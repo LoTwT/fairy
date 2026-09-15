@@ -1,0 +1,1461 @@
+{
+  "camp": {
+    "7": "New Eridu Public Security"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1521,
+  "locale": "en",
+  "name": "Cissia",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1521014", "1521015", "1521016", "1521017", "1521018"],
+      "basic": [
+        "1521001",
+        "1521002",
+        "1521003",
+        "1521004",
+        "1521006",
+        "1521019"
+      ],
+      "chain": ["1521012", "1521013"],
+      "dodge": ["1521010", "1521011"],
+      "special": ["1521007", "1521008", "1521009"]
+    },
+    "parameterRowsById": {
+      "1521001": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1521002": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1521003": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1521004": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1521006": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/1"
+      ],
+      "1521007": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1521008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/2",
+        "/skill/special/description/3/param/3"
+      ],
+      "1521009": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1521010": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1521011": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1521012": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1521013": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1521014": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1521015": ["/skill/assist/description/4/param/0"],
+      "1521016": ["/skill/assist/description/4/param/1"],
+      "1521017": ["/skill/assist/description/4/param/2"],
+      "1521018": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1521019": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "JAN 10",
+    "fullName": "Cissia",
+    "gender": "Female",
+    "impressionF": "There isn't a single snack that can get past Cissia's eyes and nose! How in the world can she smell potato chips through the packaging?",
+    "impressionM": "Ever since Cissia started coming over on the regular, some things have never gone missing again... like those old videotapes that were always impossible to find. And some things have never been seen again either... like the leftover cheesecake in the fridge.",
+    "impressions": [
+      "Impressions of Cissia:\n · Throw eggs her way, and she pays it back with snacks.",
+      " · No security alarms went off. Another day of her being good.",
+      " · She's officially claimed the video store couch as her territory."
+    ],
+    "profileDesc": "Cissia, a case specialist serving under the New Eridu Public Security Commissioner, is currently campaigning to become the new second-floor roommate at Random Play.\n\nMore than the danger of the mission itself, what she fears most is a call from her superior. The professionalism she shows in her actions is far more dependable than how she looks or the way she talks. Relying only on instinct and her senses, she can still make the right call.\n\nShe may claim to be a selfish, instinct-driven \"bad guy,\" but the choices she makes often carry a faint glimmer of humanity beyond personal gain. She scoffs at order and justice, yet can become the sharpest blade in the hunt for the worst criminals.\n\nBut whether it's the lies she tells to protect herself, the fangs she shows when she bites back, or that wild philosophy of \"survive and profit,\" Cissia has turned them all into a shield to protect the few things she still has. No matter what past or shackles she carries, she has already decided to make her stand here.",
+    "stature": "156",
+    "trustLv": {
+      "1": "Cissia, a case specialist serving under the New Eridu Public Security Commissioner, is currently campaigning to become the new second-floor roommate at Random Play.\n\nMore than the danger of the mission itself, what she fears most is a call from her superior. The professionalism she shows in her actions is far more dependable than how she looks or the way she talks. Relying only on instinct and her senses, she can still make the right call.\n\nShe may claim to be a selfish, instinct-driven \"bad guy,\" but the choices she makes often carry a faint glimmer of humanity beyond personal gain. She scoffs at order and justice, yet can become the sharpest blade in the hunt for the worst criminals.\n\nBut whether it's the lies she tells to protect herself, the fangs she shows when she bites back, or that wild philosophy of \"survive and profit,\" Cissia has turned them all into a shield to protect the few things she still has. No matter what past or shackles she carries, she has already decided to make her stand here.",
+      "2": "",
+      "3": "\"Instinct\" is the foundation Cissia relies on to survive, yet it has also become the force pulling her deeper into the vortex. She places too much trust in the signals she reads from scent, tracks, and subtle muscle movements, yet has never learned to spot the pitfalls buried in paperwork and systems of authority.\n\nBefore her arrest, the last \"legitimate\" job Cissia took was transporting a batch of confidential supplies. The client offered generous pay and a simple route — an easy task for someone who knew the Outer Ring's back alleys like the back of her hand. As usual, her animal-like vigilance helped her slip through a few narrow patrol windows. What she didn't realize was that every evasive move was being logged as evidence of \"suspicious behavior\" and \"counter-surveillance ability.\" When the explosion that swallowed everything erupted, she had already slipped into an abandoned pipe seconds earlier after sensing an unusual surge of heat. It saved her life — and cemented her identity as the \"only surviving, highly suspicious arson suspect.\"\n\nIn Public Security's files, her instincts and abilities were twisted into proof of a carefully planned crime. The interrogation wasn't meant to uncover the truth, but to carry out a cold procedure: blinding lights to break her tolerance for brightness, endless questioning to strip away her sense of time, and finally, when her body and mind were on the verge of collapse, a confession was pushed in front of her.\n\nAmid countless misfortunes, fortune finally showed her a trace of favor. Commissioner Severian uncovered the glaring flaws in Cissia's interrogation records. Recognizing her remarkable talent and fundamentally good nature, Severian personally recruited her as a \"case specialist.\" From that moment on, the collar and handcuffs were no longer simple shackles. They marked a dangerous line between her and the system of order she neither understood nor trusted — one she had learned to use to her advantage.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 - Epilogue \"New: Eridan Sunset (A)\"",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1521049": {
+        "desc": [
+          "Upon entering the battlefield, gain 3 <color=#FFFFFF>Venom</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhile possessing <color=#FFFFFF>Venom</color>, consume 1 <color=#FFFFFF>Venom</color> every 5s while in combat to trigger <color=#FFFFFF>Corrode Bone</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nWith <color=#FFFFFF>Venom</color>, all squad memebrs' <color=#2EB6FF>Electric DMG</color> ignores <color=#2BAD00>3%</color> of enemy DEF. If initial Energy Regen is higher than 1.4, for every additional 0.12 above that threshold, an additional <color=#2BAD00>0.52%</color> of the enemy's DEF is ignored, up to a maximum of <color=#2BAD00>12.88%</color> of enemy DEF. This effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted.\n<color=#FFFFFF>Corrode Bone</color> deals additional <color=#2EB6FF>Electric DMG</color> equal to <color=#2BAD00>227%</color> of ATK.\nWhen there are 1/2 <color=#2EB6FF>Electric</color> characters in the squad, the Daze dealt by <color=#FFFFFF>Corrode Bone</color> increases by 40%/60%.\nWhen gaining <color=#FFFFFF>Venom</color>, every 1 excess point of <color=#FFFFFF>Venom</color> triggers <color=#FFFFFF>Corrode Bone</color> once.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\nWhile possessing <color=#FFFFFF>Venom</color>, increases all squad members' CRIT DMG by 40%, with Cissia gaining an additional 10%. The effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fatal Concoction",
+          "Additional Ability: Festering Venom"
+        ],
+        "potential": []
+      },
+      "1521050": {
+        "desc": [
+          "Upon entering the battlefield, gain 3 <color=#FFFFFF>Venom</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhile possessing <color=#FFFFFF>Venom</color>, consume 1 <color=#FFFFFF>Venom</color> every 5s while in combat to trigger <color=#FFFFFF>Corrode Bone</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nWith <color=#FFFFFF>Venom</color>, all squad memebrs' <color=#2EB6FF>Electric DMG</color> ignores <color=#2BAD00>3.5%</color> of enemy DEF. If initial Energy Regen is higher than 1.4, for every additional 0.12 above that threshold, an additional <color=#2BAD00>0.6%</color> of the enemy's DEF is ignored, up to a maximum of <color=#2BAD00>14.9%</color> of enemy DEF. This effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted.\n<color=#FFFFFF>Corrode Bone</color> deals additional <color=#2EB6FF>Electric DMG</color> equal to <color=#2BAD00>245%</color> of ATK.\nWhen there are 1/2 <color=#2EB6FF>Electric</color> characters in the squad, the Daze dealt by <color=#FFFFFF>Corrode Bone</color> increases by 40%/60%.\nWhen gaining <color=#FFFFFF>Venom</color>, every 1 excess point of <color=#FFFFFF>Venom</color> triggers <color=#FFFFFF>Corrode Bone</color> once.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\nWhile possessing <color=#FFFFFF>Venom</color>, increases all squad members' CRIT DMG by 40%, with Cissia gaining an additional 10%. The effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fatal Concoction",
+          "Additional Ability: Festering Venom"
+        ],
+        "potential": []
+      },
+      "1521051": {
+        "desc": [
+          "Upon entering the battlefield, gain 3 <color=#FFFFFF>Venom</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhile possessing <color=#FFFFFF>Venom</color>, consume 1 <color=#FFFFFF>Venom</color> every 5s while in combat to trigger <color=#FFFFFF>Corrode Bone</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nWith <color=#FFFFFF>Venom</color>, all squad memebrs' <color=#2EB6FF>Electric DMG</color> ignores <color=#2BAD00>4%</color> of enemy DEF. If initial Energy Regen is higher than 1.4, for every additional 0.12 above that threshold, an additional <color=#2BAD00>0.68%</color> of the enemy's DEF is ignored, up to a maximum of <color=#2BAD00>16.92%</color> of enemy DEF. This effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted.\n<color=#FFFFFF>Corrode Bone</color> deals additional <color=#2EB6FF>Electric DMG</color> equal to <color=#2BAD00>263%</color> of ATK.\nWhen there are 1/2 <color=#2EB6FF>Electric</color> characters in the squad, the Daze dealt by <color=#FFFFFF>Corrode Bone</color> increases by 40%/60%.\nWhen gaining <color=#FFFFFF>Venom</color>, every 1 excess point of <color=#FFFFFF>Venom</color> triggers <color=#FFFFFF>Corrode Bone</color> once.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\nWhile possessing <color=#FFFFFF>Venom</color>, increases all squad members' CRIT DMG by 40%, with Cissia gaining an additional 10%. The effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fatal Concoction",
+          "Additional Ability: Festering Venom"
+        ],
+        "potential": []
+      },
+      "1521052": {
+        "desc": [
+          "Upon entering the battlefield, gain 3 <color=#FFFFFF>Venom</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhile possessing <color=#FFFFFF>Venom</color>, consume 1 <color=#FFFFFF>Venom</color> every 5s while in combat to trigger <color=#FFFFFF>Corrode Bone</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nWith <color=#FFFFFF>Venom</color>, all squad memebrs' <color=#2EB6FF>Electric DMG</color> ignores <color=#2BAD00>4.5%</color> of enemy DEF. If initial Energy Regen is higher than 1.4, for every additional 0.12 above that threshold, an additional <color=#2BAD00>0.76%</color> of the enemy's DEF is ignored, up to a maximum of <color=#2BAD00>18.94%</color> of enemy DEF. This effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted.\n<color=#FFFFFF>Corrode Bone</color> deals additional <color=#2EB6FF>Electric DMG</color> equal to <color=#2BAD00>281%</color> of ATK.\nWhen there are 1/2 <color=#2EB6FF>Electric</color> characters in the squad, the Daze dealt by <color=#FFFFFF>Corrode Bone</color> increases by 40%/60%.\nWhen gaining <color=#FFFFFF>Venom</color>, every 1 excess point of <color=#FFFFFF>Venom</color> triggers <color=#FFFFFF>Corrode Bone</color> once.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\nWhile possessing <color=#FFFFFF>Venom</color>, increases all squad members' CRIT DMG by 40%, with Cissia gaining an additional 10%. The effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fatal Concoction",
+          "Additional Ability: Festering Venom"
+        ],
+        "potential": []
+      },
+      "1521053": {
+        "desc": [
+          "Upon entering the battlefield, gain 3 <color=#FFFFFF>Venom</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhile possessing <color=#FFFFFF>Venom</color>, consume 1 <color=#FFFFFF>Venom</color> every 5s while in combat to trigger <color=#FFFFFF>Corrode Bone</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nWith <color=#FFFFFF>Venom</color>, all squad memebrs' <color=#2EB6FF>Electric DMG</color> ignores <color=#2BAD00>5%</color> of enemy DEF. If initial Energy Regen is higher than 1.4, for every additional 0.12 above that threshold, an additional <color=#2BAD00>0.84%</color> of the enemy's DEF is ignored, up to a maximum of <color=#2BAD00>20.96%</color> of enemy DEF. This effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted.\n<color=#FFFFFF>Corrode Bone</color> deals additional <color=#2EB6FF>Electric DMG</color> equal to <color=#2BAD00>299%</color> of ATK.\nWhen there are 1/2 <color=#2EB6FF>Electric</color> characters in the squad, the Daze dealt by <color=#FFFFFF>Corrode Bone</color> increases by 40%/60%.\nWhen gaining <color=#FFFFFF>Venom</color>, every 1 excess point of <color=#FFFFFF>Venom</color> triggers <color=#FFFFFF>Corrode Bone</color> once.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\nWhile possessing <color=#FFFFFF>Venom</color>, increases all squad members' CRIT DMG by 40%, with Cissia gaining an additional 10%. The effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fatal Concoction",
+          "Additional Ability: Festering Venom"
+        ],
+        "potential": []
+      },
+      "1521054": {
+        "desc": [
+          "Upon entering the battlefield, gain 3 <color=#FFFFFF>Venom</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhile possessing <color=#FFFFFF>Venom</color>, consume 1 <color=#FFFFFF>Venom</color> every 5s while in combat to trigger <color=#FFFFFF>Corrode Bone</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nWith <color=#FFFFFF>Venom</color>, all squad memebrs' <color=#2EB6FF>Electric DMG</color> ignores <color=#2BAD00>5.5%</color> of enemy DEF. If initial Energy Regen is higher than 1.4, for every additional 0.12 above that threshold, an additional <color=#2BAD00>0.92%</color> of the enemy's DEF is ignored, up to a maximum of <color=#2BAD00>22.98%</color> of enemy DEF. This effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted.\n<color=#FFFFFF>Corrode Bone</color> deals additional <color=#2EB6FF>Electric DMG</color> equal to <color=#2BAD00>317%</color> of ATK.\nWhen there are 1/2 <color=#2EB6FF>Electric</color> characters in the squad, the Daze dealt by <color=#FFFFFF>Corrode Bone</color> increases by 40%/60%.\nWhen gaining <color=#FFFFFF>Venom</color>, every 1 excess point of <color=#FFFFFF>Venom</color> triggers <color=#FFFFFF>Corrode Bone</color> once.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\nWhile possessing <color=#FFFFFF>Venom</color>, increases all squad members' CRIT DMG by 40%, with Cissia gaining an additional 10%. The effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fatal Concoction",
+          "Additional Ability: Festering Venom"
+        ],
+        "potential": []
+      },
+      "1521055": {
+        "desc": [
+          "Upon entering the battlefield, gain 3 <color=#FFFFFF>Venom</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhile possessing <color=#FFFFFF>Venom</color>, consume 1 <color=#FFFFFF>Venom</color> every 5s while in combat to trigger <color=#FFFFFF>Corrode Bone</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nWith <color=#FFFFFF>Venom</color>, all squad memebrs' <color=#2EB6FF>Electric DMG</color> ignores <color=#2BAD00>6%</color> of enemy DEF. If initial Energy Regen is higher than 1.4, for every additional 0.12 above that threshold, an additional <color=#2BAD00>1%</color> of the enemy's DEF is ignored, up to a maximum of <color=#2BAD00>25%</color> of enemy DEF. This effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted.\n<color=#FFFFFF>Corrode Bone</color> deals additional <color=#2EB6FF>Electric DMG</color> equal to <color=#2BAD00>335%</color> of ATK.\nWhen there are 1/2 <color=#2EB6FF>Electric</color> characters in the squad, the Daze dealt by <color=#FFFFFF>Corrode Bone</color> increases by 40%/60%.\nWhen gaining <color=#FFFFFF>Venom</color>, every 1 excess point of <color=#FFFFFF>Venom</color> triggers <color=#FFFFFF>Corrode Bone</color> once.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\nWhile possessing <color=#FFFFFF>Venom</color>, increases all squad members' CRIT DMG by 40%, with Cissia gaining an additional 10%. The effect lasts until 30s after <color=#FFFFFF>Venom</color> is depleted."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fatal Concoction",
+          "Additional Ability: Festering Venom"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nLeaps forward and performs a sweeping attack upon landing, dealing <color=#2EB6FF>Electric DMG</color>.\nDuring this skill, you can quickly chain into <color=#FFFFFF>Special Attack: Bared Fangs</color>, <color=#FFFFFF>EX Special Attack: Venomous Bite</color>, and <color=#FFFFFF>Basic Attack: Serpent's Kiss</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Alarm System",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Extra Prison Rations",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nUnleash a series of attacks, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Partners in Crime",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Alarm System",
+          "param": [
+            {
+              "desc": "{Skill:1521014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521014": {
+                  "attackData": [],
+                  "attributeInfliction": 5751,
+                  "damagePercentage": 7480,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 5752,
+                  "feverRecovery": 158400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 680,
+                  "main": 7480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6330,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521014": {
+                  "attackData": [],
+                  "attributeInfliction": 5751,
+                  "damagePercentage": 7480,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 5752,
+                  "feverRecovery": 158400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6330,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Extra Prison Rations",
+          "param": [
+            {
+              "desc": "{Skill:1521015, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1521015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521016, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1521016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521017, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1521017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Partners in Crime",
+          "param": [
+            {
+              "desc": "{Skill:1521018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521018": {
+                  "attackData": [],
+                  "attributeInfliction": 37617,
+                  "damagePercentage": 52060,
+                  "damagePercentageGrowth": 4740,
+                  "etherPurify": 20664,
+                  "feverRecovery": 1234475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4740,
+                  "main": 52060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38720,
+                  "stunRatioGrowth": 1760
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521018": {
+                  "attackData": [],
+                  "attributeInfliction": 37617,
+                  "damagePercentage": 52060,
+                  "damagePercentageGrowth": 4740,
+                  "etherPurify": 20664,
+                  "feverRecovery": 1234475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1760,
+                  "main": 38720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38720,
+                  "stunRatioGrowth": 1760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunch up to four attacks forward, dealing <color=#2EB6FF>Electric DMG</color>.\nWhen the 4th hit lands, gain 2 points of <color=#FFFFFF>Venom</color>. Hitting a Stunned enemy grants an additional 1 point of <color=#FFFFFF>Venom</color>.",
+          "name": "Basic Attack: Tongue Flick",
+          "potential": []
+        },
+        {
+          "desc": "With <color=#FFFFFF>Serpentine Shadow</color>, hold <IconMap:Icon_Normal> to launch:\nCissia leaps into the air and locks onto a target, then slams down, dealing <color=#2EB6FF>Electric DMG</color> to enemies in the area.\nWhile locking on, continue to hold <IconMap:Icon_Normal> and drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to extend the lock-on duration and freely control the landing position.\nFor every 6 points of <color=#FFFFFF>Venom</color> gained, gain 1 stack of <color=#FFFFFF>Serpentine Shadow</color>, stacking up to 3 times.\nUpon entering the battlefield, gain 1 stack of <color=#FFFFFF>Serpentine Shadow</color>.\nUsing this skill consumes 1 stack of <color=#FFFFFF>Serpentine Shadow</color>.\nUpon hitting an enemy, all <color=#FFFFFF>Venom</color> is consumed to trigger <color=#FFFFFF>Corrode Bone</color>.\nUpon activating this skill, a <color=#FFFFFF>Quick Assist</color> is triggered.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Serpent's Kiss",
+          "potential": []
+        },
+        {
+          "desc": "Deal <color=#2EB6FF>Electric DMG</color> to nearby enemies.\nEach trigger increases CRIT Rate by 6% for 15s, stacking up to 3 times. Repeated triggers refresh the duration.",
+          "name": "Corrode Bone",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Tongue Flick",
+          "param": [
+            {
+              "desc": "{Skill:1521001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1521001": {
+                  "attackData": [],
+                  "attributeInfliction": 6530,
+                  "damagePercentage": 7770,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 6531,
+                  "feverRecovery": 179850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 7770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6030,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1521002": {
+                  "attackData": [],
+                  "attributeInfliction": 10466,
+                  "damagePercentage": 13870,
+                  "damagePercentageGrowth": 1270,
+                  "etherPurify": 10467,
+                  "feverRecovery": 287925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1270,
+                  "main": 13870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37680,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9840,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1521003": {
+                  "attackData": [],
+                  "attributeInfliction": 9096,
+                  "damagePercentage": 13510,
+                  "damagePercentageGrowth": 1230,
+                  "etherPurify": 9097,
+                  "feverRecovery": 250250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1230,
+                  "main": 13510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 32750,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8740,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1521004": {
+                  "attackData": [],
+                  "attributeInfliction": 18732,
+                  "damagePercentage": 25020,
+                  "damagePercentageGrowth": 2280,
+                  "etherPurify": 18733,
+                  "feverRecovery": 515350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2280,
+                  "main": 25020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 67440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15910,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1521001": {
+                  "attackData": [],
+                  "attributeInfliction": 6530,
+                  "damagePercentage": 7770,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 6531,
+                  "feverRecovery": 179850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6030,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1521002": {
+                  "attackData": [],
+                  "attributeInfliction": 10466,
+                  "damagePercentage": 13870,
+                  "damagePercentageGrowth": 1270,
+                  "etherPurify": 10467,
+                  "feverRecovery": 287925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 9840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37680,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9840,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1521003": {
+                  "attackData": [],
+                  "attributeInfliction": 9096,
+                  "damagePercentage": 13510,
+                  "damagePercentageGrowth": 1230,
+                  "etherPurify": 9097,
+                  "feverRecovery": 250250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 32750,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8740,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1521004": {
+                  "attackData": [],
+                  "attributeInfliction": 18732,
+                  "damagePercentage": 25020,
+                  "damagePercentageGrowth": 2280,
+                  "etherPurify": 18733,
+                  "feverRecovery": 515350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 730,
+                  "main": 15910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 67440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15910,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Serpent's Kiss",
+          "param": [
+            {
+              "desc": "{Skill:1521006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521006": {
+                  "attackData": [],
+                  "attributeInfliction": 13063,
+                  "damagePercentage": 50420,
+                  "damagePercentageGrowth": 4590,
+                  "etherPurify": 13064,
+                  "feverRecovery": 359425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4590,
+                  "main": 50420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49970,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17970,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521006": {
+                  "attackData": [],
+                  "attributeInfliction": 13063,
+                  "damagePercentage": 50420,
+                  "damagePercentageGrowth": 4590,
+                  "etherPurify": 13064,
+                  "feverRecovery": 359425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49970,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17970,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Corrode Bone",
+          "param": [
+            {
+              "desc": "{Skill:1521019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12680,
+                  "damagePercentageGrowth": 1160,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1160,
+                  "main": 12680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15510,
+                  "stunRatioGrowth": 710
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12680,
+                  "damagePercentageGrowth": 1160,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 15510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15510,
+                  "stunRatioGrowth": 710
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunch multiple attacks ahead, dealing massive <color=#2EB6FF>Electric DMG</color>.\nAfter using this skill, gain 3 <color=#FFFFFF>Venom</color>.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Gang Operation",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nDeliver a thunderbolt attack in front, dealing massive <color=#2EB6FF>Electric DMG</color>.\nAfter using this skill, obtain 3 <color=#FFFFFF>Venom</color>.\nAfter using this skill, activate <color=#FFFFFF>Ether Veil: Cold-Blooded</color>, lasting 30s. All squad members' CRIT DMG increases by 5% for the duration.\nRe-activating <color=#FFFFFF>Ether Veil: Cold-Blooded</color> a second time will first deactivate the active <color=#FFFFFF>Ether Veil: Cold-Blooded</color>.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Ophidiophobia",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Gang Operation",
+          "param": [
+            {
+              "desc": "{Skill:1521012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521012": {
+                  "attackData": [],
+                  "attributeInfliction": 43453,
+                  "damagePercentage": 73780,
+                  "damagePercentageGrowth": 6710,
+                  "etherPurify": 23504,
+                  "feverRecovery": 2475275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6710,
+                  "main": 73780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25860,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521012": {
+                  "attackData": [],
+                  "attributeInfliction": 43453,
+                  "damagePercentage": 73780,
+                  "damagePercentageGrowth": 6710,
+                  "etherPurify": 23504,
+                  "feverRecovery": 2475275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1180,
+                  "main": 25860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25860,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Ophidiophobia",
+          "param": [
+            {
+              "desc": "{Skill:1521013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521013": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 181100,
+                  "damagePercentageGrowth": 16470,
+                  "etherPurify": 61004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 16470,
+                  "main": 181100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12110,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521013": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 181100,
+                  "damagePercentageGrowth": 16470,
+                  "etherPurify": 61004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12110,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Slither",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nDash forward with a swift slash, dealing <color=#2EB6FF>Electric DMG</color>.",
+          "name": "Dash Attack: Bite Mark",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nLeap forward and perform a sweeping attack upon landing, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Bite Back",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Bite Mark",
+          "param": [
+            {
+              "desc": "{Skill:1521010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521010": {
+                  "attackData": [],
+                  "attributeInfliction": 5665,
+                  "damagePercentage": 14730,
+                  "damagePercentageGrowth": 1340,
+                  "etherPurify": 5666,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1340,
+                  "main": 14730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521010": {
+                  "attackData": [],
+                  "attributeInfliction": 5665,
+                  "damagePercentage": 14730,
+                  "damagePercentageGrowth": 1340,
+                  "etherPurify": 5666,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Bite Back",
+          "param": [
+            {
+              "desc": "{Skill:1521011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521011": {
+                  "attackData": [],
+                  "attributeInfliction": 11503,
+                  "damagePercentage": 32450,
+                  "damagePercentageGrowth": 2950,
+                  "etherPurify": 26504,
+                  "feverRecovery": 316525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2950,
+                  "main": 32450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23660,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521011": {
+                  "attackData": [],
+                  "attributeInfliction": 11503,
+                  "damagePercentage": 32450,
+                  "damagePercentageGrowth": 2950,
+                  "etherPurify": 26504,
+                  "feverRecovery": 316525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 23660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23660,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nLaunches a long-range snake bite forward, dealing <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Bared Fangs",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy, press or hold <IconMap:Icon_SpecialReady> to activate:\nUnleash multiple long-range snake bites forward, dealing <color=#2EB6FF>Electric DMG</color>.\nGrants 5 Energy when the move is used.\nWhen activating by holding, consumes additional Energy. For every 20 additional Energy consumed, unleash 1 extra strike that deals <color=#2EB6FF>Electric DMG</color>, up to a maximum of 60 additional Energy.\nAfter activation, gain 3 <color=#FFFFFF>Venom</color>. For every additional 20 Energy consumed while holding, gain 1 more <color=#FFFFFF>Venom</color>.\nAfter using this skill, it can be immediately followed up with the 4th hit of <color=#FFFFFF>Basic Attack: Tongue Flick</color>.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Venomous Bite",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Bared Fangs",
+          "param": [
+            {
+              "desc": "{Skill:1521007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521007": {
+                  "attackData": [],
+                  "attributeInfliction": 3998,
+                  "damagePercentage": 5200,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 3999,
+                  "feverRecovery": 110000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4400,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521007": {
+                  "attackData": [],
+                  "attributeInfliction": 3998,
+                  "damagePercentage": 5200,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 3999,
+                  "feverRecovery": 110000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4400,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Venomous Bite",
+          "param": [
+            {
+              "desc": "{{Skill:1521008, Prop:1001}*3+{Skill:1521009, Prop:1001}}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1521008": {
+                  "attackData": [],
+                  "attributeInfliction": 16375,
+                  "damagePercentage": 20040,
+                  "damagePercentageGrowth": 1830,
+                  "etherPurify": 5650,
+                  "feverRecovery": 577500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1830,
+                  "main": 20040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10830,
+                  "stunRatioGrowth": 500
+                },
+                "1521009": {
+                  "attackData": [],
+                  "attributeInfliction": 5459,
+                  "damagePercentage": 6680,
+                  "damagePercentageGrowth": 610,
+                  "etherPurify": 1884,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 6680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3610,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1521008, Prop:1002}*3+{Skill:1521009, Prop:1002}}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1521008": {
+                  "attackData": [],
+                  "attributeInfliction": 16375,
+                  "damagePercentage": 20040,
+                  "damagePercentageGrowth": 1830,
+                  "etherPurify": 5650,
+                  "feverRecovery": 577500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10830,
+                  "stunRatioGrowth": 500
+                },
+                "1521009": {
+                  "attackData": [],
+                  "attributeInfliction": 5459,
+                  "damagePercentage": 6680,
+                  "damagePercentageGrowth": 610,
+                  "etherPurify": 1884,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3610,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521008, Prop:1001}",
+              "name": "Additional Strike DMG Multiplier",
+              "param": {
+                "1521008": {
+                  "attackData": [],
+                  "attributeInfliction": 16375,
+                  "damagePercentage": 20040,
+                  "damagePercentageGrowth": 1830,
+                  "etherPurify": 5650,
+                  "feverRecovery": 577500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1830,
+                  "main": 20040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10830,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1521008, Prop:1002}",
+              "name": "Additional Strike Daze Multiplier",
+              "param": {
+                "1521008": {
+                  "attackData": [],
+                  "attributeInfliction": 16375,
+                  "damagePercentage": 20040,
+                  "damagePercentageGrowth": 1830,
+                  "etherPurify": 5650,
+                  "feverRecovery": 577500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10830,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "65",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1521001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Tongue Flick"
+    },
+    "1521002": {
+      "desc": "<IconMap:Icon_Normal> (Hold with Serpentine Shadow)",
+      "name": "Basic Attack: Serpent's Kiss"
+    },
+    "1521003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Bared Fangs"
+    },
+    "1521004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Venomous Bite"
+    },
+    "1521005": {
+      "desc": "<IconMap:Icon_SpecialReady> (Hold)",
+      "name": "EX Special Attack: Venomous Bite"
+    },
+    "1521006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Bite Mark"
+    },
+    "1521007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Bite Back"
+    },
+    "1521008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Gang Operation"
+    },
+    "1521009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Ophidiophobia"
+    },
+    "1521010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Alarm System"
+    },
+    "1521011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Extra Prison Rations"
+    },
+    "1521012": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Partners in Crime"
+    }
+  },
+  "skin": {
+    "3115210": {
+      "desc": "There are two kinds of people in this world, venomous snakes and mice! As for who is what...\nLady Cissia says: Those stronger than me are snakes, and those weaker than me are mice!",
+      "name": "Cissia: Snake & Mouse Game"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, quick-swap/on-field DMG dealer",
+    "Provides buffs to boost CRIT DMG and ignore a portion of enemy DEF",
+    "Deals sustained DMG off-field and inflicts additional Daze"
+  ],
+  "talent": {
+    "1": {
+      "desc": "The <color=#FFFFFF>Venom</color> gained upon entering the battlefield increases to 6. The DEF ignore from the <color=#FFFFFF>Core Passive</color> increases to 140% of its original value, and all squad members ignore 5% of the target's <color=#2EB6FF>Electric RES</color>. <color=#FFFFFF>Corrode Bone</color> DMG ignores 10% of the target's <color=#2EB6FF>Electric RES</color>.",
+      "desc2": "Scents, footsteps, the way someone's eyes shift... those are the \"clues\" that let me sort hunters from prey. I vanish before I'm hunted. I lower my head before I hunt. That's how I stay alive.\n\"Home\"? That's just something out of a storybook. The endless wild is my hunting cabin.",
+      "name": "Traveler and Prey"
+    },
+    "2": {
+      "desc": "After a <color=#FFFFFF>Chain Attack: Gang Operation</color> or <color=#FFFFFF>Ultimate: Ophidiophobia</color> hits a Stunned enemy, gain an additional 3 <color=#FFFFFF>Venom</color>. <color=#FFFFFF>Basic Attack: Serpent's Kiss</color> deals 35% increased DMG.",
+      "desc2": "If I can eat my fill there, it's a good place. If someone gives me food, they're a good person. That's the easiest and most dependable rule in the world. And also, omelet with rice is divine. Even that last leftover bit on the spoon.",
+      "name": "Hunger and Hard Truths"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Justice? Order? That kind of righteous, aboveboard stuff makes me shaky. What I know are the rules of the shadows — betrayal, lies, bowing low if it keeps me breathing. I don't mind being used as a tool, as long as the pay is a full meal and a warm corner to curl up in.",
+      "name": "Chains and a Warm Nest"
+    },
+    "4": {
+      "desc": "When using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, gain 1 stack of <color=#FFFFFF>Decidedness</color>, stacking up to 3 times. When using <color=#FFFFFF>Basic Attack: Serpent's Kiss</color>, consume all <color=#FFFFFF>Decidedness</color>. Each stack consumed triggers 1 special instance of <color=#FFFFFF>Corrode Bone</color> that does not consume <color=#FFFFFF>Venom</color>. This <color=#FFFFFF>Corrode Bone</color> does not cause Daze.",
+      "desc2": "The collar around my neck is cold. The handcuffs are heavy. They remind me of the sins I can't wash away. But compared to those invisible rules and icy stares, this kind of restraint with a clear price tag actually puts me at ease... at least I know what it costs. And once I'm back in that little den with a couch and snacks, even the cold metal seems warm.",
+      "name": "A Rogue's Resolve"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Memories scorched by blinding light, crimes spelled out in black and white... those \"marks\" were once all that defined me. But things are different now. I've learned to read, and I've learned to recognize the smell of a lie. When that familiar scent of a scheme creeps in again, I won't just walk into the cage like an idiot. This time, I'll be the one leaving \"marks\" — with my teeth, and I won't hold back.",
+      "name": "False Evidence and Fangs"
+    },
+    "6": {
+      "desc": "Each time <color=#FFFFFF>Corrode Bone</color> is triggered, gain 1 stack of <color=#FFFFFF>Bone-Deep Corrosion</color>. When attacks from any squad member, other than <color=#FFFFFF>Corrode Bone</color>, hit an enemy, consume 1 stack of <color=#FFFFFF>Bone-Deep Corrosion</color> to trigger 1 special <color=#FFFFFF>Corrode Bone</color>. This instance of <color=#FFFFFF>Corrode Bone</color> cannot inflict Daze, and at most 1 stack of <color=#FFFFFF>Bone-Deep Corrosion</color> can be consumed every 3s.",
+      "desc2": "Once there's something I want to hold onto more than just \"staying alive,\" I really do turn stupid. If fate ever decides I have to die, that big, soft couch of yours better not have anyone else lying on it.\n\n\"Don't you dare forget me... or I'll bite you to death.\"",
+      "name": "Home and Sixth Street"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

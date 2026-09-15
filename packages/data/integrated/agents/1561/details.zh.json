@@ -1,0 +1,1561 @@
+{
+  "camp": {
+    "16": "罗斯凯利法"
+  },
+  "elementType": {
+    "204": "风属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "异常精通"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "异常精通"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "异常精通"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "异常精通"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "异常精通"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "异常精通"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "能量自动回复"
+    },
+    "part5": {
+      "format": "{0:0}",
+      "name": "异常精通"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "风属性伤害加成"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1561,
+  "locale": "zh",
+  "name": "维琳娜",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1561015", "1561016", "1561017", "1561018", "1561019"],
+      "basic": ["1561001", "1561002", "1561003", "1561004", "1561005"],
+      "chain": ["1561013", "1561014"],
+      "dodge": ["1561011", "1561012"],
+      "special": [
+        "1561006",
+        "1561007",
+        "1561008",
+        "1561009",
+        "1561010",
+        "1561020",
+        "1561021"
+      ]
+    },
+    "parameterRowsById": {
+      "1561001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/5"
+      ],
+      "1561002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1561003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1561004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/8"
+      ],
+      "1561005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1561006": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1561007": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1561008": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1561009": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1561010": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1561011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1561012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1561013": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1561014": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1561015": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1561016": ["/skill/assist/description/4/param/0"],
+      "1561017": ["/skill/assist/description/4/param/1"],
+      "1561018": ["/skill/assist/description/4/param/2"],
+      "1561019": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1561020": ["/skill/special/description/8/param/2"],
+      "1561021": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "09/22",
+    "fullName": "维琳娜·艾嘉德",
+    "gender": "女",
+    "impressionF": "维琳娜明明需要和各种人打交道，却喝不惯燃油饮…总感觉非常意外呢！",
+    "impressionM": "铃…就算知道了她的弱点，你也别再打什么坏主意了…上次半夜把她送回外策局，可是引发了不小的骚动。",
+    "impressions": [
+      "对维琳娜的印象：\n · 红茶与优雅似乎可以画上等号。",
+      " · 无懈可击的总务官也有不擅长的事。",
+      " · 天使与魔女，两种身份能够同时存在吗？。"
+    ],
+    "profileDesc": "维琳娜，外务筹策局的总务官，统筹着罗斯凯利法与新艾利都的往来协作事宜。\n\n作为名门艾嘉德家族的后人，维琳娜承袭了一丝不苟的家风，以近乎无懈可击的执行效率与控场能力著称，是诺姆技术官口中能够「应付开会签字和麻烦的大人」的可靠大人。\n\n她行事干练、条理分明，待人接物温和得体，优雅从容的微笑下隐含着不容忽视的威慑性。无论是多么棘手的对外事务、荒唐祸端，她都能游刃有余地摆平，但向她求助的代价，却不一定是求助者能够承受的。\n\n维琳娜对各类红茶情有独钟，也经常在闲暇时邀请朋友、举行茶会。\n\n特别提醒：需要留意她以总务官身份发出的茶会邀请——那往往不止于消遣，更是她用于斡旋局势、悄然推进事态的绝佳场合。",
+    "stature": "172",
+    "trustLv": {
+      "1": "维琳娜，外务筹策局的总务官，统筹着罗斯凯利法与新艾利都的往来协作事宜。\n\n作为名门艾嘉德家族的后人，维琳娜承袭了一丝不苟的家风，以近乎无懈可击的执行效率与控场能力著称，是诺姆技术官口中能够「应付开会签字和麻烦的大人」的可靠大人。\n\n她行事干练、条理分明，待人接物温和得体，优雅从容的微笑下隐含着不容忽视的威慑性。无论是多么棘手的对外事务、荒唐祸端，她都能游刃有余地摆平，但向她求助的代价，却不一定是求助者能够承受的。\n\n维琳娜对各类红茶情有独钟，也经常在闲暇时邀请朋友、举行茶会。\n\n特别提醒：需要留意她以总务官身份发出的茶会邀请——那往往不止于消遣，更是她用于斡旋局势、悄然推进事态的绝佳场合。",
+      "2": "",
+      "3": "作为玛瑟尔集团的管理机构，外策局需要负责处理邦布的退役审批事宜，因此在邦布市民眼中，维琳娜就是传说中的「告死的魔女」，令布遍体生寒的茶会主人。\n\n实际上，维琳娜的真实身份，正是邦布世界中口耳相传的「首席天使」。但她并不介意蒙受恶名，魔女的名号在邦布相关事务中也能提供诸多便利，比起成为邦布们口中的天使，她更习惯作为他们沉默的守护者。\n\n此外，维琳娜似乎在一些生活细节上出人意料的笨拙，尤其不擅长动植物饲养，有着「绿植杀手」的称号。\n\n提议：或许可以作为快速拉近距离的思路之一。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线委托第三季第一章",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1561501": {
+        "desc": [
+          "维琳娜初始能量自动回复大于1.2时，超过部分每超过0.01，造成的伤害提升0.21%，最多提升35%，异常掌控提升0.5点，最多提升84点；\n维琳娜进入战场时，获得45点<Term:1000008></Term>，在勘域模式中此效果180秒内最多触发一次，维琳娜发动<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>或<color=#FFFFFF>[强化特殊技：风切变·三重绝息]</color>都会获得45点<color=#FFFFFF>[风华]</color>，<color=#FFFFFF>[风华]</color>上限为135点；\n维琳娜触发<color=#FFFFFF>[乱流]</color>时，会获得1点<Term:1000014></Term>并召唤<Term:1000015></Term>，造成<color=#A6C5FD>风属性伤害</color>，该效果每3秒最多触发一次，当维琳娜拥有2点<color=#FFFFFF>[风蚀]</color>时，维琳娜下一次触发<color=#FFFFFF>[乱流]</color>时，会消耗2点<color=#FFFFFF>[风蚀]</color>使此时<color=#FFFFFF>[乱流]</color>的伤害倍率提升<color=#2BAD00>90%</color>，并且不再召唤<color=#FFFFFF>[微域气旋]</color>转而召唤<Term:1000016></Term>，此时不会获得<color=#FFFFFF>[风蚀]</color>；\n当维琳娜召唤的<color=#FFFFFF>[广域气旋]</color>首次命中处于<color=#FFFFFF>[浸染]</color>状态下的敌人，会触发<Term:1000017></Term>效果，转化为相应属性的<color=#FFFFFF>[广域气旋]</color>，并会造成相应属性的伤害，<color=#FFFFFF>[广域气旋]</color>攻击命中敌人时，会使敌人的<color=#A6C5FD>风属性异常积蓄抗性</color>降低7%，持续35秒，重复触发时刷新持续时间，若<color=#FFFFFF>[赋彩]</color>后的<color=#FFFFFF>[广域气旋]</color>攻击命中敌人，则敌人的<color=#FFFFFF>相应属性异常积蓄抗性</color>也会降低7%，持续35秒，重复触发时刷新持续时间；\n受到<color=#FFFFFF>[广域气旋]</color>影响的敌人被击败时，会使该<color=#FFFFFF>[广域气旋]</color>的持续时间延长5秒，该效果对同一<color=#FFFFFF>[广域气旋]</color>仅能触发一次，同一时间只能存在一个<color=#FFFFFF>[广域气旋]</color>；\n<color=#FFFFFF>[微域气旋]</color>和<color=#FFFFFF>[广域气旋]</color>会在消散时触发一次爆炸，该次爆炸命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，都会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#2BAD00>85%</color>和<color=#2BAD00>135%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或与自身属性相同的角色时触发：\n维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升10%，<color=#FFFFFF>[终结技]</color>重击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#A6C5FD>680%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>；\n<color=#FFFFFF>[核心被动：风华盈袖]</color>中，<Term:1000016></Term>造成的<color=#FFFFFF>属性异常积蓄抗性</color>降低效果额外提升7%，造成的失衡值提升30%，累积的属性异常积蓄值提升15%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风华盈袖", "额外能力：茶会礼仪"],
+        "potential": []
+      },
+      "1561502": {
+        "desc": [
+          "维琳娜初始能量自动回复大于1.2时，超过部分每超过0.01，造成的伤害提升0.21%，最多提升35%，异常掌控提升0.5点，最多提升84点；\n维琳娜进入战场时，获得45点<Term:1000008></Term>，在勘域模式中此效果180秒内最多触发一次，维琳娜发动<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>或<color=#FFFFFF>[强化特殊技：风切变·三重绝息]</color>都会获得45点<color=#FFFFFF>[风华]</color>，<color=#FFFFFF>[风华]</color>上限为135点；\n维琳娜触发<color=#FFFFFF>[乱流]</color>时，会获得1点<Term:1000014></Term>并召唤<Term:1000015></Term>，造成<color=#A6C5FD>风属性伤害</color>，该效果每3秒最多触发一次，当维琳娜拥有2点<color=#FFFFFF>[风蚀]</color>时，维琳娜下一次触发<color=#FFFFFF>[乱流]</color>时，会消耗2点<color=#FFFFFF>[风蚀]</color>使此时<color=#FFFFFF>[乱流]</color>的伤害倍率提升<color=#2BAD00>100%</color>，并且不再召唤<color=#FFFFFF>[微域气旋]</color>转而召唤<Term:1000016></Term>，此时不会获得<color=#FFFFFF>[风蚀]</color>；\n当维琳娜召唤的<color=#FFFFFF>[广域气旋]</color>首次命中处于<color=#FFFFFF>[浸染]</color>状态下的敌人，会触发<Term:1000017></Term>效果，转化为相应属性的<color=#FFFFFF>[广域气旋]</color>，并会造成相应属性的伤害，<color=#FFFFFF>[广域气旋]</color>攻击命中敌人时，会使敌人的<color=#A6C5FD>风属性异常积蓄抗性</color>降低7%，持续35秒，重复触发时刷新持续时间，若<color=#FFFFFF>[赋彩]</color>后的<color=#FFFFFF>[广域气旋]</color>攻击命中敌人，则敌人的<color=#FFFFFF>相应属性异常积蓄抗性</color>也会降低7%，持续35秒，重复触发时刷新持续时间；\n受到<color=#FFFFFF>[广域气旋]</color>影响的敌人被击败时，会使该<color=#FFFFFF>[广域气旋]</color>的持续时间延长5秒，该效果对同一<color=#FFFFFF>[广域气旋]</color>仅能触发一次，同一时间只能存在一个<color=#FFFFFF>[广域气旋]</color>；\n<color=#FFFFFF>[微域气旋]</color>和<color=#FFFFFF>[广域气旋]</color>会在消散时触发一次爆炸，该次爆炸命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，都会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#2BAD00>95%</color>和<color=#2BAD00>155%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或与自身属性相同的角色时触发：\n维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升10%，<color=#FFFFFF>[终结技]</color>重击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#A6C5FD>680%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>；\n<color=#FFFFFF>[核心被动：风华盈袖]</color>中，<Term:1000016></Term>造成的<color=#FFFFFF>属性异常积蓄抗性</color>降低效果额外提升7%，造成的失衡值提升30%，累积的属性异常积蓄值提升15%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风华盈袖", "额外能力：茶会礼仪"],
+        "potential": []
+      },
+      "1561503": {
+        "desc": [
+          "维琳娜初始能量自动回复大于1.2时，超过部分每超过0.01，造成的伤害提升0.21%，最多提升35%，异常掌控提升0.5点，最多提升84点；\n维琳娜进入战场时，获得45点<Term:1000008></Term>，在勘域模式中此效果180秒内最多触发一次，维琳娜发动<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>或<color=#FFFFFF>[强化特殊技：风切变·三重绝息]</color>都会获得45点<color=#FFFFFF>[风华]</color>，<color=#FFFFFF>[风华]</color>上限为135点；\n维琳娜触发<color=#FFFFFF>[乱流]</color>时，会获得1点<Term:1000014></Term>并召唤<Term:1000015></Term>，造成<color=#A6C5FD>风属性伤害</color>，该效果每3秒最多触发一次，当维琳娜拥有2点<color=#FFFFFF>[风蚀]</color>时，维琳娜下一次触发<color=#FFFFFF>[乱流]</color>时，会消耗2点<color=#FFFFFF>[风蚀]</color>使此时<color=#FFFFFF>[乱流]</color>的伤害倍率提升<color=#2BAD00>110%</color>，并且不再召唤<color=#FFFFFF>[微域气旋]</color>转而召唤<Term:1000016></Term>，此时不会获得<color=#FFFFFF>[风蚀]</color>；\n当维琳娜召唤的<color=#FFFFFF>[广域气旋]</color>首次命中处于<color=#FFFFFF>[浸染]</color>状态下的敌人，会触发<Term:1000017></Term>效果，转化为相应属性的<color=#FFFFFF>[广域气旋]</color>，并会造成相应属性的伤害，<color=#FFFFFF>[广域气旋]</color>攻击命中敌人时，会使敌人的<color=#A6C5FD>风属性异常积蓄抗性</color>降低7%，持续35秒，重复触发时刷新持续时间，若<color=#FFFFFF>[赋彩]</color>后的<color=#FFFFFF>[广域气旋]</color>攻击命中敌人，则敌人的<color=#FFFFFF>相应属性异常积蓄抗性</color>也会降低7%，持续35秒，重复触发时刷新持续时间；\n受到<color=#FFFFFF>[广域气旋]</color>影响的敌人被击败时，会使该<color=#FFFFFF>[广域气旋]</color>的持续时间延长5秒，该效果对同一<color=#FFFFFF>[广域气旋]</color>仅能触发一次，同一时间只能存在一个<color=#FFFFFF>[广域气旋]</color>；\n<color=#FFFFFF>[微域气旋]</color>和<color=#FFFFFF>[广域气旋]</color>会在消散时触发一次爆炸，该次爆炸命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，都会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#2BAD00>105%</color>和<color=#2BAD00>175%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或与自身属性相同的角色时触发：\n维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升10%，<color=#FFFFFF>[终结技]</color>重击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#A6C5FD>680%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>；\n<color=#FFFFFF>[核心被动：风华盈袖]</color>中，<Term:1000016></Term>造成的<color=#FFFFFF>属性异常积蓄抗性</color>降低效果额外提升7%，造成的失衡值提升30%，累积的属性异常积蓄值提升15%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风华盈袖", "额外能力：茶会礼仪"],
+        "potential": []
+      },
+      "1561504": {
+        "desc": [
+          "维琳娜初始能量自动回复大于1.2时，超过部分每超过0.01，造成的伤害提升0.21%，最多提升35%，异常掌控提升0.5点，最多提升84点；\n维琳娜进入战场时，获得45点<Term:1000008></Term>，在勘域模式中此效果180秒内最多触发一次，维琳娜发动<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>或<color=#FFFFFF>[强化特殊技：风切变·三重绝息]</color>都会获得45点<color=#FFFFFF>[风华]</color>，<color=#FFFFFF>[风华]</color>上限为135点；\n维琳娜触发<color=#FFFFFF>[乱流]</color>时，会获得1点<Term:1000014></Term>并召唤<Term:1000015></Term>，造成<color=#A6C5FD>风属性伤害</color>，该效果每3秒最多触发一次，当维琳娜拥有2点<color=#FFFFFF>[风蚀]</color>时，维琳娜下一次触发<color=#FFFFFF>[乱流]</color>时，会消耗2点<color=#FFFFFF>[风蚀]</color>使此时<color=#FFFFFF>[乱流]</color>的伤害倍率提升<color=#2BAD00>120%</color>，并且不再召唤<color=#FFFFFF>[微域气旋]</color>转而召唤<Term:1000016></Term>，此时不会获得<color=#FFFFFF>[风蚀]</color>；\n当维琳娜召唤的<color=#FFFFFF>[广域气旋]</color>首次命中处于<color=#FFFFFF>[浸染]</color>状态下的敌人，会触发<Term:1000017></Term>效果，转化为相应属性的<color=#FFFFFF>[广域气旋]</color>，并会造成相应属性的伤害，<color=#FFFFFF>[广域气旋]</color>攻击命中敌人时，会使敌人的<color=#A6C5FD>风属性异常积蓄抗性</color>降低7%，持续35秒，重复触发时刷新持续时间，若<color=#FFFFFF>[赋彩]</color>后的<color=#FFFFFF>[广域气旋]</color>攻击命中敌人，则敌人的<color=#FFFFFF>相应属性异常积蓄抗性</color>也会降低7%，持续35秒，重复触发时刷新持续时间；\n受到<color=#FFFFFF>[广域气旋]</color>影响的敌人被击败时，会使该<color=#FFFFFF>[广域气旋]</color>的持续时间延长5秒，该效果对同一<color=#FFFFFF>[广域气旋]</color>仅能触发一次，同一时间只能存在一个<color=#FFFFFF>[广域气旋]</color>；\n<color=#FFFFFF>[微域气旋]</color>和<color=#FFFFFF>[广域气旋]</color>会在消散时触发一次爆炸，该次爆炸命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，都会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#2BAD00>115%</color>和<color=#2BAD00>195%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或与自身属性相同的角色时触发：\n维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升10%，<color=#FFFFFF>[终结技]</color>重击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#A6C5FD>680%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>；\n<color=#FFFFFF>[核心被动：风华盈袖]</color>中，<Term:1000016></Term>造成的<color=#FFFFFF>属性异常积蓄抗性</color>降低效果额外提升7%，造成的失衡值提升30%，累积的属性异常积蓄值提升15%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风华盈袖", "额外能力：茶会礼仪"],
+        "potential": []
+      },
+      "1561505": {
+        "desc": [
+          "维琳娜初始能量自动回复大于1.2时，超过部分每超过0.01，造成的伤害提升0.21%，最多提升35%，异常掌控提升0.5点，最多提升84点；\n维琳娜进入战场时，获得45点<Term:1000008></Term>，在勘域模式中此效果180秒内最多触发一次，维琳娜发动<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>或<color=#FFFFFF>[强化特殊技：风切变·三重绝息]</color>都会获得45点<color=#FFFFFF>[风华]</color>，<color=#FFFFFF>[风华]</color>上限为135点；\n维琳娜触发<color=#FFFFFF>[乱流]</color>时，会获得1点<Term:1000014></Term>并召唤<Term:1000015></Term>，造成<color=#A6C5FD>风属性伤害</color>，该效果每3秒最多触发一次，当维琳娜拥有2点<color=#FFFFFF>[风蚀]</color>时，维琳娜下一次触发<color=#FFFFFF>[乱流]</color>时，会消耗2点<color=#FFFFFF>[风蚀]</color>使此时<color=#FFFFFF>[乱流]</color>的伤害倍率提升<color=#2BAD00>130%</color>，并且不再召唤<color=#FFFFFF>[微域气旋]</color>转而召唤<Term:1000016></Term>，此时不会获得<color=#FFFFFF>[风蚀]</color>；\n当维琳娜召唤的<color=#FFFFFF>[广域气旋]</color>首次命中处于<color=#FFFFFF>[浸染]</color>状态下的敌人，会触发<Term:1000017></Term>效果，转化为相应属性的<color=#FFFFFF>[广域气旋]</color>，并会造成相应属性的伤害，<color=#FFFFFF>[广域气旋]</color>攻击命中敌人时，会使敌人的<color=#A6C5FD>风属性异常积蓄抗性</color>降低7%，持续35秒，重复触发时刷新持续时间，若<color=#FFFFFF>[赋彩]</color>后的<color=#FFFFFF>[广域气旋]</color>攻击命中敌人，则敌人的<color=#FFFFFF>相应属性异常积蓄抗性</color>也会降低7%，持续35秒，重复触发时刷新持续时间；\n受到<color=#FFFFFF>[广域气旋]</color>影响的敌人被击败时，会使该<color=#FFFFFF>[广域气旋]</color>的持续时间延长5秒，该效果对同一<color=#FFFFFF>[广域气旋]</color>仅能触发一次，同一时间只能存在一个<color=#FFFFFF>[广域气旋]</color>；\n<color=#FFFFFF>[微域气旋]</color>和<color=#FFFFFF>[广域气旋]</color>会在消散时触发一次爆炸，该次爆炸命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，都会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#2BAD00>125%</color>和<color=#2BAD00>215%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或与自身属性相同的角色时触发：\n维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升10%，<color=#FFFFFF>[终结技]</color>重击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#A6C5FD>680%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>；\n<color=#FFFFFF>[核心被动：风华盈袖]</color>中，<Term:1000016></Term>造成的<color=#FFFFFF>属性异常积蓄抗性</color>降低效果额外提升7%，造成的失衡值提升30%，累积的属性异常积蓄值提升15%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风华盈袖", "额外能力：茶会礼仪"],
+        "potential": []
+      },
+      "1561506": {
+        "desc": [
+          "维琳娜初始能量自动回复大于1.2时，超过部分每超过0.01，造成的伤害提升0.21%，最多提升35%，异常掌控提升0.5点，最多提升84点；\n维琳娜进入战场时，获得45点<Term:1000008></Term>，在勘域模式中此效果180秒内最多触发一次，维琳娜发动<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>或<color=#FFFFFF>[强化特殊技：风切变·三重绝息]</color>都会获得45点<color=#FFFFFF>[风华]</color>，<color=#FFFFFF>[风华]</color>上限为135点；\n维琳娜触发<color=#FFFFFF>[乱流]</color>时，会获得1点<Term:1000014></Term>并召唤<Term:1000015></Term>，造成<color=#A6C5FD>风属性伤害</color>，该效果每3秒最多触发一次，当维琳娜拥有2点<color=#FFFFFF>[风蚀]</color>时，维琳娜下一次触发<color=#FFFFFF>[乱流]</color>时，会消耗2点<color=#FFFFFF>[风蚀]</color>使此时<color=#FFFFFF>[乱流]</color>的伤害倍率提升<color=#2BAD00>140%</color>，并且不再召唤<color=#FFFFFF>[微域气旋]</color>转而召唤<Term:1000016></Term>，此时不会获得<color=#FFFFFF>[风蚀]</color>；\n当维琳娜召唤的<color=#FFFFFF>[广域气旋]</color>首次命中处于<color=#FFFFFF>[浸染]</color>状态下的敌人，会触发<Term:1000017></Term>效果，转化为相应属性的<color=#FFFFFF>[广域气旋]</color>，并会造成相应属性的伤害，<color=#FFFFFF>[广域气旋]</color>攻击命中敌人时，会使敌人的<color=#A6C5FD>风属性异常积蓄抗性</color>降低7%，持续35秒，重复触发时刷新持续时间，若<color=#FFFFFF>[赋彩]</color>后的<color=#FFFFFF>[广域气旋]</color>攻击命中敌人，则敌人的<color=#FFFFFF>相应属性异常积蓄抗性</color>也会降低7%，持续35秒，重复触发时刷新持续时间；\n受到<color=#FFFFFF>[广域气旋]</color>影响的敌人被击败时，会使该<color=#FFFFFF>[广域气旋]</color>的持续时间延长5秒，该效果对同一<color=#FFFFFF>[广域气旋]</color>仅能触发一次，同一时间只能存在一个<color=#FFFFFF>[广域气旋]</color>；\n<color=#FFFFFF>[微域气旋]</color>和<color=#FFFFFF>[广域气旋]</color>会在消散时触发一次爆炸，该次爆炸命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，都会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#2BAD00>135%</color>和<color=#2BAD00>235%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或与自身属性相同的角色时触发：\n维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升10%，<color=#FFFFFF>[终结技]</color>重击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#A6C5FD>680%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>；\n<color=#FFFFFF>[核心被动：风华盈袖]</color>中，<Term:1000016></Term>造成的<color=#FFFFFF>属性异常积蓄抗性</color>降低效果额外提升7%，造成的失衡值提升30%，累积的属性异常积蓄值提升15%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风华盈袖", "额外能力：茶会礼仪"],
+        "potential": []
+      },
+      "1561507": {
+        "desc": [
+          "维琳娜初始能量自动回复大于1.2时，超过部分每超过0.01，造成的伤害提升0.21%，最多提升35%，异常掌控提升0.5点，最多提升84点；\n维琳娜进入战场时，获得45点<Term:1000008></Term>，在勘域模式中此效果180秒内最多触发一次，维琳娜发动<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>或<color=#FFFFFF>[强化特殊技：风切变·三重绝息]</color>都会获得45点<color=#FFFFFF>[风华]</color>，<color=#FFFFFF>[风华]</color>上限为135点；\n维琳娜触发<color=#FFFFFF>[乱流]</color>时，会获得1点<Term:1000014></Term>并召唤<Term:1000015></Term>，造成<color=#A6C5FD>风属性伤害</color>，该效果每3秒最多触发一次，当维琳娜拥有2点<color=#FFFFFF>[风蚀]</color>时，维琳娜下一次触发<color=#FFFFFF>[乱流]</color>时，会消耗2点<color=#FFFFFF>[风蚀]</color>使此时<color=#FFFFFF>[乱流]</color>的伤害倍率提升<color=#2BAD00>150%</color>，并且不再召唤<color=#FFFFFF>[微域气旋]</color>转而召唤<Term:1000016></Term>，此时不会获得<color=#FFFFFF>[风蚀]</color>；\n当维琳娜召唤的<color=#FFFFFF>[广域气旋]</color>首次命中处于<color=#FFFFFF>[浸染]</color>状态下的敌人，会触发<Term:1000017></Term>效果，转化为相应属性的<color=#FFFFFF>[广域气旋]</color>，并会造成相应属性的伤害，<color=#FFFFFF>[广域气旋]</color>攻击命中敌人时，会使敌人的<color=#A6C5FD>风属性异常积蓄抗性</color>降低7%，持续35秒，重复触发时刷新持续时间，若<color=#FFFFFF>[赋彩]</color>后的<color=#FFFFFF>[广域气旋]</color>攻击命中敌人，则敌人的<color=#FFFFFF>相应属性异常积蓄抗性</color>也会降低7%，持续35秒，重复触发时刷新持续时间；\n受到<color=#FFFFFF>[广域气旋]</color>影响的敌人被击败时，会使该<color=#FFFFFF>[广域气旋]</color>的持续时间延长5秒，该效果对同一<color=#FFFFFF>[广域气旋]</color>仅能触发一次，同一时间只能存在一个<color=#FFFFFF>[广域气旋]</color>；\n<color=#FFFFFF>[微域气旋]</color>和<color=#FFFFFF>[广域气旋]</color>会在消散时触发一次爆炸，该次爆炸命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，都会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#2BAD00>145%</color>和<color=#2BAD00>255%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或与自身属性相同的角色时触发：\n维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升10%，<color=#FFFFFF>[终结技]</color>重击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，会对目标造成一次<color=#FFFFFF>[异放]</color>伤害：额外结算一次属性异常伤害，固定结算<color=#A6C5FD>680%</color>倍率的<color=#A6C5FD>风属性异常伤害</color>；\n<color=#FFFFFF>[核心被动：风华盈袖]</color>中，<Term:1000016></Term>造成的<color=#FFFFFF>属性异常积蓄抗性</color>降低效果额外提升7%，造成的失衡值提升30%，累积的属性异常积蓄值提升15%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风华盈袖", "额外能力：茶会礼仪"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对目标发动连续攻击，造成<color=#A6C5FD>风属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：紧急预案",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：裁量干预",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对目标发动连续攻击，造成<color=#A6C5FD>风属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：谈判技巧",
+          "potential": []
+        },
+        {
+          "name": "快速支援：紧急预案",
+          "param": [
+            {
+              "desc": "{Skill:1561015, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561015": {
+                  "attackData": [],
+                  "attributeInfliction": 7834,
+                  "damagePercentage": 20380,
+                  "damagePercentageGrowth": 1860,
+                  "etherPurify": 7835,
+                  "feverRecovery": 215600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1860,
+                  "main": 20380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8620,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561015, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561015": {
+                  "attackData": [],
+                  "attributeInfliction": 7834,
+                  "damagePercentage": 20380,
+                  "damagePercentageGrowth": 1860,
+                  "etherPurify": 7835,
+                  "feverRecovery": 215600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8620,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：裁量干预",
+          "param": [
+            {
+              "desc": "{Skill:1561016, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1561016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561017, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1561017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561018, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1561018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：谈判技巧",
+          "param": [
+            {
+              "desc": "{Skill:1561019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561019": {
+                  "attackData": [],
+                  "attributeInfliction": 38517,
+                  "damagePercentage": 53270,
+                  "damagePercentageGrowth": 4850,
+                  "etherPurify": 21330,
+                  "feverRecovery": 883300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4850,
+                  "main": 53270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39670,
+                  "stunRatioGrowth": 1810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561019": {
+                  "attackData": [],
+                  "attributeInfliction": 38517,
+                  "damagePercentage": 53270,
+                  "damagePercentageGrowth": 4850,
+                  "etherPurify": 21330,
+                  "feverRecovery": 883300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1810,
+                  "main": 39670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39670,
+                  "stunRatioGrowth": 1810
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多五段的攻击，造成<color=#A6C5FD>风属性伤害</color>；\n第五段攻击发动期间，维琳娜的抗打断等级提升，受到的伤害降低40%。",
+          "name": "普通攻击：扇舞",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：扇舞",
+          "param": [
+            {
+              "desc": "{Skill:1561001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1561001": {
+                  "attackData": [],
+                  "attributeInfliction": 1708,
+                  "damagePercentage": 5170,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 3867,
+                  "feverRecovery": 106425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 5170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2360,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1561002": {
+                  "attackData": [],
+                  "attributeInfliction": 1788,
+                  "damagePercentage": 4890,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3501,
+                  "feverRecovery": 96525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 4890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2350,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1561003": {
+                  "attackData": [],
+                  "attributeInfliction": 6180,
+                  "damagePercentage": 16910,
+                  "damagePercentageGrowth": 1540,
+                  "etherPurify": 11837,
+                  "feverRecovery": 325600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1540,
+                  "main": 16910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8050,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1561004": {
+                  "attackData": [],
+                  "attributeInfliction": 5013,
+                  "damagePercentage": 12560,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 8512,
+                  "feverRecovery": 204875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 12560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6290,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561005, Prop:1001}",
+              "name": "五段伤害倍率",
+              "param": {
+                "1561005": {
+                  "attackData": [],
+                  "attributeInfliction": 6316,
+                  "damagePercentage": 22960,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 15126,
+                  "feverRecovery": 375925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2090,
+                  "main": 22960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11270,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1561001": {
+                  "attackData": [],
+                  "attributeInfliction": 1708,
+                  "damagePercentage": 5170,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 3867,
+                  "feverRecovery": 106425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2360,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1561002": {
+                  "attackData": [],
+                  "attributeInfliction": 1788,
+                  "damagePercentage": 4890,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3501,
+                  "feverRecovery": 96525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2350,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1561003": {
+                  "attackData": [],
+                  "attributeInfliction": 6180,
+                  "damagePercentage": 16910,
+                  "damagePercentageGrowth": 1540,
+                  "etherPurify": 11837,
+                  "feverRecovery": 325600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 8050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8050,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1561004": {
+                  "attackData": [],
+                  "attributeInfliction": 5013,
+                  "damagePercentage": 12560,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 8512,
+                  "feverRecovery": 204875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6290,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561005, Prop:1002}",
+              "name": "五段失衡倍率",
+              "param": {
+                "1561005": {
+                  "attackData": [],
+                  "attributeInfliction": 6316,
+                  "damagePercentage": 22960,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 15126,
+                  "feverRecovery": 375925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 11270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11270,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n化作飓风，对敌人进行多段攻击，随后进行终结一击，造成大量<color=#A6C5FD>风属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：旋舞华章",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n向前方进行多段攻击，造成大量<color=#A6C5FD>风属性伤害</color>；\n招式发动后将触发上一位角色的<color=#FFFFFF>[快速支援]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：聆听呼啸",
+          "potential": []
+        },
+        {
+          "name": "连携技：旋舞华章",
+          "param": [
+            {
+              "desc": "{Skill:1561013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561013": {
+                  "attackData": [],
+                  "attributeInfliction": 41616,
+                  "damagePercentage": 80040,
+                  "damagePercentageGrowth": 7280,
+                  "etherPurify": 21667,
+                  "feverRecovery": 2424675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7280,
+                  "main": 80040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561013": {
+                  "attackData": [],
+                  "attributeInfliction": 41616,
+                  "damagePercentage": 80040,
+                  "damagePercentageGrowth": 7280,
+                  "etherPurify": 21667,
+                  "feverRecovery": 2424675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1090,
+                  "main": 23840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：聆听呼啸",
+          "param": [
+            {
+              "desc": "{Skill:1561014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561014": {
+                  "attackData": [],
+                  "attributeInfliction": 114862,
+                  "damagePercentage": 218830,
+                  "damagePercentageGrowth": 19900,
+                  "etherPurify": 84664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 19900,
+                  "main": 218830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38130,
+                  "stunRatioGrowth": 1740
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561014": {
+                  "attackData": [],
+                  "attributeInfliction": 114862,
+                  "damagePercentage": 218830,
+                  "damagePercentageGrowth": 19900,
+                  "etherPurify": 84664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1740,
+                  "main": 38130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38130,
+                  "stunRatioGrowth": 1740
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：拂岚",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前进行快速攻击，造成<color=#A6C5FD>风属性伤害</color>。",
+          "name": "冲刺攻击：踏风",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对目标发动连续攻击，造成<color=#A6C5FD>风属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：折云",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：踏风",
+          "param": [
+            {
+              "desc": "{Skill:1561011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561011": {
+                  "attackData": [],
+                  "attributeInfliction": 3833,
+                  "damagePercentage": 9970,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 3834,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 9970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561011": {
+                  "attackData": [],
+                  "attributeInfliction": 3833,
+                  "damagePercentage": 9970,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 3834,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：折云",
+          "param": [
+            {
+              "desc": "{Skill:1561012, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561012": {
+                  "attackData": [],
+                  "attributeInfliction": 15669,
+                  "damagePercentage": 39490,
+                  "damagePercentageGrowth": 3590,
+                  "etherPurify": 30670,
+                  "feverRecovery": 430925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3590,
+                  "main": 39490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 56420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28240,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561012, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561012": {
+                  "attackData": [],
+                  "attributeInfliction": 15669,
+                  "damagePercentage": 39490,
+                  "damagePercentageGrowth": 3590,
+                  "etherPurify": 30670,
+                  "feverRecovery": 430925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1290,
+                  "main": 28240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 56420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28240,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n向前扇出一道风，造成<color=#A6C5FD>风属性伤害</color>。",
+          "name": "特殊技：风切变·激浊",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n先向后闪避，随后扇出巨大风弹攻击敌人，造成<color=#A6C5FD>风属性伤害</color>；\n向后闪避期间，具备闪避判定，如果成功闪避敌人攻击，会触发<color=#FFFFFF>[极限视域]</color>；\n发动该招式后，点按 <IconMap:Icon_Normal> 可衔接<color=#FFFFFF>[普通攻击]</color>第五段；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：风切变·扬清",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，在<color=#FFFFFF>[强化特殊技：风切变·扬清]</color>后点按或长按 <IconMap:Icon_SpecialReady> 发动：\n连续挥舞扇子，对敌人造成<color=#A6C5FD>风属性伤害</color>；\n发动该招式后，点按 <IconMap:Icon_Normal> 可衔接<color=#FFFFFF>[普通攻击]</color>第五段；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：风切变·三重绝息",
+          "potential": []
+        },
+        {
+          "desc": "<Term:1000008></Term>大于等于90点时，长按 <IconMap:Icon_Special> 或 <IconMap:Icon_Normal> 发动：\n维琳娜汇聚旋风，随后召唤出<Term:1000016></Term>，持续攻击敌人，并触发上一位角色的<color=#FFFFFF>[快速支援]</color>；\n<color=#FFFFFF>[广域气旋]</color>持续5秒，每0.5秒对周边敌人造成一次<color=#A6C5FD>风属性伤害</color>。",
+          "name": "强化特殊技：风切变·风暴眼",
+          "potential": []
+        },
+        {
+          "name": "特殊技：风切变·激浊",
+          "param": [
+            {
+              "desc": "{Skill:1561008, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561008": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561008, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561008": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：风切变·扬清",
+          "param": [
+            {
+              "desc": "{Skill:1561009, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561009": {
+                  "attackData": [],
+                  "attributeInfliction": 30689,
+                  "damagePercentage": 44050,
+                  "damagePercentageGrowth": 4010,
+                  "etherPurify": 8331,
+                  "feverRecovery": 775500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4010,
+                  "main": 44050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30250,
+                  "stunRatioGrowth": 1380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561009, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561009": {
+                  "attackData": [],
+                  "attributeInfliction": 30689,
+                  "damagePercentage": 44050,
+                  "damagePercentageGrowth": 4010,
+                  "etherPurify": 8331,
+                  "feverRecovery": 775500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1380,
+                  "main": 30250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30250,
+                  "stunRatioGrowth": 1380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "45点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：风切变·三重绝息",
+          "param": [
+            {
+              "desc": "{Skill:1561010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561010": {
+                  "attackData": [],
+                  "attributeInfliction": 51305,
+                  "damagePercentage": 72520,
+                  "damagePercentageGrowth": 6600,
+                  "etherPurify": 20000,
+                  "feverRecovery": 1246025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6600,
+                  "main": 72520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51520,
+                  "stunRatioGrowth": 2350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561010": {
+                  "attackData": [],
+                  "attributeInfliction": 51305,
+                  "damagePercentage": 72520,
+                  "damagePercentageGrowth": 6600,
+                  "etherPurify": 20000,
+                  "feverRecovery": 1246025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2350,
+                  "main": 51520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51520,
+                  "stunRatioGrowth": 2350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "45点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：风切变·风暴眼",
+          "param": [
+            {
+              "desc": "{Skill:1561006, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561006": {
+                  "attackData": [],
+                  "attributeInfliction": 16666,
+                  "damagePercentage": 21670,
+                  "damagePercentageGrowth": 1970,
+                  "etherPurify": 16667,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1970,
+                  "main": 21670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18340,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561006, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561006": {
+                  "attackData": [],
+                  "attributeInfliction": 16666,
+                  "damagePercentage": 21670,
+                  "damagePercentageGrowth": 1970,
+                  "etherPurify": 16667,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 18340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18340,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "90点",
+              "name": "[风华]消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "广域气旋",
+          "param": [
+            {
+              "desc": "{Skill:1561007, Prop:1001}",
+              "name": "[广域气旋]风属性单次攻击伤害倍率",
+              "param": {
+                "1561007": {
+                  "attackData": [],
+                  "attributeInfliction": 4500,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8250,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561007, Prop:1002}",
+              "name": "[广域气旋]风属性单次攻击失衡倍率",
+              "param": {
+                "1561007": {
+                  "attackData": [],
+                  "attributeInfliction": 4500,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8250,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1561020, Prop:1001}*0.2}",
+              "name": "[广域气旋]染色属性单次攻击伤害倍率",
+              "param": {
+                "1561020": {
+                  "attackData": [],
+                  "attributeInfliction": 11250,
+                  "damagePercentage": 9750,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 9750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "微域气旋",
+          "param": [
+            {
+              "desc": "{Skill:1561021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1561021": {
+                  "attackData": [],
+                  "attributeInfliction": 5625,
+                  "damagePercentage": 3250,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 3250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1561021": {
+                  "attackData": [],
+                  "attributeInfliction": 5625,
+                  "damagePercentage": 3250,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1561001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：扇舞"
+    },
+    "1561002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：风切变·激浊"
+    },
+    "1561003": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：风切变·扬清"
+    },
+    "1561004": {
+      "desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady>或 <IconMap:Icon_SpecialReady>（长按）",
+      "name": "强化特殊技：风切变·三重绝息"
+    },
+    "1561005": {
+      "desc": "<IconMap:Icon_Special>（长按）或<IconMap:Icon_Normal>（长按）",
+      "name": "强化特殊技：风切变·风暴眼"
+    },
+    "1561006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：踏风"
+    },
+    "1561007": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：折云"
+    },
+    "1561008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：旋舞华章"
+    },
+    "1561009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：聆听呼啸"
+    },
+    "1561010": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：紧急预案"
+    },
+    "1561011": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：裁量干预"
+    },
+    "1561012": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：谈判技巧"
+    }
+  },
+  "skin": {
+    "3115610": {
+      "desc": "好事者曾传言，总务官拒绝外策局的制式服装，是为了彰显门第矜贵，但维琳娜对华服向来兴致寥寥。比起礼仪场上的锦绣装点，她更偏爱简洁的装束——利落、得体，足以应对永无尽头的公务。",
+      "name": "维琳娜·华扇流银"
+    },
+    "3115611": {
+      "desc": "维琳娜在工作之余邀请好友参加午后茶会，在此期间，她会换上相对休闲的服装享受闲暇…不过此前对于邦布们来说，那也只是死神换了一套可怖的伪装而已。",
+      "name": "维琳娜·暇时闲影"
+    }
+  },
+  "specialElementType": {},
+  "strategy": {},
+  "talent": {
+    "1": {
+      "desc": "<color=#FFFFFF>[额外能力：茶会礼仪]</color>中，<color=#FFFFFF>[广域气旋]</color>造成的失衡值额外提升20%；维琳娜触发<color=#FFFFFF>[乱流]</color>时无视目标20%<color=#FFFFFF>全属性伤害抗性</color>；全队造成<color=#A6C5FD>[风化]</color>伤害时，无视目标20%<color=#A6C5FD>风属性伤害抗性</color>。",
+      "desc2": "一切言辞与举止，皆被精确安排在应有的位置之上。\n对方往往尚未察觉，便欣然接受了她所设定的边界、节奏与结果——\n「所谓优雅，不过是秩序运转时最自然的呈现。」",
+      "name": "秩序化优雅"
+    },
+    "2": {
+      "desc": "维琳娜触发<color=#A6C5FD>[风化]</color>时，也可以获取1点<color=#FFFFFF>[风蚀]</color>，该效果每5秒最多触发一次；<color=#FFFFFF>[广域气旋]</color>触发<color=#FFFFFF>[赋彩]</color>效果后，可以积蓄相应属性的异常积蓄值，且该攻击累积的属性异常积蓄值不参与异常伤害结算；<color=#FFFFFF>[额外能力：茶会礼仪]</color>中，维琳娜造成的<color=#A6C5FD>[风化]</color>和<color=#FFFFFF>[乱流]</color>伤害提升效果额外提升15%。",
+      "desc2": "预设一切可能，覆盖所有变数，甚至为失控献上余地。\n她从不寄望侥幸，每一种结局各得归处。\n纵使局势片刻偏离，也不过是被引入另一条早已准备好的路径。\n「唉，果然如此吗…所幸我并非全无准备。」",
+      "name": "饱和式计划"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "无需以力量压制，无需依赖情绪与恫吓。\n只需一个得体的回应，一次恰到好处的让步…\n局势便已在无形中收束，直至归于既定的征服。\n「礼仪是掩盖暴力的手段？」\n「抑或，礼仪是更高的暴力？」",
+      "name": "礼仪性征服"
+    },
+    "4": {
+      "desc": "维琳娜发动<color=#FFFFFF>[强化特殊技]</color>会使自身攻击力提升15%，持续40秒，重复触发时刷新持续时间。",
+      "desc2": "言笑之间，轻重既分。\n红茶未凉，定论已成。\n「若某件事让我苦恼，尽快处理妥当就好。若某个人让我苦恼，呵…」",
+      "name": "茶话即审判"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "「听见她的脚步，便是听见判决！」\n「接过她的请柬，便是步入葬仪！」\n银发的魔女端坐于邦布王国的剧场之下，聆听着小小演员对自己深信不疑的诋毁，轻摇华扇，微笑不语。",
+      "name": "告死魔女"
+    },
+    "6": {
+      "desc": "当维琳娜消耗2点<color=#FFFFFF>[风蚀]</color>提升<color=#FFFFFF>[乱流]</color>伤害倍率时，会获得1点<color=#FFFFFF>[风蚀]</color>，该效果每6秒最多触发一次；维琳娜攻击命中处于<color=#A6C5FD>风属性异常状态</color>下的敌人时，造成的<color=#A6C5FD>风属性异常积蓄值</color>提升20%；当维琳娜对处于<color=#A6C5FD>[风化]</color>状态的敌人再次施加<color=#A6C5FD>[风化]</color>时，会根据上一次<color=#A6C5FD>[风化]</color>的剩余持续时间提升此次<color=#A6C5FD>[风化]</color>的伤害，每1秒剩余持续时间会使伤害提升2.5%，最多提升40%。",
+      "desc2": "「不必问询天使的名姓。她藏在谣言里，藏在训诫后，藏在你战战兢兢递来的求助信里。」",
+      "name": "首席天使"
+    }
+  },
+  "weaponType": {
+    "3": "异常"
+  }
+}

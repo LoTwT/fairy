@@ -2,8 +2,16 @@ import { readFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
-export const supportedLanguages = ["zh", "en"] as const
-export type SupportedLanguage = (typeof supportedLanguages)[number]
+import {
+  isValidEntityId,
+  supportedLanguages,
+} from "../../src/nanoka-identity.ts"
+import type { SupportedLanguage } from "../../src/nanoka-identity.ts"
+export {
+  isValidEntityId,
+  supportedLanguages,
+} from "../../src/nanoka-identity.ts"
+export type { SupportedLanguage } from "../../src/nanoka-identity.ts"
 export const supportedEntityNames = [
   "character",
   "equipment",
@@ -71,10 +79,18 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
     new Uint8Array(await readFile(registryPath)),
     registryPath,
   ) as RegistryDocument
-  const source = registry.sources?.["nanoka-zzz"] as SourcePolicy | undefined
+  if (registry.schemaVersion !== "fairy-source-registry/v1")
+    throw new Error(`来源配置无效：${registryPath}`)
+  return validateSourcePolicy(registry.sources?.["nanoka-zzz"])
+}
 
+/** 离线构建与抓取共用同一配置校验；历史恢复可验证此前登记的语言子集，不能用于新输入构建。 */
+export function validateSourcePolicy(
+  value: unknown,
+  options: { historicalLanguages?: boolean } = {},
+): SourcePolicy {
+  const source = value as SourcePolicy | undefined
   if (
-    registry.schemaVersion !== "fairy-source-registry/v1" ||
     source?.sourceId !== "nanoka-zzz" ||
     source.game !== "zzz" ||
     source.manifestUrl !== "https://static.nanoka.cc/manifest.json" ||
@@ -83,10 +99,13 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
     source.allowlist.manifestPath !== "/manifest.json" ||
     source.allowlist.dataPathPrefix !== "/zzz/" ||
     !Array.isArray(source.languages) ||
-    source.languages.length !== supportedLanguages.length ||
-    !supportedLanguages.every((language) =>
-      source.languages.includes(language),
+    source.languages.length === 0 ||
+    new Set(source.languages).size !== source.languages.length ||
+    !source.languages.every((language) =>
+      supportedLanguages.includes(language),
     ) ||
+    (!options.historicalLanguages &&
+      source.languages.length !== supportedLanguages.length) ||
     !isPositiveInteger(source.requestPolicy?.maxConcurrency) ||
     !isNonNegativeInteger(source.requestPolicy.minimumStartIntervalMs) ||
     !isPositiveInteger(source.requestPolicy.timeoutMs) ||
@@ -101,14 +120,10 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
     typeof source.userAgent !== "string" ||
     source.userAgent.length === 0
   ) {
-    throw new Error(`来源配置无效：${registryPath}`)
+    throw new Error("来源配置无效：nanoka-zzz")
   }
 
-  return source
-}
-
-export function isValidEntityId(value: string): boolean {
-  return value.length <= 32 && /^(0|[1-9]\d*)$/u.test(value)
+  return structuredClone(source)
 }
 
 export function validateManifest(value: unknown): NanokaManifest {

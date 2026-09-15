@@ -1,0 +1,1687 @@
+{
+  "camp": {
+    "12": "Krampus Compliance Authority"
+  },
+  "elementType": {
+    "200": "Physical"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Impact"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1481,
+  "locale": "en",
+  "name": "Dialyn",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1481018", "1481019", "1481020", "1481021", "1481022"],
+      "basic": [
+        "1481001",
+        "1481002",
+        "1481003",
+        "1481004",
+        "1481005",
+        "1481006",
+        "1481007",
+        "1481008"
+      ],
+      "chain": ["1481016", "1481017"],
+      "dodge": ["1481014", "1481015"],
+      "special": ["1481009", "1481010", "1481011", "1481012", "1481013"]
+    },
+    "parameterRowsById": {
+      "1481001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1481002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1481003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1481004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1481005": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1481006": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1481007": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1481008": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1481009": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1481010": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1481011": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1481012": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1481013": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ],
+      "1481014": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1481015": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1481016": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1481017": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1481018": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1481019": ["/skill/assist/description/4/param/0"],
+      "1481020": ["/skill/assist/description/4/param/1"],
+      "1481021": ["/skill/assist/description/4/param/2"],
+      "1481022": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "MAY 28",
+    "fullName": "Dialyn",
+    "gender": "Female",
+    "impressionF": "She might seem to switch back and forth between jokes and sarcasm, but if you have the patience to listen closely, you'll find that deep down, Dialyn is someone with strong principles and real courage!",
+    "impressionM": "Dialyn may come across as a little harsh sometimes, but she's the type to always speak up against injustice and be honest with her friends. She's even the one who told me about Belle sneaking out to hang out with our Agents without me.",
+    "impressions": [
+      "Impressions of Dialyn:\n · Hi there! This is your one and only top-rated customer service rep~",
+      " · Every remarkable person ends up getting countless complaints.",
+      " · Calls and regrets from the past — I'll answer them in yesterday's place."
+    ],
+    "profileDesc": "Dialyn works as a customer service representative for TOPS' Cross-Department Customer Service Center, though few know her other identity — a Krampus Compliance Authority Judge.\n\nShe calls herself TOPS' top-rated representative, yet she also tops the list for the most complaints in the department. Despite never flaunting her authority as a Judge, she always delivers verdicts that cut closest to the truth.\n\nDialyn was born with the ability to hear the voices of those on the brink of death within the Hollows — a talent that's unmatched. Yet to a young Dialyn, it was a tormenting curse.\n\nBe it gift or curse, she has long turned it into a blade for discerning the truth. Despite the trials and tribulations she's borne, she's come far.",
+    "stature": "145",
+    "trustLv": {
+      "1": "Dialyn works as a customer service representative for TOPS' Cross-Department Customer Service Center, though few know her other identity — a Krampus Compliance Authority Judge.\n\nShe calls herself TOPS' top-rated representative, yet she also tops the list for the most complaints in the department. Despite never flaunting her authority as a Judge, she always delivers verdicts that cut closest to the truth.\n\nDialyn was born with the ability to hear the voices of those on the brink of death within the Hollows — a talent that's unmatched. Yet to a young Dialyn, it was a tormenting curse.\n\nBe it gift or curse, she has long turned it into a blade for discerning the truth. Despite the trials and tribulations she's borne, she's come far.",
+      "2": "",
+      "3": "\"Curse\" — not just a word for the torment of those endless voices of the dead echoing through the Hollows, but also for the ill fate brought by such a sinister gift.\n\nBefore a secondary Hollow outbreak, Dialyn's neighbors, misled by a construction company, turned on her, sending the \"ill-omened\" child into a Hollow as a sacrifice for their own safety.\n\nNaive to humanity's cruelty but kind at heart, the young Dialyn willingly offered her life to save everyone, but upon stepping into the Hollow, her accursed gift revealed the cruel truth: it had all been a scheme by the construction company. The residents — whose lives had been covered by massive insurance policies — were doomed to die within the Hollow, and Dialyn was simply the bait to keep them from fleeing.\n\nShe heard her secret curse betrayed, the hatred the dead had towards her, the voices of all who perished, and the lies of those who lived. She can no longer recall how she made it through that barren wasteland. But ever since Krampus took her in, she's been ready: Amid the unending struggle between lies and truth, she would learn to pass her own judgment on good and evil.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 5",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1481049": {
+        "desc": [
+          "Upon entering the battlefield, Dialyn starts with 60 <color=#FFFFFF>Positive Reviews</color>. If her initial CRIT Rate surpasses 50%, her Impact increases by <color=#2BAD00>1.4</color> for each additional 1%, up to a maximum increase of 100.\nAfter using <color=#FFFFFF>EX Special Attack: Rock</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Scissors</color> for 8s.\nAfter using <color=#FFFFFF>EX Special Attack: Scissors</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Paper!</color> for 8s.\nWhen <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy, it applies the <color=#FFFFFF>Malicious Complaint</color> effect. While under <color=#FFFFFF>Malicious Complaint</color>, if the enemy becomes Stunned, the Stun duration is extended by 2s, and Stun DMG Multiplier increases by <color=#2BAD00>15%</color>. Before recovering from Stun, <color=#FFFFFF>Malicious Complaint</color> can trigger on the same target only once. The Stun duration bonus does not stack with similar effects. When an enemy with <color=#FFFFFF>Malicious Complaint</color> recovers from being Stunned, the effect ends.\nWhile in combat, Dialyn gains 0.6 <color=#FFFFFF>Positive Reviews</color> per second. When a heavy attack of <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits enemies, she gains 7.5 <color=#FFFFFF>Positive Reviews</color>. Each use of a skill can grant this bonus only once, up to a maximum of 120.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn triggers the <color=#FFFFFF>Chain Attack</color> window using <color=#FFFFFF>Chain Attack: Welcome Mat</color>, <color=#FFFFFF>EX Special Attack: Get Lost!</color>, or <color=#FFFFFF>Quick Assist: Forward Call</color>, the next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>. When an ally launches an <color=#FFFFFF>Ultimate</color> this way, Dialyn consumes 60 <color=#FFFFFF>Positive Reviews</color>.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn hits an enemy with <color=#FFFFFF>EX Special Attack: Get Lost!</color> and doesn't trigger a <color=#FFFFFF>Chain Attack</color> window, she consumes 90 <color=#FFFFFF>Positive Reviews</color> to forcibly trigger a <color=#FFFFFF>Chain Attack</color> window. The next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>.\nEach time <color=#FFFFFF>Positive Reviews</color> reaches 90 or an <color=#FFFFFF>Ultimate</color> is activated, Dialyn obtains 1 <color=#FFFFFF>Customer Complaint</color>. A maximum of 1 <color=#FFFFFF>Customer Complaint</color> can be held at a time.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nDialyn's <color=#FFFFFF>EX Special Attack</color> CRIT DMG is increased by 50%.\nWhen an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> is activated, all squad members gain the <color=#FFFFFF>Overwhelmingly Positive</color> effect. While <color=#FFFFFF>Overwhelmingly Positive</color> is active, DMG dealt is increased by 40% for 15s. When Dialyn uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> while <color=#FFFFFF>Overwhelmingly Positive</color> is active, if the remaining duration of <color=#FFFFFF>Overwhelmingly Positive</color> is less than 35s, its duration is extended by 10s.\nWhen a heavy attack from <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits, additional DMG is dealt based on the previous squad member's Specialty:\nIf the squad member is an <color=#FFFFFF>Attack</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 320% of that <color=#FFFFFF>Attack</color> Agent's ATK.\nIf the squad member is a <color=#FFFFFF>Rupture</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 400% of that <color=#FFFFFF>Rupture</color> Agent's Sheer Force."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Five-Star Service Hotline",
+          "Additional Ability: External Line"
+        ],
+        "potential": []
+      },
+      "1481050": {
+        "desc": [
+          "Upon entering the battlefield, Dialyn starts with 60 <color=#FFFFFF>Positive Reviews</color>. If her initial CRIT Rate surpasses 50%, her Impact increases by <color=#2BAD00>1.5</color> for each additional 1%, up to a maximum increase of 100.\nAfter using <color=#FFFFFF>EX Special Attack: Rock</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Scissors</color> for 8s.\nAfter using <color=#FFFFFF>EX Special Attack: Scissors</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Paper!</color> for 8s.\nWhen <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy, it applies the <color=#FFFFFF>Malicious Complaint</color> effect. While under <color=#FFFFFF>Malicious Complaint</color>, if the enemy becomes Stunned, the Stun duration is extended by 2s, and Stun DMG Multiplier increases by <color=#2BAD00>17.5%</color>. Before recovering from Stun, <color=#FFFFFF>Malicious Complaint</color> can trigger on the same target only once. The Stun duration bonus does not stack with similar effects. When an enemy with <color=#FFFFFF>Malicious Complaint</color> recovers from being Stunned, the effect ends.\nWhile in combat, Dialyn gains 0.6 <color=#FFFFFF>Positive Reviews</color> per second. When a heavy attack of <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits enemies, she gains 7.5 <color=#FFFFFF>Positive Reviews</color>. Each use of a skill can grant this bonus only once, up to a maximum of 120.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn triggers the <color=#FFFFFF>Chain Attack</color> window using <color=#FFFFFF>Chain Attack: Welcome Mat</color>, <color=#FFFFFF>EX Special Attack: Get Lost!</color>, or <color=#FFFFFF>Quick Assist: Forward Call</color>, the next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>. When an ally launches an <color=#FFFFFF>Ultimate</color> this way, Dialyn consumes 60 <color=#FFFFFF>Positive Reviews</color>.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn hits an enemy with <color=#FFFFFF>EX Special Attack: Get Lost!</color> and doesn't trigger a <color=#FFFFFF>Chain Attack</color> window, she consumes 90 <color=#FFFFFF>Positive Reviews</color> to forcibly trigger a <color=#FFFFFF>Chain Attack</color> window. The next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>.\nEach time <color=#FFFFFF>Positive Reviews</color> reaches 90 or an <color=#FFFFFF>Ultimate</color> is activated, Dialyn obtains 1 <color=#FFFFFF>Customer Complaint</color>. A maximum of 1 <color=#FFFFFF>Customer Complaint</color> can be held at a time.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nDialyn's <color=#FFFFFF>EX Special Attack</color> CRIT DMG is increased by 50%.\nWhen an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> is activated, all squad members gain the <color=#FFFFFF>Overwhelmingly Positive</color> effect. While <color=#FFFFFF>Overwhelmingly Positive</color> is active, DMG dealt is increased by 40% for 15s. When Dialyn uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> while <color=#FFFFFF>Overwhelmingly Positive</color> is active, if the remaining duration of <color=#FFFFFF>Overwhelmingly Positive</color> is less than 35s, its duration is extended by 10s.\nWhen a heavy attack from <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits, additional DMG is dealt based on the previous squad member's Specialty:\nIf the squad member is an <color=#FFFFFF>Attack</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 320% of that <color=#FFFFFF>Attack</color> Agent's ATK.\nIf the squad member is a <color=#FFFFFF>Rupture</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 400% of that <color=#FFFFFF>Rupture</color> Agent's Sheer Force."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Five-Star Service Hotline",
+          "Additional Ability: External Line"
+        ],
+        "potential": []
+      },
+      "1481051": {
+        "desc": [
+          "Upon entering the battlefield, Dialyn starts with 60 <color=#FFFFFF>Positive Reviews</color>. If her initial CRIT Rate surpasses 50%, her Impact increases by <color=#2BAD00>1.6</color> for each additional 1%, up to a maximum increase of 100.\nAfter using <color=#FFFFFF>EX Special Attack: Rock</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Scissors</color> for 8s.\nAfter using <color=#FFFFFF>EX Special Attack: Scissors</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Paper!</color> for 8s.\nWhen <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy, it applies the <color=#FFFFFF>Malicious Complaint</color> effect. While under <color=#FFFFFF>Malicious Complaint</color>, if the enemy becomes Stunned, the Stun duration is extended by 2s, and Stun DMG Multiplier increases by <color=#2BAD00>20%</color>. Before recovering from Stun, <color=#FFFFFF>Malicious Complaint</color> can trigger on the same target only once. The Stun duration bonus does not stack with similar effects. When an enemy with <color=#FFFFFF>Malicious Complaint</color> recovers from being Stunned, the effect ends.\nWhile in combat, Dialyn gains 0.6 <color=#FFFFFF>Positive Reviews</color> per second. When a heavy attack of <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits enemies, she gains 7.5 <color=#FFFFFF>Positive Reviews</color>. Each use of a skill can grant this bonus only once, up to a maximum of 120.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn triggers the <color=#FFFFFF>Chain Attack</color> window using <color=#FFFFFF>Chain Attack: Welcome Mat</color>, <color=#FFFFFF>EX Special Attack: Get Lost!</color>, or <color=#FFFFFF>Quick Assist: Forward Call</color>, the next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>. When an ally launches an <color=#FFFFFF>Ultimate</color> this way, Dialyn consumes 60 <color=#FFFFFF>Positive Reviews</color>.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn hits an enemy with <color=#FFFFFF>EX Special Attack: Get Lost!</color> and doesn't trigger a <color=#FFFFFF>Chain Attack</color> window, she consumes 90 <color=#FFFFFF>Positive Reviews</color> to forcibly trigger a <color=#FFFFFF>Chain Attack</color> window. The next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>.\nEach time <color=#FFFFFF>Positive Reviews</color> reaches 90 or an <color=#FFFFFF>Ultimate</color> is activated, Dialyn obtains 1 <color=#FFFFFF>Customer Complaint</color>. A maximum of 1 <color=#FFFFFF>Customer Complaint</color> can be held at a time.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nDialyn's <color=#FFFFFF>EX Special Attack</color> CRIT DMG is increased by 50%.\nWhen an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> is activated, all squad members gain the <color=#FFFFFF>Overwhelmingly Positive</color> effect. While <color=#FFFFFF>Overwhelmingly Positive</color> is active, DMG dealt is increased by 40% for 15s. When Dialyn uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> while <color=#FFFFFF>Overwhelmingly Positive</color> is active, if the remaining duration of <color=#FFFFFF>Overwhelmingly Positive</color> is less than 35s, its duration is extended by 10s.\nWhen a heavy attack from <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits, additional DMG is dealt based on the previous squad member's Specialty:\nIf the squad member is an <color=#FFFFFF>Attack</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 320% of that <color=#FFFFFF>Attack</color> Agent's ATK.\nIf the squad member is a <color=#FFFFFF>Rupture</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 400% of that <color=#FFFFFF>Rupture</color> Agent's Sheer Force."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Five-Star Service Hotline",
+          "Additional Ability: External Line"
+        ],
+        "potential": []
+      },
+      "1481052": {
+        "desc": [
+          "Upon entering the battlefield, Dialyn starts with 60 <color=#FFFFFF>Positive Reviews</color>. If her initial CRIT Rate surpasses 50%, her Impact increases by <color=#2BAD00>1.7</color> for each additional 1%, up to a maximum increase of 100.\nAfter using <color=#FFFFFF>EX Special Attack: Rock</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Scissors</color> for 8s.\nAfter using <color=#FFFFFF>EX Special Attack: Scissors</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Paper!</color> for 8s.\nWhen <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy, it applies the <color=#FFFFFF>Malicious Complaint</color> effect. While under <color=#FFFFFF>Malicious Complaint</color>, if the enemy becomes Stunned, the Stun duration is extended by 2s, and Stun DMG Multiplier increases by <color=#2BAD00>22.5%</color>. Before recovering from Stun, <color=#FFFFFF>Malicious Complaint</color> can trigger on the same target only once. The Stun duration bonus does not stack with similar effects. When an enemy with <color=#FFFFFF>Malicious Complaint</color> recovers from being Stunned, the effect ends.\nWhile in combat, Dialyn gains 0.6 <color=#FFFFFF>Positive Reviews</color> per second. When a heavy attack of <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits enemies, she gains 7.5 <color=#FFFFFF>Positive Reviews</color>. Each use of a skill can grant this bonus only once, up to a maximum of 120.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn triggers the <color=#FFFFFF>Chain Attack</color> window using <color=#FFFFFF>Chain Attack: Welcome Mat</color>, <color=#FFFFFF>EX Special Attack: Get Lost!</color>, or <color=#FFFFFF>Quick Assist: Forward Call</color>, the next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>. When an ally launches an <color=#FFFFFF>Ultimate</color> this way, Dialyn consumes 60 <color=#FFFFFF>Positive Reviews</color>.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn hits an enemy with <color=#FFFFFF>EX Special Attack: Get Lost!</color> and doesn't trigger a <color=#FFFFFF>Chain Attack</color> window, she consumes 90 <color=#FFFFFF>Positive Reviews</color> to forcibly trigger a <color=#FFFFFF>Chain Attack</color> window. The next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>.\nEach time <color=#FFFFFF>Positive Reviews</color> reaches 90 or an <color=#FFFFFF>Ultimate</color> is activated, Dialyn obtains 1 <color=#FFFFFF>Customer Complaint</color>. A maximum of 1 <color=#FFFFFF>Customer Complaint</color> can be held at a time.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nDialyn's <color=#FFFFFF>EX Special Attack</color> CRIT DMG is increased by 50%.\nWhen an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> is activated, all squad members gain the <color=#FFFFFF>Overwhelmingly Positive</color> effect. While <color=#FFFFFF>Overwhelmingly Positive</color> is active, DMG dealt is increased by 40% for 15s. When Dialyn uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> while <color=#FFFFFF>Overwhelmingly Positive</color> is active, if the remaining duration of <color=#FFFFFF>Overwhelmingly Positive</color> is less than 35s, its duration is extended by 10s.\nWhen a heavy attack from <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits, additional DMG is dealt based on the previous squad member's Specialty:\nIf the squad member is an <color=#FFFFFF>Attack</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 320% of that <color=#FFFFFF>Attack</color> Agent's ATK.\nIf the squad member is a <color=#FFFFFF>Rupture</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 400% of that <color=#FFFFFF>Rupture</color> Agent's Sheer Force."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Five-Star Service Hotline",
+          "Additional Ability: External Line"
+        ],
+        "potential": []
+      },
+      "1481053": {
+        "desc": [
+          "Upon entering the battlefield, Dialyn starts with 60 <color=#FFFFFF>Positive Reviews</color>. If her initial CRIT Rate surpasses 50%, her Impact increases by <color=#2BAD00>1.8</color> for each additional 1%, up to a maximum increase of 100.\nAfter using <color=#FFFFFF>EX Special Attack: Rock</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Scissors</color> for 8s.\nAfter using <color=#FFFFFF>EX Special Attack: Scissors</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Paper!</color> for 8s.\nWhen <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy, it applies the <color=#FFFFFF>Malicious Complaint</color> effect. While under <color=#FFFFFF>Malicious Complaint</color>, if the enemy becomes Stunned, the Stun duration is extended by 2s, and Stun DMG Multiplier increases by <color=#2BAD00>25%</color>. Before recovering from Stun, <color=#FFFFFF>Malicious Complaint</color> can trigger on the same target only once. The Stun duration bonus does not stack with similar effects. When an enemy with <color=#FFFFFF>Malicious Complaint</color> recovers from being Stunned, the effect ends.\nWhile in combat, Dialyn gains 0.6 <color=#FFFFFF>Positive Reviews</color> per second. When a heavy attack of <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits enemies, she gains 7.5 <color=#FFFFFF>Positive Reviews</color>. Each use of a skill can grant this bonus only once, up to a maximum of 120.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn triggers the <color=#FFFFFF>Chain Attack</color> window using <color=#FFFFFF>Chain Attack: Welcome Mat</color>, <color=#FFFFFF>EX Special Attack: Get Lost!</color>, or <color=#FFFFFF>Quick Assist: Forward Call</color>, the next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>. When an ally launches an <color=#FFFFFF>Ultimate</color> this way, Dialyn consumes 60 <color=#FFFFFF>Positive Reviews</color>.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn hits an enemy with <color=#FFFFFF>EX Special Attack: Get Lost!</color> and doesn't trigger a <color=#FFFFFF>Chain Attack</color> window, she consumes 90 <color=#FFFFFF>Positive Reviews</color> to forcibly trigger a <color=#FFFFFF>Chain Attack</color> window. The next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>.\nEach time <color=#FFFFFF>Positive Reviews</color> reaches 90 or an <color=#FFFFFF>Ultimate</color> is activated, Dialyn obtains 1 <color=#FFFFFF>Customer Complaint</color>. A maximum of 1 <color=#FFFFFF>Customer Complaint</color> can be held at a time.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nDialyn's <color=#FFFFFF>EX Special Attack</color> CRIT DMG is increased by 50%.\nWhen an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> is activated, all squad members gain the <color=#FFFFFF>Overwhelmingly Positive</color> effect. While <color=#FFFFFF>Overwhelmingly Positive</color> is active, DMG dealt is increased by 40% for 15s. When Dialyn uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> while <color=#FFFFFF>Overwhelmingly Positive</color> is active, if the remaining duration of <color=#FFFFFF>Overwhelmingly Positive</color> is less than 35s, its duration is extended by 10s.\nWhen a heavy attack from <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits, additional DMG is dealt based on the previous squad member's Specialty:\nIf the squad member is an <color=#FFFFFF>Attack</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 320% of that <color=#FFFFFF>Attack</color> Agent's ATK.\nIf the squad member is a <color=#FFFFFF>Rupture</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 400% of that <color=#FFFFFF>Rupture</color> Agent's Sheer Force."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Five-Star Service Hotline",
+          "Additional Ability: External Line"
+        ],
+        "potential": []
+      },
+      "1481054": {
+        "desc": [
+          "Upon entering the battlefield, Dialyn starts with 60 <color=#FFFFFF>Positive Reviews</color>. If her initial CRIT Rate surpasses 50%, her Impact increases by <color=#2BAD00>1.9</color> for each additional 1%, up to a maximum increase of 100.\nAfter using <color=#FFFFFF>EX Special Attack: Rock</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Scissors</color> for 8s.\nAfter using <color=#FFFFFF>EX Special Attack: Scissors</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Paper!</color> for 8s.\nWhen <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy, it applies the <color=#FFFFFF>Malicious Complaint</color> effect. While under <color=#FFFFFF>Malicious Complaint</color>, if the enemy becomes Stunned, the Stun duration is extended by 2s, and Stun DMG Multiplier increases by <color=#2BAD00>27.5%</color>. Before recovering from Stun, <color=#FFFFFF>Malicious Complaint</color> can trigger on the same target only once. The Stun duration bonus does not stack with similar effects. When an enemy with <color=#FFFFFF>Malicious Complaint</color> recovers from being Stunned, the effect ends.\nWhile in combat, Dialyn gains 0.6 <color=#FFFFFF>Positive Reviews</color> per second. When a heavy attack of <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits enemies, she gains 7.5 <color=#FFFFFF>Positive Reviews</color>. Each use of a skill can grant this bonus only once, up to a maximum of 120.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn triggers the <color=#FFFFFF>Chain Attack</color> window using <color=#FFFFFF>Chain Attack: Welcome Mat</color>, <color=#FFFFFF>EX Special Attack: Get Lost!</color>, or <color=#FFFFFF>Quick Assist: Forward Call</color>, the next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>. When an ally launches an <color=#FFFFFF>Ultimate</color> this way, Dialyn consumes 60 <color=#FFFFFF>Positive Reviews</color>.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn hits an enemy with <color=#FFFFFF>EX Special Attack: Get Lost!</color> and doesn't trigger a <color=#FFFFFF>Chain Attack</color> window, she consumes 90 <color=#FFFFFF>Positive Reviews</color> to forcibly trigger a <color=#FFFFFF>Chain Attack</color> window. The next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>.\nEach time <color=#FFFFFF>Positive Reviews</color> reaches 90 or an <color=#FFFFFF>Ultimate</color> is activated, Dialyn obtains 1 <color=#FFFFFF>Customer Complaint</color>. A maximum of 1 <color=#FFFFFF>Customer Complaint</color> can be held at a time.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nDialyn's <color=#FFFFFF>EX Special Attack</color> CRIT DMG is increased by 50%.\nWhen an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> is activated, all squad members gain the <color=#FFFFFF>Overwhelmingly Positive</color> effect. While <color=#FFFFFF>Overwhelmingly Positive</color> is active, DMG dealt is increased by 40% for 15s. When Dialyn uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> while <color=#FFFFFF>Overwhelmingly Positive</color> is active, if the remaining duration of <color=#FFFFFF>Overwhelmingly Positive</color> is less than 35s, its duration is extended by 10s.\nWhen a heavy attack from <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits, additional DMG is dealt based on the previous squad member's Specialty:\nIf the squad member is an <color=#FFFFFF>Attack</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 320% of that <color=#FFFFFF>Attack</color> Agent's ATK.\nIf the squad member is a <color=#FFFFFF>Rupture</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 400% of that <color=#FFFFFF>Rupture</color> Agent's Sheer Force."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Five-Star Service Hotline",
+          "Additional Ability: External Line"
+        ],
+        "potential": []
+      },
+      "1481055": {
+        "desc": [
+          "Upon entering the battlefield, Dialyn starts with 60 <color=#FFFFFF>Positive Reviews</color>. If her initial CRIT Rate surpasses 50%, her Impact increases by <color=#2BAD00>2</color> for each additional 1%, up to a maximum increase of 100.\nAfter using <color=#FFFFFF>EX Special Attack: Rock</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Scissors</color> for 8s.\nAfter using <color=#FFFFFF>EX Special Attack: Scissors</color>, the next <color=#FFFFFF>EX Special Attack</color> becomes <color=#FFFFFF>EX Special Attack: Paper!</color> for 8s.\nWhen <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy, it applies the <color=#FFFFFF>Malicious Complaint</color> effect. While under <color=#FFFFFF>Malicious Complaint</color>, if the enemy becomes Stunned, the Stun duration is extended by 2s, and Stun DMG Multiplier increases by <color=#2BAD00>30%</color>. Before recovering from Stun, <color=#FFFFFF>Malicious Complaint</color> can trigger on the same target only once. The Stun duration bonus does not stack with similar effects. When an enemy with <color=#FFFFFF>Malicious Complaint</color> recovers from being Stunned, the effect ends.\nWhile in combat, Dialyn gains 0.6 <color=#FFFFFF>Positive Reviews</color> per second. When a heavy attack of <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits enemies, she gains 7.5 <color=#FFFFFF>Positive Reviews</color>. Each use of a skill can grant this bonus only once, up to a maximum of 120.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn triggers the <color=#FFFFFF>Chain Attack</color> window using <color=#FFFFFF>Chain Attack: Welcome Mat</color>, <color=#FFFFFF>EX Special Attack: Get Lost!</color>, or <color=#FFFFFF>Quick Assist: Forward Call</color>, the next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>. When an ally launches an <color=#FFFFFF>Ultimate</color> this way, Dialyn consumes 60 <color=#FFFFFF>Positive Reviews</color>.\nWith at least 90 <color=#FFFFFF>Positive Reviews</color>, when Dialyn hits an enemy with <color=#FFFFFF>EX Special Attack: Get Lost!</color> and doesn't trigger a <color=#FFFFFF>Chain Attack</color> window, she consumes 90 <color=#FFFFFF>Positive Reviews</color> to forcibly trigger a <color=#FFFFFF>Chain Attack</color> window. The next character to switch in will have their <color=#FFFFFF>Chain Attack</color> upgraded to an <color=#FFFFFF>Ultimate</color>.\nEach time <color=#FFFFFF>Positive Reviews</color> reaches 90 or an <color=#FFFFFF>Ultimate</color> is activated, Dialyn obtains 1 <color=#FFFFFF>Customer Complaint</color>. A maximum of 1 <color=#FFFFFF>Customer Complaint</color> can be held at a time.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nDialyn's <color=#FFFFFF>EX Special Attack</color> CRIT DMG is increased by 50%.\nWhen an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> is activated, all squad members gain the <color=#FFFFFF>Overwhelmingly Positive</color> effect. While <color=#FFFFFF>Overwhelmingly Positive</color> is active, DMG dealt is increased by 40% for 15s. When Dialyn uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> while <color=#FFFFFF>Overwhelmingly Positive</color> is active, if the remaining duration of <color=#FFFFFF>Overwhelmingly Positive</color> is less than 35s, its duration is extended by 10s.\nWhen a heavy attack from <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits, additional DMG is dealt based on the previous squad member's Specialty:\nIf the squad member is an <color=#FFFFFF>Attack</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 320% of that <color=#FFFFFF>Attack</color> Agent's ATK.\nIf the squad member is a <color=#FFFFFF>Rupture</color> Agent, <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, and <color=#FFFFFF>EX Special Attack: Paper!</color> deal additional DMG equal to 400% of that <color=#FFFFFF>Rupture</color> Agent's Sheer Force."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Five-Star Service Hotline",
+          "Additional Ability: External Line"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nLaunches consecutive attacks against enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nAfter using this skill, can immediately follow up with the 4th hit of <color=#FFFFFF>Basic Attack: Happy to Be of Service</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Forward Call",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Decline Call",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nPerforms a rapid dash followed by a slash attack, dealing <color=#F0D12B>Physical DMG</color>.\nAfter using this skill, can immediately follow up with the 4th hit of <color=#FFFFFF>Basic Attack: Happy to Be of Service</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Back-to-Back Calls",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Forward Call",
+          "param": [
+            {
+              "desc": "{Skill:1481018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481018": {
+                  "attackData": [],
+                  "attributeInfliction": 5498,
+                  "damagePercentage": 12100,
+                  "damagePercentageGrowth": 1100,
+                  "etherPurify": 10997,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1100,
+                  "main": 12100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6050,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481018": {
+                  "attackData": [],
+                  "attributeInfliction": 5498,
+                  "damagePercentage": 12100,
+                  "damagePercentageGrowth": 1100,
+                  "etherPurify": 10997,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6050,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Decline Call",
+          "param": [
+            {
+              "desc": "{Skill:1481019, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1481019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481020, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1481020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481021, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1481021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Back-to-Back Calls",
+          "param": [
+            {
+              "desc": "{Skill:1481022, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481022": {
+                  "attackData": [],
+                  "attributeInfliction": 31997,
+                  "damagePercentage": 37640,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 16500,
+                  "feverRecovery": 1062600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3430,
+                  "main": 37640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32770,
+                  "stunRatioGrowth": 1490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481022, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481022": {
+                  "attackData": [],
+                  "attributeInfliction": 31997,
+                  "damagePercentage": 37640,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 16500,
+                  "feverRecovery": 1062600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 32770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32770,
+                  "stunRatioGrowth": 1490
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to four attacks, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Happy to Be of Service",
+          "potential": []
+        },
+        {
+          "desc": "After <color=#FFFFFF>EX Special Attack: Rock</color> or <color=#FFFFFF>EX Special Attack: Scissors</color>, press <IconMap:Icon_Normal> to activate:\nPerforms up to two attacks, dealing <color=#F0D12B>Physical DMG</color>.\nDuring skill activation, Anti-Interrupt level increases, and DMG taken is reduced by 40%.",
+          "name": "Basic Attack: Rock, Paper, Scissors",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Happy to Be of Service",
+          "param": [
+            {
+              "desc": "{Skill:1481001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1481001": {
+                  "attackData": [],
+                  "attributeInfliction": 2263,
+                  "damagePercentage": 2560,
+                  "damagePercentageGrowth": 240,
+                  "etherPurify": 2264,
+                  "feverRecovery": 62425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 2560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 4080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1940,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1481002": {
+                  "attackData": [],
+                  "attributeInfliction": 4958,
+                  "damagePercentage": 5130,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 4959,
+                  "feverRecovery": 136400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 5130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4350,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1481003": {
+                  "attackData": [],
+                  "attributeInfliction": 6871,
+                  "damagePercentage": 6480,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 6872,
+                  "feverRecovery": 189200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 6480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12370,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6160,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1481004": {
+                  "attackData": [],
+                  "attributeInfliction": 12569,
+                  "damagePercentage": 9950,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 12570,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 9950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22630,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9950,
+                  "stunRatioGrowth": 460
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1481001": {
+                  "attackData": [],
+                  "attributeInfliction": 2263,
+                  "damagePercentage": 2560,
+                  "damagePercentageGrowth": 240,
+                  "etherPurify": 2264,
+                  "feverRecovery": 62425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1940,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 4080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1940,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1481002": {
+                  "attackData": [],
+                  "attributeInfliction": 4958,
+                  "damagePercentage": 5130,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 4959,
+                  "feverRecovery": 136400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4350,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1481003": {
+                  "attackData": [],
+                  "attributeInfliction": 6871,
+                  "damagePercentage": 6480,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 6872,
+                  "feverRecovery": 189200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12370,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6160,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1481004": {
+                  "attackData": [],
+                  "attributeInfliction": 12569,
+                  "damagePercentage": 9950,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 12570,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 9950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22630,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9950,
+                  "stunRatioGrowth": 460
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Rock, Paper, Scissors",
+          "param": [
+            {
+              "desc": "{Skill:1481005, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1481005": {
+                  "attackData": [],
+                  "attributeInfliction": 5500,
+                  "damagePercentage": 8950,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 5500,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 8950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7140,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481006, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1481006": {
+                  "attackData": [],
+                  "attributeInfliction": 7000,
+                  "damagePercentage": 11390,
+                  "damagePercentageGrowth": 1040,
+                  "etherPurify": 7000,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1040,
+                  "main": 11390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9080,
+                  "stunRatioGrowth": 420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481007, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1481007": {
+                  "attackData": [],
+                  "attributeInfliction": 6333,
+                  "damagePercentage": 10310,
+                  "damagePercentageGrowth": 940,
+                  "etherPurify": 6334,
+                  "feverRecovery": 174350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 940,
+                  "main": 10310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8220,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481008, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1481008": {
+                  "attackData": [],
+                  "attributeInfliction": 6166,
+                  "damagePercentage": 10030,
+                  "damagePercentageGrowth": 920,
+                  "etherPurify": 6167,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 920,
+                  "main": 10030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8000,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481005, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1481005": {
+                  "attackData": [],
+                  "attributeInfliction": 5500,
+                  "damagePercentage": 8950,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 5500,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7140,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481006, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1481006": {
+                  "attackData": [],
+                  "attributeInfliction": 7000,
+                  "damagePercentage": 11390,
+                  "damagePercentageGrowth": 1040,
+                  "etherPurify": 7000,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 9080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9080,
+                  "stunRatioGrowth": 420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481007, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1481007": {
+                  "attackData": [],
+                  "attributeInfliction": 6333,
+                  "damagePercentage": 10310,
+                  "damagePercentageGrowth": 940,
+                  "etherPurify": 6334,
+                  "feverRecovery": 174350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8220,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481008, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1481008": {
+                  "attackData": [],
+                  "attributeInfliction": 6166,
+                  "damagePercentage": 10030,
+                  "damagePercentageGrowth": 920,
+                  "etherPurify": 6167,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 8000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8000,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunches consecutive kicks against enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.\nAfter using this skill, can immediately follow up with the 4th hit of <color=#FFFFFF>Basic Attack: Happy to Be of Service</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Welcome Mat",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nRushes forward and performs a finger flick attack, dealing massive <color=#F0D12B>Physical DMG</color>.\nAfter using this skill, can immediately follow up with the 4th hit of <color=#FFFFFF>Basic Attack: Happy to Be of Service</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Service Stopped for Number Dialed",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Welcome Mat",
+          "param": [
+            {
+              "desc": "{Skill:1481016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481016": {
+                  "attackData": [],
+                  "attributeInfliction": 40450,
+                  "damagePercentage": 62040,
+                  "damagePercentageGrowth": 5640,
+                  "etherPurify": 16497,
+                  "feverRecovery": 2282500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5640,
+                  "main": 62040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18150,
+                  "stunRatioGrowth": 830
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481016": {
+                  "attackData": [],
+                  "attributeInfliction": 40450,
+                  "damagePercentage": 62040,
+                  "damagePercentageGrowth": 5640,
+                  "etherPurify": 16497,
+                  "feverRecovery": 2282500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 830,
+                  "main": 18150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18150,
+                  "stunRatioGrowth": 830
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Service Stopped for Number Dialed",
+          "param": [
+            {
+              "desc": "{Skill:1481017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481017": {
+                  "attackData": [],
+                  "attributeInfliction": 18000,
+                  "damagePercentage": 162250,
+                  "damagePercentageGrowth": 14750,
+                  "etherPurify": 68000,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14750,
+                  "main": 162250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 76780,
+                  "stunRatioGrowth": 3490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481017": {
+                  "attackData": [],
+                  "attributeInfliction": 18000,
+                  "damagePercentage": 162250,
+                  "damagePercentageGrowth": 14750,
+                  "etherPurify": 68000,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3490,
+                  "main": 76780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 76780,
+                  "stunRatioGrowth": 3490
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Line Busy",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nLaunches a dashing attack at enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Sudden Call",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nLaunches consecutive attacks against enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nAfter using this skill, can immediately follow up with the 4th hit of <color=#FFFFFF>Basic Attack: Happy to Be of Service</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Number Unavailable",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Sudden Call",
+          "param": [
+            {
+              "desc": "{Skill:1481014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481014": {
+                  "attackData": [],
+                  "attributeInfliction": 2750,
+                  "damagePercentage": 6050,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 5500,
+                  "feverRecovery": 75625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 6050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3030,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481014": {
+                  "attackData": [],
+                  "attributeInfliction": 2750,
+                  "damagePercentage": 6050,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 5500,
+                  "feverRecovery": 75625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 3030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3030,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Number Unavailable",
+          "param": [
+            {
+              "desc": "{Skill:1481015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481015": {
+                  "attackData": [],
+                  "attributeInfliction": 10996,
+                  "damagePercentage": 26730,
+                  "damagePercentageGrowth": 2430,
+                  "etherPurify": 25997,
+                  "feverRecovery": 302500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2430,
+                  "main": 26730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23100,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481015": {
+                  "attackData": [],
+                  "attributeInfliction": 10996,
+                  "damagePercentage": 26730,
+                  "damagePercentageGrowth": 2430,
+                  "etherPurify": 25997,
+                  "feverRecovery": 302500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 23100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23100,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "With <color=#FFFFFF>Customer Complaint</color>, hold <IconMap:Icon_Normal> to activate:\nDelivers a forward martial salute attack. On activation, it consumes 1 <color=#FFFFFF>Customer Complaint</color> and deals <color=#F0D12B>Physical DMG</color>.\nAfter activation, the previous character's <color=#FFFFFF>Quick Assist</color> is triggered.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Get Lost!",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nThrows dual rings to slash enemies, dealing <color=#F0D12B>Physical DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Welcome Gesture",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLaunches a fist attack, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Rock",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLaunches a scissors attack, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Scissors",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLaunches a paper attack, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Paper!",
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Get Lost!",
+          "param": [
+            {
+              "desc": "{Skill:1481009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481009": {
+                  "attackData": [],
+                  "attributeInfliction": 16003,
+                  "damagePercentage": 54970,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 16004,
+                  "feverRecovery": 440275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5000,
+                  "main": 54970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33650,
+                  "stunRatioGrowth": 1530
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481009": {
+                  "attackData": [],
+                  "attributeInfliction": 16003,
+                  "damagePercentage": 54970,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 16004,
+                  "feverRecovery": 440275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1530,
+                  "main": 33650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33650,
+                  "stunRatioGrowth": 1530
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Welcome Gesture",
+          "param": [
+            {
+              "desc": "{Skill:1481010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481010": {
+                  "attackData": [],
+                  "attributeInfliction": 4918,
+                  "damagePercentage": 5420,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 4919,
+                  "feverRecovery": 135300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 5420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5420,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481010": {
+                  "attackData": [],
+                  "attributeInfliction": 4918,
+                  "damagePercentage": 5420,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 4919,
+                  "feverRecovery": 135300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5420,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Rock",
+          "param": [
+            {
+              "desc": "{Skill:1481011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481011": {
+                  "attackData": [],
+                  "attributeInfliction": 18051,
+                  "damagePercentage": 40400,
+                  "damagePercentageGrowth": 3680,
+                  "etherPurify": 6170,
+                  "feverRecovery": 636625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3680,
+                  "main": 40400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23600,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481011": {
+                  "attackData": [],
+                  "attributeInfliction": 18051,
+                  "damagePercentage": 40400,
+                  "damagePercentageGrowth": 3680,
+                  "etherPurify": 6170,
+                  "feverRecovery": 636625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 23600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23600,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "25",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Scissors",
+          "param": [
+            {
+              "desc": "{Skill:1481012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481012": {
+                  "attackData": [],
+                  "attributeInfliction": 23852,
+                  "damagePercentage": 52490,
+                  "damagePercentageGrowth": 4780,
+                  "etherPurify": 8667,
+                  "feverRecovery": 835175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4780,
+                  "main": 52490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31020,
+                  "stunRatioGrowth": 1410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481012": {
+                  "attackData": [],
+                  "attributeInfliction": 23852,
+                  "damagePercentage": 52490,
+                  "damagePercentageGrowth": 4780,
+                  "etherPurify": 8667,
+                  "feverRecovery": 835175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1410,
+                  "main": 31020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31020,
+                  "stunRatioGrowth": 1410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "25",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Paper!",
+          "param": [
+            {
+              "desc": "{Skill:1481013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1481013": {
+                  "attackData": [],
+                  "attributeInfliction": 33258,
+                  "damagePercentage": 70170,
+                  "damagePercentageGrowth": 6380,
+                  "etherPurify": 13834,
+                  "feverRecovery": 1143725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6380,
+                  "main": 70170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 42690,
+                  "stunRatioGrowth": 1950
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1481013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1481013": {
+                  "attackData": [],
+                  "attributeInfliction": 33258,
+                  "damagePercentage": 70170,
+                  "damagePercentageGrowth": 6380,
+                  "etherPurify": 13834,
+                  "feverRecovery": 1143725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1950,
+                  "main": 42690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 42690,
+                  "stunRatioGrowth": 1950
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "25",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1481001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Happy to Be of Service"
+    },
+    "1481002": {
+      "desc": "<IconMap:Icon_Normal> (After EX Special Attack: Rock or EX Special Attack: Scissors)",
+      "name": "Basic Attack: Rock, Paper, Scissors"
+    },
+    "1481003": {
+      "desc": "<IconMap:Icon_Normal> (Hold with enough Customer Complaint)",
+      "name": "EX Special Attack: Get Lost!"
+    },
+    "1481004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Welcome Gesture"
+    },
+    "1481005": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Rock"
+    },
+    "1481006": {
+      "desc": "<IconMap:Icon_SpecialReady> (For a short duration after using EX Special Attack: Rock)",
+      "name": "EX Special Attack: Scissors"
+    },
+    "1481007": {
+      "desc": "<IconMap:Icon_SpecialReady> (For a short duration after using EX Special Attack: Scissors)",
+      "name": "EX Special Attack: Paper!"
+    },
+    "1481008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Sudden Call"
+    },
+    "1481009": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Number Unavailable"
+    },
+    "1481010": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Welcome Mat"
+    },
+    "1481011": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Service Stopped for Number Dialed"
+    },
+    "1481012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Forward Call"
+    },
+    "1481013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Decline Call"
+    },
+    "1481014": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Back-to-Back Calls"
+    }
+  },
+  "skin": {
+    "3114810": {
+      "desc": "A sweet voice comes from the receiver, and when you lean in to listen, it softens into a gentle whisper, announcing that the verdict has arrived... just kidding, it's just a standard satisfaction survey.",
+      "name": "Dialyn: Ringing Judgment"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, quick-swap Stun triggerer",
+    "Increases enemy Stun DMG Multiplier",
+    "Can upgrade Chain Attack to Ultimate"
+  ],
+  "talent": {
+    "1": {
+      "desc": "The amount of <color=#FFFFFF>Positive Reviews</color> accumulated each second and gained when <color=#FFFFFF>EX Special Attack: Rock</color>, <color=#FFFFFF>EX Special Attack: Scissors</color>, or <color=#FFFFFF>EX Special Attack: Paper!</color> hits an enemy increase by 16%. While the <color=#FFFFFF>Overwhelmingly Positive</color> effect is active, characters ignore 15% of enemy All-Attribute RES.",
+      "desc2": "Welcome to the Cross-Department Customer Service Center!\nOur motto is simple: always wear a smile, always greet every customer with passion~!\nA smile... the one expression I once found hardest to fake. When did it become second nature to me?\n\"Hello there, darling~ How can I help you? Well~ not that I really can do anything for you!\"",
+      "name": "Boundless Hospitality"
+    },
+    "2": {
+      "desc": "Enemies affected by <color=#FFFFFF>Malicious Complaint</color> gain an additional 20% Stun DMG Multiplier when Stunned, and all units deal 15% increased DMG to targets affected by <color=#FFFFFF>Malicious Complaint</color>.",
+      "desc2": "TOPS is the biggest corporate alliance in New Eridu, and our work keeps this city alive~!\nWe're the essential lubricant that keeps this great machine turning, so our service hotline must stay open 24/7, no matter what!\nEndless noise and constant chatter? No problem — that's what I know best.\n\"Please feel free to contact me anytime~! No matter when you do, I'll still be just as annoying~!\"",
+      "name": "24/7 Hotline"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The Hollows are a vast tomb, where every echo of life falls silent within its pitch-black coffin.\nBut to me, it's a call I can never refuse, the final page of every diary, a memo of obsession and lingering resentment.\nEven if... all that talk of letting go or holding on, they've got nothing to do with my own story.\n\"It's alright! I've talked with plenty of clients far harder to communicate with than you~!\"",
+      "name": "Call From the Hollow"
+    },
+    "4": {
+      "desc": "Upon entering combat, Dialyn recovers 20 Energy. This effect can trigger once every 180s in Investigation Zone Mode. While the <color=#FFFFFF>Overwhelmingly Positive</color> effect is active, Dialyn's ATK increases by 500.",
+      "desc2": "People always treat me like a kid because I'm small, but my childhood is long since over.\nWhich day did it end, though? The first time I heard the whispers of the dead? When I was sent into the Hollow as a sacrifice? Or that first night I cried myself to sleep?\nWith no one to protect me, I had to find my own footing. Unable to forget the past, I pretended to let it go.\n\"I don't care about your personal issues~ but I am very concerned about how your childhood trauma might affect my complaint rate~!\"",
+      "name": "The Past Never Fades"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "We lie when others still care about us, and only tell the truth once they've stopped.\nSuch foolish choices always lead to regret. My job is simply to use yesterday's regrets to make today's a little lighter.\nI know people always lie, but at least there are still some who bother to lie to me.\n\"My suggestion? Mix a bit of flattering nonsense in between your insults — it'll work in your favor~!\"",
+      "name": "Lies"
+    },
+    "6": {
+      "desc": "When an ally enters the field with an Ultimate through the <color=#FFFFFF>Core Passive</color>'s effect, that ally gains the <color=#FFFFFF>Aftertone</color> effect. With this effect, landing an attack causes Dialyn to deal an additional instance of <color=#F0D12B>Physical DMG</color> equal to 480% of Dialyn's ATK. This DMG is treated as <color=#FFFFFF>EX Special Attack</color> DMG, and can trigger once every second, up to 12 times. Gaining <color=#FFFFFF>Aftertone</color> again refreshes its trigger count. Only one ally can have <color=#FFFFFF>Aftertone</color> at a time.",
+      "desc2": "A sudden death is like a moment preserved in time, capturing truth in its final, immutable form.\nI take these specimens from the hands of the dead, using their death certificates as the foundation for my judgments.\nPure, objective \"truth\" is the only rule I can depend on, the only thread guiding my way forward... until—\n\"Proxy, can I lie as well?\"",
+      "name": "Truth"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

@@ -1,0 +1,2299 @@
+{
+  "camp": {
+    "2": "Victoria Housekeeping Co."
+  },
+  "elementType": {
+    "202": "Ice"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Ice DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1191,
+  "locale": "en",
+  "name": "Ellen",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1191018", "1191019", "1191020", "1191021", "1191022"],
+      "basic": [
+        "1191001",
+        "1191002",
+        "1191003",
+        "1191004",
+        "1191005",
+        "1191006",
+        "1191027",
+        "1191028",
+        "1191029",
+        "1191030"
+      ],
+      "chain": ["1191016", "1191017"],
+      "dodge": [
+        "1191007",
+        "1191008",
+        "1191009",
+        "1191013",
+        "1191014",
+        "1191015"
+      ],
+      "special": ["1191010", "1191011", "1191012"]
+    },
+    "parameterRowsById": {
+      "1191001": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/3"
+      ],
+      "1191002": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/4"
+      ],
+      "1191003": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/5"
+      ],
+      "1191004": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/3"
+      ],
+      "1191005": [
+        "/skill/basic/description/5/param/1",
+        "/skill/basic/description/5/param/4"
+      ],
+      "1191006": [
+        "/skill/basic/description/5/param/2",
+        "/skill/basic/description/5/param/5"
+      ],
+      "1191007": [
+        "/skill/dodge/description/8/param/0",
+        "/skill/dodge/description/8/param/3"
+      ],
+      "1191008": [
+        "/skill/dodge/description/8/param/1",
+        "/skill/dodge/description/8/param/4"
+      ],
+      "1191009": [
+        "/skill/dodge/description/8/param/2",
+        "/skill/dodge/description/8/param/5"
+      ],
+      "1191010": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1191011": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1191012": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1191013": [
+        "/skill/dodge/description/9/param/0",
+        "/skill/dodge/description/9/param/1"
+      ],
+      "1191014": [
+        "/skill/dodge/description/10/param/0",
+        "/skill/dodge/description/10/param/1"
+      ],
+      "1191015": [
+        "/skill/dodge/description/11/param/0",
+        "/skill/dodge/description/11/param/1"
+      ],
+      "1191016": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1191017": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1191018": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1191019": ["/skill/assist/description/4/param/0"],
+      "1191020": ["/skill/assist/description/4/param/1"],
+      "1191021": ["/skill/assist/description/4/param/2"],
+      "1191022": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1191027": [
+        "/skill/basic/description/7/param/0",
+        "/skill/basic/description/7/param/1",
+        "/skill/basic/description/7/param/2",
+        "/skill/basic/description/7/param/3",
+        "/skill/basic/description/7/param/4",
+        "/skill/basic/description/7/param/5"
+      ],
+      "1191028": [
+        "/skill/basic/description/7/param/1",
+        "/skill/basic/description/7/param/2",
+        "/skill/basic/description/7/param/4",
+        "/skill/basic/description/7/param/5"
+      ],
+      "1191029": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/2"
+      ],
+      "1191030": [
+        "/skill/basic/description/6/param/1",
+        "/skill/basic/description/6/param/3"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "JAN 4",
+    "fullName": "Ellen Joe",
+    "gender": "Female",
+    "impressionF": "I was somewhat surprised to see Ellen in her school uniform...\nFor her, working in Victoria Housekeeping is something like a part-time job outside of school, right? That's impressive!",
+    "impressionM": "In a way, we're also working a part-time job, Belle...",
+    "impressions": [
+      "Impressions of Ellen:\n · Shark Rule #1: The more karaoke coupons, the better!",
+      " · Shark Rule #2: If you want to skip class, grab an accomplice!",
+      " · Shark Rule #3: Weight and nickname are top-secret!"
+    ],
+    "profileDesc": "Ellen is a maid working for Victoria Housekeeping Co. and its latest member.\nShe is a laid-back individual who dislikes activities that require energy. However, with the full support of her teammates, she can unleash her formidable power during critical moments.\nSince her fighting style leads to high energy consumption, she always carries a lollipop in her mouth to ensure an adequate sugar intake.\nWhile she frequently expresses her desire to change jobs due to the hassle, she genuinely values her companions at Victoria Housekeeping.\n\nEllen attends a school in New Eridu and has a group of ordinary friends.\nApart from her role as a maid at Victoria Housekeeping, Ellen spends a significant amount of time with her friends, leading an ordinary and contented student life.\n\nThoughts: As a multitasker, Ellen must balance her student life with her job at Victoria Housekeeping Co.\nPerhaps this is one of the reasons why she often feels tired?",
+    "stature": "161",
+    "trustLv": {
+      "1": "Ellen is a maid working for Victoria Housekeeping Co. and its latest member.\nShe is a laid-back individual who dislikes activities that require energy. However, with the full support of her teammates, she can unleash her formidable power during critical moments.\nSince her fighting style leads to high energy consumption, she always carries a lollipop in her mouth to ensure an adequate sugar intake.\nWhile she frequently expresses her desire to change jobs due to the hassle, she genuinely values her companions at Victoria Housekeeping.\n\nEllen attends a school in New Eridu and has a group of ordinary friends.\nApart from her role as a maid at Victoria Housekeeping, Ellen spends a significant amount of time with her friends, leading an ordinary and contented student life.\n\nThoughts: As a multitasker, Ellen must balance her student life with her job at Victoria Housekeeping Co.\nPerhaps this is one of the reasons why she often feels tired?",
+      "2": "",
+      "3": "Ellen appears to possess a unique sense of taste that differs from that of ordinary people. Her teammate Rina consistently prepares various \"whimsical\" dishes, and Ellen is the only one who can consume them without breaking a sweat.\n\nSuggestion: Perhaps you could also sample Rina's dishes. I will compare your reaction with Ellen's to gather more significant data.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Chapter 3",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1191501": {
+        "desc": [
+          "When Ellen launches a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes a <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG is increased by <color=#2BAD00>50%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [0]
+      },
+      "1191502": {
+        "desc": [
+          "When Ellen launches a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes a <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG is increased by <color=#2BAD00>58.3%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [0]
+      },
+      "1191503": {
+        "desc": [
+          "When Ellen launches a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes a <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG is increased by <color=#2BAD00>66.6%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [0]
+      },
+      "1191504": {
+        "desc": [
+          "When Ellen launches a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes a <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG is increased by <color=#2BAD00>75%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [0]
+      },
+      "1191505": {
+        "desc": [
+          "When Ellen launches a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes a <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG is increased by <color=#2BAD00>83.3%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [0]
+      },
+      "1191506": {
+        "desc": [
+          "When Ellen launches a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes a <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG is increased by <color=#2BAD00>91.6%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [0]
+      },
+      "1191507": {
+        "desc": [
+          "When Ellen launches a Charged Scissors Strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes a <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG is increased by <color=#2BAD00>100%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [0]
+      },
+      "1191508": {
+        "desc": [
+          "When Ellen launches a Charged Scissor strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG increases by <color=#2BAD00>50%</color>.\nThe above effect also applies to <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, <color=#FFFFFF>Basic Attack: Icy Blade</color>, and <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+      },
+      "1191509": {
+        "desc": [
+          "When Ellen launches a Charged Scissor strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG increases by <color=#2BAD00>58.3%</color>.\nThe above effect also applies to <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, <color=#FFFFFF>Basic Attack: Icy Blade</color>, and <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+      },
+      "1191510": {
+        "desc": [
+          "When Ellen launches a Charged Scissor strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG increases by <color=#2BAD00>66.6%</color>.\nThe above effect also applies to <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, <color=#FFFFFF>Basic Attack: Icy Blade</color>, and <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+      },
+      "1191511": {
+        "desc": [
+          "When Ellen launches a Charged Scissor strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG increases by <color=#2BAD00>75%</color>.\nThe above effect also applies to <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, <color=#FFFFFF>Basic Attack: Icy Blade</color>, and <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+      },
+      "1191512": {
+        "desc": [
+          "When Ellen launches a Charged Scissor strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG increases by <color=#2BAD00>83.3%</color>.\nThe above effect also applies to <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, <color=#FFFFFF>Basic Attack: Icy Blade</color>, and <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+      },
+      "1191513": {
+        "desc": [
+          "When Ellen launches a Charged Scissor strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG increases by <color=#2BAD00>91.6%</color>.\nThe above effect also applies to <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, <color=#FFFFFF>Basic Attack: Icy Blade</color>, and <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+      },
+      "1191514": {
+        "desc": [
+          "When Ellen launches a Charged Scissor strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, or consumes <color=#FFFFFF>Flash Freeze Charge</color> to activate <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, the skill's CRIT DMG increases by <color=#2BAD00>100%</color>.\nThe above effect also applies to <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, <color=#FFFFFF>Basic Attack: Icy Blade</color>, and <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same Attribute or Faction:\nWhen Ellen deals <color=#98EFF0>Ice DMG</color>, subsequent <color=#98EFF0>Ice DMG</color> increases by 3% for 10s. This effect can stack up to 10 times, and repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Sharp-Toothed",
+          "Additional Ability: Rising Storm"
+        ],
+        "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+      }
+    }
+  },
+  "potentialDetail": {
+    "119100": {
+      "abilityList": [11191401],
+      "desc": "",
+      "id": 119100,
+      "image": "Ellen",
+      "level": 1,
+      "levelShowName": "Shark's Rage I",
+      "name": "",
+      "potentialMaterials": [
+        {
+          "itemId": 20119,
+          "number": 1
+        }
+      ]
+    },
+    "119101": {
+      "abilityList": [11191401, 11191501],
+      "desc": "Ellen 's Additional Ability: Rising Storm CRIT DMG increases by <color=#2BAD00>1.6%</color> per stack. At 10 stacks, the attack ignores <color=#2BAD00>3.3%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "id": 119101,
+      "image": "Ellen",
+      "level": 2,
+      "levelShowName": "Shark's Rage II",
+      "name": "Potential Awakening: Permafrost Zone",
+      "potentialMaterials": [
+        {
+          "itemId": 20119,
+          "number": 1
+        }
+      ]
+    },
+    "119102": {
+      "abilityList": [11191401, 11191502],
+      "desc": "Ellen 's Additional Ability: Rising Storm CRIT DMG increases by <color=#2BAD00>2.4%</color> per stack. At 10 stacks, the attack ignores <color=#2BAD00>5%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "id": 119102,
+      "image": "Ellen",
+      "level": 3,
+      "levelShowName": "Shark's Rage III",
+      "name": "Potential Awakening: Permafrost Zone",
+      "potentialMaterials": [
+        {
+          "itemId": 20119,
+          "number": 1
+        }
+      ]
+    },
+    "119103": {
+      "abilityList": [11191401, 11191503],
+      "desc": "Ellen 's Additional Ability: Rising Storm CRIT DMG increases by <color=#2BAD00>3.2%</color> per stack. At 10 stacks, the attack ignores <color=#2BAD00>6.7%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "id": 119103,
+      "image": "Ellen",
+      "level": 4,
+      "levelShowName": "Shark's Rage IV",
+      "name": "Potential Awakening: Permafrost Zone",
+      "potentialMaterials": [
+        {
+          "itemId": 20119,
+          "number": 1
+        }
+      ]
+    },
+    "119104": {
+      "abilityList": [11191401, 11191504],
+      "desc": "Ellen 's Additional Ability: Rising Storm CRIT DMG increases by <color=#2BAD00>4%</color> per stack. At 10 stacks, the attack ignores <color=#2BAD00>8.3%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "id": 119104,
+      "image": "Ellen",
+      "level": 5,
+      "levelShowName": "Shark's Rage V",
+      "name": "Potential Awakening: Permafrost Zone",
+      "potentialMaterials": [
+        {
+          "itemId": 20119,
+          "number": 1
+        }
+      ]
+    },
+    "119105": {
+      "abilityList": [11191401, 11191505],
+      "desc": "Ellen 's Additional Ability: Rising Storm CRIT DMG increases by <color=#2BAD00>4.8%</color> per stack. At 10 stacks, the attack ignores <color=#2BAD00>10%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "id": 119105,
+      "image": "Ellen",
+      "level": 6,
+      "levelShowName": "Shark's Rage VI",
+      "name": "Potential Awakening: Permafrost Zone",
+      "potentialMaterials": [
+        {
+          "itemId": 20119,
+          "number": 1
+        }
+      ]
+    }
+  },
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nSpeedily move through the enemy with open scissors for a cutting strike, dealing <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.\nWhen the character on the field is launched, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} and press <IconMap:Icon_Switch> to activate:\nEnter the <color=#FFFFFF>Roaming</color> state, enabling dashing movement.\nWhile in the <color=#FFFFFF>Roaming</color> state, use the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to change directions and release to stop.\nCharacter is invulnerable briefly when triggering the skill.\nUpon triggering a <color=#FFFFFF>Quick Assist</color>, Ellen gains the <color=#FFFFFF>Quick Charge</color> effect, shortening the charging time of <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, lasting up to 5s or until it triggers once.",
+          "name": "Quick Assist: Shark Sentinel",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Wavefront Impact",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nCharge and slash enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nPress repeatedly or hold <IconMap:Icon_Normal> during the attack to extend the skill duration.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Shark Cruiser",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Shark Sentinel",
+          "param": [
+            {
+              "desc": "{Skill:1191018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191018": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 12110,
+                  "damagePercentageGrowth": 1110,
+                  "etherPurify": 5502,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 12110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12110,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191018": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 12110,
+                  "damagePercentageGrowth": 1110,
+                  "etherPurify": 5502,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12110,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Wavefront Impact",
+          "param": [
+            {
+              "desc": "{Skill:1191019, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1191019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191020, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1191020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191021, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1191021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Shark Cruiser",
+          "param": [
+            {
+              "desc": "{Skill:1191022, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191022": {
+                  "attackData": [],
+                  "attributeInfliction": 37392,
+                  "damagePercentage": 43790,
+                  "damagePercentageGrowth": 3990,
+                  "etherPurify": 20497,
+                  "feverRecovery": 1227600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3990,
+                  "main": 43790,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38480,
+                  "stunRatioGrowth": 1750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191022, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191022": {
+                  "attackData": [],
+                  "attributeInfliction": 37392,
+                  "damagePercentage": 43790,
+                  "damagePercentageGrowth": 3990,
+                  "etherPurify": 20497,
+                  "feverRecovery": 1227600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1750,
+                  "main": 38480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38480,
+                  "stunRatioGrowth": 1750
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 3 attacks, dealing <color=#F0D12B>Physical DMG</color>.\nPress repeatedly or hold <IconMap:Icon_Normal> during the 3rd attack to extend the skill duration.",
+          "name": "Basic Attack: Saw Teeth Trimming",
+          "potential": []
+        },
+        {
+          "desc": "While <color=#FFFFFF>Flash Freeze</color> is active, press <IconMap:Icon_Normal> to activate:\nLaunch up to 3 attacks at enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nEach attack consumes 1 <color=#FFFFFF>Flash Freeze Charge</color>.\nPress repeatedly or hold <IconMap:Icon_Normal> during the 3rd attack to extend the skill duration.",
+          "name": "Basic Attack: Flash Freeze Trimming",
+          "potential": []
+        },
+        {
+          "desc": "After the 3rd hit of <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, <color=#FFFFFF>Dash Attack: Arctic Ambush</color>'s charged scissor strike, <color=#FFFFFF>Dodge Counter: Reef Rock</color>, and <color=#FFFFFF>Quick Assist</color>, if Ellen has <color=#FFFFFF>Flash Freeze Charges</color>, pressing <IconMap:Icon_Normal> will launch <color=#FFFFFF>Basic Attack: Glacial Blade Wave</color>, dealing <color=#98EFF0>Ice DMG</color>.\nThis skill consumes 2 points of <color=#FFFFFF>Flash Freeze Charge</color>.\nAfter use, it can be directly followed up with the 3rd hit of her <color=#FFFFFF>Basic Attack</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Glacial Blade Wave",
+          "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+        },
+        {
+          "desc": "After the 3rd hit of <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color>, <color=#FFFFFF>EX Special Attack: Sharknami</color>, <color=#FFFFFF>Dodge Counter: Reef Rock</color>, and <color=#FFFFFF>Assist Follow-Up</color>, automatically launch <color=#FFFFFF>Basic Attack: Icy Blade</color>, dealing multiple instances of <color=#98EFF0>Ice DMG</color> to all enemies in a large area ahead. It inflicts additional instances of <color=#98EFF0>Ice DMG</color> against Medium and Large foes.\nAfter the skill, Ellen gains the <color=#FFFFFF>Quick Charge</color> effect.\n<color=#FFFFFF>Basic Attack: Icy Blade</color> does not affect the branch or form of the original skill.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Icy Blade",
+          "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+        },
+        {
+          "name": "Basic Attack: Saw Teeth Trimming",
+          "param": [
+            {
+              "desc": "{Skill:1191001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1191001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4880,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 2218,
+                  "feverRecovery": 61050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 4880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2440,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1191002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11110,
+                  "damagePercentageGrowth": 1010,
+                  "etherPurify": 7890,
+                  "feverRecovery": 216975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1010,
+                  "main": 11110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8680,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1191003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 29730,
+                  "damagePercentageGrowth": 2710,
+                  "etherPurify": 21854,
+                  "feverRecovery": 601150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2710,
+                  "main": 29730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 66880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24040,
+                  "stunRatioGrowth": 1100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1191001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4880,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 2218,
+                  "feverRecovery": 61050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2440,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1191002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11110,
+                  "damagePercentageGrowth": 1010,
+                  "etherPurify": 7890,
+                  "feverRecovery": 216975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8680,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1191003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 29730,
+                  "damagePercentageGrowth": 2710,
+                  "etherPurify": 21854,
+                  "feverRecovery": 601150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1100,
+                  "main": 24040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 66880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24040,
+                  "stunRatioGrowth": 1100
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Flash Freeze Trimming",
+          "param": [
+            {
+              "desc": "{Skill:1191004, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1191004": {
+                  "attackData": [],
+                  "attributeInfliction": 4435,
+                  "damagePercentage": 9960,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 4436,
+                  "feverRecovery": 122100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 9960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13580,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4880,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191005, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1191005": {
+                  "attackData": [],
+                  "attributeInfliction": 8199,
+                  "damagePercentage": 18400,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 8200,
+                  "feverRecovery": 225500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 18400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9020,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191006, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1191006": {
+                  "attackData": [],
+                  "attributeInfliction": 22317,
+                  "damagePercentage": 49620,
+                  "damagePercentageGrowth": 4520,
+                  "etherPurify": 22318,
+                  "feverRecovery": 613800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4520,
+                  "main": 49620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 64280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24550,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191004, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1191004": {
+                  "attackData": [],
+                  "attributeInfliction": 4435,
+                  "damagePercentage": 9960,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 4436,
+                  "feverRecovery": 122100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13580,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4880,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191005, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1191005": {
+                  "attackData": [],
+                  "attributeInfliction": 8199,
+                  "damagePercentage": 18400,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 8200,
+                  "feverRecovery": 225500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 9020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9020,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191006, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1191006": {
+                  "attackData": [],
+                  "attributeInfliction": 22317,
+                  "damagePercentage": 49620,
+                  "damagePercentageGrowth": 4520,
+                  "etherPurify": 22318,
+                  "feverRecovery": 613800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 24550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 64280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24550,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Glacial Blade Wave",
+          "param": [
+            {
+              "desc": "{Skill:1191029, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1191029": {
+                  "attackData": [],
+                  "attributeInfliction": 12166,
+                  "damagePercentage": 23020,
+                  "damagePercentageGrowth": 2100,
+                  "etherPurify": 9125,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2100,
+                  "main": 23020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6700,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{Skill:1191030, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1191030": {
+                  "attackData": [],
+                  "attributeInfliction": 4996,
+                  "damagePercentage": 14680,
+                  "damagePercentageGrowth": 1340,
+                  "etherPurify": 5464,
+                  "feverRecovery": 210375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1340,
+                  "main": 14680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8420,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{Skill:1191029, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1191029": {
+                  "attackData": [],
+                  "attributeInfliction": 12166,
+                  "damagePercentage": 23020,
+                  "damagePercentageGrowth": 2100,
+                  "etherPurify": 9125,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6700,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{Skill:1191030, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1191030": {
+                  "attackData": [],
+                  "attributeInfliction": 4996,
+                  "damagePercentage": 14680,
+                  "damagePercentageGrowth": 1340,
+                  "etherPurify": 5464,
+                  "feverRecovery": 210375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8420,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            }
+          ],
+          "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+        },
+        {
+          "name": "Basic Attack: Icy Blade",
+          "param": [
+            {
+              "desc": "{{Skill:1191027, Prop:1001}*3}",
+              "name": "DMG Multiplier to Small Enemies",
+              "param": {
+                "1191027": {
+                  "attackData": [],
+                  "attributeInfliction": 2338,
+                  "damagePercentage": 6040,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2339,
+                  "feverRecovery": 64350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 6040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2580,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{{Skill:1191027, Prop:1001}*3+{Skill:1191028, Prop:1001}*3}",
+              "name": "DMG Multiplier to Medium Enemies",
+              "param": {
+                "1191027": {
+                  "attackData": [],
+                  "attributeInfliction": 2338,
+                  "damagePercentage": 6040,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2339,
+                  "feverRecovery": 64350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 6040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2580,
+                  "stunRatioGrowth": 120
+                },
+                "1191028": {
+                  "attackData": [],
+                  "attributeInfliction": 501,
+                  "damagePercentage": 1300,
+                  "damagePercentageGrowth": 120,
+                  "etherPurify": 502,
+                  "feverRecovery": 14025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 1300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 1810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 560,
+                  "stunRatioGrowth": 30
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{{Skill:1191027, Prop:1001}*3+{Skill:1191028, Prop:1001}*6}",
+              "name": "DMG Multiplier to Large Enemies",
+              "param": {
+                "1191027": {
+                  "attackData": [],
+                  "attributeInfliction": 2338,
+                  "damagePercentage": 6040,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2339,
+                  "feverRecovery": 64350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 6040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2580,
+                  "stunRatioGrowth": 120
+                },
+                "1191028": {
+                  "attackData": [],
+                  "attributeInfliction": 501,
+                  "damagePercentage": 1300,
+                  "damagePercentageGrowth": 120,
+                  "etherPurify": 502,
+                  "feverRecovery": 14025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 1300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 1810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 560,
+                  "stunRatioGrowth": 30
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{{Skill:1191027, Prop:1002}*3}",
+              "name": "Daze Multiplier to Small Enemies",
+              "param": {
+                "1191027": {
+                  "attackData": [],
+                  "attributeInfliction": 2338,
+                  "damagePercentage": 6040,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2339,
+                  "feverRecovery": 64350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2580,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{{Skill:1191027, Prop:1002}*3+{Skill:1191028, Prop:1002}*3}",
+              "name": "Daze Multiplier to Medium Enemies",
+              "param": {
+                "1191027": {
+                  "attackData": [],
+                  "attributeInfliction": 2338,
+                  "damagePercentage": 6040,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2339,
+                  "feverRecovery": 64350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2580,
+                  "stunRatioGrowth": 120
+                },
+                "1191028": {
+                  "attackData": [],
+                  "attributeInfliction": 501,
+                  "damagePercentage": 1300,
+                  "damagePercentageGrowth": 120,
+                  "etherPurify": 502,
+                  "feverRecovery": 14025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 30,
+                  "main": 560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 1810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 560,
+                  "stunRatioGrowth": 30
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            },
+            {
+              "desc": "{{Skill:1191027, Prop:1002}*3+{Skill:1191028, Prop:1002}*6}",
+              "name": "Daze Multiplier to Large Enemies",
+              "param": {
+                "1191027": {
+                  "attackData": [],
+                  "attributeInfliction": 2338,
+                  "damagePercentage": 6040,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2339,
+                  "feverRecovery": 64350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2580,
+                  "stunRatioGrowth": 120
+                },
+                "1191028": {
+                  "attackData": [],
+                  "attributeInfliction": 501,
+                  "damagePercentage": 1300,
+                  "damagePercentageGrowth": 120,
+                  "etherPurify": 502,
+                  "feverRecovery": 14025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 30,
+                  "main": 560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 1810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 560,
+                  "stunRatioGrowth": 30
+                }
+              },
+              "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+            }
+          ],
+          "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nCrash down from above and unleash an ice storm, dealing massive <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Avalanche",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nCrash down from above and unleash an ice storm before a powerful scissor strike, dealing massive <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Endless Winter",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Avalanche",
+          "param": [
+            {
+              "desc": "{Skill:1191016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191016": {
+                  "attackData": [],
+                  "attributeInfliction": 52283,
+                  "damagePercentage": 79460,
+                  "damagePercentageGrowth": 7230,
+                  "etherPurify": 32334,
+                  "feverRecovery": 2718100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7230,
+                  "main": 79460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35570,
+                  "stunRatioGrowth": 1620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191016": {
+                  "attackData": [],
+                  "attributeInfliction": 52283,
+                  "damagePercentage": 79460,
+                  "damagePercentageGrowth": 7230,
+                  "etherPurify": 32334,
+                  "feverRecovery": 2718100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1620,
+                  "main": 35570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35570,
+                  "stunRatioGrowth": 1620
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Endless Winter",
+          "param": [
+            {
+              "desc": "{Skill:1191017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191017": {
+                  "attackData": [],
+                  "attributeInfliction": 16833,
+                  "damagePercentage": 189080,
+                  "damagePercentageGrowth": 17190,
+                  "etherPurify": 66834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 17190,
+                  "main": 189080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18520,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191017": {
+                  "attackData": [],
+                  "attributeInfliction": 16833,
+                  "damagePercentage": 189080,
+                  "damagePercentageGrowth": 17190,
+                  "etherPurify": 66834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 18520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18520,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA rapid dash dodge.\nCharacter is invulnerable while using this skill.\nWhen <color=#FFFFFF>Perfect Dodge</color> is triggered, Ellen gains the <color=#FFFFFF>Quick Charge</color> effect, reducing the charge time of <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, lasting up to 5 seconds or until it triggers.",
+          "name": "Dodge: Vortex",
+          "potential": []
+        },
+        {
+          "desc": "Hold or double-press <IconMap:Icon_Evade> to activate:\nEnter the <color=#FFFFFF>Roaming</color> state, allowing dashing movement.\nIn the <color=#FFFFFF>Roaming</color> state, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to control Ellen's direction, and release to stop.\nEllen is invulnerable for a brief time after activation.",
+          "name": "Dash: Roaming Hunt",
+          "potential": []
+        },
+        {
+          "desc": "While in the <color=#FFFFFF>Roaming</color> state, press <IconMap:Icon_Normal> to activate:\nDelivers a spinning slash to enemies before opening her scissors for a Swift Scissors strike, dealing <color=#98EFF0>Ice DMG</color>.\nGain 1 point of <color=#FFFFFF>Flash Freeze Charge</color> when the Swift Scissors strike hits.\n\nWhile in the <color=#FFFFFF>Roaming</color> state, hold <IconMap:Icon_Normal> to activate:\nPerform a spinning slash against the enemy, then pull apart the scissors to unleash a Charged Scissors strike, dealing massive <color=#98EFF0>Ice DMG</color>.\nGain 3 points of <color=#FFFFFF>Flash Freeze Charge</color> when the Charged Scissors strike hits. If the enemy is <color=#98EFF0>Frozen</color>, it always triggers <color=#98EFF0>Shatter</color>.\nAnti-Interrupt level is increased while charging the skill, and DMG taken is reduced by 40%.\nCharacter is invulnerable while using this skill.",
+          "name": "Dash Attack: Arctic Ambush",
+          "potential": [0]
+        },
+        {
+          "desc": "While in the <color=#FFFFFF>Roaming</color> state, press <IconMap:Icon_Normal> to activate:\nDelivers a spinning slash to enemies before opening her scissors for a Swift Scissors strike, dealing <color=#98EFF0>Ice DMG</color>.\nGain 1 point of <color=#FFFFFF>Flash Freeze Charge</color> when the Swift Scissors strike hits.\n\nWhile in the <color=#FFFFFF>Roaming</color> state, hold <IconMap:Icon_Normal> to activate:\nPerform a spinning slash against the enemy, then pull apart the scissors to unleash a Charged Scissor strike, dealing massive <color=#98EFF0>Ice DMG</color>.\nGain 3 points of <color=#FFFFFF>Flash Freeze Charge</color> when the Charged Scissor strike hits. If the enemy is <color=#98EFF0>Frozen</color>, it always triggers <color=#98EFF0>Shatter</color>.\nAnti-Interrupt level is increased while charging the skill, and DMG taken is reduced by 40%.\nWhen taking DMG from enemies while the skill is charging, that instance of DMG is nullified, and charging instantly completes.\nCharacter is invulnerable while using this skill.",
+          "name": "Dash Attack: Arctic Ambush",
+          "potential": [119100, 119101, 119102, 119103, 119104, 119105]
+        },
+        {
+          "desc": "When Ellen has <color=#FFFFFF>Flash Freeze Charges</color>, the <color=#FFFFFF>Flash Freeze</color> effect is activated. Once <color=#FFFFFF>Flash Freeze</color> activates, <color=#FFFFFF>Basic Attacks</color> and <color=#FFFFFF>Dash Attacks</color> expend <color=#FFFFFF>Flash Freeze Charges</color>, dealing massive <color=#98EFF0>Ice DMG</color>. Ellen can have up to a maximum of 6 <color=#FFFFFF>Flash Freeze Charges</color>.",
+          "name": "Flash Freeze",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nLaunches a dashing slash attack at enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Monstrous Wave",
+          "potential": []
+        },
+        {
+          "desc": "While <color=#FFFFFF>Flash Freeze</color> is active, press <IconMap:Icon_Normal> during dodge to activate:\nLaunches a dashing slash attack at enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nConsumes 1 <color=#FFFFFF>Flash Freeze Charge</color>.",
+          "name": "Dash Attack: Cold Snap",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nRapidly move through enemies with open scissors for a cutting strike, dealing <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Reef Rock",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Arctic Ambush",
+          "param": [
+            {
+              "desc": "{Skill:1191007, Prop:1001}",
+              "name": "Spinning Slash DMG Multiplier",
+              "param": {
+                "1191007": {
+                  "attackData": [],
+                  "attributeInfliction": 5659,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5660,
+                  "feverRecovery": 155650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6230,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191008, Prop:1001}",
+              "name": "Swift Scissors DMG Multiplier",
+              "param": {
+                "1191008": {
+                  "attackData": [],
+                  "attributeInfliction": 8919,
+                  "damagePercentage": 12760,
+                  "damagePercentageGrowth": 1160,
+                  "etherPurify": 8920,
+                  "feverRecovery": 245300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1160,
+                  "main": 12760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 32110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9820,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191009, Prop:1001}",
+              "name": "Charged Scissors DMG Multiplier",
+              "param": {
+                "1191009": {
+                  "attackData": [],
+                  "attributeInfliction": 11056,
+                  "damagePercentage": 15820,
+                  "damagePercentageGrowth": 1440,
+                  "etherPurify": 11057,
+                  "feverRecovery": 304150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1440,
+                  "main": 15820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12170,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191007, Prop:1002}",
+              "name": "Spinning Slash Daze Multiplier",
+              "param": {
+                "1191007": {
+                  "attackData": [],
+                  "attributeInfliction": 5659,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5660,
+                  "feverRecovery": 155650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6230,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191008, Prop:1002}",
+              "name": "Swift Scissors Daze Multiplier",
+              "param": {
+                "1191008": {
+                  "attackData": [],
+                  "attributeInfliction": 8919,
+                  "damagePercentage": 12760,
+                  "damagePercentageGrowth": 1160,
+                  "etherPurify": 8920,
+                  "feverRecovery": 245300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 9820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 32110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9820,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191009, Prop:1002}",
+              "name": "Charged Scissors Daze Multiplier",
+              "param": {
+                "1191009": {
+                  "attackData": [],
+                  "attributeInfliction": 11056,
+                  "damagePercentage": 15820,
+                  "damagePercentageGrowth": 1440,
+                  "etherPurify": 11057,
+                  "feverRecovery": 304150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12170,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "1",
+              "name": "Swift Scissors Flash Freeze Charge Obtained",
+              "potential": []
+            },
+            {
+              "desc": "3",
+              "name": "Charged Scissors Flash Freeze Charge Obtained",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Monstrous Wave",
+          "param": [
+            {
+              "desc": "{Skill:1191013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7700,
+                  "damagePercentageGrowth": 700,
+                  "etherPurify": 3499,
+                  "feverRecovery": 96250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 7700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3850,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7700,
+                  "damagePercentageGrowth": 700,
+                  "etherPurify": 3499,
+                  "feverRecovery": 96250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 180,
+                  "main": 3850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3850,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Cold Snap",
+          "param": [
+            {
+              "desc": "{Skill:1191014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191014": {
+                  "attackData": [],
+                  "attributeInfliction": 7163,
+                  "damagePercentage": 14570,
+                  "damagePercentageGrowth": 1330,
+                  "etherPurify": 3582,
+                  "feverRecovery": 197175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1330,
+                  "main": 14570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7880,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191014": {
+                  "attackData": [],
+                  "attributeInfliction": 7163,
+                  "damagePercentage": 14570,
+                  "damagePercentageGrowth": 1330,
+                  "etherPurify": 3582,
+                  "feverRecovery": 197175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7880,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Reef Rock",
+          "param": [
+            {
+              "desc": "{Skill:1191015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191015": {
+                  "attackData": [],
+                  "attributeInfliction": 10670,
+                  "damagePercentage": 15260,
+                  "damagePercentageGrowth": 1390,
+                  "etherPurify": 25671,
+                  "feverRecovery": 293700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1390,
+                  "main": 15260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22740,
+                  "stunRatioGrowth": 1040
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191015": {
+                  "attackData": [],
+                  "attributeInfliction": 10670,
+                  "damagePercentage": 15260,
+                  "damagePercentageGrowth": 1390,
+                  "etherPurify": 25671,
+                  "feverRecovery": 293700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1040,
+                  "main": 22740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22740,
+                  "stunRatioGrowth": 1040
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nUse a quick tail sweep attack in front, dealing <color=#98EFF0>Ice DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Drift",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nPerform a forceful tail whip attack that deals massive <color=#98EFF0>Ice DMG</color>.\nGain 1 <color=#FFFFFF>Flash Freeze Charge</color> upon striking an enemy.\nCharacter is invulnerable while using this skill.\nAfter executing the move, you can immediately follow up with the 3rd hit of a <color=#FFFFFF>Basic Attack</color>.",
+          "name": "EX Special Attack: Tail Swipe",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy and after executing <color=#FFFFFF>EX Special Attack: Tail Swipe</color>, press <IconMap:Icon_SpecialReady> to activate:\nPerform a powerful series of slashes ahead that deal massive <color=#98EFF0>Ice DMG</color>.\nGain 1 <color=#FFFFFF>Flash Freeze Charge</color> upon striking an enemy.\nCharacter is invulnerable while using this skill.\nAfter executing the move, you can immediately follow up with the 3rd hit of a <color=#FFFFFF>Basic Attack</color>.",
+          "name": "EX Special Attack: Sharknami",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Drift",
+          "param": [
+            {
+              "desc": "{Skill:1191010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191010": {
+                  "attackData": [],
+                  "attributeInfliction": 4584,
+                  "damagePercentage": 5050,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4585,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 5050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191010": {
+                  "attackData": [],
+                  "attributeInfliction": 4584,
+                  "damagePercentage": 5050,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4585,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Tail Swipe",
+          "param": [
+            {
+              "desc": "{Skill:1191011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191011": {
+                  "attackData": [],
+                  "attributeInfliction": 40373,
+                  "damagePercentage": 37720,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 15504,
+                  "feverRecovery": 1403600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3430,
+                  "main": 37720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40510,
+                  "stunRatioGrowth": 1850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191011": {
+                  "attackData": [],
+                  "attributeInfliction": 40373,
+                  "damagePercentage": 37720,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 15504,
+                  "feverRecovery": 1403600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1850,
+                  "main": 40510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40510,
+                  "stunRatioGrowth": 1850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Sharknami",
+          "param": [
+            {
+              "desc": "{Skill:1191012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1191012": {
+                  "attackData": [],
+                  "attributeInfliction": 37219,
+                  "damagePercentage": 55330,
+                  "damagePercentageGrowth": 5030,
+                  "etherPurify": 13167,
+                  "feverRecovery": 1307075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5030,
+                  "main": 55330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 37170,
+                  "stunRatioGrowth": 1690
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1191012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1191012": {
+                  "attackData": [],
+                  "attributeInfliction": 37219,
+                  "damagePercentage": 55330,
+                  "damagePercentageGrowth": 5030,
+                  "etherPurify": 13167,
+                  "feverRecovery": 1307075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1690,
+                  "main": 37170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 37170,
+                  "stunRatioGrowth": 1690
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1191001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Saw Teeth Trimming"
+    },
+    "1191002": {
+      "desc": "<IconMap:Icon_Normal> (Flash Freeze)",
+      "name": "Basic Attack: Flash Freeze Trimming"
+    },
+    "1191003": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> (Flash Freeze) ; <IconMap:Icon_Normal> (Flash Freeze)",
+      "name": "Basic Attack: Glacial Blade Wave"
+    },
+    "1191004": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> (Flash Freeze) (Automatic)",
+      "name": "Basic Attack: Icy Blade"
+    },
+    "1191005": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Drift"
+    },
+    "1191006": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Tail Swipe"
+    },
+    "1191007": {
+      "desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Sharknami"
+    },
+    "1191008": {
+      "desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady> (Automatic)",
+      "name": "Basic Attack: Icy Blade"
+    },
+    "1191009": {
+      "desc": "<IconMap:Icon_Evade> (Hold or Double Tap)",
+      "name": "Dash: Roaming Hunt"
+    },
+    "1191010": {
+      "desc": "<IconMap:Icon_Normal> (Sprint State)",
+      "name": "Dash Attack: Arctic Ambush"
+    },
+    "1191011": {
+      "desc": "<IconMap:Icon_Normal> (Sprint State) (Hold)",
+      "name": "Dash Attack: Arctic Ambush (Charged)"
+    },
+    "1191012": {
+      "desc": "<IconMap:Icon_Normal> (Sprint State) (Hold) ; <IconMap:Icon_Normal>",
+      "name": "Basic Attack: Glacial Blade Wave"
+    },
+    "1191013": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Monstrous Wave"
+    },
+    "1191014": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal> (Flash Freeze)",
+      "name": "Dash Attack: Cold Snap"
+    },
+    "1191015": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Reef Rock"
+    },
+    "1191018": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Avalanche"
+    },
+    "1191019": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Endless Winter"
+    },
+    "1191020": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Shark Sentinel"
+    },
+    "1191022": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Wavefront Impact"
+    },
+    "1191023": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Shark Cruiser"
+    }
+  },
+  "skin": {
+    "3111910": {
+      "desc": "The sharp scissors of Victoria Housekeeping, if only she weren't sleeping...",
+      "name": "Ellen: Ellen Scissorhands"
+    },
+    "3111911": {
+      "desc": "The tail doesn't quite match the school uniform, but with just a little bit of needlework, it can become even cuter!",
+      "name": "Ellen: On Campus"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, on-field DMG dealer",
+    "Stacks Flash Freeze Charges to deal burst DMG",
+    "Moves around the battlefield flexibly"
+  ],
+  "talent": {
+    "1": {
+      "desc": "Upon hitting an enemy with a Swift Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, the obtained <color=#FFFFFF>Flash Freeze Charges</color> are increased to 3. Upon hitting an enemy with a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color>, the obtained <color=#FFFFFF>Flash Freeze Charges</color> are increased to 6. For each <color=#FFFFFF>Flash Freeze Charge</color> consumed, Ellen's CRIT Rate is increased by 2% for 15s, stacking up to 6 times. The duration of each stack is calculated separately.",
+      "desc2": "Chilling winds are an omen of winter, and a signal that Ellen is about to apply for extended leave to hibernate.\nSpeaking of which, do sharks actually need to hibernate?",
+      "name": "Glacial Omen"
+    },
+    "2": {
+      "desc": "The 3rd hit of <color=#FFFFFF>Basic Attack: Flash Freeze Trimming</color> can be directly followed up with <color=#FFFFFF>EX Special Attack: Sharknami</color>. For each point of <color=#FFFFFF>Flash Freeze Charge</color> when using an <color=#FFFFFF>EX Special Attack</color>, the current attack's CRIT DMG is increased by 20%, up to a max of 60%.",
+      "desc2": "Despite being freshly stained with red, the massive shears held by Ellen lacked any trace of warmth.\nThe icy cold stems from her iron-forged instrument, as well as the fear of facing a predator such as herself.",
+      "name": "Arctic Ocean Predator"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The whole point of \"efficiency\" is being able to go home early and sleep.\nSo strike harder and strike faster.",
+      "name": "Overtime-Intolerant"
+    },
+    "4": {
+      "desc": "Whenever a squad member <color=#98EFF0>Freezes</color> or Stuns an enemy, Ellen gains 6 <color=#FFFFFF>Flash Freeze Charges</color> and the <color=#FFFFFF>Quick Charge</color> effect. She also recovers 4 Energy. The Energy recovery effect can trigger once per 10s.",
+      "desc2": "A relentless assault of piercing cold. Terrifying monstrosities will learn the beauty and cruelty of winter under Ellen's blade.\nBut, actually, the endless work that maids have during holidays is far more cruel... ",
+      "name": "Endless Hoarfrost"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Except for when in the toughest of battles, Ellen always seems to have that \"I can fall asleep at any moment\" look.\nMany an enemy has met their demise after underestimating Ellen because of it.",
+      "name": "Adequate Sleep"
+    },
+    "6": {
+      "desc": "When Ellen uses an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or gains <color=#FFFFFF>Quick Charge</color>, her PEN Ratio increases by 20% for 6s. She also gains 1 stack of <color=#FFFFFF>The Feast Begins</color>, up to a maximum of 3 stacks. With 3 stacks of <color=#FFFFFF>The Feast Begins</color>, using a Charged Scissors strike during <color=#FFFFFF>Dash Attack: Arctic Ambush</color> consumes all stacks, increasing the DMG of the current attack by 250%.",
+      "desc2": "An open wound, a drop of blood. A thrilling hunt, a grand feast. A fragile life, a moment of satisfaction.",
+      "name": "The Feast Begins"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

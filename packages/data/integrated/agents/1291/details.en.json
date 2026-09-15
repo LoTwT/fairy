@@ -1,0 +1,1807 @@
+{
+  "camp": {
+    "9": "Mockingbird"
+  },
+  "elementType": {
+    "202": "Ice"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Ice DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1291,
+  "locale": "en",
+  "name": "Hugo",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1291019",
+        "1291020",
+        "1291021",
+        "1291022",
+        "1291023",
+        "1291027",
+        "1291028"
+      ],
+      "basic": [
+        "1291001",
+        "1291002",
+        "1291003",
+        "1291004",
+        "1291005",
+        "1291006",
+        "1291024",
+        "1291025",
+        "1291026"
+      ],
+      "chain": ["1291015", "1291018"],
+      "dodge": ["1291011", "1291012", "1291013", "1291014"],
+      "special": ["1291008", "1291009", "1291010"]
+    },
+    "parameterRowsById": {
+      "1291001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1291002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1291003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1291004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1291005": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/10"
+      ],
+      "1291006": [
+        "/skill/basic/description/2/param/5",
+        "/skill/basic/description/2/param/11"
+      ],
+      "1291008": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1291009": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1291010": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1291011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1291012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/3"
+      ],
+      "1291013": [
+        "/skill/dodge/description/4/param/1",
+        "/skill/dodge/description/4/param/4"
+      ],
+      "1291014": [
+        "/skill/dodge/description/4/param/2",
+        "/skill/dodge/description/4/param/5"
+      ],
+      "1291015": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1291018": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1291019": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/3"
+      ],
+      "1291020": ["/skill/assist/description/4/param/0"],
+      "1291021": ["/skill/assist/description/4/param/1"],
+      "1291022": ["/skill/assist/description/4/param/2"],
+      "1291023": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1291024": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1291025": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1291026": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1291027": [
+        "/skill/assist/description/3/param/1",
+        "/skill/assist/description/3/param/4"
+      ],
+      "1291028": [
+        "/skill/assist/description/3/param/2",
+        "/skill/assist/description/3/param/5"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "AUG 20",
+    "fullName": "Hugo Vlad",
+    "gender": "Male",
+    "impressionF": "Let's just say, the fact that Hugo hasn't gone off the deep end or become a sociopath is already quite the achievement.",
+    "impressionM": "Sometimes I wonder what Hugo would've been like if he'd had a normal upbringing...\nBut then again, it's those very experiences that made him who he is.",
+    "impressions": [
+      "Impressions of Hugo:\n · He climbed out of the abyss and saw his true self.",
+      " · There never was any seed of evil.",
+      " · You're always free to be whoever you wish to be."
+    ],
+    "profileDesc": "Hugo calls himself a collector and runs a fairly successful gallery, mingling with the \"elite\" of New Eridu.\nIn truth, he's the leader of the phantom thieves syndicate, Mockingbird — and Lycaon's former partner.\nDespite his cruel (edgy and dramatic) words, deep down he has his own sense of fairness and justice.\n\nRecords suggest that Hugo had a troubled childhood.\nAs the illegitimate son of the Ravenlocks, a long-established TOPS family, he was rejected by his mother from an early age because of his heterochromatic eyes.\nHis father bought him back like a cheap commodity, using him to provoke a cutthroat succession battle between his children. In that brutal struggle, the only one kind to Hugo — his sister, Serena — became the first to fall. The ones who orchestrated her death pinned the blame on Hugo, thinking it would destroy him. But to their shock, their father actually praised Hugo's actions, calling them the very traits a worthy heir should possess.\nAfter running away from his family, Hugo met Lycaon and Jack and learned to be a phantom thief. After Jack passed away, Hugo and Lycaon formed Mockingbird together.\n\nLater, during one of Mockingbird's missions, Hugo came face-to-face with his father. In a brief moment of hesitation, he chose not to take his revenge and kill him — an act of mercy that ended up costing the lives of many innocent people. His close friend Lycaon, due to a misunderstanding born from those circumstances, broke ties with him and ultimately left Mockingbird.\nAfter drifting on his own for a while, Hugo met Vivian, a girl who reminded him of his sister Serena. He took her under his wing and reformed the Mockingbird syndicate.",
+    "stature": "185",
+    "trustLv": {
+      "1": "Hugo calls himself a collector and runs a fairly successful gallery, mingling with the \"elite\" of New Eridu.\nIn truth, he's the leader of the phantom thieves syndicate, Mockingbird — and Lycaon's former partner.\nDespite his cruel (edgy and dramatic) words, deep down he has his own sense of fairness and justice.\n\nRecords suggest that Hugo had a troubled childhood.\nAs the illegitimate son of the Ravenlocks, a long-established TOPS family, he was rejected by his mother from an early age because of his heterochromatic eyes.\nHis father bought him back like a cheap commodity, using him to provoke a cutthroat succession battle between his children. In that brutal struggle, the only one kind to Hugo — his sister, Serena — became the first to fall. The ones who orchestrated her death pinned the blame on Hugo, thinking it would destroy him. But to their shock, their father actually praised Hugo's actions, calling them the very traits a worthy heir should possess.\nAfter running away from his family, Hugo met Lycaon and Jack and learned to be a phantom thief. After Jack passed away, Hugo and Lycaon formed Mockingbird together.\n\nLater, during one of Mockingbird's missions, Hugo came face-to-face with his father. In a brief moment of hesitation, he chose not to take his revenge and kill him — an act of mercy that ended up costing the lives of many innocent people. His close friend Lycaon, due to a misunderstanding born from those circumstances, broke ties with him and ultimately left Mockingbird.\nAfter drifting on his own for a while, Hugo met Vivian, a girl who reminded him of his sister Serena. He took her under his wing and reformed the Mockingbird syndicate.",
+      "2": "",
+      "3": "Back during his time with the Ravenlock family, Hugo once ate a piece of cake that his older brother liked. In retaliation, the other children forced him to eat an entire table's worth of desserts.\nEver since, the taste of anything sweet makes him want to throw up — likely due to PTSD.\nBut due to his hypoglycemia, he needs sugar to keep his body functioning properly. Hugo forces himself to eat sweets over and over, pushing through the nausea to overcome the pain.\nNote: Neither Lycaon nor Vivian knows about this, and Hugo once asked you to keep it a secret from them.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Story \"Leisurely Lull: Wandering Visitor\" (available after completing Main Story Season 1 - Epilogue (B))",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1291501": {
+        "desc": [
+          "When <color=#FFFFFF>Chain Attack: Trick of Fate</color> hits an enemy or Hugo's attacks Stun an enemy, Hugo gains the <color=#FFFFFF>Dark Abyss Reverb</color> state for 6s, and repeated triggers reset the duration. During this state, Hugo's CRIT Rate increases by 12% and CRIT DMG increases by 25%.\nWhen there are 1/2 <color=#FFFFFF>Stun</color> characters in your squad, Hugo's ATK increases by <color=#2BAD00>25</color>/<color=#2BAD00>75</color>.\nWhen the Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> or <color=#FFFFFF>Ultimate: Blaspheme</color> hits an enemy while they are Stunned, it triggers the <color=#FFFFFF>Totalize</color> effect, increasing the DMG Multiplier of the skill's Finishing Move by <color=#2BAD00>500%</color>. Additionally, the <color=#FFFFFF>Totalize</color> effect further increases the skill's DMG multiplier based on the remaining Stun time of the enemy when triggered: for each remaining second of Stun time from the portion that is less than or equal to 5s, the skill's DMG multiplier increases by <color=#2BAD00>140%</color>; for each remaining second of Stun time from the portion between 5 and 15s, the skill's DMG multiplier increases by <color=#2BAD00>50%</color>. The total increase can raise the skill's DMG multiplier by a maximum of <color=#2BAD00>1,700%</color>.\nAfter Hugo triggers the <color=#FFFFFF>Totalize</color> effect, the enemy's Stunned state will immediately end. Based on the remaining Stun time at the moment <color=#FFFFFF>Totalize</color> is triggered, a certain amount of Daze will be accumulated. For every second of Stun time remaining, 5% Daze is accumulated, up to a maximum Daze equivalent to 25% of the enemy's maximum Daze.\nWhen <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> hits an enemy, if the enemy is not Stunned, the Daze accumulated by the skill increases by 20%.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\n<color=#FFFFFF>Chain Attack: Trick of Fate</color>'s DMG increases by 15%, with a further increase of 35% against normal enemies. When <color=#FFFFFF>Totalize</color> is triggered, the DMG dealt by the skill increases by 40%. <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> generates an additional 20 Energy when triggering <color=#FFFFFF>Totalize</color> on normal enemies. The Energy generation effect can trigger once every 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Terminating Verdict",
+          "Additional Ability: Prelude to Finality"
+        ],
+        "potential": []
+      },
+      "1291502": {
+        "desc": [
+          "When <color=#FFFFFF>Chain Attack: Trick of Fate</color> hits an enemy or Hugo's attacks Stun an enemy, Hugo gains the <color=#FFFFFF>Dark Abyss Reverb</color> state for 6s, and repeated triggers reset the duration. During this state, Hugo's CRIT Rate increases by 12% and CRIT DMG increases by 25%.\nWhen there are 1/2 <color=#FFFFFF>Stun</color> characters in your squad, Hugo's ATK increases by <color=#2BAD00>50</color>/<color=#2BAD00>150</color>.\nWhen the Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> or <color=#FFFFFF>Ultimate: Blaspheme</color> hits an enemy while they are Stunned, it triggers the <color=#FFFFFF>Totalize</color> effect, increasing the DMG Multiplier of the skill's Finishing Move by <color=#2BAD00>583%</color>. Additionally, the <color=#FFFFFF>Totalize</color> effect further increases the skill's DMG multiplier based on the remaining Stun time of the enemy when triggered: for each remaining second of Stun time from the portion that is less than or equal to 5s, the skill's DMG multiplier increases by <color=#2BAD00>163%</color>; for each remaining second of Stun time from the portion between 5 and 15s, the skill's DMG multiplier increases by <color=#2BAD00>58%</color>. The total increase can raise the skill's DMG multiplier by a maximum of <color=#2BAD00>1,978%</color>.\nAfter Hugo triggers the <color=#FFFFFF>Totalize</color> effect, the enemy's Stunned state will immediately end. Based on the remaining Stun time at the moment <color=#FFFFFF>Totalize</color> is triggered, a certain amount of Daze will be accumulated. For every second of Stun time remaining, 5% Daze is accumulated, up to a maximum Daze equivalent to 25% of the enemy's maximum Daze.\nWhen <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> hits an enemy, if the enemy is not Stunned, the Daze accumulated by the skill increases by 20%.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\n<color=#FFFFFF>Chain Attack: Trick of Fate</color>'s DMG increases by 15%, with a further increase of 35% against normal enemies. When <color=#FFFFFF>Totalize</color> is triggered, the DMG dealt by the skill increases by 40%. <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> generates an additional 20 Energy when triggering <color=#FFFFFF>Totalize</color> on normal enemies. The Energy generation effect can trigger once every 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Terminating Verdict",
+          "Additional Ability: Prelude to Finality"
+        ],
+        "potential": []
+      },
+      "1291503": {
+        "desc": [
+          "When <color=#FFFFFF>Chain Attack: Trick of Fate</color> hits an enemy or Hugo's attacks Stun an enemy, Hugo gains the <color=#FFFFFF>Dark Abyss Reverb</color> state for 6s, and repeated triggers reset the duration. During this state, Hugo's CRIT Rate increases by 12% and CRIT DMG increases by 25%.\nWhen there are 1/2 <color=#FFFFFF>Stun</color> characters in your squad, Hugo's ATK increases by <color=#2BAD00>80</color>/<color=#2BAD00>240</color>.\nWhen the Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> or <color=#FFFFFF>Ultimate: Blaspheme</color> hits an enemy while they are Stunned, it triggers the <color=#FFFFFF>Totalize</color> effect, increasing the DMG Multiplier of the skill's Finishing Move by <color=#2BAD00>667%</color>. Additionally, the <color=#FFFFFF>Totalize</color> effect further increases the skill's DMG multiplier based on the remaining Stun time of the enemy when triggered: for each remaining second of Stun time from the portion that is less than or equal to 5s, the skill's DMG multiplier increases by <color=#2BAD00>187%</color>; for each remaining second of Stun time from the portion between 5 and 15s, the skill's DMG multiplier increases by <color=#2BAD00>67%</color>. The total increase can raise the skill's DMG multiplier by a maximum of <color=#2BAD00>2,272%</color>.\nAfter Hugo triggers the <color=#FFFFFF>Totalize</color> effect, the enemy's Stunned state will immediately end. Based on the remaining Stun time at the moment <color=#FFFFFF>Totalize</color> is triggered, a certain amount of Daze will be accumulated. For every second of Stun time remaining, 5% Daze is accumulated, up to a maximum Daze equivalent to 25% of the enemy's maximum Daze.\nWhen <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> hits an enemy, if the enemy is not Stunned, the Daze accumulated by the skill increases by 20%.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\n<color=#FFFFFF>Chain Attack: Trick of Fate</color>'s DMG increases by 15%, with a further increase of 35% against normal enemies. When <color=#FFFFFF>Totalize</color> is triggered, the DMG dealt by the skill increases by 40%. <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> generates an additional 20 Energy when triggering <color=#FFFFFF>Totalize</color> on normal enemies. The Energy generation effect can trigger once every 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Terminating Verdict",
+          "Additional Ability: Prelude to Finality"
+        ],
+        "potential": []
+      },
+      "1291504": {
+        "desc": [
+          "When <color=#FFFFFF>Chain Attack: Trick of Fate</color> hits an enemy or Hugo's attacks Stun an enemy, Hugo gains the <color=#FFFFFF>Dark Abyss Reverb</color> state for 6s, and repeated triggers reset the duration. During this state, Hugo's CRIT Rate increases by 12% and CRIT DMG increases by 25%.\nWhen there are 1/2 <color=#FFFFFF>Stun</color> characters in your squad, Hugo's ATK increases by <color=#2BAD00>120</color>/<color=#2BAD00>360</color>.\nWhen the Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> or <color=#FFFFFF>Ultimate: Blaspheme</color> hits an enemy while they are Stunned, it triggers the <color=#FFFFFF>Totalize</color> effect, increasing the DMG Multiplier of the skill's Finishing Move by <color=#2BAD00>750%</color>. Additionally, the <color=#FFFFFF>Totalize</color> effect further increases the skill's DMG multiplier based on the remaining Stun time of the enemy when triggered: for each remaining second of Stun time from the portion that is less than or equal to 5s, the skill's DMG multiplier increases by <color=#2BAD00>210%</color>; for each remaining second of Stun time from the portion between 5 and 15s, the skill's DMG multiplier increases by <color=#2BAD00>75%</color>. The total increase can raise the skill's DMG multiplier by a maximum of <color=#2BAD00>2,550%</color>.\nAfter Hugo triggers the <color=#FFFFFF>Totalize</color> effect, the enemy's Stunned state will immediately end. Based on the remaining Stun time at the moment <color=#FFFFFF>Totalize</color> is triggered, a certain amount of Daze will be accumulated. For every second of Stun time remaining, 5% Daze is accumulated, up to a maximum Daze equivalent to 25% of the enemy's maximum Daze.\nWhen <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> hits an enemy, if the enemy is not Stunned, the Daze accumulated by the skill increases by 20%.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\n<color=#FFFFFF>Chain Attack: Trick of Fate</color>'s DMG increases by 15%, with a further increase of 35% against normal enemies. When <color=#FFFFFF>Totalize</color> is triggered, the DMG dealt by the skill increases by 40%. <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> generates an additional 20 Energy when triggering <color=#FFFFFF>Totalize</color> on normal enemies. The Energy generation effect can trigger once every 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Terminating Verdict",
+          "Additional Ability: Prelude to Finality"
+        ],
+        "potential": []
+      },
+      "1291505": {
+        "desc": [
+          "When <color=#FFFFFF>Chain Attack: Trick of Fate</color> hits an enemy or Hugo's attacks Stun an enemy, Hugo gains the <color=#FFFFFF>Dark Abyss Reverb</color> state for 6s, and repeated triggers reset the duration. During this state, Hugo's CRIT Rate increases by 12% and CRIT DMG increases by 25%.\nWhen there are 1/2 <color=#FFFFFF>Stun</color> characters in your squad, Hugo's ATK increases by <color=#2BAD00>180</color>/<color=#2BAD00>540</color>.\nWhen the Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> or <color=#FFFFFF>Ultimate: Blaspheme</color> hits an enemy while they are Stunned, it triggers the <color=#FFFFFF>Totalize</color> effect, increasing the DMG Multiplier of the skill's Finishing Move by <color=#2BAD00>833%</color>. Additionally, the <color=#FFFFFF>Totalize</color> effect further increases the skill's DMG multiplier based on the remaining Stun time of the enemy when triggered: for each remaining second of Stun time from the portion that is less than or equal to 5s, the skill's DMG multiplier increases by <color=#2BAD00>233%</color>; for each remaining second of Stun time from the portion between 5 and 15s, the skill's DMG multiplier increases by <color=#2BAD00>83%</color>. The total increase can raise the skill's DMG multiplier by a maximum of <color=#2BAD00>2,828%</color>.\nAfter Hugo triggers the <color=#FFFFFF>Totalize</color> effect, the enemy's Stunned state will immediately end. Based on the remaining Stun time at the moment <color=#FFFFFF>Totalize</color> is triggered, a certain amount of Daze will be accumulated. For every second of Stun time remaining, 5% Daze is accumulated, up to a maximum Daze equivalent to 25% of the enemy's maximum Daze.\nWhen <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> hits an enemy, if the enemy is not Stunned, the Daze accumulated by the skill increases by 20%.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\n<color=#FFFFFF>Chain Attack: Trick of Fate</color>'s DMG increases by 15%, with a further increase of 35% against normal enemies. When <color=#FFFFFF>Totalize</color> is triggered, the DMG dealt by the skill increases by 40%. <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> generates an additional 20 Energy when triggering <color=#FFFFFF>Totalize</color> on normal enemies. The Energy generation effect can trigger once every 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Terminating Verdict",
+          "Additional Ability: Prelude to Finality"
+        ],
+        "potential": []
+      },
+      "1291506": {
+        "desc": [
+          "When <color=#FFFFFF>Chain Attack: Trick of Fate</color> hits an enemy or Hugo's attacks Stun an enemy, Hugo gains the <color=#FFFFFF>Dark Abyss Reverb</color> state for 6s, and repeated triggers reset the duration. During this state, Hugo's CRIT Rate increases by 12% and CRIT DMG increases by 25%.\nWhen there are 1/2 <color=#FFFFFF>Stun</color> characters in your squad, Hugo's ATK increases by <color=#2BAD00>270</color>/<color=#2BAD00>810</color>.\nWhen the Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> or <color=#FFFFFF>Ultimate: Blaspheme</color> hits an enemy while they are Stunned, it triggers the <color=#FFFFFF>Totalize</color> effect, increasing the DMG Multiplier of the skill's Finishing Move by <color=#2BAD00>917%</color>. Additionally, the <color=#FFFFFF>Totalize</color> effect further increases the skill's DMG multiplier based on the remaining Stun time of the enemy when triggered: for each remaining second of Stun time from the portion that is less than or equal to 5s, the skill's DMG multiplier increases by <color=#2BAD00>257%</color>; for each remaining second of Stun time from the portion between 5 and 15s, the skill's DMG multiplier increases by <color=#2BAD00>92%</color>. The total increase can raise the skill's DMG multiplier by a maximum of <color=#2BAD00>3,122%</color>.\nAfter Hugo triggers the <color=#FFFFFF>Totalize</color> effect, the enemy's Stunned state will immediately end. Based on the remaining Stun time at the moment <color=#FFFFFF>Totalize</color> is triggered, a certain amount of Daze will be accumulated. For every second of Stun time remaining, 5% Daze is accumulated, up to a maximum Daze equivalent to 25% of the enemy's maximum Daze.\nWhen <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> hits an enemy, if the enemy is not Stunned, the Daze accumulated by the skill increases by 20%.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\n<color=#FFFFFF>Chain Attack: Trick of Fate</color>'s DMG increases by 15%, with a further increase of 35% against normal enemies. When <color=#FFFFFF>Totalize</color> is triggered, the DMG dealt by the skill increases by 40%. <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> generates an additional 20 Energy when triggering <color=#FFFFFF>Totalize</color> on normal enemies. The Energy generation effect can trigger once every 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Terminating Verdict",
+          "Additional Ability: Prelude to Finality"
+        ],
+        "potential": []
+      },
+      "1291507": {
+        "desc": [
+          "When <color=#FFFFFF>Chain Attack: Trick of Fate</color> hits an enemy or Hugo's attacks Stun an enemy, Hugo gains the <color=#FFFFFF>Dark Abyss Reverb</color> state for 6s, and repeated triggers reset the duration. During this state, Hugo's CRIT Rate increases by 12% and CRIT DMG increases by 25%.\nWhen there are 1/2 <color=#FFFFFF>Stun</color> characters in your squad, Hugo's ATK increases by <color=#2BAD00>300</color>/<color=#2BAD00>900</color>.\nWhen the Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> or <color=#FFFFFF>Ultimate: Blaspheme</color> hits an enemy while they are Stunned, it triggers the <color=#FFFFFF>Totalize</color> effect, increasing the DMG Multiplier of the skill's Finishing Move by <color=#2BAD00>1,000%</color>. Additionally, the <color=#FFFFFF>Totalize</color> effect further increases the skill's DMG multiplier based on the remaining Stun time of the enemy when triggered: for each remaining second of Stun time from the portion that is less than or equal to 5s, the skill's DMG multiplier increases by <color=#2BAD00>280%</color>; for each remaining second of Stun time from the portion between 5 and 15s, the skill's DMG multiplier increases by <color=#2BAD00>100%</color>. The total increase can raise the skill's DMG multiplier by a maximum of <color=#2BAD00>3,400%</color>.\nAfter Hugo triggers the <color=#FFFFFF>Totalize</color> effect, the enemy's Stunned state will immediately end. Based on the remaining Stun time at the moment <color=#FFFFFF>Totalize</color> is triggered, a certain amount of Daze will be accumulated. For every second of Stun time remaining, 5% Daze is accumulated, up to a maximum Daze equivalent to 25% of the enemy's maximum Daze.\nWhen <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> hits an enemy, if the enemy is not Stunned, the Daze accumulated by the skill increases by 20%.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> character or shares the same attribute:\n<color=#FFFFFF>Chain Attack: Trick of Fate</color>'s DMG increases by 15%, with a further increase of 35% against normal enemies. When <color=#FFFFFF>Totalize</color> is triggered, the DMG dealt by the skill increases by 40%. <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> generates an additional 20 Energy when triggering <color=#FFFFFF>Totalize</color> on normal enemies. The Energy generation effect can trigger once every 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Terminating Verdict",
+          "Additional Ability: Prelude to Finality"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nPerforms a series of attacks on enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nDuring the skill, hold <IconMap:Icon_Normal> to launch a shot. During the shot, hold <IconMap:Icon_Normal> to charge and perform a charged shot.\nThe shot is considered a Basic Attack, with its DMG treated as Basic Attack DMG.\nAfter the skill is used, it can be directly followed up with the 4th hit of <color=#FFFFFF>Basic Attack: Dark Abyss Quartet</color>.\nDuring the skill's ranged phase, Anti-Interrupt Level is increased, and DMG received is reduced by 40%.\nInvulnerable during the slashes and ranged retreat of the skill.",
+          "name": "Quick Assist: Elegy",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: The End Has Not Come",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nDash forward and perform two slashes, dealing <color=#98EFF0>Ice DMG</color>.\nAfter the skill is used, it can be directly followed up with the 4th hit of <color=#FFFFFF>Basic Attack: Dark Abyss Quartet</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Ace Reversal",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Elegy",
+          "param": [
+            {
+              "desc": "{Skill:1291019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1291019": {
+                  "attackData": [],
+                  "attributeInfliction": 4750,
+                  "damagePercentage": 10450,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4750,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 950,
+                  "main": 10450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291027, Prop:1001}",
+              "name": "ALT Shot DMG Multiplier",
+              "param": {
+                "1291027": {
+                  "attackData": [],
+                  "attributeInfliction": 5666,
+                  "damagePercentage": 12470,
+                  "damagePercentageGrowth": 1140,
+                  "etherPurify": 5667,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 12470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291028, Prop:1001}",
+              "name": "ALT Charged Shot DMG Multiplier",
+              "param": {
+                "1291028": {
+                  "attackData": [],
+                  "attributeInfliction": 7415,
+                  "damagePercentage": 16320,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 7416,
+                  "feverRecovery": 204050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 16320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8160,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1291019": {
+                  "attackData": [],
+                  "attributeInfliction": 4750,
+                  "damagePercentage": 10450,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4750,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291027, Prop:1002}",
+              "name": "ALT Shot Daze Multiplier",
+              "param": {
+                "1291027": {
+                  "attackData": [],
+                  "attributeInfliction": 5666,
+                  "damagePercentage": 12470,
+                  "damagePercentageGrowth": 1140,
+                  "etherPurify": 5667,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291028, Prop:1002}",
+              "name": "ALT Charged Shot Daze Multiplier",
+              "param": {
+                "1291028": {
+                  "attackData": [],
+                  "attributeInfliction": 7415,
+                  "damagePercentage": 16320,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 7416,
+                  "feverRecovery": 204050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8160,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: The End Has Not Come",
+          "param": [
+            {
+              "desc": "{Skill:1291020, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1291020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291021, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1291021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291022, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1291022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Ace Reversal",
+          "param": [
+            {
+              "desc": "{Skill:1291023, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1291023": {
+                  "attackData": [],
+                  "attributeInfliction": 24576,
+                  "damagePercentage": 29170,
+                  "damagePercentageGrowth": 2660,
+                  "etherPurify": 11004,
+                  "feverRecovery": 836000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2660,
+                  "main": 29170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24910,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291023, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1291023": {
+                  "attackData": [],
+                  "attributeInfliction": 24576,
+                  "damagePercentage": 29170,
+                  "damagePercentageGrowth": 2660,
+                  "etherPurify": 11004,
+                  "feverRecovery": 836000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 24910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24910,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nPerform up to four attacks forward, dealing <color=#F0D12B>Physical DMG</color> and <color=#98EFF0>Ice DMG</color>.\nThe fourth attack is a shot. During this attack, hold <IconMap:Icon_Normal> to charge and perform a charged shot.\nAnti-Interrupt level is increased during the fourth attack, and DMG received is reduced by 40%.",
+          "name": "Basic Attack: Dark Abyss Quartet",
+          "potential": []
+        },
+        {
+          "desc": "After the 4th hit of <color=#FFFFFF>Basic Attack: Dark Abyss Quartet</color>, the shot of <color=#FFFFFF>Dodge Counter: Phantasm - Slash</color>, or the shot of <color=#FFFFFF>Quick Assist: Elegy</color>, press or hold <IconMap:Icon_Normal> to activate:\nThrow the scythe forward to perform a slash, followed by a shot, dealing <color=#98EFF0>Ice DMG</color>.\nDuring the shot, hold <IconMap:Icon_Normal> to charge and perform a charged shot.\nDuring this skill, Anti-Interrupt level is increased, and DMG received is reduced by 40%.",
+          "name": "Basic Attack: Dark Abyss Concerto",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Dark Abyss Quartet",
+          "param": [
+            {
+              "desc": "{Skill:1291001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1291001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4310,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 1959,
+                  "feverRecovery": 53900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 4310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2160,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1291002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7410,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 4988,
+                  "feverRecovery": 137225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 680,
+                  "main": 7410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5490,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1291003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16960,
+                  "damagePercentageGrowth": 1550,
+                  "etherPurify": 11641,
+                  "feverRecovery": 320375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1550,
+                  "main": 16960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12810,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291004, Prop:1001}",
+              "name": "Slash DMG Multiplier",
+              "param": {
+                "1291004": {
+                  "attackData": [],
+                  "attributeInfliction": 9581,
+                  "damagePercentage": 14910,
+                  "damagePercentageGrowth": 1360,
+                  "etherPurify": 11431,
+                  "feverRecovery": 314600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1360,
+                  "main": 14910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12580,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291005, Prop:1001}",
+              "name": "Shot DMG Multiplier",
+              "param": {
+                "1291005": {
+                  "attackData": [],
+                  "attributeInfliction": 3617,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4546,
+                  "feverRecovery": 125125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16370,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291006, Prop:1001}",
+              "name": "Charged Shot DMG Multiplier",
+              "param": {
+                "1291006": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 11800,
+                  "damagePercentageGrowth": 1080,
+                  "etherPurify": 8700,
+                  "feverRecovery": 239250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 11800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9570,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1291001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4310,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 1959,
+                  "feverRecovery": 53900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2160,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1291002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7410,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 4988,
+                  "feverRecovery": 137225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5490,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1291003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16960,
+                  "damagePercentageGrowth": 1550,
+                  "etherPurify": 11641,
+                  "feverRecovery": 320375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 12810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12810,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291004, Prop:1002}",
+              "name": "Slash Daze Multiplier",
+              "param": {
+                "1291004": {
+                  "attackData": [],
+                  "attributeInfliction": 9581,
+                  "damagePercentage": 14910,
+                  "damagePercentageGrowth": 1360,
+                  "etherPurify": 11431,
+                  "feverRecovery": 314600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 12580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12580,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291005, Prop:1002}",
+              "name": "Shot Daze Multiplier",
+              "param": {
+                "1291005": {
+                  "attackData": [],
+                  "attributeInfliction": 3617,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4546,
+                  "feverRecovery": 125125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16370,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291006, Prop:1002}",
+              "name": "Charged Shot Daze Multiplier",
+              "param": {
+                "1291006": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 11800,
+                  "damagePercentageGrowth": 1080,
+                  "etherPurify": 8700,
+                  "feverRecovery": 239250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 9570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9570,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Dark Abyss Concerto",
+          "param": [
+            {
+              "desc": "{Skill:1291024, Prop:1001}",
+              "name": "Slash DMG Multiplier",
+              "param": {
+                "1291024": {
+                  "attackData": [],
+                  "attributeInfliction": 10023,
+                  "damagePercentage": 14340,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 10024,
+                  "feverRecovery": 275825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1310,
+                  "main": 14340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11030,
+                  "stunRatioGrowth": 510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291025, Prop:1001}",
+              "name": "Shot DMG Multiplier",
+              "param": {
+                "1291025": {
+                  "attackData": [],
+                  "attributeInfliction": 6056,
+                  "damagePercentage": 8670,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 6057,
+                  "feverRecovery": 166650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 8670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6670,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291026, Prop:1001}",
+              "name": "Charged Shot DMG Multiplier",
+              "param": {
+                "1291026": {
+                  "attackData": [],
+                  "attributeInfliction": 11924,
+                  "damagePercentage": 17060,
+                  "damagePercentageGrowth": 1560,
+                  "etherPurify": 11925,
+                  "feverRecovery": 328075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 17060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13120,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291024, Prop:1002}",
+              "name": "Slash Daze Multiplier",
+              "param": {
+                "1291024": {
+                  "attackData": [],
+                  "attributeInfliction": 10023,
+                  "damagePercentage": 14340,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 10024,
+                  "feverRecovery": 275825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 11030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11030,
+                  "stunRatioGrowth": 510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291025, Prop:1002}",
+              "name": "Shot Daze Multiplier",
+              "param": {
+                "1291025": {
+                  "attackData": [],
+                  "attributeInfliction": 6056,
+                  "damagePercentage": 8670,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 6057,
+                  "feverRecovery": 166650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6670,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291026, Prop:1002}",
+              "name": "Charged Shot Daze Multiplier",
+              "param": {
+                "1291026": {
+                  "attackData": [],
+                  "attributeInfliction": 11924,
+                  "damagePercentage": 17060,
+                  "damagePercentageGrowth": 1560,
+                  "etherPurify": 11925,
+                  "feverRecovery": 328075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 13120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13120,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nDash forward to perform a slash across a large area, then launch a shot, dealing massive <color=#98EFF0>Ice DMG</color>.\nThe shot activated by this skill is considered a charged shot.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Trick of Fate",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nThrows the scythe in a powerful spinning attack, then launches a Finishing Move, dealing massive <color=#98EFF0>Ice DMG</color>.\nThis skill is not counted as a heavy attack.\nAfter the skill is used, it can be directly followed up with the 4th hit of <color=#FFFFFF>Basic Attack: Dark Abyss Quartet</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Blaspheme",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Trick of Fate",
+          "param": [
+            {
+              "desc": "{Skill:1291015, Prop:1001}",
+              "name": "Slash DMG Multiplier",
+              "param": {
+                "1291015": {
+                  "attackData": [],
+                  "attributeInfliction": 43783,
+                  "damagePercentage": 70110,
+                  "damagePercentageGrowth": 6380,
+                  "etherPurify": 23834,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6380,
+                  "main": 70110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26220,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291015, Prop:1002}",
+              "name": "Slash Daze Multiplier",
+              "param": {
+                "1291015": {
+                  "attackData": [],
+                  "attributeInfliction": 43783,
+                  "damagePercentage": 70110,
+                  "damagePercentageGrowth": 6380,
+                  "etherPurify": 23834,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 26220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26220,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Blaspheme",
+          "param": [
+            {
+              "desc": "{Skill:1291018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1291018": {
+                  "attackData": [],
+                  "attributeInfliction": 21833,
+                  "damagePercentage": 152710,
+                  "damagePercentageGrowth": 13890,
+                  "etherPurify": 71834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13890,
+                  "main": 152710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26420,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1291018": {
+                  "attackData": [],
+                  "attributeInfliction": 21833,
+                  "damagePercentage": 152710,
+                  "damagePercentageGrowth": 13890,
+                  "etherPurify": 71834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1210,
+                  "main": 26420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26420,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Phantasm",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nLaunch a dashing attack at enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Phantasm - Shatter",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nPerforms a series of attacks on enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nDuring the skill, hold <IconMap:Icon_Normal> to launch a shot. During the shot, hold <IconMap:Icon_Normal> to charge and perform a charged shot.\nThe shot is considered a Basic Attack, with its DMG treated as Basic Attack DMG.\nAfter the skill is used, it can be directly followed up with the 4th hit of <color=#FFFFFF>Basic Attack: Dark Abyss Quartet</color>.\nDuring the skill's ranged phase, Anti-Interrupt level is increased, and DMG received is reduced by 40%.\nInvulnerable during the slashes and ranged retreat of the skill.",
+          "name": "Dodge Counter: Phantasm - Slash",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Phantasm - Shatter",
+          "param": [
+            {
+              "desc": "{Skill:1291011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1291011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9350,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4249,
+                  "feverRecovery": 116875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 9350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4680,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1291011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9350,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4249,
+                  "feverRecovery": 116875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 220,
+                  "main": 4680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4680,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Phantasm - Slash",
+          "param": [
+            {
+              "desc": "{Skill:1291012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1291012": {
+                  "attackData": [],
+                  "attributeInfliction": 9500,
+                  "damagePercentage": 24590,
+                  "damagePercentageGrowth": 2240,
+                  "etherPurify": 24500,
+                  "feverRecovery": 261250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2240,
+                  "main": 24590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21450,
+                  "stunRatioGrowth": 980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291013, Prop:1001}",
+              "name": "ALT Shot DMG Multiplier",
+              "param": {
+                "1291013": {
+                  "attackData": [],
+                  "attributeInfliction": 11333,
+                  "damagePercentage": 16210,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 11334,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1480,
+                  "main": 16210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12470,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291014, Prop:1001}",
+              "name": "ALT Charged Shot DMG Multiplier",
+              "param": {
+                "1291014": {
+                  "attackData": [],
+                  "attributeInfliction": 14830,
+                  "damagePercentage": 21210,
+                  "damagePercentageGrowth": 1930,
+                  "etherPurify": 14831,
+                  "feverRecovery": 408100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1930,
+                  "main": 21210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 53390,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16320,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1291012": {
+                  "attackData": [],
+                  "attributeInfliction": 9500,
+                  "damagePercentage": 24590,
+                  "damagePercentageGrowth": 2240,
+                  "etherPurify": 24500,
+                  "feverRecovery": 261250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 21450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21450,
+                  "stunRatioGrowth": 980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291013, Prop:1002}",
+              "name": "ALT Shot Daze Multiplier",
+              "param": {
+                "1291013": {
+                  "attackData": [],
+                  "attributeInfliction": 11333,
+                  "damagePercentage": 16210,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 11334,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 12470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12470,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291014, Prop:1002}",
+              "name": "ALT Charged Shot Daze Multiplier",
+              "param": {
+                "1291014": {
+                  "attackData": [],
+                  "attributeInfliction": 14830,
+                  "damagePercentage": 21210,
+                  "damagePercentageGrowth": 1930,
+                  "etherPurify": 14831,
+                  "feverRecovery": 408100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 750,
+                  "main": 16320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 53390,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16320,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nSpins the scythe and then unleashes a forward slash, dealing <color=#98EFF0>Ice DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Soul Hunter - Judgment",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nSpins the scythe to attack and then executes a powerful Finishing Move, dealing massive <color=#98EFF0>Ice DMG</color>.\nThis skill is not counted as a heavy attack.\nAfter the skill is used, it can be directly followed up with the 4th hit of <color=#FFFFFF>Basic Attack: Dark Abyss Quartet</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Soul Hunter - Punishment",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Soul Hunter - Judgment",
+          "param": [
+            {
+              "desc": "{Skill:1291008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1291008": {
+                  "attackData": [],
+                  "attributeInfliction": 7751,
+                  "damagePercentage": 8530,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7752,
+                  "feverRecovery": 213400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 780,
+                  "main": 8530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8530,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1291008": {
+                  "attackData": [],
+                  "attributeInfliction": 7751,
+                  "damagePercentage": 8530,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7752,
+                  "feverRecovery": 213400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8530,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Soul Hunter - Punishment",
+          "param": [
+            {
+              "desc": "{{Skill:1291009, Prop:1001} + {Skill:1291010, Prop:1001}}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1291009": {
+                  "attackData": [],
+                  "attributeInfliction": 2254,
+                  "damagePercentage": 1870,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 951,
+                  "feverRecovery": 77550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 1870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43240,
+                  "stunRatioGrowth": 1970
+                },
+                "1291010": {
+                  "attackData": [],
+                  "attributeInfliction": 42843,
+                  "damagePercentage": 35450,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 18054,
+                  "feverRecovery": 1470425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3230,
+                  "main": 35450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2280,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1291009, Prop:1002} + {Skill:1291010, Prop:1002}}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1291009": {
+                  "attackData": [],
+                  "attributeInfliction": 2254,
+                  "damagePercentage": 1870,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 951,
+                  "feverRecovery": 77550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1970,
+                  "main": 43240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43240,
+                  "stunRatioGrowth": 1970
+                },
+                "1291010": {
+                  "attackData": [],
+                  "attributeInfliction": 42843,
+                  "damagePercentage": 35450,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 18054,
+                  "feverRecovery": 1470425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2280,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1291001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Dark Abyss Quartet (1st, 2nd, and 3rd hit)"
+    },
+    "1291002": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Dark Abyss Quartet (4th hit)"
+    },
+    "1291003": {
+      "desc": "<IconMap:Icon_Normal> (Hold after the 4th hit of Dark Abyss Quartet)",
+      "name": "Basic Attack: Dark Abyss Concerto"
+    },
+    "1291004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Soul Hunter - Judgment"
+    },
+    "1291005": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Soul Hunter - Punishment"
+    },
+    "1291006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Phantasm - Shatter"
+    },
+    "1291007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Phantasm - Slash"
+    },
+    "1291008": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal> (Hold)",
+      "name": "Dodge Counter: Phantasm - Slash (2nd hit)"
+    },
+    "1291009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Trick of Fate"
+    },
+    "1291010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Blaspheme"
+    },
+    "1291011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Elegy"
+    },
+    "1291012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist) ; <IconMap:Icon_Normal>(Press or Hold)",
+      "name": "Quick Assist: Elegy (2nd hit)"
+    },
+    "1291013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: The End Has Not Come"
+    },
+    "1291014": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Ace Reversal"
+    }
+  },
+  "skin": {
+    "3112910": {
+      "desc": "Never be claimed by fate. Defy its clamps, its control, its taunts, its alms, its curses, and its so-called blessings. Once you return from the abyss, it is fate that should kneel to you.",
+      "name": "Hugo: Crownless Rebellion"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, quick-swap DMG dealer",
+    "Triggering Totalize deals bonus DMG to Stunned enemies",
+    "High-Frequency Stun burst"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When triggering the <color=#FFFFFF>Totalize</color> effect in the <color=#FFFFFF>Dark Abyss Reverb</color> state, the skill's CRIT Rate is increased by an additional 12%, and CRIT DMG by 30%.",
+      "desc2": "\"So, do not deny your own desires, do not resist your own ambition. This is the talent you were born with, the best gift fate has ever given you!\"\n\"Admit it, deep within your heart lies a spark, yearning to ignite a raging inferno that will burn everything down—\"\n\"And I, am that spark.\"\n\n\"Yeah, I know. I've always known.\"",
+      "name": "Child of Hatred"
+    },
+    "2": {
+      "desc": "When <color=#FFFFFF>Ultimate: Blaspheme</color> triggers <color=#FFFFFF>Totalize</color>, it will not end the enemy's Stunned state. Additionally, when <color=#FFFFFF>Totalize</color> is triggered, the skill will ignore 15% of the enemy's DEF.",
+      "desc2": "\"Family is an everlasting, unavoidable curse placed upon a person.\"\n\"No matter how much you grow, no matter where you go, that curse will forever follow you like a shadow.\"\n\"When you fall to rock bottom or climb to your peak, it will appear, turning you back into that helpless, powerless child who can do nothing but hide in the closet and weep.\"\n\n\"Unless you truly see him, embrace him.\"\nSome pain can only be healed when it is seen and accepted.",
+      "name": "The Child Within"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "They say that the flowers that bloom in the abyss are always soaked in malice, just like how a poisonous tree can't bear safe fruit.\nBut all fruit falls.\nSo, he broke himself into a rain of shattered pieces.\nThe rain covered the earth, and each dewdrop reflected a fresh new dawn.",
+      "name": "Fruit of the Poisonous Tree"
+    },
+    "4": {
+      "desc": "After a Charged Shot hits an enemy, Hugo's attacks against that target will ignore 12% of that target's <color=#98EFF0>Ice RES</color> for 15s, repeated triggers reset the duration.",
+      "desc2": "Justice, evil, madness, reason, charm, stubbornness.\nHe's composed of countless faces.\n\"So, which is the real you?\"\n\"That's not important. How about, instead, you tell me, Lycaon—\"\n\"What kind of person do you see in me?\"",
+      "name": "Dramatic Theory"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The world doesn't need to be destroyed and rebuilt, and no one has the right to do such.\nBut a person can.\nSo, he shattered himself and was reborn.\n\"If I must fall, let me fall. The person I am meant to become will surely catch me.\"",
+      "name": "Nirvana"
+    },
+    "6": {
+      "desc": "All shooting attacks that hit enemies trigger the <color=#FFFFFF>Dark Abyss Reverb</color> state, lasting up to 6s, and repeated triggers reset the duration. Additionally, whenever any skill triggers the <color=#FFFFFF>Totalize</color> effect, that DMG is further increased by 60%. The Finishing Move of <color=#FFFFFF>EX Special Attack: Soul Hunter - Punishment</color> also triggers the <color=#FFFFFF>Totalize</color> effect when hitting an enemy that isn't Stunned, boosting the DMG multiplier of the Finishing Move by a fixed 1,000 %.",
+      "desc2": "He walked willingly toward the endless abyss, letting the thorns on the ground tear at his wounds.\nWhere the blood spread, broken dignity and stubbornness began to sprout from the wounds.\nHe picked up the blood-soaked thorns to crown himself.\n\"There's only ever been one person who can kill me or save me... And that is me.\"",
+      "name": "Crown of Thorns"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

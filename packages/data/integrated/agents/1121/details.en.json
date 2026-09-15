@@ -1,0 +1,1430 @@
+{
+  "camp": {
+    "3": "Belobog Heavy Industries"
+  },
+  "elementType": {
+    "201": "Fire"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "DEF"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Fire DMG Bonus"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1121,
+  "locale": "en",
+  "name": "Ben",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1121016", "1121017", "1121018", "1121019", "1121020"],
+      "basic": ["1121001", "1121002", "1121003"],
+      "chain": ["1121014", "1121015"],
+      "dodge": ["1121012", "1121013"],
+      "special": [
+        "1121005",
+        "1121006",
+        "1121008",
+        "1121009",
+        "1121010",
+        "1121011"
+      ]
+    },
+    "parameterRowsById": {
+      "1121001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/3"
+      ],
+      "1121002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/4"
+      ],
+      "1121003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/5"
+      ],
+      "1121005": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/2"
+      ],
+      "1121006": [
+        "/skill/special/description/2/param/1",
+        "/skill/special/description/2/param/3"
+      ],
+      "1121008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/4"
+      ],
+      "1121009": [
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/5"
+      ],
+      "1121010": [
+        "/skill/special/description/3/param/2",
+        "/skill/special/description/3/param/6"
+      ],
+      "1121011": [
+        "/skill/special/description/3/param/3",
+        "/skill/special/description/3/param/7"
+      ],
+      "1121012": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1121013": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1121014": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1121015": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1121016": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1121017": ["/skill/assist/description/4/param/0"],
+      "1121018": ["/skill/assist/description/4/param/1"],
+      "1121019": ["/skill/assist/description/4/param/2"],
+      "1121020": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "DEC 23",
+    "fullName": "Ben Bigger",
+    "gender": "Male",
+    "impressionF": "The first time I saw him, I was definitely taken aback...\nWho would've thought Ben was unexpectedly a soft, furry, gentle-natured bear!",
+    "impressionM": "Never judge a book by its cover.\nThat said, it seems he's often required to present a menacing image to deter the enemy... and it appears to be quite effective.",
+    "impressions": [
+      "Impressions of Ben:\n · Things he values: Receipts, safety hats, caviar. Things he dislikes: Receipts, calculators with small buttons, fish.",
+      " · In terms of daily tasks, \"fur care\" is the second most important. The most important task is \"settling the accounts.\"",
+      " · He has the body of the king of the beasts and the caring heart of the king of the beasts' mother."
+    ],
+    "profileDesc": "Ben is the financial and asset management director at Belobog Heavy Industries and one of Koleda's trusted aides.\n\"I enjoy mathematics, but that doesn't stop me from giving thugs a good smack.\"\nHe's a burly and strong Thiren. Despite his tough exterior, he's of a surprisingly sensitive and detail-oriented nature, especially when it comes to numbers.\nOriginally a frontline mechanical operator at Belobog, his talents caught Koleda's discerning eye, leading to his promotion to a managerial position responsible for the company's finances.\nGrateful for Koleda's trust in him, he remains profoundly loyal to her.\nHis favorite food is black caviar, but he dislikes fish.\n\nI once witnessed this imposing figure seated in a small office chair, wearing small glasses, and carefully cross-referencing Belobog's asset records while mashing away at a calculator with his huge fingers.\nQuestion: Is that what they call on Inter-Knot a \"Kawaii Curveball?\"",
+    "stature": "192",
+    "trustLv": {
+      "1": "Ben is the financial and asset management director at Belobog Heavy Industries and one of Koleda's trusted aides.\n\"I enjoy mathematics, but that doesn't stop me from giving thugs a good smack.\"\nHe's a burly and strong Thiren. Despite his tough exterior, he's of a surprisingly sensitive and detail-oriented nature, especially when it comes to numbers.\nOriginally a frontline mechanical operator at Belobog, his talents caught Koleda's discerning eye, leading to his promotion to a managerial position responsible for the company's finances.\nGrateful for Koleda's trust in him, he remains profoundly loyal to her.\nHis favorite food is black caviar, but he dislikes fish.\n\nI once witnessed this imposing figure seated in a small office chair, wearing small glasses, and carefully cross-referencing Belobog's asset records while mashing away at a calculator with his huge fingers.\nQuestion: Is that what they call on Inter-Knot a \"Kawaii Curveball?\"",
+      "2": "",
+      "3": "Deducing from relevant data, Ben's current outfit and style is chosen to better serve Belobog Industries rather than from his own preference.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete Main Commission Chapter 2"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1121501": {
+        "desc": [
+          "Ben's initial ATK increases along with his initial DEF. He gains <color=#2BAD00>40%</color> of his initial DEF as ATK.\nWhen Ben launches a follow-up attack during his <color=#FFFFFF>EX Special Attack</color>, all squad members gain a Shield of <color=#2BAD00>15%</color> of his DEF +<color=#2BAD00>100</color>, lasting for 30s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile the Shield from <color=#FFFFFF>Core Passive: Guardian</color> is in effect, the character's CRIT Rate is increased by 16%."
+        ],
+        "extraProperty": {
+          "131": {
+            "target": 121,
+            "value": 4000
+          }
+        },
+        "name": [
+          "Core Passive: Guardian",
+          "Additional Ability: Contractual Agreement"
+        ],
+        "potential": []
+      },
+      "1121502": {
+        "desc": [
+          "Ben's initial ATK increases along with his initial DEF. He gains <color=#2BAD00>46%</color> of his initial DEF as ATK.\nWhen Ben launches a powerful follow-up strike during his <color=#FFFFFF>EX Special Attack</color>, all squad members gain a Shield of <color=#2BAD00>17.5%</color> of his DEF +<color=#2BAD00>220</color>, lasting for 30s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile the Shield from <color=#FFFFFF>Core Passive: Guardian</color> is in effect, the character's CRIT Rate is increased by 16%."
+        ],
+        "extraProperty": {
+          "131": {
+            "target": 121,
+            "value": 4600
+          }
+        },
+        "name": [
+          "Core Passive: Guardian",
+          "Additional Ability: Contractual Agreement"
+        ],
+        "potential": []
+      },
+      "1121503": {
+        "desc": [
+          "Ben's initial ATK increases along with his initial DEF. He gains <color=#2BAD00>52%</color> of his initial DEF as ATK.\nWhen Ben launches a powerful follow-up strike during his <color=#FFFFFF>EX Special Attack</color>, all squad members gain a Shield of <color=#2BAD00>20%</color> of his DEF +<color=#2BAD00>330</color>, lasting for 30s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile the Shield from <color=#FFFFFF>Core Passive: Guardian</color> is in effect, the character's CRIT Rate is increased by 16%."
+        ],
+        "extraProperty": {
+          "131": {
+            "target": 121,
+            "value": 5200
+          }
+        },
+        "name": [
+          "Core Passive: Guardian",
+          "Additional Ability: Contractual Agreement"
+        ],
+        "potential": []
+      },
+      "1121504": {
+        "desc": [
+          "Ben's initial ATK increases along with his initial DEF. He gains <color=#2BAD00>60%</color> of his initial DEF as ATK.\nWhen Ben launches a powerful follow-up strike during his <color=#FFFFFF>EX Special Attack</color>, all squad members gain a Shield of <color=#2BAD00>22.5%</color> of his DEF +<color=#2BAD00>460</color>, lasting for 30s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile the Shield from <color=#FFFFFF>Core Passive: Guardian</color> is in effect, the character's CRIT Rate is increased by 16%."
+        ],
+        "extraProperty": {
+          "131": {
+            "target": 121,
+            "value": 6000
+          }
+        },
+        "name": [
+          "Core Passive: Guardian",
+          "Additional Ability: Contractual Agreement"
+        ],
+        "potential": []
+      },
+      "1121505": {
+        "desc": [
+          "Ben's initial ATK increases along with his initial DEF. He gains <color=#2BAD00>66%</color> of his initial DEF as ATK.\nWhen Ben launches a powerful follow-up strike during his <color=#FFFFFF>EX Special Attack</color>, all squad members gain a Shield of <color=#2BAD00>25%</color> of his DEF +<color=#2BAD00>500</color>, lasting for 30s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile the Shield from <color=#FFFFFF>Core Passive: Guardian</color> is in effect, the character's CRIT Rate is increased by 16%."
+        ],
+        "extraProperty": {
+          "131": {
+            "target": 121,
+            "value": 6600
+          }
+        },
+        "name": [
+          "Core Passive: Guardian",
+          "Additional Ability: Contractual Agreement"
+        ],
+        "potential": []
+      },
+      "1121506": {
+        "desc": [
+          "Ben's initial ATK increases along with his initial DEF. He gains <color=#2BAD00>72%</color> of his initial DEF as ATK.\nWhen Ben launches a powerful follow-up strike during his <color=#FFFFFF>EX Special Attack</color>, all squad members gain a Shield of <color=#2BAD00>27.5%</color> of his DEF +<color=#2BAD00>525</color>, lasting for 30s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile the Shield from <color=#FFFFFF>Core Passive: Guardian</color> is in effect, the character's CRIT Rate is increased by 16%."
+        ],
+        "extraProperty": {
+          "131": {
+            "target": 121,
+            "value": 7200
+          }
+        },
+        "name": [
+          "Core Passive: Guardian",
+          "Additional Ability: Contractual Agreement"
+        ],
+        "potential": []
+      },
+      "1121507": {
+        "desc": [
+          "Ben's initial ATK increases along with his initial DEF. He gains <color=#2BAD00>80%</color> of his initial DEF as ATK.\nWhen Ben launches a powerful follow-up strike during his <color=#FFFFFF>EX Special Attack</color>, all squad members gain a Shield of <color=#2BAD00>30%</color> of his DEF +<color=#2BAD00>550</color>, lasting for 30s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile the Shield from <color=#FFFFFF>Core Passive: Guardian</color> is in effect, the character's CRIT Rate is increased by 16%."
+        ],
+        "extraProperty": {
+          "131": {
+            "target": 121,
+            "value": 8000
+          }
+        },
+        "name": [
+          "Core Passive: Guardian",
+          "Additional Ability: Contractual Agreement"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nStrikes enemies in front, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable during the attack.",
+          "name": "Quick Assist: Joint Account",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Risk Allocation",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nCharges and strikes enemies in front, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Don't Break Contract",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Joint Account",
+          "param": [
+            {
+              "desc": "{Skill:1121016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1121016": {
+                  "attackData": [],
+                  "attributeInfliction": 9666,
+                  "damagePercentage": 9670,
+                  "damagePercentageGrowth": 880,
+                  "etherPurify": 4834,
+                  "feverRecovery": 265925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 880,
+                  "main": 9670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9670,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1121016": {
+                  "attackData": [],
+                  "attributeInfliction": 9666,
+                  "damagePercentage": 9670,
+                  "damagePercentageGrowth": 880,
+                  "etherPurify": 4834,
+                  "feverRecovery": 265925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 9670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9670,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Risk Allocation",
+          "param": [
+            {
+              "desc": "{Skill:1121017, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1121017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 35004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1030,
+                  "main": 22510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22510,
+                  "stunRatioGrowth": 1030
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121018, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1121018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 38334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1220,
+                  "main": 26840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26840,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121019, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1121019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 8334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10840,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Don't Break Contract",
+          "param": [
+            {
+              "desc": "{Skill:1121020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1121020": {
+                  "attackData": [],
+                  "attributeInfliction": 30426,
+                  "damagePercentage": 32590,
+                  "damagePercentageGrowth": 2970,
+                  "etherPurify": 15337,
+                  "feverRecovery": 1014750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2970,
+                  "main": 32590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28280,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121020, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1121020": {
+                  "attackData": [],
+                  "attributeInfliction": 30426,
+                  "damagePercentage": 32590,
+                  "damagePercentageGrowth": 2970,
+                  "etherPurify": 15337,
+                  "feverRecovery": 1014750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1290,
+                  "main": 28280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28280,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 3 strikes, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Debt Reconciliation",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Debt Reconciliation",
+          "param": [
+            {
+              "desc": "{Skill:1121001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1121001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6590,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 4706,
+                  "feverRecovery": 129525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 6590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16940,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4710,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1121002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 18900,
+                  "damagePercentageGrowth": 1720,
+                  "etherPurify": 15681,
+                  "feverRecovery": 431475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1720,
+                  "main": 18900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 56460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15690,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1121003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 34830,
+                  "damagePercentageGrowth": 3170,
+                  "etherPurify": 26008,
+                  "feverRecovery": 715275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3170,
+                  "main": 34830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 93630,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26010,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1121001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6590,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 4706,
+                  "feverRecovery": 129525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 220,
+                  "main": 4710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16940,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4710,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1121002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 18900,
+                  "damagePercentageGrowth": 1720,
+                  "etherPurify": 15681,
+                  "feverRecovery": 431475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 15690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 56460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15690,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1121003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 34830,
+                  "damagePercentageGrowth": 3170,
+                  "etherPurify": 26008,
+                  "feverRecovery": 715275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1190,
+                  "main": 26010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 93630,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26010,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a powerful strike at enemies in front in a large area, dealing massive <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Signed and Sealed",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a powerful strike at enemies in front in a large area, dealing massive <color=#FF5521>Fire DMG</color>.\nWhen activating the skill, additionally recover 3 Assist Points.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Complete Payback",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Signed and Sealed",
+          "param": [
+            {
+              "desc": "{Skill:1121014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1121014": {
+                  "attackData": [],
+                  "attributeInfliction": 42779,
+                  "damagePercentage": 62730,
+                  "damagePercentageGrowth": 5710,
+                  "etherPurify": 22830,
+                  "feverRecovery": 2456575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5710,
+                  "main": 62730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32830,
+                  "stunRatioGrowth": 1500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1121014": {
+                  "attackData": [],
+                  "attributeInfliction": 42779,
+                  "damagePercentage": 62730,
+                  "damagePercentageGrowth": 5710,
+                  "etherPurify": 22830,
+                  "feverRecovery": 2456575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1500,
+                  "main": 32830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32830,
+                  "stunRatioGrowth": 1500
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Complete Payback",
+          "param": [
+            {
+              "desc": "{Skill:1121015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1121015": {
+                  "attackData": [],
+                  "attributeInfliction": 11000,
+                  "damagePercentage": 164300,
+                  "damagePercentageGrowth": 14940,
+                  "etherPurify": 61000,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14940,
+                  "main": 164300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1121015": {
+                  "attackData": [],
+                  "attributeInfliction": 11000,
+                  "damagePercentage": 164300,
+                  "damagePercentageGrowth": 14940,
+                  "etherPurify": 61000,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Missing Invoice",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a Dodge to activate:\nStrikes enemies in front of him, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Incoming Expense",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nStrike enemies in front, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Accounts Settled",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Incoming Expense",
+          "param": [
+            {
+              "desc": "{Skill:1121012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1121012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 13840,
+                  "damagePercentageGrowth": 1260,
+                  "etherPurify": 6917,
+                  "feverRecovery": 190300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1260,
+                  "main": 13840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6920,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1121012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 13840,
+                  "damagePercentageGrowth": 1260,
+                  "etherPurify": 6917,
+                  "feverRecovery": 190300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6920,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Accounts Settled",
+          "param": [
+            {
+              "desc": "{Skill:1121013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1121013": {
+                  "attackData": [],
+                  "attributeInfliction": 9666,
+                  "damagePercentage": 22570,
+                  "damagePercentageGrowth": 2060,
+                  "etherPurify": 24667,
+                  "feverRecovery": 265925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2060,
+                  "main": 22570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19670,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1121013": {
+                  "attackData": [],
+                  "attributeInfliction": 9666,
+                  "damagePercentage": 22570,
+                  "damagePercentageGrowth": 2060,
+                  "etherPurify": 24667,
+                  "feverRecovery": 265925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 900,
+                  "main": 19670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19670,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nBen lifts his weapon, blocking the enemy's attack before unleashing a forward strike, dealing <color=#F0D12B>Physical DMG</color>. Successfully blocking an attack enhances the power of this skill and triggers Block Counter, dealing massive <color=#F0D12B>Physical DMG</color>.\nHold <IconMap:Icon_Special> to remain in the Blocking stance.\nWhile in the Blocking stance, Ben gains a Shield that weakens over time.\nAfter leaving the blocking stance, the Shield is removed and recovers over time.\nThe Shield cannot exceed 16% of Ben's Max HP.\nBen is invulnerable when activating Block.\nAnti-Interrupt level is increased while launching strikes.",
+          "name": "Special Attack: Fiscal Fist",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nBen lifts his weapon, blocking the enemy's attacks before unleashing a forward strike, dealing <color=#FF5521>Fire DMG</color>. Successfully blocking an attack enhances the power of this skill and triggers Block Counter, dealing massive <color=#FF5521>Fire DMG</color>.\nHold <IconMap:Icon_SpecialReady> to remain in the Blocking stance.\nWhile in the Blocking stance, Ben gains a Shield that weakens over time.\nAfter leaving the blocking stance, the Shield is removed and recovers over time.\nThe Shield cannot exceed 16% of Ben's Max HP.\nWhen this skill is activated, the Shield is restored to its maximum value.\nAfter activating the skill, press <IconMap:Icon_SpecialReady> again to follow up with a powerful forward strike, dealing massive <color=#FF5521>Fire DMG</color>.\nBen is invulnerable when activating Block.\nBen is invulnerable while launching strikes.",
+          "name": "EX Special Attack: Cashflow Counter",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Fiscal Fist",
+          "param": [
+            {
+              "desc": "{Skill:1121005, Prop:1001}",
+              "name": "Active Attack DMG Multiplier",
+              "param": {
+                "1121005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4170,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 4166,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121006, Prop:1001}",
+              "name": "Block Counter DMG Multiplier",
+              "param": {
+                "1121006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 23340,
+                  "damagePercentageGrowth": 2130,
+                  "etherPurify": 8331,
+                  "feverRecovery": 229350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2130,
+                  "main": 23340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22340,
+                  "stunRatioGrowth": 1020
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121005, Prop:1002}",
+              "name": "Active Attack Daze Multiplier",
+              "param": {
+                "1121005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4170,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 4166,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121006, Prop:1002}",
+              "name": "Block Counter Daze Multiplier",
+              "param": {
+                "1121006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 23340,
+                  "damagePercentageGrowth": 2130,
+                  "etherPurify": 8331,
+                  "feverRecovery": 229350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1020,
+                  "main": 22340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22340,
+                  "stunRatioGrowth": 1020
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Cashflow Counter",
+          "param": [
+            {
+              "desc": "{Skill:1121008, Prop:1001}",
+              "name": "Active Attack DMG Multiplier",
+              "param": {
+                "1121008": {
+                  "attackData": [],
+                  "attributeInfliction": 27099,
+                  "damagePercentage": 43850,
+                  "damagePercentageGrowth": 3990,
+                  "etherPurify": 10352,
+                  "feverRecovery": 942700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3990,
+                  "main": 43850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24710,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121009, Prop:1001}",
+              "name": "Follow-Up Attack DMG Multiplier",
+              "param": {
+                "1121009": {
+                  "attackData": [],
+                  "attributeInfliction": 27099,
+                  "damagePercentage": 43850,
+                  "damagePercentageGrowth": 3990,
+                  "etherPurify": 10352,
+                  "feverRecovery": 942700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3990,
+                  "main": 43850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24710,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121010, Prop:1001}",
+              "name": "Block Counter DMG Multiplier",
+              "param": {
+                "1121010": {
+                  "attackData": [],
+                  "attributeInfliction": 33071,
+                  "damagePercentage": 50050,
+                  "damagePercentageGrowth": 4550,
+                  "etherPurify": 14776,
+                  "feverRecovery": 1125300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4550,
+                  "main": 50050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36760,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121011, Prop:1001}",
+              "name": "Block Follow-Up DMG Multiplier",
+              "param": {
+                "1121011": {
+                  "attackData": [],
+                  "attributeInfliction": 33071,
+                  "damagePercentage": 55120,
+                  "damagePercentageGrowth": 5020,
+                  "etherPurify": 14776,
+                  "feverRecovery": 1125300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5020,
+                  "main": 55120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36760,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121008, Prop:1002}",
+              "name": "Active Attack Daze Multiplier",
+              "param": {
+                "1121008": {
+                  "attackData": [],
+                  "attributeInfliction": 27099,
+                  "damagePercentage": 43850,
+                  "damagePercentageGrowth": 3990,
+                  "etherPurify": 10352,
+                  "feverRecovery": 942700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24710,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121009, Prop:1002}",
+              "name": "Follow-Up Attack Daze Multiplier",
+              "param": {
+                "1121009": {
+                  "attackData": [],
+                  "attributeInfliction": 27099,
+                  "damagePercentage": 43850,
+                  "damagePercentageGrowth": 3990,
+                  "etherPurify": 10352,
+                  "feverRecovery": 942700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24710,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121010, Prop:1002}",
+              "name": "Block Counter Daze Multiplier",
+              "param": {
+                "1121010": {
+                  "attackData": [],
+                  "attributeInfliction": 33071,
+                  "damagePercentage": 50050,
+                  "damagePercentageGrowth": 4550,
+                  "etherPurify": 14776,
+                  "feverRecovery": 1125300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 36760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36760,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1121011, Prop:1002}",
+              "name": "Block Follow-Up Daze Multiplier",
+              "param": {
+                "1121011": {
+                  "attackData": [],
+                  "attributeInfliction": 33071,
+                  "damagePercentage": 55120,
+                  "damagePercentageGrowth": 5020,
+                  "etherPurify": 14776,
+                  "feverRecovery": 1125300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 36760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36760,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "30",
+              "name": "Block Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "30",
+              "name": "Follow-Up Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1121001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Debt Reconciliation"
+    },
+    "1121002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Fiscal Fist"
+    },
+    "1121003": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Cashflow Counter"
+    },
+    "1121004": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Incoming Expense"
+    },
+    "1121005": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Accounts Settled"
+    },
+    "1121006": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Signed and Sealed"
+    },
+    "1121007": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Complete Payback"
+    },
+    "1121008": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Joint Account"
+    },
+    "1121009": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Risk Allocation"
+    },
+    "1121010": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Don't Break Contract"
+    }
+  },
+  "skin": {
+    "3111210": {
+      "desc": "Ignoring the intimidating look meant to cow outsiders, even the Beast King struggles with grooming his fur and sorting out the bills.",
+      "name": "Ben: Fluffy Beastking"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "05",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, defense support",
+    "Grants shield Retaliation to all squad members"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When successfully Blocking an enemy with Ben's <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, the DMG dealt by the blocked enemy is reduced by 30% for 15s.",
+      "desc2": "\"Every action has an equal and opposite reaction. So why do you have to bash things head-on?\"\n\"Looks like your calculations are off.\"",
+      "name": "Reacting Force"
+    },
+    "2": {
+      "desc": "When successfully triggering a Block Counter during Ben's <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, inflict an additional 300% of Ben's DEF as DMG.",
+      "desc2": "Unlike other bear Thirens, Ben remains patient when fighting.\nHe believes if he keeps his defenses up, he can wait until the enemy reveals their weakness.",
+      "name": "Offense Through Defense"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Financial responsibility demands mastering cost-efficiency and utilizing every available resource to enhance both the team and oneself.",
+      "name": "Careful Accounting"
+    },
+    "4": {
+      "desc": "When successfully blocking enemy DMG with Ben's invulnerable effect during his <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, the following counter deals 30% more DMG.",
+      "desc2": "Ben's professional accounting instincts let him adapt dynamically based on the situation.\nWhether dealing with accounts or enemies, it's important to achieve the best results at the lowest cost.",
+      "name": "Agile Adaptation"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Ben's keen eye doesn't miss a single error in statements. The same goes for combat, where he gets progressively stronger as he corrects mistakes.",
+      "name": "Meticulous Detail"
+    },
+    "6": {
+      "desc": "After launching an attack or follow-up attack during Ben's <color=#FFFFFF>EX Special Attack</color>, Daze inflicted by <color=#FFFFFF>Basic Attacks</color>, <color=#FFFFFF>Dash Attack</color>, and <color=#FFFFFF>Dodge Counter</color> is increased by 20%, lasting 12s.",
+      "desc2": "Bear Thirens are different from canine Thirens.\nThey can't be appeased with food alone.\nWhen they lose their temper, the only thing you can do is run for your life...\n—The discontinued \"Be a Good Neighbor! 100 Tips for Getting Along With Thirens\"",
+      "name": "Wild Spirit"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

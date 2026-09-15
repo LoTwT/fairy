@@ -1,0 +1,1658 @@
+{
+  "camp": {
+    "17": "Covenant of Dayat"
+  },
+  "elementType": {
+    "300": "Lumiflux"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1581,
+  "locale": "en",
+  "name": "Remielle",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1581015",
+        "1581017",
+        "1581018",
+        "1581019",
+        "1581020",
+        "1581021"
+      ],
+      "basic": [
+        "1581002",
+        "1581003",
+        "1581004",
+        "1581005",
+        "1581006",
+        "1581007",
+        "1581008"
+      ],
+      "chain": ["1581014", "1581016"],
+      "dodge": ["1581012", "1581013"],
+      "special": ["1581009", "1581010", "1581011"]
+    },
+    "parameterRowsById": {
+      "1581002": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/4"
+      ],
+      "1581003": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/5"
+      ],
+      "1581004": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/6"
+      ],
+      "1581005": [
+        "/skill/basic/description/4/param/3",
+        "/skill/basic/description/4/param/7"
+      ],
+      "1581006": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1581007": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/1"
+      ],
+      "1581008": [
+        "/skill/basic/description/7/param/0",
+        "/skill/basic/description/7/param/1"
+      ],
+      "1581009": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1581010": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1581011": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1581012": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1581013": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1581014": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1581015": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ],
+      "1581016": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1581017": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1581018": ["/skill/assist/description/5/param/0"],
+      "1581019": ["/skill/assist/description/5/param/1"],
+      "1581020": ["/skill/assist/description/5/param/2"],
+      "1581021": [
+        "/skill/assist/description/6/param/0",
+        "/skill/assist/description/6/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "MAR 14",
+    "fullName": "Remielle Dan",
+    "gender": "Female",
+    "impressionF": "Remielle is always smiling, but somehow... it never feels like she's as happy as she looks. What can I do to help her?",
+    "impressionM": "Yeah... She's much harder to get close to than she seems. But that's okay. When she needs someone, her \"partner-in-crime\" will be right by her side.",
+    "impressions": [
+      "Impressions of Remielle:\n · She bridges the memories of two eras.",
+      " · Partners-in-crime? I'd say it's friendship leveled-up?",
+      " · Beneath the jokes lie fragile lies and heartfelt truths."
+    ],
+    "profileDesc": "Remielle Dan, one of the first-generation Void Hunters, was formerly a Lieutenant Colonel in the Guard of Staves and currently a member of the secret organization known as the Covenant of Dayat.\nRecords describe her as a prodigy from childhood, capable of rapidly acquiring knowledge and mastering skills in nearly any discipline.\nShe was selected to join the Guard of Staves at a remarkably young age, was promoted directly to Lieutenant Colonel, and inherited the Void Hunter weapon, \"Thaumiel.\" Fighting alongside Colonel Vike and the leader of the Falkenhayn Mercenary Troupe, she helped drive back the Dark Wall, rose to fame through that decisive battle, and was formally awarded the title of Void Hunter.\nDuring the classified operation later known as the Day of Silence, Remielle and Colonel Vike were both believed to have been killed in action following an unexpected incident. Yet as she's still alive, then the truth must be something else entirely.\nRemielle comes and goes without a trace, yet always seems to appear at the most unexpected, pivotal moments, steering events in a new direction.\nAround others, Remielle always wears a sweet, effortless smile. Calm under any circumstances and almost disarmingly friendly, she rarely gives people a reason to raise their guard.\nShe excels at closing the distance with lighthearted banter, yet instinctively maintains just the right amount of distance, making her difficult to read.\nNote: Remielle has a habit of playfully teasing those around her. As for you, you seem to receive a particularly generous share of that \"special treatment.\"",
+    "stature": "167",
+    "trustLv": {
+      "1": "Remielle Dan, one of the first-generation Void Hunters, was formerly a Lieutenant Colonel in the Guard of Staves and currently a member of the secret organization known as the Covenant of Dayat.\nRecords describe her as a prodigy from childhood, capable of rapidly acquiring knowledge and mastering skills in nearly any discipline.\nShe was selected to join the Guard of Staves at a remarkably young age, was promoted directly to Lieutenant Colonel, and inherited the Void Hunter weapon, \"Thaumiel.\" Fighting alongside Colonel Vike and the leader of the Falkenhayn Mercenary Troupe, she helped drive back the Dark Wall, rose to fame through that decisive battle, and was formally awarded the title of Void Hunter.\nDuring the classified operation later known as the Day of Silence, Remielle and Colonel Vike were both believed to have been killed in action following an unexpected incident. Yet as she's still alive, then the truth must be something else entirely.\nRemielle comes and goes without a trace, yet always seems to appear at the most unexpected, pivotal moments, steering events in a new direction.\nAround others, Remielle always wears a sweet, effortless smile. Calm under any circumstances and almost disarmingly friendly, she rarely gives people a reason to raise their guard.\nShe excels at closing the distance with lighthearted banter, yet instinctively maintains just the right amount of distance, making her difficult to read.\nNote: Remielle has a habit of playfully teasing those around her. As for you, you seem to receive a particularly generous share of that \"special treatment.\"",
+      "2": "",
+      "3": "During the Day of Silence operation, Remielle and Colonel Vike took part in an experiment proposed by Arche and Sunbringer known as Project Sunseeker.\nProject Sunseeker sought to fuse a Void Hunter with the Karma Core sealed within a Void Hunter weapon, artificially creating an Enchainer. Its goal was to eliminate the burden imposed on wielders by Void Hunter weapons, allowing Void Hunters to defend Eridu with even greater power.\nThe experiment ended in failure, and both Void Hunters were lost. Fortunately, under the influence of Thaumiel's power, Remielle did not fully transform into an Enchainer, instead falling into a slumber that lasted for over a century.\nAfter awakening in the Pursenas Hollow, Remielle found that the era she had known had long since come to an end. She met members of the Covenant of Dayat and chose to join the organization.\nHowever, Remielle's Enchainer transformation did not stop there. Worse still, excessive use of her Void Hunter weapon only accelerates the process.\nOnce the Corruption reaches its critical threshold, horrifying symptoms of Enchainer transformation begin to appear across her body, and she seems determined to keep anyone from seeing her in such a state.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Season 3 Chapter 2 \"The Long Goodbye\"",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1581501": {
+        "desc": [
+          "Remielle's <color=#FFA9DD>Refringe Coefficient</color> is equal to 0.02% of her Anomaly Proficiency. If there are 3 <color=#FFFFFF>Anomaly</color> characters in the squad, her <color=#FFA9DD>Refringe Coefficient</color> increases by an additional 10%.\nWhen Remielle triggers a <Term:1000031></Term> reaction through a teammate, she generates <color=#FFFFFF>Voidflare</color> based on the enhanced <Term:1000023></Term> of the current Attribute Anomaly after it has been <color=#FFA9DD>Refringed</color>. Up to the 3 most recently generated <color=#FFFFFF>Voidflares</color> can be stored.\nIf <color=#FFFFFF>Assist: Flower & Feather Dance</color>, <color=#FFFFFF>Ultimate: Dazzling Curtain Call</color>, <color=#FFFFFF>Basic Attack: Rainbow's End</color>, or <color=#FFFFFF>Basic Attack: Fleeting Grace</color> hits a target, <color=#FFFFFF>Luminize</color> is triggered after the skill ends：\nBased on the <color=#FFFFFF>Anomaly Effect Strength</color> of all stored <color=#FFFFFF>Voidflares</color>, deals Attribute Anomaly DMG to the enemy using the corresponding skill's DMG multiplier. This multiplier is further increased by <color=#2BAD00>0.1%</color> of Remielle's Anomaly Proficiency.\nAll stored <color=#FFFFFF>Voidflares</color> are cleared when Remielle enters the <Term:1000035></Term> state or after using <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same faction:\nWhen there are 1/2/3 <color=#FFFFFF>Anomaly</color> characters in the squad, upon entering the battlefield, all squad members gain an ATK increase equal to 6%/12%/40% of Remielle's initial ATK, up to a maximum increase of 1,600 ATK. Remielle's Daze dealt while in the <Term:1000035></Term> state increases by 6%/12%/35%.\nWhen applying <color=#FFA9DD>Lumiflux Buildup</color> to an enemy, Remielle also applies the <color=#FFFFFF>Prismatic</color> effect: All squad members' attacks against enemies with the <color=#FFFFFF>Prismatic</color> effect have 15% increased Anomaly Buildup Rate. <color=#FFFFFF>Prismatic</color> is removed when the enemy no longer has <color=#FFA9DD>Lumiflux Buildup</color>. After <color=#FFFFFF>Prismatic</color> is removed, the Anomaly Buildup Rate increase persists for an additional 8s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Temporal Patterns = Stilled Colors",
+          "Additional Ability: Invitation to Bloom"
+        ],
+        "potential": []
+      },
+      "1581502": {
+        "desc": [
+          "Remielle's <color=#FFA9DD>Refringe Coefficient</color> is equal to 0.02% of her Anomaly Proficiency. If there are 3 <color=#FFFFFF>Anomaly</color> characters in the squad, her <color=#FFA9DD>Refringe Coefficient</color> increases by an additional 10%.\nWhen Remielle triggers a <Term:1000031></Term> reaction through a teammate, she generates <color=#FFFFFF>Voidflare</color> based on the enhanced <Term:1000023></Term> of the current Attribute Anomaly after it has been <color=#FFA9DD>Refringed</color>. Up to the 3 most recently generated <color=#FFFFFF>Voidflares</color> can be stored.\nIf <color=#FFFFFF>Assist: Flower & Feather Dance</color>, <color=#FFFFFF>Ultimate: Dazzling Curtain Call</color>, <color=#FFFFFF>Basic Attack: Rainbow's End</color>, or <color=#FFFFFF>Basic Attack: Fleeting Grace</color> hits a target, <color=#FFFFFF>Luminize</color> is triggered after the skill ends：\nBased on the <color=#FFFFFF>Anomaly Effect Strength</color> of all stored <color=#FFFFFF>Voidflares</color>, deals Attribute Anomaly DMG to the enemy using the corresponding skill's DMG multiplier. This multiplier is further increased by <color=#2BAD00>0.12%</color> of Remielle's Anomaly Proficiency.\nAll stored <color=#FFFFFF>Voidflares</color> are cleared when Remielle enters the <Term:1000035></Term> state or after using <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same faction:\nWhen there are 1/2/3 <color=#FFFFFF>Anomaly</color> characters in the squad, upon entering the battlefield, all squad members gain an ATK increase equal to 6%/12%/40% of Remielle's initial ATK, up to a maximum increase of 1,600 ATK. Remielle's Daze dealt while in the <Term:1000035></Term> state increases by 6%/12%/35%.\nWhen applying <color=#FFA9DD>Lumiflux Buildup</color> to an enemy, Remielle also applies the <color=#FFFFFF>Prismatic</color> effect: All squad members' attacks against enemies with the <color=#FFFFFF>Prismatic</color> effect have 15% increased Anomaly Buildup Rate. <color=#FFFFFF>Prismatic</color> is removed when the enemy no longer has <color=#FFA9DD>Lumiflux Buildup</color>. After <color=#FFFFFF>Prismatic</color> is removed, the Anomaly Buildup Rate increase persists for an additional 8s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Temporal Patterns = Stilled Colors",
+          "Additional Ability: Invitation to Bloom"
+        ],
+        "potential": []
+      },
+      "1581503": {
+        "desc": [
+          "Remielle's <color=#FFA9DD>Refringe Coefficient</color> is equal to 0.02% of her Anomaly Proficiency. If there are 3 <color=#FFFFFF>Anomaly</color> characters in the squad, her <color=#FFA9DD>Refringe Coefficient</color> increases by an additional 10%.\nWhen Remielle triggers a <Term:1000031></Term> reaction through a teammate, she generates <color=#FFFFFF>Voidflare</color> based on the enhanced <Term:1000023></Term> of the current Attribute Anomaly after it has been <color=#FFA9DD>Refringed</color>. Up to the 3 most recently generated <color=#FFFFFF>Voidflares</color> can be stored.\nIf <color=#FFFFFF>Assist: Flower & Feather Dance</color>, <color=#FFFFFF>Ultimate: Dazzling Curtain Call</color>, <color=#FFFFFF>Basic Attack: Rainbow's End</color>, or <color=#FFFFFF>Basic Attack: Fleeting Grace</color> hits a target, <color=#FFFFFF>Luminize</color> is triggered after the skill ends：\nBased on the <color=#FFFFFF>Anomaly Effect Strength</color> of all stored <color=#FFFFFF>Voidflares</color>, deals Attribute Anomaly DMG to the enemy using the corresponding skill's DMG multiplier. This multiplier is further increased by <color=#2BAD00>0.14%</color> of Remielle's Anomaly Proficiency.\nAll stored <color=#FFFFFF>Voidflares</color> are cleared when Remielle enters the <Term:1000035></Term> state or after using <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same faction:\nWhen there are 1/2/3 <color=#FFFFFF>Anomaly</color> characters in the squad, upon entering the battlefield, all squad members gain an ATK increase equal to 6%/12%/40% of Remielle's initial ATK, up to a maximum increase of 1,600 ATK. Remielle's Daze dealt while in the <Term:1000035></Term> state increases by 6%/12%/35%.\nWhen applying <color=#FFA9DD>Lumiflux Buildup</color> to an enemy, Remielle also applies the <color=#FFFFFF>Prismatic</color> effect: All squad members' attacks against enemies with the <color=#FFFFFF>Prismatic</color> effect have 15% increased Anomaly Buildup Rate. <color=#FFFFFF>Prismatic</color> is removed when the enemy no longer has <color=#FFA9DD>Lumiflux Buildup</color>. After <color=#FFFFFF>Prismatic</color> is removed, the Anomaly Buildup Rate increase persists for an additional 8s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Temporal Patterns = Stilled Colors",
+          "Additional Ability: Invitation to Bloom"
+        ],
+        "potential": []
+      },
+      "1581504": {
+        "desc": [
+          "Remielle's <color=#FFA9DD>Refringe Coefficient</color> is equal to 0.02% of her Anomaly Proficiency. If there are 3 <color=#FFFFFF>Anomaly</color> characters in the squad, her <color=#FFA9DD>Refringe Coefficient</color> increases by an additional 10%.\nWhen Remielle triggers a <Term:1000031></Term> reaction through a teammate, she generates <color=#FFFFFF>Voidflare</color> based on the enhanced <Term:1000023></Term> of the current Attribute Anomaly after it has been <color=#FFA9DD>Refringed</color>. Up to the 3 most recently generated <color=#FFFFFF>Voidflares</color> can be stored.\nIf <color=#FFFFFF>Assist: Flower & Feather Dance</color>, <color=#FFFFFF>Ultimate: Dazzling Curtain Call</color>, <color=#FFFFFF>Basic Attack: Rainbow's End</color>, or <color=#FFFFFF>Basic Attack: Fleeting Grace</color> hits a target, <color=#FFFFFF>Luminize</color> is triggered after the skill ends：\nBased on the <color=#FFFFFF>Anomaly Effect Strength</color> of all stored <color=#FFFFFF>Voidflares</color>, deals Attribute Anomaly DMG to the enemy using the corresponding skill's DMG multiplier. This multiplier is further increased by <color=#2BAD00>0.15%</color> of Remielle's Anomaly Proficiency.\nAll stored <color=#FFFFFF>Voidflares</color> are cleared when Remielle enters the <Term:1000035></Term> state or after using <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same faction:\nWhen there are 1/2/3 <color=#FFFFFF>Anomaly</color> characters in the squad, upon entering the battlefield, all squad members gain an ATK increase equal to 6%/12%/40% of Remielle's initial ATK, up to a maximum increase of 1,600 ATK. Remielle's Daze dealt while in the <Term:1000035></Term> state increases by 6%/12%/35%.\nWhen applying <color=#FFA9DD>Lumiflux Buildup</color> to an enemy, Remielle also applies the <color=#FFFFFF>Prismatic</color> effect: All squad members' attacks against enemies with the <color=#FFFFFF>Prismatic</color> effect have 15% increased Anomaly Buildup Rate. <color=#FFFFFF>Prismatic</color> is removed when the enemy no longer has <color=#FFA9DD>Lumiflux Buildup</color>. After <color=#FFFFFF>Prismatic</color> is removed, the Anomaly Buildup Rate increase persists for an additional 8s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Temporal Patterns = Stilled Colors",
+          "Additional Ability: Invitation to Bloom"
+        ],
+        "potential": []
+      },
+      "1581505": {
+        "desc": [
+          "Remielle's <color=#FFA9DD>Refringe Coefficient</color> is equal to 0.02% of her Anomaly Proficiency. If there are 3 <color=#FFFFFF>Anomaly</color> characters in the squad, her <color=#FFA9DD>Refringe Coefficient</color> increases by an additional 10%.\nWhen Remielle triggers a <Term:1000031></Term> reaction through a teammate, she generates <color=#FFFFFF>Voidflare</color> based on the enhanced <Term:1000023></Term> of the current Attribute Anomaly after it has been <color=#FFA9DD>Refringed</color>. Up to the 3 most recently generated <color=#FFFFFF>Voidflares</color> can be stored.\nIf <color=#FFFFFF>Assist: Flower & Feather Dance</color>, <color=#FFFFFF>Ultimate: Dazzling Curtain Call</color>, <color=#FFFFFF>Basic Attack: Rainbow's End</color>, or <color=#FFFFFF>Basic Attack: Fleeting Grace</color> hits a target, <color=#FFFFFF>Luminize</color> is triggered after the skill ends：\nBased on the <color=#FFFFFF>Anomaly Effect Strength</color> of all stored <color=#FFFFFF>Voidflares</color>, deals Attribute Anomaly DMG to the enemy using the corresponding skill's DMG multiplier. This multiplier is further increased by <color=#2BAD00>0.16%</color> of Remielle's Anomaly Proficiency.\nAll stored <color=#FFFFFF>Voidflares</color> are cleared when Remielle enters the <Term:1000035></Term> state or after using <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same faction:\nWhen there are 1/2/3 <color=#FFFFFF>Anomaly</color> characters in the squad, upon entering the battlefield, all squad members gain an ATK increase equal to 6%/12%/40% of Remielle's initial ATK, up to a maximum increase of 1,600 ATK. Remielle's Daze dealt while in the <Term:1000035></Term> state increases by 6%/12%/35%.\nWhen applying <color=#FFA9DD>Lumiflux Buildup</color> to an enemy, Remielle also applies the <color=#FFFFFF>Prismatic</color> effect: All squad members' attacks against enemies with the <color=#FFFFFF>Prismatic</color> effect have 15% increased Anomaly Buildup Rate. <color=#FFFFFF>Prismatic</color> is removed when the enemy no longer has <color=#FFA9DD>Lumiflux Buildup</color>. After <color=#FFFFFF>Prismatic</color> is removed, the Anomaly Buildup Rate increase persists for an additional 8s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Temporal Patterns = Stilled Colors",
+          "Additional Ability: Invitation to Bloom"
+        ],
+        "potential": []
+      },
+      "1581506": {
+        "desc": [
+          "Remielle's <color=#FFA9DD>Refringe Coefficient</color> is equal to 0.02% of her Anomaly Proficiency. If there are 3 <color=#FFFFFF>Anomaly</color> characters in the squad, her <color=#FFA9DD>Refringe Coefficient</color> increases by an additional 10%.\nWhen Remielle triggers a <Term:1000031></Term> reaction through a teammate, she generates <color=#FFFFFF>Voidflare</color> based on the enhanced <Term:1000023></Term> of the current Attribute Anomaly after it has been <color=#FFA9DD>Refringed</color>. Up to the 3 most recently generated <color=#FFFFFF>Voidflares</color> can be stored.\nIf <color=#FFFFFF>Assist: Flower & Feather Dance</color>, <color=#FFFFFF>Ultimate: Dazzling Curtain Call</color>, <color=#FFFFFF>Basic Attack: Rainbow's End</color>, or <color=#FFFFFF>Basic Attack: Fleeting Grace</color> hits a target, <color=#FFFFFF>Luminize</color> is triggered after the skill ends：\nBased on the <color=#FFFFFF>Anomaly Effect Strength</color> of all stored <color=#FFFFFF>Voidflares</color>, deals Attribute Anomaly DMG to the enemy using the corresponding skill's DMG multiplier. This multiplier is further increased by <color=#2BAD00>0.18%</color> of Remielle's Anomaly Proficiency.\nAll stored <color=#FFFFFF>Voidflares</color> are cleared when Remielle enters the <Term:1000035></Term> state or after using <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same faction:\nWhen there are 1/2/3 <color=#FFFFFF>Anomaly</color> characters in the squad, upon entering the battlefield, all squad members gain an ATK increase equal to 6%/12%/40% of Remielle's initial ATK, up to a maximum increase of 1,600 ATK. Remielle's Daze dealt while in the <Term:1000035></Term> state increases by 6%/12%/35%.\nWhen applying <color=#FFA9DD>Lumiflux Buildup</color> to an enemy, Remielle also applies the <color=#FFFFFF>Prismatic</color> effect: All squad members' attacks against enemies with the <color=#FFFFFF>Prismatic</color> effect have 15% increased Anomaly Buildup Rate. <color=#FFFFFF>Prismatic</color> is removed when the enemy no longer has <color=#FFA9DD>Lumiflux Buildup</color>. After <color=#FFFFFF>Prismatic</color> is removed, the Anomaly Buildup Rate increase persists for an additional 8s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Temporal Patterns = Stilled Colors",
+          "Additional Ability: Invitation to Bloom"
+        ],
+        "potential": []
+      },
+      "1581507": {
+        "desc": [
+          "Remielle's <color=#FFA9DD>Refringe Coefficient</color> is equal to 0.02% of her Anomaly Proficiency. If there are 3 <color=#FFFFFF>Anomaly</color> characters in the squad, her <color=#FFA9DD>Refringe Coefficient</color> increases by an additional 10%.\nWhen Remielle triggers a <Term:1000031></Term> reaction through a teammate, she generates <color=#FFFFFF>Voidflare</color> based on the enhanced <Term:1000023></Term> of the current Attribute Anomaly after it has been <color=#FFA9DD>Refringed</color>. Up to the 3 most recently generated <color=#FFFFFF>Voidflares</color> can be stored.\nIf <color=#FFFFFF>Assist: Flower & Feather Dance</color>, <color=#FFFFFF>Ultimate: Dazzling Curtain Call</color>, <color=#FFFFFF>Basic Attack: Rainbow's End</color>, or <color=#FFFFFF>Basic Attack: Fleeting Grace</color> hits a target, <color=#FFFFFF>Luminize</color> is triggered after the skill ends：\nBased on the <color=#FFFFFF>Anomaly Effect Strength</color> of all stored <color=#FFFFFF>Voidflares</color>, deals Attribute Anomaly DMG to the enemy using the corresponding skill's DMG multiplier. This multiplier is further increased by <color=#2BAD00>0.2%</color> of Remielle's Anomaly Proficiency.\nAll stored <color=#FFFFFF>Voidflares</color> are cleared when Remielle enters the <Term:1000035></Term> state or after using <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same faction:\nWhen there are 1/2/3 <color=#FFFFFF>Anomaly</color> characters in the squad, upon entering the battlefield, all squad members gain an ATK increase equal to 6%/12%/40% of Remielle's initial ATK, up to a maximum increase of 1,600 ATK. Remielle's Daze dealt while in the <Term:1000035></Term> state increases by 6%/12%/35%.\nWhen applying <color=#FFA9DD>Lumiflux Buildup</color> to an enemy, Remielle also applies the <color=#FFFFFF>Prismatic</color> effect: All squad members' attacks against enemies with the <color=#FFFFFF>Prismatic</color> effect have 15% increased Anomaly Buildup Rate. <color=#FFFFFF>Prismatic</color> is removed when the enemy no longer has <color=#FFA9DD>Lumiflux Buildup</color>. After <color=#FFFFFF>Prismatic</color> is removed, the Anomaly Buildup Rate increase persists for an additional 8s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Temporal Patterns = Stilled Colors",
+          "Additional Ability: Invitation to Bloom"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nUnleashes a slash at the target, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Featherglow Rebirth",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Fleeting Light",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nUnleashes a series of slashes against the target, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Awakening Glimmer",
+          "potential": []
+        },
+        {
+          "desc": "Enters the battlefield and unleashes an attack in a large area, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nConsumes 40 <Term:1000032></Term> upon activation. With 90 or fewer <color=#FFFFFF>Floating Radiance</color> remaining upon activation, this <color=#FFFFFF>Assist: Flower & Feather Dance</color> does not consume <color=#FFFFFF>Floating Radiance</color>. Remielle also enters the <color=#FFFFFF>Luminous Reflection</color> state, and the next <color=#FFFFFF>Basic Attack: Rainbow's End</color> is upgraded to <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.\nWhen this skill hits a Stunned enemy, their Stun duration is extended by 3s. Each enemy can be affected by this effect only once per Stun window. This Stun duration increase cannot stack with other effects of the same type.\nIf this skill lands a hit, the <Term:1000034></Term> effect can be triggered after the skill ends with a multiplier of <color=#2BAD00>{CAL:200+AvatarSkillLevel(6)*10,1,2}%</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist: Flower & Feather Dance",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Featherglow Rebirth",
+          "param": [
+            {
+              "desc": "{Skill:1581017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3250,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 2499,
+                  "feverRecovery": 34375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 3250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2750,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3250,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 2499,
+                  "feverRecovery": 34375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2750,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Fleeting Light",
+          "param": [
+            {
+              "desc": "{Skill:1581018, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1581018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581019, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1581019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581020, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1581020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Awakening Glimmer",
+          "param": [
+            {
+              "desc": "{Skill:1581021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 38110,
+                  "damagePercentageGrowth": 3470,
+                  "etherPurify": 13001,
+                  "feverRecovery": 459250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3470,
+                  "main": 38110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27760,
+                  "stunRatioGrowth": 1270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 38110,
+                  "damagePercentageGrowth": 3470,
+                  "etherPurify": 13001,
+                  "feverRecovery": 459250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1270,
+                  "main": 27760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27760,
+                  "stunRatioGrowth": 1270
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist: Flower & Feather Dance",
+          "param": [
+            {
+              "desc": "{Skill:1581015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 45350,
+                  "damagePercentageGrowth": 4130,
+                  "etherPurify": 26830,
+                  "feverRecovery": 737825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4130,
+                  "main": 45350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29520,
+                  "stunRatioGrowth": 1350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 45350,
+                  "damagePercentageGrowth": 4130,
+                  "etherPurify": 26830,
+                  "feverRecovery": 737825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1350,
+                  "main": 29520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29520,
+                  "stunRatioGrowth": 1350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:200+AvatarSkillLevel(6)*10,1,2}%",
+              "name": "Luminize Multiplier",
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Floating Radiance Consumed",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nPerforms up to four attacks ahead, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nIf the Basic Attack hits the target, gains <Term:1000032></Term> after the skill ends.\nAfter the 4th hit of the Basic Attack ends, 1 <color=#FFA9DD>Lumiflux Buildup</color> is applied to enemies hit.",
+          "name": "Basic Attack: Leap",
+          "potential": []
+        },
+        {
+          "desc": "Hold <IconMap:Icon_Normal> to activate:\nPerforms a slash in an area ahead, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nIf it hits a target, gains <color=#FFFFFF>Floating Radiance</color> after the skill ends.",
+          "name": "Basic Attack: Solo Dance",
+          "potential": []
+        },
+        {
+          "desc": "When Remielle has stored <Term:1000033></Term>, hold <IconMap:Icon_Normal> to activate:\nUnleashes a powerful attack across a large area ahead, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nGrants a large amount of <color=#FFFFFF>Floating Radiance</color> when the skill ends.\nIf the attack hits a target, triggers the <Term:1000034></Term> effect after the skill ends with a <color=#2BAD00>{CAL:100+AvatarSkillLevel(0)*5,1,2}%</color> multiplier.\nConsumes all stored <color=#FFFFFF>Voidflare</color> upon use.",
+          "name": "Basic Attack: Rainbow's End",
+          "potential": []
+        },
+        {
+          "desc": "When Remielle has stored <color=#FFFFFF>Voidflare</color> and is in the <color=#FFFFFF>Luminous Reflection</color> state, hold <IconMap:Icon_Normal> to activate:\nUnleashes a powerful attack across a large area ahead, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nGrants a large amount of <color=#FFFFFF>Floating Radiance</color> when the skill ends.\nIf the attack hits a target, triggers the <color=#FFFFFF>Luminize</color> effect after the skill ends with a <color=#2BAD00>{CAL:200+AvatarSkillLevel(0)*10,1,2}%</color> multiplier.\nConsumes all stored <color=#FFFFFF>Voidflare</color> upon use.",
+          "name": "Basic Attack: Fleeting Grace",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Leap",
+          "param": [
+            {
+              "desc": "{Skill:1581002, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1581002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3120,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1937,
+                  "feverRecovery": 53350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 3120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1220,
+                  "stunRatioGrowth": 60
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581003, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1581003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5450,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 3023,
+                  "feverRecovery": 83325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 5450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2820,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581004, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1581004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8430,
+                  "damagePercentageGrowth": 770,
+                  "etherPurify": 4384,
+                  "feverRecovery": 120725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 770,
+                  "main": 8430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15780,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4930,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581005, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1581005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 25080,
+                  "damagePercentageGrowth": 2280,
+                  "etherPurify": 11826,
+                  "feverRecovery": 325325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2280,
+                  "main": 25080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42580,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12660,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581002, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1581002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3120,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1937,
+                  "feverRecovery": 53350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 60,
+                  "main": 1220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1220,
+                  "stunRatioGrowth": 60
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581003, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1581003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5450,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 3023,
+                  "feverRecovery": 83325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2820,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581004, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1581004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8430,
+                  "damagePercentageGrowth": 770,
+                  "etherPurify": 4384,
+                  "feverRecovery": 120725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15780,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4930,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581005, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1581005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 25080,
+                  "damagePercentageGrowth": 2280,
+                  "etherPurify": 11826,
+                  "feverRecovery": 325325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 12660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42580,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12660,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "5",
+              "name": "1st Hit Floating Radiance Gained",
+              "potential": []
+            },
+            {
+              "desc": "5",
+              "name": "2nd Hit Floating Radiance Gained",
+              "potential": []
+            },
+            {
+              "desc": "15",
+              "name": "3rd Hit Floating Radiance Gained",
+              "potential": []
+            },
+            {
+              "desc": "35",
+              "name": "4th Hit Floating Radiance Gained",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Solo Dance",
+          "param": [
+            {
+              "desc": "{Skill:1581006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9650,
+                  "damagePercentageGrowth": 880,
+                  "etherPurify": 7417,
+                  "feverRecovery": 102025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 880,
+                  "main": 9650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13360,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8160,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9650,
+                  "damagePercentageGrowth": 880,
+                  "etherPurify": 7417,
+                  "feverRecovery": 102025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13360,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8160,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "30",
+              "name": "Floating Radiance Gained",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Rainbow's End",
+          "param": [
+            {
+              "desc": "{Skill:1581007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 19500,
+                  "damagePercentageGrowth": 1780,
+                  "etherPurify": 14997,
+                  "feverRecovery": 206250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1780,
+                  "main": 19500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16500,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 19500,
+                  "damagePercentageGrowth": 1780,
+                  "etherPurify": 14997,
+                  "feverRecovery": 206250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 750,
+                  "main": 16500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16500,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "120",
+              "name": "Floating Radiance Gained",
+              "potential": []
+            },
+            {
+              "desc": "{CAL:100+AvatarSkillLevel(0)*5,1,2}%",
+              "name": "Luminize Multiplier",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Fleeting Grace",
+          "param": [
+            {
+              "desc": "{Skill:1581008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 59720,
+                  "damagePercentageGrowth": 5430,
+                  "etherPurify": 35334,
+                  "feverRecovery": 971850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5430,
+                  "main": 59720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 63600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38870,
+                  "stunRatioGrowth": 1770
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 59720,
+                  "damagePercentageGrowth": 5430,
+                  "etherPurify": 35334,
+                  "feverRecovery": 971850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1770,
+                  "main": 38870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 63600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38870,
+                  "stunRatioGrowth": 1770
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "120",
+              "name": "Floating Radiance Gained",
+              "potential": []
+            },
+            {
+              "desc": "{CAL:200+AvatarSkillLevel(0)*10,1,2}%",
+              "name": "Luminize Multiplier",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunches multiple attacks ahead in a large area, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nEnters the <color=#FFFFFF>Luminous Reflection</color> state upon activation. The next <color=#FFFFFF>Basic Attack: Rainbow's End</color> is upgraded to <color=#FFFFFF>Basic Attack: Fleeting Grace</color>.\nAfter the skill ends, apply 2 <color=#FFA9DD>Lumiflux Buildup</color> to enemies hit.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Interwoven Dance Steps",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nLaunches an attack across a large area in front, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nIf the skill hits, the <Term:1000034></Term> effect can be triggered after the skill ends with a multiplier of <color=#2BAD00>{CAL:210+AvatarSkillLevel(3)*10.5,1,2}%</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Dazzling Curtain Call",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Interwoven Dance Steps",
+          "param": [
+            {
+              "desc": "{Skill:1581014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 78520,
+                  "damagePercentageGrowth": 7140,
+                  "etherPurify": 20500,
+                  "feverRecovery": 2392500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7140,
+                  "main": 78520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22550,
+                  "stunRatioGrowth": 1030
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 78520,
+                  "damagePercentageGrowth": 7140,
+                  "etherPurify": 20500,
+                  "feverRecovery": 2392500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1030,
+                  "main": 22550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22550,
+                  "stunRatioGrowth": 1030
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Dazzling Curtain Call",
+          "param": [
+            {
+              "desc": "{Skill:1581016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 200970,
+                  "damagePercentageGrowth": 18270,
+                  "etherPurify": 73671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 18270,
+                  "main": 200970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26040,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 200970,
+                  "damagePercentageGrowth": 18270,
+                  "etherPurify": 73671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1190,
+                  "main": 26040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26040,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:210+AvatarSkillLevel(3)*10.5,1,2}%",
+              "name": "Luminize Multiplier",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Retreating Light",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nLaunches a quick attack ahead, dealing <color=#FFA9DD>Lumiflux DMG</color>.",
+          "name": "Dash Attack: Keen Light",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nUnleashes a powerful slash at the target, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Mirrored Shadow",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Keen Light",
+          "param": [
+            {
+              "desc": "{Skill:1581012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 3000,
+                  "feverRecovery": 41250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3300,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 3000,
+                  "feverRecovery": 41250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3300,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Mirrored Shadow",
+          "param": [
+            {
+              "desc": "{Skill:1581013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 21450,
+                  "damagePercentageGrowth": 1950,
+                  "etherPurify": 19997,
+                  "feverRecovery": 68750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1950,
+                  "main": 21450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16500,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 21450,
+                  "damagePercentageGrowth": 1950,
+                  "etherPurify": 19997,
+                  "feverRecovery": 68750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 750,
+                  "main": 16500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16500,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nLaunches a ranged attack ahead, dealing <color=#FFA9DD>Lumiflux DMG</color>.",
+          "name": "Special Attack: Sliver of Light",
+          "potential": []
+        },
+        {
+          "desc": "Upon entering the battlefield, if Remielle has less than 60 Energy, her Energy is recovered to 60. In Investigation Zone Mode, this effect can trigger once every 180s.\nWith enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nUnleashes a powerful attack across a large area ahead, dealing <color=#FFA9DD>Lumiflux DMG</color>.\nAfter the skill ends, apply 2 <color=#FFA9DD>Lumiflux Buildup</color> to all enemies hit.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Ode to Dawn",
+          "potential": []
+        },
+        {
+          "desc": "When Remielle is in combat and her <color=#FFFFFF>Floating Radiance</color> reaches its maximum of 120, hold <IconMap:Icon_Special> after a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> to enter <color=#FFFFFF>Stance Shift</color>. Switching characters while in <color=#FFFFFF>Stance Shift</color> causes Remielle to enter the <color=#FFFFFF>Phase Flow</color> state:\nWhile in the <color=#FFFFFF>Phase Flow</color> state, Remielle acts autonomously to assist in combat. In this state, <color=#FFFFFF>Floating Radiance</color> is consumed over time, and some of her attacks apply <color=#FFA9DD>Lumiflux Buildup</color> to the target. When <color=#FFFFFF>Floating Radiance</color> is fully depleted or upon leaving combat, Remielle exits the <color=#FFFFFF>Phase Flow</color> state. Before exiting the <color=#FFFFFF>Phase Flow</color> state, Remielle cannot be actively switched in except via a <color=#FFFFFF>Chain Attack</color>.\nIf Remielle triggers 3 <Term:1000031></Term> reactions in one <color=#FFFFFF>Phase Flow</color> state, or has at least 1 stored <Term:1000033></Term> when <color=#FFFFFF>Floating Radiance</color> is fully depleted, <color=#FFFFFF>Assist: Flower & Feather Dance</color> becomes available, and her normal switch-in is unlocked. <color=#FFFFFF>Assist: Flower & Feather Dance</color> is automatically used on Remielle's next normal switch-in.\nUpon entering the <color=#FFFFFF>Phase Flow</color> state, Remielle increases all squad members's DMG by <color=#2BAD00>{CAL:0+AvatarSkillLevel(1)*1.5,1,2}%</color> for 60s. Repeated triggers reset the duration.\nWhen Remielle's <color=#FFFFFF>Floating Radiance</color> has reached its maximum of 120 and her <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> hits a Stunned enemy, she can also enter the <color=#FFFFFF>Phase Flow</color> state by switching characters during the <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>.\nIf no character is switched in after entering <color=#FFFFFF>Stance Shift</color>, Remielle uses a downward attack to return to the ground instead.",
+          "name": "Special Attack: Ode to Dawn - Radiant Turn",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Sliver of Light",
+          "param": [
+            {
+              "desc": "{Skill:1581009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581009": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4990,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 3834,
+                  "feverRecovery": 52800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 4990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581009": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4990,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 3834,
+                  "feverRecovery": 52800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Ode to Dawn - Radiant Turn",
+          "param": [
+            {
+              "desc": "{Skill:1581010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581010": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16470,
+                  "damagePercentageGrowth": 1500,
+                  "etherPurify": 12667,
+                  "feverRecovery": 174350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1500,
+                  "main": 16470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6970,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581010": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16470,
+                  "damagePercentageGrowth": 1500,
+                  "etherPurify": 12667,
+                  "feverRecovery": 174350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6970,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:0+AvatarSkillLevel(1)*1.5,1,2}%",
+              "name": "DMG Increase",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Ode to Dawn",
+          "param": [
+            {
+              "desc": "{Skill:1581011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1581011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 72150,
+                  "damagePercentageGrowth": 6560,
+                  "etherPurify": 15830,
+                  "feverRecovery": 1799050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6560,
+                  "main": 72150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28330,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1581011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1581011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 72150,
+                  "damagePercentageGrowth": 6560,
+                  "etherPurify": 15830,
+                  "feverRecovery": 1799050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1290,
+                  "main": 28330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28330,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1581001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Leap"
+    },
+    "1581002": {
+      "desc": "<IconMap:Icon_Normal> (Hold)",
+      "name": "Basic Attack: Solo Dance"
+    },
+    "1581003": {
+      "desc": "<IconMap:Icon_Normal> (Hold with Voidflare)",
+      "name": "Basic Attack: Rainbow's End"
+    },
+    "1581004": {
+      "desc": "<IconMap:Icon_Normal> (Hold with Voidflare while in the Luminous Reflection state)",
+      "name": "Basic Attack: Fleeting Grace"
+    },
+    "1581005": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Sliver of Light"
+    },
+    "1581006": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Ode to Dawn"
+    },
+    "1581007": {
+      "desc": "<IconMap:Icon_Special> (Hold with max Floating Radiance) or <IconMap:Icon_SpecialReady> (Hold with max Floating Radiance)",
+      "name": "Special Attack: Ode to Dawn - Radiant Turn"
+    },
+    "1581008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Keen Light"
+    },
+    "1581009": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Mirrored Shadow"
+    },
+    "1581010": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Interwoven Dance Steps"
+    },
+    "1581011": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Dazzling Curtain Call"
+    },
+    "1581012": {
+      "desc": "<IconMap:Icon_Switch> (After triggering 3 Refringe reactions while in the Phase Flow state)",
+      "name": "Assist: Flower & Feather Dance"
+    },
+    "1581013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Featherglow Rebirth"
+    },
+    "1581014": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Fleeting Light"
+    },
+    "1581015": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Awakening Glimmer"
+    }
+  },
+  "skin": {
+    "3115810": {
+      "desc": "An angel of old fell to the mortal world, their feathers drifting down as they sank into silent slumber.\nAwaken from the pale wasteland, beyond the edge of all sound, and begin the journey anew.",
+      "name": "Remielle: Feathered Murmurs"
+    },
+    "3115811": {
+      "desc": "Since the sun has never shown mercy, let us embrace the fall alongside the moonlit night.\nYou say it's difficult to differentiate between jokes and deception?\nThen let's have another round of our Q&A game, my dear partner in crime.",
+      "name": "Remielle: Moonlight Whispers"
+    },
+    "3115812": {
+      "desc": "This was originally a solo dance, yet a ray of light has illuminated the secrecy and solitude shrouded in darkness. Now, would you care to join me for a pas de deux, my partner in crime?",
+      "name": "Remielle: Seashade Pas Seul"
+    },
+    "3115813": {
+      "desc": "Since the sun has never shown mercy, let us embrace the fall alongside the moonlit night.\nYou say it's difficult to differentiate between jokes and deception?\nThen let's have another round of our Q&A game, my dear partner in crime.",
+      "name": "Remielle: Moonlight Whispers (Veil)"
+    }
+  },
+  "specialElementType": {},
+  "strategy": {},
+  "talent": {
+    "1": {
+      "desc": "Upon entering the battlefield, Remielle gains 3 special <Term:1000033></Term>s. In Investigation Zone mode, this effect can trigger once every 180s. When Remielle triggers <Term:1000034></Term> to deal DMG, she ignores 50% of the target's All-Attribute RES. When using <color=#FFFFFF>Assist: Flower & Feather Dance</color>, she gains 200 Decibels. This effect can trigger once every 18s. While Remielle is in the <Term:1000035></Term> state, other squad members' Attribute Anomaly DMG increases by 10%.",
+      "desc2": "\"We can put an end to evil and split the heavens. We can walk out of the fog and step closer to the truth...\"\n\"This is our nation, forever standing tall, and with the power to accomplish miracles.\"\n\"...\"\nThe pink-haired girl finally can't hold it in anymore. Lowering the brim of her hat, she quietly grumbles to the figure at the front of the line:\n\"Beli... This oath is way too long. We're not going to have to recite it all the time, are we?\"\n\"Just wait. It'll only get longer.\"\nEven the ever-composed figure can't help but smile wryly.",
+      "name": "Naive Oath"
+    },
+    "2": {
+      "desc": "Remielle's <color=#FFA9DD>Refringe Coefficient</color> increases by 20%. When an <color=#FFFFFF>Anomaly</color> character in the squad deals Anomaly DMG to an enemy affected by <color=#FFFFFF>Prismatic</color>, the attack ignores 15% of the target's DEF. This effect persists for an additional 8s after <color=#FFFFFF>Prismatic</color> ends. While Remielle is in the <Term:1000035></Term> state, the frequency at which she automatically attacks to apply <color=#FFA9DD>Lumiflux Buildup</color> to enemies increases.",
+      "desc2": "It was a grand ball.\nThe city was captivated. Even the full moon paled beside it.\nCrowds gathered in celebration, calling out the heroes' names, laughing and singing as though the night would never end.\nThose of unparalleled achievement stood together, gazing upon the jubilant crowd as they made a humble vow. \"This is where miracles begin.\"\nAnd so, Eridu's journey was about to begin.\nA great adventure to reclaim the world.\n\"Come on, the ball's almost over, and you still haven't found a partner? Well... I suppose I can spare you a dance.\"",
+      "name": "Fall Into the Noise"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The girl wrote her name among the Sunseekers, driven by an ideal that burned brighter than the blazing sun.\nShe believed every wound could be healed. She believed every sacrifice could one day come to an end. And so, she turned and walked into the secret garden.\nShe did not yet know that, deep within that garden, time forever diverged, leading to countless futures.\nSome led to glory. Some led to hope...\nOthers led to the shadow cast by the sun, to a long night that no one would remember.\n\"I know, I know. But someone's gotta do it, right?\"",
+      "name": "The Garden of Diverging Time"
+    },
+    "4": {
+      "desc": "When Remielle triggers <Term:1000034></Term>, the DMG multiplier is increased by an additional 12%. After entering the battlefield and gaining 3 special <Term:1000033></Term>s, if all <color=#FFFFFF>Voidflares</color> are consumed, she immediately gains the maximum number of special <color=#FFFFFF>Voidflares</color> again. This effect to regain special <color=#FFFFFF>Voidflares</color> is removed after being triggered once or when Remielle enters the <Term:1000035></Term> state.",
+      "desc2": "She awakens to a pale, desolate world\nA hundred years is a dream too long. Long enough for the mists to swallow the remnants of a bygone age. Long enough for pale silence to smother the lingering warmth in her memory.\nA hundred years is a dream too short. Short enough that the smile before parting still reflects in her eyes. Short enough that her fingertips still reach for a fleeting dance.\nThen she remembers a summer night. The star-filled sky they once gazed upon together. So she begins to dance alone, just as she always has.\nTurn. Pause. Reach. Fall into empty air.\nTo an old friend. To a bygone age.\nMay this lament serve as the farewell that has waited a hundred years to be spoken.\n\"Hey... Care to share a dance with me?\"",
+      "name": "The Long Goodbye"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Dusk spills over the rooftops of the world, and lights flicker on one by one. Behind every window glows the warmth of home.\nHer thin clothes do little to keep out the wind and rain. The girl once called a hero fusses over her disheveled wings.\nShe drains a cup brimming with forgetfulness, yet searing memories still burn her throat as moonlight flows across her lowered gaze.\n\"Be careful... The ghosts of the old world just might come knocking at your window.\"",
+      "name": "To Drink Forgetfulness"
+    },
+    "6": {
+      "desc": "When Remielle uses <color=#FFFFFF>Basic Attack: Rainbow's End</color> or <color=#FFFFFF>Basic Attack: Fleeting Grace</color>, <Term:1000034></Term> is triggered 2 times. If the 4th hit of her <color=#FFFFFF>Basic Attack</color> lands against a target, Remielle gains 3 special <color=#FFFFFF>Voidflares</color> after the skill ends. Special <Term:1000033></Term>s gained this way deal DMG equal to 25% of the special <color=#FFFFFF>Voidflares</color> gained upon entering the battlefield.",
+      "desc2": "The end of one journey is simply the beginning of another. Beyond every sky of stars lies yet another.\nSo, once more... just once more, spread your wings and soar.\nSilent, fallen feathers will touch the sky again,\ncrossing scars that have yet to heal, crossing the shattered yesterdays,\ntoward a tomorrow still waiting to be written.\n\"My story ends here. I believe it's your turn now, dear partner-in-crime.\"",
+      "name": "Lone Feather's Endless Flight"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

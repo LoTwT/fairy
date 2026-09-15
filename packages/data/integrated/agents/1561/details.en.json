@@ -1,0 +1,1582 @@
+{
+  "camp": {
+    "16": "Roscaelifer"
+  },
+  "elementType": {
+    "204": "Wind"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31201": {
+          "format": "{0:0}",
+          "name": "Anomaly Proficiency"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part5": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Wind DMG Bonus"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1561,
+  "locale": "en",
+  "name": "Velina",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1561015", "1561016", "1561017", "1561018", "1561019"],
+      "basic": ["1561001", "1561002", "1561003", "1561004", "1561005"],
+      "chain": ["1561013", "1561014"],
+      "dodge": ["1561011", "1561012"],
+      "special": [
+        "1561006",
+        "1561007",
+        "1561008",
+        "1561009",
+        "1561010",
+        "1561020",
+        "1561021"
+      ]
+    },
+    "parameterRowsById": {
+      "1561001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/5"
+      ],
+      "1561002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1561003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1561004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/8"
+      ],
+      "1561005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1561006": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1561007": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1561008": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1561009": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1561010": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1561011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1561012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1561013": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1561014": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1561015": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1561016": ["/skill/assist/description/4/param/0"],
+      "1561017": ["/skill/assist/description/4/param/1"],
+      "1561018": ["/skill/assist/description/4/param/2"],
+      "1561019": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1561020": ["/skill/special/description/8/param/2"],
+      "1561021": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "SEP 22",
+    "fullName": "Velina Airgid",
+    "gender": "Female",
+    "impressionF": "Velina deals with all kinds of people every day, yet she still can't get used to Nitro-Fuel... That's really surprising!",
+    "impressionM": "Belle... Even if you've figured out her weakness, don't go getting any ideas... Taking her back to the External Strategy Department that night caused a huge scene.",
+    "impressions": [
+      "Impressions of Velina:\n · Black tea and elegance go hand in hand.",
+      " · There are still things even the perfect Administrative Director struggles with.",
+      " · Can a person be both an angel and a witch?"
+    ],
+    "profileDesc": "Velina, the Administrative Director of the External Strategy Department, oversees cooperation and diplomacy between Roscaelifer and New Eridu.\n\nAs a descendant of the prestigious Airgid family, Velina inherited a strict and meticulous upbringing. Renowned for her nearly flawless efficiency and exceptional ability to keep any situation under control, she is the dependable adult whom Chief Technician Norma describes as someone capable of \"handling meetings, paperwork, and troublesome people.\"\n\nShe is sharp and efficient in her work, meticulous, and always gentle and composed when dealing with others. Beneath her elegant, effortless smile lies an intensity that is impossible to ignore. No matter how troublesome the diplomatic affair or absurd the disaster may be, Velina can resolve it with ease. However, the price of seeking her help is not always one the requester can afford.\n\nVelina has a particular fondness for all kinds of black tea and often invites friends to tea parties during her spare time.\n\nPlease note: Any tea party invitation sent by Velina in her capacity as Administrative Director should never be taken lightly. They are rarely mere leisure. More often, they serve as the perfect setting for her to negotiate situations and quietly steer events toward her desired outcome.",
+    "stature": "172",
+    "trustLv": {
+      "1": "Velina, the Administrative Director of the External Strategy Department, oversees cooperation and diplomacy between Roscaelifer and New Eridu.\n\nAs a descendant of the prestigious Airgid family, Velina inherited a strict and meticulous upbringing. Renowned for her nearly flawless efficiency and exceptional ability to keep any situation under control, she is the dependable adult whom Chief Technician Norma describes as someone capable of \"handling meetings, paperwork, and troublesome people.\"\n\nShe is sharp and efficient in her work, meticulous, and always gentle and composed when dealing with others. Beneath her elegant, effortless smile lies an intensity that is impossible to ignore. No matter how troublesome the diplomatic affair or absurd the disaster may be, Velina can resolve it with ease. However, the price of seeking her help is not always one the requester can afford.\n\nVelina has a particular fondness for all kinds of black tea and often invites friends to tea parties during her spare time.\n\nPlease note: Any tea party invitation sent by Velina in her capacity as Administrative Director should never be taken lightly. They are rarely mere leisure. More often, they serve as the perfect setting for her to negotiate situations and quietly steer events toward her desired outcome.",
+      "2": "",
+      "3": "As the governing body of the Marcel Group, the External Strategy Department is responsible for handling Bangboo retirement approvals. Because of this, Velina is known among Bangboo citizens as the legendary \"Death Witch\" — the tea party host whose very presence sends chills through their circuits.\n\nIn reality, though, Velina is none other than the \"Chief Angel\" famed throughout Bangboo society. Yet she has no issue with her infamy. The title of witch makes many Bangboo-related matters easier to handle, and rather than being worshipped as an angel, she is more comfortable acting as their quiet protector.\n\nVelina also seems unexpectedly awkward with certain aspects of daily life, particularly when it comes to raising plants or animals. She's even earned the title of \"Serial Plant Killer.\"\n\nSuggestion: Perhaps this could serve as an effective way to grow closer to her.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 3 Chapter 1",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1561501": {
+        "desc": [
+          "When Velina's initial Energy Regen exceeds 1.2, every additional 0.01 increases DMG dealt by 0.21%, up to a maximum increase of 35%, and increases Anomaly Mastery by 0.5, up to a maximum increase of 84.\nWhen Velina enters the battlefield, she gains 45 <Term:1000008>Windbloom</Term>. In Investigation Zone mode, this effect can trigger once every 180s. Using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color> or <color=#FFFFFF>EX Special Attack: Wind Shear - Triple Deathblow</color> grants 45 <color=#FFFFFF>Windbloom</color>, up to a maximum of 135 <color=#FFFFFF>Windbloom</color>. \nWhen Velina triggers <color=#FFFFFF>Vortex</color>, she gains 1 point of <Term:1000014>Windbite</Term> and summons a <Term:1000015>Condensed Cyclone</Term>, dealing <color=#A6C5FD>Wind DMG</color>. This effect can trigger once every 3s. When Velina has 2 points of <color=#FFFFFF>Windbite</color>, the next time she triggers <color=#FFFFFF>Vortex</color>, 2 points of <color=#FFFFFF>Windbite</color> are consumed to increase that <color=#FFFFFF>Vortex</color>'s DMG Multiplier by <color=#2BAD00>90%</color>. In addition, a <Term:1000016>Sweeping Cyclone</Term> is summoned instead of a <color=#FFFFFF>Condensed Cyclone</color>, which does not grant <color=#FFFFFF>Windbite</color>.\nWhen Velina's summoned <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy suffering <color=#FFFFFF>Contamination</color> for the first time, it triggers <Term:1000017>Chromatic Tint</Term>, converting it into a <color=#FFFFFF>Sweeping Cyclone</color> of the corresponding attribute, dealing the corresponding attribute's DMG. When <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy, the enemy's <color=#A6C5FD>Wind Anomaly Buildup RES</color> is reduced by 7% for 35s. Repeated triggers reset the duration. If a <color=#FFFFFF>Sweeping Cyclone</color> enhanced by <color=#FFFFFF>Chromatic Tint</color> hits an enemy, the enemy's corresponding <color=#FFFFFF>Attribute Anomaly Buildup RES</color> is also reduced by 7% for 35s. Repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweeping Cyclone</color> is defeated, the duration of that <color=#FFFFFF>Sweeping Cyclone</color> is extended by 5s. This effect can only trigger once for the same <color=#FFFFFF>Sweeping Cyclone</color>, and only one <color=#FFFFFF>Sweeping Cyclone</color> can exist at a time.\n<color=#FFFFFF>Condensed Cyclone</color> and <color=#FFFFFF>Sweeping Cyclone</color> trigger an explosion when they dissipate. If this explosion hits an enemy suffering a <color=#A6C5FD>Wind Anomaly</color>, it triggers one instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves an additional instance of Attribute Anomaly DMG, dealing a fixed <color=#2BAD00>85%</color> and <color=#2BAD00>135%</color> multiplier <color=#A6C5FD>Wind Anomaly DMG</color> respectively.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nVelina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> DMG increases by 10%. When the heavy attack from an <color=#FFFFFF>Ultimate</color> hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, it triggers an instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves one additional instance of Attribute Anomaly DMG, fixed at <color=#A6C5FD>680%</color> of <color=#A6C5FD>Wind Attribute Anomaly DMG</color>.\nFor <color=#FFFFFF>Core Passive: Breeze in Bloom</color>, the <color=#FFFFFF>Attribute Anomaly Buildup RES</color> reduction from <Term:1000016></Term> is further increased by 7%, while Daze inflicted increases by 30%, and accumulated Attribute Anomaly Buildup increases by 15%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Breeze in Bloom",
+          "Additional Ability: Tea Party Etiquette"
+        ],
+        "potential": []
+      },
+      "1561502": {
+        "desc": [
+          "When Velina's initial Energy Regen exceeds 1.2, every additional 0.01 increases DMG dealt by 0.21%, up to a maximum increase of 35%, and increases Anomaly Mastery by 0.5, up to a maximum increase of 84.\nWhen Velina enters the battlefield, she gains 45 <Term:1000008>Windbloom</Term>. In Investigation Zone mode, this effect can trigger once every 180s. Using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color> or <color=#FFFFFF>EX Special Attack: Wind Shear - Triple Deathblow</color> grants 45 <color=#FFFFFF>Windbloom</color>, up to a maximum of 135 <color=#FFFFFF>Windbloom</color>. \nWhen Velina triggers <color=#FFFFFF>Vortex</color>, she gains 1 point of <Term:1000014>Windbite</Term> and summons a <Term:1000015>Condensed Cyclone</Term>, dealing <color=#A6C5FD>Wind DMG</color>. This effect can trigger once every 3s. When Velina has 2 points of <color=#FFFFFF>Windbite</color>, the next time she triggers <color=#FFFFFF>Vortex</color>, 2 points of <color=#FFFFFF>Windbite</color> are consumed to increase that <color=#FFFFFF>Vortex</color>'s DMG Multiplier by <color=#2BAD00>100%</color>. In addition, a <Term:1000016>Sweeping Cyclone</Term> is summoned instead of a <color=#FFFFFF>Condensed Cyclone</color>, which does not grant <color=#FFFFFF>Windbite</color>.\nWhen Velina's summoned <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy suffering <color=#FFFFFF>Contamination</color> for the first time, it triggers <Term:1000017>Chromatic Tint</Term>, converting it into a <color=#FFFFFF>Sweeping Cyclone</color> of the corresponding attribute, dealing the corresponding attribute's DMG. When <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy, the enemy's <color=#A6C5FD>Wind Anomaly Buildup RES</color> is reduced by 7% for 35s. Repeated triggers reset the duration. If a <color=#FFFFFF>Sweeping Cyclone</color> enhanced by <color=#FFFFFF>Chromatic Tint</color> hits an enemy, the enemy's corresponding <color=#FFFFFF>Attribute Anomaly Buildup RES</color> is also reduced by 7% for 35s. Repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweeping Cyclone</color> is defeated, the duration of that <color=#FFFFFF>Sweeping Cyclone</color> is extended by 5s. This effect can only trigger once for the same <color=#FFFFFF>Sweeping Cyclone</color>, and only one <color=#FFFFFF>Sweeping Cyclone</color> can exist at a time.\n<color=#FFFFFF>Condensed Cyclone</color> and <color=#FFFFFF>Sweeping Cyclone</color> trigger an explosion when they dissipate. If this explosion hits an enemy suffering a <color=#A6C5FD>Wind Anomaly</color>, it triggers one instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves an additional instance of Attribute Anomaly DMG, dealing a fixed <color=#2BAD00>95%</color> and <color=#2BAD00>155%</color> multiplier <color=#A6C5FD>Wind Anomaly DMG</color> respectively.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nVelina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> DMG increases by 10%. When the heavy attack from an <color=#FFFFFF>Ultimate</color> hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, it triggers an instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves one additional instance of Attribute Anomaly DMG, fixed at <color=#A6C5FD>680%</color> of <color=#A6C5FD>Wind Attribute Anomaly DMG</color>.\nFor <color=#FFFFFF>Core Passive: Breeze in Bloom</color>, the <color=#FFFFFF>Attribute Anomaly Buildup RES</color> reduction from <Term:1000016></Term> is further increased by 7%, while Daze inflicted increases by 30%, and accumulated Attribute Anomaly Buildup increases by 15%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Breeze in Bloom",
+          "Additional Ability: Tea Party Etiquette"
+        ],
+        "potential": []
+      },
+      "1561503": {
+        "desc": [
+          "When Velina's initial Energy Regen exceeds 1.2, every additional 0.01 increases DMG dealt by 0.21%, up to a maximum increase of 35%, and increases Anomaly Mastery by 0.5, up to a maximum increase of 84.\nWhen Velina enters the battlefield, she gains 45 <Term:1000008>Windbloom</Term>. In Investigation Zone mode, this effect can trigger once every 180s. Using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color> or <color=#FFFFFF>EX Special Attack: Wind Shear - Triple Deathblow</color> grants 45 <color=#FFFFFF>Windbloom</color>, up to a maximum of 135 <color=#FFFFFF>Windbloom</color>. \nWhen Velina triggers <color=#FFFFFF>Vortex</color>, she gains 1 point of <Term:1000014>Windbite</Term> and summons a <Term:1000015>Condensed Cyclone</Term>, dealing <color=#A6C5FD>Wind DMG</color>. This effect can trigger once every 3s. When Velina has 2 points of <color=#FFFFFF>Windbite</color>, the next time she triggers <color=#FFFFFF>Vortex</color>, 2 points of <color=#FFFFFF>Windbite</color> are consumed to increase that <color=#FFFFFF>Vortex</color>'s DMG Multiplier by <color=#2BAD00>110%</color>. In addition, a <Term:1000016>Sweeping Cyclone</Term> is summoned instead of a <color=#FFFFFF>Condensed Cyclone</color>, which does not grant <color=#FFFFFF>Windbite</color>.\nWhen Velina's summoned <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy suffering <color=#FFFFFF>Contamination</color> for the first time, it triggers <Term:1000017>Chromatic Tint</Term>, converting it into a <color=#FFFFFF>Sweeping Cyclone</color> of the corresponding attribute, dealing the corresponding attribute's DMG. When <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy, the enemy's <color=#A6C5FD>Wind Anomaly Buildup RES</color> is reduced by 7% for 35s. Repeated triggers reset the duration. If a <color=#FFFFFF>Sweeping Cyclone</color> enhanced by <color=#FFFFFF>Chromatic Tint</color> hits an enemy, the enemy's corresponding <color=#FFFFFF>Attribute Anomaly Buildup RES</color> is also reduced by 7% for 35s. Repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweeping Cyclone</color> is defeated, the duration of that <color=#FFFFFF>Sweeping Cyclone</color> is extended by 5s. This effect can only trigger once for the same <color=#FFFFFF>Sweeping Cyclone</color>, and only one <color=#FFFFFF>Sweeping Cyclone</color> can exist at a time.\n<color=#FFFFFF>Condensed Cyclone</color> and <color=#FFFFFF>Sweeping Cyclone</color> trigger an explosion when they dissipate. If this explosion hits an enemy suffering a <color=#A6C5FD>Wind Anomaly</color>, it triggers one instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves an additional instance of Attribute Anomaly DMG, dealing a fixed <color=#2BAD00>105%</color> and <color=#2BAD00>175%</color> multiplier <color=#A6C5FD>Wind Anomaly DMG</color> respectively.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nVelina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> DMG increases by 10%. When the heavy attack from an <color=#FFFFFF>Ultimate</color> hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, it triggers an instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves one additional instance of Attribute Anomaly DMG, fixed at <color=#A6C5FD>680%</color> of <color=#A6C5FD>Wind Attribute Anomaly DMG</color>.\nFor <color=#FFFFFF>Core Passive: Breeze in Bloom</color>, the <color=#FFFFFF>Attribute Anomaly Buildup RES</color> reduction from <Term:1000016></Term> is further increased by 7%, while Daze inflicted increases by 30%, and accumulated Attribute Anomaly Buildup increases by 15%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Breeze in Bloom",
+          "Additional Ability: Tea Party Etiquette"
+        ],
+        "potential": []
+      },
+      "1561504": {
+        "desc": [
+          "When Velina's initial Energy Regen exceeds 1.2, every additional 0.01 increases DMG dealt by 0.21%, up to a maximum increase of 35%, and increases Anomaly Mastery by 0.5, up to a maximum increase of 84.\nWhen Velina enters the battlefield, she gains 45 <Term:1000008>Windbloom</Term>. In Investigation Zone mode, this effect can trigger once every 180s. Using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color> or <color=#FFFFFF>EX Special Attack: Wind Shear - Triple Deathblow</color> grants 45 <color=#FFFFFF>Windbloom</color>, up to a maximum of 135 <color=#FFFFFF>Windbloom</color>. \nWhen Velina triggers <color=#FFFFFF>Vortex</color>, she gains 1 point of <Term:1000014>Windbite</Term> and summons a <Term:1000015>Condensed Cyclone</Term>, dealing <color=#A6C5FD>Wind DMG</color>. This effect can trigger once every 3s. When Velina has 2 points of <color=#FFFFFF>Windbite</color>, the next time she triggers <color=#FFFFFF>Vortex</color>, 2 points of <color=#FFFFFF>Windbite</color> are consumed to increase that <color=#FFFFFF>Vortex</color>'s DMG Multiplier by <color=#2BAD00>120%</color>. In addition, a <Term:1000016>Sweeping Cyclone</Term> is summoned instead of a <color=#FFFFFF>Condensed Cyclone</color>, which does not grant <color=#FFFFFF>Windbite</color>.\nWhen Velina's summoned <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy suffering <color=#FFFFFF>Contamination</color> for the first time, it triggers <Term:1000017>Chromatic Tint</Term>, converting it into a <color=#FFFFFF>Sweeping Cyclone</color> of the corresponding attribute, dealing the corresponding attribute's DMG. When <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy, the enemy's <color=#A6C5FD>Wind Anomaly Buildup RES</color> is reduced by 7% for 35s. Repeated triggers reset the duration. If a <color=#FFFFFF>Sweeping Cyclone</color> enhanced by <color=#FFFFFF>Chromatic Tint</color> hits an enemy, the enemy's corresponding <color=#FFFFFF>Attribute Anomaly Buildup RES</color> is also reduced by 7% for 35s. Repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweeping Cyclone</color> is defeated, the duration of that <color=#FFFFFF>Sweeping Cyclone</color> is extended by 5s. This effect can only trigger once for the same <color=#FFFFFF>Sweeping Cyclone</color>, and only one <color=#FFFFFF>Sweeping Cyclone</color> can exist at a time.\n<color=#FFFFFF>Condensed Cyclone</color> and <color=#FFFFFF>Sweeping Cyclone</color> trigger an explosion when they dissipate. If this explosion hits an enemy suffering a <color=#A6C5FD>Wind Anomaly</color>, it triggers one instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves an additional instance of Attribute Anomaly DMG, dealing a fixed <color=#2BAD00>115%</color> and <color=#2BAD00>195%</color> multiplier <color=#A6C5FD>Wind Anomaly DMG</color> respectively.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nVelina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> DMG increases by 10%. When the heavy attack from an <color=#FFFFFF>Ultimate</color> hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, it triggers an instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves one additional instance of Attribute Anomaly DMG, fixed at <color=#A6C5FD>680%</color> of <color=#A6C5FD>Wind Attribute Anomaly DMG</color>.\nFor <color=#FFFFFF>Core Passive: Breeze in Bloom</color>, the <color=#FFFFFF>Attribute Anomaly Buildup RES</color> reduction from <Term:1000016></Term> is further increased by 7%, while Daze inflicted increases by 30%, and accumulated Attribute Anomaly Buildup increases by 15%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Breeze in Bloom",
+          "Additional Ability: Tea Party Etiquette"
+        ],
+        "potential": []
+      },
+      "1561505": {
+        "desc": [
+          "When Velina's initial Energy Regen exceeds 1.2, every additional 0.01 increases DMG dealt by 0.21%, up to a maximum increase of 35%, and increases Anomaly Mastery by 0.5, up to a maximum increase of 84.\nWhen Velina enters the battlefield, she gains 45 <Term:1000008>Windbloom</Term>. In Investigation Zone mode, this effect can trigger once every 180s. Using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color> or <color=#FFFFFF>EX Special Attack: Wind Shear - Triple Deathblow</color> grants 45 <color=#FFFFFF>Windbloom</color>, up to a maximum of 135 <color=#FFFFFF>Windbloom</color>. \nWhen Velina triggers <color=#FFFFFF>Vortex</color>, she gains 1 point of <Term:1000014>Windbite</Term> and summons a <Term:1000015>Condensed Cyclone</Term>, dealing <color=#A6C5FD>Wind DMG</color>. This effect can trigger once every 3s. When Velina has 2 points of <color=#FFFFFF>Windbite</color>, the next time she triggers <color=#FFFFFF>Vortex</color>, 2 points of <color=#FFFFFF>Windbite</color> are consumed to increase that <color=#FFFFFF>Vortex</color>'s DMG Multiplier by <color=#2BAD00>130%</color>. In addition, a <Term:1000016>Sweeping Cyclone</Term> is summoned instead of a <color=#FFFFFF>Condensed Cyclone</color>, which does not grant <color=#FFFFFF>Windbite</color>.\nWhen Velina's summoned <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy suffering <color=#FFFFFF>Contamination</color> for the first time, it triggers <Term:1000017>Chromatic Tint</Term>, converting it into a <color=#FFFFFF>Sweeping Cyclone</color> of the corresponding attribute, dealing the corresponding attribute's DMG. When <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy, the enemy's <color=#A6C5FD>Wind Anomaly Buildup RES</color> is reduced by 7% for 35s. Repeated triggers reset the duration. If a <color=#FFFFFF>Sweeping Cyclone</color> enhanced by <color=#FFFFFF>Chromatic Tint</color> hits an enemy, the enemy's corresponding <color=#FFFFFF>Attribute Anomaly Buildup RES</color> is also reduced by 7% for 35s. Repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweeping Cyclone</color> is defeated, the duration of that <color=#FFFFFF>Sweeping Cyclone</color> is extended by 5s. This effect can only trigger once for the same <color=#FFFFFF>Sweeping Cyclone</color>, and only one <color=#FFFFFF>Sweeping Cyclone</color> can exist at a time.\n<color=#FFFFFF>Condensed Cyclone</color> and <color=#FFFFFF>Sweeping Cyclone</color> trigger an explosion when they dissipate. If this explosion hits an enemy suffering a <color=#A6C5FD>Wind Anomaly</color>, it triggers one instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves an additional instance of Attribute Anomaly DMG, dealing a fixed <color=#2BAD00>125%</color> and <color=#2BAD00>215%</color> multiplier <color=#A6C5FD>Wind Anomaly DMG</color> respectively.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nVelina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> DMG increases by 10%. When the heavy attack from an <color=#FFFFFF>Ultimate</color> hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, it triggers an instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves one additional instance of Attribute Anomaly DMG, fixed at <color=#A6C5FD>680%</color> of <color=#A6C5FD>Wind Attribute Anomaly DMG</color>.\nFor <color=#FFFFFF>Core Passive: Breeze in Bloom</color>, the <color=#FFFFFF>Attribute Anomaly Buildup RES</color> reduction from <Term:1000016></Term> is further increased by 7%, while Daze inflicted increases by 30%, and accumulated Attribute Anomaly Buildup increases by 15%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Breeze in Bloom",
+          "Additional Ability: Tea Party Etiquette"
+        ],
+        "potential": []
+      },
+      "1561506": {
+        "desc": [
+          "When Velina's initial Energy Regen exceeds 1.2, every additional 0.01 increases DMG dealt by 0.21%, up to a maximum increase of 35%, and increases Anomaly Mastery by 0.5, up to a maximum increase of 84.\nWhen Velina enters the battlefield, she gains 45 <Term:1000008>Windbloom</Term>. In Investigation Zone mode, this effect can trigger once every 180s. Using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color> or <color=#FFFFFF>EX Special Attack: Wind Shear - Triple Deathblow</color> grants 45 <color=#FFFFFF>Windbloom</color>, up to a maximum of 135 <color=#FFFFFF>Windbloom</color>. \nWhen Velina triggers <color=#FFFFFF>Vortex</color>, she gains 1 point of <Term:1000014>Windbite</Term> and summons a <Term:1000015>Condensed Cyclone</Term>, dealing <color=#A6C5FD>Wind DMG</color>. This effect can trigger once every 3s. When Velina has 2 points of <color=#FFFFFF>Windbite</color>, the next time she triggers <color=#FFFFFF>Vortex</color>, 2 points of <color=#FFFFFF>Windbite</color> are consumed to increase that <color=#FFFFFF>Vortex</color>'s DMG Multiplier by <color=#2BAD00>140%</color>. In addition, a <Term:1000016>Sweeping Cyclone</Term> is summoned instead of a <color=#FFFFFF>Condensed Cyclone</color>, which does not grant <color=#FFFFFF>Windbite</color>.\nWhen Velina's summoned <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy suffering <color=#FFFFFF>Contamination</color> for the first time, it triggers <Term:1000017>Chromatic Tint</Term>, converting it into a <color=#FFFFFF>Sweeping Cyclone</color> of the corresponding attribute, dealing the corresponding attribute's DMG. When <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy, the enemy's <color=#A6C5FD>Wind Anomaly Buildup RES</color> is reduced by 7% for 35s. Repeated triggers reset the duration. If a <color=#FFFFFF>Sweeping Cyclone</color> enhanced by <color=#FFFFFF>Chromatic Tint</color> hits an enemy, the enemy's corresponding <color=#FFFFFF>Attribute Anomaly Buildup RES</color> is also reduced by 7% for 35s. Repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweeping Cyclone</color> is defeated, the duration of that <color=#FFFFFF>Sweeping Cyclone</color> is extended by 5s. This effect can only trigger once for the same <color=#FFFFFF>Sweeping Cyclone</color>, and only one <color=#FFFFFF>Sweeping Cyclone</color> can exist at a time.\n<color=#FFFFFF>Condensed Cyclone</color> and <color=#FFFFFF>Sweeping Cyclone</color> trigger an explosion when they dissipate. If this explosion hits an enemy suffering a <color=#A6C5FD>Wind Anomaly</color>, it triggers one instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves an additional instance of Attribute Anomaly DMG, dealing a fixed <color=#2BAD00>135%</color> and <color=#2BAD00>235%</color> multiplier <color=#A6C5FD>Wind Anomaly DMG</color> respectively.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nVelina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> DMG increases by 10%. When the heavy attack from an <color=#FFFFFF>Ultimate</color> hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, it triggers an instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves one additional instance of Attribute Anomaly DMG, fixed at <color=#A6C5FD>680%</color> of <color=#A6C5FD>Wind Attribute Anomaly DMG</color>.\nFor <color=#FFFFFF>Core Passive: Breeze in Bloom</color>, the <color=#FFFFFF>Attribute Anomaly Buildup RES</color> reduction from <Term:1000016></Term> is further increased by 7%, while Daze inflicted increases by 30%, and accumulated Attribute Anomaly Buildup increases by 15%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Breeze in Bloom",
+          "Additional Ability: Tea Party Etiquette"
+        ],
+        "potential": []
+      },
+      "1561507": {
+        "desc": [
+          "When Velina's initial Energy Regen exceeds 1.2, every additional 0.01 increases DMG dealt by 0.21%, up to a maximum increase of 35%, and increases Anomaly Mastery by 0.5, up to a maximum increase of 84.\nWhen Velina enters the battlefield, she gains 45 <Term:1000008>Windbloom</Term>. In Investigation Zone mode, this effect can trigger once every 180s. Using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color> or <color=#FFFFFF>EX Special Attack: Wind Shear - Triple Deathblow</color> grants 45 <color=#FFFFFF>Windbloom</color>, up to a maximum of 135 <color=#FFFFFF>Windbloom</color>. \nWhen Velina triggers <color=#FFFFFF>Vortex</color>, she gains 1 point of <Term:1000014>Windbite</Term> and summons a <Term:1000015>Condensed Cyclone</Term>, dealing <color=#A6C5FD>Wind DMG</color>. This effect can trigger once every 3s. When Velina has 2 points of <color=#FFFFFF>Windbite</color>, the next time she triggers <color=#FFFFFF>Vortex</color>, 2 points of <color=#FFFFFF>Windbite</color> are consumed to increase that <color=#FFFFFF>Vortex</color>'s DMG Multiplier by <color=#2BAD00>150%</color>. In addition, a <Term:1000016>Sweeping Cyclone</Term> is summoned instead of a <color=#FFFFFF>Condensed Cyclone</color>, which does not grant <color=#FFFFFF>Windbite</color>.\nWhen Velina's summoned <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy suffering <color=#FFFFFF>Contamination</color> for the first time, it triggers <Term:1000017>Chromatic Tint</Term>, converting it into a <color=#FFFFFF>Sweeping Cyclone</color> of the corresponding attribute, dealing the corresponding attribute's DMG. When <color=#FFFFFF>Sweeping Cyclone</color> hits an enemy, the enemy's <color=#A6C5FD>Wind Anomaly Buildup RES</color> is reduced by 7% for 35s. Repeated triggers reset the duration. If a <color=#FFFFFF>Sweeping Cyclone</color> enhanced by <color=#FFFFFF>Chromatic Tint</color> hits an enemy, the enemy's corresponding <color=#FFFFFF>Attribute Anomaly Buildup RES</color> is also reduced by 7% for 35s. Repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweeping Cyclone</color> is defeated, the duration of that <color=#FFFFFF>Sweeping Cyclone</color> is extended by 5s. This effect can only trigger once for the same <color=#FFFFFF>Sweeping Cyclone</color>, and only one <color=#FFFFFF>Sweeping Cyclone</color> can exist at a time.\n<color=#FFFFFF>Condensed Cyclone</color> and <color=#FFFFFF>Sweeping Cyclone</color> trigger an explosion when they dissipate. If this explosion hits an enemy suffering a <color=#A6C5FD>Wind Anomaly</color>, it triggers one instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves an additional instance of Attribute Anomaly DMG, dealing a fixed <color=#2BAD00>145%</color> and <color=#2BAD00>255%</color> multiplier <color=#A6C5FD>Wind Anomaly DMG</color> respectively.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nVelina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> DMG increases by 10%. When the heavy attack from an <color=#FFFFFF>Ultimate</color> hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, it triggers an instance of <color=#FFFFFF>Abloom</color> DMG against the target: resolves one additional instance of Attribute Anomaly DMG, fixed at <color=#A6C5FD>680%</color> of <color=#A6C5FD>Wind Attribute Anomaly DMG</color>.\nFor <color=#FFFFFF>Core Passive: Breeze in Bloom</color>, the <color=#FFFFFF>Attribute Anomaly Buildup RES</color> reduction from <Term:1000016></Term> is further increased by 7%, while Daze inflicted increases by 30%, and accumulated Attribute Anomaly Buildup increases by 15%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Breeze in Bloom",
+          "Additional Ability: Tea Party Etiquette"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nUnleashes consecutive attacks against the target, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Emergency Protocol",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Judicious Intervention",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nUnleashes a series of attacks, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Negotiation Techniques",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Emergency Protocol",
+          "param": [
+            {
+              "desc": "{Skill:1561015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561015": {
+                  "attackData": [],
+                  "attributeInfliction": 7834,
+                  "damagePercentage": 20380,
+                  "damagePercentageGrowth": 1860,
+                  "etherPurify": 7835,
+                  "feverRecovery": 215600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1860,
+                  "main": 20380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8620,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561015": {
+                  "attackData": [],
+                  "attributeInfliction": 7834,
+                  "damagePercentage": 20380,
+                  "damagePercentageGrowth": 1860,
+                  "etherPurify": 7835,
+                  "feverRecovery": 215600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8620,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Judicious Intervention",
+          "param": [
+            {
+              "desc": "{Skill:1561016, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1561016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561017, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1561017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561018, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1561018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Negotiation Techniques",
+          "param": [
+            {
+              "desc": "{Skill:1561019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561019": {
+                  "attackData": [],
+                  "attributeInfliction": 38517,
+                  "damagePercentage": 53270,
+                  "damagePercentageGrowth": 4850,
+                  "etherPurify": 21330,
+                  "feverRecovery": 883300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4850,
+                  "main": 53270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39670,
+                  "stunRatioGrowth": 1810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561019": {
+                  "attackData": [],
+                  "attributeInfliction": 38517,
+                  "damagePercentage": 53270,
+                  "damagePercentageGrowth": 4850,
+                  "etherPurify": 21330,
+                  "feverRecovery": 883300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1810,
+                  "main": 39670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39670,
+                  "stunRatioGrowth": 1810
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunches up to five attacks against enemies ahead, dealing <color=#A6C5FD>Wind DMG</color>.\nDuring the 5th attack, Velina's Anti-Interrupt Level increases, and DMG taken is reduced by 40%.",
+          "name": "Basic Attack: Dancing Fans",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Dancing Fans",
+          "param": [
+            {
+              "desc": "{Skill:1561001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1561001": {
+                  "attackData": [],
+                  "attributeInfliction": 1708,
+                  "damagePercentage": 5170,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 3867,
+                  "feverRecovery": 106425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 5170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2360,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1561002": {
+                  "attackData": [],
+                  "attributeInfliction": 1788,
+                  "damagePercentage": 4890,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3501,
+                  "feverRecovery": 96525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 4890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2350,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1561003": {
+                  "attackData": [],
+                  "attributeInfliction": 6180,
+                  "damagePercentage": 16910,
+                  "damagePercentageGrowth": 1540,
+                  "etherPurify": 11837,
+                  "feverRecovery": 325600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1540,
+                  "main": 16910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8050,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1561004": {
+                  "attackData": [],
+                  "attributeInfliction": 5013,
+                  "damagePercentage": 12560,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 8512,
+                  "feverRecovery": 204875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 12560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6290,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1561005": {
+                  "attackData": [],
+                  "attributeInfliction": 6316,
+                  "damagePercentage": 22960,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 15126,
+                  "feverRecovery": 375925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2090,
+                  "main": 22960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11270,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1561001": {
+                  "attackData": [],
+                  "attributeInfliction": 1708,
+                  "damagePercentage": 5170,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 3867,
+                  "feverRecovery": 106425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2360,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1561002": {
+                  "attackData": [],
+                  "attributeInfliction": 1788,
+                  "damagePercentage": 4890,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3501,
+                  "feverRecovery": 96525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2350,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1561003": {
+                  "attackData": [],
+                  "attributeInfliction": 6180,
+                  "damagePercentage": 16910,
+                  "damagePercentageGrowth": 1540,
+                  "etherPurify": 11837,
+                  "feverRecovery": 325600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 8050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8050,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1561004": {
+                  "attackData": [],
+                  "attributeInfliction": 5013,
+                  "damagePercentage": 12560,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 8512,
+                  "feverRecovery": 204875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6290,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1561005": {
+                  "attackData": [],
+                  "attributeInfliction": 6316,
+                  "damagePercentage": 22960,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 15126,
+                  "feverRecovery": 375925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 11270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11270,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nTransforms into a hurricane to unleash multiple attacks against enemies, followed by a Finishing Move, dealing massive <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Thousandfold Spiral",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes multiple attacks against enemies ahead, dealing massive <color=#A6C5FD>Wind DMG</color>.\nAfter using this skill, the previous character's <color=#FFFFFF>Quick Assist</color> is triggered.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Heed the Tempest",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Thousandfold Spiral",
+          "param": [
+            {
+              "desc": "{Skill:1561013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561013": {
+                  "attackData": [],
+                  "attributeInfliction": 41616,
+                  "damagePercentage": 80040,
+                  "damagePercentageGrowth": 7280,
+                  "etherPurify": 21667,
+                  "feverRecovery": 2424675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7280,
+                  "main": 80040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561013": {
+                  "attackData": [],
+                  "attributeInfliction": 41616,
+                  "damagePercentage": 80040,
+                  "damagePercentageGrowth": 7280,
+                  "etherPurify": 21667,
+                  "feverRecovery": 2424675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1090,
+                  "main": 23840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Heed the Tempest",
+          "param": [
+            {
+              "desc": "{Skill:1561014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561014": {
+                  "attackData": [],
+                  "attributeInfliction": 114862,
+                  "damagePercentage": 218830,
+                  "damagePercentageGrowth": 19900,
+                  "etherPurify": 84664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 19900,
+                  "main": 218830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38130,
+                  "stunRatioGrowth": 1740
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561014": {
+                  "attackData": [],
+                  "attributeInfliction": 114862,
+                  "damagePercentage": 218830,
+                  "damagePercentageGrowth": 19900,
+                  "etherPurify": 84664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1740,
+                  "main": 38130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 38130,
+                  "stunRatioGrowth": 1740
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Windward Sweep",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nDelivers a quick attack forward, dealing <color=#A6C5FD>Wind DMG</color>.",
+          "name": "Dash Attack: Gale Step",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nLaunches a series of attacks on the target, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Cloudrend",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Gale Step",
+          "param": [
+            {
+              "desc": "{Skill:1561011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561011": {
+                  "attackData": [],
+                  "attributeInfliction": 3833,
+                  "damagePercentage": 9970,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 3834,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 9970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561011": {
+                  "attackData": [],
+                  "attributeInfliction": 3833,
+                  "damagePercentage": 9970,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 3834,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Cloudrend",
+          "param": [
+            {
+              "desc": "{Skill:1561012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561012": {
+                  "attackData": [],
+                  "attributeInfliction": 15669,
+                  "damagePercentage": 39490,
+                  "damagePercentageGrowth": 3590,
+                  "etherPurify": 30670,
+                  "feverRecovery": 430925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3590,
+                  "main": 39490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 56420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28240,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561012": {
+                  "attackData": [],
+                  "attributeInfliction": 15669,
+                  "damagePercentage": 39490,
+                  "damagePercentageGrowth": 3590,
+                  "etherPurify": 30670,
+                  "feverRecovery": 430925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1290,
+                  "main": 28240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 56420,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28240,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nUnleashes a sweeping gust forward, dealing <color=#A6C5FD>Wind DMG</color>.",
+          "name": "Special Attack: Wind Shear - Purging Surge",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nDodges backward, then unleashes a massive wind blast to attack enemies, dealing <color=#A6C5FD>Wind DMG</color>.\nDuring the backward dodge, a dodge effect is active. Successfully dodging an enemy attack triggers <color=#FFFFFF>Vital View</color>.\nAfter using this skill, press <IconMap:Icon_Normal> to chain into the 5th hit of the <color=#FFFFFF>Basic Attack</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Wind Shear - Purifying Rise",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy and after using <color=#FFFFFF>EX Special Attack: Wind Shear - Purifying Rise</color>, press or hold <IconMap:Icon_SpecialReady> to activate:\nContinuously swings the fan, dealing <color=#A6C5FD>Wind DMG</color>.\nAfter using this skill, press <IconMap:Icon_Normal> to chain into the 5th hit of the <color=#FFFFFF>Basic Attack</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Wind Shear - Triple Deathblow",
+          "potential": []
+        },
+        {
+          "desc": "With 90 or more <Term:1000008></Term>, hold <IconMap:Icon_Special> or <IconMap:Icon_Normal> to activate:\nVelina channels a whirlwind and summons a <Term:1000016></Term> to continuously attack enemies and triggers the previous character's <color=#FFFFFF>Quick Assist</color>.\n<color=#FFFFFF>Sweeping Cyclone</color> lasts for 5s and deals <color=#A6C5FD>Wind DMG</color> to nearby enemies once every 0.5s.",
+          "name": "EX Special Attack: Wind Shear - Eye of the Storm",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Wind Shear - Purging Surge",
+          "param": [
+            {
+              "desc": "{Skill:1561008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561008": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561008": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Wind Shear - Purifying Rise",
+          "param": [
+            {
+              "desc": "{Skill:1561009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561009": {
+                  "attackData": [],
+                  "attributeInfliction": 30689,
+                  "damagePercentage": 44050,
+                  "damagePercentageGrowth": 4010,
+                  "etherPurify": 8331,
+                  "feverRecovery": 775500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4010,
+                  "main": 44050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30250,
+                  "stunRatioGrowth": 1380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561009": {
+                  "attackData": [],
+                  "attributeInfliction": 30689,
+                  "damagePercentage": 44050,
+                  "damagePercentageGrowth": 4010,
+                  "etherPurify": 8331,
+                  "feverRecovery": 775500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1380,
+                  "main": 30250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30250,
+                  "stunRatioGrowth": 1380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "45",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Wind Shear - Triple Deathblow",
+          "param": [
+            {
+              "desc": "{Skill:1561010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561010": {
+                  "attackData": [],
+                  "attributeInfliction": 51305,
+                  "damagePercentage": 72520,
+                  "damagePercentageGrowth": 6600,
+                  "etherPurify": 20000,
+                  "feverRecovery": 1246025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6600,
+                  "main": 72520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51520,
+                  "stunRatioGrowth": 2350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561010": {
+                  "attackData": [],
+                  "attributeInfliction": 51305,
+                  "damagePercentage": 72520,
+                  "damagePercentageGrowth": 6600,
+                  "etherPurify": 20000,
+                  "feverRecovery": 1246025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2350,
+                  "main": 51520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51520,
+                  "stunRatioGrowth": 2350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "45",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Wind Shear - Eye of the Storm",
+          "param": [
+            {
+              "desc": "{Skill:1561006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561006": {
+                  "attackData": [],
+                  "attributeInfliction": 16666,
+                  "damagePercentage": 21670,
+                  "damagePercentageGrowth": 1970,
+                  "etherPurify": 16667,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1970,
+                  "main": 21670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18340,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561006": {
+                  "attackData": [],
+                  "attributeInfliction": 16666,
+                  "damagePercentage": 21670,
+                  "damagePercentageGrowth": 1970,
+                  "etherPurify": 16667,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 18340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18340,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "90",
+              "name": "Windbloom Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Sweeping Cyclone",
+          "param": [
+            {
+              "desc": "{Skill:1561007, Prop:1001}",
+              "name": "Sweeping Cyclone Wind Attribute Single-Hit DMG Multiplier",
+              "param": {
+                "1561007": {
+                  "attackData": [],
+                  "attributeInfliction": 4500,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8250,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561007, Prop:1002}",
+              "name": "Sweeping Cyclone Wind Attribute Single-Hit Daze Multiplier",
+              "param": {
+                "1561007": {
+                  "attackData": [],
+                  "attributeInfliction": 4500,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8250,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1561020, Prop:1001}*0.2}",
+              "name": "Sweeping Cyclone Attribute-Converted Single-Hit DMG Multiplier",
+              "param": {
+                "1561020": {
+                  "attackData": [],
+                  "attributeInfliction": 11250,
+                  "damagePercentage": 9750,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 9750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Condensed Cyclone",
+          "param": [
+            {
+              "desc": "{Skill:1561021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1561021": {
+                  "attackData": [],
+                  "attributeInfliction": 5625,
+                  "damagePercentage": 3250,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 3250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1561021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1561021": {
+                  "attackData": [],
+                  "attributeInfliction": 5625,
+                  "damagePercentage": 3250,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1561001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Dancing Fans"
+    },
+    "1561002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Wind Shear - Purging Surge"
+    },
+    "1561003": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Wind Shear - Purifying Rise"
+    },
+    "1561004": {
+      "desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady> or <IconMap:Icon_SpecialReady> (Hold)",
+      "name": "EX Special Attack: Wind Shear - Triple Deathblow"
+    },
+    "1561005": {
+      "desc": "<IconMap:Icon_Special> (Hold) or <IconMap:Icon_Normal> (Hold)",
+      "name": "EX Special Attack: Wind Shear - Eye of the Storm"
+    },
+    "1561006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Gale Step"
+    },
+    "1561007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Cloudrend"
+    },
+    "1561008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Thousandfold Spiral"
+    },
+    "1561009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Heed the Tempest"
+    },
+    "1561010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Emergency Protocol"
+    },
+    "1561011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Judicious Intervention"
+    },
+    "1561012": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Negotiation Techniques"
+    }
+  },
+  "skin": {
+    "3115610": {
+      "desc": "Some busybodies claim the Administrative Director rejected the External Strategy Department's official uniform to show off her prestigious upbringing, but Velina has always had little interest in lavish fashion. Rather than the elaborate glamour of ceremonial wear, she favors simple clothing: sharp, proper, and suited to dealing with never-ending administrative work.",
+      "name": "Velina: Elegant Silver Cascade"
+    },
+    "3115611": {
+      "desc": "Outside of work, Velina occasionally invites close friends to afternoon tea parties. During such moments, she changes into relatively casual attire to enjoy her free time... though to the Bangboo, it's merely the Grim Reaper in a different terrifying disguise.",
+      "name": "Velina: Shade of Leisure"
+    }
+  },
+  "specialElementType": {},
+  "strategy": {},
+  "talent": {
+    "1": {
+      "desc": "<color=#FFFFFF>Sweeping Cyclone</color> from <color=#FFFFFF>Additional Ability: Tea Party Etiquette</color> deals an additional 20% Daze. When Velina triggers <color=#FFFFFF>Vortex</color>, she ignores 20% of the target's <color=#FFFFFF>All-Attribute RES</color>. When squad members deal <color=#A6C5FD>Windswept</color> DMG, 20% of the target's <color=#A6C5FD>Wind RES</color> is ignored.",
+      "desc2": "Every word and gesture is placed precisely where it belongs.\nBefore the other party even realizes it, they willingly accept the boundaries, rhythm, and outcome she has arranged—\n\"Elegance is simply the most natural expression of order in motion.\"",
+      "name": "Orderly Elegance"
+    },
+    "2": {
+      "desc": "When Velina triggers <color=#A6C5FD>Windswept</color>, she can also gain 1 point of <color=#FFFFFF>Windbite</color>. This effect can trigger once every 5s. After <color=#FFFFFF>Sweeping Cyclone</color> triggers the <color=#FFFFFF>Chromatic Tint</color> effect, it can accumulate the corresponding attribute's Anomaly Buildup. The buildup accumulated by this attack is excluded from Anomaly DMG calculations. The DMG increase effects of Velina's <color=#A6C5FD>Windswept</color> and <color=#FFFFFF>Vortex</color> from <color=#FFFFFF>Additional Ability: Tea Party Etiquette</color> are further increased by 15%.",
+      "desc2": "She anticipates every possibility, accounts for every variable, and makes backup plans for things going wrong.\nShe never relies on chance. Every ending is calculated.\nEven if the situation veers off course for a moment, it only leads onto another path she has already prepared for.\n\"Sigh, so it's come to this... Good thing I'm not entirely unprepared.\"",
+      "name": "Saturation Project"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "No need to force submission through strength, nor rely on emotion or intimidation.\nA graceful response and a carefully measured compromise are enough...\nBefore anyone realizes it, the situation has already been steered toward destined conquest.\n\"Is etiquette simply violence in disguise?\"\n\"Or is etiquette the more refined form of violence?\"",
+      "name": "Conquest by Etiquette"
+    },
+    "4": {
+      "desc": "When Velina uses an <color=#FFFFFF>EX Special Attack</color>, her ATK increases by 15% for 40s. Repeated triggers reset the duration.",
+      "desc2": "In the midst of laughter and conversation, the scales have already tipped.\nThe tea has yet to go cold, yet the verdict is already sold.\n\"If something's bothering me, I'll simply deal with it and move on. And if someone's bothering me, heh...\"",
+      "name": "Tea Party Tribunal"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"Her footsteps herald judgment!\"\n\"Her invitation is your funeral!\"\nThe silver-haired witch sits calmly beneath the theater of the Bangboo Kingdom, listening to the tiny performers hurl accusations at her with absolute conviction. She gently waves her ornate fan, smiling without a word.",
+      "name": "Death Witch"
+    },
+    "6": {
+      "desc": "When Velina consumes 2 points of <color=#FFFFFF>Windbite</color> to increase the DMG Multiplier of <color=#FFFFFF>Vortex</color>, she gains 1 point of <color=#FFFFFF>Windbite</color>. This effect can trigger once every 6s. When Velina hits an enemy suffering a <color=#A6C5FD>Wind Attribute Anomaly</color>, the <color=#A6C5FD>Wind Attribute Anomaly Buildup</color> she inflicts increases by 20%. When Velina inflicts <color=#A6C5FD>Windswept</color> on an enemy already affected by <color=#A6C5FD>Windswept</color>, the new <color=#A6C5FD>Windswept</color>'s DMG increases based on the remaining duration of the previous. Each remaining second increases the DMG by 2.5%, up to a maximum increase of 40%.",
+      "desc2": "\"There is no need to ask an angel's name. She hides within rumors, behind reprimands, and within the fearful letters requesting aid you deliver with shaking hands.\"",
+      "name": "Chief Angel"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

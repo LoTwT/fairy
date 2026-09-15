@@ -1,0 +1,1605 @@
+{
+  "camp": {
+    "11": "Spook Shack"
+  },
+  "elementType": {
+    "200": "Physical"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Physical DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Anomaly Mastery"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1401,
+  "locale": "en",
+  "name": "Alice",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1401017", "1401018", "1401019", "1401020", "1401021"],
+      "basic": [
+        "1401001",
+        "1401002",
+        "1401003",
+        "1401004",
+        "1401005",
+        "1401006",
+        "1401010",
+        "1401011",
+        "1401012"
+      ],
+      "chain": ["1401015", "1401016"],
+      "dodge": ["1401013", "1401014"],
+      "special": ["1401007", "1401008", "1401009"]
+    },
+    "parameterRowsById": {
+      "1401001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1401002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1401003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1401004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1401005": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/10"
+      ],
+      "1401006": [
+        "/skill/basic/description/2/param/5",
+        "/skill/basic/description/2/param/11"
+      ],
+      "1401007": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1401008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1401009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1401010": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1401011": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1401012": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1401013": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1401014": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1401015": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1401016": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1401017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1401018": ["/skill/assist/description/4/param/0"],
+      "1401019": ["/skill/assist/description/4/param/1"],
+      "1401020": ["/skill/assist/description/4/param/2"],
+      "1401021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "AUG 30",
+    "fullName": "Alice Thymefield",
+    "gender": "Female",
+    "impressionF": "It's rare to find someone who's just as bad with horror movies as my brother~ But even so, Alice still can't help but let her curiosity get the better of her, watching the latest horror flicks I recommend, and screaming while clinging to me. Unlike my brother, who always finds excuses to bail...",
+    "impressionM": "Sorry for my lack of courage... But Alice really is obsessed with the paranormal. Does she really enjoy getting scared out of her wits over and over again?",
+    "impressions": [
+      "Impression of Alice:\n · It seems Alice thinks shelling out huge sums of money to help friends is normal...",
+      "· How did someone who gets scared so easily end up joining a paranormal investigation group anyway?",
+      "· Under the symmetrical constellation, their gazes meet. Her smile, no longer lost, is utterly dazzling."
+    ],
+    "profileDesc": "Alice Thymefield, a new member of Spook Shack, is a young lady from the prestigious Thymefield family of New Eridu.\n\nAlice has studied fencing and Ether science since childhood, showing exceptional talent in both fields. She currently attends Celestia School for Girls, a subsidiary of High Ambitions Academy, where she's a model student excelling in both academics and conduct. It is predicted that she will one day inherit the family business and become a next-generation Ether scholar of New Eridu.\n\nShe places extreme importance on order and patterns, showing an almost obsessive pursuit of symmetry in particular. This even affects her aesthetic judgment, making symmetry the primary criterion in determining whether something is beautiful or ugly.\n\nFurthermore, she's easily frightened, with practically zero resistance to ghost stories and supernatural tales. Despite this, she seems to show considerable interest in encountering such phenomena. Suggestion: Master can use ghost stories as a topic of conversation with her. No matter how much she initially refuses, it is likely that she will eventually come closer to investigate.",
+    "stature": "163 (Ears Included)",
+    "trustLv": {
+      "1": "Alice Thymefield, a new member of Spook Shack, is a young lady from the prestigious Thymefield family of New Eridu.\n\nAlice has studied fencing and Ether science since childhood, showing exceptional talent in both fields. She currently attends Celestia School for Girls, a subsidiary of High Ambitions Academy, where she's a model student excelling in both academics and conduct. It is predicted that she will one day inherit the family business and become a next-generation Ether scholar of New Eridu.\n\nShe places extreme importance on order and patterns, showing an almost obsessive pursuit of symmetry in particular. This even affects her aesthetic judgment, making symmetry the primary criterion in determining whether something is beautiful or ugly.\n\nFurthermore, she's easily frightened, with practically zero resistance to ghost stories and supernatural tales. Despite this, she seems to show considerable interest in encountering such phenomena. Suggestion: Master can use ghost stories as a topic of conversation with her. No matter how much she initially refuses, it is likely that she will eventually come closer to investigate.",
+      "2": "",
+      "3": "According to my investigations, Alice has been obsessed with symmetry ever since she was young, but after experiencing the loss of her symmetrical hairpin and her father's subsequent death, she subconsciously attributed the tragedy to the loss of a symmetrical object, which intensified her obsession with symmetry.\n\nAs a prestigious family known for their Ether science research, the Thymefield family is currently facing a decline. With Alice's parents passing away early and her grandfather falling ill, and after giving away the family's patents to save a friend, she's determined to start anew and revive the family through her own strength.\n\nDespite her timid nature, once she sets her mind on accomplishing something, she'll pursue it with unwavering determination. Moreover, she values her companions deeply and would never ignore their difficulties... Therefore, Master, I strongly recommend improving relations with Alice and informing her about our current financial struggles with paying the electricity bills.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 2",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1401501": {
+        "desc": [
+          "After any squad member inflicts a <color=#F0D12B>Physical Anomaly</color> on an enemy, Alice deals additional DMG each 0.95s of its active duration, equal to 2.5% of the original Physical Anomaly DMG. If <color=#FFFFFF>Disorder</color> is triggered while the enemy is suffering a <color=#F0D12B>Physical Anomaly</color>, for every 1s of remaining <color=#F0D12B>Physical Anomaly</color> duration, the <color=#FFFFFF>Disorder</color> DMG multiplier increases by 18%, up to a max of {CAL:18*10,1,2}%.\nWhen Alice's attacks hit an enemy, she builds up <color=#FFFFFF>Blade Etiquette</color>. When she triggers an <color=#F0D12B>Assault</color> through Anomaly Buildup, she gains 10 <color=#FFFFFF>Blade Etiquette</color>. <color=#FFFFFF>Blade Etiquette</color> has a maximum of 300, with each 100 being 1 bar.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> lands, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>, dealing {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color> DMG, ignoring Anomaly Buildup progress. This can be combined with any Attribute Anomaly, including Physical Anomaly, to trigger <color=#FFFFFF>Disorder</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> on an enemy, her <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>12.5%</color> for 30s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> or <color=#FFFFFF>Support</color> character:\nWhen any squad member triggers <color=#FFFFFF>Disorder</color>, Alice gains 30 <color=#FFFFFF>Blade Etiquette</color>.\nIf Alice's Anomaly Mastery exceeds 140, each additional point grants her 1.6 Anomaly Proficiency.\nUpon entering the battlefield, Alice gains 300 <color=#FFFFFF>Blade Etiquette</color>. This effect can trigger once every 180s in Investigation Zone mode."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Twin Rainbows of the Swordheart",
+          "Additional Ability: Mystery Hunt"
+        ],
+        "potential": []
+      },
+      "1401502": {
+        "desc": [
+          "After any squad member inflicts a <color=#F0D12B>Physical Anomaly</color> on an enemy, Alice deals additional DMG each 0.95s of its active duration, equal to 2.5% of the original Physical Anomaly DMG. If <color=#FFFFFF>Disorder</color> is triggered while the enemy is suffering a <color=#F0D12B>Physical Anomaly</color>, for every 1s of remaining <color=#F0D12B>Physical Anomaly</color> duration, the <color=#FFFFFF>Disorder</color> DMG multiplier increases by 18%, up to a max of {CAL:18*10,1,2}%.\nWhen Alice's attacks hit an enemy, she builds up <color=#FFFFFF>Blade Etiquette</color>. When she triggers an <color=#F0D12B>Assault</color> through Anomaly Buildup, she gains 10 <color=#FFFFFF>Blade Etiquette</color>. <color=#FFFFFF>Blade Etiquette</color> has a maximum of 300, with each 100 being 1 bar.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> lands, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>, dealing {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color> DMG, ignoring Anomaly Buildup progress. This can be combined with any Attribute Anomaly, including Physical Anomaly, to trigger <color=#FFFFFF>Disorder</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> on an enemy, her <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>14.6%</color> for 30s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> or <color=#FFFFFF>Support</color> character:\nWhen any squad member triggers <color=#FFFFFF>Disorder</color>, Alice gains 30 <color=#FFFFFF>Blade Etiquette</color>.\nIf Alice's Anomaly Mastery exceeds 140, each additional point grants her 1.6 Anomaly Proficiency.\nUpon entering the battlefield, Alice gains 300 <color=#FFFFFF>Blade Etiquette</color>. This effect can trigger once every 180s in Investigation Zone mode."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Twin Rainbows of the Swordheart",
+          "Additional Ability: Mystery Hunt"
+        ],
+        "potential": []
+      },
+      "1401503": {
+        "desc": [
+          "After any squad member inflicts a <color=#F0D12B>Physical Anomaly</color> on an enemy, Alice deals additional DMG each 0.95s of its active duration, equal to 2.5% of the original Physical Anomaly DMG. If <color=#FFFFFF>Disorder</color> is triggered while the enemy is suffering a <color=#F0D12B>Physical Anomaly</color>, for every 1s of remaining <color=#F0D12B>Physical Anomaly</color> duration, the <color=#FFFFFF>Disorder</color> DMG multiplier increases by 18%, up to a max of {CAL:18*10,1,2}%.\nWhen Alice's attacks hit an enemy, she builds up <color=#FFFFFF>Blade Etiquette</color>. When she triggers an <color=#F0D12B>Assault</color> through Anomaly Buildup, she gains 10 <color=#FFFFFF>Blade Etiquette</color>. <color=#FFFFFF>Blade Etiquette</color> has a maximum of 300, with each 100 being 1 bar.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> lands, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>, dealing {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color> DMG, ignoring Anomaly Buildup progress. This can be combined with any Attribute Anomaly, including Physical Anomaly, to trigger <color=#FFFFFF>Disorder</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> on an enemy, her <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>16.7%</color> for 30s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> or <color=#FFFFFF>Support</color> character:\nWhen any squad member triggers <color=#FFFFFF>Disorder</color>, Alice gains 30 <color=#FFFFFF>Blade Etiquette</color>.\nIf Alice's Anomaly Mastery exceeds 140, each additional point grants her 1.6 Anomaly Proficiency.\nUpon entering the battlefield, Alice gains 300 <color=#FFFFFF>Blade Etiquette</color>. This effect can trigger once every 180s in Investigation Zone mode."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Twin Rainbows of the Swordheart",
+          "Additional Ability: Mystery Hunt"
+        ],
+        "potential": []
+      },
+      "1401504": {
+        "desc": [
+          "After any squad member inflicts a <color=#F0D12B>Physical Anomaly</color> on an enemy, Alice deals additional DMG each 0.95s of its active duration, equal to 2.5% of the original Physical Anomaly DMG. If <color=#FFFFFF>Disorder</color> is triggered while the enemy is suffering a <color=#F0D12B>Physical Anomaly</color>, for every 1s of remaining <color=#F0D12B>Physical Anomaly</color> duration, the <color=#FFFFFF>Disorder</color> DMG multiplier increases by 18%, up to a max of {CAL:18*10,1,2}%.\nWhen Alice's attacks hit an enemy, she builds up <color=#FFFFFF>Blade Etiquette</color>. When she triggers an <color=#F0D12B>Assault</color> through Anomaly Buildup, she gains 10 <color=#FFFFFF>Blade Etiquette</color>. <color=#FFFFFF>Blade Etiquette</color> has a maximum of 300, with each 100 being 1 bar.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> lands, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>, dealing {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color> DMG, ignoring Anomaly Buildup progress. This can be combined with any Attribute Anomaly, including Physical Anomaly, to trigger <color=#FFFFFF>Disorder</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> on an enemy, her <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>18.8%</color> for 30s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> or <color=#FFFFFF>Support</color> character:\nWhen any squad member triggers <color=#FFFFFF>Disorder</color>, Alice gains 30 <color=#FFFFFF>Blade Etiquette</color>.\nIf Alice's Anomaly Mastery exceeds 140, each additional point grants her 1.6 Anomaly Proficiency.\nUpon entering the battlefield, Alice gains 300 <color=#FFFFFF>Blade Etiquette</color>. This effect can trigger once every 180s in Investigation Zone mode."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Twin Rainbows of the Swordheart",
+          "Additional Ability: Mystery Hunt"
+        ],
+        "potential": []
+      },
+      "1401505": {
+        "desc": [
+          "After any squad member inflicts a <color=#F0D12B>Physical Anomaly</color> on an enemy, Alice deals additional DMG each 0.95s of its active duration, equal to 2.5% of the original Physical Anomaly DMG. If <color=#FFFFFF>Disorder</color> is triggered while the enemy is suffering a <color=#F0D12B>Physical Anomaly</color>, for every 1s of remaining <color=#F0D12B>Physical Anomaly</color> duration, the <color=#FFFFFF>Disorder</color> DMG multiplier increases by 18%, up to a max of {CAL:18*10,1,2}%.\nWhen Alice's attacks hit an enemy, she builds up <color=#FFFFFF>Blade Etiquette</color>. When she triggers an <color=#F0D12B>Assault</color> through Anomaly Buildup, she gains 10 <color=#FFFFFF>Blade Etiquette</color>. <color=#FFFFFF>Blade Etiquette</color> has a maximum of 300, with each 100 being 1 bar.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> lands, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>, dealing {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color> DMG, ignoring Anomaly Buildup progress. This can be combined with any Attribute Anomaly, including Physical Anomaly, to trigger <color=#FFFFFF>Disorder</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> on an enemy, her <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>20.8%</color> for 30s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> or <color=#FFFFFF>Support</color> character:\nWhen any squad member triggers <color=#FFFFFF>Disorder</color>, Alice gains 30 <color=#FFFFFF>Blade Etiquette</color>.\nIf Alice's Anomaly Mastery exceeds 140, each additional point grants her 1.6 Anomaly Proficiency.\nUpon entering the battlefield, Alice gains 300 <color=#FFFFFF>Blade Etiquette</color>. This effect can trigger once every 180s in Investigation Zone mode."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Twin Rainbows of the Swordheart",
+          "Additional Ability: Mystery Hunt"
+        ],
+        "potential": []
+      },
+      "1401506": {
+        "desc": [
+          "After any squad member inflicts a <color=#F0D12B>Physical Anomaly</color> on an enemy, Alice deals additional DMG each 0.95s of its active duration, equal to 2.5% of the original Physical Anomaly DMG. If <color=#FFFFFF>Disorder</color> is triggered while the enemy is suffering a <color=#F0D12B>Physical Anomaly</color>, for every 1s of remaining <color=#F0D12B>Physical Anomaly</color> duration, the <color=#FFFFFF>Disorder</color> DMG multiplier increases by 18%, up to a max of {CAL:18*10,1,2}%.\nWhen Alice's attacks hit an enemy, she builds up <color=#FFFFFF>Blade Etiquette</color>. When she triggers an <color=#F0D12B>Assault</color> through Anomaly Buildup, she gains 10 <color=#FFFFFF>Blade Etiquette</color>. <color=#FFFFFF>Blade Etiquette</color> has a maximum of 300, with each 100 being 1 bar.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> lands, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>, dealing {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color> DMG, ignoring Anomaly Buildup progress. This can be combined with any Attribute Anomaly, including Physical Anomaly, to trigger <color=#FFFFFF>Disorder</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> on an enemy, her <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>22.9%</color> for 30s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> or <color=#FFFFFF>Support</color> character:\nWhen any squad member triggers <color=#FFFFFF>Disorder</color>, Alice gains 30 <color=#FFFFFF>Blade Etiquette</color>.\nIf Alice's Anomaly Mastery exceeds 140, each additional point grants her 1.6 Anomaly Proficiency.\nUpon entering the battlefield, Alice gains 300 <color=#FFFFFF>Blade Etiquette</color>. This effect can trigger once every 180s in Investigation Zone mode."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Twin Rainbows of the Swordheart",
+          "Additional Ability: Mystery Hunt"
+        ],
+        "potential": []
+      },
+      "1401507": {
+        "desc": [
+          "After any squad member inflicts a <color=#F0D12B>Physical Anomaly</color> on an enemy, Alice deals additional DMG each 0.95s of its active duration, equal to 2.5% of the original Physical Anomaly DMG. If <color=#FFFFFF>Disorder</color> is triggered while the enemy is suffering a <color=#F0D12B>Physical Anomaly</color>, for every 1s of remaining <color=#F0D12B>Physical Anomaly</color> duration, the <color=#FFFFFF>Disorder</color> DMG multiplier increases by 18%, up to a max of {CAL:18*10,1,2}%.\nWhen Alice's attacks hit an enemy, she builds up <color=#FFFFFF>Blade Etiquette</color>. When she triggers an <color=#F0D12B>Assault</color> through Anomaly Buildup, she gains 10 <color=#FFFFFF>Blade Etiquette</color>. <color=#FFFFFF>Blade Etiquette</color> has a maximum of 300, with each 100 being 1 bar.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> lands, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>, dealing {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color> DMG, ignoring Anomaly Buildup progress. This can be combined with any Attribute Anomaly, including Physical Anomaly, to trigger <color=#FFFFFF>Disorder</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> on an enemy, her <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>25%</color> for 30s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> or <color=#FFFFFF>Support</color> character:\nWhen any squad member triggers <color=#FFFFFF>Disorder</color>, Alice gains 30 <color=#FFFFFF>Blade Etiquette</color>.\nIf Alice's Anomaly Mastery exceeds 140, each additional point grants her 1.6 Anomaly Proficiency.\nUpon entering the battlefield, Alice gains 300 <color=#FFFFFF>Blade Etiquette</color>. This effect can trigger once every 180s in Investigation Zone mode."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Twin Rainbows of the Swordheart",
+          "Additional Ability: Mystery Hunt"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nSlash and kick enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Intertwined Stab",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Parry Guard",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nCharge forward and slash enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Cross Riposte",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Intertwined Stab",
+          "param": [
+            {
+              "desc": "{Skill:1401017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401017": {
+                  "attackData": [125163],
+                  "attributeInfliction": 10385,
+                  "damagePercentage": 16330,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 7419,
+                  "feverRecovery": 285725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 16330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14690,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401017": {
+                  "attackData": [125163],
+                  "attributeInfliction": 10385,
+                  "damagePercentage": 16330,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 7419,
+                  "feverRecovery": 285725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 670,
+                  "main": 14690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14690,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Parry Guard",
+          "param": [
+            {
+              "desc": "{Skill:1401018, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1401018": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 24420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24420,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401019, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1401019": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1410,
+                  "main": 30860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30860,
+                  "stunRatioGrowth": 1410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401020, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1401020": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15020,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Cross Riposte",
+          "param": [
+            {
+              "desc": "{Skill:1401021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401021": {
+                  "attackData": [813164],
+                  "attributeInfliction": 19717,
+                  "damagePercentage": 33270,
+                  "damagePercentageGrowth": 3030,
+                  "etherPurify": 13664,
+                  "feverRecovery": 661925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3030,
+                  "main": 33270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25840,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401021": {
+                  "attackData": [813164],
+                  "attributeInfliction": 19717,
+                  "damagePercentage": 33270,
+                  "damagePercentageGrowth": 3030,
+                  "etherPurify": 13664,
+                  "feverRecovery": 661925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1180,
+                  "main": 25840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25840,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nPerform up to 5 slashes forward, dealing <color=#F0D12B>Physical DMG</color>.\nWhen Alice triggers <color=#F0D12B>Assault</color> through Attribute Anomaly Buildup, the 5th hit of her next <color=#FFFFFF>Basic Attack</color> is enhanced.",
+          "name": "Basic Attack: Celestial Overture",
+          "potential": []
+        },
+        {
+          "desc": "When Alice's <color=#FFFFFF>Blade Etiquette</color> reaches 1 bar, hold <IconMap:Icon_Normal> to activate:\nHold to charge, expending up to 3 bars of <color=#FFFFFF>Blade Etiquette</color>. Release <IconMap:Icon_Normal> or when <color=#FFFFFF>Blade Etiquette</color> is below 1 bar, Alice performs a series of slashes in an area centered on the target enemy, with the number of hits determined by charge level, dealing massive <color=#F0D12B>Physical DMG</color>.\nWhen the Finishing Move of a three-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> hits, it triggers a special <color=#F0D12B>Assault</color> effect: <color=#F0D12B>Polarity Assault</color>. This deals DMG equal to {CAL:0+100,1,2}% of the original <color=#F0D12B>Assault</color>, ignoring Anomaly Buildup, and can interact with other Attribute Anomalies, including Physical, to trigger <color=#FFFFFF>Disorder</color>.\n<color=#FFFFFF>Blade Etiquette</color> does not accumulate when hitting an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Starshine Waltz",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Celestial Overture",
+          "param": [
+            {
+              "desc": "{Skill:1401001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1401001": {
+                  "attackData": [98177],
+                  "attributeInfliction": 2976,
+                  "damagePercentage": 5510,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 4003,
+                  "feverRecovery": 77275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 5510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3970,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1401002": {
+                  "attackData": [156912],
+                  "attributeInfliction": 5213,
+                  "damagePercentage": 8800,
+                  "damagePercentageGrowth": 800,
+                  "etherPurify": 7048,
+                  "feverRecovery": 135850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 800,
+                  "main": 8800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6980,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1401003": {
+                  "attackData": [117733],
+                  "attributeInfliction": 4445,
+                  "damagePercentage": 6610,
+                  "damagePercentageGrowth": 610,
+                  "etherPurify": 6051,
+                  "feverRecovery": 116600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 6610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5990,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1401004": {
+                  "attackData": [199492],
+                  "attributeInfliction": 7781,
+                  "damagePercentage": 11190,
+                  "damagePercentageGrowth": 1020,
+                  "etherPurify": 10609,
+                  "feverRecovery": 204325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1020,
+                  "main": 11190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10510,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1401005": {
+                  "attackData": [232261],
+                  "attributeInfliction": 9720,
+                  "damagePercentage": 13030,
+                  "damagePercentageGrowth": 1190,
+                  "etherPurify": 13295,
+                  "feverRecovery": 256025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1190,
+                  "main": 13030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47870,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13170,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401006, Prop:1001}",
+              "name": "5th-Hit (Enhanced) DMG Multiplier",
+              "param": {
+                "1401006": {
+                  "attackData": [389238],
+                  "attributeInfliction": 15600,
+                  "damagePercentage": 21830,
+                  "damagePercentageGrowth": 1990,
+                  "etherPurify": 21296,
+                  "feverRecovery": 410025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1990,
+                  "main": 21830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 76670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1401001": {
+                  "attackData": [98177],
+                  "attributeInfliction": 2976,
+                  "damagePercentage": 5510,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 4003,
+                  "feverRecovery": 77275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 3970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3970,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1401002": {
+                  "attackData": [156912],
+                  "attributeInfliction": 5213,
+                  "damagePercentage": 8800,
+                  "damagePercentageGrowth": 800,
+                  "etherPurify": 7048,
+                  "feverRecovery": 135850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6980,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1401003": {
+                  "attackData": [117733],
+                  "attributeInfliction": 4445,
+                  "damagePercentage": 6610,
+                  "damagePercentageGrowth": 610,
+                  "etherPurify": 6051,
+                  "feverRecovery": 116600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5990,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1401004": {
+                  "attackData": [199492],
+                  "attributeInfliction": 7781,
+                  "damagePercentage": 11190,
+                  "damagePercentageGrowth": 1020,
+                  "etherPurify": 10609,
+                  "feverRecovery": 204325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 10510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10510,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1401005": {
+                  "attackData": [232261],
+                  "attributeInfliction": 9720,
+                  "damagePercentage": 13030,
+                  "damagePercentageGrowth": 1190,
+                  "etherPurify": 13295,
+                  "feverRecovery": 256025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 13170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47870,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13170,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401006, Prop:1002}",
+              "name": "5th-Hit (Enhanced) Daze Multiplier",
+              "param": {
+                "1401006": {
+                  "attackData": [389238],
+                  "attributeInfliction": 15600,
+                  "damagePercentage": 21830,
+                  "damagePercentageGrowth": 1990,
+                  "etherPurify": 21296,
+                  "feverRecovery": 410025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 21090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 76670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Starshine Waltz",
+          "param": [
+            {
+              "desc": "{Skill:1401010, Prop:1001}",
+              "name": "One-Staged Charged Attack DMG Multiplier",
+              "param": {
+                "1401010": {
+                  "attackData": [0],
+                  "attributeInfliction": 7816,
+                  "damagePercentage": 18890,
+                  "damagePercentageGrowth": 1720,
+                  "etherPurify": 11167,
+                  "feverRecovery": 215050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1720,
+                  "main": 18890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5530,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401011, Prop:1001}",
+              "name": "Two-Staged Charged Attack DMG Multiplier",
+              "param": {
+                "1401011": {
+                  "attackData": [0],
+                  "attributeInfliction": 10966,
+                  "damagePercentage": 30440,
+                  "damagePercentageGrowth": 2770,
+                  "etherPurify": 15667,
+                  "feverRecovery": 301675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2770,
+                  "main": 30440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7760,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401012, Prop:1001}",
+              "name": "Three-Staged Charged Attack DMG Multiplier",
+              "param": {
+                "1401012": {
+                  "attackData": [0],
+                  "attributeInfliction": 46783,
+                  "damagePercentage": 96570,
+                  "damagePercentageGrowth": 8780,
+                  "etherPurify": 39834,
+                  "feverRecovery": 766975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 8780,
+                  "main": 96570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19720,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401010, Prop:1002}",
+              "name": "One-Staged Charged Daze Multiplier",
+              "param": {
+                "1401010": {
+                  "attackData": [0],
+                  "attributeInfliction": 7816,
+                  "damagePercentage": 18890,
+                  "damagePercentageGrowth": 1720,
+                  "etherPurify": 11167,
+                  "feverRecovery": 215050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5530,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401011, Prop:1002}",
+              "name": "Two-Staged Charged Daze Multiplier",
+              "param": {
+                "1401011": {
+                  "attackData": [0],
+                  "attributeInfliction": 10966,
+                  "damagePercentage": 30440,
+                  "damagePercentageGrowth": 2770,
+                  "etherPurify": 15667,
+                  "feverRecovery": 301675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7760,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401012, Prop:1002}",
+              "name": "Three-Staged Charged Daze Multiplier",
+              "param": {
+                "1401012": {
+                  "attackData": [0],
+                  "attributeInfliction": 46783,
+                  "damagePercentage": 96570,
+                  "damagePercentageGrowth": 8780,
+                  "etherPurify": 39834,
+                  "feverRecovery": 766975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 900,
+                  "main": 19720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19720,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes powerful consecutive slashes at enemies ahead, dealing massive <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Starfall Intermission",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes powerful slashes at enemies in a large area ahead, dealing massive <color=#F0D12B>Physical DMG</color>.\nActivating this skill restores 200 <color=#FFFFFF>Blade Etiquette</color>.\n<color=#FFFFFF>Blade Etiquette</color> does not accumulate when hitting an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Starfall Finale",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Starfall Intermission",
+          "param": [
+            {
+              "desc": "{Skill:1401015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401015": {
+                  "attackData": [405590],
+                  "attributeInfliction": 28434,
+                  "damagePercentage": 66630,
+                  "damagePercentageGrowth": 6060,
+                  "etherPurify": 20671,
+                  "feverRecovery": 1678050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6060,
+                  "main": 66630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20470,
+                  "stunRatioGrowth": 940
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401015": {
+                  "attackData": [405590],
+                  "attributeInfliction": 28434,
+                  "damagePercentage": 66630,
+                  "damagePercentageGrowth": 6060,
+                  "etherPurify": 20671,
+                  "feverRecovery": 1678050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 940,
+                  "main": 20470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20470,
+                  "stunRatioGrowth": 940
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Starfall Finale",
+          "param": [
+            {
+              "desc": "{Skill:1401016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401016": {
+                  "attackData": [0],
+                  "attributeInfliction": 72225,
+                  "damagePercentage": 226200,
+                  "damagePercentageGrowth": 20570,
+                  "etherPurify": 74504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 20570,
+                  "main": 226200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24260,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401016": {
+                  "attackData": [0],
+                  "attributeInfliction": 72225,
+                  "damagePercentage": 226200,
+                  "damagePercentageGrowth": 20570,
+                  "etherPurify": 74504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 24260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24260,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Jumpy Bunny",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nSlashes enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Blade-Dancer's Gale",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nSlash and kick enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Ceremony of Swordlight",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Blade-Dancer's Gale",
+          "param": [
+            {
+              "desc": "{Skill:1401013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401013": {
+                  "attackData": [57675],
+                  "attributeInfliction": 2392,
+                  "damagePercentage": 7530,
+                  "damagePercentageGrowth": 690,
+                  "etherPurify": 3419,
+                  "feverRecovery": 66000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 7530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3390,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401013": {
+                  "attackData": [57675],
+                  "attributeInfliction": 2392,
+                  "damagePercentage": 7530,
+                  "damagePercentageGrowth": 690,
+                  "etherPurify": 3419,
+                  "feverRecovery": 66000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3390,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Ceremony of Swordlight",
+          "param": [
+            {
+              "desc": "{Skill:1401014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401014": {
+                  "attackData": [238736],
+                  "attributeInfliction": 8516,
+                  "damagePercentage": 28400,
+                  "damagePercentageGrowth": 2590,
+                  "etherPurify": 27167,
+                  "feverRecovery": 234300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2590,
+                  "main": 28400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21950,
+                  "stunRatioGrowth": 1000
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401014": {
+                  "attackData": [238736],
+                  "attributeInfliction": 8516,
+                  "damagePercentage": 28400,
+                  "damagePercentageGrowth": 2590,
+                  "etherPurify": 27167,
+                  "feverRecovery": 234300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1000,
+                  "main": 21950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21950,
+                  "stunRatioGrowth": 1000
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nHurl the blade to strike and pass through enemies ahead, dealing <color=#F0D12B>Physical DMG</color>.\nUpon activating this skill, a <color=#FFFFFF>Perfect Dodge</color> can be triggered.\nAfter triggering a <color=#FFFFFF>Perfect Dodge</color>, press <IconMap:Icon_Normal> to follow up with the 5th hit of a <color=#FFFFFF>Basic Attack</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Special Attack: Piercing Dawn",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} forward and press <IconMap:Icon_SpecialReady> to activate:\nA thrust attack that goes through enemies ahead, dealing massive <color=#F0D12B>Physical DMG</color>.\nActivating the skill can trigger <color=#FFFFFF>Perfect Dodge</color> and restores 10 <color=#FFFFFF>Blade Etiquette</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Aurora Thrust - Northern Cross",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy, and without moving the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} or when dragging it backwards, press <IconMap:Icon_SpecialReady> to activate:\nBack away with a slash, then thrust forward, dealing massive <color=#F0D12B>Physical DMG</color>.\nActivating the skill can trigger <color=#FFFFFF>Perfect Dodge</color> and restores 10 <color=#FFFFFF>Blade Etiquette</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Aurora Thrust - Southern Cross",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Piercing Dawn",
+          "param": [
+            {
+              "desc": "{Skill:1401008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401008": {
+                  "attackData": [95580],
+                  "attributeInfliction": 3965,
+                  "damagePercentage": 6240,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5666,
+                  "feverRecovery": 218350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5610,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401008": {
+                  "attackData": [95580],
+                  "attributeInfliction": 3965,
+                  "damagePercentage": 6240,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5666,
+                  "feverRecovery": 218350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5610,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Aurora Thrust - Northern Cross",
+          "param": [
+            {
+              "desc": "{Skill:1401009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401009": {
+                  "attackData": [1003584],
+                  "attributeInfliction": 31706,
+                  "damagePercentage": 46000,
+                  "damagePercentageGrowth": 4190,
+                  "etherPurify": 13997,
+                  "feverRecovery": 939125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4190,
+                  "main": 46000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34520,
+                  "stunRatioGrowth": 1570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401009": {
+                  "attackData": [1003584],
+                  "attributeInfliction": 31706,
+                  "damagePercentage": 46000,
+                  "damagePercentageGrowth": 4190,
+                  "etherPurify": 13997,
+                  "feverRecovery": 939125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1570,
+                  "main": 34520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34520,
+                  "stunRatioGrowth": 1570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Aurora Thrust - Southern Cross",
+          "param": [
+            {
+              "desc": "{Skill:1401007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1401007": {
+                  "attackData": [1064254],
+                  "attributeInfliction": 36446,
+                  "damagePercentage": 53200,
+                  "damagePercentageGrowth": 4840,
+                  "etherPurify": 18667,
+                  "feverRecovery": 1073875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4840,
+                  "main": 53200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40530,
+                  "stunRatioGrowth": 1850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1401007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1401007": {
+                  "attackData": [1064254],
+                  "attributeInfliction": 36446,
+                  "damagePercentage": 53200,
+                  "damagePercentageGrowth": 4840,
+                  "etherPurify": 18667,
+                  "feverRecovery": 1073875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1850,
+                  "main": 40530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40530,
+                  "stunRatioGrowth": 1850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1401001": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal>",
+      "name": "Basic Attack: Celestial Overture"
+    },
+    "1401002": {
+      "desc": "<IconMap:Icon_Normal> (Hold)",
+      "name": "Basic Attack: Starshine Waltz"
+    },
+    "1401003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Piercing Dawn"
+    },
+    "1401004": {
+      "desc": "<IconMap:Icon_SpecialReady> (When dragging the joystick forward)",
+      "name": "EX Special Attack: Aurora Thrust - Northern Cross"
+    },
+    "1401005": {
+      "desc": "<IconMap:Icon_SpecialReady> （When moving backward or not moving the joystick)",
+      "name": "EX Special Attack: Aurora Thrust - Southern Cross"
+    },
+    "1401006": {
+      "desc": "<IconMap:Icon_Evade>",
+      "name": "Dodge: Jumpy Bunny"
+    },
+    "1401007": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Blade-Dancer's Gale"
+    },
+    "1401008": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Ceremony of Swordlight"
+    },
+    "1401009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Starfall Intermission"
+    },
+    "1401010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Starfall Finale"
+    },
+    "1401011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Intertwined Stab"
+    },
+    "1401012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Parry Guard"
+    },
+    "1401013": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Cross Riposte"
+    }
+  },
+  "skin": {
+    "3114010": {
+      "desc": "The young woman's perfect symmetry is only ever slightly compromised when she wears the school crest — such is the elegant and noble Thymefield spirit.",
+      "name": "Alice: Celestian Etiquette"
+    },
+    "3114011": {
+      "desc": "Though it wasn't completely symmetrical, she did not mind this gift from a dear friend.\nThe girl pushed open the locked door and walked along the pink beach after the sudden downpour, the cool waves brushing over her ankles. There were no unknowns left to frighten her.",
+      "name": "Alice: Sea of Thyme"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
+    "Ignores Anomaly Buildup and triggers Assault directly",
+    "Can trigger Disorder frequently to deal damage"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Alice triggers a <color=#F0D12B>Polarity Assault</color>, she gains 25 <color=#FFFFFF>Blade Etiquette</color>. When she triggers <color=#F0D12B>Assault</color> against an enemy, the target's DEF is reduced by 20% for 30s.",
+      "desc2": "A sprig of coriander sways like a newborn green star,\nSo fragile her fingertips felt they might pass through it.\nShe slowly opened her trembling hands,\nAnd held that flicker of feeling in her palms.\nHer heart beat like a spring bud breaking the earth at dawn, just after the rain.",
+      "name": "Palmful of Cilantro"
+    },
+    "2": {
+      "desc": "When <color=#FFFFFF>Ultimate: Starfall Finale</color>'s Finishing Move hits an enemy, it triggers <color=#F0D12B>Polarity Assault</color>. All squad members' <color=#F0D12B>Assault</color> DMG increases by 15%. <color=#FFFFFF>Disorder</color> DMG against enemies suffering from <color=#F0D12B>Physical Anomaly</color> increases by 15%. Upon entering the battlefield, Alice immediately gains 1,000 Decibels. Triggers once per 180s in Investigation Zone mode.",
+      "desc2": "The silver blade dips low, kissing the frost-lined sage leaf.\nThis pre-battle salute is the girl's quiet show of composure.\nFear and helplessness lie frozen in the faded dreams of yesterday.\nHer sword stirs, ready to trace the outline of the stars.\nDawn is near, and the flower bud waits to bloom.",
+      "name": "Sage at the Sword's Tip"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "She couldn't resist perfect symmetry.\nIn symmetry, there was order, balance, and meaning. Without it, her bunny ears and tail would dull and droop, as if something lovely were about to vanish from her world.\n\"So... that's why you had to bring up my mismatched socks, and tried to take off my leg band?\"\n\"I just can't stand your asymmetry! Just for a second, I swear — just one second!\"",
+      "name": "Symmetrism"
+    },
+    "4": {
+      "desc": "Alice ignores 10% of the target's <color=#F0D12B>Physical RES</color>. Enhanced <color=#FFFFFF>Basic Attack: Celestial Overture</color> accumulates 25% more <color=#F0D12B>Physical Anomaly Buildup</color>.",
+      "desc2": "The scent of rosemary lingered between her lips,\nA vow searing and resolute, carried on every breath of frost.\nEven as the air in her lungs turned cold and heavy,\nThe girl would never forget the spell called love.\n\"In the name of the Thymefields... I will never betray it.\"",
+      "name": "Rosemary on Her Lips"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "She couldn't resist scary paranormal things.\nWithin the paranormal hid the unknown and the dangerous. When she felt it, her bunny ears and tail would bristle in fright — only to become irresistibly smooth once she calmed down.\n\"So... that's why you always tag along on my ghost-hunting trips, even though you're scared out of your mind?\"\n\"I just wanted to see what would happen... but it's so scary, I totally regret it! Just this once — I swear I'm not coming next time!\"",
+      "name": "Passion for the Supernatural"
+    },
+    "6": {
+      "desc": "When Alice uses a third-stage charged <color=#FFFFFF>Basic Attack: Starshine Waltz</color> or <color=#FFFFFF>Ultimate: Starfall Finale</color>, she enters the <color=#FFFFFF>Victory State</color> for 30s. During this time, whenever any squad member lands a hit on a target, Alice will follow up with an extra attack against the target, dealing Physical DMG equal to 3,300% of her Anomaly Proficiency. This effect can trigger once every 1s and is guaranteed to CRIT. This effect can trigger up to 6 times. Gaining the <color=#FFFFFF>Victory State</color> again refreshes the available trigger count.",
+      "desc2": "The thyme-scented manor,\nThe night spent watching the stars,\nThe moment she came to understand what courage truly meant.\nA fragrant wind swept the clouds away, and sunlight outshone the crystal chandelier.\nThe girl gave a gentle bow to the days gone by.\nThen, slowly, she vanished into the field of thyme.",
+      "name": "A Heart of Thyme"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

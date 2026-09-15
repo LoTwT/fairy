@@ -1,0 +1,1687 @@
+{
+  "camp": {
+    "3": "Belobog Heavy Industries"
+  },
+  "elementType": {
+    "201": "Fire"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Fire DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Impact"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1101,
+  "locale": "en",
+  "name": "Koleda",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1101501", "1101502", "1101503", "1101504", "1101505"],
+      "basic": [
+        "1101001",
+        "1101002",
+        "1101003",
+        "1101004",
+        "1101005",
+        "1101006",
+        "1101007"
+      ],
+      "chain": ["1101301", "1101401", "1101402"],
+      "dodge": ["1101201", "1101202"],
+      "special": [
+        "1101101",
+        "1101102",
+        "1101103",
+        "1101104",
+        "1101105",
+        "1101106"
+      ]
+    },
+    "parameterRowsById": {
+      "1101001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1101002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/8"
+      ],
+      "1101003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1101004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/10"
+      ],
+      "1101005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/11"
+      ],
+      "1101006": [
+        "/skill/basic/description/1/param/5",
+        "/skill/basic/description/1/param/12"
+      ],
+      "1101007": [
+        "/skill/basic/description/1/param/6",
+        "/skill/basic/description/1/param/13"
+      ],
+      "1101101": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/3"
+      ],
+      "1101102": [
+        "/skill/special/description/2/param/1",
+        "/skill/special/description/2/param/4"
+      ],
+      "1101103": [
+        "/skill/special/description/2/param/2",
+        "/skill/special/description/2/param/5"
+      ],
+      "1101104": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/3"
+      ],
+      "1101105": [
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/4"
+      ],
+      "1101106": [
+        "/skill/special/description/3/param/2",
+        "/skill/special/description/3/param/5"
+      ],
+      "1101201": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1101202": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1101301": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1101401": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/2"
+      ],
+      "1101402": [
+        "/skill/chain/description/3/param/1",
+        "/skill/chain/description/3/param/3"
+      ],
+      "1101501": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1101502": ["/skill/assist/description/4/param/0"],
+      "1101503": ["/skill/assist/description/4/param/1"],
+      "1101504": ["/skill/assist/description/4/param/2"],
+      "1101505": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "AUG 10",
+    "fullName": "Koleda Belobog",
+    "gender": "Female",
+    "impressionF": "What's that line from that detective movie we watched again?\n\"She may look like a child...\" Well, no matter how old she is or how she looks, Koleda really is a kid, and she's so cute!",
+    "impressionM": "I hope your comment isn't seen by a certain someone, or our video store will be end up smashed to bits by a hammer.",
+    "impressions": [
+      "Impressions of Koleda:\n · Koleda never openly admits her love for desserts.",
+      " · She wants to be the most reliable president in front of her colleagues.",
+      " · Good news — what lies under her eye patch is not a demonic eye that possesses the power to destroy the world."
+    ],
+    "profileDesc": "Koleda is the current head of Belobog Industries, and the biological daughter of the company's founder, Khors.\nHer father, Khors, vanished due to a scandal involving embezzlement and fled, which severely shook the company, nearly driving it to the brink of collapse. Once she came of age, Koleda willingly stepped up to untangle the mess, rallying the remaining company workforce and resources to revive the financially and reputationally vulnerable Belobog Heavy Industries.\nWith the help of new invaluable team members, Belobog eventually managed to regain its prominence in relevant sectors. Though not as resplendent as its prime, Belobog in its current state is still a notable newcomer in the field.\nThroughout her journey, Koleda amassed practical life experiences and professional know-how, building a circle of colleagues who back her up like family. Yet, to present herself as a leader, Koleda appears to intentionally adopt a stern tone when communicating with others.\nThis distinct growth trajectory has also contributed to Koleda's heightened maturity in certain aspects compared to her peers. \nNaturally, she might display a bit of childishness in certain aspects as well.\nHypothesis: Koleda's comparatively smaller stature among her peers may stem from her prolonged involvement in the Hollows. \nCurrently, there aren't any publicly accessible papers or research substantiating this theory, but I will continue to track this topic.",
+    "stature": "150",
+    "trustLv": {
+      "1": "Koleda is the current head of Belobog Industries, and the biological daughter of the company's founder, Khors.\nHer father, Khors, vanished due to a scandal involving embezzlement and fled, which severely shook the company, nearly driving it to the brink of collapse. Once she came of age, Koleda willingly stepped up to untangle the mess, rallying the remaining company workforce and resources to revive the financially and reputationally vulnerable Belobog Heavy Industries.\nWith the help of new invaluable team members, Belobog eventually managed to regain its prominence in relevant sectors. Though not as resplendent as its prime, Belobog in its current state is still a notable newcomer in the field.\nThroughout her journey, Koleda amassed practical life experiences and professional know-how, building a circle of colleagues who back her up like family. Yet, to present herself as a leader, Koleda appears to intentionally adopt a stern tone when communicating with others.\nThis distinct growth trajectory has also contributed to Koleda's heightened maturity in certain aspects compared to her peers. \nNaturally, she might display a bit of childishness in certain aspects as well.\nHypothesis: Koleda's comparatively smaller stature among her peers may stem from her prolonged involvement in the Hollows. \nCurrently, there aren't any publicly accessible papers or research substantiating this theory, but I will continue to track this topic.",
+      "2": "",
+      "3": "From analysis of her behavior, it's evident that Koleda is actually quite fond of sweets, even though she's hesitant to openly admit it. \nThe suspected rationale behind this is that she views enjoying sweets as a childish inclination and doesn't want others to perceive her as immature. \nFurthermore, Koleda seems particularly sensitive to any descriptors associated with children, and mentioning such terms could trigger her annoyance. \n\"Just remember, I'm the perfect height for your shinbone, so you might wanna reconsider before labeling me as childish.\"",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete Agent Story \"Schoolyard Powerhouse\""
+    ]
+  },
+  "passive": {
+    "level": {
+      "1101501": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>30%</color>.",
+          "When another character in your squad shares the same Attribute or Faction or is a <color=#FFFFFF>Rupture</color> character:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": []
+      },
+      "1101502": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>35%</color>.",
+          "When another character in your squad shares the same Attribute or Faction or is a <color=#FFFFFF>Rupture</color> character:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": []
+      },
+      "1101503": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>40%</color>.",
+          "When another character in your squad shares the same Attribute or Faction or is a <color=#FFFFFF>Rupture</color> character:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": []
+      },
+      "1101504": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>45%</color>.",
+          "When another character in your squad shares the same Attribute or Faction or is a <color=#FFFFFF>Rupture</color> character:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": []
+      },
+      "1101505": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>50%</color>.",
+          "When another character in your squad shares the same Attribute or Faction or is a <color=#FFFFFF>Rupture</color> character:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": []
+      },
+      "1101506": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>55%</color>.",
+          "When another character in your squad shares the same Attribute or Faction or is a <color=#FFFFFF>Rupture</color> character:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": []
+      },
+      "1101507": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>60%</color>.",
+          "When another character in your squad shares the same Attribute or Faction or is a <color=#FFFFFF>Rupture</color> character:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nStrikes enemies in front, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Coming Thru!",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Protective Hammer",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nKoleda charges and strikes enemies in front, dealing <color=#FF5521>Fire DMG</color> and obtaining <color=#FFFFFF>Furnace Fire</color> effect.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Hammer Bell",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Coming Thru!",
+          "param": [
+            {
+              "desc": "{Skill:1101501, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1101501": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 18380,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 8749,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 18380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18380,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101501, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1101501": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 18380,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 8749,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 18380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18380,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Protective Hammer",
+          "param": [
+            {
+              "desc": "{Skill:1101502, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1101502": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1180,
+                  "main": 25900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25900,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101503, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1101503": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 32730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32730,
+                  "stunRatioGrowth": 1490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101504, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1101504": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 730,
+                  "main": 15930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15930,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Hammer Bell",
+          "param": [
+            {
+              "desc": "{Skill:1101505, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1101505": {
+                  "attackData": [],
+                  "attributeInfliction": 31992,
+                  "damagePercentage": 35920,
+                  "damagePercentageGrowth": 3270,
+                  "etherPurify": 16497,
+                  "feverRecovery": 1062600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3270,
+                  "main": 35920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31270,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101505, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1101505": {
+                  "attackData": [],
+                  "attributeInfliction": 31992,
+                  "damagePercentage": 35920,
+                  "damagePercentageGrowth": 3270,
+                  "etherPurify": 16497,
+                  "feverRecovery": 1062600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1430,
+                  "main": 31270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31270,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 strikes, dealing <color=#F0D12B>Physical DMG</color>.\nWhen Koleda has the <color=#FFFFFF>Furnace Fire</color> effect, she can launch an enhanced <color=#FFFFFF>Basic Attack</color> after the 2nd hit, consuming the <color=#FFFFFF>Furnace Fire</color> effect and dealing massive <color=#FF5521>Fire DMG</color>.\nWhen Koleda and Ben are deployed together, executing an enhanced <color=#FFFFFF>Basic Attack</color> will trigger a coordinated attack from both, further increasing the move's power;\nKoleda is invulnerable during the <color=#FFFFFF>Basic Attack's</color> 4th hit and enhanced <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Basic Attack: Smash 'n' Bash",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Smash 'n' Bash",
+          "param": [
+            {
+              "desc": "{Skill:1101001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1101001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6360,
+                  "damagePercentageGrowth": 580,
+                  "etherPurify": 3027,
+                  "feverRecovery": 83325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 6360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3180,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1101002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7920,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6238,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6550,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1101003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12610,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 9927,
+                  "feverRecovery": 273075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 12610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35740,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1101004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 31740,
+                  "damagePercentageGrowth": 2890,
+                  "etherPurify": 23741,
+                  "feverRecovery": 653125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2890,
+                  "main": 31740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 85470,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24930,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101005, Prop:1001}",
+              "name": "Enhanced Basic Attack 1st-Hit DMG Multiplier",
+              "param": {
+                "1101005": {
+                  "attackData": [],
+                  "attributeInfliction": 4435,
+                  "damagePercentage": 16080,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 5846,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1470,
+                  "main": 16080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6140,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101006, Prop:1001}",
+              "name": "Enhanced Basic Attack 2nd-Hit DMG Multiplier",
+              "param": {
+                "1101006": {
+                  "attackData": [],
+                  "attributeInfliction": 14908,
+                  "damagePercentage": 40490,
+                  "damagePercentageGrowth": 3690,
+                  "etherPurify": 16588,
+                  "feverRecovery": 456225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3690,
+                  "main": 40490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 59720,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15660,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101007, Prop:1001}",
+              "name": "Enhanced Basic Attack 2nd-Hit Dmg Multiplier (Teamwork)",
+              "param": {
+                "1101007": {
+                  "attackData": [],
+                  "attributeInfliction": 18629,
+                  "damagePercentage": 50130,
+                  "damagePercentageGrowth": 4560,
+                  "etherPurify": 20308,
+                  "feverRecovery": 558525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4560,
+                  "main": 50130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23460,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1101001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6360,
+                  "damagePercentageGrowth": 580,
+                  "etherPurify": 3027,
+                  "feverRecovery": 83325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3180,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1101002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7920,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6238,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6550,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1101003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12610,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 9927,
+                  "feverRecovery": 273075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 10430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35740,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1101004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 31740,
+                  "damagePercentageGrowth": 2890,
+                  "etherPurify": 23741,
+                  "feverRecovery": 653125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 24930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 85470,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24930,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101005, Prop:1002}",
+              "name": "Enhanced Basic Attack 1st-Hit Daze Multiplier",
+              "param": {
+                "1101005": {
+                  "attackData": [],
+                  "attributeInfliction": 4435,
+                  "damagePercentage": 16080,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 5846,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6140,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101006, Prop:1002}",
+              "name": "Enhanced Basic Attack 2nd-Hit Daze Multiplier",
+              "param": {
+                "1101006": {
+                  "attackData": [],
+                  "attributeInfliction": 14908,
+                  "damagePercentage": 40490,
+                  "damagePercentageGrowth": 3690,
+                  "etherPurify": 16588,
+                  "feverRecovery": 456225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 15660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 59720,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15660,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101007, Prop:1002}",
+              "name": "Enhanced Basic Attack 2nd-Hit Daze Multiplier (Teamwork)",
+              "param": {
+                "1101007": {
+                  "attackData": [],
+                  "attributeInfliction": 18629,
+                  "damagePercentage": 50130,
+                  "damagePercentageGrowth": 4560,
+                  "etherPurify": 20308,
+                  "feverRecovery": 558525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 23460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23460,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a powerful explosion on enemies in a large area, dealing massive <color=#FF5521>Fire DMG</color> while also obtaining the <color=#FFFFFF>Furnace Fire</color> effect.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Natural Disaster",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a powerful explosion on enemies in a large area in front, dealing massive <color=#FF5521>Fire DMG</color> while also obtaining the <color=#FFFFFF>Furnace Fire</color> effect.\nKoleda and Ben can team up when fighting together to launch a coordinated attack, further increasing the power of the attack.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Hammerquake",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Natural Disaster",
+          "param": [
+            {
+              "desc": "{Skill:1101301, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1101301": {
+                  "attackData": [],
+                  "attributeInfliction": 40613,
+                  "damagePercentage": 63600,
+                  "damagePercentageGrowth": 5790,
+                  "etherPurify": 20664,
+                  "feverRecovery": 2397175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5790,
+                  "main": 63600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21700,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101301, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1101301": {
+                  "attackData": [],
+                  "attributeInfliction": 40613,
+                  "damagePercentage": 63600,
+                  "damagePercentageGrowth": 5790,
+                  "etherPurify": 20664,
+                  "feverRecovery": 2397175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 990,
+                  "main": 21700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21700,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Hammerquake",
+          "param": [
+            {
+              "desc": "{Skill:1101401, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1101401": {
+                  "attackData": [],
+                  "attributeInfliction": 18003,
+                  "damagePercentage": 154880,
+                  "damagePercentageGrowth": 14080,
+                  "etherPurify": 68004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14080,
+                  "main": 154880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 100490,
+                  "stunRatioGrowth": 4570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101402, Prop:1001}",
+              "name": "DMG Multiplier (Teamwork)",
+              "param": {
+                "1101402": {
+                  "attackData": [],
+                  "attributeInfliction": 19066,
+                  "damagePercentage": 169400,
+                  "damagePercentageGrowth": 15400,
+                  "etherPurify": 67334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 15400,
+                  "main": 169400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109650,
+                  "stunRatioGrowth": 4990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101401, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1101401": {
+                  "attackData": [],
+                  "attributeInfliction": 18003,
+                  "damagePercentage": 154880,
+                  "damagePercentageGrowth": 14080,
+                  "etherPurify": 68004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4570,
+                  "main": 100490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 100490,
+                  "stunRatioGrowth": 4570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101402, Prop:1002}",
+              "name": "Daze Multiplier (Teamwork)",
+              "param": {
+                "1101402": {
+                  "attackData": [],
+                  "attributeInfliction": 19066,
+                  "damagePercentage": 169400,
+                  "damagePercentageGrowth": 15400,
+                  "etherPurify": 67334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4990,
+                  "main": 109650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109650,
+                  "stunRatioGrowth": 4990
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Wait 'n' See",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a Dodge to activate:\nStrikes enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Tremble!",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nStrikes enemies in front and creates an explosion, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Don't Look Down on Me",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Tremble!",
+          "param": [
+            {
+              "desc": "{Skill:1101201, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1101201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5610,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 2667,
+                  "feverRecovery": 73425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 5610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2810,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101201, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1101201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5610,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 2667,
+                  "feverRecovery": 73425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2810,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Don't Look Down on Me",
+          "param": [
+            {
+              "desc": "{Skill:1101202, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1101202": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 34390,
+                  "damagePercentageGrowth": 3130,
+                  "etherPurify": 32497,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3130,
+                  "main": 34390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28880,
+                  "stunRatioGrowth": 1320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101202, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1101202": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 34390,
+                  "damagePercentageGrowth": 3130,
+                  "etherPurify": 32497,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1320,
+                  "main": 28880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28880,
+                  "stunRatioGrowth": 1320
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nStrikes enemies in front and triggers an explosion, dealing <color=#FF5521>Fire DMG</color>.\nThis skill launches faster and triggers an explosion when used after the 2nd or 4th hit of Koleda's <color=#FFFFFF>Basic Attack</color> or enhanced <color=#FFFFFF>Basic Attack</color>.\nWhen Koleda and Ben are both in your squad, and this skill is quickly launched after an enhanced <color=#FFFFFF>Basic Attack</color>, they team up to launch a coordinated attack, further increasing the power of the skill.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Hammer Time",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nStrikes enemies in front and triggers a powerful explosion, dealing massive <color=#FF5521>Fire DMG</color>. Koleda also gains the <color=#FFFFFF>Furnace Fire</color> effect.\nThis skill activates faster and triggers an explosion when used after the 2nd or 4th hit of Koleda's <color=#FFFFFF>Basic Attack</color> or enhanced <color=#FFFFFF>Basic Attack</color>.\nWhen Koleda and Ben are both in your squad and this skill is quickly launched after an enhanced <color=#FFFFFF>Basic Attack</color>, they team up to launch a coordinated attack, further increasing the power of the skill.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Boiling Furnace",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Hammer Time",
+          "param": [
+            {
+              "desc": "{Skill:1101101, Prop:1001}",
+              "name": "Strike DMG Multiplier",
+              "param": {
+                "1101101": {
+                  "attackData": [],
+                  "attributeInfliction": 6418,
+                  "damagePercentage": 5190,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4935,
+                  "feverRecovery": 135850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5190,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101102, Prop:1001}",
+              "name": "Explosion DMG Multiplier",
+              "param": {
+                "1101102": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 7780,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 7780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101103, Prop:1001}",
+              "name": "Explosion DMG Multiplier (Teamwork)",
+              "param": {
+                "1101103": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 8550,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 780,
+                  "main": 8550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101101, Prop:1002}",
+              "name": "Strike Daze Multiplier",
+              "param": {
+                "1101101": {
+                  "attackData": [],
+                  "attributeInfliction": 6418,
+                  "damagePercentage": 5190,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4935,
+                  "feverRecovery": 135850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5190,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101102, Prop:1002}",
+              "name": "Explosion Daze Multiplier",
+              "param": {
+                "1101102": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 7780,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101103, Prop:1002}",
+              "name": "Explosion Daze Multiplier (Teamwork)",
+              "param": {
+                "1101103": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 8550,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Boiling Furnace",
+          "param": [
+            {
+              "desc": "{Skill:1101104, Prop:1001}",
+              "name": "Strike DMG Multiplier",
+              "param": {
+                "1101104": {
+                  "attackData": [],
+                  "attributeInfliction": 7248,
+                  "damagePercentage": 15230,
+                  "damagePercentageGrowth": 1390,
+                  "etherPurify": 14497,
+                  "feverRecovery": 398750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1390,
+                  "main": 15230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15230,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101105, Prop:1001}",
+              "name": "Explosion DMG Multiplier",
+              "param": {
+                "1101105": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 60600,
+                  "damagePercentageGrowth": 5510,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5510,
+                  "main": 60600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101106, Prop:1001}",
+              "name": "Explosion DMG Multiplier (Teamwork)",
+              "param": {
+                "1101106": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 66660,
+                  "damagePercentageGrowth": 6060,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6060,
+                  "main": 66660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101104, Prop:1002}",
+              "name": "Strike Daze Multiplier",
+              "param": {
+                "1101104": {
+                  "attackData": [],
+                  "attributeInfliction": 7248,
+                  "damagePercentage": 15230,
+                  "damagePercentageGrowth": 1390,
+                  "etherPurify": 14497,
+                  "feverRecovery": 398750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 15230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15230,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101105, Prop:1002}",
+              "name": "Explosion Daze Multiplier",
+              "param": {
+                "1101105": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 60600,
+                  "damagePercentageGrowth": 5510,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2250,
+                  "main": 49400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101106, Prop:1002}",
+              "name": "Explosion Daze Multiplier (Teamwork)",
+              "param": {
+                "1101106": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 66660,
+                  "damagePercentageGrowth": 6060,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2250,
+                  "main": 49400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1101001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Smash 'n' Bash"
+    },
+    "1101002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Hammer Time"
+    },
+    "1101003": {
+      "desc": "<IconMap:Icon_Special> (Basic Attack Combo)",
+      "name": "Special Attack: Hammer Time (Quick Detonation)"
+    },
+    "1101004": {
+      "desc": "<IconMap:Icon_SpecialReady> (Consume Energy)",
+      "name": "EX Special Attack: Boiling Furnace"
+    },
+    "1101005": {
+      "desc": "<IconMap:Icon_SpecialReady> (Basic Attack Combo) (Consume Energy)",
+      "name": "EX Special Attack: Boiling Furnace (Quick Detonation)"
+    },
+    "1101006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Tremble!"
+    },
+    "1101007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Don't Look Down on Me"
+    },
+    "1101008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Natural Disaster"
+    },
+    "1101009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Hammerquake"
+    },
+    "1101010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Coming Thru!"
+    },
+    "1101011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Protective Hammer"
+    },
+    "1101012": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Hammer Bell"
+    }
+  },
+  "skin": {
+    "3111010": {
+      "desc": "A crimson figure swings twin hammers as if she could even shatter time itself.\nStill young, her journey is only just beginning. Growing up can wait; in the end, every person becomes their own true self.",
+      "name": "Koleda: Heart & Hammer"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, Stun support",
+    "Rapidly builds up Daze on enemies",
+    "Unleashes Coordinated Attacks with Ben and boosts skill DMG"
+  ],
+  "talent": {
+    "1": {
+      "desc": "After the 2nd or 4th hit of Koleda's <color=#FFFFFF>Basic Attack</color> or her enhanced <color=#FFFFFF>Basic Attack</color>, quickly use a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> to increase the Daze dealt by 15%.",
+      "desc2": "Her fiery temper is just a facade. In reality, Koleda's thoughts are quite intricate. For example, she knows when to swing her hammer for a more painful strike.",
+      "name": "Beat of the Hammer"
+    },
+    "2": {
+      "desc": "When Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, she recovers 60 Energy. Can trigger once every 45s.",
+      "desc2": "Koleda believes perfect hammering has its own natural rhythm.\nIt's like tapping a tambourine, with each hit building up the tempo of the next beat.\nOf course, it's hard to say how many taps her \"toys\" can endure.",
+      "name": "Kinetic Recovery"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "As a qualified \"toy,\" you better not cause trouble when Koleda starts to get a feel for swinging her hammer. Just take the beating.\n—After all, what's the point of resisting?",
+      "name": "\"Mind Your Own!\""
+    },
+    "4": {
+      "desc": "Koleda gains one stack of Charge (max 2 stacks) when consuming <color=#FFFFFF>Furnace Fire</color> to use her Enhanced <color=#FFFFFF>Basic Attack</color>. When her <color=#FFFFFF>Chain Attack: Natural Disaster</color> or <color=#FFFFFF>Ultimate: Hammerquake</color> hits an enemy, she consumes all stacks of Charge to increase the attack's DMG by 18% per stack.",
+      "desc2": "Koleda feels the flames of war as her hammer swings raise the surrounding temperature.\nShe's now even more flammable and explosive than Ether.",
+      "name": "Furnace's Glow"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Koleda cares deeply about her role as a young leader potentially causing others to underestimate Belobog Heavy Industries. To compensate, she consistently trains diligently in secret.",
+      "name": "\"You Dare Underestimate Me?\""
+    },
+    "6": {
+      "desc": "When <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color> triggers an explosion that hits an enemy, it deals additional DMG equal to 360% of Koleda's ATK.",
+      "desc2": "There are two types of people that Koleda really hates:\nStupid people, and hopelessly stupid people.\nLuckily for her, Belobog always has a good supply of strong Ether explosives — plenty to use on the stupid.",
+      "name": "Saturated Blast"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

@@ -1,0 +1,1245 @@
+{
+  "camp": {
+    "4": "卡吕冬之子"
+  },
+  "elementType": {
+    "200": "物理"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "物理伤害加成"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "冲击力"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1351,
+  "locale": "zh",
+  "name": "波可娜",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1351013", "1351014"],
+      "basic": ["1351001", "1351002", "1351003", "1351004"],
+      "chain": ["1351011", "1351012"],
+      "dodge": ["1351009", "1351010"],
+      "special": ["1351005", "1351006", "1351007", "1351008"]
+    },
+    "parameterRowsById": {
+      "1351001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/3"
+      ],
+      "1351002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1351003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1351004": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/1"
+      ],
+      "1351005": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1351006": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/2"
+      ],
+      "1351007": [
+        "/skill/special/description/4/param/1",
+        "/skill/special/description/4/param/3"
+      ],
+      "1351008": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1351009": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1351010": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1351011": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1351012": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1351013": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1351014": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "6/19",
+    "fullName": "波可娜·费雷尼",
+    "gender": "女",
+    "impressionF": "我觉得她好像也没Fairy评价的那么危险，还挺有亲和力的，毕竟小猫咪能有什么坏心思呢？",
+    "impressionM": "你有这种想法就已经很危险了…啊，她发信息说，帮我弄到想要的游戏限定版了。",
+    "impressions": [
+      "对波可娜的印象：\n · 对波可娜来说，敌人或朋友并不重要，它们只是由工作临时决定的角色扮演。",
+      " · 她似乎对自己利益之外的任何事都毫不在乎，但这会不会只是假象？",
+      " · 某个人至今仍盘踞在她的回忆里，那是一段美好的往事，还是一场噩梦？"
+    ],
+    "profileDesc": "波可娜，原外环雇佣兵，现为卡吕冬之子成员，物流公司猪突猛进挂职职位：普通员工。\n警告，检测到外环多个机车族阵营和不法帮派与波可娜存在过资金往来，在加入卡吕冬之子后，此类记录有所减少，但来自新艾利都的资金转入记录大量增加，推测是由于波可娜的新身份能更方便地出入新艾利都。\n此外有资料表明，波可娜与数起外环重大事件存在间接关联，包括并不限于：帮派火并，车队重要物资情报泄露，道路离奇损毁，重要物资涨价…\n波可娜并未与卢修斯有过深的联系，目前也不存在身为其他机车族阵营内应的风险，但她的人际关系极为复杂，建议与其接触时提高警惕，尤其注意保护个人隐私。",
+    "stature": "173",
+    "trustLv": {
+      "1": "波可娜，原外环雇佣兵，现为卡吕冬之子成员，物流公司猪突猛进挂职职位：普通员工。\n警告，检测到外环多个机车族阵营和不法帮派与波可娜存在过资金往来，在加入卡吕冬之子后，此类记录有所减少，但来自新艾利都的资金转入记录大量增加，推测是由于波可娜的新身份能更方便地出入新艾利都。\n此外有资料表明，波可娜与数起外环重大事件存在间接关联，包括并不限于：帮派火并，车队重要物资情报泄露，道路离奇损毁，重要物资涨价…\n波可娜并未与卢修斯有过深的联系，目前也不存在身为其他机车族阵营内应的风险，但她的人际关系极为复杂，建议与其接触时提高警惕，尤其注意保护个人隐私。",
+      "2": "",
+      "3": "在两个已解散数年的外环雇佣兵团队中找到了波可娜的受雇记录，与其一同受雇的还有一位名为米莱娜的年轻女性，该女性的信息记录于八年前左右完全消失。\n同样在八年前，波可娜曾短暂成立过一支小型雇佣兵队伍，并未检索到队伍成员名单与解散原因。此后，波可娜的个人事业突然开始蒸蒸日上起来。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线：「悠然插曲·意外的新顾客」（主线第四章完成后开启）后解锁",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1351501": {
+        "desc": [
+          "波可娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，将会进入<color=#FFFFFF>[猎步]</color>状态，使自身造成的失衡值提升<color=#2BAD00>15%</color>，持续6秒；切换至其他角色后，若波可娜仍处于<color=#FFFFFF>[猎步]</color>状态下，则其持续时间会改为切换回波可娜时；进入<color=#FFFFFF>[猎步]</color>状态后，自身为当前操作中的角色时，波可娜重击命中敌人，能够触发队伍中上一位角色的<color=#FFFFFF>[快速支援]</color>。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[命破]</color>角色或自身阵营相同的角色时触发：\n波可娜发动<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>、<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>、<color=#FFFFFF>[支援突击：单独计价]</color>、<color=#FFFFFF>[连携技：嗨，想不到吧]</color>、<color=#FFFFFF>[终结技：噢，游戏时间]</color>命中敌人时，将对敌人施加<color=#FFFFFF>[困迹]</color>效果，持续15秒；被施加<color=#FFFFFF>[困迹]</color>效果后，所有单位发动<color=#FFFFFF>[追加攻击]</color>对目标造成的伤害提升30%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：猎手本能", "额外能力：业务搭档"],
+        "potential": []
+      },
+      "1351502": {
+        "desc": [
+          "波可娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，将会进入<color=#FFFFFF>[猎步]</color>状态，使自身造成的失衡值提升<color=#2BAD00>17.5%</color>，持续6秒；切换至其他角色后，若波可娜仍处于<color=#FFFFFF>[猎步]</color>状态下，则其持续时间会改为切换回波可娜时；进入<color=#FFFFFF>[猎步]</color>状态后，自身为当前操作中的角色时，波可娜重击命中敌人，能够触发队伍中上一位角色的<color=#FFFFFF>[快速支援]</color>。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[命破]</color>角色或自身阵营相同的角色时触发：\n波可娜发动<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>、<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>、<color=#FFFFFF>[支援突击：单独计价]</color>、<color=#FFFFFF>[连携技：嗨，想不到吧]</color>、<color=#FFFFFF>[终结技：噢，游戏时间]</color>命中敌人时，将对敌人施加<color=#FFFFFF>[困迹]</color>效果，持续15秒；被施加<color=#FFFFFF>[困迹]</color>效果后，所有单位发动<color=#FFFFFF>[追加攻击]</color>对目标造成的伤害提升30%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：猎手本能", "额外能力：业务搭档"],
+        "potential": []
+      },
+      "1351503": {
+        "desc": [
+          "波可娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，将会进入<color=#FFFFFF>[猎步]</color>状态，使自身造成的失衡值提升<color=#2BAD00>20%</color>，持续6秒；切换至其他角色后，若波可娜仍处于<color=#FFFFFF>[猎步]</color>状态下，则其持续时间会改为切换回波可娜时；进入<color=#FFFFFF>[猎步]</color>状态后，自身为当前操作中的角色时，波可娜重击命中敌人，能够触发队伍中上一位角色的<color=#FFFFFF>[快速支援]</color>。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[命破]</color>角色或自身阵营相同的角色时触发：\n波可娜发动<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>、<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>、<color=#FFFFFF>[支援突击：单独计价]</color>、<color=#FFFFFF>[连携技：嗨，想不到吧]</color>、<color=#FFFFFF>[终结技：噢，游戏时间]</color>命中敌人时，将对敌人施加<color=#FFFFFF>[困迹]</color>效果，持续15秒；被施加<color=#FFFFFF>[困迹]</color>效果后，所有单位发动<color=#FFFFFF>[追加攻击]</color>对目标造成的伤害提升30%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：猎手本能", "额外能力：业务搭档"],
+        "potential": []
+      },
+      "1351504": {
+        "desc": [
+          "波可娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，将会进入<color=#FFFFFF>[猎步]</color>状态，使自身造成的失衡值提升<color=#2BAD00>22.5%</color>，持续6秒；切换至其他角色后，若波可娜仍处于<color=#FFFFFF>[猎步]</color>状态下，则其持续时间会改为切换回波可娜时；进入<color=#FFFFFF>[猎步]</color>状态后，自身为当前操作中的角色时，波可娜重击命中敌人，能够触发队伍中上一位角色的<color=#FFFFFF>[快速支援]</color>。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[命破]</color>角色或自身阵营相同的角色时触发：\n波可娜发动<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>、<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>、<color=#FFFFFF>[支援突击：单独计价]</color>、<color=#FFFFFF>[连携技：嗨，想不到吧]</color>、<color=#FFFFFF>[终结技：噢，游戏时间]</color>命中敌人时，将对敌人施加<color=#FFFFFF>[困迹]</color>效果，持续15秒；被施加<color=#FFFFFF>[困迹]</color>效果后，所有单位发动<color=#FFFFFF>[追加攻击]</color>对目标造成的伤害提升30%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：猎手本能", "额外能力：业务搭档"],
+        "potential": []
+      },
+      "1351505": {
+        "desc": [
+          "波可娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，将会进入<color=#FFFFFF>[猎步]</color>状态，使自身造成的失衡值提升<color=#2BAD00>25%</color>，持续6秒；切换至其他角色后，若波可娜仍处于<color=#FFFFFF>[猎步]</color>状态下，则其持续时间会改为切换回波可娜时；进入<color=#FFFFFF>[猎步]</color>状态后，自身为当前操作中的角色时，波可娜重击命中敌人，能够触发队伍中上一位角色的<color=#FFFFFF>[快速支援]</color>。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[命破]</color>角色或自身阵营相同的角色时触发：\n波可娜发动<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>、<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>、<color=#FFFFFF>[支援突击：单独计价]</color>、<color=#FFFFFF>[连携技：嗨，想不到吧]</color>、<color=#FFFFFF>[终结技：噢，游戏时间]</color>命中敌人时，将对敌人施加<color=#FFFFFF>[困迹]</color>效果，持续15秒；被施加<color=#FFFFFF>[困迹]</color>效果后，所有单位发动<color=#FFFFFF>[追加攻击]</color>对目标造成的伤害提升30%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：猎手本能", "额外能力：业务搭档"],
+        "potential": []
+      },
+      "1351506": {
+        "desc": [
+          "波可娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，将会进入<color=#FFFFFF>[猎步]</color>状态，使自身造成的失衡值提升<color=#2BAD00>27.5%</color>，持续6秒；切换至其他角色后，若波可娜仍处于<color=#FFFFFF>[猎步]</color>状态下，则其持续时间会改为切换回波可娜时；进入<color=#FFFFFF>[猎步]</color>状态后，自身为当前操作中的角色时，波可娜重击命中敌人，能够触发队伍中上一位角色的<color=#FFFFFF>[快速支援]</color>。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[命破]</color>角色或自身阵营相同的角色时触发：\n波可娜发动<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>、<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>、<color=#FFFFFF>[支援突击：单独计价]</color>、<color=#FFFFFF>[连携技：嗨，想不到吧]</color>、<color=#FFFFFF>[终结技：噢，游戏时间]</color>命中敌人时，将对敌人施加<color=#FFFFFF>[困迹]</color>效果，持续15秒；被施加<color=#FFFFFF>[困迹]</color>效果后，所有单位发动<color=#FFFFFF>[追加攻击]</color>对目标造成的伤害提升30%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：猎手本能", "额外能力：业务搭档"],
+        "potential": []
+      },
+      "1351507": {
+        "desc": [
+          "波可娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，将会进入<color=#FFFFFF>[猎步]</color>状态，使自身造成的失衡值提升<color=#2BAD00>30%</color>，持续6秒；切换至其他角色后，若波可娜仍处于<color=#FFFFFF>[猎步]</color>状态下，则其持续时间会改为切换回波可娜时；进入<color=#FFFFFF>[猎步]</color>状态后，自身为当前操作中的角色时，波可娜重击命中敌人，能够触发队伍中上一位角色的<color=#FFFFFF>[快速支援]</color>。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[命破]</color>角色或自身阵营相同的角色时触发：\n波可娜发动<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>、<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>、<color=#FFFFFF>[支援突击：单独计价]</color>、<color=#FFFFFF>[连携技：嗨，想不到吧]</color>、<color=#FFFFFF>[终结技：噢，游戏时间]</color>命中敌人时，将对敌人施加<color=#FFFFFF>[困迹]</color>效果，持续15秒；被施加<color=#FFFFFF>[困迹]</color>效果后，所有单位发动<color=#FFFFFF>[追加攻击]</color>对目标造成的伤害提升30%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：猎手本能", "额外能力：业务搭档"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对前方敌人发动突刺并衔接快速斩击，造成<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：雇佣合同·保镖业务",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n回避敌人的攻击，并触发<color=#FFFFFF>[极限视域]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "回避支援：雇佣合同·作战外包",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[回避支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n向前腾空跃起后开枪射击，造成<color=#F0D12B>物理伤害</color>；\n招式发动时，将消耗1点<color=#FFFFFF>[支援点数]</color>，使自身进入<color=#FFFFFF>[猎步]</color>状态；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：单独计价",
+          "potential": []
+        },
+        {
+          "name": "快速支援：雇佣合同·保镖业务",
+          "param": [
+            {
+              "desc": "{Skill:1351013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351013": {
+                  "attackData": [],
+                  "attributeInfliction": 7829,
+                  "damagePercentage": 7830,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 3915,
+                  "feverRecovery": 215325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7830,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351013": {
+                  "attackData": [],
+                  "attributeInfliction": 7829,
+                  "damagePercentage": 7830,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 3915,
+                  "feverRecovery": 215325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7830,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：单独计价",
+          "param": [
+            {
+              "desc": "{Skill:1351014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351014": {
+                  "attackData": [],
+                  "attributeInfliction": 28617,
+                  "damagePercentage": 30710,
+                  "damagePercentageGrowth": 2800,
+                  "etherPurify": 13997,
+                  "feverRecovery": 959475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2800,
+                  "main": 30710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26530,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351014": {
+                  "attackData": [],
+                  "attributeInfliction": 28617,
+                  "damagePercentage": 30710,
+                  "damagePercentageGrowth": 2800,
+                  "etherPurify": 13997,
+                  "feverRecovery": 959475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1210,
+                  "main": 26530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26530,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多三段的攻击，造成<color=#F0D12B>物理伤害</color>；",
+          "name": "普通攻击：捷击",
+          "potential": []
+        },
+        {
+          "desc": "长按 <IconMap:Icon_Normal> 发动：\n向前跃进并发动连续斩击，造成<color=#F0D12B>物理伤害</color>；",
+          "name": "普通攻击：跃击",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：捷击",
+          "param": [
+            {
+              "desc": "{Skill:1351001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1351001": {
+                  "attackData": [],
+                  "attributeInfliction": 2848,
+                  "damagePercentage": 3570,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2849,
+                  "feverRecovery": 78375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2850,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1351002": {
+                  "attackData": [],
+                  "attributeInfliction": 7522,
+                  "damagePercentage": 9410,
+                  "damagePercentageGrowth": 860,
+                  "etherPurify": 7523,
+                  "feverRecovery": 207075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 860,
+                  "main": 9410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7530,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1351003": {
+                  "attackData": [],
+                  "attributeInfliction": 13405,
+                  "damagePercentage": 16760,
+                  "damagePercentageGrowth": 1530,
+                  "etherPurify": 13406,
+                  "feverRecovery": 368775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1530,
+                  "main": 16760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 48260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13410,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1351001": {
+                  "attackData": [],
+                  "attributeInfliction": 2848,
+                  "damagePercentage": 3570,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2849,
+                  "feverRecovery": 78375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2850,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1351002": {
+                  "attackData": [],
+                  "attributeInfliction": 7522,
+                  "damagePercentage": 9410,
+                  "damagePercentageGrowth": 860,
+                  "etherPurify": 7523,
+                  "feverRecovery": 207075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 350,
+                  "main": 7530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7530,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1351003": {
+                  "attackData": [],
+                  "attributeInfliction": 13405,
+                  "damagePercentage": 16760,
+                  "damagePercentageGrowth": 1530,
+                  "etherPurify": 13406,
+                  "feverRecovery": 368775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 48260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13410,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：跃击",
+          "param": [
+            {
+              "desc": "{Skill:1351004, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351004": {
+                  "attackData": [],
+                  "attributeInfliction": 10797,
+                  "damagePercentage": 13500,
+                  "damagePercentageGrowth": 1230,
+                  "etherPurify": 10798,
+                  "feverRecovery": 297000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1230,
+                  "main": 13500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10800,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351004, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351004": {
+                  "attackData": [],
+                  "attributeInfliction": 10797,
+                  "damagePercentage": 13500,
+                  "damagePercentageGrowth": 1230,
+                  "etherPurify": 10798,
+                  "feverRecovery": 297000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10800,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n向前方发动蓄力射击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：嗨，想不到吧",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n向前方大范围敌人发动强力射击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：噢，游戏时间",
+          "potential": []
+        },
+        {
+          "name": "连携技：嗨，想不到吧",
+          "param": [
+            {
+              "desc": "{Skill:1351011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351011": {
+                  "attackData": [],
+                  "attributeInfliction": 33453,
+                  "damagePercentage": 53410,
+                  "damagePercentageGrowth": 4860,
+                  "etherPurify": 13504,
+                  "feverRecovery": 2200275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4860,
+                  "main": 53410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13510,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351011": {
+                  "attackData": [],
+                  "attributeInfliction": 33453,
+                  "damagePercentage": 53410,
+                  "damagePercentageGrowth": 4860,
+                  "etherPurify": 13504,
+                  "feverRecovery": 2200275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 13510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13510,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：噢，游戏时间",
+          "param": [
+            {
+              "desc": "{Skill:1351012, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351012": {
+                  "attackData": [],
+                  "attributeInfliction": 11496,
+                  "damagePercentage": 139380,
+                  "damagePercentageGrowth": 12680,
+                  "etherPurify": 61497,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 12680,
+                  "main": 139380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 88230,
+                  "stunRatioGrowth": 4020
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351012, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351012": {
+                  "attackData": [],
+                  "attributeInfliction": 11496,
+                  "damagePercentage": 139380,
+                  "damagePercentageGrowth": 12680,
+                  "etherPurify": 61497,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4020,
+                  "main": 88230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 88230,
+                  "stunRatioGrowth": 4020
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：翻正反射",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前方突进斩击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "冲刺攻击：先下手为强",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动突刺并衔接快速斩击，造成<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：睚眦必报",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：先下手为强",
+          "param": [
+            {
+              "desc": "{Skill:1351009, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351009": {
+                  "attackData": [],
+                  "attributeInfliction": 2414,
+                  "damagePercentage": 4830,
+                  "damagePercentageGrowth": 440,
+                  "etherPurify": 2415,
+                  "feverRecovery": 66550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 4830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2420,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351009, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351009": {
+                  "attackData": [],
+                  "attributeInfliction": 2414,
+                  "damagePercentage": 4830,
+                  "damagePercentageGrowth": 440,
+                  "etherPurify": 2415,
+                  "feverRecovery": 66550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2420,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：睚眦必报",
+          "param": [
+            {
+              "desc": "{Skill:1351010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351010": {
+                  "attackData": [],
+                  "attributeInfliction": 7829,
+                  "damagePercentage": 20180,
+                  "damagePercentageGrowth": 1840,
+                  "etherPurify": 22830,
+                  "feverRecovery": 215325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1840,
+                  "main": 20180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17830,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351010": {
+                  "attackData": [],
+                  "attributeInfliction": 7829,
+                  "damagePercentage": 20180,
+                  "damagePercentageGrowth": 1840,
+                  "etherPurify": 22830,
+                  "feverRecovery": 215325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17830,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n向前方快速来回穿刺，造成<color=#F0D12B>物理伤害</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：噬爪",
+          "potential": []
+        },
+        {
+          "desc": "波可娜进入<color=#FFFFFF>[猎步]</color>状态后，队伍中其他操作中的角色的<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[强化特殊技]</color>重击命中敌人时触发：\n围绕目标敌人，快速来回穿刺，造成<color=#F0D12B>物理伤害</color>；\n招式发动后，队伍中其他操作中的角色，发动任意攻击命中敌人时，波可娜会重复发动攻击，最多额外触发5次，且最后一次攻击会被替换为更加强力的终结一击；\n招式发动期间拥有无敌效果；\n<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>为<color=#FFFFFF>[追加攻击]</color>。",
+          "name": "特殊技：噬爪·噩梦袭影",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n向前方多次来回穿刺，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：噬爪·瞬步",
+          "potential": []
+        },
+        {
+          "name": "特殊技：噬爪",
+          "param": [
+            {
+              "desc": "{Skill:1351005, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351005": {
+                  "attackData": [],
+                  "attributeInfliction": 2500,
+                  "damagePercentage": 2510,
+                  "damagePercentageGrowth": 230,
+                  "etherPurify": 2501,
+                  "feverRecovery": 137775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 2510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351005, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351005": {
+                  "attackData": [],
+                  "attributeInfliction": 2500,
+                  "damagePercentage": 2510,
+                  "damagePercentageGrowth": 230,
+                  "etherPurify": 2501,
+                  "feverRecovery": 137775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：噬爪·噩梦袭影",
+          "param": [
+            {
+              "desc": "{Skill:1351006, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351006": {
+                  "attackData": [],
+                  "attributeInfliction": 1736,
+                  "damagePercentage": 4630,
+                  "damagePercentageGrowth": 430,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 4630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351007, Prop:1001}",
+              "name": "终结一击伤害倍率",
+              "param": {
+                "1351007": {
+                  "attackData": [],
+                  "attributeInfliction": 1736,
+                  "damagePercentage": 5350,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 5350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3480,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351006, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351006": {
+                  "attackData": [],
+                  "attributeInfliction": 1736,
+                  "damagePercentage": 4630,
+                  "damagePercentageGrowth": 430,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351007, Prop:1002}",
+              "name": "终结一击失衡倍率",
+              "param": {
+                "1351007": {
+                  "attackData": [],
+                  "attributeInfliction": 1736,
+                  "damagePercentage": 5350,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3480,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：噬爪·瞬步",
+          "param": [
+            {
+              "desc": "{Skill:1351008, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1351008": {
+                  "attackData": [],
+                  "attributeInfliction": 25548,
+                  "damagePercentage": 34770,
+                  "damagePercentageGrowth": 3170,
+                  "etherPurify": 8004,
+                  "feverRecovery": 1426425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3170,
+                  "main": 34770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21170,
+                  "stunRatioGrowth": 970
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1351008, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1351008": {
+                  "attackData": [],
+                  "attributeInfliction": 25548,
+                  "damagePercentage": 34770,
+                  "damagePercentageGrowth": 3170,
+                  "etherPurify": 8004,
+                  "feverRecovery": 1426425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 970,
+                  "main": 21170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21170,
+                  "stunRatioGrowth": 970
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1351001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：捷击"
+    },
+    "1351002": {
+      "desc": "<IconMap:Icon_Normal>（长按）",
+      "name": "普通攻击：跃击"
+    },
+    "1351003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：噬爪"
+    },
+    "1351004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：噬爪·瞬步"
+    },
+    "1351005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：先下手为强"
+    },
+    "1351006": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：睚眦必报"
+    },
+    "1351007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：嗨，想不到吧"
+    },
+    "1351008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：噢，游戏时间"
+    },
+    "1351009": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：雇佣合同·保镖业务"
+    },
+    "1351010": {
+      "desc": "<IconMap:Icon_Switch>（触发回避支援时）",
+      "name": "回避支援：雇佣合同·作战外包"
+    },
+    "1351011": {
+      "desc": "<IconMap:Icon_Normal>（发动回避支援后）",
+      "name": "支援突击：单独计价"
+    }
+  },
+  "skin": {
+    "3113510": {
+      "desc": "风尘仆仆的雇佣兵本该浪迹天涯，但这里阳光温暖，恰好适合安睡。",
+      "name": "波可娜·倦尾栖痕"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，后台增伤辅助",
+    "进入猎步状态提升失衡效率"
+  ],
+  "talent": {
+    "1": {
+      "desc": "对被施加<color=#FFFFFF>[困迹]</color>效果的敌人造成伤害时，自身暴击率提升10%。",
+      "desc2": "「利己主义是一种本能，但其实也可以在后天习得。」\n「如何习得？」\n「多吃点亏自然就明白了。」",
+      "name": "利己主义"
+    },
+    "2": {
+      "desc": "处于<color=#FFFFFF>[核心被动：猎手本能]</color>的<color=#FFFFFF>[猎步]</color>状态时，波可娜的攻击力额外提升10%。",
+      "desc2": "「一个雇佣兵最重要的素质不是忠诚，而是懂得借势而为。挑选合适的雇主，接下合适的委托，完成分内工作，绝不签长期合同。即使跳槽去对手那边，原雇主也没什么话好说。」\n「波可娜，刚才又有人来找你麻烦，被我打发走了。你怎么会得罪这么多人？」\n「是感情用事的人太多了。所以你看，他们都是一群拈不清自己斤两的失败者。」",
+      "name": "借势而为"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "波可娜居住的卡车车厢门上贴着一张大纸。上面用红色的大字写着：这是我的地盘！进来要敲门！敲门！敲门！\n纸下方还贴有一张稍小的纸，上面用黑色的大字写着：凯撒，赔我的锁！10万丁尼！\n黑色的大字下还有一行歪歪扭扭的小字：我问过绳匠了，那锁2万！",
+      "name": "领地意识"
+    },
+    "4": {
+      "desc": "发动<color=#FFFFFF>[强化特殊技：噬爪·瞬步]</color>时的能量消耗降低5点。",
+      "desc2": "「挑战强者有什么意思，我又不是自虐狂。对我而言知道自己稳赢的时候，才能体会真正的狩猎乐趣！」\n5分钟后。\n「这游戏的AI太弱了吧，没劲。」",
+      "name": "狩猎乐趣"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "波可娜童年最早的模糊回忆，是一条温暖的大尾巴。在她刚学会爬行的时候，最喜欢玩追逐它的游戏。\n「后来呢？」\n「他们告诉我，那条尾巴就是我自己的。」\n但波可娜知道，那条尾巴不是她的。因为除了尾巴游戏，晚上它还会紧紧地包裹住她，度过每一个寒冷的夜晚。可能是空洞把它夺走了，或者是别的什么…哎，无所谓，反正她早就不玩这个游戏了。",
+      "name": "尾巴游戏"
+    },
+    "6": {
+      "desc": "<color=#FFFFFF>[特殊技：噬爪·噩梦袭影]</color>造成的伤害提升15%，重复攻击的可触发次数额外提升2次；<color=#FFFFFF>[额外能力：业务搭档]</color>中<color=#FFFFFF>[困迹]</color>的效果对<color=#FFFFFF>[追加攻击]</color>以外的伤害类型也会生效。",
+      "desc2": "覆面式呼吸过滤器挡住了以太粒子和花粉，阻隔了或好奇或畏惧或不怀好意的视线，却让人再也没办法蜷缩起来舒服地睡个好觉了。好想去一个温暖的地方，毫无防备地睡一个午觉…\n车厢的门被毫无征兆地推开了，从梦中惊醒的她立刻抓起老搭档扣在脸上，「你们能不能学会敲门？！」\n…啊，原来现在她已经可以摘掉它了。",
+      "name": "面具之下"
+    }
+  },
+  "weaponType": {
+    "2": "击破"
+  }
+}

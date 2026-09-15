@@ -1,0 +1,1528 @@
+{
+  "camp": {
+    "12": "Krampus Compliance Authority"
+  },
+  "elementType": {
+    "202": "Ice"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "11102": {
+          "format": "{0:0.#%}",
+          "name": "HP"
+        },
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "11102": {
+          "format": "{0:0.#%}",
+          "name": "HP"
+        },
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "11102": {
+          "format": "{0:0.#%}",
+          "name": "HP"
+        },
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "11102": {
+          "format": "{0:0.#%}",
+          "name": "HP"
+        },
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "11102": {
+          "format": "{0:0.#%}",
+          "name": "HP"
+        },
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "11102": {
+          "format": "{0:0.#%}",
+          "name": "HP"
+        },
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "HP"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1341,
+  "locale": "en",
+  "name": "Zhao",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1341015",
+        "1341016",
+        "1341017",
+        "1341018",
+        "1341019",
+        "1341020"
+      ],
+      "basic": [
+        "1341001",
+        "1341002",
+        "1341003",
+        "1341004",
+        "1341005",
+        "1341006",
+        "1341008"
+      ],
+      "chain": ["1341013", "1341014", "1341023"],
+      "dodge": ["1341011", "1341012"],
+      "special": ["1341009", "1341010"]
+    },
+    "parameterRowsById": {
+      "1341001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1341002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1341003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1341004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1341005": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1341006": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1341008": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/1"
+      ],
+      "1341009": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1341010": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1341011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1341012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1341013": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1341014": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1341015": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1341016": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1341017": ["/skill/assist/description/6/param/0"],
+      "1341018": ["/skill/assist/description/6/param/1"],
+      "1341019": ["/skill/assist/description/6/param/2"],
+      "1341020": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ],
+      "1341023": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "OCT 14",
+    "fullName": "Zhao",
+    "gender": "Female",
+    "impressionF": "I feel especially safe when I'm out investigating with Xiao'Zhao. Like... she's the kind of person who never loses out when dealing with others.",
+    "impressionM": "Whenever the group decides on something and Xiao'Zhao raises no objections, you can bet she's judged the pros and cons and found it worth attempting.",
+    "impressions": [
+      "Impressions of Zhao:\n · To someone like Xiao'Zhao, who cares deeply about value, a trading partner is a very dependable connection.",
+      " · But when a partner offers help without asking for anything in return, Xiao'Zhao gets a bit uncomfortable. It's not that she dislikes them — she just can't figure out what she's supposed to offer back to complete the \"transaction.\"",
+      " · As more partners like that appeared in her life, Xiao'Zhao eventually realized that being liked isn't a bad thing at all, and it has nothing to do with how much value she holds."
+    ],
+    "profileDesc": "Zhao, a Krampus Compliance Authority Judge, was one of the elite members who joined in the early days.\n\nThough she looks innocent and cute on the outside, she's actually sharp-minded, meticulous, and principled. She puts great importance on \"value\" and \"equivalent exchange\" — not in the sense of pricing things with money, but in analyzing someone's ability and potential, giving an objective and long-term assessment of the impact they can make.\n\nIt's said this mindset didn't come from Zhao's work at Krampus, but had already taken root during her childhood. She evaluates not only others, but herself as well. \"Only those with value deserve to be seen.\"\n\nThough she rarely shows it openly, Zhao remains cautious toward kindness that comes without reason. It conflicts with her belief in \"equivalent exchange,\" and she tends to assume the other person must have a deeper motive for offering help.\nAs such, when dealing with Zhao, it's best to focus on mutual benefit first. If you want to break through her defenses with sheer sincerity and goodwill, you'll be fighting an uphill battle.\n\nThere's also one piece of intel that can't be fully confirmed: Zhao loves vegetables and dislikes meat, but she seems to be pretending she enjoys meat as well.",
+    "stature": "118",
+    "trustLv": {
+      "1": "Zhao, a Krampus Compliance Authority Judge, was one of the elite members who joined in the early days.\n\nThough she looks innocent and cute on the outside, she's actually sharp-minded, meticulous, and principled. She puts great importance on \"value\" and \"equivalent exchange\" — not in the sense of pricing things with money, but in analyzing someone's ability and potential, giving an objective and long-term assessment of the impact they can make.\n\nIt's said this mindset didn't come from Zhao's work at Krampus, but had already taken root during her childhood. She evaluates not only others, but herself as well. \"Only those with value deserve to be seen.\"\n\nThough she rarely shows it openly, Zhao remains cautious toward kindness that comes without reason. It conflicts with her belief in \"equivalent exchange,\" and she tends to assume the other person must have a deeper motive for offering help.\nAs such, when dealing with Zhao, it's best to focus on mutual benefit first. If you want to break through her defenses with sheer sincerity and goodwill, you'll be fighting an uphill battle.\n\nThere's also one piece of intel that can't be fully confirmed: Zhao loves vegetables and dislikes meat, but she seems to be pretending she enjoys meat as well.",
+      "2": "",
+      "3": "Zhao grew up in a large family that was both poor and struggling, where affection and trust never outweighed the rule of survival: \"Whoever can bring the most benefit gets more to eat.\"\n\nShe looked sweet and likeable, but that only made others think she was easy prey. In that harsh, predatory environment, people quickly labeled her as \"low value.\" So her elders wrote her off as someone who'd never amount to anything, leaving her to a fate of being dismissed and abandoned. Everything changed when she met a Krampus official who saw her hidden potential instantly. From that moment on, she sealed away her past with her family, joined Krampus, and vowed to prove her true worth.\n\"Once you have value, you'll be seen even if you're crawling in the mud.\"",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 6",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1341501": {
+        "desc": [
+          "Zhao gains bonus CRIT Rate based on her initial Max HP, gaining <color=#2BAD00>0.8%</color> CRIT Rate for every 1,000 initial Max HP.\nUpon entering the battlefield, Zhao gains 100 <color=#FFFFFF>Frostbite Points</color>. This effect can trigger once every 180s in Investigation Zone mode. The maximum amount of <color=#FFFFFF>Frostbite Points</color> is 100.\nWhen the currently active character's attacks hit an enemy, Zhao gains 6 <color=#FFFFFF>Frostbite Points</color>. This can be triggered once every 3s.\nWhen <color=#FFFFFF>Frostbite Points</color> are maxed out, switching Zhao to the field while in combat will activate her <color=#FFFFFF>Entry Skill</color>.\nWhen Zhao activates her <color=#FFFFFF>Entry Skill</color>, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhile <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members gain 5% Max HP for 40s. Re-activating <color=#FFFFFF>Ether Veil: Wellspring</color> ends the existing instance before applying a new <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhen Zhao activates <color=#FFFFFF>Ether Veil: Wellspring</color>, all squad members' ATK increase by <color=#2BAD00>100</color> for 50s. Repeated triggers reset the duration.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Anomaly</color>, or <color=#FFFFFF>Support</color> character:\nWhen Zhao is within any <color=#FFFFFF>Ether Veil</color>, the whole squad's DMG increases by 10%. If Zhao's initial Max HP exceeds 15,000, every additional 400 initial Max HP increases this DMG bonus by an additional 1%, up to a total maximum increase of 40%. This bonus reaches its maximum when Zhao's initial Max HP reaches 27,000."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Ideal Colleague",
+          "Additional Ability: Crystallization"
+        ],
+        "potential": []
+      },
+      "1341502": {
+        "desc": [
+          "Zhao gains bonus CRIT Rate based on her initial Max HP, gaining <color=#2BAD00>0.9%</color> CRIT Rate for every 1,000 initial Max HP.\nUpon entering the battlefield, Zhao gains 100 <color=#FFFFFF>Frostbite Points</color>. This effect can trigger once every 180s in Investigation Zone mode. The maximum amount of <color=#FFFFFF>Frostbite Points</color> is 100.\nWhen the currently active character's attacks hit an enemy, Zhao gains 6 <color=#FFFFFF>Frostbite Points</color>. This can be triggered once every 3s.\nWhen <color=#FFFFFF>Frostbite Points</color> are maxed out, switching Zhao to the field while in combat will activate her <color=#FFFFFF>Entry Skill</color>.\nWhen Zhao activates her <color=#FFFFFF>Entry Skill</color>, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhile <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members gain 5% Max HP for 40s. Re-activating <color=#FFFFFF>Ether Veil: Wellspring</color> ends the existing instance before applying a new <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhen Zhao activates <color=#FFFFFF>Ether Veil: Wellspring</color>, all squad members' ATK increase by <color=#2BAD00>250</color> for 50s. Repeated triggers reset the duration.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Anomaly</color>, or <color=#FFFFFF>Support</color> character:\nWhen Zhao is within any <color=#FFFFFF>Ether Veil</color>, the whole squad's DMG increases by 10%. If Zhao's initial Max HP exceeds 15,000, every additional 400 initial Max HP increases this DMG bonus by an additional 1%, up to a total maximum increase of 40%. This bonus reaches its maximum when Zhao's initial Max HP reaches 27,000."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Ideal Colleague",
+          "Additional Ability: Crystallization"
+        ],
+        "potential": []
+      },
+      "1341503": {
+        "desc": [
+          "Zhao gains bonus CRIT Rate based on her initial Max HP, gaining <color=#2BAD00>1%</color> CRIT Rate for every 1,000 initial Max HP.\nUpon entering the battlefield, Zhao gains 100 <color=#FFFFFF>Frostbite Points</color>. This effect can trigger once every 180s in Investigation Zone mode. The maximum amount of <color=#FFFFFF>Frostbite Points</color> is 100.\nWhen the currently active character's attacks hit an enemy, Zhao gains 6 <color=#FFFFFF>Frostbite Points</color>. This can be triggered once every 3s.\nWhen <color=#FFFFFF>Frostbite Points</color> are maxed out, switching Zhao to the field while in combat will activate her <color=#FFFFFF>Entry Skill</color>.\nWhen Zhao activates her <color=#FFFFFF>Entry Skill</color>, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhile <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members gain 5% Max HP for 40s. Re-activating <color=#FFFFFF>Ether Veil: Wellspring</color> ends the existing instance before applying a new <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhen Zhao activates <color=#FFFFFF>Ether Veil: Wellspring</color>, all squad members' ATK increase by <color=#2BAD00>400</color> for 50s. Repeated triggers reset the duration.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Anomaly</color>, or <color=#FFFFFF>Support</color> character:\nWhen Zhao is within any <color=#FFFFFF>Ether Veil</color>, the whole squad's DMG increases by 10%. If Zhao's initial Max HP exceeds 15,000, every additional 400 initial Max HP increases this DMG bonus by an additional 1%, up to a total maximum increase of 40%. This bonus reaches its maximum when Zhao's initial Max HP reaches 27,000."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Ideal Colleague",
+          "Additional Ability: Crystallization"
+        ],
+        "potential": []
+      },
+      "1341504": {
+        "desc": [
+          "Zhao gains bonus CRIT Rate based on her initial Max HP, gaining <color=#2BAD00>1.1%</color> CRIT Rate for every 1,000 initial Max HP.\nUpon entering the battlefield, Zhao gains 100 <color=#FFFFFF>Frostbite Points</color>. This effect can trigger once every 180s in Investigation Zone mode. The maximum amount of <color=#FFFFFF>Frostbite Points</color> is 100.\nWhen the currently active character's attacks hit an enemy, Zhao gains 6 <color=#FFFFFF>Frostbite Points</color>. This can be triggered once every 3s.\nWhen <color=#FFFFFF>Frostbite Points</color> are maxed out, switching Zhao to the field while in combat will activate her <color=#FFFFFF>Entry Skill</color>.\nWhen Zhao activates her <color=#FFFFFF>Entry Skill</color>, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhile <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members gain 5% Max HP for 40s. Re-activating <color=#FFFFFF>Ether Veil: Wellspring</color> ends the existing instance before applying a new <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhen Zhao activates <color=#FFFFFF>Ether Veil: Wellspring</color>, all squad members' ATK increase by <color=#2BAD00>550</color> for 50s. Repeated triggers reset the duration.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Anomaly</color>, or <color=#FFFFFF>Support</color> character:\nWhen Zhao is within any <color=#FFFFFF>Ether Veil</color>, the whole squad's DMG increases by 10%. If Zhao's initial Max HP exceeds 15,000, every additional 400 initial Max HP increases this DMG bonus by an additional 1%, up to a total maximum increase of 40%. This bonus reaches its maximum when Zhao's initial Max HP reaches 27,000."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Ideal Colleague",
+          "Additional Ability: Crystallization"
+        ],
+        "potential": []
+      },
+      "1341505": {
+        "desc": [
+          "Zhao gains bonus CRIT Rate based on her initial Max HP, gaining <color=#2BAD00>1.2%</color> CRIT Rate for every 1,000 initial Max HP.\nUpon entering the battlefield, Zhao gains 100 <color=#FFFFFF>Frostbite Points</color>. This effect can trigger once every 180s in Investigation Zone mode. The maximum amount of <color=#FFFFFF>Frostbite Points</color> is 100.\nWhen the currently active character's attacks hit an enemy, Zhao gains 6 <color=#FFFFFF>Frostbite Points</color>. This can be triggered once every 3s.\nWhen <color=#FFFFFF>Frostbite Points</color> are maxed out, switching Zhao to the field while in combat will activate her <color=#FFFFFF>Entry Skill</color>.\nWhen Zhao activates her <color=#FFFFFF>Entry Skill</color>, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhile <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members gain 5% Max HP for 40s. Re-activating <color=#FFFFFF>Ether Veil: Wellspring</color> ends the existing instance before applying a new <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhen Zhao activates <color=#FFFFFF>Ether Veil: Wellspring</color>, all squad members' ATK increase by <color=#2BAD00>700</color> for 50s. Repeated triggers reset the duration.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Anomaly</color>, or <color=#FFFFFF>Support</color> character:\nWhen Zhao is within any <color=#FFFFFF>Ether Veil</color>, the whole squad's DMG increases by 10%. If Zhao's initial Max HP exceeds 15,000, every additional 400 initial Max HP increases this DMG bonus by an additional 1%, up to a total maximum increase of 40%. This bonus reaches its maximum when Zhao's initial Max HP reaches 27,000."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Ideal Colleague",
+          "Additional Ability: Crystallization"
+        ],
+        "potential": []
+      },
+      "1341506": {
+        "desc": [
+          "Zhao gains bonus CRIT Rate based on her initial Max HP, gaining <color=#2BAD00>1.3%</color> CRIT Rate for every 1,000 initial Max HP.\nUpon entering the battlefield, Zhao gains 100 <color=#FFFFFF>Frostbite Points</color>. This effect can trigger once every 180s in Investigation Zone mode. The maximum amount of <color=#FFFFFF>Frostbite Points</color> is 100.\nWhen the currently active character's attacks hit an enemy, Zhao gains 6 <color=#FFFFFF>Frostbite Points</color>. This can be triggered once every 3s.\nWhen <color=#FFFFFF>Frostbite Points</color> are maxed out, switching Zhao to the field while in combat will activate her <color=#FFFFFF>Entry Skill</color>.\nWhen Zhao activates her <color=#FFFFFF>Entry Skill</color>, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhile <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members gain 5% Max HP for 40s. Re-activating <color=#FFFFFF>Ether Veil: Wellspring</color> ends the existing instance before applying a new <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhen Zhao activates <color=#FFFFFF>Ether Veil: Wellspring</color>, all squad members' ATK increase by <color=#2BAD00>850</color> for 50s. Repeated triggers reset the duration.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Anomaly</color>, or <color=#FFFFFF>Support</color> character:\nWhen Zhao is within any <color=#FFFFFF>Ether Veil</color>, the whole squad's DMG increases by 10%. If Zhao's initial Max HP exceeds 15,000, every additional 400 initial Max HP increases this DMG bonus by an additional 1%, up to a total maximum increase of 40%. This bonus reaches its maximum when Zhao's initial Max HP reaches 27,000."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Ideal Colleague",
+          "Additional Ability: Crystallization"
+        ],
+        "potential": []
+      },
+      "1341507": {
+        "desc": [
+          "Zhao gains bonus CRIT Rate based on her initial Max HP, gaining <color=#2BAD00>1.4%</color> CRIT Rate for every 1,000 initial Max HP.\nUpon entering the battlefield, Zhao gains 100 <color=#FFFFFF>Frostbite Points</color>. This effect can trigger once every 180s in Investigation Zone mode. The maximum amount of <color=#FFFFFF>Frostbite Points</color> is 100.\nWhen the currently active character's attacks hit an enemy, Zhao gains 6 <color=#FFFFFF>Frostbite Points</color>. This can be triggered once every 3s.\nWhen <color=#FFFFFF>Frostbite Points</color> are maxed out, switching Zhao to the field while in combat will activate her <color=#FFFFFF>Entry Skill</color>.\nWhen Zhao activates her <color=#FFFFFF>Entry Skill</color>, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhile <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members gain 5% Max HP for 40s. Re-activating <color=#FFFFFF>Ether Veil: Wellspring</color> ends the existing instance before applying a new <color=#FFFFFF>Ether Veil: Wellspring</color>.\nWhen Zhao activates <color=#FFFFFF>Ether Veil: Wellspring</color>, all squad members' ATK increase by <color=#2BAD00>1,000</color> for 50s. Repeated triggers reset the duration.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Anomaly</color>, or <color=#FFFFFF>Support</color> character:\nWhen Zhao is within any <color=#FFFFFF>Ether Veil</color>, the whole squad's DMG increases by 10%. If Zhao's initial Max HP exceeds 15,000, every additional 400 initial Max HP increases this DMG bonus by an additional 1%, up to a total maximum increase of 40%. This bonus reaches its maximum when Zhao's initial Max HP reaches 27,000."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Ideal Colleague",
+          "Additional Ability: Crystallization"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When Zhao has maximum <color=#FFFFFF>Frostbite Points</color>, and is in combat, press <IconMap:Icon_Switch> to activate:\nLaunches consecutive attacks forward, followed by a slash, dealing massive <color=#98EFF0>Ice DMG</color>.\nUpon activating this skill, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nUpon activating this skill, a <color=#FFFFFF>Quick Assist</color> is triggered. If a squadmate is then switched in via <color=#FFFFFF>Quick Assist</color>, Zhao automatically follows up with <color=#FFFFFF>Basic Attack: Final Verdict</color> and begins charging.\nActivating this skill is considered as activating a <color=#FFFFFF>Quick Assist</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Entry Skill: Burst of Frost",
+          "potential": []
+        },
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nLaunches a falling slash in front, dealing <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Patch the Gaps",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Frostveil Suppression",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nLaunch multiple slashes in front, dealing massive <color=#98EFF0>Ice DMG</color>.\nUpon activating this skill, if <color=#FFFFFF>Frostbite Points</color> are maxed out, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nUpon activating this skill while in any <color=#FFFFFF>Ether Veil</color>, a <color=#FFFFFF>Quick Assist</color> is triggered. If a squadmate is then switched in via <color=#FFFFFF>Quick Assist</color>, Zhao automatically follows up with <color=#FFFFFF>Basic Attack: Final Verdict</color> and begins charging.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Frostlight Reflection",
+          "potential": []
+        },
+        {
+          "name": "Entry Skill: Burst of Frost",
+          "param": [
+            {
+              "desc": "{Skill:1341015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341015": {
+                  "attackData": [],
+                  "attributeInfliction": 20918,
+                  "damagePercentage": 68030,
+                  "damagePercentageGrowth": 6190,
+                  "etherPurify": 20919,
+                  "feverRecovery": 575300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6190,
+                  "main": 68030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 75310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23020,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341015": {
+                  "attackData": [],
+                  "attributeInfliction": 20918,
+                  "damagePercentage": 68030,
+                  "damagePercentageGrowth": 6190,
+                  "etherPurify": 20919,
+                  "feverRecovery": 575300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 23020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 75310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23020,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Patch the Gaps",
+          "param": [
+            {
+              "desc": "{Skill:1341016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341016": {
+                  "attackData": [],
+                  "attributeInfliction": 7998,
+                  "damagePercentage": 17600,
+                  "damagePercentageGrowth": 1600,
+                  "etherPurify": 7999,
+                  "feverRecovery": 220000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1600,
+                  "main": 17600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8800,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341016": {
+                  "attackData": [],
+                  "attributeInfliction": 7998,
+                  "damagePercentage": 17600,
+                  "damagePercentageGrowth": 1600,
+                  "etherPurify": 7999,
+                  "feverRecovery": 220000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8800,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Frostveil Suppression",
+          "param": [
+            {
+              "desc": "{Skill:1341017, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1341017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341018, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1341018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341019, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1341019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Frostlight Reflection",
+          "param": [
+            {
+              "desc": "{Skill:1341020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341020": {
+                  "attackData": [],
+                  "attributeInfliction": 31097,
+                  "damagePercentage": 36610,
+                  "damagePercentageGrowth": 3330,
+                  "etherPurify": 15834,
+                  "feverRecovery": 1035100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3330,
+                  "main": 36610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31810,
+                  "stunRatioGrowth": 1450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341020, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341020": {
+                  "attackData": [],
+                  "attributeInfliction": 31097,
+                  "damagePercentage": 36610,
+                  "damagePercentageGrowth": 3330,
+                  "etherPurify": 15834,
+                  "feverRecovery": 1035100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1450,
+                  "main": 31810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31810,
+                  "stunRatioGrowth": 1450
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunches up to five slashes forward, the first dealing <color=#F0D12B>Physical DMG</color>, and the following four <color=#98EFF0>Ice DMG</color>.",
+          "name": "Basic Attack: Glacial Judgment",
+          "potential": []
+        },
+        {
+          "desc": "Hold <IconMap:Icon_Normal> to activate:\nAfter getting ready, Zhao starts charging up, then launches a forward slash on release, dealing massive <color=#98EFF0>Ice DMG</color>.\nWhile charging, Zhao accumulates up to 5s of charge time. When the Finishing Move of <color=#FFFFFF>Basic Attack: Final Verdict</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Assist Follow-Up</color> hits, the stored charge time is consumed to deal additional DMG. For every 1 second of charge time, Zhao deals <color=#2BAD00>{CAL:0.12+AvatarSkillLevel(0)*0.01,100,2}%</color> of Max HP as additional DMG.\nWhen Zhao is in any <color=#FFFFFF>Ether Veil</color>, if she gets switched out while charging, the charge can continue.\nIf <color=#FFFFFF>Frostbite Points</color> are maxed out when the skill activates, all <color=#FFFFFF>Frostbite Points</color> are consumed to trigger <color=#FFFFFF>Ether Veil: Wellspring</color> and a <color=#FFFFFF>Quick Assist</color>. If a squadmate is then switched in via <color=#FFFFFF>Quick Assist</color>, Zhao automatically follows up with <color=#FFFFFF>Basic Attack: Final Verdict</color> and begins charging.\nDuring skill activation, Anti-Interrupt level increases, and DMG taken is reduced by 40%.\nWhile not the currently controlled character, the character is invulnerable while using this skill.",
+          "name": "Basic Attack: Final Verdict",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Glacial Judgment",
+          "param": [
+            {
+              "desc": "{Skill:1341001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1341001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7340,
+                  "damagePercentageGrowth": 670,
+                  "etherPurify": 5001,
+                  "feverRecovery": 137775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 670,
+                  "main": 7340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5510,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1341002": {
+                  "attackData": [],
+                  "attributeInfliction": 4463,
+                  "damagePercentage": 6600,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 4464,
+                  "feverRecovery": 122925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 6600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4920,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1341003": {
+                  "attackData": [],
+                  "attributeInfliction": 7672,
+                  "damagePercentage": 11580,
+                  "damagePercentageGrowth": 1060,
+                  "etherPurify": 7673,
+                  "feverRecovery": 211200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1060,
+                  "main": 11580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8440,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1341004": {
+                  "attackData": [],
+                  "attributeInfliction": 12410,
+                  "damagePercentage": 18560,
+                  "damagePercentageGrowth": 1690,
+                  "etherPurify": 14053,
+                  "feverRecovery": 341550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1690,
+                  "main": 18560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44680,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15460,
+                  "stunRatioGrowth": 710
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1341005, Prop:1001} + {Skill:1341006, Prop:1001}}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1341005": {
+                  "attackData": [],
+                  "attributeInfliction": 22623,
+                  "damagePercentage": 30910,
+                  "damagePercentageGrowth": 2810,
+                  "etherPurify": 21311,
+                  "feverRecovery": 622325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2810,
+                  "main": 30910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 81450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23450,
+                  "stunRatioGrowth": 1070
+                },
+                "1341006": {
+                  "attackData": [],
+                  "attributeInfliction": 5660,
+                  "damagePercentage": 7730,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 5330,
+                  "feverRecovery": 155580,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 7730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20360,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5860,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1341001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7340,
+                  "damagePercentageGrowth": 670,
+                  "etherPurify": 5001,
+                  "feverRecovery": 137775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5510,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1341002": {
+                  "attackData": [],
+                  "attributeInfliction": 4463,
+                  "damagePercentage": 6600,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 4464,
+                  "feverRecovery": 122925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4920,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1341003": {
+                  "attackData": [],
+                  "attributeInfliction": 7672,
+                  "damagePercentage": 11580,
+                  "damagePercentageGrowth": 1060,
+                  "etherPurify": 7673,
+                  "feverRecovery": 211200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8440,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1341004": {
+                  "attackData": [],
+                  "attributeInfliction": 12410,
+                  "damagePercentage": 18560,
+                  "damagePercentageGrowth": 1690,
+                  "etherPurify": 14053,
+                  "feverRecovery": 341550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 15460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44680,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15460,
+                  "stunRatioGrowth": 710
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1341005, Prop:1002} + {Skill:1341006, Prop:1002}}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1341005": {
+                  "attackData": [],
+                  "attributeInfliction": 22623,
+                  "damagePercentage": 30910,
+                  "damagePercentageGrowth": 2810,
+                  "etherPurify": 21311,
+                  "feverRecovery": 622325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 23450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 81450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23450,
+                  "stunRatioGrowth": 1070
+                },
+                "1341006": {
+                  "attackData": [],
+                  "attributeInfliction": 5660,
+                  "damagePercentage": 7730,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 5330,
+                  "feverRecovery": 155580,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 270,
+                  "main": 5860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20360,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5860,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Final Verdict",
+          "param": [
+            {
+              "desc": "{Skill:1341008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341008": {
+                  "attackData": [],
+                  "attributeInfliction": 4750,
+                  "damagePercentage": 6970,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 4750,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 6970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341008": {
+                  "attackData": [],
+                  "attributeInfliction": 4750,
+                  "damagePercentage": 6970,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 4750,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:0.12+AvatarSkillLevel(0)*0.01,100,2}%",
+              "name": "Charged Max HP Additional Multiplier",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunches multiple slashes in front, dealing massive <color=#98EFF0>Ice DMG</color>.\nAfter using this skill, gains 5 <color=#FFFFFF>Frostbite Points</color>. If <color=#FFFFFF>Frostbite Points</color> are maxed out, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nUpon activating this skill while in any <color=#FFFFFF>Ether Veil</color>, a <color=#FFFFFF>Quick Assist</color> is triggered. If a squadmate is then switched in via <color=#FFFFFF>Quick Assist</color>, Zhao automatically follows up with <color=#FFFFFF>Basic Attack: Final Verdict</color> and begins charging.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Temporary Alliance",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nLaunches consecutive attacks in front, followed by a falling slash, dealing massive <color=#98EFF0>Ice DMG</color>.\nAfter using this skill, gains 20 <color=#FFFFFF>Frostbite Points</color>. If <color=#FFFFFF>Frostbite Points</color> are maxed out, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nUpon activating this skill while in any <color=#FFFFFF>Ether Veil</color>, a <color=#FFFFFF>Quick Assist</color> is triggered. If a squadmate is then switched in via <color=#FFFFFF>Quick Assist</color>, Zhao automatically follows up with <color=#FFFFFF>Basic Attack: Final Verdict</color> and begins charging.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Bunny Barrage",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Temporary Alliance",
+          "param": [
+            {
+              "desc": "{Skill:1341013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341013": {
+                  "attackData": [],
+                  "attributeInfliction": 50116,
+                  "damagePercentage": 77080,
+                  "damagePercentageGrowth": 7010,
+                  "etherPurify": 30167,
+                  "feverRecovery": 2658425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7010,
+                  "main": 77080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33190,
+                  "stunRatioGrowth": 1510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341013": {
+                  "attackData": [],
+                  "attributeInfliction": 50116,
+                  "damagePercentage": 77080,
+                  "damagePercentageGrowth": 7010,
+                  "etherPurify": 30167,
+                  "feverRecovery": 2658425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1510,
+                  "main": 33190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33190,
+                  "stunRatioGrowth": 1510
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Bunny Barrage",
+          "param": [
+            {
+              "desc": "{{Skill:1341014, Prop:1001} + {Skill:1341023, Prop:1001}}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341014": {
+                  "attackData": [],
+                  "attributeInfliction": 14666,
+                  "damagePercentage": 174980,
+                  "damagePercentageGrowth": 15910,
+                  "etherPurify": 54667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 15910,
+                  "main": 174980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16140,
+                  "stunRatioGrowth": 740
+                },
+                "1341023": {
+                  "attackData": [],
+                  "attributeInfliction": 3670,
+                  "damagePercentage": 43750,
+                  "damagePercentageGrowth": 3980,
+                  "etherPurify": 13670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3980,
+                  "main": 43750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4030,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1341014, Prop:1002} + {Skill:1341023, Prop:1002}}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341014": {
+                  "attackData": [],
+                  "attributeInfliction": 14666,
+                  "damagePercentage": 174980,
+                  "damagePercentageGrowth": 15910,
+                  "etherPurify": 54667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 740,
+                  "main": 16140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16140,
+                  "stunRatioGrowth": 740
+                },
+                "1341023": {
+                  "attackData": [],
+                  "attributeInfliction": 3670,
+                  "damagePercentage": 43750,
+                  "damagePercentageGrowth": 3980,
+                  "etherPurify": 13670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4030,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Bunny Hop",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nSlashes forward, dealing <color=#F0D12B>Physical DMG</color> and <color=#98EFF0>Ice DMG</color>.",
+          "name": "Dash Attack: Bouncing Dash",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nPerforms a falling slash ahead, dealing <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Swift Blink",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Bouncing Dash",
+          "param": [
+            {
+              "desc": "{Skill:1341011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341011": {
+                  "attackData": [],
+                  "attributeInfliction": 3918,
+                  "damagePercentage": 8630,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 3919,
+                  "feverRecovery": 107800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 8630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4320,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341011": {
+                  "attackData": [],
+                  "attributeInfliction": 3918,
+                  "damagePercentage": 8630,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 3919,
+                  "feverRecovery": 107800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4320,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Swift Blink",
+          "param": [
+            {
+              "desc": "{Skill:1341012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341012": {
+                  "attackData": [],
+                  "attributeInfliction": 15996,
+                  "damagePercentage": 33880,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 30997,
+                  "feverRecovery": 440000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3080,
+                  "main": 33880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 57590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28600,
+                  "stunRatioGrowth": 1300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341012": {
+                  "attackData": [],
+                  "attributeInfliction": 15996,
+                  "damagePercentage": 33880,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 30997,
+                  "feverRecovery": 440000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1300,
+                  "main": 28600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 57590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28600,
+                  "stunRatioGrowth": 1300
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nLaunches a forward slash, dealing <color=#98EFF0>Ice DMG</color>.\nUpon activating this skill, consumes 5% of current HP to grant all squad members HP regeneration equal to <color=#2BAD00>{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%</color> of Zhao's Max HP per second for 5s. The HP-consuming effects of <color=#FFFFFF>Special Attack: Shatterfrost Surge</color> and <color=#FFFFFF>EX Special Attack: Frostflow Tundra</color> can trigger at most once every 30s.",
+          "name": "Special Attack: Shatterfrost Surge",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy, press <IconMap:Icon_SpecialReady> to activate:\nLaunches multiple forward slashes, dealing massive <color=#98EFF0>Ice DMG</color>.\nUpon activating this skill, consumes 5% of current HP to grant all squad members HP regeneration equal to <color=#2BAD00>{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%</color> of Zhao's Max HP per second for 5s. The HP-consuming effects of <color=#FFFFFF>Special Attack: Shatterfrost Surge</color> and <color=#FFFFFF>EX Special Attack: Frostflow Tundra</color> can trigger at most once every 30s.\nUpon activating this skill, gain 20 <color=#FFFFFF>Frostbite Points</color>. If <color=#FFFFFF>Frostbite Points</color> are maxed out, all <color=#FFFFFF>Frostbite Points</color> are consumed to activate <color=#FFFFFF>Ether Veil: Wellspring</color>.\nUpon activating this skill while in any <color=#FFFFFF>Ether Veil</color>, a <color=#FFFFFF>Quick Assist</color> is triggered. If a squadmate is then switched in via <color=#FFFFFF>Quick Assist</color>, Zhao automatically follows up with <color=#FFFFFF>Basic Attack: Final Verdict</color> and begins charging.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Frostflow Tundra",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Shatterfrost Surge",
+          "param": [
+            {
+              "desc": "{Skill:1341009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341009": {
+                  "attackData": [],
+                  "attributeInfliction": 5168,
+                  "damagePercentage": 5690,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 5169,
+                  "feverRecovery": 142175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 5690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5690,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341009": {
+                  "attackData": [],
+                  "attributeInfliction": 5168,
+                  "damagePercentage": 5690,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 5169,
+                  "feverRecovery": 142175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5690,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%",
+              "name": "Percent HP Recovered",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Frostflow Tundra",
+          "param": [
+            {
+              "desc": "{Skill:1341010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1341010": {
+                  "attackData": [],
+                  "attributeInfliction": 80738,
+                  "damagePercentage": 121080,
+                  "damagePercentageGrowth": 11010,
+                  "etherPurify": 31000,
+                  "feverRecovery": 2806650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 11010,
+                  "main": 121080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 81000,
+                  "stunRatioGrowth": 3690
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1341010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1341010": {
+                  "attackData": [],
+                  "attributeInfliction": 80738,
+                  "damagePercentage": 121080,
+                  "damagePercentageGrowth": 11010,
+                  "etherPurify": 31000,
+                  "feverRecovery": 2806650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3690,
+                  "main": 81000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 81000,
+                  "stunRatioGrowth": 3690
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "80",
+              "name": "Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%",
+              "name": "Percent HP Recovered",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1341001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Glacial Judgment"
+    },
+    "1341002": {
+      "desc": "<IconMap:Icon_Normal> (Hold)",
+      "name": "Basic Attack: Final Verdict"
+    },
+    "1341003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Shatterfrost Surge"
+    },
+    "1341004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Frostflow Tundra"
+    },
+    "1341005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Bouncing Dash"
+    },
+    "1341006": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Swift Blink"
+    },
+    "1341007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Temporary Alliance"
+    },
+    "1341008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Bunny Barrage"
+    },
+    "1341009": {
+      "desc": "<IconMap:Icon_Switch> (With full Frostbite Points)",
+      "name": "Entry Skill: Burst of Frost"
+    },
+    "1341010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Patch the Gaps"
+    },
+    "1341011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Frostveil Suppression"
+    },
+    "1341012": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Frostlight Reflection"
+    }
+  },
+  "skin": {
+    "3113410": {
+      "desc": "Warm, woolly ears and a small build may invite underestimation, but the Judge of \"Value\" won't think twice about bringing her branch down on anyone who tries.",
+      "name": "Zhao: Cuddly Executor"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "05",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, versatile quick-swap support",
+    "Can reliably activate Ether Veil",
+    "Boosts all squad members' ATK"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Zhao switches out of being the active character, all squad members' DMG ignores 15% of the target's All-Attribute RES for 50s.",
+      "desc2": "\"Don't let that cute face fool you! I'll never forget that meeting — right there in front of a few dozen people, she pointed her finger and, with the sweetest expression, delivered the coldest verdict: 'If your company refuses any single item in this rectification list, you will be removed from TOPS. This isn't a threat — it's the objectively correct conclusion.' That image is forever etched in my mind! ...Still, I have to thank Miss Zhao.\"\n—A company manager who revived his business after a brutal restructuring, speaking with a conflicted look as he rubbed his temples.",
+      "name": "Righteous Verdict"
+    },
+    "2": {
+      "desc": "When Zhao recovers HP, her ATK increases by 20%, and other squad members' ATK increases by 15% for 50s. Repeated triggers reset the duration.",
+      "desc2": "Xiao'Zhao joined Krampus very early on, and even within the elite of the elite, the Krampus Compliance Authority, she's still addressed as \"senior.\" That's how it should be... if only the juniors who came after weren't all the type who value personality over protocol.",
+      "name": "Krampus Senior"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Xiao'Zhao's weapon, \"Frostveil,\" is an experimental asset supplied through a confidential TOPS research project. Rather than merely projecting Ice-aligned Ether into strikes, the weapon channels Ether into its own structure. Under normal conditions, Frostveil is only half the weight of comparable weapons, but once in combat, its rapidly condensed ice edge gains far greater destructive power. The design might as well have been tailor-made for Xiao'Zhao.",
+      "name": "Frostveil Edge"
+    },
+    "4": {
+      "desc": "When Zhao activates an <color=#FFFFFF>Ether Veil</color>, she gains 250 Decibels. The CRIT DMG of her <color=#FFFFFF>Ultimate</color>, <color=#FFFFFF>Chain Attack</color>, and <color=#FFFFFF>Basic Attack: Final Verdict</color> increase by 40%.",
+      "desc2": "Agile, light, and hard to pin down. Words once used to describe a little rabbit are now being used to describe a terrifying warrior wielding a massive blade, capable of cutting through anything...",
+      "name": "Featherlight Footsteps"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "If Xiao'Zhao's ears twitch unconsciously and perk up slightly, it means she's heard that which matters to her most. It could be intel, a mission, a deal... or praise.",
+      "name": "Fuzzy Listener"
+    },
+    "6": {
+      "desc": "The CRIT Rate buff from <color=#FFFFFF>Core Passive: Ideal Colleague</color> increases to 125% of the original value. The extra DMG gained from charging during <color=#FFFFFF>Basic Attack: Final Verdict</color> increases to 140% of the original value, and accumulated charge time is no longer consumed when attacking.",
+      "desc2": "The wall of beliefs she'd built since childhood, molded by so many people, has begun to crack because of one encounter.\nXiao'Zhao now sees value differently: when something carries no listed price, it isn't useless, it's simply too precious for anything to stand as its equivalent.",
+      "name": "No Value Has Its Own Value"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

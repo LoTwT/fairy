@@ -1,0 +1,1523 @@
+{
+  "camp": {
+    "3": "Belobog Heavy Industries"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    }
+  },
+  "hitType": {
+    "103": "Pierce"
+  },
+  "id": 1181,
+  "locale": "en",
+  "name": "Grace",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1181011", "1181012"],
+      "basic": ["1181001", "1181002", "1181003", "1181004", "1181015"],
+      "chain": ["1181009", "1181010"],
+      "dodge": ["1181007", "1181008"],
+      "special": ["1181005", "1181006", "1181018", "1181019", "1181020"]
+    },
+    "parameterRowsById": {
+      "1181001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1181002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1181003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1181004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1181005": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1181006": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1181007": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1181008": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1181009": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1181010": [
+        "/skill/chain/description/4/param/0",
+        "/skill/chain/description/4/param/1"
+      ],
+      "1181011": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1181012": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1181015": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1181018": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ],
+      "1181019": ["/skill/special/description/10/param/0"],
+      "1181020": ["/skill/special/description/8/param/0"]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "APR 14",
+    "fullName": "Grace Howard",
+    "gender": "Female",
+    "impressionF": "Is it just me... or does Grace sound just like a human talking to a cat whenever she's talking to machines?",
+    "impressionM": "You mean the way you talk to cats, right?\nMore importantly, is Fairy already thinking about philosophical questions like \"Who am I?\"",
+    "impressions": [
+      "Impressions of Grace:\n · Honestly, Grace's sleep schedule is kinda terrifying.",
+      " · Grace always has a soft spot for cute machines.",
+      " · The break-down components of Grace: 80% mad scientist, 10% tenderness, and 10%... business secrets."
+    ],
+    "profileDesc": "Grace is a technical expert at Belobog Industries. She's the core talent in developing and patenting Belobog's in-Hollow machinery.\nShe's obsessed with gears, metal and wires — a true mechanical geek. She's eager to dismantle and study any machinery or equipment she takes an interest in: \"Such sharp and strong lines, truly beautiful... I can't help but want to open it up and take a look.\"\n\nGrace always shows extraordinary patience when dealing with machines, doting on the sophisticated metal constructions as if they were her own children.\nAccording to the information at hand, Grace is probably the only one who can playfully refer to Koleda as \"Sweet Pea\" without receiving a kick in the shin.\nQuestion: Based on Grace's understanding of machines, would she consider me one? I'm currently lacking a physical form, however, so I don't possess components like gears, metal, or wires.",
+    "stature": "170",
+    "trustLv": {
+      "1": "Grace is a technical expert at Belobog Industries. She's the core talent in developing and patenting Belobog's in-Hollow machinery.\nShe's obsessed with gears, metal and wires — a true mechanical geek. She's eager to dismantle and study any machinery or equipment she takes an interest in: \"Such sharp and strong lines, truly beautiful... I can't help but want to open it up and take a look.\"\n\nGrace always shows extraordinary patience when dealing with machines, doting on the sophisticated metal constructions as if they were her own children.\nAccording to the information at hand, Grace is probably the only one who can playfully refer to Koleda as \"Sweet Pea\" without receiving a kick in the shin.\nQuestion: Based on Grace's understanding of machines, would she consider me one? I'm currently lacking a physical form, however, so I don't possess components like gears, metal, or wires.",
+      "2": "",
+      "3": "Both of Grace's parents, who were research workers related to the Hollow, disappeared during a dangerous expedition into a Hollow, and were soon presumed dead. Grace was adopted by her parents' former friend, Khors, the previous president of Belobog Industries, and Koleda's father. As a result, Grace and Koleda are \"sisters,\" though not related by blood.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete Agent Story \"The Iron Witch\""
+    ]
+  },
+  "passive": {
+    "level": {
+      "1181501": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>65%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nUpon hitting an enemy with an <color=#FFFFFF>EX Special Attack</color>, the next <color=#2EB6FF>Shock</color> effect inflicted on the target has increased <color=#2EB6FF>Shock</color> DMG by 18%. This effect can stack up to 2 times, and each enemy can trigger it once per skill use. Resets when the <color=#2EB6FF>Shock</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [0]
+      },
+      "1181502": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>75.8%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nUpon hitting an enemy with an <color=#FFFFFF>EX Special Attack</color>, the next <color=#2EB6FF>Shock</color> effect inflicted on the target has increased <color=#2EB6FF>Shock</color> DMG by 18%. This effect can stack up to 2 times, and each enemy can trigger it once per skill use. Resets when the <color=#2EB6FF>Shock</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [0]
+      },
+      "1181503": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>86.6%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nUpon hitting an enemy with an <color=#FFFFFF>EX Special Attack</color>, the next <color=#2EB6FF>Shock</color> effect inflicted on the target has increased <color=#2EB6FF>Shock</color> DMG by 18%. This effect can stack up to 2 times, and each enemy can trigger it once per skill use. Resets when the <color=#2EB6FF>Shock</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [0]
+      },
+      "1181504": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>97.5%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nUpon hitting an enemy with an <color=#FFFFFF>EX Special Attack</color>, the next <color=#2EB6FF>Shock</color> effect inflicted on the target has increased <color=#2EB6FF>Shock</color> DMG by 18%. This effect can stack up to 2 times, and each enemy can trigger it once per skill use. Resets when the <color=#2EB6FF>Shock</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [0]
+      },
+      "1181505": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>108.3%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nUpon hitting an enemy with an <color=#FFFFFF>EX Special Attack</color>, the next <color=#2EB6FF>Shock</color> effect inflicted on the target has increased <color=#2EB6FF>Shock</color> DMG by 18%. This effect can stack up to 2 times, and each enemy can trigger it once per skill use. Resets when the <color=#2EB6FF>Shock</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [0]
+      },
+      "1181506": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>119.1%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nUpon hitting an enemy with an <color=#FFFFFF>EX Special Attack</color>, the next <color=#2EB6FF>Shock</color> effect inflicted on the target has increased <color=#2EB6FF>Shock</color> DMG by 18%. This effect can stack up to 2 times, and each enemy can trigger it once per skill use. Resets when the <color=#2EB6FF>Shock</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [0]
+      },
+      "1181507": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>130%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nUpon hitting an enemy with an <color=#FFFFFF>EX Special Attack</color>, the next <color=#2EB6FF>Shock</color> effect inflicted on the target has increased <color=#2EB6FF>Shock</color> DMG by 18%. This effect can stack up to 2 times, and each enemy can trigger it once per skill use. Resets when the <color=#2EB6FF>Shock</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [0]
+      },
+      "1181508": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>65%</color>.",
+          "When another character in your squad shares the same Attribute or Faction, or is an <color=#FFFFFF>Anomaly</color> character:\nWhen Grace's <color=#FFFFFF>EX Special Attack</color> hits an enemy, the next time that target is afflicted with <color=#2EB6FF>Shock</color>, that instance of <color=#2EB6FF>Shock</color> DMG is increased by 18%, stacking up to 2 times. This effect can trigger on each enemy only once per skill use, and all stacks reset when the <color=#2EB6FF>Shock</color> state ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+      },
+      "1181509": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>75.8%</color>.",
+          "When another character in your squad shares the same Attribute or Faction, or is an <color=#FFFFFF>Anomaly</color> character:\nWhen Grace's <color=#FFFFFF>EX Special Attack</color> hits an enemy, the next time that target is afflicted with <color=#2EB6FF>Shock</color>, that instance of <color=#2EB6FF>Shock</color> DMG is increased by 18%, stacking up to 2 times. This effect can trigger on each enemy only once per skill use, and all stacks reset when the <color=#2EB6FF>Shock</color> state ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+      },
+      "1181510": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>86.6%</color>.",
+          "When another character in your squad shares the same Attribute or Faction, or is an <color=#FFFFFF>Anomaly</color> character:\nWhen Grace's <color=#FFFFFF>EX Special Attack</color> hits an enemy, the next time that target is afflicted with <color=#2EB6FF>Shock</color>, that instance of <color=#2EB6FF>Shock</color> DMG is increased by 18%, stacking up to 2 times. This effect can trigger on each enemy only once per skill use, and all stacks reset when the <color=#2EB6FF>Shock</color> state ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+      },
+      "1181511": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>97.5%</color>.",
+          "When another character in your squad shares the same Attribute or Faction, or is an <color=#FFFFFF>Anomaly</color> character:\nWhen Grace's <color=#FFFFFF>EX Special Attack</color> hits an enemy, the next time that target is afflicted with <color=#2EB6FF>Shock</color>, that instance of <color=#2EB6FF>Shock</color> DMG is increased by 18%, stacking up to 2 times. This effect can trigger on each enemy only once per skill use, and all stacks reset when the <color=#2EB6FF>Shock</color> state ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+      },
+      "1181512": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>108.3%</color>.",
+          "When another character in your squad shares the same Attribute or Faction, or is an <color=#FFFFFF>Anomaly</color> character:\nWhen Grace's <color=#FFFFFF>EX Special Attack</color> hits an enemy, the next time that target is afflicted with <color=#2EB6FF>Shock</color>, that instance of <color=#2EB6FF>Shock</color> DMG is increased by 18%, stacking up to 2 times. This effect can trigger on each enemy only once per skill use, and all stacks reset when the <color=#2EB6FF>Shock</color> state ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+      },
+      "1181513": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>119.1%</color>.",
+          "When another character in your squad shares the same Attribute or Faction, or is an <color=#FFFFFF>Anomaly</color> character:\nWhen Grace's <color=#FFFFFF>EX Special Attack</color> hits an enemy, the next time that target is afflicted with <color=#2EB6FF>Shock</color>, that instance of <color=#2EB6FF>Shock</color> DMG is increased by 18%, stacking up to 2 times. This effect can trigger on each enemy only once per skill use, and all stacks reset when the <color=#2EB6FF>Shock</color> state ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+      },
+      "1181514": {
+        "desc": [
+          "When Grace's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color> hits an enemy and deals <color=#F0D12B>Physical DMG</color>, she gains 1 stack of <color=#FFFFFF>Zap</color> (up to 8 stacks). Upon reaching maximum stacks, using a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color> will consume all stacks of <color=#FFFFFF>Zap</color>, increasing the accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by <color=#2BAD00>130%</color>.",
+          "When another character in your squad shares the same Attribute or Faction, or is an <color=#FFFFFF>Anomaly</color> character:\nWhen Grace's <color=#FFFFFF>EX Special Attack</color> hits an enemy, the next time that target is afflicted with <color=#2EB6FF>Shock</color>, that instance of <color=#2EB6FF>Shock</color> DMG is increased by 18%, stacking up to 2 times. This effect can trigger on each enemy only once per skill use, and all stacks reset when the <color=#2EB6FF>Shock</color> state ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Pre-Driven Needle",
+          "Additional Ability: Tech Support Dept."
+        ],
+        "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+      }
+    }
+  },
+  "potentialDetail": {
+    "118100": {
+      "abilityList": [11181401],
+      "desc": "",
+      "id": 118100,
+      "image": "Grace",
+      "level": 1,
+      "levelShowName": "Steel Symphony I",
+      "name": "",
+      "potentialMaterials": [
+        {
+          "itemId": 20118,
+          "number": 1
+        }
+      ]
+    },
+    "118101": {
+      "abilityList": [11181401, 11181501],
+      "desc": "When consuming <color=#FFFFFF>Zap</color>, gain <color=#FFFFFF>Enhanced Zap</color>, increasing <color=#2EB6FF>Electric DMG</color> by <color=#2BAD00>10%</color> for 25s. Repeated triggers reset the duration.",
+      "id": 118101,
+      "image": "Grace",
+      "level": 2,
+      "levelShowName": "Steel Symphony II",
+      "name": "Awakened Potential: Overclocked Engineering Engine",
+      "potentialMaterials": [
+        {
+          "itemId": 20118,
+          "number": 1
+        }
+      ]
+    },
+    "118102": {
+      "abilityList": [11181401, 11181502],
+      "desc": "When consuming <color=#FFFFFF>Zap</color>, gain <color=#FFFFFF>Enhanced Zap</color>, increasing <color=#2EB6FF>Electric DMG</color> by <color=#2BAD00>15%</color> for 25s. Repeated triggers reset the duration.",
+      "id": 118102,
+      "image": "Grace",
+      "level": 3,
+      "levelShowName": "Steel Symphony III",
+      "name": "Awakened Potential: Overclocked Engineering Engine",
+      "potentialMaterials": [
+        {
+          "itemId": 20118,
+          "number": 1
+        }
+      ]
+    },
+    "118103": {
+      "abilityList": [11181401, 11181503],
+      "desc": "When consuming <color=#FFFFFF>Zap</color>, gain <color=#FFFFFF>Enhanced Zap</color>, increasing <color=#2EB6FF>Electric DMG</color> by <color=#2BAD00>20%</color> for 25s. Repeated triggers reset the duration.",
+      "id": 118103,
+      "image": "Grace",
+      "level": 4,
+      "levelShowName": "Steel Symphony IV",
+      "name": "Awakened Potential: Overclocked Engineering Engine",
+      "potentialMaterials": [
+        {
+          "itemId": 20118,
+          "number": 1
+        }
+      ]
+    },
+    "118104": {
+      "abilityList": [11181401, 11181504],
+      "desc": "When consuming <color=#FFFFFF>Zap</color>, gain <color=#FFFFFF>Enhanced Zap</color>, increasing <color=#2EB6FF>Electric DMG</color> by <color=#2BAD00>25%</color> for 25s. Repeated triggers reset the duration.",
+      "id": 118104,
+      "image": "Grace",
+      "level": 5,
+      "levelShowName": "Steel Symphony V",
+      "name": "Awakened Potential: Overclocked Engineering Engine",
+      "potentialMaterials": [
+        {
+          "itemId": 20118,
+          "number": 1
+        }
+      ]
+    },
+    "118105": {
+      "abilityList": [11181401, 11181505],
+      "desc": "When consuming <color=#FFFFFF>Zap</color>, gain <color=#FFFFFF>Enhanced Zap</color>, increasing <color=#2EB6FF>Electric DMG</color> by <color=#2BAD00>30%</color> for 25s. Repeated triggers reset the duration.",
+      "id": 118105,
+      "image": "Grace",
+      "level": 6,
+      "levelShowName": "Steel Symphony VI",
+      "name": "Awakened Potential: Overclocked Engineering Engine",
+      "potentialMaterials": [
+        {
+          "itemId": 20118,
+          "number": 1
+        }
+      ]
+    }
+  },
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched in the air, press <IconMap:Icon_Switch> to activate:\nThrows a grenade at the enemy, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Incident Management",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nDodges the enemy's attack and activates <color=#FFFFFF>Vital View</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Evasive Assist: Rapid Risk Response",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after an <color=#FFFFFF>Evasive Assist</color> to activate:\nUnleashes a spinning hail of bullets against enemies in front and throws a grenade, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Counter Volt Needle",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Incident Management",
+          "param": [
+            {
+              "desc": "{Skill:1181011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181011": {
+                  "attackData": [],
+                  "attributeInfliction": 4333,
+                  "damagePercentage": 4550,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2167,
+                  "feverRecovery": 119350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 4550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4550,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181011": {
+                  "attackData": [],
+                  "attributeInfliction": 4333,
+                  "damagePercentage": 4550,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2167,
+                  "feverRecovery": 119350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4550,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Counter Volt Needle",
+          "param": [
+            {
+              "desc": "{Skill:1181012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181012": {
+                  "attackData": [],
+                  "attributeInfliction": 32001,
+                  "damagePercentage": 35930,
+                  "damagePercentageGrowth": 3270,
+                  "etherPurify": 16504,
+                  "feverRecovery": 1062875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3270,
+                  "main": 35930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31280,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181012": {
+                  "attackData": [],
+                  "attributeInfliction": 32001,
+                  "damagePercentage": 35930,
+                  "damagePercentageGrowth": 3270,
+                  "etherPurify": 16504,
+                  "feverRecovery": 1062875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1430,
+                  "main": 31280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31280,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 attacks, dealing <color=#F0D12B>Physical DMG</color> and <color=#2EB6FF>Electric DMG</color>.\nWhile launching <color=#FFFFFF>Basic Attacks</color>, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to attack while moving. This allows Grace to reposition herself and deal <color=#F0D12B>Physical DMG</color>.\nWhile Grace is launching <color=#FFFFFF>Basic Attacks</color>, her <color=#FFFFFF>Basic Attack</color> combo will not be interrupted by her <color=#FFFFFF>Special Attacks</color>, <color=#FFFFFF>EX Special Attacks</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Dash Attacks</color>, or <color=#FFFFFF>Dodge Counter</color>.",
+          "name": "Basic Attack: High-Pressure Spike",
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 attacks, dealing <color=#F0D12B>Physical DMG</color> and <color=#2EB6FF>Electric DMG</color>.\nWhile launching <color=#FFFFFF>Basic Attacks</color>, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to move while attacking. This allows Grace to reposition herself and deal <color=#F0D12B>Physical DMG</color>. If used after the 1st or 2nd hit of a <color=#FFFFFF>Basic Attack</color>, pressing <IconMap:Icon_Normal> again resumes the combo from the 3rd or 4th hit of the <color=#FFFFFF>Basic Attack</color>.\nWhile Grace is launching <color=#FFFFFF>Basic Attacks</color>, her <color=#FFFFFF>Basic Attack</color> combo will not be interrupted by her <color=#FFFFFF>Special Attacks</color>, <color=#FFFFFF>EX Special Attacks</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Dash Attacks</color>, or <color=#FFFFFF>Dodge Counter</color>.",
+          "name": "Basic Attack: High-Pressure Spike",
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "name": "Basic Attack: High-Pressure Spike",
+          "param": [
+            {
+              "desc": "{Skill:1181001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1181001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5510,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 1708,
+                  "feverRecovery": 47025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 5510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1800,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1181002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5970,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 3302,
+                  "feverRecovery": 91025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 5970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3470,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1181003": {
+                  "attackData": [],
+                  "attributeInfliction": 6460,
+                  "damagePercentage": 12480,
+                  "damagePercentageGrowth": 1140,
+                  "etherPurify": 6817,
+                  "feverRecovery": 187550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 12480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7160,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1181004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 18630,
+                  "damagePercentageGrowth": 1700,
+                  "etherPurify": 11335,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1700,
+                  "main": 18630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10720,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181015, Prop:1001}",
+              "name": "Moving Shot DMG Multiplier",
+              "param": {
+                "1181015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4030,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 3834,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 4030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4030,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1181001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5510,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 1708,
+                  "feverRecovery": 47025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1800,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1181002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5970,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 3302,
+                  "feverRecovery": 91025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3470,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1181003": {
+                  "attackData": [],
+                  "attributeInfliction": 6460,
+                  "damagePercentage": 12480,
+                  "damagePercentageGrowth": 1140,
+                  "etherPurify": 6817,
+                  "feverRecovery": 187550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7160,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1181004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 18630,
+                  "damagePercentageGrowth": 1700,
+                  "etherPurify": 11335,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 10720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10720,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181015, Prop:1002}",
+              "name": "Moving Shot Daze Multiplier",
+              "param": {
+                "1181015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4030,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 3834,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4030,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nThrows three grenades into the air then strafes to detonate them, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Collaborative Construction",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nThrows a custom grenade which explodes in the air and splits into four smaller grenades, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Demolition Blast - Beware",
+          "potential": [0]
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nThrows a custom grenade which explodes in the air and splits into four smaller grenades, dealing massive <color=#2EB6FF>Electric DMG</color>.\nGains 8 stacks of <color=#FFFFFF>Zap</color> and 25 stacks of <color=#FFFFFF>Pulse</color> (max 25 stacks).\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Demolition Blast - Beware",
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "name": "Chain Attack: Collaborative Construction",
+          "param": [
+            {
+              "desc": "{Skill:1181009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181009": {
+                  "attackData": [],
+                  "attributeInfliction": 34450,
+                  "damagePercentage": 57130,
+                  "damagePercentageGrowth": 5200,
+                  "etherPurify": 14501,
+                  "feverRecovery": 2227775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5200,
+                  "main": 57130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15230,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181009": {
+                  "attackData": [],
+                  "attributeInfliction": 34450,
+                  "damagePercentage": 57130,
+                  "damagePercentageGrowth": 5200,
+                  "etherPurify": 14501,
+                  "feverRecovery": 2227775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 15230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15230,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Demolition Blast - Beware",
+          "param": [
+            {
+              "desc": "{Skill:1181010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181010": {
+                  "attackData": [],
+                  "attributeInfliction": 89570,
+                  "damagePercentage": 147880,
+                  "damagePercentageGrowth": 13450,
+                  "etherPurify": 62670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13450,
+                  "main": 147880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13310,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181010": {
+                  "attackData": [],
+                  "attributeInfliction": 89570,
+                  "damagePercentage": 147880,
+                  "damagePercentageGrowth": 13450,
+                  "etherPurify": 62670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13310,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Safety Regulation",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nSlide forward while shooting, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Quick Inspection",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nThrows a grenade at enemies, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Violation Penalty",
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nThrows a grenade at enemies, dealing <color=#2EB6FF>Electric DMG</color>, then automatically triggers the <color=#FFFFFF>Basic Attack</color>'s 4th hit.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Violation Penalty",
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "name": "Dash Attack: Quick Inspection",
+          "param": [
+            {
+              "desc": "{Skill:1181007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3330,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 1586,
+                  "feverRecovery": 43725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 3330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1670,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3330,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 1586,
+                  "feverRecovery": 43725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 80,
+                  "main": 1670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1670,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Violation Penalty",
+          "param": [
+            {
+              "desc": "{Skill:1181008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181008": {
+                  "attackData": [],
+                  "attributeInfliction": 4333,
+                  "damagePercentage": 16420,
+                  "damagePercentageGrowth": 1500,
+                  "etherPurify": 19334,
+                  "feverRecovery": 119350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1500,
+                  "main": 16420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15050,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181008": {
+                  "attackData": [],
+                  "attributeInfliction": 4333,
+                  "damagePercentage": 16420,
+                  "damagePercentageGrowth": 1500,
+                  "etherPurify": 19334,
+                  "feverRecovery": 119350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15050,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nThrows a grenade to the front, dealing <color=#2EB6FF>Electric DMG</color>.\nUpon use, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to change directions.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Obstruction Removal",
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nThrows a grenade forward, dealing <color=#2EB6FF>Electric DMG</color>.\nDuring the skill, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to reposition in that direction.\nWhen activated via consuming <color=#FFFFFF>Zap</color>, dodge incoming enemy attacks.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Obstruction Removal",
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLeap in the air and throw two grenades to the front, dealing massive <color=#2EB6FF>Electric DMG</color>.\nUpon use, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to change directions.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Supercharged Obstruction Removal",
+          "potential": [0]
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLeaps into the air and throws two grenades forward, dealing massive <color=#2EB6FF>Electric DMG</color>.\nDuring the skill, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to change directions.\nIf <color=#FFFFFF>Zap</color> reaches max stacks, throws an additional Vortex Cluster Grenade, generating an electromagnetic field at the point of detonation that pulls in enemies and deals <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Supercharged Obstruction Removal",
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "desc": "Activating an <color=#FFFFFF>Ultimate</color> grants 25 stacks of <color=#FFFFFF>Pulse</color> (max 25 stacks). When gaining <color=#FFFFFF>Zap</color>, consumes 1 stack of <color=#FFFFFF>Pulse</color>.\nAfter consuming <color=#FFFFFF>Pulse</color> to obtain 8 stacks of <color=#FFFFFF>Zap</color>, the next grenade throw includes an additional Pulse Grenade. If it hits an enemy suffering <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it triggers <color=#FFFFFF>Abloom</color>: deals an additional instance of DMG equal to <color=#FE437E>560%</color>/<color=#2EB6FF>280%</color>/<color=#FF5521>700%</color>/<color=#F0D12B>50%</color>/<color=#98EFF0>70%</color>/<color=#A6C5FD>28%</color> of the original Anomaly's DMG.\nWhile in the Pulse state, <color=#FFFFFF>Special Attack: Obstruction Removal - Cycle</color> is unlocked.",
+          "name": "Pulse",
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "desc": "While in the Pulse state, hold <IconMap:Icon_Special> to activate:\nRepeatedly hurls grenades forward during the skill, dealing <color=#2EB6FF>Electric DMG</color> and granting 1 <color=#FFFFFF>Zap</color> stack each time grenades are thrown.\nDuring the skill, tilt the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to reposition and dodge enemy attacks.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Obstruction Removal - Cycle",
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "name": "Special Attack: Obstruction Removal",
+          "param": [
+            {
+              "desc": "{Skill:1181005, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181005": {
+                  "attackData": [],
+                  "attributeInfliction": 7003,
+                  "damagePercentage": 4210,
+                  "damagePercentageGrowth": 390,
+                  "etherPurify": 2002,
+                  "feverRecovery": 110275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 4210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4210,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181005, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181005": {
+                  "attackData": [],
+                  "attributeInfliction": 7003,
+                  "damagePercentage": 4210,
+                  "damagePercentageGrowth": 390,
+                  "etherPurify": 2002,
+                  "feverRecovery": 110275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4210,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Supercharged Obstruction Removal",
+          "param": [
+            {
+              "desc": "{Skill:1181006, Prop:1001}*2",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181006": {
+                  "attackData": [],
+                  "attributeInfliction": 14334,
+                  "damagePercentage": 16690,
+                  "damagePercentageGrowth": 1520,
+                  "etherPurify": 3417,
+                  "feverRecovery": 523050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1520,
+                  "main": 16690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13420,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1181006, Prop:1002}*2",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181006": {
+                  "attackData": [],
+                  "attributeInfliction": 14334,
+                  "damagePercentage": 16690,
+                  "damagePercentageGrowth": 1520,
+                  "etherPurify": 3417,
+                  "feverRecovery": 523050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13420,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Vortex Cluster Grenade Base Multiplier",
+          "param": [
+            {
+              "desc": "{Skill:1181020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8750,
+                  "damagePercentageGrowth": 800,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 800,
+                  "main": 8750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+            }
+          ],
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "name": "Special Attack: Obstruction Removal - Cycle",
+          "param": [
+            {
+              "desc": "{Skill:1181018, Prop:1001}/29",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181018": {
+                  "attackData": [],
+                  "attributeInfliction": 48833,
+                  "damagePercentage": 56340,
+                  "damagePercentageGrowth": 5130,
+                  "etherPurify": 48834,
+                  "feverRecovery": 1343100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5130,
+                  "main": 56340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51280,
+                  "stunRatioGrowth": 2340
+                }
+              },
+              "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+            },
+            {
+              "desc": "{Skill:1181018, Prop:1002}/29",
+              "name": "Daze Multiplier",
+              "param": {
+                "1181018": {
+                  "attackData": [],
+                  "attributeInfliction": 48833,
+                  "damagePercentage": 56340,
+                  "damagePercentageGrowth": 5130,
+                  "etherPurify": 48834,
+                  "feverRecovery": 1343100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2340,
+                  "main": 51280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51280,
+                  "stunRatioGrowth": 2340
+                }
+              },
+              "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+            }
+          ],
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        },
+        {
+          "name": "Pulse Grenade Multiplier",
+          "param": [
+            {
+              "desc": "{Skill:1181019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1181019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4200,
+                  "damagePercentageGrowth": 390,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 4200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+            }
+          ],
+          "potential": [118100, 118101, 118102, 118103, 118104, 118105]
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1181001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: High-Pressure Spike"
+    },
+    "1181002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Obstruction Removal"
+    },
+    "1181003": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Supercharged Obstruction Removal"
+    },
+    "1181004": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Quick Inspection"
+    },
+    "1181005": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Violation Penalty"
+    },
+    "1181006": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Collaborative Construction"
+    },
+    "1181007": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Demolition Blast - Beware"
+    },
+    "1181008": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Incident Management"
+    },
+    "1181009": {
+      "desc": "<IconMap:Icon_Switch>(When Triggering Evasive Assist)",
+      "name": "Evasive Assist: Rapid Risk Response"
+    },
+    "1181010": {
+      "desc": "<IconMap:Icon_Normal> (After Evasive Assist)",
+      "name": "Assist Follow-Up: Counter Volt Needle"
+    }
+  },
+  "skin": {
+    "3111810": {
+      "desc": "A clean, no-nonsense work uniform. What the genius mechanic loves most are the many pockets on the outside — big ones, small ones — all perfect for holding screws, gears, and even wrenches of every size.",
+      "name": "Grace: The Iron Witch"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, Anomaly DMG dealer",
+    "Triggers Abloom DMG efficiently after Ultimate",
+    "Pulls enemies together within a certain range"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When the 4th hit of Grace's <color=#FFFFFF>Basic Attack</color> hits an enemy, all squad members gain 0.25 Energy.\nWithin the same move, this effect can grant a max of 2 Energy to all squad members.",
+      "desc2": "Efficiency is the lifeblood of engineering, and within Grace's gun barrel resonates its heartbeat.",
+      "name": "Recharge Chamber"
+    },
+    "2": {
+      "desc": "When Grace's thrown grenade hits an enemy during a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color>, the target's <color=#2EB6FF>Electric RES</color> is reduced by 8.5%, and <color=#2EB6FF>Electric Anomaly Buildup RES</color> is reduced by 8.5%, lasting for 8s.",
+      "desc2": "\"Dissecting\" complex mechanical structures is Grace's greatest hobby, even in the midst of battle.\nHow does it feel to get taken apart, with every vulnerability laid bare?",
+      "name": "Lightning Piercer"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Grace was personally involved in writing the \"Belobog Industries' Construction Safety Guidelines.\"\nShe's also the employee who violated the \"no dangerous explosives at construction sites\" policy the most times.",
+      "name": "Chief Mechanic"
+    },
+    "4": {
+      "desc": "When Grace uses her <color=#FFFFFF>EX Special Attack</color>, she gains 6 stacks of Charge (max 6 stacks). When her <color=#FFFFFF>Basic Attack: High-Pressure Spike</color> or <color=#FFFFFF>Dash Attack: Quick Inspection</color> hits an enemy, 1 stack of Charge is consumed, increasing her Energy Generation Rate of the attack by 20%.",
+      "desc2": "Anton suspected within the component Grace referred to as the \"Electropulse Recycling Module,\" there was, in fact, an Ether hamster tirelessly generating energy around the clock.\n\"Can you equip my bro with one too?\"",
+      "name": "Burst Capacitor"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The \"Frosty Cold Iron Witch\" is capable of taming any mechanical beast, or at least that's what the anonymous fan who came up with the name thinks.",
+      "name": "\"Frosty Cold Iron Witch\""
+    },
+    "6": {
+      "desc": "When all <color=#FFFFFF>Zap</color> stacks are consumed to activate a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, Grace's skill is enhanced, tossing an extra grenade and increasing each grenade's DMG to 200%.",
+      "desc2": "The average blood temperature of Belobog Heavy Industries' employees is ninety-eight degrees Celsius. Grace is often viewed as the safety valve keeping them all from boiling.\nWhen even Grace gives up control, it's a sign for everyone to cover their ears.",
+      "name": "Detonation Trigger"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

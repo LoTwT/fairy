@@ -1,0 +1,1451 @@
+{
+  "camp": {
+    "13": "Angels of Delusion"
+  },
+  "elementType": {
+    "205": "Ether"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "Anomaly Mastery"
+    },
+    "part5": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Ether DMG Bonus"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1511,
+  "locale": "en",
+  "name": "Nangong Yu",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1511013", "1511014", "1511015", "1511016", "1511017"],
+      "basic": [
+        "1511001",
+        "1511002",
+        "1511003",
+        "1511004",
+        "1511005",
+        "1511006",
+        "1511018"
+      ],
+      "chain": ["1511011", "1511012"],
+      "dodge": ["1511009", "1511010"],
+      "special": ["1511007", "1511008"]
+    },
+    "parameterRowsById": {
+      "1511001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/3"
+      ],
+      "1511002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1511003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1511004": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1511005": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1511006": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/6",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1511007": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1511008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1511009": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1511010": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1511011": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1511012": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1511013": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1511014": ["/skill/assist/description/4/param/0"],
+      "1511015": ["/skill/assist/description/4/param/1"],
+      "1511016": ["/skill/assist/description/4/param/2"],
+      "1511017": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1511018": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/7"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "SEP 29",
+    "fullName": "Nangong Yu",
+    "gender": "Female",
+    "impressionF": "Nangong can do anything effortlessly and flawlessly. If only Wise had that kind of talent, things would be so much easier for me, too. I'm kidding, Wise is great~",
+    "impressionM": "I'm truly to blame for not being able to back you up, Belle... I'll have to learn more from Nangong!",
+    "impressions": [
+      "Impression of Nangong Yu:\n · She's an exceptionally capable idol team captain and a \"winner at life.\"",
+      " · She knows exactly what it takes to make a stage shine, including the sacrifices that never stand in the spotlight.",
+      " · The ability to grasp a borrowed dream and never let go is a talent all its own."
+    ],
+    "profileDesc": "Nangong Yu, the captain and choreographer of the idol group the \"Angels of Delusion,\" is a rare prodigy blessed with exceptional Ether aptitude, a sharp business acumen, and outstanding idol talent.\n\nThough she always presents herself with a laid-back air — teasing her teammates and joking around — she consistently receives the fewest negative reviews in the group. Although she often claims that her dream is merely \"borrowed,\" she pours far more effort and emotion into this small stage than anyone would believe.\n\nNangong possesses a rare gift for making the difficult look effortless — whether it's dancing, rapping, making investments, or reading people. That gift once served as the mask that allowed her to easily play the role of \"captain,\" yet it also kept her isolated from her true desires.\n\nYet whether it started as responsibility toward a close friend or later turned into an irreplaceable love for the stage, beneath the stage lights and the audience's gaze she has already forged those borrowed sparks into a light of her own.",
+    "stature": "156",
+    "trustLv": {
+      "1": "Nangong Yu, the captain and choreographer of the idol group the \"Angels of Delusion,\" is a rare prodigy blessed with exceptional Ether aptitude, a sharp business acumen, and outstanding idol talent.\n\nThough she always presents herself with a laid-back air — teasing her teammates and joking around — she consistently receives the fewest negative reviews in the group. Although she often claims that her dream is merely \"borrowed,\" she pours far more effort and emotion into this small stage than anyone would believe.\n\nNangong possesses a rare gift for making the difficult look effortless — whether it's dancing, rapping, making investments, or reading people. That gift once served as the mask that allowed her to easily play the role of \"captain,\" yet it also kept her isolated from her true desires.\n\nYet whether it started as responsibility toward a close friend or later turned into an irreplaceable love for the stage, beneath the stage lights and the audience's gaze she has already forged those borrowed sparks into a light of her own.",
+      "2": "",
+      "3": "\"Talent\" is the halo that lets Nangong move through everything with ease, but it once also served as the fog that dulled her sense of her true feelings. She's skilled at evaluating and planning for everything, yet when it comes to the seemingly intangible concept of \"dreams,\" she can't put a price on it.\n\nWhen the Angels of Delusion formed, Nangong Yu found herself dealing with a stingy agency that even charged its trainees for training. For the first time, she felt that her talent for \"always spotting a business opportunity\" had failed her. She could calculate the optimal choreography and predict which stocks would rise, yet she couldn't figure out how to keep this fragile group, built around Sunna's dream, alive. When their last savings ran dry and their only lead vocalist was about to quit under financial pressure, a dangerous \"opportunity\" appeared: use their unregistered Ether aptitude to enter a Hollow and carry out a high-paying \"material recovery\" job.\n\nIt wasn't a dance studio — it was a real fight for survival. The makeshift weapon in her hand felt worlds heavier than any stage prop. And the rapid, frightened breaths Sunna took beside her set her nerves on edge far more than the roar of any crowd. In the end, they were lucky enough to complete the commission and bring back payment that could keep the group afloat. But when they stumbled back into the safe zone and looked at the dust-covered reward in their hands, what Nangong felt wasn't joy.\n\nShe realized that what she was willing to risk her life and endure fear for was no longer the abstract duty of \"helping a friend achieve her dream.\" It was the melody Sunna had written in that shabby rehearsal room, and the songs Aria had sung, the voices, and the stage that would one day belong to them. That longing itself had gained a weight no investment return could ever measure. From that day forward, she continued to calculate how to guard this \"bargain dream\" — one she had pulled into motion with her own hands and could no longer abandon — at the smallest possible cost.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Unlocked after completing Main Commission Season 2 Interlude: \"Encore for an Old Dream\"",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1511049": {
+        "desc": [
+          "Nangong Yu's Anomaly Proficiency increases by <color=#2BAD00>60</color>.\nWhen Nangong Yu's initial Anomaly Mastery exceeds 110, each point of initial Anomaly Mastery above that increases her Impact by 1.\nWhen an enemy is Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on the enemy, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato</color>.\nA single enemy can have up to 4 stacks of <color=#FFFFFF>Vibrato</color>.\nIf <color=#FFFFFF>Vibrato</color> reaches the maximum stacks and the enemy is afflicted with an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, or if the enemy has <color=#FFFFFF>Vibrato</color> and recovers from being Stunned, all <color=#FFFFFF>Vibrato</color> stacks will be cleared.\nWhen <color=#FFFFFF>Vibrato</color> is cleared, if the enemy is suffering an aforementioned Attribute Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>720%</color>/<color=#2EB6FF>360%</color>/<color=#FF5521>900%</color>/<color=#F0D12B>63%</color>/<color=#98EFF0>90%</color>/<color=#A6C5FD>36%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. During the same Stun period, once <color=#FFFFFF>Vibrato</color> has been cleared, the enemy cannot gain <color=#FFFFFF>Vibrato</color> again.\nWhen Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> hits an enemy, her Anomaly Buildup Rate increases by <color=#2BAD00>17%</color>, and her Daze dealt increases by <color=#2BAD00>11%</color>, and the whole squad's DMG dealt increases by <color=#2BAD00>13%</color> for 30s. Repeated triggers reset the duration.\nWhile in combat, Nangong Yu restores 3.8 <color=#FFFFFF>Downbeats</color>/s. When any squad member inflicts an Attribute Anomaly on an enemy, Nangong Yu restores an additional 12 <color=#FFFFFF>Downbeats</color>. This effect can trigger once every 6s.\nNangong Yu can have up to 100 <color=#FFFFFF>Downbeats</color>, and starts with 30 <color=#FFFFFF>Downbeats</color> upon entering the battlefield.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nAny squad member's attack against a Stunned enemy has 30% increased Anomaly Buildup. <color=#FFFFFF>Chain Attacks</color> against a Stunned enemy have an additional 30% increased Anomaly Buildup.\nWhen any squad member Stuns an enemy, Nangong Yu gains 2 stacks of <color=#FFFFFF>Dance Prowess</color>, up to a maximum of 2 stacks, lasting 15s, repeated triggers reset the duration. With <color=#FFFFFF>Dance Prowess</color>, when a heavy attack from Nangong Yu's <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color>, <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, or <color=#FFFFFF>Quick Assist: Emergency Save</color> hits an enemy that is both Stunned and affected by an Attribute Anomaly, 1 stack of <color=#FFFFFF>Dance Prowess</color> is consumed to trigger the special <color=#FFFFFF>Disorder</color> effect <color=#FFFFFF>Polarity Disorder</color> against all enemies who meet the conditions. This deals DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG, and triggers the previous squad member's <color=#FFFFFF>Quick Assist</color>. <color=#FFFFFF>Polarity Disorder</color> does not clear the target's Attribute Anomaly. If the skill fails to trigger <color=#FFFFFF>Polarity Disorder</color>, <color=#FFFFFF>Dance Prowess</color> will not be consumed. When Nangong Yu has <color=#FFFFFF>Dance Prowess</color>, the next time she switches to the field, she will immediately perform the first charged hit of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, which will always trigger precise charging.\nWhen any squad member Stuns an enemy, Nangong Yu's next <color=#FFFFFF>EX Special Attack</color> will not consume Energy. This effect lasts 15s and can trigger once every 15s.\nWhen Nangong Yu and Aria are in the same squad, if Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, and Nangong Yu fully participates in the attack, 1 stack of <color=#FFFFFF>Dance Prowess</color> will also be consumed to trigger <color=#FFFFFF>Polarity Disorder</color> on all enemies who meet the conditions.\nWhen the third hit of Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>Ultimate: Meteor Shower</color> hits an enemy, the enemy suffers <color=#FFFFFF>Misstep</color>. Under this effect, Stun DMG Multiplier increases by 30% and when an enemy becomes Stunned, their Stun duration increases by 3s. Before recovering from Stun, <color=#FFFFFF>Misstep</color> can only trigger once on the same target. The increased Stun duration cannot stack with similar effects. When an enemy with <color=#FFFFFF>Misstep</color> recovers from Stun, the <color=#FFFFFF>Misstep</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Prodigious Idol",
+          "Additional Ability: Angel Captain"
+        ],
+        "potential": []
+      },
+      "1511050": {
+        "desc": [
+          "Nangong Yu's Anomaly Proficiency increases by <color=#2BAD00>70</color>.\nWhen Nangong Yu's initial Anomaly Mastery exceeds 110, each point of initial Anomaly Mastery above that increases her Impact by 1.\nWhen an enemy is Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on the enemy, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato</color>.\nA single enemy can have up to 4 stacks of <color=#FFFFFF>Vibrato</color>.\nIf <color=#FFFFFF>Vibrato</color> reaches the maximum stacks and the enemy is afflicted with an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, or if the enemy has <color=#FFFFFF>Vibrato</color> and recovers from being Stunned, all <color=#FFFFFF>Vibrato</color> stacks will be cleared.\nWhen <color=#FFFFFF>Vibrato</color> is cleared, if the enemy is suffering an aforementioned Attribute Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>720%</color>/<color=#2EB6FF>360%</color>/<color=#FF5521>900%</color>/<color=#F0D12B>63%</color>/<color=#98EFF0>90%</color>/<color=#A6C5FD>36%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. During the same Stun period, once <color=#FFFFFF>Vibrato</color> has been cleared, the enemy cannot gain <color=#FFFFFF>Vibrato</color> again.\nWhen Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> hits an enemy, her Anomaly Buildup Rate increases by <color=#2BAD00>20%</color>, and her Daze dealt increases by <color=#2BAD00>12.5%</color>, and the whole squad's DMG dealt increases by <color=#2BAD00>15%</color> for 30s. Repeated triggers reset the duration.\nWhile in combat, Nangong Yu restores 3.8 <color=#FFFFFF>Downbeats</color>/s. When any squad member inflicts an Attribute Anomaly on an enemy, Nangong Yu restores an additional 12 <color=#FFFFFF>Downbeats</color>. This effect can trigger once every 6s.\nNangong Yu can have up to 100 <color=#FFFFFF>Downbeats</color>, and starts with 30 <color=#FFFFFF>Downbeats</color> upon entering the battlefield.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nAny squad member's attack against a Stunned enemy has 30% increased Anomaly Buildup. <color=#FFFFFF>Chain Attacks</color> against a Stunned enemy have an additional 30% increased Anomaly Buildup.\nWhen any squad member Stuns an enemy, Nangong Yu gains 2 stacks of <color=#FFFFFF>Dance Prowess</color>, up to a maximum of 2 stacks, lasting 15s, repeated triggers reset the duration. With <color=#FFFFFF>Dance Prowess</color>, when a heavy attack from Nangong Yu's <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color>, <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, or <color=#FFFFFF>Quick Assist: Emergency Save</color> hits an enemy that is both Stunned and affected by an Attribute Anomaly, 1 stack of <color=#FFFFFF>Dance Prowess</color> is consumed to trigger the special <color=#FFFFFF>Disorder</color> effect <color=#FFFFFF>Polarity Disorder</color> against all enemies who meet the conditions. This deals DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG, and triggers the previous squad member's <color=#FFFFFF>Quick Assist</color>. <color=#FFFFFF>Polarity Disorder</color> does not clear the target's Attribute Anomaly. If the skill fails to trigger <color=#FFFFFF>Polarity Disorder</color>, <color=#FFFFFF>Dance Prowess</color> will not be consumed. When Nangong Yu has <color=#FFFFFF>Dance Prowess</color>, the next time she switches to the field, she will immediately perform the first charged hit of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, which will always trigger precise charging.\nWhen any squad member Stuns an enemy, Nangong Yu's next <color=#FFFFFF>EX Special Attack</color> will not consume Energy. This effect lasts 15s and can trigger once every 15s.\nWhen Nangong Yu and Aria are in the same squad, if Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, and Nangong Yu fully participates in the attack, 1 stack of <color=#FFFFFF>Dance Prowess</color> will also be consumed to trigger <color=#FFFFFF>Polarity Disorder</color> on all enemies who meet the conditions.\nWhen the third hit of Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>Ultimate: Meteor Shower</color> hits an enemy, the enemy suffers <color=#FFFFFF>Misstep</color>. Under this effect, Stun DMG Multiplier increases by 30% and when an enemy becomes Stunned, their Stun duration increases by 3s. Before recovering from Stun, <color=#FFFFFF>Misstep</color> can only trigger once on the same target. The increased Stun duration cannot stack with similar effects. When an enemy with <color=#FFFFFF>Misstep</color> recovers from Stun, the <color=#FFFFFF>Misstep</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Prodigious Idol",
+          "Additional Ability: Angel Captain"
+        ],
+        "potential": []
+      },
+      "1511051": {
+        "desc": [
+          "Nangong Yu's Anomaly Proficiency increases by <color=#2BAD00>80</color>.\nWhen Nangong Yu's initial Anomaly Mastery exceeds 110, each point of initial Anomaly Mastery above that increases her Impact by 1.\nWhen an enemy is Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on the enemy, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato</color>.\nA single enemy can have up to 4 stacks of <color=#FFFFFF>Vibrato</color>.\nIf <color=#FFFFFF>Vibrato</color> reaches the maximum stacks and the enemy is afflicted with an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, or if the enemy has <color=#FFFFFF>Vibrato</color> and recovers from being Stunned, all <color=#FFFFFF>Vibrato</color> stacks will be cleared.\nWhen <color=#FFFFFF>Vibrato</color> is cleared, if the enemy is suffering an aforementioned Attribute Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>720%</color>/<color=#2EB6FF>360%</color>/<color=#FF5521>900%</color>/<color=#F0D12B>63%</color>/<color=#98EFF0>90%</color>/<color=#A6C5FD>36%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. During the same Stun period, once <color=#FFFFFF>Vibrato</color> has been cleared, the enemy cannot gain <color=#FFFFFF>Vibrato</color> again.\nWhen Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> hits an enemy, her Anomaly Buildup Rate increases by <color=#2BAD00>23%</color>, and her Daze dealt increases by <color=#2BAD00>14%</color>, and the whole squad's DMG dealt increases by <color=#2BAD00>17%</color> for 30s. Repeated triggers reset the duration.\nWhile in combat, Nangong Yu restores 3.8 <color=#FFFFFF>Downbeats</color>/s. When any squad member inflicts an Attribute Anomaly on an enemy, Nangong Yu restores an additional 12 <color=#FFFFFF>Downbeats</color>. This effect can trigger once every 6s.\nNangong Yu can have up to 100 <color=#FFFFFF>Downbeats</color>, and starts with 30 <color=#FFFFFF>Downbeats</color> upon entering the battlefield.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nAny squad member's attack against a Stunned enemy has 30% increased Anomaly Buildup. <color=#FFFFFF>Chain Attacks</color> against a Stunned enemy have an additional 30% increased Anomaly Buildup.\nWhen any squad member Stuns an enemy, Nangong Yu gains 2 stacks of <color=#FFFFFF>Dance Prowess</color>, up to a maximum of 2 stacks, lasting 15s, repeated triggers reset the duration. With <color=#FFFFFF>Dance Prowess</color>, when a heavy attack from Nangong Yu's <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color>, <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, or <color=#FFFFFF>Quick Assist: Emergency Save</color> hits an enemy that is both Stunned and affected by an Attribute Anomaly, 1 stack of <color=#FFFFFF>Dance Prowess</color> is consumed to trigger the special <color=#FFFFFF>Disorder</color> effect <color=#FFFFFF>Polarity Disorder</color> against all enemies who meet the conditions. This deals DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG, and triggers the previous squad member's <color=#FFFFFF>Quick Assist</color>. <color=#FFFFFF>Polarity Disorder</color> does not clear the target's Attribute Anomaly. If the skill fails to trigger <color=#FFFFFF>Polarity Disorder</color>, <color=#FFFFFF>Dance Prowess</color> will not be consumed. When Nangong Yu has <color=#FFFFFF>Dance Prowess</color>, the next time she switches to the field, she will immediately perform the first charged hit of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, which will always trigger precise charging.\nWhen any squad member Stuns an enemy, Nangong Yu's next <color=#FFFFFF>EX Special Attack</color> will not consume Energy. This effect lasts 15s and can trigger once every 15s.\nWhen Nangong Yu and Aria are in the same squad, if Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, and Nangong Yu fully participates in the attack, 1 stack of <color=#FFFFFF>Dance Prowess</color> will also be consumed to trigger <color=#FFFFFF>Polarity Disorder</color> on all enemies who meet the conditions.\nWhen the third hit of Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>Ultimate: Meteor Shower</color> hits an enemy, the enemy suffers <color=#FFFFFF>Misstep</color>. Under this effect, Stun DMG Multiplier increases by 30% and when an enemy becomes Stunned, their Stun duration increases by 3s. Before recovering from Stun, <color=#FFFFFF>Misstep</color> can only trigger once on the same target. The increased Stun duration cannot stack with similar effects. When an enemy with <color=#FFFFFF>Misstep</color> recovers from Stun, the <color=#FFFFFF>Misstep</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Prodigious Idol",
+          "Additional Ability: Angel Captain"
+        ],
+        "potential": []
+      },
+      "1511052": {
+        "desc": [
+          "Nangong Yu's Anomaly Proficiency increases by <color=#2BAD00>90</color>.\nWhen Nangong Yu's initial Anomaly Mastery exceeds 110, each point of initial Anomaly Mastery above that increases her Impact by 1.\nWhen an enemy is Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on the enemy, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato</color>.\nA single enemy can have up to 4 stacks of <color=#FFFFFF>Vibrato</color>.\nIf <color=#FFFFFF>Vibrato</color> reaches the maximum stacks and the enemy is afflicted with an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, or if the enemy has <color=#FFFFFF>Vibrato</color> and recovers from being Stunned, all <color=#FFFFFF>Vibrato</color> stacks will be cleared.\nWhen <color=#FFFFFF>Vibrato</color> is cleared, if the enemy is suffering an aforementioned Attribute Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>720%</color>/<color=#2EB6FF>360%</color>/<color=#FF5521>900%</color>/<color=#F0D12B>63%</color>/<color=#98EFF0>90%</color>/<color=#A6C5FD>36%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. During the same Stun period, once <color=#FFFFFF>Vibrato</color> has been cleared, the enemy cannot gain <color=#FFFFFF>Vibrato</color> again.\nWhen Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> hits an enemy, her Anomaly Buildup Rate increases by <color=#2BAD00>26%</color>, and her Daze dealt increases by <color=#2BAD00>15.5%</color>, and the whole squad's DMG dealt increases by <color=#2BAD00>19%</color> for 30s. Repeated triggers reset the duration.\nWhile in combat, Nangong Yu restores 3.8 <color=#FFFFFF>Downbeats</color>/s. When any squad member inflicts an Attribute Anomaly on an enemy, Nangong Yu restores an additional 12 <color=#FFFFFF>Downbeats</color>. This effect can trigger once every 6s.\nNangong Yu can have up to 100 <color=#FFFFFF>Downbeats</color>, and starts with 30 <color=#FFFFFF>Downbeats</color> upon entering the battlefield.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nAny squad member's attack against a Stunned enemy has 30% increased Anomaly Buildup. <color=#FFFFFF>Chain Attacks</color> against a Stunned enemy have an additional 30% increased Anomaly Buildup.\nWhen any squad member Stuns an enemy, Nangong Yu gains 2 stacks of <color=#FFFFFF>Dance Prowess</color>, up to a maximum of 2 stacks, lasting 15s, repeated triggers reset the duration. With <color=#FFFFFF>Dance Prowess</color>, when a heavy attack from Nangong Yu's <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color>, <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, or <color=#FFFFFF>Quick Assist: Emergency Save</color> hits an enemy that is both Stunned and affected by an Attribute Anomaly, 1 stack of <color=#FFFFFF>Dance Prowess</color> is consumed to trigger the special <color=#FFFFFF>Disorder</color> effect <color=#FFFFFF>Polarity Disorder</color> against all enemies who meet the conditions. This deals DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG, and triggers the previous squad member's <color=#FFFFFF>Quick Assist</color>. <color=#FFFFFF>Polarity Disorder</color> does not clear the target's Attribute Anomaly. If the skill fails to trigger <color=#FFFFFF>Polarity Disorder</color>, <color=#FFFFFF>Dance Prowess</color> will not be consumed. When Nangong Yu has <color=#FFFFFF>Dance Prowess</color>, the next time she switches to the field, she will immediately perform the first charged hit of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, which will always trigger precise charging.\nWhen any squad member Stuns an enemy, Nangong Yu's next <color=#FFFFFF>EX Special Attack</color> will not consume Energy. This effect lasts 15s and can trigger once every 15s.\nWhen Nangong Yu and Aria are in the same squad, if Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, and Nangong Yu fully participates in the attack, 1 stack of <color=#FFFFFF>Dance Prowess</color> will also be consumed to trigger <color=#FFFFFF>Polarity Disorder</color> on all enemies who meet the conditions.\nWhen the third hit of Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>Ultimate: Meteor Shower</color> hits an enemy, the enemy suffers <color=#FFFFFF>Misstep</color>. Under this effect, Stun DMG Multiplier increases by 30% and when an enemy becomes Stunned, their Stun duration increases by 3s. Before recovering from Stun, <color=#FFFFFF>Misstep</color> can only trigger once on the same target. The increased Stun duration cannot stack with similar effects. When an enemy with <color=#FFFFFF>Misstep</color> recovers from Stun, the <color=#FFFFFF>Misstep</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Prodigious Idol",
+          "Additional Ability: Angel Captain"
+        ],
+        "potential": []
+      },
+      "1511053": {
+        "desc": [
+          "Nangong Yu's Anomaly Proficiency increases by <color=#2BAD00>100</color>.\nWhen Nangong Yu's initial Anomaly Mastery exceeds 110, each point of initial Anomaly Mastery above that increases her Impact by 1.\nWhen an enemy is Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on the enemy, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato</color>.\nA single enemy can have up to 4 stacks of <color=#FFFFFF>Vibrato</color>.\nIf <color=#FFFFFF>Vibrato</color> reaches the maximum stacks and the enemy is afflicted with an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, or if the enemy has <color=#FFFFFF>Vibrato</color> and recovers from being Stunned, all <color=#FFFFFF>Vibrato</color> stacks will be cleared.\nWhen <color=#FFFFFF>Vibrato</color> is cleared, if the enemy is suffering an aforementioned Attribute Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>720%</color>/<color=#2EB6FF>360%</color>/<color=#FF5521>900%</color>/<color=#F0D12B>63%</color>/<color=#98EFF0>90%</color>/<color=#A6C5FD>36%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. During the same Stun period, once <color=#FFFFFF>Vibrato</color> has been cleared, the enemy cannot gain <color=#FFFFFF>Vibrato</color> again.\nWhen Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> hits an enemy, her Anomaly Buildup Rate increases by <color=#2BAD00>29%</color>, and her Daze dealt increases by <color=#2BAD00>17%</color>, and the whole squad's DMG dealt increases by <color=#2BAD00>21%</color> for 30s. Repeated triggers reset the duration.\nWhile in combat, Nangong Yu restores 3.8 <color=#FFFFFF>Downbeats</color>/s. When any squad member inflicts an Attribute Anomaly on an enemy, Nangong Yu restores an additional 12 <color=#FFFFFF>Downbeats</color>. This effect can trigger once every 6s.\nNangong Yu can have up to 100 <color=#FFFFFF>Downbeats</color>, and starts with 30 <color=#FFFFFF>Downbeats</color> upon entering the battlefield.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nAny squad member's attack against a Stunned enemy has 30% increased Anomaly Buildup. <color=#FFFFFF>Chain Attacks</color> against a Stunned enemy have an additional 30% increased Anomaly Buildup.\nWhen any squad member Stuns an enemy, Nangong Yu gains 2 stacks of <color=#FFFFFF>Dance Prowess</color>, up to a maximum of 2 stacks, lasting 15s, repeated triggers reset the duration. With <color=#FFFFFF>Dance Prowess</color>, when a heavy attack from Nangong Yu's <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color>, <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, or <color=#FFFFFF>Quick Assist: Emergency Save</color> hits an enemy that is both Stunned and affected by an Attribute Anomaly, 1 stack of <color=#FFFFFF>Dance Prowess</color> is consumed to trigger the special <color=#FFFFFF>Disorder</color> effect <color=#FFFFFF>Polarity Disorder</color> against all enemies who meet the conditions. This deals DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG, and triggers the previous squad member's <color=#FFFFFF>Quick Assist</color>. <color=#FFFFFF>Polarity Disorder</color> does not clear the target's Attribute Anomaly. If the skill fails to trigger <color=#FFFFFF>Polarity Disorder</color>, <color=#FFFFFF>Dance Prowess</color> will not be consumed. When Nangong Yu has <color=#FFFFFF>Dance Prowess</color>, the next time she switches to the field, she will immediately perform the first charged hit of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, which will always trigger precise charging.\nWhen any squad member Stuns an enemy, Nangong Yu's next <color=#FFFFFF>EX Special Attack</color> will not consume Energy. This effect lasts 15s and can trigger once every 15s.\nWhen Nangong Yu and Aria are in the same squad, if Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, and Nangong Yu fully participates in the attack, 1 stack of <color=#FFFFFF>Dance Prowess</color> will also be consumed to trigger <color=#FFFFFF>Polarity Disorder</color> on all enemies who meet the conditions.\nWhen the third hit of Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>Ultimate: Meteor Shower</color> hits an enemy, the enemy suffers <color=#FFFFFF>Misstep</color>. Under this effect, Stun DMG Multiplier increases by 30% and when an enemy becomes Stunned, their Stun duration increases by 3s. Before recovering from Stun, <color=#FFFFFF>Misstep</color> can only trigger once on the same target. The increased Stun duration cannot stack with similar effects. When an enemy with <color=#FFFFFF>Misstep</color> recovers from Stun, the <color=#FFFFFF>Misstep</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Prodigious Idol",
+          "Additional Ability: Angel Captain"
+        ],
+        "potential": []
+      },
+      "1511054": {
+        "desc": [
+          "Nangong Yu's Anomaly Proficiency increases by <color=#2BAD00>110</color>.\nWhen Nangong Yu's initial Anomaly Mastery exceeds 110, each point of initial Anomaly Mastery above that increases her Impact by 1.\nWhen an enemy is Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on the enemy, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato</color>.\nA single enemy can have up to 4 stacks of <color=#FFFFFF>Vibrato</color>.\nIf <color=#FFFFFF>Vibrato</color> reaches the maximum stacks and the enemy is afflicted with an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, or if the enemy has <color=#FFFFFF>Vibrato</color> and recovers from being Stunned, all <color=#FFFFFF>Vibrato</color> stacks will be cleared.\nWhen <color=#FFFFFF>Vibrato</color> is cleared, if the enemy is suffering an aforementioned Attribute Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>720%</color>/<color=#2EB6FF>360%</color>/<color=#FF5521>900%</color>/<color=#F0D12B>63%</color>/<color=#98EFF0>90%</color>/<color=#A6C5FD>36%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. During the same Stun period, once <color=#FFFFFF>Vibrato</color> has been cleared, the enemy cannot gain <color=#FFFFFF>Vibrato</color> again.\nWhen Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> hits an enemy, her Anomaly Buildup Rate increases by <color=#2BAD00>32%</color>, and her Daze dealt increases by <color=#2BAD00>18.5%</color>, and the whole squad's DMG dealt increases by <color=#2BAD00>23%</color> for 30s. Repeated triggers reset the duration.\nWhile in combat, Nangong Yu restores 3.8 <color=#FFFFFF>Downbeats</color>/s. When any squad member inflicts an Attribute Anomaly on an enemy, Nangong Yu restores an additional 12 <color=#FFFFFF>Downbeats</color>. This effect can trigger once every 6s.\nNangong Yu can have up to 100 <color=#FFFFFF>Downbeats</color>, and starts with 30 <color=#FFFFFF>Downbeats</color> upon entering the battlefield.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nAny squad member's attack against a Stunned enemy has 30% increased Anomaly Buildup. <color=#FFFFFF>Chain Attacks</color> against a Stunned enemy have an additional 30% increased Anomaly Buildup.\nWhen any squad member Stuns an enemy, Nangong Yu gains 2 stacks of <color=#FFFFFF>Dance Prowess</color>, up to a maximum of 2 stacks, lasting 15s, repeated triggers reset the duration. With <color=#FFFFFF>Dance Prowess</color>, when a heavy attack from Nangong Yu's <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color>, <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, or <color=#FFFFFF>Quick Assist: Emergency Save</color> hits an enemy that is both Stunned and affected by an Attribute Anomaly, 1 stack of <color=#FFFFFF>Dance Prowess</color> is consumed to trigger the special <color=#FFFFFF>Disorder</color> effect <color=#FFFFFF>Polarity Disorder</color> against all enemies who meet the conditions. This deals DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG, and triggers the previous squad member's <color=#FFFFFF>Quick Assist</color>. <color=#FFFFFF>Polarity Disorder</color> does not clear the target's Attribute Anomaly. If the skill fails to trigger <color=#FFFFFF>Polarity Disorder</color>, <color=#FFFFFF>Dance Prowess</color> will not be consumed. When Nangong Yu has <color=#FFFFFF>Dance Prowess</color>, the next time she switches to the field, she will immediately perform the first charged hit of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, which will always trigger precise charging.\nWhen any squad member Stuns an enemy, Nangong Yu's next <color=#FFFFFF>EX Special Attack</color> will not consume Energy. This effect lasts 15s and can trigger once every 15s.\nWhen Nangong Yu and Aria are in the same squad, if Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, and Nangong Yu fully participates in the attack, 1 stack of <color=#FFFFFF>Dance Prowess</color> will also be consumed to trigger <color=#FFFFFF>Polarity Disorder</color> on all enemies who meet the conditions.\nWhen the third hit of Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>Ultimate: Meteor Shower</color> hits an enemy, the enemy suffers <color=#FFFFFF>Misstep</color>. Under this effect, Stun DMG Multiplier increases by 30% and when an enemy becomes Stunned, their Stun duration increases by 3s. Before recovering from Stun, <color=#FFFFFF>Misstep</color> can only trigger once on the same target. The increased Stun duration cannot stack with similar effects. When an enemy with <color=#FFFFFF>Misstep</color> recovers from Stun, the <color=#FFFFFF>Misstep</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Prodigious Idol",
+          "Additional Ability: Angel Captain"
+        ],
+        "potential": []
+      },
+      "1511055": {
+        "desc": [
+          "Nangong Yu's Anomaly Proficiency increases by <color=#2BAD00>120</color>.\nWhen Nangong Yu's initial Anomaly Mastery exceeds 110, each point of initial Anomaly Mastery above that increases her Impact by 1.\nWhen an enemy is Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on the enemy, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato</color>.\nA single enemy can have up to 4 stacks of <color=#FFFFFF>Vibrato</color>.\nIf <color=#FFFFFF>Vibrato</color> reaches the maximum stacks and the enemy is afflicted with an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, or if the enemy has <color=#FFFFFF>Vibrato</color> and recovers from being Stunned, all <color=#FFFFFF>Vibrato</color> stacks will be cleared.\nWhen <color=#FFFFFF>Vibrato</color> is cleared, if the enemy is suffering an aforementioned Attribute Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>720%</color>/<color=#2EB6FF>360%</color>/<color=#FF5521>900%</color>/<color=#F0D12B>63%</color>/<color=#98EFF0>90%</color>/<color=#A6C5FD>36%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. During the same Stun period, once <color=#FFFFFF>Vibrato</color> has been cleared, the enemy cannot gain <color=#FFFFFF>Vibrato</color> again.\nWhen Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> hits an enemy, her Anomaly Buildup Rate increases by <color=#2BAD00>35%</color>, and her Daze dealt increases by <color=#2BAD00>20%</color>, and the whole squad's DMG dealt increases by <color=#2BAD00>25%</color> for 30s. Repeated triggers reset the duration.\nWhile in combat, Nangong Yu restores 3.8 <color=#FFFFFF>Downbeats</color>/s. When any squad member inflicts an Attribute Anomaly on an enemy, Nangong Yu restores an additional 12 <color=#FFFFFF>Downbeats</color>. This effect can trigger once every 6s.\nNangong Yu can have up to 100 <color=#FFFFFF>Downbeats</color>, and starts with 30 <color=#FFFFFF>Downbeats</color> upon entering the battlefield.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nAny squad member's attack against a Stunned enemy has 30% increased Anomaly Buildup. <color=#FFFFFF>Chain Attacks</color> against a Stunned enemy have an additional 30% increased Anomaly Buildup.\nWhen any squad member Stuns an enemy, Nangong Yu gains 2 stacks of <color=#FFFFFF>Dance Prowess</color>, up to a maximum of 2 stacks, lasting 15s, repeated triggers reset the duration. With <color=#FFFFFF>Dance Prowess</color>, when a heavy attack from Nangong Yu's <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color>, <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, or <color=#FFFFFF>Quick Assist: Emergency Save</color> hits an enemy that is both Stunned and affected by an Attribute Anomaly, 1 stack of <color=#FFFFFF>Dance Prowess</color> is consumed to trigger the special <color=#FFFFFF>Disorder</color> effect <color=#FFFFFF>Polarity Disorder</color> against all enemies who meet the conditions. This deals DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG, and triggers the previous squad member's <color=#FFFFFF>Quick Assist</color>. <color=#FFFFFF>Polarity Disorder</color> does not clear the target's Attribute Anomaly. If the skill fails to trigger <color=#FFFFFF>Polarity Disorder</color>, <color=#FFFFFF>Dance Prowess</color> will not be consumed. When Nangong Yu has <color=#FFFFFF>Dance Prowess</color>, the next time she switches to the field, she will immediately perform the first charged hit of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, which will always trigger precise charging.\nWhen any squad member Stuns an enemy, Nangong Yu's next <color=#FFFFFF>EX Special Attack</color> will not consume Energy. This effect lasts 15s and can trigger once every 15s.\nWhen Nangong Yu and Aria are in the same squad, if Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, and Nangong Yu fully participates in the attack, 1 stack of <color=#FFFFFF>Dance Prowess</color> will also be consumed to trigger <color=#FFFFFF>Polarity Disorder</color> on all enemies who meet the conditions.\nWhen the third hit of Nangong Yu's <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> or <color=#FFFFFF>Ultimate: Meteor Shower</color> hits an enemy, the enemy suffers <color=#FFFFFF>Misstep</color>. Under this effect, Stun DMG Multiplier increases by 30% and when an enemy becomes Stunned, their Stun duration increases by 3s. Before recovering from Stun, <color=#FFFFFF>Misstep</color> can only trigger once on the same target. The increased Stun duration cannot stack with similar effects. When an enemy with <color=#FFFFFF>Misstep</color> recovers from Stun, the <color=#FFFFFF>Misstep</color> effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Prodigious Idol",
+          "Additional Ability: Angel Captain"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nLaunches a series of attacks on the target, dealing <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Emergency Save",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Perfected Choreography",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nLaunches a series of attacks on the target, dealing massive <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Improvised Performance",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Emergency Save",
+          "param": [
+            {
+              "desc": "{Skill:1511013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511013": {
+                  "attackData": [],
+                  "attributeInfliction": 5748,
+                  "damagePercentage": 7480,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 5749,
+                  "feverRecovery": 142450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 680,
+                  "main": 7480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6330,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511013": {
+                  "attackData": [],
+                  "attributeInfliction": 5748,
+                  "damagePercentage": 7480,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 5749,
+                  "feverRecovery": 142450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6330,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Perfected Choreography",
+          "param": [
+            {
+              "desc": "{Skill:1511014, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1511014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511015, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1511015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511016, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1511016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Improvised Performance",
+          "param": [
+            {
+              "desc": "{Skill:1511017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511017": {
+                  "attackData": [],
+                  "attributeInfliction": 38747,
+                  "damagePercentage": 53580,
+                  "damagePercentageGrowth": 4880,
+                  "etherPurify": 21500,
+                  "feverRecovery": 1142075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4880,
+                  "main": 53580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39920,
+                  "stunRatioGrowth": 1820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511017": {
+                  "attackData": [],
+                  "attributeInfliction": 38747,
+                  "damagePercentage": 53580,
+                  "damagePercentageGrowth": 4880,
+                  "etherPurify": 21500,
+                  "feverRecovery": 1142075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1820,
+                  "main": 39920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39920,
+                  "stunRatioGrowth": 1820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nPerform up to three attacks forward, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Basic Attack: Shooting Star Step",
+          "potential": []
+        },
+        {
+          "desc": "Hold <IconMap:Icon_Normal> to launch a charged attack, dealing <color=#FE437E>Ether DMG</color>. Release the button at the right moment to trigger precise charging, increasing the Daze dealt by the skill by 20%.\nNangong Yu can perform up to three hits. The second and third hits each must consume 50 <color=#FFFFFF>Downbeats</color>.\nAfter using a <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or <color=#FFFFFF>EX Special Attack</color>, if enough <color=#FFFFFF>Downbeats</color> are available, hold <IconMap:Icon_Normal> to skip the first hit and directly perform the second and third hits, which always trigger precise charging.\nWhen Nangong Yu is the active character, <color=#FFFFFF>Chain Attacks</color>, <color=#FFFFFF>Ultimates</color>, and <color=#FFFFFF>EX Special Attacks</color> do not interrupt the combo count of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>.\nWhile charging the first hit, Anti-Interrupt Level increases and DMG taken decreases by 60%.\nWhile charging the second and third hits, the character is Invulnerable.\nDuring the dash phase of the first hit, enemy attacks can be Blocked. On a successful Block, the attack is treated as a precise charging attack.\nCharacter is invulnerable during all attacks.",
+          "name": "Basic Attack: Adorable Explosive Impact",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Shooting Star Step",
+          "param": [
+            {
+              "desc": "{Skill:1511001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1511001": {
+                  "attackData": [],
+                  "attributeInfliction": 5933,
+                  "damagePercentage": 11490,
+                  "damagePercentageGrowth": 1050,
+                  "etherPurify": 7512,
+                  "feverRecovery": 186175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 11490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8270,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1511002": {
+                  "attackData": [],
+                  "attributeInfliction": 6215,
+                  "damagePercentage": 13690,
+                  "damagePercentageGrowth": 1250,
+                  "etherPurify": 7645,
+                  "feverRecovery": 189475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1250,
+                  "main": 13690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27530,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8410,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1511003": {
+                  "attackData": [],
+                  "attributeInfliction": 12907,
+                  "damagePercentage": 26380,
+                  "damagePercentageGrowth": 2400,
+                  "etherPurify": 15348,
+                  "feverRecovery": 380050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2400,
+                  "main": 26380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16890,
+                  "stunRatioGrowth": 770
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1511001": {
+                  "attackData": [],
+                  "attributeInfliction": 5933,
+                  "damagePercentage": 11490,
+                  "damagePercentageGrowth": 1050,
+                  "etherPurify": 7512,
+                  "feverRecovery": 186175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8270,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1511002": {
+                  "attackData": [],
+                  "attributeInfliction": 6215,
+                  "damagePercentage": 13690,
+                  "damagePercentageGrowth": 1250,
+                  "etherPurify": 7645,
+                  "feverRecovery": 189475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27530,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8410,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1511003": {
+                  "attackData": [],
+                  "attributeInfliction": 12907,
+                  "damagePercentage": 26380,
+                  "damagePercentageGrowth": 2400,
+                  "etherPurify": 15348,
+                  "feverRecovery": 380050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 770,
+                  "main": 16890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16890,
+                  "stunRatioGrowth": 770
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Adorable Explosive Impact",
+          "param": [
+            {
+              "desc": "{Skill:1511004, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1511004": {
+                  "attackData": [],
+                  "attributeInfliction": 4000,
+                  "damagePercentage": 10400,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4000,
+                  "feverRecovery": 99000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 950,
+                  "main": 10400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4400,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511005, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1511005": {
+                  "attackData": [],
+                  "attributeInfliction": 19163,
+                  "damagePercentage": 30440,
+                  "damagePercentageGrowth": 2770,
+                  "etherPurify": 11664,
+                  "feverRecovery": 288750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2770,
+                  "main": 30440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21080,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511006, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1511006": {
+                  "attackData": [],
+                  "attributeInfliction": 37336,
+                  "damagePercentage": 51080,
+                  "damagePercentageGrowth": 4650,
+                  "etherPurify": 14837,
+                  "feverRecovery": 367400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4650,
+                  "main": 51080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 41080,
+                  "stunRatioGrowth": 1870
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511006, Prop:1001} + {Skill:1511018, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier (Coordinated)",
+              "param": {
+                "1511006": {
+                  "attackData": [],
+                  "attributeInfliction": 37336,
+                  "damagePercentage": 51080,
+                  "damagePercentageGrowth": 4650,
+                  "etherPurify": 14837,
+                  "feverRecovery": 367400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4650,
+                  "main": 51080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 41080,
+                  "stunRatioGrowth": 1870
+                },
+                "1511018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7670,
+                  "damagePercentageGrowth": 700,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 7670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2060,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511004, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1511004": {
+                  "attackData": [],
+                  "attributeInfliction": 4000,
+                  "damagePercentage": 10400,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4000,
+                  "feverRecovery": 99000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4400,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511005, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1511005": {
+                  "attackData": [],
+                  "attributeInfliction": 19163,
+                  "damagePercentage": 30440,
+                  "damagePercentageGrowth": 2770,
+                  "etherPurify": 11664,
+                  "feverRecovery": 288750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 21080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21080,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511006, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1511006": {
+                  "attackData": [],
+                  "attributeInfliction": 37336,
+                  "damagePercentage": 51080,
+                  "damagePercentageGrowth": 4650,
+                  "etherPurify": 14837,
+                  "feverRecovery": 367400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1870,
+                  "main": 41080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 41080,
+                  "stunRatioGrowth": 1870
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511006, Prop:1002}+{Skill:1511018, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier (Coordinated)",
+              "param": {
+                "1511006": {
+                  "attackData": [],
+                  "attributeInfliction": 37336,
+                  "damagePercentage": 51080,
+                  "damagePercentageGrowth": 4650,
+                  "etherPurify": 14837,
+                  "feverRecovery": 367400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1870,
+                  "main": 41080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 41080,
+                  "stunRatioGrowth": 1870
+                },
+                "1511018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7670,
+                  "damagePercentageGrowth": 700,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2060,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunch a series of attacks forward, dealing massive <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Comet Gravity",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nLaunch multiple attacks forward, dealing massive <color=#FE437E>Ether DMG</color>.\nUpon activating this skill, Nangong Yu activates <color=#FFFFFF>Ether Veil: Delusion Reprise</color>. While <color=#FFFFFF>Ether Veil: Delusion Reprise</color> is active, all squad members gain an additional 50 ATK for 30s. If Nangong Yu activates <color=#FFFFFF>Ether Veil: Delusion Reprise</color> again, the current <color=#FFFFFF>Ether Veil: Delusion Reprise</color> will first deactivate.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Meteor Shower",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Comet Gravity",
+          "param": [
+            {
+              "desc": "{Skill:1511011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511011": {
+                  "attackData": [],
+                  "attributeInfliction": 41446,
+                  "damagePercentage": 79820,
+                  "damagePercentageGrowth": 7260,
+                  "etherPurify": 21497,
+                  "feverRecovery": 2178000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7260,
+                  "main": 79820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23650,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511011": {
+                  "attackData": [],
+                  "attributeInfliction": 41446,
+                  "damagePercentage": 79820,
+                  "damagePercentageGrowth": 7260,
+                  "etherPurify": 21497,
+                  "feverRecovery": 2178000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 23650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23650,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Meteor Shower",
+          "param": [
+            {
+              "desc": "{Skill:1511012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511012": {
+                  "attackData": [],
+                  "attributeInfliction": 29333,
+                  "damagePercentage": 210170,
+                  "damagePercentageGrowth": 19110,
+                  "etherPurify": 64667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 19110,
+                  "main": 210170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 119610,
+                  "stunRatioGrowth": 5440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511012": {
+                  "attackData": [],
+                  "attributeInfliction": 29333,
+                  "damagePercentage": 210170,
+                  "damagePercentageGrowth": 19110,
+                  "etherPurify": 64667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5440,
+                  "main": 119610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 119610,
+                  "stunRatioGrowth": 5440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Natural Dancer",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nDeliver a quick attack forward, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Dash Attack: Spinning Meteor",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nLaunch a series of attacks on the target, dealing <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Asteroid Waltz",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Spinning Meteor",
+          "param": [
+            {
+              "desc": "{Skill:1511009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511009": {
+                  "attackData": [],
+                  "attributeInfliction": 2331,
+                  "damagePercentage": 19070,
+                  "damagePercentageGrowth": 1740,
+                  "etherPurify": 2332,
+                  "feverRecovery": 57750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1740,
+                  "main": 19070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2570,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511009": {
+                  "attackData": [],
+                  "attributeInfliction": 2331,
+                  "damagePercentage": 19070,
+                  "damagePercentageGrowth": 1740,
+                  "etherPurify": 2332,
+                  "feverRecovery": 57750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2570,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Asteroid Waltz",
+          "param": [
+            {
+              "desc": "{Skill:1511010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511010": {
+                  "attackData": [],
+                  "attributeInfliction": 13330,
+                  "damagePercentage": 35530,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 28331,
+                  "feverRecovery": 330000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3230,
+                  "main": 35530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25670,
+                  "stunRatioGrowth": 1170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511010": {
+                  "attackData": [],
+                  "attributeInfliction": 13330,
+                  "damagePercentage": 35530,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 28331,
+                  "feverRecovery": 330000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1170,
+                  "main": 25670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25670,
+                  "stunRatioGrowth": 1170
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nDelivers a morning star attack, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Special Attack: The Weight of Love",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nDelivers a morning star attack, dealing <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: The Unbearable Weight of Love",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: The Weight of Love",
+          "param": [
+            {
+              "desc": "{Skill:1511007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511007": {
+                  "attackData": [],
+                  "attributeInfliction": 6418,
+                  "damagePercentage": 8350,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 6419,
+                  "feverRecovery": 158950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 8350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7070,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511007": {
+                  "attackData": [],
+                  "attributeInfliction": 6418,
+                  "damagePercentage": 8350,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 6419,
+                  "feverRecovery": 158950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7070,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: The Unbearable Weight of Love",
+          "param": [
+            {
+              "desc": "{Skill:1511008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1511008": {
+                  "attackData": [],
+                  "attributeInfliction": 46327,
+                  "damagePercentage": 53300,
+                  "damagePercentageGrowth": 4850,
+                  "etherPurify": 11664,
+                  "feverRecovery": 948750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4850,
+                  "main": 53300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 41430,
+                  "stunRatioGrowth": 1890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1511008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1511008": {
+                  "attackData": [],
+                  "attributeInfliction": 46327,
+                  "damagePercentage": 53300,
+                  "damagePercentageGrowth": 4850,
+                  "etherPurify": 11664,
+                  "feverRecovery": 948750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1890,
+                  "main": 41430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 41430,
+                  "stunRatioGrowth": 1890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1511001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Shooting Star Step"
+    },
+    "1511002": {
+      "desc": "<IconMap:Icon_Normal> (Hold) ; <IconMap:Icon_Normal> (Hold with enough Downbeats) ; <IconMap:Icon_Normal> (Hold with enough Downbeats)",
+      "name": "Basic Attack: Adorable Explosive Impact"
+    },
+    "1511003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: The Weight of Love"
+    },
+    "1511004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: The Unbearable Weight of Love"
+    },
+    "1511005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Spinning Meteor"
+    },
+    "1511006": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Asteroid Waltz"
+    },
+    "1511007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Comet Gravity"
+    },
+    "1511008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Meteor Shower"
+    },
+    "1511009": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Emergency Save"
+    },
+    "1511010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Perfected Choreography"
+    },
+    "1511011": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Improvised Performance"
+    }
+  },
+  "skin": {
+    "3115110": {
+      "desc": "Dreams are both cheap and expensive, always just out of reach. The people on the ground call them stars.\nSo the angel walks among the stars and lifts a sliver of fantasy from the endless galaxy... the very first rainbow light that shone upon her.",
+      "name": "Nangong Yu: Dreamy Dancer"
+    },
+    "3115111": {
+      "desc": "Dancing within disordered rhythms, spinning across a stage of wild fantasia.\nThe boundary between angel and demon tilts with the lights, dissolving within her reflection.",
+      "name": "Nangong Yu: Rhapsody's Muse"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, quick-swap Stun",
+    "Increases Stun duration and Stun DMG Multiplier",
+    "Can trigger Abloom and Polarity Disorder"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> or <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> hits an enemy, the enemy's All-Attribute RES decreases by 18% for 40s. Repeated triggers refresh the duration. When entering the battlefield, Nangong Yu's <color=#FFFFFF>Downbeat</color> is restored to the maximum. In Investigation Zone Mode, this effect can trigger once every 180s.",
+      "desc2": "Dreams are such troublesome and expensive things. When the spotlight shines on her, it just feels a little warm, that's all. Honestly, watching Sunna blush from being teased, seeing Aria short-circuit from nerves, or discovering our next lucky break might be far more entertaining to her.",
+      "name": "Lazy Spotlight"
+    },
+    "2": {
+      "desc": "Each stack of <color=#FFFFFF>Vibrato</color>'s additional <color=#FFFFFF>Abloom</color> DMG ratio increase from <color=#FFFFFF>Core Passive: Prodigious Idol</color> increases by an additional 10%. The Stun DMG Multiplier provided by <color=#FFFFFF>Additional Ability: Angel Captain</color> increases by an additional 30%. When the active character's <color=#FFFFFF>Chain Attack</color> heavy attack hits an enemy that is both Stunned and affected by an Attribute Anomaly, it triggers <color=#FFFFFF>Polarity Disorder</color>, dealing DMG equal to 25% of the original <color=#FFFFFF>Disorder</color> DMG. Each enemy can only trigger this effect once during the same Stun period.",
+      "desc2": "Tears are a valuable stage prop, but unfortunately, she's always been short on stock. Luckily, her acting skills as an idol are good enough to make them fall right on cue when needed... whether it's to comfort a real crybaby, or win a little sympathy from the audience.",
+      "name": "Painless Tears"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Choreography can be arranged, stage positions can be planned, and even popularity and the future seem like things money can sort out. Watching the numbers bounce around in the account feels like a reassuring little game... until a problem shows up with no price tag attached. Fiddling with the stack of \"chips\" she's best at using makes the scale of \"it's just business\" start to wobble.",
+      "name": "Chips on the Scales"
+    },
+    "4": {
+      "desc": "Anomaly Proficiency increases by 40. The Anomaly Buildup of <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color> when hitting an enemy increases by 35%.",
+      "desc2": "I've got a habit of giving Sunna the most dazzling position on stage, and leaving Aria the high note that cuts through the night sky. My \"dream\" was borrowed from them, but the resolve to protect what I borrowed belongs entirely to me.",
+      "name": "Accomplice's Dance Step"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The Yearlight lanterns drift up into the sky, and the stage curtain finally opens. The stage, the lights, their faces... everything has never been this clear. Turns out I've been standing in the center of the spotlight all along. I was never just watching from the sidelines.",
+      "name": "Center Stage"
+    },
+    "6": {
+      "desc": "Nangong Yu's attacks deal 50% more Daze. When the enemy is not Stunned, each time any character triggers <color=#FFFFFF>Abloom</color> DMG, <color=#FFFFFF>Disorder</color> DMG, or inflicts an Attribute Anomaly on them, the enemy gains 1 stacks of <color=#FFFFFF>Vibrato: Modified</color>. When hit by the heavy attack of <color=#FFFFFF>EX Special Attack: The Unbearable Weight of Love</color> or <color=#FFFFFF>Basic Attack: Adorable Explosive Impact</color>, they gain 1 stacks of <color=#FFFFFF>Vibrato: Modified</color>. When hit by the heavy attack of <color=#FFFFFF>Ultimate: Meteor Shower</color>, they gain 2 stacks of <color=#FFFFFF>Vibrato: Modified</color>. <color=#FFFFFF>Vibrato: Modified</color> can stack up to 4 times. When the enemy becomes Stunned, all <color=#FFFFFF>Vibrato: Modified</color> stacks are cleared. When <color=#FFFFFF>Vibrato: Modified</color> is cleared, if the enemy is under an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, Nangong Yu triggers an instance of <color=#FFFFFF>Abloom</color> DMG on the target, dealing an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>800%</color>/<color=#2EB6FF>400%</color>/<color=#FF5521>1,000%</color>/<color=#F0D12B>70%</color>/<color=#98EFF0>100%</color>/<color=#A6C5FD>40%</color> of the original Attribute Anomaly DMG. Each stack of <color=#FFFFFF>Vibrato: Modified</color> on the enemy increases this <color=#FFFFFF>Abloom</color> DMG ratio by an additional 25%. <color=#FFFFFF>Vibrato: Modified</color> cannot stack with <color=#FFFFFF>Vibrato</color>.",
+      "desc2": "Cameras, cheering crowds, glow sticks... that distant warmth turns into blazing fire. The dream I borrowed from others has already fused with my flesh and blood. From here on, this intoxicating \"Delusion\" will be defined by Captain Nangong.",
+      "name": "An Angel's Delusion"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

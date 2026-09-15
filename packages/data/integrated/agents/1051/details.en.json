@@ -1,0 +1,1850 @@
+{
+  "camp": {
+    "11": "Spook Shack"
+  },
+  "elementType": {
+    "202": "Ice"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "HP"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "HP"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1051,
+  "locale": "en",
+  "name": "Yidhari",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1051017", "1051018", "1051019", "1051020", "1051021"],
+      "basic": [
+        "1051001",
+        "1051002",
+        "1051003",
+        "1051004",
+        "1051005",
+        "1051006",
+        "1051007",
+        "1051008",
+        "1051026"
+      ],
+      "chain": ["1051015", "1051016", "1051025"],
+      "dodge": ["1051013", "1051014"],
+      "special": ["1051009", "1051010", "1051011", "1051012", "1051024"]
+    },
+    "parameterRowsById": {
+      "1051001": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1051002": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1051003": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1051004": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1051005": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/4"
+      ],
+      "1051006": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/5"
+      ],
+      "1051007": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/6"
+      ],
+      "1051008": [
+        "/skill/basic/description/4/param/3",
+        "/skill/basic/description/4/param/7"
+      ],
+      "1051009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1051010": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1051011": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1051012": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/2"
+      ],
+      "1051013": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1051014": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1051015": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1051016": [
+        "/skill/chain/description/4/param/0",
+        "/skill/chain/description/4/param/1"
+      ],
+      "1051017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1051018": ["/skill/assist/description/4/param/0"],
+      "1051019": ["/skill/assist/description/4/param/1"],
+      "1051020": ["/skill/assist/description/4/param/2"],
+      "1051021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1051024": ["/skill/special/description/7/param/1"],
+      "1051025": [
+        "/skill/chain/description/3/param/2",
+        "/skill/chain/description/3/param/3"
+      ],
+      "1051026": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "MAR 19",
+    "fullName": "Yidhari Murphy",
+    "gender": "Female",
+    "impressionF": "Yidhari always seems like she couldn't care less, but she's actually really thoughtful and knows how to take care of others!\nOnce, while I was carrying some videotapes, I got a small cut on my hand without even noticing, and she came right over with a bandage and put it on for me!",
+    "impressionM": "I know the feeling... When we hung out together before, I was in such a rush, I skipped lunch, and she noticed right away. She said my lips looked pale, so I must have come without eating, even though I couldn't tell myself...",
+    "impressions": [
+      "Impressions of Yidhari:\n · In the darkness was undeniably cold, yet it burned her with searing heat.",
+      " · She never got the rainy day she was waiting for, but she did get you.",
+      "· She wants to continue forward with those she cares about."
+    ],
+    "profileDesc": "In addition to her role as an Agent, Yidhari doubles as both a Proxy, and a contributor for Spook Shack.\nTo most, she comes across as laid-back and leisurely, but according to records, it's less \"laziness\" than a shroud of nothingness, leaving her at odds with the world around her.\nPerhaps to most people, this would seem like the usual quirk of someone absorbed in their craft. As a gifted writer of bizarre tales, Yidhari should be more prone than most to immersing herself in the worlds of her own imagination.\nIn truth, however, her unusual behavior stems more from the burden of her own abilities.\nIn the Hollows, she's exposed to vast torrents of information unimaginable to most, tangled with years upon years of memories that have amassed there. That crushing weight of countless pasts constantly batters her sense of reality, until even her emotions are gradually worn dull.\nThe fact that she can bear this burden, turn it into her own strength, and still live life in her own way — that's what sets Yidhari apart as gifted beyond others.",
+    "stature": "171",
+    "trustLv": {
+      "1": "In addition to her role as an Agent, Yidhari doubles as both a Proxy, and a contributor for Spook Shack.\nTo most, she comes across as laid-back and leisurely, but according to records, it's less \"laziness\" than a shroud of nothingness, leaving her at odds with the world around her.\nPerhaps to most people, this would seem like the usual quirk of someone absorbed in their craft. As a gifted writer of bizarre tales, Yidhari should be more prone than most to immersing herself in the worlds of her own imagination.\nIn truth, however, her unusual behavior stems more from the burden of her own abilities.\nIn the Hollows, she's exposed to vast torrents of information unimaginable to most, tangled with years upon years of memories that have amassed there. That crushing weight of countless pasts constantly batters her sense of reality, until even her emotions are gradually worn dull.\nThe fact that she can bear this burden, turn it into her own strength, and still live life in her own way — that's what sets Yidhari apart as gifted beyond others.",
+      "2": "",
+      "3": "Yidhari has an unusual fondness for rainy days and long baths.\nThese two comforts grant her brief moments of peace in the real world, allowing her moments of rest free from the tangled streams of information in her mind.\n\nBut lately, her feelings toward these two comforts have changed.\nShe's grown unaccustomed to being alone, no longer anxiously yearning for the rain, no longer relying on warm baths to heal herself.\nShe has begun strolling beneath clear skies, moving with ease through bustling crowds... and looking forward to trying everything that feels new to her.\nFor Yidhari, everything started to change from the moment she met you.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 4",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1051501": {
+        "desc": [
+          "Yidhari gains extra Sheer Force based on her Max HP, with every 1 point of Max HP increasing Sheer Force by 0.1.\nAll <color=#98EFF0>Ice DMG</color> dealt by Yidhari deals is Sheer DMG, ignoring enemy DEF and using her Sheer Force stat as the DMG Multiplier. When Yidhari enters battle, she immediately gains 60 Adrenaline. In Investigation Zone Mode, this effect can trigger once every 180s.\nYidhari's skill DMG increases as her current HP percentage decreases.\nWhen her HP falls below 50%, the buff reaches its maximum value, increasing her DMG by up to <color=#2BAD00>50%</color>. Once her HP is restored to 50%, the maximum bonus remains for 5s thereafter.\nYidhari gains fewer Decibels from landing skills. Instead, she gains Decibels as her HP decreases, with every 1% HP lost granting 10 Decibels.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nWhen Yidhari's HP falls below 50%, CRIT DMG increases by 30% and DMG taken is reduced by 25%.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains the following additional effect:\nAfter the level 3 charged attack of Yidhari's <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, an icy tentacle is summoned to attack, dealing extra damage. This effect can trigger once every 12s.\nThe above skill is considered an <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier increases based on the EX Special Attack's level."
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": [
+          "Core Passive: Dreamscape Collection",
+          "Additional Ability: Narrative Completion"
+        ],
+        "potential": []
+      },
+      "1051502": {
+        "desc": [
+          "Yidhari gains extra Sheer Force based on her Max HP, with every 1 point of Max HP increasing Sheer Force by 0.1.\nAll <color=#98EFF0>Ice DMG</color> dealt by Yidhari deals is Sheer DMG, ignoring enemy DEF and using her Sheer Force stat as the DMG Multiplier. When Yidhari enters battle, she immediately gains 60 Adrenaline. In Investigation Zone Mode, this effect can trigger once every 180s.\nYidhari's skill DMG increases as her current HP percentage decreases.\nWhen her HP falls below 50%, the buff reaches its maximum value, increasing her DMG by up to <color=#2BAD00>58%</color>. Once her HP is restored to 50%, the maximum bonus remains for 5s thereafter.\nYidhari gains fewer Decibels from landing skills. Instead, she gains Decibels as her HP decreases, with every 1% HP lost granting 10 Decibels.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nWhen Yidhari's HP falls below 50%, CRIT DMG increases by 30% and DMG taken is reduced by 25%.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains the following additional effect:\nAfter the level 3 charged attack of Yidhari's <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, an icy tentacle is summoned to attack, dealing extra damage. This effect can trigger once every 12s.\nThe above skill is considered an <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier increases based on the EX Special Attack's level."
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": [
+          "Core Passive: Dreamscape Collection",
+          "Additional Ability: Narrative Completion"
+        ],
+        "potential": []
+      },
+      "1051503": {
+        "desc": [
+          "Yidhari gains extra Sheer Force based on her Max HP, with every 1 point of Max HP increasing Sheer Force by 0.1.\nAll <color=#98EFF0>Ice DMG</color> dealt by Yidhari deals is Sheer DMG, ignoring enemy DEF and using her Sheer Force stat as the DMG Multiplier. When Yidhari enters battle, she immediately gains 60 Adrenaline. In Investigation Zone Mode, this effect can trigger once every 180s.\nYidhari's skill DMG increases as her current HP percentage decreases.\nWhen her HP falls below 50%, the buff reaches its maximum value, increasing her DMG by up to <color=#2BAD00>66%</color>. Once her HP is restored to 50%, the maximum bonus remains for 5s thereafter.\nYidhari gains fewer Decibels from landing skills. Instead, she gains Decibels as her HP decreases, with every 1% HP lost granting 10 Decibels.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nWhen Yidhari's HP falls below 50%, CRIT DMG increases by 30% and DMG taken is reduced by 25%.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains the following additional effect:\nAfter the level 3 charged attack of Yidhari's <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, an icy tentacle is summoned to attack, dealing extra damage. This effect can trigger once every 12s.\nThe above skill is considered an <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier increases based on the EX Special Attack's level."
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": [
+          "Core Passive: Dreamscape Collection",
+          "Additional Ability: Narrative Completion"
+        ],
+        "potential": []
+      },
+      "1051504": {
+        "desc": [
+          "Yidhari gains extra Sheer Force based on her Max HP, with every 1 point of Max HP increasing Sheer Force by 0.1.\nAll <color=#98EFF0>Ice DMG</color> dealt by Yidhari deals is Sheer DMG, ignoring enemy DEF and using her Sheer Force stat as the DMG Multiplier. When Yidhari enters battle, she immediately gains 60 Adrenaline. In Investigation Zone Mode, this effect can trigger once every 180s.\nYidhari's skill DMG increases as her current HP percentage decreases.\nWhen her HP falls below 50%, the buff reaches its maximum value, increasing her DMG by up to <color=#2BAD00>74%</color>. Once her HP is restored to 50%, the maximum bonus remains for 5s thereafter.\nYidhari gains fewer Decibels from landing skills. Instead, she gains Decibels as her HP decreases, with every 1% HP lost granting 10 Decibels.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nWhen Yidhari's HP falls below 50%, CRIT DMG increases by 30% and DMG taken is reduced by 25%.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains the following additional effect:\nAfter the level 3 charged attack of Yidhari's <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, an icy tentacle is summoned to attack, dealing extra damage. This effect can trigger once every 12s.\nThe above skill is considered an <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier increases based on the EX Special Attack's level."
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": [
+          "Core Passive: Dreamscape Collection",
+          "Additional Ability: Narrative Completion"
+        ],
+        "potential": []
+      },
+      "1051505": {
+        "desc": [
+          "Yidhari gains extra Sheer Force based on her Max HP, with every 1 point of Max HP increasing Sheer Force by 0.1.\nAll <color=#98EFF0>Ice DMG</color> dealt by Yidhari deals is Sheer DMG, ignoring enemy DEF and using her Sheer Force stat as the DMG Multiplier. When Yidhari enters battle, she immediately gains 60 Adrenaline. In Investigation Zone Mode, this effect can trigger once every 180s.\nYidhari's skill DMG increases as her current HP percentage decreases.\nWhen her HP falls below 50%, the buff reaches its maximum value, increasing her DMG by up to <color=#2BAD00>82%</color>. Once her HP is restored to 50%, the maximum bonus remains for 5s thereafter.\nYidhari gains fewer Decibels from landing skills. Instead, she gains Decibels as her HP decreases, with every 1% HP lost granting 10 Decibels.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nWhen Yidhari's HP falls below 50%, CRIT DMG increases by 30% and DMG taken is reduced by 25%.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains the following additional effect:\nAfter the level 3 charged attack of Yidhari's <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, an icy tentacle is summoned to attack, dealing extra damage. This effect can trigger once every 12s.\nThe above skill is considered an <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier increases based on the EX Special Attack's level."
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": [
+          "Core Passive: Dreamscape Collection",
+          "Additional Ability: Narrative Completion"
+        ],
+        "potential": []
+      },
+      "1051506": {
+        "desc": [
+          "Yidhari gains extra Sheer Force based on her Max HP, with every 1 point of Max HP increasing Sheer Force by 0.1.\nAll <color=#98EFF0>Ice DMG</color> dealt by Yidhari deals is Sheer DMG, ignoring enemy DEF and using her Sheer Force stat as the DMG Multiplier. When Yidhari enters battle, she immediately gains 60 Adrenaline. In Investigation Zone Mode, this effect can trigger once every 180s.\nYidhari's skill DMG increases as her current HP percentage decreases.\nWhen her HP falls below 50%, the buff reaches its maximum value, increasing her DMG by up to <color=#2BAD00>90%</color>. Once her HP is restored to 50%, the maximum bonus remains for 5s thereafter.\nYidhari gains fewer Decibels from landing skills. Instead, she gains Decibels as her HP decreases, with every 1% HP lost granting 10 Decibels.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nWhen Yidhari's HP falls below 50%, CRIT DMG increases by 30% and DMG taken is reduced by 25%.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains the following additional effect:\nAfter the level 3 charged attack of Yidhari's <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, an icy tentacle is summoned to attack, dealing extra damage. This effect can trigger once every 12s.\nThe above skill is considered an <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier increases based on the EX Special Attack's level."
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": [
+          "Core Passive: Dreamscape Collection",
+          "Additional Ability: Narrative Completion"
+        ],
+        "potential": []
+      },
+      "1051507": {
+        "desc": [
+          "Yidhari gains extra Sheer Force based on her Max HP, with every 1 point of Max HP increasing Sheer Force by 0.1.\nAll <color=#98EFF0>Ice DMG</color> dealt by Yidhari deals is Sheer DMG, ignoring enemy DEF and using her Sheer Force stat as the DMG Multiplier. When Yidhari enters battle, she immediately gains 60 Adrenaline. In Investigation Zone Mode, this effect can trigger once every 180s.\nYidhari's skill DMG increases as her current HP percentage decreases.\nWhen her HP falls below 50%, the buff reaches its maximum value, increasing her DMG by up to <color=#2BAD00>100%</color>. Once her HP is restored to 50%, the maximum bonus remains for 5s thereafter.\nYidhari gains fewer Decibels from landing skills. Instead, she gains Decibels as her HP decreases, with every 1% HP lost granting 10 Decibels.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nWhen Yidhari's HP falls below 50%, CRIT DMG increases by 30% and DMG taken is reduced by 25%.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains the following additional effect:\nAfter the level 3 charged attack of Yidhari's <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, an icy tentacle is summoned to attack, dealing extra damage. This effect can trigger once every 12s.\nThe above skill is considered an <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier increases based on the EX Special Attack's level."
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": [
+          "Core Passive: Dreamscape Collection",
+          "Additional Ability: Narrative Completion"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nStrikes enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Frostshock Reinforcement",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Flashquake Rejection",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nExecute an ice shard hammer attack against enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Glacial Onslaught",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Frostshock Reinforcement",
+          "param": [
+            {
+              "desc": "{Skill:1051017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051017": {
+                  "attackData": [],
+                  "attributeInfliction": 4668,
+                  "damagePercentage": 8220,
+                  "damagePercentageGrowth": 750,
+                  "etherPurify": 4669,
+                  "feverRecovery": 62975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 750,
+                  "main": 8220,
+                  "rpRecovery": 18680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5140,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051017": {
+                  "attackData": [],
+                  "attributeInfliction": 4668,
+                  "damagePercentage": 8220,
+                  "damagePercentageGrowth": 750,
+                  "etherPurify": 4669,
+                  "feverRecovery": 62975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5140,
+                  "rpRecovery": 18680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5140,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Flashquake Rejection",
+          "param": [
+            {
+              "desc": "{Skill:1051018, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1051018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051019, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1051019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051020, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1051020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Glacial Onslaught",
+          "param": [
+            {
+              "desc": "{Skill:1051021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051021": {
+                  "attackData": [],
+                  "attributeInfliction": 33342,
+                  "damagePercentage": 31340,
+                  "damagePercentageGrowth": 2850,
+                  "etherPurify": 17497,
+                  "feverRecovery": 540925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2850,
+                  "main": 31340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34190,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051021": {
+                  "attackData": [],
+                  "attributeInfliction": 33342,
+                  "damagePercentage": 31340,
+                  "damagePercentageGrowth": 2850,
+                  "etherPurify": 17497,
+                  "feverRecovery": 540925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34190,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 3 strikes, dealing <color=#98EFF0>Ice DMG</color>.\nOn the 3rd hit, Yidhari recovers 10% HP.",
+          "name": "Basic Attack: Crushing Strike",
+          "potential": []
+        },
+        {
+          "desc": "Hold <IconMap:Icon_Normal> to activate:\nYidhari begins charging, continuously consuming HP to reach up to three levels of charge. When <IconMap:Icon_Normal> is released, Yidhari unleashes a powerful charged hammer attack in front based on the current charge level, dealing massive <color=#98EFF0>Ice DMG</color>.\nThe higher Yidhari's HP, the faster charging consumes it. HP consumption will at most reduce Yidhari's HP to 25% of Max HP.\nAt 2 charge levels, after using the skill, press <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of <color=#FFFFFF>Basic Attack: Crushing Strike</color>. The DMG of a <color=#FFFFFF>Basic Attack: Crushing Strike</color> triggered this way increases based on the current charge level, up to 30%.\nAt 3 charge levels, Yidhari gains increased Anti-Interrupt level during the charged skill. Press <IconMap:Icon_Normal> to chain early into the finishing smash.",
+          "name": "Basic Attack: Frostbite Embrace",
+          "potential": []
+        },
+        {
+          "desc": "While charging or spinning during <color=#FFFFFF>Basic Attack: Frostbite Embrace</color>, if hit by an enemy, Yidhari can block with her tentacles, reducing the DMG taken by 25%.\nIf charging or not yet at full charge, Yidhari counterattacks with her tentacles, returning to the charging stance and instantly gaining 1 charge level, while also dealing <color=#98EFF0>Ice DMG</color> to enemies ahead.\nWhile Frost's Crushing Weight is active, pressing <IconMap:Icon_Normal> makes Yidhari immediately unleash the finishing slam of <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> based on her current charge level.\nWhile Frost's Crushing Weight is active, pressing <IconMap:Icon_Special> or <IconMap:Icon_SpecialReady_Rp> makes Yidhari unleash a <color=#FFFFFF>Special Attack: Surging Cold, Crushing Pursuit</color> that is guaranteed to trigger Surging Cold.",
+          "name": "Frost's Crushing Weight",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Crushing Strike",
+          "param": [
+            {
+              "desc": "{Skill:1051001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1051001": {
+                  "attackData": [],
+                  "attributeInfliction": 5396,
+                  "damagePercentage": 6070,
+                  "damagePercentageGrowth": 560,
+                  "etherPurify": 5397,
+                  "feverRecovery": 72875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 6070,
+                  "rpRecovery": 21590,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5940,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051004, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier (ALT)",
+              "param": {
+                "1051004": {
+                  "attackData": [],
+                  "attributeInfliction": 5546,
+                  "damagePercentage": 6240,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5547,
+                  "feverRecovery": 74800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6240,
+                  "rpRecovery": 22190,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6110,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1051002": {
+                  "attackData": [],
+                  "attributeInfliction": 7933,
+                  "damagePercentage": 8600,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 7934,
+                  "feverRecovery": 106975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 8600,
+                  "rpRecovery": 31740,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8730,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1051003": {
+                  "attackData": [],
+                  "attributeInfliction": 15500,
+                  "damagePercentage": 20780,
+                  "damagePercentageGrowth": 1890,
+                  "etherPurify": 15500,
+                  "feverRecovery": 209000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1890,
+                  "main": 20780,
+                  "rpRecovery": 62000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17050,
+                  "stunRatioGrowth": 780
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1051001": {
+                  "attackData": [],
+                  "attributeInfliction": 5396,
+                  "damagePercentage": 6070,
+                  "damagePercentageGrowth": 560,
+                  "etherPurify": 5397,
+                  "feverRecovery": 72875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 270,
+                  "main": 5940,
+                  "rpRecovery": 21590,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5940,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051004, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier (ALT)",
+              "param": {
+                "1051004": {
+                  "attackData": [],
+                  "attributeInfliction": 5546,
+                  "damagePercentage": 6240,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5547,
+                  "feverRecovery": 74800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6110,
+                  "rpRecovery": 22190,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6110,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1051002": {
+                  "attackData": [],
+                  "attributeInfliction": 7933,
+                  "damagePercentage": 8600,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 7934,
+                  "feverRecovery": 106975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8730,
+                  "rpRecovery": 31740,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8730,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1051003": {
+                  "attackData": [],
+                  "attributeInfliction": 15500,
+                  "damagePercentage": 20780,
+                  "damagePercentageGrowth": 1890,
+                  "etherPurify": 15500,
+                  "feverRecovery": 209000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 780,
+                  "main": 17050,
+                  "rpRecovery": 62000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17050,
+                  "stunRatioGrowth": 780
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Frostbite Embrace",
+          "param": [
+            {
+              "desc": "{Skill:1051005, Prop:1001}",
+              "name": "Level-1 Charged Attack DMG Multiplier",
+              "param": {
+                "1051005": {
+                  "attackData": [],
+                  "attributeInfliction": 13469,
+                  "damagePercentage": 16140,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 13470,
+                  "feverRecovery": 181500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1470,
+                  "main": 16140,
+                  "rpRecovery": 31460,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14820,
+                  "stunRatioGrowth": 680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051006, Prop:1001}",
+              "name": "Level-2 Charged Attack DMG Multiplier",
+              "param": {
+                "1051006": {
+                  "attackData": [],
+                  "attributeInfliction": 23852,
+                  "damagePercentage": 25410,
+                  "damagePercentageGrowth": 2310,
+                  "etherPurify": 23853,
+                  "feverRecovery": 321475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2310,
+                  "main": 25410,
+                  "rpRecovery": 47900,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26240,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051007, Prop:1001}",
+              "name": "Level-3 Charged Smash DMG Multiplier",
+              "param": {
+                "1051007": {
+                  "attackData": [],
+                  "attributeInfliction": 25833,
+                  "damagePercentage": 34590,
+                  "damagePercentageGrowth": 3150,
+                  "etherPurify": 25834,
+                  "feverRecovery": 348150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3150,
+                  "main": 34590,
+                  "rpRecovery": 63170,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28420,
+                  "stunRatioGrowth": 1300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051008, Prop:1001}",
+              "name": "Level-3 Charged Spin DMG Multiplier",
+              "param": {
+                "1051008": {
+                  "attackData": [],
+                  "attributeInfliction": 16163,
+                  "damagePercentage": 23580,
+                  "damagePercentageGrowth": 2150,
+                  "etherPurify": 16164,
+                  "feverRecovery": 218075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2150,
+                  "main": 23580,
+                  "rpRecovery": 64660,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17780,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051005, Prop:1002}",
+              "name": "Level-1 Charged Daze Multiplier",
+              "param": {
+                "1051005": {
+                  "attackData": [],
+                  "attributeInfliction": 13469,
+                  "damagePercentage": 16140,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 13470,
+                  "feverRecovery": 181500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 680,
+                  "main": 14820,
+                  "rpRecovery": 31460,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14820,
+                  "stunRatioGrowth": 680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051006, Prop:1002}",
+              "name": "Level-2 Charged Daze Multiplier",
+              "param": {
+                "1051006": {
+                  "attackData": [],
+                  "attributeInfliction": 23852,
+                  "damagePercentage": 25410,
+                  "damagePercentageGrowth": 2310,
+                  "etherPurify": 23853,
+                  "feverRecovery": 321475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 26240,
+                  "rpRecovery": 47900,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26240,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051007, Prop:1002}",
+              "name": "Level-3 Charged Smash Daze Multiplier",
+              "param": {
+                "1051007": {
+                  "attackData": [],
+                  "attributeInfliction": 25833,
+                  "damagePercentage": 34590,
+                  "damagePercentageGrowth": 3150,
+                  "etherPurify": 25834,
+                  "feverRecovery": 348150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1300,
+                  "main": 28420,
+                  "rpRecovery": 63170,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28420,
+                  "stunRatioGrowth": 1300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051008, Prop:1002}",
+              "name": "Level-3 Charged Spin Daze Multiplier",
+              "param": {
+                "1051008": {
+                  "attackData": [],
+                  "attributeInfliction": 16163,
+                  "damagePercentage": 23580,
+                  "damagePercentageGrowth": 2150,
+                  "etherPurify": 16164,
+                  "feverRecovery": 218075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 810,
+                  "main": 17780,
+                  "rpRecovery": 64660,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17780,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Frost's Crushing Weight",
+          "param": [
+            {
+              "desc": "{Skill:1051026, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051026": {
+                  "attackData": [],
+                  "attributeInfliction": 3333,
+                  "damagePercentage": 4870,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3334,
+                  "feverRecovery": 45100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 4870,
+                  "rpRecovery": 13340,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3670,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051026, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051026": {
+                  "attackData": [],
+                  "attributeInfliction": 3333,
+                  "damagePercentage": 4870,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3334,
+                  "feverRecovery": 45100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3670,
+                  "rpRecovery": 13340,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3670,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleash a powerful strike against enemies in a small area ahead, dealing massive <color=#98EFF0>Ice DMG</color>.\nIf inside <color=#FFFFFF>Ether Veil: Wellspring</color>, tentacles join in the assault, further enhancing the skill's power.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Frostbound Oath",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, the final hit of <color=#FFFFFF>Basic Attack: Frostbite Embrace</color>, <color=#FFFFFF>EX Special Attack: Frost Coil</color>, <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, and <color=#FFFFFF>Chain Attack: Frostbound Oath</color> will consume 3,000 Decibels to activate an <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5% for 30s. Repeated triggers extend the duration, up to a maximum of 300s.\nWhile Yidhari is within <color=#FFFFFF>Ether Veil: Wellspring</color>, the charge speed of <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> increases, and HP is consumed faster during charging.",
+          "name": "Ether Veil: Wellspring",
+          "potential": []
+        },
+        {
+          "desc": "After Yidhari expends Decibels to activate <color=#FFFFFF>Ether Veil: Wellspring</color>, press <IconMap:Icon_UltimateReady> within 30s to activate:\nDeliver a powerful strike to enemies in a large area ahead, dealing massive <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.\nEach time Yidhari expends Decibels to activate an <color=#FFFFFF>Ether Veil: Wellspring</color>, she can use <color=#FFFFFF>Ultimate: Final Act - Crossing the River of Regret</color> once.",
+          "name": "Ultimate: Final Act - Crossing the River of Regret",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Frostbound Oath",
+          "param": [
+            {
+              "desc": "{Skill:1051015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051015": {
+                  "attackData": [],
+                  "attributeInfliction": 45120,
+                  "damagePercentage": 57270,
+                  "damagePercentageGrowth": 5210,
+                  "etherPurify": 25171,
+                  "feverRecovery": 1235300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5210,
+                  "main": 57270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27690,
+                  "stunRatioGrowth": 1260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051015": {
+                  "attackData": [],
+                  "attributeInfliction": 45120,
+                  "damagePercentage": 57270,
+                  "damagePercentageGrowth": 5210,
+                  "etherPurify": 25171,
+                  "feverRecovery": 1235300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1260,
+                  "main": 27690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27690,
+                  "stunRatioGrowth": 1260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051025, Prop:1001}",
+              "name": "DMG Multiplier in Ether Veil: Wellspring",
+              "param": {
+                "1051025": {
+                  "attackData": [],
+                  "attributeInfliction": 45120,
+                  "damagePercentage": 62990,
+                  "damagePercentageGrowth": 5730,
+                  "etherPurify": 25171,
+                  "feverRecovery": 1235300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5730,
+                  "main": 62990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27690,
+                  "stunRatioGrowth": 1260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051025, Prop:1002}",
+              "name": "Daze Multiplier in Ether Veil: Wellspring",
+              "param": {
+                "1051025": {
+                  "attackData": [],
+                  "attributeInfliction": 45120,
+                  "damagePercentage": 62990,
+                  "damagePercentageGrowth": 5730,
+                  "etherPurify": 25171,
+                  "feverRecovery": 1235300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1260,
+                  "main": 27690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27690,
+                  "stunRatioGrowth": 1260
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Final Act - Crossing the River of Regret",
+          "param": [
+            {
+              "desc": "{Skill:1051016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051016": {
+                  "attackData": [],
+                  "attributeInfliction": 17663,
+                  "damagePercentage": 152210,
+                  "damagePercentageGrowth": 13840,
+                  "etherPurify": 67664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13840,
+                  "main": 152210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19430,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051016": {
+                  "attackData": [],
+                  "attributeInfliction": 17663,
+                  "damagePercentage": 152210,
+                  "damagePercentageGrowth": 13840,
+                  "etherPurify": 67664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 19430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19430,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Dreamshift",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nStrike forward, dealing <color=#98EFF0>Ice DMG</color>.",
+          "name": "Dash Attack: Frostbloom Impact",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nStrikes enemies in front, dealing <color=#98EFF0>Ice DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Icehaul Reverb",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Frostbloom Impact",
+          "param": [
+            {
+              "desc": "{Skill:1051013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051013": {
+                  "attackData": [],
+                  "attributeInfliction": 4001,
+                  "damagePercentage": 7050,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 4002,
+                  "feverRecovery": 54175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 650,
+                  "main": 7050,
+                  "rpRecovery": 16010,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4410,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051013": {
+                  "attackData": [],
+                  "attributeInfliction": 4001,
+                  "damagePercentage": 7050,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 4002,
+                  "feverRecovery": 54175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4410,
+                  "rpRecovery": 16010,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4410,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Icehaul Reverb",
+          "param": [
+            {
+              "desc": "{Skill:1051014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051014": {
+                  "attackData": [],
+                  "attributeInfliction": 8503,
+                  "damagePercentage": 18530,
+                  "damagePercentageGrowth": 1690,
+                  "etherPurify": 23504,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1690,
+                  "main": 18530,
+                  "rpRecovery": 34020,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20360,
+                  "stunRatioGrowth": 930
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051014": {
+                  "attackData": [],
+                  "attributeInfliction": 8503,
+                  "damagePercentage": 18530,
+                  "damagePercentageGrowth": 1690,
+                  "etherPurify": 23504,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 930,
+                  "main": 20360,
+                  "rpRecovery": 34020,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20360,
+                  "stunRatioGrowth": 930
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nLaunches enemies in front into the air, dealing <color=#98EFF0>Ice DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Cease Thoughts",
+          "potential": []
+        },
+        {
+          "desc": "With enough Adrenaline, press <IconMap:Icon_SpecialReady_Rp> to activate:\nPerform two consecutive upward strikes, then release an icy mist, dealing massive <color=#98EFF0>Ice DMG</color>.\nIf EX Special Attack: Frost Coil hits an enemy, Yidhari recovers HP at the end of the skill equal to 33% of her missing HP.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Frost Coil",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Special> or <IconMap:Icon_SpecialReady_Rp> while charging or spinning during <color=#FFFFFF>Basic Attack: Frostbite Embrace</color>, or press <IconMap:Icon_Evade> while holding <IconMap:Icon_Normal> to activate:\nLaunches enemies in front into the air, dealing <color=#98EFF0>Ice DMG</color>.\nWhen the skill's attack collides with an enemy's attack, it triggers Surging Cold.\nIf the skill hits a Stunned enemy, and with sufficient Adrenaline, it triggers Crushing Pursuit.\nTriggering Surging Cold or Crushing Pursuit instantly raises the charge level to maximum.\nDuring this skill, press <IconMap:Icon_Normal> and Yidhari will immediately unleash the finishing slam of <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> based on the current charge level.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Surging Cold, Crushing Pursuit",
+          "potential": []
+        },
+        {
+          "desc": "When triggering Surging Cold or Crushing Pursuit, and with enough Adrenaline, press <IconMap:Icon_SpecialReady_Rp> or <IconMap:Icon_Normal> to activate:\nDash forward with an upward attack, then leap into the air before delivering a powerful downward smash, dealing massive <color=#98EFF0>Ice DMG</color>.\nIf <color=#FFFFFF>EX Special Attack: Glacial Crush</color> hits an enemy, Yidhari heals at the end of the skill for 33% of her missing HP.\nIf the skill is used after Surging Cold, it grants an additional 15 Adrenaline. This effect can trigger once every 1s.\nAfter using this skill, press <IconMap:Icon_Normal> to immediately unleash the finishing slam of <color=#FFFFFF>Basic Attack: Frostbite Embrace</color> based on the current charge level.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Glacial Crush",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Cease Thoughts",
+          "param": [
+            {
+              "desc": "{Skill:1051009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051009": {
+                  "attackData": [],
+                  "attributeInfliction": 4499,
+                  "damagePercentage": 3960,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 4500,
+                  "feverRecovery": 60775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4950,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051009": {
+                  "attackData": [],
+                  "attributeInfliction": 4499,
+                  "damagePercentage": 3960,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 4500,
+                  "feverRecovery": 60775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4950,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Frost Coil",
+          "param": [
+            {
+              "desc": "{Skill:1051010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051010": {
+                  "attackData": [],
+                  "attributeInfliction": 52324,
+                  "damagePercentage": 51020,
+                  "damagePercentageGrowth": 4640,
+                  "etherPurify": 12834,
+                  "feverRecovery": 933350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4640,
+                  "main": 51020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51360,
+                  "stunRatioGrowth": 2340
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051010": {
+                  "attackData": [],
+                  "attributeInfliction": 52324,
+                  "damagePercentage": 51020,
+                  "damagePercentageGrowth": 4640,
+                  "etherPurify": 12834,
+                  "feverRecovery": 933350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2340,
+                  "main": 51360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 51360,
+                  "stunRatioGrowth": 2340
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Adrenaline Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Surging Cold, Crushing Pursuit",
+          "param": [
+            {
+              "desc": "{Skill:1051011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1051011": {
+                  "attackData": [],
+                  "attributeInfliction": 9503,
+                  "damagePercentage": 8370,
+                  "damagePercentageGrowth": 770,
+                  "etherPurify": 9504,
+                  "feverRecovery": 64075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 770,
+                  "main": 8370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10460,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1051011": {
+                  "attackData": [],
+                  "attributeInfliction": 9503,
+                  "damagePercentage": 8370,
+                  "damagePercentageGrowth": 770,
+                  "etherPurify": 9504,
+                  "feverRecovery": 64075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 10460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10460,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Glacial Crush",
+          "param": [
+            {
+              "desc": "{Skill:1051012, Prop:1001}",
+              "name": "EX Special Attack: Glacial Crush DMG Multiplier",
+              "param": {
+                "1051012": {
+                  "attackData": [],
+                  "attributeInfliction": 70095,
+                  "damagePercentage": 100760,
+                  "damagePercentageGrowth": 9160,
+                  "etherPurify": 25997,
+                  "feverRecovery": 1199275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9160,
+                  "main": 100760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 70180,
+                  "stunRatioGrowth": 3190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051024, Prop:1001}",
+              "name": "Additional Ability Icy Tentacle DMG Multiplier",
+              "param": {
+                "1051024": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7920,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1051012, Prop:1002}",
+              "name": "EX Special Attack: Glacial Crush Daze Multiplier",
+              "param": {
+                "1051012": {
+                  "attackData": [],
+                  "attributeInfliction": 70095,
+                  "damagePercentage": 100760,
+                  "damagePercentageGrowth": 9160,
+                  "etherPurify": 25997,
+                  "feverRecovery": 1199275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3190,
+                  "main": 70180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 70180,
+                  "stunRatioGrowth": 3190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Adrenaline Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1051001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Crushing Strike"
+    },
+    "1051002": {
+      "desc": "<IconMap:Icon_Normal> (Hold) ; <IconMap:Icon_Normal> (Release when fully charged)",
+      "name": "Basic Attack: Frostbite Embrace"
+    },
+    "1051003": {
+      "desc": "<IconMap:Icon_Normal> (Hold) ; <IconMap:Icon_Normal> (Press again after being hit and triggering Frost's Crushing Weight)",
+      "name": "Basic Attack: Frostbite Embrace (Quick)"
+    },
+    "1051004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Cease Thoughts"
+    },
+    "1051005": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp>",
+      "name": "EX Special Attack: Frost Coil"
+    },
+    "1051006": {
+      "desc": "<IconMap:Icon_Normal> (Hold) ; <IconMap:Icon_Normal> (Release when fully charged) ; <IconMap:Icon_Special> (During Basic Attack: Frostbite Embrace's charged rotating strike)",
+      "name": "Special Attack: Surging Cold, Crushing Pursuit"
+    },
+    "1051007": {
+      "desc": "<IconMap:Icon_Normal> (Hold) ; <IconMap:Icon_Evade> (Keep holding Basic Attack button)",
+      "name": "Special Attack: Surging Cold, Crushing Pursuit"
+    },
+    "1051008": {
+      "desc": "<IconMap:Icon_Normal> (Hold) ; <IconMap:Icon_Special> (Press after being hit and triggering Frost's Crushing Weight)",
+      "name": "Special Attack: Surging Cold, Crushing Pursuit (Always triggers Surging Cold)"
+    },
+    "1051009": {
+      "desc": "<IconMap:Icon_Normal> (When Surging Cold or Crushing Pursuit is triggered with enough Energy)",
+      "name": "EX Special Attack: Glacial Crush"
+    },
+    "1051010": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp> (When Surging Cold or Crushing Pursuit is triggered with enough Energy)",
+      "name": "EX Special Attack: Glacial Crush"
+    },
+    "1051011": {
+      "desc": "<IconMap:Icon_Evade>",
+      "name": "Dodge: Dreamshift"
+    },
+    "1051012": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Frostbloom Impact"
+    },
+    "1051013": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Icehaul Reverb"
+    },
+    "1051014": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Frostbound Oath"
+    },
+    "1051015": {
+      "desc": "<IconMap:Icon_UltimateReady> (After consuming Decibels to activate Ether Veil: Wellspring)",
+      "name": "Ultimate: Final Act - Crossing the River of Regret"
+    },
+    "1051016": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Frostshock Reinforcement"
+    },
+    "1051017": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Flashquake Rejection"
+    },
+    "1051018": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Glacial Onslaught"
+    }
+  },
+  "skin": {
+    "3110510": {
+      "desc": "Past recollections and novel dreams spill over, inviting her to drown in them as they entwine on paper. With a blank page before her, she pens the opening line at the crossroads of reality and illusion.",
+      "name": "Yidhari: Stream of Consciousness"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, HP-consuming on-field DMG dealer",
+    "Consumes HP to boost DMG dealt",
+    "Boosts skill DMG through skill collisions"
+  ],
+  "talent": {
+    "1": {
+      "desc": "The Adrenaline cost to activate Yidhari's <color=#FFFFFF>EX Special Attack</color> is reduced by 10. After using <color=#FFFFFF>EX Special Attack: Frost Coil</color> or <color=#FFFFFF>EX Special Attack: Glacial Crush</color>, keeping hold of the Basic Attack or Special Attack button consumes 35 Adrenaline to forgo healing and immediately chain into another <color=#FFFFFF>EX Special Attack: Glacial Crush</color>. The HP restored by this <color=#FFFFFF>EX Special Attack: Glacial Crush</color> is increased by 100% of the original value. Yidhari's <color=#FFFFFF>Basic Attacks</color> and <color=#FFFFFF>EX Special Attacks</color> ignore 20% of targets' <color=#98EFF0>Ice RES</color>.",
+      "desc2": "She plunged into an unfathomable abyss.\n—What is this place, and where will it carry her?\nThe moment doubt arose, a voice whispered from the darkness:\n\"This is the realm of the unknown, opening the path to all that is known.\"\nEndless shadows tumbled down with her.\n—Who are they, and why do their shadows fall here?\nAs the question rose in her thoughts, the voice replied once more:\n\"They are those cut off from fate. What falls here are the remnants of their past.\"\nAnd so, the little girl hugged herself in solitude, carried downward by countless bygone memories.\nHer eyes widened in bewilderment, seeing only cold, stillness, and loneliness blooming at the bottom of the abyss.",
+      "name": "The Past Lost Beneath the Abyss"
+    },
+    "2": {
+      "desc": "Yidhari's CRIT DMG increases by 40%. Triggering <color=#FFFFFF>Surging Cold</color> or <color=#FFFFFF>Crushing Pursuit</color> grants Adrenaline regen of 0.5/s for up to 30s. Repeated triggers reset the duration.",
+      "desc2": "In the darkness lay the girl's slumbering thoughts.\nThey were not innocent daydreams, nor carefree flights of fancy.\nHer mind was fixed on the memories she had witnessed.\n\"What must I do? What must I bear?\"\n\"Good thing it's me, and not someone else.\"\n\"I know how to deal with being alone... I think.\"\nAs she sifted through those pasts, the girl calmly accepted this heavy gift.",
+      "name": "Who Lingers Here, Lost in Thought?"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "So this is what humanity is — such a complex existence.\nA lifetime can hold so much joy, and just as much sorrow.\nYet now, all of it has fallen into this void, to be swallowed, erased, and buried.\nNo one will ever care again for those joyful laughs, or those grief-stricken cries.\nStill... every one of those untold stories has been etched into this abyss of the soul.",
+      "name": "A Story Without an Audience"
+    },
+    "4": {
+      "desc": "Yidhari gains 10% more Decibels when losing HP for <color=#FFFFFF>Core Passive: Dreamscape Collection</color>. While in <color=#FFFFFF>Ether Veil: Wellspring</color>, Yidhari's Max HP is further increased by 5%.",
+      "desc2": "The flower trembled as it bloomed in the dark, white and translucent, as though it reflected the lone light of the abyss's depths.\n—It was, in truth, a soul, fragile yet unyielding.\nAmid the countless falling shadows, amid the flood of cascading memories... she remained untouched, still blooming with her own strength.\nBut in the end... will she too fade away, drifting with nothing to hold on to?",
+      "name": "Blooming in Silence"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"Such beautiful eyes... am I still inside a dream?\"\nIt was their first meeting, and her first brush with something real.\nAmid the emptiness and the grotesque, in the barren abyss that threatened to devour everything, she caught sight of those eyes.\nThey were like a hint of green breaking through the burning desert, like a clear spring rising from a parched riverbed.\n\"I think I've found it... the hope of someone who will willingly respond to me.\"",
+      "name": "This Solace Is Real"
+    },
+    "6": {
+      "desc": "After Yidhari spends Decibels to activate or extend <color=#FFFFFF>Ether Veil: Wellspring</color>, she gains <color=#FFFFFF>Erudition</color> for 30s. While <color=#FFFFFF>Erudition</color> is active, her Sheer DMG increases by 25%. Also, upon taking fatal DMG for the first time, her HP is reduced to at most 1, and for the next 5s, she cannot be defeated and will restore 25% HP over time.",
+      "desc2": "Immersed in the tide of memories, she had never found even fleeting rest.\nHer only refuge was solitude, escaping the bustle of the world, losing herself in strange tales, seeking quiet beneath veils of misty rain or within the embrace of warm waters.\nBut now, she can walk calmly among the crowds, no longer troubled by noise or the burning sun, for \"illusion\" no longer binds her spirit, and \"reality\" has become the anchor of her soul.",
+      "name": "At Last, a Peaceful Dream"
+    }
+  },
+  "weaponType": {
+    "6": "Rupture"
+  }
+}

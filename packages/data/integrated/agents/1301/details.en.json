@@ -1,0 +1,1675 @@
+{
+  "camp": {
+    "5": "New Eridu Defense Force"
+  },
+  "elementType": {
+    "201": "Fire"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "103": "Pierce"
+  },
+  "id": 1301,
+  "locale": "en",
+  "name": "Orphie & Magus",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1301017", "1301018", "1301019", "1301020", "1301021"],
+      "basic": [
+        "1301001",
+        "1301002",
+        "1301003",
+        "1301004",
+        "1301005",
+        "1301006"
+      ],
+      "chain": ["1301014", "1301015", "1301016"],
+      "dodge": ["1301012", "1301013"],
+      "special": [
+        "1301007",
+        "1301008",
+        "1301009",
+        "1301010",
+        "1301011",
+        "1301022"
+      ]
+    },
+    "parameterRowsById": {
+      "1301001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1301002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1301003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/8"
+      ],
+      "1301004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1301005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/10"
+      ],
+      "1301006": [
+        "/skill/basic/description/1/param/5",
+        "/skill/basic/description/1/param/11"
+      ],
+      "1301007": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1301008": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1301009": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1301010": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ],
+      "1301011": [
+        "/skill/special/description/10/param/0",
+        "/skill/special/description/10/param/1"
+      ],
+      "1301012": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1301013": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1301014": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1301015": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1301016": [
+        "/skill/chain/description/3/param/2",
+        "/skill/chain/description/3/param/3"
+      ],
+      "1301017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1301018": ["/skill/assist/description/4/param/0"],
+      "1301019": ["/skill/assist/description/4/param/1"],
+      "1301020": ["/skill/assist/description/4/param/2"],
+      "1301021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1301022": [
+        "/skill/special/description/11/param/0",
+        "/skill/special/description/11/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "NOV 3",
+    "fullName": "Orphie Magnusson & Magus",
+    "gender": "Female",
+    "impressionF": "Orphie has a great personality — being around her really puts you at ease!\nBut her obliviousness has caused Magus a fair share of grief, and she seems totally unaware of it...",
+    "impressionM": "The way those two interact is pretty entertaining.\nIf someone made a movie starring that girl and her gun, it'd probably do pretty well at the box office.",
+    "impressions": [
+      "Impressions of Orphie & Magus:\n · She faces the world with a cat-like curiosity.",
+      " · They are two blossoms from a single seed.",
+      " · You can't always choose where your path begins, but you can change its course."
+    ],
+    "profileDesc": "Orphie Magnusson serves in the New Eridu Defense Force's Obsidian Division, Obol Squad. She is the wielder of Magus, an Intelligent Construct in gun form.\n\nMagus is the captain of Obol Squad. She was gravely injured during the fall of the old capital and on the brink of death. After taking part in a military research project, her consciousness was transferred into a weapon, allowing her to survive as an Intelligent Construct. Since the squad's formation, she has remained its heart and soul — hot-tempered and impulsive at times, yet deeply respected and trusted by her comrades.\nOrphie shares an extraordinary bond with Magus — one that goes far beyond that of just \"partners.\" The two have known each other for years, and Magus often acts like a mother, offering guidance and care. In return, Orphie does everything she can to meet Magus' expectations, aspiring to become a strong, independent soldier like her captain.\n\nStrictly speaking, Orphie enjoys many things Magus disapproves of: fancy desserts, cute animals, and overly decorative toys. Her captain sees them as signs of softness, unfit for a soldier. Still, while Magus enforces discipline in public and imposes the expectations of a perfect soldier, she pretends to be in \"sleep mode\" just to turn a blind eye to Orphie's less-than-perfect behavior. According to this supposedly \"strict and impartial\" captain, she's simply following the parenting advice laid out in an online series titled \"Raising a Child Prodigy.\"",
+    "stature": "158",
+    "trustLv": {
+      "1": "Orphie Magnusson serves in the New Eridu Defense Force's Obsidian Division, Obol Squad. She is the wielder of Magus, an Intelligent Construct in gun form.\n\nMagus is the captain of Obol Squad. She was gravely injured during the fall of the old capital and on the brink of death. After taking part in a military research project, her consciousness was transferred into a weapon, allowing her to survive as an Intelligent Construct. Since the squad's formation, she has remained its heart and soul — hot-tempered and impulsive at times, yet deeply respected and trusted by her comrades.\nOrphie shares an extraordinary bond with Magus — one that goes far beyond that of just \"partners.\" The two have known each other for years, and Magus often acts like a mother, offering guidance and care. In return, Orphie does everything she can to meet Magus' expectations, aspiring to become a strong, independent soldier like her captain.\n\nStrictly speaking, Orphie enjoys many things Magus disapproves of: fancy desserts, cute animals, and overly decorative toys. Her captain sees them as signs of softness, unfit for a soldier. Still, while Magus enforces discipline in public and imposes the expectations of a perfect soldier, she pretends to be in \"sleep mode\" just to turn a blind eye to Orphie's less-than-perfect behavior. According to this supposedly \"strict and impartial\" captain, she's simply following the parenting advice laid out in an online series titled \"Raising a Child Prodigy.\"",
+      "2": "",
+      "3": "\nIt may seem like Captain Magus is the one giving orders and calling the shots, but in truth, Orphie quietly keeps her in check in her own way.\nThey see each other as reflections of themselves, sharing certain vulnerabilities, though Magus tends to keep hers well concealed.\n\nNote: Even so, you've already uncovered plenty of weaknesses Magus tried to keep hidden. Nothing escapes your keen eyes!",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 3",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1301501": {
+        "desc": [
+          "Orphie & Magus's CRIT Rate increases by <color=#2BAD00>12.5%</color>, and Aftershock DMG increases by <color=#2BAD00>42.5%</color>.\nOrphie & Magus initially gain 100 Bottled Heat, up to a maximum of 125.\nWhen Orphie & Magus are off-field, if Special Attack: Corrosive Flash is available and Energy is greater than or equal to 60, consume 30 Energy to automatically trigger EX Special Attack: Crimson Vortex instead.\nWhen the laser from EX Special Attack: Heat Charge hits enemies, all squad members gain Zeroed In for 12s. Repeated triggers reset the duration. Zeroed In increases Agent ATK by <color=#2BAD00>130</color>. When Orphie & Magus's initial Energy Regen is greater than or equal to 1.6, for every 0.1 initial Energy Regen above this threshold, ATK increases by an additional 20. The total increase from both initial and additional ATK increases cannot exceed <color=#2BAD00>340</color>. When an Agent with Zeroed In triggers Aftershock, their Zeroed In duration extends by 4s, up to a maximum extension of 20s.\nThe fire blade attack from Basic Attack: High-Pressure Flamethrower, EX Special Attack: Watch Your Step, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, EX Special Attack: Fiery Eruption, Chain Attack: Overheated Barrel, and Ultimate: Dance With Fire all count as Aftershock DMG, and using these skills counts as triggering Aftershock.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nAftershock DMG dealt by Agents with Zeroed In ignores 25% DEF."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Taming Wind and Fire",
+          "Additional Ability: Forged in Flames"
+        ],
+        "potential": []
+      },
+      "1301502": {
+        "desc": [
+          "Orphie & Magus's CRIT Rate increases by <color=#2BAD00>14.6%</color>, and Aftershock DMG increases by <color=#2BAD00>49.6%</color>.\nOrphie & Magus initially gain 100 Bottled Heat, up to a maximum of 125.\nWhen Orphie & Magus are off-field, if Special Attack: Corrosive Flash is available and Energy is greater than or equal to 60, consume 30 Energy to automatically trigger EX Special Attack: Crimson Vortex instead.\nWhen the laser from EX Special Attack: Heat Charge hits enemies, all squad members gain Zeroed In for 12s. Repeated triggers reset the duration. Zeroed In increases Agent ATK by <color=#2BAD00>155</color>. When Orphie & Magus's initial Energy Regen is greater than or equal to 1.6, for every 0.1 initial Energy Regen above this threshold, ATK increases by an additional 20. The total increase from both initial and additional ATK increases cannot exceed <color=#2BAD00>400</color>. When an Agent with Zeroed In triggers Aftershock, their Zeroed In duration extends by 4s, up to a maximum extension of 20s.\nThe fire blade attack from Basic Attack: High-Pressure Flamethrower, EX Special Attack: Watch Your Step, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, EX Special Attack: Fiery Eruption, Chain Attack: Overheated Barrel, and Ultimate: Dance With Fire all count as Aftershock DMG, and using these skills counts as triggering Aftershock.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nAftershock DMG dealt by Agents with Zeroed In ignores 25% DEF."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Taming Wind and Fire",
+          "Additional Ability: Forged in Flames"
+        ],
+        "potential": []
+      },
+      "1301503": {
+        "desc": [
+          "Orphie & Magus's CRIT Rate increases by <color=#2BAD00>16.7%</color>, and Aftershock DMG increases by <color=#2BAD00>56.7%</color>.\nOrphie & Magus initially gain 100 Bottled Heat, up to a maximum of 125.\nWhen Orphie & Magus are off-field, if Special Attack: Corrosive Flash is available and Energy is greater than or equal to 60, consume 30 Energy to automatically trigger EX Special Attack: Crimson Vortex instead.\nWhen the laser from EX Special Attack: Heat Charge hits enemies, all squad members gain Zeroed In for 12s. Repeated triggers reset the duration. Zeroed In increases Agent ATK by <color=#2BAD00>180</color>. When Orphie & Magus's initial Energy Regen is greater than or equal to 1.6, for every 0.1 initial Energy Regen above this threshold, ATK increases by an additional 20. The total increase from both initial and additional ATK increases cannot exceed <color=#2BAD00>460</color>. When an Agent with Zeroed In triggers Aftershock, their Zeroed In duration extends by 4s, up to a maximum extension of 20s.\nThe fire blade attack from Basic Attack: High-Pressure Flamethrower, EX Special Attack: Watch Your Step, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, EX Special Attack: Fiery Eruption, Chain Attack: Overheated Barrel, and Ultimate: Dance With Fire all count as Aftershock DMG, and using these skills counts as triggering Aftershock.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nAftershock DMG dealt by Agents with Zeroed In ignores 25% DEF."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Taming Wind and Fire",
+          "Additional Ability: Forged in Flames"
+        ],
+        "potential": []
+      },
+      "1301504": {
+        "desc": [
+          "Orphie & Magus's CRIT Rate increases by <color=#2BAD00>18.8%</color>, and Aftershock DMG increases by <color=#2BAD00>63.7%</color>.\nOrphie & Magus initially gain 100 Bottled Heat, up to a maximum of 125.\nWhen Orphie & Magus are off-field, if Special Attack: Corrosive Flash is available and Energy is greater than or equal to 60, consume 30 Energy to automatically trigger EX Special Attack: Crimson Vortex instead.\nWhen the laser from EX Special Attack: Heat Charge hits enemies, all squad members gain Zeroed In for 12s. Repeated triggers reset the duration. Zeroed In increases Agent ATK by <color=#2BAD00>205</color>. When Orphie & Magus's initial Energy Regen is greater than or equal to 1.6, for every 0.1 initial Energy Regen above this threshold, ATK increases by an additional 20. The total increase from both initial and additional ATK increases cannot exceed <color=#2BAD00>520</color>. When an Agent with Zeroed In triggers Aftershock, their Zeroed In duration extends by 4s, up to a maximum extension of 20s.\nThe fire blade attack from Basic Attack: High-Pressure Flamethrower, EX Special Attack: Watch Your Step, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, EX Special Attack: Fiery Eruption, Chain Attack: Overheated Barrel, and Ultimate: Dance With Fire all count as Aftershock DMG, and using these skills counts as triggering Aftershock.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nAftershock DMG dealt by Agents with Zeroed In ignores 25% DEF."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Taming Wind and Fire",
+          "Additional Ability: Forged in Flames"
+        ],
+        "potential": []
+      },
+      "1301505": {
+        "desc": [
+          "Orphie & Magus's CRIT Rate increases by <color=#2BAD00>20.8%</color>, and Aftershock DMG increases by <color=#2BAD00>70.8%</color>.\nOrphie & Magus initially gain 100 Bottled Heat, up to a maximum of 125.\nWhen Orphie & Magus are off-field, if Special Attack: Corrosive Flash is available and Energy is greater than or equal to 60, consume 30 Energy to automatically trigger EX Special Attack: Crimson Vortex instead.\nWhen the laser from EX Special Attack: Heat Charge hits enemies, all squad members gain Zeroed In for 12s. Repeated triggers reset the duration. Zeroed In increases Agent ATK by <color=#2BAD00>230</color>. When Orphie & Magus's initial Energy Regen is greater than or equal to 1.6, for every 0.1 initial Energy Regen above this threshold, ATK increases by an additional 20. The total increase from both initial and additional ATK increases cannot exceed <color=#2BAD00>580</color>. When an Agent with Zeroed In triggers Aftershock, their Zeroed In duration extends by 4s, up to a maximum extension of 20s.\nThe fire blade attack from Basic Attack: High-Pressure Flamethrower, EX Special Attack: Watch Your Step, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, EX Special Attack: Fiery Eruption, Chain Attack: Overheated Barrel, and Ultimate: Dance With Fire all count as Aftershock DMG, and using these skills counts as triggering Aftershock.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nAftershock DMG dealt by Agents with Zeroed In ignores 25% DEF."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Taming Wind and Fire",
+          "Additional Ability: Forged in Flames"
+        ],
+        "potential": []
+      },
+      "1301506": {
+        "desc": [
+          "Orphie & Magus's CRIT Rate increases by <color=#2BAD00>22.9%</color>, and Aftershock DMG increases by <color=#2BAD00>77.9%</color>.\nOrphie & Magus initially gain 100 Bottled Heat, up to a maximum of 125.\nWhen Orphie & Magus are off-field, if Special Attack: Corrosive Flash is available and Energy is greater than or equal to 60, consume 30 Energy to automatically trigger EX Special Attack: Crimson Vortex instead.\nWhen the laser from EX Special Attack: Heat Charge hits enemies, all squad members gain Zeroed In for 12s. Repeated triggers reset the duration. Zeroed In increases Agent ATK by <color=#2BAD00>255</color>. When Orphie & Magus's initial Energy Regen is greater than or equal to 1.6, for every 0.1 initial Energy Regen above this threshold, ATK increases by an additional 20. The total increase from both initial and additional ATK increases cannot exceed <color=#2BAD00>640</color>. When an Agent with Zeroed In triggers Aftershock, their Zeroed In duration extends by 4s, up to a maximum extension of 20s.\nThe fire blade attack from Basic Attack: High-Pressure Flamethrower, EX Special Attack: Watch Your Step, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, EX Special Attack: Fiery Eruption, Chain Attack: Overheated Barrel, and Ultimate: Dance With Fire all count as Aftershock DMG, and using these skills counts as triggering Aftershock.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nAftershock DMG dealt by Agents with Zeroed In ignores 25% DEF."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Taming Wind and Fire",
+          "Additional Ability: Forged in Flames"
+        ],
+        "potential": []
+      },
+      "1301507": {
+        "desc": [
+          "Orphie & Magus's CRIT Rate increases by <color=#2BAD00>25%</color>, and Aftershock DMG increases by <color=#2BAD00>85%</color>.\nOrphie & Magus initially gain 100 Bottled Heat, up to a maximum of 125.\nWhen Orphie & Magus are off-field, if Special Attack: Corrosive Flash is available and Energy is greater than or equal to 60, consume 30 Energy to automatically trigger EX Special Attack: Crimson Vortex instead.\nWhen the laser from EX Special Attack: Heat Charge hits enemies, all squad members gain Zeroed In for 12s. Repeated triggers reset the duration. Zeroed In increases Agent ATK by <color=#2BAD00>280</color>. When Orphie & Magus's initial Energy Regen is greater than or equal to 1.6, for every 0.1 initial Energy Regen above this threshold, ATK increases by an additional 20. The total increase from both initial and additional ATK increases cannot exceed <color=#2BAD00>700</color>. When an Agent with Zeroed In triggers Aftershock, their Zeroed In duration extends by 4s, up to a maximum extension of 20s.\nThe fire blade attack from Basic Attack: High-Pressure Flamethrower, EX Special Attack: Watch Your Step, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, EX Special Attack: Fiery Eruption, Chain Attack: Overheated Barrel, and Ultimate: Dance With Fire all count as Aftershock DMG, and using these skills counts as triggering Aftershock.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nAftershock DMG dealt by Agents with Zeroed In ignores 25% DEF."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Taming Wind and Fire",
+          "Additional Ability: Forged in Flames"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nUnleash a series of attacks on enemies in front, dealing <color=#F0D12B>Physical DMG</color> and <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Searing Slash",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Blazing Gunblade",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nUnleash multiple attacks against enemies in front, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Boiling Pierce",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Searing Slash",
+          "param": [
+            {
+              "desc": "{Skill:1301017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301017": {
+                  "attackData": [],
+                  "attributeInfliction": 5166,
+                  "damagePercentage": 11370,
+                  "damagePercentageGrowth": 1040,
+                  "etherPurify": 5167,
+                  "feverRecovery": 284350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1040,
+                  "main": 11370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11370,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301017": {
+                  "attackData": [],
+                  "attributeInfliction": 5166,
+                  "damagePercentage": 11370,
+                  "damagePercentageGrowth": 1040,
+                  "etherPurify": 5167,
+                  "feverRecovery": 284350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 11370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11370,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Blazing Gunblade",
+          "param": [
+            {
+              "desc": "{Skill:1301018, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1301018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301019, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1301019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301020, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1301020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Boiling Pierce",
+          "param": [
+            {
+              "desc": "{Skill:1301021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301021": {
+                  "attackData": [],
+                  "attributeInfliction": 30642,
+                  "damagePercentage": 36090,
+                  "damagePercentageGrowth": 3290,
+                  "etherPurify": 15497,
+                  "feverRecovery": 1021350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3290,
+                  "main": 36090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31330,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301021": {
+                  "attackData": [],
+                  "attributeInfliction": 30642,
+                  "damagePercentage": 36090,
+                  "damagePercentageGrowth": 3290,
+                  "etherPurify": 15497,
+                  "feverRecovery": 1021350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1430,
+                  "main": 31330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31330,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 5 attacks in front, followed by a powerful flame blade strike, dealing <color=#F0D12B>Physical DMG</color> and <color=#FF5521>Fire DMG</color>.",
+          "name": "Basic Attack: High-Pressure Flamethrower",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: High-Pressure Flamethrower",
+          "param": [
+            {
+              "desc": "{Skill:1301001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1301001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1450,
+                  "damagePercentageGrowth": 140,
+                  "etherPurify": 1132,
+                  "feverRecovery": 29425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 1450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 3830,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1170,
+                  "stunRatioGrowth": 60
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1301002": {
+                  "attackData": [],
+                  "attributeInfliction": 2867,
+                  "damagePercentage": 4440,
+                  "damagePercentageGrowth": 410,
+                  "etherPurify": 3118,
+                  "feverRecovery": 80850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 4440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10580,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3240,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1301003": {
+                  "attackData": [],
+                  "attributeInfliction": 2673,
+                  "damagePercentage": 4150,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 2424,
+                  "feverRecovery": 63525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8290,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2540,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1301004": {
+                  "attackData": [],
+                  "attributeInfliction": 5120,
+                  "damagePercentage": 8670,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 5121,
+                  "feverRecovery": 134200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 8670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5360,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1301005": {
+                  "attackData": [],
+                  "attributeInfliction": 10120,
+                  "damagePercentage": 18160,
+                  "damagePercentageGrowth": 1660,
+                  "etherPurify": 10121,
+                  "feverRecovery": 295625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1660,
+                  "main": 18160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11820,
+                  "stunRatioGrowth": 540
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301006, Prop:1001}",
+              "name": "Fire Blade DMG Multiplier",
+              "param": {
+                "1301006": {
+                  "attackData": [],
+                  "attributeInfliction": 9416,
+                  "damagePercentage": 15840,
+                  "damagePercentageGrowth": 1440,
+                  "etherPurify": 9417,
+                  "feverRecovery": 259050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1440,
+                  "main": 15840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10360,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1301001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1450,
+                  "damagePercentageGrowth": 140,
+                  "etherPurify": 1132,
+                  "feverRecovery": 29425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 60,
+                  "main": 1170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 3830,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1170,
+                  "stunRatioGrowth": 60
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1301002": {
+                  "attackData": [],
+                  "attributeInfliction": 2867,
+                  "damagePercentage": 4440,
+                  "damagePercentageGrowth": 410,
+                  "etherPurify": 3118,
+                  "feverRecovery": 80850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10580,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3240,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1301003": {
+                  "attackData": [],
+                  "attributeInfliction": 2673,
+                  "damagePercentage": 4150,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 2424,
+                  "feverRecovery": 63525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8290,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2540,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1301004": {
+                  "attackData": [],
+                  "attributeInfliction": 5120,
+                  "damagePercentage": 8670,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 5121,
+                  "feverRecovery": 134200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5360,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1301005": {
+                  "attackData": [],
+                  "attributeInfliction": 10120,
+                  "damagePercentage": 18160,
+                  "damagePercentageGrowth": 1660,
+                  "etherPurify": 10121,
+                  "feverRecovery": 295625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 11820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 38670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11820,
+                  "stunRatioGrowth": 540
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301006, Prop:1002}",
+              "name": "Fire Blade Daze Multiplier",
+              "param": {
+                "1301006": {
+                  "attackData": [],
+                  "attributeInfliction": 9416,
+                  "damagePercentage": 15840,
+                  "damagePercentageGrowth": 1440,
+                  "etherPurify": 9417,
+                  "feverRecovery": 259050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 10360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10360,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nPerform a spinning attack forward, then fire a laser ahead, dealing <color=#FF5521>Fire DMG</color>.\nUpon activating this skill, restore 20 points of Bottled Heat.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Overheated Barrel",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nPerform a spinning attack forward, then fire a laser ahead, dealing <color=#FF5521>Fire DMG</color>.\nWhen leaping into the air, a <color=#FFFFFF>Quick Assist</color> will be triggered. If the <color=#FFFFFF>Quick Assist</color> is activated, Orphie & Magus will extend the laser firing duration.\nUpon activating this skill, recover 20 Bottled Heat.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Dance With Fire",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Overheated Barrel",
+          "param": [
+            {
+              "desc": "{Skill:1301014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301014": {
+                  "attackData": [],
+                  "attributeInfliction": 50279,
+                  "damagePercentage": 62630,
+                  "damagePercentageGrowth": 5700,
+                  "etherPurify": 30330,
+                  "feverRecovery": 2662825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5700,
+                  "main": 62630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33370,
+                  "stunRatioGrowth": 1520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301014": {
+                  "attackData": [],
+                  "attributeInfliction": 50279,
+                  "damagePercentage": 62630,
+                  "damagePercentageGrowth": 5700,
+                  "etherPurify": 30330,
+                  "feverRecovery": 2662825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1520,
+                  "main": 33370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33370,
+                  "stunRatioGrowth": 1520
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Dance With Fire",
+          "param": [
+            {
+              "desc": "{Skill:1301015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301015": {
+                  "attackData": [],
+                  "attributeInfliction": 2700,
+                  "damagePercentage": 69870,
+                  "damagePercentageGrowth": 6360,
+                  "etherPurify": 32700,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6360,
+                  "main": 69870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2970,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301015": {
+                  "attackData": [],
+                  "attributeInfliction": 2700,
+                  "damagePercentage": 69870,
+                  "damagePercentageGrowth": 6360,
+                  "etherPurify": 32700,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2970,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301016, Prop:1001}",
+              "name": "Extended Duration Total DMG Multiplier",
+              "param": {
+                "1301016": {
+                  "attackData": [],
+                  "attributeInfliction": 1800,
+                  "damagePercentage": 46580,
+                  "damagePercentageGrowth": 4240,
+                  "etherPurify": 21800,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4240,
+                  "main": 46580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1980,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301016, Prop:1002}",
+              "name": "Extended Duration Total Daze Multiplier",
+              "param": {
+                "1301016": {
+                  "attackData": [],
+                  "attributeInfliction": 1800,
+                  "damagePercentage": 46580,
+                  "damagePercentageGrowth": 4240,
+                  "etherPurify": 21800,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1980,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Flickering Flames",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nPerform a quick forward attack, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Rush Command",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nLaunch a series of attacks on enemies in front, dealing <color=#F0D12B>Physical DMG</color> and <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Counter Strike Opportunity",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Rush Command",
+          "param": [
+            {
+              "desc": "{Skill:1301012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 2832,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3120,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 2832,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3120,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Counter Strike Opportunity",
+          "param": [
+            {
+              "desc": "{Skill:1301013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301013": {
+                  "attackData": [],
+                  "attributeInfliction": 10333,
+                  "damagePercentage": 25780,
+                  "damagePercentageGrowth": 2350,
+                  "etherPurify": 25334,
+                  "feverRecovery": 284350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2350,
+                  "main": 25780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22370,
+                  "stunRatioGrowth": 1020
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301013": {
+                  "attackData": [],
+                  "attributeInfliction": 10333,
+                  "damagePercentage": 25780,
+                  "damagePercentageGrowth": 2350,
+                  "etherPurify": 25334,
+                  "feverRecovery": 284350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1020,
+                  "main": 22370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22370,
+                  "stunRatioGrowth": 1020
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nThrust forward and perform a tail attack, dealing <color=#FF5521>Fire DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Blazing Chamber",
+          "potential": []
+        },
+        {
+          "desc": "Automatically triggers during ally attacks:\nUnleashes 4 laser Aftershock attacks, dealing <color=#FF5521>Fire DMG</color>.\nTriggers once per 5s.\nUpon activating this skill, restore 20 Bottled Heat.\nCharacter is invulnerable while using this skill.",
+          "name": "Special Attack: Corrosive Flash",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nPerform a sweeping laser attack forward, dealing <color=#FF5521>Fire DMG</color>.\nAfter using this skill, immediately follow up with the powerful fire blade from the Basic Attack.\nUpon activating this skill, restore 20 Bottled Heat.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Watch Your Step",
+          "potential": []
+        },
+        {
+          "desc": "When off-field with 60 or more Energy, automatically triggers during ally attacks:\nPerforms a sweeping laser attack in an area around, dealing <color=#FF5521>Fire DMG</color>.\nUpon activating this skill, restore 20 Bottled Heat.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Crimson Vortex",
+          "potential": []
+        },
+        {
+          "desc": "When Bottled Heat is greater than or equal to 100, hold <IconMap:Icon_Special> to activate:\nConsume 100 Bottled Heat to continuously fire a laser forward, dealing <color=#FF5521>Fire DMG</color>.\nWhen firing begins, triggers <color=#FFFFFF>Quick Assist</color>.\nAfter continuous firing for a period, firepower increases, greatly boosting the skill's Interrupt Level.\nWhen attacked during firing, will parry enemy attacks and immediately increase firepower.\nWhen maximum firing duration is reached, automatically activates EX Special Attack: Fiery Eruption.\nDuring the low firepower phase, Anti-Interrupt Level increases and DMG taken is reduced by 40%, while character is invulnerable during the high firepower phase.",
+          "name": "EX Special Attack: Heat Charge",
+          "potential": []
+        },
+        {
+          "desc": "Automatically activates after EX Special Attack: Heat Charge reaches maximum firing time:\nPerforms a spinning attack forward, then fires a laser ahead dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Fiery Eruption",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Blazing Chamber",
+          "param": [
+            {
+              "desc": "{Skill:1301007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301007": {
+                  "attackData": [],
+                  "attributeInfliction": 3583,
+                  "damagePercentage": 3950,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 3584,
+                  "feverRecovery": 98725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3950,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301007": {
+                  "attackData": [],
+                  "attributeInfliction": 3583,
+                  "damagePercentage": 3950,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 3584,
+                  "feverRecovery": 98725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 180,
+                  "main": 3950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3950,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Corrosive Flash",
+          "param": [
+            {
+              "desc": "{Skill:1301008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301008": {
+                  "attackData": [],
+                  "attributeInfliction": 5000,
+                  "damagePercentage": 49500,
+                  "damagePercentageGrowth": 4500,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4500,
+                  "main": 49500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301008": {
+                  "attackData": [],
+                  "attributeInfliction": 5000,
+                  "damagePercentage": 49500,
+                  "damagePercentageGrowth": 4500,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Watch Your Step",
+          "param": [
+            {
+              "desc": "{Skill:1301009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301009": {
+                  "attackData": [],
+                  "attributeInfliction": 28333,
+                  "damagePercentage": 28090,
+                  "damagePercentageGrowth": 2560,
+                  "etherPurify": 14334,
+                  "feverRecovery": 582175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2560,
+                  "main": 28090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28090,
+                  "stunRatioGrowth": 1280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301009": {
+                  "attackData": [],
+                  "attributeInfliction": 28333,
+                  "damagePercentage": 28090,
+                  "damagePercentageGrowth": 2560,
+                  "etherPurify": 14334,
+                  "feverRecovery": 582175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1280,
+                  "main": 28090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28090,
+                  "stunRatioGrowth": 1280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "30",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Crimson Vortex",
+          "param": [
+            {
+              "desc": "{Skill:1301010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301010": {
+                  "attackData": [],
+                  "attributeInfliction": 5000,
+                  "damagePercentage": 67840,
+                  "damagePercentageGrowth": 6170,
+                  "etherPurify": 0,
+                  "feverRecovery": 573100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6170,
+                  "main": 67840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301010": {
+                  "attackData": [],
+                  "attributeInfliction": 5000,
+                  "damagePercentage": 67840,
+                  "damagePercentageGrowth": 6170,
+                  "etherPurify": 0,
+                  "feverRecovery": 573100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "30",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Heat Charge",
+          "param": [
+            {
+              "desc": "{Skill:1301011, Prop:1001}",
+              "name": "Laser Maximum DMG Multiplier",
+              "param": {
+                "1301011": {
+                  "attackData": [],
+                  "attributeInfliction": 2400,
+                  "damagePercentage": 38940,
+                  "damagePercentageGrowth": 3540,
+                  "etherPurify": 2400,
+                  "feverRecovery": 249150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3540,
+                  "main": 38940,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3300,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301011, Prop:1002}",
+              "name": "Laser Maximum Daze Multiplier",
+              "param": {
+                "1301011": {
+                  "attackData": [],
+                  "attributeInfliction": 2400,
+                  "damagePercentage": 38940,
+                  "damagePercentageGrowth": 3540,
+                  "etherPurify": 2400,
+                  "feverRecovery": 249150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3300,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Fiery Eruption",
+          "param": [
+            {
+              "desc": "{Skill:1301022, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1301022": {
+                  "attackData": [],
+                  "attributeInfliction": 1600,
+                  "damagePercentage": 25960,
+                  "damagePercentageGrowth": 2360,
+                  "etherPurify": 1600,
+                  "feverRecovery": 166100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2360,
+                  "main": 25960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2200,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1301022, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1301022": {
+                  "attackData": [],
+                  "attributeInfliction": 1600,
+                  "damagePercentage": 25960,
+                  "damagePercentageGrowth": 2360,
+                  "etherPurify": 1600,
+                  "feverRecovery": 166100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2200,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1301001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: High-Pressure Flamethrower"
+    },
+    "1301002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Blazing Chamber"
+    },
+    "1301003": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Watch Your Step"
+    },
+    "1301004": {
+      "desc": "<IconMap:Icon_Special>(Hold with enough Bottled Heat)",
+      "name": "EX Special Attack: Heat Charge"
+    },
+    "1301005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Rush Command"
+    },
+    "1301006": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Counter Strike Opportunity"
+    },
+    "1301007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Overheated Barrel"
+    },
+    "1301008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Dance with Fire"
+    },
+    "1301009": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Searing Slash"
+    },
+    "1301010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Blazing Gunblade"
+    },
+    "1301011": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Boiling Pierce"
+    }
+  },
+  "skin": {
+    "3113010": {
+      "desc": "A soul of mirrored halves, having twice crossed the river of the dead. One side forged in fire, the other shaped into ice; one looking back on where it came from, the other watching for a new dawn. They wander on — never lost, never ceasing.",
+      "name": "Orphie & Magus: Two Banks of the River"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, off-field follow-up attack triggerer",
+    "Fully automated off-field DMG output",
+    "Provides ATK boost for all squad members"
+  ],
+  "talent": {
+    "1": {
+      "desc": "Orphie & Magus' Special Attack: Corrosive Flash, EX Special Attack: Crimson Vortex, EX Special Attack: Heat Charge, and EX Special Attack: Fiery Eruption ignore 15% of target's <color=#FF5521>Fire RES</color>, and Agents with Zeroed In deal 20% increased DMG.",
+      "desc2": "The corners of Orphie's room are filled with all sorts of cat supplies: a cat tree for climbing, a soft cushion, a scratching post that won't break, and carefully selected toys...\n\"I'm always worried about finding a sick, homeless cat near the outpost... If I have these things ready in advance, it'll be easier for them to stay here...\"\n\"Though we can't keep cats in the camp... I'll definitely find a kind owner for them within the captain's deadline!\"\n\"But Orphie, those things have been in the dorm for three years, and you still haven't found such a cat!\"",
+      "name": "Luxurious Cat House"
+    },
+    "2": {
+      "desc": "When Orphie & Magus launch an Aftershock, restore 65 Decibels. This effect can trigger once every 4s. After Orphie & Magus use their Ultimate, their ATK increases by 20% for up to 45s.",
+      "desc2": "Sea grape popcorn, sakura peach seafood porridge, spicy strawberry braised tofu... Orphie sometimes tries foods with bizarre flavors, all chaotically listed on the list at the corner of her desk.\n\"While tasty food is tempting, interesting flavors are worth trying too! ...Just as long as they're not bitter!\"\n\"Hey Proxy, wanna try my favorite ultra-spicy strawberry coconut candy? I've already unwrapped it for you—\"\n\"Soldier Orphie, your weird tastes are gonna scare away all your friends one day!\"",
+      "name": "Weird Food List"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "No one knows what's written in the \"Tactics Manual: Orphie's Special Extension\" sitting on the young lady's bedside table, not even Captain Magus...\n\"'Annihilation-1', 'Retreat-3', 'Patrol-2'... Oh, and 'Social Rendezvous-5'!\"\n\"Hold up, Orphie, since when did the tactical strategies for social rendezvous expand to five entries?!\"\n\"I was just testing if you were familiar enough with the Tactics Manual, hehe! You passed, Captain!\"",
+      "name": "\"Tactics Manual\""
+    },
+    "4": {
+      "desc": "Initial duration of Zeroed In increases to 16s, and Orphie & Magus's EX Special Attack: Heat Charge and Ultimate: Dance With Fire DMG increases by 40%.",
+      "desc2": "Magus never responds to empty threats, which is exactly why Orphie actually bought a pink holster.\nIt sits in the bottom drawer of the storage locker, serving as a constant reminder for Magus to watch her words — though with limited success.\n\"Captain, I've told you before, think thrice before speaking, or you'll end up hurting others!\"\n\"Those punks deserved those bullets! Wait, Orphie... Squad Member Orphie, I order you to put that horrendously pink thing down!\"",
+      "name": "Pink Holster"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "It was Orphie who placed the silver, gleaming commemorative coin right at the entrance where anyone could see it.\n\"Where could that silver coin for crossing the River of the underworld be~\"\n\"How about... making a set of commemorative coins like this? Using the squad emblem as the design, as a symbol of our squad spirit.\"\n\"So a badge of moonlight can be born from black flames...?\"\n\"Stop saying things nobody understands, Soldier 11! But Trigger's idea is great! We could even put all the squad members' names on the back! What do you think, Captain?\"\n\"Approved.\"",
+      "name": "Ferry Toll"
+    },
+    "6": {
+      "desc": "With enough energy, after the fire blade attack of Basic Attack: High-Pressure Flamethrower, press <IconMap:Icon_SpecialReady> to immediately follow up with EX Special Attack: Crimson Vortex. When the fire blade attack of Basic Attack: High-Pressure Flamethrower is activated, recover 10 Bottled Heat, and the Interrupt Level during the low firepower phase of EX Special Attack: Heat Charge will also increase. When the laser from EX Special Attack: Heat Charge or Ultimate hits enemies, it deals additional <color=#FF5521>Fire DMG</color> equal to 250% of Orphie & Magus's ATK. This effect can trigger once every 0.5s and is counted as EX Special Attack and Aftershock DMG.",
+      "desc2": "\"Captain, this kind of seed won't grow into a flower. Just like me... no matter how hard I try, nothing ever comes of it...\"\n\"Orphie, this is a magic seed. Though it can't bloom or sprout on its own, it helps other seeds grow into mighty trees... Just keep it with you, and it will bring you good fortune.\"\n\"Like me, it will always stay by your side, Orphie, watching as you gradually become the finest soldier.\"\n—Facing that tiny figure who clumsily wipes away tears with her palms, her face twisted with hurt and sadness, Magus's voice flowed from her muzzle with a gentleness never heard before.",
+      "name": "Magic Seed"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

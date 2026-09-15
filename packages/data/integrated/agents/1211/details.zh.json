@@ -1,0 +1,1526 @@
+{
+  "camp": {
+    "2": "维多利亚家政"
+  },
+  "elementType": {
+    "203": "电属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "23101": {
+          "format": "{0:0.#%}",
+          "name": "穿透率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "23101": {
+          "format": "{0:0.#%}",
+          "name": "穿透率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "23101": {
+          "format": "{0:0.#%}",
+          "name": "穿透率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "23101": {
+          "format": "{0:0.#%}",
+          "name": "穿透率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "23101": {
+          "format": "{0:0.#%}",
+          "name": "穿透率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "23101": {
+          "format": "{0:0.#%}",
+          "name": "穿透率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "穿透率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "能量自动回复"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "102": "打击"
+  },
+  "id": 1211,
+  "locale": "zh",
+  "name": "丽娜",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1211019", "1211021"],
+      "basic": [
+        "1211001",
+        "1211003",
+        "1211004",
+        "1211006",
+        "1211007",
+        "1211023",
+        "1211024",
+        "1211025",
+        "1211027"
+      ],
+      "chain": ["1211015", "1211017"],
+      "dodge": ["1211011", "1211013"],
+      "special": ["1211008", "1211009"]
+    },
+    "parameterRowsById": {
+      "1211001": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/4"
+      ],
+      "1211003": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/5"
+      ],
+      "1211004": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/6"
+      ],
+      "1211006": [
+        "/skill/basic/description/4/param/3",
+        "/skill/basic/description/4/param/7"
+      ],
+      "1211007": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1211008": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1211009": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1211011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1211013": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1211015": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1211017": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1211019": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1211021": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1211023": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/3"
+      ],
+      "1211024": [
+        "/skill/basic/description/6/param/1",
+        "/skill/basic/description/6/param/4"
+      ],
+      "1211025": [
+        "/skill/basic/description/6/param/2",
+        "/skill/basic/description/6/param/5"
+      ],
+      "1211027": [
+        "/skill/basic/description/7/param/0",
+        "/skill/basic/description/7/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "9/23",
+    "fullName": "亚历山德丽娜·莎芭丝缇安",
+    "gender": "女",
+    "impressionF": "哥哥你看，Fairy这家伙怎么越来越坏了，竟然建议我们吃丽娜做的饭！",
+    "impressionM": "我们现在并不需要做风险如此大的事情，建议Fairy下次不要建议了。",
+    "impressions": [
+      "对丽娜的印象：\n · 最近丽娜来六分街的频率也多了起来，是因为我们的原因吗？",
+      " · 丽娜时常驻足在各种店铺前，看起来像是为了拓展自身服务范围在做实地调查…",
+      " · 看得出丽娜非常在意同事们，不管在工作还是生活中都经常会提到他们。"
+    ],
+    "profileDesc": "丽娜，维多利亚家政的女仆长，同时也是组织资历最深的成员。\n漂亮端庄，从头到脚都非常完美，气质高贵，脸上总是带着淡淡的笑意。\n很在意自己在他人眼中的印象。\n\n丽娜身边漂浮着两个邦布分别名为安娜塔莎（棕发）和杜苏拉（金发），都拥有独立的人格。\n杜苏拉与丽娜一起的时间较长，非常聪明，能够读懂丽娜当下内心的情绪和真实想法。\n安娜塔莎刚加入不久，通常说话只会应和，总是被杜苏拉欺负。\n\n丽娜最大的爱好是烹饪，但似乎很少有人能承受丽娜烹饪的食物。\n建议：可以找机会尝尝丽娜烹饪的食物，以此来测试自己是否是天选之子。",
+    "stature": "173",
+    "trustLv": {
+      "1": "丽娜，维多利亚家政的女仆长，同时也是组织资历最深的成员。\n漂亮端庄，从头到脚都非常完美，气质高贵，脸上总是带着淡淡的笑意。\n很在意自己在他人眼中的印象。\n\n丽娜身边漂浮着两个邦布分别名为安娜塔莎（棕发）和杜苏拉（金发），都拥有独立的人格。\n杜苏拉与丽娜一起的时间较长，非常聪明，能够读懂丽娜当下内心的情绪和真实想法。\n安娜塔莎刚加入不久，通常说话只会应和，总是被杜苏拉欺负。\n\n丽娜最大的爱好是烹饪，但似乎很少有人能承受丽娜烹饪的食物。\n建议：可以找机会尝尝丽娜烹饪的食物，以此来测试自己是否是天选之子。",
+      "2": "",
+      "3": "为了维护自身的形象，即使遇到最难缠的客人，丽娜依然会保持专业和温柔的态度。\n但杜苏拉有时会不分场合地说出她的真心话。\n\n*丽娜的家族似乎拥有深厚行业背景，向来是某些大人物手下的执事/女仆。\n莱卡恩的一些执事技能就是由丽娜所传授的。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成代理人秘闻「直到您彻底遗忘」",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1211501": {
+        "desc": [
+          "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+<color=#2BAD00>6%</color>，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n队伍中任意角色对敌人施加<color=#2EB6FF>[感电]</color>效果时，该效果的持续时间提升3秒；场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升10%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：迷你毁灭拍档", "额外能力：完美舞会"],
+        "potential": []
+      },
+      "1211502": {
+        "desc": [
+          "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+<color=#2BAD00>7.5%</color>，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n队伍中任意角色对敌人施加<color=#2EB6FF>[感电]</color>效果时，该效果的持续时间提升3秒；场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升10%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：迷你毁灭拍档", "额外能力：完美舞会"],
+        "potential": []
+      },
+      "1211503": {
+        "desc": [
+          "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+<color=#2BAD00>9%</color>，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n队伍中任意角色对敌人施加<color=#2EB6FF>[感电]</color>效果时，该效果的持续时间提升3秒；场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升10%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：迷你毁灭拍档", "额外能力：完美舞会"],
+        "potential": []
+      },
+      "1211504": {
+        "desc": [
+          "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+<color=#2BAD00>10.2%</color>，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n队伍中任意角色对敌人施加<color=#2EB6FF>[感电]</color>效果时，该效果的持续时间提升3秒；场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升10%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：迷你毁灭拍档", "额外能力：完美舞会"],
+        "potential": []
+      },
+      "1211505": {
+        "desc": [
+          "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+<color=#2BAD00>10.8%</color>，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n队伍中任意角色对敌人施加<color=#2EB6FF>[感电]</color>效果时，该效果的持续时间提升3秒；场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升10%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：迷你毁灭拍档", "额外能力：完美舞会"],
+        "potential": []
+      },
+      "1211506": {
+        "desc": [
+          "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+<color=#2BAD00>11.4%</color>，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n队伍中任意角色对敌人施加<color=#2EB6FF>[感电]</color>效果时，该效果的持续时间提升3秒；场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升10%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：迷你毁灭拍档", "额外能力：完美舞会"],
+        "potential": []
+      },
+      "1211507": {
+        "desc": [
+          "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+<color=#2BAD00>12%</color>，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n队伍中任意角色对敌人施加<color=#2EB6FF>[感电]</color>效果时，该效果的持续时间提升3秒；场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升10%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：迷你毁灭拍档", "额外能力：完美舞会"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {
+    "121100": {
+      "abilityList": [11211501],
+      "desc": "",
+      "id": 121100,
+      "image": "Rina",
+      "level": 1,
+      "levelShowName": "大扫除 I",
+      "name": "",
+      "potentialMaterials": [
+        {
+          "itemId": 20121,
+          "number": 1
+        }
+      ]
+    },
+    "121101": {
+      "abilityList": [11211501, 11211601],
+      "desc": "穿透率提升1.6%；<color=#FFFFFF>[核心被动：迷你毁灭拍档]</color>中获得的增益效果存在期间，基于丽娜自身穿透率每1%，全队角色攻击力和防御力分别提升<color=#2BAD00>3</color>点和<color=#2BAD00>2.5</color>点，至多提升576点攻击力和468点防御力。",
+      "id": 121101,
+      "image": "Rina",
+      "level": 2,
+      "levelShowName": "大扫除 II",
+      "name": "潜能觉醒：完美侍奉",
+      "potentialMaterials": [
+        {
+          "itemId": 20121,
+          "number": 1
+        }
+      ]
+    },
+    "121102": {
+      "abilityList": [11211501, 11211602],
+      "desc": "穿透率提升1.6%；<color=#FFFFFF>[核心被动：迷你毁灭拍档]</color>中获得的增益效果存在期间，基于丽娜自身穿透率每1%，全队角色攻击力和防御力分别提升<color=#2BAD00>4.2</color>点和<color=#2BAD00>3.5</color>点，至多提升576点攻击力和468点防御力。",
+      "id": 121102,
+      "image": "Rina",
+      "level": 3,
+      "levelShowName": "大扫除 III",
+      "name": "潜能觉醒：完美侍奉",
+      "potentialMaterials": [
+        {
+          "itemId": 20121,
+          "number": 1
+        }
+      ]
+    },
+    "121103": {
+      "abilityList": [11211501, 11211603],
+      "desc": "穿透率提升1.6%；<color=#FFFFFF>[核心被动：迷你毁灭拍档]</color>中获得的增益效果存在期间，基于丽娜自身穿透率每1%，全队角色攻击力和防御力分别提升<color=#2BAD00>5.5</color>点和<color=#2BAD00>4.5</color>点，至多提升576点攻击力和468点防御力。",
+      "id": 121103,
+      "image": "Rina",
+      "level": 4,
+      "levelShowName": "大扫除 IV",
+      "name": "潜能觉醒：完美侍奉",
+      "potentialMaterials": [
+        {
+          "itemId": 20121,
+          "number": 1
+        }
+      ]
+    },
+    "121104": {
+      "abilityList": [11211501, 11211604],
+      "desc": "穿透率提升1.6%；<color=#FFFFFF>[核心被动：迷你毁灭拍档]</color>中获得的增益效果存在期间，基于丽娜自身穿透率每1%，全队角色攻击力和防御力分别提升<color=#2BAD00>6.7</color>点和<color=#2BAD00>5.5</color>点，至多提升576点攻击力和468点防御力。",
+      "id": 121104,
+      "image": "Rina",
+      "level": 5,
+      "levelShowName": "大扫除 V",
+      "name": "潜能觉醒：完美侍奉",
+      "potentialMaterials": [
+        {
+          "itemId": 20121,
+          "number": 1
+        }
+      ]
+    },
+    "121105": {
+      "abilityList": [11211501, 11211605],
+      "desc": "穿透率提升1.6%；<color=#FFFFFF>[核心被动：迷你毁灭拍档]</color>中获得的增益效果存在期间，基于丽娜自身穿透率每1%，全队角色攻击力和防御力分别提升<color=#2BAD00>8</color>点和<color=#2BAD00>6.5</color>点，至多提升576点攻击力和468点防御力。",
+      "id": 121105,
+      "image": "Rina",
+      "level": 6,
+      "levelShowName": "大扫除 VI",
+      "name": "潜能觉醒：完美侍奉",
+      "potentialMaterials": [
+        {
+          "itemId": 20121,
+          "number": 1
+        }
+      ]
+    }
+  },
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n指派杜苏拉和安娜塔莎，向前方旋转飞出并触发爆炸，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：二拍的阿勒芒德",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n回避敌人的攻击，并触发<color=#FFFFFF>[极限视域]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "回避支援：三拍的库朗特",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[回避支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n指派杜苏拉和安娜塔莎，向前方持续推进并生成涡旋电场，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间，可以快速衔接<color=#FFFFFF>[强化特殊技：笨蛋消失魔法]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：四拍的加沃特",
+          "potential": []
+        },
+        {
+          "name": "快速支援：二拍的阿勒芒德",
+          "param": [
+            {
+              "desc": "{Skill:1211019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211019": {
+                  "attackData": [],
+                  "attributeInfliction": 11670,
+                  "damagePercentage": 12260,
+                  "damagePercentageGrowth": 1120,
+                  "etherPurify": 5836,
+                  "feverRecovery": 321200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 12260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12260,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211019": {
+                  "attackData": [],
+                  "attributeInfliction": 11670,
+                  "damagePercentage": 12260,
+                  "damagePercentageGrowth": 1120,
+                  "etherPurify": 5836,
+                  "feverRecovery": 321200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12260,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：四拍的加沃特",
+          "param": [
+            {
+              "desc": "{Skill:1211021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211021": {
+                  "attackData": [],
+                  "attributeInfliction": 31092,
+                  "damagePercentage": 34940,
+                  "damagePercentageGrowth": 3180,
+                  "etherPurify": 15830,
+                  "feverRecovery": 1035100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3180,
+                  "main": 34940,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30360,
+                  "stunRatioGrowth": 1380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211021": {
+                  "attackData": [],
+                  "attributeInfliction": 31092,
+                  "damagePercentage": 34940,
+                  "damagePercentageGrowth": 3180,
+                  "etherPurify": 15830,
+                  "feverRecovery": 1035100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1380,
+                  "main": 30360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30360,
+                  "stunRatioGrowth": 1380
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n指派杜苏拉和安娜塔莎发动至多四段的攻击，造成<color=#F0D12B>物理伤害</color>和<color=#2EB6FF>电属性伤害</color>；\n在杜苏拉和安娜塔莎攻击期间，丽娜执行其他行动，不会打断<color=#FFFFFF>[普通攻击]</color>的连击段数。",
+          "name": "普通攻击：痛打呆子",
+          "potential": []
+        },
+        {
+          "desc": "长按 <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 发动：\n召回杜苏拉和安娜塔莎，在身边回旋后进行范围攻击，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间抗打断等级提升。",
+          "name": "普通攻击：赶走傻瓜",
+          "potential": []
+        },
+        {
+          "desc": "当丽娜发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>后，进入<color=#FFFFFF>[一尘不染]</color>状态，持续13秒，期间杜苏拉或安娜塔莎会每间隔2.5秒，攻击敌人1次，造成<color=#F0D12B>物理伤害</color>和<color=#2EB6FF>电属性伤害</color>，并获得1层<color=#FFFFFF>[惊吓]</color>，至多获得6层<color=#FFFFFF>[惊吓]</color>；招式发动后重置杜苏拉和安娜塔莎离场倒计时。",
+          "name": "普通攻击：晨间清扫",
+          "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+        },
+        {
+          "desc": "当<color=#FFFFFF><Term:1000026></Term></color>达到6层时，杜苏拉或安娜塔莎下一次发动<color=#FFFFFF>[普通攻击：晨间清扫]</color>会消耗全部<color=#FFFFFF>[惊吓]</color>，改为发动<color=#FFFFFF>[普通攻击：午夜清扫]</color>，造成<color=#2EB6FF>电属性伤害</color>；招式发动后重置杜苏拉和安娜塔莎离场倒计时。",
+          "name": "普通攻击：午夜清扫",
+          "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+        },
+        {
+          "name": "普通攻击：痛打呆子",
+          "param": [
+            {
+              "desc": "{Skill:1211001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1211001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4400,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 2328,
+                  "feverRecovery": 64075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 4400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2450,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211003, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1211003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11140,
+                  "damagePercentageGrowth": 1020,
+                  "etherPurify": 6784,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1020,
+                  "main": 11140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30290,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8840,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211004, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1211004": {
+                  "attackData": [],
+                  "attributeInfliction": 8363,
+                  "damagePercentage": 11710,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 9194,
+                  "feverRecovery": 386100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 11710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9660,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211006, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1211006": {
+                  "attackData": [],
+                  "attributeInfliction": 10474,
+                  "damagePercentage": 18390,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 15528,
+                  "feverRecovery": 341825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 18390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14680,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1211001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4400,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 2328,
+                  "feverRecovery": 64075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2450,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211003, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1211003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11140,
+                  "damagePercentageGrowth": 1020,
+                  "etherPurify": 6784,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 8840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30290,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8840,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211004, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1211004": {
+                  "attackData": [],
+                  "attributeInfliction": 8363,
+                  "damagePercentage": 11710,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 9194,
+                  "feverRecovery": 386100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 9660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9660,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211006, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1211006": {
+                  "attackData": [],
+                  "attributeInfliction": 10474,
+                  "damagePercentage": 18390,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 15528,
+                  "feverRecovery": 341825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 670,
+                  "main": 14680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14680,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：赶走傻瓜",
+          "param": [
+            {
+              "desc": "{Skill:1211007, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211007": {
+                  "attackData": [],
+                  "attributeInfliction": 30003,
+                  "damagePercentage": 31510,
+                  "damagePercentageGrowth": 2870,
+                  "etherPurify": 30004,
+                  "feverRecovery": 825275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2870,
+                  "main": 31510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 108020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31510,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211007, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211007": {
+                  "attackData": [],
+                  "attributeInfliction": 30003,
+                  "damagePercentage": 31510,
+                  "damagePercentageGrowth": 2870,
+                  "etherPurify": 30004,
+                  "feverRecovery": 825275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1440,
+                  "main": 31510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 108020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31510,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：晨间清扫",
+          "param": [
+            {
+              "desc": "{Skill:1211023, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1211023": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5250,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            },
+            {
+              "desc": "{Skill:1211024, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1211024": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5250,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            },
+            {
+              "desc": "{Skill:1211025, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1211025": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5250,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            },
+            {
+              "desc": "{Skill:1211023, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1211023": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5250,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            },
+            {
+              "desc": "{Skill:1211024, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1211024": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5250,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            },
+            {
+              "desc": "{Skill:1211025, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1211025": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5250,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            }
+          ],
+          "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+        },
+        {
+          "name": "普通攻击：午夜清扫",
+          "param": [
+            {
+              "desc": "{Skill:1211027, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211027": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 21000,
+                  "damagePercentageGrowth": 1910,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1910,
+                  "main": 21000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            },
+            {
+              "desc": "{Skill:1211027, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211027": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 21000,
+                  "damagePercentageGrowth": 1910,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+            }
+          ],
+          "potential": [121100, 121101, 121102, 121103, 121104, 121105]
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n指派杜苏拉和安娜塔莎，向前方持续推进并生成球形电场，造成大量<color=#2EB6FF>电属性伤害</color>；\n杜苏拉和安娜塔莎在推进期间无法响应<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[冲刺攻击]</color>、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[强化特殊技]</color>的指令，但可以通过发动<color=#FFFFFF>[普通攻击：赶走傻瓜]</color>将其召回丽娜身边；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发<color=#FFFFFF>[快速支援]</color>。\n",
+          "name": "连携技：侍者守则",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n指派杜苏拉和安娜塔莎，向前方持续推进并发动高速回旋，造成大量<color=#2EB6FF>电属性伤害</color>；\n杜苏拉和安娜塔莎在推进期间无法响应<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[冲刺攻击]</color>、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[强化特殊技]</color>的指令，但可以通过发动<color=#FFFFFF>[普通攻击：赶走傻瓜]</color>将其召回丽娜身边；\n招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n招式发动期间拥有无敌效果；\n招式发动后，将触发<color=#FFFFFF>[快速支援]</color>。",
+          "name": "终结技：女王的侍从们",
+          "potential": []
+        },
+        {
+          "name": "连携技：侍者守则",
+          "param": [
+            {
+              "desc": "{Skill:1211015, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211015": {
+                  "attackData": [],
+                  "attributeInfliction": 36620,
+                  "damagePercentage": 101300,
+                  "damagePercentageGrowth": 9210,
+                  "etherPurify": 16671,
+                  "feverRecovery": 2287450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9210,
+                  "main": 101300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17510,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211015, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211015": {
+                  "attackData": [],
+                  "attributeInfliction": 36620,
+                  "damagePercentage": 101300,
+                  "damagePercentageGrowth": 9210,
+                  "etherPurify": 16671,
+                  "feverRecovery": 2287450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 800,
+                  "main": 17510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17510,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：女王的侍从们",
+          "param": [
+            {
+              "desc": "{Skill:1211017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211017": {
+                  "attackData": [],
+                  "attributeInfliction": 10837,
+                  "damagePercentage": 211670,
+                  "damagePercentageGrowth": 19250,
+                  "etherPurify": 73338,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 19250,
+                  "main": 211670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11380,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211017": {
+                  "attackData": [],
+                  "attributeInfliction": 10837,
+                  "damagePercentage": 211670,
+                  "damagePercentageGrowth": 19250,
+                  "etherPurify": 73338,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 11380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11380,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：抚平裙摆",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n指派杜苏拉和安娜塔莎发动穿透攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "冲刺攻击：突然惊吓",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n指派杜苏拉和安娜塔莎，向前方旋转飞出并触发爆炸，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：邦布回魂",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：突然惊吓",
+          "param": [
+            {
+              "desc": "{Skill:1211011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 10500,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 5000,
+                  "feverRecovery": 137500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 10500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5250,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 10500,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 5000,
+                  "feverRecovery": 137500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5250,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：邦布回魂",
+          "param": [
+            {
+              "desc": "{Skill:1211013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211013": {
+                  "attackData": [],
+                  "attributeInfliction": 11670,
+                  "damagePercentage": 22760,
+                  "damagePercentageGrowth": 2070,
+                  "etherPurify": 26671,
+                  "feverRecovery": 321200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2070,
+                  "main": 22760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22760,
+                  "stunRatioGrowth": 1040
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211013": {
+                  "attackData": [],
+                  "attributeInfliction": 11670,
+                  "damagePercentage": 22760,
+                  "damagePercentageGrowth": 2070,
+                  "etherPurify": 26671,
+                  "feverRecovery": 321200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1040,
+                  "main": 22760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22760,
+                  "stunRatioGrowth": 1040
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n指派安娜塔莎发动下砸攻击，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：砸扁笨蛋",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n指派杜苏拉和安娜塔莎发动持续下砸攻击，造成大量<color=#2EB6FF>电属性伤害</color>；\n招式发动期间拥有无敌效果；\n招式发动后，将触发<color=#FFFFFF>[快速支援]</color>。",
+          "name": "强化特殊技：笨蛋消失魔法",
+          "potential": []
+        },
+        {
+          "name": "特殊技：砸扁笨蛋",
+          "param": [
+            {
+              "desc": "{Skill:1211008, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211008": {
+                  "attackData": [],
+                  "attributeInfliction": 5835,
+                  "damagePercentage": 6130,
+                  "damagePercentageGrowth": 560,
+                  "etherPurify": 5836,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 6130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6130,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211008, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211008": {
+                  "attackData": [],
+                  "attributeInfliction": 5835,
+                  "damagePercentage": 6130,
+                  "damagePercentageGrowth": 560,
+                  "etherPurify": 5836,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6130,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：笨蛋消失魔法",
+          "param": [
+            {
+              "desc": "{Skill:1211009, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1211009": {
+                  "attackData": [],
+                  "attributeInfliction": 47162,
+                  "damagePercentage": 54600,
+                  "damagePercentageGrowth": 4970,
+                  "etherPurify": 13330,
+                  "feverRecovery": 1145925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4970,
+                  "main": 54600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44450,
+                  "stunRatioGrowth": 2030
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1211009, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1211009": {
+                  "attackData": [],
+                  "attributeInfliction": 47162,
+                  "damagePercentage": 54600,
+                  "damagePercentageGrowth": 4970,
+                  "etherPurify": 13330,
+                  "feverRecovery": 1145925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2030,
+                  "main": 44450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44450,
+                  "stunRatioGrowth": 2030
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1211001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：痛打呆子"
+    },
+    "1211002": {
+      "desc": "<IconMap:Icon_Normal>（长按）",
+      "name": "普通攻击：赶走傻瓜"
+    },
+    "1211003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：砸扁笨蛋"
+    },
+    "1211004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：笨蛋消失魔法"
+    },
+    "1211005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：突然惊吓"
+    },
+    "1211006": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：邦布回魂"
+    },
+    "1211007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：侍者守则"
+    },
+    "1211008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：女王的侍从们"
+    },
+    "1211009": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：二拍的阿勒芒德"
+    },
+    "1211010": {
+      "desc": "<IconMap:Icon_Switch>（触发回避支援时）",
+      "name": "回避支援：三拍的库朗特"
+    },
+    "1211011": {
+      "desc": "<IconMap:Icon_Normal>（发动回避支援后）",
+      "name": "支援突击：四拍的加沃特"
+    }
+  },
+  "skin": {
+    "3112110": {
+      "desc": "裙摆一丝不苟，尽显得体仪容，完美主义是女仆长的基本准则。但对于烹饪，完美的定义似乎另有一套标准…",
+      "name": "丽娜·完美女仆长"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "04",
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，后台支援",
+    "为队伍提供穿透率加成",
+    "延长[感电]效果持续时间"
+  ],
+  "talent": {
+    "1": {
+      "desc": "被指派并发动攻击后，返回丽娜身边前，杜苏拉和安娜塔莎会在原处额外逗留5.5秒；在杜苏拉或安娜塔莎附近10米范围内的角色，从<color=#FFFFFF>[核心被动：迷你毁灭拍档]</color>中获得的增益效果提升至原本的130%。",
+      "desc2": "「干不完活就要挨揍！」杜苏拉总是这样鼓励大家。\n「挨揍挨揍！」安娜塔莎总是如此附和。",
+      "name": "双人领舞"
+    },
+    "2": {
+      "desc": "成为接战状态下的当前操作角色时，丽娜造成的伤害提升15%，持续12秒，18秒内最多触发一次。",
+      "desc2": "「只有卓越的女仆长能够带领卓越的女仆，\n只有模范的主人能够培养模范的邦布。」\n——丽娜在「维多利亚家政人力资源管理暨邦布培养心得分享讲座」上的讲话",
+      "name": "主人的典范"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "丽娜总是有做好任何事的自信和毁灭任何事的本领。\n不过，在毁灭敌人的好心情这件事上，她的信心和能力得到了统一。",
+      "name": "女仆长的专长"
+    },
+    "4": {
+      "desc": "杜苏拉和安娜塔莎均被指派在外时，丽娜的能量自动回复速度提升0.5点/秒；杜苏拉或安娜塔莎返回丽娜身边时，对应增益效果结束。",
+      "desc2": "杜苏拉和安娜塔莎从未达成任何一致的意见，\n「殴打前面那个傻瓜」是一个例外。",
+      "name": "针与锤"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "「『丽娜』在邦布的语言里是完美的意思。」\n完美主义是维多利亚家政员工手册的第一准则。\n而对于「完美」的评判，丽娜自有准绳。",
+      "name": "完美主义女仆长"
+    },
+    "6": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>命中敌人时，全队角色造成的<color=#2EB6FF>电属性伤害</color>提升15%，持续8秒。",
+      "desc2": "雨夜的古堡，雷声隆隆。长廊的深处，诡影憧憧。 \n恐惧电路超载，惊悚电影开拍。",
+      "name": "雷雨夜惊魂"
+    }
+  },
+  "weaponType": {
+    "4": "支援"
+  }
+}

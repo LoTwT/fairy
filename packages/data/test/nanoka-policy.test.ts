@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest"
 import {
   escapeTerminalText,
   formatCommandFailure,
+} from "../scripts/terminal.ts"
+import {
   formatFetchProgress,
   formatVersionMenu,
   parseArguments,
@@ -168,6 +170,17 @@ describe("Nanoka version policy", () => {
       "Nanoka 数据源命令失败：Location: \\u{001b}]52;c;payload\\u{0007}\\u{000a}spoofed\n",
     )
     expect(escapeTerminalText("x".repeat(5000))).toBe(`${"x".repeat(4096)}…`)
+    expect(escapeTerminalText("😀".repeat(4097))).toBe(`${"😀".repeat(4096)}…`)
+    const cause = new Error("nested cause must stay out of terminal output")
+    const error = new Error("resource [zh] /field\r", { cause })
+    expect(formatCommandFailure(error, "Nanoka 代理人整合命令")).toBe(
+      "Nanoka 代理人整合命令失败：resource [zh] /field\\u{000d}\n",
+    )
+    expect(error.message).toBe("resource [zh] /field\r")
+    expect(error.cause).toBe(cause)
+    expect(formatCommandFailure("invalid\ninput")).toBe(
+      "Nanoka 数据源命令失败：invalid\\u{000a}input\n",
+    )
   })
 })
 

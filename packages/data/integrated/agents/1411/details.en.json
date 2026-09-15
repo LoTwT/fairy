@@ -1,0 +1,1723 @@
+{
+  "camp": {
+    "11": "Spook Shack"
+  },
+  "elementType": {
+    "200": "Physical"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "Anomaly Mastery"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1411,
+  "locale": "en",
+  "name": "Yuzuha",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1411013",
+        "1411014",
+        "1411015",
+        "1411016",
+        "1411017",
+        "1411024"
+      ],
+      "basic": [
+        "1411001",
+        "1411002",
+        "1411003",
+        "1411004",
+        "1411005",
+        "1411018",
+        "1411019",
+        "1411020",
+        "1411021",
+        "1411022",
+        "1411023"
+      ],
+      "chain": ["1411011", "1411012"],
+      "dodge": ["1411009", "1411010"],
+      "special": ["1411006", "1411007", "1411008"]
+    },
+    "parameterRowsById": {
+      "1411001": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/5"
+      ],
+      "1411002": [
+        "/skill/basic/description/6/param/1",
+        "/skill/basic/description/6/param/6"
+      ],
+      "1411003": [
+        "/skill/basic/description/6/param/2",
+        "/skill/basic/description/6/param/7"
+      ],
+      "1411004": [
+        "/skill/basic/description/6/param/3",
+        "/skill/basic/description/6/param/8"
+      ],
+      "1411005": [
+        "/skill/basic/description/6/param/4",
+        "/skill/basic/description/6/param/9"
+      ],
+      "1411006": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1411007": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1411008": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1411009": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1411010": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1411011": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1411012": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1411013": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1411014": ["/skill/assist/description/5/param/0"],
+      "1411015": ["/skill/assist/description/5/param/1"],
+      "1411016": ["/skill/assist/description/5/param/2"],
+      "1411017": [
+        "/skill/assist/description/6/param/0",
+        "/skill/assist/description/6/param/1"
+      ],
+      "1411018": [
+        "/skill/basic/description/8/param/0",
+        "/skill/basic/description/8/param/1"
+      ],
+      "1411019": ["/skill/basic/description/7/param/0"],
+      "1411020": ["/skill/basic/description/9/param/0"],
+      "1411021": ["/skill/basic/description/10/param/0"],
+      "1411022": ["/skill/basic/description/11/param/0"],
+      "1411023": ["/skill/basic/description/11/param/1"],
+      "1411024": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "NOV 2",
+    "fullName": "Ukinami Yuzuha",
+    "gender": "Female",
+    "impressionF": "When I first met Yuzuha, she seemed cheerful on the surface, but I always felt like she kept a certain distance from people... but that's not the case anymore.",
+    "impressionM": "When I saw Yuzuha's younger sister Kaede the other day, she asked me if Yuzuha had aced her exams this term. She mentioned how Yuzuha's been noticeably happier lately.",
+    "impressions": [
+      "Impression of Ukinami Yuzuha:\n · A master of mischief — but not for fun.",
+      " · A dependable companion, though not without her moments of vulnerability.",
+      " · May your life always be free and full of light."
+    ],
+    "profileDesc": "Ukinami Yuzuha, a resident of Waifei Peninsula's Failume Heights, currently attends a low-tuition company affiliated school in the city. Aside from being part of the Inter-Knot subforum Spook Shack, she's not affiliated with any other groups — though in New Eridu, such forums aren't typically seen as formal organizations, and are, instead, more like hobby clubs.\nYuzuha is the adopted daughter of Li Baorong, owner of the Mystic Wares Porcelume store. Word around Failume Heights is that Baorong lost his wife and two daughters when the old capital fell. In the years that followed, he took in five children. Yuzuha is the second oldest, with an older brother, a younger brother, and two younger sisters. The family lived on the second floor above the store, and with just two bedrooms, Yuzuha shared one with her sisters, while the boys stayed with Baorong. Now that her older brother has moved out and she mostly stays in the school dorm, the apartment feels a bit less crowded. But on weekends and holidays, Yuzuha usually returns from school to help her father at the store.\nEven as a child, Yuzuha showed a surprising level of maturity. Her eloquence and cheerful nature have made her a favorite among neighbors — and a hit with the kids around Waifei Peninsula and Sailume Bay.\nOn the Spook Shack forum, Yuzuha goes by the username \"Yuzupepper.\" In addition to her real-life friends Manato and Alice, she is also close with two other users known as \"Night Emissary\" and \"Strawberry Parfait\" on the forums.",
+    "stature": "162",
+    "trustLv": {
+      "1": "Ukinami Yuzuha, a resident of Waifei Peninsula's Failume Heights, currently attends a low-tuition company affiliated school in the city. Aside from being part of the Inter-Knot subforum Spook Shack, she's not affiliated with any other groups — though in New Eridu, such forums aren't typically seen as formal organizations, and are, instead, more like hobby clubs.\nYuzuha is the adopted daughter of Li Baorong, owner of the Mystic Wares Porcelume store. Word around Failume Heights is that Baorong lost his wife and two daughters when the old capital fell. In the years that followed, he took in five children. Yuzuha is the second oldest, with an older brother, a younger brother, and two younger sisters. The family lived on the second floor above the store, and with just two bedrooms, Yuzuha shared one with her sisters, while the boys stayed with Baorong. Now that her older brother has moved out and she mostly stays in the school dorm, the apartment feels a bit less crowded. But on weekends and holidays, Yuzuha usually returns from school to help her father at the store.\nEven as a child, Yuzuha showed a surprising level of maturity. Her eloquence and cheerful nature have made her a favorite among neighbors — and a hit with the kids around Waifei Peninsula and Sailume Bay.\nOn the Spook Shack forum, Yuzuha goes by the username \"Yuzupepper.\" In addition to her real-life friends Manato and Alice, she is also close with two other users known as \"Night Emissary\" and \"Strawberry Parfait\" on the forums.",
+      "2": "",
+      "3": "According to Yuzuha, she's been wandering the Faunus Quarter for as long as she can remember, living as part of a small gang of street kids. She didn't have a name back then. Due to malnutrition, she had night blindness and always carried a candlestick after dark, so the others nicknamed her \"Little Candle.\"\nYuzuha was part of an experimental project called \"Project New Leaf.\" Since she never had a proper name, one of the lower-level researchers assigned to care for the children gave her the name \"Yuzuha.\" However, this name was never known to Ferox or the other higher-ups — they only ever referred to her as ES-07. Despite the name coming from the lab, Yuzuha has always felt the name carried a spark of life — and that spark was part of her luck.\nBoth of Yuzuha's younger sisters were adopted as infants, and when Baorong named them, he continued his tradition of using names inspired by plants.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 2",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1411049": {
+        "desc": [
+          "Upon entering the battlefield, Yuzuha immediately gains 3 <color=#FFFFFF>Sugar Points</color>.\nYuzuha can have up to 6 <color=#FFFFFF>Sugar Points</color>.\nWhen Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members receive the <color=#FFFFFF>Tanuki Wish</color> effect.\n<color=#FFFFFF>Tanuki Wish</color> grants an ATK increase equal to 40% of Yuzuha's initial ATK, up to a maximum increase of <color=#2BAD00>600</color>, and increases the DMG dealt by those with the effect by 15%, lasting 40s. Repeated triggers reset the duration.\nIf Yuzuha's initial ATK reaches 1,500, she grants the full ATK bonus to all squad members.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nIf Yuzuha's Anomaly Mastery exceeds 100, every point over increases the Anomaly Buildup Rate of characters with <color=#FFFFFF>Tanuki Wish</color> by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>. When Yuzuha's Anomaly Mastery is at 200, she grants the full buff effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Whimsical Wonder",
+          "Additional Ability: The More the Merrier"
+        ],
+        "potential": []
+      },
+      "1411050": {
+        "desc": [
+          "Upon entering the battlefield, Yuzuha immediately gains 3 <color=#FFFFFF>Sugar Points</color>.\nYuzuha can have up to 6 <color=#FFFFFF>Sugar Points</color>.\nWhen Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members receive the <color=#FFFFFF>Tanuki Wish</color> effect.\n<color=#FFFFFF>Tanuki Wish</color> grants an ATK increase equal to 40% of Yuzuha's initial ATK, up to a maximum increase of <color=#2BAD00>700</color>, and increases the DMG dealt by those with the effect by 15%, lasting 40s. Repeated triggers reset the duration.\nIf Yuzuha's initial ATK reaches 1,750, she grants the full ATK bonus to all squad members.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nIf Yuzuha's Anomaly Mastery exceeds 100, every point over increases the Anomaly Buildup Rate of characters with <color=#FFFFFF>Tanuki Wish</color> by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>. When Yuzuha's Anomaly Mastery is at 200, she grants the full buff effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Whimsical Wonder",
+          "Additional Ability: The More the Merrier"
+        ],
+        "potential": []
+      },
+      "1411051": {
+        "desc": [
+          "Upon entering the battlefield, Yuzuha immediately gains 3 <color=#FFFFFF>Sugar Points</color>.\nYuzuha can have up to 6 <color=#FFFFFF>Sugar Points</color>.\nWhen Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members receive the <color=#FFFFFF>Tanuki Wish</color> effect.\n<color=#FFFFFF>Tanuki Wish</color> grants an ATK increase equal to 40% of Yuzuha's initial ATK, up to a maximum increase of <color=#2BAD00>800</color>, and increases the DMG dealt by those with the effect by 15%, lasting 40s. Repeated triggers reset the duration.\nIf Yuzuha's initial ATK reaches 2,000, she grants the full ATK bonus to all squad members.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nIf Yuzuha's Anomaly Mastery exceeds 100, every point over increases the Anomaly Buildup Rate of characters with <color=#FFFFFF>Tanuki Wish</color> by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>. When Yuzuha's Anomaly Mastery is at 200, she grants the full buff effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Whimsical Wonder",
+          "Additional Ability: The More the Merrier"
+        ],
+        "potential": []
+      },
+      "1411052": {
+        "desc": [
+          "Upon entering the battlefield, Yuzuha immediately gains 3 <color=#FFFFFF>Sugar Points</color>.\nYuzuha can have up to 6 <color=#FFFFFF>Sugar Points</color>.\nWhen Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members receive the <color=#FFFFFF>Tanuki Wish</color> effect.\n<color=#FFFFFF>Tanuki Wish</color> grants an ATK increase equal to 40% of Yuzuha's initial ATK, up to a maximum increase of <color=#2BAD00>900</color>, and increases the DMG dealt by those with the effect by 15%, lasting 40s. Repeated triggers reset the duration.\nIf Yuzuha's initial ATK reaches 2,250, she grants the full ATK bonus to all squad members.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nIf Yuzuha's Anomaly Mastery exceeds 100, every point over increases the Anomaly Buildup Rate of characters with <color=#FFFFFF>Tanuki Wish</color> by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>. When Yuzuha's Anomaly Mastery is at 200, she grants the full buff effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Whimsical Wonder",
+          "Additional Ability: The More the Merrier"
+        ],
+        "potential": []
+      },
+      "1411053": {
+        "desc": [
+          "Upon entering the battlefield, Yuzuha immediately gains 3 <color=#FFFFFF>Sugar Points</color>.\nYuzuha can have up to 6 <color=#FFFFFF>Sugar Points</color>.\nWhen Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members receive the <color=#FFFFFF>Tanuki Wish</color> effect.\n<color=#FFFFFF>Tanuki Wish</color> grants an ATK increase equal to 40% of Yuzuha's initial ATK, up to a maximum increase of <color=#2BAD00>1,000</color>, and increases the DMG dealt by those with the effect by 15%, lasting 40s. Repeated triggers reset the duration.\nIf Yuzuha's initial ATK reaches 2,500, she grants the full ATK bonus to all squad members.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nIf Yuzuha's Anomaly Mastery exceeds 100, every point over increases the Anomaly Buildup Rate of characters with <color=#FFFFFF>Tanuki Wish</color> by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>. When Yuzuha's Anomaly Mastery is at 200, she grants the full buff effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Whimsical Wonder",
+          "Additional Ability: The More the Merrier"
+        ],
+        "potential": []
+      },
+      "1411054": {
+        "desc": [
+          "Upon entering the battlefield, Yuzuha immediately gains 3 <color=#FFFFFF>Sugar Points</color>.\nYuzuha can have up to 6 <color=#FFFFFF>Sugar Points</color>.\nWhen Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members receive the <color=#FFFFFF>Tanuki Wish</color> effect.\n<color=#FFFFFF>Tanuki Wish</color> grants an ATK increase equal to 40% of Yuzuha's initial ATK, up to a maximum increase of <color=#2BAD00>1,100</color>, and increases the DMG dealt by those with the effect by 15%, lasting 40s. Repeated triggers reset the duration.\nIf Yuzuha's initial ATK reaches 2,750, she grants the full ATK bonus to all squad members.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nIf Yuzuha's Anomaly Mastery exceeds 100, every point over increases the Anomaly Buildup Rate of characters with <color=#FFFFFF>Tanuki Wish</color> by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>. When Yuzuha's Anomaly Mastery is at 200, she grants the full buff effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Whimsical Wonder",
+          "Additional Ability: The More the Merrier"
+        ],
+        "potential": []
+      },
+      "1411055": {
+        "desc": [
+          "Upon entering the battlefield, Yuzuha immediately gains 3 <color=#FFFFFF>Sugar Points</color>.\nYuzuha can have up to 6 <color=#FFFFFF>Sugar Points</color>.\nWhen Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members receive the <color=#FFFFFF>Tanuki Wish</color> effect.\n<color=#FFFFFF>Tanuki Wish</color> grants an ATK increase equal to 40% of Yuzuha's initial ATK, up to a maximum increase of <color=#2BAD00>1,200</color>, and increases the DMG dealt by those with the effect by 15%, lasting 40s. Repeated triggers reset the duration.\nIf Yuzuha's initial ATK reaches 3,000, she grants the full ATK bonus to all squad members.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nIf Yuzuha's Anomaly Mastery exceeds 100, every point over increases the Anomaly Buildup Rate of characters with <color=#FFFFFF>Tanuki Wish</color> by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>0.2%</color>, up to a maximum of <color=#2BAD00>20%</color>. When Yuzuha's Anomaly Mastery is at 200, she grants the full buff effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Whimsical Wonder",
+          "Additional Ability: The More the Merrier"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nStrike enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Dessert Time",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nUpon a successful parry, gain 1 <color=#FFFFFF>Sugar Points</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Replenish Your Fun",
+          "potential": []
+        },
+        {
+          "desc": "After triggering a <color=#FFFFFF>Defensive Assist</color> or successfully parrying an enemy attack with <color=#FFFFFF>Basic Attack: Tanuki Cloak</color>, press <IconMap:Icon_Normal> to activate:\nStrike enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: We Have Cookies",
+          "potential": []
+        },
+        {
+          "desc": "After triggering a <color=#FFFFFF>Defensive Assist</color> or successfully parrying an enemy attack with <color=#FFFFFF>Basic Attack: Tanuki Cloak</color>, press <IconMap:Icon_Normal> at the right moment to activate:\nFollowing a continuous spinning umbrella attack, fire a powerful projectile that deals <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Stuffed Hard Candy Shot",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Dessert Time",
+          "param": [
+            {
+              "desc": "{Skill:1411013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411013": {
+                  "attackData": [],
+                  "attributeInfliction": 5584,
+                  "damagePercentage": 12290,
+                  "damagePercentageGrowth": 1120,
+                  "etherPurify": 5585,
+                  "feverRecovery": 153725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 12290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6150,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411013": {
+                  "attackData": [],
+                  "attributeInfliction": 5584,
+                  "damagePercentage": 12290,
+                  "damagePercentageGrowth": 1120,
+                  "etherPurify": 5585,
+                  "feverRecovery": 153725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6150,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Replenish Your Fun",
+          "param": [
+            {
+              "desc": "{Skill:1411014, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1411014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 38334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1350,
+                  "main": 29520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29520,
+                  "stunRatioGrowth": 1350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411015, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1411015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411016, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1411016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: We Have Cookies",
+          "param": [
+            {
+              "desc": "{Skill:1411017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411017": {
+                  "attackData": [],
+                  "attributeInfliction": 24801,
+                  "damagePercentage": 29430,
+                  "damagePercentageGrowth": 2680,
+                  "etherPurify": 11170,
+                  "feverRecovery": 842875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2680,
+                  "main": 29430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25140,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411017": {
+                  "attackData": [],
+                  "attributeInfliction": 24801,
+                  "damagePercentage": 29430,
+                  "damagePercentageGrowth": 2680,
+                  "etherPurify": 11170,
+                  "feverRecovery": 842875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 25140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25140,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Stuffed Hard Candy Shot",
+          "param": [
+            {
+              "desc": "{Skill:1411024, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411024": {
+                  "attackData": [],
+                  "attributeInfliction": 39642,
+                  "damagePercentage": 46360,
+                  "damagePercentageGrowth": 4220,
+                  "etherPurify": 22164,
+                  "feverRecovery": 1296350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4220,
+                  "main": 46360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40870,
+                  "stunRatioGrowth": 1860
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411024, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411024": {
+                  "attackData": [],
+                  "attributeInfliction": 39642,
+                  "damagePercentage": 46360,
+                  "damagePercentageGrowth": 4220,
+                  "etherPurify": 22164,
+                  "feverRecovery": 1296350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1860,
+                  "main": 40870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40870,
+                  "stunRatioGrowth": 1860
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 5 strikes ahead, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Tanuki Claws",
+          "potential": []
+        },
+        {
+          "desc": "Hold <IconMap:Icon_Normal> to activate:\nEnter a defensive stance for up to 1.5 seconds. If hit during this time, parry the attack and inflict massive Daze against the attacking enemy.\nSuccessfully parrying an attack gains 1 <color=#FFFFFF>Sugar Points</color>.\nCharacter is invulnerable when successfully parrying.",
+          "name": "Basic Attack: Tanuki Cloak",
+          "potential": []
+        },
+        {
+          "desc": "When Yuzuha has <color=#FFFFFF>Sugar Points</color>, landing a hit with other active characters' attacks will have Yuzuha continuously twirl her umbrella and attack centered around the target before launching a powerful shell, dealing <color=#F0D12B>Physical DMG</color>. When this attack lands a heavy attack, Yuzuha consumes 1 <color=#FFFFFF>Sugar Point</color>.\n<color=#FFFFFF>Basic Attack: Hard Candy Shot</color> is considered an <color=#FFFFFF>Aftershock</color>.\n<color=#FFFFFF>Basic Attack: Hard Candy Shot</color> can be triggered once every 8s.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Hard Candy Shot",
+          "potential": []
+        },
+        {
+          "desc": "Enemies under the effect of <color=#FFFFFF>Sweet Scare</color> will be attacked by a <color=#FFFFFF>Basic Attack: Sugarburst Sparkles</color> once every 1s.\n<color=#FFFFFF>Basic Attack: Sugarburst Sparkles</color> initially deals <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Basic Attack: Sugarburst Sparkles</color> does not contribute its accumulated Attribute Anomaly Buildup toward Anomaly DMG calculation.\n<color=#FFFFFF>Basic Attack: Sugarburst Sparkles</color> Anomaly Buildup Rate increases by <color=#2BAD00>{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%</color>.",
+          "name": "Basic Attack: Sugarburst Sparkles",
+          "potential": []
+        },
+        {
+          "desc": "Enemies affected by <color=#FFFFFF>Sweet Scare</color> will be attacked by a <color=#FFFFFF>Basic Attack: Sugarburst Sparkles - Max</color> when hit with a heavy attack from <color=#FFFFFF>Basic Attack: Hard Candy Shot</color> or <color=#FFFFFF>Assist Follow-Up: Stuffed Hard Candy Shot</color>.\n<color=#FFFFFF>Basic Attack: Sugarburst Sparkles - Max</color> initially deals <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Basic Attack: Sugarburst Sparkles - Max</color> does not contribute its accumulated Attribute Anomaly Buildup toward Anomaly DMG calculation.\n<color=#FFFFFF>Basic Attack: Sugarburst Sparkles - Max</color> Anomaly Buildup Rate increases by <color=#2BAD00>{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%</color>.",
+          "name": "Basic Attack: Sugarburst Sparkles - Max",
+          "potential": []
+        },
+        {
+          "desc": "When Yuzuha is off-field, tanuki Kama assists the active character in attacking enemies, dealing <color=#F0D12B>Physical DMG</color>.\nWhen Yuzuha performs <color=#FFFFFF>Basic Attack: Tanuki Cloak</color>, tanuki Kama joins her in attacking the enemy, dealing <color=#F0D12B>Physical DMG</color>.\nTanuki Kama inherits Yuzuha's initial ATK.",
+          "name": "Basic Attack: Tanuki Helper",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Tanuki Claws",
+          "param": [
+            {
+              "desc": "{Skill:1411001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1411001": {
+                  "attackData": [],
+                  "attributeInfliction": 1618,
+                  "damagePercentage": 3770,
+                  "damagePercentageGrowth": 350,
+                  "etherPurify": 3998,
+                  "feverRecovery": 110000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 350,
+                  "main": 3770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4400,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1411002": {
+                  "attackData": [],
+                  "attributeInfliction": 2682,
+                  "damagePercentage": 5770,
+                  "damagePercentageGrowth": 530,
+                  "etherPurify": 5734,
+                  "feverRecovery": 157850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 530,
+                  "main": 5770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20640,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6310,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1411003": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 6600,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 5992,
+                  "feverRecovery": 165000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 6600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21570,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6600,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1411004": {
+                  "attackData": [],
+                  "attributeInfliction": 6296,
+                  "damagePercentage": 9810,
+                  "damagePercentageGrowth": 900,
+                  "etherPurify": 10239,
+                  "feverRecovery": 281600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 900,
+                  "main": 9810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36860,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11270,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1411005": {
+                  "attackData": [],
+                  "attributeInfliction": 8839,
+                  "damagePercentage": 16410,
+                  "damagePercentageGrowth": 1500,
+                  "etherPurify": 14867,
+                  "feverRecovery": 408925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1500,
+                  "main": 16410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 53520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16360,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1411001": {
+                  "attackData": [],
+                  "attributeInfliction": 1618,
+                  "damagePercentage": 3770,
+                  "damagePercentageGrowth": 350,
+                  "etherPurify": 3998,
+                  "feverRecovery": 110000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4400,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1411002": {
+                  "attackData": [],
+                  "attributeInfliction": 2682,
+                  "damagePercentage": 5770,
+                  "damagePercentageGrowth": 530,
+                  "etherPurify": 5734,
+                  "feverRecovery": 157850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20640,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6310,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1411003": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 6600,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 5992,
+                  "feverRecovery": 165000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21570,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6600,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1411004": {
+                  "attackData": [],
+                  "attributeInfliction": 6296,
+                  "damagePercentage": 9810,
+                  "damagePercentageGrowth": 900,
+                  "etherPurify": 10239,
+                  "feverRecovery": 281600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 11270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36860,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11270,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1411005": {
+                  "attackData": [],
+                  "attributeInfliction": 8839,
+                  "damagePercentage": 16410,
+                  "damagePercentageGrowth": 1500,
+                  "etherPurify": 14867,
+                  "feverRecovery": 408925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 750,
+                  "main": 16360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 53520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16360,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Tanuki Cloak",
+          "param": [
+            {
+              "desc": "{Skill:1411019, Prop:1002}",
+              "name": "Parry Daze Multiplier",
+              "param": {
+                "1411019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Hard Candy Shot",
+          "param": [
+            {
+              "desc": "{Skill:1411018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 13200,
+                  "damagePercentageGrowth": 1200,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 13200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8800,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 13200,
+                  "damagePercentageGrowth": 1200,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8800,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Sugarburst Sparkles",
+          "param": [
+            {
+              "desc": "{Skill:1411020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411020": {
+                  "attackData": [],
+                  "attributeInfliction": 1766,
+                  "damagePercentage": 2750,
+                  "damagePercentageGrowth": 250,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 2750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%",
+              "name": "Anomaly Buildup Rate Increase",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Sugarburst Sparkles - Max",
+          "param": [
+            {
+              "desc": "{Skill:1411021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411021": {
+                  "attackData": [],
+                  "attributeInfliction": 12000,
+                  "damagePercentage": 30800,
+                  "damagePercentageGrowth": 2800,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2800,
+                  "main": 30800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%",
+              "name": "Anomaly Buildup Rate Increase",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Tanuki Helper",
+          "param": [
+            {
+              "desc": "{Skill:1411022, Prop:1001}",
+              "name": "Tanuki Kama & Yuzuha Coordinated Attack DMG Multiplier",
+              "param": {
+                "1411022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11000,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1000,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411023, Prop:1001}",
+              "name": "Tanuki Kama Auto-Attack DMG Multiplier",
+              "param": {
+                "1411023": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11000,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1000,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleash a powerful strike on enemies in a small area ahead, dealing massive <color=#F0D12B>Physical DMG</color>.\nGains 1 <color=#FFFFFF>Sugar Points</color> when used.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Prank Assault",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating reaches Maximum, press <IconMap:Icon_UltimateReady> to trigger:\nUnleash a powerful strike on enemies in a large area around the character, dealing massive <color=#F0D12B>Physical DMG</color>.\nEnemies hit with a heavy attack are inflicted with the <color=#FFFFFF>Sweet Scare</color> state.\nUpon activating this skill, other squad members gain <color=#2BAD00>{CAL:7+AvatarSkillLevel(3)*1.5,1,2}</color> Energy.\nUpon activating this skill, gain 2 <color=#FFFFFF>Sugar Points</color>.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Surrender or Suffer the Mischief",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Prank Assault",
+          "param": [
+            {
+              "desc": "{Skill:1411011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411011": {
+                  "attackData": [],
+                  "attributeInfliction": 34469,
+                  "damagePercentage": 59870,
+                  "damagePercentageGrowth": 5450,
+                  "etherPurify": 21170,
+                  "feverRecovery": 2410925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5450,
+                  "main": 59870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23290,
+                  "stunRatioGrowth": 1060
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411011": {
+                  "attackData": [],
+                  "attributeInfliction": 34469,
+                  "damagePercentage": 59870,
+                  "damagePercentageGrowth": 5450,
+                  "etherPurify": 21170,
+                  "feverRecovery": 2410925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1060,
+                  "main": 23290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23290,
+                  "stunRatioGrowth": 1060
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Surrender or Suffer the Mischief",
+          "param": [
+            {
+              "desc": "{Skill:1411012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411012": {
+                  "attackData": [],
+                  "attributeInfliction": 25996,
+                  "damagePercentage": 144320,
+                  "damagePercentageGrowth": 13120,
+                  "etherPurify": 75997,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13120,
+                  "main": 144320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28600,
+                  "stunRatioGrowth": 1300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411012": {
+                  "attackData": [],
+                  "attributeInfliction": 25996,
+                  "damagePercentage": 144320,
+                  "damagePercentageGrowth": 13120,
+                  "etherPurify": 75997,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1300,
+                  "main": 28600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28600,
+                  "stunRatioGrowth": 1300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:7+AvatarSkillLevel(3)*1.5,1,2}",
+              "name": "Other Squad Members' Energy Gain",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Did I Scare You?",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nRapidly strikes enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: You're Outta Luck!",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nDeliver a quick strike forward, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Time for Payback~",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: You're Outta Luck!",
+          "param": [
+            {
+              "desc": "{Skill:1411009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411009": {
+                  "attackData": [],
+                  "attributeInfliction": 3168,
+                  "damagePercentage": 6980,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 3169,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 6980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3490,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411009": {
+                  "attackData": [],
+                  "attributeInfliction": 3168,
+                  "damagePercentage": 6980,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 3169,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3490,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Time for Payback~",
+          "param": [
+            {
+              "desc": "{Skill:1411010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411010": {
+                  "attackData": [],
+                  "attributeInfliction": 11669,
+                  "damagePercentage": 27690,
+                  "damagePercentageGrowth": 2520,
+                  "etherPurify": 26670,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2520,
+                  "main": 27690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411010": {
+                  "attackData": [],
+                  "attributeInfliction": 11669,
+                  "damagePercentage": 27690,
+                  "damagePercentageGrowth": 2520,
+                  "etherPurify": 26670,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1090,
+                  "main": 23840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nFire a cannon shot forward, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Special Attack: Gummy Bombardment",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nThrow a bomb at the enemy, dealing <color=#F0D12B>Physical DMG</color>.\nUpon hitting an enemy with a heavy attack, it inflicts the <color=#FFFFFF>Sweet Scare</color> state.\nGains 2 <color=#FFFFFF>Sugar Points</color> upon activation.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Cavity Alert",
+          "potential": []
+        },
+        {
+          "desc": "After using <color=#FFFFFF>Dodge Counter: Time for Payback~</color>, <color=#FFFFFF>Quick Assist: Dessert Time</color>, <color=#FFFFFF>Assist Follow-Up: We Have Cookies</color>, or <color=#FFFFFF>Assist Follow-Up: Stuffed Hard Candy Shot</color>, or when a <color=#FFFFFF>Perfect Dodge</color> is triggered, press <IconMap:Icon_SpecialReady> to activate:\nQuickly throw a bomb at the enemy, dealing <color=#F0D12B>Physical DMG</color>.\nOn hitting an enemy with a heavy attack, it inflicts the <color=#FFFFFF>Sweet Scare</color> state.\nGains 2 <color=#FFFFFF>Sugar Points</color> upon activation.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Cavity Alert, Right Now!",
+          "potential": []
+        },
+        {
+          "desc": "The <color=#FFFFFF>Sweet Scare</color> state lasts for <color=#2BAD00>{CAL:16+AvatarSkillLevel(1)*2,1,2}</color>s, repeated triggers reset the duration.\nWhen an enemy affected by <color=#FFFFFF>Sweet Scare</color> is first hit by an active character using an attack of their attribute, <color=#FFFFFF>Flavor Match</color> is triggered against that enemy, changing the attribute of <color=#FFFFFF>Basic Attack: Sugarburst Sparkles</color> and <color=#FFFFFF>Basic Attack: Sugarburst Sparkles - Max</color> against that enemy to match that of the character who triggered Flavor Match.\nWhen <color=#FFFFFF>Sweet Scare</color> is triggered again on an enemy, their existing <color=#FFFFFF>Flavor Match</color> state is removed. The process can be repeated to change the attribute of <color=#FFFFFF>Basic Attack: Sugarburst Sparkles</color> and <color=#FFFFFF>Basic Attack: Sugarburst Sparkles - Max</color> again.",
+          "name": "Sweet Scare",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Gummy Bombardment",
+          "param": [
+            {
+              "desc": "{Skill:1411006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411006": {
+                  "attackData": [],
+                  "attributeInfliction": 4583,
+                  "damagePercentage": 5050,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4584,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 5050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411006": {
+                  "attackData": [],
+                  "attributeInfliction": 4583,
+                  "damagePercentage": 5050,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4584,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Cavity Alert",
+          "param": [
+            {
+              "desc": "{Skill:1411007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411007": {
+                  "attackData": [],
+                  "attributeInfliction": 48208,
+                  "damagePercentage": 42100,
+                  "damagePercentageGrowth": 3830,
+                  "etherPurify": 18000,
+                  "feverRecovery": 1888425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3830,
+                  "main": 42100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 42100,
+                  "stunRatioGrowth": 1920
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411007": {
+                  "attackData": [],
+                  "attributeInfliction": 48208,
+                  "damagePercentage": 42100,
+                  "damagePercentageGrowth": 3830,
+                  "etherPurify": 18000,
+                  "feverRecovery": 1888425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1920,
+                  "main": 42100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 42100,
+                  "stunRatioGrowth": 1920
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Cavity Alert, Right Now!",
+          "param": [
+            {
+              "desc": "{Skill:1411008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1411008": {
+                  "attackData": [],
+                  "attributeInfliction": 32462,
+                  "damagePercentage": 24140,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 6337,
+                  "feverRecovery": 1407450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2200,
+                  "main": 24140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26700,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1411008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1411008": {
+                  "attackData": [],
+                  "attributeInfliction": 32462,
+                  "damagePercentage": 24140,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 6337,
+                  "feverRecovery": 1407450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1220,
+                  "main": 26700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26700,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Sweet Scare",
+          "param": [
+            {
+              "desc": "{CAL:16+AvatarSkillLevel(1)*2,1,2}s",
+              "name": "Sweet Scare Duration",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1411001": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal>",
+      "name": "Basic Attack: Tanuki Claws (1st, 2nd, 3rd, 4th, and 5th hit)"
+    },
+    "1411002": {
+      "desc": "<IconMap:Icon_Normal> (Hold)",
+      "name": "Basic Attack: Tanuki Cloak"
+    },
+    "1411003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Gummy Bombardment"
+    },
+    "1411004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Cavity Alert"
+    },
+    "1411005": {
+      "desc": "<IconMap:Icon_SpecialReady> (After using Assist Follow-Up: Stuffed Hard Candy Shot, Assist Follow-Up: We Have Cookies, Quick Assist: Dessert Time, and Dodge Counter: Time for Payback~, or after a Perfect Dodge)",
+      "name": "EX Special Attack: Cavity Alert, Right Now!"
+    },
+    "1411006": {
+      "desc": "<IconMap:Icon_Evade>",
+      "name": "Dodge: Did I Scare You?"
+    },
+    "1411007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Time for Payback~"
+    },
+    "1411008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Prank Assault"
+    },
+    "1411009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Surrender or Suffer the Mischief"
+    },
+    "1411010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Dessert Time"
+    },
+    "1411011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Replenish Your Fun"
+    },
+    "1411012": {
+      "desc": "<IconMap:Icon_Normal> (After a Defensive Assist or successfully parrying an enemy attack with Basic Attack: Tanuki Cloak)",
+      "name": "Assist Follow-Up: We Have Cookies"
+    },
+    "1411013": {
+      "desc": "<IconMap:Icon_Normal> (At the right moment after a Defensive Assist or successfully parrying an enemy attack with Basic Attack: Tanuki Cloak)",
+      "name": "Assist Follow-Up: Stuffed Hard Candy Shot"
+    }
+  },
+  "skin": {
+    "3114110": {
+      "desc": "Can you tell what the umbrella conceals? A tanuki, a trap, a ghost, or a girl's sly, spirited smile?",
+      "name": "Yuzuha: Tanuki Under the Shade"
+    },
+    "3114111": {
+      "desc": "Ghost stories aren't born only in shadows. Unconvinced? Just lock eyes with that playful young lady splashing in the water. She'll possess your thoughts, while Kama sneaks away with your drink.",
+      "name": "Yuzuha: Tanuki in Broad Daylight"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "04",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, off-field support",
+    "All-around boosts to Anomaly team rotation and DMG",
+    "Increases squadmates' Anomaly Buildup Rate"
+  ],
+  "talent": {
+    "1": {
+      "desc": "Yuzuha regains 30 Energy when she enters the battlefield. In Investigation Zone Mode, this effect can trigger at most once every 180s. Enemies in the <color=#FFFFFF>Sweet Scare</color> state have their All-Attribute RES reduced by 10%. The Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG buff from her <color=#FFFFFF>Additional Ability</color> is increased to 130% of its original value.",
+      "desc2": "\"Ugh, I'm done for!\"\n\"Yuzuha, you failed too? ...Hold up, a 92?! Are you seriously telling me you guessed your way to that score? You're just showing off!\"\n\"No, seriously! Luck only works if you don't overdo it. I had no reason to get such a high score on this one... I can feel it — there's no way the next test will have multiple choice!\"",
+      "name": "Lucky Constitution"
+    },
+    "2": {
+      "desc": "When Yuzuha's <color=#FFFFFF>EX Special Attack: Cavity Alert</color>, <color=#FFFFFF>EX Special Attack: Cavity Alert, Right Now!</color>, or <color=#FFFFFF>Ultimate: Surrender or Suffer the Mischief</color> hits an enemy, all squad members' DMG increases by 15% and Anomaly Buildup Rate by 15%, lasting 40s and repeated triggers reset the duration. When a heavy attack hits an enemy that is not Stunned, it will trigger a forced <color=#FFFFFF>Chain Attack</color>. <color=#FFFFFF>Chain Attacks</color> triggered this way have reduced Interrupt Level and forced <color=#FFFFFF>Chain Attacks</color> can only occur once every 20s. Whenever another character enters through a <color=#FFFFFF>Chain Attack</color>, Yuzuha gains 1 <color=#FFFFFF>Sugar Points</color>. Yuzuha's <color=#FFFFFF>Basic Attack: Hard Candy Shot</color> cooldown is reduced by 25%.",
+      "desc2": "\"Kama, you've never left my sight, but how did you swap so many things like just like that?\"\n\"Heh heh~ Kama's got a lot of friends too! Come on out, everyone! Let me introduce them — left to right: Takenosuke, Inosuke, Hyakunosuke...\"\n\"Wait, you're going too fast!\"\n\"Okay, one more time: Shinnosuke, Kinosuke, Harunosuke...\"\n\"Those names are completely different!\"",
+      "name": "Full of Colorful Company"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"...The princess led a busy life. At sunrise, her silent and stoic maids would adorn her with lavish garments, a weighty magical crown, and layers of jewelry before guiding her to the throne where she used her powers to turn mundane stones into priceless gems.\"\n\"Does the princess really have to turn stones into gems every single day? That sounds even more boring than doing homework while minding the shop.\"\n\"Well... if she doesn't, the poor kingdom will collapse.\"\n\"If a kingdom can only survive by overworking the princess, then let it collapse!\"\nShe bursts into laughter. Yes — let such a useless kingdom fall.",
+      "name": "Fairytale of the Haunted City"
+    },
+    "4": {
+      "desc": "The DMG of Yuzuha's <color=#FFFFFF>Assist Follow-Up: Stuffed Hard Candy Shot</color> and <color=#FFFFFF>Assist Follow-Up: We Have Cookies</color> increases by 30%, Anomaly Buildup Rate by 20%, and triggers a <color=#FFFFFF>Quick Assist</color> when it hits an enemy.",
+      "desc2": "The girl I saw through the narrow vent shone like she'd stepped right out of a fairytale.\nShe was the real princess — and I was just a prisoner.\nLord, she has so much already... would it be so wrong if I had just a tiny bit of it too?\nThat's when the hairpin silently fell.",
+      "name": "Falling Magic"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The day the TOPS executives and the Inspection Team arrived, she and Manato had just returned from school. Their airship had to circle overhead for ages, waiting for a place to land because the guests' vehicles took priority. Sweating as they hurried across the skybridge, they passed just above a throng of reporters surrounding the guests. That's when she spotted the girl. That night, she had a dream: it was her being swarmed by reporters, walking that same path under the bridge. And at the end of it... stood a throne, waiting just for her.\nIt had been a long time since she'd had a dream like that. She got up for a drink of water, replaying the words she'd overheard during the day: \"A so-called expert Inspection Team, and they've got some rich girl tagging along just for show!\"\n\"Kama, Kama!\" She cracked open the window and whispered. A fuzzy little face popped up instantly from outside. \"I've got a great idea. Tomorrow night... let's go do something fun.\"",
+      "name": "Dreams of a Fading Winter"
+    },
+    "6": {
+      "desc": "Gain 1 additional <color=#FFFFFF>Sugar Points</color> when successfully parrying an enemy attack using a <color=#FFFFFF>Defensive Assist</color> or <color=#FFFFFF>Basic Attack: Tanuki Cloak</color>. When using <color=#FFFFFF>Assist Follow-Up: Stuffed Hard Candy Shot</color>, hold <IconMap:Icon_Normal> to charge for up to 0.8 seconds. Releasing <IconMap:Icon_Normal> or reaching full charge fires an extra powerful shell at the enemy. For every 0.4s charged, Yuzuha consumes 1 <color=#FFFFFF>Sugar Point</color> to fire an additional powerful shell, each dealing 300% of her ATK as <color=#F0D12B>Physical DMG</color>. If any powerful shell from <color=#FFFFFF>Assist Follow-Up: Stuffed Hard Candy Shot</color> hits an enemy, all squad members' <color=#FFFFFF>Disorder</color> DMG Multiplier increases by 105% for 40s, and stacking up to 3 times, with each stack duration being calculated separately. In addition, if the powerful shell hits an enemy under <color=#FFFFFF>Sweet Scare</color>, it'll trigger 1 <color=#FFFFFF>Basic Attack: Sugarburst Sparkles - Max</color> attack. If Yuzuha is attacked while charging, she will automatically dodge the attack and immediately unleash the max-charged attack.",
+      "desc2": "The night the hearing ended, Baorong said they should celebrate Kaede getting a scholarship, so Mystic Wares closed early and the whole family went to Yum Cha Sin.\nDuring the meal, her brother called from the far-off Faunus Quarter to offer his congratulations. While Sumire and A-Wen animatedly recounted the day's events: a calico cat at school had lost her kitten, and no one could find it — until, miraculously, it came back on its own at noon.\nOn the phone, her brother sighed, \"A-Wen, every time I ask about your grades, you change the subject. If Dad and Yuzuha won't say anything, then I will!\"\nEveryone laughed — except Baorong, who just kept murmuring, \"It came back, that's what matters... that it came back...\"",
+      "name": "Put Down Roots"
+    }
+  },
+  "weaponType": {
+    "4": "Support"
+  }
+}

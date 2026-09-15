@@ -1,0 +1,1629 @@
+{
+  "camp": {
+    "15": "Phaethon"
+  },
+  "elementType": {
+    "205": "Ether"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Ether DMG Bonus"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1551,
+  "locale": "en",
+  "name": "Pyrois",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1551017", "1551018", "1551019", "1551020", "1551021"],
+      "basic": [
+        "1551001",
+        "1551002",
+        "1551003",
+        "1551004",
+        "1551005",
+        "1551006",
+        "1551007"
+      ],
+      "chain": ["1551012", "1551013", "1551014", "1551015", "1551016"],
+      "dodge": ["1551010", "1551011"],
+      "special": ["1551008", "1551009", "1551022"]
+    },
+    "parameterRowsById": {
+      "1551001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/3"
+      ],
+      "1551002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1551003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1551004": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1551005": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1551006": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1551007": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1551008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1551009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1551010": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1551011": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1551012": [
+        "/skill/chain/description/5/param/0",
+        "/skill/chain/description/5/param/1"
+      ],
+      "1551013": [
+        "/skill/chain/description/8/param/0",
+        "/skill/chain/description/8/param/1"
+      ],
+      "1551014": [
+        "/skill/chain/description/7/param/0",
+        "/skill/chain/description/7/param/1"
+      ],
+      "1551015": [
+        "/skill/chain/description/6/param/0",
+        "/skill/chain/description/6/param/1"
+      ],
+      "1551016": [
+        "/skill/chain/description/9/param/0",
+        "/skill/chain/description/9/param/1"
+      ],
+      "1551017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1551018": ["/skill/assist/description/4/param/0"],
+      "1551019": ["/skill/assist/description/4/param/1"],
+      "1551020": ["/skill/assist/description/4/param/2"],
+      "1551021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1551022": ["/skill/special/description/5/param/0"]
+    }
+  },
+  "partnerInfo": {},
+  "passive": {
+    "level": {
+      "1551501": {
+        "desc": [
+          "Upon entering battle, Pyrois gains 30 <Term:1000018>Solar Prominence</Term>. This effect can trigger once every 180s in Investigation Zone mode. Landing different attacks on enemies grants a certain amount of <color=#FFFFFF>Solar Prominence</color>, and Pyrois also gains 0.5 <color=#FFFFFF>Solar Prominence</color> every second while in-combat, up to a max of 60.\nWhen Pyrois uses different Ultimates, they gain the following effects:\nUpper Branch - Ultimate: Total Annihilation: Gains 30 Solar Prominence and enters the <Term:1000019>Mirage</Term> state. While in the Mirage state, Pyrois' Ultimate deals 40% increased CRIT DMG against Stunned enemies, and with 30 or more Solar Prominence, hold <IconMap:Icon_Normal> during the 4th hit of Basic Attack: Celestial Light to immediately follow up with the 3rd hit of Basic Attack: Celestial Light. This effect lasts 21s. Repeated triggers reset the duration.\nLower Branch - Ultimate: Triumphant Return: Enters the <Term:1000020>Sunflare</Term> state. While in the Sunflare state, Energy Generation Rate increases by 15%, DMG dealt increases by <color=#2BAD00>20%</color>, and triggering a Perfect Block with an EX Special Attack grants 10 Solar Prominence. This effect lasts 200s. Repeated triggers reset the duration.\nLeft Branch - Ultimate: Unbound Swordstorm: When this skill's heavy attack hits an enemy in the Contamination state, it deals <color=#2BAD00>450%</color> of ATK as additional DMG.\nRight Branch - Ultimate: Eternal Imprisonment: When this skill's heavy attack hits a Stunned enemy, the <Term:1000021>Totalize</Term> effect is triggered, dealing <color=#2BAD00>1,125%</color> of ATK as additional DMG. Upon activating this skill, the Stun duration of all currently Stunned enemies is extended by 3s. After landing the finishing move, the enemy's Stunned state ends.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nPyrois' CRIT DMG increases by 40%.\nUsing a Chain Attack grants 300 <color=#FFFFFF>Decibels</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Radiant Chariot",
+          "Additional Ability: Glorious Legion"
+        ],
+        "potential": []
+      },
+      "1551502": {
+        "desc": [
+          "Upon entering battle, Pyrois gains 30 <Term:1000018>Solar Prominence</Term>. This effect can trigger once every 180s in Investigation Zone mode. Landing different attacks on enemies grants a certain amount of <color=#FFFFFF>Solar Prominence</color>, and Pyrois also gains 0.5 <color=#FFFFFF>Solar Prominence</color> every second while in-combat, up to a max of 60.\nWhen Pyrois uses different Ultimates, they gain the following effects:\nUpper Branch - Ultimate: Total Annihilation: Gains 30 Solar Prominence and enters the <Term:1000019>Mirage</Term> state. While in the Mirage state, Pyrois' Ultimate deals 40% increased CRIT DMG against Stunned enemies, and with 30 or more Solar Prominence, hold <IconMap:Icon_Normal> during the 4th hit of Basic Attack: Celestial Light to immediately follow up with the 3rd hit of Basic Attack: Celestial Light. This effect lasts 21s. Repeated triggers reset the duration.\nLower Branch - Ultimate: Triumphant Return: Enters the <Term:1000020>Sunflare</Term> state. While in the Sunflare state, Energy Generation Rate increases by 15%, DMG dealt increases by <color=#2BAD00>23.4%</color>, and triggering a Perfect Block with an EX Special Attack grants 10 Solar Prominence. This effect lasts 200s. Repeated triggers reset the duration.\nLeft Branch - Ultimate: Unbound Swordstorm: When this skill's heavy attack hits an enemy in the Contamination state, it deals <color=#2BAD00>525%</color> of ATK as additional DMG.\nRight Branch - Ultimate: Eternal Imprisonment: When this skill's heavy attack hits a Stunned enemy, the <Term:1000021>Totalize</Term> effect is triggered, dealing <color=#2BAD00>1,312%</color> of ATK as additional DMG. Upon activating this skill, the Stun duration of all currently Stunned enemies is extended by 3s. After landing the finishing move, the enemy's Stunned state ends.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nPyrois' CRIT DMG increases by 40%.\nUsing a Chain Attack grants 300 <color=#FFFFFF>Decibels</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Radiant Chariot",
+          "Additional Ability: Glorious Legion"
+        ],
+        "potential": []
+      },
+      "1551503": {
+        "desc": [
+          "Upon entering battle, Pyrois gains 30 <Term:1000018>Solar Prominence</Term>. This effect can trigger once every 180s in Investigation Zone mode. Landing different attacks on enemies grants a certain amount of <color=#FFFFFF>Solar Prominence</color>, and Pyrois also gains 0.5 <color=#FFFFFF>Solar Prominence</color> every second while in-combat, up to a max of 60.\nWhen Pyrois uses different Ultimates, they gain the following effects:\nUpper Branch - Ultimate: Total Annihilation: Gains 30 Solar Prominence and enters the <Term:1000019>Mirage</Term> state. While in the Mirage state, Pyrois' Ultimate deals 40% increased CRIT DMG against Stunned enemies, and with 30 or more Solar Prominence, hold <IconMap:Icon_Normal> during the 4th hit of Basic Attack: Celestial Light to immediately follow up with the 3rd hit of Basic Attack: Celestial Light. This effect lasts 21s. Repeated triggers reset the duration.\nLower Branch - Ultimate: Triumphant Return: Enters the <Term:1000020>Sunflare</Term> state. While in the Sunflare state, Energy Generation Rate increases by 15%, DMG dealt increases by <color=#2BAD00>26.8%</color>, and triggering a Perfect Block with an EX Special Attack grants 10 Solar Prominence. This effect lasts 200s. Repeated triggers reset the duration.\nLeft Branch - Ultimate: Unbound Swordstorm: When this skill's heavy attack hits an enemy in the Contamination state, it deals <color=#2BAD00>600%</color> of ATK as additional DMG.\nRight Branch - Ultimate: Eternal Imprisonment: When this skill's heavy attack hits a Stunned enemy, the <Term:1000021>Totalize</Term> effect is triggered, dealing <color=#2BAD00>1,499%</color> of ATK as additional DMG. Upon activating this skill, the Stun duration of all currently Stunned enemies is extended by 3s. After landing the finishing move, the enemy's Stunned state ends.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nPyrois' CRIT DMG increases by 40%.\nUsing a Chain Attack grants 300 <color=#FFFFFF>Decibels</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Radiant Chariot",
+          "Additional Ability: Glorious Legion"
+        ],
+        "potential": []
+      },
+      "1551504": {
+        "desc": [
+          "Upon entering battle, Pyrois gains 30 <Term:1000018>Solar Prominence</Term>. This effect can trigger once every 180s in Investigation Zone mode. Landing different attacks on enemies grants a certain amount of <color=#FFFFFF>Solar Prominence</color>, and Pyrois also gains 0.5 <color=#FFFFFF>Solar Prominence</color> every second while in-combat, up to a max of 60.\nWhen Pyrois uses different Ultimates, they gain the following effects:\nUpper Branch - Ultimate: Total Annihilation: Gains 30 Solar Prominence and enters the <Term:1000019>Mirage</Term> state. While in the Mirage state, Pyrois' Ultimate deals 40% increased CRIT DMG against Stunned enemies, and with 30 or more Solar Prominence, hold <IconMap:Icon_Normal> during the 4th hit of Basic Attack: Celestial Light to immediately follow up with the 3rd hit of Basic Attack: Celestial Light. This effect lasts 21s. Repeated triggers reset the duration.\nLower Branch - Ultimate: Triumphant Return: Enters the <Term:1000020>Sunflare</Term> state. While in the Sunflare state, Energy Generation Rate increases by 15%, DMG dealt increases by <color=#2BAD00>30.2%</color>, and triggering a Perfect Block with an EX Special Attack grants 10 Solar Prominence. This effect lasts 200s. Repeated triggers reset the duration.\nLeft Branch - Ultimate: Unbound Swordstorm: When this skill's heavy attack hits an enemy in the Contamination state, it deals <color=#2BAD00>675%</color> of ATK as additional DMG.\nRight Branch - Ultimate: Eternal Imprisonment: When this skill's heavy attack hits a Stunned enemy, the <Term:1000021>Totalize</Term> effect is triggered, dealing <color=#2BAD00>1,686%</color> of ATK as additional DMG. Upon activating this skill, the Stun duration of all currently Stunned enemies is extended by 3s. After landing the finishing move, the enemy's Stunned state ends.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nPyrois' CRIT DMG increases by 40%.\nUsing a Chain Attack grants 300 <color=#FFFFFF>Decibels</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Radiant Chariot",
+          "Additional Ability: Glorious Legion"
+        ],
+        "potential": []
+      },
+      "1551505": {
+        "desc": [
+          "Upon entering battle, Pyrois gains 30 <Term:1000018>Solar Prominence</Term>. This effect can trigger once every 180s in Investigation Zone mode. Landing different attacks on enemies grants a certain amount of <color=#FFFFFF>Solar Prominence</color>, and Pyrois also gains 0.5 <color=#FFFFFF>Solar Prominence</color> every second while in-combat, up to a max of 60.\nWhen Pyrois uses different Ultimates, they gain the following effects:\nUpper Branch - Ultimate: Total Annihilation: Gains 30 Solar Prominence and enters the <Term:1000019>Mirage</Term> state. While in the Mirage state, Pyrois' Ultimate deals 40% increased CRIT DMG against Stunned enemies, and with 30 or more Solar Prominence, hold <IconMap:Icon_Normal> during the 4th hit of Basic Attack: Celestial Light to immediately follow up with the 3rd hit of Basic Attack: Celestial Light. This effect lasts 21s. Repeated triggers reset the duration.\nLower Branch - Ultimate: Triumphant Return: Enters the <Term:1000020>Sunflare</Term> state. While in the Sunflare state, Energy Generation Rate increases by 15%, DMG dealt increases by <color=#2BAD00>33.6%</color>, and triggering a Perfect Block with an EX Special Attack grants 10 Solar Prominence. This effect lasts 200s. Repeated triggers reset the duration.\nLeft Branch - Ultimate: Unbound Swordstorm: When this skill's heavy attack hits an enemy in the Contamination state, it deals <color=#2BAD00>750%</color> of ATK as additional DMG.\nRight Branch - Ultimate: Eternal Imprisonment: When this skill's heavy attack hits a Stunned enemy, the <Term:1000021>Totalize</Term> effect is triggered, dealing <color=#2BAD00>1,873%</color> of ATK as additional DMG. Upon activating this skill, the Stun duration of all currently Stunned enemies is extended by 3s. After landing the finishing move, the enemy's Stunned state ends.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nPyrois' CRIT DMG increases by 40%.\nUsing a Chain Attack grants 300 <color=#FFFFFF>Decibels</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Radiant Chariot",
+          "Additional Ability: Glorious Legion"
+        ],
+        "potential": []
+      },
+      "1551506": {
+        "desc": [
+          "Upon entering battle, Pyrois gains 30 <Term:1000018>Solar Prominence</Term>. This effect can trigger once every 180s in Investigation Zone mode. Landing different attacks on enemies grants a certain amount of <color=#FFFFFF>Solar Prominence</color>, and Pyrois also gains 0.5 <color=#FFFFFF>Solar Prominence</color> every second while in-combat, up to a max of 60.\nWhen Pyrois uses different Ultimates, they gain the following effects:\nUpper Branch - Ultimate: Total Annihilation: Gains 30 Solar Prominence and enters the <Term:1000019>Mirage</Term> state. While in the Mirage state, Pyrois' Ultimate deals 40% increased CRIT DMG against Stunned enemies, and with 30 or more Solar Prominence, hold <IconMap:Icon_Normal> during the 4th hit of Basic Attack: Celestial Light to immediately follow up with the 3rd hit of Basic Attack: Celestial Light. This effect lasts 21s. Repeated triggers reset the duration.\nLower Branch - Ultimate: Triumphant Return: Enters the <Term:1000020>Sunflare</Term> state. While in the Sunflare state, Energy Generation Rate increases by 15%, DMG dealt increases by <color=#2BAD00>37%</color>, and triggering a Perfect Block with an EX Special Attack grants 10 Solar Prominence. This effect lasts 200s. Repeated triggers reset the duration.\nLeft Branch - Ultimate: Unbound Swordstorm: When this skill's heavy attack hits an enemy in the Contamination state, it deals <color=#2BAD00>825%</color> of ATK as additional DMG.\nRight Branch - Ultimate: Eternal Imprisonment: When this skill's heavy attack hits a Stunned enemy, the <Term:1000021>Totalize</Term> effect is triggered, dealing <color=#2BAD00>2,060%</color> of ATK as additional DMG. Upon activating this skill, the Stun duration of all currently Stunned enemies is extended by 3s. After landing the finishing move, the enemy's Stunned state ends.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nPyrois' CRIT DMG increases by 40%.\nUsing a Chain Attack grants 300 <color=#FFFFFF>Decibels</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Radiant Chariot",
+          "Additional Ability: Glorious Legion"
+        ],
+        "potential": []
+      },
+      "1551507": {
+        "desc": [
+          "Upon entering battle, Pyrois gains 30 <Term:1000018>Solar Prominence</Term>. This effect can trigger once every 180s in Investigation Zone mode. Landing different attacks on enemies grants a certain amount of <color=#FFFFFF>Solar Prominence</color>, and Pyrois also gains 0.5 <color=#FFFFFF>Solar Prominence</color> every second while in-combat, up to a max of 60.\nWhen Pyrois uses different Ultimates, they gain the following effects:\nUpper Branch - Ultimate: Total Annihilation: Gains 30 Solar Prominence and enters the <Term:1000019>Mirage</Term> state. While in the Mirage state, Pyrois' Ultimate deals 40% increased CRIT DMG against Stunned enemies, and with 30 or more Solar Prominence, hold <IconMap:Icon_Normal> during the 4th hit of Basic Attack: Celestial Light to immediately follow up with the 3rd hit of Basic Attack: Celestial Light. This effect lasts 21s. Repeated triggers reset the duration.\nLower Branch - Ultimate: Triumphant Return: Enters the <Term:1000020>Sunflare</Term> state. While in the Sunflare state, Energy Generation Rate increases by 15%, DMG dealt increases by <color=#2BAD00>40%</color>, and triggering a Perfect Block with an EX Special Attack grants 10 Solar Prominence. This effect lasts 200s. Repeated triggers reset the duration.\nLeft Branch - Ultimate: Unbound Swordstorm: When this skill's heavy attack hits an enemy in the Contamination state, it deals <color=#2BAD00>900%</color> of ATK as additional DMG.\nRight Branch - Ultimate: Eternal Imprisonment: When this skill's heavy attack hits a Stunned enemy, the <Term:1000021>Totalize</Term> effect is triggered, dealing <color=#2BAD00>2,250%</color> of ATK as additional DMG. Upon activating this skill, the Stun duration of all currently Stunned enemies is extended by 3s. After landing the finishing move, the enemy's Stunned state ends.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Support</color> character:\nPyrois' CRIT DMG increases by 40%.\nUsing a Chain Attack grants 300 <color=#FFFFFF>Decibels</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Radiant Chariot",
+          "Additional Ability: Glorious Legion"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nLaunches a series of attacks against the target, dealing <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Duskguard",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Ironhide Behemoth",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nPerforms a forward thrust attack, dealing <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, press or hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Return to Daylight",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Duskguard",
+          "param": [
+            {
+              "desc": "{Skill:1551017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551017": {
+                  "attackData": [12674],
+                  "attributeInfliction": 3168,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 3169,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9920,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3490,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551017": {
+                  "attackData": [12674],
+                  "attributeInfliction": 3168,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 3169,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9920,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3490,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Ironhide Behemoth",
+          "param": [
+            {
+              "desc": "{Skill:1551018, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1551018": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551019, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1551019": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551020, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1551020": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Return to Daylight",
+          "param": [
+            {
+              "desc": "{Skill:1551021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551021": {
+                  "attackData": [21327],
+                  "attributeInfliction": 24117,
+                  "damagePercentage": 33860,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 10664,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3080,
+                  "main": 33860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24420,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551021": {
+                  "attackData": [21327],
+                  "attributeInfliction": 24117,
+                  "damagePercentage": 33860,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 10664,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 24420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24420,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nPerforms up to three attacks forward, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Basic Attack: Emberglow",
+          "potential": []
+        },
+        {
+          "desc": "With 30 or more <Term:1000018>Solar Prominence</Term>, hold <IconMap:Icon_Normal> to activate:\nUnleashes up to four attacks forward, dealing massive <color=#FE437E>Ether DMG</color>.\nIf another character is switched in during the 3rd hit, Pyrois automatically performs the 4th hit off-field.\nEach hit consumes a certain amount of Solar Prominence.\nCharacter is invulnerable during the 3rd and 4th hits.",
+          "name": "Basic Attack: Celestial Light",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Emberglow",
+          "param": [
+            {
+              "desc": "{Skill:1551001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1551001": {
+                  "attackData": [14001],
+                  "attributeInfliction": 2800,
+                  "damagePercentage": 4560,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2801,
+                  "feverRecovery": 77275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 4560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3090,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1551002": {
+                  "attackData": [15321],
+                  "attributeInfliction": 3797,
+                  "damagePercentage": 6410,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 3798,
+                  "feverRecovery": 104500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 6410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4180,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1551003": {
+                  "attackData": [62014],
+                  "attributeInfliction": 16236,
+                  "damagePercentage": 27630,
+                  "damagePercentageGrowth": 2520,
+                  "etherPurify": 16237,
+                  "feverRecovery": 446600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2520,
+                  "main": 27630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 50830,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17860,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1551001": {
+                  "attackData": [14001],
+                  "attributeInfliction": 2800,
+                  "damagePercentage": 4560,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2801,
+                  "feverRecovery": 77275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3090,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1551002": {
+                  "attackData": [15321],
+                  "attributeInfliction": 3797,
+                  "damagePercentage": 6410,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 3798,
+                  "feverRecovery": 104500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4180,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1551003": {
+                  "attackData": [62014],
+                  "attributeInfliction": 16236,
+                  "damagePercentage": 27630,
+                  "damagePercentageGrowth": 2520,
+                  "etherPurify": 16237,
+                  "feverRecovery": 446600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 50830,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17860,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Celestial Light",
+          "param": [
+            {
+              "desc": "{Skill:1551004, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1551004": {
+                  "attackData": [0, 15007],
+                  "attributeInfliction": 4747,
+                  "damagePercentage": 10700,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 5064,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551005, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1551005": {
+                  "attackData": [0, 20459],
+                  "attributeInfliction": 7860,
+                  "damagePercentage": 14380,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 8286,
+                  "feverRecovery": 216425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1310,
+                  "main": 14380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8650,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551006, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1551006": {
+                  "attackData": [0, 146107],
+                  "attributeInfliction": 16996,
+                  "damagePercentage": 54900,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 16256,
+                  "feverRecovery": 467500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5000,
+                  "main": 54900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551007, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1551007": {
+                  "attackData": [0, 118234],
+                  "attributeInfliction": 12561,
+                  "damagePercentage": 64100,
+                  "damagePercentageGrowth": 5830,
+                  "etherPurify": 12562,
+                  "feverRecovery": 345675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5830,
+                  "main": 64100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13820,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551004, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1551004": {
+                  "attackData": [0, 15007],
+                  "attributeInfliction": 4747,
+                  "damagePercentage": 10700,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 5064,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551005, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1551005": {
+                  "attackData": [0, 20459],
+                  "attributeInfliction": 7860,
+                  "damagePercentage": 14380,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 8286,
+                  "feverRecovery": 216425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8650,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551006, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1551006": {
+                  "attackData": [0, 146107],
+                  "attributeInfliction": 16996,
+                  "damagePercentage": 54900,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 16256,
+                  "feverRecovery": 467500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 18700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551007, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1551007": {
+                  "attackData": [0, 118234],
+                  "attributeInfliction": 12561,
+                  "damagePercentage": 64100,
+                  "damagePercentageGrowth": 5830,
+                  "etherPurify": 12562,
+                  "feverRecovery": 345675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13820,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nPerforms a coordinated attack with Phaethon, dealing massive <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, press or hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Ceremonial March",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at or above <color=#FFFFFF>Blasting</color>, press <IconMap:Icon_UltimateReady> and select the upper branch to activate:\nAfter charging, performs a downward slash, dealing massive <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, press or hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Total Annihilation",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at or above <color=#FFFFFF>Blasting</color>, press <IconMap:Icon_UltimateReady> and select the lower branch to activate:\nReleases an energy burst in the surrounding area, dealing massive <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Triumphant Return",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at or above <color=#FFFFFF>Blasting</color>, press <IconMap:Icon_UltimateReady> and select the left branch to activate:\nUnleashes consecutive attacks forward, dealing massive <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Unbound Swordstorm",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at or above <color=#FFFFFF>Blasting</color>, press <IconMap:Icon_UltimateReady> and select the right branch to activate:\nGathers energy ahead before unleashing a Finishing Move, dealing massive <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Eternal Imprisonment",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Ceremonial March",
+          "param": [
+            {
+              "desc": "{Skill:1551012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551012": {
+                  "attackData": [0],
+                  "attributeInfliction": 46453,
+                  "damagePercentage": 105830,
+                  "damagePercentageGrowth": 9630,
+                  "etherPurify": 26504,
+                  "feverRecovery": 2557775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9630,
+                  "main": 105830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29160,
+                  "stunRatioGrowth": 1330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551012": {
+                  "attackData": [0],
+                  "attributeInfliction": 46453,
+                  "damagePercentage": 105830,
+                  "damagePercentageGrowth": 9630,
+                  "etherPurify": 26504,
+                  "feverRecovery": 2557775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1330,
+                  "main": 29160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29160,
+                  "stunRatioGrowth": 1330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Total Annihilation",
+          "param": [
+            {
+              "desc": "{Skill:1551015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551015": {
+                  "attackData": [0],
+                  "attributeInfliction": 24329,
+                  "damagePercentage": 86620,
+                  "damagePercentageGrowth": 7880,
+                  "etherPurify": 59330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7880,
+                  "main": 86620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26770,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551015": {
+                  "attackData": [0],
+                  "attributeInfliction": 24329,
+                  "damagePercentage": 86620,
+                  "damagePercentageGrowth": 7880,
+                  "etherPurify": 59330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1220,
+                  "main": 26770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26770,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Triumphant Return",
+          "param": [
+            {
+              "desc": "{Skill:1551014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551014": {
+                  "attackData": [0],
+                  "attributeInfliction": 11503,
+                  "damagePercentage": 53570,
+                  "damagePercentageGrowth": 4870,
+                  "etherPurify": 11504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4870,
+                  "main": 53570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12660,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551014": {
+                  "attackData": [0],
+                  "attributeInfliction": 11503,
+                  "damagePercentage": 53570,
+                  "damagePercentageGrowth": 4870,
+                  "etherPurify": 11504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 12660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12660,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Unbound Swordstorm",
+          "param": [
+            {
+              "desc": "{Skill:1551013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551013": {
+                  "attackData": [0],
+                  "attributeInfliction": 30663,
+                  "damagePercentage": 97330,
+                  "damagePercentageGrowth": 8850,
+                  "etherPurify": 65664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 8850,
+                  "main": 97330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33730,
+                  "stunRatioGrowth": 1540
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551013": {
+                  "attackData": [0],
+                  "attributeInfliction": 30663,
+                  "damagePercentage": 97330,
+                  "damagePercentageGrowth": 8850,
+                  "etherPurify": 65664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1540,
+                  "main": 33730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33730,
+                  "stunRatioGrowth": 1540
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Eternal Imprisonment",
+          "param": [
+            {
+              "desc": "{Skill:1551016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551016": {
+                  "attackData": [0],
+                  "attributeInfliction": 22836,
+                  "damagePercentage": 99700,
+                  "damagePercentageGrowth": 9070,
+                  "etherPurify": 57837,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9070,
+                  "main": 99700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25130,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551016": {
+                  "attackData": [0],
+                  "attributeInfliction": 22836,
+                  "damagePercentage": 99700,
+                  "damagePercentageGrowth": 9070,
+                  "etherPurify": 57837,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 25130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25130,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Twilight",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nDelivers a quick slash forward, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Dash Attack: Sunrise",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nPerforms a forward spinning slash, dealing <color=#FE437E>Ether DMG</color>.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: First Light",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Sunrise",
+          "param": [
+            {
+              "desc": "{Skill:1551010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551010": {
+                  "attackData": [14661],
+                  "attributeInfliction": 3665,
+                  "damagePercentage": 9530,
+                  "damagePercentageGrowth": 870,
+                  "etherPurify": 3666,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 870,
+                  "main": 9530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11480,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551010": {
+                  "attackData": [14661],
+                  "attributeInfliction": 3665,
+                  "damagePercentage": 9530,
+                  "damagePercentageGrowth": 870,
+                  "etherPurify": 3666,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11480,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: First Light",
+          "param": [
+            {
+              "desc": "{Skill:1551011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551011": {
+                  "attackData": [23347],
+                  "attributeInfliction": 5836,
+                  "damagePercentage": 22870,
+                  "damagePercentageGrowth": 2080,
+                  "etherPurify": 20837,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2080,
+                  "main": 22870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17430,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551011": {
+                  "attackData": [23347],
+                  "attributeInfliction": 5836,
+                  "damagePercentage": 22870,
+                  "damagePercentageGrowth": 2080,
+                  "etherPurify": 20837,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 800,
+                  "main": 17430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17430,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nPerforms a rush attack, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Special Attack: Fading Rays",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nQuickly charges forward and performs a series of consecutive attacks, dealing massive <color=#FE437E>Ether DMG</color>.\nIf hit by an enemy attack during the charge, triggers a Perfect Block effect, nullifying the damage and increasing the move's Interrupt Level to that of a Heavy Defensive Assist.\nAfter using the skill and with 30 or more <Term:1000018>Solar Prominence</Term>, hold <IconMap:Icon_Normal> to immediately follow up with the 3rd hit of Basic Attack: Celestial Light.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Sun's Halo",
+          "potential": []
+        },
+        {
+          "desc": "When an <color=#FFFFFF>Ultimate</color> or <color=#FFFFFF>EX Special Attack: Sun's Halo</color> is used, Phaethon performs an assist attack, dealing <color=#FE437E>Ether DMG</color>. This effect can trigger once every 2.5s, and is guaranteed to trigger when using an <color=#FFFFFF>Ultimate</color>.",
+          "name": "Special Attack: Assault Directive",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Fading Rays",
+          "param": [
+            {
+              "desc": "{Skill:1551008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551008": {
+                  "attackData": [0],
+                  "attributeInfliction": 4001,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4002,
+                  "feverRecovery": 220275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4410,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551008": {
+                  "attackData": [0],
+                  "attributeInfliction": 4001,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4002,
+                  "feverRecovery": 220275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4410,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Sun's Halo",
+          "param": [
+            {
+              "desc": "{Skill:1551009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551009": {
+                  "attackData": [49987],
+                  "attributeInfliction": 43064,
+                  "damagePercentage": 73740,
+                  "damagePercentageGrowth": 6710,
+                  "etherPurify": 17497,
+                  "feverRecovery": 1485825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6710,
+                  "main": 73740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43360,
+                  "stunRatioGrowth": 1980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1551009": {
+                  "attackData": [49987],
+                  "attributeInfliction": 43064,
+                  "damagePercentage": 73740,
+                  "damagePercentageGrowth": 6710,
+                  "etherPurify": 17497,
+                  "feverRecovery": 1485825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1980,
+                  "main": 43360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43360,
+                  "stunRatioGrowth": 1980
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Assault Directive",
+          "param": [
+            {
+              "desc": "{Skill:1551022, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1551022": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8280,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 8280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "",
+          "param": [],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1551001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Emberglow"
+    },
+    "1551002": {
+      "desc": "<IconMap:Icon_Normal> (Hold)",
+      "name": "Basic Attack: Celestial Light"
+    },
+    "1551003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Fading Rays"
+    },
+    "1551004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Sun's Halo"
+    },
+    "1551005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Sunrise"
+    },
+    "1551006": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Daybreak"
+    },
+    "1551007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Ceremonial March"
+    },
+    "1551008": {
+      "desc": "<IconMap:Icon_UltimateReady> (Select Upper Branch)",
+      "name": "Ultimate: Total Annihilation"
+    },
+    "1551009": {
+      "desc": "<IconMap:Icon_UltimateReady> (Select Lower Branch)",
+      "name": "Ultimate: Triumphant Return"
+    },
+    "1551010": {
+      "desc": "<IconMap:Icon_UltimateReady> (Select Left Branch)",
+      "name": "Ultimate: Unbound Swordstorm"
+    },
+    "1551011": {
+      "desc": "<IconMap:Icon_UltimateReady> (Select Right Branch)",
+      "name": "Ultimate: Eternal Imprisonment"
+    },
+    "1551012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Duskguard"
+    },
+    "1551013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Ironhide Behemoth"
+    },
+    "1551014": {
+      "desc": "<IconMap:Icon_Pyroisl> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Return to Daylight"
+    }
+  },
+  "skin": {
+    "3115510": {
+      "desc": "The dying heat haze extinguished within the valley will one day be reborn from the sea. The beast that trampled fate beneath its feet will become the chariot that clears the path ahead.",
+      "name": "Pyrois: Dawn's Guardian"
+    }
+  },
+  "specialElementType": {},
+  "strategy": {},
+  "talent": {
+    "1": {
+      "desc": "Upon entering the battlefield, Pyrois gains 1,000 <color=#FFFFFF>Decibels</color>. This effect can trigger once every 180s in Investigation Zone mode. CRIT Rate increases by 8%.",
+      "desc2": "The dark night is a tide of shadow, drowning the fields of a fallen civilization.\nDeluded gods forge a blazing golden spear, seeking to pierce the throat of the abyss.",
+      "name": "Shadows of Twilight Past"
+    },
+    "2": {
+      "desc": "Using Ultimate: Triumphant Return grants 1,500 <color=#FFFFFF>Decibels</color>. This effect can trigger once every 180s. Pyrois's Decibel limit increases by 1,000.",
+      "desc2": "All forgotten stories and muffled cries sink into the arid sea behind a pair of eyes,\nawaiting a chariot ablaze with searing flames to roll across the lightless surface of the abyss.",
+      "name": "Blazing Cavalry"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The chariot shines in splendor, the scorched earth stretches without end.\nYet within the body of an innocent child grows a tyrant destined to consume all life.",
+      "name": "Chains of Fate"
+    },
+    "4": {
+      "desc": "When Pyrois triggers a Perfect Block with <color=#FFFFFF>EX Special Attack: Sun's Halo</color>, immediately gain shield equal to 8% of Max HP, lasting 10s. Repeated triggers reset the duration. Pyrois deals 10% extra Daze while shielded.",
+      "desc2": "Perhaps the beacon of first light can only be reached by passing through the darkest night. Perhaps every hero must walk a road of thorns.\nSo the forsaken child wanders in self-imposed exile, until the cursed fire burns away the final remains of their mortal shell.",
+      "name": "Balefire Horizon"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "The tyrant's crown is remade as a bridle, with silver-white iron wardens and gallant horses.\nThey guard the child who burns forever, crossing beyond the digital prison and the deceptions of the night.",
+      "name": "Youthful Guardian"
+    },
+    "6": {
+      "desc": "Mindscape Effect Hidden",
+      "desc2": "Dusk bleeds crimson, dawn soft as ever.\nThe morning star has risen above the horizon, wiping away the tears of childhood.\nIts soft sigh lingers like the closing rhyme of a poem.\nThe long night is but a prelude to sunrise.",
+      "name": "Morning Star at Dawn"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

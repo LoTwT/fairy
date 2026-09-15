@@ -8,6 +8,7 @@ export default defineConfig({
   trailingComma: "all",
   semi: false,
   endOfLine: "lf",
+  insertFinalNewline: true,
   proseWrap: "preserve",
   bracketSpacing: true,
   quoteProps: "consistent",

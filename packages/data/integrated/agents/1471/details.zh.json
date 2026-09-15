@@ -1,0 +1,2209 @@
+{
+  "camp": {
+    "12": "坎卜斯黑枝"
+  },
+  "elementType": {
+    "201": "火属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "暴击伤害"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "生命值"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "火属性伤害加成"
+    }
+  },
+  "hitType": {
+    "102": "打击"
+  },
+  "id": 1471,
+  "locale": "zh",
+  "name": "般岳",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1471022",
+        "1471023",
+        "1471024",
+        "1471025",
+        "1471026",
+        "1471029"
+      ],
+      "basic": [
+        "1471001",
+        "1471002",
+        "1471003",
+        "1471004",
+        "1471005",
+        "1471006",
+        "1471007",
+        "1471008",
+        "1471009",
+        "1471010",
+        "1471027"
+      ],
+      "chain": ["1471020", "1471021"],
+      "dodge": ["1471011", "1471018", "1471019"],
+      "special": [
+        "1471012",
+        "1471013",
+        "1471014",
+        "1471015",
+        "1471016",
+        "1471017"
+      ]
+    },
+    "parameterRowsById": {
+      "1471001": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/4"
+      ],
+      "1471002": [
+        "/skill/basic/description/6/param/1",
+        "/skill/basic/description/6/param/5"
+      ],
+      "1471003": [
+        "/skill/basic/description/6/param/2",
+        "/skill/basic/description/6/param/6"
+      ],
+      "1471004": [
+        "/skill/basic/description/6/param/3",
+        "/skill/basic/description/6/param/7"
+      ],
+      "1471005": [
+        "/skill/basic/description/7/param/0",
+        "/skill/basic/description/7/param/4"
+      ],
+      "1471006": [
+        "/skill/basic/description/7/param/1",
+        "/skill/basic/description/7/param/5"
+      ],
+      "1471007": [
+        "/skill/basic/description/7/param/2",
+        "/skill/basic/description/7/param/6"
+      ],
+      "1471008": [
+        "/skill/basic/description/7/param/3",
+        "/skill/basic/description/7/param/7"
+      ],
+      "1471009": [
+        "/skill/basic/description/9/param/0",
+        "/skill/basic/description/9/param/1"
+      ],
+      "1471010": [
+        "/skill/basic/description/10/param/0",
+        "/skill/basic/description/10/param/1"
+      ],
+      "1471011": ["/skill/dodge/description/5/param/0"],
+      "1471012": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1471013": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1471014": [
+        "/skill/special/description/10/param/0",
+        "/skill/special/description/10/param/1"
+      ],
+      "1471015": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ],
+      "1471016": [
+        "/skill/special/description/12/param/0",
+        "/skill/special/description/12/param/1"
+      ],
+      "1471017": [
+        "/skill/special/description/11/param/0",
+        "/skill/special/description/11/param/1"
+      ],
+      "1471018": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1471019": [
+        "/skill/dodge/description/7/param/0",
+        "/skill/dodge/description/7/param/1"
+      ],
+      "1471020": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1471021": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1471022": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1471023": ["/skill/assist/description/5/param/0"],
+      "1471024": ["/skill/assist/description/5/param/1"],
+      "1471025": ["/skill/assist/description/5/param/2"],
+      "1471026": [
+        "/skill/assist/description/6/param/0",
+        "/skill/assist/description/6/param/1"
+      ],
+      "1471027": [
+        "/skill/basic/description/8/param/0",
+        "/skill/basic/description/8/param/1"
+      ],
+      "1471029": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "7/24",
+    "fullName": "般岳",
+    "gender": "男",
+    "impressionF": "般岳师父虽然看起来很沉稳，其实意外地有脆弱的一面哦！上回他造访随便观时刚好闯进来一只老鼠，虽然他极力掩饰，但也能感受到他的不自在…",
+    "impressionM": "这么说我之前看有小孩子玩弹珠意外掉了一颗，般岳师父往那个方向多看了好几眼…感觉般岳师父私底下也有不太像武学大师的一面呢。",
+    "impressions": [
+      "对般岳的印象：\n · 智能构造体生活中的烦恼其一：安检怎么一直响",
+      " · 智能构造体生活中的烦恼其二：古董零件的养护",
+      " · 智能构造体生活中的烦恼其三：心的重量如何测量"
+    ],
+    "profileDesc": "般岳，一位在卫非地开设武馆、门下学徒众多的智能构造体，存活于世已有很长时间，人称「般岳师父」。他有着如石狮子般威严的外表，武艺高强，与云岿山现任门主仪玄有着多年的交情。\n\n作为武术高手，般岳寡言而可靠，行事风格与观念古朴，对门下习武的学徒严以管教，是因材施教、授人以渔的武学宗师。他有着名为「怒相」的战斗特殊形态，一旦开启，可将眼前邪祟尽皆诛伏。\n\n作为长期居住于卫非地的普通居民，平日的般岳则性格温和沉稳，不善情感表达，言辞举止颇有古人之风。他自知跟不上人类时尚潮流的发展，私下正学习着各类网络新潮用语中，然而因为理解不到位，时常会造成一些让人哭笑不得的误会。\n\n此外，般岳似乎很喜欢石墩子等球状物体。若与其独处因其沉默而陷入冷场，推荐以球状物来唤起其好奇心。",
+    "stature": "200",
+    "trustLv": {
+      "1": "般岳，一位在卫非地开设武馆、门下学徒众多的智能构造体，存活于世已有很长时间，人称「般岳师父」。他有着如石狮子般威严的外表，武艺高强，与云岿山现任门主仪玄有着多年的交情。\n\n作为武术高手，般岳寡言而可靠，行事风格与观念古朴，对门下习武的学徒严以管教，是因材施教、授人以渔的武学宗师。他有着名为「怒相」的战斗特殊形态，一旦开启，可将眼前邪祟尽皆诛伏。\n\n作为长期居住于卫非地的普通居民，平日的般岳则性格温和沉稳，不善情感表达，言辞举止颇有古人之风。他自知跟不上人类时尚潮流的发展，私下正学习着各类网络新潮用语中，然而因为理解不到位，时常会造成一些让人哭笑不得的误会。\n\n此外，般岳似乎很喜欢石墩子等球状物体。若与其独处因其沉默而陷入冷场，推荐以球状物来唤起其好奇心。",
+      "2": "",
+      "3": "般岳的真实身份，是多年前由TOPS秘密开发的、专门用于镇压秽息的杀戮机械，代号「肃灭单元·零型」。其所植入的算法指令会使其基于消灭秽息的最合理方案进行行动，这往往意味着他会无差别抹杀连同秽息与受灾民众在内的视线内所有可动目标。\n\n在某次行动失败后，作为杀戮机械的般岳被TOPS所遗弃，却又被某位莅临莱姆尼安空洞的智者遇到，改写了他的核心，为他构筑了新的智能逻辑，这也使得般岳逐渐拥有了自我意识。后面般岳被卫非地矿区旧址当时的居民们所接纳，让他融入了「为人」的生活。\n\n十年前矿区旧址秽息大爆发那次浩劫，般岳赶往救援民众，但在绝对合理化的算法逻辑的作用下舍弃了部分被判断为无法得救的居民。他救出了年幼的叶瞬光与叶释渊，却也种下了对自身「见死不救」罪孽的心结。般岳也因此未能主动接受禁果测试，哪怕其已经符合广义上智能构造体的特征，却仍未被正式认定为智能构造体。\n\n在接受来自坎卜斯黑枝的裁决官琉音的裁定后，般岳决心以未来的守护，弥补往昔的悔意。经琉音引荐，现今他已经成为坎卜斯黑枝裁决官的一员，开启了全新的旅程。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线委托第二季第五章",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1471049": {
+        "desc": [
+          "般岳会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n般岳发动招式造成的<color=#FF5521>火属性伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n般岳进入战场时即可回复60闪能，在勘域模式中此效果180秒内最多触发一次。\n般岳可以通过以下方式回复<color=#FFFFFF>[嗔火]</color>：\n每消耗1点闪能，回复0.5点<color=#FFFFFF>[嗔火]</color>；\n发动<color=#FFFFFF>[招架支援]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>；\n通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击时，回复4点<color=#FFFFFF>[嗔火]</color>，若触发完美格挡，则改为回复6点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次；\n触发<color=#FFFFFF>[极限闪避]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次。\n般岳最多拥有150点<color=#FFFFFF>[嗔火]</color>，拥有120点<color=#FFFFFF>[嗔火]</color>时，般岳可以通过发动<color=#FFFFFF>[普通攻击：焚身]</color>进入<color=#FFFFFF>[怒相]</color>状态，处于<color=#FFFFFF>[怒相]</color>状态时，般岳无法再获得<color=#FFFFFF>[嗔火]</color>，当般岳发动<color=#FFFFFF>[普通攻击：倾山]</color>后，会退出<color=#FFFFFF>[怒相]</color>状态；\n进入<color=#FFFFFF>[怒相]</color>状态时，般岳会获得4点<color=#FFFFFF>[山威]</color>，若般岳拥有<color=#FFFFFF>[山威]</color>，则发动<color=#FFFFFF>[强化特殊技]</color>时，不再消耗闪能，转而消耗1点<color=#FFFFFF>[山威]</color>并回复10点闪能，否则仍会消耗闪能，退出<color=#FFFFFF>[怒相]</color>状态时，会清空<color=#FFFFFF>[山威]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且有<color=#FFFFFF>[山威]</color>时，可以长按 <IconMap:Icon_Special> 按固定顺序自动打出四种<color=#FFFFFF>[强化特殊技]</color>及<color=#FFFFFF>[普通攻击：倾山]</color>；\n般岳发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[支援突击]</color>时，贯穿力提升<color=#2BAD00>150</color>点，造成的<color=#FF5521>火属性伤害</color>提升<color=#2BAD00>18%</color>，暴击伤害提升<color=#2BAD00>18%</color>，持续30秒，重复触发时刷新持续时间。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>或<color=#FFFFFF>[击破]</color>角色时触发：\n处于<color=#FFFFFF>[怒相]</color>状态时，若通过普通攻击派生或者快速键入指令的方式消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时 ，般岳会获得一层<color=#FFFFFF>[明王]</color>，每层<color=#FFFFFF>[明王]</color>会使自身造成的<color=#FF5521>火属性伤害</color>提升5%，最多叠加3层，持续8秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": ["核心被动：群山如我", "额外能力：绝巅"],
+        "potential": []
+      },
+      "1471050": {
+        "desc": [
+          "般岳会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n般岳发动招式造成的<color=#FF5521>火属性伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n般岳进入战场时即可回复60闪能，在勘域模式中此效果180秒内最多触发一次。\n般岳可以通过以下方式回复<color=#FFFFFF>[嗔火]</color>：\n每消耗1点闪能，回复0.5点<color=#FFFFFF>[嗔火]</color>；\n发动<color=#FFFFFF>[招架支援]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>；\n通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击时，回复4点<color=#FFFFFF>[嗔火]</color>，若触发完美格挡，则改为回复6点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次；\n触发<color=#FFFFFF>[极限闪避]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次。\n般岳最多拥有150点<color=#FFFFFF>[嗔火]</color>，拥有120点<color=#FFFFFF>[嗔火]</color>时，般岳可以通过发动<color=#FFFFFF>[普通攻击：焚身]</color>进入<color=#FFFFFF>[怒相]</color>状态，处于<color=#FFFFFF>[怒相]</color>状态时，般岳无法再获得<color=#FFFFFF>[嗔火]</color>，当般岳发动<color=#FFFFFF>[普通攻击：倾山]</color>后，会退出<color=#FFFFFF>[怒相]</color>状态；\n进入<color=#FFFFFF>[怒相]</color>状态时，般岳会获得4点<color=#FFFFFF>[山威]</color>，若般岳拥有<color=#FFFFFF>[山威]</color>，则发动<color=#FFFFFF>[强化特殊技]</color>时，不再消耗闪能，转而消耗1点<color=#FFFFFF>[山威]</color>并回复10点闪能，否则仍会消耗闪能，退出<color=#FFFFFF>[怒相]</color>状态时，会清空<color=#FFFFFF>[山威]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且有<color=#FFFFFF>[山威]</color>时，可以长按 <IconMap:Icon_Special> 按固定顺序自动打出四种<color=#FFFFFF>[强化特殊技]</color>及<color=#FFFFFF>[普通攻击：倾山]</color>；\n般岳发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[支援突击]</color>时，贯穿力提升<color=#2BAD00>175</color>点，造成的<color=#FF5521>火属性伤害</color>提升<color=#2BAD00>21%</color>，暴击伤害提升<color=#2BAD00>21%</color>，持续30秒，重复触发时刷新持续时间。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>或<color=#FFFFFF>[击破]</color>角色时触发：\n处于<color=#FFFFFF>[怒相]</color>状态时，若通过普通攻击派生或者快速键入指令的方式消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时 ，般岳会获得一层<color=#FFFFFF>[明王]</color>，每层<color=#FFFFFF>[明王]</color>会使自身造成的<color=#FF5521>火属性伤害</color>提升5%，最多叠加3层，持续8秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": ["核心被动：群山如我", "额外能力：绝巅"],
+        "potential": []
+      },
+      "1471051": {
+        "desc": [
+          "般岳会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n般岳发动招式造成的<color=#FF5521>火属性伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n般岳进入战场时即可回复60闪能，在勘域模式中此效果180秒内最多触发一次。\n般岳可以通过以下方式回复<color=#FFFFFF>[嗔火]</color>：\n每消耗1点闪能，回复0.5点<color=#FFFFFF>[嗔火]</color>；\n发动<color=#FFFFFF>[招架支援]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>；\n通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击时，回复4点<color=#FFFFFF>[嗔火]</color>，若触发完美格挡，则改为回复6点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次；\n触发<color=#FFFFFF>[极限闪避]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次。\n般岳最多拥有150点<color=#FFFFFF>[嗔火]</color>，拥有120点<color=#FFFFFF>[嗔火]</color>时，般岳可以通过发动<color=#FFFFFF>[普通攻击：焚身]</color>进入<color=#FFFFFF>[怒相]</color>状态，处于<color=#FFFFFF>[怒相]</color>状态时，般岳无法再获得<color=#FFFFFF>[嗔火]</color>，当般岳发动<color=#FFFFFF>[普通攻击：倾山]</color>后，会退出<color=#FFFFFF>[怒相]</color>状态；\n进入<color=#FFFFFF>[怒相]</color>状态时，般岳会获得4点<color=#FFFFFF>[山威]</color>，若般岳拥有<color=#FFFFFF>[山威]</color>，则发动<color=#FFFFFF>[强化特殊技]</color>时，不再消耗闪能，转而消耗1点<color=#FFFFFF>[山威]</color>并回复10点闪能，否则仍会消耗闪能，退出<color=#FFFFFF>[怒相]</color>状态时，会清空<color=#FFFFFF>[山威]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且有<color=#FFFFFF>[山威]</color>时，可以长按 <IconMap:Icon_Special> 按固定顺序自动打出四种<color=#FFFFFF>[强化特殊技]</color>及<color=#FFFFFF>[普通攻击：倾山]</color>；\n般岳发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[支援突击]</color>时，贯穿力提升<color=#2BAD00>200</color>点，造成的<color=#FF5521>火属性伤害</color>提升<color=#2BAD00>24%</color>，暴击伤害提升<color=#2BAD00>24%</color>，持续30秒，重复触发时刷新持续时间。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>或<color=#FFFFFF>[击破]</color>角色时触发：\n处于<color=#FFFFFF>[怒相]</color>状态时，若通过普通攻击派生或者快速键入指令的方式消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时 ，般岳会获得一层<color=#FFFFFF>[明王]</color>，每层<color=#FFFFFF>[明王]</color>会使自身造成的<color=#FF5521>火属性伤害</color>提升5%，最多叠加3层，持续8秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": ["核心被动：群山如我", "额外能力：绝巅"],
+        "potential": []
+      },
+      "1471052": {
+        "desc": [
+          "般岳会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n般岳发动招式造成的<color=#FF5521>火属性伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n般岳进入战场时即可回复60闪能，在勘域模式中此效果180秒内最多触发一次。\n般岳可以通过以下方式回复<color=#FFFFFF>[嗔火]</color>：\n每消耗1点闪能，回复0.5点<color=#FFFFFF>[嗔火]</color>；\n发动<color=#FFFFFF>[招架支援]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>；\n通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击时，回复4点<color=#FFFFFF>[嗔火]</color>，若触发完美格挡，则改为回复6点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次；\n触发<color=#FFFFFF>[极限闪避]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次。\n般岳最多拥有150点<color=#FFFFFF>[嗔火]</color>，拥有120点<color=#FFFFFF>[嗔火]</color>时，般岳可以通过发动<color=#FFFFFF>[普通攻击：焚身]</color>进入<color=#FFFFFF>[怒相]</color>状态，处于<color=#FFFFFF>[怒相]</color>状态时，般岳无法再获得<color=#FFFFFF>[嗔火]</color>，当般岳发动<color=#FFFFFF>[普通攻击：倾山]</color>后，会退出<color=#FFFFFF>[怒相]</color>状态；\n进入<color=#FFFFFF>[怒相]</color>状态时，般岳会获得4点<color=#FFFFFF>[山威]</color>，若般岳拥有<color=#FFFFFF>[山威]</color>，则发动<color=#FFFFFF>[强化特殊技]</color>时，不再消耗闪能，转而消耗1点<color=#FFFFFF>[山威]</color>并回复10点闪能，否则仍会消耗闪能，退出<color=#FFFFFF>[怒相]</color>状态时，会清空<color=#FFFFFF>[山威]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且有<color=#FFFFFF>[山威]</color>时，可以长按 <IconMap:Icon_Special> 按固定顺序自动打出四种<color=#FFFFFF>[强化特殊技]</color>及<color=#FFFFFF>[普通攻击：倾山]</color>；\n般岳发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[支援突击]</color>时，贯穿力提升<color=#2BAD00>225</color>点，造成的<color=#FF5521>火属性伤害</color>提升<color=#2BAD00>27%</color>，暴击伤害提升<color=#2BAD00>27%</color>，持续30秒，重复触发时刷新持续时间。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>或<color=#FFFFFF>[击破]</color>角色时触发：\n处于<color=#FFFFFF>[怒相]</color>状态时，若通过普通攻击派生或者快速键入指令的方式消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时 ，般岳会获得一层<color=#FFFFFF>[明王]</color>，每层<color=#FFFFFF>[明王]</color>会使自身造成的<color=#FF5521>火属性伤害</color>提升5%，最多叠加3层，持续8秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": ["核心被动：群山如我", "额外能力：绝巅"],
+        "potential": []
+      },
+      "1471053": {
+        "desc": [
+          "般岳会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n般岳发动招式造成的<color=#FF5521>火属性伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n般岳进入战场时即可回复60闪能，在勘域模式中此效果180秒内最多触发一次。\n般岳可以通过以下方式回复<color=#FFFFFF>[嗔火]</color>：\n每消耗1点闪能，回复0.5点<color=#FFFFFF>[嗔火]</color>；\n发动<color=#FFFFFF>[招架支援]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>；\n通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击时，回复4点<color=#FFFFFF>[嗔火]</color>，若触发完美格挡，则改为回复6点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次；\n触发<color=#FFFFFF>[极限闪避]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次。\n般岳最多拥有150点<color=#FFFFFF>[嗔火]</color>，拥有120点<color=#FFFFFF>[嗔火]</color>时，般岳可以通过发动<color=#FFFFFF>[普通攻击：焚身]</color>进入<color=#FFFFFF>[怒相]</color>状态，处于<color=#FFFFFF>[怒相]</color>状态时，般岳无法再获得<color=#FFFFFF>[嗔火]</color>，当般岳发动<color=#FFFFFF>[普通攻击：倾山]</color>后，会退出<color=#FFFFFF>[怒相]</color>状态；\n进入<color=#FFFFFF>[怒相]</color>状态时，般岳会获得4点<color=#FFFFFF>[山威]</color>，若般岳拥有<color=#FFFFFF>[山威]</color>，则发动<color=#FFFFFF>[强化特殊技]</color>时，不再消耗闪能，转而消耗1点<color=#FFFFFF>[山威]</color>并回复10点闪能，否则仍会消耗闪能，退出<color=#FFFFFF>[怒相]</color>状态时，会清空<color=#FFFFFF>[山威]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且有<color=#FFFFFF>[山威]</color>时，可以长按 <IconMap:Icon_Special> 按固定顺序自动打出四种<color=#FFFFFF>[强化特殊技]</color>及<color=#FFFFFF>[普通攻击：倾山]</color>；\n般岳发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[支援突击]</color>时，贯穿力提升<color=#2BAD00>250</color>点，造成的<color=#FF5521>火属性伤害</color>提升<color=#2BAD00>30%</color>，暴击伤害提升<color=#2BAD00>30%</color>，持续30秒，重复触发时刷新持续时间。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>或<color=#FFFFFF>[击破]</color>角色时触发：\n处于<color=#FFFFFF>[怒相]</color>状态时，若通过普通攻击派生或者快速键入指令的方式消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时 ，般岳会获得一层<color=#FFFFFF>[明王]</color>，每层<color=#FFFFFF>[明王]</color>会使自身造成的<color=#FF5521>火属性伤害</color>提升5%，最多叠加3层，持续8秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": ["核心被动：群山如我", "额外能力：绝巅"],
+        "potential": []
+      },
+      "1471054": {
+        "desc": [
+          "般岳会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n般岳发动招式造成的<color=#FF5521>火属性伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n般岳进入战场时即可回复60闪能，在勘域模式中此效果180秒内最多触发一次。\n般岳可以通过以下方式回复<color=#FFFFFF>[嗔火]</color>：\n每消耗1点闪能，回复0.5点<color=#FFFFFF>[嗔火]</color>；\n发动<color=#FFFFFF>[招架支援]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>；\n通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击时，回复4点<color=#FFFFFF>[嗔火]</color>，若触发完美格挡，则改为回复6点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次；\n触发<color=#FFFFFF>[极限闪避]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次。\n般岳最多拥有150点<color=#FFFFFF>[嗔火]</color>，拥有120点<color=#FFFFFF>[嗔火]</color>时，般岳可以通过发动<color=#FFFFFF>[普通攻击：焚身]</color>进入<color=#FFFFFF>[怒相]</color>状态，处于<color=#FFFFFF>[怒相]</color>状态时，般岳无法再获得<color=#FFFFFF>[嗔火]</color>，当般岳发动<color=#FFFFFF>[普通攻击：倾山]</color>后，会退出<color=#FFFFFF>[怒相]</color>状态；\n进入<color=#FFFFFF>[怒相]</color>状态时，般岳会获得4点<color=#FFFFFF>[山威]</color>，若般岳拥有<color=#FFFFFF>[山威]</color>，则发动<color=#FFFFFF>[强化特殊技]</color>时，不再消耗闪能，转而消耗1点<color=#FFFFFF>[山威]</color>并回复10点闪能，否则仍会消耗闪能，退出<color=#FFFFFF>[怒相]</color>状态时，会清空<color=#FFFFFF>[山威]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且有<color=#FFFFFF>[山威]</color>时，可以长按 <IconMap:Icon_Special> 按固定顺序自动打出四种<color=#FFFFFF>[强化特殊技]</color>及<color=#FFFFFF>[普通攻击：倾山]</color>；\n般岳发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[支援突击]</color>时，贯穿力提升<color=#2BAD00>275</color>点，造成的<color=#FF5521>火属性伤害</color>提升<color=#2BAD00>33%</color>，暴击伤害提升<color=#2BAD00>33%</color>，持续30秒，重复触发时刷新持续时间。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>或<color=#FFFFFF>[击破]</color>角色时触发：\n处于<color=#FFFFFF>[怒相]</color>状态时，若通过普通攻击派生或者快速键入指令的方式消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时 ，般岳会获得一层<color=#FFFFFF>[明王]</color>，每层<color=#FFFFFF>[明王]</color>会使自身造成的<color=#FF5521>火属性伤害</color>提升5%，最多叠加3层，持续8秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": ["核心被动：群山如我", "额外能力：绝巅"],
+        "potential": []
+      },
+      "1471055": {
+        "desc": [
+          "般岳会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n般岳发动招式造成的<color=#FF5521>火属性伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n般岳进入战场时即可回复60闪能，在勘域模式中此效果180秒内最多触发一次。\n般岳可以通过以下方式回复<color=#FFFFFF>[嗔火]</color>：\n每消耗1点闪能，回复0.5点<color=#FFFFFF>[嗔火]</color>；\n发动<color=#FFFFFF>[招架支援]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>；\n通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击时，回复4点<color=#FFFFFF>[嗔火]</color>，若触发完美格挡，则改为回复6点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次；\n触发<color=#FFFFFF>[极限闪避]</color>时，回复4点<color=#FFFFFF>[嗔火]</color>，每1秒最多触发一次。\n般岳最多拥有150点<color=#FFFFFF>[嗔火]</color>，拥有120点<color=#FFFFFF>[嗔火]</color>时，般岳可以通过发动<color=#FFFFFF>[普通攻击：焚身]</color>进入<color=#FFFFFF>[怒相]</color>状态，处于<color=#FFFFFF>[怒相]</color>状态时，般岳无法再获得<color=#FFFFFF>[嗔火]</color>，当般岳发动<color=#FFFFFF>[普通攻击：倾山]</color>后，会退出<color=#FFFFFF>[怒相]</color>状态；\n进入<color=#FFFFFF>[怒相]</color>状态时，般岳会获得4点<color=#FFFFFF>[山威]</color>，若般岳拥有<color=#FFFFFF>[山威]</color>，则发动<color=#FFFFFF>[强化特殊技]</color>时，不再消耗闪能，转而消耗1点<color=#FFFFFF>[山威]</color>并回复10点闪能，否则仍会消耗闪能，退出<color=#FFFFFF>[怒相]</color>状态时，会清空<color=#FFFFFF>[山威]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且有<color=#FFFFFF>[山威]</color>时，可以长按 <IconMap:Icon_Special> 按固定顺序自动打出四种<color=#FFFFFF>[强化特殊技]</color>及<color=#FFFFFF>[普通攻击：倾山]</color>；\n般岳发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[支援突击]</color>时，贯穿力提升<color=#2BAD00>300</color>点，造成的<color=#FF5521>火属性伤害</color>提升<color=#2BAD00>36%</color>，暴击伤害提升<color=#2BAD00>36%</color>，持续30秒，重复触发时刷新持续时间。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>或<color=#FFFFFF>[击破]</color>角色时触发：\n处于<color=#FFFFFF>[怒相]</color>状态时，若通过普通攻击派生或者快速键入指令的方式消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时 ，般岳会获得一层<color=#FFFFFF>[明王]</color>，每层<color=#FFFFFF>[明王]</color>会使自身造成的<color=#FF5521>火属性伤害</color>提升5%，最多叠加3层，持续8秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {
+          "111": {
+            "target": 123,
+            "value": 1000
+          },
+          "121": {
+            "target": 123,
+            "value": 3000
+          }
+        },
+        "name": ["核心被动：群山如我", "额外能力：绝巅"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对前方敌人发动连续攻击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：磐岩",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：铁壁",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n快速突进并发动攻击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：昂霄",
+          "potential": []
+        },
+        {
+          "desc": "通过<color=#FFFFFF>[闪避：不动如山]</color>成功招架敌人攻击后，点按 <IconMap:Icon_Normal> 发动：\n快速突进并发动攻击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：冲霄",
+          "potential": []
+        },
+        {
+          "name": "快速支援：磐岩",
+          "param": [
+            {
+              "desc": "{Skill:1471022, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471022": {
+                  "attackData": [],
+                  "attributeInfliction": 4168,
+                  "damagePercentage": 7340,
+                  "damagePercentageGrowth": 670,
+                  "etherPurify": 4169,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 670,
+                  "main": 7340,
+                  "rpRecovery": 16680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471022, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471022": {
+                  "attackData": [],
+                  "attributeInfliction": 4168,
+                  "damagePercentage": 7340,
+                  "damagePercentageGrowth": 670,
+                  "etherPurify": 4169,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4590,
+                  "rpRecovery": 16680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：铁壁",
+          "param": [
+            {
+              "desc": "{Skill:1471023, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1471023": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471024, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1471024": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471025, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1471025": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：昂霄",
+          "param": [
+            {
+              "desc": "{Skill:1471026, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471026": {
+                  "attackData": [],
+                  "attributeInfliction": 25476,
+                  "damagePercentage": 24160,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 11670,
+                  "feverRecovery": 863500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2200,
+                  "main": 24160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25860,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471026, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471026": {
+                  "attackData": [],
+                  "attributeInfliction": 25476,
+                  "damagePercentage": 24160,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 11670,
+                  "feverRecovery": 863500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1180,
+                  "main": 25860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25860,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：冲霄",
+          "param": [
+            {
+              "desc": "{Skill:1471029, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471029": {
+                  "attackData": [],
+                  "attributeInfliction": 11669,
+                  "damagePercentage": 22160,
+                  "damagePercentageGrowth": 2020,
+                  "etherPurify": 26670,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2020,
+                  "main": 22160,
+                  "rpRecovery": 46680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471029, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471029": {
+                  "attackData": [],
+                  "attributeInfliction": 11669,
+                  "damagePercentage": 22160,
+                  "damagePercentageGrowth": 2020,
+                  "etherPurify": 26670,
+                  "feverRecovery": 320925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1090,
+                  "main": 23840,
+                  "rpRecovery": 46680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23840,
+                  "stunRatioGrowth": 1090
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多四段的攻击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间，打断等级提升。",
+          "name": "普通攻击：峥嵘",
+          "potential": []
+        },
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n向前方进行至多四段的攻击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间，抗打断等级提升。",
+          "name": "普通攻击：崔巍",
+          "potential": []
+        },
+        {
+          "desc": "不处于<color=#FFFFFF>[怒相]</color>状态且拥有120点<color=#FFFFFF>[嗔火]</color>时，长按 <IconMap:Icon_Normal> 发动：\n对周身敌人造成<color=#FF5521>火属性伤害</color>，随后进入<color=#FFFFFF>[怒相]</color>状态。",
+          "name": "普通攻击：焚身",
+          "potential": []
+        },
+        {
+          "desc": "不处于接战状态、生命值大于50%且<color=#FFFFFF>[嗔火]</color>不足120点时，长按 <IconMap:Icon_Normal> 发动：\n般岳主动消耗生命值回复<color=#FFFFFF>[嗔火]</color>，<color=#FFFFFF>[嗔火]</color>回复至120点时般岳将直接进入<color=#FFFFFF>[怒相]</color>状态；\n进入战场时，获得一次释放该招式的机会，在勘域模式中该效果180秒内最多触发一次；\n般岳最多消耗生命值至最大生命值的50%。",
+          "name": "普通攻击：引火",
+          "potential": []
+        },
+        {
+          "desc": "当般岳处于<color=#FFFFFF>[怒相]</color>状态时，长按 <IconMap:Icon_Normal> 消耗120点<color=#FFFFFF>[嗔火]</color>发动：\n般岳轰出巨大的山体攻击敌人，造成大量<color=#FF5521>火属性伤害</color>；\n发动该招式后，般岳退出<color=#FFFFFF>[怒相]</color>状态；\n招式发动期间拥有无敌效果。",
+          "name": "普通攻击：倾山",
+          "potential": []
+        },
+        {
+          "desc": "当般岳处于<color=#FFFFFF>[怒相]</color>状态时，通过普通攻击派生或者快速键入指令的方式释放两次不同的<color=#FFFFFF>[强化特殊技]</color>后，长按 <IconMap:Icon_Normal> 发动：\n般岳向前方打出珠子禁锢敌人造成大量<color=#FF5521>火属性伤害</color>；\n随后般岳将自动释放<color=#FFFFFF>[普通攻击：倾山]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "普通攻击：摧岳",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：峥嵘",
+          "param": [
+            {
+              "desc": "{Skill:1471001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1471001": {
+                  "attackData": [],
+                  "attributeInfliction": 3372,
+                  "damagePercentage": 3960,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 3373,
+                  "feverRecovery": 92950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3960,
+                  "rpRecovery": 13500,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3710,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1471002": {
+                  "attackData": [],
+                  "attributeInfliction": 4130,
+                  "damagePercentage": 4980,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4131,
+                  "feverRecovery": 113850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 4980,
+                  "rpRecovery": 16530,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4550,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1471003": {
+                  "attackData": [],
+                  "attributeInfliction": 8957,
+                  "damagePercentage": 10130,
+                  "damagePercentageGrowth": 930,
+                  "etherPurify": 8958,
+                  "feverRecovery": 246400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 930,
+                  "main": 10130,
+                  "rpRecovery": 35840,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9860,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1471004": {
+                  "attackData": [],
+                  "attributeInfliction": 10362,
+                  "damagePercentage": 11630,
+                  "damagePercentageGrowth": 1060,
+                  "etherPurify": 10363,
+                  "feverRecovery": 285175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1060,
+                  "main": 11630,
+                  "rpRecovery": 41460,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11400,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1471001": {
+                  "attackData": [],
+                  "attributeInfliction": 3372,
+                  "damagePercentage": 3960,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 3373,
+                  "feverRecovery": 92950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3710,
+                  "rpRecovery": 13500,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3710,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1471002": {
+                  "attackData": [],
+                  "attributeInfliction": 4130,
+                  "damagePercentage": 4980,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4131,
+                  "feverRecovery": 113850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4550,
+                  "rpRecovery": 16530,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4550,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1471003": {
+                  "attackData": [],
+                  "attributeInfliction": 8957,
+                  "damagePercentage": 10130,
+                  "damagePercentageGrowth": 930,
+                  "etherPurify": 8958,
+                  "feverRecovery": 246400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 9860,
+                  "rpRecovery": 35840,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9860,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1471004": {
+                  "attackData": [],
+                  "attributeInfliction": 10362,
+                  "damagePercentage": 11630,
+                  "damagePercentageGrowth": 1060,
+                  "etherPurify": 10363,
+                  "feverRecovery": 285175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 11400,
+                  "rpRecovery": 41460,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11400,
+                  "stunRatioGrowth": 520
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：崔巍",
+          "param": [
+            {
+              "desc": "{Skill:1471005, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1471005": {
+                  "attackData": [],
+                  "attributeInfliction": 4500,
+                  "damagePercentage": 5280,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4500,
+                  "feverRecovery": 123750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5280,
+                  "rpRecovery": 18000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4950,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471006, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1471006": {
+                  "attackData": [],
+                  "attributeInfliction": 5844,
+                  "damagePercentage": 7040,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 5845,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 7040,
+                  "rpRecovery": 23380,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6430,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471007, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1471007": {
+                  "attackData": [],
+                  "attributeInfliction": 11986,
+                  "damagePercentage": 13550,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 11987,
+                  "feverRecovery": 329725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 13550,
+                  "rpRecovery": 47950,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13190,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471008, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1471008": {
+                  "attackData": [],
+                  "attributeInfliction": 8345,
+                  "damagePercentage": 9240,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 8346,
+                  "feverRecovery": 229625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 9240,
+                  "rpRecovery": 33390,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9180,
+                  "stunRatioGrowth": 420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471005, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1471005": {
+                  "attackData": [],
+                  "attributeInfliction": 4500,
+                  "damagePercentage": 5280,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4500,
+                  "feverRecovery": 123750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4950,
+                  "rpRecovery": 18000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4950,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471006, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1471006": {
+                  "attackData": [],
+                  "attributeInfliction": 5844,
+                  "damagePercentage": 7040,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 5845,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6430,
+                  "rpRecovery": 23380,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6430,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471007, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1471007": {
+                  "attackData": [],
+                  "attributeInfliction": 11986,
+                  "damagePercentage": 13550,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 11987,
+                  "feverRecovery": 329725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 13190,
+                  "rpRecovery": 47950,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13190,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471008, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1471008": {
+                  "attackData": [],
+                  "attributeInfliction": 8345,
+                  "damagePercentage": 9240,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 8346,
+                  "feverRecovery": 229625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 9180,
+                  "rpRecovery": 33390,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9180,
+                  "stunRatioGrowth": 420
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：焚身",
+          "param": [
+            {
+              "desc": "{Skill:1471027, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471027": {
+                  "attackData": [],
+                  "attributeInfliction": 9663,
+                  "damagePercentage": 11060,
+                  "damagePercentageGrowth": 1010,
+                  "etherPurify": 9664,
+                  "feverRecovery": 265925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1010,
+                  "main": 11060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10630,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471027, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471027": {
+                  "attackData": [],
+                  "attributeInfliction": 9663,
+                  "damagePercentage": 11060,
+                  "damagePercentageGrowth": 1010,
+                  "etherPurify": 9664,
+                  "feverRecovery": 265925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 10630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10630,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：倾山",
+          "param": [
+            {
+              "desc": "{Skill:1471009, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471009": {
+                  "attackData": [],
+                  "attributeInfliction": 18336,
+                  "damagePercentage": 86980,
+                  "damagePercentageGrowth": 7910,
+                  "etherPurify": 18337,
+                  "feverRecovery": 504350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7910,
+                  "main": 86980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20180,
+                  "stunRatioGrowth": 920
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471009, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471009": {
+                  "attackData": [],
+                  "attributeInfliction": 18336,
+                  "damagePercentage": 86980,
+                  "damagePercentageGrowth": 7910,
+                  "etherPurify": 18337,
+                  "feverRecovery": 504350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 920,
+                  "main": 20180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20180,
+                  "stunRatioGrowth": 920
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：摧岳",
+          "param": [
+            {
+              "desc": "{Skill:1471010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471010": {
+                  "attackData": [],
+                  "attributeInfliction": 13829,
+                  "damagePercentage": 37830,
+                  "damagePercentageGrowth": 3440,
+                  "etherPurify": 13830,
+                  "feverRecovery": 380325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3440,
+                  "main": 37830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15220,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471010": {
+                  "attackData": [],
+                  "attributeInfliction": 13829,
+                  "damagePercentage": 37830,
+                  "damagePercentageGrowth": 3440,
+                  "etherPurify": 13830,
+                  "feverRecovery": 380325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 15220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15220,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n向前方发动大范围攻击，造成大量<color=#FF5521>火属性伤害</color>；\n若般岳的<color=#FFFFFF>[嗔火]</color>大于120点，攻击结束后般岳会自动进入<color=#FFFFFF>[怒相]</color>状态；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：怒焰",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n向前方发动大范围攻击，造成大量<color=#FF5521>火属性伤害</color>；\n若般岳的<color=#FFFFFF>[嗔火]</color>大于120点，攻击结束后般岳会自动进入<color=#FFFFFF>[怒相]</color>状态；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：撼天动地",
+          "potential": []
+        },
+        {
+          "name": "连携技：怒焰",
+          "param": [
+            {
+              "desc": "{Skill:1471020, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471020": {
+                  "attackData": [],
+                  "attributeInfliction": 43786,
+                  "damagePercentage": 56090,
+                  "damagePercentageGrowth": 5100,
+                  "etherPurify": 23837,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5100,
+                  "main": 56090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26230,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471020, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471020": {
+                  "attackData": [],
+                  "attributeInfliction": 43786,
+                  "damagePercentage": 56090,
+                  "damagePercentageGrowth": 5100,
+                  "etherPurify": 23837,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 26230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26230,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：撼天动地",
+          "param": [
+            {
+              "desc": "{Skill:1471021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471021": {
+                  "attackData": [],
+                  "attributeInfliction": 24329,
+                  "damagePercentage": 159840,
+                  "damagePercentageGrowth": 14540,
+                  "etherPurify": 74330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14540,
+                  "main": 159840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26770,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471021": {
+                  "attackData": [],
+                  "attributeInfliction": 24329,
+                  "damagePercentage": 159840,
+                  "damagePercentageGrowth": 14540,
+                  "etherPurify": 74330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1220,
+                  "main": 26770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26770,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "攻击过程中不拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}点按 <IconMap:Icon_Evade> 发动：\n般岳进入防御姿态，期间如果受到敌人攻击，会招架敌人攻击，累积失衡值；\n如果在招式发动的瞬间受到敌人的攻击，则可以触发完美格挡；\n成功招架敌人攻击时拥有无敌效果。",
+          "name": "闪避：不动如山",
+          "potential": []
+        },
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：越岭",
+          "potential": []
+        },
+        {
+          "desc": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}半周并点按 <IconMap:Icon_Evade> 发动：\n向后闪避并挑衅敌人；\n在任意<color=#FFFFFF>[强化特殊技]</color>后衔接派生<color=#FFFFFF>[闪避：叫阵]</color>，可在<color=#FFFFFF>[闪避：叫阵]</color>期间快速键入对应指令继续派生<color=#FFFFFF>[强化特殊技]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：叫阵",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 或在<color=#FFFFFF>[闪避：叫阵]</color>时长按 <IconMap:Icon_Normal> 发动：\n向前方打出珠子，造成<color=#FF5521>火属性伤害</color>；\n招式发动后可直接衔接<color=#FFFFFF>[普通攻击：峥嵘]</color>的第二段攻击或<color=#FFFFFF>[普通攻击：崔巍]</color>的第二段攻击。",
+          "name": "冲刺攻击：飞砂",
+          "potential": []
+        },
+        {
+          "desc": "通过<color=#FFFFFF>[闪避：越岭]</color>触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 或通过<color=#FFFFFF>[闪避：叫阵]</color>触发<color=#FFFFFF>[极限闪避]</color>后，长按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动攻击，造成<color=#FF5521>火属性伤害</color>；\n招式发动后可直接衔接<color=#FFFFFF>[普通攻击：峥嵘]</color>的第三段攻击或<color=#FFFFFF>[普通攻击：崔巍]</color>的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：扬砾",
+          "potential": []
+        },
+        {
+          "name": "闪避：不动如山",
+          "param": [
+            {
+              "desc": "{Skill:1471011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 6664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 9530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9530,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：飞砂",
+          "param": [
+            {
+              "desc": "{Skill:1471018, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471018": {
+                  "attackData": [],
+                  "attributeInfliction": 2251,
+                  "damagePercentage": 3970,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 2252,
+                  "feverRecovery": 62150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 3970,
+                  "rpRecovery": 9010,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2480,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471018, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471018": {
+                  "attackData": [],
+                  "attributeInfliction": 2251,
+                  "damagePercentage": 3970,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 2252,
+                  "feverRecovery": 62150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2480,
+                  "rpRecovery": 9010,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2480,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：扬砾",
+          "param": [
+            {
+              "desc": "{Skill:1471019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471019": {
+                  "attackData": [],
+                  "attributeInfliction": 9336,
+                  "damagePercentage": 19490,
+                  "damagePercentageGrowth": 1780,
+                  "etherPurify": 24337,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1780,
+                  "main": 19490,
+                  "rpRecovery": 37350,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21280,
+                  "stunRatioGrowth": 970
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471019": {
+                  "attackData": [],
+                  "attributeInfliction": 9336,
+                  "damagePercentage": 19490,
+                  "damagePercentageGrowth": 1780,
+                  "etherPurify": 24337,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 970,
+                  "main": 21280,
+                  "rpRecovery": 37350,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21280,
+                  "stunRatioGrowth": 970
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "闪能足够时，可通过以下三种方式发动：\n在第三段或第四段<color=#FFFFFF>[普通攻击：峥嵘]</color>后点按 <IconMap:Icon_SpecialReady_Rp> 发动；\n在<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[快速支援]</color>后长按 <IconMap:Icon_SpecialReady_Rp> 发动；\n在发动任意<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[普通攻击：焚身]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[快速支援]</color>时，快速键入指令 <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> 发动；\n般岳连续重击地面，对敌人造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：地动",
+          "potential": []
+        },
+        {
+          "desc": "闪能足够时，可通过以下两种方式发动：\n在第一段或第二段<color=#FFFFFF>[普通攻击：崔巍]</color>后点按 <IconMap:Icon_Normal> 发动；\n在发动任意<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[普通攻击：焚身]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[快速支援]</color>时，快速键入指令 <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> 发动；\n般岳掀出山体，对敌人造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：山摇",
+          "potential": []
+        },
+        {
+          "desc": "闪能足够时，可通过以下三种方式发动：\n在第三段或第四段<color=#FFFFFF>[普通攻击：崔巍]</color>后点按 <IconMap:Icon_Normal> 发动；\n在<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[快速支援]</color>后长按 <IconMap:Icon_Normal> 发动；\n在发动任意<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[普通攻击：焚身]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[快速支援]</color>时，快速键入指令 <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> 发动；\n般岳扔出珠子对前方敌人造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：论道",
+          "potential": []
+        },
+        {
+          "desc": "闪能足够时，可通过以下两种方式发动：\n在第一段或第二段<color=#FFFFFF>[普通攻击：峥嵘]</color>后点按 <IconMap:Icon_SpecialReady_Rp> 发动；\n在发动任意<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[普通攻击：焚身]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[快速支援]</color>时，快速键入指令 <IconMap:Icon_Normal> <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> 发动；\n般岳向前方发动音波攻击，对敌人造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：狮子吼",
+          "potential": []
+        },
+        {
+          "desc": "闪能足够时，在发动<color=#FFFFFF>[强化特殊技：地动]</color>时快速键入指令 <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> 发动：\n般岳掀出更巨大的山体，对敌人造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：山摇·怒",
+          "potential": []
+        },
+        {
+          "desc": "闪能足够时，在发动<color=#FFFFFF>[强化特殊技：论道]</color>时快速键入指令 <IconMap:Icon_Normal> <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> 发动：\n般岳向前方发动更强力的音波攻击，对敌人造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：狮子吼·怒",
+          "potential": []
+        },
+        {
+          "desc": "当般岳通过快速键入指令的方式派生<color=#FFFFFF>[强化特殊技]</color>时，可以打断正在发动的<color=#FFFFFF>[强化特殊技]</color>，每一种<color=#FFFFFF>[强化特殊技]</color>都存在特殊的完美打断节点，在完美打断节点之后打断<color=#FFFFFF>[强化特殊技]</color>，被打断的<color=#FFFFFF>[强化特殊技]</color>的攻击效果将不会受到影响，在完美打断节点时打断<color=#FFFFFF>[强化特殊技]</color>，被视为触发了<color=#FFFFFF>[完美取消]</color>；\n处于<color=#FFFFFF>[怒相]</color>状态且拥有<color=#FFFFFF>[山威]</color>时，更容易触发<color=#FFFFFF>[完美取消]</color>。",
+          "name": "取消",
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：地动",
+          "param": [
+            {
+              "desc": "{Skill:1471013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471013": {
+                  "attackData": [],
+                  "attributeInfliction": 24116,
+                  "damagePercentage": 25480,
+                  "damagePercentageGrowth": 2320,
+                  "etherPurify": 12830,
+                  "feverRecovery": 796400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2320,
+                  "main": 25480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24760,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471013": {
+                  "attackData": [],
+                  "attributeInfliction": 24116,
+                  "damagePercentage": 25480,
+                  "damagePercentageGrowth": 2320,
+                  "etherPurify": 12830,
+                  "feverRecovery": 796400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24760,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：山摇",
+          "param": [
+            {
+              "desc": "{Skill:1471012, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471012": {
+                  "attackData": [],
+                  "attributeInfliction": 15575,
+                  "damagePercentage": 17130,
+                  "damagePercentageGrowth": 1560,
+                  "etherPurify": 6504,
+                  "feverRecovery": 535425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 17130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15710,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471012, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471012": {
+                  "attackData": [],
+                  "attributeInfliction": 15575,
+                  "damagePercentage": 17130,
+                  "damagePercentageGrowth": 1560,
+                  "etherPurify": 6504,
+                  "feverRecovery": 535425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 15710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15710,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：论道",
+          "param": [
+            {
+              "desc": "{Skill:1471015, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471015": {
+                  "attackData": [],
+                  "attributeInfliction": 14666,
+                  "damagePercentage": 16240,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 5831,
+                  "feverRecovery": 507650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1480,
+                  "main": 16240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14750,
+                  "stunRatioGrowth": 680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471015, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471015": {
+                  "attackData": [],
+                  "attributeInfliction": 14666,
+                  "damagePercentage": 16240,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 5831,
+                  "feverRecovery": 507650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 680,
+                  "main": 14750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14750,
+                  "stunRatioGrowth": 680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：狮子吼",
+          "param": [
+            {
+              "desc": "{Skill:1471014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471014": {
+                  "attackData": [],
+                  "attributeInfliction": 13775,
+                  "damagePercentage": 15370,
+                  "damagePercentageGrowth": 1400,
+                  "etherPurify": 5171,
+                  "feverRecovery": 480425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1400,
+                  "main": 15370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13810,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471014": {
+                  "attackData": [],
+                  "attributeInfliction": 13775,
+                  "damagePercentage": 15370,
+                  "damagePercentageGrowth": 1400,
+                  "etherPurify": 5171,
+                  "feverRecovery": 480425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13810,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：山摇·怒",
+          "param": [
+            {
+              "desc": "{Skill:1471017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471017": {
+                  "attackData": [],
+                  "attributeInfliction": 22371,
+                  "damagePercentage": 32500,
+                  "damagePercentageGrowth": 2960,
+                  "etherPurify": 6504,
+                  "feverRecovery": 802450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2960,
+                  "main": 32500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22120,
+                  "stunRatioGrowth": 1010
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471017": {
+                  "attackData": [],
+                  "attributeInfliction": 22371,
+                  "damagePercentage": 32500,
+                  "damagePercentageGrowth": 2960,
+                  "etherPurify": 6504,
+                  "feverRecovery": 802450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1010,
+                  "main": 22120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22120,
+                  "stunRatioGrowth": 1010
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：狮子吼·怒",
+          "param": [
+            {
+              "desc": "{Skill:1471016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1471016": {
+                  "attackData": [],
+                  "attributeInfliction": 20571,
+                  "damagePercentage": 30010,
+                  "damagePercentageGrowth": 2730,
+                  "etherPurify": 5171,
+                  "feverRecovery": 747450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2730,
+                  "main": 30010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20210,
+                  "stunRatioGrowth": 920
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1471016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1471016": {
+                  "attackData": [],
+                  "attributeInfliction": 20571,
+                  "damagePercentage": 30010,
+                  "damagePercentageGrowth": 2730,
+                  "etherPurify": 5171,
+                  "feverRecovery": 747450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 920,
+                  "main": 20210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20210,
+                  "stunRatioGrowth": 920
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1471001": {
+      "desc": "<IconMap:Icon_Normal>;<IconMap:Icon_Normal>;<IconMap:Icon_Normal>;<IconMap:Icon_Normal>",
+      "name": "普通攻击：峥嵘"
+    },
+    "1471002": {
+      "desc": "<IconMap:Icon_Special>;<IconMap:Icon_Special>;<IconMap:Icon_Special>;<IconMap:Icon_Special>",
+      "name": "普通攻击：崔巍"
+    },
+    "1471003": {
+      "desc": "<IconMap:Icon_Normal>（[嗔火]足够时长按）",
+      "name": "普通攻击：焚身"
+    },
+    "1471004": {
+      "desc": "<IconMap:Icon_Normal>（处于非接战状态且生命值充足时长按，一场战斗最多使用一次）",
+      "name": "普通攻击：引火"
+    },
+    "1471005": {
+      "desc": "<IconMap:Icon_Normal>（发动第一段或第二段[普通攻击：崔巍]时）",
+      "name": "强化特殊技：山摇"
+    },
+    "1471006": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp> ; <IconMap:Icon_SpecialReady_Rp> ; <IconMap:Icon_Normal>（发动任意[强化特殊技]、[普通攻击：焚身]、[快速支援]、[支援突击]、[闪避反击]、[连携技：怒焰]、[终结技：撼天动地]时）",
+      "name": "强化特殊技：山摇"
+    },
+    "1471007": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp>（发动第三段或四段[普通攻击：峥嵘]时）",
+      "name": "强化特殊技：地动"
+    },
+    "1471008": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp>（发动[支援突击]、[闪避反击：扬砾]、[快速支援：磐岩]后长按）",
+      "name": "强化特殊技：地动"
+    },
+    "1471009": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_SpecialReady_Rp> ; <IconMap:Icon_Normal>（发动任意[强化特殊技]、[普通攻击：焚身]、[快速支援]、[支援突击]、[闪避反击]、[连携技：怒焰]、[终结技：撼天动地]时）",
+      "name": "强化特殊技：地动"
+    },
+    "1471010": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp>（发动第一段或第二段[普通攻击：峥嵘]时）",
+      "name": "强化特殊技：狮子吼"
+    },
+    "1471011": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_SpecialReady_Rp>（发动任意[强化特殊技]、[普通攻击：焚身]、[快速支援]、[支援突击]、[闪避反击]、[连携技：怒焰]、[终结技：撼天动地]时）",
+      "name": "强化特殊技：狮子吼"
+    },
+    "1471012": {
+      "desc": "<IconMap:Icon_Normal>（发动第三段或第四段[普通攻击：崔巍]后）",
+      "name": "强化特殊技：论道"
+    },
+    "1471013": {
+      "desc": "<IconMap:Icon_Normal>（发动[支援突击]、[闪避反击：扬砾]、[快速支援：磐岩]后长按）",
+      "name": "强化特殊技：论道"
+    },
+    "1471014": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp> ; <IconMap:Icon_Normal> ; <IconMap:Icon_SpecialReady_Rp>（发动任意[强化特殊技]、[普通攻击：焚身]、[快速支援]、[支援突击]、[闪避反击]、[连携技：怒焰]、[终结技：撼天动地]时）",
+      "name": "强化特殊技：论道"
+    },
+    "1471015": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_SpecialReady_Rp>（发动[强化特殊技：论道]时）",
+      "name": "强化特殊技：狮子吼·怒"
+    },
+    "1471016": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp> ; <IconMap:Icon_SpecialReady_Rp> ; <IconMap:Icon_Normal>（发动[强化特殊技：地动]时）",
+      "name": "强化特殊技：山摇·怒"
+    },
+    "1471017": {
+      "desc": "<IconMap:Icon_Normal>（处于[怒相]状态时长按）",
+      "name": "普通攻击：倾山"
+    },
+    "1471018": {
+      "desc": "<IconMap:Icon_Normal>（处于[怒相]状态时，通过普通攻击派生或者快速键入指令的方式释放两次不同的[强化特殊技]后，长按）",
+      "name": "普通攻击：摧岳"
+    },
+    "1471019": {
+      "desc": "<IconMap:Icon_Evade>",
+      "name": "闪避：越岭"
+    },
+    "1471020": {
+      "desc": "<IconMap:Icon_Evade>（攻击过程中点按）",
+      "name": "闪避：不动如山"
+    },
+    "1471021": {
+      "desc": "<IconMap:Icon_Evade>（拖曳摇杆半周时点按）",
+      "name": "闪避：叫阵"
+    },
+    "1471022": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：飞砂"
+    },
+    "1471023": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：扬砾"
+    },
+    "1471024": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：怒焰"
+    },
+    "1471025": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：撼天动地"
+    },
+    "1471026": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：磐岩"
+    },
+    "1471027": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：铁壁"
+    },
+    "1471028": {
+      "desc": "<IconMap:Icon_Normal>（发动[招架支援]后）",
+      "name": "支援突击：昂霄"
+    },
+    "1471029": {
+      "desc": "<IconMap:Icon_Normal>（通过[闪避：不动如山]成功招架敌人攻击后）",
+      "name": "支援突击：冲霄"
+    }
+  },
+  "skin": {
+    "3114710": {
+      "desc": "一身浩然正气，尽显宗师风范。切莫因其沉默而妄加评判，石心不鸣，悲悯无声。",
+      "name": "般岳·灼业石心"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，站场输出",
+    "多种连招组合",
+    "可提升自身贯穿力、暴伤与火伤"
+  ],
+  "talent": {
+    "1": {
+      "desc": "<color=#FFFFFF>[强化特殊技：论道]</color>和<color=#FFFFFF>[强化特殊技：地动]</color>命中敌人时，会使敌人陷入<color=#FFFFFF>[战栗]</color>状态，处于该状态的敌人<color=#FF5521>火属性伤害抗性</color>降低10%，持续30秒；<color=#FFFFFF>[强化特殊技：狮子吼]</color>、<color=#FFFFFF>[强化特殊技：狮子吼·怒]</color>、<color=#FFFFFF>[强化特殊技：山摇]</color>、<color=#FFFFFF>[强化特殊技：山摇·怒]</color>、<color=#FFFFFF>[普通攻击：倾山]</color>和<color=#FFFFFF>[普通攻击：摧岳]</color>命中处于<color=#FFFFFF>[战栗]</color>状态的敌人时，造成的贯穿伤害提高10%；<color=#FFFFFF>[普通攻击：摧岳]</color>命中处于失衡状态的敌人时，会使其此次失衡的失衡持续时间提升2秒，敌人在一次失衡期间内只会受到一次该效果，且同类效果不可叠加。",
+      "desc2": "般岳师父可有过什么欲求么，他在澄辉坪开着家武馆，似乎也只因为某位宗师提议他开家武馆。\n那座武馆连名字都没有，既不为名，更不图利，甚至连什么要传宗授艺之类的口号都没教学生喊过。\n只有般岳师父自己知道，名为「赎罪」的执妄日夜灼烧着他钢铁铸成的心，一着不慎便是迷途。\n\n「贪欲如火，恰当的欲望能够成为前行的炬火，不加收敛便会自受其焚。」",
+      "name": "贪欲如火"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>[核心被动]</color>中的暴击伤害增益效果额外提升15%，<color=#FF5521>火属性伤害</color>增益效果额外提升15%；处于<color=#FFFFFF>[怒相]</color>状态时，般岳消耗<color=#FFFFFF>[山威]</color>发动<color=#FFFFFF>[强化特殊技]</color>时，额外回复5点闪能。",
+      "desc2": "武馆的学生们从未见过般岳师父生气——更别说是发怒，即使对于最驽钝或最轻狂的学生，般岳师父似乎也拥有无限的耐心。\n山脉怎么会轻易发怒呢，它过分厚重的沉稳总使人们几乎忘记它的暴烈。\n但当它引动天倾的怒火，即使最嚣狂的恶兽，也要因此而战栗。\n\n「嗔恨如刀，平日要好生藏于鞘中，莫要伤了身边的人。」",
+      "name": "嗔恨如刀"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "般岳师父不止是武人，更是位智者——不管是武馆的学生们还是相熟的邻里，都这么说。\n毕竟般岳师父平常看起来就很深沉的样子嘛，寡言少语的他一开口，总是些让人耐人寻味的格言般的句子。\n武道不止修身，更是修心，而般岳师父常说，自己皆不过是学徒。\n\n「般岳鲁钝，也曾踏入歧途，但为阁下开辟这一程的道路…尚有双拳可付。」",
+      "name": "痴愚如锁"
+    },
+    "4": {
+      "desc": "<color=#FFFFFF>[强化特殊技：狮子吼·怒]</color>、<color=#FFFFFF>[强化特殊技：山摇·怒]</color>、<color=#FFFFFF>[普通攻击：倾山]</color>和<color=#FFFFFF>[普通攻击：摧岳]</color>造成的伤害提升<color=#FFFFFF>30%</color>。",
+      "desc2": "命运或许是天定或许是人为，但有些人的宿命与罪责，从不曾有幸被自由意志粉饰。\n在获得如今的姓名之前，被称为「零型」的作战构造体不过是字面意义的杀戮机器。\n而「心」是何时诞生的呢？是代码的桎梏被她抹去的那天，还是当你获得背负这一切前行的勇气？\n\n「忏悔太过轻巧，比起逃避曾经的罪孽，不如背负这如山的过往…为如今挥拳吧。」",
+      "name": "肃灭单元·零型"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "听说了么？山上开了家武馆，教功夫的是个大个子构造体。\n从那武馆里出来的学徒都颇有些真功夫呢，连以骸都能过上几招。\n那位铁铸的师父也常跑到空洞里救灾救人，想必也是位武道的宗师吧？\n\n「我不过也还是个稚拙的学徒…各位虽然称我一声师父，却也教会我许多为『人』的道理 。」",
+      "name": "学徒"
+    },
+    "6": {
+      "desc": "任意时刻，般岳发动<color=#FFFFFF>[强化特殊技]</color>都可获取<color=#FFFFFF>[明王]</color>；<color=#FFFFFF>[明王]</color>提供的<color=#FF5521>火属性伤害</color>增益效果额外提升8%，持续时间提升至30秒；发动<color=#FFFFFF>[普通攻击：摧岳]</color>时，般岳会对周身敌人造成等同于自身600%贯穿力的<color=#FF5521>火属性伤害</color>；衔接在<color=#FFFFFF>[强化特殊技]</color>后释放<color=#FFFFFF>[闪避：叫阵]</color>也可以获取<color=#FFFFFF>[明王]</color>。",
+      "desc2": "「用性命抵债很轻松吧大块头？可你前面还有很长的赎罪之路要走呢！」\n「这是我对你…最终的裁决！」\n那个女孩的身形实在纤细，但那掷地有声的判词却似乎拨开如山的重负与迷雾。\n\n「我仍在思索自己是否具备裁决的智勇…但那不是我驻足不前的借口。」",
+      "name": "降世明王"
+    }
+  },
+  "weaponType": {
+    "6": "命破"
+  }
+}

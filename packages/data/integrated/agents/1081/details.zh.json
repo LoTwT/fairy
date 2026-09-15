@@ -1,0 +1,1385 @@
+{
+  "camp": {
+    "1": "狡兔屋"
+  },
+  "elementType": {
+    "200": "物理"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "物理伤害加成"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "暴击伤害"
+    }
+  },
+  "hitType": {
+    "103": "穿透"
+  },
+  "id": 1081,
+  "locale": "zh",
+  "name": "比利",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1081020", "1081021"],
+      "basic": ["1081002", "1081003", "1081004", "1081007", "1081008"],
+      "chain": ["1081018", "1081019"],
+      "dodge": ["1081014", "1081016", "1081017"],
+      "special": ["1081010", "1081011", "1081012", "1081013"]
+    },
+    "parameterRowsById": {
+      "1081002": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1081003": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1081004": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/8",
+        "/skill/basic/description/1/param/10"
+      ],
+      "1081007": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1081008": [
+        "/skill/basic/description/1/param/5",
+        "/skill/basic/description/1/param/11"
+      ],
+      "1081010": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/3"
+      ],
+      "1081011": [
+        "/skill/special/description/2/param/1",
+        "/skill/special/description/2/param/4"
+      ],
+      "1081012": [
+        "/skill/special/description/2/param/2",
+        "/skill/special/description/2/param/5"
+      ],
+      "1081013": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1081014": [
+        "/skill/dodge/description/3/param/1",
+        "/skill/dodge/description/3/param/3"
+      ],
+      "1081016": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/2"
+      ],
+      "1081017": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1081018": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1081019": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1081020": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1081021": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "11/25",
+    "fullName": "比利·奇德",
+    "gender": "男",
+    "impressionF": "「星徽骑士」系列的特摄片，哥哥小时候好像也曾经痴迷过？\n啊，真怀念呢，哥哥叉着腰大喊「星徽荣耀幻影！」的时候…",
+    "impressionM": "并没有那种时候。请把这些不存在的记忆从你的大脑里清空。\n我已经脱离那个年龄段很久了，毕竟我的名字里可没有「kid」。",
+    "impressions": [
+      "对比利的印象：\n · 比利对待武器，就像对自己一样爱护",
+      " · 他真的很爱星徽骑士，是因为正义还是因为特摄？",
+      " · 比利的过去，也藏着让人难以想象的秘密"
+    ],
+    "profileDesc": "比利·奇德，是一台通过了禁果测试的智能构造体。简言之，拥有自我意志的机器人。\n人如其名，虽然有着机器人的外表，他的内心却（幼稚的）像个孩子。\n钟爱一部名为「星徽骑士」的特摄片。希望自己也能成为剧中主角那样的英雄，于是总是以星徽骑士自居，还会用较为夸张的姿态模仿剧中台词。\n但这样的行为似乎只能造成一些（适合用来调节气氛的）喜剧效果。\n「不要把我说的好像笨蛋一样啊！我明明是很聪明的！」——by比利",
+    "stature": "188",
+    "trustLv": {
+      "1": "比利·奇德，是一台通过了禁果测试的智能构造体。简言之，拥有自我意志的机器人。\n人如其名，虽然有着机器人的外表，他的内心却（幼稚的）像个孩子。\n钟爱一部名为「星徽骑士」的特摄片。希望自己也能成为剧中主角那样的英雄，于是总是以星徽骑士自居，还会用较为夸张的姿态模仿剧中台词。\n但这样的行为似乎只能造成一些（适合用来调节气氛的）喜剧效果。\n「不要把我说的好像笨蛋一样啊！我明明是很聪明的！」——by比利",
+      "2": "",
+      "3": "和安比相似，比利的个人履历中也存在部分空白区域。\n有信息显示，在加入狡兔屋之前比利曾经长期效忠于另一个神秘的组织。\n截至目前为止，比利似乎仍然和盘踞于新艾利都外环的某组织老大之间保有密切联系。",
+      "4": ""
+    },
+    "unlockCondition": ["获得代理人", "完成委托「安比的困扰」"]
+  },
+  "passive": {
+    "level": {
+      "1081501": {
+        "desc": [
+          "比利在<color=#FFFFFF>[普通攻击]</color>中进入蹲姿射击后，自身造成的伤害提升<color=#2BAD00>25%</color>，进行移动、回到待机、被击退或被击飞时增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n比利发动<color=#FFFFFF>[连携技]</color>后，下次发动<color=#FFFFFF>[终结技]</color>时，招式造成的伤害提升50%，最多叠加2次，发动<color=#FFFFFF>[终结技]</color>后效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：稳定据枪", "额外能力：骑士战队"],
+        "potential": []
+      },
+      "1081502": {
+        "desc": [
+          "比利在<color=#FFFFFF>[普通攻击]</color>中进入蹲姿射击后，自身造成的伤害提升<color=#2BAD00>29.1%</color>，进行移动、回到待机、被击退或被击飞时增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n比利发动<color=#FFFFFF>[连携技]</color>后，下次发动<color=#FFFFFF>[终结技]</color>时，招式造成的伤害提升50%，最多叠加2次，发动<color=#FFFFFF>[终结技]</color>后效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：稳定据枪", "额外能力：骑士战队"],
+        "potential": []
+      },
+      "1081503": {
+        "desc": [
+          "比利在<color=#FFFFFF>[普通攻击]</color>中进入蹲姿射击后，自身造成的伤害提升<color=#2BAD00>33.3%</color>，进行移动、回到待机、被击退或被击飞时增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n比利发动<color=#FFFFFF>[连携技]</color>后，下次发动<color=#FFFFFF>[终结技]</color>时，招式造成的伤害提升50%，最多叠加2次，发动<color=#FFFFFF>[终结技]</color>后效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：稳定据枪", "额外能力：骑士战队"],
+        "potential": []
+      },
+      "1081504": {
+        "desc": [
+          "比利在<color=#FFFFFF>[普通攻击]</color>中进入蹲姿射击后，自身造成的伤害提升<color=#2BAD00>37.5%</color>，进行移动、回到待机、被击退或被击飞时增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n比利发动<color=#FFFFFF>[连携技]</color>后，下次发动<color=#FFFFFF>[终结技]</color>时，招式造成的伤害提升50%，最多叠加2次，发动<color=#FFFFFF>[终结技]</color>后效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：稳定据枪", "额外能力：骑士战队"],
+        "potential": []
+      },
+      "1081505": {
+        "desc": [
+          "比利在<color=#FFFFFF>[普通攻击]</color>中进入蹲姿射击后，自身造成的伤害提升<color=#2BAD00>41.6%</color>，进行移动、回到待机、被击退或被击飞时增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n比利发动<color=#FFFFFF>[连携技]</color>后，下次发动<color=#FFFFFF>[终结技]</color>时，招式造成的伤害提升50%，最多叠加2次，发动<color=#FFFFFF>[终结技]</color>后效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：稳定据枪", "额外能力：骑士战队"],
+        "potential": []
+      },
+      "1081506": {
+        "desc": [
+          "比利在<color=#FFFFFF>[普通攻击]</color>中进入蹲姿射击后，自身造成的伤害提升<color=#2BAD00>45.8%</color>，进行移动、回到待机、被击退或被击飞时增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n比利发动<color=#FFFFFF>[连携技]</color>后，下次发动<color=#FFFFFF>[终结技]</color>时，招式造成的伤害提升50%，最多叠加2次，发动<color=#FFFFFF>[终结技]</color>后效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：稳定据枪", "额外能力：骑士战队"],
+        "potential": []
+      },
+      "1081507": {
+        "desc": [
+          "比利在<color=#FFFFFF>[普通攻击]</color>中进入蹲姿射击后，自身造成的伤害提升<color=#2BAD00>50%</color>，进行移动、回到待机、被击退或被击飞时增益效果结束。",
+          "队伍中存在与自身属性或阵营相同的角色时触发：\n比利发动<color=#FFFFFF>[连携技]</color>后，下次发动<color=#FFFFFF>[终结技]</color>时，招式造成的伤害提升50%，最多叠加2次，发动<color=#FFFFFF>[终结技]</color>后效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：稳定据枪", "额外能力：骑士战队"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对前方敌人发动穿透攻击，造成<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：星徽-同伴之力",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n回避敌人的攻击，并触发<color=#FFFFFF>[极限视域]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "回避支援：闪转步伐",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[回避支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方大范围敌人发动穿透攻击，造成<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：要害射击",
+          "potential": []
+        },
+        {
+          "name": "快速支援：星徽-同伴之力",
+          "param": [
+            {
+              "desc": "{Skill:1081020, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1081020": {
+                  "attackData": [],
+                  "attributeInfliction": 9336,
+                  "damagePercentage": 9340,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4669,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 9340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9340,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081020, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1081020": {
+                  "attackData": [],
+                  "attributeInfliction": 9336,
+                  "damagePercentage": 9340,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4669,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 9340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9340,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：要害射击",
+          "param": [
+            {
+              "desc": "{Skill:1081021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1081021": {
+                  "attackData": [],
+                  "attributeInfliction": 36497,
+                  "damagePercentage": 38880,
+                  "damagePercentageGrowth": 3540,
+                  "etherPurify": 19834,
+                  "feverRecovery": 1200100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3540,
+                  "main": 38880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34120,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1081021": {
+                  "attackData": [],
+                  "attributeInfliction": 36497,
+                  "damagePercentage": 38880,
+                  "damagePercentageGrowth": 3540,
+                  "etherPurify": 19834,
+                  "feverRecovery": 1200100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34120,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动穿透攻击，造成<color=#F0D12B>物理伤害</color>；\n连点或长按时，可以进入蹲姿射击，延长射击的持续时间；\n蹲姿射击途中拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}时，可以发动翻滚射击，调整身位并造成<color=#F0D12B>物理伤害</color>；\n蹲姿射击途中停止连点或松开长按时，对前方敌人发动终结射击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "普通攻击：火力全开",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：火力全开",
+          "param": [
+            {
+              "desc": "{Skill:1081002, Prop:1001}",
+              "name": "站姿开火伤害倍率",
+              "param": {
+                "1081002": {
+                  "attackData": [],
+                  "attributeInfliction": 5439,
+                  "damagePercentage": 6800,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 6799,
+                  "feverRecovery": 99825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 6800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5440,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081003, Prop:1001}",
+              "name": "站姿子弹伤害倍率",
+              "param": {
+                "1081003": {
+                  "attackData": [],
+                  "attributeInfliction": 604,
+                  "damagePercentage": 760,
+                  "damagePercentageGrowth": 70,
+                  "etherPurify": 756,
+                  "feverRecovery": 33275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 70,
+                  "main": 760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 610,
+                  "stunRatioGrowth": 30
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081004, Prop:1001}",
+              "name": "蹲姿开火伤害倍率",
+              "param": {
+                "1081004": {
+                  "attackData": [],
+                  "attributeInfliction": 2903,
+                  "damagePercentage": 6180,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5367,
+                  "feverRecovery": 150425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19690,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5470,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081007, Prop:1001}",
+              "name": "蹲姿子弹伤害倍率",
+              "param": {
+                "1081007": {
+                  "attackData": [],
+                  "attributeInfliction": 889,
+                  "damagePercentage": 1270,
+                  "damagePercentageGrowth": 120,
+                  "etherPurify": 890,
+                  "feverRecovery": 24475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 1270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 3210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 890,
+                  "stunRatioGrowth": 50
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081004, Prop:1001}",
+              "name": "翻滚射击伤害倍率",
+              "param": {
+                "1081004": {
+                  "attackData": [],
+                  "attributeInfliction": 2903,
+                  "damagePercentage": 6180,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5367,
+                  "feverRecovery": 150425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19690,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5470,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081008, Prop:1001}",
+              "name": "终结射击伤害倍率",
+              "param": {
+                "1081008": {
+                  "attackData": [],
+                  "attributeInfliction": 8079,
+                  "damagePercentage": 4950,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3805,
+                  "feverRecovery": 151800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 4950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5520,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081002, Prop:1002}",
+              "name": "站姿开火失衡倍率",
+              "param": {
+                "1081002": {
+                  "attackData": [],
+                  "attributeInfliction": 5439,
+                  "damagePercentage": 6800,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 6799,
+                  "feverRecovery": 99825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5440,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081003, Prop:1002}",
+              "name": "站姿子弹失衡倍率",
+              "param": {
+                "1081003": {
+                  "attackData": [],
+                  "attributeInfliction": 604,
+                  "damagePercentage": 760,
+                  "damagePercentageGrowth": 70,
+                  "etherPurify": 756,
+                  "feverRecovery": 33275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 30,
+                  "main": 610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 610,
+                  "stunRatioGrowth": 30
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081004, Prop:1002}",
+              "name": "蹲姿开火失衡倍率",
+              "param": {
+                "1081004": {
+                  "attackData": [],
+                  "attributeInfliction": 2903,
+                  "damagePercentage": 6180,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5367,
+                  "feverRecovery": 150425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19690,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5470,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081007, Prop:1002}",
+              "name": "蹲姿子弹失衡倍率",
+              "param": {
+                "1081007": {
+                  "attackData": [],
+                  "attributeInfliction": 889,
+                  "damagePercentage": 1270,
+                  "damagePercentageGrowth": 120,
+                  "etherPurify": 890,
+                  "feverRecovery": 24475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 50,
+                  "main": 890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 3210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 890,
+                  "stunRatioGrowth": 50
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081004, Prop:1002}",
+              "name": "翻滚射击失衡倍率",
+              "param": {
+                "1081004": {
+                  "attackData": [],
+                  "attributeInfliction": 2903,
+                  "damagePercentage": 6180,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5367,
+                  "feverRecovery": 150425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19690,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5470,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081008, Prop:1002}",
+              "name": "终结射击失衡倍率",
+              "param": {
+                "1081008": {
+                  "attackData": [],
+                  "attributeInfliction": 8079,
+                  "damagePercentage": 4950,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 3805,
+                  "feverRecovery": 151800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5520,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n对身周大范围敌人发动强力穿透攻击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：星徽荣耀幻影",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n对身周大范围敌人发动强力穿透攻击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：星徽在此闪耀",
+          "potential": []
+        },
+        {
+          "name": "连携技：星徽荣耀幻影",
+          "param": [
+            {
+              "desc": "{Skill:1081018, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1081018": {
+                  "attackData": [],
+                  "attributeInfliction": 41783,
+                  "damagePercentage": 73520,
+                  "damagePercentageGrowth": 6690,
+                  "etherPurify": 21834,
+                  "feverRecovery": 2429350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6690,
+                  "main": 73520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19660,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081018, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1081018": {
+                  "attackData": [],
+                  "attributeInfliction": 41783,
+                  "damagePercentage": 73520,
+                  "damagePercentageGrowth": 6690,
+                  "etherPurify": 21834,
+                  "feverRecovery": 2429350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 900,
+                  "main": 19660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19660,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：星徽在此闪耀",
+          "param": [
+            {
+              "desc": "{Skill:1081019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1081019": {
+                  "attackData": [],
+                  "attributeInfliction": 21170,
+                  "damagePercentage": 159770,
+                  "damagePercentageGrowth": 14530,
+                  "etherPurify": 71171,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14530,
+                  "main": 159770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19060,
+                  "stunRatioGrowth": 870
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1081019": {
+                  "attackData": [],
+                  "attributeInfliction": 21170,
+                  "damagePercentage": 159770,
+                  "damagePercentageGrowth": 14530,
+                  "etherPurify": 71171,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 870,
+                  "main": 19060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19060,
+                  "stunRatioGrowth": 870
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：好险好险",
+          "potential": []
+        },
+        {
+          "desc": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按 <IconMap:Icon_Normal> 发动：\n向身周大范围区域进行穿透攻击，造成<color=#F0D12B>物理伤害</color>。\n未拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按 <IconMap:Icon_Normal> 发动：\n向前方直线区域进行穿透攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "冲刺攻击：星-徽-制-裁",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动穿透攻击，造成<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：公平决斗",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：星-徽-制-裁",
+          "param": [
+            {
+              "desc": "{Skill:1081016, Prop:1001}",
+              "name": "周身射击伤害倍率",
+              "param": {
+                "1081016": {
+                  "attackData": [],
+                  "attributeInfliction": 3498,
+                  "damagePercentage": 6300,
+                  "damagePercentageGrowth": 580,
+                  "etherPurify": 3499,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 6300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6300,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081014, Prop:1001}",
+              "name": "直线射击伤害倍率",
+              "param": {
+                "1081014": {
+                  "attackData": [],
+                  "attributeInfliction": 4329,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 2165,
+                  "feverRecovery": 59675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1950,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081016, Prop:1002}",
+              "name": "周身射击失衡倍率",
+              "param": {
+                "1081016": {
+                  "attackData": [],
+                  "attributeInfliction": 3498,
+                  "damagePercentage": 6300,
+                  "damagePercentageGrowth": 580,
+                  "etherPurify": 3499,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6300,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081014, Prop:1002}",
+              "name": "直线射击失衡倍率",
+              "param": {
+                "1081014": {
+                  "attackData": [],
+                  "attributeInfliction": 4329,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 2165,
+                  "feverRecovery": 59675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1950,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：公平决斗",
+          "param": [
+            {
+              "desc": "{Skill:1081017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1081017": {
+                  "attackData": [],
+                  "attributeInfliction": 9336,
+                  "damagePercentage": 22140,
+                  "damagePercentageGrowth": 2020,
+                  "etherPurify": 24337,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2020,
+                  "main": 22140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19340,
+                  "stunRatioGrowth": 880
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1081017": {
+                  "attackData": [],
+                  "attributeInfliction": 9336,
+                  "damagePercentage": 22140,
+                  "damagePercentageGrowth": 2020,
+                  "etherPurify": 24337,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 880,
+                  "main": 19340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19340,
+                  "stunRatioGrowth": 880
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n向前方直线区域进行至多三段的穿透攻击，造成<color=#F0D12B>物理伤害</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：乖乖站好",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n向前方直线区域进行强力穿透攻击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：清场时间",
+          "potential": []
+        },
+        {
+          "name": "特殊技：乖乖站好",
+          "param": [
+            {
+              "desc": "{Skill:1081010, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1081010": {
+                  "attackData": [],
+                  "attributeInfliction": 2414,
+                  "damagePercentage": 2420,
+                  "damagePercentageGrowth": 220,
+                  "etherPurify": 2415,
+                  "feverRecovery": 66550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 220,
+                  "main": 2420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2420,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081011, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1081011": {
+                  "attackData": [],
+                  "attributeInfliction": 2584,
+                  "damagePercentage": 5170,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 2585,
+                  "feverRecovery": 142175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 5170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5170,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081012, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1081012": {
+                  "attackData": [],
+                  "attributeInfliction": 2500,
+                  "damagePercentage": 5010,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 2501,
+                  "feverRecovery": 137775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 5010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081010, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1081010": {
+                  "attackData": [],
+                  "attributeInfliction": 2414,
+                  "damagePercentage": 2420,
+                  "damagePercentageGrowth": 220,
+                  "etherPurify": 2415,
+                  "feverRecovery": 66550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2420,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081011, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1081011": {
+                  "attackData": [],
+                  "attributeInfliction": 2584,
+                  "damagePercentage": 5170,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 2585,
+                  "feverRecovery": 142175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5170,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081012, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1081012": {
+                  "attackData": [],
+                  "attributeInfliction": 2500,
+                  "damagePercentage": 5010,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 2501,
+                  "feverRecovery": 137775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：清场时间",
+          "param": [
+            {
+              "desc": "{Skill:1081013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1081013": {
+                  "attackData": [],
+                  "attributeInfliction": 44687,
+                  "damagePercentage": 54380,
+                  "damagePercentageGrowth": 4950,
+                  "etherPurify": 11497,
+                  "feverRecovery": 1620300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4950,
+                  "main": 54380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43950,
+                  "stunRatioGrowth": 2000
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1081013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1081013": {
+                  "attackData": [],
+                  "attributeInfliction": 44687,
+                  "damagePercentage": 54380,
+                  "damagePercentageGrowth": 4950,
+                  "etherPurify": 11497,
+                  "feverRecovery": 1620300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2000,
+                  "main": 43950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43950,
+                  "stunRatioGrowth": 2000
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1081001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：火力全开"
+    },
+    "1081002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：乖乖站好"
+    },
+    "1081003": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：清场时间"
+    },
+    "1081004": {
+      "desc": "<IconMap:Icon_Evade>（任意方向） ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：星-徽-制-裁（散射）"
+    },
+    "1081005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：星-徽-制-裁（集中）"
+    },
+    "1081006": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：公平决斗"
+    },
+    "1081007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：星徽荣耀幻影"
+    },
+    "1081008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：星徽在此闪耀"
+    },
+    "1081009": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：星徽-同伴之力"
+    },
+    "1081010": {
+      "desc": "<IconMap:Icon_Switch>（触发回避支援时）",
+      "name": "回避支援：闪转步伐"
+    },
+    "1081011": {
+      "desc": "<IconMap:Icon_Normal>（发动回避支援后）",
+      "name": "支援突击：要害射击"
+    }
+  },
+  "skin": {
+    "3110810": {
+      "desc": "帅气即正义，正义即帅气，这就是永不磨灭的骑士美学！虽然关节螺丝的确容易磨损就是了…",
+      "name": "比利·闪耀星徽套装"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，站场输出",
+    "兼顾单体与范围输出"
+  ],
+  "talent": {
+    "1": {
+      "desc": "<color=#FFFFFF>[冲刺攻击]</color>或<color=#FFFFFF>[闪避反击]</color>命中敌人时，比利额外回复2.7点能量，5秒内最多触发一次。",
+      "desc2": "「作为反派，你们也太老实了！」\n「就像为了配合主角登场，故意设置的固定靶一样！」",
+      "name": "闪亮登场"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>[闪避反击]</color>造成的伤害提升25%；<color=#FFFFFF>[普通攻击]</color>中的翻滚射击将被视为闪避动作，在招式发动期间获得无敌效果，并且能够触发<color=#FFFFFF>[极限闪避]</color>，翻滚射击触发<color=#FFFFFF>[极限闪避]</color>时，将自动衔接<color=#FFFFFF>[闪避反击]</color>。",
+      "desc2": "「星徽骑士从来不会逃避危险，那叫做战术游走射击！」\n——星徽闪耀-交流区，会员「哦梦中的莫妮卡」留言。",
+      "name": "游斗射术"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "绝不懈怠训练，绝不停止进步！这是星徽骑士倡导的精神。比利真的相信，而且真的在遵守。",
+      "name": "星徽骑士的教导"
+    },
+    "4": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>命中敌人时，招式的暴击率随自身与目标之间的距离而提升；比利与目标距离越近，提升效果越显著，最高提升32%。",
+      "desc2": "比利独创的爆破型子弹，\n在近身战时有着惊人的威力。\n不过比利改造子弹的本意，是让开枪时的演出效果更加帅气。",
+      "name": "星徽-惩戒弹药"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "未知的精密元件和独特的构造设计带给了比利远超同侪的性能…和维修养护费用。",
+      "name": "失落技术构造体"
+    },
+    "6": {
+      "desc": "累计命中敌人10次或触发<color=#FFFFFF>[极限闪避]</color>时，比利造成的伤害提升6%，最多叠加5层，被敌方击退或击飞后增益效果重置。",
+      "desc2": "「呼~感觉来了！安比你让开，现在是我的主场！」\n「呃，安比，能帮忙放一下星徽骑士片头曲吗？」\n——狡兔屋内部「十大禁句」评选，安比的提案。",
+      "name": "星徽-英雄时刻"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}
