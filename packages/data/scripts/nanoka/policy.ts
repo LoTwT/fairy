@@ -84,8 +84,11 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
   return validateSourcePolicy(registry.sources?.["nanoka-zzz"])
 }
 
-/** 离线构建与抓取共用同一配置校验；保留完整详情语言的配置顺序。 */
-export function validateSourcePolicy(value: unknown): SourcePolicy {
+/** 离线构建与抓取共用同一配置校验；历史恢复可验证此前登记的语言子集，不能用于新输入构建。 */
+export function validateSourcePolicy(
+  value: unknown,
+  options: { historicalLanguages?: boolean } = {},
+): SourcePolicy {
   const source = value as SourcePolicy | undefined
   if (
     source?.sourceId !== "nanoka-zzz" ||
@@ -96,10 +99,13 @@ export function validateSourcePolicy(value: unknown): SourcePolicy {
     source.allowlist.manifestPath !== "/manifest.json" ||
     source.allowlist.dataPathPrefix !== "/zzz/" ||
     !Array.isArray(source.languages) ||
-    source.languages.length !== supportedLanguages.length ||
-    !supportedLanguages.every((language) =>
-      source.languages.includes(language),
+    source.languages.length === 0 ||
+    new Set(source.languages).size !== source.languages.length ||
+    !source.languages.every((language) =>
+      supportedLanguages.includes(language),
     ) ||
+    (!options.historicalLanguages &&
+      source.languages.length !== supportedLanguages.length) ||
     !isPositiveInteger(source.requestPolicy?.maxConcurrency) ||
     !isNonNegativeInteger(source.requestPolicy.minimumStartIntervalMs) ||
     !isPositiveInteger(source.requestPolicy.timeoutMs) ||

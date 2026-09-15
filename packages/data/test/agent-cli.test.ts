@@ -66,7 +66,7 @@ const rejectNetwork = () => { throw new Error("unexpected network") }
 globalThis.fetch = rejectNetwork
 http.request = http.get = https.request = https.get = rejectNetwork
 if (process.env.FAIRY_CLI_TEST_REJECT_IO === "1" &&
-    /(?:build|verify)-nanoka-agents[.]ts$/.test(process.argv[1] ?? "")) {
+    /(?:build|verify|current)-nanoka-agents[.]ts$/.test(process.argv[1] ?? "")) {
   for (const name of ["readFile", "realpath", "mkdtemp"])
     fs[name] = () => { throw new Error("unexpected file access") }
 }
@@ -585,3 +585,31 @@ describe("offline agent package commands", () => {
     },
   )
 })
+
+it("current commands keep committed data when actual stdout pipes close", async () => {
+  const input = await fixture()
+  const target = join(input.root, "integrated", "nanoka")
+  const args = [input.rawRoot, input.version, target]
+  for (const command of [
+    "update:nanoka:agents",
+    "recover:nanoka:agents",
+    "verify:nanoka:current",
+  ]) {
+    const help = await runCommandWithClosedStdout(
+      input,
+      command,
+      ["--help"],
+      true,
+    )
+    failure(help, "write EPIPE")
+    const completed = await runCommandWithClosedStdout(
+      input,
+      command,
+      command === "update:nanoka:agents" ? args : [target],
+    )
+    failure(completed, "write EPIPE")
+    expect(
+      success(runCommand(input, "verify:nanoka:current", [target])).verified,
+    ).toBe(true)
+  }
+}, 30_000)

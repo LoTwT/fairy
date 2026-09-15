@@ -41,13 +41,18 @@ export interface ExportFileReference {
  * 索引的完整资料导出契约 v2；离线全量构建器生成并复验 full-index 制品。
  * index 内 sourceRecord 为原始来源值，其余字段是来源定位或整合元信息。
  * 元信息中的版本不要求 integrated 存放多个版本目录。
+ * 详情引用默认覆盖全部支持语言；历史类型复用同一结构，将固定语言引用设为可选。
  */
-export interface IntegratedIndex {
+export interface IntegratedIndex<
+  RulesVersion extends string = "nanoka-agent-reference/4",
+  DetailFiles extends Partial<Record<DetailLocale, ExportFileReference>> =
+    Record<DetailLocale, ExportFileReference>,
+> {
   /** 文件结构与命名契约版本；v2 将已登记的结构字段改为 camelCase，不是游戏版本。 */
   format: "fairy-nanoka-integrated/v2"
 
   /** 共享提取、字段拼写和导航规则版本；v4 增加可选资源提取与潜能详情字段拼写，沿用 codeName 特例。 */
-  rulesVersion: "nanoka-agent-reference/4"
+  rulesVersion: RulesVersion
 
   /** 当前导出的成员范围；完整性的边界是选定来源索引。 */
   scope:
@@ -102,8 +107,8 @@ export interface IntegratedIndex {
       files: {
         /** 公共资料文件 data.json 的位置与实际字节摘要。 */
         stats: ExportFileReference
-        /** 详情语言 → 对应 details.{locale}.json 文件；成员与 source.detailLocales 一致。 */
-        content: Record<DetailLocale, ExportFileReference>
+        /** 详情语言 → 对应 details.{locale}.json 文件；成员与 source.detailLocales 一致，历史集须检查语言引用是否存在。 */
+        content: DetailFiles
       }
 
       /** 独立来源索引记录，完整保留原值与原 key，含 ja/ko 名称；不覆盖到某语言详情。 */
@@ -111,6 +116,13 @@ export interface IntegratedIndex {
     }
   >
 }
+
+/** 历史规则或语言配置下已验证的索引；详情语言可为支持语言的子集，不保证任一固定语言存在。 */
+export type HistoricalIntegratedIndex<RulesVersion extends string = string> =
+  IntegratedIndex<
+    RulesVersion,
+    Partial<Record<DetailLocale, ExportFileReference>>
+  >
 
 /** 材料 ID → 原始数量。本层不加载材料详情或补造材料名称。 */
 export type MaterialCounts = Record<SourceId, number>

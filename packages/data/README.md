@@ -4,7 +4,7 @@ Fairy 的游戏来源资料与数据整理包。
 
 Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。当前公开导出仍保持为空。
 
-[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；本步仅创建新的临时制品，增量维护当前 integrated 数据集与公开 API 尚未实现。
+[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的增量维护、互斥读取和中断恢复，公开 API 尚未实现。
 
 ## 本地抓取
 
@@ -72,7 +72,36 @@ pnpm --silent --filter @randomplay/data integrate:nanoka:agents raw/nanoka 3.1
 pnpm --silent --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated/nanoka
 ```
 
-摘要只标识使用的字节，不证明 raw 来自同一抓取批次；单独复验制品也不认证来源真实性。步骤二的显式开发命令已接入；固定当前数据集的更新、增量识别、成员删除、事务替换与中断恢复协议仍属于步骤三，尚未实现。资源上限、路径边界、合成测试与真实验证范围见[整合规范](../../docs/specs/data/integration.md#当前离线全量新制品构建)。上述入口仅供源码工作区使用，不增加 npm 导出；普通 `build`、`test`、`verify:pack` 不触发真实数据构建。
+摘要只标识使用的字节，不证明 raw 来自同一抓取批次；单独复验制品也不认证来源真实性。全量新制品入口继续保持只创建行为；固定当前数据集请使用下述独立更新命令。资源上限、路径边界、合成测试与真实验证范围见[整合规范](../../docs/specs/data/integration.md#当前离线全量新制品构建)。上述入口仅供源码工作区使用，不增加 npm 导出；普通 `build`、`test`、`verify:pack` 不触发真实数据构建。
+
+## 首次生成、增量更新与恢复
+
+从仓库根目录执行（filter 命令在 data 包目录运行）：
+
+```bash
+pnpm --filter @randomplay/data update:nanoka:agents raw/nanoka 3.1 integrated/nanoka
+pnpm --filter @randomplay/data verify:nanoka:current integrated/nanoka
+pnpm --filter @randomplay/data recover:nanoka:agents integrated/nanoka
+```
+
+首次生成和后续更新使用同一命令，三个参数依次为 `rawRoot`、确切版本、目标目录；都必须明确给出。
+更新会完整验证该版本的配置语言输入，离线生成候选，再复用实际字节相等的当前文件 inode。合法完整索引决定成员移除；
+缺文件或校验失败会保留旧集，不跨版本填缺。相同输入仍会执行完整校验，实体文件内容及 mtime 不变；临时候选仍有 I/O。
+首次目标必须不存在；已有非受管理目录（包括空目录）或损坏数据会报错，不能通过删除目标来绕过恢复。
+
+[更新与恢复协议](../../docs/specs/data/integration.md#81-当前数据集更新与恢复协议)是事务、锁、读取及清理规则的唯一来源。
+固定目标保持 `packages/data/integrated/nanoka/`；控制记录、临时候选、备份和最新维护报告在同级
+`.nanoka.fairy-state/` 中。正常完成后只留当前数据和最新维护报告，不长期保存旧版本。
+**保留永久 `lock.sqlite`，不要手工删除它来解锁。** 进程终止会自动释放 SQLite 锁，恢复命令无需 raw；更新也会先恢复。
+
+当前数据的消费者必须在 `withNanokaCurrentDataset` 内部回调持锁期间读完并使用所需字节；该内部维护能力没有 npm 导出。
+当前目录使用 `verify:nanoka:current`；`verify:nanoka:agents` 继续用于静态制品，不能替代并发读取锁。
+忙碌时明确报 `BUSY` 并重试；未完成事务报 `RECOVERY_REQUIRED`，先执行恢复命令。错误、回执字段及提交后失败语义见
+[命令契约](../../docs/specs/data/integration.md#当前数据更新实现与命令)。机器解析使用 `pnpm --silent`。
+
+协议使用本机 macOS/Linux、同文件系统的 SQLite 排他锁、目录 rename 和硬链接；受控子进程中断纳入常规测试。
+不保证网络文件系统、Windows、绕过锁修改目录、断电或内核崩溃时的持久性；读取者需要控制目录写权限。
+真实当前数据和控制目录均被 Git 忽略，不自动暂存、不进入 npm；普通 build/test/check/pack 不生成或依赖真实数据。
 
 ## 约束
 

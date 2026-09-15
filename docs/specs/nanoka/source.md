@@ -227,7 +227,7 @@ packages/data/
 ```
 
 - `source-registry.json`：URL、allowlist、语言、请求和单次抓取限制。
-- `policy.ts`：登记实体、配置、manifest、版本、URL 和路径策略；导出 `validateSourcePolicy` 供抓取与离线整合复用同一校验，保留配置语言顺序；语言及实体 ID 复用包内 `src/nanoka-identity.ts`，与纯整合模块保持同一来源身份规则。
+- `policy.ts`：登记实体、配置、manifest、版本、URL 和路径策略；导出 `validateSourcePolicy` 供抓取与离线整合复用同一校验，保留配置语言顺序；当前数据恢复可单独校验历史支持语言子集，不放宽新输入的完整语言要求。语言及实体 ID 复用包内 `src/nanoka-identity.ts`，与纯整合模块保持同一来源身份规则。
 - `http.ts`：节流、并发、超时、有限重试、响应字节读取。
 - `fetch.ts`：通用索引发现、详情抓取和本地缓存写入。
 - `nanoka-source.ts`：CLI、交互选择、进度和结果输出。

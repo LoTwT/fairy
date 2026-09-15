@@ -138,6 +138,37 @@ async function preserved(options: Awaited<ReturnType<typeof fixture>>) {
 }
 
 describe("offline full Nanoka agent build", () => {
+  it("infers verification rules from the expected index while respecting an explicit override", async () => {
+    const build = await buildNanokaAgents(await fixture())
+    const expectedIndex = {
+      ...build.index,
+      rulesVersion: "nanoka-agent-reference/3" as const,
+    }
+    await edit(
+      join(build.artifactDirectory, "index.json"),
+      (value) => {
+        value.rulesVersion = expectedIndex.rulesVersion
+      },
+      true,
+    )
+    await expect(
+      verifyNanokaAgentArtifact({
+        artifactDirectory: build.artifactDirectory,
+        expectedIndex,
+      }),
+    ).resolves.toEqual(expectedIndex)
+    await expect(
+      verifyNanokaAgentArtifact({ artifactDirectory: build.artifactDirectory }),
+    ).rejects.toThrow("规则版本错误")
+    await expect(
+      verifyNanokaAgentArtifact({
+        artifactDirectory: build.artifactDirectory,
+        expectedIndex,
+        rulesVersion: "nanoka-agent-reference/4",
+      }),
+    ).rejects.toThrow("规则版本错误")
+  })
+
   it("builds every indexed member and configured language with independent byte digests", async () => {
     const options = await fixture()
     await fs.writeFile(

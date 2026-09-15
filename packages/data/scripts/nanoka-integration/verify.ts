@@ -3,6 +3,7 @@ import type {
   DetailLocale,
   ExportFileReference,
   IntegratedIndex,
+  HistoricalIntegratedIndex,
 } from "../../src/integration/agent-types.ts"
 import {
   equalJson,
@@ -125,21 +126,46 @@ export async function verifyAgentFile(
   return bytes.byteLength
 }
 
-/**
- * 验证制品的索引契约与精确文件集合；接受按实际字节重算摘要的 JSON 重新序列化副本。
- * 不读取 raw，也不把索引自述视作来源真实性证明或与原制品值相等的证明。
- * 构建器另外传入其完整输入导出的 expectedIndex，核对来源记录与输入摘要没有在写入时改变。
- */
-export async function verifyNanokaAgentArtifact(options: {
+/** 制品验证的共用输入；历史语言开关决定输出是否保证完整语言引用。 */
+interface VerifyNanokaAgentArtifactOptions<RulesVersion extends string> {
   /** 指向完整制品 integrated/nanoka 的本地目录。 */
   artifactDirectory: string
   /** 默认加载工作区来源策略；注入策略也必须通过同一校验。 */
   policy?: SourcePolicy
   /** 构建阶段按规范序列化的预期索引；省略时仅校验制品自身的一致性。 */
-  expectedIndex?: IntegratedIndex
-}): Promise<IntegratedIndex> {
+  expectedIndex?: HistoricalIntegratedIndex<RulesVersion>
+  /** 默认取 expectedIndex.rulesVersion，否则使用当前规则；显式值优先。恢复旧规则只验证同格式文件外壳。 */
+  rulesVersion?: RulesVersion
+  /** 仅恢复旧数据集时允许此前登记的支持语言子集；新候选仍要求完整当前配置。 */
+  historicalLanguages?: boolean
+}
+
+/**
+ * 验证制品的索引契约与精确文件集合；接受按实际字节重算摘要的 JSON 重新序列化副本。
+ * 不读取 raw，也不把索引自述视作来源真实性证明或与原制品值相等的证明。
+ * 构建器另外传入其完整输入导出的 expectedIndex，核对来源记录与输入摘要没有在写入时改变。
+ */
+export function verifyNanokaAgentArtifact<
+  RulesVersion extends string = IntegratedIndex["rulesVersion"],
+>(
+  options: VerifyNanokaAgentArtifactOptions<RulesVersion> & {
+    historicalLanguages?: false
+  },
+): Promise<IntegratedIndex<RulesVersion>>
+/** 历史开关为 true、动态 boolean 或未收窄的可选 boolean 时，返回可能缺失语言的索引。 */
+export function verifyNanokaAgentArtifact<
+  RulesVersion extends string = IntegratedIndex["rulesVersion"],
+>(
+  options: VerifyNanokaAgentArtifactOptions<RulesVersion>,
+): Promise<HistoricalIntegratedIndex<RulesVersion>>
+export async function verifyNanokaAgentArtifact<
+  RulesVersion extends string = IntegratedIndex["rulesVersion"],
+>(
+  options: VerifyNanokaAgentArtifactOptions<RulesVersion>,
+): Promise<HistoricalIntegratedIndex<RulesVersion>> {
   const policy = validateSourcePolicy(
     options.policy ?? (await loadSourcePolicy()),
+    { historicalLanguages: options.historicalLanguages ?? false },
   )
   const root = await directoryRoot(options.artifactDirectory)
   const maximumTotalBytes =
@@ -161,7 +187,10 @@ export async function verifyNanokaAgentArtifact(options: {
     "格式版本错误",
   )
   requireValue(
-    index.rulesVersion === "nanoka-agent-reference/4",
+    index.rulesVersion ===
+      (options.rulesVersion ??
+        options.expectedIndex?.rulesVersion ??
+        "nanoka-agent-reference/4"),
     "/rulesVersion",
     "规则版本错误",
   )
@@ -283,5 +312,5 @@ export async function verifyNanokaAgentArtifact(options: {
   }
   await verifyFileSet(root, files)
   // 以上运行时检查覆盖完整索引外壳；sourceRecord 仅要求 JSON 对象，未知原 key 保留。
-  return index as unknown as IntegratedIndex
+  return index as unknown as HistoricalIntegratedIndex<RulesVersion>
 }

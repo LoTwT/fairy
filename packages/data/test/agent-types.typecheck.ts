@@ -1,3 +1,7 @@
+import { buildNanokaAgents } from "../scripts/nanoka-integration/build.ts"
+import { verifyNanokaAgentArtifact } from "../scripts/nanoka-integration/verify.ts"
+import { withNanokaCurrentDataset } from "../scripts/nanoka-integration/current.ts"
+
 /** 由包 tsc 真正检查的正反例；移除 exactOptionalPropertyTypes 会令对应 @ts-expect-error 失败。 */
 import type {
   AgentData,
@@ -161,4 +165,82 @@ export const undefinedPassiveLevel: Pick<LanguagePassive, "level"> = {
 // @ts-expect-error 可选 talent 等级不能显式写 undefined。
 export const undefinedTalentLevel: Pick<LanguageTalent, "level"> = {
   level: undefined,
+}
+
+/** 历史语言子集必须先检查引用；默认构建和严格验证继续保证配置的完整语言。 */
+export async function currentIndexLanguageTypes(
+  artifactDirectory: string,
+  dynamicHistorical: boolean,
+) {
+  const historical = await verifyNanokaAgentArtifact({
+    artifactDirectory,
+    historicalLanguages: true,
+  })
+  // @ts-expect-error 历史集可能不含中文，不能直接访问固定语言的文件路径。
+  const unsafeHistorical: string = historical.agents["2"].files.content.zh.path
+  const chinese = historical.agents["2"].files.content.zh
+  if (chinese) {
+    const safePath: string = chinese.path
+    void safePath
+  }
+  const dynamic = await verifyNanokaAgentArtifact({
+    artifactDirectory,
+    historicalLanguages: dynamicHistorical,
+  })
+  // @ts-expect-error 动态 boolean 可能启用历史语言验证，返回引用也可能缺失。
+  const unsafeDynamic: string = dynamic.agents["2"].files.content.zh.path
+  await withNanokaCurrentDataset(
+    artifactDirectory,
+    async (_directory, index) => {
+      // @ts-expect-error 持锁读取也可能返回历史语言子集。
+      const unsafeRead: string = index.agents["2"].files.content.zh.path
+      const english = index.agents["2"].files.content.en
+      if (english) {
+        const safePath: string = english.path
+        void safePath
+      }
+      return unsafeRead
+    },
+  )
+  const built = await buildNanokaAgents({
+    rawRoot: "synthetic",
+    version: "synthetic",
+  })
+  const builtPath: string = built.index.agents["2"].files.content.zh.path
+  const builtEnglishPath: string = built.index.agents["2"].files.content.en.path
+  const strict = await verifyNanokaAgentArtifact({ artifactDirectory })
+  const strictPath: string = strict.agents["2"].files.content.zh.path
+  const explicitStrict = await verifyNanokaAgentArtifact({
+    artifactDirectory,
+    historicalLanguages: false,
+  })
+  const explicitPath: string = explicitStrict.agents["2"].files.content.en.path
+  const optionalOptions: {
+    artifactDirectory: string
+    historicalLanguages?: boolean
+  } = { artifactDirectory }
+  const optional = await verifyNanokaAgentArtifact(optionalOptions)
+  // @ts-expect-error 未收窄的可选 boolean 不保证严格语言全集。
+  const unsafeOptional: string = optional.agents["2"].files.content.zh.path
+  const explicitRules =
+    await verifyNanokaAgentArtifact<"nanoka-agent-reference/3">({
+      artifactDirectory,
+      rulesVersion: "nanoka-agent-reference/3",
+      historicalLanguages: true,
+    })
+  const retainedRules: "nanoka-agent-reference/3" = explicitRules.rulesVersion
+  const unsafeExplicitRules: string =
+    // @ts-expect-error 显式规则泛型不会消除历史语言缺失的可能。
+    explicitRules.agents["2"].files.content.zh.path
+  return [
+    unsafeHistorical,
+    unsafeDynamic,
+    unsafeOptional,
+    unsafeExplicitRules,
+    builtPath,
+    builtEnglishPath,
+    strictPath,
+    explicitPath,
+    retainedRules,
+  ]
 }
