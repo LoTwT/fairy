@@ -1,9 +1,9 @@
 import type { SupportedLanguage } from "../nanoka-identity.ts"
 
 /**
- * Nanoka 代理人整合资料的正式包内字段定义（规则 v4）。
+ * Nanoka 代理人整合资料的正式字段定义（规则 v4）。
  *
- * 以本地索引全部 58 个成员的双语结构为范围，尚不是 @randomplay/data 的公开 API。
+ * 以本地索引全部 58 个成员的双语结构为范围，由 @randomplay/data 根入口以类型导出。
  * 规则 v4 补充可选资源提取与潜能详情字段拼写，并沿用 v3 的 codeName 取值特例。
  * 不承诺未来来源版本结构不变；运行时保留未知成员，合成验收位于 test/agent-integration.test.ts。
  * 已登记结构字段只改为 camelCase，保留来源用词；每个声明字段有独立中文注释。

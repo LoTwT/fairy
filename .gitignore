@@ -6,3 +6,5 @@ packages/data/raw/
 fairy-nanoka-agents-*/
 .DS_Store
 *.log
+packages/data/.generated/
+packages/data/.publication-*/
