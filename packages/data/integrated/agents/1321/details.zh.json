@@ -1,0 +1,1667 @@
+{
+  "camp": {
+    "8": "天琴座"
+  },
+  "elementType": {
+    "201": "火属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "暴击伤害"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "火属性伤害加成"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1321,
+  "locale": "zh",
+  "name": "伊芙琳",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1321017", "1321018", "1321019", "1321020", "1321021"],
+      "basic": [
+        "1321001",
+        "1321002",
+        "1321003",
+        "1321004",
+        "1321005",
+        "1321006",
+        "1321007"
+      ],
+      "chain": ["1321015", "1321016"],
+      "dodge": ["1321013", "1321014"],
+      "special": ["1321008", "1321009", "1321010", "1321011", "1321012"]
+    },
+    "parameterRowsById": {
+      "1321001": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/5"
+      ],
+      "1321002": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/6"
+      ],
+      "1321003": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/7"
+      ],
+      "1321004": [
+        "/skill/basic/description/4/param/3",
+        "/skill/basic/description/4/param/8"
+      ],
+      "1321005": [
+        "/skill/basic/description/4/param/4",
+        "/skill/basic/description/4/param/9"
+      ],
+      "1321006": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1321007": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/1"
+      ],
+      "1321008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1321009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/2"
+      ],
+      "1321010": [
+        "/skill/special/description/4/param/1",
+        "/skill/special/description/4/param/3"
+      ],
+      "1321011": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/2"
+      ],
+      "1321012": [
+        "/skill/special/description/5/param/1",
+        "/skill/special/description/5/param/3"
+      ],
+      "1321013": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1321014": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1321015": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1321016": [
+        "/skill/chain/description/4/param/0",
+        "/skill/chain/description/4/param/1",
+        "/skill/chain/description/5/param/0",
+        "/skill/chain/description/5/param/1"
+      ],
+      "1321017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1321018": ["/skill/assist/description/4/param/0"],
+      "1321019": ["/skill/assist/description/4/param/1"],
+      "1321020": ["/skill/assist/description/4/param/2"],
+      "1321021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "10/7",
+    "fullName": "伊芙琳 · 舒瓦利耶",
+    "gender": "女",
+    "impressionF": "伊芙琳好帅哦，真的不能跟嘉音一起出道吗？两个人一起拍写真，好想看！",
+    "impressionM": "真羡慕女孩子，铃就可以很自然地说出这种愿望，我说的话大概会被打吧…",
+    "impressions": [
+      "对伊芙琳的印象：\n · 任何想要靠近嘉音的动作，都逃不过伊芙琳的眼睛…",
+      " · 在日复一日的相处中，伊芙琳逐渐放下了深藏的防备。",
+      " · 她在这个世界上所需要依靠的东西并不多，而我们，正是其中之一。"
+    ],
+    "profileDesc": "伊芙琳是丽都第一歌姬耀嘉音的经纪人兼贴身保镖，以其冷静果断的决策力和专业干练的风格闻名。是嘉音背后无可取代的支柱，「说到商业价值，耀嘉音如果是那个源头的1，那伊芙琳就是跟在后面的全部的0。」某娱乐杂志记者这样评论道。\n\n既能规划周全的行程和代言，又能在各种突发事件中保障嘉音的安全。「想要接近嘉音？要先过伊芙琳 · 舒瓦利耶那一关才行…」尽管工作繁忙，伊芙琳从不显得慌乱。她对细节有着近乎苛刻的要求，无论是嘉音的每一场演出，还是代言产品的品质，都必须经过她的严格把关。但奇怪的是，如此优秀的经纪人，却并不受到其母公司帝高娱乐的信任。\n\n情报：伊芙琳的身份似乎不仅仅是经纪人兼贴身保镖这么简单，背后似乎有一个「组织」。\n\n嘉音的核心加饭群里，嗑这一对CP的人似乎相当多。",
+    "stature": "173",
+    "trustLv": {
+      "1": "伊芙琳是丽都第一歌姬耀嘉音的经纪人兼贴身保镖，以其冷静果断的决策力和专业干练的风格闻名。是嘉音背后无可取代的支柱，「说到商业价值，耀嘉音如果是那个源头的1，那伊芙琳就是跟在后面的全部的0。」某娱乐杂志记者这样评论道。\n\n既能规划周全的行程和代言，又能在各种突发事件中保障嘉音的安全。「想要接近嘉音？要先过伊芙琳 · 舒瓦利耶那一关才行…」尽管工作繁忙，伊芙琳从不显得慌乱。她对细节有着近乎苛刻的要求，无论是嘉音的每一场演出，还是代言产品的品质，都必须经过她的严格把关。但奇怪的是，如此优秀的经纪人，却并不受到其母公司帝高娱乐的信任。\n\n情报：伊芙琳的身份似乎不仅仅是经纪人兼贴身保镖这么简单，背后似乎有一个「组织」。\n\n嘉音的核心加饭群里，嗑这一对CP的人似乎相当多。",
+      "2": "",
+      "3": "关于伊芙琳所隶属的「组织」，情报较为匮乏，目前仅知伊芙琳年幼时被纳入「组织」，接受过严苛的训练，习得了在任何环境中都能快速决策与执行任务的技能。虽然这些经历在她身上留下了不少隐秘的伤痕，但也让她拥有了不凡的身手和冷静的头脑。\n\n思考：需要调查「组织」究竟是什么组织。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线「悠然插曲·金翅雀逃跑计划」（主线第五章完成后开启）",
+      "完成独家视界「闪耀的此刻」",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1321501": {
+        "desc": [
+          "进入<color=#FFFFFF>[牵缠禁制]</color>时，伊芙琳的暴击率提升<color=#2BAD00>12.5%</color>，退出<color=#FFFFFF>[牵缠禁制]</color>后，伊芙琳仍可继续保有增益，持续10秒；在<color=#FFFFFF>[牵缠禁制]</color>期间切换至其他角色时，伊芙琳将自动衔接<color=#FFFFFF>[特殊技：束裂式·I型]</color>。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n伊芙琳的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，<color=#FFFFFF>[连携技：月辉丝·绊]</color>、<color=#FFFFFF>[终结技：月辉丝·弦音]</color>和<color=#FFFFFF>[终结技：月辉丝·弦影]</color>的伤害倍率提升至原本的125%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：缠丝", "额外能力：潜袭支点"],
+        "potential": []
+      },
+      "1321502": {
+        "desc": [
+          "进入<color=#FFFFFF>[牵缠禁制]</color>时，伊芙琳的暴击率提升<color=#2BAD00>14.6%</color>，退出<color=#FFFFFF>[牵缠禁制]</color>后，伊芙琳仍可继续保有增益，持续10秒；在<color=#FFFFFF>[牵缠禁制]</color>期间切换至其他角色时，伊芙琳将自动衔接<color=#FFFFFF>[特殊技：束裂式·I型]</color>。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n伊芙琳的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，<color=#FFFFFF>[连携技：月辉丝·绊]</color>、<color=#FFFFFF>[终结技：月辉丝·弦音]</color>和<color=#FFFFFF>[终结技：月辉丝·弦影]</color>的伤害倍率提升至原本的125%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：缠丝", "额外能力：潜袭支点"],
+        "potential": []
+      },
+      "1321503": {
+        "desc": [
+          "进入<color=#FFFFFF>[牵缠禁制]</color>时，伊芙琳的暴击率提升<color=#2BAD00>16.7%</color>，退出<color=#FFFFFF>[牵缠禁制]</color>后，伊芙琳仍可继续保有增益，持续10秒；在<color=#FFFFFF>[牵缠禁制]</color>期间切换至其他角色时，伊芙琳将自动衔接<color=#FFFFFF>[特殊技：束裂式·I型]</color>。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n伊芙琳的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，<color=#FFFFFF>[连携技：月辉丝·绊]</color>、<color=#FFFFFF>[终结技：月辉丝·弦音]</color>和<color=#FFFFFF>[终结技：月辉丝·弦影]</color>的伤害倍率提升至原本的125%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：缠丝", "额外能力：潜袭支点"],
+        "potential": []
+      },
+      "1321504": {
+        "desc": [
+          "进入<color=#FFFFFF>[牵缠禁制]</color>时，伊芙琳的暴击率提升<color=#2BAD00>18.8%</color>，退出<color=#FFFFFF>[牵缠禁制]</color>后，伊芙琳仍可继续保有增益，持续10秒；在<color=#FFFFFF>[牵缠禁制]</color>期间切换至其他角色时，伊芙琳将自动衔接<color=#FFFFFF>[特殊技：束裂式·I型]</color>。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n伊芙琳的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，<color=#FFFFFF>[连携技：月辉丝·绊]</color>、<color=#FFFFFF>[终结技：月辉丝·弦音]</color>和<color=#FFFFFF>[终结技：月辉丝·弦影]</color>的伤害倍率提升至原本的125%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：缠丝", "额外能力：潜袭支点"],
+        "potential": []
+      },
+      "1321505": {
+        "desc": [
+          "进入<color=#FFFFFF>[牵缠禁制]</color>时，伊芙琳的暴击率提升<color=#2BAD00>20.8%</color>，退出<color=#FFFFFF>[牵缠禁制]</color>后，伊芙琳仍可继续保有增益，持续10秒；在<color=#FFFFFF>[牵缠禁制]</color>期间切换至其他角色时，伊芙琳将自动衔接<color=#FFFFFF>[特殊技：束裂式·I型]</color>。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n伊芙琳的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，<color=#FFFFFF>[连携技：月辉丝·绊]</color>、<color=#FFFFFF>[终结技：月辉丝·弦音]</color>和<color=#FFFFFF>[终结技：月辉丝·弦影]</color>的伤害倍率提升至原本的125%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：缠丝", "额外能力：潜袭支点"],
+        "potential": []
+      },
+      "1321506": {
+        "desc": [
+          "进入<color=#FFFFFF>[牵缠禁制]</color>时，伊芙琳的暴击率提升<color=#2BAD00>23%</color>，退出<color=#FFFFFF>[牵缠禁制]</color>后，伊芙琳仍可继续保有增益，持续10秒；在<color=#FFFFFF>[牵缠禁制]</color>期间切换至其他角色时，伊芙琳将自动衔接<color=#FFFFFF>[特殊技：束裂式·I型]</color>。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n伊芙琳的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，<color=#FFFFFF>[连携技：月辉丝·绊]</color>、<color=#FFFFFF>[终结技：月辉丝·弦音]</color>和<color=#FFFFFF>[终结技：月辉丝·弦影]</color>的伤害倍率提升至原本的125%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：缠丝", "额外能力：潜袭支点"],
+        "potential": []
+      },
+      "1321507": {
+        "desc": [
+          "进入<color=#FFFFFF>[牵缠禁制]</color>时，伊芙琳的暴击率提升<color=#2BAD00>25%</color>，退出<color=#FFFFFF>[牵缠禁制]</color>后，伊芙琳仍可继续保有增益，持续10秒；在<color=#FFFFFF>[牵缠禁制]</color>期间切换至其他角色时，伊芙琳将自动衔接<color=#FFFFFF>[特殊技：束裂式·I型]</color>。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n伊芙琳的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，<color=#FFFFFF>[连携技：月辉丝·绊]</color>、<color=#FFFFFF>[终结技：月辉丝·弦音]</color>和<color=#FFFFFF>[终结技：月辉丝·弦影]</color>的伤害倍率提升至原本的125%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：缠丝", "额外能力：潜袭支点"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n挥动<color=#FFFFFF>[月辉丝·弦]</color>斩击周围敌人，造成<color=#FF5521>火属性伤害</color>；\n攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：烈锋",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：静默掩护",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n挥动<color=#FFFFFF>[月辉丝·弦]</color>进行斩击，随后在前方引发爆炸，造成<color=#FF5521>火属性伤害</color>；\n攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：轨迹干涉",
+          "potential": []
+        },
+        {
+          "name": "快速支援：烈锋",
+          "param": [
+            {
+              "desc": "{Skill:1321017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321017": {
+                  "attackData": [],
+                  "attributeInfliction": 7003,
+                  "damagePercentage": 7710,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 3502,
+                  "feverRecovery": 192775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 7710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7710,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321017": {
+                  "attackData": [],
+                  "attributeInfliction": 7003,
+                  "damagePercentage": 7710,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 3502,
+                  "feverRecovery": 192775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7710,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：静默掩护",
+          "param": [
+            {
+              "desc": "{Skill:1321018, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1321018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321019, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1321019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321020, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1321020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：轨迹干涉",
+          "param": [
+            {
+              "desc": "{Skill:1321021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321021": {
+                  "attackData": [],
+                  "attributeInfliction": 24567,
+                  "damagePercentage": 29160,
+                  "damagePercentageGrowth": 2660,
+                  "etherPurify": 10997,
+                  "feverRecovery": 835725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2660,
+                  "main": 29160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24900,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321021": {
+                  "attackData": [],
+                  "attributeInfliction": 24567,
+                  "damagePercentage": 29160,
+                  "damagePercentageGrowth": 2660,
+                  "etherPurify": 10997,
+                  "feverRecovery": 835725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 24900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24900,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多五段的攻击，造成<color=#F0D12B>物理伤害</color>和<color=#FF5521>火属性伤害</color>；\n第五段攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>。",
+          "name": "普通攻击：割弦",
+          "potential": []
+        },
+        {
+          "desc": "伊芙琳发动招式对敌人造成伤害时，会累积<color=#FFFFFF>[燎火]</color>；\n伊芙琳消耗<color=#FFFFFF>[燎火]</color>发动<color=#FFFFFF>[绞勒式]</color>，或消耗<color=#FFFFFF>[喧响值]</color>发动<color=#FFFFFF>[终结技]</color>时，会累积1点<color=#FFFFFF>[燎索点]</color>；\n拥有3点<color=#FFFFFF>[燎索点]</color>后，伊芙琳下一次发动<color=#FFFFFF>[绞勒式]</color>时，会消耗所有<color=#FFFFFF>[燎索点]</color>，并将招式替换为打断等级较弱的<color=#FFFFFF>[连携技：月辉丝·绊]</color>。",
+          "name": "被动：绑缚",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[燎火]</color>大于等于50%时，长按 <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 发动：\n消耗50%<color=#FFFFFF>[燎火]</color>，使用<color=#FFFFFF>[月辉丝·弦]</color>进行斩击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动后，累积1点<color=#FFFFFF>[燎索点]</color>。",
+          "name": "普通攻击：绞勒式·I型",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[燎火]</color>大于等于50%时，<color=#FFFFFF>[普通攻击：绞勒式·I型]</color>发动后，继续长按  <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 发动：\n消耗50%<color=#FFFFFF>[燎火]</color>，使用<color=#FFFFFF>[月辉丝·弦]</color>进行追击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动后，累积1点<color=#FFFFFF>[燎索点]</color>。",
+          "name": "普通攻击：绞勒式·II型",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：割弦",
+          "param": [
+            {
+              "desc": "{Skill:1321001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1321001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5120,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 2328,
+                  "feverRecovery": 64075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 5120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2560,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1321002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6210,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 4890,
+                  "feverRecovery": 134475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5380,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1321003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7820,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 5642,
+                  "feverRecovery": 155375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6210,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1321004": {
+                  "attackData": [],
+                  "attributeInfliction": 13903,
+                  "damagePercentage": 18670,
+                  "damagePercentageGrowth": 1700,
+                  "etherPurify": 13904,
+                  "feverRecovery": 382525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1700,
+                  "main": 18670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 50060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15300,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321005, Prop:1001}",
+              "name": "五段伤害倍率",
+              "param": {
+                "1321005": {
+                  "attackData": [],
+                  "attributeInfliction": 15291,
+                  "damagePercentage": 22340,
+                  "damagePercentageGrowth": 2040,
+                  "etherPurify": 15292,
+                  "feverRecovery": 420750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2040,
+                  "main": 22340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16830,
+                  "stunRatioGrowth": 770
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1321001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5120,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 2328,
+                  "feverRecovery": 64075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2560,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1321002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6210,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 4890,
+                  "feverRecovery": 134475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5380,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1321003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7820,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 5642,
+                  "feverRecovery": 155375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6210,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1321004": {
+                  "attackData": [],
+                  "attributeInfliction": 13903,
+                  "damagePercentage": 18670,
+                  "damagePercentageGrowth": 1700,
+                  "etherPurify": 13904,
+                  "feverRecovery": 382525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 15300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 50060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15300,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321005, Prop:1002}",
+              "name": "五段失衡倍率",
+              "param": {
+                "1321005": {
+                  "attackData": [],
+                  "attributeInfliction": 15291,
+                  "damagePercentage": 22340,
+                  "damagePercentageGrowth": 2040,
+                  "etherPurify": 15292,
+                  "feverRecovery": 420750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 770,
+                  "main": 16830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16830,
+                  "stunRatioGrowth": 770
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：绞勒式·I型",
+          "param": [
+            {
+              "desc": "{Skill:1321006, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321006": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 22640,
+                  "damagePercentageGrowth": 2060,
+                  "etherPurify": 11004,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2060,
+                  "main": 22640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12110,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321006, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321006": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 22640,
+                  "damagePercentageGrowth": 2060,
+                  "etherPurify": 11004,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12110,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：绞勒式·II型",
+          "param": [
+            {
+              "desc": "{Skill:1321007, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321007": {
+                  "attackData": [],
+                  "attributeInfliction": 11336,
+                  "damagePercentage": 24520,
+                  "damagePercentageGrowth": 2230,
+                  "etherPurify": 11337,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2230,
+                  "main": 24520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12480,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321007, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321007": {
+                  "attackData": [],
+                  "attributeInfliction": 11336,
+                  "damagePercentage": 24520,
+                  "damagePercentageGrowth": 2230,
+                  "etherPurify": 11337,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 12480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12480,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n使用复数<color=#FFFFFF>[月辉丝·弦]</color>连续斩击前方范围内敌人并引爆，造成大量<color=#FF5521>火属性伤害</color>；\n攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：月辉丝·绊",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n使用复数<color=#FFFFFF>[月辉丝·弦]</color>连续斩击前方范围内敌人并引爆，造成大量<color=#FF5521>火属性伤害</color>；\n招式发动时，伊芙琳将脱掉风衣，并进入<color=#FFFFFF>[焰舞觉醒]</color>状态，持续整场战斗，<color=#FFFFFF>[焰舞觉醒]</color>状态下，伊芙琳消耗<color=#FFFFFF>[燎索点]</color>发动<color=#FFFFFF>[连携技：月辉丝·绊]</color>时，将会保留1点<color=#FFFFFF>[燎索点]</color>；\n攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动期间拥有无敌效果；\n招式发动后，累积1点<color=#FFFFFF>[燎索点]</color>。",
+          "name": "终结技：月辉丝·弦音",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[焰舞觉醒]</color>状态下，喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n使用复数<color=#FFFFFF>[月辉丝·弦]</color>连续斩击前方范围内敌人并引爆，造成大量<color=#FF5521>火属性伤害</color>；\n攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动期间拥有无敌效果；\n招式发动后，累积1点<color=#FFFFFF>[燎索点]</color>。",
+          "name": "终结技：月辉丝·弦影",
+          "potential": []
+        },
+        {
+          "name": "连携技：月辉丝·绊",
+          "param": [
+            {
+              "desc": "{Skill:1321015, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321015": {
+                  "attackData": [],
+                  "attributeInfliction": 29017,
+                  "damagePercentage": 82930,
+                  "damagePercentageGrowth": 7540,
+                  "etherPurify": 21504,
+                  "feverRecovery": 1694275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7540,
+                  "main": 82930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23660,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321015, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321015": {
+                  "attackData": [],
+                  "attributeInfliction": 29017,
+                  "damagePercentage": 82930,
+                  "damagePercentageGrowth": 7540,
+                  "etherPurify": 21504,
+                  "feverRecovery": 1694275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 23660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23660,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：月辉丝·弦音",
+          "param": [
+            {
+              "desc": "{Skill:1321016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321016": {
+                  "attackData": [],
+                  "attributeInfliction": 23670,
+                  "damagePercentage": 198850,
+                  "damagePercentageGrowth": 18080,
+                  "etherPurify": 73671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 18080,
+                  "main": 198850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26040,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321016": {
+                  "attackData": [],
+                  "attributeInfliction": 23670,
+                  "damagePercentage": 198850,
+                  "damagePercentageGrowth": 18080,
+                  "etherPurify": 73671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1190,
+                  "main": 26040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26040,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：月辉丝·弦影",
+          "param": [
+            {
+              "desc": "{Skill:1321016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321016": {
+                  "attackData": [],
+                  "attributeInfliction": 23670,
+                  "damagePercentage": 198850,
+                  "damagePercentageGrowth": 18080,
+                  "etherPurify": 73671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 18080,
+                  "main": 198850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26040,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321016": {
+                  "attackData": [],
+                  "attributeInfliction": 23670,
+                  "damagePercentage": 198850,
+                  "damagePercentageGrowth": 18080,
+                  "etherPurify": 73671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1190,
+                  "main": 26040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26040,
+                  "stunRatioGrowth": 1190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：弧步",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n踢击前方敌人，造成<color=#F0D12B>物理伤害</color>；",
+          "name": "冲刺攻击：穿梭潜袭",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n挥动<color=#FFFFFF>[月辉丝·弦]</color>斩击周围敌人，造成<color=#FF5521>火属性伤害</color>；\n攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：绞缢反制",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：穿梭潜袭",
+          "param": [
+            {
+              "desc": "{Skill:1321013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6050,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2749,
+                  "feverRecovery": 75625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 6050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3030,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6050,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2749,
+                  "feverRecovery": 75625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 3030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3030,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：绞缢反制",
+          "param": [
+            {
+              "desc": "{Skill:1321014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1321014": {
+                  "attackData": [],
+                  "attributeInfliction": 7003,
+                  "damagePercentage": 21020,
+                  "damagePercentageGrowth": 1920,
+                  "etherPurify": 22004,
+                  "feverRecovery": 192775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1920,
+                  "main": 21020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18710,
+                  "stunRatioGrowth": 860
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1321014": {
+                  "attackData": [],
+                  "attributeInfliction": 7003,
+                  "damagePercentage": 21020,
+                  "damagePercentageGrowth": 1920,
+                  "etherPurify": 22004,
+                  "feverRecovery": 192775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 860,
+                  "main": 18710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18710,
+                  "stunRatioGrowth": 860
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "未进入<color=#FFFFFF>[牵缠禁制]</color>前，点按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady>  发动：\n使用<color=#FFFFFF>[月辉丝·弦]</color>牵引敌人并突进踢击，造成<color=#FF5521>火属性伤害</color>；\n攻击命中敌人时，伊芙琳会使用<color=#FFFFFF>[月辉丝·弦]</color>链接主要目标，与其进入<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：锁系控位",
+          "potential": []
+        },
+        {
+          "desc": "进入<color=#FFFFFF>[牵缠禁制]</color>后，点按或长按 <IconMap:Icon_Special> 发动：\n以被<color=#FFFFFF>[牵缠禁制]</color>的目标为中心，牵引周围敌人并引爆，造成<color=#FF5521>火属性伤害</color>，引爆后将退出<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动时，可以闪避敌人的攻击，若成功触发<color=#FFFFFF>[极限闪避]</color>，将额外累积25%<color=#FFFFFF>[燎火]</color>；\n牵引周围敌人后，点按 <IconMap:Icon_Normal> ，可以取消引爆，直接衔接第三段<color=#FFFFFF>[普通攻击]</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：束裂式·I型",
+          "potential": []
+        },
+        {
+          "desc": "进入<color=#FFFFFF>[牵缠禁制]</color>后，能量足够时，点按或长按 <IconMap:Icon_SpecialReady> 发动：\n以被<color=#FFFFFF>[牵缠禁制]</color>的目标为中心，牵引周围敌人并引爆，造成大量<color=#FF5521>火属性伤害</color>，引爆后将退出<color=#FFFFFF>[牵缠禁制]</color>；\n招式发动时，可以闪避敌人的攻击，若成功触发<color=#FFFFFF>[极限闪避]</color>，将额外累积25%<color=#FFFFFF>[燎火]</color>；\n牵引周围敌人后，点按 <IconMap:Icon_Normal> ，可以取消引爆，直接衔接第三段<color=#FFFFFF>[普通攻击]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：束裂式·终型",
+          "potential": []
+        },
+        {
+          "name": "特殊技：锁系控位",
+          "param": [
+            {
+              "desc": "{Skill:1321008, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1321008": {
+                  "attackData": [],
+                  "attributeInfliction": 4748,
+                  "damagePercentage": 5230,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4749,
+                  "feverRecovery": 261250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321008, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1321008": {
+                  "attackData": [],
+                  "attributeInfliction": 4748,
+                  "damagePercentage": 5230,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4749,
+                  "feverRecovery": 261250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：束裂式·I型",
+          "param": [
+            {
+              "desc": "{Skill:1321009, Prop:1001}",
+              "name": "缠绕伤害倍率",
+              "param": {
+                "1321009": {
+                  "attackData": [],
+                  "attributeInfliction": 3664,
+                  "damagePercentage": 4040,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 3665,
+                  "feverRecovery": 201575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 4040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321010, Prop:1001}",
+              "name": "引爆伤害倍率",
+              "param": {
+                "1321010": {
+                  "attackData": [],
+                  "attributeInfliction": 3084,
+                  "damagePercentage": 3400,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 3085,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 3400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3400,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321009, Prop:1002}",
+              "name": "缠绕失衡倍率",
+              "param": {
+                "1321009": {
+                  "attackData": [],
+                  "attributeInfliction": 3664,
+                  "damagePercentage": 4040,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 3665,
+                  "feverRecovery": 201575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321010, Prop:1002}",
+              "name": "引爆失衡倍率",
+              "param": {
+                "1321010": {
+                  "attackData": [],
+                  "attributeInfliction": 3084,
+                  "damagePercentage": 3400,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 3085,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3400,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：束裂式·终型",
+          "param": [
+            {
+              "desc": "{Skill:1321011, Prop:1001}",
+              "name": "缠绕伤害倍率",
+              "param": {
+                "1321011": {
+                  "attackData": [],
+                  "attributeInfliction": 44462,
+                  "damagePercentage": 54120,
+                  "damagePercentageGrowth": 4920,
+                  "etherPurify": 11331,
+                  "feverRecovery": 1613425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4920,
+                  "main": 54120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43710,
+                  "stunRatioGrowth": 1990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321012, Prop:1001}",
+              "name": "引爆伤害倍率",
+              "param": {
+                "1321012": {
+                  "attackData": [],
+                  "attributeInfliction": 5620,
+                  "damagePercentage": 5960,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 4164,
+                  "feverRecovery": 171875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321011, Prop:1002}",
+              "name": "缠绕失衡倍率",
+              "param": {
+                "1321011": {
+                  "attackData": [],
+                  "attributeInfliction": 44462,
+                  "damagePercentage": 54120,
+                  "damagePercentageGrowth": 4920,
+                  "etherPurify": 11331,
+                  "feverRecovery": 1613425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1990,
+                  "main": 43710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43710,
+                  "stunRatioGrowth": 1990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1321012, Prop:1002}",
+              "name": "引爆失衡倍率",
+              "param": {
+                "1321012": {
+                  "attackData": [],
+                  "attributeInfliction": 5620,
+                  "damagePercentage": 5960,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 4164,
+                  "feverRecovery": 171875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1321001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：割弦（一、二、三段）"
+    },
+    "1321002": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：割弦（四、五段）"
+    },
+    "1321003": {
+      "desc": "<IconMap:Icon_Special>（束裂式） ; <IconMap:Icon_Normal>（束裂式引爆前） ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal>",
+      "name": "普通攻击：割弦（束裂式取消引爆）"
+    },
+    "1321004": {
+      "desc": "<IconMap:Icon_Normal>（长按）",
+      "name": "普通攻击：绞勒式"
+    },
+    "1321005": {
+      "desc": "<IconMap:Icon_Special>（束裂式牵引时）（长按）",
+      "name": "普通攻击：绞勒式"
+    },
+    "1321006": {
+      "desc": "<IconMap:Icon_Special>（牵缠禁制前）",
+      "name": "特殊技：锁系控位"
+    },
+    "1321007": {
+      "desc": "<IconMap:Icon_Special>（牵缠禁制后）",
+      "name": "特殊技：束裂式·I型"
+    },
+    "1321008": {
+      "desc": "<IconMap:Icon_SpecialReady>（牵缠禁制后）",
+      "name": "强化特殊技：束裂式·终型"
+    },
+    "1321009": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：穿梭潜袭"
+    },
+    "1321010": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：绞缢反制"
+    },
+    "1321011": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：月辉丝·绊"
+    },
+    "1321012": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：月辉丝·弦音"
+    },
+    "1321013": {
+      "desc": "<IconMap:Icon_UltimateReady>（焰舞觉醒下）",
+      "name": "终结技：月辉丝·弦影"
+    },
+    "1321014": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：烈锋"
+    },
+    "1321015": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：静默掩护"
+    },
+    "1321016": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：轨迹干涉"
+    }
+  },
+  "skin": {
+    "3113210": {
+      "desc": "干练凌厉的经纪人装束，锋芒暗露，令窥伺者止步。缃叶色的发丝织就细密之网，一泓星光安然栖居其中。",
+      "name": "伊芙琳·飞蛾逐光"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，站场输出",
+    "兼具速切爆发能力",
+    "无需失衡即可触发[连携技]"
+  ],
+  "talent": {
+    "1": {
+      "desc": "进入战场时，伊芙琳立刻获得1500点喧响值，在勘域模式中此效果180秒内最多触发一次；敌人进入<color=#FFFFFF>[牵缠禁制]</color>后，将被施加<color=#FFFFFF>[禁锢]</color>效果，伊芙琳攻击带有<color=#FFFFFF>[禁锢]</color>效果的敌人时，无视目标12%防御力；伊芙琳发动<color=#FFFFFF>[特殊技：束裂式·I型]</color>或<color=#FFFFFF>[强化特殊技：束裂式·终型]</color>时，会将<color=#FFFFFF>[禁锢]</color>效果扩散给所有被招式命中的敌人，被扩散的<color=#FFFFFF>[禁锢]</color>效果持续10秒。",
+      "desc2": "远方模糊的光亮，似乎是她编织出的梦，一个无法触碰的未来。那不是为了赎罪，而是对自由的渴求。\n「你果然也是想要的吧？真正的生活。」——一位匿名的前同事曾对伊芙琳这样说道。",
+      "name": "织梦"
+    },
+    "2": {
+      "desc": "伊芙琳的攻击力提升15%；伊芙琳发动<color=#FFFFFF>[普通攻击：绞勒式·I型]</color>或<color=#FFFFFF>[普通攻击：绞勒式·II型]</color>时，将返还所消耗的<color=#FFFFFF>[燎火]</color>，25秒内最多触发一次；伊芙琳消耗<color=#FFFFFF>[燎索点]</color>发动<color=#FFFFFF>[连携技：月辉丝·绊]</color>时，招式的打断等级提升。",
+      "desc2": "「对我来说，那种光是陌生的，我本该避开，可它却穿透了所有防线，像是要提醒我，黑暗之外还有什么值得追寻。」\n回忆起第一次见到嘉音的情景，伊芙琳的语气里夹杂着一丝罕见的柔软。",
+      "name": "赴火之舞"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "那一刻，她从禁锢中脱身，成为更真实的自己。\n绷紧的绳索断裂，曾经的枷锁化作破碎的茧壳。伊芙琳站在新生的边界，冷冽的目光里，一丝柔光若隐若现。",
+      "name": "破茧"
+    },
+    "4": {
+      "desc": "发动<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，伊芙琳立刻获得等同于自身10%生命值上限的护盾，持有该护盾时，伊芙琳的暴击伤害提升40%。",
+      "desc2": "「伊芙，你知道吗？每次遇到对我的生命而言至关重要的人时，我心里都会『噔噔！』这样响一下~」\n伊芙琳叹了口气，示意时间已经不早了，嘉音慌忙拉上礼服的后襟，推门而出。\n「…噔噔。」独自留在化妆间的伊芙琳，低声重复了一遍。",
+      "name": "命运的弦音"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "她的丝线，如同被晨曦染成赤红的云霞。\n每一次攻击后潇洒地回身，炽焰如霞光般散落。无需言语，伊芙琳早已将守护化为燃烧的光辉。",
+      "name": "丹缕如霞"
+    },
+    "6": {
+      "desc": "发动<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，伊芙琳将获得<color=#FFFFFF>[弦影绝锋]</color>，持续20秒；<color=#FFFFFF>[弦影绝锋]</color>期间，伊芙琳发动<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[冲刺攻击]</color>、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[强化特殊技]</color>命中主要攻击目标时，将额外释放一段<color=#FFFFFF>[月辉丝·弦]</color>进行追击，对范围内敌人造成等同于伊芙琳375%攻击力的<color=#FF5521>火属性伤害</color>，该伤害会被视为<color=#FFFFFF>[连携技]</color>伤害，最多触发16次，再次获得<color=#FFFFFF>[弦影绝锋]</color>时刷新可触发次数。",
+      "desc2": "有光的地方，永远有影。\n它无声无息地隐匿，追随着光的轨迹，守护每一次明亮的绽放。\n影从不试图夺走光的辉煌，却在每一个转身间，默默填补它未及的角落。\n两者从未分离，也无法分离——光因影而完整，影因光而存在。这是一场永无止息的追随，也是一份不可言说的羁绊。",
+      "name": "光与影的牵绊"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

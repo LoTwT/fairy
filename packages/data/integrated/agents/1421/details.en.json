@@ -1,0 +1,1412 @@
+{
+  "camp": {
+    "10": "Yunkui Summit"
+  },
+  "elementType": {
+    "200": "Physical"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1421,
+  "locale": "en",
+  "name": "Pan Yinhu",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1421014", "1421015", "1421016", "1421017", "1421018"],
+      "basic": ["1421001", "1421002", "1421003", "1421004"],
+      "chain": ["1421012", "1421013"],
+      "dodge": ["1421010", "1421011"],
+      "special": ["1421005", "1421006", "1421007", "1421008", "1421009"]
+    },
+    "parameterRowsById": {
+      "1421001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/4"
+      ],
+      "1421002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/5"
+      ],
+      "1421003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1421004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1421005": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1421006": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1421007": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1421008": [
+        "/skill/special/description/4/param/2",
+        "/skill/special/description/4/param/3"
+      ],
+      "1421009": [
+        "/skill/special/description/4/param/4",
+        "/skill/special/description/4/param/5"
+      ],
+      "1421010": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1421011": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1421012": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1421013": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1421014": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1421015": ["/skill/assist/description/4/param/0"],
+      "1421016": ["/skill/assist/description/4/param/1"],
+      "1421017": ["/skill/assist/description/4/param/2"],
+      "1421018": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "MAY 10",
+    "fullName": "Pan Yinhu",
+    "gender": "Male",
+    "impressionF": "Every time we're about to order takeout, Senior Yinhu immediately pipes up to stop us, saying takeout isn't good for you, then offers to whip up whatever we want in the kitchen... We haven't ordered takeout in months!",
+    "impressionM": "His cooking really can't be beat, except for the fact he occasionally holds back on the meat... I really want to learn some of his recipes.",
+    "impressions": [
+      "Impressions of Pan Yinhu:\n· As the manager of Suibian Temple's funds, he makes sure not a single Denny goes to waste!",
+      "· As Suibian Temple's head chef, he ensures every piece of char siu conquers his companions' taste buds!",
+      "· As Suibian Temple's newest senior, he's obliged to support his juniors' suggestions without question!"
+    ],
+    "profileDesc": "Pan Yinhu, disciple of Yunkui Summit, serves as both the head chef and financial manager of Suibian Temple. He's proficient in martial arts, and an expert in pressure-point techniques.\nAs the one managing Suibian Temple's money, he's a master at keeping costs down and can bargain a 5,000 Denny piece of meat down to 500. If he can make something at home, he refuses to purchase it at a store, and no matter which big supermarket or shop you name, he's got a coupon for it tucked in his pocket.\nThanks to him, the members of Suibian Temple enjoy delicious yet budget-friendly meals every day. As the head of the kitchen, he demands precise flavor profiles and pays keen attention to his friends' opinions.\nWhat's more, given his years of frugality, it's safe to assume that both the group's treasury and his secret piggy bank have ballooned to jaw-dropping levels.",
+    "stature": "192",
+    "trustLv": {
+      "1": "Pan Yinhu, disciple of Yunkui Summit, serves as both the head chef and financial manager of Suibian Temple. He's proficient in martial arts, and an expert in pressure-point techniques.\nAs the one managing Suibian Temple's money, he's a master at keeping costs down and can bargain a 5,000 Denny piece of meat down to 500. If he can make something at home, he refuses to purchase it at a store, and no matter which big supermarket or shop you name, he's got a coupon for it tucked in his pocket.\nThanks to him, the members of Suibian Temple enjoy delicious yet budget-friendly meals every day. As the head of the kitchen, he demands precise flavor profiles and pays keen attention to his friends' opinions.\nWhat's more, given his years of frugality, it's safe to assume that both the group's treasury and his secret piggy bank have ballooned to jaw-dropping levels.",
+      "2": "",
+      "3": "Being a Panda Thiren, an exceedingly rare sight in New Eridu, Pan Yinhu has scraped by on his own since he was a child. Only someone who's truly known starvation understands its terror, and to fill his belly he sampled every trade he could find. In the end, his remarkable Ether aptitude led him to become a Hollow Raider.\nAs a Hollow Raider, he had a chance encounter with Yixuan. Following a harsh beating and a sudden spiritual awakening, he opted to become a disciple of Yunkui Summit, where he now practices the mystic arts to cleanse his then-increasingly violent nature.\nBecause he joined the sect later than most, he actually has very few junior disciples — and you, Master, are one of them. As your senior, he shows his care by cooking special dishes just for you and constantly sneaking store coupons into your pockets.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 1",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1421501": {
+        "desc": [
+          "For a brief period when Pan Yinhu's <color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> hits an enemy and triggers Quick Assist, the next Agent entering through a Quick Assist or Chain Attack will gain the <color=#FFFFFF>Meridian Flow</color> effect. This effect provides a Sheer Force boost equal to <color=#2BAD00>9%</color> of Pan Yinhu's initial ATK and lasts for 25s. The Sheer Force provided by this effect cannot exceed 540 points.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> character or shares the same Faction:\nWhen Pan Yinhu hits an enemy with <color=#FFFFFF>Special Attack: Touch of Death</color>, the enemy suffers the <color=#FFFFFF>Depleted Qi</color> effect, increasing DMG from all units against the target by 20%. Each hit of <color=#FFFFFF>Special Attack: Touch of Death</color> inflicts a 10s <color=#FFFFFF>Depleted Qi</color> effect. This effect does not stack, but repeated hits on the same enemy will extend the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Meridian Enlightenment",
+          "Additional Ability: Iron Stomach"
+        ],
+        "potential": []
+      },
+      "1421502": {
+        "desc": [
+          "For a brief period when Pan Yinhu's <color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> hits an enemy and triggers Quick Assist, the next Agent entering through a Quick Assist or Chain Attack will gain the <color=#FFFFFF>Meridian Flow</color> effect. This effect provides a Sheer Force boost equal to <color=#2BAD00>10.5%</color> of Pan Yinhu's initial ATK and lasts for 25s. The Sheer Force provided by this effect cannot exceed 540 points.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> character or shares the same Faction:\nWhen Pan Yinhu hits an enemy with <color=#FFFFFF>Special Attack: Touch of Death</color>, the enemy suffers the <color=#FFFFFF>Depleted Qi</color> effect, increasing DMG from all units against the target by 20%. Each hit of <color=#FFFFFF>Special Attack: Touch of Death</color> inflicts a 10s <color=#FFFFFF>Depleted Qi</color> effect. This effect does not stack, but repeated hits on the same enemy will extend the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Meridian Enlightenment",
+          "Additional Ability: Iron Stomach"
+        ],
+        "potential": []
+      },
+      "1421503": {
+        "desc": [
+          "For a brief period when Pan Yinhu's <color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> hits an enemy and triggers Quick Assist, the next Agent entering through a Quick Assist or Chain Attack will gain the <color=#FFFFFF>Meridian Flow</color> effect. This effect provides a Sheer Force boost equal to <color=#2BAD00>12%</color> of Pan Yinhu's initial ATK and lasts for 25s. The Sheer Force provided by this effect cannot exceed 540 points.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> character or shares the same Faction:\nWhen Pan Yinhu hits an enemy with <color=#FFFFFF>Special Attack: Touch of Death</color>, the enemy suffers the <color=#FFFFFF>Depleted Qi</color> effect, increasing DMG from all units against the target by 20%. Each hit of <color=#FFFFFF>Special Attack: Touch of Death</color> inflicts a 10s <color=#FFFFFF>Depleted Qi</color> effect. This effect does not stack, but repeated hits on the same enemy will extend the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Meridian Enlightenment",
+          "Additional Ability: Iron Stomach"
+        ],
+        "potential": []
+      },
+      "1421504": {
+        "desc": [
+          "For a brief period when Pan Yinhu's <color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> hits an enemy and triggers Quick Assist, the next Agent entering through a Quick Assist or Chain Attack will gain the <color=#FFFFFF>Meridian Flow</color> effect. This effect provides a Sheer Force boost equal to <color=#2BAD00>13.5%</color> of Pan Yinhu's initial ATK and lasts for 25s. The Sheer Force provided by this effect cannot exceed 540 points.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> character or shares the same Faction:\nWhen Pan Yinhu hits an enemy with <color=#FFFFFF>Special Attack: Touch of Death</color>, the enemy suffers the <color=#FFFFFF>Depleted Qi</color> effect, increasing DMG from all units against the target by 20%. Each hit of <color=#FFFFFF>Special Attack: Touch of Death</color> inflicts a 10s <color=#FFFFFF>Depleted Qi</color> effect. This effect does not stack, but repeated hits on the same enemy will extend the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Meridian Enlightenment",
+          "Additional Ability: Iron Stomach"
+        ],
+        "potential": []
+      },
+      "1421505": {
+        "desc": [
+          "For a brief period when Pan Yinhu's <color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> hits an enemy and triggers Quick Assist, the next Agent entering through a Quick Assist or Chain Attack will gain the <color=#FFFFFF>Meridian Flow</color> effect. This effect provides a Sheer Force boost equal to <color=#2BAD00>15%</color> of Pan Yinhu's initial ATK and lasts for 25s. The Sheer Force provided by this effect cannot exceed 540 points.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> character or shares the same Faction:\nWhen Pan Yinhu hits an enemy with <color=#FFFFFF>Special Attack: Touch of Death</color>, the enemy suffers the <color=#FFFFFF>Depleted Qi</color> effect, increasing DMG from all units against the target by 20%. Each hit of <color=#FFFFFF>Special Attack: Touch of Death</color> inflicts a 10s <color=#FFFFFF>Depleted Qi</color> effect. This effect does not stack, but repeated hits on the same enemy will extend the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Meridian Enlightenment",
+          "Additional Ability: Iron Stomach"
+        ],
+        "potential": []
+      },
+      "1421506": {
+        "desc": [
+          "For a brief period when Pan Yinhu's <color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> hits an enemy and triggers Quick Assist, the next Agent entering through a Quick Assist or Chain Attack will gain the <color=#FFFFFF>Meridian Flow</color> effect. This effect provides a Sheer Force boost equal to <color=#2BAD00>16.5%</color> of Pan Yinhu's initial ATK and lasts for 25s. The Sheer Force provided by this effect cannot exceed 540 points.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> character or shares the same Faction:\nWhen Pan Yinhu hits an enemy with <color=#FFFFFF>Special Attack: Touch of Death</color>, the enemy suffers the <color=#FFFFFF>Depleted Qi</color> effect, increasing DMG from all units against the target by 20%. Each hit of <color=#FFFFFF>Special Attack: Touch of Death</color> inflicts a 10s <color=#FFFFFF>Depleted Qi</color> effect. This effect does not stack, but repeated hits on the same enemy will extend the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Meridian Enlightenment",
+          "Additional Ability: Iron Stomach"
+        ],
+        "potential": []
+      },
+      "1421507": {
+        "desc": [
+          "For a brief period when Pan Yinhu's <color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> hits an enemy and triggers Quick Assist, the next Agent entering through a Quick Assist or Chain Attack will gain the <color=#FFFFFF>Meridian Flow</color> effect. This effect provides a Sheer Force boost equal to <color=#2BAD00>18%</color> of Pan Yinhu's initial ATK and lasts for 25s. The Sheer Force provided by this effect cannot exceed 540 points.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> character or shares the same Faction:\nWhen Pan Yinhu hits an enemy with <color=#FFFFFF>Special Attack: Touch of Death</color>, the enemy suffers the <color=#FFFFFF>Depleted Qi</color> effect, increasing DMG from all units against the target by 20%. Each hit of <color=#FFFFFF>Special Attack: Touch of Death</color> inflicts a 10s <color=#FFFFFF>Depleted Qi</color> effect. This effect does not stack, but repeated hits on the same enemy will extend the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Meridian Enlightenment",
+          "Additional Ability: Iron Stomach"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nPerform a melee attack on enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Lift Your Gaze to Good Fortune",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Intimidating Presence",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nPerform a melee attack on enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Ride the Momentum",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Lift Your Gaze to Good Fortune",
+          "param": [
+            {
+              "desc": "{Skill:1421014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421014": {
+                  "attackData": [],
+                  "attributeInfliction": 4583,
+                  "damagePercentage": 9170,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 4584,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 9170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421014": {
+                  "attackData": [],
+                  "attributeInfliction": 4583,
+                  "damagePercentage": 9170,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 4584,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Intimidating Presence",
+          "param": [
+            {
+              "desc": "{Skill:1421015, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1421015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 35004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1030,
+                  "main": 22510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22510,
+                  "stunRatioGrowth": 1030
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421016, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1421016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 38334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1220,
+                  "main": 26840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26840,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421017, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1421017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 8334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10840,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Ride the Momentum",
+          "param": [
+            {
+              "desc": "{Skill:1421018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421018": {
+                  "attackData": [],
+                  "attributeInfliction": 31542,
+                  "damagePercentage": 33740,
+                  "damagePercentageGrowth": 3070,
+                  "etherPurify": 16164,
+                  "feverRecovery": 1048850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3070,
+                  "main": 33740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29350,
+                  "stunRatioGrowth": 1340
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421018": {
+                  "attackData": [],
+                  "attributeInfliction": 31542,
+                  "damagePercentage": 33740,
+                  "damagePercentageGrowth": 3070,
+                  "etherPurify": 16164,
+                  "feverRecovery": 1048850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1340,
+                  "main": 29350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29350,
+                  "stunRatioGrowth": 1340
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunches up to four consecutive melee attacks, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Unyielding Strikes",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Unyielding Strikes",
+          "param": [
+            {
+              "desc": "{Skill:1421001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1421001": {
+                  "attackData": [],
+                  "attributeInfliction": 2480,
+                  "damagePercentage": 4970,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 2481,
+                  "feverRecovery": 68475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 4970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8940,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2490,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1421002": {
+                  "attackData": [],
+                  "attributeInfliction": 4744,
+                  "damagePercentage": 4980,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4745,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 4980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4750,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1421003": {
+                  "attackData": [],
+                  "attributeInfliction": 8429,
+                  "damagePercentage": 10940,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 8430,
+                  "feverRecovery": 231825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1000,
+                  "main": 10940,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8430,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1421004": {
+                  "attackData": [],
+                  "attributeInfliction": 16648,
+                  "damagePercentage": 21130,
+                  "damagePercentageGrowth": 1930,
+                  "etherPurify": 16649,
+                  "feverRecovery": 457875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1930,
+                  "main": 21130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 59940,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16650,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1421001": {
+                  "attackData": [],
+                  "attributeInfliction": 2480,
+                  "damagePercentage": 4970,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 2481,
+                  "feverRecovery": 68475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8940,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2490,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1421002": {
+                  "attackData": [],
+                  "attributeInfliction": 4744,
+                  "damagePercentage": 4980,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4745,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 220,
+                  "main": 4750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17080,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4750,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1421003": {
+                  "attackData": [],
+                  "attributeInfliction": 8429,
+                  "damagePercentage": 10940,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 8430,
+                  "feverRecovery": 231825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8430,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1421004": {
+                  "attackData": [],
+                  "attributeInfliction": 16648,
+                  "damagePercentage": 21130,
+                  "damagePercentageGrowth": 1930,
+                  "etherPurify": 16649,
+                  "feverRecovery": 457875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 59940,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16650,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nHop onto the Iron Wok and spin rapidly to ram into enemies, dealing massive <color=#F0D12B>Physical DMG</color> to all enemies on the way.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Anointed with Wok Steam",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nPerform a technique that compresses qi into fried rice and catapults it at foes, dealing massive <color=#F0D12B>Physical DMG</color> and healing all squad members for <color=#2BAD00>{CAL:100+AvatarSkillLevel(3)*60,1,2}</color> HP, while also applying a 8s heal over time on all squad members, recovering <color=#2BAD00>{CAL:0.8+AvatarSkillLevel(3)*0.05,1,2}</color>% HP/s.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: A Feast Fit for an Emperor!",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Anointed with Wok Steam",
+          "param": [
+            {
+              "desc": "{Skill:1421012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421012": {
+                  "attackData": [],
+                  "attributeInfliction": 43279,
+                  "damagePercentage": 63230,
+                  "damagePercentageGrowth": 5750,
+                  "etherPurify": 23330,
+                  "feverRecovery": 2470325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5750,
+                  "main": 63230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23330,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421012": {
+                  "attackData": [],
+                  "attributeInfliction": 43279,
+                  "damagePercentage": 63230,
+                  "damagePercentageGrowth": 5750,
+                  "etherPurify": 23330,
+                  "feverRecovery": 2470325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 23330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23330,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: A Feast Fit for an Emperor!",
+          "param": [
+            {
+              "desc": "{Skill:1421013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421013": {
+                  "attackData": [],
+                  "attributeInfliction": 9833,
+                  "damagePercentage": 162790,
+                  "damagePercentageGrowth": 14800,
+                  "etherPurify": 59834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14800,
+                  "main": 162790,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9840,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421013": {
+                  "attackData": [],
+                  "attributeInfliction": 9833,
+                  "damagePercentage": 162790,
+                  "damagePercentageGrowth": 14800,
+                  "etherPurify": 59834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 9840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9840,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:100+AvatarSkillLevel(3)*60,1,2}",
+              "name": "HP Recovery",
+              "potential": []
+            },
+            {
+              "desc": "{CAL:0.8+AvatarSkillLevel(3)*0.05,1,2}%",
+              "name": "Percent HP Recovered Per Second",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Light as a Swallow",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nPerform a quick forward melee attack, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Sizzling Oil Supreme",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nPerform a melee attack on enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Moving Mountains and Seas",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Sizzling Oil Supreme",
+          "param": [
+            {
+              "desc": "{Skill:1421010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421010": {
+                  "attackData": [],
+                  "attributeInfliction": 4166,
+                  "damagePercentage": 8340,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 8340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421010": {
+                  "attackData": [],
+                  "attributeInfliction": 4166,
+                  "damagePercentage": 8340,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Moving Mountains and Seas",
+          "param": [
+            {
+              "desc": "{Skill:1421011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421011": {
+                  "attackData": [],
+                  "attributeInfliction": 9166,
+                  "damagePercentage": 21920,
+                  "damagePercentageGrowth": 2000,
+                  "etherPurify": 24167,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2000,
+                  "main": 21920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19170,
+                  "stunRatioGrowth": 880
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421011": {
+                  "attackData": [],
+                  "attributeInfliction": 9166,
+                  "damagePercentage": 21920,
+                  "damagePercentageGrowth": 2000,
+                  "etherPurify": 24167,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 880,
+                  "main": 19170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19170,
+                  "stunRatioGrowth": 880
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nDelivers a forward melee technique while tossing firecrackers, dealing <color=#F0D12B>Physical DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Sonic Pressure-Point Strike",
+          "potential": []
+        },
+        {
+          "desc": "With <color=#FFFFFF>Break Force</color>, press <IconMap:Icon_Special>to activate:\n<color=#FFFFFF>Special Attack: Touch of Death</color> attacks centered on the enemy, dealing <color=#F0D12B>Physical DMG</color>.\nThe skill can be chained up to three times. Each use of <color=#FFFFFF>Special Attack: Touch of Death</color> consumes 1 point of Break Force.\nWhen Pan Yinhu is the active character, DMG received during the skill is reduced by 40% and Anti-Interrupt Level is increased. If he isn't the active character, he becomes Invulnerable.",
+          "name": "Special Attack: Touch of Death",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\n<color=#FFFFFF>EX Special Attack: Mountainous Pulse Strike</color> unleashes a powerful strike forward, dealing <color=#F0D12B>Physical DMG</color>.\nGain 3 points of <color=#FFFFFF>Break Force</color> on activation. Upon hitting an enemy, it triggers the <color=#FFFFFF>Quick Assist</color> of the previous character in the squad.\nAgents who enter the field via this Quick Assist will gain the Sheer Force bonus from the Core Passive. After switching out, Pan Yinhu will stay on the field and automatically launch <color=#FFFFFF>Special Attack: Touch of Death</color> until his Break Force runs out, where he then leaves the field.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Mountainous Pulse Strike",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Sonic Pressure-Point Strike",
+          "param": [
+            {
+              "desc": "{Skill:1421005, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421005": {
+                  "attackData": [],
+                  "attributeInfliction": 6248,
+                  "damagePercentage": 6250,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 6249,
+                  "feverRecovery": 171875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6250,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421005, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421005": {
+                  "attackData": [],
+                  "attributeInfliction": 6248,
+                  "damagePercentage": 6250,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 6249,
+                  "feverRecovery": 171875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6250,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Touch of Death",
+          "param": [
+            {
+              "desc": "{Skill:1421007, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1421007": {
+                  "attackData": [],
+                  "attributeInfliction": 4861,
+                  "damagePercentage": 9730,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 191125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 9730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421007, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1421007": {
+                  "attackData": [],
+                  "attributeInfliction": 4861,
+                  "damagePercentage": 9730,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 191125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421008, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1421008": {
+                  "attackData": [],
+                  "attributeInfliction": 4861,
+                  "damagePercentage": 9730,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 191125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 9730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421008, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1421008": {
+                  "attackData": [],
+                  "attributeInfliction": 4861,
+                  "damagePercentage": 9730,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 191125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421009, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1421009": {
+                  "attackData": [],
+                  "attributeInfliction": 4861,
+                  "damagePercentage": 9730,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 191125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 9730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421009, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1421009": {
+                  "attackData": [],
+                  "attributeInfliction": 4861,
+                  "damagePercentage": 9730,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 0,
+                  "feverRecovery": 191125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4170,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Mountainous Pulse Strike",
+          "param": [
+            {
+              "desc": "{Skill:1421006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1421006": {
+                  "attackData": [],
+                  "attributeInfliction": 28312,
+                  "damagePercentage": 38410,
+                  "damagePercentageGrowth": 3500,
+                  "etherPurify": 10170,
+                  "feverRecovery": 992475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3500,
+                  "main": 38410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25730,
+                  "stunRatioGrowth": 1170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1421006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1421006": {
+                  "attackData": [],
+                  "attributeInfliction": 28312,
+                  "damagePercentage": 38410,
+                  "damagePercentageGrowth": 3500,
+                  "etherPurify": 10170,
+                  "feverRecovery": 992475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1170,
+                  "main": 25730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25730,
+                  "stunRatioGrowth": 1170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1421001": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal>",
+      "name": "Basic Attack: Unyielding Strikes"
+    },
+    "1421002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Sonic Pressure-Point Strike"
+    },
+    "1421003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Touch of Death (With Break Force)"
+    },
+    "1421004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Mountainous Pulse Strike"
+    },
+    "1421005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Sizzling Oil Supreme"
+    },
+    "1421006": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Moving Mountains and Seas"
+    },
+    "1421007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Anointed With Wok Steam"
+    },
+    "1421008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: A Feast Fit for an Emperor!"
+    },
+    "1421009": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Lift Your Gaze to Good Fortune"
+    },
+    "1421010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Intimidating Presence"
+    },
+    "1421011": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Ride the Momentum"
+    }
+  },
+  "skin": {
+    "3114210": {
+      "desc": "Yunkui Summit's largest disciple uniform, spacious enough for this senior brother's belly and all his seasonings. And that iron wok on top is a first of its kind. But... putting a pan you just used for stir-frying on your head? Doesn't it burn?",
+      "name": "Pan Yinhu: Hundred Flavors"
+    },
+    "3114211": {
+      "desc": "Senior Yinhu once dreamed of becoming a renowned chef, but in this day and age, there's always some thug looking to smash your bowl.\n—\"Go on, try smashing one.\"",
+      "name": "Pan Yinhu: Culinary Jewel"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "05",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, Rupture-based support",
+    "Provides Sheer Force to squadmates"
+  ],
+  "talent": {
+    "1": {
+      "desc": "All units deal 10% increased DMG to enemies affected by <color=#FFFFFF>Depleted Qi</color>.",
+      "desc2": "This Yunkui technique wards off the external flow of Ether while reinforcing your inner meridians and muscles. With qi acting as a shield, no blade or spear can pierce it — this is Pan Yinhu's secret to enduring every blow.\nSide note: this trick comes in extra handy when you're elbow-to-elbow with aunties and uncles fighting over supermarket sale items.",
+      "name": "Qi Shield"
+    },
+    "2": {
+      "desc": "For every 6 points of <color=#FFFFFF>Break Force</color> consumed, Pan Yinhu will recover 4 Energy, and the <color=#FFFFFF>Depleted Qi</color> effect applied when <color=#FFFFFF>Special Attack: Touch of Death</color> hits an enemy will have its duration increased to 12s.",
+      "desc2": "\"Heh, can't move an inch now, can you, thief?\"\n\"This technique is called Yunkui Pressure-Point Strike — it both paralyzes the body and clears the meridians — it's our sect's ultimate technique for punishing evil and upholding justice!\"\n\"...Eh? You mean my grip was so strong that you just went numb? ...Alright then — can you move or not?\"",
+      "name": "Yunkui Pressure-Point Strike"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"These pressure points are a lot like us Panda Thirens.\"\n\"They're few and scattered, don't fit into any one system, and hardly anyone's ever studied them. It's a shame.\"\n\"But they really catch people off guard as a surprise weapon. Pretty great, right?\"",
+      "name": "Non-Meridian Pressure Point"
+    },
+    "4": {
+      "desc": "When <color=#FFFFFF>Ultimate: A Feast Fit for an Emperor!</color> heals all squad members, the HP recovery is increased by 25%, and the healing over time effect is increased by 25%. On activating <color=#FFFFFF>Ultimate: A Feast Fit for an Emperor!</color>, gain the <color=#FFFFFF>Backup Provisions</color> effect. Whenever any character in the squad loses HP, consume the <color=#FFFFFF>Backup Provisions</color> effect to instantly restore 50% of the HP recovered with <color=#FFFFFF>Ultimate: A Feast Fit for an Emperor!</color>'s instant HP recovery effect. This effect does not stack.",
+      "desc2": "The first time he cooked, he nearly set the stove on fire. Among those who rushed to help was a chef who, looking at the pile of burnt food, used the unused eggs to make him a plate of fried rice.\nHe wolfed it down with tears in his eyes. When he finally looked up, the cook was holding out a slip of paper with \"100\" written on it.\n\"I understand, Master! You're teaching me in cooking, you have to give it 100%, right?\" \"No, I'm saying it's 100 Dennies per bite, and you've had over a hundred bites. Time to pay up.\"\nFrom that day on, Pan Yinhu insisted on cooking for himself and never messed up again. And that's how a first-class chef was born.",
+      "name": "First-Class Head Chef"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "In the sprawling city of New Eridu, Panda Thirens are extremely rare. He's always bristled at curious stares and long ago gotten used to living a lonely life with nobody to support him.\nIt wasn't until he became an apprentice on Yunkui Summit that he stopped feeling so isolated.\nAnd once he realized that many citizens would even pay to take a photo with a Panda Thiren... he no longer minded the stares.",
+      "name": "\"Thiren\""
+    },
+    "6": {
+      "desc": "The <color=#FFFFFF>Meridian Flow</color> effect provided by <color=#FFFFFF>Core Passive: Meridian Enlightenment</color> increases by an extra 6% of Pan Yinhu's initial ATK. The maximum Sheer Force provided by this effect increases to 720.",
+      "desc2": "\"There's an old saying that there are 365 pressure points in the feet. Funny — it's the same with how we live our lives.\"\n\"Here — pick whichever point you like from this chart.\"\n\"That point represents your current way of life — where it is or what it does doesn't matter. As long as you like it, that's enough.\"\n\"And what good is choosing it, you ask? Let me think... Ah, of course. Next time I deal with some thieves, that's the point I'll target!\"",
+      "name": "Meridian Theory"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

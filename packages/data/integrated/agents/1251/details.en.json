@@ -1,0 +1,1630 @@
+{
+  "camp": {
+    "7": "New Eridu Public Security"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Impact"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1251,
+  "locale": "en",
+  "name": "Qingyi",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1251016", "1251017", "1251018", "1251019", "1251020"],
+      "basic": [
+        "1251001",
+        "1251002",
+        "1251003",
+        "1251004",
+        "1251005",
+        "1251006",
+        "1251007",
+        "1251008",
+        "1251009"
+      ],
+      "chain": ["1251014", "1251015"],
+      "dodge": ["1251012", "1251013"],
+      "special": ["1251010", "1251011", "1251021", "1251022"]
+    },
+    "parameterRowsById": {
+      "1251001": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/6"
+      ],
+      "1251002": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/7"
+      ],
+      "1251003": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/8"
+      ],
+      "1251004": [
+        "/skill/basic/description/4/param/3",
+        "/skill/basic/description/4/param/9"
+      ],
+      "1251005": [
+        "/skill/basic/description/4/param/4",
+        "/skill/basic/description/4/param/10"
+      ],
+      "1251006": [
+        "/skill/basic/description/4/param/5",
+        "/skill/basic/description/4/param/11"
+      ],
+      "1251007": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1251008": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/2"
+      ],
+      "1251009": [
+        "/skill/basic/description/6/param/1",
+        "/skill/basic/description/6/param/3"
+      ],
+      "1251010": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1251011": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1251012": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1251013": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1251014": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1251015": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1251016": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1251017": ["/skill/assist/description/4/param/0"],
+      "1251018": ["/skill/assist/description/4/param/1"],
+      "1251019": ["/skill/assist/description/4/param/2"],
+      "1251020": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1251021": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1251022": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "JAN 1",
+    "fullName": "Qingyi",
+    "gender": "Female",
+    "impressionF": "Why does Fairy only warn us once when it comes to Qingyi? She warned us to \"remember our true identity\" three whole times when she gave suggestions about Zhu Yuan!",
+    "impressionM": "Because even if she knew, she'd pretend she didn't...\nShe might even have already guessed.",
+    "impressions": [
+      "Impressions of Qingyi:\n · Advanced artificial intelligence equipped with all kinds of enviable function modules...",
+      " · Just how old is Qingyi exactly...? If you ask her directly, she'll probably fob you off by saying it's \"top secret\"...",
+      " · She's teased me a bunch of times, but her pranks never really bothered me. How? Is this that \"restraint\" we're promised comes with maturity?"
+    ],
+    "profileDesc": "Qingyi is a new officer in the Criminal Investigation Special Response Team.\nAs an artificial human, her personality is derived from ancient cultural texts from the old civilization. Her body, known as an \"Automaton,\" is an intelligent construct composed of biological materials.\nRecommended by White Star Institute, she was assigned to Public Security as a new officer partnered with Zhu Yuan.\n\nQingyi always exhibits an easygoing, laid-back demeanor, not restricted by rules.\nIn contrast to modern individuals affected by today's society, Qingyi frequently proposes unexpected solutions to problems.\n\nQingyi always carries a cup of hot water and takes occasional sips.\n\"Drinking hot water is good for your health.\"\nSuggestion: Approaching Qingyi is also an ill-considered decision that may compromise your cover. Please remember your true identity as a Proxy.",
+    "stature": "142",
+    "trustLv": {
+      "1": "Qingyi is a new officer in the Criminal Investigation Special Response Team.\nAs an artificial human, her personality is derived from ancient cultural texts from the old civilization. Her body, known as an \"Automaton,\" is an intelligent construct composed of biological materials.\nRecommended by White Star Institute, she was assigned to Public Security as a new officer partnered with Zhu Yuan.\n\nQingyi always exhibits an easygoing, laid-back demeanor, not restricted by rules.\nIn contrast to modern individuals affected by today's society, Qingyi frequently proposes unexpected solutions to problems.\n\nQingyi always carries a cup of hot water and takes occasional sips.\n\"Drinking hot water is good for your health.\"\nSuggestion: Approaching Qingyi is also an ill-considered decision that may compromise your cover. Please remember your true identity as a Proxy.",
+      "2": "",
+      "3": "Qingyi's full name is officially designated as \"01 Neo-Genesis VI.\"\nThis code is marked on a specific location of Qingyi's body, abbreviated as \"01NG Ⅵ.\"\nThe researcher from White Star Institute who discovered her thought her code name looked like QING YI, so that's what he called her — Qingyi.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete Main Commission Chapter 2 Interlude"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1251501": {
+        "desc": [
+          "When Qingyi lands a Finishing Move on an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, it applies 5 stacks of <color=#FFFFFF>Subjugation</color> to the enemy, stacking up to 20 times. Each stack of <color=#FFFFFF>Subjugation</color> increases the target's Stun DMG Multiplier by <color=#2BAD00>2</color>%. For each rush attack performed during <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the Finishing Move will apply 1 extra stack of <color=#FFFFFF>Subjugation</color>. If <color=#FFFFFF>Perfect Dodge</color> is triggered when using the Finishing Move, it directly applies {CAL:5+5,1,2} stacks of <color=#FFFFFF>Subjugation</color>. When applying Subjugation to normal and elite enemies, the target receives double the stacks. When the target recovers from being Stunned, the corresponding stacks of <color=#FFFFFF>Subjugation</color> are reset.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> character or shares the same Faction:\n<color=#FFFFFF>Basic Attacks</color> deal 20% increased Daze. If Qingyi's Impact is greater than 120, each point over increases her ATK by 6, up to a maximum of 600."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Eternal Seasons",
+          "Additional Ability: Three Verses of Farewell at Yang Pass"
+        ],
+        "potential": []
+      },
+      "1251502": {
+        "desc": [
+          "When Qingyi lands a Finishing Move on an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, it applies 5 stacks of <color=#FFFFFF>Subjugation</color> to the enemy, stacking up to 20 times. Each stack of <color=#FFFFFF>Subjugation</color> increases the target's Stun DMG Multiplier by <color=#2BAD00>2.4</color>%. For each rush attack performed during <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the Finishing Move will apply an extra stack of <color=#FFFFFF>Subjugation</color>. If <color=#FFFFFF>Perfect Dodge</color> is triggered when using the Finishing Move, it directly applies {CAL:5+5,1,2} stacks of <color=#FFFFFF>Subjugation</color>. When applying Subjugation to normal and elite enemies, the target receives double the stacks. When the target recovers from being Stunned, the corresponding stacks of <color=#FFFFFF>Subjugation</color> are reset.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> character or shares the same Faction:\n<color=#FFFFFF>Basic Attacks</color> deal 20% increased Daze. If Qingyi's Impact is greater than 120, each point over increases her ATK by 6, up to a maximum of 600."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Eternal Seasons",
+          "Additional Ability: Three Verses of Farewell at Yang Pass"
+        ],
+        "potential": []
+      },
+      "1251503": {
+        "desc": [
+          "When Qingyi lands a Finishing Move on an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, it applies 5 stacks of <color=#FFFFFF>Subjugation</color> to the enemy, stacking up to 20 times. Each stack of <color=#FFFFFF>Subjugation</color> increases the target's Stun DMG Multiplier by <color=#2BAD00>2.7</color>%. For each rush attack performed during <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the Finishing Move will apply an extra stack of <color=#FFFFFF>Subjugation</color>. If <color=#FFFFFF>Perfect Dodge</color> is triggered when using the Finishing Move, it directly applies {CAL:5+5,1,2} stacks of <color=#FFFFFF>Subjugation</color>. When applying Subjugation to normal and elite enemies, the target receives double the stacks. When the target recovers from being Stunned, the corresponding stacks of <color=#FFFFFF>Subjugation</color> are reset.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> character or shares the same Faction:\n<color=#FFFFFF>Basic Attacks</color> deal 20% increased Daze. If Qingyi's Impact is greater than 120, each point over increases her ATK by 6, up to a maximum of 600."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Eternal Seasons",
+          "Additional Ability: Three Verses of Farewell at Yang Pass"
+        ],
+        "potential": []
+      },
+      "1251504": {
+        "desc": [
+          "When Qingyi lands a Finishing Move on an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, it applies 5 stacks of <color=#FFFFFF>Subjugation</color> to the enemy, stacking up to 20 times. Each stack of <color=#FFFFFF>Subjugation</color> increases the target's Stun DMG Multiplier by <color=#2BAD00>3</color>%. For each rush attack performed during <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the Finishing Move will apply an extra stack of <color=#FFFFFF>Subjugation</color>. If <color=#FFFFFF>Perfect Dodge</color> is triggered when using the Finishing Move, it directly applies {CAL:5+5,1,2} stacks of <color=#FFFFFF>Subjugation</color>. When applying Subjugation to normal and elite enemies, the target receives double the stacks. When the target recovers from being Stunned, the corresponding stacks of <color=#FFFFFF>Subjugation</color> are reset.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> character or shares the same Faction:\n<color=#FFFFFF>Basic Attacks</color> deal 20% increased Daze. If Qingyi's Impact is greater than 120, each point over increases her ATK by 6, up to a maximum of 600."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Eternal Seasons",
+          "Additional Ability: Three Verses of Farewell at Yang Pass"
+        ],
+        "potential": []
+      },
+      "1251505": {
+        "desc": [
+          "When Qingyi lands a Finishing Move on an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, it applies 5 stacks of <color=#FFFFFF>Subjugation</color> to the enemy, stacking up to 20 times. Each stack of <color=#FFFFFF>Subjugation</color> increases the target's Stun DMG Multiplier by <color=#2BAD00>3.4</color>%. For each rush attack performed during <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the Finishing Move will apply an extra stack of <color=#FFFFFF>Subjugation</color>. If <color=#FFFFFF>Perfect Dodge</color> is triggered when using the Finishing Move, it directly applies {CAL:5+5,1,2} stacks of <color=#FFFFFF>Subjugation</color>. When applying Subjugation to normal and elite enemies, the target receives double the stacks. When the target recovers from being Stunned, the corresponding stacks of <color=#FFFFFF>Subjugation</color> are reset.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> character or shares the same Faction:\n<color=#FFFFFF>Basic Attacks</color> deal 20% increased Daze. If Qingyi's Impact is greater than 120, each point over increases her ATK by 6, up to a maximum of 600."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Eternal Seasons",
+          "Additional Ability: Three Verses of Farewell at Yang Pass"
+        ],
+        "potential": []
+      },
+      "1251506": {
+        "desc": [
+          "When Qingyi lands a Finishing Move on an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, it applies 5 stacks of <color=#FFFFFF>Subjugation</color> to the enemy, stacking up to 20 times. Each stack of <color=#FFFFFF>Subjugation</color> increases the target's Stun DMG Multiplier by <color=#2BAD00>3.7</color>%. For each rush attack performed during <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the Finishing Move will apply an extra stack of <color=#FFFFFF>Subjugation</color>. If <color=#FFFFFF>Perfect Dodge</color> is triggered when using the Finishing Move, it directly applies {CAL:5+5,1,2} stacks of <color=#FFFFFF>Subjugation</color>. When applying Subjugation to normal and elite enemies, the target receives double the stacks. When the target recovers from being Stunned, the corresponding stacks of <color=#FFFFFF>Subjugation</color> are reset.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> character or shares the same Faction:\n<color=#FFFFFF>Basic Attacks</color> deal 20% increased Daze. If Qingyi's Impact is greater than 120, each point over increases her ATK by 6, up to a maximum of 600."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Eternal Seasons",
+          "Additional Ability: Three Verses of Farewell at Yang Pass"
+        ],
+        "potential": []
+      },
+      "1251507": {
+        "desc": [
+          "When Qingyi lands a Finishing Move on an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, it applies 5 stacks of <color=#FFFFFF>Subjugation</color> to the enemy, stacking up to 20 times. Each stack of <color=#FFFFFF>Subjugation</color> increases the target's Stun DMG Multiplier by <color=#2BAD00>4</color>%. For each rush attack performed during <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the Finishing Move will apply an extra stack of <color=#FFFFFF>Subjugation</color>. If <color=#FFFFFF>Perfect Dodge</color> is triggered when using the Finishing Move, it directly applies {CAL:5+5,1,2} stacks of <color=#FFFFFF>Subjugation</color>. When applying Subjugation to normal and elite enemies, the target receives double the stacks. When the target recovers from being Stunned, the corresponding stacks of <color=#FFFFFF>Subjugation</color> are reset.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> character or shares the same Faction:\n<color=#FFFFFF>Basic Attacks</color> deal 20% increased Daze. If Qingyi's Impact is greater than 120, each point over increases her ATK by 6, up to a maximum of 600."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Eternal Seasons",
+          "Additional Ability: Three Verses of Farewell at Yang Pass"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nLeap into the air and perform a downward attack, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Wind Through the Pines",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Graceful Embellishment",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nRush forward with an attack and inject electrical energy into the ground, then pull back to trigger an explosion, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Song of the Clear River",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Wind Through the Pines",
+          "param": [
+            {
+              "desc": "{Skill:1251016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251016": {
+                  "attackData": [60834],
+                  "attributeInfliction": 12166,
+                  "damagePercentage": 13390,
+                  "damagePercentageGrowth": 1220,
+                  "etherPurify": 6084,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1220,
+                  "main": 13390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251016": {
+                  "attackData": [60834],
+                  "attributeInfliction": 12166,
+                  "damagePercentage": 13390,
+                  "damagePercentageGrowth": 1220,
+                  "etherPurify": 6084,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Graceful Embellishment",
+          "param": [
+            {
+              "desc": "{Skill:1251017, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1251017": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 24930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24930,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251018, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1251018": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1390,
+                  "main": 30430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30430,
+                  "stunRatioGrowth": 1390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251019, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1251019": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 12830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12830,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Song of the Clear River",
+          "param": [
+            {
+              "desc": "{Skill:1251020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251020": {
+                  "attackData": [148939],
+                  "attributeInfliction": 32001,
+                  "damagePercentage": 37640,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 16504,
+                  "feverRecovery": 454025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3430,
+                  "main": 37640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27900,
+                  "stunRatioGrowth": 1270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251020, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251020": {
+                  "attackData": [148939],
+                  "attributeInfliction": 32001,
+                  "damagePercentage": 37640,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 16504,
+                  "feverRecovery": 454025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1270,
+                  "main": 27900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27900,
+                  "stunRatioGrowth": 1270
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunch up to four strikes forward, dealing <color=#F0D12B>Physical DMG</color> and <color=#2EB6FF>Electric DMG</color>.\nDuring the 3rd hit, repeatedly press <IconMap:Icon_Normal> to continue the attack, continuously striking the enemy. Using <color=#FFFFFF>Dodge</color> during this period will not interrupt Qingyi's <color=#FFFFFF>Basic Attack</color> combo count.\nDuring the 3rd hit, stop pressing <IconMap:Icon_Normal> to interrupt the continuous attack, transitioning automatically to the 4th hit. If the continuous attack lasts for a certain time, the 4th hit will be enhanced.\nAnti-Interrupt Level is increased and DMG received is reduced by 40% during the 3rd and 4th hit.",
+          "name": "Basic Attack: Penultimate",
+          "potential": []
+        },
+        {
+          "desc": "Hold <IconMap:Icon_Normal> to activate:\nLaunches a forward rush attack, dealing <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Basic Attack: Enchanted Blossoms",
+          "potential": []
+        },
+        {
+          "desc": "When Qingyi deals <color=#2EB6FF>Electric DMG</color> with a skill, she accumulates <color=#FFFFFF>Flash Connect Voltage</color>. When <color=#FFFFFF>Flash Connect Voltage</color> reaches 75%, she will enter the <color=#FFFFFF>Flash Connect</color> state. When using her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, Qingyi will consume all <color=#FFFFFF>Flash Connect Voltage</color> and exit the <color=#FFFFFF>Flash Connect</color> state. For every 1% of <color=#FFFFFF>Flash Connect Voltage</color> consumed over 75%, her Damage and Daze inflicted by this skill will be increased by 1%/0.5%. <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color> itself does not accumulate <color=#FFFFFF>Flash Connect Voltage</color>.",
+          "name": "Flash Connect",
+          "potential": []
+        },
+        {
+          "desc": "During the <color=#FFFFFF>Flash Connect</color> state, hold <IconMap:Icon_Normal> to activate:\nLaunch five consecutive forward rush attacks, then execute a Finishing Move that inflicts massive <color=#2EB6FF>Electric DMG</color>. Release <IconMap:Icon_Normal> during the move to trigger the Finishing Move early.\nActivate the Finishing Move just before the character is attacked to trigger <color=#FFFFFF>Perfect Dodge</color>.\nAnti-Interrupt level is increased and DMG received is reduced by 40% during the rush attack. Qingyi is invulnerable during the Finishing Move.",
+          "name": "Basic Attack: Enchanted Moonlit Blossoms",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Penultimate",
+          "param": [
+            {
+              "desc": "{Skill:1251001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1251001": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4720,
+                  "damagePercentageGrowth": 430,
+                  "etherPurify": 2142,
+                  "feverRecovery": 59125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 4720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2360,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251002, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier (ALT)",
+              "param": {
+                "1251002": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11030,
+                  "damagePercentageGrowth": 1010,
+                  "etherPurify": 5014,
+                  "feverRecovery": 138050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1010,
+                  "main": 11030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5520,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251003, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1251003": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12210,
+                  "damagePercentageGrowth": 1110,
+                  "etherPurify": 7469,
+                  "feverRecovery": 239250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 12210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8220,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251004, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1251004": {
+                  "attackData": [33334],
+                  "attributeInfliction": 1333,
+                  "damagePercentage": 1760,
+                  "damagePercentageGrowth": 160,
+                  "etherPurify": 1334,
+                  "feverRecovery": 36850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 1760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 4800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1910,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251005, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1251005": {
+                  "attackData": [32271],
+                  "attributeInfliction": 6454,
+                  "damagePercentage": 10640,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 9658,
+                  "feverRecovery": 265650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 970,
+                  "main": 10640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10630,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251006, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier (Enhanced)",
+              "param": {
+                "1251006": {
+                  "attackData": [76999],
+                  "attributeInfliction": 15399,
+                  "damagePercentage": 23440,
+                  "damagePercentageGrowth": 2140,
+                  "etherPurify": 18603,
+                  "feverRecovery": 511775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2140,
+                  "main": 23440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 66980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20470,
+                  "stunRatioGrowth": 940
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1251001": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4720,
+                  "damagePercentageGrowth": 430,
+                  "etherPurify": 2142,
+                  "feverRecovery": 59125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2360,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251002, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier (ALT)",
+              "param": {
+                "1251002": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11030,
+                  "damagePercentageGrowth": 1010,
+                  "etherPurify": 5014,
+                  "feverRecovery": 138050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5520,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251003, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1251003": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12210,
+                  "damagePercentageGrowth": 1110,
+                  "etherPurify": 7469,
+                  "feverRecovery": 239250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8220,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251004, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1251004": {
+                  "attackData": [33334],
+                  "attributeInfliction": 1333,
+                  "damagePercentage": 1760,
+                  "damagePercentageGrowth": 160,
+                  "etherPurify": 1334,
+                  "feverRecovery": 36850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 4800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1910,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251005, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1251005": {
+                  "attackData": [32271],
+                  "attributeInfliction": 6454,
+                  "damagePercentage": 10640,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 9658,
+                  "feverRecovery": 265650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 10630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10630,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251006, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier (Enhanced)",
+              "param": {
+                "1251006": {
+                  "attackData": [76999],
+                  "attributeInfliction": 15399,
+                  "damagePercentage": 23440,
+                  "damagePercentageGrowth": 2140,
+                  "etherPurify": 18603,
+                  "feverRecovery": 511775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 940,
+                  "main": 20470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 66980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20470,
+                  "stunRatioGrowth": 940
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Enchanted Blossoms",
+          "param": [
+            {
+              "desc": "{Skill:1251007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251007": {
+                  "attackData": [19436],
+                  "attributeInfliction": 7774,
+                  "damagePercentage": 8560,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7775,
+                  "feverRecovery": 213950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 780,
+                  "main": 8560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8560,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251007": {
+                  "attackData": [19436],
+                  "attributeInfliction": 7774,
+                  "damagePercentage": 8560,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7775,
+                  "feverRecovery": 213950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8560,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Enchanted Moonlit Blossoms",
+          "param": [
+            {
+              "desc": "{Skill:1251008, Prop:1001}",
+              "name": "Rush Attack DMG Multiplier",
+              "param": {
+                "1251008": {
+                  "attackData": [0],
+                  "attributeInfliction": 19013,
+                  "damagePercentage": 44870,
+                  "damagePercentageGrowth": 4080,
+                  "etherPurify": 19014,
+                  "feverRecovery": 523050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4080,
+                  "main": 44870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 68450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27190,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251009, Prop:1001}",
+              "name": "Finishing Move DMG Multiplier",
+              "param": {
+                "1251009": {
+                  "attackData": [0],
+                  "attributeInfliction": 15214,
+                  "damagePercentage": 39440,
+                  "damagePercentageGrowth": 3590,
+                  "etherPurify": 15215,
+                  "feverRecovery": 418550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3590,
+                  "main": 39440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 54780,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21760,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251008, Prop:1002}",
+              "name": "Rush Attack Daze Multiplier",
+              "param": {
+                "1251008": {
+                  "attackData": [0],
+                  "attributeInfliction": 19013,
+                  "damagePercentage": 44870,
+                  "damagePercentageGrowth": 4080,
+                  "etherPurify": 19014,
+                  "feverRecovery": 523050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 68450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27190,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251009, Prop:1002}",
+              "name": "Finishing Move Daze Multiplier",
+              "param": {
+                "1251009": {
+                  "attackData": [0],
+                  "attributeInfliction": 15214,
+                  "damagePercentage": 39440,
+                  "damagePercentageGrowth": 3590,
+                  "etherPurify": 15215,
+                  "feverRecovery": 418550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 990,
+                  "main": 21760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 54780,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21760,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunch a series of powerful strikes over a large area in front, dealing massive <color=#2EB6FF>Electric DMG</color>\nWhen this attack hits an enemy, the skill's DMG increases by 3% for every stack of <color=#FFFFFF>Subjugation</color> in <color=#FFFFFF>Core Passive: Eternal Seasons</color> the target has.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Tranquil Serenade",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nLaunch a series of powerful strikes over a large area in front, followed by a Finishing Move, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Eight Sounds of Ganzhou",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Tranquil Serenade",
+          "param": [
+            {
+              "desc": "{Skill:1251014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251014": {
+                  "attackData": [250000],
+                  "attributeInfliction": 38946,
+                  "damagePercentage": 64790,
+                  "damagePercentageGrowth": 5890,
+                  "etherPurify": 18997,
+                  "feverRecovery": 2351250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5890,
+                  "main": 64790,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20900,
+                  "stunRatioGrowth": 950
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251014": {
+                  "attackData": [250000],
+                  "attributeInfliction": 38946,
+                  "damagePercentage": 64790,
+                  "damagePercentageGrowth": 5890,
+                  "etherPurify": 18997,
+                  "feverRecovery": 2351250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 950,
+                  "main": 20900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20900,
+                  "stunRatioGrowth": 950
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Eight Sounds of Ganzhou",
+          "param": [
+            {
+              "desc": "{Skill:1251015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251015": {
+                  "attackData": [800000],
+                  "attributeInfliction": 21503,
+                  "damagePercentage": 167070,
+                  "damagePercentageGrowth": 15190,
+                  "etherPurify": 71504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 15190,
+                  "main": 167070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109710,
+                  "stunRatioGrowth": 4990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251015": {
+                  "attackData": [800000],
+                  "attributeInfliction": 21503,
+                  "damagePercentage": 167070,
+                  "damagePercentageGrowth": 15190,
+                  "etherPurify": 71504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4990,
+                  "main": 109710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109710,
+                  "stunRatioGrowth": 4990
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Swan Song",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a Dodge to activate:\nRush forward and then launch an upward attack, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Breach",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nLeap into the air and then perform a downward attack, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Lingering Sentiments",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Breach",
+          "param": [
+            {
+              "desc": "{Skill:1251012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251012": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4950,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 2249,
+                  "feverRecovery": 61875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 4950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2480,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251012": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4950,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 2249,
+                  "feverRecovery": 61875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2480,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Lingering Sentiments",
+          "param": [
+            {
+              "desc": "{Skill:1251013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251013": {
+                  "attackData": [160834],
+                  "attributeInfliction": 12166,
+                  "damagePercentage": 28400,
+                  "damagePercentageGrowth": 2590,
+                  "etherPurify": 27167,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2590,
+                  "main": 28400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19040,
+                  "stunRatioGrowth": 870
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251013": {
+                  "attackData": [160834],
+                  "attributeInfliction": 12166,
+                  "damagePercentage": 28400,
+                  "damagePercentageGrowth": 2590,
+                  "etherPurify": 27167,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 870,
+                  "main": 19040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19040,
+                  "stunRatioGrowth": 870
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nQuickly swings upward, followed by a downward smash, dealing <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Sunlit Glory",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nQuickly swings upward and leaps into the air, turning around to launch a series of attacks, then follows up with a powerful downward smash, dealing massive <color=#2EB6FF>Electric DMG</color>.\nHold <IconMap:Icon_SpecialReady> to consume additional energy to increase the number of hits of the series of attacks.\nCharacter is invulnerable while using this skill.\nAfter executing the move, you can immediately follow up with the 3rd hit of a <color=#FFFFFF>Basic Attack</color>.",
+          "name": "EX Special Attack: Moonlit Begonia",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Sunlit Glory",
+          "param": [
+            {
+              "desc": "{Skill:1251010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251010": {
+                  "attackData": [28342],
+                  "attributeInfliction": 5668,
+                  "damagePercentage": 6240,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5669,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1251010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251010": {
+                  "attackData": [28342],
+                  "attributeInfliction": 5668,
+                  "damagePercentage": 6240,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 5669,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Moonlit Begonia",
+          "param": [
+            {
+              "desc": "{{Skill:1251011, Prop:1001} + {Skill:1251021, Prop:1001} + {Skill:1251022, Prop:1001}}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1251011": {
+                  "attackData": [56162],
+                  "attributeInfliction": 12465,
+                  "damagePercentage": 15070,
+                  "damagePercentageGrowth": 1370,
+                  "etherPurify": 3833,
+                  "feverRecovery": 408650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1370,
+                  "main": 15070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11110,
+                  "stunRatioGrowth": 510
+                },
+                "1251021": {
+                  "attackData": [78626],
+                  "attributeInfliction": 17451,
+                  "damagePercentage": 21100,
+                  "damagePercentageGrowth": 1920,
+                  "etherPurify": 5366,
+                  "feverRecovery": 572000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1920,
+                  "main": 21100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15550,
+                  "stunRatioGrowth": 710
+                },
+                "1251022": {
+                  "attackData": [89858],
+                  "attributeInfliction": 19944,
+                  "damagePercentage": 24110,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 6132,
+                  "feverRecovery": 653675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2200,
+                  "main": 24110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17770,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1251011, Prop:1002} + {Skill:1251021, Prop:1002} + {Skill:1251022, Prop:1002}}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1251011": {
+                  "attackData": [56162],
+                  "attributeInfliction": 12465,
+                  "damagePercentage": 15070,
+                  "damagePercentageGrowth": 1370,
+                  "etherPurify": 3833,
+                  "feverRecovery": 408650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 11110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11110,
+                  "stunRatioGrowth": 510
+                },
+                "1251021": {
+                  "attackData": [78626],
+                  "attributeInfliction": 17451,
+                  "damagePercentage": 21100,
+                  "damagePercentageGrowth": 1920,
+                  "etherPurify": 5366,
+                  "feverRecovery": 572000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 15550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15550,
+                  "stunRatioGrowth": 710
+                },
+                "1251022": {
+                  "attackData": [89858],
+                  "attributeInfliction": 19944,
+                  "damagePercentage": 24110,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 6132,
+                  "feverRecovery": 653675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 810,
+                  "main": 17770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17770,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "20",
+              "name": "Additional Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1251001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Penultimate"
+    },
+    "1251002": {
+      "desc": "<IconMap:Icon_Normal>(Hold)",
+      "name": "Basic Attack: Enchanted Blossoms"
+    },
+    "1251003": {
+      "desc": "<IconMap:Icon_Normal> (Flash Connect State) (Hold)",
+      "name": "Basic Attack: Enchanted Moonlit Blossoms"
+    },
+    "1251004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Sunlit Glory"
+    },
+    "1251005": {
+      "desc": "<IconMap:Icon_SpecialReady>(Can Hold Down)",
+      "name": "EX Special Attack: Moonlit Begonia"
+    },
+    "1251006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Breach"
+    },
+    "1251007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Lingering Sentiments"
+    },
+    "1251008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Tranquil Serenade"
+    },
+    "1251009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Eight Sounds of Ganzhou"
+    },
+    "1251010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Wind Through the Pines"
+    },
+    "1251011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Graceful Embellishment"
+    },
+    "1251012": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Song of the Clear River"
+    }
+  },
+  "skin": {
+    "3112510": {
+      "desc": "Keep your teapot close and drink plenty of hot water — that's ancient wisdom passed down from the old civilization. But why would an intelligent construct drink tea? It must be for health purposes... right?",
+      "name": "Qingyi: Clarity, Peace, and Joy"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, versatile Stun",
+    "Grants Stun DMG buffs",
+    "Converts Impact into ATK"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Qingyi enters combat, <color=#FFFFFF>Flash Connect Voltage</color> is instantly restored to its maximum, and the accumulation rate is increased by 30%. When using her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, if <color=#FFFFFF>Flash Connect Voltage</color> is at its maximum, the attack will reduce the DEF of the enemy it hits by 15%, and Qingyi's CRIT Rate against that enemy will increase by 20% for 15s.",
+      "desc2": "\"While there will be no threat to your life, we kindly request you do not resist arrest...\"\nThe direction and intensity of the current have been precisely calculated to ensure that every suspect receives a safe electric shock experience.",
+      "name": "Insulation Breakdown"
+    },
+    "2": {
+      "desc": "The Stun DMG Multiplier increase provided by each stack of <color=#FFFFFF>Subjugation</color> in <color=#FFFFFF>Core Passive: Eternal Seasons</color> increases to 135% of its original value. When Qingyi's attack hits an enemy and the stacks of <color=#FFFFFF>Subjugation</color> she applies reaches its maximum stacks, her Daze dealt to the target increases by 15%.",
+      "desc2": "An ancient combat technique mentioned in old civillization texts. It seems to have started as a martial arts technique, rather than a staff technique.\n\"Don't be so constrained, the arm itself can be used like a three-section staff, mhm.\"",
+      "name": "Minimal Effort, Maximum Impact"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"Young people should be mindful their health, and drinking more hot water is a good start.\"\nQingyi always appears comforted when she drinks from her flask. But be careful if she offers you a drink—\n\"Even 100-degree Celsius boiling water doesn't faze her...\" One Public Security Officer who encountered this left such a note.",
+      "name": "Drink Hot Water"
+    },
+    "4": {
+      "desc": "Upon entering or exiting <color=#FFFFFF>Flash Connect</color> state, gain a shield equal to 10% of Qingyi's Max HP. If a previous shield is still active when the shield effect refreshes, Qingyi generates 5 Energy. This Energy Generation effect can be triggered once every 10s.",
+      "desc2": "By reverse-engineering Automatons from the old civilization, the White Star Institute developed the Arc Barrier, a technology that combines defense, attack, and electrical energy conversion.\n\"As the saying goes: Water can float a boat or sink it. Physics has a saying: Electric current flows like water. Therefore: Electric current can be used both offensively and defensively. It's a fantastic combination.\"",
+      "name": "Stable Arc Barrier"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"Great, young people should be courageous and try new things. Keep it up!\"\nIt sometimes feels like Qingyi's encouragement is lazy and teasing, but if you really get into trouble, just rely on her.\nAfter all, she's been around for centuries and can handle anything.",
+      "name": "Youthful Spirit"
+    },
+    "6": {
+      "desc": "The Interrupt Level of <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color> is greatly increased, and the CRIT DMG is increased by an additional 100%. When Qingyi hits an enemy with her <color=#FFFFFF>Basic Attack: Enchanted Moonlit Blossoms</color>, the target's Attribute DMG RES is reduced by 20% for 15s.",
+      "desc2": "A theory about the human circulatory system documented in ancient texts from the old civilization. It's said those who fully master this theory can instantly disable an opponent in a fight.\n\"How about trying the pressure points that cause itching next time? Who should be the guinea pig? Manager? Or Zhu Yuan?\"",
+      "name": "Eight Meridians"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

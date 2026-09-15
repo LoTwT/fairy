@@ -1,0 +1,1489 @@
+{
+  "camp": {
+    "4": "Sons of Calydon"
+  },
+  "elementType": {
+    "200": "Physical"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Anomaly Mastery"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1281,
+  "locale": "en",
+  "name": "Piper",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1281015", "1281016", "1281017", "1281018", "1281019"],
+      "basic": ["1281001", "1281002", "1281003", "1281004"],
+      "chain": ["1281013", "1281014"],
+      "dodge": ["1281011", "1281012"],
+      "special": [
+        "1281005",
+        "1281006",
+        "1281007",
+        "1281008",
+        "1281009",
+        "1281010"
+      ]
+    },
+    "parameterRowsById": {
+      "1281001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/4"
+      ],
+      "1281002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/5"
+      ],
+      "1281003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1281004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1281005": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1281006": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/3"
+      ],
+      "1281007": [
+        "/skill/special/description/5/param/1",
+        "/skill/special/description/5/param/4"
+      ],
+      "1281008": [
+        "/skill/special/description/5/param/2",
+        "/skill/special/description/5/param/5"
+      ],
+      "1281009": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1281010": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1281011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1281012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1281013": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1281014": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1281015": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1281016": ["/skill/assist/description/4/param/0"],
+      "1281017": ["/skill/assist/description/4/param/1"],
+      "1281018": ["/skill/assist/description/4/param/2"],
+      "1281019": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "OCT 21",
+    "fullName": "Piper",
+    "gender": "Female",
+    "impressionF": "Sometimes Piper says \"lil ol' me\" instead of \"I\"... Is she trying to be funny...? Or maybe she's shy!",
+    "impressionM": "I think it's probably just a catchphrase.\nBy the way, that last part... Is Fairy trying to complain about us...?",
+    "impressions": [
+      "Impressions of Piper:\n · Is her personality like a middle-aged man cause she drives a truck? Or does she drive a truck because her personality is like a middle-aged man?",
+      " · Piper seems to be really lucky... Maybe it'll rub off if we hang out with her more.",
+      " · Someone who says that people have to look forward must have some reason they're unwilling to look back."
+    ],
+    "profileDesc": "Piper is a truck driver for the Sons of Calydon. Apart from driving, she's also responsible for vehicle maintenance and other related jobs.\nHer tiny stature, cute voice (though she always seems half-asleep when not driving), and adorably harmless appearance (though she's a shut-in who can't be bothered to take care of her own appearance) make it hard to imagine that she would have such a crazy driving style.\nUsually, by the time she drawls out, \"Hold~ on~ tight~,\" the truck is already barreling down the road.\nRumor has it, Piper is a driver who doesn't need brakes. Though riding with her is a terrifying experience, she will always get you where you need to go safely, and in the shortest time possible. Of course, \"safely\" doesn't include any trauma that may be induced.\n\nPiper has many hobbies that don't seem to match her age, such as reading newspapers, buying lottery tickets, and collecting car magazines.\nPiper's biggest wish is to live each day slowly and leisurely.\nNote: Please keep in mind, Master, that this is also my wish.",
+    "stature": "151",
+    "trustLv": {
+      "1": "Piper is a truck driver for the Sons of Calydon. Apart from driving, she's also responsible for vehicle maintenance and other related jobs.\nHer tiny stature, cute voice (though she always seems half-asleep when not driving), and adorably harmless appearance (though she's a shut-in who can't be bothered to take care of her own appearance) make it hard to imagine that she would have such a crazy driving style.\nUsually, by the time she drawls out, \"Hold~ on~ tight~,\" the truck is already barreling down the road.\nRumor has it, Piper is a driver who doesn't need brakes. Though riding with her is a terrifying experience, she will always get you where you need to go safely, and in the shortest time possible. Of course, \"safely\" doesn't include any trauma that may be induced.\n\nPiper has many hobbies that don't seem to match her age, such as reading newspapers, buying lottery tickets, and collecting car magazines.\nPiper's biggest wish is to live each day slowly and leisurely.\nNote: Please keep in mind, Master, that this is also my wish.",
+      "2": "",
+      "3": "Piper has a love for the sound of truck engines starting up, so she recorded the sound of Steeltusk starting up. She has to listen to the recording to fully wake up in the morning.\nIf Piper falls asleep during a meeting, playing a recording of a truck engine can quickly get her wide awake again (this intel was provided by Lucy).",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Story \"Leisurely Lull: Unexpected New Customer\" (available after completing Main Story Chapter 4) to unlock",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1281501": {
+        "desc": [
+          "When Piper's <color=#FFFFFF>EX Special Attack: Engine Spin</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, she gains 1 stack of <color=#FFFFFF>Power</color>, up to a maximum of 20 stacks, lasting for 12s. Repeated triggers reset the duration. For every stack of <color=#FFFFFF>Power</color>, Piper's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>2%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character, or shares the same Attribute or Faction:\nWhen Piper has 20 or more stacks of <color=#FFFFFF>Power</color>, all squad members' DMG is increased by 18%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Power Charge",
+          "Additional Ability: Synced Acceleration"
+        ],
+        "potential": []
+      },
+      "1281502": {
+        "desc": [
+          "When Piper's <color=#FFFFFF>EX Special Attack: Engine Spin</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, she gains 1 stack of <color=#FFFFFF>Power</color>, up to a maximum of 20 stacks, lasting for 12s. Repeated triggers reset the duration. For every stack of <color=#FFFFFF>Power</color>, Piper's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>2.3%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character, or shares the same Attribute or Faction:\nWhen Piper has 20 or more stacks of <color=#FFFFFF>Power</color>, all squad members' DMG is increased by 18%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Power Charge",
+          "Additional Ability: Synced Acceleration"
+        ],
+        "potential": []
+      },
+      "1281503": {
+        "desc": [
+          "When Piper's <color=#FFFFFF>EX Special Attack: Engine Spin</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, she gains 1 stack of <color=#FFFFFF>Power</color>, up to a maximum of 20 stacks, lasting for 12s. Repeated triggers reset the duration. For every stack of <color=#FFFFFF>Power</color>, Piper's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>2.6%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character, or shares the same Attribute or Faction:\nWhen Piper has 20 or more stacks of <color=#FFFFFF>Power</color>, all squad members' DMG is increased by 18%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Power Charge",
+          "Additional Ability: Synced Acceleration"
+        ],
+        "potential": []
+      },
+      "1281504": {
+        "desc": [
+          "When Piper's <color=#FFFFFF>EX Special Attack: Engine Spin</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, she gains 1 stack of <color=#FFFFFF>Power</color>, up to a maximum of 20 stacks, lasting for 12s. Repeated triggers reset the duration. For every stack of <color=#FFFFFF>Power</color>, Piper's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>3%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character, or shares the same Attribute or Faction:\nWhen Piper has 20 or more stacks of <color=#FFFFFF>Power</color>, all squad members' DMG is increased by 18%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Power Charge",
+          "Additional Ability: Synced Acceleration"
+        ],
+        "potential": []
+      },
+      "1281505": {
+        "desc": [
+          "When Piper's <color=#FFFFFF>EX Special Attack: Engine Spin</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, she gains 1 stack of <color=#FFFFFF>Power</color>, up to a maximum of 20 stacks, lasting for 12s. Repeated triggers reset the duration. For every stack of <color=#FFFFFF>Power</color>, Piper's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>3.3%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character, or shares the same Attribute or Faction:\nWhen Piper has 20 or more stacks of <color=#FFFFFF>Power</color>, all squad members' DMG is increased by 18%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Power Charge",
+          "Additional Ability: Synced Acceleration"
+        ],
+        "potential": []
+      },
+      "1281506": {
+        "desc": [
+          "When Piper's <color=#FFFFFF>EX Special Attack: Engine Spin</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, she gains 1 stack of <color=#FFFFFF>Power</color>, up to a maximum of 20 stacks, lasting for 12s. Repeated triggers reset the duration. For every stack of <color=#FFFFFF>Power</color>, Piper's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>3.6%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character, or shares the same Attribute or Faction:\nWhen Piper has 20 or more stacks of <color=#FFFFFF>Power</color>, all squad members' DMG is increased by 18%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Power Charge",
+          "Additional Ability: Synced Acceleration"
+        ],
+        "potential": []
+      },
+      "1281507": {
+        "desc": [
+          "When Piper's <color=#FFFFFF>EX Special Attack: Engine Spin</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, she gains 1 stack of <color=#FFFFFF>Power</color>, up to a maximum of 20 stacks, lasting for 12s. Repeated triggers reset the duration. For every stack of <color=#FFFFFF>Power</color>, Piper's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by <color=#2BAD00>4%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character, or shares the same Attribute or Faction:\nWhen Piper has 20 or more stacks of <color=#FFFFFF>Power</color>, all squad members' DMG is increased by 18%."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Power Charge",
+          "Additional Ability: Synced Acceleration"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nLaunches a downward smash attack at enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Brake Tap",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Emergency Brake",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nCharge and slash enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Overtaking Maneuver",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Brake Tap",
+          "param": [
+            {
+              "desc": "{Skill:1281015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281015": {
+                  "attackData": [],
+                  "attributeInfliction": 12996,
+                  "damagePercentage": 13000,
+                  "damagePercentageGrowth": 1190,
+                  "etherPurify": 6499,
+                  "feverRecovery": 357500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1190,
+                  "main": 13000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 46790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13000,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281015": {
+                  "attackData": [],
+                  "attributeInfliction": 12996,
+                  "damagePercentage": 13000,
+                  "damagePercentageGrowth": 1190,
+                  "etherPurify": 6499,
+                  "feverRecovery": 357500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 13000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 46790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13000,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Emergency Brake",
+          "param": [
+            {
+              "desc": "{Skill:1281016, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1281016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24670,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281017, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1281017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1420,
+                  "main": 31170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281018, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1281018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15170,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Overtaking Maneuver",
+          "param": [
+            {
+              "desc": "{Skill:1281019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281019": {
+                  "attackData": [],
+                  "attributeInfliction": 37622,
+                  "damagePercentage": 40050,
+                  "damagePercentageGrowth": 3650,
+                  "etherPurify": 20667,
+                  "feverRecovery": 1234475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3650,
+                  "main": 40050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35200,
+                  "stunRatioGrowth": 1600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281019": {
+                  "attackData": [],
+                  "attributeInfliction": 37622,
+                  "damagePercentage": 40050,
+                  "damagePercentageGrowth": 3650,
+                  "etherPurify": 20667,
+                  "feverRecovery": 1234475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1600,
+                  "main": 35200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35200,
+                  "stunRatioGrowth": 1600
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 slashes, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Load Up and Roll Out",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Load Up and Roll Out",
+          "param": [
+            {
+              "desc": "{Skill:1281001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1281001": {
+                  "attackData": [],
+                  "attributeInfliction": 2948,
+                  "damagePercentage": 5900,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 2949,
+                  "feverRecovery": 81125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2950,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1281002": {
+                  "attackData": [],
+                  "attributeInfliction": 6440,
+                  "damagePercentage": 7880,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6441,
+                  "feverRecovery": 177375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6450,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1281003": {
+                  "attackData": [],
+                  "attributeInfliction": 12189,
+                  "damagePercentage": 15010,
+                  "damagePercentageGrowth": 1370,
+                  "etherPurify": 12190,
+                  "feverRecovery": 335225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1370,
+                  "main": 15010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12190,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1281004": {
+                  "attackData": [],
+                  "attributeInfliction": 25211,
+                  "damagePercentage": 32060,
+                  "damagePercentageGrowth": 2920,
+                  "etherPurify": 25212,
+                  "feverRecovery": 693550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2920,
+                  "main": 32060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 90770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25220,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1281001": {
+                  "attackData": [],
+                  "attributeInfliction": 2948,
+                  "damagePercentage": 5900,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 2949,
+                  "feverRecovery": 81125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2950,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1281002": {
+                  "attackData": [],
+                  "attributeInfliction": 6440,
+                  "damagePercentage": 7880,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6441,
+                  "feverRecovery": 177375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6450,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1281003": {
+                  "attackData": [],
+                  "attributeInfliction": 12189,
+                  "damagePercentage": 15010,
+                  "damagePercentageGrowth": 1370,
+                  "etherPurify": 12190,
+                  "feverRecovery": 335225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12190,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1281004": {
+                  "attackData": [],
+                  "attributeInfliction": 25211,
+                  "damagePercentage": 32060,
+                  "damagePercentageGrowth": 2920,
+                  "etherPurify": 25212,
+                  "feverRecovery": 693550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 25220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 90770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25220,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a powerful downward smash at enemies ahead in a large area, dealing massive <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Buckle Up",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nRapidly spins, unleashing powerful spinning slashes at enemies in a large area ahead, followed by a downward smash, dealing massive <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Hold~ On~ Tight~",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Buckle Up",
+          "param": [
+            {
+              "desc": "{Skill:1281013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281013": {
+                  "attackData": [],
+                  "attributeInfliction": 45279,
+                  "damagePercentage": 65230,
+                  "damagePercentageGrowth": 5930,
+                  "etherPurify": 25330,
+                  "feverRecovery": 2525325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5930,
+                  "main": 65230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25330,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281013": {
+                  "attackData": [],
+                  "attributeInfliction": 45279,
+                  "damagePercentage": 65230,
+                  "damagePercentageGrowth": 5930,
+                  "etherPurify": 25330,
+                  "feverRecovery": 2525325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1160,
+                  "main": 25330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25330,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Hold~ On~ Tight~",
+          "param": [
+            {
+              "desc": "{Skill:1281014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281014": {
+                  "attackData": [],
+                  "attributeInfliction": 112754,
+                  "damagePercentage": 166040,
+                  "damagePercentageGrowth": 15100,
+                  "etherPurify": 82830,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 15100,
+                  "main": 166040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32830,
+                  "stunRatioGrowth": 1500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281014": {
+                  "attackData": [],
+                  "attributeInfliction": 112754,
+                  "damagePercentage": 166040,
+                  "damagePercentageGrowth": 15100,
+                  "etherPurify": 82830,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1500,
+                  "main": 32830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32830,
+                  "stunRatioGrowth": 1500
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Handbrake Drift",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nSlashes enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Pedal to the Metal",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nUnleash a downward smash attack in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Power Drift",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Pedal to the Metal",
+          "param": [
+            {
+              "desc": "{Skill:1281011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281011": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 9010,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 9010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281011": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 9010,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Power Drift",
+          "param": [
+            {
+              "desc": "{Skill:1281012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281012": {
+                  "attackData": [],
+                  "attributeInfliction": 12996,
+                  "damagePercentage": 26900,
+                  "damagePercentageGrowth": 2450,
+                  "etherPurify": 27997,
+                  "feverRecovery": 357500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2450,
+                  "main": 26900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 46790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23000,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281012": {
+                  "attackData": [],
+                  "attributeInfliction": 12996,
+                  "damagePercentage": 26900,
+                  "damagePercentageGrowth": 2450,
+                  "etherPurify": 27997,
+                  "feverRecovery": 357500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 23000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 46790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23000,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nPiper spins and launches a sweeping slash around her, dealing <color=#F0D12B>Physical DMG</color>.\nHold <IconMap:Icon_Special> to extend the skill duration, unleashing increasingly powerful spinning slashes and increasing the charge level of the skill up to 2 times.\nIf the skill is used after the first 3 hits of a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dash Attack</color>, or <color=#FFFFFF>Dodge Counter</color>, you can quickly activate <color=#FFFFFF>Special Attack: Tire Spin</color> of an increased charge level.\nDuring the skill activation, Anti-Interrupt level increases, and DMG taken is reduced by 40%.",
+          "name": "Special Attack: Tire Spin",
+          "potential": []
+        },
+        {
+          "desc": "While <color=#FFFFFF>Special Attack: Tire Spin</color> is active, release <IconMap:Icon_Special> to trigger a downward smash attack based on the charge level of <color=#FFFFFF>Special Attack: Tire Spin</color>, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Special Attack: One Trillion Tons",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, continue holding <IconMap:Icon_SpecialReady> after <color=#FFFFFF>Special Attack: Tire Spin</color> reaches maximum charge level to activate:\nRapidly spins, unleashing powerful spinning slashes around her and dealing massive <color=#F0D12B>Physical DMG</color>.\nThis skill consumes Energy continuously for up to 3s.\nDuring the skill activation, Anti-Interrupt level increases, and DMG taken is reduced by 40%.",
+          "name": "EX Special Attack: Engine Spin",
+          "potential": []
+        },
+        {
+          "desc": "During <color=#FFFFFF>EX Special Attack: Engine Spin</color>, release <IconMap:Icon_SpecialReady> to activate:\nPiper unleashes a downward smash attack, dealing massive <color=#F0D12B>Physical DMG</color>.\nIf the duration of <color=#FFFFFF>EX Special Attack: Engine Spin</color> reaches its limit or Energy drops to 20, <color=#FFFFFF>EX Special Attack: Really Heavy</color> will automatically activate.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Really Heavy",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Tire Spin",
+          "param": [
+            {
+              "desc": "{Skill:1281005, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281005": {
+                  "attackData": [],
+                  "attributeInfliction": 27166,
+                  "damagePercentage": 27170,
+                  "damagePercentageGrowth": 2470,
+                  "etherPurify": 27167,
+                  "feverRecovery": 373725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2470,
+                  "main": 27170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27170,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281005, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281005": {
+                  "attackData": [],
+                  "attributeInfliction": 27166,
+                  "damagePercentage": 27170,
+                  "damagePercentageGrowth": 2470,
+                  "etherPurify": 27167,
+                  "feverRecovery": 373725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27170,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: One Trillion Tons",
+          "param": [
+            {
+              "desc": "{Skill:1281006, Prop:1001}",
+              "name": "Level-1 Charged Attack DMG Multiplier",
+              "param": {
+                "1281006": {
+                  "attackData": [],
+                  "attributeInfliction": 9333,
+                  "damagePercentage": 9340,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 9334,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 9340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9340,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281007, Prop:1001}",
+              "name": "Level-2 Charged Attack DMG Multiplier",
+              "param": {
+                "1281007": {
+                  "attackData": [],
+                  "attributeInfliction": 10336,
+                  "damagePercentage": 10340,
+                  "damagePercentageGrowth": 940,
+                  "etherPurify": 10337,
+                  "feverRecovery": 284350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 940,
+                  "main": 10340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10340,
+                  "stunRatioGrowth": 470
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281008, Prop:1001}",
+              "name": "Level-3 Charged Attack DMG Multiplier",
+              "param": {
+                "1281008": {
+                  "attackData": [],
+                  "attributeInfliction": 23500,
+                  "damagePercentage": 23500,
+                  "damagePercentageGrowth": 2140,
+                  "etherPurify": 23500,
+                  "feverRecovery": 646250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2140,
+                  "main": 23500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23500,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281006, Prop:1002}",
+              "name": "Level-1 Charged Daze Multiplier",
+              "param": {
+                "1281006": {
+                  "attackData": [],
+                  "attributeInfliction": 9333,
+                  "damagePercentage": 9340,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 9334,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 9340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9340,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281007, Prop:1002}",
+              "name": "Level-2 Charged Daze Multiplier",
+              "param": {
+                "1281007": {
+                  "attackData": [],
+                  "attributeInfliction": 10336,
+                  "damagePercentage": 10340,
+                  "damagePercentageGrowth": 940,
+                  "etherPurify": 10337,
+                  "feverRecovery": 284350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 10340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10340,
+                  "stunRatioGrowth": 470
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281008, Prop:1002}",
+              "name": "Level-3 Charged Attack Daze Multiplier",
+              "param": {
+                "1281008": {
+                  "attackData": [],
+                  "attributeInfliction": 23500,
+                  "damagePercentage": 23500,
+                  "damagePercentageGrowth": 2140,
+                  "etherPurify": 23500,
+                  "feverRecovery": 646250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 23500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23500,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Engine Spin",
+          "param": [
+            {
+              "desc": "{{Skill:1281010, Prop:1001}/2}",
+              "name": "DMG Multiplier Every Spin",
+              "param": {
+                "1281010": {
+                  "attackData": [],
+                  "attributeInfliction": 16125,
+                  "damagePercentage": 18710,
+                  "damagePercentageGrowth": 1710,
+                  "etherPurify": 4667,
+                  "feverRecovery": 370975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1710,
+                  "main": 18710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10960,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1281010, Prop:1002}/2}",
+              "name": "Daze Multiplier Every Spin",
+              "param": {
+                "1281010": {
+                  "attackData": [],
+                  "attributeInfliction": 16125,
+                  "damagePercentage": 18710,
+                  "damagePercentageGrowth": 1710,
+                  "etherPurify": 4667,
+                  "feverRecovery": 370975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10960,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20 Energy/s",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Really Heavy",
+          "param": [
+            {
+              "desc": "{Skill:1281009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1281009": {
+                  "attackData": [],
+                  "attributeInfliction": 53255,
+                  "damagePercentage": 61290,
+                  "damagePercentageGrowth": 5580,
+                  "etherPurify": 21334,
+                  "feverRecovery": 1261975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5580,
+                  "main": 61290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39680,
+                  "stunRatioGrowth": 1810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1281009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1281009": {
+                  "attackData": [],
+                  "attributeInfliction": 53255,
+                  "damagePercentage": 61290,
+                  "damagePercentageGrowth": 5580,
+                  "etherPurify": 21334,
+                  "feverRecovery": 1261975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1810,
+                  "main": 39680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 39680,
+                  "stunRatioGrowth": 1810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1281001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Load Up and Roll Out"
+    },
+    "1281002": {
+      "desc": "<IconMap:Icon_Special> (Hold Down)",
+      "name": "Special Attack: Tire Spin"
+    },
+    "1281003": {
+      "desc": "<IconMap:Icon_Special> (Basic Attack Combo) (Hold)",
+      "name": "Special Attack: Tire Spin (Quick Launch)"
+    },
+    "1281004": {
+      "desc": "<IconMap:Icon_Special> (Hold Down) ; <IconMap:Icon_Special> (Release)",
+      "name": "Special Attack: One Trillion Tons"
+    },
+    "1281005": {
+      "desc": "<IconMap:Icon_SpecialReady>(Hold)",
+      "name": "EX Special Attack: Engine Spin"
+    },
+    "1281006": {
+      "desc": "<IconMap:Icon_SpecialReady> (Basic Attack Combo) (Hold)",
+      "name": "EX Special Attack: Engine Spin (Quick Launch)"
+    },
+    "1281007": {
+      "desc": "<IconMap:Icon_SpecialReady> (Hold) ; <IconMap:Icon_SpecialReady> (Release)",
+      "name": "EX Special Attack: Really Heavy"
+    },
+    "1281008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Pedal to the Metal"
+    },
+    "1281009": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Power Drift"
+    },
+    "1281010": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Buckle Up"
+    },
+    "1281011": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Hold~ On~ Tight~"
+    },
+    "1281012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Brake Tap"
+    },
+    "1281013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Emergency Brake"
+    },
+    "1281014": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Overtaking Maneuver"
+    }
+  },
+  "skin": {
+    "3112810": {
+      "desc": "Don't be fooled by this truck driver's lazy gaze. One tap on the gas is enough to fling every passenger's soul straight into the back seat.",
+      "name": "Piper: Lazy Speed"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
+    "Rapidly inflicts Physical Anomaly Buildup"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Piper's <color=#FFFFFF>Special Attack: Tire Spin</color>, <color=#FFFFFF>EX Special Attack: Engine Spin</color>, or <color=#FFFFFF>Ultimate</color> hits an enemy with a spinning slash, there is a 50% chance to gain an additional stack of <color=#FFFFFF>Power</color>. The maximum stack limit of <color=#FFFFFF>Power</color> is increased to 30.",
+      "desc2": "One ordinary morning at Sons of Calydon, Piper lets out a lazy yawn.\n\"Good morning—\"\n\"Can we have another relaxing day today? It's important to take it easy, or else lil ol' me might end up working meself to death—\"",
+      "name": "Leisure Moment"
+    },
+    "2": {
+      "desc": "During <color=#FFFFFF>Special Attack: Tire Spin</color> and <color=#FFFFFF>EX Special Attack: Engine Spin</color>, Piper's movement speed increases. When using <color=#FFFFFF>Special Attack: One Trillion Tons</color>, <color=#FFFFFF>EX Special Attack: Really Heavy</color>, or <color=#FFFFFF>Ultimate</color> to launch a downward smash that hits an enemy, the <color=#F0D12B>Physical DMG</color> dealt by the move is increased by 10%. For each stack of <color=#FFFFFF>Power</color>, this buff is further increased by 1%.",
+      "desc2": "A bit of effort now means more rest later.\nThough, it'd be even better if I didn't have to put in any effort at all — Piper stretches, pats the soft bed in her truck, and lies down.",
+      "name": "Motivation"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Piper is always all about trucks.\nEven when she's fast asleep, the rumble of an engine snaps her awake in an instant:\n\"100 horsepower, 5-ton capacity... must be the new light truck from Three Gates Industries!\"",
+      "name": "Truck Expert"
+    },
+    "4": {
+      "desc": "Whenever a squad member inflicts an Attribute Anomaly on an enemy, Piper recovers 20 Energy. This effect can trigger once every 30s.",
+      "desc2": "Riding with Piper is a heart-pounding experience.\nBy the time she drawls out, \"Hold~ on~ tight~,\" the truck is already barreling down the road.\nShe always gets you to your destination fast—though your nerves might take a hit.",
+      "name": "Refined Techniques"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Piper seems to have some hobbies that are not what you'd expect from her.\n\"This horse looks like a real runner... Hmm, but not many people are betting on it. Guess the one with the higher win rate is the safer bet...\"\n\"Burp— Nitro-Fuel... I can drink more... Gimme another one!\"",
+      "name": "Personal Hobbies"
+    },
+    "6": {
+      "desc": "Increases the duration limit of <color=#FFFFFF>EX Special Attack: Engine Spin</color> by 2s and extends the duration of <color=#FFFFFF>Power</color> by 4s.",
+      "desc2": "As you may already know, Piper's biggest dream is to live a life of perpetual relaxation.\nBut right now, her usually half-closed eyes are surprisingly bright and alert.\n\"If it's for you... I suppose lil ol' me can try a little harder~\"",
+      "name": "Mild Excitement"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

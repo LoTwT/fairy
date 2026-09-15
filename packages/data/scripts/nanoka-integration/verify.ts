@@ -128,11 +128,11 @@ export async function verifyAgentFile(
 
 /** 制品验证的共用输入；历史语言开关决定输出是否保证完整语言引用。 */
 interface VerifyNanokaAgentArtifactOptions<RulesVersion extends string> {
-  /** 指向完整制品 integrated/nanoka 的本地目录。 */
+  /** 指向完整制品 integrated 的本地目录。 */
   artifactDirectory: string
   /** 默认加载工作区来源策略；注入策略也必须通过同一校验。 */
   policy?: SourcePolicy
-  /** 构建阶段按规范序列化的预期索引；省略时仅校验制品自身的一致性。 */
+  /** 完整输入导出的预期索引；按 JSON 值核对，省略时仅校验制品自身的一致性。 */
   expectedIndex?: HistoricalIntegratedIndex<RulesVersion>
   /** 默认取 expectedIndex.rulesVersion，否则使用当前规则；显式值优先。恢复旧规则只验证同格式文件外壳。 */
   rulesVersion?: RulesVersion
@@ -270,7 +270,9 @@ export async function verifyNanokaAgentArtifact<
   })
   if (options.expectedIndex)
     requireValue(
-      Buffer.from(bytes).equals(serializeJson(options.expectedIndex)),
+      Buffer.from(serializeJson(index)).equals(
+        serializeJson(options.expectedIndex),
+      ),
       "index.json",
       "与完整输入构建结果不一致",
     )

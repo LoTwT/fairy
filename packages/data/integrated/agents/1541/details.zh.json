@@ -1,0 +1,1589 @@
+{
+  "camp": {
+    "12": "坎卜斯黑枝"
+  },
+  "elementType": {
+    "202": "冰属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "异常掌控"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "异常掌控"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "异常掌控"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "异常掌控"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "异常掌控"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "异常掌控"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "异常掌控"
+    },
+    "part5": {
+      "format": "{0:0}",
+      "name": "异常精通"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "冰属性伤害加成"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1541,
+  "locale": "zh",
+  "name": "普罗米娅",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1541019", "1541020", "1541021", "1541022", "1541023"],
+      "basic": [
+        "1541001",
+        "1541002",
+        "1541003",
+        "1541004",
+        "1541005",
+        "1541006",
+        "1541008"
+      ],
+      "chain": ["1541017", "1541018"],
+      "dodge": ["1541015", "1541016"],
+      "special": [
+        "1541007",
+        "1541009",
+        "1541010",
+        "1541011",
+        "1541012",
+        "1541014"
+      ]
+    },
+    "parameterRowsById": {
+      "1541001": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1541002": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1541003": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1541004": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/8"
+      ],
+      "1541005": [
+        "/skill/basic/description/3/param/4",
+        "/skill/basic/description/3/param/9"
+      ],
+      "1541006": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/1"
+      ],
+      "1541007": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1541008": ["/skill/basic/description/3/param/10"],
+      "1541009": ["/skill/special/description/7/param/0"],
+      "1541010": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1541011": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ],
+      "1541012": ["/skill/special/description/9/param/2"],
+      "1541014": [
+        "/skill/special/description/10/param/0",
+        "/skill/special/description/10/param/1"
+      ],
+      "1541015": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1541016": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1541017": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1541018": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1541019": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1541020": ["/skill/assist/description/4/param/0"],
+      "1541021": ["/skill/assist/description/4/param/1"],
+      "1541022": ["/skill/assist/description/4/param/2"],
+      "1541023": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "12/23",
+    "fullName": "普罗米娅",
+    "gender": "女",
+    "impressionF": "尽管话很少，但是普罗米娅的表达却意外地很清晰呢…真是了不起的技巧！",
+    "impressionM": "如果遇到难以做出选择的情况，就请不要客气地来找我们吧！不管是以黑枝裁决官的身份，还是作为朋友的普罗米娅的身份～",
+    "impressions": [
+      "对普罗米娅的印象：\n · 这个高手有点冷！",
+      " · 认真工作的裁决官理应得到奖励。",
+      " · 哼唱着轻轻漂浮起来的沉重灵魂。"
+    ],
+    "profileDesc": "普罗米娅，坎卜斯黑枝的裁决官，主要负责「处刑」的工作。\n\n相比于黑枝里其他性格鲜明的裁决官，普罗米娅更像是一座隐藏在水面下的冰山。她沉默寡言，几乎没有出于个人生活爱好的活动。\n\n对于TOPS财联的大部分人而言，他们不希望自己与普罗米娅产生任何交集。倘若不幸东窗事发、被坎卜斯黑枝盯上，那些战战兢兢的违规者们祈祷的第一件事便是负责审查案件的裁决官不是普罗米娅。\n\n公司内部私下流传着一条传闻，但没人敢公开讨论。在进入坎卜斯黑枝以前，普罗米娅出身于恶名昭著的清道夫，一个效力于卡吕冬、负责清扫「不稳定因素」的外环组织。",
+    "stature": "174",
+    "trustLv": {
+      "1": "普罗米娅，坎卜斯黑枝的裁决官，主要负责「处刑」的工作。\n\n相比于黑枝里其他性格鲜明的裁决官，普罗米娅更像是一座隐藏在水面下的冰山。她沉默寡言，几乎没有出于个人生活爱好的活动。\n\n对于TOPS财联的大部分人而言，他们不希望自己与普罗米娅产生任何交集。倘若不幸东窗事发、被坎卜斯黑枝盯上，那些战战兢兢的违规者们祈祷的第一件事便是负责审查案件的裁决官不是普罗米娅。\n\n公司内部私下流传着一条传闻，但没人敢公开讨论。在进入坎卜斯黑枝以前，普罗米娅出身于恶名昭著的清道夫，一个效力于卡吕冬、负责清扫「不稳定因素」的外环组织。",
+      "2": "",
+      "3": "普罗米娅的手铐是在加入黑枝时被赋予的，这是她提出的，加入黑枝唯一的条件。黑枝并没有收走手铐的钥匙，但在任务以外，普罗米娅几乎不会主动解开手铐。对她而言，这是束缚，亦是审判。\n\n传闻是对的。\n对于身为清道夫的普罗米娅而言，曾经的她最主要的工作，便是处理那些遭到不可逆侵蚀症的「以骸」，了结他们的生命与痛苦。她本以为，这是为了某种宏大的使命，是为了脚下的土地。她颤抖着，接受了这样沉重的命运。\n直到真相大白。\n那个自负的、锋芒毕露的杀手死去了。幸存下来的，不过是一个背负着命运与愧疚的囚徒。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线委托第二季·尾音 新·艾利都日落时 下",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1541501": {
+        "desc": [
+          "若普罗米娅的初始异常掌控大于150点，每超过1点初始异常掌控会提升自身1.5点异常精通，提升0.35%全队造成的<color=#FFFFFF>[异放]</color>伤害；\n普罗米娅的不同攻击命中敌人时回复一定<color=#FFFFFF>[寒蚀值]</color>，队伍中角色触发<color=#98EFF0>[冻结]</color>效果、<color=#FFFFFF>[紊乱]</color>效果、敌人被触发<color=#FFFFFF>[乱流]</color>效果、自身触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>时，额外回复5/5/5/10点<color=#FFFFFF>[寒蚀值]</color>，最多积累100点<color=#FFFFFF>[寒蚀值]</color>；\n队友触发<color=#FFFFFF>[异放]</color>效果命中敌人时，普罗米娅额外回复15点<color=#FFFFFF>[寒蚀值]</color>；\n若<color=#FFFFFF>[寒蚀值]</color>大于等于50点，则消耗50点<color=#FFFFFF>[寒蚀值]</color>，转化为1点<color=#FFFFFF>[霜刑]</color>，最多获得2点<color=#FFFFFF>[霜刑]</color>；\n进入战场时，普罗米娅获得2点<color=#FFFFFF>[霜刑]</color>；\n发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>的终结一击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，固定结算<color=#2BAD00>330%</color>倍率的对应属性的属性异常伤害，招式发动时消耗1点<color=#FFFFFF>[霜刑]</color>;\n普罗米娅触发<color=#FFFFFF>[异放]</color>效果命中敌人时额外回复100点喧响值，0.5秒内最多触发一次，发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时获得<color=#FFFFFF>[寒誓]</color>效果，拥有<color=#FFFFFF>[寒誓]</color>效果时，发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>、<color=#FFFFFF>[连携技：倒悬清算]</color>、<color=#FFFFFF>[终结技：彻骨磔罚]</color>后点按或长按 <IconMap:Icon_Special> 可消耗<color=#FFFFFF>[寒誓]</color>效果直接衔接<color=#FFFFFF>[特殊技：处刑式·重霜]</color>，<color=#FFFFFF>[寒誓]</color>效果最多获得1层。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n发动<color=#FFFFFF>[强化特殊技]</color>时，普罗米娅的<color=#98EFF0>冰异常积蓄效率</color>提升30%，持续30秒，重复触发时刷新持续时间；\n队伍中任意角色对敌人施加<color=#98EFF0>[霜寒]</color>效果时，该效果的持续时间提升3秒；\n普罗米娅发动<color=#FFFFFF>[强化特殊技]</color>命中敌人时，敌人获得<color=#FFFFFF>[有罪推定]</color>状态，全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时无视40%防御力，<color=#FFFFFF>[有罪推定]</color>状态持续30秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：盗火", "额外能力：饮冰"],
+        "potential": []
+      },
+      "1541502": {
+        "desc": [
+          "若普罗米娅的初始异常掌控大于150点，每超过1点初始异常掌控会提升自身1.5点异常精通，提升0.35%全队造成的<color=#FFFFFF>[异放]</color>伤害；\n普罗米娅的不同攻击命中敌人时回复一定<color=#FFFFFF>[寒蚀值]</color>，队伍中角色触发<color=#98EFF0>[冻结]</color>效果、<color=#FFFFFF>[紊乱]</color>效果、敌人被触发<color=#FFFFFF>[乱流]</color>效果、自身触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>时，额外回复5/5/5/10点<color=#FFFFFF>[寒蚀值]</color>，最多积累100点<color=#FFFFFF>[寒蚀值]</color>；\n队友触发<color=#FFFFFF>[异放]</color>效果命中敌人时，普罗米娅额外回复15点<color=#FFFFFF>[寒蚀值]</color>；\n若<color=#FFFFFF>[寒蚀值]</color>大于等于50点，则消耗50点<color=#FFFFFF>[寒蚀值]</color>，转化为1点<color=#FFFFFF>[霜刑]</color>，最多获得2点<color=#FFFFFF>[霜刑]</color>；\n进入战场时，普罗米娅获得2点<color=#FFFFFF>[霜刑]</color>；\n发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>的终结一击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，固定结算<color=#2BAD00>385%</color>倍率的对应属性的属性异常伤害，招式发动时消耗1点<color=#FFFFFF>[霜刑]</color>;\n普罗米娅触发<color=#FFFFFF>[异放]</color>效果命中敌人时额外回复100点喧响值，0.5秒内最多触发一次，发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时获得<color=#FFFFFF>[寒誓]</color>效果，拥有<color=#FFFFFF>[寒誓]</color>效果时，发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>、<color=#FFFFFF>[连携技：倒悬清算]</color>、<color=#FFFFFF>[终结技：彻骨磔罚]</color>后点按或长按 <IconMap:Icon_Special> 可消耗<color=#FFFFFF>[寒誓]</color>效果直接衔接<color=#FFFFFF>[特殊技：处刑式·重霜]</color>，<color=#FFFFFF>[寒誓]</color>效果最多获得1层。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n发动<color=#FFFFFF>[强化特殊技]</color>时，普罗米娅的<color=#98EFF0>冰异常积蓄效率</color>提升30%，持续30秒，重复触发时刷新持续时间；\n队伍中任意角色对敌人施加<color=#98EFF0>[霜寒]</color>效果时，该效果的持续时间提升3秒；\n普罗米娅发动<color=#FFFFFF>[强化特殊技]</color>命中敌人时，敌人获得<color=#FFFFFF>[有罪推定]</color>状态，全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时无视40%防御力，<color=#FFFFFF>[有罪推定]</color>状态持续30秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：盗火", "额外能力：饮冰"],
+        "potential": []
+      },
+      "1541503": {
+        "desc": [
+          "若普罗米娅的初始异常掌控大于150点，每超过1点初始异常掌控会提升自身1.5点异常精通，提升0.35%全队造成的<color=#FFFFFF>[异放]</color>伤害；\n普罗米娅的不同攻击命中敌人时回复一定<color=#FFFFFF>[寒蚀值]</color>，队伍中角色触发<color=#98EFF0>[冻结]</color>效果、<color=#FFFFFF>[紊乱]</color>效果、敌人被触发<color=#FFFFFF>[乱流]</color>效果、自身触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>时，额外回复5/5/5/10点<color=#FFFFFF>[寒蚀值]</color>，最多积累100点<color=#FFFFFF>[寒蚀值]</color>；\n队友触发<color=#FFFFFF>[异放]</color>效果命中敌人时，普罗米娅额外回复15点<color=#FFFFFF>[寒蚀值]</color>；\n若<color=#FFFFFF>[寒蚀值]</color>大于等于50点，则消耗50点<color=#FFFFFF>[寒蚀值]</color>，转化为1点<color=#FFFFFF>[霜刑]</color>，最多获得2点<color=#FFFFFF>[霜刑]</color>；\n进入战场时，普罗米娅获得2点<color=#FFFFFF>[霜刑]</color>；\n发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>的终结一击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，固定结算<color=#2BAD00>435%</color>倍率的对应属性的属性异常伤害，招式发动时消耗1点<color=#FFFFFF>[霜刑]</color>;\n普罗米娅触发<color=#FFFFFF>[异放]</color>效果命中敌人时额外回复100点喧响值，0.5秒内最多触发一次，发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时获得<color=#FFFFFF>[寒誓]</color>效果，拥有<color=#FFFFFF>[寒誓]</color>效果时，发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>、<color=#FFFFFF>[连携技：倒悬清算]</color>、<color=#FFFFFF>[终结技：彻骨磔罚]</color>后点按或长按 <IconMap:Icon_Special> 可消耗<color=#FFFFFF>[寒誓]</color>效果直接衔接<color=#FFFFFF>[特殊技：处刑式·重霜]</color>，<color=#FFFFFF>[寒誓]</color>效果最多获得1层。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n发动<color=#FFFFFF>[强化特殊技]</color>时，普罗米娅的<color=#98EFF0>冰异常积蓄效率</color>提升30%，持续30秒，重复触发时刷新持续时间；\n队伍中任意角色对敌人施加<color=#98EFF0>[霜寒]</color>效果时，该效果的持续时间提升3秒；\n普罗米娅发动<color=#FFFFFF>[强化特殊技]</color>命中敌人时，敌人获得<color=#FFFFFF>[有罪推定]</color>状态，全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时无视40%防御力，<color=#FFFFFF>[有罪推定]</color>状态持续30秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：盗火", "额外能力：饮冰"],
+        "potential": []
+      },
+      "1541504": {
+        "desc": [
+          "若普罗米娅的初始异常掌控大于150点，每超过1点初始异常掌控会提升自身1.5点异常精通，提升0.35%全队造成的<color=#FFFFFF>[异放]</color>伤害；\n普罗米娅的不同攻击命中敌人时回复一定<color=#FFFFFF>[寒蚀值]</color>，队伍中角色触发<color=#98EFF0>[冻结]</color>效果、<color=#FFFFFF>[紊乱]</color>效果、敌人被触发<color=#FFFFFF>[乱流]</color>效果、自身触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>时，额外回复5/5/5/10点<color=#FFFFFF>[寒蚀值]</color>，最多积累100点<color=#FFFFFF>[寒蚀值]</color>；\n队友触发<color=#FFFFFF>[异放]</color>效果命中敌人时，普罗米娅额外回复15点<color=#FFFFFF>[寒蚀值]</color>；\n若<color=#FFFFFF>[寒蚀值]</color>大于等于50点，则消耗50点<color=#FFFFFF>[寒蚀值]</color>，转化为1点<color=#FFFFFF>[霜刑]</color>，最多获得2点<color=#FFFFFF>[霜刑]</color>；\n进入战场时，普罗米娅获得2点<color=#FFFFFF>[霜刑]</color>；\n发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>的终结一击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，固定结算<color=#2BAD00>485%</color>倍率的对应属性的属性异常伤害，招式发动时消耗1点<color=#FFFFFF>[霜刑]</color>;\n普罗米娅触发<color=#FFFFFF>[异放]</color>效果命中敌人时额外回复100点喧响值，0.5秒内最多触发一次，发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时获得<color=#FFFFFF>[寒誓]</color>效果，拥有<color=#FFFFFF>[寒誓]</color>效果时，发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>、<color=#FFFFFF>[连携技：倒悬清算]</color>、<color=#FFFFFF>[终结技：彻骨磔罚]</color>后点按或长按 <IconMap:Icon_Special> 可消耗<color=#FFFFFF>[寒誓]</color>效果直接衔接<color=#FFFFFF>[特殊技：处刑式·重霜]</color>，<color=#FFFFFF>[寒誓]</color>效果最多获得1层。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n发动<color=#FFFFFF>[强化特殊技]</color>时，普罗米娅的<color=#98EFF0>冰异常积蓄效率</color>提升30%，持续30秒，重复触发时刷新持续时间；\n队伍中任意角色对敌人施加<color=#98EFF0>[霜寒]</color>效果时，该效果的持续时间提升3秒；\n普罗米娅发动<color=#FFFFFF>[强化特殊技]</color>命中敌人时，敌人获得<color=#FFFFFF>[有罪推定]</color>状态，全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时无视40%防御力，<color=#FFFFFF>[有罪推定]</color>状态持续30秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：盗火", "额外能力：饮冰"],
+        "potential": []
+      },
+      "1541505": {
+        "desc": [
+          "若普罗米娅的初始异常掌控大于150点，每超过1点初始异常掌控会提升自身1.5点异常精通，提升0.35%全队造成的<color=#FFFFFF>[异放]</color>伤害；\n普罗米娅的不同攻击命中敌人时回复一定<color=#FFFFFF>[寒蚀值]</color>，队伍中角色触发<color=#98EFF0>[冻结]</color>效果、<color=#FFFFFF>[紊乱]</color>效果、敌人被触发<color=#FFFFFF>[乱流]</color>效果、自身触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>时，额外回复5/5/5/10点<color=#FFFFFF>[寒蚀值]</color>，最多积累100点<color=#FFFFFF>[寒蚀值]</color>；\n队友触发<color=#FFFFFF>[异放]</color>效果命中敌人时，普罗米娅额外回复15点<color=#FFFFFF>[寒蚀值]</color>；\n若<color=#FFFFFF>[寒蚀值]</color>大于等于50点，则消耗50点<color=#FFFFFF>[寒蚀值]</color>，转化为1点<color=#FFFFFF>[霜刑]</color>，最多获得2点<color=#FFFFFF>[霜刑]</color>；\n进入战场时，普罗米娅获得2点<color=#FFFFFF>[霜刑]</color>；\n发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>的终结一击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，固定结算<color=#2BAD00>535%</color>倍率的对应属性的属性异常伤害，招式发动时消耗1点<color=#FFFFFF>[霜刑]</color>;\n普罗米娅触发<color=#FFFFFF>[异放]</color>效果命中敌人时额外回复100点喧响值，0.5秒内最多触发一次，发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时获得<color=#FFFFFF>[寒誓]</color>效果，拥有<color=#FFFFFF>[寒誓]</color>效果时，发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>、<color=#FFFFFF>[连携技：倒悬清算]</color>、<color=#FFFFFF>[终结技：彻骨磔罚]</color>后点按或长按 <IconMap:Icon_Special> 可消耗<color=#FFFFFF>[寒誓]</color>效果直接衔接<color=#FFFFFF>[特殊技：处刑式·重霜]</color>，<color=#FFFFFF>[寒誓]</color>效果最多获得1层。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n发动<color=#FFFFFF>[强化特殊技]</color>时，普罗米娅的<color=#98EFF0>冰异常积蓄效率</color>提升30%，持续30秒，重复触发时刷新持续时间；\n队伍中任意角色对敌人施加<color=#98EFF0>[霜寒]</color>效果时，该效果的持续时间提升3秒；\n普罗米娅发动<color=#FFFFFF>[强化特殊技]</color>命中敌人时，敌人获得<color=#FFFFFF>[有罪推定]</color>状态，全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时无视40%防御力，<color=#FFFFFF>[有罪推定]</color>状态持续30秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：盗火", "额外能力：饮冰"],
+        "potential": []
+      },
+      "1541506": {
+        "desc": [
+          "若普罗米娅的初始异常掌控大于150点，每超过1点初始异常掌控会提升自身1.5点异常精通，提升0.35%全队造成的<color=#FFFFFF>[异放]</color>伤害；\n普罗米娅的不同攻击命中敌人时回复一定<color=#FFFFFF>[寒蚀值]</color>，队伍中角色触发<color=#98EFF0>[冻结]</color>效果、<color=#FFFFFF>[紊乱]</color>效果、敌人被触发<color=#FFFFFF>[乱流]</color>效果、自身触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>时，额外回复5/5/5/10点<color=#FFFFFF>[寒蚀值]</color>，最多积累100点<color=#FFFFFF>[寒蚀值]</color>；\n队友触发<color=#FFFFFF>[异放]</color>效果命中敌人时，普罗米娅额外回复15点<color=#FFFFFF>[寒蚀值]</color>；\n若<color=#FFFFFF>[寒蚀值]</color>大于等于50点，则消耗50点<color=#FFFFFF>[寒蚀值]</color>，转化为1点<color=#FFFFFF>[霜刑]</color>，最多获得2点<color=#FFFFFF>[霜刑]</color>；\n进入战场时，普罗米娅获得2点<color=#FFFFFF>[霜刑]</color>；\n发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>的终结一击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，固定结算<color=#2BAD00>585%</color>倍率的对应属性的属性异常伤害，招式发动时消耗1点<color=#FFFFFF>[霜刑]</color>;\n普罗米娅触发<color=#FFFFFF>[异放]</color>效果命中敌人时额外回复100点喧响值，0.5秒内最多触发一次，发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时获得<color=#FFFFFF>[寒誓]</color>效果，拥有<color=#FFFFFF>[寒誓]</color>效果时，发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>、<color=#FFFFFF>[连携技：倒悬清算]</color>、<color=#FFFFFF>[终结技：彻骨磔罚]</color>后点按或长按 <IconMap:Icon_Special> 可消耗<color=#FFFFFF>[寒誓]</color>效果直接衔接<color=#FFFFFF>[特殊技：处刑式·重霜]</color>，<color=#FFFFFF>[寒誓]</color>效果最多获得1层。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n发动<color=#FFFFFF>[强化特殊技]</color>时，普罗米娅的<color=#98EFF0>冰异常积蓄效率</color>提升30%，持续30秒，重复触发时刷新持续时间；\n队伍中任意角色对敌人施加<color=#98EFF0>[霜寒]</color>效果时，该效果的持续时间提升3秒；\n普罗米娅发动<color=#FFFFFF>[强化特殊技]</color>命中敌人时，敌人获得<color=#FFFFFF>[有罪推定]</color>状态，全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时无视40%防御力，<color=#FFFFFF>[有罪推定]</color>状态持续30秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：盗火", "额外能力：饮冰"],
+        "potential": []
+      },
+      "1541507": {
+        "desc": [
+          "若普罗米娅的初始异常掌控大于150点，每超过1点初始异常掌控会提升自身1.5点异常精通，提升0.35%全队造成的<color=#FFFFFF>[异放]</color>伤害；\n普罗米娅的不同攻击命中敌人时回复一定<color=#FFFFFF>[寒蚀值]</color>，队伍中角色触发<color=#98EFF0>[冻结]</color>效果、<color=#FFFFFF>[紊乱]</color>效果、敌人被触发<color=#FFFFFF>[乱流]</color>效果、自身触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>时，额外回复5/5/5/10点<color=#FFFFFF>[寒蚀值]</color>，最多积累100点<color=#FFFFFF>[寒蚀值]</color>；\n队友触发<color=#FFFFFF>[异放]</color>效果命中敌人时，普罗米娅额外回复15点<color=#FFFFFF>[寒蚀值]</color>；\n若<color=#FFFFFF>[寒蚀值]</color>大于等于50点，则消耗50点<color=#FFFFFF>[寒蚀值]</color>，转化为1点<color=#FFFFFF>[霜刑]</color>，最多获得2点<color=#FFFFFF>[霜刑]</color>；\n进入战场时，普罗米娅获得2点<color=#FFFFFF>[霜刑]</color>；\n发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>的终结一击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，固定结算<color=#2BAD00>635%</color>倍率的对应属性的属性异常伤害，招式发动时消耗1点<color=#FFFFFF>[霜刑]</color>;\n普罗米娅触发<color=#FFFFFF>[异放]</color>效果命中敌人时额外回复100点喧响值，0.5秒内最多触发一次，发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时获得<color=#FFFFFF>[寒誓]</color>效果，拥有<color=#FFFFFF>[寒誓]</color>效果时，发动<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>、<color=#FFFFFF>[连携技：倒悬清算]</color>、<color=#FFFFFF>[终结技：彻骨磔罚]</color>后点按或长按 <IconMap:Icon_Special> 可消耗<color=#FFFFFF>[寒誓]</color>效果直接衔接<color=#FFFFFF>[特殊技：处刑式·重霜]</color>，<color=#FFFFFF>[寒誓]</color>效果最多获得1层。",
+          "队伍中存在其他<color=#FFFFFF>[异常]</color>角色或<color=#FFFFFF>[支援]</color>角色时触发：\n发动<color=#FFFFFF>[强化特殊技]</color>时，普罗米娅的<color=#98EFF0>冰异常积蓄效率</color>提升30%，持续30秒，重复触发时刷新持续时间；\n队伍中任意角色对敌人施加<color=#98EFF0>[霜寒]</color>效果时，该效果的持续时间提升3秒；\n普罗米娅发动<color=#FFFFFF>[强化特殊技]</color>命中敌人时，敌人获得<color=#FFFFFF>[有罪推定]</color>状态，全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时无视40%防御力，<color=#FFFFFF>[有罪推定]</color>状态持续30秒，重复触发时刷新持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：盗火", "额外能力：饮冰"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对目标发动连续攻击，造成<color=#98EFF0>冰属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：折袭",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：禁令",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对目标发动连续攻击，造成<color=#98EFF0>冰属性伤害</color>；\n招式发动后，可直接衔接第五段<color=#FFFFFF>[普通攻击：偏锋]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：截兵",
+          "potential": []
+        },
+        {
+          "name": "快速支援：折袭",
+          "param": [
+            {
+              "desc": "{Skill:1541019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541019": {
+                  "attackData": [24334],
+                  "attributeInfliction": 5170,
+                  "damagePercentage": 7910,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6084,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6700,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541019": {
+                  "attackData": [24334],
+                  "attributeInfliction": 5170,
+                  "damagePercentage": 7910,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6084,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6700,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：禁令",
+          "param": [
+            {
+              "desc": "{Skill:1541020, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1541020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541021, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1541021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541022, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1541022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：截兵",
+          "param": [
+            {
+              "desc": "{Skill:1541023, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541023": {
+                  "attackData": [71320],
+                  "attributeInfliction": 28723,
+                  "damagePercentage": 46900,
+                  "damagePercentageGrowth": 4270,
+                  "etherPurify": 17830,
+                  "feverRecovery": 2319075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4270,
+                  "main": 46900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34670,
+                  "stunRatioGrowth": 1580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541023, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541023": {
+                  "attackData": [71320],
+                  "attributeInfliction": 28723,
+                  "damagePercentage": 46900,
+                  "damagePercentageGrowth": 4270,
+                  "etherPurify": 17830,
+                  "feverRecovery": 2319075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1580,
+                  "main": 34670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34670,
+                  "stunRatioGrowth": 1580
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多五段的攻击，造成<color=#98EFF0>冰属性伤害</color>；\n第五段攻击为下落攻击，落地后保持长按 <IconMap:Icon_Special> 或 <IconMap:Icon_Normal> ，若<color=#FFFFFF>[霜刑]</color>足够，可衔接<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>；\n第四段攻击将披风扔出后进入<color=#FFFFFF>[镣锁赦罪]</color>状态。",
+          "name": "普通攻击：偏锋",
+          "potential": []
+        },
+        {
+          "desc": "长按 <IconMap:Icon_Normal> 发动：\n普罗米娅向上跃起发动攻击，并将披风扔至敌人身边进入<color=#FFFFFF>[镣锁赦罪]</color>状态，造成<color=#98EFF0>冰属性伤害</color>；\n命中敌人时，不累积<color=#FFFFFF>[寒蚀值]</color>。",
+          "name": "普通攻击：旋刃",
+          "potential": []
+        },
+        {
+          "desc": "普罗米娅在释放部分招式时会将披风扔出，持续切割敌人，造成<color=#98EFF0>冰属性伤害</color>，命中敌人时不累积<color=#FFFFFF>[寒蚀值]</color>；\n扔出披风期间，普罗米娅可缓慢行走；\n期间点按 <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 可直接衔接<color=#FFFFFF>[普通攻击：偏锋]</color>第五段攻击；\n期间受到攻击可自动触发<color=#FFFFFF>[极限闪避]</color>，闪避效果每20秒最多触发一次。",
+          "name": "镣锁赦罪",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：偏锋",
+          "param": [
+            {
+              "desc": "{Skill:1541001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1541001": {
+                  "attackData": [12257],
+                  "attributeInfliction": 4348,
+                  "damagePercentage": 4980,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 3065,
+                  "feverRecovery": 84425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 4980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11040,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3380,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1541002": {
+                  "attackData": [25122],
+                  "attributeInfliction": 8600,
+                  "damagePercentage": 10320,
+                  "damagePercentageGrowth": 940,
+                  "etherPurify": 6281,
+                  "feverRecovery": 172975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 940,
+                  "main": 10320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6910,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1541003": {
+                  "attackData": [45411],
+                  "attributeInfliction": 15115,
+                  "damagePercentage": 19090,
+                  "damagePercentageGrowth": 1740,
+                  "etherPurify": 11353,
+                  "feverRecovery": 312400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1740,
+                  "main": 19090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40870,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12490,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1541004": {
+                  "attackData": [49554],
+                  "attributeInfliction": 15916,
+                  "damagePercentage": 20470,
+                  "damagePercentageGrowth": 1870,
+                  "etherPurify": 12389,
+                  "feverRecovery": 309100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1870,
+                  "main": 20470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13630,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541005, Prop:1001}",
+              "name": "五段伤害倍率",
+              "param": {
+                "1541005": {
+                  "attackData": [58313],
+                  "attributeInfliction": 18236,
+                  "damagePercentage": 24150,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 14579,
+                  "feverRecovery": 353100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2200,
+                  "main": 24150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 52490,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16040,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1541001": {
+                  "attackData": [12257],
+                  "attributeInfliction": 4348,
+                  "damagePercentage": 4980,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 3065,
+                  "feverRecovery": 84425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11040,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3380,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1541002": {
+                  "attackData": [25122],
+                  "attributeInfliction": 8600,
+                  "damagePercentage": 10320,
+                  "damagePercentageGrowth": 940,
+                  "etherPurify": 6281,
+                  "feverRecovery": 172975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6910,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1541003": {
+                  "attackData": [45411],
+                  "attributeInfliction": 15115,
+                  "damagePercentage": 19090,
+                  "damagePercentageGrowth": 1740,
+                  "etherPurify": 11353,
+                  "feverRecovery": 312400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 12490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40870,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12490,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1541004": {
+                  "attackData": [49554],
+                  "attributeInfliction": 15916,
+                  "damagePercentage": 20470,
+                  "damagePercentageGrowth": 1870,
+                  "etherPurify": 12389,
+                  "feverRecovery": 309100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 13630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13630,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541005, Prop:1002}",
+              "name": "五段失衡倍率",
+              "param": {
+                "1541005": {
+                  "attackData": [58313],
+                  "attributeInfliction": 18236,
+                  "damagePercentage": 24150,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 14579,
+                  "feverRecovery": 353100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 730,
+                  "main": 16040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 52490,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16040,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541008, Prop:1001}",
+              "name": "披风切割每秒伤害倍率",
+              "param": {
+                "1541008": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1950,
+                  "damagePercentageGrowth": 180,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 180,
+                  "main": 1950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：旋刃",
+          "param": [
+            {
+              "desc": "{Skill:1541006, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1541006": {
+                  "attackData": [0],
+                  "attributeInfliction": 6373,
+                  "damagePercentage": 17550,
+                  "damagePercentageGrowth": 1600,
+                  "etherPurify": 7499,
+                  "feverRecovery": 206250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1600,
+                  "main": 17550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8250,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541006, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1541006": {
+                  "attackData": [0],
+                  "attributeInfliction": 6373,
+                  "damagePercentage": 17550,
+                  "damagePercentageGrowth": 1600,
+                  "etherPurify": 7499,
+                  "feverRecovery": 206250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8250,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n扔出飞镖，倒吊在敌人上空进行多段攻击，随后进行终结一击，造成大量<color=#98EFF0>冰属性伤害</color>；\n重击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，结算一次100%倍率的对应属性的属性异常伤害；\n招式发动后，可直接衔接第五段<color=#FFFFFF>[普通攻击：偏锋]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：倒悬清算",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n向前方进行多段攻击，造成大量<color=#98EFF0>冰属性伤害</color>；\n重击命中处于<color=#98EFF0>冰属性异常状态</color>、<color=#FE437E>以太异常状态</color>、<color=#2EB6FF>电属性异常状态</color>、<color=#FF5521>火属性异常状态</color>、<color=#F0D12B>物理属性异常状态</color>、<color=#A6C5FD>风属性异常状态</color>的敌人时，触发1次<color=#FFFFFF>[异放]</color>效果，结算一次250%倍率的对应属性的属性异常伤害；\n招式发动后，可直接衔接第五段<color=#FFFFFF>[普通攻击：偏锋]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：彻骨磔罚",
+          "potential": []
+        },
+        {
+          "name": "连携技：倒悬清算",
+          "param": [
+            {
+              "desc": "{Skill:1541017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541017": {
+                  "attackData": [48007],
+                  "attributeInfliction": 37360,
+                  "damagePercentage": 83080,
+                  "damagePercentageGrowth": 7560,
+                  "etherPurify": 24004,
+                  "feverRecovery": 2489025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7560,
+                  "main": 83080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26410,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541017": {
+                  "attackData": [48007],
+                  "attributeInfliction": 37360,
+                  "damagePercentage": 83080,
+                  "damagePercentageGrowth": 7560,
+                  "etherPurify": 24004,
+                  "feverRecovery": 2489025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1210,
+                  "main": 26410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26410,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：彻骨磔罚",
+          "param": [
+            {
+              "desc": "{Skill:1541018, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541018": {
+                  "attackData": [45340],
+                  "attributeInfliction": 60409,
+                  "damagePercentage": 153840,
+                  "damagePercentageGrowth": 13990,
+                  "etherPurify": 72670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13990,
+                  "main": 153840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24940,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541018, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541018": {
+                  "attackData": [45340],
+                  "attributeInfliction": 60409,
+                  "damagePercentage": 153840,
+                  "damagePercentageGrowth": 13990,
+                  "etherPurify": 72670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 24940,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24940,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：霏步",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前进行快速攻击，造成<color=#98EFF0>冰属性伤害</color>。",
+          "name": "冲刺攻击：掠命",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对目标发动连续攻击，造成<color=#98EFF0>冰属性伤害</color>；\n招式发动后，可直接衔接第五段<color=#FFFFFF>[普通攻击：偏锋]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：蝠跃",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：掠命",
+          "param": [
+            {
+              "desc": "{Skill:1541015, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541015": {
+                  "attackData": [8661],
+                  "attributeInfliction": 1840,
+                  "damagePercentage": 5630,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 2166,
+                  "feverRecovery": 59675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 5630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2390,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541015, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541015": {
+                  "attackData": [8661],
+                  "attributeInfliction": 1840,
+                  "damagePercentage": 5630,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 2166,
+                  "feverRecovery": 59675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2390,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：蝠跃",
+          "param": [
+            {
+              "desc": "{Skill:1541016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541016": {
+                  "attackData": [148667],
+                  "attributeInfliction": 15881,
+                  "damagePercentage": 33570,
+                  "damagePercentageGrowth": 3060,
+                  "etherPurify": 27167,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3060,
+                  "main": 33570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24390,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541016": {
+                  "attackData": [148667],
+                  "attributeInfliction": 15881,
+                  "damagePercentage": 33570,
+                  "damagePercentageGrowth": 3060,
+                  "etherPurify": 27167,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 24390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24390,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n发动飞镖攻击，造成<color=#98EFF0>冰属性伤害</color>。",
+          "name": "特殊技：处刑式·寒芒乍现",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n发动飞镖攻击，并将披风扔至敌人身边进入<color=#FFFFFF>[镣锁赦罪]</color>状态，造成<color=#98EFF0>冰属性伤害</color>；\n开始发动招式的短时间内，若受到敌人攻击，则会自动衔接<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>；\n发动招式时，普罗米娅获得<color=#FFFFFF>[铁律]</color>效果；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：处刑式·封喉霜径",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[强化特殊技：处刑式·封喉霜径]</color>的短时间内受到攻击自动发动：\n开启短时间的<color=#FFFFFF>[极限视域]</color>，并快速绕至敌人身后；\n触发<color=#FFFFFF>[极限闪避]</color>后，若能量足够，点按 <IconMap:Icon_SpecialReady> 可消耗40点能量触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>，并获得<color=#FFFFFF>[铁律]</color>效果；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：处刑式·匿影",
+          "potential": []
+        },
+        {
+          "desc": "拥有<color=#FFFFFF>[铁律]</color>效果时，在<color=#FFFFFF>[镣锁赦罪]</color>状态下点按 <IconMap:Icon_Normal> 或点按 <IconMap:Icon_Special> 发动 ：\n跃向敌人，收回披风的同时进行下落攻击，造成<color=#98EFF0>冰属性伤害</color>；\n落地后若拥有<color=#FFFFFF>[霜刑]</color>，保持长按 <IconMap:Icon_Normal> 、 <IconMap:Icon_Special> 可衔接<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "特殊技：处刑式·坠霜",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[强化特殊技：处刑式·匿影]</color>后，点按 <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 发动：\n快速发动多段攻击，随后跃向敌人，收回披风的同时进行更强力的下落攻击，造成<color=#98EFF0>冰属性伤害</color>；\n落地后若拥有<color=#FFFFFF>[霜刑]</color>，保持长按 <IconMap:Icon_Normal> 、 <IconMap:Icon_Special> 可衔接<color=#FFFFFF>[强化特殊技：处刑式·绝裁]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "特殊技：处刑式·重霜",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[霜刑]</color>足够时，发动<color=#FFFFFF>[普通攻击：偏锋]</color>的最后一段攻击、<color=#FFFFFF>[特殊技：处刑式·坠霜]</color>、<color=#FFFFFF>[特殊技：处刑式·重霜]</color>落地后保持长按 <IconMap:Icon_Normal> 、 <IconMap:Icon_Special> 发动：\n快速闪身后跳的同时进行更强力的终结一击，造成<color=#98EFF0>冰属性伤害</color>；\n命中敌人时，不累积<color=#FFFFFF>[寒蚀值]</color>；\n招式发动后，可通过长按 <IconMap:Icon_Normal> 、 <IconMap:Icon_Special> 或点按 <IconMap:Icon_Normal> 直接衔接第五段<color=#FFFFFF>[普通攻击：偏锋]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：处刑式·绝裁",
+          "potential": []
+        },
+        {
+          "name": "特殊技：处刑式·寒芒乍现",
+          "param": [
+            {
+              "desc": "{Skill:1541007, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541007": {
+                  "attackData": [19661],
+                  "attributeInfliction": 4177,
+                  "damagePercentage": 12780,
+                  "damagePercentageGrowth": 1170,
+                  "etherPurify": 4916,
+                  "feverRecovery": 135300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1170,
+                  "main": 12780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5410,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541007, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541007": {
+                  "attackData": [19661],
+                  "attributeInfliction": 4177,
+                  "damagePercentage": 12780,
+                  "damagePercentageGrowth": 1170,
+                  "etherPurify": 4916,
+                  "feverRecovery": 135300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5410,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：处刑式·封喉霜径",
+          "param": [
+            {
+              "desc": "{Skill:1541009, Prop:1001}",
+              "name": "飞镖射击总伤害倍率",
+              "param": {
+                "1541009": {
+                  "attackData": [28000],
+                  "attributeInfliction": 5949,
+                  "damagePercentage": 7930,
+                  "damagePercentageGrowth": 730,
+                  "etherPurify": 0,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 730,
+                  "main": 7930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7700,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：处刑式·坠霜",
+          "param": [
+            {
+              "desc": "{Skill:1541010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541010": {
+                  "attackData": [44654],
+                  "attributeInfliction": 23139,
+                  "damagePercentage": 38380,
+                  "damagePercentageGrowth": 3490,
+                  "etherPurify": 11164,
+                  "feverRecovery": 938025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3490,
+                  "main": 38380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27430,
+                  "stunRatioGrowth": 1250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541010": {
+                  "attackData": [44654],
+                  "attributeInfliction": 23139,
+                  "damagePercentage": 38380,
+                  "damagePercentageGrowth": 3490,
+                  "etherPurify": 11164,
+                  "feverRecovery": 938025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1250,
+                  "main": 27430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27430,
+                  "stunRatioGrowth": 1250
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：处刑式·重霜",
+          "param": [
+            {
+              "desc": "{Skill:1541011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541011": {
+                  "attackData": [93987],
+                  "attributeInfliction": 37292,
+                  "damagePercentage": 60820,
+                  "damagePercentageGrowth": 5530,
+                  "etherPurify": 23497,
+                  "feverRecovery": 1446775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5530,
+                  "main": 60820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 45060,
+                  "stunRatioGrowth": 2050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541011": {
+                  "attackData": [93987],
+                  "attributeInfliction": 37292,
+                  "damagePercentage": 60820,
+                  "damagePercentageGrowth": 5530,
+                  "etherPurify": 23497,
+                  "feverRecovery": 1446775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2050,
+                  "main": 45060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 45060,
+                  "stunRatioGrowth": 2050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541012, Prop:1001}",
+              "name": "飞镖切割总伤害倍率",
+              "param": {
+                "1541012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1210,
+                  "damagePercentageGrowth": 110,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 1210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：处刑式·绝裁",
+          "param": [
+            {
+              "desc": "{Skill:1541014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1541014": {
+                  "attackData": [],
+                  "attributeInfliction": 7227,
+                  "damagePercentage": 51230,
+                  "damagePercentageGrowth": 4660,
+                  "etherPurify": 8504,
+                  "feverRecovery": 234025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4660,
+                  "main": 51230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12160,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1541014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1541014": {
+                  "attackData": [],
+                  "attributeInfliction": 7227,
+                  "damagePercentage": 51230,
+                  "damagePercentageGrowth": 4660,
+                  "etherPurify": 8504,
+                  "feverRecovery": 234025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12160,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1541001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：偏锋"
+    },
+    "1541002": {
+      "desc": "<IconMap:Icon_Normal>（长按）",
+      "name": "普通攻击：旋刃"
+    },
+    "1541003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：处刑式·寒芒乍现"
+    },
+    "1541004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：处刑式·封喉霜径"
+    },
+    "1541005": {
+      "desc": "发动[强化特殊技：处刑式·封喉霜径]的短时间内受到攻击自动发动",
+      "name": "强化特殊技：处刑式·匿影"
+    },
+    "1541006": {
+      "desc": "<IconMap:Icon_Normal>或<IconMap:Icon_Special>（[镣锁赦罪]状态且拥有[铁律]时）",
+      "name": "特殊技：处刑式·坠霜"
+    },
+    "1541007": {
+      "desc": "<IconMap:Icon_Normal>或<IconMap:Icon_Special>（触发[强化特殊技：处刑式·匿影]后）",
+      "name": "特殊技：处刑式·重霜"
+    },
+    "1541008": {
+      "desc": "<IconMap:Icon_Normal>或<IconMap:Icon_Special>（[霜刑]足够时，下落攻击后保持长按）",
+      "name": "强化特殊技：处刑式·绝裁"
+    },
+    "1541009": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：掠命"
+    },
+    "1541010": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：蝠跃"
+    },
+    "1541011": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：倒悬清算"
+    },
+    "1541012": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：彻骨磔罚"
+    },
+    "1541013": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：折袭"
+    },
+    "1541014": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：禁令"
+    },
+    "1541015": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：截兵"
+    }
+  },
+  "skin": {
+    "3115410": {
+      "desc": "黑暗是件趁手的武器，处刑者早已谙熟黑夜，可身负重枷，难免行于歧路。",
+      "name": "普罗米娅·曳影迷霜"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，站场输出",
+    "提供全队角色异放伤害增益",
+    "对其他属性异常敌人造成多次[异放]伤害"
+  ],
+  "talent": {
+    "1": {
+      "desc": "普罗米娅发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>时额外获得效果：<color=#FFFFFF>[霜刑]</color>不满时获得1点<color=#FFFFFF>[霜刑]</color>，该效果在发动<color=#FFFFFF>[终结技：彻骨磔罚]</color>后可触发一次；全队角色对<color=#FFFFFF>[有罪推定]</color>状态的敌人造成<color=#FFFFFF>[异放]</color>效果时额外无视20%防御力。",
+      "desc2": "这是一片混乱的无主之地。\n轰鸣的引擎与扬起的沙尘，钢筋与血肉的碰撞，纷争与暴力，日日夜夜地上演着。\n稚嫩的孩子握紧了同样稚嫩的武器，彷徨地走在同样彷徨的红土地上。\n「你愿意，为这儿的和平尽一份力吗？」",
+      "name": "理想稚嫩"
+    },
+    "2": {
+      "desc": "普罗米娅的异常精通提升40点；消耗<color=#FFFFFF>[霜刑]</color>造成的<color=#FFFFFF>[异放]</color>效果的倍率提升120%。",
+      "desc2": "她成为了出色的清道夫，干净利落，了无声息。目标清晰而众多，是以骸，是感染不可逆侵蚀症的患者，是终将异变的以骸，是溅起的血花与耳边的悲鸣。\n可是，这是对的吗？\n「这是清道夫的责任！」「就当是…为了这儿的大多数人，明白了吗！」「那些家伙迟早会死的。」…\n「这是必要的牺牲。」",
+      "name": "信念飘摇"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "真相往往从一次不起眼的意外中被剖出。\n「只是处理那些没用的废物以骸的话，你以为清道夫要怎么捞到现在的油水？！」\n「帮派斗争可是门稳赚不赔的生意。你怕脏了自己的手，『黑狼』倒是眼红得紧…」\n很快，夜晚来了，比所有人以为的更早。\n清道夫，卡吕冬，叫得上名字和叫不上名字的帮派，混乱的时代，似乎都消逝在漫漫无边的黑夜里。",
+      "name": "月光残忍"
+    },
+    "4": {
+      "desc": "普罗米娅触发<color=#FFFFFF>[异放]</color>效果时，回复5点<color=#FFFFFF>[寒蚀值]</color>，0.5秒内最多触发一次。",
+      "desc2": "一封邀请函寄来了对飞蛾的审判。\n选择的权利，光明，正义，以及作为「普罗米娅」的全部。\n她戴上手铐，选择了对自我的流放。\n「这是我，最后的选择。」",
+      "name": "冷酷罪名"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "她将自己淹没在工作之中。\n调查，审讯，裁决，几乎无穷无尽。\n同伴担忧地望着她。\n「你打算这样…到什么时候？」\n「直到赎清全部的罪行，或是迎接死亡。」",
+      "name": "飞蛾将死"
+    },
+    "6": {
+      "desc": "普罗米娅消耗<color=#FFFFFF>[霜刑]</color>触发<color=#FFFFFF>[异放]</color>效果时，额外触发一次特殊的<color=#FFFFFF>[异放]</color>效果，固定结算200%倍率的对应属性的属性异常伤害，同时回复5点<color=#FFFFFF>[寒蚀值]</color>、100点喧响值，该效果每15秒最多触发一次；此外，普罗米娅造成的属性异常伤害、<color=#FFFFFF>[紊乱]</color>伤害无视敌人15%全属性伤害抗性。",
+      "desc2": "终点并没有如期到来，夜晚也并没有想象中的那般漆黑。\n同僚，旧相识，深夜亮起的灯盏与新的朋友…\n「可怜」的飞蛾似乎尚且无法摆脱如此沉甸甸的馈赠，某个期待已久的结局似乎更远了些。\n但这样的命运，似乎也不错？",
+      "name": "故事未完待续"
+    }
+  },
+  "weaponType": {
+    "3": "异常"
+  }
+}

@@ -1,0 +1,1549 @@
+{
+  "camp": {
+    "10": "Yunkui Summit"
+  },
+  "elementType": {
+    "201": "Fire"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1391,
+  "locale": "en",
+  "name": "Ju Fufu",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1391015", "1391016", "1391017", "1391018", "1391019"],
+      "basic": ["1391001", "1391002", "1391003", "1391004", "1391005"],
+      "chain": ["1391012", "1391013", "1391014"],
+      "dodge": ["1391008", "1391009", "1391010", "1391011", "1391022"],
+      "special": ["1391006", "1391007"]
+    },
+    "parameterRowsById": {
+      "1391001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1391002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1391003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1391004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1391005": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/1"
+      ],
+      "1391006": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1391007": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1391008": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1391009": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1391010": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1391011": [
+        "/skill/dodge/description/8/param/0",
+        "/skill/dodge/description/8/param/1"
+      ],
+      "1391012": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1391013": [
+        "/skill/chain/description/4/param/0",
+        "/skill/chain/description/4/param/1"
+      ],
+      "1391014": [
+        "/skill/chain/description/5/param/0",
+        "/skill/chain/description/5/param/1"
+      ],
+      "1391015": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1391016": ["/skill/assist/description/4/param/0"],
+      "1391017": ["/skill/assist/description/4/param/1"],
+      "1391018": ["/skill/assist/description/4/param/2"],
+      "1391019": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1391022": [
+        "/skill/dodge/description/7/param/0",
+        "/skill/dodge/description/7/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "JAN 6",
+    "fullName": "Ju Fufu",
+    "gender": "Female",
+    "impressionF": "\"The most skilled senior ever who can do anything, a righteous hero with righteous might!\" I didn't expect senior Fufu to have such a side... so adorable! Hm... why does this feel like something Wise would've said?",
+    "impressionM": "I've never said anything like that! I still haven't totally gotten used to Fufu calling me junior when she looks so small herself, but both in life and in missions, Fufu truly is a reliable senior... How about we accidentally on purpose show her our comments? I bet she'll get really shy but feel super smug inside.",
+    "impressions": [
+      "Impressions of Ju Fufu:\n · The Little Tiger of Yunkui Summit excels at subduing demons and dispelling evil, driven by a deep resolve to punish the wicked and wipe out all evil.",
+      " · This young master of Suibian Temple has immense powers, and her bearing is nothing short of majestic.",
+      " · Phaethon's senior will have your back when you're up to mischief and plead your case if you get into trouble."
+    ],
+    "profileDesc": "Ju Fufu, a rare tiger Thiren of New Eridu. She looks small and is still young, but she's the most senior disciple of Suibian Temple and one of Yixuan's first disciples.\n\n\"Able to deal with anything,\" \"can even make Shifu listen,\" \"super patient and meticulous teacher,\" \"has great taste when choosing restaurants for teambuilding.\"\n—Yunkui Summit trainee performance review, peer evaluation\n\n\"Always messing up the tasks given by Shifu,\" \"doesn't command respect in speech or combat,\" \"doesn't know how to act tough against bad guys,\" \"juniors are more skilled.\"\n—Yunkui Summit trainee performance review, self-evaluation\n\n\"'The most skilled senior ever who can do anything, a righteous hero with righteous might' is what I heard her say when I passed by her room. Hm... I concur.\"\n—Yunkui Summit trainee performance review, Shifu's evaluation\n\nOther: I suggest you suggest Yunkui Summit improve their network security to avoid the risk of disciples' personal data being stolen or leaked.",
+    "stature": "142",
+    "trustLv": {
+      "1": "Ju Fufu, a rare tiger Thiren of New Eridu. She looks small and is still young, but she's the most senior disciple of Suibian Temple and one of Yixuan's first disciples.\n\n\"Able to deal with anything,\" \"can even make Shifu listen,\" \"super patient and meticulous teacher,\" \"has great taste when choosing restaurants for teambuilding.\"\n—Yunkui Summit trainee performance review, peer evaluation\n\n\"Always messing up the tasks given by Shifu,\" \"doesn't command respect in speech or combat,\" \"doesn't know how to act tough against bad guys,\" \"juniors are more skilled.\"\n—Yunkui Summit trainee performance review, self-evaluation\n\n\"'The most skilled senior ever who can do anything, a righteous hero with righteous might' is what I heard her say when I passed by her room. Hm... I concur.\"\n—Yunkui Summit trainee performance review, Shifu's evaluation\n\nOther: I suggest you suggest Yunkui Summit improve their network security to avoid the risk of disciples' personal data being stolen or leaked.",
+      "2": "",
+      "3": "Tiger Thirens, a Thiren race living in the mountains far from New Eridu's urban areas. Using the security camera footage in Janus Quarter, it can be extrapolated that there are no more than twenty tiger Thirens currently active in New Eridu.\n\nDuring the fall of the old capital, a Hollow Zero companion Hollow disaster erupted in the tiger Thiren settlement. Records show that multiple notorious Ethereals appeared in this Hollow that swallowed up their settlement, killing 98 percent of all registered tiger Thirens. Most of the survivors were the sick, young, or elderly. If it hadn't been for a team of mystics from Yunkui Summit arriving within half an hour for search and rescue, the name Ju Fufu would likely have never appeared in your Agent records.\n\nFrom Yunkui Summit's records and dates, Ju Fufu was already a disciple of the leader of Yunkui Summit, Yixuan, when the disaster happened.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 1",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1391501": {
+        "desc": [
+          "When Ju Fufu isn't using Hu Wei, it will automatically attack enemies and gain <color=#FFFFFF>Might</color> upon hitting them.\nWhen Hu Wei hits an enemy and has at least 100 <color=#FFFFFF>Might</color>, and Ju Fufu is not the currently active character, Ju Fufu will launch <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color> centered around the target enemy. Upon activation, all squad members gain the <color=#FFFFFF>Tiger's Roar</color> effect: CRIT DMG increases by <color=#2BAD00>10%</color>, and when Ju Fufu's initial ATK is greater than or equal to 2,800, every additional 100 ATK further increases CRIT DMG by 5%, up to a maximum additional increase of 30%.\nWhile in the <color=#FFFFFF>Tiger's Roar</color> state, character <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>Ultimate</color> DMG increases by <color=#2BAD00>10%/20%</color>.\nThe <color=#FFFFFF>Tiger's Roar</color> state lasts for 30s. Repeated triggers reset the duration. While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, Impact increases by <color=#2BAD00>25</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nThe maximum Decibels for all characters in the squad increases by 1,000. When an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character uses an <color=#FFFFFF>Ultimate</color>, that character gains 300 Decibels."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fu-rocious Might",
+          "Additional Ability: Aura of Authority"
+        ],
+        "potential": []
+      },
+      "1391502": {
+        "desc": [
+          "When Ju Fufu has yet to use Hu Wei, it will automatically attack enemies and gain <color=#FFFFFF>Might</color> upon hitting them.\nWhen Hu Wei hits an enemy and has at least 100 <color=#FFFFFF>Might</color>, and Ju Fufu is not the currently active character, Ju Fufu will launch <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color> centered around the target enemy. Upon activation, all squad members gain the <color=#FFFFFF>Tiger's Roar</color> effect: CRIT DMG increases by <color=#2BAD00>11.7%</color>, and when Ju Fufu's initial ATK is greater than or equal to 2,800, every additional 100 ATK further increases CRIT DMG by 5%, up to a maximum additional increase of 30%.\nWhile in the <color=#FFFFFF>Tiger's Roar</color> state, character <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>Ultimate</color> DMG increases by <color=#2BAD00>11.7%/23.3%</color>.\nThe <color=#FFFFFF>Tiger's Roar</color> state lasts for 30s. Repeated triggers reset the duration. While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, Impact increases by <color=#2BAD00>29.2</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nThe maximum Decibels for all characters in the squad increases by 1,000. When an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character uses an <color=#FFFFFF>Ultimate</color>, that character gains 300 Decibels."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fu-rocious Might",
+          "Additional Ability: Aura of Authority"
+        ],
+        "potential": []
+      },
+      "1391503": {
+        "desc": [
+          "When Ju Fufu has yet to use Hu Wei, it will automatically attack enemies and gain <color=#FFFFFF>Might</color> upon hitting them.\nWhen Hu Wei hits an enemy and has at least 100 <color=#FFFFFF>Might</color>, and Ju Fufu is not the currently active character, Ju Fufu will launch <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color> centered around the target enemy. Upon activation, all squad members gain the <color=#FFFFFF>Tiger's Roar</color> effect: CRIT DMG increases by <color=#2BAD00>13.3%</color>, and when Ju Fufu's initial ATK is greater than or equal to 2,800, every additional 100 ATK further increases CRIT DMG by 5%, up to a maximum additional increase of 30%.\nWhile in the <color=#FFFFFF>Tiger's Roar</color> state, character <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>Ultimate</color> DMG increases by <color=#2BAD00>13.3%/26.7%</color>.\nThe <color=#FFFFFF>Tiger's Roar</color> state lasts for 30s. Repeated triggers reset the duration. While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, Impact increases by <color=#2BAD00>33.3</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nThe maximum Decibels for all characters in the squad increases by 1,000. When an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character uses an <color=#FFFFFF>Ultimate</color>, that character gains 300 Decibels."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fu-rocious Might",
+          "Additional Ability: Aura of Authority"
+        ],
+        "potential": []
+      },
+      "1391504": {
+        "desc": [
+          "When Ju Fufu has yet to use Hu Wei, it will automatically attack enemies and gain <color=#FFFFFF>Might</color> upon hitting them.\nWhen Hu Wei hits an enemy and has at least 100 <color=#FFFFFF>Might</color>, and Ju Fufu is not the currently active character, Ju Fufu will launch <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color> centered around the target enemy. Upon activation, all squad members gain the <color=#FFFFFF>Tiger's Roar</color> effect: CRIT DMG increases by <color=#2BAD00>15%</color>, and when Ju Fufu's initial ATK is greater than or equal to 2,800, every additional 100 ATK further increases CRIT DMG by 5%, up to a maximum additional increase of 30%.\nWhile in the <color=#FFFFFF>Tiger's Roar</color> state, character <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>Ultimate</color> DMG increases by <color=#2BAD00>15%/30%</color>.\nThe <color=#FFFFFF>Tiger's Roar</color> state lasts for 30s. Repeated triggers reset the duration. While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, Impact increases by <color=#2BAD00>37.5</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nThe maximum Decibels for all characters in the squad increases by 1,000. When an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character uses an <color=#FFFFFF>Ultimate</color>, that character gains 300 Decibels."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fu-rocious Might",
+          "Additional Ability: Aura of Authority"
+        ],
+        "potential": []
+      },
+      "1391505": {
+        "desc": [
+          "When Ju Fufu has yet to use Hu Wei, it will automatically attack enemies and gain <color=#FFFFFF>Might</color> upon hitting them.\nWhen Hu Wei hits an enemy and has at least 100 <color=#FFFFFF>Might</color>, and Ju Fufu is not the currently active character, Ju Fufu will launch <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color> centered around the target enemy. Upon activation, all squad members gain the <color=#FFFFFF>Tiger's Roar</color> effect: CRIT DMG increases by <color=#2BAD00>16.7%</color>, and when Ju Fufu's initial ATK is greater than or equal to 2,800, every additional 100 ATK further increases CRIT DMG by 5%, up to a maximum additional increase of 30%.\nWhile in the <color=#FFFFFF>Tiger's Roar</color> state, character <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>Ultimate</color> DMG increases by <color=#2BAD00>16.7%/33.3%</color>.\nThe <color=#FFFFFF>Tiger's Roar</color> state lasts for 30s. Repeated triggers reset the duration. While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, Impact increases by <color=#2BAD00>41.7</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nThe maximum Decibels for all characters in the squad increases by 1,000. When an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character uses an <color=#FFFFFF>Ultimate</color>, that character gains 300 Decibels."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fu-rocious Might",
+          "Additional Ability: Aura of Authority"
+        ],
+        "potential": []
+      },
+      "1391506": {
+        "desc": [
+          "When Ju Fufu has yet to use Hu Wei, it will automatically attack enemies and gain <color=#FFFFFF>Might</color> upon hitting them.\nWhen Hu Wei hits an enemy and has at least 100 <color=#FFFFFF>Might</color>, and Ju Fufu is not the currently active character, Ju Fufu will launch <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color> centered around the target enemy. Upon activation, all squad members gain the <color=#FFFFFF>Tiger's Roar</color> effect: CRIT DMG increases by <color=#2BAD00>18.3%</color>, and when Ju Fufu's initial ATK is greater than or equal to 2,800, every additional 100 ATK further increases CRIT DMG by 5%, up to a maximum additional increase of 30%.\nWhile in the <color=#FFFFFF>Tiger's Roar</color> state, character <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>Ultimate</color> DMG increases by <color=#2BAD00>18.3%/36.7%</color>.\nThe <color=#FFFFFF>Tiger's Roar</color> state lasts for 30s. Repeated triggers reset the duration. While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, Impact increases by <color=#2BAD00>45.8</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nThe maximum Decibels for all characters in the squad increases by 1,000. When an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character uses an <color=#FFFFFF>Ultimate</color>, that character gains 300 Decibels."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fu-rocious Might",
+          "Additional Ability: Aura of Authority"
+        ],
+        "potential": []
+      },
+      "1391507": {
+        "desc": [
+          "When Ju Fufu has yet to use Hu Wei, it will automatically attack enemies and gain <color=#FFFFFF>Might</color> upon hitting them.\nWhen Hu Wei hits an enemy and has at least 100 <color=#FFFFFF>Might</color>, and Ju Fufu is not the currently active character, Ju Fufu will launch <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color> centered around the target enemy. Upon activation, all squad members gain the <color=#FFFFFF>Tiger's Roar</color> effect: CRIT DMG increases by <color=#2BAD00>20%</color>, and when Ju Fufu's initial ATK is greater than or equal to 2,800, every additional 100 ATK further increases CRIT DMG by 5%, up to a maximum additional increase of 30%.\nWhile in the <color=#FFFFFF>Tiger's Roar</color> state, character <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>Ultimate</color> DMG increases by <color=#2BAD00>20%/40%</color>.\nThe <color=#FFFFFF>Tiger's Roar</color> state lasts for 30s. Repeated triggers reset the duration. While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, Impact increases by <color=#2BAD00>50</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character:\nThe maximum Decibels for all characters in the squad increases by 1,000. When an <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Rupture</color> character uses an <color=#FFFFFF>Ultimate</color>, that character gains 300 Decibels."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fu-rocious Might",
+          "Additional Ability: Aura of Authority"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nSlashes enemies in front, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Decisive Stomp",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Steadfast Crouching Tiger",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nSlash forward at enemies, then use <color=#FFFFFF>Hu Wei</color> to follow up with a downward attack, dealing <color=#FF5521>Fire DMG</color>.\nGain 1 point of <color=#FFFFFF>Momentum</color> upon activation at most once every 10s.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Feral Blazing Maw",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Decisive Stomp",
+          "param": [
+            {
+              "desc": "{Skill:1391015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391015": {
+                  "attackData": [],
+                  "attributeInfliction": 3418,
+                  "damagePercentage": 7530,
+                  "damagePercentageGrowth": 690,
+                  "etherPurify": 3419,
+                  "feverRecovery": 94050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 7530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3770,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391015": {
+                  "attackData": [],
+                  "attributeInfliction": 3418,
+                  "damagePercentage": 7530,
+                  "damagePercentageGrowth": 690,
+                  "etherPurify": 3419,
+                  "feverRecovery": 94050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 180,
+                  "main": 3770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3770,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Steadfast Crouching Tiger",
+          "param": [
+            {
+              "desc": "{Skill:1391016, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1391016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 920,
+                  "main": 20130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20130,
+                  "stunRatioGrowth": 920
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391017, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1391017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27280,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391018, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1391018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13680,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Feral Blazing Maw",
+          "param": [
+            {
+              "desc": "{Skill:1391019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391019": {
+                  "attackData": [],
+                  "attributeInfliction": 34697,
+                  "damagePercentage": 40720,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 18501,
+                  "feverRecovery": 1145100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3710,
+                  "main": 40720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25630,
+                  "stunRatioGrowth": 1170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391019": {
+                  "attackData": [],
+                  "attributeInfliction": 34697,
+                  "damagePercentage": 40720,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 18501,
+                  "feverRecovery": 1145100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1170,
+                  "main": 25630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25630,
+                  "stunRatioGrowth": 1170
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nSlash forward up to four times, dealing <color=#F0D12B>Physical DMG</color> and <color=#FF5521>Fire DMG</color>.\nDuring the 3rd hit, repeatedly press <IconMap:Icon_Normal> to maintain the combo and keep striking the enemy.\nDuring the 3rd hit, hold or pause before pressing <IconMap:Icon_Normal> to chain into the 4th hit.\nDuring the 3rd hit, Anti-Interrupt Level is increased, and DMG received is reduced by 40%.",
+          "name": "Basic Attack: Tiger Seven Forms - Flaming Claw",
+          "potential": []
+        },
+        {
+          "desc": "During combat, Hu Wei will automatically attack enemies, dealing <color=#FF5521>Fire DMG</color>.\nUpon hitting an enemy, gain 20 points of <color=#FFFFFF>Might</color>, triggering up to once per use of a skill. The maximum for <color=#FFFFFF>Might</color> is 200.",
+          "name": "Basic Attack: Hu Wei",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Tiger Seven Forms - Flaming Claw",
+          "param": [
+            {
+              "desc": "{Skill:1391001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1391001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4250,
+                  "damagePercentageGrowth": 390,
+                  "etherPurify": 4407,
+                  "feverRecovery": 121275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 4250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15870,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4850,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1391002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4520,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 3552,
+                  "feverRecovery": 97900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 4520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3910,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1391003": {
+                  "attackData": [],
+                  "attributeInfliction": 4404,
+                  "damagePercentage": 3150,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 4405,
+                  "feverRecovery": 121275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 3150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15860,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4850,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1391004": {
+                  "attackData": [],
+                  "attributeInfliction": 12171,
+                  "damagePercentage": 21840,
+                  "damagePercentageGrowth": 1990,
+                  "etherPurify": 12172,
+                  "feverRecovery": 334950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1990,
+                  "main": 21840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1391001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4250,
+                  "damagePercentageGrowth": 390,
+                  "etherPurify": 4407,
+                  "feverRecovery": 121275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15870,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4850,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1391002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4520,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 3552,
+                  "feverRecovery": 97900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 180,
+                  "main": 3910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3910,
+                  "stunRatioGrowth": 180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1391003": {
+                  "attackData": [],
+                  "attributeInfliction": 4404,
+                  "damagePercentage": 3150,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 4405,
+                  "feverRecovery": 121275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15860,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4850,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1391004": {
+                  "attackData": [],
+                  "attributeInfliction": 12171,
+                  "damagePercentage": 21840,
+                  "damagePercentageGrowth": 1990,
+                  "etherPurify": 12172,
+                  "feverRecovery": 334950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Hu Wei",
+          "param": [
+            {
+              "desc": "{Skill:1391005, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9240,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 9240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6930,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391005, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9240,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6930,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nSwing Hu Wei to deliver a powerful strike to enemies in a small area ahead, dealing massive <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Tiger Cauldron Collapse",
+          "potential": []
+        },
+        {
+          "desc": "With at least 100 points of <color=#FFFFFF>Might</color>, after triggering a <color=#FFFFFF>Chain Attack</color>, automatically activate:\nConsume 100 <color=#FFFFFF>Might</color> to open Hu Wei and fire flames and popcorn at enemies, striking them in a small area ahead, dealing massive <color=#FF5521>Fire DMG</color>.\nIf <color=#FFFFFF>Momentum</color> is available, and while not the active character, the high-speed spinning state will activate after the skill ends.\nThis is an <color=#FFFFFF>Aftershock</color>. Character is invulnerable while using this skill.",
+          "name": "Chain Attack: Suppressing Tiger Cauldron",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nPerform two downward attacks with Hu Wei, dealing massive <color=#FF5521>Fire DMG</color>.\nUpon activation, gain 6 points of <color=#FFFFFF>Momentum</color> and 100 points of <color=#FFFFFF>Might</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Tiger Seven Forms - Raging Tiger Explosion",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Tiger Cauldron Collapse",
+          "param": [
+            {
+              "desc": "{Skill:1391012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391012": {
+                  "attackData": [],
+                  "attributeInfliction": 30808,
+                  "damagePercentage": 66810,
+                  "damagePercentageGrowth": 6080,
+                  "etherPurify": 20834,
+                  "feverRecovery": 1487475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6080,
+                  "main": 66810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16050,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391012": {
+                  "attackData": [],
+                  "attributeInfliction": 30808,
+                  "damagePercentage": 66810,
+                  "damagePercentageGrowth": 6080,
+                  "etherPurify": 20834,
+                  "feverRecovery": 1487475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 730,
+                  "main": 16050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16050,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Suppressing Tiger Cauldron",
+          "param": [
+            {
+              "desc": "{Skill:1391013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391013": {
+                  "attackData": [],
+                  "attributeInfliction": 6041,
+                  "damagePercentage": 35450,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 0,
+                  "feverRecovery": 454025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3230,
+                  "main": 35450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22160,
+                  "stunRatioGrowth": 1010
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391013": {
+                  "attackData": [],
+                  "attributeInfliction": 6041,
+                  "damagePercentage": 35450,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 0,
+                  "feverRecovery": 454025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1010,
+                  "main": 22160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22160,
+                  "stunRatioGrowth": 1010
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Tiger Seven Forms - Raging Tiger Explosion",
+          "param": [
+            {
+              "desc": "{Skill:1391014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391014": {
+                  "attackData": [],
+                  "attributeInfliction": 21003,
+                  "damagePercentage": 166380,
+                  "damagePercentageGrowth": 15130,
+                  "etherPurify": 71004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 15130,
+                  "main": 166380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109070,
+                  "stunRatioGrowth": 4960
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391014": {
+                  "attackData": [],
+                  "attributeInfliction": 21003,
+                  "damagePercentage": 166380,
+                  "damagePercentageGrowth": 15130,
+                  "etherPurify": 71004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4960,
+                  "main": 109070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109070,
+                  "stunRatioGrowth": 4960
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Tiger Seven Forms - Tigerwind",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nPerform a quick slash forward, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Tiger Seven Forms - Tiger Charge",
+          "potential": []
+        },
+        {
+          "desc": "After using <color=#FFFFFF>Dash Attack: Tiger Seven Forms - Tiger Charge</color>, hold <IconMap:Icon_Normal> to activate:\nEnter a high-speed spinning state. While in this state, use the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to move and deal <color=#F0D12B>Physical DMG</color> upon contact with enemies.\nAfter Ju Fufu gains <color=#FFFFFF>Momentum</color> from other skills, she will be surrounded by flames in the high-speed spinning state. Upon contact with enemies, 1 point of <color=#FFFFFF>Momentum</color> is consumed, changing the DMG to <color=#FF5521>Fire DMG</color> and granting 25 points of <color=#FFFFFF>Might</color>. The maximum for <color=#FFFFFF>Momentum</color> is 15.\nWhen consuming <color=#FFFFFF>Momentum</color> to deal <color=#FF5521>Fire DMG</color>, if <color=#FFFFFF>Might</color> is above 100 points, 100 points of <color=#FFFFFF>Might</color> will be automatically consumed to trigger <color=#FFFFFF>Chain Attack: Suppressing Tiger Cauldron</color>.\nReleasing <IconMap:Icon_Normal> will have Ju Fufu exit the spinning state and throw <color=#FFFFFF>Hu Wei</color> to attack enemies, dealing <color=#FF5521>Fire DMG</color>. When switching to another character, Ju Fufu will remain in the spinning state and attempt to collide with the nearest enemy.\nWhile Ju Fufu is the currently active character, DMG taken during the skill is reduced by 40%, and Anti-Interrupt Level is increased. If not the active character, she becomes Invulnerable.",
+          "name": "Dash Attack: Tiger Seven Forms - Mountain King's Game",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nPerform multiple slashes on enemies ahead, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Tiger Seven Forms - Reignited Mountain",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Tiger Seven Forms - Tiger Charge",
+          "param": [
+            {
+              "desc": "{Skill:1391008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3680,
+                  "damagePercentageGrowth": 340,
+                  "etherPurify": 1669,
+                  "feverRecovery": 45925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 340,
+                  "main": 3680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1840,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3680,
+                  "damagePercentageGrowth": 340,
+                  "etherPurify": 1669,
+                  "feverRecovery": 45925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1840,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Tiger Seven Forms - Mountain King's Game",
+          "param": [
+            {
+              "desc": "{Skill:1391009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391009": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1840,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 0,
+                  "feverRecovery": 45925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 1840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1840,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391009": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1840,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 0,
+                  "feverRecovery": 45925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1840,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Tiger Seven Forms - Mountain King's Game - Momentum",
+          "param": [
+            {
+              "desc": "{Skill:1391010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391010": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1920,
+                  "damagePercentageGrowth": 180,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 180,
+                  "main": 1920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 870,
+                  "stunRatioGrowth": 40
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391010": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1920,
+                  "damagePercentageGrowth": 180,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 40,
+                  "main": 870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 870,
+                  "stunRatioGrowth": 40
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Tiger Seven Forms - Mountain King's Game - Hu Wei",
+          "param": [
+            {
+              "desc": "{Skill:1391022, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9240,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 9240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6930,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391022, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9240,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6930,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Tiger Seven Forms - Reignited Mountain",
+          "param": [
+            {
+              "desc": "{Skill:1391011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391011": {
+                  "attackData": [],
+                  "attributeInfliction": 6836,
+                  "damagePercentage": 20780,
+                  "damagePercentageGrowth": 1890,
+                  "etherPurify": 21837,
+                  "feverRecovery": 188100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1890,
+                  "main": 20780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18530,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391011": {
+                  "attackData": [],
+                  "attributeInfliction": 6836,
+                  "damagePercentage": 20780,
+                  "damagePercentageGrowth": 1890,
+                  "etherPurify": 21837,
+                  "feverRecovery": 188100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 18530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18530,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nPerform a spinning slash forward, followed by a falling slash, dealing <color=#FF5521>Fire DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Tiger Seven Forms - Mountain-Descending Tiger",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nSwing <color=#FFFFFF>Hu Wei</color> forward for a powerful strike, dealing massive <color=#FF5521>Fire DMG</color>.\nUpon activation, gain 3 points of <color=#FFFFFF>Momentum</color> and 80 points of <color=#FFFFFF>Might</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Tiger Seven Forms Alt - Mountain-Descending Savage Tiger",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Tiger Seven Forms - Mountain-Descending Tiger",
+          "param": [
+            {
+              "desc": "{Skill:1391006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391006": {
+                  "attackData": [],
+                  "attributeInfliction": 6001,
+                  "damagePercentage": 6610,
+                  "damagePercentageGrowth": 610,
+                  "etherPurify": 6002,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 6610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391006": {
+                  "attackData": [],
+                  "attributeInfliction": 6001,
+                  "damagePercentage": 6610,
+                  "damagePercentageGrowth": 610,
+                  "etherPurify": 6002,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Tiger Seven Forms Alt - Mountain-Descending Savage Tiger",
+          "param": [
+            {
+              "desc": "{Skill:1391007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1391007": {
+                  "attackData": [],
+                  "attributeInfliction": 51212,
+                  "damagePercentage": 52650,
+                  "damagePercentageGrowth": 4790,
+                  "etherPurify": 16331,
+                  "feverRecovery": 1819675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4790,
+                  "main": 52650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34410,
+                  "stunRatioGrowth": 1570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1391007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1391007": {
+                  "attackData": [],
+                  "attributeInfliction": 51212,
+                  "damagePercentage": 52650,
+                  "damagePercentageGrowth": 4790,
+                  "etherPurify": 16331,
+                  "feverRecovery": 1819675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1570,
+                  "main": 34410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34410,
+                  "stunRatioGrowth": 1570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1391001": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> (repeats when pressed repeatedly)",
+      "name": "Basic Attack: Tiger Seven Forms - Flaming Claw (1st, 2nd, and 3rd hit)"
+    },
+    "1391002": {
+      "desc": "<IconMap:Icon_Normal> (After 3rd hit, hold or delayed press)",
+      "name": "Basic Attack: Tiger Seven Forms - Flaming Claw (4th hit)"
+    },
+    "1391003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Tiger Seven Forms - Mountain-Descending Tiger"
+    },
+    "1391004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Tiger Seven Forms Alt - Mountain-Descending Savage Tiger"
+    },
+    "1391005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Tiger Seven Forms - Tiger Charge"
+    },
+    "1391006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal> (Hold)",
+      "name": "Dash Attack: Tiger Seven Forms - Mountain King's Game"
+    },
+    "1391007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Tiger Seven Forms - Reignited Mountain"
+    },
+    "1391008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Tiger Cauldron Collapse"
+    },
+    "1391009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Tiger Seven Forms - Raging Tiger Explosion"
+    },
+    "1391010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Decisive Stomp"
+    },
+    "1391011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Steadfast Crouching Tiger"
+    },
+    "1391012": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Feral Blazing Maw"
+    }
+  },
+  "skin": {
+    "3113910": {
+      "desc": "Dressed like a simple mystic, this senior sister looks like she's tucked all her bravado away, but with a tiger in her heart... she still radiates that heroic fire.",
+      "name": "Ju Fufu: Summit's Cute Tiger"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, off-field Stun triggerer",
+    "Boosts all squad members' CRIT DMG and max Decibels",
+    "Restores bonus Decibels for Attack & Rupture Agents"
+  ],
+  "talent": {
+    "1": {
+      "desc": "Upon entering combat, Ju Fufu's CRIT Rate increases by 12%, and she immediately gains 100 <color=#FFFFFF>Might</color>. When Ju Fufu's <color=#FFFFFF>Chain Attack</color> hits an enemy, when the target is Stunned, the target's Stun DMG Multiplier increases by 35%, lasting for 30s.",
+      "desc2": "\"The topic of farewells and life and death is too difficult for children to understand, too heavy for adults to bear, and too cruel for the elderly.\"\n\"But I'm not afraid — I'm the fearless Tiger Thiren who learned this lesson early.\"\n\"I'm a super scary big tiger, little critters, so please don't look directly into my eyes!\"",
+      "name": "Super Scary Little Tiger"
+    },
+    "2": {
+      "desc": "While in the <color=#FFFFFF>Tiger's Roar</color> state, character CRIT DMG increases by an additional 22%. Whenever any character activates an <color=#FFFFFF>Ultimate</color>, Ju Fufu gains 3 points of <color=#FFFFFF>Momentum</color>.",
+      "desc2": "\"The techniques Shifu taught me are truly amazing, though it can't compare to those of fairy tales and legend.\"\n\"If I were a little stronger — just a little stronger — could I rewrite those fated pasts, like in the stories and legends?\n\"At first, I was just as puzzled, but once you grasp the trick, it's actually quite simple! Let me teach you, Junior!\"",
+      "name": "Almighty Qingming Warrior"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"Good or evil, in that moment, perhaps it's all just a matter of a single thought. A single thought leaves behind so many regrets, so many 'what ifs' — and so much sacrifice and love.\"\n\"I'm not smart, I don't understand many of those grand principles, so I just do what I think is right.\"\n\"Wherever the great hero Fufu goes, there's justice!\"",
+      "name": "Righteous Young Hero"
+    },
+    "4": {
+      "desc": "While Ju Fufu is in the <color=#FFFFFF>Tiger's Roar</color> state, her CRIT DMG increases by 35%.",
+      "desc2": "\"Ethereals are terrifying, bandits are terrifying, Hollow Raiders are terrifying, the dark night without stars is terrifying — and yet, I'm the most powerful mystic of Yunkui Summit. I cannot retreat, I cannot let my story repeat.\"\n\"The dark and gloom is a blanketing shroud, unbearable for mountain, moon, and cloud.\"\n\"I am the strongest mystic of Yunkui Summit, evil spirits and demons, meet your end!\"",
+      "name": "Monster-Slaying Tiger Mystic"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"No need to fear — your senior is here!\"\n\"The hero I longed for when I was a child never came, but I won't make you wait — I will be your hero.\"\n\"You can bully me, but not my juniors! I'll take you on! Rwaar!\"",
+      "name": "Unrivaled Almighty Senior"
+    },
+    "6": {
+      "desc": "Ju Fufu's <color=#FFFFFF>Chain Attack</color> DMG increases by 30%. Upon consuming <color=#FFFFFF>Momentum</color> and hitting an enemy in the high-speed spinning state, fire 3 popcorns, each dealing 160% of Fufu's ATK as DMG. This DMG is treated as <color=#FFFFFF>Chain Attack</color> DMG.",
+      "desc2": "\"My might shakes the moon down from the mountain, my aura levels caves — how's this line? Does it capture the grandeur of my imposing presence?\"\n\"The name of a hero doesn't matter, their regrets don't matter, their tears don't matter, and even the inevitable farewell doesn't matter.\"\n\"As long as you remember, I once roared with bravery.\"",
+      "name": "Roar of My Inner Tiger"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

@@ -28,9 +28,9 @@ export type SourceEmptyObject = Record<string, never>
 /** 已取得完整详情的语言；索引里的 ja/ko 名称另外原样保留在 index.json。 */
 export type DetailLocale = SupportedLanguage
 
-/** 导出实体文件的位置与实际 UTF-8 字节摘要；path 相对于 integrated/nanoka/。 */
+/** 导出实体文件的位置与实际 UTF-8 字节摘要；path 相对于 integrated/。 */
 export interface ExportFileReference {
-  /** 相对于 integrated/nanoka/ 的实体文件路径；不包含本地主机绝对路径。 */
+  /** 相对于 integrated/ 的实体文件路径；不包含本地主机绝对路径。 */
   path: string
 
   /** 对应文件实际 UTF-8 字节的 SHA-256，小写十六进制；重序列化后必须重算。 */

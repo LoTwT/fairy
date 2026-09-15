@@ -1,0 +1,1786 @@
+{
+  "camp": {
+    "9": "反舌鸟"
+  },
+  "elementType": {
+    "202": "冰属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "冰属性伤害加成"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "暴击伤害"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1291,
+  "locale": "zh",
+  "name": "雨果",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1291019",
+        "1291020",
+        "1291021",
+        "1291022",
+        "1291023",
+        "1291027",
+        "1291028"
+      ],
+      "basic": [
+        "1291001",
+        "1291002",
+        "1291003",
+        "1291004",
+        "1291005",
+        "1291006",
+        "1291024",
+        "1291025",
+        "1291026"
+      ],
+      "chain": ["1291015", "1291018"],
+      "dodge": ["1291011", "1291012", "1291013", "1291014"],
+      "special": ["1291008", "1291009", "1291010"]
+    },
+    "parameterRowsById": {
+      "1291001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1291002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1291003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1291004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1291005": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/10"
+      ],
+      "1291006": [
+        "/skill/basic/description/2/param/5",
+        "/skill/basic/description/2/param/11"
+      ],
+      "1291008": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1291009": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1291010": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1291011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1291012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/3"
+      ],
+      "1291013": [
+        "/skill/dodge/description/4/param/1",
+        "/skill/dodge/description/4/param/4"
+      ],
+      "1291014": [
+        "/skill/dodge/description/4/param/2",
+        "/skill/dodge/description/4/param/5"
+      ],
+      "1291015": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1291018": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1291019": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/3"
+      ],
+      "1291020": ["/skill/assist/description/4/param/0"],
+      "1291021": ["/skill/assist/description/4/param/1"],
+      "1291022": ["/skill/assist/description/4/param/2"],
+      "1291023": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1291024": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1291025": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1291026": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1291027": [
+        "/skill/assist/description/3/param/1",
+        "/skill/assist/description/3/param/4"
+      ],
+      "1291028": [
+        "/skill/assist/description/3/param/2",
+        "/skill/assist/description/3/param/5"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "8/20",
+    "fullName": "雨果·维拉德",
+    "gender": "男",
+    "impressionF": "该怎么说呢…感觉雨果至今能保持相对的心理健康，没有发疯也没有变成反社会人格，已经很了不起了？",
+    "impressionM": "有点好奇，如果雨果是在一个普通家庭长大的话，会变成什么样的人…\n但也正是因为经历了这些，他才成为他自己吧。",
+    "impressions": [
+      "对雨果的印象：\n · 他从深渊中爬起，看见了真正的自己。",
+      " · 从来没有什么罪恶的种子。",
+      " · 你永远可以成为你想成为的任何人。"
+    ],
+    "profileDesc": "雨果，自称是一位收藏家，名下有一间生意不错的画廊，游走在新艾利都「上等人」之间。\n真实身份是怪盗组织反舌鸟的首领，莱卡恩的前搭档。\n虽然嘴上总是说着很多残酷（又中二）的话，但本质上对「公平」和「正义」有自己的追求。\n\n相关信息显示，雨果有一段扭曲的童年经历。\n作为TOPS老牌家族拉文洛克的私生子，他从小因为异色的眼睛遭到母亲的厌弃。\n父亲将他像一件廉价商品一样买了回来，利用他来刺激自己的孩子们进行继承人竞争。在残忍的竞争中，唯一对雨果友善的妹妹塞蕾娜成为了牺牲品，而谋害了她的孩子们却把一切罪行推给了雨果，以为这样就可以置他于死地，却没想到父亲竟然赞扬了雨果的行为，认为这才是合格的继承人应该具有的手段。\n逃离了家族后，雨果遇到了莱卡恩和老杰克，学到了一些怪盗技巧。老杰克去世后，莱卡恩和雨果共同成立了最初的反舌鸟。\n\n而后，在反舌鸟的某次行动中，雨果遭遇了他的父亲。因为一瞬间的犹豫，雨果没有选择杀死自己的父亲复仇，却因此导致了更多无辜者的死亡。挚友莱卡恩也因为一些误解与他决裂，最终离开反舌鸟。\n独自漂泊一段时间后，雨果收留了和妹妹塞蕾娜相似的薇薇安，重组了反舌鸟组织。",
+    "stature": "185",
+    "trustLv": {
+      "1": "雨果，自称是一位收藏家，名下有一间生意不错的画廊，游走在新艾利都「上等人」之间。\n真实身份是怪盗组织反舌鸟的首领，莱卡恩的前搭档。\n虽然嘴上总是说着很多残酷（又中二）的话，但本质上对「公平」和「正义」有自己的追求。\n\n相关信息显示，雨果有一段扭曲的童年经历。\n作为TOPS老牌家族拉文洛克的私生子，他从小因为异色的眼睛遭到母亲的厌弃。\n父亲将他像一件廉价商品一样买了回来，利用他来刺激自己的孩子们进行继承人竞争。在残忍的竞争中，唯一对雨果友善的妹妹塞蕾娜成为了牺牲品，而谋害了她的孩子们却把一切罪行推给了雨果，以为这样就可以置他于死地，却没想到父亲竟然赞扬了雨果的行为，认为这才是合格的继承人应该具有的手段。\n逃离了家族后，雨果遇到了莱卡恩和老杰克，学到了一些怪盗技巧。老杰克去世后，莱卡恩和雨果共同成立了最初的反舌鸟。\n\n而后，在反舌鸟的某次行动中，雨果遭遇了他的父亲。因为一瞬间的犹豫，雨果没有选择杀死自己的父亲复仇，却因此导致了更多无辜者的死亡。挚友莱卡恩也因为一些误解与他决裂，最终离开反舌鸟。\n独自漂泊一段时间后，雨果收留了和妹妹塞蕾娜相似的薇薇安，重组了反舌鸟组织。",
+      "2": "",
+      "3": "在拉文洛克家族时期，雨果曾因为吃了一块「哥哥」喜爱的蛋糕，而被那些孩子们逼迫吞下了整整一桌的甜品。\n自那之后，只要尝到甜味就会令他想要呕吐（推测为某种创伤后应激反应）。\n但因为低血糖，他需要通过补充糖分来让自己的身体机能维持稳定状态。雨果选择逼迫自己一遍一遍吃下各种甜品，战胜这种痛苦。\n备注：莱卡恩和薇薇安都不知道这段信息，雨果曾要求您对他们保密。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线：「悠然插曲·游方闲客」（主线第一季·尾音·下完成后开启）",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1291501": {
+        "desc": [
+          "<color=#FFFFFF>[连携技：命运戏法]</color>命中敌人或雨果的攻击使敌人失衡时，雨果获得<color=#FFFFFF>[暗渊回响]</color>状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名<color=#FFFFFF>[击破]</color>角色时，雨果的攻击力提升<color=#2BAD00>25</color>/<color=#2BAD00>75</color>点；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>或<color=#FFFFFF>[终结技：渎神者]</color>的终结一击命中敌人时，若敌人处于失衡状态，会对其触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率提升<color=#2BAD00>500%</color>，此外<color=#FFFFFF>[决算]</color>效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>140%</color>，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>50%</color>，总共最多可以提升<color=#2BAD00>1700%</color>的招式伤害倍率；\n雨果触发<color=#FFFFFF>[决算]</color>效果后，敌人的失衡状态会立即结束，并且根据<color=#FFFFFF>[决算]</color>效果触发时该敌人剩余的失衡时间立即累积一定失衡值，失衡时间每剩余1秒，则积累5%失衡值，最多累积等同于敌人失衡值上限25%的失衡值；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>命中敌人时，若敌人处于非失衡状态，招式累积的失衡值提升20%。",
+          "队伍中存在其他<color=#FFFFFF>[击破]</color>角色或与自身属性相同的角色时触发：\n<color=#FFFFFF>[连携技：命运戏法]</color>造成的伤害提升15%，对普通敌人造成的伤害额外提升35%；触发<color=#FFFFFF>[决算]</color>时，招式造成的伤害提升40%，<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>对普通敌人触发<color=#FFFFFF>[决算]</color>效果时额外回复20点能量，能量回复效果30秒内最多触发一次。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：终末裁决", "额外能力：终焉序曲"],
+        "potential": []
+      },
+      "1291502": {
+        "desc": [
+          "<color=#FFFFFF>[连携技：命运戏法]</color>命中敌人或雨果的攻击使敌人失衡时，雨果获得<color=#FFFFFF>[暗渊回响]</color>状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名<color=#FFFFFF>[击破]</color>角色时，雨果的攻击力提升<color=#2BAD00>50</color>/<color=#2BAD00>150</color>点；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>或<color=#FFFFFF>[终结技：渎神者]</color>的终结一击命中敌人时，若敌人处于失衡状态，会对其触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率提升<color=#2BAD00>583%</color>，此外<color=#FFFFFF>[决算]</color>效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>163%</color>，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>58%</color>，总共最多可以提升<color=#2BAD00>1978%</color>的招式伤害倍率；\n雨果触发<color=#FFFFFF>[决算]</color>效果后，敌人的失衡状态会立即结束，并且根据<color=#FFFFFF>[决算]</color>效果触发时该敌人剩余的失衡时间立即累积一定失衡值，失衡时间每剩余1秒，则积累5%失衡值，最多累积等同于敌人失衡值上限25%的失衡值；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>命中敌人时，若敌人处于非失衡状态，招式累积的失衡值提升20%。",
+          "队伍中存在其他<color=#FFFFFF>[击破]</color>角色或与自身属性相同的角色时触发：\n<color=#FFFFFF>[连携技：命运戏法]</color>造成的伤害提升15%，对普通敌人造成的伤害额外提升35%；触发<color=#FFFFFF>[决算]</color>时，招式造成的伤害提升40%，<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>对普通敌人触发<color=#FFFFFF>[决算]</color>效果时额外回复20点能量，能量回复效果30秒内最多触发一次。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：终末裁决", "额外能力：终焉序曲"],
+        "potential": []
+      },
+      "1291503": {
+        "desc": [
+          "<color=#FFFFFF>[连携技：命运戏法]</color>命中敌人或雨果的攻击使敌人失衡时，雨果获得<color=#FFFFFF>[暗渊回响]</color>状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名<color=#FFFFFF>[击破]</color>角色时，雨果的攻击力提升<color=#2BAD00>80</color>/<color=#2BAD00>240</color>点；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>或<color=#FFFFFF>[终结技：渎神者]</color>的终结一击命中敌人时，若敌人处于失衡状态，会对其触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率提升<color=#2BAD00>667%</color>，此外<color=#FFFFFF>[决算]</color>效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>187%</color>，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>67%</color>，总共最多可以提升<color=#2BAD00>2272%</color>的招式伤害倍率；\n雨果触发<color=#FFFFFF>[决算]</color>效果后，敌人的失衡状态会立即结束，并且根据<color=#FFFFFF>[决算]</color>效果触发时该敌人剩余的失衡时间立即累积一定失衡值，失衡时间每剩余1秒，则积累5%失衡值，最多累积等同于敌人失衡值上限25%的失衡值；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>命中敌人时，若敌人处于非失衡状态，招式累积的失衡值提升20%。",
+          "队伍中存在其他<color=#FFFFFF>[击破]</color>角色或与自身属性相同的角色时触发：\n<color=#FFFFFF>[连携技：命运戏法]</color>造成的伤害提升15%，对普通敌人造成的伤害额外提升35%；触发<color=#FFFFFF>[决算]</color>时，招式造成的伤害提升40%，<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>对普通敌人触发<color=#FFFFFF>[决算]</color>效果时额外回复20点能量，能量回复效果30秒内最多触发一次。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：终末裁决", "额外能力：终焉序曲"],
+        "potential": []
+      },
+      "1291504": {
+        "desc": [
+          "<color=#FFFFFF>[连携技：命运戏法]</color>命中敌人或雨果的攻击使敌人失衡时，雨果获得<color=#FFFFFF>[暗渊回响]</color>状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名<color=#FFFFFF>[击破]</color>角色时，雨果的攻击力提升<color=#2BAD00>120</color>/<color=#2BAD00>360</color>点；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>或<color=#FFFFFF>[终结技：渎神者]</color>的终结一击命中敌人时，若敌人处于失衡状态，会对其触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率提升<color=#2BAD00>750%</color>，此外<color=#FFFFFF>[决算]</color>效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>210%</color>，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>75%</color>，总共最多可以提升<color=#2BAD00>2550%</color>的招式伤害倍率；\n雨果触发<color=#FFFFFF>[决算]</color>效果后，敌人的失衡状态会立即结束，并且根据<color=#FFFFFF>[决算]</color>效果触发时该敌人剩余的失衡时间立即累积一定失衡值，失衡时间每剩余1秒，则积累5%失衡值，最多累积等同于敌人失衡值上限25%的失衡值；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>命中敌人时，若敌人处于非失衡状态，招式累积的失衡值提升20%。",
+          "队伍中存在其他<color=#FFFFFF>[击破]</color>角色或与自身属性相同的角色时触发：\n<color=#FFFFFF>[连携技：命运戏法]</color>造成的伤害提升15%，对普通敌人造成的伤害额外提升35%；触发<color=#FFFFFF>[决算]</color>时，招式造成的伤害提升40%，<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>对普通敌人触发<color=#FFFFFF>[决算]</color>效果时额外回复20点能量，能量回复效果30秒内最多触发一次。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：终末裁决", "额外能力：终焉序曲"],
+        "potential": []
+      },
+      "1291505": {
+        "desc": [
+          "<color=#FFFFFF>[连携技：命运戏法]</color>命中敌人或雨果的攻击使敌人失衡时，雨果获得<color=#FFFFFF>[暗渊回响]</color>状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名<color=#FFFFFF>[击破]</color>角色时，雨果的攻击力提升<color=#2BAD00>180</color>/<color=#2BAD00>540</color>点；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>或<color=#FFFFFF>[终结技：渎神者]</color>的终结一击命中敌人时，若敌人处于失衡状态，会对其触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率提升<color=#2BAD00>833%</color>，此外<color=#FFFFFF>[决算]</color>效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>233%</color>，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>83%</color>，总共最多可以提升<color=#2BAD00>2828%</color>的招式伤害倍率；\n雨果触发<color=#FFFFFF>[决算]</color>效果后，敌人的失衡状态会立即结束，并且根据<color=#FFFFFF>[决算]</color>效果触发时该敌人剩余的失衡时间立即累积一定失衡值，失衡时间每剩余1秒，则积累5%失衡值，最多累积等同于敌人失衡值上限25%的失衡值；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>命中敌人时，若敌人处于非失衡状态，招式累积的失衡值提升20%。",
+          "队伍中存在其他<color=#FFFFFF>[击破]</color>角色或与自身属性相同的角色时触发：\n<color=#FFFFFF>[连携技：命运戏法]</color>造成的伤害提升15%，对普通敌人造成的伤害额外提升35%；触发<color=#FFFFFF>[决算]</color>时，招式造成的伤害提升40%，<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>对普通敌人触发<color=#FFFFFF>[决算]</color>效果时额外回复20点能量，能量回复效果30秒内最多触发一次。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：终末裁决", "额外能力：终焉序曲"],
+        "potential": []
+      },
+      "1291506": {
+        "desc": [
+          "<color=#FFFFFF>[连携技：命运戏法]</color>命中敌人或雨果的攻击使敌人失衡时，雨果获得<color=#FFFFFF>[暗渊回响]</color>状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名<color=#FFFFFF>[击破]</color>角色时，雨果的攻击力提升<color=#2BAD00>270</color>/<color=#2BAD00>810</color>点；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>或<color=#FFFFFF>[终结技：渎神者]</color>的终结一击命中敌人时，若敌人处于失衡状态，会对其触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率提升<color=#2BAD00>917%</color>，此外<color=#FFFFFF>[决算]</color>效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>257%</color>，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>92%</color>，总共最多可以提升<color=#2BAD00>3122%</color>的招式伤害倍率；\n雨果触发<color=#FFFFFF>[决算]</color>效果后，敌人的失衡状态会立即结束，并且根据<color=#FFFFFF>[决算]</color>效果触发时该敌人剩余的失衡时间立即累积一定失衡值，失衡时间每剩余1秒，则积累5%失衡值，最多累积等同于敌人失衡值上限25%的失衡值；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>命中敌人时，若敌人处于非失衡状态，招式累积的失衡值提升20%。",
+          "队伍中存在其他<color=#FFFFFF>[击破]</color>角色或与自身属性相同的角色时触发：\n<color=#FFFFFF>[连携技：命运戏法]</color>造成的伤害提升15%，对普通敌人造成的伤害额外提升35%；触发<color=#FFFFFF>[决算]</color>时，招式造成的伤害提升40%，<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>对普通敌人触发<color=#FFFFFF>[决算]</color>效果时额外回复20点能量，能量回复效果30秒内最多触发一次。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：终末裁决", "额外能力：终焉序曲"],
+        "potential": []
+      },
+      "1291507": {
+        "desc": [
+          "<color=#FFFFFF>[连携技：命运戏法]</color>命中敌人或雨果的攻击使敌人失衡时，雨果获得<color=#FFFFFF>[暗渊回响]</color>状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名<color=#FFFFFF>[击破]</color>角色时，雨果的攻击力提升<color=#2BAD00>300</color>/<color=#2BAD00>900</color>点；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>或<color=#FFFFFF>[终结技：渎神者]</color>的终结一击命中敌人时，若敌人处于失衡状态，会对其触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率提升<color=#2BAD00>1000%</color>，此外<color=#FFFFFF>[决算]</color>效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>280%</color>，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升<color=#2BAD00>100%</color>，总共最多可以提升<color=#2BAD00>3400%</color>的招式伤害倍率；\n雨果触发<color=#FFFFFF>[决算]</color>效果后，敌人的失衡状态会立即结束，并且根据<color=#FFFFFF>[决算]</color>效果触发时该敌人剩余的失衡时间立即累积一定失衡值，失衡时间每剩余1秒，则积累5%失衡值，最多累积等同于敌人失衡值上限25%的失衡值；\n<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>命中敌人时，若敌人处于非失衡状态，招式累积的失衡值提升20%。",
+          "队伍中存在其他<color=#FFFFFF>[击破]</color>角色或与自身属性相同的角色时触发：\n<color=#FFFFFF>[连携技：命运戏法]</color>造成的伤害提升15%，对普通敌人造成的伤害额外提升35%；触发<color=#FFFFFF>[决算]</color>时，招式造成的伤害提升40%，<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>对普通敌人触发<color=#FFFFFF>[决算]</color>效果时额外回复20点能量，能量回复效果30秒内最多触发一次。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：终末裁决", "额外能力：终焉序曲"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对前方敌人发动连续攻击，造成<color=#98EFF0>冰属性伤害</color>；\n招式发动期间长按 <IconMap:Icon_Normal> 可以发动射击攻击，射击攻击期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接<color=#FFFFFF>[普通攻击：暗渊四重奏]</color>的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+          "name": "快速支援：葬歌",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：死期未至",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n快速突进并发动两次斩击，造成<color=#98EFF0>冰属性伤害</color>；\n招式发动后可直接衔接<color=#FFFFFF>[普通攻击：暗渊四重奏]</color>的第四段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：王牌反转",
+          "potential": []
+        },
+        {
+          "name": "快速支援：葬歌",
+          "param": [
+            {
+              "desc": "{Skill:1291019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1291019": {
+                  "attackData": [],
+                  "attributeInfliction": 4750,
+                  "damagePercentage": 10450,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4750,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 950,
+                  "main": 10450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291027, Prop:1001}",
+              "name": "派生射击伤害倍率",
+              "param": {
+                "1291027": {
+                  "attackData": [],
+                  "attributeInfliction": 5666,
+                  "damagePercentage": 12470,
+                  "damagePercentageGrowth": 1140,
+                  "etherPurify": 5667,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 12470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291028, Prop:1001}",
+              "name": "派生蓄力射击伤害倍率",
+              "param": {
+                "1291028": {
+                  "attackData": [],
+                  "attributeInfliction": 7415,
+                  "damagePercentage": 16320,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 7416,
+                  "feverRecovery": 204050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 16320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8160,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1291019": {
+                  "attackData": [],
+                  "attributeInfliction": 4750,
+                  "damagePercentage": 10450,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4750,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291027, Prop:1002}",
+              "name": "派生射击失衡倍率",
+              "param": {
+                "1291027": {
+                  "attackData": [],
+                  "attributeInfliction": 5666,
+                  "damagePercentage": 12470,
+                  "damagePercentageGrowth": 1140,
+                  "etherPurify": 5667,
+                  "feverRecovery": 155925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6240,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291028, Prop:1002}",
+              "name": "派生蓄力射击失衡倍率",
+              "param": {
+                "1291028": {
+                  "attackData": [],
+                  "attributeInfliction": 7415,
+                  "damagePercentage": 16320,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 7416,
+                  "feverRecovery": 204050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8160,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：死期未至",
+          "param": [
+            {
+              "desc": "{Skill:1291020, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1291020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291021, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1291021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291022, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1291022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：王牌反转",
+          "param": [
+            {
+              "desc": "{Skill:1291023, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1291023": {
+                  "attackData": [],
+                  "attributeInfliction": 24576,
+                  "damagePercentage": 29170,
+                  "damagePercentageGrowth": 2660,
+                  "etherPurify": 11004,
+                  "feverRecovery": 836000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2660,
+                  "main": 29170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24910,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291023, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1291023": {
+                  "attackData": [],
+                  "attributeInfliction": 24576,
+                  "damagePercentage": 29170,
+                  "damagePercentageGrowth": 2660,
+                  "etherPurify": 11004,
+                  "feverRecovery": 836000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 24910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24910,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多四段的攻击，造成<color=#F0D12B>物理伤害</color>和<color=#98EFF0>冰属性伤害</color>；\n招式第四段攻击为射击攻击，射击攻击发动期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+          "name": "普通攻击：暗渊四重奏",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[普通攻击：暗渊四重奏]</color>第四段后、发动<color=#FFFFFF>[闪避反击：诡影·斩]</color>的射击攻击后、发动<color=#FFFFFF>[快速支援：葬歌]</color>的射击攻击后，点按或长按 <IconMap:Icon_Normal> 发动：\n扔出镰刀向前方发动斩击，随后发动射击攻击，造成<color=#98EFF0>冰属性伤害</color>；\n射击攻击期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+          "name": "普通攻击：暗渊协奏曲",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：暗渊四重奏",
+          "param": [
+            {
+              "desc": "{Skill:1291001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1291001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4310,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 1959,
+                  "feverRecovery": 53900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 4310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2160,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1291002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7410,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 4988,
+                  "feverRecovery": 137225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 680,
+                  "main": 7410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5490,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1291003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16960,
+                  "damagePercentageGrowth": 1550,
+                  "etherPurify": 11641,
+                  "feverRecovery": 320375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1550,
+                  "main": 16960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12810,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291004, Prop:1001}",
+              "name": "斩击伤害倍率",
+              "param": {
+                "1291004": {
+                  "attackData": [],
+                  "attributeInfliction": 9581,
+                  "damagePercentage": 14910,
+                  "damagePercentageGrowth": 1360,
+                  "etherPurify": 11431,
+                  "feverRecovery": 314600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1360,
+                  "main": 14910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12580,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291005, Prop:1001}",
+              "name": "射击伤害倍率",
+              "param": {
+                "1291005": {
+                  "attackData": [],
+                  "attributeInfliction": 3617,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4546,
+                  "feverRecovery": 125125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16370,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291006, Prop:1001}",
+              "name": "蓄力射击伤害倍率",
+              "param": {
+                "1291006": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 11800,
+                  "damagePercentageGrowth": 1080,
+                  "etherPurify": 8700,
+                  "feverRecovery": 239250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 11800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9570,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1291001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4310,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 1959,
+                  "feverRecovery": 53900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2160,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1291002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7410,
+                  "damagePercentageGrowth": 680,
+                  "etherPurify": 4988,
+                  "feverRecovery": 137225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17960,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5490,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1291003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16960,
+                  "damagePercentageGrowth": 1550,
+                  "etherPurify": 11641,
+                  "feverRecovery": 320375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 12810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12810,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291004, Prop:1002}",
+              "name": "斩击失衡倍率",
+              "param": {
+                "1291004": {
+                  "attackData": [],
+                  "attributeInfliction": 9581,
+                  "damagePercentage": 14910,
+                  "damagePercentageGrowth": 1360,
+                  "etherPurify": 11431,
+                  "feverRecovery": 314600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 12580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 41150,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12580,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291005, Prop:1002}",
+              "name": "射击失衡倍率",
+              "param": {
+                "1291005": {
+                  "attackData": [],
+                  "attributeInfliction": 3617,
+                  "damagePercentage": 5860,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4546,
+                  "feverRecovery": 125125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16370,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5010,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291006, Prop:1002}",
+              "name": "蓄力射击失衡倍率",
+              "param": {
+                "1291006": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 11800,
+                  "damagePercentageGrowth": 1080,
+                  "etherPurify": 8700,
+                  "feverRecovery": 239250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 9570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9570,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：暗渊协奏曲",
+          "param": [
+            {
+              "desc": "{Skill:1291024, Prop:1001}",
+              "name": "斩击伤害倍率",
+              "param": {
+                "1291024": {
+                  "attackData": [],
+                  "attributeInfliction": 10023,
+                  "damagePercentage": 14340,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 10024,
+                  "feverRecovery": 275825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1310,
+                  "main": 14340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11030,
+                  "stunRatioGrowth": 510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291025, Prop:1001}",
+              "name": "射击伤害倍率",
+              "param": {
+                "1291025": {
+                  "attackData": [],
+                  "attributeInfliction": 6056,
+                  "damagePercentage": 8670,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 6057,
+                  "feverRecovery": 166650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 8670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6670,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291026, Prop:1001}",
+              "name": "蓄力射击伤害倍率",
+              "param": {
+                "1291026": {
+                  "attackData": [],
+                  "attributeInfliction": 11924,
+                  "damagePercentage": 17060,
+                  "damagePercentageGrowth": 1560,
+                  "etherPurify": 11925,
+                  "feverRecovery": 328075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 17060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13120,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291024, Prop:1002}",
+              "name": "斩击失衡倍率",
+              "param": {
+                "1291024": {
+                  "attackData": [],
+                  "attributeInfliction": 10023,
+                  "damagePercentage": 14340,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 10024,
+                  "feverRecovery": 275825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 11030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11030,
+                  "stunRatioGrowth": 510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291025, Prop:1002}",
+              "name": "射击失衡倍率",
+              "param": {
+                "1291025": {
+                  "attackData": [],
+                  "attributeInfliction": 6056,
+                  "damagePercentage": 8670,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 6057,
+                  "feverRecovery": 166650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6670,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291026, Prop:1002}",
+              "name": "蓄力射击失衡倍率",
+              "param": {
+                "1291026": {
+                  "attackData": [],
+                  "attributeInfliction": 11924,
+                  "damagePercentage": 17060,
+                  "damagePercentageGrowth": 1560,
+                  "etherPurify": 11925,
+                  "feverRecovery": 328075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 13120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 42930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13120,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n快速突进向前方发动大范围斩击，随后发动射击攻击，造成大量<color=#98EFF0>冰属性伤害</color>；\n招式发动的射击攻击视为蓄力射击；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：命运戏法",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n丢出镰刀对前方敌人发动强力旋转攻击，随后进行终结一击，造成大量<color=#98EFF0>冰属性伤害</color>；\n招式视为非重击；\n招式发动后可直接衔接<color=#FFFFFF>[普通攻击：暗渊四重奏]</color>的第四段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：渎神者",
+          "potential": []
+        },
+        {
+          "name": "连携技：命运戏法",
+          "param": [
+            {
+              "desc": "{Skill:1291015, Prop:1001}",
+              "name": "斩击伤害倍率",
+              "param": {
+                "1291015": {
+                  "attackData": [],
+                  "attributeInfliction": 43783,
+                  "damagePercentage": 70110,
+                  "damagePercentageGrowth": 6380,
+                  "etherPurify": 23834,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6380,
+                  "main": 70110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26220,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291015, Prop:1002}",
+              "name": "斩击失衡倍率",
+              "param": {
+                "1291015": {
+                  "attackData": [],
+                  "attributeInfliction": 43783,
+                  "damagePercentage": 70110,
+                  "damagePercentageGrowth": 6380,
+                  "etherPurify": 23834,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 26220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26220,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：渎神者",
+          "param": [
+            {
+              "desc": "{Skill:1291018, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1291018": {
+                  "attackData": [],
+                  "attributeInfliction": 21833,
+                  "damagePercentage": 152710,
+                  "damagePercentageGrowth": 13890,
+                  "etherPurify": 71834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13890,
+                  "main": 152710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26420,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291018, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1291018": {
+                  "attackData": [],
+                  "attributeInfliction": 21833,
+                  "damagePercentage": 152710,
+                  "damagePercentageGrowth": 13890,
+                  "etherPurify": 71834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1210,
+                  "main": 26420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26420,
+                  "stunRatioGrowth": 1210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：诡影",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前方进行突进攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "冲刺攻击：诡影·破",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动连续攻击，造成<color=#98EFF0>冰属性伤害</color>；\n招式发动期间长按 <IconMap:Icon_Normal> 可以发动射击攻击，射击攻击期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接<color=#FFFFFF>[普通攻击：暗渊四重奏]</color>的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+          "name": "闪避反击：诡影·斩",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：诡影·破",
+          "param": [
+            {
+              "desc": "{Skill:1291011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1291011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9350,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4249,
+                  "feverRecovery": 116875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 9350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4680,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1291011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9350,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4249,
+                  "feverRecovery": 116875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 220,
+                  "main": 4680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4680,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：诡影·斩",
+          "param": [
+            {
+              "desc": "{Skill:1291012, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1291012": {
+                  "attackData": [],
+                  "attributeInfliction": 9500,
+                  "damagePercentage": 24590,
+                  "damagePercentageGrowth": 2240,
+                  "etherPurify": 24500,
+                  "feverRecovery": 261250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2240,
+                  "main": 24590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21450,
+                  "stunRatioGrowth": 980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291013, Prop:1001}",
+              "name": "派生射击伤害倍率",
+              "param": {
+                "1291013": {
+                  "attackData": [],
+                  "attributeInfliction": 11333,
+                  "damagePercentage": 16210,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 11334,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1480,
+                  "main": 16210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12470,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291014, Prop:1001}",
+              "name": "派生蓄力射击伤害倍率",
+              "param": {
+                "1291014": {
+                  "attackData": [],
+                  "attributeInfliction": 14830,
+                  "damagePercentage": 21210,
+                  "damagePercentageGrowth": 1930,
+                  "etherPurify": 14831,
+                  "feverRecovery": 408100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1930,
+                  "main": 21210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 53390,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16320,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291012, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1291012": {
+                  "attackData": [],
+                  "attributeInfliction": 9500,
+                  "damagePercentage": 24590,
+                  "damagePercentageGrowth": 2240,
+                  "etherPurify": 24500,
+                  "feverRecovery": 261250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 21450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21450,
+                  "stunRatioGrowth": 980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291013, Prop:1002}",
+              "name": "派生射击失衡倍率",
+              "param": {
+                "1291013": {
+                  "attackData": [],
+                  "attributeInfliction": 11333,
+                  "damagePercentage": 16210,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 11334,
+                  "feverRecovery": 311850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 12470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12470,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291014, Prop:1002}",
+              "name": "派生蓄力射击失衡倍率",
+              "param": {
+                "1291014": {
+                  "attackData": [],
+                  "attributeInfliction": 14830,
+                  "damagePercentage": 21210,
+                  "damagePercentageGrowth": 1930,
+                  "etherPurify": 14831,
+                  "feverRecovery": 408100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 750,
+                  "main": 16320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 53390,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16320,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n旋转镰刀后向前方发动斩击，造成<color=#98EFF0>冰属性伤害</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：魂狩·断罪",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n旋转镰刀攻击，随后进行终结一击，造成大量<color=#98EFF0>冰属性伤害</color>；\n招式视为非重击；\n招式发动后可直接衔接<color=#FFFFFF>[普通攻击：暗渊四重奏]</color>的第四段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：魂狩·惩戒",
+          "potential": []
+        },
+        {
+          "name": "特殊技：魂狩·断罪",
+          "param": [
+            {
+              "desc": "{Skill:1291008, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1291008": {
+                  "attackData": [],
+                  "attributeInfliction": 7751,
+                  "damagePercentage": 8530,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7752,
+                  "feverRecovery": 213400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 780,
+                  "main": 8530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8530,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1291008, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1291008": {
+                  "attackData": [],
+                  "attributeInfliction": 7751,
+                  "damagePercentage": 8530,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7752,
+                  "feverRecovery": 213400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8530,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：魂狩·惩戒",
+          "param": [
+            {
+              "desc": "{{Skill:1291009, Prop:1001} + {Skill:1291010, Prop:1001}}",
+              "name": "伤害倍率",
+              "param": {
+                "1291009": {
+                  "attackData": [],
+                  "attributeInfliction": 2254,
+                  "damagePercentage": 1870,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 951,
+                  "feverRecovery": 77550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 1870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43240,
+                  "stunRatioGrowth": 1970
+                },
+                "1291010": {
+                  "attackData": [],
+                  "attributeInfliction": 42843,
+                  "damagePercentage": 35450,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 18054,
+                  "feverRecovery": 1470425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3230,
+                  "main": 35450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2280,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1291009, Prop:1002} + {Skill:1291010, Prop:1002}}",
+              "name": "失衡倍率",
+              "param": {
+                "1291009": {
+                  "attackData": [],
+                  "attributeInfliction": 2254,
+                  "damagePercentage": 1870,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 951,
+                  "feverRecovery": 77550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1970,
+                  "main": 43240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43240,
+                  "stunRatioGrowth": 1970
+                },
+                "1291010": {
+                  "attackData": [],
+                  "attributeInfliction": 42843,
+                  "damagePercentage": 35450,
+                  "damagePercentageGrowth": 3230,
+                  "etherPurify": 18054,
+                  "feverRecovery": 1470425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2280,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1291001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：暗渊四重奏（一、二、三段）"
+    },
+    "1291002": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：暗渊四重奏（第四段）"
+    },
+    "1291003": {
+      "desc": "<IconMap:Icon_Normal>（暗渊四重奏第四段后长按）",
+      "name": "普通攻击：暗渊协奏曲"
+    },
+    "1291004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：魂狩·断罪"
+    },
+    "1291005": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：魂狩·惩戒"
+    },
+    "1291006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：诡影·破"
+    },
+    "1291007": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：诡影·斩"
+    },
+    "1291008": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>（长按）",
+      "name": "闪避反击：诡影·斩（第二段）"
+    },
+    "1291009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：命运戏法"
+    },
+    "1291010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：渎神者"
+    },
+    "1291011": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：葬歌"
+    },
+    "1291012": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时） ; <IconMap:Icon_Normal>（点按或长按）",
+      "name": "快速支援：葬歌（第二段）"
+    },
+    "1291013": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：死期未至"
+    },
+    "1291014": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：王牌反转"
+    }
+  },
+  "skin": {
+    "3112910": {
+      "desc": "不要被命运捕获，蔑视它的钳制、操纵、嘲弄与施舍、诅咒与祝福。既已从深渊归来，那便让命运向你俯首。",
+      "name": "雨果·无冕歧命"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，速切输出",
+    "触发[决算]对失衡敌人造成额外伤害",
+    "高频失衡爆发"
+  ],
+  "talent": {
+    "1": {
+      "desc": "<color=#FFFFFF>[暗渊回响]</color>状态下，触发<color=#FFFFFF>[决算]</color>效果时招式的暴击率额外提升12%，暴击伤害额外提升30%。",
+      "desc2": "「不要否认你的欲望，不要抗拒你的野心。那是你与生俱来的天赋，是命运送给你最好的礼物！」\n「承认吧，你的内心埋着一枚火种，它早就迫不及待地想要点燃一场熊熊大火，将一切燃烧殆尽——」\n「我就是那颗种子。」\n\n「嗯，我知道。我一直都知道。」",
+      "name": "仇恨之子"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>[终结技：渎神者]</color>触发<color=#FFFFFF>[决算]</color>效果时不会使敌人的失衡状态结束；此外，触发<color=#FFFFFF>[决算]</color>效果时招式将会无视其15%防御力。",
+      "desc2": "「家族是刻在一个人身上永恒不灭的诅咒。」\n「无论你成长为何种模样，无论你去往何处，这份诅咒终将如影随形。」\n「在你跌入谷底，亦或是爬上巅峰的时候，它总会突然出现，把你变回那个无力的，无能的，只敢躲在衣柜里颤抖哭泣的孩子。」\n\n「除非你真正地看见他，拥抱他。」\n有些痛苦只有被看见，被接受，才会消弭。",
+      "name": "内在小孩"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "他们说，深渊里开出的花必然浸透恶意，就像有毒的树上结不出无毒的果。\n但所有果实都会坠落。\n于是，他把自己摔成一场破碎的雨。\n雨水浸没大地，在每一颗露珠上折射崭新的黎明。",
+      "name": "毒树之果"
+    },
+    "4": {
+      "desc": "蓄力射击命中敌人后，雨果的攻击对该目标无视12%<color=#98EFF0>冰属性伤害抗性</color>，持续15秒，重复触发时刷新持续时间。",
+      "desc2": "正义，邪恶，疯狂，理智，圆滑，固执。\n他由千万重面相组成。\n「那么，真正的你在哪里？」\n「这不重要。不如由你来告诉我，莱卡恩——」\n「你眼里看到的，又是怎样的我？」",
+      "name": "拟剧论"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "世界不需要被毁灭再重建，也没有谁有资格这么做。\n但人可以。\n所以，他将自己打碎再重生。\n「如果必须坠落，就让我坠落。我会成为的那个人，一定会接住我。」",
+      "name": "涅槃"
+    },
+    "6": {
+      "desc": "所有射击攻击命中敌人时，均可触发<color=#FFFFFF>[暗渊回响]</color>状态，最多持续6秒，重复触发时刷新持续时间；此外，任意招式触发<color=#FFFFFF>[决算]</color>效果时，此次伤害额外提升60%；<color=#FFFFFF>[强化特殊技：魂狩·惩戒]</color>的终结一击命中非失衡状态下的敌人时也可触发<color=#FFFFFF>[决算]</color>效果，使得招式的终结一击伤害倍率固定提升1000%。",
+      "desc2": "他欣然走向无尽深渊，任由满地荆棘划破伤口。\n血色蔓延处，破碎的尊严与执念自创口抽芽。\n而他捡起浸满血渍的荆棘，为自己加冕。\n「能杀我的人，能救我的人，从来都只有我自己。」",
+      "name": "荆棘王冠"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

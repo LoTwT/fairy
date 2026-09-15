@@ -36,17 +36,21 @@ raw 范围外，并非最终制品目录；省略时使用系统临时目录。�
 构建失败只清理本次目录。重复执行会创建新的制品，不覆盖已有 integrated。仓库内任意层级的这些临时目录均被 Git 忽略。
 
 - [构建模块](scripts/nanoka-integration/build.ts)：`buildNanokaAgents({ rawRoot, version, temporaryParent?, policy? })`；返回 `buildDirectory`、`artifactDirectory`、`maintenanceReportPath`、已复验索引和计数。策略默认从工作区加载，显式传入的 `policy` 仍须通过相同校验。
-- [序列化模块](src/integration/serialize-json.ts)：纯函数 `serializeJson(value)`，返回规范 UTF-8 字节。
+- [序列化模块](src/integration/serialize-json.ts)：纯函数 `serializeJson(value)`，固定键排序并返回初始 UTF-8 字节；构建脚本调用工作区 oxfmt 完成最终排版。
 - [验证模块](scripts/nanoka-integration/verify.ts)：`verifyNanokaAgentArtifact({ artifactDirectory })`，重新读取全部文件，核对摘要、身份、语言、路径及精确文件集合。
 
-`buildDirectory` 是本次独占构建根目录，使用完毕后可按回执中的确切路径整体删除（例如 `rm -rf -- "/absolute/fairy-nanoka-agents-xxxxxx"`），包括制品与维护报告；不要删除 `temporaryParent`。制品位于其 `integrated/nanoka/`，含 `index.json` 和索引登记的全部实体文件，不加版本目录。`maintenance.json` 位于本次目录根部，单独登记未知字段和 `codeName` 差异。重复构建应比较两个制品目录的全部文件字节；临时目录路径不是数据内容。
+`buildDirectory` 是本次独占构建根目录，使用完毕后可按回执中的确切路径整体删除（例如 `rm -rf -- "/absolute/fairy-nanoka-agents-xxxxxx"`），包括制品与维护报告；不要删除 `temporaryParent`。制品位于其 `integrated/`，含 `index.json` 和索引登记的全部实体文件，不加来源或版本目录。`maintenance.json` 位于本次目录根部，单独登记未知字段和 `codeName` 差异。重复构建应比较两个制品目录的全部文件字节；临时目录路径不是数据内容。
 
-构建器始终写出规范序列化字节。独立验证器也接受按实际字节重算摘要后的紧凑 JSON 或其他排版副本；索引本身可以重新排版。它只验证该副本内部的一致性，与原制品的 JSON 值相等需另行核对；传输压缩需先解压。
+构建器在独占临时目录内依次生成实体 JSON、批量运行 oxfmt、按最终字节计算摘要，再生成并格式化 `index.json`，最后完整复验。
+始终使用仓库根目录的 `oxfmt.config.ts`，系统临时目录和不同调用位置也使用同一配置。JSON 值、键排序与数组顺序保持不变；
+根配置显式固定 LF 及末尾换行，覆盖临时父目录的 EditorConfig 设置。
+输出大小限制与 SHA-256 均基于最终格式化字节，控制记录的索引摘要也对应最终索引。格式化失败会清理本次构建目录。
+独立验证器也接受按实际字节重算摘要后的紧凑 JSON 或其他排版副本；索引本身可以重新排版。它只验证该副本内部的一致性，与原制品的 JSON 值相等需另行核对；传输压缩需先解压。
 
 单独复验（替换最后的目录参数）：
 
 ```bash
-pnpm --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated/nanoka
+pnpm --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated
 ```
 
 两个命令的参数契约：
@@ -69,7 +73,7 @@ pnpm 自身可能打印执行信息。程序解析 stdout 时使用 `--silent`�
 
 ```bash
 pnpm --silent --filter @randomplay/data integrate:nanoka:agents raw/nanoka 3.1
-pnpm --silent --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated/nanoka
+pnpm --silent --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated
 ```
 
 摘要只标识使用的字节，不证明 raw 来自同一抓取批次；单独复验制品也不认证来源真实性。全量新制品入口继续保持只创建行为；固定当前数据集请使用下述独立更新命令。资源上限、路径边界、合成测试与真实验证范围见[整合规范](../../docs/specs/data/integration.md#当前离线全量新制品构建)。上述入口仅供源码工作区使用，不增加 npm 导出；普通 `build`、`test`、`verify:pack` 不触发真实数据构建。
@@ -79,19 +83,23 @@ pnpm --silent --filter @randomplay/data verify:nanoka:agents /absolute/build/int
 从仓库根目录执行（filter 命令在 data 包目录运行）：
 
 ```bash
-pnpm --filter @randomplay/data update:nanoka:agents raw/nanoka 3.1 integrated/nanoka
-pnpm --filter @randomplay/data verify:nanoka:current integrated/nanoka
-pnpm --filter @randomplay/data recover:nanoka:agents integrated/nanoka
+pnpm --filter @randomplay/data update:nanoka:agents raw/nanoka 3.1 integrated
+pnpm --filter @randomplay/data verify:nanoka:current integrated
+pnpm --filter @randomplay/data recover:nanoka:agents integrated
 ```
 
 首次生成和后续更新使用同一命令，三个参数依次为 `rawRoot`、确切版本、目标目录；都必须明确给出。
-更新会完整验证该版本的配置语言输入，离线生成候选，再复用实际字节相等的当前文件 inode。合法完整索引决定成员移除；
+更新会完整验证该版本的配置语言输入，离线生成并格式化候选，完整校验后再复用实际字节相等的当前文件 inode。
+格式化始终发生在硬链接复用之前；不要直接对受管理的当前数据目录运行格式化，应通过更新入口安装已验证候选。
+仓库通用 `pnpm format` 只负责源码格式化，命令行排除 integrated；只读的 `pnpm format:check` 仍检查 integrated。
+旧排版导致格式检查失败时，使用上述 `update:nanoka:agents` 重排并更新摘要，保持 Git 跟踪及控制目录忽略规则。
+格式化失败沿用现有更新恢复机制，当前数据保持完整。合法完整索引决定成员移除；
 缺文件或校验失败会保留旧集，不跨版本填缺。相同输入仍会执行完整校验，实体文件内容及 mtime 不变；临时候选仍有 I/O。
 首次目标必须不存在；已有非受管理目录（包括空目录）或损坏数据会报错，不能通过删除目标来绕过恢复。
 
 [更新与恢复协议](../../docs/specs/data/integration.md#81-当前数据集更新与恢复协议)是事务、锁、读取及清理规则的唯一来源。
-固定目标保持 `packages/data/integrated/nanoka/`；控制记录、临时候选、备份和最新维护报告在同级
-`.nanoka.fairy-state/` 中。正常完成后只留当前数据和最新维护报告，不长期保存旧版本。
+固定目标为 `packages/data/integrated/`；控制记录、临时候选、备份和最新维护报告在同级
+`.integrated.fairy-state/` 中。正常完成后只留当前数据和最新维护报告，不长期保存旧版本。
 **保留永久 `lock.sqlite`，不要手工删除它来解锁。** 进程终止会自动释放 SQLite 锁，恢复命令无需 raw；更新也会先恢复。
 
 当前数据的消费者必须在 `withNanokaCurrentDataset` 内部回调持锁期间读完并使用所需字节；该内部维护能力没有 npm 导出。
@@ -101,7 +109,7 @@ pnpm --filter @randomplay/data recover:nanoka:agents integrated/nanoka
 
 协议使用本机 macOS/Linux、同文件系统的 SQLite 排他锁、目录 rename 和硬链接；受控子进程中断纳入常规测试。
 不保证网络文件系统、Windows、绕过锁修改目录、断电或内核崩溃时的持久性；读取者需要控制目录写权限。
-真实当前数据和控制目录均被 Git 忽略，不自动暂存、不进入 npm；普通 build/test/check/pack 不生成或依赖真实数据。
+当前数据目录可纳入 Git；控制目录仍被 Git 忽略。数据不自动暂存、不进入 npm；普通 build/test/check/pack 不生成或依赖真实数据。
 
 ## 约束
 

@@ -1,0 +1,1626 @@
+{
+  "camp": {
+    "3": "Belobog Heavy Industries"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    }
+  },
+  "hitType": {
+    "103": "Pierce"
+  },
+  "id": 1111,
+  "locale": "en",
+  "name": "Anton",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1111018",
+        "1111019",
+        "1111020",
+        "1111021",
+        "1111022",
+        "1111023"
+      ],
+      "basic": [
+        "1111001",
+        "1111002",
+        "1111003",
+        "1111004",
+        "1111006",
+        "1111007",
+        "1111008"
+      ],
+      "chain": ["1111016", "1111017"],
+      "dodge": ["1111012", "1111014", "1111015"],
+      "special": ["1111009", "1111010", "1111011"]
+    },
+    "parameterRowsById": {
+      "1111001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1111002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1111003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1111004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1111006": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1111007": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1111008": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1111009": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1111010": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1111011": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1111012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1111014": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1111015": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1111016": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1111017": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1111018": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1111019": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1111020": ["/skill/assist/description/6/param/0"],
+      "1111021": ["/skill/assist/description/6/param/1"],
+      "1111022": ["/skill/assist/description/6/param/2"],
+      "1111023": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "MAY 2",
+    "fullName": "Anton Ivanov",
+    "gender": "Male",
+    "impressionF": "Anton keeps saying he's the \"second-best driller in the company.\"\nSo... who's the first?",
+    "impressionM": "I think it's the heavy drill machine from their company. I've heard him say something like \"I gotta win next time\" against it.",
+    "impressions": [
+      "Impressions of Anton:\n · The one who shouts the loudest slogans during a fight, and the second loudest is his bro.",
+      " · Keywords for dealing with Anton: \"Passion,\" \"Bond,\" and \"Bro.\"",
+      " · He will have your back no matter what, even if the protagonist takes a dark path."
+    ],
+    "profileDesc": "Anton is a key member of construction staff at Belobog Industries and one of Koleda's trusted aides.\n\"Got a job you can't handle? Leave it to me!\"\n Anton is one of the top brass at Belobog, handpicked by its former president Khors, which makes him a \"senior employee.\"\nA genuine, straightforward man, always boosting the morale of his coworkers with his surplus of energy.\n\nApart from this, it seems Anton is always talking to his jackhammer, affectionately calling it, \"Bro.\"\nAn instance from Anton's everyday life goes like this:\nAnton, seemingly in dialogue with himself, asks, \"Whaddaya think, Bro?\" \nThe jackhammer replies, \"Vroom vroom vroom—\"\nAnton, apparently enlightened, responds, \"I see, I see! You still got it, Bro!\"\nUnfortunately, I have not collected enough information on such occurrences and am not able to deliver further analysis.",
+    "stature": "190",
+    "trustLv": {
+      "1": "Anton is a key member of construction staff at Belobog Industries and one of Koleda's trusted aides.\n\"Got a job you can't handle? Leave it to me!\"\n Anton is one of the top brass at Belobog, handpicked by its former president Khors, which makes him a \"senior employee.\"\nA genuine, straightforward man, always boosting the morale of his coworkers with his surplus of energy.\n\nApart from this, it seems Anton is always talking to his jackhammer, affectionately calling it, \"Bro.\"\nAn instance from Anton's everyday life goes like this:\nAnton, seemingly in dialogue with himself, asks, \"Whaddaya think, Bro?\" \nThe jackhammer replies, \"Vroom vroom vroom—\"\nAnton, apparently enlightened, responds, \"I see, I see! You still got it, Bro!\"\nUnfortunately, I have not collected enough information on such occurrences and am not able to deliver further analysis.",
+      "2": "",
+      "3": "Here is a video recording depicting Anton's life:\nLate at night at the construction site, Anton gazes down at his jackhammer and mutters to himself, \"Dang, this is exhausting, Bro...\"\nAs the jackhammer buzzed to life, Anton nodded in acknowledgment. \"No, a real one doesn't complain about being tired! Thanks for reminding me, buddy! You can never back down from a challenge!\"\nThe truth is, Anton had set up demanding tasks for the construction workers, hoping to push them to their limits and unlock their true potential. However, witnessing their struggles and diminishing confidence, he couldn't bear to see them suffer any longer, so he secretly completed all the tasks in the dead of night.\nIn the end, Anton became the one who accepted all the trials.\n\n* Anton's beloved \"bro,\" aka his jackhammer, appears to have a connection to his former colleagues.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete Main Commission Chapter 2"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1111501": {
+        "desc": [
+          "When Anton uses his <color=#FFFFFF>Piledriver Attack</color>, the skill's DMG is increased by <color=#2BAD00>12%</color> and when he uses his <color=#FFFFFF>Drill Attack</color>, the skill's DMG is increased by <color=#2BAD00>20%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile Anton is in <color=#FFFFFF>Burst Mode</color>, for every 4 critical hits, the next attack hitting <color=#2EB6FF>Shocked</color> enemies triggers an additional bout of <color=#2EB6FF>Shock</color> DMG at 45% of the original DMG. This effect can trigger once every 0.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Brothers in Arms!",
+          "Additional Ability: Teamwork"
+        ],
+        "potential": []
+      },
+      "1111502": {
+        "desc": [
+          "When Anton uses his <color=#FFFFFF>Piledriver Attack</color>, the skill's DMG is increased by <color=#2BAD00>14%</color> and when he uses his <color=#FFFFFF>Drill Attack</color>, the skill's DMG is increased by <color=#2BAD00>23.3%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile Anton is in <color=#FFFFFF>Burst Mode</color>, for every 4 critical hits, the next attack hitting <color=#2EB6FF>Shocked</color> enemies triggers an additional bout of <color=#2EB6FF>Shock</color> DMG at 45% of the original DMG. This effect can trigger once every 0.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Brothers in Arms!",
+          "Additional Ability: Teamwork"
+        ],
+        "potential": []
+      },
+      "1111503": {
+        "desc": [
+          "When Anton uses his <color=#FFFFFF>Piledriver Attack</color>, the skill's DMG is increased by <color=#2BAD00>16%</color> and when he uses his <color=#FFFFFF>Drill Attack</color>, the skill's DMG is increased by <color=#2BAD00>26.6%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile Anton is in <color=#FFFFFF>Burst Mode</color>, for every 4 critical hits, the next attack hitting <color=#2EB6FF>Shocked</color> enemies triggers an additional bout of <color=#2EB6FF>Shock</color> DMG at 45% of the original DMG. This effect can trigger once every 0.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Brothers in Arms!",
+          "Additional Ability: Teamwork"
+        ],
+        "potential": []
+      },
+      "1111504": {
+        "desc": [
+          "When Anton uses his <color=#FFFFFF>Piledriver Attack</color>, the skill's DMG is increased by <color=#2BAD00>18%</color> and when he uses his <color=#FFFFFF>Drill Attack</color>, the skill's DMG is increased by <color=#2BAD00>30%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile Anton is in <color=#FFFFFF>Burst Mode</color>, for every 4 critical hits, the next attack hitting <color=#2EB6FF>Shocked</color> enemies triggers an additional bout of <color=#2EB6FF>Shock</color> DMG at 45% of the original DMG. This effect can trigger once every 0.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Brothers in Arms!",
+          "Additional Ability: Teamwork"
+        ],
+        "potential": []
+      },
+      "1111505": {
+        "desc": [
+          "When Anton uses his <color=#FFFFFF>Piledriver Attack</color>, the skill's DMG is increased by <color=#2BAD00>20%</color> and when he uses his <color=#FFFFFF>Drill Attack</color>, the skill's DMG is increased by <color=#2BAD00>33.3%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile Anton is in <color=#FFFFFF>Burst Mode</color>, for every 4 critical hits, the next attack hitting <color=#2EB6FF>Shocked</color> enemies triggers an additional bout of <color=#2EB6FF>Shock</color> DMG at 45% of the original DMG. This effect can trigger once every 0.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Brothers in Arms!",
+          "Additional Ability: Teamwork"
+        ],
+        "potential": []
+      },
+      "1111506": {
+        "desc": [
+          "When Anton uses his <color=#FFFFFF>Piledriver Attack</color>, the skill's DMG is increased by <color=#2BAD00>22%</color> and when he uses his <color=#FFFFFF>Drill Attack</color>, the skill's DMG is increased by <color=#2BAD00>36.6%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile Anton is in <color=#FFFFFF>Burst Mode</color>, for every 4 critical hits, the next attack hitting <color=#2EB6FF>Shocked</color> enemies triggers an additional bout of <color=#2EB6FF>Shock</color> DMG at 45% of the original DMG. This effect can trigger once every 0.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Brothers in Arms!",
+          "Additional Ability: Teamwork"
+        ],
+        "potential": []
+      },
+      "1111507": {
+        "desc": [
+          "When Anton uses his <color=#FFFFFF>Piledriver Attack</color>, the skill's DMG is increased by <color=#2BAD00>24%</color> and when he uses his <color=#FFFFFF>Drill Attack</color>, the skill's DMG is increased by <color=#2BAD00>40%</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhile Anton is in <color=#FFFFFF>Burst Mode</color>, for every 4 critical hits, the next attack hitting <color=#2EB6FF>Shocked</color> enemies triggers an additional bout of <color=#2EB6FF>Shock</color> DMG at 45% of the original DMG. This effect can trigger once every 0.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Brothers in Arms!",
+          "Additional Ability: Teamwork"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nContinuously strikes enemies in front of him with heavy punches, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Shoulder-To-Shoulder",
+          "potential": []
+        },
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nAttacks enemies in front with a <color=#FFFFFF>Drill Attack</color>, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable during the attack.",
+          "name": "Quick Assist: Protective Drill (Burst Mode)",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Iron Wrist",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nLaunches a <color=#FFFFFF>Drill Attack</color> that ends in a <color=#FFFFFF>Piledriver Attack</color>, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Limit Burst",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Shoulder-To-Shoulder",
+          "param": [
+            {
+              "desc": "{Skill:1111018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 26340,
+                  "damagePercentageGrowth": 2400,
+                  "etherPurify": 6584,
+                  "feverRecovery": 362175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2400,
+                  "main": 26340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13170,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 26340,
+                  "damagePercentageGrowth": 2400,
+                  "etherPurify": 6584,
+                  "feverRecovery": 362175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 13170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13170,
+                  "stunRatioGrowth": 600
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Protective Drill (Burst Mode)",
+          "param": [
+            {
+              "desc": "{Skill:1111019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111019": {
+                  "attackData": [],
+                  "attributeInfliction": 26923,
+                  "damagePercentage": 36540,
+                  "damagePercentageGrowth": 3330,
+                  "etherPurify": 7332,
+                  "feverRecovery": 884950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3330,
+                  "main": 36540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 230033,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25180,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111019": {
+                  "attackData": [],
+                  "attributeInfliction": 26923,
+                  "damagePercentage": 36540,
+                  "damagePercentageGrowth": 3330,
+                  "etherPurify": 7332,
+                  "feverRecovery": 884950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 25180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 230033,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25180,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Iron Wrist",
+          "param": [
+            {
+              "desc": "{Skill:1111020, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1111020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24670,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111021, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1111021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1420,
+                  "main": 31170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111022, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1111022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15170,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Limit Burst",
+          "param": [
+            {
+              "desc": "{Skill:1111023, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111023": {
+                  "attackData": [],
+                  "attributeInfliction": 30422,
+                  "damagePercentage": 32580,
+                  "damagePercentageGrowth": 2970,
+                  "etherPurify": 15334,
+                  "feverRecovery": 1014475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2970,
+                  "main": 32580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28270,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111023, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111023": {
+                  "attackData": [],
+                  "attributeInfliction": 30422,
+                  "damagePercentage": 32580,
+                  "damagePercentageGrowth": 2970,
+                  "etherPurify": 15334,
+                  "feverRecovery": 1014475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1290,
+                  "main": 28270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28270,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 mixed attacks in front, dealing <color=#F0D12B>Physical DMG</color>.\nThe 4th hit is a <color=#FFFFFF>Piledriver Attack</color>.",
+          "name": "Basic Attack: Enthusiastic Drills",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> while Anton is in <color=#FFFFFF>Burst Mode</color> to activate:\nUnleashes up to 3 mixed attacks in front, dealing massive <color=#2EB6FF>Electric DMG</color>.\nDuring the 2nd <color=#FFFFFF>Drill Attack</color> and 3rd <color=#FFFFFF>Piledriver Attack</color>, press repeatedly or hold <IconMap:Icon_Normal> to extend the skill duration.",
+          "name": "Basic Attack: Enthusiastic Drills (Burst Mode)",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Enthusiastic Drills",
+          "param": [
+            {
+              "desc": "{Skill:1111001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1111001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6780,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 3389,
+                  "feverRecovery": 93225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 6780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3390,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1111002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9230,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 7523,
+                  "feverRecovery": 207075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 9230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7530,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1111003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 10980,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 9325,
+                  "feverRecovery": 256575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1000,
+                  "main": 10980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33570,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9330,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1111004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 22910,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 18138,
+                  "feverRecovery": 498850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2090,
+                  "main": 22910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 65300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18140,
+                  "stunRatioGrowth": 830
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1111001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6780,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 3389,
+                  "feverRecovery": 93225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3390,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1111002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9230,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 7523,
+                  "feverRecovery": 207075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 350,
+                  "main": 7530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7530,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1111003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 10980,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 9325,
+                  "feverRecovery": 256575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 9330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33570,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9330,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1111004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 22910,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 18138,
+                  "feverRecovery": 498850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 830,
+                  "main": 18140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 65300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18140,
+                  "stunRatioGrowth": 830
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Enthusiastic Drills (Burst Mode)",
+          "param": [
+            {
+              "desc": "{Skill:1111006, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1111006": {
+                  "attackData": [],
+                  "attributeInfliction": 17749,
+                  "damagePercentage": 24090,
+                  "damagePercentageGrowth": 2190,
+                  "etherPurify": 9667,
+                  "feverRecovery": 583550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2190,
+                  "main": 24090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 96666,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16600,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111007, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1111007": {
+                  "attackData": [],
+                  "attributeInfliction": 34573,
+                  "damagePercentage": 46920,
+                  "damagePercentageGrowth": 4270,
+                  "etherPurify": 18831,
+                  "feverRecovery": 1136575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4270,
+                  "main": 46920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 186000,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32330,
+                  "stunRatioGrowth": 1470
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111008, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1111008": {
+                  "attackData": [],
+                  "attributeInfliction": 33668,
+                  "damagePercentage": 45690,
+                  "damagePercentageGrowth": 4160,
+                  "etherPurify": 18337,
+                  "feverRecovery": 1106600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4160,
+                  "main": 45690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 183366,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31480,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111006, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1111006": {
+                  "attackData": [],
+                  "attributeInfliction": 17749,
+                  "damagePercentage": 24090,
+                  "damagePercentageGrowth": 2190,
+                  "etherPurify": 9667,
+                  "feverRecovery": 583550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 96666,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16600,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111007, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1111007": {
+                  "attackData": [],
+                  "attributeInfliction": 34573,
+                  "damagePercentage": 46920,
+                  "damagePercentageGrowth": 4270,
+                  "etherPurify": 18831,
+                  "feverRecovery": 1136575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1470,
+                  "main": 32330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 186000,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32330,
+                  "stunRatioGrowth": 1470
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111008, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1111008": {
+                  "attackData": [],
+                  "attributeInfliction": 33668,
+                  "damagePercentage": 45690,
+                  "damagePercentageGrowth": 4160,
+                  "etherPurify": 18337,
+                  "feverRecovery": 1106600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1440,
+                  "main": 31480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 183366,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31480,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a <color=#FFFFFF>Piledriver Attack</color> onto the ground in front of him over a large area, dealing massive <color=#2EB6FF>Electric DMG</color> to enemies within range.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Go Go Go!",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a <color=#FFFFFF>Piledriver Attack</color> onto the ground in front of him over a large area, dealing massive <color=#2EB6FF>Electric DMG</color> to enemies within range.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Go Go Go Go Go!",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Go Go Go!",
+          "param": [
+            {
+              "desc": "{Skill:1111016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111016": {
+                  "attackData": [],
+                  "attributeInfliction": 44113,
+                  "damagePercentage": 64070,
+                  "damagePercentageGrowth": 5830,
+                  "etherPurify": 24164,
+                  "feverRecovery": 2493425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5830,
+                  "main": 64070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24170,
+                  "stunRatioGrowth": 1100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111016": {
+                  "attackData": [],
+                  "attributeInfliction": 44113,
+                  "damagePercentage": 64070,
+                  "damagePercentageGrowth": 5830,
+                  "etherPurify": 24164,
+                  "feverRecovery": 2493425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1100,
+                  "main": 24170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24170,
+                  "stunRatioGrowth": 1100
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Go Go Go Go Go!",
+          "param": [
+            {
+              "desc": "{Skill:1111017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111017": {
+                  "attackData": [],
+                  "attributeInfliction": 24336,
+                  "damagePercentage": 181640,
+                  "damagePercentageGrowth": 16520,
+                  "etherPurify": 74337,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 16520,
+                  "main": 181640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24340,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111017": {
+                  "attackData": [],
+                  "attributeInfliction": 24336,
+                  "damagePercentage": 181640,
+                  "damagePercentageGrowth": 16520,
+                  "etherPurify": 74337,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 24340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24340,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Let's Move",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a Dodge to activate:\nRams into enemies in front of him, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Fire With Fire",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nContinuously strikes enemies in front with heavy punches, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Retaliation",
+          "potential": []
+        },
+        {
+          "desc": "While in <color=#FFFFFF>Burst Mode</color>, press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nLaunches a <color=#FFFFFF>Drill Attack</color> at enemies in front of him, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable during the attack.",
+          "name": "Dodge Counter: Overload Drill (Burst Mode)",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Fire With Fire",
+          "param": [
+            {
+              "desc": "{Skill:1111012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6840,
+                  "damagePercentageGrowth": 630,
+                  "etherPurify": 3417,
+                  "feverRecovery": 94050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 6840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3420,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6840,
+                  "damagePercentageGrowth": 630,
+                  "etherPurify": 3417,
+                  "feverRecovery": 94050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3420,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Retaliation",
+          "param": [
+            {
+              "desc": "{Skill:1111014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 27120,
+                  "damagePercentageGrowth": 2470,
+                  "etherPurify": 28167,
+                  "feverRecovery": 362175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2470,
+                  "main": 27120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23170,
+                  "stunRatioGrowth": 1060
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 27120,
+                  "damagePercentageGrowth": 2470,
+                  "etherPurify": 28167,
+                  "feverRecovery": 362175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1060,
+                  "main": 23170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23170,
+                  "stunRatioGrowth": 1060
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Overload Drill (Burst Mode)",
+          "param": [
+            {
+              "desc": "{Skill:1111015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111015": {
+                  "attackData": [],
+                  "attributeInfliction": 26923,
+                  "damagePercentage": 46540,
+                  "damagePercentageGrowth": 4240,
+                  "etherPurify": 29664,
+                  "feverRecovery": 884950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4240,
+                  "main": 46540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 230033,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35180,
+                  "stunRatioGrowth": 1600
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111015": {
+                  "attackData": [],
+                  "attributeInfliction": 26923,
+                  "damagePercentage": 46540,
+                  "damagePercentageGrowth": 4240,
+                  "etherPurify": 29664,
+                  "feverRecovery": 884950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1600,
+                  "main": 35180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 230033,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35180,
+                  "stunRatioGrowth": 1600
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nUnleashes a <color=#FFFFFF>Piledriver Attack</color> against enemies in a line in front, dealing <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Spin, Bro!",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLaunches several <color=#FFFFFF>Piledriver Attacks</color> at enemies in a line in front of him, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.\nAnton enters <color=#FFFFFF>Burst Mode</color> after using this skill. When in <color=#FFFFFF>Burst Mode</color>, Anton's attacks become more powerful, dealing massive <color=#2EB6FF>Electric DMG</color> while continually consuming Energy upon hitting an enemy. Burst Mode remains active until his Energy is depleted.",
+          "name": "EX Special Attack: Smash the Horizon, Bro!",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Special> while in <color=#FFFFFF>Burst Mode</color> to activate:\nLaunches a <color=#FFFFFF>Piledriver Attack</color> at enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Explosive Drill (Burst Mode)",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Spin, Bro!",
+          "param": [
+            {
+              "desc": "{Skill:1111009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111009": {
+                  "attackData": [],
+                  "attributeInfliction": 4418,
+                  "damagePercentage": 4420,
+                  "damagePercentageGrowth": 410,
+                  "etherPurify": 4419,
+                  "feverRecovery": 121550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 4420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4420,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111009": {
+                  "attackData": [],
+                  "attributeInfliction": 4418,
+                  "damagePercentage": 4420,
+                  "damagePercentageGrowth": 410,
+                  "etherPurify": 4419,
+                  "feverRecovery": 121550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4420,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Explosive Drill (Burst Mode)",
+          "param": [
+            {
+              "desc": "{Skill:1111010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111010": {
+                  "attackData": [],
+                  "attributeInfliction": 21721,
+                  "damagePercentage": 23140,
+                  "damagePercentageGrowth": 2110,
+                  "etherPurify": 5916,
+                  "feverRecovery": 714175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2110,
+                  "main": 23140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 116500,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11840,
+                  "stunRatioGrowth": 540
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111010": {
+                  "attackData": [],
+                  "attributeInfliction": 21721,
+                  "damagePercentage": 23140,
+                  "damagePercentageGrowth": 2110,
+                  "etherPurify": 5916,
+                  "feverRecovery": 714175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 11840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 116500,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11840,
+                  "stunRatioGrowth": 540
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Smash the Horizon, Bro!",
+          "param": [
+            {
+              "desc": "{Skill:1111011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1111011": {
+                  "attackData": [],
+                  "attributeInfliction": 19503,
+                  "damagePercentage": 19510,
+                  "damagePercentageGrowth": 1780,
+                  "etherPurify": 19504,
+                  "feverRecovery": 536525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1780,
+                  "main": 19510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19510,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1111011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1111011": {
+                  "attackData": [],
+                  "attributeInfliction": 19503,
+                  "damagePercentage": 19510,
+                  "damagePercentageGrowth": 1780,
+                  "etherPurify": 19504,
+                  "feverRecovery": 536525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 19510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19510,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost to Use",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1111001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Enthusiastic Drills"
+    },
+    "1111002": {
+      "desc": "<IconMap:Icon_Normal> (Burst Mode) ;<IconMap:Icon_Normal> (Mash or hold down) ; <IconMap:Icon_Normal>(Mash or hold down)",
+      "name": "Basic Attack: Enthusiastic Drills (Burst Mode)"
+    },
+    "1111003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Spin, Bro!"
+    },
+    "1111004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Smash the Horizon, Bro!"
+    },
+    "1111005": {
+      "desc": "<IconMap:Icon_Special> (Burst Mode)",
+      "name": "Special Attack: Explosive Drill (Burst Mode)"
+    },
+    "1111006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Fire With Fire"
+    },
+    "1111008": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Retaliation"
+    },
+    "1111009": {
+      "desc": "<IconMap:Icon_Evade>(Perfect);<IconMap:Icon_Normal>(Burst Mode)",
+      "name": "Dodge Counter: Overload Drill (Burst Mode)"
+    },
+    "1111010": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Go Go Go!"
+    },
+    "1111011": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Go Go Go Go Go!"
+    },
+    "1111012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Shoulder-To-Shoulder"
+    },
+    "1111013": {
+      "desc": "<IconMap:Icon_Switch>(When Triggering Quick Assist) (Burst Mode)",
+      "name": "Quick Assist: Protective Drill (Burst Mode)"
+    },
+    "1111014": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Iron Wrist"
+    },
+    "1111015": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Limit Burst"
+    }
+  },
+  "skin": {
+    "3111110": {
+      "desc": "The jackhammer's bearings rumble without pause, echoing the hot, thunderous beat of its wielder's heart.",
+      "name": "Anton: Earthshaking Axle"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, on-field DMG dealer",
+    "Attacking Shocked enemies triggers additional effects"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When <color=#FFFFFF>Drill Attack</color> hits an enemy, Anton gains additional Energy, up to a maximum of 5 Energy per skill use.",
+      "desc2": "\"Are you awake? Get spinning, bro!\"\n\"Try and keep up. It's time to do our stretches!\"",
+      "name": "Warm-Up Exercises"
+    },
+    "2": {
+      "desc": "When Anton uses his <color=#FFFFFF>EX Special Attack</color> and enters <color=#FFFFFF>Burst Mode</color>, he gains a Shield that equals to 7.5% of his Max HP. While in <color=#FFFFFF>Burst Mode</color>, entering combat or switching in reapplies the Shield effect. This effect can trigger once every 15s. The Shield dissipates when <color=#FFFFFF>Burst Mode</color> ends.",
+      "desc2": "After arduous training, a few lucky individuals will display exceptional vigor and perform above their usual level during high-intensity activities, entering a state of flow commonly known as \"being in the zone.\"\nAre you ready to get moving and enter the zone?\n— Nitro-Fuel's exclusive program \"Good Morning, Zealous Office Workers!\"",
+      "name": "State of Flow"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Knowing a bit of everything may seem underwhelming, but in a complex and ever-changing Hollow worksite, having a wide skillset can present an opportunity to overcome difficulties.",
+      "name": "Rotational Training"
+    },
+    "4": {
+      "desc": "When Anton uses a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, all squad members' CRIT Rate increases by 10% for 12s.",
+      "desc2": "\"Find your rhythm, and let's get moving!\"\nWhen Anton starts to get serious, everyone becomes more nimble.\nThey have to keep up or else they will be training alone the next day.",
+      "name": "Everyone Get Fired Up!"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Knowing a bit of everything may seem underwhelming, but if you are resolute enough to change from \"knowing a bit\" to \"being excellent,\" then you become omnipotent!",
+      "name": "Jack of All Trades"
+    },
+    "6": {
+      "desc": "When Anton's <color=#FFFFFF>Piledriver Attack</color> triggers a critical hit, his <color=#FFFFFF>Basic Attack: Enthusiastic Drills (Burst Mode)</color> and <color=#FFFFFF>Dodge Counter: Overload Drill (Burst Mode)</color> deal 4% more DMG for 30s, stacking up to 6 times. Repeated triggers reset the duration.",
+      "desc2": "\"Yeah bro, can you feel the burn?\"\nWhenever Anton wants to exceed his limits,\nhis \"bro\" starts spinning at an astonishing pace, its buzzing echoing Anton's resolution.",
+      "name": "Break the Limit"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

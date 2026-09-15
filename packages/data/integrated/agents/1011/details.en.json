@@ -1,0 +1,1293 @@
+{
+  "camp": {
+    "1": "Cunning Hares"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Impact"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1011,
+  "locale": "en",
+  "name": "Anby",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1011012", "1011013", "1011014", "1011015", "1011016"],
+      "basic": ["1011001", "1011002", "1011003", "1011004", "1011005"],
+      "chain": ["1011010", "1011011"],
+      "dodge": ["1011008", "1011009"],
+      "special": ["1011006", "1011007"]
+    },
+    "parameterRowsById": {
+      "1011001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1011002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1011003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1011004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1011005": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/1"
+      ],
+      "1011006": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1011007": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1011008": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1011009": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1011010": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1011011": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1011012": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1011013": ["/skill/assist/description/4/param/0"],
+      "1011014": ["/skill/assist/description/4/param/1"],
+      "1011015": ["/skill/assist/description/4/param/2"],
+      "1011016": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "FEB 20",
+    "fullName": "Anby Demara",
+    "gender": "Female",
+    "impressionF": "Anby often comes to the video store to borrow movies and returns them quickly, so she seems to watch a lot of movies.\nFeelin' the pressure, bro? As the manager of the video rental store, it'd be embarrassing if the amount of movies we watch falls behind our customers.",
+    "impressionM": "Honestly, I'm most curious about Anby's playlist. She's got her headphones on constantly... but what exactly is she listening to?",
+    "impressions": [
+      "Impressions of Anby:\n · As the only one who's worried about the Cunning Hares' finances, Anby really has it hard.",
+      " · Maybe movies are Anby's real life...",
+      " · \"Movie Lovers Can't be Bad Guys\" — Just like Anby"
+    ],
+    "profileDesc": "Anby, the original member of Gentle House.\nAccording to the New Eridu resident records, her identity as \"Anby Demara\" only exists after joining Gentle House, the name obviously being taken from Nicole. Before registering as an employee of Gentle House, all data relating to Anby is suspiciously blank.\nDespite her extreme lack of common sense, Anby is well-versed in matters related to combat and is among the strongest combatants of the Cunning Hares.\n\nAnby's greatest interest is movies, of which she likes an extensive range of genres. Due to an excessive obsession, she tends to take the stories in movies as reality.\nContrary to her seemingly emotionless appearance, Anby is easily moved by movie storylines.\nHer favorite food is hamburgers because \"they contain protein, carbs, and greens, taste good, and are even affordable — there's nothing else besides hamburgers.\"",
+    "stature": "156",
+    "trustLv": {
+      "1": "Anby, the original member of Gentle House.\nAccording to the New Eridu resident records, her identity as \"Anby Demara\" only exists after joining Gentle House, the name obviously being taken from Nicole. Before registering as an employee of Gentle House, all data relating to Anby is suspiciously blank.\nDespite her extreme lack of common sense, Anby is well-versed in matters related to combat and is among the strongest combatants of the Cunning Hares.\n\nAnby's greatest interest is movies, of which she likes an extensive range of genres. Due to an excessive obsession, she tends to take the stories in movies as reality.\nContrary to her seemingly emotionless appearance, Anby is easily moved by movie storylines.\nHer favorite food is hamburgers because \"they contain protein, carbs, and greens, taste good, and are even affordable — there's nothing else besides hamburgers.\"",
+      "2": "",
+      "3": "Rumors suggest Nicole found Anby near the ruins of the old capital and took her in because she was impressed by her formidable combat abilities.\n\"It's not because she's strong! I took her in because I'm kind~\" — Nicole\nAnby's behavior and combat performance suggest she has had military training.\nDue to the suspicious gaps in her history, it's advised to maintain a certain level of vigilance towards her.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1011501": {
+        "desc": [
+          "Launch a <color=#FFFFFF>Basic Attack: Thunderbolt</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> after the 3rd hit of Anby's <color=#FFFFFF>Basic Attack</color> for an extra <color=#2BAD00>32%</color> Daze.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Anby's <color=#FFFFFF>Dodge Counter</color> hits an enemy, she gains an extra 7.2 Energy. This effect can trigger once every 5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fluctuating Voltage",
+          "Additional Ability: Parallel Connection"
+        ],
+        "potential": []
+      },
+      "1011502": {
+        "desc": [
+          "Launch a <color=#FFFFFF>Basic Attack: Thunderbolt</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> after the 3rd hit of Anby's <color=#FFFFFF>Basic Attack</color> for an extra <color=#2BAD00>37.3%</color> Daze.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Anby's <color=#FFFFFF>Dodge Counter</color> hits an enemy, she gains an extra 7.2 Energy. This effect can trigger once every 5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fluctuating Voltage",
+          "Additional Ability: Parallel Connection"
+        ],
+        "potential": []
+      },
+      "1011503": {
+        "desc": [
+          "Launch a <color=#FFFFFF>Basic Attack: Thunderbolt</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> after the 3rd hit of Anby's <color=#FFFFFF>Basic Attack</color> for an extra <color=#2BAD00>42.6%</color> Daze.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Anby's <color=#FFFFFF>Dodge Counter</color> hits an enemy, she gains an extra 7.2 Energy. This effect can trigger once every 5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fluctuating Voltage",
+          "Additional Ability: Parallel Connection"
+        ],
+        "potential": []
+      },
+      "1011504": {
+        "desc": [
+          "Launch a <color=#FFFFFF>Basic Attack: Thunderbolt</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> after the 3rd hit of Anby's <color=#FFFFFF>Basic Attack</color> for an extra <color=#2BAD00>48%</color> Daze.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Anby's <color=#FFFFFF>Dodge Counter</color> hits an enemy, she gains an extra 7.2 Energy. This effect can trigger once every 5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fluctuating Voltage",
+          "Additional Ability: Parallel Connection"
+        ],
+        "potential": []
+      },
+      "1011505": {
+        "desc": [
+          "Launch a <color=#FFFFFF>Basic Attack: Thunderbolt</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> after the 3rd hit of Anby's <color=#FFFFFF>Basic Attack</color> for an extra <color=#2BAD00>53.3%</color> Daze.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Anby's <color=#FFFFFF>Dodge Counter</color> hits an enemy, she gains an extra 7.2 Energy. This effect can trigger once every 5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fluctuating Voltage",
+          "Additional Ability: Parallel Connection"
+        ],
+        "potential": []
+      },
+      "1011506": {
+        "desc": [
+          "Launch a <color=#FFFFFF>Basic Attack: Thunderbolt</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> after the 3rd hit of Anby's <color=#FFFFFF>Basic Attack</color> for an extra <color=#2BAD00>58.6%</color> Daze.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Anby's <color=#FFFFFF>Dodge Counter</color> hits an enemy, she gains an extra 7.2 Energy. This effect can trigger once every 5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fluctuating Voltage",
+          "Additional Ability: Parallel Connection"
+        ],
+        "potential": []
+      },
+      "1011507": {
+        "desc": [
+          "Launch a <color=#FFFFFF>Basic Attack: Thunderbolt</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> after the 3rd hit of Anby's <color=#FFFFFF>Basic Attack</color> for an extra <color=#2BAD00>64%</color> Daze.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Anby's <color=#FFFFFF>Dodge Counter</color> hits an enemy, she gains an extra 7.2 Energy. This effect can trigger once every 5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Fluctuating Voltage",
+          "Additional Ability: Parallel Connection"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nSlashes enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Thunderfall",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Flash",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nPerform a spinning slash against enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Lightning Whirl",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Thunderfall",
+          "param": [
+            {
+              "desc": "{Skill:1011012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011012": {
+                  "attackData": [],
+                  "attributeInfliction": 6163,
+                  "damagePercentage": 6170,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 3082,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6170,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011012": {
+                  "attackData": [],
+                  "attributeInfliction": 6163,
+                  "damagePercentage": 6170,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 3082,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6170,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Flash",
+          "param": [
+            {
+              "desc": "{Skill:1011013, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1011013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24670,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011014, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1011014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1420,
+                  "main": 31170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011015, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1011015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15170,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Lightning Whirl",
+          "param": [
+            {
+              "desc": "{Skill:1011016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011016": {
+                  "attackData": [],
+                  "attributeInfliction": 31322,
+                  "damagePercentage": 33520,
+                  "damagePercentageGrowth": 3050,
+                  "etherPurify": 16000,
+                  "feverRecovery": 1041975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3050,
+                  "main": 33520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29140,
+                  "stunRatioGrowth": 1330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011016": {
+                  "attackData": [],
+                  "attributeInfliction": 31322,
+                  "damagePercentage": 33520,
+                  "damagePercentageGrowth": 3050,
+                  "etherPurify": 16000,
+                  "feverRecovery": 1041975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1330,
+                  "main": 29140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29140,
+                  "stunRatioGrowth": 1330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 slashes. The first 3 hits deal <color=#F0D12B>Physical DMG</color>, the 4th hit deals <color=#2EB6FF>Electric DMG</color>.",
+          "name": "Basic Attack: Turbo Volt",
+          "potential": []
+        },
+        {
+          "desc": "After unleashing the 3rd hit of the <color=#FFFFFF>Basic Attack</color>, hold down or pause for a short while, and then press <IconMap:Icon_Normal> to activate:\nUnleashes a downward strike that deals <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Basic Attack: Thunderbolt",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Turbo Volt",
+          "param": [
+            {
+              "desc": "{Skill:1011001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1011001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3120,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1559,
+                  "feverRecovery": 42900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 3120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1560,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1011002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3370,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 2865,
+                  "feverRecovery": 78925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 3370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2870,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1011003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11360,
+                  "damagePercentageGrowth": 1040,
+                  "etherPurify": 8959,
+                  "feverRecovery": 246400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1040,
+                  "main": 11360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 32260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8960,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1011004": {
+                  "attackData": [],
+                  "attributeInfliction": 17247,
+                  "damagePercentage": 23910,
+                  "damagePercentageGrowth": 2180,
+                  "etherPurify": 18735,
+                  "feverRecovery": 515350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2180,
+                  "main": 23910,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 67450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18740,
+                  "stunRatioGrowth": 860
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1011001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3120,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1559,
+                  "feverRecovery": 42900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 80,
+                  "main": 1560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1560,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1011002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3370,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 2865,
+                  "feverRecovery": 78925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10320,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2870,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1011003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11360,
+                  "damagePercentageGrowth": 1040,
+                  "etherPurify": 8959,
+                  "feverRecovery": 246400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 8960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 32260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8960,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1011004": {
+                  "attackData": [],
+                  "attributeInfliction": 17247,
+                  "damagePercentage": 23910,
+                  "damagePercentageGrowth": 2180,
+                  "etherPurify": 18735,
+                  "feverRecovery": 515350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 860,
+                  "main": 18740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 67450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18740,
+                  "stunRatioGrowth": 860
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Thunderbolt",
+          "param": [
+            {
+              "desc": "{Skill:1011005, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011005": {
+                  "attackData": [],
+                  "attributeInfliction": 12750,
+                  "damagePercentage": 32860,
+                  "damagePercentageGrowth": 2990,
+                  "etherPurify": 14238,
+                  "feverRecovery": 391600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2990,
+                  "main": 32860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 51260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14240,
+                  "stunRatioGrowth": 650
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011005, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011005": {
+                  "attackData": [],
+                  "attributeInfliction": 12750,
+                  "damagePercentage": 32860,
+                  "damagePercentageGrowth": 2990,
+                  "etherPurify": 14238,
+                  "feverRecovery": 391600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 650,
+                  "main": 14240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 51260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14240,
+                  "stunRatioGrowth": 650
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a powerful upwards slash at enemies in a small area, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Electro Engine",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a powerful upward slash at enemies in a small area followed by several downward strikes, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Overdrive Engine",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Electro Engine",
+          "param": [
+            {
+              "desc": "{Skill:1011010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011010": {
+                  "attackData": [],
+                  "attributeInfliction": 34283,
+                  "damagePercentage": 54240,
+                  "damagePercentageGrowth": 4940,
+                  "etherPurify": 14334,
+                  "feverRecovery": 2223100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4940,
+                  "main": 54240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14340,
+                  "stunRatioGrowth": 660
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011010": {
+                  "attackData": [],
+                  "attributeInfliction": 34283,
+                  "damagePercentage": 54240,
+                  "damagePercentageGrowth": 4940,
+                  "etherPurify": 14334,
+                  "feverRecovery": 2223100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 660,
+                  "main": 14340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14340,
+                  "stunRatioGrowth": 660
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Overdrive Engine",
+          "param": [
+            {
+              "desc": "{Skill:1011011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011011": {
+                  "attackData": [],
+                  "attributeInfliction": 21003,
+                  "damagePercentage": 151260,
+                  "damagePercentageGrowth": 13760,
+                  "etherPurify": 71004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13760,
+                  "main": 151260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 99160,
+                  "stunRatioGrowth": 4510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011011": {
+                  "attackData": [],
+                  "attributeInfliction": 21003,
+                  "damagePercentage": 151260,
+                  "damagePercentageGrowth": 13760,
+                  "etherPurify": 71004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4510,
+                  "main": 99160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 99160,
+                  "stunRatioGrowth": 4510
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Slide",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nSlashes all nearby enemies, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Taser Blast",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nSlashes enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Thunderclap",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Taser Blast",
+          "param": [
+            {
+              "desc": "{Skill:1011008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5670,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 2832,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 5670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2840,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5670,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 2832,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2840,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Thunderclap",
+          "param": [
+            {
+              "desc": "{Skill:1011009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011009": {
+                  "attackData": [],
+                  "attributeInfliction": 6163,
+                  "damagePercentage": 18020,
+                  "damagePercentageGrowth": 1640,
+                  "etherPurify": 21164,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1640,
+                  "main": 18020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16170,
+                  "stunRatioGrowth": 740
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011009": {
+                  "attackData": [],
+                  "attributeInfliction": 6163,
+                  "damagePercentage": 18020,
+                  "damagePercentageGrowth": 1640,
+                  "etherPurify": 21164,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 740,
+                  "main": 16170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16170,
+                  "stunRatioGrowth": 740
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nUnleashes an upward slash that deals <color=#2EB6FF>Electric DMG</color>.\nThis attack launches faster when used after the 3rd hit of the <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Basic Attack: Thunderbolt</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Fork Lightning",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nUnleashes a powerful upward slash that deals massive <color=#2EB6FF>Electric DMG</color>.\nThis attack launches faster when used after the 3rd hit of her <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Basic Attack: Thunderbolt</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Lightning Bolt",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Fork Lightning",
+          "param": [
+            {
+              "desc": "{Skill:1011006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011006": {
+                  "attackData": [],
+                  "attributeInfliction": 9330,
+                  "damagePercentage": 9340,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4666,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 9340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9340,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011006": {
+                  "attackData": [],
+                  "attributeInfliction": 9330,
+                  "damagePercentage": 9340,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 4666,
+                  "feverRecovery": 256850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 9340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9340,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Lightning Bolt",
+          "param": [
+            {
+              "desc": "{Skill:1011007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1011007": {
+                  "attackData": [],
+                  "attributeInfliction": 53237,
+                  "damagePercentage": 58300,
+                  "damagePercentageGrowth": 5300,
+                  "etherPurify": 17830,
+                  "feverRecovery": 1881550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5300,
+                  "main": 58300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 48180,
+                  "stunRatioGrowth": 2190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1011007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1011007": {
+                  "attackData": [],
+                  "attributeInfliction": 53237,
+                  "damagePercentage": 58300,
+                  "damagePercentageGrowth": 5300,
+                  "etherPurify": 17830,
+                  "feverRecovery": 1881550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2190,
+                  "main": 48180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 48180,
+                  "stunRatioGrowth": 2190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1011001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Turbo Volt"
+    },
+    "1011002": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> (Delayed press or hold down)",
+      "name": "Basic Attack: Thunderbolt"
+    },
+    "1011003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Fork Lightning"
+    },
+    "1011004": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Special>",
+      "name": "Special Attack: Fork Lightning (Quick Launch)"
+    },
+    "1011005": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Lightning Bolt"
+    },
+    "1011006": {
+      "desc": "<IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_Normal> ; <IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Lightning Bolt (Quick Launch)"
+    },
+    "1011007": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Taser Blast"
+    },
+    "1011008": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Thunderclap"
+    },
+    "1011009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Electro Engine"
+    },
+    "1011010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Overdrive Engine"
+    },
+    "1011011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Thunderfall"
+    },
+    "1011012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Flash"
+    },
+    "1011013": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Lightning Whirl"
+    }
+  },
+  "skin": {
+    "3110110": {
+      "desc": "These casual clothes were hand-picked and styled for Anby by Nicole. They're designed for easy movement and ideal for moving about the streets. The fabrics and accessories cost a lot more than they seem, so (?) Anby treats the outfit with real care.",
+      "name": "Anby: Street Streak"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, Stun support",
+    "Consistently Stuns enemies and accumulates Daze"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When the 4th hit of Anby's <color=#FFFFFF>Basic Attack</color> hits an enemy, her Energy Generation Rate is increased by 12% for 30s.",
+      "desc2": "\"Charge up for just a minute, and you're set to fight for an hour!\" That's the sales pitch for these weapon expansion modules.\nAnd they deliver exactly that.",
+      "name": "Rapid Charge Mode"
+    },
+    "2": {
+      "desc": "When <color=#FFFFFF>Basic Attack: Thunderbolt</color> hits a Stunned enemy, its DMG is increased by 30%. When Anby's <color=#FFFFFF>EX Special Attack</color> hits an enemy that is not Stunned, the Daze inflicted is increased by 10%.",
+      "desc2": "\"Electric shocks will knock you out cold.\"\nLooking at the enemy out cold at her feet, she added:\n\"At least, that's what happens in the movies.\"",
+      "name": "Precision Discharge"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Run, slash, move like lightning. She is no amateur when it comes to Hollows—she's an expert.",
+      "name": "Well-Disciplined"
+    },
+    "4": {
+      "desc": "When Anby launches a <color=#FFFFFF>Chain Attack</color> or uses her <color=#FFFFFF>Ultimate</color>, off-field Electric Agents recover 3 Energy.\nFor every 12% Energy Generation Rate Anby has, recover an additional 2 Energy, up to a maximum of 6.",
+      "desc2": "You won't last long fighting solo. An experienced Hollow Raider knows how to create opportunities for their teammates.",
+      "name": "Conducting Charge"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Working for the Cunning Hares not only builds your mental toughness but also helps (or rather, forces) you to get in shape.",
+      "name": "Street Experience"
+    },
+    "6": {
+      "desc": "When Anby uses her <color=#FFFFFF>EX Special Attack</color>, she gains 8 stacks of Charge (max 8 stacks). When she hits an enemy with her <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Dash Attack</color>, 1 stack of Charge is consumed, increasing that attack's DMG by 45%.",
+      "desc2": "Coils of electricity flickered over her fingertips.\nAnby raised her head, eyes brimming with determination beyond her years.\nPerhaps, one day, she will be the one with total mastery over electricity.",
+      "name": "Charging Field"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

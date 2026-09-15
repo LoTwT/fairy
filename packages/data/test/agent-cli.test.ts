@@ -249,7 +249,7 @@ describe("offline agent package commands", () => {
         const artifactDirectory = join(
           input.temporaryParent,
           completedBuilds[0],
-          "integrated/nanoka",
+          "integrated",
         )
         expect(
           success(runCommand(input, verifyCommand, [artifactDirectory]))
@@ -285,7 +285,7 @@ describe("offline agent package commands", () => {
       )
       expect(dirname(receipt.buildDirectory)).toBe(input.temporaryParent)
       expect(receipt.artifactDirectory).toBe(
-        join(receipt.buildDirectory, "integrated/nanoka"),
+        join(receipt.buildDirectory, "integrated"),
       )
       expect(receipt.maintenanceReportPath).toBe(
         join(receipt.buildDirectory, "maintenance.json"),
@@ -450,10 +450,9 @@ describe("offline agent package commands", () => {
     { timeout: 30_000 },
     async () => {
       const input = await fixture()
-      await writeJson(
-        join(input.temporaryParent, "integrated/nanoka/keep.json"),
-        { existing: true },
-      )
+      await writeJson(join(input.temporaryParent, "integrated/keep.json"), {
+        existing: true,
+      })
       const receipt = build(input)
       const before = await directoryBytes(input.temporaryParent)
       const directories = await readdir(input.temporaryParent)
@@ -588,7 +587,7 @@ describe("offline agent package commands", () => {
 
 it("current commands keep committed data when actual stdout pipes close", async () => {
   const input = await fixture()
-  const target = join(input.root, "integrated", "nanoka")
+  const target = join(input.root, "integrated")
   const args = [input.rawRoot, input.version, target]
   for (const command of [
     "update:nanoka:agents",

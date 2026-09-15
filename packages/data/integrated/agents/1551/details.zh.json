@@ -1,0 +1,1608 @@
+{
+  "camp": {
+    "15": "法厄同"
+  },
+  "elementType": {
+    "205": "以太"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "暴击伤害"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "以太伤害加成"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1551,
+  "locale": "zh",
+  "name": "佩洛伊斯",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1551017", "1551018", "1551019", "1551020", "1551021"],
+      "basic": [
+        "1551001",
+        "1551002",
+        "1551003",
+        "1551004",
+        "1551005",
+        "1551006",
+        "1551007"
+      ],
+      "chain": ["1551012", "1551013", "1551014", "1551015", "1551016"],
+      "dodge": ["1551010", "1551011"],
+      "special": ["1551008", "1551009", "1551022"]
+    },
+    "parameterRowsById": {
+      "1551001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/3"
+      ],
+      "1551002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1551003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1551004": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1551005": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1551006": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1551007": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1551008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1551009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1551010": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1551011": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1551012": [
+        "/skill/chain/description/5/param/0",
+        "/skill/chain/description/5/param/1"
+      ],
+      "1551013": [
+        "/skill/chain/description/8/param/0",
+        "/skill/chain/description/8/param/1"
+      ],
+      "1551014": [
+        "/skill/chain/description/7/param/0",
+        "/skill/chain/description/7/param/1"
+      ],
+      "1551015": [
+        "/skill/chain/description/6/param/0",
+        "/skill/chain/description/6/param/1"
+      ],
+      "1551016": [
+        "/skill/chain/description/9/param/0",
+        "/skill/chain/description/9/param/1"
+      ],
+      "1551017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1551018": ["/skill/assist/description/4/param/0"],
+      "1551019": ["/skill/assist/description/4/param/1"],
+      "1551020": ["/skill/assist/description/4/param/2"],
+      "1551021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1551022": ["/skill/special/description/5/param/0"]
+    }
+  },
+  "partnerInfo": {},
+  "passive": {
+    "level": {
+      "1551501": {
+        "desc": [
+          "进入战场时，佩洛伊斯获得30点<Term:1000018></Term>，在勘域模式中此效果180秒内最多触发一次，且不同攻击命中敌人时回复一定<color=#FFFFFF>[日珥]</color>，处于接战状态下，每秒回复0.5点<color=#FFFFFF>[日珥]</color>，最多获得60点；\n佩洛伊斯发动不同[终结技]时，分别可获得如下效果：\n上分支-[终结技：万军诛绝]：获得30点[日珥]，并获得<Term:1000019></Term>状态，[阳炎]状态下，佩洛伊斯发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升40%，[日珥]大于等于30点时，[普通攻击：天光]的第四段攻击期间长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击，持续21秒，重复触发时刷新持续时间；\n下分支-[终结技：凯旋坦途]：获得<Term:1000020></Term>状态，[耀斑]状态下，能量获得效率提升15%，造成的伤害提升<color=#2BAD00>20%</color>，发动[强化特殊技]触发完美格挡时回复10点[日珥]，持续200秒，重复触发时刷新持续时间；\n左分支-[终结技：无拘剑势]：重击命中[浸染]状态下的敌人时，额外造成等同于<color=#2BAD00>450%</color>攻击力的伤害；\n右分支-[终结技：永陷幽囚]：重击命中失衡敌人触发<Term:1000021></Term>效果，额外造成等同于<color=#2BAD00>1125%</color>攻击力的伤害，招式发动时，使所有处于失衡状态的敌人失衡持续时间提升3秒，终结一击命中时敌人失衡结束。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n佩洛伊斯的暴击伤害提升40%；\n发动[连携技]时回复自身300点<color=#FFFFFF>[喧响值]</color>。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：煊赫车辇", "额外能力：辉煌军势"],
+        "potential": []
+      },
+      "1551502": {
+        "desc": [
+          "进入战场时，佩洛伊斯获得30点<Term:1000018></Term>，在勘域模式中此效果180秒内最多触发一次，且不同攻击命中敌人时回复一定<color=#FFFFFF>[日珥]</color>，处于接战状态下，每秒回复0.5点<color=#FFFFFF>[日珥]</color>，最多获得60点；\n佩洛伊斯发动不同[终结技]时，分别可获得如下效果：\n上分支-[终结技：万军诛绝]：获得30点[日珥]，并获得<Term:1000019></Term>状态，[阳炎]状态下，佩洛伊斯发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升40%，[日珥]大于等于30点时，[普通攻击：天光]的第四段攻击期间长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击，持续21秒，重复触发时刷新持续时间；\n下分支-[终结技：凯旋坦途]：获得<Term:1000020></Term>状态，[耀斑]状态下，能量获得效率提升15%，造成的伤害提升<color=#2BAD00>23.4%</color>，发动[强化特殊技]触发完美格挡时回复10点[日珥]，持续200秒，重复触发时刷新持续时间；\n左分支-[终结技：无拘剑势]：重击命中[浸染]状态下的敌人时，额外造成等同于<color=#2BAD00>525%</color>攻击力的伤害；\n右分支-[终结技：永陷幽囚]：重击命中失衡敌人触发<Term:1000021></Term>效果，额外造成等同于<color=#2BAD00>1312%</color>攻击力的伤害，招式发动时，使所有处于失衡状态的敌人失衡持续时间提升3秒，终结一击命中时敌人失衡结束。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n佩洛伊斯的暴击伤害提升40%；\n发动[连携技]时回复自身300点<color=#FFFFFF>[喧响值]</color>。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：煊赫车辇", "额外能力：辉煌军势"],
+        "potential": []
+      },
+      "1551503": {
+        "desc": [
+          "进入战场时，佩洛伊斯获得30点<Term:1000018></Term>，在勘域模式中此效果180秒内最多触发一次，且不同攻击命中敌人时回复一定<color=#FFFFFF>[日珥]</color>，处于接战状态下，每秒回复0.5点<color=#FFFFFF>[日珥]</color>，最多获得60点；\n佩洛伊斯发动不同[终结技]时，分别可获得如下效果：\n上分支-[终结技：万军诛绝]：获得30点[日珥]，并获得<Term:1000019></Term>状态，[阳炎]状态下，佩洛伊斯发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升40%，[日珥]大于等于30点时，[普通攻击：天光]的第四段攻击期间长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击，持续21秒，重复触发时刷新持续时间；\n下分支-[终结技：凯旋坦途]：获得<Term:1000020></Term>状态，[耀斑]状态下，能量获得效率提升15%，造成的伤害提升<color=#2BAD00>26.8%</color>，发动[强化特殊技]触发完美格挡时回复10点[日珥]，持续200秒，重复触发时刷新持续时间；\n左分支-[终结技：无拘剑势]：重击命中[浸染]状态下的敌人时，额外造成等同于<color=#2BAD00>600%</color>攻击力的伤害；\n右分支-[终结技：永陷幽囚]：重击命中失衡敌人触发<Term:1000021></Term>效果，额外造成等同于<color=#2BAD00>1499%</color>攻击力的伤害，招式发动时，使所有处于失衡状态的敌人失衡持续时间提升3秒，终结一击命中时敌人失衡结束。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n佩洛伊斯的暴击伤害提升40%；\n发动[连携技]时回复自身300点<color=#FFFFFF>[喧响值]</color>。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：煊赫车辇", "额外能力：辉煌军势"],
+        "potential": []
+      },
+      "1551504": {
+        "desc": [
+          "进入战场时，佩洛伊斯获得30点<Term:1000018></Term>，在勘域模式中此效果180秒内最多触发一次，且不同攻击命中敌人时回复一定<color=#FFFFFF>[日珥]</color>，处于接战状态下，每秒回复0.5点<color=#FFFFFF>[日珥]</color>，最多获得60点；\n佩洛伊斯发动不同[终结技]时，分别可获得如下效果：\n上分支-[终结技：万军诛绝]：获得30点[日珥]，并获得<Term:1000019></Term>状态，[阳炎]状态下，佩洛伊斯发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升40%，[日珥]大于等于30点时，[普通攻击：天光]的第四段攻击期间长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击，持续21秒，重复触发时刷新持续时间；\n下分支-[终结技：凯旋坦途]：获得<Term:1000020></Term>状态，[耀斑]状态下，能量获得效率提升15%，造成的伤害提升<color=#2BAD00>30.2%</color>，发动[强化特殊技]触发完美格挡时回复10点[日珥]，持续200秒，重复触发时刷新持续时间；\n左分支-[终结技：无拘剑势]：重击命中[浸染]状态下的敌人时，额外造成等同于<color=#2BAD00>675%</color>攻击力的伤害；\n右分支-[终结技：永陷幽囚]：重击命中失衡敌人触发<Term:1000021></Term>效果，额外造成等同于<color=#2BAD00>1686%</color>攻击力的伤害，招式发动时，使所有处于失衡状态的敌人失衡持续时间提升3秒，终结一击命中时敌人失衡结束。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n佩洛伊斯的暴击伤害提升40%；\n发动[连携技]时回复自身300点<color=#FFFFFF>[喧响值]</color>。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：煊赫车辇", "额外能力：辉煌军势"],
+        "potential": []
+      },
+      "1551505": {
+        "desc": [
+          "进入战场时，佩洛伊斯获得30点<Term:1000018></Term>，在勘域模式中此效果180秒内最多触发一次，且不同攻击命中敌人时回复一定<color=#FFFFFF>[日珥]</color>，处于接战状态下，每秒回复0.5点<color=#FFFFFF>[日珥]</color>，最多获得60点；\n佩洛伊斯发动不同[终结技]时，分别可获得如下效果：\n上分支-[终结技：万军诛绝]：获得30点[日珥]，并获得<Term:1000019></Term>状态，[阳炎]状态下，佩洛伊斯发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升40%，[日珥]大于等于30点时，[普通攻击：天光]的第四段攻击期间长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击，持续21秒，重复触发时刷新持续时间；\n下分支-[终结技：凯旋坦途]：获得<Term:1000020></Term>状态，[耀斑]状态下，能量获得效率提升15%，造成的伤害提升<color=#2BAD00>33.6%</color>，发动[强化特殊技]触发完美格挡时回复10点[日珥]，持续200秒，重复触发时刷新持续时间；\n左分支-[终结技：无拘剑势]：重击命中[浸染]状态下的敌人时，额外造成等同于<color=#2BAD00>750%</color>攻击力的伤害；\n右分支-[终结技：永陷幽囚]：重击命中失衡敌人触发<Term:1000021></Term>效果，额外造成等同于<color=#2BAD00>1873%</color>攻击力的伤害，招式发动时，使所有处于失衡状态的敌人失衡持续时间提升3秒，终结一击命中时敌人失衡结束。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n佩洛伊斯的暴击伤害提升40%；\n发动[连携技]时回复自身300点<color=#FFFFFF>[喧响值]</color>。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：煊赫车辇", "额外能力：辉煌军势"],
+        "potential": []
+      },
+      "1551506": {
+        "desc": [
+          "进入战场时，佩洛伊斯获得30点<Term:1000018></Term>，在勘域模式中此效果180秒内最多触发一次，且不同攻击命中敌人时回复一定<color=#FFFFFF>[日珥]</color>，处于接战状态下，每秒回复0.5点<color=#FFFFFF>[日珥]</color>，最多获得60点；\n佩洛伊斯发动不同[终结技]时，分别可获得如下效果：\n上分支-[终结技：万军诛绝]：获得30点[日珥]，并获得<Term:1000019></Term>状态，[阳炎]状态下，佩洛伊斯发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升40%，[日珥]大于等于30点时，[普通攻击：天光]的第四段攻击期间长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击，持续21秒，重复触发时刷新持续时间；\n下分支-[终结技：凯旋坦途]：获得<Term:1000020></Term>状态，[耀斑]状态下，能量获得效率提升15%，造成的伤害提升<color=#2BAD00>37%</color>，发动[强化特殊技]触发完美格挡时回复10点[日珥]，持续200秒，重复触发时刷新持续时间；\n左分支-[终结技：无拘剑势]：重击命中[浸染]状态下的敌人时，额外造成等同于<color=#2BAD00>825%</color>攻击力的伤害；\n右分支-[终结技：永陷幽囚]：重击命中失衡敌人触发<Term:1000021></Term>效果，额外造成等同于<color=#2BAD00>2060%</color>攻击力的伤害，招式发动时，使所有处于失衡状态的敌人失衡持续时间提升3秒，终结一击命中时敌人失衡结束。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n佩洛伊斯的暴击伤害提升40%；\n发动[连携技]时回复自身300点<color=#FFFFFF>[喧响值]</color>。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：煊赫车辇", "额外能力：辉煌军势"],
+        "potential": []
+      },
+      "1551507": {
+        "desc": [
+          "进入战场时，佩洛伊斯获得30点<Term:1000018></Term>，在勘域模式中此效果180秒内最多触发一次，且不同攻击命中敌人时回复一定<color=#FFFFFF>[日珥]</color>，处于接战状态下，每秒回复0.5点<color=#FFFFFF>[日珥]</color>，最多获得60点；\n佩洛伊斯发动不同[终结技]时，分别可获得如下效果：\n上分支-[终结技：万军诛绝]：获得30点[日珥]，并获得<Term:1000019></Term>状态，[阳炎]状态下，佩洛伊斯发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升40%，[日珥]大于等于30点时，[普通攻击：天光]的第四段攻击期间长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击，持续21秒，重复触发时刷新持续时间；\n下分支-[终结技：凯旋坦途]：获得<Term:1000020></Term>状态，[耀斑]状态下，能量获得效率提升15%，造成的伤害提升<color=#2BAD00>40%</color>，发动[强化特殊技]触发完美格挡时回复10点[日珥]，持续200秒，重复触发时刷新持续时间；\n左分支-[终结技：无拘剑势]：重击命中[浸染]状态下的敌人时，额外造成等同于<color=#2BAD00>900%</color>攻击力的伤害；\n右分支-[终结技：永陷幽囚]：重击命中失衡敌人触发<Term:1000021></Term>效果，额外造成等同于<color=#2BAD00>2250%</color>攻击力的伤害，招式发动时，使所有处于失衡状态的敌人失衡持续时间提升3秒，终结一击命中时敌人失衡结束。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n佩洛伊斯的暴击伤害提升40%；\n发动[连携技]时回复自身300点<color=#FFFFFF>[喧响值]</color>。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：煊赫车辇", "额外能力：辉煌军势"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对目标发动连续攻击，造成<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：黄昏禁卫",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：悍兽铁御",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n向前方发动突刺攻击，造成<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：重睹天日",
+          "potential": []
+        },
+        {
+          "name": "快速支援：黄昏禁卫",
+          "param": [
+            {
+              "desc": "{Skill:1551017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551017": {
+                  "attackData": [12674],
+                  "attributeInfliction": 3168,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 3169,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9920,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3490,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551017": {
+                  "attackData": [12674],
+                  "attributeInfliction": 3168,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 3169,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9920,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3490,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：悍兽铁御",
+          "param": [
+            {
+              "desc": "{Skill:1551018, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1551018": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551019, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1551019": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551020, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1551020": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：重睹天日",
+          "param": [
+            {
+              "desc": "{Skill:1551021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551021": {
+                  "attackData": [21327],
+                  "attributeInfliction": 24117,
+                  "damagePercentage": 33860,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 10664,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3080,
+                  "main": 33860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24420,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551021": {
+                  "attackData": [21327],
+                  "attributeInfliction": 24117,
+                  "damagePercentage": 33860,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 10664,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 24420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24420,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多三段的攻击，造成<color=#FE437E>以太伤害</color>。",
+          "name": "普通攻击：余晖",
+          "potential": []
+        },
+        {
+          "desc": "<Term:1000018></Term>大于等于30点时，长按 <IconMap:Icon_Normal> 发动：\n向前方进行至多四段的攻击，造成大量<color=#FE437E>以太伤害</color>；\n发动第三段攻击时若将其他角色换入前场，佩洛伊斯将在后场自动释放第四段攻击；\n每段攻击命中敌人时均会消耗一定[日珥]；\n招式第三段和第四段期间拥有无敌效果。",
+          "name": "普通攻击：天光",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：余晖",
+          "param": [
+            {
+              "desc": "{Skill:1551001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1551001": {
+                  "attackData": [14001],
+                  "attributeInfliction": 2800,
+                  "damagePercentage": 4560,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2801,
+                  "feverRecovery": 77275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 4560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3090,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1551002": {
+                  "attackData": [15321],
+                  "attributeInfliction": 3797,
+                  "damagePercentage": 6410,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 3798,
+                  "feverRecovery": 104500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 6410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4180,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1551003": {
+                  "attackData": [62014],
+                  "attributeInfliction": 16236,
+                  "damagePercentage": 27630,
+                  "damagePercentageGrowth": 2520,
+                  "etherPurify": 16237,
+                  "feverRecovery": 446600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2520,
+                  "main": 27630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 50830,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17860,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1551001": {
+                  "attackData": [14001],
+                  "attributeInfliction": 2800,
+                  "damagePercentage": 4560,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2801,
+                  "feverRecovery": 77275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3090,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1551002": {
+                  "attackData": [15321],
+                  "attributeInfliction": 3797,
+                  "damagePercentage": 6410,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 3798,
+                  "feverRecovery": 104500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4180,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1551003": {
+                  "attackData": [62014],
+                  "attributeInfliction": 16236,
+                  "damagePercentage": 27630,
+                  "damagePercentageGrowth": 2520,
+                  "etherPurify": 16237,
+                  "feverRecovery": 446600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 50830,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17860,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：天光",
+          "param": [
+            {
+              "desc": "{Skill:1551004, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1551004": {
+                  "attackData": [0, 15007],
+                  "attributeInfliction": 4747,
+                  "damagePercentage": 10700,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 5064,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551005, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1551005": {
+                  "attackData": [0, 20459],
+                  "attributeInfliction": 7860,
+                  "damagePercentage": 14380,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 8286,
+                  "feverRecovery": 216425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1310,
+                  "main": 14380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8650,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551006, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1551006": {
+                  "attackData": [0, 146107],
+                  "attributeInfliction": 16996,
+                  "damagePercentage": 54900,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 16256,
+                  "feverRecovery": 467500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5000,
+                  "main": 54900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551007, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1551007": {
+                  "attackData": [0, 118234],
+                  "attributeInfliction": 12561,
+                  "damagePercentage": 64100,
+                  "damagePercentageGrowth": 5830,
+                  "etherPurify": 12562,
+                  "feverRecovery": 345675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5830,
+                  "main": 64100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13820,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551004, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1551004": {
+                  "attackData": [0, 15007],
+                  "attributeInfliction": 4747,
+                  "damagePercentage": 10700,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 5064,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7440,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551005, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1551005": {
+                  "attackData": [0, 20459],
+                  "attributeInfliction": 7860,
+                  "damagePercentage": 14380,
+                  "damagePercentageGrowth": 1310,
+                  "etherPurify": 8286,
+                  "feverRecovery": 216425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 8650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12310,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8650,
+                  "stunRatioGrowth": 400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551006, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1551006": {
+                  "attackData": [0, 146107],
+                  "attributeInfliction": 16996,
+                  "damagePercentage": 54900,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 16256,
+                  "feverRecovery": 467500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 18700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551007, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1551007": {
+                  "attackData": [0, 118234],
+                  "attributeInfliction": 12561,
+                  "damagePercentage": 64100,
+                  "damagePercentageGrowth": 5830,
+                  "etherPurify": 12562,
+                  "feverRecovery": 345675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13820,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n配合法厄同协同攻击，造成大量<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，点按或长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：行军仪仗",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[特]</color>时，点按 <IconMap:Icon_UltimateReady> 后，选择向上分支发动：\n蓄力后发动下劈攻击，造成大量<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，点按或长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：万军诛绝",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[特]</color>时，点按 <IconMap:Icon_UltimateReady> 后，选择向下分支发动：\n向周身发动能量冲击，造成大量<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：凯旋坦途",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[特]</color>时，点按 <IconMap:Icon_UltimateReady> 后，选择向左分支发动：\n向前方发动连续攻击，造成大量<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：无拘剑势",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[特]</color>时，点按 <IconMap:Icon_UltimateReady> 后，选择向右分支发动：\n向前方凝聚能量随后进行终结一击，造成大量<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：永陷幽囚",
+          "potential": []
+        },
+        {
+          "name": "连携技：行军仪仗",
+          "param": [
+            {
+              "desc": "{Skill:1551012, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551012": {
+                  "attackData": [0],
+                  "attributeInfliction": 46453,
+                  "damagePercentage": 105830,
+                  "damagePercentageGrowth": 9630,
+                  "etherPurify": 26504,
+                  "feverRecovery": 2557775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9630,
+                  "main": 105830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29160,
+                  "stunRatioGrowth": 1330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551012, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551012": {
+                  "attackData": [0],
+                  "attributeInfliction": 46453,
+                  "damagePercentage": 105830,
+                  "damagePercentageGrowth": 9630,
+                  "etherPurify": 26504,
+                  "feverRecovery": 2557775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1330,
+                  "main": 29160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29160,
+                  "stunRatioGrowth": 1330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：万军诛绝",
+          "param": [
+            {
+              "desc": "{Skill:1551015, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551015": {
+                  "attackData": [0],
+                  "attributeInfliction": 24329,
+                  "damagePercentage": 86620,
+                  "damagePercentageGrowth": 7880,
+                  "etherPurify": 59330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7880,
+                  "main": 86620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26770,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551015, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551015": {
+                  "attackData": [0],
+                  "attributeInfliction": 24329,
+                  "damagePercentage": 86620,
+                  "damagePercentageGrowth": 7880,
+                  "etherPurify": 59330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1220,
+                  "main": 26770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26770,
+                  "stunRatioGrowth": 1220
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：凯旋坦途",
+          "param": [
+            {
+              "desc": "{Skill:1551014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551014": {
+                  "attackData": [0],
+                  "attributeInfliction": 11503,
+                  "damagePercentage": 53570,
+                  "damagePercentageGrowth": 4870,
+                  "etherPurify": 11504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4870,
+                  "main": 53570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12660,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551014": {
+                  "attackData": [0],
+                  "attributeInfliction": 11503,
+                  "damagePercentage": 53570,
+                  "damagePercentageGrowth": 4870,
+                  "etherPurify": 11504,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 12660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12660,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：无拘剑势",
+          "param": [
+            {
+              "desc": "{Skill:1551013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551013": {
+                  "attackData": [0],
+                  "attributeInfliction": 30663,
+                  "damagePercentage": 97330,
+                  "damagePercentageGrowth": 8850,
+                  "etherPurify": 65664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 8850,
+                  "main": 97330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33730,
+                  "stunRatioGrowth": 1540
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551013": {
+                  "attackData": [0],
+                  "attributeInfliction": 30663,
+                  "damagePercentage": 97330,
+                  "damagePercentageGrowth": 8850,
+                  "etherPurify": 65664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1540,
+                  "main": 33730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33730,
+                  "stunRatioGrowth": 1540
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：永陷幽囚",
+          "param": [
+            {
+              "desc": "{Skill:1551016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551016": {
+                  "attackData": [0],
+                  "attributeInfliction": 22836,
+                  "damagePercentage": 99700,
+                  "damagePercentageGrowth": 9070,
+                  "etherPurify": 57837,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9070,
+                  "main": 99700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25130,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551016": {
+                  "attackData": [0],
+                  "attributeInfliction": 22836,
+                  "damagePercentage": 99700,
+                  "damagePercentageGrowth": 9070,
+                  "etherPurify": 57837,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 25130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25130,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：薄暮",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前进行快速斩击，造成<color=#FE437E>以太伤害</color>。",
+          "name": "冲刺攻击：旭日",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n向前进行回旋斩击，造成<color=#FE437E>以太伤害</color>；\n招式发动后，若<Term:1000018></Term>大于等于30点，长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：朝晖",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：旭日",
+          "param": [
+            {
+              "desc": "{Skill:1551010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551010": {
+                  "attackData": [14661],
+                  "attributeInfliction": 3665,
+                  "damagePercentage": 9530,
+                  "damagePercentageGrowth": 870,
+                  "etherPurify": 3666,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 870,
+                  "main": 9530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11480,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551010": {
+                  "attackData": [14661],
+                  "attributeInfliction": 3665,
+                  "damagePercentage": 9530,
+                  "damagePercentageGrowth": 870,
+                  "etherPurify": 3666,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11480,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：朝晖",
+          "param": [
+            {
+              "desc": "{Skill:1551011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551011": {
+                  "attackData": [23347],
+                  "attributeInfliction": 5836,
+                  "damagePercentage": 22870,
+                  "damagePercentageGrowth": 2080,
+                  "etherPurify": 20837,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2080,
+                  "main": 22870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17430,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551011": {
+                  "attackData": [23347],
+                  "attributeInfliction": 5836,
+                  "damagePercentage": 22870,
+                  "damagePercentageGrowth": 2080,
+                  "etherPurify": 20837,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 800,
+                  "main": 17430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17430,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n发动突进攻击，造成<color=#FE437E>以太伤害</color>。",
+          "name": "特殊技：残照",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n快速突进并发动连续多段攻击，造成大量<color=#FE437E>以太伤害</color>；\n突进期间受到敌人攻击时，可触发完美格挡效果，免疫该次伤害，提高招式的打断等级至与重招架支援一致；\n招式发动后，若<Term:1000018></Term>大于等于30点，长按 <IconMap:Icon_Normal> 可直接衔接[普通攻击：天光]的第三段攻击；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：日华",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技：日华]</color>时，法厄同会进行协助攻击，造成<color=#FE437E>以太伤害</color>，该效果每2.5秒最多触发一次，发动<color=#FFFFFF>[终结技]</color>时必定触发。",
+          "name": "特殊技：强袭训令",
+          "potential": []
+        },
+        {
+          "name": "特殊技：残照",
+          "param": [
+            {
+              "desc": "{Skill:1551008, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551008": {
+                  "attackData": [0],
+                  "attributeInfliction": 4001,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4002,
+                  "feverRecovery": 220275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4410,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551008, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551008": {
+                  "attackData": [0],
+                  "attributeInfliction": 4001,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4002,
+                  "feverRecovery": 220275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4410,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：日华",
+          "param": [
+            {
+              "desc": "{Skill:1551009, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551009": {
+                  "attackData": [49987],
+                  "attributeInfliction": 43064,
+                  "damagePercentage": 73740,
+                  "damagePercentageGrowth": 6710,
+                  "etherPurify": 17497,
+                  "feverRecovery": 1485825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6710,
+                  "main": 73740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43360,
+                  "stunRatioGrowth": 1980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1551009, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1551009": {
+                  "attackData": [49987],
+                  "attributeInfliction": 43064,
+                  "damagePercentage": 73740,
+                  "damagePercentageGrowth": 6710,
+                  "etherPurify": 17497,
+                  "feverRecovery": 1485825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1980,
+                  "main": 43360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43360,
+                  "stunRatioGrowth": 1980
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：强袭训令",
+          "param": [
+            {
+              "desc": "{Skill:1551022, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1551022": {
+                  "attackData": [0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8280,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 8280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "",
+          "param": [],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1551001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：余晖"
+    },
+    "1551002": {
+      "desc": "<IconMap:Icon_Normal>（长按）",
+      "name": "普通攻击：天光"
+    },
+    "1551003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：残照"
+    },
+    "1551004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：日华"
+    },
+    "1551005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：旭日"
+    },
+    "1551006": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：破晓"
+    },
+    "1551007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：行军仪仗"
+    },
+    "1551008": {
+      "desc": "<IconMap:Icon_UltimateReady>（选择上分支）",
+      "name": "终结技：万军诛绝"
+    },
+    "1551009": {
+      "desc": "<IconMap:Icon_UltimateReady>（选择下分支）",
+      "name": "终结技：凯旋坦途"
+    },
+    "1551010": {
+      "desc": "<IconMap:Icon_UltimateReady>（选择左分支）",
+      "name": "终结技：无拘剑势"
+    },
+    "1551011": {
+      "desc": "<IconMap:Icon_UltimateReady>（选择右分支）",
+      "name": "终结技：永陷幽囚"
+    },
+    "1551012": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：黄昏禁卫"
+    },
+    "1551013": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：悍兽铁御"
+    },
+    "1551014": {
+      "desc": "<IconMap:Icon_Pyroisl>（发动招架支援后）",
+      "name": "支援突击：重睹天日"
+    }
+  },
+  "skin": {
+    "3115510": {
+      "desc": "在山谷里熄灭的阳炎，终会从大海中新生。蹂躏命运的恶兽，也将成为开辟前路的战车。",
+      "name": "佩洛伊斯·黎明铁卫"
+    }
+  },
+  "specialElementType": {},
+  "strategy": {},
+  "talent": {
+    "1": {
+      "desc": "进入战场时，佩洛伊斯获得1000点<color=#FFFFFF>[喧响值]</color>，在勘域模式中此效果180秒内最多触发一次，暴击率提升8%。",
+      "desc2": "幽夜是黝黯的潮水，沉沦文明的原野，\n痴妄的神祇锻造灼亮的金矛，欲刺破深渊的喉管。",
+      "name": "黄昏旧章"
+    },
+    "2": {
+      "desc": "发动[终结技：凯旋坦途]时回复1500点<color=#FFFFFF>[喧响值]</color>，该效果180秒最多触发一次；佩洛伊斯的喧响值上限提升1000点。",
+      "desc2": "所有被遗忘的故事与呜咽，都沉入一双眼睛的旱海；\n等待一驾烈焰灼灼的车辇，碾过无光的渊面。",
+      "name": "煜焰铁骑"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "车舆煌煌，焦土茫茫，\n天真稚子的躯壳中，却孕育燔荡生灵的暴君。",
+      "name": "命定枷锁"
+    },
+    "4": {
+      "desc": "佩洛伊斯发动<color=#FFFFFF>[强化特殊技：日华]</color>触发完美格挡时，立刻获得等同于自身8%生命值上限的护盾，持续10秒，重复触发刷新持续时间，持有该护盾时，佩洛伊斯造成的失衡值提升10%。",
+      "desc2": "或许启明的灯火总要泅渡午夜，或许英雄的旅途总要踏过荆棘。\n于是弃儿漫长地将自己放逐，直到孽火将仅剩的残躯焚尽。",
+      "name": "焚昼孽火"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "暴君的冠冕化作缰绳，银白的铁卫与骏马，\n拱卫永远燃烧的稚子，跨过数字的牢笼与黑夜的虚言。",
+      "name": "稚子禁卫"
+    },
+    "6": {
+      "desc": "影画效果未揭示",
+      "desc2": "黄昏猩红若血，黎明温柔如旧。\n晨星已从天际升起，抹去童年的泪痕，\n它的轻叹如同诗句的尾韵——\n长夜无非朝阳的序幕。",
+      "name": "拂晓晨星"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

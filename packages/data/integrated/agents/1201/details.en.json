@@ -1,0 +1,1998 @@
+{
+  "camp": {
+    "6": "Hollow Special Operations Section 6"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "103": "Pierce"
+  },
+  "id": 1201,
+  "locale": "en",
+  "name": "Harumasa",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1201015", "1201016", "1201017", "1201018", "1201019"],
+      "basic": [
+        "1201001",
+        "1201002",
+        "1201003",
+        "1201004",
+        "1201005",
+        "1201006",
+        "1201007",
+        "1201008"
+      ],
+      "chain": ["1201013", "1201014", "1201024"],
+      "dodge": [
+        "1201011",
+        "1201012",
+        "1201020",
+        "1201021",
+        "1201022",
+        "1201025"
+      ],
+      "special": ["1201009", "1201010", "1201023"]
+    },
+    "parameterRowsById": {
+      "1201001": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/5"
+      ],
+      "1201002": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/6"
+      ],
+      "1201003": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/7"
+      ],
+      "1201004": [
+        "/skill/basic/description/4/param/3",
+        "/skill/basic/description/4/param/8"
+      ],
+      "1201005": [
+        "/skill/basic/description/4/param/4",
+        "/skill/basic/description/4/param/9"
+      ],
+      "1201006": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1201007": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/1"
+      ],
+      "1201008": [
+        "/skill/basic/description/7/param/0",
+        "/skill/basic/description/7/param/1"
+      ],
+      "1201009": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1201010": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1201011": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1201012": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1201013": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1201014": [
+        "/skill/chain/description/4/param/0",
+        "/skill/chain/description/4/param/1"
+      ],
+      "1201015": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1201016": ["/skill/assist/description/4/param/0"],
+      "1201017": ["/skill/assist/description/4/param/1"],
+      "1201018": ["/skill/assist/description/4/param/2"],
+      "1201019": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1201020": [
+        "/skill/dodge/description/7/param/0",
+        "/skill/dodge/description/7/param/3"
+      ],
+      "1201021": [
+        "/skill/dodge/description/7/param/1",
+        "/skill/dodge/description/7/param/4"
+      ],
+      "1201022": [
+        "/skill/dodge/description/7/param/2",
+        "/skill/dodge/description/7/param/5"
+      ],
+      "1201023": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1201024": [
+        "/skill/chain/description/5/param/0",
+        "/skill/chain/description/5/param/1"
+      ],
+      "1201025": ["/skill/dodge/description/8/param/0"]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "JUL 19",
+    "fullName": "Asaba Harumasa",
+    "gender": "Male",
+    "impressionF": "Harumasa sure is good at slacking off... Hey Wise, maybe we should learn from him.",
+    "impressionM": "Harumasa can only slack off because he manages to complete his work with efficiency. Let's try mastering that skill first...",
+    "impressions": [
+      "Impressions of Harumasa:\n · Even now, we still don't know what Harumasa does when he's on leave...",
+      " · Perhaps flowers can bloom in wounds.",
+      " · There are always people who look to the stars despite their hardships."
+    ],
+    "profileDesc": "Asaba Harumasa, a member of Hollow Special Operations Section 6.\nPossessing exceptional Ether aptitude since he was young and being dubbed a prodigy, he entered HSO after graduating with outstanding merit.\nWas originally a member of a certain ace division within HSO, but later left due to various reasons, joining Miyabi's team instead.\n\nHe possesses a carefree and laidback attitude, and his only wish is to achieve acceptable results with minimum effort.\nAfter efficiently taking care of his work to the lowest acceptable standard, he will hurry to use all the remainder of his available time to rest (slack off).\nHe claims he uses a bow to better slack off, as it effectively lowers the amount of running he has to do.\n\nAsaba Harumasa has poor health, and over-exercise sometimes triggers his illness.\nHe often uses this reason to apply for sick leave, though no one knows what he does with this time off. Either way, it's probably not resting.",
+    "stature": "173",
+    "trustLv": {
+      "1": "Asaba Harumasa, a member of Hollow Special Operations Section 6.\nPossessing exceptional Ether aptitude since he was young and being dubbed a prodigy, he entered HSO after graduating with outstanding merit.\nWas originally a member of a certain ace division within HSO, but later left due to various reasons, joining Miyabi's team instead.\n\nHe possesses a carefree and laidback attitude, and his only wish is to achieve acceptable results with minimum effort.\nAfter efficiently taking care of his work to the lowest acceptable standard, he will hurry to use all the remainder of his available time to rest (slack off).\nHe claims he uses a bow to better slack off, as it effectively lowers the amount of running he has to do.\n\nAsaba Harumasa has poor health, and over-exercise sometimes triggers his illness.\nHe often uses this reason to apply for sick leave, though no one knows what he does with this time off. Either way, it's probably not resting.",
+      "2": "",
+      "3": "Asaba Harumasa has a very rare illness, Ether Aptitude Regression Syndrome.\nThis illness causes certain parts of the patient's body to mutate, wrecking their constitution, but also giving them unusually exceptional Ether aptitude.\nIn the late stages of the illness, the patient's body will rapidly deteriorate, losing their Ether aptitude and sensory functions while under immense pain, eventually resulting in death. If the patient's illness worsens in late stages while in a Hollow, they'll quickly be corrupted into an Ethereal.\nThose who suffer from Ether Aptitude Regression Syndrome do not live long. Currently, the longest-lived person with this illness died at the age of 26.\nThere is no known method to completely cure this disease.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Story \"Leisurely Lull: Goldfinch's Escape\" (available after completing Main Story Chapter 5)",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1201501": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by <color=#2BAD00>10.6%</color>, and when Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> triggers a critical hit against an enemy, he gains 1 stack of <color=#FFFFFF>Gleaming Edge</color>, for up to a maximum of 3 stacks per use of the skill and stacking up to 6 times, lasting 5s, repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> by <color=#2BAD00>6%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [0]
+      },
+      "1201502": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by <color=#2BAD00>13%</color>, and when Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> triggers a critical hit against an enemy, he gains 1 stack of <color=#FFFFFF>Gleaming Edge</color>, for up to a maximum of 3 stacks per use of the skill and stacking up to 6 times, lasting 5s, repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> by <color=#2BAD00>7%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [0]
+      },
+      "1201503": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by <color=#2BAD00>15.4%</color>, and when Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> triggers a critical hit against an enemy, he gains 1 stack of <color=#FFFFFF>Gleaming Edge</color>, for up to a maximum of 3 stacks per use of the skill and stacking up to 6 times, lasting 5s, repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> by <color=#2BAD00>8%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [0]
+      },
+      "1201504": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by <color=#2BAD00>17.8%</color>, and when Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> triggers a critical hit against an enemy, he gains 1 stack of <color=#FFFFFF>Gleaming Edge</color>, for up to a maximum of 3 stacks per use of the skill and stacking up to 6 times, lasting 5s, repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> by <color=#2BAD00>9%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [0]
+      },
+      "1201505": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by <color=#2BAD00>20.2%</color>, and when Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> triggers a critical hit against an enemy, he gains 1 stack of <color=#FFFFFF>Gleaming Edge</color>, for up to a maximum of 3 stacks per use of the skill and stacking up to 6 times, lasting 5s, repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> by <color=#2BAD00>10%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [0]
+      },
+      "1201506": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by <color=#2BAD00>22.6%</color>, and when Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> triggers a critical hit against an enemy, he gains 1 stack of <color=#FFFFFF>Gleaming Edge</color>, for up to a maximum of 3 stacks per use of the skill and stacking up to 6 times, lasting 5s, repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> by <color=#2BAD00>11%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [0]
+      },
+      "1201507": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by <color=#2BAD00>25%</color>, and when Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> triggers a critical hit against an enemy, he gains 1 stack of <color=#FFFFFF>Gleaming Edge</color>, for up to a maximum of 3 stacks per use of the skill and stacking up to 6 times, lasting 5s, repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> by <color=#2BAD00>12%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [0]
+      },
+      "1201508": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate increase by <color=#2BAD00>10.6%</color>. When Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>/<color=#FFFFFF>Ultimate</color> triggers a critical hit against an enemy, he gains 1/6 stacks of <color=#FFFFFF>Gleaming Edge</color>. Dash Attack: Hiten no Tsuru - Slash can grant a maximum of 3 stacks per activation, and <color=#FFFFFF>Gleaming Edge</color> can stack up to 6 times, lasting 5s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate by <color=#2BAD00>6%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+      },
+      "1201509": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate increase by <color=#2BAD00>13%</color>. When Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>/<color=#FFFFFF>Ultimate</color> triggers a critical hit against an enemy, he gains 1/6 stacks of <color=#FFFFFF>Gleaming Edge</color>. Dash Attack: Hiten no Tsuru - Slash can grant a maximum of 3 stacks per activation, and <color=#FFFFFF>Gleaming Edge</color> can stack up to 6 times, lasting 5s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate by <color=#2BAD00>7%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+      },
+      "1201510": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate increase by <color=#2BAD00>15.4%</color>. When Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>/<color=#FFFFFF>Ultimate</color> triggers a critical hit against an enemy, he gains 1/6 stacks of <color=#FFFFFF>Gleaming Edge</color>. Dash Attack: Hiten no Tsuru - Slash can grant a maximum of 3 stacks per activation, and <color=#FFFFFF>Gleaming Edge</color> can stack up to 6 times, lasting 5s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate by <color=#2BAD00>8%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+      },
+      "1201511": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate increase by <color=#2BAD00>17.8%</color>. When Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>/<color=#FFFFFF>Ultimate</color> triggers a critical hit against an enemy, he gains 1/6 stacks of <color=#FFFFFF>Gleaming Edge</color>. Dash Attack: Hiten no Tsuru - Slash can grant a maximum of 3 stacks per activation, and <color=#FFFFFF>Gleaming Edge</color> can stack up to 6 times, lasting 5s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate by <color=#2BAD00>9%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+      },
+      "1201512": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate increase by <color=#2BAD00>20.2%</color>. When Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>/<color=#FFFFFF>Ultimate</color> triggers a critical hit against an enemy, he gains 1/6 stacks of <color=#FFFFFF>Gleaming Edge</color>. Dash Attack: Hiten no Tsuru - Slash can grant a maximum of 3 stacks per activation, and <color=#FFFFFF>Gleaming Edge</color> can stack up to 6 times, lasting 5s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate by <color=#2BAD00>10%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+      },
+      "1201513": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate increase by <color=#2BAD00>22.6%</color>. When Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>/<color=#FFFFFF>Ultimate</color> triggers a critical hit against an enemy, he gains 1/6 stacks of <color=#FFFFFF>Gleaming Edge</color>. Dash Attack: Hiten no Tsuru - Slash can grant a maximum of 3 stacks per activation, and <color=#FFFFFF>Gleaming Edge</color> can stack up to 6 times, lasting 5s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate by <color=#2BAD00>11%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+      },
+      "1201514": {
+        "desc": [
+          "The CRIT Rate of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate increase by <color=#2BAD00>25%</color>. When Harumasa's <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>/<color=#FFFFFF>Ultimate</color> triggers a critical hit against an enemy, he gains 1/6 stacks of <color=#FFFFFF>Gleaming Edge</color>. Dash Attack: Hiten no Tsuru - Slash can grant a maximum of 3 stacks per activation, and <color=#FFFFFF>Gleaming Edge</color> can stack up to 6 times, lasting 5s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Gleaming Edge</color> increases the CRIT DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, Chasing Thunder, and Ultimate by <color=#2BAD00>12%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color> or <color=#FFFFFF>Anomaly</color> character:\nWhen Harumasa's attacks hit Stunned enemies or enemies under Attribute Anomaly, his DMG increases by 40%. When Harumasa's <color=#FFFFFF>Falling Feather</color> hits Stunned enemies or enemies under Attribute Anomaly, it will apply 2 stacks of <color=#FFFFFF>Electro Prison</color> to the target."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Day Break", "Additional Ability: Overclock"],
+        "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+      }
+    }
+  },
+  "potentialDetail": {
+    "120100": {
+      "abilityList": [11201601],
+      "desc": "",
+      "id": 120100,
+      "image": "Harumasa",
+      "level": 1,
+      "levelShowName": "Sure Shot I",
+      "name": "",
+      "potentialMaterials": [
+        {
+          "itemId": 20120,
+          "number": 1
+        }
+      ]
+    },
+    "120101": {
+      "abilityList": [11201601, 11201701],
+      "desc": "When activating an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, increases ATK by <color=#2BAD00>4%</color>. Dash Attack: Hiten no Tsuru - Slash and Chasing Thunder ignore <color=#2BAD00>5%</color> of the target's <color=#2EB6FF>Electric RES</color> for 12s. Repeated triggers reset the duration.\nExtends the duration of Core Passive's Gleaming Edge to 10s.",
+      "id": 120101,
+      "image": "Harumasa",
+      "level": 2,
+      "levelShowName": "Sure Shot II",
+      "name": "Potential Awakening: Focus",
+      "potentialMaterials": [
+        {
+          "itemId": 20120,
+          "number": 1
+        }
+      ]
+    },
+    "120102": {
+      "abilityList": [11201601, 11201702],
+      "desc": "When activating an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, increases ATK by <color=#2BAD00>6%</color>. Dash Attack: Hiten no Tsuru - Slash and Chasing Thunder ignore <color=#2BAD00>7.5%</color> of the target's <color=#2EB6FF>Electric RES</color> for 12s. Repeated triggers reset the duration.\nExtends the duration of Core Passive's Gleaming Edge to 10s.",
+      "id": 120102,
+      "image": "Harumasa",
+      "level": 3,
+      "levelShowName": "Sure Shot III",
+      "name": "Potential Awakening: Focus",
+      "potentialMaterials": [
+        {
+          "itemId": 20120,
+          "number": 1
+        }
+      ]
+    },
+    "120103": {
+      "abilityList": [11201601, 11201703],
+      "desc": "When activating an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, increases ATK by <color=#2BAD00>8%</color>. Dash Attack: Hiten no Tsuru - Slash and Chasing Thunder ignore <color=#2BAD00>10%</color> of the target's <color=#2EB6FF>Electric RES</color> for 12s. Repeated triggers reset the duration.\nExtends the duration of Core Passive's Gleaming Edge to 10s.",
+      "id": 120103,
+      "image": "Harumasa",
+      "level": 4,
+      "levelShowName": "Sure Shot IV",
+      "name": "Potential Awakening: Focus",
+      "potentialMaterials": [
+        {
+          "itemId": 20120,
+          "number": 1
+        }
+      ]
+    },
+    "120104": {
+      "abilityList": [11201601, 11201704],
+      "desc": "When activating an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, increases ATK by <color=#2BAD00>10%</color>. Dash Attack: Hiten no Tsuru - Slash and Chasing Thunder ignore <color=#2BAD00>12.5%</color> of the target's <color=#2EB6FF>Electric RES</color> for 12s. Repeated triggers reset the duration.\nExtends the duration of Core Passive's Gleaming Edge to 10s.",
+      "id": 120104,
+      "image": "Harumasa",
+      "level": 5,
+      "levelShowName": "Sure Shot V",
+      "name": "Potential Awakening: Focus",
+      "potentialMaterials": [
+        {
+          "itemId": 20120,
+          "number": 1
+        }
+      ]
+    },
+    "120105": {
+      "abilityList": [11201601, 11201705],
+      "desc": "When activating an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, increases ATK by <color=#2BAD00>12%</color>. Dash Attack: Hiten no Tsuru - Slash and Chasing Thunder ignore <color=#2BAD00>15%</color> of the target's <color=#2EB6FF>Electric RES</color> for 12s. Repeated triggers reset the duration.\nExtends the duration of Core Passive's Gleaming Edge to 10s.",
+      "id": 120105,
+      "image": "Harumasa",
+      "level": 6,
+      "levelShowName": "Sure Shot VI",
+      "name": "Potential Awakening: Focus",
+      "potentialMaterials": [
+        {
+          "itemId": 20120,
+          "number": 1
+        }
+      ]
+    }
+  },
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nUnleash a piercing attack at enemies ahead, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Braced Bow",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Yugamae",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nUnleash a series of slashes at enemies ahead, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Yugamae - Slash",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Braced Bow",
+          "param": [
+            {
+              "desc": "{Skill:1201015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201015": {
+                  "attackData": [],
+                  "attributeInfliction": 5364,
+                  "damagePercentage": 8430,
+                  "damagePercentageGrowth": 770,
+                  "etherPurify": 3832,
+                  "feverRecovery": 210925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 770,
+                  "main": 8430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8430,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201015": {
+                  "attackData": [],
+                  "attributeInfliction": 5364,
+                  "damagePercentage": 8430,
+                  "damagePercentageGrowth": 770,
+                  "etherPurify": 3832,
+                  "feverRecovery": 210925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8430,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Yugamae",
+          "param": [
+            {
+              "desc": "{Skill:1201016, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1201016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 35004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24760,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201017, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1201017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 38334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1350,
+                  "main": 29520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29520,
+                  "stunRatioGrowth": 1350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201018, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1201018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 8334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 11920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11920,
+                  "stunRatioGrowth": 550
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Yugamae - Slash",
+          "param": [
+            {
+              "desc": "{Skill:1201019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201019": {
+                  "attackData": [],
+                  "attributeInfliction": 18145,
+                  "damagePercentage": 30710,
+                  "damagePercentageGrowth": 2800,
+                  "etherPurify": 12001,
+                  "feverRecovery": 876975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2800,
+                  "main": 30710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26330,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201019": {
+                  "attackData": [],
+                  "attributeInfliction": 18145,
+                  "damagePercentage": 30710,
+                  "damagePercentageGrowth": 2800,
+                  "etherPurify": 12001,
+                  "feverRecovery": 876975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 26330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26330,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunch up to five piercing attacks ahead, dealing <color=#F0D12B>Physical DMG</color> and <color=#2EB6FF>Electric DMG</color>.\nWhen the 5th hit of the Basic Attack hits an enemy, it generates 2 <color=#FFFFFF>Electro Quivers</color>.\nAfter activating a <color=#FFFFFF>Chain Attack</color>, the next time Harumasa activates the 5th hit of <color=#FFFFFF>Basic Attack: Cloud Piercer</color> and hits an enemy with it, it generates 6 <color=#FFFFFF>Electro Quivers</color>.",
+          "name": "Basic Attack: Cloud Piercer",
+          "potential": []
+        },
+        {
+          "desc": "During <color=#FFFFFF>Basic Attack: Cloud Piercer</color>, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} and press <IconMap:Icon_Normal> to activate:\nShoot a ranged piercing attack and reposition towards the corresponding drag direction, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Cloud Piercer - Drift",
+          "potential": []
+        },
+        {
+          "desc": "After the 5th hit of <color=#FFFFFF>Basic Attack: Cloud Piercer</color>, a <color=#FFFFFF>Special Attack</color>, an <color=#FFFFFF>EX Special Attack</color>, or a <color=#FFFFFF>Chain Attack</color>, hold <IconMap:Icon_Special> to activate:\nImmediately shoot <color=#FFFFFF>Falling Feather</color> at enemies ahead, dealing <color=#2EB6FF>Electric DMG</color>.\nHold <IconMap:Icon_Normal> to aim at a target and release <IconMap:Icon_Normal> to activate:\nAfter drawing the bowstring and aiming, shoot <color=#FFFFFF>Falling Feather</color> at the target, dealing <color=#2EB6FF>Electric DMG</color>.",
+          "name": "Basic Attack: Falling Feather",
+          "potential": []
+        },
+        {
+          "desc": "When the 5th hit of <color=#FFFFFF>Basic Attack: Cloud Piercer</color>/<color=#FFFFFF>EX Special Attack</color>/<color=#FFFFFF>Chain Attack</color> hits an enemy or the ground, it can generate 2/6/6 <color=#FFFFFF>Electro Quivers</color>. If there are no <color=#FFFFFF>Electro Quivers</color> on the field when any squad member applies an Attribute Anomaly to an enemy, generate 6 <color=#FFFFFF>Electro Quivers</color>. This effect can trigger once every 12s.\nThere can be up to 6 <color=#FFFFFF>Electro Quivers</color> present at a time. If there are any <color=#FFFFFF>Electro Quivers</color> present when Harumasa fires and hits enemies with <color=#FFFFFF>Falling Feather</color>, the <color=#FFFFFF>Electro Quivers</color> will activate and fire <color=#FFFFFF>Ha-Oto no Ya</color> at the enemies hit by <color=#FFFFFF>Falling Feather</color>, dealing <color=#2EB6FF>Electric DMG</color>.\n<color=#FFFFFF>Ha-Oto no Ya</color> will apply <color=#FFFFFF>Electro Prison</color> to enemies hit, stacking up to 8 times and lasting 10s, repeated triggers reset the duration. While a target has at least 2 stacks of <color=#FFFFFF>Electro Prison</color>, they will be <color=#FFFFFF>X-Marked</color>.",
+          "name": "Basic Attack: Ha-Oto no Ya",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Cloud Piercer",
+          "param": [
+            {
+              "desc": "{Skill:1201001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1201001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4240,
+                  "damagePercentageGrowth": 390,
+                  "etherPurify": 2407,
+                  "feverRecovery": 66275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 4240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2650,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1201002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3980,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 4028,
+                  "feverRecovery": 110825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 3980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4430,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1201003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7090,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 6009,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 650,
+                  "main": 7090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21640,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1201004": {
+                  "attackData": [],
+                  "attributeInfliction": 4917,
+                  "damagePercentage": 9010,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 8138,
+                  "feverRecovery": 223850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 9010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 29300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8960,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1201005": {
+                  "attackData": [],
+                  "attributeInfliction": 6584,
+                  "damagePercentage": 13290,
+                  "damagePercentageGrowth": 1210,
+                  "etherPurify": 10491,
+                  "feverRecovery": 288750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1210,
+                  "main": 13290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11540,
+                  "stunRatioGrowth": 530
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1201001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4240,
+                  "damagePercentageGrowth": 390,
+                  "etherPurify": 2407,
+                  "feverRecovery": 66275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8670,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2650,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1201002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3980,
+                  "damagePercentageGrowth": 370,
+                  "etherPurify": 4028,
+                  "feverRecovery": 110825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4430,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1201003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7090,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 6009,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21640,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1201004": {
+                  "attackData": [],
+                  "attributeInfliction": 4917,
+                  "damagePercentage": 9010,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 8138,
+                  "feverRecovery": 223850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 8960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 29300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8960,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1201005": {
+                  "attackData": [],
+                  "attributeInfliction": 6584,
+                  "damagePercentage": 13290,
+                  "damagePercentageGrowth": 1210,
+                  "etherPurify": 10491,
+                  "feverRecovery": 288750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 530,
+                  "main": 11540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11540,
+                  "stunRatioGrowth": 530
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Cloud Piercer - Drift",
+          "param": [
+            {
+              "desc": "{Skill:1201006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6950,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 4423,
+                  "feverRecovery": 121825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 6950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4870,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6950,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 4423,
+                  "feverRecovery": 121825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15930,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4870,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Falling Feather",
+          "param": [
+            {
+              "desc": "{Skill:1201007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201007": {
+                  "attackData": [],
+                  "attributeInfliction": 3351,
+                  "damagePercentage": 10540,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 4788,
+                  "feverRecovery": 131725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 10540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17240,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5270,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201007": {
+                  "attackData": [],
+                  "attributeInfliction": 3351,
+                  "damagePercentage": 10540,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 4788,
+                  "feverRecovery": 131725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17240,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5270,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Ha-Oto no Ya",
+          "param": [
+            {
+              "desc": "{Skill:1201008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1590,
+                  "damagePercentageGrowth": 150,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 1590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 1590,
+                  "damagePercentageGrowth": 150,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleash a piercing attack on enemies in a large area ahead then fire an enhanced arrow, dealing massive <color=#2EB6FF>Electric DMG</color>.\nWhen the arrow hits the ground, it generates 6 <color=#FFFFFF>Electro Quivers</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Kai - Hanare",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleash a piercing attack on enemies in a large area ahead, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Zanshin",
+          "potential": []
+        },
+        {
+          "desc": "Activates ALT automatically after Ultimate: Zanshin:\nUnleashes a wide-area piercing attack against enemies in front, dealing <color=#2EB6FF>Electric DMG</color>. This is considered Ultimate DMG.\nCharacter is invulnerable while using this skill.",
+          "name": "Zanshin - Scattered Blossoms",
+          "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+        },
+        {
+          "name": "Chain Attack: Kai - Hanare",
+          "param": [
+            {
+              "desc": "{Skill:1201013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201013": {
+                  "attackData": [],
+                  "attributeInfliction": 25633,
+                  "damagePercentage": 51760,
+                  "damagePercentageGrowth": 4710,
+                  "etherPurify": 16670,
+                  "feverRecovery": 2287175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4710,
+                  "main": 51760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18340,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201013": {
+                  "attackData": [],
+                  "attributeInfliction": 25633,
+                  "damagePercentage": 51760,
+                  "damagePercentageGrowth": 4710,
+                  "etherPurify": 16670,
+                  "feverRecovery": 2287175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 18340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18340,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Zanshin",
+          "param": [
+            {
+              "desc": "{Skill:1201014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201014": {
+                  "attackData": [],
+                  "attributeInfliction": 6181,
+                  "damagePercentage": 195390,
+                  "damagePercentageGrowth": 17770,
+                  "etherPurify": 58831,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 17770,
+                  "main": 195390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10690,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201014": {
+                  "attackData": [],
+                  "attributeInfliction": 6181,
+                  "damagePercentage": 195390,
+                  "damagePercentageGrowth": 17770,
+                  "etherPurify": 58831,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 10690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10690,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Zanshin - Scattered Blossoms",
+          "param": [
+            {
+              "desc": "{Skill:1201024, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201024": {
+                  "attackData": [],
+                  "attributeInfliction": 1854,
+                  "damagePercentage": 23650,
+                  "damagePercentageGrowth": 2150,
+                  "etherPurify": 17650,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2150,
+                  "main": 23650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3210,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+            },
+            {
+              "desc": "{Skill:1201024, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201024": {
+                  "attackData": [],
+                  "attributeInfliction": 1854,
+                  "damagePercentage": 23650,
+                  "damagePercentageGrowth": 2150,
+                  "etherPurify": 17650,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3210,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+            }
+          ],
+          "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Quick Flash",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nLaunch multiple piercing attacks ahead, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Hiten no Tsuru",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nPierces enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Hidden Edge",
+          "potential": []
+        },
+        {
+          "desc": "While there are <color=#FFFFFF>X-Marked</color> enemies on the field, Harumasa will enter the <color=#FFFFFF>Awakened</color> state, switching <color=#FFFFFF>Dash Attack: Hiten no Tsuru</color> for <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>.\n\nWhile in the <color=#FFFFFF>Awakened</color> state, press <IconMap:Icon_Normal> during a dodge to activate:\nRush forwards to the closest <color=#FFFFFF>X-Marked</color> enemy and execute a powerful slash, dealing <color=#2EB6FF>Electric DMG</color>.\nWhen the slash hits the target, it consumes 2 stacks of <color=#FFFFFF>Electro Prison</color>. With less than 2 stacks of <color=#FFFFFF>Electro Prison</color>, <color=#FFFFFF>X-Marked</color> will be removed from the enemy. Before <color=#FFFFFF>X-Marked</color> is removed, repeatedly press <IconMap:Icon_Normal> to repeatedly use <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>. While no <color=#FFFFFF>X-Marked</color> enemies exist on the field, Harumasa leaves the <color=#FFFFFF>Awakened</color> state.\nWhile in the <color=#FFFFFF>Awakened</color> state, press <IconMap:Icon_Normal> after <color=#FFFFFF>Basic Attack: Falling Feather</color> to quickly follow up with <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>.\nDuring skill activation, Anti-Interrupt level increases, and DMG taken is reduced by 40%.",
+          "name": "Dash Attack: Hiten no Tsuru - Slash",
+          "potential": [0]
+        },
+        {
+          "desc": "While there are <color=#FFFFFF>X-Marked</color> enemies on the field, Harumasa will enter the <color=#FFFFFF>Awakened</color> state, switching <color=#FFFFFF>Dash Attack: Hiten no Tsuru</color> for <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>.\n\nWhile in the <color=#FFFFFF>Awakened</color> state, press <IconMap:Icon_Normal> during a dodge to activate:\nRush forward to the closest <color=#FFFFFF>X-Marked</color> enemy and execute a powerful slash, dealing <color=#2EB6FF>Electric DMG</color>. Hitting a Stunned enemy triggers Chasing Thunder, dealing 1 instance of additional <color=#2EB6FF>Electric DMG</color>.\nWhen the slash hits the target, it consumes 2 stacks of <color=#FFFFFF>Electro Prison</color>. With less than 2 stacks of <color=#FFFFFF>Electro Prison</color>, <color=#FFFFFF>X-Marked</color> will be removed from the enemy. Before <color=#FFFFFF>X-Marked</color> is removed, repeatedly press <IconMap:Icon_Normal> to repeatedly use <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>. While no <color=#FFFFFF>X-Marked</color> enemies exist on the field, Harumasa leaves the <color=#FFFFFF>Awakened</color> state.\nWhile in the <color=#FFFFFF>Awakened</color> state, press <IconMap:Icon_Normal> after <color=#FFFFFF>Basic Attack: Falling Feather</color> to quickly follow up with <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>.\nEnemy attacks can be blocked during the 1st hit of the skill. The pursuit effect of the second and third hits is increased.\nDuring skill activation, Anti-Interrupt level increases, and DMG taken is reduced by 40%.",
+          "name": "Dash Attack: Hiten no Tsuru - Slash",
+          "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+        },
+        {
+          "name": "Dash Attack: Hiten no Tsuru",
+          "param": [
+            {
+              "desc": "{Skill:1201011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8070,
+                  "damagePercentageGrowth": 740,
+                  "etherPurify": 3667,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 740,
+                  "main": 8070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8070,
+                  "damagePercentageGrowth": 740,
+                  "etherPurify": 3667,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Hidden Edge",
+          "param": [
+            {
+              "desc": "{Skill:1201012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201012": {
+                  "attackData": [],
+                  "attributeInfliction": 5364,
+                  "damagePercentage": 21960,
+                  "damagePercentageGrowth": 2000,
+                  "etherPurify": 22664,
+                  "feverRecovery": 210925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2000,
+                  "main": 21960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19430,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201012": {
+                  "attackData": [],
+                  "attributeInfliction": 5364,
+                  "damagePercentage": 21960,
+                  "damagePercentageGrowth": 2000,
+                  "etherPurify": 22664,
+                  "feverRecovery": 210925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 19430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19430,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Hiten no Tsuru - Slash",
+          "param": [
+            {
+              "desc": "{Skill:1201020, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1201020": {
+                  "attackData": [],
+                  "attributeInfliction": 4197,
+                  "damagePercentage": 16230,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 2999,
+                  "feverRecovery": 165000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1480,
+                  "main": 16230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6600,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201021, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1201021": {
+                  "attackData": [],
+                  "attributeInfliction": 2916,
+                  "damagePercentage": 16660,
+                  "damagePercentageGrowth": 1520,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1520,
+                  "main": 16660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201022, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1201022": {
+                  "attackData": [],
+                  "attributeInfliction": 3147,
+                  "damagePercentage": 18960,
+                  "damagePercentageGrowth": 1730,
+                  "etherPurify": 4497,
+                  "feverRecovery": 123750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1730,
+                  "main": 18960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4950,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201020, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1201020": {
+                  "attackData": [],
+                  "attributeInfliction": 4197,
+                  "damagePercentage": 16230,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 2999,
+                  "feverRecovery": 165000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6600,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201021, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1201021": {
+                  "attackData": [],
+                  "attributeInfliction": 2916,
+                  "damagePercentage": 16660,
+                  "damagePercentageGrowth": 1520,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201022, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1201022": {
+                  "attackData": [],
+                  "attributeInfliction": 3147,
+                  "damagePercentage": 18960,
+                  "damagePercentageGrowth": 1730,
+                  "etherPurify": 4497,
+                  "feverRecovery": 123750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 8100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4950,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Chasing Thunder",
+          "param": [
+            {
+              "desc": "{Skill:1201025, Prop:1001}",
+              "name": "Additional DMG Multiplier",
+              "param": {
+                "1201025": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+            }
+          ],
+          "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nLaunch an arrow forward, dealing <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Nowhere to Hide",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLaunch daggers and an enhanced arrow ahead, dealing massive <color=#2EB6FF>Electric DMG</color>.\nWhen the enhanced arrow hits an enemy or the ground, it generates 6 <color=#FFFFFF>Electro Quivers</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Nowhere to Run",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy, press <IconMap:Icon_SpecialReady> after using the 4th/5th attack of <color=#FFFFFF>Basic Attack: Cloud Piercer</color>, <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color>, an <color=#FFFFFF>Ultimate</color>, <color=#FFFFFF>Dodge Counter: Hidden Edge</color>, or <color=#FFFFFF>Quick Assist: Braced Bow</color> to activate:\nFire enhanced arrows forward in rapid succession, dealing massive <color=#2EB6FF>Electric DMG</color>.\nWhen the first enhanced arrow hits an enemy or the ground, 6 <color=#FFFFFF>Electro Quivers</color> are generated. When the final enhanced arrow hits an enemy, it activates the <color=#FFFFFF>Electro Quivers</color> on the field, firing <color=#FFFFFF>Ha-Oto no Ya</color> at the target, dealing <color=#2EB6FF>Electric DMG</color>.\nWhen the target's <color=#FFFFFF>Electro Prison</color> stacks are close to the maximum, fewer <color=#FFFFFF>Electro Quivers</color> will be activated.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Nowhere to Run - Patrol",
+          "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+        },
+        {
+          "name": "Special Attack: Nowhere to Hide",
+          "param": [
+            {
+              "desc": "{Skill:1201009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201009": {
+                  "attackData": [],
+                  "attributeInfliction": 3326,
+                  "damagePercentage": 5230,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4752,
+                  "feverRecovery": 130900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201009": {
+                  "attackData": [],
+                  "attributeInfliction": 3326,
+                  "damagePercentage": 5230,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4752,
+                  "feverRecovery": 130900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Nowhere to Run",
+          "param": [
+            {
+              "desc": "{Skill:1201010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201010": {
+                  "attackData": [],
+                  "attributeInfliction": 31911,
+                  "damagePercentage": 44930,
+                  "damagePercentageGrowth": 4090,
+                  "etherPurify": 12164,
+                  "feverRecovery": 1647800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4090,
+                  "main": 44930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44900,
+                  "stunRatioGrowth": 2050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1201010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201010": {
+                  "attackData": [],
+                  "attributeInfliction": 31911,
+                  "damagePercentage": 44930,
+                  "damagePercentageGrowth": 4090,
+                  "etherPurify": 12164,
+                  "feverRecovery": 1647800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2050,
+                  "main": 44900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44900,
+                  "stunRatioGrowth": 2050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Nowhere to Run - Patrol",
+          "param": [
+            {
+              "desc": "{Skill:1201023, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1201023": {
+                  "attackData": [],
+                  "attributeInfliction": 33013,
+                  "damagePercentage": 51310,
+                  "damagePercentageGrowth": 4670,
+                  "etherPurify": 13330,
+                  "feverRecovery": 1695925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4670,
+                  "main": 51310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 46570,
+                  "stunRatioGrowth": 2120
+                }
+              },
+              "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+            },
+            {
+              "desc": "{Skill:1201023, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1201023": {
+                  "attackData": [],
+                  "attributeInfliction": 33013,
+                  "damagePercentage": 51310,
+                  "damagePercentageGrowth": 4670,
+                  "etherPurify": 13330,
+                  "feverRecovery": 1695925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2120,
+                  "main": 46570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 46570,
+                  "stunRatioGrowth": 2120
+                }
+              },
+              "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+            }
+          ],
+          "potential": [120100, 120101, 120102, 120103, 120104, 120105]
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1201001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Cloud Piercer (1st, 2nd, and 3rd hit)"
+    },
+    "1201002": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Cloud Piercer (4th and 5th hit)"
+    },
+    "1201003": {
+      "desc": "<IconMap:Icon_Special> (Hold Down) (After specified skills)",
+      "name": "Basic Attack: Falling Feather"
+    },
+    "1201004": {
+      "desc": "<IconMap:Icon_Normal>(Hold)",
+      "name": "Basic Attack: Falling Feather"
+    },
+    "1201005": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Nowhere to Hide"
+    },
+    "1201006": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Nowhere to Run"
+    },
+    "1201007": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Hiten no Tsuru"
+    },
+    "1201008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal> (Awakened State)",
+      "name": "Dash Attack: Hiten no Tsuru - Slash"
+    },
+    "1201009": {
+      "desc": "<IconMap:Icon_Normal> (Awakened State) (After Falling Feather)",
+      "name": "Dash Attack: Hiten no Tsuru - Slash (Quick launch)"
+    },
+    "1201010": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Hidden Edge"
+    },
+    "1201011": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Kai - Hanare"
+    },
+    "1201012": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Zanshin"
+    },
+    "1201013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Braced Bow"
+    },
+    "1201014": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Yugamae"
+    },
+    "1201015": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Yugamae - Slash"
+    }
+  },
+  "skin": {
+    "3112010": {
+      "desc": "His eyes are brighter than the streak of bright yellow upon his brow. His arrows pierce through deceit and lies and scatter the past like feathers on the wind. Dawn may not have arrived yet, but beyond the horizon, a golden future shimmers faintly.",
+      "name": "Asaba Harumasa: Full-Fledged Strings"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, quick-swap DMG dealer",
+    "Switches between ranged/melee forms",
+    "Rapid dashes and slashes"
+  ],
+  "talent": {
+    "1": {
+      "desc": "The maximum stack limit of <color=#FFFFFF>Electro Prison</color> from <color=#FFFFFF>Basic Attack: Ha-Oto no Ya</color> increases to 14 stacks. When an <color=#FFFFFF>Electro Quiver</color> is triggered, 2 consecutive <color=#FFFFFF>Ha-Oto no Ya</color> will be fired at the target.",
+      "desc2": "\"I'm not like some stubborn idiots who insist on facing the enemy head-on.\"\n\"Be it a straightforward assault or an underhanded attack from the shadows, anything that gets me off work earlier is good in my eyes~\"",
+      "name": "\"High Spirit\""
+    },
+    "2": {
+      "desc": "When using an <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, Harumasa gains 7 stacks of <color=#FFFFFF>Electro Blitz</color>, up to a max of 7 stacks. While possessing <color=#FFFFFF>Electro Blitz</color>, the DMG of <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> increases by 50%. Consume 1 stack of <color=#FFFFFF>Electro Blitz</color> once <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> ends.",
+      "desc2": "\"Don't look at me like that, I'm actually real frail, y'know~\"\nHarumasa lazily sprawls across his office desk.\n\"So... how 'bout picking someone else for this mission?\"",
+      "name": "Languish"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"...Don't worry, this isn't enough to kill me.\"\nHe wipes the blood from the corner of his mouth with a smile and readies his bow once more.\n\"After all, I'm going to live to make it everyone's problem.\"",
+      "name": "White Lies"
+    },
+    "4": {
+      "desc": "<color=#FFFFFF>Electro Prison</color> now lasts for 20s. When <color=#FFFFFF>Dash Attack: Hiten no Tsuru - Slash</color> hits enemies, Harumasa gains 30 Decibels once per use of this skill. Upon activating <color=#FFFFFF>Ultimate</color>, apply the maximum stacks of <color=#FFFFFF>Electro Prison</color> to all on-field enemies.",
+      "desc2": "Harumasa is occasionally full of energy and motivation...\nWhen there's only five minutes left until he can get off work.",
+      "name": "Occasionally Motivated"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"I want vacations, freedom, to be happy every day!\"\n\"Just kidding. I want to live.\"",
+      "name": "No One Knows"
+    },
+    "6": {
+      "desc": "After <color=#FFFFFF>Ha-Oto no Ya</color> hits Stunned enemies or enemies under Attribute Anomalies, Harumasa will ignore 15% of the target's <color=#2EB6FF>Electric RES</color> for 12s. Every 12 times an enemy is hit by <color=#FFFFFF>Ha-Oto no Ya</color>, trigger an extra electromagnetic explosion, dealing 1,500% of Harumasa's ATK to the target as <color=#2EB6FF>Electric DMG</color>.",
+      "desc2": "\"My master taught me a lot of things, like how to draw a bow, how to wield a blade, and how to survive in this world with this body of mine.\"\n\"...What happened after that?\"\n\"Well, after that... he left me.\"",
+      "name": "Tacit Understanding"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

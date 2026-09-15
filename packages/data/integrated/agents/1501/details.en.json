@@ -1,0 +1,1802 @@
+{
+  "camp": {
+    "13": "Angels of Delusion"
+  },
+  "elementType": {
+    "205": "Ether"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "Anomaly Mastery"
+    },
+    "part5": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Ether DMG Bonus"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1501,
+  "locale": "en",
+  "name": "Aria",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1501017", "1501018", "1501019", "1501020", "1501021"],
+      "basic": [
+        "1501001",
+        "1501002",
+        "1501003",
+        "1501004",
+        "1501005",
+        "1501006",
+        "1501007",
+        "1501008",
+        "1501022"
+      ],
+      "chain": ["1501015", "1501016"],
+      "dodge": ["1501013", "1501014"],
+      "special": ["1501009", "1501010", "1501011", "1501012"]
+    },
+    "parameterRowsById": {
+      "1501001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1501002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1501003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1501004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1501005": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1501006": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1501007": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/8",
+        "/skill/basic/description/3/param/9"
+      ],
+      "1501008": [
+        "/skill/basic/description/3/param/4",
+        "/skill/basic/description/3/param/5",
+        "/skill/basic/description/3/param/10",
+        "/skill/basic/description/3/param/11"
+      ],
+      "1501009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1501010": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1501011": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1501012": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1501013": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1501014": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1501015": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1501016": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1501017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1501018": ["/skill/assist/description/4/param/0"],
+      "1501019": ["/skill/assist/description/4/param/1"],
+      "1501020": ["/skill/assist/description/4/param/2"],
+      "1501021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1501022": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/5",
+        "/skill/basic/description/3/param/9",
+        "/skill/basic/description/3/param/11"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "JUN 7",
+    "fullName": "Aria",
+    "gender": "Female",
+    "impressionF": "An idol performing on stage with a virtual avatar... Does that count as being a virtual idol?",
+    "impressionM": "Uh... That doesn't feel quite right, Belle... but I honestly don't know how to refute it...",
+    "impressions": [
+      "Impressions of Aria:\n · The Three Principles of Idol Constructs, One: No matter when, always stay full of energy!",
+      " · The Three Principles of Idol Constructs, Two: No matter where, always keep your image up!",
+      " · The Three Principles of Idol Constructs, Three: No matter what, always remember to charge up in advance!"
+    ],
+    "profileDesc": "Aria is the lead vocalist and center of the Angels of Delusion. Bright and full of energy, she always shines on stage, bringing warmth and strength to all Delulus.\nShe has a near-perfect voice, even though she was never professionally trained. At first, Aria only sang because she loved her idol, the retired songstress Cersea, copying her performances and singing along, until she realized she had a gift for song of her own.\nThough Aria's vocal skills are undeniably professional, she lacks a solid foundation in dance. Even with dedicated practice, she can still get flustered when faced with more complex moves. Still, fans deeply appreciate her attitude of \"even if I can't dance well, I'll still give it everything I've got.\"\n\"Pushing herself to the limit, wrestling with her own limbs to try and keep up with the rhythm... that's our Angels of Delusion lead vocalist!\" —One Delulu sobbing after a show.",
+    "stature": "150",
+    "trustLv": {
+      "1": "Aria is the lead vocalist and center of the Angels of Delusion. Bright and full of energy, she always shines on stage, bringing warmth and strength to all Delulus.\nShe has a near-perfect voice, even though she was never professionally trained. At first, Aria only sang because she loved her idol, the retired songstress Cersea, copying her performances and singing along, until she realized she had a gift for song of her own.\nThough Aria's vocal skills are undeniably professional, she lacks a solid foundation in dance. Even with dedicated practice, she can still get flustered when faced with more complex moves. Still, fans deeply appreciate her attitude of \"even if I can't dance well, I'll still give it everything I've got.\"\n\"Pushing herself to the limit, wrestling with her own limbs to try and keep up with the rhythm... that's our Angels of Delusion lead vocalist!\" —One Delulu sobbing after a show.",
+      "2": "",
+      "3": "Unlike her bright, glamorous stage persona, Aria's true form is an A-H0L0 Type Intelligent Tactical Construct, built for combat. However, as she took part in more combat operations, she slowly grew to hate the feeling of \"bringing pain to others.\"\nAfter being abandoned in a Hollow alongside others of the same model, she was awakened once more by Cersea's singing. In Eridu, she saw how such a voice could spark hope in people and draw them into \"delusions,\" and it was then that the desire to sing began to take root within her. By chance, she once served as Cersea's \"voice double,\" but after Cersea retired, she returned to normal life. It was only after being invited by Nangong and Sunna to join the Angels of Delusion that Aria truly stepped onto the stage, meeting the Delulus who loved her voice face-to-face.\nPerhaps shaped by her past experiences, Aria feels deeply insecure about her identity as a construct. When she switches to her construct form, she becomes shy and timid, speaking slowly and hesitantly. But the moment she activates her energetic idol projection, she instantly returns to her bright, outgoing, high-energy self, shining like a little sun on her teammates and the Delulus in the audience.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Unlocked after completing Main Commission Season 2 Interlude: \"Encore for an Old Dream\"",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1501049": {
+        "desc": [
+          "Aria's Anomaly Proficiency increases by <color=#2BAD00>45</color>.\nIf Aria's 3rd hit of <color=#FFFFFF>Basic Attack: Perfect Pitch</color> lands a heavy attack on an enemy suffering an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it will trigger <color=#FFFFFF>Abloom</color>, which resolves an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>13.8%</color>/<color=#2EB6FF>7.2%</color>/<color=#FF5521>17.9%</color>/<color=#F0D12B>1.25%</color>/<color=#98EFF0>1.8%</color>/<color=#A6C5FD>0.7%</color> per 10 points of initial Anomaly Mastery of the original Anomaly DMG. If the target is Stunned, the DMG ratio is further increased by <color=#FFFFFF>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color>, <color=#FFFFFF>Support</color>, or <color=#FFFFFF>Anomaly</color> character, or shares the same Faction:\nWhen <color=#FFFFFF>Ether Veil</color> is activated, 4 <color=#FFFFFF>Fandom Power</color> are generated on the field. This can trigger once every 1s.\nWhen any squad member applies <color=#FE437E>Corruption</color> to an enemy, its duration is extended by 3s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Innate Stage Presence",
+          "Additional Ability: Collaborative Stage"
+        ],
+        "potential": []
+      },
+      "1501050": {
+        "desc": [
+          "Aria's Anomaly Proficiency increases by <color=#2BAD00>52</color>.\nIf Aria's 3rd hit of <color=#FFFFFF>Basic Attack: Perfect Pitch</color> lands a heavy attack on an enemy suffering an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it will trigger <color=#FFFFFF>Abloom</color>, which resolves an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>16%</color>/<color=#2EB6FF>8.3%</color>/<color=#FF5521>20.8%</color>/<color=#F0D12B>1.46%</color>/<color=#98EFF0>2.1%</color>/<color=#A6C5FD>0.8%</color> per 10 points of initial Anomaly Mastery of the original Anomaly DMG. If the target is Stunned, the DMG ratio is further increased by <color=#FFFFFF>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color>, <color=#FFFFFF>Support</color>, or <color=#FFFFFF>Anomaly</color> character, or shares the same Faction:\nWhen <color=#FFFFFF>Ether Veil</color> is activated, 4 <color=#FFFFFF>Fandom Power</color> are generated on the field. This can trigger once every 1s.\nWhen any squad member applies <color=#FE437E>Corruption</color> to an enemy, its duration is extended by 3s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Innate Stage Presence",
+          "Additional Ability: Collaborative Stage"
+        ],
+        "potential": []
+      },
+      "1501051": {
+        "desc": [
+          "Aria's Anomaly Proficiency increases by <color=#2BAD00>60</color>.\nIf Aria's 3rd hit of <color=#FFFFFF>Basic Attack: Perfect Pitch</color> lands a heavy attack on an enemy suffering an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it will trigger <color=#FFFFFF>Abloom</color>, which resolves an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>18.3%</color>/<color=#2EB6FF>9.5%</color>/<color=#FF5521>23.8%</color>/<color=#F0D12B>1.67%</color>/<color=#98EFF0>2.4%</color>/<color=#A6C5FD>0.9%</color> per 10 points of initial Anomaly Mastery of the original Anomaly DMG. If the target is Stunned, the DMG ratio is further increased by <color=#FFFFFF>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color>, <color=#FFFFFF>Support</color>, or <color=#FFFFFF>Anomaly</color> character, or shares the same Faction:\nWhen <color=#FFFFFF>Ether Veil</color> is activated, 4 <color=#FFFFFF>Fandom Power</color> are generated on the field. This can trigger once every 1s.\nWhen any squad member applies <color=#FE437E>Corruption</color> to an enemy, its duration is extended by 3s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Innate Stage Presence",
+          "Additional Ability: Collaborative Stage"
+        ],
+        "potential": []
+      },
+      "1501052": {
+        "desc": [
+          "Aria's Anomaly Proficiency increases by <color=#2BAD00>67</color>.\nIf Aria's 3rd hit of <color=#FFFFFF>Basic Attack: Perfect Pitch</color> lands a heavy attack on an enemy suffering an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it will trigger <color=#FFFFFF>Abloom</color>, which resolves an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>20.6%</color>/<color=#2EB6FF>10.7%</color>/<color=#FF5521>26.8%</color>/<color=#F0D12B>1.88%</color>/<color=#98EFF0>2.7%</color>/<color=#A6C5FD>1.1%</color> per 10 points of initial Anomaly Mastery of the original Anomaly DMG. If the target is Stunned, the DMG ratio is further increased by <color=#FFFFFF>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color>, <color=#FFFFFF>Support</color>, or <color=#FFFFFF>Anomaly</color> character, or shares the same Faction:\nWhen <color=#FFFFFF>Ether Veil</color> is activated, 4 <color=#FFFFFF>Fandom Power</color> are generated on the field. This can trigger once every 1s.\nWhen any squad member applies <color=#FE437E>Corruption</color> to an enemy, its duration is extended by 3s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Innate Stage Presence",
+          "Additional Ability: Collaborative Stage"
+        ],
+        "potential": []
+      },
+      "1501053": {
+        "desc": [
+          "Aria's Anomaly Proficiency increases by <color=#2BAD00>75</color>.\nIf Aria's 3rd hit of <color=#FFFFFF>Basic Attack: Perfect Pitch</color> lands a heavy attack on an enemy suffering an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it will trigger <color=#FFFFFF>Abloom</color>, which resolves an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>22.9%</color>/<color=#2EB6FF>11.9%</color>/<color=#FF5521>29.8%</color>/<color=#F0D12B>2.08%</color>/<color=#98EFF0>3%</color>/<color=#A6C5FD>1.2%</color> per 10 points of initial Anomaly Mastery of the original Anomaly DMG. If the target is Stunned, the DMG ratio is further increased by <color=#FFFFFF>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color>, <color=#FFFFFF>Support</color>, or <color=#FFFFFF>Anomaly</color> character, or shares the same Faction:\nWhen <color=#FFFFFF>Ether Veil</color> is activated, 4 <color=#FFFFFF>Fandom Power</color> are generated on the field. This can trigger once every 1s.\nWhen any squad member applies <color=#FE437E>Corruption</color> to an enemy, its duration is extended by 3s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Innate Stage Presence",
+          "Additional Ability: Collaborative Stage"
+        ],
+        "potential": []
+      },
+      "1501054": {
+        "desc": [
+          "Aria's Anomaly Proficiency increases by <color=#2BAD00>82</color>.\nIf Aria's 3rd hit of <color=#FFFFFF>Basic Attack: Perfect Pitch</color> lands a heavy attack on an enemy suffering an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it will trigger <color=#FFFFFF>Abloom</color>, which resolves an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>25.2%</color>/<color=#2EB6FF>13.1%</color>/<color=#FF5521>32.7%</color>/<color=#F0D12B>2.29%</color>/<color=#98EFF0>3.3%</color>/<color=#A6C5FD>1.3%</color> per 10 points of initial Anomaly Mastery of the original Anomaly DMG. If the target is Stunned, the DMG ratio is further increased by <color=#FFFFFF>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color>, <color=#FFFFFF>Support</color>, or <color=#FFFFFF>Anomaly</color> character, or shares the same Faction:\nWhen <color=#FFFFFF>Ether Veil</color> is activated, 4 <color=#FFFFFF>Fandom Power</color> are generated on the field. This can trigger once every 1s.\nWhen any squad member applies <color=#FE437E>Corruption</color> to an enemy, its duration is extended by 3s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Innate Stage Presence",
+          "Additional Ability: Collaborative Stage"
+        ],
+        "potential": []
+      },
+      "1501055": {
+        "desc": [
+          "Aria's Anomaly Proficiency increases by <color=#2BAD00>90</color>.\nIf Aria's 3rd hit of <color=#FFFFFF>Basic Attack: Perfect Pitch</color> lands a heavy attack on an enemy suffering an <color=#FE437E>Ether</color>, <color=#2EB6FF>Electric</color>, <color=#FF5521>Fire</color>, <color=#F0D12B>Physical</color>, <color=#98EFF0>Ice</color>, or <color=#A6C5FD>Wind</color> Anomaly, it will trigger <color=#FFFFFF>Abloom</color>, which resolves an additional instance of Attribute Anomaly DMG equal to <color=#FE437E>27.5%</color>/<color=#2EB6FF>14.3%</color>/<color=#FF5521>35.7%</color>/<color=#F0D12B>2.5%</color>/<color=#98EFF0>3.6%</color>/<color=#A6C5FD>1.4%</color> per 10 points of initial Anomaly Mastery of the original Anomaly DMG. If the target is Stunned, the DMG ratio is further increased by <color=#FFFFFF>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Stun</color>, <color=#FFFFFF>Support</color>, or <color=#FFFFFF>Anomaly</color> character, or shares the same Faction:\nWhen <color=#FFFFFF>Ether Veil</color> is activated, 4 <color=#FFFFFF>Fandom Power</color> are generated on the field. This can trigger once every 1s.\nWhen any squad member applies <color=#FE437E>Corruption</color> to an enemy, its duration is extended by 3s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Innate Stage Presence",
+          "Additional Ability: Collaborative Stage"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nDelivers a powerful slash to the target, dealing <color=#FE437E>Ether DMG</color>.\nAfter using this skill, it can be immediately followed up with the 3rd hit of <color=#FFFFFF>Basic Attack: Sweet Melody</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Shatter Fantasy",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Clutch Save",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nUnleashes a powerful series of slashes on the target, dealing massive <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Encore Song",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Shatter Fantasy",
+          "param": [
+            {
+              "desc": "{Skill:1501017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501017": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 4960,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 4960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501017": {
+                  "attackData": [],
+                  "attributeInfliction": 4501,
+                  "damagePercentage": 4960,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4502,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Clutch Save",
+          "param": [
+            {
+              "desc": "{Skill:1501018, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1501018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501019, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1501019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501020, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1501020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Encore Song",
+          "param": [
+            {
+              "desc": "{Skill:1501021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501021": {
+                  "attackData": [],
+                  "attributeInfliction": 30872,
+                  "damagePercentage": 36350,
+                  "damagePercentageGrowth": 3310,
+                  "etherPurify": 15667,
+                  "feverRecovery": 1028225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3310,
+                  "main": 36350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31570,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501021": {
+                  "attackData": [],
+                  "attributeInfliction": 30872,
+                  "damagePercentage": 36350,
+                  "damagePercentageGrowth": 3310,
+                  "etherPurify": 15667,
+                  "feverRecovery": 1028225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1440,
+                  "main": 31570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31570,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunches up to four consecutive attacks forward, dealing <color=#FE437E>Ether DMG</color>.\nAfter hitting an enemy with the fourth hit, 1 <color=#FFFFFF>Fandom Power</color> is generated on the field after the attack ends.",
+          "name": "Basic Attack: Sweet Melody",
+          "potential": []
+        },
+        {
+          "desc": "Hold <IconMap:Icon_Normal> to activate:\nAria enters a charging state and can reach three levels of charge. Releasing <IconMap:Icon_Normal> or reaching the maximum charge time causes Aria to unleash a powerful downward attack forward based on the current charge level, dealing massive <color=#FE437E>Ether DMG</color>.\nIf there is <color=#FFFFFF>Fandom Power</color> nearby while Aria is charging, she will absorb the <color=#FFFFFF>Fandom Power</color>, with each absorbed <color=#FFFFFF>Fandom Power</color> instantly increasing charge level by 1 and granting 1 stack of a buff that increases the next <color=#FFFFFF>Basic Attack: Perfect Pitch</color>'s <color=#FE437E>Ether Anomaly Buildup</color> by 10%. This buff can stack up to 2 times and is removed after the attack ends.\nAfter the 4th hit of <color=#FFFFFF>Basic Attack: Sweet Melody</color>, <color=#FFFFFF>Special Attack: Full-Sugar Electronica - No Ice</color>, an <color=#FFFFFF>EX Special Attack</color>, a level three charged <color=#FFFFFF>Basic Attack: Perfect Pitch</color>, a <color=#FFFFFF>Quick Assist</color>, a <color=#FFFFFF>Chain Attack</color>, or an <color=#FFFFFF>Ultimate</color>, if there are at least 2 <color=#FFFFFF>Fandom Power</color> nearby, hold <IconMap:Icon_Normal> to consume 2 <color=#FFFFFF>Fandom Power</color> and quickly activate a level three charged <color=#FFFFFF>Basic Attack: Perfect Pitch</color>. After a level three charged <color=#FFFFFF>Basic Attack: Perfect Pitch</color>, a <color=#FFFFFF>Chain Attack</color>, or an <color=#FFFFFF>Ultimate</color>, if there are at least 2 <color=#FFFFFF>Fandom Power</color> nearby, a level three charged <color=#FFFFFF>Basic Attack: Perfect Pitch</color> can also be quickly activated by pressing <IconMap:Icon_Normal> within a short window, consuming 2 <color=#FFFFFF>Fandom Power</color>.\nAnti-Interrupt Level is increased while charging, and received DMG is reduced by 40%. Character is invulnerable while using this attack.",
+          "name": "Basic Attack: Perfect Pitch",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Sweet Melody",
+          "param": [
+            {
+              "desc": "{Skill:1501001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1501001": {
+                  "attackData": [],
+                  "attributeInfliction": 2280,
+                  "damagePercentage": 3320,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 2936,
+                  "feverRecovery": 80850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 3320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10570,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3440,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1501002": {
+                  "attackData": [],
+                  "attributeInfliction": 4657,
+                  "damagePercentage": 7160,
+                  "damagePercentageGrowth": 660,
+                  "etherPurify": 5848,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 660,
+                  "main": 7160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6800,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1501003": {
+                  "attackData": [],
+                  "attributeInfliction": 5804,
+                  "damagePercentage": 9380,
+                  "damagePercentageGrowth": 860,
+                  "etherPurify": 7114,
+                  "feverRecovery": 195800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 860,
+                  "main": 9380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8230,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1501004": {
+                  "attackData": [],
+                  "attributeInfliction": 13400,
+                  "damagePercentage": 19420,
+                  "damagePercentageGrowth": 1770,
+                  "etherPurify": 15930,
+                  "feverRecovery": 438075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1770,
+                  "main": 19420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 57350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16560,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1501001": {
+                  "attackData": [],
+                  "attributeInfliction": 2280,
+                  "damagePercentage": 3320,
+                  "damagePercentageGrowth": 310,
+                  "etherPurify": 2936,
+                  "feverRecovery": 80850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10570,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3440,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1501002": {
+                  "attackData": [],
+                  "attributeInfliction": 4657,
+                  "damagePercentage": 7160,
+                  "damagePercentageGrowth": 660,
+                  "etherPurify": 5848,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6800,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1501003": {
+                  "attackData": [],
+                  "attributeInfliction": 5804,
+                  "damagePercentage": 9380,
+                  "damagePercentageGrowth": 860,
+                  "etherPurify": 7114,
+                  "feverRecovery": 195800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8230,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1501004": {
+                  "attackData": [],
+                  "attributeInfliction": 13400,
+                  "damagePercentage": 19420,
+                  "damagePercentageGrowth": 1770,
+                  "etherPurify": 15930,
+                  "feverRecovery": 438075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 57350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16560,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Perfect Pitch",
+          "param": [
+            {
+              "desc": "{Skill:1501005, Prop:1001}",
+              "name": "Charge Level One Attack DMG Multiplier",
+              "param": {
+                "1501005": {
+                  "attackData": [],
+                  "attributeInfliction": 13200,
+                  "damagePercentage": 18150,
+                  "damagePercentageGrowth": 1650,
+                  "etherPurify": 13200,
+                  "feverRecovery": 363000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1650,
+                  "main": 18150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15430,
+                  "stunRatioGrowth": 710
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501006, Prop:1001}",
+              "name": "Charge Level Two Attack DMG Multiplier",
+              "param": {
+                "1501006": {
+                  "attackData": [],
+                  "attributeInfliction": 15066,
+                  "damagePercentage": 20720,
+                  "damagePercentageGrowth": 1890,
+                  "etherPurify": 15067,
+                  "feverRecovery": 414425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1890,
+                  "main": 20720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 54240,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17610,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501007, Prop:1001}",
+              "name": "Charge Level Three Attack DMG Multiplier",
+              "param": {
+                "1501007": {
+                  "attackData": [],
+                  "attributeInfliction": 13000,
+                  "damagePercentage": 27500,
+                  "damagePercentageGrowth": 2500,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2500,
+                  "main": 27500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501007, Prop:1001} + {Skill:1501022, Prop:1001}",
+              "name": "Charge Level Three Attack DMG Multiplier (Coordinated)",
+              "param": {
+                "1501007": {
+                  "attackData": [],
+                  "attributeInfliction": 13000,
+                  "damagePercentage": 27500,
+                  "damagePercentageGrowth": 2500,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2500,
+                  "main": 27500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                },
+                "1501022": {
+                  "attackData": [],
+                  "attributeInfliction": 1950,
+                  "damagePercentage": 4130,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1650,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501008, Prop:1001}",
+              "name": "Enhanced Charge Attack DMG Multiplier",
+              "param": {
+                "1501008": {
+                  "attackData": [],
+                  "attributeInfliction": 17166,
+                  "damagePercentage": 32090,
+                  "damagePercentageGrowth": 2920,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2920,
+                  "main": 32090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501008, Prop:1001} + {Skill:1501022, Prop:1001}",
+              "name": "Enhanced Charge Attack DMG Multiplier (Coordinated)",
+              "param": {
+                "1501008": {
+                  "attackData": [],
+                  "attributeInfliction": 17166,
+                  "damagePercentage": 32090,
+                  "damagePercentageGrowth": 2920,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2920,
+                  "main": 32090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                },
+                "1501022": {
+                  "attackData": [],
+                  "attributeInfliction": 1950,
+                  "damagePercentage": 4130,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1650,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501005, Prop:1002}",
+              "name": "Charge Level One Attack Daze Multiplier",
+              "param": {
+                "1501005": {
+                  "attackData": [],
+                  "attributeInfliction": 13200,
+                  "damagePercentage": 18150,
+                  "damagePercentageGrowth": 1650,
+                  "etherPurify": 13200,
+                  "feverRecovery": 363000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 15430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15430,
+                  "stunRatioGrowth": 710
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501006, Prop:1002}",
+              "name": "Charge Level Two Attack Daze Multiplier",
+              "param": {
+                "1501006": {
+                  "attackData": [],
+                  "attributeInfliction": 15066,
+                  "damagePercentage": 20720,
+                  "damagePercentageGrowth": 1890,
+                  "etherPurify": 15067,
+                  "feverRecovery": 414425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 810,
+                  "main": 17610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 54240,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17610,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501007, Prop:1002}",
+              "name": "Charge Level Three Attack Daze Multiplier",
+              "param": {
+                "1501007": {
+                  "attackData": [],
+                  "attributeInfliction": 13000,
+                  "damagePercentage": 27500,
+                  "damagePercentageGrowth": 2500,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501007, Prop:1002} + {Skill:1501022, Prop:1002}",
+              "name": "Charge Level Three Attack Daze Multiplier (Coordinated)",
+              "param": {
+                "1501007": {
+                  "attackData": [],
+                  "attributeInfliction": 13000,
+                  "damagePercentage": 27500,
+                  "damagePercentageGrowth": 2500,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                },
+                "1501022": {
+                  "attackData": [],
+                  "attributeInfliction": 1950,
+                  "damagePercentage": 4130,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 80,
+                  "main": 1650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1650,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501008, Prop:1002}",
+              "name": "Enhanced Charge Attack Daze Multiplier",
+              "param": {
+                "1501008": {
+                  "attackData": [],
+                  "attributeInfliction": 17166,
+                  "damagePercentage": 32090,
+                  "damagePercentageGrowth": 2920,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501008, Prop:1002} + {Skill:1501022, Prop:1002}",
+              "name": "Enhanced Charge Attack Daze Multiplier (Coordinated)",
+              "param": {
+                "1501008": {
+                  "attackData": [],
+                  "attributeInfliction": 17166,
+                  "damagePercentage": 32090,
+                  "damagePercentageGrowth": 2920,
+                  "etherPurify": 10000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                },
+                "1501022": {
+                  "attackData": [],
+                  "attributeInfliction": 1950,
+                  "damagePercentage": 4130,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 80,
+                  "main": 1650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1650,
+                  "stunRatioGrowth": 80
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunches a series of attacks forward, dealing massive <color=#FE437E>Ether DMG</color>. 4 <color=#FFFFFF>Fandom Power</color> are generated on the field on skill activation.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Dream Collab",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nReleases all her power, entering <color=#FFFFFF>Moment of Delusion</color>, and fires multiple powerful shots at the target, dealing massive <color=#FE437E>Ether DMG</color>.\nUpon entering <color=#FFFFFF>Moment of Delusion</color>, Aria gains 3 stacks of <color=#FFFFFF>All-Out Cheering</color> and activates <color=#FFFFFF>Ether Veil: Delusion Reprise</color>. While <color=#FFFFFF>Ether Veil: Delusion Reprise</color> is active, all squad members gain an additional 50 ATK for 30s. Re-activating <color=#FFFFFF>Ether Veil: Delusion Reprise</color> will first cancel any existing instance of <color=#FFFFFF>Ether Veil: Delusion Reprise</color>.\nWhile Aria is charging, if she has <color=#FFFFFF>All-Out Cheering</color>, stacks of <color=#FFFFFF>All-Out Cheering</color> are consumed first to charge. Each stack of <color=#FFFFFF>All-Out Cheering</color> consumed increases the charge level by 2.\nUpon entering <color=#FFFFFF>Moment of Delusion</color>, if Aria already has <color=#FFFFFF>All-Out Cheering</color>, all remaining stacks of <color=#FFFFFF>All-Out Cheering</color> are first converted into <color=#FFFFFF>Fandom Power</color> and generated on the field. Each stack of <color=#FFFFFF>All-Out Cheering</color> is converted into 2 <color=#FFFFFF>Fandom Power</color>.\n<color=#FFFFFF>Moment of Delusion</color> lasts for up to 15s. During <color=#FFFFFF>Moment of Delusion</color>, Aria's <color=#FFFFFF>Basic Attack: Perfect Pitch</color> 3rd attack is upgraded to an enhanced version.\nWhen exiting <color=#FFFFFF>Moment of Delusion</color>, if Aria has <color=#FFFFFF>All-Out Cheering</color>, all remaining stacks of <color=#FFFFFF>All-Out Cheering</color> are converted into <color=#FFFFFF>Fandom Power</color> and generated on the field. Each stack of <color=#FFFFFF>All-Out Cheering</color> is converted into 2 <color=#FFFFFF>Fandom Power</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: 100% Energy",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Dream Collab",
+          "param": [
+            {
+              "desc": "{Skill:1501015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501015": {
+                  "attackData": [],
+                  "attributeInfliction": 54246,
+                  "damagePercentage": 81620,
+                  "damagePercentageGrowth": 7420,
+                  "etherPurify": 20997,
+                  "feverRecovery": 2406250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7420,
+                  "main": 81620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23100,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501015": {
+                  "attackData": [],
+                  "attributeInfliction": 54246,
+                  "damagePercentage": 81620,
+                  "damagePercentageGrowth": 7420,
+                  "etherPurify": 20997,
+                  "feverRecovery": 2406250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 23100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23100,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: 100% Energy",
+          "param": [
+            {
+              "desc": "{Skill:1501016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501016": {
+                  "attackData": [],
+                  "attributeInfliction": 145699,
+                  "damagePercentage": 162250,
+                  "damagePercentageGrowth": 14750,
+                  "etherPurify": 68000,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14750,
+                  "main": 162250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19800,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501016": {
+                  "attackData": [],
+                  "attributeInfliction": 145699,
+                  "damagePercentage": 162250,
+                  "damagePercentageGrowth": 14750,
+                  "etherPurify": 68000,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 900,
+                  "main": 19800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19800,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nIf activated during a <color=#FFFFFF>Basic Attack: Sweet Melody</color> chain, this action does not reset the Basic Attack count.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: On-Beat Precision",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nLaunches a swift slashing attack forward, dealing <color=#FE437E>Ether DMG</color>.\nIf activated during a <color=#FFFFFF>Basic Attack: Sweet Melody</color> chain, this action does not reset the Basic Attack count.",
+          "name": "Dash Attack: Silky-Smooth Combo",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nUnleashes a powerful slash against the target, dealing <color=#FE437E>Ether DMG</color>.\nAfter using this skill, it can be immediately followed up with the 3rd hit of <color=#FFFFFF>Basic Attack: Sweet Melody</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Slide-Shift Variation",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Silky-Smooth Combo",
+          "param": [
+            {
+              "desc": "{Skill:1501013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501013": {
+                  "attackData": [],
+                  "attributeInfliction": 2081,
+                  "damagePercentage": 4580,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2082,
+                  "feverRecovery": 57475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 4580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2290,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501013": {
+                  "attackData": [],
+                  "attributeInfliction": 2081,
+                  "damagePercentage": 4580,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 2082,
+                  "feverRecovery": 57475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2290,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Slide-Shift Variation",
+          "param": [
+            {
+              "desc": "{Skill:1501014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501014": {
+                  "attackData": [],
+                  "attributeInfliction": 9169,
+                  "damagePercentage": 24120,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 24170,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2200,
+                  "main": 24120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501014": {
+                  "attackData": [],
+                  "attributeInfliction": 9169,
+                  "damagePercentage": 24120,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 24170,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 21090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nDelivers a forward kick, dealing <color=#FE437E>Ether DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Full-Sugar Electronica",
+          "potential": []
+        },
+        {
+          "desc": "After the 4th hit of <color=#FFFFFF>Basic Attack: Sweet Melody</color>, an <color=#FFFFFF>Assist Follow-Up</color>, a <color=#FFFFFF>Chain Attack</color>, or an <color=#FFFFFF>Ultimate</color>, press <IconMap:Icon_Special> to activate:\nDelivers a quicker forward kick, dealing <color=#FE437E>Ether DMG</color>. If the attack hits an enemy, 1 <color=#FFFFFF>Fandom Power</color> is generated on the field after the attack ends.\nCharacter is invulnerable while using this skill.",
+          "name": "Special Attack: Full-Sugar Electronica - No Ice",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy, press <IconMap:Icon_SpecialReady> to activate:\nDelivers a powerful forward kick followed by a sonic wave attack, dealing <color=#FE437E>Ether DMG</color>. If the attack hits an enemy, 3 <color=#FFFFFF>Fandom Power</color> are generated on the field after the attack ends.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Fall Into Delusion",
+          "potential": []
+        },
+        {
+          "desc": "After launching <color=#FFFFFF>EX Special Attack: Fall Into Delusion</color>, and with enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nPerforms a powerful downward attack in front, dealing <color=#FE437E>Ether DMG</color>. If the attack hits an enemy, 3 <color=#FFFFFF>Fandom Power</color> are generated on the field after the attack ends.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Instantly Hooked",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Full-Sugar Electronica",
+          "param": [
+            {
+              "desc": "{Skill:1501009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501009": {
+                  "attackData": [],
+                  "attributeInfliction": 6168,
+                  "damagePercentage": 5430,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 6169,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 5430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6790,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501009": {
+                  "attackData": [],
+                  "attributeInfliction": 6168,
+                  "damagePercentage": 5430,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 6169,
+                  "feverRecovery": 169675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6790,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6790,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Full-Sugar Electronica - No Ice",
+          "param": [
+            {
+              "desc": "{Skill:1501010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501010": {
+                  "attackData": [],
+                  "attributeInfliction": 4453,
+                  "damagePercentage": 6480,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 5734,
+                  "feverRecovery": 157850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 6480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20640,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6710,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501010": {
+                  "attackData": [],
+                  "attributeInfliction": 4453,
+                  "damagePercentage": 6480,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 5734,
+                  "feverRecovery": 157850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20640,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6710,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Fall Into Delusion",
+          "param": [
+            {
+              "desc": "{Skill:1501011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501011": {
+                  "attackData": [],
+                  "attributeInfliction": 45700,
+                  "damagePercentage": 51120,
+                  "damagePercentageGrowth": 4650,
+                  "etherPurify": 15334,
+                  "feverRecovery": 1396450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4650,
+                  "main": 51120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40270,
+                  "stunRatioGrowth": 1840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501011": {
+                  "attackData": [],
+                  "attributeInfliction": 45700,
+                  "damagePercentage": 51120,
+                  "damagePercentageGrowth": 4650,
+                  "etherPurify": 15334,
+                  "feverRecovery": 1396450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1840,
+                  "main": 40270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40270,
+                  "stunRatioGrowth": 1840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Instantly Hooked",
+          "param": [
+            {
+              "desc": "{Skill:1501012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1501012": {
+                  "attackData": [],
+                  "attributeInfliction": 48620,
+                  "damagePercentage": 54450,
+                  "damagePercentageGrowth": 4950,
+                  "etherPurify": 17497,
+                  "feverRecovery": 1485825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4950,
+                  "main": 54450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43360,
+                  "stunRatioGrowth": 1980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1501012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1501012": {
+                  "attackData": [],
+                  "attributeInfliction": 48620,
+                  "damagePercentage": 54450,
+                  "damagePercentageGrowth": 4950,
+                  "etherPurify": 17497,
+                  "feverRecovery": 1485825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1980,
+                  "main": 43360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 43360,
+                  "stunRatioGrowth": 1980
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1501001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Sweet Melody"
+    },
+    "1501002": {
+      "desc": "<IconMap:Icon_Normal> (Hold)",
+      "name": "Basic Attack: Perfect Pitch"
+    },
+    "1501003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Full-Sugar Electronica"
+    },
+    "1501004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Fall Into Delusion"
+    },
+    "1501005": {
+      "desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Instantly Hooked"
+    },
+    "1501006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Silky-Smooth Combo"
+    },
+    "1501007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Slide-Shift Variation"
+    },
+    "1501008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Dream Collab"
+    },
+    "1501009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: 100% Energy"
+    },
+    "1501010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Shatter Fantasy"
+    },
+    "1501011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Clutch Save"
+    },
+    "1501012": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Encore Song"
+    }
+  },
+  "skin": {
+    "3115010": {
+      "desc": "A touch of pink and white, a hint of lights and sound, plus countless days and nights devoted to singing — all of it comes together as a boundless delusion on stage.",
+      "name": "Aria: Energetic Idol"
+    },
+    "3115011": {
+      "desc": "Aria's performance outfit for special shows, worn only a handful of times.\nA pure-white \"angel\" clad in \"demonic\" wings. Take a deep breath, get ready... once the spotlight comes on, it's the Angels of Delusion's time to rebel.",
+      "name": "Aria: Discordant Note"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, on-field DMG dealer",
+    "Charged attacks can trigger Abloom",
+    "Boosts Abloom effects after Daze"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Aria's <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>EX Special Attack</color> deals DMG to enemies, it ignores 10% of the target's <color=#FE437E>Ether Anomaly Buildup RES</color>. Additionally, when Aria triggers <color=#FFFFFF>Abloom</color>, it has a chance to trigger a critical hit. The base CRIT Rate is 25%, and CRIT DMG is 25%. If initial Anomaly Mastery exceeds 100, each additional point of initial Anomaly Mastery increases this effect's CRIT Rate by 0.5%.",
+      "desc2": "\"You see them? Everyone out there is waiting for us. So when the lights come up, we have to be full of energy. That's what it means to be an idol.\"\n—A few whispered words before going on stage.",
+      "name": "Energetic Sound Waves"
+    },
+    "2": {
+      "desc": "When Aria attacks or triggers <color=#FFFFFF>Abloom</color>, it ignores 16% of the target's DEF. During <color=#FFFFFF>Moment of Delusion</color>, attacks and <color=#FFFFFF>Abloom</color> triggers also ignore an additional 8% of the target's DEF.",
+      "desc2": "\"We don't have to sing it yet. Just close our eyes, feel it, and accept it. Then, on stage, through our performance, we'll make the whole audience fall in love with it.\"",
+      "name": "Fantastical Beat"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"Whether it's a dream or just a delusion, we just need to keep running toward a better version of ourselves. Everyone is worthy of being appreciated, and every effort will be remembered by someone.\"",
+      "name": "Delulu"
+    },
+    "4": {
+      "desc": "When Aria triggers <color=#FFFFFF>Abloom</color>, she gains 4 Energy and 70 Decibels. This effect can trigger once every 10s.",
+      "desc2": "My wings are moonlight forged from tempered steel,\nwith lines of code, each vibration made real.\nGears bite into the rhythm of destiny,\nwhile silent electricity roars through me.",
+      "name": "Mechanical Angel"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "I once saw a city swallowed by the Hollows, its order reshaped by Ether. Everything beautiful was consumed by darkness, sinking into the long river of time... like tears fading in the rain.",
+      "name": "Tears in the Rain"
+    },
+    "6": {
+      "desc": "Upon entering the battlefield, Aria immediately gains 1,200 Decibels. In Investigation Zone mode, this effect can trigger once every 180s. After Aria enters <color=#FFFFFF>Moment of Delusion</color>, she will not exit it, and <color=#FFFFFF>enhanced Basic Attack: Perfect Pitch</color> and her <color=#FFFFFF>Ultimate</color> deal 40% increased <color=#FE437E>Ether DMG</color>. While in <color=#FFFFFF>Moment of Delusion</color>, when an enemy on the field enters an Anomaly state, Aria gains 1 stacks of <color=#FFFFFF>All-Out Cheering</color>. This effect can occur once every 6s. When gaining the <color=#FFFFFF>All-Out Cheering</color> effect, if already at 3 stacks of <color=#FFFFFF>All-Out Cheering</color>, any excess <color=#FFFFFF>All-Out Cheering</color> is converted into 2 <color=#FFFFFF>Fandom Power</color> and generated on the field.",
+      "desc2": "Do you still remember that night in September, when love was born?\nDo you still remember the dancing on the stage, in those days when we fell into delusions?",
+      "name": "Construct's Dream"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

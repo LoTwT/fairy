@@ -1,0 +1,1384 @@
+{
+  "camp": {
+    "7": "New Eridu Public Security"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "HP"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1271,
+  "locale": "en",
+  "name": "Seth",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1271015", "1271016", "1271017", "1271018", "1271019"],
+      "basic": [
+        "1271001",
+        "1271002",
+        "1271003",
+        "1271004",
+        "1271005",
+        "1271006"
+      ],
+      "chain": ["1271013", "1271014"],
+      "dodge": ["1271011", "1271012"],
+      "special": ["1271007", "1271008", "1271009"]
+    },
+    "parameterRowsById": {
+      "1271001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1271002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1271003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1271004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1271005": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/2"
+      ],
+      "1271006": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1271007": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1271008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1271009": [
+        "/skill/special/description/3/param/2",
+        "/skill/special/description/3/param/3"
+      ],
+      "1271011": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1271012": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1271013": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1271014": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1271015": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1271016": ["/skill/assist/description/4/param/0"],
+      "1271017": ["/skill/assist/description/4/param/1"],
+      "1271018": ["/skill/assist/description/4/param/2"],
+      "1271019": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "APR 8",
+    "fullName": "Seth Lowell",
+    "gender": "Male",
+    "impressionF": "Seth really is a feline Thiren! He's like a kitty magnet.",
+    "impressionM": "I remember seeing him being completely surrounded by stray cats on the street once.\nMust be nice to be so loved by cats.",
+    "impressions": [
+      "Impressions of Seth:\n · Somehow, we became friends? Seth is really easy to understand.",
+      " · How come Seth is always treating people to meals? Do Pub Sec officers make that much?",
+      " · \"I'm very happy to be Seth's friend\"... Until that day arrives."
+    ],
+    "profileDesc": "Seth, a rookie officer in the Public Security Criminal Investigation Special Response Team, is a key player in providing fire support during criminal investigations.\nHe graduated at the top of his class in the academy and could have landed a higher position, but he chose the tougher path of the Special Response Team.\nHis impressive profile makes him seem like a genius, but he's actually a hard worker who has had his own struggles. There have been times when he practiced the subjects he wasn't good at until he cried.\nSeth is quite smart, but his personality often leads to him being taken advantage of by cunning criminals, or sometimes, coworkers (?).\nThe subject he's worst at is infiltration. Rumor has it that he holds the academy record for \"fastest to get busted\" in infiltration tasks. Based on the video intel we have, he seems a bit slow to catch on. For instance, when someone is being sarcastic, it takes him a long time to realize it.",
+    "stature": "174",
+    "trustLv": {
+      "1": "Seth, a rookie officer in the Public Security Criminal Investigation Special Response Team, is a key player in providing fire support during criminal investigations.\nHe graduated at the top of his class in the academy and could have landed a higher position, but he chose the tougher path of the Special Response Team.\nHis impressive profile makes him seem like a genius, but he's actually a hard worker who has had his own struggles. There have been times when he practiced the subjects he wasn't good at until he cried.\nSeth is quite smart, but his personality often leads to him being taken advantage of by cunning criminals, or sometimes, coworkers (?).\nThe subject he's worst at is infiltration. Rumor has it that he holds the academy record for \"fastest to get busted\" in infiltration tasks. Based on the video intel we have, he seems a bit slow to catch on. For instance, when someone is being sarcastic, it takes him a long time to realize it.",
+      "2": "",
+      "3": "The profile shows that Seth has an older brother who holds a higher position in Public Security.\nTo some, Seth is a rookie riding on family connections within Public Security, but he got in on his own merit and has nothing to do with his brother's influence.\nCurrently, they are not on good terms. When they encounter each other at work, they pretend not to know one another.\nSeth views his brother as a rival he must surpass, and is working hard to achieve that goal.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete Main Commission Chapter 2 Interlude"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1271501": {
+        "desc": [
+          "When Seth uses <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, he gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>40%</color> of his initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. When <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> or <color=#FFFFFF>Assist Follow-Up: Public Security Ruling</color> triggers a <color=#FFFFFF>Quick Assist</color> or <color=#FFFFFF>Chain Attack</color>, causing another squad member to enter the field, that squad member gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>40</color>% of Seth's initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. Having a <color=#FFFFFF>Shield of Firm Resolve</color> increases Anomaly Proficiency by <color=#2BAD00>50</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Seth's <color=#FFFFFF>Chain Attack: Final Judgment</color> or Finishing Move during <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> hits an enemy, the target's Anomaly Buildup RES to all Attributes is reduced by 20%, lasting 20s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Protector", "Additional Ability: High Spirit"],
+        "potential": []
+      },
+      "1271502": {
+        "desc": [
+          "When Seth uses <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, he gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>50%</color> of his initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. When <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> or <color=#FFFFFF>Assist Follow-Up: Public Security Ruling</color> triggers a <color=#FFFFFF>Quick Assist</color> or <color=#FFFFFF>Chain Attack</color>, causing another squad member to enter the field, that squad member gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>50</color>% of Seth's initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. Having a <color=#FFFFFF>Shield of Firm Resolve</color> increases Anomaly Proficiency by <color=#2BAD00>62</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Seth's <color=#FFFFFF>Chain Attack: Final Judgment</color> or Finishing Move during <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> hits an enemy, the target's Anomaly Buildup RES to all Attributes is reduced by 20%, lasting 20s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Protector", "Additional Ability: High Spirit"],
+        "potential": []
+      },
+      "1271503": {
+        "desc": [
+          "When Seth uses <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, he gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>60%</color> of his initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. When <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> or <color=#FFFFFF>Assist Follow-Up: Public Security Ruling</color> triggers a <color=#FFFFFF>Quick Assist</color> or <color=#FFFFFF>Chain Attack</color>, causing another squad member to enter the field, that squad member gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>60</color>% of Seth's initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. Having a <color=#FFFFFF>Shield of Firm Resolve</color> increases Anomaly Proficiency by <color=#2BAD00>75</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Seth's <color=#FFFFFF>Chain Attack: Final Judgment</color> or Finishing Move during <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> hits an enemy, the target's Anomaly Buildup RES to all Attributes is reduced by 20%, lasting 20s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Protector", "Additional Ability: High Spirit"],
+        "potential": []
+      },
+      "1271504": {
+        "desc": [
+          "When Seth uses <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, he gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>68%</color> of his initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. When <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> or <color=#FFFFFF>Assist Follow-Up: Public Security Ruling</color> triggers a <color=#FFFFFF>Quick Assist</color> or <color=#FFFFFF>Chain Attack</color>, causing another squad member to enter the field, that squad member gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>68</color>% of Seth's initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. Having a <color=#FFFFFF>Shield of Firm Resolve</color> increases Anomaly Proficiency by <color=#2BAD00>85</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Seth's <color=#FFFFFF>Chain Attack: Final Judgment</color> or Finishing Move during <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> hits an enemy, the target's Anomaly Buildup RES to all Attributes is reduced by 20%, lasting 20s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Protector", "Additional Ability: High Spirit"],
+        "potential": []
+      },
+      "1271505": {
+        "desc": [
+          "When Seth uses <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, he gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>72%</color> of his initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. When <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> or <color=#FFFFFF>Assist Follow-Up: Public Security Ruling</color> triggers a <color=#FFFFFF>Quick Assist</color> or <color=#FFFFFF>Chain Attack</color>, causing another squad member to enter the field, that squad member gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>72</color>% of Seth's initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. Having a <color=#FFFFFF>Shield of Firm Resolve</color> increases Anomaly Proficiency by <color=#2BAD00>90</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Seth's <color=#FFFFFF>Chain Attack: Final Judgment</color> or Finishing Move during <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> hits an enemy, the target's Anomaly Buildup RES to all Attributes is reduced by 20%, lasting 20s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Protector", "Additional Ability: High Spirit"],
+        "potential": []
+      },
+      "1271506": {
+        "desc": [
+          "When Seth uses <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, he gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>76%</color> of his initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. When <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> or <color=#FFFFFF>Assist Follow-Up: Public Security Ruling</color> triggers a <color=#FFFFFF>Quick Assist</color> or <color=#FFFFFF>Chain Attack</color>, causing another squad member to enter the field, that squad member gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>76</color>% of Seth's initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. Having a <color=#FFFFFF>Shield of Firm Resolve</color> increases Anomaly Proficiency by <color=#2BAD00>95</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Seth's <color=#FFFFFF>Chain Attack: Final Judgment</color> or Finishing Move during <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> hits an enemy, the target's Anomaly Buildup RES to all Attributes is reduced by 20%, lasting 20s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Protector", "Additional Ability: High Spirit"],
+        "potential": []
+      },
+      "1271507": {
+        "desc": [
+          "When Seth uses <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, he gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>80%</color> of his initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. When <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> or <color=#FFFFFF>Assist Follow-Up: Public Security Ruling</color> triggers a <color=#FFFFFF>Quick Assist</color> or <color=#FFFFFF>Chain Attack</color>, causing another squad member to enter the field, that squad member gains a <color=#FFFFFF>Shield of Firm Resolve</color> equal to <color=#2BAD00>80</color>% of Seth's initial ATK, up to a max of 3,000 points, and lasting 25s. This effect can trigger once every 10s. Having a <color=#FFFFFF>Shield of Firm Resolve</color> increases Anomaly Proficiency by <color=#2BAD00>100</color>.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Seth's <color=#FFFFFF>Chain Attack: Final Judgment</color> or Finishing Move during <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> hits an enemy, the target's Anomaly Buildup RES to all Attributes is reduced by 20%, lasting 20s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Protector", "Additional Ability: High Spirit"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nUnleash a quick downward slash on enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nAfter the move, hold <IconMap:Icon_SpecialReady> to chain into <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, enabling faster charging.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Armed Support",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nUpon activation, gain 25% <color=#FFFFFF>Resolve</color>.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Thundershield",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nLaunch a forward thrust attack, followed by two horizontal slashes, dealing <color=#2EB6FF>Electric DMG</color>.\nWhen the skill hits an enemy, it triggers the <color=#FFFFFF>Quick Assist</color> of the squad member positioned before Seth.\nAfter activating the move, hold <IconMap:Icon_SpecialReady> to transition to <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color> and charge faster.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Public Security Ruling",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Armed Support",
+          "param": [
+            {
+              "desc": "{Skill:1271015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271015": {
+                  "attackData": [],
+                  "attributeInfliction": 10000,
+                  "damagePercentage": 10000,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 5000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 10000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10000,
+                  "stunRatioGrowth": 460
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271015": {
+                  "attackData": [],
+                  "attributeInfliction": 10000,
+                  "damagePercentage": 10000,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 5000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 10000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10000,
+                  "stunRatioGrowth": 460
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Thundershield",
+          "param": [
+            {
+              "desc": "{Skill:1271016, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1271016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24670,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271017, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1271017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1420,
+                  "main": 31170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271018, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1271018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15170,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Public Security Ruling",
+          "param": [
+            {
+              "desc": "{Skill:1271019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271019": {
+                  "attackData": [],
+                  "attributeInfliction": 40322,
+                  "damagePercentage": 42850,
+                  "damagePercentageGrowth": 3900,
+                  "etherPurify": 22667,
+                  "feverRecovery": 1316975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3900,
+                  "main": 42850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 37800,
+                  "stunRatioGrowth": 1720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271019": {
+                  "attackData": [],
+                  "attributeInfliction": 40322,
+                  "damagePercentage": 42850,
+                  "damagePercentageGrowth": 3900,
+                  "etherPurify": 22667,
+                  "feverRecovery": 1316975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1720,
+                  "main": 37800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 37800,
+                  "stunRatioGrowth": 1720
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 attacks in front, dealing <color=#F0D12B>Physical DMG</color> and <color=#2EB6FF>Electric DMG</color>.",
+          "name": "Basic Attack: Lightning Strike",
+          "potential": []
+        },
+        {
+          "desc": "When <color=#FFFFFF>Resolve</color> is above or equal to 75%, hold <IconMap:Icon_Normal> to activate.\nConsume 75% <color=#FFFFFF>Resolve</color> to launch consecutive attacks in front, followed by a Finishing Move, dealing <color=#2EB6FF>Electric DMG</color>.\nWhen the Finishing Move hits an enemy, it triggers the <color=#FFFFFF>Quick Assist</color> of the squad member positioned before Seth.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Basic Attack: Lightning Strike - Electrified",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Lightning Strike",
+          "param": [
+            {
+              "desc": "{Skill:1271001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1271001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3620,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 1809,
+                  "feverRecovery": 49775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1810,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1271002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5650,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 4510,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 5650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16240,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1271003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 19330,
+                  "damagePercentageGrowth": 1760,
+                  "etherPurify": 15124,
+                  "feverRecovery": 416075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1760,
+                  "main": 19330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 54450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15130,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1271004": {
+                  "attackData": [],
+                  "attributeInfliction": 8041,
+                  "damagePercentage": 9740,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 8042,
+                  "feverRecovery": 221375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 9740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8050,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1271001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3620,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 1809,
+                  "feverRecovery": 49775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1810,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1271002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5650,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 4510,
+                  "feverRecovery": 124025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16240,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1271003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 19330,
+                  "damagePercentageGrowth": 1760,
+                  "etherPurify": 15124,
+                  "feverRecovery": 416075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 54450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15130,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1271004": {
+                  "attackData": [],
+                  "attributeInfliction": 8041,
+                  "damagePercentage": 9740,
+                  "damagePercentageGrowth": 890,
+                  "etherPurify": 8042,
+                  "feverRecovery": 221375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 8050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8050,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Lightning Strike - Electrified",
+          "param": [
+            {
+              "desc": "{Skill:1271005, Prop:1001}",
+              "name": "Consecutive Attack DMG Multiplier",
+              "param": {
+                "1271005": {
+                  "attackData": [],
+                  "attributeInfliction": 16168,
+                  "damagePercentage": 38280,
+                  "damagePercentageGrowth": 3480,
+                  "etherPurify": 14361,
+                  "feverRecovery": 444675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3480,
+                  "main": 38280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 58210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16170,
+                  "stunRatioGrowth": 740
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271006, Prop:1001}",
+              "name": "Finishing Move DMG Multiplier",
+              "param": {
+                "1271006": {
+                  "attackData": [],
+                  "attributeInfliction": 13220,
+                  "damagePercentage": 42420,
+                  "damagePercentageGrowth": 3860,
+                  "etherPurify": 13221,
+                  "feverRecovery": 363825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3860,
+                  "main": 42420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14550,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271005, Prop:1002}",
+              "name": "Consecutive Attack Daze Multiplier",
+              "param": {
+                "1271005": {
+                  "attackData": [],
+                  "attributeInfliction": 16168,
+                  "damagePercentage": 38280,
+                  "damagePercentageGrowth": 3480,
+                  "etherPurify": 14361,
+                  "feverRecovery": 444675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 740,
+                  "main": 16170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 58210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16170,
+                  "stunRatioGrowth": 740
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271006, Prop:1002}",
+              "name": "Finishing Move Daze Multiplier",
+              "param": {
+                "1271006": {
+                  "attackData": [],
+                  "attributeInfliction": 13220,
+                  "damagePercentage": 42420,
+                  "damagePercentageGrowth": 3860,
+                  "etherPurify": 13221,
+                  "feverRecovery": 363825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 670,
+                  "main": 14550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14550,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nLaunch a series of slashes in front, dealing massive <color=#2EB6FF>Electric DMG</color>.\nActivating the move accumulates 75% <color=#FFFFFF>Resolve</color>.\nAfter the move, hold <IconMap:Icon_SpecialReady> to chain into <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, enabling faster charging.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Final Judgment",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nLaunch a series of upward attacks in front, followed by a Finishing Move, dealing massive <color=#2EB6FF>Electric DMG</color>.\nActivating the move accumulates 75% <color=#FFFFFF>Resolve</color>, and grants 3 additional Assist Points.\nAfter the move, hold <IconMap:Icon_SpecialReady> to chain into <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, enabling faster charging.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Justice Prevails",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Final Judgment",
+          "param": [
+            {
+              "desc": "{Skill:1271013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271013": {
+                  "attackData": [],
+                  "attributeInfliction": 50453,
+                  "damagePercentage": 70410,
+                  "damagePercentageGrowth": 6410,
+                  "etherPurify": 30504,
+                  "feverRecovery": 2667775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6410,
+                  "main": 70410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30510,
+                  "stunRatioGrowth": 1390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271013": {
+                  "attackData": [],
+                  "attributeInfliction": 50453,
+                  "damagePercentage": 70410,
+                  "damagePercentageGrowth": 6410,
+                  "etherPurify": 30504,
+                  "feverRecovery": 2667775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1390,
+                  "main": 30510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30510,
+                  "stunRatioGrowth": 1390
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Justice Prevails",
+          "param": [
+            {
+              "desc": "{Skill:1271014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271014": {
+                  "attackData": [],
+                  "attributeInfliction": 40329,
+                  "damagePercentage": 202430,
+                  "damagePercentageGrowth": 18410,
+                  "etherPurify": 90330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 18410,
+                  "main": 202430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40330,
+                  "stunRatioGrowth": 1840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271014": {
+                  "attackData": [],
+                  "attributeInfliction": 40329,
+                  "damagePercentage": 202430,
+                  "damagePercentageGrowth": 18410,
+                  "etherPurify": 90330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1840,
+                  "main": 40330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40330,
+                  "stunRatioGrowth": 1840
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Evasion Maneuver",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a Dodge to activate:\nCharge forward with a shield attack, dealing <color=#F0D12B>Physical DMG</color>.\nDamage received during the move is decreased by 40%.",
+          "name": "Dash Attack: Thunder Assault",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nUnleash a quick downward slash on enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nAfter the move, hold <IconMap:Icon_SpecialReady> to chain into <color=#FFFFFF>EX Special Attack: Thunder Shield Rush - High Voltage</color>, enabling faster charging.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Retreat to Advance",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Thunder Assault",
+          "param": [
+            {
+              "desc": "{Skill:1271011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11000,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 5499,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1000,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11000,
+                  "damagePercentageGrowth": 1000,
+                  "etherPurify": 5499,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Retreat to Advance",
+          "param": [
+            {
+              "desc": "{Skill:1271012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271012": {
+                  "attackData": [],
+                  "attributeInfliction": 10000,
+                  "damagePercentage": 23000,
+                  "damagePercentageGrowth": 2100,
+                  "etherPurify": 25000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2100,
+                  "main": 23000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20000,
+                  "stunRatioGrowth": 910
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271012": {
+                  "attackData": [],
+                  "attributeInfliction": 10000,
+                  "damagePercentage": 23000,
+                  "damagePercentageGrowth": 2100,
+                  "etherPurify": 25000,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 20000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20000,
+                  "stunRatioGrowth": 910
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nLaunch two shield attacks forward, dealing <color=#2EB6FF>Electric DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Thunder Shield Rush",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nUnleash a series of slashes in front, dealing massive <color=#2EB6FF>Electric DMG</color>.\nHold <IconMap:Icon_SpecialReady>to charge the move, and Seth will dash forward, unleashing a series of powerful slashes, dealing massive <color=#2EB6FF>Electric DMG</color>.\nActivating the move accumulates 75% <color=#FFFFFF>Resolve</color>.\nAnti-Interrupt level is increased while charging this skill, and damage taken is reduced by 40%.\nSeth is invulnerable during the consecutive slashes.",
+          "name": "EX Special Attack: Thunder Shield Rush - High Voltage",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Thunder Shield Rush",
+          "param": [
+            {
+              "desc": "{Skill:1271007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271007": {
+                  "attackData": [],
+                  "attributeInfliction": 6918,
+                  "damagePercentage": 6920,
+                  "damagePercentageGrowth": 630,
+                  "etherPurify": 6919,
+                  "feverRecovery": 190300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 6920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6920,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271007": {
+                  "attackData": [],
+                  "attributeInfliction": 6918,
+                  "damagePercentage": 6920,
+                  "damagePercentageGrowth": 630,
+                  "etherPurify": 6919,
+                  "feverRecovery": 190300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6920,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Thunder Shield Rush - High Voltage",
+          "param": [
+            {
+              "desc": "{Skill:1271008, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1271008": {
+                  "attackData": [],
+                  "attributeInfliction": 59316,
+                  "damagePercentage": 64600,
+                  "damagePercentageGrowth": 5880,
+                  "etherPurify": 22334,
+                  "feverRecovery": 2067175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5880,
+                  "main": 64600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 54040,
+                  "stunRatioGrowth": 2460
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271008, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1271008": {
+                  "attackData": [],
+                  "attributeInfliction": 59316,
+                  "damagePercentage": 64600,
+                  "damagePercentageGrowth": 5880,
+                  "etherPurify": 22334,
+                  "feverRecovery": 2067175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2460,
+                  "main": 54040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 54040,
+                  "stunRatioGrowth": 2460
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271009, Prop:1001}",
+              "name": "DMG Multiplier (Charged)",
+              "param": {
+                "1271009": {
+                  "attackData": [],
+                  "attributeInfliction": 92438,
+                  "damagePercentage": 99980,
+                  "damagePercentageGrowth": 9090,
+                  "etherPurify": 39667,
+                  "feverRecovery": 3164150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9090,
+                  "main": 99980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 84900,
+                  "stunRatioGrowth": 3860
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1271009, Prop:1002}",
+              "name": "Daze Multiplier (Charged)",
+              "param": {
+                "1271009": {
+                  "attackData": [],
+                  "attributeInfliction": 92438,
+                  "damagePercentage": 99980,
+                  "damagePercentageGrowth": 9090,
+                  "etherPurify": 39667,
+                  "feverRecovery": 3164150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3860,
+                  "main": 84900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 84900,
+                  "stunRatioGrowth": 3860
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "80",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1271001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Lightning Strike"
+    },
+    "1271002": {
+      "desc": "<IconMap:Icon_Normal> (While resolve exceeds 75%) (Hold)",
+      "name": "Basic Attack: Lightning Strike - Electrified"
+    },
+    "1271003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Thunder Shield Rush"
+    },
+    "1271004": {
+      "desc": "<IconMap:Icon_SpecialReady>(Can Hold Down)",
+      "name": "EX Special Attack: Thunder Shield Rush - High Voltage"
+    },
+    "1271005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Thunder Assault"
+    },
+    "1271006": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Retreat to Advance"
+    },
+    "1271007": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Final Judgment"
+    },
+    "1271008": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Justice Prevails"
+    },
+    "1271009": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Armed Support"
+    },
+    "1271010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Thundershield"
+    },
+    "1271011": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Public Security Ruling"
+    }
+  },
+  "skin": {
+    "3112710": {
+      "desc": "He may be slow to pick up on things, slower even than the weight of the shield in his left hand, but his ability to detect evil is keener than the baton in his right.",
+      "name": "Seth: Incorruptible Heart"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "05",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, Anomaly-based support",
+    "Grants shields and Anomaly Proficiency to the whole squad"
+  ],
+  "talent": {
+    "1": {
+      "desc": "The shield value provided by <color=#FFFFFF>Shield of Firm Resolve</color> and its maximum limit is increased by 30%. When <color=#FFFFFF>Shield of Firm Resolve</color> ends, the Anomaly Proficiency increase provided by <color=#FFFFFF>Core Passive: Protector</color> lasts an additional 10s.",
+      "desc2": "When it comes to team missions, Seth is always leading the charge.\n\"Let me handle the arrests! I scored a 99 in close-quarters arrests, and the only point deducted was because I accidentally sprained the instructor's wrist.\"",
+      "name": "Heroism"
+    },
+    "2": {
+      "desc": "Upon entering battle, Seth immediately gains 75% <color=#FFFFFF>Resolve</color>. Hitting an enemy with <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color> increases the move's accumulated <color=#2EB6FF>Electric Anomaly Buildup</color> by 35%.",
+      "desc2": "Many criminals make the mistake of underestimating Seth.\nIt might be his pure, clear eyes or those innocent-looking furry ears and tail. Whatever the reason, everyone who underestimates him eventually pays the price.",
+      "name": "Recklessness of Youth"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"A skilled officer like you must handle everything on your own, right? No help from others, surely?\"\nEven after hearing this, Seth remained composed and didn't say a word.\nIt wasn't until midnight that he suddenly woke up: \"Could that guy's comment earlier... have been a dig at me?\"",
+      "name": "Slow Reflexes"
+    },
+    "4": {
+      "desc": "The Daze caused by <color=#FFFFFF>Defensive Assist: Thundershield</color> is increased by 25%.",
+      "desc2": "\"Put aside your foolish notions of good and evil. You can't protect everyone. Sometimes, you have to make a choice.\"\n\"This is my choice, and it's the core responsibility of an officer — you're the one who has changed, Brother.\"",
+      "name": "Core Aspiration"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Seth used to deeply admire and respect his older brother. But as you know, \"admiration\" is the furthest thing from \"understanding.\"\n\"Someday, I'll become the finest officer... and make him eat his words!\"",
+      "name": "Distant Admiration"
+    },
+    "6": {
+      "desc": "When Seth lands a Finishing Move on an enemy with <color=#FFFFFF>Basic Attack: Lightning Strike - Electrified</color>, it deals additional damage equal to 500% of his ATK. The attack is guaranteed to trigger a critical hit, and CRIT DMG is increased by 60%.",
+      "desc2": "To a young person, everything is clear-cut, with a stark contrast between black and white, right and wrong.\nThere will always be someone who tries to tell him that the world is a murky gray. But is a world where everything is clear-cut and distinct really not worth striving for?",
+      "name": "Idealist"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

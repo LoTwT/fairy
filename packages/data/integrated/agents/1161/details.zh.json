@@ -1,0 +1,1957 @@
+{
+  "camp": {
+    "4": "卡吕冬之子"
+  },
+  "elementType": {
+    "201": "火属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "冲击力"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "火属性伤害加成"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    }
+  },
+  "hitType": {
+    "102": "打击"
+  },
+  "id": 1161,
+  "locale": "zh",
+  "name": "莱特",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1161020", "1161021", "1161022", "1161023", "1161024"],
+      "basic": [
+        "1161001",
+        "1161002",
+        "1161003",
+        "1161004",
+        "1161005",
+        "1161006",
+        "1161007",
+        "1161008",
+        "1161009",
+        "1161010",
+        "1161011",
+        "1161012",
+        "1161025",
+        "1161026",
+        "1161027",
+        "1161028"
+      ],
+      "chain": ["1161018", "1161019"],
+      "dodge": ["1161016", "1161017"],
+      "special": ["1161013", "1161014", "1161015"]
+    },
+    "parameterRowsById": {
+      "1161001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/16"
+      ],
+      "1161002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/17"
+      ],
+      "1161003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/18"
+      ],
+      "1161004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/19"
+      ],
+      "1161005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/20"
+      ],
+      "1161006": [
+        "/skill/basic/description/1/param/5",
+        "/skill/basic/description/1/param/21"
+      ],
+      "1161007": [
+        "/skill/basic/description/1/param/6",
+        "/skill/basic/description/1/param/22"
+      ],
+      "1161008": [
+        "/skill/basic/description/1/param/7",
+        "/skill/basic/description/1/param/23"
+      ],
+      "1161009": [
+        "/skill/basic/description/1/param/8",
+        "/skill/basic/description/1/param/24"
+      ],
+      "1161010": [
+        "/skill/basic/description/1/param/9",
+        "/skill/basic/description/1/param/25"
+      ],
+      "1161011": [
+        "/skill/basic/description/1/param/10",
+        "/skill/basic/description/1/param/26"
+      ],
+      "1161012": [
+        "/skill/basic/description/1/param/11",
+        "/skill/basic/description/1/param/27"
+      ],
+      "1161013": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1161014": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/2"
+      ],
+      "1161015": [
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/3"
+      ],
+      "1161016": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1161017": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1161018": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1161019": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1161020": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1161021": ["/skill/assist/description/4/param/0"],
+      "1161022": ["/skill/assist/description/4/param/1"],
+      "1161023": ["/skill/assist/description/4/param/2"],
+      "1161024": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1161025": [
+        "/skill/basic/description/1/param/15",
+        "/skill/basic/description/1/param/31"
+      ],
+      "1161026": [
+        "/skill/basic/description/1/param/12",
+        "/skill/basic/description/1/param/28"
+      ],
+      "1161027": [
+        "/skill/basic/description/1/param/13",
+        "/skill/basic/description/1/param/29"
+      ],
+      "1161028": [
+        "/skill/basic/description/1/param/14",
+        "/skill/basic/description/1/param/30"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "12/27",
+    "fullName": "莱特",
+    "gender": "男",
+    "impressionF": "莱特之前是不是说过自己晕血？然后一直戴着墨镜也是因为晕血…\n晕血的人可以当常胜冠军吗？还能在地下搏击场打拳…",
+    "impressionM": "总觉得这是非常敷衍的借口啊…",
+    "impressions": [
+      "对莱特的印象：\n · 莱特的手下败将…到底有几位数？",
+      " · 墨镜给他带来了帅气，也带来了困扰。",
+      " · 愿时间可以治愈这一切。"
+    ],
+    "profileDesc": "莱特，卡吕冬之子的常胜冠军，前雇佣兵。\n在外环，常胜冠军指团战中专门负责解决对面最强战士的成员，通常需要进行一对一的决斗，为团长消除威胁。他的胜利至关重要，可以带来巨大的荣耀，并鼓舞整个团队的士气。\n「常胜冠军可以死，但不能输。」\n\n卡吕冬之子的常胜冠军象征物是一条红色的围巾。\n即使敌人没有听说过莱特，只要看到红围巾便能认出他的身份。\n\n根据已有信息推断，莱特本身是个相对低调的人。只有在履行常胜冠军职责的时候，他才会刻意在战场上做出高调的表演。\n备注：莱特是卡吕冬之子的第二任「红围巾」。他会戏谑地称呼上一任为「前辈」。",
+    "stature": "185",
+    "trustLv": {
+      "1": "莱特，卡吕冬之子的常胜冠军，前雇佣兵。\n在外环，常胜冠军指团战中专门负责解决对面最强战士的成员，通常需要进行一对一的决斗，为团长消除威胁。他的胜利至关重要，可以带来巨大的荣耀，并鼓舞整个团队的士气。\n「常胜冠军可以死，但不能输。」\n\n卡吕冬之子的常胜冠军象征物是一条红色的围巾。\n即使敌人没有听说过莱特，只要看到红围巾便能认出他的身份。\n\n根据已有信息推断，莱特本身是个相对低调的人。只有在履行常胜冠军职责的时候，他才会刻意在战场上做出高调的表演。\n备注：莱特是卡吕冬之子的第二任「红围巾」。他会戏谑地称呼上一任为「前辈」。",
+      "2": "",
+      "3": "莱特曾是雇佣兵团的团长。\n发生了某个意外之后，莱特解散了佣兵团，并欠下一笔巨款。为了还清款项，莱特选择进入地下搏击场。\n随后莱特被大老爹发现，高价雇佣他进入卡吕冬之子，代替比利之前的位置。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线：「悠然插曲·意外的新顾客」（主线第四章完成后开启）后解锁",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1161501": {
+        "desc": [
+          "莱特会随时间自动获得<color=#FFFFFF>[士气]</color>，每秒回复2.9点，队伍中任意角色每消耗1点能量值，额外为莱特回复0.26点<color=#FFFFFF>[士气]</color>，莱特最多拥有100点<color=#FFFFFF>[士气]</color>；<color=#FFFFFF>[士气]</color>回复至80点时，下一次换入前场将直接发动<color=#FFFFFF>[快速支援]</color>；<color=#FFFFFF>[士气]</color>大于等于80点后，莱特发动第五段<color=#FFFFFF>[普通攻击]</color>时，将进入<color=#FFFFFF>[士气喷发]</color>状态，提升<color=#FFFFFF>[普通攻击]</color>第五段中轻拳起攻、刺拳连击和终结一击的威力；威力提升后，招式命中敌人时，会持续消耗<color=#FFFFFF>[士气]</color>，每消耗10点<color=#FFFFFF>[士气]</color>，莱特的冲击力提升<color=#2BAD00>1%</color>，最多提升<color=#2BAD00>10%</color>，持续6秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特不再随时间自动获得<color=#FFFFFF>[士气]</color>，轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>时，会自动衔接发动更加强力的终结一击；\n<color=#FFFFFF>[士气喷发]</color>状态下，轻拳起攻或刺拳连击命中敌人时，目标的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>降低15%，持续30秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，终结一击命中敌人时，会对目标施加<color=#FFFFFF>[溃败]</color>效果，使其进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前<color=#FFFFFF>[溃败]</color>效果对同一目标最多触发一次；\n<color=#FFFFFF>[普通攻击]</color>第五段终结一击命中敌人、换回后场或<color=#FFFFFF>[士气]</color>耗尽时，莱特将退出<color=#FFFFFF>[士气喷发]</color>状态，尚未消耗的<color=#FFFFFF>[士气]</color>会被保留。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特第五段<color=#FFFFFF>[普通攻击]</color>命中敌人时，全队角色获得一层<color=#FFFFFF>[昂扬]</color>，最多叠加20层，持续30秒，重复触发时刷新持续时间；每拥有一层<color=#FFFFFF>[昂扬]</color>，代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升1.25%，获得<color=#FFFFFF>[昂扬]</color>时，若莱特的冲击力高于170点，每超过10点冲击力会使每层<color=#FFFFFF>[昂扬]</color>提供的增益效果额外提升0.25%；队伍中任意角色发动<color=#FFFFFF>[连携技]</color>时，会刷新全队角色<color=#FFFFFF>[昂扬]</color>的持续时间；<color=#FFFFFF>[昂扬]</color>最多使代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升75%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：助燃剂", "额外能力：斗志昂扬"],
+        "potential": []
+      },
+      "1161502": {
+        "desc": [
+          "莱特会随时间自动获得<color=#FFFFFF>[士气]</color>，每秒回复2.9点，队伍中任意角色每消耗1点能量值，额外为莱特回复0.26点<color=#FFFFFF>[士气]</color>，莱特最多拥有100点<color=#FFFFFF>[士气]</color>；<color=#FFFFFF>[士气]</color>回复至80点时，下一次换入前场将直接发动<color=#FFFFFF>[快速支援]</color>；<color=#FFFFFF>[士气]</color>大于等于80点后，莱特发动第五段<color=#FFFFFF>[普通攻击]</color>时，将进入<color=#FFFFFF>[士气喷发]</color>状态，提升<color=#FFFFFF>[普通攻击]</color>第五段中轻拳起攻、刺拳连击和终结一击的威力；威力提升后，招式命中敌人时，会持续消耗<color=#FFFFFF>[士气]</color>，每消耗10点<color=#FFFFFF>[士气]</color>，莱特的冲击力提升<color=#2BAD00>1.17%</color>，最多提升<color=#2BAD00>11.7%</color>，持续6秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特不再随时间自动获得<color=#FFFFFF>[士气]</color>，轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>时，会自动衔接发动更加强力的终结一击；\n<color=#FFFFFF>[士气喷发]</color>状态下，轻拳起攻或刺拳连击命中敌人时，目标的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>降低15%，持续30秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，终结一击命中敌人时，会对目标施加<color=#FFFFFF>[溃败]</color>效果，使其进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前<color=#FFFFFF>[溃败]</color>效果对同一目标最多触发一次；\n<color=#FFFFFF>[普通攻击]</color>第五段终结一击命中敌人、换回后场或<color=#FFFFFF>[士气]</color>耗尽时，莱特将退出<color=#FFFFFF>[士气喷发]</color>状态，尚未消耗的<color=#FFFFFF>[士气]</color>会被保留。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特第五段<color=#FFFFFF>[普通攻击]</color>命中敌人时，全队角色获得一层<color=#FFFFFF>[昂扬]</color>，最多叠加20层，持续30秒，重复触发时刷新持续时间；每拥有一层<color=#FFFFFF>[昂扬]</color>，代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升1.25%，获得<color=#FFFFFF>[昂扬]</color>时，若莱特的冲击力高于170点，每超过10点冲击力会使每层<color=#FFFFFF>[昂扬]</color>提供的增益效果额外提升0.25%；队伍中任意角色发动<color=#FFFFFF>[连携技]</color>时，会刷新全队角色<color=#FFFFFF>[昂扬]</color>的持续时间；<color=#FFFFFF>[昂扬]</color>最多使代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升75%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：助燃剂", "额外能力：斗志昂扬"],
+        "potential": []
+      },
+      "1161503": {
+        "desc": [
+          "莱特会随时间自动获得<color=#FFFFFF>[士气]</color>，每秒回复2.9点，队伍中任意角色每消耗1点能量值，额外为莱特回复0.26点<color=#FFFFFF>[士气]</color>，莱特最多拥有100点<color=#FFFFFF>[士气]</color>；<color=#FFFFFF>[士气]</color>回复至80点时，下一次换入前场将直接发动<color=#FFFFFF>[快速支援]</color>；<color=#FFFFFF>[士气]</color>大于等于80点后，莱特发动第五段<color=#FFFFFF>[普通攻击]</color>时，将进入<color=#FFFFFF>[士气喷发]</color>状态，提升<color=#FFFFFF>[普通攻击]</color>第五段中轻拳起攻、刺拳连击和终结一击的威力；威力提升后，招式命中敌人时，会持续消耗<color=#FFFFFF>[士气]</color>，每消耗10点<color=#FFFFFF>[士气]</color>，莱特的冲击力提升<color=#2BAD00>1.33%</color>，最多提升<color=#2BAD00>13.3%</color>，持续6秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特不再随时间自动获得<color=#FFFFFF>[士气]</color>，轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>时，会自动衔接发动更加强力的终结一击；\n<color=#FFFFFF>[士气喷发]</color>状态下，轻拳起攻或刺拳连击命中敌人时，目标的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>降低15%，持续30秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，终结一击命中敌人时，会对目标施加<color=#FFFFFF>[溃败]</color>效果，使其进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前<color=#FFFFFF>[溃败]</color>效果对同一目标最多触发一次；\n<color=#FFFFFF>[普通攻击]</color>第五段终结一击命中敌人、换回后场或<color=#FFFFFF>[士气]</color>耗尽时，莱特将退出<color=#FFFFFF>[士气喷发]</color>状态，尚未消耗的<color=#FFFFFF>[士气]</color>会被保留。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特第五段<color=#FFFFFF>[普通攻击]</color>命中敌人时，全队角色获得一层<color=#FFFFFF>[昂扬]</color>，最多叠加20层，持续30秒，重复触发时刷新持续时间；每拥有一层<color=#FFFFFF>[昂扬]</color>，代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升1.25%，获得<color=#FFFFFF>[昂扬]</color>时，若莱特的冲击力高于170点，每超过10点冲击力会使每层<color=#FFFFFF>[昂扬]</color>提供的增益效果额外提升0.25%；队伍中任意角色发动<color=#FFFFFF>[连携技]</color>时，会刷新全队角色<color=#FFFFFF>[昂扬]</color>的持续时间；<color=#FFFFFF>[昂扬]</color>最多使代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升75%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：助燃剂", "额外能力：斗志昂扬"],
+        "potential": []
+      },
+      "1161504": {
+        "desc": [
+          "莱特会随时间自动获得<color=#FFFFFF>[士气]</color>，每秒回复2.9点，队伍中任意角色每消耗1点能量值，额外为莱特回复0.26点<color=#FFFFFF>[士气]</color>，莱特最多拥有100点<color=#FFFFFF>[士气]</color>；<color=#FFFFFF>[士气]</color>回复至80点时，下一次换入前场将直接发动<color=#FFFFFF>[快速支援]</color>；<color=#FFFFFF>[士气]</color>大于等于80点后，莱特发动第五段<color=#FFFFFF>[普通攻击]</color>时，将进入<color=#FFFFFF>[士气喷发]</color>状态，提升<color=#FFFFFF>[普通攻击]</color>第五段中轻拳起攻、刺拳连击和终结一击的威力；威力提升后，招式命中敌人时，会持续消耗<color=#FFFFFF>[士气]</color>，每消耗10点<color=#FFFFFF>[士气]</color>，莱特的冲击力提升<color=#2BAD00>1.5%</color>，最多提升<color=#2BAD00>15%</color>，持续6秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特不再随时间自动获得<color=#FFFFFF>[士气]</color>，轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>时，会自动衔接发动更加强力的终结一击；\n<color=#FFFFFF>[士气喷发]</color>状态下，轻拳起攻或刺拳连击命中敌人时，目标的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>降低15%，持续30秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，终结一击命中敌人时，会对目标施加<color=#FFFFFF>[溃败]</color>效果，使其进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前<color=#FFFFFF>[溃败]</color>效果对同一目标最多触发一次；\n<color=#FFFFFF>[普通攻击]</color>第五段终结一击命中敌人、换回后场或<color=#FFFFFF>[士气]</color>耗尽时，莱特将退出<color=#FFFFFF>[士气喷发]</color>状态，尚未消耗的<color=#FFFFFF>[士气]</color>会被保留。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特第五段<color=#FFFFFF>[普通攻击]</color>命中敌人时，全队角色获得一层<color=#FFFFFF>[昂扬]</color>，最多叠加20层，持续30秒，重复触发时刷新持续时间；每拥有一层<color=#FFFFFF>[昂扬]</color>，代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升1.25%，获得<color=#FFFFFF>[昂扬]</color>时，若莱特的冲击力高于170点，每超过10点冲击力会使每层<color=#FFFFFF>[昂扬]</color>提供的增益效果额外提升0.25%；队伍中任意角色发动<color=#FFFFFF>[连携技]</color>时，会刷新全队角色<color=#FFFFFF>[昂扬]</color>的持续时间；<color=#FFFFFF>[昂扬]</color>最多使代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升75%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：助燃剂", "额外能力：斗志昂扬"],
+        "potential": []
+      },
+      "1161505": {
+        "desc": [
+          "莱特会随时间自动获得<color=#FFFFFF>[士气]</color>，每秒回复2.9点，队伍中任意角色每消耗1点能量值，额外为莱特回复0.26点<color=#FFFFFF>[士气]</color>，莱特最多拥有100点<color=#FFFFFF>[士气]</color>；<color=#FFFFFF>[士气]</color>回复至80点时，下一次换入前场将直接发动<color=#FFFFFF>[快速支援]</color>；<color=#FFFFFF>[士气]</color>大于等于80点后，莱特发动第五段<color=#FFFFFF>[普通攻击]</color>时，将进入<color=#FFFFFF>[士气喷发]</color>状态，提升<color=#FFFFFF>[普通攻击]</color>第五段中轻拳起攻、刺拳连击和终结一击的威力；威力提升后，招式命中敌人时，会持续消耗<color=#FFFFFF>[士气]</color>，每消耗10点<color=#FFFFFF>[士气]</color>，莱特的冲击力提升<color=#2BAD00>1.67%</color>，最多提升<color=#2BAD00>16.7%</color>，持续6秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特不再随时间自动获得<color=#FFFFFF>[士气]</color>，轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>时，会自动衔接发动更加强力的终结一击；\n<color=#FFFFFF>[士气喷发]</color>状态下，轻拳起攻或刺拳连击命中敌人时，目标的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>降低15%，持续30秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，终结一击命中敌人时，会对目标施加<color=#FFFFFF>[溃败]</color>效果，使其进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前<color=#FFFFFF>[溃败]</color>效果对同一目标最多触发一次；\n<color=#FFFFFF>[普通攻击]</color>第五段终结一击命中敌人、换回后场或<color=#FFFFFF>[士气]</color>耗尽时，莱特将退出<color=#FFFFFF>[士气喷发]</color>状态，尚未消耗的<color=#FFFFFF>[士气]</color>会被保留。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特第五段<color=#FFFFFF>[普通攻击]</color>命中敌人时，全队角色获得一层<color=#FFFFFF>[昂扬]</color>，最多叠加20层，持续30秒，重复触发时刷新持续时间；每拥有一层<color=#FFFFFF>[昂扬]</color>，代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升1.25%，获得<color=#FFFFFF>[昂扬]</color>时，若莱特的冲击力高于170点，每超过10点冲击力会使每层<color=#FFFFFF>[昂扬]</color>提供的增益效果额外提升0.25%；队伍中任意角色发动<color=#FFFFFF>[连携技]</color>时，会刷新全队角色<color=#FFFFFF>[昂扬]</color>的持续时间；<color=#FFFFFF>[昂扬]</color>最多使代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升75%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：助燃剂", "额外能力：斗志昂扬"],
+        "potential": []
+      },
+      "1161506": {
+        "desc": [
+          "莱特会随时间自动获得<color=#FFFFFF>[士气]</color>，每秒回复2.9点，队伍中任意角色每消耗1点能量值，额外为莱特回复0.26点<color=#FFFFFF>[士气]</color>，莱特最多拥有100点<color=#FFFFFF>[士气]</color>；<color=#FFFFFF>[士气]</color>回复至80点时，下一次换入前场将直接发动<color=#FFFFFF>[快速支援]</color>；<color=#FFFFFF>[士气]</color>大于等于80点后，莱特发动第五段<color=#FFFFFF>[普通攻击]</color>时，将进入<color=#FFFFFF>[士气喷发]</color>状态，提升<color=#FFFFFF>[普通攻击]</color>第五段中轻拳起攻、刺拳连击和终结一击的威力；威力提升后，招式命中敌人时，会持续消耗<color=#FFFFFF>[士气]</color>，每消耗10点<color=#FFFFFF>[士气]</color>，莱特的冲击力提升<color=#2BAD00>1.83%</color>，最多提升<color=#2BAD00>18.3%</color>，持续6秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特不再随时间自动获得<color=#FFFFFF>[士气]</color>，轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>时，会自动衔接发动更加强力的终结一击；\n<color=#FFFFFF>[士气喷发]</color>状态下，轻拳起攻或刺拳连击命中敌人时，目标的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>降低15%，持续30秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，终结一击命中敌人时，会对目标施加<color=#FFFFFF>[溃败]</color>效果，使其进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前<color=#FFFFFF>[溃败]</color>效果对同一目标最多触发一次；\n<color=#FFFFFF>[普通攻击]</color>第五段终结一击命中敌人、换回后场或<color=#FFFFFF>[士气]</color>耗尽时，莱特将退出<color=#FFFFFF>[士气喷发]</color>状态，尚未消耗的<color=#FFFFFF>[士气]</color>会被保留。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特第五段<color=#FFFFFF>[普通攻击]</color>命中敌人时，全队角色获得一层<color=#FFFFFF>[昂扬]</color>，最多叠加20层，持续30秒，重复触发时刷新持续时间；每拥有一层<color=#FFFFFF>[昂扬]</color>，代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升1.25%，获得<color=#FFFFFF>[昂扬]</color>时，若莱特的冲击力高于170点，每超过10点冲击力会使每层<color=#FFFFFF>[昂扬]</color>提供的增益效果额外提升0.25%；队伍中任意角色发动<color=#FFFFFF>[连携技]</color>时，会刷新全队角色<color=#FFFFFF>[昂扬]</color>的持续时间；<color=#FFFFFF>[昂扬]</color>最多使代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升75%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：助燃剂", "额外能力：斗志昂扬"],
+        "potential": []
+      },
+      "1161507": {
+        "desc": [
+          "莱特会随时间自动获得<color=#FFFFFF>[士气]</color>，每秒回复2.9点，队伍中任意角色每消耗1点能量值，额外为莱特回复0.26点<color=#FFFFFF>[士气]</color>，莱特最多拥有100点<color=#FFFFFF>[士气]</color>；<color=#FFFFFF>[士气]</color>回复至80点时，下一次换入前场将直接发动<color=#FFFFFF>[快速支援]</color>；<color=#FFFFFF>[士气]</color>大于等于80点后，莱特发动第五段<color=#FFFFFF>[普通攻击]</color>时，将进入<color=#FFFFFF>[士气喷发]</color>状态，提升<color=#FFFFFF>[普通攻击]</color>第五段中轻拳起攻、刺拳连击和终结一击的威力；威力提升后，招式命中敌人时，会持续消耗<color=#FFFFFF>[士气]</color>，每消耗10点<color=#FFFFFF>[士气]</color>，莱特的冲击力提升<color=#2BAD00>2%</color>，最多提升<color=#2BAD00>20%</color>，持续6秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特不再随时间自动获得<color=#FFFFFF>[士气]</color>，轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>时，会自动衔接发动更加强力的终结一击；\n<color=#FFFFFF>[士气喷发]</color>状态下，轻拳起攻或刺拳连击命中敌人时，目标的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>降低15%，持续30秒；\n<color=#FFFFFF>[士气喷发]</color>状态下，终结一击命中敌人时，会对目标施加<color=#FFFFFF>[溃败]</color>效果，使其进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前<color=#FFFFFF>[溃败]</color>效果对同一目标最多触发一次；\n<color=#FFFFFF>[普通攻击]</color>第五段终结一击命中敌人、换回后场或<color=#FFFFFF>[士气]</color>耗尽时，莱特将退出<color=#FFFFFF>[士气喷发]</color>状态，尚未消耗的<color=#FFFFFF>[士气]</color>会被保留。",
+          "队伍中存在<color=#FFFFFF>[强攻]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[士气喷发]</color>状态下，莱特第五段<color=#FFFFFF>[普通攻击]</color>命中敌人时，全队角色获得一层<color=#FFFFFF>[昂扬]</color>，最多叠加20层，持续30秒，重复触发时刷新持续时间；每拥有一层<color=#FFFFFF>[昂扬]</color>，代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升1.25%，获得<color=#FFFFFF>[昂扬]</color>时，若莱特的冲击力高于170点，每超过10点冲击力会使每层<color=#FFFFFF>[昂扬]</color>提供的增益效果额外提升0.25%；队伍中任意角色发动<color=#FFFFFF>[连携技]</color>时，会刷新全队角色<color=#FFFFFF>[昂扬]</color>的持续时间；<color=#FFFFFF>[昂扬]</color>最多使代理人造成的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>提升75%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：助燃剂", "额外能力：斗志昂扬"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对前方敌人发动打击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果；\n招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段<color=#FFFFFF>[普通攻击]</color>。",
+          "name": "快速支援：烈闪-守",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：瞬破",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动打击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果；\n招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段<color=#FFFFFF>[普通攻击]</color>。",
+          "name": "支援突击：骸突-刺",
+          "potential": []
+        },
+        {
+          "name": "快速支援：烈闪-守",
+          "param": [
+            {
+              "desc": "{Skill:1161020, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161020": {
+                  "attackData": [],
+                  "attributeInfliction": 6333,
+                  "damagePercentage": 6970,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 3167,
+                  "feverRecovery": 174350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 6970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6970,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161020, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161020": {
+                  "attackData": [],
+                  "attributeInfliction": 6333,
+                  "damagePercentage": 6970,
+                  "damagePercentageGrowth": 640,
+                  "etherPurify": 3167,
+                  "feverRecovery": 174350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6970,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：瞬破",
+          "param": [
+            {
+              "desc": "{Skill:1161021, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1161021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161022, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1161022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161023, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1161023": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：骸突-刺",
+          "param": [
+            {
+              "desc": "{Skill:1161024, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161024": {
+                  "attackData": [],
+                  "attributeInfliction": 18272,
+                  "damagePercentage": 21980,
+                  "damagePercentageGrowth": 2000,
+                  "etherPurify": 6334,
+                  "feverRecovery": 643225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2000,
+                  "main": 21980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18230,
+                  "stunRatioGrowth": 830
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161024, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161024": {
+                  "attackData": [],
+                  "attributeInfliction": 18272,
+                  "damagePercentage": 21980,
+                  "damagePercentageGrowth": 2000,
+                  "etherPurify": 6334,
+                  "feverRecovery": 643225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 830,
+                  "main": 18230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18230,
+                  "stunRatioGrowth": 830
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按或长按 <IconMap:Icon_Normal> 发动：\n向前方进行至多五段的打击，造成<color=#F0D12B>物理伤害</color>和<color=#FF5521>火属性伤害</color>；\n在<color=#FFFFFF>[普通攻击]</color>第三段发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，同时连点或长按 <IconMap:Icon_Normal> ，可以持续发动连续体术追击，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，则衔接后继第四段<color=#FFFFFF>[普通攻击]</color>；\n在<color=#FFFFFF>[普通攻击]</color>第五段轻拳起攻期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，同时连点或长按 <IconMap:Icon_Normal> ，可以循环发动轻拳起攻和第四段<color=#FFFFFF>[普通攻击]</color>，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，则衔接后继刺拳连击；\n保持连点或长按 <IconMap:Icon_Normal> 时，可以延长刺拳连击的持续时间；\n停止连点或长按 <IconMap:Icon_Normal> 后，或刺拳连击至持续时间上限后，将向前方发动终结一击，终结一击期间拥有无敌效果；\n<color=#FFFFFF>[普通攻击]</color>第五段发动期间，莱特受到的伤害降低40%；\n<color=#FFFFFF>[士气喷发]</color>状态下，<color=#FFFFFF>[普通攻击]</color>第五段发动期间抗打断等级提升，伤害降低效果提升至80%。",
+          "name": "普通攻击：L式轰鸣拳",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：L式轰鸣拳",
+          "param": [
+            {
+              "desc": "{Skill:1161001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1161001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3920,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 1781,
+                  "feverRecovery": 49225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1960,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1161002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4800,
+                  "damagePercentageGrowth": 440,
+                  "etherPurify": 2986,
+                  "feverRecovery": 82225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 4800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10750,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3290,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1161003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5530,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 4238,
+                  "feverRecovery": 116600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 5530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4670,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161004, Prop:1001}",
+              "name": "追击一段伤害倍率",
+              "param": {
+                "1161004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8690,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 5495,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 8690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19780,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6050,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161005, Prop:1001}",
+              "name": "追击二段伤害倍率",
+              "param": {
+                "1161005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4770,
+                  "damagePercentageGrowth": 440,
+                  "etherPurify": 3013,
+                  "feverRecovery": 83050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 4770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10850,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3320,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161006, Prop:1001}",
+              "name": "追击三段伤害倍率",
+              "param": {
+                "1161006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5810,
+                  "damagePercentageGrowth": 530,
+                  "etherPurify": 3669,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 530,
+                  "main": 5810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161007, Prop:1001}",
+              "name": "追击四段伤害倍率",
+              "param": {
+                "1161007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3280,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 2069,
+                  "feverRecovery": 56925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 3280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2280,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161008, Prop:1001}",
+              "name": "追击五段伤害倍率",
+              "param": {
+                "1161008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8900,
+                  "damagePercentageGrowth": 810,
+                  "etherPurify": 5623,
+                  "feverRecovery": 154825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 810,
+                  "main": 8900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20250,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6190,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161009, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1161009": {
+                  "attackData": [],
+                  "attributeInfliction": 5505,
+                  "damagePercentage": 7890,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6918,
+                  "feverRecovery": 190300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7610,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161010, Prop:1001}",
+              "name": "五段起攻伤害倍率",
+              "param": {
+                "1161010": {
+                  "attackData": [],
+                  "attributeInfliction": 12387,
+                  "damagePercentage": 16360,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 13226,
+                  "feverRecovery": 363825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 16360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12950,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161011, Prop:1001}",
+              "name": "五段连击伤害倍率",
+              "param": {
+                "1161011": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 12290,
+                  "damagePercentageGrowth": 1120,
+                  "etherPurify": 7771,
+                  "feverRecovery": 213950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 12290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8130,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161012, Prop:1001}",
+              "name": "五段终结伤害倍率",
+              "param": {
+                "1161012": {
+                  "attackData": [],
+                  "attributeInfliction": 7605,
+                  "damagePercentage": 10460,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 7606,
+                  "feverRecovery": 209275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 10460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7950,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161026, Prop:1001}",
+              "name": "五段起攻伤害倍率（士气喷发状态）",
+              "param": {
+                "1161026": {
+                  "attackData": [],
+                  "attributeInfliction": 12387,
+                  "damagePercentage": 17720,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 12388,
+                  "feverRecovery": 340725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1620,
+                  "main": 17720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13630,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161027, Prop:1001}",
+              "name": "五段连击伤害倍率（士气喷发状态）",
+              "param": {
+                "1161027": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 36430,
+                  "damagePercentageGrowth": 3320,
+                  "etherPurify": 7771,
+                  "feverRecovery": 213950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3320,
+                  "main": 36430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8550,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161028, Prop:1001}",
+              "name": "五段终结伤害倍率（士气喷发状态）",
+              "param": {
+                "1161028": {
+                  "attackData": [],
+                  "attributeInfliction": 8366,
+                  "damagePercentage": 11970,
+                  "damagePercentageGrowth": 1090,
+                  "etherPurify": 8367,
+                  "feverRecovery": 230175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1090,
+                  "main": 11970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30120,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9210,
+                  "stunRatioGrowth": 420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161025, Prop:1001}",
+              "name": "五段强力终结伤害倍率（士气喷发状态）",
+              "param": {
+                "1161025": {
+                  "attackData": [],
+                  "attributeInfliction": 10023,
+                  "damagePercentage": 43540,
+                  "damagePercentageGrowth": 3960,
+                  "etherPurify": 10024,
+                  "feverRecovery": 275825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3960,
+                  "main": 43540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13240,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1161001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3920,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 1781,
+                  "feverRecovery": 49225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 6410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1960,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1161002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4800,
+                  "damagePercentageGrowth": 440,
+                  "etherPurify": 2986,
+                  "feverRecovery": 82225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10750,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3290,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1161003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5530,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 4238,
+                  "feverRecovery": 116600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 220,
+                  "main": 4670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15260,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4670,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161004, Prop:1002}",
+              "name": "追击一段失衡倍率",
+              "param": {
+                "1161004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8690,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 5495,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19780,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6050,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161005, Prop:1002}",
+              "name": "追击二段失衡倍率",
+              "param": {
+                "1161005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4770,
+                  "damagePercentageGrowth": 440,
+                  "etherPurify": 3013,
+                  "feverRecovery": 83050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10850,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3320,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161006, Prop:1002}",
+              "name": "追击三段失衡倍率",
+              "param": {
+                "1161006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5810,
+                  "damagePercentageGrowth": 530,
+                  "etherPurify": 3669,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161007, Prop:1002}",
+              "name": "追击四段失衡倍率",
+              "param": {
+                "1161007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3280,
+                  "damagePercentageGrowth": 300,
+                  "etherPurify": 2069,
+                  "feverRecovery": 56925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7450,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2280,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161008, Prop:1002}",
+              "name": "追击五段失衡倍率",
+              "param": {
+                "1161008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8900,
+                  "damagePercentageGrowth": 810,
+                  "etherPurify": 5623,
+                  "feverRecovery": 154825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 6190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20250,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6190,
+                  "stunRatioGrowth": 290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161009, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1161009": {
+                  "attackData": [],
+                  "attributeInfliction": 5505,
+                  "damagePercentage": 7890,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6918,
+                  "feverRecovery": 190300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 350,
+                  "main": 7610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7610,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161010, Prop:1002}",
+              "name": "五段起攻失衡倍率",
+              "param": {
+                "1161010": {
+                  "attackData": [],
+                  "attributeInfliction": 12387,
+                  "damagePercentage": 16360,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 13226,
+                  "feverRecovery": 363825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 12950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 47620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12950,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161011, Prop:1002}",
+              "name": "五段连击失衡倍率",
+              "param": {
+                "1161011": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 12290,
+                  "damagePercentageGrowth": 1120,
+                  "etherPurify": 7771,
+                  "feverRecovery": 213950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 8130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8130,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161012, Prop:1002}",
+              "name": "五段终结失衡倍率",
+              "param": {
+                "1161012": {
+                  "attackData": [],
+                  "attributeInfliction": 7605,
+                  "damagePercentage": 10460,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 7606,
+                  "feverRecovery": 209275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 370,
+                  "main": 7950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27380,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7950,
+                  "stunRatioGrowth": 370
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161026, Prop:1002}",
+              "name": "五段起攻失衡倍率（士气喷发状态）",
+              "param": {
+                "1161026": {
+                  "attackData": [],
+                  "attributeInfliction": 12387,
+                  "damagePercentage": 17720,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 12388,
+                  "feverRecovery": 340725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 13630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13630,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161027, Prop:1002}",
+              "name": "五段连击失衡倍率（士气喷发状态）",
+              "param": {
+                "1161027": {
+                  "attackData": [],
+                  "attributeInfliction": 7770,
+                  "damagePercentage": 36430,
+                  "damagePercentageGrowth": 3320,
+                  "etherPurify": 7771,
+                  "feverRecovery": 213950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8550,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161028, Prop:1002}",
+              "name": "五段终结失衡倍率（士气喷发状态）",
+              "param": {
+                "1161028": {
+                  "attackData": [],
+                  "attributeInfliction": 8366,
+                  "damagePercentage": 11970,
+                  "damagePercentageGrowth": 1090,
+                  "etherPurify": 8367,
+                  "feverRecovery": 230175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 9210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30120,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9210,
+                  "stunRatioGrowth": 420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161025, Prop:1002}",
+              "name": "五段强力终结失衡倍率（士气喷发状态）",
+              "param": {
+                "1161025": {
+                  "attackData": [],
+                  "attributeInfliction": 10023,
+                  "damagePercentage": 43540,
+                  "damagePercentageGrowth": 3960,
+                  "etherPurify": 10024,
+                  "feverRecovery": 275825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 36090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13240,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n对前方小范围敌人发动强力打击，造成大量<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：V式灼日炎",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n对身周大范围敌人发动强力打击，造成大量<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：W式桂冠终火",
+          "potential": []
+        },
+        {
+          "name": "连携技：V式灼日炎",
+          "param": [
+            {
+              "desc": "{Skill:1161018, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161018": {
+                  "attackData": [],
+                  "attributeInfliction": 44783,
+                  "damagePercentage": 71210,
+                  "damagePercentageGrowth": 6480,
+                  "etherPurify": 24834,
+                  "feverRecovery": 2511850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6480,
+                  "main": 71210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27320,
+                  "stunRatioGrowth": 1250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161018, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161018": {
+                  "attackData": [],
+                  "attributeInfliction": 44783,
+                  "damagePercentage": 71210,
+                  "damagePercentageGrowth": 6480,
+                  "etherPurify": 24834,
+                  "feverRecovery": 2511850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1250,
+                  "main": 27320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27320,
+                  "stunRatioGrowth": 1250
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：W式桂冠终火",
+          "param": [
+            {
+              "desc": "{Skill:1161019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161019": {
+                  "attackData": [],
+                  "attributeInfliction": 9669,
+                  "damagePercentage": 150800,
+                  "damagePercentageGrowth": 13710,
+                  "etherPurify": 59670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13710,
+                  "main": 150800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 94740,
+                  "stunRatioGrowth": 4310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161019": {
+                  "attackData": [],
+                  "attributeInfliction": 9669,
+                  "damagePercentage": 150800,
+                  "damagePercentageGrowth": 13710,
+                  "etherPurify": 59670,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4310,
+                  "main": 94740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 94740,
+                  "stunRatioGrowth": 4310
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。\n角色发动攻击期间，点按 <IconMap:Icon_Evade> 发动：\n向{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}方向垫步闪避；\n发动该招式不会打断<color=#FFFFFF>[普通攻击]</color>的连击段数；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：匿影滑步",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前方进行快速打击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "冲刺攻击：骸突",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动打击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果；\n招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段<color=#FFFFFF>[普通攻击]</color>。",
+          "name": "闪避反击：烈闪",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：骸突",
+          "param": [
+            {
+              "desc": "{Skill:1161016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8990,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 4085,
+                  "feverRecovery": 112475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 8990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4500,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8990,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 4085,
+                  "feverRecovery": 112475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4500,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：烈闪",
+          "param": [
+            {
+              "desc": "{Skill:1161017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161017": {
+                  "attackData": [],
+                  "attributeInfliction": 5333,
+                  "damagePercentage": 18630,
+                  "damagePercentageGrowth": 1700,
+                  "etherPurify": 20334,
+                  "feverRecovery": 146850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1700,
+                  "main": 18630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16870,
+                  "stunRatioGrowth": 770
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161017": {
+                  "attackData": [],
+                  "attributeInfliction": 5333,
+                  "damagePercentage": 18630,
+                  "damagePercentageGrowth": 1700,
+                  "etherPurify": 20334,
+                  "feverRecovery": 146850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 770,
+                  "main": 16870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19210,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16870,
+                  "stunRatioGrowth": 770
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n使用上勾拳向前方进行打击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间抗打断等级提升。\n垫步闪避期间，点按 <IconMap:Icon_Special> 发动：\n使用组合拳向前方进行打击，造成<color=#FF5521>火属性伤害</color>；\n发动该招式不会打断<color=#FFFFFF>[普通攻击]</color>的连击段数；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：V式日轮升拳",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n使用上勾拳离地跃起并向前方进行强力打击，造成大量<color=#FF5521>火属性伤害</color>；\n招式发动期间，再次点按 <IconMap:Icon_SpecialReady> 可以额外消耗能量，发动强力追击，造成大量<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果，\n招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第四段<color=#FFFFFF>[普通攻击]</color>。\n垫步闪避期间，能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n使用组合拳向前方进行强力打击，造成大量<color=#FF5521>火属性伤害</color>；\n发动该招式不会打断<color=#FFFFFF>[普通攻击]</color>的连击段数；\n招式发动期间拥有无敌效果；\n招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段<color=#FFFFFF>[普通攻击]</color>。",
+          "name": "强化特殊技：V式日轮升拳-全冲程",
+          "potential": []
+        },
+        {
+          "name": "特殊技：V式日轮升拳",
+          "param": [
+            {
+              "desc": "{Skill:1161013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161013": {
+                  "attackData": [],
+                  "attributeInfliction": 3000,
+                  "damagePercentage": 3630,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 3000,
+                  "feverRecovery": 82500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3630,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161013": {
+                  "attackData": [],
+                  "attributeInfliction": 3000,
+                  "damagePercentage": 3630,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 3000,
+                  "feverRecovery": 82500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3630,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：V式日轮升拳-全冲程",
+          "param": [
+            {
+              "desc": "{Skill:1161014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1161014": {
+                  "attackData": [],
+                  "attributeInfliction": 36764,
+                  "damagePercentage": 48630,
+                  "damagePercentageGrowth": 4430,
+                  "etherPurify": 12831,
+                  "feverRecovery": 1293325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4430,
+                  "main": 48630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40350,
+                  "stunRatioGrowth": 1840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161015, Prop:1001}",
+              "name": "追击伤害倍率",
+              "param": {
+                "1161015": {
+                  "attackData": [],
+                  "attributeInfliction": 22326,
+                  "damagePercentage": 29270,
+                  "damagePercentageGrowth": 2670,
+                  "etherPurify": 9337,
+                  "feverRecovery": 767250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2670,
+                  "main": 29270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24770,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1161014": {
+                  "attackData": [],
+                  "attributeInfliction": 36764,
+                  "damagePercentage": 48630,
+                  "damagePercentageGrowth": 4430,
+                  "etherPurify": 12831,
+                  "feverRecovery": 1293325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1840,
+                  "main": 40350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 40350,
+                  "stunRatioGrowth": 1840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1161015, Prop:1002}",
+              "name": "追击失衡倍率",
+              "param": {
+                "1161015": {
+                  "attackData": [],
+                  "attributeInfliction": 22326,
+                  "damagePercentage": 29270,
+                  "damagePercentageGrowth": 2670,
+                  "etherPurify": 9337,
+                  "feverRecovery": 767250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24770,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40点",
+              "name": "发动能量消耗",
+              "potential": []
+            },
+            {
+              "desc": "20点",
+              "name": "追击能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1161001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：L式轰鸣拳"
+    },
+    "1161002": {
+      "desc": "<IconMap:Icon_Evade>（发动攻击期间）",
+      "name": "闪避：匿影滑步（垫步闪避）"
+    },
+    "1161003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：V式日轮升拳"
+    },
+    "1161004": {
+      "desc": "<IconMap:Icon_Special>（垫步闪避期间）",
+      "name": "特殊技：V式日轮升拳（组合拳）"
+    },
+    "1161005": {
+      "desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady>",
+      "name": "强化特殊技：V式日轮升拳-全冲程"
+    },
+    "1161006": {
+      "desc": "<IconMap:Icon_SpecialReady>（垫步闪避期间）",
+      "name": "强化特殊技：V式日轮升拳-全冲程（组合拳）"
+    },
+    "1161007": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：骸突"
+    },
+    "1161008": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：烈闪"
+    },
+    "1161009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：V式灼日炎"
+    },
+    "1161010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：W式桂冠终火"
+    },
+    "1161011": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：烈闪-守"
+    },
+    "1161012": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：瞬破"
+    },
+    "1161013": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：骸突-刺"
+    }
+  },
+  "skin": {
+    "3111610": {
+      "desc": "常胜冠军从不摘下他的墨镜…和围巾。荣耀早已微不足道，但还有无数与同伴共度的黄昏值得守候。",
+      "name": "莱特·不熄烬炎"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，速切击破",
+    "额外延长目标失衡时间",
+    "全队角色冰火增伤，降低目标冰火伤害抗性"
+  ],
+  "talent": {
+    "1": {
+      "desc": "在<color=#FFFFFF>[核心被动：助燃剂]</color>所施加的减益效果中，<color=#FFFFFF>[溃败]</color>效果将使失衡持续时间提升5秒，<color=#98EFF0>冰属性伤害抗性</color>和<color=#FF5521>火属性伤害抗性</color>将额外降低10%；在轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>，自动衔接发动强力终结一击时，强力终结一击造成的伤害提升30%。",
+      "desc2": "常胜冠军的胜利至关重要。与对面最强的战士决斗，为团长解决威胁——同时为团队带来巨大的士气鼓舞。\n对他来说，唯有胜利值得赞颂。\n「常胜冠军不能倒下。」",
+      "name": "常胜冠军"
+    },
+    "2": {
+      "desc": "通过<color=#FFFFFF>[核心被动：助燃剂]</color>对敌人施加<color=#FFFFFF>[溃败]</color>效果时，目标的失衡易伤倍率提升25%；<color=#FFFFFF>[额外能力：斗志昂扬]</color>中由<color=#FFFFFF>[昂扬]</color>提供的<color=#98EFF0>冰属性伤害</color>和<color=#FF5521>火属性伤害</color>增益效果提升至原本的120%。",
+      "desc2": "作为卡吕冬之子的「红围巾」，莱特在外环非常有名。\n不只是因为他的拳头，也因为…某些说话风格。\n「虽然我乐得清闲…不过没有我的话，你们也搞不定吧？」",
+      "name": "红围巾"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "「我大概是全世界最不适合当团长的人吧。」",
+      "name": "佣兵团长"
+    },
+    "4": {
+      "desc": "莱特位于后场时，前场角色的能量自动回复效率提升10%；莱特进入<color=#FFFFFF>[士气喷发]</color>状态时，为后场角色回复4点能量，18秒内最多触发一次。",
+      "desc2": "「问我为什么要带墨镜？嗯…因为我晕血啊，大概吧。」",
+      "name": "墨镜"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "「给我命令，我来照做。就这么简单。」\n莱特推了推自己的墨镜，笑得漫不经心。\n「别再让我来做决定就行。」",
+      "name": "决策者"
+    },
+    "6": {
+      "desc": "莱特的<color=#FFFFFF>[士气]</color>回复效率提升至原本的200%；莱特在<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[快速支援]</color>、<color=#FFFFFF>[支援突击]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>中发动重击命中敌人时，将会触发<color=#FFFFFF>[火焰冲击]</color>效果，造成250%攻击力的<color=#FF5521>火属性伤害</color>，每个敌人8秒内最多触发一次；若莱特的冲击力高于170点，每超过1点冲击力会使<color=#FFFFFF>[火焰冲击]</color>的倍率额外提升5%，最多提升500%；在轻拳起攻或刺拳连击期间耗尽<color=#FFFFFF>[士气]</color>，自动衔接发动强力终结一击命中敌人时，可以忽略冷却时间，额外触发一次<color=#FFFFFF>[火焰冲击]</color>效果。",
+      "desc2": "重来一次，他绝不会选择成为唯一的幸存者。\n可惜命运向来无法选择。",
+      "name": "幸存者"
+    }
+  },
+  "weaponType": {
+    "2": "击破"
+  }
+}

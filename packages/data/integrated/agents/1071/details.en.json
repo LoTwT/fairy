@@ -1,0 +1,1788 @@
+{
+  "camp": {
+    "4": "Sons of Calydon"
+  },
+  "elementType": {
+    "200": "Physical"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "Impact"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "Impact"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1071,
+  "locale": "en",
+  "name": "Caesar",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1071020", "1071021", "1071022", "1071023", "1071024"],
+      "basic": [
+        "1071001",
+        "1071002",
+        "1071003",
+        "1071004",
+        "1071005",
+        "1071006",
+        "1071007",
+        "1071008"
+      ],
+      "chain": ["1071018", "1071019"],
+      "dodge": ["1071016", "1071017"],
+      "special": [
+        "1071009",
+        "1071010",
+        "1071011",
+        "1071012",
+        "1071013",
+        "1071014",
+        "1071015"
+      ]
+    },
+    "parameterRowsById": {
+      "1071001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1071002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1071003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1071004": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/11"
+      ],
+      "1071005": [
+        "/skill/basic/description/2/param/5",
+        "/skill/basic/description/2/param/12"
+      ],
+      "1071006": [
+        "/skill/basic/description/2/param/6",
+        "/skill/basic/description/2/param/13"
+      ],
+      "1071007": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/1"
+      ],
+      "1071008": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/10"
+      ],
+      "1071009": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1071010": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1071011": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1071012": [
+        "/skill/special/description/8/param/3",
+        "/skill/special/description/8/param/4"
+      ],
+      "1071013": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ],
+      "1071014": ["/skill/special/description/6/param/2"],
+      "1071015": [
+        "/skill/special/description/8/param/2",
+        "/skill/special/description/9/param/2"
+      ],
+      "1071016": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1071017": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1071018": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1071019": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1071020": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1071021": ["/skill/assist/description/4/param/0"],
+      "1071022": ["/skill/assist/description/4/param/1"],
+      "1071023": ["/skill/assist/description/4/param/2"],
+      "1071024": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "MAR 16",
+    "fullName": "Caesar King",
+    "gender": "Female",
+    "impressionF": "Big Daddy looks cultured and sophisticated, but Caesar's a different kettle of fish...\nBut even though she often gets her idioms wrong, Caesar's still very cute!",
+    "impressionM": "Earning the trust of the Outer Ring's Overlord is a pretty big deal. We should really appreciate that.\nOf course, it'd be nice if Caesar could make fewer typos in her DMs to us.",
+    "impressions": [
+      "Impression of Caesar:\n · It seems like we now know more about Caesar's... weakness?",
+      " · It feels like we're not just Caesar's friend, but also comrades in hardship...?",
+      " · I always feel more relaxed with Caesar. That's just how it is between \"buddies.\""
+    ],
+    "profileDesc": "Caesar: Leader of the Sons of Calydon biker gang and a \"monarch\" in the making.\nHer combination of formidable strength and bold, straightforward personality has earned her the love and respect of the Outer Ring's residents.\nAlthough she appears to do things in her own way, she is actually very willing to listen to others' opinions. Caesar actively listens to and implements any valid suggestion she hears — regardless of who it comes from.\nShe is completely defenseless against those she trusts. Once she accepts someone, she considers them part of her inner circle, treating them with absolute trust.\n(Assumption: Caesar currently views you in this way.)\n\nCaesar's father has been missing for as long as she can remember, and her mother passed away from illness when she was young. She was raised by Big Daddy, who took a very hands-off approach to raising her, allowing her to grow up freely and independently.\n\nIn addition, Caesar seems to have a curious interest in matters related to romance.\nIf you wish to get closer to her, you might want to try discussing this topic with her.",
+    "stature": "176",
+    "trustLv": {
+      "1": "Caesar: Leader of the Sons of Calydon biker gang and a \"monarch\" in the making.\nHer combination of formidable strength and bold, straightforward personality has earned her the love and respect of the Outer Ring's residents.\nAlthough she appears to do things in her own way, she is actually very willing to listen to others' opinions. Caesar actively listens to and implements any valid suggestion she hears — regardless of who it comes from.\nShe is completely defenseless against those she trusts. Once she accepts someone, she considers them part of her inner circle, treating them with absolute trust.\n(Assumption: Caesar currently views you in this way.)\n\nCaesar's father has been missing for as long as she can remember, and her mother passed away from illness when she was young. She was raised by Big Daddy, who took a very hands-off approach to raising her, allowing her to grow up freely and independently.\n\nIn addition, Caesar seems to have a curious interest in matters related to romance.\nIf you wish to get closer to her, you might want to try discussing this topic with her.",
+      "2": "",
+      "3": "Caesar's father was the leader of a biker gang called \"Calydon,\" which carved out a legendary reputation in the Outer Ring. The \"Sons of Calydon\" take their name from this legacy.\nCaesar has a fear of needles.\n\"They're so tiny and thin, and it only stings for a second when you're pricked — but then all this blood comes out. It's so weird — and definitely not straightforward at all!\"",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Story \"Leisurely Lull: Unexpected New Customer\" (available after completing Main Story Chapter 4) to unlock",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1071501": {
+        "desc": [
+          "When Caesar activates <color=#FFFFFF>EX Special Attack: Parry Counter</color>, <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or triggers <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> through <color=#FFFFFF>Retaliation</color>, she buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield equal to <color=#2BAD00>300%</color> of her base Impact + <color=#2BAD00>200</color>. The shield lasts for 60s and is equipped by the active character, with its value shared among all squad members. Any single instance of DMG will not exceed the shield value.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's Anti-Interrupt level is increased.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's ATK is increased by <color=#2BAD00>40</color>. After <color=#FFFFFF>Radiant Aegis</color> expires, this buff remains for an additional 5s.",
+          "When another character in your squad can activate <color=#FFFFFF>Defensive Assist</color> or shares the same Faction:\nWhen Caesar activates <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, <color=#FFFFFF>Defensive Assist</color>, or <color=#FFFFFF>Basic Attack: Dead End</color>, she applies a Debuff effect to enemies within a 7m radius, increasing the damage they take from all squad members by 25% for 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Barrier of Resilience",
+          "Additional Ability: Battle Spirit"
+        ],
+        "potential": []
+      },
+      "1071502": {
+        "desc": [
+          "When Caesar activates <color=#FFFFFF>EX Special Attack: Parry Counter</color>, <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or triggers <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> through <color=#FFFFFF>Retaliation</color>, she buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield equal to <color=#2BAD00>500%</color> of her base Impact + <color=#2BAD00>400</color>. The shield lasts for 60s and is equipped by the active character, with its value shared among all squad members. Any single instance of DMG will not exceed the shield value.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's Anti-Interrupt level is increased.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's ATK is increased by <color=#2BAD00>135</color>. After <color=#FFFFFF>Radiant Aegis</color> expires, this buff remains for an additional 5s.",
+          "When another character in your squad can activate <color=#FFFFFF>Defensive Assist</color> or shares the same Faction:\nWhen Caesar activates <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, <color=#FFFFFF>Defensive Assist</color>, or <color=#FFFFFF>Basic Attack: Dead End</color>, she applies a Debuff effect to enemies within a 7m radius, increasing the damage they take from all squad members by 25% for 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Barrier of Resilience",
+          "Additional Ability: Battle Spirit"
+        ],
+        "potential": []
+      },
+      "1071503": {
+        "desc": [
+          "When Caesar activates <color=#FFFFFF>EX Special Attack: Parry Counter</color>, <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or triggers <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> through <color=#FFFFFF>Retaliation</color>, she buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield equal to <color=#2BAD00>700%</color> of her base Impact + <color=#2BAD00>700</color>. The shield lasts for 60s and is equipped by the active character, with its value shared among all squad members. Any single instance of DMG will not exceed the shield value.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's Anti-Interrupt level is increased.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's ATK is increased by <color=#2BAD00>240</color>. After <color=#FFFFFF>Radiant Aegis</color> expires, this buff remains for an additional 5s.",
+          "When another character in your squad can activate <color=#FFFFFF>Defensive Assist</color> or shares the same Faction:\nWhen Caesar activates <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, <color=#FFFFFF>Defensive Assist</color>, or <color=#FFFFFF>Basic Attack: Dead End</color>, she applies a Debuff effect to enemies within a 7m radius, increasing the damage they take from all squad members by 25% for 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Barrier of Resilience",
+          "Additional Ability: Battle Spirit"
+        ],
+        "potential": []
+      },
+      "1071504": {
+        "desc": [
+          "When Caesar activates <color=#FFFFFF>EX Special Attack: Parry Counter</color>, <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or triggers <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> through <color=#FFFFFF>Retaliation</color>, she buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield equal to <color=#2BAD00>900%</color> of her base Impact + <color=#2BAD00>900</color>. The shield lasts for 60s and is equipped by the active character, with its value shared among all squad members. Any single instance of DMG will not exceed the shield value.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's Anti-Interrupt level is increased.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's ATK is increased by <color=#2BAD00>400</color>. After <color=#FFFFFF>Radiant Aegis</color> expires, this buff remains for an additional 5s.",
+          "When another character in your squad can activate <color=#FFFFFF>Defensive Assist</color> or shares the same Faction:\nWhen Caesar activates <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, <color=#FFFFFF>Defensive Assist</color>, or <color=#FFFFFF>Basic Attack: Dead End</color>, she applies a Debuff effect to enemies within a 7m radius, increasing the damage they take from all squad members by 25% for 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Barrier of Resilience",
+          "Additional Ability: Battle Spirit"
+        ],
+        "potential": []
+      },
+      "1071505": {
+        "desc": [
+          "When Caesar activates <color=#FFFFFF>EX Special Attack: Parry Counter</color>, <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or triggers <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> through <color=#FFFFFF>Retaliation</color>, she buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield equal to <color=#2BAD00>1,100%</color> of her base Impact + <color=#2BAD00>1,100</color>. The shield lasts for 60s and is equipped by the active character, with its value shared among all squad members. Any single instance of DMG will not exceed the shield value.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's Anti-Interrupt level is increased.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's ATK is increased by <color=#2BAD00>650</color>. After <color=#FFFFFF>Radiant Aegis</color> expires, this buff remains for an additional 5s.",
+          "When another character in your squad can activate <color=#FFFFFF>Defensive Assist</color> or shares the same Faction:\nWhen Caesar activates <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, <color=#FFFFFF>Defensive Assist</color>, or <color=#FFFFFF>Basic Attack: Dead End</color>, she applies a Debuff effect to enemies within a 7m radius, increasing the damage they take from all squad members by 25% for 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Barrier of Resilience",
+          "Additional Ability: Battle Spirit"
+        ],
+        "potential": []
+      },
+      "1071506": {
+        "desc": [
+          "When Caesar activates <color=#FFFFFF>EX Special Attack: Parry Counter</color>, <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or triggers <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> through <color=#FFFFFF>Retaliation</color>, she buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield equal to <color=#2BAD00>1,300%</color> of her base Impact + <color=#2BAD00>1,300</color>. The shield lasts for 60s and is equipped by the active character, with its value shared among all squad members. Any single instance of DMG will not exceed the shield value.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's Anti-Interrupt level is increased.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's ATK is increased by <color=#2BAD00>900</color>. After <color=#FFFFFF>Radiant Aegis</color> expires, this buff remains for an additional 5s.",
+          "When another character in your squad can activate <color=#FFFFFF>Defensive Assist</color> or shares the same Faction:\nWhen Caesar activates <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, <color=#FFFFFF>Defensive Assist</color>, or <color=#FFFFFF>Basic Attack: Dead End</color>, she applies a Debuff effect to enemies within a 7m radius, increasing the damage they take from all squad members by 25% for 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Barrier of Resilience",
+          "Additional Ability: Battle Spirit"
+        ],
+        "potential": []
+      },
+      "1071507": {
+        "desc": [
+          "When Caesar activates <color=#FFFFFF>EX Special Attack: Parry Counter</color>, <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Ultimate</color>, or triggers <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> through <color=#FFFFFF>Retaliation</color>, she buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield equal to <color=#2BAD00>1,400%</color> of her base Impact + <color=#2BAD00>1,400</color>. The shield lasts for 60s and is equipped by the active character, with its value shared among all squad members. Any single instance of DMG will not exceed the shield value.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's Anti-Interrupt level is increased.\nWhile <color=#FFFFFF>Radiant Aegis</color> is active, the shield bearer's ATK is increased by <color=#2BAD00>1,000</color>. After <color=#FFFFFF>Radiant Aegis</color> expires, this buff remains for an additional 5s.",
+          "When another character in your squad can activate <color=#FFFFFF>Defensive Assist</color> or shares the same Faction:\nWhen Caesar activates <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, <color=#FFFFFF>Defensive Assist</color>, or <color=#FFFFFF>Basic Attack: Dead End</color>, she applies a Debuff effect to enemies within a 7m radius, increasing the damage they take from all squad members by 25% for 30s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Barrier of Resilience",
+          "Additional Ability: Battle Spirit"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nThrust at enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Lane Change",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Aegis Shield",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nTosses the shield forward, unleashing a powerful spinning attack on enemies in front, followed by a slash that deals <color=#F0D12B>Physical DMG</color>.\nAfter activating the skill, press <IconMap:Icon_Special> or <IconMap:Icon_SpecialReady> to trigger a <color=#FFFFFF>Retaliation</color>, activating <color=#FFFFFF>Special Attack: Roaring Thrust</color> or <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Aiding Blade",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Lane Change",
+          "param": [
+            {
+              "desc": "{Skill:1071020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071020": {
+                  "attackData": [],
+                  "attributeInfliction": 5833,
+                  "damagePercentage": 6420,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 5834,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 6420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6420,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071020, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071020": {
+                  "attackData": [],
+                  "attributeInfliction": 5833,
+                  "damagePercentage": 6420,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 5834,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6420,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Aegis Shield",
+          "param": [
+            {
+              "desc": "{Skill:1071021, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1071021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071022, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1071022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1570,
+                  "main": 34530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34530,
+                  "stunRatioGrowth": 1570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071023, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1071023": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 770,
+                  "main": 16930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16930,
+                  "stunRatioGrowth": 770
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Aiding Blade",
+          "param": [
+            {
+              "desc": "{Skill:1071024, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071024": {
+                  "attackData": [],
+                  "attributeInfliction": 34697,
+                  "damagePercentage": 40720,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 18500,
+                  "feverRecovery": 1145100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3710,
+                  "main": 40720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35630,
+                  "stunRatioGrowth": 1620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071024, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071024": {
+                  "attackData": [],
+                  "attributeInfliction": 34697,
+                  "damagePercentage": 40720,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 18500,
+                  "feverRecovery": 1145100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1620,
+                  "main": 35630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35630,
+                  "stunRatioGrowth": 1620
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 6 slashes ahead, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Rampaging Slash",
+          "potential": []
+        },
+        {
+          "desc": "When there are sufficient <color=#FFFFFF>Assist Points</color>, hold <IconMap:Icon_Normal> to activate:\nConsume 1 <color=#FFFFFF>Assist Point</color> to toss the shield and attack nearby enemies in all directions, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Dead End",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Rampaging Slash",
+          "param": [
+            {
+              "desc": "{Skill:1071001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1071001": {
+                  "attackData": [],
+                  "attributeInfliction": 2142,
+                  "damagePercentage": 4720,
+                  "damagePercentageGrowth": 430,
+                  "etherPurify": 2143,
+                  "feverRecovery": 59125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 4720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7720,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2130,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1071002": {
+                  "attackData": [],
+                  "attributeInfliction": 3409,
+                  "damagePercentage": 4090,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 3410,
+                  "feverRecovery": 93775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3380,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1071003": {
+                  "attackData": [],
+                  "attributeInfliction": 11104,
+                  "damagePercentage": 14830,
+                  "damagePercentageGrowth": 1350,
+                  "etherPurify": 11105,
+                  "feverRecovery": 305525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1350,
+                  "main": 14830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071008, Prop:1001}",
+              "name": "3rd-Hit (ALT) DMG Multiplier",
+              "param": {
+                "1071008": {
+                  "attackData": [],
+                  "attributeInfliction": 7432,
+                  "damagePercentage": 11840,
+                  "damagePercentageGrowth": 1080,
+                  "etherPurify": 7433,
+                  "feverRecovery": 204600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 11840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26760,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7360,
+                  "stunRatioGrowth": 340
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1071004": {
+                  "attackData": [],
+                  "attributeInfliction": 6812,
+                  "damagePercentage": 7880,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6813,
+                  "feverRecovery": 187550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24530,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6750,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1071005": {
+                  "attackData": [],
+                  "attributeInfliction": 13879,
+                  "damagePercentage": 19860,
+                  "damagePercentageGrowth": 1810,
+                  "etherPurify": 13880,
+                  "feverRecovery": 381700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1810,
+                  "main": 19860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49970,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071006, Prop:1001}",
+              "name": "6th-Hit DMG Multiplier",
+              "param": {
+                "1071006": {
+                  "attackData": [],
+                  "attributeInfliction": 26524,
+                  "damagePercentage": 39990,
+                  "damagePercentageGrowth": 3640,
+                  "etherPurify": 26525,
+                  "feverRecovery": 729575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3640,
+                  "main": 39990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 95490,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26260,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1071001": {
+                  "attackData": [],
+                  "attributeInfliction": 2142,
+                  "damagePercentage": 4720,
+                  "damagePercentageGrowth": 430,
+                  "etherPurify": 2143,
+                  "feverRecovery": 59125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7720,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2130,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1071002": {
+                  "attackData": [],
+                  "attributeInfliction": 3409,
+                  "damagePercentage": 4090,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 3410,
+                  "feverRecovery": 93775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12280,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3380,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1071003": {
+                  "attackData": [],
+                  "attributeInfliction": 11104,
+                  "damagePercentage": 14830,
+                  "damagePercentageGrowth": 1350,
+                  "etherPurify": 11105,
+                  "feverRecovery": 305525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 11000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39980,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071008, Prop:1002}",
+              "name": "3rd-Hit (ALT) Daze Multiplier",
+              "param": {
+                "1071008": {
+                  "attackData": [],
+                  "attributeInfliction": 7432,
+                  "damagePercentage": 11840,
+                  "damagePercentageGrowth": 1080,
+                  "etherPurify": 7433,
+                  "feverRecovery": 204600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 340,
+                  "main": 7360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26760,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7360,
+                  "stunRatioGrowth": 340
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1071004": {
+                  "attackData": [],
+                  "attributeInfliction": 6812,
+                  "damagePercentage": 7880,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6813,
+                  "feverRecovery": 187550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24530,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6750,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1071005": {
+                  "attackData": [],
+                  "attributeInfliction": 13879,
+                  "damagePercentage": 19860,
+                  "damagePercentageGrowth": 1810,
+                  "etherPurify": 13880,
+                  "feverRecovery": 381700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49970,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071006, Prop:1002}",
+              "name": "6th-Hit Daze Multiplier",
+              "param": {
+                "1071006": {
+                  "attackData": [],
+                  "attributeInfliction": 26524,
+                  "damagePercentage": 39990,
+                  "damagePercentageGrowth": 3640,
+                  "etherPurify": 26525,
+                  "feverRecovery": 729575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 26260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 95490,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26260,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Dead End",
+          "param": [
+            {
+              "desc": "{Skill:1071007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071007": {
+                  "attackData": [],
+                  "attributeInfliction": 9410,
+                  "damagePercentage": 12630,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 9411,
+                  "feverRecovery": 259050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 12630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9320,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071007": {
+                  "attackData": [],
+                  "attributeInfliction": 9410,
+                  "damagePercentage": 12630,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 9411,
+                  "feverRecovery": 259050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 9320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33880,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9320,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "1",
+              "name": "Assist Point Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a powerful downward strike at enemies ahead, dealing massive <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Road Rage Slam",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nTosses the shield forward, unleashing a powerful spinning attack on enemies in front, followed by a downward strike, dealing massive <color=#F0D12B>Physical DMG</color>.\nWhen hitting shielded enemies, the Daze dealt is increased by <color=#2BAD00>{CAL:40+AvatarSkillLevel(3)*5,1,2}%</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Savage Smash",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Road Rage Slam",
+          "param": [
+            {
+              "desc": "{Skill:1071018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071018": {
+                  "attackData": [],
+                  "attributeInfliction": 38116,
+                  "damagePercentage": 63880,
+                  "damagePercentageGrowth": 5810,
+                  "etherPurify": 18167,
+                  "feverRecovery": 2328425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5810,
+                  "main": 63880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19990,
+                  "stunRatioGrowth": 910
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071018": {
+                  "attackData": [],
+                  "attributeInfliction": 38116,
+                  "damagePercentage": 63880,
+                  "damagePercentageGrowth": 5810,
+                  "etherPurify": 18167,
+                  "feverRecovery": 2328425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 19990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19990,
+                  "stunRatioGrowth": 910
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Savage Smash",
+          "param": [
+            {
+              "desc": "{Skill:1071019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071019": {
+                  "attackData": [],
+                  "attributeInfliction": 25329,
+                  "damagePercentage": 201230,
+                  "damagePercentageGrowth": 18300,
+                  "etherPurify": 75330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 18300,
+                  "main": 201230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27870,
+                  "stunRatioGrowth": 1270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071019": {
+                  "attackData": [],
+                  "attributeInfliction": 25329,
+                  "damagePercentage": 201230,
+                  "damagePercentageGrowth": 18300,
+                  "etherPurify": 75330,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1270,
+                  "main": 27870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27870,
+                  "stunRatioGrowth": 1270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:40+AvatarSkillLevel(3)*5,1,2}%",
+              "name": "Daze Increase",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Adrift",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nStrikes forward with the shield, dealing <color=#F0D12B>Physical DMG</color>.\nDuring skill activation, DMG taken is reduced by 40%, and when attacked by an enemy, Caesar blocks with the shield and gets knocked back. Following that, press <IconMap:Icon_Special> or <IconMap:Icon_SpecialReady> to trigger <color=#FFFFFF>Retaliation</color> and activate <color=#FFFFFF>Special Attack: Roaring Thrust</color> or <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color>.",
+          "name": "Dash Attack: Hog Rush",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nStabs at enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Eye For an Eye",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Hog Rush",
+          "param": [
+            {
+              "desc": "{Skill:1071016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071016": {
+                  "attackData": [],
+                  "attributeInfliction": 2831,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 2832,
+                  "feverRecovery": 272800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3120,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071016": {
+                  "attackData": [],
+                  "attributeInfliction": 2831,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 2832,
+                  "feverRecovery": 272800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3120,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Eye For an Eye",
+          "param": [
+            {
+              "desc": "{Skill:1071017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071017": {
+                  "attackData": [],
+                  "attributeInfliction": 5833,
+                  "damagePercentage": 19350,
+                  "damagePercentageGrowth": 1760,
+                  "etherPurify": 20834,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1760,
+                  "main": 19350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17420,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071017": {
+                  "attackData": [],
+                  "attributeInfliction": 5833,
+                  "damagePercentage": 19350,
+                  "damagePercentageGrowth": 1760,
+                  "etherPurify": 20834,
+                  "feverRecovery": 160600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 800,
+                  "main": 17420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17420,
+                  "stunRatioGrowth": 800
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nStrike forward with the shield, dealing <color=#F0D12B>Physical DMG</color>.\nIf Caesar is hit by an enemy at the beginning of the skill's activation, it will trigger a <color=#FFFFFF>Perfect Block</color>, negating the damage once and automatically following up with a <color=#FFFFFF>Special Attack: Roaring Thrust</color>.\nAfter using the skill, Caesar enters a guard stance, reducing incoming damage by 40%. When attacked by an enemy, Caesar blocks with the shield and gets slightly knocked back. Press <IconMap:Icon_Special> or <IconMap:Icon_SpecialReady> to trigger <color=#FFFFFF>Retaliation</color>, activating <color=#FFFFFF>Special Attack: Roaring Thrust</color> or <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color>\nWhen <color=#FFFFFF>Retaliation</color> is triggered, Caesar is invulnerable while using the skill.",
+          "name": "Special Attack: Shockwave Shield Bash",
+          "potential": []
+        },
+        {
+          "desc": "After activating <color=#FFFFFF>Special Attack: Shockwave Shield Bash</color>, press <IconMap:Icon_Special> to activate:\nThrusts forward, dealing <color=#F0D12B>Physical DMG</color>.\nIf <color=#FFFFFF>Perfect Block</color> or <color=#FFFFFF>Retaliation</color> is not triggered, the Anti-Interrupt level is increased while using this skill.\nCharacter is invulnerable while using this skill when <color=#FFFFFF>Perfect Block</color> or <color=#FFFFFF>Retaliation</color> is triggered.",
+          "name": "Special Attack: Roaring Thrust",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nStrikes forward with the shield, followed by a powerful thrust, dealing massive <color=#F0D12B>Physical DMG</color>.\nIf Caesar is hit by an enemy at the beginning of the skill activation or an <color=#FFFFFF>Interrupt</color> is triggered with the shield strike, it will trigger <color=#FFFFFF>Perfect Block</color>, negating incoming damage once and countering with a shield attack. After triggering <color=#FFFFFF>Perfect Block</color>, press <IconMap:Icon_SpecialReady> to activate <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> without consuming energy.\nAfter using the skill, Caesar enters a guard stance, reducing incoming damage by 40%. When attacked by an enemy, Caesar blocks the attack and is knocked back. Press <IconMap:Icon_Special> or <IconMap:Icon_SpecialReady> to trigger <color=#FFFFFF>Retaliation</color> and activate <color=#FFFFFF>Special Attack: Roaring Thrust</color> or <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color>\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Parry Counter",
+          "potential": []
+        },
+        {
+          "desc": "After activating <color=#FFFFFF>EX Special Attack: Parry Counter</color>, with enough energy, press <IconMap:Icon_SpecialReady> to activate:\nStrikes forward with the shield, dealing massive <color=#F0D12B>Physical DMG</color>.\nIf Caesar is hit by an enemy at the beginning of the skill activation or an <color=#FFFFFF>Interrupt</color> is triggered with the shield strike, it will trigger <color=#FFFFFF>Perfect Block</color>, negating incoming damage once and recovering the Energy used to activate the skill.\nWhen the skill is activated through <color=#FFFFFF>Perfect Block</color> or <color=#FFFFFF>Retaliation</color>, it cannot trigger <color=#FFFFFF>Perfect Block</color> again.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Overpowered Shield Bash",
+          "potential": []
+        },
+        {
+          "desc": "When Caesar triggers a <color=#FFFFFF>Perfect Block</color>, <color=#FFFFFF>Retaliation</color>, or <color=#FFFFFF>Defensive Assist</color>, her impact is increased by <color=#2BAD00>{CAL:8+AvatarSkillLevel(1)*1,1,2}</color>% for 3s.",
+          "name": "Stance Switch",
+          "potential": []
+        },
+        {
+          "name": "Stance Switch",
+          "param": [
+            {
+              "desc": "{CAL:8+AvatarSkillLevel(1)*1,1,2}%",
+              "name": "Impact Increase",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Shockwave Shield Bash",
+          "param": [
+            {
+              "desc": "{Skill:1071009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071009": {
+                  "attackData": [],
+                  "attributeInfliction": 2418,
+                  "damagePercentage": 5330,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 2419,
+                  "feverRecovery": 66550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 5330,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2400,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071009": {
+                  "attackData": [],
+                  "attributeInfliction": 2418,
+                  "damagePercentage": 5330,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 2419,
+                  "feverRecovery": 66550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2400,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071014, Prop:1002}",
+              "name": "[Perfect Block] Daze Multiplier",
+              "param": {
+                "1071014": {
+                  "attackData": [],
+                  "attributeInfliction": 4000,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 0,
+                  "feverRecovery": 110275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 350,
+                  "main": 7700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7700,
+                  "stunRatioGrowth": 350
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Roaring Thrust",
+          "param": [
+            {
+              "desc": "{Skill:1071010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071010": {
+                  "attackData": [],
+                  "attributeInfliction": 2668,
+                  "damagePercentage": 5880,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 2669,
+                  "feverRecovery": 73425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2650,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071010": {
+                  "attackData": [],
+                  "attributeInfliction": 2668,
+                  "damagePercentage": 5880,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 2669,
+                  "feverRecovery": 73425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2650,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Parry Counter",
+          "param": [
+            {
+              "desc": "{Skill:1071011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071011": {
+                  "attackData": [],
+                  "attributeInfliction": 24911,
+                  "damagePercentage": 38720,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 12334,
+                  "feverRecovery": 846175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3520,
+                  "main": 38720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25260,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071011": {
+                  "attackData": [],
+                  "attributeInfliction": 24911,
+                  "damagePercentage": 38720,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 12334,
+                  "feverRecovery": 846175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 25260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25260,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071015, Prop:1002}",
+              "name": "[Perfect Block] Daze Multiplier",
+              "param": {
+                "1071015": {
+                  "attackData": [],
+                  "attributeInfliction": 10000,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 0,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 15400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15400,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071012, Prop:1001}",
+              "name": "[Perfect Block] Counter DMG Multiplier",
+              "param": {
+                "1071012": {
+                  "attackData": [],
+                  "attributeInfliction": 24911,
+                  "damagePercentage": 38720,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 5167,
+                  "feverRecovery": 846175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3520,
+                  "main": 38720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25260,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071012, Prop:1002}",
+              "name": "[Perfect Block] Counter Daze Multiplier",
+              "param": {
+                "1071012": {
+                  "attackData": [],
+                  "attributeInfliction": 24911,
+                  "damagePercentage": 38720,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 5167,
+                  "feverRecovery": 846175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 25260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25260,
+                  "stunRatioGrowth": 1150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Overpowered Shield Bash",
+          "param": [
+            {
+              "desc": "{Skill:1071013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1071013": {
+                  "attackData": [],
+                  "attributeInfliction": 28287,
+                  "damagePercentage": 42570,
+                  "damagePercentageGrowth": 3870,
+                  "etherPurify": 12670,
+                  "feverRecovery": 949300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3870,
+                  "main": 42570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28840,
+                  "stunRatioGrowth": 1320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1071013": {
+                  "attackData": [],
+                  "attributeInfliction": 28287,
+                  "damagePercentage": 42570,
+                  "damagePercentageGrowth": 3870,
+                  "etherPurify": 12670,
+                  "feverRecovery": 949300,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1320,
+                  "main": 28840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28840,
+                  "stunRatioGrowth": 1320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1071015, Prop:1002}",
+              "name": "[Perfect Block] Daze Multiplier",
+              "param": {
+                "1071015": {
+                  "attackData": [],
+                  "attributeInfliction": 10000,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 0,
+                  "feverRecovery": 275000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 15400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15400,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20",
+              "name": "Press Activation Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1071001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Rampaging Slash"
+    },
+    "1071002": {
+      "desc": "<IconMap:Icon_Normal> (Hold) (With sufficient Assist Points)",
+      "name": "Basic Attack: Dead End"
+    },
+    "1071003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Shockwave Shield Bash"
+    },
+    "1071004": {
+      "desc": "<IconMap:Icon_Special> ; <IconMap:Icon_Special>",
+      "name": "Special Attack: Roaring Thrust"
+    },
+    "1071005": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Parry Counter"
+    },
+    "1071006": {
+      "desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Overpowered Shield Bash"
+    },
+    "1071007": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist); <IconMap:Icon_Normal> ; <IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Overpowered Shield Bash (Retaliation)"
+    },
+    "1071008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Hog Rush"
+    },
+    "1071009": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Eye For an Eye"
+    },
+    "1071010": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Road Rage Slam"
+    },
+    "1071011": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Savage Smash"
+    },
+    "1071012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Assist: Lane Change"
+    },
+    "1071013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Aegis Shield"
+    },
+    "1071014": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Aiding Blade"
+    }
+  },
+  "skin": {
+    "3110710": {
+      "desc": "A ruler ready to ready to sound the triumphal anthem anew, a hero poised to reignite her legend. The not-yet-seasoned leader has finally met the flames of her coronation, yet she still walks the gritty sands of the Outer Ring.\nA light tap on the piano keys sends her desert-tinged song drifting across this land that bears the weight of hope.",
+      "name": "Caesar: Inferno Joyride"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "05",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, off-field support",
+    "Grants shields and Anti-Interrupt to all squad members",
+    "Provides attack boosts to on-field squadmates"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Caesar becomes the active character in combat, she instantly buffs all squad members with a <color=#FFFFFF>Radiant Aegis</color> shield. This effect can trigger once every 300s. While <color=#FFFFFF>Radiant Aegis</color> is active, enemies within a 5m radius of the shield bearer suffer a 15% All-Attribute RES reduction.",
+      "desc2": "\"Big Daddy taught me that this is when you form a spearheaded formation with overwhelming force and strike at the enemy's weakest point—\"\n\"And I'll be leading the charge, of course!\"",
+      "name": "Spearhead Advance"
+    },
+    "2": {
+      "desc": "While <color=#FFFFFF>Radiant Aegis</color> from <color=#FFFFFF>Core Passive: Barrier of Resilience</color> is active, Caesar's Energy Generation Rate increases by 10%, and the shield bearer's ATK boost is increased to 150% of its original value.",
+      "desc2": "Caesar's combat style stands out from those of New Eridu or the Outer Ring, drawing from the techniques of the most skilled warriors among the wanderers.\nKnowing when to hold back and when to strike decisively — that has always been the wanderer's way of survival. And Caesar has always been a good student of this philosophy.",
+      "name": "Legacy of the Far Lands"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Once Caesar recognizes someone as one of her own, she fully accepts them as part of her inner circle. She gives them absolute trust, letting her guard down completely...\nJust like she does with you now.",
+      "name": "Absolute Trust"
+    },
+    "4": {
+      "desc": "When Caesar uses a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, she gains 3 additional <color=#FFFFFF>Assist Points</color>. If her Energy is below 20, she can activate <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> with 1 <color=#FFFFFF>Assist Point</color> instead. This substitution can trigger once every 5s.",
+      "desc2": "One of the tactics Caesar mastered under the guidance of the wanderers.\n\"No matter what, I'll fight till the last moment!\"",
+      "name": "Aries the Battering-Ram"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Behind Caesar's carefree and unpolished appearance lies a romantic at heart.\nShe's always curious about love stories.\nBut if you dig a little deeper into the subject... you might just catch her blushing.",
+      "name": "Romantic Conquest"
+    },
+    "6": {
+      "desc": "<color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> and <color=#FFFFFF>Assist Follow-Up: Aiding Blade</color> are guaranteed to trigger a critical hit. The skill's DMG is increased by 50% and deals additional 50% DMG to the primary target. When Caesar uses <color=#FFFFFF>EX Special Attack: Overpowered Shield Bash</color> or <color=#FFFFFF>Assist Follow-Up: Aiding Blade</color>, her CRIT Rate is increased by 30% and her CRIT DMG is increased by 60% for 15s.",
+      "desc2": "\"I used to keep my eyes straight ahead, thinking that as long as I was strong enough, I could do anything.\"\n\"But being a great leader takes more than just power.\"\n\"I need to protect my friends behind me — they are the reason I can keep going.\"",
+      "name": "Overlord's Will"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

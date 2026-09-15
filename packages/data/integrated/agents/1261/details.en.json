@@ -1,0 +1,2030 @@
+{
+  "camp": {
+    "7": "New Eridu Public Security"
+  },
+  "elementType": {
+    "200": "Physical"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Physical DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1261,
+  "locale": "en",
+  "name": "Jane",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1261019",
+        "1261020",
+        "1261021",
+        "1261022",
+        "1261023",
+        "1261024"
+      ],
+      "basic": [
+        "1261001",
+        "1261002",
+        "1261003",
+        "1261004",
+        "1261005",
+        "1261006",
+        "1261007",
+        "1261008",
+        "1261030"
+      ],
+      "chain": ["1261017", "1261018"],
+      "dodge": [
+        "1261011",
+        "1261012",
+        "1261013",
+        "1261014",
+        "1261015",
+        "1261016"
+      ],
+      "special": ["1261009", "1261010", "1261031"]
+    },
+    "parameterRowsById": {
+      "1261001": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/6"
+      ],
+      "1261002": [
+        "/skill/basic/description/5/param/1",
+        "/skill/basic/description/5/param/7"
+      ],
+      "1261003": [
+        "/skill/basic/description/5/param/2",
+        "/skill/basic/description/5/param/8"
+      ],
+      "1261004": [
+        "/skill/basic/description/5/param/3",
+        "/skill/basic/description/5/param/9"
+      ],
+      "1261005": [
+        "/skill/basic/description/5/param/4",
+        "/skill/basic/description/5/param/10"
+      ],
+      "1261006": [
+        "/skill/basic/description/5/param/5",
+        "/skill/basic/description/5/param/11"
+      ],
+      "1261007": [
+        "/skill/basic/description/6/param/0",
+        "/skill/basic/description/6/param/3"
+      ],
+      "1261008": [
+        "/skill/basic/description/6/param/2",
+        "/skill/basic/description/6/param/5"
+      ],
+      "1261009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1261010": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1261011": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1261012": [
+        "/skill/dodge/description/5/param/2",
+        "/skill/dodge/description/5/param/3"
+      ],
+      "1261013": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1261014": [
+        "/skill/dodge/description/7/param/0",
+        "/skill/dodge/description/7/param/1"
+      ],
+      "1261015": [
+        "/skill/dodge/description/7/param/2",
+        "/skill/dodge/description/7/param/3"
+      ],
+      "1261016": [
+        "/skill/dodge/description/8/param/0",
+        "/skill/dodge/description/8/param/1"
+      ],
+      "1261017": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1261018": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1261019": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1261020": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1261021": ["/skill/assist/description/6/param/0"],
+      "1261022": ["/skill/assist/description/6/param/1"],
+      "1261023": ["/skill/assist/description/6/param/2"],
+      "1261024": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ],
+      "1261030": [
+        "/skill/basic/description/6/param/1",
+        "/skill/basic/description/6/param/4"
+      ],
+      "1261031": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "FEB 16",
+    "fullName": "Jane Doe",
+    "gender": "Female",
+    "impressionF": "Fairy, you don't have to reiterate anything. We've all come to terms with Jane's name being Jane.",
+    "impressionM": "I mean, it's far from the worst name we've seen...",
+    "impressions": [
+      "Impressions of Jane:\n · She seems to always be busy at night...",
+      " · Is Jane a bystander who acted on accident, or a mastermind who planned it all...?",
+      " · To her, \"good night, sweet dreams\" and \"let's have breakfast together\" are two very significant phrases."
+    ],
+    "profileDesc": "Jane, a criminal behavior specialist, has had a \"colorful\" career as a consultant with Public Security over the years.\nShe is an expert in disguise, infiltration, and other investigative work.\nShe has a bad habit of trolling others and sometimes plays harmless pranks.\nShe's a skilled mimic, able to change her appearance and demeanor at will, making people wonder what the \"real\" Jane is like.\n\nJane has a wealth of life experience and can seamlessly blend into any environment, as though she has dabbled in everything there is to do.\nHowever, if you ask her for any further details, she'll give you a different story every time.\nWho knows which, if any, are true.\n\nNote 1: Jane does not know our true identity. Do not reveal this to her under any circumstances.\nNote 2: Despite \"Jane Doe\" being an obvious alias, we haven't found any information about her real or former name.\nThis is not my problem. My guess is that her true identity has been completely erased due to her special status.\nLet me reiterate: This is not my problem.",
+    "stature": "170",
+    "trustLv": {
+      "1": "Jane, a criminal behavior specialist, has had a \"colorful\" career as a consultant with Public Security over the years.\nShe is an expert in disguise, infiltration, and other investigative work.\nShe has a bad habit of trolling others and sometimes plays harmless pranks.\nShe's a skilled mimic, able to change her appearance and demeanor at will, making people wonder what the \"real\" Jane is like.\n\nJane has a wealth of life experience and can seamlessly blend into any environment, as though she has dabbled in everything there is to do.\nHowever, if you ask her for any further details, she'll give you a different story every time.\nWho knows which, if any, are true.\n\nNote 1: Jane does not know our true identity. Do not reveal this to her under any circumstances.\nNote 2: Despite \"Jane Doe\" being an obvious alias, we haven't found any information about her real or former name.\nThis is not my problem. My guess is that her true identity has been completely erased due to her special status.\nLet me reiterate: This is not my problem.",
+      "2": "",
+      "3": "Jane is a total night owl. She loves working the night shift and is most alive after dark.\nShe's also a bit of a hoarder, constantly filling her home with stuff (usually a bunch of junk food).\n\nThe pouch at her waist might look like a makeup bag, but it's actually her toolkit, packed with all the \"essentials\" for her work.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete the Special Episode \"Undercover R&B\" and read Jane's DM"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1261501": {
+        "desc": [
+          "When Jane's attacks hit an enemy, it causes them to enter the <color=#FFFFFF>Gnawed</color> state, lasting for 10s. If any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state and causes the <color=#F0D12B>Flinch</color> effect, the <color=#F0D12B>Flinch</color> effect duration is extended by 5s. <color=#F0D12B>Assault</color> DMG has a chance to trigger a critical hit against enemies in the <color=#FFFFFF>Gnawed</color> state, with a base CRIT Rate of <color=#2BAD00>20%</color> and CRIT DMG of 50%. Each point of Jane's Anomaly Proficiency further increases this CRIT Rate by <color=#2BAD00>0.1%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nJane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 20%. When the enemy is already suffering from an Attribute Anomaly, Jane's <color=#F0D12B>Physical Anomaly Buildup</color> towards the target is increased by an additional 15%."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Insight", "Additional Ability: Sore Spot"],
+        "potential": []
+      },
+      "1261502": {
+        "desc": [
+          "When Jane's attacks hit an enemy, it causes them to enter the <color=#FFFFFF>Gnawed</color> state, lasting for 10s. If any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state and causes the <color=#F0D12B>Flinch</color> effect, the <color=#F0D12B>Flinch</color> effect duration is extended by 5s. <color=#F0D12B>Assault</color> DMG has a chance to trigger a critical hit against enemies in the <color=#FFFFFF>Gnawed</color> state, with a base CRIT Rate of <color=#2BAD00>25%</color> and CRIT DMG of 50%. Each point of Jane's Anomaly Proficiency further increases this CRIT Rate by <color=#2BAD00>0.11%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nJane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 20%. When the enemy is already suffering from an Attribute Anomaly, Jane's <color=#F0D12B>Physical Anomaly Buildup</color> towards the target is increased by an additional 15%."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Insight", "Additional Ability: Sore Spot"],
+        "potential": []
+      },
+      "1261503": {
+        "desc": [
+          "When Jane's attacks hit an enemy, it causes them to enter the <color=#FFFFFF>Gnawed</color> state, lasting for 10s. If any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state and causes the <color=#F0D12B>Flinch</color> effect, the <color=#F0D12B>Flinch</color> effect duration is extended by 5s. <color=#F0D12B>Assault</color> DMG has a chance to trigger a critical hit against enemies in the <color=#FFFFFF>Gnawed</color> state, with a base CRIT Rate of <color=#2BAD00>28%</color> and CRIT DMG of 50%. Each point of Jane's Anomaly Proficiency further increases this CRIT Rate by <color=#2BAD00>0.12%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nJane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 20%. When the enemy is already suffering from an Attribute Anomaly, Jane's <color=#F0D12B>Physical Anomaly Buildup</color> towards the target is increased by an additional 15%."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Insight", "Additional Ability: Sore Spot"],
+        "potential": []
+      },
+      "1261504": {
+        "desc": [
+          "When Jane's attacks hit an enemy, it causes them to enter the <color=#FFFFFF>Gnawed</color> state, lasting for 10s. If any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state and causes the <color=#F0D12B>Flinch</color> effect, the <color=#F0D12B>Flinch</color> effect duration is extended by 5s. <color=#F0D12B>Assault</color> DMG has a chance to trigger a critical hit against enemies in the <color=#FFFFFF>Gnawed</color> state, with a base CRIT Rate of <color=#2BAD00>31%</color> and CRIT DMG of 50%. Each point of Jane's Anomaly Proficiency further increases this CRIT Rate by <color=#2BAD00>0.13%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nJane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 20%. When the enemy is already suffering from an Attribute Anomaly, Jane's <color=#F0D12B>Physical Anomaly Buildup</color> towards the target is increased by an additional 15%."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Insight", "Additional Ability: Sore Spot"],
+        "potential": []
+      },
+      "1261505": {
+        "desc": [
+          "When Jane's attacks hit an enemy, it causes them to enter the <color=#FFFFFF>Gnawed</color> state, lasting for 10s. If any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state and causes the <color=#F0D12B>Flinch</color> effect, the <color=#F0D12B>Flinch</color> effect duration is extended by 5s. <color=#F0D12B>Assault</color> DMG has a chance to trigger a critical hit against enemies in the <color=#FFFFFF>Gnawed</color> state, with a base CRIT Rate of <color=#2BAD00>34%</color> and CRIT DMG of 50%. Each point of Jane's Anomaly Proficiency further increases this CRIT Rate by <color=#2BAD00>0.14%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nJane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 20%. When the enemy is already suffering from an Attribute Anomaly, Jane's <color=#F0D12B>Physical Anomaly Buildup</color> towards the target is increased by an additional 15%."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Insight", "Additional Ability: Sore Spot"],
+        "potential": []
+      },
+      "1261506": {
+        "desc": [
+          "When Jane's attacks hit an enemy, it causes them to enter the <color=#FFFFFF>Gnawed</color> state, lasting for 10s. If any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state and causes the <color=#F0D12B>Flinch</color> effect, the <color=#F0D12B>Flinch</color> effect duration is extended by 5s. <color=#F0D12B>Assault</color> DMG has a chance to trigger a critical hit against enemies in the <color=#FFFFFF>Gnawed</color> state, with a base CRIT Rate of <color=#2BAD00>37%</color> and CRIT DMG of 50%. Each point of Jane's Anomaly Proficiency further increases this CRIT Rate by <color=#2BAD00>0.15%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nJane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 20%. When the enemy is already suffering from an Attribute Anomaly, Jane's <color=#F0D12B>Physical Anomaly Buildup</color> towards the target is increased by an additional 15%."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Insight", "Additional Ability: Sore Spot"],
+        "potential": []
+      },
+      "1261507": {
+        "desc": [
+          "When Jane's attacks hit an enemy, it causes them to enter the <color=#FFFFFF>Gnawed</color> state, lasting for 10s. If any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state and causes the <color=#F0D12B>Flinch</color> effect, the <color=#F0D12B>Flinch</color> effect duration is extended by 5s. <color=#F0D12B>Assault</color> DMG has a chance to trigger a critical hit against enemies in the <color=#FFFFFF>Gnawed</color> state, with a base CRIT Rate of <color=#2BAD00>40%</color> and CRIT DMG of 50%. Each point of Jane's Anomaly Proficiency further increases this CRIT Rate by <color=#2BAD00>0.16%</color>.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same Faction:\nJane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 20%. When the enemy is already suffering from an Attribute Anomaly, Jane's <color=#F0D12B>Physical Anomaly Buildup</color> towards the target is increased by an additional 15%."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Insight", "Additional Ability: Sore Spot"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {
+    "126100": {
+      "abilityList": [11261401],
+      "desc": "",
+      "id": 126100,
+      "image": "Jane",
+      "level": 1,
+      "levelShowName": "Heartsnatch Tango I",
+      "name": "",
+      "potentialMaterials": [
+        {
+          "itemId": 20126,
+          "number": 1
+        }
+      ]
+    },
+    "126101": {
+      "abilityList": [11261401, 11261501],
+      "desc": "When Jane triggers <color=#F0D12B>Assault</color>, the CRIT DMG of that instance of <color=#F0D12B>Assault</color> is additionally increased by <color=#2BAD00>10%</color>.",
+      "id": 126101,
+      "image": "Jane",
+      "level": 2,
+      "levelShowName": "Heartsnatch Tango II",
+      "name": "Awakened Potential: Lethal Dance",
+      "potentialMaterials": [
+        {
+          "itemId": 20126,
+          "number": 1
+        }
+      ]
+    },
+    "126102": {
+      "abilityList": [11261401, 11261502],
+      "desc": "When Jane triggers <color=#F0D12B>Assault</color>, the CRIT DMG of that instance of <color=#F0D12B>Assault</color> is additionally increased by <color=#2BAD00>15%</color>.",
+      "id": 126102,
+      "image": "Jane",
+      "level": 3,
+      "levelShowName": "Heartsnatch Tango III",
+      "name": "Awakened Potential: Lethal Dance",
+      "potentialMaterials": [
+        {
+          "itemId": 20126,
+          "number": 1
+        }
+      ]
+    },
+    "126103": {
+      "abilityList": [11261401, 11261503],
+      "desc": "When Jane triggers <color=#F0D12B>Assault</color>, the CRIT DMG of that instance of <color=#F0D12B>Assault</color> is additionally increased by <color=#2BAD00>20%</color>.",
+      "id": 126103,
+      "image": "Jane",
+      "level": 4,
+      "levelShowName": "Heartsnatch Tango IV",
+      "name": "Awakened Potential: Lethal Dance",
+      "potentialMaterials": [
+        {
+          "itemId": 20126,
+          "number": 1
+        }
+      ]
+    },
+    "126104": {
+      "abilityList": [11261401, 11261504],
+      "desc": "When Jane triggers <color=#F0D12B>Assault</color>, the CRIT DMG of that instance of <color=#F0D12B>Assault</color> is additionally increased by <color=#2BAD00>25</color>%.",
+      "id": 126104,
+      "image": "Jane",
+      "level": 5,
+      "levelShowName": "Heartsnatch Tango V",
+      "name": "Awakened Potential: Lethal Dance",
+      "potentialMaterials": [
+        {
+          "itemId": 20126,
+          "number": 1
+        }
+      ]
+    },
+    "126105": {
+      "abilityList": [11261401, 11261505],
+      "desc": "When Jane triggers <color=#F0D12B>Assault</color>, the CRIT DMG of that instance of <color=#F0D12B>Assault</color> is additionally increased by <color=#2BAD00>30%</color>.",
+      "id": 126105,
+      "image": "Jane",
+      "level": 6,
+      "levelShowName": "Heartsnatch Tango VI",
+      "name": "Awakened Potential: Lethal Dance",
+      "potentialMaterials": [
+        {
+          "itemId": 20126,
+          "number": 1
+        }
+      ]
+    }
+  },
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nUnleash multiple slashes at enemies in front, followed by a downward thrust, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Dark Thorn",
+          "potential": []
+        },
+        {
+          "desc": "While in the <color=#FFFFFF>Passion</color> state, when the active character is launched, press <IconMap:Icon_Switch> to activate:\nSlash enemies in front quickly multiple times, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Lutz Jump",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Last Defense",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nLeap up and swiftly slash the enemy, then execute a wide sweeping slash across a large area in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Gale Sweep",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Dark Thorn",
+          "param": [
+            {
+              "desc": "{Skill:1261019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261019": {
+                  "attackData": [158334, 0],
+                  "attributeInfliction": 10833,
+                  "damagePercentage": 11920,
+                  "damagePercentageGrowth": 1090,
+                  "etherPurify": 5417,
+                  "feverRecovery": 298100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1090,
+                  "main": 11920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11920,
+                  "stunRatioGrowth": 550
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261019": {
+                  "attackData": [158334, 0],
+                  "attributeInfliction": 10833,
+                  "damagePercentage": 11920,
+                  "damagePercentageGrowth": 1090,
+                  "etherPurify": 5417,
+                  "feverRecovery": 298100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 11920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11920,
+                  "stunRatioGrowth": 550
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Lutz Jump",
+          "param": [
+            {
+              "desc": "{Skill:1261020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261020": {
+                  "attackData": [0, 149960],
+                  "attributeInfliction": 12496,
+                  "damagePercentage": 13750,
+                  "damagePercentageGrowth": 1250,
+                  "etherPurify": 6249,
+                  "feverRecovery": 343750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1250,
+                  "main": 13750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261020, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261020": {
+                  "attackData": [0, 149960],
+                  "attributeInfliction": 12496,
+                  "damagePercentage": 13750,
+                  "damagePercentageGrowth": 1250,
+                  "etherPurify": 6249,
+                  "feverRecovery": 343750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 630,
+                  "main": 13750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13750,
+                  "stunRatioGrowth": 630
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Last Defense",
+          "param": [
+            {
+              "desc": "{Skill:1261021, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1261021": {
+                  "attackData": [0, 0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261022, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1261022": {
+                  "attackData": [0, 0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261023, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1261023": {
+                  "attackData": [0, 0],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Gale Sweep",
+          "param": [
+            {
+              "desc": "{Skill:1261024, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261024": {
+                  "attackData": [407686, 173961],
+                  "attributeInfliction": 29292,
+                  "damagePercentage": 34550,
+                  "damagePercentageGrowth": 3150,
+                  "etherPurify": 14497,
+                  "feverRecovery": 980100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3150,
+                  "main": 34550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29900,
+                  "stunRatioGrowth": 1360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261024, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261024": {
+                  "attackData": [407686, 173961],
+                  "attributeInfliction": 29292,
+                  "damagePercentage": 34550,
+                  "damagePercentageGrowth": 3150,
+                  "etherPurify": 14497,
+                  "feverRecovery": 980100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1360,
+                  "main": 29900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 29900,
+                  "stunRatioGrowth": 1360
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 6 attacks in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Dancing Blades",
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to six consecutive attacks ahead, dealing <color=#F0D12B>Physical DMG</color>.\nThe sixth <color=#FFFFFF>Basic Attack</color> is also treated as a <color=#FFFFFF>Dash Attack</color>, and Anti-Interrupt level is increased while using this skill.",
+          "name": "Basic Attack: Dancing Blades",
+          "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+        },
+        {
+          "desc": "When Jane triggers <color=#FFFFFF>Perfect Dodge</color>, <color=#FFFFFF>Defensive Assist</color>, or performs a move that deals DMG to the enemy, she accumulates <color=#FFFFFF>Passion Stream</color>. Upon reaching the maximum <color=#FFFFFF>Passion Stream</color>, Jane enters the <color=#FFFFFF>Passion</color> state.\nWhile in the <color=#FFFFFF>Passion</color> state, Jane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by 25%. Additionally, if Jane's Anomaly Proficiency exceeds 120, each extra point raises her ATK by 2, up to a maximum of 600.\nIn the <color=#FFFFFF>Passion</color> state, Jane's skills that deal damage consume <color=#FFFFFF>Passion Stream</color>. Activating a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Defensive Assist</color> regenerates <color=#FFFFFF>Passion Stream</color>. Jane exits the <color=#FFFFFF>Passion</color> state when all of her <color=#FFFFFF>Passion Stream</color> is consumed.",
+          "name": "Passion",
+          "potential": []
+        },
+        {
+          "desc": "Entering the <color=#FFFFFF>Passion</color> state grants Jane one use of <color=#FFFFFF>Basic Attack: Salchow Jump</color>.\nWhen available, hold <IconMap:Icon_Normal> to activate:\nLaunch rapid consecutive attacks forward, followed by a Finishing Move, dealing <color=#F0D12B>Physical DMG</color>.\nHold the button during the consecutive attacks to extend the skill duration. Release <IconMap:Icon_Normal> to trigger the Finishing Move early.\nAnti-Interrupt level is increased during the consecutive attacks, and Jane takes 40% reduced DMG. Jane is invulnerable during the Finishing Move.\nUsing and damaging an enemy with <color=#FFFFFF>Basic Attack: Salchow Jump</color> while in the <color=#FFFFFF>Passion</color> state generates <color=#FFFFFF>Passion Stream</color>.",
+          "name": "Basic Attack: Salchow Jump",
+          "potential": [0]
+        },
+        {
+          "desc": "Entering the <color=#FFFFFF>Passion</color> state grants Jane one use of <color=#FFFFFF>Basic Attack: Salchow Jump</color>.\nWhen available, hold <IconMap:Icon_Normal> to activate:\nLaunches rapid consecutive attacks forward, followed by a Finishing Move, dealing <color=#F0D12B>Physical DMG</color>.\nHold the button during the consecutive attacks to greatly extend the skill duration. Release <IconMap:Icon_Normal> to trigger the Finishing Move early.\nAnti-Interrupt level is increased during the consecutive attacks, and Jane takes 40% reduced DMG. Jane is invulnerable during the Finishing Move, which can also trigger a Perfect Dodge upon activation.\nIf a Perfect Dodge is triggered, the Finishing Move restores more <color=#FFFFFF>Passion Stream</color> on hit.\nUsing and damaging an enemy with <color=#FFFFFF>Basic Attack: Salchow Jump</color> while in the <color=#FFFFFF>Passion</color> state generates <color=#FFFFFF>Passion Stream</color>.",
+          "name": "Basic Attack: Salchow Jump",
+          "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+        },
+        {
+          "name": "Basic Attack: Dancing Blades",
+          "param": [
+            {
+              "desc": "{Skill:1261001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1261001": {
+                  "attackData": [41695, 33356],
+                  "attributeInfliction": 2134,
+                  "damagePercentage": 3610,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 1390,
+                  "feverRecovery": 38225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1530,
+                  "stunRatioGrowth": 70
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1261002": {
+                  "attackData": [66493, 53194],
+                  "attributeInfliction": 5206,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 4020,
+                  "feverRecovery": 110550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 6230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14480,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4430,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1261003": {
+                  "attackData": [82623, 66098],
+                  "attributeInfliction": 6878,
+                  "damagePercentage": 8350,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 5404,
+                  "feverRecovery": 148775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 8350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5950,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1261004": {
+                  "attackData": [155541, 124433],
+                  "attributeInfliction": 12745,
+                  "damagePercentage": 16340,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 9969,
+                  "feverRecovery": 274175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 16340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10970,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1261005": {
+                  "attackData": [80264, 64211],
+                  "attributeInfliction": 7671,
+                  "damagePercentage": 9880,
+                  "damagePercentageGrowth": 900,
+                  "etherPurify": 6238,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 900,
+                  "main": 9880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6870,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261006, Prop:1001}",
+              "name": "6th-Hit DMG Multiplier",
+              "param": {
+                "1261006": {
+                  "attackData": [251293, 201034],
+                  "attributeInfliction": 22662,
+                  "damagePercentage": 29130,
+                  "damagePercentageGrowth": 2650,
+                  "etherPurify": 18175,
+                  "feverRecovery": 499950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2650,
+                  "main": 29130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 65430,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20000,
+                  "stunRatioGrowth": 910
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1261001": {
+                  "attackData": [41695, 33356],
+                  "attributeInfliction": 2134,
+                  "damagePercentage": 3610,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 1390,
+                  "feverRecovery": 38225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 70,
+                  "main": 1530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 5010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1530,
+                  "stunRatioGrowth": 70
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1261002": {
+                  "attackData": [66493, 53194],
+                  "attributeInfliction": 5206,
+                  "damagePercentage": 6230,
+                  "damagePercentageGrowth": 570,
+                  "etherPurify": 4020,
+                  "feverRecovery": 110550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14480,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4430,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1261003": {
+                  "attackData": [82623, 66098],
+                  "attributeInfliction": 6878,
+                  "damagePercentage": 8350,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 5404,
+                  "feverRecovery": 148775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5950,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1261004": {
+                  "attackData": [155541, 124433],
+                  "attributeInfliction": 12745,
+                  "damagePercentage": 16340,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 9969,
+                  "feverRecovery": 274175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35890,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10970,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1261005": {
+                  "attackData": [80264, 64211],
+                  "attributeInfliction": 7671,
+                  "damagePercentage": 9880,
+                  "damagePercentageGrowth": 900,
+                  "etherPurify": 6238,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6870,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261006, Prop:1002}",
+              "name": "6th-Hit Daze Multiplier",
+              "param": {
+                "1261006": {
+                  "attackData": [251293, 201034],
+                  "attributeInfliction": 22662,
+                  "damagePercentage": 29130,
+                  "damagePercentageGrowth": 2650,
+                  "etherPurify": 18175,
+                  "feverRecovery": 499950,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 20000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 65430,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20000,
+                  "stunRatioGrowth": 910
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Salchow Jump",
+          "param": [
+            {
+              "desc": "{Skill:1261007, Prop:1001}",
+              "name": "Consecutive Attack DMG Multiplier",
+              "param": {
+                "1261007": {
+                  "attackData": [249960, 249960],
+                  "attributeInfliction": 27340,
+                  "damagePercentage": 30080,
+                  "damagePercentageGrowth": 2740,
+                  "etherPurify": 20830,
+                  "feverRecovery": 572825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2740,
+                  "main": 30080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 74990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22920,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": [0]
+            },
+            {
+              "desc": "{Skill:1261030, Prop:1001}",
+              "name": "Consecutive Attack DMG Multiplier",
+              "param": {
+                "1261030": {
+                  "attackData": [352000, 352000],
+                  "attributeInfliction": 36576,
+                  "damagePercentage": 48210,
+                  "damagePercentageGrowth": 4390,
+                  "etherPurify": 29334,
+                  "feverRecovery": 806850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4390,
+                  "main": 48210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 105600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32270,
+                  "stunRatioGrowth": 1470
+                }
+              },
+              "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+            },
+            {
+              "desc": "{Skill:1261008, Prop:1001}",
+              "name": "Finishing Move DMG Multiplier",
+              "param": {
+                "1261008": {
+                  "attackData": [134000, 134000],
+                  "attributeInfliction": 14656,
+                  "damagePercentage": 16130,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 11167,
+                  "feverRecovery": 307175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1470,
+                  "main": 16130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12290,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261007, Prop:1002}",
+              "name": "Consecutive Attack Daze Multiplier",
+              "param": {
+                "1261007": {
+                  "attackData": [249960, 249960],
+                  "attributeInfliction": 27340,
+                  "damagePercentage": 30080,
+                  "damagePercentageGrowth": 2740,
+                  "etherPurify": 20830,
+                  "feverRecovery": 572825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 22920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 74990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22920,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": [0]
+            },
+            {
+              "desc": "{Skill:1261030, Prop:1002}",
+              "name": "Consecutive Attack Daze Multiplier",
+              "param": {
+                "1261030": {
+                  "attackData": [352000, 352000],
+                  "attributeInfliction": 36576,
+                  "damagePercentage": 48210,
+                  "damagePercentageGrowth": 4390,
+                  "etherPurify": 29334,
+                  "feverRecovery": 806850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1470,
+                  "main": 32270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 105600,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32270,
+                  "stunRatioGrowth": 1470
+                }
+              },
+              "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+            },
+            {
+              "desc": "{Skill:1261008, Prop:1002}",
+              "name": "Finishing Move Daze Multiplier",
+              "param": {
+                "1261008": {
+                  "attackData": [134000, 134000],
+                  "attributeInfliction": 14656,
+                  "damagePercentage": 16130,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 11167,
+                  "feverRecovery": 307175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 560,
+                  "main": 12290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12290,
+                  "stunRatioGrowth": 560
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nWeaves between and slashes enemies in a large area in front, dealing massive <color=#F0D12B>Physical DMG</color>.\nJane directly enters the <color=#FFFFFF>Passion</color> state upon activating the skill, and gains max <color=#FFFFFF>Passion Stream</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Flowers of Sin",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nWeaves between and slashes enemies with a powerful attack in a large area in front, followed by a Finishing Move, dealing massive <color=#F0D12B>Physical DMG</color>.\nJane directly enters the <color=#FFFFFF>Passion</color> state upon activating the skill, and gains max <color=#FFFFFF>Passion Stream</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Final Curtain",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Flowers of Sin",
+          "param": [
+            {
+              "desc": "{Skill:1261017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261017": {
+                  "attackData": [0, 350000],
+                  "attributeInfliction": 43946,
+                  "damagePercentage": 63260,
+                  "damagePercentageGrowth": 5760,
+                  "etherPurify": 23997,
+                  "feverRecovery": 2488750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5760,
+                  "main": 63260,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23760,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261017": {
+                  "attackData": [0, 350000],
+                  "attributeInfliction": 43946,
+                  "damagePercentage": 63260,
+                  "damagePercentageGrowth": 5760,
+                  "etherPurify": 23997,
+                  "feverRecovery": 2488750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1080,
+                  "main": 23760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23760,
+                  "stunRatioGrowth": 1080
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Final Curtain",
+          "param": [
+            {
+              "desc": "{Skill:1261018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261018": {
+                  "attackData": [0, 350000],
+                  "attributeInfliction": 96658,
+                  "damagePercentage": 147060,
+                  "damagePercentageGrowth": 13370,
+                  "etherPurify": 68834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13370,
+                  "main": 147060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18650,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261018": {
+                  "attackData": [0, 350000],
+                  "attributeInfliction": 96658,
+                  "damagePercentage": 147060,
+                  "damagePercentageGrowth": 13370,
+                  "etherPurify": 68834,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 18650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18650,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to trigger.\nA quick slide dodge.\nCharacter is invulnerable while using this skill.\nJane has an extra dodge. Before she enters the <color=#FFFFFF>Passion</color> state, she alternates between the two dodges. After entering the <color=#FFFFFF>Passion</color> state, Jane can pass through enemies in front when dodging.",
+          "name": "Dodge: Phantom",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nIf after the first dodge, launch an upward slash in front, dealing <color=#F0D12B>Physical DMG</color>.\nIf after the second dodge, perform a consecutive slashes in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Edge Jump",
+          "potential": []
+        },
+        {
+          "desc": "While in the <color=#FFFFFF>Passion</color> state, press <IconMap:Icon_Normal> during a dodge to activate:\nLaunch three quick rushing slashes in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Phantom Thrust",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nIf after the first dodge, unleash multiple slashes at enemies in front, followed by a downward thrust, dealing <color=#F0D12B>Physical DMG</color>.\nIf after the second dodge, leap up and deliver three consecutive attacks to enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Swift Shadow",
+          "potential": []
+        },
+        {
+          "desc": "While in the <color=#FFFFFF>Passion</color> state, press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nSlash enemies in front quickly multiple times, dealing <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Swift Shadow Dance",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Edge Jump",
+          "param": [
+            {
+              "desc": "{Skill:1261011, Prop:1001}",
+              "name": "1st-Dodge DMG Multiplier",
+              "param": {
+                "1261011": {
+                  "attackData": [97500, 0],
+                  "attributeInfliction": 3250,
+                  "damagePercentage": 7150,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 3250,
+                  "feverRecovery": 89375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 650,
+                  "main": 7150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3580,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261011, Prop:1002}",
+              "name": "1st-Dodge Daze Multiplier",
+              "param": {
+                "1261011": {
+                  "attackData": [97500, 0],
+                  "attributeInfliction": 3250,
+                  "damagePercentage": 7150,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 3250,
+                  "feverRecovery": 89375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3580,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261012, Prop:1001}",
+              "name": "2nd-Dodge DMG Multiplier",
+              "param": {
+                "1261012": {
+                  "attackData": [97500, 0],
+                  "attributeInfliction": 3250,
+                  "damagePercentage": 7150,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 3250,
+                  "feverRecovery": 89375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 650,
+                  "main": 7150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3580,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261012, Prop:1002}",
+              "name": "2nd-Dodge Daze Multiplier",
+              "param": {
+                "1261012": {
+                  "attackData": [97500, 0],
+                  "attributeInfliction": 3250,
+                  "damagePercentage": 7150,
+                  "damagePercentageGrowth": 650,
+                  "etherPurify": 3250,
+                  "feverRecovery": 89375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11700,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3580,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Phantom Thrust",
+          "param": [
+            {
+              "desc": "{Skill:1261013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261013": {
+                  "attackData": [0, 113961],
+                  "attributeInfliction": 4748,
+                  "damagePercentage": 10450,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4749,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 950,
+                  "main": 10450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261013": {
+                  "attackData": [0, 113961],
+                  "attributeInfliction": 4748,
+                  "damagePercentage": 10450,
+                  "damagePercentageGrowth": 950,
+                  "etherPurify": 4749,
+                  "feverRecovery": 130625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17100,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5230,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Swift Shadow",
+          "param": [
+            {
+              "desc": "{Skill:1261014, Prop:1001}",
+              "name": "1st-Dodge DMG Multiplier",
+              "param": {
+                "1261014": {
+                  "attackData": [54167, 0],
+                  "attributeInfliction": 17767,
+                  "damagePercentage": 34120,
+                  "damagePercentageGrowth": 3110,
+                  "etherPurify": 25834,
+                  "feverRecovery": 298100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3110,
+                  "main": 34120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22920,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261014, Prop:1002}",
+              "name": "1st-Dodge Daze Multiplier",
+              "param": {
+                "1261014": {
+                  "attackData": [54167, 0],
+                  "attributeInfliction": 17767,
+                  "damagePercentage": 34120,
+                  "damagePercentageGrowth": 3110,
+                  "etherPurify": 25834,
+                  "feverRecovery": 298100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 22920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22920,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261015, Prop:1001}",
+              "name": "2nd-Dodge DMG Multiplier",
+              "param": {
+                "1261015": {
+                  "attackData": [54167, 0],
+                  "attributeInfliction": 17767,
+                  "damagePercentage": 34120,
+                  "damagePercentageGrowth": 3110,
+                  "etherPurify": 25834,
+                  "feverRecovery": 298100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3110,
+                  "main": 34120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22920,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261015, Prop:1002}",
+              "name": "2nd-Dodge Daze Multiplier",
+              "param": {
+                "1261015": {
+                  "attackData": [54167, 0],
+                  "attributeInfliction": 17767,
+                  "damagePercentage": 34120,
+                  "damagePercentageGrowth": 3110,
+                  "etherPurify": 25834,
+                  "feverRecovery": 298100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1050,
+                  "main": 22920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 22920,
+                  "stunRatioGrowth": 1050
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Swift Shadow Dance",
+          "param": [
+            {
+              "desc": "{Skill:1261016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261016": {
+                  "attackData": [0, 100000],
+                  "attributeInfliction": 19431,
+                  "damagePercentage": 38700,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 27497,
+                  "feverRecovery": 343750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3520,
+                  "main": 38700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24750,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261016": {
+                  "attackData": [0, 100000],
+                  "attributeInfliction": 19431,
+                  "damagePercentage": 38700,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 27497,
+                  "feverRecovery": 343750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24750,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nLeaps into the air to launch consecutive kicks forward, then sweeps across, dealing <color=#F0D12B>Physical DMG</color>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Aerial Sweep",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLeaps into the air to launch multiple consecutive kicks forward, then sweeps across, dealing massive <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Aerial Sweep - Clearout",
+          "potential": [0]
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLeaps into the air to launch multiple consecutive kicks forward, then sweeps across, dealing massive <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill, which also counts as a <color=#FFFFFF>Dash Attack</color>.",
+          "name": "EX Special Attack: Aerial Sweep - Clearout",
+          "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+        },
+        {
+          "desc": "While in the Passion state and with enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nLeaps into the air to launch multiple consecutive kicks forward, then sweeps across, dealing massive <color=#F0D12B>Physical DMG</color>.\nCharacter is invulnerable while using this skill, which also counts as a <color=#FFFFFF>Dash Attack</color>.",
+          "name": "EX Special Attack: Aerial Sweep - Onslaught",
+          "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+        },
+        {
+          "name": "Special Attack: Aerial Sweep",
+          "param": [
+            {
+              "desc": "{Skill:1261009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261009": {
+                  "attackData": [78750, 126000],
+                  "attributeInfliction": 5250,
+                  "damagePercentage": 5780,
+                  "damagePercentageGrowth": 530,
+                  "etherPurify": 5250,
+                  "feverRecovery": 144375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 530,
+                  "main": 5780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5780,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261009": {
+                  "attackData": [78750, 126000],
+                  "attributeInfliction": 5250,
+                  "damagePercentage": 5780,
+                  "damagePercentageGrowth": 530,
+                  "etherPurify": 5250,
+                  "feverRecovery": 144375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 270,
+                  "main": 5780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5780,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Aerial Sweep - Clearout",
+          "param": [
+            {
+              "desc": "{Skill:1261010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261010": {
+                  "attackData": [425544, 212772],
+                  "attributeInfliction": 47396,
+                  "damagePercentage": 57470,
+                  "damagePercentageGrowth": 5230,
+                  "etherPurify": 13504,
+                  "feverRecovery": 1703075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5230,
+                  "main": 57470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 46810,
+                  "stunRatioGrowth": 2130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1261010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261010": {
+                  "attackData": [425544, 212772],
+                  "attributeInfliction": 47396,
+                  "damagePercentage": 57470,
+                  "damagePercentageGrowth": 5230,
+                  "etherPurify": 13504,
+                  "feverRecovery": 1703075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2130,
+                  "main": 46810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 46810,
+                  "stunRatioGrowth": 2130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Aerial Sweep - Onslaught",
+          "param": [
+            {
+              "desc": "{Skill:1261031, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1261031": {
+                  "attackData": [442834, 221417],
+                  "attributeInfliction": 49191,
+                  "damagePercentage": 59510,
+                  "damagePercentageGrowth": 5410,
+                  "etherPurify": 14834,
+                  "feverRecovery": 1757800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5410,
+                  "main": 59510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 48720,
+                  "stunRatioGrowth": 2220
+                }
+              },
+              "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+            },
+            {
+              "desc": "{Skill:1261031, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1261031": {
+                  "attackData": [442834, 221417],
+                  "attributeInfliction": 49191,
+                  "damagePercentage": 59510,
+                  "damagePercentageGrowth": 5410,
+                  "etherPurify": 14834,
+                  "feverRecovery": 1757800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2220,
+                  "main": 48720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 48720,
+                  "stunRatioGrowth": 2220
+                }
+              },
+              "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+            }
+          ],
+          "potential": [126100, 126101, 126102, 126103, 126104, 126105]
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1261001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Dancing Blades"
+    },
+    "1261002": {
+      "desc": "<IconMap:Icon_Normal> (If there are remaining uses) (Hold)",
+      "name": "Basic Attack: Salchow Jump"
+    },
+    "1261003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Aerial Sweep"
+    },
+    "1261004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Aerial Sweep - Clearout"
+    },
+    "1261005": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Edge Jump"
+    },
+    "1261006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal> (Passion State)",
+      "name": "Dash Attack: Phantom Thrust"
+    },
+    "1261007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Swift Shadow"
+    },
+    "1261008": {
+      "desc": "<IconMap:Icon_Evade>(Perfect);<IconMap:Icon_Normal>(Passion State)",
+      "name": "Dodge Counter: Swift Shadow Dance"
+    },
+    "1261009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Flowers of Sin"
+    },
+    "1261010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Final Curtain"
+    },
+    "1261011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Dark Thorn"
+    },
+    "1261012": {
+      "desc": "<IconMap:Icon_Switch>(When Triggering Quick Assist) (Passion State)",
+      "name": "Quick Assist: Lutz Jump"
+    },
+    "1261013": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Last Defense"
+    },
+    "1261014": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Gale Sweep"
+    },
+    "1261015": {
+      "desc": "<IconMap:Icon_SpecialReady> (Passion State)",
+      "name": "EX Special Attack: Aerial Sweep - Onslaught"
+    }
+  },
+  "skin": {
+    "3112610": {
+      "desc": "Her everyday look when she isn't putting on a disguise. Maybe it's just one of the countless faces she wears. The night becomes her cover, and her mask is the one truth she never sets aside.",
+      "name": "Jane: Hidden Nightfade"
+    },
+    "3112611": {
+      "desc": "Who says sunlight must accompany a seaside stroll? For lurkers with names unknown, the night is their most faithful companion. The anonymous lady says the evening sea holds unspeakable secrets — is this the truth, or another deception?",
+      "name": "Jane: Nocturne of Light"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
+    "Increases Physical Anomaly Buildup Rate",
+    "Assault DMG has a chance to CRIT"
+  ],
+  "talent": {
+    "1": {
+      "desc": "The maximum uses of <color=#FFFFFF>Basic Attack: Salchow Jump</color> are increased by one. While in the <color=#FFFFFF>Passion</color> state, Jane's <color=#F0D12B>Physical Anomaly Buildup Rate</color> increases by an extra 15% and each point of Jane's Anomaly Proficiency increases her DMG by 0.1%, up to a maximum increase of 30%.",
+      "desc2": "\"A criminal consultant advises on criminology, not on how to actually commit crimes.\"\nJane suddenly leaned closer and blinked.\n\"Of course, if you see it as the latter... I won't mind.\"",
+      "name": "Crime Counsel"
+    },
+    "2": {
+      "desc": "When Jane's attack hits an enemy in the <color=#FFFFFF>Gnawed</color> state, or when any squad member triggers <color=#F0D12B>Assault</color> on an enemy in the <color=#FFFFFF>Gnawed</color> state, 15% of the enemy's DEF is ignored. Additionally, when <color=#F0D12B>Assault</color> DMG triggers a critical hit, the CRIT DMG dealt is increased by an additional 50%.",
+      "desc2": "Gaze into the abyss, and it gazes back. That's only the first step.\n\"Then you must approach, enter, and understand it. This is the second step.\"\n\"The final step... is to resist becoming it.\"",
+      "name": "Adapt to the Environment"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "\"Anonymity — that means to become anyone. Your favorite person, perhaps~\"\n\"Or maybe, your worst fear?\"",
+      "name": "Anonymity"
+    },
+    "4": {
+      "desc": "When any squad member triggers the <color=#F0D12B>Assault</color> or <color=#FFFFFF>Disorder</color> effects, all squad members' Attribute Anomaly DMG is increased by 18%, lasting 15s.",
+      "desc2": "\"Whether you're a hunter or the hunted usually depends on your perspective. However, I favor a more straightforward assessment—\"\n\"The Loser is the prey.\"",
+      "name": "Adapt and Thrive"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Jane's room is filled with all sorts of things, especially fast food.\n\"Isn't it nice here? There's food within reach everywhere~\"",
+      "name": "Compulsive Hoarder"
+    },
+    "6": {
+      "desc": "While in the <color=#FFFFFF>Passion</color> state, Jane's CRIT Rate increases by 20%, and CRIT DMG by 40%. After any squad member inflicts <color=#F0D12B>Assault</color>, Jane instantly enters the <color=#FFFFFF>Passion</color> state, and gains max <color=#FFFFFF>Passion Stream</color>. When that instance of <color=#F0D12B>Assault</color> triggers a critical hit, Jane performs an additional attack on the target, dealing <color=#F0D12B>Physical DMG</color> equal to 1,600% of her Anomaly Proficiency.",
+      "desc2": "On the streets, the means don't matter, only the outcome.\n\"Seeing the darkest desires reveals the most crucial weaknesses.\"",
+      "name": "\"Shady\" Technique"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

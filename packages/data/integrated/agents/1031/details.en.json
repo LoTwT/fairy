@@ -1,0 +1,2269 @@
+{
+  "camp": {
+    "1": "Cunning Hares"
+  },
+  "elementType": {
+    "205": "Ether"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Ether DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1031,
+  "locale": "en",
+  "name": "Nicole",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1031401",
+        "1031402",
+        "1031403",
+        "1031404",
+        "1031405",
+        "1031501"
+      ],
+      "basic": [
+        "1031001",
+        "1031002",
+        "1031003",
+        "1031004",
+        "1031005",
+        "1031006",
+        "1031007",
+        "1031008",
+        "1031009"
+      ],
+      "chain": ["1031301", "1031302", "1031303", "1031304", "1031305"],
+      "dodge": [
+        "1031201",
+        "1031202",
+        "1031203",
+        "1031204",
+        "1031205",
+        "1031206"
+      ],
+      "special": [
+        "1031101",
+        "1031102",
+        "1031103",
+        "1031104",
+        "1031105",
+        "1031106"
+      ]
+    },
+    "parameterRowsById": {
+      "1031001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1031002": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/3"
+      ],
+      "1031003": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1031004": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1031005": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1031006": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1031007": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/5",
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1031008": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1031009": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1031101": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1031102": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1031103": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/3"
+      ],
+      "1031104": [
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/4"
+      ],
+      "1031105": [
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/4"
+      ],
+      "1031106": [
+        "/skill/special/description/3/param/2",
+        "/skill/special/description/3/param/5"
+      ],
+      "1031201": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/2",
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1031202": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/2"
+      ],
+      "1031203": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1031204": [
+        "/skill/dodge/description/3/param/1",
+        "/skill/dodge/description/3/param/3"
+      ],
+      "1031205": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1031206": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1031301": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/2"
+      ],
+      "1031302": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/2"
+      ],
+      "1031303": [
+        "/skill/chain/description/2/param/1",
+        "/skill/chain/description/2/param/3"
+      ],
+      "1031304": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/2"
+      ],
+      "1031305": [
+        "/skill/chain/description/3/param/1",
+        "/skill/chain/description/3/param/3"
+      ],
+      "1031401": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1031402": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1031403": ["/skill/assist/description/4/param/0"],
+      "1031404": ["/skill/assist/description/4/param/1"],
+      "1031405": ["/skill/assist/description/4/param/2"],
+      "1031501": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "NOV 11",
+    "fullName": "Nicole Demara",
+    "gender": "Female",
+    "impressionF": "Turns out Nicole is more famous in the biz than I thought huh!",
+    "impressionM": "Instead of these astute comments, I'm more interested in seeing a comprehensive list of everything Nicole owes us.",
+    "impressions": [
+      "Impressions of Nicole:\n · Nicole's afraid of ghosts... Perhaps because of a guilty conscience?",
+      " · The usually stingy Nicole is generous when treating the orphanage kids.",
+      " · Nicole is a genius when it comes to business. No matter how poor she may be, she is still a genius"
+    ],
+    "profileDesc": "Database search: Nicole. Returned results:\n\"Boss of the odd-job agency, the Cunning Hares,\" \"Streetwise,\" \"Orphan, parents unknown.\"\nNicole's agency was originally called Gentle House, but due to her reputation of being cunning, it gained the nickname the Cunning Hares.\n\"She's really into money! I don't know what she's doing with it all though, seems like she's doing nothing.\"\n— The above is a quote from a popular post on Inter-Knot: \"Her odd-job agency is outrageous. I've never encountered a boss who knows how to turn everything into profit!\"\nThe individual involved responded, \"This, this is a false accusation! I, Nicole, have never been skilled at making money — mainly because I don't have any money to begin with!\"\nAccording to reliable sources, the Cunning Hares are constantly in debt, and their \"careful budgeting\" seems to have no effect on the organization.",
+    "stature": "165",
+    "trustLv": {
+      "1": "Database search: Nicole. Returned results:\n\"Boss of the odd-job agency, the Cunning Hares,\" \"Streetwise,\" \"Orphan, parents unknown.\"\nNicole's agency was originally called Gentle House, but due to her reputation of being cunning, it gained the nickname the Cunning Hares.\n\"She's really into money! I don't know what she's doing with it all though, seems like she's doing nothing.\"\n— The above is a quote from a popular post on Inter-Knot: \"Her odd-job agency is outrageous. I've never encountered a boss who knows how to turn everything into profit!\"\nThe individual involved responded, \"This, this is a false accusation! I, Nicole, have never been skilled at making money — mainly because I don't have any money to begin with!\"\nAccording to reliable sources, the Cunning Hares are constantly in debt, and their \"careful budgeting\" seems to have no effect on the organization.",
+      "2": "",
+      "3": "During her early years, Nicole spent a good amount of time in an orphanage.\nThere are rumors that Nicole once reached an adoption agreement with a prominent family. Yet, shortly afterward, she reappeared by herself somewhere in New Eridu, and has been out around the streets ever since.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1031501": {
+        "desc": [
+          "After hitting an enemy with a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, enhancing her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>. When her enhanced bullets or Energy Field hits an enemy, the target's DEF is reduced by <color=#2BAD00>20%</color> for 3.5s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Nicole's <color=#FFFFFF>Core Passive: Mechanical Case</color> applies a debuff to an enemy, all units deal 25% more <color=#FE437E>Ether DMG</color> to the target for 3.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Mechanical Case",
+          "Additional Ability: Hare of Many Burrows"
+        ],
+        "potential": []
+      },
+      "1031502": {
+        "desc": [
+          "After hitting an enemy with a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, enhancing her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>. When her enhanced bullets or Energy Field hits an enemy, the target's DEF is reduced by <color=#2BAD00>25%</color> for 3.5s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Nicole's <color=#FFFFFF>Core Passive: Mechanical Case</color> applies a debuff to an enemy, all units deal 25% more <color=#FE437E>Ether DMG</color> to the target for 3.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Mechanical Case",
+          "Additional Ability: Hare of Many Burrows"
+        ],
+        "potential": []
+      },
+      "1031503": {
+        "desc": [
+          "After hitting an enemy with a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, enhancing her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>. When her enhanced bullets or Energy Field hits an enemy, the target's DEF is reduced by <color=#2BAD00>30%</color> for 3.5s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Nicole's <color=#FFFFFF>Core Passive: Mechanical Case</color> applies a debuff to an enemy, all units deal 25% more <color=#FE437E>Ether DMG</color> to the target for 3.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Mechanical Case",
+          "Additional Ability: Hare of Many Burrows"
+        ],
+        "potential": []
+      },
+      "1031504": {
+        "desc": [
+          "After hitting an enemy with a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, enhancing her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>. When her enhanced bullets or Energy Field hits an enemy, the target's DEF is reduced by <color=#2BAD00>34%</color> for 3.5s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Nicole's <color=#FFFFFF>Core Passive: Mechanical Case</color> applies a debuff to an enemy, all units deal 25% more <color=#FE437E>Ether DMG</color> to the target for 3.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Mechanical Case",
+          "Additional Ability: Hare of Many Burrows"
+        ],
+        "potential": []
+      },
+      "1031505": {
+        "desc": [
+          "After hitting an enemy with a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, enhancing her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>. When her enhanced bullets or Energy Field hits an enemy, the target's DEF is reduced by <color=#2BAD00>36%</color> for 3.5s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Nicole's <color=#FFFFFF>Core Passive: Mechanical Case</color> applies a debuff to an enemy, all units deal 25% more <color=#FE437E>Ether DMG</color> to the target for 3.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Mechanical Case",
+          "Additional Ability: Hare of Many Burrows"
+        ],
+        "potential": []
+      },
+      "1031506": {
+        "desc": [
+          "After hitting an enemy with a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, enhancing her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>. When her enhanced bullets or Energy Field hits an enemy, the target's DEF is reduced by <color=#2BAD00>38%</color> for 3.5s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Nicole's <color=#FFFFFF>Core Passive: Mechanical Case</color> applies a debuff to an enemy, all units deal 25% more <color=#FE437E>Ether DMG</color> to the target for 3.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Mechanical Case",
+          "Additional Ability: Hare of Many Burrows"
+        ],
+        "potential": []
+      },
+      "1031507": {
+        "desc": [
+          "After hitting an enemy with a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, enhancing her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>. When her enhanced bullets or Energy Field hits an enemy, the target's DEF is reduced by <color=#2BAD00>40%</color> for 3.5s.",
+          "When another character in your squad shares the same Attribute or Faction:\nWhen Nicole's <color=#FFFFFF>Core Passive: Mechanical Case</color> applies a debuff to an enemy, all units deal 25% more <color=#FE437E>Ether DMG</color> to the target for 3.5s."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Mechanical Case",
+          "Additional Ability: Hare of Many Burrows"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nDodge backwards and send a ranged strike at enemies in front, dealing <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.\nAutomatically reloads after the attack to enhance <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> up to 8 times.",
+          "name": "Quick Assist: Emergency Bombard",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: The Hare Strikes Back!",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nCharge forward and bombard enemies, dealing <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Window of Opportunity",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Emergency Bombard",
+          "param": [
+            {
+              "desc": "{{Skill:1031401, Prop:1001} + {Skill:1031402, Prop:1001}}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1031401": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 3170,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1583,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 3170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3170,
+                  "stunRatioGrowth": 150
+                },
+                "1031402": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 3170,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1583,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 3170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3170,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1031401, Prop:1002} + {Skill:1031402, Prop:1002}}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1031401": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 3170,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1583,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3170,
+                  "stunRatioGrowth": 150
+                },
+                "1031402": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 3170,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 1583,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3170,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: The Hare Strikes Back!",
+          "param": [
+            {
+              "desc": "{Skill:1031403, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1031403": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 24670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24670,
+                  "stunRatioGrowth": 1130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031404, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1031404": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1420,
+                  "main": 31170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031405, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1031405": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15170,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Window of Opportunity",
+          "param": [
+            {
+              "desc": "{Skill:1031501, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1031501": {
+                  "attackData": [],
+                  "attributeInfliction": 35367,
+                  "damagePercentage": 37710,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 18997,
+                  "feverRecovery": 1165725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3430,
+                  "main": 37710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33030,
+                  "stunRatioGrowth": 1510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031501, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1031501": {
+                  "attackData": [],
+                  "attributeInfliction": 35367,
+                  "damagePercentage": 37710,
+                  "damagePercentageGrowth": 3430,
+                  "etherPurify": 18997,
+                  "feverRecovery": 1165725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1510,
+                  "main": 33030,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 33030,
+                  "stunRatioGrowth": 1510
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 3 strikes, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Basic Attack: Cunning Combo",
+          "potential": []
+        },
+        {
+          "desc": "After using a <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, Nicole can reload, and her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> are enhanced, increasing the power of her bullets.",
+          "name": "Basic Attack: Do As I Please",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Cunning Combo",
+          "param": [
+            {
+              "desc": "{Skill:1031001, Prop:1001} + {{Skill:1031002, Prop:1001}/3}*3",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1031001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3890,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 1943,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1950,
+                  "stunRatioGrowth": 90
+                },
+                "1031002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 2710,
+                  "damagePercentageGrowth": 250,
+                  "etherPurify": 2082,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 2710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2090,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031004, Prop:1001} + {{Skill:1031005, Prop:1001}/4}*4",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1031004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3530,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2892,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3610,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2775,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2780,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031007, Prop:1001} + {{Skill:1031008, Prop:1001}/20}*20",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1031007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12430,
+                  "damagePercentageGrowth": 1130,
+                  "etherPurify": 10427,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 12430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                },
+                "1031008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 18040,
+                  "damagePercentageGrowth": 1640,
+                  "etherPurify": 10406,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1640,
+                  "main": 18040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13880,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031001, Prop:1002} + {{Skill:1031002, Prop:1002}/3}*3",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1031001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3890,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 1943,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1950,
+                  "stunRatioGrowth": 90
+                },
+                "1031002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 2710,
+                  "damagePercentageGrowth": 250,
+                  "etherPurify": 2082,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2090,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031004, Prop:1002} + {{Skill:1031005, Prop:1002}/4}*4",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1031004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3530,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2892,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031005": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3610,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2775,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2780,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031007, Prop:1002} + {{Skill:1031008, Prop:1002}/20}*20",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1031007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12430,
+                  "damagePercentageGrowth": 1130,
+                  "etherPurify": 10427,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 10430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                },
+                "1031008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 18040,
+                  "damagePercentageGrowth": 1640,
+                  "etherPurify": 10406,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 13880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13880,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Do As I Please",
+          "param": [
+            {
+              "desc": "{Skill:1031001, Prop:1001} + {{Skill:1031003, Prop:1001}/3}*3",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1031001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3890,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 1943,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3890,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1950,
+                  "stunRatioGrowth": 90
+                },
+                "1031003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4940,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 2082,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 4940,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2090,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031004, Prop:1001} + {{Skill:1031006, Prop:1001}/4}*4",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1031004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3530,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2892,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6580,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 2775,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 6580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2780,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031007, Prop:1001} + {{Skill:1031009, Prop:1001}/20}*20",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1031007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12430,
+                  "damagePercentageGrowth": 1130,
+                  "etherPurify": 10427,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1130,
+                  "main": 12430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                },
+                "1031009": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 32900,
+                  "damagePercentageGrowth": 3000,
+                  "etherPurify": 10406,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3000,
+                  "main": 32900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13880,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031001, Prop:1002} + {{Skill:1031003, Prop:1002}/3}*3",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1031001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3890,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 1943,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1950,
+                  "stunRatioGrowth": 90
+                },
+                "1031003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4940,
+                  "damagePercentageGrowth": 450,
+                  "etherPurify": 2082,
+                  "feverRecovery": 53625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2090,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031004, Prop:1002} + {{Skill:1031006, Prop:1002}/4}*4",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1031004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 3530,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 2892,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6580,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 2775,
+                  "feverRecovery": 79750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2780,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031007, Prop:1002} + {{Skill:1031009, Prop:1002}/20}*20",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1031007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12430,
+                  "damagePercentageGrowth": 1130,
+                  "etherPurify": 10427,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 10430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                },
+                "1031009": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 32900,
+                  "damagePercentageGrowth": 3000,
+                  "etherPurify": 10406,
+                  "feverRecovery": 286825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 13880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 37540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13880,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a powerful ranged strike at enemies in a small area, generating an energy field that pulls enemies towards its center to deal <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nAutomatically reloads after the attack to enhance <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> up to 8 times.",
+          "name": "Chain Attack: Ether Shellacking",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a powerful ranged strike at enemies in a small area, generating an energy field that pulls enemies towards its center to deal <color=#FE437E>Ether DMG</color>.\nWhen using this skill, other squad members recover 10 Energy. The next character to switch in gains an additional 20 Energy.\nCharacter is invulnerable while using this skill.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nAutomatically reloads after the attack to enhance <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> up to 8 times.",
+          "name": "Ultimate: Ether Grenade",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Ether Shellacking",
+          "param": [
+            {
+              "desc": "{{Skill:1031301, Prop:1001} + {Skill:1031302, Prop:1001}}",
+              "name": "Bombard DMG Multiplier",
+              "param": {
+                "1031301": {
+                  "attackData": [],
+                  "attributeInfliction": 6489,
+                  "damagePercentage": 10480,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 2500,
+                  "feverRecovery": 434500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 10480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                },
+                "1031302": {
+                  "attackData": [],
+                  "attributeInfliction": 6489,
+                  "damagePercentage": 10480,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 2500,
+                  "feverRecovery": 434500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 10480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031303, Prop:1001}",
+              "name": "Energy Field DMG Multiplier",
+              "param": {
+                "1031303": {
+                  "attackData": [],
+                  "attributeInfliction": 19469,
+                  "damagePercentage": 28300,
+                  "damagePercentageGrowth": 2580,
+                  "etherPurify": 7500,
+                  "feverRecovery": 1303500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2580,
+                  "main": 28300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6750,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1031301, Prop:1002} + {Skill:1031302, Prop:1002}}",
+              "name": "Bombard Daze Multiplier",
+              "param": {
+                "1031301": {
+                  "attackData": [],
+                  "attributeInfliction": 6489,
+                  "damagePercentage": 10480,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 2500,
+                  "feverRecovery": 434500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                },
+                "1031302": {
+                  "attackData": [],
+                  "attributeInfliction": 6489,
+                  "damagePercentage": 10480,
+                  "damagePercentageGrowth": 960,
+                  "etherPurify": 2500,
+                  "feverRecovery": 434500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031303, Prop:1002}",
+              "name": "Energy Field Daze Multiplier",
+              "param": {
+                "1031303": {
+                  "attackData": [],
+                  "attributeInfliction": 19469,
+                  "damagePercentage": 28300,
+                  "damagePercentageGrowth": 2580,
+                  "etherPurify": 7500,
+                  "feverRecovery": 1303500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6750,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Ether Grenade",
+          "param": [
+            {
+              "desc": "{Skill:1031304, Prop:1001}",
+              "name": "Bombard DMG Multiplier",
+              "param": {
+                "1031304": {
+                  "attackData": [],
+                  "attributeInfliction": 3599,
+                  "damagePercentage": 64680,
+                  "damagePercentageGrowth": 5880,
+                  "etherPurify": 23600,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5880,
+                  "main": 64680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3600,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031305, Prop:1001}",
+              "name": "Energy Field DMG Multiplier",
+              "param": {
+                "1031305": {
+                  "attackData": [],
+                  "attributeInfliction": 5399,
+                  "damagePercentage": 87320,
+                  "damagePercentageGrowth": 7940,
+                  "etherPurify": 35400,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7940,
+                  "main": 87320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4860,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031304, Prop:1002}",
+              "name": "Bombard Daze Multiplier",
+              "param": {
+                "1031304": {
+                  "attackData": [],
+                  "attributeInfliction": 3599,
+                  "damagePercentage": 64680,
+                  "damagePercentageGrowth": 5880,
+                  "etherPurify": 23600,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3600,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031305, Prop:1002}",
+              "name": "Energy Field Daze Multiplier",
+              "param": {
+                "1031305": {
+                  "attackData": [],
+                  "attributeInfliction": 5399,
+                  "damagePercentage": 87320,
+                  "damagePercentageGrowth": 7940,
+                  "etherPurify": 35400,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4860,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.\nDrag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to dodge, then hold <IconMap:Icon_Evade> to reload while dodging, enhancing <color=#FFFFFF>Basic Attacks</color> and <color=#FFFFFF>Dash Attacks</color> up to 8 times.",
+          "name": "Dodge: Speed Demon",
+          "potential": []
+        },
+        {
+          "desc": "When dragging the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} during a dodge, press <IconMap:Icon_Normal>:\nDashes in the target direction and strikes nearby enemies, dealing <color=#F0D12B>Physical DMG</color>.\nWhen not dragging the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} during a dodge, press <IconMap:Icon_Normal>:\nVaults backward and launches a ranged strike against enemies in front, dealing <color=#F0D12B>Physical DMG</color>.\nAutomatically reloads after the attack to enhance her <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color>, up to 8 times.",
+          "name": "Dash Attack: Jack in the Box",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nDodge backwards and send a ranged strike at enemies in front, dealing <color=#FE437E>Ether DMG</color>.\nCharacter is invulnerable while using this skill.\nAutomatically reloads after the attack to enhance <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> up to 8 times.",
+          "name": "Dodge Counter: Diverted Bombard",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Jack in the Box",
+          "param": [
+            {
+              "desc": "{Skill:1031201, Prop:1001} + {{Skill:1031202, Prop:1001}/13}*13",
+              "name": "Forward Dash DMG Multiplier",
+              "param": {
+                "1031201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 2891,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031202": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11730,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 4509,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 11730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031204, Prop:1001}",
+              "name": "Backward Vault DMG Multiplier",
+              "param": {
+                "1031204": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6000,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2999,
+                  "feverRecovery": 82500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 550,
+                  "main": 6000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6000,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031201, Prop:1002} + {{Skill:1031202, Prop:1002}/13}*13",
+              "name": "Forward Dash Daze Multiplier",
+              "param": {
+                "1031201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 2891,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031202": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11730,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 4509,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031204, Prop:1002}",
+              "name": "Backward Vault Daze Multiplier",
+              "param": {
+                "1031204": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6000,
+                  "damagePercentageGrowth": 550,
+                  "etherPurify": 2999,
+                  "feverRecovery": 82500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6000,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Do As I Please",
+          "param": [
+            {
+              "desc": "{Skill:1031201, Prop:1001} + {{Skill:1031203, Prop:1001}/13}*13",
+              "name": "Forward Dash DMG Multiplier",
+              "param": {
+                "1031201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 2891,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031203": {
+                  "attackData": [],
+                  "attributeInfliction": 12129,
+                  "damagePercentage": 11730,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 4509,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 11730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031201, Prop:1002} + {{Skill:1031203, Prop:1002}/13}*13",
+              "name": "Forward Dash Daze Multiplier",
+              "param": {
+                "1031201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4120,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 2891,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 2900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2900,
+                  "stunRatioGrowth": 140
+                },
+                "1031203": {
+                  "attackData": [],
+                  "attributeInfliction": 12129,
+                  "damagePercentage": 11730,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 4509,
+                  "feverRecovery": 78100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10200,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4510,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Diverted Bombard",
+          "param": [
+            {
+              "desc": "{{Skill:1031205, Prop:1001} + {Skill:1031206, Prop:1001}}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1031205": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 9120,
+                  "damagePercentageGrowth": 830,
+                  "etherPurify": 10665,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 830,
+                  "main": 9120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8170,
+                  "stunRatioGrowth": 380
+                },
+                "1031206": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 9120,
+                  "damagePercentageGrowth": 830,
+                  "etherPurify": 10665,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 830,
+                  "main": 9120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8170,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1031205, Prop:1002} + {Skill:1031206, Prop:1002}}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1031205": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 9120,
+                  "damagePercentageGrowth": 830,
+                  "etherPurify": 10665,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22790,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8170,
+                  "stunRatioGrowth": 380
+                },
+                "1031206": {
+                  "attackData": [],
+                  "attributeInfliction": 3164,
+                  "damagePercentage": 9120,
+                  "damagePercentageGrowth": 830,
+                  "etherPurify": 10665,
+                  "feverRecovery": 87175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 8170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 19190,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8170,
+                  "stunRatioGrowth": 380
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nUnleashes a ranged strike against enemies in front, dealing <color=#FE437E>Ether DMG</color>.\nAnti-Interrupt level is increased while using this skill.\nAutomatically reloads after the attack to enhance <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> up to 8 times.",
+          "name": "Special Attack: Sugarcoated Bullet",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nA powerful ranged strike, generating an energy field that pulls enemies towards its center to deal <color=#FE437E>Ether DMG</color>.\nHold <IconMap:Icon_SpecialReady> down to charge up this attack, during which a small energy field is generated at the muzzle as Energy is consumed, dealing bonus DMG to enemies nearby.\nCharacter is invulnerable while using this skill.\nA <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy.\nAutomatically reloads after the attack to enhance <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> up to 8 times.",
+          "name": "EX Special Attack: Stuffed Sugarcoated Bullet",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Sugarcoated Bullet",
+          "param": [
+            {
+              "desc": "{{Skill:1031101, Prop:1001} + {Skill:1031102, Prop:1001}}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1031101": {
+                  "attackData": [],
+                  "attributeInfliction": 2624,
+                  "damagePercentage": 2630,
+                  "damagePercentageGrowth": 240,
+                  "etherPurify": 2625,
+                  "feverRecovery": 72325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 2630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                },
+                "1031102": {
+                  "attackData": [],
+                  "attributeInfliction": 2624,
+                  "damagePercentage": 2630,
+                  "damagePercentageGrowth": 240,
+                  "etherPurify": 2625,
+                  "feverRecovery": 72325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 2630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1031101, Prop:1002} + {Skill:1031102, Prop:1002}}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1031101": {
+                  "attackData": [],
+                  "attributeInfliction": 2624,
+                  "damagePercentage": 2630,
+                  "damagePercentageGrowth": 240,
+                  "etherPurify": 2625,
+                  "feverRecovery": 72325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                },
+                "1031102": {
+                  "attackData": [],
+                  "attributeInfliction": 2624,
+                  "damagePercentage": 2630,
+                  "damagePercentageGrowth": 240,
+                  "etherPurify": 2625,
+                  "feverRecovery": 72325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 120,
+                  "main": 2500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2500,
+                  "stunRatioGrowth": 120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Stuffed Sugarcoated Bullet",
+          "param": [
+            {
+              "desc": "{Skill:1031103, Prop:1001}",
+              "name": "Charged Attack DMG Multiplier",
+              "param": {
+                "1031103": {
+                  "attackData": [],
+                  "attributeInfliction": 19735,
+                  "damagePercentage": 21500,
+                  "damagePercentageGrowth": 1960,
+                  "etherPurify": 7418,
+                  "feverRecovery": 688050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1960,
+                  "main": 21500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17980,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1031104, Prop:1001} + {Skill:1031105, Prop:1001}}",
+              "name": "Bombard DMG Multiplier",
+              "param": {
+                "1031104": {
+                  "attackData": [],
+                  "attributeInfliction": 9867,
+                  "damagePercentage": 10750,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3709,
+                  "feverRecovery": 344025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8990,
+                  "stunRatioGrowth": 410
+                },
+                "1031105": {
+                  "attackData": [],
+                  "attributeInfliction": 9867,
+                  "damagePercentage": 10750,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3709,
+                  "feverRecovery": 344025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8990,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031106, Prop:1001}",
+              "name": "Energy Field DMG Multiplier",
+              "param": {
+                "1031106": {
+                  "attackData": [],
+                  "attributeInfliction": 39471,
+                  "damagePercentage": 38700,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 14835,
+                  "feverRecovery": 1376100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3520,
+                  "main": 38700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32360,
+                  "stunRatioGrowth": 1480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031103, Prop:1002}",
+              "name": "Charged Daze Multiplier",
+              "param": {
+                "1031103": {
+                  "attackData": [],
+                  "attributeInfliction": 19735,
+                  "damagePercentage": 21500,
+                  "damagePercentageGrowth": 1960,
+                  "etherPurify": 7418,
+                  "feverRecovery": 688050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17980,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17980,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{{Skill:1031104, Prop:1002} + {Skill:1031105, Prop:1002}}",
+              "name": "Bombard Daze Multiplier",
+              "param": {
+                "1031104": {
+                  "attackData": [],
+                  "attributeInfliction": 9867,
+                  "damagePercentage": 10750,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3709,
+                  "feverRecovery": 344025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 8990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8990,
+                  "stunRatioGrowth": 410
+                },
+                "1031105": {
+                  "attackData": [],
+                  "attributeInfliction": 9867,
+                  "damagePercentage": 10750,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3709,
+                  "feverRecovery": 344025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 8990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8990,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1031106, Prop:1002}",
+              "name": "Energy Field Daze Multiplier",
+              "param": {
+                "1031106": {
+                  "attackData": [],
+                  "attributeInfliction": 39471,
+                  "damagePercentage": 38700,
+                  "damagePercentageGrowth": 3520,
+                  "etherPurify": 14835,
+                  "feverRecovery": 1376100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1480,
+                  "main": 32360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32360,
+                  "stunRatioGrowth": 1480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "20 Energy/sec",
+              "name": "Charged Attack Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Bombard Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1031001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Cunning Combo"
+    },
+    "1031002": {
+      "desc": "<IconMap:Icon_Normal>(After reloading)",
+      "name": "Basic Attack: Do As I Please"
+    },
+    "1031003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Sugarcoated Bullet"
+    },
+    "1031004": {
+      "desc": "<IconMap:Icon_SpecialReady>(Can Hold Down)",
+      "name": "EX Special Attack: Stuffed Sugarcoated Bullet"
+    },
+    "1031005": {
+      "desc": "<IconMap:Icon_Evade> (Any direction) (Hold)",
+      "name": "Dodge Reload"
+    },
+    "1031006": {
+      "desc": "<IconMap:Icon_Evade> (Any direction) ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Jack in the Box (Scattered)"
+    },
+    "1031007": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Jack in the Box (Focused)"
+    },
+    "1031008": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Diverted Bombard"
+    },
+    "1031009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Ether Shellacking"
+    },
+    "1031010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Ether Grenade"
+    },
+    "1031011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Emergency Bombard"
+    },
+    "1031012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: The Hare Strikes Back!"
+    },
+    "1031013": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Window of Opportunity"
+    }
+  },
+  "skin": {
+    "3110310": {
+      "desc": "The classic outfit of the leader of the Cunning Hares, hiding a hint of playful cunning, both mischievous and cute.",
+      "name": "Nicole: Lil Sassy"
+    },
+    "3110311": {
+      "desc": "Pink! Pink! Pink! Pink is Nicole's signature color. So are you feeling it?",
+      "name": "Nicole: Cunning Cutie"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "04",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, versatile support",
+    "Gathers enemies and reduces their DEF"
+  ],
+  "talent": {
+    "1": {
+      "desc": "The DMG and the Anomaly Buildup inflicted by Nicole's <color=#FFFFFF>EX Special Attack</color> increases by 16%. For each additional 0.1s of charging when Nicole activates her <color=#FFFFFF>EX Special Attack</color>, the duration of the energy field created at the target location increases by 0.15s ",
+      "desc2": "\"I've juiced you all up! Go get 'em!\"\n\"Huh? I—I wasn't slacking off, I swear — I just needed a break!\"",
+      "name": "Supercharged Bomb"
+    },
+    "2": {
+      "desc": "Nicole recovers 5 Energy when <color=#FFFFFF>Core Passive: Mechanical Case's</color> debuff is triggered. This effect can trigger once every 15s.",
+      "desc2": "\"Never underestimate the value of a single second!\"\n\"Do you have any idea how much extra I can squeeze out of just one second? It's unfathomable!\"\n\"So, can I get a productivity bonus? How about 10%, huh?\"",
+      "name": "Charging Device"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Without overpowering might or abundant resources, Nicole depended on her own sharp mind to bring the Cunning Hares to where they are today.",
+      "name": "A Hare's Cunning"
+    },
+    "4": {
+      "desc": "When Nicole uses her <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, the diameter of the energy field generated at the target location is increased by 3m.",
+      "desc2": "\"This, and this too — all of this will soon become the Cunning Hares' territory. Do you hear me!\"\n\"W—What? How soon?\"\n\"Uh... in about ten thousand years, based on current revenue projections.\"",
+      "name": "Field Expansion"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Though they have plenty of enemies in the industry, Nicole has led her team out of many impossible situations, and so their reputation and experience steadily grew.",
+      "name": "Industry Star"
+    },
+    "6": {
+      "desc": "When Nicole's energy fields deal DMG to an enemy, all units' CRIT Rate against that enemy increases by 1.5%, stacking up to 10 times, and lasting 12s. The duration of each stack is calculated separately.",
+      "desc2": "A switch to higher quality ammo with better firepower and increased compressed Etheric Matter leads to higher damage, longer use duration... and higher costs.",
+      "name": "Corrupting Energy Field"
+    }
+  },
+  "weaponType": {
+    "4": "Support"
+  }
+}

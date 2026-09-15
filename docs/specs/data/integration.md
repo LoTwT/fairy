@@ -55,17 +55,16 @@ core：计算
        character.json
        {locale}/character/{id}.json
 +  integrated/
-+    nanoka/
-+      index.json
-+      agents/
-+        {id}/
-+          data.json
-+          details.zh.json
-+          details.en.json
++    index.json
++    agents/
++      {id}/
++        data.json
++        details.zh.json
++        details.en.json
 +  definitions/
 ```
 
-`raw` 继续按来源版本保存；`integrated` 维护一份当前数据，没有 `{version}/` 目录。`definitions` 是已确认的
+`raw` 继续按来源版本保存；`integrated` 维护一份当前数据，不设来源或 `{version}/` 子目录，来源信息保留在 `index.json`。`definitions` 是已确认的
 职责名称，本次不创建空目录或填入计算模型。
 
 实体目录是维护和读取的基本单位。使用方可以读取全部数据，也可以通过索引只取指定代理人的公共部分和指定
@@ -288,7 +287,7 @@ Pointer 采用 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html) 的字符
 `zzz/{version}/{locale}/character/{id}.json`。输入清单依次记录 manifest、实体索引，再按实体 ID 和配置
 语言顺序记录详情；文件摘要均为小写十六进制 SHA-256。一个资源只登记一次，完整导出不带摘录 Pointer。
 
-输出 `path` 相对于 `integrated/nanoka/`，必须等于第 2 节对应实体及语言的固定路径；不得使用绝对路径、
+输出 `path` 相对于 `integrated/`，必须等于第 2 节对应实体及语言的固定路径；不得使用绝对路径、
 `..` 或远程 URL。输出 `sha256` 针对实际文件字节。索引不记录自身摘要，避免循环；也不记录生成时间或主机路径。
 输入哈希和输出哈希用途不同，不能互相替代。
 
@@ -299,9 +298,17 @@ Pointer 采用 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html) 的字符
 
 ## 8. 序列化、增量与导出一致性
 
-实体文件及索引使用 UTF-8、两个空格缩进、末尾 LF。规范十进制 key 按整数值排序并置前，其余 key 按
-UTF-16 代码单元顺序排列；数组原序保留。固定输入和规则应得到相同字节，对象 key 的输入排列不影响结果。
+实体文件及索引由 `serializeJson` 固定键排序，再由工作区已安装的 oxfmt 按仓库根目录 `oxfmt.config.ts`
+负责最终排版（UTF-8、两个空格缩进、末尾 LF，以及配置规定的折行）。规范十进制 key 按整数值排序并置前，
+其余 key 按 UTF-16 代码单元顺序排列；格式化保持 JSON 值、字段结构、键排序与数组原序。
+固定输入、规则、格式化器版本及配置应得到相同字节，对象 key 的输入排列不影响结果。
+根配置显式设置 `endOfLine: "lf"` 与 `insertFinalNewline: true`，覆盖外层 EditorConfig 对换行及末尾换行的设置；
+`--disable-nested-config` 本身不会关闭 EditorConfig。
 可对制品使用紧凑 JSON 或传输压缩，但重新序列化后必须按实际输出字节重算索引中的输出哈希；JSON 值仍需相等。
+
+仓库通用 `pnpm format` 负责源码格式化，通过命令行否定 glob 排除 `packages/data/integrated/**`，避免绕过更新协议
+直接改写文件而使摘要失效。`pnpm format:check` 继续只读检查 integrated；不通过 Git 忽略或共享格式忽略配置排除数据。
+受管理 integrated 的重排始终通过 `update:nanoka:agents` 构建并安装已验证候选。
 
 首次建立当前数据，后续增量识别新增、内容变化、规则变化及索引成员移除；相同内容无需反复重写实体文件。
 来源版本变化必须先取得该版本完整输入集合，不能混用旧版本详情填缺。失败抓取或暂时缺少文件不能解释为删除。
@@ -325,7 +332,7 @@ UTF-16 代码单元顺序排列；数组原序保留。固定输入和规则应�
 
 ### 归属与锁
 
-目标为固定的 `packages/data/integrated/nanoka`，不加版本目录。库与显式命令也允许指定其他目标供离线测试。
+目标为固定的 `packages/data/integrated`，不加来源或版本目录。库与显式命令也允许指定其他目标供离线测试。
 目标的同级目录 `.<目标名>.fairy-state/` 是唯一控制目录；保存 `state.json`（协议标记、目标绝对路径、
 当前索引摘要及验证配置）、永久 `lock.sqlite`、最新 `maintenance.json`，事务期间可有 `work/`、`backup/`
 和原子写记录使用的 `state.next`。所有材料均不属于可消费制品。正常结束只保留一份当前数据与最新维护报告。
@@ -349,7 +356,9 @@ UTF-16 代码单元顺序排列；数组原序保留。固定输入和规则应�
 不把改版本标记视作规则迁移。未登记或损坏旧目录明确拒绝，由用户保留现场处理，不自动修复或丢弃。
 
 显式 `rawRoot` 与版本交给既有全量构建器，在同文件系统的 `work/` 下生成完整新制品；构建器复用纯整合函数、
-来源配置语言及预算。只有整个输入和候选验证通过才进入提交阶段；缺详情、解析失败、语言不全等不会触发删除。
+来源配置语言及预算。实体和索引均先在构建器独占目录内完成 oxfmt 格式化，再计算最终字节摘要、完整校验，
+之后才复用当前文件硬链接。不得直接格式化受管理的当前目录，也不得在硬链接复用后格式化候选。
+只有整个输入和候选验证通过才进入提交阶段；缺详情、解析失败、格式化失败、语言不全等不会触发删除。
 来源版本切换完整读取新版本；成员仅由该完整合法索引决定。
 更新器在写入 `prepared` 或安装维护报告之前，检查报告为独占普通文件，且大小不超过本次
 `maximumBytesPerRun × outputExpansionLimit`；超限时放弃候选，旧集保持可用，首次仍不生成目标。
@@ -488,6 +497,7 @@ pnpm --filter @randomplay/data verify:pack
 
 表中数值是当前配置，运行时以已校验策略为准。网络节流、HTTP 重试和超时不应用于离线构建，不加载 HTTP 客户端。
 输出另设原始单文件与累计字节预算各 16 倍的有限膨胀上限，以容纳缩进、导航和索引；索引受累计输出预算限制。
+输出大小统计、单文件及累计限制、实体 SHA-256 和控制记录的索引 SHA-256 均基于最终格式化后的实际字节。
 超限时失败，不裁剪内容。配置文件属于工作区受信维护输入，不登记到原始来源资源清单。
 
 显式根目录先解析系统路径别名（如 macOS `/var`），其解析结果作为边界。根下每级路径拒绝符号链接，包含
@@ -495,7 +505,7 @@ pnpm --filter @randomplay/data verify:pack
 检查句柄身份和路径边界，防止静态链接越界、设备文件或 FIFO 读取。临时父目录不能位于只读 raw 范围内。
 本步要求构建期间本地目录不被并发替换；没有提供对并发目录重命名攻击的隔离或现有数据集的并发更新协议。
 
-[纯序列化模块](../../../packages/data/src/integration/serialize-json.ts) `serializeJson` 实现第 8 节字节契约，
+[纯序列化模块](../../../packages/data/src/integration/serialize-json.ts) `serializeJson` 实现第 8 节的键排序与初始序列化，
 直接输出对象成员，避免 JavaScript 对整数属性枚举的二次排序。规范十进制 key 用长度及代码单元比较整数大小，
 不经 `Number` 转换；未知成员、特殊自有 key、Unicode 字符串与数组原序保留。
 
@@ -503,33 +513,36 @@ pnpm --filter @randomplay/data verify:pack
 
 ```text
 fairy-nanoka-agents-<独占后缀>/
-  integrated/nanoka/
+  integrated/
     index.json
     agents/{id}/data.json
     agents/{id}/details.{locale}.json
   maintenance.json
 ```
 
-全部实体文件写出并回读验证、文件集合与完整来源索引对应后，才构造 `completeDataset: true` 的总索引。
-索引写出后由[制品验证器](../../../packages/data/scripts/nanoka-integration/verify.ts)
+实体文件先以 `serializeJson` 写出，每批最多 64 个文件调用工作区 oxfmt；明确传入仓库绝对配置路径，
+以独占制品目录为工作目录并禁用嵌套配置，系统临时目录和任意调用位置使用同一配置。
+格式化后回读核对 JSON 值与整合结果一致，再按最终字节计算实体摘要并验证；文件集合与完整来源索引对应后，
+才构造 `completeDataset: true` 的总索引。索引写出并使用相同配置格式化后，由[制品验证器](../../../packages/data/scripts/nanoka-integration/verify.ts)
 `verifyNanokaAgentArtifact` 再次完整检查路径、实际字节摘要、身份、语言、来源清单顺序和成员集合，
 拒绝缺失、多余文件、额外空目录和混入的维护文件；解码校验使用摘要核对的同一批字节。
-构建器始终调用规范序列化函数，实体文件以该字节摘要回读核对；同时传入完整输入所导出的预期索引，
-核对索引规范字节、来源记录与输入摘要未在写入过程中改变。
+构建器传入完整输入所导出的预期索引，以完整 JSON 值核对全部字段，包括来源记录、输入摘要、成员与语言集合，
+不要求索引字节等于 `serializeJson(expectedIndex)`。格式化只改变排版，不进入纯整合函数。
+格式化失败与其他构建失败共用独占临时目录清理；更新入口沿用现有恢复机制，不发布未完成候选。
 独立验证器允许按第 8 节重新序列化实体文件并更新摘要，也允许索引自身重新排版；不强制副本采用构建器的排版。
 副本与原制品的 JSON 值相等需另行核对，验证器只检查副本内部一致性；传输压缩先解压再验证。
 独立调用验证器只证明制品自身一致，不认证 raw 来源真实性或重新证明完整抓取批次。
 
 成功返回本次独占根目录 `buildDirectory`、`artifactDirectory`、复验索引、计数和独立的 `maintenanceReportPath`；
 使用完毕后可整体删除 `buildDirectory`，包含制品与维护报告。所有维护诊断保存在
-`integrated/nanoka` 外。任何校验或写入失败都不返回成功路径，只清理本次独占目录。可用制品不得被当作
+`integrated` 外。任何校验或写入失败都不返回成功路径，只清理本次独占目录。可用制品不得被当作
 可变当前目录使用；该构建入口不覆盖现有 integrated，增量、成员删除及事务恢复由第 8.1 节的独立更新器负责。
 
 工作区显式复跑入口（在仓库根目录执行）：
 
 ```bash
 pnpm --filter @randomplay/data integrate:nanoka:agents raw/nanoka 3.1
-pnpm --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated/nanoka
+pnpm --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated
 ```
 
 命令分别接受 `<rawRoot> <version> [temporaryParent]` 和 `<artifactDirectory>`。相对路径以进程工作目录解析；
@@ -575,11 +588,11 @@ stderr 使用[共享终端错误规则](../nanoka/source.md#终端错误文本)�
 
 ```bash
 # 首次生成与后续更新使用同一入口，版本必须明确给出
-pnpm --filter @randomplay/data update:nanoka:agents raw/nanoka 3.1 integrated/nanoka
+pnpm --filter @randomplay/data update:nanoka:agents raw/nanoka 3.1 integrated
 # 对当前目录持锁并完整复验
-pnpm --filter @randomplay/data verify:nanoka:current integrated/nanoka
+pnpm --filter @randomplay/data verify:nanoka:current integrated
 # 不读取 raw，恢复后可重复运行；更新入口也会先恢复
-pnpm --filter @randomplay/data recover:nanoka:agents integrated/nanoka
+pnpm --filter @randomplay/data recover:nanoka:agents integrated
 ```
 
 所有相对路径仍相对于 data 包工作目录。三个命令分别接受三个、一个、一个非空位置参数；独立 help、
@@ -602,8 +615,8 @@ pnpm --filter @randomplay/data recover:nanoka:agents integrated/nanoka
 工作目录清理以及恢复回滚自身再次中断；清理中途实验先实际删除一个备份/候选文件再由父进程终止子进程。CLI 测试另外关闭真实 stdout 管道，核对失败时已提交数据仍可持锁验证。
 测试仅在自有临时目录执行，不读取真实 raw、不联网，不生成固定当前数据。真实验收结果单独记录。
 
-Git 精确忽略 `packages/data/integrated/nanoka/`；任意层级的 `.<目标名>.fairy-state/` 控制目录也忽略。
-这些生成物不自动暂存或发布，源码、规范和测试继续跟踪；npm 仍只包含 `dist`，空公开 API 不变。
+`packages/data/integrated/` 纳入 Git 跟踪范围；任意层级的 `.<目标名>.fairy-state/` 控制目录继续忽略。
+整合数据不自动暂存或发布，源码、规范和测试继续跟踪；npm 仍只包含 `dist`，空公开 API 不变。
 
 ### 步骤三真实数据验收记录
 

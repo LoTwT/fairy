@@ -1,0 +1,1751 @@
+{
+  "camp": {
+    "11": "Spook Shack"
+  },
+  "elementType": {
+    "205": "Ether"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "30501": {
+          "format": "{0:0.##}",
+          "name": "Base Energy Regen"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "HP"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1451,
+  "locale": "en",
+  "name": "Lucia",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1451015",
+        "1451018",
+        "1451019",
+        "1451020",
+        "1451021",
+        "1451022",
+        "1451023"
+      ],
+      "basic": [
+        "1451001",
+        "1451002",
+        "1451003",
+        "1451004",
+        "1451005",
+        "1451006",
+        "1451007"
+      ],
+      "chain": ["1451016", "1451017", "1451024"],
+      "dodge": ["1451012", "1451013", "1451014"],
+      "special": ["1451008", "1451009", "1451010", "1451011"]
+    },
+    "parameterRowsById": {
+      "1451001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1451002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/8"
+      ],
+      "1451003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1451004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/10"
+      ],
+      "1451005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/11"
+      ],
+      "1451006": [
+        "/skill/basic/description/1/param/5",
+        "/skill/basic/description/1/param/12"
+      ],
+      "1451007": [
+        "/skill/basic/description/1/param/6",
+        "/skill/basic/description/1/param/13"
+      ],
+      "1451008": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/3"
+      ],
+      "1451009": [
+        "/skill/special/description/2/param/1",
+        "/skill/special/description/2/param/4"
+      ],
+      "1451010": [
+        "/skill/special/description/2/param/2",
+        "/skill/special/description/2/param/5"
+      ],
+      "1451011": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1451012": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1451013": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/2"
+      ],
+      "1451014": [
+        "/skill/dodge/description/4/param/1",
+        "/skill/dodge/description/4/param/3"
+      ],
+      "1451015": [
+        "/skill/assist/description/3/param/2",
+        "/skill/assist/description/3/param/5"
+      ],
+      "1451016": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1451017": [
+        "/skill/chain/description/3/param/1",
+        "/skill/chain/description/3/param/3"
+      ],
+      "1451018": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/3"
+      ],
+      "1451019": ["/skill/assist/description/4/param/0"],
+      "1451020": ["/skill/assist/description/4/param/1"],
+      "1451021": ["/skill/assist/description/4/param/2"],
+      "1451022": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1451023": [
+        "/skill/assist/description/3/param/1",
+        "/skill/assist/description/3/param/4"
+      ],
+      "1451024": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/2"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "MAR 17",
+    "fullName": "Lucia Elowen",
+    "gender": "Female",
+    "impressionF": "Lucia enjoys traveling the Hollows alone and tracking down Ethereals. She also often shows up with snacks, tapping on the window before slipping into the video store to watch a movie...\nShe's always popping up in different places with a bright smile — just like a little sprite flitting through the night!",
+    "impressionM": "Ever since getting hooked on Lucia's Bangboo ghost stories, Eous has stopped going to bed on time...\nNow it just camps out at the front desk, ears pricked for the sound of tapping on the window... What a headache.",
+    "impressions": [
+      "Impressions of Lucia:\n · She arrives under cover of night, like a mystery beneath the starry sky.",
+      " · Passing through countless tales, walking within boundless dreams.",
+      " · May your travels never end."
+    ],
+    "profileDesc": "Lucia, a member of Spook Shack, goes by the online name \"Night Emissary.\" She's a backpacker, an Ethereal story enthusiast, and a connoisseur of late-night food stalls.\n\nRecords show that Lucia hails from a tribe living on the outskirts of the city. Legend has it their ancestors once encountered an Ethereal called the \"Night Horror\" (absent from the Hollow Investigative Association archives), which left them with a strange gift: Ethereals tend not to notice them. The cost, though, is that they dream of the Night Horror at night, and under its influence, they sleepwalk into Hollows, where corruption awaits.\nBecause of this, the tribe took on the role of Nightwatchers. They rest during the day and hunt deep in the night, avoiding the Night Horror's pull. And if anyone must sleep at night, their family will keep vigil at their side until dawn.\n\nLucia grew up surrounded by her kin, and even after arriving in New Eridu, she has kept to the Nightwatcher tradition of staying awake through the night and watching over her cherished friends, shielding them from the Night Horror's reach.\nMaster, if you hear a knock at your window late at night, don't be alarmed. It may just be a sleepless night guardian stopping by to say hello.\n\nAdditional note: Lucia's pet is \"Chestnut,\" a small, friendly Hati. It once lived in the Hollow's outskirts, but has since moved deeper inside. Even I can no longer detect its exact whereabouts.",
+    "stature": "160",
+    "trustLv": {
+      "1": "Lucia, a member of Spook Shack, goes by the online name \"Night Emissary.\" She's a backpacker, an Ethereal story enthusiast, and a connoisseur of late-night food stalls.\n\nRecords show that Lucia hails from a tribe living on the outskirts of the city. Legend has it their ancestors once encountered an Ethereal called the \"Night Horror\" (absent from the Hollow Investigative Association archives), which left them with a strange gift: Ethereals tend not to notice them. The cost, though, is that they dream of the Night Horror at night, and under its influence, they sleepwalk into Hollows, where corruption awaits.\nBecause of this, the tribe took on the role of Nightwatchers. They rest during the day and hunt deep in the night, avoiding the Night Horror's pull. And if anyone must sleep at night, their family will keep vigil at their side until dawn.\n\nLucia grew up surrounded by her kin, and even after arriving in New Eridu, she has kept to the Nightwatcher tradition of staying awake through the night and watching over her cherished friends, shielding them from the Night Horror's reach.\nMaster, if you hear a knock at your window late at night, don't be alarmed. It may just be a sleepless night guardian stopping by to say hello.\n\nAdditional note: Lucia's pet is \"Chestnut,\" a small, friendly Hati. It once lived in the Hollow's outskirts, but has since moved deeper inside. Even I can no longer detect its exact whereabouts.",
+      "2": "",
+      "3": "Lucia's father worked with the Defense Force's special forces, and because of his demanding duties, he could only return home once a year. For young Lucia, that time with him felt like a reward in itself.\nWhile on leave one time, Lucia's father received an emergency order and had to depart at once. To calm his crying daughter before leaving, he coaxed her into covering her eyes for a game of hide-and-seek. By the time she finished counting and opened them, he was already gone, never to return again.\nYears later, during an operation in the Town, Lucia came face-to-face with her father, now corrupted into the Wandering Hunter. To the soft tune of a nursery rhyme, she at last brought their unfinished hide-and-seek to an end. The Wandering Hunter laid down his obsession, tainted by miasma, and slowly faded away. Their reunion took place here — as did their farewell.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Commission Season 2 Chapter 4",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1451501": {
+        "desc": [
+          "When entering the battlefield, Lucia immediately gains 60 <color=#FFFFFF>Dream Points</color>. If her <color=#FFFFFF>Dream Points</color> reaches 100 upon activating a <color=#FFFFFF>Whim</color> or <color=#FFFFFF>Harmony</color>, she enters the <color=#FFFFFF>Dream</color> state.\nWhen entering the <color=#FFFFFF>Dream</color> state, it triggers a <color=#FFFFFF>Quick Assist</color> and simultaneously activates <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5%, lasting 40s. Repeated triggers extend the duration, up to a max of 300s.\nWhile Lucia is in the <color=#FFFFFF>Dream</color> state, using any <color=#FFFFFF>Whim</color> consumes 25 <color=#FFFFFF>Dream Points</color> and upgrades it to <color=#FFFFFF>Harmony</color>. Whenever another active character's attack hits an enemy, Lucia consumes 25 <color=#FFFFFF>Dream Points</color> to unleash an <color=#FFFFFF>Aftershock</color>. This <color=#FFFFFF>Aftershock</color> is a <color=#FFFFFF>Harmony</color>. After Lucia triggers a skill upgrade or <color=#FFFFFF>Aftershock</color>, <color=#FFFFFF>Aftershock</color> cannot be triggered for 8s.\nWhen Lucia triggers a skill upgrade or an <color=#FFFFFF>Aftershock</color>, all squad members gain the <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state. While in <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state, DMG dealt increases by <color=#2BAD00>10%</color> for 12s. Repeated triggers reset the duration.\nIf Lucia runs out of <color=#FFFFFF>Dream Points</color> or she leaves the <color=#FFFFFF>Ether Veil</color>, she exits the <color=#FFFFFF>Dream</color> state.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Stun</color> character:\nWhen applying <color=#FFFFFF>Darkbreaker</color>, additionally applies a 30% CRIT DMG increase effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Lost Nocturne",
+          "Additional Ability: Ballad of the Long Night"
+        ],
+        "potential": []
+      },
+      "1451502": {
+        "desc": [
+          "When entering the battlefield, Lucia immediately gains 60 <color=#FFFFFF>Dream Points</color>. If her <color=#FFFFFF>Dream Points</color> reaches 100 upon activating a <color=#FFFFFF>Whim</color> or <color=#FFFFFF>Harmony</color>, she enters the <color=#FFFFFF>Dream</color> state.\nWhen entering the <color=#FFFFFF>Dream</color> state, it triggers a <color=#FFFFFF>Quick Assist</color> and simultaneously activates <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5%, lasting 40s. Repeated triggers extend the duration, up to a max of 300s.\nWhile Lucia is in the <color=#FFFFFF>Dream</color> state, using any <color=#FFFFFF>Whim</color> consumes 25 <color=#FFFFFF>Dream Points</color> and upgrades it to <color=#FFFFFF>Harmony</color>. Whenever another active character's attack hits an enemy, Lucia consumes 25 <color=#FFFFFF>Dream Points</color> to unleash an <color=#FFFFFF>Aftershock</color>. This <color=#FFFFFF>Aftershock</color> is a <color=#FFFFFF>Harmony</color>. After Lucia triggers a skill upgrade or <color=#FFFFFF>Aftershock</color>, <color=#FFFFFF>Aftershock</color> cannot be triggered for 8s.\nWhen Lucia triggers a skill upgrade or an <color=#FFFFFF>Aftershock</color>, all squad members gain the <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state. While in <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state, DMG dealt increases by <color=#2BAD00>11.7%</color> for 12s. Repeated triggers reset the duration.\nIf Lucia runs out of <color=#FFFFFF>Dream Points</color> or she leaves the <color=#FFFFFF>Ether Veil</color>, she exits the <color=#FFFFFF>Dream</color> state.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Stun</color> character:\nWhen applying <color=#FFFFFF>Darkbreaker</color>, additionally applies a 30% CRIT DMG increase effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Lost Nocturne",
+          "Additional Ability: Ballad of the Long Night"
+        ],
+        "potential": []
+      },
+      "1451503": {
+        "desc": [
+          "When entering the battlefield, Lucia immediately gains 60 <color=#FFFFFF>Dream Points</color>. If her <color=#FFFFFF>Dream Points</color> reaches 100 upon activating a <color=#FFFFFF>Whim</color> or <color=#FFFFFF>Harmony</color>, she enters the <color=#FFFFFF>Dream</color> state.\nWhen entering the <color=#FFFFFF>Dream</color> state, it triggers a <color=#FFFFFF>Quick Assist</color> and simultaneously activates <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5%, lasting 40s. Repeated triggers extend the duration, up to a max of 300s.\nWhile Lucia is in the <color=#FFFFFF>Dream</color> state, using any <color=#FFFFFF>Whim</color> consumes 25 <color=#FFFFFF>Dream Points</color> and upgrades it to <color=#FFFFFF>Harmony</color>. Whenever another active character's attack hits an enemy, Lucia consumes 25 <color=#FFFFFF>Dream Points</color> to unleash an <color=#FFFFFF>Aftershock</color>. This <color=#FFFFFF>Aftershock</color> is a <color=#FFFFFF>Harmony</color>. After Lucia triggers a skill upgrade or <color=#FFFFFF>Aftershock</color>, <color=#FFFFFF>Aftershock</color> cannot be triggered for 8s.\nWhen Lucia triggers a skill upgrade or an <color=#FFFFFF>Aftershock</color>, all squad members gain the <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state. While in <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state, DMG dealt increases by <color=#2BAD00>13.3%</color> for 12s. Repeated triggers reset the duration.\nIf Lucia runs out of <color=#FFFFFF>Dream Points</color> or she leaves the <color=#FFFFFF>Ether Veil</color>, she exits the <color=#FFFFFF>Dream</color> state.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Stun</color> character:\nWhen applying <color=#FFFFFF>Darkbreaker</color>, additionally applies a 30% CRIT DMG increase effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Lost Nocturne",
+          "Additional Ability: Ballad of the Long Night"
+        ],
+        "potential": []
+      },
+      "1451504": {
+        "desc": [
+          "When entering the battlefield, Lucia immediately gains 60 <color=#FFFFFF>Dream Points</color>. If her <color=#FFFFFF>Dream Points</color> reaches 100 upon activating a <color=#FFFFFF>Whim</color> or <color=#FFFFFF>Harmony</color>, she enters the <color=#FFFFFF>Dream</color> state.\nWhen entering the <color=#FFFFFF>Dream</color> state, it triggers a <color=#FFFFFF>Quick Assist</color> and simultaneously activates <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5%, lasting 40s. Repeated triggers extend the duration, up to a max of 300s.\nWhile Lucia is in the <color=#FFFFFF>Dream</color> state, using any <color=#FFFFFF>Whim</color> consumes 25 <color=#FFFFFF>Dream Points</color> and upgrades it to <color=#FFFFFF>Harmony</color>. Whenever another active character's attack hits an enemy, Lucia consumes 25 <color=#FFFFFF>Dream Points</color> to unleash an <color=#FFFFFF>Aftershock</color>. This <color=#FFFFFF>Aftershock</color> is a <color=#FFFFFF>Harmony</color>. After Lucia triggers a skill upgrade or <color=#FFFFFF>Aftershock</color>, <color=#FFFFFF>Aftershock</color> cannot be triggered for 8s.\nWhen Lucia triggers a skill upgrade or an <color=#FFFFFF>Aftershock</color>, all squad members gain the <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state. While in <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state, DMG dealt increases by <color=#2BAD00>15%</color> for 12s. Repeated triggers reset the duration.\nIf Lucia runs out of <color=#FFFFFF>Dream Points</color> or she leaves the <color=#FFFFFF>Ether Veil</color>, she exits the <color=#FFFFFF>Dream</color> state.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Stun</color> character:\nWhen applying <color=#FFFFFF>Darkbreaker</color>, additionally applies a 30% CRIT DMG increase effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Lost Nocturne",
+          "Additional Ability: Ballad of the Long Night"
+        ],
+        "potential": []
+      },
+      "1451505": {
+        "desc": [
+          "When entering the battlefield, Lucia immediately gains 60 <color=#FFFFFF>Dream Points</color>. If her <color=#FFFFFF>Dream Points</color> reaches 100 upon activating a <color=#FFFFFF>Whim</color> or <color=#FFFFFF>Harmony</color>, she enters the <color=#FFFFFF>Dream</color> state.\nWhen entering the <color=#FFFFFF>Dream</color> state, it triggers a <color=#FFFFFF>Quick Assist</color> and simultaneously activates <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5%, lasting 40s. Repeated triggers extend the duration, up to a max of 300s.\nWhile Lucia is in the <color=#FFFFFF>Dream</color> state, using any <color=#FFFFFF>Whim</color> consumes 25 <color=#FFFFFF>Dream Points</color> and upgrades it to <color=#FFFFFF>Harmony</color>. Whenever another active character's attack hits an enemy, Lucia consumes 25 <color=#FFFFFF>Dream Points</color> to unleash an <color=#FFFFFF>Aftershock</color>. This <color=#FFFFFF>Aftershock</color> is a <color=#FFFFFF>Harmony</color>. After Lucia triggers a skill upgrade or <color=#FFFFFF>Aftershock</color>, <color=#FFFFFF>Aftershock</color> cannot be triggered for 8s.\nWhen Lucia triggers a skill upgrade or an <color=#FFFFFF>Aftershock</color>, all squad members gain the <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state. While in <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state, DMG dealt increases by <color=#2BAD00>16.7%</color> for 12s. Repeated triggers reset the duration.\nIf Lucia runs out of <color=#FFFFFF>Dream Points</color> or she leaves the <color=#FFFFFF>Ether Veil</color>, she exits the <color=#FFFFFF>Dream</color> state.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Stun</color> character:\nWhen applying <color=#FFFFFF>Darkbreaker</color>, additionally applies a 30% CRIT DMG increase effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Lost Nocturne",
+          "Additional Ability: Ballad of the Long Night"
+        ],
+        "potential": []
+      },
+      "1451506": {
+        "desc": [
+          "When entering the battlefield, Lucia immediately gains 60 <color=#FFFFFF>Dream Points</color>. If her <color=#FFFFFF>Dream Points</color> reaches 100 upon activating a <color=#FFFFFF>Whim</color> or <color=#FFFFFF>Harmony</color>, she enters the <color=#FFFFFF>Dream</color> state.\nWhen entering the <color=#FFFFFF>Dream</color> state, it triggers a <color=#FFFFFF>Quick Assist</color> and simultaneously activates <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5%, lasting 40s. Repeated triggers extend the duration, up to a max of 300s.\nWhile Lucia is in the <color=#FFFFFF>Dream</color> state, using any <color=#FFFFFF>Whim</color> consumes 25 <color=#FFFFFF>Dream Points</color> and upgrades it to <color=#FFFFFF>Harmony</color>. Whenever another active character's attack hits an enemy, Lucia consumes 25 <color=#FFFFFF>Dream Points</color> to unleash an <color=#FFFFFF>Aftershock</color>. This <color=#FFFFFF>Aftershock</color> is a <color=#FFFFFF>Harmony</color>. After Lucia triggers a skill upgrade or <color=#FFFFFF>Aftershock</color>, <color=#FFFFFF>Aftershock</color> cannot be triggered for 8s.\nWhen Lucia triggers a skill upgrade or an <color=#FFFFFF>Aftershock</color>, all squad members gain the <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state. While in <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state, DMG dealt increases by <color=#2BAD00>18.3%</color> for 12s. Repeated triggers reset the duration.\nIf Lucia runs out of <color=#FFFFFF>Dream Points</color> or she leaves the <color=#FFFFFF>Ether Veil</color>, she exits the <color=#FFFFFF>Dream</color> state.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Stun</color> character:\nWhen applying <color=#FFFFFF>Darkbreaker</color>, additionally applies a 30% CRIT DMG increase effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Lost Nocturne",
+          "Additional Ability: Ballad of the Long Night"
+        ],
+        "potential": []
+      },
+      "1451507": {
+        "desc": [
+          "When entering the battlefield, Lucia immediately gains 60 <color=#FFFFFF>Dream Points</color>. If her <color=#FFFFFF>Dream Points</color> reaches 100 upon activating a <color=#FFFFFF>Whim</color> or <color=#FFFFFF>Harmony</color>, she enters the <color=#FFFFFF>Dream</color> state.\nWhen entering the <color=#FFFFFF>Dream</color> state, it triggers a <color=#FFFFFF>Quick Assist</color> and simultaneously activates <color=#FFFFFF>Ether Veil: Wellspring</color>. While <color=#FFFFFF>Ether Veil: Wellspring</color> is active, all squad members' Max HP increase by 5%, lasting 40s. Repeated triggers extend the duration, up to a max of 300s.\nWhile Lucia is in the <color=#FFFFFF>Dream</color> state, using any <color=#FFFFFF>Whim</color> consumes 25 <color=#FFFFFF>Dream Points</color> and upgrades it to <color=#FFFFFF>Harmony</color>. Whenever another active character's attack hits an enemy, Lucia consumes 25 <color=#FFFFFF>Dream Points</color> to unleash an <color=#FFFFFF>Aftershock</color>. This <color=#FFFFFF>Aftershock</color> is a <color=#FFFFFF>Harmony</color>. After Lucia triggers a skill upgrade or <color=#FFFFFF>Aftershock</color>, <color=#FFFFFF>Aftershock</color> cannot be triggered for 8s.\nWhen Lucia triggers a skill upgrade or an <color=#FFFFFF>Aftershock</color>, all squad members gain the <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state. While in <color=#FFFFFF>Dreamer's Nursery Rhyme</color> state, DMG dealt increases by <color=#2BAD00>20%</color> for 12s. Repeated triggers reset the duration.\nIf Lucia runs out of <color=#FFFFFF>Dream Points</color> or she leaves the <color=#FFFFFF>Ether Veil</color>, she exits the <color=#FFFFFF>Dream</color> state.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Stun</color> character:\nWhen applying <color=#FFFFFF>Darkbreaker</color>, additionally applies a 30% CRIT DMG increase effect."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Lost Nocturne",
+          "Additional Ability: Ballad of the Long Night"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nThis Quick Assist is a <color=#FFFFFF>Whim</color>. When activated, it summons an Ethereal figure that delivers a downward attack in a circular area ahead, dealing <color=#FE437E>Ether DMG</color>.\nIf not in the <color=#FFFFFF>Dream</color> state, Lucia gains 20 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Whim</color>. This effect can trigger once every 5s.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Crushing Mist",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Voice of Illusory Dreams",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nThis Assist Follow-Up is a <color=#FFFFFF>Harmony</color>. When activated, it summons an Ethereal figure that delivers a downward attack in a circular area ahead, dealing <color=#FE437E>Ether DMG</color>.\nIf not in the <color=#FFFFFF>Dream</color> state, Lucia gains 40 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Harmony</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Harmony of Painted Dreams",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Crushing Mist",
+          "param": [
+            {
+              "desc": "{Skill:1451018, Prop:1001}",
+              "name": "Whim DMG Multiplier",
+              "param": {
+                "1451018": {
+                  "attackData": [],
+                  "attributeInfliction": 4835,
+                  "damagePercentage": 10640,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 4836,
+                  "feverRecovery": 133100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 970,
+                  "main": 10640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5320,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451023, Prop:1001}",
+              "name": "Harmony DMG Multiplier",
+              "param": {
+                "1451023": {
+                  "attackData": [],
+                  "attributeInfliction": 4835,
+                  "damagePercentage": 24390,
+                  "damagePercentageGrowth": 2220,
+                  "etherPurify": 4836,
+                  "feverRecovery": 133100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2220,
+                  "main": 24390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5320,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451015, Prop:1001}",
+              "name": "Aftershock DMG Multiplier",
+              "param": {
+                "1451015": {
+                  "attackData": [],
+                  "attributeInfliction": 20000,
+                  "damagePercentage": 55000,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5000,
+                  "main": 55000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451018, Prop:1002}",
+              "name": "Whim Daze Multiplier",
+              "param": {
+                "1451018": {
+                  "attackData": [],
+                  "attributeInfliction": 4835,
+                  "damagePercentage": 10640,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 4836,
+                  "feverRecovery": 133100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5320,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451023, Prop:1002}",
+              "name": "Harmony Daze Multiplier",
+              "param": {
+                "1451023": {
+                  "attackData": [],
+                  "attributeInfliction": 4835,
+                  "damagePercentage": 24390,
+                  "damagePercentageGrowth": 2220,
+                  "etherPurify": 4836,
+                  "feverRecovery": 133100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 17410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5320,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451015, Prop:1002}",
+              "name": "Aftershock Daze Multiplier",
+              "param": {
+                "1451015": {
+                  "attackData": [],
+                  "attributeInfliction": 20000,
+                  "damagePercentage": 55000,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Voice of Illusory Dreams",
+          "param": [
+            {
+              "desc": "{Skill:1451019, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1451019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451020, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1451020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451021, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1451021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Harmony of Painted Dreams",
+          "param": [
+            {
+              "desc": "{Skill:1451022, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1451022": {
+                  "attackData": [],
+                  "attributeInfliction": 27726,
+                  "damagePercentage": 32770,
+                  "damagePercentageGrowth": 2980,
+                  "etherPurify": 13337,
+                  "feverRecovery": 932250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2980,
+                  "main": 32770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28240,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451022, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1451022": {
+                  "attackData": [],
+                  "attributeInfliction": 27726,
+                  "damagePercentage": 32770,
+                  "damagePercentageGrowth": 2980,
+                  "etherPurify": 13337,
+                  "feverRecovery": 932250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1290,
+                  "main": 28240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28240,
+                  "stunRatioGrowth": 1290
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nPerform up to five forward strikes, dealing <color=#FE437E>Ether DMG</color>.\nThe fifth attack is a <color=#FFFFFF>Whim</color>, conjuring an Ethereal figure that inflicts <color=#FE437E>Ether DMG</color> on enemies in a circular area ahead.\nWhen in combat and not in the <color=#FFFFFF>Dream</color> state, Lucia gains 40 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Whim</color>.",
+          "name": "Basic Attack: Orbital Combo",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Orbital Combo",
+          "param": [
+            {
+              "desc": "{Skill:1451001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1451001": {
+                  "attackData": [],
+                  "attributeInfliction": 3144,
+                  "damagePercentage": 4090,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 6003,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 380,
+                  "main": 4090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1451002": {
+                  "attackData": [],
+                  "attributeInfliction": 2025,
+                  "damagePercentage": 2780,
+                  "damagePercentageGrowth": 260,
+                  "etherPurify": 3337,
+                  "feverRecovery": 91850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 2780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3670,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1451003": {
+                  "attackData": [],
+                  "attributeInfliction": 5921,
+                  "damagePercentage": 8350,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 9790,
+                  "feverRecovery": 269225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 8350,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35250,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10770,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1451004": {
+                  "attackData": [],
+                  "attributeInfliction": 5650,
+                  "damagePercentage": 8010,
+                  "damagePercentageGrowth": 730,
+                  "etherPurify": 10171,
+                  "feverRecovery": 237325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 730,
+                  "main": 8010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31070,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11190,
+                  "stunRatioGrowth": 510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451005, Prop:1001}",
+              "name": "Whim DMG Multiplier",
+              "param": {
+                "1451005": {
+                  "attackData": [],
+                  "attributeInfliction": 14224,
+                  "damagePercentage": 17290,
+                  "damagePercentageGrowth": 1580,
+                  "etherPurify": 18873,
+                  "feverRecovery": 561550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1580,
+                  "main": 17290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20760,
+                  "stunRatioGrowth": 950
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451006, Prop:1001}",
+              "name": "Harmony DMG Multiplier",
+              "param": {
+                "1451006": {
+                  "attackData": [],
+                  "attributeInfliction": 14224,
+                  "damagePercentage": 41250,
+                  "damagePercentageGrowth": 3750,
+                  "etherPurify": 18873,
+                  "feverRecovery": 561550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3750,
+                  "main": 41250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20760,
+                  "stunRatioGrowth": 950
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451007, Prop:1001}",
+              "name": "Aftershock DMG Multiplier",
+              "param": {
+                "1451007": {
+                  "attackData": [],
+                  "attributeInfliction": 20000,
+                  "damagePercentage": 55000,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5000,
+                  "main": 55000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1451001": {
+                  "attackData": [],
+                  "attributeInfliction": 3144,
+                  "damagePercentage": 4090,
+                  "damagePercentageGrowth": 380,
+                  "etherPurify": 6003,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1451002": {
+                  "attackData": [],
+                  "attributeInfliction": 2025,
+                  "damagePercentage": 2780,
+                  "damagePercentageGrowth": 260,
+                  "etherPurify": 3337,
+                  "feverRecovery": 91850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 12020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3670,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1451003": {
+                  "attackData": [],
+                  "attributeInfliction": 5921,
+                  "damagePercentage": 8350,
+                  "damagePercentageGrowth": 760,
+                  "etherPurify": 9790,
+                  "feverRecovery": 269225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 10770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35250,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10770,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1451004": {
+                  "attackData": [],
+                  "attributeInfliction": 5650,
+                  "damagePercentage": 8010,
+                  "damagePercentageGrowth": 730,
+                  "etherPurify": 10171,
+                  "feverRecovery": 237325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 11190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31070,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11190,
+                  "stunRatioGrowth": 510
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451005, Prop:1002}",
+              "name": "Whim Daze Multiplier",
+              "param": {
+                "1451005": {
+                  "attackData": [],
+                  "attributeInfliction": 14224,
+                  "damagePercentage": 17290,
+                  "damagePercentageGrowth": 1580,
+                  "etherPurify": 18873,
+                  "feverRecovery": 561550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 950,
+                  "main": 20760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20760,
+                  "stunRatioGrowth": 950
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451006, Prop:1002}",
+              "name": "Harmony Daze Multiplier",
+              "param": {
+                "1451006": {
+                  "attackData": [],
+                  "attributeInfliction": 14224,
+                  "damagePercentage": 41250,
+                  "damagePercentageGrowth": 3750,
+                  "etherPurify": 18873,
+                  "feverRecovery": 561550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 950,
+                  "main": 20760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20760,
+                  "stunRatioGrowth": 950
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451007, Prop:1002}",
+              "name": "Aftershock Daze Multiplier",
+              "param": {
+                "1451007": {
+                  "attackData": [],
+                  "attributeInfliction": 20000,
+                  "damagePercentage": 55000,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nThis Chain Attack is a <color=#FFFFFF>Harmony</color>. When activated, it summons an Ethereal figure that pulls in enemies in a circular area ahead and deals <color=#FE437E>Ether DMG</color>.\nIf not in the <color=#FFFFFF>Dream</color> state, Lucia gains 40 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Harmony</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Stage of Brilliance",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at Maximum, press <IconMap:Icon_UltimateReady> to activate:\nThis Ultimate is a <color=#FFFFFF>Harmony</color>. When activated, Lucia summons an Ethereal figure and rides it forward in a charge. Holding a directional button allows her to steer and extend the charge, up to 3s. During the charge, Anti-Interrupt Level is increased, DMG taken is reduced by 40%, and when Lucia takes fatal DMG, she remains in battle with HP not dropping below 1.\nWhen the charge ends, Lucia unleashes a powerful strike in a large area around her, dealing <color=#FE437E>Ether DMG</color>. A <color=#FFFFFF>Quick Assist</color> is triggered when this skill hits an enemy, and after the skill is used, it leaves behind a <color=#FFFFFF>Starlight Convergence</color>. <color=#FFFFFF>Starlight Convergence</color> lasts 8s. While inside <color=#FFFFFF>Starlight Convergence</color>, the currently active character gains HP regeneration equal to <color=#2BAD00>{CAL:0.01+AvatarSkillLevel(3)*0.0005,100,2}%</color> of Lucia's Max HP per second. This effect ends 4s after leaving the <color=#FFFFFF>Starlight Convergence</color> or immediately when switching out.\nAfter activation, if Lucia is in the <color=#FFFFFF>Dream</color> state and <color=#FFFFFF>Ether Veil: Wellspring</color> is active, <color=#FFFFFF>Ether Veil: Wellspring</color> duration is extended by 32s.\nIf not in the <color=#FFFFFF>Dream</color> state, Lucia gains 100 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Harmony</color>. If she is in the <color=#FFFFFF>Dream</color> state when activating this <color=#FFFFFF>Harmony</color>, she will gain 100 <color=#FFFFFF>Dream Points</color> and re-enter <color=#FFFFFF>Dream</color> state the next time she exits it. This effect cannot be stacked.\nCharacter is invulnerable while performing the powerful strike.",
+          "name": "Ultimate: Charge, Great Armor!",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Stage of Brilliance",
+          "param": [
+            {
+              "desc": "{Skill:1451016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1451016": {
+                  "attackData": [],
+                  "attributeInfliction": 36113,
+                  "damagePercentage": 61670,
+                  "damagePercentageGrowth": 5610,
+                  "etherPurify": 16164,
+                  "feverRecovery": 2273425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5610,
+                  "main": 61670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17780,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1451016": {
+                  "attackData": [],
+                  "attributeInfliction": 36113,
+                  "damagePercentage": 61670,
+                  "damagePercentageGrowth": 5610,
+                  "etherPurify": 16164,
+                  "feverRecovery": 2273425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 810,
+                  "main": 17780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17780,
+                  "stunRatioGrowth": 810
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Charge, Great Armor!",
+          "param": [
+            {
+              "desc": "{Skill:1451024, Prop:1001}",
+              "name": "Charge Single-Hit DMG Multiplier",
+              "param": {
+                "1451024": {
+                  "attackData": [],
+                  "attributeInfliction": 4875,
+                  "damagePercentage": 9300,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 6500,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 9300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7150,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451017, Prop:1001}",
+              "name": "Ultimate DMG Multiplier",
+              "param": {
+                "1451017": {
+                  "attackData": [],
+                  "attributeInfliction": 17670,
+                  "damagePercentage": 190270,
+                  "damagePercentageGrowth": 17300,
+                  "etherPurify": 67671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 17300,
+                  "main": 190270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19440,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451024, Prop:1002}",
+              "name": "Charge Single-Hit Daze Multiplier",
+              "param": {
+                "1451024": {
+                  "attackData": [],
+                  "attributeInfliction": 4875,
+                  "damagePercentage": 9300,
+                  "damagePercentageGrowth": 850,
+                  "etherPurify": 6500,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7150,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451017, Prop:1002}",
+              "name": "Ultimate Daze Multiplier",
+              "param": {
+                "1451017": {
+                  "attackData": [],
+                  "attributeInfliction": 17670,
+                  "damagePercentage": 190270,
+                  "damagePercentageGrowth": 17300,
+                  "etherPurify": 67671,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 890,
+                  "main": 19440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19440,
+                  "stunRatioGrowth": 890
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:0.01+AvatarSkillLevel(3)*0.0005,100,2}%",
+              "name": "Percent HP Recovered Per Second",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Fading Silhouette",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nDeliver a quick strike forward, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Dash Attack: Refraction",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nThis Dodge Counter is a <color=#FFFFFF>Whim</color>. When activated, summons an Ethereal figure that delivers a downward attack in a circular area ahead, dealing <color=#FE437E>Ether DMG</color>.\nIf not in the <color=#FFFFFF>Dream</color> state, Lucia gains 20 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Whim</color>. This effect can trigger once every 5s.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Stardust Echo",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Refraction",
+          "param": [
+            {
+              "desc": "{Skill:1451012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1451012": {
+                  "attackData": [],
+                  "attributeInfliction": 3918,
+                  "damagePercentage": 8630,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 3919,
+                  "feverRecovery": 107800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 8630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4320,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1451012": {
+                  "attackData": [],
+                  "attributeInfliction": 3918,
+                  "damagePercentage": 8630,
+                  "damagePercentageGrowth": 790,
+                  "etherPurify": 3919,
+                  "feverRecovery": 107800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 14110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4320,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Stardust Echo",
+          "param": [
+            {
+              "desc": "{Skill:1451013, Prop:1001}",
+              "name": "Whim DMG Multiplier",
+              "param": {
+                "1451013": {
+                  "attackData": [],
+                  "attributeInfliction": 9670,
+                  "damagePercentage": 24830,
+                  "damagePercentageGrowth": 2260,
+                  "etherPurify": 24671,
+                  "feverRecovery": 266200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2260,
+                  "main": 24830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21640,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451014, Prop:1001}",
+              "name": "Harmony DMG Multiplier",
+              "param": {
+                "1451014": {
+                  "attackData": [],
+                  "attributeInfliction": 9670,
+                  "damagePercentage": 38580,
+                  "damagePercentageGrowth": 3510,
+                  "etherPurify": 24671,
+                  "feverRecovery": 266200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3510,
+                  "main": 38580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21640,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451013, Prop:1002}",
+              "name": "Whim Daze Multiplier",
+              "param": {
+                "1451013": {
+                  "attackData": [],
+                  "attributeInfliction": 9670,
+                  "damagePercentage": 24830,
+                  "damagePercentageGrowth": 2260,
+                  "etherPurify": 24671,
+                  "feverRecovery": 266200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 990,
+                  "main": 21640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21640,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451014, Prop:1002}",
+              "name": "Harmony Daze Multiplier",
+              "param": {
+                "1451014": {
+                  "attackData": [],
+                  "attributeInfliction": 9670,
+                  "damagePercentage": 38580,
+                  "damagePercentageGrowth": 3510,
+                  "etherPurify": 24671,
+                  "feverRecovery": 266200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 990,
+                  "main": 21640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 34820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21640,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nThis Special Attack is a <color=#FFFFFF>Whim</color>. When activated, it recreates an Ethereal figure that slashes forward in a line, dealing <color=#FE437E>Ether DMG</color>.\nWhen in combat and not in the <color=#FFFFFF>Dream</color> state, Lucia gains 20 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Whim</color>. This effect can trigger once every 5s.",
+          "name": "Special Attack: Symphony of the Reaper - Storm",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nThis EX Special Attack is a <color=#FFFFFF>Harmony</color>. When activated, it summons an Ethereal figure that delivers a powerful forward slash in a line, dealing <color=#FE437E>Ether DMG</color>.\nWhen Lucia uses any <color=#FFFFFF>Harmony</color>, all squad members gain the <color=#FFFFFF>Darkbreaker</color> state. While in <color=#FFFFFF>Darkbreaker</color> state, Sheer Force increases by 12. Every 200 points of Lucia's initial Max HP grants an additional <color=#2BAD00>{CAL:5+AvatarSkillLevel(1)*0.2,1,1}</color> Sheer Force. The <color=#FFFFFF>Darkbreaker</color> state can increase Sheer Force by up to a maximum of <color=#2BAD00>{CAL:612+AvatarSkillLevel(1)*24,1,2}</color>, lasting 20s and repeated triggers reset the duration. When Lucia's initial Max HP reaches 24,000, the above bonus effect reaches its maximum value.\nWhen any <color=#FFFFFF>Harmony</color> deals DMG, Lucia increases the final attack's DMG by an additional <color=#2BAD00>{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%</color> of her Max HP.\nIf she activates this EX Special Attack while in the <color=#FFFFFF>Dream</color> state and under the effect of <color=#FFFFFF>Ether Veil: Wellspring</color>, <color=#FFFFFF>Ether Veil: Wellspring</color> duration is extended by 16s.\nAfter activating her EX Special Attack, Lucia can immediately follow up with the 5th hit of her <color=#FFFFFF>Basic Attack</color>.\nIf not in the <color=#FFFFFF>Dream</color> state, Lucia gains 60 <color=#FFFFFF>Dream Points</color> upon using this <color=#FFFFFF>Harmony</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Symphony of the Reaper - Daybreak",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Symphony of the Reaper - Storm",
+          "param": [
+            {
+              "desc": "{Skill:1451008, Prop:1001}",
+              "name": "Whim DMG Multiplier",
+              "param": {
+                "1451008": {
+                  "attackData": [],
+                  "attributeInfliction": 4165,
+                  "damagePercentage": 4590,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 4166,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 420,
+                  "main": 4590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451009, Prop:1001}",
+              "name": "Harmony DMG Multiplier",
+              "param": {
+                "1451009": {
+                  "attackData": [],
+                  "attributeInfliction": 4165,
+                  "damagePercentage": 18340,
+                  "damagePercentageGrowth": 1670,
+                  "etherPurify": 4166,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1670,
+                  "main": 18340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451010, Prop:1001}",
+              "name": "Aftershock DMG Multiplier",
+              "param": {
+                "1451010": {
+                  "attackData": [],
+                  "attributeInfliction": 20000,
+                  "damagePercentage": 55000,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5000,
+                  "main": 55000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451008, Prop:1002}",
+              "name": "Whim Daze Multiplier",
+              "param": {
+                "1451008": {
+                  "attackData": [],
+                  "attributeInfliction": 4165,
+                  "damagePercentage": 4590,
+                  "damagePercentageGrowth": 420,
+                  "etherPurify": 4166,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451009, Prop:1002}",
+              "name": "Harmony Daze Multiplier",
+              "param": {
+                "1451009": {
+                  "attackData": [],
+                  "attributeInfliction": 4165,
+                  "damagePercentage": 18340,
+                  "damagePercentageGrowth": 1670,
+                  "etherPurify": 4166,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451010, Prop:1002}",
+              "name": "Aftershock Daze Multiplier",
+              "param": {
+                "1451010": {
+                  "attackData": [],
+                  "attributeInfliction": 20000,
+                  "damagePercentage": 55000,
+                  "damagePercentageGrowth": 5000,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 0,
+                  "main": 0,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Symphony of the Reaper - Daybreak",
+          "param": [
+            {
+              "desc": "{Skill:1451011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1451011": {
+                  "attackData": [],
+                  "attributeInfliction": 44921,
+                  "damagePercentage": 63810,
+                  "damagePercentageGrowth": 5810,
+                  "etherPurify": 11671,
+                  "feverRecovery": 1627450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5810,
+                  "main": 63810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44190,
+                  "stunRatioGrowth": 2010
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1451011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1451011": {
+                  "attackData": [],
+                  "attributeInfliction": 44921,
+                  "damagePercentage": 63810,
+                  "damagePercentageGrowth": 5810,
+                  "etherPurify": 11671,
+                  "feverRecovery": 1627450,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2010,
+                  "main": 44190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44190,
+                  "stunRatioGrowth": 2010
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "{CAL:612+AvatarSkillLevel(1)*24,1,2}",
+              "name": "Max Additional Sheer Force Increase",
+              "potential": []
+            },
+            {
+              "desc": "{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%",
+              "name": "Harmony Additional DMG Multiplier",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1451001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Orbital Combo"
+    },
+    "1451002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Symphony of the Reaper - Storm"
+    },
+    "1451003": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Symphony of the Reaper - Daybreak"
+    },
+    "1451004": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Refraction"
+    },
+    "1451005": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Stardust Echo"
+    },
+    "1451006": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Stage of Brilliance"
+    },
+    "1451007": {
+      "desc": "<IconMap:Icon_UltimateReady> (Drag the joystick to extend charge duration)",
+      "name": "Ultimate: Charge, Great Armor!"
+    },
+    "1451008": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Crushing Mist"
+    },
+    "1451009": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Voice of Illusory Dreams"
+    },
+    "1451010": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Harmony of Painted Dreams"
+    }
+  },
+  "skin": {
+    "3114510": {
+      "desc": "Her cloak is the curtain of night, and beneath her hood rests the world's quiet whispers. She sings for the dusk and speaks in dreams, gathering the thoughts sleepers leave behind and weaving them into halos and riddles across the stars.",
+      "name": "Lucia: Whispering Dreams"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "04",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, Rupture-based support",
+    "Activating Ether Veil boosts Max HP",
+    "Provides Sheer Force and CRIT DMG Bonus"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When <color=#FFFFFF>Dreamer's Nursery Rhyme</color> deals additional DMG, ignore 18% of enemy All-Attribute RES and have 5% increased Decibel Generation Rate. Each time Lucia performs a skill upgrade, she gains 1 stack of <color=#FFFFFF>Echo</color>, stacking up to 4 times. When <color=#FFFFFF>Dreamer's Nursery Rhyme</color> ends, if Lucia has any <color=#FFFFFF>Echo</color> stacks, 1 stack is consumed to reapply <color=#FFFFFF>Dreamer's Nursery Rhyme</color> to all squad members.",
+      "desc2": "As a child, Lucia's grandmother took her by the hand and led her into the Hollows.\nFrom that moment on, she roamed its darkened trails and hunted in its boundless depths. With her brush, she painted the Ethereals she encountered, and the glow of Ether became the brilliance that lit her childhood.\n\"When I was little, I had three friends: the mighty black shield, the teleporting Thana, and the super-powerful great armor!\"\n\"Then one day, they were gone...\"\n\"But it's okay! I drew them in my notebook. Now, with just a wave of my staff, I can summon them all back!\"",
+      "name": "Secret Friend"
+    },
+    "2": {
+      "desc": "While Lucia is inside <color=#FFFFFF>Ether Veil: Wellspring</color>, <color=#FFFFFF>Harmony</color> deals 15% more DMG. Agents in the <color=#FFFFFF>Darkbreaker</color> state gain an additional 15% Sheer DMG increase while in <color=#FFFFFF>Ether Veil: Wellspring</color>.",
+      "desc2": "Lately, a tale has been spreading through New Eridu about the Night Emissary.\n\"Every night at midnight, the Night Emissary shows up on the streets to tell us all kinds of stories!\"\n\"She's also an amazing magician! Just by chanting a spell, there's a 'Woosh!' and she summons a whole swarm of Ethereals to fight for us!\"\n\"Last time we got lost in a Hollow, the Night Emissary used that very trick to save us!\"\n—As told by Avocaboo, Devilboo and Boollseye.",
+      "name": "Great Magician"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "—Knock, knock knock. \nWith the steady rhythm of knocks, a kebab was passed through the window.\n\"Proxy, take it! Hot off the fire — roast skewers with lemon popping candy, paired as perfectly as a Dullahan's sword and shield!\"\n\"Once you finish eating... let's head out and play!\"\n\"I have a feeling... tonight we'll find some amazing inspiration for an urban legend, the kind that can make the entire forum explode!\"",
+      "name": "The Best Partner"
+    },
+    "4": {
+      "desc": "When <color=#FFFFFF>Ether Veil</color> is activated or extended on the field, Lucia grants all squad members 100 Decibels. This effect can trigger once every 15s.",
+      "desc2": "A Scholar of Urban Legends must have keen curiosity, plenty of drive, and the guts to set off without hesitation. Lucia is no exception.\nThat's why, during her early days in New Eridu, she became a regular at Public Security.\n\"How many times do I have to tell you? Chasing after ghost stories doesn't give you the right to wander into construction zones!\"\n\"Don't sleep on the streets, don't run around in the middle of the night, and don't go diving into Hollows in front of everyone... These are all part of the 'Rules for Life in New Eridu,' and you need to take them seriously!\"\n\"If you really can't sleep, then... uh, why not go explore Thymefield manor, and tell Alice a few ghost stories while you're there?\"",
+      "name": "Late-Night Hours"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Night falls dark as ink, the stars shining bright and brilliant.\nShe journeys from afar, carrying stories, ballads, and unfinished verses.\nShe plucks a flower, dew gathered upon its petals, and sets it on the windowsill.\nShe watches over your dreams, keeping them warm and safe.\n\n\"Good morning... Huh? When did you get here, Lucia?\"\n\"I'm not sure, but it hasn't been too long... time just seems to fly when I'm around you, Proxy.\"",
+      "name": "Dream Watcher"
+    },
+    "6": {
+      "desc": "When Lucia is inside any <color=#FFFFFF>Ether Veil</color>, her ATK increases by 2% of her initial Max HP, and <color=#FFFFFF>Harmony</color> always triggers a CRIT with <color=#FFFFFF>Harmony</color> CRIT DMG increased by 30%.",
+      "desc2": "Lucia's life is an endless journey. She runs beneath the moonlight, searching, crossing street after street, city after city.\nStories intertwine like threads, spinning endless dreams, while gentle song flows beneath the glow of the night lanterns.\nHer search never stops, and under the stars, the journey goes on without end.\n\nOnly when the night fades and the sun rises does the girl step out of the Hollows, stretching lazily.\n\"Yaaawn... I'm so tired... but everyone says it's best not to sleep inside a Hollow...\"\n\"Maybe I should just crash on the floor at the video store instead!\"",
+      "name": "The Never-Ending Journey"
+    }
+  },
+  "weaponType": {
+    "4": "Support"
+  }
+}

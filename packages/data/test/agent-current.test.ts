@@ -14,6 +14,7 @@ import {
 } from "../scripts/nanoka-integration/current.ts"
 import type { CurrentCheckpoint } from "../scripts/nanoka-integration/current.ts"
 import { buildNanokaAgents } from "../scripts/nanoka-integration/build.ts"
+import * as formatting from "../scripts/nanoka-integration/format.ts"
 import {
   outputExpansionLimit,
   verifyNanokaAgentArtifact,
@@ -23,6 +24,11 @@ import { agentInput } from "./fixtures/agent-source.ts"
 
 vi.mock("node:fs/promises", async (original) => ({
   ...(await original<typeof import("node:fs/promises")>()),
+}))
+vi.mock("../scripts/nanoka-integration/format.ts", async (original) => ({
+  ...(await original<
+    typeof import("../scripts/nanoka-integration/format.ts")
+  >()),
 }))
 const roots: string[] = []
 const children: ChildProcess[] = []
@@ -79,13 +85,13 @@ async function fixture() {
     root,
     rawRoot,
     version,
-    targetDirectory: join(root, "integrated/nanoka"),
+    targetDirectory: join(root, "integrated"),
     policy: await loadSourcePolicy(),
   }
 }
 type Fixture = Awaited<ReturnType<typeof fixture>>
 function control(input: Fixture) {
-  return join(dirname(input.targetDirectory), ".nanoka.fairy-state")
+  return join(dirname(input.targetDirectory), ".integrated.fairy-state")
 }
 async function bytes(root: string): Promise<Record<string, Buffer>> {
   const result: Record<string, Buffer> = {}
@@ -144,6 +150,10 @@ async function clean(input: Fixture) {
       ...Object.values(agent.files.content),
     ])
       expect(digest(result.bytes[file.path])).toBe(file.sha256)
+  const state = JSON.parse(
+    await fs.readFile(join(control(input), "state.json"), "utf8"),
+  )
+  expect(state.current.indexSha256).toBe(digest(result.bytes["index.json"]))
   return result
 }
 const processScript = fileURLToPath(
@@ -395,10 +405,20 @@ describe("current Nanoka dataset", () => {
     expect(first.outcome).toBe("committed")
     const before = await fingerprints(input.targetDirectory)
     const writes = vi.spyOn(fs, "writeFile")
+    const format = formatting.formatGeneratedJson
+    const formatted = vi
+      .spyOn(formatting, "formatGeneratedJson")
+      .mockImplementation(async (root, paths) => {
+        expect(root.startsWith(`${control(input)}/work/`)).toBe(true)
+        for (const path of paths)
+          expect((await fs.stat(join(root, path))).nlink).toBe(1)
+        await format(root, paths)
+      })
     const second = await updateNanokaAgents(input)
     expect(second.outcome).toBe("unchanged")
     expect(second.reusedEntityFiles).toBe(Object.keys(before).length - 1)
     expect(second.changedEntityFiles).toBe(0)
+    expect(formatted).toHaveBeenCalledTimes(2)
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
     expect(
       writes.mock.calls.filter(([path]) =>
@@ -409,12 +429,45 @@ describe("current Nanoka dataset", () => {
       writes.mock.calls.filter(
         ([path]) =>
           String(path).startsWith(`${control(input)}/work/`) &&
-          String(path).includes("/integrated/nanoka/agents/"),
+          String(path).includes("/integrated/agents/"),
       ),
     ).toHaveLength(Object.keys(before).length - 1)
     expect(await bytes(input.rawRoot)).toEqual(raw)
     await clean(input)
   })
+
+  it.each(["entities", "index"])(
+    "preserves current data and recovers after actual oxfmt failure on %s",
+    async (stage) => {
+      const input = await fixture()
+      await updateNanokaAgents(input)
+      const before = await fingerprints(input.targetDirectory)
+      const rawBefore = await fingerprints(input.rawRoot)
+      const stateBefore = await fs.readFile(join(control(input), "state.json"))
+      const format = formatting.formatGeneratedJson
+      const formatted = vi
+        .spyOn(formatting, "formatGeneratedJson")
+        .mockImplementation(async (root, paths) => {
+          if ((stage === "index") === paths.includes("index.json"))
+            await fs.writeFile(join(root, paths[0]), "{ invalid JSON")
+          await format(root, paths)
+        })
+      const links = vi.spyOn(fs, "link")
+      await expect(updateNanokaAgents(input)).rejects.toThrow(/oxfmt/)
+      expect(formatted).toHaveBeenCalledTimes(stage === "index" ? 2 : 1)
+      expect(links).not.toHaveBeenCalled()
+      expect(await fingerprints(input.targetDirectory)).toEqual(before)
+      expect(await fingerprints(input.rawRoot)).toEqual(rawBefore)
+      expect(await fs.readFile(join(control(input), "state.json"))).toEqual(
+        stateBefore,
+      )
+      await clean(input)
+      formatted.mockRestore()
+      expect((await recoverNanokaAgents(input)).outcome).toBe("unchanged")
+      expect((await updateNanokaAgents(input)).outcome).toBe("unchanged")
+      expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    },
+  )
 
   it("adds, changes and legally removes members while reusing unchanged current inodes", async () => {
     const input = await fixture()
@@ -798,6 +851,101 @@ function command(name: string, args: string[]) {
   )
 }
 describe("current workspace commands", () => {
+  it("formats workspace sources while preserving managed legacy integrated data", async () => {
+    const input = await fixture()
+    const workspace = join(input.root, "workspace")
+    input.targetDirectory = join(workspace, "packages/data/integrated")
+    await fs.mkdir(dirname(input.targetDirectory), { recursive: true })
+    for (const path of ["package.json", "oxfmt.config.ts", ".gitignore"])
+      await fs.copyFile(join(repository, path), join(workspace, path))
+    await fs.symlink(
+      join(repository, "node_modules"),
+      join(workspace, "node_modules"),
+      "dir",
+    )
+    function workspaceCommand(name: "format" | "format:check") {
+      // 独占测试工作区复用已安装依赖；禁止 pnpm 自动安装或校验依赖快照。
+      const result = spawnSync(
+        "pnpm",
+        ["--config.verifyDepsBeforeRun=false", name],
+        {
+          cwd: workspace,
+          encoding: "utf8",
+          timeout: 20000,
+        },
+      )
+      expect(result.error).toBeUndefined()
+      expect(result.signal).toBeNull()
+      return result
+    }
+    await updateNanokaAgents(input)
+    const original = await clean(input)
+    const legacyIndex = structuredClone(original.index)
+    // 只在合成 fixture 中构造合法旧排版，并同步实体及控制记录摘要。
+    for (const agent of Object.values(legacyIndex.agents))
+      for (const reference of [
+        agent.files.stats,
+        ...Object.values(agent.files.content),
+      ]) {
+        const content = Buffer.from(
+          `${JSON.stringify(JSON.parse(original.bytes[reference.path].toString()), null, 4)}\n`,
+        )
+        await fs.writeFile(join(input.targetDirectory, reference.path), content)
+        reference.sha256 = digest(content)
+      }
+    const indexBytes = Buffer.from(`${JSON.stringify(legacyIndex, null, 4)}\n`)
+    await fs.writeFile(join(input.targetDirectory, "index.json"), indexBytes)
+    await editJson(join(control(input), "state.json"), (state) => {
+      state.current.indexSha256 = digest(indexBytes)
+    })
+    await clean(input)
+    expect((await recoverNanokaAgents(input)).outcome).toBe("unchanged")
+
+    // 真实 oxfmt 确实会改写此样本；探针副本不属于当前数据集。
+    const probe = join(input.root, "legacy-probe.json")
+    await fs.writeFile(probe, indexBytes)
+    const rewritten = spawnSync(
+      process.execPath,
+      [
+        join(repository, "node_modules/oxfmt/bin/oxfmt"),
+        "--write",
+        "--config",
+        join(repository, "oxfmt.config.ts"),
+        probe,
+      ],
+      { cwd: input.root, encoding: "utf8", timeout: 20000 },
+    )
+    expect(rewritten.status, rewritten.stderr).toBe(0)
+    expect(await fs.readFile(probe)).not.toEqual(indexBytes)
+    expect(JSON.parse(await fs.readFile(probe, "utf8"))).toEqual(legacyIndex)
+
+    const sourcePath = join(workspace, "source.ts")
+    await fs.writeFile(sourcePath, "export const value={answer:42};")
+    const before = await fingerprints(input.targetDirectory)
+    const controlBefore = await fingerprints(control(input))
+    const formatted = workspaceCommand("format")
+    expect(formatted.status, formatted.stderr).toBe(0)
+    expect(await fs.readFile(sourcePath, "utf8")).toBe(
+      "export const value = { answer: 42 }\n",
+    )
+    expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    expect(await fingerprints(control(input))).toEqual(controlBefore)
+    await clean(input)
+    expect((await recoverNanokaAgents(input)).outcome).toBe("unchanged")
+    expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    const checked = workspaceCommand("format:check")
+    expect(checked.status).toBe(1)
+    expect(checked.stdout + checked.stderr).toContain(
+      "packages/data/integrated/",
+    )
+
+    expect((await updateNanokaAgents(input)).outcome).toBe("committed")
+    expect((await clean(input)).bytes).toEqual(original.bytes)
+    const rechecked = workspaceCommand("format:check")
+    expect(rechecked.status, rechecked.stdout + rechecked.stderr).toBe(0)
+    expect((await recoverNanokaAgents(input)).outcome).toBe("unchanged")
+  }, 30000)
+
   it("generates, updates, verifies and recovers through explicit pnpm scripts", async () => {
     const input = await fixture()
     const args = [input.rawRoot, input.version, input.targetDirectory]

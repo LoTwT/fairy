@@ -3,9 +3,11 @@ import { createHash } from "node:crypto"
 import * as fs from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
+import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { buildNanokaAgents } from "../scripts/nanoka-integration/build.ts"
 import { readBytes } from "../scripts/nanoka-integration/files.ts"
+import * as formatting from "../scripts/nanoka-integration/format.ts"
 import { verifyNanokaAgentArtifact } from "../scripts/nanoka-integration/verify.ts"
 import { loadSourcePolicy } from "../scripts/nanoka/policy.ts"
 import { agentInput } from "./fixtures/agent-source.ts"
@@ -13,6 +15,27 @@ import { agentInput } from "./fixtures/agent-source.ts"
 vi.mock("node:fs/promises", async (importOriginal) => ({
   ...(await importOriginal<typeof import("node:fs/promises")>()),
 }))
+vi.mock("../scripts/nanoka-integration/format.ts", async (original) => ({
+  ...(await original<
+    typeof import("../scripts/nanoka-integration/format.ts")
+  >()),
+}))
+
+const workspaceRoot = fileURLToPath(new URL("../../../", import.meta.url))
+function checkFormatting(artifactDirectory: string) {
+  return execFileSync(
+    process.execPath,
+    [
+      join(workspaceRoot, "node_modules/oxfmt/bin/oxfmt"),
+      "--check",
+      "--config",
+      join(workspaceRoot, "oxfmt.config.ts"),
+      "--disable-nested-config",
+      ...expectedFiles,
+    ],
+    { cwd: artifactDirectory, encoding: "utf8" },
+  )
+}
 
 const temporaryDirectories: string[] = []
 afterEach(async () => {
@@ -32,11 +55,11 @@ async function fixture() {
   const rawRoot = join(root, "raw", "nanoka")
   const temporaryParent = join(root, "output")
   await fs.mkdir(temporaryParent)
-  await fs.mkdir(join(temporaryParent, "integrated", "nanoka"), {
+  await fs.mkdir(join(temporaryParent, "integrated"), {
     recursive: true,
   })
   await fs.writeFile(
-    join(temporaryParent, "integrated", "nanoka", "keep"),
+    join(temporaryParent, "integrated", "keep"),
     "existing dataset",
   )
   const version = "synthetic-1"
@@ -130,14 +153,127 @@ async function edit(
 async function preserved(options: Awaited<ReturnType<typeof fixture>>) {
   expect(await fs.readdir(options.temporaryParent)).toEqual(["integrated"])
   expect(
-    await fs.readFile(
-      join(options.temporaryParent, "integrated/nanoka/keep"),
-      "utf8",
-    ),
+    await fs.readFile(join(options.temporaryParent, "integrated/keep"), "utf8"),
   ).toBe("existing dataset")
 }
 
 describe("offline full Nanoka agent build", () => {
+  it("keeps final LF and identical artifact bytes under an outer EditorConfig", async () => {
+    const options = await fixture()
+    const ordinaryParent = join(options.temporaryParent, "ordinary")
+    const editorConfigParent = join(options.temporaryParent, "editorconfig")
+    await fs.mkdir(ordinaryParent)
+    await fs.mkdir(editorConfigParent)
+    // 隔离测试宿主可能存在的配置，仅在第二个父目录禁止末尾换行。
+    await fs.writeFile(join(ordinaryParent, ".editorconfig"), "root = true\n")
+    await fs.writeFile(
+      join(editorConfigParent, ".editorconfig"),
+      "root = true\n[*]\ninsert_final_newline = false\n",
+    )
+    const ordinary = await buildNanokaAgents({
+      ...options,
+      temporaryParent: ordinaryParent,
+    })
+    const withEditorConfig = await buildNanokaAgents({
+      ...options,
+      temporaryParent: editorConfigParent,
+    })
+    const ordinaryBytes = await allBytes(ordinary.artifactDirectory)
+    const editorConfigBytes = await allBytes(withEditorConfig.artifactDirectory)
+    expect(Object.keys(editorConfigBytes).toSorted()).toEqual(expectedFiles)
+    for (const path of expectedFiles) {
+      expect(ordinaryBytes[path].at(-1), path).toBe(10)
+      expect(editorConfigBytes[path].at(-1), path).toBe(10)
+      expect(editorConfigBytes[path], path).toEqual(ordinaryBytes[path])
+    }
+    for (const build of [ordinary, withEditorConfig]) {
+      const files = await allBytes(build.artifactDirectory)
+      for (const agent of Object.values(build.index.agents))
+        for (const reference of [
+          agent.files.stats,
+          ...Object.values(agent.files.content),
+        ])
+          expect(digest(files[reference.path])).toBe(reference.sha256)
+      expect(
+        await verifyNanokaAgentArtifact({
+          artifactDirectory: build.artifactDirectory,
+          expectedIndex: build.index,
+        }),
+      ).toEqual(build.index)
+      expect(checkFormatting(build.artifactDirectory)).toContain(
+        "All matched files use the correct format",
+      )
+    }
+  })
+
+  it("batch formats entities and the index without changing JSON values or key order", async () => {
+    const options = await fixture()
+    const format = formatting.formatGeneratedJson
+    const calls = vi
+      .spyOn(formatting, "formatGeneratedJson")
+      .mockImplementation(async (root, paths) => {
+        const before = await Promise.all(
+          paths.map((path) => fs.readFile(join(root, path))),
+        )
+        await format(root, paths)
+        const after = await Promise.all(
+          paths.map((path) => fs.readFile(join(root, path))),
+        )
+        expect(
+          after.some((bytes, offset) => !bytes.equals(before[offset])),
+        ).toBe(true)
+        for (const [offset, bytes] of after.entries()) {
+          expect(JSON.parse(bytes.toString())).toEqual(
+            JSON.parse(before[offset].toString()),
+          )
+          expect(JSON.stringify(JSON.parse(bytes.toString()))).toBe(
+            JSON.stringify(JSON.parse(before[offset].toString())),
+          )
+        }
+      })
+    const build = await buildNanokaAgents(options)
+    expect(calls.mock.calls.map(([, paths]) => paths.length)).toEqual([6, 1])
+    expect(checkFormatting(build.artifactDirectory)).toContain(
+      "All matched files use the correct format",
+    )
+  })
+
+  it("rejects changed entity values even when formatting succeeds", async () => {
+    const options = await fixture()
+    const format = formatting.formatGeneratedJson
+    vi.spyOn(formatting, "formatGeneratedJson").mockImplementation(
+      async (root, paths) => {
+        await format(root, paths)
+        await edit(join(root, paths[0]), (value) => {
+          value.codeName = "tampered"
+        })
+      },
+    )
+    await expect(buildNanokaAgents(options)).rejects.toThrow(
+      "JSON 值与整合结果不一致",
+    )
+    await preserved(options)
+  })
+
+  it.each(["entity", "index"])(
+    "enforces limits on final formatted %s bytes",
+    async (kind) => {
+      const options = await fixture()
+      options.policy.requestPolicy.maximumResponseBytes = 10000
+      options.policy.fetchLimits.maximumBytesPerRun = 20000
+      const format = formatting.formatGeneratedJson
+      vi.spyOn(formatting, "formatGeneratedJson").mockImplementation(
+        async (root, paths) => {
+          await format(root, paths)
+          if ((kind === "index") === paths.includes("index.json"))
+            await fs.appendFile(join(root, paths[0]), " ".repeat(320001))
+        },
+      )
+      await expect(buildNanokaAgents(options)).rejects.toThrow("上限")
+      await preserved(options)
+    },
+  )
+
   it("infers verification rules from the expected index while respecting an explicit override", async () => {
     const build = await buildNanokaAgents(await fixture())
     const expectedIndex = {
@@ -189,10 +325,13 @@ describe("offline full Nanoka agent build", () => {
     expect(result.outputFileCount).toBe(7)
     const bytes = await allBytes(result.artifactDirectory)
     expect(Object.keys(bytes).toSorted()).toEqual(expectedFiles)
-    // 当前合成输入的 key 均可由此独立排序表达规范格式；不调用生产序列化器生成预期。
+    expect(checkFormatting(result.artifactDirectory)).toContain(
+      "All matched files use the correct format",
+    )
+    // 排版由真实 oxfmt 检查；对象键顺序仍由独立排序核对，数组顺序保留。
     for (const fileBytes of Object.values(bytes)) {
-      const expected = `${JSON.stringify(arranged(JSON.parse(fileBytes.toString())), null, 2)}\n`
-      expect(fileBytes.toString()).toBe(expected)
+      const value = JSON.parse(fileBytes.toString())
+      expect(JSON.stringify(value)).toBe(JSON.stringify(arranged(value)))
     }
     const resources = [
       "manifest.json",
@@ -620,6 +759,12 @@ describe("offline full Nanoka agent build", () => {
 
   it("runs the explicit workspace entry with synthetic files and no network", async () => {
     const options = await fixture()
+    await write(join(options.temporaryParent, ".oxfmtrc.json"), {
+      tabWidth: 8,
+      printWidth: 20,
+      endOfLine: "crlf",
+    })
+    await fs.writeFile(join(options.temporaryParent, ".gitignore"), "*\n")
     const preloadPath = join(options.temporaryParent, "offline.mjs")
     await fs.writeFile(
       preloadPath,
@@ -630,17 +775,24 @@ describe("offline full Nanoka agent build", () => {
       [
         "--import",
         preloadPath,
-        "scripts/build-nanoka-agents.ts",
+        join(workspaceRoot, "packages/data/scripts/build-nanoka-agents.ts"),
         options.rawRoot,
         options.version,
         options.temporaryParent,
       ],
-      { encoding: "utf8" },
+      { cwd: options.temporaryParent, encoding: "utf8" },
     )
     const receipt = JSON.parse(output)
     expect(receipt.agentCount).toBe(2)
     expect(receipt.inputFileCount).toBe(6)
     expect(receipt.outputFileCount).toBe(7)
+    expect(checkFormatting(receipt.artifactDirectory)).toContain(
+      "All matched files use the correct format",
+    )
+    const direct = await buildNanokaAgents(options)
+    expect(await allBytes(receipt.artifactDirectory)).toEqual(
+      await allBytes(direct.artifactDirectory),
+    )
     expect(
       (
         await verifyNanokaAgentArtifact({
@@ -690,34 +842,43 @@ describe("offline full Nanoka agent build", () => {
     },
   )
 
-  it("rejects a changed final index source record after write", async () => {
-    const options = await fixture()
-    const originalWrite = fs.writeFile
-    vi.spyOn(fs, "writeFile").mockImplementation(async (...args) => {
-      await originalWrite(...args)
-      if (String(args[0]).endsWith("/index.json")) {
-        const index = JSON.parse(await fs.readFile(args[0], "utf8"))
-        index.agents["2"].sourceRecord.future_field = ["tampered"]
-        await originalWrite(
-          args[0],
-          `${JSON.stringify(arranged(index), null, 2)}\n`,
-        )
-      }
-    })
-    await expect(buildNanokaAgents(options)).rejects.toThrow(
-      "与完整输入构建结果不一致",
-    )
-    await preserved(options)
-  })
+  it.each(["source record", "input digest", "output digest"])(
+    "rejects a changed final index %s after write",
+    async (kind) => {
+      const options = await fixture()
+      const originalWrite = fs.writeFile
+      vi.spyOn(fs, "writeFile").mockImplementation(async (...args) => {
+        await originalWrite(...args)
+        if (String(args[0]).endsWith("/index.json")) {
+          const index = JSON.parse(await fs.readFile(args[0], "utf8"))
+          if (kind === "source record")
+            index.agents["2"].sourceRecord.future_field = ["tampered"]
+          else if (kind === "input digest")
+            index.source.inputs[0].sha256 = "a".repeat(64)
+          else index.agents["2"].files.stats.sha256 = "a".repeat(64)
+          await originalWrite(
+            args[0],
+            `${JSON.stringify(arranged(index), null, 2)}\n`,
+          )
+        }
+      })
+      await expect(buildNanokaAgents(options)).rejects.toThrow(
+        "与完整输入构建结果不一致",
+      )
+      await preserved(options)
+    },
+  )
 
   it("does not return success when post-write verification detects damage", async () => {
     const options = await fixture()
-    const originalWrite = fs.writeFile
-    vi.spyOn(fs, "writeFile").mockImplementation(async (...args) => {
-      await originalWrite(...args)
-      if (String(args[0]).endsWith("agents/10/data.json"))
-        await fs.appendFile(args[0], " ")
-    })
+    const format = formatting.formatGeneratedJson
+    vi.spyOn(formatting, "formatGeneratedJson").mockImplementation(
+      async (root, paths) => {
+        await format(root, paths)
+        if (paths.includes("index.json"))
+          await fs.appendFile(join(root, "agents/10/data.json"), " ")
+      },
+    )
     await expect(buildNanokaAgents(options)).rejects.toThrow("摘要不一致")
     await preserved(options)
   })
@@ -780,7 +941,7 @@ describe("complete artifact verifier", () => {
           artifactDirectory: result.artifactDirectory,
           expectedIndex: result.index,
         }),
-      ).rejects.toThrow("与完整输入构建结果不一致")
+      ).resolves.toEqual(result.index)
     },
   )
 

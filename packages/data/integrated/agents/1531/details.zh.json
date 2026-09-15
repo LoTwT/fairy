@@ -1,0 +1,1541 @@
+{
+  "camp": {
+    "1": "狡兔屋"
+  },
+  "elementType": {
+    "200": "物理"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "暴击伤害"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "物理伤害加成"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "生命值"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1531,
+  "locale": "zh",
+  "name": "星徽·比利",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1531017", "1531018", "1531019", "1531020", "1531021"],
+      "basic": ["1531001", "1531002", "1531003", "1531004", "1531010"],
+      "chain": ["1531015", "1531016"],
+      "dodge": ["1531012", "1531013", "1531014"],
+      "special": ["1531006", "1531007", "1531008", "1531009", "1531011"]
+    },
+    "parameterRowsById": {
+      "1531001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/4"
+      ],
+      "1531002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1531003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1531004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1531006": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1531007": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1531008": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1531009": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ],
+      "1531010": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/1"
+      ],
+      "1531011": [
+        "/skill/special/description/9/param/0",
+        "/skill/special/description/9/param/1"
+      ],
+      "1531012": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1531013": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1531014": [
+        "/skill/dodge/description/7/param/0",
+        "/skill/dodge/description/7/param/1"
+      ],
+      "1531015": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1531016": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1531017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1531018": ["/skill/assist/description/4/param/0"],
+      "1531019": ["/skill/assist/description/4/param/1"],
+      "1531020": ["/skill/assist/description/4/param/2"],
+      "1531021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {},
+  "passive": {
+    "level": {
+      "1531049": {
+        "desc": [
+          "星徽·比利会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；发动招式造成的<color=#F0D12B>物理伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n星徽·比利进入战场时即可回复60点闪能，在勘域模式中此效果180秒内最多触发一次;\n生命值大于25%时，可以点按 <IconMap:Icon_Special> 消耗生命值发动<color=#FFFFFF>[特殊技：动力压制]</color>，且接战状态下，每次发动该招式时，自身暴击伤害提升<color=#2BAD00>45%</color>，持续45秒，重复触发刷新持续时间；生命值小于或等于25%时，受到的伤害减少50%；\n星徽·比利攻击命中敌人时，会获得<color=#FFFFFF>[决意]</color>，回复量根据招式变化，<color=#FFFFFF>[决意]</color>上限为120点，处于接战状态下，会缓慢回复<color=#FFFFFF>[决意]</color>；<color=#FFFFFF>[强化特殊技：孤轮特技]</color>命中时、发动<color=#FFFFFF>[连携技：骑士漫步]</color>时或触发格挡时，额外回复<color=#FFFFFF>[决意]</color>；任意方式触发<color=#FFFFFF>[极限闪避]</color>时，回复3点<color=#FFFFFF>[决意]</color>，此效果0.5秒内最多触发一次；\n当<color=#FFFFFF>[决意]</color>大于等于100点时，长按 <IconMap:Icon_Normal> 会消耗100点<color=#FFFFFF>[决意]</color>发动<color=#FFFFFF>[普通攻击：最高马力星光]</color>；\n<color=#FFFFFF>[普通攻击：骑士斗技]</color>命中敌人时，回复少量生命值；通过<color=#FFFFFF>[极限闪避]</color>发动<color=#FFFFFF>[闪避反击：决斗之王]</color>命中敌人时，回复生命值；发动<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>或<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>时，回复生命值。\n",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[防护]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n<color=#FFFFFF>[强化特殊技：孤轮特技]</color>、<color=#FFFFFF>[普通攻击：骑士斗技]</color>第四段、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>命中敌人时获得一层<color=#FFFFFF>[星辉]</color>，同一招式至多获得一层，持续45秒，至多叠加2层，每层<color=#FFFFFF>[星辉]</color>会使<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的伤害提升20%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：骑士决心", "额外能力：炽热星辉"],
+        "potential": []
+      },
+      "1531050": {
+        "desc": [
+          "星徽·比利会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；发动招式造成的<color=#F0D12B>物理伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n星徽·比利进入战场时即可回复60点闪能，在勘域模式中此效果180秒内最多触发一次;\n生命值大于25%时，可以点按 <IconMap:Icon_Special> 消耗生命值发动<color=#FFFFFF>[特殊技：动力压制]</color>，且接战状态下，每次发动该招式时，自身暴击伤害提升<color=#2BAD00>53%</color>，持续45秒，重复触发刷新持续时间；生命值小于或等于25%时，受到的伤害减少50%；\n星徽·比利攻击命中敌人时，会获得<color=#FFFFFF>[决意]</color>，回复量根据招式变化，<color=#FFFFFF>[决意]</color>上限为120点，处于接战状态下，会缓慢回复<color=#FFFFFF>[决意]</color>；<color=#FFFFFF>[强化特殊技：孤轮特技]</color>命中时、发动<color=#FFFFFF>[连携技：骑士漫步]</color>时或触发格挡时，额外回复<color=#FFFFFF>[决意]</color>；任意方式触发<color=#FFFFFF>[极限闪避]</color>时，回复3点<color=#FFFFFF>[决意]</color>，此效果0.5秒内最多触发一次；\n当<color=#FFFFFF>[决意]</color>大于等于100点时，长按 <IconMap:Icon_Normal> 会消耗100点<color=#FFFFFF>[决意]</color>发动<color=#FFFFFF>[普通攻击：最高马力星光]</color>；\n<color=#FFFFFF>[普通攻击：骑士斗技]</color>命中敌人时，回复少量生命值；通过<color=#FFFFFF>[极限闪避]</color>发动<color=#FFFFFF>[闪避反击：决斗之王]</color>命中敌人时，回复生命值；发动<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>或<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>时，回复生命值。\n",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[防护]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n<color=#FFFFFF>[强化特殊技：孤轮特技]</color>、<color=#FFFFFF>[普通攻击：骑士斗技]</color>第四段、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>命中敌人时获得一层<color=#FFFFFF>[星辉]</color>，同一招式至多获得一层，持续45秒，至多叠加2层，每层<color=#FFFFFF>[星辉]</color>会使<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的伤害提升20%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：骑士决心", "额外能力：炽热星辉"],
+        "potential": []
+      },
+      "1531051": {
+        "desc": [
+          "星徽·比利会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；发动招式造成的<color=#F0D12B>物理伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n星徽·比利进入战场时即可回复60点闪能，在勘域模式中此效果180秒内最多触发一次;\n生命值大于25%时，可以点按 <IconMap:Icon_Special> 消耗生命值发动<color=#FFFFFF>[特殊技：动力压制]</color>，且接战状态下，每次发动该招式时，自身暴击伤害提升<color=#2BAD00>60%</color>，持续45秒，重复触发刷新持续时间；生命值小于或等于25%时，受到的伤害减少50%；\n星徽·比利攻击命中敌人时，会获得<color=#FFFFFF>[决意]</color>，回复量根据招式变化，<color=#FFFFFF>[决意]</color>上限为120点，处于接战状态下，会缓慢回复<color=#FFFFFF>[决意]</color>；<color=#FFFFFF>[强化特殊技：孤轮特技]</color>命中时、发动<color=#FFFFFF>[连携技：骑士漫步]</color>时或触发格挡时，额外回复<color=#FFFFFF>[决意]</color>；任意方式触发<color=#FFFFFF>[极限闪避]</color>时，回复3点<color=#FFFFFF>[决意]</color>，此效果0.5秒内最多触发一次；\n当<color=#FFFFFF>[决意]</color>大于等于100点时，长按 <IconMap:Icon_Normal> 会消耗100点<color=#FFFFFF>[决意]</color>发动<color=#FFFFFF>[普通攻击：最高马力星光]</color>；\n<color=#FFFFFF>[普通攻击：骑士斗技]</color>命中敌人时，回复少量生命值；通过<color=#FFFFFF>[极限闪避]</color>发动<color=#FFFFFF>[闪避反击：决斗之王]</color>命中敌人时，回复生命值；发动<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>或<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>时，回复生命值。\n",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[防护]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n<color=#FFFFFF>[强化特殊技：孤轮特技]</color>、<color=#FFFFFF>[普通攻击：骑士斗技]</color>第四段、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>命中敌人时获得一层<color=#FFFFFF>[星辉]</color>，同一招式至多获得一层，持续45秒，至多叠加2层，每层<color=#FFFFFF>[星辉]</color>会使<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的伤害提升20%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：骑士决心", "额外能力：炽热星辉"],
+        "potential": []
+      },
+      "1531052": {
+        "desc": [
+          "星徽·比利会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；发动招式造成的<color=#F0D12B>物理伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n星徽·比利进入战场时即可回复60点闪能，在勘域模式中此效果180秒内最多触发一次;\n生命值大于25%时，可以点按 <IconMap:Icon_Special> 消耗生命值发动<color=#FFFFFF>[特殊技：动力压制]</color>，且接战状态下，每次发动该招式时，自身暴击伤害提升<color=#2BAD00>68%</color>，持续45秒，重复触发刷新持续时间；生命值小于或等于25%时，受到的伤害减少50%；\n星徽·比利攻击命中敌人时，会获得<color=#FFFFFF>[决意]</color>，回复量根据招式变化，<color=#FFFFFF>[决意]</color>上限为120点，处于接战状态下，会缓慢回复<color=#FFFFFF>[决意]</color>；<color=#FFFFFF>[强化特殊技：孤轮特技]</color>命中时、发动<color=#FFFFFF>[连携技：骑士漫步]</color>时或触发格挡时，额外回复<color=#FFFFFF>[决意]</color>；任意方式触发<color=#FFFFFF>[极限闪避]</color>时，回复3点<color=#FFFFFF>[决意]</color>，此效果0.5秒内最多触发一次；\n当<color=#FFFFFF>[决意]</color>大于等于100点时，长按 <IconMap:Icon_Normal> 会消耗100点<color=#FFFFFF>[决意]</color>发动<color=#FFFFFF>[普通攻击：最高马力星光]</color>；\n<color=#FFFFFF>[普通攻击：骑士斗技]</color>命中敌人时，回复少量生命值；通过<color=#FFFFFF>[极限闪避]</color>发动<color=#FFFFFF>[闪避反击：决斗之王]</color>命中敌人时，回复生命值；发动<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>或<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>时，回复生命值。\n",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[防护]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n<color=#FFFFFF>[强化特殊技：孤轮特技]</color>、<color=#FFFFFF>[普通攻击：骑士斗技]</color>第四段、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>命中敌人时获得一层<color=#FFFFFF>[星辉]</color>，同一招式至多获得一层，持续45秒，至多叠加2层，每层<color=#FFFFFF>[星辉]</color>会使<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的伤害提升20%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：骑士决心", "额外能力：炽热星辉"],
+        "potential": []
+      },
+      "1531053": {
+        "desc": [
+          "星徽·比利会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；发动招式造成的<color=#F0D12B>物理伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n星徽·比利进入战场时即可回复60点闪能，在勘域模式中此效果180秒内最多触发一次;\n生命值大于25%时，可以点按 <IconMap:Icon_Special> 消耗生命值发动<color=#FFFFFF>[特殊技：动力压制]</color>，且接战状态下，每次发动该招式时，自身暴击伤害提升<color=#2BAD00>75%</color>，持续45秒，重复触发刷新持续时间；生命值小于或等于25%时，受到的伤害减少50%；\n星徽·比利攻击命中敌人时，会获得<color=#FFFFFF>[决意]</color>，回复量根据招式变化，<color=#FFFFFF>[决意]</color>上限为120点，处于接战状态下，会缓慢回复<color=#FFFFFF>[决意]</color>；<color=#FFFFFF>[强化特殊技：孤轮特技]</color>命中时、发动<color=#FFFFFF>[连携技：骑士漫步]</color>时或触发格挡时，额外回复<color=#FFFFFF>[决意]</color>；任意方式触发<color=#FFFFFF>[极限闪避]</color>时，回复3点<color=#FFFFFF>[决意]</color>，此效果0.5秒内最多触发一次；\n当<color=#FFFFFF>[决意]</color>大于等于100点时，长按 <IconMap:Icon_Normal> 会消耗100点<color=#FFFFFF>[决意]</color>发动<color=#FFFFFF>[普通攻击：最高马力星光]</color>；\n<color=#FFFFFF>[普通攻击：骑士斗技]</color>命中敌人时，回复少量生命值；通过<color=#FFFFFF>[极限闪避]</color>发动<color=#FFFFFF>[闪避反击：决斗之王]</color>命中敌人时，回复生命值；发动<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>或<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>时，回复生命值。\n",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[防护]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n<color=#FFFFFF>[强化特殊技：孤轮特技]</color>、<color=#FFFFFF>[普通攻击：骑士斗技]</color>第四段、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>命中敌人时获得一层<color=#FFFFFF>[星辉]</color>，同一招式至多获得一层，持续45秒，至多叠加2层，每层<color=#FFFFFF>[星辉]</color>会使<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的伤害提升20%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：骑士决心", "额外能力：炽热星辉"],
+        "potential": []
+      },
+      "1531054": {
+        "desc": [
+          "星徽·比利会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；发动招式造成的<color=#F0D12B>物理伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n星徽·比利进入战场时即可回复60点闪能，在勘域模式中此效果180秒内最多触发一次;\n生命值大于25%时，可以点按 <IconMap:Icon_Special> 消耗生命值发动<color=#FFFFFF>[特殊技：动力压制]</color>，且接战状态下，每次发动该招式时，自身暴击伤害提升<color=#2BAD00>83%</color>，持续45秒，重复触发刷新持续时间；生命值小于或等于25%时，受到的伤害减少50%；\n星徽·比利攻击命中敌人时，会获得<color=#FFFFFF>[决意]</color>，回复量根据招式变化，<color=#FFFFFF>[决意]</color>上限为120点，处于接战状态下，会缓慢回复<color=#FFFFFF>[决意]</color>；<color=#FFFFFF>[强化特殊技：孤轮特技]</color>命中时、发动<color=#FFFFFF>[连携技：骑士漫步]</color>时或触发格挡时，额外回复<color=#FFFFFF>[决意]</color>；任意方式触发<color=#FFFFFF>[极限闪避]</color>时，回复3点<color=#FFFFFF>[决意]</color>，此效果0.5秒内最多触发一次；\n当<color=#FFFFFF>[决意]</color>大于等于100点时，长按 <IconMap:Icon_Normal> 会消耗100点<color=#FFFFFF>[决意]</color>发动<color=#FFFFFF>[普通攻击：最高马力星光]</color>；\n<color=#FFFFFF>[普通攻击：骑士斗技]</color>命中敌人时，回复少量生命值；通过<color=#FFFFFF>[极限闪避]</color>发动<color=#FFFFFF>[闪避反击：决斗之王]</color>命中敌人时，回复生命值；发动<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>或<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>时，回复生命值。\n",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[防护]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n<color=#FFFFFF>[强化特殊技：孤轮特技]</color>、<color=#FFFFFF>[普通攻击：骑士斗技]</color>第四段、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>命中敌人时获得一层<color=#FFFFFF>[星辉]</color>，同一招式至多获得一层，持续45秒，至多叠加2层，每层<color=#FFFFFF>[星辉]</color>会使<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的伤害提升20%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：骑士决心", "额外能力：炽热星辉"],
+        "potential": []
+      },
+      "1531055": {
+        "desc": [
+          "星徽·比利会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；发动招式造成的<color=#F0D12B>物理伤害</color>均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n星徽·比利进入战场时即可回复60点闪能，在勘域模式中此效果180秒内最多触发一次;\n生命值大于25%时，可以点按 <IconMap:Icon_Special> 消耗生命值发动<color=#FFFFFF>[特殊技：动力压制]</color>，且接战状态下，每次发动该招式时，自身暴击伤害提升<color=#2BAD00>90%</color>，持续45秒，重复触发刷新持续时间；生命值小于或等于25%时，受到的伤害减少50%；\n星徽·比利攻击命中敌人时，会获得<color=#FFFFFF>[决意]</color>，回复量根据招式变化，<color=#FFFFFF>[决意]</color>上限为120点，处于接战状态下，会缓慢回复<color=#FFFFFF>[决意]</color>；<color=#FFFFFF>[强化特殊技：孤轮特技]</color>命中时、发动<color=#FFFFFF>[连携技：骑士漫步]</color>时或触发格挡时，额外回复<color=#FFFFFF>[决意]</color>；任意方式触发<color=#FFFFFF>[极限闪避]</color>时，回复3点<color=#FFFFFF>[决意]</color>，此效果0.5秒内最多触发一次；\n当<color=#FFFFFF>[决意]</color>大于等于100点时，长按 <IconMap:Icon_Normal> 会消耗100点<color=#FFFFFF>[决意]</color>发动<color=#FFFFFF>[普通攻击：最高马力星光]</color>；\n<color=#FFFFFF>[普通攻击：骑士斗技]</color>命中敌人时，回复少量生命值；通过<color=#FFFFFF>[极限闪避]</color>发动<color=#FFFFFF>[闪避反击：决斗之王]</color>命中敌人时，回复生命值；发动<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>或<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>时，回复生命值。\n",
+          "队伍中存在<color=#FFFFFF>[击破]</color>或<color=#FFFFFF>[防护]</color>或<color=#FFFFFF>[支援]</color>角色时触发：\n<color=#FFFFFF>[强化特殊技：孤轮特技]</color>、<color=#FFFFFF>[普通攻击：骑士斗技]</color>第四段、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>命中敌人时获得一层<color=#FFFFFF>[星辉]</color>，同一招式至多获得一层，持续45秒，至多叠加2层，每层<color=#FFFFFF>[星辉]</color>会使<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>、<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的伤害提升20%。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：骑士决心", "额外能力：炽热星辉"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n向前使用手炮轰击，造成<color=#F0D12B>物理伤害</color>；\n生命值大于25%时，发动该招式改为发动<color=#FFFFFF>[特殊技：动力压制]</color>，该效果每5秒至多生效1次；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：星徽-羁绊之力",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：英雄登台",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对目标发动踢车攻击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：反派退场",
+          "potential": []
+        },
+        {
+          "name": "快速支援：星徽-羁绊之力",
+          "param": [
+            {
+              "desc": "{Skill:1531017, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531017": {
+                  "attackData": [17674],
+                  "attributeInfliction": 4418,
+                  "damagePercentage": 9200,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 4419,
+                  "feverRecovery": 121550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 9200,
+                  "rpRecovery": 8840,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4870,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531017": {
+                  "attackData": [17674],
+                  "attributeInfliction": 4418,
+                  "damagePercentage": 9200,
+                  "damagePercentageGrowth": 840,
+                  "etherPurify": 4419,
+                  "feverRecovery": 121550,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4870,
+                  "rpRecovery": 8840,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4870,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：英雄登台",
+          "param": [
+            {
+              "desc": "{Skill:1531018, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1531018": {
+                  "attackData": [26654],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531019, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1531019": {
+                  "attackData": [46654],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531020, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1531020": {
+                  "attackData": [46654],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：反派退场",
+          "param": [
+            {
+              "desc": "{Skill:1531021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531021": {
+                  "attackData": [31321],
+                  "attributeInfliction": 20292,
+                  "damagePercentage": 22960,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 7831,
+                  "feverRecovery": 705100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2090,
+                  "main": 22960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20370,
+                  "stunRatioGrowth": 930
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531021": {
+                  "attackData": [31321],
+                  "attributeInfliction": 20292,
+                  "damagePercentage": 22960,
+                  "damagePercentageGrowth": 2090,
+                  "etherPurify": 7831,
+                  "feverRecovery": 705100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 930,
+                  "main": 20370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 20370,
+                  "stunRatioGrowth": 930
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多四段的攻击，造成<color=#F0D12B>物理伤害</color>；\n第四段攻击发动时，点按 <IconMap:Icon_Special> 发动<color=#FFFFFF>[特殊技：动力压制]</color>消耗生命值减少50%；\n招式命中敌人时，少量回复生命值。",
+          "name": "普通攻击：骑士斗技",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[决意]</color>足够时，长按 <IconMap:Icon_Normal> 发动：\n对前方发动摩托突击，突击结束后打出激光束，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "普通攻击：最高马力星光",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：骑士斗技",
+          "param": [
+            {
+              "desc": "{Skill:1531001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1531001": {
+                  "attackData": [19320, 203],
+                  "attributeInfliction": 3622,
+                  "damagePercentage": 5030,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 3623,
+                  "feverRecovery": 99825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 5030,
+                  "rpRecovery": 7250,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3990,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1531002": {
+                  "attackData": [22000, 231],
+                  "attributeInfliction": 5157,
+                  "damagePercentage": 6800,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 5158,
+                  "feverRecovery": 141900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 6800,
+                  "rpRecovery": 10320,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5680,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1531003": {
+                  "attackData": [14000, 147],
+                  "attributeInfliction": 4357,
+                  "damagePercentage": 5450,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 4358,
+                  "feverRecovery": 119900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 5450,
+                  "rpRecovery": 8720,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4800,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1531004": {
+                  "attackData": [56680, 596],
+                  "attributeInfliction": 14861,
+                  "damagePercentage": 20600,
+                  "damagePercentageGrowth": 1880,
+                  "etherPurify": 14862,
+                  "feverRecovery": 408925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1880,
+                  "main": 20600,
+                  "rpRecovery": 29730,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16350,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1531001": {
+                  "attackData": [19320, 203],
+                  "attributeInfliction": 3622,
+                  "damagePercentage": 5030,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 3623,
+                  "feverRecovery": 99825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 3990,
+                  "rpRecovery": 7250,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3990,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1531002": {
+                  "attackData": [22000, 231],
+                  "attributeInfliction": 5157,
+                  "damagePercentage": 6800,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 5158,
+                  "feverRecovery": 141900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5680,
+                  "rpRecovery": 10320,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5680,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1531003": {
+                  "attackData": [14000, 147],
+                  "attributeInfliction": 4357,
+                  "damagePercentage": 5450,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 4358,
+                  "feverRecovery": 119900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 220,
+                  "main": 4800,
+                  "rpRecovery": 8720,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4800,
+                  "stunRatioGrowth": 220
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1531004": {
+                  "attackData": [56680, 596],
+                  "attributeInfliction": 14861,
+                  "damagePercentage": 20600,
+                  "damagePercentageGrowth": 1880,
+                  "etherPurify": 14862,
+                  "feverRecovery": 408925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 750,
+                  "main": 16350,
+                  "rpRecovery": 29730,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16350,
+                  "stunRatioGrowth": 750
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：最高马力星光",
+          "param": [
+            {
+              "desc": "{Skill:1531010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531010": {
+                  "attackData": [0],
+                  "attributeInfliction": 31003,
+                  "damagePercentage": 104320,
+                  "damagePercentageGrowth": 9490,
+                  "etherPurify": 31004,
+                  "feverRecovery": 852775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9490,
+                  "main": 104320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34110,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531010": {
+                  "attackData": [0],
+                  "attributeInfliction": 31003,
+                  "damagePercentage": 104320,
+                  "damagePercentageGrowth": 9490,
+                  "etherPurify": 31004,
+                  "feverRecovery": 852775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34110,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34110,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "100点",
+              "name": "[决意]消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n向前方进行多段攻击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动时，回复15点<color=#FFFFFF>[决意]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：骑士漫步",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n跃至空中朝目标进行飞踢攻击，造成大量<color=#F0D12B>物理伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：骑士飞踢",
+          "potential": []
+        },
+        {
+          "name": "连携技：骑士漫步",
+          "param": [
+            {
+              "desc": "{Skill:1531015, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531015": {
+                  "attackData": [45334],
+                  "attributeInfliction": 43783,
+                  "damagePercentage": 66290,
+                  "damagePercentageGrowth": 6030,
+                  "etherPurify": 23834,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6030,
+                  "main": 66290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26220,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531015, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531015": {
+                  "attackData": [45334],
+                  "attributeInfliction": 43783,
+                  "damagePercentage": 66290,
+                  "damagePercentageGrowth": 6030,
+                  "etherPurify": 23834,
+                  "feverRecovery": 2484350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1200,
+                  "main": 26220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 26220,
+                  "stunRatioGrowth": 1200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：骑士飞踢",
+          "param": [
+            {
+              "desc": "{Skill:1531016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531016": {
+                  "attackData": [63320],
+                  "attributeInfliction": 40829,
+                  "damagePercentage": 159210,
+                  "damagePercentageGrowth": 14480,
+                  "etherPurify": 90830,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14480,
+                  "main": 159210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44920,
+                  "stunRatioGrowth": 2050
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531016": {
+                  "attackData": [63320],
+                  "attributeInfliction": 40829,
+                  "damagePercentage": 159210,
+                  "damagePercentageGrowth": 14480,
+                  "etherPurify": 90830,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2050,
+                  "main": 44920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 44920,
+                  "stunRatioGrowth": 2050
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：真惊险！",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[特殊技：动力压制]</color>期间拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}或长按 <IconMap:Icon_Evade> 发动：\n控制摩托车漂移，短时间内可以触发<color=#FFFFFF>[极限闪避]</color>；\n若成功触发<color=#FFFFFF>[极限闪避]</color>，则会立即衔接<color=#FFFFFF>[闪避反击：尾焰全旋]</color>；\n招式发动期间，保持拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}或长按 <IconMap:Icon_Evade> 会持续漂移；\n招式发动期间，会继续<color=#FFFFFF>[特殊技：动力压制]</color>的计时，达到最大时长时，自动衔接<color=#FFFFFF>[强化特殊技：孤轮特技]</color>；\n提前中断招式时，自动衔接<color=#FFFFFF>[特殊技：脱缰]</color>；\n招式发动期间抗打断等级提升且拥有短暂无敌效果。",
+          "name": "闪避：银河横行",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前进行快速斩击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "冲刺攻击：星-徽-惩-戒",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n向前使用手炮轰击，造成<color=#F0D12B>物理伤害</color>；\n若通过<color=#FFFFFF>[极限闪避]</color>发动该招式，则该招式命中敌人时，回复自身10%生命值上限的生命值，并可以衔接第四段<color=#FFFFFF>[普通攻击：骑士斗技]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：决斗之王",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[闪避：银河横行]</color>期间触发<color=#FFFFFF>[极限闪避]</color>时自动发动：\n旋转摩托对周围敌人造成<color=#F0D12B>物理伤害</color>；\n招式发动后，自动衔接<color=#FFFFFF>[强化特殊技：孤轮特技]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：尾焰全旋",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：星-徽-惩-戒",
+          "param": [
+            {
+              "desc": "{Skill:1531012, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531012": {
+                  "attackData": [8660],
+                  "attributeInfliction": 2164,
+                  "damagePercentage": 4510,
+                  "damagePercentageGrowth": 410,
+                  "etherPurify": 2165,
+                  "feverRecovery": 59675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 4510,
+                  "rpRecovery": 4330,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2390,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531012, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531012": {
+                  "attackData": [8660],
+                  "attributeInfliction": 2164,
+                  "damagePercentage": 4510,
+                  "damagePercentageGrowth": 410,
+                  "etherPurify": 2165,
+                  "feverRecovery": 59675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 110,
+                  "main": 2390,
+                  "rpRecovery": 4330,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2390,
+                  "stunRatioGrowth": 110
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：决斗之王",
+          "param": [
+            {
+              "desc": "{Skill:1531013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531013": {
+                  "attackData": [35347],
+                  "attributeInfliction": 8836,
+                  "damagePercentage": 11950,
+                  "damagePercentageGrowth": 1090,
+                  "etherPurify": 8837,
+                  "feverRecovery": 243100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1090,
+                  "main": 11950,
+                  "rpRecovery": 17680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9730,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531013": {
+                  "attackData": [35347],
+                  "attributeInfliction": 8836,
+                  "damagePercentage": 11950,
+                  "damagePercentageGrowth": 1090,
+                  "etherPurify": 8837,
+                  "feverRecovery": 243100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 9730,
+                  "rpRecovery": 17680,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9730,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：尾焰全旋",
+          "param": [
+            {
+              "desc": "{Skill:1531014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531014": {
+                  "attackData": [28000],
+                  "attributeInfliction": 6999,
+                  "damagePercentage": 19870,
+                  "damagePercentageGrowth": 1810,
+                  "etherPurify": 22000,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1810,
+                  "main": 19870,
+                  "rpRecovery": 14000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531014": {
+                  "attackData": [28000],
+                  "attributeInfliction": 6999,
+                  "damagePercentage": 19870,
+                  "damagePercentageGrowth": 1810,
+                  "etherPurify": 22000,
+                  "feverRecovery": 192500,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 18700,
+                  "rpRecovery": 14000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "自身生命值大于25%时，点按 <IconMap:Icon_Special> 发动：\n消耗等同于自身16%生命值上限的生命值，召出摩托快速撞向敌人，持续造成<color=#F0D12B>物理伤害</color>；\n招式发动短时间内，若为当前操作中的角色时受到敌人攻击，则会触发格挡，免疫该次攻击，并回复5点<color=#FFFFFF>[决意]</color>；\n触发格挡后，立即衔接<color=#FFFFFF>[强化特殊技：孤轮特技]</color>；\n招式持续攻击一段时间后会自动衔接<color=#FFFFFF>[强化特殊技：孤轮特技]</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：动力压制",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[闪避：银河横行]</color>中断时自动发动：\n将摩托车踢向敌人，造成<color=#F0D12B>物理伤害</color>；\n招式发动后，可以衔接<color=#FFFFFF>[闪避反击：决斗之王]</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：脱缰",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[特殊技：动力压制]</color>达到最大攻击时长或触发格挡时自动发动：\n将摩托车抬起攻击敌人，造成<color=#F0D12B>物理伤害</color>；\n招式命中敌人后，额外回复8点<color=#FFFFFF>[决意]</color>；\n招式发动后，若闪能足够，点按或长按 <IconMap:Icon_SpecialReady_Rp> 可以衔接<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>；\n招式动作结束后，自动衔接<color=#FFFFFF>[特殊技：脱缰]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：孤轮特技",
+          "potential": []
+        },
+        {
+          "desc": "闪能足够时，长按 <IconMap:Icon_SpecialReady_Rp> 发动：\n使用摩托下砸，造成<color=#F0D12B>物理伤害</color>；\n招式发动时，回复自身30%生命值上限的生命值；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：抓地轮毂",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[强化特殊技：孤轮特技]</color>后，且闪能足够时，点按或长按 <IconMap:Icon_SpecialReady_Rp> 发动：\n使用摩托和手炮进行混合攻击，造成<color=#F0D12B>物理伤害</color>；\n招式发动时，回复自身15%生命值上限的生命值；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：摇曳步伐",
+          "potential": []
+        },
+        {
+          "name": "特殊技：动力压制",
+          "param": [
+            {
+              "desc": "{Skill:1531006, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531006": {
+                  "attackData": [40000],
+                  "attributeInfliction": 4000,
+                  "damagePercentage": 5200,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 2000,
+                  "feverRecovery": 110000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5200,
+                  "rpRecovery": 8000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531006, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531006": {
+                  "attackData": [40000],
+                  "attributeInfliction": 4000,
+                  "damagePercentage": 5200,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 2000,
+                  "feverRecovery": 110000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 11000,
+                  "rpRecovery": 8000,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 11000,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：脱缰",
+          "param": [
+            {
+              "desc": "{Skill:1531007, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531007": {
+                  "attackData": [21321],
+                  "attributeInfliction": 5330,
+                  "damagePercentage": 7210,
+                  "damagePercentageGrowth": 660,
+                  "etherPurify": 5331,
+                  "feverRecovery": 146850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 660,
+                  "main": 7210,
+                  "rpRecovery": 10670,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5870,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531007, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531007": {
+                  "attackData": [21321],
+                  "attributeInfliction": 5330,
+                  "damagePercentage": 7210,
+                  "damagePercentageGrowth": 660,
+                  "etherPurify": 5331,
+                  "feverRecovery": 146850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 270,
+                  "main": 5870,
+                  "rpRecovery": 10670,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5870,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：孤轮特技",
+          "param": [
+            {
+              "desc": "{Skill:1531008, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531008": {
+                  "attackData": [20654],
+                  "attributeInfliction": 18663,
+                  "damagePercentage": 38970,
+                  "damagePercentageGrowth": 3550,
+                  "etherPurify": 15664,
+                  "feverRecovery": 513425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3550,
+                  "main": 38970,
+                  "rpRecovery": 37330,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13930,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531008, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531008": {
+                  "attackData": [20654],
+                  "attributeInfliction": 18663,
+                  "damagePercentage": 38970,
+                  "damagePercentageGrowth": 3550,
+                  "etherPurify": 15664,
+                  "feverRecovery": 513425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 13930,
+                  "rpRecovery": 37330,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13930,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：抓地轮毂",
+          "param": [
+            {
+              "desc": "{Skill:1531009, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531009": {
+                  "attackData": [84014],
+                  "attributeInfliction": 80854,
+                  "damagePercentage": 92990,
+                  "damagePercentageGrowth": 8460,
+                  "etherPurify": 21004,
+                  "feverRecovery": 2929025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 8460,
+                  "main": 92990,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 79540,
+                  "stunRatioGrowth": 3620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531009, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531009": {
+                  "attackData": [84014],
+                  "attributeInfliction": 80854,
+                  "damagePercentage": 92990,
+                  "damagePercentageGrowth": 8460,
+                  "etherPurify": 21004,
+                  "feverRecovery": 2929025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3620,
+                  "main": 79540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 79540,
+                  "stunRatioGrowth": 3620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：摇曳步伐",
+          "param": [
+            {
+              "desc": "{Skill:1531011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1531011": {
+                  "attackData": [92014],
+                  "attributeInfliction": 83554,
+                  "damagePercentage": 95900,
+                  "damagePercentageGrowth": 8720,
+                  "etherPurify": 23004,
+                  "feverRecovery": 3011525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 8720,
+                  "main": 95900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 82400,
+                  "stunRatioGrowth": 3750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1531011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1531011": {
+                  "attackData": [92014],
+                  "attributeInfliction": 83554,
+                  "damagePercentage": 95900,
+                  "damagePercentageGrowth": 8720,
+                  "etherPurify": 23004,
+                  "feverRecovery": 3011525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3750,
+                  "main": 82400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 82400,
+                  "stunRatioGrowth": 3750
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "闪能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1531001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：骑士斗技"
+    },
+    "1531002": {
+      "desc": "<IconMap:Icon_Normal>（长按，[决意]足够时）",
+      "name": "普通攻击：最高马力星光"
+    },
+    "1531003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：动力压制"
+    },
+    "1531004": {
+      "desc": "（强化特殊技：孤轮特技结束后自动发动）",
+      "name": "特殊技：脱缰"
+    },
+    "1531005": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp> （长按）",
+      "name": "强化特殊技：抓地轮毂"
+    },
+    "1531006": {
+      "desc": "<IconMap:Icon_SpecialReady_Rp> （点按或长按）（强化特殊技：孤轮特技发动后）",
+      "name": "强化特殊技：摇曳步伐"
+    },
+    "1531007": {
+      "desc": "（特殊技：动力压制发动期间成功格挡时）或（特殊技：动力压制持续一段时间后自动发动）",
+      "name": "强化特殊技：孤轮特技"
+    },
+    "1531008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：星-徽-惩-戒"
+    },
+    "1531009": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：决斗之王"
+    },
+    "1531010": {
+      "desc": "<IconMap:Icon_Evade>（特殊技：动力压制发动期间）（极限闪避时自动发动）",
+      "name": "闪避反击：尾焰全旋"
+    },
+    "1531011": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：骑士漫步"
+    },
+    "1531012": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：骑士飞踢"
+    },
+    "1531013": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：星徽-羁绊之力"
+    },
+    "1531014": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：英雄登台"
+    },
+    "1531015": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：反派退场"
+    }
+  },
+  "skin": {
+    "3115310": {
+      "desc": "始终相信希望的人，最后也会成为别人的希望。",
+      "name": "星徽·比利·星徽武装"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，站场输出",
+    "摩托形态持续消耗生命获得伤害加成",
+    "拥有多种回复生命手段"
+  ],
+  "talent": {
+    "1": {
+      "desc": "<color=#FFFFFF>[核心被动：骑士决心]</color>进入战场时，额外回复60点闪能；<color=#FFFFFF>[强化特殊技]</color>命中敌人时，使自身攻击造成的伤害无视目标18%<color=#F0D12B>物理伤害抗性</color>，持续45秒，重复触发时刷新持续时间。",
+      "desc2": "新艾利都的坏蛋就像特摄片里的一样多，而真正的英雄却没有几个。\n「虽然我很会喊英雄的台词，不过我可能还算不上英雄…」\n「但我会学着英雄的样子，站在大家的身前！」",
+      "name": "英雄登场"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>[普通攻击：最高马力星光]</color>、<color=#FFFFFF>[强化特殊技：孤轮特技]</color>和<color=#FFFFFF>[终结技：骑士飞踢]</color>造成的伤害提升50%；发动<color=#FFFFFF>[强化特殊技：摇曳步伐]</color>、<color=#FFFFFF>[强化特殊技：抓地轮毂]</color>时或发动<color=#FFFFFF>[特殊技：动力压制]</color>命中处于失衡状态下的敌人时，获得<color=#FFFFFF>[涡轮增压]</color>效果：<color=#FFFFFF>[特殊技：动力压制]</color>会消耗该效果直接衔接<color=#FFFFFF>[强化特殊技：孤轮特技]</color>，并使该次<color=#FFFFFF>[强化特殊技：孤轮特技]</color>造成的暴击伤害提升50%，<color=#FFFFFF>[涡轮增压]</color>效果至多叠加1层。",
+      "desc2": "外环的神射手数不胜数，但在高速奔驰的机车上还能保持准头，才能成为真正的王牌。\n「弹道算法和机械指头？那些当然很有用…」\n「但我射术神准的真正原因是…星光选中了我！」",
+      "name": "荒原机兵"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "星徽骑士的精神到底是什么？永不退缩，锄强扶弱？牺牲、公正、怜悯、荣誉？\n「认为正确的事情，就去做…」\n「认为是不帅气的事情，就绝不能妥协！」\n「这就是我绝不放弃同伴的理由！」",
+      "name": "骑士精神"
+    },
+    "4": {
+      "desc": "接战状态下，每次发动<color=#FFFFFF>[特殊技：动力压制]</color>时，自身暴击伤害提升8%，至多叠加2层，持续45秒，重复触发时刷新持续时间；若生命值低于35%，且自身非当前操作中的角色时，会持续回复生命值至35%。",
+      "desc2": "理想的秩序为维护公义而生，然而理想生来就是为了被背弃。\n「你说这些片子是小孩子才看的…？」\n「有些最有勇气的梦想，本来只有小孩子才敢做吧？」\n「这些被嘲笑的梦想，就由我——星徽·比利来守护！」",
+      "name": "审判底火"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "身披华丽的衣装才能成为威风的英雄…所以说英雄还真是不方便的东西。\n「我可不是因为加大口径的武器和加大功率的部件才变强的！」\n「我真正的武装，是漫天的星光！」",
+      "name": "辉光武装"
+    },
+    "6": {
+      "desc": "<color=#FFFFFF>[终结技：骑士飞踢]</color>和<color=#FFFFFF>[普通攻击：最高马力星光]</color>造成的贯穿伤害提升18%；第四段<color=#FFFFFF>[普通攻击：骑士斗技]</color>、<color=#FFFFFF>[强化特殊技：孤轮特技]</color>或<color=#FFFFFF>[连携技：骑士漫步]</color>命中敌人后，可以获得1层<color=#FFFFFF>[煊赫星辉]</color>，最多获得6层，同一招式内至多获得1层；发动<color=#FFFFFF>[终结技：骑士飞踢]</color>或<color=#FFFFFF>[普通攻击：最高马力星光]</color>时，至多消耗2层<color=#FFFFFF>[煊赫星辉]</color>，每消耗1层<color=#FFFFFF>[煊赫星辉]</color>，使该招式的最后一击额外造成100%贯穿力的<color=#F0D12B>物理伤害</color>。",
+      "desc2": "永远相信希望的人，最后也成为了别人的希望。\n这就是关于星徽骑士，关于比利·奇德的故事。\n「星徽骑士——变身！」",
+      "name": "星徽骑士"
+    }
+  },
+  "weaponType": {
+    "6": "命破"
+  }
+}

@@ -28,6 +28,7 @@ import {
 } from "../nanoka/policy.ts"
 import type { SourcePolicy } from "../nanoka/policy.ts"
 import { directoryRoot, parseBytes, readBytes, sha256 } from "./files.ts"
+import { formatGeneratedJson } from "./format.ts"
 import {
   outputExpansionLimit,
   verifyAgentFile,
@@ -51,7 +52,7 @@ export interface BuildNanokaAgentsOptions {
 export interface NanokaAgentBuildResult {
   /** 本次独占的新目录，调用方可在使用完毕后整体移除。 */
   buildDirectory: string
-  /** 可用的 integrated/nanoka 完整制品目录。 */
+  /** 可用的 integrated 完整制品目录。 */
   artifactDirectory: string
   /** 独立维护报告路径，不参与实体文件集合或总索引。 */
   maintenanceReportPath: string
@@ -161,7 +162,7 @@ export async function buildNanokaAgents(
     join(temporaryParent, "fairy-nanoka-agents-"),
   )
   try {
-    const artifactDirectory = join(buildDirectory, "integrated", "nanoka")
+    const artifactDirectory = join(buildDirectory, "integrated")
     await mkdir(join(artifactDirectory, "agents"), { recursive: true })
     const agents: IntegratedIndex["agents"] = {}
     const maintenance: IntegratedAgent["maintenance"] = {
@@ -172,6 +173,48 @@ export async function buildNanokaAgents(
     let outputBytes = 0
     const maximumOutputBytes =
       policy.fetchLimits.maximumBytesPerRun * outputExpansionLimit
+    const pendingFiles: {
+      reference: ExportFileReference
+      id: string
+      locale: DetailLocale | "data"
+      serializedBytes: Uint8Array
+    }[] = []
+    async function finishAgentFiles() {
+      if (!pendingFiles.length) return
+      await formatGeneratedJson(
+        artifactDirectory,
+        pendingFiles.map(({ reference }) => reference.path),
+      )
+      for (const { reference, id, locale, serializedBytes } of pendingFiles) {
+        const maximumBytes = Math.min(
+          policy.requestPolicy.maximumResponseBytes * outputExpansionLimit,
+          maximumOutputBytes - outputBytes,
+        )
+        const bytes = await readBytes(
+          artifactDirectory,
+          reference.path,
+          maximumBytes,
+        )
+        const value = parseBytes(bytes, reference.path, {
+          entityId: id,
+          locale: locale === "data" ? "input" : locale,
+          pointer: "",
+        })
+        if (!Buffer.from(serializeJson(value)).equals(serializedBytes))
+          throw new Error(
+            `${reference.path}: 格式化后的 JSON 值与整合结果不一致`,
+          )
+        reference.sha256 = sha256(bytes)
+        outputBytes += await verifyAgentFile(
+          artifactDirectory,
+          reference,
+          id,
+          locale,
+          maximumBytes,
+        )
+      }
+      pendingFiles.length = 0
+    }
     async function writeAgentFile(
       value: unknown,
       id: string,
@@ -179,22 +222,11 @@ export async function buildNanokaAgents(
     ): Promise<ExportFileReference> {
       const path = `agents/${id}/${locale === "data" ? "data.json" : `details.${locale}.json`}`
       const bytes = serializeJson(value)
-      const maximumBytes = Math.min(
-        policy.requestPolicy.maximumResponseBytes * outputExpansionLimit,
-        maximumOutputBytes - outputBytes,
-      )
-      if (bytes.byteLength > maximumBytes)
-        throw new Error(`${path}: 输出字节数超过上限`)
       await writeFile(join(artifactDirectory, path), bytes, { flag: "wx" })
-      const reference = { path, sha256: sha256(bytes) }
-      await verifyAgentFile(
-        artifactDirectory,
-        reference,
-        id,
-        locale,
-        maximumBytes,
-      )
-      outputBytes += bytes.byteLength
+      const reference = { path, sha256: "" }
+      pendingFiles.push({ reference, id, locale, serializedBytes: bytes })
+      // 限制待核对字节与命令行参数数量；摘要仅在批量格式化完成后填写。
+      if (pendingFiles.length >= 64) await finishAgentFiles()
       outputFiles.push(path)
       return reference
     }
@@ -243,7 +275,8 @@ export async function buildNanokaAgents(
         ...result.maintenance.codeNameDifferences,
       )
     }
-    // 在声明完整之前，全部成员、语言与文件均已写出并复验，且集合与输入索引一致。
+    await finishAgentFiles()
+    // 在声明完整之前，全部成员、语言与文件均已格式化并复验，且集合与输入索引一致。
     await verifyFileSet(artifactDirectory, outputFiles)
     const index: IntegratedIndex = {
       format: "fairy-nanoka-integrated/v2",
@@ -257,12 +290,14 @@ export async function buildNanokaAgents(
       },
       agents,
     }
-    const indexBytes = serializeJson(index)
-    if (indexBytes.byteLength > maximumOutputBytes - outputBytes)
-      throw new Error("index.json: 输出字节数超过上限")
-    await writeFile(join(artifactDirectory, "index.json"), indexBytes, {
-      flag: "wx",
-    })
+    await writeFile(
+      join(artifactDirectory, "index.json"),
+      serializeJson(index),
+      {
+        flag: "wx",
+      },
+    )
+    await formatGeneratedJson(artifactDirectory, ["index.json"])
     const verifiedIndex = await verifyNanokaAgentArtifact({
       artifactDirectory,
       policy,

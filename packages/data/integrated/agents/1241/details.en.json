@@ -1,0 +1,1675 @@
+{
+  "camp": {
+    "7": "New Eridu Public Security"
+  },
+  "elementType": {
+    "205": "Ether"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Ether DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    }
+  },
+  "hitType": {
+    "103": "Pierce"
+  },
+  "id": 1241,
+  "locale": "en",
+  "name": "Zhu Yuan",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1241024", "1241025"],
+      "basic": [
+        "1241001",
+        "1241002",
+        "1241003",
+        "1241004",
+        "1241005",
+        "1241006",
+        "1241007",
+        "1241008",
+        "1241010",
+        "1241011",
+        "1241012"
+      ],
+      "chain": ["1241022", "1241023"],
+      "dodge": ["1241017", "1241018", "1241019", "1241020"],
+      "special": ["1241015", "1241016"]
+    },
+    "parameterRowsById": {
+      "1241001": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1241002": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1241003": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1241004": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1241005": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1241006": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/3"
+      ],
+      "1241007": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1241008": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1241010": [
+        "/skill/basic/description/3/param/6",
+        "/skill/basic/description/3/param/9"
+      ],
+      "1241011": [
+        "/skill/basic/description/3/param/7",
+        "/skill/basic/description/3/param/10"
+      ],
+      "1241012": [
+        "/skill/basic/description/3/param/8",
+        "/skill/basic/description/3/param/11"
+      ],
+      "1241015": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1241016": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1241017": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1241018": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1241019": [
+        "/skill/dodge/description/5/param/2",
+        "/skill/dodge/description/5/param/3"
+      ],
+      "1241020": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1241022": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1241023": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1241024": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1241025": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "SEP 1",
+    "fullName": "Zhu Yuan",
+    "gender": "Female",
+    "impressionF": "An exemplary human. We've been dealing with such an opponent for so long. Aren't we amazing?",
+    "impressionM": "That's because it's me + you + Fairy. I wouldn't wanna know the outcome if it was one on one...",
+    "impressions": [
+      "Impressions of Zhu Yuan:\n · Serious, reliable, responsible, dedicated, honest... Any positive word fits Zhu Yuan perfectly.",
+      " · One may think that they could uncover some of Zhu Yuan's flaws over time, but such things simply don't exist...",
+      " · Zhu Yuan's occasional shyness is really... Wait a minute! She's a Public Security Officer! Can't forget that!"
+    ],
+    "profileDesc": "Zhu Yuan, an exceptional officer at Public Security, is a highly skilled individual expected to become the next commissioner. She currently leads the Criminal Investigation Special Response Team at the Janus Precinct within the Metropolitan Order Division. Her team members include Qingyi, Seth, and [redacted].\nNote: For documents with higher security levels within the Public Security system, further investigation is required; scheduling priority - low.\n\nZhu Yuan possesses excellent skills in criminal investigation, combat, and self-management (including working overtime). She has no unresolved cases on record.\nSuggestion: Approaching Zhu Yuan is an ill-advised decision that may compromise your cover. Always remember your true identity as a Proxy. Remember your true identity as a Proxy. Remember your true identity as a Proxy.",
+    "stature": "175",
+    "trustLv": {
+      "1": "Zhu Yuan, an exceptional officer at Public Security, is a highly skilled individual expected to become the next commissioner. She currently leads the Criminal Investigation Special Response Team at the Janus Precinct within the Metropolitan Order Division. Her team members include Qingyi, Seth, and [redacted].\nNote: For documents with higher security levels within the Public Security system, further investigation is required; scheduling priority - low.\n\nZhu Yuan possesses excellent skills in criminal investigation, combat, and self-management (including working overtime). She has no unresolved cases on record.\nSuggestion: Approaching Zhu Yuan is an ill-advised decision that may compromise your cover. Always remember your true identity as a Proxy. Remember your true identity as a Proxy. Remember your true identity as a Proxy.",
+      "2": "",
+      "3": "She has a tendency to be a perfectionist and exhibits a strong obsession with \"neatness\" and \"perfection,\" which may be considered her only weakness (?). Officer Qingyi, her mentor in life and subordinate at work, often remarks that Zhu Yuan's perfectionism complex will worsen unless someone can talk her out of it. However, due to her high standards for herself, she has gained ample experience and skills to lead the Criminal Investigation Special Response Team and attract exceptional talents.\n\nZhu Yuan seems to have a passion for gardening. She is currently growing a tomato plant in her office, which is often pilfered by a raccoon family residing near the Public Security office.\nThoughts: Could this provide a potential avenue for infiltrating Public Security?\n\nZhu Yuan is a rarity among humans, showing no particular fondness for small furry animals.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete the \"Anby's Problem\" commission",
+      "Complete Main Commission Chapter 2 Interlude"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1241501": {
+        "desc": [
+          "When Zhu Yuan is under <color=#FFFFFF>Suppressive Mode</color>, using <color=#FFFFFF>Enhanced Shotshells</color> increases her DMG by <color=#2BAD00>20%</color>. When attacking Stunned enemies, this DMG buff is increased by an additional <color=#2BAD00>20%</color>. When Zhu Yuan enters the battlefield, she immediately gains 6 <color=#FFFFFF>Enhanced Shotshells</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> character or shares the same Faction:\nZhu Yuan's CRIT Rate is increased by 30% for 10s after using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Special Ops Ammunition",
+          "Additional Ability: Tactical Coordination"
+        ],
+        "potential": []
+      },
+      "1241502": {
+        "desc": [
+          "When Zhu Yuan is under <color=#FFFFFF>Suppressive Mode</color>, using <color=#FFFFFF>Enhanced Shotshells</color> increases her DMG by <color=#2BAD00>23.3%</color>. When attacking Stunned enemies, this DMG buff is increased by an additional <color=#2BAD00>23.3%</color>. When Zhu Yuan enters the battlefield, she immediately gains 6 <color=#FFFFFF>Enhanced Shotshells</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> character or shares the same Faction:\nZhu Yuan's CRIT Rate is increased by 30% for 10s after using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Special Ops Ammunition",
+          "Additional Ability: Tactical Coordination"
+        ],
+        "potential": []
+      },
+      "1241503": {
+        "desc": [
+          "When Zhu Yuan is under <color=#FFFFFF>Suppressive Mode</color>, using <color=#FFFFFF>Enhanced Shotshells</color> increases her DMG by <color=#2BAD00>26.6%</color>. When attacking Stunned enemies, this DMG buff is increased by an additional <color=#2BAD00>26.6%</color>. When Zhu Yuan enters the battlefield, she immediately gains 6 <color=#FFFFFF>Enhanced Shotshells</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> character or shares the same Faction:\nZhu Yuan's CRIT Rate is increased by 30% for 10s after using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Special Ops Ammunition",
+          "Additional Ability: Tactical Coordination"
+        ],
+        "potential": []
+      },
+      "1241504": {
+        "desc": [
+          "When Zhu Yuan is under <color=#FFFFFF>Suppressive Mode</color>, using <color=#FFFFFF>Enhanced Shotshells</color> increases her DMG by <color=#2BAD00>30%</color>. When attacking Stunned enemies, this DMG buff is increased by an additional <color=#2BAD00>30%</color>. When Zhu Yuan enters the battlefield, she immediately gains 6 <color=#FFFFFF>Enhanced Shotshells</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> character or shares the same Faction:\nZhu Yuan's CRIT Rate is increased by 30% for 10s after using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Special Ops Ammunition",
+          "Additional Ability: Tactical Coordination"
+        ],
+        "potential": []
+      },
+      "1241505": {
+        "desc": [
+          "When Zhu Yuan is under <color=#FFFFFF>Suppressive Mode</color>, using <color=#FFFFFF>Enhanced Shotshells</color> increases her DMG by <color=#2BAD00>33.3%</color>. When attacking Stunned enemies, this DMG buff is increased by an additional <color=#2BAD00>33.3%</color>. When Zhu Yuan enters the battlefield, she immediately gains 6 <color=#FFFFFF>Enhanced Shotshells</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> character or shares the same Faction:\nZhu Yuan's CRIT Rate is increased by 30% for 10s after using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Special Ops Ammunition",
+          "Additional Ability: Tactical Coordination"
+        ],
+        "potential": []
+      },
+      "1241506": {
+        "desc": [
+          "When Zhu Yuan is under <color=#FFFFFF>Suppressive Mode</color>, using <color=#FFFFFF>Enhanced Shotshells</color> increases her DMG by <color=#2BAD00>36.6%</color>. When attacking Stunned enemies, this DMG buff is increased by an additional <color=#2BAD00>36.6%</color>. When Zhu Yuan enters the battlefield, she immediately gains 6 <color=#FFFFFF>Enhanced Shotshells</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> character or shares the same Faction:\nZhu Yuan's CRIT Rate is increased by 30% for 10s after using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Special Ops Ammunition",
+          "Additional Ability: Tactical Coordination"
+        ],
+        "potential": []
+      },
+      "1241507": {
+        "desc": [
+          "When Zhu Yuan is under <color=#FFFFFF>Suppressive Mode</color>, using <color=#FFFFFF>Enhanced Shotshells</color> increases her DMG by <color=#2BAD00>40%</color>. When attacking Stunned enemies, this DMG buff is increased by an additional <color=#2BAD00>40%</color>. When Zhu Yuan enters the battlefield, she immediately gains 6 <color=#FFFFFF>Enhanced Shotshells</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> character or shares the same Faction:\nZhu Yuan's CRIT Rate is increased by 30% for 10s after using an <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Special Ops Ammunition",
+          "Additional Ability: Tactical Coordination"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nShoots enemies in front with an Ether Buckshot, dealing <color=#FE437E>Ether DMG</color>.\nGain 1 <color=#FFFFFF>Enhanced Shotshell</color> on skill use.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Covering Shot",
+          "potential": []
+        },
+        {
+          "desc": "When the character on field is about to be attacked, press <IconMap:Icon_Switch> to activate:\nDodges the enemy's attack and activates <color=#FFFFFF>Vital View</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Evasive Assist: Guarded Backup",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after an <color=#FFFFFF>Evasive Assist</color> to activate:\nAttack with a combination of martial arts and shotshells, dealing <color=#F0D12B>Physical DMG</color> and <color=#FE437E>Ether DMG</color>.\nUpon activation, gain 3 <color=#FFFFFF>Enhanced Shotshells</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Defensive Counter",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Covering Shot",
+          "param": [
+            {
+              "desc": "{Skill:1241024, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241024": {
+                  "attackData": [],
+                  "attributeInfliction": 4670,
+                  "damagePercentage": 5140,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 2336,
+                  "feverRecovery": 128700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 5140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5140,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241024, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241024": {
+                  "attackData": [],
+                  "attributeInfliction": 4670,
+                  "damagePercentage": 5140,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 2336,
+                  "feverRecovery": 128700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5140,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Defensive Counter",
+          "param": [
+            {
+              "desc": "{Skill:1241025, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241025": {
+                  "attackData": [],
+                  "attributeInfliction": 30197,
+                  "damagePercentage": 35580,
+                  "damagePercentageGrowth": 3240,
+                  "etherPurify": 15167,
+                  "feverRecovery": 1007600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3240,
+                  "main": 35580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30860,
+                  "stunRatioGrowth": 1410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241025, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241025": {
+                  "attackData": [],
+                  "attributeInfliction": 30197,
+                  "damagePercentage": 35580,
+                  "damagePercentageGrowth": 3240,
+                  "etherPurify": 15167,
+                  "feverRecovery": 1007600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1410,
+                  "main": 30860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30860,
+                  "stunRatioGrowth": 1410
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "<color=#FFFFFF>[Assault Mode]</color>\nPress <IconMap:Icon_Normal> to activate.\nUnleash a flurry of martial arts, bullets, and Ether Buckshots in a series of up to 5 attacks, dealing <color=#F0D12B>Physical DMG</color> and <color=#FE437E>Ether DMG</color>.\nWhen the 4th or 5th hit strikes an enemy, obtain 1 <color=#FFFFFF>Enhanced Shotshell</color> per hit. A max of 1 can be obtained per activation of this Basic Attack.\nWhile using this skill, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} and press <IconMap:Icon_Normal> to activate <color=#FFFFFF>Dash Attack: Firepower Offensive</color> and readjust to face the selected direction.\nWhile under <color=#FFFFFF>Assault Mode</color>, hold <IconMap:Icon_Normal> to switch to <color=#FFFFFF>Suppressive Mode</color>.",
+          "name": "Basic Attack: Don't Move!",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>[Suppressive Mode]</color>\nHold <IconMap:Icon_Normal> to activate:\nUnleash up to 3 Shotshell piercing attacks, dealing <color=#F0D12B>Physical DMG</color>. If Zhu Yuan has <color=#FFFFFF>Enhanced Shotshells</color> upon firing, 1 <color=#FFFFFF>Enhanced Shotshell</color> will be consumed, dealing massive <color=#FE437E>Ether DMG</color>.\nWhile using this skill, drag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} to activate her <color=#FFFFFF>Dash Attack: Overwhelming Firepower</color> and readjust to face the selected direction.\nWhile in <color=#FFFFFF>Suppressive Mode</color>, release <IconMap:Icon_Normal> to return to <color=#FFFFFF>Assault Mode</color>.",
+          "name": "Basic Attack: Please Do Not Resist",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Don't Move!",
+          "param": [
+            {
+              "desc": "{Skill:1241001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1241001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4310,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 1959,
+                  "feverRecovery": 53900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 400,
+                  "main": 4310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2160,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1241002": {
+                  "attackData": [],
+                  "attributeInfliction": 10477,
+                  "damagePercentage": 12640,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 8838,
+                  "feverRecovery": 243100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 12640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9730,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1241003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 13730,
+                  "damagePercentageGrowth": 1250,
+                  "etherPurify": 8601,
+                  "feverRecovery": 236775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1250,
+                  "main": 13730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30970,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9470,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1241004": {
+                  "attackData": [],
+                  "attributeInfliction": 5912,
+                  "damagePercentage": 15100,
+                  "damagePercentageGrowth": 1380,
+                  "etherPurify": 11294,
+                  "feverRecovery": 310750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1380,
+                  "main": 15100,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40660,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12430,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1241005": {
+                  "attackData": [],
+                  "attributeInfliction": 6005,
+                  "damagePercentage": 16220,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 12650,
+                  "feverRecovery": 347875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1480,
+                  "main": 16220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 45540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13920,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1241001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 4310,
+                  "damagePercentageGrowth": 400,
+                  "etherPurify": 1959,
+                  "feverRecovery": 53900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 100,
+                  "main": 2160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 7050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2160,
+                  "stunRatioGrowth": 100
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1241002": {
+                  "attackData": [],
+                  "attributeInfliction": 10477,
+                  "damagePercentage": 12640,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 8838,
+                  "feverRecovery": 243100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 9730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 31820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9730,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1241003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 13730,
+                  "damagePercentageGrowth": 1250,
+                  "etherPurify": 8601,
+                  "feverRecovery": 236775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 440,
+                  "main": 9470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30970,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9470,
+                  "stunRatioGrowth": 440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1241004": {
+                  "attackData": [],
+                  "attributeInfliction": 5912,
+                  "damagePercentage": 15100,
+                  "damagePercentageGrowth": 1380,
+                  "etherPurify": 11294,
+                  "feverRecovery": 310750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 570,
+                  "main": 12430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 40660,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12430,
+                  "stunRatioGrowth": 570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1241005": {
+                  "attackData": [],
+                  "attributeInfliction": 6005,
+                  "damagePercentage": 16220,
+                  "damagePercentageGrowth": 1480,
+                  "etherPurify": 12650,
+                  "feverRecovery": 347875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 640,
+                  "main": 13920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 45540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13920,
+                  "stunRatioGrowth": 640
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Please Do Not Resist",
+          "param": [
+            {
+              "desc": "{Skill:1241006, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier (Physical)",
+              "param": {
+                "1241006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5370,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 5416,
+                  "feverRecovery": 75900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 5370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241007, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier (Physical)",
+              "param": {
+                "1241007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5370,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 5416,
+                  "feverRecovery": 140250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 5370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241008, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier (Physical)",
+              "param": {
+                "1241008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16090,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 16246,
+                  "feverRecovery": 374825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1470,
+                  "main": 16090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17870,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241006, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier (Physical)",
+              "param": {
+                "1241006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5370,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 5416,
+                  "feverRecovery": 75900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241007, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier (Physical)",
+              "param": {
+                "1241007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5370,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 5416,
+                  "feverRecovery": 140250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241008, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier (Physical)",
+              "param": {
+                "1241008": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 16090,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 16246,
+                  "feverRecovery": 374825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17870,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241010, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier (Ether)",
+              "param": {
+                "1241010": {
+                  "attackData": [],
+                  "attributeInfliction": 5415,
+                  "damagePercentage": 13590,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 5416,
+                  "feverRecovery": 75900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 13590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241011, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier (Ether)",
+              "param": {
+                "1241011": {
+                  "attackData": [],
+                  "attributeInfliction": 5415,
+                  "damagePercentage": 13590,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 5416,
+                  "feverRecovery": 140250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 13590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241012, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier (Ether)",
+              "param": {
+                "1241012": {
+                  "attackData": [],
+                  "attributeInfliction": 16245,
+                  "damagePercentage": 40770,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 16246,
+                  "feverRecovery": 374825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3710,
+                  "main": 40770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17870,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241010, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier (Ether)",
+              "param": {
+                "1241010": {
+                  "attackData": [],
+                  "attributeInfliction": 5415,
+                  "damagePercentage": 13590,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 5416,
+                  "feverRecovery": 75900,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9910,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241011, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier (Ether)",
+              "param": {
+                "1241011": {
+                  "attackData": [],
+                  "attributeInfliction": 5415,
+                  "damagePercentage": 13590,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 5416,
+                  "feverRecovery": 140250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 18350,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241012, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier (Ether)",
+              "param": {
+                "1241012": {
+                  "attackData": [],
+                  "attributeInfliction": 16245,
+                  "damagePercentage": 40770,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 16246,
+                  "feverRecovery": 374825,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49060,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17870,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nUses Modified Master Firearm to execute a saturated attack, firing lasers and seeking missiles to deal massive <color=#FE437E>Ether DMG</color>.\nUpon activation, gain 3 <color=#FFFFFF>Enhanced Shotshells</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Eradication Mode",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUses Modified Master Firearm to execute a saturated attack, firing lasers and seeking missiles to deal massive <color=#FE437E>Ether DMG</color>.\nUpon activation, gain 3 <color=#FFFFFF>Enhanced Shotshells</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Max Eradication Mode",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Eradication Mode",
+          "param": [
+            {
+              "desc": "{Skill:1241022, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241022": {
+                  "attackData": [],
+                  "attributeInfliction": 33450,
+                  "damagePercentage": 58750,
+                  "damagePercentageGrowth": 5350,
+                  "etherPurify": 13501,
+                  "feverRecovery": 2200275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5350,
+                  "main": 58750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14860,
+                  "stunRatioGrowth": 680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241022, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241022": {
+                  "attackData": [],
+                  "attributeInfliction": 33450,
+                  "damagePercentage": 58750,
+                  "damagePercentageGrowth": 5350,
+                  "etherPurify": 13501,
+                  "feverRecovery": 2200275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 680,
+                  "main": 14860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14860,
+                  "stunRatioGrowth": 680
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Max Eradication Mode",
+          "param": [
+            {
+              "desc": "{Skill:1241023, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241023": {
+                  "attackData": [],
+                  "attributeInfliction": 10333,
+                  "damagePercentage": 197760,
+                  "damagePercentageGrowth": 17980,
+                  "etherPurify": 60334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 17980,
+                  "main": 197760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12510,
+                  "stunRatioGrowth": 627
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241023, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241023": {
+                  "attackData": [],
+                  "attributeInfliction": 10333,
+                  "damagePercentage": 197760,
+                  "damagePercentageGrowth": 17980,
+                  "etherPurify": 60334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 627,
+                  "main": 12510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12510,
+                  "stunRatioGrowth": 627
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Tactical Detour",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>Assault Mode</color>\nPress <IconMap:Icon_Normal> during a dodge to activate:\nUses handgun to attack, dealing <color=#FE437E>Ether DMG</color>.",
+          "name": "Dash Attack: Firepower Offensive",
+          "potential": []
+        },
+        {
+          "desc": "<color=#FFFFFF>Suppressive Mode</color>\nDrag the {LAYOUT_CONSOLECONTROLLER#stick}{LAYOUT_FALLBACK#joystick} during <color=#FFFFFF>Basic Attack: Please Do Not Resist</color> to activate:\nUnleashes a Shotshell piercing attack, dealing <color=#F0D12B>Physical DMG</color>. If Zhu Yuan has <color=#FFFFFF>Enhanced Shotshells</color> when firing, 1 <color=#FFFFFF>Enhanced Shotshell</color> will be consumed, dealing massive <color=#FE437E>Ether DMG</color>.",
+          "name": "Dash Attack: Overwhelming Firepower",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate.\nShoots enemies in front with an Ether Buckshot, dealing <color=#FE437E>Ether DMG</color>.\nGain 1 <color=#FFFFFF>Enhanced Shotshell</color> on skill use.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Fire Blast",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Firepower Offensive",
+          "param": [
+            {
+              "desc": "{Skill:1241017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241017": {
+                  "attackData": [],
+                  "attributeInfliction": 5000,
+                  "damagePercentage": 5510,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 2501,
+                  "feverRecovery": 69025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 5510,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2760,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241017": {
+                  "attackData": [],
+                  "attributeInfliction": 5000,
+                  "damagePercentage": 5510,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 2501,
+                  "feverRecovery": 69025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2760,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Overwhelming Firepower",
+          "param": [
+            {
+              "desc": "{Skill:1241018, Prop:1001}",
+              "name": "DMG Multiplier (Physical)",
+              "param": {
+                "1241018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5370,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 3251,
+                  "feverRecovery": 89650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 5370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241018, Prop:1002}",
+              "name": "Daze Multiplier (Physical)",
+              "param": {
+                "1241018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5370,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 3251,
+                  "feverRecovery": 89650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11710,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241019, Prop:1001}",
+              "name": "DMG Multiplier (Ether)",
+              "param": {
+                "1241019": {
+                  "attackData": [],
+                  "attributeInfliction": 5415,
+                  "damagePercentage": 13590,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 6501,
+                  "feverRecovery": 179025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 13590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241019, Prop:1002}",
+              "name": "Daze Multiplier (Ether)",
+              "param": {
+                "1241019": {
+                  "attackData": [],
+                  "attributeInfliction": 5415,
+                  "damagePercentage": 13590,
+                  "damagePercentageGrowth": 1240,
+                  "etherPurify": 6501,
+                  "feverRecovery": 179025,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 5960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 23410,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5960,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Fire Blast",
+          "param": [
+            {
+              "desc": "{Skill:1241020, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241020": {
+                  "attackData": [],
+                  "attributeInfliction": 4670,
+                  "damagePercentage": 17680,
+                  "damagePercentageGrowth": 1610,
+                  "etherPurify": 19671,
+                  "feverRecovery": 128700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1610,
+                  "main": 17680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16140,
+                  "stunRatioGrowth": 740
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241020, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241020": {
+                  "attackData": [],
+                  "attributeInfliction": 4670,
+                  "damagePercentage": 17680,
+                  "damagePercentageGrowth": 1610,
+                  "etherPurify": 19671,
+                  "feverRecovery": 128700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 740,
+                  "main": 16140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16140,
+                  "stunRatioGrowth": 740
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nShoots Ether Buckshots that deal <color=#FE437E>Ether DMG</color>. This can be repeated 3 times by repeatedly pressing <IconMap:Icon_Special>.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Buckshot Blast",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nShoots a series of Ether Buckshots, that explode and deal massive <color=#FE437E>Ether DMG</color>.\nUpon activation, gain 3 <color=#FFFFFF>Enhanced Shotshells</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Full Barrage",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Buckshot Blast",
+          "param": [
+            {
+              "desc": "{Skill:1241015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241015": {
+                  "attackData": [],
+                  "attributeInfliction": 1665,
+                  "damagePercentage": 1840,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 1666,
+                  "feverRecovery": 45925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 1840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1840,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241015": {
+                  "attackData": [],
+                  "attributeInfliction": 1665,
+                  "damagePercentage": 1840,
+                  "damagePercentageGrowth": 170,
+                  "etherPurify": 1666,
+                  "feverRecovery": 45925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1840,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Full Barrage",
+          "param": [
+            {
+              "desc": "{Skill:1241016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1241016": {
+                  "attackData": [],
+                  "attributeInfliction": 48512,
+                  "damagePercentage": 58740,
+                  "damagePercentageGrowth": 5340,
+                  "etherPurify": 14330,
+                  "feverRecovery": 1737175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5340,
+                  "main": 58740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 48000,
+                  "stunRatioGrowth": 2190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1241016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1241016": {
+                  "attackData": [],
+                  "attributeInfliction": 48512,
+                  "damagePercentage": 58740,
+                  "damagePercentageGrowth": 5340,
+                  "etherPurify": 14330,
+                  "feverRecovery": 1737175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2190,
+                  "main": 48000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 48000,
+                  "stunRatioGrowth": 2190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60",
+              "name": "Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1241001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Don't Move!"
+    },
+    "1241002": {
+      "desc": "<IconMap:Icon_Normal>(Hold)",
+      "name": "Basic Attack: Please Do Not Resist"
+    },
+    "1241003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Buckshot Blast"
+    },
+    "1241004": {
+      "desc": "<IconMap:Icon_SpecialReady>",
+      "name": "EX Special Attack: Full Barrage"
+    },
+    "1241005": {
+      "desc": "<IconMap:Icon_Evade>;<IconMap:Icon_Normal>",
+      "name": "Dash Attack: Firepower Offensive"
+    },
+    "1241006": {
+      "desc": "<IconMap:Icon_Normal> (Hold) ; <IconMap:Icon_JoyStick>",
+      "name": "Dash Attack: Overwhelming Firepower"
+    },
+    "1241007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Fire Blast"
+    },
+    "1241008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Eradication Mode"
+    },
+    "1241009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Max Eradication Mode"
+    },
+    "1241010": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Covering Shot"
+    },
+    "1241011": {
+      "desc": "<IconMap:Icon_Switch>(When Triggering Evasive Assist)",
+      "name": "Evasive Assist: Guarded Backup"
+    },
+    "1241012": {
+      "desc": "<IconMap:Icon_Normal> (After Evasive Assist)",
+      "name": "Assist Follow-Up: Defensive Counter"
+    }
+  },
+  "skin": {
+    "3112410": {
+      "desc": "This high-grade anti-riot uniform from Public Security has been specially modified to suit Zhu Yuan's fighting style.\nWinner of the Janus Precinct's combat tournament three years running, the young top Public Security Officer is on call 24/7, ready to arrest any criminal in her path.",
+      "name": "Zhu Yuan: Suppressor of Evil"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, quick-swap DMG dealer",
+    "Burst DMG during Stun",
+    "Suppressive Mode and Shotshell Rapid Fire"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Zhu Yuan activates <color=#FFFFFF>Chain Attacks</color>/<color=#FFFFFF>Ultimates</color>, gain the <color=#FFFFFF>Quick Reload</color> effect. When Zhu Yuan has the <color=#FFFFFF>Quick Reload</color> effect and uses up all <color=#FFFFFF>Enhanced Shotshells</color>, the <color=#FFFFFF>Quick Reload</color> effect will be consumed to instantly gain 6/9 <color=#FFFFFF>Enhanced Shotshells</color>.",
+      "desc2": "Zhu Yuan once competed in the Janus Quarter's Public Security Officer Contest, clinching first place with her extraordinary reloading techniques. Her colleague commented: \"It's nothing but sheer practice.\"",
+      "name": "Quick Reload"
+    },
+    "2": {
+      "desc": "In <color=#FFFFFF>Suppressive Mode</color>, Zhu Yuan's Anti-Interrupt level is increased and DMG taken reduced by 10%. When Zhu Yuan hits an enemy with <color=#FFFFFF>Enhanced Shotshells</color>, deal 10% more <color=#FFFFFF>Basic Attack: Please Do Not Resist</color> and <color=#FFFFFF>Dash Attack: Overwhelming Firepower</color> <color=#FE437E>Ether DMG</color>, stacking up to 5 times and lasting for 5s. Each shot adds one stack of this effect, and repeated triggers reset the duration.",
+      "desc2": "Zhu Yuan is equipped with Ether bullets specially designed by Public Security, which cause irreversible corruption upon hitting the enemy.\nThis is why Zhu Yuan always warns her enemies to surrender and stop resisting before she fires. It really is for their own health and safety...",
+      "name": "Ether Ember"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "As an elite Public Security Officer, Zhu Yuan's training focused on a single objective: to enhance all aspects of her combat abilities within the Hollow, ensuring she could outmatch any criminal.",
+      "name": "Public Security Special Training"
+    },
+    "4": {
+      "desc": "When Zhu Yuan hits an enemy with <color=#FFFFFF>Enhanced Shotshells</color>, her <color=#FFFFFF>Basic Attack: Please Do Not Resist</color> and <color=#FFFFFF>Dash Attack: Overwhelming Firepower</color> ignore 25% of the target's <color=#FE437E>Ether RES</color>.",
+      "desc2": "When in battle, the gangs in the Hollows often try to quietly calculate how many bullets their enemies have left. What they don't know is that Zhu Yuan's custom magazine can recharge itself with the Ether in the air...",
+      "name": "Ether Perforation"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "A seasoned Public Security Officer excels at reading the battlefield, striking precisely and maximizing combat efficiency. Sometimes, one stern look is enough to make her enemies think twice about putting up a fight.",
+      "name": "Special Ops Experience"
+    },
+    "6": {
+      "desc": "When Zhu Yuan consumes a total of 12 <color=#FFFFFF>Enhanced Shotshells</color>, she receives the <color=#FFFFFF>Ether Afterglow</color> effect, and the Energy cost of the next <color=#FFFFFF>EX Special Attack</color> is reduced by 30. Launching an <color=#FFFFFF>EX Special Attack</color> will consume <color=#FFFFFF>Ether Afterglow</color> and shoot an additional 4-bullet Ether Buckshot. Each extra bullet deals DMG equal to 220% of Zhu Yuan's ATK.",
+      "desc2": "Zhu Yuan often worries about her gear's remaining battery, getting nervous when the power dips into the red zone and consciously saving power. Public Security finally equipped her with an energy pack that offered both high capacity and long-lasting endurance.",
+      "name": "Expanded Energy Pack III"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

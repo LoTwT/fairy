@@ -1,0 +1,1627 @@
+{
+  "camp": {
+    "6": "Hollow Special Operations Section 6"
+  },
+  "elementType": {
+    "203": "Electric"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "31401": {
+          "format": "{0:0.#}",
+          "name": "Anomaly Mastery"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Electric DMG Bonus"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "Anomaly Mastery"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1221,
+  "locale": "en",
+  "name": "Yanagi",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1221017", "1221018", "1221019", "1221020", "1221021"],
+      "basic": [
+        "1221001",
+        "1221002",
+        "1221003",
+        "1221004",
+        "1221005",
+        "1221006",
+        "1221007",
+        "1221008",
+        "1221009",
+        "1221010"
+      ],
+      "chain": ["1221015", "1221016"],
+      "dodge": ["1221013", "1221014"],
+      "special": ["1221011", "1221022", "1221023"]
+    },
+    "parameterRowsById": {
+      "1221001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/5"
+      ],
+      "1221002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1221003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1221004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/8"
+      ],
+      "1221005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1221006": [
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/5"
+      ],
+      "1221007": [
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/6"
+      ],
+      "1221008": [
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/7"
+      ],
+      "1221009": [
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/8"
+      ],
+      "1221010": [
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/9"
+      ],
+      "1221011": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1221013": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1221014": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1221015": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1221016": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1221017": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1221018": ["/skill/assist/description/4/param/0"],
+      "1221019": ["/skill/assist/description/4/param/1"],
+      "1221020": ["/skill/assist/description/4/param/2"],
+      "1221021": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1221022": [
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/2"
+      ],
+      "1221023": [
+        "/skill/special/description/3/param/3",
+        "/skill/special/description/3/param/4"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "SEP 21",
+    "fullName": "Tsukishiro Yanagi",
+    "gender": "Female",
+    "impressionF": "Where did Fairy even get this info? So even a perfect person like Yanagi has her clumsy moments? Got any specifics to share?",
+    "impressionM": "How should I put this...? From this data, it feels like Section 6 would fall apart without Yanagi.",
+    "impressions": [
+      "Impressions of Tsukishiro Yanagi:\n · Her singing skills sure are shocking.",
+      " · Her obsession with red bean buns seems perfectly reasonable.",
+      " · Yanagi... she doesn't seem to just suffer from simple nearsightedness."
+    ],
+    "profileDesc": "Tsukishiro Yanagi, Hollow Special Operations Section 6 Deputy Chief and intelligence officer.\nPrimarily responsible for personnel management, mission management and feedback, collecting intel, on-site support, etc.\nAt the same time, Yanagi is also Section 6 member Soukaku's Protector. Apart from taking care of Soukaku's day-to-day affairs, she is also responsible for and takes responsibility for all of Soukaku's behavior at work.\n\nSection 6 Chief Hoshimi Miyabi possesses a rather eccentric personality; Asaba Harumasa, a member of Section 6, is overly relaxed and carefree; and Soukaku, another member of Section, 6 is still an innocent and excitable child, so most of the team's work falls upon Yanagi's shoulders.\nSerious, diligent, and meticulous, Tsukishiro Yanagi is the only \"normal\" person on the team, so to speak. It is only due to her guidance and leadership that the strength of the three who make up Section 6's primary on-field force can be transformed into true combat power.\nOverall, Tsukishiro Yanagi is a talented and highly efficient executive officer, whose abilities are both exceptional and comprehensive.\nHowever, from certain data, Tsukishiro Yanagi appears to have a somewhat clumsy side to her when it comes to day-to-day affairs.",
+    "stature": "169",
+    "trustLv": {
+      "1": "Tsukishiro Yanagi, Hollow Special Operations Section 6 Deputy Chief and intelligence officer.\nPrimarily responsible for personnel management, mission management and feedback, collecting intel, on-site support, etc.\nAt the same time, Yanagi is also Section 6 member Soukaku's Protector. Apart from taking care of Soukaku's day-to-day affairs, she is also responsible for and takes responsibility for all of Soukaku's behavior at work.\n\nSection 6 Chief Hoshimi Miyabi possesses a rather eccentric personality; Asaba Harumasa, a member of Section 6, is overly relaxed and carefree; and Soukaku, another member of Section, 6 is still an innocent and excitable child, so most of the team's work falls upon Yanagi's shoulders.\nSerious, diligent, and meticulous, Tsukishiro Yanagi is the only \"normal\" person on the team, so to speak. It is only due to her guidance and leadership that the strength of the three who make up Section 6's primary on-field force can be transformed into true combat power.\nOverall, Tsukishiro Yanagi is a talented and highly efficient executive officer, whose abilities are both exceptional and comprehensive.\nHowever, from certain data, Tsukishiro Yanagi appears to have a somewhat clumsy side to her when it comes to day-to-day affairs.",
+      "2": "",
+      "3": "Due to an accident long ago, Tsukishiro Yanagi appears to possess blood that does not belong to her, flowing through her veins.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Story \"Leisurely Lull: Unexpected New Customer\" (available after completing Main Story Chapter 4) to unlock",
+      "Complete Special Episode \"Virtual Revenge\"",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1221501": {
+        "desc": [
+          "After Yanagi activates her <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier of <color=#FFFFFF>Disorder</color> is increased by <color=#2BAD00>125%</color> when any squad member applies the <color=#FFFFFF>Disorder</color> effect to an enemy, lasting 15s.\nWhen her <color=#FFFFFF>EX Special Attack</color> hits an enemy, Yanagi's <color=#2EB6FF>Electric DMG</color> against the target is increased by <color=#2BAD00>10%</color> for 15s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nAfter switching stances, when Yanagi hits an enemy with <color=#FFFFFF>Basic Attack: Tsukuyomi Kagura</color>, <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 45% for 8s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Lunar Eclipse", "Additional Ability: Gessou"],
+        "potential": []
+      },
+      "1221502": {
+        "desc": [
+          "After Yanagi activates her <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier of <color=#FFFFFF>Disorder</color> is increased by <color=#2BAD00>145%</color> when any squad member applies the <color=#FFFFFF>Disorder</color> effect to an enemy, lasting 15s.\nWhen her <color=#FFFFFF>EX Special Attack</color> hits an enemy, Yanagi's <color=#2EB6FF>Electric DMG</color> against the target is increased by <color=#2BAD00>11.6%</color> for 15s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nAfter switching stances, when Yanagi hits an enemy with <color=#FFFFFF>Basic Attack: Tsukuyomi Kagura</color>, <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 45% for 8s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Lunar Eclipse", "Additional Ability: Gessou"],
+        "potential": []
+      },
+      "1221503": {
+        "desc": [
+          "After Yanagi activates her <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier of <color=#FFFFFF>Disorder</color> is increased by <color=#2BAD00>166%</color> when any squad member applies the <color=#FFFFFF>Disorder</color> effect to an enemy, lasting 15s.\nWhen her <color=#FFFFFF>EX Special Attack</color> hits an enemy, Yanagi's <color=#2EB6FF>Electric DMG</color> against the target is increased by <color=#2BAD00>13.3%</color> for 15s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nAfter switching stances, when Yanagi hits an enemy with <color=#FFFFFF>Basic Attack: Tsukuyomi Kagura</color>, <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 45% for 8s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Lunar Eclipse", "Additional Ability: Gessou"],
+        "potential": []
+      },
+      "1221504": {
+        "desc": [
+          "After Yanagi activates her <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier of <color=#FFFFFF>Disorder</color> is increased by <color=#2BAD00>188%</color> when any squad member applies the <color=#FFFFFF>Disorder</color> effect to an enemy, lasting 15s.\nWhen her <color=#FFFFFF>EX Special Attack</color> hits an enemy, Yanagi's <color=#2EB6FF>Electric DMG</color> against the target is increased by <color=#2BAD00>15%</color> for 15s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nAfter switching stances, when Yanagi hits an enemy with <color=#FFFFFF>Basic Attack: Tsukuyomi Kagura</color>, <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 45% for 8s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Lunar Eclipse", "Additional Ability: Gessou"],
+        "potential": []
+      },
+      "1221505": {
+        "desc": [
+          "After Yanagi activates her <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier of <color=#FFFFFF>Disorder</color> is increased by <color=#2BAD00>208%</color> when any squad member applies the <color=#FFFFFF>Disorder</color> effect to an enemy, lasting 15s.\nWhen her <color=#FFFFFF>EX Special Attack</color> hits an enemy, Yanagi's <color=#2EB6FF>Electric DMG</color> against the target is increased by <color=#2BAD00>16.6%</color> for 15s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nAfter switching stances, when Yanagi hits an enemy with <color=#FFFFFF>Basic Attack: Tsukuyomi Kagura</color>, <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 45% for 8s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Lunar Eclipse", "Additional Ability: Gessou"],
+        "potential": []
+      },
+      "1221506": {
+        "desc": [
+          "After Yanagi activates her <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier of <color=#FFFFFF>Disorder</color> is increased by <color=#2BAD00>230%</color> when any squad member applies the <color=#FFFFFF>Disorder</color> effect to an enemy, lasting 15s.\nWhen her <color=#FFFFFF>EX Special Attack</color> hits an enemy, Yanagi's <color=#2EB6FF>Electric DMG</color> against the target is increased by <color=#2BAD00>18.3%</color> for 15s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nAfter switching stances, when Yanagi hits an enemy with <color=#FFFFFF>Basic Attack: Tsukuyomi Kagura</color>, <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 45% for 8s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Lunar Eclipse", "Additional Ability: Gessou"],
+        "potential": []
+      },
+      "1221507": {
+        "desc": [
+          "After Yanagi activates her <color=#FFFFFF>EX Special Attack</color>, the DMG multiplier of <color=#FFFFFF>Disorder</color> is increased by <color=#2BAD00>250%</color> when any squad member applies the <color=#FFFFFF>Disorder</color> effect to an enemy, lasting 15s.\nWhen her <color=#FFFFFF>EX Special Attack</color> hits an enemy, Yanagi's <color=#2EB6FF>Electric DMG</color> against the target is increased by <color=#2BAD00>20%</color> for 15s.",
+          "When another character in your squad is an <color=#FFFFFF>Anomaly</color> character or shares the same attribute:\nAfter switching stances, when Yanagi hits an enemy with <color=#FFFFFF>Basic Attack: Tsukuyomi Kagura</color>, <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 45% for 8s."
+        ],
+        "extraProperty": {},
+        "name": ["Core Passive: Lunar Eclipse", "Additional Ability: Gessou"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nSlashes enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.\nAfter using this skill, you can immediately follow up with the 3rd hit of the current stance's <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Quick Assist: Blade of Elegance",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Radiant Reversal",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nSwitch stances, and quickly deliver multiple slashes to enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.\nAfter using this skill, you can immediately follow up with the 3rd hit of the current stance's <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Assist Follow-Up: Weeping Willow Stab",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Blade of Elegance",
+          "param": [
+            {
+              "desc": "{Skill:1221017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1221017": {
+                  "attackData": [],
+                  "attributeInfliction": 7652,
+                  "damagePercentage": 9360,
+                  "damagePercentageGrowth": 860,
+                  "etherPurify": 4252,
+                  "feverRecovery": 210650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 860,
+                  "main": 9360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8420,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1221017": {
+                  "attackData": [],
+                  "attributeInfliction": 7652,
+                  "damagePercentage": 9360,
+                  "damagePercentageGrowth": 860,
+                  "etherPurify": 4252,
+                  "feverRecovery": 210650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8420,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Radiant Reversal",
+          "param": [
+            {
+              "desc": "{Skill:1221018, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1221018": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1110,
+                  "main": 24420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24420,
+                  "stunRatioGrowth": 1110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221019, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1221019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1410,
+                  "main": 30860,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 30860,
+                  "stunRatioGrowth": 1410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221020, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1221020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 690,
+                  "main": 15020,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15020,
+                  "stunRatioGrowth": 690
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Weeping Willow Stab",
+          "param": [
+            {
+              "desc": "{Skill:1221021, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1221021": {
+                  "attackData": [],
+                  "attributeInfliction": 31223,
+                  "damagePercentage": 40710,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 18497,
+                  "feverRecovery": 1030700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3710,
+                  "main": 40710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32060,
+                  "stunRatioGrowth": 1460
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221021, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1221021": {
+                  "attackData": [],
+                  "attributeInfliction": 31223,
+                  "damagePercentage": 40710,
+                  "damagePercentageGrowth": 3710,
+                  "etherPurify": 18497,
+                  "feverRecovery": 1030700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1460,
+                  "main": 32060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32060,
+                  "stunRatioGrowth": 1460
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Yanagi has two stances: <color=#FFFFFF>Jougen</color> and <color=#FFFFFF>Kagen</color>.\nPress <IconMap:Icon_Normal> to activate:\nExecute up to five forward slashes based on the current stance, causing <color=#F0D12B>Physical DMG</color> and <color=#2EB6FF>Electric DMG</color>.\nDuring combat, Yanagi gains the corresponding stance buff based on her current stance:\n<color=#FFFFFF>Jougen</color> stance buff: <color=#2EB6FF>Electric DMG</color> increases by 10%. Anti-Interrupt Level increases during <color=#FFFFFF>Basic Attacks</color>.\n<color=#FFFFFF>Kagen</color> stance buff: PEN Ratio increases by 10%. Interrupt Level increases for <color=#FFFFFF>Basic Attacks</color>.\nFor 8s after switching stances, Yanagi retains the bonus from the previous stance.",
+          "name": "Basic Attack: Tsukuyomi Kagura",
+          "potential": []
+        },
+        {
+          "name": "Stance: Jougen",
+          "param": [
+            {
+              "desc": "{Skill:1221001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1221001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5660,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 2801,
+                  "feverRecovery": 69575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 520,
+                  "main": 5660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2780,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1221002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9970,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 6871,
+                  "feverRecovery": 170225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 910,
+                  "main": 9970,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24740,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6810,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1221003": {
+                  "attackData": [],
+                  "attributeInfliction": 7991,
+                  "damagePercentage": 11310,
+                  "damagePercentageGrowth": 1030,
+                  "etherPurify": 7004,
+                  "feverRecovery": 173525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1030,
+                  "main": 11310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6940,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1221004": {
+                  "attackData": [],
+                  "attributeInfliction": 8942,
+                  "damagePercentage": 12660,
+                  "damagePercentageGrowth": 1160,
+                  "etherPurify": 7837,
+                  "feverRecovery": 194150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1160,
+                  "main": 12660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7760,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221005, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1221005": {
+                  "attackData": [],
+                  "attributeInfliction": 16735,
+                  "damagePercentage": 23690,
+                  "damagePercentageGrowth": 2160,
+                  "etherPurify": 14667,
+                  "feverRecovery": 363000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2160,
+                  "main": 23690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 52800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14520,
+                  "stunRatioGrowth": 660
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1221001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5660,
+                  "damagePercentageGrowth": 520,
+                  "etherPurify": 2801,
+                  "feverRecovery": 69575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10090,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2780,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1221002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 9970,
+                  "damagePercentageGrowth": 910,
+                  "etherPurify": 6871,
+                  "feverRecovery": 170225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24740,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6810,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1221003": {
+                  "attackData": [],
+                  "attributeInfliction": 7991,
+                  "damagePercentage": 11310,
+                  "damagePercentageGrowth": 1030,
+                  "etherPurify": 7004,
+                  "feverRecovery": 173525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 320,
+                  "main": 6940,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 25220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6940,
+                  "stunRatioGrowth": 320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1221004": {
+                  "attackData": [],
+                  "attributeInfliction": 8942,
+                  "damagePercentage": 12660,
+                  "damagePercentageGrowth": 1160,
+                  "etherPurify": 7837,
+                  "feverRecovery": 194150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7760,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 28220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7760,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221005, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1221005": {
+                  "attackData": [],
+                  "attributeInfliction": 16735,
+                  "damagePercentage": 23690,
+                  "damagePercentageGrowth": 2160,
+                  "etherPurify": 14667,
+                  "feverRecovery": 363000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 660,
+                  "main": 14520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 52800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14520,
+                  "stunRatioGrowth": 660
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Stance: Kagen",
+          "param": [
+            {
+              "desc": "{Skill:1221006, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1221006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11310,
+                  "damagePercentageGrowth": 1030,
+                  "etherPurify": 5603,
+                  "feverRecovery": 138875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1030,
+                  "main": 11310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20170,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5550,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221007, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1221007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12920,
+                  "damagePercentageGrowth": 1180,
+                  "etherPurify": 9401,
+                  "feverRecovery": 232925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1180,
+                  "main": 12920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33850,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9310,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221008, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1221008": {
+                  "attackData": [],
+                  "attributeInfliction": 5138,
+                  "damagePercentage": 7280,
+                  "damagePercentageGrowth": 670,
+                  "etherPurify": 4504,
+                  "feverRecovery": 111650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 670,
+                  "main": 7280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4460,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221009, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1221009": {
+                  "attackData": [],
+                  "attributeInfliction": 7607,
+                  "damagePercentage": 10770,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 6667,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221010, Prop:1001}",
+              "name": "5th-Hit DMG Multiplier",
+              "param": {
+                "1221010": {
+                  "attackData": [],
+                  "attributeInfliction": 19204,
+                  "damagePercentage": 27180,
+                  "damagePercentageGrowth": 2480,
+                  "etherPurify": 16831,
+                  "feverRecovery": 416625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2480,
+                  "main": 27180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 60590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16670,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221006, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1221006": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 11310,
+                  "damagePercentageGrowth": 1030,
+                  "etherPurify": 5603,
+                  "feverRecovery": 138875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 260,
+                  "main": 5550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20170,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5550,
+                  "stunRatioGrowth": 260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221007, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1221007": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12920,
+                  "damagePercentageGrowth": 1180,
+                  "etherPurify": 9401,
+                  "feverRecovery": 232925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 430,
+                  "main": 9310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33850,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9310,
+                  "stunRatioGrowth": 430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221008, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1221008": {
+                  "attackData": [],
+                  "attributeInfliction": 5138,
+                  "damagePercentage": 7280,
+                  "damagePercentageGrowth": 670,
+                  "etherPurify": 4504,
+                  "feverRecovery": 111650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4460,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221009, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1221009": {
+                  "attackData": [],
+                  "attributeInfliction": 7607,
+                  "damagePercentage": 10770,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 6667,
+                  "feverRecovery": 165275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 310,
+                  "main": 6610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 24010,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6610,
+                  "stunRatioGrowth": 310
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221010, Prop:1002}",
+              "name": "5th-Hit Daze Multiplier",
+              "param": {
+                "1221010": {
+                  "attackData": [],
+                  "attributeInfliction": 19204,
+                  "damagePercentage": 27180,
+                  "damagePercentageGrowth": 2480,
+                  "etherPurify": 16831,
+                  "feverRecovery": 416625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 60590,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16670,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nSwitch stances and unleash a powerful slash on enemies in front, dealing massive <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.\nAfter using this skill, you can immediately follow up with the 3rd hit of the current stance's <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Chain Attack: Celestial Harmony",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nYanagi unleashes her potential and delivers a powerful slash to a large area of enemies in front in a very short time, followed by an additional lightning strike, dealing massive <color=#2EB6FF>Electric DMG</color>.\nWhen the lightning strike hits an enemy affected by an Attribute Anomaly, it triggers a special <color=#FFFFFF>Disorder</color> effect called <color=#FFFFFF>Polarity Disorder</color>. This deals DMG equal to 15% of the original <color=#FFFFFF>Disorder</color> effect plus an additional <color=#2BAD00>{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%</color> of Yanagi's Anomaly Proficiency. <color=#FFFFFF>Polarity Disorder</color> will not remove the target's Anomaly.\nCharacter is invulnerable while using this skill.\nAfter using this skill, Yanagi can immediately follow up with the 3rd hit of the current stance's <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Ultimate: Raiei Tenge",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Celestial Harmony",
+          "param": [
+            {
+              "desc": "{Skill:1221015, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1221015": {
+                  "attackData": [],
+                  "attributeInfliction": 35958,
+                  "damagePercentage": 59310,
+                  "damagePercentageGrowth": 5400,
+                  "etherPurify": 20004,
+                  "feverRecovery": 2141150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5400,
+                  "main": 59310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17830,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221015, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1221015": {
+                  "attackData": [],
+                  "attributeInfliction": 35958,
+                  "damagePercentage": 59310,
+                  "damagePercentageGrowth": 5400,
+                  "etherPurify": 20004,
+                  "feverRecovery": 2141150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17830,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17830,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Raiei Tenge",
+          "param": [
+            {
+              "desc": "{Skill:1221016, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1221016": {
+                  "attackData": [],
+                  "attributeInfliction": 90439,
+                  "damagePercentage": 151180,
+                  "damagePercentageGrowth": 13750,
+                  "etherPurify": 72164,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 13750,
+                  "main": 151180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9750,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221016, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1221016": {
+                  "attackData": [],
+                  "attributeInfliction": 90439,
+                  "damagePercentage": 151180,
+                  "damagePercentageGrowth": 13750,
+                  "etherPurify": 72164,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 450,
+                  "main": 9750,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 9750,
+                  "stunRatioGrowth": 450
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%",
+              "name": "Additional DMG Multiplier",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Wandering Breeze",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nSlashes enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dash Attack: Fleeting Flight",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nSlashes enemies in front, dealing <color=#2EB6FF>Electric DMG</color>.\nCharacter is invulnerable while using this skill.\nAfter using this skill, you can immediately follow up with the 3rd hit of the current stance's <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Dodge Counter: Rapid Retaliation",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Fleeting Flight",
+          "param": [
+            {
+              "desc": "{Skill:1221013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1221013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5040,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4582,
+                  "feverRecovery": 113575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 460,
+                  "main": 5040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4540,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1221013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5040,
+                  "damagePercentageGrowth": 460,
+                  "etherPurify": 4582,
+                  "feverRecovery": 113575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16500,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4540,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Rapid Retaliation",
+          "param": [
+            {
+              "desc": "{Skill:1221014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1221014": {
+                  "attackData": [],
+                  "attributeInfliction": 7652,
+                  "damagePercentage": 23160,
+                  "damagePercentageGrowth": 2110,
+                  "etherPurify": 23504,
+                  "feverRecovery": 210650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2110,
+                  "main": 23160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18320,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1221014": {
+                  "attackData": [],
+                  "attributeInfliction": 7652,
+                  "damagePercentage": 23160,
+                  "damagePercentageGrowth": 2110,
+                  "etherPurify": 23504,
+                  "feverRecovery": 210650,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 18320,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 30620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18320,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nPerform a forward slash, dealing <color=#2EB6FF>Electric DMG</color>, and switch the current stance.\nAnti-Interrupt level is increased while using this skill.\nIf activated after the 3rd, 4th, or 5th hit of a <color=#FFFFFF>Basic Attack</color>, it activates <color=#FFFFFF>Swift Ruten</color>, speeding up the slashes while switching her current stance.\nBlock enemy attacks while <color=#FFFFFF>Swift Ruten</color> is active.\nUpon activating <color=#FFFFFF>Swift Ruten</color>, Yanagi can immediately follow up with the 3rd hit of the current stance's <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Special Attack: Ruten",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, hold <IconMap:Icon_SpecialReady> to activate:\nCharge up power for a quick forward thrust, followed by a downward attack, dealing massive <color=#2EB6FF>Electric DMG</color>.\nUpon executing the thrust, Yanagi switches stances and enters the <color=#FFFFFF>Shinrabanshou</color> state, lasting 15s. For the duration of this state, when following up with a subsequent <color=#FFFFFF>Basic Attack</color> from the 5th hit of a <color=#FFFFFF>Basic Attack</color> or other skills, the combo will begin directly from the 3rd hit of the <color=#FFFFFF>Basic Attack</color>.\nIf the downward attack hits an enemy suffering an Anomaly, it triggers a special <color=#FFFFFF>Disorder</color> effect, <color=#FFFFFF>Polarity Disorder</color>, dealing 15% of the original <color=#FFFFFF>Disorder</color> effect's DMG to the target, plus an additional <color=#2BAD00>{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%</color> of Yanagi's Anomaly Proficiency. <color=#FFFFFF>Polarity Disorder</color> will not remove the target's Anomaly.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Gekka Ruten",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Ruten",
+          "param": [
+            {
+              "desc": "{Skill:1221011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1221011": {
+                  "attackData": [],
+                  "attributeInfliction": 9600,
+                  "damagePercentage": 11740,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 5334,
+                  "feverRecovery": 264275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 11740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10570,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1221011": {
+                  "attackData": [],
+                  "attributeInfliction": 9600,
+                  "damagePercentage": 11740,
+                  "damagePercentageGrowth": 1070,
+                  "etherPurify": 5334,
+                  "feverRecovery": 264275,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 10570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10570,
+                  "stunRatioGrowth": 490
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Gekka Ruten",
+          "param": [
+            {
+              "desc": "40",
+              "name": "Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221022, Prop:1001}",
+              "name": "Thrust Attack DMG Multiplier",
+              "param": {
+                "1221022": {
+                  "attackData": [],
+                  "attributeInfliction": 14350,
+                  "damagePercentage": 16380,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 6667,
+                  "feverRecovery": 419375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 16380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12710,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221022, Prop:1002}",
+              "name": "Thrust Attack Daze Multiplier",
+              "param": {
+                "1221022": {
+                  "attackData": [],
+                  "attributeInfliction": 14350,
+                  "damagePercentage": 16380,
+                  "damagePercentageGrowth": 1490,
+                  "etherPurify": 6667,
+                  "feverRecovery": 419375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 12710,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12710,
+                  "stunRatioGrowth": 580
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221023, Prop:1001}",
+              "name": "Downward Attack DMG Multiplier",
+              "param": {
+                "1221023": {
+                  "attackData": [],
+                  "attributeInfliction": 26854,
+                  "damagePercentage": 37780,
+                  "damagePercentageGrowth": 3440,
+                  "etherPurify": 6670,
+                  "feverRecovery": 763400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3440,
+                  "main": 37780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10960,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1221023, Prop:1002}",
+              "name": "Downward Attack Daze Multiplier",
+              "param": {
+                "1221023": {
+                  "attackData": [],
+                  "attributeInfliction": 26854,
+                  "damagePercentage": 37780,
+                  "damagePercentageGrowth": 3440,
+                  "etherPurify": 6670,
+                  "feverRecovery": 763400,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 10960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10960,
+                  "stunRatioGrowth": 500
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%",
+              "name": "Additional DMG Multiplier",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1221001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Tsukuyomi Kagura (1st, 2nd Hit)"
+    },
+    "1221002": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Tsukuyomi Kagura (3rd, 4th, 5th Hit)"
+    },
+    "1221003": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Ruten"
+    },
+    "1221004": {
+      "desc": "<IconMap:Icon_Normal> (3rd, 4th, and 5th hit) ; <IconMap:Icon_Special>",
+      "name": "Special Attack: Ruten (Quick Switch)"
+    },
+    "1221005": {
+      "desc": "<IconMap:Icon_Normal> (3rd, 4th, and 5th hit) ; <IconMap:Icon_Special> (When Being Attacked)",
+      "name": "Special Attack: Ruten (Blocking an Attack)"
+    },
+    "1221006": {
+      "desc": "<IconMap:Icon_SpecialReady> (Hold)",
+      "name": "EX Special Attack: Gekka Ruten"
+    },
+    "1221007": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Fleeting Flight"
+    },
+    "1221008": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Rapid Retaliation"
+    },
+    "1221009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Celestial Harmony"
+    },
+    "1221010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Raiei Tenge"
+    },
+    "1221011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Blade of Elegance"
+    },
+    "1221012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Radiant Reversal"
+    },
+    "1221013": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Weeping Willow Stab"
+    }
+  },
+  "skin": {
+    "3112210": {
+      "desc": "Even reflective lenses can't hide the sharp gleam in the Deputy Chief's eyes. She has to constantly keep watch over a warrior obsessed with training, a scout who slacks off whenever possible, and a little one who's forever getting stomachaches.",
+      "name": "Tsukishiro Yanagi: Flowing Moonshade"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, on-field Anomaly DMG dealer",
+    "Switches Stances to gain combat buffs",
+    "Triggers Polarity Disorder to deal bonus DMG"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When any squad member inflicts an Anomaly on an enemy, Yanagi gains 1 stack of <color=#FFFFFF>Clarity</color>, lasting 15s, stacking up to 3 times. Repeated triggers reset the duration. Upon being hit by an enemy attack, Yanagi consumes 1 stack of <color=#FFFFFF>Clarity</color> to gain invulnerability for 1s. When Yanagi has 1 or more stacks of <color=#FFFFFF>Clarity</color>, her Anomaly Proficiency increases by 80.",
+      "desc2": "\"Having the clarity to see your enemy's weakness is like an extra safety net... and it increases your chances at victory.\"\nYanagi adjusts her glasses, remaining as composed as ever, even when victory is already assured.",
+      "name": "Know Thy Self, Know Thy Enemy"
+    },
+    "2": {
+      "desc": "During her <color=#FFFFFF>EX Special Attack</color>, the rapid thrust's <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 20%. Holding down the Special Attack button after a rapid thrust hits an enemy will consume 10 additional Energy to launch another thrust. If Energy is insufficient or the button is released, the attack automatically follows up with the downward attack. When the downward attack hits an enemy suffering an Anomaly and triggers <color=#FFFFFF>Polarity Disorder</color>, the DMG multiplier increases to 20% of the original <color=#FFFFFF>Disorder</color> effect. Each additional thrust increases this multiplier by 15%, up to a maximum of 2 extra thrusts.",
+      "desc2": "\"Yanagi can handle any unfamiliar environment thrown her way.\"\n\"I believe in her more than I believe in myself.\"\n— From a martial artist practicing \"the cutting of fallen leaves.\"",
+      "name": "Outstanding Adaptability"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Everyone says Section 6 is gathering oddballs and geniuses, with Tsukishiro Yanagi being the only \"normal\" one. But it's precisely her presence that holds the oddballs and geniuses together.",
+      "name": "Tsukishiro Style Management"
+    },
+    "4": {
+      "desc": "When Yanagi inflicts Attribute Anomaly DMG on an enemy, they suffer the <color=#FFFFFF>Exposed</color> effect, lasting 15s. Attacks on enemies under the <color=#FFFFFF>Expose</color> effect will have 16% increased PEN Ratio.",
+      "desc2": "No matter the situation, Tsukishiro Yanagi can rapidly grasp all the information at hand and make the most appropriate decision.",
+      "name": "Chessmaster"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "At present, Tsukishiro Yanagi is the sole designated guardian of Soukaku.\n\"Soukaku, this is the Chief's riceball, you mustn't eat it... forget it, come here, I'll heat it up for you.\"\n\"We'll just buy a similar one for the Chief later.\"",
+      "name": "\"Other Mother\""
+    },
+    "6": {
+      "desc": "After a thrust attack during her <color=#FFFFFF>EX Special Attack</color>, the duration of the <color=#FFFFFF>Shinrabanshou</color> state increases to 30s. While the state is active, <color=#FFFFFF>EX Special Attack</color> DMG increases by 20%. The maximum number of times the additional DMG multiplier increase effect for <color=#FFFFFF>Polarity Disorder</color> in <color=#FFFFFF>Outstanding Adaptability</color> can be triggered increases to 4, and the Energy cost for the first 4 additional thrust attacks is halved.",
+      "desc2": "Flowing through Tsukishiro Yanagi's veins is blood that isn't entirely her own. This blood once granted her new life in the face of despair, and with it, she gained certain special powers.\n\"But as you know, something that isn't mine... comes with a price.\"",
+      "name": "Inhuman Blood"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

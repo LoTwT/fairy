@@ -1,0 +1,1666 @@
+{
+  "camp": {
+    "3": "白祇重工"
+  },
+  "elementType": {
+    "201": "火属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "12201": {
+          "format": "{0:0.#}",
+          "name": "冲击力"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "火属性伤害加成"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "冲击力"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "102": "打击"
+  },
+  "id": 1101,
+  "locale": "zh",
+  "name": "珂蕾妲",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": ["1101501", "1101502", "1101503", "1101504", "1101505"],
+      "basic": [
+        "1101001",
+        "1101002",
+        "1101003",
+        "1101004",
+        "1101005",
+        "1101006",
+        "1101007"
+      ],
+      "chain": ["1101301", "1101401", "1101402"],
+      "dodge": ["1101201", "1101202"],
+      "special": [
+        "1101101",
+        "1101102",
+        "1101103",
+        "1101104",
+        "1101105",
+        "1101106"
+      ]
+    },
+    "parameterRowsById": {
+      "1101001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1101002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/8"
+      ],
+      "1101003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/9"
+      ],
+      "1101004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/10"
+      ],
+      "1101005": [
+        "/skill/basic/description/1/param/4",
+        "/skill/basic/description/1/param/11"
+      ],
+      "1101006": [
+        "/skill/basic/description/1/param/5",
+        "/skill/basic/description/1/param/12"
+      ],
+      "1101007": [
+        "/skill/basic/description/1/param/6",
+        "/skill/basic/description/1/param/13"
+      ],
+      "1101101": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/3"
+      ],
+      "1101102": [
+        "/skill/special/description/2/param/1",
+        "/skill/special/description/2/param/4"
+      ],
+      "1101103": [
+        "/skill/special/description/2/param/2",
+        "/skill/special/description/2/param/5"
+      ],
+      "1101104": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/3"
+      ],
+      "1101105": [
+        "/skill/special/description/3/param/1",
+        "/skill/special/description/3/param/4"
+      ],
+      "1101106": [
+        "/skill/special/description/3/param/2",
+        "/skill/special/description/3/param/5"
+      ],
+      "1101201": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1101202": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1101301": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1101401": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/2"
+      ],
+      "1101402": [
+        "/skill/chain/description/3/param/1",
+        "/skill/chain/description/3/param/3"
+      ],
+      "1101501": [
+        "/skill/assist/description/3/param/0",
+        "/skill/assist/description/3/param/1"
+      ],
+      "1101502": ["/skill/assist/description/4/param/0"],
+      "1101503": ["/skill/assist/description/4/param/1"],
+      "1101504": ["/skill/assist/description/4/param/2"],
+      "1101505": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "08/10",
+    "fullName": "珂蕾妲·贝洛伯格",
+    "gender": "女",
+    "impressionF": "哥哥，我们以前看的那个侦探片里的名言是怎么说的来着？\n「虽然外表看似小孩…」呃，实际上不管年龄还是外表，珂蕾妲也确实就是小孩子嘛，很可爱呀！",
+    "impressionM": "你的这句评价一定不能被当事人看到，不然我们的录像店招牌可能都会被她一怒之下用锤子砸了。",
+    "impressions": [
+      "对珂蕾妲的印象：\n · 珂蕾妲总是不肯坦率地承认她对甜品的爱",
+      " · 在下属面前，她想成为最可靠的社长",
+      " · 珂蕾妲的眼罩下——并不是会毁灭世界的魔眼，真是可喜可贺"
+    ],
+    "profileDesc": "珂蕾妲，白祇重工的现任社长。同时也是公司创始人霍尔斯的亲生女儿。\n父亲霍尔斯因涉嫌「卷款潜逃事件」失踪，导致公司遭受巨大冲击，几近一蹶不振。在那之后，达到法定年龄的珂蕾妲主动接过「烂摊子」，整合仅剩的公司人员和资产，重新开始经营资金和声誉都岌岌可危的白祇重工。\n在新的骨干成员们的协助下，白祇重工终于在业界相关领域内再次崭露头角。虽不及全盛时期的辉煌，但现在的白祇重工也称得上是业内值得瞩目的新星。\n在此过程中，珂蕾妲积累了实实在在的生活和工作阅历，也收获了一群始终追随她的如同家人般贴心的工友们。不过为了让娇小的自己能有个「领袖的样子」，珂蕾妲似乎总是会刻意用严厉的口吻和大家说话。\n这样特殊的成长经历，也使得珂蕾妲在某些方面远比同龄人更加成熟。\n当然，也会在某些方面看起来更加幼稚。\n推测：或许珂蕾妲相较同龄人更加单薄的身材，是由于长期在空洞内活动所产生的影响而造成的。\n目前尚未搜索到可以支撑此观点的公开论文及研究，我将会持续关注此议题。",
+    "stature": "150",
+    "trustLv": {
+      "1": "珂蕾妲，白祇重工的现任社长。同时也是公司创始人霍尔斯的亲生女儿。\n父亲霍尔斯因涉嫌「卷款潜逃事件」失踪，导致公司遭受巨大冲击，几近一蹶不振。在那之后，达到法定年龄的珂蕾妲主动接过「烂摊子」，整合仅剩的公司人员和资产，重新开始经营资金和声誉都岌岌可危的白祇重工。\n在新的骨干成员们的协助下，白祇重工终于在业界相关领域内再次崭露头角。虽不及全盛时期的辉煌，但现在的白祇重工也称得上是业内值得瞩目的新星。\n在此过程中，珂蕾妲积累了实实在在的生活和工作阅历，也收获了一群始终追随她的如同家人般贴心的工友们。不过为了让娇小的自己能有个「领袖的样子」，珂蕾妲似乎总是会刻意用严厉的口吻和大家说话。\n这样特殊的成长经历，也使得珂蕾妲在某些方面远比同龄人更加成熟。\n当然，也会在某些方面看起来更加幼稚。\n推测：或许珂蕾妲相较同龄人更加单薄的身材，是由于长期在空洞内活动所产生的影响而造成的。\n目前尚未搜索到可以支撑此观点的公开论文及研究，我将会持续关注此议题。",
+      "2": "",
+      "3": "根据相关行为分析可知，珂蕾妲其实很喜欢甜食，但是却不愿意坦率承认。\n推测原因为：她认为喜欢甜食很幼稚，不想让其他人觉得自己幼稚。\n此外，珂蕾妲似乎对所有与「小孩子」相关的形容词都表现出了过度的敏感，一旦提及就有可能遭受她的怒视：\n「先提醒你，我现在能轻松地敲到你的胫骨，所以『像个小孩子啊』之类的话你最好想清楚了再说！」",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成委托「安比的困扰」",
+      "完成代理人秘闻「满级小学生」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1101501": {
+        "desc": [
+          "珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>，或消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，招式造成的失衡值提升<color=#2BAD00>30%</color>。",
+          "队伍中存在与自身属性或阵营相同的角色或<color=#FFFFFF>[命破]</color>角色时触发：\n珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>引发爆炸命中敌人时，对目标施加减益效果；当目标陷入失衡状态后，<color=#FFFFFF>[连携技]</color>对其造成的伤害提升35%，最多叠加2层，失衡状态结束时该效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：爆破锤", "额外能力：白祇管理学"],
+        "potential": []
+      },
+      "1101502": {
+        "desc": [
+          "珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>，或消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，招式造成的失衡值提升<color=#2BAD00>35%</color>。",
+          "队伍中存在与自身属性或阵营相同的角色或<color=#FFFFFF>[命破]</color>角色时触发：\n珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>引发爆炸命中敌人时，对目标施加减益效果；当目标陷入失衡状态后，<color=#FFFFFF>[连携技]</color>对其造成的伤害提升35%，最多叠加2层，失衡状态结束时该效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：爆破锤", "额外能力：白祇管理学"],
+        "potential": []
+      },
+      "1101503": {
+        "desc": [
+          "珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>，或消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，招式造成的失衡值提升<color=#2BAD00>40%</color>。",
+          "队伍中存在与自身属性或阵营相同的角色或<color=#FFFFFF>[命破]</color>角色时触发：\n珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>引发爆炸命中敌人时，对目标施加减益效果；当目标陷入失衡状态后，<color=#FFFFFF>[连携技]</color>对其造成的伤害提升35%，最多叠加2层，失衡状态结束时该效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：爆破锤", "额外能力：白祇管理学"],
+        "potential": []
+      },
+      "1101504": {
+        "desc": [
+          "珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>，或消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，招式造成的失衡值提升<color=#2BAD00>45%</color>。",
+          "队伍中存在与自身属性或阵营相同的角色或<color=#FFFFFF>[命破]</color>角色时触发：\n珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>引发爆炸命中敌人时，对目标施加减益效果；当目标陷入失衡状态后，<color=#FFFFFF>[连携技]</color>对其造成的伤害提升35%，最多叠加2层，失衡状态结束时该效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：爆破锤", "额外能力：白祇管理学"],
+        "potential": []
+      },
+      "1101505": {
+        "desc": [
+          "珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>，或消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，招式造成的失衡值提升<color=#2BAD00>50%</color>。",
+          "队伍中存在与自身属性或阵营相同的角色或<color=#FFFFFF>[命破]</color>角色时触发：\n珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>引发爆炸命中敌人时，对目标施加减益效果；当目标陷入失衡状态后，<color=#FFFFFF>[连携技]</color>对其造成的伤害提升35%，最多叠加2层，失衡状态结束时该效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：爆破锤", "额外能力：白祇管理学"],
+        "potential": []
+      },
+      "1101506": {
+        "desc": [
+          "珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>，或消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，招式造成的失衡值提升<color=#2BAD00>55%</color>。",
+          "队伍中存在与自身属性或阵营相同的角色或<color=#FFFFFF>[命破]</color>角色时触发：\n珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>引发爆炸命中敌人时，对目标施加减益效果；当目标陷入失衡状态后，<color=#FFFFFF>[连携技]</color>对其造成的伤害提升35%，最多叠加2层，失衡状态结束时该效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：爆破锤", "额外能力：白祇管理学"],
+        "potential": []
+      },
+      "1101507": {
+        "desc": [
+          "珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>，或消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，招式造成的失衡值提升<color=#2BAD00>60%</color>。",
+          "队伍中存在与自身属性或阵营相同的角色或<color=#FFFFFF>[命破]</color>角色时触发：\n珂蕾妲发动<color=#FFFFFF>[强化特殊技]</color>引发爆炸命中敌人时，对目标施加减益效果；当目标陷入失衡状态后，<color=#FFFFFF>[连携技]</color>对其造成的伤害提升35%，最多叠加2层，失衡状态结束时该效果重置。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：爆破锤", "额外能力：白祇管理学"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n向前方敌人发动打击，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：让我来",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时<color=#FFFFFF>[支援点数]</color>的消耗量降低；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：护身锤",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动突进打击，造成<color=#FF5521>火属性伤害</color>，并获得<color=#FFFFFF>[熔炉升温]</color>效果；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：锤钟",
+          "potential": []
+        },
+        {
+          "name": "快速支援：让我来",
+          "param": [
+            {
+              "desc": "{Skill:1101501, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1101501": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 18380,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 8749,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 18380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18380,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101501, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1101501": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 18380,
+                  "damagePercentageGrowth": 1680,
+                  "etherPurify": 8749,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 840,
+                  "main": 18380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18380,
+                  "stunRatioGrowth": 840
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：护身锤",
+          "param": [
+            {
+              "desc": "{Skill:1101502, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1101502": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1180,
+                  "main": 25900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25900,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101503, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1101503": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1490,
+                  "main": 32730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32730,
+                  "stunRatioGrowth": 1490
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101504, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1101504": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 730,
+                  "main": 15930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15930,
+                  "stunRatioGrowth": 730
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：锤钟",
+          "param": [
+            {
+              "desc": "{Skill:1101505, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1101505": {
+                  "attackData": [],
+                  "attributeInfliction": 31992,
+                  "damagePercentage": 35920,
+                  "damagePercentageGrowth": 3270,
+                  "etherPurify": 16497,
+                  "feverRecovery": 1062600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3270,
+                  "main": 35920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31270,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101505, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1101505": {
+                  "attackData": [],
+                  "attributeInfliction": 31992,
+                  "damagePercentage": 35920,
+                  "damagePercentageGrowth": 3270,
+                  "etherPurify": 16497,
+                  "feverRecovery": 1062600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1430,
+                  "main": 31270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31270,
+                  "stunRatioGrowth": 1430
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多四段的打击，造成<color=#F0D12B>物理伤害</color>；\n当珂蕾妲拥有<color=#FFFFFF>[熔炉升温]</color>效果时，能够在第二段攻击后发动强化<color=#FFFFFF>[普通攻击]</color>，消耗<color=#FFFFFF>[熔炉升温]</color>效果并造成大量<color=#FF5521>火属性伤害</color>；\n当珂蕾妲与本同时出战，发动强化<color=#FFFFFF>[普通攻击]</color>时，会由双方配合发动协同攻击，进一步提升招式的威力；\n<color=#FFFFFF>[普通攻击]</color>第四段和强化<color=#FFFFFF>[普通攻击]</color>发动期间拥有无敌效果。",
+          "name": "普通攻击：砸扁，粉碎",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：砸扁，粉碎",
+          "param": [
+            {
+              "desc": "{Skill:1101001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1101001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6360,
+                  "damagePercentageGrowth": 580,
+                  "etherPurify": 3027,
+                  "feverRecovery": 83325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 580,
+                  "main": 6360,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3180,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1101002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7920,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6238,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 7920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6550,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1101003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12610,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 9927,
+                  "feverRecovery": 273075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1150,
+                  "main": 12610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35740,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1101004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 31740,
+                  "damagePercentageGrowth": 2890,
+                  "etherPurify": 23741,
+                  "feverRecovery": 653125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2890,
+                  "main": 31740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 85470,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24930,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101005, Prop:1001}",
+              "name": "强化普攻一段伤害倍率",
+              "param": {
+                "1101005": {
+                  "attackData": [],
+                  "attributeInfliction": 4435,
+                  "damagePercentage": 16080,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 5846,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1470,
+                  "main": 16080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6140,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101006, Prop:1001}",
+              "name": "强化普攻二段伤害倍率",
+              "param": {
+                "1101006": {
+                  "attackData": [],
+                  "attributeInfliction": 14908,
+                  "damagePercentage": 40490,
+                  "damagePercentageGrowth": 3690,
+                  "etherPurify": 16588,
+                  "feverRecovery": 456225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3690,
+                  "main": 40490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 59720,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15660,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101007, Prop:1001}",
+              "name": "强化普攻二段伤害倍率（协同）",
+              "param": {
+                "1101007": {
+                  "attackData": [],
+                  "attributeInfliction": 18629,
+                  "damagePercentage": 50130,
+                  "damagePercentageGrowth": 4560,
+                  "etherPurify": 20308,
+                  "feverRecovery": 558525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4560,
+                  "main": 50130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23460,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1101001": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 6360,
+                  "damagePercentageGrowth": 580,
+                  "etherPurify": 3027,
+                  "feverRecovery": 83325,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3180,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 10900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3180,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1101002": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7920,
+                  "damagePercentageGrowth": 720,
+                  "etherPurify": 6238,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 22460,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6550,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1101003": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 12610,
+                  "damagePercentageGrowth": 1150,
+                  "etherPurify": 9927,
+                  "feverRecovery": 273075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 10430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35740,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10430,
+                  "stunRatioGrowth": 480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1101004": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 31740,
+                  "damagePercentageGrowth": 2890,
+                  "etherPurify": 23741,
+                  "feverRecovery": 653125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1140,
+                  "main": 24930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 85470,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24930,
+                  "stunRatioGrowth": 1140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101005, Prop:1002}",
+              "name": "强化普攻一段失衡倍率",
+              "param": {
+                "1101005": {
+                  "attackData": [],
+                  "attributeInfliction": 4435,
+                  "damagePercentage": 16080,
+                  "damagePercentageGrowth": 1470,
+                  "etherPurify": 5846,
+                  "feverRecovery": 160875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 21050,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6140,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101006, Prop:1002}",
+              "name": "强化普攻二段失衡倍率",
+              "param": {
+                "1101006": {
+                  "attackData": [],
+                  "attributeInfliction": 14908,
+                  "damagePercentage": 40490,
+                  "damagePercentageGrowth": 3690,
+                  "etherPurify": 16588,
+                  "feverRecovery": 456225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 720,
+                  "main": 15660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 59720,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15660,
+                  "stunRatioGrowth": 720
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101007, Prop:1002}",
+              "name": "强化普攻二段失衡倍率（协同）",
+              "param": {
+                "1101007": {
+                  "attackData": [],
+                  "attributeInfliction": 18629,
+                  "damagePercentage": 50130,
+                  "damagePercentageGrowth": 4560,
+                  "etherPurify": 20308,
+                  "feverRecovery": 558525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1070,
+                  "main": 23460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 73110,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 23460,
+                  "stunRatioGrowth": 1070
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n在前方大范围区域发动强力爆炸，造成大量<color=#FF5521>火属性伤害</color>，并获得<color=#FFFFFF>[熔炉升温]</color>效果；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：天崩-地裂",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n在前方大范围区域发动强力爆炸，造成大量<color=#FF5521>火属性伤害</color>，并获得<color=#FFFFFF>[熔炉升温]</color>效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：锤进地心",
+          "potential": []
+        },
+        {
+          "name": "连携技：天崩-地裂",
+          "param": [
+            {
+              "desc": "{Skill:1101301, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1101301": {
+                  "attackData": [],
+                  "attributeInfliction": 40613,
+                  "damagePercentage": 63600,
+                  "damagePercentageGrowth": 5790,
+                  "etherPurify": 20664,
+                  "feverRecovery": 2397175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5790,
+                  "main": 63600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21700,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101301, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1101301": {
+                  "attackData": [],
+                  "attributeInfliction": 40613,
+                  "damagePercentage": 63600,
+                  "damagePercentageGrowth": 5790,
+                  "etherPurify": 20664,
+                  "feverRecovery": 2397175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 990,
+                  "main": 21700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21700,
+                  "stunRatioGrowth": 990
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：锤进地心",
+          "param": [
+            {
+              "desc": "{Skill:1101401, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1101401": {
+                  "attackData": [],
+                  "attributeInfliction": 18003,
+                  "damagePercentage": 154880,
+                  "damagePercentageGrowth": 14080,
+                  "etherPurify": 68004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 14080,
+                  "main": 154880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 100490,
+                  "stunRatioGrowth": 4570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101402, Prop:1001}",
+              "name": "伤害倍率（协同）",
+              "param": {
+                "1101402": {
+                  "attackData": [],
+                  "attributeInfliction": 19066,
+                  "damagePercentage": 169400,
+                  "damagePercentageGrowth": 15400,
+                  "etherPurify": 67334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 15400,
+                  "main": 169400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109650,
+                  "stunRatioGrowth": 4990
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101401, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1101401": {
+                  "attackData": [],
+                  "attributeInfliction": 18003,
+                  "damagePercentage": 154880,
+                  "damagePercentageGrowth": 14080,
+                  "etherPurify": 68004,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4570,
+                  "main": 100490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 100490,
+                  "stunRatioGrowth": 4570
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101402, Prop:1002}",
+              "name": "失衡倍率（协同）",
+              "param": {
+                "1101402": {
+                  "attackData": [],
+                  "attributeInfliction": 19066,
+                  "damagePercentage": 169400,
+                  "damagePercentageGrowth": 15400,
+                  "etherPurify": 67334,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4990,
+                  "main": 109650,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 109650,
+                  "stunRatioGrowth": 4990
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：走着瞧",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前方进行打击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "冲刺攻击：给我颤抖",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n向前方敌人发动打击并引发爆炸，造成<color=#FF5521>火属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：别小看我",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：给我颤抖",
+          "param": [
+            {
+              "desc": "{Skill:1101201, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1101201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5610,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 2667,
+                  "feverRecovery": 73425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 510,
+                  "main": 5610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2810,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101201, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1101201": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5610,
+                  "damagePercentageGrowth": 510,
+                  "etherPurify": 2667,
+                  "feverRecovery": 73425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2810,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 9610,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2810,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：别小看我",
+          "param": [
+            {
+              "desc": "{Skill:1101202, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1101202": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 34390,
+                  "damagePercentageGrowth": 3130,
+                  "etherPurify": 32497,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3130,
+                  "main": 34390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28880,
+                  "stunRatioGrowth": 1320
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101202, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1101202": {
+                  "attackData": [],
+                  "attributeInfliction": 17496,
+                  "damagePercentage": 34390,
+                  "damagePercentageGrowth": 3130,
+                  "etherPurify": 32497,
+                  "feverRecovery": 481250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1320,
+                  "main": 28880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 62990,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28880,
+                  "stunRatioGrowth": 1320
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n对前方进行打击并引发爆炸，造成<color=#FF5521>火属性伤害</color>；\n若衔接在<color=#FFFFFF>[普通攻击]</color>第二、第四段或强化<color=#FFFFFF>[普通攻击]</color>后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化<color=#FFFFFF>[普通攻击]</color>后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：爆破！铁锤时间",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n对前方进行打击并引发强力爆炸，造成大量<color=#FF5521>火属性伤害</color>，并获得<color=#FFFFFF>[熔炉升温]</color>效果；\n若衔接在<color=#FFFFFF>[普通攻击]</color>第二、第四段或强化<color=#FFFFFF>[普通攻击]</color>后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化<color=#FFFFFF>[普通攻击]</color>后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：沸腾熔炉",
+          "potential": []
+        },
+        {
+          "name": "特殊技：爆破！铁锤时间",
+          "param": [
+            {
+              "desc": "{Skill:1101101, Prop:1001}",
+              "name": "打击伤害倍率",
+              "param": {
+                "1101101": {
+                  "attackData": [],
+                  "attributeInfliction": 6418,
+                  "damagePercentage": 5190,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4935,
+                  "feverRecovery": 135850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5190,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101102, Prop:1001}",
+              "name": "引爆伤害倍率",
+              "param": {
+                "1101102": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 7780,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 710,
+                  "main": 7780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101103, Prop:1001}",
+              "name": "引爆伤害倍率（协同）",
+              "param": {
+                "1101103": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 8550,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 780,
+                  "main": 8550,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101101, Prop:1002}",
+              "name": "打击失衡倍率",
+              "param": {
+                "1101101": {
+                  "attackData": [],
+                  "attributeInfliction": 6418,
+                  "damagePercentage": 5190,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 4935,
+                  "feverRecovery": 135850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 5190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5190,
+                  "stunRatioGrowth": 240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101102, Prop:1002}",
+              "name": "引爆失衡倍率",
+              "param": {
+                "1101102": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 7780,
+                  "damagePercentageGrowth": 710,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101103, Prop:1002}",
+              "name": "引爆失衡倍率（协同）",
+              "param": {
+                "1101103": {
+                  "attackData": [],
+                  "attributeInfliction": 5918,
+                  "damagePercentage": 8550,
+                  "damagePercentageGrowth": 780,
+                  "etherPurify": 7402,
+                  "feverRecovery": 203775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 7780,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7780,
+                  "stunRatioGrowth": 360
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：沸腾熔炉",
+          "param": [
+            {
+              "desc": "{Skill:1101104, Prop:1001}",
+              "name": "打击伤害倍率",
+              "param": {
+                "1101104": {
+                  "attackData": [],
+                  "attributeInfliction": 7248,
+                  "damagePercentage": 15230,
+                  "damagePercentageGrowth": 1390,
+                  "etherPurify": 14497,
+                  "feverRecovery": 398750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1390,
+                  "main": 15230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15230,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101105, Prop:1001}",
+              "name": "引爆伤害倍率",
+              "param": {
+                "1101105": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 60600,
+                  "damagePercentageGrowth": 5510,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5510,
+                  "main": 60600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101106, Prop:1001}",
+              "name": "引爆伤害倍率（协同）",
+              "param": {
+                "1101106": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 66660,
+                  "damagePercentageGrowth": 6060,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 6060,
+                  "main": 66660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101104, Prop:1002}",
+              "name": "打击失衡倍率",
+              "param": {
+                "1101104": {
+                  "attackData": [],
+                  "attributeInfliction": 7248,
+                  "damagePercentage": 15230,
+                  "damagePercentageGrowth": 1390,
+                  "etherPurify": 14497,
+                  "feverRecovery": 398750,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 15230,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 15230,
+                  "stunRatioGrowth": 700
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101105, Prop:1002}",
+              "name": "引爆失衡倍率",
+              "param": {
+                "1101105": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 60600,
+                  "damagePercentageGrowth": 5510,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2250,
+                  "main": 49400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1101106, Prop:1002}",
+              "name": "引爆失衡倍率（协同）",
+              "param": {
+                "1101106": {
+                  "attackData": [],
+                  "attributeInfliction": 47612,
+                  "damagePercentage": 66660,
+                  "damagePercentageGrowth": 6060,
+                  "etherPurify": 13664,
+                  "feverRecovery": 1709675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2250,
+                  "main": 49400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 49400,
+                  "stunRatioGrowth": 2250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1101001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：砸扁，粉碎"
+    },
+    "1101002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：爆破！铁锤时间"
+    },
+    "1101003": {
+      "desc": "<IconMap:Icon_Special>（普攻连段中）",
+      "name": "特殊技：爆破！铁锤时间（快速引爆）"
+    },
+    "1101004": {
+      "desc": "<IconMap:Icon_SpecialReady>（耗能）",
+      "name": "强化特殊技：沸腾熔炉"
+    },
+    "1101005": {
+      "desc": "<IconMap:Icon_SpecialReady>（普攻连段中）（耗能）",
+      "name": "强化特殊技：沸腾熔炉（快速引爆）"
+    },
+    "1101006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：给我颤抖"
+    },
+    "1101007": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：别小看我"
+    },
+    "1101008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：天崩-地裂"
+    },
+    "1101009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：锤进地心"
+    },
+    "1101010": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：让我来"
+    },
+    "1101011": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：护身锤"
+    },
+    "1101012": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：锤钟"
+    }
+  },
+  "skin": {
+    "3111010": {
+      "desc": "赤红的身影挥舞双锤，仿佛连时间都能击碎。\n可你是这样年轻，一切正准备开始。不必着急长大，你终将成为你自己。",
+      "name": "珂蕾妲·赤子烈锤"
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，击破辅助",
+    "快速为敌人累积失衡值",
+    "与本协同攻击提升招式威力"
+  ],
+  "talent": {
+    "1": {
+      "desc": "当衔接在<color=#FFFFFF>[普通攻击]</color>第二、第四段或强化<color=#FFFFFF>[普通攻击]</color>后，快速发动<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[强化特殊技]</color>时，招式造成的失衡值提升15%。",
+      "desc2": "火爆的脾气只是表象，其实珂蕾妲心思很细腻。比如她知道什么时候挥锤能打得更痛。",
+      "name": "锤击节奏"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>命中敌人时，珂蕾妲回复60点能量，45秒内最多触发一次。",
+      "desc2": "对珂蕾妲来说，完美的锤击自有独特的节奏。\n像是加速敲击手鼓，每一击都在为下一次更强的节拍蓄力。\n当然，面前的「玩具」能够撑住几下，就不好说了。",
+      "name": "动能回收"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "作为合格的「玩具」，当珂蕾妲逐渐找到挥锤的手感时，\n最好不要节外生枝惹麻烦，只要老老实实挨锤就好。\n——毕竟，反抗又有什么用呢？",
+      "name": "「别惹我！」"
+    },
+    "4": {
+      "desc": "消耗<color=#FFFFFF>[熔炉升温]</color>发动强化<color=#FFFFFF>[普通攻击]</color>时，珂蕾妲获得1层充能（上限2层）；<color=#FFFFFF>[连携技：天崩-地裂]</color>或<color=#FFFFFF>[终结技：锤进地心]</color>命中敌人时，消耗所有充能，每层充能使当前招式造成的伤害提升18%。",
+      "desc2": "当炽热的挥锤让周围温度上升后，珂蕾妲便进入了作战状态。\n现在，她比以太炸药更易燃易爆。",
+      "name": "熔炉余温"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "珂蕾妲非常在意自己这个年轻的首领会让外人小瞧白祇重工。为了弥补这一点，她总是悄悄努力训练。",
+      "name": "「敢小瞧我？」"
+    },
+    "6": {
+      "desc": "在<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>中，引发爆炸命中敌人时，额外造成珂蕾妲360%攻击力的伤害。",
+      "desc2": "在珂蕾妲眼里，讨厌的人分为两种：\n笨蛋，和无可救药的笨蛋。\n万幸的是，白祇重工向来不缺烈性以太炸药。\n多余的份正好可以用在这些笨蛋头上。",
+      "name": "饱和爆破"
+    }
+  },
+  "weaponType": {
+    "2": "击破"
+  }
+}
