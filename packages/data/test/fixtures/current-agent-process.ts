@@ -2,6 +2,7 @@ import filesystem, { readFile } from "node:fs/promises"
 import { syncBuiltinESMExports } from "node:module"
 import { join } from "node:path"
 import {
+  generateNanokaAgents,
   recoverNanokaAgents,
   updateNanokaAgents,
   withNanokaCurrentDataset,
@@ -43,6 +44,22 @@ filesystem.rm = async (path, removeOptions) => {
   }
   return remove(path, removeOptions)
 }
+const write = filesystem.writeFile
+filesystem.writeFile = async (path, data, writeOptions) => {
+  if (
+    options.pause === "initialization-partially-written" &&
+    String(path).endsWith("/state.next")
+  ) {
+    const content = Buffer.from(data as Uint8Array)
+    await write(
+      path,
+      content.subarray(0, Math.floor(content.length / 2)),
+      writeOptions,
+    )
+    await checkpoint("initialization-partially-written")
+  }
+  return write(path, data, writeOptions)
+}
 syncBuiltinESMExports()
 try {
   const result =
@@ -62,7 +79,11 @@ try {
               }
             },
           )
-        : await updateNanokaAgents({ ...options, checkpoint })
+        : await (
+            options.mode === "generate"
+              ? generateNanokaAgents
+              : updateNanokaAgents
+          )({ ...options, checkpoint })
   process.stdout.write(JSON.stringify(result))
 } catch (error) {
   process.stderr.write(error instanceof Error ? error.message : String(error))

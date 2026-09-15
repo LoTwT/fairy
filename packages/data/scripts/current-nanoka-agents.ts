@@ -1,12 +1,12 @@
 import {
   recoverNanokaAgents,
-  updateNanokaAgents,
+  generateNanokaAgents,
   withNanokaCurrentDataset,
 } from "./nanoka-integration/current.ts"
 import { createCommandFailureHandler } from "./terminal.ts"
 
 const usages = {
-  update: "用法：update:nanoka:agents <rawRoot> <version> <targetDirectory>",
+  generate: "用法：generate:integrated <rawRoot> <version> <targetDirectory>",
   recover: "用法：recover:nanoka:agents <targetDirectory>",
   verify: "用法：verify:nanoka:current <targetDirectory>",
 }
@@ -14,8 +14,8 @@ const handleFailure = createCommandFailureHandler("Nanoka 代理人当前数据�
 try {
   process.stdout.on("error", handleFailure)
   const [mode, ...args] = process.argv.slice(2)
-  if (mode !== "update" && mode !== "recover" && mode !== "verify")
-    throw new Error("需要 update、recover 或 verify 子命令")
+  if (mode !== "generate" && mode !== "recover" && mode !== "verify")
+    throw new Error("需要 generate、recover 或 verify 子命令")
   const usage = usages[mode]
   if (args.length === 1 && (args[0] === "--help" || args[0] === "-h")) {
     process.stdout.write(`${usage}\n`)
@@ -27,12 +27,12 @@ try {
     if (option !== undefined) throw new Error(`未知选项：${option}；${usage}`)
     if (args.includes("--help") || args.includes("-h"))
       throw new Error(`--help/-h 只能单独使用；${usage}`)
-    const count = mode === "update" ? 3 : 1
+    const count = mode === "generate" ? 3 : 1
     if (args.length !== count || args.some((argument) => !argument))
       throw new Error(`需要 ${count} 个非空位置参数；${usage}`)
     const result =
-      mode === "update"
-        ? await updateNanokaAgents({
+      mode === "generate"
+        ? await generateNanokaAgents({
             rawRoot: args[0],
             version: args[1],
             targetDirectory: args[2],

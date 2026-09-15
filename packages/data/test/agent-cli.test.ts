@@ -17,7 +17,7 @@ import { agentInput } from "./fixtures/agent-source.ts"
 
 const packageDirectory = fileURLToPath(new URL("../", import.meta.url))
 const repositoryDirectory = resolve(packageDirectory, "../..")
-const integrateCommand = "integrate:nanoka:agents"
+const generateCommand = "generate:integrated"
 const verifyCommand = "verify:nanoka:agents"
 const temporaryDirectories: string[] = []
 
@@ -78,7 +78,15 @@ if (process.env.FAIRY_CLI_TEST_WAIT_FOR_STDIN === "1") {
 }
 `,
   )
-  return { root, rawRoot, temporaryParent, version, versionRoot, preload }
+  return {
+    root,
+    rawRoot,
+    temporaryParent,
+    targetDirectory: join(temporaryParent, "integrated"),
+    version,
+    versionRoot,
+    preload,
+  }
 }
 
 type Fixture = Awaited<ReturnType<typeof fixture>>
@@ -178,10 +186,10 @@ function failure(
 
 function build(input: Fixture) {
   return success(
-    runCommand(input, integrateCommand, [
+    runCommand(input, generateCommand, [
       input.rawRoot,
       input.version,
-      input.temporaryParent,
+      input.targetDirectory,
     ]),
   )
 }
@@ -200,7 +208,7 @@ async function directoryBytes(root: string): Promise<Record<string, Buffer>> {
 }
 
 describe("offline agent package commands", () => {
-  it.each([integrateCommand, verifyCommand])(
+  it.each([generateCommand, verifyCommand])(
     "%s reports a closed stdout pipe while printing help",
     async (command) => {
       const input = await fixture()
@@ -216,24 +224,24 @@ describe("offline agent package commands", () => {
     30_000,
   )
 
-  it.each([integrateCommand, verifyCommand])(
+  it.each([generateCommand, verifyCommand])(
     "%s reports a closed stdout pipe after producing a JSON receipt",
     async (command) => {
       const input = await fixture()
       const receipt = build(input)
       const rawBytes = await directoryBytes(input.rawRoot)
-      const previousBuild = await directoryBytes(receipt.buildDirectory)
+      const previousBuild = await directoryBytes(receipt.artifactDirectory)
       const directories = await readdir(input.temporaryParent)
       const commandArguments =
-        command === integrateCommand
-          ? [input.rawRoot, input.version, input.temporaryParent]
+        command === generateCommand
+          ? [input.rawRoot, input.version, input.targetDirectory]
           : [receipt.artifactDirectory]
       failure(
         await runCommandWithClosedStdout(input, command, commandArguments),
         "失败：write EPIPE",
       )
       expect(await directoryBytes(input.rawRoot)).toEqual(rawBytes)
-      expect(await directoryBytes(receipt.buildDirectory)).toEqual(
+      expect(await directoryBytes(receipt.artifactDirectory)).toEqual(
         previousBuild,
       )
       expect(
@@ -241,23 +249,7 @@ describe("offline agent package commands", () => {
           .verified,
       ).toBe(true)
       const after = await readdir(input.temporaryParent)
-      if (command === integrateCommand) {
-        const completedBuilds = after.filter(
-          (name) => !directories.includes(name),
-        )
-        expect(completedBuilds).toHaveLength(1)
-        const artifactDirectory = join(
-          input.temporaryParent,
-          completedBuilds[0],
-          "integrated",
-        )
-        expect(
-          success(runCommand(input, verifyCommand, [artifactDirectory]))
-            .verified,
-        ).toBe(true)
-      } else {
-        expect(after).toEqual(directories)
-      }
+      expect(after).toEqual(directories)
     },
     30_000,
   )
@@ -274,21 +266,19 @@ describe("offline agent package commands", () => {
       const receipt = success(
         runCommand(
           input,
-          integrateCommand,
+          generateCommand,
           [
             argument(input.rawRoot),
             input.version,
-            argument(input.temporaryParent),
+            argument(input.targetDirectory),
           ],
           fromRoot,
         ),
       )
-      expect(dirname(receipt.buildDirectory)).toBe(input.temporaryParent)
-      expect(receipt.artifactDirectory).toBe(
-        join(receipt.buildDirectory, "integrated"),
-      )
+      expect(receipt.artifactDirectory).toBe(input.targetDirectory)
+      expect(receipt.outcome).toBe("committed")
       expect(receipt.maintenanceReportPath).toBe(
-        join(receipt.buildDirectory, "maintenance.json"),
+        join(input.temporaryParent, ".integrated.fairy-state/maintenance.json"),
       )
       const index = JSON.parse(
         await readFile(join(receipt.artifactDirectory, "index.json"), "utf8"),
@@ -328,28 +318,17 @@ describe("offline agent package commands", () => {
     30_000,
   )
 
-  it(
-    "uses a fresh system temporary directory when the parent is omitted",
-    { timeout: 30_000 },
-    async () => {
-      const input = await fixture()
-      const first = success(
-        runCommand(input, integrateCommand, [input.rawRoot, input.version]),
-      )
-      temporaryDirectories.push(first.buildDirectory)
-      const second = success(
-        runCommand(input, integrateCommand, [input.rawRoot, input.version]),
-      )
-      temporaryDirectories.push(second.buildDirectory)
-      expect(dirname(first.buildDirectory)).toBe(await realpath(tmpdir()))
-      expect(second.buildDirectory).not.toBe(first.buildDirectory)
-      expect(await directoryBytes(first.buildDirectory)).toEqual(
-        await directoryBytes(second.buildDirectory),
-      )
-    },
-  )
+  it("repeats generation at the explicit target", async () => {
+    const input = await fixture()
+    const first = build(input)
+    const before = await directoryBytes(first.artifactDirectory)
+    const second = build(input)
+    expect(second.outcome).toBe("unchanged")
+    expect(second.artifactDirectory).toBe(first.artifactDirectory)
+    expect(await directoryBytes(second.artifactDirectory)).toEqual(before)
+  })
 
-  for (const command of [integrateCommand, verifyCommand]) {
+  for (const command of [generateCommand, verifyCommand]) {
     it.each(["--help", "-h"])(
       `${command} %s succeeds without file access`,
       async (help) => {
@@ -367,7 +346,7 @@ describe("offline agent package commands", () => {
       async (help) => {
         const input = await fixture()
         const positionalArguments =
-          command === integrateCommand ? ["raw", "v", "parent"] : ["artifact"]
+          command === generateCommand ? ["raw", "v", "parent"] : ["artifact"]
         for (const commandArguments of [
           [help, "extra"],
           [...positionalArguments, help],
@@ -398,9 +377,10 @@ describe("offline agent package commands", () => {
       [""],
       ["--unknown"],
       ["-x"],
-      ...(command === integrateCommand
+      ...(command === generateCommand
         ? [
             ["missing"],
+            ["raw", "v"],
             ["raw", "v", "parent", "extra"],
             ["raw", "--unknown"],
             ["raw", "v", "--unknown"],
@@ -428,19 +408,23 @@ describe("offline agent package commands", () => {
   }
 
   it(
-    "rejects missing input, version and output parent without creating them",
+    "rejects missing input and version without creating the target",
     { timeout: 30_000 },
     async () => {
       const input = await fixture()
       const missing = join(input.root, "does not exist")
       for (const commandArguments of [
-        [missing, input.version, input.temporaryParent],
-        [input.rawRoot, "missing-version", input.temporaryParent],
-        [input.rawRoot, input.version, missing],
+        [missing, input.version, input.targetDirectory],
+        [input.rawRoot, "missing-version", input.targetDirectory],
       ])
-        failure(runCommand(input, integrateCommand, commandArguments), "ENOENT")
+        failure(runCommand(input, generateCommand, commandArguments), "ENOENT")
       failure(runCommand(input, verifyCommand, [missing]), "ENOENT")
-      expect(await readdir(input.temporaryParent)).toEqual([])
+      await expect(readdir(input.targetDirectory)).rejects.toMatchObject({
+        code: "ENOENT",
+      })
+      expect(await readdir(input.temporaryParent)).toEqual([
+        ".integrated.fairy-state",
+      ])
       expect(await readdir(input.root)).not.toContain("does not exist")
     },
   )
@@ -450,7 +434,7 @@ describe("offline agent package commands", () => {
     { timeout: 30_000 },
     async () => {
       const input = await fixture()
-      await writeJson(join(input.temporaryParent, "integrated/keep.json"), {
+      await writeJson(join(input.temporaryParent, "adjacent/keep.json"), {
         existing: true,
       })
       const receipt = build(input)
@@ -458,10 +442,10 @@ describe("offline agent package commands", () => {
       const directories = await readdir(input.temporaryParent)
       await rm(join(input.versionRoot, "en/character/10.json"))
       failure(
-        runCommand(input, integrateCommand, [
+        runCommand(input, generateCommand, [
           input.rawRoot,
           input.version,
-          input.temporaryParent,
+          input.targetDirectory,
         ]),
         "zzz/synthetic-1/en/character/10.json",
       )
@@ -507,10 +491,10 @@ describe("offline agent package commands", () => {
       detail[field] = Number.MAX_SAFE_INTEGER + 1
       await writeJson(detailPath, detail)
       const rawBytes = await readFile(detailPath)
-      const failedBuild = runCommand(input, integrateCommand, [
+      const failedBuild = runCommand(input, generateCommand, [
         input.rawRoot,
         input.version,
-        input.temporaryParent,
+        input.targetDirectory,
       ])
       failure(failedBuild, "zzz/synthetic-1/zh/character/2.json")
       expect(failedBuild.stderr).toContain('"2" [zh]')
@@ -542,7 +526,7 @@ describe("offline agent package commands", () => {
   )
 
   it(
-    "Git ignores actual build directories at any depth but keeps adjacent source and documentation",
+    "Git ignores control and temporary build directories but keeps artifacts and adjacent files",
     { timeout: 30_000 },
     async () => {
       const input = await fixture(packageDirectory)
@@ -553,7 +537,6 @@ describe("offline agent package commands", () => {
       temporaryDirectories.push(rootBuild)
       await writeJson(join(rootBuild, "maintenance.json"), {})
       for (const path of [
-        receipt.artifactDirectory,
         receipt.maintenanceReportPath,
         join(rootBuild, "maintenance.json"),
       ]) {
@@ -563,8 +546,25 @@ describe("offline agent package commands", () => {
           { cwd: repositoryDirectory, encoding: "utf8" },
         )
         expect(result.status).toBe(0)
-        expect(result.stdout).toContain("fairy-nanoka-agents-*/")
+        expect(result.stdout).toContain(
+          path === receipt.maintenanceReportPath
+            ? ".*.fairy-state/"
+            : "fairy-nanoka-agents-*/",
+        )
       }
+      const artifactIgnored = spawnSync(
+        "git",
+        [
+          "check-ignore",
+          "--no-index",
+          join(receipt.artifactDirectory, "index.json"),
+        ],
+        {
+          cwd: repositoryDirectory,
+          encoding: "utf8",
+        },
+      )
+      expect(artifactIgnored.status).toBe(1)
       for (const name of [
         "source.ts",
         "README.md",
@@ -590,7 +590,7 @@ it("current commands keep committed data when actual stdout pipes close", async 
   const target = join(input.root, "integrated")
   const args = [input.rawRoot, input.version, target]
   for (const command of [
-    "update:nanoka:agents",
+    generateCommand,
     "recover:nanoka:agents",
     "verify:nanoka:current",
   ]) {
@@ -604,7 +604,7 @@ it("current commands keep committed data when actual stdout pipes close", async 
     const completed = await runCommandWithClosedStdout(
       input,
       command,
-      command === "update:nanoka:agents" ? args : [target],
+      command === generateCommand ? args : [target],
     )
     failure(completed, "write EPIPE")
     expect(

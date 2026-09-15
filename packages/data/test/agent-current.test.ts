@@ -8,6 +8,7 @@ import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import {
+  generateNanokaAgents,
   updateNanokaAgents,
   recoverNanokaAgents,
   withNanokaCurrentDataset,
@@ -237,8 +238,19 @@ async function reportHeavySource(input: Fixture) {
   )
 }
 
+async function cloneFixture() {
+  const input = await fixture()
+  const build = await buildNanokaAgents({
+    ...input,
+    temporaryParent: input.root,
+  })
+  await fs.rename(build.artifactDirectory, input.targetDirectory)
+  await fs.rm(build.buildDirectory, { recursive: true })
+  return input
+}
+
 describe("current Nanoka dataset", () => {
-  it.each(["update", "recover", "read"] as const)(
+  it.each(["generate", "update", "recover", "read"] as const)(
     "rejects SQLite sidecars before opening the database and preserves the external hardlink: %s",
     async (mode) => {
       const input = await fixture()
@@ -258,14 +270,16 @@ describe("current Nanoka dataset", () => {
       const before = await fingerprints(control(input))
       const externalBefore = await fs.stat(external, { bigint: true })
       const operation =
-        mode === "update"
-          ? updateNanokaAgents(input)
-          : mode === "recover"
-            ? recoverNanokaAgents(input)
-            : withNanokaCurrentDataset(
-                input.targetDirectory,
-                async () => "unexpected read",
-              )
+        mode === "generate"
+          ? generateNanokaAgents(input)
+          : mode === "update"
+            ? updateNanokaAgents(input)
+            : mode === "recover"
+              ? recoverNanokaAgents(input)
+              : withNanokaCurrentDataset(
+                  input.targetDirectory,
+                  async () => "unexpected read",
+                )
       await expect(operation).rejects.toThrow(
         /INVALID_STATE.*未登记成员.*lock.sqlite-shm/,
       )
@@ -851,6 +865,26 @@ function command(name: string, args: string[]) {
   )
 }
 describe("current workspace commands", () => {
+  it("initializes a fresh clone through the generation command without rewriting files", async () => {
+    const input = await cloneFixture()
+    const before = await fingerprints(input.targetDirectory)
+    for (let run = 0; run < 2; run++) {
+      const result = command("generate:integrated", [
+        input.rawRoot,
+        input.version,
+        input.targetDirectory,
+      ])
+      expect(result.status, result.stderr).toBe(0)
+      expect(JSON.parse(result.stdout)).toMatchObject({
+        outcome: "unchanged",
+        reusedEntityFiles: 6,
+        changedEntityFiles: 0,
+      })
+      expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    }
+    await clean(input)
+  }, 30000)
+
   it("formats workspace sources while preserving managed legacy integrated data", async () => {
     const input = await fixture()
     const workspace = join(input.root, "workspace")
@@ -950,7 +984,7 @@ describe("current workspace commands", () => {
     const input = await fixture()
     const args = [input.rawRoot, input.version, input.targetDirectory]
     for (const expected of ["committed", "unchanged"]) {
-      const result = command("update:nanoka:agents", args)
+      const result = command("generate:integrated", args)
       expect(result, result.stderr).toMatchObject({ status: 0, stderr: "" })
       expect(JSON.parse(result.stdout).outcome).toBe(expected)
     }
@@ -963,7 +997,7 @@ describe("current workspace commands", () => {
     await clean(input)
   }, 30000)
   it.each([
-    "update:nanoka:agents",
+    "generate:integrated",
     "recover:nanoka:agents",
     "verify:nanoka:current",
   ])(
@@ -1156,4 +1190,198 @@ it("refuses to recreate a missing permanent lock in an already managed directory
   await expect(
     fs.lstat(join(control(input), "lock.sqlite")),
   ).rejects.toMatchObject({ code: "ENOENT" })
+})
+
+describe("explicit generation initialization", () => {
+  it.each([
+    "format",
+    "rules",
+    "members",
+    "languages",
+    "digest",
+    "missing",
+    "extra",
+    "empty-directory",
+    "symlink",
+  ])(
+    "rejects invalid clone %s and preserves existing files",
+    async (damage) => {
+      const input = await cloneFixture()
+      const indexPath = join(input.targetDirectory, "index.json")
+      if (damage === "format")
+        await editJson(indexPath, (index) => {
+          index.format = "unknown"
+        })
+      if (damage === "rules")
+        await editJson(indexPath, (index) => {
+          index.rulesVersion = "nanoka-agent-reference/999"
+        })
+      if (damage === "members")
+        await editJson(indexPath, (index) => {
+          index.scope.agentIds = ["2"]
+        })
+      if (damage === "languages")
+        await editJson(indexPath, (index) => {
+          index.source.detailLocales = ["en"]
+        })
+      if (damage === "digest")
+        await fs.appendFile(
+          join(input.targetDirectory, "agents/2/data.json"),
+          " ",
+        )
+      if (damage === "missing")
+        await fs.rm(join(input.targetDirectory, "agents/2/details.en.json"))
+      if (damage === "extra")
+        await fs.writeFile(join(input.targetDirectory, "extra.json"), "{}")
+      if (damage === "empty-directory")
+        await fs.mkdir(join(input.targetDirectory, "extra"))
+      if (damage === "symlink") {
+        await fs.rename(
+          join(input.targetDirectory, "agents/2/data.json"),
+          join(input.root, "external.json"),
+        )
+        await fs.symlink(
+          join(input.root, "external.json"),
+          join(input.targetDirectory, "agents/2/data.json"),
+        )
+      }
+      const before = await fingerprints(input.targetDirectory)
+      const names = await fs.readdir(input.targetDirectory, { recursive: true })
+      const result = command("generate:integrated", [
+        input.rawRoot,
+        input.version,
+        input.targetDirectory,
+      ])
+      expect(result.status, result.stderr).toBe(1)
+      expect(result.stdout).toBe("")
+      expect(result.stderr).toContain("失败")
+      expect(await fingerprints(input.targetDirectory)).toEqual(before)
+      expect(
+        await fs.readdir(input.targetDirectory, { recursive: true }),
+      ).toEqual(names)
+      await expect(
+        fs.stat(join(control(input), "state.json")),
+      ).rejects.toMatchObject({ code: "ENOENT" })
+    },
+    20000,
+  )
+
+  it.each([
+    "damaged-record",
+    "index-mismatch",
+    "missing-lock",
+    "orphan-work",
+    "orphan-backup",
+    "orphan-report",
+    "orphan-prepared",
+    "damaged-initial-record",
+  ])(
+    "does not reset an existing management failure: %s",
+    async (damage) => {
+      const input = await cloneFixture()
+      if (
+        ["damaged-record", "index-mismatch", "missing-lock"].includes(damage)
+      ) {
+        await generateNanokaAgents(input)
+        if (damage === "damaged-record")
+          await fs.writeFile(join(control(input), "state.json"), "{broken")
+        if (damage === "index-mismatch")
+          await fs.appendFile(join(input.targetDirectory, "index.json"), " ")
+        if (damage === "missing-lock")
+          await fs.rm(join(control(input), "lock.sqlite"))
+      } else {
+        await fs.mkdir(control(input))
+        const db = new DatabaseSync(join(control(input), "lock.sqlite"))
+        db.close()
+        if (damage === "orphan-work")
+          await fs.mkdir(join(control(input), "work"))
+        if (damage === "orphan-backup")
+          await fs.mkdir(join(control(input), "backup"))
+        if (damage === "orphan-report")
+          await fs.writeFile(join(control(input), "maintenance.json"), "{}")
+        if (damage === "orphan-prepared")
+          await writeJson(join(control(input), "state.next"), {
+            phase: "prepared",
+          })
+        if (damage === "damaged-initial-record")
+          await fs.writeFile(join(control(input), "state.next"), "{broken")
+      }
+      const before = await fingerprints(input.root)
+      const names = await fs.readdir(input.root, { recursive: true })
+      const result = command("generate:integrated", [
+        input.rawRoot,
+        input.version,
+        input.targetDirectory,
+      ])
+      expect(result.status, result.stderr).toBe(1)
+      expect(result.stdout).toBe("")
+      expect(await fingerprints(input.root)).toEqual(before)
+      expect(await fs.readdir(input.root, { recursive: true })).toEqual(names)
+    },
+    20000,
+  )
+
+  it.each([
+    "locked",
+    "initialization-partially-written",
+    "initialization-written",
+    "initialized",
+  ])(
+    "retries initialization after SIGKILL at %s using the same permanent lock",
+    async (pause) => {
+      const input = await cloneFixture()
+      const before = await fingerprints(input.targetDirectory)
+      const writer = await child(input, { mode: "generate", pause })
+      const lockBefore = await fs.stat(join(control(input), "lock.sqlite"), {
+        bigint: true,
+      })
+      for (const operation of [
+        () => generateNanokaAgents(input),
+        () => recoverNanokaAgents(input),
+        () => verified(input),
+      ])
+        await expect(operation()).rejects.toThrow("BUSY")
+      writer.process.kill("SIGKILL")
+      expect((await writer.done).signal).toBe("SIGKILL")
+      expect(await fingerprints(input.targetDirectory)).toEqual(before)
+      if (pause !== "initialized") {
+        await expect(recoverNanokaAgents(input)).rejects.toThrow(
+          "未登记的目标目录",
+        )
+        await expect(verified(input)).rejects.toThrow("RECOVERY_REQUIRED")
+      } else {
+        expect((await recoverNanokaAgents(input)).available).toBe(true)
+      }
+      const retry = await child(input, { mode: "generate" })
+      const result = await retry.done
+      expect(result.code, result.stderr).toBe(0)
+      expect(JSON.parse(result.stdout).outcome).toBe("unchanged")
+      expect(await fingerprints(input.targetDirectory)).toEqual(before)
+      expect(
+        (await fs.stat(join(control(input), "lock.sqlite"), { bigint: true }))
+          .ino,
+      ).toBe(lockBefore.ino)
+      await clean(input)
+      expect((await recoverNanokaAgents(input)).outcome).toBe("unchanged")
+    },
+    20000,
+  )
+
+  it("initializes existing bytes before a changed-input update and recovers a prepared transaction", async () => {
+    const input = await cloneFixture()
+    const before = await fingerprints(input.targetDirectory)
+    await change(input)
+    const writer = await child(input, { mode: "generate", pause: "prepared" })
+    writer.process.kill("SIGKILL")
+    await writer.done
+    expect((await recoverNanokaAgents(input)).outcome).toBe("rolled-back")
+    expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    const result = await generateNanokaAgents(input)
+    expect(result).toMatchObject({
+      outcome: "committed",
+      changedEntityFiles: 1,
+      reusedEntityFiles: 5,
+    })
+    await clean(input)
+  })
 })

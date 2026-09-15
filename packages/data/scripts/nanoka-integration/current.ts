@@ -72,6 +72,7 @@ export class NanokaCurrentError extends Error {
 /** 内部故障注入边界；无环境变量或 CLI 后门，真实子进程测试通过回调停在已完成的操作后。 */
 export type CurrentCheckpoint =
   | "locked"
+  | "initialization-written"
   | "initialized"
   | "building"
   | "candidate-ready"
@@ -297,6 +298,8 @@ async function writeState(
   if (bytes.byteLength > stateLimit) invalid("状态记录超过上限")
   await writeFile(join(paths.control, "state.next"), bytes)
   if (state.phase === "prepared") await checkpoint?.("journal-written")
+  else if (!(await exists(join(paths.control, "state.json"))))
+    await checkpoint?.("initialization-written")
   await rename(
     join(paths.control, "state.next"),
     join(paths.control, "state.json"),
@@ -385,7 +388,11 @@ async function finish(
 }
 
 /** 调用时已持锁；失败保留现场，再次执行同一状态机而不是从头删除重建。 */
-async function recoverLocked(paths: CurrentPaths, checkpoint?: Checkpoint) {
+async function recoverLocked(
+  paths: CurrentPaths,
+  checkpoint?: Checkpoint,
+  initializationPolicy?: SourcePolicy,
+) {
   let state = await readState(paths)
   if (!state) {
     const names = await readdir(paths.control)
@@ -396,9 +403,41 @@ async function recoverLocked(paths: CurrentPaths, checkpoint?: Checkpoint) {
       )
     )
       invalid("没有归属记录的异常控制目录")
-    await verifyCurrent(paths, null)
-    state = idle(paths, null)
-    await writeState(paths, state)
+    let current: DatasetDescriptor | null = null
+    if (initializationPolicy && (await exists(paths.target))) {
+      // 仅显式生成可登记静态制品；默认验证拒绝未知规则及不完整语言。
+      const index = await verifyNanokaAgentArtifact({
+        artifactDirectory: paths.target,
+        policy: initializationPolicy,
+      })
+      current = {
+        indexSha256: sha256(
+          await readBytes(
+            paths.target,
+            "index.json",
+            initializationPolicy.fetchLimits.maximumBytesPerRun *
+              outputExpansionLimit,
+          ),
+        ),
+        rulesVersion: index.rulesVersion,
+        policy: initializationPolicy,
+      }
+      await verifyDescriptor(paths.target, current)
+    } else {
+      await verifyCurrent(paths, null)
+    }
+    state = idle(paths, current)
+    if (current && (await exists(join(paths.control, "state.next")))) {
+      // 初始化写入可在任意字节处中断；仅重试本次已验证描述符的完整记录或前缀。
+      // 其他记录（包括 prepared）不能作为首次初始化覆盖。
+      const pending = await readBytes(paths.control, "state.next", stateLimit)
+      const expected = serializeJson(state)
+      if (
+        !Buffer.from(expected.subarray(0, pending.byteLength)).equals(pending)
+      )
+        invalid("初始暂存记录与已验证数据不一致，保留现场")
+    }
+    await writeState(paths, state, checkpoint)
     await checkpoint?.("initialized")
   }
   if (state.phase === "idle") {
@@ -474,14 +513,29 @@ export async function withNanokaCurrentDataset<T>(
   })
 }
 
-/** 全量候选输入复验后按实际输出字节复用当前 inode，再以可恢复协议提交。 */
-export async function updateNanokaAgents(options: {
+interface UpdateNanokaAgentsOptions {
   rawRoot: string
   version: string
   targetDirectory: string
   policy?: SourcePolicy
   checkpoint?: Checkpoint
-}) {
+}
+
+/** 显式生成：缺少记录时完整验证已有制品，再复用同一更新流程。 */
+export function generateNanokaAgents(options: UpdateNanokaAgentsOptions) {
+  return updateCurrent(options, true)
+}
+
+/** 内部更新保留原契约，不登记已有非受管理制品。 */
+export function updateNanokaAgents(options: UpdateNanokaAgentsOptions) {
+  return updateCurrent(options, false)
+}
+
+/** 全量候选输入复验后按实际输出字节复用当前 inode，再以可恢复协议提交。 */
+async function updateCurrent(
+  options: UpdateNanokaAgentsOptions,
+  initializeExisting: boolean,
+) {
   const rawRoot = await directoryRoot(options.rawRoot)
   const paths = await pathsFor(options.targetDirectory)
   if (
@@ -495,7 +549,11 @@ export async function updateNanokaAgents(options: {
   )
   return locked(paths, true, async () => {
     await options.checkpoint?.("locked")
-    const previous = await recoverLocked(paths, options.checkpoint)
+    const previous = await recoverLocked(
+      paths,
+      options.checkpoint,
+      initializeExisting ? policy : undefined,
+    )
     try {
       await mkdir(paths.work)
       await options.checkpoint?.("building")

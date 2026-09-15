@@ -775,10 +775,12 @@ describe("offline full Nanoka agent build", () => {
       [
         "--import",
         preloadPath,
-        join(workspaceRoot, "packages/data/scripts/build-nanoka-agents.ts"),
+        "--disable-warning=ExperimentalWarning",
+        join(workspaceRoot, "packages/data/scripts/current-nanoka-agents.ts"),
+        "generate",
         options.rawRoot,
         options.version,
-        options.temporaryParent,
+        join(options.temporaryParent, "generated"),
       ],
       { cwd: options.temporaryParent, encoding: "utf8" },
     )
