@@ -1,0 +1,98 @@
+# 数据消费与 npm 导出契约
+
+本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
+[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、zh/en 两种详情语言。
+
+## 名称与类型
+
+根入口导出正式字段类型（包含其引用的索引、文件引用、材料计数与来源身份等结构）、`AgentName`、
+`LocalizedAgent`、`agentNames` 和四个读取函数。这些类型可供消费者引用，不改变来源 ID 的内部标识用途。
+`AgentName` 是本次发布所有 `integrated/agents/{来源ID}/details.en.json` 顶层 `name` 原值的精确
+字符串字面量 union。固定取英文，保留大小写、空格及标点，不取 `data.codeName` 或来源索引的 code/en。
+例如 `1381` 为 `Soldier 0 - Anby`，`1311` 为 `Astra Yao`（codeName 为 `Astra`）。
+名称、内部英文名称到来源 ID 的映射、导入表及类型均由同一已验证发布副本生成；缺失、非字符串、空名称
+或完全重名使构建失败，不覆盖、不修改来源。英文更名、成员删除属于公开取值的兼容性变化，须在该次变更的
+Git 记录或发布说明中明确记录，不自动添加别名。来源数字字符串目录、索引 key、`SourceId` 和数值 `AgentData.id` 保持原义。
+
+`agentNames: readonly AgentName[]` 覆盖本版全部成员，沿用索引 `scope.agentIds` 的来源 ID 数值升序，
+运行时冻结，调用方不能通过修改列表影响后续使用。名称类型不提供任意 string 重载，保留字面量补全。
+
+## 读取接口
+
+```ts
+export declare function loadIndex(): Promise<IntegratedIndex>
+export declare function loadAgentData(
+  name: AgentName,
+): Promise<AgentData | undefined>
+export declare function loadAgentDetails(
+  name: AgentName,
+  locale: DetailLocale,
+): Promise<AgentDetails | undefined>
+export interface LocalizedAgent {
+  /** 原有公共资料结构。 */
+  data: AgentData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: AgentDetails
+}
+export declare function loadAllAgents(
+  locale: DetailLocale,
+): Promise<Record<AgentName, LocalizedAgent>>
+```
+
+- `loadIndex` 只加载完整原样索引，包含元信息、全部成员、文件引用与独立来源索引记录；不加载实体。
+- `loadAgentData` 只加载该成员 data；`loadAgentDetails` 只加载该成员指定语言 details。均无需先调用索引。
+- `loadAllAgents` 显式加载本版全部 data 与指定语言 details，目前为 58 + 58 个文件；结果以 AgentName 为 key。
+  `data` 和 `details` 保持两个独立对象，不合并同名字段。索引的 `agents` 仍以来源数字字符串为 key。
+- 每次调用返回独立的 JSON 对象树，任意嵌套修改不污染后续调用、同时调用或其他调用方。
+- 名称精确匹配，不 trim、不忽略大小写、不接受数值 ID。单体函数对未知字符串返回 undefined。
+- 非字符串 name、缺少或不支持的 locale 均使 Promise 以 TypeError 拒绝。locale 必须显式为 zh 或 en，
+  不默认、不转换 zh-CN、不回退；未知名称也不能绕过 locale 校验。
+- 已登记文件缺失、JSON 解析或模块加载失败使 Promise 拒绝，不转换为 undefined；全量任一必要项失败即整体拒绝。
+
+## 分发与按需加载
+
+包保持 ESM，Node 范围沿用包清单，浏览器首版验收目标为 Vite 开发与生产消费。根入口导入不加载任何数据 JSON；
+允许加载小型名称元数据和显式动态导入表。Node 与 browser 条件入口由同一源码和副本生成；
+Node 使用 JSON 导入属性，browser 入口交由 Vite 转换 JSON，默认开发预构建无需额外 exclude 配置。消费者无需配置路径表或运行生成器，无运行时服务、CDN 或 core 依赖。
+npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块或构建后的分块，全量读取需显式调用。
+
+公开 JSON 子路径（前缀 `@randomplay/data`）：
+
+- `/integrated/index.json`
+- `/integrated/agents/{来源ID}/data.json`
+- `/integrated/agents/{来源ID}/details.zh.json`
+- `/integrated/agents/{来源ID}/details.en.json`
+
+这些路径映射到包内 `dist/integrated/` 的已验证发布副本。JSON 原字节、字段、层级、文件名、摘要全部保留，
+索引 `files.stats` / `files.content` 不改名。包只包含 dist 与 npm 标准清单、README、LICENSE；
+不包含 raw、本机控制目录、抓取/恢复工具及内部维护材料。直接 JSON 导入遵循宿主模块缓存语义；
+返回对象隔离保证属于上述四个函数。
+
+## 静态发布与受管理目录边界
+
+整合规范第 8 节的「读取同一批字节、复核摘要后使用」继续适用于维护、再次导出及准备发布副本。
+准备阶段复用完整验证器，并拒绝输入根目录为符号链接，避免漏认真实目标的管理状态。
+若同级控制目录存在，必须使用原持锁读取协议，在回调持锁期间读完并复制全部字节，
+不能返回路径后解锁再读取，也不自动初始化、恢复或重置本机记录。没有控制目录的新克隆可直接验证已跟踪的静态 JSON，
+无需 raw 或本机管理状态。静态输入在复制期间不得并发初始化/修改，检测到新增控制目录即拒绝。
+
+构建在独占临时副本完整验证后生成类型、名称与导入表，并只从该副本构建和复制到 dist；
+不会在生成类型后重新打包可变 integrated。打包前复验发布副本，解包验收再次核对实际文件集合、原字节和摘要。
+公开 API 消费随 npm 版本固定的快照，不接受本地目录，不操作锁或恢复记录，运行时不重算原 JSON 的 SHA-256。
+这将维护时的字节完整性检查落实在发布边界；不把静态模块缓存当作受管理目录并发读取协议，也不认证来源真实性。
+普通 build/test/check/pack 不读取真实 raw、不抓取、不生成或格式化真实 integrated。
+
+`typecheck`、`test`（含 watch/coverage）通过 `prepare:consumer` 自动重建包内 `.generated/`，
+其中包含本地类型检查使用的已验证副本和名称目录；它被 Git 忽略，不是发布输入。
+每次 `build` 另建独占 `.publication-*/` 副本，成功后或进程退出时清理。
+构建仅支持单次运行，`build --watch` 在创建副本或清理 dist 前拒绝；修改后重新运行 `build`。
+
+## 验收入口
+
+`pnpm --filter @randomplay/data check` 覆盖名称生成、类型、API、静态/受管理发布准备及实际打包解包、离线安装。
+`pnpm --filter @randomplay/data verify:browser` 对离线安装包进行真实 Chromium 的 Vite 开发/生产请求验收，
+输出 npm/解包字节数、初始与按需请求字节数、gzip 参考值和分块清单；gzip 是离线测量，不冒充服务器实际压缩传输量。
+浏览器验收需要本机 Playwright Chromium（首次运行 `pnpm --filter @randomplay/data exec playwright install chromium`）；测试使用合成 fixture，包与浏览器验收使用已跟踪的完整静态快照。
+
+CI 的 Node 24 作业安装 Chromium 并运行 `verify:browser`；普通 `check` 不要求本机浏览器。
+打包验收的临时 checkout 使用独立离线安装的依赖，避免 IDE 或直接启动测试时改写工作区依赖。

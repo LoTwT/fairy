@@ -34,3 +34,9 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check source, tests, and packed packages
         run: pnpm check
+      - name: Install browser acceptance runtime
+        if: matrix.node == '24'
+        run: pnpm --filter @randomplay/data exec playwright install --with-deps chromium
+      - name: Verify Vite development and production consumption
+        if: matrix.node == '24'
+        run: pnpm --filter @randomplay/data verify:browser

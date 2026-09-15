@@ -2,9 +2,38 @@
 
 Fairy 的游戏来源资料与数据整理包。
 
-Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。当前公开导出仍保持为空。
+Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。公开接口见[数据消费与 npm 导出契约](../../docs/specs/data/consumption.md)。
 
-[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的增量维护、互斥读取和中断恢复，公开 API 尚未实现。
+[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的增量维护、互斥读取和中断恢复，公开 API 消费随 npm 版本发布的固定快照。
+
+## 使用
+
+```ts
+import {
+  agentNames,
+  loadIndex,
+  loadAgentData,
+  loadAgentDetails,
+  loadAllAgents,
+} from "@randomplay/data"
+import type { AgentName } from "@randomplay/data"
+
+const name: AgentName = "Astra Yao"
+const data = await loadAgentData(name)
+const details = await loadAgentDetails(name, "zh")
+const index = await loadIndex() // 完整来源索引，不加载实体
+const all = await loadAllAgents("en") // 显式加载全部公共资料和英文详情
+console.log(agentNames, data, details, index.agents["1311"], all[name])
+```
+
+Node ESM 也可直接读取原样 JSON：
+
+```js
+import data from "@randomplay/data/integrated/agents/1311/data.json" with { type: "json" }
+```
+
+名称取英文详情顶层原值，语言必须显式为 `zh` 或 `en`。四个函数每次返回独立对象，根入口不预载数据。
+完整参数、错误、JSON 子路径及兼容性规则统一见[消费契约](../../docs/specs/data/consumption.md)。
 
 ## 本地抓取
 
@@ -80,7 +109,8 @@ pnpm --filter @randomplay/data verify:nanoka:agents /absolute/copy/integrated
 
 摘要证明制品内部字节一致性，不认证来源真实性或同一抓取批次。协议仅支持可信本机 macOS/Linux、同一文件系统及遵守锁的参与者；
 进程中断纳入测试，不承诺断电、内核崩溃、网络文件系统或 Windows；读取者需要控制目录写权限。
-普通 build/test/check/pack 不读取真实 raw 或生成真实数据，不增加依赖、npm 导出或公开 API。
+`typecheck` / `test` 自动准备被 Git 忽略的 `.generated/`；`build` 使用另一份独占发布副本，
+仅支持单次构建。生成目录、静态发布边界与 CI 浏览器验收见[消费契约](../../docs/specs/data/consumption.md)。
 
 ## 约束
 

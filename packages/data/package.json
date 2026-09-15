@@ -17,8 +17,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
+      "browser": "./dist/index.browser.mjs",
       "import": "./dist/index.mjs"
-    }
+    },
+    "./integrated/index.json": "./dist/integrated/index.json",
+    "./integrated/agents/*/data.json": "./dist/integrated/agents/*/data.json",
+    "./integrated/agents/*/details.zh.json": "./dist/integrated/agents/*/details.zh.json",
+    "./integrated/agents/*/details.en.json": "./dist/integrated/agents/*/details.en.json"
   },
   "publishConfig": {
     "access": "public"
@@ -32,18 +37,21 @@
     "recover:nanoka:agents": "node --disable-warning=ExperimentalWarning scripts/current-nanoka-agents.ts recover",
     "verify:nanoka:current": "node --disable-warning=ExperimentalWarning scripts/current-nanoka-agents.ts verify",
     "prepack": "pnpm build",
-    "test": "vitest run --exclude test/verify-package.test.ts",
-    "test:watch": "vitest --exclude test/verify-package.test.ts",
-    "test:coverage": "vitest run --coverage --exclude test/verify-package.test.ts",
-    "typecheck": "tsc --noEmit",
-    "verify:pack": "vitest run test/verify-package.test.ts"
+    "test": "pnpm prepare:consumer && vitest run --exclude test/verify-package.test.ts --exclude test/verify-browser.test.ts",
+    "test:watch": "pnpm prepare:consumer && vitest --exclude test/verify-package.test.ts --exclude test/verify-browser.test.ts",
+    "test:coverage": "pnpm prepare:consumer && vitest run --coverage --exclude test/verify-package.test.ts --exclude test/verify-browser.test.ts",
+    "typecheck": "pnpm prepare:consumer && tsc --noEmit",
+    "verify:pack": "vitest run test/verify-package.test.ts",
+    "prepare:consumer": "node --disable-warning=ExperimentalWarning scripts/prepare-consumer-types.ts",
+    "verify:browser": "vitest run test/verify-browser.test.ts"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "^4.1.10",
+    "playwright": "^1.63.0",
     "tsdown": "^0.22.4",
     "typescript": "^6.0.3",
+    "vite": "8.1.5",
     "vitest": "^4.1.10"
   },
   "engines": {
