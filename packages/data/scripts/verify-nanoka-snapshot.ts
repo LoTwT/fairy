@@ -1,9 +1,9 @@
 import { directoryRoot } from "./nanoka-integration/files.ts"
-import { verifyNanokaAgentArtifact } from "./nanoka-integration/verify.ts"
+import { verifyIntegratedSnapshot } from "./nanoka-integration/snapshot-verify.ts"
 import { createCommandFailureHandler } from "./terminal.ts"
 
-const usage = "用法：verify:nanoka:agents <artifactDirectory>"
-const handleFailure = createCommandFailureHandler("Nanoka 代理人验证命令")
+const usage = "用法：verify:nanoka:snapshot <artifactDirectory>"
+const handleFailure = createCommandFailureHandler("Nanoka 静态快照验证命令")
 
 try {
   process.stdout.on("error", handleFailure)
@@ -24,13 +24,21 @@ try {
     if (commandArguments.length !== 1 || !commandArguments[0])
       throw new Error(`需要 1 个非空位置参数；${usage}`)
     const artifactDirectory = await directoryRoot(commandArguments[0])
-    const index = await verifyNanokaAgentArtifact({ artifactDirectory })
+    const index = await verifyIntegratedSnapshot({ artifactDirectory })
     process.stdout.write(
       `${JSON.stringify(
         {
           artifactDirectory,
-          agentCount: index.scope.agentIds.length,
-          detailLocales: index.source.detailLocales,
+          format: index.format,
+          categories: Object.fromEntries(
+            Object.entries(index.entities).map(([name, entity]) => [
+              name,
+              {
+                memberCount: entity.memberIds.length,
+                detailLocales: entity.detailLocales,
+              },
+            ]),
+          ),
           verified: true,
         },
         null,

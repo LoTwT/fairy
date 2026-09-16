@@ -3,7 +3,7 @@ dist/
 coverage/
 packages/data/raw/
 .*.fairy-state/
-fairy-nanoka-agents-*/
+fairy-integrated-snapshot-*/
 .DS_Store
 *.log
 packages/data/.generated/

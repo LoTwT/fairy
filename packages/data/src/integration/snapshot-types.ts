@@ -12,6 +12,9 @@ import type {
  */
 export const integratedSnapshotFormat = "fairy-nanoka-integrated/v3"
 
+/** 详情语言 → 详情文件引用；默认类型保证当前完整语言配置，历史类型允许缺失。 */
+type SnapshotDetailFiles = Partial<Record<DetailLocale, ExportFileReference>>
+
 /** 来源输入资源及其原始字节摘要；resource 是来源相对资源名，不是可执行地址。 */
 export interface IntegratedSnapshotSourceInput {
   /** 来源相对资源名，如 zzz/3.1/character.json；不含主机或远程地址。 */
@@ -22,14 +25,22 @@ export interface IntegratedSnapshotSourceInput {
 }
 
 /** 一个成员在制品中的实体文件引用与独立来源索引记录。 */
-export interface IntegratedSnapshotMember {
+export interface IntegratedSnapshotMember<
+  DetailFiles extends SnapshotDetailFiles = Record<
+    DetailLocale,
+    ExportFileReference
+  >,
+> {
   /** 该成员完成生成并通过验证的实体文件引用。 */
   files: {
     /** 公共资料文件 data.json 的位置与实际字节摘要；path 相对于 integrated/。 */
     data: ExportFileReference
 
-    /** 详情语言 → details.{locale}.json 文件；成员与所属类别的 detailLocales 一致。 */
-    details: Record<DetailLocale, ExportFileReference>
+    /**
+     * 详情语言 → details.{locale}.json 文件；成员与所属类别的 detailLocales 一致。
+     * 默认类型表达当前完整语言契约；历史复验复用同一 JSON 结构，把引用表达为可能缺失。
+     */
+    details: DetailFiles
   }
 
   /** 独立来源索引记录，完整保留原值与原 key；不覆盖到某语言详情。 */
@@ -37,7 +48,12 @@ export interface IntegratedSnapshotMember {
 }
 
 /** 制品中一个已接入类别的来源定位、成员范围、整合规则与输出文件摘要。 */
-export interface IntegratedSnapshotEntity {
+export interface IntegratedSnapshotEntity<
+  DetailFiles extends SnapshotDetailFiles = Record<
+    DetailLocale,
+    ExportFileReference
+  >,
+> {
   /** 该类别的整合规则版本；各类别独立演进，不从其他类别或根索引推断。 */
   rulesVersion: string
 
@@ -54,11 +70,16 @@ export interface IntegratedSnapshotEntity {
   inputs: IntegratedSnapshotSourceInput[]
 
   /** 成员 ID → 实体文件引用与独立来源索引记录；key 原样保留。 */
-  members: Record<string, IntegratedSnapshotMember>
+  members: Record<string, IntegratedSnapshotMember<DetailFiles>>
 }
 
 /** 多实体完整制品的根索引；整个快照共用一个来源版本与一组已接入类别。 */
-export interface IntegratedSnapshotIndex {
+export interface IntegratedSnapshotIndex<
+  DetailFiles extends SnapshotDetailFiles = Record<
+    DetailLocale,
+    ExportFileReference
+  >,
+> {
   /** 文件外壳与类别分块契约版本；不是游戏版本。 */
   format: typeof integratedSnapshotFormat
 
@@ -75,5 +96,14 @@ export interface IntegratedSnapshotIndex {
   }
 
   /** 已包含类别 → 该类别完整成员、规则、语言、来源输入与输出文件摘要；key 由已接入类别登记表定义。 */
-  entities: Record<string, IntegratedSnapshotEntity>
+  entities: Record<string, IntegratedSnapshotEntity<DetailFiles>>
 }
+
+/**
+ * 历史复验得到的索引：详情语言引用可能缺失，访问前必须检查存在性。
+ *
+ * 严格验证与新建制品返回上文的完整语言类型；只有启用历史模式（含动态 boolean）的复验返回本类型。
+ * JSON 字段与完整类型相同，两者只有类型层面的可选性差别。
+ */
+export type HistoricalIntegratedSnapshotIndex =
+  IntegratedSnapshotIndex<SnapshotDetailFiles>

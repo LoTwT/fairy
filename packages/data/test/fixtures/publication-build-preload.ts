@@ -35,9 +35,8 @@ if (intervention === "source-change") {
       const bytes = JSON.stringify(details)
       const indexPath = join(source, "index.json")
       const index = JSON.parse(await fs.readFile(indexPath, "utf8"))
-      index.agents["1311"].files.content.en.sha256 = createHash("sha256")
-        .update(bytes)
-        .digest("hex")
+      index.entities.agents.members["1311"].files.details.en.sha256 =
+        createHash("sha256").update(bytes).digest("hex")
       await writeFile(detailsPath, bytes)
       await writeFile(indexPath, JSON.stringify(index))
       await writeFile(tracePath, intervention)

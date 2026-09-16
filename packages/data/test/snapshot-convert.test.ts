@@ -3,12 +3,13 @@ import * as fs from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
-import { buildNanokaAgents } from "../scripts/nanoka-integration/build.ts"
 import { loadSourcePolicy } from "../scripts/nanoka/policy.ts"
 import { convertNanokaAgentsArtifactToSnapshot } from "../scripts/nanoka-integration/snapshot-convert.ts"
+import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
 import { nanokaAgentsSnapshotEntity } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
 import { agentInput } from "./fixtures/agent-source.ts"
+import { rewriteAsLegacyV2Artifact } from "./fixtures/synthetic-dataset.ts"
 
 const temporaryDirectories: string[] = []
 afterEach(async () => {
@@ -72,13 +73,28 @@ async function fixture() {
         code_name: locale === "zh" ? "中文原值" : "English value",
       })
   const policy = await loadSourcePolicy()
-  const source = await buildNanokaAgents({
+  const build = await buildIntegratedSnapshot({
     rawRoot,
     version,
     temporaryParent,
     policy,
   })
-  return { root, rawRoot, versionRoot, outputParent, policy, source }
+  // 合成 v2 静态制品：v3 构建结果改写索引外壳，成员文件与摘要保持原字节。
+  const artifactDirectory = join(root, "source-artifact")
+  await fs.rename(build.artifactDirectory, artifactDirectory)
+  await fs.rm(build.buildDirectory, { recursive: true })
+  await rewriteAsLegacyV2Artifact(artifactDirectory)
+  const index = JSON.parse(
+    await fs.readFile(join(artifactDirectory, "index.json"), "utf8"),
+  )
+  return {
+    root,
+    rawRoot,
+    versionRoot,
+    outputParent,
+    policy,
+    source: { artifactDirectory, index },
+  }
 }
 
 describe("v2 agent artifact conversion", () => {

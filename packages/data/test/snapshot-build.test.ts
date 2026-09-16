@@ -12,6 +12,7 @@ import {
 } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
 import { outputExpansionLimit } from "../scripts/nanoka-integration/artifact-files.ts"
+import { checkedPath, readBytes } from "../scripts/nanoka-integration/files.ts"
 import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
 import * as formatting from "../scripts/nanoka-integration/format.ts"
 import { loadSourcePolicy } from "../scripts/nanoka/policy.ts"
@@ -934,4 +935,646 @@ describe("multi-entity snapshot build", () => {
     )
     expect(await fs.readdir(options.temporaryParent)).toEqual([])
   })
+})
+
+/** 维护报告按类别 → 成员分组；取出指定代理人成员的整合维护信息。 */
+function agentMemberMaintenance(
+  build: Awaited<ReturnType<typeof buildIntegratedSnapshot>>,
+  memberId: string,
+): {
+  diagnostics: {
+    entityId: string
+    locale: string
+    pointer: string
+    kind: string
+  }[]
+  codeNameDifferences: {
+    entityId: string
+    locale: string
+    pointer: string
+    selectedLocale: string
+    selectedValue: string
+    value: string
+  }[]
+} {
+  const entry = build.maintenance.agents?.find(
+    (item) => item.memberId === memberId,
+  )
+  if (!entry) throw new Error(`维护报告缺少代理人成员 ${memberId}`)
+  return entry.maintenance as ReturnType<typeof agentMemberMaintenance>
+}
+
+/**
+ * v2 单实体构建器（scripts/nanoka-integration/build.ts）的输入侧与构建完整性回归。
+ *
+ * 断言含义与 v2 测试一致，但按多实体构建器的读取顺序、类别分块索引与按成员分组的维护报告改写；
+ * 只用合成 raw 与独占临时目录，不读取真实缓存、不访问网络、不写入既有 integrated 数据集。
+ */
+describe("multi-entity snapshot build input-side coverage", () => {
+  it("rejects a temporary parent inside the read-only raw root and keeps raw bytes", async () => {
+    const options = await fixture()
+    const before = await allBytes(options.rawRoot)
+    for (const temporaryParent of [options.versionRoot, options.rawRoot]) {
+      await expect(
+        buildIntegratedSnapshot({ ...options, temporaryParent }),
+      ).rejects.toThrow("只读 raw")
+      expect(await allBytes(options.rawRoot)).toEqual(before)
+    }
+    expect(await fs.readdir(options.temporaryParent)).toEqual([])
+  })
+
+  it("enforces streaming byte limits when a raw file grows after stat", async () => {
+    const options = await fixture()
+    const originalOpen = fs.open
+    let grown = false
+    vi.spyOn(fs, "open").mockImplementation(async (...args) => {
+      const handle = await originalOpen(...args)
+      const originalStat = handle.stat.bind(handle)
+      vi.spyOn(handle, "stat").mockImplementation(async () => {
+        const stat = await originalStat()
+        // 只在句柄完成静态大小观察之后增长；读取必须继续受流式字节上限约束。
+        if (!grown && String(args[0]).endsWith("/manifest.json")) {
+          grown = true
+          await fs.appendFile(
+            join(options.versionRoot, "manifest.json"),
+            " ".repeat(1000),
+          )
+        }
+        return stat
+      })
+      return handle
+    })
+    const policy = {
+      ...options.policy,
+      requestPolicy: {
+        ...options.policy.requestPolicy,
+        maximumResponseBytes: 500,
+      },
+    }
+    await expect(
+      buildIntegratedSnapshot({ ...options, policy }),
+    ).rejects.toThrow("字节数超过上限")
+    expect(grown).toBe(true)
+    // manifest 读取失败发生在创建构建目录之前，临时父目录保持为空。
+    expect(await fs.readdir(options.temporaryParent)).toEqual([])
+  })
+
+  it("uses one read for input decoding and digest even if raw changes immediately afterwards", async () => {
+    const options = await fixture()
+    const targetPath = join(options.versionRoot, "en/character/10.json")
+    const originalBytes = await fs.readFile(targetPath)
+    const originalOpen = fs.open
+    let reads = 0
+    vi.spyOn(fs, "open").mockImplementation(async (...args) => {
+      const handle = await originalOpen(...args)
+      if (String(args[0]).endsWith("synthetic-1/en/character/10.json")) {
+        reads += 1
+        const close = handle.close.bind(handle)
+        vi.spyOn(handle, "close").mockImplementation(async () => {
+          await close()
+          await edit(targetPath, (value) => {
+            value.code_name = "Changed after read"
+          })
+        })
+      }
+      return handle
+    })
+    const build = await buildIntegratedSnapshot(options)
+    expect(reads).toBe(1)
+    // 该资源是代理人类别最后一个输入；摘要必须描述已被解码的那一批字节。
+    const inputs = build.index.entities.agents!.inputs
+    expect(inputs.at(-1)!.sha256).toBe(digest(originalBytes))
+    expect(inputs.at(-1)!.sha256).not.toBe(
+      digest(await fs.readFile(targetPath)),
+    )
+    expect(
+      agentMemberMaintenance(build, "10").codeNameDifferences.at(-1)!.value,
+    ).toBe("English value")
+  })
+
+  it.each([
+    "../outside.json",
+    "/outside.json",
+    "zh/../character.json",
+    "zh\\character.json",
+    "",
+  ])("confines raw file reads to the version root: %s", async (path) => {
+    const options = await fixture()
+    const root = await fs.realpath(options.versionRoot)
+    await expect(readBytes(root, path, 100)).rejects.toThrow(/路径/)
+    await expect(checkedPath(root, path)).rejects.toThrow(/路径/)
+    // 正例：规范相对路径仍被接受，拒绝来自路径规范而不是恒定失败。
+    await expect(checkedPath(root, "zh/character/2.json")).resolves.toContain(
+      "zh/character/2.json",
+    )
+  })
+
+  it.each([
+    "file link outside",
+    "file link inside",
+    "directory link",
+    "version link",
+    "directory file",
+    "fifo",
+  ])("rejects unsafe raw file kind: %s", async (kind) => {
+    const options = await fixture()
+    const path = join(options.versionRoot, "en/character/10.json")
+    if (kind === "version link") {
+      await fs.rename(options.versionRoot, join(options.rawRoot, "elsewhere"))
+      await fs.symlink(join(options.rawRoot, "elsewhere"), options.versionRoot)
+    } else if (kind === "directory link") {
+      await fs.rename(
+        join(options.versionRoot, "en"),
+        join(options.rawRoot, "elsewhere"),
+      )
+      await fs.symlink(
+        join(options.rawRoot, "elsewhere"),
+        join(options.versionRoot, "en"),
+      )
+    } else {
+      const bytes = await fs.readFile(path)
+      await fs.rm(path)
+      if (kind === "directory file") await fs.mkdir(path)
+      else if (kind === "fifo") execFileSync("mkfifo", [path])
+      else {
+        const target =
+          kind === "file link outside"
+            ? join(options.temporaryParent, "outside.json")
+            : join(options.versionRoot, "en/character/2.json")
+        if (kind === "file link outside") await fs.writeFile(target, bytes)
+        await fs.symlink(target, path)
+      }
+    }
+    await expect(buildIntegratedSnapshot(options)).rejects.toThrow(
+      /符号链接|普通文件/,
+    )
+    // 只允许清理本次构建独占的目录；临时父目录不留任何构建残留（同用例自建的链接目标除外）。
+    expect(
+      (await fs.readdir(options.temporaryParent)).filter((name) =>
+        name.startsWith("fairy-integrated-snapshot-"),
+      ),
+    ).toEqual([])
+  })
+
+  it("never fills missing details from another version or language", async () => {
+    const options = await fixture()
+    await fs.cp(options.versionRoot, join(options.rawRoot, "other-version"), {
+      recursive: true,
+    })
+    await fs.rm(join(options.versionRoot, "en"), { recursive: true })
+    await expect(buildIntegratedSnapshot(options)).rejects.toThrow(
+      "en/character/2.json",
+    )
+    expect(await fs.readdir(options.temporaryParent)).toEqual([])
+  })
+
+  it.each(["manifest.json", "character.json", "en/character/10.json"])(
+    "strictly decodes and validates every input kind: %s",
+    async (resource) => {
+      const options = await fixture()
+      const path = join(options.versionRoot, resource)
+      const original = await fs.readFile(path, "utf8")
+      for (const [bytes, message] of [
+        [Buffer.from([0x7b, 0x22, 0xc3, 0x28]), "UTF-8"],
+        [Buffer.from('{"broken":'), "JSON"],
+        ...["1e400", "9007199254740993", "-0"].map(
+          (value) =>
+            [
+              Buffer.from(`{"bad/~":${value},${original.slice(1)}`),
+              "非法数值",
+            ] as const,
+        ),
+      ] as const) {
+        await fs.writeFile(path, bytes)
+        await expect(buildIntegratedSnapshot(options)).rejects.toThrow(message)
+        expect(await fs.readdir(options.temporaryParent)).toEqual([])
+      }
+    },
+  )
+
+  it.each([
+    ["empty", {}],
+    ["array", []],
+    ["noncanonical ID", { "02": {} }],
+    ["traversal ID", { "../2": {} }],
+    ["long ID", { ["1".repeat(33)]: {} }],
+    ["member array", { "2": [] }],
+    ["member null", { "2": null }],
+    ["member scalar", { "2": 1 }],
+  ])("rejects invalid source entity index: %s", async (_name, value) => {
+    const options = await fixture()
+    await write(join(options.versionRoot, "character.json"), value)
+    await expect(buildIntegratedSnapshot(options)).rejects.toThrow(
+      "character.json",
+    )
+    expect(await fs.readdir(options.temporaryParent)).toEqual([])
+  })
+
+  it.each([
+    {},
+    { zzz: { live: "x", latest: "x", available: [] } },
+    { zzz: { live: "x", latest: "x", available: ["x", "x"] } },
+    { zzz: { live: "x", latest: "x", available: ["x", "X"] } },
+    { zzz: { live: "missing", latest: "x", available: ["x"] } },
+    { zzz: { live: "x", latest: "x", available: ["x"] } },
+  ])("rejects manifest or unavailable version %j", async (manifest) => {
+    const options = await fixture()
+    await write(join(options.versionRoot, "manifest.json"), manifest)
+    await expect(buildIntegratedSnapshot(options)).rejects.toThrow("manifest")
+    expect(await fs.readdir(options.temporaryParent)).toEqual([])
+  })
+
+  it("uses validated reversed configuration order for detailLocales, input order and codeName", async () => {
+    const options = await fixture()
+    const rawBefore = await allBytes(options.rawRoot)
+    const build = await buildIntegratedSnapshot({
+      ...options,
+      policy: { ...options.policy, languages: ["en", "zh"] },
+    })
+    // 语言顺序贯穿全部类别：类别语言、详情读取顺序与索引登记顺序一致反转。
+    expect(build.index.entities.agents!.detailLocales).toEqual(["en", "zh"])
+    expect(build.index.entities.widgets!.detailLocales).toEqual(["en", "zh"])
+    expect(
+      build.index.entities
+        .agents!.inputs.slice(1)
+        .map((input) => input.resource),
+    ).toEqual([
+      "zzz/synthetic-1/en/character/2.json",
+      "zzz/synthetic-1/zh/character/2.json",
+      "zzz/synthetic-1/en/character/10.json",
+      "zzz/synthetic-1/zh/character/10.json",
+    ])
+    expect(
+      build.index.entities
+        .widgets!.inputs.slice(1)
+        .map((input) => input.resource),
+    ).toEqual([
+      "zzz/synthetic-1/en/equipment/9001.json",
+      "zzz/synthetic-1/zh/equipment/9001.json",
+      "zzz/synthetic-1/en/equipment/9002.json",
+      "zzz/synthetic-1/zh/equipment/9002.json",
+    ])
+    const bytes = await allBytes(build.artifactDirectory)
+    expect(JSON.parse(bytes["agents/2/data.json"]!.toString()).codeName).toBe(
+      "English value",
+    )
+    expect(
+      JSON.parse(bytes["agents/2/details.en.json"]!.toString()).locale,
+    ).toBe("en")
+    expect(agentMemberMaintenance(build, "2").codeNameDifferences[0]).toEqual({
+      entityId: "2",
+      locale: "zh",
+      pointer: "/code_name",
+      selectedLocale: "en",
+      selectedValue: "English value",
+      value: "中文原值",
+    })
+    // 顺序反转只改变读取顺序与取值特例，不改变 raw 字节。
+    expect(await allBytes(options.rawRoot)).toEqual(rawBefore)
+    // 已完成的构建目录归调用方所有；失败的语言配置不得再留下任何新目录。
+    const afterSuccessfulBuild = await fs.readdir(options.temporaryParent)
+    await expect(
+      buildIntegratedSnapshot({
+        ...options,
+        policy: { ...options.policy, languages: ["zh"] },
+      }),
+    ).rejects.toThrow("来源配置无效")
+    expect(await fs.readdir(options.temporaryParent)).toEqual(
+      afterSuccessfulBuild,
+    )
+  })
+
+  it("preserves a large unregistered diagnostic set within the source byte budgets", async () => {
+    const options = await fixture()
+    const unknownKeys = Array.from(
+      { length: 5_000 },
+      (_, index) => `unregistered_${index}`,
+    )
+    for (const locale of ["zh", "en"] as const) {
+      const path = join(options.versionRoot, locale, "character", "2.json")
+      await edit(path, (value) => {
+        for (const key of unknownKeys) value[key] = 0
+      })
+      expect((await fs.stat(path)).size).toBeLessThan(
+        options.policy.requestPolicy.maximumResponseBytes,
+      )
+    }
+    const build = await buildIntegratedSnapshot(options)
+    const maintenance = agentMemberMaintenance(build, "2")
+    expect(maintenance.diagnostics).toHaveLength(unknownKeys.length * 2)
+    const bytes = await allBytes(build.artifactDirectory)
+    for (const locale of ["zh", "en"] as const) {
+      // 诊断按配置语言与来源路径的确定性顺序排列。
+      expect(
+        maintenance.diagnostics
+          .filter(
+            (item) =>
+              item.locale === locale &&
+              item.pointer.startsWith("/unregistered_"),
+          )
+          .map((item) => item.pointer),
+      ).toEqual(unknownKeys.toSorted().map((key) => `/${key}`))
+      const details = JSON.parse(
+        bytes[`agents/2/details.${locale}.json`]!.toString(),
+      )
+      expect(
+        unknownKeys.every(
+          (key) => Object.hasOwn(details, key) && details[key] === 0,
+        ),
+      ).toBe(true)
+    }
+    // 未注入未登记字段的成员没有对应诊断；诊断只登记位置，不猜测原值。
+    expect(
+      agentMemberMaintenance(build, "10").diagnostics.filter((item) =>
+        item.pointer.startsWith("/unregistered_"),
+      ),
+    ).toEqual([])
+    expect(build.inputBytes).toBeLessThan(
+      options.policy.fetchLimits.maximumBytesPerRun,
+    )
+    expect(build.outputFileCount).toBe(expectedFiles.length)
+    expect(
+      JSON.parse(await fs.readFile(build.maintenanceReportPath, "utf8")),
+    ).toEqual({ categories: build.maintenance })
+    await expect(
+      verifyIntegratedSnapshot({
+        artifactDirectory: build.artifactDirectory,
+        policy: options.policy,
+        entities: options.entities,
+      }),
+    ).resolves.toMatchObject({ format: "fairy-nanoka-integrated/v3" })
+  }, 30_000)
+
+  it("keeps member content, own keys, codeName and maintenance counts exact", async () => {
+    const options = await fixture()
+    // 来源索引注入特殊自有 key；详情注入未登记字段，覆盖原值保留与诊断计数。
+    await edit(join(options.versionRoot, "character.json"), (value) => {
+      for (const record of Object.values(value) as Record<string, unknown>[]) {
+        // 用定义自有属性写入，避免触发 __proto__ setter 或命中继承的 constructor。
+        for (const key of ["__proto__", "constructor"] as const)
+          Object.defineProperty(record, key, {
+            value: { source_key: 0 },
+            enumerable: true,
+            configurable: true,
+            writable: true,
+          })
+      }
+    })
+    for (const locale of ["zh", "en"] as const)
+      await edit(
+        join(options.versionRoot, locale, "character", "2.json"),
+        (value) => {
+          value.future_field = JSON.parse(
+            '{"__proto__":null,"some_key":[0,"",null]}',
+          )
+        },
+      )
+    const build = await buildIntegratedSnapshot(options)
+    const bytes = await allBytes(build.artifactDirectory)
+    expect(Object.keys(bytes).toSorted()).toEqual(expectedFiles)
+    // 规范键顺序由真实序列化决定；数组顺序保留。
+    for (const fileBytes of Object.values(bytes)) {
+      const value = JSON.parse(fileBytes.toString())
+      expect(JSON.stringify(value)).toBe(JSON.stringify(arranged(value)))
+    }
+    for (const memberId of ["2", "10"]) {
+      const member = build.index.entities.agents!.members[memberId]!
+      expect(Object.hasOwn(member.sourceRecord, "__proto__")).toBe(true)
+      expect(Object.hasOwn(member.sourceRecord, "constructor")).toBe(true)
+      expect(member.sourceRecord.code_name).toBe("Index identity")
+      expect(
+        JSON.parse(bytes[`agents/${memberId}/data.json`]!.toString()).codeName,
+      ).toBe("中文原值")
+    }
+    // 未登记字段的原值（含特殊自有 key 与数组顺序）保留在详情中。
+    const details = JSON.parse(bytes["agents/2/details.en.json"]!.toString())
+    expect(details).toMatchObject({
+      id: 2,
+      locale: "en",
+      future_field: { some_key: [0, "", null] },
+    })
+    expect(Object.hasOwn(details.future_field, "__proto__")).toBe(true)
+    expect(
+      JSON.parse(bytes["agents/10/details.en.json"]!.toString()),
+    ).not.toHaveProperty("future_field")
+    // codeName 差异与诊断按成员分组，只写入制品外的维护报告。
+    expect(build.maintenance.agents).toEqual([
+      {
+        memberId: "2",
+        maintenance: {
+          diagnostics: [
+            {
+              entityId: "2",
+              locale: "zh",
+              pointer: "/future_field",
+              kind: "unknown-field",
+            },
+            {
+              entityId: "2",
+              locale: "en",
+              pointer: "/future_field",
+              kind: "unknown-field",
+            },
+          ],
+          codeNameDifferences: [
+            {
+              entityId: "2",
+              locale: "en",
+              pointer: "/code_name",
+              selectedLocale: "zh",
+              selectedValue: "中文原值",
+              value: "English value",
+            },
+          ],
+        },
+      },
+      {
+        memberId: "10",
+        maintenance: {
+          diagnostics: [],
+          codeNameDifferences: [
+            {
+              entityId: "10",
+              locale: "en",
+              pointer: "/code_name",
+              selectedLocale: "zh",
+              selectedValue: "中文原值",
+              value: "English value",
+            },
+          ],
+        },
+      },
+    ])
+    expect(
+      build.maintenanceReportPath.startsWith(build.artifactDirectory),
+    ).toBe(false)
+    expect(
+      JSON.parse(await fs.readFile(build.maintenanceReportPath, "utf8")),
+    ).toEqual({ categories: build.maintenance })
+    expect(build.outputFileCount).toBe(expectedFiles.length)
+  })
+
+  it.each(["agents/10/details.en.json", "index.json", "maintenance.json"])(
+    "cleans only its owned directory and keeps an unrelated sibling: %s",
+    async (failedPath) => {
+      const options = await fixture()
+      const sibling = join(options.temporaryParent, "unrelated")
+      await fs.mkdir(sibling)
+      await fs.writeFile(join(sibling, "keep"), "unrelated dataset")
+      const originalWrite = fs.writeFile
+      vi.spyOn(fs, "writeFile").mockImplementation(async (...args) => {
+        if (String(args[0]).endsWith(failedPath)) {
+          await originalWrite(args[0], "partial", args[2])
+          throw new Error("synthetic disk failure")
+        }
+        return originalWrite(...args)
+      })
+      await expect(buildIntegratedSnapshot(options)).rejects.toThrow(
+        "synthetic disk failure",
+      )
+      // 成员文件、索引与维护报告三种写失败都只清理本次构建目录。
+      expect(await fs.readdir(options.temporaryParent)).toEqual(["unrelated"])
+      expect(await fs.readFile(join(sibling, "keep"), "utf8")).toBe(
+        "unrelated dataset",
+      )
+    },
+  )
+
+  it("does not return success when post-write verification detects member damage", async () => {
+    const options = await fixture()
+    const format = formatting.formatGeneratedJson
+    vi.spyOn(formatting, "formatGeneratedJson").mockImplementation(
+      async (root, paths) => {
+        await format(root, paths)
+        if (paths.includes("index.json"))
+          await fs.appendFile(join(root, "agents/10/data.json"), " ")
+      },
+    )
+    // 成员文件在写入并登记摘要之后被破坏：整次构建必须失败，不能返回成功路径。
+    await expect(buildIntegratedSnapshot(options)).rejects.toThrow("摘要不一致")
+    expect(await fs.readdir(options.temporaryParent)).toEqual([])
+  })
+
+  it("keeps final LF and identical artifact bytes under an outer EditorConfig", async () => {
+    const options = await fixture()
+    const ordinaryParent = join(options.temporaryParent, "ordinary")
+    const editorConfigParent = join(options.temporaryParent, "editorconfig")
+    await fs.mkdir(ordinaryParent)
+    await fs.mkdir(editorConfigParent)
+    // 隔离测试宿主可能存在的配置，仅在第二个父目录禁止末尾换行。
+    await fs.writeFile(join(ordinaryParent, ".editorconfig"), "root = true\n")
+    await fs.writeFile(
+      join(editorConfigParent, ".editorconfig"),
+      "root = true\n[*]\ninsert_final_newline = false\n",
+    )
+    const ordinary = await buildIntegratedSnapshot({
+      ...options,
+      temporaryParent: ordinaryParent,
+    })
+    const withEditorConfig = await buildIntegratedSnapshot({
+      ...options,
+      temporaryParent: editorConfigParent,
+    })
+    const ordinaryBytes = await allBytes(ordinary.artifactDirectory)
+    const editorConfigBytes = await allBytes(withEditorConfig.artifactDirectory)
+    expect(Object.keys(editorConfigBytes).toSorted()).toEqual(expectedFiles)
+    for (const path of expectedFiles) {
+      expect(ordinaryBytes[path]!.at(-1), path).toBe(10)
+      expect(editorConfigBytes[path]!.at(-1), path).toBe(10)
+      expect(editorConfigBytes[path]!, path).toEqual(ordinaryBytes[path]!)
+    }
+    for (const build of [ordinary, withEditorConfig]) {
+      const files = await allBytes(build.artifactDirectory)
+      for (const category of Object.values(build.index.entities))
+        for (const member of Object.values(category.members))
+          for (const reference of [
+            member.files.data,
+            ...Object.values(member.files.details),
+          ])
+            expect(reference.sha256).toBe(digest(files[reference.path]!))
+      await expect(
+        verifyIntegratedSnapshot({
+          artifactDirectory: build.artifactDirectory,
+          policy: options.policy,
+          entities: options.entities,
+          expectedIndex: build.index,
+        }),
+      ).resolves.toEqual(build.index)
+      expect(checkFormatting(build.artifactDirectory)).toContain(
+        "All matched files use the correct format",
+      )
+    }
+  }, 30_000)
+
+  it("batch formats members and the index without changing JSON values or key order", async () => {
+    const options = await fixture()
+    const format = formatting.formatGeneratedJson
+    const calls = vi
+      .spyOn(formatting, "formatGeneratedJson")
+      .mockImplementation(async (root, paths) => {
+        const before = await Promise.all(
+          paths.map((path) => fs.readFile(join(root, path))),
+        )
+        await format(root, paths)
+        const after = await Promise.all(
+          paths.map((path) => fs.readFile(join(root, path))),
+        )
+        // 排版不是空操作：每一批都必须至少改变一个文件的字节。
+        expect(
+          after.some((bytes, offset) => !bytes.equals(before[offset]!)),
+        ).toBe(true)
+        for (const [offset, bytes] of after.entries()) {
+          expect(JSON.parse(bytes.toString())).toEqual(
+            JSON.parse(before[offset]!.toString()),
+          )
+          expect(JSON.stringify(JSON.parse(bytes.toString()))).toBe(
+            JSON.stringify(JSON.parse(before[offset]!.toString())),
+          )
+        }
+      })
+    const build = await buildIntegratedSnapshot(options)
+    // 两个类别的成员文件各自成批，索引单独一批。
+    expect(calls.mock.calls.map(([, paths]) => paths.length)).toEqual([6, 6, 1])
+    const files = await allBytes(build.artifactDirectory)
+    for (const category of Object.values(build.index.entities))
+      for (const member of Object.values(category.members))
+        for (const reference of [
+          member.files.data,
+          ...Object.values(member.files.details),
+        ])
+          expect(reference.sha256).toBe(digest(files[reference.path]!))
+    expect(files["index.json"]!.at(-1)).toBe(10)
+    expect(checkFormatting(build.artifactDirectory)).toContain(
+      "All matched files use the correct format",
+    )
+  })
+
+  const budgetCases: [string, object, string][] = [
+    ["records", { maximumRecordsPerEntity: 1 }, "记录数超过上限"],
+    ["resources", { maximumAssetsPerRun: 5 }, "输入资源数超过上限"],
+  ]
+  it.each(budgetCases)(
+    "rejects the %s budget before opening any detail file",
+    async (_name, fetchLimits, message) => {
+      const options = await fixture()
+      const open = vi.spyOn(fs, "open")
+      const mkdtemp = vi.spyOn(fs, "mkdtemp")
+      await expect(
+        buildIntegratedSnapshot({
+          ...options,
+          policy: {
+            ...options.policy,
+            fetchLimits: { ...options.policy.fetchLimits, ...fetchLimits },
+          },
+        }),
+      ).rejects.toThrow(message)
+      const opened = open.mock.calls.map(([path]) => String(path))
+      // 观测有效：类别索引确实已被读取；被拒绝的是尚未开始的详情读取。
+      expect(opened.some((path) => path.endsWith("character.json"))).toBe(true)
+      expect(opened.filter((path) => path.includes("/character/"))).toEqual([])
+      // 与 v2 不同：manifest 必须先读取，构建目录在预算检查之前创建，随后被整体清理。
+      expect(mkdtemp).toHaveBeenCalledTimes(1)
+      expect(await fs.readdir(options.temporaryParent)).toEqual([])
+    },
+  )
 })

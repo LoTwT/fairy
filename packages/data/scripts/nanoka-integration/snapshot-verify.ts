@@ -1,6 +1,9 @@
 import type { DetailLocale } from "../../src/integration/agent-types.ts"
 import { integratedSnapshotFormat } from "../../src/integration/snapshot-types.ts"
-import type { IntegratedSnapshotIndex } from "../../src/integration/snapshot-types.ts"
+import type {
+  HistoricalIntegratedSnapshotIndex,
+  IntegratedSnapshotIndex,
+} from "../../src/integration/snapshot-types.ts"
 import { equalJson, sortedIds } from "../../src/integration/source-json.ts"
 import { serializeJson } from "../../src/integration/serialize-json.ts"
 import {
@@ -44,6 +47,12 @@ export interface VerifyIntegratedSnapshotOptions {
 
   /** 完整输入导出的预期索引；按 JSON 值核对，省略时仅校验制品自身的一致性。 */
   expectedIndex?: IntegratedSnapshotIndex
+
+  /**
+   * 仅复验旧数据集时允许此前登记的支持语言子集；新候选必须提供完整当前配置。
+   * 复验旧集仍要求各类别的 detailLocales 与该配置一致。
+   */
+  historicalLanguages?: boolean
 }
 
 /** 索引内一个成员文件的待读取项；第一阶段只收集，第二阶段才读取字节。 */
@@ -94,11 +103,19 @@ function verifySourceInputs(
  * 先只依据索引完成结构与数量预算检查，再读取实体文件核对字节、摘要与身份；索引自身同时受单文件上限
  * 与整库累计输出预算约束。不读取 raw，不认证来源真实性；接受按实际字节重算摘要的重新序列化副本。
  */
+export function verifyIntegratedSnapshot(
+  options: VerifyIntegratedSnapshotOptions & { historicalLanguages?: false },
+): Promise<IntegratedSnapshotIndex>
+/** 历史开关为 true、动态 boolean 或未收窄的可选 boolean 时，返回可能缺失语言引用的索引。 */
+export function verifyIntegratedSnapshot(
+  options: VerifyIntegratedSnapshotOptions,
+): Promise<HistoricalIntegratedSnapshotIndex>
 export async function verifyIntegratedSnapshot(
   options: VerifyIntegratedSnapshotOptions,
-): Promise<IntegratedSnapshotIndex> {
+): Promise<HistoricalIntegratedSnapshotIndex> {
   const policy = validateSourcePolicy(
     options.policy ?? (await loadSourcePolicy()),
+    { historicalLanguages: options.historicalLanguages ?? false },
   )
   const entities = options.entities ?? onboardedSnapshotEntities
   validateSnapshotEntityContracts(entities)
@@ -118,11 +135,17 @@ export async function verifyIntegratedSnapshot(
     locale: "index",
     pointer: "",
   })
-  const index = exactKeys(value, ["format", "source", "entities"], "index.json")
+  const parsed = object(value, "index.json")
+  // 外壳版本先单独核对：v2 或未知外壳在这里明确报错，而不是被当成字段集合不符。
   requireValue(
-    index.format === integratedSnapshotFormat,
+    parsed.format === integratedSnapshotFormat,
     "/format",
     "格式版本错误",
+  )
+  const index = exactKeys(
+    parsed,
+    ["format", "source", "entities"],
+    "index.json",
   )
   const source = exactKeys(index.source, ["id", "version", "inputs"], "/source")
   requireValue(
@@ -312,5 +335,5 @@ export async function verifyIntegratedSnapshot(
   }
   await verifyFileSet(root, files)
   // 以上运行时检查覆盖完整索引外壳；sourceRecord 仅要求 JSON 对象，未知原 key 保留。
-  return index as unknown as IntegratedSnapshotIndex
+  return index as unknown as HistoricalIntegratedSnapshotIndex
 }

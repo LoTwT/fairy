@@ -38,8 +38,11 @@ import {
 beforeEach(() => {
   vi.resetAllMocks()
   loaders.index.mockResolvedValue({
+    format: "fairy-nanoka-integrated/v3",
     source: { inputs: [{ resource: "untouched" }] },
-    agents: { "1311": { sourceRecord: { code: "Astra" } } },
+    entities: {
+      agents: { members: { "1311": { sourceRecord: { code: "Astra" } } } },
+    },
   })
   for (const [data, zh, en, id] of [
     [loaders.data, loaders.zh, loaders.en, 1311],
@@ -74,7 +77,9 @@ describe("public readers", () => {
     expect(loaders.otherZh).not.toHaveBeenCalled()
     vi.clearAllMocks()
     expect(await loadIndex()).toMatchObject({
-      agents: { "1311": { sourceRecord: { code: "Astra" } } },
+      entities: {
+        agents: { members: { "1311": { sourceRecord: { code: "Astra" } } } },
+      },
     })
     for (const [key, loader] of Object.entries(loaders))
       if (key !== "index") expect(loader).not.toHaveBeenCalled()
@@ -141,7 +146,12 @@ describe("public readers", () => {
     expect(two!.stats.tags).toEqual(["original"])
     const index = await loadIndex()
     index.source.inputs[0].resource = "changed"
-    expect((await loadIndex()).source.inputs[0].resource).toBe("untouched")
+    index.entities.agents.members["1311"].sourceRecord.code = "changed"
+    const reloaded = await loadIndex()
+    expect(reloaded.source.inputs[0].resource).toBe("untouched")
+    expect(reloaded.entities.agents.members["1311"].sourceRecord.code).toBe(
+      "Astra",
+    )
     const details = await loadAgentDetails("Astra Yao", "zh")
     ;(details!.skill as any).entries.push("changed")
     const all = await loadAllAgents("zh")

@@ -7,7 +7,7 @@ import {
   generateCatalog,
   preparePublication,
 } from "./scripts/prepare-publication.ts"
-import { verifyNanokaAgentArtifact } from "./scripts/nanoka-integration/verify.ts"
+import { verifyIntegratedSnapshot } from "./scripts/nanoka-integration/snapshot-verify.ts"
 
 export default defineConfig(async (options) => {
   if (options.watch)
@@ -66,11 +66,11 @@ export default defineConfig(async (options) => {
     hooks: {
       "build:done": async () => {
         const snapshot = join(buildDirectory, ".generated/integrated")
-        await verifyNanokaAgentArtifact({ artifactDirectory: snapshot })
+        await verifyIntegratedSnapshot({ artifactDirectory: snapshot })
         await cp(snapshot, join(packageDirectory, "dist/integrated"), {
           recursive: true,
         })
-        await verifyNanokaAgentArtifact({
+        await verifyIntegratedSnapshot({
           artifactDirectory: join(packageDirectory, "dist/integrated"),
         })
         await rm(buildDirectory, { recursive: true, force: true })
