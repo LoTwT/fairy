@@ -1,0 +1,57 @@
+import { createHash } from "node:crypto"
+import fs from "node:fs/promises"
+import { syncBuiltinESMExports } from "node:module"
+import { join } from "node:path"
+
+const configuredPackageDirectory = process.env.FAIRY_PUBLICATION_TEST_PACKAGE
+const intervention = process.env.FAIRY_PUBLICATION_TEST_INTERVENTION
+const tracePath = process.env.FAIRY_PUBLICATION_TEST_TRACE
+if (
+  !configuredPackageDirectory ||
+  !tracePath ||
+  (intervention !== "source-change" && intervention !== "dist-corruption")
+)
+  throw new Error("Missing publication build fixture configuration")
+const packageDirectory = await fs.realpath(configuredPackageDirectory)
+
+const writeFile = fs.writeFile
+const cp = fs.cp
+let injected = false
+
+if (intervention === "source-change") {
+  fs.writeFile = async (path, ...args) => {
+    await writeFile(path, ...args)
+    if (
+      !injected &&
+      String(path).startsWith(join(packageDirectory, ".publication-")) &&
+      String(path).endsWith("/src/index.browser.ts")
+    ) {
+      injected = true
+      // The catalog and private JSON snapshot are already captured. Publish a valid newer source.
+      const source = join(packageDirectory, "integrated")
+      const detailsPath = join(source, "agents/1311/details.en.json")
+      const details = JSON.parse(await fs.readFile(detailsPath, "utf8"))
+      details.name += " [next snapshot]"
+      const bytes = JSON.stringify(details)
+      const indexPath = join(source, "index.json")
+      const index = JSON.parse(await fs.readFile(indexPath, "utf8"))
+      index.agents["1311"].files.content.en.sha256 = createHash("sha256")
+        .update(bytes)
+        .digest("hex")
+      await writeFile(detailsPath, bytes)
+      await writeFile(indexPath, JSON.stringify(index))
+      await writeFile(tracePath, intervention)
+    }
+  }
+} else {
+  fs.cp = async (from, to, ...args) => {
+    await cp(from, to, ...args)
+    if (!injected && String(to) === join(packageDirectory, "dist/integrated")) {
+      injected = true
+      // Damage only the installed bytes, after copying the verified private snapshot.
+      await fs.appendFile(join(String(to), "agents/1311/data.json"), " ")
+      await writeFile(tracePath, intervention)
+    }
+  }
+}
+syncBuiltinESMExports()

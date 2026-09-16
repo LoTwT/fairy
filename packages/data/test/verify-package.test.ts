@@ -12,6 +12,7 @@ import {
 } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
+import { pathToFileURL } from "node:url"
 import ts from "typescript"
 import { afterEach, describe, expect, it } from "vitest"
 import { verifyNanokaAgentArtifact } from "../scripts/nanoka-integration/verify.ts"
@@ -329,6 +330,73 @@ void [numericSourceId, names, index, data, detail, all, acceptsName, wrong]
       brokenConsumer,
       'import assert from "node:assert/strict"; import { agentNames } from "@randomplay/data"; assert.equal(agentNames.length, 58)',
     )
+    // Exercise both build boundaries with the real tsdown process in this private checkout.
+    for (const intervention of ["source-change", "dist-corruption"]) {
+      const trace = join(temporaryDirectory, `${intervention}.trace`)
+      const build = spawnSync(
+        process.execPath,
+        [
+          "--import",
+          pathToFileURL(
+            join(cleanPackage, "test/fixtures/publication-build-preload.ts"),
+          ).href,
+          join(cleanPackage, "node_modules/tsdown/dist/run.mjs"),
+        ],
+        {
+          cwd: cleanPackage,
+          encoding: "utf8",
+          timeout: 30_000,
+          env: {
+            ...checkoutEnvironment,
+            FAIRY_PUBLICATION_TEST_PACKAGE: cleanPackage,
+            FAIRY_PUBLICATION_TEST_INTERVENTION: intervention,
+            FAIRY_PUBLICATION_TEST_TRACE: trace,
+          },
+        },
+      )
+      expect(build.error).toBeUndefined()
+      expect(build.signal).toBeNull()
+      expect(existsSync(trace), build.stdout + build.stderr).toBe(true)
+      expect(readFileSync(trace, "utf8")).toBe(intervention)
+      if (intervention === "source-change") {
+        expect(build.status, build.stdout + build.stderr).toBe(0)
+        await verifyNanokaAgentArtifact({
+          artifactDirectory: join(cleanPackage, "integrated"),
+        })
+        expect(
+          JSON.parse(
+            readFileSync(
+              join(cleanPackage, "integrated/agents/1311/details.en.json"),
+              "utf8",
+            ),
+          ).name,
+        ).toBe("Astra Yao [next snapshot]")
+        for (const path of jsonFiles)
+          expect(
+            readFileSync(join(cleanPackage, "dist/integrated", path)),
+            path,
+          ).toEqual(readFileSync(join(snapshot, path)))
+        // Published declarations and the runtime name table come from the same captured snapshot.
+        const declarations = listFiles(join(cleanPackage, "dist"))
+          .filter((path) => path.endsWith(".d.mts"))
+          .map((path) => readFileSync(join(cleanPackage, "dist", path), "utf8"))
+          .join("\n")
+        const changedName = JSON.stringify("Astra Yao [next snapshot]")
+        expect(declarations).toContain(JSON.stringify("Astra Yao"))
+        expect(declarations).not.toContain(changedName)
+        expect(
+          JSON.parse(
+            runNode(
+              cleanPackage,
+              'import { agentNames, loadAgentDetails } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(agentNames.map(async name => (await loadAgentDetails(name, "en")).name))))',
+            ),
+          ),
+        ).toEqual(expectedNames)
+      } else {
+        expect(build.status).toBe(1)
+        expect(build.stdout + build.stderr).toContain("摘要不一致")
+      }
+    }
     expect(
       dependencyMetadata.map((path) =>
         existsSync(path) ? readFileSync(path) : undefined,

@@ -463,7 +463,7 @@ schema 路径的维护错误，不冒充来源结构异常，也不依赖来源�
 
 该纯函数仅处理已解析 JSON，验证来源值、必需字段、可选结构、共享一致性、保真与对象结果确定性。
 文件读取、严格 UTF-8 解码、摘要、序列化和全量索引由下述独立模块负责，这些职责不加入 `integrateAgent`。
-单实体对象测试不代替文件流程验收。未实现计算 helpers、definitions、core 映射或公开查询 API。
+单实体对象测试不代替文件流程验收。计算 helpers、definitions 和 core 映射仍未实现；公开读取 API 见[数据消费契约](consumption.md)。
 
 旧文档 example 已迁移并删除：
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { formatCommandFailure } from "./terminal.ts"
+import { createCommandFailureHandler } from "./terminal.ts"
 import { createInterface } from "node:readline/promises"
 import { pathToFileURL } from "node:url"
 import { NanokaHttpClient } from "./nanoka/http.ts"
@@ -192,8 +192,13 @@ const isMain =
   process.argv[1] !== undefined &&
   import.meta.url === pathToFileURL(process.argv[1]).href
 if (isMain) {
-  run(process.argv.slice(2)).catch((error: unknown) => {
-    process.stderr.write(formatCommandFailure(error))
-    process.exitCode = 1
+  const fail = createCommandFailureHandler("Nanoka 数据源命令")
+  let reportedOutputFailure = false
+  process.stdout.on("error", (error: Error) => {
+    // 继续监听后续进度写入，但同一输出故障只报告一次。
+    if (reportedOutputFailure) return
+    reportedOutputFailure = true
+    fail(error)
   })
+  run(process.argv.slice(2)).catch(fail)
 }

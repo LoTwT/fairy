@@ -740,6 +740,36 @@ describe("current Nanoka dataset", () => {
     await clean(input)
   })
 
+  it("rejects candidate corruption after hard-link reuse before preparing a commit", async () => {
+    const input = await fixture()
+    await updateNanokaAgents(input)
+    const before = await fingerprints(input.targetDirectory)
+    await change(input)
+    const link = fs.link
+    let injected = false
+    vi.spyOn(fs, "link").mockImplementation(async (from, to) => {
+      if (!injected) {
+        injected = true
+        return link(join(input.targetDirectory, "index.json"), to)
+      }
+      return link(from, to)
+    })
+    const stages: CurrentCheckpoint[] = []
+    await expect(
+      updateNanokaAgents({
+        ...input,
+        checkpoint: (stage) => {
+          stages.push(stage)
+        },
+      }),
+    ).rejects.toThrow()
+    expect(injected).toBe(true)
+    expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    expect(stages).not.toContain("candidate-ready")
+    expect(stages).not.toContain("prepared")
+    await clean(input)
+  })
+
   it("fails hard-link preparation without rewriting or losing current files", async () => {
     const input = await fixture()
     await updateNanokaAgents(input)
