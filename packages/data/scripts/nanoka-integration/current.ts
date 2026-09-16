@@ -19,6 +19,7 @@ import {
 } from "node:path"
 import type {
   ExportFileReference,
+  HistoricalIntegratedIndex,
   IntegratedIndex,
 } from "../../src/integration/agent-types.ts"
 import { integratedSnapshotFormat } from "../../src/integration/snapshot-types.ts"
@@ -48,6 +49,12 @@ import type {
   IntegratedSnapshotEntityProducer,
 } from "./snapshot-entities.ts"
 import { verifyIntegratedSnapshot } from "./snapshot-verify.ts"
+import {
+  comparedSnapshotFromIndex,
+  comparedSnapshotFromLegacyIndex,
+  compareSnapshotUpdate,
+  summarizeUpdateReport,
+} from "./update-report.ts"
 import { verifyNanokaAgentArtifact } from "./verify.ts"
 
 /** v2 外壳的格式标记；管理记录用它区分需要显式迁移的旧数据集。 */
@@ -610,7 +617,7 @@ function summarizeIndex(index: HistoricalIntegratedSnapshotIndex): {
   return { files, memberCounts }
 }
 
-/** 已完整验证的数据集；v2 外壳不投影为当前索引类型，只保留文件引用与计数。 */
+/** 已完整验证的数据集；v2 外壳不投影为当前索引类型，只保留文件引用、计数与完整旧索引。 */
 interface VerifiedDataset {
   format: DatasetIndexFormat
 
@@ -619,6 +626,9 @@ interface VerifiedDataset {
    * 消费前必须经过 completeLanguageIndex 的运行时检查，不能直接断言为完整语言索引。
    */
   index?: HistoricalIntegratedSnapshotIndex
+
+  /** v2 外壳的完整验证索引；只用于把受管理旧基线纳入同一比较口径。 */
+  legacyIndex?: HistoricalIntegratedIndex
 
   files: ExportFileReference[]
   memberCounts: Record<string, number>
@@ -722,6 +732,7 @@ async function verifyDataset(
     }
     return {
       format: descriptor.format,
+      legacyIndex: index,
       files,
       memberCounts: { agents: index.scope.agentIds.length },
     }
@@ -1136,14 +1147,6 @@ async function updateCurrent(
         entities: registry,
       })
       await rename(build.artifactDirectory, paths.candidate)
-      await rename(
-        build.maintenanceReportPath,
-        join(paths.work, "maintenance.json"),
-      )
-      await checkedMaintenanceReport(
-        paths,
-        policy.fetchLimits.maximumBytesPerRun * outputExpansionLimit,
-      )
       const counts = await reuseEntityFiles({
         candidateRoot: paths.candidate,
         existingRoot: paths.target,
@@ -1181,6 +1184,46 @@ async function updateCurrent(
         ),
         policy,
       )
+      // 差异只比较本次已完整验证的旧基线与候选：候选尚未安装，旧基线尚未移动，
+      // 提交后不再重新读取可变目录，也不在恢复时重算差异。
+      const baselineView = previous.dataset?.index
+        ? comparedSnapshotFromIndex(previous.dataset.index)
+        : previous.dataset?.legacyIndex
+          ? comparedSnapshotFromLegacyIndex(previous.dataset.legacyIndex)
+          : undefined
+      if (previous.current && !baselineView) invalid("旧基线的比较视图缺失")
+      const report = await compareSnapshotUpdate({
+        baseline:
+          previous.current && baselineView
+            ? {
+                side: "baseline",
+                root: paths.target,
+                snapshot: baselineView,
+                maximumBytes:
+                  previous.current.policy.requestPolicy.maximumResponseBytes *
+                  outputExpansionLimit,
+              }
+            : null,
+        candidate: {
+          side: "candidate",
+          root: paths.candidate,
+          snapshot: comparedSnapshotFromIndex(verified),
+          maximumBytes:
+            policy.requestPolicy.maximumResponseBytes * outputExpansionLimit,
+        },
+      })
+      // 候选维护信息与本次差异报告合并为同一份制品外报告；构建器的独立报告不单独保留。
+      await rm(build.buildDirectory, { recursive: true, force: true })
+      await writeFile(
+        join(paths.work, "maintenance.json"),
+        serializeJson({ categories: build.maintenance, update: report }),
+        { flag: "wx" },
+      )
+      // 报告生成与预算检查都在提交之前：失败或超限时既不写 prepared，也不切换当前数据。
+      await checkedMaintenanceReport(
+        paths,
+        policy.fetchLimits.maximumBytesPerRun * outputExpansionLimit,
+      )
       await options.checkpoint?.("candidate-ready")
       const summary = summarizeIndex(verified)
       const result = {
@@ -1193,6 +1236,7 @@ async function updateCurrent(
         outputFileCount: build.outputFileCount,
         ...counts,
         removedEntityFiles,
+        ...summarizeUpdateReport(report),
       }
       if (previous.current?.indexSha256 === after.indexSha256) {
         await rename(

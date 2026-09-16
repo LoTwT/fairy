@@ -4,7 +4,7 @@ Fairy 的游戏来源资料与数据整理包。
 
 Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。公开接口见[数据消费与 npm 导出契约](../../docs/specs/data/consumption.md)。
 
-[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的多实体 v3 增量维护、互斥读取、中断恢复与显式迁移，公开 API 消费随 npm 版本发布的固定快照。
+[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的多实体 v3 增量维护、按类别的更新差异报告、互斥读取、中断恢复与显式迁移，公开 API 消费随 npm 版本发布的固定快照。
 
 ## 使用
 
@@ -77,9 +77,10 @@ v2 外壳的制品不会被隐式登记或转换：静态 v2 制品需要显式�
 相同输入重复执行仍完整构建和校验，但当前文件的内容、inode 和 mtime 保持不变；临时候选仍有 I/O。
 初始化中断后直接重跑同一命令，永久锁保留，进程终止会自动释放锁。独立读取、恢复和静态验证不会初始化非受管理制品。
 
-底层复用[多实体构建器](scripts/nanoka-integration/snapshot-build.ts)、[完整制品验证器](scripts/nanoka-integration/snapshot-verify.ts)
-及[当前数据事务模块](scripts/nanoka-integration/current.ts)。流程仍为：按类别生成实体 JSON → oxfmt 格式化 →
-计算最终字节摘要 → 生成并格式化 index.json → 完整校验 → 复用相同实体文件并安装当前数据。
+底层复用[多实体构建器](scripts/nanoka-integration/snapshot-build.ts)、[完整制品验证器](scripts/nanoka-integration/snapshot-verify.ts)、
+[当前数据事务模块](scripts/nanoka-integration/current.ts)及[更新报告模块](scripts/nanoka-integration/update-report.ts)。流程仍为：
+按类别生成实体 JSON → oxfmt 格式化 → 计算最终字节摘要 → 生成并格式化 index.json → 完整校验 → 比较旧基线与候选、
+生成并检查维护报告 → 复用相同实体文件并安装当前数据。
 格式化发生在硬链接复用之前，使用仓库 `oxfmt.config.ts`。不要直接格式化当前目录；
 `pnpm format` 排除 integrated，`pnpm format:check` 仍检查它，旧排版通过生成入口更新。
 raw 保留来源版本目录；integrated 不加来源或版本层级，`data`/`details` 字段与语义不变。
@@ -87,6 +88,12 @@ raw 保留来源版本目录；integrated 不加来源或版本层级，`data`/`
 控制目录为目标同级的 `.<目标名>.fairy-state/`，默认是 `packages/data/.integrated.fairy-state/`；
 它保存永久锁、本机记录、最新维护报告及事务临时材料，被 Git 忽略。**不要删除永久 lock.sqlite 来解锁，
 也不要删除当前数据或管理记录来绕过错误。** 正常完成不保留历史数据目录。
+
+最新维护报告是 `.<目标名>.fairy-state/maintenance.json`：`categories` 保留各类别成员的未知字段提示等既有维护信息，
+`update` 是本次整库更新的差异报告（按类别的新增、修改、删除、无变化，来源与规则变化，字段级 JSON Pointer 差异，
+以及需要重点审查的既有内容摘要）。报告由本次已完整验证的旧基线与候选在提交前生成，不在提交后重新读取当前目录计算，
+也不写入 v3 索引；首次生成以 `baseline.kind: "none"` 明确表达；报告失败或超限时不会提交新数据，也不会截断冒充完整报告。
+字段含义、计数口径与状态判定见[更新差异报告](../../docs/specs/data/integration.md#更新差异报告)。
 
 若 Git 更新了 JSON，使它与已有本机记录的摘要不一致，生成和恢复会明确拒绝并保留现场；
 本次不支持自动重新登记这种受管理数据，也不支持把未知规则或旧语言子集的非受管理制品直接初始化。
@@ -116,7 +123,10 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 
 生成回执包含 `outcome`（`committed` 或 `unchanged`）、`artifactDirectory`、`maintenanceReportPath`、`format`、
 按类别的 `memberCounts`、`inputFileCount`、`outputFileCount`、`reusedEntityFiles`、`changedEntityFiles`、
-`removedEntityFiles`。路径为实际绝对路径；实体计数不包含索引。验证回执包含目标路径、`format`、按类别的成员数与语言
+`removedEntityFiles`，以及本次更新摘要：`reportVersion`、`firstGeneration`、`sourceVersion`、`sourceChanged`、
+`rulesChanged`、`result`、`reviewRequired` 和按类别的 `categories`（`checked`、`presence`、`result`、成员与文件计数、
+`sourceRecordsChanged`、`rulesVersionChanged`、`reviewRequired`）。路径为实际绝对路径；实体计数不包含索引；
+逐条差异只写在制品外的报告里。验证回执包含目标路径、`format`、按类别的成员数与语言
 和 `verified: true`；恢复回执包含目标路径、`outcome`、`available` 与 `format`；迁移回执包含目标路径、
 `outcome`（`migrated` 或 `unchanged`）、`format`、按类别的成员数与实体文件数。
 提交后清理或 stdout 断管失败也可能退出 1，已经提交的数据会保留；应恢复并复验，不能仅按退出码判断是否提交。

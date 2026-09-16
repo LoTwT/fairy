@@ -2,7 +2,7 @@
 
 ## 状态与目标
 
-**状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
+**状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
@@ -439,8 +439,8 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 之后才复用当前文件硬链接。不得直接格式化受管理的当前目录，也不得在硬链接复用后格式化候选。
 只有整个输入和候选验证通过才进入提交阶段；缺详情、解析失败、格式化失败、语言不全等不会触发删除。
 来源版本切换完整读取新版本；成员仅由该完整合法索引决定。
-更新器在写入 `prepared` 或安装维护报告之前，检查报告为独占普通文件，且大小不超过本次
-`maximumBytesPerRun × outputExpansionLimit`；超限时放弃候选，旧集保持可用，首次仍不生成目标。
+更新器在写入 `prepared` 或安装维护报告之前，先按本次已验证的旧基线与候选生成完整报告，再检查报告为独占普通文件，
+且大小不超过本次 `maximumBytesPerRun × outputExpansionLimit`；生成失败或超限时放弃候选，旧集保持可用，首次仍不生成目标。
 独立全量构建器继续只创建新临时制品；此报告上限是当前数据更新入口的提交前约束。
 
 按实际读取的输出字节逐文件比较；旧文件使用持久记录的旧预算，候选使用本次新预算，允许合法缩小预算的迁移。
@@ -449,6 +449,75 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 失败，不悄悄退化为重写；索引完全相同时不切换当前目录。来源字节、来源记录、版本、语言顺序或规则标记变化即使
 实体输出不变，也会由完整重建后的索引体现。候选构建本身仍会写临时实体文件；“不重写”指当前文件 inode 的内容
 和 mtime 保持，临时生成并非零 I/O。链接会改变 nlink/ctime，目录 inode 也可能变化，不能承诺它们不变。
+
+### 更新差异报告
+
+每次整库更新在提交之前比较**本次已完整验证的旧基线**与**本次已完整验证、经过 oxfmt 的候选**，把按类别的更新差异
+写进同一份制品外维护报告。报告只描述这两份快照：提交后不重新读取可变目录计算差异，恢复不读取 raw、也不重算差异；
+报告不修改 v3 索引，不把维护状态或差异写进制品。
+
+报告仍是控制目录的 `maintenance.json`，由两个字段组成：`categories` 保留原有的按类别与成员顺序的未知字段提示等维护信息，
+`update` 是本次更新差异报告，`reportVersion` 为 `fairy-nanoka-update-report/1`，与索引外壳版本、管理记录协议、类别规则版本互相独立。
+
+| 字段                         | 含义与计数口径                                                                                                    |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `baseline`                   | `{kind: "none"}` 表示首次生成、没有旧基线；`{kind: "snapshot", format, sourceVersion}` 表示旧基线的外壳与版本     |
+| `candidate`                  | 候选的索引外壳与来源版本；两次来源版本分别由 `baseline` 与 `candidate` 表达                                       |
+| `checked`                    | 候选全部类别的 `checked` 都为 true 时才为 true；报告只在候选完整读取、构建并验证之后生成                          |
+| `result`                     | 全部类别的结论；存在 `changed` 取 `changed`，否则存在 `format-only` 取 `format-only`，否则 `unchanged`            |
+| `source.version`             | 本次与上次来源版本；首次生成时 `before` 为 null 且 `changed` 为 false                                             |
+| `source.inputs`              | 相对旧基线新增、删除或摘要变化的来源资源；`category` 为 null 表示快照级输入，顺序为先候选顺序、再仅基线存在的资源 |
+| `source.unchangedInputCount` | 两侧都有且原始字节摘要相同的来源资源数                                                                            |
+| `source.changed`             | 来源版本号、任一已登记资源摘要或任一成员 `sourceRecord` 发生变化                                                  |
+| `rules.categories`           | 每个类别的旧、新 `rulesVersion`；`changed` 只在两侧都存在且版本不同时为 true                                      |
+| `rules.changed`              | 任一类别规则版本变化                                                                                              |
+| `categories`                 | 按类别名 UTF-16 代码单元顺序排列；只在一侧存在的类别也各自成条，不用空集合冒充另一侧                              |
+| `categories[].checked`       | 该类别的候选已按本次来源版本完整读取、构建并验证；只存在于旧基线的类别为 false                                    |
+| `categories[].presence`      | `present` 两侧都有，`added` 只在候选，`removed` 只在旧基线                                                        |
+| `categories[].result`        | `unchanged`、`format-only`、`changed`，判定见下；规则版本与快照来源变化不改变它                                   |
+| `categories[].rulesVersion`  | 该类别的旧、新规则版本；`changed` 只在两侧都存在且版本不同时为 true                                               |
+| `categories[].members`       | 两侧成员数、`added`、`removed`、`changed`、`unchanged` 成员 ID 列表，按数值升序                                   |
+| `categories[].files`         | 两侧实体文件数、`added`、`removed`、`semanticChanged`、`formatOnlyChanged` 路径列表与 `unchangedCount`            |
+| `categories[].sourceRecords` | `changed` 成员 ID 列表、`unchangedCount`，以及逐成员的字段差异 `changes`                                          |
+| `categories[].fileChanges`   | 逐文件的字段差异：`path`、`memberId`、`changes`                                                                   |
+| `categories[].review`        | 需要重点审查的既有内容摘要，见下                                                                                  |
+| `categories[].cause`         | 该类别的来源与规则变化及归因结论，见下                                                                            |
+| `changeCause`                | 整次更新的归因结论，由各类别与来源、规则的结论汇总                                                                |
+
+状态判定与计数口径：
+
+- `result` 覆盖成员集合、实体文件与来源记录：其中任一有新增、删除或 JSON 值变化时为 `changed`；否则存在
+  字节不同而 JSON 值相同的文件时为 `format-only`；否则为 `unchanged`。未变化文件按索引摘要判定，不重新解析。
+- 成员 `changed` 表示两侧都存在、但其文件集合、任一文件字节或 `sourceRecord` 与旧基线不同；`unchanged` 表示这些都相同。
+  一个成员文件的字节相同即计入 `unchangedCount`，字节不同则读取两侧字节、比较 JSON 值：值相同计入 `formatOnlyChanged`，
+  值不同计入 `semanticChanged` 并给出字段差异。只有两侧都存在的成员文件才做字段比较；新增或删除的文件只按路径列出。
+- `sourceRecord` 逐成员按 JSON 值比较；对象成员排列不算变化，数组仍按下标比较。
+- `review` 由同一比较结果派生：`required` 表示存在既有内容的修改或删除（删除的成员、删除的文件、既有文件的语义变化或
+  既有 `sourceRecord` 的变化）；`removedFields`、`changedFields`、`addedFields` 是差异条目按 `change` 的计数，含容器与叶子条目。
+- 首次生成没有旧基线：`baseline.kind` 为 `none`，`source.inputs` 全部记为新增，`source.version.changed`、`source.changed`
+  与 `rules.changed` 均为 false（没有可比较的旧侧）；各类别的 `presence` 为 `added`、成员与文件全部新增。
+  报告必须按首次生成解读，不得当作普通版本更新。
+- 来源版本号变化不等于实体内容变化：版本切换通常只产生资源名的新增与移除，`source.changed` 与各类别 `result` 分别表达。
+  规则版本变化同样不等于输出被改写；只有 `rulesVersion.changed` 记录它。
+- 归因只按快照级事实给出：`attributedTo` 为 `source`、`rules`、`undetermined` 或 `neither`。来源与规则同时变化时为
+  `undetermined`，报告明确保留「字段差异不能唯一归因」这一不确定性，不把差异武断归因于某一侧；两侧都未变化时为 `neither`。
+  类别的 `cause.sourceChanged` 表示快照来源版本变化、该类别来源资源集合或摘要变化、或该类别任一成员 `sourceRecord` 变化，
+  `cause.rulesChanged` 表示该类别规则版本变化；只在一侧存在的类别不按两侧变化归因，其新增或删除由 `presence` 表达。
+- 类别顺序按类别名代码单元、成员按数值升序、文件按成员与语言顺序、字段差异按深度优先的对象键（规范十进制键在前）与数组下标排列；
+  顺序不依赖对象遍历偶然顺序，也不依赖文件读取完成顺序。两侧文件按各自记录的预算顺序读取。
+
+字段差异用 JSON Pointer 表示（相对该文件或 `sourceRecord` 的根，根为空字符串），每条记录给出 `change` 与两侧取值摘要。
+取值摘要的 `kind` 区分 `string`、`number`、`boolean`、`null`、`array`（只含 `length`）与 `object`（只含 `size`）；
+字段缺失用「记录中缺少对应一侧」表达，因此缺失、`null`、`0`、`false` 与空字符串不会混淆。容器既给出自身的形状记录，
+也逐条展开其内容；数组始终按下标比较，长度变化单列一条，顺序变化保留为对应下标的差异，不排序数组来掩盖变化。
+容器被另一种类型替换（对象、数组、标量或 `null` 之间互换）时同样保留父节点的形状记录，并展开两侧内容：
+旧一侧的内容按删除、新一侧的内容按新增逐条记录。两侧成员不配对，因此数字对象键与数组下标得到相同 Pointer 时
+仍分别保留各自的结构语义，不会被合并或抵消；同大小而内容不同的替换必须给出不同的差异条目。
+
+报告上限与事务边界：报告在提交前生成并检查，失败、超限或写入失败都不会写入 `prepared`、也不会切换当前数据；
+超限不通过截断或遗漏类别来冒充完整报告。回滚不安装未提交候选的报告，当前目录保留上一次成功更新的报告。
+提交成功后由既有清理流程安装已准备的报告，提交后的中断仍按第 8.1 节向前恢复，恢复只安装或保留已生成的报告文件，
+不重新读取 raw、不重算差异。重复执行且实体输出未变时，报告仍完整生成并明确表达本次已检查、无变化。
 
 ### 提交点、状态转换与恢复
 
@@ -696,6 +765,9 @@ fairy-integrated-snapshot-<独占后缀>/
 
 [当前数据事务模块](../../../packages/data/scripts/nanoka-integration/current.ts) 实现第 8.1 节协议，复用全量构建器与验证器；
 [命令入口](../../../packages/data/scripts/current-nanoka-dataset.ts)提供整库语义的四个子命令，另有独立静态复验命令。
+更新差异由[差异引擎](../../../packages/data/scripts/nanoka-integration/snapshot-diff.ts)（纯 JSON 值比较）和
+[更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
+实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
 `generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次只有 `agents` 一个真实类别。
 从仓库根目录执行：
 
@@ -718,7 +790,11 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 按类别的 `memberCounts`、实体文件数、输入/输出计数，以及 `reusedEntityFiles`、`changedEntityFiles`、
 `removedEntityFiles`。`changedEntityFiles` 统计本次候选中新建或字节改变的实体文件，首次生成时包含全部实体文件；
 `reusedEntityFiles` 统计字节相同并复用旧 inode 的实体文件，`removedEntityFiles` 统计旧集中不再存在的实体文件。
-三者均不含总索引，也不是临时构建的写入次数。详细的新增/修改/删除/无变化报告属于后续工作，本次回执不展开。
+三者均不含总索引，也不是临时构建的写入次数。除这些计数外，回执还给出本次更新摘要：`reportVersion`、`firstGeneration`、
+`sourceVersion`（本次与上次来源版本及是否变化）、`sourceChanged`、`rulesChanged`、`result`、`reviewRequired`，
+以及按类别的 `categories`（`checked`、`presence`、`result`、成员与文件计数、`sourceRecordsChanged`、`rulesVersionChanged`、
+`reviewRequired`）。摘要与报告由同一次比较结果派生，字段含义与计数口径见[更新差异报告](#更新差异报告)；逐条差异只写在制品外的报告里，
+回执不展开。首次生成按 `firstGeneration` 与报告中的 `baseline.kind` 明确表达，不伪装成一次普通版本更新。
 恢复回执含目标路径、`outcome`（`committed`、`rolled-back` 或 `unchanged`）、`available` 与记录或数据集的 `format`；
 验证回执含目标路径、`format`、按类别的成员数与语言以及 `verified: true`；迁移回执含目标路径、
 `outcome`（`migrated` 或 `unchanged`）、迁移后的 `format`、按类别的成员数与实体文件数。
@@ -749,7 +825,8 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 转换结果作为候选整体复验、按实际字节复用相同实体文件的原 inode，最后以第 8.1 节的两次 rename 提交整个数据集。
 实体文件保持原字节、原 inode 与 mtime，`sourceRecord` 保持原值；只有索引外壳与管理记录改变。
 格式迁移不升级代理人规则、不重新清洗实体文件；历史规则或历史语言子集需要按当前规则从 raw 重新生成，
-不能用迁移改写版本标记。迁移中断按第 8.1 节恢复：未提交时保留原 v2 数据集，提交后保留 v3 并向前完成清理；
+不能用迁移改写版本标记。迁移不是整库更新：它不比较实体差异、也不生成更新差异报告，控制目录里的最新维护报告
+仍描述此前最后一次生成或更新。迁移中断按第 8.1 节恢复：未提交时保留原 v2 数据集，提交后保留 v3 并向前完成清理；
 重复执行有明确结果。正常 build/test/check/pack 与只读验证都不会隐式迁移或改写真实目录。
 
 [当前数据合成测试](../../../packages/data/test/agent-current.test.ts)使用人工合成代理人输入与合成第二类别覆盖：
@@ -762,6 +839,13 @@ v2 静态/受管理/旧协议 prepared 到 v3 的三条迁移路径、迁移中�
 发送 `SIGKILL`，用全新进程恢复并再次恢复；包括首次初始化、准备记录发布前后、旧目录移出、提交点后、报告/备份/
 工作目录清理、生成与迁移两条链路，以及恢复回滚自身再次中断；清理中途实验先实际删除一个备份/候选文件再由父进程终止子进程。
 CLI 测试另外关闭真实 stdout 管道，核对失败时已提交数据仍可持锁验证。
+[更新报告测试](../../../packages/data/test/update-report.test.ts)另覆盖：纯值差异引擎（字段新增/修改/删除、容器展开、
+容器类型替换的两侧展开、对象数字键与数组下标重合、数组长度与顺序、缺失与 `null`/`0`/`false`/空字符串的区别、
+Pointer 转义与确定顺序）、首次生成、同版本重复生成、来源版本切换但实体输出不变、
+仅来源输入字节或 `sourceRecord` 变化但实体输出不变、仅规则版本变化以及来源与规则同时变化时的归因表达、
+只变化一个合成类别时另一类别明确「已检查、无变化」、成员/文件/字段的新增修改删除、纯格式变化与语义变化的分开表达、
+v2 旧基线与新增类别、缺失或损坏新版输入的明确失败、报告写入失败与报告超限时的提交前拒绝、提交前后中断时报告与数据的对应关系、
+以及未变化实体文件的字节、inode 与纳秒 mtime 保持；另有整库流程用例在 `sourceRecord` 与既有实体文件中替换容器类型并核对最终报告与计数。
 测试仅在自有临时目录执行，不读取真实 raw、不联网，不生成固定当前数据。真实验收结果单独记录。
 
 `packages/data/integrated/` 纳入 Git 跟踪范围；任意层级的 `.<目标名>.fairy-state/` 控制目录继续忽略。
@@ -771,6 +855,53 @@ CLI 测试另外关闭真实 stdout 管道，核对失败时已提交数据仍�
 
 以下记录按时间顺序保留当时的验证结果；早于「多实体 v3 切换」的记录描述当时仍为 v2 外壳的生成、管理、
 发布与消费链路，其命令名与索引字段已被第 7.1、8.1、9 节的当前契约取代，不作为现行用法。
+
+### 更新差异报告验收
+
+2026-09-16，基线 `3473256d`。实现按类别的整库更新差异报告：报告比较本次已完整验证的旧基线与经过 oxfmt 的候选，
+按类别区分新增、修改、删除与无变化，分开表达来源变化与规则版本变化，并以 JSON Pointer 给出既有文件的字段差异；
+报告在提交前生成并检查，失败、写入失败或超限都不提交新数据，也不截断或遗漏类别。
+
+合成双类别验收（`test/update-report.test.ts`，不读取真实 raw）覆盖：首次生成以 `baseline.kind: "none"` 明确表达；
+同版本重复生成时两个类别都报告「已检查、无变化」，未变化实体文件的字节、inode 与纳秒 mtime 保持不变；
+来源版本切换但实体输出不变时只报告资源名的新增与移除，两个类别仍为无变化；只改动合成第二类别时代理人类别仍明确无变化；
+仅来源输入字节或 `sourceRecord` 变化时实体文件全部无变化，但来源痕迹与 `review` 仍如实报告；仅规则版本变化时类别输出仍为无变化，
+来源与规则同时变化时归因为 `undetermined` 并保留不唯一归因；
+成员、文件与字段的新增、修改、删除各有条目并在 `review` 中显著提示；数组顺序变化保留为对应下标的差异，
+缺失、`null`、`0`、`false` 与空字符串互不混淆；仅排版不同记为 `format-only` 且不产生字段条目；
+受管理 v2 旧基线与当前登记表新增的类别按同一口径比较；缺失或损坏的新版输入、报告写入失败与报告超限都在提交前失败，
+且不安装未提交候选的报告；提交点之前中断后报告仍属上次成功更新，提交点之后中断恢复出的报告与已提交数据一致。
+差异引擎另有纯值比较用例覆盖 Pointer 转义、容器展开与确定顺序。
+
+隔离副本执行 `pnpm check` 通过，退出码 0：lint 无告警、格式检查通过，data 650 项（含差异报告 17 项）与 core 1,423 项测试、
+两个包的 pack 验证全部通过，无失败或跳过。副本中以真实 `3.1` 数据集走统一生成入口：初始化记录后整库重建得到 `unchanged`，
+回执与报告为 58 个成员、174 个实体文件、两个类别规则版本未变、无字段差异、无需重点审查的既有内容。
+正式工作区的 `raw`、`integrated` 与控制目录（含永久锁与已有报告）在本次工作中逐文件摘要、inode 与纳秒 mtime 完全一致，
+未被测试或演示改写；正式工作区未执行生成、恢复或迁移。本次未做断电、Linux 实机、Windows 或网络文件系统验证。
+
+### 更新差异报告 review 修订
+
+2026-09-16，修复 review 发现的 P2：容器类型替换会遗漏内部差异。修复前先复现：`{"field":{"rate":1}}` 与
+`{"field":[9,11]}` 只报告 `/field` 从 `object(size=1)` 变成 `array(length=2)`，`/field/rate` 的删除与 `/field/0`、
+`/field/1` 的新增全部丢失；换成同容器大小的其他内容会得到完全相同的报告；整库流程中 `sourceRecord` 的内部差异同样丢失，
+`removedFields` 与 `addedFields` 都为 0。
+
+根因：差异引擎在两侧类型不同（对象、数组、标量、`null` 之间互换）时只写入父节点记录便直接返回，没有展开两侧容器内容。
+
+修复：该分支在保留父节点形状记录之后，对旧一侧按删除、新一侧按新增复用同一展开逻辑
+（[snapshot-diff.ts](../../../packages/data/scripts/nanoka-integration/snapshot-diff.ts)）。两侧成员不配对，
+因此数字对象键与数组下标得到相同 Pointer 时仍分别保留结构语义，不会被合并或抵消；条目顺序与统计口径不变，
+`removedFields`、`changedFields`、`addedFields` 仍由同一次比较结果派生。
+
+修复后同一输入的报告为：`/field` 类型变化、`/field/rate` 删除 `1`、`/field/0` 新增 `9`、`/field/1` 新增 `11`；
+同大小的其他内容给出不同条目。新增回归覆盖对象→数组、数组→对象、对象/数组→标量、标量→对象/数组、`null` 与容器互换、
+空容器与嵌套容器、数字键与下标重合、含 `/` 与 `~` 的键及确定顺序，并通过合成数据在 `sourceRecord` 与既有实体文件中
+各替换一次容器类型，核对最终维护报告的条目与计数（统计按报告条目重新计数核对）。修复前的 5 个用例全部失败，修复后通过。
+
+隔离副本执行 `pnpm check` 通过，退出码 0：lint 无告警、格式检查通过，data 655 项（含差异报告 22 项）与 core 1,423 项测试、
+两个包的 pack 验证全部通过，无失败或跳过。正式工作区的 `raw`、`integrated` 与控制目录（含永久锁与已有报告）逐文件摘要、
+inode 与纳秒 mtime 与本次修复前完全一致；未为演示更新真实数据，未提交、未推送。
+本次未做断电、Linux 实机、Windows 或网络文件系统验证。
 
 ### 多实体 v3 切换验收
 

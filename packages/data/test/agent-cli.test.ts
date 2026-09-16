@@ -287,6 +287,28 @@ describe("offline agent package commands", () => {
       expect(index.entities.agents.memberIds).toEqual(ids)
       expect(receipt.memberCounts).toEqual({ agents: ids.length })
       expect(receipt.format).toBe("fairy-nanoka-integrated/v3")
+      // 回执给出可机器解析的按类别摘要与完整报告位置；详细差异只在制品外报告里。
+      expect(receipt).toMatchObject({
+        reportVersion: "fairy-nanoka-update-report/1",
+        firstGeneration: true,
+        result: "changed",
+        sourceVersion: { before: null, after: input.version, changed: false },
+        sourceChanged: false,
+        rulesChanged: false,
+        reviewRequired: false,
+        categories: {
+          agents: {
+            checked: true,
+            presence: "added",
+            result: "changed",
+            members: { before: 0, after: ids.length, added: ids.length },
+            files: { after: ids.length * 3, added: ids.length * 3 },
+            sourceRecordsChanged: 0,
+            rulesVersionChanged: false,
+            reviewRequired: false,
+          },
+        },
+      })
       expect(index.entities.agents.detailLocales).toEqual(
         agentInput().detailLocales,
       )

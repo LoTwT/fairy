@@ -35,11 +35,14 @@ export const syntheticSnapshotEntity: IntegratedSnapshotEntityProducer = {
       throw new Error(`${path}/locale: 语言错误`)
   },
   integrate({ memberId, sourceRecord, detailLocales }) {
+    const record = sourceRecord as { label?: unknown; values?: unknown }
     return {
       data: {
         id: Number(memberId),
-        label: (sourceRecord as { label?: unknown }).label,
-        values: [1, 0, 2],
+        label: record.label,
+        // 显式存在的 values 原样进入公共文件，测试可借此观察数组内容归属与顺序；
+        // 未登记 values 时沿用固定数组，使既有 fixture 的默认输出保持不变。
+        values: Object.hasOwn(record, "values") ? record.values : [1, 0, 2],
       },
       details: completeLocaleRecord(
         new Map(
