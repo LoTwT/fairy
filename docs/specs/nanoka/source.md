@@ -60,7 +60,7 @@ raw 与 integrated 继续保留原始资源值；完整 URL 属于消费时派�
 4. 对超时、并发、请求频率、重试、单响应大小及单次抓取规模设置上限。
 5. 从实体索引动态发现详情 ID。
 6. 将成功获取的原始响应字节写入可删除的本地缓存。
-7. 保持 `@randomplay/data` 公开 API 为空，不将缓存打入 npm 包。
+7. 抓取器保持为仓库内部工具，raw 缓存不进入 npm 包；公开 API 与整合快照发布由[数据消费契约](../data/consumption.md)定义。
 
 ## 3. 非目标
 
@@ -254,11 +254,12 @@ pnpm --filter @randomplay/data fetch:nanoka --entity <entity>
 超出时添加 `…`；转义后每个码点最多占 8 个字符。错误保留预算内的资源、实体、语言与字段定位，
 只在 stderr 的命令错误行结尾添加真实换行。该限制仅用于终端显示，不修改 raw、制品、维护报告或库的结构化异常。
 抓取命令继续使用原错误前缀、进度和成功输出方式；离线命令的 JSON 回执契约由整合规范维护。
+stdout 管道关闭等异步输出错误使用同一错误出口，退出码为 1；不回滚已完成的缓存或制品写入。
 
 ## 12. 包边界与再分发
 
 - `@randomplay/data` 不依赖 `@randomplay/core`；
-- `packages/data/src/index.ts` 保持空公开 API；
+- 包根公开 API 与整合快照的 npm 导出遵守[数据消费契约](../data/consumption.md)；
 - npm 包只发布 `dist`；
 - raw 缓存不进入 Git 或 npm；
 - 若未来需要提交、上传或再分发数据，必须重新评审上游政策、存储成本和制品契约。
@@ -274,6 +275,6 @@ pnpm --filter @randomplay/data fetch:nanoka --entity <entity>
 - 单次抓取记录、资源和字节预算，资源数或累计字节超限时不得发布实体索引；
 - 原始字节写入及实体索引延后写入；
 - raw 缓存不进入 npm tarball；
-- `@randomplay/data` 公开 API 保持不变。
+- 抓取器及 raw 缓存不进入公开 API；包消费验收由[数据消费契约](../data/consumption.md)定义。
 
 不测试或承诺已列入第 3 节的非目标。

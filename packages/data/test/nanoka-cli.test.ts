@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process"
+import { once } from "node:events"
 import {
   cp,
   mkdtemp,
@@ -27,6 +28,43 @@ afterEach(async () => {
 })
 
 describe("Nanoka CLI", () => {
+  it("reports a closed stdout pipe without interrupting cache writes or printing a stack", async () => {
+    const result = await runCli(["fetch", "--entity", "character"], {
+      closedStdout: true,
+    })
+    expect(result.code).toBe(1)
+    expect(result.stdout).toBe("")
+    expect(result.stderr).toBe("Nanoka 数据源命令失败：write EPIPE\n")
+    expect(result.requests).toHaveLength(4)
+    expect(
+      JSON.parse(
+        await readFile(
+          join(result.directory, "raw/nanoka/3.0/character.json"),
+          "utf8",
+        ),
+      ),
+    ).toEqual({ "1": { name: "Fixture" } })
+  }, 10_000)
+
+  it("keeps reporting a later fetch failure after the output failure", async () => {
+    const result = await runCli(["fetch", "--entity", "character"], {
+      closedStdout: true,
+      invalidDetail: true,
+    })
+    expect(result.code).toBe(1)
+    // The output failure is reported once and does not consume the fetch failure report.
+    const reports = result.stderr.split("\n").filter(Boolean)
+    expect(reports).toHaveLength(2)
+    expect(reports[0]).toBe("Nanoka 数据源命令失败：write EPIPE")
+    expect(reports[1]).toMatch(
+      /^Nanoka 数据源命令失败：character (?:zh|en)\/1 详情必须是普通对象$/u,
+    )
+    expect(result.requests.length).toBeGreaterThan(2)
+    expect(
+      await readdir(join(result.directory, "raw", "nanoka", "3.0")),
+    ).not.toContain("character.json")
+  }, 10_000)
+
   it.each([
     { arguments_: [], version: "3.0", selectedBy: "live" },
     {
@@ -129,7 +167,11 @@ describe("Nanoka CLI", () => {
 
 async function runCli(
   arguments_: string[],
-  options: { answers?: string[]; invalidDetail?: boolean } = {},
+  options: {
+    answers?: string[]
+    invalidDetail?: boolean
+    closedStdout?: boolean
+  } = {},
 ) {
   const directory = await realpath(await mkdtemp(join(tmpdir(), "nanoka-cli-")))
   temporaryDirectories.push(directory)
@@ -167,6 +209,7 @@ async function runCli(
         NANOKA_CLI_TEST_REQUEST_LOG: requestLog,
         NANOKA_CLI_TEST_TTY: options.answers === undefined ? "0" : "1",
         NANOKA_CLI_TEST_INVALID_DETAIL: options.invalidDetail ? "1" : "0",
+        NANOKA_CLI_TEST_WAIT_FOR_STDIN: options.closedStdout ? "1" : "0",
       },
       stdio: ["pipe", "pipe", "pipe"],
     },
@@ -195,13 +238,20 @@ async function runCli(
   child.stderr.on("data", (chunk: string) => {
     stderr += chunk
   })
-  if (options.answers === undefined) child.stdin.end()
+  const completed = new Promise<number | null>((resolve, reject) => {
+    child.once("error", reject)
+    child.once("close", resolve)
+  })
   const timeout = setTimeout(() => child.kill(), 8_000)
   try {
-    const code = await new Promise<number | null>((resolve, reject) => {
-      child.once("error", reject)
-      child.once("close", resolve)
-    })
+    if (options.closedStdout) {
+      // Close the real pipe before the preload lets the command start.
+      const stdoutClosed = once(child.stdout, "close")
+      child.stdout.destroy()
+      await stdoutClosed
+      child.stdin.end("start\n")
+    } else if (options.answers === undefined) child.stdin.end()
+    const code = await completed
     await responseQueue
     return {
       code,

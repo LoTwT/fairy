@@ -12,10 +12,15 @@ import {
   withNanokaCurrentDataset,
 } from "../scripts/nanoka-integration/current.ts"
 import { sha256 } from "../scripts/nanoka-integration/files.ts"
+import { outputExpansionLimit } from "../scripts/nanoka-integration/verify.ts"
+import * as sourcePolicy from "../scripts/nanoka/policy.ts"
 import { publicationFixture } from "./fixtures/publication.ts"
 
 vi.mock("node:fs/promises", async (original) => ({
   ...(await original<typeof import("node:fs/promises")>()),
+}))
+vi.mock("../scripts/nanoka/policy.ts", async (original) => ({
+  ...(await original<typeof import("../scripts/nanoka/policy.ts")>()),
 }))
 const temporaryDirectories: string[] = []
 afterEach(async () => {
@@ -118,6 +123,41 @@ describe("publication snapshot", () => {
     await expect(
       preparePublication(artifactDirectory, join(root, "extra")),
     ).rejects.toThrow(/未登记/u)
+  })
+
+  it("bounds copy reads when a source file grows after initial verification", async () => {
+    const { root, artifactDirectory } = await fixture()
+    const policy = await sourcePolicy.loadSourcePolicy()
+    // A controlled budget far above the synthetic fixture (largest file ~4 KiB) keeps the growth small.
+    policy.fetchLimits.maximumBytesPerRun = 4096
+    vi.spyOn(sourcePolicy, "loadSourcePolicy").mockResolvedValue(policy)
+    const generated = join(root, "generated")
+    const relativePath = "agents/2/data.json"
+    const maximumBytes =
+      policy.fetchLimits.maximumBytesPerRun * outputExpansionLimit
+    const writeFile = fs.writeFile
+    let injected = false
+    vi.spyOn(fs, "writeFile").mockImplementation(async (path, ...args) => {
+      await writeFile(path, ...args)
+      if (path === join(generated, "integrated/index.json")) {
+        await writeFile(
+          join(artifactDirectory, relativePath),
+          " ".repeat(maximumBytes + 1),
+        )
+        injected = true
+      }
+    })
+    await expect(
+      preparePublication(artifactDirectory, generated),
+    ).rejects.toThrow("字节数超过上限")
+    expect(injected).toBe(true)
+    // The oversized bytes must never reach the snapshot, even if its final verifier would reject them.
+    await expect(
+      fs.stat(join(generated, "integrated", relativePath)),
+    ).rejects.toMatchObject({ code: "ENOENT" })
+    await expect(fs.stat(join(generated, "catalog.ts"))).rejects.toMatchObject({
+      code: "ENOENT",
+    })
   })
 
   it("copies managed bytes while holding the existing lease and never initializes broken control state", async () => {

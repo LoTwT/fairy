@@ -241,17 +241,22 @@ describe("offline full Nanoka agent build", () => {
   it("rejects changed entity values even when formatting succeeds", async () => {
     const options = await fixture()
     const format = formatting.formatGeneratedJson
+    let injected = false
     vi.spyOn(formatting, "formatGeneratedJson").mockImplementation(
       async (root, paths) => {
         await format(root, paths)
-        await edit(join(root, paths[0]), (value) => {
-          value.codeName = "tampered"
-        })
+        if (paths.includes("agents/2/data.json")) {
+          await edit(join(root, "agents/2/data.json"), (value) => {
+            value.stats.attack = 12345
+          })
+          injected = true
+        }
       },
     )
     await expect(buildNanokaAgents(options)).rejects.toThrow(
       "JSON 值与整合结果不一致",
     )
+    expect(injected).toBe(true)
     await preserved(options)
   })
 

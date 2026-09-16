@@ -1,4 +1,10 @@
 import { appendFileSync, writeFileSync } from "node:fs"
+import { once } from "node:events"
+
+if (process.env.NANOKA_CLI_TEST_WAIT_FOR_STDIN === "1") {
+  await once(process.stdin, "data")
+  process.stdin.pause()
+}
 
 const requestLog = process.env.NANOKA_CLI_TEST_REQUEST_LOG
 if (requestLog === undefined) throw new Error("Missing CLI fixture request log")
