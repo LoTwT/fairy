@@ -215,6 +215,14 @@ async function managedLegacyFixture(options: { rulesVersion?: string } = {}) {
   return input
 }
 
+/** 受管理的稳定数据集：v2 用旧协议稳定记录，v3 由整库更新生成。 */
+async function managedFixture(shape: "v2" | "v3") {
+  if (shape === "v2") return managedLegacyFixture()
+  const input = await fixture()
+  await updateCurrentDataset(input)
+  return input
+}
+
 /**
  * 把已生成的 v3 数据集改写成此前只登记 en 的历史语言子集，并同步管理记录。
  * 只用于合成复验、读取边界与迁移边界测试；当前构建不会产出语言子集。
@@ -1135,6 +1143,93 @@ describe("migration to the multi-entity shell", () => {
     expect((await recoverCurrentDataset(input)).outcome).toBe("unchanged")
     expect(await fingerprints(input.targetDirectory)).toEqual(after)
   })
+
+  it.each(["empty", "non-empty"] as const)(
+    "refuses to migrate a stable managed dataset whose site has an abnormal backup: %s",
+    async (residue) => {
+      const input = await managedLegacyFixture()
+      const backup = join(control(input), "backup")
+      await fs.mkdir(backup)
+      if (residue === "non-empty")
+        await fs.writeFile(join(backup, "unattributed"), "keep")
+      const before = await bytes(input.root)
+      await expect(migrateCurrentDataset(input)).rejects.toThrow(
+        "稳定状态有异常备份，保留现场",
+      )
+      // 现场全部保留：记录、v2 数据集、异常备份及其中内容都不变，也不新增迁移工作材料。
+      expect(await bytes(input.root)).toEqual(before)
+      expect((await fs.readdir(control(input))).toSorted()).toEqual(
+        ["backup", "lock.sqlite", "state.json"].toSorted(),
+      )
+      expect((await readState(input)).protocol).toBe(legacyProtocol)
+      expect((await readState(input)).phase).toBe("idle")
+      expect(await fs.readdir(backup)).toEqual(
+        residue === "empty" ? [] : ["unattributed"],
+      )
+      // 独立恢复对同一现场给出同样的结论：两处共用一份稳定状态判断。
+      await expect(recoverCurrentDataset(input)).rejects.toThrow(
+        "稳定状态有异常备份，保留现场",
+      )
+      expect(await bytes(input.root)).toEqual(before)
+    },
+    30000,
+  )
+
+  it.each(["empty", "non-empty"] as const)(
+    "never reports the v3 dataset unchanged while its site has an abnormal backup: %s",
+    async (residue) => {
+      const input = await managedFixture("v3")
+      const backup = join(control(input), "backup")
+      await fs.mkdir(backup)
+      if (residue === "non-empty")
+        await fs.writeFile(join(backup, "unattributed"), "keep")
+      const before = await bytes(input.root)
+      await expect(migrateCurrentDataset(input)).rejects.toThrow(
+        "稳定状态有异常备份，保留现场",
+      )
+      expect(await bytes(input.root)).toEqual(before)
+      expect((await readState(input)).phase).toBe("idle")
+      // 人工清理异常现场后，幂等迁移与正常读取仍然可用。
+      await fs.rm(backup, { recursive: true })
+      expect(await migrateCurrentDataset(input)).toMatchObject({
+        outcome: "unchanged",
+        format: integratedSnapshotFormat,
+      })
+      expect((await verified(input)).index.format).toBe(
+        integratedSnapshotFormat,
+      )
+      await clean(input)
+    },
+    30000,
+  )
+
+  it.each(["v2", "v3"] as const)(
+    "cleans the residual work materials of a stable record before reporting a migration result: %s",
+    async (shape) => {
+      const input = await managedFixture(shape)
+      const before = await bytes(input.targetDirectory)
+      await fs.mkdir(join(control(input), "work", "candidate"), {
+        recursive: true,
+      })
+      await fs.writeFile(
+        join(control(input), "work", "candidate", "index.json"),
+        "partial",
+      )
+      await fs.writeFile(join(control(input), "state.next"), "partial")
+      expect((await migrateCurrentDataset(input)).outcome).toBe(
+        shape === "v2" ? "migrated" : "unchanged",
+      )
+      // 残留工作材料按恢复契约清理，迁移不把待恢复现场报告为成功。
+      const names = await fs.readdir(control(input))
+      expect(names).not.toContain("work")
+      expect(names).not.toContain("state.next")
+      const after = await bytes(input.targetDirectory)
+      for (const path of Object.keys(before))
+        if (path !== "index.json") expect(after[path]).toEqual(before[path])
+      await clean(input)
+    },
+    30000,
+  )
 
   it("requires recovering an unfinished legacy transaction under its original protocol first", async () => {
     const input = await fixture()

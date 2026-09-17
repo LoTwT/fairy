@@ -928,6 +928,22 @@ async function initializeLocked(
   }
 }
 
+/**
+ * 稳定记录的事务现场检查：先复验记录指向的数据集，再拒绝异常备份，最后按恢复契约清理残留工作材料。
+ * 恢复与迁移共用这一判断，避免两套规则漂移；调用时已持锁，不写记录、也不新建工作材料。
+ */
+async function verifyStableSite(
+  paths: CurrentPaths,
+  current: DatasetDescriptor | null,
+  registry: EntityRegistry,
+): Promise<VerifiedDataset | undefined> {
+  const dataset = await verifyCurrent(paths, current, registry)
+  // 稳定状态下的备份不属于任何可归属事务，不能用空目录覆盖或并入新的提交路径。
+  if (await exists(paths.backup)) invalid("稳定状态有异常备份，保留现场")
+  await removeWork(paths)
+  return dataset
+}
+
 /** 调用时已持锁；失败保留现场，再次执行同一状态机而不是从头删除重建。 */
 async function recoverLocked(
   paths: CurrentPaths,
@@ -940,9 +956,7 @@ async function recoverLocked(
     return initializeLocked(paths, checkpoint, registry, initializationPolicy)
   const { codec, state } = record
   if (state.phase === "idle") {
-    const dataset = await verifyCurrent(paths, state.current, registry)
-    if (await exists(paths.backup)) invalid("稳定状态有异常备份，保留现场")
-    await removeWork(paths)
+    const dataset = await verifyStableSite(paths, state.current, registry)
     return {
       codec,
       current: state.current,
@@ -1340,25 +1354,26 @@ export async function migrateCurrentDataset(options: {
       )
     const recorded =
       record?.state.phase === "idle" ? record.state.current : null
-    if (recorded?.format === integratedSnapshotFormat) {
-      const dataset = await verifyDataset(paths.target, recorded, registry)
-      return {
-        artifactDirectory: paths.target,
-        outcome: "unchanged" as const,
-        format: dataset.format,
-        memberCounts: dataset.memberCounts,
-        entityFileCount: dataset.files.length,
-      }
-    }
-    if (!recorded && !(await exists(paths.target)))
-      invalid("没有可迁移的数据集")
     let baseline: DatasetDescriptor
     let baselineDataset: VerifiedDataset
     let journalWritten = false
     if (recorded) {
+      // 在创建 work、转换候选或改写管理记录之前，按恢复契约核对稳定记录的事务现场：
+      // 异常备份明确拒绝并保留全部现场，残留工作材料按同一契约清理，不把待恢复现场报成成功。
+      const stable = await verifyStableSite(paths, recorded, registry)
+      if (!stable) invalid("稳定记录的当前数据集缺失")
+      baselineDataset = stable
+      if (recorded.format === integratedSnapshotFormat)
+        return {
+          artifactDirectory: paths.target,
+          outcome: "unchanged" as const,
+          format: stable.format,
+          memberCounts: stable.memberCounts,
+          entityFileCount: stable.files.length,
+        }
       baseline = recorded
-      baselineDataset = await verifyDataset(paths.target, recorded, registry)
     } else {
+      if (!(await exists(paths.target))) invalid("没有可迁移的数据集")
       await requireUnattributedControl(paths)
       const format = await readIndexFormat(paths.target, policy)
       if (format === integratedSnapshotFormat) {
