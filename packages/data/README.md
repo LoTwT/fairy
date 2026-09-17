@@ -11,24 +11,36 @@ Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以
 ```ts
 import {
   agentNames,
+  driveDiscNames,
   loadIndex,
   loadAgentData,
   loadAgentDetails,
   loadAllAgents,
+  loadDriveDiscData,
+  loadDriveDiscDetails,
+  loadAllDriveDiscs,
 } from "@randomplay/data"
-import type { AgentName } from "@randomplay/data"
+import type { AgentName, DriveDiscName } from "@randomplay/data"
 
 const name: AgentName = "Astra Yao"
 const data = await loadAgentData(name)
 const details = await loadAgentDetails(name, "zh")
 const index = await loadIndex() // 完整 v3 来源索引，不加载实体
-const all = await loadAllAgents("en") // 显式加载全部公共资料和英文详情
+const all = await loadAllAgents("en") // 显式加载全部代理人公共资料和英文详情
+const disc: DriveDiscName = "Woodpecker Electro"
+const discData = await loadDriveDiscData(disc)
+const discDetails = await loadDriveDiscDetails(disc, "zh")
+const allDiscs = await loadAllDriveDiscs("en") // 显式加载全部驱动盘套装公共资料和英文详情
 console.log(
   agentNames,
   data,
   details,
   index.entities.agents.members["1311"],
   all[name],
+  driveDiscNames,
+  discData,
+  discDetails,
+  allDiscs[disc],
 )
 ```
 
@@ -40,9 +52,8 @@ import driveDisc from "@randomplay/data/integrated/drive-discs/31000/data.json" 
 import driveDiscZh from "@randomplay/data/integrated/drive-discs/31000/details.zh.json" with { type: "json" }
 ```
 
-名称取英文详情顶层原值，语言必须显式为 `zh` 或 `en`。四个函数每次返回独立对象，根入口不预载数据。
-驱动盘 JSON 已随快照发布并可按子路径导入；驱动盘的公开名称类型、catalog 与读取函数尚未实现，
-根入口的懒加载表也不包含驱动盘文件。
+名称取英文详情顶层原值，语言必须显式为 `zh` 或 `en`。读取函数每次返回独立对象，根入口不预载数据；
+代理人与驱动盘的名称类型、catalog 与读取函数遵循同一契约，两类按需加载互不串读。
 完整参数、错误、JSON 子路径及兼容性规则统一见[消费契约](../../docs/specs/data/consumption.md)。
 
 ## 本地抓取

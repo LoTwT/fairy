@@ -11,9 +11,29 @@ import { tmpdir } from "node:os"
 import { basename, join } from "node:path"
 import { gzipSync } from "node:zlib"
 import { chromium } from "playwright"
+import type { Page } from "playwright"
 import { build, createServer, preview } from "vite"
 import { expect, it } from "vitest"
 import { installPackedConsumer, listFiles } from "./fixtures/packed-consumer.ts"
+
+/** 单个浏览器请求的证据：阶段、状态、字节数与来源 JSON 模块。 */
+interface RequestEvidence {
+  phase: string
+  url: string
+  status: number
+  bytes: number
+  gzipBytes: number
+  sources: string[]
+}
+
+/** 一个验收阶段：动作结束后该阶段新增请求的 JSON 来源必须等于 sources（排序比较；空数组表示零请求；省略表示只做附加断言）。 */
+interface ScenarioStep {
+  name: string
+  act: (page: Page) => Promise<void>
+  sources?: string[]
+  /** settle 后对该上下文全部请求的附加断言（跨阶段组合计数等）。 */
+  after?: (requests: RequestEvidence[]) => void
+}
 
 it("consumes the offline-installed package in real Vite development and production browsers", async () => {
   const temporaryDirectory = realpathSync(
@@ -25,13 +45,44 @@ it("consumes the offline-installed package in real Vite development and producti
   try {
     const { consumerDirectory, packedRoot, tarballPath } =
       installPackedConsumer(temporaryDirectory)
+    const integratedIndex = JSON.parse(
+      readFileSync(join(packedRoot, "dist/integrated/index.json"), "utf8"),
+    )
+    const agentCount: number = integratedIndex.entities.agents.memberIds.length
+    const driveDiscMemberIds: string[] =
+      integratedIndex.entities["drive-discs"].memberIds
+    const driveDiscCount = driveDiscMemberIds.length
+    const directDiscId = driveDiscMemberIds[1] ?? driveDiscMemberIds[0]
+    // 构建模块图应包含两类导入表引用的全部 JSON：按已验证索引逐类别推导，不使用固定文件总数。
+    const publishedEntities = integratedIndex.entities as Record<
+      string,
+      { memberIds: string[]; detailLocales: string[] }
+    >
+    const expectedGraph = [
+      "index.json",
+      ...Object.entries(publishedEntities).flatMap(([category, entity]) =>
+        entity.memberIds.flatMap((id) => [
+          `${category}/${id}/data.json`,
+          ...entity.detailLocales.map(
+            (locale) => `${category}/${id}/details.${locale}.json`,
+          ),
+        ]),
+      ),
+    ].toSorted()
     writeFileSync(
       join(consumerDirectory, "index.html"),
       '<!doctype html><html><head><title>Fairy consumer</title><link rel="icon" href="data:,"></head><body><script type="module" src="/main.js"></script></body></html>',
     )
     writeFileSync(
       join(consumerDirectory, "main.js"),
-      'import * as api from "@randomplay/data"; globalThis.fairy = api; document.body.append("ready");',
+      `import * as api from "@randomplay/data"
+globalThis.fairy = api
+globalThis.fairyDirectDriveDisc = {
+  data: () => import("@randomplay/data/integrated/drive-discs/${directDiscId}/data.json"),
+  zh: () => import("@randomplay/data/integrated/drive-discs/${directDiscId}/details.zh.json"),
+}
+document.body.append("ready")
+`,
     )
     await build({
       root: consumerDirectory,
@@ -55,24 +106,7 @@ it("consumes the offline-installed package in real Vite development and producti
         },
       ],
     })
-    expect(Object.values(chunkSources).flat().toSorted()).toEqual(
-      [
-        "index.json",
-        ...JSON.parse(
-          readFileSync(join(packedRoot, "dist/integrated/index.json"), "utf8"),
-        ).entities.agents.memberIds.flatMap((id: string) => [
-          `agents/${id}/data.json`,
-          `agents/${id}/details.zh.json`,
-          `agents/${id}/details.en.json`,
-        ]),
-      ].toSorted(),
-    )
-    // 安装包含驱动盘 JSON，但本版没有驱动盘懒加载表：它们不得进入 Vite 模块图。
-    expect(
-      Object.values(chunkSources)
-        .flat()
-        .some((path) => path.startsWith("drive-discs/")),
-    ).toBe(false)
+    expect(Object.values(chunkSources).flat().toSorted()).toEqual(expectedGraph)
     const browser = await chromium.launch({ headless: true })
     try {
       for (const mode of ["development", "production"] as const) {
@@ -92,204 +126,96 @@ it("consumes the offline-installed package in real Vite development and producti
               })
         if ("listen" in server) await server.listen()
         const url = server.resolvedUrls!.local[0]
-        const context = await browser.newContext()
-        const page = await context.newPage()
-        const errors: string[] = []
-        page.on("pageerror", (error) => errors.push(error.message))
-        type RequestEvidence = {
-          phase: string
-          url: string
-          status: number
-          bytes: number
-          gzipBytes: number
-          sources: string[]
-        }
-        const requests: RequestEvidence[] = []
-        const pending: Promise<void>[] = []
-        let phase = "initial"
-        page.on("response", (response) => {
-          const responsePhase = phase
-          pending.push(
-            (async () => {
-              const body = await response.body()
-              const path = new URL(response.url()).pathname
-              // Optimized dev chunks preserve source comments. Production uses build module provenance.
-              const sources =
-                mode === "production"
-                  ? (chunkSources[path.replace(/^\//u, "")] ?? [])
-                  : [
-                      ...body
-                        .toString()
-                        .matchAll(
-                          /^\/\/(?:#region)? .*\/dist\/integrated\/(.+\.json)\s*$/gmu,
-                        ),
-                    ].map((match) => match[1])
-              requests.push({
-                phase: responsePhase,
-                url: response.url(),
-                status: response.status(),
-                bytes: body.length,
-                gzipBytes: gzipSync(body).length,
-                sources,
-              })
-            })(),
-          )
-        })
-        async function settle() {
-          await page.waitForLoadState("networkidle")
-          await Promise.all(pending)
-          expect(errors).toEqual([])
-          expect(requests.every((request) => request.status === 200)).toBe(true)
-        }
         try {
-          await page.goto(url)
-          await page.waitForFunction(() => "fairy" in globalThis)
-          await settle()
-          expect(requests.flatMap((request) => request.sources)).toEqual([])
-          expect(
-            await page.evaluate(
-              () => (globalThis as any).fairy.agentNames.length,
-            ),
-          ).toBe(58)
-          phase = "data"
-          expect(
-            await page.evaluate(
-              async () =>
-                (await (globalThis as any).fairy.loadAgentData("Astra Yao")).id,
-            ),
-          ).toBe(1311)
-          await settle()
-          expect(
-            requests
-              .filter((request) => request.phase === phase)
-              .flatMap((request) => request.sources),
-          ).toEqual(["agents/1311/data.json"])
-          phase = "details-en"
-          expect(
-            await page.evaluate(
-              async () =>
-                (
-                  await (globalThis as any).fairy.loadAgentDetails(
-                    "Astra Yao",
-                    "en",
-                  )
-                ).locale,
-            ),
-          ).toBe("en")
-          await settle()
-          expect(
-            requests
-              .filter((request) => request.phase === phase)
-              .flatMap((request) => request.sources),
-          ).toEqual(["agents/1311/details.en.json"])
-          phase = "details-zh"
-          expect(
-            await page.evaluate(
-              async () =>
-                (
-                  await (globalThis as any).fairy.loadAgentDetails(
-                    "Soldier 0 - Anby",
-                    "zh",
-                  )
-                ).locale,
-            ),
-          ).toBe("zh")
-          await settle()
-          expect(
-            requests
-              .filter((request) => request.phase === phase)
-              .flatMap((request) => request.sources),
-          ).toEqual(["agents/1381/details.zh.json"])
-          phase = "index"
-          expect(
-            await page.evaluate(
-              async () =>
-                Object.keys(
-                  (await (globalThis as any).fairy.loadIndex()).entities.agents
-                    .members,
-                ).length,
-            ),
-          ).toBe(58)
-          await settle()
-          expect(
-            requests
-              .filter((request) => request.phase === phase)
-              .flatMap((request) => request.sources),
-          ).toEqual(["index.json"])
-          phase = "all-en"
-          expect(
-            await page.evaluate(async () => {
-              const all = await (globalThis as any).fairy.loadAllAgents("en")
-              return {
-                count: Object.keys(all).length,
-                locales: [
-                  ...new Set(
-                    Object.values(all).map(
-                      (agent: any) => agent.details.locale,
-                    ),
-                  ),
-                ],
-              }
-            }),
-          ).toEqual({ count: 58, locales: ["en"] })
-          await settle()
-          const fullSources = requests
-            .filter((request) =>
-              ["data", "details-en", "all-en"].includes(request.phase),
-            )
-            .flatMap((request) => request.sources)
-          expect(fullSources).toHaveLength(116)
-          expect(new Set(fullSources).size).toBe(116)
-          expect(
-            fullSources.every(
-              (path) =>
-                path.endsWith("/data.json") ||
-                path.endsWith("/details.en.json"),
-            ),
-          ).toBe(true)
-          phase = "repeat-and-invalid"
-          await page.evaluate(async () => {
-            const api = (globalThis as any).fairy
-            const one = await api.loadAgentData("Astra Yao")
-            one.stats.tags.push("browser mutation")
-            if (
-              (await api.loadAgentData("Astra Yao")).stats.tags.includes(
-                "browser mutation",
+          // 两个独立上下文各自冷启动：本类别首个有效调用之前未加载另一类别任何文件，
+          // 已加载缓存不会掩盖串读；上下文整体请求集合分别证明类别边界。
+          for (const scenario of defineScenarios({
+            agentCount,
+            driveDiscCount,
+            directDiscId,
+          })) {
+            const context = await browser.newContext()
+            const page = await context.newPage()
+            const errors: string[] = []
+            page.on("pageerror", (error) => errors.push(error.message))
+            const requests: RequestEvidence[] = []
+            const pending: Promise<void>[] = []
+            let phase = "initial"
+            page.on("response", (response) => {
+              const responsePhase = phase
+              pending.push(
+                (async () => {
+                  const body = await response.body()
+                  const path = new URL(response.url()).pathname
+                  // Production uses build module provenance. Dev pre-bundled chunks
+                  // preserve source comments; raw module requests (direct subpath
+                  // imports) carry no comment and are identified by request path.
+                  const sources =
+                    mode === "production"
+                      ? (chunkSources[path.replace(/^\//u, "")] ?? [])
+                      : devModuleSources(body.toString(), path)
+                  requests.push({
+                    phase: responsePhase,
+                    url: response.url(),
+                    status: response.status(),
+                    bytes: body.length,
+                    gzipBytes: gzipSync(body).length,
+                    sources,
+                  })
+                })(),
               )
-            )
-              throw new Error("shared object")
-            if ((await api.loadAgentData("astra yao")) !== undefined)
-              throw new Error("inexact name")
+            })
+            async function settle() {
+              await page.waitForLoadState("networkidle")
+              await Promise.all(pending)
+              expect(errors).toEqual([])
+              expect(requests.every((request) => request.status === 200)).toBe(
+                true,
+              )
+            }
             try {
-              await api.loadAllAgents("zh-CN")
-              throw new Error("invalid locale accepted")
-            } catch (error) {
-              if (!(error instanceof TypeError)) throw error
+              await page.goto(url)
+              await page.waitForFunction(() => "fairy" in globalThis)
+              for (const step of scenario.steps) {
+                phase = step.name
+                await step.act(page)
+                await settle()
+                if (step.sources !== undefined) {
+                  expect(
+                    requests
+                      .filter((request) => request.phase === step.name)
+                      .flatMap((request) => request.sources)
+                      .toSorted(),
+                  ).toEqual(step.sources.toSorted())
+                }
+                step.after?.(requests)
+              }
+              const phases = [
+                ...new Set(requests.map((request) => request.phase)),
+              ].map((name) => {
+                const entries = requests.filter(
+                  (request) => request.phase === name,
+                )
+                return {
+                  phase: name,
+                  requests: entries.length,
+                  bytes: entries.reduce((sum, entry) => sum + entry.bytes, 0),
+                  gzipBytes: entries.reduce(
+                    (sum, entry) => sum + entry.gzipBytes,
+                    0,
+                  ),
+                  jsonModules: entries.flatMap((entry) => entry.sources).length,
+                }
+              })
+              reports.push({ mode, scenario: scenario.name, phases, requests })
+              console.log(
+                JSON.stringify({ mode, scenario: scenario.name, phases }),
+              )
+            } finally {
+              await context.close()
             }
-          })
-          await settle()
-          expect(requests.filter((request) => request.phase === phase)).toEqual(
-            [],
-          )
-          const phases = [
-            ...new Set(requests.map((request) => request.phase)),
-          ].map((name) => {
-            const entries = requests.filter((request) => request.phase === name)
-            return {
-              phase: name,
-              requests: entries.length,
-              bytes: entries.reduce((sum, entry) => sum + entry.bytes, 0),
-              gzipBytes: entries.reduce(
-                (sum, entry) => sum + entry.gzipBytes,
-                0,
-              ),
-              jsonModules: entries.flatMap((entry) => entry.sources).length,
-            }
-          })
-          reports.push({ mode, phases, requests })
-          console.log(JSON.stringify({ mode, phases }))
+          }
         } finally {
-          await context.close()
           await server.close()
         }
       }
@@ -335,3 +261,423 @@ it("consumes the offline-installed package in real Vite development and producti
     else console.log(`Consumer artifacts retained at ${temporaryDirectory}`)
   }
 }, 120_000)
+
+/** Dev 响应的来源 JSON 模块：预构建分块带来源注释；未预构建的原始模块请求按路径识别。 */
+function devModuleSources(body: string, pathname: string): string[] {
+  const comments = [
+    ...body.matchAll(
+      /^\/\/(?:#region)? .*\/dist\/integrated\/(.+\.json)\s*$/gmu,
+    ),
+  ].map((match) => match[1])
+  if (comments.length) return comments
+  const match = pathname.match(/\/dist\/integrated\/(.+\.json)$/u)
+  return match ? [match[1]] : []
+}
+
+/** 两类实体各自的冷启动验收步骤；有效读取只触达本类别，非法参数不触发任何数据加载。 */
+function defineScenarios(counts: {
+  agentCount: number
+  driveDiscCount: number
+  directDiscId: string
+}): Array<{ name: string; steps: ScenarioStep[] }> {
+  const { agentCount, driveDiscCount, directDiscId } = counts
+  async function checkNameCatalogs(page: Page) {
+    const catalogs = await page.evaluate(() => {
+      const api = (globalThis as any).fairy
+      return {
+        agentNames: api.agentNames.length,
+        driveDiscNames: api.driveDiscNames.length,
+        frozen:
+          Object.isFrozen(api.agentNames) &&
+          Object.isFrozen(api.driveDiscNames),
+      }
+    })
+    expect(catalogs).toEqual({
+      agentNames: agentCount,
+      driveDiscNames: driveDiscCount,
+      frozen: true,
+    })
+  }
+  return [
+    {
+      name: "agents",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (await (globalThis as any).fairy.loadAgentData("Astra Yao"))
+                    .id,
+              ),
+            ).toBe(1311)
+          },
+          sources: ["agents/1311/data.json"],
+        },
+        {
+          name: "details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadAgentDetails(
+                      "Astra Yao",
+                      "en",
+                    )
+                  ).locale,
+              ),
+            ).toBe("en")
+          },
+          sources: ["agents/1311/details.en.json"],
+        },
+        {
+          name: "details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadAgentDetails(
+                      "Soldier 0 - Anby",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["agents/1381/details.zh.json"],
+        },
+        {
+          name: "index",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  Object.keys(
+                    (await (globalThis as any).fairy.loadIndex()).entities
+                      .agents.members,
+                  ).length,
+              ),
+            ).toBe(agentCount)
+          },
+          sources: ["index.json"],
+        },
+        {
+          name: "all-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const all = await (globalThis as any).fairy.loadAllAgents("en")
+                return {
+                  count: Object.keys(all).length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (agent: any) => agent.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    Object.keys(all).length === expected &&
+                    Object.keys(all).every(
+                      (name, position) =>
+                        name === (globalThis as any).fairy.agentNames[position],
+                    ),
+                }
+              }, agentCount),
+            ).toEqual({
+              count: agentCount,
+              locales: ["en"],
+              keysMatch: true,
+            })
+          },
+          after: (requests) => {
+            const fullSources = requests
+              .filter((request) =>
+                ["data", "details-en", "all-en"].includes(request.phase),
+              )
+              .flatMap((request) => request.sources)
+            expect(fullSources).toHaveLength(agentCount * 2)
+            expect(new Set(fullSources).size).toBe(agentCount * 2)
+            expect(
+              fullSources.every(
+                (path) =>
+                  path.endsWith("/data.json") ||
+                  path.endsWith("/details.en.json"),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadAgentData("Astra Yao")
+              one.stats.tags.push("browser mutation")
+              if (
+                (await api.loadAgentData("Astra Yao")).stats.tags.includes(
+                  "browser mutation",
+                )
+              )
+                throw new Error("shared object")
+              if ((await api.loadAgentData("astra yao")) !== undefined)
+                throw new Error("inexact name")
+              try {
+                await api.loadAllAgents("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 另一类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadDriveDiscData(31000)
+                throw new Error("drive disc numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              if (
+                (await api.loadDriveDiscData("woodpecker electro")) !==
+                undefined
+              )
+                throw new Error("drive disc inexact name")
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // 代理人上下文全程不请求驱动盘 JSON。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => !path.startsWith("drive-discs/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+    {
+      name: "drive-discs",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "disc-data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadDriveDiscData(
+                      "Woodpecker Electro",
+                    )
+                  ).id,
+              ),
+            ).toBe(31000)
+          },
+          sources: ["drive-discs/31000/data.json"],
+        },
+        {
+          name: "disc-details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const details = await (
+                  globalThis as any
+                ).fairy.loadDriveDiscDetails("Woodpecker Electro", "en")
+                return { locale: details.locale, name: details.name }
+              }),
+            ).toEqual({ locale: "en", name: "Woodpecker Electro" })
+          },
+          sources: ["drive-discs/31000/details.en.json"],
+        },
+        {
+          name: "disc-details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadDriveDiscDetails(
+                      "Woodpecker Electro",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["drive-discs/31000/details.zh.json"],
+        },
+        {
+          name: "all-discs-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const api = (globalThis as any).fairy
+                const all = await api.loadAllDriveDiscs("en")
+                const keys = Object.keys(all)
+                return {
+                  count: keys.length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (disc: any) => disc.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    keys.length === expected &&
+                    keys.every(
+                      (name, position) => name === api.driveDiscNames[position],
+                    ),
+                  dataKeysSeparated: Object.values(all).every(
+                    (disc: any) =>
+                      Object.keys(disc).length === 2 &&
+                      "data" in disc &&
+                      "details" in disc,
+                  ),
+                }
+              }, driveDiscCount),
+            ).toEqual({
+              count: driveDiscCount,
+              locales: ["en"],
+              keysMatch: true,
+              dataKeysSeparated: true,
+            })
+          },
+          after: (requests) => {
+            const discSources = requests
+              .filter((request) =>
+                ["disc-data", "disc-details-en", "all-discs-en"].includes(
+                  request.phase,
+                ),
+              )
+              .flatMap((request) => request.sources)
+            expect(discSources).toHaveLength(driveDiscCount * 2)
+            expect(new Set(discSources).size).toBe(driveDiscCount * 2)
+            expect(
+              discSources.every(
+                (path) =>
+                  path.startsWith("drive-discs/") &&
+                  (path.endsWith("/data.json") ||
+                    path.endsWith("/details.en.json")),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "direct-subpath",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (id) => {
+                const data = await (
+                  globalThis as any
+                ).fairyDirectDriveDisc.data()
+                const zh = await (globalThis as any).fairyDirectDriveDisc.zh()
+                if (data.default.id !== Number(id))
+                  throw new Error("direct drive disc data id mismatch")
+                if (zh.default.id !== Number(id) || zh.default.locale !== "zh")
+                  throw new Error("direct drive disc details mismatch")
+                return { id: data.default.id, locale: zh.default.locale }
+              }, directDiscId),
+            ).toEqual({ id: Number(directDiscId), locale: "zh" })
+          },
+          // 直接导入只触达该成员的两个 JSON：生产构建与懒加载表共享分块（data 已缓存），
+          // dev 中原始模块请求与预构建分块是不同实例（data 也会请求），因此按集合断言。
+          after: (requests) => {
+            const directSources = requests
+              .filter((request) => request.phase === "direct-subpath")
+              .flatMap((request) => request.sources)
+            expect(directSources).toContain(
+              `drive-discs/${directDiscId}/details.zh.json`,
+            )
+            expect(
+              directSources.every(
+                (path) =>
+                  path === `drive-discs/${directDiscId}/data.json` ||
+                  path === `drive-discs/${directDiscId}/details.zh.json`,
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "disc-repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadDriveDiscData("Woodpecker Electro")
+              one.icon2 = "browser mutation"
+              if (
+                (await api.loadDriveDiscData("Woodpecker Electro")).icon2 ===
+                "browser mutation"
+              )
+                throw new Error("shared object")
+              const details = await api.loadDriveDiscDetails(
+                "Woodpecker Electro",
+                "zh",
+              )
+              details.story = "browser mutation"
+              if (
+                (await api.loadDriveDiscDetails("Woodpecker Electro", "zh"))
+                  .story === "browser mutation"
+              )
+                throw new Error("shared details")
+              if (
+                (await api.loadDriveDiscData("woodpecker electro")) !==
+                undefined
+              )
+                throw new Error("inexact name")
+              if ((await api.loadDriveDiscData("31000")) !== undefined)
+                throw new Error("numeric id string accepted")
+              try {
+                await api.loadAllDriveDiscs("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadDriveDiscDetails("Woodpecker Electro")
+                throw new Error("missing locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 另一类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("agent numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              if ((await api.loadAgentData("astra yao")) !== undefined)
+                throw new Error("agent inexact name")
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人文件或索引。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => path.startsWith("drive-discs/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+  ]
+}

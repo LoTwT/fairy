@@ -38,3 +38,11 @@ export function driveDiscInput() {
     details: { zh, en },
   }
 }
+
+/**
+ * 多成员合成输入的英文详情名称：按成员 ID 派生，类内唯一且与索引 `sourceRecord.en.name`
+ * 及任何单成员 fixture 名称不同，用于捕获发布目录生成取错名称来源。
+ */
+export function syntheticDriveDiscEnglishName(memberId: string): string {
+  return `Example Drive Disc ${memberId}`
+}

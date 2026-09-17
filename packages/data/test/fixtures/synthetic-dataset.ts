@@ -2,7 +2,10 @@ import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { serializeJson } from "../../src/integration/serialize-json.ts"
 import { agentInput } from "./agent-source.ts"
-import { driveDiscInput } from "./drive-disc-source.ts"
+import {
+  driveDiscInput,
+  syntheticDriveDiscEnglishName,
+} from "./drive-disc-source.ts"
 import {
   syntheticEntityDetails,
   syntheticEntityRecord,
@@ -78,6 +81,11 @@ export async function writeSyntheticRaw(options: {
         await writeJson(join(root, locale, "equipment", `${id}.json`), {
           ...input.details[locale],
           id: Number(id),
+          // 英文详情名称按成员唯一，与 sourceRecord.en.name 不同；供发布链路间接使用的输入保持同一约定。
+          name:
+            locale === "en"
+              ? syntheticDriveDiscEnglishName(id)
+              : `示例驱动盘 ${id}`,
         })
   }
   if (widgetIds.length) {

@@ -693,8 +693,8 @@ core 映射不属于本规则。
 [合成输入](../../../packages/data/test/fixtures/drive-disc-source.ts)和
 [类型正反例](../../../packages/data/test/drive-disc-types.typecheck.ts)覆盖，测试不读取真实 raw。
 **生产类别已接入**：`drive-discs`（来源实体 `equipment`）登记到已接入类别，生产快照与 JSON 子路径导出已包含
-驱动盘；成员文件身份检查在类别登记表中显式实现。公开的驱动盘类型、名称 catalog 与读取 API 尚未提供；
-这些属于后续工作。
+驱动盘；成员文件身份检查在类别登记表中显式实现。公开的驱动盘类型、名称 catalog 与读取 API 已由包根入口
+按[消费契约](consumption.md)提供。
 
 ### 离线全量构建的共用能力
 

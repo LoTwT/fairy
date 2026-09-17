@@ -1,7 +1,10 @@
 import { lstat, mkdir, readFile, writeFile } from "node:fs/promises"
 import { basename, dirname, join, resolve } from "node:path"
 import type { ExportFileReference } from "../src/integration/agent-types.ts"
-import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
+import type {
+  IntegratedSnapshotEntity,
+  IntegratedSnapshotIndex,
+} from "../src/integration/snapshot-types.ts"
 import { outputExpansionLimit } from "./nanoka-integration/artifact-files.ts"
 import { withCurrentDataset } from "./nanoka-integration/current.ts"
 import { directoryRoot, readBytes } from "./nanoka-integration/files.ts"
@@ -37,22 +40,29 @@ export function publicationFiles(index: IntegratedSnapshotIndex): string[] {
   return files
 }
 
-/** 从已验证副本的英文顶层 name 生成精确类型、冻结名称/映射及显式懒加载表。 */
-export async function generateCatalog(
-  snapshot: string,
+/** 公开 API 当前覆盖的类别必须进入发布副本，且两类公开语言完整；缺失即拒绝发布。 */
+function requirePublishedEntity(
   index: IntegratedSnapshotIndex,
-  importAttributes = true,
-): Promise<string> {
-  const agents = index.entities["agents"]
-  if (!agents) throw new Error("The published snapshot has no agents category")
+  name: string,
+): IntegratedSnapshotEntity {
+  const entity = index.entities[name]
+  if (!entity) throw new Error(`The published snapshot has no ${name} category`)
   for (const locale of ["zh", "en"] as const)
-    if (!agents.detailLocales.includes(locale))
+    if (!entity.detailLocales.includes(locale))
       throw new Error(
-        `The published agents category is missing ${locale} details`,
+        `The published ${name} category is missing ${locale} details`,
       )
+  return entity
+}
+
+/** 按成员 ID 升序读取各类别英文详情顶层 name 原值；缺失、空值或类内重名给出可定位文件。 */
+async function englishDetailNames(
+  snapshot: string,
+  entity: IntegratedSnapshotEntity,
+): Promise<string[]> {
   const names: string[] = []
-  for (const id of agents.memberIds) {
-    const reference: ExportFileReference = agents.members[id].files.details.en
+  for (const id of entity.memberIds) {
+    const reference: ExportFileReference = entity.members[id].files.details.en
     const { name } = JSON.parse(
       await readFile(join(snapshot, reference.path), "utf8"),
     )
@@ -64,28 +74,58 @@ export async function generateCatalog(
       )
     names.push(name)
   }
+  return names
+}
+
+/** 从已验证副本的英文顶层 name 生成两类实体的精确类型、冻结名称/映射及显式懒加载表。 */
+export async function generateCatalog(
+  snapshot: string,
+  index: IntegratedSnapshotIndex,
+  importAttributes = true,
+): Promise<string> {
+  const agents = requirePublishedEntity(index, "agents")
+  const driveDiscs = requirePublishedEntity(index, "drive-discs")
+  const agentNames = await englishDetailNames(snapshot, agents)
+  const driveDiscNames = await englishDetailNames(snapshot, driveDiscs)
   const json = JSON.stringify
   const lazy = (path: string, type: string) =>
     `() => import(${json(`@randomplay/data/integrated/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
+  const sourceIds = (names: string[], entity: IntegratedSnapshotEntity) =>
+    `Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, entity.memberIds[i]]))}))`
+  const loaderTable = (
+    entity: IntegratedSnapshotEntity,
+    data: string,
+    details: string,
+  ) =>
+    entity.memberIds
+      .map(
+        (id) => `${json(id)}: {
+data: ${lazy(entity.members[id].files.data.path, data)},
+zh: ${lazy(entity.members[id].files.details.zh.path, details)},
+en: ${lazy(entity.members[id].files.details.en.path, details)},
+}`,
+      )
+      .join(",\n")
   return `// Generated from the verified publication snapshot. Do not edit.
 import type { AgentData, AgentDetails } from "../src/integration/agent-types.ts"
+import type { DriveDiscData, DriveDiscDetails } from "../src/integration/drive-disc-types.ts"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
 /** 本次发布全部代理人的英文详情顶层 name 原值。 */
-export type AgentName = ${names.map((name) => json(name)).join(" | ")}
-/** 按来源 ID 数值升序排列的完整英文名称列表；运行时冻结。 */
-export const agentNames: readonly AgentName[] = Object.freeze(${json(names)})
-export const agentSourceIds: Readonly<Record<AgentName, string>> = Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, agents.memberIds[i]]))})) as Readonly<Record<AgentName, string>>
+export type AgentName = ${agentNames.map((name) => json(name)).join(" | ")}
+/** 本次发布全部驱动盘套装的英文详情顶层 name 原值。 */
+export type DriveDiscName = ${driveDiscNames.map((name) => json(name)).join(" | ")}
+/** 按来源 ID 数值升序排列的完整代理人英文名称列表；运行时冻结。 */
+export const agentNames: readonly AgentName[] = Object.freeze(${json(agentNames)})
+/** 按来源 ID 数值升序排列的完整驱动盘英文名称列表；运行时冻结。 */
+export const driveDiscNames: readonly DriveDiscName[] = Object.freeze(${json(driveDiscNames)})
+export const agentSourceIds: Readonly<Record<AgentName, string>> = ${sourceIds(agentNames, agents)} as Readonly<Record<AgentName, string>>
+export const driveDiscSourceIds: Readonly<Record<DriveDiscName, string>> = ${sourceIds(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscName, string>>
 export const indexLoader = ${lazy("index.json", "IntegratedSnapshotIndex")}
 export const agentLoaders: Record<string, { data: () => Promise<AgentData>; zh: () => Promise<AgentDetails>; en: () => Promise<AgentDetails> }> = {
-${agents.memberIds
-  .map(
-    (id) => `${json(id)}: {
-data: ${lazy(agents.members[id].files.data.path, "AgentData")},
-zh: ${lazy(agents.members[id].files.details.zh.path, "AgentDetails")},
-en: ${lazy(agents.members[id].files.details.en.path, "AgentDetails")},
-}`,
-  )
-  .join(",\n")}
+${loaderTable(agents, "AgentData", "AgentDetails")}
+}
+export const driveDiscLoaders: Record<string, { data: () => Promise<DriveDiscData>; zh: () => Promise<DriveDiscDetails>; en: () => Promise<DriveDiscDetails> }> = {
+${loaderTable(driveDiscs, "DriveDiscData", "DriveDiscDetails")}
 }
 `
 }

@@ -9,7 +9,10 @@ import { buildIntegratedSnapshot } from "../../scripts/nanoka-integration/snapsh
 import { nanokaAgentsSnapshotEntity } from "../../scripts/nanoka-integration/snapshot-entities.ts"
 import { loadSourcePolicy } from "../../scripts/nanoka/policy.ts"
 import { agentInput } from "./agent-source.ts"
-import { driveDiscInput } from "./drive-disc-source.ts"
+import {
+  driveDiscInput,
+  syntheticDriveDiscEnglishName,
+} from "./drive-disc-source.ts"
 import {
   rewriteAsLegacyV2Artifact,
   syntheticDriveDiscIds,
@@ -54,6 +57,7 @@ export async function publicationFixture(
   }
   if (driveDiscs) {
     // 默认登记表包含 drive-discs 类别：equipment 输入使用真实驱动盘结构的合成成员。
+    // 英文详情名称按成员唯一且与 sourceRecord.en.name 不同；发布目录生成依赖类内唯一。
     const driveDisc = driveDiscInput()
     await write(
       "equipment.json",
@@ -66,6 +70,10 @@ export async function publicationFixture(
         await write(`${locale}/equipment/${id}.json`, {
           ...driveDisc.details[locale],
           id: Number(id),
+          name:
+            locale === "en"
+              ? syntheticDriveDiscEnglishName(id)
+              : `示例驱动盘 ${id}`,
         })
   }
   const result = await buildIntegratedSnapshot({
