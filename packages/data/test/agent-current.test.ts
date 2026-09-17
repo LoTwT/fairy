@@ -17,12 +17,16 @@ import {
 import type { CurrentCheckpoint } from "../scripts/nanoka-integration/current.ts"
 import * as formatting from "../scripts/nanoka-integration/format.ts"
 import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
-import { onboardedSnapshotEntities } from "../scripts/nanoka-integration/snapshot-entities.ts"
+import {
+  nanokaAgentsSnapshotEntity,
+  onboardedSnapshotEntities,
+} from "../scripts/nanoka-integration/snapshot-entities.ts"
 import type { IntegratedSnapshotEntityProducer } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { loadSourcePolicy } from "../scripts/nanoka/policy.ts"
 import {
   legacyV2Format,
   rewriteAsLegacyV2Artifact,
+  syntheticDriveDiscIds,
   writeSyntheticRaw,
 } from "./fixtures/synthetic-dataset.ts"
 import { syntheticSnapshotEntity } from "./fixtures/snapshot-entities.ts"
@@ -75,8 +79,10 @@ async function fixture(options: { widgets?: readonly string[] } = {}) {
   roots.push(root)
   const rawRoot = join(root, "raw/nanoka")
   const version = "synthetic-1"
+  // widgets 只能与 agents 组成独立测试登记表：它和 drive-discs 共用 equipment 来源，
+  // 不能并入含驱动盘的生产登记表。
   const entities: readonly IntegratedSnapshotEntityProducer[] = options.widgets
-    ? [...onboardedSnapshotEntities, syntheticSnapshotEntity]
+    ? [nanokaAgentsSnapshotEntity, syntheticSnapshotEntity]
     : onboardedSnapshotEntities
   await writeSyntheticRaw({
     rawRoot,
@@ -178,7 +184,9 @@ async function staticArtifact(input: Fixture, shape: "v3" | "v2" = "v3") {
     rawRoot: input.rawRoot,
     version: input.version,
     temporaryParent: input.root,
-    entities: input.entities,
+    // v2 外壳只描述单一代理人制品：改写前必须构建合法的 agents-only 制品，
+    // 不能把双类别制品改名冒充 v2（残留类别文件会破坏精确文件集合）。
+    entities: shape === "v2" ? [nanokaAgentsSnapshotEntity] : input.entities,
   })
   await fs.rename(build.artifactDirectory, input.targetDirectory)
   await fs.rm(build.buildDirectory, { recursive: true })
@@ -229,16 +237,22 @@ async function managedFixture(shape: "v2" | "v3") {
  */
 async function restrictToEnglish(input: Fixture) {
   await editJson(join(input.targetDirectory, "index.json"), (index) => {
-    const agents = index.entities.agents
-    agents.detailLocales = ["en"]
-    agents.inputs = agents.inputs.filter(
-      (entry: { resource: string }) => !entry.resource.includes("/zh/"),
-    )
-    for (const memberId of agents.memberIds)
-      delete agents.members[memberId].files.details.zh
+    // 记录的语言配置作用于全部类别：历史子集构造也必须覆盖每个已登记类别。
+    for (const entity of Object.values<any>(index.entities)) {
+      entity.detailLocales = ["en"]
+      entity.inputs = entity.inputs.filter(
+        (entry: { resource: string }) => !entry.resource.includes("/zh/"),
+      )
+      for (const memberId of entity.memberIds)
+        delete entity.members[memberId].files.details.zh
+    }
   })
   for (const id of ["2", "10"])
     await fs.rm(join(input.targetDirectory, `agents/${id}/details.zh.json`))
+  for (const id of syntheticDriveDiscIds)
+    await fs.rm(
+      join(input.targetDirectory, `drive-discs/${id}/details.zh.json`),
+    )
   const hash = digest(
     await fs.readFile(join(input.targetDirectory, "index.json")),
   )
@@ -523,8 +537,8 @@ describe("current multi-entity dataset", () => {
     expect(first.outcome).toBe("committed")
     expect(first).toMatchObject({
       format: integratedSnapshotFormat,
-      memberCounts: { agents: 2 },
-      entityFileCount: 6,
+      memberCounts: { "agents": 2, "drive-discs": 2 },
+      entityFileCount: 12,
     })
     const before = await fingerprints(input.targetDirectory)
     const writes = vi.spyOn(fs, "writeFile")
@@ -541,7 +555,8 @@ describe("current multi-entity dataset", () => {
     expect(second.outcome).toBe("unchanged")
     expect(second.reusedEntityFiles).toBe(Object.keys(before).length - 1)
     expect(second.changedEntityFiles).toBe(0)
-    expect(formatted).toHaveBeenCalledTimes(2)
+    // 两个类别的成员文件各自成批，索引单独一批。
+    expect(formatted).toHaveBeenCalledTimes(3)
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
     expect(
       writes.mock.calls.filter(([path]) =>
@@ -554,7 +569,7 @@ describe("current multi-entity dataset", () => {
           String(path).startsWith(`${control(input)}/work/`) &&
           String(path).includes("/integrated/agents/"),
       ),
-    ).toHaveLength(Object.keys(before).length - 1)
+    ).toHaveLength(6)
     expect(await bytes(input.rawRoot)).toEqual(raw)
     await clean(input)
   })
@@ -577,7 +592,8 @@ describe("current multi-entity dataset", () => {
         })
       const links = vi.spyOn(fs, "link")
       await expect(updateCurrentDataset(input)).rejects.toThrow(/oxfmt/)
-      expect(formatted).toHaveBeenCalledTimes(stage === "index" ? 2 : 1)
+      // 实体阶段首个类别批次即失败，后续批次不再执行；索引批次前有两个类别的成员批次。
+      expect(formatted).toHaveBeenCalledTimes(stage === "index" ? 3 : 1)
       expect(links).not.toHaveBeenCalled()
       expect(await fingerprints(input.targetDirectory)).toEqual(before)
       expect(await fingerprints(input.rawRoot)).toEqual(rawBefore)
@@ -786,7 +802,7 @@ describe("current multi-entity dataset", () => {
       version: input.version,
       agentIds: ["2", "10"],
     })
-    expect((await updateCurrentDataset(input)).changedEntityFiles).toBe(2)
+    expect((await updateCurrentDataset(input)).changedEntityFiles).toBe(4)
     const after = await fingerprints(input.targetDirectory)
     for (const path of Object.keys(before).filter(
       (file) => file !== "index.json" && !file.endsWith("details.zh.json"),
@@ -1629,7 +1645,7 @@ describe("current workspace commands", () => {
       expect(result.status, result.stderr).toBe(0)
       expect(JSON.parse(result.stdout)).toMatchObject({
         outcome: "unchanged",
-        reusedEntityFiles: 6,
+        reusedEntityFiles: 12,
         changedEntityFiles: 0,
       })
       expect(await fingerprints(input.targetDirectory)).toEqual(before)
@@ -1938,6 +1954,36 @@ it("refuses to recreate a missing permanent lock in an already managed directory
 })
 
 describe("explicit generation initialization", () => {
+  it("refuses an unregistered agents-only v3 dataset after the registry gains a category", async () => {
+    const input = await fixture()
+    // 用 agents-only 登记构建合法制品并放到目标位置，不带本机管理记录（模拟登记表演进前的旧克隆）。
+    const build = await buildIntegratedSnapshot({
+      rawRoot: input.rawRoot,
+      version: input.version,
+      temporaryParent: input.root,
+      entities: [nanokaAgentsSnapshotEntity],
+    })
+    await fs.rename(build.artifactDirectory, input.targetDirectory)
+    await fs.rm(build.buildDirectory, { recursive: true })
+    const before = await fingerprints(input.targetDirectory)
+    // 初始化与迁移都不放宽：登记表演进后，缺 drive-discs 类别的静态 v3 制品明确拒绝且保留现场。
+    await expect(generateCurrentDataset(input)).rejects.toThrow(
+      "类别集合与本次期望的已接入类别不一致",
+    )
+    await expect(migrateCurrentDataset(input)).rejects.toThrow(
+      "类别集合与本次期望的已接入类别不一致",
+    )
+    expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    // 按协议删除旧制品后重新生成：从 raw 完整重建双类别数据集。
+    await fs.rm(input.targetDirectory, { recursive: true })
+    expect((await generateCurrentDataset(input)).outcome).toBe("committed")
+    const index = (await clean(input)).index
+    expect(Object.keys(index.entities).toSorted()).toEqual([
+      "agents",
+      "drive-discs",
+    ])
+  }, 30000)
+
   it.each([
     "format",
     "rules",
@@ -2125,7 +2171,7 @@ describe("explicit generation initialization", () => {
     expect(result).toMatchObject({
       outcome: "committed",
       changedEntityFiles: 1,
-      reusedEntityFiles: 5,
+      reusedEntityFiles: 11,
     })
     await clean(input)
   })

@@ -264,6 +264,22 @@ stdout 管道关闭等异步输出错误使用同一错误出口，退出码为 
 - raw 缓存不进入 Git 或 npm；
 - 若未来需要提交、上传或再分发数据，必须重新评审上游政策、存储成本和制品契约。
 
+### 分发复核记录
+
+2026-09-17，接入驱动盘生产类别并提交双类别真实快照前，按本节要求重新评审一次：
+
+- **上游政策**：`https://zzz.nanoka.cc/` 当日返回的页面 HTML 声明 `<meta name="robots" content="index, follow">`，站点自述
+  "Feature-rich game database made for players"；`https://static.nanoka.cc/manifest.json` 匿名可访问，与登记的
+  `contentSignals`（`search: yes`、`use: reference`、`aiTrain: no`，2026-07-26 观测）一致。站点未发现任何使用条款、
+  再分发授权或禁止性声明；本项目继续按"可重新获取的公开参考来源"对待，不声明权威性，也不把公开可访问当作再分发授权。
+- **存储成本**：新增 `drive-discs` 类别后，Git 跟踪的 integrated 由 175 个文件增加到 265 个（新增 30 名成员 ×
+  3 个文件），磁盘约 0.36 MiB（同目录 agents 约 9.64 MiB）；npm 包相应增加这 90 个 JSON 的发布副本。
+  raw（约 2,478 个文件）仍被 Git 精确忽略，不进入 Git 或 npm，成本评估不依赖 raw 入库。
+- **制品契约**：提交的数据仅限 `packages/data/integrated/` 下的已验证 v3 制品（索引与成员 JSON）；
+  抓取器、管理记录、维护报告与 raw 不入库。结论：在"raw 不进入 Git/npm、只提交已验证 integrated、
+  npm 只发布 dist"的现行边界内，接入驱动盘与既有代理人分发使用同一契约，无新增阻碍；若未来扩大再分发范围
+  （例如整包镜像），仍须按本节重新评审。
+
 ## 13. 验证范围
 
 自动化测试覆盖：

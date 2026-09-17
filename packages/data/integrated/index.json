@@ -2964,6 +2964,1521 @@
         }
       },
       "rulesVersion": "nanoka-agent-reference/4"
+    },
+    "drive-discs": {
+      "complete": true,
+      "detailLocales": ["zh", "en"],
+      "inputs": [
+        {
+          "resource": "zzz/3.1/equipment.json",
+          "sha256": "44257c768809225de33ac50cb08ada9cdea3e0cd6dfdf8b59ed5c8ee20f525f7"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31000.json",
+          "sha256": "6af7dcce6a1863b1d801e54621056b2f92baab2c31672a4ed6c2cb1ff3fcf508"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31000.json",
+          "sha256": "6490c8c540e75090c20234600f00ffae7c4a7d11c0959cbe495e21c8be53154d"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31100.json",
+          "sha256": "aa18a914545325288b5bd659e1725c5f07fbd382666cd966219258f6ae91fc30"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31100.json",
+          "sha256": "7dfeca6694ad882e5daa38769c25aa48a9472fc39836b71fd3c6e9643e88ba3a"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31200.json",
+          "sha256": "aeeb7aa8c32d74c24ba205ff3b610b6bfebd9010a43b01c7696d52b0ebda0296"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31200.json",
+          "sha256": "e5cbed556545d6544cb01bb33f8ab189fe69fa2685e7ef1645474aeea1657e69"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31300.json",
+          "sha256": "500afe2dd1aba29325fad5a4a111c745d475b677622d2b8429e65ff3009ab3ed"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31300.json",
+          "sha256": "b6362f48d7be6ce7761c22919696fd7c6f181caaccf78a3420894e2ad2142f88"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31400.json",
+          "sha256": "45a40302875b46eb38483ef4dcce20ac29b99dfab270075eff9a673b057050d7"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31400.json",
+          "sha256": "949bc2c04f183e2414cef64e091c07fa3df002095b01c18b2d9a36f4926c50d6"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31500.json",
+          "sha256": "e7227a0b2c609108205f65b475649063c4e691f1edb247efbd906d61f7212868"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31500.json",
+          "sha256": "46e55e9256bca42e43e13ca6df801b000ef4b6e0152a61245f9741b72104b8af"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31600.json",
+          "sha256": "40eb74a6dc6bbe1acd47459b722884dada82f5dd665f6ce78e18daa48436114f"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31600.json",
+          "sha256": "047928ca4ae9803c56c693f868797f0e430277448eefccac0b382668dcce965e"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31800.json",
+          "sha256": "fd2a8f853758fefb58a03f3f7c8fb5c27f29638783384f27b4961b671c4d4e6d"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31800.json",
+          "sha256": "764e574e0459634224b7fd1d52fe3a4d442664b41fb193c0f69d56a54150e8d4"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/31900.json",
+          "sha256": "9b1d6a34701f3bfe0baecf95a2d6361a9a3e22c33e47c18a0fd88990e152dc9f"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/31900.json",
+          "sha256": "28ed93676da382c12ca3d68aebf6505ca30f1148eee24e990811a533da51bbce"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32200.json",
+          "sha256": "9bd14e7590b8ac023a29b809b36dd5b0c546bf97f7de03230b5a202e9da805a0"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32200.json",
+          "sha256": "fa26f9312b962f61e8a859a1d644fd7092e8f0872f21e75885c8970d546f909a"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32300.json",
+          "sha256": "195cddd5303b19fc53bd4932a7b5dcaa1f262ff26ab37564d5f17100fd6b63f5"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32300.json",
+          "sha256": "cd6aea7842767f1f43b3fc77fb6e9595ad8b95e1e8af237e93bbaebd3f405700"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32400.json",
+          "sha256": "0da934eb8d280d474343f31e8d191d0e5335b3160100b0bc58d466199d81e237"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32400.json",
+          "sha256": "6b1c47537eb03cf33030c7eaf641c6b3917f4fa229a1ce36ba39b2410359df86"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32500.json",
+          "sha256": "9f7bab3a54f87ad7dcf8e07096c5326977292e72d13dd77c80f021650dd33b83"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32500.json",
+          "sha256": "4e736ae09bf7473a79efd9657593c81420f17ac54499ec292d7dccf5b6c8ff1c"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32600.json",
+          "sha256": "cbb38f6e3a54d6df2b65856d8493b6a67db1db980d05dd2e71ed266ef583d956"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32600.json",
+          "sha256": "27f641bbe40f8ec2e49402318b95bfc23ada93fa432c65280b8984e3f4bb0ffd"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32700.json",
+          "sha256": "e843e586b78ab98c1d299eee4cd31899fbdb87763fa65102c3be490d4fe21656"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32700.json",
+          "sha256": "3f6456c16264213c8eae8840a1653b75eea0d28814f33c923ea7da82a3f5e161"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32800.json",
+          "sha256": "5b5a853e8304813637a35283e1b52ce1861ae46c58f05f85a23ff51d891807f3"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32800.json",
+          "sha256": "cc1ec01b5a99f81b28dbec4394b4cba7714648c8d71eaf20f0d98352d764ff20"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/32900.json",
+          "sha256": "46c88e579e8079b231a28f1c52d386cd4b5b5b9da87e06d712d602496c22abe4"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/32900.json",
+          "sha256": "616a14fd97531e6dea0ba31589499a518fb242cacab49ccad4801d19f0eb48bc"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33000.json",
+          "sha256": "e160058fda3ba10ef2a91f0332972dab4931767f7d3f63c7596da76898bd05da"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33000.json",
+          "sha256": "480a86f13e4f2a00a0115bafc52eb74356b286cfbe1e6698d77746e6766698e4"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33100.json",
+          "sha256": "de2d30b581510f2c9d3fa6e1bb4f2625ea32ebe7e1c499d0603cf73b85995007"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33100.json",
+          "sha256": "3be62ca28c5c63b16023a0184d05365e38403b6458fab829d0f89bba92b2853f"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33200.json",
+          "sha256": "9e0439931ff4997fce4c6fc8b577cabba941ad74e3869c31153ed4dd4c45a26f"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33200.json",
+          "sha256": "a3c7c9286db151392e2dde5132691ad2239937a56d07c4cc1d19d816307b5d5f"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33300.json",
+          "sha256": "5be8d7d27e1612db0553010206a3b043ede5c8d8cd631c38136404c513e5c29e"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33300.json",
+          "sha256": "0b38e1fe2f6ccd2482ae249df8671c5de508a9a94c499c1f22edfdeec7542e7f"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33400.json",
+          "sha256": "2fc6638b540b1c0025df38db2a8ab2a1fb401093b97a7cada94dd39974b49797"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33400.json",
+          "sha256": "f159c810b455918b8ea7b60d4c00911fb0a7563d8c7758724fdb9bca0c63095d"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33500.json",
+          "sha256": "fc1502906afb313f20f76297526c2e26c66bb56a3fc5dc226736ae29c178bad0"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33500.json",
+          "sha256": "ad01a0e0988ab03b852abdd1170b2dd76a93e5b4c255160020c7a7fbf15f5383"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33600.json",
+          "sha256": "a0c3dbace97f789b958f269c8109a871a835e42d762e8ad7c513a0d7803c12e8"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33600.json",
+          "sha256": "efc62057631fa48bc68287e486c37b721e179cd3b3b54cccb8dfcfef261b4dfb"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33700.json",
+          "sha256": "db143c8be3ac26c0474d84bf7e23e98c1eae74f83ba8aeb682758f13c403805f"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33700.json",
+          "sha256": "c4f9b35fa7d6af53cefc707f7be27b515de4451225e99ef84f1ddc244e5bd8d8"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33800.json",
+          "sha256": "1b32d75d397d2a914efb102bbdebb4d9d3d678a56601d7aba6ead885a9bb74c7"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33800.json",
+          "sha256": "d84ccb9ff0d03d36551db078844d7dd10707040711307af1f4e1ab7a2cec47c4"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/33900.json",
+          "sha256": "79ade1c9207d7f3f827fb6148e9eeafb7e1d1964a7e5b6ccd0bf21ba8c600e36"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/33900.json",
+          "sha256": "b8134ed4df290737568bb1f19b85b0a187fca296a671f0018f7d66e1330b910d"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/34000.json",
+          "sha256": "b32bd800e2b1f09653cec45f2dee2ce5519ff220ff596a9547d3687bcf349cd7"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/34000.json",
+          "sha256": "71d97f04f0cc15ac3c42672097fa7f63c9cad5da80ac3ddb7a2c8c96a33896a3"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/34100.json",
+          "sha256": "21106fe2eb528e52b839c8b55eb3960e5654ef78331f5f349cd602ec89c37e24"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/34100.json",
+          "sha256": "3a216338bb7435cd80530859e4a448346e64bb856d3e941e55246709c4f3c2cb"
+        },
+        {
+          "resource": "zzz/3.1/zh/equipment/34200.json",
+          "sha256": "5cc2c7cd641bdb27656e0ef70a7a11487f9de1ed2b33beb6ed1eb3b45172f154"
+        },
+        {
+          "resource": "zzz/3.1/en/equipment/34200.json",
+          "sha256": "285b5d7c08272f1d090a5da2868122636e9f0ef9b2f09f282b2a2d1cb0d6fc6e"
+        }
+      ],
+      "memberIds": [
+        "31000",
+        "31100",
+        "31200",
+        "31300",
+        "31400",
+        "31500",
+        "31600",
+        "31800",
+        "31900",
+        "32200",
+        "32300",
+        "32400",
+        "32500",
+        "32600",
+        "32700",
+        "32800",
+        "32900",
+        "33000",
+        "33100",
+        "33200",
+        "33300",
+        "33400",
+        "33500",
+        "33600",
+        "33700",
+        "33800",
+        "33900",
+        "34000",
+        "34100",
+        "34200"
+      ],
+      "members": {
+        "31000": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31000/data.json",
+              "sha256": "b70647b23dc0f75a1974a6ce6ad41d7c861c1186dd412e4068abb5ed8dd23e32"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31000/details.en.json",
+                "sha256": "3c21429665de55f496692d95932ae8d66a4aba28aa8bc568a186246054d3a666"
+              },
+              "zh": {
+                "path": "drive-discs/31000/details.zh.json",
+                "sha256": "ac8a900ac90b8b769f38d82b34e11ba5ac340e2ae4723f356af801acda254e20"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "CRIT Rate +8%",
+              "desc4": "Landing a critical hit on an enemy with a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, or <color=#FFFFFF>EX Special Attack</color> increases the equipper's ATK by 9% for 6s. The buff duration for different skills are calculated separately.",
+              "name": "Woodpecker Electro"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWoodpeckerElectro.png",
+            "ja": {
+              "desc2": "会心率+8%。",
+              "desc4": "<color=#FFFFFF>『通常攻撃』</color>、<color=#FFFFFF>『回避反撃』</color>または<color=#FFFFFF>『強化特殊スキル』</color>が敵に命中し、なおかつ会心が出た時、それぞれ装備者にバフ効果を1重与える。バフ効果1重につき、装備者の攻撃力+9%、継続時間6秒。バフ効果の継続時間はスキルごとに計算される。",
+              "name": "ウッドペッカー・エレクトロ"
+            },
+            "ko": {
+              "desc2": "치명타 확률+8%",
+              "desc4": "<color=#FFFFFF>[일반 공격]</color>, <color=#FFFFFF>[회피 반격]</color> 혹은 <color=#FFFFFF>[강화 특수 스킬]</color>이 적에게 명중하고 치명타 발동 시 착용자에게 각각 1스택의 버프 효과를 제공하며 버프 효과 스택당 착용자의 공격력이 9% 증가한다. 지속 시간: 6초, 각 스킬의 지속 시간은 따로 계산된다.",
+              "name": "딱따구리 일렉트로"
+            },
+            "zh": {
+              "desc2": "暴击率+8%。",
+              "desc4": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避反击]</color>或<color=#FFFFFF>[强化特殊技]</color>命中敌人并触发暴击时，分别为装备者提供1层增益效果，每层增益效果使装备者的攻击力提升9%，持续6秒，不同招式分别结算持续时间。",
+              "name": "啄木鸟电音"
+            }
+          }
+        },
+        "31100": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31100/data.json",
+              "sha256": "4ce0659618247e35fdf37071782b34c80f9214caae1c800c44d7fe8c057adb01"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31100/details.en.json",
+                "sha256": "6549e93bd748923e9811a9bf3e39137a8c16e6d653d38ef6312a51df169b2b8c"
+              },
+              "zh": {
+                "path": "drive-discs/31100/details.zh.json",
+                "sha256": "d2a606bd02c6937f09e761f070891f5de848f5b9e7ba2f9fd3fd904ead797085"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "PEN Ratio +8%",
+              "desc4": "<color=#FFFFFF>Ultimate</color> DMG increases by 20%. Launching an <color=#FFFFFF>Ultimate</color> increases the equipper's ATK by 15% for 12s.",
+              "name": "Puffer Electro"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPufferElectro.png",
+            "ja": {
+              "desc2": "貫通率+8%。",
+              "desc4": "<color=#FFFFFF>『終結スキル』</color>の与ダメージ+20%。<color=#FFFFFF>『終結スキル』</color>発動時、装備者の攻撃力+15%、継続時間12秒。",
+              "name": "パファー・エレクトロ"
+            },
+            "ko": {
+              "desc2": "관통률+8%",
+              "desc4": "<color=#FFFFFF>[궁극기]</color>로 주는 피해가 20% 증가한다. <color=#FFFFFF>[궁극기]</color> 시전 시 착용자의 공격력이 15% 증가한다. 지속 시간: 12초",
+              "name": "복어 일렉트로"
+            },
+            "zh": {
+              "desc2": "穿透率+8%。",
+              "desc4": "<color=#FFFFFF>[终结技]</color>造成的伤害提升20%；发动<color=#FFFFFF>[终结技]</color>时，装备者的攻击力提升15%，持续12秒。",
+              "name": "河豚电音"
+            }
+          }
+        },
+        "31200": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31200/data.json",
+              "sha256": "22c6a25545658cee6cf3cce0e5e07f40ff1b828174d1feadb85707ed54cb711b"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31200/details.en.json",
+                "sha256": "b709afb0b355f5534a739080eb1530e543249f2f6c44266789e97aed3d0c58d2"
+              },
+              "zh": {
+                "path": "drive-discs/31200/details.zh.json",
+                "sha256": "109364e29c3ce07041963bfde98a39344645c8cfc59d32d7189e3e36bed7ee82"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Impact +6%",
+              "desc4": "<color=#FFFFFF>Basic Attacks</color>, <color=#FFFFFF>Dash Attacks</color>, and <color=#FFFFFF>Dodge Counters</color> inflict 20% more Daze to the main target.",
+              "name": "Shockstar Disco"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShockstarDisco.png",
+            "ja": {
+              "desc2": "衝撃力+6%。",
+              "desc4": "<color=#FFFFFF>『通常攻撃』</color>、<color=#FFFFFF>『ダッシュ攻撃』</color>、<color=#FFFFFF>『回避反撃』</color>がメインターゲットに与えるブレイク値+20%。",
+              "name": "ショックスター・ディスコ"
+            },
+            "ko": {
+              "desc2": "충격력+6%",
+              "desc4": "<color=#FFFFFF>[일반 공격]</color>, <color=#FFFFFF>[대시 공격]</color>, <color=#FFFFFF>[회피 반격]</color>이 주요 공격 타깃에게 주는 그로기 수치가 20% 증가한다.",
+              "name": "쇼크스타 디스코"
+            },
+            "zh": {
+              "desc2": "冲击力+6%。",
+              "desc4": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[冲刺攻击]</color>、<color=#FFFFFF>[闪避反击]</color>对主要攻击目标造成的失衡值提升20%。",
+              "name": "震星迪斯科"
+            }
+          }
+        },
+        "31300": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31300/data.json",
+              "sha256": "e85e398a03fde93ce24065a3afe8e844b7ce76b2bb6ec20ad1581462e8744903"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31300/details.en.json",
+                "sha256": "7003ca4715344af122a724f69e3e41aa81027b43b174dea003e1b1e99bb8bb9b"
+              },
+              "zh": {
+                "path": "drive-discs/31300/details.zh.json",
+                "sha256": "f7936957a70b83abe7661006f25fa4c5256bb2e7bac64d157989cb078f6852b6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Anomaly Proficiency +30",
+              "desc4": "When an <color=#FFFFFF>EX Special Attack</color> hits an enemy, reduce the target's Anomaly Buildup RES to the equipper's Attribute by 20% for 8s. This effect does not stack with others of the same attribute.",
+              "name": "Freedom Blues"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitFreedomBlues.png",
+            "ja": {
+              "desc2": "異常マスタリー+30Pt。",
+              "desc4": "<color=#FFFFFF>『強化特殊スキル』</color>が敵に命中すると、装備者の属性に応じてターゲットの対応する状態異常蓄積耐性-20%、継続時間8秒。同属性での重ね掛けは不可。",
+              "name": "フリーダム・ブルース"
+            },
+            "ko": {
+              "desc2": "이상 마스터리+30pt",
+              "desc4": "<color=#FFFFFF>[강화 특수 스킬]</color>이 적에게 명중 시 착용자의 속성 타입에 따라 타깃의 상응하는 속성 이상 축적 저항이 20% 감소한다. 지속 시간: 8초, 동일한 속성 타입의 효과는 중첩되지 않는다.",
+              "name": "자유의 블루스"
+            },
+            "zh": {
+              "desc2": "异常精通+30点。",
+              "desc4": "<color=#FFFFFF>[强化特殊技]</color>命中敌人时，根据装备者的属性类型，使目标对应属性异常积蓄抗性降低20%，持续8秒，相同属性类型的效果不可叠加。",
+              "name": "自由蓝调"
+            }
+          }
+        },
+        "31400": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31400/data.json",
+              "sha256": "fb9cd20c281eee0050420660080b734ad02840b7bf70cc21a77851f10fd3bfb7"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31400/details.en.json",
+                "sha256": "d3c14bb2fbb5123a8e913c484c7943b2ebaabe155c3bcbfb73afbf2d2549d6eb"
+              },
+              "zh": {
+                "path": "drive-discs/31400/details.zh.json",
+                "sha256": "1676b36773377ba1145f74f652affcc2ea99f6a4e6e32a981bc1dc7eaa75559b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "ATK +10%",
+              "desc4": "Upon becoming the active character in combat, the equipper's ATK increases by 25% for 10s. This effect can trigger once every 20s.",
+              "name": "Hormone Punk"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitHormonePunk.png",
+            "ja": {
+              "desc2": "攻撃力+10%。",
+              "desc4": "接敵状態かつ操作中のメンバーになった時、装備者の攻撃力+25%、継続時間10秒。20秒に1回のみ発動可能。",
+              "name": "ホルモン・パンク"
+            },
+            "ko": {
+              "desc2": "공격력+10%",
+              "desc4": "교전 상태에서의 현재 조작 중인 캐릭터가 될 시, 착용자의 공격력이 25% 증가한다. 지속 시간: 10초, 20초 동안 최대 1회 발동한다.",
+              "name": "호르몬 펑크"
+            },
+            "zh": {
+              "desc2": "攻击力+10%。",
+              "desc4": "成为接战状态下的当前操作角色时，装备者的攻击力提升25%，持续10秒，20秒内最多触发一次。",
+              "name": "激素朋克"
+            }
+          }
+        },
+        "31500": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31500/data.json",
+              "sha256": "b9fd71e2c20251efec618609d978021eff6eae0bb761e3a8aaa11abc92043c68"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31500/details.en.json",
+                "sha256": "4be1102cf9758935515f8b5fe2ed3ac355e52c1ccd5079838aee21774a362a46"
+              },
+              "zh": {
+                "path": "drive-discs/31500/details.zh.json",
+                "sha256": "bdf81529b0dad0bb91f0a7b6b14484af3b9b31ead6841103c177563aed101c0c"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "DEF +16%",
+              "desc4": "Upon receiving an enemy attack and losing HP, the equipper takes 40% less DMG for 2.5s. This effect can trigger once every 15s.",
+              "name": "Soul Rock"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSoulRock.png",
+            "ja": {
+              "desc2": "防御力+16%。",
+              "desc4": "敵の攻撃を受け、かつHPが減少した時、装備者の被ダメージ-40%、継続時間2.5秒。15秒に1回のみ発動可能。",
+              "name": "ソウル・ロック"
+            },
+            "ko": {
+              "desc2": "방어력+16%",
+              "desc4": "적의 공격을 받아 HP가 줄어들 시 착용자가 받는 피해가 40% 감소한다. 지속 시간: 2.5초, 15초 동안 최대 1회 발동한다.",
+              "name": "소울 록"
+            },
+            "zh": {
+              "desc2": "防御力+16%。",
+              "desc4": "受到敌方攻击并损失生命值时，装备者受到的伤害降低40%，持续2.5秒，15秒内最多触发一次。",
+              "name": "灵魂摇滚"
+            }
+          }
+        },
+        "31600": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31600/data.json",
+              "sha256": "2236f2d47b278838c9571684051727a482e69408b72c64159539111b06e95565"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31600/details.en.json",
+                "sha256": "586987fbfa11d4966b456c1077fbe251e5a9497d8ce7c107dea8f9f7d7f0b503"
+              },
+              "zh": {
+                "path": "drive-discs/31600/details.zh.json",
+                "sha256": "9ee1078b2ca6920c75518e04587dbfa90a14020c1cd199ee3fbf3da42befdd5a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Energy Regen +20%",
+              "desc4": "Launching a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color> increases all squad members' DMG by 15% for 12s. Passive effects of the same name do not stack.",
+              "name": "Swing Jazz"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSwingJazz.png",
+            "ja": {
+              "desc2": "エネルギー自動回復+20%。",
+              "desc4": "<color=#FFFFFF>『連携スキル』</color>または<color=#FFFFFF>『終結スキル』</color>発動時、メンバー全員の与ダメージ+15%、継続時間12秒。同じパッシブ効果は重ね掛け不可。",
+              "name": "スイング・ジャズ"
+            },
+            "ko": {
+              "desc2": "에너지 자동 회복+20%",
+              "desc4": "<color=#FFFFFF>[콤보 스킬]</color> 혹은 <color=#FFFFFF>[궁극기]</color> 시전 시 파티 내 모든 캐릭터가 주는 피해가 15% 증가한다. 지속 시간: 12초, 이름이 같은 패시브 효과끼리 중첩되지 않는다.",
+              "name": "스윙 재즈"
+            },
+            "zh": {
+              "desc2": "能量自动回复+20%。",
+              "desc4": "发动<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，全队角色造成的伤害提升15%，持续12秒，同名被动效果之间不可叠加。",
+              "name": "摇摆爵士"
+            }
+          }
+        },
+        "31800": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31800/data.json",
+              "sha256": "dcab66a8f9504aa3eab9d1e237e88443f06ace421ec04cd006419bb8ff33944d"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31800/details.en.json",
+                "sha256": "122fe59f60d25c22dda5d80f474c6f64959d2eb7659fec3fae9ccec791171ab2"
+              },
+              "zh": {
+                "path": "drive-discs/31800/details.zh.json",
+                "sha256": "f2440df5e506d02565235ee3b30d5facbd51d8bdc8b62a28782479d8a5a20cc6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Anomaly Proficiency +30",
+              "desc4": "<color=#FF5521>Fire DMG</color> and <color=#2EB6FF>Electric DMG</color> increases by 15%. While off-field, <color=#FFFFFF>EX Special Attack</color> and <color=#FFFFFF>Assist Attack</color> DMG increases by 20%. When switching on-field, this buff continues for 5s, and this continuation effect can trigger once every 7.5s.",
+              "name": "Chaos Jazz"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitChaosJazz.png",
+            "ja": {
+              "desc2": "異常マスタリー+30Pt。",
+              "desc4": "<color=#FF5521>炎属性ダメージ</color>および<color=#2EB6FF>電気属性ダメージ</color>+15%。控えにいる時、<color=#FFFFFF>『強化特殊スキル』</color>と<color=#FFFFFF>『支援攻撃』</color>の与ダメージ+20%。出場した後も効果は5秒継続する。この効果継続は7.5秒に1回のみ発動可能。",
+              "name": "ケイオス・ジャズ"
+            },
+            "ko": {
+              "desc2": "이상 마스터리+30pt",
+              "desc4": "<color=#FF5521>불 속성 피해</color> 및 <color=#2EB6FF>전기 속성 피해</color>가 15% 증가한다. 대기 캐릭터일 시 <color=#FFFFFF>[강화 특수 스킬]</color> 및 <color=#FFFFFF>[지원 공격]</color>으로 주는 피해가 20% 증가하며, 전장에 교체 투입된 후 해당 버프 효과는 여전히 5초 동안 지속된다. 해당 지속 효과는 7.5초 동안 최대 1회 발동된다.",
+              "name": "카오스 재즈"
+            },
+            "zh": {
+              "desc2": "异常精通+30点。",
+              "desc4": "<color=#FF5521>火属性伤害</color>和<color=#2EB6FF>电属性伤害</color>提升15%；位于后场时，<color=#FFFFFF>[强化特殊技]</color>和<color=#FFFFFF>[支援攻击]</color>造成的伤害提升20%，换入前场后，该增益效果仍然保留，持续5秒，保留效果7.5秒内最多触发一次。",
+              "name": "混沌爵士"
+            }
+          }
+        },
+        "31900": {
+          "files": {
+            "data": {
+              "path": "drive-discs/31900/data.json",
+              "sha256": "d4a37d6de2c33a4bfe604b545b43031040691f5025e6fd46537e807058eef48b"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/31900/details.en.json",
+                "sha256": "de037ee9a3c3c557882ce7454b7b301beb1b63d648e2301c31c676c3418d9701"
+              },
+              "zh": {
+                "path": "drive-discs/31900/details.zh.json",
+                "sha256": "9c6614381151e3568cd368deea6cbbf71579ed0c556f9faedf99b85f9cb904c8"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Increases Shield effect by 15%.",
+              "desc4": "When any squad member triggers a <color=#FFFFFF>Defensive Assist</color> or <color=#FFFFFF>Evasive Assist</color>, all squad members deal 15% increased DMG, lasting 10s. Passive effects of the same name do not stack.",
+              "name": "Proto Punk"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitProtoPunk.png",
+            "ja": {
+              "desc2": "シールド生成量+15%。",
+              "desc4": "任意のメンバーが<color=#FFFFFF>『パリィ支援』</color>または<color=#FFFFFF>『回避支援』</color>を発動した時、メンバー全員の与ダメージ+15%、継続時間10秒。同じパッシブ効果は重ね掛け不可。",
+              "name": "プロト・パンク"
+            },
+            "ko": {
+              "desc2": "부여하는 실드량+15%",
+              "desc4": "파티 내 임의의 캐릭터가 <color=#FFFFFF>[패링 지원]</color> 혹은 <color=#FFFFFF>[회피 지원]</color> 시전 시 파티 내 모든 캐릭터가 주는 피해가 15% 증가한다. 지속 시간: 10초, 이름이 같은 패시브 효과끼리 중첩되지 않는다.",
+              "name": "원시 펑크"
+            },
+            "zh": {
+              "desc2": "施加的护盾值提升15%。",
+              "desc4": "队伍中任意角色发动<color=#FFFFFF>[招架支援]</color>或<color=#FFFFFF>[回避支援]</color>时，全队角色造成的伤害提升15%，持续10秒，同名被动效果之间不可叠加。",
+              "name": "原始朋克"
+            }
+          }
+        },
+        "32200": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32200/data.json",
+              "sha256": "3bf5bdb82d8e961a8c24490a457324aa60cf69a8a3bb4931f25bf9d9107c3e06"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32200/details.en.json",
+                "sha256": "eb2e132d437cb0a752a65f70a23f35b732cbb6499d5be87334a9f8307a104283"
+              },
+              "zh": {
+                "path": "drive-discs/32200/details.zh.json",
+                "sha256": "edc74e18d757a2a6268eefdc9663ce689d9e2a02e8296fb874a698ee619948ee"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#FF5521>Fire DMG</color> +10%",
+              "desc4": "Upon hitting a <color=#FF5521>Burning</color> enemy, the equipper's CRIT Rate is increased by 28% for 8s.",
+              "name": "Inferno Metal"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitInfernoMetal.png",
+            "ja": {
+              "desc2": "<color=#FF5521>炎属性ダメージ</color>+10%。",
+              "desc4": "<color=#FF5521>[熱傷]</color>状態の敵に攻撃が命中した時、装備者の会心率+28%、継続時間8秒。",
+              "name": "炎獄のヘヴィメタル"
+            },
+            "ko": {
+              "desc2": "<color=#FF5521>불 속성 피해</color>+10%",
+              "desc4": "공격이 <color=#FF5521>[연소]</color> 상태의 적에게 명중 시 착용자의 치명타 확률이 28% 증가한다. 지속 시간: 8초",
+              "name": "불지옥 메탈"
+            },
+            "zh": {
+              "desc2": "<color=#FF5521>火属性伤害</color>+10%。",
+              "desc4": "攻击命中处于<color=#FF5521>[灼烧]</color>状态下的敌人时，装备者的暴击率提升28%，持续8秒。",
+              "name": "炎狱重金属"
+            }
+          }
+        },
+        "32300": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32300/data.json",
+              "sha256": "2a6acf16bb43336ff266ad12147528c2f70426adfb57a30fe78363428598f59a"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32300/details.en.json",
+                "sha256": "d800d01e373388e9e044e53afa1adcaee18f07d38c6ca2e89e5138a87e947af4"
+              },
+              "zh": {
+                "path": "drive-discs/32300/details.zh.json",
+                "sha256": "d124ebd1a7b42e009ffca820c355f3e70b9b0c639a62622cd6a90a57740d4666"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#FE437E>Ether DMG</color> +10%",
+              "desc4": "The equipper's CRIT DMG increases by 20%. When any character in the squad triggers <color=#FE437E>Corruption</color> DMG, this effect further increases by 5.5% for 8s, stacking up to 6 times. Repeated triggers reset the duration.",
+              "name": "Chaotic Metal"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitChaosMetal.png",
+            "ja": {
+              "desc2": "<color=#FE437E>エーテル属性ダメージ</color>+10%。",
+              "desc4": "装備者の会心ダメージ+20%。任意のメンバーによって<color=#FE437E>[侵蝕]</color>ダメージが発生した時、この効果がさらに+5.5%、最大6重まで重ね掛け可能、継続時間8秒。重複して発動すると継続時間が更新される。",
+              "name": "混沌のヘヴィメタル"
+            },
+            "ko": {
+              "desc2": "<color=#FE437E>에테르 피해</color>+10%",
+              "desc4": "착용자의 치명타 피해가 20% 증가한다. 파티 내 임의의 캐릭터가 <color=#FE437E>[침식]</color> 피해 발동 시, 해당 버프 효과가 추가로 5.5% 증가한다. 최대 중첩: 6스택, 지속 시간: 8초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "카오스 메탈"
+            },
+            "zh": {
+              "desc2": "<color=#FE437E>以太伤害</color>+10%。",
+              "desc4": "装备者的暴击伤害提升20%，队伍中任意角色触发<color=#FE437E>[侵蚀]</color>伤害时，该增益效果额外提升5.5%，最多叠加6层，持续8秒，重复触发时刷新持续时间。",
+              "name": "混沌重金属"
+            }
+          }
+        },
+        "32400": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32400/data.json",
+              "sha256": "0f812515da8a89c25e5fe683e6de65a4e916a1f26b40624e56703cedfbabe8f0"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32400/details.en.json",
+                "sha256": "2378e2e21565c67da63f60d7989117459e5f3709ca923a4220321fafd50a5692"
+              },
+              "zh": {
+                "path": "drive-discs/32400/details.zh.json",
+                "sha256": "fb6287f7fe32621236903868354964e36f23602371baf827174b4ae73844ae88"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#2EB6FF>Electric DMG</color> +10%",
+              "desc4": "As long as an enemy in combat is <color=#2EB6FF>Shocked</color>, the equipper's ATK is increased by 28%.",
+              "name": "Thunder Metal"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitThunderMetal.png",
+            "ja": {
+              "desc2": "<color=#2EB6FF>電気属性ダメージ</color>+10%。",
+              "desc4": "フィールド上に<color=#2EB6FF>[感電]</color>状態の敵がいる時、装備者の攻撃力+28%。",
+              "name": "霹靂のヘヴィメタル"
+            },
+            "ko": {
+              "desc2": "<color=#2EB6FF>전기 속성 피해</color>+10%",
+              "desc4": "전장에 <color=#2EB6FF>[감전]</color> 상태의 적이 존재할 시 착용자의 공격력이 28% 증가한다.",
+              "name": "썬더 메탈"
+            },
+            "zh": {
+              "desc2": "<color=#2EB6FF>电属性伤害</color>+10%。",
+              "desc4": "当场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，装备者的攻击力提升28%。",
+              "name": "雷暴重金属"
+            }
+          }
+        },
+        "32500": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32500/data.json",
+              "sha256": "cc11d1c778e9a5613e0babcbe872fce8a701824252fedccc44fe1dcbe1511190"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32500/details.en.json",
+                "sha256": "52f1e133d353a8c38ab1eaca7060c3935d053f8277563175ef0a01bb8a02d1d1"
+              },
+              "zh": {
+                "path": "drive-discs/32500/details.zh.json",
+                "sha256": "1be66bcc7ee0bc6003ad16a5c54d92d477f9ca2afae210dba11983467716bae6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#98EFF0>Ice DMG</color> +10%",
+              "desc4": "Increase the DMG of <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> by 20%. When any squad member inflicts <color=#98EFF0>Freeze</color> or <color=#98EFF0>Shatter</color>, this effect increases by an additional 20% for 12s.",
+              "name": "Polar Metal"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPolarMetal.png",
+            "ja": {
+              "desc2": "<color=#98EFF0>氷属性ダメージ</color>+10%。",
+              "desc4": "<color=#FFFFFF>『通常攻撃』</color>と<color=#FFFFFF>『ダッシュ攻撃』</color>の与ダメージ+20%。任意のメンバーが敵に<color=#98EFF0>[凍結]</color>効果を付与した時、または<color=#98EFF0>[砕氷]</color>効果を発動した時、この効果がさらに+20%、継続時間12秒。",
+              "name": "極地のヘヴィメタル"
+            },
+            "ko": {
+              "desc2": "<color=#98EFF0>얼음 속성 피해</color>+10%",
+              "desc4": "<color=#FFFFFF>[일반 공격]</color> 및 <color=#FFFFFF>[대시 공격]</color>으로 주는 피해가 20% 증가하며, 파티 내 임의의 캐릭터가 적에게 <color=#98EFF0>[빙결]</color> 부여 혹은 <color=#98EFF0>[쇄빙]</color> 효과 발동 시, 해당 버프 효과가 추가로 20% 증가한다. 지속 시간: 12초",
+              "name": "극지 메탈"
+            },
+            "zh": {
+              "desc2": "<color=#98EFF0>冰属性伤害</color>+10%。",
+              "desc4": "<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[冲刺攻击]</color>造成的伤害提升20%，队伍中任意角色对敌人施加<color=#98EFF0>[冻结]</color>或触发<color=#98EFF0>[碎冰]</color>效果时，该增益效果额外提升20%，持续12秒。",
+              "name": "极地重金属"
+            }
+          }
+        },
+        "32600": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32600/data.json",
+              "sha256": "4afccbbc033c0de378511939712e89ae53bcf311696610436eda3bac00409a28"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32600/details.en.json",
+                "sha256": "b1672e1b2f561d3b3c7d4e4b911f8180d8d066461aa4eda968a9d8df1aaaf423"
+              },
+              "zh": {
+                "path": "drive-discs/32600/details.zh.json",
+                "sha256": "b21d0bc91557dcddd01bfa61cd68cdf9034aaf0725c4ad37ff692ae1f6eab65e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#F0D12B>Physical DMG</color> +10%",
+              "desc4": "Whenever a squad member inflicts <color=#F0D12B>Assault</color> on an enemy, the equipper deals 35% additional DMG to the target for 12s.",
+              "name": "Fanged Metal"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitFangedMetal.png",
+            "ja": {
+              "desc2": "<color=#F0D12B>物理属性ダメージ</color>+10%。",
+              "desc4": "任意のメンバーが敵に<color=#F0D12B>[強撃]</color>効果を付与した時、装備者がターゲットに与えるダメージ+35%、継続時間12秒。",
+              "name": "獣牙のヘヴィメタル"
+            },
+            "ko": {
+              "desc2": "<color=#F0D12B>물리 피해</color>+10%",
+              "desc4": "파티 내 임의의 캐릭터가 적에게 <color=#F0D12B>[강타]</color> 효과 부여 시 착용자가 타깃에게 주는 피해가 35% 증가한다. 지속 시간: 12초",
+              "name": "송곳니 메탈"
+            },
+            "zh": {
+              "desc2": "<color=#F0D12B>物理伤害</color>+10%。",
+              "desc4": "队伍中任意角色对敌人施加<color=#F0D12B>[强击]</color>效果时，装备者对目标造成的伤害提升35%，持续12秒。",
+              "name": "獠牙重金属"
+            }
+          }
+        },
+        "32700": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32700/data.json",
+              "sha256": "fd76e8ee96d67960671ecb1561ce75df010a3a94904af7d27b5b27eb624ab586"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32700/details.en.json",
+                "sha256": "afb323fb44413c954c5acd91161455e50d7d561f58814275cc6d96cfc600be50"
+              },
+              "zh": {
+                "path": "drive-discs/32700/details.zh.json",
+                "sha256": "0925146095c913fede9d12fd2c17a6677e7594bf5302da05f60d2fd97c096a97"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "CRIT DMG +16%",
+              "desc4": "When Anomaly Mastery exceeds or equals 115 points, the equipper's CRIT DMG increases by 30%. When any squad member applies <color=#98EFF0>Freeze</color> or triggers the <color=#98EFF0>Shatter</color> effect on an enemy, the equipper's CRIT Rate increases by 12%, lasting 15s.",
+              "name": "Branch & Blade Song"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitBranch&BladeSong.png",
+            "ja": {
+              "desc2": "会心ダメージ+16%。",
+              "desc4": "異常掌握が115Pt以上の時、装備者の会心ダメージ+30%。任意のメンバーが敵に<color=#98EFF0>[凍結]</color>効果を付与した時、または<color=#98EFF0>[砕氷]</color>効果を発動した時、装備者の会心率+12%、継続時間15秒。",
+              "name": "折枝の刀歌"
+            },
+            "ko": {
+              "desc2": "치명타 피해+16%",
+              "desc4": "이상 장악력이 115pt 이상일 시 착용자의 치명타 피해가 30% 증가한다. 파티 내 임의의 캐릭터가 적에게 <color=#98EFF0>[빙결]</color> 부여 혹은 <color=#98EFF0>[쇄빙]</color> 효과 발동 시 착용자의 치명타 확률이 12% 증가한다. 지속 시간: 15초",
+              "name": "나뭇가지 검의 노래"
+            },
+            "zh": {
+              "desc2": "暴击伤害+16%。",
+              "desc4": "异常掌控大于等于115点时，装备者的暴击伤害提升30%；队伍中任意角色对敌人施加<color=#98EFF0>[冻结]</color>或触发<color=#98EFF0>[碎冰]</color>效果时，装备者的暴击率提升12%，持续15秒。",
+              "name": "折枝剑歌"
+            }
+          }
+        },
+        "32800": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32800/data.json",
+              "sha256": "2ce97dd6290fd60f25eeed2680efe23b06ded0d0234ca90d9fe588ad8ceb4d52"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32800/details.en.json",
+                "sha256": "2d481f05dba0c977fd908113ca473b31259d80ff21886df93bf58d66660db571"
+              },
+              "zh": {
+                "path": "drive-discs/32800/details.zh.json",
+                "sha256": "4f288707de5fa28e7d2ec18981bc30fcff11811d116a7e0a9881b4ad81ae6c00"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "ATK +10%",
+              "desc4": "Whenever any squad member enters the field using a <color=#FFFFFF>Quick Assist</color>, all squad members gain 1 stack of <color=#FFFFFF>Astral</color>, up to a maximum of 3 stacks, and lasting 15s. Repeated triggers reset the duration. Each stack of <color=#FFFFFF>Astral</color> increases the DMG dealt by the character entering the field using a <color=#FFFFFF>Quick Assist</color> by 8%. Passive effects of the same name do not stack.",
+              "name": "Astral Voice"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitAstralVoice.png",
+            "ja": {
+              "desc2": "攻撃力+10%。",
+              "desc4": "任意のメンバーが<color=#FFFFFF>『クイック支援』</color>で出場した時、メンバー全員が<color=#FFFFFF>「天籟」</color>を1重獲得する。最大3重まで重ね掛け可能、継続時間15秒、重複して発動すると継続時間が更新される。<color=#FFFFFF>「天籟」</color>1重につき、<color=#FFFFFF>『クイック支援』</color>で出場したメンバーの与ダメージ+8%、同じパッシブ効果は重ね掛け不可。",
+              "name": "静寂のアストラ"
+            },
+            "ko": {
+              "desc2": "공격력+10%",
+              "desc4": "파티 내 임의의 캐릭터가 <color=#FFFFFF>[빠른 지원]</color>을 통해 전장에 진입할 경우, 파티 내 모든 캐릭터가 <color=#FFFFFF>[별]</color>을 1스택 획득한다. 최대 중첩: 3스택, 지속 시간: 15초, 중복 발동 시 지속 시간이 갱신되며, <color=#FFFFFF>[별]</color>을 1스택 보유할 때마다 <color=#FFFFFF>[빠른 지원]</color>으로 전장에 진입하는 캐릭터가 주는 피해가 8% 증가한다. 이름이 같은 패시브 효과끼리 중첩되지 않는다.",
+              "name": "고요 속의 별"
+            },
+            "zh": {
+              "desc2": "攻击力+10%。",
+              "desc4": "队伍中任意角色通过<color=#FFFFFF>[快速支援]</color>入场时，全队角色获得1层<color=#FFFFFF>[嘉音]</color>，最多叠加3层，持续15秒，重复触发时刷新持续时间，每拥有1层<color=#FFFFFF>[嘉音]</color>，通过<color=#FFFFFF>[快速支援]</color>入场的角色造成的伤害提升8%，同名被动效果之间不可叠加。",
+              "name": "静听嘉音"
+            }
+          }
+        },
+        "32900": {
+          "files": {
+            "data": {
+              "path": "drive-discs/32900/data.json",
+              "sha256": "d06928629d3b86ebaff4d6a923fa1d9149592558c5f6cac6d4f1c3d9dab829fc"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/32900/details.en.json",
+                "sha256": "50e35af99146459545d0b80b6fb45d7aba43820edc0440cc0788b29146dcef2a"
+              },
+              "zh": {
+                "path": "drive-discs/32900/details.zh.json",
+                "sha256": "60da2af424f28ab240ea4234eff5c7727ef72674a10a1d32d2654262ff5b5e1b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "The DMG of <color=#FFFFFF>Aftershocks</color> and <color=#FFFFFF>Dash Attacks</color> is increased by 15%.",
+              "desc4": "Upon hitting an enemy with an <color=#FFFFFF>Aftershock</color> or <color=#FFFFFF>Dash Attack</color>, if the DMG dealt aligns with the equipper's attribute, the equipper gains 1 stack of a buff effect, at most once per use of a skill. For each stack, the equipper's ATK increases by 4%, and CRIT Rate increases by 4%. The effect can stack up to 3 times and lasts for 15s. Repeated triggers reset the duration.",
+              "name": "Shadow Harmony"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShadow.png",
+            "ja": {
+              "desc2": "<color=#FFFFFF>『追加攻撃』</color>と<color=#FFFFFF>『ダッシュ攻撃』</color>の与ダメージ+15%。",
+              "desc4": "<color=#FFFFFF>『追加攻撃』</color>または<color=#FFFFFF>『ダッシュ攻撃』</color>が敵に命中した時、与えたダメージが装備者の属性と一致している場合、バフ効果を1重獲得する、1回のスキルにおいて1回のみ発動可能。バフ効果1重につき、装備者の攻撃力+4%、会心率+4%。最大3重まで重ね掛け可能、継続時間15秒、重複して発動すると継続時間が更新される。",
+              "name": "シャドウハーモニー"
+            },
+            "ko": {
+              "desc2": "<color=#FFFFFF>[여진 공격]</color> 및 <color=#FFFFFF>[대시 공격]</color>으로 주는 피해가 15% 증가한다.",
+              "desc4": "<color=#FFFFFF>[여진 공격]</color> 혹은 <color=#FFFFFF>[대시 공격]</color>이 적에게 명중 시, 만약 주는 피해가 착용자의 속성과 일치하면 버프 효과를 1스택 획득한다. 동일한 공격 한 번에 최대 1회 발동한다. 보유한 버프 효과 1스택당 착용자의 공격력이 4% 증가하고, 치명타 확률이 4% 증가한다. 최대 중첩: 3스택, 지속 시간: 15초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "그림자처럼 함께"
+            },
+            "zh": {
+              "desc2": "<color=#FFFFFF>[追加攻击]</color>和<color=#FFFFFF>[冲刺攻击]</color>造成的伤害提升15%。",
+              "desc4": "<color=#FFFFFF>[追加攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>命中敌人时，若造成的伤害与装备者的属性一致，则获得1层增益效果，同一招式内最多触发一次；每拥有1层增益效果，装备者的攻击力提升4%，暴击率提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间。",
+              "name": "如影相随"
+            }
+          }
+        },
+        "33000": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33000/data.json",
+              "sha256": "87f8e3805e0d3beebf004f4e02506f7d5b6b79c1021775f7c073e6f83ba5dc25"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33000/details.en.json",
+                "sha256": "4fdd92306f8989a297bad012426242f16db26745188ad0be7db7f708d19aba50"
+              },
+              "zh": {
+                "path": "drive-discs/33000/details.zh.json",
+                "sha256": "aa5607b822673b3ed360f94a5caf3f05ddfee94b03b43b2ccfb9273530eafb86"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Anomaly Mastery +8%.",
+              "desc4": "When any squad member uses an <color=#FFFFFF>EX Special Attack</color>, the equipper's Anomaly Proficiency increases by 45 for 8s. If the character using the <color=#FFFFFF>EX Special Attack</color> is not the equipper, the equipper's <color=#FE437E>Ether DMG</color> is increased by 25%.",
+              "name": "Phaethon's Melody"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSavior.png",
+            "ja": {
+              "desc2": "異常掌握+8%",
+              "desc4": "任意のメンバーが<color=#FFFFFF>『強化特殊スキル』</color>を発動した時、装備者の異常マスタリー+45Pt、継続時間8秒。<color=#FFFFFF>『強化特殊スキル』</color>を発動したエージェントが装備者本人でない場合、装備者による<color=#FE437E>エーテル属性ダメージ</color>+25%。",
+              "name": "「パエトーン」の歌"
+            },
+            "ko": {
+              "desc2": "이상 장악력+8%",
+              "desc4": "파티 내 임의의 캐릭터가 <color=#FFFFFF>[강화 특수 스킬]</color> 시전 시, 착용자의 이상 마스터리가 45pt 증가한다. 지속 시간: 8초. 만약 <color=#FFFFFF>[강화 특수 스킬]</color>을 시전한 캐릭터가 착용자 본인이 아닐 경우, 착용자가 주는 <color=#FE437E>에테르 피해</color>가 25% 증가한다.",
+              "name": "파에톤의 노래"
+            },
+            "zh": {
+              "desc2": "异常掌控+8%。",
+              "desc4": "队伍中任意角色发动<color=#FFFFFF>[强化特殊技]</color>时，装备者的异常精通提升45点，持续8秒；如果发动<color=#FFFFFF>[强化特殊技]</color>的角色不是装备者本人时，装备者造成的<color=#FE437E>以太伤害</color>提升25%。",
+              "name": "法厄同之歌"
+            }
+          }
+        },
+        "33100": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33100/data.json",
+              "sha256": "536224d5c060e0bd2acd06db178c6d9588b94edb21744bf8a1963b3d6e4a3c95"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33100/details.en.json",
+                "sha256": "f400c7c94673e7c7976e938e49a59f4e930a8fd99df83e7b153a91373ac08d98"
+              },
+              "zh": {
+                "path": "drive-discs/33100/details.zh.json",
+                "sha256": "212b480aa206e116a014ad9aacf1bd716e5a9570e6873e03362d31571d1fba3c"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "HP +10%",
+              "desc4": "When using <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, CRIT Rate increases by 4%, stacking up to 3 times and lasting 15s. Repeated triggers reset the duration. When having 3 stacks of this effect, Sheer DMG increases by 10%.",
+              "name": "Yunkui Tales"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitYunkuiTales.png",
+            "ja": {
+              "desc2": "HP+10%",
+              "desc4": "<color=#FFFFFF>『強化特殊スキル』</color>、<color=#FFFFFF>『連携スキル』</color>、<color=#FFFFFF>『終結スキル』</color>を発動時、会心率+4%。この効果は最大3重まで重ね掛け可能、継続時間15秒。重複して発動すると継続時間が更新される。重数が3重に達している場合、与える透徹ダメージ+10%。",
+              "name": "雲嶽は我に似たり"
+            },
+            "ko": {
+              "desc2": "HP+10%",
+              "desc4": "<color=#FFFFFF>[강화 특수 스킬]</color>, <color=#FFFFFF>[콤보 스킬]</color>, <color=#FFFFFF>[궁극기]</color> 시전 시 치명타 확률이 4% 증가한다. 최대 중첩: 3스택, 지속 시간: 15초. 중복 발동 시 지속 시간이 갱신되며, 3스택 효과 보유 시 주는 관입 피해가 10% 증가한다.",
+              "name": "운규 이야기"
+            },
+            "zh": {
+              "desc2": "生命值+10%",
+              "desc4": "发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，暴击率提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的贯穿伤害提升10%。",
+              "name": "云岿如我"
+            }
+          }
+        },
+        "33200": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33200/data.json",
+              "sha256": "084d623c79742292c8978967c24f23133fa3028207d79c57e9793111a97949fe"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33200/details.en.json",
+                "sha256": "d3880bd8d80782bc63cb45d67d78fef219b9bf585a04b7d54bc85527dc26a162"
+              },
+              "zh": {
+                "path": "drive-discs/33200/details.zh.json",
+                "sha256": "706bc00711de5fba049ee0b8f6d9985762b236674d532311072037a609385c18"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Increases Daze of attacks by 6%",
+              "desc4": "When the equipper is a Stun character and uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Chain Attack</color>, increases CRIT DMG of all squad members by 15%, and when the equipper's CRIT Rate is more than or equal to 50%, further increases CRIT DMG by 15%, lasting 15s. Repeated triggers reset the duration. Passive effects of the same name do not stack.",
+              "name": "King of the Summit"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitKingoftheSummit.png",
+            "ja": {
+              "desc2": "攻撃の与えるブレイク値+6%",
+              "desc4": "装備者が[撃破]メンバーの場合、<color=#FFFFFF>『強化特殊スキル』</color>または<color=#FFFFFF>『連携スキル』</color>発動時、メンバー全員の会心ダメージ+15%。装備者の会心率が50%以上の場合、会心ダメージがさらに+15%、継続時間15秒、重複して発動すると継続時間が更新される。同じパッシブ効果は重ね掛け不可。",
+              "name": "大山を統べる者"
+            },
+            "ko": {
+              "desc2": "공격으로 주는 그로기 수치+6%",
+              "desc4": "착용자가 [격파] 캐릭터일 때 <color=#FFFFFF>[강화 특수 스킬]</color> 혹은 <color=#FFFFFF>[콤보 스킬]</color>을 시전하면 파티 내 모든 캐릭터의 치명타 피해가 15% 증가하고, 착용자의 치명타 확률이 50% 이상일 시 치명타 피해가 추가로 15% 증가한다. 지속 시간: 15초, 중복 발동 시 지속 시간이 갱신되며 이름이 같은 패시브 효과끼리 중첩되지 않는다.",
+              "name": "산림의 왕"
+            },
+            "zh": {
+              "desc2": "攻击造成的失衡值提升6%",
+              "desc4": "装备者为[击破]角色时，发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[连携技]</color>会使全队角色暴击伤害提升15%，装备者的暴击率大于等于50%时暴击伤害额外提升15%，持续15秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。",
+              "name": "山大王"
+            }
+          }
+        },
+        "33300": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33300/data.json",
+              "sha256": "fe0493fc1f1c7aa7aa1014c3ff9d72c36f3cf95808c56d281faba0c35ab5e3ca"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33300/details.en.json",
+                "sha256": "11545f68ce8c537228ecb8593c03076c384d1d102deaead51b579653f92b7665"
+              },
+              "zh": {
+                "path": "drive-discs/33300/details.zh.json",
+                "sha256": "48c077077383bcd6112db0c745e8ab5c32e9f0716de6b06857db1ea3f6ea87d4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Increases <color=#FFFFFF>Basic Attack</color> DMG by 15%.",
+              "desc4": "Increases <color=#FFFFFF>Basic Attack</color> DMG by 20%. When equipped by an Attack character, using an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> will further increase <color=#FFFFFF>Basic Attack</color> DMG by 20% for 25s. Repeated triggers reset the duration.",
+              "name": "Dawn's Bloom"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitDawnsBloom.png",
+            "ja": {
+              "desc2": "<color=#FFFFFF>『通常攻撃』</color>の与ダメージ+15%。",
+              "desc4": "<color=#FFFFFF>『通常攻撃』</color>の与ダメージ+20%。装備者が[強攻]メンバーの場合、<color=#FFFFFF>『強化特殊スキル』</color>または<color=#FFFFFF>『終結スキル』</color>を発動すると、<color=#FFFFFF>『通常攻撃』</color>の与ダメージが追加で+20%、継続時間25秒、重複して発動すると継続時間が更新される。",
+              "name": "暁に咲く花"
+            },
+            "ko": {
+              "desc2": "<color=#FFFFFF>[일반 공격]</color>으로 주는 피해+15%",
+              "desc4": "<color=#FFFFFF>[일반 공격]</color>으로 주는 피해가 20% 증가하며, 착용자가 [강공] 캐릭터일 시 <color=#FFFFFF>[강화 특수 스킬]</color> 혹은 <color=#FFFFFF>[궁극기]</color>를 시전하면 <color=#FFFFFF>[일반 공격]</color>으로 주는 피해가 추가로 20% 증가한다. 지속 시간: 25초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "여명의 꽃"
+            },
+            "zh": {
+              "desc2": "<color=#FFFFFF>[普通攻击]</color>造成的伤害提升15%。",
+              "desc4": "<color=#FFFFFF>[普通攻击]</color>造成的伤害提升20%，装备者为[强攻]角色时，发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>会使<color=#FFFFFF>[普通攻击]</color>造成的伤害额外提升20%，持续25秒，重复触发时刷新持续时间。",
+              "name": "拂晓生花"
+            }
+          }
+        },
+        "33400": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33400/data.json",
+              "sha256": "5e99f2c839e5b6a3dad9f1708a2d8fd4e9fc65e00b9cb59f93aff944061b2516"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33400/details.en.json",
+                "sha256": "d45771e7b33020a25153b7fa4983725a98e396d5c68d114f27f8c2e83fb7d50c"
+              },
+              "zh": {
+                "path": "drive-discs/33400/details.zh.json",
+                "sha256": "e51428e5389d7d601a899f182e1116aa0bd09e639e0e692d0b2dd71e49c3b820"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Energy Regen +20%",
+              "desc4": "When the equipper is a Support character and uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color>, the DMG dealt by all squad members increases by 18% for 25s. Repeated triggers reset the duration. Passive effects of the same name do not stack.",
+              "name": "Moonlight Lullaby"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitMoonlightLullaby.png",
+            "ja": {
+              "desc2": "エネルギー自動回復+20%。",
+              "desc4": "装備者が[支援]メンバーの場合、<color=#FFFFFF>『強化特殊スキル』</color>または<color=#FFFFFF>『終結スキル』</color>を発動すると、メンバー全員の与ダメージ+18%、継続時間25秒、重複して発動すると継続時間が更新される。同じパッシブ効果は重ね掛け不可。",
+              "name": "月光騎士の讃歌"
+            },
+            "ko": {
+              "desc2": "에너지 자동 회복+20%",
+              "desc4": "착용자가 [지원] 캐릭터일 때 <color=#FFFFFF>[강화 특수 스킬]</color> 혹은 <color=#FFFFFF>[궁극기]</color>를 시전하면 파티 내 모든 캐릭터가 주는 피해가 18% 증가한다. 지속 시간: 25초, 중복 발동 시 지속 시간이 갱신되며, 이름이 같은 패시브 효과끼리 중첩되지 않는다.",
+              "name": "달빛 기사의 칭송"
+            },
+            "zh": {
+              "desc2": "能量自动回复+20%。",
+              "desc4": "装备者为[支援]角色时，发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>会使全队角色造成的伤害提升18%，持续25秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。",
+              "name": "月光骑士颂"
+            }
+          }
+        },
+        "33500": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33500/data.json",
+              "sha256": "dd58eadfdb3c81d7658573d0a89c417b2c3e6a86acc6297add8c27931445b29b"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33500/details.en.json",
+                "sha256": "a0cc5be0e02ce26f8703cfdf203cc8a3942b7d851a2567d662af04d722eacb81"
+              },
+              "zh": {
+                "path": "drive-discs/33500/details.zh.json",
+                "sha256": "ffe51fed8fe1f2ad695ba75b330064ee5bdc5656e9582a4865a897c29716daca"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#F0D12B>Physical DMG</color> +10%",
+              "desc4": "When the equipper is within any <color=#FFFFFF>Ether Veil</color>, their CRIT Rate increases by 10%. After leaving the <color=#FFFFFF>Ether Veil</color>, this buff remains for 15s. If the equipper is an <color=#FFFFFF>Attack</color> character, activating an <color=#FFFFFF>Ether Veil</color> or extending an <color=#FFFFFF>Ether Veil</color>'s duration increases their CRIT Rate by 10% and ATK by 10% for 30s. Repeated triggers reset the duration.",
+              "name": "White Water Ballad"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWhiteWaterBallad.png",
+            "ja": {
+              "desc2": "<color=#F0D12B>物理属性ダメージ</color>+10%。",
+              "desc4": "装備者が任意の<color=#FFFFFF>「エーテルベール」</color>効果を受けている時、自身の会心率+10%。<color=#FFFFFF>「エーテルベール」</color>終了後でも、この効果は15秒継続する。装備者が<color=#FFFFFF>[強攻]</color>メンバーの場合、<color=#FFFFFF>「エーテルベール」</color>を展開、または<color=#FFFFFF>「エーテルベール」</color>の継続時間を延長した際、自身の会心率+10%、攻撃力+10%、継続時間30秒、重複して発動すると継続時間が更新される。",
+              "name": "純白の行歌"
+            },
+            "ko": {
+              "desc2": "<color=#F0D12B>물리 피해</color>+10%",
+              "desc4": "착용자가 임의의 <color=#FFFFFF>[에테르 장막]</color> 중에 있을 때 자신의 치명타 확률이 10% 증가하며, <color=#FFFFFF>[에테르 장막]</color>에서 벗어난 후에도 해당 버프는 유지된다. 지속 시간: 15초. 착용자가 <color=#FFFFFF>[강공]</color> 캐릭터일 경우, <color=#FFFFFF>[에테르 장막]</color>을 발동하거나 <color=#FFFFFF>[에테르 장막]</color>의 지속 시간 연장 시, 자신의 치명타 확률이 10% 증가하고 공격력이 10% 증가한다. 지속 시간: 30초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "물빛 노랫소리"
+            },
+            "zh": {
+              "desc2": "<color=#F0D12B>物理伤害</color>+10%。",
+              "desc4": "装备者处于任意<color=#FFFFFF>[以太帷幕]</color>中时，自身暴击率提高10%，离开<color=#FFFFFF>[以太帷幕]</color>后，该增益效果仍然保留，持续15秒；装备者为<color=#FFFFFF>[强攻]</color>角色时，开启<color=#FFFFFF>[以太帷幕]</color>或延长<color=#FFFFFF>[以太帷幕]</color>的持续时间会使自身暴击率提升10%和攻击力提升10%，持续30秒，重复触发时刷新持续时间。",
+              "name": "沧浪行歌"
+            }
+          }
+        },
+        "33600": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33600/data.json",
+              "sha256": "ad848e2f4a4ccc21cbe8657e415a3401e46bb3a5a0f8d7dce23f22f434acafeb"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33600/details.en.json",
+                "sha256": "290ee506dc5248ac1455bafb1c8378fe2847b955d31081a3f39fce8ae018abc4"
+              },
+              "zh": {
+                "path": "drive-discs/33600/details.zh.json",
+                "sha256": "6bf0a0e55dadadd48925a629b0df5d14d6c2256e915ffcaca9d46550ad3a4a47"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#FE437E>Ether DMG</color> +10%",
+              "desc4": "When the equipper's <color=#FFFFFF>Basic Attack</color> hits an enemy, their Anomaly Proficiency increases by 36, lasting 8s. Repeated triggers reset the duration. When any enemy on the field is Stunned, the equipper's DMG increases by 25% for 18s. Repeated triggers reset the duration.",
+              "name": "Shining Aria"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShiningAria.png",
+            "ja": {
+              "desc2": "<color=#FE437E>エーテル属性ダメージ</color>+10%。",
+              "desc4": "装備者の<color=#FFFFFF>『通常攻撃』</color>が敵に命中した時、自身の異常マスタリー+36Pt、継続時間8秒、重複して発動すると継続時間が更新される。フィールド上の敵がブレイク状態になった時、装備者の与ダメージ+25%、継続時間18秒、重複して発動すると継続時間が更新される。",
+              "name": "流光のアリア"
+            },
+            "ko": {
+              "desc2": "<color=#FE437E>에테르 피해</color>+10%",
+              "desc4": "착용자가 <color=#FFFFFF>[일반 공격]</color>으로 적 명중 시 자신의 이상 마스터리가 36pt 증가한다. 지속 시간: 8초, 중복 발동 시 지속 시간이 갱신된다. 전장 위 적이 그로기 상태에 진입할 시 착용자가 주는 피해가 25% 증가한다. 지속 시간: 18초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "빛의 아리아"
+            },
+            "zh": {
+              "desc2": "<color=#FE437E>以太伤害</color>+10%。",
+              "desc4": "装备者发动<color=#FFFFFF>[普通攻击]</color>命中敌人时，自身异常精通提升36点，持续8秒，重复触发时刷新持续时间；当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间。",
+              "name": "流光咏叹"
+            }
+          }
+        },
+        "33700": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33700/data.json",
+              "sha256": "5d991ef9f5d39371e0b8da95bb05496446cd4f2338ffaeb26d0613b93785e1f9"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33700/details.en.json",
+                "sha256": "f2f5dfdfa627f2ff2a04bff0ebde5f0ea5c361be2511bf715fead01b5a41e63b"
+              },
+              "zh": {
+                "path": "drive-discs/33700/details.zh.json",
+                "sha256": "98337e043729079c15b60b0dd08b6cebc6fd51d767d7c66bc10a02a6009ada30"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "HP +10%",
+              "desc4": "When the equipper is a Defense character: When the equipper launches an <color=#FFFFFF>EX Special Attack</color> or any squad member triggers a <color=#FFFFFF>Defensive Assist</color> or <color=#FFFFFF>Evasive Assist</color>, all squad members' DMG increases by 6%, stacking up to 3 times, lasting 25s. Stacks decay one at a time, and duration refreshes when gained or decayed. Passive effects of the same name do not stack.",
+              "name": "Bunny in Wonderland"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitBunnyinWonderland.png",
+            "ja": {
+              "desc2": "HP+10%",
+              "desc4": "[防護]メンバーが装備している場合、装備者が<color=#FFFFFF>『強化特殊スキル』</color>を発動、または任意のメンバーが<color=#FFFFFF>『パリィ支援』</color>、<color=#FFFFFF>『回避支援』</color>を発動した時、メンバー全員の与ダメージ+6%、最大3重まで重ね掛け可能、継続時間25秒。重数は1重ずつ減少し、獲得または減少時に継続時間が更新される。同じパッシブ効果は重ね掛け不可。",
+              "name": "雪うさぎワンダーランド"
+            },
+            "ko": {
+              "desc2": "HP+10%",
+              "desc4": "[방어] 캐릭터가 장착 시, 착용자가 <color=#FFFFFF>[강화 특수 스킬]</color>을 시전하거나 임의의 파티원이 <color=#FFFFFF>[패링 지원]</color>, <color=#FFFFFF>[회피 지원]</color> 시전 시, 파티 내 모든 캐릭터가 주는 피해가 6% 증가한다. 최대 중첩: 3스택, 지속 시간: 25초, 스택은 순차적으로 감소하고, 획득 혹은 감소 시 지속 시간이 갱신되며, 이름이 같은 패시브 효과끼리 중첩되지 않는다.",
+              "name": "이상한 나라의 눈토끼"
+            },
+            "zh": {
+              "desc2": "生命值+10%",
+              "desc4": "[防护]角色装备时：装备者发动<color=#FFFFFF>[强化特殊技]</color>或队伍中任意队友发动<color=#FFFFFF>[招架支援]</color>、<color=#FFFFFF>[回避支援]</color>时，全队角色造成伤害提升6%，最多叠加3层，持续25秒，层数逐层衰减，获得或者衰减时刷新持续时间，同名被动效果之间不可叠加。",
+              "name": "雪兔梦游仙境 "
+            }
+          }
+        },
+        "33800": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33800/data.json",
+              "sha256": "fa764e7fa7de7c246d716c2f17d7e17e61a00e1adb619e5b330e094fec853fff"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33800/details.en.json",
+                "sha256": "2c4d635af60e09ca4c48cb8ce5dcf2974d15d5b159d8a294423e461383159728"
+              },
+              "zh": {
+                "path": "drive-discs/33800/details.zh.json",
+                "sha256": "4ed4eb3261db0ecbbd0938a1601043a732535de7455323bc97499b353b813bba"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#98EFF0>Ice DMG</color> +10%.",
+              "desc4": "When the equipper triggers <color=#FFFFFF>Abloom</color>, their Anomaly Proficiency increases by 48 for 30s; repeated triggers reset the duration. When the equipper triggers a <color=#FFFFFF>Freeze</color> effect, their All-Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG increase by 16% for 30s; repeated triggers reset the duration.",
+              "name": "Notes From the Chained"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitNotesFromtheChained.png",
+            "ja": {
+              "desc2": "<color=#98EFF0>氷属性ダメージ</color>+10%。",
+              "desc4": "装備者が<color=#FFFFFF>「狂咲」</color>を発動させた時、装備者の異常マスタリー+48Pt、継続時間30秒、重複して発動すると継続時間が更新される。装備者が<color=#FFFFFF>「凍結」</color>効果を発動させた時、装備者が与える全属性状態異常ダメージと<color=#FFFFFF>「混沌」</color>ダメージ+16%、継続時間30秒、重複して発動すると継続時間が更新される。",
+              "name": "獄中の手記"
+            },
+            "ko": {
+              "desc2": "<color=#98EFF0>얼음 속성 피해</color>+10%",
+              "desc4": "착용자가 <color=#FFFFFF>[난개]</color> 발동 시, 착용자의 이상 마스터리가 48pt 증가한다. 지속 시간: 30초, 중복 발동 시 지속 시간이 갱신된다. 착용자가 <color=#FFFFFF>[빙결]</color> 효과 발동 시, 착용자가 주는 모든 속성 이상 피해, <color=#FFFFFF>[혼돈]</color> 피해가 16% 증가한다. 지속 시간: 30초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "수감자 수기"
+            },
+            "zh": {
+              "desc2": "<color=#98EFF0>冰属性伤害</color>+10%。",
+              "desc4": "装备者触发<color=#FFFFFF>[异放]</color>时，装备者异常精通提升48点，持续30秒；重复触发时刷新持续时间；装备者触发<color=#FFFFFF>[冻结]</color>效果时，装备者造成的所有属性异常伤害、<color=#FFFFFF>[紊乱]</color>伤害提升16%，持续30秒，重复触发时刷新持续时间。",
+              "name": "囚徒手记"
+            }
+          }
+        },
+        "33900": {
+          "files": {
+            "data": {
+              "path": "drive-discs/33900/data.json",
+              "sha256": "ff34dc859e04d6a1b0383d202b3f814980400dcc47efc65cbe4f6d73dd9739e7"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/33900/details.en.json",
+                "sha256": "d43c9399a43b2aa348787805922ea975b050f007c7ba6c2c0e7ce53258f08974"
+              },
+              "zh": {
+                "path": "drive-discs/33900/details.zh.json",
+                "sha256": "ddbf73d457689d2fa03fa2570bce429669cfcda7c65b46e9e511d697c6caf2ed"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#A6C5FD>Wind DMG</color> +10%.",
+              "desc4": "When the equipper uses an <color=#FFFFFF>EX Special Attack</color>, their Anomaly Proficiency increases by 25, stacking up to 2 times, and lasting 40s; repeated triggers reset the duration. When the equipper triggers <color=#A6C5FD>Windswept</color>, their DMG increases by 18% for 40s. Repeated triggers reset the duration.",
+              "name": "Wuthering Salon"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWutheringSalon.png",
+            "ja": {
+              "desc2": "<color=#A6C5FD>風属性ダメージ</color>+10%。",
+              "desc4": "装備者が<color=#FFFFFF>『強化特殊スキル』</color>を発動した時、装備者の異常マスタリー+25Pt、最大2重まで重ね掛け可能、継続時間40秒、重複して発動すると継続時間が更新される。装備者が<color=#A6C5FD>「風化」</color>効果を発動させた時、装備者の与ダメージ+18%、継続時間40秒、重複して発動すると継続時間が更新される。",
+              "name": "風鳴りのサロン"
+            },
+            "ko": {
+              "desc2": "<color=#A6C5FD>바람 속성 피해</color>+10%",
+              "desc4": "착용자가 <color=#FFFFFF>[강화 특수 스킬]</color> 시전 시, 착용자의 이상 마스터리가 25pt 증가한다. 최대 중첩: 2스택, 지속 시간: 40초, 중복 발동 시 지속 시간이 갱신된다. 착용자가 <color=#A6C5FD>[풍화]</color> 효과 발동 후, 착용자가 주는 피해가 18% 증가한다. 지속 시간: 40초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "울부짖는 살롱"
+            },
+            "zh": {
+              "desc2": "<color=#A6C5FD>风属性伤害</color>+10%。",
+              "desc4": "装备者发动<color=#FFFFFF>[强化特殊技]</color>时，装备者异常精通提升25点，最多叠加2层，持续40秒，重复触发时刷新持续时间；装备者触发<color=#A6C5FD>[风化]</color>效果后，装备者造成的伤害提升18%，持续40秒，重复触发时刷新持续时间。",
+              "name": "呼啸沙龙"
+            }
+          }
+        },
+        "34000": {
+          "files": {
+            "data": {
+              "path": "drive-discs/34000/data.json",
+              "sha256": "65af3c044ee8a15c9b8f05687e12d91b96b6c244118514969a36a5ecee121126"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/34000/details.en.json",
+                "sha256": "131d61957cd84fcb595285500e1c7d1f3ac42cff97148c945d7afe33924638ce"
+              },
+              "zh": {
+                "path": "drive-discs/34000/details.zh.json",
+                "sha256": "53de190f6d2a878dd17bc87d9b2ecd9fac9aef641cbe8eabadf4dcc5c2ceadd6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "<color=#FE437E>Ether DMG</color> +10%.",
+              "desc4": "When the equipper is an <color=#FE437E>Ether</color> attribute Agent, their CRIT DMG increases by 30%. When the equipper uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color>, their ATK increases by 10% for 30s. Repeated triggers reset the duration.",
+              "name": "The Sky Ablaze"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitTheSkyAblaze.png",
+            "ja": {
+              "desc2": "<color=#FE437E>エーテル属性ダメージ</color>+10%。",
+              "desc4": "<color=#FE437E>エーテル属性</color>エージェントが装備した時、会心ダメージ+30%。装備者が<color=#FFFFFF>『強化特殊スキル』</color>または<color=#FFFFFF>『終結スキル』</color>を発動した時、自身の攻撃力+10%、継続時間30秒。重複して発動すると継続時間が更新される。",
+              "name": "夜明けの紀行"
+            },
+            "ko": {
+              "desc2": "<color=#FE437E>에테르 피해</color>+10%",
+              "desc4": "착용자가 <color=#FE437E>에테르 속성</color> 에이전트일 때, 치명타 피해가 30% 증가한다. 착용자가 <color=#FFFFFF>[강화 특수 스킬]</color> 혹은 <color=#FFFFFF>[궁극기]</color> 시전 시, 착용자의 공격력이 10% 증가한다. 지속 시간: 30초, 중복 발동 시 지속 시간이 갱신된다.",
+              "name": "새벽녘 여행기"
+            },
+            "zh": {
+              "desc2": "<color=#FE437E>以太伤害</color>+10%。",
+              "desc4": "装备者为<color=#FE437E>以太属性</color>代理人时，暴击伤害提升30%；装备者发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>时，装备者的攻击力提升10%，持续30秒，重复触发时刷新持续时间。",
+              "name": "拂晓行纪"
+            }
+          }
+        },
+        "34100": {
+          "files": {
+            "data": {
+              "path": "drive-discs/34100/data.json",
+              "sha256": "a63518146feea822ee93b9c389c7136cb11eb881c85234aa814e2a4ad640a98e"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/34100/details.en.json",
+                "sha256": "e36bb1093fd418a343c976d999c27089c7d8e3f836c6c300ea90ff0532b2b96f"
+              },
+              "zh": {
+                "path": "drive-discs/34100/details.zh.json",
+                "sha256": "c6b4c69be2532f5db81fe8156ccd270952115b0a46c06e9b99f419ba1958ac70"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "Anomaly Proficiency +30",
+              "desc4": "When the equipper enters the battlefield or is switched in as the active character, they gain the following buff: Anomaly Proficiency increases by 50. If the equipper is a <color=#FFA9DD>Lumiflux</color> character, Attribute Anomaly DMG increases by 15%, lasting 15s.\nThis buff remains active while the equipper is off-field.",
+              "name": "Feathered Fate"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitFeatheredFate.png",
+            "ja": {
+              "desc2": "異常マスタリー+30Pt。",
+              "desc4": "装備者がフィールドに入場した時、または交代で操作中のメンバーになった時、以下のバフ効果を獲得する。\n異常マスタリー+50Pt。装備者が<color=#FFA9DD>流明属性</color>の場合、与える状態異常ダメージ+15%、継続時間15秒。\n装備者が操作中のメンバーでない時、このバフ効果は常時適用される。",
+              "name": "契る翼の運命"
+            },
+            "ko": {
+              "desc2": "이상 마스터리+30pt",
+              "desc4": "착용자가 전장에 진입하거나, 현재 조작 중인 캐릭터로 교체될 시, 버프 효과를 획득한다: 이상 마스터리가 50pt 증가하고, 착용자가 <color=#FFA9DD>루멘 속성</color>일 경우, 주는 속성 이상 피해가 15% 증가한다. 지속 시간: 15초, 착용자가 조작 중인 캐릭터가 아닐 때, 해당 버프 효과를 항시 보유한다.",
+              "name": "깃털에 얽힌 맹세"
+            },
+            "zh": {
+              "desc2": "异常精通+30点。",
+              "desc4": "装备者进入战场时，或被切换为当前操作中角色时，获得增益效果：异常精通提升50点，若装备者为<color=#FFA9DD>流明属性</color>，造成的属性异常伤害提升15%，持续15秒；\n当装备者为非操作中角色时，则始终持有该增益效果。",
+              "name": "谶羽之誓"
+            }
+          }
+        },
+        "34200": {
+          "files": {
+            "data": {
+              "path": "drive-discs/34200/data.json",
+              "sha256": "ccc6aab56a1179d9cc1867d5ca6e4ea1b9f83f3ea76be9f39de64564b3155fd4"
+            },
+            "details": {
+              "en": {
+                "path": "drive-discs/34200/details.en.json",
+                "sha256": "a2b69082bcef18f4193717825c88c88b744e58b6eba0c8baa4635a47aed9cc2b"
+              },
+              "zh": {
+                "path": "drive-discs/34200/details.zh.json",
+                "sha256": "4fe9b248e0dcde14ac8a0a9cbc0b435a4425655fc86d9c9651145a54ac9b09ed"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": {
+              "desc2": "DEF +16%",
+              "desc4": "The equipper's DMG increases by 15%. When the equipper's initial DEF is at least 1,000/1,800, CRIT Rate increases by 8/16%.",
+              "name": "Thorned Rose"
+            },
+            "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitThornedRose.png",
+            "ja": {
+              "desc2": "防御力+16%。",
+              "desc4": "装備者の与ダメージ+15%。装備者の開幕防御力が1000Pt/1800Pt以上の時、会心率+8%/16%。",
+              "name": "棘まとう薔薇"
+            },
+            "ko": {
+              "desc2": "방어력+16%",
+              "desc4": "착용자가 주는 피해가 15% 증가한다. 착용자의 초기 방어력이 1000/1800pt 이상일 때, 치명타 확률이 8/16% 증가한다.",
+              "name": "가시 돋친 장미"
+            },
+            "zh": {
+              "desc2": "防御力+16%。",
+              "desc4": "装备者造成的伤害提升15%，装备者初始防御力大于等于1000/1800点时，暴击率提升8/16%",
+              "name": "荆棘玫瑰"
+            }
+          }
+        }
+      },
+      "rulesVersion": "nanoka-drive-disc-reference/1"
     }
   },
   "format": "fairy-nanoka-integrated/v3",

@@ -4,6 +4,9 @@
 
 **状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
+已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）与 `drive-discs`（规则
+`nanoka-drive-disc-reference/1`）。驱动盘单实体规则与实现状态见
+[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -19,8 +22,9 @@ definitions：经人工确认的计算语义
 core：计算
 ```
 
-本规范只定义第一阶段代理人资料，来源为 [Nanoka Agents](../nanoka/agents.md)，上游名称 `character`
-在整合目录中称为 `agents`。`definitions` 的内部模型由后续人工讨论决定；data 与 core 保持互不依赖。
+本规范定义第一阶段代理人资料，来源为 [Nanoka Agents](../nanoka/agents.md)，上游名称 `character`
+在整合目录中称为 `agents`；驱动盘套装的独立规则见[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
+`definitions` 的内部模型由后续人工讨论决定；data 与 core 保持互不依赖。
 
 ## 1. 完整导出的边界
 
@@ -405,6 +409,9 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 和原子写记录使用的 `state.next`。所有材料均不属于可消费制品。正常结束只保留一份当前数据与最新维护报告。
 
 - 目标不存在时首次创建；显式 `generate:integrated` 也允许对已有完整合法 JSON 建立本机记录。空目录、符号链接、外来文件和损坏状态仍拒绝，不递归重建。
+- 初始化要求当前 v3 制品满足当前登记表的全部已接入类别：登记表演进后，缺类别的历史完整制品（例如仅含
+  `agents` 的旧 v3 数据集）不再满足初始化条件，生成与迁移都明确拒绝并保留现场，不会自动接管或补空集合；
+  删除旧制品后由生成入口从 raw 完整重建双类别数据集。
 - 生成入口取得同一永久锁后，只有 `state.json` 不存在且控制目录至多含锁文件、journal 与初始 `state.next` 时，才允许初始化已有制品。
   复用完整验证器检查当前 v3 格式、支持的当前规则 v4、全部已接入类别、当前完整语言配置、成员、来源清单、精确文件集合及实际字节摘要；
   以已验证索引的实际字节摘要、索引格式、各类别规则版本和验证配置建立 `idle(current)`，再进入既有恢复及候选更新流程。
@@ -597,7 +604,7 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 
 ## 9. 包内实现与验收证据
 
-### 当前单实体实现
+### 代理人单实体实现
 
 [纯整合函数](../../../packages/data/src/integration/integrate-agent.ts) `integrateAgent` 接受
 `{ entityId, sourceRecord, details, detailLocales }`：实体 ID 明确给出，独立索引记录和各语言详情以 `unknown`
@@ -637,6 +644,57 @@ pnpm --filter @randomplay/data typecheck
 pnpm --filter @randomplay/data test
 pnpm --filter @randomplay/data verify:pack
 ```
+
+### 驱动盘单实体实现规则 `nanoka-drive-disc-reference/1`
+
+来源说明见 [Nanoka Drive Discs](../nanoka/equipment.md)：上游实体 `equipment`，整合类别登记名为 `drive-discs`，
+类型与函数统一使用 `DriveDisc` 命名。每条记录表示一个驱动盘套装；单件槽位、主副词条、强化面板、效果计算及
+core 映射不属于本规则。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-drive-disc.ts) `integrateDriveDisc` 接受与
+`integrateAgent` 相同的输入形态 `{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[驱动盘类型](../../../packages/data/src/integration/drive-disc-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[驱动盘结构登记](../../../packages/data/src/integration/drive-disc-schema.ts)。
+
+字段归属：
+
+| 来源字段                          | `data.json`            | `details.{locale}.json` |
+| --------------------------------- | ---------------------- | ----------------------- |
+| `id`                              | 数值套装 ID            | 同值身份副本            |
+| `icon`、`icon2`                   | 原值，两个字段分别保存 | 无重复载荷              |
+| `name`、`desc2`、`desc4`、`story` | 无                     | 当前语言原文            |
+| 派生 `locale`                     | 无                     | 输入语言标识            |
+
+`desc2`、`desc4`、`icon2` 继续使用来源用词：不解析效果、不推断槽位对应关系或新的业务含义。索引摘要与语言详情
+是两个独立来源：摘要完整保存在 `sourceRecord`，不与详情去重，同名字段不要求相等，也不互相回退。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`name`、`desc2`、`desc4`、`story`、`icon`、`icon2`；除 `id` 外均为字符串。
+   `id` 必须为安全整数，其规范十进制形式与 `entityId` 一致。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. `icon` 与 `icon2` 是必需的公共字符串：每个语言都必须提供，跨语言完整值必须一致，冲突即失败；即使
+   两个字段取值相等也分别保留。
+5. 来源摘要必须提供字符串 `icon` 与 `zh`、`en` 语言对象的 `name`、`desc2`、`desc4`；`ja`、`ko` 存在时校验
+   对应结构，缺失时不补造；摘要与详情的同名字段不要求相等。
+6. 未登记字段原样保留：详情未知字段留在对应语言，摘要未知字段留在 `sourceRecord`，都进入维护诊断；
+   不因跨语言相等而自动共享。来源字段 `locale` 与派生 `locale` 重名时失败，不能覆盖。
+7. 空字符串、零、`null`、空数组、空对象、数组顺序和富文本按来源保留；已登记字段仍须满足其明确类型。
+   非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `DriveDiscIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+   字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
+
+实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/drive-disc-integration.test.ts)、
+[独立测试侧还原](../../../packages/data/test/fixtures/drive-disc-roundtrip.ts)、
+[合成输入](../../../packages/data/test/fixtures/drive-disc-source.ts)和
+[类型正反例](../../../packages/data/test/drive-disc-types.typecheck.ts)覆盖，测试不读取真实 raw。
+**生产类别已接入**：`drive-discs`（来源实体 `equipment`）登记到已接入类别，生产快照与 JSON 子路径导出已包含
+驱动盘；成员文件身份检查在类别登记表中显式实现。公开的驱动盘类型、名称 catalog 与读取 API 已由包根入口
+按[消费契约](consumption.md)提供。
 
 ### 离线全量构建的共用能力
 
@@ -735,9 +793,11 @@ fairy-integrated-snapshot-<独占后缀>/
 ### 多实体完整制品的内部生成、验证与转换
 
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
-当前只有 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`），其纯整合复用既有 `integrateAgent`，
-成员文件身份检查沿用第 7.1 节的代理人规则。登记校验要求类别名唯一且可作为目录名、来源实体不被重复使用、
-规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，验证与历史复验只要求静态契约。
+当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）与 `drive-discs`（来源实体
+`equipment`，规则 `nanoka-drive-disc-reference/1`），代理人复用既有 `integrateAgent`、驱动盘复用既有
+`integrateDriveDisc`，成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
+可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
+验证与历史复验只要求静态契约。
 [索引类型](../../../packages/data/src/integration/snapshot-types.ts)由包根入口导出，是公开读取的唯一索引类型；
 `IntegratedSnapshotIndex` 默认要求完整语言引用，`HistoricalIntegratedSnapshotIndex` 复用同一 JSON 结构并把引用表达为可能缺失，
 只用于历史复验。
@@ -772,7 +832,8 @@ fairy-integrated-snapshot-<独占后缀>/
 更新差异由[差异引擎](../../../packages/data/scripts/nanoka-integration/snapshot-diff.ts)（纯 JSON 值比较）和
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
-`generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次只有 `agents` 一个真实类别。
+`generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents` 与
+`drive-discs`。
 从仓库根目录执行：
 
 ```bash
@@ -819,6 +880,9 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 | 旧协议下需要先恢复的未完成事务                           | `RECOVERY_REQUIRED`：先运行恢复按原协议回到稳定状态，再迁移 |
 | 已经迁移完成的 v3 数据集                                 | `unchanged`，只复验，不写记录、不改数据                     |
 | 损坏、归属不符或不受支持的输入                           | 明确拒绝并保留现场                                          |
+
+「已经迁移完成的 v3 数据集」指已有稳定管理记录的数据集；无本机记录的静态 v3 制品走初始化登记，
+同样要求当前登记表的全部已接入类别与当前完整语言配置，缺类别的旧制品明确拒绝，不冒充 `unchanged`。
 
 对无本机管理记录的静态 v2 制品，迁移在创建任何工作材料（复制、转换、候选）之前先登记本次迁移的归属与基线记录：
 记录指向已验证的 v2 数据集本身，因此未提交时数据仍保持原样。该登记本身也可中断——`state.next` 允许写入途中终止，
@@ -869,6 +933,39 @@ v2 旧基线与新增类别、缺失或损坏新版输入的明确失败、报�
 以下记录按时间顺序保留当时的验证结果；早于「多实体 v3 切换」的记录描述当时仍为 v2 外壳的生成、管理、
 发布与消费链路，其命令名与索引字段已被第 7.1、8.1、9 节的当前契约取代，不作为现行用法。
 记录中的测试数量是当时基线在当时的隔离环境中的快照，不构成对当前代码的保证；当前覆盖以第 9 节上文与常规检查为准。
+
+### 驱动盘生产类别接入验收
+
+2026-09-17，基线 `2aa5bead`，实现 `drive-discs`（来源实体 `equipment`，规则 `nanoka-drive-disc-reference/1`）
+登记到生产类别登记表，`snapshot-build` 错误包装扩展到 `SourceIntegrationError` 基类，package.json 增加驱动盘
+data/zh/en JSON 子路径，并提交双类别真实快照。
+
+真实 3.1 验收（本机 macOS 26.6.2 arm64、Node 24.18.0，raw 为只读输入）：
+
+- 登记前先用 agents-only 登记执行 `generate:integrated`：`unchanged`，175 个文件字节、inode、纳秒 mtime 与
+  登记前完全一致，建立合法管理记录；118 项代理人来源输入与既有索引记录的摘要一致。
+- 改用双类别登记后同一命令：`committed`；agents 58 名成员、174 个实体文件字节、inode、纳秒 mtime 不变，
+  仅 index.json 改写；drive-discs 新增 30 名成员、90 个文件，全制品 265 个文件。
+- 独立核对脚本（不导入生产代码）核对 1,584 项：索引外壳与类别块、全部输入资源摘要、逐成员 `sourceRecord`
+  与 raw 索引记录 JSON 值相等、data/zh/en 路径与实际字节摘要、驱动盘 `id`/`locale`/`name`/`desc2`/`desc4`/
+  `story` 保留、`icon`/`icon2` 跨语言一致并提取到 data、未知字段保留、文件集合与索引精确一致，全部通过。
+- 重复执行同一命令：`unchanged`，复用 264 个实体文件、改变 0 个；实体文件 sha256、inode、纳秒 mtime 不变
+  （硬链接复用使 ctime 变化，不构成改写承诺范围）。整个 raw 的 2,478 个文件前后逐字节一致。
+- 合成验收（`test/agent-current.test.ts`、`test/update-report.test.ts` 等，不读取真实 raw）覆盖：从已有受管理
+  agents-only 基线新增 drive-discs、只改一类时另一类完整复用、成员新增/修改/合法移除、缺失输入不得解释为删除、
+  来源与规则变化归因、重复更新明确报告已检查无变化、v2 显式迁移不新增类别（转换候选按 agents 契约复验）、
+  历史语言子集复验与恢复、提交前失败保留旧快照等。
+- `pnpm check`（lint、格式、类型、data 727 项与 core 1,423 项测试、打包解包离线安装、按包名消费
+  loadIndex 与驱动盘 data/zh/en JSON 子路径）、真实 Chromium 的 Vite 开发/生产消费、`verify:nanoka:current`、
+  `verify:nanoka:snapshot` 与幂等恢复全部通过；`git diff --check` 无输出。
+- 独立 review 复核完整 diff 并在本机复跑测试：登记与身份检查、错误包装、迁移复验、fixture 与文档未发现缺陷；
+  据其修订两点——登记表演进后无管理记录的 agents-only v3 制品被生成/迁移明确拒绝（新增合成回归钉住，
+  并在 8.1 节写明边界），合成驱动盘成员 ID 收敛到 `syntheticDriveDiscIds` 单一来源；
+  `rewriteAsLegacyV2Artifact` 增加多类别输入拒绝护栏。
+- 打包包含 265 个 JSON，而 Vite 模块图只含代理人懒加载表引用的 175 个（index.json + 58×3）：
+  驱动盘 JSON 已随包分发但尚无读取 API，两个口径不再相等是本版的预期状态。
+- 未执行真实相邻版本推进（历史 3.0 缓存缺少 `skill_priority`，不能作为当前规则完整输入）；不承诺
+  nlink、ctime 或目录 inode 不变。来源分发复核记录见[共享来源规范](../nanoka/source.md#分发复核记录)。
 
 ### 跨层最终验收
 

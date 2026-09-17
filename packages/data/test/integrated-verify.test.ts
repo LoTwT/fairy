@@ -425,11 +425,12 @@ describe("复验 v3 完整制品", () => {
     await edit(join(build.artifactDirectory, "index.json"), (index) => {
       index.entities.agents.rulesVersion = historicalRulesVersion
     })
-    // 默认登记表要求当前规则版本：旧快照不能作为新候选。
+    // 旧快照不能作为新候选：按其原有 agents-only 契约（当前规则版本）复验时明确拒绝旧规则版本。
     await expect(
       verifyIntegratedSnapshot({
         artifactDirectory: build.artifactDirectory,
         policy: options.policy,
+        entities: [nanokaAgentsSnapshotEntity],
       }),
     ).rejects.toThrow("规则版本错误")
     expect(

@@ -13,11 +13,11 @@ import type {
 } from "../../src/integration/snapshot-types.ts"
 import { integratedSnapshotFormat } from "../../src/integration/snapshot-types.ts"
 import {
-  AgentIntegrationError,
   at,
   fail,
   isObject,
   sortedIds,
+  SourceIntegrationError,
 } from "../../src/integration/source-json.ts"
 import type { SourceLocation } from "../../src/integration/source-json.ts"
 import { serializeJson } from "../../src/integration/serialize-json.ts"
@@ -325,7 +325,8 @@ export async function buildIntegratedSnapshot(
             detailLocales,
           })
         } catch (error) {
-          if (!(error instanceof AgentIntegrationError)) throw error
+          // 各来源类别都继承 SourceIntegrationError；包装只补充资源名，保留实体、语言与 Pointer。
+          if (!(error instanceof SourceIntegrationError)) throw error
           const resource =
             error.location.locale === "index"
               ? indexResource

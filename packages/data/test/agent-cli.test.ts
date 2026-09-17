@@ -14,6 +14,8 @@ import { dirname, join, relative, resolve } from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
 import { agentInput } from "./fixtures/agent-source.ts"
+import { driveDiscInput } from "./fixtures/drive-disc-source.ts"
+import { syntheticDriveDiscIds } from "./fixtures/synthetic-dataset.ts"
 
 const packageDirectory = fileURLToPath(new URL("../", import.meta.url))
 const repositoryDirectory = resolve(packageDirectory, "../..")
@@ -53,6 +55,20 @@ async function fixture(parent = tmpdir(), ids = ["2", "10"]) {
     for (const locale of input.detailLocales)
       await writeJson(join(versionRoot, locale, "character", `${id}.json`), {
         ...input.details[locale],
+        id: Number(id),
+      })
+  // 默认登记表包含 drive-discs：equipment 输入使用真实驱动盘结构的合成成员。
+  const driveDisc = driveDiscInput()
+  await writeJson(
+    join(versionRoot, "equipment.json"),
+    Object.fromEntries(
+      syntheticDriveDiscIds.map((id) => [id, driveDisc.sourceRecord]),
+    ),
+  )
+  for (const id of syntheticDriveDiscIds)
+    for (const locale of driveDisc.detailLocales)
+      await writeJson(join(versionRoot, locale, "equipment", `${id}.json`), {
+        ...driveDisc.details[locale],
         id: Number(id),
       })
   const preload = join(root, "offline guard.mjs")
@@ -283,9 +299,14 @@ describe("offline agent package commands", () => {
       const index = JSON.parse(
         await readFile(join(receipt.artifactDirectory, "index.json"), "utf8"),
       )
+      const driveDiscIds = syntheticDriveDiscIds
       expect(index.format).toBe("fairy-nanoka-integrated/v3")
       expect(index.entities.agents.memberIds).toEqual(ids)
-      expect(receipt.memberCounts).toEqual({ agents: ids.length })
+      expect(index.entities["drive-discs"].memberIds).toEqual(driveDiscIds)
+      expect(receipt.memberCounts).toEqual({
+        "agents": ids.length,
+        "drive-discs": driveDiscIds.length,
+      })
       expect(receipt.format).toBe("fairy-nanoka-integrated/v3")
       // 回执给出可机器解析的按类别摘要与完整报告位置；详细差异只在制品外报告里。
       expect(receipt).toMatchObject({
@@ -297,7 +318,7 @@ describe("offline agent package commands", () => {
         rulesChanged: false,
         reviewRequired: false,
         categories: {
-          agents: {
+          "agents": {
             checked: true,
             presence: "added",
             result: "changed",
@@ -307,13 +328,34 @@ describe("offline agent package commands", () => {
             rulesVersionChanged: false,
             reviewRequired: false,
           },
+          "drive-discs": {
+            checked: true,
+            presence: "added",
+            result: "changed",
+            members: {
+              before: 0,
+              after: driveDiscIds.length,
+              added: driveDiscIds.length,
+            },
+            files: {
+              after: driveDiscIds.length * 3,
+              added: driveDiscIds.length * 3,
+            },
+            sourceRecordsChanged: 0,
+            rulesVersionChanged: false,
+            reviewRequired: false,
+          },
         },
       })
       expect(index.entities.agents.detailLocales).toEqual(
         agentInput().detailLocales,
       )
+      expect(index.entities["drive-discs"].detailLocales).toEqual(
+        agentInput().detailLocales,
+      )
       expect(receipt.inputFileCount).toBe(
-        2 + ids.length * index.entities.agents.detailLocales.length,
+        // manifest、两类索引与全部成员详情；跨类别累计。
+        3 + ids.length * 2 + driveDiscIds.length * 2,
       )
       expect(receipt.outputFileCount).toBe(
         Object.keys(await directoryBytes(receipt.artifactDirectory)).length,
@@ -321,7 +363,10 @@ describe("offline agent package commands", () => {
       const maintenance = JSON.parse(
         await readFile(receipt.maintenanceReportPath, "utf8"),
       )
-      expect(Object.keys(maintenance.categories)).toEqual(["agents"])
+      expect(Object.keys(maintenance.categories)).toEqual([
+        "agents",
+        "drive-discs",
+      ])
       expect(
         maintenance.categories.agents.map(
           (entry: { memberId: string }) => entry.memberId,
@@ -330,6 +375,14 @@ describe("offline agent package commands", () => {
       for (const entry of maintenance.categories.agents) {
         expect(entry.maintenance.diagnostics).toEqual([])
         expect(entry.maintenance.codeNameDifferences).toEqual([])
+      }
+      expect(
+        maintenance.categories["drive-discs"].map(
+          (entry: { memberId: string }) => entry.memberId,
+        ),
+      ).toEqual(driveDiscIds)
+      for (const entry of maintenance.categories["drive-discs"]) {
+        expect(entry.maintenance.diagnostics).toEqual([])
       }
       const verified = success(
         runCommand(
@@ -343,8 +396,12 @@ describe("offline agent package commands", () => {
         artifactDirectory: receipt.artifactDirectory,
         format: receipt.format,
         categories: {
-          agents: {
+          "agents": {
             memberCount: receipt.memberCounts.agents,
+            detailLocales: agentInput().detailLocales,
+          },
+          "drive-discs": {
+            memberCount: receipt.memberCounts["drive-discs"],
             detailLocales: agentInput().detailLocales,
           },
         },

@@ -6,12 +6,27 @@ import {
   sha256,
 } from "../../scripts/nanoka-integration/files.ts"
 import { buildIntegratedSnapshot } from "../../scripts/nanoka-integration/snapshot-build.ts"
+import { nanokaAgentsSnapshotEntity } from "../../scripts/nanoka-integration/snapshot-entities.ts"
 import { loadSourcePolicy } from "../../scripts/nanoka/policy.ts"
 import { agentInput } from "./agent-source.ts"
-import { rewriteAsLegacyV2Artifact } from "./synthetic-dataset.ts"
+import {
+  driveDiscInput,
+  syntheticDriveDiscEnglishName,
+} from "./drive-disc-source.ts"
+import {
+  rewriteAsLegacyV2Artifact,
+  syntheticDriveDiscIds,
+} from "./synthetic-dataset.ts"
 
-/** 合成双语制品；不同英文展示名、codeName 和索引名称用于捕获错误取值来源。 */
-export async function publicationFixture(root: string) {
+/**
+ * 合成双语制品；不同英文展示名、codeName 和索引名称用于捕获错误取值来源。
+ * 默认按生产登记表构建（含真实结构的合成驱动盘）；v2 现场必须显式要求 agents-only 制品。
+ */
+export async function publicationFixture(
+  root: string,
+  options: { driveDiscs?: boolean } = {},
+) {
+  const driveDiscs = options.driveDiscs ?? true
   const rawRoot = join(root, "raw")
   const version = "synthetic-publication"
   async function write(path: string, value: unknown) {
@@ -40,10 +55,32 @@ export async function publicationFixture(root: string) {
       })
     }
   }
+  if (driveDiscs) {
+    // 默认登记表包含 drive-discs 类别：equipment 输入使用真实驱动盘结构的合成成员。
+    // 英文详情名称按成员唯一且与 sourceRecord.en.name 不同；发布目录生成依赖类内唯一。
+    const driveDisc = driveDiscInput()
+    await write(
+      "equipment.json",
+      Object.fromEntries(
+        syntheticDriveDiscIds.map((id) => [id, driveDisc.sourceRecord]),
+      ),
+    )
+    for (const id of syntheticDriveDiscIds)
+      for (const locale of driveDisc.detailLocales)
+        await write(`${locale}/equipment/${id}.json`, {
+          ...driveDisc.details[locale],
+          id: Number(id),
+          name:
+            locale === "en"
+              ? syntheticDriveDiscEnglishName(id)
+              : `示例驱动盘 ${id}`,
+        })
+  }
   const result = await buildIntegratedSnapshot({
     rawRoot,
     version,
     temporaryParent: root,
+    ...(driveDiscs ? {} : { entities: [nanokaAgentsSnapshotEntity] }),
   })
   return { ...result, rawRoot, version }
 }
@@ -70,8 +107,9 @@ export interface LegacyManagedPublicationFixture {
 export async function managedLegacyV2Fixture(
   root: string,
 ): Promise<LegacyManagedPublicationFixture> {
+  // v2 外壳只描述单一代理人制品：现场必须由合法 agents-only 制品改写而来。
   const { artifactDirectory, index, rawRoot, version } =
-    await publicationFixture(root)
+    await publicationFixture(root, { driveDiscs: false })
   const parent = await directoryRoot(root)
   const target = join(parent, "managed")
   await rename(artifactDirectory, target)
