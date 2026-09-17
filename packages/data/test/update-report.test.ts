@@ -159,6 +159,76 @@ async function rawByteTotal(rawRoot: string) {
   )
 }
 
+/** 制品文件集合去掉索引本身：报告只描述成员文件。 */
+function entityPaths(files: Record<string, unknown>) {
+  return Object.keys(files).filter((path) => path !== "index.json")
+}
+
+/**
+ * 指针处的实际值整理成报告使用的取值摘要；指针在两侧都不存在时返回 undefined，
+ * 因此报告「缺少对应一侧」的表达可以与真实字节直接比较。
+ */
+function summaryAt(value: unknown, pointer: string) {
+  let current: unknown = value
+  for (const raw of pointer ? pointer.slice(1).split("/") : []) {
+    const segment = raw.replaceAll("~1", "/").replaceAll("~0", "~")
+    if (Array.isArray(current)) {
+      if (!/^(0|[1-9]\d*)$/u.test(segment) || Number(segment) >= current.length)
+        return undefined
+      current = current[Number(segment)]
+      continue
+    }
+    if (current === null || typeof current !== "object") return undefined
+    if (!Object.hasOwn(current, segment)) return undefined
+    current = (current as Record<string, unknown>)[segment]
+  }
+  return summarizeValue(current)
+}
+
+/** 报告记录的取值形状：标量保留原值，容器只记录形状。 */
+function summarizeValue(value: unknown) {
+  if (value === null) return { kind: "null" as const }
+  if (Array.isArray(value))
+    return { kind: "array" as const, length: value.length }
+  if (typeof value === "object")
+    return { kind: "object" as const, size: Object.keys(value).length }
+  if (typeof value === "string") return { kind: "string" as const, value }
+  if (typeof value === "number") return { kind: "number" as const, value }
+  return { kind: "boolean" as const, value }
+}
+
+/** 逐文件事实只按 JSON 值判定：对象成员排列无关，数组按下标，不调用被测比较实现。 */
+function equalJsonText(left: Uint8Array, right: Uint8Array) {
+  return equalJsonValue(
+    JSON.parse(left.toString()),
+    JSON.parse(right.toString()),
+  )
+}
+
+function equalJsonValue(left: unknown, right: unknown): boolean {
+  if (left === right) return true
+  if (Array.isArray(left))
+    return (
+      Array.isArray(right) &&
+      left.length === right.length &&
+      left.every((item, index) => equalJsonValue(item, right[index]))
+    )
+  if (left === null || right === null) return false
+  if (typeof left !== "object" || typeof right !== "object") return false
+  const keys = Object.keys(left)
+  return (
+    keys.length === Object.keys(right).length &&
+    keys.every(
+      (key) =>
+        Object.hasOwn(right, key) &&
+        equalJsonValue(
+          (left as Record<string, unknown>)[key],
+          (right as Record<string, unknown>)[key],
+        ),
+    )
+  )
+}
+
 async function child(input: Fixture, extra: Record<string, unknown> = {}) {
   const path = join(input.root, `process-${crypto.randomUUID()}.json`)
   const { entities, ...serializable } = input
@@ -1550,6 +1620,296 @@ describe("current dataset update report", () => {
     expect(JSON.parse(await fs.readFile(entityPath, "utf8"))).toEqual(value)
   })
 
+  it("advances to a new source version and keeps the report true for the committed dataset", async () => {
+    const input = await fixture({ widgets: ["3", "7"] })
+    await generateCurrentDataset(input)
+    // 推进前的完整副本：报告与提交结果的对照只用这份独立字节，不重新调用比较实现。
+    const published = join(input.root, "dataset-before-advance")
+    await fs.cp(input.targetDirectory, published, { recursive: true })
+    const beforeAdvance = await fingerprints(input.targetDirectory)
+    // 下一版本：新增与移除成员、既有内容修改与数组顺序变化，另有成员完全不变。
+    await writeSyntheticRaw({
+      rawRoot: input.rawRoot,
+      version: "synthetic-2",
+      agentIds: ["2", "10", "30"],
+      widgetIds: ["3"],
+    })
+    await editJson(
+      join(input.rawRoot, "synthetic-2/zh/character/2.json"),
+      (value) => {
+        value.name = "changed"
+      },
+    )
+    await editJson(
+      join(input.rawRoot, "synthetic-2/equipment.json"),
+      (value) => {
+        value["3"].values = [2, 0, 1]
+      },
+    )
+    input.version = "synthetic-2"
+    const result = await updateCurrentDataset(input)
+    expect(result.outcome).toBe("committed")
+    const report = await updateReport(input)
+    expect(report.baseline).toEqual({
+      kind: "snapshot",
+      format: integratedSnapshotFormat,
+      sourceVersion: "synthetic-1",
+    })
+    expect(report.candidate).toEqual({
+      format: integratedSnapshotFormat,
+      sourceVersion: "synthetic-2",
+    })
+    expect(report.source.version).toEqual({
+      before: "synthetic-1",
+      after: "synthetic-2",
+      changed: true,
+    })
+    expect(report.changeCause.attributedTo).toBe("source")
+    // 回执摘要与报告来自同一次比较结果。
+    expect(result.reportVersion).toBe(report.reportVersion)
+    expect(result.result).toBe(report.result)
+    expect(result.sourceChanged).toBe(report.source.changed)
+    expect(result.rulesChanged).toBe(report.rules.changed)
+    expect(result.reviewRequired).toBe(
+      report.categories.some((entry) => entry.review.required),
+    )
+    for (const entry of report.categories)
+      expect(result.categories[entry.name]).toMatchObject({
+        checked: entry.checked,
+        presence: entry.presence,
+        result: entry.result,
+        members: {
+          before: entry.members.beforeCount,
+          after: entry.members.afterCount,
+          added: entry.members.added.length,
+          removed: entry.members.removed.length,
+          changed: entry.members.changed.length,
+          unchanged: entry.members.unchanged.length,
+        },
+        files: {
+          added: entry.files.added.length,
+          removed: entry.files.removed.length,
+          semanticChanged: entry.files.semanticChanged.length,
+          formatOnlyChanged: entry.files.formatOnlyChanged.length,
+          unchanged: entry.files.unchangedCount,
+        },
+        sourceRecordsChanged: entry.sourceRecords.changed.length,
+        rulesVersionChanged: entry.rulesVersion.changed,
+        reviewRequired: entry.review.required,
+      })
+    // 提交后的数据集与推进前副本：逐文件事实完全由两边字节重算。
+    const committed = await bytes(input.targetDirectory)
+    const previous = await bytes(published)
+    const committedIndex = JSON.parse(committed["index.json"]!.toString())
+    const previousIndex = JSON.parse(previous["index.json"]!.toString())
+    expect(report.categories.map((entry) => entry.checked)).toEqual([
+      true,
+      true,
+    ])
+    const agents = category(report, "agents")
+    const widgets = category(report, "widgets")
+    expect(agents.members).toMatchObject({
+      beforeCount: previousIndex.entities.agents.memberIds.length,
+      afterCount: committedIndex.entities.agents.memberIds.length,
+      added: ["30"],
+      removed: [],
+      changed: ["2"],
+      // 来源版本变化不改写字节相同的成员：未变化成员仍被明确列为 unchanged。
+      unchanged: ["10"],
+    })
+    expect(widgets.members).toMatchObject({
+      beforeCount: previousIndex.entities.widgets.memberIds.length,
+      afterCount: committedIndex.entities.widgets.memberIds.length,
+      added: [],
+      removed: ["7"],
+      changed: ["3"],
+      unchanged: [],
+    })
+    const previousPaths = new Set(entityPaths(previous))
+    const committedPaths = new Set(entityPaths(committed))
+    const sharedPaths = [...committedPaths].filter((path) =>
+      previousPaths.has(path),
+    )
+    const equalPaths = sharedPaths.filter((path) =>
+      committed[path]!.equals(previous[path]!),
+    )
+    const rewrittenPaths = sharedPaths.filter(
+      (path) => !committed[path]!.equals(previous[path]!),
+    )
+    expect(
+      report.categories.flatMap((entry) => entry.files.added).toSorted(),
+    ).toEqual(
+      [...committedPaths].filter((path) => !previousPaths.has(path)).toSorted(),
+    )
+    expect(
+      report.categories.flatMap((entry) => entry.files.removed).toSorted(),
+    ).toEqual(
+      [...previousPaths].filter((path) => !committedPaths.has(path)).toSorted(),
+    )
+    expect(
+      report.categories.reduce(
+        (total, entry) => total + entry.files.unchangedCount,
+        0,
+      ),
+    ).toBe(equalPaths.length)
+    expect(
+      report.categories
+        .flatMap((entry) => entry.files.semanticChanged)
+        .toSorted(),
+    ).toEqual(
+      rewrittenPaths
+        .filter((path) => !equalJsonText(previous[path]!, committed[path]!))
+        .toSorted(),
+    )
+    expect(
+      report.categories
+        .flatMap((entry) => entry.files.formatOnlyChanged)
+        .toSorted(),
+    ).toEqual(
+      rewrittenPaths
+        .filter((path) => equalJsonText(previous[path]!, committed[path]!))
+        .toSorted(),
+    )
+    // 报告里的每条字段差异都必须与提交后的字节、以及副本里的旧字节一致。
+    let describedEntries = 0
+    for (const entry of report.categories.flatMap(
+      (current) => current.fileChanges,
+    )) {
+      const after = JSON.parse(committed[entry.path]!.toString())
+      const before = JSON.parse(previous[entry.path]!.toString())
+      expect(entry.changes.length).toBeGreaterThan(0)
+      for (const record of entry.changes) {
+        expect(summaryAt(after, record.pointer)).toEqual(record.after)
+        expect(summaryAt(before, record.pointer)).toEqual(record.before)
+        describedEntries++
+      }
+    }
+    expect(describedEntries).toBeGreaterThan(0)
+    // 来源记录差异同样必须落在提交后索引与副本索引的真实值上。
+    for (const current of report.categories)
+      for (const entry of current.sourceRecords.changes)
+        for (const record of entry.changes) {
+          expect(
+            summaryAt(
+              committedIndex.entities[current.name].members[entry.memberId]
+                .sourceRecord,
+              record.pointer,
+            ),
+          ).toEqual(record.after)
+          expect(
+            summaryAt(
+              previousIndex.entities[current.name].members[entry.memberId]
+                .sourceRecord,
+              record.pointer,
+            ),
+          ).toEqual(record.before)
+        }
+    // 提交后的数据集可用持锁读取消费，且回执实体计数与实际字节一致。
+    const read = await withCurrentDataset(
+      input.targetDirectory,
+      async (directory, index) => ({
+        index,
+        bytes: await bytes(directory),
+      }),
+      { entities: input.entities },
+    )
+    expect(read.index.entities.agents.memberIds).toEqual(["2", "10", "30"])
+    expect(read.bytes["agents/2/details.zh.json"]!.toString()).toContain(
+      '"changed"',
+    )
+    const afterAdvance = await fingerprints(input.targetDirectory)
+    const afterPaths = entityPaths(afterAdvance)
+    const reused = afterPaths.filter(
+      (path) =>
+        beforeAdvance[path] &&
+        afterAdvance[path]!.hash === beforeAdvance[path]!.hash,
+    )
+    expect(result.reusedEntityFiles).toBe(reused.length)
+    expect(result.changedEntityFiles).toBe(afterPaths.length - reused.length)
+    expect(result.removedEntityFiles).toBe(
+      Object.keys(beforeAdvance).filter(
+        (path) => path !== "index.json" && !afterPaths.includes(path),
+      ).length,
+    )
+    // 字节相同的成员文件沿用原 inode 与 mtime，不因版本推进被重写。
+    expect(reused.length).toBeGreaterThan(0)
+    for (const path of reused)
+      expect({
+        ino: afterAdvance[path]!.ino,
+        mtimeNs: afterAdvance[path]!.mtimeNs,
+      }).toEqual({
+        ino: beforeAdvance[path]!.ino,
+        mtimeNs: beforeAdvance[path]!.mtimeNs,
+      })
+  })
+
+  it("recovers without raw and installs the report that was already generated", async () => {
+    const input = await fixture()
+    await generateCurrentDataset(input)
+    const previousReport = await fs.readFile(reportPath(input))
+    const before = await fingerprints(input.targetDirectory)
+    // 恢复不读取 raw：整个 raw 根可以在恢复期间不可用。
+    const offline = `${input.rawRoot}-offline`
+    await editJson(
+      join(input.rawRoot, input.version, "zh/character/2.json"),
+      (value) => {
+        value.name = "changed"
+      },
+    )
+    // 提交点之前中断：候选报告已经生成并检查，但当前数据尚未切换。
+    const writer = await child(input, { mode: "update", pause: "prepared" })
+    const pending = await fs.readFile(
+      join(control(input), "work/maintenance.json"),
+    )
+    expect(JSON.parse(pending.toString()).update.result).toBe("changed")
+    writer.process.kill("SIGKILL")
+    expect((await writer.done).signal).toBe("SIGKILL")
+    await fs.rename(input.rawRoot, offline)
+    expect(await recoverCurrentDataset(input)).toMatchObject({
+      outcome: "rolled-back",
+      available: true,
+    })
+    await fs.rename(offline, input.rawRoot)
+    // 未提交的回滚不安装候选报告，当前目录保留上次成功更新的报告。
+    expect(await fs.readFile(reportPath(input))).toEqual(previousReport)
+    expect(await fingerprints(input.targetDirectory)).toEqual(before)
+    // 提交点之后中断：新数据已经安装，只剩报告安装与清理。
+    const committed = await child(input, {
+      mode: "update",
+      pause: "new-installed",
+    })
+    const generated = await fs.readFile(
+      join(control(input), "work/maintenance.json"),
+    )
+    committed.process.kill("SIGKILL")
+    expect((await committed.done).signal).toBe("SIGKILL")
+    expect(await fs.readFile(reportPath(input))).toEqual(previousReport)
+    await fs.rename(input.rawRoot, offline)
+    expect(await recoverCurrentDataset(input)).toMatchObject({
+      outcome: "committed",
+      available: true,
+    })
+    await fs.rename(offline, input.rawRoot)
+    // 恢复只安装已经生成的报告：字节与预生成结果相同，不重新读取 raw 或重算差异。
+    expect(await fs.readFile(reportPath(input))).toEqual(generated)
+    const report = await updateReport(input)
+    expect(report.result).toBe("changed")
+    const committedBytes = await bytes(input.targetDirectory)
+    expect(committedBytes["agents/2/details.zh.json"]!.toString()).toContain(
+      '"changed"',
+    )
+    const fileChanges = category(report, "agents").fileChanges
+    expect(fileChanges.length).toBeGreaterThan(0)
+    for (const entry of fileChanges)
+      for (const record of entry.changes)
+        expect(
+          summaryAt(
+            JSON.parse(committedBytes[entry.path]!.toString()),
+            record.pointer,
+          ),
+        ).toEqual(record.after)
+  })
+
   it("reports a legacy v2 baseline and a category added by the current registry", async () => {
     const input = await fixture()
     await generateCurrentDataset(input)
@@ -1647,6 +2007,12 @@ describe("current dataset update report", () => {
         expect(await fs.readFile(join(input.targetDirectory, path))).toEqual(
           content,
         )
+    // 提交后的数据集是 v3 外壳：旧协议记录升级为新协议，v1 记录不能表达 v3。
+    const committedState = JSON.parse(
+      await fs.readFile(join(control(input), "state.json"), "utf8"),
+    )
+    expect(committedState.protocol).toBe("fairy-nanoka-current/2")
+    expect(committedState.current.format).toBe(integratedSnapshotFormat)
   })
 
   it("fails without reporting success or no change when new version inputs are missing or corrupt", async () => {
