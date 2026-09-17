@@ -1,6 +1,11 @@
-import { buildNanokaAgents } from "../scripts/nanoka-integration/build.ts"
 import { verifyNanokaAgentArtifact } from "../scripts/nanoka-integration/verify.ts"
-import { withNanokaCurrentDataset } from "../scripts/nanoka-integration/current.ts"
+import { withCurrentDataset } from "../scripts/nanoka-integration/current.ts"
+import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
+import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
+import type {
+  HistoricalIntegratedSnapshotIndex,
+  IntegratedSnapshotIndex,
+} from "../src/integration/snapshot-types.ts"
 
 /** 由包 tsc 真正检查的正反例；移除 exactOptionalPropertyTypes 会令对应 @ts-expect-error 失败。 */
 import type {
@@ -189,25 +194,24 @@ export async function currentIndexLanguageTypes(
   })
   // @ts-expect-error 动态 boolean 可能启用历史语言验证，返回引用也可能缺失。
   const unsafeDynamic: string = dynamic.agents["2"].files.content.zh.path
-  await withNanokaCurrentDataset(
-    artifactDirectory,
-    async (_directory, index) => {
-      // @ts-expect-error 持锁读取也可能返回历史语言子集。
-      const unsafeRead: string = index.agents["2"].files.content.zh.path
-      const english = index.agents["2"].files.content.en
-      if (english) {
-        const safePath: string = english.path
-        void safePath
-      }
-      return unsafeRead
-    },
-  )
-  const built = await buildNanokaAgents({
+  await withCurrentDataset(artifactDirectory, async (_directory, index) => {
+    // 当前格式的持锁读取返回完整语言引用类型；历史语言子集由记录的配置在运行时约束。
+    const chinesePath: string =
+      index.entities.agents.members["2"].files.details.zh.path
+    const englishPath: string =
+      index.entities.agents.members["2"].files.details.en.path
+    void chinesePath
+    void englishPath
+    return englishPath
+  })
+  const built = await buildIntegratedSnapshot({
     rawRoot: "synthetic",
     version: "synthetic",
   })
-  const builtPath: string = built.index.agents["2"].files.content.zh.path
-  const builtEnglishPath: string = built.index.agents["2"].files.content.en.path
+  const builtPath: string =
+    built.index.entities.agents.members["2"].files.details.zh.path
+  const builtEnglishPath: string =
+    built.index.entities.agents.members["2"].files.details.en.path
   const strict = await verifyNanokaAgentArtifact({ artifactDirectory })
   const strictPath: string = strict.agents["2"].files.content.zh.path
   const explicitStrict = await verifyNanokaAgentArtifact({
@@ -242,5 +246,76 @@ export async function currentIndexLanguageTypes(
     strictPath,
     explicitPath,
     retainedRules,
+  ]
+}
+
+/**
+ * 多实体外壳的语言引用类型：严格验证与新建制品给出完整语言引用，
+ * 历史复验（含动态 boolean）给出可能缺失的引用，访问前必须检查存在性。
+ */
+export async function snapshotLanguageTypes(
+  artifactDirectory: string,
+  dynamicHistorical: boolean,
+) {
+  const strict = await verifyIntegratedSnapshot({ artifactDirectory })
+  const strictDetails = strict.entities.agents.members["2"].files.details
+  const strictPath: string = strictDetails.zh.path
+  const explicitStrict = await verifyIntegratedSnapshot({
+    artifactDirectory,
+    historicalLanguages: false,
+  })
+  const explicitDetails =
+    explicitStrict.entities.agents.members["2"].files.details
+  const explicitPath: string = explicitDetails.en.path
+  const built = await buildIntegratedSnapshot({
+    rawRoot: "synthetic",
+    version: "synthetic",
+  })
+  const builtDetails = built.index.entities.agents.members["2"].files.details
+  const builtPath: string = builtDetails.zh.path
+
+  const historical = await verifyIntegratedSnapshot({
+    artifactDirectory,
+    historicalLanguages: true,
+  })
+  const historicalDetails =
+    historical.entities.agents.members["2"].files.details
+  // @ts-expect-error 历史集可能不含中文，不能直接访问固定语言的文件路径。
+  const unsafeHistorical: string = historicalDetails.zh.path
+  const historicalLocales: string[] = historical.entities.agents.detailLocales
+  const english = historicalDetails.en
+  if (english) {
+    const safePath: string = english.path
+    void safePath
+  }
+  const dynamic = await verifyIntegratedSnapshot({
+    artifactDirectory,
+    historicalLanguages: dynamicHistorical,
+  })
+  const dynamicDetails = dynamic.entities.agents.members["2"].files.details
+  // @ts-expect-error 动态 boolean 可能启用历史语言验证，返回引用也可能缺失。
+  const unsafeDynamic: string = dynamicDetails.zh.path
+  const optionalOptions: {
+    artifactDirectory: string
+    historicalLanguages?: boolean
+  } = { artifactDirectory }
+  const optional = await verifyIntegratedSnapshot(optionalOptions)
+  const optionalDetails = optional.entities.agents.members["2"].files.details
+  // @ts-expect-error 未收窄的可选 boolean 不保证完整语言引用。
+  const unsafeOptional: string = optionalDetails.zh.path
+  // @ts-expect-error 历史复验结果不能直接当作完整语言索引使用。
+  const complete: IntegratedSnapshotIndex = historical
+  const historicalResult: HistoricalIntegratedSnapshotIndex = historical
+
+  return [
+    strictPath,
+    explicitPath,
+    builtPath,
+    unsafeHistorical,
+    unsafeDynamic,
+    unsafeOptional,
+    complete,
+    historicalResult,
+    historicalLocales,
   ]
 }

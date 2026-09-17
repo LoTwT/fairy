@@ -188,7 +188,8 @@ it("consumes the offline-installed package in real Vite development and producti
             await page.evaluate(
               async () =>
                 Object.keys(
-                  (await (globalThis as any).fairy.loadIndex()).agents,
+                  (await (globalThis as any).fairy.loadIndex()).entities.agents
+                    .members,
                 ).length,
             ),
           ).toBe(58)

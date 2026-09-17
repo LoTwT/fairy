@@ -244,7 +244,7 @@ pnpm --filter @randomplay/data fetch:nanoka --version <version>
 pnpm --filter @randomplay/data fetch:nanoka --entity <entity>
 ```
 
-当前不存在原始缓存验证命令 `verify:nanoka`；`verify:nanoka:agents` 用于独立整合制品，见[整合规范](../data/integration.md#当前离线全量新制品构建)。抓取 CLI 成功只表示本次请求范围内的资源已获取并通过第 8 节的轻量检查，不表示本地目录是一份完整或可复现快照。
+当前不存在原始缓存验证命令 `verify:nanoka`；`verify:nanoka:snapshot` 用于独立复验静态完整制品（当前 v3 外壳），见[整合规范](../data/integration.md#离线全量构建的共用能力)。抓取 CLI 成功只表示本次请求范围内的资源已获取并通过第 8 节的轻量检查，不表示本地目录是一份完整或可复现快照。
 
 ### 终端错误文本
 

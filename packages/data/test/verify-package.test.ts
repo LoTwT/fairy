@@ -11,11 +11,11 @@ import {
   writeFileSync,
 } from "node:fs"
 import { tmpdir } from "node:os"
-import { dirname, join } from "node:path"
+import { basename, dirname, join } from "node:path"
 import { pathToFileURL } from "node:url"
 import ts from "typescript"
 import { afterEach, describe, expect, it } from "vitest"
-import { verifyNanokaAgentArtifact } from "../scripts/nanoka-integration/verify.ts"
+import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
 import {
   preparePublication,
   publicationFiles,
@@ -59,6 +59,9 @@ describe("packed package", () => {
       .filter(Boolean)
     for (const file of files) {
       if (file.startsWith("packages/data/integrated/")) continue
+      // 工作区可能已有尚未提交的删除；checkout 只取工作区实际存在的 Git 可见文件，
+      // 干净签出时集合与索引一致。
+      if (!existsSync(join(workspaceDirectory, file))) continue
       mkdirSync(dirname(join(checkout, file)), { recursive: true })
       cpSync(join(workspaceDirectory, file), join(checkout, file))
     }
@@ -137,15 +140,25 @@ describe("packed package", () => {
       publishedEntry,
     )
     const snapshot = join(packedRoot, "dist/integrated")
-    const index = await verifyNanokaAgentArtifact({
+    const index = await verifyIntegratedSnapshot({
       artifactDirectory: snapshot,
     })
     const jsonFiles = publicationFiles(index)
     expect(jsonFiles).toHaveLength(175)
-    const sharedTypes = listFiles(packedRoot).filter((path) =>
-      /^dist\/index(?:\.browser)?-[\w-]+\.d\.mts$/u.test(path),
+    // 两个入口共用恰好一份带哈希的声明分块，且都引用它；分块名由打包器决定，不在此钉住来源模块名。
+    const sharedTypes = listFiles(packedRoot).filter(
+      (path) =>
+        path.endsWith(".d.mts") &&
+        path !== "dist/index.d.mts" &&
+        path !== "dist/index.browser.d.mts",
     )
     expect(sharedTypes).toHaveLength(1)
+    // 入口声明按打包器生成的名字引用同一份共享分块（可能与声明文件后缀不同）。
+    const sharedStem = basename(sharedTypes[0]).replace(/\.d\.mts$/u, "")
+    for (const entry of ["dist/index.d.mts", "dist/index.browser.d.mts"])
+      expect(readFileSync(join(packedRoot, entry), "utf8")).toContain(
+        sharedStem,
+      )
     expect(listFiles(packedRoot)).toEqual(
       [
         "LICENSE",
@@ -167,7 +180,7 @@ describe("packed package", () => {
       JSON.parse(readFileSync(join(packedRoot, "package.json"), "utf8"))
         .dependencies ?? {},
     ).toEqual({})
-    const expectedNames = index.scope.agentIds.map(
+    const expectedNames = index.entities.agents.memberIds.map(
       (id) =>
         JSON.parse(
           readFileSync(join(snapshot, `agents/${id}/details.en.json`), "utf8"),
@@ -217,12 +230,12 @@ console.log(JSON.stringify(api.agentNames))
     ).toEqual(expectedNames)
     const typeSource = `import rawData from "@randomplay/data/integrated/agents/1311/data.json" with { type: "json" }
 import { agentNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents } from "@randomplay/data"
-import type { AgentName, AgentData, AgentDetails, IntegratedIndex, LocalizedAgent, DetailLocale } from "@randomplay/data"
+import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale } from "@randomplay/data"
 const numericSourceId: number = rawData.id
 const name: AgentName = "Astra Yao"
 const punctuated: AgentName = "Soldier 0 - Anby"
 const names: readonly AgentName[] = agentNames
-const index: Promise<IntegratedIndex> = loadIndex()
+const index: Promise<IntegratedSnapshotIndex> = loadIndex()
 const data: Promise<AgentData | undefined> = loadAgentData(name)
 const detail: Promise<AgentDetails | undefined> = loadAgentDetails(punctuated, "zh")
 const all: Promise<Record<AgentName, LocalizedAgent>> = loadAllAgents("en")
@@ -360,7 +373,7 @@ void [numericSourceId, names, index, data, detail, all, acceptsName, wrong]
       expect(readFileSync(trace, "utf8")).toBe(intervention)
       if (intervention === "source-change") {
         expect(build.status, build.stdout + build.stderr).toBe(0)
-        await verifyNanokaAgentArtifact({
+        await verifyIntegratedSnapshot({
           artifactDirectory: join(cleanPackage, "integrated"),
         })
         expect(

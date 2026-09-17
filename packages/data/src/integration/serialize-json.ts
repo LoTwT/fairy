@@ -1,8 +1,12 @@
 import type { SourceJson } from "./agent-types.ts"
 import { copyJson } from "./source-json.ts"
 
-/** 规范十进制 key（不受实体 ID 长度约束）优先；其余按 UTF-16 代码单元排序。 */
-function compareKeys(left: string, right: string): number {
+/**
+ * 规范十进制 key（不受实体 ID 长度约束）优先；其余按 UTF-16 代码单元排序。
+ *
+ * 序列化与维护报告的键顺序共用这一处定义，报告顺序因此不受对象遍历偶然顺序影响。
+ */
+export function compareJsonKeys(left: string, right: string): number {
   const decimal = /^(0|[1-9]\d*)$/u
   const leftDecimal = decimal.test(left)
   const rightDecimal = decimal.test(right)
@@ -24,7 +28,7 @@ export function serializeJson(value: unknown): Uint8Array {
     const entries = array
       ? current.map((item) => render(item, depth + 1))
       : Object.keys(current)
-          .toSorted(compareKeys)
+          .toSorted(compareJsonKeys)
           .map(
             (key) =>
               `${JSON.stringify(key)}: ${render(current[key], depth + 1)}`,

@@ -1,12 +1,11 @@
 import { lstat, mkdir, readFile, writeFile } from "node:fs/promises"
 import { basename, dirname, join, resolve } from "node:path"
-import type { IntegratedIndex } from "../src/integration/agent-types.ts"
-import { withNanokaCurrentDataset } from "./nanoka-integration/current.ts"
+import type { ExportFileReference } from "../src/integration/agent-types.ts"
+import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
+import { outputExpansionLimit } from "./nanoka-integration/artifact-files.ts"
+import { withCurrentDataset } from "./nanoka-integration/current.ts"
 import { directoryRoot, readBytes } from "./nanoka-integration/files.ts"
-import {
-  outputExpansionLimit,
-  verifyNanokaAgentArtifact,
-} from "./nanoka-integration/verify.ts"
+import { verifyIntegratedSnapshot } from "./nanoka-integration/snapshot-verify.ts"
 import { loadSourcePolicy } from "./nanoka/policy.ts"
 
 async function exists(path: string): Promise<boolean> {
@@ -19,51 +18,71 @@ async function exists(path: string): Promise<boolean> {
   }
 }
 
-/** 成员与文件引用以完整验证后的索引为准，不扫描目录推导成员。 */
-export function publicationFiles(index: IntegratedIndex): string[] {
-  return [
-    "index.json",
-    ...index.scope.agentIds.flatMap((id) => {
-      const files = index.agents[id].files
-      return [files.stats.path, files.content.zh.path, files.content.en.path]
-    }),
-  ]
+/** 发布清单只包含全部登记类别的完整成员文件；成员或语言引用缺失即失败。 */
+export function publicationFiles(index: IntegratedSnapshotIndex): string[] {
+  const files = ["index.json"]
+  for (const [name, entity] of Object.entries(index.entities))
+    for (const memberId of entity.memberIds) {
+      const member = entity.members[memberId]
+      if (!member)
+        throw new Error(`/entities/${name}/${memberId}: missing member`)
+      files.push(member.files.data.path)
+      for (const locale of entity.detailLocales) {
+        const reference = member.files.details[locale]
+        if (!reference)
+          throw new Error(`/entities/${name}/${memberId}: missing ${locale}`)
+        files.push(reference.path)
+      }
+    }
+  return files
 }
 
 /** 从已验证副本的英文顶层 name 生成精确类型、冻结名称/映射及显式懒加载表。 */
 export async function generateCatalog(
   snapshot: string,
-  index: IntegratedIndex,
+  index: IntegratedSnapshotIndex,
   importAttributes = true,
 ): Promise<string> {
+  const agents = index.entities["agents"]
+  if (!agents) throw new Error("The published snapshot has no agents category")
+  for (const locale of ["zh", "en"] as const)
+    if (!agents.detailLocales.includes(locale))
+      throw new Error(
+        `The published agents category is missing ${locale} details`,
+      )
   const names: string[] = []
-  for (const id of index.scope.agentIds) {
-    const path = index.agents[id].files.content.en.path
-    const { name } = JSON.parse(await readFile(join(snapshot, path), "utf8"))
+  for (const id of agents.memberIds) {
+    const reference: ExportFileReference = agents.members[id].files.details.en
+    const { name } = JSON.parse(
+      await readFile(join(snapshot, reference.path), "utf8"),
+    )
     if (typeof name !== "string" || name.length === 0)
-      throw new Error(`${path}: name must be a non-empty string`)
+      throw new Error(`${reference.path}: name must be a non-empty string`)
     if (names.includes(name))
-      throw new Error(`${path}: duplicate English name ${JSON.stringify(name)}`)
+      throw new Error(
+        `${reference.path}: duplicate English name ${JSON.stringify(name)}`,
+      )
     names.push(name)
   }
   const json = JSON.stringify
   const lazy = (path: string, type: string) =>
     `() => import(${json(`@randomplay/data/integrated/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
   return `// Generated from the verified publication snapshot. Do not edit.
-import type { AgentData, AgentDetails, IntegratedIndex } from "../src/integration/agent-types.ts"
+import type { AgentData, AgentDetails } from "../src/integration/agent-types.ts"
+import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
 /** 本次发布全部代理人的英文详情顶层 name 原值。 */
 export type AgentName = ${names.map((name) => json(name)).join(" | ")}
 /** 按来源 ID 数值升序排列的完整英文名称列表；运行时冻结。 */
 export const agentNames: readonly AgentName[] = Object.freeze(${json(names)})
-export const agentSourceIds: Readonly<Record<AgentName, string>> = Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, index.scope.agentIds[i]]))})) as Readonly<Record<AgentName, string>>
-export const indexLoader = ${lazy("index.json", "IntegratedIndex")}
+export const agentSourceIds: Readonly<Record<AgentName, string>> = Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, agents.memberIds[i]]))})) as Readonly<Record<AgentName, string>>
+export const indexLoader = ${lazy("index.json", "IntegratedSnapshotIndex")}
 export const agentLoaders: Record<string, { data: () => Promise<AgentData>; zh: () => Promise<AgentDetails>; en: () => Promise<AgentDetails> }> = {
-${index.scope.agentIds
+${agents.memberIds
   .map(
     (id) => `${json(id)}: {
-data: ${lazy(index.agents[id].files.stats.path, "AgentData")},
-zh: ${lazy(index.agents[id].files.content.zh.path, "AgentDetails")},
-en: ${lazy(index.agents[id].files.content.en.path, "AgentDetails")},
+data: ${lazy(agents.members[id].files.data.path, "AgentData")},
+zh: ${lazy(agents.members[id].files.details.zh.path, "AgentDetails")},
+en: ${lazy(agents.members[id].files.details.en.path, "AgentDetails")},
 }`,
   )
   .join(",\n")}
@@ -78,7 +97,7 @@ en: ${lazy(index.agents[id].files.content.en.path, "AgentDetails")},
 export async function preparePublication(
   targetDirectory: string,
   outputDirectory: string,
-): Promise<IntegratedIndex> {
+): Promise<IntegratedSnapshotIndex> {
   const target = resolve(targetDirectory)
   if ((await lstat(target)).isSymbolicLink())
     throw new Error("Publication source must not be a symbolic link")
@@ -91,7 +110,10 @@ export async function preparePublication(
   const maximumBytes =
     policy.fetchLimits.maximumBytesPerRun * outputExpansionLimit
   async function copyVerifiedBytes(artifactDirectory: string) {
-    const index = await verifyNanokaAgentArtifact({ artifactDirectory, policy })
+    const index = await verifyIntegratedSnapshot({
+      artifactDirectory,
+      policy,
+    })
     const root = await directoryRoot(artifactDirectory)
     for (const path of publicationFiles(index)) {
       const bytes = await readBytes(root, path, maximumBytes)
@@ -99,7 +121,7 @@ export async function preparePublication(
       await mkdir(dirname(destination), { recursive: true })
       await writeFile(destination, bytes, { flag: "wx" })
     }
-    return verifyNanokaAgentArtifact({
+    return verifyIntegratedSnapshot({
       artifactDirectory: snapshot,
       policy,
       expectedIndex: index,
@@ -107,7 +129,7 @@ export async function preparePublication(
   }
   const managed = await exists(control)
   const index = managed
-    ? await withNanokaCurrentDataset(target, copyVerifiedBytes)
+    ? await withCurrentDataset(target, copyVerifiedBytes)
     : await copyVerifiedBytes(target)
   if (!managed && (await exists(control)))
     throw new Error(

@@ -2,19 +2,29 @@ import * as fs from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { basename, dirname, join } from "node:path"
 import { afterEach, describe, expect, it, vi } from "vitest"
+import { nanokaAgentsSnapshotEntity } from "../scripts/nanoka-integration/snapshot-entities.ts"
+import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
 import {
   generateCatalog,
   preparePublication,
   publicationFiles,
 } from "../scripts/prepare-publication.ts"
 import {
-  generateNanokaAgents,
-  withNanokaCurrentDataset,
+  generateCurrentDataset,
+  withCurrentDataset,
 } from "../scripts/nanoka-integration/current.ts"
 import { sha256 } from "../scripts/nanoka-integration/files.ts"
 import { outputExpansionLimit } from "../scripts/nanoka-integration/verify.ts"
 import * as sourcePolicy from "../scripts/nanoka/policy.ts"
-import { publicationFixture } from "./fixtures/publication.ts"
+import {
+  managedLegacyV2Fixture,
+  publicationFixture,
+} from "./fixtures/publication.ts"
+import { syntheticSnapshotEntity } from "./fixtures/snapshot-entities.ts"
+import {
+  legacyV2Format,
+  writeSyntheticRaw,
+} from "./fixtures/synthetic-dataset.ts"
 
 vi.mock("node:fs/promises", async (original) => ({
   ...(await original<typeof import("node:fs/promises")>()),
@@ -31,10 +41,44 @@ afterEach(async () => {
       .map((path) => fs.rm(path, { recursive: true, force: true })),
   )
 })
-async function fixture() {
+async function temporaryRoot() {
   const root = await fs.mkdtemp(join(tmpdir(), "fairy-publication-"))
   temporaryDirectories.push(root)
+  return root
+}
+async function fixture() {
+  const root = await temporaryRoot()
   return { root, ...(await publicationFixture(root)) }
+}
+
+/** 目录下全部文件的相对路径与内容，用于证明复制前后没有增删或改写。 */
+async function directoryFiles(
+  root: string,
+  prefix = "",
+): Promise<Record<string, Buffer>> {
+  const files: Record<string, Buffer> = {}
+  for (const entry of await fs.readdir(join(root, prefix), {
+    withFileTypes: true,
+  })) {
+    const path = prefix ? `${prefix}/${entry.name}` : entry.name
+    if (entry.isDirectory())
+      Object.assign(files, await directoryFiles(root, path))
+    else files[path] = await fs.readFile(join(root, path))
+  }
+  return files
+}
+
+/** 逐个普通文件的字节摘要、inode 与 mtime；任一改写都会改变指纹。 */
+async function fingerprints(root: string): Promise<string[]> {
+  const entries = Object.entries(await directoryFiles(root)).toSorted(
+    ([left], [right]) => (left < right ? -1 : left > right ? 1 : 0),
+  )
+  const result: string[] = []
+  for (const [path, bytes] of entries) {
+    const stat = await fs.stat(join(root, path), { bigint: true })
+    result.push(`${path} ${sha256(bytes)} ${stat.ino} ${stat.mtimeNs}`)
+  }
+  return result
 }
 
 describe("publication snapshot", () => {
@@ -69,6 +113,54 @@ describe("publication snapshot", () => {
     )
   })
 
+  it("publishes the complete file list of every registered category", async () => {
+    const root = await temporaryRoot()
+    const rawRoot = join(root, "raw")
+    const version = "synthetic-multi-category"
+    const output = join(root, "output")
+    await fs.mkdir(output)
+    await writeSyntheticRaw({
+      rawRoot,
+      version,
+      agentIds: ["10", "2"],
+      widgetIds: ["9001", "9002"],
+    })
+    const build = await buildIntegratedSnapshot({
+      rawRoot,
+      version,
+      temporaryParent: output,
+      entities: [nanokaAgentsSnapshotEntity, syntheticSnapshotEntity],
+    })
+    // 显式期望清单：两个类别各自的全部成员文件加根索引，顺序无关。
+    const expected = [
+      "index.json",
+      "agents/2/data.json",
+      "agents/2/details.zh.json",
+      "agents/2/details.en.json",
+      "agents/10/data.json",
+      "agents/10/details.zh.json",
+      "agents/10/details.en.json",
+      "widgets/9001/data.json",
+      "widgets/9001/details.zh.json",
+      "widgets/9001/details.en.json",
+      "widgets/9002/data.json",
+      "widgets/9002/details.zh.json",
+      "widgets/9002/details.en.json",
+    ].toSorted()
+    const files = publicationFiles(build.index)
+    expect(files).toContain("index.json")
+    expect(files).toHaveLength(expected.length)
+    expect(files.toSorted()).toEqual(expected)
+    // 清单没有多余项：它逐项等于制品实际文件集合，且每项都是可读的普通文件。
+    expect(
+      Object.keys(await directoryFiles(build.artifactDirectory)).toSorted(),
+    ).toEqual(expected)
+    for (const path of files)
+      expect(
+        await fs.readFile(join(build.artifactDirectory, path)),
+      ).toBeInstanceOf(Buffer)
+  })
+
   it.each([undefined, "", null, 12, "Soldier 0 - Anby"])(
     "rejects invalid or duplicate names: %s",
     async (name) => {
@@ -81,7 +173,9 @@ describe("publication snapshot", () => {
       else details.name = name
       const bytes = JSON.stringify(details)
       await fs.writeFile(join(artifactDirectory, path), bytes)
-      index.agents["2"].files.content.en.sha256 = sha256(Buffer.from(bytes))
+      index.entities.agents.members["2"].files.details.en.sha256 = sha256(
+        Buffer.from(bytes),
+      )
       await fs.writeFile(
         join(artifactDirectory, "index.json"),
         JSON.stringify(index),
@@ -163,7 +257,7 @@ describe("publication snapshot", () => {
   it("copies managed bytes while holding the existing lease and never initializes broken control state", async () => {
     const { root, rawRoot, version } = await fixture()
     const targetDirectory = join(root, "managed")
-    await generateNanokaAgents({ rawRoot, version, targetDirectory })
+    await generateCurrentDataset({ rawRoot, version, targetDirectory })
     const control = join(root, ".managed.fairy-state")
     const state = await fs.readFile(join(control, "state.json"))
     const lock = await fs.stat(join(control, "lock.sqlite"))
@@ -172,7 +266,7 @@ describe("publication snapshot", () => {
     vi.spyOn(fs, "writeFile").mockImplementation(async (path, ...args) => {
       if (String(path).includes("/generated/integrated/")) {
         await expect(
-          withNanokaCurrentDataset(targetDirectory, async () => undefined),
+          withCurrentDataset(targetDirectory, async () => undefined),
         ).rejects.toMatchObject({ code: "BUSY" })
         lockedCopies++
       }
@@ -191,13 +285,34 @@ describe("publication snapshot", () => {
     )
   })
 
+  it("refuses a managed v2 dataset with an explicit migration requirement without touching its bytes", async () => {
+    const root = await temporaryRoot()
+    const { targetDirectory, control } = await managedLegacyV2Fixture(root)
+    const datasetBefore = await fingerprints(targetDirectory)
+    const controlBefore = await fingerprints(control)
+    await expect(
+      preparePublication(targetDirectory, join(root, "generated")),
+    ).rejects.toThrow(/MIGRATION_REQUIRED: .*显式迁移命令/u)
+    // 拒绝路径不得迁移、改写数据集或改动控制目录：逐文件字节、inode 与 mtime 全部不变。
+    expect(await fingerprints(targetDirectory)).toEqual(datasetBefore)
+    expect(await fingerprints(control)).toEqual(controlBefore)
+    expect(
+      JSON.parse(await fs.readFile(join(targetDirectory, "index.json"), "utf8"))
+        .format,
+    ).toBe(legacyV2Format)
+    expect((await fs.readdir(control)).toSorted()).toEqual([
+      "lock.sqlite",
+      "state.json",
+    ])
+  })
+
   it("rejects root symlinks before bypassing a managed target's lease or recovery state", async () => {
     const { root, rawRoot, version } = await fixture()
     const targetDirectory = join(root, "managed")
-    await generateNanokaAgents({ rawRoot, version, targetDirectory })
+    await generateCurrentDataset({ rawRoot, version, targetDirectory })
     const alias = join(root, "alias")
     await fs.symlink(targetDirectory, alias, "dir")
-    await withNanokaCurrentDataset(targetDirectory, async () => {
+    await withCurrentDataset(targetDirectory, async () => {
       await expect(
         preparePublication(alias, join(root, "locked")),
       ).rejects.toThrow(/symbolic link/u)
@@ -253,7 +368,8 @@ describe("publication snapshot", () => {
             args[0] = Buffer.concat([bytes, Buffer.from(" ")])
           else {
             const index = JSON.parse(bytes.toString())
-            index.agents["2"].sourceRecord.injected = "unverified change"
+            index.entities.agents.members["2"].sourceRecord.injected =
+              "unverified change"
             args[0] = JSON.stringify(index)
           }
           injected = true

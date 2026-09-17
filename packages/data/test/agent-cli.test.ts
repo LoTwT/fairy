@@ -18,7 +18,7 @@ import { agentInput } from "./fixtures/agent-source.ts"
 const packageDirectory = fileURLToPath(new URL("../", import.meta.url))
 const repositoryDirectory = resolve(packageDirectory, "../..")
 const generateCommand = "generate:integrated"
-const verifyCommand = "verify:nanoka:agents"
+const verifyCommand = "verify:nanoka:snapshot"
 const temporaryDirectories: string[] = []
 
 afterEach(async () => {
@@ -66,7 +66,7 @@ const rejectNetwork = () => { throw new Error("unexpected network") }
 globalThis.fetch = rejectNetwork
 http.request = http.get = https.request = https.get = rejectNetwork
 if (process.env.FAIRY_CLI_TEST_REJECT_IO === "1" &&
-    /(?:build|verify|current)-nanoka-agents[.]ts$/.test(process.argv[1] ?? "")) {
+    /(?:current-nanoka-dataset|verify-nanoka-snapshot)[.]ts$/.test(process.argv[1] ?? "")) {
   for (const name of ["readFile", "realpath", "mkdtemp"])
     fs[name] = () => { throw new Error("unexpected file access") }
 }
@@ -283,12 +283,37 @@ describe("offline agent package commands", () => {
       const index = JSON.parse(
         await readFile(join(receipt.artifactDirectory, "index.json"), "utf8"),
       )
-      expect(index.scope.agentIds).toEqual(ids)
-      expect(receipt.agentCount).toBe(ids.length)
-      expect(receipt.detailLocales).toEqual(index.source.detailLocales)
-      expect(receipt.detailLocales).toEqual(agentInput().detailLocales)
+      expect(index.format).toBe("fairy-nanoka-integrated/v3")
+      expect(index.entities.agents.memberIds).toEqual(ids)
+      expect(receipt.memberCounts).toEqual({ agents: ids.length })
+      expect(receipt.format).toBe("fairy-nanoka-integrated/v3")
+      // 回执给出可机器解析的按类别摘要与完整报告位置；详细差异只在制品外报告里。
+      expect(receipt).toMatchObject({
+        reportVersion: "fairy-nanoka-update-report/1",
+        firstGeneration: true,
+        result: "changed",
+        sourceVersion: { before: null, after: input.version, changed: false },
+        sourceChanged: false,
+        rulesChanged: false,
+        reviewRequired: false,
+        categories: {
+          agents: {
+            checked: true,
+            presence: "added",
+            result: "changed",
+            members: { before: 0, after: ids.length, added: ids.length },
+            files: { after: ids.length * 3, added: ids.length * 3 },
+            sourceRecordsChanged: 0,
+            rulesVersionChanged: false,
+            reviewRequired: false,
+          },
+        },
+      })
+      expect(index.entities.agents.detailLocales).toEqual(
+        agentInput().detailLocales,
+      )
       expect(receipt.inputFileCount).toBe(
-        2 + ids.length * receipt.detailLocales.length,
+        2 + ids.length * index.entities.agents.detailLocales.length,
       )
       expect(receipt.outputFileCount).toBe(
         Object.keys(await directoryBytes(receipt.artifactDirectory)).length,
@@ -296,10 +321,16 @@ describe("offline agent package commands", () => {
       const maintenance = JSON.parse(
         await readFile(receipt.maintenanceReportPath, "utf8"),
       )
-      expect(receipt.unknownFieldCount).toBe(maintenance.diagnostics.length)
-      expect(receipt.codeNameDifferenceCount).toBe(
-        maintenance.codeNameDifferences.length,
-      )
+      expect(Object.keys(maintenance.categories)).toEqual(["agents"])
+      expect(
+        maintenance.categories.agents.map(
+          (entry: { memberId: string }) => entry.memberId,
+        ),
+      ).toEqual(ids)
+      for (const entry of maintenance.categories.agents) {
+        expect(entry.maintenance.diagnostics).toEqual([])
+        expect(entry.maintenance.codeNameDifferences).toEqual([])
+      }
       const verified = success(
         runCommand(
           input,
@@ -310,8 +341,13 @@ describe("offline agent package commands", () => {
       )
       expect(verified).toEqual({
         artifactDirectory: receipt.artifactDirectory,
-        agentCount: receipt.agentCount,
-        detailLocales: receipt.detailLocales,
+        format: receipt.format,
+        categories: {
+          agents: {
+            memberCount: receipt.memberCounts.agents,
+            detailLocales: agentInput().detailLocales,
+          },
+        },
         verified: true,
       })
     },
@@ -460,7 +496,7 @@ describe("offline agent package commands", () => {
       await mkdir(invalid)
       failure(runCommand(input, verifyCommand, [invalid]), "index.json")
       await writeJson(join(invalid, "index.json"), {})
-      failure(runCommand(input, verifyCommand, [invalid]), "字段集合不一致")
+      failure(runCommand(input, verifyCommand, [invalid]), "格式版本错误")
       await writeFile(
         join(receipt.artifactDirectory, "agents/2/data.json"),
         "tampered",
@@ -503,14 +539,17 @@ describe("offline agent package commands", () => {
 
       const indexPath = join(receipt.artifactDirectory, "index.json")
       const index = JSON.parse(await readFile(indexPath, "utf8"))
-      index.agents["2"].sourceRecord[field] = Number.MAX_SAFE_INTEGER + 1
+      index.entities.agents.members["2"].sourceRecord[field] =
+        Number.MAX_SAFE_INTEGER + 1
       await writeJson(indexPath, index)
       const invalidBytes = await readFile(indexPath)
       const failedVerify = runCommand(input, verifyCommand, [
         receipt.artifactDirectory,
       ])
       failure(failedVerify, "index.json")
-      expect(failedVerify.stderr).toContain("/agents/2/sourceRecord/")
+      expect(failedVerify.stderr).toContain(
+        "/entities/agents/members/2/sourceRecord/",
+      )
       expect(await readFile(indexPath)).toEqual(invalidBytes)
       for (const result of [failedBuild, failedVerify]) {
         expect(result.stderr).toContain(escaped)
@@ -532,7 +571,7 @@ describe("offline agent package commands", () => {
       const input = await fixture(packageDirectory)
       const receipt = build(input)
       const rootBuild = await mkdtemp(
-        join(repositoryDirectory, "fairy-nanoka-agents-"),
+        join(repositoryDirectory, "fairy-integrated-snapshot-"),
       )
       temporaryDirectories.push(rootBuild)
       await writeJson(join(rootBuild, "maintenance.json"), {})
@@ -549,7 +588,7 @@ describe("offline agent package commands", () => {
         expect(result.stdout).toContain(
           path === receipt.maintenanceReportPath
             ? ".*.fairy-state/"
-            : "fairy-nanoka-agents-*/",
+            : "fairy-integrated-snapshot-*/",
         )
       }
       const artifactIgnored = spawnSync(
@@ -569,7 +608,7 @@ describe("offline agent package commands", () => {
         "source.ts",
         "README.md",
         "dataset.json",
-        "fairy-nanoka-agents-not-a-directory.ts",
+        "fairy-integrated-snapshot-not-a-directory.ts",
       ]) {
         const path = join(input.temporaryParent, name)
         await writeFile(path, "normal maintained file")
@@ -591,8 +630,9 @@ it("current commands keep committed data when actual stdout pipes close", async 
   const args = [input.rawRoot, input.version, target]
   for (const command of [
     generateCommand,
-    "recover:nanoka:agents",
+    "recover:nanoka:current",
     "verify:nanoka:current",
+    "migrate:nanoka:current",
   ]) {
     const help = await runCommandWithClosedStdout(
       input,

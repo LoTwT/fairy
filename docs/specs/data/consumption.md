@@ -1,7 +1,8 @@
 # 数据消费与 npm 导出契约
 
 本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
-[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、zh/en 两种详情语言。
+[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、zh/en 两种详情语言；
+公开索引使用多实体 v3 外壳，类别（当前只有 `agents`）与成员文件摘要来自完整验证后的同一发布副本。
 
 ## 名称与类型
 
@@ -14,13 +15,13 @@
 或完全重名使构建失败，不覆盖、不修改来源。英文更名、成员删除属于公开取值的兼容性变化，须在该次变更的
 Git 记录或发布说明中明确记录，不自动添加别名。来源数字字符串目录、索引 key、`SourceId` 和数值 `AgentData.id` 保持原义。
 
-`agentNames: readonly AgentName[]` 覆盖本版全部成员，沿用索引 `scope.agentIds` 的来源 ID 数值升序，
+`agentNames: readonly AgentName[]` 覆盖本版全部成员，沿用索引 `entities.agents.memberIds` 的来源 ID 数值升序，
 运行时冻结，调用方不能通过修改列表影响后续使用。名称类型不提供任意 string 重载，保留字面量补全。
 
 ## 读取接口
 
 ```ts
-export declare function loadIndex(): Promise<IntegratedIndex>
+export declare function loadIndex(): Promise<IntegratedSnapshotIndex>
 export declare function loadAgentData(
   name: AgentName,
 ): Promise<AgentData | undefined>
@@ -39,10 +40,14 @@ export declare function loadAllAgents(
 ): Promise<Record<AgentName, LocalizedAgent>>
 ```
 
-- `loadIndex` 只加载完整原样索引，包含元信息、全部成员、文件引用与独立来源索引记录；不加载实体。
+- `loadIndex` 只加载完整原样索引（v3 外壳），包含快照来源输入、全部已登记类别、各类别的规则版本与语言、
+  成员文件引用与独立来源索引记录；不加载实体。根导出同时提供 `IntegratedSnapshotIndex`、
+  `IntegratedSnapshotEntity`、`IntegratedSnapshotMember` 与 `IntegratedSnapshotSourceInput` 类型；
+  旧的 v2 索引外壳类型不再公开导出，公开读取只有一种索引形状。
 - `loadAgentData` 只加载该成员 data；`loadAgentDetails` 只加载该成员指定语言 details。均无需先调用索引。
 - `loadAllAgents` 显式加载本版全部 data 与指定语言 details，目前为 58 + 58 个文件；结果以 AgentName 为 key。
-  `data` 和 `details` 保持两个独立对象，不合并同名字段。索引的 `agents` 仍以来源数字字符串为 key。
+  `data` 和 `details` 保持两个独立对象，不合并同名字段。索引的成员表是
+  `entities.agents.members`，仍以来源数字字符串为 key。
 - 每次调用返回独立的 JSON 对象树，任意嵌套修改不污染后续调用、同时调用或其他调用方。
 - 名称精确匹配，不 trim、不忽略大小写、不接受数值 ID。单体函数对未知字符串返回 undefined。
 - 非字符串 name、缺少或不支持的 locale 均使 Promise 以 TypeError 拒绝。locale 必须显式为 zh 或 en，
@@ -64,7 +69,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/agents/{来源ID}/details.en.json`
 
 这些路径映射到包内 `dist/integrated/` 的已验证发布副本。JSON 原字节、字段、层级、文件名、摘要全部保留，
-索引 `files.stats` / `files.content` 不改名。包只包含 dist 与 npm 标准清单、README、LICENSE；
+索引成员引用为 `files.data` 与 `files.details.{locale}`。包只包含 dist 与 npm 标准清单、README、LICENSE；
 不包含 raw、本机控制目录、抓取/恢复工具及内部维护材料。直接 JSON 导入遵循宿主模块缓存语义；
 返回对象隔离保证属于上述四个函数。
 
@@ -75,6 +80,10 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 若同级控制目录存在，必须使用原持锁读取协议，在回调持锁期间读完并复制全部字节，
 不能返回路径后解锁再读取，也不自动初始化、恢复或重置本机记录。没有控制目录的新克隆可直接验证已跟踪的静态 JSON，
 无需 raw 或本机管理状态。静态输入在复制期间不得并发初始化/修改，检测到新增控制目录即拒绝。
+发布的文件清单来自完整验证后的 v3 索引，覆盖全部已登记类别；类型、名称、映射与 JSON 来自同一已验证发布副本。
+受管理源仍是 v2 外壳时明确报 `MIGRATION_REQUIRED`，提示先运行 `migrate:nanoka:current`，不隐式转换、不改写数据；
+只登记部分历史语言的数据集在普通读取与当前验证时报 `INCOMPLETE_LANGUAGES`，提示按当前完整语言配置重新生成，
+发布要求完整语言配置。
 
 构建在独占临时副本完整验证后生成类型、名称与导入表，并只从该副本构建和复制到 dist；
 不会在生成类型后重新打包可变 integrated。打包前复验发布副本，解包验收再次核对实际文件集合、原字节和摘要。
@@ -82,7 +91,8 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 这将维护时的字节完整性检查落实在发布边界；不把静态模块缓存当作受管理目录并发读取协议，也不认证来源真实性。
 普通 build/test/check/pack 不读取真实 raw、不抓取、不生成或格式化真实 integrated。
 
-`typecheck`、`test`（含 watch/coverage）通过 `prepare:consumer` 自动重建包内 `.generated/`，
+真实工作区若尚未完成显式迁移，`build`、`typecheck`、`test` 与 `pack` 都会因发布源仍是 v2 外壳而明确失败；
+这是有意的拒绝，不是可以绕过的错误。`typecheck`、`test`（含 watch/coverage）通过 `prepare:consumer` 自动重建包内 `.generated/`，
 其中包含本地类型检查使用的已验证副本和名称目录；它被 Git 忽略，不是发布输入。
 每次 `build` 另建独占 `.publication-*/` 副本，成功后或进程退出时清理。
 构建仅支持单次运行，`build --watch` 在创建副本或清理 dist 前拒绝；修改后重新运行 `build`。

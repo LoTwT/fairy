@@ -2,10 +2,11 @@ import filesystem, { readFile } from "node:fs/promises"
 import { syncBuiltinESMExports } from "node:module"
 import { join } from "node:path"
 import {
-  generateNanokaAgents,
-  recoverNanokaAgents,
-  updateNanokaAgents,
-  withNanokaCurrentDataset,
+  generateCurrentDataset,
+  migrateCurrentDataset,
+  recoverCurrentDataset,
+  updateCurrentDataset,
+  withCurrentDataset,
 } from "../../scripts/nanoka-integration/current.ts"
 
 // 只供合成子进程实验；不接受生产 CLI 的故障注入环境变量。
@@ -30,8 +31,9 @@ filesystem.rm = async (path, removeOptions) => {
     target.endsWith(".fairy-state/backup")
   ) {
     const index = JSON.parse(await readFile(join(target, "index.json"), "utf8"))
+    const agents = index.entities.agents
     await remove(
-      join(target, index.agents[index.scope.agentIds[0]].files.stats.path),
+      join(target, agents.members[agents.memberIds[0]].files.data.path),
     )
     await checkpoint("backup-partially-cleaned")
   }
@@ -64,26 +66,31 @@ syncBuiltinESMExports()
 try {
   const result =
     options.mode === "recover"
-      ? await recoverNanokaAgents({
+      ? await recoverCurrentDataset({
           targetDirectory: options.targetDirectory,
           checkpoint,
         })
-      : options.mode === "read"
-        ? await withNanokaCurrentDataset(
-            options.targetDirectory,
-            async (directory, index) => {
-              await checkpoint("reading")
-              return {
-                index,
-                bytes: await readFile(`${directory}/index.json`, "utf8"),
-              }
-            },
-          )
-        : await (
-            options.mode === "generate"
-              ? generateNanokaAgents
-              : updateNanokaAgents
-          )({ ...options, checkpoint })
+      : options.mode === "migrate"
+        ? await migrateCurrentDataset({
+            targetDirectory: options.targetDirectory,
+            checkpoint,
+          })
+        : options.mode === "read"
+          ? await withCurrentDataset(
+              options.targetDirectory,
+              async (directory, index) => {
+                await checkpoint("reading")
+                return {
+                  index,
+                  bytes: await readFile(`${directory}/index.json`, "utf8"),
+                }
+              },
+            )
+          : await (
+              options.mode === "generate"
+                ? generateCurrentDataset
+                : updateCurrentDataset
+            )({ ...options, checkpoint })
   process.stdout.write(JSON.stringify(result))
 } catch (error) {
   process.stderr.write(error instanceof Error ? error.message : String(error))

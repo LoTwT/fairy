@@ -2,8 +2,8 @@ import type {
   AgentData,
   AgentDetails,
   DetailLocale,
-  IntegratedIndex,
 } from "./integration/agent-types.ts"
+import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
 import {
   agentNames,
   agentSourceIds,
@@ -12,7 +12,33 @@ import {
 } from "../.generated/catalog.ts"
 import type { AgentName } from "../.generated/catalog.ts"
 
-export type * from "./integration/agent-types.ts"
+/** 正式字段类型：实体结构、文件引用、来源身份与多实体完整制品索引。 */
+export type {
+  AgentData,
+  AgentDetails,
+  DetailLocale,
+  ExportFileReference,
+  MaterialCounts,
+  PropertyText,
+  RecommendationProperty,
+  SkillDescriptionSection,
+  SkillParameterRow,
+  SourceBaseStats,
+  SourceEmptyObject,
+  SourceExtraProperty,
+  SourceId,
+  SourceJson,
+  SourceLevelStage,
+  SourceParameter,
+  SourcePotentialDetail,
+  SourceSkillPriority,
+} from "./integration/agent-types.ts"
+export type {
+  IntegratedSnapshotEntity,
+  IntegratedSnapshotIndex,
+  IntegratedSnapshotMember,
+  IntegratedSnapshotSourceInput,
+} from "./integration/snapshot-types.ts"
 export type { AgentName } from "../.generated/catalog.ts"
 export { agentNames } from "../.generated/catalog.ts"
 
@@ -39,7 +65,7 @@ function sourceId(name: AgentName): string | undefined {
 }
 
 /** 加载完整原样索引及来源记录，不加载实体；每次返回独立对象树。加载失败时拒绝 Promise。 */
-export async function loadIndex(): Promise<IntegratedIndex> {
+export async function loadIndex(): Promise<IntegratedSnapshotIndex> {
   return structuredClone(await indexLoader())
 }
 
