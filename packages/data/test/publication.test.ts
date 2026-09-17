@@ -255,7 +255,7 @@ describe("publication snapshot", () => {
   })
 
   it("copies managed bytes while holding the existing lease and never initializes broken control state", async () => {
-    const { root, rawRoot, version } = await fixture()
+    const { root, rawRoot, version, index } = await fixture()
     const targetDirectory = join(root, "managed")
     await generateCurrentDataset({ rawRoot, version, targetDirectory })
     const control = join(root, ".managed.fairy-state")
@@ -273,7 +273,8 @@ describe("publication snapshot", () => {
       return writeFile(path, ...args)
     })
     await preparePublication(targetDirectory, join(root, "generated"))
-    expect(lockedCopies).toBe(7)
+    // 持锁复制覆盖发布清单的每个文件（index.json 加全部登记类别的实体文件）。
+    expect(lockedCopies).toBe(publicationFiles(index).length)
     expect(await fs.readFile(join(control, "state.json"))).toEqual(state)
     expect((await fs.stat(join(control, "lock.sqlite"))).ino).toBe(lock.ino)
     await fs.writeFile(join(control, "state.next"), "incomplete")

@@ -78,6 +78,8 @@ async function fixture() {
     version,
     temporaryParent,
     policy,
+    // v2 外壳只描述单一代理人制品：转换链路显式使用 agents-only 登记表，不含生产 drive-discs 类别。
+    entities: [nanokaAgentsSnapshotEntity],
   })
   // 合成 v2 静态制品：v3 构建结果改写索引外壳，成员文件与摘要保持原字节。
   const artifactDirectory = join(root, "source-artifact")

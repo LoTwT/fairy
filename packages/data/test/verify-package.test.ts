@@ -144,7 +144,20 @@ describe("packed package", () => {
       artifactDirectory: snapshot,
     })
     const jsonFiles = publicationFiles(index)
-    expect(jsonFiles).toHaveLength(175)
+    // 文件清单覆盖全部已登记类别与成员：由验证后的索引逐类别推导，不使用固定文件总数。
+    expect(Object.keys(index.entities).toSorted()).toEqual([
+      "agents",
+      "drive-discs",
+    ])
+    const expectedJsonCount =
+      1 +
+      Object.values(index.entities).reduce(
+        (total, entity) =>
+          total + entity.memberIds.length * (1 + entity.detailLocales.length),
+        0,
+      )
+    expect(jsonFiles).toHaveLength(expectedJsonCount)
+    expect(new Set(jsonFiles).size).toBe(expectedJsonCount)
     // 两个入口共用恰好一份带哈希的声明分块，且都引用它；分块名由打包器决定，不在此钉住来源模块名。
     const sharedTypes = listFiles(packedRoot).filter(
       (path) =>
@@ -218,11 +231,22 @@ for (const name of api.agentNames) {
 }
 assert.equal((await api.loadAgentData("Astra Yao")).id, 1311)
 assert.equal((await api.loadAgentData("Soldier 0 - Anby")).id, 1381)
-assert.equal(await api.loadAgentData("1311"), undefined)
+assert.equal((await api.loadAgentData("1311")), undefined)
 assert.equal(await api.loadAgentDetails("unknown", "en"), undefined)
 await assert.rejects(api.loadAgentData(1311), TypeError)
 await assert.rejects(api.loadAgentDetails("unknown"), TypeError)
 await assert.rejects(api.loadAllAgents("zh-CN"), TypeError)
+// 驱动盘 JSON 子路径按包名消费：安装包含全部文件，读取 API 属于后续提交。
+const driveDiscIds = index.entities["drive-discs"].memberIds
+assert(driveDiscIds.length > 0)
+const driveDiscId = driveDiscIds[0]
+const driveDiscData = await import(\`@randomplay/data/integrated/drive-discs/\${driveDiscId}/data.json\`, { with: { type: "json" } })
+assert.equal(driveDiscData.default.id, Number(driveDiscId))
+for (const [file, locale] of [["details.zh.json", "zh"], ["details.en.json", "en"]]) {
+  const details = await import(\`@randomplay/data/integrated/drive-discs/\${driveDiscId}/\${file}\`, { with: { type: "json" } })
+  assert.equal(details.default.id, Number(driveDiscId))
+  assert.equal(details.default.locale, locale)
+}
 console.log(JSON.stringify(api.agentNames))
 `,
         ),

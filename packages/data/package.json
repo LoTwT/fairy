@@ -23,7 +23,10 @@
     "./integrated/index.json": "./dist/integrated/index.json",
     "./integrated/agents/*/data.json": "./dist/integrated/agents/*/data.json",
     "./integrated/agents/*/details.zh.json": "./dist/integrated/agents/*/details.zh.json",
-    "./integrated/agents/*/details.en.json": "./dist/integrated/agents/*/details.en.json"
+    "./integrated/agents/*/details.en.json": "./dist/integrated/agents/*/details.en.json",
+    "./integrated/drive-discs/*/data.json": "./dist/integrated/drive-discs/*/data.json",
+    "./integrated/drive-discs/*/details.zh.json": "./dist/integrated/drive-discs/*/details.zh.json",
+    "./integrated/drive-discs/*/details.en.json": "./dist/integrated/drive-discs/*/details.en.json"
   },
   "publishConfig": {
     "access": "public"

@@ -12,7 +12,10 @@ import {
   updateCurrentDataset,
   withCurrentDataset,
 } from "../scripts/nanoka-integration/current.ts"
-import { onboardedSnapshotEntities } from "../scripts/nanoka-integration/snapshot-entities.ts"
+import {
+  nanokaAgentsSnapshotEntity,
+  onboardedSnapshotEntities,
+} from "../scripts/nanoka-integration/snapshot-entities.ts"
 import type { IntegratedSnapshotEntityProducer } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { compareJsonValues } from "../scripts/nanoka-integration/snapshot-diff.ts"
 import type {
@@ -81,8 +84,9 @@ async function fixture(options: { widgets?: readonly string[] } = {}) {
   roots.push(root)
   const rawRoot = join(root, "raw/nanoka")
   const version = "synthetic-1"
+  // widgets 与 drive-discs 共用 equipment 来源：widgets 用例改用 agents + widgets 的独立测试登记表。
   const entities: readonly IntegratedSnapshotEntityProducer[] = options.widgets
-    ? [...onboardedSnapshotEntities, syntheticSnapshotEntity]
+    ? [nanokaAgentsSnapshotEntity, syntheticSnapshotEntity]
     : onboardedSnapshotEntities
   await writeSyntheticRaw({
     rawRoot,
@@ -816,6 +820,12 @@ describe("current dataset update report", () => {
             after: "nanoka-agent-reference/4",
             changed: false,
           },
+          {
+            name: "drive-discs",
+            before: null,
+            after: "nanoka-drive-disc-reference/1",
+            changed: false,
+          },
         ],
         changed: false,
       },
@@ -838,6 +848,11 @@ describe("current dataset update report", () => {
       ["agents", "added"],
       ["agents", "added"],
       ["agents", "added"],
+      ["drive-discs", "added"],
+      ["drive-discs", "added"],
+      ["drive-discs", "added"],
+      ["drive-discs", "added"],
+      ["drive-discs", "added"],
     ])
     // 首次生成没有旧基线：成员与文件全部是新增，不伪装成一次普通版本更新。
     const agents = category(report, "agents")
@@ -974,7 +989,7 @@ describe("current dataset update report", () => {
       changed: true,
     })
     // 版本切换只体现为资源名的新增与移除；来源版本号变化不等于实体内容变化。
-    // 顺序为先候选顺序，再仅基线存在的资源。
+    // 每个类别先候选顺序、再仅基线存在的资源；类别按名称序，类别内索引在前、成员按数值升序与配置语言顺序。
     expect(
       report.source.inputs.map(({ category: scope, resource, change }) => [
         scope,
@@ -993,6 +1008,16 @@ describe("current dataset update report", () => {
       ["agents", "zzz/synthetic-1/en/character/2.json", "removed"],
       ["agents", "zzz/synthetic-1/zh/character/10.json", "removed"],
       ["agents", "zzz/synthetic-1/en/character/10.json", "removed"],
+      ["drive-discs", `zzz/${input.version}/equipment.json`, "added"],
+      ["drive-discs", `zzz/${input.version}/zh/equipment/930001.json`, "added"],
+      ["drive-discs", `zzz/${input.version}/en/equipment/930001.json`, "added"],
+      ["drive-discs", `zzz/${input.version}/zh/equipment/930002.json`, "added"],
+      ["drive-discs", `zzz/${input.version}/en/equipment/930002.json`, "added"],
+      ["drive-discs", "zzz/synthetic-1/equipment.json", "removed"],
+      ["drive-discs", "zzz/synthetic-1/zh/equipment/930001.json", "removed"],
+      ["drive-discs", "zzz/synthetic-1/en/equipment/930001.json", "removed"],
+      ["drive-discs", "zzz/synthetic-1/zh/equipment/930002.json", "removed"],
+      ["drive-discs", "zzz/synthetic-1/en/equipment/930002.json", "removed"],
     ])
     expect(report.source.changed).toBe(true)
     expect(report.result).toBe("unchanged")
@@ -1083,7 +1108,7 @@ describe("current dataset update report", () => {
       ["zzz/synthetic-1/character.json", "changed"],
       ["zzz/synthetic-1/zh/character/10.json", "changed"],
     ])
-    expect(report.source.unchangedInputCount).toBe(4)
+    expect(report.source.unchangedInputCount).toBe(9)
     expect(report.source.changed).toBe(true)
     expect(report.changeCause).toMatchObject({ attributedTo: "source" })
     expect(agents.review).toMatchObject({
@@ -1107,7 +1132,7 @@ describe("current dataset update report", () => {
     await generateCurrentDataset(input)
     const before = await fingerprints(input.targetDirectory)
     const bumpedRules = [
-      ...onboardedSnapshotEntities,
+      nanokaAgentsSnapshotEntity,
       { ...syntheticSnapshotEntity, rulesVersion: "widget-reference/2" },
     ]
     // 仅规则版本变化：来源未变、实体输出未改写，只登记规则版本变化。
@@ -1165,7 +1190,7 @@ describe("current dataset update report", () => {
     await updateCurrentDataset({
       ...input,
       entities: [
-        ...onboardedSnapshotEntities,
+        nanokaAgentsSnapshotEntity,
         { ...syntheticSnapshotEntity, rulesVersion: "widget-reference/3" },
       ],
     })
@@ -1912,7 +1937,11 @@ describe("current dataset update report", () => {
 
   it("reports a legacy v2 baseline and a category added by the current registry", async () => {
     const input = await fixture()
-    await generateCurrentDataset(input)
+    // 基线必须是合法的 agents-only v2 制品：先用 agents-only 登记表生成，再改写索引外壳。
+    await generateCurrentDataset({
+      ...input,
+      entities: [nanokaAgentsSnapshotEntity],
+    })
     const entityBytes = await bytes(input.targetDirectory)
     // 把 v3 制品改写为 v2 外壳并登记旧协议稳定记录：实体文件与来源记录保持原值。
     await rewriteAsLegacyV2Artifact(input.targetDirectory)
@@ -1949,7 +1978,7 @@ describe("current dataset update report", () => {
     })
     const result = await generateCurrentDataset({
       ...input,
-      entities: [...onboardedSnapshotEntities, syntheticSnapshotEntity],
+      entities: [nanokaAgentsSnapshotEntity, syntheticSnapshotEntity],
     })
     expect(result.outcome).toBe("committed")
     const report = await updateReport(input)

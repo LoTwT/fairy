@@ -1,8 +1,9 @@
 # 数据消费与 npm 导出契约
 
 本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
-[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、zh/en 两种详情语言；
-公开索引使用多实体 v3 外壳，类别（当前只有 `agents`）与成员文件摘要来自完整验证后的同一发布副本。
+[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、30 个驱动盘套装、zh/en 两种详情语言；
+公开索引使用多实体 v3 外壳，类别（`agents` 与 `drive-discs`）与成员文件摘要来自完整验证后的同一发布副本。
+驱动盘已进入生产快照与 JSON 子路径导出；公开的驱动盘名称类型、名称 catalog 与读取 API 尚未实现，属于后续工作。
 
 ## 名称与类型
 
@@ -67,9 +68,14 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/agents/{来源ID}/data.json`
 - `/integrated/agents/{来源ID}/details.zh.json`
 - `/integrated/agents/{来源ID}/details.en.json`
+- `/integrated/drive-discs/{来源ID}/data.json`
+- `/integrated/drive-discs/{来源ID}/details.zh.json`
+- `/integrated/drive-discs/{来源ID}/details.en.json`
 
 这些路径映射到包内 `dist/integrated/` 的已验证发布副本。JSON 原字节、字段、层级、文件名、摘要全部保留，
-索引成员引用为 `files.data` 与 `files.details.{locale}`。包只包含 dist 与 npm 标准清单、README、LICENSE；
+索引成员引用为 `files.data` 与 `files.details.{locale}`。驱动盘 JSON 只通过子路径直接导入消费；
+包根入口尚不提供驱动盘的名称元数据、懒加载表或读取函数，因此安装包含驱动盘 JSON，而根入口的模块图
+暂不引用它们。包只包含 dist 与 npm 标准清单、README、LICENSE；
 不包含 raw、本机控制目录、抓取/恢复工具及内部维护材料。直接 JSON 导入遵循宿主模块缓存语义；
 返回对象隔离保证属于上述四个函数。
 

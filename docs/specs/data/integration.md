@@ -4,7 +4,8 @@
 
 **状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
-驱动盘单实体纯整合已按独立规则 `nanoka-drive-disc-reference/1` 实现，其生产类别尚未接入；规则与实现状态见
+已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）与 `drive-discs`（规则
+`nanoka-drive-disc-reference/1`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
@@ -408,6 +409,9 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 和原子写记录使用的 `state.next`。所有材料均不属于可消费制品。正常结束只保留一份当前数据与最新维护报告。
 
 - 目标不存在时首次创建；显式 `generate:integrated` 也允许对已有完整合法 JSON 建立本机记录。空目录、符号链接、外来文件和损坏状态仍拒绝，不递归重建。
+- 初始化要求当前 v3 制品满足当前登记表的全部已接入类别：登记表演进后，缺类别的历史完整制品（例如仅含
+  `agents` 的旧 v3 数据集）不再满足初始化条件，生成与迁移都明确拒绝并保留现场，不会自动接管或补空集合；
+  删除旧制品后由生成入口从 raw 完整重建双类别数据集。
 - 生成入口取得同一永久锁后，只有 `state.json` 不存在且控制目录至多含锁文件、journal 与初始 `state.next` 时，才允许初始化已有制品。
   复用完整验证器检查当前 v3 格式、支持的当前规则 v4、全部已接入类别、当前完整语言配置、成员、来源清单、精确文件集合及实际字节摘要；
   以已验证索引的实际字节摘要、索引格式、各类别规则版本和验证配置建立 `idle(current)`，再进入既有恢复及候选更新流程。
@@ -688,8 +692,9 @@ core 映射不属于本规则。
 [独立测试侧还原](../../../packages/data/test/fixtures/drive-disc-roundtrip.ts)、
 [合成输入](../../../packages/data/test/fixtures/drive-disc-source.ts)和
 [类型正反例](../../../packages/data/test/drive-disc-types.typecheck.ts)覆盖，测试不读取真实 raw。
-**生产类别尚未接入**：`drive-discs` 未登记到已接入类别，不生成、不修改真实 integrated，也没有公开类型、
-名称 catalog 或读取 API；这些属于后续工作。
+**生产类别已接入**：`drive-discs`（来源实体 `equipment`）登记到已接入类别，生产快照与 JSON 子路径导出已包含
+驱动盘；成员文件身份检查在类别登记表中显式实现。公开的驱动盘类型、名称 catalog 与读取 API 尚未提供；
+这些属于后续工作。
 
 ### 离线全量构建的共用能力
 
@@ -788,9 +793,11 @@ fairy-integrated-snapshot-<独占后缀>/
 ### 多实体完整制品的内部生成、验证与转换
 
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
-当前只有 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`），其纯整合复用既有 `integrateAgent`，
-成员文件身份检查沿用第 7.1 节的代理人规则。登记校验要求类别名唯一且可作为目录名、来源实体不被重复使用、
-规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，验证与历史复验只要求静态契约。
+当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）与 `drive-discs`（来源实体
+`equipment`，规则 `nanoka-drive-disc-reference/1`），代理人复用既有 `integrateAgent`、驱动盘复用既有
+`integrateDriveDisc`，成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
+可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
+验证与历史复验只要求静态契约。
 [索引类型](../../../packages/data/src/integration/snapshot-types.ts)由包根入口导出，是公开读取的唯一索引类型；
 `IntegratedSnapshotIndex` 默认要求完整语言引用，`HistoricalIntegratedSnapshotIndex` 复用同一 JSON 结构并把引用表达为可能缺失，
 只用于历史复验。
@@ -825,7 +832,8 @@ fairy-integrated-snapshot-<独占后缀>/
 更新差异由[差异引擎](../../../packages/data/scripts/nanoka-integration/snapshot-diff.ts)（纯 JSON 值比较）和
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
-`generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次只有 `agents` 一个真实类别。
+`generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents` 与
+`drive-discs`。
 从仓库根目录执行：
 
 ```bash
@@ -872,6 +880,9 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 | 旧协议下需要先恢复的未完成事务                           | `RECOVERY_REQUIRED`：先运行恢复按原协议回到稳定状态，再迁移 |
 | 已经迁移完成的 v3 数据集                                 | `unchanged`，只复验，不写记录、不改数据                     |
 | 损坏、归属不符或不受支持的输入                           | 明确拒绝并保留现场                                          |
+
+「已经迁移完成的 v3 数据集」指已有稳定管理记录的数据集；无本机记录的静态 v3 制品走初始化登记，
+同样要求当前登记表的全部已接入类别与当前完整语言配置，缺类别的旧制品明确拒绝，不冒充 `unchanged`。
 
 对无本机管理记录的静态 v2 制品，迁移在创建任何工作材料（复制、转换、候选）之前先登记本次迁移的归属与基线记录：
 记录指向已验证的 v2 数据集本身，因此未提交时数据仍保持原样。该登记本身也可中断——`state.next` 允许写入途中终止，
@@ -922,6 +933,39 @@ v2 旧基线与新增类别、缺失或损坏新版输入的明确失败、报�
 以下记录按时间顺序保留当时的验证结果；早于「多实体 v3 切换」的记录描述当时仍为 v2 外壳的生成、管理、
 发布与消费链路，其命令名与索引字段已被第 7.1、8.1、9 节的当前契约取代，不作为现行用法。
 记录中的测试数量是当时基线在当时的隔离环境中的快照，不构成对当前代码的保证；当前覆盖以第 9 节上文与常规检查为准。
+
+### 驱动盘生产类别接入验收
+
+2026-09-17，基线 `2aa5bead`，实现 `drive-discs`（来源实体 `equipment`，规则 `nanoka-drive-disc-reference/1`）
+登记到生产类别登记表，`snapshot-build` 错误包装扩展到 `SourceIntegrationError` 基类，package.json 增加驱动盘
+data/zh/en JSON 子路径，并提交双类别真实快照。
+
+真实 3.1 验收（本机 macOS 26.6.2 arm64、Node 24.18.0，raw 为只读输入）：
+
+- 登记前先用 agents-only 登记执行 `generate:integrated`：`unchanged`，175 个文件字节、inode、纳秒 mtime 与
+  登记前完全一致，建立合法管理记录；118 项代理人来源输入与既有索引记录的摘要一致。
+- 改用双类别登记后同一命令：`committed`；agents 58 名成员、174 个实体文件字节、inode、纳秒 mtime 不变，
+  仅 index.json 改写；drive-discs 新增 30 名成员、90 个文件，全制品 265 个文件。
+- 独立核对脚本（不导入生产代码）核对 1,584 项：索引外壳与类别块、全部输入资源摘要、逐成员 `sourceRecord`
+  与 raw 索引记录 JSON 值相等、data/zh/en 路径与实际字节摘要、驱动盘 `id`/`locale`/`name`/`desc2`/`desc4`/
+  `story` 保留、`icon`/`icon2` 跨语言一致并提取到 data、未知字段保留、文件集合与索引精确一致，全部通过。
+- 重复执行同一命令：`unchanged`，复用 264 个实体文件、改变 0 个；实体文件 sha256、inode、纳秒 mtime 不变
+  （硬链接复用使 ctime 变化，不构成改写承诺范围）。整个 raw 的 2,478 个文件前后逐字节一致。
+- 合成验收（`test/agent-current.test.ts`、`test/update-report.test.ts` 等，不读取真实 raw）覆盖：从已有受管理
+  agents-only 基线新增 drive-discs、只改一类时另一类完整复用、成员新增/修改/合法移除、缺失输入不得解释为删除、
+  来源与规则变化归因、重复更新明确报告已检查无变化、v2 显式迁移不新增类别（转换候选按 agents 契约复验）、
+  历史语言子集复验与恢复、提交前失败保留旧快照等。
+- `pnpm check`（lint、格式、类型、data 727 项与 core 1,423 项测试、打包解包离线安装、按包名消费
+  loadIndex 与驱动盘 data/zh/en JSON 子路径）、真实 Chromium 的 Vite 开发/生产消费、`verify:nanoka:current`、
+  `verify:nanoka:snapshot` 与幂等恢复全部通过；`git diff --check` 无输出。
+- 独立 review 复核完整 diff 并在本机复跑测试：登记与身份检查、错误包装、迁移复验、fixture 与文档未发现缺陷；
+  据其修订两点——登记表演进后无管理记录的 agents-only v3 制品被生成/迁移明确拒绝（新增合成回归钉住，
+  并在 8.1 节写明边界），合成驱动盘成员 ID 收敛到 `syntheticDriveDiscIds` 单一来源；
+  `rewriteAsLegacyV2Artifact` 增加多类别输入拒绝护栏。
+- 打包包含 265 个 JSON，而 Vite 模块图只含代理人懒加载表引用的 175 个（index.json + 58×3）：
+  驱动盘 JSON 已随包分发但尚无读取 API，两个口径不再相等是本版的预期状态。
+- 未执行真实相邻版本推进（历史 3.0 缓存缺少 `skill_priority`，不能作为当前规则完整输入）；不承诺
+  nlink、ctime 或目录 inode 不变。来源分发复核记录见[共享来源规范](../nanoka/source.md#分发复核记录)。
 
 ### 跨层最终验收
 

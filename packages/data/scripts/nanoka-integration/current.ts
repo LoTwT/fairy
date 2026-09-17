@@ -43,7 +43,10 @@ import {
 } from "./files.ts"
 import { convertNanokaAgentsArtifactToSnapshot } from "./snapshot-convert.ts"
 import { buildIntegratedSnapshot } from "./snapshot-build.ts"
-import { onboardedSnapshotEntities } from "./snapshot-entities.ts"
+import {
+  nanokaAgentsSnapshotEntity,
+  onboardedSnapshotEntities,
+} from "./snapshot-entities.ts"
 import type {
   IntegratedSnapshotEntityContract,
   IntegratedSnapshotEntityProducer,
@@ -1474,6 +1477,9 @@ export async function migrateCurrentDataset(options: {
       const verified = await verifyIntegratedSnapshot({
         artifactDirectory: paths.candidate,
         policy,
+        // 转换结果是 agents-only 的 v3 制品：按 v2 外壳的同一 agents 契约复验候选；
+        // 显式迁移不新增类别，缺类别的新候选只能由整库更新从 raw 重建。
+        entities: [nanokaAgentsSnapshotEntity],
         expectedIndex: conversion.index,
       })
       const after = descriptorFor(

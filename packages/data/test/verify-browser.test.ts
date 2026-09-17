@@ -55,7 +55,24 @@ it("consumes the offline-installed package in real Vite development and producti
         },
       ],
     })
-    expect(Object.values(chunkSources).flat()).toHaveLength(175)
+    expect(Object.values(chunkSources).flat().toSorted()).toEqual(
+      [
+        "index.json",
+        ...JSON.parse(
+          readFileSync(join(packedRoot, "dist/integrated/index.json"), "utf8"),
+        ).entities.agents.memberIds.flatMap((id: string) => [
+          `agents/${id}/data.json`,
+          `agents/${id}/details.zh.json`,
+          `agents/${id}/details.en.json`,
+        ]),
+      ].toSorted(),
+    )
+    // 安装包含驱动盘 JSON，但本版没有驱动盘懒加载表：它们不得进入 Vite 模块图。
+    expect(
+      Object.values(chunkSources)
+        .flat()
+        .some((path) => path.startsWith("drive-discs/")),
+    ).toBe(false)
     const browser = await chromium.launch({ headless: true })
     try {
       for (const mode of ["development", "production"] as const) {
