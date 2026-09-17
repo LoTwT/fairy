@@ -3,7 +3,7 @@
 ## 状态
 
 - 上游实体：`equipment`；整合类别登记名为 `drive-discs`，类型与函数统一使用 `DriveDisc` 命名。
-- 状态：已完成代表性结构调研，可由共享抓取器缓存；单实体纯整合（规则 `nanoka-drive-disc-reference/1`）已实现，生产类别尚未接入。
+- 状态：已完成代表性结构调研，可由共享抓取器缓存；当前整合实现状态见[来源数据整合规范](../data/integration.md#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
 - 抓取器仍只确认索引和详情是可解析的普通 JSON 对象，不比较摘要与详情字段，也不验证跨语言一致性。
 - 字段级结构校验、跨语言一致性与保真边界由包内纯整合函数执行；规则以[来源数据整合规范](../data/integration.md#驱动盘单实体实现规则-nanoka-drive-disc-reference1)为准。
 
