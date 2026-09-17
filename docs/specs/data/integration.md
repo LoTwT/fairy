@@ -4,6 +4,8 @@
 
 **状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
+驱动盘单实体纯整合已按独立规则 `nanoka-drive-disc-reference/1` 实现，其生产类别尚未接入；规则与实现状态见
+[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -19,8 +21,9 @@ definitions：经人工确认的计算语义
 core：计算
 ```
 
-本规范只定义第一阶段代理人资料，来源为 [Nanoka Agents](../nanoka/agents.md)，上游名称 `character`
-在整合目录中称为 `agents`。`definitions` 的内部模型由后续人工讨论决定；data 与 core 保持互不依赖。
+本规范定义第一阶段代理人资料，来源为 [Nanoka Agents](../nanoka/agents.md)，上游名称 `character`
+在整合目录中称为 `agents`；驱动盘套装的独立规则见[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
+`definitions` 的内部模型由后续人工讨论决定；data 与 core 保持互不依赖。
 
 ## 1. 完整导出的边界
 
@@ -597,7 +600,7 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 
 ## 9. 包内实现与验收证据
 
-### 当前单实体实现
+### 代理人单实体实现
 
 [纯整合函数](../../../packages/data/src/integration/integrate-agent.ts) `integrateAgent` 接受
 `{ entityId, sourceRecord, details, detailLocales }`：实体 ID 明确给出，独立索引记录和各语言详情以 `unknown`
@@ -637,6 +640,56 @@ pnpm --filter @randomplay/data typecheck
 pnpm --filter @randomplay/data test
 pnpm --filter @randomplay/data verify:pack
 ```
+
+### 驱动盘单实体实现规则 `nanoka-drive-disc-reference/1`
+
+来源说明见 [Nanoka Drive Discs](../nanoka/equipment.md)：上游实体 `equipment`，整合类别登记名为 `drive-discs`，
+类型与函数统一使用 `DriveDisc` 命名。每条记录表示一个驱动盘套装；单件槽位、主副词条、强化面板、效果计算及
+core 映射不属于本规则。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-drive-disc.ts) `integrateDriveDisc` 接受与
+`integrateAgent` 相同的输入形态 `{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[驱动盘类型](../../../packages/data/src/integration/drive-disc-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[驱动盘结构登记](../../../packages/data/src/integration/drive-disc-schema.ts)。
+
+字段归属：
+
+| 来源字段                          | `data.json`            | `details.{locale}.json` |
+| --------------------------------- | ---------------------- | ----------------------- |
+| `id`                              | 数值套装 ID            | 同值身份副本            |
+| `icon`、`icon2`                   | 原值，两个字段分别保存 | 无重复载荷              |
+| `name`、`desc2`、`desc4`、`story` | 无                     | 当前语言原文            |
+| 派生 `locale`                     | 无                     | 输入语言标识            |
+
+`desc2`、`desc4`、`icon2` 继续使用来源用词：不解析效果、不推断槽位对应关系或新的业务含义。索引摘要与语言详情
+是两个独立来源：摘要完整保存在 `sourceRecord`，不与详情去重，同名字段不要求相等，也不互相回退。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`name`、`desc2`、`desc4`、`story`、`icon`、`icon2`；除 `id` 外均为字符串。
+   `id` 必须为安全整数，其规范十进制形式与 `entityId` 一致。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. `icon` 与 `icon2` 是必需的公共字符串：每个语言都必须提供，跨语言完整值必须一致，冲突即失败；即使
+   两个字段取值相等也分别保留。
+5. 来源摘要必须提供字符串 `icon` 与 `zh`、`en` 语言对象的 `name`、`desc2`、`desc4`；`ja`、`ko` 存在时校验
+   对应结构，缺失时不补造；摘要与详情的同名字段不要求相等。
+6. 未登记字段原样保留：详情未知字段留在对应语言，摘要未知字段留在 `sourceRecord`，都进入维护诊断；
+   不因跨语言相等而自动共享。来源字段 `locale` 与派生 `locale` 重名时失败，不能覆盖。
+7. 空字符串、零、`null`、空数组、空对象、数组顺序和富文本按来源保留；已登记字段仍须满足其明确类型。
+   非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `DriveDiscIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+   字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
+
+实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/drive-disc-integration.test.ts)、
+[独立测试侧还原](../../../packages/data/test/fixtures/drive-disc-roundtrip.ts)、
+[合成输入](../../../packages/data/test/fixtures/drive-disc-source.ts)和
+[类型正反例](../../../packages/data/test/drive-disc-types.typecheck.ts)覆盖，测试不读取真实 raw。
+**生产类别尚未接入**：`drive-discs` 未登记到已接入类别，不生成、不修改真实 integrated，也没有公开类型、
+名称 catalog 或读取 API；这些属于后续工作。
 
 ### 离线全量构建的共用能力
 

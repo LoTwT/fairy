@@ -18,7 +18,11 @@ import {
   put,
   sortedIds,
 } from "./source-json.ts"
-import type { JsonObject, SourceLocation } from "./source-json.ts"
+import type {
+  JsonObject,
+  SourceLocation,
+  UnknownFieldDiagnostic,
+} from "./source-json.ts"
 
 /** 单实体已解析输入；语言顺序由调用方明确提供，不隐式加载来源配置。 */
 export interface IntegrateAgentInput {
@@ -30,12 +34,6 @@ export interface IntegrateAgentInput {
   details: unknown
   /** 显式有序、非空且不重复的已取得详情语言；首项决定 codeName。 */
   detailLocales: readonly DetailLocale[]
-}
-
-/** 未登记结构字段的维护提示；未知容器内部不猜测字段身份。 */
-export interface UnknownFieldDiagnostic extends SourceLocation {
-  /** 未登记字段提示，不影响原值保留。 */
-  kind: "unknown-field"
 }
 
 /** codeName 特例的独立维护记录。 */
