@@ -807,17 +807,22 @@ core 映射不属于本规则。
    `classificationIds.weaponType` 从 key 派生并按数值升序；完整字典保留在各语言详情，不映射为 core 枚举。
 5. 来源字段与登记输出名冲突（如同时存在 `code_name` 与 `codeName`、`star_rate` 与 `starRate`）时失败，
    不覆盖、不合并；`locale`、`classificationIds` 与派生辅助字段重名时同样失败。
-6. 未登记字段原样保留：详情未知字段留在对应语言，索引记录未知字段留在 `sourceRecord`，都进入维护诊断；
-   共享块内部的未知阶段成员随整块提取到 `data`，跨语言不一致时仍按公共冲突处理。
-7. 空字符串、零、`null`、空数组、空对象、数组顺序、材料字符串、数值尺度与显示格式按来源保留；
+6. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.1 `weapon.json` 的 95 条记录为
+   `atk`、`desc`、`en`、`icon`、`ja`、`ko`、`rank`、`sub`、`type`、`zh`。登记只用于识别未知字段：
+   不要求这些字段存在、不校验其类型，`sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的
+   代码单元顺序生成 `locale: "index"` 的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
+7. 未登记字段原样保留：详情未知字段留在对应语言并进入维护诊断；共享块内部的未知阶段成员随整块提取到
+   `data`，跨语言不一致时仍按公共冲突处理。
+8. 空字符串、零、`null`、空数组、空对象、数组顺序、材料字符串、数值尺度与显示格式按来源保留；
    已登记字段仍须满足其明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
-8. 失败抛出 `WEngineIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+9. 失败抛出 `WEngineIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
    字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
 
 实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/w-engine-integration.test.ts)、
 [独立测试侧还原](../../../packages/data/test/fixtures/w-engine-roundtrip.ts)、
 [合成输入](../../../packages/data/test/fixtures/w-engine-source.ts)和
-[类型正反例](../../../packages/data/test/w-engine-types.typecheck.ts)覆盖，测试不读取真实 raw。
+[类型正反例](../../../packages/data/test/w-engine-types.typecheck.ts)覆盖，测试不读取真实 raw；
+索引诊断进入制品外维护报告的链路由[构建维护报告用例](../../../packages/data/test/snapshot-build.test.ts)覆盖。
 **生产类别已接入**：`w-engines`（来源实体 `weapon`）登记到已接入类别，生产快照与 JSON 子路径导出已包含
 WEngine；成员文件身份检查在类别登记表中显式实现。公开的 WEngine 类型、名称 catalog 与读取 API 已由包根入口
 按[消费契约](consumption.md)提供。
@@ -1128,6 +1133,14 @@ package.json 增加 WEngine data/zh/en JSON 子路径，并提交三类别真实
 - `pnpm check`（lint、格式、类型、data 824 项与 core 1,423 项测试、打包解包离线安装与按包名消费）、
   真实 Chromium 的 Vite 开发/生产消费（三类场景各 6 个阶段，跨类别零串读）、`verify:nanoka:current` 全部通过；
   `git diff --check` 无输出。
+- Review 修复（同日）：规范承诺索引未知字段进入维护诊断，而 `integrateWEngine` 此前只复制 `sourceRecord`，
+  未知顶层字段没有诊断。现将已知索引顶层字段（`atk`、`desc`、`en`、`icon`、`ja`、`ko`、`rank`、`sub`、
+  `type`、`zh`）集中登记到结构登记表，只用于识别未知字段，不要求字段存在、不校验类型；未知顶层字段按来源
+  key 顺序生成 `locale: "index"` 的诊断，索引诊断先于语言诊断，`sourceRecord` 原 key 与原值不变。
+  修复后从同一 3.1 raw 重新生成：`unchanged`，549 个实体文件全部复用、改变 0、移除 0；管理记录的索引摘要与
+  修复前一致（真实数据内容未变），维护报告三个类别诊断均为 0。合成用例覆盖已知字段不误报、未知字段诊断与
+  Pointer 转义、特殊对象 key、未知容器完整保留、输入不被修改、对象 key 排列无关，以及 index 诊断进入制品外
+  维护报告。
 - 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567，本任务明确只使用现有 3.1 缓存，
   不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
   [共享来源规范](../nanoka/source.md#分发复核记录)。

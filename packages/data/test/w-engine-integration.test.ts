@@ -172,6 +172,65 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
     expectWEngineRoundtrip(result, input)
   })
 
+  it("来源索引的未知顶层字段生成 index 诊断，已知字段不误报", () => {
+    const input = wEngineInput()
+    change(input.sourceRecord, "future_field", { nested: [1, 2] })
+    change(input.sourceRecord, "a/b~c", 0)
+    change(input.sourceRecord, "__proto__", { polluted: true })
+    change(input.sourceRecord, "constructor", "raw")
+    const before = structuredClone(input)
+    const result = integrateWEngine(input)
+    // 已知索引字段全部保留且不产生诊断；未知字段按来源 key 顺序生成 index 诊断并转义 Pointer。
+    expect(result.maintenance.diagnostics).toEqual([
+      {
+        entityId: "940001",
+        locale: "index",
+        pointer: "/__proto__",
+        kind: "unknown-field",
+      },
+      {
+        entityId: "940001",
+        locale: "index",
+        pointer: "/a~1b~0c",
+        kind: "unknown-field",
+      },
+      {
+        entityId: "940001",
+        locale: "index",
+        pointer: "/constructor",
+        kind: "unknown-field",
+      },
+      {
+        entityId: "940001",
+        locale: "index",
+        pointer: "/future_field",
+        kind: "unknown-field",
+      },
+    ])
+    expect(Object.getPrototypeOf(result.sourceRecord)).toBe(Object.prototype)
+    expect(ownValue(result.sourceRecord, "future_field")).toStrictEqual({
+      nested: [1, 2],
+    })
+    expect(ownValue(result.sourceRecord, "a/b~c")).toBe(0)
+    expect(ownValue(result.sourceRecord, "__proto__")).toStrictEqual({
+      polluted: true,
+    })
+    expect(ownValue(result.sourceRecord, "constructor")).toBe("raw")
+    expect(ownValue(result.sourceRecord, "icon")).toBe(
+      "Weapon_B_Common_Example",
+    )
+    expect(ownValue(result.sourceRecord, "atk")).toBe(475)
+    expect(input).toStrictEqual(before)
+    expectWEngineRoundtrip(result, input)
+    // 对象 key 排列不影响诊断集合与顺序。
+    const reordered = integrateWEngine(
+      reverseKeys(input) as IntegrateWEngineInput,
+    )
+    expect(reordered.maintenance.diagnostics).toEqual(
+      result.maintenance.diagnostics,
+    )
+  })
+
   it("两次整合互不影响，结果对象树独立", () => {
     const input = wEngineInput()
     const first = integrateWEngine(input)
@@ -206,6 +265,12 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
     expect(reordered).toStrictEqual(result)
     expect(JSON.stringify(reordered)).toBe(JSON.stringify(result))
     expect(result.maintenance.diagnostics).toEqual([
+      {
+        entityId: "940001",
+        locale: "index",
+        pointer: "/future",
+        kind: "unknown-field",
+      },
       {
         entityId: "940001",
         locale: "zh",
@@ -279,6 +344,12 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
       0,
     ])
     expect(result.maintenance.diagnostics).toEqual([
+      {
+        entityId: "940001",
+        locale: "index",
+        pointer: "/future_field",
+        kind: "unknown-field",
+      },
       {
         entityId: "940001",
         locale: "zh",

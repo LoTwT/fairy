@@ -7,6 +7,7 @@ import type { DetailLocale, SourceJson } from "./agent-types.ts"
  * 本层不解析 materials 字符串、不换算百分比、不解释成长公式或天赋计算效果，
  * 也不建立 definitions 或 core 映射。
  * number 表示原始数值，不承诺单位、缩放或计算语义；未知来源结构使用 SourceJson 保留。
+ * 来源索引记录与各语言详情的未登记顶层字段原样保留，并进入整合结果的维护诊断。
  * 运行时原样保留未登记的顶层字段，索引签名让这些字段可以在类型层面读取，
  * 但读取到的不表示其业务语义已经确认。
  * 不承诺未来来源版本结构不变；合成验收位于 test/w-engine-integration.test.ts。

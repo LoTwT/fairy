@@ -7,6 +7,7 @@ import type {
   WEngineSharedDetailField,
 } from "./w-engine-schema.ts"
 import {
+  wEngineIndexFields,
   wEngineLocalizedDetailFields,
   wEnginePropertyFields,
   wEnginePropertyTextMembers,
@@ -49,11 +50,11 @@ export interface IntegratedWEngine {
   data: WEngineData
   /** 本次输入语言 → details.{locale}.json 顶层对象；未读取语言不存在。 */
   details: Partial<Record<DetailLocale, WEngineDetails>>
-  /** 完整独立来源索引记录副本，供后续总索引使用，保持原 key 与原值。 */
+  /** 完整独立来源索引记录副本，供后续总索引使用，保持原 key 与原值；未知顶层字段另进入维护诊断。 */
   sourceRecord: JsonObject
   /** 与实体数据分开的维护信息。 */
   maintenance: {
-    /** 未登记结构字段，按配置语言及来源路径的确定性顺序排列。 */
+    /** 未登记结构字段；索引记录的未知顶层字段在前、按来源 key 顺序，语言详情按配置语言与来源路径的确定性顺序排列。 */
     diagnostics: UnknownFieldDiagnostic[]
   }
 }
@@ -100,6 +101,11 @@ export function integrateWEngine(
   )
   if (!isObject(sourceRecord))
     failWEngine(indexLocation, "索引记录必须是普通对象")
+  const diagnostics: UnknownFieldDiagnostic[] = []
+  // 只识别来源索引的未知顶层字段；登记不要求字段存在或类型相符，未知容器内部不递归推断。
+  for (const key of Object.keys(sourceRecord).toSorted())
+    if (!wEngineIndexFields.includes(key))
+      diagnostics.push({ ...at(indexLocation, key), kind: "unknown-field" })
   const sources = input.details
   if (!isObject(sources)) failWEngine(location, "details 必须是语言记录对象")
   for (const key of Reflect.ownKeys(sources)) {
@@ -111,7 +117,6 @@ export function integrateWEngine(
     if (!locales.includes(key as DetailLocale))
       failWEngine(at(location, key), "未配置的详情语言")
   }
-  const diagnostics: UnknownFieldDiagnostic[] = []
   const records = locales.map((locale) => {
     const context: SourceLocation = { ...location, locale }
     if (!Object.hasOwn(sources, locale)) failWEngine(context, "缺失详情")
