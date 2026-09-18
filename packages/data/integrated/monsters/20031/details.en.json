@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A consistently lucky investigator that believes good fortune comes from waiting patiently.",
+  "cardSkillDesc": "Miasmic - Wicked Wraith attacks with a giant axe and shotgun. Its axe attacks can create Miasma Pools on the ground, and these attacks can inflict an Miasma Corruption effect on players.",
+  "desc": "A fallen being, reforged within the depths of corruption and shadow.\nIts most striking feature lies in its grotesquely developed arms, the embodiment of the Wicked Wraith's fury. The limbs themselves are bulkier than a standard double-door refrigerator, coated in dense keratin layers that interlock to form a natural hammer shape. One expert from the Hollow Investigative Association claimed such abnormal development may stem from the host's original body having long relied on heavy machinery or strength-enhancing equipment, causing its physical traits to become grotesquely amplified during the corruption process.\nReports indicate it can smash through reinforced concrete and fling the remains of derelict vehicles several dozen meters. Among investigators, it's colloquially known as the \"Hollow Demolition Crew.\"\nOne account tells of a Wicked Wraith that, in its fury, leveled a whole ruin in under a minute, only to get stuck in a tight corridor, its massive frame unable to keep balance, and was later retrieved as a research specimen.\n\"When it slams the ground, even the echoes throughout the Hollow tremble... but if you're quick enough, maybe you won't have to arm-wrestle it.\"",
+  "groupDesc": "Corrupted",
+  "id": 20031,
+  "locale": "en",
+  "name": "Miasmic - Wicked Wraith"
+}

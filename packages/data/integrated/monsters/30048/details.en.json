@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A rookie Guardian pilot, secretly hoping enemy mechs and warships will show up in the sky",
+  "cardSkillDesc": "The Airspace Sentinel will expose its core when performing certain moves or after an Agent successfully parries specific moves. Attacking the exposed core deals additional damage and triggers Impaired.",
+  "desc": "A special heavy combat unit fielded by the Roscaelifer Airspace Patrol. The culmination of the Airspace Patrol's military technology, it is stationed in the Energy Module facilities on the lower levels of the floating island.\nDuring patrol duty, it remains in a fixed turret configuration, providing thunderous heavy fire support to ground forces. When its stabilized base transforms into a quadrupedal frame, it becomes a highly mobile heavy combat mech capable of dominating the battlefield.\nIt serves as a reliable defensive line against Ethereal incursions caused by Singularity Leakage. However, if affected by Ether Corruption and driven out of control, it becomes a severe threat to the Energy Hub.\n\n\"If any enemy dares to invade, I will deploy in mech form!\"",
+  "groupDesc": "Special",
+  "id": 30048,
+  "locale": "en",
+  "name": "Airspace Sentinel"
+}

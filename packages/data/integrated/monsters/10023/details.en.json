@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—The Cunning Hares desperately chasing after a Golden Bangboo deep within a Hollow",
+  "cardSkillDesc": "During combat, Golden Bangboo will sometimes counterattack, too.",
+  "desc": "Every Hollow Raider believes there are infinite opportunities in the Hollows that can make you rich overnight. At the heart of every tale of extraordinary wealth is always mention of a special entity known as the Golden Bangboo.\nAccording to research conducted by the HIA, numerous Bangboo Wanderers inhabit the Hollows. They diligently gather scattered Gear Coins and Dennies, entrusting them to the Golden Bangboo for safekeeping.\nWhile their motives remain a mystery, one thing is certain: These wandering Bangboo, with their peculiar \"Ehn-ne\" sound diligently fill the pockets of the Golden Bangboo with bags overflowing with Gear Coins and Dennies.\nAs a result, the Golden Bangboo always finds themselves coveted by greedy groups of Hollow Raiders...\n\"N—Nicole!? Look there, a Golden Bangboo!\"\n\"What are you waiting for? Smash it to bits! It'll make us rich!\"",
+  "groupDesc": "Special",
+  "id": 10023,
+  "locale": "en",
+  "name": "Golden Bangboo"
+}

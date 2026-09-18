@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—The horror movie Eternal Lost, the main character looking for a way out of the Hollow",
+  "cardSkillDesc": "During combat, Goblin's roar boosts its DMG dealt while significantly reducing DMG taken. However, these effects are interrupted if Stunned.",
+  "desc": "The debate regarding Metro Goblin is a persistent one. Some scholars argue their peculiar appearance serves as camouflage to confuse their enemies, while others attribute the debris on their bodies to corruption and fusion with old metro equipment.\nNevertheless, the presence of Metro Goblins evokes fear among inexperienced investigators exploring the Hollow's old metro zone.\nAt any given moment, an ordinary-looking \"road sign\" may start trembling, and then a formidable Ethereal emerges from the ground, charging menacingly.\n\"Huh? I saw this sign a few minutes ago. Have we been going in circles?\"\n\"No... That 'road sign' has been following us!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 200041,
+  "locale": "en",
+  "name": "Metro Goblin - Energized"
+}

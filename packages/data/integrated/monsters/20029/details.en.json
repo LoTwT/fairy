@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Typhoeus Security's sales rep, talking up a storm",
+  "cardSkillDesc": "In combat, Tactical Security Unit - Light Patroller performs a dash attack using the chainsaws mounted on its arms.",
+  "desc": "A mass-produced security unit made by Typhoeus Security, put into use across many civilian sectors. With numerous advantages, including affordability, versatility, a revolutionary single-wheel dynamic balance system, and an integrated intelligent threat recognition core, they're suitable for security needs in various complex spaces.\n\n\"This Tactical Security Unit, having passed 47 rigorous tests, has been successfully deployed in core areas of 32 industrial parks. Client feedback shows an average 91% reduction in tresspassing rates. Trust us: you can use it for any security task you can imagine.\"",
+  "groupDesc": "Special",
+  "id": 20029,
+  "locale": "en",
+  "name": "Light Patroller"
+}

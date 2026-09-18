@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—The investigators, \"tormented\" by the simulation data of the Wandering Hunter, found themselves unconsciously humming nursery rhymes while doing household chores",
+  "cardSkillDesc": "In combat, the Wandering Hunter possesses extremely high DEF. Some of its ranged skills can generate Miasma Pool on the ground, while most skills can trigger Miasma Pool to create Stray Blades for disruptive shots. Additionally, when the Wandering Hunter activates Miasmic Field, it conceals itself and charges strength. When players use Perception Technique to break through Drowned Ideal - Lucia, the Wandering Hunter will reveal itself and launch an ambush. A successful Defensive Assist can interrupt its action, causing Impaired status and reducing its Miasmic Shield. If you fail to correctly identify Drowned Ideal: Lucia, or after a period of time, the Wandering Hunter will unleash a powerful skill that ignores the Invulnerable effect to deal DMG, maxing out the team's Miasma Contamination value.",
+  "desc": "A Corrupted with rich combat experience, equally skilled in offense and defense, moving with agility. It excels at lurking in hidden spots, launching the most efficient attacks targeting weak points.\n\nI should have recorded more - its behavioral patterns, the haunting song that follows it like a shadow, things like that... But let's leave it at that, just like the half-finished portrait in Lucia's book.\n\n\"One little star, up high. Two little stars, float by. Three little stars, it's time to go and hide.\"",
+  "groupDesc": "Corrupted",
+  "id": 30041,
+  "locale": "en",
+  "name": "Wandering Hunter"
+}

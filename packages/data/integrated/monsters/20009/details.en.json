@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Comment on the Daydream page of the Planet of Disaster forum",
+  "cardSkillDesc": "During combat, Heavy Gunner switches between using laser cannons and frag grenades to perform continual long-range attacks.",
+  "desc": "A heavy infantry unit belonging to the New Eridu Defense Force.\nEquipped with \"Gray Rhino\" heavy combat armor paired with a complete arsenal enhanced using Ether technology, they can sustain high-intensity firepower for an extended period when ample ammunition is available. They serve as the assault core of a combat team and are often deployed as the front line in assault and clearance operations.\nAfter the fall of the old capital, many soldiers left the army and joined civilian factions. Since then, these elite gunners have emerged under various banners, including private armies of plutocrats, new security companies, and even roving gangs of bandits...\n\"I'm convinced those heavy gunners are secretly adorable little girls who somehow manage to hide all that ammo in the extra pockets of their combat suits. I mean, how else can you explain their endless stockpile of shells?\"",
+  "groupDesc": "Rebel Soldiers",
+  "id": 20009,
+  "locale": "en",
+  "name": "Heavy Gunner"
+}

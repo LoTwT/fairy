@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A Guard Squad member who is addicted to VR combat games and terrified of arthropods",
+  "cardSkillDesc": "During the combat, Girtablullu will frequently create Ether wormholes to teleport around the field and lauch surprise attacks. It will also unleash various skills that require two Agents to guard together. Successfully performing Chain Parry will quickly weaken its Corruptive Barrier. At certain points in the fight, Girtablullu will summon its minions to launch consecutive attacks. Successfully blocking their attacks will trigger Active Conversion and give you an advantage in battle.",
+  "desc": "A High-Risk simulation unit modeled from real combat data. Through deep reconstruction and overfitting of its original combat logic, certain units have surpassed standard performance limits, presenting an extremely high level of combat threat.\n\nA highly dangerous scorpion-like Ethereal that fights with an ash-gray lance. Its powerful lower body and agile upper torso combine to create a combat machine that is both devastating and highly mobile. By burrowing through \"wormholes,\" it traverses the Scamall Hollow in search of its next victim to fall into the nest. Unlike Ethereals transformed from corrupted wildlife or machinery, this creature was spawned by something far more terrifying, carrying an Ether signature unlike any other.\n\n\"There's no Insect Phobia Mode in the settings!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 40009,
+  "locale": "en",
+  "name": "Integrated - Girtablullu"
+}

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A refusal letter received by a certain applicant at the Defense Force Recruitment Center",
+  "cardSkillDesc": "During combat, Guard Jaeger uses its shield to both significantly reduce DMG and Daze taken, and also counterattack.",
+  "desc": "As a vital offensive and defensive unit in the Defense Force's tactical squads, Guard Jaegers and Patrol Jaegers not only carry \"Coyote-PE7\" heavy Ether cutters but also inert Ether blast shields, providing cover for tactical squads in complex battlefield environments.\nAs a high-defense unit, the extraordinary weight of the shield affects their combat mobility.\nWithout strict training, an ordinary person would find it challenging to lift such a shield.\n\"Come back and submit your application once you've hit the gym!\"",
+  "groupDesc": "Rebel Soldiers",
+  "id": 10008,
+  "locale": "en",
+  "name": "Guard Jaeger"
+}

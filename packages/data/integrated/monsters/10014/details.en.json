@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Mandrake blooming in the movie Deep Fear",
+  "cardSkillDesc": "During combat, different Mandrakes provide periodic ATK/Shield buffs to adjacent units.",
+  "desc": "Mandrake derive their name from a toxic herb. The scholar who initially assigned the name believed there was a resemblance between the two solely based on their appearance.\nWhile blooming, Mandrake emit heat rays targeting nearby objects, while sturdy leaves anchor it firmly to the ground, preventing uprooting. When threatened, Mandrake may use their sharp leaves for self-defense.\nSimilar to the legend of their namesake, Mandrake cries can be highly deadly.\n\"Stay away! It's gonna bloom any second now!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 10014,
+  "locale": "en",
+  "name": "Mandrake"
+}

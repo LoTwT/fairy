@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Hollow Investigative Association Resignation Letter from a rookie investigator",
+  "cardSkillDesc": "During combat, Hollow Thug - Bulky Intimidator switches between using a club and a shotgun for nearby attacks while sometimes kicking up sand to launch an ambush.",
+  "desc": "In contrast to fully equipped Hollow investigators, Bulky Intimidators and Wanted Intimidators possess minimalistic gear.\nNevertheless, these notorious thugs can easily instill fear in their victims with their makeshift equipment.\nA spiked metal bat and a modified double-barreled shotgun are all they need to establish themselves as the most feared brutes in the Hollow.\nAccording to investigators who have encountered them in the Hollows, these brutes enter an extreme state of euphoria during battle. Their \"demeanor\" could hardly be called combat suitable, and more closely resembles bullying.\n\"Fighting them brought back the fear I felt when facing the school bullies alone...\"",
+  "groupDesc": "Thugs",
+  "id": 20015,
+  "locale": "en",
+  "name": "Bulky Intimidator"
+}

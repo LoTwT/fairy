@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Lines from the New Eridu popcorn movie \"Frontline Guardians, Transform!\"",
+  "cardSkillDesc": "During combat, Autonomous Assault Unit - Guardian Mk II performs aggressive melee attacks and a variety of ranged attacks. It sometimes also leaps into the air to launch a clobbering blow.",
+  "desc": "The Defense Force will only dispatch the fully armed mechs known as Guardians during operations in large-scale Hollows.\nThese mechs are equipped with active Ether shock blasters, Ether-charging guns MARS-74, and even fusion heat rays... causing the Guardian to often be referred to as Public Security's mobile arsenal.\nDespite their formidable firepower, they possess impressive mobility, enabling them to jump and sprint while dispersing groups of lesser Ethereals and advancing the front lines.\nFor Hollow Raiders, encountering a single Guardian is akin to facing an impregnable fortress.\n\"I'll strike in my Fortress Form!\"",
+  "groupDesc": "Rebel Soldiers",
+  "id": 300022,
+  "locale": "en",
+  "name": "Guardian MK III"
+}

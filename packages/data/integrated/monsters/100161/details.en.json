@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Inside the Hollow, robbed investigator quietly discussing strategies for retreating",
+  "cardSkillDesc": "During combat, Hollow Thug - Arsonist will sometimes bombard using a hail of molotov cocktails.",
+  "desc": "For Pyromaniacs and Arsonists, robbing passersby is merely a side hustle. Deep down, they consider themselves as adept bartenders who actively seek excitement.\nWith precision and skill, they expertly blend various types of Ether into their beverages, effortlessly concocting bottles of highly flammable and explosive \"exclusive brew.\"\nUnlike other brutal Hollow Raiders, they often offer their victims a choice.\nIf the victim agrees to pay the toll, they extend the courtesy of a free drink.\nHowever, if the victim declines, the flammable \"exclusive brew\" will be forcefully shattered upon their head.\n\"How about we trick those guys into drinking their own weapon stash?\"",
+  "groupDesc": "Thugs",
+  "id": 100161,
+  "locale": "en",
+  "name": "Arsonist"
+}

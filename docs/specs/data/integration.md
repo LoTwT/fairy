@@ -5,11 +5,12 @@
 **状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）、`drive-discs`（规则
-`nanoka-drive-disc-reference/1`）、`w-engines`（规则 `nanoka-w-engine-reference/1`）与 `bangboos`（规则
-`nanoka-bangboo-reference/1`）。驱动盘单实体规则与实现状态见
+`nanoka-drive-disc-reference/1`）、`w-engines`（规则 `nanoka-w-engine-reference/1`）、`bangboos`（规则
+`nanoka-bangboo-reference/1`）与 `monsters`（规则 `nanoka-monster-reference/1`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)，WEngine 单实体规则与实现状态见
 [WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)，Bangboo 单实体规则与实现状态见
-[Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference1)。
+[Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference1)，Monster 单实体规则与实现状态见
+[Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -909,6 +910,77 @@ key 原样保留。技能 `param` 中的引用、分隔符、百分号及语言�
 邦布；成员文件身份检查在类别登记表中显式实现。公开的 Bangboo 类型、名称 catalog 与读取 API 已由包根入口
 按[消费契约](consumption.md)提供。
 
+### Monster 单实体实现规则 `nanoka-monster-reference/1`
+
+来源说明见 [Nanoka Monsters](../nanoka/monster.md)：上游实体 `monster`，整合类别登记名为 `monsters`，
+类型与函数统一使用 `Monster` 命名。一条记录表示一个怪物条目，其 `monster_info` 可包含多个内部战斗单位；
+数值曲线解释、属性编码换算、单位与关卡引用闭合校验、definitions 或 core 映射不属于本规则。
+Monster 名称在类内大量重名（本地 3.1 的占位名 `OfficialName_` 出现 37 次），名称不作为公开身份，
+公开读取以[来源 ID 为身份](consumption.md)；本层仍按字符串保留名称，不做非空或类内唯一检查。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-monster.ts) `integrateMonster` 接受与
+`integrateAgent`、`integrateDriveDisc`、`integrateWEngine`、`integrateBangboo` 相同的输入形态
+`{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[Monster 类型](../../../packages/data/src/integration/monster-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[Monster 结构登记](../../../packages/data/src/integration/monster-schema.ts)。
+
+字段归属（第一列为来源拼写，后两列为转换后的字段名）：
+
+| 来源字段           | `data.json`                                                      | `details.{locale}.json`                 |
+| ------------------ | ---------------------------------------------------------------- | --------------------------------------- |
+| `id`               | 数值怪物 ID                                                      | 同值身份副本                            |
+| `monster_id`       | `monsterId`；分组内成员编号，与顶层 ID、单位 ID 分属不同身份层次 | 无重复载荷                              |
+| `image_path`       | `imagePath` 原值                                                 | 无重复载荷                              |
+| `rarity`           | `rarity` 原值                                                    | 无重复载荷                              |
+| `group_id`         | `groupId` 分组编码                                               | 无重复载荷                              |
+| `monster_info`     | `monsterInfo` 完整共享块，保留全部内部战斗单位                   | 无重复载荷                              |
+| `element_abnormal` | `elementAbnormal` 完整共享块，属性编码 key → 原始数值            | 无重复载荷                              |
+| `name`、`desc`     | 无                                                               | 当前语言原文                            |
+| `group_desc`       | 无                                                               | `groupDesc` 当前语言分组说明            |
+| `card_obtain`      | 无                                                               | `cardObtain` 当前语言获得方式           |
+| `card_quote`       | 无                                                               | `cardQuote` 当前语言引语                |
+| `card_skill_desc`  | 无                                                               | `cardSkillDesc` 当前语言技能说明        |
+| 派生 `locale`      | 无                                                               | 输入语言标识                            |
+| 索引中的实体记录   | 不覆盖到详情                                                     | 完整保存在 `sourceRecord`，不修改原 key |
+
+`monsterId`、`imagePath`、`rarity`、`groupId` 是严格公共字段：每个语言都必须提供，跨语言完整值必须一致，
+冲突即失败。`monsterInfo` 与 `elementAbnormal` 是整块共享的容器：转换已登记字段拼写后按完整值跨语言比较，
+块内未知成员随块保留并参与比较，不能静默选一门语言。索引摘要与语言详情是两个独立来源：摘要完整保存在
+`sourceRecord`，不与详情去重，同名字段不要求相等，也不互相回退。
+
+`monsterInfo` 的单位 key 即单位身份：必须是规范十进制 ID 且与单位自身 `id` 一致。它不要求等于顶层详情 ID，
+顶层 `monsterId` 也不要求出现在单位集合中；本地 3.1 中 30 个非空 `monster_info` 的 `monsterId` 不在单位集合内，
+40 个成员的 `monster_info` 为空对象，都是合法原值。单位结构登记 `id`、`code_name` → `codeName`、`icon`、
+`tag`（字符串数组）、`type`、`element`、`stats`、`curves`；`element` 是元素编码 key → 数值的字典，
+`stats` 是属性编码 key → 数值或布尔开关的字典（如 `crit_dmg_res`、`is_stun`），`curves` 是曲线 key →
+`{ curve: number[], ratio: number }` 的字典。属性编码、曲线 key 与标签是字典 key 或数据值，不改拼写、
+不映射为枚举、不解释单位与比例；只有 `code_name` 等结构字段登记拼写转换。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`monster_id`、`image_path`、`name`、`desc`、`rarity`、`group_id`、
+   `group_desc`、`card_obtain`、`card_quote`、`card_skill_desc`、`monster_info`、`element_abnormal`；
+   登记字段按登记表核对类型，`id` 必须为安全整数且规范十进制形式与 `entityId` 一致。单位登记八类结构成员，
+   曲线条目登记 `curve`（数值数组）与 `ratio`；未登记的成员原样保留并进入维护诊断。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. 来源字段与登记输出名冲突（如同时存在 `monster_id` 与 `monsterId`、`code_name` 与 `codeName`、
+   `group_desc` 与 `groupDesc`）时失败，不覆盖、不合并；来源 `locale` 与派生辅助字段重名时同样失败。
+5. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.1 `monster.json` 的 293 条记录为
+   `desc`、`en`、`group`、`icon`、`ja`、`ko`、`rarity`、`tag`、`tag2`、`zh`。登记只用于识别未知字段：
+   不要求这些字段存在、不校验其类型，`sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的
+   代码单元顺序生成 `locale: "index"` 的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
+6. 未登记字段原样保留：详情未知字段留在对应语言并进入维护诊断；共享块内部的未知成员随整块提取到 `data`，
+   跨语言不一致时仍按公共冲突处理。
+7. 空字符串、零、负值、空数组、空对象、数组顺序、数值尺度与显示格式按来源保留；已登记字段仍须满足其
+   明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `MonsterIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+   字符串保留，占位名称与类内重名是合法来源值；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
+   [消费契约](consumption.md)以来源 ID 为身份。
+
 ### 离线全量构建的共用能力
 
 全量构建入口是第 7.1 节的 `buildIntegratedSnapshot`（实现见下节）；它按已接入类别登记表处理全部类别，
@@ -1008,9 +1080,11 @@ fairy-integrated-snapshot-<独占后缀>/
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
 当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）、`drive-discs`（来源实体
 `equipment`，规则 `nanoka-drive-disc-reference/1`）、`w-engines`（来源实体 `weapon`，规则
-`nanoka-w-engine-reference/1`）与 `bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`），
+`nanoka-w-engine-reference/1`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`）
+与 `monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/1`），
 代理人复用既有 `integrateAgent`、驱动盘复用既有
-`integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`，
+`integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`、
+怪物复用既有 `integrateMonster`，
 成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
 可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
 验证与历史复验只要求静态契约。
@@ -1049,7 +1123,7 @@ fairy-integrated-snapshot-<独占后缀>/
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
 `generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents`、
-`drive-discs`、`w-engines` 与 `bangboos`。
+`drive-discs`、`w-engines`、`bangboos` 与 `monsters`。
 从仓库根目录执行：
 
 ```bash
@@ -1260,6 +1334,50 @@ package.json 增加邦布 data/zh/en JSON 子路径，并提交四类别真实�
   消费（四类场景，跨类别零串读）、`verify:nanoka:current` 全部通过；`git diff --check` 无输出。
 - 未执行真实相邻版本推进：本任务明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录
   inode 不变。来源分发复核记录见[共享来源规范](../nanoka/source.md#分发复核记录)。
+
+### Monster 生产类别接入验收
+
+2026-09-19，基线 `fc508f1f0069f3772b9c9b2793645c798ae1bada`（任务分支 `codex/monster-integration`），
+实现 `monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/1`）登记到生产类别登记表，
+package.json 增加怪物 data/zh/en JSON 子路径，并提交五类别真实快照。Monster 名称在类内大量重名
+（本地 3.1 的英文占位名 `OfficialName_` 出现 37 次），公开身份是来源索引顶层 ID 的规范十进制字符串：
+根入口新增 `MonsterId` 字面量 union、冻结 `monsterIds` 列表与 `loadMonsterData`、`loadMonsterDetails`、
+`loadAllMonsters` 三个按 ID 读取的函数，不生成名称 catalog，也不执行名称非空或类内唯一检查；
+既有四类的名称 API 与名称校验保持不变。
+
+真实 3.1 验收（本机 macOS arm64、Node 24、raw 为只读输入，不联网覆盖缓存、不升级来源版本）：
+
+- 修改登记前先按持锁协议执行 `verify:nanoka:current integrated`：`verified: true`；既有 455 项来源输入
+  与实际 raw 字节的 SHA-256 全部一致，确认受管理基线未被来源漂移影响；登记前的全部 676 个制品文件摘要
+  另存仓库外备份。
+- 登记 Monster 后执行 `generate:integrated raw/nanoka 3.1 integrated`：`committed`；monsters 新增 293 名
+  成员、879 个文件；agents 58 名成员/174 个文件、drive-discs 30 名成员/90 个文件、w-engines 95 名成员/
+  285 个文件与 bangboos 42 名成员/126 个文件结论均为 `unchanged`，仅 index.json 改写；全制品 1555 个文件
+  （1554 个实体文件与索引）、1042 项来源输入、复用 675 个既有实体文件。
+- 重复执行同一命令：`unchanged`，复用 1554 个实体文件、改变 0 个、移除 0 个；管理记录、更新报告与当前
+  快照相互一致。仓库外备份逐文件比对：除 index.json 外的既有 675 个实体文件字节不变。
+- 独立核对脚本（不导入生产代码）执行 298 项聚合检查，覆盖 293 名成员与 586 份语言详情：索引外壳与五个
+  类别块、成员集合与来源索引 key 严格一致且按数值升序、全部 1042 项输入资源摘要与 raw 实际字节、
+  data/zh/en 路径与实际字节摘要、逐成员 `sourceRecord` 与 raw 索引记录 JSON 值相等、身份与 `locale`、
+  data 与 details 的字段归属（data 只含七个登记共享字段、details 只含八个登记本语言字段）、
+  `monster_id`/`image_path`/`rarity`/`group_id` 的提取与跨语言一致、`monsterInfo`/`elementAbnormal`
+  共享块、按登记拼写逆向合并后与 raw 详情 JSON 值相等的完整往返还原，以及维护报告中 293 个成员的未知
+  字段诊断均为 0；全部通过。
+- 身份层次核对：顶层详情 ID、`monsterId` 分组编号与 `monsterInfo` 内部单位 ID 分属三个身份层次，互不推导；
+  全部单位 key 与单位自身 `id` 一致；本地 3.1 中 30 个非空 `monster_info` 成员的 `monsterId` 不在单位集合内、
+  40 个成员的 `monster_info` 为空对象，均按原样保留不触发失败。
+- 合成验收（不读取真实 raw）覆盖：Monster 纯整合 18 项（双语拆分与独立测试侧还原、多内部单位与三个身份
+  层次、合法空 `monster_info`、占位名称与跨语言重名不触发名称校验、共享块未知成员随块保留并参与完整值
+  比较、公共冲突、单位 key/id 规则、身份/类型/语言/改名冲突/辅助字段重名与保真边界、对象 key 排列无关、
+  诊断顺序确定、显式语言子集、特殊自有属性还原）、类型正反例、发布目录按 memberIds 生成 ID union 与冻结
+  列表且重名/占位名不影响目录生成、更新报告五类别归因、消费 API 按 ID 读取的对象隔离与跨类别加载边界
+  （含补零与科学计数法形式的拒绝）、JSON 子路径、打包解包与离线安装。
+- `pnpm check`（类型、data 880 项常规测试与 1 项打包验收、打包解包离线安装与按包名消费，解包 1555 个 JSON、
+  17,523,115 字节）、真实 Chromium 的 Vite 开发/生产消费（五类场景，跨类别零串读，生产分块 1556）、
+  `verify:nanoka:current` 全部通过；`git diff --check` 无输出。
+- 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567（`available` 仍含 3.1），本任务
+  明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
+  [共享来源规范](../nanoka/source.md#分发复核记录)。
 
 ### 跨层最终验收
 

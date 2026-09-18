@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "Just kidding. Always remember to drive safely!",
+  "cardSkillDesc": "During combat, the Metamorphosed - Airspace Patrolboo engages targets with its arm-mounted cannon and homing missiles fired from its overhead launcher.",
+  "desc": "A rebel that sheds its old shell in the gloom, emerging anew amidst corruption, forsaking the body that once sank into depravity.\nA light Recon Mech of the Airspace Patrol Bangboo Guard Forces. Blue markings on the chassis indicate assignment to Hollow operations. Built for speed, it excels at patrol and scouting missions, while its arm-mounted autocannon provides enough firepower to drive off hostile targets.\nIts lightweight armor keeps it fast, but offers little protection during high-speed maneuvers. As a result, Recon Mech pilots are all skilled racers. \"Only Bangboo without talent need airbags!\"",
+  "groupDesc": "Special",
+  "id": 10038,
+  "locale": "en",
+  "name": "Metamorphosed - Airspace Patrolboo"
+}

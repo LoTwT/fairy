@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Low\nATK: High\nMovement Speed: Slow\nThreat Level: <color=#FFAF2C>Medium</color>",
+  "desc": "Faun moves slowly but has a high ATK. Please pay attention to the candidates' Stamina!",
+  "groupDesc": "Ether Mutants",
+  "id": 930153,
+  "locale": "en",
+  "name": "Faun"
+}

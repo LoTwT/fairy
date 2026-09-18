@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Several investigators besieging a Nassellaria within a Hollow",
+  "cardSkillDesc": "During combat, Ionized: Nassellaria charges up attacks for a long time, shooting out high-level energy orbs to attack the enemy. Energy orbs attacked with Ether damage or a high-level attack during charge up will fall down, damaging enemies in the surrounding area.",
+  "desc": "Each type of Ether mutant in the Hollow exhibits unique fighting styles.\nSome are merciless, others cunning, and a few even display a sense of... honor.\nAmong them, Nassellaria is particularly distinctive.\nIt often remains motionless out in the open, gathering potent Ether around itself before unleashing its destructive power to eliminate all enemies within its vicinity for other Ethereals.\nWhile Nassellaria is channeling its energy, those accompanying Ethereals engage in frenzied attacks, buying time for the Nassellaria to unleash its devastating attack.\n\"Quick! Stop that guy! Don't let it unleash its ultimate attack!\"\n\"If we get hit by that attack, we'll end up like those sorry villains in those cliche hero animations!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 30018,
+  "locale": "en",
+  "name": "Ionized - Nassellaria"
+}

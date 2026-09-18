@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— As written in \"The Battle of the Old Capital: Truth and Memories\"",
+  "cardSkillDesc": "In combat, the Miasmic Terror Raptor suppresses enemies with various ranged weapons, while its six stealth drones provide additional firepower at staggered intervals.\nWhen it fires special Miasma shells, you can use Defensive Assist to counter and reflect them, temporarily paralyzing the Miasmic Terror Raptor. At specific points in battle, it also activates the Miasmic Field, shifting to primarily melee attacks while its six drones blink and execute strike patterns at regular intervals. Beware: many of the Terror Raptor's abilities and drone attacks inflict potent Miasma Corruption.",
+  "desc": "A fallen creation, reforged in the depths of filth and darkness.\nA veteran model of countless battles, the Terror Raptors are New Eridu's most trusted weapon of war. Designed for a perfect balance of brutal melee and devastating ranged firepower, it delivers destruction with every charge and strike. Armed with multi-missile launchers and rapid-fire guns, it dominates both close-quarters and distant combat. From leaping assaults to explosive barrages and swift aerial retreats, the Raptor adapts to any battlefield with ease. Its relentless attacks leave enemies no room to fight back, embodying both unstoppable power and overwhelming fear.\n\n\"Terror Raptor was the symbol of that era.\"",
+  "groupDesc": "Corrupted",
+  "id": 30036,
+  "locale": "en",
+  "name": "Miasmic - Terror Raptor"
+}

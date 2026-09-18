@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Inter-Knot forum, comment from a rookie Hollow Raider",
+  "cardSkillDesc": "During combat, Scout Jaeger will provide continual fire support.",
+  "desc": "As the New Eridu Defense Force's signature combat unit, qualified Light Jaegers and Scout Jaegers can freely switch between various combat modes.\nWhether using a knife in close combat or the Falcon-MK3 Ether energy gun at long range, they can tailor their tactics to the target's weaknesses.\nAnd when their opponent is in disarray they launch an offensive without hesitation.\n\"I saw that guy with a knife and was preparing for a fair fight... I didn't expect him to suddenly pull out a gun.\"",
+  "groupDesc": "Rebel Soldiers",
+  "id": 100061,
+  "locale": "en",
+  "name": "Scout Jaeger"
+}

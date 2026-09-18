@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—From the diary of a shaken Hollow Raider, written with trembling hands",
+  "cardSkillDesc": "In combat, Miasmic - Lightfoot Rover summons two drones to assist in battle. If Miasmic - Heavy Striker is also on the field, Miasmic - Lightfoot Rover will coordinate attacks together with it. Additionally, when Miasmic - Heavy Striker is close to death, Miasmic - Lightfoot Rover will leap toward the target due to coordinated combat signal interference, seize its combat data core, gain part of Miasmic - Heavy Striker's shield components and abilities, and trigger a small Miasmic Field.",
+  "desc": "Once a standard fire-support mech, now corrupted within the Hollow. It's tactical algorithms now in total disarray, flagging every lifeform it sees as a high-threat target and firing indiscriminately.\nBuilt for offense over defense, it boasts exceptional mobility, making it hard to hit and relentless in pursuit.\nIf you're unlucky enough to be tagged by it, pray there's a spatial rift nearby — without one, escape is nearly impossible.\n\"If I could go back to middle school, I'd never slack off in track practice again.\"",
+  "groupDesc": "Corrupted",
+  "id": 20016,
+  "locale": "en",
+  "name": "Miasmic - Lightfoot Rover"
+}

@@ -833,6 +833,12 @@ describe("current dataset update report", () => {
             changed: false,
           },
           {
+            name: "monsters",
+            before: null,
+            after: "nanoka-monster-reference/1",
+            changed: false,
+          },
+          {
             name: "w-engines",
             before: null,
             after: "nanoka-w-engine-reference/1",
@@ -870,6 +876,11 @@ describe("current dataset update report", () => {
       ["drive-discs", "added"],
       ["drive-discs", "added"],
       ["drive-discs", "added"],
+      ["monsters", "added"],
+      ["monsters", "added"],
+      ["monsters", "added"],
+      ["monsters", "added"],
+      ["monsters", "added"],
       ["w-engines", "added"],
       ["w-engines", "added"],
       ["w-engines", "added"],
@@ -1050,6 +1061,16 @@ describe("current dataset update report", () => {
       ["drive-discs", "zzz/synthetic-1/en/equipment/930001.json", "removed"],
       ["drive-discs", "zzz/synthetic-1/zh/equipment/930002.json", "removed"],
       ["drive-discs", "zzz/synthetic-1/en/equipment/930002.json", "removed"],
+      ["monsters", `zzz/${input.version}/monster.json`, "added"],
+      ["monsters", `zzz/${input.version}/zh/monster/960001.json`, "added"],
+      ["monsters", `zzz/${input.version}/en/monster/960001.json`, "added"],
+      ["monsters", `zzz/${input.version}/zh/monster/960002.json`, "added"],
+      ["monsters", `zzz/${input.version}/en/monster/960002.json`, "added"],
+      ["monsters", "zzz/synthetic-1/monster.json", "removed"],
+      ["monsters", "zzz/synthetic-1/zh/monster/960001.json", "removed"],
+      ["monsters", "zzz/synthetic-1/en/monster/960001.json", "removed"],
+      ["monsters", "zzz/synthetic-1/zh/monster/960002.json", "removed"],
+      ["monsters", "zzz/synthetic-1/en/monster/960002.json", "removed"],
       ["w-engines", `zzz/${input.version}/weapon.json`, "added"],
       ["w-engines", `zzz/${input.version}/zh/weapon/940001.json`, "added"],
       ["w-engines", `zzz/${input.version}/en/weapon/940001.json`, "added"],
@@ -1150,7 +1171,7 @@ describe("current dataset update report", () => {
       ["zzz/synthetic-1/character.json", "changed"],
       ["zzz/synthetic-1/zh/character/10.json", "changed"],
     ])
-    expect(report.source.unchangedInputCount).toBe(19)
+    expect(report.source.unchangedInputCount).toBe(24)
     expect(report.source.changed).toBe(true)
     expect(report.changeCause).toMatchObject({ attributedTo: "source" })
     expect(agents.review).toMatchObject({

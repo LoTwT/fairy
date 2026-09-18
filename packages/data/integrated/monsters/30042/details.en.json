@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—In the deepest reaches of the Hollow, \"Its\" will murmurs in scornful mockery.",
+  "cardSkillDesc": "During combat, The Thrall will summon Miasma Ravager - Sobek as an ally. Sobek cannot be Stunned and does not accumulate Anomaly Buildup. Each time Sobek is defeated, The Thrall will revive them and unleash an even more powerful combo move. If the player successfully defends the final hit of this combo move, Sobek will enter a Weakened state for a period of time.",
+  "desc": "Tainted miasma and a corrupt will pull the strings. The beast still retains its instinct to roam and prowl, yet the human form upon its back has lost all reason. Only a faint trace of sorrow remains. At times, he slashes through the dark fog with his blade; at others, he commands the beast's gaping jaws to rend the earth itself. His strikes are precise, devoid of the gentle humanity he once held — like a puppet pulled by the tattered remnants of a nightmare.\nOnly when a streak of red ribbon flashes across his senses does his sword arm falter for an instant — as though that lingering sorrow had, for a heartbeat, tightened around his corroded soul.\n\n\"As for the two, who is truly controlling whom... The \"person\" on its back is my real prisoner.\"\n\"Despair should be utilized to its fullest until the very end, shouldn't it?\"",
+  "groupDesc": "Special",
+  "id": 30042,
+  "locale": "en",
+  "name": "Ye Shiyuan the Thrall"
+}

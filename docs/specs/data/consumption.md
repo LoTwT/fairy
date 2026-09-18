@@ -2,15 +2,19 @@
 
 本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
 [来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、30 个驱动盘套装、95 个 WEngine、
-42 个邦布、zh/en 两种详情语言；公开索引使用多实体 v3 外壳，类别（`agents`、`drive-discs`、`w-engines` 与
-`bangboos`）与成员文件摘要来自完整验证后的同一发布副本。驱动盘、WEngine 与邦布已进入生产快照、JSON 子路径
-导出及根入口的公开名称类型、名称 catalog 与读取 API。
+42 个邦布、293 个怪物、zh/en 两种详情语言；公开索引使用多实体 v3 外壳，类别（`agents`、`drive-discs`、
+`w-engines`、`bangboos` 与 `monsters`）与成员文件摘要来自完整验证后的同一发布副本。驱动盘、WEngine 与邦布
+已进入生产快照、JSON 子路径导出及根入口的公开名称类型、名称 catalog 与读取 API；怪物已进入生产快照、
+JSON 子路径导出及根入口的公开 ID 类型、冻结 ID 列表与读取 API。Monster 与后续 End Game 类别名称在类内
+重名或缺失，公开身份统一使用来源索引顶层 ID 的规范十进制字符串，不套用英文名称唯一性，也不创造名称、
+别名或 slug。
 
 ## 名称与类型
 
 根入口导出正式字段类型（包含其引用的索引、文件引用、材料计数与来源身份等结构）、`AgentName`、
 `LocalizedAgent`、`agentNames`、`DriveDiscName`、`LocalizedDriveDisc`、`driveDiscNames`、`WEngineName`、
-`LocalizedWEngine`、`wEngineNames`、`BangbooName`、`LocalizedBangboo`、`bangbooNames` 和十三个读取函数。
+`LocalizedWEngine`、`wEngineNames`、`BangbooName`、`LocalizedBangboo`、`bangbooNames`、`MonsterId`、
+`LocalizedMonster`、`monsterIds` 和十六个读取函数。
 这些类型可供消费者引用，不改变来源 ID 的内部标识用途。`AgentName` 是本次发布所有
 `integrated/agents/{来源ID}/details.en.json` 顶层 `name` 原值的精确字符串字面量 union；`DriveDiscName`
 同理取 `integrated/drive-discs/{来源ID}/details.en.json`，`WEngineName` 取
@@ -22,15 +26,23 @@
 `53019` 为 `Bild N. Boolok`（保留空格与标点）。
 名称、各类别内部英文名称到来源 ID 的映射、导入表及类型均由同一已验证发布副本生成；缺失、非字符串、空名称
 或类别内完全重名使构建失败并给出可定位文件，不覆盖、不修改来源。重名检查限定在各类别内；不同类别出现
-同名时各套 union 与映射仍按各类别成员独立生成。发布源必须包含 `agents`、`drive-discs`、`w-engines` 与
-`bangboos` 四个类别及完整 zh/en 详情。英文更名、成员删除属于公开取值的兼容性变化，须在该次变更的
-Git 记录或发布说明中明确记录，不自动添加别名。来源数字字符串目录、索引 key、`SourceId` 和数值成员
-`data.id` 保持原义。
+同名时各套 union 与映射仍按各类别成员独立生成。这些名称约束只适用于名称作为公开身份的类别；
+Monster 的名称是普通来源文本，占位名称与类内重名不参与目录生成，也不触发该检查。发布源必须包含
+`agents`、`drive-discs`、`w-engines`、`bangboos` 与 `monsters` 五个类别及完整 zh/en 详情；`MonsterId`
+字面量 union、冻结 ID 列表与懒加载表由同一发布副本的 `entities.monsters.memberIds` 生成。英文更名、
+成员删除属于公开取值的兼容性变化，须在该次变更的 Git 记录或发布说明中明确记录，不自动添加别名。
+来源数字字符串目录、索引 key、`SourceId` 和数值成员 `data.id` 保持原义。
 
 `agentNames: readonly AgentName[]`、`driveDiscNames: readonly DriveDiscName[]`、
 `wEngineNames: readonly WEngineName[]` 与 `bangbooNames: readonly BangbooName[]` 分别覆盖本版全部成员，
 沿用索引 `entities.{类别}.memberIds` 的来源 ID 数值升序，运行时冻结，调用方不能通过修改列表影响后续使用。
 名称类型不提供任意 string 重载，保留字面量补全。
+
+`MonsterId` 是本次发布全部 `integrated/monsters/{来源ID}` 成员的来源索引顶层 ID（规范十进制字符串）的
+精确字面量 union；`monsterIds: readonly MonsterId[]` 覆盖本版全部怪物成员，沿用同一 memberIds 数值升序，
+运行时冻结。ID 字面量与懒加载表由同一已验证发布副本的 `entities.monsters.memberIds` 生成；ID 精确匹配，
+不 trim、不转换 number、不解析科学计数法或补零，未登记字符串返回 undefined，非字符串参数以 TypeError
+拒绝。ID 类型不提供任意 string 重载，保留字面量补全。
 
 ## 读取接口
 
@@ -100,6 +112,22 @@ export interface LocalizedBangboo {
 export declare function loadAllBangboos(
   locale: DetailLocale,
 ): Promise<Record<BangbooName, LocalizedBangboo>>
+export declare function loadMonsterData(
+  id: MonsterId,
+): Promise<MonsterData | undefined>
+export declare function loadMonsterDetails(
+  id: MonsterId,
+  locale: DetailLocale,
+): Promise<MonsterDetails | undefined>
+export interface LocalizedMonster {
+  /** 原有公共资料结构。 */
+  data: MonsterData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: MonsterDetails
+}
+export declare function loadAllMonsters(
+  locale: DetailLocale,
+): Promise<Record<MonsterId, LocalizedMonster>>
 ```
 
 - `loadIndex` 只加载完整原样索引（v3 外壳），包含快照来源输入、全部已登记类别、各类别的规则版本与语言、
@@ -120,13 +148,20 @@ export declare function loadAllBangboos(
 - `loadBangbooData` 只加载该邦布 data；`loadBangbooDetails` 只加载该邦布指定语言 details；
   `loadAllBangboos` 显式加载全部邦布 data 与指定语言 details，目前为 42 + 42 个文件，结果以
   BangbooName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是 `entities["bangboos"].members`。
+- `loadMonsterData` 只加载该怪物 data；`loadMonsterDetails` 只加载该怪物指定语言 details；两者以来源 ID
+  （规范十进制字符串）为身份，ID 精确匹配，不 trim、不转换 number、不解析科学计数法或补零；未登记 ID
+  返回 undefined，非字符串以 TypeError 拒绝，locale 校验先于 ID 查找。`loadAllMonsters` 显式加载全部怪物
+  data 与指定语言 details，目前为 293 + 293 个文件，结果以 MonsterId 为 key，`data` 与 `details` 同样分开
+  保留。索引的成员表是 `entities["monsters"].members`。
 - 每次调用返回独立的 JSON 对象树，任意嵌套修改不污染后续调用、同时调用或其他调用方。
 - 名称精确匹配，不 trim、不忽略大小写、不接受数值 ID。单体函数对未知字符串返回 undefined。
 - 非字符串 name、缺少或不支持的 locale 均使 Promise 以 TypeError 拒绝。locale 必须显式为 zh 或 en，
   不默认、不转换 zh-CN、不回退；未知名称也不能绕过 locale 校验。
 - 已登记文件缺失、JSON 解析或模块加载失败使 Promise 拒绝，不转换为 undefined；全量任一必要项失败即整体拒绝。
-- 代理人不加载驱动盘、WEngine 或邦布文件，驱动盘不加载代理人、WEngine、邦布文件或索引，WEngine 不加载
-  代理人、驱动盘、邦布文件或索引，邦布不加载代理人、驱动盘、WEngine 文件或索引；各类别加载边界互不串读。
+- 代理人不加载驱动盘、WEngine、邦布或怪物文件，驱动盘不加载代理人、WEngine、邦布、怪物文件或索引，
+  WEngine 不加载代理人、驱动盘、邦布、怪物文件或索引，邦布不加载代理人、驱动盘、WEngine、怪物文件或索引，
+  怪物不加载代理人、驱动盘、WEngine、邦布文件或索引；各类别加载边界互不串读。End Game 类别中的
+  Monster 引用不触发 Monster 自动加载。
 
 ## 分发与按需加载
 
@@ -150,13 +185,16 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/bangboos/{来源ID}/data.json`
 - `/integrated/bangboos/{来源ID}/details.zh.json`
 - `/integrated/bangboos/{来源ID}/details.en.json`
+- `/integrated/monsters/{来源ID}/data.json`
+- `/integrated/monsters/{来源ID}/details.zh.json`
+- `/integrated/monsters/{来源ID}/details.en.json`
 
 这些路径映射到包内 `dist/integrated/` 的已验证发布副本。JSON 原字节、字段、层级、文件名、摘要全部保留，
-索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含四类类别的完整数据；根入口的名称元数据与
-显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时请求
-该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；
+索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含五个类别的完整数据；根入口的名称与 ID
+元数据及显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时
+请求该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；
 不包含 raw、本机控制目录、抓取/恢复工具及内部维护材料。直接 JSON 导入遵循宿主模块缓存语义；
-返回对象隔离保证属于上述十三个函数。
+返回对象隔离保证属于上述十六个函数。
 
 ## 静态发布与受管理目录边界
 

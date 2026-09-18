@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A conversation between Anne and Bessa, two Trainee Investigators who just escaped death in the Hollow",
+  "cardSkillDesc": "In combat, Huskron moves cautiously and actively takes a defensive stance when facing player attacks, launching powerful counterattacks. If you successfully perform Defensive Assists against these counterattacks, it will become stunned.",
+  "desc": "The Huskron's dual forms — pre and post-hatching — have been giving headaches to new and veteran investigators alike. The Hollow Investigative Association offers this advice: Always watch for Miasmic substances at your feet. If you spot any rock-like spherical objects, attack immediately! Don't hesitate! Don't hesitate!\nAccording to insiders, the advice originally didn't have that repetition — until some clever Hollow Investigators still tried stepping around Huskrons even after reading it. That strategy worked about as well as trying to quietly open the fridge late at night without alerting one's dog.\n\n\"I prefer how it looks before hatching — all round and rolly.\"\n\"Is that why you didn't attack it first...?\"",
+  "groupDesc": "Ether Mutants",
+  "id": 930172,
+  "locale": "en",
+  "name": "Huskron"
+}

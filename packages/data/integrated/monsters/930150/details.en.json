@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Medium\nATK: High\nMovement Speed: Slow\nThreat Level: <color=#FF3333>Super High</color>",
+  "desc": "A highly dangerous melee unit with <color=#D9A600>extremely high HP</color>. Deploy <color=#D9A600>Paperboo</color>, which have extremely high HP, to deal with it.",
+  "groupDesc": "Ether Mutants",
+  "id": 930150,
+  "locale": "en",
+  "name": "Dullahan"
+}

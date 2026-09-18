@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Bangboo Guard Instructor, introducing the Riot Suppression Mech's features and capabilities",
+  "cardSkillDesc": "During combat, the Special Anti-Riotboo can unleash a series of consecutive melee attacks. Use Defensive Assist before it strikes to interrupt its assault.",
+  "desc": "A standard frontline unit of the Airspace Patrol Bangboo Guard Forces. Its agile mechanical arms and high-powered chainsaw make it highly effective against Ethereals and allow it to assist with the maintenance and repair of heavy machinery, earning praise from both Airspace Patrol personnel and Energy Hub engineers.\nThat versatility comes at a price. Its open cockpit design and limited combat range leave pilots exposed to greater danger on the battlefield, so only the most courageous Bangboo are trusted to operate it. \"Strong left arm, stronger right arm!\"",
+  "groupDesc": "Special",
+  "id": 10035,
+  "locale": "en",
+  "name": "Special Anti-Riotboo"
+}

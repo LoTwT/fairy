@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—a Hollow Thug urgently debugging an Enraged Sweeper in a Hollow",
+  "cardSkillDesc": "During combat, Illegal Support Unit - Enraged Sweeper uses its long arms to perform a spinning attack. Use Defensive Assist before it does so to completely prevent it from even launching.",
+  "desc": "A significant number of combat mechs belonging to Public Security are destroyed within Hollow each year. Some of these mechs are subsequently repaired by Hollow thugs and illegally modified into Enraged Sweepers. \nDespite lacking access to standard parts or professional repair services, the thugs manage to restore these mechs using makeshift components, striving to maintain their original combat capabilities.\nIn their pursuit of individuality, the thugs often apply custom paint jobs and even install high-powered loudspeakers on their Enraged Sweepers.\nWhile this does not enhance their combat effectiveness, it does make them seem cooler than the originals.\n\"Here we go! There's an easy prey with pink hair over there!\"\n\"Yo! Switch to the background music we always use for robberies!\"",
+  "groupDesc": "Thugs",
+  "id": 20020,
+  "locale": "en",
+  "name": "Enraged Sweeper"
+}

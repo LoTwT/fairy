@@ -1,0 +1,10 @@
+{
+  "cardObtain": "【未探明】击败1次以获得数据",
+  "cardQuote": "",
+  "cardSkillDesc": "生命值：低\n攻击力：中\n移动速度：快\n威胁程度：<color=#31CC00>低</color>",
+  "desc": "赫斯克龙被阻挡时<color=#D9A600>防御力会大幅度提高</color>，在他被阻挡以前击败他吧！",
+  "groupDesc": "以太异形",
+  "id": 940001,
+  "locale": "zh",
+  "name": "赫斯克龙"
+}

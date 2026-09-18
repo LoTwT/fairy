@@ -32,7 +32,10 @@
     "./integrated/w-engines/*/details.en.json": "./dist/integrated/w-engines/*/details.en.json",
     "./integrated/bangboos/*/data.json": "./dist/integrated/bangboos/*/data.json",
     "./integrated/bangboos/*/details.zh.json": "./dist/integrated/bangboos/*/details.zh.json",
-    "./integrated/bangboos/*/details.en.json": "./dist/integrated/bangboos/*/details.en.json"
+    "./integrated/bangboos/*/details.en.json": "./dist/integrated/bangboos/*/details.en.json",
+    "./integrated/monsters/*/data.json": "./dist/integrated/monsters/*/data.json",
+    "./integrated/monsters/*/details.zh.json": "./dist/integrated/monsters/*/details.zh.json",
+    "./integrated/monsters/*/details.en.json": "./dist/integrated/monsters/*/details.en.json"
   },
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "【未探明】击败1次以获得数据",
+  "cardQuote": "",
+  "cardSkillDesc": "生命值：超高\n攻击力：高\n防御力：高\n移动速度：中\n威胁程度：<color=#FF3333>超高</color>",
+  "desc": "伐木机是具有极高威胁性的敌人。在造成<color=#D9A600>高额单体伤害</color>的同时，伐木机还会释放以自身为中心的<color=#D9A600>大范围群体伤害</color>，注意安全！",
+  "groupDesc": "暴徒",
+  "id": 940002,
+  "locale": "zh",
+  "name": "伐木机"
+}

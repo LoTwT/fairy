@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Hollow Zero Investigation File KU241. Voice recording of the first recorded Hornet sighting.",
+  "cardSkillDesc": "In battle, Hornets will assist Nineveh by distrupting and attacking enemies.",
+  "desc": "Hornets always seem to be buzzing around Nineveh. Some scholars believe that the two have formed a symbiotic relationship and that, in some respects, they have reached a kind of group coordination.\nAs Nineveh's energy increases, revealing its distinctive swaying blossom stance, the Hornets enter a frenzied state and try their best to attack any moving target nearby.\n\"Hey! Something just flew out of that 'flower'!\"\n\"Looks like... a swarm of wasps?\"",
+  "groupDesc": "Ether Mutants",
+  "id": 20022,
+  "locale": "en",
+  "name": "Hornet"
+}

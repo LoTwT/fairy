@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Official response from a Defense Force spokesperson.",
+  "cardSkillDesc": "In combat, the Miasmic Trooper - Cannoneer prefers to provide heavy firepower support from a distance. Additionally, some of its skills inflict potent Miasma Corruption.",
+  "desc": "The Ethereal soldiers, formed from Miasma, wear tattered old uniforms and linger in the smoke of battle like ghosts from another era.\nHollow observation data shows that the Canonneers can strike nearby targets with impressive precision using their bazookas — a level of accuracy suggesting rigorous training, which has sparked much speculation.\n\"Could these newly discovered, highly organized Ethereal units be linked to the Defense Force?\"\n\"Sorry. No comment until the matter is fully investigated and confirmed.\"",
+  "groupDesc": "Corrupted",
+  "id": 10034,
+  "locale": "en",
+  "name": "Miasmic Trooper - Cannoneer"
+}

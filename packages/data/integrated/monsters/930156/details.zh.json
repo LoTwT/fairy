@@ -1,0 +1,10 @@
+{
+  "cardObtain": "【未探明】击败1次以获得数据",
+  "cardQuote": "",
+  "cardSkillDesc": "生命值：中\n攻击力：中\n防御力：50\n移动速度：快\n威胁程度：<color=#FFAF2C>中</color>",
+  "desc": "恶毒打手拥有<color=#D9A600>较高的生命值</color>，需要集中火力攻击他！",
+  "groupDesc": "侵蚀体",
+  "id": 930156,
+  "locale": "zh",
+  "name": "恶毒打手"
+}

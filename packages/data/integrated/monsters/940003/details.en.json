@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Super High\nATK: Super High\nDEF: High\nMovement Speed: Medium\nThreat Level: <color=#FF3333>Super High</color>",
+  "desc": "The Rampant Brute is a highly dangerous enemy. He can deal <color=#D9A600>massive DMG</color> to targets, so when using Paperboo to block him, be sure to deploy Kind Bangboo strategically to ensure <color=#D9A600>Paperboo's</color> safety!",
+  "groupDesc": "Thugs",
+  "id": 940003,
+  "locale": "en",
+  "name": "Rampant Brute"
+}

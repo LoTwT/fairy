@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Member of the Hollow Investigative Association's Anti-Hollow Fanatic Task Force",
+  "cardSkillDesc": "In combat, the Flame Cantor's skills possess the Miasma Corruption ability, and will use sweeping skills to generate Miasma Pools on the ground. Additionally, the Flame Cantor can summon Huskrons from the Miasma Pools and command them to perform charging attacks.",
+  "desc": "A high-ranking priest of the Exaltists who holds the position of \"Flame Cantor,\" and who has the power to manipulate Miasma. This defiling force drains life, while the flames light the path ahead.\n\nWhile all Exaltist fanatics tend to either shout or chant vague slogans like \"Refinement\" and \"Creator\" when attacking you, few can make known the experience of true \"Refinement\" using Miasmic fire like this one does.\n\n\"They just charge at you, screaming things like 'Refinement,' 'Creator,' 'Purification' and whatnot!\"",
+  "groupDesc": "Corrupted",
+  "id": 930167,
+  "locale": "en",
+  "name": "Flame Cantor"
+}

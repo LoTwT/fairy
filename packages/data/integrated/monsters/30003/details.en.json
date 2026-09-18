@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Lockspring",
+  "cardSkillDesc": "In combat, Lockspring attacks the player with its weapon. Certain blows hit with such force that, despite a successful Defensive Assist, an Assist Follow-Up cannot activate, and Lockspring may respond with a taunt.",
+  "desc": "In the early days of Bangboo's creation, Lady Sunbringer had a grand vision: to create a highly intelligent Bangboo capable of independently judging and executing \"protection\" commands to help humanity against threats from the Hollows.\n\nAnd \"Lockspring,\" designated GU-0001, was the first creation of this great plan.\n\nHe was given the most advanced tactical modules, the most powerful fire systems, and... a pure heart programmed with the highest directive to \"protect humanity.\"\n\nHowever, during the hellish disaster of the old capital's fall, he witnessed for the first time the irredeemable darkness lurking in the souls of the humans he was meant to \"protect.\" He saw people betray and slaughter each other for survival, and watched as his trusted users forced him to point his gun at defenseless fellow humans.\n\nThe noble ideals etched in his core code clashed violently with the ugly reality before him in the most acute and cruel way.\n\nAt that moment, he finally understood that humanity's greatest enemy was never the monsters from outside—\n\nBut rather humanity's own endless desires and conflicts.\n\n\"Humans are truly adorable. Even though you keep making the same mistakes...\"\n\n\"But it's alright, I'll forgive you.\"\n\n\"And... I'll help fix everything with my own hands.\"",
+  "groupDesc": "Special",
+  "id": 30003,
+  "locale": "en",
+  "name": "Lockspring"
+}

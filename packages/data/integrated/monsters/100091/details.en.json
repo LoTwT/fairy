@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—New recruits training camp instructor explaining how to use the rockets",
+  "cardSkillDesc": "During combat, Demolition Jaeger provides heavy ranged fire support.",
+  "desc": "Grenadier Jaegers and Demolition Jaegers are equipped with a modified version of the Mamba-TG3 Bazooka, featuring special ammunition containing active Ether incendiary agents. This weapon enables them to swiftly destroy enemy mech units and eliminate large Ethereals within the Hollows.\nTo counteract the recoil and ensure accurate aim, they are required to undergo special weapon-grip training. Interestingly, Defense Force statistics indicate recruits excelling in this program often possess prior experience in photography.\n\"Wanna know how to use this thing? It's like using a shoulder-mounted camera.\"\n\"Just lock onto your target, pull the trigger, and say...\"\n\"Hey, idiot!... Say cheese!\"",
+  "groupDesc": "Rebel Soldiers",
+  "id": 100091,
+  "locale": "en",
+  "name": "Demolition Jaeger"
+}

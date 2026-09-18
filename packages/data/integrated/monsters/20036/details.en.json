@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A Bangboo reserve in training. First choice: the Airspace Patrol Mech Corps",
+  "cardSkillDesc": "During combat, Metamorphosed - City Guardboo alternates between close-range combos and ranged attacks and will also launch charging attacks. Using a Defensive Assist at the right moment can counter its offense.",
+  "desc": "A rebel that sheds its old shell in the gloom, emerging anew amidst corruption, forsaking the body that once sank into depravity.\nAn elite combat unit fielded by the Roscaelifer Airspace Patrol. Blue markings on the chassis indicate assignment to Hollow operations. Originally deployed to guard critical infrastructure, it was driven out of control by the effects of a Singularity Leakage and Hollow activity. It now wreaks havoc throughout the lower levels of the floating island and within nearby Hollows.\nCity Guardboo forms the backbone of Roscaelifer's Bangboo Guard Forces, serving in assault, air defense, and facility security roles. To support these missions, it is equipped with heavy air-to-ground weaponry.\nAlthough the exoskeletal mech has been compromised by Ether Corruption, the Bangboo pilot inside remains fully operational, lying dormant while waiting for a chance to break free.\n\n\"Ehn-ne, ehn-ne-ne! (I wanted to become a Guardboo! Commander Norma was so happy she even gave me my favorite Ether batteries!)\"",
+  "groupDesc": "Special",
+  "id": 20036,
+  "locale": "en",
+  "name": "Metamorphosed - City Guardboo"
+}

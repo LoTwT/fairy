@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero once to obtain its data.",
+  "cardQuote": "— Inter-Knot forum complaint from a Hollow Raider",
+  "cardSkillDesc": "In combat, Miasmic Doppelganger - Komano Manato will unleash fierce attacks against the player. Players must give it their all to parry his skills. When successfully performing a Defensive Assist against some of his skills, you can interrupt his attacks. If you manage to Defensive Assist his powerful skills, you can force him into a Weakened state. After taking a certain amount of DMG in battle, he will activate Miasmic Field and unleash powerful attacks.",
+  "desc": "A form reshaped in profound darkness from fallen creation.\nEven among Ionized enemies, which are renowned for their strange and uncanny qualities, \"Ionized Doppelgangers\" are exceptionally unique.\nThese entities can coat their bodies with a layer of special active Ether ions, enabling them to accurately replicate their target's form, often to a degree that makes it hard to tell the difference. From detail to texture, these creatures are experts in mixing the spurious and genuine.\nMore challenging still is their ability to mimic the powerful and fearsome combat techniques of their targets.\nNo one knows where they obtain the information about the subjects they mimic. Some rumors suggest they can read minds, picking out the most suitable nemeses from their opponent's memories, before attacking in that form.\n\"Nonsense! If it could really read my deepest fears, it would turn into a fierce middle-aged woman wielding a clothes hanger! That's right, I'm most afraid of my mom!\"",
+  "groupDesc": "Special",
+  "id": 300402,
+  "locale": "en",
+  "name": "Miasmic Komano Manato"
+}

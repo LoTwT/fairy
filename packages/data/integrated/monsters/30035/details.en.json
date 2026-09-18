@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—An email sent to a psychiatrist by a lab investigator (now resigned) who was attacked",
+  "cardSkillDesc": "During combat, Sacrifice - Heretic Jester will rise into the air, unleashing Flying Blade Frenzy and activating a Miasmic Field. Using a Defensive Assist at the right moment during the skill can interrupt the Flying Blade Frenzy. Successfully interrupting it will cause the enemy to fall and enter a Weakened state for a period of time.",
+  "desc": "Its peculiar energy fluctuations reveal its identity — an Exaltist creation, the source of nightmares.\nA fearsome hunter, it creeps up on its prey without a sound — yet at times, it's like a restless child playing hide-and-seek, unable to hold back a mischievous giggle. Perhaps the Miasma that birthed it carries too many echoes of lost souls, making it erratic and indecisive.\n\"If play is a privilege of the intelligent, then what it imitates is nothing more than a broken, mindless parody — there's no applause, only bloodshed.\"",
+  "groupDesc": "Special",
+  "id": 30035,
+  "locale": "en",
+  "name": "Sacrifice - Heretic Jester"
+}

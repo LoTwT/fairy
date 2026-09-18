@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Inter-Knot forum complaint from a Hollow Raider",
+  "cardSkillDesc": "In combat, this enemy uses identical skills to those of their target, launching fierce attacks with blades and guns. After taking a certain amount of DMG, it activates a Miasmic Field and unleashes powerful, swift piercing attacks.",
+  "desc": "A fallen creation, reforged in the depths of filth and gloom.\nEven among Ionized enemies known for their strange and uncanny qualities, Ionized Doppelgangers stand out as particularly exceptional.\nThese creatures cloak themselves in a special layer of active Ether ions, allowing them to precisely mimic the appearance of their targets — sometimes so accurately it's nearly impossible to tell the difference. From details to texture, they're masters at blurring the line between real and false.\nWhat makes them even more dangerous is their ability to replicate their targets' powerful combat techniques.\nNo one knows how they acquire such detailed intel of their targets. Some say they can read minds, pulling the perfect nightmare from their opponent's memory and taking that shape before launching their attack.\n\"Nonsense! If it could really read my deepest fears, it would turn into a fierce middle-aged woman wielding a clothes hanger! That's right, I'm most afraid of my mom!\"",
+  "groupDesc": "Special",
+  "id": 300372,
+  "locale": "en",
+  "name": "Miasmic - Doppelganger - The Defector"
+}

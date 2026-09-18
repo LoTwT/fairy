@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "——A record of a certain knight's self-indulgent monologuing being interrupted",
+  "cardSkillDesc": "In combat, The Decider - Terror Raptor relies on its agile, powerful mechanical legs for close-range attacks while unleashing a barrage of ranged weapons to suppress its enemy. \nUse Defensive Assists to rebound its bombs back, leaving The Decider - Terror Raptor temporarily paralyzed. In addition, The Decider - Terror Raptor will activate Corruptive Barrier at specific moments to fend off attacks, during which it focuses on melee attacks and its certain moves additionally deal powerful electric DMG.",
+  "desc": "Modified from the military Autonomous Support Unit \"Terror Raptor,\" the \"anti-Void Hunter mech\" is a highly classified weapon painstakingly developed by Rusty Cliff Corp.\nIts original military identifier has long been erased, as if it were never meant to leave behind any tracks to retrace from the very beginning.\nClaimed to be capable of countering Void Hunter-Rank fighters, the mech is still in its prototype phase, and its actual combat capabilities fall far short of its terrifying name. However, both its ammunition power and armor specs break through conventional military thresholds. Without a doubt, this steel behemoth possesses unparalleled killing efficiency, a testament to the \"relentless efforts\" TOPS has made to breach the city administration's long-standing military control.\n\"The 'anti-Void Hunter mech'... A rarely worthy opponent indeed. But sorry! As always, the passing-by knight has once again saved New Eridu.\"\n\"Billy, hurry up! We're leaving!\"\n\"So soon?! Wait a sec! I still have a few more lines... Ugh, never mind, wait for me!\"",
+  "groupDesc": "Special",
+  "id": 30046,
+  "locale": "en",
+  "name": "The Decider - Terror Raptor"
+}

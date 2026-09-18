@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Words from a graying combat mechanic, left upon retirement",
+  "cardSkillDesc": "In combat, when Miasmic - Heavy Striker deploys its shield, it activates a small Miasmic Field. If Miasmic - Lightfoot Rover is also on the field, the two will carry out coordinated attacks. Additionally, when Miasmic - Lightfoot Rover is close to death, Miasmic - Heavy Striker will leap toward the target due to coordinated combat signal interference, seize its combat data core, acquire Miasmic - Lightfoot Rover's drones and abilities, and command the drones to fight alongside it.",
+  "desc": "This autonomous tactical mech, swallowed by the Hollow, has grown even more brutal after corruption, powerful enough to crush Goblins with ease.\nOnce a steadfast shield protecting soldiers against devastating attacks, the Defense Force's most trusted companion has now transformed into a terrifying killing machine.\n\"If you have the courage, then grant our once-reliable friend a final end, freeing it from the sins and shattered honor it now carries.\"",
+  "groupDesc": "Corrupted",
+  "id": 20018,
+  "locale": "en",
+  "name": "Miasmic - Heavy Striker"
+}

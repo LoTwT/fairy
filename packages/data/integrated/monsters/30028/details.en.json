@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Written by a veteran security guard on the front page of the Security Personnel Operations Manual",
+  "cardSkillDesc": "In combat, Security Operatives use a variety of weapons to attack and coordinate with each other when necessary.",
+  "desc": "These Security Operatives may look like ordinary security personnel, but don't be fooled — they're packing a whole arsenal of secret skills. Their job isn't just to stand at the door and look intimidating. They're the ones who step in when the boss has had one too many drinks, or who handle petty troublemakers with a cool \"I've seen it all before\" expression. Their mission isn't to fight crime — it's to keep the boss from falling over, fix the elevator at the entrance, and, above all, stay under the radar. In their world, the most powerful weapon is \"looking like a total badass,\" and the best outcome is \"having nothing to do.\" After all, a great Security Operative is someone you don't even notice — until the problem's solved and people realize, \"Oh, they were here the whole time.\"\n\"If you can stand steady enough, no one's tougher than you.\"",
+  "groupDesc": "Special",
+  "id": 30028,
+  "locale": "en",
+  "name": "Security Operative"
+}

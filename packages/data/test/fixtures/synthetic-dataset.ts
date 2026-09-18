@@ -12,6 +12,7 @@ import {
 } from "./snapshot-entities.ts"
 import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
 import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
+import { monsterInput } from "./monster-source.ts"
 
 /** v2 外壳的格式标记；合成测试用它构造需要显式迁移的旧制品。 */
 export const legacyV2Format = "fairy-nanoka-integrated/v2"
@@ -28,6 +29,12 @@ export const syntheticWEngineIds = ["940001", "940002"] as const
 /** 生产登记表默认使用的合成邦布成员；details.id 按成员改写，索引记录与语言详情复用同一真实结构 fixture。 */
 export const syntheticBangbooIds = ["950001", "950002"] as const
 
+/**
+ * 生产登记表默认使用的合成怪物成员；details.id 按成员改写，索引记录与语言详情复用同一真实结构 fixture。
+ * 英文名称故意两成员同为占位名 `OfficialName_`：Monster 公开身份是来源 ID，类内重名合法。
+ */
+export const syntheticMonsterIds = ["960001", "960002"] as const
+
 async function writeJson(path: string, value: unknown) {
   await mkdir(dirname(path), { recursive: true })
   await writeFile(path, JSON.stringify(value))
@@ -38,9 +45,10 @@ async function writeJson(path: string, value: unknown) {
  *
  * 代理人使用 agent-source fixture，驱动盘使用真实结构的 drive-disc-source fixture，
  * WEngine 使用真实结构的 w-engine-source fixture，邦布使用真实结构的 bangboo-source fixture，
- * 合成第二类别使用 snapshot-entities fixture；都不读取真实 raw。
+ * 怪物使用真实结构的 monster-source fixture，合成第二类别使用 snapshot-entities fixture；
+ * 都不读取真实 raw。
  * 驱动盘与 widgets 都来自 equipment 资源，不能同时写入：同一输入文件会被后者覆盖。
- * widgets 用例使用独立的测试登记表，因此默认不写驱动盘、WEngine 与邦布输入。
+ * widgets 用例使用独立的测试登记表，因此默认不写驱动盘、WEngine、邦布与怪物输入。
  */
 export async function writeSyntheticRaw(options: {
   rawRoot: string
@@ -52,6 +60,8 @@ export async function writeSyntheticRaw(options: {
   weaponIds?: readonly string[]
   /** 真实邦布结构的 bangboo 输入；默认写入生产登记表所需的合成成员，传入空数组显式省略。 */
   bangbooIds?: readonly string[]
+  /** 真实怪物结构的 monster 输入；默认写入生产登记表所需的合成成员，传入空数组显式省略。 */
+  monsterIds?: readonly string[]
   /** 合成第二类别（widgets）的 equipment 输入；仅供显式测试登记表使用。 */
   widgetIds?: readonly string[]
 }) {
@@ -152,6 +162,23 @@ export async function writeSyntheticRaw(options: {
           // 英文详情名称按成员唯一，与 sourceRecord.en 不同；供发布链路间接使用的输入保持同一约定。
           name:
             locale === "en" ? syntheticBangbooEnglishName(id) : `示例布 ${id}`,
+        })
+  }
+  const monsterIds =
+    options.monsterIds ?? (widgetIds.length ? [] : syntheticMonsterIds)
+  if (monsterIds.length) {
+    const input = monsterInput()
+    await writeJson(
+      join(root, "monster.json"),
+      Object.fromEntries(monsterIds.map((id) => [id, input.sourceRecord])),
+    )
+    for (const id of monsterIds)
+      for (const locale of input.detailLocales)
+        await writeJson(join(root, locale, "monster", `${id}.json`), {
+          ...input.details[locale],
+          id: Number(id),
+          // Monster 公开身份是来源 ID：英文详情名称两成员故意同为占位名，证明重名不影响任何链路。
+          name: locale === "en" ? "OfficialName_" : `示例怪 ${id}`,
         })
   }
 }

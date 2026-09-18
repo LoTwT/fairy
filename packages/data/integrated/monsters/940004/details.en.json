@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Super High\nATK: High\nDEF: High\nMovement Speed: Medium\nThreat Level: <color=#FF3333>Super High</color>",
+  "desc": "The Flame Cantor is a highly dangerous enemy that specializes in <color=#D9A600>large AoE DMG</color>. Deploy <color=#D9A600>Miss Esme</color> strategically to protect everyone!",
+  "groupDesc": "Corrupted",
+  "id": 940004,
+  "locale": "en",
+  "name": "Flame Cantor"
+}

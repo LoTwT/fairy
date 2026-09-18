@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: High\nATK: Medium\nMovement Speed: Fast\nThreat Level: <color=#FF3333>High</color>",
+  "desc": "The Golden Bangboo <color=#D9A600>has very high Movement Speed and HP</color> but does not attack your Bangboo. Defeat one, and <color=#D9A600>something good might happen</color>.",
+  "groupDesc": "Special",
+  "id": 930151,
+  "locale": "en",
+  "name": "Golden Bangboo"
+}

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—While collecting ghost stories, Lucia is making Blastcrawlers fight like crickets",
+  "cardSkillDesc": "After being corrupted by Miasma, Miasmic - Blastcrawler becomes extremely unstable, leaving behind Miasma residue that can trigger another explosion after it self-detonates. A well-timed Defensive Assist against its leap can redirect the blast in your favor.",
+  "desc": "A fallen creation, reshaped in deep, tainted darkness.\nThe Miasma Blastcrawler wears crimson red, yet still can't shake off its \"low threat\" stigma, as its movement speed and blast radius remain— unchanged...\nHowever, the Association has repeatedly issued warnings, urging investigators to guard against the miasma smoke released after its explosion. If inhaled carelessly, a moment of disorientation is enough for even an Elite Investigator to perish in the ever-changing Hollows.\n\"Red team is ready! Here comes the green team walking towards us...\"",
+  "groupDesc": "Corrupted",
+  "id": 10017,
+  "locale": "en",
+  "name": "Miasmic - Blastcrawler"
+}

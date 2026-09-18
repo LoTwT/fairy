@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A flustered rookie Hollow Raider",
+  "cardSkillDesc": "During combat, the timid Mutant Formicarrier hides inside treasure chests. If anyone tries to take its loot, it will... run for its life.",
+  "desc": "Originally a standard-issue Supplies Storage Crate, this unit was equipped with a high-spec electronic anti-theft system capable of thwarting thieves even without external power.\nA group of smugglers once managed to intercept a shipment, only to discover they couldn't bypass its security permissions. After exhausting every option, they abandoned the crate in a Hollow. To everyone's surprise, several Formicarriers eventually merged with it, transforming it into a mobile nest and taking up residence inside like Hermit Crabs. Veteran Hollow Raiders know the secret to opening it: don't bother hacking the lock, just beat up the Formicarriers living inside first. The incident serves as yet another confirmation of a famous observation by a certain thinker: destruction comes from being broken from the outside, while renewal comes from being broken from within.\nAt least, that's certainly true for this particular crate.\n\n\"Hold on... you're telling me my cargo, and my Dennies, grew legs and walked off?!\"",
+  "groupDesc": "Corrupted",
+  "id": 10022,
+  "locale": "en",
+  "name": "Mutant Formicarrier"
+}
