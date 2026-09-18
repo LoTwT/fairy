@@ -902,7 +902,14 @@ v2 转换与 v3 幂等分支共用这一前置检查，不把需要恢复的现�
 仍描述此前最后一次生成或更新。迁移中断按第 8.1 节恢复：未提交时保留原 v2 数据集，提交后保留 v3 并向前完成清理；
 重复执行有明确结果。正常 build/test/check/pack 与只读验证都不会隐式迁移或改写真实目录。
 
-[当前数据合成测试](../../../packages/data/test/agent-current.test.ts)使用人工合成代理人输入与合成第二类别覆盖：
+[当前数据合成测试](../../../packages/data/test/agent-current.test.ts)按职责分为常规更新与数据集验证、
+[初始化](../../../packages/data/test/agent-current-initialization.test.ts)、
+[旧格式迁移](../../../packages/data/test/agent-current-migration.test.ts)、
+[跨进程中断与恢复](../../../packages/data/test/agent-current-interruption.test.ts)与
+[工作区命令](../../../packages/data/test/agent-current-workspace.test.ts)五个文件，共用
+[事务 fixture](../../../packages/data/test/fixtures/current-dataset.ts)；通用协议用例使用稳定的最小合成类别集合
+（代理人加合成第二类别），生产登记表（含驱动盘）的协议与命令覆盖保留在整库生命周期用例、显式生成初始化与工作区命令中。
+测试使用人工合成代理人输入与合成第二类别覆盖：
 首次生成、整库版本更新、幂等重复生成、单类别变化时另一类别原样复用且两个类别都不丢失、新增与合法移除成员、
 缺失输入不被解释成删除、硬链接复用后候选损坏必须在提交前拒绝、旧类别快照按历史契约复验但不能充当新候选、
 v2 静态/受管理/旧协议 prepared 到 v3 的三条迁移路径、迁移中断与重复迁移、稳定状态下异常 `backup` 与残留工作材料的迁移前置检查、历史规则/语言/预算恢复，
@@ -951,7 +958,7 @@ data/zh/en JSON 子路径，并提交双类别真实快照。
   `story` 保留、`icon`/`icon2` 跨语言一致并提取到 data、未知字段保留、文件集合与索引精确一致，全部通过。
 - 重复执行同一命令：`unchanged`，复用 264 个实体文件、改变 0 个；实体文件 sha256、inode、纳秒 mtime 不变
   （硬链接复用使 ctime 变化，不构成改写承诺范围）。整个 raw 的 2,478 个文件前后逐字节一致。
-- 合成验收（`test/agent-current.test.ts`、`test/update-report.test.ts` 等，不读取真实 raw）覆盖：从已有受管理
+- 合成验收（`test/agent-current*.test.ts`、`test/update-report.test.ts` 等，不读取真实 raw）覆盖：从已有受管理
   agents-only 基线新增 drive-discs、只改一类时另一类完整复用、成员新增/修改/合法移除、缺失输入不得解释为删除、
   来源与规则变化归因、重复更新明确报告已检查无变化、v2 显式迁移不新增类别（转换候选按 agents 契约复验）、
   历史语言子集复验与恢复、提交前失败保留旧快照等。

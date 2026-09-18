@@ -6,6 +6,7 @@ import {
   type BaseDamageFactorInputItem,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("baseDamageFactor", () => {
   it("exposes its public identity and types", () => {
@@ -126,7 +127,7 @@ describe("baseDamageFactor", () => {
         expect(() => baseDamageFactor.calculate([input])).toThrow(TypeError)
       })
 
-      it.each([NaN, Infinity, -Infinity])(
+      it.each(nonFiniteFactorInputs)(
         "rejects the non-finite value %s",
         (value) => {
           const input = {

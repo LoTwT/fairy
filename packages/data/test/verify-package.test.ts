@@ -42,6 +42,20 @@ function runNode(directory: string, code: string) {
   })
 }
 
+/**
+ * 全量字节比较使用原生 Buffer.equals；失败时给出可定位的文件路径与首个差异偏移。
+ * 通用深比较会逐元素展开约 10 MB 的发布快照，这里保持全部文件与全部字节的比较语义。
+ */
+function expectSameBytes(actual: Buffer, expected: Buffer, label: string) {
+  if (actual.equals(expected)) return
+  const length = Math.min(actual.length, expected.length)
+  let offset = 0
+  while (offset < length && actual[offset] === expected[offset]) offset += 1
+  throw new Error(
+    `${label}: 字节不一致（实际 ${actual.length} 字节，预期 ${expected.length} 字节，首个差异偏移 ${offset}）`,
+  )
+}
+
 describe("packed package", () => {
   it("builds from a fresh static checkout, preserves exact bytes, installs offline and consumes by package name", async () => {
     const temporaryDirectory = mkdtempSync(
@@ -186,8 +200,10 @@ describe("packed package", () => {
       ].toSorted(),
     )
     for (const path of jsonFiles)
-      expect(readFileSync(join(snapshot, path)), path).toEqual(
+      expectSameBytes(
+        readFileSync(join(snapshot, path)),
         readFileSync(join(cleanPackage, "integrated", path)),
+        path,
       )
     expect(
       JSON.parse(readFileSync(join(packedRoot, "package.json"), "utf8"))
@@ -501,10 +517,11 @@ void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail
           ).name,
         ).toBe("Astra Yao [next snapshot]")
         for (const path of jsonFiles)
-          expect(
+          expectSameBytes(
             readFileSync(join(cleanPackage, "dist/integrated", path)),
+            readFileSync(join(snapshot, path)),
             path,
-          ).toEqual(readFileSync(join(snapshot, path)))
+          )
         // Published declarations and the runtime name table come from the same captured snapshot.
         const declarations = listFiles(join(cleanPackage, "dist"))
           .filter((path) => path.endsWith(".d.mts"))

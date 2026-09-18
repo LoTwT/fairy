@@ -8,12 +8,22 @@ import {
   updateCurrentDataset,
   withCurrentDataset,
 } from "../../scripts/nanoka-integration/current.ts"
+import {
+  nanokaAgentsSnapshotEntity,
+  onboardedSnapshotEntities,
+} from "../../scripts/nanoka-integration/snapshot-entities.ts"
+import { syntheticSnapshotEntity } from "./snapshot-entities.ts"
 
 // 只供合成子进程实验；不接受生产 CLI 的故障注入环境变量。
 globalThis.fetch = async () => {
   throw new Error("测试禁止联网")
 }
 const options = JSON.parse(await readFile(process.argv[2], "utf8"))
+// 父测试用 registry 标记选择与 fixture 相同的类别登记表；默认沿用生产登记表。
+const entities =
+  options.registry === "synthetic"
+    ? [nanokaAgentsSnapshotEntity, syntheticSnapshotEntity]
+    : onboardedSnapshotEntities
 const checkpoint = async (stage: string) => {
   if (stage === options.pause) {
     process.send?.({ stage })
@@ -69,11 +79,13 @@ try {
       ? await recoverCurrentDataset({
           targetDirectory: options.targetDirectory,
           checkpoint,
+          entities,
         })
       : options.mode === "migrate"
         ? await migrateCurrentDataset({
             targetDirectory: options.targetDirectory,
             checkpoint,
+            entities,
           })
         : options.mode === "read"
           ? await withCurrentDataset(
@@ -85,12 +97,13 @@ try {
                   bytes: await readFile(`${directory}/index.json`, "utf8"),
                 }
               },
+              { entities },
             )
           : await (
               options.mode === "generate"
                 ? generateCurrentDataset
                 : updateCurrentDataset
-            )({ ...options, checkpoint })
+            )({ ...options, checkpoint, entities })
   process.stdout.write(JSON.stringify(result))
 } catch (error) {
   process.stderr.write(error instanceof Error ? error.message : String(error))

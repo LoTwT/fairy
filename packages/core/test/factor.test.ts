@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from "vitest"
 import { defineFactor, type Factor, type FactorParams } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 interface ValueInput {
   readonly value: number
@@ -73,7 +74,7 @@ describe("defineFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite result %s",
     (result) => {
       const factor = defineFactor<ValueInput>({

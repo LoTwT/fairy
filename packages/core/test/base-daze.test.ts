@@ -6,6 +6,7 @@ import {
   type BaseDazeFactorInputItem,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("baseDazeFactor", () => {
   it("exposes its public identity and types", () => {
@@ -133,7 +134,7 @@ describe("baseDazeFactor", () => {
         expect(() => baseDazeFactor.calculate([input])).toThrow(TypeError)
       })
 
-      it.each([NaN, Infinity, -Infinity])(
+      it.each(nonFiniteFactorInputs)(
         "rejects the non-finite value %s",
         (value) => {
           const input = {

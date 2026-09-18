@@ -5,6 +5,7 @@ import {
   type BaseEnergyGenerationFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("baseEnergyGenerationFactor", () => {
   it("exposes its public identity and types", () => {
@@ -185,7 +186,7 @@ describe("baseEnergyGenerationFactor", () => {
       )
     })
 
-    it.each([NaN, Infinity, -Infinity])(
+    it.each(nonFiniteFactorInputs)(
       "rejects the non-finite value %s",
       (value) => {
         const input = {
@@ -215,7 +216,7 @@ describe("baseEnergyGenerationFactor", () => {
     })
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite one-time generation value %s",
     (value) => {
       expect(() =>

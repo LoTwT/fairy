@@ -5,6 +5,7 @@ import {
   type BaseMiasmicShieldReductionFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("baseMiasmicShieldReductionFactor", () => {
   it("exposes its public identity and types", () => {
@@ -47,14 +48,11 @@ describe("baseMiasmicShieldReductionFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() => baseMiasmicShieldReductionFactor.calculate(input)).toThrow(
-        RangeError,
-      )
-    },
-  )
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() => baseMiasmicShieldReductionFactor.calculate(input)).toThrow(
+      RangeError,
+    )
+  })
 
   it("rejects a negative input", () => {
     expect(() => baseMiasmicShieldReductionFactor.calculate(-1)).toThrow(

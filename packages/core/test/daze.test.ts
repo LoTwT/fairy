@@ -3,6 +3,7 @@ import {
   calculateDisplayedDazePercentage,
   type CalculateDisplayedDazePercentageParams,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 function calculate(accumulatedDaze: unknown, maximumDaze: unknown): number {
   return calculateDisplayedDazePercentage({
@@ -124,14 +125,14 @@ describe("calculateDisplayedDazePercentage", () => {
     expect(() => calculate(accumulatedDaze, maximumDaze)).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite accumulated Daze %s",
     (accumulatedDaze) => {
       expect(() => calculate(accumulatedDaze, 1000)).toThrow(RangeError)
     },
   )
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite maximum Daze %s",
     (maximumDaze) => {
       expect(() => calculate(995, maximumDaze)).toThrow(RangeError)

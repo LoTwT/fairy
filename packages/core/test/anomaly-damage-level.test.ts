@@ -6,6 +6,7 @@ import {
   type AnomalyDamageLevelFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("anomalyDamageLevelFactor", () => {
   it("exposes its public identity and types", () => {
@@ -64,14 +65,9 @@ describe("anomalyDamageLevelFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() => anomalyDamageLevelFactor.calculate(input)).toThrow(
-        RangeError,
-      )
-    },
-  )
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() => anomalyDamageLevelFactor.calculate(input)).toThrow(RangeError)
+  })
 
   it.each([1.5, 59.9999])("rejects the non-integer input %s", (input) => {
     expect(() => anomalyDamageLevelFactor.calculate(input)).toThrow(RangeError)

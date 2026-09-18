@@ -7,6 +7,10 @@ import {
   type AdrenalineGenerationRateFactorInput,
   type Factor,
 } from "../src/index.ts"
+import {
+  nonFiniteFactorInputs,
+  overflowingFactorInputs,
+} from "./fixtures/factor-input-cases.ts"
 
 describe("adrenalineGenerationRateFactor", () => {
   it("reads indexed contributions instead of a custom iterator", () => {
@@ -134,21 +138,18 @@ describe("adrenalineGenerationRateFactor", () => {
     )
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() => adrenalineGenerationRateFactor.calculate([input])).toThrow(
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() => adrenalineGenerationRateFactor.calculate([input])).toThrow(
+      RangeError,
+    )
+  })
+
+  it.each(overflowingFactorInputs)(
+    "rejects an input sum that overflows",
+    (...inputs) => {
+      expect(() => adrenalineGenerationRateFactor.calculate(inputs)).toThrow(
         RangeError,
       )
     },
   )
-
-  it.each([
-    [Number.MAX_VALUE, Number.MAX_VALUE],
-    [-Number.MAX_VALUE, -Number.MAX_VALUE],
-  ])("rejects an input sum that overflows", (...inputs) => {
-    expect(() => adrenalineGenerationRateFactor.calculate(inputs)).toThrow(
-      RangeError,
-    )
-  })
 })
