@@ -41,7 +41,10 @@
     "./integrated/shiyu/*/details.en.json": "./dist/integrated/shiyu/*/details.en.json",
     "./integrated/boss/*/data.json": "./dist/integrated/boss/*/data.json",
     "./integrated/boss/*/details.zh.json": "./dist/integrated/boss/*/details.zh.json",
-    "./integrated/boss/*/details.en.json": "./dist/integrated/boss/*/details.en.json"
+    "./integrated/boss/*/details.en.json": "./dist/integrated/boss/*/details.en.json",
+    "./integrated/simul/*/data.json": "./dist/integrated/simul/*/data.json",
+    "./integrated/simul/*/details.zh.json": "./dist/integrated/simul/*/details.zh.json",
+    "./integrated/simul/*/details.en.json": "./dist/integrated/simul/*/details.en.json"
   },
   "publishConfig": {
     "access": "public"

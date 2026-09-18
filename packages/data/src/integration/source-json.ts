@@ -94,6 +94,14 @@ export class BossIntegrationError extends SourceIntegrationError {
   }
 }
 
+/** Simul 整合失败；与代理人、驱动盘、WEngine、Bangboo、Monster、Shiyu、Boss 分开具名，便于调用方按实体类别定位。 */
+export class SimulIntegrationError extends SourceIntegrationError {
+  constructor(location: SourceLocation, reason: string) {
+    super(location, reason)
+    this.name = "SimulIntegrationError"
+  }
+}
+
 /** 失败时抛出指定类别的整合错误；默认沿用既有代理人错误契约，新实体类别显式传入自己的类型。 */
 export function fail(
   location: SourceLocation,

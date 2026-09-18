@@ -71,6 +71,9 @@ it("consumes the offline-installed package in real Vite development and producti
     const bossMemberIds: string[] = integratedIndex.entities["boss"].memberIds
     const bossCount = bossMemberIds.length
     const directBossId = bossMemberIds[1] ?? bossMemberIds[0]
+    const simulMemberIds: string[] = integratedIndex.entities["simul"].memberIds
+    const simulCount = simulMemberIds.length
+    const directSimulId = simulMemberIds[1] ?? simulMemberIds[0]
     // 构建模块图应包含两类导入表引用的全部 JSON：按已验证索引逐类别推导，不使用固定文件总数。
     const publishedEntities = integratedIndex.entities as Record<
       string,
@@ -118,6 +121,10 @@ globalThis.fairyDirectShiyu = {
 globalThis.fairyDirectBoss = {
   data: () => import("@randomplay/data/integrated/boss/${directBossId}/data.json"),
   zh: () => import("@randomplay/data/integrated/boss/${directBossId}/details.zh.json"),
+}
+globalThis.fairyDirectSimul = {
+  data: () => import("@randomplay/data/integrated/simul/${directSimulId}/data.json"),
+  zh: () => import("@randomplay/data/integrated/simul/${directSimulId}/details.zh.json"),
 }
 document.body.append("ready")
 `,
@@ -181,6 +188,8 @@ document.body.append("ready")
             directShiyuId,
             bossCount,
             directBossId,
+            simulCount,
+            directSimulId,
           })) {
             const context = await browser.newContext()
             const page = await context.newPage()
@@ -337,6 +346,8 @@ function defineScenarios(counts: {
   directShiyuId: string
   bossCount: number
   directBossId: string
+  simulCount: number
+  directSimulId: string
 }): Array<{ name: string; steps: ScenarioStep[] }> {
   const {
     agentCount,
@@ -352,6 +363,8 @@ function defineScenarios(counts: {
     directShiyuId,
     bossCount,
     directBossId,
+    simulCount,
+    directSimulId,
   } = counts
   async function checkNameCatalogs(page: Page) {
     const catalogs = await page.evaluate(() => {
@@ -364,6 +377,7 @@ function defineScenarios(counts: {
         monsterIds: api.monsterIds.length,
         shiyuIds: api.shiyuIds.length,
         bossIds: api.bossIds.length,
+        simulIds: api.simulIds.length,
         frozen:
           Object.isFrozen(api.agentNames) &&
           Object.isFrozen(api.driveDiscNames) &&
@@ -371,7 +385,8 @@ function defineScenarios(counts: {
           Object.isFrozen(api.bangbooNames) &&
           Object.isFrozen(api.monsterIds) &&
           Object.isFrozen(api.shiyuIds) &&
-          Object.isFrozen(api.bossIds),
+          Object.isFrozen(api.bossIds) &&
+          Object.isFrozen(api.simulIds),
       }
     })
     expect(catalogs).toEqual({
@@ -382,6 +397,7 @@ function defineScenarios(counts: {
       monsterIds: monsterCount,
       shiyuIds: shiyuCount,
       bossIds: bossCount,
+      simulIds: simulCount,
       frozen: true,
     })
   }
@@ -561,7 +577,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 代理人上下文全程不请求驱动盘、WEngine、邦布、怪物、Shiyu 或 Boss JSON。
+            // 代理人上下文全程不请求驱动盘、WEngine、邦布、怪物、Shiyu、Boss 或 Simul JSON。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -572,7 +588,8 @@ function defineScenarios(counts: {
                     !path.startsWith("bangboos/") &&
                     !path.startsWith("monsters/") &&
                     !path.startsWith("shiyu/") &&
-                    !path.startsWith("boss/"),
+                    !path.startsWith("boss/") &&
+                    !path.startsWith("simul/"),
                 ),
             ).toBe(true)
           },
@@ -796,7 +813,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布、怪物、Shiyu、Boss 文件或索引。
+            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布、怪物、Shiyu、Boss、Simul 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1004,7 +1021,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布、怪物、Shiyu、Boss 文件或索引。
+            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布、怪物、Shiyu、Boss、Simul 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1214,7 +1231,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine、怪物、Shiyu、Boss 文件或索引。
+            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine、怪物、Shiyu、Boss、Simul 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1436,7 +1453,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 怪物上下文全程只请求怪物 JSON：不触达代理人、驱动盘、WEngine、邦布、Shiyu、Boss 文件或索引。
+            // 怪物上下文全程只请求怪物 JSON：不触达代理人、驱动盘、WEngine、邦布、Shiyu、Boss、Simul 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1658,7 +1675,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // Shiyu 上下文全程只请求 Shiyu JSON：不触达代理人、驱动盘、WEngine、邦布、怪物、Boss 文件或索引。
+            // Shiyu 上下文全程只请求 Shiyu JSON：不触达代理人、驱动盘、WEngine、邦布、怪物、Boss、Simul 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1864,15 +1881,229 @@ function defineScenarios(counts: {
               } catch (error) {
                 if (!(error instanceof TypeError)) throw error
               }
+              try {
+                await api.loadSimulData(101)
+                throw new Error("simul numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
             })
           },
           sources: [],
           after: (requests) => {
-            // Boss 上下文全程只请求 Boss JSON：不触达代理人、驱动盘、WEngine、邦布、怪物、Shiyu 文件或索引。
+            // Boss 上下文全程只请求 Boss JSON：不触达代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Simul 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
                 .every((path) => path.startsWith("boss/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+    {
+      name: "simul",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "simul-data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (await (globalThis as any).fairy.loadSimulData("101")).id,
+              ),
+            ).toBe(101)
+          },
+          sources: ["simul/101/data.json"],
+        },
+        {
+          name: "simul-details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const details = await (
+                  globalThis as any
+                ).fairy.loadSimulDetails("101", "en")
+                return { locale: details.locale, id: String(details.id) }
+              }),
+            ).toEqual({ locale: "en", id: "101" })
+          },
+          sources: ["simul/101/details.en.json"],
+        },
+        {
+          name: "simul-details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadSimulDetails(
+                      "101",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["simul/101/details.zh.json"],
+        },
+        {
+          name: "all-simul-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const api = (globalThis as any).fairy
+                const all = await api.loadAllSimul("en")
+                const keys = Object.keys(all)
+                return {
+                  count: keys.length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (simul: any) => simul.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    keys.length === expected &&
+                    keys.every((id, position) => id === api.simulIds[position]),
+                  dataKeysSeparated: Object.values(all).every(
+                    (simul: any) =>
+                      Object.keys(simul).length === 2 &&
+                      "data" in simul &&
+                      "details" in simul,
+                  ),
+                }
+              }, simulCount),
+            ).toEqual({
+              count: simulCount,
+              locales: ["en"],
+              keysMatch: true,
+              dataKeysSeparated: true,
+            })
+          },
+          after: (requests) => {
+            const simulSources = requests
+              .filter((request) =>
+                ["simul-data", "simul-details-en", "all-simul-en"].includes(
+                  request.phase,
+                ),
+              )
+              .flatMap((request) => request.sources)
+            expect(simulSources).toHaveLength(simulCount * 2)
+            expect(new Set(simulSources).size).toBe(simulCount * 2)
+            expect(
+              simulSources.every(
+                (path) =>
+                  path.startsWith("simul/") &&
+                  (path.endsWith("/data.json") ||
+                    path.endsWith("/details.en.json")),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "direct-subpath",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (id) => {
+                const data = await (globalThis as any).fairyDirectSimul.data()
+                const zh = await (globalThis as any).fairyDirectSimul.zh()
+                if (String(data.default.id) !== id)
+                  throw new Error("direct simul data id mismatch")
+                if (String(zh.default.id) !== id || zh.default.locale !== "zh")
+                  throw new Error("direct simul details mismatch")
+                return { id: data.default.id, locale: zh.default.locale }
+              }, directSimulId),
+            ).toEqual({ id: Number(directSimulId), locale: "zh" })
+          },
+          after: (requests) => {
+            const directSources = requests
+              .filter((request) => request.phase === "direct-subpath")
+              .flatMap((request) => request.sources)
+            expect(directSources).toContain(
+              `simul/${directSimulId}/details.zh.json`,
+            )
+            expect(
+              directSources.every(
+                (path) =>
+                  path === `simul/${directSimulId}/data.json` ||
+                  path === `simul/${directSimulId}/details.zh.json`,
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "simul-repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadSimulData("101")
+              one.endTime = "modified"
+              if ((await api.loadSimulData("101")).endTime === "modified")
+                throw new Error("shared object")
+              const details = await api.loadSimulDetails("101", "zh")
+              const node = details.node["10101"]
+              node.prevNode = -1
+              details.record = { modified: true }
+              const reread = await api.loadSimulDetails("101", "zh")
+              if (reread.node["10101"].prevNode === -1)
+                throw new Error("shared node")
+              if (reread.record.modified === true)
+                throw new Error("shared details")
+              if ((await api.loadSimulData("0101")) !== undefined)
+                throw new Error("zero-padded id accepted")
+              try {
+                await api.loadAllSimul("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadSimulDetails("101")
+                throw new Error("missing locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadSimulData(101)
+                throw new Error("numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 其余类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("agent numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadMonsterData(10000)
+                throw new Error("monster numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadBossData(69001)
+                throw new Error("boss numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // Simul 上下文全程只请求 Simul JSON：不触达代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Boss 文件或索引。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => path.startsWith("simul/")),
             ).toBe(true)
           },
         },

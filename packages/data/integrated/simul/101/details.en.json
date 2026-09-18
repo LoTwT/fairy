@@ -1,0 +1,1538 @@
+{
+  "id": 101,
+  "locale": "en",
+  "node": {
+    "10101": {
+      "battle": {},
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Tale_01.png",
+      "id": 10101,
+      "name": "INTRO",
+      "prevNode": 0,
+      "storyEvent": {
+        "1010101": {
+          "1000101": {
+            "choice": [],
+            "desc": "Following your command, the Agents pushed into the rapidly expanding Hollow.\nAs you surged forward, just about to reach the next planned destination, your most trusted <color=#FFAF2C>Supreme Assistant</color>, Fairy, reached out to you telepathically.\n\"Master, I've detected a high-risk Corrupted ahead. If you're not going to take care of it now, I'll start recording from the next sentence and have it stored in the database as your final words.\"\n\nHow thoughtful, truly worthy of being your <color=#FFAF2C>Supreme Assistant</color>! Deeply moved, you ordered her to allocate some additional processing power and instantly draft a \"Why AI Should Always Be Present\" post before publishing it to Inter-Knot...\n\nBut wait! You couldn't help but remind her:\n\"Fairy, quit running pointless simulations. Electricity isn't cheap.\"\n\"Too bad. The prior action has been suspended. I'll keep recording your simulation choices and refine the exploration experience until you feel completely immersed.\"\n\n...Just as these words fell, the entire Hollow suddenly began to expand violently, quickly diverting your attention.\nThe terrifying Corrupted arrived before you faster than imagined, like a hungry beast eager to devour its prey. But not to worry — you know you're the hunter here.",
+            "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Story01.png",
+            "id": 1000101,
+            "name": "A Perilous Journey",
+            "nextNodeUnlock": [],
+            "nextPage": [],
+            "nextRecordUnlock": []
+          }
+        }
+      },
+      "type": 4
+    },
+    "10102": {
+      "battle": {
+        "1010201": {
+          "aRankScoreLayerBuff": {},
+          "bRankScoreLayerBuff": {},
+          "id": 1010201,
+          "layer": {
+            "aRankGoal": 21000,
+            "bRankGoal": 9000,
+            "goalType": 2,
+            "id": 7000101,
+            "layerBuff": {
+              "69010402": {
+                "desc": "· DMG dealt to boss enemies by Attribute Anomaly is increased by 50%. While Notorious - Dead End Butcher is in <color=#FFFFFF>Ether Enhanced</color> state, the DMG it takes is reduced by 15%, and the Daze value dealt by Agents to it is reduced by 30%. Triggering <color=#FFFFFF>Disorder</color> on Notorious - Dead End Butcher immediately forces it to exit the <color=#FFFFFF>Ether Enhanced</color> state.",
+                "title": ""
+              },
+              "69011702": {
+                "desc": "· Successfully <color=#FFAF2C>inflicting Disorder</color> grants <color=#FFAF2C>200 Performance Points</color>, up to a maximum of 5,000.",
+                "title": ""
+              },
+              "69013010": {
+                "desc": "· When an extra <color=#FFAF2C>score multiplier</color> is active in this stage, the Performance Points cap will increase accordingly.",
+                "title": ""
+              }
+            },
+            "layerRoom": {},
+            "monsterLevel": 55,
+            "sRankGoal": 30000
+          },
+          "layerRoom": {
+            "70702014": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "Notorious - Dead End Butcher",
+                  "stats": {
+                    "attack": 2589.6000000000004,
+                    "attribute_infliction": 10,
+                    "defence": 826.8,
+                    "hp": 7769077.295999999,
+                    "stun": 12652.8
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "name": "BATTLE 01",
+          "sRankScoreLayerBuff": {},
+          "selectableBuff": {
+            "69010101": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>30%</color> and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>40%</color>.\n· When inflicting <color=#FFFFFF>Disorder</color> on an enemy, recovers all squad members' Energy by <color=#FFFFFF>10</color> and increases Agent's ATK by <color=#FFFFFF>25%</color> for 30s. The Energy Generation effect can trigger once every 20s.",
+              "title": "Spirit Break"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69012001": {
+              "desc": "· Aftershock DMG <color=#2BAD00> from Agents increases by 30%</color> and their CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· When Agents of Attack specialty hits an enemy with <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color>, the enemy's all DMG RES is <color=#2BAD00>reduced by 30%</color> for 15 seconds. Repeated triggers reset the duration.",
+              "title": "Chasing Blade"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#ff4e00>Final</color>",
+          "tagType": 1
+        },
+        "1010202": {
+          "aRankScoreLayerBuff": {
+            "2003103": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003102": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010202,
+          "layer": {
+            "aRankGoal": 210,
+            "bRankGoal": 300,
+            "goalType": 0,
+            "id": 7000102,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 55,
+            "sRankGoal": 150
+          },
+          "layerRoom": {
+            "70702015": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_GuardianBoss.png",
+              "monsterList": {
+                "11057": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300022,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GuardianBoss.png",
+                  "name": "Guardian MK III",
+                  "stats": {
+                    "attack": 2191.2000000000003,
+                    "attribute_infliction": 0,
+                    "defence": 826.8,
+                    "hp": 4899347.464000001,
+                    "stun": 10783.800000000001
+                  }
+                },
+                "11272": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 100071,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_MeleeJaegerPro.png",
+                  "name": "Private Jaeger",
+                  "stats": {
+                    "attack": 1205.16,
+                    "attribute_infliction": 0,
+                    "defence": 551.1999999999999,
+                    "hp": 390684.40400000004,
+                    "stun": 1620
+                  }
+                },
+                "11282": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 100081,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_HeavyJaeger_Pro.png",
+                  "name": "Patrol Jaeger",
+                  "stats": {
+                    "attack": 1095.6000000000001,
+                    "attribute_infliction": 0,
+                    "defence": 633.88,
+                    "hp": 390684.40400000004,
+                    "stun": 1620
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric"
+              },
+              "wavesNum": 2
+            }
+          },
+          "name": "1-1 ",
+          "sRankScoreLayerBuff": {
+            "2003104": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.5</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010101": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>30%</color> and <color=#FFFFFF>Disorder</color> DMG by <color=#2BAD00>40%</color>.\n· When inflicting <color=#FFFFFF>Disorder</color> on an enemy, recovers all squad members' Energy by <color=#FFFFFF>10</color> and increases Agent's ATK by <color=#FFFFFF>25%</color> for 30s. The Energy Generation effect can trigger once every 20s.",
+              "title": "Spirit Break"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69012001": {
+              "desc": "· Aftershock DMG <color=#2BAD00> from Agents increases by 30%</color> and their CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· When Agents of Attack specialty hits an enemy with <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color>, the enemy's all DMG RES is <color=#2BAD00>reduced by 30%</color> for 15 seconds. Repeated triggers reset the duration.",
+              "title": "Chasing Blade"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#ffef00>Required</color>",
+          "tagType": 2
+        }
+      },
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Level01.png",
+      "id": 10102,
+      "name": "BATTLE 01",
+      "prevNode": 10001001,
+      "storyEvent": {},
+      "type": 2
+    },
+    "10103": {
+      "battle": {},
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Tale_01.png",
+      "id": 10103,
+      "name": "STORY 01",
+      "prevNode": 0,
+      "storyEvent": {
+        "1010301": {
+          "1000201": {
+            "choice": [
+              {
+                "desc": "",
+                "id": 15,
+                "name": "I'm ready for this destined encounter"
+              }
+            ],
+            "desc": "Your Agents, sharp and disciplined, cleared out the interference and managed to scavenge some supplies along the way. Among the haul is a can of soda past its prime... but who cares? With a good shake, it becomes a makeshift short-range concussion weapon.\n\nYour brilliant idea earned praise from your Agents... The probability of an <color=#FFAF2C>encounter</color> has <color=#FFAF2C>increased</color>.\nYou threw the expired carbonated drink in a perfect arc onto the Ethereal's head... The probability of an <color=#FFAF2C>encounter</color> has <color=#FFAF2C>increased</color>.\nYou retrieved the drink can that hit the Ethereal to avoid polluting the Hollow... The probability of an <color=#FFAF2C>encounter</color> has <color=#FFAF2C>increased</color>.\nYou're walking, you're breathing...\nBut anyway, the probability of an <color=#FFAF2C>encounter</color> has <color=#FFAF2C>increased</color>.\n\nAmid the chaos and complexity of the Hollow, you may find yourself face-to-face with all manner of horrifying threats.",
+            "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Story03.png",
+            "id": 1000201,
+            "name": "A Fateful Encounter",
+            "nextNodeUnlock": [],
+            "nextPage": [1000202],
+            "nextRecordUnlock": []
+          },
+          "1000202": {
+            "choice": [],
+            "desc": "A man from New Eridu, formerly known as the Lord of the Outer Ring. Height: 8 points. Appearance: 8 points. Primary form: humanoid. Occasional form: motorcycle. Assets: one supercritical Ether Heart.\nHis <color=#FFAF2C>ideal type</color> is a Proxy who would personally enter the Hollow.\n\n\"Fairy, humans don't typically abbreviate 'ideal <color=#FFAF2C>food</color> type' as 'ideal type'; and stop using that format when logging Corrupted being files. The Hollows have never doubled as a dating venue.\"\n\"Understood, Master. I will record your behavioral preferences and continue to improve the exploration experience until you feel fully immersed.\"\n\n...You knew it would come to this.\nAfter all, in the Hollows, the only ones willing to endure every hardship just to see you are the <color=#FFAF2C>Ethereals</color>.\n\nBut you also realize that nothing can stand in the way of your conquest of the Hollow's mysteries. He has to be taken care of quickly.",
+            "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Story03.png",
+            "id": 1000202,
+            "name": "A Fateful Encounter",
+            "nextNodeUnlock": [],
+            "nextPage": [],
+            "nextRecordUnlock": []
+          }
+        }
+      },
+      "type": 1
+    },
+    "10104": {
+      "battle": {
+        "1010401": {
+          "aRankScoreLayerBuff": {},
+          "bRankScoreLayerBuff": {},
+          "id": 1010401,
+          "layer": {
+            "aRankGoal": 21000,
+            "bRankGoal": 9000,
+            "goalType": 2,
+            "id": 7000103,
+            "layerBuff": {
+              "69010503": {
+                "desc": "· When the Agent <color=#FFAF2C>hits the boss enemy with a Defensive Assist or Chain Attack</color>, they apply 1 stack of <color=#FFFFFF>Weakening</color> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <color=#FFFFFF>Weakening</color> on the target, Agent CRIT DMG is <color=#FFAF2C>increased by 15%</color>.\n\nWhen the boss enemy has 4 stacks of <color=#FFFFFF>Weakening</color>, Defensive Assist will deflect the boss enemy's attack, causing a Stagger effect.",
+                "title": ""
+              },
+              "69010802": {
+                "desc": "· Successfully <color=#FFAF2C>triggering a Perfect Assist</color> grants <color=#FFAF2C>350 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+                "title": ""
+              },
+              "69013010": {
+                "desc": "· When an extra <color=#FFAF2C>score multiplier</color> is active in this stage, the Performance Points cap will increase accordingly.",
+                "title": ""
+              }
+            },
+            "layerRoom": {},
+            "monsterLevel": 58,
+            "sRankGoal": 30000
+          },
+          "layerRoom": {
+            "70702016": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousPompey.png",
+              "monsterList": {
+                "11881": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300211,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousPompey.png",
+                  "name": "Notorious - Pompey",
+                  "stats": {
+                    "attack": 3221.862878787879,
+                    "attribute_infliction": 10,
+                    "defence": 901.1999999999999,
+                    "hp": 7033766.971999999,
+                    "stun": 14168
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "name": "BATTLE 02",
+          "sRankScoreLayerBuff": {},
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010502": {
+              "desc": "· The Agent's Decibel Generation Rate <color=#2BAD00>increases by 20%</color>.\n· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>. When the <color=#FFFFFF>Ultimate</color> hits an enemy, it reduces the enemy's DEF by <color=#2BAD00>15%</color> for 20s.",
+              "title": "Final Assault"
+            },
+            "69011401": {
+              "desc": "· After Stunning enemies, their Stun DMG Multiplier <color=#2BAD00>increases by 25%</color>, and their Stun recovery speed <color=#2BAD00>decreases by 10%</color>.\n· After an Agent uses a Chain Attack, their ATK <color=#2BAD00>increases by 20%</color> and CRIT DMG <color=#2BAD00>by 30%</color> for 20s.",
+              "title": "Lingering Illness"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#ff4e00>Final</color>",
+          "tagType": 1
+        },
+        "1010402": {
+          "aRankScoreLayerBuff": {
+            "2003103": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003102": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010402,
+          "layer": {
+            "aRankGoal": 210,
+            "bRankGoal": 300,
+            "goalType": 0,
+            "id": 7000104,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 58,
+            "sRankGoal": 150
+          },
+          "layerRoom": {
+            "70702017": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Harvester.png",
+              "monsterList": {
+                "11162": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 100051,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_StrikeJaegerPro.png",
+                  "name": "Harrier Jaeger",
+                  "stats": {
+                    "attack": 1248.06,
+                    "attribute_infliction": 0,
+                    "defence": 600.8,
+                    "hp": 495217.1400000001,
+                    "stun": 1719
+                  }
+                },
+                "11442": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 200081,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRoverPro.png",
+                  "name": "Lightfoot Rover MK II",
+                  "stats": {
+                    "attack": 1720.81,
+                    "attribute_infliction": 0,
+                    "defence": 811.0799999999999,
+                    "hp": 2254081.236,
+                    "stun": 7586.5199999999995
+                  }
+                },
+                "11791": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30027,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Harvester.png",
+                  "name": "Lumberjack",
+                  "stats": {
+                    "attack": 2723.04,
+                    "attribute_infliction": 0,
+                    "defence": 901.1999999999999,
+                    "hp": 6173809.224,
+                    "stun": 11645.269999999999
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric"
+              },
+              "wavesNum": 2
+            }
+          },
+          "name": "2-1 ",
+          "sRankScoreLayerBuff": {
+            "2003104": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.5</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010502": {
+              "desc": "· The Agent's Decibel Generation Rate <color=#2BAD00>increases by 20%</color>.\n· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>. When the <color=#FFFFFF>Ultimate</color> hits an enemy, it reduces the enemy's DEF by <color=#2BAD00>15%</color> for 20s.",
+              "title": "Final Assault"
+            },
+            "69011401": {
+              "desc": "· After Stunning enemies, their Stun DMG Multiplier <color=#2BAD00>increases by 25%</color>, and their Stun recovery speed <color=#2BAD00>decreases by 10%</color>.\n· After an Agent uses a Chain Attack, their ATK <color=#2BAD00>increases by 20%</color> and CRIT DMG <color=#2BAD00>by 30%</color> for 20s.",
+              "title": "Lingering Illness"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#ffef00>Required</color>",
+          "tagType": 2
+        },
+        "1010403": {
+          "aRankScoreLayerBuff": {
+            "2003127": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.2</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003126": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010403,
+          "layer": {
+            "aRankGoal": 1,
+            "bRankGoal": 4,
+            "goalType": 1,
+            "id": 7000105,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 58,
+            "sRankGoal": 0
+          },
+          "layerRoom": {
+            "70702018": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HatiArmoredBoss.png",
+              "monsterList": {
+                "11195": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 200034,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_HatiArmoredBoss.png",
+                  "name": "Notorious - Armored Hati",
+                  "stats": {
+                    "attack": 1701.9,
+                    "attribute_infliction": 0,
+                    "defence": 901.1999999999999,
+                    "hp": 3866373.3239999996,
+                    "stun": 7410.799999999999
+                  }
+                },
+                "11472": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 10026,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Specter.png",
+                  "name": "Specter",
+                  "stats": {
+                    "attack": 936.045,
+                    "attribute_infliction": 0,
+                    "defence": 600.8,
+                    "hp": 344463.732,
+                    "stun": 1719
+                  }
+                },
+                "11692": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 10031,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Sordidus.png",
+                  "name": "Sordidus",
+                  "stats": {
+                    "attack": 978.5925,
+                    "attribute_infliction": 0,
+                    "defence": 600.8,
+                    "hp": 379838.37600000005,
+                    "stun": 1894.72
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 2
+            }
+          },
+          "name": "2-2 ",
+          "sRankScoreLayerBuff": {
+            "2003128": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010502": {
+              "desc": "· The Agent's Decibel Generation Rate <color=#2BAD00>increases by 20%</color>.\n· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>. When the <color=#FFFFFF>Ultimate</color> hits an enemy, it reduces the enemy's DEF by <color=#2BAD00>15%</color> for 20s.",
+              "title": "Final Assault"
+            },
+            "69011401": {
+              "desc": "· After Stunning enemies, their Stun DMG Multiplier <color=#2BAD00>increases by 25%</color>, and their Stun recovery speed <color=#2BAD00>decreases by 10%</color>.\n· After an Agent uses a Chain Attack, their ATK <color=#2BAD00>increases by 20%</color> and CRIT DMG <color=#2BAD00>by 30%</color> for 20s.",
+              "title": "Lingering Illness"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#069eff>Optional</color>",
+          "tagType": 3
+        }
+      },
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Level01.png",
+      "id": 10104,
+      "name": "BATTLE 02",
+      "prevNode": 10001002,
+      "storyEvent": {},
+      "type": 2
+    },
+    "10105": {
+      "battle": {},
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Tale_01.png",
+      "id": 10105,
+      "name": "STORY 02",
+      "prevNode": 0,
+      "storyEvent": {
+        "1010501": {
+          "1000301": {
+            "choice": [
+              {
+                "desc": "",
+                "id": 16,
+                "name": "Make the captive step into the trap instead of you"
+              }
+            ],
+            "desc": "You bid farewell to the former Overlord of the Outer Ring in a life-or-death showdown - perhaps this too was fate.\n\nBut there's no time for regrets now. The Hollow's expansion is about to break through the Zenless Limit, like a giant beast opening its maw, ready to devour the city at any moment.\nYet you know all too well... at such crucial moments for humanity's survival, it's usually humans themselves who get in the way — <color=#FFAF2C>you've been ambushed!</color> Fortunately, your reliable Agents are by your side, and no one can harm you.\n\nYour attackers are a band of mutinous soldiers who couldn't care less about the consequences of leaving this Hollow untreated. Lost in their own delusions, they're just looking to collect their \"toll\" from you, a stranger in their midst.\n\nThere's bound to be more... you suspect there must be more <color=#FFAF2C>ill-intentioned traps</color> ahead. But that's fine, you've got no shortage of tricks and strategies.",
+            "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Story09.png",
+            "id": 1000301,
+            "name": "Malicious Ambush",
+            "nextNodeUnlock": [],
+            "nextPage": [1000302],
+            "nextRecordUnlock": []
+          },
+          "1000302": {
+            "choice": [],
+            "desc": "The rebels, prisoners guilty of countless crimes, had no choice but to march ahead, clearing the way of mines for you... Yet when a massive heavy mech dropped from the sky, the fear on their faces twisted into unrestrained fanaticism.\n\nYou knew this was the next trap the rebels had prepared for you, and you successfully drew it out ahead of time.\n\nYou couldn't help but marvel at how you were truly a brilliant Proxy, the legendary \"Phaethon\", and... the perfect master of the AI Fairy!\n\n\"Fairy, didn't I tell you...\"\n\"Understood, Master. But according to statistical data, if I remained silent, this mechanical creation's <color=#FFAF2C>appearance rate</color> would exceed mine.\"\nTo maintain your Supreme Assistant's status, you decided to quickly eliminate this eyesore of a behemoth in front of you.",
+            "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Story03.png",
+            "id": 1000302,
+            "name": "Crisis Averted",
+            "nextNodeUnlock": [],
+            "nextPage": [],
+            "nextRecordUnlock": []
+          }
+        }
+      },
+      "type": 1
+    },
+    "10106": {
+      "battle": {
+        "1010601": {
+          "aRankScoreLayerBuff": {},
+          "bRankScoreLayerBuff": {},
+          "id": 1010601,
+          "layer": {
+            "aRankGoal": 28000,
+            "bRankGoal": 12000,
+            "goalType": 2,
+            "id": 7000106,
+            "layerBuff": {
+              "69010205": {
+                "desc": "· Agents inflict <color=#FFFFFF>Overwhelmed</color> when <color=#FFAF2C>landing a Defensive Assist hit</color> against a Boss enemy, and 3 stacks of <color=#FFFFFF>Overwhelmed</color> when accumulating 3 <color=#FFFFFF>Defensive Assist</color> hits and triggering Impaired. Each stack of <color=#FFFFFF>Overwhelmed</color> increases Daze by <color=#FFAF2C>15%</color>, and <color=#FFFFFF>Chain Attack</color> and <color=#FFFFFF>Ultimate</color> DMG taken while Stunned by <color=#FFAF2C>10%</color>. The enemy will fix the impaired parts and reset the impairment level while charging, and will reset its <color=#FFFFFF>Overwhelmed</color> stacks after recovering from Stun.",
+                "title": ""
+              },
+              "69010308": {
+                "desc": "· <color=#FFFFFF>Assist Points</color> are not consumed for this battle.",
+                "title": ""
+              },
+              "69010703": {
+                "desc": "· Successfully <color=#FFAF2C>triggering a Perfect Assist</color> grants <color=#FFAF2C>200 Performance Points</color>\n. Successfully <color=#FFAF2C>causing Impaired</color> grants <color=#FFAF2C>600 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+                "title": ""
+              },
+              "69013010": {
+                "desc": "· When an extra <color=#FFAF2C>score multiplier</color> is active in this stage, the Performance Points cap will increase accordingly.",
+                "title": ""
+              }
+            },
+            "layerRoom": {},
+            "monsterLevel": 60,
+            "sRankGoal": 40000
+          },
+          "layerRoom": {
+            "70702019": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_TyphonDestroyer.png",
+              "monsterList": {
+                "11891": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 300082,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_TyphonDestroyer.png",
+                  "name": "Autonomous Assault Unit - Typhon Destroyer",
+                  "stats": {
+                    "attack": 2744.1818181818185,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 8934160.365,
+                    "stun": 12559.82
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "name": "BATTLE 03",
+          "sRankScoreLayerBuff": {},
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            },
+            "69012403": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG <color=#2BAD00>increases by 20%/60%</color>.\n· After an EX Special Attack or Ultimate, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 20%. For Agents with Attack specialty, their DMG <color=#2BAD00>further increases by 30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Combined Attack"
+            }
+          },
+          "tag": "<color=#ff4e00>Final</color>",
+          "tagType": 1
+        },
+        "1010602": {
+          "aRankScoreLayerBuff": {
+            "2003103": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003102": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010602,
+          "layer": {
+            "aRankGoal": 210,
+            "bRankGoal": 300,
+            "goalType": 0,
+            "id": 7000107,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 60,
+            "sRankGoal": 150
+          },
+          "layerRoom": {
+            "70702020": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Durahan.png",
+              "monsterList": {
+                "11142": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 10002,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Satyrus.png",
+                  "name": "Faun",
+                  "stats": {
+                    "attack": 1277.1000000000001,
+                    "attribute_infliction": 0,
+                    "defence": 571.6800000000001,
+                    "hp": 496405.4040000001,
+                    "stun": 1782
+                  }
+                },
+                "11152": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300002,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Durahan.png",
+                  "name": "Newborn Dullahan",
+                  "stats": {
+                    "attack": 2322,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 6066052.344000001,
+                    "stun": 10975.14
+                  }
+                },
+                "11224": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 20004,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GoblinMetro.png",
+                  "name": "Metro Goblin",
+                  "stats": {
+                    "attack": 2147.8500000000004,
+                    "attribute_infliction": 0,
+                    "defence": 714.6,
+                    "hp": 2657739.348,
+                    "stun": 7864.5599999999995
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 2
+            }
+          },
+          "name": "3-1 ",
+          "sRankScoreLayerBuff": {
+            "2003104": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.5</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            },
+            "69012403": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG <color=#2BAD00>increases by 20%/60%</color>.\n· After an EX Special Attack or Ultimate, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 20%. For Agents with Attack specialty, their DMG <color=#2BAD00>further increases by 30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Combined Attack"
+            }
+          },
+          "tag": "<color=#ffef00>Required</color>",
+          "tagType": 2
+        },
+        "1010603": {
+          "aRankScoreLayerBuff": {
+            "2003106": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003105": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010603,
+          "layer": {
+            "aRankGoal": 210,
+            "bRankGoal": 300,
+            "goalType": 0,
+            "id": 7000108,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 60,
+            "sRankGoal": 150
+          },
+          "layerRoom": {
+            "70702021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_BoringMachineRed.png",
+              "monsterList": {
+                "11302": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 300041,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_BoringMachineRed.png",
+                  "name": "Greta - Energized",
+                  "stats": {
+                    "attack": 2322,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 7781597.604000001,
+                    "stun": 14234.22
+                  }
+                },
+                "11482": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 100271,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+                  "name": "Vicious Striker",
+                  "stats": {
+                    "attack": 1044.9,
+                    "attribute_infliction": 0,
+                    "defence": 635.2,
+                    "hp": 496405.4040000001,
+                    "stun": 1782
+                  }
+                },
+                "11492": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 100281,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+                  "name": "Greedy Ranger",
+                  "stats": {
+                    "attack": 1277.1000000000001,
+                    "attribute_infliction": 0,
+                    "defence": 635.2,
+                    "hp": 496405.4040000001,
+                    "stun": 1782
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 2
+            }
+          },
+          "name": "3-2 ",
+          "sRankScoreLayerBuff": {
+            "2003107": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.5</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            },
+            "69012403": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG <color=#2BAD00>increases by 20%/60%</color>.\n· After an EX Special Attack or Ultimate, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 20%. For Agents with Attack specialty, their DMG <color=#2BAD00>further increases by 30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Combined Attack"
+            }
+          },
+          "tag": "<color=#ffef00>Required</color>",
+          "tagType": 2
+        },
+        "1010604": {
+          "aRankScoreLayerBuff": {
+            "2003127": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.2</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003126": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010604,
+          "layer": {
+            "aRankGoal": 1,
+            "bRankGoal": 4,
+            "goalType": 1,
+            "id": 7000109,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 60,
+            "sRankGoal": 0
+          },
+          "layerRoom": {
+            "70702022": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ThugBulkyEnforcerBoss.png",
+              "monsterList": {
+                "11353": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 200172,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerBoss.png",
+                  "name": "Troublemaker - Wanted Enforcer",
+                  "stats": {
+                    "attack": 1741.5000000000002,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 6078344.976000001,
+                    "stun": 10975.14
+                  }
+                },
+                "11671": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30019,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_DubiousHero.png",
+                  "name": "Rampant Brute",
+                  "stats": {
+                    "attack": 1915.65,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 6451955.532000001,
+                    "stun": 10975.14
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "name": "3-3 ",
+          "sRankScoreLayerBuff": {
+            "2003128": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            },
+            "69012403": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG <color=#2BAD00>increases by 20%/60%</color>.\n· After an EX Special Attack or Ultimate, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 20%. For Agents with Attack specialty, their DMG <color=#2BAD00>further increases by 30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Combined Attack"
+            }
+          },
+          "tag": "<color=#069eff>Optional</color>",
+          "tagType": 3
+        }
+      },
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Level01.png",
+      "id": 10106,
+      "name": "BATTLE 03",
+      "prevNode": 10001003,
+      "storyEvent": {},
+      "type": 2
+    },
+    "10107": {
+      "battle": {},
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Tale_01.png",
+      "id": 10107,
+      "name": "STORY 03",
+      "prevNode": 0,
+      "storyEvent": {
+        "1010701": {
+          "1000401": {
+            "choice": [
+              {
+                "desc": "",
+                "id": 17,
+                "name": "It's all the Exaltists' fault!"
+              }
+            ],
+            "desc": "You've successfully defended the appearance rate of the Supreme Assistant!\nAs a reward for your wise decision, the path of Hollow exploration fast-forwards, countless scenes rewinding past you in a blur.\n\n...In short, after enduring many hardships and dangers, you've reached the depths of the Hollow — here, the Miasma surges with unusually high activity.\nYou even came across several friends you recognized, yet when you looked again, they appeared to have been <color=#FFAF2C>remolded</color> into unfamiliar forms.\n\nYou're certain you've uncovered the secret behind the Hollow's strange disturbance...",
+            "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Level/Story03.png",
+            "id": 1000401,
+            "name": "Exalted Voice",
+            "nextNodeUnlock": [],
+            "nextPage": [],
+            "nextRecordUnlock": [1010801]
+          }
+        }
+      },
+      "type": 1
+    },
+    "10108": {
+      "battle": {
+        "1010801": {
+          "aRankScoreLayerBuff": {},
+          "bRankScoreLayerBuff": {},
+          "id": 1010801,
+          "layer": {
+            "aRankGoal": 28000,
+            "bRankGoal": 12000,
+            "goalType": 2,
+            "id": 7000110,
+            "layerBuff": {
+              "69011302": {
+                "desc": "· When the Miasma Priest switches phase, their Anomaly Buildup RES increases by 10% and CRIT DMG taken increases by 30%. This effect can stack up to 2 times and is cleared when <Term:2000002>Miasmic Shield</Term> breaks.",
+                "title": ""
+              },
+              "69011303": {
+                "desc": "· When an Agent successfully performs <color=#FFAF2C>3 Defensive Assists within 3 seconds</color>, earn <color=#FFAF2C>1,000 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+                "title": ""
+              },
+              "69012102": {
+                "desc": "",
+                "title": ""
+              },
+              "69013010": {
+                "desc": "· When an extra <color=#FFAF2C>score multiplier</color> is active in this stage, the Performance Points cap will increase accordingly.",
+                "title": ""
+              }
+            },
+            "layerRoom": {},
+            "monsterLevel": 65,
+            "sRankGoal": 40000
+          },
+          "layerRoom": {
+            "70702023": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "Miasma Priest",
+                  "stats": {
+                    "attack": 2173.009090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 10221639.3345,
+                    "stun": 15584.800000000001
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "name": "LAST NODE",
+          "sRankScoreLayerBuff": {},
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Dash Attack</color> DMG increases by <color=#2BAD00>30%</color>.\n· After triggering a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Perfect Assist</color>, increases all squad members' ATK by <color=#2BAD00>10%</color> and CRIT DMG by <color=#2BAD00>10%</color> for 15s. Stacks up to 3 times. The duration of each stack is calculated separately.",
+              "title": "Interrupt"
+            },
+            "69010201": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>25%</color> and Anomaly Proficiency by <color=#2BAD00>40</color>.\n· When an enemy suffers an Attribute Anomaly, Agents recover <color=#2BAD00>500</color> additional Decibels and ATK increases by <color=#2BAD00>30%</color> for 15s. The Decibel recovery effect can trigger once every 15s.",
+              "title": "Graceful Mastery"
+            },
+            "69012101": {
+              "desc": "· Agent HP <color=#2BAD00>increases by 25%</color>, and their Sheer DMG <color=#2BAD00>increases by 15%</color>.\n· Agents with Rupture specialty deal <color=#2BAD00>15%</color> more DMG, and their Ultimate DMG is additionally <color=#2BAD00>increased by 15%</color>.",
+              "title": "Clarity"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#ff4e00>Final</color>",
+          "tagType": 1
+        },
+        "1010802": {
+          "aRankScoreLayerBuff": {
+            "2003103": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003102": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010802,
+          "layer": {
+            "aRankGoal": 210,
+            "bRankGoal": 300,
+            "goalType": 0,
+            "id": 7000111,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 65,
+            "sRankGoal": 150
+          },
+          "layerRoom": {
+            "70702024": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HeavyStrike.png",
+              "monsterList": {
+                "11158": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300001,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DurahanGreyPro.png",
+                  "name": "Dullahan - Energized",
+                  "stats": {
+                    "attack": 2267.73,
+                    "attribute_infliction": 0,
+                    "defence": 921.0400000000001,
+                    "hp": 2944310.7320000003,
+                    "stun": 8579.52
+                  }
+                },
+                "11206": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 100031,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GolemGreyPro.png",
+                  "name": "Hoplitai - Energized",
+                  "stats": {
+                    "attack": 1225.8,
+                    "attribute_infliction": 0,
+                    "defence": 730.48,
+                    "hp": 549930.4360000001,
+                    "stun": 1944.0000000000002
+                  }
+                },
+                "11456": {
+                  "element": {
+                    "electric": 0,
+                    "ether": -1,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 200072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_HeavyStrikerBoss.png",
+                  "name": "Shielded Defender",
+                  "stats": {
+                    "attack": 2451.6,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8230131.536000001,
+                    "stun": 11972.880000000001
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "201": "Fire"
+              },
+              "wavesNum": 2
+            }
+          },
+          "name": "4-1 ",
+          "sRankScoreLayerBuff": {
+            "2003104": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.5</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Dash Attack</color> DMG increases by <color=#2BAD00>30%</color>.\n· After triggering a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Perfect Assist</color>, increases all squad members' ATK by <color=#2BAD00>10%</color> and CRIT DMG by <color=#2BAD00>10%</color> for 15s. Stacks up to 3 times. The duration of each stack is calculated separately.",
+              "title": "Interrupt"
+            },
+            "69010201": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>25%</color> and Anomaly Proficiency by <color=#2BAD00>40</color>.\n· When an enemy suffers an Attribute Anomaly, Agents recover <color=#2BAD00>500</color> additional Decibels and ATK increases by <color=#2BAD00>30%</color> for 15s. The Decibel recovery effect can trigger once every 15s.",
+              "title": "Graceful Mastery"
+            },
+            "69012101": {
+              "desc": "· Agent HP <color=#2BAD00>increases by 25%</color>, and their Sheer DMG <color=#2BAD00>increases by 15%</color>.\n· Agents with Rupture specialty deal <color=#2BAD00>15%</color> more DMG, and their Ultimate DMG is additionally <color=#2BAD00>increased by 15%</color>.",
+              "title": "Clarity"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#ffef00>Required</color>",
+          "tagType": 2
+        },
+        "1010803": {
+          "aRankScoreLayerBuff": {
+            "2003106": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003105": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010803,
+          "layer": {
+            "aRankGoal": 210,
+            "bRankGoal": 300,
+            "goalType": 0,
+            "id": 7000112,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 65,
+            "sRankGoal": 150
+          },
+          "layerRoom": {
+            "70702025": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_PileDriver.png",
+              "monsterList": {
+                "11391": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 30006,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_PileDriver.png",
+                  "name": "Friday",
+                  "stats": {
+                    "attack": 2451.6,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8620650.236000001,
+                    "stun": 15528.240000000002
+                  }
+                },
+                "11762": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 100091,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GrenadierJaegerPro.png",
+                  "name": "Demolition Jaeger",
+                  "stats": {
+                    "attack": 1205.37,
+                    "attribute_infliction": 0,
+                    "defence": 635.2,
+                    "hp": 604803.3200000001,
+                    "stun": 2041.2
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric"
+              },
+              "wavesNum": 2
+            }
+          },
+          "name": "4-2 ",
+          "sRankScoreLayerBuff": {
+            "2003107": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.5</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Dash Attack</color> DMG increases by <color=#2BAD00>30%</color>.\n· After triggering a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Perfect Assist</color>, increases all squad members' ATK by <color=#2BAD00>10%</color> and CRIT DMG by <color=#2BAD00>10%</color> for 15s. Stacks up to 3 times. The duration of each stack is calculated separately.",
+              "title": "Interrupt"
+            },
+            "69010201": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>25%</color> and Anomaly Proficiency by <color=#2BAD00>40</color>.\n· When an enemy suffers an Attribute Anomaly, Agents recover <color=#2BAD00>500</color> additional Decibels and ATK increases by <color=#2BAD00>30%</color> for 15s. The Decibel recovery effect can trigger once every 15s.",
+              "title": "Graceful Mastery"
+            },
+            "69012101": {
+              "desc": "· Agent HP <color=#2BAD00>increases by 25%</color>, and their Sheer DMG <color=#2BAD00>increases by 15%</color>.\n· Agents with Rupture specialty deal <color=#2BAD00>15%</color> more DMG, and their Ultimate DMG is additionally <color=#2BAD00>increased by 15%</color>.",
+              "title": "Clarity"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#ffef00>Required</color>",
+          "tagType": 2
+        },
+        "1010804": {
+          "aRankScoreLayerBuff": {
+            "2003127": {
+              "desc": "Lv.2 In the Final stage, score multiplier increases by <color=#2BAD00>0.2</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "bRankScoreLayerBuff": {
+            "2003126": {
+              "desc": "Lv.1 In the Final stage, score multiplier increases by <color=#2BAD00>0.1</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "id": 1010804,
+          "layer": {
+            "aRankGoal": 1,
+            "bRankGoal": 4,
+            "goalType": 1,
+            "id": 7000113,
+            "layerBuff": {},
+            "layerRoom": {},
+            "monsterLevel": 65,
+            "sRankGoal": 0
+          },
+          "layerRoom": {
+            "70702026": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NoranoEgo_Slime.png",
+              "monsterList": {
+                "31292": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 300401,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NoranoEgo_Slime.png",
+                  "name": "Doppelganger Komano Manato",
+                  "stats": {
+                    "attack": 2206.44,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8807807.916,
+                    "stun": 14966.640000000001
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice"
+              },
+              "wavesNum": 1
+            }
+          },
+          "name": "4-3 ",
+          "sRankScoreLayerBuff": {
+            "2003128": {
+              "desc": "Lv.3 In the Final stage, score multiplier increases by <color=#2BAD00>0.3</color>.",
+              "title": "Score Multiplier Buff"
+            }
+          },
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Dash Attack</color> DMG increases by <color=#2BAD00>30%</color>.\n· After triggering a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Perfect Assist</color>, increases all squad members' ATK by <color=#2BAD00>10%</color> and CRIT DMG by <color=#2BAD00>10%</color> for 15s. Stacks up to 3 times. The duration of each stack is calculated separately.",
+              "title": "Interrupt"
+            },
+            "69010201": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>25%</color> and Anomaly Proficiency by <color=#2BAD00>40</color>.\n· When an enemy suffers an Attribute Anomaly, Agents recover <color=#2BAD00>500</color> additional Decibels and ATK increases by <color=#2BAD00>30%</color> for 15s. The Decibel recovery effect can trigger once every 15s.",
+              "title": "Graceful Mastery"
+            },
+            "69012101": {
+              "desc": "· Agent HP <color=#2BAD00>increases by 25%</color>, and their Sheer DMG <color=#2BAD00>increases by 15%</color>.\n· Agents with Rupture specialty deal <color=#2BAD00>15%</color> more DMG, and their Ultimate DMG is additionally <color=#2BAD00>increased by 15%</color>.",
+              "title": "Clarity"
+            },
+            "69012402": {
+              "desc": "· When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore <color=#2BAD00>10%/25%</color> of the enemy's <color=#98EFF0>Ice RES</color>.\n· When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, repeated triggers reset the duration.",
+              "title": "Raging Waves"
+            }
+          },
+          "tag": "<color=#069eff>Optional</color>",
+          "tagType": 3
+        }
+      },
+      "icon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/VoldFront/UnPacker/Boss/Boss05.png",
+      "id": 10108,
+      "name": "LAST NODE",
+      "prevNode": 10001004,
+      "storyEvent": {},
+      "type": 3
+    }
+  },
+  "record": {}
+}

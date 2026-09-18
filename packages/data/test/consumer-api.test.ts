@@ -55,6 +55,12 @@ const loaders = vi.hoisted(() => ({
   otherBossData: vi.fn(),
   otherBossZh: vi.fn(),
   otherBossEn: vi.fn(),
+  simulData: vi.fn(),
+  simulZh: vi.fn(),
+  simulEn: vi.fn(),
+  otherSimulData: vi.fn(),
+  otherSimulZh: vi.fn(),
+  otherSimulEn: vi.fn(),
 }))
 vi.mock("../.generated/catalog.ts", () => ({
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
@@ -160,6 +166,19 @@ vi.mock("../.generated/catalog.ts", () => ({
       en: loaders.otherBossEn,
     },
   },
+  simulIds: Object.freeze(["101", "102"]),
+  simulLoaders: {
+    "101": {
+      data: loaders.simulData,
+      zh: loaders.simulZh,
+      en: loaders.simulEn,
+    },
+    "102": {
+      data: loaders.otherSimulData,
+      zh: loaders.otherSimulZh,
+      en: loaders.otherSimulEn,
+    },
+  },
   indexLoader: loaders.index,
 }))
 import {
@@ -169,6 +188,7 @@ import {
   monsterIds,
   shiyuIds,
   bossIds,
+  simulIds,
   wEngineNames,
   loadIndex,
   loadAgentData,
@@ -189,6 +209,9 @@ import {
   loadBossData,
   loadBossDetails,
   loadAllBosses,
+  loadSimulData,
+  loadSimulDetails,
+  loadAllSimul,
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
@@ -548,6 +571,39 @@ function mockMemberRecords() {
       bossDetails("en", "Trial", "Example Overlord · Phase I"),
     )
   }
+
+  for (const [data, zh, en, id] of [
+    [loaders.simulData, loaders.simulZh, loaders.simulEn, 101],
+    [loaders.otherSimulData, loaders.otherSimulZh, loaders.otherSimulEn, 102],
+  ] as const) {
+    data.mockResolvedValue({
+      id,
+      endTime: id === 101 ? "2026-02-05 03:59:59" : "",
+      bossAdjust: {
+        "1001": { hp: 1200, atk: -5000, points: 1000 },
+      },
+      unknown: { tags: ["original"] },
+    })
+    const simulDetails = (locale: string, nodeName: string) => ({
+      id,
+      locale,
+      record: {},
+      node: {
+        "10101": {
+          id: 10101,
+          name: nodeName,
+          icon: "",
+          type: 4,
+          prevNode: 0,
+          storyEvent: {},
+          battle: {},
+        },
+      },
+      extra: { entries: locale === "zh" ? ["原文"] : ["original"] },
+    })
+    zh.mockResolvedValue(simulDetails("zh", "INTRO"))
+    en.mockResolvedValue(simulDetails("en", "INTRO"))
+  }
 }
 
 beforeEach(() => {
@@ -674,6 +730,21 @@ describe("public readers", () => {
     expect(loaders.otherBossZh).not.toHaveBeenCalled()
     for (const [key, loader] of Object.entries(loaders))
       if (key !== "bossData" && key !== "otherBossEn")
+        expect(loader).not.toHaveBeenCalled()
+  })
+  it("loads only the requested simul data/locale without prerequisites or other categories", async () => {
+    expect(await loadSimulData("101")).toMatchObject({ id: 101 })
+    expect(loaders.index).not.toHaveBeenCalled()
+    expect(loaders.simulZh).not.toHaveBeenCalled()
+    expect(loaders.simulEn).not.toHaveBeenCalled()
+    expect(await loadSimulDetails("102", "en")).toMatchObject({
+      id: 102,
+      locale: "en",
+    })
+    expect(loaders.otherSimulData).not.toHaveBeenCalled()
+    expect(loaders.otherSimulZh).not.toHaveBeenCalled()
+    for (const [key, loader] of Object.entries(loaders))
+      if (key !== "simulData" && key !== "otherSimulEn")
         expect(loader).not.toHaveBeenCalled()
   })
   it.each([
@@ -971,6 +1042,35 @@ describe("public readers", () => {
       // Boss 全量不得顺带加载其他类别或索引。
       for (const [key, loader] of Object.entries(loaders))
         if (!key.toLowerCase().includes("boss"))
+          expect(loader).not.toHaveBeenCalled()
+    },
+  )
+  it.each(supportedLanguages)(
+    "loads the full separated simul %s view with source ID keys",
+    async (locale) => {
+      const all = await loadAllSimul(locale)
+      expect(Object.keys(all)).toEqual(simulIds)
+      expect(Object.keys(all["101"])).toEqual(["data", "details"])
+      expect(all["101"].details.locale).toBe(locale)
+      expect(all["101"].details.node["10101"]!.name).toBe("INTRO")
+      expect(all["101"].data.bossAdjust["1001"]!.atk).toBe(-5000)
+      expect(all["102"].data.endTime).toBe("")
+      expect(all["102"].details.locale).toBe(locale)
+      expect(loaders.index).not.toHaveBeenCalled()
+      expect(loaders.simulData).toHaveBeenCalledTimes(1)
+      expect(loaders.otherSimulData).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "simulZh" : "simulEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "otherSimulZh" : "otherSimulEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "simulEn" : "simulZh"],
+      ).not.toHaveBeenCalled()
+      // Simul 全量不得顺带加载其他类别或索引。
+      for (const [key, loader] of Object.entries(loaders))
+        if (!key.toLowerCase().includes("simul"))
           expect(loader).not.toHaveBeenCalled()
     },
   )
