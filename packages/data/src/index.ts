@@ -19,6 +19,7 @@ import type {
   MonsterData,
   MonsterDetails,
 } from "./integration/monster-types.ts"
+import type { ShiyuData, ShiyuDetails } from "./integration/shiyu-types.ts"
 import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
 import {
   agentNames,
@@ -35,6 +36,8 @@ import {
   bangbooLoaders,
   monsterIds,
   monsterLoaders,
+  shiyuIds,
+  shiyuLoaders,
   indexLoader,
 } from "../.generated/catalog.ts"
 import type {
@@ -43,6 +46,7 @@ import type {
   WEngineName,
   BangbooName,
   MonsterId,
+  ShiyuId,
 } from "../.generated/catalog.ts"
 
 /** 正式字段类型：实体结构、文件引用、来源身份与多实体完整制品索引。 */
@@ -100,6 +104,14 @@ export type {
   MonsterInfoUnit,
 } from "./integration/monster-types.ts"
 export type {
+  ShiyuData,
+  ShiyuDetails,
+  ShiyuZoneBuff,
+  ShiyuZoneEncounter,
+  ShiyuZoneRoom,
+  ShiyuZoneStage,
+} from "./integration/shiyu-types.ts"
+export type {
   IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
   IntegratedSnapshotMember,
@@ -111,6 +123,7 @@ export type {
   WEngineName,
   BangbooName,
   MonsterId,
+  ShiyuId,
 } from "../.generated/catalog.ts"
 export {
   agentNames,
@@ -118,6 +131,7 @@ export {
   wEngineNames,
   bangbooNames,
   monsterIds,
+  shiyuIds,
 } from "../.generated/catalog.ts"
 
 /** 指定语言的完整代理人资料；公共与本地化字段分别保留，不合并。 */
@@ -160,11 +174,23 @@ export interface LocalizedMonster {
   details: MonsterDetails
 }
 
+/** 指定语言的完整 Shiyu 区域资料；公共与本地化字段分别保留，不合并。 */
+export interface LocalizedShiyu {
+  /** 原有公共资料结构。 */
+  data: ShiyuData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: ShiyuDetails
+}
+
 function assertName(name: unknown): asserts name is string {
   if (typeof name !== "string") throw new TypeError("name must be a string")
 }
 
 function assertMonsterId(id: unknown): asserts id is string {
+  if (typeof id !== "string") throw new TypeError("id must be a string")
+}
+
+function assertShiyuId(id: unknown): asserts id is string {
   if (typeof id !== "string") throw new TypeError("id must be a string")
 }
 
@@ -417,4 +443,51 @@ export async function loadAllMonsters(
       }),
     ),
   ) as Record<MonsterId, LocalizedMonster>
+}
+
+/**
+ * 精确来源 ID 对应的 Shiyu 区域公共资料；ID 是规范十进制字符串，不 trim、不转换数值、
+ * 不解析科学计数法或补零。未登记字符串返回 undefined，非字符串以 TypeError 拒绝。
+ * 不加载索引、详情或其他类别，每次返回独立对象树。
+ */
+export async function loadShiyuData(
+  id: ShiyuId,
+): Promise<ShiyuData | undefined> {
+  assertShiyuId(id)
+  const loaders = Object.hasOwn(shiyuLoaders, id) ? shiyuLoaders[id] : undefined
+  return loaders === undefined
+    ? undefined
+    : structuredClone(await loaders.data())
+}
+
+/** 只读取指定 Shiyu 区域显式 zh/en 详情，无语言回退；未登记 ID 返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
+export async function loadShiyuDetails(
+  id: ShiyuId,
+  locale: DetailLocale,
+): Promise<ShiyuDetails | undefined> {
+  assertLocale(locale)
+  assertShiyuId(id)
+  const loaders = Object.hasOwn(shiyuLoaders, id) ? shiyuLoaders[id] : undefined
+  return loaders === undefined
+    ? undefined
+    : structuredClone(await loaders[locale]())
+}
+
+/** 显式加载全部 Shiyu 区域公共资料和指定语言详情，以来源 ID 为 key；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllShiyu(
+  locale: DetailLocale,
+): Promise<Record<ShiyuId, LocalizedShiyu>> {
+  assertLocale(locale)
+  return Object.fromEntries(
+    await Promise.all(
+      shiyuIds.map(async (id) => {
+        const loaders = shiyuLoaders[id]!
+        const [data, details] = await Promise.all([
+          loaders.data(),
+          loaders[locale](),
+        ])
+        return [id, structuredClone({ data, details })]
+      }),
+    ),
+  ) as Record<ShiyuId, LocalizedShiyu>
 }

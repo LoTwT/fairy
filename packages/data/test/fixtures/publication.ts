@@ -19,10 +19,12 @@ import {
   syntheticWEngineIds,
   syntheticBangbooIds,
   syntheticMonsterIds,
+  syntheticShiyuIds,
 } from "./synthetic-dataset.ts"
 import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
 import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
 import { monsterInput } from "./monster-source.ts"
+import { shiyuInput } from "./shiyu-source.ts"
 
 /**
  * 合成双语制品；不同英文展示名、codeName 和索引名称用于捕获错误取值来源。
@@ -131,6 +133,19 @@ export async function publicationFixture(
         ...monster.details[locale],
         id: Number(id),
         name: locale === "en" ? "OfficialName_" : `示例怪 ${id}`,
+      })
+  // 默认登记表包含 shiyu 类别：shiyu 输入使用真实 Shiyu 结构的合成成员；
+  // 公开身份是来源 ID，名称类内重名合法，不做任何名称校验。
+  const shiyu = shiyuInput()
+  await write(
+    "shiyu.json",
+    Object.fromEntries(syntheticShiyuIds.map((id) => [id, shiyu.sourceRecord])),
+  )
+  for (const id of syntheticShiyuIds)
+    for (const locale of shiyu.detailLocales)
+      await write(`${locale}/shiyu/${id}.json`, {
+        ...shiyu.details[locale],
+        id: Number(id),
       })
   const result = await buildIntegratedSnapshot({
     rawRoot,

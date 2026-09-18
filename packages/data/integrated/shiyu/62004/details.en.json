@@ -1,0 +1,1400 @@
+{
+  "id": 62004,
+  "locale": "en",
+  "name": "Critical Node",
+  "zone": {
+    "6200401": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001041": {
+          "desc": "· When an enemy is Stunned, all squad members gain 2 stacks of <color=#FFFFFF>Fervor</color>, and when an Attribute Anomaly is triggered, all squad members gain 1 stack of <color=#FFFFFF>Fervor</color>. Fervor lasts for 20s and stacks up to 3 times. The duration of each stack is calculated separately.\n· For each stack of <color=#FFFFFF>Fervor</color>, Agent ATK increases by 10% and Anomaly Proficiency increases by 10.",
+          "title": "Irresistible Force"
+        },
+        "62001042": {
+          "desc": "",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "62004011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11481": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100271,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+              "name": "Vicious Striker",
+              "stats": {
+                "attack": 1405.6363636363637,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 153683.673,
+                "stun": 1068
+              }
+            },
+            "11491": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100281,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+              "name": "Greedy Ranger",
+              "stats": {
+                "attack": 1718,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 153683.673,
+                "stun": 1068
+              }
+            },
+            "11501": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200121,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "Frenzied Maniac",
+              "stats": {
+                "attack": 2394.787878787879,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 832464.633,
+                "stun": 4749.04
+              }
+            },
+            "11511": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200131,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "Wicked Wraith",
+              "stats": {
+                "attack": 2290.666666666667,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 1209078.585,
+                "stun": 6233.56
+              }
+            }
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          },
+          "wavesNum": 4
+        },
+        "62004012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11251": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100061,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaegerPro.png",
+              "name": "Scout Jaeger",
+              "stats": {
+                "attack": 1718,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 153683.673,
+                "stun": 1068
+              }
+            },
+            "11261": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200091,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyFirepowerPro.png",
+              "name": "Assault Gunner",
+              "stats": {
+                "attack": 2420.818181818182,
+                "attribute_infliction": 0,
+                "defence": 639.36,
+                "hp": 908690.64,
+                "stun": 4722.34
+              }
+            },
+            "11281": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_HeavyJaeger_Pro.png",
+              "name": "Patrol Jaeger",
+              "stats": {
+                "attack": 1561.818181818182,
+                "attribute_infliction": 0,
+                "defence": 544.64,
+                "hp": 153683.673,
+                "stun": 1068
+              }
+            },
+            "11441": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRoverPro.png",
+              "name": "Lightfoot Rover MK II",
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 639.36,
+                "hp": 971231.547,
+                "stun": 6233.56
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 50,
+      "name": "Critical Node: First Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 1
+    },
+    "6200402": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001041": {
+          "desc": "· When an enemy is Stunned, all squad members gain 2 stacks of <color=#FFFFFF>Fervor</color>, and when an Attribute Anomaly is triggered, all squad members gain 1 stack of <color=#FFFFFF>Fervor</color>. Fervor lasts for 20s and stacks up to 3 times. The duration of each stack is calculated separately.\n· For each stack of <color=#FFFFFF>Fervor</color>, Agent ATK increases by 10% and Anomaly Proficiency increases by 10.",
+          "title": "Irresistible Force"
+        },
+        "62001042": {
+          "desc": "",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "62004021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11058": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30002,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Guardian.png",
+              "name": "Guardian",
+              "stats": {
+                "attack": 2485.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 700.9200000000001,
+                "hp": 1397525.012,
+                "stun": 7739.46
+              }
+            },
+            "11164": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10005,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_StrikeJaeger.png",
+              "name": "Strike Jaeger",
+              "stats": {
+                "attack": 1783,
+                "attribute_infliction": 0,
+                "defence": 519.2,
+                "hp": 268148.14,
+                "stun": 1674
+              }
+            },
+            "11254": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10006,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "Light Jaeger",
+              "stats": {
+                "attack": 1783,
+                "attribute_infliction": 0,
+                "defence": 519.2,
+                "hp": 227967.428,
+                "stun": 1674
+              }
+            },
+            "11454": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20007,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "Heavy Striker",
+              "stats": {
+                "attack": 2485.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 700.9200000000001,
+                "hp": 1397026.904,
+                "stun": 6203.1
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 4
+        },
+        "62004022": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11731": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantEnergy.png",
+              "name": "Ionized - Farbauti",
+              "stats": {
+                "attack": 2485.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 584.1,
+                "hp": 1397525.012,
+                "stun": 7739.46
+              }
+            },
+            "11751": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DurahanEnergy.png",
+              "name": "Ionized - Dullahan",
+              "stats": {
+                "attack": 2620.469696969697,
+                "attribute_infliction": 0,
+                "defence": 752.84,
+                "hp": 1178357.492,
+                "stun": 6513.72
+              }
+            },
+            "11771": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Cyrtoidea.png",
+              "name": "Ionized - Cyrtoidea",
+              "stats": {
+                "attack": 1620.909090909091,
+                "attribute_infliction": 0,
+                "defence": 467.28000000000003,
+                "hp": 186458.428,
+                "stun": 1116
+              }
+            },
+            "11781": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30018,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Nassellaria.png",
+              "name": "Ionized - Nassellaria",
+              "stats": {
+                "attack": 1620.909090909091,
+                "attribute_infliction": 0,
+                "defence": 467.28000000000003,
+                "hp": 186458.428,
+                "stun": 1116
+              }
+            }
+          },
+          "monsterWeakness": {
+            "205": "Ether"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 53,
+      "name": "Critical Node: Second Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 2
+    },
+    "6200403": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001041": {
+          "desc": "· When an enemy is Stunned, all squad members gain 2 stacks of <color=#FFFFFF>Fervor</color>, and when an Attribute Anomaly is triggered, all squad members gain 1 stack of <color=#FFFFFF>Fervor</color>. Fervor lasts for 20s and stacks up to 3 times. The duration of each stack is calculated separately.\n· For each stack of <color=#FFFFFF>Fervor</color>, Agent ATK increases by 10% and Anomaly Proficiency increases by 10.",
+          "title": "Irresistible Force"
+        },
+        "62001042": {
+          "desc": "",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "62004031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11314": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10019,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulter.png",
+              "name": "Assaulter",
+              "stats": {
+                "attack": 1743,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 279640.283,
+                "stun": 1728
+              }
+            },
+            "11334": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10016,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPyromaniac.png",
+              "name": "Pyromaniac",
+              "stats": {
+                "attack": 1494,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 279640.283,
+                "stun": 1728
+              }
+            },
+            "11354": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcer.png",
+              "name": "Bulky Enforcer",
+              "stats": {
+                "attack": 2324,
+                "attribute_infliction": 0,
+                "defence": 689,
+                "hp": 1713687.794,
+                "stun": 6403.2
+              }
+            },
+            "11363": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuser.png",
+              "name": "Bulky Intimidator",
+              "stats": {
+                "attack": 2102.666666666667,
+                "attribute_infliction": 0,
+                "defence": 689,
+                "hp": 1288015.404,
+                "stun": 4851.84
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "202": "Ice"
+          },
+          "wavesNum": 4
+        },
+        "62004032": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11251": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100061,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaegerPro.png",
+              "name": "Scout Jaeger",
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 228722.533,
+                "stun": 1152
+              }
+            },
+            "11271": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100071,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_MeleeJaegerPro.png",
+              "name": "Private Jaeger",
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 228722.533,
+                "stun": 1152
+              }
+            },
+            "11441": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRoverPro.png",
+              "name": "Lightfoot Rover MK II",
+              "stats": {
+                "attack": 2185.666666666667,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 1445453.087,
+                "stun": 6723.84
+              }
+            },
+            "11451": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200071,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStrikerPro.png",
+              "name": "Heavy Striker MK II",
+              "stats": {
+                "attack": 2683.666666666667,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 1799433.285,
+                "stun": 6723.84
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 4
+        }
+      },
+      "monsterLevel": 55,
+      "name": "Critical Node: Third Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 3
+    },
+    "6200404": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001041": {
+          "desc": "· When an enemy is Stunned, all squad members gain 2 stacks of <color=#FFFFFF>Fervor</color>, and when an Attribute Anomaly is triggered, all squad members gain 1 stack of <color=#FFFFFF>Fervor</color>. Fervor lasts for 20s and stacks up to 3 times. The duration of each stack is calculated separately.\n· For each stack of <color=#FFFFFF>Fervor</color>, Agent ATK increases by 10% and Anomaly Proficiency increases by 10.",
+          "title": "Irresistible Force"
+        },
+        "62001042": {
+          "desc": "",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "62004041": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11103": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
+              "name": "Alpeca",
+              "stats": {
+                "attack": 1375.2727272727273,
+                "attribute_infliction": 0,
+                "defence": 675.9,
+                "hp": 17215.12,
+                "stun": 0
+              }
+            },
+            "11114": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 20000,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantGrey.png",
+              "name": "Farbauti",
+              "stats": {
+                "attack": 2635.939393939394,
+                "attribute_infliction": 0,
+                "defence": 811.0799999999999,
+                "hp": 1811245.813,
+                "stun": 8322
+              }
+            },
+            "11194": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 20003,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HatiArmoredGrey.png",
+              "name": "Armored Hati",
+              "stats": {
+                "attack": 3323.5757575757575,
+                "attribute_infliction": 0,
+                "defence": 811.0799999999999,
+                "hp": 1396791.799,
+                "stun": 5296
+              }
+            },
+            "11203": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10003,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Golemgrey.png",
+              "name": "Hoplitai",
+              "stats": {
+                "attack": 1719.0909090909092,
+                "attribute_infliction": 0,
+                "defence": 690.92,
+                "hp": 241657.247,
+                "stun": 1200
+              }
+            },
+            "11291": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10014,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Mandrake.png",
+              "name": "Mandrake",
+              "stats": {
+                "attack": 1805.0454545454545,
+                "attribute_infliction": 0,
+                "defence": 540.72,
+                "hp": 190227.076,
+                "stun": 1260
+              }
+            },
+            "11292": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10014,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Mandrake.png",
+              "name": "Mandrake",
+              "stats": {
+                "attack": 1805.0454545454545,
+                "attribute_infliction": 0,
+                "defence": 540.72,
+                "hp": 190227.076,
+                "stun": 1260
+              }
+            }
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "205": "Ether"
+          },
+          "wavesNum": 4
+        },
+        "62004042": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11732": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantEnergy.png",
+              "name": "Ionized - Farbauti",
+              "stats": {
+                "attack": 3037.060606060606,
+                "attribute_infliction": 0,
+                "defence": 675.9,
+                "hp": 1879891.1040000003,
+                "stun": 9506
+              }
+            },
+            "11741": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300014,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DeathXIIIEnergy.png",
+              "name": "Ionized - Thanatos",
+              "stats": {
+                "attack": 2779.19696969697,
+                "attribute_infliction": 0,
+                "defence": 675.9,
+                "hp": 1710967.7390000003,
+                "stun": 4902
+              }
+            },
+            "11751": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DurahanEnergy.png",
+              "name": "Ionized - Dullahan",
+              "stats": {
+                "attack": 2779.19696969697,
+                "attribute_infliction": 0,
+                "defence": 871.16,
+                "hp": 1527196.333,
+                "stun": 7004
+              }
+            },
+            "11771": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Cyrtoidea.png",
+              "name": "Ionized - Cyrtoidea",
+              "stats": {
+                "attack": 1719.0909090909092,
+                "attribute_infliction": 0,
+                "defence": 540.72,
+                "hp": 241657.247,
+                "stun": 1200
+              }
+            },
+            "11781": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30018,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Nassellaria.png",
+              "name": "Ionized - Nassellaria",
+              "stats": {
+                "attack": 1719.0909090909092,
+                "attribute_infliction": 0,
+                "defence": 540.72,
+                "hp": 241657.247,
+                "stun": 1200
+              }
+            }
+          },
+          "monsterWeakness": {
+            "205": "Ether"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 58,
+      "name": "Critical Node: Fourth Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 4
+    },
+    "6200405": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001041": {
+          "desc": "· When an enemy is Stunned, all squad members gain 2 stacks of <color=#FFFFFF>Fervor</color>, and when an Attribute Anomaly is triggered, all squad members gain 1 stack of <color=#FFFFFF>Fervor</color>. Fervor lasts for 20s and stacks up to 3 times. The duration of each stack is calculated separately.\n· For each stack of <color=#FFFFFF>Fervor</color>, Agent ATK increases by 10% and Anomaly Proficiency increases by 10.",
+          "title": "Irresistible Force"
+        },
+        "62001042": {
+          "desc": "",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "62004051": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11323": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10018,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacher.png",
+              "name": "Poacher",
+              "stats": {
+                "attack": 1583.181818181818,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 283060.011,
+                "stun": 1236
+              }
+            },
+            "11343": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugRaider.png",
+              "name": "Raider",
+              "stats": {
+                "attack": 1847.0454545454545,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 312550.68,
+                "stun": 1236
+              }
+            },
+            "11355": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcer.png",
+              "name": "Bulky Enforcer",
+              "stats": {
+                "attack": 2814.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 2181553.335,
+                "stun": 7792.9800000000005
+              }
+            },
+            "11363": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuser.png",
+              "name": "Bulky Intimidator",
+              "stats": {
+                "attack": 2228.181818181818,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 1594008.468,
+                "stun": 5205.62
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "202": "Ice"
+          },
+          "wavesNum": 3
+        },
+        "62004052": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11045": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 20020,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_RagingGuy.png",
+              "name": "Enraged Sweeper",
+              "stats": {
+                "attack": 2814.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 1764651.057,
+                "stun": 7792.9800000000005
+              }
+            },
+            "11051": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300021,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GuardianPro.png",
+              "name": "Guardian MK II",
+              "stats": {
+                "attack": 2697.272727272727,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 2121563.769,
+                "stun": 8571.66
+              }
+            },
+            "11251": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100061,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaegerPro.png",
+              "name": "Scout Jaeger",
+              "stats": {
+                "attack": 1935,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 283060.011,
+                "stun": 1236
+              }
+            },
+            "11261": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200091,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyFirepowerPro.png",
+              "name": "Assault Gunner",
+              "stats": {
+                "attack": 2726.590909090909,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 1673658.48,
+                "stun": 5465.18
+              }
+            },
+            "11281": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_HeavyJaeger_Pro.png",
+              "name": "Patrol Jaeger",
+              "stats": {
+                "attack": 1759.090909090909,
+                "attribute_infliction": 0,
+                "defence": 730.48,
+                "hp": 283060.011,
+                "stun": 1236
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 60,
+      "name": "Critical Node: Fifth Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "6200406": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001041": {
+          "desc": "· When an enemy is Stunned, all squad members gain 2 stacks of <color=#FFFFFF>Fervor</color>, and when an Attribute Anomaly is triggered, all squad members gain 1 stack of <color=#FFFFFF>Fervor</color>. Fervor lasts for 20s and stacks up to 3 times. The duration of each stack is calculated separately.\n· For each stack of <color=#FFFFFF>Fervor</color>, Agent ATK increases by 10% and Anomaly Proficiency increases by 10.",
+          "title": "Irresistible Force"
+        },
+        "62001042": {
+          "desc": "",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "62004061": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_DurahanBoss.png",
+          "monsterList": {
+            "11103": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
+              "name": "Alpeca",
+              "stats": {
+                "attack": 1485.8181818181818,
+                "attribute_infliction": 0,
+                "defence": 714.6,
+                "hp": 21924.24,
+                "stun": 0
+              }
+            },
+            "11156": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300005,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DurahanBoss.png",
+              "name": "Notorious - Dullahan",
+              "stats": {
+                "attack": 3714.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 4598061.234,
+                "stun": 12194.6
+              }
+            },
+            "11203": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10003,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Golemgrey.png",
+              "name": "Hoplitai",
+              "stats": {
+                "attack": 1857.2727272727273,
+                "attribute_infliction": 0,
+                "defence": 730.48,
+                "hp": 307761.51900000003,
+                "stun": 1320
+              }
+            }
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "205": "Ether"
+          },
+          "wavesNum": 2
+        },
+        "62004062": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_GretelOverclocked.png",
+          "monsterList": {
+            "11303": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 300042,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_GretelOverclocked.png",
+              "name": "Greta - Overclocked",
+              "stats": {
+                "attack": 3714.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 5898442.7190000005,
+                "stun": 15815.800000000001
+              }
+            },
+            "11771": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Cyrtoidea.png",
+              "name": "Ionized - Cyrtoidea",
+              "stats": {
+                "attack": 1857.2727272727273,
+                "attribute_infliction": 0,
+                "defence": 571.6800000000001,
+                "hp": 307761.51900000003,
+                "stun": 1320
+              }
+            },
+            "11781": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30018,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Nassellaria.png",
+              "name": "Ionized - Nassellaria",
+              "stats": {
+                "attack": 1857.2727272727273,
+                "attribute_infliction": 0,
+                "defence": 571.6800000000001,
+                "hp": 307761.51900000003,
+                "stun": 1320
+              }
+            }
+          },
+          "monsterWeakness": {
+            "205": "Ether"
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 65,
+      "name": "Critical Node: Sixth Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 6
+    },
+    "6200407": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001041": {
+          "desc": "· When an enemy is Stunned, all squad members gain 2 stacks of <color=#FFFFFF>Fervor</color>, and when an Attribute Anomaly is triggered, all squad members gain 1 stack of <color=#FFFFFF>Fervor</color>. Fervor lasts for 20s and stacks up to 3 times. The duration of each stack is calculated separately.\n· For each stack of <color=#FFFFFF>Fervor</color>, Agent ATK increases by 10% and Anomaly Proficiency increases by 10.",
+          "title": "Irresistible Force"
+        },
+        "62001042": {
+          "desc": "",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "62004071": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ThugBulkyEnforcerBoss.png",
+          "monsterList": {
+            "11311": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100191,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulterPro.png",
+              "name": "Ambusher",
+              "stats": {
+                "attack": 2054.1818181818185,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 361982.205,
+                "stun": 1410
+              }
+            },
+            "11321": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100181,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacherPro.png",
+              "name": "Rustler",
+              "stats": {
+                "attack": 1760.727272727273,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 361982.205,
+                "stun": 1410
+              }
+            },
+            "11353": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200172,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerBoss.png",
+              "name": "Troublemaker - Wanted Enforcer",
+              "stats": {
+                "attack": 3912.727272727273,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 6623339.58,
+                "stun": 13026.050000000001
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 2
+        },
+        "62004072": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MaterialHandler.png",
+          "monsterList": {
+            "11371": {
+              "element": {
+                "electric": 1,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10029,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BeholderEngine.png",
+              "name": "Beholder Engine",
+              "stats": {
+                "attack": 1760.727272727273,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 361982.205,
+                "stun": 1410
+              }
+            },
+            "11401": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 30005,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MaterialHandler.png",
+              "name": "Hans",
+              "stats": {
+                "attack": 3912.727272727273,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 6937616.205,
+                "stun": 16894.15
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 70,
+      "name": "Critical Node: Seventh Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 7
+    }
+  }
+}

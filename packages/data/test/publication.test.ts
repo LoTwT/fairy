@@ -122,6 +122,7 @@ describe("publication snapshot", () => {
       'Object.freeze(["Exampleboo 950001","Exampleboo 950002"])',
     )
     expect(catalog).toContain('Object.freeze(["960001","960002"])')
+    expect(catalog).toContain('Object.freeze(["970001","970002"])')
     expect(catalog).toContain(
       'import("@randomplay/data/integrated/agents/2/details.en.json", { with: { type: "json" } })',
     )
@@ -136,6 +137,9 @@ describe("publication snapshot", () => {
     )
     expect(catalog).toContain(
       'import("@randomplay/data/integrated/monsters/960001/data.json", { with: { type: "json" } })',
+    )
+    expect(catalog).toContain(
+      'import("@randomplay/data/integrated/shiyu/970001/data.json", { with: { type: "json" } })',
     )
     for (const path of publicationFiles(index))
       expect(await fs.readFile(join(generated, "integrated", path))).toEqual(
@@ -353,7 +357,7 @@ describe("publication snapshot", () => {
     )
   })
 
-  it("rejects catalog generation without the drive-discs, w-engines, bangboos or monsters category", async () => {
+  it("rejects catalog generation without the drive-discs, w-engines, bangboos, monsters or shiyu category", async () => {
     const root = await temporaryRoot()
     // agents-only v3 制品过不了发布复制前的完整类别验证；这里直接验证目录生成对缺失类别的要求。
     const { artifactDirectory, index } = await publicationFixture(root, {
@@ -378,6 +382,11 @@ describe("publication snapshot", () => {
     await expect(
       generateCatalog(artifactDirectory, withoutMonsters),
     ).rejects.toThrow(/no monsters category/u)
+    const withoutShiyu = structuredClone(complete)
+    delete (withoutShiyu.entities as Record<string, unknown>)["shiyu"]
+    await expect(
+      generateCatalog(artifactDirectory, withoutShiyu),
+    ).rejects.toThrow(/no shiyu category/u)
   })
 
   it("keeps ID catalog generation unaffected by duplicate or placeholder monster names", async () => {
@@ -410,6 +419,7 @@ describe("publication snapshot", () => {
     const catalog = await generateCatalog(artifactDirectory, index)
     expect(catalog).toContain('export type MonsterId = "960001" | "960002"')
     expect(catalog).toContain('Object.freeze(["960001","960002"])')
+    expect(catalog).toContain('Object.freeze(["970001","970002"])')
   })
 
   it("preserves whitespace, punctuation and special property names exactly", async () => {
@@ -475,8 +485,9 @@ describe("publication snapshot", () => {
   it("bounds copy reads when a source file grows after initial verification", async () => {
     const { root, artifactDirectory } = await fixture()
     const policy = await sourcePolicy.loadSourcePolicy()
-    // A controlled budget far above the synthetic fixture (largest file ~4 KiB) keeps the growth small.
-    policy.fetchLimits.maximumBytesPerRun = 4096
+    // A controlled budget above the whole synthetic fixture (~76 KiB with six categories) keeps the
+    // injected growth small while the cumulative output check still passes for the untampered copy.
+    policy.fetchLimits.maximumBytesPerRun = 8192
     vi.spyOn(sourcePolicy, "loadSourcePolicy").mockResolvedValue(policy)
     const generated = join(root, "generated")
     const relativePath = "agents/2/data.json"

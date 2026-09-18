@@ -1,0 +1,517 @@
+{
+  "id": 61003,
+  "locale": "zh",
+  "name": "奇袭节点",
+  "zone": {
+    "6100301": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002011": {
+          "desc": "· <color=#FFFFFF>[招架支援]</color>造成的失衡值提升100%，<color=#FFFFFF>[支援突击]</color>造成的伤害提升100%。",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11502": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200121,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "狂乱暴徒",
+              "stats": {
+                "attack": 4552.700000000001,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 862298.151,
+                "stun": 7002.164000000001
+              }
+            },
+            "11511": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200131,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "盛怒恶霸",
+              "stats": {
+                "attack": 3779.6000000000004,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 1209078.585,
+                "stun": 8103.628000000001
+              }
+            }
+          },
+          "monsterWeakness": {
+            "201": "火属性"
+          },
+          "wavesNum": 1
+        },
+        "61003012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11355": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcer.png",
+              "name": "魁梧打手",
+              "stats": {
+                "attack": 4123.200000000001,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 1184445.405,
+                "stun": 8753.862000000001
+              }
+            },
+            "11363": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuser.png",
+              "name": "魁梧施虐者",
+              "stats": {
+                "attack": 3264.2000000000003,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 865445.724,
+                "stun": 5847.478
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "202": "冰属性"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 50,
+      "name": "奇袭节点第一防线",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 1
+    },
+    "6100302": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002021": {
+          "desc": "· <color=#FFFFFF>[闪避反击]</color>造成的伤害提升150%。",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11441": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRoverPro.png",
+              "name": "「捷足巡游者Ⅱ型」",
+              "stats": {
+                "attack": 3521.425,
+                "attribute_infliction": 0,
+                "defence": 700.9200000000001,
+                "hp": 1178357.492,
+                "stun": 8467.836000000001
+              }
+            },
+            "11452": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200071,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStrikerPro.png",
+              "name": "「重装侵袭者Ⅱ型」",
+              "stats": {
+                "attack": 4947.825000000001,
+                "attribute_infliction": 0,
+                "defence": 700.9200000000001,
+                "hp": 1508935.1679999998,
+                "stun": 9604.296
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "电属性"
+          },
+          "wavesNum": 1
+        },
+        "61003022": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HatiGreyPro.png",
+          "monsterList": {
+            "11127": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_HatiEnergized.png",
+              "name": "哈提头犬·蓄能型",
+              "stats": {
+                "attack": 5883.900000000001,
+                "attribute_infliction": 0,
+                "defence": 778.8000000000001,
+                "hp": 3411707.728,
+                "stun": 13402.974000000002
+              }
+            }
+          },
+          "monsterWeakness": {
+            "201": "火属性"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 53,
+      "name": "奇袭节点第二防线",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 2
+    },
+    "6100303": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002051": {
+          "desc": "· 发动<color=#FFFFFF>[极限支援]</color>时，代理人造成的伤害提升35%，承受的伤害降低25%，持续15秒。",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11115": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 20000,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantGrey.png",
+              "name": "法布提",
+              "stats": {
+                "attack": 4838.9,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 1779269.8560000001,
+                "stun": 11863.488000000001
+              }
+            },
+            "11185": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DeathXIIIGrey.png",
+              "name": "塔纳托斯",
+              "stats": {
+                "attack": 4610.65,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 1665825.109,
+                "stun": 6941.376
+              }
+            }
+          },
+          "monsterWeakness": {
+            "202": "冰属性",
+            "205": "以太"
+          },
+          "wavesNum": 1
+        },
+        "61003032": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_GuardianBoss.png",
+          "monsterList": {
+            "11057": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300022,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GuardianBoss.png",
+              "name": "「卫士Ⅲ型」",
+              "stats": {
+                "attack": 5478,
+                "attribute_infliction": 0,
+                "defence": 826.8,
+                "hp": 3506807.278,
+                "stun": 14953.536
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "电属性"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 55,
+      "name": "奇袭节点第三防线",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 3
+    },
+    "6100304": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002071": {
+          "desc": "· 触发<color=#FFFFFF>[极限闪避]</color>时，代理人造成的伤害提升10%，承受的伤害降低10%，最多叠加3层，持续10秒，每层效果单独结算持续时间。",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003041": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11185": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DeathXIIIGrey.png",
+              "name": "塔纳托斯",
+              "stats": {
+                "attack": 4885.875,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 2061574.203,
+                "stun": 7447.518000000001
+              }
+            }
+          },
+          "monsterWeakness": {
+            "202": "冰属性",
+            "205": "以太"
+          },
+          "wavesNum": 1
+        },
+        "61003042": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_JaneBoss.png",
+          "monsterList": {
+            "11642": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30020,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_JaneBoss.png",
+              "name": "多佩冈亚·简",
+              "stats": {
+                "attack": 5805,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 4516357.326,
+                "stun": 14844.154000000002
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "物理"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 60,
+      "name": "奇袭节点第四防线",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 4
+    },
+    "6100305": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002061": {
+          "desc": "· 代理人的属性异常积蓄效率提升30%。使敌人进入属性异常状态时，其造成的伤害降低25%，持续10秒。",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003051": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MetalGorilla.png",
+          "monsterList": {
+            "11063": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30008,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MetalGorilla.png",
+              "name": "「提丰·挑战者型」",
+              "stats": {
+                "attack": 6741.900000000001,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 4598061.234,
+                "stun": 15852.980000000003
+              }
+            },
+            "11623": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200241,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Pulchra.png",
+              "name": "多佩冈亚·波可娜",
+              "stats": {
+                "attack": 5924.700000000001,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 2800821.66,
+                "stun": 17039.88
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "201": "火属性"
+          },
+          "wavesNum": 1
+        },
+        "61003052": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ThugBulkyEnforcerBoss.png",
+          "monsterList": {
+            "11353": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200172,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerBoss.png",
+              "name": "祸首·通缉打手",
+              "stats": {
+                "attack": 6129,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 5631241.044000001,
+                "stun": 15852.980000000003
+              }
+            },
+            "11603": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200231,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Mors.png",
+              "name": "多佩冈亚·莫尔斯",
+              "stats": {
+                "attack": 4852.125,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 2800821.66,
+                "stun": 17039.88
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "201": "火属性"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 65,
+      "name": "奇袭节点第五防线",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    }
+  }
+}

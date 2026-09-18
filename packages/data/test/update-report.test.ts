@@ -839,6 +839,12 @@ describe("current dataset update report", () => {
             changed: false,
           },
           {
+            name: "shiyu",
+            before: null,
+            after: "nanoka-shiyu-reference/1",
+            changed: false,
+          },
+          {
             name: "w-engines",
             before: null,
             after: "nanoka-w-engine-reference/1",
@@ -881,6 +887,11 @@ describe("current dataset update report", () => {
       ["monsters", "added"],
       ["monsters", "added"],
       ["monsters", "added"],
+      ["shiyu", "added"],
+      ["shiyu", "added"],
+      ["shiyu", "added"],
+      ["shiyu", "added"],
+      ["shiyu", "added"],
       ["w-engines", "added"],
       ["w-engines", "added"],
       ["w-engines", "added"],
@@ -1071,6 +1082,16 @@ describe("current dataset update report", () => {
       ["monsters", "zzz/synthetic-1/en/monster/960001.json", "removed"],
       ["monsters", "zzz/synthetic-1/zh/monster/960002.json", "removed"],
       ["monsters", "zzz/synthetic-1/en/monster/960002.json", "removed"],
+      ["shiyu", `zzz/${input.version}/shiyu.json`, "added"],
+      ["shiyu", `zzz/${input.version}/zh/shiyu/970001.json`, "added"],
+      ["shiyu", `zzz/${input.version}/en/shiyu/970001.json`, "added"],
+      ["shiyu", `zzz/${input.version}/zh/shiyu/970002.json`, "added"],
+      ["shiyu", `zzz/${input.version}/en/shiyu/970002.json`, "added"],
+      ["shiyu", "zzz/synthetic-1/shiyu.json", "removed"],
+      ["shiyu", "zzz/synthetic-1/zh/shiyu/970001.json", "removed"],
+      ["shiyu", "zzz/synthetic-1/en/shiyu/970001.json", "removed"],
+      ["shiyu", "zzz/synthetic-1/zh/shiyu/970002.json", "removed"],
+      ["shiyu", "zzz/synthetic-1/en/shiyu/970002.json", "removed"],
       ["w-engines", `zzz/${input.version}/weapon.json`, "added"],
       ["w-engines", `zzz/${input.version}/zh/weapon/940001.json`, "added"],
       ["w-engines", `zzz/${input.version}/en/weapon/940001.json`, "added"],
@@ -1171,7 +1192,7 @@ describe("current dataset update report", () => {
       ["zzz/synthetic-1/character.json", "changed"],
       ["zzz/synthetic-1/zh/character/10.json", "changed"],
     ])
-    expect(report.source.unchangedInputCount).toBe(24)
+    expect(report.source.unchangedInputCount).toBe(29)
     expect(report.source.changed).toBe(true)
     expect(report.changeCause).toMatchObject({ attributedTo: "source" })
     expect(agents.review).toMatchObject({

@@ -1,0 +1,1312 @@
+{
+  "id": 62009,
+  "locale": "en",
+  "name": "Critical Node",
+  "zone": {
+    "6200901": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001091": {
+          "desc": "· <color=#FFFFFF>Assist Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> Anomaly Buildup increases by 30% and DMG increases by 20%.\n· When triggering <color=#FFFFFF>Disorder</color>, generate 400 Decibels, and reduce the target's DEF by 20% for 20s. The Decibel gain effect can trigger once every 10s.",
+          "title": "Whirling Currents"
+        }
+      },
+      "layerRoom": {
+        "62009011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11314": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10019,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulter.png",
+              "name": "Assaulter",
+              "stats": {
+                "attack": 1639.909090909091,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 216803.565,
+                "stun": 1602
+              }
+            },
+            "11334": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10016,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPyromaniac.png",
+              "name": "Pyromaniac",
+              "stats": {
+                "attack": 1405.6363636363637,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 216803.565,
+                "stun": 1602
+              }
+            },
+            "11354": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcer.png",
+              "name": "Bulky Enforcer",
+              "stats": {
+                "attack": 2186.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 1328612.67,
+                "stun": 5936.3
+              }
+            },
+            "11363": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuser.png",
+              "name": "Bulky Intimidator",
+              "stats": {
+                "attack": 1978.3030303030305,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 998591.22,
+                "stun": 4498.06
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "202": "Ice"
+          },
+          "wavesNum": 4
+        },
+        "62009012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11372": {
+              "element": {
+                "electric": 1,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10029,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BeholderEngine.png",
+              "name": "Beholder Engine",
+              "stats": {
+                "attack": 1405.6363636363637,
+                "attribute_infliction": 0,
+                "defence": 509.12,
+                "hp": 216803.565,
+                "stun": 1602
+              }
+            },
+            "11381": {
+              "element": {
+                "electric": 1,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 20010,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_TarasqueMixer.png",
+              "name": "Tarasque Mixer",
+              "stats": {
+                "attack": 2290.666666666667,
+                "attribute_infliction": 0,
+                "defence": 639.36,
+                "hp": 1395090.675,
+                "stun": 6233.56
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric",
+            "205": "Ether"
+          },
+          "wavesNum": 4
+        }
+      },
+      "monsterLevel": 50,
+      "name": "Critical Node: First Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 1
+    },
+    "6200902": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001091": {
+          "desc": "· <color=#FFFFFF>Assist Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> Anomaly Buildup increases by 30% and DMG increases by 20%.\n· When triggering <color=#FFFFFF>Disorder</color>, generate 400 Decibels, and reduce the target's DEF by 20% for 20s. The Decibel gain effect can trigger once every 10s.",
+          "title": "Whirling Currents"
+        }
+      },
+      "layerRoom": {
+        "62009021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11322": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100181,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacherPro.png",
+              "name": "Rustler",
+              "stats": {
+                "attack": 1458.8181818181818,
+                "attribute_infliction": 0,
+                "defence": 519.2,
+                "hp": 263039.34,
+                "stun": 1674
+              }
+            },
+            "11342": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100151,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugRaiderPro.png",
+              "name": "Looter",
+              "stats": {
+                "attack": 1701.9545454545455,
+                "attribute_infliction": 0,
+                "defence": 519.2,
+                "hp": 309401.7,
+                "stun": 1674
+              }
+            },
+            "11352": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200171,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerPro.png",
+              "name": "Wanted Enforcer",
+              "stats": {
+                "attack": 2593.4545454545455,
+                "attribute_infliction": 0,
+                "defence": 649,
+                "hp": 1658124.9,
+                "stun": 7036.38
+              }
+            },
+            "11612": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200251,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Bellum.png",
+              "name": "Doppelganger - Bellum",
+              "stats": {
+                "attack": 2755.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 649,
+                "hp": 2020211.1,
+                "stun": 11636.16
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 4
+        },
+        "62009022": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11731": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantEnergy.png",
+              "name": "Ionized - Farbauti",
+              "stats": {
+                "attack": 2485.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 584.1,
+                "hp": 1612528.8599999999,
+                "stun": 7739.46
+              }
+            },
+            "11751": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DurahanEnergy.png",
+              "name": "Ionized - Dullahan",
+              "stats": {
+                "attack": 2620.469696969697,
+                "attribute_infliction": 0,
+                "defence": 752.84,
+                "hp": 1359643.26,
+                "stun": 6513.72
+              }
+            },
+            "11771": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Cyrtoidea.png",
+              "name": "Ionized - Cyrtoidea",
+              "stats": {
+                "attack": 1620.909090909091,
+                "attribute_infliction": 0,
+                "defence": 467.28000000000003,
+                "hp": 215144.34,
+                "stun": 1116
+              }
+            },
+            "11781": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30018,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Nassellaria.png",
+              "name": "Ionized - Nassellaria",
+              "stats": {
+                "attack": 1620.909090909091,
+                "attribute_infliction": 0,
+                "defence": 467.28000000000003,
+                "hp": 215144.34,
+                "stun": 1116
+              }
+            }
+          },
+          "monsterWeakness": {
+            "205": "Ether"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 53,
+      "name": "Critical Node: Second Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 2
+    },
+    "6200903": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001091": {
+          "desc": "· <color=#FFFFFF>Assist Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> Anomaly Buildup increases by 30% and DMG increases by 20%.\n· When triggering <color=#FFFFFF>Disorder</color>, generate 400 Decibels, and reduce the target's DEF by 20% for 20s. The Decibel gain effect can trigger once every 10s.",
+          "title": "Whirling Currents"
+        }
+      },
+      "layerRoom": {
+        "62009031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11481": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100271,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+              "name": "Vicious Striker",
+              "stats": {
+                "attack": 1494,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 263910.615,
+                "stun": 1152
+              }
+            },
+            "11491": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100281,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+              "name": "Greedy Ranger",
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 263910.615,
+                "stun": 1152
+              }
+            },
+            "11501": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200121,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "Frenzied Maniac",
+              "stats": {
+                "attack": 2545.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 689,
+                "hp": 1429535.4149999998,
+                "stun": 5122.5599999999995
+              }
+            },
+            "11522": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200141,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_RuthlessFiendPro.png",
+              "name": "Ruthless Fiend",
+              "stats": {
+                "attack": 2628.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 620.1,
+                "hp": 2053003.68,
+                "stun": 9125.76
+              }
+            }
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          },
+          "wavesNum": 4
+        },
+        "62009032": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11252": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100061,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaegerPro.png",
+              "name": "Scout Jaeger",
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 322661.865,
+                "stun": 1728
+              }
+            },
+            "11272": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100071,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_MeleeJaegerPro.png",
+              "name": "Private Jaeger",
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 322661.865,
+                "stun": 1728
+              }
+            },
+            "11441": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRoverPro.png",
+              "name": "Lightfoot Rover MK II",
+              "stats": {
+                "attack": 2185.666666666667,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 1667830.4849999999,
+                "stun": 6723.84
+              }
+            },
+            "11451": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200071,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStrikerPro.png",
+              "name": "Heavy Striker MK II",
+              "stats": {
+                "attack": 2683.666666666667,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 2076269.1749999998,
+                "stun": 6723.84
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 4
+        }
+      },
+      "monsterLevel": 55,
+      "name": "Critical Node: Third Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 3
+    },
+    "6200904": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001091": {
+          "desc": "· <color=#FFFFFF>Assist Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> Anomaly Buildup increases by 30% and DMG increases by 20%.\n· When triggering <color=#FFFFFF>Disorder</color>, generate 400 Decibels, and reduce the target's DEF by 20% for 20s. The Decibel gain effect can trigger once every 10s.",
+          "title": "Whirling Currents"
+        }
+      },
+      "layerRoom": {
+        "62009041": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11059": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30002,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Guardian.png",
+              "name": "Guardian",
+              "stats": {
+                "attack": 3037.060606060606,
+                "attribute_infliction": 0,
+                "defence": 811.0799999999999,
+                "hp": 2169105.12,
+                "stun": 9506
+              }
+            },
+            "11253": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10006,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "Light Jaeger",
+              "stats": {
+                "attack": 1891,
+                "attribute_infliction": 0,
+                "defence": 600.8,
+                "hp": 278835.285,
+                "stun": 1200
+              }
+            },
+            "11263": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20009,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyFirepower.png",
+              "name": "Heavy Gunner",
+              "stats": {
+                "attack": 2664.590909090909,
+                "attribute_infliction": 0,
+                "defence": 811.0799999999999,
+                "hp": 1648678.8,
+                "stun": 5306
+              }
+            },
+            "11283": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10008,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_HeavyJaeger.png",
+              "name": "Guard Jaeger",
+              "stats": {
+                "attack": 1719.0909090909092,
+                "attribute_infliction": 0,
+                "defence": 690.92,
+                "hp": 278835.285,
+                "stun": 1200
+              }
+            },
+            "11443": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20008,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRover.png",
+              "name": "Lightfoot Rover",
+              "stats": {
+                "attack": 2263.469696969697,
+                "attribute_infliction": 0,
+                "defence": 811.0799999999999,
+                "hp": 1762149.615,
+                "stun": 7004
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 3
+        },
+        "62009042": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11124": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 20001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HatiGrey.png",
+              "name": "Hati",
+              "stats": {
+                "attack": 3037.060606060606,
+                "attribute_infliction": 0,
+                "defence": 811.0799999999999,
+                "hp": 1504419.405,
+                "stun": 4918
+              }
+            },
+            "11184": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DeathXIIIGrey.png",
+              "name": "Thanatos",
+              "stats": {
+                "attack": 2779.19696969697,
+                "attribute_infliction": 0,
+                "defence": 675.9,
+                "hp": 1974193.545,
+                "stun": 4902
+              }
+            },
+            "11194": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 20003,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HatiArmoredGrey.png",
+              "name": "Armored Hati",
+              "stats": {
+                "attack": 3323.5757575757575,
+                "attribute_infliction": 0,
+                "defence": 811.0799999999999,
+                "hp": 1611682.845,
+                "stun": 5296
+              }
+            },
+            "11681": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10030,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Fossor.png",
+              "name": "Fossor",
+              "stats": {
+                "attack": 2177.5151515151515,
+                "attribute_infliction": 0,
+                "defence": 600.8,
+                "hp": 307389.21,
+                "stun": 1324
+              }
+            },
+            "11691": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10031,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Sordidus.png",
+              "name": "Sordidus",
+              "stats": {
+                "attack": 2177.5151515151515,
+                "attribute_infliction": 0,
+                "defence": 600.8,
+                "hp": 307389.21,
+                "stun": 1324
+              }
+            }
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "205": "Ether"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 58,
+      "name": "Critical Node: Fourth Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 4
+    },
+    "6200905": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001091": {
+          "desc": "· <color=#FFFFFF>Assist Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> Anomaly Buildup increases by 30% and DMG increases by 20%.\n· When triggering <color=#FFFFFF>Disorder</color>, generate 400 Decibels, and reduce the target's DEF by 20% for 20s. The Decibel gain effect can trigger once every 10s.",
+          "title": "Whirling Currents"
+        }
+      },
+      "layerRoom": {
+        "62009051": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11482": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100271,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+              "name": "Vicious Striker",
+              "stats": {
+                "attack": 1583.181818181818,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 399316.45499999996,
+                "stun": 1854
+              }
+            },
+            "11492": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100281,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+              "name": "Greedy Ranger",
+              "stats": {
+                "attack": 1935,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 399316.45499999996,
+                "stun": 1854
+              }
+            },
+            "11502": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200121,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "Frenzied Maniac",
+              "stats": {
+                "attack": 3107.7272727272725,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 1832551.335,
+                "stun": 6233.56
+              }
+            },
+            "11512": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200131,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "Wicked Wraith",
+              "stats": {
+                "attack": 2961.1363636363635,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 2643108.48,
+                "stun": 8182.320000000001
+              }
+            },
+            "11522": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200141,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_RuthlessFiendPro.png",
+              "name": "Ruthless Fiend",
+              "stats": {
+                "attack": 2785.2272727272725,
+                "attribute_infliction": 0,
+                "defence": 714.6,
+                "hp": 2540734.5599999996,
+                "stun": 9791.18
+              }
+            }
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          },
+          "wavesNum": 3
+        },
+        "62009052": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11045": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 20020,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_RagingGuy.png",
+              "name": "Enraged Sweeper",
+              "stats": {
+                "attack": 2814.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 2036135.835,
+                "stun": 7792.9800000000005
+              }
+            },
+            "11052": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300021,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GuardianPro.png",
+              "name": "Guardian MK II",
+              "stats": {
+                "attack": 3107.7272727272725,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 2540734.5599999996,
+                "stun": 9791.18
+              }
+            },
+            "11162": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100051,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_StrikeJaegerPro.png",
+              "name": "Harrier Jaeger",
+              "stats": {
+                "attack": 1935,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 469698.52499999997,
+                "stun": 1854
+              }
+            },
+            "11282": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_HeavyJaeger_Pro.png",
+              "name": "Patrol Jaeger",
+              "stats": {
+                "attack": 1759.090909090909,
+                "attribute_infliction": 0,
+                "defence": 730.48,
+                "hp": 399316.45499999996,
+                "stun": 1854
+              }
+            },
+            "11442": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRoverPro.png",
+              "name": "Lightfoot Rover MK II",
+              "stats": {
+                "attack": 2667.9545454545455,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 2137928.085,
+                "stun": 8182.320000000001
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 60,
+      "name": "Critical Node: Fifth Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "6200906": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001091": {
+          "desc": "· <color=#FFFFFF>Assist Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> Anomaly Buildup increases by 30% and DMG increases by 20%.\n· When triggering <color=#FFFFFF>Disorder</color>, generate 400 Decibels, and reduce the target's DEF by 20% for 20s. The Decibel gain effect can trigger once every 10s.",
+          "title": "Whirling Currents"
+        }
+      },
+      "layerRoom": {
+        "62009061": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_JaneBoss.png",
+          "monsterList": {
+            "11334": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10016,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPyromaniac.png",
+              "name": "Pyromaniac",
+              "stats": {
+                "attack": 1671.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 434163.195,
+                "stun": 1980.0000000000002
+              }
+            },
+            "11344": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugRaider.png",
+              "name": "Raider",
+              "stats": {
+                "attack": 1950.1363636363635,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 510687.225,
+                "stun": 1980.0000000000002
+              }
+            },
+            "11642": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30020,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_JaneBoss.png",
+              "name": "Doppelganger - Jane",
+              "stats": {
+                "attack": 3714.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 5665940.37,
+                "stun": 12194.6
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical"
+          },
+          "wavesNum": 2
+        },
+        "62009062": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HeavyStrikerPro.png",
+          "monsterList": {
+            "11281": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_HeavyJaeger_Pro.png",
+              "name": "Patrol Jaeger",
+              "stats": {
+                "attack": 1857.2727272727273,
+                "attribute_infliction": 0,
+                "defence": 730.48,
+                "hp": 355109.445,
+                "stun": 1320
+              }
+            },
+            "11453": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200073,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_HeavyStrikerBossPro.png",
+              "name": "Shielded Defender Omega",
+              "stats": {
+                "attack": 3714.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 6497585.82,
+                "stun": 12194.6
+              }
+            },
+            "11761": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100091,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GrenadierJaegerPro.png",
+              "name": "Demolition Jaeger",
+              "stats": {
+                "attack": 1826.3181818181818,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 390525.525,
+                "stun": 1386
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 65,
+      "name": "Critical Node: Sixth Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 6
+    },
+    "6200907": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001091": {
+          "desc": "· <color=#FFFFFF>Assist Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> Anomaly Buildup increases by 30% and DMG increases by 20%.\n· When triggering <color=#FFFFFF>Disorder</color>, generate 400 Decibels, and reduce the target's DEF by 20% for 20s. The Decibel gain effect can trigger once every 10s.",
+          "title": "Whirling Currents"
+        }
+      },
+      "layerRoom": {
+        "62009071": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MetalGorilla.png",
+          "monsterList": {
+            "11063": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30008,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MetalGorilla.png",
+              "name": "Typhon Challenger",
+              "stats": {
+                "attack": 4304,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 6240157.649999999,
+                "stun": 13026.050000000001
+              }
+            },
+            "11444": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20008,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRover.png",
+              "name": "Lightfoot Rover",
+              "stats": {
+                "attack": 2967.1515151515155,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 2734020.675,
+                "stun": 9334.2
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 2
+        },
+        "62009072": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_PileDriver.png",
+          "monsterList": {
+            "11371": {
+              "element": {
+                "electric": 1,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 10029,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BeholderEngine.png",
+              "name": "Beholder Engine",
+              "stats": {
+                "attack": 1760.727272727273,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 417671.77499999997,
+                "stun": 1410
+              }
+            },
+            "11391": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 30006,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_PileDriver.png",
+              "name": "Friday",
+              "stats": {
+                "attack": 3912.727272727273,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 8004941.774999999,
+                "stun": 16894.15
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 70,
+      "name": "Critical Node: Seventh Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 7
+    }
+  }
+}
