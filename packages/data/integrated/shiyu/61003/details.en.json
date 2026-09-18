@@ -1,0 +1,517 @@
+{
+  "id": 61003,
+  "locale": "en",
+  "name": "Ambush Node",
+  "zone": {
+    "6100301": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002011": {
+          "desc": "· <color=#FFFFFF>Defensive Assist</color>'s Daze increases by 100%. <color=#FFFFFF>Assist Follow-Up</color>'s DMG increases by 100%.",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11502": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200121,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "Frenzied Maniac",
+              "stats": {
+                "attack": 4552.700000000001,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 862298.151,
+                "stun": 7002.164000000001
+              }
+            },
+            "11511": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200131,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "Wicked Wraith",
+              "stats": {
+                "attack": 3779.6000000000004,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 1209078.585,
+                "stun": 8103.628000000001
+              }
+            }
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          },
+          "wavesNum": 1
+        },
+        "61003012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11355": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcer.png",
+              "name": "Bulky Enforcer",
+              "stats": {
+                "attack": 4123.200000000001,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 1184445.405,
+                "stun": 8753.862000000001
+              }
+            },
+            "11363": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuser.png",
+              "name": "Bulky Intimidator",
+              "stats": {
+                "attack": 3264.2000000000003,
+                "attribute_infliction": 0,
+                "defence": 592,
+                "hp": 865445.724,
+                "stun": 5847.478
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "202": "Ice"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 50,
+      "name": "Ambush Node: First Frontier",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 1
+    },
+    "6100302": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002021": {
+          "desc": "· <color=#FFFFFF>Dodge Counter</color> DMG increases by 150%.",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11441": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200081,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRoverPro.png",
+              "name": "Lightfoot Rover MK II",
+              "stats": {
+                "attack": 3521.425,
+                "attribute_infliction": 0,
+                "defence": 700.9200000000001,
+                "hp": 1178357.492,
+                "stun": 8467.836000000001
+              }
+            },
+            "11452": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200071,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStrikerPro.png",
+              "name": "Heavy Striker MK II",
+              "stats": {
+                "attack": 4947.825000000001,
+                "attribute_infliction": 0,
+                "defence": 700.9200000000001,
+                "hp": 1508935.1679999998,
+                "stun": 9604.296
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 1
+        },
+        "61003022": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HatiGreyPro.png",
+          "monsterList": {
+            "11127": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_HatiEnergized.png",
+              "name": "Hati Pack Leader — Energized",
+              "stats": {
+                "attack": 5883.900000000001,
+                "attribute_infliction": 0,
+                "defence": 778.8000000000001,
+                "hp": 3411707.728,
+                "stun": 13402.974000000002
+              }
+            }
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 53,
+      "name": "Ambush Node: Second Frontier",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 2
+    },
+    "6100303": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002051": {
+          "desc": "· When launching <color=#FFFFFF>Perfect Assists</color>, Agent DMG increases by 35% and DMG received is reduced by 25% for 15s.",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11115": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 20000,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantGrey.png",
+              "name": "Farbauti",
+              "stats": {
+                "attack": 4838.9,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 1779269.8560000001,
+                "stun": 11863.488000000001
+              }
+            },
+            "11185": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DeathXIIIGrey.png",
+              "name": "Thanatos",
+              "stats": {
+                "attack": 4610.65,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 1665825.109,
+                "stun": 6941.376
+              }
+            }
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "205": "Ether"
+          },
+          "wavesNum": 1
+        },
+        "61003032": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_GuardianBoss.png",
+          "monsterList": {
+            "11057": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": -1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300022,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GuardianBoss.png",
+              "name": "Guardian MK III",
+              "stats": {
+                "attack": 5478,
+                "attribute_infliction": 0,
+                "defence": 826.8,
+                "hp": 3506807.278,
+                "stun": 14953.536
+              }
+            }
+          },
+          "monsterWeakness": {
+            "203": "Electric"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 55,
+      "name": "Ambush Node: Third Frontier",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 3
+    },
+    "6100304": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002071": {
+          "desc": "· When triggering a <color=#FFFFFF>Perfect Dodge</color>, Agent DMG increases by 10% and DMG received is reduced by 10% for 10s, stacking up to 3 times. The duration of each stack is calculated separately.",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003041": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11185": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30001,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DeathXIIIGrey.png",
+              "name": "Thanatos",
+              "stats": {
+                "attack": 4885.875,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 2061574.203,
+                "stun": 7447.518000000001
+              }
+            }
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "205": "Ether"
+          },
+          "wavesNum": 1
+        },
+        "61003042": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_JaneBoss.png",
+          "monsterList": {
+            "11642": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30020,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_JaneBoss.png",
+              "name": "Doppelganger - Jane",
+              "stats": {
+                "attack": 5805,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 4516357.326,
+                "stun": 14844.154000000002
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 60,
+      "name": "Ambush Node: Fourth Frontier",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 4
+    },
+    "6100305": {
+      "aRankGoal": 2,
+      "bRankGoal": 6,
+      "child": [],
+      "goalType": 1,
+      "layerBuff": {
+        "61002061": {
+          "desc": "· Increases Agent Anomaly Buildup Rate by 30%. Enemies afflicted with Attribute Anomaly deal 25% less DMG for 10s.",
+          "title": ""
+        }
+      },
+      "layerRoom": {
+        "61003051": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MetalGorilla.png",
+          "monsterList": {
+            "11063": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30008,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MetalGorilla.png",
+              "name": "Typhon Challenger",
+              "stats": {
+                "attack": 6741.900000000001,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 4598061.234,
+                "stun": 15852.980000000003
+              }
+            },
+            "11623": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200241,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Pulchra.png",
+              "name": "Doppelganger - Pulchra",
+              "stats": {
+                "attack": 5924.700000000001,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 2800821.66,
+                "stun": 17039.88
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 1
+        },
+        "61003052": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ThugBulkyEnforcerBoss.png",
+          "monsterList": {
+            "11353": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200172,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerBoss.png",
+              "name": "Troublemaker - Wanted Enforcer",
+              "stats": {
+                "attack": 6129,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 5631241.044000001,
+                "stun": 15852.980000000003
+              }
+            },
+            "11603": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200231,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Mors.png",
+              "name": "Doppelganger - Mors",
+              "stats": {
+                "attack": 4852.125,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 2800821.66,
+                "stun": 17039.88
+              }
+            }
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 1
+        }
+      },
+      "monsterLevel": 65,
+      "name": "Ambush Node: Fifth Frontier",
+      "sRankGoal": 0,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    }
+  }
+}

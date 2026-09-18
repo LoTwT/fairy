@@ -5,6 +5,7 @@ import type {
   DetailLocale,
   DriveDiscName,
   MonsterId,
+  ShiyuId,
   WEngineName,
 } from "../src/index.ts"
 import { supportedLanguages } from "../src/nanoka-identity.ts"
@@ -41,6 +42,12 @@ const loaders = vi.hoisted(() => ({
   otherMonsterData: vi.fn(),
   otherMonsterZh: vi.fn(),
   otherMonsterEn: vi.fn(),
+  shiyuData: vi.fn(),
+  shiyuZh: vi.fn(),
+  shiyuEn: vi.fn(),
+  otherShiyuData: vi.fn(),
+  otherShiyuZh: vi.fn(),
+  otherShiyuEn: vi.fn(),
 }))
 vi.mock("../.generated/catalog.ts", () => ({
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
@@ -120,6 +127,19 @@ vi.mock("../.generated/catalog.ts", () => ({
       en: loaders.otherMonsterEn,
     },
   },
+  shiyuIds: Object.freeze(["61001", "62001"]),
+  shiyuLoaders: {
+    "61001": {
+      data: loaders.shiyuData,
+      zh: loaders.shiyuZh,
+      en: loaders.shiyuEn,
+    },
+    "62001": {
+      data: loaders.otherShiyuData,
+      zh: loaders.otherShiyuZh,
+      en: loaders.otherShiyuEn,
+    },
+  },
   indexLoader: loaders.index,
 }))
 import {
@@ -127,6 +147,7 @@ import {
   bangbooNames,
   driveDiscNames,
   monsterIds,
+  shiyuIds,
   wEngineNames,
   loadIndex,
   loadAgentData,
@@ -141,6 +162,9 @@ import {
   loadMonsterData,
   loadMonsterDetails,
   loadAllMonsters,
+  loadShiyuData,
+  loadShiyuDetails,
+  loadAllShiyu,
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
@@ -398,6 +422,61 @@ function mockMemberRecords() {
       extra: { entries: ["original"] },
     })
   }
+
+  for (const [data, zh, en, id] of [
+    [loaders.shiyuData, loaders.shiyuZh, loaders.shiyuEn, 61001],
+    [loaders.otherShiyuData, loaders.otherShiyuZh, loaders.otherShiyuEn, 62001],
+  ] as const) {
+    data.mockResolvedValue({
+      id,
+      priority: 3,
+      beginTime: "2024-07-04 04:00:00",
+      endTime: "2024-08-01 03:59:59",
+      unknown: { tags: ["original"] },
+    })
+    zh.mockResolvedValue({
+      id,
+      locale: "zh",
+      name: "稳定节点",
+      zone: {
+        "6100101": {
+          name: "稳定防线一",
+          stageNum: 1,
+          monsterLevel: 25,
+          layerBuff: {},
+          child: [],
+          layerRoom: {},
+          goalType: 1,
+          ssRankGoal: 300,
+          sRankGoal: 240,
+          aRankGoal: 180,
+          bRankGoal: 120,
+        },
+      },
+      extra: { entries: ["原文"] },
+    })
+    en.mockResolvedValue({
+      id,
+      locale: "en",
+      name: "Stable Node",
+      zone: {
+        "6100101": {
+          name: "Stable Frontline I",
+          stageNum: 1,
+          monsterLevel: 25,
+          layerBuff: {},
+          child: [],
+          layerRoom: {},
+          goalType: 1,
+          ssRankGoal: 300,
+          sRankGoal: 240,
+          aRankGoal: 180,
+          bRankGoal: 120,
+        },
+      },
+      extra: { entries: ["original"] },
+    })
+  }
 }
 
 beforeEach(() => {
@@ -496,6 +575,21 @@ describe("public readers", () => {
       if (key !== "monsterData" && key !== "otherMonsterEn")
         expect(loader).not.toHaveBeenCalled()
   })
+  it("loads only the requested shiyu data/locale without prerequisites or other categories", async () => {
+    expect(await loadShiyuData("61001")).toMatchObject({ id: 61001 })
+    expect(loaders.index).not.toHaveBeenCalled()
+    expect(loaders.shiyuZh).not.toHaveBeenCalled()
+    expect(loaders.shiyuEn).not.toHaveBeenCalled()
+    expect(await loadShiyuDetails("62001", "en")).toMatchObject({
+      id: 62001,
+      locale: "en",
+    })
+    expect(loaders.otherShiyuData).not.toHaveBeenCalled()
+    expect(loaders.otherShiyuZh).not.toHaveBeenCalled()
+    for (const [key, loader] of Object.entries(loaders))
+      if (key !== "shiyuData" && key !== "otherShiyuEn")
+        expect(loader).not.toHaveBeenCalled()
+  })
   it.each([
     "unknown",
     "1311",
@@ -523,6 +617,8 @@ describe("public readers", () => {
     expect(await loadBangbooDetails(name as BangbooName, "zh")).toBeUndefined()
     expect(await loadMonsterData(name as MonsterId)).toBeUndefined()
     expect(await loadMonsterDetails(name as MonsterId, "zh")).toBeUndefined()
+    expect(await loadShiyuData(name as ShiyuId)).toBeUndefined()
+    expect(await loadShiyuDetails(name as ShiyuId, "zh")).toBeUndefined()
     for (const loader of Object.values(loaders))
       expect(loader).not.toHaveBeenCalled()
   })
@@ -547,6 +643,8 @@ describe("public readers", () => {
       () => loadBangbooDetails(name as BangbooName, "zh"),
       () => loadMonsterData(name as MonsterId),
       () => loadMonsterDetails(name as MonsterId, "zh"),
+      () => loadShiyuData(name as ShiyuId),
+      () => loadShiyuDetails(name as ShiyuId, "zh"),
     ])
       await expect(read()).rejects.toBeInstanceOf(TypeError)
   })
@@ -586,6 +684,12 @@ describe("public readers", () => {
       await expect(
         loadAllMonsters(locale as DetailLocale),
       ).rejects.toBeInstanceOf(TypeError)
+      await expect(
+        loadShiyuDetails("unknown" as ShiyuId, locale as DetailLocale),
+      ).rejects.toBeInstanceOf(TypeError)
+      await expect(loadAllShiyu(locale as DetailLocale)).rejects.toBeInstanceOf(
+        TypeError,
+      )
       for (const loader of Object.values(loaders))
         expect(loader).not.toHaveBeenCalled()
     },
@@ -722,6 +826,36 @@ describe("public readers", () => {
           expect(loader).not.toHaveBeenCalled()
     },
   )
+  it.each(supportedLanguages)(
+    "loads the full separated shiyu %s view with source ID keys",
+    async (locale) => {
+      const all = await loadAllShiyu(locale)
+      expect(Object.keys(all)).toEqual(shiyuIds)
+      expect(Object.keys(all["61001"])).toEqual(["data", "details"])
+      expect(all["61001"].details.locale).toBe(locale)
+      expect(all["61001"].details.name).toBe(
+        locale === "zh" ? "稳定节点" : "Stable Node",
+      )
+      expect(all["61001"].data.beginTime).toBe("2024-07-04 04:00:00")
+      expect(all["62001"].details.locale).toBe(locale)
+      expect(loaders.index).not.toHaveBeenCalled()
+      expect(loaders.shiyuData).toHaveBeenCalledTimes(1)
+      expect(loaders.otherShiyuData).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "shiyuZh" : "shiyuEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "otherShiyuZh" : "otherShiyuEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "shiyuEn" : "shiyuZh"],
+      ).not.toHaveBeenCalled()
+      // Shiyu 全量不得顺带加载其他类别或索引。
+      for (const [key, loader] of Object.entries(loaders))
+        if (!key.toLowerCase().includes("shiyu"))
+          expect(loader).not.toHaveBeenCalled()
+    },
+  )
   it("isolates deeply nested mutations across sequential/concurrent and full/single calls", async () => {
     const [one, two] = await Promise.all([
       loadAgentData("Astra Yao"),
@@ -847,6 +981,32 @@ describe("public readers", () => {
     })
     expect(() => (monsterIds as MonsterId[]).pop()).toThrow(TypeError)
   })
+  it("isolates shiyu mutations across sequential/concurrent and full/single calls", async () => {
+    const [one, two] = await Promise.all([
+      loadShiyuData("61001"),
+      loadShiyuData("61001"),
+    ])
+    ;(one!.unknown as { tags: string[] }).tags.push("changed")
+    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.beginTime = "modified"
+    expect((await loadShiyuData("61001"))!.beginTime).toBe(
+      "2024-07-04 04:00:00",
+    )
+    const details = await loadShiyuDetails("61001", "zh")
+    ;(
+      details!.zone["6100101"]!.layerBuff as unknown as Record<string, unknown>
+    ).future = 0
+    const reread = await loadShiyuDetails("61001", "zh")
+    expect(reread!.zone["6100101"]?.layerBuff).toStrictEqual({})
+    const all = await loadAllShiyu("zh")
+    expect(all["61001"].details.zone["6100101"]!.stageNum).toBe(1)
+    ;(all["61001"].data.unknown as { tags: string[] }).tags.push("changed")
+    expect((await loadAllShiyu("zh"))["61001"]).toEqual({
+      data: two,
+      details: await loadShiyuDetails("61001", "zh"),
+    })
+    expect(() => (shiyuIds as ShiyuId[]).pop()).toThrow(TypeError)
+  })
   it.each([
     new Error("missing file"),
     new SyntaxError("invalid JSON"),
@@ -863,6 +1023,8 @@ describe("public readers", () => {
     loaders.bangbooZh.mockRejectedValue(error)
     loaders.monsterData.mockRejectedValue(error)
     loaders.monsterZh.mockRejectedValue(error)
+    loaders.shiyuData.mockRejectedValue(error)
+    loaders.shiyuZh.mockRejectedValue(error)
     await expect(loadIndex()).rejects.toBe(error)
     await expect(loadAgentData("Astra Yao")).rejects.toBe(error)
     await expect(loadAgentDetails("Astra Yao", "zh")).rejects.toBe(error)
@@ -883,6 +1045,9 @@ describe("public readers", () => {
     await expect(loadMonsterData("10000")).rejects.toBe(error)
     await expect(loadMonsterDetails("10000", "zh")).rejects.toBe(error)
     await expect(loadAllMonsters("zh")).rejects.toBe(error)
+    await expect(loadShiyuData("61001")).rejects.toBe(error)
+    await expect(loadShiyuDetails("61001", "zh")).rejects.toBe(error)
+    await expect(loadAllShiyu("zh")).rejects.toBe(error)
   })
   it("rejects the full view if a later member's necessary detail fails", async () => {
     const agentError = new Error("missing later member")
@@ -900,5 +1065,8 @@ describe("public readers", () => {
     const monsterError = new Error("missing later monster")
     loaders.otherMonsterEn.mockRejectedValue(monsterError)
     await expect(loadAllMonsters("en")).rejects.toBe(monsterError)
+    const shiyuError = new Error("missing later shiyu")
+    loaders.otherShiyuEn.mockRejectedValue(shiyuError)
+    await expect(loadAllShiyu("en")).rejects.toBe(shiyuError)
   })
 })

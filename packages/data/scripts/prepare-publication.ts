@@ -88,11 +88,13 @@ export async function generateCatalog(
   const wEngines = requirePublishedEntity(index, "w-engines")
   const bangboos = requirePublishedEntity(index, "bangboos")
   const monsters = requirePublishedEntity(index, "monsters")
+  const shiyu = requirePublishedEntity(index, "shiyu")
   const agentNames = await englishDetailNames(snapshot, agents)
   const driveDiscNames = await englishDetailNames(snapshot, driveDiscs)
   const wEngineNames = await englishDetailNames(snapshot, wEngines)
   const bangbooNames = await englishDetailNames(snapshot, bangboos)
   const monsterIds = [...monsters.memberIds]
+  const shiyuIds = [...shiyu.memberIds]
   const json = JSON.stringify
   const lazy = (path: string, type: string) =>
     `() => import(${json(`@randomplay/data/integrated/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
@@ -118,6 +120,7 @@ import type { DriveDiscData, DriveDiscDetails } from "../src/integration/drive-d
 import type { WEngineData, WEngineDetails } from "../src/integration/w-engine-types.ts"
 import type { BangbooData, BangbooDetails } from "../src/integration/bangboo-types.ts"
 import type { MonsterData, MonsterDetails } from "../src/integration/monster-types.ts"
+import type { ShiyuData, ShiyuDetails } from "../src/integration/shiyu-types.ts"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
 /** 本次发布全部代理人的英文详情顶层 name 原值。 */
 export type AgentName = ${agentNames.map((name) => json(name)).join(" | ")}
@@ -132,6 +135,11 @@ export type BangbooName = ${bangbooNames.map((name) => json(name)).join(" | ")}
  * Monster 类内允许重名与占位名称，公开身份是来源 ID 本身，不是名称。
  */
 export type MonsterId = ${monsterIds.map((id) => json(id)).join(" | ")}
+/**
+ * 本次发布全部 Shiyu 区域的来源索引顶层 ID（规范十进制字符串）。
+ * Shiyu 类内大量重名（本地 3.1 的剧变节点类记录），公开身份是来源 ID 本身，不是名称。
+ */
+export type ShiyuId = ${shiyuIds.map((id) => json(id)).join(" | ")}
 /** 按来源 ID 数值升序排列的完整代理人英文名称列表；运行时冻结。 */
 export const agentNames: readonly AgentName[] = Object.freeze(${json(agentNames)})
 /** 按来源 ID 数值升序排列的完整驱动盘英文名称列表；运行时冻结。 */
@@ -142,6 +150,8 @@ export const wEngineNames: readonly WEngineName[] = Object.freeze(${json(wEngine
 export const bangbooNames: readonly BangbooName[] = Object.freeze(${json(bangbooNames)})
 /** 按来源 ID 数值升序排列的完整怪物来源 ID 列表；运行时冻结。 */
 export const monsterIds: readonly MonsterId[] = Object.freeze(${json(monsterIds)})
+/** 按来源 ID 数值升序排列的完整 Shiyu 来源 ID 列表；运行时冻结。 */
+export const shiyuIds: readonly ShiyuId[] = Object.freeze(${json(shiyuIds)})
 export const agentSourceIds: Readonly<Record<AgentName, string>> = ${sourceIds(agentNames, agents)} as Readonly<Record<AgentName, string>>
 export const driveDiscSourceIds: Readonly<Record<DriveDiscName, string>> = ${sourceIds(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscName, string>>
 export const wEngineSourceIds: Readonly<Record<WEngineName, string>> = ${sourceIds(wEngineNames, wEngines)} as Readonly<Record<WEngineName, string>>
@@ -161,6 +171,9 @@ ${loaderTable(bangboos, "BangbooData", "BangbooDetails")}
 }
 export const monsterLoaders: Record<string, { data: () => Promise<MonsterData>; zh: () => Promise<MonsterDetails>; en: () => Promise<MonsterDetails> }> = {
 ${loaderTable(monsters, "MonsterData", "MonsterDetails")}
+}
+export const shiyuLoaders: Record<string, { data: () => Promise<ShiyuData>; zh: () => Promise<ShiyuDetails>; en: () => Promise<ShiyuDetails> }> = {
+${loaderTable(shiyu, "ShiyuData", "ShiyuDetails")}
 }
 `
 }

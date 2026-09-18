@@ -17491,6 +17491,2255 @@
       },
       "rulesVersion": "nanoka-monster-reference/1"
     },
+    "shiyu": {
+      "complete": true,
+      "detailLocales": ["zh", "en"],
+      "inputs": [
+        {
+          "resource": "zzz/3.1/shiyu.json",
+          "sha256": "618013723ece9d412c9dd91015cf392e6c1bd0b6aa15fffb7f3b92bab15dedc7"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/61001.json",
+          "sha256": "bc2aa28d444e281c4e966b57ff36f0bbf8f17bcacd2684d9b80d95156aec82e0"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/61001.json",
+          "sha256": "7f589b0c4f7f2e0eb01ff3622046ec1f8d63cbaadf25cbf1c780929e79fef1f0"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/61002.json",
+          "sha256": "4741bab98a82c50f7ad9e48c5de72b271da340010fe6702df61bd5aa1cf59ea9"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/61002.json",
+          "sha256": "924b449284b7a1ee2d91cd79efb26c1c85e81508b358b30d6599605a3122d155"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/61003.json",
+          "sha256": "076699bd260d0df4999da9068d0f9b36a04872a5cebd24b21ea4eb99e94d6d82"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/61003.json",
+          "sha256": "733580fee43798f87eb97a6184bf78e2ff33e3722a6af6aa94bf43f69ff29c1a"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62001.json",
+          "sha256": "ff2eea179f0c125d1a74012df4e9795e7cb386cc4babff20c752844ed7a69947"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62001.json",
+          "sha256": "94850d27864eb06240f25ba44e3db0dd843441ed7990df1f04f6dff3b39b2c91"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62002.json",
+          "sha256": "1b9a71e43aea44839e06e00a8c654d9675a7915694884f41c36ff987119f69a8"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62002.json",
+          "sha256": "c398a3497e0e0d7e07a804d6ab6f441bd39e06a361b8d30e339ab8b8864fc103"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62003.json",
+          "sha256": "9da470c9f3cb3b4498651601932db2bd4b8617ce513fb8ad733b9e346d23f91f"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62003.json",
+          "sha256": "0dfbec996f44ca578d19572b9c056b9e6820eb37d4f80f2b320d593543351518"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62004.json",
+          "sha256": "a7c142694ea8785452aca9bd3ef33a0c5f47e477978ace8a11ca9bffeb1f33c8"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62004.json",
+          "sha256": "1fe395b0dc010b6670577cd22c1cecbabf5a320061c626b473b28c0e91d63d88"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62005.json",
+          "sha256": "cf68ed6cf944310fa5be2f8224cdace2790908f00c076549e354ea1a6acbe9b9"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62005.json",
+          "sha256": "d4bfc3331bb5278262d6b00159fa2bd3ea1895c5f69b4939ab48eca0360569ca"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62006.json",
+          "sha256": "4ef8c6dc8bca05d460bd95f4133cca09c192046fc8566abeca2b787e8da4e20c"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62006.json",
+          "sha256": "a200b1f20061ad70f52dc033fd08514cd89b16a56df7752c6b6d2c40066d4ac1"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62007.json",
+          "sha256": "c7cab1e5ff711dc17161d721a30a18dd6dd9655ee7087b26e6adcbbd8180dbde"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62007.json",
+          "sha256": "86c37f6362cc118accae349bf79715481d24c56bd144e4a8106d1fd54e8967df"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62008.json",
+          "sha256": "7d68d0a9c6bac4c7f5e0c55e49b3fdbabcd42d105419d65b813cef3f86b2fad8"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62008.json",
+          "sha256": "d05e1458326158f7e51091ffc59cf334809fcd3462209f2476afbc94ca6f2743"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62009.json",
+          "sha256": "b3d078defbb00b61b092b6ca9a8d8e351dafcc25005439052ac9f124fb29841b"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62009.json",
+          "sha256": "7bee00426a57fd0f89da040c1ea5bbf8784e9769fea91fa146f8cfd434b88f65"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62010.json",
+          "sha256": "555a05f1a95360b3a9d0c86bbcb60cbccb5cd7c65e5fe9588e6f667c6856ed9e"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62010.json",
+          "sha256": "11e110af2f81b107112a4cb15a5b6db642e31d6323095dceee35c13bb1eb1b81"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62011.json",
+          "sha256": "9fbe18bd362f1e2e8bcc51fc08e70dc4e0e3db45597aa3e0a7f1d8bb96a900b2"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62011.json",
+          "sha256": "838c16a17e0716eef6e2c19280809c9fcb348f197b1afb33976ab55ed7af7536"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62012.json",
+          "sha256": "7f7cf6030bc5742db3d59a98f30764f2629c1004d1d4365cf07b2b7ac617697b"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62012.json",
+          "sha256": "1d6cad2dfaecf733dc61440a556d214af20e5429d47d0216831cd00549ed9a55"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62013.json",
+          "sha256": "5489c60b3320bdf4a1c30da707421861f4b0f4dd0474ff86cfab9ab6eee37ca6"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62013.json",
+          "sha256": "32b86c12ae14a4d4c49ca6a41e47f7070338c51dc50e3ba5834edc6f1e9ae2b2"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62014.json",
+          "sha256": "bc124febd0856742c5e201782ce2125c5194591084e48b61bbe957523cd54240"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62014.json",
+          "sha256": "93582da6ebd1c6f7557a16791589e9020c74a8bc34fa030f7fcf46b53801a0a5"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62015.json",
+          "sha256": "400d2fd0269346f1dc6b545ef29894ce89afbf8751981a5eb348f9007d6db12b"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62015.json",
+          "sha256": "d7f1779b7fe4e8997388a5f7770012d4400bb2fa732362f6e459cd643030812f"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62016.json",
+          "sha256": "4b56a7691500e5bf797980d9d79679193cd3fe8b1a89d6a4a412af4aa6230573"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62016.json",
+          "sha256": "c63ff246884e62d8a4775f3c9ad6786ccc17465a40b27184977e624f3f9d271c"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62017.json",
+          "sha256": "2d18879530a287a770f1befe96b3a69cf6f7e9715c64b21dc867c1e6464657f5"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62017.json",
+          "sha256": "a72f8ddc59987948a01c8eceaff8e0130d576458bf1ce0a865210b84b996f6c6"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62018.json",
+          "sha256": "b90c206a49a4edb714413f934fe417a909cfdc14d197687ebe621162644593b9"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62018.json",
+          "sha256": "1b562e743788e0b02bdacd429de832998ff5a82789a27b5ee4d1796ef2025d7c"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62019.json",
+          "sha256": "92ad18524fa20a8abe3d4cf93337ec3fbc6b7b15694ee4f125b80709838ab876"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62019.json",
+          "sha256": "3f675df51284d27f20403226622b32c785ef38958c12d873d6c94de8f2dabcc7"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62020.json",
+          "sha256": "cb537372e9e576f0eb6211b0ec941c6adb4595ee854ab89b796649e1ac2ca0ad"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62020.json",
+          "sha256": "8b58108d7b6422c474c07e4a764b36eb8483dd3ea916b0a9ec529de252738b1f"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62021.json",
+          "sha256": "b5a8a46da418c4f57b9d547b1a113419e61e858cce96927cdec9da29f0d447db"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62021.json",
+          "sha256": "b5aba2966886b05afd7a5d15f810c1d471c7fcb83cfe071aa1d1ce9e00334ba0"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62022.json",
+          "sha256": "f61977d48aef50b30eacceddd1710384b742c26c4abb9a433f0208cb9357ee6e"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62022.json",
+          "sha256": "ce5470006b3c97864a067e0ec8e40fd572ef8e1c12eebc1e7d50311ea58d6eca"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62023.json",
+          "sha256": "2a0e146809375d4d9f38e50c99a0f59a586b113d7aa04e3820e3d7d81db575e7"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62023.json",
+          "sha256": "5895490e979593a0d4bc5fb598a3c809ddd4a8498ff23af8c13d378d22722a96"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62024.json",
+          "sha256": "bda3f7b3d687ab9f4700778c2e0dd4beea4bc5c7f5c05541c068798e36f2c3d9"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62024.json",
+          "sha256": "bba887b3fb80c4189e7feb7ee363ef7fa1c0e4ad150dd3f0de26dd9547f6acb6"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62025.json",
+          "sha256": "684abd6f7edc1c3e87d498d3aef95784d5b13b8a69a417a17f16c8d5379c67b3"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62025.json",
+          "sha256": "c319a110a051df220677c9d1a1172141879fe9b95446149a8851af95ccc72085"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62026.json",
+          "sha256": "383ccaf84390ce7971a3c90f0bc6f2e7d81a6a1e2e5ac32925ac40509432397f"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62026.json",
+          "sha256": "037d618bf0f4f08efe9d77f17b83cee85c28ff4f4aa23bcf6f49e070e4337ff7"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62027.json",
+          "sha256": "730a3270b5243a535071514ca11408a28663484a375dfa15304290b328e45193"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62027.json",
+          "sha256": "421a5b113a909e02f56cd7eacc704d115c48467541904ee2b170cf20d143ef63"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62028.json",
+          "sha256": "34ca714b71b0b1479d16fec859cf7e1b66ec9ecc10197bc6bfbedb9fb6c43290"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62028.json",
+          "sha256": "c7beb98ecc39a946439376f3418f3dca91858985ad01b6e8148dfa59aee92b48"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62029.json",
+          "sha256": "e5c444afc5ee7c2cb0603b2e373e5762e0f7b2591bf683fad54ce6dbcbde66d3"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62029.json",
+          "sha256": "7da65d49e3badaf3e2c481acb42e0fc4ed8dfe8452da5c5c1feab05011168918"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62030.json",
+          "sha256": "9d9799f1e890c511ca44b4f6d3ebac4206d2867d66591e4cd7eb94437d9a81c4"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62030.json",
+          "sha256": "d00772495491972f0cde34caefc64513cbfee9bd1549421eb1ffa2c85e0d5196"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62031.json",
+          "sha256": "0da6b943818b786f4007f8e2cac56f41c7d1c3956db4289021c41ec5d55f0dc4"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62031.json",
+          "sha256": "9dcd954a3a49bc57bcb800bb2045626d17d1696bfa81d52ecf934b58a28f8ae8"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62032.json",
+          "sha256": "790d6234a075bb0897f4da246e7ed69176002a5035e6f9b2f889ff84f3625c3e"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62032.json",
+          "sha256": "6b82bdd3074a687f6cbad4509907aaebfd4b3800dc21274df990fea701eead7e"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62033.json",
+          "sha256": "367ee623e2a995e3b34aa8e223bfef2f7ccb254627efd50dd4eeef7e2ac6c043"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62033.json",
+          "sha256": "ea2c452dbb4cbf3ab544fe98ea83391abf70a61ed0c110c77ef8c6890529b4a0"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62034.json",
+          "sha256": "99deae3fa150161921f233d336ce4674be3acb70d8274e6ec72828ba4181c2d1"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62034.json",
+          "sha256": "15040520cb271ddfe2767e64413ed8c43c3c6fe07739c333e0d24cd2f1c93018"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62035.json",
+          "sha256": "57fa2e22a68af7447ea4ccf559d6fd26d35d70dcf4a7a4f1035078dc2ba6d67d"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62035.json",
+          "sha256": "6f091ff530c4dd211bb24db924d27b8986bfb829ba2c4e7cb5ae9ce87e448dd8"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62036.json",
+          "sha256": "fcbe2fd496d9b380e87c9c2d5cb54680d0b1726732e680e1991bf5c2ede80115"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62036.json",
+          "sha256": "3faf28619f524ba1b99f464230410cf57d42f584545c5e3603ee17cbd6b4cd7b"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62037.json",
+          "sha256": "2f017e07356956eaada849b1d972ee7de7ab83591a7acfb4c136dbb050d0a26b"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62037.json",
+          "sha256": "4807dc26d732303d83da2268b860e120e353531025c3d77ee92fe824f7e213cf"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62038.json",
+          "sha256": "e30de4d10434e83fda1e3caf7667b2c18d9c50d8cce352820243c0057cd747e6"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62038.json",
+          "sha256": "6d7b49822834091b2abdccd9286b0740cdca6217fa8682f1e327191abfbe4424"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62039.json",
+          "sha256": "344a6abcdb0792a4fb063f982b5bb5fd7abf5a91f4ddfb9ca3a1f601b664b49a"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62039.json",
+          "sha256": "2971f6f76cfacc1a3d6dc0e5647e154db8619496e9c27ea1dc00044ff8029b75"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62040.json",
+          "sha256": "d7db89af1ff86276a4d742ef334ea6fd6f188eb473304fee79a86efcf6c9accd"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62040.json",
+          "sha256": "a60c19e4effce534e25d5d3192397a3444d6ca102a206c3fdda0d83480642630"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62041.json",
+          "sha256": "b2674c6f9b7e013db135948c32567891b1b8a5d11132eef3159ca7e7e9a55afe"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62041.json",
+          "sha256": "c21097f9d70ac2663535aa4f72277a93d2bf3b19f5b48f16af8579a7fccabf9e"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62042.json",
+          "sha256": "48fefa794e35b469e5497cd8a3413687a4692927fd169c7253a5879b50248c1c"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62042.json",
+          "sha256": "f20e289b3c593a83ea1e328ac431b52a39a5c9592c3d9e202ec0be8bda9f5252"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62043.json",
+          "sha256": "2d14655687238b5b3b21b67e56c3bfa87f4620a2ef3138432fba566174644a48"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62043.json",
+          "sha256": "9c8495afe35cb8da16d906ca59c6ba42331cbab2462039896b3c66a826481a4d"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62044.json",
+          "sha256": "312ff37ede2c0f60470fe08b5bb9331c2e00d45f616147fc538cc6e2c7906eb0"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62044.json",
+          "sha256": "d40adeb2dad044680d8439d3b4d9ae9c3a0c3cf3cf8c52e4d9299f9c191d2357"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62045.json",
+          "sha256": "c1df453d0954eaa78e59494f6f5626a1c19fdf6f2cce083516249750e17909d6"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62045.json",
+          "sha256": "d0c765a5a042e95ebe263af24cf708cc9635a8e3bba6f5320bef270d995133b8"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62046.json",
+          "sha256": "c53ad689c7fa41ac10b27050e5a6549404bc457528b3153d26630cc05f12034b"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62046.json",
+          "sha256": "856ee04e3083fc393b8aafde332d3070827bb47efaf1dcdb471196de93a12b41"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62047.json",
+          "sha256": "3f792056b5466b531f2cb9a918e94f830b386e24e28587841729988f65572279"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62047.json",
+          "sha256": "8c5d85bde479c8c68136012c39a7933c80e3e56a278583648560e4a7013f7cd5"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62048.json",
+          "sha256": "ad88bed05105cc1e224f0f6b0450401abe7f3ece3497e197275b4ab0c4abd3c3"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62048.json",
+          "sha256": "6571032c661435a9f58e129ec458a4ea1e131929256c821b926a8b156a9b8137"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62049.json",
+          "sha256": "a1c522c7be8961aa07beaea8867d13dc17b3ead32a676ab08d5a0fed0eeefe61"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62049.json",
+          "sha256": "a63120cb1d78bfdbcfe91eb74c37132e3e25656355f3e9e8ae1742d11ac3dfc0"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62050.json",
+          "sha256": "19727eaa30e31ecef9d17cdbd9c29f81066cf68f925934192ab29d512eef9023"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62050.json",
+          "sha256": "54a6f871b5dd559a0b82d01f550ed7589dcc5a54e92a1784561104df4dc3fb24"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62051.json",
+          "sha256": "513fbdef000e81fe5794b129340f9434c0b679859c7ea2bd751e5a7a62769d5e"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62051.json",
+          "sha256": "002222fcfd49f382fd578d078cbe68910512a7f07a46a82213627035bb65ff7d"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62052.json",
+          "sha256": "ecb8739d4da605dd3c0b69b7537711e42113608ed2a22ad4c34c9541d6c590b6"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62052.json",
+          "sha256": "ea6d6768d5584a6c84cd7bdb6465055141857df55ec4bf693ccb29d67309dc65"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62053.json",
+          "sha256": "99668a50764389a7326c0227b65ff7e3b415870337862b54d444b28bc163e60a"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62053.json",
+          "sha256": "20f17563d3fb1e5f7f969ae43726915591f5759198c40eb4acda07ee453c0840"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62054.json",
+          "sha256": "71b355c068d496aae039e485018fc3359327e34b44cb5e9eb7e20a5913eb2bf0"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62054.json",
+          "sha256": "cd19d71382e668e4d835c121db55db7f9f37e6491e198dbfb98e9d5e5e2bb1e8"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62055.json",
+          "sha256": "3e41e09aebb199b739672cca565c3213f892e8ed31f1e99b9d85d6652a045586"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62055.json",
+          "sha256": "f40ff0166e48460088cdb4e3158503919710eb64c36550f39d2abf2ff9a56c2a"
+        },
+        {
+          "resource": "zzz/3.1/zh/shiyu/62056.json",
+          "sha256": "1841b5b31ee8181fda5dfc446b5047735686c3b641908d182b2c33bff2e61610"
+        },
+        {
+          "resource": "zzz/3.1/en/shiyu/62056.json",
+          "sha256": "2db195fe6031978061de02d0c695e8a48ee585d74f4df863408554d278813f36"
+        }
+      ],
+      "memberIds": [
+        "61001",
+        "61002",
+        "61003",
+        "62001",
+        "62002",
+        "62003",
+        "62004",
+        "62005",
+        "62006",
+        "62007",
+        "62008",
+        "62009",
+        "62010",
+        "62011",
+        "62012",
+        "62013",
+        "62014",
+        "62015",
+        "62016",
+        "62017",
+        "62018",
+        "62019",
+        "62020",
+        "62021",
+        "62022",
+        "62023",
+        "62024",
+        "62025",
+        "62026",
+        "62027",
+        "62028",
+        "62029",
+        "62030",
+        "62031",
+        "62032",
+        "62033",
+        "62034",
+        "62035",
+        "62036",
+        "62037",
+        "62038",
+        "62039",
+        "62040",
+        "62041",
+        "62042",
+        "62043",
+        "62044",
+        "62045",
+        "62046",
+        "62047",
+        "62048",
+        "62049",
+        "62050",
+        "62051",
+        "62052",
+        "62053",
+        "62054",
+        "62055",
+        "62056"
+      ],
+      "members": {
+        "61001": {
+          "files": {
+            "data": {
+              "path": "shiyu/61001/data.json",
+              "sha256": "8307e649ed2c06f531301da26d20a345cc6968d3c215dbb20e143babb5f3a327"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/61001/details.en.json",
+                "sha256": "5065fa4d8b2897037a2e03147efe9530fa65c62b01d1219ebc9852e19792a6b1"
+              },
+              "zh": {
+                "path": "shiyu/61001/details.zh.json",
+                "sha256": "ed4f406d06ca4db9a57139c31d04839c7de0992e6e8a2aff4f8a7f31e3c28f01"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": "Stable Node",
+            "ja": "安定ノード",
+            "ko": "안정 구간",
+            "sort": 2,
+            "zh": "稳定节点"
+          }
+        },
+        "61002": {
+          "files": {
+            "data": {
+              "path": "shiyu/61002/data.json",
+              "sha256": "f3292032de50c0c1bddab696bc90d3ba1db9dbd6bcda2fc023817c81aaea605a"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/61002/details.en.json",
+                "sha256": "e782c9c08f226c6e7cd31b54cab8cbaec4208a21503bc4bd618dc4c945bcd126"
+              },
+              "zh": {
+                "path": "shiyu/61002/details.zh.json",
+                "sha256": "a87bb154470f51581c8922b64d218cf836c8b11a92228fdbf8bdf60d73bcb3c7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "en": "Disputed Node",
+            "ja": "紛争ノード",
+            "ko": "분쟁 구간",
+            "sort": 3,
+            "zh": "纷争节点"
+          }
+        },
+        "61003": {
+          "files": {
+            "data": {
+              "path": "shiyu/61003/data.json",
+              "sha256": "640fe3cef7931c8d4a2d4925b94570941e3c34444993e1fe6346af4d5b440f69"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/61003/details.en.json",
+                "sha256": "a91935149a8017ee55d6d6bbc06849910f73f04642b24a7c86d67c9581a2c510"
+              },
+              "zh": {
+                "path": "shiyu/61003/details.zh.json",
+                "sha256": "9c9ea12d5a10ca661bbbfc55a67c276de4a24c1e72a4c658cc9918f71f1965e2"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-08-24 04:00:00",
+            "en": "Ambush Node",
+            "end": "2024-11-06 03:59:59",
+            "ja": "奇襲ノード",
+            "ko": "기습 구간",
+            "live_begin": "2024-08-24 04:00:00",
+            "live_end": "2024-11-06 03:59:59",
+            "sort": 4,
+            "zh": "奇袭节点"
+          }
+        },
+        "62001": {
+          "files": {
+            "data": {
+              "path": "shiyu/62001/data.json",
+              "sha256": "58a76d07cbd5cf0f56a9a3ea935c39a307edd00b7d0210735c01e894e8a3fcba"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62001/details.en.json",
+                "sha256": "fbe68fa8c160720a7cf581d9b99ac737c5a41d0245c9c8be28977e9cefa1e080"
+              },
+              "zh": {
+                "path": "shiyu/62001/details.zh.json",
+                "sha256": "9ef28eed349ea880b9361638d5eeb3dbcd3fa0a9d571cd6368ad24db0bc164e3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-07-04 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-08-01 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-07-04 04:00:00",
+            "live_end": "2024-08-01 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62002": {
+          "files": {
+            "data": {
+              "path": "shiyu/62002/data.json",
+              "sha256": "46382372df1d69dbcd3c7d80d21dea6731070c87299511300384ba05c73c1b0e"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62002/details.en.json",
+                "sha256": "b14d452f760fd02e41885ddf61b2542def1c2e847e99ddab71e4b57d910effa8"
+              },
+              "zh": {
+                "path": "shiyu/62002/details.zh.json",
+                "sha256": "4f275a2010c26f58e367c62916f2486fba16618160470534e57131c67e34ca30"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-08-01 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-08-16 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-08-01 04:00:00",
+            "live_end": "2024-08-16 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62003": {
+          "files": {
+            "data": {
+              "path": "shiyu/62003/data.json",
+              "sha256": "775e427ca8e2d2af3863f4a2fe5bd5a91f067f748cca18f9b56010d756b7ee18"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62003/details.en.json",
+                "sha256": "a138419c6707343f6205035b446b9b06a2018b322e1341d1046399677a8cd6f4"
+              },
+              "zh": {
+                "path": "shiyu/62003/details.zh.json",
+                "sha256": "d828fc4c8fab70714ff09e18a7a3a8c4878943eeca565787dc3dc04d2d0e9fd3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-08-16 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-09-01 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-08-16 04:00:00",
+            "live_end": "2024-09-01 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62004": {
+          "files": {
+            "data": {
+              "path": "shiyu/62004/data.json",
+              "sha256": "7139225dd9d5558fc8316f3bcbcc26fa0f30286eafd2e93a44545fe100914b1c"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62004/details.en.json",
+                "sha256": "bf5f9c743209bfff1461c67b02eeb1b645d057fa0bfb2a73138c4bc1990746a9"
+              },
+              "zh": {
+                "path": "shiyu/62004/details.zh.json",
+                "sha256": "69496e8bbebc0669336e91144a7eeacf2b29c5ba6ed4f18d90a8f6ae6e9182bf"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-09-01 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-09-16 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-09-01 04:00:00",
+            "live_end": "2024-09-16 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62005": {
+          "files": {
+            "data": {
+              "path": "shiyu/62005/data.json",
+              "sha256": "91479f62660dd18787dae15e10ac6ef6c38a2d5ed42fa3e4b80980ffe29e97e3"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62005/details.en.json",
+                "sha256": "eec1992b79e42e44b2708c39b533b2b4a05dfcf71839926e3ca3d6523f03192e"
+              },
+              "zh": {
+                "path": "shiyu/62005/details.zh.json",
+                "sha256": "c34d821ffc05843a8d7624fb5e0f2c3ff3ee31804f0afad2a6f6d4f84d571f43"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-09-16 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-10-01 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-09-16 04:00:00",
+            "live_end": "2024-10-01 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62006": {
+          "files": {
+            "data": {
+              "path": "shiyu/62006/data.json",
+              "sha256": "83ba3215b96f9f530401cc0dadb1068bb9b5c4c72bb7ded174187177037633ec"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62006/details.en.json",
+                "sha256": "e6c656552804333e5d2ee0c9c669281f9e825c74e2631dae1d559a10474efc2e"
+              },
+              "zh": {
+                "path": "shiyu/62006/details.zh.json",
+                "sha256": "7178b2351d55e46b2863d2b0c337339ea5b18333d6f0bb1f74ace7dbaf987b84"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-10-01 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-10-16 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-10-01 04:00:00",
+            "live_end": "2024-10-16 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62007": {
+          "files": {
+            "data": {
+              "path": "shiyu/62007/data.json",
+              "sha256": "d3c37813098abdc8d60939e3260fe0e39c622e0d0e38c58ab218e9aa1b9a1f9e"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62007/details.en.json",
+                "sha256": "cab5bbf7182512daec1fa3f641b78a0784b5a53e23c9144d88efebf820811770"
+              },
+              "zh": {
+                "path": "shiyu/62007/details.zh.json",
+                "sha256": "758ab58a9069dc87ac5a1cb3b7b85b02d50ad1bcf6bd6ac4a1cce31394c5be18"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-10-16 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-11-01 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-10-16 04:00:00",
+            "live_end": "2024-11-01 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62008": {
+          "files": {
+            "data": {
+              "path": "shiyu/62008/data.json",
+              "sha256": "49462edffc986084d0f815b86a3adf793ab2772fe7c1e645cd946cdf687e387e"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62008/details.en.json",
+                "sha256": "fc007aace885e2b285d41600405d242a81042d102ef412653da9690521b34092"
+              },
+              "zh": {
+                "path": "shiyu/62008/details.zh.json",
+                "sha256": "8f542f5d55d14a37dfd000f510320b8be1bbb5eaf78d8263f495d5cf5282e25f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-11-01 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-11-16 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-11-01 04:00:00",
+            "live_end": "2024-11-16 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62009": {
+          "files": {
+            "data": {
+              "path": "shiyu/62009/data.json",
+              "sha256": "ba174058c7ecc5ca323e5d4a8c70e073c7aef67f6abdf9d656beb0afa790778f"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62009/details.en.json",
+                "sha256": "a4274f3dcd253cd2c341e190bb9afd1245696160396cb856a320c49352a59ea4"
+              },
+              "zh": {
+                "path": "shiyu/62009/details.zh.json",
+                "sha256": "df0772bbaaa664f16e70b5435a9d87dd4d92dfd7d985cd8c2150c0f100224da3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-11-16 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-12-01 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-11-16 04:00:00",
+            "live_end": "2024-12-01 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62010": {
+          "files": {
+            "data": {
+              "path": "shiyu/62010/data.json",
+              "sha256": "601580a8a0e8f4cde61dd6509a272becacd520b3c14d5f81f287a5f21712346c"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62010/details.en.json",
+                "sha256": "39327e83012fd6230a2c8cf6fdabf711208a2b3bad355d0ac06e10ae21e67006"
+              },
+              "zh": {
+                "path": "shiyu/62010/details.zh.json",
+                "sha256": "ad6bf9bbf70fea6b1db44ca865fc4ca6d859ee7917007c200eaa2517401d6b84"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-12-01 04:00:00",
+            "en": "Critical Node",
+            "end": "2024-12-17 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-12-01 04:00:00",
+            "live_end": "2024-12-17 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62011": {
+          "files": {
+            "data": {
+              "path": "shiyu/62011/data.json",
+              "sha256": "ecbbcfa167fc25ed874b189a5ccaa862909c10f9d4fd972b7302af3176fb2836"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62011/details.en.json",
+                "sha256": "cbe88654cc985bcd0c2d436ad5e1fc4f4b73c863967759a80cbc9cd967852ef0"
+              },
+              "zh": {
+                "path": "shiyu/62011/details.zh.json",
+                "sha256": "cec58b458db0106f47799483dbc828c9d909ba388520d0d4664c970e0c717d89"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-12-17 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-01-03 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2024-12-17 04:00:00",
+            "live_end": "2025-01-03 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62012": {
+          "files": {
+            "data": {
+              "path": "shiyu/62012/data.json",
+              "sha256": "fb1626d668a1266fa825e06dfb5a9319d38f8878e0154d23d7eb83c5996c57fd"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62012/details.en.json",
+                "sha256": "0c9bf089d148ce97136ae5335edf7af0290c28678954739dd3927ecf3e0084e8"
+              },
+              "zh": {
+                "path": "shiyu/62012/details.zh.json",
+                "sha256": "8ca644778195e85c7d564ea4464ccdbecd110482e5c629fbed28bf62dbeab78e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-01-03 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-01-17 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-01-03 04:00:00",
+            "live_end": "2025-01-17 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62013": {
+          "files": {
+            "data": {
+              "path": "shiyu/62013/data.json",
+              "sha256": "5bf97a54d2d627c6d0611a704e498253ecbf11274e2a62c9db8c2effef9d6eb4"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62013/details.en.json",
+                "sha256": "329f2f7003d5531c9f71c4bdc868d82b59e7fac086e6d33bdc8211a920d52d64"
+              },
+              "zh": {
+                "path": "shiyu/62013/details.zh.json",
+                "sha256": "d0eaa899ca099f04d366caaace783e0c1b01c196321c1c13f09974cd2842b983"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-01-17 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-01-31 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-01-17 04:00:00",
+            "live_end": "2025-01-31 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62014": {
+          "files": {
+            "data": {
+              "path": "shiyu/62014/data.json",
+              "sha256": "ad47ce2a6bd77ec75637efdccfe47fb07cf710f64075ae6580188f9080e26538"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62014/details.en.json",
+                "sha256": "1cbb8be9fa05fbc64ea895edf417757450711eac56b23acb1ef8bb305c27faec"
+              },
+              "zh": {
+                "path": "shiyu/62014/details.zh.json",
+                "sha256": "e90d3e8d793bc44c89d5e01fd03c667f409e4902f974bd0648839af0f316ce48"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-01-31 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-02-14 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-01-31 04:00:00",
+            "live_end": "2025-02-14 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62015": {
+          "files": {
+            "data": {
+              "path": "shiyu/62015/data.json",
+              "sha256": "30ec5030c37d2523a46d85413f5bb827b5430343994c711b3e8a90ad00594f5f"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62015/details.en.json",
+                "sha256": "0236606c6fa2d8a5cd9546d241dced0fa5425e6a20e3f9af95a1f98fb5272cc0"
+              },
+              "zh": {
+                "path": "shiyu/62015/details.zh.json",
+                "sha256": "ccc80ab7c21ffa7bccb952040ff8d2e446a9372d552e6fee5f3bc70a2be96c14"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-02-14 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-02-28 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-02-14 04:00:00",
+            "live_end": "2025-02-28 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62016": {
+          "files": {
+            "data": {
+              "path": "shiyu/62016/data.json",
+              "sha256": "08c67a49dc85538fe872157f76688c48aec99f3989beee055f9667378a934fc0"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62016/details.en.json",
+                "sha256": "2e921edd14c93905f047f845d50869c1d77bd4e024c151dad1c55e9d85984c82"
+              },
+              "zh": {
+                "path": "shiyu/62016/details.zh.json",
+                "sha256": "4c19401a7dea085eea815afe9b459dcdac1f602a9ca53c9891d381a613324069"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-02-28 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-03-14 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-02-28 04:00:00",
+            "live_end": "2025-03-14 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62017": {
+          "files": {
+            "data": {
+              "path": "shiyu/62017/data.json",
+              "sha256": "f5465ca1204998c45bb1e3270e4df77c329f165c5f368f9b0f65f6d0104ca256"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62017/details.en.json",
+                "sha256": "4fec319dfcc3eaf0fa82a019998de7b1129021a198de3f17d4b57b09c1f03fba"
+              },
+              "zh": {
+                "path": "shiyu/62017/details.zh.json",
+                "sha256": "f3c56de27f8e6f74608c23aeeab4654f608f6bed16f4b3ea3afb35901510fcc7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-03-14 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-03-28 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-03-14 04:00:00",
+            "live_end": "2025-03-28 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62018": {
+          "files": {
+            "data": {
+              "path": "shiyu/62018/data.json",
+              "sha256": "43bfbef5bce56e9f5418cac58a35692ad314f5069649d6ae212f6225e94b12d2"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62018/details.en.json",
+                "sha256": "49b866dc85f9f3708f573b33f299467735090dd221729f23099d0675144a249c"
+              },
+              "zh": {
+                "path": "shiyu/62018/details.zh.json",
+                "sha256": "ccebaed29d3602bcebea9ca45627e218d7901add71e09501f42b8bf88e0cc828"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-03-28 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-04-11 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-03-28 04:00:00",
+            "live_end": "2025-04-11 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62019": {
+          "files": {
+            "data": {
+              "path": "shiyu/62019/data.json",
+              "sha256": "3fc4ee185abe41a5bc0b2919a826d56af7cd4bf8d0ff50f6ff1ca7e8dbe3e081"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62019/details.en.json",
+                "sha256": "33c156f79425670dfa99dab5a79fffbae2116417a2556e1a75a99127cdb50e65"
+              },
+              "zh": {
+                "path": "shiyu/62019/details.zh.json",
+                "sha256": "da690564fda68b76b82e089dbf7d0ae204b036980c953822a59bc0cd2ffe7889"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-04-11 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-04-25 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-04-11 04:00:00",
+            "live_end": "2025-04-25 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62020": {
+          "files": {
+            "data": {
+              "path": "shiyu/62020/data.json",
+              "sha256": "69d3a5c5420665667764f9104a1c84ff964243b9e745b1deab05bcf6036d6a72"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62020/details.en.json",
+                "sha256": "321555dad715c2c7752781f83467b548303d893e153be4a7614ed0545d204ae4"
+              },
+              "zh": {
+                "path": "shiyu/62020/details.zh.json",
+                "sha256": "edae6f3fa59a3ba5fc77485aeb8f7f6158b106520613525eafe5e48220ffa00a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-04-25 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-05-09 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-04-25 04:00:00",
+            "live_end": "2025-05-09 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62021": {
+          "files": {
+            "data": {
+              "path": "shiyu/62021/data.json",
+              "sha256": "110b0fbd0b688f2ea6836fb8b3b0e26d3183edf1ce42b8ba1310665158fa8348"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62021/details.en.json",
+                "sha256": "7b4f281f999e326cec3b6b9a3ac16ffed802af9514496df1c1033c1d3aa33921"
+              },
+              "zh": {
+                "path": "shiyu/62021/details.zh.json",
+                "sha256": "b947193a86969d30ac7155c20c7755c11c7abd5a34715f858bd99674be8584c9"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-05-09 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-05-23 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-05-09 04:00:00",
+            "live_end": "2025-05-23 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62022": {
+          "files": {
+            "data": {
+              "path": "shiyu/62022/data.json",
+              "sha256": "286bd7c121a3f9faa6bc21035cd2e7ce36b1c9906dbd31be648feaf63366f079"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62022/details.en.json",
+                "sha256": "a5061f8bbfd84537d48fd6e142a525c198f0ae44d8809f8c4ef7c6b98710c086"
+              },
+              "zh": {
+                "path": "shiyu/62022/details.zh.json",
+                "sha256": "fc91b21c4e0593a2117c2c3c95653db900a155d6413097336f14b712f812dd46"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-05-23 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-06-06 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-05-23 04:00:00",
+            "live_end": "2025-06-06 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62023": {
+          "files": {
+            "data": {
+              "path": "shiyu/62023/data.json",
+              "sha256": "2bd56a9734214a0f0dfba732c32135a4b54c04b0689389ac9936d93f5d4e0b40"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62023/details.en.json",
+                "sha256": "7ef14d471a8c8d897d70fb8ba39b05614da83f81dd8e39dc0385dc76c737ac85"
+              },
+              "zh": {
+                "path": "shiyu/62023/details.zh.json",
+                "sha256": "149df5337982c64686b51ee9e48cc69e112513b85d1309ed340c1af77e179226"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-06-06 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-06-20 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-06-06 04:00:00",
+            "live_end": "2025-06-20 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62024": {
+          "files": {
+            "data": {
+              "path": "shiyu/62024/data.json",
+              "sha256": "00a56334c2b64be15972869cd6421886b654893ea15d1e3fd3b4642b425b8673"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62024/details.en.json",
+                "sha256": "3bf39d96131f61238549feb5accb72cf6b31c7d6922bcda4310e5a73f074ee37"
+              },
+              "zh": {
+                "path": "shiyu/62024/details.zh.json",
+                "sha256": "95834222e092f6cadf726534e11001a1899a81df5677310f9c8e4bb903b8d56f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-06-20 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-07-04 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-06-20 04:00:00",
+            "live_end": "2025-07-04 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62025": {
+          "files": {
+            "data": {
+              "path": "shiyu/62025/data.json",
+              "sha256": "3ffd8b447d1059d413a03b864c9dd906cb9b785e5e39cc918309f04638cae200"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62025/details.en.json",
+                "sha256": "6772db4ca58123c089a72adb36dffa7be4cb5800af6501677b3ba9cdbc2bd4f1"
+              },
+              "zh": {
+                "path": "shiyu/62025/details.zh.json",
+                "sha256": "b55cee862e73a45125a0877de6d8250f44ea4df63fbf2629abea1b537b7add91"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-07-04 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-07-18 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-07-04 04:00:00",
+            "live_end": "2025-07-18 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62026": {
+          "files": {
+            "data": {
+              "path": "shiyu/62026/data.json",
+              "sha256": "1d985614376d3dc408807f00ff5e799afd05eae3871e4271329f5074697a60d7"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62026/details.en.json",
+                "sha256": "eb85788ef08fab69a8faae79536c387c9b521d257966292254ba9864a93a52da"
+              },
+              "zh": {
+                "path": "shiyu/62026/details.zh.json",
+                "sha256": "3ecdab15493dced190175acfb551f5eed37842f8b3499839dbc130bb6b79fe55"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-07-18 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-08-01 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-07-18 04:00:00",
+            "live_end": "2025-08-01 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62027": {
+          "files": {
+            "data": {
+              "path": "shiyu/62027/data.json",
+              "sha256": "58ee741fc3329e1a95e0b4d77ce93d2de09b895afcfbda2a7424b73ece5b246a"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62027/details.en.json",
+                "sha256": "26ee67a7ae0e50a5ed7f0eb17f140988f3d7b009d0ff795ad667974890f7a328"
+              },
+              "zh": {
+                "path": "shiyu/62027/details.zh.json",
+                "sha256": "66fdade5cc9d1abab29070e4dd88e5715d13740541d30e9d9b8c85cb73a68bef"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-08-01 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-08-15 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-08-01 04:00:00",
+            "live_end": "2025-08-15 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62028": {
+          "files": {
+            "data": {
+              "path": "shiyu/62028/data.json",
+              "sha256": "4a27419c2749e1d1e164db99a1e6b3e3ccdba2d799d29a72d05ac7af7d590281"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62028/details.en.json",
+                "sha256": "487a1267b7f6b205c29e8f7de20051deb405e11aae4c9b45c7dfaa06314d5d69"
+              },
+              "zh": {
+                "path": "shiyu/62028/details.zh.json",
+                "sha256": "8fcc75479b8e9ae6305e675c8c4c5d2b0c32cda6f8aafd79d052c19647b7d038"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-08-15 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-08-29 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-08-15 04:00:00",
+            "live_end": "2025-08-29 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62029": {
+          "files": {
+            "data": {
+              "path": "shiyu/62029/data.json",
+              "sha256": "83def9e3475a4461bcdc7af6ee7879166fe32ae9be7d49f6d729b5b997194a14"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62029/details.en.json",
+                "sha256": "94fdb650391d1e0285d9977815b8073c997cf661ca0089962ccbc229ac35d726"
+              },
+              "zh": {
+                "path": "shiyu/62029/details.zh.json",
+                "sha256": "2e488828676e654968cdb0a02616d2ae80d12d82fdcdbeec7e22c17a0cbcc0d6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-08-29 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-09-12 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-08-29 04:00:00",
+            "live_end": "2025-09-12 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62030": {
+          "files": {
+            "data": {
+              "path": "shiyu/62030/data.json",
+              "sha256": "778c3e9c0455335484fc60f062b029c2982dbfa6b3df4ae174753c74330ae750"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62030/details.en.json",
+                "sha256": "128ea51351ca9c37467a22562f9fc06c1bf9efe1215981e41526328d50580315"
+              },
+              "zh": {
+                "path": "shiyu/62030/details.zh.json",
+                "sha256": "df95904da72503062c1e2e718f827deb5b9e21308e3ffddf4005e7938c532676"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-09-12 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-09-26 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-09-12 04:00:00",
+            "live_end": "2025-09-26 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62031": {
+          "files": {
+            "data": {
+              "path": "shiyu/62031/data.json",
+              "sha256": "c335c1a3571eb522d46d5bf7eb1baac53c4fefe40b9ab5d074fb96cb365a7fa7"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62031/details.en.json",
+                "sha256": "99a8b8439f945eb3b3c999155ef39f0d22eba9951b95b84d1f1a38ce94dafb71"
+              },
+              "zh": {
+                "path": "shiyu/62031/details.zh.json",
+                "sha256": "90a86d28204e21cf1db74ba20ae9ffd499f5aacc7c329d6b1b584f9006b18c22"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-09-26 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-10-10 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-09-26 04:00:00",
+            "live_end": "2025-10-10 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62032": {
+          "files": {
+            "data": {
+              "path": "shiyu/62032/data.json",
+              "sha256": "c7e0efc73991bd2a7a94510797c8a6cae5cbe9c458152d325fe5c88ac98ccff7"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62032/details.en.json",
+                "sha256": "107faacbacb70ef473ca665a66184afff5789355bffa7231113ced9510212f29"
+              },
+              "zh": {
+                "path": "shiyu/62032/details.zh.json",
+                "sha256": "1988bd4884dd84e24b52a66f1b569c0688dde85d0500bceb48bedd52c7d7d08f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-10-10 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-10-24 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-10-10 04:00:00",
+            "live_end": "2025-10-24 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62033": {
+          "files": {
+            "data": {
+              "path": "shiyu/62033/data.json",
+              "sha256": "8f52feb6ebc82886b69e4bbbf50e431a873390920355f12518b0e0cc70d60ab8"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62033/details.en.json",
+                "sha256": "f56dd22c40b4b469521ec496a840d1c734320109b057bbddd2a074ce98315853"
+              },
+              "zh": {
+                "path": "shiyu/62033/details.zh.json",
+                "sha256": "13aad3fa32ed3b51232f8e72910b60ec650513903320d89d3e14b7d8ae574374"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-10-24 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-11-07 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-10-24 04:00:00",
+            "live_end": "2025-11-07 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62034": {
+          "files": {
+            "data": {
+              "path": "shiyu/62034/data.json",
+              "sha256": "22d8f20151faa87f2e822d4b3b82cee3cc5b3a2466eaba37dbc083d843cbb406"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62034/details.en.json",
+                "sha256": "aa1ab2de1428bc9a1cc446d92b564cef3279d479962a15159fcd8a19510284aa"
+              },
+              "zh": {
+                "path": "shiyu/62034/details.zh.json",
+                "sha256": "da2a8bfa8a2e7a5bdda6bf273650484cfa034adffbabdf6ba7f8af6f909da18f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-11-07 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-11-21 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-11-07 04:00:00",
+            "live_end": "2025-11-21 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62035": {
+          "files": {
+            "data": {
+              "path": "shiyu/62035/data.json",
+              "sha256": "793da441824b9b7abb1432efab53a8c7bfbbad674ab4bab7fa9a2cd67e63914f"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62035/details.en.json",
+                "sha256": "234ee72dcd8901a53a6479a5353bd144cd8edc19fbbea7887d1182e178811722"
+              },
+              "zh": {
+                "path": "shiyu/62035/details.zh.json",
+                "sha256": "c50007087605abaccbb07d0f4f9f342e70730c8879ef925322d5155194bdf0fb"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-11-21 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-12-05 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-11-21 04:00:00",
+            "live_end": "2025-12-05 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62036": {
+          "files": {
+            "data": {
+              "path": "shiyu/62036/data.json",
+              "sha256": "da6a10daf5c1b47d6a9e5e817a2b76e8d7973d6e27c74577dd07ec5d488edef9"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62036/details.en.json",
+                "sha256": "c002e5db56cfd975b085a582f1087d584b19ba5142b2005f7a4a48a8667499ed"
+              },
+              "zh": {
+                "path": "shiyu/62036/details.zh.json",
+                "sha256": "af89e255d610883f7b24942c674c7968507ad6a982aee8c469bb30f68270c945"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-12-05 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-12-19 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-12-05 04:00:00",
+            "live_end": "2025-12-19 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62037": {
+          "files": {
+            "data": {
+              "path": "shiyu/62037/data.json",
+              "sha256": "adefda41934ade01b76b44bb17883d31b22cdd12403cafeca72845fa1741b473"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62037/details.en.json",
+                "sha256": "37e43ce4fbde8a57e0b4494de7b34797e5aa3ce1e1363a3a5d0c83f0bd5c695f"
+              },
+              "zh": {
+                "path": "shiyu/62037/details.zh.json",
+                "sha256": "aa0836a4a263b41f328ef7507fb8437491e60b0b66d84fc446cc11531f92ebc8"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-12-19 04:00:00",
+            "en": "Critical Node",
+            "end": "2025-12-29 14:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-12-19 04:00:00",
+            "live_end": "2025-12-29 14:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62038": {
+          "files": {
+            "data": {
+              "path": "shiyu/62038/data.json",
+              "sha256": "a8864f92da1c54f824c89a7d07a0ac6b0bc546e2bc233693edda5aa675590e52"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62038/details.en.json",
+                "sha256": "b112ce272b9350d4cf95017375b2c47cc89b5a8a3bfef977ce77592fa49dcc7a"
+              },
+              "zh": {
+                "path": "shiyu/62038/details.zh.json",
+                "sha256": "244a59a9e400e200ffe8d35c291d0825a2bec57fc03a7ed264d2efab1a64fc10"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-12-29 15:00:00",
+            "en": "Critical Node",
+            "end": "2026-01-09 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2025-12-29 15:00:00",
+            "live_end": "2026-01-09 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62039": {
+          "files": {
+            "data": {
+              "path": "shiyu/62039/data.json",
+              "sha256": "adefbaa4a705e0652021352e66a7eb0469744c5b49571acd3fddb58d52ac5081"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62039/details.en.json",
+                "sha256": "1fc131378f53d1aa6310b221c08ed8fc8747a596df74ac821508fa991e23a7ce"
+              },
+              "zh": {
+                "path": "shiyu/62039/details.zh.json",
+                "sha256": "23eacd41a8123da544417d231fbef5ce7797d715a705a421069ca77fb0b4ee31"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-01-09 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-01-23 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-01-09 04:00:00",
+            "live_end": "2026-01-23 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62040": {
+          "files": {
+            "data": {
+              "path": "shiyu/62040/data.json",
+              "sha256": "5bd062d14fde3484de0d624baddab816fefccb410a43e72fa0150978e89b62c3"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62040/details.en.json",
+                "sha256": "e1a26788e34cde385f797904a7e38821c9797cabca14178e4e8f4d5980069b90"
+              },
+              "zh": {
+                "path": "shiyu/62040/details.zh.json",
+                "sha256": "7cfe59c00a33ae9266460f32eecac322d5320b248df613b79277cdecf10fc7c3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-01-23 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-02-06 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-01-23 04:00:00",
+            "live_end": "2026-02-06 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62041": {
+          "files": {
+            "data": {
+              "path": "shiyu/62041/data.json",
+              "sha256": "f9a4d12042a989d59c541dcf5fa9ed214714ff37fd40d3a19f2a3d21019d8eca"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62041/details.en.json",
+                "sha256": "1d69913412779e8f5c18c5d8af7d2de87000d1ae9e99b227f413a77ec4747aa3"
+              },
+              "zh": {
+                "path": "shiyu/62041/details.zh.json",
+                "sha256": "68ff25da353dc98482b355677964e4ab9c57908c12e5aff841e1d4a00d896fff"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-02-06 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-02-20 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-02-06 04:00:00",
+            "live_end": "2026-02-20 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62042": {
+          "files": {
+            "data": {
+              "path": "shiyu/62042/data.json",
+              "sha256": "0ac71c0c711f8c407ae53a1a80179b37dfdcd670cb1ef31aedea57197cae5cd4"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62042/details.en.json",
+                "sha256": "ec2f7ac9ffc0f6f814b8341ab606d5c34315b54a31d129355510a288d65c3651"
+              },
+              "zh": {
+                "path": "shiyu/62042/details.zh.json",
+                "sha256": "e7e7fe5d89e3cf879b385611c5ca9fa28892f271734272c8fa1466a4cacacb3d"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-02-20 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-03-06 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-02-20 04:00:00",
+            "live_end": "2026-03-06 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62043": {
+          "files": {
+            "data": {
+              "path": "shiyu/62043/data.json",
+              "sha256": "fda80896285b03690e5ad51e224512050632f320283a7d83d156638c32676b2f"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62043/details.en.json",
+                "sha256": "e03a8405ff41d163c87301f3dd50ba6db58189a8f357c375dbfe00d8166731c2"
+              },
+              "zh": {
+                "path": "shiyu/62043/details.zh.json",
+                "sha256": "a93695fe8b42e5fc9a13d26708d4b0b9253796bed71a3c3f2f72dfc23e95c42c"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-03-06 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-03-20 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-03-06 04:00:00",
+            "live_end": "2026-03-20 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62044": {
+          "files": {
+            "data": {
+              "path": "shiyu/62044/data.json",
+              "sha256": "bbc0657ebcdf990d240a9c35ac5a26e46d195a6baed5d22f588d3c8cbeee27b7"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62044/details.en.json",
+                "sha256": "4e897f01ba78166799fb959abeb1badf3f0b3d6ad33929d48f856205fa5eb378"
+              },
+              "zh": {
+                "path": "shiyu/62044/details.zh.json",
+                "sha256": "949cb8d9569adaa3b81027bd122f43abd50d1e9457d7f438d5c772e98e7cf5c5"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-03-20 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-04-03 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-03-20 04:00:00",
+            "live_end": "2026-04-03 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62045": {
+          "files": {
+            "data": {
+              "path": "shiyu/62045/data.json",
+              "sha256": "d5ff012511679bc2add86edddb03c9b8711693996901b117e53beb0372ab10fa"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62045/details.en.json",
+                "sha256": "f3975b050a370041c3c1b7cd6a687ee267d3bbea993a384b1a9e68200a313234"
+              },
+              "zh": {
+                "path": "shiyu/62045/details.zh.json",
+                "sha256": "46256b2217fe5b6969c33121e4febaa531c96dfeada2399a9ad36bac22d0d08b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-04-03 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-04-17 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-04-03 04:00:00",
+            "live_end": "2026-04-17 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62046": {
+          "files": {
+            "data": {
+              "path": "shiyu/62046/data.json",
+              "sha256": "5d9908b9e5fb7b4264685334a36911dade6a23b0903451b388a5aa6039051793"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62046/details.en.json",
+                "sha256": "6712cfe02ba363d3688900afbd829a70462887f9319c3385686c7a8cbcca6136"
+              },
+              "zh": {
+                "path": "shiyu/62046/details.zh.json",
+                "sha256": "8221b51528f5bcddcb02853d975e8c40ad71f7282993535c7a15261010df5061"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-04-17 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-05-01 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-04-17 04:00:00",
+            "live_end": "2026-05-01 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62047": {
+          "files": {
+            "data": {
+              "path": "shiyu/62047/data.json",
+              "sha256": "e9f0a389949e8f7ed9bc8a08c75c04daec30c27171c44b0a5817694faa746dd3"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62047/details.en.json",
+                "sha256": "8966c1f21999c3183e0d2e1b074d66f5d76858bdce231219024afc4543560ee4"
+              },
+              "zh": {
+                "path": "shiyu/62047/details.zh.json",
+                "sha256": "380ff8de0faf51a80576a84994cbb0d977e5b6ab6c90a3ce537e92dc2c425493"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-05-01 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-05-15 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-05-01 04:00:00",
+            "live_end": "2026-05-15 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62048": {
+          "files": {
+            "data": {
+              "path": "shiyu/62048/data.json",
+              "sha256": "bd255012a1cb594a4ab8c9db2e427b3e7bed3a84fbe33ba0919663d126681605"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62048/details.en.json",
+                "sha256": "2f2d039753d4915752aa1ecbb42c26a3adddc05522125a83a31f745f7b944a15"
+              },
+              "zh": {
+                "path": "shiyu/62048/details.zh.json",
+                "sha256": "02c6bc3c62a97068b26d41478716eb31a7c4bd02a36a18b1ccb727e829dd5fde"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-05-15 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-05-29 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-05-15 04:00:00",
+            "live_end": "2026-05-29 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62049": {
+          "files": {
+            "data": {
+              "path": "shiyu/62049/data.json",
+              "sha256": "f03b483c4e4a9c1510978957494359abe3b9af047bebd30704a43edf8d7e7528"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62049/details.en.json",
+                "sha256": "6ccd2e5c2070da09fd49bd082d085ff0b68c53c394fb856c849da93e24ff8622"
+              },
+              "zh": {
+                "path": "shiyu/62049/details.zh.json",
+                "sha256": "985d0dd4880328f4d0f78faeda604b3e8824d5d89065d1c6d3c6c1410d82dbda"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-05-29 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-06-12 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-05-29 04:00:00",
+            "live_end": "2026-06-12 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62050": {
+          "files": {
+            "data": {
+              "path": "shiyu/62050/data.json",
+              "sha256": "66c15a5c49176480c0ca7bbd239279b7382f02cd95af36d796ead193d9b295e3"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62050/details.en.json",
+                "sha256": "c37a74c34ceaa4914b50a05f6b7089244ef016dded36a4452e68f3ff82a16ad7"
+              },
+              "zh": {
+                "path": "shiyu/62050/details.zh.json",
+                "sha256": "3edda8924f6dc0313d9dd04cab134f73b0196d8e4836c1e69e48286affbc82a7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-06-12 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-06-26 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-06-12 04:00:00",
+            "live_end": "2026-06-26 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62051": {
+          "files": {
+            "data": {
+              "path": "shiyu/62051/data.json",
+              "sha256": "9ca3ff77ce9f5c9abf47860c2018891e511df769c897c67ecf80e34dc346c311"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62051/details.en.json",
+                "sha256": "488e7aa48e8cc28543d7b694fc65a4d81713352ac0c531182fb374052cde5cbf"
+              },
+              "zh": {
+                "path": "shiyu/62051/details.zh.json",
+                "sha256": "699d3fc7afbdb900db4c7196f7d2260c3651784e2632cfadebc2024a58167df0"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-06-26 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-07-10 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-06-26 04:00:00",
+            "live_end": "2026-07-10 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62052": {
+          "files": {
+            "data": {
+              "path": "shiyu/62052/data.json",
+              "sha256": "089506daf426a08a4cbab56c3d6acab23f0fbf77af234596c2d5771b2e91dfcb"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62052/details.en.json",
+                "sha256": "ec40a725b381648852f64f9e1660f51fe837741f65ee9072f1e49b79b6886bc2"
+              },
+              "zh": {
+                "path": "shiyu/62052/details.zh.json",
+                "sha256": "b7e707b7008d677207eb1dca1ff9423e75f7581d935b006431467cbaa7adf5c3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-07-10 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-07-24 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-07-10 04:00:00",
+            "live_end": "2026-07-24 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62053": {
+          "files": {
+            "data": {
+              "path": "shiyu/62053/data.json",
+              "sha256": "f992a3bd0113413791deb095c72ccc0c9cd655e3bed1db3a261015409e7dda39"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62053/details.en.json",
+                "sha256": "0caf14af4840faa656cce7017047703fcfe8e1f3f904326a877621f671b858d6"
+              },
+              "zh": {
+                "path": "shiyu/62053/details.zh.json",
+                "sha256": "900958ae84a8ce8e129d8289e3c3e62ca28b3e7d59ac474f99334ac331925744"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-07-24 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-08-07 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-07-24 04:00:00",
+            "live_end": "2026-08-07 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62054": {
+          "files": {
+            "data": {
+              "path": "shiyu/62054/data.json",
+              "sha256": "4ceba2f5f08ae2b20d63aa75eafcdb1a14cf5b72bb56ed3b8ccde7e33005dfce"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62054/details.en.json",
+                "sha256": "750381e1de55e5f8690c0e504ba4492b6ccb16b36c621d71dee61b67e7580e5d"
+              },
+              "zh": {
+                "path": "shiyu/62054/details.zh.json",
+                "sha256": "d35f25e1169d36c538604d81b2e530e5e8f264e5198ce08c99816ee53aa5a09a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-08-07 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-08-21 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-08-07 04:00:00",
+            "live_end": "2026-08-21 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62055": {
+          "files": {
+            "data": {
+              "path": "shiyu/62055/data.json",
+              "sha256": "fa75b83060afe44a371352ae3321d10952dc513bdbd657312479bccc4e257544"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62055/details.en.json",
+                "sha256": "05c13c96568dfea7f975d8fd18fbc919eebafa6243b7761447666cb400df0aa1"
+              },
+              "zh": {
+                "path": "shiyu/62055/details.zh.json",
+                "sha256": "d6f13a12ce33aa0dae7dbc26d9dc450257e0b3790b47c1175551b11fc23ba50a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-08-21 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-09-04 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-08-21 04:00:00",
+            "live_end": "2026-09-04 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        },
+        "62056": {
+          "files": {
+            "data": {
+              "path": "shiyu/62056/data.json",
+              "sha256": "8042624908bb9ce897c7f5234eb0e5b6617dc3582e478de7d3a46a150ebd7deb"
+            },
+            "details": {
+              "en": {
+                "path": "shiyu/62056/details.en.json",
+                "sha256": "604812baf906e29143872c1ab6501bd58c244cb4f6e7ab621bb278684823dbff"
+              },
+              "zh": {
+                "path": "shiyu/62056/details.zh.json",
+                "sha256": "bf46c949853a166ffb4a4c479f693385e88438c55dc1d98b563694ae2f5d2cb7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-09-04 04:00:00",
+            "en": "Critical Node",
+            "end": "2026-09-18 03:59:59",
+            "ja": "激変ノード",
+            "ko": "격변 구간",
+            "live_begin": "2026-09-04 04:00:00",
+            "live_end": "2026-09-18 03:59:59",
+            "sort": 1,
+            "zh": "剧变节点"
+          }
+        }
+      },
+      "rulesVersion": "nanoka-shiyu-reference/1"
+    },
     "w-engines": {
       "complete": true,
       "detailLocales": ["zh", "en"],

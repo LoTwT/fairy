@@ -4,7 +4,7 @@ Fairy 的游戏来源资料与数据整理包。
 
 Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。公开接口见[数据消费与 npm 导出契约](../../docs/specs/data/consumption.md)。
 
-[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试；驱动盘套装的单实体纯整合（[integrate-drive-disc.ts](src/integration/integrate-drive-disc.ts)、[drive-disc-types.ts](src/integration/drive-disc-types.ts)）已按规则 `nanoka-drive-disc-reference/1` 实现并接入生产快照；WEngine 的单实体纯整合（[integrate-w-engine.ts](src/integration/integrate-w-engine.ts)、[w-engine-types.ts](src/integration/w-engine-types.ts)）已按规则 `nanoka-w-engine-reference/1` 实现并接入生产快照；邦布的单实体纯整合（[integrate-bangboo.ts](src/integration/integrate-bangboo.ts)、[bangboo-types.ts](src/integration/bangboo-types.ts)）已按规则 `nanoka-bangboo-reference/1` 实现并接入生产快照；怪物的单实体纯整合（[integrate-monster.ts](src/integration/integrate-monster.ts)、[monster-types.ts](src/integration/monster-types.ts)）已按规则 `nanoka-monster-reference/1` 实现并接入生产快照。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的多实体 v3 增量维护、按类别的更新差异报告、互斥读取、中断恢复与显式迁移，公开 API 消费随 npm 版本发布的固定快照。
+[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试；驱动盘套装的单实体纯整合（[integrate-drive-disc.ts](src/integration/integrate-drive-disc.ts)、[drive-disc-types.ts](src/integration/drive-disc-types.ts)）已按规则 `nanoka-drive-disc-reference/1` 实现并接入生产快照；WEngine 的单实体纯整合（[integrate-w-engine.ts](src/integration/integrate-w-engine.ts)、[w-engine-types.ts](src/integration/w-engine-types.ts)）已按规则 `nanoka-w-engine-reference/1` 实现并接入生产快照；邦布的单实体纯整合（[integrate-bangboo.ts](src/integration/integrate-bangboo.ts)、[bangboo-types.ts](src/integration/bangboo-types.ts)）已按规则 `nanoka-bangboo-reference/1` 实现并接入生产快照；怪物的单实体纯整合（[integrate-monster.ts](src/integration/integrate-monster.ts)、[monster-types.ts](src/integration/monster-types.ts)）已按规则 `nanoka-monster-reference/1` 实现并接入生产快照；Shiyu 的单实体纯整合（[integrate-shiyu.ts](src/integration/integrate-shiyu.ts)、[shiyu-types.ts](src/integration/shiyu-types.ts)）已按规则 `nanoka-shiyu-reference/1` 实现并接入生产快照。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的多实体 v3 增量维护、按类别的更新差异报告、互斥读取、中断恢复与显式迁移，公开 API 消费随 npm 版本发布的固定快照。
 
 ## 使用
 
@@ -14,6 +14,7 @@ import {
   bangbooNames,
   driveDiscNames,
   monsterIds,
+  shiyuIds,
   wEngineNames,
   loadIndex,
   loadAgentData,
@@ -28,6 +29,9 @@ import {
   loadMonsterData,
   loadMonsterDetails,
   loadAllMonsters,
+  loadShiyuData,
+  loadShiyuDetails,
+  loadAllShiyu,
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
@@ -37,6 +41,7 @@ import type {
   BangbooName,
   DriveDiscName,
   MonsterId,
+  ShiyuId,
   WEngineName,
 } from "@randomplay/data"
 
@@ -61,6 +66,10 @@ const monster: MonsterId = "10000" // 怪物公开身份是来源 ID：名称在
 const monsterData = await loadMonsterData(monster)
 const monsterDetails = await loadMonsterDetails(monster, "zh")
 const allMonsters = await loadAllMonsters("en") // 显式加载全部怪物公共资料和英文详情
+const shiyu: ShiyuId = "61001" // Shiyu 公开身份同样是来源 ID：类内大量重名
+const shiyuData = await loadShiyuData(shiyu)
+const shiyuDetails = await loadShiyuDetails(shiyu, "zh")
+const allShiyu = await loadAllShiyu("en") // 显式加载全部 Shiyu 区域公共资料和英文详情
 console.log(
   agentNames,
   data,
@@ -83,6 +92,10 @@ console.log(
   monsterData,
   monsterDetails,
   allMonsters[monster],
+  shiyuIds,
+  shiyuData,
+  shiyuDetails,
+  allShiyu[shiyu],
 )
 ```
 
@@ -98,12 +111,14 @@ import bangboo from "@randomplay/data/integrated/bangboos/53001/data.json" with 
 import bangbooZh from "@randomplay/data/integrated/bangboos/53001/details.zh.json" with { type: "json" }
 import monster from "@randomplay/data/integrated/monsters/10000/data.json" with { type: "json" }
 import monsterZh from "@randomplay/data/integrated/monsters/10000/details.zh.json" with { type: "json" }
+import shiyu from "@randomplay/data/integrated/shiyu/61001/data.json" with { type: "json" }
+import shiyuZh from "@randomplay/data/integrated/shiyu/61001/details.zh.json" with { type: "json" }
 ```
 
 名称取英文详情顶层原值，语言必须显式为 `zh` 或 `en`。读取函数每次返回独立对象，根入口不预载数据；
-代理人、驱动盘、WEngine 与邦布的名称类型、catalog 与读取函数遵循同一契约；怪物名称在类内大量重名，
-其公开身份是来源索引顶层 ID 的规范十进制字符串，`MonsterId`、`monsterIds` 与读取函数遵循同一契约。
-各类别按需加载互不串读。完整参数、错误、JSON 子路径及兼容性规则统一见
+代理人、驱动盘、WEngine 与邦布的名称类型、catalog 与读取函数遵循同一契约；怪物与 Shiyu 名称在类内大量
+重名，其公开身份是来源索引顶层 ID 的规范十进制字符串，`MonsterId`/`ShiyuId`、`monsterIds`/`shiyuIds` 与
+读取函数遵循同一契约。各类别按需加载互不串读。完整参数、错误、JSON 子路径及兼容性规则统一见
 [消费契约](../../docs/specs/data/consumption.md)。
 
 ## 本地抓取
@@ -127,7 +142,7 @@ pnpm --filter @randomplay/data generate:integrated raw/nanoka 3.1 integrated
 三个位置参数 `rawRoot`、`version`、`targetDirectory` 都必须给出，不自动选版本或联网补齐。
 相对路径仍按进程工作目录解析：filter 命令在 `packages/data` 执行，因此上述路径分别是
 `packages/data/raw/nanoka` 和 `packages/data/integrated`。在 data 包目录可省略 filter；绝对路径也可用，含空格时加引号。
-命令名称不绑定实体；生成当前已登记类别的完整快照（代理人、驱动盘、WEngine、邦布与怪物），其他实体尚未接入。
+命令名称不绑定实体；生成当前已登记类别的完整快照（代理人、驱动盘、WEngine、邦布、怪物与 Shiyu），其他实体尚未接入。
 
 同一个命令自动处理以下情况：
 

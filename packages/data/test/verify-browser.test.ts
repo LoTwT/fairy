@@ -65,6 +65,9 @@ it("consumes the offline-installed package in real Vite development and producti
       integratedIndex.entities["monsters"].memberIds
     const monsterCount = monsterMemberIds.length
     const directMonsterId = monsterMemberIds[1] ?? monsterMemberIds[0]
+    const shiyuMemberIds: string[] = integratedIndex.entities["shiyu"].memberIds
+    const shiyuCount = shiyuMemberIds.length
+    const directShiyuId = shiyuMemberIds[1] ?? shiyuMemberIds[0]
     // 构建模块图应包含两类导入表引用的全部 JSON：按已验证索引逐类别推导，不使用固定文件总数。
     const publishedEntities = integratedIndex.entities as Record<
       string,
@@ -104,6 +107,10 @@ globalThis.fairyDirectBangboo = {
 globalThis.fairyDirectMonster = {
   data: () => import("@randomplay/data/integrated/monsters/${directMonsterId}/data.json"),
   zh: () => import("@randomplay/data/integrated/monsters/${directMonsterId}/details.zh.json"),
+}
+globalThis.fairyDirectShiyu = {
+  data: () => import("@randomplay/data/integrated/shiyu/${directShiyuId}/data.json"),
+  zh: () => import("@randomplay/data/integrated/shiyu/${directShiyuId}/details.zh.json"),
 }
 document.body.append("ready")
 `,
@@ -163,6 +170,8 @@ document.body.append("ready")
             directBangbooId,
             monsterCount,
             directMonsterId,
+            shiyuCount,
+            directShiyuId,
           })) {
             const context = await browser.newContext()
             const page = await context.newPage()
@@ -315,6 +324,8 @@ function defineScenarios(counts: {
   directBangbooId: string
   monsterCount: number
   directMonsterId: string
+  shiyuCount: number
+  directShiyuId: string
 }): Array<{ name: string; steps: ScenarioStep[] }> {
   const {
     agentCount,
@@ -326,6 +337,8 @@ function defineScenarios(counts: {
     directBangbooId,
     monsterCount,
     directMonsterId,
+    shiyuCount,
+    directShiyuId,
   } = counts
   async function checkNameCatalogs(page: Page) {
     const catalogs = await page.evaluate(() => {
@@ -336,12 +349,14 @@ function defineScenarios(counts: {
         wEngineNames: api.wEngineNames.length,
         bangbooNames: api.bangbooNames.length,
         monsterIds: api.monsterIds.length,
+        shiyuIds: api.shiyuIds.length,
         frozen:
           Object.isFrozen(api.agentNames) &&
           Object.isFrozen(api.driveDiscNames) &&
           Object.isFrozen(api.wEngineNames) &&
           Object.isFrozen(api.bangbooNames) &&
-          Object.isFrozen(api.monsterIds),
+          Object.isFrozen(api.monsterIds) &&
+          Object.isFrozen(api.shiyuIds),
       }
     })
     expect(catalogs).toEqual({
@@ -350,6 +365,7 @@ function defineScenarios(counts: {
       wEngineNames: wEngineCount,
       bangbooNames: bangbooCount,
       monsterIds: monsterCount,
+      shiyuIds: shiyuCount,
       frozen: true,
     })
   }
@@ -529,7 +545,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 代理人上下文全程不请求驱动盘、WEngine、邦布或怪物 JSON。
+            // 代理人上下文全程不请求驱动盘、WEngine、邦布、怪物或 Shiyu JSON。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -538,7 +554,8 @@ function defineScenarios(counts: {
                     !path.startsWith("drive-discs/") &&
                     !path.startsWith("w-engines/") &&
                     !path.startsWith("bangboos/") &&
-                    !path.startsWith("monsters/"),
+                    !path.startsWith("monsters/") &&
+                    !path.startsWith("shiyu/"),
                 ),
             ).toBe(true)
           },
@@ -762,7 +779,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布、怪物文件或索引。
+            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布、怪物、Shiyu 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -970,7 +987,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布、怪物文件或索引。
+            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布、怪物、Shiyu 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1180,7 +1197,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine、怪物文件或索引。
+            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine、怪物、Shiyu 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1402,11 +1419,233 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 怪物上下文全程只请求怪物 JSON：不触达代理人、驱动盘、WEngine、邦布文件或索引。
+            // 怪物上下文全程只请求怪物 JSON：不触达代理人、驱动盘、WEngine、邦布、Shiyu 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
                 .every((path) => path.startsWith("monsters/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+    {
+      name: "shiyu",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "shiyu-data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (await (globalThis as any).fairy.loadShiyuData("61001")).id,
+              ),
+            ).toBe(61001)
+          },
+          sources: ["shiyu/61001/data.json"],
+        },
+        {
+          name: "shiyu-details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const details = await (
+                  globalThis as any
+                ).fairy.loadShiyuDetails("61001", "en")
+                return { locale: details.locale, id: String(details.id) }
+              }),
+            ).toEqual({ locale: "en", id: "61001" })
+          },
+          sources: ["shiyu/61001/details.en.json"],
+        },
+        {
+          name: "shiyu-details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadShiyuDetails(
+                      "61001",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["shiyu/61001/details.zh.json"],
+        },
+        {
+          name: "all-shiyu-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const api = (globalThis as any).fairy
+                const all = await api.loadAllShiyu("en")
+                const keys = Object.keys(all)
+                return {
+                  count: keys.length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (shiyu: any) => shiyu.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    keys.length === expected &&
+                    keys.every((id, position) => id === api.shiyuIds[position]),
+                  dataKeysSeparated: Object.values(all).every(
+                    (shiyu: any) =>
+                      Object.keys(shiyu).length === 2 &&
+                      "data" in shiyu &&
+                      "details" in shiyu,
+                  ),
+                }
+              }, shiyuCount),
+            ).toEqual({
+              count: shiyuCount,
+              locales: ["en"],
+              keysMatch: true,
+              dataKeysSeparated: true,
+            })
+          },
+          after: (requests) => {
+            const shiyuSources = requests
+              .filter((request) =>
+                ["shiyu-data", "shiyu-details-en", "all-shiyu-en"].includes(
+                  request.phase,
+                ),
+              )
+              .flatMap((request) => request.sources)
+            expect(shiyuSources).toHaveLength(shiyuCount * 2)
+            expect(new Set(shiyuSources).size).toBe(shiyuCount * 2)
+            expect(
+              shiyuSources.every(
+                (path) =>
+                  path.startsWith("shiyu/") &&
+                  (path.endsWith("/data.json") ||
+                    path.endsWith("/details.en.json")),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "direct-subpath",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (id) => {
+                const data = await (globalThis as any).fairyDirectShiyu.data()
+                const zh = await (globalThis as any).fairyDirectShiyu.zh()
+                if (String(data.default.id) !== id)
+                  throw new Error("direct shiyu data id mismatch")
+                if (String(zh.default.id) !== id || zh.default.locale !== "zh")
+                  throw new Error("direct shiyu details mismatch")
+                return { id: data.default.id, locale: zh.default.locale }
+              }, directShiyuId),
+            ).toEqual({ id: Number(directShiyuId), locale: "zh" })
+          },
+          after: (requests) => {
+            const directSources = requests
+              .filter((request) => request.phase === "direct-subpath")
+              .flatMap((request) => request.sources)
+            expect(directSources).toContain(
+              `shiyu/${directShiyuId}/details.zh.json`,
+            )
+            expect(
+              directSources.every(
+                (path) =>
+                  path === `shiyu/${directShiyuId}/data.json` ||
+                  path === `shiyu/${directShiyuId}/details.zh.json`,
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "shiyu-repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadShiyuData("61001")
+              one.priority = -1
+              if ((await api.loadShiyuData("61001")).priority === -1)
+                throw new Error("shared object")
+              const details = await api.loadShiyuDetails("61001", "zh")
+              const stageKey = Object.keys(details.zone)[0]
+              details.zone[stageKey].stageNum = -1
+              details.name = "browser mutation"
+              const reread = await api.loadShiyuDetails("61001", "zh")
+              if (reread.zone[stageKey].stageNum === -1)
+                throw new Error("shared zone")
+              if (reread.name === "browser mutation")
+                throw new Error("shared details")
+              if ((await api.loadShiyuData("061001")) !== undefined)
+                throw new Error("zero-padded id accepted")
+              if ((await api.loadShiyuData("Tyrfing")) !== undefined)
+                throw new Error("other category name accepted")
+              try {
+                await api.loadAllShiyu("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadShiyuDetails("61001")
+                throw new Error("missing locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadShiyuData(61001)
+                throw new Error("numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 其余类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("agent numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadDriveDiscData(31000)
+                throw new Error("drive disc numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadWEngineData(12001)
+                throw new Error("w-engine numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadBangbooData(53001)
+                throw new Error("bangboo numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadMonsterData(10000)
+                throw new Error("monster numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // Shiyu 上下文全程只请求 Shiyu JSON：不触达代理人、驱动盘、WEngine、邦布、怪物文件或索引。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => path.startsWith("shiyu/")),
             ).toBe(true)
           },
         },

@@ -6,11 +6,13 @@
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/1`）、`w-engines`（规则 `nanoka-w-engine-reference/1`）、`bangboos`（规则
-`nanoka-bangboo-reference/1`）与 `monsters`（规则 `nanoka-monster-reference/1`）。驱动盘单实体规则与实现状态见
+`nanoka-bangboo-reference/1`）、`monsters`（规则 `nanoka-monster-reference/1`）与 `shiyu`（规则
+`nanoka-shiyu-reference/1`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)，WEngine 单实体规则与实现状态见
 [WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)，Bangboo 单实体规则与实现状态见
 [Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference1)，Monster 单实体规则与实现状态见
-[Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference1)。
+[Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference1)，Shiyu 单实体规则与实现状态见
+[Shiyu 单实体实现规则](#shiyu-单实体实现规则-nanoka-shiyu-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -981,6 +983,74 @@ Monster 名称在类内大量重名（本地 3.1 的占位名 `OfficialName_` �
    字符串保留，占位名称与类内重名是合法来源值；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。
 
+### Shiyu 单实体实现规则 `nanoka-shiyu-reference/1`
+
+来源说明见 [Nanoka Shiyu](../nanoka/shiyu.md)：上游实体 `shiyu`，整合类别登记名为 `shiyu`，
+类型与函数统一使用 `Shiyu` 命名。一条记录表示一个空洞深潜区域（稳定节点、剧变节点等）及其全部关卡阶段；
+评级目标语义解释、时间换算、parent/child 闭合校验、Monster 引用闭合校验、definitions 或 core 映射不属于本规则。
+Shiyu 名称在类内大量重名（本地 3.1 的剧变节点类中英文同名记录各 56 条），名称不作为公开身份，
+公开读取以[来源 ID 为身份](consumption.md)；本层仍按字符串保留名称，不做非空或类内唯一检查。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-shiyu.ts) `integrateShiyu` 接受与
+`integrateAgent` 等前序类别相同的输入形态 `{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[Shiyu 类型](../../../packages/data/src/integration/shiyu-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[Shiyu 结构登记](../../../packages/data/src/integration/shiyu-schema.ts)。
+
+字段归属（第一列为来源拼写，后两列为转换后的字段名）：
+
+| 来源字段         | `data.json`                                  | `details.{locale}.json`                 |
+| ---------------- | -------------------------------------------- | --------------------------------------- |
+| `id`             | 数值 Shiyu ID                                | 同值身份副本                            |
+| `priority`       | `priority` 严格公共字段                      | 无重复载荷                              |
+| `begin_time`     | `beginTime` 条件公共字段，见下               | 单语言独有时保留 `beginTime` 原值       |
+| `end_time`       | `endTime` 条件公共字段，见下                 | 单语言独有时保留 `endTime` 原值         |
+| `name`           | 无                                           | 当前语言原文                            |
+| `zone`           | 无；完整留在各语言，不拆分为跨语言公共关卡图 | 完整关卡结构，登记结构字段转换拼写      |
+| 派生 `locale`    | 无                                           | 输入语言标识                            |
+| 索引中的实体记录 | 不覆盖到详情                                 | 完整保存在 `sourceRecord`，不修改原 key |
+
+`priority` 是严格公共字段：每个语言都必须提供，跨语言完整值必须一致，冲突即失败。`begin_time`/`end_time`
+是条件公共字段：只在所有输入语言都提供且完整值一致时提取到 data；全部语言缺失时不生成字段（本地 3.1 有
+2 条常驻记录）；任一语言缺失时该字段完整留在提供的语言；各语言都提供却值不同仍按共享冲突失败。时间保持
+原始字符串，不转换时间戳、不猜测时区；索引记录中的 `begin`/`end`/`live_begin`/`live_end` 是独立来源，
+完整保留在 `sourceRecord`，不与详情时间字段互相回退。
+
+`zone` 完整留在各语言 details：阶段身份由 `zone` 的来源 key 决定，不能由 `stage_num` 或详情 ID 推导；
+`stage_num` 不要求全局唯一（本地 3.1 有 8 个序号在多条记录内重复使用），也不作为身份。阶段条目登记
+`name`、`stage_num` → `stageNum`、`monster_level` → `monsterLevel`、`layer_buff` → `layerBuff`、`child`、
+`layer_room` → `layerRoom`、`goal_type` → `goalType` 与四个评级目标阈值（`ss_rank_goal` → `ssRankGoal` 等）；
+`child` 是子阶段 ID 数组，保留来源顺序与原始数值，不执行闭合校验。房间条目登记 `monster_icon` →
+`monsterIcon`、`monster_list` → `monsterList`、`monster_weakness` → `monsterWeakness`、`waves_num` →
+`wavesNum`；encounter 条目登记 `id`、`name`、`image`、`element`、`stats`。`monster_list` 外层 key 不是
+Monster ID，引用身份来自条目自身的 `id`；encounter 的名称、图片、弱点与关卡数值（含浮点原值）全部保留，
+不能替换成纯外键。Monster 引用与同版本 Monster 索引的核对属于真实验收报告，不在本层强制闭合，
+也不加入运行时跨类别读取。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`name`、`priority`、`zone`；登记字段按登记表核对类型，
+   `id` 必须为安全整数且规范十进制形式与 `entityId` 一致。`begin_time`/`end_time` 可选，提供时必须是
+   string。阶段、房间、增益与 encounter 条目各自登记必需成员；未登记的成员原样保留并进入维护诊断。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. 来源字段与登记输出名冲突（如同时存在 `begin_time` 与 `beginTime`、`stage_num` 与 `stageNum`、
+   `monster_list` 与 `monsterList`）时失败，不覆盖、不合并；来源 `locale` 与派生辅助字段重名时同样失败。
+5. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.1 `shiyu.json` 的 59 条记录为
+   `sort`、`en`、`ja`、`ko`、`zh` 与轮换记录的 `begin`、`end`、`live_begin`、`live_end`（57 条轮换与
+   2 条常驻）。登记只用于识别未知字段：不要求这些字段存在、不校验其类型，`sourceRecord` 仍按原 key、
+   原值完整保留。未知顶层字段按来源 key 的代码单元顺序生成 `locale: "index"` 的维护诊断，未知容器内部
+   不递归推断字段身份；索引诊断先于语言诊断输出。
+6. 未登记字段原样保留：详情未知字段留在对应语言并进入维护诊断；`zone` 各层内部的未知成员随本语言结构
+   保留。
+7. 空字符串、零、负值、空数组、空字典、数组顺序、浮点数值与显示格式按来源保留；已登记字段仍须满足其
+   明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `ShiyuIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+   字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
+   [消费契约](consumption.md)以来源 ID 为身份。
+
 ### 离线全量构建的共用能力
 
 全量构建入口是第 7.1 节的 `buildIntegratedSnapshot`（实现见下节）；它按已接入类别登记表处理全部类别，
@@ -1080,11 +1150,12 @@ fairy-integrated-snapshot-<独占后缀>/
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
 当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）、`drive-discs`（来源实体
 `equipment`，规则 `nanoka-drive-disc-reference/1`）、`w-engines`（来源实体 `weapon`，规则
-`nanoka-w-engine-reference/1`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`）
-与 `monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/1`），
+`nanoka-w-engine-reference/1`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`）、
+`monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/1`）与 `shiyu`（来源实体 `shiyu`，规则
+`nanoka-shiyu-reference/1`），
 代理人复用既有 `integrateAgent`、驱动盘复用既有
 `integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`、
-怪物复用既有 `integrateMonster`，
+怪物复用既有 `integrateMonster`、Shiyu 复用既有 `integrateShiyu`，
 成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
 可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
 验证与历史复验只要求静态契约。
@@ -1123,7 +1194,7 @@ fairy-integrated-snapshot-<独占后缀>/
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
 `generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents`、
-`drive-discs`、`w-engines`、`bangboos` 与 `monsters`。
+`drive-discs`、`w-engines`、`bangboos`、`monsters` 与 `shiyu`。
 从仓库根目录执行：
 
 ```bash
@@ -1375,6 +1446,47 @@ package.json 增加怪物 data/zh/en JSON 子路径，并提交五类别真实�
 - `pnpm check`（类型、data 880 项常规测试与 1 项打包验收、打包解包离线安装与按包名消费，解包 1555 个 JSON、
   17,523,115 字节）、真实 Chromium 的 Vite 开发/生产消费（五类场景，跨类别零串读，生产分块 1556）、
   `verify:nanoka:current` 全部通过；`git diff --check` 无输出。
+- 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567（`available` 仍含 3.1），本任务
+  明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
+  [共享来源规范](../nanoka/source.md#分发复核记录)。
+
+### Shiyu 生产类别接入验收
+
+2026-09-19，基线 `2b94c0882123ebc5ff97d5f41cbfee5d2a8ed504`（任务分支 `codex/shiyu-integration`），
+实现 `shiyu`（来源实体 `shiyu`，规则 `nanoka-shiyu-reference/1`）登记到生产类别登记表，
+package.json 增加 Shiyu data/zh/en JSON 子路径，并提交六类别真实快照。Shiyu 名称在类内大量重名
+（本地 3.1 的剧变节点类中英文同名记录各 56 条），公开身份是来源索引顶层 ID 的规范十进制字符串：
+根入口新增 `ShiyuId` 字面量 union、冻结 `shiyuIds` 列表与 `loadShiyuData`、`loadShiyuDetails`、
+`loadAllShiyu` 三个按 ID 读取的函数，与 Monster 的按 ID 契约一致；既有名称 API 与名称校验保持不变。
+
+真实 3.1 验收（本机 macOS arm64、Node 24、raw 为只读输入，不联网覆盖缓存、不升级来源版本）：
+
+- 修改登记前先按持锁协议执行 `verify:nanoka:current integrated`：`verified: true`；既有 1042 项来源输入
+  与实际 raw 字节的 SHA-256 全部一致；登记前的全部 1555 个制品文件摘要另存仓库外备份。
+- 登记 Shiyu 后执行 `generate:integrated raw/nanoka 3.1 integrated`：`committed`；shiyu 新增 59 名成员、
+  177 个文件；agents 58 名成员/174 个文件、drive-discs 30 名成员/90 个文件、w-engines 95 名成员/285 个
+  文件、bangboos 42 名成员/126 个文件与 monsters 293 名成员/879 个文件结论均为 `unchanged`，仅 index.json
+  改写；全制品 1732 个文件（1731 个实体文件与索引）、1161 项来源输入、复用 1554 个既有实体文件。
+- 重复执行同一命令：`unchanged`，复用 1731 个实体文件、改变 0 个、移除 0 个。仓库外备份逐文件比对：
+  除 index.json 外的既有 1554 个实体文件字节不变。
+- 独立核对脚本（不导入生产代码）执行 65 项聚合检查，覆盖 59 名成员与 118 份语言详情：索引外壳与六个
+  类别块、成员集合与来源索引 key 严格一致、全部 1161 项输入资源摘要与 raw 实际字节、data/zh/en 路径与
+  实际字节摘要、逐成员 `sourceRecord` 与 raw 索引记录 JSON 值相等、身份与 `locale`、字段归属
+  （data 只含 id/priority 与条件时间字段、details 只含 id/locale/name/zone）、`beginTime`/`endTime` 只在
+  57 条轮换记录出现（2 条常驻记录无时间字段且不补值）、按登记拼写逆向合并后与 raw 详情 JSON 值相等的
+  完整往返还原，以及维护报告中 59 个成员的未知字段诊断均为 0；全部通过。
+- Monster 引用验收：`zone` 全部 encounter 的 141 个去重引用 ID 与同版本 Monster 索引
+  （`entities.monsters.memberIds`，293 名成员）逐一核对，全部闭合；该结论只进入验收报告，
+  不升级为运行时强制图关系契约。`stage_num` 有 8 个序号在多条记录内重复使用，按来源保留且不作为身份。
+- 合成验收（不读取真实 raw）覆盖：Shiyu 纯整合 19 项（双语拆分与独立测试侧还原、阶段身份由 zone 来源
+  key 决定且 `stage_num` 允许重复、常驻记录无时间字段、条件时间字段三种状态与冲突失败、encounter 外层
+  key 与引用身份分离、`monster_list` 完整保留、索引独立、未知字段诊断与确定顺序、公共冲突、身份/类型/
+  语言/改名冲突/辅助字段重名与保真边界、对象 key 排列无关、显式语言子集、空值与特殊自有属性还原）、
+  类型正反例、发布目录按 memberIds 生成 ID union、更新报告六类别归因、消费 API 按 ID 读取边界、
+  JSON 子路径、打包解包与离线安装。
+- `pnpm check`（类型、data 903 项常规测试与 1 项打包验收、core 1,423 项测试，打包解包离线安装与按包名消费，
+  解包 1732 个 JSON、22,511,620 字节）、真实 Chromium 的 Vite 开发/生产消费（六类场景，跨类别零串读，
+  生产分块 1733）、`verify:nanoka:current` 全部通过；`git diff --check` 无输出。
 - 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567（`available` 仍含 3.1），本任务
   明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
   [共享来源规范](../nanoka/source.md#分发复核记录)。
