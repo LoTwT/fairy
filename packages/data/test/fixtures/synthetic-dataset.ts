@@ -15,6 +15,7 @@ import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
 import { monsterInput } from "./monster-source.ts"
 import { shiyuInput } from "./shiyu-source.ts"
 import { bossInput } from "./boss-source.ts"
+import { simulInput, simulSecondInput } from "./simul-source.ts"
 
 /** v2 外壳的格式标记；合成测试用它构造需要显式迁移的旧制品。 */
 export const legacyV2Format = "fairy-nanoka-integrated/v2"
@@ -49,6 +50,12 @@ export const syntheticShiyuIds = ["970001", "970002"] as const
  */
 export const syntheticBossIds = ["980001", "980002"] as const
 
+/**
+ * 生产登记表默认使用的合成 Simul 成员；details.id 按成员改写，索引记录与语言详情复用同一真实结构 fixture。
+ * Simul 无顶层 name，公开身份是来源 ID；第二个成员使用空字符串 endTime 与空 record。
+ */
+export const syntheticSimulIds = ["990001", "990002"] as const
+
 async function writeJson(path: string, value: unknown) {
   await mkdir(dirname(path), { recursive: true })
   await writeFile(path, JSON.stringify(value))
@@ -60,10 +67,10 @@ async function writeJson(path: string, value: unknown) {
  * 代理人使用 agent-source fixture，驱动盘使用真实结构的 drive-disc-source fixture，
  * WEngine 使用真实结构的 w-engine-source fixture，邦布使用真实结构的 bangboo-source fixture，
  * 怪物使用真实结构的 monster-source fixture，Shiyu 使用真实结构的 shiyu-source fixture，
- * Boss 使用真实结构的 boss-source fixture，合成第二类别使用 snapshot-entities fixture；
- * 都不读取真实 raw。
+ * Boss 使用真实结构的 boss-source fixture，Simul 使用真实结构的 simul-source fixture，
+ * 合成第二类别使用 snapshot-entities fixture；都不读取真实 raw。
  * 驱动盘与 widgets 都来自 equipment 资源，不能同时写入：同一输入文件会被后者覆盖。
- * widgets 用例使用独立的测试登记表，因此默认不写驱动盘、WEngine、邦布、怪物、Shiyu 与 Boss 输入。
+ * widgets 用例使用独立的测试登记表，因此默认不写驱动盘、WEngine、邦布、怪物、Shiyu、Boss 与 Simul 输入。
  */
 export async function writeSyntheticRaw(options: {
   rawRoot: string
@@ -81,6 +88,9 @@ export async function writeSyntheticRaw(options: {
   shiyuIds?: readonly string[]
   /** 真实 Boss 结构的 boss 输入；默认写入生产登记表所需的合成成员，传入空数组显式省略。 */
   bossIds?: readonly string[]
+
+  /** 真实 Simul 结构的 simul 输入；默认写入生产登记表所需的合成成员，传入空数组显式省略。 */
+  simulIds?: readonly string[]
   /** 合成第二类别（widgets）的 equipment 输入；仅供显式测试登记表使用。 */
   widgetIds?: readonly string[]
 }) {
@@ -226,6 +236,27 @@ export async function writeSyntheticRaw(options: {
       for (const locale of input.detailLocales)
         await writeJson(join(root, locale, "boss", `${id}.json`), {
           ...input.details[locale],
+          id: Number(id),
+        })
+  }
+  const simulIds =
+    options.simulIds ?? (widgetIds.length ? [] : syntheticSimulIds)
+  if (simulIds.length) {
+    const first = simulInput()
+    const second = simulSecondInput()
+    await writeJson(
+      join(root, "simul.json"),
+      Object.fromEntries(
+        simulIds.map((id) => [
+          id,
+          id === "990002" ? second.sourceRecord : first.sourceRecord,
+        ]),
+      ),
+    )
+    for (const id of simulIds)
+      for (const locale of first.detailLocales)
+        await writeJson(join(root, locale, "simul", `${id}.json`), {
+          ...(id === "990002" ? second : first).details[locale],
           id: Number(id),
         })
   }

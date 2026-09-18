@@ -21,6 +21,22 @@ import type {
 } from "./integration/monster-types.ts"
 import type { ShiyuData, ShiyuDetails } from "./integration/shiyu-types.ts"
 import type { BossData, BossDetails } from "./integration/boss-types.ts"
+export type {
+  SimulAdjustEntry,
+  SimulData,
+  SimulDetails,
+  SimulBuff,
+  SimulEncounter,
+  SimulLayer,
+  SimulNode,
+  SimulRecordEntry,
+  SimulRoom,
+  SimulStoryChoice,
+  SimulStoryEventGroup,
+  SimulStoryPage,
+  SimulBattle,
+} from "./integration/simul-types.ts"
+import type { SimulData, SimulDetails } from "./integration/simul-types.ts"
 import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
 import {
   agentNames,
@@ -41,6 +57,8 @@ import {
   shiyuLoaders,
   bossIds,
   bossLoaders,
+  simulIds,
+  simulLoaders,
   indexLoader,
 } from "../.generated/catalog.ts"
 import type {
@@ -51,6 +69,7 @@ import type {
   MonsterId,
   ShiyuId,
   BossId,
+  SimulId,
 } from "../.generated/catalog.ts"
 
 /** 正式字段类型：实体结构、文件引用、来源身份与多实体完整制品索引。 */
@@ -139,6 +158,7 @@ export type {
   MonsterId,
   ShiyuId,
   BossId,
+  SimulId,
 } from "../.generated/catalog.ts"
 export {
   agentNames,
@@ -148,6 +168,7 @@ export {
   monsterIds,
   shiyuIds,
   bossIds,
+  simulIds,
 } from "../.generated/catalog.ts"
 
 /** 指定语言的完整代理人资料；公共与本地化字段分别保留，不合并。 */
@@ -206,6 +227,14 @@ export interface LocalizedBoss {
   details: BossDetails
 }
 
+/** 一个 Simul 模拟战的公共资料与指定语言详情；两个对象独立保留，不合并同名字段。 */
+export interface LocalizedSimul {
+  /** 原有公共资料结构。 */
+  data: SimulData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: SimulDetails
+}
+
 function assertName(name: unknown): asserts name is string {
   if (typeof name !== "string") throw new TypeError("name must be a string")
 }
@@ -219,6 +248,10 @@ function assertShiyuId(id: unknown): asserts id is string {
 }
 
 function assertBossId(id: unknown): asserts id is string {
+  if (typeof id !== "string") throw new TypeError("id must be a string")
+}
+
+function assertSimulId(id: unknown): asserts id is string {
   if (typeof id !== "string") throw new TypeError("id must be a string")
 }
 
@@ -563,4 +596,51 @@ export async function loadAllBosses(
       }),
     ),
   ) as Record<BossId, LocalizedBoss>
+}
+
+/**
+ * 精确来源 ID 对应的 Simul 模拟战公共资料；ID 是规范十进制字符串，不 trim、不转换数值、
+ * 不解析科学计数法或补零。未登记字符串返回 undefined，非字符串以 TypeError 拒绝。
+ * 不加载索引、详情或其他类别，每次返回独立对象树。
+ */
+export async function loadSimulData(
+  id: SimulId,
+): Promise<SimulData | undefined> {
+  assertSimulId(id)
+  const loaders = Object.hasOwn(simulLoaders, id) ? simulLoaders[id] : undefined
+  return loaders === undefined
+    ? undefined
+    : structuredClone(await loaders.data())
+}
+
+/** 只读取指定 Simul 模拟战显式 zh/en 详情，无语言回退；未登记 ID 返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
+export async function loadSimulDetails(
+  id: SimulId,
+  locale: DetailLocale,
+): Promise<SimulDetails | undefined> {
+  assertLocale(locale)
+  assertSimulId(id)
+  const loaders = Object.hasOwn(simulLoaders, id) ? simulLoaders[id] : undefined
+  return loaders === undefined
+    ? undefined
+    : structuredClone(await loaders[locale]())
+}
+
+/** 显式加载全部 Simul 模拟战公共资料和指定语言详情，以来源 ID 为 key；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllSimul(
+  locale: DetailLocale,
+): Promise<Record<SimulId, LocalizedSimul>> {
+  assertLocale(locale)
+  return Object.fromEntries(
+    await Promise.all(
+      simulIds.map(async (id) => {
+        const loaders = simulLoaders[id]!
+        const [data, details] = await Promise.all([
+          loaders.data(),
+          loaders[locale](),
+        ])
+        return [id, structuredClone({ data, details })]
+      }),
+    ),
+  ) as Record<SimulId, LocalizedSimul>
 }

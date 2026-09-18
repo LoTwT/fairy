@@ -166,6 +166,7 @@ describe("packed package", () => {
       "drive-discs",
       "monsters",
       "shiyu",
+      "simul",
       "w-engines",
     ])
     const expectedJsonCount =
@@ -250,6 +251,7 @@ describe("packed package", () => {
     const expectedMonsterIds = index.entities["monsters"].memberIds
     const expectedShiyuIds = index.entities["shiyu"].memberIds
     const expectedBossIds = index.entities["boss"].memberIds
+    const expectedSimulIds = index.entities["simul"].memberIds
     expect(
       JSON.parse(
         runNode(
@@ -258,7 +260,7 @@ describe("packed package", () => {
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
-assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails"].sort())
+assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails"].sort())
 const index = await api.loadIndex()
 assert.deepEqual(index, JSON.parse(readFileSync(new URL(import.meta.resolve("@randomplay/data/integrated/index.json")), "utf8")))
 assert(Object.isFrozen(api.agentNames))
@@ -268,6 +270,7 @@ assert(Object.isFrozen(api.bangbooNames))
 assert(Object.isFrozen(api.monsterIds))
 assert(Object.isFrozen(api.shiyuIds))
 assert(Object.isFrozen(api.bossIds))
+assert(Object.isFrozen(api.simulIds))
 const all = await api.loadAllAgents("zh")
 for (const name of api.agentNames) {
   const data = await api.loadAgentData(name)
@@ -474,7 +477,38 @@ assert.equal(await api.loadBossDetails("unknown boss", "en"), undefined)
 await assert.rejects(api.loadBossData(69001), TypeError)
 await assert.rejects(api.loadBossDetails("69001"), TypeError)
 await assert.rejects(api.loadAllBosses("zh-CN"), TypeError)
-console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames, boss: [...api.bossIds], driveDiscs: api.driveDiscNames, monsters: [...api.monsterIds], shiyu: [...api.shiyuIds], wEngines: api.wEngineNames }))
+// Simul 读取 API：以来源 ID 为身份，逐成员与包内 data/zh/en JSON 比对，子路径直读与 API 值一致。
+const simulIds = index.entities["simul"].memberIds
+assert(api.simulIds.length === simulIds.length)
+assert.deepEqual([...api.simulIds], simulIds)
+const allSimul = await api.loadAllSimul("zh")
+for (const id of api.simulIds) {
+  const data = await api.loadSimulData(id)
+  const zh = await api.loadSimulDetails(id, "zh")
+  const en = await api.loadSimulDetails(id, "en")
+  assert.equal(String(data.id), id)
+  assert.equal(String(zh.id), id)
+  assert.equal(zh.locale, "zh")
+  assert.equal(en.locale, "en")
+  assert.deepEqual(allSimul[id], { data, details: zh })
+  assert.deepEqual(Object.keys(allSimul[id]), ["data", "details"])
+  for (const [file, value] of [["data.json", data], ["details.zh.json", zh], ["details.en.json", en]]) {
+    const direct = await import("@randomplay/data/integrated/simul/" + data.id + "/" + file, { with: { type: "json" } })
+    assert.deepEqual(value, direct.default)
+  }
+  data.endTime = "modified"
+  assert.notDeepEqual(await api.loadSimulData(id), data)
+  zh.record = { modified: true }
+  assert.notDeepEqual(await api.loadSimulDetails(id, "zh"), zh)
+}
+assert(api.simulIds.includes("101"))
+assert.equal(String((await api.loadSimulData("101")).id), "101")
+assert.equal(await api.loadSimulData("0101"), undefined)
+assert.equal(await api.loadSimulDetails("unknown simul", "en"), undefined)
+await assert.rejects(api.loadSimulData(101), TypeError)
+await assert.rejects(api.loadSimulDetails("101"), TypeError)
+await assert.rejects(api.loadAllSimul("zh-CN"), TypeError)
+console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames, boss: [...api.bossIds], driveDiscs: api.driveDiscNames, monsters: [...api.monsterIds], shiyu: [...api.shiyuIds], simul: [...api.simulIds], wEngines: api.wEngineNames }))
 `,
         ),
       ),
@@ -482,6 +516,7 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
       agents: expectedNames,
       bangboos: expectedBangbooNames,
       boss: expectedBossIds,
+      simul: expectedSimulIds,
       driveDiscs: expectedDriveDiscNames,
       monsters: expectedMonsterIds,
       shiyu: expectedShiyuIds,
@@ -494,8 +529,9 @@ import rawBangbooData from "@randomplay/data/integrated/bangboos/53001/data.json
 import rawMonsterData from "@randomplay/data/integrated/monsters/10000/data.json" with { type: "json" }
 import rawShiyuData from "@randomplay/data/integrated/shiyu/61001/data.json" with { type: "json" }
 import rawBossData from "@randomplay/data/integrated/boss/69001/data.json" with { type: "json" }
-import { agentNames, bangbooNames, bossIds, driveDiscNames, monsterIds, shiyuIds, wEngineNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadBangbooData, loadBangbooDetails, loadAllBangboos, loadBossData, loadBossDetails, loadAllBosses, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadMonsterData, loadMonsterDetails, loadAllMonsters, loadShiyuData, loadShiyuDetails, loadAllShiyu, loadWEngineData, loadWEngineDetails, loadAllWEngines } from "@randomplay/data"
-import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale, BangbooName, BangbooData, BangbooDetails, LocalizedBangboo, BossId, BossData, BossDetails, LocalizedBoss, DriveDiscName, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, MonsterId, MonsterData, MonsterDetails, LocalizedMonster, ShiyuId, ShiyuData, ShiyuDetails, LocalizedShiyu, WEngineName, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
+import rawSimulData from "@randomplay/data/integrated/simul/101/data.json" with { type: "json" }
+import { agentNames, bangbooNames, bossIds, simulIds, driveDiscNames, monsterIds, shiyuIds, wEngineNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadBangbooData, loadBangbooDetails, loadAllBangboos, loadBossData, loadBossDetails, loadAllBosses, loadSimulData, loadSimulDetails, loadAllSimul, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadMonsterData, loadMonsterDetails, loadAllMonsters, loadShiyuData, loadShiyuDetails, loadAllShiyu, loadWEngineData, loadWEngineDetails, loadAllWEngines } from "@randomplay/data"
+import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale, BangbooName, BangbooData, BangbooDetails, LocalizedBangboo, BossId, BossData, BossDetails, LocalizedBoss, SimulId, SimulData, SimulDetails, LocalizedSimul, DriveDiscName, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, MonsterId, MonsterData, MonsterDetails, LocalizedMonster, ShiyuId, ShiyuData, ShiyuDetails, LocalizedShiyu, WEngineName, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
 const numericSourceId: number = rawData.id
 const numericDriveDiscId: number = rawDriveDiscData.id
 const numericWEngineId: number = rawWEngineData.id
@@ -503,6 +539,7 @@ const numericBangbooId: number = rawBangbooData.id
 const numericMonsterId: number = rawMonsterData.id
 const numericShiyuId: number = rawShiyuData.id
 const numericBossId: number = rawBossData.id
+const numericSimulId: number = rawSimulData.id
 const name: AgentName = "Astra Yao"
 const punctuated: AgentName = "Soldier 0 - Anby"
 const driveDiscName: DriveDiscName = "Woodpecker Electro"
@@ -520,6 +557,9 @@ const shiyuIdentityList: readonly ShiyuId[] = shiyuIds
 const bossId: BossId = "69001"
 const adjacentBossId: BossId = "69002"
 const bossIdentityList: readonly BossId[] = bossIds
+const simulId: SimulId = "101"
+const adjacentSimulId: SimulId = "102"
+const simulIdentityList: readonly SimulId[] = simulIds
 const names: readonly AgentName[] = agentNames
 const discNames: readonly DriveDiscName[] = driveDiscNames
 const engineNames: readonly WEngineName[] = wEngineNames
@@ -533,6 +573,9 @@ const allShiyu: Promise<Record<ShiyuId, LocalizedShiyu>> = loadAllShiyu("en")
 const bossData: Promise<BossData | undefined> = loadBossData(bossId)
 const bossDetail: Promise<BossDetails | undefined> = loadBossDetails(adjacentBossId, "zh")
 const allBosses: Promise<Record<BossId, LocalizedBoss>> = loadAllBosses("en")
+const simulData: Promise<SimulData | undefined> = loadSimulData(simulId)
+const simulDetail: Promise<SimulDetails | undefined> = loadSimulDetails(adjacentSimulId, "zh")
+const allSimul: Promise<Record<SimulId, LocalizedSimul>> = loadAllSimul("en")
 const index: Promise<IntegratedSnapshotIndex> = loadIndex()
 const data: Promise<AgentData | undefined> = loadAgentData(name)
 const detail: Promise<AgentDetails | undefined> = loadAgentDetails(punctuated, "zh")
@@ -553,6 +596,7 @@ function acceptsBangbooName(value: BangbooName, locale: DetailLocale) { return l
 function acceptsMonsterId(value: MonsterId, locale: DetailLocale) { return loadMonsterDetails(value, locale) }
 function acceptsShiyuId(value: ShiyuId, locale: DetailLocale) { return loadShiyuDetails(value, locale) }
 function acceptsBossId(value: BossId, locale: DetailLocale) { return loadBossDetails(value, locale) }
+function acceptsSimulId(value: SimulId, locale: DetailLocale) { return loadSimulDetails(value, locale) }
 // @ts-expect-error exact literal union, no arbitrary string
 const wrong: AgentName = "AstraYao"
 // @ts-expect-error exact drive disc literal union
@@ -567,6 +611,8 @@ const wrongMonsterId: MonsterId = "010000"
 const wrongShiyuId: ShiyuId = "061001"
 // @ts-expect-error exact boss ID literal union; zero padding is not a canonical ID
 const wrongBossId: BossId = "069001"
+// @ts-expect-error exact simul ID literal union; zero padding is not a canonical ID
+const wrongSimulId: SimulId = "0101"
 // @ts-expect-error arbitrary strings must be narrowed by the caller
 loadAgentData("unknown" as string)
 // @ts-expect-error arbitrary strings must be narrowed by the caller for drive discs
@@ -581,6 +627,8 @@ loadMonsterData("unknown" as string)
 loadShiyuData("unknown" as string)
 // @ts-expect-error arbitrary strings must be narrowed by the caller for boss
 loadBossData("unknown" as string)
+// @ts-expect-error arbitrary strings must be narrowed by the caller for simul
+loadSimulData("unknown" as string)
 // @ts-expect-error misspelling
 loadAgentDetails("astra yao", "en")
 // @ts-expect-error drive disc misspelling without space
@@ -595,6 +643,8 @@ loadMonsterDetails("1e4", "en")
 loadShiyuDetails("061001", "en")
 // @ts-expect-error misspelled boss ID with zero padding
 loadBossDetails("069001", "en")
+// @ts-expect-error misspelled simul ID with zero padding
+loadSimulDetails("0101", "en")
 // @ts-expect-error numeric IDs are not names
 loadAgentData(1311)
 // @ts-expect-error numeric drive disc IDs are not names
@@ -609,6 +659,8 @@ loadMonsterData(10000)
 loadShiyuData(61001)
 // @ts-expect-error numeric boss IDs are not accepted without canonical string form
 loadBossData(69001)
+// @ts-expect-error numeric simul IDs are not accepted without canonical string form
+loadSimulData(101)
 // @ts-expect-error locale required
 loadAgentDetails(name)
 // @ts-expect-error drive disc locale required
@@ -623,6 +675,8 @@ loadMonsterDetails(monsterId)
 loadShiyuDetails(shiyuId)
 // @ts-expect-error boss locale required
 loadBossDetails(bossId)
+// @ts-expect-error simul locale required
+loadSimulDetails(simulId)
 // @ts-expect-error locale has no aliases
 loadAllAgents("zh-CN")
 // @ts-expect-error drive disc locale has no aliases
@@ -637,6 +691,8 @@ loadAllMonsters("zh-CN")
 loadAllShiyu("zh-CN")
 // @ts-expect-error boss locale has no aliases
 loadAllBosses("zh-CN")
+// @ts-expect-error simul locale has no aliases
+loadAllSimul("zh-CN")
 // @ts-expect-error frozen readonly list
 agentNames.push(name)
 // @ts-expect-error readonly element
@@ -665,7 +721,11 @@ shiyuIds[0] = shiyuId
 bossIds.push(bossId)
 // @ts-expect-error readonly boss ID element
 bossIds[0] = bossId
-void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, numericMonsterId, numericShiyuId, numericBossId, names, discNames, engineNames, booNames, monsterIdentityList, shiyuIdentityList, bossIdentityList, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, bangbooData, bangbooDetail, allBangboos, monsterData, monsterDetail, allMonsters, shiyuData, shiyuDetail, allShiyu, bossData, bossDetail, allBosses, acceptsName, acceptsDriveDiscName, acceptsWEngineName, acceptsBangbooName, acceptsMonsterId, acceptsShiyuId, acceptsBossId, wrong, wrongDisc, wrongEngine, wrongBangboo, wrongMonsterId, wrongShiyuId, wrongBossId]
+// @ts-expect-error frozen readonly simul ID list
+simulIds.push(simulId)
+// @ts-expect-error readonly simul ID element
+simulIds[0] = simulId
+void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, numericMonsterId, numericShiyuId, numericBossId, numericSimulId, names, discNames, engineNames, booNames, monsterIdentityList, shiyuIdentityList, bossIdentityList, simulIdentityList, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, bangbooData, bangbooDetail, allBangboos, monsterData, monsterDetail, allMonsters, shiyuData, shiyuDetail, allShiyu, bossData, bossDetail, allBosses, simulData, simulDetail, allSimul, acceptsName, acceptsDriveDiscName, acceptsWEngineName, acceptsBangbooName, acceptsMonsterId, acceptsShiyuId, acceptsBossId, acceptsSimulId, wrong, wrongDisc, wrongEngine, wrongBangboo, wrongMonsterId, wrongShiyuId, wrongBossId, wrongSimulId]
 `
     const typeFile = join(consumerDirectory, "smoke.ts")
     writeFileSync(typeFile, typeSource)
@@ -780,6 +840,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
     const monsterCount = index.entities["monsters"].memberIds.length
     const shiyuCount = index.entities["shiyu"].memberIds.length
     const bossCount = index.entities["boss"].memberIds.length
+    const simulCount = index.entities["simul"].memberIds.length
     // 各行：损坏文件、必须拒绝的调用、以及跨类别隔离断言（其余类别的单体与全量读取仍成功）。
     for (const [path, call, isolation] of [
       [
@@ -857,6 +918,16 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         'api.loadBossDetails("69001", "zh")',
         'await assert.rejects(api.loadAllBosses("zh")); await api.loadAllBosses("en"); assert.equal((await api.loadAgentDetails("Astra Yao", "zh")).locale, "zh"); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh"); await api.loadAllWEngines("zh"); await api.loadAllBangboos("zh"); await api.loadAllMonsters("zh"); await api.loadAllShiyu("zh")',
       ],
+      [
+        "simul/101/data.json",
+        'api.loadSimulData("101")',
+        'await assert.rejects(api.loadAllSimul("en")); await assert.rejects(api.loadAllSimul("zh")); assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); await api.loadAllAgents("en"); await api.loadAllDriveDiscs("en"); await api.loadAllWEngines("en"); await api.loadAllBangboos("en"); await api.loadAllMonsters("en"); await api.loadAllShiyu("en"); await api.loadAllBosses("en")',
+      ],
+      [
+        "simul/101/details.zh.json",
+        'api.loadSimulDetails("101", "zh")',
+        'await assert.rejects(api.loadAllSimul("zh")); await api.loadAllSimul("en"); assert.equal((await api.loadAgentDetails("Astra Yao", "zh")).locale, "zh"); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh"); await api.loadAllWEngines("zh"); await api.loadAllBangboos("zh"); await api.loadAllMonsters("zh"); await api.loadAllShiyu("zh"); await api.loadAllBosses("zh")',
+      ],
     ]) {
       const fullPath = join(brokenPackage, "dist/integrated", path)
       const bytes = readFileSync(fullPath)
@@ -865,7 +936,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         else writeFileSync(fullPath, "{")
         runNode(
           brokenConsumer,
-          `import assert from "node:assert/strict"; import * as api from "@randomplay/data"; assert.equal(api.agentNames.length, ${agentCount}); assert.equal(api.driveDiscNames.length, ${driveDiscCount}); assert.equal(api.wEngineNames.length, ${wEngineCount}); assert.equal(api.bangbooNames.length, ${bangbooCount}); assert.equal(api.monsterIds.length, ${monsterCount}); assert.equal(api.shiyuIds.length, ${shiyuCount}); assert.equal(api.bossIds.length, ${bossCount}); await assert.rejects(${call}); ${isolation}`,
+          `import assert from "node:assert/strict"; import * as api from "@randomplay/data"; assert.equal(api.agentNames.length, ${agentCount}); assert.equal(api.driveDiscNames.length, ${driveDiscCount}); assert.equal(api.wEngineNames.length, ${wEngineCount}); assert.equal(api.bangbooNames.length, ${bangbooCount}); assert.equal(api.monsterIds.length, ${monsterCount}); assert.equal(api.shiyuIds.length, ${shiyuCount}); assert.equal(api.bossIds.length, ${bossCount}); assert.equal(api.simulIds.length, ${simulCount}); await assert.rejects(${call}); ${isolation}`,
         )
         writeFileSync(fullPath, bytes)
       }
@@ -874,7 +945,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
     rmSync(join(brokenPackage, "dist/integrated"), { recursive: true })
     runNode(
       brokenConsumer,
-      'import assert from "node:assert/strict"; import { agentNames, bangbooNames, bossIds, driveDiscNames, monsterIds, shiyuIds, wEngineNames, loadAgentData, loadBangbooData, loadBossData, loadDriveDiscData, loadMonsterData, loadShiyuData, loadWEngineData } from "@randomplay/data"; assert.equal(agentNames.length, ' +
+      'import assert from "node:assert/strict"; import { agentNames, bangbooNames, bossIds, simulIds, driveDiscNames, monsterIds, shiyuIds, wEngineNames, loadAgentData, loadBangbooData, loadBossData, loadSimulData, loadDriveDiscData, loadMonsterData, loadShiyuData, loadWEngineData } from "@randomplay/data"; assert.equal(agentNames.length, ' +
         agentCount +
         "); assert.equal(driveDiscNames.length, " +
         driveDiscCount +
@@ -888,7 +959,9 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         shiyuCount +
         "); assert.equal(bossIds.length, " +
         bossCount +
-        '); await assert.rejects(loadAgentData("Astra Yao")); await assert.rejects(loadDriveDiscData("Woodpecker Electro")); await assert.rejects(loadWEngineData("[Lunar] Pleniluna")); await assert.rejects(loadBangbooData("Penguinboo")); await assert.rejects(loadMonsterData("10000")); await assert.rejects(loadShiyuData("61001")); await assert.rejects(loadBossData("69001"))',
+        "); assert.equal(simulIds.length, " +
+        simulCount +
+        '); await assert.rejects(loadAgentData("Astra Yao")); await assert.rejects(loadDriveDiscData("Woodpecker Electro")); await assert.rejects(loadWEngineData("[Lunar] Pleniluna")); await assert.rejects(loadBangbooData("Penguinboo")); await assert.rejects(loadMonsterData("10000")); await assert.rejects(loadShiyuData("61001")); await assert.rejects(loadBossData("69001")); await assert.rejects(loadSimulData("101"))',
     )
     // Exercise both build boundaries with the real tsdown process in this private checkout.
     for (const intervention of ["source-change", "dist-corruption"]) {
@@ -1004,6 +1077,14 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
             ),
           ),
         ).toEqual(expectedBossIds)
+        expect(
+          JSON.parse(
+            runNode(
+              cleanPackage,
+              'import { simulIds, loadSimulDetails } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(simulIds.map(async id => String((await loadSimulDetails(id, "en")).id)))))',
+            ),
+          ),
+        ).toEqual(expectedSimulIds)
       } else {
         expect(build.status).toBe(1)
         expect(build.stdout + build.stderr).toContain("摘要不一致")

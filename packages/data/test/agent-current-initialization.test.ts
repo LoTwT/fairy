@@ -66,7 +66,7 @@ describe("explicit generation initialization", () => {
       "类别集合与本次期望的已接入类别不一致",
     )
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
-    // 按协议删除旧制品后重新生成：从 raw 完整重建当前七类别数据集。
+    // 按协议删除旧制品后重新生成：从 raw 完整重建当前八类别数据集。
     await fs.rm(input.targetDirectory, { recursive: true })
     expect((await generateCurrentDataset(input)).outcome).toBe("committed")
     const index = (await clean(input)).index
@@ -77,6 +77,7 @@ describe("explicit generation initialization", () => {
       "drive-discs",
       "monsters",
       "shiyu",
+      "simul",
       "w-engines",
     ])
   }, 30000)
@@ -268,7 +269,7 @@ describe("explicit generation initialization", () => {
     expect(result).toMatchObject({
       outcome: "committed",
       changedEntityFiles: 1,
-      reusedEntityFiles: 41,
+      reusedEntityFiles: 47,
     })
     await clean(input)
   }, 20000)

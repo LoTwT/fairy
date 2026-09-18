@@ -21471,6 +21471,107 @@
       },
       "rulesVersion": "nanoka-shiyu-reference/1"
     },
+    "simul": {
+      "complete": true,
+      "detailLocales": ["zh", "en"],
+      "inputs": [
+        {
+          "resource": "zzz/3.1/simul.json",
+          "sha256": "e6846e88eb19c04f83210976497f1909c00a562d2bda686b45b4001729e33cca"
+        },
+        {
+          "resource": "zzz/3.1/zh/simul/101.json",
+          "sha256": "e0bd3f91dc5c61587e8071856bde5fe175f72789ae0ea4d6128348f85ce5a36a"
+        },
+        {
+          "resource": "zzz/3.1/en/simul/101.json",
+          "sha256": "f1b063f987b1c0b551a78cf8bf33bc885863011bb6324c4ec20ef9a1d7eba55c"
+        },
+        {
+          "resource": "zzz/3.1/zh/simul/102.json",
+          "sha256": "9ee5a0ee70fe6a737a7db38839cb59256277cb0c7a0a1d14e1c98249267315de"
+        },
+        {
+          "resource": "zzz/3.1/en/simul/102.json",
+          "sha256": "cae0e984eb98414fb14215b3ccbc4da0e56aa08f40083f8e0190997e774d7969"
+        },
+        {
+          "resource": "zzz/3.1/zh/simul/201.json",
+          "sha256": "dc4b0f92041320898b32bbf4be7f55c5cb3bf32c2e9588c4a786070dc63741c8"
+        },
+        {
+          "resource": "zzz/3.1/en/simul/201.json",
+          "sha256": "80250d333ad2f887b197345aafd530c57ee779f1b7a13a6644f9360b51a2a150"
+        }
+      ],
+      "memberIds": ["101", "102", "201"],
+      "members": {
+        "101": {
+          "files": {
+            "data": {
+              "path": "simul/101/data.json",
+              "sha256": "54f71c5cbfd4e2f70eda99db2e4b7e64d1a33073857bc562b403e9de654dd46b"
+            },
+            "details": {
+              "en": {
+                "path": "simul/101/details.en.json",
+                "sha256": "e0c838f8335c4fc3a73d863003d090acc5f56739373fa0abb6e51f3c274dc33d"
+              },
+              "zh": {
+                "path": "simul/101/details.zh.json",
+                "sha256": "7aaf5f9723d4b5075c465c591a5c9c2e00d4ff1a1f637a4a830c8cc96f0b4716"
+              }
+            }
+          },
+          "sourceRecord": {
+            "end": ""
+          }
+        },
+        "102": {
+          "files": {
+            "data": {
+              "path": "simul/102/data.json",
+              "sha256": "ad40524c58c830fbc3e2105e40311361dfc2ba8c504b46bd9e1f2c5e1f303384"
+            },
+            "details": {
+              "en": {
+                "path": "simul/102/details.en.json",
+                "sha256": "3bf396d5947d5d9191ea2553e63fde97e3af5e20f467b0feec27e0bceb3da98a"
+              },
+              "zh": {
+                "path": "simul/102/details.zh.json",
+                "sha256": "caafc6183f9df50c24e28927d5cbd27fb9b0c8579e58879df9642b78042f79ff"
+              }
+            }
+          },
+          "sourceRecord": {
+            "end": "2026-02-05 03:59:59"
+          }
+        },
+        "201": {
+          "files": {
+            "data": {
+              "path": "simul/201/data.json",
+              "sha256": "14f2cab32c5ce29b1769f81205c9f37b90a82117a42049f05fe54e6c12baaa93"
+            },
+            "details": {
+              "en": {
+                "path": "simul/201/details.en.json",
+                "sha256": "968d389f387fb5022f6545fb3bcaeaa185cae14701a92f7215ffe085e6bf9abd"
+              },
+              "zh": {
+                "path": "simul/201/details.zh.json",
+                "sha256": "833719bcc1c517fb0bfe4f26eb82f5665e159295dce2d1d47f29fe0bd7783cf9"
+              }
+            }
+          },
+          "sourceRecord": {
+            "end": "2030-02-05 03:59:59"
+          }
+        }
+      },
+      "rulesVersion": "nanoka-simul-reference/1"
+    },
     "w-engines": {
       "complete": true,
       "detailLocales": ["zh", "en"],

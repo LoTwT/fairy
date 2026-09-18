@@ -7,13 +7,15 @@
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/1`）、`w-engines`（规则 `nanoka-w-engine-reference/1`）、`bangboos`（规则
 `nanoka-bangboo-reference/1`）、`monsters`（规则 `nanoka-monster-reference/1`）、`shiyu`（规则
-`nanoka-shiyu-reference/1`）与 `boss`（规则 `nanoka-boss-reference/1`）。驱动盘单实体规则与实现状态见
+`nanoka-shiyu-reference/1`）、`boss`（规则 `nanoka-boss-reference/1`）与 `simul`（规则
+`nanoka-simul-reference/1`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)，WEngine 单实体规则与实现状态见
 [WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)，Bangboo 单实体规则与实现状态见
 [Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference1)，Monster 单实体规则与实现状态见
 [Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference1)，Shiyu 单实体规则与实现状态见
 [Shiyu 单实体实现规则](#shiyu-单实体实现规则-nanoka-shiyu-reference1)，Boss 单实体规则与实现状态见
-[Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference1)。
+[Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference1)，Simul 单实体规则与实现状态见
+[Simul 单实体实现规则](#simul-单实体实现规则-nanoka-simul-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -1126,6 +1128,71 @@ encounter 完整留在各语言详情：encounter 的名称、图片、弱点与
    字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。旧结构变体使用合成 fixture 验证，不切换当前真实数据版本。
 
+### Simul 单实体实现规则 `nanoka-simul-reference/1`
+
+来源说明见 [Nanoka Simul](../nanoka/simul.md)：上游实体 `simul`，整合类别登记名为 `simul`，
+类型与函数统一使用 `Simul` 命名。一条记录表示一个模拟战条目；评级目标语义解释、时间换算、图连通性、
+解锁目标闭合、Monster 引用闭合、Boss/Simul 共享配置一致性校验、definitions 或 core 映射不属于本规则。
+Simul 详情没有顶层 name（本地 3.1 三条记录均无该字段），公开身份是
+[来源 ID](consumption.md)，本层不要求也不补造顶层名称。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-simul.ts) `integrateSimul` 接受与
+`integrateAgent` 等前序类别相同的输入形态 `{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[Simul 类型](../../../packages/data/src/integration/simul-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[Simul 结构登记](../../../packages/data/src/integration/simul-schema.ts)。
+
+字段归属（第一列为来源拼写，后两列为转换后的字段名）：
+
+| 来源字段         | `data.json`                                            | `details.{locale}.json`                 |
+| ---------------- | ------------------------------------------------------ | --------------------------------------- |
+| `id`             | 数值 Simul ID                                          | 同值身份副本                            |
+| `end_time`       | `endTime` 严格公共字段，原始字符串；空字符串是合法原值 | 无重复载荷                              |
+| `boss_adjust`    | `bossAdjust` 完整共享块                                | 无重复载荷                              |
+| `record`         | 无                                                     | 当前语言的完整结局记录字典              |
+| `node`           | 无                                                     | 当前语言的完整剧情节点字典              |
+| 派生 `locale`    | 无                                                     | 输入语言标识                            |
+| 索引中的实体记录 | 不覆盖到详情                                           | 完整保存在 `sourceRecord`，不修改原 key |
+
+`endTime` 是严格公共字段：每个语言都必须提供，跨语言完整值必须一致，冲突即失败；空字符串是合法原值
+（本地 3.1 成员 101 两语言均为空串），不转换时间戳、不猜测时区。`bossAdjust` 是完整共享块：包括未知成员
+在内进行跨语言比较，负值与比例原样保留；与 Boss 类别的同名配置分别保留，跨类别不比较、不去重、不建立
+加载依赖（同版本同语言的相交配置核对属于真实验收报告）。索引记录中的 `end` 是独立来源，完整保留在
+`sourceRecord`，不与详情 `end_time` 互相回退或要求相等。
+
+`record` 与 `node` 完整留在各语言详情：不拆分跨语言公共结构、不执行图重构或跨语言数组对齐。
+`node` 内的 `story_event`（事件 key → 页面字典）、`battle`（战斗字典）、页面 `choice` 数组与解锁列表
+`next_page`/`next_node_unlock`/`next_record_unlock` 逐层登记：三个解锁列表指向不同目标集合，不混用；
+`prev_node` 保留为不透明来源值，不要求落在当前 node 字典中；不要求图连通、无环或所有非零引用都落在
+猜测的集合中。battle 的 `layer`、`layer_room` 与各级 buff（`layer_buff`、`selectable_buff`、
+`*_rank_score_layer_buff`）字典结构与 Boss 的同名结构同源但按类别独立登记；encounter 的名称、图片、弱点
+与关卡数值全部保留，不能替换成纯外键；`monster_list` 外层 key 不是 Monster ID，引用身份来自条目自身的
+`id`。空 `record`、空 `battle`、空 `story_event` 与空房间字典是合法原值，来源顺序全部保持原样。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`end_time`、`boss_adjust`、`record` 与 `node`；登记字段按登记表核对
+   类型，`id` 必须为安全整数且规范十进制形式与 `entityId` 一致。node、页面、选项、battle、layer、房间、
+   buff、encounter 与 `boss_adjust` 条目各自登记必需成员；未登记的成员原样保留并进入维护诊断。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. 来源字段与登记输出名冲突（如同时存在 `end_time` 与 `endTime`、`boss_adjust` 与 `bossAdjust`、
+   `prev_node` 与 `prevNode`、`next_page` 与 `nextPage`、`selectable_buff` 与 `selectableBuff`）时失败，
+   不覆盖、不合并；来源 `locale` 与派生辅助字段重名时同样失败。
+5. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.1 `simul.json` 的 3 条记录为
+   轮换结束时间 `end`（可为空字符串）。登记只用于识别未知字段：不要求这些字段存在、不校验其类型，
+   `sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的代码单元顺序生成 `locale: "index"`
+   的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
+6. 未登记字段原样保留：详情未知字段留在对应语言并进入维护诊断；`boss_adjust` 与 `record`/`node` 各层
+   内部的未知成员随本语言结构保留，`boss_adjust` 的未知成员参与跨语言完整值比较。
+7. 空字符串、零、负值、空数组、空字典、浮点数值、数组顺序与显示格式按来源保留；已登记字段仍须满足其
+   明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `SimulIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。Simul 无顶层
+   name，本规则不生成名称 catalog 或名称唯一性约束，公开读取按
+   [消费契约](consumption.md)以来源 ID 为身份。
+
 ### 离线全量构建的共用能力
 
 全量构建入口是第 7.1 节的 `buildIntegratedSnapshot`（实现见下节）；它按已接入类别登记表处理全部类别，
@@ -1269,7 +1336,7 @@ fairy-integrated-snapshot-<独占后缀>/
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
 `generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents`、
-`drive-discs`、`w-engines`、`bangboos`、`monsters`、`shiyu` 与 `boss`。
+`drive-discs`、`w-engines`、`bangboos`、`monsters`、`shiyu`、`boss` 与 `simul`。
 从仓库根目录执行：
 
 ```bash
@@ -1607,6 +1674,54 @@ package.json 增加 Boss data/zh/en JSON 子路径，并提交七类别真实快
 - `pnpm check`（类型、data 926 项常规测试与 1 项打包验收、core 1,423 项测试，打包解包离线安装与按包名
   消费，解包 1864 个 JSON、24,258,611 字节，npm 包 2,212,302 字节）、真实 Chromium 的 Vite 开发/生产消费
   （七类场景含 boss 场景，跨类别零串读，生产分块 1865）、`verify:nanoka:current`（`verified: true`）
+  全部通过；`git diff --check` 无输出。
+- 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567（`available` 仍含 3.1），本任务
+  明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
+  [共享来源规范](../nanoka/source.md#分发复核记录)。
+
+### Simul 生产类别接入验收
+
+2026-09-19，基线 `e4d731022a09a083073554f06576de02628b58cb`（任务分支 `codex/simul-integration`），
+实现 `simul`（来源实体 `simul`，规则 `nanoka-simul-reference/1`）登记到生产类别登记表，
+package.json 增加 Simul data/zh/en JSON 子路径，并提交八类别真实快照。Simul 详情没有顶层 name
+（本地 3.1 三条记录 101、102、201 均无该字段），公开身份是来源索引顶层 ID 的规范十进制字符串：
+根入口新增 `SimulId` 字面量 union、冻结 `simulIds` 列表与 `loadSimulData`、`loadSimulDetails`、
+`loadAllSimul` 三个按 ID 读取的函数，与 Monster、Shiyu、Boss 的按 ID 契约一致；既有名称 API 与名称校验
+保持不变。
+
+真实 3.1 验收（本机 macOS arm64、Node 24、raw 为只读输入，不联网覆盖缓存、不升级来源版本）：
+
+- 修改登记前先按持锁协议执行 `verify:nanoka:current integrated`：`verified: true`；登记前的全部
+  1864 个制品文件摘要另存仓库外备份。
+- 登记 Simul 后执行 `generate:integrated raw/nanoka 3.1 integrated`：`committed`；simul 新增 3 名成员、
+  9 个文件；agents 58 名成员/174 个文件、drive-discs 30 名成员/90 个文件、w-engines 95 名成员/285 个
+  文件、bangboos 42 名成员/126 个文件、monsters 293 名成员/879 个文件、shiyu 59 名成员/177 个文件与
+  boss 44 名成员/132 个文件结论均为 `unchanged`，仅 index.json 改写；全制品 1873 个文件（1872 个实体
+  文件与索引）、1256 项索引来源输入、复用 1863 个既有实体文件。
+- 重复执行同一命令：`unchanged`，复用 1872 个实体文件、改变 0 个、移除 0 个。仓库外备份逐文件比对：
+  除 index.json 外新增 9 个文件全部位于 `simul/`，既有 1863 个实体文件字节不变、无删除。
+- 独立核对脚本（不导入生产代码）执行：索引外壳与八个类别块、simul 成员集合与来源索引 key 严格一致、
+  逐成员 `sourceRecord` 与 raw 索引记录 JSON 值相等、严格公共 `endTime`（含成员 101 的合法空字符串）与
+  完整共享块 `bossAdjust` 跨语言一致且映射进 data.json、`record` 与 `node` 按登记拼写逆向转换后与 raw
+  详情 JSON 值相等的完整往返还原（3 名成员 × 2 语言，节点数 4/8/8），以及维护报告中 3 个成员的未知字段
+  诊断均为 0；数值比较遵循 JS number 语义（`0.0` 与 `0` 相等，与既有制品一致）；全部通过。
+- Monster 引用验收：battle 级与 layer 级 `layer_room.*.monster_list` 全部 encounter 的 82 个去重引用 ID
+  与同版本 Monster 索引（293 名成员）逐一核对，全部闭合；该结论只进入验收报告，不升级为运行时强制图
+  关系契约。
+- Boss/Simul 相交配置验收：同版本同语言下 Simul 的 `boss_adjust`（158 个调整 key）与 Boss（成员 69001）
+  完全相交且逐条相等，zh/en 两种语言一致；integrated 制品两侧副本亦逐字节等价。该结论只进入验收报告：
+  两类别分别保留各自副本，不跨类别去重、覆盖或建立加载依赖，差异（本次为零）不通过选边、补齐或覆盖
+  原值消除。
+- 合成验收（不读取真实 raw）覆盖：Simul 纯整合 18 项（双语拆分与独立测试侧还原、空字符串 endTime 与
+  空 record 的合法保留、`bossAdjust` 完整共享块与未知成员冲突、`record`/`node` 完整留在各语言、
+  `next_page`/`next_node_unlock`/`next_record_unlock` 三种解锁目标集合分立且不做图闭合、`prev_node`
+  不透明保留、node/页面/选项/battle/layer/房间/增益/encounter/结局记录逐层登记与改名冲突、索引独立
+  与未知字段诊断确定顺序、身份/类型/语言/辅助字段重名与保真边界、对象 key 排列无关、显式语言子集、
+  空值与特殊自有属性还原）、类型正反例、发布目录按 memberIds 生成 ID union、更新报告八类别归因、
+  消费 API 按 ID 读取边界、JSON 子路径、打包解包与离线安装。
+- `pnpm check`（类型、data 947 项常规测试与 1 项打包验收、core 1,423 项测试，打包解包离线安装与按包名
+  消费，解包 1873 个 JSON、25,036,748 字节，npm 包 2,293,547 字节）、真实 Chromium 的 Vite 开发/生产消费
+  （九类场景含 simul 场景，跨类别零串读，生产分块 1874）、`verify:nanoka:current`（`verified: true`）
   全部通过；`git diff --check` 无输出。
 - 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567（`available` 仍含 3.1），本任务
   明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见

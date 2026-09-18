@@ -21,12 +21,14 @@ import {
   syntheticMonsterIds,
   syntheticShiyuIds,
   syntheticBossIds,
+  syntheticSimulIds,
 } from "./synthetic-dataset.ts"
 import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
 import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
 import { monsterInput } from "./monster-source.ts"
 import { shiyuInput } from "./shiyu-source.ts"
 import { bossInput } from "./boss-source.ts"
+import { simulInput, simulSecondInput } from "./simul-source.ts"
 
 /**
  * 合成双语制品；不同英文展示名、codeName 和索引名称用于捕获错误取值来源。
@@ -160,6 +162,25 @@ export async function publicationFixture(
     for (const locale of boss.detailLocales)
       await write(`${locale}/boss/${id}.json`, {
         ...boss.details[locale],
+        id: Number(id),
+      })
+  // 默认登记表包含 simul 类别：simul 输入使用真实 Simul 结构的合成成员；
+  // 公开身份是来源 ID，无顶层 name，不做任何名称校验。
+  const simulFirst = simulInput()
+  const simulSecond = simulSecondInput()
+  await write(
+    "simul.json",
+    Object.fromEntries(
+      syntheticSimulIds.map((id) => [
+        id,
+        id === "990002" ? simulSecond.sourceRecord : simulFirst.sourceRecord,
+      ]),
+    ),
+  )
+  for (const id of syntheticSimulIds)
+    for (const locale of simulFirst.detailLocales)
+      await write(`${locale}/simul/${id}.json`, {
+        ...(id === "990002" ? simulSecond : simulFirst).details[locale],
         id: Number(id),
       })
   const result = await buildIntegratedSnapshot({

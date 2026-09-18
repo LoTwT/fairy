@@ -53,6 +53,10 @@ export default defineConfig({
         test: {
           name: "integration",
           include: integrationTestFiles,
+          // 事务与发布链路的测试随生产登记表类别增多而变重；GitHub CI runner 比本机慢，
+          // 默认 5s 会在并行负载下偶发超时。为该层统一放宽到 30s，与本层既有用例
+          // 显式声明的 15s/20s/30s 超时同一量级；unit 层保持默认 5s。
+          testTimeout: 30_000,
         },
       },
       {
