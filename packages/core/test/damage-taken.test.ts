@@ -6,6 +6,7 @@ import {
   type DamageTakenFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("damageTakenFactor", () => {
   it("exposes its public identity and types", () => {
@@ -195,7 +196,7 @@ describe("damageTakenFactor", () => {
       expect(() => damageTakenFactor.calculate(input)).toThrow(TypeError)
     })
 
-    it.each([NaN, Infinity, -Infinity])(
+    it.each(nonFiniteFactorInputs)(
       "rejects the non-finite array member %s",
       (value) => {
         const input = {

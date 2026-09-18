@@ -6,6 +6,7 @@ import {
   type FormulaParams,
   type FormulaResult,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 interface ValueFormulaInput {
   readonly base: number
@@ -202,22 +203,19 @@ describe("defineFormula", () => {
     },
   )
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite value %s",
-    (value) => {
-      const formula = defineFormula<ValueFormulaInput>({
-        formulaId: "invalid-value",
-        calculate: () => ({
-          value,
-          factorResults: { base: 1, multiplier: 1 },
-        }),
-      })
+  it.each(nonFiniteFactorInputs)("rejects the non-finite value %s", (value) => {
+    const formula = defineFormula<ValueFormulaInput>({
+      formulaId: "invalid-value",
+      calculate: () => ({
+        value,
+        factorResults: { base: 1, multiplier: 1 },
+      }),
+    })
 
-      expect(() => formula.calculate({ base: 2, multiplier: 3 })).toThrow(
-        RangeError,
-      )
-    },
-  )
+    expect(() => formula.calculate({ base: 2, multiplier: 3 })).toThrow(
+      RangeError,
+    )
+  })
 
   it.each([0, -1, Number.MIN_VALUE, Number.MAX_VALUE])(
     "accepts the finite value and factor result %s",
@@ -257,7 +255,7 @@ describe("defineFormula", () => {
     },
   )
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite factor result %s",
     (factorResult) => {
       const formula = defineFormula<ValueFormulaInput>({

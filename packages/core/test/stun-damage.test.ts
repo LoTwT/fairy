@@ -6,6 +6,7 @@ import {
   type Factor,
   type StunDamageFactorInput,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("stunDamageFactor", () => {
   it("exposes its public identity and types", () => {
@@ -226,7 +227,7 @@ describe("stunDamageFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite base multiplier %s",
     (targetBaseStunDamageMultiplier) => {
       expect(() =>
@@ -271,7 +272,7 @@ describe("stunDamageFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite adjustment %s",
     (adjustment) => {
       expect(() =>

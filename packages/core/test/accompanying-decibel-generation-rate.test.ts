@@ -6,6 +6,7 @@ import {
   type AccompanyingDecibelGenerationRateFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("accompanyingDecibelGenerationRateFactor", () => {
   it("exposes its public identity and types", () => {
@@ -69,14 +70,11 @@ describe("accompanyingDecibelGenerationRateFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() =>
-        accompanyingDecibelGenerationRateFactor.calculate(input),
-      ).toThrow(RangeError)
-    },
-  )
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() =>
+      accompanyingDecibelGenerationRateFactor.calculate(input),
+    ).toThrow(RangeError)
+  })
 
   it.each([-Number.EPSILON, -1, -Number.MAX_VALUE])(
     "rejects the negative input %s",

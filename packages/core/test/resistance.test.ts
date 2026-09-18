@@ -6,6 +6,7 @@ import {
   type Factor,
   type ResistanceFactorInput,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("resistanceFactor", () => {
   it("exposes its public identity and types", () => {
@@ -177,7 +178,7 @@ describe("resistanceFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite target resistance %s",
     (targetResistance) => {
       expect(() =>
@@ -216,7 +217,7 @@ describe("resistanceFactor", () => {
       expect(() => resistanceFactor.calculate(input)).toThrow(TypeError)
     })
 
-    it.each([NaN, Infinity, -Infinity])(
+    it.each(nonFiniteFactorInputs)(
       "rejects the non-finite array member %s",
       (value) => {
         const input = {

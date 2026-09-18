@@ -33,7 +33,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "check": "pnpm typecheck && pnpm test && pnpm verify:pack",
+    "check": "pnpm prepare:consumer && pnpm typecheck:prepared && pnpm test:prepared && pnpm verify:pack",
     "fetch:nanoka": "node scripts/nanoka-source.ts fetch",
     "verify:nanoka:snapshot": "node scripts/verify-nanoka-snapshot.ts",
     "generate:integrated": "node --disable-warning=ExperimentalWarning scripts/current-nanoka-dataset.ts generate",
@@ -41,13 +41,17 @@
     "recover:nanoka:current": "node --disable-warning=ExperimentalWarning scripts/current-nanoka-dataset.ts recover",
     "migrate:nanoka:current": "node --disable-warning=ExperimentalWarning scripts/current-nanoka-dataset.ts migrate",
     "prepack": "pnpm build",
-    "test": "pnpm prepare:consumer && vitest run --exclude test/verify-package.test.ts --exclude test/verify-browser.test.ts",
-    "test:watch": "pnpm prepare:consumer && vitest --exclude test/verify-package.test.ts --exclude test/verify-browser.test.ts",
-    "test:coverage": "pnpm prepare:consumer && vitest run --coverage --exclude test/verify-package.test.ts --exclude test/verify-browser.test.ts",
-    "typecheck": "pnpm prepare:consumer && tsc --noEmit",
-    "verify:pack": "vitest run test/verify-package.test.ts",
+    "test": "pnpm prepare:consumer && pnpm test:prepared",
+    "test:prepared": "vitest run --project unit --project integration",
+    "test:fast": "pnpm prepare:consumer && vitest run --project unit",
+    "test:integration": "pnpm prepare:consumer && vitest run --project integration",
+    "test:watch": "pnpm prepare:consumer && vitest --project unit --project integration",
+    "test:coverage": "pnpm prepare:consumer && vitest run --coverage --project unit --project integration",
+    "typecheck": "pnpm prepare:consumer && pnpm typecheck:prepared",
+    "typecheck:prepared": "tsc --noEmit",
+    "verify:pack": "vitest run --project packaging test/verify-package.test.ts",
     "prepare:consumer": "node --disable-warning=ExperimentalWarning scripts/prepare-consumer-types.ts",
-    "verify:browser": "vitest run test/verify-browser.test.ts"
+    "verify:browser": "vitest run --project packaging test/verify-browser.test.ts"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

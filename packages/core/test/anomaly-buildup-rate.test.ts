@@ -6,6 +6,7 @@ import {
   type AnomalyBuildupRateFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("anomalyBuildupRateFactor", () => {
   it("exposes its public identity and types", () => {
@@ -103,14 +104,11 @@ describe("anomalyBuildupRateFactor", () => {
     expect(() => anomalyBuildupRateFactor.calculate(inputs)).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() => anomalyBuildupRateFactor.calculate([input])).toThrow(
-        RangeError,
-      )
-    },
-  )
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() => anomalyBuildupRateFactor.calculate([input])).toThrow(
+      RangeError,
+    )
+  })
 
   it.each([
     [Number.MAX_VALUE, Number.MAX_VALUE],

@@ -6,6 +6,10 @@ import {
   type EnergyGenerationRateFactorInput,
   type Factor,
 } from "../src/index.ts"
+import {
+  nonFiniteFactorInputs,
+  overflowingFactorInputs,
+} from "./fixtures/factor-input-cases.ts"
 
 describe("energyGenerationRateFactor", () => {
   it("exposes its public identity and types", () => {
@@ -102,21 +106,18 @@ describe("energyGenerationRateFactor", () => {
     )
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() => energyGenerationRateFactor.calculate([input])).toThrow(
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() => energyGenerationRateFactor.calculate([input])).toThrow(
+      RangeError,
+    )
+  })
+
+  it.each(overflowingFactorInputs)(
+    "rejects an input sum that overflows",
+    (...inputs) => {
+      expect(() => energyGenerationRateFactor.calculate(inputs)).toThrow(
         RangeError,
       )
     },
   )
-
-  it.each([
-    [Number.MAX_VALUE, Number.MAX_VALUE],
-    [-Number.MAX_VALUE, -Number.MAX_VALUE],
-  ])("rejects an input sum that overflows", (...inputs) => {
-    expect(() => energyGenerationRateFactor.calculate(inputs)).toThrow(
-      RangeError,
-    )
-  })
 })

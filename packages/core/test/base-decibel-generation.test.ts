@@ -5,6 +5,7 @@ import {
   type BaseDecibelGenerationFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("baseDecibelGenerationFactor", () => {
   it("exposes its public identity and types", () => {
@@ -45,14 +46,11 @@ describe("baseDecibelGenerationFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() => baseDecibelGenerationFactor.calculate(input)).toThrow(
-        RangeError,
-      )
-    },
-  )
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() => baseDecibelGenerationFactor.calculate(input)).toThrow(
+      RangeError,
+    )
+  })
 
   it("rejects a negative input", () => {
     expect(() => baseDecibelGenerationFactor.calculate(-1)).toThrow(RangeError)

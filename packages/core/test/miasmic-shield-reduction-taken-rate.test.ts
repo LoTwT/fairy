@@ -7,6 +7,10 @@ import {
   type Factor,
   type MiasmicShieldReductionTakenRateFactorInput,
 } from "../src/index.ts"
+import {
+  nonFiniteFactorInputs,
+  overflowingFactorInputs,
+} from "./fixtures/factor-input-cases.ts"
 
 describe("miasmicShieldReductionTakenRateFactor", () => {
   it("exposes its public identity and types", () => {
@@ -142,21 +146,18 @@ describe("miasmicShieldReductionTakenRateFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() =>
+      miasmicShieldReductionTakenRateFactor.calculate([input]),
+    ).toThrow(RangeError)
+  })
+
+  it.each(overflowingFactorInputs)(
+    "rejects an input sum that overflows",
+    (...inputs) => {
       expect(() =>
-        miasmicShieldReductionTakenRateFactor.calculate([input]),
+        miasmicShieldReductionTakenRateFactor.calculate(inputs),
       ).toThrow(RangeError)
     },
   )
-
-  it.each([
-    [Number.MAX_VALUE, Number.MAX_VALUE],
-    [-Number.MAX_VALUE, -Number.MAX_VALUE],
-  ])("rejects an input sum that overflows", (...inputs) => {
-    expect(() =>
-      miasmicShieldReductionTakenRateFactor.calculate(inputs),
-    ).toThrow(RangeError)
-  })
 })

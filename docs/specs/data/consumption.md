@@ -132,7 +132,12 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 ## 验收入口
 
-`pnpm --filter @randomplay/data check` 覆盖名称生成、类型、API、静态/受管理发布准备及实际打包解包、离线安装。
+`pnpm --filter @randomplay/data check` 覆盖名称生成、类型、API、静态/受管理发布准备及实际打包解包、离线安装；
+它在一次运行内只准备一次 `.generated/`，随后依次执行类型检查、常规测试与打包验收。
+常规测试按 `vitest.config.ts` 的 project 分层：`pnpm --filter @randomplay/data test:fast` 只运行不启动真实进程、
+真实格式化或制品构建的快速单元与 API 层，适合日常迭代；`pnpm --filter @randomplay/data test:integration` 运行事务、
+真实进程、真实格式化与发布链路；`test` 运行两层全部常规测试（含 watch/coverage）。分层只影响入口选择，
+不缩减 `check` 与 CI 的覆盖范围。
 `pnpm --filter @randomplay/data verify:browser` 对离线安装包进行真实 Chromium 的 Vite 开发/生产请求验收，
 输出 npm/解包字节数、初始与按需请求字节数、gzip 参考值和分块清单；gzip 是离线测量，不冒充服务器实际压缩传输量。
 浏览器验收需要本机 Playwright Chromium（首次运行 `pnpm --filter @randomplay/data exec playwright install chromium`）；测试使用合成 fixture，包与浏览器验收使用已跟踪的完整静态快照。

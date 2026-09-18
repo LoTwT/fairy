@@ -6,6 +6,7 @@ import {
   type AnomalyMasteryFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("anomalyMasteryFactor", () => {
   it("exposes its public identity and types", () => {
@@ -67,7 +68,7 @@ describe("anomalyMasteryFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite input %s before flooring and clamping",
     (input) => {
       expect(() => anomalyMasteryFactor.calculate(input)).toThrow(RangeError)

@@ -11,6 +11,7 @@ import {
   type DefenseFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 const LEVEL_BASES_BELOW_SIXTY = [
   50, 54, 58, 62, 66, 71, 76, 82, 88, 94, 100, 107, 114, 121, 129, 137, 145,
@@ -133,7 +134,7 @@ describe("defenseFactor", () => {
         expect(() => defenseFactor.calculate(input)).toThrow(TypeError)
       })
 
-      it.each([NaN, Infinity, -Infinity])(
+      it.each(nonFiniteFactorInputs)(
         "rejects the non-finite value %s",
         (value) => {
           const input = {
@@ -297,7 +298,7 @@ describe("calculateTargetBaseDefense", () => {
         expect(() => calculateTargetBaseDefense(params)).toThrow(TypeError)
       })
 
-      it.each([NaN, Infinity, -Infinity])(
+      it.each(nonFiniteFactorInputs)(
         "rejects the non-finite value %s",
         (value) => {
           const params = {
@@ -575,7 +576,7 @@ describe("calculateTargetEffectiveDefense", () => {
     expect(() => calculateTargetEffectiveDefense(params)).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite target base defense %s",
     (targetBaseDefense) => {
       expect(() =>

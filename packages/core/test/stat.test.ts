@@ -6,6 +6,7 @@ import {
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 interface StatCalculatorCase {
   readonly name: string
@@ -223,21 +224,21 @@ describe("stat calculation helpers", () => {
         expect(() => calculate(80, [], ["10"])).toThrow(TypeError)
       })
 
-      it.each([NaN, Infinity, -Infinity])(
+      it.each(nonFiniteFactorInputs)(
         "rejects the non-finite source stat %s",
         (sourceStat) => {
           expect(() => calculate(sourceStat, [], [])).toThrow(RangeError)
         },
       )
 
-      it.each([NaN, Infinity, -Infinity])(
+      it.each(nonFiniteFactorInputs)(
         "rejects the non-finite percentage adjustment %s",
         (adjustment) => {
           expect(() => calculate(80, [adjustment], [])).toThrow(RangeError)
         },
       )
 
-      it.each([NaN, Infinity, -Infinity])(
+      it.each(nonFiniteFactorInputs)(
         "rejects the non-finite fixed value adjustment %s",
         (adjustment) => {
           expect(() => calculate(80, [], [adjustment])).toThrow(RangeError)

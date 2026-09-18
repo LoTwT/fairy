@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from "vitest"
 import { calculateTotalDisplayedDamage } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("calculateTotalDisplayedDamage", () => {
   it("exposes its public function type", () => {
@@ -109,7 +110,7 @@ describe("calculateTotalDisplayedDamage", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite member %s",
     (value) => {
       expect(() => calculateTotalDisplayedDamage([value])).toThrow(RangeError)

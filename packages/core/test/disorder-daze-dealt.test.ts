@@ -6,6 +6,7 @@ import {
   type DisorderDazeDealtFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 describe("disorderDazeDealtFactor", () => {
   it("exposes its public identity and types", () => {
@@ -56,12 +57,9 @@ describe("disorderDazeDealtFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
-    "rejects the non-finite input %s",
-    (input) => {
-      expect(() => disorderDazeDealtFactor.calculate(input)).toThrow(RangeError)
-    },
-  )
+  it.each(nonFiniteFactorInputs)("rejects the non-finite input %s", (input) => {
+    expect(() => disorderDazeDealtFactor.calculate(input)).toThrow(RangeError)
+  })
 
   it.each([-Number.EPSILON, -1, 4.000000000000001, 5])(
     "rejects the out-of-range input %s",

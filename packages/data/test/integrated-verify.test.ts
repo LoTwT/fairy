@@ -2,7 +2,7 @@ import { createHash } from "node:crypto"
 import * as fs from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
-import { afterEach, describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import type { IntegratedSnapshotEntityProducer } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { nanokaAgentsSnapshotEntity } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
@@ -25,7 +25,14 @@ import {
  * v2 外壳（verifyNanokaAgentArtifact）仍在显式迁移与旧数据集复验中使用，v3 完整制品
  * （verifyIntegratedSnapshot）是新链条的验证器；两者都必须只按索引值、实际字节与文件集合判断，
  * 不把排版或序列化方式当作证据。全部输入为合成来源，不读取真实 raw 与 integrated，也不访问网络。
+ *
+ * 这些用例关注摘要、身份与文件集合等结构边界，不验证格式化本身：构建器仍走生产序列化、
+ * 摘要计算与完整复验，只是把 oxfmt 调用替换为确定性的空操作，避免每个 fixture 都启动格式化子进程。
+ * 真实 oxfmt 调用、格式化后数据保真与发布链路由 snapshot-build.test.ts 与打包验收继续覆盖。
  */
+vi.mock("../scripts/nanoka-integration/format.ts", () => ({
+  formatGeneratedJson: async () => {},
+}))
 
 const temporaryDirectories: string[] = []
 afterEach(async () => {

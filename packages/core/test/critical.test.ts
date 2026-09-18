@@ -6,6 +6,7 @@ import {
   type CriticalFactorInput,
   type Factor,
 } from "../src/index.ts"
+import { nonFiniteFactorInputs } from "./fixtures/factor-input-cases.ts"
 
 function createCriticalInput(
   criticalDamageContributions: readonly number[],
@@ -188,7 +189,7 @@ describe("criticalFactor", () => {
     expect(() => criticalFactor.calculate(input)).toThrow(TypeError)
   })
 
-  it.each([NaN, Infinity, -Infinity])(
+  it.each(nonFiniteFactorInputs)(
     "rejects the non-finite contribution %s",
     (contribution) => {
       expect(() =>

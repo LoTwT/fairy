@@ -13,6 +13,7 @@ import { tmpdir } from "node:os"
 import { dirname, join, relative, resolve } from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
+import { runDataCli } from "./fixtures/data-cli.ts"
 import { agentInput } from "./fixtures/agent-source.ts"
 import { driveDiscInput } from "./fixtures/drive-disc-source.ts"
 import { syntheticDriveDiscIds } from "./fixtures/synthetic-dataset.ts"
@@ -421,12 +422,14 @@ describe("offline agent package commands", () => {
     expect(await directoryBytes(second.artifactDirectory)).toEqual(before)
   })
 
-  for (const command of [generateCommand, verifyCommand]) {
+  for (const command of [generateCommand, verifyCommand] as const) {
     it.each(["--help", "-h"])(
       `${command} %s succeeds without file access`,
       async (help) => {
         const input = await fixture()
-        const result = runCommand(input, command, [help], true, true)
+        const result = runDataCli(command, [help], {
+          env: commandEnvironment(input, true),
+        })
         expect(result.status).toBe(0)
         expect(result.stderr).toBe("")
         expect(result.stdout).toContain(`用法：${command}`)
@@ -445,19 +448,17 @@ describe("offline agent package commands", () => {
           [...positionalArguments, help],
           [help, help],
         ]) {
-          const result = runCommand(
-            input,
-            command,
-            commandArguments,
-            true,
-            true,
-          )
+          const result = runDataCli(command, commandArguments, {
+            env: commandEnvironment(input, true),
+          })
           failure(result, "--help/-h 只能单独使用")
           expect(result.stderr).toContain(`用法：${command}`)
           expect(result.stderr).not.toContain("未知选项")
         }
         failure(
-          runCommand(input, command, [help, "--unknown"], true, true),
+          runDataCli(command, [help, "--unknown"], {
+            env: commandEnvironment(input, true),
+          }),
           "未知选项：--unknown",
         )
         expect(await readdir(input.temporaryParent)).toEqual([])
@@ -487,7 +488,9 @@ describe("offline agent package commands", () => {
       `${command} rejects invalid arguments %j before file access`,
       async (...commandArguments) => {
         const input = await fixture()
-        const result = runCommand(input, command, commandArguments, true, true)
+        const result = runDataCli(command, commandArguments, {
+          env: commandEnvironment(input, true),
+        })
         failure(
           result,
           commandArguments.some((argument) => argument.startsWith("-"))
