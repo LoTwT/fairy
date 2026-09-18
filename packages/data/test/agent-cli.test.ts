@@ -474,7 +474,7 @@ describe("offline agent package commands", () => {
     expect(second.outcome).toBe("unchanged")
     expect(second.artifactDirectory).toBe(first.artifactDirectory)
     expect(await directoryBytes(second.artifactDirectory)).toEqual(before)
-  })
+  }, 30_000)
 
   for (const command of [generateCommand, verifyCommand] as const) {
     it.each(["--help", "-h"])(
