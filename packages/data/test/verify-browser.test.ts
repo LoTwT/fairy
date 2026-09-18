@@ -57,6 +57,10 @@ it("consumes the offline-installed package in real Vite development and producti
       integratedIndex.entities["w-engines"].memberIds
     const wEngineCount = wEngineMemberIds.length
     const directWEngineId = wEngineMemberIds[1] ?? wEngineMemberIds[0]
+    const bangbooMemberIds: string[] =
+      integratedIndex.entities["bangboos"].memberIds
+    const bangbooCount = bangbooMemberIds.length
+    const directBangbooId = bangbooMemberIds[1] ?? bangbooMemberIds[0]
     // 构建模块图应包含两类导入表引用的全部 JSON：按已验证索引逐类别推导，不使用固定文件总数。
     const publishedEntities = integratedIndex.entities as Record<
       string,
@@ -88,6 +92,10 @@ globalThis.fairyDirectDriveDisc = {
 globalThis.fairyDirectWEngine = {
   data: () => import("@randomplay/data/integrated/w-engines/${directWEngineId}/data.json"),
   zh: () => import("@randomplay/data/integrated/w-engines/${directWEngineId}/details.zh.json"),
+}
+globalThis.fairyDirectBangboo = {
+  data: () => import("@randomplay/data/integrated/bangboos/${directBangbooId}/data.json"),
+  zh: () => import("@randomplay/data/integrated/bangboos/${directBangbooId}/details.zh.json"),
 }
 document.body.append("ready")
 `,
@@ -143,6 +151,8 @@ document.body.append("ready")
             directDiscId,
             wEngineCount,
             directWEngineId,
+            bangbooCount,
+            directBangbooId,
           })) {
             const context = await browser.newContext()
             const page = await context.newPage()
@@ -291,6 +301,8 @@ function defineScenarios(counts: {
   directDiscId: string
   wEngineCount: number
   directWEngineId: string
+  bangbooCount: number
+  directBangbooId: string
 }): Array<{ name: string; steps: ScenarioStep[] }> {
   const {
     agentCount,
@@ -298,6 +310,8 @@ function defineScenarios(counts: {
     directDiscId,
     wEngineCount,
     directWEngineId,
+    bangbooCount,
+    directBangbooId,
   } = counts
   async function checkNameCatalogs(page: Page) {
     const catalogs = await page.evaluate(() => {
@@ -306,16 +320,19 @@ function defineScenarios(counts: {
         agentNames: api.agentNames.length,
         driveDiscNames: api.driveDiscNames.length,
         wEngineNames: api.wEngineNames.length,
+        bangbooNames: api.bangbooNames.length,
         frozen:
           Object.isFrozen(api.agentNames) &&
           Object.isFrozen(api.driveDiscNames) &&
-          Object.isFrozen(api.wEngineNames),
+          Object.isFrozen(api.wEngineNames) &&
+          Object.isFrozen(api.bangbooNames),
       }
     })
     expect(catalogs).toEqual({
       agentNames: agentCount,
       driveDiscNames: driveDiscCount,
       wEngineNames: wEngineCount,
+      bangbooNames: bangbooCount,
       frozen: true,
     })
   }
@@ -483,18 +500,27 @@ function defineScenarios(counts: {
               }
               if ((await api.loadWEngineData("lunar pleniluna")) !== undefined)
                 throw new Error("w-engine inexact name")
+              try {
+                await api.loadBangbooData(53001)
+                throw new Error("bangboo numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              if ((await api.loadBangbooData("penguinboo")) !== undefined)
+                throw new Error("bangboo inexact name")
             })
           },
           sources: [],
           after: (requests) => {
-            // 代理人上下文全程不请求驱动盘或 WEngine JSON。
+            // 代理人上下文全程不请求驱动盘、WEngine 或邦布 JSON。
             expect(
               requests
                 .flatMap((request) => request.sources)
                 .every(
                   (path) =>
                     !path.startsWith("drive-discs/") &&
-                    !path.startsWith("w-engines/"),
+                    !path.startsWith("w-engines/") &&
+                    !path.startsWith("bangboos/"),
                 ),
             ).toBe(true)
           },
@@ -706,11 +732,19 @@ function defineScenarios(counts: {
               }
               if ((await api.loadWEngineData("lunar pleniluna")) !== undefined)
                 throw new Error("w-engine inexact name")
+              try {
+                await api.loadBangbooData(53001)
+                throw new Error("bangboo numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              if ((await api.loadBangbooData("penguinboo")) !== undefined)
+                throw new Error("bangboo inexact name")
             })
           },
           sources: [],
           after: (requests) => {
-            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine 文件或索引。
+            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -918,11 +952,221 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘文件或索引。
+            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
                 .every((path) => path.startsWith("w-engines/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+    {
+      name: "bangboos",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "bangboo-data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadBangbooData(
+                      "Penguinboo",
+                    )
+                  ).id,
+              ),
+            ).toBe(53001)
+          },
+          sources: ["bangboos/53001/data.json"],
+        },
+        {
+          name: "bangboo-details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const details = await (
+                  globalThis as any
+                ).fairy.loadBangbooDetails("Penguinboo", "en")
+                return { locale: details.locale, name: details.name }
+              }),
+            ).toEqual({ locale: "en", name: "Penguinboo" })
+          },
+          sources: ["bangboos/53001/details.en.json"],
+        },
+        {
+          name: "bangboo-details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadBangbooDetails(
+                      "Penguinboo",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["bangboos/53001/details.zh.json"],
+        },
+        {
+          name: "all-bangboos-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const api = (globalThis as any).fairy
+                const all = await api.loadAllBangboos("en")
+                const keys = Object.keys(all)
+                return {
+                  count: keys.length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (bangboo: any) => bangboo.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    keys.length === expected &&
+                    keys.every(
+                      (name, position) => name === api.bangbooNames[position],
+                    ),
+                  dataKeysSeparated: Object.values(all).every(
+                    (bangboo: any) =>
+                      Object.keys(bangboo).length === 2 &&
+                      "data" in bangboo &&
+                      "details" in bangboo,
+                  ),
+                }
+              }, bangbooCount),
+            ).toEqual({
+              count: bangbooCount,
+              locales: ["en"],
+              keysMatch: true,
+              dataKeysSeparated: true,
+            })
+          },
+          after: (requests) => {
+            const bangbooSources = requests
+              .filter((request) =>
+                [
+                  "bangboo-data",
+                  "bangboo-details-en",
+                  "all-bangboos-en",
+                ].includes(request.phase),
+              )
+              .flatMap((request) => request.sources)
+            expect(bangbooSources).toHaveLength(bangbooCount * 2)
+            expect(new Set(bangbooSources).size).toBe(bangbooCount * 2)
+            expect(
+              bangbooSources.every(
+                (path) =>
+                  path.startsWith("bangboos/") &&
+                  (path.endsWith("/data.json") ||
+                    path.endsWith("/details.en.json")),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "direct-subpath",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (id) => {
+                const data = await (globalThis as any).fairyDirectBangboo.data()
+                const zh = await (globalThis as any).fairyDirectBangboo.zh()
+                if (data.default.id !== Number(id))
+                  throw new Error("direct bangboo data id mismatch")
+                if (zh.default.id !== Number(id) || zh.default.locale !== "zh")
+                  throw new Error("direct bangboo details mismatch")
+                return { id: data.default.id, locale: zh.default.locale }
+              }, directBangbooId),
+            ).toEqual({ id: Number(directBangbooId), locale: "zh" })
+          },
+          after: (requests) => {
+            const directSources = requests
+              .filter((request) => request.phase === "direct-subpath")
+              .flatMap((request) => request.sources)
+            expect(directSources).toContain(
+              `bangboos/${directBangbooId}/details.zh.json`,
+            )
+            expect(
+              directSources.every(
+                (path) =>
+                  path === `bangboos/${directBangbooId}/data.json` ||
+                  path === `bangboos/${directBangbooId}/details.zh.json`,
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "bangboo-repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadBangbooData("Penguinboo")
+              one.stats.hpMax = -1
+              if ((await api.loadBangbooData("Penguinboo")).stats.hpMax === -1)
+                throw new Error("shared object")
+              const details = await api.loadBangbooDetails("Penguinboo", "zh")
+              details.desc = "browser mutation"
+              if (
+                (await api.loadBangbooDetails("Penguinboo", "zh")).desc ===
+                "browser mutation"
+              )
+                throw new Error("shared details")
+              if ((await api.loadBangbooData("penguinboo")) !== undefined)
+                throw new Error("inexact name")
+              if ((await api.loadBangbooData("53001")) !== undefined)
+                throw new Error("numeric id string accepted")
+              try {
+                await api.loadAllBangboos("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadBangbooDetails("Penguinboo")
+                throw new Error("missing locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 其余类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("agent numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadDriveDiscData(31000)
+                throw new Error("drive disc numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadWEngineData(12001)
+                throw new Error("w-engine numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine 文件或索引。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => path.startsWith("bangboos/")),
             ).toBe(true)
           },
         },

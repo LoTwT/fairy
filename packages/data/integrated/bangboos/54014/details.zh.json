@@ -1,0 +1,245 @@
+{
+  "codeName": "Agent Gulliver",
+  "desc": "开门！安全检查！",
+  "id": 54014,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "格列佛探员",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向前方进行3段穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "紧急行动",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[对空洞特别行动部第六课]</color>阵营的角色时触发：<color=#ffffff>[主动技]</color>和<color=#ffffff>[邦布连携技]</color>命中处于<color=#2EB6FF>[感电]</color>状态下的敌人时，造成的伤害提升30%；攻击处于非电属性的其他属性异常状态下的敌人时，累积的属性异常积蓄值提升60%。",
+          "name": "邦布突击队",
+          "param": "30%|60%",
+          "property": ["伤害提升", "属性异常积蓄值提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[对空洞特别行动部第六课]</color>阵营的角色时触发：<color=#ffffff>[主动技]</color>和<color=#ffffff>[邦布连携技]</color>命中处于<color=#2EB6FF>[感电]</color>状态下的敌人时，造成的伤害提升37%；攻击处于非电属性的其他属性异常状态下的敌人时，累积的属性异常积蓄值提升75%。",
+          "name": "邦布突击队",
+          "param": "37%|75%",
+          "property": ["伤害提升", "属性异常积蓄值提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[对空洞特别行动部第六课]</color>阵营的角色时触发：<color=#ffffff>[主动技]</color>和<color=#ffffff>[邦布连携技]</color>命中处于<color=#2EB6FF>[感电]</color>状态下的敌人时，造成的伤害提升45%；攻击处于非电属性的其他属性异常状态下的敌人时，累积的属性异常积蓄值提升90%。",
+          "name": "邦布突击队",
+          "param": "45%|90%",
+          "property": ["伤害提升", "属性异常积蓄值提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[对空洞特别行动部第六课]</color>阵营的角色时触发：<color=#ffffff>[主动技]</color>和<color=#ffffff>[邦布连携技]</color>命中处于<color=#2EB6FF>[感电]</color>状态下的敌人时，造成的伤害提升52%；攻击处于非电属性的其他属性异常状态下的敌人时，累积的属性异常积蓄值提升105%。",
+          "name": "邦布突击队",
+          "param": "52%|105%",
+          "property": ["伤害提升", "属性异常积蓄值提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[对空洞特别行动部第六课]</color>阵营的角色时触发：<color=#ffffff>[主动技]</color>和<color=#ffffff>[邦布连携技]</color>命中处于<color=#2EB6FF>[感电]</color>状态下的敌人时，造成的伤害提升60%；攻击处于非电属性的其他属性异常状态下的敌人时，累积的属性异常积蓄值提升120%。",
+          "name": "邦布突击队",
+          "param": "60%|120%",
+          "property": ["伤害提升", "属性异常积蓄值提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方进行1段强力穿透射击，造成<color=#2EB6FF>电属性伤害</color>并累积大量<color=#2EB6FF>电属性异常积蓄值</color>。",
+          "name": "突击时刻",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

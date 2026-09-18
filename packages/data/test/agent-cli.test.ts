@@ -19,8 +19,10 @@ import { driveDiscInput } from "./fixtures/drive-disc-source.ts"
 import {
   syntheticDriveDiscIds,
   syntheticWEngineIds,
+  syntheticBangbooIds,
 } from "./fixtures/synthetic-dataset.ts"
 import { wEngineInput } from "./fixtures/w-engine-source.ts"
+import { bangbooInput } from "./fixtures/bangboo-source.ts"
 
 const packageDirectory = fileURLToPath(new URL("../", import.meta.url))
 const repositoryDirectory = resolve(packageDirectory, "../..")
@@ -88,6 +90,20 @@ async function fixture(parent = tmpdir(), ids = ["2", "10"]) {
     for (const locale of wEngine.detailLocales)
       await writeJson(join(versionRoot, locale, "weapon", `${id}.json`), {
         ...wEngine.details[locale],
+        id: Number(id),
+      })
+  // 默认登记表包含 bangboos：bangboo 输入使用真实邦布结构的合成成员。
+  const bangboo = bangbooInput()
+  await writeJson(
+    join(versionRoot, "bangboo.json"),
+    Object.fromEntries(
+      syntheticBangbooIds.map((id) => [id, bangboo.sourceRecord]),
+    ),
+  )
+  for (const id of syntheticBangbooIds)
+    for (const locale of bangboo.detailLocales)
+      await writeJson(join(versionRoot, locale, "bangboo", `${id}.json`), {
+        ...bangboo.details[locale],
         id: Number(id),
       })
   const preload = join(root, "offline guard.mjs")
@@ -320,12 +336,15 @@ describe("offline agent package commands", () => {
       )
       const driveDiscIds = syntheticDriveDiscIds
       const wEngineIds = syntheticWEngineIds
+      const bangbooIds = syntheticBangbooIds
       expect(index.format).toBe("fairy-nanoka-integrated/v3")
       expect(index.entities.agents.memberIds).toEqual(ids)
       expect(index.entities["drive-discs"].memberIds).toEqual(driveDiscIds)
       expect(index.entities["w-engines"].memberIds).toEqual(wEngineIds)
+      expect(index.entities["bangboos"].memberIds).toEqual(bangbooIds)
       expect(receipt.memberCounts).toEqual({
         "agents": ids.length,
+        "bangboos": bangbooIds.length,
         "drive-discs": driveDiscIds.length,
         "w-engines": wEngineIds.length,
       })
@@ -396,8 +415,12 @@ describe("offline agent package commands", () => {
         agentInput().detailLocales,
       )
       expect(receipt.inputFileCount).toBe(
-        // manifest、三类索引与全部成员详情；跨类别累计。
-        4 + ids.length * 2 + driveDiscIds.length * 2 + wEngineIds.length * 2,
+        // manifest、四类索引与全部成员详情；跨类别累计。
+        5 +
+          ids.length * 2 +
+          driveDiscIds.length * 2 +
+          wEngineIds.length * 2 +
+          bangbooIds.length * 2,
       )
       expect(receipt.outputFileCount).toBe(
         Object.keys(await directoryBytes(receipt.artifactDirectory)).length,
@@ -407,6 +430,7 @@ describe("offline agent package commands", () => {
       )
       expect(Object.keys(maintenance.categories)).toEqual([
         "agents",
+        "bangboos",
         "drive-discs",
         "w-engines",
       ])
@@ -435,6 +459,14 @@ describe("offline agent package commands", () => {
       for (const entry of maintenance.categories["w-engines"]) {
         expect(entry.maintenance.diagnostics).toEqual([])
       }
+      expect(
+        maintenance.categories["bangboos"].map(
+          (entry: { memberId: string }) => entry.memberId,
+        ),
+      ).toEqual(bangbooIds)
+      for (const entry of maintenance.categories["bangboos"]) {
+        expect(entry.maintenance.diagnostics).toEqual([])
+      }
       const verified = success(
         runCommand(
           input,
@@ -457,6 +489,10 @@ describe("offline agent package commands", () => {
           },
           "w-engines": {
             memberCount: receipt.memberCounts["w-engines"],
+            detailLocales: agentInput().detailLocales,
+          },
+          "bangboos": {
+            memberCount: receipt.memberCounts["bangboos"],
             detailLocales: agentInput().detailLocales,
           },
         },

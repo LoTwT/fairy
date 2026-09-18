@@ -17,8 +17,10 @@ import {
   rewriteAsLegacyV2Artifact,
   syntheticDriveDiscIds,
   syntheticWEngineIds,
+  syntheticBangbooIds,
 } from "./synthetic-dataset.ts"
 import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
+import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
 
 /**
  * 合成双语制品；不同英文展示名、codeName 和索引名称用于捕获错误取值来源。
@@ -94,6 +96,23 @@ export async function publicationFixture(
         id: Number(id),
         name:
           locale === "en" ? syntheticWEngineEnglishName(id) : `示例音擎 ${id}`,
+      })
+  // 默认登记表包含 bangboos 类别：bangboo 输入使用真实邦布结构的合成成员；
+  // 英文详情名称按成员唯一且与 sourceRecord.en 不同，用于捕获发布目录取错名称来源。
+  const bangboo = bangbooInput()
+  await write(
+    "bangboo.json",
+    Object.fromEntries(
+      syntheticBangbooIds.map((id) => [id, bangboo.sourceRecord]),
+    ),
+  )
+  for (const id of syntheticBangbooIds)
+    for (const locale of bangboo.detailLocales)
+      await write(`${locale}/bangboo/${id}.json`, {
+        ...bangboo.details[locale],
+        id: Number(id),
+        name:
+          locale === "en" ? syntheticBangbooEnglishName(id) : `示例布 ${id}`,
       })
   const result = await buildIntegratedSnapshot({
     rawRoot,

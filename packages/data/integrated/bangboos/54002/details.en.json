@@ -1,0 +1,245 @@
+{
+  "codeName": "Safety",
+  "desc": "Safety first, ehn-na second.",
+  "id": 54002,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Safety",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nEnters the driving state and charges enemies, launching a drilling attack upon hit and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Boring Burst",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Belobog Heavy Industries</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 20%. If the target is <color=#FF5521>Burning</color> or <color=#2EB6FF>Shocked</color>, this buff increases by an additional 20%.",
+          "name": "Drill Team Mobilization",
+          "param": "20%|20%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Belobog Heavy Industries</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 25%. If the target is <color=#FF5521>Burning</color> or <color=#2EB6FF>Shocked</color>, this buff increases by an additional 25%.",
+          "name": "Drill Team Mobilization",
+          "param": "25%|25%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Belobog Heavy Industries</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 30%. If the target is <color=#FF5521>Burning</color> or <color=#2EB6FF>Shocked</color>, this buff increases by an additional 30%.",
+          "name": "Drill Team Mobilization",
+          "param": "30%|30%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Belobog Heavy Industries</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 35%. If the target is <color=#FF5521>Burning</color> or <color=#2EB6FF>Shocked</color>, this buff increases by an additional 35%.",
+          "name": "Drill Team Mobilization",
+          "param": "35%|35%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Belobog Heavy Industries</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 40%. If the target is <color=#FF5521>Burning</color> or <color=#2EB6FF>Shocked</color>, this buff increases by an additional 40%.",
+          "name": "Drill Team Mobilization",
+          "param": "40%|40%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters the driving state and charges enemies, launching a multi-hit drilling attack upon hit and dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Demolition Drill",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

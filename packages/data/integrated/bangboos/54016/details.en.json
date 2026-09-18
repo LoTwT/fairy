@@ -1,0 +1,345 @@
+{
+  "codeName": "Robin",
+  "desc": "Three, two, one! Don't blink!",
+  "id": 54016,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Robin",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nFire a series of random cards using a magic gun, each triggering different effects based on card type:\n<color=#FFFFFF>Hearts</color> – Deals massive <color=#F0D12B>Physical DMG</color>.\n<color=#FFFFFF>Spades</color> – Deals <color=#F0D12B>Physical DMG</color> and inflicts massive Daze.\n<color=#FFFFFF>Crowns</color> – Deals <color=#FE437E>Ether DMG</color> and accumulates massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "The Curtain Falls",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26s",
+          "property": [
+            "Hearts DMG Multiplier",
+            "Hearts Daze Multiplier",
+            "Spades DMG Multiplier",
+            "Spades Daze Multiplier",
+            "Crowns DMG Multiplier",
+            "Crowns Daze Multiplier",
+            "Cooldown"
+          ]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Mockingbird</color> character in the squad: When the on-field Agent in the squad meets the Specialty requirements, the <color=#FFFFFF>Active Skill</color> fires a fixed card with a buff:\n<color=#FFFFFF>Attack</color>: Fires only <color=#FFFFFF>Hearts</color>, increasing the DMG by 45%.\n<color=#FFFFFF>Stun</color>: Fires only <color=#FFFFFF>Spades</color>, increasing the Daze buildup by 27%.\n<color=#FFFFFF>Anomaly</color>: Fires only <color=#FFFFFF>Crowns</color>, increasing the Anomaly Buildup by 90%.",
+          "name": "Master of Disguise",
+          "param": "45%|27%|90%",
+          "property": [
+            "DMG Increase",
+            "Daze Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Mockingbird</color> character in the squad: When the on-field Agent in the squad meets the Specialty requirements, the <color=#FFFFFF>Active Skill</color> fires a fixed card with a buff:\n<color=#FFFFFF>Attack</color>: Fires only <color=#FFFFFF>Hearts</color>, increasing the DMG by 56%.\n<color=#FFFFFF>Stun</color>: Fires only <color=#FFFFFF>Spades</color>, increasing the Daze buildup by 34%.\n<color=#FFFFFF>Anomaly</color>: Fires only <color=#FFFFFF>Crowns</color>, increasing the Anomaly Buildup by 112.5%.",
+          "name": "Master of Disguise",
+          "param": "56%|34%|112.5%",
+          "property": [
+            "DMG Increase",
+            "Daze Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Mockingbird</color> character in the squad: When the on-field Agent in the squad meets the Specialty requirements, the <color=#FFFFFF>Active Skill</color> fires a fixed card with a buff:\n<color=#FFFFFF>Attack</color>: Fires only <color=#FFFFFF>Hearts</color>, increasing the DMG by 67%.\n<color=#FFFFFF>Stun</color>: Fires only <color=#FFFFFF>Spades</color>, increasing the Daze buildup by 40%.\n<color=#FFFFFF>Anomaly</color>: Fires only <color=#FFFFFF>Crowns</color>, increasing the Anomaly Buildup by 135%.",
+          "name": "Master of Disguise",
+          "param": "67%|40%|135%",
+          "property": [
+            "DMG Increase",
+            "Daze Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Mockingbird</color> character in the squad: When the on-field Agent in the squad meets the Specialty requirements, the <color=#FFFFFF>Active Skill</color> fires a fixed card with a buff:\n<color=#FFFFFF>Attack</color>: Fires only <color=#FFFFFF>Hearts</color>, increasing the DMG by 78%.\n<color=#FFFFFF>Stun</color>: Fires only <color=#FFFFFF>Spades</color>, increasing the Daze buildup by 47%.\n<color=#FFFFFF>Anomaly</color>: Fires only <color=#FFFFFF>Crowns</color>, increasing the Anomaly Buildup by 157.5%.",
+          "name": "Master of Disguise",
+          "param": "78%|47%|157.5%",
+          "property": [
+            "DMG Increase",
+            "Daze Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Mockingbird</color> character in the squad: When the on-field Agent in the squad meets the Specialty requirements, the <color=#FFFFFF>Active Skill</color> fires a fixed card with a buff:\n<color=#FFFFFF>Attack</color>: Fires only <color=#FFFFFF>Hearts</color>, increasing the DMG by 90%.\n<color=#FFFFFF>Stun</color>: Fires only <color=#FFFFFF>Spades</color>, increasing the Daze buildup by 54%.\n<color=#FFFFFF>Anomaly</color>: Fires only <color=#FFFFFF>Crowns</color>, increasing the Anomaly Buildup by 180%.",
+          "name": "Master of Disguise",
+          "param": "90%|54%|180%",
+          "property": [
+            "DMG Increase",
+            "Daze Increase",
+            "Anomaly Buildup Increase"
+          ]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows a magic grenade forward, dealing <color=#FE437E>Ether DMG</color> and inflicting <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Show Time!",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

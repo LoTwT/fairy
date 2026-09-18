@@ -1,0 +1,245 @@
+{
+  "codeName": "Sharkboo",
+  "desc": "Seen in the distant seas and the seafood section of the fresh food market.",
+  "id": 54001,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Sharkboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPlants a homing trap underfoot which bites, tears, and summons torpedos at triggering enemies, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Drylands Shark Hunt",
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 100% more Anomaly Buildup.",
+          "name": "Cold Surge",
+          "param": "100%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 125% more Anomaly Buildup.",
+          "name": "Cold Surge",
+          "param": "125%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 150% more Anomaly Buildup.",
+          "name": "Cold Surge",
+          "param": "150%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 175% more Anomaly Buildup.",
+          "name": "Cold Surge",
+          "param": "175%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 200% more Anomaly Buildup.",
+          "name": "Cold Surge",
+          "param": "200%",
+          "property": ["Anomaly Buildup Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a homing trap and leaps toward the target, causing an explosion upon landing that deals <color=#98EFF0>Ice DMG</color> and accumulates massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Relentless Pursuit",
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

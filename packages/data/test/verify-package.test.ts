@@ -161,6 +161,7 @@ describe("packed package", () => {
     // 文件清单覆盖全部已登记类别与成员：由验证后的索引逐类别推导，不使用固定文件总数。
     expect(Object.keys(index.entities).toSorted()).toEqual([
       "agents",
+      "bangboos",
       "drive-discs",
       "w-engines",
     ])
@@ -234,6 +235,15 @@ describe("packed package", () => {
           ),
         ).name,
     )
+    const expectedBangbooNames = index.entities["bangboos"].memberIds.map(
+      (id) =>
+        JSON.parse(
+          readFileSync(
+            join(snapshot, `bangboos/${id}/details.en.json`),
+            "utf8",
+          ),
+        ).name,
+    )
     expect(
       JSON.parse(
         runNode(
@@ -242,12 +252,13 @@ describe("packed package", () => {
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
-assert.deepEqual(Object.keys(api).sort(), ["agentNames", "driveDiscNames", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllDriveDiscs", "loadAllWEngines", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadWEngineData", "loadWEngineDetails"].sort())
+assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "driveDiscNames", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllDriveDiscs", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadWEngineData", "loadWEngineDetails"].sort())
 const index = await api.loadIndex()
 assert.deepEqual(index, JSON.parse(readFileSync(new URL(import.meta.resolve("@randomplay/data/integrated/index.json")), "utf8")))
 assert(Object.isFrozen(api.agentNames))
 assert(Object.isFrozen(api.driveDiscNames))
 assert(Object.isFrozen(api.wEngineNames))
+assert(Object.isFrozen(api.bangbooNames))
 const all = await api.loadAllAgents("zh")
 for (const name of api.agentNames) {
   const data = await api.loadAgentData(name)
@@ -331,32 +342,67 @@ assert.equal(await api.loadWEngineDetails("unknown engine", "en"), undefined)
 await assert.rejects(api.loadWEngineData(12001), TypeError)
 await assert.rejects(api.loadWEngineDetails("[Lunar] Pleniluna"), TypeError)
 await assert.rejects(api.loadAllWEngines("zh-CN"), TypeError)
-console.log(JSON.stringify({ agents: api.agentNames, driveDiscs: api.driveDiscNames, wEngines: api.wEngineNames }))
+// Bangboo 读取 API：逐成员与包内 data/zh/en JSON 比对，子路径直读与 API 值一致。
+const bangbooIds = index.entities["bangboos"].memberIds
+assert(api.bangbooNames.length === bangbooIds.length)
+const allBangboos = await api.loadAllBangboos("zh")
+for (const name of api.bangbooNames) {
+  const data = await api.loadBangbooData(name)
+  const zh = await api.loadBangbooDetails(name, "zh")
+  const en = await api.loadBangbooDetails(name, "en")
+  assert.equal(en.name, name)
+  assert.equal(zh.locale, "zh")
+  assert.equal(en.locale, "en")
+  assert.deepEqual(allBangboos[name], { data, details: zh })
+  assert.deepEqual(Object.keys(allBangboos[name]), ["data", "details"])
+  for (const [file, value] of [["data.json", data], ["details.zh.json", zh], ["details.en.json", en]]) {
+    const direct = await import("@randomplay/data/integrated/bangboos/" + data.id + "/" + file, { with: { type: "json" } })
+    assert.deepEqual(value, direct.default)
+  }
+  data.stats.hpMax = -1
+  assert.notDeepEqual(await api.loadBangbooData(name), data)
+  zh.desc = "modified"
+  assert.notDeepEqual(await api.loadBangbooDetails(name, "zh"), zh)
+}
+assert(api.bangbooNames.includes("Penguinboo"))
+assert.equal((await api.loadBangbooData("Penguinboo")).id, 53001)
+assert.equal(await api.loadBangbooData("53001"), undefined)
+assert.equal(await api.loadBangbooDetails("unknown bangboo", "en"), undefined)
+await assert.rejects(api.loadBangbooData(53001), TypeError)
+await assert.rejects(api.loadBangbooDetails("Penguinboo"), TypeError)
+await assert.rejects(api.loadAllBangboos("zh-CN"), TypeError)
+console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames, driveDiscs: api.driveDiscNames, wEngines: api.wEngineNames }))
 `,
         ),
       ),
     ).toEqual({
       agents: expectedNames,
+      bangboos: expectedBangbooNames,
       driveDiscs: expectedDriveDiscNames,
       wEngines: expectedWEngineNames,
     })
     const typeSource = `import rawData from "@randomplay/data/integrated/agents/1311/data.json" with { type: "json" }
 import rawDriveDiscData from "@randomplay/data/integrated/drive-discs/31000/data.json" with { type: "json" }
 import rawWEngineData from "@randomplay/data/integrated/w-engines/12001/data.json" with { type: "json" }
-import { agentNames, driveDiscNames, wEngineNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadWEngineData, loadWEngineDetails, loadAllWEngines } from "@randomplay/data"
-import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale, DriveDiscName, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, WEngineName, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
+import rawBangbooData from "@randomplay/data/integrated/bangboos/53001/data.json" with { type: "json" }
+import { agentNames, bangbooNames, driveDiscNames, wEngineNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadBangbooData, loadBangbooDetails, loadAllBangboos, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadWEngineData, loadWEngineDetails, loadAllWEngines } from "@randomplay/data"
+import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale, BangbooName, BangbooData, BangbooDetails, LocalizedBangboo, DriveDiscName, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, WEngineName, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
 const numericSourceId: number = rawData.id
 const numericDriveDiscId: number = rawDriveDiscData.id
 const numericWEngineId: number = rawWEngineData.id
+const numericBangbooId: number = rawBangbooData.id
 const name: AgentName = "Astra Yao"
 const punctuated: AgentName = "Soldier 0 - Anby"
 const driveDiscName: DriveDiscName = "Woodpecker Electro"
 const spacedDiscName: DriveDiscName = "Puffer Electro"
 const wEngineName: WEngineName = "[Lunar] Pleniluna"
 const punctuatedEngineName: WEngineName = "[Reverb] Mark I"
+const bangbooName: BangbooName = "Penguinboo"
+const spacedBangbooName: BangbooName = "Bild N. Boolok"
 const names: readonly AgentName[] = agentNames
 const discNames: readonly DriveDiscName[] = driveDiscNames
 const engineNames: readonly WEngineName[] = wEngineNames
+const booNames: readonly BangbooName[] = bangbooNames
 const index: Promise<IntegratedSnapshotIndex> = loadIndex()
 const data: Promise<AgentData | undefined> = loadAgentData(name)
 const detail: Promise<AgentDetails | undefined> = loadAgentDetails(punctuated, "zh")
@@ -367,45 +413,61 @@ const allDiscs: Promise<Record<DriveDiscName, LocalizedDriveDisc>> = loadAllDriv
 const engineData: Promise<WEngineData | undefined> = loadWEngineData(wEngineName)
 const engineDetail: Promise<WEngineDetails | undefined> = loadWEngineDetails(punctuatedEngineName, "zh")
 const allEngines: Promise<Record<WEngineName, LocalizedWEngine>> = loadAllWEngines("en")
+const bangbooData: Promise<BangbooData | undefined> = loadBangbooData(bangbooName)
+const bangbooDetail: Promise<BangbooDetails | undefined> = loadBangbooDetails(spacedBangbooName, "zh")
+const allBangboos: Promise<Record<BangbooName, LocalizedBangboo>> = loadAllBangboos("en")
 function acceptsName(value: AgentName, locale: DetailLocale) { return loadAgentDetails(value, locale) }
 function acceptsDriveDiscName(value: DriveDiscName, locale: DetailLocale) { return loadDriveDiscDetails(value, locale) }
 function acceptsWEngineName(value: WEngineName, locale: DetailLocale) { return loadWEngineDetails(value, locale) }
+function acceptsBangbooName(value: BangbooName, locale: DetailLocale) { return loadBangbooDetails(value, locale) }
 // @ts-expect-error exact literal union, no arbitrary string
 const wrong: AgentName = "AstraYao"
 // @ts-expect-error exact drive disc literal union
 const wrongDisc: DriveDiscName = "WoodpeckerElectro"
 // @ts-expect-error exact WEngine literal union
 const wrongEngine: WEngineName = "Lunar Pleniluna"
+// @ts-expect-error exact bangboo literal union
+const wrongBangboo: BangbooName = "Penguin"
 // @ts-expect-error arbitrary strings must be narrowed by the caller
 loadAgentData("unknown" as string)
 // @ts-expect-error arbitrary strings must be narrowed by the caller for drive discs
 loadDriveDiscData("unknown" as string)
 // @ts-expect-error arbitrary strings must be narrowed by the caller for WEngines
 loadWEngineData("unknown" as string)
+// @ts-expect-error arbitrary strings must be narrowed by the caller for bangboos
+loadBangbooData("unknown" as string)
 // @ts-expect-error misspelling
 loadAgentDetails("astra yao", "en")
 // @ts-expect-error drive disc misspelling without space
 loadDriveDiscDetails("woodpecker electro", "en")
 // @ts-expect-error WEngine misspelling with a different bracket
 loadWEngineDetails("[Lunar]Pleniluna", "en")
+// @ts-expect-error bangboo misspelling without the family suffix
+loadBangbooDetails("Penguin", "en")
 // @ts-expect-error numeric IDs are not names
 loadAgentData(1311)
 // @ts-expect-error numeric drive disc IDs are not names
 loadDriveDiscData(31000)
 // @ts-expect-error numeric WEngine IDs are not names
 loadWEngineData(12001)
+// @ts-expect-error numeric bangboo IDs are not names
+loadBangbooData(53001)
 // @ts-expect-error locale required
 loadAgentDetails(name)
 // @ts-expect-error drive disc locale required
 loadDriveDiscDetails(driveDiscName)
 // @ts-expect-error WEngine locale required
 loadWEngineDetails(wEngineName)
+// @ts-expect-error bangboo locale required
+loadBangbooDetails(bangbooName)
 // @ts-expect-error locale has no aliases
 loadAllAgents("zh-CN")
 // @ts-expect-error drive disc locale has no aliases
 loadAllDriveDiscs("zh-CN")
 // @ts-expect-error WEngine locale has no aliases
 loadAllWEngines("zh-CN")
+// @ts-expect-error bangboo locale has no aliases
+loadAllBangboos("zh-CN")
 // @ts-expect-error frozen readonly list
 agentNames.push(name)
 // @ts-expect-error readonly element
@@ -418,7 +480,11 @@ driveDiscNames[0] = driveDiscName
 wEngineNames.push(wEngineName)
 // @ts-expect-error readonly WEngine element
 wEngineNames[0] = wEngineName
-void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, engineNames, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, acceptsName, acceptsDriveDiscName, acceptsWEngineName, wrong, wrongDisc, wrongEngine]
+// @ts-expect-error frozen readonly bangboo list
+bangbooNames.push(bangbooName)
+// @ts-expect-error readonly bangboo element
+bangbooNames[0] = bangbooName
+void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, names, discNames, engineNames, booNames, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, bangbooData, bangbooDetail, allBangboos, acceptsName, acceptsDriveDiscName, acceptsWEngineName, acceptsBangbooName, wrong, wrongDisc, wrongEngine, wrongBangboo]
 `
     const typeFile = join(consumerDirectory, "smoke.ts")
     writeFileSync(typeFile, typeSource)
@@ -445,7 +511,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
     // Exercise the actual TypeScript language service, including completion after a space.
     const completionSource =
       typeSource +
-      '\nloadAgentData("Soldier ")\nloadDriveDiscData("Woodpecker ")\nloadWEngineData("[Lunar")\n'
+      '\nloadAgentData("Soldier ")\nloadDriveDiscData("Woodpecker ")\nloadWEngineData("[Lunar")\nloadBangbooData("Penguin")\n'
     writeFileSync(typeFile, completionSource)
     const compilerOptions: ts.CompilerOptions = {
       module: ts.ModuleKind.ESNext,
@@ -495,6 +561,16 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
         )
         ?.entries.map((entry) => entry.name),
     ).toEqual(expect.arrayContaining(expectedWEngineNames))
+    // 名称补全包含带空格与标点的邦布名称。
+    expect(
+      service
+        .getCompletionsAtPosition(
+          typeFile,
+          completionSource.lastIndexOf("Penguin") + "Penguin".length,
+          {},
+        )
+        ?.entries.map((entry) => entry.name),
+    ).toEqual(expect.arrayContaining(expectedBangbooNames))
     service.dispose()
     // Fresh private copies: never mutate the offline install's content-addressed files.
     const brokenConsumer = join(temporaryDirectory, "broken")
@@ -505,12 +581,13 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
     const agentCount = index.entities.agents.memberIds.length
     const driveDiscCount = index.entities["drive-discs"].memberIds.length
     const wEngineCount = index.entities["w-engines"].memberIds.length
+    const bangbooCount = index.entities["bangboos"].memberIds.length
     // 各行：损坏文件、必须拒绝的调用、以及跨类别隔离断言（其余类别的单体与全量读取仍成功）。
     for (const [path, call, isolation] of [
       [
         "index.json",
         "api.loadIndex()",
-        'assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); assert.equal((await api.loadDriveDiscData("Woodpecker Electro")).id, 31000); assert.equal((await api.loadWEngineData("[Lunar] Pleniluna")).id, 12001); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh"); await api.loadAllWEngines("zh")',
+        'assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); assert.equal((await api.loadDriveDiscData("Woodpecker Electro")).id, 31000); assert.equal((await api.loadWEngineData("[Lunar] Pleniluna")).id, 12001); assert.equal((await api.loadBangbooData("Penguinboo")).id, 53001); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh"); await api.loadAllWEngines("zh"); await api.loadAllBangboos("zh")',
       ],
       [
         "agents/1311/data.json",
@@ -542,6 +619,16 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
         'api.loadWEngineDetails("[Lunar] Pleniluna", "zh")',
         'await assert.rejects(api.loadAllWEngines("zh")); await api.loadAllWEngines("en"); assert.equal((await api.loadAgentDetails("Astra Yao", "zh")).locale, "zh"); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh")',
       ],
+      [
+        "bangboos/53001/data.json",
+        'api.loadBangbooData("Penguinboo")',
+        'await assert.rejects(api.loadAllBangboos("en")); await assert.rejects(api.loadAllBangboos("zh")); assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); await api.loadAllAgents("en"); await api.loadAllDriveDiscs("en"); await api.loadAllWEngines("en")',
+      ],
+      [
+        "bangboos/53001/details.zh.json",
+        'api.loadBangbooDetails("Penguinboo", "zh")',
+        'await assert.rejects(api.loadAllBangboos("zh")); await api.loadAllBangboos("en"); assert.equal((await api.loadAgentDetails("Astra Yao", "zh")).locale, "zh"); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh"); await api.loadAllWEngines("zh")',
+      ],
     ]) {
       const fullPath = join(brokenPackage, "dist/integrated", path)
       const bytes = readFileSync(fullPath)
@@ -550,7 +637,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
         else writeFileSync(fullPath, "{")
         runNode(
           brokenConsumer,
-          `import assert from "node:assert/strict"; import * as api from "@randomplay/data"; assert.equal(api.agentNames.length, ${agentCount}); assert.equal(api.driveDiscNames.length, ${driveDiscCount}); assert.equal(api.wEngineNames.length, ${wEngineCount}); await assert.rejects(${call}); ${isolation}`,
+          `import assert from "node:assert/strict"; import * as api from "@randomplay/data"; assert.equal(api.agentNames.length, ${agentCount}); assert.equal(api.driveDiscNames.length, ${driveDiscCount}); assert.equal(api.wEngineNames.length, ${wEngineCount}); assert.equal(api.bangbooNames.length, ${bangbooCount}); await assert.rejects(${call}); ${isolation}`,
         )
         writeFileSync(fullPath, bytes)
       }
@@ -559,13 +646,15 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
     rmSync(join(brokenPackage, "dist/integrated"), { recursive: true })
     runNode(
       brokenConsumer,
-      'import assert from "node:assert/strict"; import { agentNames, driveDiscNames, wEngineNames, loadAgentData, loadDriveDiscData, loadWEngineData } from "@randomplay/data"; assert.equal(agentNames.length, ' +
+      'import assert from "node:assert/strict"; import { agentNames, bangbooNames, driveDiscNames, wEngineNames, loadAgentData, loadBangbooData, loadDriveDiscData, loadWEngineData } from "@randomplay/data"; assert.equal(agentNames.length, ' +
         agentCount +
         "); assert.equal(driveDiscNames.length, " +
         driveDiscCount +
         "); assert.equal(wEngineNames.length, " +
         wEngineCount +
-        '); await assert.rejects(loadAgentData("Astra Yao")); await assert.rejects(loadDriveDiscData("Woodpecker Electro")); await assert.rejects(loadWEngineData("[Lunar] Pleniluna"))',
+        "); assert.equal(bangbooNames.length, " +
+        bangbooCount +
+        '); await assert.rejects(loadAgentData("Astra Yao")); await assert.rejects(loadDriveDiscData("Woodpecker Electro")); await assert.rejects(loadWEngineData("[Lunar] Pleniluna")); await assert.rejects(loadBangbooData("Penguinboo"))',
     )
     // Exercise both build boundaries with the real tsdown process in this private checkout.
     for (const intervention of ["source-change", "dist-corruption"]) {
@@ -623,6 +712,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
         expect(declarations).toContain(JSON.stringify("Astra Yao"))
         expect(declarations).toContain(JSON.stringify("Woodpecker Electro"))
         expect(declarations).toContain(JSON.stringify("[Lunar] Pleniluna"))
+        expect(declarations).toContain(JSON.stringify("Penguinboo"))
         expect(declarations).not.toContain(changedName)
         expect(
           JSON.parse(
@@ -648,6 +738,14 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, e
             ),
           ),
         ).toEqual(expectedWEngineNames)
+        expect(
+          JSON.parse(
+            runNode(
+              cleanPackage,
+              'import { bangbooNames, loadBangbooDetails } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(bangbooNames.map(async name => (await loadBangbooDetails(name, "en")).name))))',
+            ),
+          ),
+        ).toEqual(expectedBangbooNames)
       } else {
         expect(build.status).toBe(1)
         expect(build.stdout + build.stderr).toContain("摘要不一致")

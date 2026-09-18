@@ -1,0 +1,305 @@
+{
+  "codeName": "Bangvolver",
+  "desc": "Today's Fortune: Amazing!",
+  "id": 54013,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Bangvolver",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUse a random bullet for different moves:\nPowerful Firework Shell: Fires at the enemy with great force, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating a large amount of <color=#F0D12B>Physical Anomaly Buildup</color>.\nRegular Firework Shell: Fires at the enemy, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nPaintball: Fails to fire as flowers leave the muzzle.",
+          "name": "Revolver of Fortune",
+          "param": "{Skill:5401303, Prop:1001}|{Skill:5401303, Prop:1002}|{Skill:5401301, Prop:1001}|{Skill:5401301, Prop:1002}|18s",
+          "property": [
+            "Enhanced Shot DMG Multiplier",
+            "Enhanced Shot Daze Multiplier",
+            "Shot DMG Multiplier",
+            "Shot Daze Multiplier",
+            "Cooldown"
+          ]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 100% more Anomaly Buildup.",
+          "name": "Luck is Skill",
+          "param": "100%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 125% more Anomaly Buildup.",
+          "name": "Luck is Skill",
+          "param": "125%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 150% more Anomaly Buildup.",
+          "name": "Luck is Skill",
+          "param": "150%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 175% more Anomaly Buildup.",
+          "name": "Luck is Skill",
+          "param": "175%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 200% more Anomaly Buildup.",
+          "name": "Luck is Skill",
+          "param": "200%",
+          "property": ["Anomaly Buildup Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFire continuous shots at the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating massive <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lucky Trigger",
+          "param": "{Skill:5401302, Prop:1001}|{Skill:5401302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

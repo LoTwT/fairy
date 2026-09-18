@@ -1,0 +1,245 @@
+{
+  "codeName": "Resonaboo",
+  "desc": "Accumulating Ether energy...",
+  "id": 54009,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Resonaboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSummons an Ether black hole that continuously pulls in enemies, dealing <color=#FE437E>Ether DMG</color> to enemies struck and accumulating <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Mini-Black Hole",
+          "param": "{Skill:5400901, Prop:1001}|{Skill:5400901, Prop:1002}|28s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FE437E>Ether Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 100% more Anomaly Buildup.",
+          "name": "Radiation Effect",
+          "param": "100%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FE437E>Ether Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 125% more Anomaly Buildup.",
+          "name": "Radiation Effect",
+          "param": "125%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FE437E>Ether Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 150% more Anomaly Buildup.",
+          "name": "Radiation Effect",
+          "param": "150%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FE437E>Ether Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 175% more Anomaly Buildup.",
+          "name": "Radiation Effect",
+          "param": "175%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FE437E>Ether Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 200% more Anomaly Buildup.",
+          "name": "Radiation Effect",
+          "param": "200%",
+          "property": ["Anomaly Buildup Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nThrows an Ether bomb at the target, dealing <color=#FE437E>Ether DMG</color> and accumulating massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Primordial Black Hole",
+          "param": "{Skill:5400902, Prop:1001}|{Skill:5400902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

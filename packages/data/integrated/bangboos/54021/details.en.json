@@ -1,0 +1,305 @@
+{
+  "codeName": "Sprout",
+  "desc": "Don't underestimate our bond!",
+  "id": 54021,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Sprout",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nWhen the skill activates, if there's no Sword on the field, Sprout summons six flying swords to attack the target, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.\nIf a Sword is already on the field, Sprout steps onto it and charges up, unleashing a stronger flurry of slashes that deals massive <color=#F0D12B>Physical DMG</color> and accumulates <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Six-Star Flight",
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28s",
+          "property": [
+            "Flying Sword DMG Multiplier",
+            "Flying Sword Daze Multiplier",
+            "Flurry of Slashes DMG Multiplier",
+            "Flurry of Slashes Daze Multiplier",
+            "Cooldown"
+          ]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen <color=#FFFFFF>Ye Shunguang</color> is in the squad: Sprout's DMG increases by 30%. When using its Active Skill while in Ether Veil: Verdict, 1 Sword is summoned to the field.",
+          "name": "Heartbound Bond",
+          "param": "30%",
+          "property": ["DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen <color=#FFFFFF>Ye Shunguang</color> is in the squad: Sprout's DMG increases by 37.5%. When using its Active Skill while in Ether Veil: Verdict, 1 Sword is summoned to the field.",
+          "name": "Heartbound Bond",
+          "param": "37.5%",
+          "property": ["DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen <color=#FFFFFF>Ye Shunguang</color> is in the squad: Sprout's DMG increases by 45%. When using its Active Skill while in Ether Veil: Verdict, 1 Sword is summoned to the field.",
+          "name": "Heartbound Bond",
+          "param": "45%",
+          "property": ["DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen <color=#FFFFFF>Ye Shunguang</color> is in the squad: Sprout's DMG increases by 52.5%. When using its Active Skill while in Ether Veil: Verdict, 1 Sword is summoned to the field.",
+          "name": "Heartbound Bond",
+          "param": "52.5%",
+          "property": ["DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen <color=#FFFFFF>Ye Shunguang</color> is in the squad: Sprout's DMG increases by 60%. When using its Active Skill while in Ether Veil: Verdict, 1 Sword is summoned to the field.",
+          "name": "Heartbound Bond",
+          "param": "60%",
+          "property": ["DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSummons a massive Sword of Unification that stabs enemies, dealing massive <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Sword of Unification",
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "codeName": "Penguinboo",
+  "desc": "Widdly-waddly, icy and chilly.",
+  "id": 53001,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Penguinboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExecutes a series of graceful slashes with an ice blade, dealing <color=#98EFF0>Ice DMG</color> and accumulating <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Iceblade Dance",
+          "param": "{Skill:5300101, Prop:1001}|{Skill:5300101, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 60% more Anomaly Buildup.",
+          "name": "Dry Ice Field",
+          "param": "60%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 75% more Anomaly Buildup.",
+          "name": "Dry Ice Field",
+          "param": "75%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 90% more Anomaly Buildup.",
+          "name": "Dry Ice Field",
+          "param": "90%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 105% more Anomaly Buildup.",
+          "name": "Dry Ice Field",
+          "param": "105%",
+          "property": ["Anomaly Buildup Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#98EFF0>Ice Attribute</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> inflicts 120% more Anomaly Buildup.",
+          "name": "Dry Ice Field",
+          "param": "120%",
+          "property": ["Anomaly Buildup Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nAttacks the target with a series of slashes, dealing <color=#98EFF0>Ice DMG</color> and inflicting massive <color=#98EFF0>Ice Anomaly Buildup</color>.",
+          "name": "Frozen Hurricane",
+          "param": "{Skill:5300102, Prop:1001}|{Skill:5300102, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

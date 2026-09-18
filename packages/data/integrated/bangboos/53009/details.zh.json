@@ -1,0 +1,245 @@
+{
+  "codeName": "Boollseye",
+  "desc": "正中靶心！",
+  "id": 53009,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "飞靶布",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射飞镖，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "正中红心",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在擅长使用<color=#FFFFFF>[穿透]</color>类型招式的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升30%。",
+          "name": "弹道交叠",
+          "param": "30%",
+          "property": ["伤害提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在擅长使用<color=#FFFFFF>[穿透]</color>类型招式的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升37.5%。",
+          "name": "弹道交叠",
+          "param": "37.5%",
+          "property": ["伤害提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在擅长使用<color=#FFFFFF>[穿透]</color>类型招式的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升45%。",
+          "name": "弹道交叠",
+          "param": "45%",
+          "property": ["伤害提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在擅长使用<color=#FFFFFF>[穿透]</color>类型招式的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升52.5%。",
+          "name": "弹道交叠",
+          "param": "52.5%",
+          "property": ["伤害提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在擅长使用<color=#FFFFFF>[穿透]</color>类型招式的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升60%。",
+          "name": "弹道交叠",
+          "param": "60%",
+          "property": ["伤害提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n用弹弓发射自身，飞向目标并进行连续斩击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舍命狂镖",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

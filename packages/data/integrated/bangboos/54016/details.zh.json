@@ -1,0 +1,325 @@
+{
+  "codeName": "Robin",
+  "desc": "3——2——1！别眨眼！",
+  "id": 54016,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "罗宾",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，使用魔术枪连续发射随机卡牌，并根据卡牌类型造成不同的效果：\n<color=#FFFFFF>[红心]</color>，造成大量<color=#F0D12B>物理伤害</color>；\n<color=#FFFFFF>[黑桃]</color>，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值；\n<color=#FFFFFF>[皇冠]</color>，造成<color=#FE437E>以太伤害</color>并累积大量<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "绮幕终落",
+          "param": "{Skill:5401601, Prop:1001}|{Skill:5401601, Prop:1002}|{Skill:5401602, Prop:1001}|{Skill:5401602, Prop:1002}|{Skill:5401603, Prop:1001}|{Skill:5401603, Prop:1002}|26秒",
+          "property": [
+            "[红心]伤害倍率",
+            "[红心]失衡倍率",
+            "[黑桃]伤害倍率",
+            "[黑桃]失衡倍率",
+            "[皇冠]伤害倍率",
+            "[皇冠]失衡倍率",
+            "冷却时间"
+          ]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[反舌鸟]</color>阵营的角色时触发：前场代理人的职业满足条件时，<color=#FFFFFF>[主动技]</color>会发射固定卡牌且获得增益效果:\n<color=#FFFFFF>[强攻]</color>：只发射<color=#FFFFFF>[红心]</color>，造成的伤害提升45%；\n<color=#FFFFFF>[击破]</color>：只发射<color=#FFFFFF>[黑桃]</color>，造成的失衡值提升27%；\n<color=#FFFFFF>[异常]</color>：只发射<color=#FFFFFF>[皇冠]</color>，累积的属性异常积蓄值提升90%。",
+          "name": "百变怪杰",
+          "param": "45%|27%|90%",
+          "property": ["伤害提升", "失衡值提升", "属性异常积蓄值提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[反舌鸟]</color>阵营的角色时触发：前场代理人的职业满足条件时，<color=#FFFFFF>[主动技]</color>会发射固定卡牌且获得增益效果:\n<color=#FFFFFF>[强攻]</color>：只发射<color=#FFFFFF>[红心]</color>，造成的伤害提升56%；\n<color=#FFFFFF>[击破]</color>：只发射<color=#FFFFFF>[黑桃]</color>，造成的失衡值提升34%；\n<color=#FFFFFF>[异常]</color>：只发射<color=#FFFFFF>[皇冠]</color>，累积的属性异常积蓄值提升112.5%。",
+          "name": "百变怪杰",
+          "param": "56%|34%|112.5%",
+          "property": ["伤害提升", "失衡值提升", "属性异常积蓄值提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[反舌鸟]</color>阵营的角色时触发：前场代理人的职业满足条件时，<color=#FFFFFF>[主动技]</color>会发射固定卡牌且获得增益效果:\n<color=#FFFFFF>[强攻]</color>：只发射<color=#FFFFFF>[红心]</color>，造成的伤害提升67%；\n<color=#FFFFFF>[击破]</color>：只发射<color=#FFFFFF>[黑桃]</color>，造成的失衡值提升40%；\n<color=#FFFFFF>[异常]</color>：只发射<color=#FFFFFF>[皇冠]</color>，累积的属性异常积蓄值提升135%。",
+          "name": "百变怪杰",
+          "param": "67%|40%|135%",
+          "property": ["伤害提升", "失衡值提升", "属性异常积蓄值提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[反舌鸟]</color>阵营的角色时触发：前场代理人的职业满足条件时，<color=#FFFFFF>[主动技]</color>会发射固定卡牌且获得增益效果:\n<color=#FFFFFF>[强攻]</color>：只发射<color=#FFFFFF>[红心]</color>，造成的伤害提升78%；\n<color=#FFFFFF>[击破]</color>：只发射<color=#FFFFFF>[黑桃]</color>，造成的失衡值提升47%；\n<color=#FFFFFF>[异常]</color>：只发射<color=#FFFFFF>[皇冠]</color>，累积的属性异常积蓄值提升157.5%。",
+          "name": "百变怪杰",
+          "param": "78%|47%|157.5%",
+          "property": ["伤害提升", "失衡值提升", "属性异常积蓄值提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[反舌鸟]</color>阵营的角色时触发：前场代理人的职业满足条件时，<color=#FFFFFF>[主动技]</color>会发射固定卡牌且获得增益效果:\n<color=#FFFFFF>[强攻]</color>：只发射<color=#FFFFFF>[红心]</color>，造成的伤害提升90%；\n<color=#FFFFFF>[击破]</color>：只发射<color=#FFFFFF>[黑桃]</color>，造成的失衡值提升54%；\n<color=#FFFFFF>[异常]</color>：只发射<color=#FFFFFF>[皇冠]</color>，累积的属性异常积蓄值提升180%。",
+          "name": "百变怪杰",
+          "param": "90%|54%|180%",
+          "property": ["伤害提升", "失衡值提升", "属性异常积蓄值提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n向前方投掷魔术手雷，造成<color=#FE437E>以太伤害</color>并累积<color=#FE437E>以太异常积蓄值</color>。",
+          "name": "幻幕拉开！",
+          "param": "{Skill:5401604, Prop:1001}|{Skill:5401604, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

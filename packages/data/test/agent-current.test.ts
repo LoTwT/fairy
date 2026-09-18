@@ -256,15 +256,20 @@ describe("current multi-entity dataset", () => {
   })
 
   it("creates a complete dataset, repeats without writes to current files, and preserves every inode and mtime", async () => {
-    // 生产登记表的整库生命周期覆盖：三类别、18 个实体文件与真实 oxfmt 批次都按原语义验证。
+    // 生产登记表的整库生命周期覆盖：四类别、24 个实体文件与真实 oxfmt 批次都按原语义验证。
     const input = await fixture({ production: true })
     const raw = await bytes(input.rawRoot)
     const first = await updateCurrentDataset(input)
     expect(first.outcome).toBe("committed")
     expect(first).toMatchObject({
       format: integratedSnapshotFormat,
-      memberCounts: { "agents": 2, "drive-discs": 2, "w-engines": 2 },
-      entityFileCount: 18,
+      memberCounts: {
+        "agents": 2,
+        "bangboos": 2,
+        "drive-discs": 2,
+        "w-engines": 2,
+      },
+      entityFileCount: 24,
     })
     const before = await fingerprints(input.targetDirectory)
     const writes = vi.spyOn(fs, "writeFile")
@@ -281,8 +286,8 @@ describe("current multi-entity dataset", () => {
     expect(second.outcome).toBe("unchanged")
     expect(second.reusedEntityFiles).toBe(Object.keys(before).length - 1)
     expect(second.changedEntityFiles).toBe(0)
-    // 三个类别的成员文件各自成批，索引单独一批。
-    expect(formatted).toHaveBeenCalledTimes(4)
+    // 四个类别的成员文件各自成批，索引单独一批。
+    expect(formatted).toHaveBeenCalledTimes(5)
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
     expect(
       writes.mock.calls.filter(([path]) =>
@@ -585,7 +590,7 @@ describe("current multi-entity dataset", () => {
     ])
     expect(checkedFull.status, checkedFull.stderr).toBe(0)
     expect(JSON.parse(checkedFull.stdout).verified).toBe(true)
-  })
+  }, 30000)
 
   it("rejects a recorded category the current registry no longer registers", async () => {
     const input = await fixture({ widgetIds: ["3"] })

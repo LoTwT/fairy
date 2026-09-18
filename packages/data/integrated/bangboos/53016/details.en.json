@@ -1,0 +1,305 @@
+{
+  "codeName": "Excaliboo",
+  "desc": "Only a sacred sword is needed to crown the true king.",
+  "id": 53016,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Excaliboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nExcaliboo attempts to draw the sword:\nIf the attempt fails, it performs a triple hammer strike, dealing <color=#F0D12B>Physical DMG</color>.\nIf successful, it slashes the target with the sword, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Sacred Sword Unleashed",
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24s",
+          "property": [
+            "Slash DMG Multiplier",
+            "Slash Daze Multiplier",
+            "Hammer DMG Multiplier",
+            "Hammer Daze Multiplier",
+            "Cooldown"
+          ]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Rupture</color> character in your squad: Upon using an <color=#FFFFFF>Active Skill</color>, the sword draw is guaranteed to succeed, and DMG increases by 30%.",
+          "name": "Victor's Oath",
+          "param": "30%",
+          "property": ["DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Rupture</color> character in your squad: Upon using an <color=#FFFFFF>Active Skill</color>, the sword draw is guaranteed to succeed, and DMG increases by 37.5%.",
+          "name": "Victor's Oath",
+          "param": "37.5%",
+          "property": ["DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Rupture</color> character in your squad: Upon using an <color=#FFFFFF>Active Skill</color>, the sword draw is guaranteed to succeed, and DMG increases by 45%.",
+          "name": "Victor's Oath",
+          "param": "45%",
+          "property": ["DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Rupture</color> character in your squad: Upon using an <color=#FFFFFF>Active Skill</color>, the sword draw is guaranteed to succeed, and DMG increases by 52.5%.",
+          "name": "Victor's Oath",
+          "param": "52.5%",
+          "property": ["DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Rupture</color> character in your squad: Upon using an <color=#FFFFFF>Active Skill</color>, the sword draw is guaranteed to succeed, and DMG increases by 60%.",
+          "name": "Victor's Oath",
+          "param": "60%",
+          "property": ["DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nStrike forward with the sacred sword, dealing massive <color=#F0D12B>Physical DMG</color> to enemies in front.",
+          "name": "King's Unstoppable Might",
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

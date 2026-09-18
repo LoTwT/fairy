@@ -1,5 +1,6 @@
 import type { DetailLocale } from "../../src/integration/agent-types.ts"
 import { integrateAgent } from "../../src/integration/integrate-agent.ts"
+import { integrateBangboo } from "../../src/integration/integrate-bangboo.ts"
 import { integrateDriveDisc } from "../../src/integration/integrate-drive-disc.ts"
 import { integrateWEngine } from "../../src/integration/integrate-w-engine.ts"
 import type { JsonObject } from "../../src/integration/source-json.ts"
@@ -269,10 +270,60 @@ export const nanokaWEnginesSnapshotEntity: IntegratedSnapshotEntityProducer = {
   },
 }
 
+/** Bangboo 成员文件身份：data 与全部 details 都核对 id，另核对语言副本；规则与其他类别各自独立登记。 */
+export function verifyBangbooSnapshotMemberFile(
+  value: JsonObject,
+  { path, memberId, file, locale }: IntegratedSnapshotMemberFileContext,
+): void {
+  requireValue(
+    Number.isSafeInteger(value.id) && String(value.id) === memberId,
+    `${path}/id`,
+    "身份错误",
+  )
+  requireValue(
+    file === "data" ? !Object.hasOwn(value, "locale") : value.locale === locale,
+    `${path}/locale`,
+    "语言错误",
+  )
+}
+
+/** Bangboo 类别：复用既有单实体纯整合函数，来源实体与规则版本在此显式登记。 */
+export const nanokaBangboosSnapshotEntity: IntegratedSnapshotEntityProducer = {
+  name: "bangboos",
+  sourceEntity: "bangboo",
+  rulesVersion: "nanoka-bangboo-reference/1",
+  verifyMemberFile: verifyBangbooSnapshotMemberFile,
+  integrate({ memberId, sourceRecord, details, detailLocales }) {
+    const result = integrateBangboo({
+      entityId: memberId,
+      sourceRecord,
+      details,
+      detailLocales,
+    })
+    const integratedDetails = new Map<DetailLocale, unknown>()
+    for (const locale of detailLocales) {
+      const value = result.details[locale]
+      if (value === undefined)
+        throw new Error(`Bangboo ${memberId}: 缺少 ${locale} 详情整合结果`)
+      integratedDetails.set(locale, value)
+    }
+    return {
+      data: result.data,
+      details: completeLocaleRecord(
+        integratedDetails,
+        `Bangboo ${memberId} 详情整合结果`,
+      ),
+      sourceRecord: result.sourceRecord,
+      maintenance: result.maintenance,
+    }
+  },
+}
+
 /** 当前已接入类别；新类别必须在此显式登记，不从 raw 目录或抓取器支持列表推断。 */
 export const onboardedSnapshotEntities: readonly IntegratedSnapshotEntityProducer[] =
   [
     nanokaAgentsSnapshotEntity,
     nanokaDriveDiscsSnapshotEntity,
     nanokaWEnginesSnapshotEntity,
+    nanokaBangboosSnapshotEntity,
   ]

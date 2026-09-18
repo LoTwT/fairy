@@ -1,0 +1,245 @@
+{
+  "codeName": "Agent Gulliver",
+  "desc": "Security check! Open up!",
+  "id": 54014,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Agent Gulliver",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nShoots 3 piercing attacks, dealing <color=#2EB6FF>Electric DMG</color> and accumulating <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Emergency Operation",
+          "param": "{Skill:5401401, Prop:1001}|{Skill:5401401, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Hollow Special Operations Section 6</color> characters in your squad: When <color=#ffffff>Active Skill</color> or <color=#ffffff>Bangboo Chain Attack</color> hit <color=#2EB6FF>Shocked</color> enemies, the DMG increases by 30%. When attacking enemies under other non-Electric Attribute Anomalies, attacks accumulate 60% more Anomaly Buildup.",
+          "name": "Bangboo Assault Squad",
+          "param": "30%|60%",
+          "property": ["DMG Increase", "Anomaly Buildup Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Hollow Special Operations Section 6</color> characters in your squad: When <color=#ffffff>Active Skill</color> or <color=#ffffff>Bangboo Chain Attack</color> hit <color=#2EB6FF>Shocked</color> enemies, the DMG increases by 37%. When attacking enemies under other non-Electric Attribute Anomalies, attacks accumulate 75% more Anomaly Buildup.",
+          "name": "Bangboo Assault Squad",
+          "param": "37%|75%",
+          "property": ["DMG Increase", "Anomaly Buildup Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Hollow Special Operations Section 6</color> characters in your squad: When <color=#ffffff>Active Skill</color> or <color=#ffffff>Bangboo Chain Attack</color> hit <color=#2EB6FF>Shocked</color> enemies, the DMG increases by 45%. When attacking enemies under other non-Electric Attribute Anomalies, attacks accumulate 90% more Anomaly Buildup.",
+          "name": "Bangboo Assault Squad",
+          "param": "45%|90%",
+          "property": ["DMG Increase", "Anomaly Buildup Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Hollow Special Operations Section 6</color> characters in your squad: When <color=#ffffff>Active Skill</color> or <color=#ffffff>Bangboo Chain Attack</color> hit <color=#2EB6FF>Shocked</color> enemies, the DMG increases by 52%. When attacking enemies under other non-Electric Attribute Anomalies, attacks accumulate 105% more Anomaly Buildup.",
+          "name": "Bangboo Assault Squad",
+          "param": "52%|105%",
+          "property": ["DMG Increase", "Anomaly Buildup Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Hollow Special Operations Section 6</color> characters in your squad: When <color=#ffffff>Active Skill</color> or <color=#ffffff>Bangboo Chain Attack</color> hit <color=#2EB6FF>Shocked</color> enemies, the DMG increases by 60%. When attacking enemies under other non-Electric Attribute Anomalies, attacks accumulate 120% more Anomaly Buildup.",
+          "name": "Bangboo Assault Squad",
+          "param": "60%|120%",
+          "property": ["DMG Increase", "Anomaly Buildup Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nShoots 1 powerful piercing attack, dealing <color=#2EB6FF>Electric DMG</color> and inflicting massive <color=#2EB6FF>Electric Anomaly Buildup</color>.",
+          "name": "Assault Time",
+          "param": "{Skill:5401402, Prop:1001}|{Skill:5401402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

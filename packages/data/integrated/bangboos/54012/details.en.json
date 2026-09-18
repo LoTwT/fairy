@@ -1,0 +1,245 @@
+{
+  "codeName": "Officer Cui",
+  "desc": "Though it may be a Bangboo, it's even more intimidating than a Security Canine!",
+  "id": 54012,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Officer Cui",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nLaunches a two hit attack, tearing and biting enemies ahead and dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Awoo! Woof Woof!",
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>New Eridu Public Security</color> characters in your squad: When using the <color=#FFFFFF>Active Skill</color>, there is a 50% chance to follow-up with 1 extra hit of the biting attack, up to a maximum of 3 consecutive triggers.\n<color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 35%.",
+          "name": "Provisional Security Canine",
+          "param": "35%",
+          "property": ["DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>New Eridu Public Security</color> characters in your squad: When using the <color=#FFFFFF>Active Skill</color>, there is a 50% chance to follow-up with 1 extra hit of the biting attack, up to a maximum of 3 consecutive triggers.\n<color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 43%.",
+          "name": "Provisional Security Canine",
+          "param": "43%",
+          "property": ["DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>New Eridu Public Security</color> characters in your squad: When using the <color=#FFFFFF>Active Skill</color>, there is a 50% chance to follow-up with 1 extra hit of the biting attack, up to a maximum of 3 consecutive triggers.\n<color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 52%.",
+          "name": "Provisional Security Canine",
+          "param": "52%",
+          "property": ["DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>New Eridu Public Security</color> characters in your squad: When using the <color=#FFFFFF>Active Skill</color>, there is a 50% chance to follow-up with 1 extra hit of the biting attack, up to a maximum of 3 consecutive triggers.\n<color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 60%.",
+          "name": "Provisional Security Canine",
+          "param": "60%",
+          "property": ["DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>New Eridu Public Security</color> characters in your squad: When using the <color=#FFFFFF>Active Skill</color>, there is a 50% chance to follow-up with 1 extra hit of the biting attack, up to a maximum of 3 consecutive triggers.\n<color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 70%.",
+          "name": "Provisional Security Canine",
+          "param": "70%",
+          "property": ["DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nContinuously bites and tears enemies in front, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Woof Woof Woof Woof!",
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

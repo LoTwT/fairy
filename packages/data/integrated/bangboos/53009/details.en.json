@@ -1,0 +1,245 @@
+{
+  "codeName": "Boollseye",
+  "desc": "Right in the bull's eye!",
+  "id": 53009,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Boollseye",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill:</color>\nThrows a dart at the target, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Straight in the Heart",
+          "param": "{Skill:5300901, Prop:1001}|{Skill:5300901, Prop:1002}|16s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Pierce-type</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 30%.",
+          "name": "Crossfire Missiles",
+          "param": "30%",
+          "property": ["DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Pierce-type</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 37.5%.",
+          "name": "Crossfire Missiles",
+          "param": "37.5%",
+          "property": ["DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Pierce-type</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 45%.",
+          "name": "Crossfire Missiles",
+          "param": "45%",
+          "property": ["DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Pierce-type</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 52.5%.",
+          "name": "Crossfire Missiles",
+          "param": "52.5%",
+          "property": ["DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Pierce-type</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 60%.",
+          "name": "Crossfire Missiles",
+          "param": "60%",
+          "property": ["DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nLaunches itself with a slingshot, flying towards the target and performing consecutive slashes, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Dart of Desperation",
+          "param": "{Skill:5300902, Prop:1001}|{Skill:5300902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

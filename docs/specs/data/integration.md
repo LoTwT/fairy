@@ -5,9 +5,11 @@
 **状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）、`drive-discs`（规则
-`nanoka-drive-disc-reference/1`）与 `w-engines`（规则 `nanoka-w-engine-reference/1`）。驱动盘单实体规则与实现状态见
+`nanoka-drive-disc-reference/1`）、`w-engines`（规则 `nanoka-w-engine-reference/1`）与 `bangboos`（规则
+`nanoka-bangboo-reference/1`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)，WEngine 单实体规则与实现状态见
-[WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)。
+[WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)，Bangboo 单实体规则与实现状态见
+[Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -827,6 +829,86 @@ core 映射不属于本规则。
 WEngine；成员文件身份检查在类别登记表中显式实现。公开的 WEngine 类型、名称 catalog 与读取 API 已由包根入口
 按[消费契约](consumption.md)提供。
 
+### Bangboo 单实体实现规则 `nanoka-bangboo-reference/1`
+
+来源说明见 [Nanoka Bangboos](../nanoka/bangboo.md)：上游实体 `bangboo`，整合类别登记名为 `bangboos`，
+类型与函数统一使用 `Bangboo` 命名。每条记录表示一个邦布；计算语义、definitions/core 映射、材料解释、
+技能参数求值与引用闭合校验不属于本规则。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-bangboo.ts) `integrateBangboo` 接受与
+`integrateAgent`、`integrateDriveDisc`、`integrateWEngine` 相同的输入形态
+`{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[Bangboo 类型](../../../packages/data/src/integration/bangboo-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[Bangboo 结构登记](../../../packages/data/src/integration/bangboo-schema.ts)。
+
+字段归属（第一列为来源拼写，后两列为转换后的字段名）：
+
+| 来源字段         | `data.json`                                                                                                           | `details.{locale}.json`                                        |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `id`             | 数值邦布 ID                                                                                                           | 同值身份副本                                                   |
+| `rarity`、`icon` | `rarity`、`icon` 原值；合法空图标原样保留                                                                             | 无重复载荷                                                     |
+| `stats`          | 完整共享属性块，保留全部成员及原始数值                                                                                | 无重复载荷                                                     |
+| `skill_prop`     | `skillProp` 完整共享块，保留技能 ID、属性 ID、参数原值与格式                                                          | 无重复载荷                                                     |
+| `level`          | 共有阶段的 `hp_max`、`attack`、`defence`、`level_max`、`level_min`、`materials` 与共有 `extra` 属性的 `prop`、`value` | 对应阶段 `extra` 的 `name`、`format` 及未提取的本语言内容      |
+| `code_name`      | 无                                                                                                                    | `codeName` 当前语言原值                                        |
+| `name`、`desc`   | 无                                                                                                                    | 当前语言原文                                                   |
+| `skill`          | 无                                                                                                                    | 完整本地化结构（`level`、`name`、`desc`、`property`、`param`） |
+| 派生 `locale`    | 无                                                                                                                    | 输入语言标识                                                   |
+| 索引中的实体记录 | 不覆盖到详情                                                                                                          | 完整保存在 `sourceRecord`，不修改原 key                        |
+
+`codeName` 始终留在对应语言 details：各语言拼写可以不同（本地 3.1 的 `54010` 为 `BiggestFan` 与
+`Biggest Fan`，`54019` 为 `「Mercury」` 与 `Mercury`），不套用代理人按首个语言取值的特例，也不要求跨语言相等。
+`rarity`、`icon`、`stats`、`skillProp` 与等级阶段的登记公共值均按完整值跨语言核对，冲突即失败；
+`stats` 与 `skillProp` 是整块共享的容器，块内未知成员随块保留并参与完整值比较。索引摘要与语言详情是两个
+独立来源：摘要完整保存在 `sourceRecord`，不与详情去重，同名字段不要求相等，也不互相回退。
+
+等级成长块按 key 拆分：仅提取所有输入语言共有的同一阶段 key 的登记公共字段，单语言独有阶段完整留在该语言；
+共有阶段内再按属性 key 拆分 `extra`，仅提取全部语言共有属性 key 的 `prop` 与 `value`，单语言独有属性条目完整
+留在该语言。拆分产生的空壳（如无共有属性 key 的 `extra`）保留在两侧，与来源原有空容器一样可独立还原。
+合法空值按来源保留：本地 3.1 的 `55098`（伊埃斯）`icon` 为空字符串、`level` 为空对象、三个技能类别的
+`level` 均为空对象、`skill_prop` 为空对象，整合产物保留全部空结构。
+
+保留来源层级和用词，只转换已登记的 snake_case 结构字段：`hp_max` → `hpMax`、`attack_upgrade` → `attackUpgrade`、
+`level_max` → `levelMax`、`skill_prop` → `skillProp`、`element_accumulation_value` → `elementAccumulationValue` 等；
+`hpupgrade` 无下划线、保持来源拼写；技能类别、阶段、材料、技能及属性 ID 的 key 不改名，`skillProp` 内数字属性
+key 原样保留。技能 `param` 中的引用、分隔符、百分号及语言单位均按字符串保留，不解析、求值或修补。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`code_name`、`name`、`desc`、`rarity`、`icon`、`stats`、`level`、`skill`、
+   `skill_prop`；登记字段按登记表核对类型，`id` 必须为安全整数且规范十进制形式与 `entityId` 一致。`stats` 登记
+   十二个数值成员，`level` 阶段登记五个数值成员与 `materials` 材料计数表并要求 `extra` 存在，`extra` 属性条目登记
+   `prop`、`name`、`format`、`value`，`skill_prop` 条目要求 `element_accumulation_value` 并把数字属性 key 登记为
+   参数表（`main`、`growth`、`format`），`skill` 类别登记 `level` 字典、条目登记 `name`、`desc`、`property`、`param`；
+   未登记的成员原样保留并进入维护诊断。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. 来源字段与登记输出名冲突（如同时存在 `code_name` 与 `codeName`、`skill_prop` 与 `skillProp`、
+   `hp_max` 与 `hpMax`、`element_accumulation_value` 与 `elementAccumulationValue`）时失败，不覆盖、不合并；
+   来源 `locale` 与派生辅助字段重名时同样失败。
+5. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.1 `bangboo.json` 的 42 条记录为
+   `icon`、`rank`、`codename`、`en`、`desc`、`ko`、`zh`、`ja`。登记只用于识别未知字段：不要求这些字段存在、
+   不校验其类型，`sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的代码单元顺序生成
+   `locale: "index"` 的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
+6. 未登记字段原样保留：详情未知字段留在对应语言并进入维护诊断；共享块内部的未知成员随整块提取到 `data`，
+   跨语言不一致时仍按公共冲突处理。
+7. 空字符串、零、`null`、空数组、空对象、数组顺序、数值尺度与显示格式按来源保留；已登记字段仍须满足其
+   明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `BangbooIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+   字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
+
+实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/bangboo-integration.test.ts)、
+[独立测试侧还原](../../../packages/data/test/fixtures/bangboo-roundtrip.ts)、
+[合成输入](../../../packages/data/test/fixtures/bangboo-source.ts)和
+[类型正反例](../../../packages/data/test/bangboo-types.typecheck.ts)覆盖，测试不读取真实 raw；
+索引诊断进入制品外维护报告的链路由[构建维护报告用例](../../../packages/data/test/snapshot-build.test.ts)覆盖。
+**生产类别已接入**：`bangboos`（来源实体 `bangboo`）登记到已接入类别，生产快照与 JSON 子路径导出已包含
+邦布；成员文件身份检查在类别登记表中显式实现。公开的 Bangboo 类型、名称 catalog 与读取 API 已由包根入口
+按[消费契约](consumption.md)提供。
+
 ### 离线全量构建的共用能力
 
 全量构建入口是第 7.1 节的 `buildIntegratedSnapshot`（实现见下节）；它按已接入类别登记表处理全部类别，
@@ -925,9 +1007,11 @@ fairy-integrated-snapshot-<独占后缀>/
 
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
 当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）、`drive-discs`（来源实体
-`equipment`，规则 `nanoka-drive-disc-reference/1`）与 `w-engines`（来源实体 `weapon`，规则
-`nanoka-w-engine-reference/1`），代理人复用既有 `integrateAgent`、驱动盘复用既有
-`integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`，成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
+`equipment`，规则 `nanoka-drive-disc-reference/1`）、`w-engines`（来源实体 `weapon`，规则
+`nanoka-w-engine-reference/1`）与 `bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`），
+代理人复用既有 `integrateAgent`、驱动盘复用既有
+`integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`，
+成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
 可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
 验证与历史复验只要求静态契约。
 [索引类型](../../../packages/data/src/integration/snapshot-types.ts)由包根入口导出，是公开读取的唯一索引类型；
@@ -965,7 +1049,7 @@ fairy-integrated-snapshot-<独占后缀>/
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
 `generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents`、
-`drive-discs` 与 `w-engines`。
+`drive-discs`、`w-engines` 与 `bangboos`。
 从仓库根目录执行：
 
 ```bash
@@ -1144,6 +1228,38 @@ package.json 增加 WEngine data/zh/en JSON 子路径，并提交三类别真实
 - 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567，本任务明确只使用现有 3.1 缓存，
   不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
   [共享来源规范](../nanoka/source.md#分发复核记录)。
+
+### Bangboo 生产类别接入验收
+
+2026-09-18，基线 `eabd0ef295647826847f64fee83d816834297075`（任务分支 `codex/bangboo-integration`），
+实现 `bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`）登记到生产类别登记表，
+package.json 增加邦布 data/zh/en JSON 子路径，并提交四类别真实快照。
+
+真实 3.1 验收（本机 macOS arm64、Node 24、raw 为只读输入，不联网覆盖缓存、不升级来源版本）：
+
+- 修改登记前先按持锁协议执行 `verify:nanoka:current integrated`：`verified: true`；既有 369 项来源输入
+  （manifest、117 项代理人、61 项驱动盘、190 项 WEngine）与实际 raw 字节的 SHA-256 全部一致，确认受管理基线
+  未被来源漂移影响；登记前的全部 550 个制品文件摘要另存仓库外备份。
+- 登记 Bangboo 后执行 `generate:integrated raw/nanoka 3.1 integrated`：`committed`；bangboos 新增 42 名成员、
+  126 个文件；agents 58 名成员/174 个文件、drive-discs 30 名成员/90 个文件与 w-engines 95 名成员/285 个文件
+  结论均为 `unchanged`，仅 index.json 改写；全制品 676 个文件、455 项来源输入、复用 549 个实体文件。
+- 重复执行同一命令：`unchanged`，复用 675 个实体文件、改变 0 个、移除 0 个；管理记录、更新报告与当前快照
+  相互一致，最新报告明确表达本次已检查、无变化。仓库外备份逐文件比对：除 index.json 外的既有 549 个实体
+  文件字节不变。
+- 独立核对脚本（不导入生产代码）核对 42 名成员的 84 份语言详情：索引外壳与四个类别块、全部输入资源摘要与
+  raw 实际字节、data/zh/en 路径与实际字节摘要、逐成员 `sourceRecord` 与 raw 索引记录 JSON 值相等、身份与
+  `locale`、`rarity`/`icon`/`stats`/`skillProp` 提取、`level` 共有阶段与 `extra` 公共数值拆分、`skill` 完整本地化
+  结构、`codeName` 留在对应语言（`54010` 为 `BiggestFan`/`Biggest Fan`，`54019` 为 `「Mercury」`/`Mercury`）、
+  伊埃斯（`55098`）的空图标/空等级/空技能等级/空技能参数块保留、42 个英文名称非空且类内唯一、文件集合与
+  索引精确一致；data 与 details 按登记拼写独立合并后与 raw 详情 JSON 值相等，全部通过。
+- 合成验收（不读取真实 raw）覆盖：Bangboo 纯整合 18 项（双语拆分与独立测试侧还原、codeName 两语言差异保留、
+  语言独有阶段与属性条目、拆分空壳、合法空值样例、共享块未知成员参与完整值比较、公共冲突、身份/类型/语言/
+  改名冲突与保真边界、对象 key 排列无关与诊断顺序确定、显式语言子集）、类型正反例、发布目录名称生成与
+  缺失/空/重名拒绝、更新报告四类别归因、消费 API 对象隔离与跨类别加载边界、JSON 子路径、打包解包与离线安装。
+- `pnpm check`（类型、data 852 项常规测试、打包解包离线安装与按包名消费）、真实 Chromium 的 Vite 开发/生产
+  消费（四类场景，跨类别零串读）、`verify:nanoka:current` 全部通过；`git diff --check` 无输出。
+- 未执行真实相邻版本推进：本任务明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录
+  inode 不变。来源分发复核记录见[共享来源规范](../nanoka/source.md#分发复核记录)。
 
 ### 跨层最终验收
 

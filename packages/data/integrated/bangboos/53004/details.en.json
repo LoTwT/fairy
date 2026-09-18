@@ -1,0 +1,184 @@
+{
+  "codeName": "Sumoboo",
+  "desc": "A sumo wrestler never retreats!",
+  "id": 53004,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Sumoboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nJumps towards the target and executes a downward strike, dealing <color=#F0D12B>Physical DMG</color> in an area. This skill is good at interrupting.",
+          "name": "Finishing Move - Rock Crusher",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Stun</color> character in your squad: <color=#FFFFFF>Active Skill</color> inflicts 18% more Daze to enemies whose Daze is above 50%.",
+          "name": "Overpower All Odds",
+          "param": "18%",
+          "property": ["Daze Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Stun</color> character in your squad: <color=#FFFFFF>Active Skill</color> inflicts 22.5% more Daze to enemies whose Daze is above 50%.",
+          "name": "Overpower All Odds",
+          "param": "22.5%",
+          "property": ["Daze Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Stun</color> character in your squad: <color=#FFFFFF>Active Skill</color> inflicts 27% more Daze to enemies whose Daze is above 50%.",
+          "name": "Overpower All Odds",
+          "param": "27%",
+          "property": ["Daze Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Stun</color> character in your squad: <color=#FFFFFF>Active Skill</color> inflicts 31.5% more Daze to enemies whose Daze is above 50%.",
+          "name": "Overpower All Odds",
+          "param": "31.5%",
+          "property": ["Daze Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Stun</color> character in your squad: <color=#FFFFFF>Active Skill</color> inflicts 36% more Daze to enemies whose Daze is above 50%.",
+          "name": "Overpower All Odds",
+          "param": "36%",
+          "property": ["Daze Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

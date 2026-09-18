@@ -1,0 +1,245 @@
+{
+  "codeName": "Butler",
+  "desc": "A perfect butler for a perfect you.",
+  "id": 54004,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Butler",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[3 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[3.2 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[3.4 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[3.6 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[3.8 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[4 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[4.2 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[4.4 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[4.6 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nCreates a heartfelt afternoon snack. The snack will generate Energy for the receiving Agent once made and delivered.",
+          "name": "Tea Break",
+          "param": "[4.8 + Bangboo Level × 0.08]|24s",
+          "property": ["Energy Generation", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Victoria Housekeeping Co.</color> characters in your squad: <color=#FFFFFF>Active Skill</color> generates an additional 20% Energy.",
+          "name": "Personal Butler",
+          "param": "20%",
+          "property": ["Energy Generation Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Victoria Housekeeping Co.</color> characters in your squad: <color=#FFFFFF>Active Skill</color> generates an additional 25% Energy.",
+          "name": "Personal Butler",
+          "param": "25%",
+          "property": ["Energy Generation Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Victoria Housekeeping Co.</color> characters in your squad: <color=#FFFFFF>Active Skill</color> generates an additional 30% Energy.",
+          "name": "Personal Butler",
+          "param": "30%",
+          "property": ["Energy Generation Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Victoria Housekeeping Co.</color> characters in your squad: <color=#FFFFFF>Active Skill</color> generates an additional 35% Energy.",
+          "name": "Personal Butler",
+          "param": "35%",
+          "property": ["Energy Generation Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Victoria Housekeeping Co.</color> characters in your squad: <color=#FFFFFF>Active Skill</color> generates an additional 40% Energy.",
+          "name": "Personal Butler",
+          "param": "40%",
+          "property": ["Energy Generation Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUse a frying pan and pancakes to attack enemies from afar, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Afternoon Dessert",
+          "param": "{Skill:5400402, Prop:1001}|{Skill:5400402, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole31.png",
+  "id": 54016,
+  "level": {
+    "1": {
+      "attack": 0,
+      "defence": 0,
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "value": 0
+        }
+      },
+      "hpMax": 0,
+      "levelMax": 10,
+      "levelMin": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      }
+    },
+    "2": {
+      "attack": 65,
+      "defence": 35,
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "value": 0
+        }
+      },
+      "hpMax": 207,
+      "levelMax": 20,
+      "levelMin": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      }
+    },
+    "3": {
+      "attack": 324,
+      "defence": 69,
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "value": 0
+        }
+      },
+      "hpMax": 414,
+      "levelMax": 30,
+      "levelMin": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      }
+    },
+    "4": {
+      "attack": 973,
+      "defence": 104,
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "value": 2500
+        }
+      },
+      "hpMax": 621,
+      "levelMax": 40,
+      "levelMin": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      }
+    },
+    "5": {
+      "attack": 2593,
+      "defence": 139,
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "value": 2500
+        }
+      },
+      "hpMax": 828,
+      "levelMax": 50,
+      "levelMin": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      }
+    },
+    "6": {
+      "attack": 6483,
+      "defence": 173,
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "value": 5000
+        }
+      },
+      "hpMax": 1034,
+      "levelMax": 60,
+      "levelMin": 50,
+      "materials": {}
+    }
+  },
+  "rarity": 4,
+  "skillProp": {
+    "5401601": {
+      "1001": {
+        "format": "%",
+        "growth": 8550,
+        "main": 85500
+      },
+      "1002": {
+        "format": "%",
+        "growth": 2130,
+        "main": 21300
+      },
+      "elementAccumulationValue": 31200
+    },
+    "5401602": {
+      "1001": {
+        "format": "%",
+        "growth": 5820,
+        "main": 58200
+      },
+      "1002": {
+        "format": "%",
+        "growth": 3220,
+        "main": 32200
+      },
+      "elementAccumulationValue": 27300
+    },
+    "5401603": {
+      "1001": {
+        "format": "%",
+        "growth": 6660,
+        "main": 66600
+      },
+      "1002": {
+        "format": "%",
+        "growth": 2130,
+        "main": 21300
+      },
+      "elementAccumulationValue": 41200
+    },
+    "5401604": {
+      "1001": {
+        "format": "%",
+        "growth": 6880,
+        "main": 68800
+      },
+      "1002": {
+        "format": "%",
+        "growth": 980,
+        "main": 9800
+      },
+      "elementAccumulationValue": 29500
+    }
+  },
+  "stats": {
+    "attack": 70,
+    "attackUpgrade": 350579,
+    "breakStun": 117,
+    "crit": 500,
+    "critDmg": 5000,
+    "defUpgrade": 78871,
+    "defence": 28,
+    "elementAbnormalPower": 117,
+    "endurance": 180,
+    "hpMax": 396,
+    "hpupgrade": 471237,
+    "penRatio": 0
+  }
+}

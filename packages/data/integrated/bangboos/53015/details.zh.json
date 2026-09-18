@@ -1,0 +1,245 @@
+{
+  "codeName": "Brawlerboo",
+  "desc": "每天一万次心怀嗯呢的正拳！",
+  "id": 53015,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "格斗布",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，蓄力升空，进入<color=#FFFFFF>[凌空]</color>状态；在<color=#FFFFFF>[凌空]</color>状态期间，代理人重击命中敌人时，格斗布会发动俯冲攻击，对目标敌人造成<color=#FF5521>火属性伤害</color>。",
+          "name": "邦布星陨击！",
+          "param": "{Skill:5301501, Prop:1001}|{Skill:5301501, Prop:1002}|28秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：战斗开始时，格斗布提前进入<color=#FFFFFF>[凌空]</color>状态；首次发动的俯冲攻击造成的伤害提升120%。",
+          "name": "开幕刺拳",
+          "param": "120%",
+          "property": ["伤害提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：战斗开始时，格斗布提前进入<color=#FFFFFF>[凌空]</color>状态；首次发动的俯冲攻击造成的伤害提升150%。",
+          "name": "开幕刺拳",
+          "param": "150%",
+          "property": ["伤害提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：战斗开始时，格斗布提前进入<color=#FFFFFF>[凌空]</color>状态；首次发动的俯冲攻击造成的伤害提升180%。",
+          "name": "开幕刺拳",
+          "param": "180%",
+          "property": ["伤害提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：战斗开始时，格斗布提前进入<color=#FFFFFF>[凌空]</color>状态；首次发动的俯冲攻击造成的伤害提升210%。",
+          "name": "开幕刺拳",
+          "param": "210%",
+          "property": ["伤害提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：战斗开始时，格斗布提前进入<color=#FFFFFF>[凌空]</color>状态；首次发动的俯冲攻击造成的伤害提升240%。",
+          "name": "开幕刺拳",
+          "param": "240%",
+          "property": ["伤害提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n跳跃至空中，连续打击前方大范围敌人，造成<color=#FF5521>火属性伤害</color>。",
+          "name": "烈风千击",
+          "param": "{Skill:5301502, Prop:1001}|{Skill:5301502, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

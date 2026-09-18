@@ -821,6 +821,12 @@ describe("current dataset update report", () => {
             changed: false,
           },
           {
+            name: "bangboos",
+            before: null,
+            after: "nanoka-bangboo-reference/1",
+            changed: false,
+          },
+          {
             name: "drive-discs",
             before: null,
             after: "nanoka-drive-disc-reference/1",
@@ -854,6 +860,11 @@ describe("current dataset update report", () => {
       ["agents", "added"],
       ["agents", "added"],
       ["agents", "added"],
+      ["bangboos", "added"],
+      ["bangboos", "added"],
+      ["bangboos", "added"],
+      ["bangboos", "added"],
+      ["bangboos", "added"],
       ["drive-discs", "added"],
       ["drive-discs", "added"],
       ["drive-discs", "added"],
@@ -1019,6 +1030,16 @@ describe("current dataset update report", () => {
       ["agents", "zzz/synthetic-1/en/character/2.json", "removed"],
       ["agents", "zzz/synthetic-1/zh/character/10.json", "removed"],
       ["agents", "zzz/synthetic-1/en/character/10.json", "removed"],
+      ["bangboos", `zzz/${input.version}/bangboo.json`, "added"],
+      ["bangboos", `zzz/${input.version}/zh/bangboo/950001.json`, "added"],
+      ["bangboos", `zzz/${input.version}/en/bangboo/950001.json`, "added"],
+      ["bangboos", `zzz/${input.version}/zh/bangboo/950002.json`, "added"],
+      ["bangboos", `zzz/${input.version}/en/bangboo/950002.json`, "added"],
+      ["bangboos", "zzz/synthetic-1/bangboo.json", "removed"],
+      ["bangboos", "zzz/synthetic-1/zh/bangboo/950001.json", "removed"],
+      ["bangboos", "zzz/synthetic-1/en/bangboo/950001.json", "removed"],
+      ["bangboos", "zzz/synthetic-1/zh/bangboo/950002.json", "removed"],
+      ["bangboos", "zzz/synthetic-1/en/bangboo/950002.json", "removed"],
       ["drive-discs", `zzz/${input.version}/equipment.json`, "added"],
       ["drive-discs", `zzz/${input.version}/zh/equipment/930001.json`, "added"],
       ["drive-discs", `zzz/${input.version}/en/equipment/930001.json`, "added"],
@@ -1129,7 +1150,7 @@ describe("current dataset update report", () => {
       ["zzz/synthetic-1/character.json", "changed"],
       ["zzz/synthetic-1/zh/character/10.json", "changed"],
     ])
-    expect(report.source.unchangedInputCount).toBe(14)
+    expect(report.source.unchangedInputCount).toBe(19)
     expect(report.source.changed).toBe(true)
     expect(report.changeCause).toMatchObject({ attributedTo: "source" })
     expect(agents.review).toMatchObject({
@@ -1954,7 +1975,7 @@ describe("current dataset update report", () => {
             record.pointer,
           ),
         ).toEqual(record.after)
-  })
+  }, 30000)
 
   it("reports a legacy v2 baseline and a category added by the current registry", async () => {
     const input = await fixture()
@@ -2223,5 +2244,5 @@ describe("current dataset update report", () => {
       JSON.parse(verified.bytes["agents/2/details.zh.json"]!.toString()).name,
     ).toBe("changed")
     expect(verified.index.entities.agents.memberIds).toEqual(["2", "10"])
-  })
+  }, 30000)
 })

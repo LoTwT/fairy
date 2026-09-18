@@ -1,0 +1,19 @@
+{
+  "codeName": "Eous",
+  "desc": "Eous",
+  "id": 55098,
+  "level": {},
+  "locale": "en",
+  "name": "Eous",
+  "skill": {
+    "a": {
+      "level": {}
+    },
+    "b": {
+      "level": {}
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

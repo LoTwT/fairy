@@ -1,0 +1,245 @@
+{
+  "codeName": "Safety",
+  "desc": "安全第一，嗯呢第二。",
+  "id": 54002,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "阿全",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，进入驾驶状态向敌人冲撞，成功命中时将发动电钻攻击，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "掘进冲刺",
+          "param": "{Skill:5400201, Prop:1001}|{Skill:5400201, Prop:1002}|18秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[白祇重工]</color>阵营的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升20%，目标处于<color=#FF5521>[灼烧]</color>或<color=#2EB6FF>[感电]</color>状态下时，该增益效果额外提升20%。",
+          "name": "钻机组出动",
+          "param": "20%|20%",
+          "property": ["伤害提升", "伤害额外提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[白祇重工]</color>阵营的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升25%，目标处于<color=#FF5521>[灼烧]</color>或<color=#2EB6FF>[感电]</color>状态下时，该增益效果额外提升25%。",
+          "name": "钻机组出动",
+          "param": "25%|25%",
+          "property": ["伤害提升", "伤害额外提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[白祇重工]</color>阵营的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升30%，目标处于<color=#FF5521>[灼烧]</color>或<color=#2EB6FF>[感电]</color>状态下时，该增益效果额外提升30%。",
+          "name": "钻机组出动",
+          "param": "30%|30%",
+          "property": ["伤害提升", "伤害额外提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[白祇重工]</color>阵营的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升35%，目标处于<color=#FF5521>[灼烧]</color>或<color=#2EB6FF>[感电]</color>状态下时，该增益效果额外提升35%。",
+          "name": "钻机组出动",
+          "param": "35%|35%",
+          "property": ["伤害提升", "伤害额外提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[白祇重工]</color>阵营的角色时触发：<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升40%，目标处于<color=#FF5521>[灼烧]</color>或<color=#2EB6FF>[感电]</color>状态下时，该增益效果额外提升40%。",
+          "name": "钻机组出动",
+          "param": "40%|40%",
+          "property": ["伤害提升", "伤害额外提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n进入驾驶状态向目标冲撞，成功命中时将发动多段电钻攻击，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "破拆钻击",
+          "param": "{Skill:5400202, Prop:1001}|{Skill:5400202, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

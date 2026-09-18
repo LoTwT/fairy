@@ -1,0 +1,265 @@
+{
+  "codeName": "Miss Esme",
+  "desc": "以星耀之名，切换命运的轨迹！",
+  "id": 54018,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "艾丝弥小姐",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "4.4%生命值|[0.6+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "4.8%生命值|[0.7+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "5.2%生命值|[0.8+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "5.6%生命值|[0.9+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "6%生命值|[1+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "6.4%生命值|[1.1+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "6.8%生命值|[1.2+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "7.2%生命值|[1.3+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "7.6%生命值|[1.4+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，变身进入飞行状态，连续随机召唤出3枚<color=#FFFFFF>[幻泡]</color>或<color=#FFFFFF>[星莹]</color>：\n角色接触<color=#FFFFFF>[幻泡]</color>时，可以为自身回复生命值；\n角色接触<color=#FFFFFF>[星莹]</color>时，可以为自身回复能量值；\n前场代理人当前生命值百分比越高，艾丝弥小姐召唤<color=#FFFFFF>[星莹]</color>的概率越高。",
+          "name": "星光变身",
+          "param": "8%生命值|[1.5+自身等级*0.04]点|30秒",
+          "property": ["[幻泡]：生命值回复", "[星莹]：能量回复", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[怪啖屋]</color>阵营的角色时触发：\n角色接触<color=#FFFFFF>[幻泡]</color>时，回复的生命值提升20%；\n角色接触<color=#FFFFFF>[星莹]</color>时，回复的能量值提升20%。",
+          "name": "星耀切换",
+          "param": "2|20%|20%",
+          "property": [
+            "所需[怪啖屋]角色数",
+            "[幻泡]：回复的生命值提升",
+            "[星莹]：回复的能量值提升"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[怪啖屋]</color>阵营的角色时触发：\n角色接触<color=#FFFFFF>[幻泡]</color>时，回复的生命值提升25%；\n角色接触<color=#FFFFFF>[星莹]</color>时，回复的能量值提升25%。",
+          "name": "星耀切换",
+          "param": "2|25%|25%",
+          "property": [
+            "所需[怪啖屋]角色数",
+            "[幻泡]：回复的生命值提升",
+            "[星莹]：回复的能量值提升"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[怪啖屋]</color>阵营的角色时触发：\n角色接触<color=#FFFFFF>[幻泡]</color>时，回复的生命值提升30%；\n角色接触<color=#FFFFFF>[星莹]</color>时，回复的能量值提升30%。",
+          "name": "星耀切换",
+          "param": "1|30%|30%",
+          "property": [
+            "所需[怪啖屋]角色数",
+            "[幻泡]：回复的生命值提升",
+            "[星莹]：回复的能量值提升"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[怪啖屋]</color>阵营的角色时触发：\n角色接触<color=#FFFFFF>[幻泡]</color>时，回复的生命值提升35%；\n角色接触<color=#FFFFFF>[星莹]</color>时，回复的能量值提升35%。",
+          "name": "星耀切换",
+          "param": "1|35%|35%",
+          "property": [
+            "所需[怪啖屋]角色数",
+            "[幻泡]：回复的生命值提升",
+            "[星莹]：回复的能量值提升"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[怪啖屋]</color>阵营的角色时触发：\n角色接触<color=#FFFFFF>[幻泡]</color>时，回复的生命值提升40%；\n角色接触<color=#FFFFFF>[星莹]</color>时，回复的能量值提升40%。",
+          "name": "星耀切换",
+          "param": "1|40%|40%",
+          "property": [
+            "所需[怪啖屋]角色数",
+            "[幻泡]：回复的生命值提升",
+            "[星莹]：回复的能量值提升"
+          ]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n投掷一枚魔法炸弹，造成<color=#F0D12B>物理伤害</color>并累积大量<color=#F0D12B>物理异常积蓄值</color>。",
+          "name": "星辰弹",
+          "param": "{Skill:5401802, Prop:1001}|{Skill:5401802, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

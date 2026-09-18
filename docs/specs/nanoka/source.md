@@ -294,6 +294,21 @@ stdout 管道关闭等异步输出错误使用同一错误出口，退出码为 
   抓取器、管理记录、维护报告与 raw 不入库。结论：在现行边界内，接入 WEngine 与既有类别分发使用同一契约，
   无新增阻碍；若未来扩大再分发范围（例如整包镜像），仍须按本节重新评审。
 
+2026-09-18，接入 Bangboo 生产类别并提交四类别真实快照前，按本节要求重新评审一次：
+
+- **上游政策**：`https://zzz.nanoka.cc/` 当日返回 200，页面仍声明 `<meta name="robots" content="index, follow">`
+  与"Feature-rich game database made for players"自述，未发现使用条款、再分发授权或禁止性声明；
+  `https://static.nanoka.cc/manifest.json` 匿名可访问（当日 `live` 为 3.2、`latest` 为 3.3.2+18921567，
+  `available` 仍包含本次使用的 3.1），与登记的 `contentSignals` 一致。结论与 2026-09-17 相同，不把公开可访问
+  当作再分发授权。本次仍使用现有 3.1 缓存，未联网覆盖缓存或升级来源版本。
+- **存储成本**：新增 `bangboos` 类别后，Git 跟踪的 integrated 由 550 个文件增加到 676 个（新增 42 名成员 ×
+  3 个文件）；bangboos 目录实际字节约 1.09 MiB，agents 约 9.12 MiB、w-engines 约 1.05 MiB、drive-discs 约
+  0.04 MiB；npm 包发布副本相应增加这 126 个 JSON。raw 仍被 Git 精确忽略，不进入 Git 或 npm，成本评估不依赖
+  raw 入库。
+- **制品契约**：提交的数据仅限 `packages/data/integrated/` 下的已验证 v3 制品（索引与成员 JSON）；
+  抓取器、管理记录、维护报告与 raw 不入库。结论：在现行边界内，接入 Bangboo 与既有类别分发使用同一契约，
+  无新增阻碍；若未来扩大再分发范围（例如整包镜像），仍须按本节重新评审。
+
 ## 13. 验证范围
 
 自动化测试覆盖：
