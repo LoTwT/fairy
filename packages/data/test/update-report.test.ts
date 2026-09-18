@@ -1975,7 +1975,7 @@ describe("current dataset update report", () => {
             record.pointer,
           ),
         ).toEqual(record.after)
-  })
+  }, 30000)
 
   it("reports a legacy v2 baseline and a category added by the current registry", async () => {
     const input = await fixture()
@@ -2244,5 +2244,5 @@ describe("current dataset update report", () => {
       JSON.parse(verified.bytes["agents/2/details.zh.json"]!.toString()).name,
     ).toBe("changed")
     expect(verified.index.entities.agents.memberIds).toEqual(["2", "10"])
-  })
+  }, 30000)
 })

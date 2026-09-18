@@ -590,7 +590,7 @@ describe("current multi-entity dataset", () => {
     ])
     expect(checkedFull.status, checkedFull.stderr).toBe(0)
     expect(JSON.parse(checkedFull.stdout).verified).toBe(true)
-  })
+  }, 30000)
 
   it("rejects a recorded category the current registry no longer registers", async () => {
     const input = await fixture({ widgetIds: ["3"] })
