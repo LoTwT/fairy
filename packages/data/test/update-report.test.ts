@@ -827,6 +827,12 @@ describe("current dataset update report", () => {
             changed: false,
           },
           {
+            name: "boss",
+            before: null,
+            after: "nanoka-boss-reference/1",
+            changed: false,
+          },
+          {
             name: "drive-discs",
             before: null,
             after: "nanoka-drive-disc-reference/1",
@@ -877,6 +883,11 @@ describe("current dataset update report", () => {
       ["bangboos", "added"],
       ["bangboos", "added"],
       ["bangboos", "added"],
+      ["boss", "added"],
+      ["boss", "added"],
+      ["boss", "added"],
+      ["boss", "added"],
+      ["boss", "added"],
       ["drive-discs", "added"],
       ["drive-discs", "added"],
       ["drive-discs", "added"],
@@ -1062,6 +1073,16 @@ describe("current dataset update report", () => {
       ["bangboos", "zzz/synthetic-1/en/bangboo/950001.json", "removed"],
       ["bangboos", "zzz/synthetic-1/zh/bangboo/950002.json", "removed"],
       ["bangboos", "zzz/synthetic-1/en/bangboo/950002.json", "removed"],
+      ["boss", `zzz/${input.version}/boss.json`, "added"],
+      ["boss", `zzz/${input.version}/zh/boss/980001.json`, "added"],
+      ["boss", `zzz/${input.version}/en/boss/980001.json`, "added"],
+      ["boss", `zzz/${input.version}/zh/boss/980002.json`, "added"],
+      ["boss", `zzz/${input.version}/en/boss/980002.json`, "added"],
+      ["boss", "zzz/synthetic-1/boss.json", "removed"],
+      ["boss", "zzz/synthetic-1/zh/boss/980001.json", "removed"],
+      ["boss", "zzz/synthetic-1/en/boss/980001.json", "removed"],
+      ["boss", "zzz/synthetic-1/zh/boss/980002.json", "removed"],
+      ["boss", "zzz/synthetic-1/en/boss/980002.json", "removed"],
       ["drive-discs", `zzz/${input.version}/equipment.json`, "added"],
       ["drive-discs", `zzz/${input.version}/zh/equipment/930001.json`, "added"],
       ["drive-discs", `zzz/${input.version}/en/equipment/930001.json`, "added"],
@@ -1192,7 +1213,7 @@ describe("current dataset update report", () => {
       ["zzz/synthetic-1/character.json", "changed"],
       ["zzz/synthetic-1/zh/character/10.json", "changed"],
     ])
-    expect(report.source.unchangedInputCount).toBe(29)
+    expect(report.source.unchangedInputCount).toBe(34)
     expect(report.source.changed).toBe(true)
     expect(report.changeCause).toMatchObject({ attributedTo: "source" })
     expect(agents.review).toMatchObject({

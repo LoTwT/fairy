@@ -256,7 +256,7 @@ describe("current multi-entity dataset", () => {
   })
 
   it("creates a complete dataset, repeats without writes to current files, and preserves every inode and mtime", async () => {
-    // 生产登记表的整库生命周期覆盖：六类别、36 个实体文件与真实 oxfmt 批次都按原语义验证。
+    // 生产登记表的整库生命周期覆盖：七类别、42 个实体文件与真实 oxfmt 批次都按原语义验证。
     const input = await fixture({ production: true })
     const raw = await bytes(input.rawRoot)
     const first = await updateCurrentDataset(input)
@@ -266,12 +266,13 @@ describe("current multi-entity dataset", () => {
       memberCounts: {
         "agents": 2,
         "bangboos": 2,
+        "boss": 2,
         "drive-discs": 2,
         "monsters": 2,
         "shiyu": 2,
         "w-engines": 2,
       },
-      entityFileCount: 36,
+      entityFileCount: 42,
     })
     const before = await fingerprints(input.targetDirectory)
     const writes = vi.spyOn(fs, "writeFile")
@@ -288,8 +289,8 @@ describe("current multi-entity dataset", () => {
     expect(second.outcome).toBe("unchanged")
     expect(second.reusedEntityFiles).toBe(Object.keys(before).length - 1)
     expect(second.changedEntityFiles).toBe(0)
-    // 六个类别的成员文件各自成批，索引单独一批。
-    expect(formatted).toHaveBeenCalledTimes(7)
+    // 七个类别的成员文件各自成批，索引单独一批。
+    expect(formatted).toHaveBeenCalledTimes(8)
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
     expect(
       writes.mock.calls.filter(([path]) =>

@@ -68,6 +68,9 @@ it("consumes the offline-installed package in real Vite development and producti
     const shiyuMemberIds: string[] = integratedIndex.entities["shiyu"].memberIds
     const shiyuCount = shiyuMemberIds.length
     const directShiyuId = shiyuMemberIds[1] ?? shiyuMemberIds[0]
+    const bossMemberIds: string[] = integratedIndex.entities["boss"].memberIds
+    const bossCount = bossMemberIds.length
+    const directBossId = bossMemberIds[1] ?? bossMemberIds[0]
     // 构建模块图应包含两类导入表引用的全部 JSON：按已验证索引逐类别推导，不使用固定文件总数。
     const publishedEntities = integratedIndex.entities as Record<
       string,
@@ -111,6 +114,10 @@ globalThis.fairyDirectMonster = {
 globalThis.fairyDirectShiyu = {
   data: () => import("@randomplay/data/integrated/shiyu/${directShiyuId}/data.json"),
   zh: () => import("@randomplay/data/integrated/shiyu/${directShiyuId}/details.zh.json"),
+}
+globalThis.fairyDirectBoss = {
+  data: () => import("@randomplay/data/integrated/boss/${directBossId}/data.json"),
+  zh: () => import("@randomplay/data/integrated/boss/${directBossId}/details.zh.json"),
 }
 document.body.append("ready")
 `,
@@ -172,6 +179,8 @@ document.body.append("ready")
             directMonsterId,
             shiyuCount,
             directShiyuId,
+            bossCount,
+            directBossId,
           })) {
             const context = await browser.newContext()
             const page = await context.newPage()
@@ -326,6 +335,8 @@ function defineScenarios(counts: {
   directMonsterId: string
   shiyuCount: number
   directShiyuId: string
+  bossCount: number
+  directBossId: string
 }): Array<{ name: string; steps: ScenarioStep[] }> {
   const {
     agentCount,
@@ -339,6 +350,8 @@ function defineScenarios(counts: {
     directMonsterId,
     shiyuCount,
     directShiyuId,
+    bossCount,
+    directBossId,
   } = counts
   async function checkNameCatalogs(page: Page) {
     const catalogs = await page.evaluate(() => {
@@ -350,13 +363,15 @@ function defineScenarios(counts: {
         bangbooNames: api.bangbooNames.length,
         monsterIds: api.monsterIds.length,
         shiyuIds: api.shiyuIds.length,
+        bossIds: api.bossIds.length,
         frozen:
           Object.isFrozen(api.agentNames) &&
           Object.isFrozen(api.driveDiscNames) &&
           Object.isFrozen(api.wEngineNames) &&
           Object.isFrozen(api.bangbooNames) &&
           Object.isFrozen(api.monsterIds) &&
-          Object.isFrozen(api.shiyuIds),
+          Object.isFrozen(api.shiyuIds) &&
+          Object.isFrozen(api.bossIds),
       }
     })
     expect(catalogs).toEqual({
@@ -366,6 +381,7 @@ function defineScenarios(counts: {
       bangbooNames: bangbooCount,
       monsterIds: monsterCount,
       shiyuIds: shiyuCount,
+      bossIds: bossCount,
       frozen: true,
     })
   }
@@ -545,7 +561,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 代理人上下文全程不请求驱动盘、WEngine、邦布、怪物或 Shiyu JSON。
+            // 代理人上下文全程不请求驱动盘、WEngine、邦布、怪物、Shiyu 或 Boss JSON。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -555,7 +571,8 @@ function defineScenarios(counts: {
                     !path.startsWith("w-engines/") &&
                     !path.startsWith("bangboos/") &&
                     !path.startsWith("monsters/") &&
-                    !path.startsWith("shiyu/"),
+                    !path.startsWith("shiyu/") &&
+                    !path.startsWith("boss/"),
                 ),
             ).toBe(true)
           },
@@ -779,7 +796,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布、怪物、Shiyu 文件或索引。
+            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布、怪物、Shiyu、Boss 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -987,7 +1004,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布、怪物、Shiyu 文件或索引。
+            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布、怪物、Shiyu、Boss 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1197,7 +1214,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine、怪物、Shiyu 文件或索引。
+            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine、怪物、Shiyu、Boss 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1419,7 +1436,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 怪物上下文全程只请求怪物 JSON：不触达代理人、驱动盘、WEngine、邦布、Shiyu 文件或索引。
+            // 怪物上下文全程只请求怪物 JSON：不触达代理人、驱动盘、WEngine、邦布、Shiyu、Boss 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1641,11 +1658,221 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // Shiyu 上下文全程只请求 Shiyu JSON：不触达代理人、驱动盘、WEngine、邦布、怪物文件或索引。
+            // Shiyu 上下文全程只请求 Shiyu JSON：不触达代理人、驱动盘、WEngine、邦布、怪物、Boss 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
                 .every((path) => path.startsWith("shiyu/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+    {
+      name: "boss",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "boss-data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (await (globalThis as any).fairy.loadBossData("69001")).id,
+              ),
+            ).toBe(69001)
+          },
+          sources: ["boss/69001/data.json"],
+        },
+        {
+          name: "boss-details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const details = await (globalThis as any).fairy.loadBossDetails(
+                  "69001",
+                  "en",
+                )
+                return { locale: details.locale, id: String(details.id) }
+              }),
+            ).toEqual({ locale: "en", id: "69001" })
+          },
+          sources: ["boss/69001/details.en.json"],
+        },
+        {
+          name: "boss-details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadBossDetails(
+                      "69001",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["boss/69001/details.zh.json"],
+        },
+        {
+          name: "all-bosses-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const api = (globalThis as any).fairy
+                const all = await api.loadAllBosses("en")
+                const keys = Object.keys(all)
+                return {
+                  count: keys.length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (boss: any) => boss.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    keys.length === expected &&
+                    keys.every((id, position) => id === api.bossIds[position]),
+                  dataKeysSeparated: Object.values(all).every(
+                    (boss: any) =>
+                      Object.keys(boss).length === 2 &&
+                      "data" in boss &&
+                      "details" in boss,
+                  ),
+                }
+              }, bossCount),
+            ).toEqual({
+              count: bossCount,
+              locales: ["en"],
+              keysMatch: true,
+              dataKeysSeparated: true,
+            })
+          },
+          after: (requests) => {
+            const bossSources = requests
+              .filter((request) =>
+                ["boss-data", "boss-details-en", "all-bosses-en"].includes(
+                  request.phase,
+                ),
+              )
+              .flatMap((request) => request.sources)
+            expect(bossSources).toHaveLength(bossCount * 2)
+            expect(new Set(bossSources).size).toBe(bossCount * 2)
+            expect(
+              bossSources.every(
+                (path) =>
+                  path.startsWith("boss/") &&
+                  (path.endsWith("/data.json") ||
+                    path.endsWith("/details.en.json")),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "direct-subpath",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (id) => {
+                const data = await (globalThis as any).fairyDirectBoss.data()
+                const zh = await (globalThis as any).fairyDirectBoss.zh()
+                if (String(data.default.id) !== id)
+                  throw new Error("direct boss data id mismatch")
+                if (String(zh.default.id) !== id || zh.default.locale !== "zh")
+                  throw new Error("direct boss details mismatch")
+                return { id: data.default.id, locale: zh.default.locale }
+              }, directBossId),
+            ).toEqual({ id: Number(directBossId), locale: "zh" })
+          },
+          after: (requests) => {
+            const directSources = requests
+              .filter((request) => request.phase === "direct-subpath")
+              .flatMap((request) => request.sources)
+            expect(directSources).toContain(
+              `boss/${directBossId}/details.zh.json`,
+            )
+            expect(
+              directSources.every(
+                (path) =>
+                  path === `boss/${directBossId}/data.json` ||
+                  path === `boss/${directBossId}/details.zh.json`,
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "boss-repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadBossData("69001")
+              one.priority = -1
+              if ((await api.loadBossData("69001")).priority === -1)
+                throw new Error("shared object")
+              const details = await api.loadBossDetails("69001", "zh")
+              const mode = details.modes[0]
+              const stageKey = Object.keys(mode.zone)[0]
+              mode.zone[stageKey].stageNum = -1
+              details.name = "browser mutation"
+              const reread = await api.loadBossDetails("69001", "zh")
+              if (reread.modes[0].zone[stageKey].stageNum === -1)
+                throw new Error("shared zone")
+              if (reread.name === "browser mutation")
+                throw new Error("shared details")
+              if ((await api.loadBossData("069001")) !== undefined)
+                throw new Error("zero-padded id accepted")
+              try {
+                await api.loadAllBosses("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadBossDetails("69001")
+                throw new Error("missing locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadBossData(69001)
+                throw new Error("numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 其余类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("agent numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadMonsterData(10000)
+                throw new Error("monster numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadShiyuData(61001)
+                throw new Error("shiyu numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // Boss 上下文全程只请求 Boss JSON：不触达代理人、驱动盘、WEngine、邦布、怪物、Shiyu 文件或索引。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => path.startsWith("boss/")),
             ).toBe(true)
           },
         },

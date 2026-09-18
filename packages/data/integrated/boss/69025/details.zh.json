@@ -1,0 +1,229 @@
+{
+  "id": 69025,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 69025,
+      "zone": {
+        "6902501": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010109": {
+              "desc": "· 成功<color=#FFAF2C>击破舞者分身</color>时，可获得<color=#FFAF2C>200操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69011204": {
+              "desc": "· 首领敌人造成伤害提升25%；<color=#FFAF2C>分身被击破</color>/<color=#FFAF2C>本体进入失衡状态</color>时，将对首领敌人施加1层/5层<color=#FFFFFF>[如履薄冰]</color>， 每层<color=#FFFFFF>[如履薄冰]</color>会使首领敌人造成的伤害降低5%，并使代理人对其造成的<color=#98EFF0>冰属性伤害</color>和<color=#FE437E>以太属性伤害</color><color=#FFAF2C>提升10%</color>；敌人从失衡状态恢复时，<color=#FFFFFF>[如履薄冰]</color>层数将会被重置。",
+              "title": ""
+            },
+            "69012103": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69025011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousMarionette.png",
+              "monsterList": {
+                "11861": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300121,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousMarionette.png",
+                  "name": "恶名·冥宁芙",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 14612040.629999999,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "恶名·冥宁芙",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· 代理人的属性异常积蓄效率<color=#2BAD00>提升20%</color>。\n· 对敌人施加<color=#FFFFFF>属性异常</color>效果时，全队<color=#2BAD00>提升60点异常精通</color>，<color=#FFFFFF>紊乱</color>造成的伤害<color=#2BAD00>提升40%</color>，持续15秒。",
+              "title": "异象"
+            },
+            "69011301": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率 <color=#2BAD00>提升15%</color>，<color=#FE437E>以太属性伤害</color>和<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "凝神"
+            },
+            "69012501": {
+              "desc": "· 代理人的[终结技]造成的伤害<color=#2BAD00>提升30%</color>，代理人使敌人进入失衡状态后，其失衡易伤倍率<color=#2BAD00>提升50%</color>。\n· [击破]特性的代理人发动[强化特殊技]后，全队攻击命中敌人时，无视其<color=#2BAD00>7%全属性伤害抗性</color>，持续30秒，最多可叠加3层，每层效果单独结算持续时间。",
+              "title": "截脉"
+            }
+          },
+          "stageNum": 1
+        },
+        "6902502": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012602": {
+              "desc": "· 索贝克与魇缚者每次交替上场时，可使魇缚者获得1层<color=#FFFFFF>[合契]</color>与一层<color=#FFFFFF>[舍身]</color>，[合契]与[舍身]最多叠加3层，每层[合契]可使全属性异常积蓄抗性<color=#FFAF2C>提升15%</color>，每层[舍身]可使魇缚者防御<color=#FFAF2C>降低8%</color>；魇缚者进入失衡状态时，受到暴击伤害<color=#FFAF2C>提升50%</color>。",
+              "title": ""
+            },
+            "69012603": {
+              "desc": "· 代理人使索贝克与魇缚者进入<color=#FFAF2C>虚弱状态</color>时，可获得<color=#FFAF2C>1500操作得分</color>；代理人<color=#FFAF2C>击杀索贝克</color>时，可获得<color=#FFAF2C>2000操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69013004": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Stun><color=#FFAF2C>[击破]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69025021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Awakener.png",
+              "monsterList": {
+                "31353": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 1,
+                    "wind": 1
+                  },
+                  "id": 30042,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Awakener.png",
+                  "name": "魇缚者·叶释渊",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 18479019.24,
+                    "stun": 14068.040000000003
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "物理",
+                "202": "冰属性",
+                "204": "风属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "魇缚者·叶释渊",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· 代理人的属性异常积蓄效率<color=#2BAD00>提升20%</color>。\n· 对敌人施加<color=#FFFFFF>属性异常</color>效果时，全队<color=#2BAD00>提升60点异常精通</color>，<color=#FFFFFF>紊乱</color>造成的伤害<color=#2BAD00>提升40%</color>，持续15秒。",
+              "title": "异象"
+            },
+            "69011301": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率 <color=#2BAD00>提升15%</color>，<color=#FE437E>以太属性伤害</color>和<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "凝神"
+            },
+            "69012501": {
+              "desc": "· 代理人的[终结技]造成的伤害<color=#2BAD00>提升30%</color>，代理人使敌人进入失衡状态后，其失衡易伤倍率<color=#2BAD00>提升50%</color>。\n· [击破]特性的代理人发动[强化特殊技]后，全队攻击命中敌人时，无视其<color=#2BAD00>7%全属性伤害抗性</color>，持续30秒，最多可叠加3层，每层效果单独结算持续时间。",
+              "title": "截脉"
+            }
+          },
+          "stageNum": 2
+        },
+        "6902503": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011602": {
+              "desc": "秽息妖鬼每次进入<color=#FFAF2C>属性异常</color>时，代理人对其造成的异常伤害增加8%，最多叠加6层；开启<Term:2000002></Term>时清空所有层数，每层使<color=#FFAF2C>[秽盾]</color>被削减效率提升2.5%。",
+              "title": ""
+            },
+            "69011603": {
+              "desc": "· 代理人吸引秽息妖鬼地面攻击<color=#FFAF2C>一次性引爆至少5处秽息泽</color>，且<color=#FFAF2C>未被该攻击及秽息泽爆炸命中</color>时，可获得<color=#FFAF2C>1700操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69013003": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>[异常]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69025031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NamelessOne.png",
+              "monsterList": {
+                "31062": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30034,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_NamelessOne.png",
+                  "name": "秽息妖鬼·名可名",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 18410820.5925,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "物理",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "秽息妖鬼·名可名",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· 代理人的属性异常积蓄效率<color=#2BAD00>提升20%</color>。\n· 对敌人施加<color=#FFFFFF>属性异常</color>效果时，全队<color=#2BAD00>提升60点异常精通</color>，<color=#FFFFFF>紊乱</color>造成的伤害<color=#2BAD00>提升40%</color>，持续15秒。",
+              "title": "异象"
+            },
+            "69011301": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率 <color=#2BAD00>提升15%</color>，<color=#FE437E>以太属性伤害</color>和<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "凝神"
+            },
+            "69012501": {
+              "desc": "· 代理人的[终结技]造成的伤害<color=#2BAD00>提升30%</color>，代理人使敌人进入失衡状态后，其失衡易伤倍率<color=#2BAD00>提升50%</color>。\n· [击破]特性的代理人发动[强化特殊技]后，全队攻击命中敌人时，无视其<color=#2BAD00>7%全属性伤害抗性</color>，持续30秒，最多可叠加3层，每层效果单独结算持续时间。",
+              "title": "截脉"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}

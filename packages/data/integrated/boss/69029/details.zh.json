@@ -1,0 +1,227 @@
+{
+  "id": 69029,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 69029,
+      "zone": {
+        "6902901": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012704": {
+              "desc": "·首领受到的异常伤害<color=#2BAD00>降低30%</color>，当其从<Term:2000002></Term>状态切换回普通状态，或从普通状态切换为<color=#FFAF2C>[秽盾]</color>状态时，使代理人对其造成的暴击伤害<color=#2BAD00>提升20%</color>，最多叠加3层，当其从失衡状态恢复时层数重置。",
+              "title": ""
+            },
+            "69012705": {
+              "desc": "·触发<color=#FFAF2C>[秽盾净除]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；<Term:2000003></Term>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，可获得<color=#FFAF2C>2000操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>[强攻]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69029011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vessel.png",
+              "monsterList": {
+                "31412": {
+                  "element": {
+                    "electric": 0,
+                    "ether": -1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 40000,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vessel.png",
+                  "name": "太初梦魇·「始主」",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 24799326.7275,
+                    "stun": 18236
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "物理"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "太初梦魇·「始主」",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012901": {
+              "desc": "· 处于以太帷幕中时，代理人的攻击力<color=#2BAD00>提升20%</color>，暴击伤害<color=#2BAD00>提升20%</color>。\n· 敌人的失衡易伤倍率<color=#2BAD00>提升30%</color>，代理人的普通攻击和终结技攻击命中敌人时，无视其<color=#2BAD00>10%</color>的<color=#F0D12B>物理属性伤害抗性</color>和<color=#2BAD00>10%</color>的防御力。",
+              "title": "裁夺"
+            },
+            "69012902": {
+              "desc": "· 代理人的<color=#98EFF0>冰属性伤害</color>和<color=#F0D12B>物理伤害</color><color=#2BAD00>提升30%</color>。\n· 使敌人进入属性异常时，全队的攻击力<color=#2BAD00>提升25%</color>，喧响值获取效率<color=#2BAD00>提升20%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "霜暝"
+            },
+            "69012903": {
+              "desc": "· 使敌人进入失衡状态后，其失衡易伤倍率<color=#2BAD00>提升35%</color>，失衡恢复速度<color=#2BAD00>降低10%</color>。\n· 代理人释放<color=#FFFFFF>强化特殊技</color>后，自身暴击伤害<color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "破阵"
+            }
+          },
+          "stageNum": 1
+        },
+        "6902902": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010305": {
+              "desc": "· 对首领敌人的腿部造成足够的伤害时，会触发[部位破坏]，<color=#FFAF2C>代理人成功破坏首领敌人的腿部时</color>，回复<color=#FFAF2C>1000点喧响值</color>，首领敌人获得1层<color=#FFFFFF>[崩解]</color>，持续20秒，最多4层；代理人攻击命中敌人时，目标每拥有1层<color=#FFFFFF>[崩解]</color>，暴击伤害<color=#FFAF2C>提升25%</color>。",
+              "title": ""
+            },
+            "69010306": {
+              "desc": "",
+              "title": ""
+            },
+            "69010307": {
+              "desc": "· 成功<color=#FFAF2C>造成部位破坏</color>时，可获得<color=#FFAF2C>800操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69029021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ComplexCorrupted.png",
+              "monsterList": {
+                "11414": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_ComplexCorrupted.png",
+                  "name": "未知复合侵蚀体",
+                  "stats": {
+                    "attack": 2738.909090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 14984635.095,
+                    "stun": 16894.15
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "电属性",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "未知复合侵蚀体",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012901": {
+              "desc": "· 处于以太帷幕中时，代理人的攻击力<color=#2BAD00>提升20%</color>，暴击伤害<color=#2BAD00>提升20%</color>。\n· 敌人的失衡易伤倍率<color=#2BAD00>提升30%</color>，代理人的普通攻击和终结技攻击命中敌人时，无视其<color=#2BAD00>10%</color>的<color=#F0D12B>物理属性伤害抗性</color>和<color=#2BAD00>10%</color>的防御力。",
+              "title": "裁夺"
+            },
+            "69012902": {
+              "desc": "· 代理人的<color=#98EFF0>冰属性伤害</color>和<color=#F0D12B>物理伤害</color><color=#2BAD00>提升30%</color>。\n· 使敌人进入属性异常时，全队的攻击力<color=#2BAD00>提升25%</color>，喧响值获取效率<color=#2BAD00>提升20%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "霜暝"
+            },
+            "69012903": {
+              "desc": "· 使敌人进入失衡状态后，其失衡易伤倍率<color=#2BAD00>提升35%</color>，失衡恢复速度<color=#2BAD00>降低10%</color>。\n· 代理人释放<color=#FFFFFF>强化特殊技</color>后，自身暴击伤害<color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "破阵"
+            }
+          },
+          "stageNum": 2
+        },
+        "6902903": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012302": {
+              "desc": "· 彷徨猎手处于[秽浊流界]中时，基础防御提高40%；代理人发动<color=#FFAF2C>[支援突击]或[闪避反击]</color>命中彷徨猎手时，将对其施加1层<color=#FFFFFF>[动摇]</color>。<color=#FFFFFF>[动摇]</color>最多叠加5层，持续15秒，重复触发时刷新持续时间。\n· 代理人攻击命中彷徨猎手时，对方每有1层[动摇]，代理人的贯穿伤害<color=#FFAF2C>提升7%</color>。",
+              "title": ""
+            },
+            "69012303": {
+              "desc": "· 在捉迷藏阶段，使用<color=#FFAF2C>[觉感术]</color>破除<color=#FFAF2C>溺想者·卢西娅的真身</color>，可获得<color=#FFAF2C>3000操作得分</color>；破除真身后发动<color=#FFAF2C>[招架支援]或[支援突击]</color>命中彷徨猎手，化解其突袭，可获得<color=#FFAF2C>2000操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69013002": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Rupture><color=#FFAF2C>[命破]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69029031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_WanderingHunter.png",
+              "monsterList": {
+                "11842": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 30041,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_WanderingHunter.png",
+                  "name": "彷徨猎手",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 1588,
+                    "hp": 17472354.6375,
+                    "stun": 16283.150000000001
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "火属性",
+                "202": "冰属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "彷徨猎手",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012901": {
+              "desc": "· 处于以太帷幕中时，代理人的攻击力<color=#2BAD00>提升20%</color>，暴击伤害<color=#2BAD00>提升20%</color>。\n· 敌人的失衡易伤倍率<color=#2BAD00>提升30%</color>，代理人的普通攻击和终结技攻击命中敌人时，无视其<color=#2BAD00>10%</color>的<color=#F0D12B>物理属性伤害抗性</color>和<color=#2BAD00>10%</color>的防御力。",
+              "title": "裁夺"
+            },
+            "69012902": {
+              "desc": "· 代理人的<color=#98EFF0>冰属性伤害</color>和<color=#F0D12B>物理伤害</color><color=#2BAD00>提升30%</color>。\n· 使敌人进入属性异常时，全队的攻击力<color=#2BAD00>提升25%</color>，喧响值获取效率<color=#2BAD00>提升20%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "霜暝"
+            },
+            "69012903": {
+              "desc": "· 使敌人进入失衡状态后，其失衡易伤倍率<color=#2BAD00>提升35%</color>，失衡恢复速度<color=#2BAD00>降低10%</color>。\n· 代理人释放<color=#FFFFFF>强化特殊技</color>后，自身暴击伤害<color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "破阵"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}

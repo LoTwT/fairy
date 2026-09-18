@@ -1,0 +1,292 @@
+{
+  "id": 690441,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 690442,
+      "zone": {
+        "69044201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013304": {
+              "desc": "·每次成功应对首领的攻击并使其触发特殊跪地，可获得<color=#FFAF2C>1000操作得分</color>；<Term:2000003></Term>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，可获得<color=#FFAF2C>1500操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            },
+            "69014407": {
+              "desc": "代理人对敌人造成[完美反制]后，敌人的全属性抗性降低10%，且全队[强攻]特性的代理人攻击力提升20%，穿透率提升25%，造成的冰属性和以太属性伤害的暴击伤害提升60%。\n触发特殊跪地时，全队异常精通提升40点，异常伤害提升30%。",
+              "title": "69014407_Title"
+            },
+            "69014409": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690442011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ClonedBlackWolf.png",
+              "monsterList": {
+                "11803": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40003,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_ClonedBlackWolf.png",
+                  "name": "复写体·猎血清道夫",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 46994360.22,
+                    "stun": 17876.45
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "复写体·猎血清道夫",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· 代理人的暴击伤害<color=#2BAD00>提升30%</color>。\n· [强攻]特性的代理人攻击力<color=#2BAD00>提升10%</color>，[普通攻击]命中时造成的伤害<color=#2BAD00>提升30%</color>，并无视敌人<color=#2BAD00>15%</color>的防御力。",
+              "title": "摧心"
+            },
+            "69014401": {
+              "desc": "· 代理人的<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[终结技]</color>造成的伤害<color=#2BAD00>提升30%</color>。[强攻]特性的代理人攻击命中敌人时，无视其<color=#2BAD00>20%</color>的<color=#98EFF0>冰属性伤害抗性</color>。\n· 代理人发动<color=#FFFFFF>[强化特殊技]</color>后，自身的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "冰袭"
+            },
+            "69014402": {
+              "desc": "· 队伍中存在2/3名<color=#FFFFFF>[异常]</color>特性的代理人时，全队造成的属性异常伤害分别<color=#2BAD00>提升10%/30%</color>，全队的攻击力分别<color=#2BAD00>提升5%/15%</color>。\n· 对敌人造成属性异常伤害时，无视其<color=#2BAD00>10%</color>的全属性伤害抗性与<color=#2BAD00>10%</color>的防御力。",
+              "title": "异变"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690441,
+      "zone": {
+        "69044101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014403": {
+              "desc": "· <color=#FFAF2C>未处于失衡状态下时</color>，首领敌人每6秒获得1层<color=#FFFFFF>[孤注一掷]</color>，最多叠加3层，每层<color=#FFFFFF>[孤注一掷]</color>会使首领敌人造成的伤害<color=#FFAF2C>提升10%</color>；代理人攻击命中敌人时，目标每拥有1层<color=#FFFFFF>[孤注一掷]</color>，代理人攻击造成的暴击伤害<color=#FFAF2C>提升25%</color>，属性异常伤害<color=#FFAF2C>降低15%</color>；敌人进入失衡状态时，获得1层<color=#FFFFFF>[孤注一掷]</color>；敌人从失衡状态恢复时，<color=#FFFFFF>[孤注一掷]</color>层数将会被重置。",
+              "title": "69014403_Title"
+            },
+            "69014404": {
+              "desc": "· 成功<color=#FFAF2C>触发[极限闪避]</color>或<color=#FFAF2C>[极限支援]</color>时，可获得<color=#FFAF2C>300操作得分</color>，最多获得5000操作得分。",
+              "title": "69014404_Title"
+            }
+          },
+          "layerRoom": {
+            "690441011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_CottusGrey.png",
+              "monsterList": {
+                "11238": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30007,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_CottusGrey.png",
+                  "name": "死路屠夫",
+                  "stats": {
+                    "attack": 2738.909090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 21772935.809999995,
+                    "stun": 14078.85
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "初生死路屠夫",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· 代理人的暴击伤害<color=#2BAD00>提升30%</color>。\n· [强攻]特性的代理人攻击力<color=#2BAD00>提升10%</color>，[普通攻击]命中时造成的伤害<color=#2BAD00>提升30%</color>，并无视敌人<color=#2BAD00>15%</color>的防御力。",
+              "title": "摧心"
+            },
+            "69014401": {
+              "desc": "· 代理人的<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[终结技]</color>造成的伤害<color=#2BAD00>提升30%</color>。[强攻]特性的代理人攻击命中敌人时，无视其<color=#2BAD00>20%</color>的<color=#98EFF0>冰属性伤害抗性</color>。\n· 代理人发动<color=#FFFFFF>[强化特殊技]</color>后，自身的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "冰袭"
+            },
+            "69014402": {
+              "desc": "· 队伍中存在2/3名<color=#FFFFFF>[异常]</color>特性的代理人时，全队造成的属性异常伤害分别<color=#2BAD00>提升10%/30%</color>，全队的攻击力分别<color=#2BAD00>提升5%/15%</color>。\n· 对敌人造成属性异常伤害时，无视其<color=#2BAD00>10%</color>的全属性伤害抗性与<color=#2BAD00>10%</color>的防御力。",
+              "title": "异变"
+            }
+          },
+          "stageNum": 1
+        },
+        "69044102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>[异常]</color>特性的代理人挑战。",
+              "title": ""
+            },
+            "69013903": {
+              "desc": "· 代理人每次对首领施加异常状态时，会给首领施加1层[残翳]，每层[残翳]会令首领受到的<color=#2BAD00>异常伤害提升7.5%</color>，受到的[乱流]伤害<color=#2BAD00>额外提升5%</color>，持续<color=#2BAD00>10秒</color>，[残翳]最多累计<color=#2BAD00>3层</color>，每层效果单独结算持续时间；<Term:2000001></Term>持续期间，首领被施加[残翳]时还会额外削减<color=#FFAF2C>[侵蚀壁垒]</color><color=#2BAD00>最大值的20%</color>，并累积<color=#2BAD00>15%的失衡值</color>（15秒内不会重复触发）；<color=#FFAF2C>[侵蚀壁垒]</color>被击破时，首领立刻获得最大层数的[残翳]；首领进入失衡状态时，会移除所有[残翳]，并施加相同层数的[裂伤]，每层[裂伤]会降低首领<color=#2BAD00>5%异常积蓄抗性</color>，并增加其<color=#2BAD00>10%失衡易伤倍率</color>；首领失衡状态结束时，移除所有[裂伤]。",
+              "title": "69013903_Title"
+            },
+            "69013904": {
+              "desc": "· 每次成功招架基塔布鲁开启[侵蚀壁垒]后的连续下砸，可获得<color=#FFAF2C>1000操作得分</color>，成功触发<Term:2000004></Term>应对最后一段下砸，可额外获得<color=#FFAF2C>1000操作得分</color>；<color=#FFAF2C>成功击破[侵蚀壁垒]</color>时，可获得<color=#FFAF2C>1500操作得分</color>。最多获得5000操作得分。",
+              "title": "69013904_Title"
+            }
+          },
+          "layerRoom": {
+            "690441021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Girtablu.png",
+              "monsterList": {
+                "31661": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 40006,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Girtablu.png",
+                  "name": "基塔布鲁",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 21055864.41,
+                    "stun": 21037.2
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "204": "风属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "基塔布鲁",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· 代理人的暴击伤害<color=#2BAD00>提升30%</color>。\n· [强攻]特性的代理人攻击力<color=#2BAD00>提升10%</color>，[普通攻击]命中时造成的伤害<color=#2BAD00>提升30%</color>，并无视敌人<color=#2BAD00>15%</color>的防御力。",
+              "title": "摧心"
+            },
+            "69014401": {
+              "desc": "· 代理人的<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[终结技]</color>造成的伤害<color=#2BAD00>提升30%</color>。[强攻]特性的代理人攻击命中敌人时，无视其<color=#2BAD00>20%</color>的<color=#98EFF0>冰属性伤害抗性</color>。\n· 代理人发动<color=#FFFFFF>[强化特殊技]</color>后，自身的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "冰袭"
+            },
+            "69014402": {
+              "desc": "· 队伍中存在2/3名<color=#FFFFFF>[异常]</color>特性的代理人时，全队造成的属性异常伤害分别<color=#2BAD00>提升10%/30%</color>，全队的攻击力分别<color=#2BAD00>提升5%/15%</color>。\n· 对敌人造成属性异常伤害时，无视其<color=#2BAD00>10%</color>的全属性伤害抗性与<color=#2BAD00>10%</color>的防御力。",
+              "title": "异变"
+            }
+          },
+          "stageNum": 2
+        },
+        "69044103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012704": {
+              "desc": "·首领受到的异常伤害<color=#2BAD00>降低30%</color>，当其从<Term:2000002></Term>状态切换回普通状态，或从普通状态切换为<color=#FFAF2C>[秽盾]</color>状态时，使代理人对其造成的暴击伤害<color=#2BAD00>提升20%</color>，最多叠加3层，当其从失衡状态恢复时层数重置。",
+              "title": ""
+            },
+            "69012705": {
+              "desc": "·触发<color=#FFAF2C>[秽盾净除]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；<Term:2000003></Term>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，可获得<color=#FFAF2C>2000操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>[强攻]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690441031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vessel.png",
+              "monsterList": {
+                "31412": {
+                  "element": {
+                    "electric": 0,
+                    "ether": -1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 40000,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vessel.png",
+                  "name": "太初梦魇·「始主」",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 38711144.160000004,
+                    "stun": 18236
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "物理"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "太初梦魇·「始主」",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· 代理人的暴击伤害<color=#2BAD00>提升30%</color>。\n· [强攻]特性的代理人攻击力<color=#2BAD00>提升10%</color>，[普通攻击]命中时造成的伤害<color=#2BAD00>提升30%</color>，并无视敌人<color=#2BAD00>15%</color>的防御力。",
+              "title": "摧心"
+            },
+            "69014401": {
+              "desc": "· 代理人的<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[终结技]</color>造成的伤害<color=#2BAD00>提升30%</color>。[强攻]特性的代理人攻击命中敌人时，无视其<color=#2BAD00>20%</color>的<color=#98EFF0>冰属性伤害抗性</color>。\n· 代理人发动<color=#FFFFFF>[强化特殊技]</color>后，自身的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "冰袭"
+            },
+            "69014402": {
+              "desc": "· 队伍中存在2/3名<color=#FFFFFF>[异常]</color>特性的代理人时，全队造成的属性异常伤害分别<color=#2BAD00>提升10%/30%</color>，全队的攻击力分别<color=#2BAD00>提升5%/15%</color>。\n· 对敌人造成属性异常伤害时，无视其<color=#2BAD00>10%</color>的全属性伤害抗性与<color=#2BAD00>10%</color>的防御力。",
+              "title": "异变"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}

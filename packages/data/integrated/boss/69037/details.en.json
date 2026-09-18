@@ -1,0 +1,221 @@
+{
+  "id": 69037,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69037,
+      "zone": {
+        "6903701": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· DMG dealt to boss enemies by Attribute Anomaly is increased by 50%. While Notorious - Dead End Butcher is in <color=#FFFFFF>Ether Enhanced</color> state, the DMG it takes is reduced by 15%, and the Daze value dealt by Agents to it is reduced by 30%. Triggering <color=#FFFFFF>Disorder</color> on Notorious - Dead End Butcher immediately forces it to exit the <color=#FFFFFF>Ether Enhanced</color> state.",
+              "title": ""
+            },
+            "69013702": {
+              "desc": "· Successfully <color=#FFAF2C>inflicting Disorder</color> grants <color=#FFAF2C>300 Performance Points</color>, up to a maximum of 5,000.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69037011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "Notorious - Dead End Butcher",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 25615714.5,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Dead End Butcher",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013603": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and <color=#FFFFFF>Abloom</color> deals <color=#2BAD00>10% bonus</color> DMG.\n· After inflicting <color=#FFFFFF>Abloom</color> on enemies, enemy <color=#98EFF0>Ice RES</color> <color=#2BAD00>drops by 25%</color>, and Agents deal <color=#2BAD00>30% bonus</color> <color=#98EFF0>Ice DMG</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Scorching Frost"
+            },
+            "69013701": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>.\n· After launching EX Special Attack, Agents with Rupture specialty deal <color=#2BAD00>50% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>30%</color> of enemy <color=#F0D12B>Physical RES</color> on hit for 15s. Repeated triggers reset the duration.",
+              "title": "Decree"
+            },
+            "69013703": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 20</color>, and Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color>.\n· When inflicting an Attribute Anomaly on an enemy, the whole squad's CRIT DMG <color=#2BAD00>increases by 60%</color>, and the enemy's DEF <color=#2BAD00>decreases by 10%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Singular Blade"
+            }
+          },
+          "stageNum": 1
+        },
+        "6903702": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012603": {
+              "desc": "· When Agents inflict <color=#FFAF2C>Weakened</color> on Sobek and The Thrall, <color=#FFAF2C>1,500 Performance Points</color> will be awarded. When an Agent <color=#FFAF2C>eliminates Sobek</color>, <color=#FFAF2C>2,000 Performance Points</color> will be awarded. Up to a maximum of 5,000 Performance Points can be earned.",
+              "title": ""
+            },
+            "69012604": {
+              "desc": "· When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <color=#FFFFFF>Contract</color> and <color=#FFFFFF>Self-Sacrifice</color>. Contract and Self-Sacrifice can stack up to 3 times. Each stack of Contract increases All-Attribute Anomaly Buildup RES by <color=#FFAF2C>15%</color>, each stack of Self-Sacrifice increases The Thrall's Stun DMG Multiplier by <color=#FFAF2C>10%</color>. When The Thrall is Stunned, CRIT DMG taken increases by <color=#FFAF2C>50%</color>.",
+              "title": ""
+            },
+            "69013004": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Stun><color=#FFAF2C>Stun</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69037021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Awakener.png",
+              "monsterList": {
+                "31353": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 1,
+                    "wind": 1
+                  },
+                  "id": 30042,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Awakener.png",
+                  "name": "Ye Shiyuan the Thrall",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22585467.96,
+                    "stun": 14068.040000000003
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Ye Shiyuan the Thrall",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013603": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and <color=#FFFFFF>Abloom</color> deals <color=#2BAD00>10% bonus</color> DMG.\n· After inflicting <color=#FFFFFF>Abloom</color> on enemies, enemy <color=#98EFF0>Ice RES</color> <color=#2BAD00>drops by 25%</color>, and Agents deal <color=#2BAD00>30% bonus</color> <color=#98EFF0>Ice DMG</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Scorching Frost"
+            },
+            "69013701": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>.\n· After launching EX Special Attack, Agents with Rupture specialty deal <color=#2BAD00>50% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>30%</color> of enemy <color=#F0D12B>Physical RES</color> on hit for 15s. Repeated triggers reset the duration.",
+              "title": "Decree"
+            },
+            "69013703": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 20</color>, and Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color>.\n· When inflicting an Attribute Anomaly on an enemy, the whole squad's CRIT DMG <color=#2BAD00>increases by 60%</color>, and the enemy's DEF <color=#2BAD00>decreases by 10%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Singular Blade"
+            }
+          },
+          "stageNum": 2
+        },
+        "6903703": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69013103": {
+              "desc": "· Agent Anomaly Buildup Rate <color=#FFAF2C>increases by 15%</color>, Anomaly DMG dealt to Discordant Solo <color=#FFAF2C>increases by 30%</color>, when Agents are in Ether Veil during combat, Discordant Solo's Stun DMG Multiplier <color=#FFAF2C>increases by 30%</color>.",
+              "title": ""
+            },
+            "69013104": {
+              "desc": "During a <color=#FFAF2C>Control Skill</color>, every successful counter of a Boss attack grants <color=#FFAF2C>350 Performance Points</color>. A <color=#FFAF2C>Shutdown</color> of the Boss's <color=#FFAF2C>Control Skill</color> or counter of the final strike of certain skills inflicts on the Boss the <color=#FFAF2C>Impaired</color> effect and grants <color=#FFAF2C>750 Performance Points</color>. Earn up to 5,000 Performance Points from the above.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69037031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vesper.png",
+              "monsterList": {
+                "31451": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": -1,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 40001,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vesper.png",
+                  "name": "Discordant Solo - Vesper",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 35466247.30500001,
+                    "stun": 19977.350000000002
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "204": "Wind",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Discordant Solo - Vesper",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013603": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and <color=#FFFFFF>Abloom</color> deals <color=#2BAD00>10% bonus</color> DMG.\n· After inflicting <color=#FFFFFF>Abloom</color> on enemies, enemy <color=#98EFF0>Ice RES</color> <color=#2BAD00>drops by 25%</color>, and Agents deal <color=#2BAD00>30% bonus</color> <color=#98EFF0>Ice DMG</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Scorching Frost"
+            },
+            "69013701": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>.\n· After launching EX Special Attack, Agents with Rupture specialty deal <color=#2BAD00>50% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>30%</color> of enemy <color=#F0D12B>Physical RES</color> on hit for 15s. Repeated triggers reset the duration.",
+              "title": "Decree"
+            },
+            "69013703": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 20</color>, and Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color>.\n· When inflicting an Attribute Anomaly on an enemy, the whole squad's CRIT DMG <color=#2BAD00>increases by 60%</color>, and the enemy's DEF <color=#2BAD00>decreases by 10%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Singular Blade"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

@@ -22,11 +22,13 @@ import {
   syntheticBangbooIds,
   syntheticMonsterIds,
   syntheticShiyuIds,
+  syntheticBossIds,
 } from "./fixtures/synthetic-dataset.ts"
 import { wEngineInput } from "./fixtures/w-engine-source.ts"
 import { bangbooInput } from "./fixtures/bangboo-source.ts"
 import { monsterInput } from "./fixtures/monster-source.ts"
 import { shiyuInput } from "./fixtures/shiyu-source.ts"
+import { bossInput } from "./fixtures/boss-source.ts"
 
 const packageDirectory = fileURLToPath(new URL("../", import.meta.url))
 const repositoryDirectory = resolve(packageDirectory, "../..")
@@ -134,6 +136,18 @@ async function fixture(parent = tmpdir(), ids = ["2", "10"]) {
     for (const locale of shiyu.detailLocales)
       await writeJson(join(versionRoot, locale, "shiyu", `${id}.json`), {
         ...shiyu.details[locale],
+        id: Number(id),
+      })
+  // 默认登记表包含 boss：boss 输入使用真实 Boss 结构的合成成员（当前 modes 结构变体）。
+  const boss = bossInput()
+  await writeJson(
+    join(versionRoot, "boss.json"),
+    Object.fromEntries(syntheticBossIds.map((id) => [id, boss.sourceRecord])),
+  )
+  for (const id of syntheticBossIds)
+    for (const locale of boss.detailLocales)
+      await writeJson(join(versionRoot, locale, "boss", `${id}.json`), {
+        ...boss.details[locale],
         id: Number(id),
       })
   const preload = join(root, "offline guard.mjs")
@@ -369,6 +383,7 @@ describe("offline agent package commands", () => {
       const bangbooIds = syntheticBangbooIds
       const monsterIds = syntheticMonsterIds
       const shiyuIds = syntheticShiyuIds
+      const bossIds = syntheticBossIds
       expect(index.format).toBe("fairy-nanoka-integrated/v3")
       expect(index.entities.agents.memberIds).toEqual(ids)
       expect(index.entities["drive-discs"].memberIds).toEqual(driveDiscIds)
@@ -376,9 +391,11 @@ describe("offline agent package commands", () => {
       expect(index.entities["bangboos"].memberIds).toEqual(bangbooIds)
       expect(index.entities["monsters"].memberIds).toEqual(monsterIds)
       expect(index.entities["shiyu"].memberIds).toEqual(shiyuIds)
+      expect(index.entities["boss"].memberIds).toEqual(bossIds)
       expect(receipt.memberCounts).toEqual({
         "agents": ids.length,
         "bangboos": bangbooIds.length,
+        "boss": bossIds.length,
         "drive-discs": driveDiscIds.length,
         "monsters": monsterIds.length,
         "shiyu": shiyuIds.length,
@@ -451,14 +468,15 @@ describe("offline agent package commands", () => {
         agentInput().detailLocales,
       )
       expect(receipt.inputFileCount).toBe(
-        // manifest、六类索引与全部成员详情；跨类别累计。
-        7 +
+        // manifest、七类索引与全部成员详情；跨类别累计。
+        8 +
           ids.length * 2 +
           driveDiscIds.length * 2 +
           wEngineIds.length * 2 +
           bangbooIds.length * 2 +
           monsterIds.length * 2 +
-          shiyuIds.length * 2,
+          shiyuIds.length * 2 +
+          bossIds.length * 2,
       )
       expect(receipt.outputFileCount).toBe(
         Object.keys(await directoryBytes(receipt.artifactDirectory)).length,
@@ -469,6 +487,7 @@ describe("offline agent package commands", () => {
       expect(Object.keys(maintenance.categories)).toEqual([
         "agents",
         "bangboos",
+        "boss",
         "drive-discs",
         "monsters",
         "shiyu",
@@ -523,6 +542,14 @@ describe("offline agent package commands", () => {
       for (const entry of maintenance.categories["shiyu"]) {
         expect(entry.maintenance.diagnostics).toEqual([])
       }
+      expect(
+        maintenance.categories["boss"].map(
+          (entry: { memberId: string }) => entry.memberId,
+        ),
+      ).toEqual(bossIds)
+      for (const entry of maintenance.categories["boss"]) {
+        expect(entry.maintenance.diagnostics).toEqual([])
+      }
       const verified = success(
         runCommand(
           input,
@@ -557,6 +584,10 @@ describe("offline agent package commands", () => {
           },
           "shiyu": {
             memberCount: receipt.memberCounts["shiyu"],
+            detailLocales: agentInput().detailLocales,
+          },
+          "boss": {
+            memberCount: receipt.memberCounts["boss"],
             detailLocales: agentInput().detailLocales,
           },
         },

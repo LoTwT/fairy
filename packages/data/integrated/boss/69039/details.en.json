@@ -1,0 +1,224 @@
+{
+  "id": 69039,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69039,
+      "zone": {
+        "6903901": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69013903": {
+              "desc": "· Whenever an Agent inflicts an Anomaly on the Boss, they apply 1 stack of Shadow to it. Each stack of Shadow increases the Boss's <color=#2BAD00>Anomaly DMG taken by 7.5%</color> and additionally increases its Vortex DMG taken <color=#2BAD00>by 5%</color> for <color=#2BAD00>10s</color>. Shadow can stack up to <color=#2BAD00>3 times</color>. The duration of each stack is calculated separately. During <Term:2000001>Corruptive Barrier</Term>, applying Shadow to the Boss additionally reduces the <color=#FFAF2C>Corruptive Barrier</color> by <color=#2BAD00>20% of its max value</color> and accumulates <color=#2BAD00>15% Daze</color> (cannot be repeatedly triggered within 15s). When the <color=#FFAF2C>Corruptive Barrier</color> is broken, the Boss immediately gains max stacks of Shadow. When the Boss is Stunned, all Shadow stacks are removed and an equal number of Laceration stacks are applied. Each stack of Laceration reduces the Boss's <color=#2BAD00>Anomaly Buildup RES by 5%</color> and increases its <color=#2BAD00>Stun DMG Multiplier by 10%</color>. When the Boss's Stunned state ends, all Laceration stacks are removed.",
+              "title": "69013903_Title"
+            },
+            "69013904": {
+              "desc": "· Each successful parry against Girtablullu's consecutive downward smashes after it activates Corruptive Barrier grants <color=#FFAF2C>1,000 Performance Points</color>. Successfully triggering a <Term:2000004>Chain Parry</Term> against the final slam grants an additional <color=#FFAF2C>1,000 Performance Points</color>. <color=#FFAF2C>Successfully breaking the Corruptive Barrier</color> grants <color=#FFAF2C>1,500 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": "69013904_Title"
+            }
+          },
+          "layerRoom": {
+            "69039011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Girtablu.png",
+              "monsterList": {
+                "31661": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 40006,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Girtablu.png",
+                  "name": "Girtablullu",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 19050543.99,
+                    "stun": 21037.2
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Girtablullu",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013901": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 10%</color>. After inflicting <color=#FFFFFF>Vortex</color> on an enemy, the whole squad's ATK <color=#2BAD00>increases by 5%</color>, and Anomaly Proficiency <color=#2BAD00>increases by 10</color>, lasting for 15s, stacking up to 3 times. Repeated triggers reset the duration.\n· After inflicting a <color=#A6C5FD>Wind</color> or <color=#98EFF0>Ice</color> Attribute Anomaly on an enemy, the enemy's DEF <color=#2BAD00> decreases by 10%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Northern Wind"
+            },
+            "69013902": {
+              "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 35%</color>.\n· <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Ultimate</color> <color=#2BAD00>deal 20%</color> more DMG, ignoring <color=#2BAD00>10%</color> of the enemy's <color=#2BAD00>DEF</color>. After launching a <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>EX Special Attack</color>, the Agent's CRIT DMG <color=#2BAD00>increases by 45%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Onslaught"
+            },
+            "69014102": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>, and HP <color=#2BAD00>increases by 15%</color>.\n· After launching <color=#FFFFFF>EX Special Attack</color>, Agents with the <color=#FFFFFF>Rupture</color> specialty deal <color=#2BAD00>40% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>15%</color> of enemy <color=#F0D12B>Physical RES</color> and <color=#FE437E>Ether RES</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Shatter"
+            }
+          },
+          "stageNum": 1
+        },
+        "6903902": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010109": {
+              "desc": "· Successfully <color=#FFAF2C>destroying a dance partner</color> grants <color=#FFAF2C>200 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69011204": {
+              "desc": "· DMG dealt by Boss enemies increases by 25%. When a clone is <color=#FFAF2C>destroyed</color> or when the main body is <color=#FFAF2C>stunned</color>, 1/5 stacks of <color=#FFFFFF>On Thin Ice</color> is inflicted on Boss enemies respectively. Each stack of <color=#FFFFFF>On Thin Ice</color> decreases the DMG dealt by the Boss by 5% and increases the <color=#98EFF0>Ice DMG</color> and <color=#FE437E>Ether DMG</color> dealt to the Boss by Agents by <color=#FFAF2C>10%</color>. <color=#FFFFFF>On Thin Ice</color> stacks will be reset when the enemy recovers from Stun.",
+              "title": ""
+            },
+            "69013502": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69039021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousMarionette.png",
+              "monsterList": {
+                "11861": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300121,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousMarionette.png",
+                  "name": "Notorious - Marionette",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22250152.7775,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Marionette",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013901": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 10%</color>. After inflicting <color=#FFFFFF>Vortex</color> on an enemy, the whole squad's ATK <color=#2BAD00>increases by 5%</color>, and Anomaly Proficiency <color=#2BAD00>increases by 10</color>, lasting for 15s, stacking up to 3 times. Repeated triggers reset the duration.\n· After inflicting a <color=#A6C5FD>Wind</color> or <color=#98EFF0>Ice</color> Attribute Anomaly on an enemy, the enemy's DEF <color=#2BAD00> decreases by 10%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Northern Wind"
+            },
+            "69013902": {
+              "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 35%</color>.\n· <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Ultimate</color> <color=#2BAD00>deal 20%</color> more DMG, ignoring <color=#2BAD00>10%</color> of the enemy's <color=#2BAD00>DEF</color>. After launching a <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>EX Special Attack</color>, the Agent's CRIT DMG <color=#2BAD00>increases by 45%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Onslaught"
+            },
+            "69014102": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>, and HP <color=#2BAD00>increases by 15%</color>.\n· After launching <color=#FFFFFF>EX Special Attack</color>, Agents with the <color=#FFFFFF>Rupture</color> specialty deal <color=#2BAD00>40% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>15%</color> of enemy <color=#F0D12B>Physical RES</color> and <color=#FE437E>Ether RES</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Shatter"
+            }
+          },
+          "stageNum": 2
+        },
+        "6903903": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012603": {
+              "desc": "· When Agents inflict <color=#FFAF2C>Weakened</color> on Sobek and The Thrall, <color=#FFAF2C>1,500 Performance Points</color> will be awarded. When an Agent <color=#FFAF2C>eliminates Sobek</color>, <color=#FFAF2C>2,000 Performance Points</color> will be awarded. Up to a maximum of 5,000 Performance Points can be earned.",
+              "title": ""
+            },
+            "69012604": {
+              "desc": "· When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <color=#FFFFFF>Contract</color> and <color=#FFFFFF>Self-Sacrifice</color>. Contract and Self-Sacrifice can stack up to 3 times. Each stack of Contract increases All-Attribute Anomaly Buildup RES by <color=#FFAF2C>15%</color>, each stack of Self-Sacrifice increases The Thrall's Stun DMG Multiplier by <color=#FFAF2C>10%</color>. When The Thrall is Stunned, CRIT DMG taken increases by <color=#FFAF2C>50%</color>.",
+              "title": ""
+            },
+            "69013004": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Stun><color=#FFAF2C>Stun</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69039031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Awakener.png",
+              "monsterList": {
+                "31353": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 1,
+                    "wind": 1
+                  },
+                  "id": 30042,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Awakener.png",
+                  "name": "Ye Shiyuan the Thrall",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22585467.96,
+                    "stun": 14068.040000000003
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Ye Shiyuan the Thrall",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013901": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 10%</color>. After inflicting <color=#FFFFFF>Vortex</color> on an enemy, the whole squad's ATK <color=#2BAD00>increases by 5%</color>, and Anomaly Proficiency <color=#2BAD00>increases by 10</color>, lasting for 15s, stacking up to 3 times. Repeated triggers reset the duration.\n· After inflicting a <color=#A6C5FD>Wind</color> or <color=#98EFF0>Ice</color> Attribute Anomaly on an enemy, the enemy's DEF <color=#2BAD00> decreases by 10%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Northern Wind"
+            },
+            "69013902": {
+              "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 35%</color>.\n· <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Ultimate</color> <color=#2BAD00>deal 20%</color> more DMG, ignoring <color=#2BAD00>10%</color> of the enemy's <color=#2BAD00>DEF</color>. After launching a <color=#FFFFFF>Chain Attack</color>/<color=#FFFFFF>EX Special Attack</color>, the Agent's CRIT DMG <color=#2BAD00>increases by 45%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Onslaught"
+            },
+            "69014102": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>, and HP <color=#2BAD00>increases by 15%</color>.\n· After launching <color=#FFFFFF>EX Special Attack</color>, Agents with the <color=#FFFFFF>Rupture</color> specialty deal <color=#2BAD00>40% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>15%</color> of enemy <color=#F0D12B>Physical RES</color> and <color=#FE437E>Ether RES</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Shatter"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

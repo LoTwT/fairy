@@ -1,0 +1,222 @@
+{
+  "id": 69030,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69030,
+      "zone": {
+        "6903001": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012704": {
+              "desc": "· Boss Anomaly DMG taken is <color=#2BAD00>reduced by 30%</color>. When switching from <Term:2000002>Miasmic Shield</Term> state to normal state, or from normal state to <color=#FFAF2C>Miasmic Shield</color> state, Agent CRIT DMG against them is <color=#2BAD00>increased by 20%</color>. This effect can stack up to 3 times and resets when the boss recovers from Stun.",
+              "title": ""
+            },
+            "69012705": {
+              "desc": "·Triggering <color=#FFAF2C>Miasmic Shield Purification</color> grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>2,000 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>Attack</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69030011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vessel.png",
+              "monsterList": {
+                "31412": {
+                  "element": {
+                    "electric": 0,
+                    "ether": -1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 40000,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vessel.png",
+                  "name": "Primordial Nightmare - \"The Creator\"",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 28428496.4925,
+                    "stun": 18236
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Primordial Nightmare - \"The Creator\"",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012801": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 25%</color>, Anomaly Proficiency <color=#2BAD00>increases by 40</color>.\n· After inflicting Attribute Anomaly on enemies, their All-DMG RES is <color=#2BAD00>reduced by 10%</color>, and Agent Attribute Anomaly DMG against them is <color=#2BAD00>increased by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Mutation"
+            },
+            "69012904": {
+              "desc": "· Agents within Ether Veil have their ATK <color=#2BAD00>increased by 15%</color>, and when their <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, it ignores <color=#2BAD00>15%</color> of enemy DEF.\n· After an Agent with Assist specialty activates an <color=#FFFFFF>EX Special Attack</color>, the whole squad's <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increases by 20%</color> and their CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Ride the Current"
+            },
+            "69012905": {
+              "desc": "· Agent Max HP <color=#2BAD00>increases by 30%</color>, Ultimate DMG <color=#2BAD00>increases by 40%</color>.\n· After using an Ultimate, Energy and Adrenaline Generation Rate <color=#2BAD00>increase by 15%</color>, <color=#FE437E>Ether DMG</color> and <color=#FF5521>Fire DMG</color> <color=#2BAD00>increase by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Overwhelming Might"
+            }
+          },
+          "stageNum": 1
+        },
+        "6903002": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011302": {
+              "desc": "· When the Miasma Priest switches phase, their Anomaly Buildup RES increases by 10% and CRIT DMG taken increases by 30%. This effect can stack up to 2 times and is cleared when <Term:2000002>Miasmic Shield</Term> breaks.",
+              "title": ""
+            },
+            "69011303": {
+              "desc": "· When an Agent successfully performs <color=#FFAF2C>3 Defensive Assists within 3 seconds</color>, earn <color=#FFAF2C>1,000 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69013002": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Rupture><color=#FFAF2C>Rupture</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69030021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "Miasma Priest",
+                  "stats": {
+                    "attack": 2465.018181818182,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 16517819.043000001,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Miasma Priest",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012801": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 25%</color>, Anomaly Proficiency <color=#2BAD00>increases by 40</color>.\n· After inflicting Attribute Anomaly on enemies, their All-DMG RES is <color=#2BAD00>reduced by 10%</color>, and Agent Attribute Anomaly DMG against them is <color=#2BAD00>increased by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Mutation"
+            },
+            "69012904": {
+              "desc": "· Agents within Ether Veil have their ATK <color=#2BAD00>increased by 15%</color>, and when their <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, it ignores <color=#2BAD00>15%</color> of enemy DEF.\n· After an Agent with Assist specialty activates an <color=#FFFFFF>EX Special Attack</color>, the whole squad's <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increases by 20%</color> and their CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Ride the Current"
+            },
+            "69012905": {
+              "desc": "· Agent Max HP <color=#2BAD00>increases by 30%</color>, Ultimate DMG <color=#2BAD00>increases by 40%</color>.\n· After using an Ultimate, Energy and Adrenaline Generation Rate <color=#2BAD00>increase by 15%</color>, <color=#FE437E>Ether DMG</color> and <color=#FF5521>Fire DMG</color> <color=#2BAD00>increase by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Overwhelming Might"
+            }
+          },
+          "stageNum": 2
+        },
+        "6903003": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· DMG dealt to boss enemies by Attribute Anomaly is increased by 50%. While Notorious - Dead End Butcher is in <color=#FFFFFF>Ether Enhanced</color> state, the DMG it takes is reduced by 15%, and the Daze value dealt by Agents to it is reduced by 30%. Triggering <color=#FFFFFF>Disorder</color> on Notorious - Dead End Butcher immediately forces it to exit the <color=#FFFFFF>Ether Enhanced</color> state.",
+              "title": ""
+            },
+            "69011702": {
+              "desc": "· Successfully <color=#FFAF2C>inflicting Disorder</color> grants <color=#FFAF2C>200 Performance Points</color>, up to a maximum of 5,000.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69030031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "Notorious - Dead End Butcher",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 20492571.599999998,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Dead End Butcher",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012801": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 25%</color>, Anomaly Proficiency <color=#2BAD00>increases by 40</color>.\n· After inflicting Attribute Anomaly on enemies, their All-DMG RES is <color=#2BAD00>reduced by 10%</color>, and Agent Attribute Anomaly DMG against them is <color=#2BAD00>increased by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Mutation"
+            },
+            "69012904": {
+              "desc": "· Agents within Ether Veil have their ATK <color=#2BAD00>increased by 15%</color>, and when their <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>Ultimate</color> hits an enemy, it ignores <color=#2BAD00>15%</color> of enemy DEF.\n· After an Agent with Assist specialty activates an <color=#FFFFFF>EX Special Attack</color>, the whole squad's <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increases by 20%</color> and their CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Ride the Current"
+            },
+            "69012905": {
+              "desc": "· Agent Max HP <color=#2BAD00>increases by 30%</color>, Ultimate DMG <color=#2BAD00>increases by 40%</color>.\n· After using an Ultimate, Energy and Adrenaline Generation Rate <color=#2BAD00>increase by 15%</color>, <color=#FE437E>Ether DMG</color> and <color=#FF5521>Fire DMG</color> <color=#2BAD00>increase by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Overwhelming Might"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

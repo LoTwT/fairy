@@ -4534,6 +4534,1737 @@
       },
       "rulesVersion": "nanoka-bangboo-reference/1"
     },
+    "boss": {
+      "complete": true,
+      "detailLocales": ["zh", "en"],
+      "inputs": [
+        {
+          "resource": "zzz/3.1/boss.json",
+          "sha256": "65b2d8ba24f2bd394fdd3bbe3782112b963a924db7d4a6c5bfbb554f578f5cfc"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69001.json",
+          "sha256": "2db71c5ebfe20285a0d7d33b4fb17f7dbf0d47e089e4ecb856f659f0bd1241ce"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69001.json",
+          "sha256": "c9b561d7df3a3190157ff83a1738f8d95a1e582469d7e7a679c8f4ec59ad1cdd"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69002.json",
+          "sha256": "2b825a53ff078361b45a48d93c3e69d4c385136b6ce0b76a5b502d2e1eac0329"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69002.json",
+          "sha256": "ffd03c8fd013c0cb58092e1c3437bc79cf2bf3df6c843be94585118ca8630bf4"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69003.json",
+          "sha256": "190d3eb981b93a67f1625c1aa3787d0d2368f24c0019c6eaac04fbe408b156a2"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69003.json",
+          "sha256": "4207190dd75d2113f044205a6cf620dff2e93bb80f5954437abc94b077d9dda0"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69004.json",
+          "sha256": "a731057146ec681e8cae63d086cd5275ffe01d096396f391a5136a72867dfe17"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69004.json",
+          "sha256": "31f5ca7f59cced30daf5fe6e26bebb2e1e499c77e5b6a50898ec3ca833004ea4"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69005.json",
+          "sha256": "b3c5cf305d16f2f65afb4bea63173c502adfcc2961019ac6e52bbb17775216dc"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69005.json",
+          "sha256": "ff68bbc16c383ae8b92e8cbb4c540827d8647627641debe4f16bd1149f2d0231"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69006.json",
+          "sha256": "2f73a8d0ddbdc81e3766f763ac30be724faf48e8b6c4a43f6eb448a6f5a932b9"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69006.json",
+          "sha256": "3cefa3136c1f9256f95501107dc1555503ab49dff176a7e242608ecdf12d6f70"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69007.json",
+          "sha256": "970ada7057da615b5e109b892539fb804648b6f65d52d2da6696910f60e774e3"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69007.json",
+          "sha256": "a99cd86d617bccdfb63f7bcb747b2030da5a62a4fa1214867dbc9a4f98820320"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69008.json",
+          "sha256": "faab6acb1afe13c8cdeaef207e1a21d71bd171b1244aa5a44394e564809d3485"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69008.json",
+          "sha256": "015acf734efde0bb6cc820d6c5ade79688434485f8e1755364d93366bb49c4bd"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69009.json",
+          "sha256": "e71985e2ebea810df9a1cc4dfdc698b7ab176c03595d27d07357f427e907da43"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69009.json",
+          "sha256": "29bdc95478f2ce22660aa5f08d2f207f51d4705232e9a12412f37e89195cfb47"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69010.json",
+          "sha256": "f24877f272d61b3c0087c46947b8f96f1b4b5ed103a4bac0c0f36c80703155ab"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69010.json",
+          "sha256": "8ddf3f737808a329c5fcb75ee669345580fe4f8b6424dea53a0bd15553dfc231"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69011.json",
+          "sha256": "b9b0bf7897ef65cf41984d237a6ac5914c2fc6431fbbde9ad3032678589a6e1b"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69011.json",
+          "sha256": "b6e0aa0192376abc26ec9038fdb5922d48bfe72416dc6872c98bc759e0ea320b"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69012.json",
+          "sha256": "b18864ad96b196da453c16207a317a102e0357679e183708767a9fbf513b79bf"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69012.json",
+          "sha256": "9fcafd6e16582dfc281fb8c8f699d09bc6baa9ee951225dff980684a54a5794d"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69013.json",
+          "sha256": "f2d673336731ad726f8fe38ff14e68f300c59cf39eeb33f5d9c30eab2ec86e40"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69013.json",
+          "sha256": "a135253b34667b313cd0577e0791279add0d0ede3ee87bc9e20178f4af22e4d3"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69014.json",
+          "sha256": "8bd01ed95b553a27c3a65e93d36d51df79cb616b1b6f68312c10d3c14c06c82c"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69014.json",
+          "sha256": "406e5b81e993e8506f590607704ae5c9f7c1f2f5c210228f2dd053927710f8e5"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69015.json",
+          "sha256": "26bbae1ee914d6f1fe8cc76ab4beee9a224191103b61ea95598278c48e594b5e"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69015.json",
+          "sha256": "925f3c4ad2015b9bf39ebd0d9ca3b39154a21092f3a2f4662f85aec0c4810594"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69016.json",
+          "sha256": "2de1695302c017d117bdf5e571c84019827f776755dae236d6257bf7fd764d08"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69016.json",
+          "sha256": "64ba392a466f97279a08c95f2017e8395b81c23db58bbdc9fd2c9bb767d79a78"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69017.json",
+          "sha256": "3f9ec2efa11647adc94b093ca21ac91ade47d90e98c781c145882e8122385c2f"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69017.json",
+          "sha256": "41b08919c7b308a8adfe54f40969d0ddadd94d44fc896ed1c9cc5d6b0a0c4235"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69018.json",
+          "sha256": "7c22656c9ca21500203f64eaa43d3dce68ae2ec258fd329bf891050e44f942e7"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69018.json",
+          "sha256": "f9b5536662d7adb74e50b5c856a524d37fcecb8229937aa152e55bde9ca1299f"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69019.json",
+          "sha256": "3b1b53c8521ee0a8c1742feedbb7de1cffa4f2731aafd5e5d4370796b68f0b2c"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69019.json",
+          "sha256": "7fc4b6dfdf629d3e0d463bcbbf3430d6f7111a244ffb199f1f05697aba4e1ba3"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69020.json",
+          "sha256": "992dffbc6c1f60a96761ecbd3f9352fa6246a0445e2ee6eb7397d8330621920f"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69020.json",
+          "sha256": "6974b2cbceabc7b7148894873c6290c698492eb96da38a338788248499aa9630"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69021.json",
+          "sha256": "edaeba704dba4c219233f75272b5d5e03b3f3057ddd9e6833c5eb386d7036a65"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69021.json",
+          "sha256": "c729872ed4898e0d9f49189d2da1bc795329f0811bead41e9e6c1f2abcffa7f7"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69022.json",
+          "sha256": "f26c2c9a12aeab498187c233d6d68cfd16d5c14202cc463dbfab4cca15e1246f"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69022.json",
+          "sha256": "251605d2bc9869b726b3f9e4d02383f856bf2222e56bd0a7bc2363e878e2e500"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69023.json",
+          "sha256": "802d01b68c5fbb57f1c60c26a6ab776bef200ba7dc2adc8595988cdcc482a770"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69023.json",
+          "sha256": "f24b28bf42c537d219bc536521c553d8d007736fe64ad04e935a8eab5a353cf7"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69024.json",
+          "sha256": "8163911a5468b70ff76323bbc1f48f1178cfd75b9b579ffa759bbd031a33f89a"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69024.json",
+          "sha256": "90c66f6b98f017401a40b1b4086a077c3004c4dc15bb5ef7a7b84c15072ab655"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69025.json",
+          "sha256": "3e3dd3d654714fc709f0ad88c6a310783cfc63483d98267d87058a5c5f35c87f"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69025.json",
+          "sha256": "0edde984afb03db5b57cdca460c1445e4a93825cbfa063ea5b386a6b0d794454"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69026.json",
+          "sha256": "dd93429966b1047e2fd2d4d221e95f8e915e125d2af8b54c189fb750d7fab215"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69026.json",
+          "sha256": "620826706df250b111ac9975ace56d6d6fc239c8793757ce37315d089aa7d945"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69027.json",
+          "sha256": "ad1e5962676cd478cca39f95f643960269ada1a0440026705bc996eb1860b051"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69027.json",
+          "sha256": "ada2af357c6e488e313e40875afa0e788c2b99a1cd7a938afcd2f82926e33855"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69028.json",
+          "sha256": "3085828b4dd2baa32dc1a1678f3e824aecdca1ea8849f7c5e3391298c1598738"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69028.json",
+          "sha256": "77b9fa0dbc6e8840281249631641f30268780fc8e3ae4b13d72116a61d4c5656"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69029.json",
+          "sha256": "f37895fdfbb440f68a13229777fd47bf541ca3c74c279d47db69bf6324e0a3d2"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69029.json",
+          "sha256": "015b32b12175a7017dbf38b00aff4c47a2968effbc274e28c54423366ea823e9"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69030.json",
+          "sha256": "374d1de11dcb984f28596c035cd814618679b75911f574add297c703a5be4c4c"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69030.json",
+          "sha256": "e011a29b12fd00ac2125b9e1b1c74a85d7a424c080dc6570d77b12057418e608"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69031.json",
+          "sha256": "159f008521de9fe8b4ea0c4850c0cc969855abc2bd318372c334120d2408e235"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69031.json",
+          "sha256": "d3ed064b54c362be59b223a7abe875be6bb1e10d2bca8ad8681b5e3ec2a22511"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69032.json",
+          "sha256": "eca4428e3f72270667d5cdeafa7078e4ad56c0c21bdcb1ceb1fa89891c72ff02"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69032.json",
+          "sha256": "d04f8bd5018c991bad3a62a77a6054d293be04c0b7e501ef25947d03830a936e"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69033.json",
+          "sha256": "ce1d73daa889e5ab3eb61187daaab80f1613485d4077b70cb64b5242ffc4e034"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69033.json",
+          "sha256": "57c9f7f0539b88c09d6bb7f8d15cc553d6804b5786023ec0dcd2e5b72322e761"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69034.json",
+          "sha256": "376530ee343b3ebc3109d8561d493a3b4378409d03c50d8d7d127ddf9451cfae"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69034.json",
+          "sha256": "3bb7576d45a096139e8b2e0b09142eb91a13a2ef87718901730a064af9156ccc"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69035.json",
+          "sha256": "3393bcfbcfc9b73ecb885b542d714eb6c69ab6fbf9984e28d4b4f0944cde000f"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69035.json",
+          "sha256": "713543174c33e5ceeebf72d083c0e0961de894b2460c1e9cd0eba679d2a01a68"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69036.json",
+          "sha256": "8256cba6df3312d50cc49819704fa94faae3ce0d5f1f58b6bd70df97572e09e5"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69036.json",
+          "sha256": "3ad82badba189976f1666105efa085f8ec75515cecd69f6331db893271513209"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69037.json",
+          "sha256": "84fb76fd351b2e1adc553e7ce31b4b9b6731824c67621e5da8be7facf913c518"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69037.json",
+          "sha256": "120bf298bc50ff54ef2b9ed1247d5c22d9f159a15f6bdaa022002a61cebbff80"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69038.json",
+          "sha256": "ae2a8f98fc153a005b6effc5eff7bb9dd668ceb3cbd43719d76e8500ada9d8f3"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69038.json",
+          "sha256": "9e3b67966d6450f8e041eeb36bd815f1ef076230541322c8e37090a4b8ceeec1"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69039.json",
+          "sha256": "c492902a17383e22d0ca7ceaf5e53871fcb725c0e97f761a1cc71dbc26be1c0d"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69039.json",
+          "sha256": "752f1e342ec224c625a4b38c9bc617308b14409ed9989d304606af6fbc4d64b4"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69040.json",
+          "sha256": "722786ab1b87492b26e8292bdd323be4ee94fd00dbc9241fe69c1fb7ceb915fb"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69040.json",
+          "sha256": "7982bb5def428da2995ec3bf21a0923ffe49d96bf791c09678032ec7237e4281"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/69041.json",
+          "sha256": "7698ab70ecb92602bad7d00db25b934f28f9eea1411d875fd4b37c40af34fb55"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/69041.json",
+          "sha256": "f964338590c30e09af09a053c83bf8ab5d6124746f947523c25e921e0c8339d4"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/690421.json",
+          "sha256": "3b2f92a8980666ae657e4be941efdef65159279441ad453725d33a47d9b61600"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/690421.json",
+          "sha256": "22d3e248bbf1cc6975cea1084d1603e641b9e7a981c1f5c01d79415c1db297a1"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/690431.json",
+          "sha256": "fa9f36ea085ee63b48bf3649de8950e3d081824ec3970993286e758953c9c333"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/690431.json",
+          "sha256": "71d97a26cfc75a23841d2aed00b58586b983afe23ec0e671072512fd8c3bb666"
+        },
+        {
+          "resource": "zzz/3.1/zh/boss/690441.json",
+          "sha256": "ddb42a33f0f5aecab1365114c54c5e4dc344cc0ca715d88460299b217ee15140"
+        },
+        {
+          "resource": "zzz/3.1/en/boss/690441.json",
+          "sha256": "78e3a4b45f4c31da19395fe6c4660a984e9bf4bb5a95baf77678196ff1d36781"
+        }
+      ],
+      "memberIds": [
+        "69001",
+        "69002",
+        "69003",
+        "69004",
+        "69005",
+        "69006",
+        "69007",
+        "69008",
+        "69009",
+        "69010",
+        "69011",
+        "69012",
+        "69013",
+        "69014",
+        "69015",
+        "69016",
+        "69017",
+        "69018",
+        "69019",
+        "69020",
+        "69021",
+        "69022",
+        "69023",
+        "69024",
+        "69025",
+        "69026",
+        "69027",
+        "69028",
+        "69029",
+        "69030",
+        "69031",
+        "69032",
+        "69033",
+        "69034",
+        "69035",
+        "69036",
+        "69037",
+        "69038",
+        "69039",
+        "69040",
+        "69041",
+        "690421",
+        "690431",
+        "690441"
+      ],
+      "members": {
+        "69001": {
+          "files": {
+            "data": {
+              "path": "boss/69001/data.json",
+              "sha256": "9748eb3fc1adf09eba2290d8004efa8aec2186058ce5b839c9b048d7c052f758"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69001/details.en.json",
+                "sha256": "e88749fee232ba38d9e230f6b70e269fdf766fddad11ec5bf8c5280ae21cac18"
+              },
+              "zh": {
+                "path": "boss/69001/details.zh.json",
+                "sha256": "be9cc1fb7e9389ae64ff05493007ad429bb29ae85bbd9a35a950933933164274"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2024-12-20 04:00:00",
+            "en": "Trial",
+            "end": "2025-01-10 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2024-12-20 04:00:00",
+            "live_end": "2025-01-10 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69002": {
+          "files": {
+            "data": {
+              "path": "boss/69002/data.json",
+              "sha256": "04ef6c3ebcb492dd71559c97d1ae06e2981222d60c9f7094b265d2725b8f18ff"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69002/details.en.json",
+                "sha256": "05730357b30917d5cb3273c1ea57f12ac09b3923d6bef77eb88464cb04373b9b"
+              },
+              "zh": {
+                "path": "boss/69002/details.zh.json",
+                "sha256": "de3142c29b8e615a805ec2a4b8293f750cb0d1a0474bc16b65c51760fe4e5be5"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-01-10 04:00:00",
+            "en": "Trial",
+            "end": "2025-01-24 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-01-10 04:00:00",
+            "live_end": "2025-01-24 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69003": {
+          "files": {
+            "data": {
+              "path": "boss/69003/data.json",
+              "sha256": "1a6fef1dd02f2a5b8269a14085355d4f28a533761b54b2dd24ceb88dbffe51cd"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69003/details.en.json",
+                "sha256": "35e443950b461d234bdead63d53c3bfc5af7488d236803b7caeca83f4b3e2358"
+              },
+              "zh": {
+                "path": "boss/69003/details.zh.json",
+                "sha256": "53036083a9e31415c6e5a77fd105ac3f8b0090d78cb5768da3e0a15e4de5a8cd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-01-24 04:00:00",
+            "en": "Trial",
+            "end": "2025-02-07 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-01-24 04:00:00",
+            "live_end": "2025-02-07 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69004": {
+          "files": {
+            "data": {
+              "path": "boss/69004/data.json",
+              "sha256": "c0b3c0c38d1a7d0ca1cddbfbb856497e88547743fec68c356bf93f5260810730"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69004/details.en.json",
+                "sha256": "6975a261c2e5883b23d189dbc5ed959ae12170e0708b3672b021516b89ffa7ac"
+              },
+              "zh": {
+                "path": "boss/69004/details.zh.json",
+                "sha256": "c211f102e4bc4b38d0ae7193900ebb9f5be82c024ded39a6ff7e322216a49579"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-02-07 04:00:00",
+            "en": "Trial",
+            "end": "2025-02-21 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-02-07 04:00:00",
+            "live_end": "2025-02-21 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69005": {
+          "files": {
+            "data": {
+              "path": "boss/69005/data.json",
+              "sha256": "34155358fc132216b12453dc1b1ec1826abfec583797ad073f6fd292e92c7c68"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69005/details.en.json",
+                "sha256": "a30da78bb2804ca370e4e98fbbaa136ecd64b02f35c92d4f91510e65f84ab838"
+              },
+              "zh": {
+                "path": "boss/69005/details.zh.json",
+                "sha256": "b0e6fa6d625c13d39f1917c3c29719247cf0e1fd7aa8eef7cb1e22b41441e4e9"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-02-21 04:00:00",
+            "en": "Trial",
+            "end": "2025-03-07 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-02-21 04:00:00",
+            "live_end": "2025-03-07 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69006": {
+          "files": {
+            "data": {
+              "path": "boss/69006/data.json",
+              "sha256": "810ed84ae993500382ea084edb789a04658e70c4a6a556f3a65ff11b7dde0f40"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69006/details.en.json",
+                "sha256": "113b334c2d1d5305bbf9613046103fb3edb99b401f1e5d4b6c5cbef80e8bf23f"
+              },
+              "zh": {
+                "path": "boss/69006/details.zh.json",
+                "sha256": "1323439d49cb250c9b3e3310e88b2e4a8bce7813fef53e4768169ae8583d7253"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-03-07 04:00:00",
+            "en": "Trial",
+            "end": "2025-03-21 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-03-07 04:00:00",
+            "live_end": "2025-03-21 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69007": {
+          "files": {
+            "data": {
+              "path": "boss/69007/data.json",
+              "sha256": "025b85c0fffd00518c76d726fb8263fc5275de01bca717a2ececc1b99c2a22a0"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69007/details.en.json",
+                "sha256": "27657fcae67fa91fd1d11f398407a7f3ad1932b2aa8b945e24fcb78d9d0c2e11"
+              },
+              "zh": {
+                "path": "boss/69007/details.zh.json",
+                "sha256": "07e78af0dffcc9bbf8d1a13e2d9ae645419ae9beb330d5b68ba86e56f9ada2dd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-03-21 04:00:00",
+            "en": "Trial",
+            "end": "2025-04-04 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-03-21 04:00:00",
+            "live_end": "2025-04-04 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69008": {
+          "files": {
+            "data": {
+              "path": "boss/69008/data.json",
+              "sha256": "0264e9ea19a4fa820599e58e6c7abf2520a54d89d3a5e138030fa26b0ae39a72"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69008/details.en.json",
+                "sha256": "f2a86bf73c4fb26248a4c8da3833403eceab3ab8f706290ad77bbfd91e53b251"
+              },
+              "zh": {
+                "path": "boss/69008/details.zh.json",
+                "sha256": "d0299059924ffa86a42bf53eebd35c7cafee70294cb3122f00382234ac7201d3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-04-04 04:00:00",
+            "en": "Trial",
+            "end": "2025-04-18 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-04-04 04:00:00",
+            "live_end": "2025-04-18 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69009": {
+          "files": {
+            "data": {
+              "path": "boss/69009/data.json",
+              "sha256": "22e53bc9a278313998fb3bdcb54e0070f76792054937926820beaffc504608d0"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69009/details.en.json",
+                "sha256": "443c6a2b3ac50ec7cb715e9432b89d97cab62cdcf659999617fd83dd3969c2b1"
+              },
+              "zh": {
+                "path": "boss/69009/details.zh.json",
+                "sha256": "abc30b368271a0a3093c6c540b8c92feb45d65c906f6fafae8b73785ad1413a3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-04-18 04:00:00",
+            "en": "Trial",
+            "end": "2025-05-02 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-04-18 04:00:00",
+            "live_end": "2025-05-02 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69010": {
+          "files": {
+            "data": {
+              "path": "boss/69010/data.json",
+              "sha256": "7092cdaf3d6033bc60a077c8af25f0f2049d87a155d8aba2ccaa7691bb3f8e0c"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69010/details.en.json",
+                "sha256": "f491b5322eba6823998195c16f8f977d3ef758dfe6a540b5d73e646f54881d62"
+              },
+              "zh": {
+                "path": "boss/69010/details.zh.json",
+                "sha256": "35e2d448a0e36600625bd4ca5057337742cfbe884659383a90d18d1c08ed7422"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-05-02 04:00:00",
+            "en": "Trial",
+            "end": "2025-05-16 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-05-02 04:00:00",
+            "live_end": "2025-05-16 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69011": {
+          "files": {
+            "data": {
+              "path": "boss/69011/data.json",
+              "sha256": "f4a1370f9c5573cf202cbf555c17ae76133f178099d78dadaaab2512e3059ca4"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69011/details.en.json",
+                "sha256": "bac791b8eac2b43c215ff7203e13c0d1cf0ac376ab72afdf81bfd5f3b8272e98"
+              },
+              "zh": {
+                "path": "boss/69011/details.zh.json",
+                "sha256": "a50477776cd0a6fc1b0ffd0d3bcab62edf7557901b5ab5ad47ecee9efe781e27"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-05-16 04:00:00",
+            "en": "Trial",
+            "end": "2025-05-30 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-05-16 04:00:00",
+            "live_end": "2025-05-30 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69012": {
+          "files": {
+            "data": {
+              "path": "boss/69012/data.json",
+              "sha256": "706b7747cd2782e33f21610e41c6737c6603a587e9a4fe57176ef6320c858804"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69012/details.en.json",
+                "sha256": "5de322561666b2d84b8d4241a8386577ad2bdf7a1762b45917ee20d2ba17d322"
+              },
+              "zh": {
+                "path": "boss/69012/details.zh.json",
+                "sha256": "403150d2aba0375959686b20dbfa4b579d4514107026897beb37ceb92e32bbec"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-05-30 04:00:00",
+            "en": "Trial",
+            "end": "2025-06-13 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-05-30 04:00:00",
+            "live_end": "2025-06-13 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69013": {
+          "files": {
+            "data": {
+              "path": "boss/69013/data.json",
+              "sha256": "6ee06e1d515c4cf594bd65d8773ccabd65a14a4343e0b12040feaf4ffd4518b6"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69013/details.en.json",
+                "sha256": "149356bb98120dc23806a62c8085d1e051b93c23f2f3a640760f36166b3e6c2a"
+              },
+              "zh": {
+                "path": "boss/69013/details.zh.json",
+                "sha256": "39d2dbbfe52f8bbf5162a51b10baeadf608b9a20f7767b1d2b4bc0914f83c0f5"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-06-13 04:00:00",
+            "en": "Trial",
+            "end": "2025-06-27 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-06-13 04:00:00",
+            "live_end": "2025-06-27 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69014": {
+          "files": {
+            "data": {
+              "path": "boss/69014/data.json",
+              "sha256": "db6420209c1274f3b34f9cdc893ce1bb657a7e24b12246da34945dc6d531edd2"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69014/details.en.json",
+                "sha256": "203e16455cfdc92b935d8e4bf601f211fe14b24dc94407089b52a855a1576eb1"
+              },
+              "zh": {
+                "path": "boss/69014/details.zh.json",
+                "sha256": "f1c5ea276069bb6422662c6dd101e52f813009eee3b467702033bccae8ce03a7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-06-27 04:00:00",
+            "en": "Trial",
+            "end": "2025-07-11 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-06-27 04:00:00",
+            "live_end": "2025-07-11 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69015": {
+          "files": {
+            "data": {
+              "path": "boss/69015/data.json",
+              "sha256": "bb3c5d30a60ed5fab26d80c5c42f4a728b89a5f43c15a6b503c8e6e1c39b9785"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69015/details.en.json",
+                "sha256": "dad1406a8cde60ba658ca86678bce5caf7057605f778df2f4d4036090c9476c4"
+              },
+              "zh": {
+                "path": "boss/69015/details.zh.json",
+                "sha256": "ec1272470915e044d7d8b29c76126dbc1b9c04dcbab99fbd02ec1d58e16f1152"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-07-11 04:00:00",
+            "en": "Trial",
+            "end": "2025-07-25 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-07-11 04:00:00",
+            "live_end": "2025-07-25 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69016": {
+          "files": {
+            "data": {
+              "path": "boss/69016/data.json",
+              "sha256": "5160a5ba0dcae3160dafc632c886298c47d1b48cdd867d1642929373c8c484e8"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69016/details.en.json",
+                "sha256": "2331deb4c688de4d5695f849faa82988fe3cce38e1949b14c758c0dedb28b831"
+              },
+              "zh": {
+                "path": "boss/69016/details.zh.json",
+                "sha256": "7cf434a372f6906cf0259f3d48034cfad2b0dc3159402b0934c4723ab54b1436"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-07-25 04:00:00",
+            "en": "Trial",
+            "end": "2025-08-08 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-07-25 04:00:00",
+            "live_end": "2025-08-08 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69017": {
+          "files": {
+            "data": {
+              "path": "boss/69017/data.json",
+              "sha256": "15951b106f907acec68d90f08a2aaeb15d105e611a96a4b3d2ab94c25da13287"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69017/details.en.json",
+                "sha256": "3f00a3edc6eddb4bae70c8caba5fe9684c0c56d84d342909b4ac6f49ef3d526d"
+              },
+              "zh": {
+                "path": "boss/69017/details.zh.json",
+                "sha256": "dca001703f2689d83aae9fdf4e35c880c3596675c1493416184f2ebce984344d"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-08-08 04:00:00",
+            "en": "Trial",
+            "end": "2025-08-22 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-08-08 04:00:00",
+            "live_end": "2025-08-22 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69018": {
+          "files": {
+            "data": {
+              "path": "boss/69018/data.json",
+              "sha256": "42dcc9f42e2bcfbdd1a4802c6697f0d2d87c58c86a7502b874a48757958318bb"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69018/details.en.json",
+                "sha256": "0233ff85fb105e073d042ef7e899177a7032235f2fbc7acb557c718e414d19ce"
+              },
+              "zh": {
+                "path": "boss/69018/details.zh.json",
+                "sha256": "240ed0147edee56b3946a1d3dade708659418960b9efba1f0fd84ea02fc6f967"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-08-22 04:00:00",
+            "en": "Trial",
+            "end": "2025-09-05 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-08-22 04:00:00",
+            "live_end": "2025-09-05 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69019": {
+          "files": {
+            "data": {
+              "path": "boss/69019/data.json",
+              "sha256": "28fdbbc8496e2506e596b0badc9e1754e524f91d569d30a11f44cc38067d39b3"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69019/details.en.json",
+                "sha256": "6266a810f32d39caaa0a3016320849ceab205a9aa49aef503dde6a6baebc92aa"
+              },
+              "zh": {
+                "path": "boss/69019/details.zh.json",
+                "sha256": "bc58d2fa0e1ef1b871b7601be7fc659d7855cb0565398cac1ec0fd2534aa2595"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-09-05 04:00:00",
+            "en": "Trial",
+            "end": "2025-09-19 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-09-05 04:00:00",
+            "live_end": "2025-09-19 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69020": {
+          "files": {
+            "data": {
+              "path": "boss/69020/data.json",
+              "sha256": "3c166c0f0effa0a0ad83663dffee9f6a89ce5f26b8aa6c1e584fff96255ac1d2"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69020/details.en.json",
+                "sha256": "23e4e89602582ca3cea79216ac2541e9c03849d0c139af5e1cdddbeda71eab5c"
+              },
+              "zh": {
+                "path": "boss/69020/details.zh.json",
+                "sha256": "74d10d9d66e9214f909bf86d1f315f415eb1591c3879df80aea80ca6e31c13d4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-09-19 04:00:00",
+            "en": "Trial",
+            "end": "2025-10-03 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-09-19 04:00:00",
+            "live_end": "2025-10-03 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69021": {
+          "files": {
+            "data": {
+              "path": "boss/69021/data.json",
+              "sha256": "9872a832618d796ff8f72169433045e62e9cdda109f9c152b78e5e3987b778fb"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69021/details.en.json",
+                "sha256": "f2ec466c57bcd0808b2ccb1179483e05f2e46d910c52c0d30b6d7035cf20d937"
+              },
+              "zh": {
+                "path": "boss/69021/details.zh.json",
+                "sha256": "b4d0f22931629a1d91a8c88d4289f164f93c3bdf32a2ec75a7218c11985af4e4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-10-03 04:00:00",
+            "en": "Trial",
+            "end": "2025-10-17 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-10-03 04:00:00",
+            "live_end": "2025-10-17 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69022": {
+          "files": {
+            "data": {
+              "path": "boss/69022/data.json",
+              "sha256": "ff573701d2cf2b6beaf1b17869aa10e9b15a007bf35aed8874e877242da99181"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69022/details.en.json",
+                "sha256": "d8598053fc0420972deef9dab599b61416d05972dfe18f6ed39c9de7798f1467"
+              },
+              "zh": {
+                "path": "boss/69022/details.zh.json",
+                "sha256": "06a4c7d5b7366115cbd6c179b919ef5d824cde974883b1cba91bbc43e7de437b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-10-17 04:00:00",
+            "en": "Trial",
+            "end": "2025-10-31 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-10-17 04:00:00",
+            "live_end": "2025-10-31 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69023": {
+          "files": {
+            "data": {
+              "path": "boss/69023/data.json",
+              "sha256": "72166ebb2a07b3e5a77f316aa3689e0f4b989c3196a48090d2086c1dd37aa23e"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69023/details.en.json",
+                "sha256": "841d851c6df3fc83c6a77acd5238467ad834050eb68b15daffad39d4f7908faa"
+              },
+              "zh": {
+                "path": "boss/69023/details.zh.json",
+                "sha256": "5126182bc133e5772b8c1cd3e179153852fefc2bfc829153ebce1aa344ce9260"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-10-31 04:00:00",
+            "en": "Trial",
+            "end": "2025-11-14 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-10-31 04:00:00",
+            "live_end": "2025-11-14 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69024": {
+          "files": {
+            "data": {
+              "path": "boss/69024/data.json",
+              "sha256": "53ac1bb6a6c2c3f95122ffdf0022b36fee9dbd97f60b180af55d67440cce47f9"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69024/details.en.json",
+                "sha256": "30948526447fce36f6d6465124d2356e17bb76754c05e51676d2b4c4f7a1ca41"
+              },
+              "zh": {
+                "path": "boss/69024/details.zh.json",
+                "sha256": "c3214c9cb82b8f59b7c256aa1f936ce8ec4e2ddde0d8aa8925aa38a4855db6f4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-11-14 04:00:00",
+            "en": "Trial",
+            "end": "2025-11-28 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-11-14 04:00:00",
+            "live_end": "2025-11-28 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69025": {
+          "files": {
+            "data": {
+              "path": "boss/69025/data.json",
+              "sha256": "3263d776aba33c6495025d09ce207d0c4f89fdf0fb1693e222f7571116e7c286"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69025/details.en.json",
+                "sha256": "56aa70946781147ec886119bc464124a3f7b52a72c3b8306492a18f0f321f7fc"
+              },
+              "zh": {
+                "path": "boss/69025/details.zh.json",
+                "sha256": "7173fda2c7b653781f3d5befd504ed99d9ff90a908d0ab80cde4a7103533fd38"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-11-28 04:00:00",
+            "en": "Trial",
+            "end": "2025-12-12 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-11-28 04:00:00",
+            "live_end": "2025-12-12 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69026": {
+          "files": {
+            "data": {
+              "path": "boss/69026/data.json",
+              "sha256": "e4b2fc40609185bf11d776a4541e2c5c7f05c1c53dea944084cee258493d9979"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69026/details.en.json",
+                "sha256": "d16fe7efef710ba4a16bf761db8ff608d93155660e5782d31abbe7316a34f884"
+              },
+              "zh": {
+                "path": "boss/69026/details.zh.json",
+                "sha256": "0ebadebb63590d373404138dc9d5abed1dbcdde8c76fb0b747908ae569622167"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2025-12-12 04:00:00",
+            "en": "Trial",
+            "end": "2026-01-02 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2025-12-12 04:00:00",
+            "live_end": "2026-01-02 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69027": {
+          "files": {
+            "data": {
+              "path": "boss/69027/data.json",
+              "sha256": "3f564d2344df8b16c0ff72929a99bc7d847d0191237e2a631f3c62d9cf26ec00"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69027/details.en.json",
+                "sha256": "ba9ff9735bb9401133a0dc68b4d68a2730a0f08c9f4269935626ddfe2be69184"
+              },
+              "zh": {
+                "path": "boss/69027/details.zh.json",
+                "sha256": "329e27d7cf92a3ed9becf6dac547ccbb4183985614fedc2ec83cdd105bbcf423"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-01-02 04:00:00",
+            "en": "Trial",
+            "end": "2026-01-16 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-01-02 04:00:00",
+            "live_end": "2026-01-16 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69028": {
+          "files": {
+            "data": {
+              "path": "boss/69028/data.json",
+              "sha256": "bbe1b22081ad28a323b3829a0c5d30c23e04e7922d2e5e89f3adaed8cac6f8d9"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69028/details.en.json",
+                "sha256": "a5a7b5c04f0b791377ff388a13499c5ea367442c0f99a5b3822bd996e921a346"
+              },
+              "zh": {
+                "path": "boss/69028/details.zh.json",
+                "sha256": "7fca81acddd9c2d88ebb6cb1ee55f1cc68acdcbba51d366076b422d0631c0875"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-01-16 04:00:00",
+            "en": "Trial",
+            "end": "2026-01-30 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-01-16 04:00:00",
+            "live_end": "2026-01-30 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69029": {
+          "files": {
+            "data": {
+              "path": "boss/69029/data.json",
+              "sha256": "2edad630f69b07d7f34c179e143589a8d255196c3f1c9140c728faac53729008"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69029/details.en.json",
+                "sha256": "848d6306a2e855890e45bc1c0061f2d747642a5710200117854723e072c09528"
+              },
+              "zh": {
+                "path": "boss/69029/details.zh.json",
+                "sha256": "35ee19638351d6dca12acfdd819b22a28858048787109be73a419552af94000b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-01-30 04:00:00",
+            "en": "Trial",
+            "end": "2026-02-13 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-01-30 04:00:00",
+            "live_end": "2026-02-13 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69030": {
+          "files": {
+            "data": {
+              "path": "boss/69030/data.json",
+              "sha256": "896a68ae1fae51b89224cbe7035e9d533ee4ff6156e789220f668162e73ebaf5"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69030/details.en.json",
+                "sha256": "57e510777d847b277e044ca5ee7e8520b05a7fd18dafef9c35adcb091a1aa1a0"
+              },
+              "zh": {
+                "path": "boss/69030/details.zh.json",
+                "sha256": "001d1d3da8df6d4fb765855386b41d428f320b31f413ea985f135c3c7510788f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-02-13 04:00:00",
+            "en": "Trial",
+            "end": "2026-02-27 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-02-13 04:00:00",
+            "live_end": "2026-02-27 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69031": {
+          "files": {
+            "data": {
+              "path": "boss/69031/data.json",
+              "sha256": "2318d1edb5a2c28b189bc4eef1c3b462c8fe6babe977d86851deaafa8c5e87b0"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69031/details.en.json",
+                "sha256": "9deef5c6e8ee927509c39892317218e7464396fe4e2561e5931b9de67e9c75d0"
+              },
+              "zh": {
+                "path": "boss/69031/details.zh.json",
+                "sha256": "561376d1a916ee6de84e7914fd158d0e5cace6f5b57a6e3bf060b8bf5c6a3335"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-02-27 04:00:00",
+            "en": "Trial",
+            "end": "2026-03-13 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-02-27 04:00:00",
+            "live_end": "2026-03-13 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69032": {
+          "files": {
+            "data": {
+              "path": "boss/69032/data.json",
+              "sha256": "d54611557d235449842d617352557ea73db8a6c557dc6fa9f2f3aa4a6410e22f"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69032/details.en.json",
+                "sha256": "83caa0f1427d3e015b7eebb35f4497b729694f3667811f49850bb6b27fbc35f5"
+              },
+              "zh": {
+                "path": "boss/69032/details.zh.json",
+                "sha256": "f5aada374728ddc59a631be4261f4c24587a8954274728fe742be7d664662dc7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-03-13 04:00:00",
+            "en": "Trial",
+            "end": "2026-03-27 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-03-13 04:00:00",
+            "live_end": "2026-03-27 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69033": {
+          "files": {
+            "data": {
+              "path": "boss/69033/data.json",
+              "sha256": "794dfd4ace497b2f908f61c746dfc8266fe8d799de58a8c9612ede468467d2ac"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69033/details.en.json",
+                "sha256": "130b52cc0e74bfcc7654518c6ed3b593c69ac951b2886de54595ce992a9ca15a"
+              },
+              "zh": {
+                "path": "boss/69033/details.zh.json",
+                "sha256": "020e76850bd8b17e7a8343880aa753628c13e5a8def3968799f72eb4dd1f0ffb"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-03-27 04:00:00",
+            "en": "Trial",
+            "end": "2026-04-10 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-03-27 04:00:00",
+            "live_end": "2026-04-10 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69034": {
+          "files": {
+            "data": {
+              "path": "boss/69034/data.json",
+              "sha256": "d3e218ac64f7c37a2174c4999895b99bd18deaec5083aff7305d5bc1985866ce"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69034/details.en.json",
+                "sha256": "99496dc6256fb7851cc5bbeef14c564f74eebc3dbc3c317ad74b8e742e595e98"
+              },
+              "zh": {
+                "path": "boss/69034/details.zh.json",
+                "sha256": "99148050eda2c19a35570a982ad4aa592613298642465ac8535c1f6528ce778f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-04-10 04:00:00",
+            "en": "Trial",
+            "end": "2026-04-24 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-04-10 04:00:00",
+            "live_end": "2026-04-24 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69035": {
+          "files": {
+            "data": {
+              "path": "boss/69035/data.json",
+              "sha256": "c44d35c68a7b2ce2f94e09f4f3d5970efb2b8a25db9a4a89214b537dd591307e"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69035/details.en.json",
+                "sha256": "d05bf5a1cc7a336f1d8168dd734148c5b914309798c098ef08c1b0d056a3d88e"
+              },
+              "zh": {
+                "path": "boss/69035/details.zh.json",
+                "sha256": "b460e635243ecfcd7bf09b0c8cc4cf6a6894282bf90ef109d48edf709038d871"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-04-24 04:00:00",
+            "en": "Trial",
+            "end": "2026-05-08 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-04-24 04:00:00",
+            "live_end": "2026-05-08 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69036": {
+          "files": {
+            "data": {
+              "path": "boss/69036/data.json",
+              "sha256": "9728bf6e5b7ff96ec774fbfda194ae32e1ec2128212c35990b5bf5570630a3a6"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69036/details.en.json",
+                "sha256": "df1e51203e806b39b826ae97b57897a219688e60c3339bf6758817d9034a8bce"
+              },
+              "zh": {
+                "path": "boss/69036/details.zh.json",
+                "sha256": "27e4b70ce06c91051cb618a6df139c74d6b059bb7e15dc48e6f0bc187ecfee08"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-05-08 04:00:00",
+            "en": "Trial",
+            "end": "2026-05-22 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-05-08 04:00:00",
+            "live_end": "2026-05-22 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69037": {
+          "files": {
+            "data": {
+              "path": "boss/69037/data.json",
+              "sha256": "4a099a24de1831654e7dfb88fa546a04c8902aef2e6ece7f3347aa5fb6f041c9"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69037/details.en.json",
+                "sha256": "59064aeaee03064010946d0781252519e3ea252c81244ae2b42129007f1a8446"
+              },
+              "zh": {
+                "path": "boss/69037/details.zh.json",
+                "sha256": "0d92344c26fa938aa835f8a2b8707eeb86c5499ada3c9c2e8361d8ead241cdc7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-05-22 04:00:00",
+            "en": "Trial",
+            "end": "2026-06-05 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-05-22 04:00:00",
+            "live_end": "2026-06-05 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69038": {
+          "files": {
+            "data": {
+              "path": "boss/69038/data.json",
+              "sha256": "127bb846cd2ea7a51e327ae020ec6f22842697d553143b0fe6eac354e907064c"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69038/details.en.json",
+                "sha256": "ca1889830b985c43b1229fb467103dc23e60e32ac5229fde9382844e68690572"
+              },
+              "zh": {
+                "path": "boss/69038/details.zh.json",
+                "sha256": "95025fcecd88ba54078f8192750fcf9a910ec3881455572ad089f113814379fe"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-06-05 04:00:00",
+            "en": "Trial",
+            "end": "2026-06-19 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-06-05 04:00:00",
+            "live_end": "2026-06-19 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69039": {
+          "files": {
+            "data": {
+              "path": "boss/69039/data.json",
+              "sha256": "6aab53607429d8ee72134b8430da1407d72ae5f29d31755f5d16676439d311bc"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69039/details.en.json",
+                "sha256": "cc2be3e2317fe60265def58d389689ce5737447f7405e4335f0e8457243954b8"
+              },
+              "zh": {
+                "path": "boss/69039/details.zh.json",
+                "sha256": "7e323da6674160e95a7d18fa24b219509506a5d693ea51748617b105931fa36d"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-06-19 04:00:00",
+            "en": "Trial",
+            "end": "2026-07-03 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-06-19 04:00:00",
+            "live_end": "2026-07-03 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69040": {
+          "files": {
+            "data": {
+              "path": "boss/69040/data.json",
+              "sha256": "52b8c30ec2a0c330f5e1b99052cc16cdabe60ce672c9f243adaa831191e757b8"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69040/details.en.json",
+                "sha256": "9d4fde6c26e9a9deb21b3a8a7b77470e3729c5c6a796c8bf3be7cd16770262b4"
+              },
+              "zh": {
+                "path": "boss/69040/details.zh.json",
+                "sha256": "196dbb3f356666ed8682988436e2f444693ecfe38f038e5ac435f875a87a16e7"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-07-03 04:00:00",
+            "en": "Trial",
+            "end": "2026-07-17 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-07-03 04:00:00",
+            "live_end": "2026-07-17 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "69041": {
+          "files": {
+            "data": {
+              "path": "boss/69041/data.json",
+              "sha256": "2c36cc2ddd5f03cae13f903d654ead38e17e7b4065bd486920b7f7a21674ead1"
+            },
+            "details": {
+              "en": {
+                "path": "boss/69041/details.en.json",
+                "sha256": "12fef23dbaa25c189feeb5a69b626c7692b3c32c0e84af68f22e591419a78796"
+              },
+              "zh": {
+                "path": "boss/69041/details.zh.json",
+                "sha256": "980e0360d9de4bf9f446bf59f54ba073bcfaf4c722c021c93693f900857ad60a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-07-17 04:00:00",
+            "en": "Trial",
+            "end": "2026-07-29 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-07-17 04:00:00",
+            "live_end": "2026-07-29 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1001
+          }
+        },
+        "690421": {
+          "files": {
+            "data": {
+              "path": "boss/690421/data.json",
+              "sha256": "7a93c9e71f0f37527f87d9481224cb43c57086cf5e28411b51c2c3c849bccccb"
+            },
+            "details": {
+              "en": {
+                "path": "boss/690421/details.en.json",
+                "sha256": "ea0697c0173193b4d338a96d5c0d46c98c09509d569eb6b5923605ac8f4d8088"
+              },
+              "zh": {
+                "path": "boss/690421/details.zh.json",
+                "sha256": "3d2c78f53f5ffda6621bb8e6fd688d4873f470564ee9e105e0b3c6e5931e2389"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-07-29 04:00:00",
+            "en": "Trial",
+            "end": "2026-08-14 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-07-29 04:00:00",
+            "live_end": "2026-08-14 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1002
+          }
+        },
+        "690431": {
+          "files": {
+            "data": {
+              "path": "boss/690431/data.json",
+              "sha256": "e3cb3465bcec20028d7d077177f62390f8ecf97f36c1203cc255ee24c262079b"
+            },
+            "details": {
+              "en": {
+                "path": "boss/690431/details.en.json",
+                "sha256": "8e82af08f9151b5a5cbbfe42881e8dc3e328f74b1c43896ac7660fcb64a16f2d"
+              },
+              "zh": {
+                "path": "boss/690431/details.zh.json",
+                "sha256": "aac572299a4bf34037d1e6d27ce5a4160d77af74942bd4e60f8c15a7363e1f3c"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-08-14 04:00:00",
+            "en": "Trial",
+            "end": "2026-08-28 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-08-14 04:00:00",
+            "live_end": "2026-08-28 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1002
+          }
+        },
+        "690441": {
+          "files": {
+            "data": {
+              "path": "boss/690441/data.json",
+              "sha256": "758b4a9e09e5b8d6a7514afc37573d0291cc01da59ac55fc9f8bff7c7f5f00c8"
+            },
+            "details": {
+              "en": {
+                "path": "boss/690441/details.en.json",
+                "sha256": "4292feeb52463679a85b5530202f46709abcb566b90edb9af46ab5e073a5fbf6"
+              },
+              "zh": {
+                "path": "boss/690441/details.zh.json",
+                "sha256": "ea71368d2da0603ff50c8f2ae61be929e652ba83fab0b95c1670a6d191df921f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "begin": "2026-08-28 04:00:00",
+            "en": "Trial",
+            "end": "2026-09-11 03:59:59",
+            "ja": "試練",
+            "ko": "시련",
+            "live_begin": "2026-08-28 04:00:00",
+            "live_end": "2026-09-11 03:59:59",
+            "sort": 9,
+            "zh": "试炼",
+            "zone_type": 1002
+          }
+        }
+      },
+      "rulesVersion": "nanoka-boss-reference/1"
+    },
     "drive-discs": {
       "complete": true,
       "detailLocales": ["zh", "en"],
