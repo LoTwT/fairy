@@ -40,7 +40,7 @@ export function publicationFiles(index: IntegratedSnapshotIndex): string[] {
   return files
 }
 
-/** 公开 API 当前覆盖的类别必须进入发布副本，且两类公开语言完整；缺失即拒绝发布。 */
+/** 公开 API 当前覆盖的类别必须进入发布副本，且各类别的公开语言完整；缺失即拒绝发布。 */
 function requirePublishedEntity(
   index: IntegratedSnapshotIndex,
   name: string,
@@ -77,7 +77,7 @@ async function englishDetailNames(
   return names
 }
 
-/** 从已验证副本的英文顶层 name 生成两类实体的精确类型、冻结名称/映射及显式懒加载表。 */
+/** 从已验证副本的英文顶层 name 生成全部已登记实体的精确类型、冻结名称/映射及显式懒加载表。 */
 export async function generateCatalog(
   snapshot: string,
   index: IntegratedSnapshotIndex,
@@ -85,8 +85,10 @@ export async function generateCatalog(
 ): Promise<string> {
   const agents = requirePublishedEntity(index, "agents")
   const driveDiscs = requirePublishedEntity(index, "drive-discs")
+  const wEngines = requirePublishedEntity(index, "w-engines")
   const agentNames = await englishDetailNames(snapshot, agents)
   const driveDiscNames = await englishDetailNames(snapshot, driveDiscs)
+  const wEngineNames = await englishDetailNames(snapshot, wEngines)
   const json = JSON.stringify
   const lazy = (path: string, type: string) =>
     `() => import(${json(`@randomplay/data/integrated/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
@@ -109,23 +111,32 @@ en: ${lazy(entity.members[id].files.details.en.path, details)},
   return `// Generated from the verified publication snapshot. Do not edit.
 import type { AgentData, AgentDetails } from "../src/integration/agent-types.ts"
 import type { DriveDiscData, DriveDiscDetails } from "../src/integration/drive-disc-types.ts"
+import type { WEngineData, WEngineDetails } from "../src/integration/w-engine-types.ts"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
 /** 本次发布全部代理人的英文详情顶层 name 原值。 */
 export type AgentName = ${agentNames.map((name) => json(name)).join(" | ")}
 /** 本次发布全部驱动盘套装的英文详情顶层 name 原值。 */
 export type DriveDiscName = ${driveDiscNames.map((name) => json(name)).join(" | ")}
+/** 本次发布全部 WEngine 的英文详情顶层 name 原值。 */
+export type WEngineName = ${wEngineNames.map((name) => json(name)).join(" | ")}
 /** 按来源 ID 数值升序排列的完整代理人英文名称列表；运行时冻结。 */
 export const agentNames: readonly AgentName[] = Object.freeze(${json(agentNames)})
 /** 按来源 ID 数值升序排列的完整驱动盘英文名称列表；运行时冻结。 */
 export const driveDiscNames: readonly DriveDiscName[] = Object.freeze(${json(driveDiscNames)})
+/** 按来源 ID 数值升序排列的完整 WEngine 英文名称列表；运行时冻结。 */
+export const wEngineNames: readonly WEngineName[] = Object.freeze(${json(wEngineNames)})
 export const agentSourceIds: Readonly<Record<AgentName, string>> = ${sourceIds(agentNames, agents)} as Readonly<Record<AgentName, string>>
 export const driveDiscSourceIds: Readonly<Record<DriveDiscName, string>> = ${sourceIds(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscName, string>>
+export const wEngineSourceIds: Readonly<Record<WEngineName, string>> = ${sourceIds(wEngineNames, wEngines)} as Readonly<Record<WEngineName, string>>
 export const indexLoader = ${lazy("index.json", "IntegratedSnapshotIndex")}
 export const agentLoaders: Record<string, { data: () => Promise<AgentData>; zh: () => Promise<AgentDetails>; en: () => Promise<AgentDetails> }> = {
 ${loaderTable(agents, "AgentData", "AgentDetails")}
 }
 export const driveDiscLoaders: Record<string, { data: () => Promise<DriveDiscData>; zh: () => Promise<DriveDiscDetails>; en: () => Promise<DriveDiscDetails> }> = {
 ${loaderTable(driveDiscs, "DriveDiscData", "DriveDiscDetails")}
+}
+export const wEngineLoaders: Record<string, { data: () => Promise<WEngineData>; zh: () => Promise<WEngineDetails>; en: () => Promise<WEngineDetails> }> = {
+${loaderTable(wEngines, "WEngineData", "WEngineDetails")}
 }
 `
 }

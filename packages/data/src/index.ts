@@ -7,6 +7,10 @@ import type {
   DriveDiscData,
   DriveDiscDetails,
 } from "./integration/drive-disc-types.ts"
+import type {
+  WEngineData,
+  WEngineDetails,
+} from "./integration/w-engine-types.ts"
 import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
 import {
   agentNames,
@@ -15,9 +19,16 @@ import {
   driveDiscNames,
   driveDiscSourceIds,
   driveDiscLoaders,
+  wEngineNames,
+  wEngineSourceIds,
+  wEngineLoaders,
   indexLoader,
 } from "../.generated/catalog.ts"
-import type { AgentName, DriveDiscName } from "../.generated/catalog.ts"
+import type {
+  AgentName,
+  DriveDiscName,
+  WEngineName,
+} from "../.generated/catalog.ts"
 
 /** 正式字段类型：实体结构、文件引用、来源身份与多实体完整制品索引。 */
 export type {
@@ -45,13 +56,31 @@ export type {
   DriveDiscDetails,
 } from "./integration/drive-disc-types.ts"
 export type {
+  WEngineClassificationIds,
+  WEngineData,
+  WEngineDetails,
+  WEngineLevelStage,
+  WEnginePropertyText,
+  WEnginePropertyValue,
+  WEngineStarsStage,
+  WEngineTalent,
+} from "./integration/w-engine-types.ts"
+export type {
   IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
   IntegratedSnapshotMember,
   IntegratedSnapshotSourceInput,
 } from "./integration/snapshot-types.ts"
-export type { AgentName, DriveDiscName } from "../.generated/catalog.ts"
-export { agentNames, driveDiscNames } from "../.generated/catalog.ts"
+export type {
+  AgentName,
+  DriveDiscName,
+  WEngineName,
+} from "../.generated/catalog.ts"
+export {
+  agentNames,
+  driveDiscNames,
+  wEngineNames,
+} from "../.generated/catalog.ts"
 
 /** 指定语言的完整代理人资料；公共与本地化字段分别保留，不合并。 */
 export interface LocalizedAgent {
@@ -67,6 +96,14 @@ export interface LocalizedDriveDisc {
   data: DriveDiscData
   /** 指定语言详情，locale 与调用参数一致。 */
   details: DriveDiscDetails
+}
+
+/** 指定语言的完整 WEngine 资料；公共与本地化字段分别保留，不合并。 */
+export interface LocalizedWEngine {
+  /** 原有公共资料结构。 */
+  data: WEngineData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: WEngineDetails
 }
 
 function assertName(name: unknown): asserts name is string {
@@ -87,6 +124,13 @@ function driveDiscSourceId(name: DriveDiscName): string | undefined {
   assertName(name)
   return Object.hasOwn(driveDiscSourceIds, name)
     ? driveDiscSourceIds[name]
+    : undefined
+}
+
+function wEngineSourceId(name: WEngineName): string | undefined {
+  assertName(name)
+  return Object.hasOwn(wEngineSourceIds, name)
+    ? wEngineSourceIds[name]
     : undefined
 }
 
@@ -175,4 +219,45 @@ export async function loadAllDriveDiscs(
       }),
     ),
   ) as Record<DriveDiscName, LocalizedDriveDisc>
+}
+
+/** 精确英文名称对应的 WEngine 公共资料；未知字符串返回 undefined，非字符串以 TypeError 拒绝。不加载索引、详情或其他类别，每次返回独立对象树。 */
+export async function loadWEngineData(
+  name: WEngineName,
+): Promise<WEngineData | undefined> {
+  const id = wEngineSourceId(name)
+  return id === undefined
+    ? undefined
+    : structuredClone(await wEngineLoaders[id]!.data())
+}
+
+/** 只读取指定 WEngine 显式 zh/en 详情，无语言回退；未知字符串返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
+export async function loadWEngineDetails(
+  name: WEngineName,
+  locale: DetailLocale,
+): Promise<WEngineDetails | undefined> {
+  assertLocale(locale)
+  const id = wEngineSourceId(name)
+  return id === undefined
+    ? undefined
+    : structuredClone(await wEngineLoaders[id]![locale]())
+}
+
+/** 显式加载全部 WEngine 公共资料和指定语言详情，以英文名称为 key；任一必要文件失败则整体拒绝。不加载代理人、驱动盘或索引，每次返回独立对象树。 */
+export async function loadAllWEngines(
+  locale: DetailLocale,
+): Promise<Record<WEngineName, LocalizedWEngine>> {
+  assertLocale(locale)
+  return Object.fromEntries(
+    await Promise.all(
+      wEngineNames.map(async (name) => {
+        const loaders = wEngineLoaders[wEngineSourceIds[name]]!
+        const [data, details] = await Promise.all([
+          loaders.data(),
+          loaders[locale](),
+        ])
+        return [name, structuredClone({ data, details })]
+      }),
+    ),
+  ) as Record<WEngineName, LocalizedWEngine>
 }

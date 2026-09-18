@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Every Deputy Administrative Director of the Airspace Patrol Department from House de L'Azur has had a custom W-Engine of their own. The badge and ode of the guardians of the skies are all forged into this elegant white emblem. To the children, the members of the Airspace Patrol Department who protect the City in the Sky are knights from a fairy tale. The peace and tranquility above the clouds are the quiet ode of their extolment.\n\"Every knight in a fairy tale has their own trusty steed. Which reminds me...\"\n—Lady Lindverne Sunbringer eyes her knight with unmistakable mischief.",
+  "desc2": "Equip to increase Attack Agents' combat capabilities",
+  "desc3": "Across the vast skies and seas of clouds, the extolment for the knights echoes in quiet reverence.",
+  "id": 14159,
+  "locale": "en",
+  "name": "Knight's Extolment",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "CRIT DMG",
+    "name2": "CRIT DMG"
+  },
+  "talents": {
+    "1": {
+      "desc": "When the equipper's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>EX Special Attack</color>'s heavy attack hits an enemy, they gain 1 stack of <color=#FFFFFF>Battle Edge</color>, increasing CRIT DMG by <color=#2BAD00>32%</color> for 25s. <color=#FFFFFF>Battle Edge</color> can stack up to 2 times, and each skill type can provide up to 1 stack. Repeated triggers refresh the duration of all <color=#FFFFFF>Battle Edge</color>.\nAt 2 stacks of <color=#FFFFFF>Battle Edge</color>, the equipper gains <color=#FFFFFF>Bonechill</color>: Their DMG ignores <color=#2BAD00>20%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "name": "Knight's Rite"
+    },
+    "2": {
+      "desc": "When the equipper's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>EX Special Attack</color>'s heavy attack hits an enemy, they gain 1 stack of <color=#FFFFFF>Battle Edge</color>, increasing CRIT DMG by <color=#2BAD00>36.8%</color> for 25s. <color=#FFFFFF>Battle Edge</color> can stack up to 2 times, and each skill type can provide up to 1 stack. Repeated triggers refresh the duration of all <color=#FFFFFF>Battle Edge</color>.\nAt 2 stacks of <color=#FFFFFF>Battle Edge</color>, the equipper gains <color=#FFFFFF>Bonechill</color>: Their DMG ignores <color=#2BAD00>23%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "name": "Knight's Rite"
+    },
+    "3": {
+      "desc": "When the equipper's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>EX Special Attack</color>'s heavy attack hits an enemy, they gain 1 stack of <color=#FFFFFF>Battle Edge</color>, increasing CRIT DMG by <color=#2BAD00>41.6%</color> for 25s. <color=#FFFFFF>Battle Edge</color> can stack up to 2 times, and each skill type can provide up to 1 stack. Repeated triggers refresh the duration of all <color=#FFFFFF>Battle Edge</color>.\nAt 2 stacks of <color=#FFFFFF>Battle Edge</color>, the equipper gains <color=#FFFFFF>Bonechill</color>: Their DMG ignores <color=#2BAD00>26%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "name": "Knight's Rite"
+    },
+    "4": {
+      "desc": "When the equipper's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>EX Special Attack</color>'s heavy attack hits an enemy, they gain 1 stack of <color=#FFFFFF>Battle Edge</color>, increasing CRIT DMG by <color=#2BAD00>46.4%</color> for 25s. <color=#FFFFFF>Battle Edge</color> can stack up to 2 times, and each skill type can provide up to 1 stack. Repeated triggers refresh the duration of all <color=#FFFFFF>Battle Edge</color>.\nAt 2 stacks of <color=#FFFFFF>Battle Edge</color>, the equipper gains <color=#FFFFFF>Bonechill</color>: Their DMG ignores <color=#2BAD00>29%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "name": "Knight's Rite"
+    },
+    "5": {
+      "desc": "When the equipper's <color=#FFFFFF>Basic Attack</color> or <color=#FFFFFF>EX Special Attack</color>'s heavy attack hits an enemy, they gain 1 stack of <color=#FFFFFF>Battle Edge</color>, increasing CRIT DMG by <color=#2BAD00>51.2%</color> for 25s. <color=#FFFFFF>Battle Edge</color> can stack up to 2 times, and each skill type can provide up to 1 stack. Repeated triggers refresh the duration of all <color=#FFFFFF>Battle Edge</color>.\nAt 2 stacks of <color=#FFFFFF>Battle Edge</color>, the equipper gains <color=#FFFFFF>Bonechill</color>: Their DMG ignores <color=#2BAD00>32%</color> of the target's <color=#98EFF0>Ice RES</color>.",
+      "name": "Knight's Rite"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Not content with repeatedly listening to the same albums' melodies, and unwilling to stay stuck in the same Hollow scenery. Even among the travelers who wander the Hollows, there are those romantic adventurers, poets of sorts, who go too far. \"Radiowave Journey\" is designed specifically for these romantic fools. Its additional radio module can convert Etheric frequencies into musical melodies, playing different styles of music depending on the type of Hollow you're in.",
+  "desc2": "Equip to increase Rupture Agents' combat capabilities",
+  "desc3": "Designed for those Hollow-dwelling bards who refuse to listen to the same albums repeatedly, this W-Engine comes equipped with a radio module that can transform Etheric frequencies into melodies.",
+  "id": 13014,
+  "locale": "en",
+  "name": "Radiowave Journey",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "HP",
+    "name2": "Percent HP"
+  },
+  "talents": {
+    "1": {
+      "desc": "When launching a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, the equipper gains 1 stack of a buff effect. Each stack increases the equipper's Sheer Force by <color=#2BAD00>80</color>, stacking up to 3 times, and lasting 12s. The duration of each stack is calculated separately.",
+      "name": "Easy Strides"
+    },
+    "2": {
+      "desc": "When launching a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, the equipper gains 1 stack of a buff effect. Each stack increases the equipper's Sheer Force by <color=#2BAD00>92</color>, stacking up to 3 times, and lasting 12s. The duration of each stack is calculated separately.",
+      "name": "Easy Strides"
+    },
+    "3": {
+      "desc": "When launching a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, the equipper gains 1 stack of a buff effect. Each stack increases the equipper's Sheer Force by <color=#2BAD00>104</color>, stacking up to 3 times, and lasting 12s. The duration of each stack is calculated separately.",
+      "name": "Easy Strides"
+    },
+    "4": {
+      "desc": "When launching a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, the equipper gains 1 stack of a buff effect. Each stack increases the equipper's Sheer Force by <color=#2BAD00>116</color>, stacking up to 3 times, and lasting 12s. The duration of each stack is calculated separately.",
+      "name": "Easy Strides"
+    },
+    "5": {
+      "desc": "When launching a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color>, the equipper gains 1 stack of a buff effect. Each stack increases the equipper's Sheer Force by <color=#2BAD00>128</color>, stacking up to 3 times, and lasting 12s. The duration of each stack is calculated separately.",
+      "name": "Easy Strides"
+    }
+  },
+  "weaponType": {
+    "6": "Rupture"
+  }
+}

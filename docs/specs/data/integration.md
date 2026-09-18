@@ -4,9 +4,10 @@
 
 **状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
-已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）与 `drive-discs`（规则
-`nanoka-drive-disc-reference/1`）。驱动盘单实体规则与实现状态见
-[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
+已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）、`drive-discs`（规则
+`nanoka-drive-disc-reference/1`）与 `w-engines`（规则 `nanoka-w-engine-reference/1`）。驱动盘单实体规则与实现状态见
+[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)，WEngine 单实体规则与实现状态见
+[WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -411,7 +412,7 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 - 目标不存在时首次创建；显式 `generate:integrated` 也允许对已有完整合法 JSON 建立本机记录。空目录、符号链接、外来文件和损坏状态仍拒绝，不递归重建。
 - 初始化要求当前 v3 制品满足当前登记表的全部已接入类别：登记表演进后，缺类别的历史完整制品（例如仅含
   `agents` 的旧 v3 数据集）不再满足初始化条件，生成与迁移都明确拒绝并保留现场，不会自动接管或补空集合；
-  删除旧制品后由生成入口从 raw 完整重建双类别数据集。
+  删除旧制品后由生成入口从 raw 按当前登记表完整重建数据集。
 - 生成入口取得同一永久锁后，只有 `state.json` 不存在且控制目录至多含锁文件、journal 与初始 `state.next` 时，才允许初始化已有制品。
   复用完整验证器检查当前 v3 格式、支持的当前规则 v4、全部已接入类别、当前完整语言配置、成员、来源清单、精确文件集合及实际字节摘要；
   以已验证索引的实际字节摘要、索引格式、各类别规则版本和验证配置建立 `idle(current)`，再进入既有恢复及候选更新流程。
@@ -756,6 +757,71 @@ core 映射不属于本规则。
 驱动盘；成员文件身份检查在类别登记表中显式实现。公开的驱动盘类型、名称 catalog 与读取 API 已由包根入口
 按[消费契约](consumption.md)提供。
 
+### WEngine 单实体实现规则 `nanoka-w-engine-reference/1`
+
+来源说明见 [Nanoka W-Engines](../nanoka/weapon.md)：上游实体 `weapon`，整合类别登记名为 `w-engines`，
+类型与函数统一使用 `WEngine` 命名。每条记录表示一个 WEngine；材料字符串解析、百分比换算、成长公式解释、
+天赋计算效果以及 definitions 或 core 映射不属于本规则。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-w-engine.ts) `integrateWEngine` 接受与
+`integrateAgent`、`integrateDriveDisc` 相同的输入形态 `{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[WEngine 类型](../../../packages/data/src/integration/w-engine-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[WEngine 结构登记](../../../packages/data/src/integration/w-engine-schema.ts)。
+
+字段归属（第一列为来源拼写，后两列为转换后的字段名）：
+
+| 来源字段                         | `data.json`                                                                | `details.{locale}.json`                                     |
+| -------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `id`                             | 数值 WEngine ID                                                            | 同值身份副本                                                |
+| `code_name`                      | `codeName`，严格公共字段                                                   | 无重复载荷                                                  |
+| `rarity`、`icon`                 | `rarity`、`icon` 原值                                                      | 无重复载荷                                                  |
+| `level`                          | `level` 完整成长块，阶段 `exp`、`rate`、`rate2` 原值                       | 无重复载荷                                                  |
+| `stars`                          | `stars` 完整成长块，阶段 `star_rate`、`rand_rate` → `starRate`、`randRate` | 无重复载荷                                                  |
+| `materials`                      | `materials` 原始字符串，不解析                                             | 无重复载荷                                                  |
+| `base_property`、`rand_property` | `baseProperty.value`、`randProperty.value` 数值                            | `baseProperty`、`randProperty` 的 `name`、`name2`、`format` |
+| `weapon_type`                    | 派生 `classificationIds.weaponType`（规范十进制字符串，按数值升序）        | `weaponType` 完整本地化字典                                 |
+| `name`、`desc`、`desc2`、`desc3` | 无                                                                         | 当前语言原文                                                |
+| `talents`                        | 无                                                                         | `talents` 阶段字典，各条 `name`、`desc`                     |
+| 派生 `locale`                    | 无                                                                         | 输入语言标识                                                |
+| 索引中的实体记录                 | 不覆盖到详情                                                               | 完整保存在 `sourceRecord`，不修改原 key                     |
+
+`codeName` 是严格公共字段：各语言完整值必须一致，冲突即失败；不套用代理人按首个语言取值的特例，也不取
+索引摘要名。`level`、`stars`、`materials`、`rarity`、`icon`、两个属性数值同样按完整值核对。`baseProperty`、
+`randProperty` 的名称、第二名称与显示格式是本地化文本，不参与共享核对；即使两语言取值相同也留在各自语言。
+索引摘要与语言详情是两个独立来源：摘要完整保存在 `sourceRecord`，不与详情去重，同名字段不要求相等，
+也不互相回退。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`code_name`、`name`、`desc`、`desc2`、`desc3`、`rarity`、`icon`、
+   `weapon_type`、`base_property`、`rand_property`、`level`、`stars`、`materials`、`talents`；登记字段按
+   登记表核对类型，`id` 必须为安全整数且规范十进制形式与 `entityId` 一致。`level` 阶段登记 `exp`、`rate`、
+   `rate2`，`stars` 阶段登记 `star_rate`、`rand_rate`，`talents` 阶段登记 `name`、`desc`，属性对象登记
+   `name`、`name2`、`format` 与数值 `value`；未登记的成员原样保留并进入维护诊断。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. `weapon_type` 的 key 必须为规范十进制 ID，值为字符串；各语言 ID 集合必须一致，冲突即失败。
+   `classificationIds.weaponType` 从 key 派生并按数值升序；完整字典保留在各语言详情，不映射为 core 枚举。
+5. 来源字段与登记输出名冲突（如同时存在 `code_name` 与 `codeName`、`star_rate` 与 `starRate`）时失败，
+   不覆盖、不合并；`locale`、`classificationIds` 与派生辅助字段重名时同样失败。
+6. 未登记字段原样保留：详情未知字段留在对应语言，索引记录未知字段留在 `sourceRecord`，都进入维护诊断；
+   共享块内部的未知阶段成员随整块提取到 `data`，跨语言不一致时仍按公共冲突处理。
+7. 空字符串、零、`null`、空数组、空对象、数组顺序、材料字符串、数值尺度与显示格式按来源保留；
+   已登记字段仍须满足其明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `WEngineIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+   字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
+
+实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/w-engine-integration.test.ts)、
+[独立测试侧还原](../../../packages/data/test/fixtures/w-engine-roundtrip.ts)、
+[合成输入](../../../packages/data/test/fixtures/w-engine-source.ts)和
+[类型正反例](../../../packages/data/test/w-engine-types.typecheck.ts)覆盖，测试不读取真实 raw。
+**生产类别已接入**：`w-engines`（来源实体 `weapon`）登记到已接入类别，生产快照与 JSON 子路径导出已包含
+WEngine；成员文件身份检查在类别登记表中显式实现。公开的 WEngine 类型、名称 catalog 与读取 API 已由包根入口
+按[消费契约](consumption.md)提供。
+
 ### 离线全量构建的共用能力
 
 全量构建入口是第 7.1 节的 `buildIntegratedSnapshot`（实现见下节）；它按已接入类别登记表处理全部类别，
@@ -853,9 +919,10 @@ fairy-integrated-snapshot-<独占后缀>/
 ### 多实体完整制品的内部生成、验证与转换
 
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
-当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）与 `drive-discs`（来源实体
-`equipment`，规则 `nanoka-drive-disc-reference/1`），代理人复用既有 `integrateAgent`、驱动盘复用既有
-`integrateDriveDisc`，成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
+当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）、`drive-discs`（来源实体
+`equipment`，规则 `nanoka-drive-disc-reference/1`）与 `w-engines`（来源实体 `weapon`，规则
+`nanoka-w-engine-reference/1`），代理人复用既有 `integrateAgent`、驱动盘复用既有
+`integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`，成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
 可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
 验证与历史复验只要求静态契约。
 [索引类型](../../../packages/data/src/integration/snapshot-types.ts)由包根入口导出，是公开读取的唯一索引类型；
@@ -892,8 +959,8 @@ fairy-integrated-snapshot-<独占后缀>/
 更新差异由[差异引擎](../../../packages/data/scripts/nanoka-integration/snapshot-diff.ts)（纯 JSON 值比较）和
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
-`generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents` 与
-`drive-discs`。
+`generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents`、
+`drive-discs` 与 `w-engines`。
 从仓库根目录执行：
 
 ```bash
@@ -1033,6 +1100,37 @@ data/zh/en JSON 子路径，并提交双类别真实快照。
   驱动盘 JSON 已随包分发但尚无读取 API，两个口径不再相等是本版的预期状态。
 - 未执行真实相邻版本推进（历史 3.0 缓存缺少 `skill_priority`，不能作为当前规则完整输入）；不承诺
   nlink、ctime 或目录 inode 不变。来源分发复核记录见[共享来源规范](../nanoka/source.md#分发复核记录)。
+
+### WEngine 生产类别接入验收
+
+2026-09-18，基线 `ef45d07691c35d1b72de299842d418670b5b06bb`（任务分支 `codex/w-engine-integration`），
+实现 `w-engines`（来源实体 `weapon`，规则 `nanoka-w-engine-reference/1`）登记到生产类别登记表，
+package.json 增加 WEngine data/zh/en JSON 子路径，并提交三类别真实快照。
+
+真实 3.1 验收（本机 macOS arm64、Node 24、raw 为只读输入，不联网覆盖缓存、不升级来源版本）：
+
+- 修改登记前先按持锁协议执行 `verify:nanoka:current integrated`：`verified: true`；既有 179 项来源输入
+  （manifest、117 项代理人、61 项驱动盘）与实际 raw 字节的 SHA-256 全部一致，确认受管理基线未被来源漂移影响。
+- 登记 WEngine 后执行 `generate:integrated raw/nanoka 3.1 integrated`：`committed`；w-engines 新增 95 名成员、
+  285 个文件；agents 58 名成员/174 个文件与 drive-discs 30 名成员/90 个文件结论均为 `unchanged`，
+  仅 index.json 改写；全制品 550 个文件、370 项来源输入。
+- 重复执行同一命令：`unchanged`，复用 549 个实体文件、改变 0 个、移除 0 个；管理记录、更新报告与当前快照
+  相互一致，最新报告明确表达本次已检查、无变化。
+- 独立核对脚本（不导入生产代码）核对 2,909 项：索引外壳与三个类别块、全部输入资源摘要与 raw 实际字节、
+  data/zh/en 路径与实际字节摘要、逐成员 `sourceRecord` 与 raw 索引记录 JSON 值相等（成员排列无关）、
+  身份与 `locale`、`codeName` 严格跨语言一致、`level`/`stars`/`materials`/`rarity`/`icon` 与两个属性数值提取、
+  `star_rate`/`rand_rate` 的登记拼写转换、`classificationIds.weaponType` 派生、完整 `weaponType` 字典、
+  四段文本、`talents` 与属性文本保真、英文名称非空且类内唯一、文件集合与索引精确一致；另核对 agents 与
+  drive-discs 的全部 Git 跟踪文件与 `HEAD` 逐字节一致（既有类别未被改写），全部通过。
+- 合成验收（不读取真实 raw）覆盖：WEngine 纯整合 72 项（双语拆分、独立测试侧还原、材料字符串与数值尺度保真、
+  共享冲突、分类 ID 集合、身份/语言/改名冲突/辅助字段重名与保真边界）、类型正反例、发布目录名称生成与
+  缺失/空/重名拒绝、更新报告三类别归因、消费 API 对象隔离与跨类别加载边界、JSON 子路径、打包解包与离线安装。
+- `pnpm check`（lint、格式、类型、data 824 项与 core 1,423 项测试、打包解包离线安装与按包名消费）、
+  真实 Chromium 的 Vite 开发/生产消费（三类场景各 6 个阶段，跨类别零串读）、`verify:nanoka:current` 全部通过；
+  `git diff --check` 无输出。
+- 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567，本任务明确只使用现有 3.1 缓存，
+  不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
+  [共享来源规范](../nanoka/source.md#分发复核记录)。
 
 ### 跨层最终验收
 

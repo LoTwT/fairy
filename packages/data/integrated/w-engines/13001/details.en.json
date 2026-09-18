@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "A custom-made W-Engine designed for street music lovers. It sacrifices cooling components to make space for high-end speaker modules, ensuring your fans, both Ethereal and human, hear your every word.\n——From the streets to the Hollows, superstars are never short of flowers and applause. The bars they spit are so flaming hot, they add the perfect heat to any battlefield.",
+  "desc2": "Equip to increase Attack Agents' combat capabilities",
+  "desc3": "A custom-made W-Engine designed for urban music lovers. It sacrifices heat dissipation components for improved sound quality.",
+  "id": 13001,
+  "locale": "en",
+  "name": "Street Superstar",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "ATK",
+    "name2": "Percent ATK"
+  },
+  "talents": {
+    "1": {
+      "desc": "Whenever a squad member launches a <color=#FFFFFF>Chain Attack</color>, the equipper gains 1 Charge stack, stacking up to 3 times. Upon activating their own <color=#FFFFFF>Ultimate</color>, the equipper consumes all Charge stacks, and each stack increases the skill's DMG by <color=#2BAD00>15%</color>.",
+      "name": "Flaming Bars"
+    },
+    "2": {
+      "desc": "Whenever a squad member launches a <color=#FFFFFF>Chain Attack</color>, the equipper gains 1 Charge stack, stacking up to 3 times. Upon activating their own <color=#FFFFFF>Ultimate</color>, the equipper consumes all Charge stacks, and each stack increases the skill's DMG by <color=#2BAD00>17.2%</color>.",
+      "name": "Flaming Bars"
+    },
+    "3": {
+      "desc": "Whenever a squad member launches a <color=#FFFFFF>Chain Attack</color>, the equipper gains 1 Charge stack, stacking up to 3 times. Upon activating their own <color=#FFFFFF>Ultimate</color>, the equipper consumes all Charge stacks, and each stack increases the skill's DMG by <color=#2BAD00>19.5%</color>.",
+      "name": "Flaming Bars"
+    },
+    "4": {
+      "desc": "Whenever a squad member launches a <color=#FFFFFF>Chain Attack</color>, the equipper gains 1 Charge stack, stacking up to 3 times. Upon activating their own <color=#FFFFFF>Ultimate</color>, the equipper consumes all Charge stacks, and each stack increases the skill's DMG by <color=#2BAD00>21.7%</color>.",
+      "name": "Flaming Bars"
+    },
+    "5": {
+      "desc": "Whenever a squad member launches a <color=#FFFFFF>Chain Attack</color>, the equipper gains 1 Charge stack, stacking up to 3 times. Upon activating their own <color=#FFFFFF>Ultimate</color>, the equipper consumes all Charge stacks, and each stack increases the skill's DMG by <color=#2BAD00>24%</color>.",
+      "name": "Flaming Bars"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

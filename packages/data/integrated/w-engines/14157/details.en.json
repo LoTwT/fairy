@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Every Bangboo in Roscaelifer would gladly throw themselves into danger for the Chief Technician's scientific pursuits, and this particular one is clearly the quickest to charge in headfirst.\n\"Ehn-nhu nhe na, ehn-nha en-en?\" (Boss Norma, is pretending a Bangboo is a W-Engine actually gonna fool anyone?)\n\"Nhu-en nhe ehn na?\" (And if we can't fool them, can't we just overpower them?)\n—The External Strategy Department's Chief Technician is currently employing her finest technology to remodel her favorite Bangboo sidekick.",
+  "desc2": "Equip to increase Stun Agents' combat capabilities",
+  "desc3": "Nhe-nha ehn ne! (Through fire and flames for Lady Norma!)",
+  "id": 14157,
+  "locale": "en",
+  "name": "Chief Sidekick",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "CRIT Rate",
+    "name2": "CRIT Rate"
+  },
+  "talents": {
+    "1": {
+      "desc": "The equipper's Impact increases by <color=#2BAD00>30</color>, and their DMG ignores <color=#2BAD00>15%</color> of the target's <color=#FF5521>Fire RES</color>. When the equipper is not the active character, Energy Regen increases by <color=#2BAD00>0.4</color>/s. When the equipper deals <color=#FF5521>Fire DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, all Agents' DMG increases by <color=#2BAD00>12.5%</color> for 30s, stacking up to 2 times. Repeated triggers reset the duration. This effect can trigger once per skill. Only one instance of this effect can exist in the same squad.",
+      "name": "The Genius's Follower"
+    },
+    "2": {
+      "desc": "The equipper's Impact increases by <color=#2BAD00>33</color>, and their DMG ignores <color=#2BAD00>17.2%</color> of the target's <color=#FF5521>Fire RES</color>. When the equipper is not the active character, Energy Regen increases by <color=#2BAD00>0.46</color>/s. When the equipper deals <color=#FF5521>Fire DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, all Agents' DMG increases by <color=#2BAD00>14.4%</color> for 30s, stacking up to 2 times. Repeated triggers reset the duration. This effect can trigger once per skill. Only one instance of this effect can exist in the same squad.",
+      "name": "The Genius's Follower"
+    },
+    "3": {
+      "desc": "The equipper's Impact increases by <color=#2BAD00>36</color>, and their DMG ignores <color=#2BAD00>19.5%</color> of the target's <color=#FF5521>Fire RES</color>. When the equipper is not the active character, Energy Regen increases by <color=#2BAD00>0.52</color>/s. When the equipper deals <color=#FF5521>Fire DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, all Agents' DMG increases by <color=#2BAD00>16.3%</color> for 30s, stacking up to 2 times. Repeated triggers reset the duration. This effect can trigger once per skill. Only one instance of this effect can exist in the same squad.",
+      "name": "The Genius's Follower"
+    },
+    "4": {
+      "desc": "The equipper's Impact increases by <color=#2BAD00>39</color>, and their DMG ignores <color=#2BAD00>21.7%</color> of the target's <color=#FF5521>Fire RES</color>. When the equipper is not the active character, Energy Regen increases by <color=#2BAD00>0.58</color>/s. When the equipper deals <color=#FF5521>Fire DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, all Agents' DMG increases by <color=#2BAD00>18.1%</color> for 30s, stacking up to 2 times. Repeated triggers reset the duration. This effect can trigger once per skill. Only one instance of this effect can exist in the same squad.",
+      "name": "The Genius's Follower"
+    },
+    "5": {
+      "desc": "The equipper's Impact increases by <color=#2BAD00>42</color>, and their DMG ignores <color=#2BAD00>24%</color> of the target's <color=#FF5521>Fire RES</color>. When the equipper is not the active character, Energy Regen increases by <color=#2BAD00>0.64</color>/s. When the equipper deals <color=#FF5521>Fire DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, all Agents' DMG increases by <color=#2BAD00>20%</color> for 30s, stacking up to 2 times. Repeated triggers reset the duration. This effect can trigger once per skill. Only one instance of this effect can exist in the same squad.",
+      "name": "The Genius's Follower"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

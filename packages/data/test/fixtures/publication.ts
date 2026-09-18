@@ -16,7 +16,9 @@ import {
 import {
   rewriteAsLegacyV2Artifact,
   syntheticDriveDiscIds,
+  syntheticWEngineIds,
 } from "./synthetic-dataset.ts"
+import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
 
 /**
  * 合成双语制品；不同英文展示名、codeName 和索引名称用于捕获错误取值来源。
@@ -76,6 +78,23 @@ export async function publicationFixture(
               : `示例驱动盘 ${id}`,
         })
   }
+  // 默认登记表包含 w-engines 类别：weapon 输入使用真实 WEngine 结构的合成成员；
+  // 英文详情名称按成员唯一且与 sourceRecord.en 不同，用于捕获发布目录取错名称来源。
+  const wEngine = wEngineInput()
+  await write(
+    "weapon.json",
+    Object.fromEntries(
+      syntheticWEngineIds.map((id) => [id, wEngine.sourceRecord]),
+    ),
+  )
+  for (const id of syntheticWEngineIds)
+    for (const locale of wEngine.detailLocales)
+      await write(`${locale}/weapon/${id}.json`, {
+        ...wEngine.details[locale],
+        id: Number(id),
+        name:
+          locale === "en" ? syntheticWEngineEnglishName(id) : `示例音擎 ${id}`,
+      })
   const result = await buildIntegratedSnapshot({
     rawRoot,
     version,

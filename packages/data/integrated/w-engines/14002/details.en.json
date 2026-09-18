@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "A new supercomputing W-Engine, featuring cutting-edge integrated chips that dynamically monitor the battlefield and provide tactical analysis for its user. Furthermore, this W-Engine can serve as a portable console, allowing its user to play the most popular video games anytime, anywhere. However, it is not advisable to use the speakers while playing games... Especially not in Hollow areas frequented by Ethereals.",
+  "desc2": "Equip to increase Support Agents' combat capabilities",
+  "desc3": "A new supercomputing W-Engine, featuring cutting-edge integrated chips that dynamically monitor the battlefield and provide tactical analysis for the user.",
+  "id": 14002,
+  "locale": "en",
+  "name": "Unfettered Game Ball",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Energy Regen",
+    "name2": "Energy Regen"
+  },
+  "talents": {
+    "1": {
+      "desc": "Whenever the equipper's attack triggers an Attribute Counter effect, all units' CRIT Rate against the struck enemy increases by <color=#2BAD00>12%</color> for 12s. Passive effects of the same name do not stack.",
+      "name": "Game Start!"
+    },
+    "2": {
+      "desc": "Whenever the equipper's attack triggers an Attribute Counter effect, all units' CRIT Rate against the struck enemy increases by <color=#2BAD00>13.5%</color> for 12s. Passive effects of the same name do not stack.",
+      "name": "Game Start!"
+    },
+    "3": {
+      "desc": "Whenever the equipper's attack triggers an Attribute Counter effect, all units' CRIT Rate against the struck enemy increases by <color=#2BAD00>15.5%</color> for 12s. Passive effects of the same name do not stack.",
+      "name": "Game Start!"
+    },
+    "4": {
+      "desc": "Whenever the equipper's attack triggers an Attribute Counter effect, all units' CRIT Rate against the struck enemy increases by <color=#2BAD00>17.5%</color> for 12s. Passive effects of the same name do not stack.",
+      "name": "Game Start!"
+    },
+    "5": {
+      "desc": "Whenever the equipper's attack triggers an Attribute Counter effect, all units' CRIT Rate against the struck enemy increases by <color=#2BAD00>20%</color> for 12s. Passive effects of the same name do not stack.",
+      "name": "Game Start!"
+    }
+  },
+  "weaponType": {
+    "4": "Support"
+  }
+}

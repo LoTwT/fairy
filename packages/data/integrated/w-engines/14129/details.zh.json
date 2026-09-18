@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "优雅的收藏家，狡猾的怪盗，可恨的欺诈师，傲慢自负的私生子…\n世人对他有千万种定义。既得利益者厌恶他的存在，平民拥护者赞颂他的正义。暗巷传说将他描摹成游走于危险边缘的狂徒，而贵族们提及他如同揭开一副名为诅咒的棺椁。\n万千面相皆是他，却又皆不是他。\n\n<color=#959595>「我将活在万千不同的故事之中。」——雨果</color>",
+  "desc2": "装备后可提升[强攻]代理人的战斗能力",
+  "desc3": "黑暗如影随形。而他剖开心血，点燃一盏孤灯。",
+  "id": 14129,
+  "locale": "zh",
+  "name": "千面日陨",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "暴击率",
+    "name2": "暴击率"
+  },
+  "talents": {
+    "1": {
+      "desc": "暴击伤害提升<color=#2BAD00>45%</color>；<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>造成<color=#98EFF0>冰属性伤害</color>时，角色获得<color=#FFFFFF>[零度处刑宣言]</color>效果，持续3秒；<color=#FFFFFF>[零度处刑宣言]</color>效果期间，角色命中敌人时无视<color=#2BAD00>25%</color>防御力。",
+      "name": "万千非我"
+    },
+    "2": {
+      "desc": "暴击伤害提升<color=#2BAD00>51.75%</color>；<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>造成<color=#98EFF0>冰属性伤害</color>时，角色获得<color=#FFFFFF>[零度处刑宣言]</color>效果，持续3秒；<color=#FFFFFF>[零度处刑宣言]</color>效果期间，角色命中敌人时无视<color=#2BAD00>28.75%</color>防御力。",
+      "name": "万千非我"
+    },
+    "3": {
+      "desc": "暴击伤害提升<color=#2BAD00>58.5%</color>；<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>造成<color=#98EFF0>冰属性伤害</color>时，角色获得<color=#FFFFFF>[零度处刑宣言]</color>效果，持续3秒；<color=#FFFFFF>[零度处刑宣言]</color>效果期间，角色命中敌人时无视<color=#2BAD00>32.5%</color>防御力。",
+      "name": "万千非我"
+    },
+    "4": {
+      "desc": "暴击伤害提升<color=#2BAD00>65.25%</color>；<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>造成<color=#98EFF0>冰属性伤害</color>时，角色获得<color=#FFFFFF>[零度处刑宣言]</color>效果，持续3秒；<color=#FFFFFF>[零度处刑宣言]</color>效果期间，角色命中敌人时无视<color=#2BAD00>36.25%</color>防御力。",
+      "name": "万千非我"
+    },
+    "5": {
+      "desc": "暴击伤害提升<color=#2BAD00>72%</color>；<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>造成<color=#98EFF0>冰属性伤害</color>时，角色获得<color=#FFFFFF>[零度处刑宣言]</color>效果，持续3秒；<color=#FFFFFF>[零度处刑宣言]</color>效果期间，角色命中敌人时无视<color=#2BAD00>40%</color>防御力。",
+      "name": "万千非我"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

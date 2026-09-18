@@ -826,6 +826,12 @@ describe("current dataset update report", () => {
             after: "nanoka-drive-disc-reference/1",
             changed: false,
           },
+          {
+            name: "w-engines",
+            before: null,
+            after: "nanoka-w-engine-reference/1",
+            changed: false,
+          },
         ],
         changed: false,
       },
@@ -853,6 +859,11 @@ describe("current dataset update report", () => {
       ["drive-discs", "added"],
       ["drive-discs", "added"],
       ["drive-discs", "added"],
+      ["w-engines", "added"],
+      ["w-engines", "added"],
+      ["w-engines", "added"],
+      ["w-engines", "added"],
+      ["w-engines", "added"],
     ])
     // 首次生成没有旧基线：成员与文件全部是新增，不伪装成一次普通版本更新。
     const agents = category(report, "agents")
@@ -1018,6 +1029,16 @@ describe("current dataset update report", () => {
       ["drive-discs", "zzz/synthetic-1/en/equipment/930001.json", "removed"],
       ["drive-discs", "zzz/synthetic-1/zh/equipment/930002.json", "removed"],
       ["drive-discs", "zzz/synthetic-1/en/equipment/930002.json", "removed"],
+      ["w-engines", `zzz/${input.version}/weapon.json`, "added"],
+      ["w-engines", `zzz/${input.version}/zh/weapon/940001.json`, "added"],
+      ["w-engines", `zzz/${input.version}/en/weapon/940001.json`, "added"],
+      ["w-engines", `zzz/${input.version}/zh/weapon/940002.json`, "added"],
+      ["w-engines", `zzz/${input.version}/en/weapon/940002.json`, "added"],
+      ["w-engines", "zzz/synthetic-1/weapon.json", "removed"],
+      ["w-engines", "zzz/synthetic-1/zh/weapon/940001.json", "removed"],
+      ["w-engines", "zzz/synthetic-1/en/weapon/940001.json", "removed"],
+      ["w-engines", "zzz/synthetic-1/zh/weapon/940002.json", "removed"],
+      ["w-engines", "zzz/synthetic-1/en/weapon/940002.json", "removed"],
     ])
     expect(report.source.changed).toBe(true)
     expect(report.result).toBe("unchanged")
@@ -1108,7 +1129,7 @@ describe("current dataset update report", () => {
       ["zzz/synthetic-1/character.json", "changed"],
       ["zzz/synthetic-1/zh/character/10.json", "changed"],
     ])
-    expect(report.source.unchangedInputCount).toBe(9)
+    expect(report.source.unchangedInputCount).toBe(14)
     expect(report.source.changed).toBe(true)
     expect(report.changeCause).toMatchObject({ attributedTo: "source" })
     expect(agents.review).toMatchObject({

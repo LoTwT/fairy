@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Birds in flight, stars in the sky, blossoms, parasols, and swirling skirts — unspoken feelings, yet emotions laid bare. Only when the moon begins to sigh does the flower bud dare to bloom, releasing a joyous bird. It weaves through the stars, gathering glimmers of starlight, and before dawn breaks, it lands beneath your eaves... shaking off a night full of whispered love.\n\n<color=#959595>\"Lord Phaethon needs only Vivian. Lord Phaethon loves only Vivian. Lord Phaethon sees only Vivian... Chant that to it for 178 days, and you can give it to Lord Phaethon.\" — Vivian, fortune telling and voodoo are not scientific and offer no real value. Do not attempt them lightly</color>",
+  "desc2": "Equip to increase Anomaly Agents' combat capabilities",
+  "desc3": "A bird landed on the windowsill, scattering starlight from its tail feathers.",
+  "id": 14133,
+  "locale": "en",
+  "name": "Flight of Fancy",
+  "randProperty": {
+    "format": "{0:0}",
+    "name": "Anomaly Proficiency",
+    "name2": "Anomaly Proficiency"
+  },
+  "talents": {
+    "1": {
+      "desc": "Increases Anomaly Buildup Rate by <color=#2BAD00>40%</color>. When the equipper deals <color=#FE437E>Ether DMG</color>, their Anomaly Proficiency increases by <color=#2BAD00>20</color> for 5s, stacking up to 6 times. This effect can trigger once every 0.5s, and repeated triggers reset the duration.",
+      "name": "Silver Spiked Feathers"
+    },
+    "2": {
+      "desc": "Increases Anomaly Buildup Rate by <color=#2BAD00>46%</color>. When the equipper deals <color=#FE437E>Ether DMG</color>, their Anomaly Proficiency increases by <color=#2BAD00>23</color> for 5s, stacking up to 6 times. This effect can trigger once every 0.5s, and repeated triggers reset the duration.",
+      "name": "Silver Spiked Feathers"
+    },
+    "3": {
+      "desc": "Increases Anomaly Buildup Rate by <color=#2BAD00>52%</color>. When the equipper deals <color=#FE437E>Ether DMG</color>, their Anomaly Proficiency increases by <color=#2BAD00>26</color> for 5s, stacking up to 6 times. This effect can trigger once every 0.5s, and repeated triggers reset the duration.",
+      "name": "Silver Spiked Feathers"
+    },
+    "4": {
+      "desc": "Increases Anomaly Buildup Rate by <color=#2BAD00>58%</color>. When the equipper deals <color=#FE437E>Ether DMG</color>, their Anomaly Proficiency increases by <color=#2BAD00>29</color> for 5s, stacking up to 6 times. This effect can trigger once every 0.5s, and repeated triggers reset the duration.",
+      "name": "Silver Spiked Feathers"
+    },
+    "5": {
+      "desc": "Increases Anomaly Buildup Rate by <color=#2BAD00>64%</color>. When the equipper deals <color=#FE437E>Ether DMG</color>, their Anomaly Proficiency increases by <color=#2BAD00>32</color> for 5s, stacking up to 6 times. This effect can trigger once every 0.5s, and repeated triggers reset the duration.",
+      "name": "Silver Spiked Feathers"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

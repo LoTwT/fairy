@@ -1,27 +1,32 @@
 # 数据消费与 npm 导出契约
 
 本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
-[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、30 个驱动盘套装、zh/en 两种详情语言；
-公开索引使用多实体 v3 外壳，类别（`agents` 与 `drive-discs`）与成员文件摘要来自完整验证后的同一发布副本。
-驱动盘已进入生产快照、JSON 子路径导出及根入口的公开名称类型、名称 catalog 与读取 API。
+[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、30 个驱动盘套装、95 个 WEngine、
+zh/en 两种详情语言；公开索引使用多实体 v3 外壳，类别（`agents`、`drive-discs` 与 `w-engines`）与成员文件
+摘要来自完整验证后的同一发布副本。驱动盘与 WEngine 已进入生产快照、JSON 子路径导出及根入口的公开名称类型、
+名称 catalog 与读取 API。
 
 ## 名称与类型
 
 根入口导出正式字段类型（包含其引用的索引、文件引用、材料计数与来源身份等结构）、`AgentName`、
-`LocalizedAgent`、`agentNames`、`DriveDiscName`、`LocalizedDriveDisc`、`driveDiscNames` 和七个读取函数。
+`LocalizedAgent`、`agentNames`、`DriveDiscName`、`LocalizedDriveDisc`、`driveDiscNames`、`WEngineName`、
+`LocalizedWEngine`、`wEngineNames` 和十个读取函数。
 这些类型可供消费者引用，不改变来源 ID 的内部标识用途。`AgentName` 是本次发布所有
 `integrated/agents/{来源ID}/details.en.json` 顶层 `name` 原值的精确字符串字面量 union；`DriveDiscName`
-同理取 `integrated/drive-discs/{来源ID}/details.en.json`。固定取英文，保留大小写、空格及标点，不取
+同理取 `integrated/drive-discs/{来源ID}/details.en.json`，`WEngineName` 取
+`integrated/w-engines/{来源ID}/details.en.json`。固定取英文，保留大小写、空格及标点，不取
 `data.codeName`、索引摘要名或来源索引的 code/en。例如代理人 `1381` 为 `Soldier 0 - Anby`、`1311` 为
-`Astra Yao`（codeName 为 `Astra`），驱动盘 `31000` 为 `Woodpecker Electro`。
+`Astra Yao`（codeName 为 `Astra`），驱动盘 `31000` 为 `Woodpecker Electro`，WEngine `12001` 为
+`[Lunar] Pleniluna`（保留方括号与空格）。
 名称、各类别内部英文名称到来源 ID 的映射、导入表及类型均由同一已验证发布副本生成；缺失、非字符串、空名称
-或类别内完全重名使构建失败并给出可定位文件，不覆盖、不修改来源。重名检查限定在各类别内；代理人与驱动盘
-同名时两套 union 与映射仍按各类别成员独立生成。发布源必须包含 `agents` 与 `drive-discs` 两个类别及完整
-zh/en 详情。英文更名、成员删除属于公开取值的兼容性变化，须在该次变更的
+或类别内完全重名使构建失败并给出可定位文件，不覆盖、不修改来源。重名检查限定在各类别内；不同类别出现
+同名时各套 union 与映射仍按各类别成员独立生成。发布源必须包含 `agents`、`drive-discs` 与 `w-engines`
+三个类别及完整 zh/en 详情。英文更名、成员删除属于公开取值的兼容性变化，须在该次变更的
 Git 记录或发布说明中明确记录，不自动添加别名。来源数字字符串目录、索引 key、`SourceId` 和数值成员
 `data.id` 保持原义。
 
-`agentNames: readonly AgentName[]` 与 `driveDiscNames: readonly DriveDiscName[]` 分别覆盖本版全部成员，
+`agentNames: readonly AgentName[]`、`driveDiscNames: readonly DriveDiscName[]` 与
+`wEngineNames: readonly WEngineName[]` 分别覆盖本版全部成员，
 沿用索引 `entities.{类别}.memberIds` 的来源 ID 数值升序，运行时冻结，调用方不能通过修改列表影响后续使用。
 名称类型不提供任意 string 重载，保留字面量补全。
 
@@ -61,6 +66,22 @@ export interface LocalizedDriveDisc {
 export declare function loadAllDriveDiscs(
   locale: DetailLocale,
 ): Promise<Record<DriveDiscName, LocalizedDriveDisc>>
+export declare function loadWEngineData(
+  name: WEngineName,
+): Promise<WEngineData | undefined>
+export declare function loadWEngineDetails(
+  name: WEngineName,
+  locale: DetailLocale,
+): Promise<WEngineDetails | undefined>
+export interface LocalizedWEngine {
+  /** 原有公共资料结构。 */
+  data: WEngineData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: WEngineDetails
+}
+export declare function loadAllWEngines(
+  locale: DetailLocale,
+): Promise<Record<WEngineName, LocalizedWEngine>>
 ```
 
 - `loadIndex` 只加载完整原样索引（v3 外壳），包含快照来源输入、全部已登记类别、各类别的规则版本与语言、
@@ -75,12 +96,16 @@ export declare function loadAllDriveDiscs(
   `loadAllDriveDiscs` 显式加载全部驱动盘套装 data 与指定语言 details，目前为 30 + 30 个文件，结果以
   DriveDiscName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是
   `entities["drive-discs"].members`。
+- `loadWEngineData` 只加载该 WEngine data；`loadWEngineDetails` 只加载该 WEngine 指定语言 details；
+  `loadAllWEngines` 显式加载全部 WEngine data 与指定语言 details，目前为 95 + 95 个文件，结果以
+  WEngineName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是 `entities["w-engines"].members`。
 - 每次调用返回独立的 JSON 对象树，任意嵌套修改不污染后续调用、同时调用或其他调用方。
 - 名称精确匹配，不 trim、不忽略大小写、不接受数值 ID。单体函数对未知字符串返回 undefined。
 - 非字符串 name、缺少或不支持的 locale 均使 Promise 以 TypeError 拒绝。locale 必须显式为 zh 或 en，
   不默认、不转换 zh-CN、不回退；未知名称也不能绕过 locale 校验。
 - 已登记文件缺失、JSON 解析或模块加载失败使 Promise 拒绝，不转换为 undefined；全量任一必要项失败即整体拒绝。
-- 代理人读取不加载驱动盘文件，驱动盘读取不加载代理人文件或索引；两类加载边界互不串读。
+- 代理人不加载驱动盘或 WEngine 文件，驱动盘不加载代理人、WEngine 文件或索引，WEngine 不加载代理人、
+  驱动盘文件或索引；各类别加载边界互不串读。
 
 ## 分发与按需加载
 
@@ -98,13 +123,16 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/drive-discs/{来源ID}/data.json`
 - `/integrated/drive-discs/{来源ID}/details.zh.json`
 - `/integrated/drive-discs/{来源ID}/details.en.json`
+- `/integrated/w-engines/{来源ID}/data.json`
+- `/integrated/w-engines/{来源ID}/details.zh.json`
+- `/integrated/w-engines/{来源ID}/details.en.json`
 
 这些路径映射到包内 `dist/integrated/` 的已验证发布副本。JSON 原字节、字段、层级、文件名、摘要全部保留，
-索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含两类类别的完整数据；根入口的名称元数据与
+索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含三类类别的完整数据；根入口的名称元数据与
 显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时请求
 该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；
 不包含 raw、本机控制目录、抓取/恢复工具及内部维护材料。直接 JSON 导入遵循宿主模块缓存语义；
-返回对象隔离保证属于上述七个函数。
+返回对象隔离保证属于上述十个函数。
 
 ## 静态发布与受管理目录边界
 

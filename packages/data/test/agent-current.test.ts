@@ -23,7 +23,7 @@ import { writeSyntheticRaw } from "./fixtures/synthetic-dataset.ts"
 /**
  * 常规更新与数据集验证：生成、更新、复验、硬链接复用、报告上限与损坏现场。
  * 通用协议用例使用最小合成类别集合（agents + widgets）；生产登记表
- * （agents + drive-discs）的协议覆盖保留在整库生命周期用例与 CLI、发布链路中。
+ * （agents + drive-discs + w-engines）的协议覆盖保留在整库生命周期用例与 CLI、发布链路中。
  *
  * 本文件保留真实 oxfmt 覆盖：候选在硬链接复用前格式化，实际格式化失败不得破坏当前数据。
  */
@@ -256,15 +256,15 @@ describe("current multi-entity dataset", () => {
   })
 
   it("creates a complete dataset, repeats without writes to current files, and preserves every inode and mtime", async () => {
-    // 生产登记表的整库生命周期覆盖：两类别、12 个实体文件与真实 oxfmt 批次都按原语义验证。
+    // 生产登记表的整库生命周期覆盖：三类别、18 个实体文件与真实 oxfmt 批次都按原语义验证。
     const input = await fixture({ production: true })
     const raw = await bytes(input.rawRoot)
     const first = await updateCurrentDataset(input)
     expect(first.outcome).toBe("committed")
     expect(first).toMatchObject({
       format: integratedSnapshotFormat,
-      memberCounts: { "agents": 2, "drive-discs": 2 },
-      entityFileCount: 12,
+      memberCounts: { "agents": 2, "drive-discs": 2, "w-engines": 2 },
+      entityFileCount: 18,
     })
     const before = await fingerprints(input.targetDirectory)
     const writes = vi.spyOn(fs, "writeFile")
@@ -281,8 +281,8 @@ describe("current multi-entity dataset", () => {
     expect(second.outcome).toBe("unchanged")
     expect(second.reusedEntityFiles).toBe(Object.keys(before).length - 1)
     expect(second.changedEntityFiles).toBe(0)
-    // 两个类别的成员文件各自成批，索引单独一批。
-    expect(formatted).toHaveBeenCalledTimes(3)
+    // 三个类别的成员文件各自成批，索引单独一批。
+    expect(formatted).toHaveBeenCalledTimes(4)
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
     expect(
       writes.mock.calls.filter(([path]) =>

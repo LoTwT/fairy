@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Under the stars at midnight, the artisan raised this tool, awakening slumbering flames. Amid the misty dark, it was the lone flame that refused to die.\nIts body gleamed black with a crimson sheen, etched with cryptic markings. Was it an ancient relic, a mere toy, or a legendary weapon? Only its wielder knew the truth.\n\n<color=#959595>\"It's nothing more than a fire-starting tool... but I can't deny it's useful.\" —So he would say, each time someone guessed it served some impressive function.</color>",
+  "desc2": "Equip to increase Rupture Agents' combat capabilities",
+  "desc3": "A flame both fierce and faithful, burning without end.",
+  "id": 13144,
+  "locale": "en",
+  "name": "Grill O'Wisp",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "HP",
+    "name2": "Percent HP"
+  },
+  "talents": {
+    "1": {
+      "desc": "The equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>15%</color>. When the equipper's HP decreases, their CRIT Rate increases by <color=#2BAD00>15%</color> for 5s.",
+      "name": "Caged Fire"
+    },
+    "2": {
+      "desc": "The equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>17.25%</color>. When the equipper's HP decreases, their CRIT Rate increases by <color=#2BAD00>17.25%</color> for 5s.",
+      "name": "Caged Fire"
+    },
+    "3": {
+      "desc": "The equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>19.5%</color>. When the equipper's HP decreases, their CRIT Rate increases by <color=#2BAD00>19.5%</color> for 5s.",
+      "name": "Caged Fire"
+    },
+    "4": {
+      "desc": "The equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>21.75%</color>. When the equipper's HP decreases, their CRIT Rate increases by <color=#2BAD00>21.75%</color> for 5s.",
+      "name": "Caged Fire"
+    },
+    "5": {
+      "desc": "The equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>24%</color>. When the equipper's HP decreases, their CRIT Rate increases by <color=#2BAD00>24%</color> for 5s.",
+      "name": "Caged Fire"
+    }
+  },
+  "weaponType": {
+    "6": "Rupture"
+  }
+}

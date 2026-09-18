@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "\"Spicy without the burn, rich without the grease, bold on the first bite, with a sweet finish.\" Copy this review and leave a good review and photo to redeem one serving of Waifei Peninsula's handmade beef meatballs at Simmer hot pot.",
+  "desc2": "Equip to increase Stun Agents' combat capabilities",
+  "desc3": "Whoa, that's hot! Seriously hot! But it's so good!",
+  "id": 13020,
+  "locale": "en",
+  "name": "The Simmering Pot",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Impact",
+    "name2": "Impact"
+  },
+  "talents": {
+    "1": {
+      "desc": "When activating an <color=#FFFFFF>Assist Follow-Up</color>, the equipper's Daze inflicted on the target increases by <color=#2BAD00>7.2%</color>, and DMG dealt increases by <color=#2BAD00>7.2%</color> for 30s. Repeated triggers reset the duration.",
+      "name": "Red Chili Oil Hot Pot"
+    },
+    "2": {
+      "desc": "When activating an <color=#FFFFFF>Assist Follow-Up</color>, the equipper's Daze inflicted on the target increases by <color=#2BAD00>8.2%</color>, and DMG dealt increases by <color=#2BAD00>8.2%</color> for 30s. Repeated triggers reset the duration.",
+      "name": "Red Chili Oil Hot Pot"
+    },
+    "3": {
+      "desc": "When activating an <color=#FFFFFF>Assist Follow-Up</color>, the equipper's Daze inflicted on the target increases by <color=#2BAD00>9.2%</color>, and DMG dealt increases by <color=#2BAD00>9.2%</color> for 30s. Repeated triggers reset the duration.",
+      "name": "Red Chili Oil Hot Pot"
+    },
+    "4": {
+      "desc": "When activating an <color=#FFFFFF>Assist Follow-Up</color>, the equipper's Daze inflicted on the target increases by <color=#2BAD00>10.2%</color>, and DMG dealt increases by <color=#2BAD00>10.2%</color> for 30s. Repeated triggers reset the duration.",
+      "name": "Red Chili Oil Hot Pot"
+    },
+    "5": {
+      "desc": "When activating an <color=#FFFFFF>Assist Follow-Up</color>, the equipper's Daze inflicted on the target increases by <color=#2BAD00>11.5%</color>, and DMG dealt increases by <color=#2BAD00>11.5%</color> for 30s. Repeated triggers reset the duration.",
+      "name": "Red Chili Oil Hot Pot"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

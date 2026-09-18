@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "100% cold, and 120% sweet. The maker says it's his best custom W-Engine of the year. \"So, Miss Zhao, what do you think? I've named this one 'Full-Sugar Bunny.' Fits your style, right? Huh? Change it to Half-Sugar? But why...? Ah, no no, you're the client, you get to name it however you like!\"\n\n<color=#959595>\"Equivalent exchange means finding a balance — not a bit more, not a bit less.\" —That was Xiao'Zhao's answer after Dialyn asked her several times, \"What's wrong with full-sugar?\"</color>",
+  "desc2": "Equip to increase Defense Agents' combat capabilities",
+  "desc3": "Not too sweet, and not too cold.",
+  "id": 14134,
+  "locale": "en",
+  "name": "Half-Sugar Bunny",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "HP",
+    "name2": "Percent HP"
+  },
+  "talents": {
+    "1": {
+      "desc": "The equipper's Energy Regen increases by <color=#2BAD00>0.46</color>/s. All squad members gain <color=#2BAD00>10%</color> ATK and <color=#2BAD00>10%</color> Max HP. Only one instance of this effect can exist in the same squad. When the equipper activates or extends an <color=#FFFFFF>Ether Veil</color>, all squad members gain <color=#2BAD00>30%</color> CRIT DMG for 60s. Repeated triggers reset the duration.",
+      "name": "Fragile Sweetness"
+    },
+    "2": {
+      "desc": "The equipper's Energy Regen increases by <color=#2BAD00>0.53</color>/s. All squad members gain <color=#2BAD00>11.5%</color> ATK and <color=#2BAD00>11.5%</color> Max HP. Only one instance of this effect can exist in the same squad. When the equipper activates or extends an <color=#FFFFFF>Ether Veil</color>, all squad members gain <color=#2BAD00>34.5%</color> CRIT DMG for 60s. Repeated triggers reset the duration.",
+      "name": "Fragile Sweetness"
+    },
+    "3": {
+      "desc": "The equipper's Energy Regen increases by <color=#2BAD00>0.6</color>/s. All squad members gain <color=#2BAD00>13%</color> ATK and <color=#2BAD00>13%</color> Max HP. Only one instance of this effect can exist in the same squad. When the equipper activates or extends an <color=#FFFFFF>Ether Veil</color>, all squad members gain <color=#2BAD00>39%</color> CRIT DMG for 60s. Repeated triggers reset the duration.",
+      "name": "Fragile Sweetness"
+    },
+    "4": {
+      "desc": "The equipper's Energy Regen increases by <color=#2BAD00>0.67</color>/s. All squad members gain <color=#2BAD00>14.5%</color> ATK and <color=#2BAD00>14.5%</color> Max HP. Only one instance of this effect can exist in the same squad. When the equipper activates or extends an <color=#FFFFFF>Ether Veil</color>, all squad members gain <color=#2BAD00>43.5%</color> CRIT DMG for 60s. Repeated triggers reset the duration.",
+      "name": "Fragile Sweetness"
+    },
+    "5": {
+      "desc": "The equipper's Energy Regen increases by <color=#2BAD00>0.74</color>/s. All squad members gain <color=#2BAD00>16%</color> ATK and <color=#2BAD00>16%</color> Max HP. Only one instance of this effect can exist in the same squad. When the equipper activates or extends an <color=#FFFFFF>Ether Veil</color>, all squad members gain <color=#2BAD00>48%</color> CRIT DMG for 60s. Repeated triggers reset the duration.",
+      "name": "Fragile Sweetness"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

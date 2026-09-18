@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "This W-Engine's design was originally much more modest. The focus during its creation was on offensive capability and stealth until its owner met a group of curious and loud individuals who had no concept of subtlety. Not only did they put flashy stickers on it, but after injuring their fingers, they often used it to cut ropes, open boxes, and even slice through sticky tape...\n\"That... yeah, that box cutter, lemme borrow it, thanks!\" \"Boss, it's not a box cutter, it's called Hidden Claw!\" \"Hey, Kitty, lemme borrow your box cutter!\" \"It's not a box cutter, it's called Hidden Claw!\" \"Mind if lil ol me takes your box cutter for a mo?\" \"...\"\n\n<color=#959595>\"Fine, it's a box cutter. Whatever makes you happy.\" — Pulchra</color>",
+  "desc2": "Equip to increase Stun Agents' combat capabilities",
+  "desc3": "An energy W-Engine modded from spare parts of a truck's engine. It converts the original cylinder into an energy storage unit, which is highly advantageous.",
+  "id": 13135,
+  "locale": "en",
+  "name": "Box Cutter",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Impact",
+    "name2": "Impact"
+  },
+  "talents": {
+    "1": {
+      "desc": "Upon launching an <color=#FFFFFF>Aftershock</color>, the equipper's <color=#F0D12B>Physical DMG</color> increases by <color=#2BAD00>15%</color>, and Daze increases by <color=#2BAD00>10%</color>, lasting 10s.",
+      "name": "Watch Your Fingers"
+    },
+    "2": {
+      "desc": "Upon launching an <color=#FFFFFF>Aftershock</color>, the equipper's <color=#F0D12B>Physical DMG</color> increases by <color=#2BAD00>17.3%</color>, and Daze increases by <color=#2BAD00>11.5%</color>, lasting 10s.",
+      "name": "Watch Your Fingers"
+    },
+    "3": {
+      "desc": "Upon launching an <color=#FFFFFF>Aftershock</color>, the equipper's <color=#F0D12B>Physical DMG</color> increases by <color=#2BAD00>19.5%</color>, and Daze increases by <color=#2BAD00>13%</color>, lasting 10s.",
+      "name": "Watch Your Fingers"
+    },
+    "4": {
+      "desc": "Upon launching an <color=#FFFFFF>Aftershock</color>, the equipper's <color=#F0D12B>Physical DMG</color> increases by <color=#2BAD00>21.8%</color>, and Daze increases by <color=#2BAD00>14.5%</color>, lasting 10s.",
+      "name": "Watch Your Fingers"
+    },
+    "5": {
+      "desc": "Upon launching an <color=#FFFFFF>Aftershock</color>, the equipper's <color=#F0D12B>Physical DMG</color> increases by <color=#2BAD00>24%</color>, and Daze increases by <color=#2BAD00>16%</color>, lasting 10s.",
+      "name": "Watch Your Fingers"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "暗弦轻鸣，微光在深邃的夜色中绽开，锋芒与冷静交织，化作一曲无声的乐章。丝丝纤纤，将所珍视之物，网罗其中。\n\n<color=#959595>「这个么？只是用来储存琴弦的装置罢了。」——伊芙琳轻轻拨动，低沉的弦音在空气中回响，最后一声落定，敌人已无声息。</color>",
+  "desc2": "装备后可提升[强攻]代理人的战斗能力",
+  "desc3": "弦音如刃，穿过夜幕，守护注定之人。",
+  "id": 14132,
+  "locale": "zh",
+  "name": "心弦夜响",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "暴击率",
+    "name2": "暴击率"
+  },
+  "talents": {
+    "1": {
+      "desc": "暴击伤害提升<color=#2BAD00>50%</color>；装备者进入接战状态、发动<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，获得1层<color=#FFFFFF>[心弦]</color>，每层<color=#FFFFFF>[心弦]</color>会使装备者的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>无视目标<color=#2BAD00>12.5%</color><color=#FF5521>火属性伤害抗性</color>，最多叠加2层，持续30秒，重复触发时刷新持续时间。",
+      "name": "弦音相随"
+    },
+    "2": {
+      "desc": "暴击伤害提升<color=#2BAD00>57.5%</color>；装备者进入接战状态、发动<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，获得1层<color=#FFFFFF>[心弦]</color>，每层<color=#FFFFFF>[心弦]</color>会使装备者的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>无视目标<color=#2BAD00>14.5%</color><color=#FF5521>火属性伤害抗性</color>，最多叠加2层，持续30秒，重复触发时刷新持续时间。",
+      "name": "弦音相随"
+    },
+    "3": {
+      "desc": "暴击伤害提升<color=#2BAD00>65%</color>；装备者进入接战状态、发动<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，获得1层<color=#FFFFFF>[心弦]</color>，每层<color=#FFFFFF>[心弦]</color>会使装备者的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>无视目标<color=#2BAD00>16.5%</color><color=#FF5521>火属性伤害抗性</color>，最多叠加2层，持续30秒，重复触发时刷新持续时间。",
+      "name": "弦音相随"
+    },
+    "4": {
+      "desc": "暴击伤害提升<color=#2BAD00>72.5%</color>；装备者进入接战状态、发动<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，获得1层<color=#FFFFFF>[心弦]</color>，每层<color=#FFFFFF>[心弦]</color>会使装备者的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>无视目标<color=#2BAD00>18.5%</color><color=#FF5521>火属性伤害抗性</color>，最多叠加2层，持续30秒，重复触发时刷新持续时间。",
+      "name": "弦音相随"
+    },
+    "5": {
+      "desc": "暴击伤害提升<color=#2BAD00>80%</color>；装备者进入接战状态、发动<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，获得1层<color=#FFFFFF>[心弦]</color>，每层<color=#FFFFFF>[心弦]</color>会使装备者的<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>无视目标<color=#2BAD00>20%</color><color=#FF5521>火属性伤害抗性</color>，最多叠加2层，持续30秒，重复触发时刷新持续时间。",
+      "name": "弦音相随"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

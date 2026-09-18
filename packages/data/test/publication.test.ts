@@ -94,19 +94,31 @@ describe("publication snapshot", () => {
     expect(catalog).toContain(
       'export type DriveDiscName = "Example Drive Disc 930001" | "Example Drive Disc 930002"',
     )
+    expect(catalog).toContain(
+      'export type WEngineName = "Example W-Engine 940001" | "Example W-Engine 940002"',
+    )
     expect(catalog).toContain('[["Astra Yao","2"],["Soldier 0 - Anby","10"]]')
     expect(catalog).toContain(
       '[["Example Drive Disc 930001","930001"],["Example Drive Disc 930002","930002"]]',
+    )
+    expect(catalog).toContain(
+      '[["Example W-Engine 940001","940001"],["Example W-Engine 940002","940002"]]',
     )
     expect(catalog).toContain('Object.freeze(["Astra Yao","Soldier 0 - Anby"])')
     expect(catalog).toContain(
       'Object.freeze(["Example Drive Disc 930001","Example Drive Disc 930002"])',
     )
     expect(catalog).toContain(
+      'Object.freeze(["Example W-Engine 940001","Example W-Engine 940002"])',
+    )
+    expect(catalog).toContain(
       'import("@randomplay/data/integrated/agents/2/details.en.json", { with: { type: "json" } })',
     )
     expect(catalog).toContain(
       'import("@randomplay/data/integrated/drive-discs/930001/data.json", { with: { type: "json" } })',
+    )
+    expect(catalog).toContain(
+      'import("@randomplay/data/integrated/w-engines/940001/data.json", { with: { type: "json" } })',
     )
     for (const path of publicationFiles(index))
       expect(await fs.readFile(join(generated, "integrated", path))).toEqual(
@@ -119,6 +131,10 @@ describe("publication snapshot", () => {
     )
     await fs.writeFile(
       join(artifactDirectory, "drive-discs/930001/details.en.json"),
+      "invalid later source",
+    )
+    await fs.writeFile(
+      join(artifactDirectory, "w-engines/940001/details.en.json"),
       "invalid later source",
     )
     expect(await generateCatalog(join(generated, "integrated"), index)).toBe(
@@ -226,12 +242,37 @@ describe("publication snapshot", () => {
     },
   )
 
-  it("keeps both mappings independent when an agent and a drive disc share an English name", async () => {
+  it.each([undefined, "", null, 12, "Example W-Engine 940002"])(
+    "rejects invalid or duplicate WEngine names: %s",
+    async (name) => {
+      const { root, artifactDirectory, index } = await fixture()
+      const path = "w-engines/940001/details.en.json"
+      const details = JSON.parse(
+        await fs.readFile(join(artifactDirectory, path), "utf8"),
+      )
+      if (name === undefined) delete details.name
+      else details.name = name
+      const bytes = JSON.stringify(details)
+      await fs.writeFile(join(artifactDirectory, path), bytes)
+      index.entities["w-engines"].members["940001"].files.details.en.sha256 =
+        sha256(Buffer.from(bytes))
+      await fs.writeFile(
+        join(artifactDirectory, "index.json"),
+        JSON.stringify(index),
+      )
+      await expect(
+        preparePublication(artifactDirectory, join(root, "generated")),
+      ).rejects.toThrow(/name/u)
+    },
+  )
+
+  it("keeps every mapping independent when categories share an English name", async () => {
     const { artifactDirectory, index } = await fixture()
     const shared = "Shared Name"
     for (const [path, id] of [
       ["agents/2/details.en.json", "2"],
       ["drive-discs/930001/details.en.json", "930001"],
+      ["w-engines/940001/details.en.json", "940001"],
     ]) {
       const details = JSON.parse(
         await fs.readFile(join(artifactDirectory, path), "utf8"),
@@ -241,20 +282,26 @@ describe("publication snapshot", () => {
       expect(details.id).toBe(Number(id))
     }
     const catalog = await generateCatalog(artifactDirectory, index)
-    // 重名检查只在各类别内：跨类别同名不拒绝，两套 union 与映射仍按各类别成员独立生成。
+    // 重名检查只在各类别内：跨类别同名不拒绝，各套 union 与映射仍按各类别成员独立生成。
     expect(catalog).toContain(
       'export type AgentName = "Shared Name" | "Soldier 0 - Anby"',
     )
     expect(catalog).toContain(
       'export type DriveDiscName = "Shared Name" | "Example Drive Disc 930002"',
     )
+    expect(catalog).toContain(
+      'export type WEngineName = "Shared Name" | "Example W-Engine 940002"',
+    )
     expect(catalog).toContain('[["Shared Name","2"],["Soldier 0 - Anby","10"]]')
     expect(catalog).toContain(
       '[["Shared Name","930001"],["Example Drive Disc 930002","930002"]]',
     )
+    expect(catalog).toContain(
+      '[["Shared Name","940001"],["Example W-Engine 940002","940002"]]',
+    )
   })
 
-  it("rejects catalog generation without the drive-discs category", async () => {
+  it("rejects catalog generation without the drive-discs or w-engines category", async () => {
     const root = await temporaryRoot()
     // agents-only v3 制品过不了发布复制前的完整类别验证；这里直接验证目录生成对缺失类别的要求。
     const { artifactDirectory, index } = await publicationFixture(root, {
@@ -263,6 +310,12 @@ describe("publication snapshot", () => {
     await expect(generateCatalog(artifactDirectory, index)).rejects.toThrow(
       /no drive-discs category/u,
     )
+    const { index: complete } = await fixture()
+    const withoutWEngines = structuredClone(complete)
+    delete (withoutWEngines.entities as Record<string, unknown>)["w-engines"]
+    await expect(
+      generateCatalog(artifactDirectory, withoutWEngines),
+    ).rejects.toThrow(/no w-engines category/u)
   })
 
   it("preserves whitespace, punctuation and special property names exactly", async () => {
@@ -281,11 +334,20 @@ describe("publication snapshot", () => {
       const path = join(artifactDirectory, `drive-discs/${id}/details.en.json`)
       await fs.writeFile(path, JSON.stringify({ name }))
     }
+    for (const [id, name] of [
+      ["940001", ' W\'s "Engine"! '],
+      ["940002", "__proto__"],
+    ]) {
+      const path = join(artifactDirectory, `w-engines/${id}/details.en.json`)
+      await fs.writeFile(path, JSON.stringify({ name }))
+    }
     const catalog = await generateCatalog(artifactDirectory, index)
     expect(catalog).toContain(JSON.stringify(' A\'s "Name"! '))
     expect(catalog).toContain(JSON.stringify(' D\'s "Disc"! '))
+    expect(catalog).toContain(JSON.stringify(' W\'s "Engine"! '))
     expect(catalog).toContain('["__proto__","10"]')
     expect(catalog).toContain('["__proto__","930002"]')
+    expect(catalog).toContain('["__proto__","940002"]')
   })
 
   it("rejects incomplete, corrupt or unregistered static snapshots", async () => {

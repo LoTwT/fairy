@@ -16,7 +16,7 @@ import {
 
 /**
  * 显式生成初始化：已有完整制品的登记边界、损坏现场保留与 SIGKILL 后的重试。
- * 初始化与显式生成入口始终使用生产登记表（agents + drive-discs），保留真实类别接入覆盖。
+ * 初始化与显式生成入口始终使用生产登记表（agents + drive-discs + w-engines），保留真实类别接入覆盖。
  *
  * 初始化用例会与真实 CLI 子进程交换同一份制品字节，因此保留真实格式化调用，
  * 保证跨进程的“未变更/复用”判定仍然成立。
@@ -66,13 +66,14 @@ describe("explicit generation initialization", () => {
       "类别集合与本次期望的已接入类别不一致",
     )
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
-    // 按协议删除旧制品后重新生成：从 raw 完整重建双类别数据集。
+    // 按协议删除旧制品后重新生成：从 raw 完整重建当前三类别数据集。
     await fs.rm(input.targetDirectory, { recursive: true })
     expect((await generateCurrentDataset(input)).outcome).toBe("committed")
     const index = (await clean(input)).index
     expect(Object.keys(index.entities).toSorted()).toEqual([
       "agents",
       "drive-discs",
+      "w-engines",
     ])
   }, 30000)
 
@@ -263,7 +264,7 @@ describe("explicit generation initialization", () => {
     expect(result).toMatchObject({
       outcome: "committed",
       changedEntityFiles: 1,
-      reusedEntityFiles: 11,
+      reusedEntityFiles: 17,
     })
     await clean(input)
   })

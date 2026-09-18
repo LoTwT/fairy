@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Countless threads of Sword Will pulse like heartbeats, echoing through this tiny stretch of sky. Just don't get too close and don't try to make sense of the world inside the cauldron with your own ears. Those echoes have already been twisted into the brain-melting chant of \"Ehn-ne ehn-ne.\"",
+  "desc2": "Equip to increase Rupture Agents' combat capabilities",
+  "desc3": "Countless threads of Sword Will echo through this tiny stretch of sky.",
+  "id": 13019,
+  "locale": "en",
+  "name": "Cauldron of Clarity",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "HP",
+    "name2": "Percent HP"
+  },
+  "talents": {
+    "1": {
+      "desc": "When the equipper activates an <color=#FFFFFF>EX Special Attack</color>, they gain 1 stack of a buff. Each stack increases the equipper's DMG by <color=#2BAD00>4%</color>, up to 3 stacks, and lasting 20s. This effect can trigger once every 0.5s, and repeated triggers reset the duration. At 3 stacks, the equipper's CRIT Rate increases by <color=#2BAD00>6.5%</color>.",
+      "name": "Summoning Arcanum"
+    },
+    "2": {
+      "desc": "When the equipper activates an <color=#FFFFFF>EX Special Attack</color>, they gain 1 stack of a buff. Each stack increases the equipper's DMG by <color=#2BAD00>4.6%</color>, up to 3 stacks, and lasting 20s. This effect can trigger once every 0.5s, and repeated triggers reset the duration. At 3 stacks, the equipper's CRIT Rate increases by <color=#2BAD00>7.5%</color>.",
+      "name": "Summoning Arcanum"
+    },
+    "3": {
+      "desc": "When the equipper activates an <color=#FFFFFF>EX Special Attack</color>, they gain 1 stack of a buff. Each stack increases the equipper's DMG by <color=#2BAD00>5.2%</color>, up to 3 stacks, and lasting 20s. This effect can trigger once every 0.5s, and repeated triggers reset the duration. At 3 stacks, the equipper's CRIT Rate increases by <color=#2BAD00>8.5%</color>.",
+      "name": "Summoning Arcanum"
+    },
+    "4": {
+      "desc": "When the equipper activates an <color=#FFFFFF>EX Special Attack</color>, they gain 1 stack of a buff. Each stack increases the equipper's DMG by <color=#2BAD00>5.8%</color>, up to 3 stacks, and lasting 20s. This effect can trigger once every 0.5s, and repeated triggers reset the duration. At 3 stacks, the equipper's CRIT Rate increases by <color=#2BAD00>9.4%</color>.",
+      "name": "Summoning Arcanum"
+    },
+    "5": {
+      "desc": "When the equipper activates an <color=#FFFFFF>EX Special Attack</color>, they gain 1 stack of a buff. Each stack increases the equipper's DMG by <color=#2BAD00>6.4%</color>, up to 3 stacks, and lasting 20s. This effect can trigger once every 0.5s, and repeated triggers reset the duration. At 3 stacks, the equipper's CRIT Rate increases by <color=#2BAD00>10.4%</color>.",
+      "name": "Summoning Arcanum"
+    }
+  },
+  "weaponType": {
+    "6": "Rupture"
+  }
+}

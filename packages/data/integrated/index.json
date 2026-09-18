@@ -4479,6 +4479,3726 @@
         }
       },
       "rulesVersion": "nanoka-drive-disc-reference/1"
+    },
+    "w-engines": {
+      "complete": true,
+      "detailLocales": ["zh", "en"],
+      "inputs": [
+        {
+          "resource": "zzz/3.1/weapon.json",
+          "sha256": "a8bfd9848bc694a5ba8261dc2f2d3544b00cda0a8c7571bfc86c22cb6281b3e4"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12001.json",
+          "sha256": "021a11c8847328122b0c9863c8f78a66b37d831cb8b404b7ef5de74a0b100acf"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12001.json",
+          "sha256": "1f11c71eea7dfe440b30a8303d2d5789902d78b84805a443bc1830ce4095c214"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12002.json",
+          "sha256": "b41288cca1e16a8e0993dae41961ff3dd68bdf67d5095302798892e9b4651d36"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12002.json",
+          "sha256": "00fc1bd40af0b65898eb078502cbb91c1d666b43ac4926c653190e913e860077"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12003.json",
+          "sha256": "0718b183a5cd60751fd295e66b1be1f773c74c3994c55dd6f5776462c67a0828"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12003.json",
+          "sha256": "fe7e616beac9a5f2d68cf6d77efc25d8ca4893279122ba0941c662c9721ae338"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12004.json",
+          "sha256": "69e56f7613ad218c4a567539748efc7a9d5e71bf4d772556683a607cb8acc6b4"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12004.json",
+          "sha256": "a9caee41fc16eccda7f93d27250f867e79727e47def77ae73259e1ed97b7de00"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12005.json",
+          "sha256": "997da2085f231516dcbdd0338569a058a090d6a2ec7db60f0ef43163db9025c7"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12005.json",
+          "sha256": "a19d9fbccdb77ba3ff82785e47bfa9903a152c4723423849f68c6b00f335647c"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12006.json",
+          "sha256": "42c602c9ed7204285ebdb911b10855b55914b6be3b3aeb9253f01b2822a383eb"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12006.json",
+          "sha256": "d7aba26586873559044565c4472ab4147b36c87317ec271002742dd0fa475819"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12007.json",
+          "sha256": "18af9d3beea04a0415444a445b097a5e6d2594e5da36308d588e8f73c4943aec"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12007.json",
+          "sha256": "d44ef1a34db72491a5b660257a7995543a4534f18d56425ef407ddfe6f370cc4"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12008.json",
+          "sha256": "cacc94ab8706003b69449df3092252cdc3afea0249c6bc72a03024ef7aa99c98"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12008.json",
+          "sha256": "219d2c3c544ed28dea2ed825c8c03d4e42ea781cae09077a6d537e2e349e2fe6"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12009.json",
+          "sha256": "54f2417f7ace52bed106ee71003aa2bad4a80d4218421cd5b10dc9cb88231ac2"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12009.json",
+          "sha256": "7d6e0b64c2b042ab9798198ed0b0cd1c09ff3cdf15aaf73d8957dd58618d04a3"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12010.json",
+          "sha256": "dbaf6304b1945853efa88a1650a2d75e32399e8aabefd57000614bfc9e200ca0"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12010.json",
+          "sha256": "a8afee081438aa985ca31b5e91f7c63b850d42e5b7c4549f8a25040711891e47"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12011.json",
+          "sha256": "6f4012723dfb8dc7da97313a47ed19ad75dcb057d93f712698ddc849716ae298"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12011.json",
+          "sha256": "7f2ec276ef95bd44400132a9c44a56b2a0c070465f938c2c9e0d920755c3644e"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12012.json",
+          "sha256": "5972475f34d244d646a722f4c519bd0ed34eba06eccf0bf61a0f01ec9a76d127"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12012.json",
+          "sha256": "ef91ac6769534194a4ce347104b08590194f6d0d91dd1c726cc502737eb9d8a0"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12013.json",
+          "sha256": "b0e23da7f4c3fff1f1edde8b1546b682b014e0f458cd5d3d2bea9272ccb82f19"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12013.json",
+          "sha256": "bb47bbc37d292f6dca37887cdbc0e4894ccb64dd38a025cbff70278ecda9d486"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12014.json",
+          "sha256": "870c660c22cbff9f66a67b5762ceef3b84215be913617989164ce098da6596de"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12014.json",
+          "sha256": "4e4d1472303a521298f609b681a0bf9f239e0d2d586afb78660168d3ee500d32"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/12015.json",
+          "sha256": "067f46f29079c1c46a23ea1b2cb7572e5e157bbba69bc990260b29f29dad0218"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/12015.json",
+          "sha256": "3e328eaa2933897f32c88ac5a49c6d199ff54cbdc62d31b0dfa4eeea376f8b10"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13001.json",
+          "sha256": "28b93f7b28476955dd3c50af4370b46edde31b4cb9c3b221da08be76f9232066"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13001.json",
+          "sha256": "914b7e5202409fa37648c9343980b8c78d203cd1e144cbc0760e30416d56525b"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13002.json",
+          "sha256": "817487355741db54122acb19faee9e2ac94a1e7eab690fb680d7e4fc8ca4c6e6"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13002.json",
+          "sha256": "36a8204f6fdd54ce6bd4dd18b8610bf39171652a836f5b856eab938d18630a19"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13003.json",
+          "sha256": "efd7072e8ee04f7a671e3fc5ce790ceb93f2d4c943101d8a00ab7fde0a4f3c2d"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13003.json",
+          "sha256": "7e5bb996eed09448af116f55e59e52f6d1be44182ed715d502bb74a5cd49330f"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13004.json",
+          "sha256": "b75d16478fd1397cf58246f839567d9bc3229e668d83cf4d9b25327cd00d6f32"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13004.json",
+          "sha256": "ecb3dbc152920d9accaea8fb1997f222940b923e73a31aba08f457c31a92d792"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13005.json",
+          "sha256": "87936e41276e4517a219cc20146e617192ca2147cd132af35236ff8e258331fc"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13005.json",
+          "sha256": "1f1ec7265b2083911342e037390dce5bce3139e74dc386c91ef6be1a134b3417"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13006.json",
+          "sha256": "c898359bacd98f7d80784502839b76b675d92dcebfc0d2886c71c4503dcfc832"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13006.json",
+          "sha256": "6e9bfcbc320a1523feb6ba4a9113048820a22c419159ad92c54345af8eb13bf5"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13007.json",
+          "sha256": "e094838051332d27d915352bb5b5ba95c7b035a857d415e8d1017ac0a87552b0"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13007.json",
+          "sha256": "3adeb17f5ce533672a14ded4f9fa9fad87e2b558349875cdb38bdc247a9b7c0e"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13008.json",
+          "sha256": "b8716a0490033cc5361776eae836d51ca9061caffee3e2b3928586ee3921249a"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13008.json",
+          "sha256": "54832e48f6858013b4ece7bbba7825d6abf8e912ef54d71867897e1cb743f5f9"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13009.json",
+          "sha256": "d94ccd4c3b3faebedd472de0eab19a8202a2b69d39347533703da108aefb389f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13009.json",
+          "sha256": "e8fcf3eb6ab1b36a8d0bf6375ff68ab4faaf5c590fbbedc4c5a2ed8bffb13e86"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13010.json",
+          "sha256": "3936070b88294d56634168c21c577f053d0a7925de27878af6d92a87d8a271ad"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13010.json",
+          "sha256": "3d4c27b557be809871e0b5bb3b5139a4f5ec5df9197c888591b15d9933c425f5"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13011.json",
+          "sha256": "6873ccda5fc77fe81a3c9d9463ebadfabb63319691a4cda615f17ae173ffc9a0"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13011.json",
+          "sha256": "16cdb86cae16bd49a28ccd68ae90cce5fe9edd202d25a3f081f55ea1487f78cc"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13012.json",
+          "sha256": "e19b0dc942fa9e8b18f0f53639f0f60095098958c31e2b73e43914a5fe60dfef"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13012.json",
+          "sha256": "c441be6438388ef74632104ac82346192d73de30a82caf35bcaa2af470ab9ac6"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13013.json",
+          "sha256": "4b851d854af030144bdd0b268af92e3371178f51bc206c13ae9d4c1f826d044b"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13013.json",
+          "sha256": "344c8806b1b642087459339d74fb4cae488415a6d6a0f1c1c2c9a04bd6793ede"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13014.json",
+          "sha256": "395a828659f4151951f460380152b7ed5935d15a320ab0b522b76c8cf56cd50e"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13014.json",
+          "sha256": "f04c9f992fa9cf78662a2845b44716d8a5934eb5358acbecbe96dc7b2aa7be8e"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13015.json",
+          "sha256": "aaaff6fd7b58bf982ca0de90a4fba3b72e09e394ee26c59b406d81ce8477c39e"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13015.json",
+          "sha256": "6e1b9ea6d8cfd11690856e1f7b05a306c40d66e0406626474732405a90deaa6b"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13016.json",
+          "sha256": "a68f557de6f42faf56cd25734cdfa87bc8ea4193bd283828504a4fe68af41b30"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13016.json",
+          "sha256": "10b215ada0399e97e07e7b4f9441a22c3402fa9041f0b239295a71e178538ee9"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13018.json",
+          "sha256": "ba35aa67d7d46891554af804e2710a8e1cb377693e57a46c8e2813c7d96c420c"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13018.json",
+          "sha256": "d89309926e4aff385949f8f38a94a55ca1f175ff07a07928d6cac593cfb66ef0"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13019.json",
+          "sha256": "79f2ecc53f6e8946357e527b6d2bd98ea9324cc4da7e709e469b9e615981bd7c"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13019.json",
+          "sha256": "412dc6d88b0d9caff3843f8e6d6eeabd0d51a4b58a74bab4d5d789a57019c33d"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13020.json",
+          "sha256": "0fb24f94c013b3525f72a25288de82b2e5cbdc2fab6d91b8b61fcbcf82664264"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13020.json",
+          "sha256": "2a727f26ed7afdd6158ece37bebf4f2c11dba19b954a8ba27480fd1167b897ea"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13101.json",
+          "sha256": "12cb812ba3cde1987eaae3aeeff547c174fca73caf019229a2e32d74c671d554"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13101.json",
+          "sha256": "38c6e11d199ace54a5bf12afff0936f6d790c2c5d8da9845b2a21c6cc14012a8"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13103.json",
+          "sha256": "bb72db30e2769bcde28d6fc2bd499b9e7c6a0846ce4f3960bab4c479a0a166e9"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13103.json",
+          "sha256": "c3eb475f7e550650f30997f198e0bf5b5f085a1ea359b6365cb521464e73cdae"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13106.json",
+          "sha256": "a68567a64970a517c3225f33f66394144fe969e9968fdf6bfb189be14ede4b0e"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13106.json",
+          "sha256": "e348f5e4b453f9e22cf8114ca1cbe0fd72a65cc2e2acc4bf0e60a4e4c3292a99"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13108.json",
+          "sha256": "aa0f570b79e0fddb2bbe02341ab9201fdaacb53106c5f9e632dd79b39912f730"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13108.json",
+          "sha256": "7cf30ae0114d7e3e8d2fb552c3822d7e6d427b8c3adfa7748307d2a9c48ebc7c"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13111.json",
+          "sha256": "78b3e0f7646605342e88cd640deb920ca4613ff0c9990020e444113267dbfdca"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13111.json",
+          "sha256": "d17ead411e3b84c4c43d569bd7c05bc34b3ce4bdd16095db177e191c867c0d5f"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13112.json",
+          "sha256": "c2768fb6407fcbb8b7427b8c17ae2f84aafc02223598abf0bba3cd600c63791e"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13112.json",
+          "sha256": "b5e9ebce2a6f730fe17620d74ab609eabceb38fdda6f13e0466c2a33effd79e1"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13113.json",
+          "sha256": "543344abb57839f165287bd0edefc3a0c54cce56eb7907e26657b5aef4c1ad89"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13113.json",
+          "sha256": "a199ffc1560b00ca634191bd4a84e6cf70f2a0f8ab633e71de4912365b21613f"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13115.json",
+          "sha256": "c5fe25f8be30331f6415ce40c742b4f66714873394e8bd871f6b88a24fccfa8f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13115.json",
+          "sha256": "6f2419a15df0acdf7f01d2784e6a20bb635d1d10a27c43a13a0937b8af4c58a9"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13127.json",
+          "sha256": "dd2be161de2e09b4b843cdc3e2536e66f8d4d7a811e23062fe77c6289a4d99bc"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13127.json",
+          "sha256": "e8bb2f29e9dfef0ff88d63e2d86290738d499b6b0365e847e980802381531dd5"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13128.json",
+          "sha256": "ad1c1d3a7eda13b7cf226504b8ac501b29174487459a99d3de2f275f0a989d7d"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13128.json",
+          "sha256": "349f3cdf31c22bdacbdb3a44e88fae6a01bc2d50fce798e409cd26131a30eed8"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13135.json",
+          "sha256": "7f72ccdc0cd86d2ea2c752f7bc826a88c007c34c8c1bbffff8cf6c76748af6f3"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13135.json",
+          "sha256": "0e3b5d82aa60b937ccfe1a3b19c0614739c7936fe67dcdaa87762b5a92e9f73f"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13142.json",
+          "sha256": "10e6bdca80bea4bfb04ccb0aec6eac81d5f284a6c836b06d07b8eb35ebe3a50e"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13142.json",
+          "sha256": "15f1241f503d92a49b8640885aa244d7b39c8e3f077c288c8fd6e7836d538916"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/13144.json",
+          "sha256": "456f8cb25865897503116cb2052616f471806dd5cfdb37b85a98fa9497ebf8f1"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/13144.json",
+          "sha256": "4b97926baadfc594949a9bed41d250019921fc51e142172ad80193dc40878ecf"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14001.json",
+          "sha256": "1f6d12ed84887db01284bdf8cc300bf7e22b945a2c785a24ba517155f0ca3729"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14001.json",
+          "sha256": "1cb6f73779859d23c520a1af4916506a03bf23a5b1015aeec1f2a328920c8641"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14002.json",
+          "sha256": "b43ce8ef851b8b65f6980ec4e412d76c0f2ecf89b7f98065a34f5ea28ee6eea4"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14002.json",
+          "sha256": "32ef6c52b6132d97b60fff19cc4fe1c0cc474d9cdbd8571da521d10b1ae30068"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14003.json",
+          "sha256": "8cb3e90f472f1658d906fcb714981d02dcacbc051462689f49a539ac568ad651"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14003.json",
+          "sha256": "153856341d8a5a6b524f073a10a5c48c9354b24a6d5e4aef435c1d5fcfd79f8b"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14102.json",
+          "sha256": "e7c4dda9218848d2715472ed48a93e18ddbdc0db5116724b4ff1bdf38d308808"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14102.json",
+          "sha256": "cbc7c12ea5968fd27883e2f6afe2beef5d303b645b9e88da5e865dca1c092bad"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14104.json",
+          "sha256": "428d49b0c9d1c0b8eecffe7f669b7e60ca0d1212b174f20f7cb2e75ac22515e8"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14104.json",
+          "sha256": "3c8d7d11563a75a21e0182db5c48e902e19d1e85eb3903d2f9a3f7574f474d52"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14105.json",
+          "sha256": "f1852b8744f9f23611a8ee0b1ef7d6abeabd5dc62e11cd7c472f856d498a296d"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14105.json",
+          "sha256": "dccfe74694f224d600f21224b1a1f93bb7be10ca8f46ca01c361b8f5b660eb04"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14107.json",
+          "sha256": "3e657c10e95d18343066e95311bde83ce8f48ec4664113048509d47b36154c06"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14107.json",
+          "sha256": "64dce13224e1fbcf07890835ca6766f8a5379c0e881cfc98bd95a6c4f6bfa40d"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14109.json",
+          "sha256": "37b89bdbf2b9799a7929a097dc8109c98883f2efed8314d423e95a30ccd02545"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14109.json",
+          "sha256": "5ab891b0f5221d7255dbe7251d0f853b0cca9eaafd9e0699507e3fd1e70de062"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14110.json",
+          "sha256": "b6ac08a68aa8b35f43c3810469747b931baf0c26833293ab314db155f5a44bf8"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14110.json",
+          "sha256": "e2ffd87e2b7c120bc33545f54251522b3f2d4011e65c6f39ee9b1db07c76c7d3"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14114.json",
+          "sha256": "2d386db0e7ae63c0032d349478c81cc915001ed9de51c5912e1fed1b1111741f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14114.json",
+          "sha256": "3b077b5e2fc1bcc3b469f99a7bf481d4c6d4f142c01b1eb545a5f56eae434770"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14116.json",
+          "sha256": "0ecaffae90e8c32a53bba086154a42b5cb0e44610ab2a1e418ff81cf25e02185"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14116.json",
+          "sha256": "8f15a37a3dfb1d06072865cc8eca62e3466b53e19932e51e864ba7c464f10038"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14117.json",
+          "sha256": "d15a6abafa54b5eac9d06d0d0d75776d6f4cde136c2805edd3949550a0de36a7"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14117.json",
+          "sha256": "58f524c245501a3dd4e3592c4eb2ecf76a19f07dd67e64a9236ace76f76fdc1c"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14118.json",
+          "sha256": "9661b7adbbbc2be420599d966073242ade60b8a51928eec5636eea5f963d05da"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14118.json",
+          "sha256": "01e8faf45486e3941724d407f7386f4f0664c5c4ea40671b6ccc3a4299330a08"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14119.json",
+          "sha256": "35801d15e09b2b2638b78893cdaaf7da8b3aba961a1caab8ba10d07424f0c29a"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14119.json",
+          "sha256": "32aeb2f0d3d7756bc02bb2dbccc28812dfcd4177ca41cbec2c7b29bc132f3cf8"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14120.json",
+          "sha256": "3697eab03c076de4520cfafcdd9db3fce449176bca33ebc5ca41e966ed14a414"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14120.json",
+          "sha256": "709bb6d721368b52c246da763bdf9685ae1eac7735e8c581344c1f5fc4efd4e4"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14121.json",
+          "sha256": "72d2ca039e480763ee864695fd751480c24293cc9d1b00878fc36ed65bbc3f8f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14121.json",
+          "sha256": "6ab249a023b1d915c8451032038b14ada493ce003861ded821bacb7441af23ec"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14122.json",
+          "sha256": "0753de0a0eb5a183aa4c5033cf7a934378ce4288eed7828f7945537580f2dc83"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14122.json",
+          "sha256": "d8e933d4f1dc2c5bac55236a901af11f19e646c227f647d773e8312ab19e47d6"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14124.json",
+          "sha256": "1c9ecd95bf6fdae39c927619eaf25e5f0098683e34f0a55ef0729204b8d0c26f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14124.json",
+          "sha256": "f0b7da207aeda538547252ba84be051559577e0b59546f54641ca2a1276a4f3d"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14125.json",
+          "sha256": "4a954af100ab45a35578f42c6c413b3327e28c212d1bb81e8f7093dda299add5"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14125.json",
+          "sha256": "eadbc38dd5a01c1e580940e3641b305a5562999c123456c91569367a80aa91ff"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14126.json",
+          "sha256": "6bca9654cab7425d707733f5761dc86dd393f0571c5ad4e430a85757830eb649"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14126.json",
+          "sha256": "130afe51164e24abdb5fb54b3a4db436216ccf812ec519643a6cb069a1e8f97d"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14129.json",
+          "sha256": "7c0e450055f63f28a6c7986f1e369f7ebf022ea64d2ab92466d7ebbf167368ff"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14129.json",
+          "sha256": "3d74306bb61ada9a4ae4c46c673cce2c4443ca8c3ab76d3e85291b93651473d9"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14130.json",
+          "sha256": "da40f3fe241c2c87503ccee47b02c706bbff4d0ca2c84d46e978a443a907d54e"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14130.json",
+          "sha256": "47bedd65ada9eb28cc6e6f002eb188a995e661419bf8f8bc0441421754aecd6b"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14131.json",
+          "sha256": "38f5c2f84a58e00f3c899b184a7039dbd49f8d0e504e54ac97830985669cc8cb"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14131.json",
+          "sha256": "27a0f29e4cfa78a78a5cd5837b185a28d28f920a75c8399e27158578de18a403"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14132.json",
+          "sha256": "749478e1d70eb0bd6eb0d0200f9a2f4ae55ee6d2459f7632fab82f115ef8ee86"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14132.json",
+          "sha256": "97bb6f54af963756bcb89795264b01e4251e4e175eee92fd4031df5bbbce9180"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14133.json",
+          "sha256": "e554fe9cf2e0b77b7e5ece6b7baf533c0e57af691ffcc7f535e2105f7c73b23f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14133.json",
+          "sha256": "58addee6849082ef193580f0e5852dc29673f3713149f1fa37bbc3d7103001e9"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14134.json",
+          "sha256": "50e4112a0c38dfcfa262e2e829d06ed7bdefb8959339166acecf08f127d5716d"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14134.json",
+          "sha256": "52e5a4993fa618b8743edb92129d75f6671fda56cf5f39d98fb00c5109098365"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14136.json",
+          "sha256": "47560a823cf77d43f162bd1b18b93bc8b82c26ac1a00ca112c1eae8d6a859070"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14136.json",
+          "sha256": "4c2e9c534dbbc7a042a071f0d3fc3a924b01dc03324428c00b74934d177ab522"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14137.json",
+          "sha256": "a0d7dfe24f24a5cfc623e750c33bbea7aead9952283d670861b9a67e814a667d"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14137.json",
+          "sha256": "3db3002fd578f656b969f2d41803f3b39ae421c1b71082594b2d6eeba1151026"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14138.json",
+          "sha256": "08bf9c44500c28751a830af93a3d82f67b690fe7015b1a3d5002bc3ce61a10f8"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14138.json",
+          "sha256": "26dd5821f0f0b09b06a7dd2255de3706d4e69818d891d91543ede910ce0421fe"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14139.json",
+          "sha256": "9ff6f6af6f165b82fac3268ff18ab925f2a918bc4f5ce0c11f25016fe1d81880"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14139.json",
+          "sha256": "d759cc98c15d54f6a999afda620f516560c5c26f09102e198b6c99f65967a82f"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14140.json",
+          "sha256": "4ac99dd642ae7912f570702604f43c8be4746a71eb106389ae1928567fc406c8"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14140.json",
+          "sha256": "d4a1ca14b992b3b22f981e47c5a7effec8049fd41abd7b1560dba149a0dc2702"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14141.json",
+          "sha256": "1c7f4b94eda1294b77e023dc456f67295dca5d77efef598d9150ff576b9648e9"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14141.json",
+          "sha256": "bef00acc500e770b0332715279f8a7dfca97b13a5aa9c16a7d8222535f3c5e88"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14143.json",
+          "sha256": "1781caca4bb65209505f25fbca992726a5725db2261483d05a4d7cc6297f65d5"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14143.json",
+          "sha256": "1457d67b7598102b21002df74deee366e26be20a568f6f735d7d7938ebf9f1af"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14145.json",
+          "sha256": "ce3e59289f51784688e96d695b1d23dc8e48bb6095db0fcff3cca9c745aff12c"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14145.json",
+          "sha256": "27d24b1082a93bd3dc5956ecc9c3add5b642c376873a07569148bb6d6fab75b7"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14146.json",
+          "sha256": "95cb492bfb8e7655109ddf39821c6ef76c8fd908297715da61e9d46f789dbf0d"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14146.json",
+          "sha256": "8ab3c44a6cd6a8cd62cf6a00c4e75986b6c93c3f80d0e13966b67b8e8e2c4b1c"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14147.json",
+          "sha256": "cedf139c8ff69346be6be4ab82c075d836c50d22d59d0f99a568d1a42778617f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14147.json",
+          "sha256": "859b51f9a02fd1f7d1992e3dac8995277629c0cea4b177e38affed5f8e2b02d0"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14148.json",
+          "sha256": "25500bd65c95f6ebe1fec009c78bb8ec51073a0205dc8d0744393b63d0e33576"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14148.json",
+          "sha256": "a26ebfb8e60d445020206e0c68ef30a63cd64550cf1d2f5989995c4b71829659"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14149.json",
+          "sha256": "5cc9a415a250eaa0d4e8b627b4dbd9fac1c2f64983e6084fe1ecdca912ad8cf9"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14149.json",
+          "sha256": "dba325cc611ced2f705b5e330402bffe1c9c8c68d08d1bb763a28047756a6984"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14150.json",
+          "sha256": "b8ec602954fb4b3f4a19961352aad86ef8582ba56be1cecc98b9ada646c1ffab"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14150.json",
+          "sha256": "866f7a0f4a9ea0c2b2de1b488c674ec43925e4eebf6f99a84d0f46ddbfee6503"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14151.json",
+          "sha256": "aee9cc0d91ec46a5e8c736d99ad7d2ac2bd7b0dc5ee509b94cd077f1bba251af"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14151.json",
+          "sha256": "c24b93bebffa475f342570aa0cc3005aaf373708a5476e4882d4cc9b51851d12"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14152.json",
+          "sha256": "5e055b130e8e89fd13c87af58617c88cb32a10adcaf8fc710c4e2b3a7a49fb51"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14152.json",
+          "sha256": "0e46ee26ff70c627512b879141b28150cb69eab19cdbdaa9d9d99373f4a9da96"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14153.json",
+          "sha256": "ba47148e8b9608fc251dc1ae4400908474dd5da39e52fe9aa5019c7f5921b2a2"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14153.json",
+          "sha256": "befaefd135dd0317815c70cc869817fbf4c9be06243177240a9364638bd4728f"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14154.json",
+          "sha256": "1f42dfe769b416169a9a2c0b27033f5c5c26cb0395416b52a6815711a8d7b4ec"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14154.json",
+          "sha256": "2a416735e0fc2939e0b1243c2ce666563d9e4e147fb9e8b4899a667a8cc72b1d"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14155.json",
+          "sha256": "e55516d1ecca003293099f2babc8219ac592e8172fedb9fa7a32d00cb9bd62d7"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14155.json",
+          "sha256": "304b9e16d04e96fe13f888462aeab2cbd476c7209376f45917be3c7668e553a4"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14156.json",
+          "sha256": "16a9e5414bea650d868e9c661230851c30bf311192d46b3cfb3bf21a72c8f05a"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14156.json",
+          "sha256": "23110cc8a7c4e15ca7014299accc99f47ab2ed3dc1c45a3016c0e220aeb0fef7"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14157.json",
+          "sha256": "d98e9da321722a542724759f4f91f0d8861ca49360e0db5dda88fadfdb355805"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14157.json",
+          "sha256": "07f05f69e6d9d0c3a2216e25315896e71d0fa80a3b72dd818fb43a4e1bb52e4b"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14158.json",
+          "sha256": "090f43a9c215ce302cdd237febfa2d8319ae3b7803610a0c4ca3d01d9af3805f"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14158.json",
+          "sha256": "95dd96ae0a84addb656d62f1f2da4770bc66d8ab87ca0090c549ca07c3715a00"
+        },
+        {
+          "resource": "zzz/3.1/zh/weapon/14159.json",
+          "sha256": "28d5a2b3ed50f97ad611d677df8bb1536b22f7f4f0662a7e895a0227b83272c6"
+        },
+        {
+          "resource": "zzz/3.1/en/weapon/14159.json",
+          "sha256": "d07fcee82a26567440b980f5aa3c43579129e20c19b7605e4dd3f9fe7c34c787"
+        }
+      ],
+      "memberIds": [
+        "12001",
+        "12002",
+        "12003",
+        "12004",
+        "12005",
+        "12006",
+        "12007",
+        "12008",
+        "12009",
+        "12010",
+        "12011",
+        "12012",
+        "12013",
+        "12014",
+        "12015",
+        "13001",
+        "13002",
+        "13003",
+        "13004",
+        "13005",
+        "13006",
+        "13007",
+        "13008",
+        "13009",
+        "13010",
+        "13011",
+        "13012",
+        "13013",
+        "13014",
+        "13015",
+        "13016",
+        "13018",
+        "13019",
+        "13020",
+        "13101",
+        "13103",
+        "13106",
+        "13108",
+        "13111",
+        "13112",
+        "13113",
+        "13115",
+        "13127",
+        "13128",
+        "13135",
+        "13142",
+        "13144",
+        "14001",
+        "14002",
+        "14003",
+        "14102",
+        "14104",
+        "14105",
+        "14107",
+        "14109",
+        "14110",
+        "14114",
+        "14116",
+        "14117",
+        "14118",
+        "14119",
+        "14120",
+        "14121",
+        "14122",
+        "14124",
+        "14125",
+        "14126",
+        "14129",
+        "14130",
+        "14131",
+        "14132",
+        "14133",
+        "14134",
+        "14136",
+        "14137",
+        "14138",
+        "14139",
+        "14140",
+        "14141",
+        "14143",
+        "14145",
+        "14146",
+        "14147",
+        "14148",
+        "14149",
+        "14150",
+        "14151",
+        "14152",
+        "14153",
+        "14154",
+        "14155",
+        "14156",
+        "14157",
+        "14158",
+        "14159"
+      ],
+      "members": {
+        "12001": {
+          "files": {
+            "data": {
+              "path": "w-engines/12001/data.json",
+              "sha256": "905edb9141c5fcb4d655f7271b801a0cd3e6b2c328c1234ce3b0015289e8927b"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12001/details.en.json",
+                "sha256": "0aa434cb52a13bedb38eca13f0c91c695c6b500b559db23d80818305f77b8d55"
+              },
+              "zh": {
+                "path": "w-engines/12001/details.zh.json",
+                "sha256": "4f0733cef1aacf99f863e36b43b0d2ece2e001c221d468737d7c8bea5464fe9e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A W-Engine that prioritizes damage output over noise reduction. It can indiscriminately deal considerable damage to all units nearby.",
+            "en": "[Lunar] Pleniluna",
+            "icon": "Weapon_B_Common_01",
+            "ja": "「月相」-望",
+            "ko": "「루나」-보름달",
+            "rank": 2,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "「月相」-望"
+          }
+        },
+        "12002": {
+          "files": {
+            "data": {
+              "path": "w-engines/12002/data.json",
+              "sha256": "12731451102ab41e4800643228183769824e2aaad8fc3b8a23070e5e6233b563"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12002/details.en.json",
+                "sha256": "6e813fc73bd4cbf7fd54f134754e7a215a686ca428b3e1ef7cf366cfd383d449"
+              },
+              "zh": {
+                "path": "w-engines/12002/details.zh.json",
+                "sha256": "1b33ee2c649123eb53606980ca9feb6af3f5dd64e464739a13c48eeec6aaa08b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A W-Engine with excellent sonic and thermal energy usage, capable of hitting its target with a double whammy.",
+            "en": "[Lunar] Decrescent",
+            "icon": "Weapon_B_Common_02",
+            "ja": "「月相」-晦",
+            "ko": "「루나」-그믐달",
+            "rank": 2,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "「月相」-晦"
+          }
+        },
+        "12003": {
+          "files": {
+            "data": {
+              "path": "w-engines/12003/data.json",
+              "sha256": "4c3ed396870fe70b14ee1b1fdd8fcfb86b17d4c1978017c19ad862e15ea9ae8f"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12003/details.en.json",
+                "sha256": "4987705ab413611fd59bc811b49bfca62c0d70066bc2c60d2da16e5a94833416"
+              },
+              "zh": {
+                "path": "w-engines/12003/details.zh.json",
+                "sha256": "2f6ce555847c472d952f5d7f37d31e63cb23aabf6acafe6ee13c90a54688cf52"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A high-capacity portable W-Engine that can collect dissipated energy from its surroundings, thus enhancing the combat effectiveness of its operator.",
+            "en": "[Lunar] Noviluna",
+            "icon": "Weapon_B_Common_03",
+            "ja": "「月相」-朔",
+            "ko": "「루나」-초승달",
+            "rank": 2,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "「月相」-朔"
+          }
+        },
+        "12004": {
+          "files": {
+            "data": {
+              "path": "w-engines/12004/data.json",
+              "sha256": "76219bd0bbffcfe42acc7bf5074d8c84f7da7ce89579061b725e2e84bbb21691"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12004/details.en.json",
+                "sha256": "d8454093891ecb06c6e78df835bdc87cd36286839134afa1bd9c5dfa5801243d"
+              },
+              "zh": {
+                "path": "w-engines/12004/details.zh.json",
+                "sha256": "064c40023d0c399a94ae32ad5b5c404b4208fb40e3e9a4fcb3c1f1ad6488316e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A special W-Engine featuring a built-in sonic generator that boosts its damage output.",
+            "en": "[Reverb] Mark I",
+            "icon": "Weapon_B_Common_04",
+            "ja": "「残響」-Ⅰ型",
+            "ko": "「잔향」-Ⅰ형",
+            "rank": 2,
+            "sub": "ATK",
+            "type": 4,
+            "zh": "「残响」-Ⅰ型"
+          }
+        },
+        "12005": {
+          "files": {
+            "data": {
+              "path": "w-engines/12005/data.json",
+              "sha256": "d0c485f133ae887c51301fb6c1eadc22824bd42fd3fd894338cfa922cb3466c0"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12005/details.en.json",
+                "sha256": "d941610ee8ec7100a0b1b09ae9698d751a03e37b3577b180473390255d4fa2d4"
+              },
+              "zh": {
+                "path": "w-engines/12005/details.zh.json",
+                "sha256": "47b310ff1407d20fdbe0193cddc939a7c077304072cc0c2929821b78f95380df"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A standardized W-Engine with balanced performance that enhances its owner's and their teammates' combat effectiveness in all aspects.",
+            "en": "[Reverb] Mark II",
+            "icon": "Weapon_B_Common_05",
+            "ja": "「残響」-Ⅱ型",
+            "ko": "「잔향」-Ⅱ형",
+            "rank": 2,
+            "sub": "Energy Regen",
+            "type": 4,
+            "zh": "「残响」-Ⅱ型"
+          }
+        },
+        "12006": {
+          "files": {
+            "data": {
+              "path": "w-engines/12006/data.json",
+              "sha256": "749c7889ad3c7ce82dbf0727c6151ec9a8de89bebc6a65d28fb5a6a09db2e899"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12006/details.en.json",
+                "sha256": "91f6b672a5f0a9dd922f5e85297cd1c4bf7310375e04ee746bdd2dc385e451f3"
+              },
+              "zh": {
+                "path": "w-engines/12006/details.zh.json",
+                "sha256": "327b21f70d65eb72d21d272f76454f644135aab2e8d0fd2fc0d8bbf5ac248914"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A special W-Engine that features motion capture algorithms, which enhance the overall combat competency of your squad.",
+            "en": "[Reverb] Mark III",
+            "icon": "Weapon_B_Common_06",
+            "ja": "「残響」-Ⅲ型",
+            "ko": "「잔향」-Ⅲ형",
+            "rank": 2,
+            "sub": "HP",
+            "type": 4,
+            "zh": "「残响」-Ⅲ型"
+          }
+        },
+        "12007": {
+          "files": {
+            "data": {
+              "path": "w-engines/12007/data.json",
+              "sha256": "e7fd3b1ae47c13a860c46f1a79ee9ef7b392176061417de0e597fd7b95166a5e"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12007/details.en.json",
+                "sha256": "9ac14f1a7702094e3726a05fef2af446fc2df09a9a39852d7efcd95fb5182a43"
+              },
+              "zh": {
+                "path": "w-engines/12007/details.zh.json",
+                "sha256": "06c4185be93eb398856e53e84d31f630da93b4a19d4c44180892e9fbec68906f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "An energy-storage type W-Engine with a unique operation circuit. It will absorb scattered energy up to a certain amount before unleashing it all at once.",
+            "en": "[Vortex] Revolver",
+            "icon": "Weapon_B_Common_07",
+            "ja": "「激流」-銃型",
+            "ko": "「급류」-총",
+            "rank": 2,
+            "sub": "ATK",
+            "type": 2,
+            "zh": "「湍流」-铳型"
+          }
+        },
+        "12008": {
+          "files": {
+            "data": {
+              "path": "w-engines/12008/data.json",
+              "sha256": "fe8aed7d2b8b04dfbdfb2fb90a0bf3ef75b8bbf2b0d6f7c4fdb0e7b295897a0e"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12008/details.en.json",
+                "sha256": "88265da419191b45a0ccba7c07817b97e54133c2207611f32d5fd8a55a057517"
+              },
+              "zh": {
+                "path": "w-engines/12008/details.zh.json",
+                "sha256": "961a9e97aea4d2476f9f2570a4c8394088e86f3ede0e206fdddb050d0168fdbd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A tactical W-Engine that locates enemies using high-frequency sound waves. Its aiming aid can make its operator's precision attack more deadly.",
+            "en": "[Vortex] Arrow",
+            "icon": "Weapon_B_Common_08",
+            "ja": "「激流」-矢型",
+            "ko": "「급류」-화살",
+            "rank": 2,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "「湍流」-矢型"
+          }
+        },
+        "12009": {
+          "files": {
+            "data": {
+              "path": "w-engines/12009/data.json",
+              "sha256": "60756354e23351e631d30ec813daa7bf1fc43923c52511358d5270e48fd75b6a"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12009/details.en.json",
+                "sha256": "71d7416e72542e624864519d2c6bac1624bfa94dcb70f124e766ae2a862fdabb"
+              },
+              "zh": {
+                "path": "w-engines/12009/details.zh.json",
+                "sha256": "5ae75e57e305582bf7b5b5a8ff824045dcad4cce43cf50646d51cb26ceefb758"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A frequency-converting W-Engine that can quickly generate excessive power and effectively increase its user's battle prowess.",
+            "en": "[Vortex] Hatchet",
+            "icon": "Weapon_B_Common_09",
+            "ja": "「激流」-斧型",
+            "ko": "「급류」-도끼",
+            "rank": 2,
+            "sub": "Energy Regen",
+            "type": 2,
+            "zh": "「湍流」-斧型"
+          }
+        },
+        "12010": {
+          "files": {
+            "data": {
+              "path": "w-engines/12010/data.json",
+              "sha256": "59532601e65b11888094b13896c0dd00aee74558b2e514925cfa2b3bafae2a8d"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12010/details.en.json",
+                "sha256": "9fed8ca89f740b496561e389fd6a5aa1c262a7f8269b0ccd5441a36f94568772"
+              },
+              "zh": {
+                "path": "w-engines/12010/details.zh.json",
+                "sha256": "bee516fdfb8d268104f45a0e022977789df47e95072c0c6b3a1c3662ba23c07e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A special W-Engine that can analyze the target's weak spots through real-time calculations.",
+            "en": "[Magnetic Storm] Alpha",
+            "icon": "Weapon_B_Common_10",
+            "ja": "「磁気嵐」-壱式",
+            "ko": "「자기 폭풍」-알파",
+            "rank": 2,
+            "sub": "ATK",
+            "type": 3,
+            "zh": "「电磁暴」-壹式"
+          }
+        },
+        "12011": {
+          "files": {
+            "data": {
+              "path": "w-engines/12011/data.json",
+              "sha256": "23c6e89bdd93bbc51621fc9c8a8d962e96e7d17c810efad1fcf70def8ff44c95"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12011/details.en.json",
+                "sha256": "9f77948cfed20c16b80a03ee92a0ec741264c779e54843f8192738fc79844aa3"
+              },
+              "zh": {
+                "path": "w-engines/12011/details.zh.json",
+                "sha256": "1f44070357037bbea394b9cded3ee250e4842e67c9294b5887be7ed9a4ee9e54"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A damage-type W-Engine that features an enhanced movement detection module that can quickly alter its output intensity to optimize battle efficiency.",
+            "en": "[Magnetic Storm] Bravo",
+            "icon": "Weapon_B_Common_11",
+            "ja": "「磁気嵐」-弐式",
+            "ko": "「자기 폭풍」-브라보",
+            "rank": 2,
+            "sub": "Anomaly Proficiency",
+            "type": 3,
+            "zh": "「电磁暴」-贰式"
+          }
+        },
+        "12012": {
+          "files": {
+            "data": {
+              "path": "w-engines/12012/data.json",
+              "sha256": "c0a7db9e497899acf2bbe877f3b04c6e401b59ebaf83fe870875a952bed53336"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12012/details.en.json",
+                "sha256": "c9a7f0b77409ee3142ebe4d90c92e56aad580329496432658a0a09534ce455f5"
+              },
+              "zh": {
+                "path": "w-engines/12012/details.zh.json",
+                "sha256": "45271f96bb6ee1b6bcb1ad2eeef692f4370019e15777cf4806432d306218014b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A high-capacity W-Engine that features a built-in generator, which allows it to keep a stable storage of electrical power.",
+            "en": "[Magnetic Storm] Charlie",
+            "icon": "Weapon_B_Common_12",
+            "ja": "「磁気嵐」-参式",
+            "ko": "「자기 폭풍」-찰리",
+            "rank": 2,
+            "sub": "PEN Ratio",
+            "type": 3,
+            "zh": "「电磁暴」-叁式"
+          }
+        },
+        "12013": {
+          "files": {
+            "data": {
+              "path": "w-engines/12013/data.json",
+              "sha256": "0083ed9ba54d43ecdf6cb708c05f429659671d63a9da0ca02aa23dcef9aa61e2"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12013/details.en.json",
+                "sha256": "afac6890500e9e91557f2d41a271817062c08a1773d7146ba64fc64fa551aceb"
+              },
+              "zh": {
+                "path": "w-engines/12013/details.zh.json",
+                "sha256": "71351b0c818f362454bff43a4d4fed98fc25120648eee884ab2e88a4b63a1415"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A W-Engine with a component structure adjusted according to specific parameters. It can enhance the defensive capabilities of those who have a certain style of combat.",
+            "en": "[Identity] Base",
+            "icon": "Weapon_B_Common_13",
+            "ja": "「恒等式」-本格",
+            "ko": "「아이덴티티」-베이스",
+            "rank": 2,
+            "sub": "DEF",
+            "type": 5,
+            "zh": "「恒等式」-本格"
+          }
+        },
+        "12014": {
+          "files": {
+            "data": {
+              "path": "w-engines/12014/data.json",
+              "sha256": "91e2160ccd9b97a88acf254e82c37b05d648ac12842264f0b91baa7fd31567ba"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12014/details.en.json",
+                "sha256": "a324b76b8d517c0d5bd1ea0df5aa91f9f5d45598ce416112ac5b98f03721803b"
+              },
+              "zh": {
+                "path": "w-engines/12014/details.zh.json",
+                "sha256": "8b63e7e33ecf102c30023fe5692377055689d56001affe0a318148e1dba41d2e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A functional W-Engine that specializes in energy conversion. It can analyze combat environments and generate special sounds to disrupt the enemy's offense.",
+            "en": "[Identity] Inflection",
+            "icon": "Weapon_B_Common_14",
+            "ja": "「恒等式」-変格",
+            "ko": "「아이덴티티」-인플렉션",
+            "rank": 2,
+            "sub": "DEF",
+            "type": 5,
+            "zh": "「恒等式」-变格"
+          }
+        },
+        "12015": {
+          "files": {
+            "data": {
+              "path": "w-engines/12015/data.json",
+              "sha256": "53d5f207a7bf7a0ad2674c94995b162380f5a7d9ef00ccefcb8e63379deb7871"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/12015/details.en.json",
+                "sha256": "0f44f2a32b638f5ddd320d1ede39e237192dd24dc1895986c66a9832ae84ff9e"
+              },
+              "zh": {
+                "path": "w-engines/12015/details.zh.json",
+                "sha256": "3d96f79ffc58645fb4d6f3ea1df6d812b8173bf6c1b0133908311bc0a8fec0b4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 475,
+            "desc": "A W-Engine with a built-in heating component. When operating at high speeds, it resembles a blazing blue flame.",
+            "en": "[Cinder] Cobalt",
+            "icon": "Weapon_B_Common_15",
+            "ja": "「灰燼」-蒼藍",
+            "ko": "「잿더미」-코발트블루",
+            "rank": 2,
+            "sub": "HP",
+            "type": 6,
+            "zh": "「灰烬」-钴蓝"
+          }
+        },
+        "13001": {
+          "files": {
+            "data": {
+              "path": "w-engines/13001/data.json",
+              "sha256": "deac58833e461d39be442c35d6581695f9552abdf1795361396990c213d73939"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13001/details.en.json",
+                "sha256": "ccec9c6bcc7215d2a97e2785082ad77a19dc510d3b83206b1c853f73406c3b55"
+              },
+              "zh": {
+                "path": "w-engines/13001/details.zh.json",
+                "sha256": "d3d3238be02888ee069bf3d31020a6c44ca56d0c35211d57ea1ee3f97534654e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A custom-made W-Engine designed for urban music lovers. It sacrifices heat dissipation components for improved sound quality.",
+            "en": "Street Superstar",
+            "icon": "Weapon_A_Common_01",
+            "ja": "ストリートスター",
+            "ko": "거리의 슈퍼스타",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "街头巨星"
+          }
+        },
+        "13002": {
+          "files": {
+            "data": {
+              "path": "w-engines/13002/data.json",
+              "sha256": "3c4c728edc16964d41898795aeadff69ee7f0ded217d97ffa2bc73c5f8bcd081"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13002/details.en.json",
+                "sha256": "3f2f6d81e4224946dafdf28c78ceb181d27ab17ca5b4a295f45253f2803b47a7"
+              },
+              "zh": {
+                "path": "w-engines/13002/details.zh.json",
+                "sha256": "bd6450e90efb54b2291039d9b312039f3329220d5b58fff7f7360fff3fe0b09e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A special W-Engine equipped with a high-speed camera module. The best choice for in-Hollow photography enthusiasts.",
+            "en": "Slice of Time",
+            "icon": "Weapon_A_Common_02",
+            "ja": "歳月の薄片",
+            "ko": "시간의 파편",
+            "rank": 3,
+            "sub": "PEN Ratio",
+            "type": 4,
+            "zh": "时光切片"
+          }
+        },
+        "13003": {
+          "files": {
+            "data": {
+              "path": "w-engines/13003/data.json",
+              "sha256": "9891d06a3797c3bac8f7c9b59d4f9851256f2455ad65c1ccfc99caef0775684d"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13003/details.en.json",
+                "sha256": "4b61fc7c3af473763e30ced8ec647cc240de200f9cb7b0279e6ff969ad133bdf"
+              },
+              "zh": {
+                "path": "w-engines/13003/details.zh.json",
+                "sha256": "0b507bd7f02b3233a9f994ae5fb1b9eda6c785a57129e5b2754ec5e91e4859f1"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A consumer-class W-Engine launched by an exotic pet fan club to promote pet culture. Due to its cute appearance, it was once a very popular model.",
+            "en": "Rainforest Gourmet",
+            "icon": "Weapon_A_Common_03",
+            "ja": "密林の食いしん坊",
+            "ko": "우림의 식객",
+            "rank": 3,
+            "sub": "Anomaly Proficiency",
+            "type": 3,
+            "zh": "雨林饕客"
+          }
+        },
+        "13004": {
+          "files": {
+            "data": {
+              "path": "w-engines/13004/data.json",
+              "sha256": "d7f58335aa7d46df4855f15c71c5717d97500eb96f0b5953cb3aa5c923d4280b"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13004/details.en.json",
+                "sha256": "fe3519478ad6899988cd5587f95133a7bcfe3c758888eeaaf67b340547efb4de"
+              },
+              "zh": {
+                "path": "w-engines/13004/details.zh.json",
+                "sha256": "66721d037d59db2edd6ffea426212ea27c6cc3ab117356a3bbe8fce0304bc513"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A damage-type W-Engine made of special Etheric matter. When its user is attacked, it builds up energy.",
+            "en": "Starlight Engine",
+            "icon": "Weapon_A_Common_04",
+            "ja": "スターライトエンジン",
+            "ko": "별빛 엔진",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "星徽引擎"
+          }
+        },
+        "13005": {
+          "files": {
+            "data": {
+              "path": "w-engines/13005/data.json",
+              "sha256": "df3e17ffac91ee2481ca28b50132cdf5f9447f919e204fd1e6cad61fa5a0b611"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13005/details.en.json",
+                "sha256": "730d6e0708b52f810db7aa4037d8383da90837b2b1df559556e1e2dc924b9ff3"
+              },
+              "zh": {
+                "path": "w-engines/13005/details.zh.json",
+                "sha256": "0eef324292cba51d5f2a2e31984fcec31c78f846db6f9528685bac9ddec1cb4a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A high-power W-Engine that boasts a cutting-edge energy conversion system. It collects excess heat and supplies it to the steamer.",
+            "en": "Steam Oven",
+            "icon": "Weapon_A_Common_05",
+            "ja": "まな板の鯉",
+            "ko": "스팀오븐",
+            "rank": 3,
+            "sub": "Energy Regen",
+            "type": 2,
+            "zh": "人为刀俎"
+          }
+        },
+        "13006": {
+          "files": {
+            "data": {
+              "path": "w-engines/13006/data.json",
+              "sha256": "3d0267341416630363cb6a8dc7ee592a60963a15639f5354c08a26f9e597b6de"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13006/details.en.json",
+                "sha256": "6fe82098e433388d55f3a0a9d20f1687eb322705b453214b1f7f78ae8cf1478e"
+              },
+              "zh": {
+                "path": "w-engines/13006/details.zh.json",
+                "sha256": "f7c6ab49fe4b785dc3002d4753b935353bd7723d6e863b58c71a8bd39334e3d2"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A special W-Engine whose outer shell is made of composite Etheric matter that effectively absorbs impact, and turns it against the enemy.",
+            "en": "Precious Fossilized Core",
+            "icon": "Weapon_A_Common_06",
+            "ja": "貴重な石化コア",
+            "ko": "귀중한 화석 코어",
+            "rank": 3,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "贵重骨核"
+          }
+        },
+        "13007": {
+          "files": {
+            "data": {
+              "path": "w-engines/13007/data.json",
+              "sha256": "a5eac38947f871269ca267c9b2673ffeed8c7778800af19085510081c7bac96e"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13007/details.en.json",
+                "sha256": "0e60b442ef0542b739cfa700ad82ddf08b031953de819a839f123698ed5f4378"
+              },
+              "zh": {
+                "path": "w-engines/13007/details.zh.json",
+                "sha256": "a005e0ced36c0cd4236900b57ece1a64c6b2b2157358ea25d4b8c79ecf1e94fe"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "An epic W-Engine favored by Starlight Knight fans. Its high popularity and scarcity marketing strategy have caused an influx of knock-offs.",
+            "en": "Original Transmorpher",
+            "icon": "Weapon_A_Common_07",
+            "ja": "正規版変身装置",
+            "ko": "오리지널 변신 아이템",
+            "rank": 3,
+            "sub": "HP",
+            "type": 5,
+            "zh": "正版变身器"
+          }
+        },
+        "13008": {
+          "files": {
+            "data": {
+              "path": "w-engines/13008/data.json",
+              "sha256": "fa34849286bfb3d721f119e4c94c470db42f91ed258a26b081a799796d4f3c02"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13008/details.en.json",
+                "sha256": "a64b0d62f2fd2bfd3645ea4c7beb151cce1a08df505be6d809ab9d65364c3a6b"
+              },
+              "zh": {
+                "path": "w-engines/13008/details.zh.json",
+                "sha256": "e4ef324178d6fe01bb25d2593636fae02912167829d6c5d084fc67ce57f6ca44"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A W-Engine produced by recycling abandoned Bangboo shells. Its electrode cores made of recycled metals can release high-voltage charges.",
+            "en": "Weeping Gemini",
+            "icon": "Weapon_A_Common_08",
+            "ja": "双生の涙",
+            "ko": "쌍둥이의 눈물",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 3,
+            "zh": "双生泣星"
+          }
+        },
+        "13009": {
+          "files": {
+            "data": {
+              "path": "w-engines/13009/data.json",
+              "sha256": "439b12fb5ebc05138f7ec0c9315618f63e2d7aec455e2ca42b28c8418b099d5a"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13009/details.en.json",
+                "sha256": "ac23b5dfd8a0148164c82fd0914e338e8170d6095935609c86d2ab4b135caa56"
+              },
+              "zh": {
+                "path": "w-engines/13009/details.zh.json",
+                "sha256": "f10ca03b328a136d77a58ae814fffeb5fa03b45c717933ccb2ec819cb8e8f1c3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "This damage-type W-Engine boasts a built-in current transformer, and automatically attracts electrically sensitive objects around the operator and deals additional damage to them.",
+            "en": "Electro-Lip Gloss",
+            "icon": "Weapon_A_Common_09",
+            "ja": "電撃リップグロス",
+            "ko": "감전 립글로스",
+            "rank": 3,
+            "sub": "Anomaly Proficiency",
+            "type": 3,
+            "zh": "触电唇彩"
+          }
+        },
+        "13010": {
+          "files": {
+            "data": {
+              "path": "w-engines/13010/data.json",
+              "sha256": "c731b4762feefffcd92f68ee6793a9e821f7c55d2304f8ce1b7d89af280bcf27"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13010/details.en.json",
+                "sha256": "43bff1ac5f9d9702e586bb634d803833610ab067edf1a88c0107c3fbc51738e3"
+              },
+              "zh": {
+                "path": "w-engines/13010/details.zh.json",
+                "sha256": "fa150937d81cd4db1b19fbb168afe95d2da309c4ed4b63bda78c81aad31ce569"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A special W-Engine decorated with a fluffy bunny. However, it is just an imitation of the real animal.",
+            "en": "Bunny Band",
+            "icon": "Weapon_A_Common_10",
+            "ja": "ラビットチャージャー",
+            "ko": "버니 밴드",
+            "rank": 3,
+            "sub": "DEF",
+            "type": 5,
+            "zh": "兔能环"
+          }
+        },
+        "13011": {
+          "files": {
+            "data": {
+              "path": "w-engines/13011/data.json",
+              "sha256": "8f8e26b660131019c80dcd07af6779ee5cce2d82754958d9faf5635649a179a0"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13011/details.en.json",
+                "sha256": "cab82139b93aa2660ea44313e2cee72f3b5428db1116c70ea0c6a45fcfca246d"
+              },
+              "zh": {
+                "path": "w-engines/13011/details.zh.json",
+                "sha256": "7a1f903fc6ae49c90a3db86ecd9883d017440f73742aee2e4f49bda239d898ca"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A special W-Engine equipped with a temperature regulator where residual heat generated by the W-Engine's high frequency is funneled into the hot springs on its surface.",
+            "en": "Spring Embrace",
+            "icon": "Weapon_A_Common_11",
+            "ja": "ホットスプリング",
+            "ko": "봄날의 포옹",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 5,
+            "zh": "春日融融"
+          }
+        },
+        "13012": {
+          "files": {
+            "data": {
+              "path": "w-engines/13012/data.json",
+              "sha256": "5bfa0f0e922ee7f3adacc7f016e5c72c08c5d22e2cd978f6ed04d4fb34690348"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13012/details.en.json",
+                "sha256": "be06ef59aab493828dd402c1f6fe065dfa3f60e228ff7d38dd3b92a9bdca2e27"
+              },
+              "zh": {
+                "path": "w-engines/13012/details.zh.json",
+                "sha256": "1fdc76bc0120ccc42a4b677bc4920c785d3f104fb6901689dc35da9d9a98e197"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "The W-Engine, with its bright colors and great performance, saw poor sales at first because it resembled a toy. But with its reasonable price, it slowly gained a positive reputation.",
+            "en": "Puzzle Sphere",
+            "icon": "Weapon_A_Common_12",
+            "ja": "魔法の立体パズル",
+            "ko": "기변의 큐브",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 6,
+            "zh": "幻变魔方"
+          }
+        },
+        "13013": {
+          "files": {
+            "data": {
+              "path": "w-engines/13013/data.json",
+              "sha256": "daf4b2c9ad1eb84d5322e4adf448739e812f8dc5f80be4ea4ef83700991ee6ee"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13013/details.en.json",
+                "sha256": "4b2a2a229f6bf479dfdc2498ff960f0c9b1057993a8c6291180c60fe625d89ef"
+              },
+              "zh": {
+                "path": "w-engines/13013/details.zh.json",
+                "sha256": "a6ec4b785fc168f041113a3103e9232a33bff8020e9ff31640ca8a79a33ccf45"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A W-Engine with a grandiose and luxurious appearance equipped with a premium Ether-powered anti-theft device. It's actually used to provide the equipper with energy.",
+            "en": "Gilded Blossom",
+            "icon": "Weapon_A_Common_13",
+            "ja": "金メッキの花信",
+            "ko": "도금된 화신풍",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "鎏金花信"
+          }
+        },
+        "13014": {
+          "files": {
+            "data": {
+              "path": "w-engines/13014/data.json",
+              "sha256": "5b72556606c2b1975105fc8883becb8ee3dd467a205e71020d22de782854d995"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13014/details.en.json",
+                "sha256": "7f69b7435a8b11e4cf3c3e10aebdffeb3f8e31d576c92c17fad1bfc4086d1fff"
+              },
+              "zh": {
+                "path": "w-engines/13014/details.zh.json",
+                "sha256": "e6216fff0271255b734a3cb06283083213359caccd6644ad7610b8019da475c5"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "Designed for those Hollow-dwelling bards who refuse to listen to the same albums repeatedly, this W-Engine comes equipped with a radio module that can transform Etheric frequencies into melodies.",
+            "en": "Radiowave Journey",
+            "icon": "Weapon_A_Common_14",
+            "ja": "エレクトロウォーク",
+            "ko": "일렉트로 워크",
+            "rank": 3,
+            "sub": "HP",
+            "type": 6,
+            "zh": "电波漫步"
+          }
+        },
+        "13015": {
+          "files": {
+            "data": {
+              "path": "w-engines/13015/data.json",
+              "sha256": "af4e40843a46d4557c73b02dfcdbbd290f9c21a5189a38ae0b7fc1c2a5bcb6a1"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13015/details.en.json",
+                "sha256": "26f543453f1155523bdbeefe90bf83e6eb13ec0f10f3af5034fc18aad27c2a31"
+              },
+              "zh": {
+                "path": "w-engines/13015/details.zh.json",
+                "sha256": "b3ce06c2d6d5e2784fe6ede6cd6b4781142bb4585356ec2fee5609ef1d7cd70c"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "Gather 'round, mortals! Turn up the music!",
+            "en": "Marcato Desire",
+            "icon": "Weapon_A_Common_15",
+            "ja": "強音デザイア",
+            "ko": "열망의 악센트",
+            "rank": 3,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "强音热望"
+          }
+        },
+        "13016": {
+          "files": {
+            "data": {
+              "path": "w-engines/13016/data.json",
+              "sha256": "579db2190e31ee671bd059b4150db9773ee49e0f0d06aa5c2e75b173b509d845"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13016/details.en.json",
+                "sha256": "f7f1c02232f1160723925dc344414ece21fd4970cd5cbcd574dcc97dc5d9b5af"
+              },
+              "zh": {
+                "path": "w-engines/13016/details.zh.json",
+                "sha256": "a3b2ef0f4a3f9b1a07017cfa6eb012d152a545c9a728fb1424d5d936c8ccde26"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "Clearly a W-Engine is for sound, and not images. What kind of lunatic genius would insist on stuffing a 16mm film camera into a W-Engine?",
+            "en": "Reel Projector",
+            "icon": "Weapon_A_Common_16",
+            "ja": "光と影のカット",
+            "ko": "조명을 새기는 칼",
+            "rank": 3,
+            "sub": "Impact",
+            "type": 5,
+            "zh": "光影刻刀"
+          }
+        },
+        "13018": {
+          "files": {
+            "data": {
+              "path": "w-engines/13018/data.json",
+              "sha256": "0295b5634914d2f2ad120bfe2925a090af4bb210a9ee95ced50532edd2bad7b1"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13018/details.en.json",
+                "sha256": "968c253e38208c9231e03a11ee504efae0a1b55bb44789d15529f4bb06b6c6b4"
+              },
+              "zh": {
+                "path": "w-engines/13018/details.zh.json",
+                "sha256": "618f42c0fa44cbdd25a2a3b461fbd6f6eedab2f5876430ea7468a242ed8a6a60"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "Pick it up and play another thunk-thud concerto!",
+            "en": "Boisterous Echoes",
+            "icon": "Weapon_A_Common_18",
+            "ja": "ドンカツエコー",
+            "ko": "둥둥 메아리",
+            "rank": 3,
+            "sub": "Anomaly Proficiency",
+            "type": 3,
+            "zh": "咚哒回声"
+          }
+        },
+        "13019": {
+          "files": {
+            "data": {
+              "path": "w-engines/13019/data.json",
+              "sha256": "c01300b751266c6481f8d2a53eeb644f1c3e0f2520abc87cbd6ea1c3f274f753"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13019/details.en.json",
+                "sha256": "dc5a9a34e006e8f648c3ce35f1998b5b1130e2946beb4ad0006121729c9bde81"
+              },
+              "zh": {
+                "path": "w-engines/13019/details.zh.json",
+                "sha256": "3b27e4f46dc354b6193d1b4bd32719fac8750b1ee10f50aac2dce6769976729a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "Countless threads of Sword Will echo through this tiny stretch of sky.",
+            "en": "Cauldron of Clarity",
+            "icon": "Weapon_A_Common_19",
+            "ja": "蒼き波の霊器",
+            "ko": "푸른 물결의 솥",
+            "rank": 3,
+            "sub": "HP",
+            "type": 6,
+            "zh": "青漪灵鼎"
+          }
+        },
+        "13020": {
+          "files": {
+            "data": {
+              "path": "w-engines/13020/data.json",
+              "sha256": "bd0d59663ad0026f5f4e5ed9d8630bbe8ad56f7a593b40283c20411f31e8a0c6"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13020/details.en.json",
+                "sha256": "81a4eaa49e23b0c6ee0ebd9d4f0bea865ca7108b0f49ab39a1cadb3038d5ae9f"
+              },
+              "zh": {
+                "path": "w-engines/13020/details.zh.json",
+                "sha256": "933e3167ba9b5530d0af20bbef77891d4321ca93980c2718f22746cc80e997ae"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "Whoa, that's hot! Seriously hot! But it's so good!",
+            "en": "The Simmering Pot",
+            "icon": "Weapon_A_Common_20",
+            "ja": "炎々沸々鍋一丁",
+            "ko": "들끓는 가마솥",
+            "rank": 3,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "炎炙沸釜"
+          }
+        },
+        "13101": {
+          "files": {
+            "data": {
+              "path": "w-engines/13101/data.json",
+              "sha256": "42130b05be3ec40a477c345d6b681f9801ec0f813faf25bf9d4e34551102af9a"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13101/details.en.json",
+                "sha256": "fd2bcc1013455f4526b6fbc0707e4670b97523feb693194b4407dc3b479a2dfb"
+              },
+              "zh": {
+                "path": "w-engines/13101/details.zh.json",
+                "sha256": "d8d51abe735ce93beea91caa9c441517ed48e904507268e95c17c358a7adb157"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "A customized W-Engine that focuses on energy storage, modified to improve its energy capacity. This model is often used by Anby.",
+            "en": "Demara Battery Mark II",
+            "icon": "Weapon_A_1011",
+            "ja": "デマラ式電池Ⅱ型",
+            "ko": "데마라 배터리 Ⅱ형",
+            "rank": 3,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "德玛拉电池Ⅱ型"
+          }
+        },
+        "13103": {
+          "files": {
+            "data": {
+              "path": "w-engines/13103/data.json",
+              "sha256": "fdcd122b23441b4ecf28b520e5830ec3e58b61cc1fa4cf2397a15eaa5d396be3"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13103/details.en.json",
+                "sha256": "43ddfa121ec6248b15edd688f49627d08e8b2d687ef0b17d27f212c04f3b5ad9"
+              },
+              "zh": {
+                "path": "w-engines/13103/details.zh.json",
+                "sha256": "bf2b958f4e77151cb7d84641ca65a0caed5b4eabfd376b23f6180838e341a156"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "A cost-effective W-Engine that can store energy, with improvements made to its internal space. This model is often used by Nicole.",
+            "en": "The Vault",
+            "icon": "Weapon_A_1031",
+            "ja": "ザ・ボールト",
+            "ko": "보물함",
+            "rank": 3,
+            "sub": "Energy Regen",
+            "type": 4,
+            "zh": "聚宝箱"
+          }
+        },
+        "13106": {
+          "files": {
+            "data": {
+              "path": "w-engines/13106/data.json",
+              "sha256": "b91ab71310cc58da396f7b1301613bcb95ff6a6ffd32c31d208d6d71fae3b722"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13106/details.en.json",
+                "sha256": "8a73071bd940c03d826d21d75a27e2f2be3d8cfb2c3846d200bc2afe5db2370e"
+              },
+              "zh": {
+                "path": "w-engines/13106/details.zh.json",
+                "sha256": "245041a7d461871ad49477a8f0956f99847409424135ed34f7b712616ed9818d"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "An enhanced W-Engine with a high rotation speed. A chainsaw has been integrated into its shaft. This model is often used by Corin.",
+            "en": "Housekeeper",
+            "icon": "Weapon_A_1061",
+            "ja": "ハウスキーパー",
+            "ko": "하우스키퍼",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "家政员"
+          }
+        },
+        "13108": {
+          "files": {
+            "data": {
+              "path": "w-engines/13108/data.json",
+              "sha256": "e5d8eb8e7c946d1d974a6e3ff9da2713934bf3c7734414037706eb569ddc44c7"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13108/details.en.json",
+                "sha256": "3fda505614498a7957610208ab5d20abe9344919ab4de69eab52939f68f96f32"
+              },
+              "zh": {
+                "path": "w-engines/13108/details.zh.json",
+                "sha256": "0b1d7e8c0cd4b547b97c4c2762ba4fa4c47f3d1e131623442100e4fdf9448df8"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "A customized supercomputing W-Engine, specialized in aim support and ballistic calculations. Modified by Billy, it now looks like some sort of knock-off Starlight Knight figurine.",
+            "en": "Starlight Engine Replica",
+            "icon": "Weapon_A_1081",
+            "ja": "なんちゃってスターライトエンジン",
+            "ko": "별빛 엔진 레플리카",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "仿制星徽引擎"
+          }
+        },
+        "13111": {
+          "files": {
+            "data": {
+              "path": "w-engines/13111/data.json",
+              "sha256": "f15b78db778f650eadc03281d0408aba6b6a4bba603c2d8db304a129a2d757b6"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13111/details.en.json",
+                "sha256": "d96b881d8c95e80de8876834442e35c40205f4f4289e2af39de8688454bc43b2"
+              },
+              "zh": {
+                "path": "w-engines/13111/details.zh.json",
+                "sha256": "9e64b712f1b2e306e6083aa3bf2507b52396e83c6328df6118049db2fe2c1d43"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "Originally a rev-enhanced W-Engine, it has been modified by Anton with the most expensive rotary drill parts that allow it to exceed its output limits.",
+            "en": "Drill Rig - Red Axis",
+            "icon": "Weapon_A_1111",
+            "ja": "ドリルリグ-レッドシャフト",
+            "ko": "굴착기-붉은 축",
+            "rank": 3,
+            "sub": "Energy Regen",
+            "type": 1,
+            "zh": "旋钻机-赤轴"
+          }
+        },
+        "13112": {
+          "files": {
+            "data": {
+              "path": "w-engines/13112/data.json",
+              "sha256": "02b75fdf95964b9b6bdd85281415c23b98dd3778fcb27b363b76ef6b49582043"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13112/details.en.json",
+                "sha256": "6e1f0fb30b224d379061b163fccad5eb7512750890b6b6db1bde8a7b7f6a4121"
+              },
+              "zh": {
+                "path": "w-engines/13112/details.zh.json",
+                "sha256": "86a2ce694134ea780dcfe2181938f1bc91dbe7af70a653cbc78fc994875c3201"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "A powerful protection-type W-Engine, characterized by thick oil cylinders that ceaselessly roar inside it. It can provide sufficient power for heavy machinery.",
+            "en": "Big Cylinder",
+            "icon": "Weapon_A_1121",
+            "ja": "ビガー・シリンダー",
+            "ko": "빅 실린더",
+            "rank": 3,
+            "sub": "DEF",
+            "type": 5,
+            "zh": "比格气缸"
+          }
+        },
+        "13113": {
+          "files": {
+            "data": {
+              "path": "w-engines/13113/data.json",
+              "sha256": "2043bc88b6e1bff8aa596cfe7d6765d514bcdd599efcd67436665676ecb0a9a1"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13113/details.en.json",
+                "sha256": "4866cfa182bae725add773d8ffb79472b374b211d5f5da1885f8f438a553a441"
+              },
+              "zh": {
+                "path": "w-engines/13113/details.zh.json",
+                "sha256": "f64876b3e04b30145641f09eec102ba7818a873efb790a9da8346aa503979962"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "An intricate W-Engine developed by Section 6 and later modified with extra features. It can control Ether particles to form an energy field. This model is favored by Soukaku.",
+            "en": "Bashful Demon",
+            "icon": "Weapon_A_1131",
+            "ja": "恥じらう悪面",
+            "ko": "수줍은 악마",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 4,
+            "zh": "含羞恶面"
+          }
+        },
+        "13115": {
+          "files": {
+            "data": {
+              "path": "w-engines/13115/data.json",
+              "sha256": "3d4a773643b98a546ea5d18ebce04280d9e9b9a762fd64b7d91936763c7fe4c4"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13115/details.en.json",
+                "sha256": "1342e682dff300d5c6e0a3dd01a93c176eb0f0a3b74bc0e96410338fdab7367e"
+              },
+              "zh": {
+                "path": "w-engines/13115/details.zh.json",
+                "sha256": "06fce85272a52c851ea576b17383c3de39f9878d871260a1b8c4ef495af27f25"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "A support W-Engine propelled by jets that is both mobile and impactful, it can traverse the entire battlefield providing combat buffs.",
+            "en": "Kaboom the Cannon",
+            "icon": "Weapon_A_1151",
+            "ja": "喧嘩腰のボンバルダム",
+            "ko": "호전적인 꽝꽝이",
+            "rank": 3,
+            "sub": "Energy Regen",
+            "type": 4,
+            "zh": "好斗的阿炮"
+          }
+        },
+        "13127": {
+          "files": {
+            "data": {
+              "path": "w-engines/13127/data.json",
+              "sha256": "b7d6c6789dbc758eafd08aecf8165dd0320fe3540348b49128ea0d5625f65881"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13127/details.en.json",
+                "sha256": "6924420f40f2d9b8d1f8ee914cf7a1efc1e24fb1720e067897782efb0339c480"
+              },
+              "zh": {
+                "path": "w-engines/13127/details.zh.json",
+                "sha256": "6ede50ba4109867976d76b4dbce456a11f346ea42873c26c1dcdadbc122eacd3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "A defensive W-Engine independently researched and created by Public Security which simplifies the offensive components to enhance the energy conversion ability in its shield. ",
+            "en": "Peacekeeper - Specialized",
+            "icon": "Weapon_A_1271",
+            "ja": "秩序の守り手・特化型",
+            "ko": "평화 수호자-특화형",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 5,
+            "zh": "维序者-特化型"
+          }
+        },
+        "13128": {
+          "files": {
+            "data": {
+              "path": "w-engines/13128/data.json",
+              "sha256": "f8a9a944e218b5cb2c1c028b4658eecbf602d3cb3f5a2e45735f936cff1599fc"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13128/details.en.json",
+                "sha256": "8c633565cb2cf551aa25b581781ac574c7785f443c940ada0c4cdcd3be36ad6f"
+              },
+              "zh": {
+                "path": "w-engines/13128/details.zh.json",
+                "sha256": "370e1fd41e846feaf5a1fbc6575bb7a363a4d39c6f6c4c1f2d2a1df8fda38ecd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "An energy W-Engine modded from spare parts of a truck's engine. It converts the original cylinder into an energy storage unit, which is highly advantageous.",
+            "en": "Roaring Ride",
+            "icon": "Weapon_A_1281",
+            "ja": "グロウル・マイ・カー",
+            "ko": "뛰뛰빵빵",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 3,
+            "zh": "轰鸣座驾"
+          }
+        },
+        "13135": {
+          "files": {
+            "data": {
+              "path": "w-engines/13135/data.json",
+              "sha256": "777bb271e271fc324af65b6a6addf888c2d1e3b803c6036c4da54deb77ac34dc"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13135/details.en.json",
+                "sha256": "e5352ce41fbdd6acaab77c11ec122efd2c0427bc8cdebe46c756e2b07d9d58a4"
+              },
+              "zh": {
+                "path": "w-engines/13135/details.zh.json",
+                "sha256": "71c3e4f1f629d47e6f4e3d49970127d97b72155bca327018ccb3b032d9b989da"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "An energy W-Engine modded from spare parts of a truck's engine. It converts the original cylinder into an energy storage unit, which is highly advantageous.",
+            "en": "Box Cutter",
+            "icon": "Weapon_A_1351",
+            "ja": "ペーパーカッター",
+            "ko": "커터칼",
+            "rank": 3,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "裁纸刀"
+          }
+        },
+        "13142": {
+          "files": {
+            "data": {
+              "path": "w-engines/13142/data.json",
+              "sha256": "58fcf0a63700d649ac697645a78bbc6c5dbd178a22d8c25572214fd7ad86cf52"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13142/details.en.json",
+                "sha256": "ee9a55f253d5cef8064459e10e240277b2339ac97fa33cfda3a27ba1d78eebe7"
+              },
+              "zh": {
+                "path": "w-engines/13142/details.zh.json",
+                "sha256": "7837af97909f5cfff14bd383a51f7a077026eface275a3f1577ae9c0a08db041"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "Pressing acupoints is like cooking. Striking the fatal acupoint is like setting the stove on fire, bringing disaster.",
+            "en": "Tremor Trigram Vessel",
+            "icon": "Weapon_A_1421",
+            "ja": "雷鳴が如き八卦",
+            "ko": "진괘를 담은 함",
+            "rank": 3,
+            "sub": "ATK",
+            "type": 5,
+            "zh": "震元奇枢"
+          }
+        },
+        "13144": {
+          "files": {
+            "data": {
+              "path": "w-engines/13144/data.json",
+              "sha256": "c359a3e6f498c568eb185e393d7a6f7b0f3cabee2500d961183d903e09aa52bb"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/13144/details.en.json",
+                "sha256": "6afc74ec728eaa3f65bd995278b430acfeb8c0cb3f5ff5c200a451da627fdb24"
+              },
+              "zh": {
+                "path": "w-engines/13144/details.zh.json",
+                "sha256": "9e8bf40a8de3e9867e3f149ce866a35a21c663801b467b1a0d0f0edcda16a942"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 624,
+            "desc": "A flame both fierce and faithful, burning without end.",
+            "en": "Grill O'Wisp",
+            "icon": "Weapon_A_1441",
+            "ja": "燔火の朧夜",
+            "ko": "어스름한 밤의 화염",
+            "rank": 3,
+            "sub": "HP",
+            "type": 6,
+            "zh": "燔火胧夜"
+          }
+        },
+        "14001": {
+          "files": {
+            "data": {
+              "path": "w-engines/14001/data.json",
+              "sha256": "8be17ae931c3ea3faffd132d861935032302ec5f83ab905c8ceefd91010edb99"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14001/details.en.json",
+                "sha256": "02aa6dfca516447e44b4efb256662fed97f1f39c0be0dad6f2f7a6b538b5f169"
+              },
+              "zh": {
+                "path": "w-engines/14001/details.zh.json",
+                "sha256": "e4ccbd28edd40413c974cbb05b520ac284b0c0006bd62529e8d7409b05cd95ea"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A high-performance supercomputing W-Engine, capable of collecting real-time battlefield data and equipped with mini cannons.",
+            "en": "Cannon Rotor",
+            "icon": "Weapon_S_Common_01",
+            "ja": "キャノンローラー",
+            "ko": "캐논 로터",
+            "rank": 3,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "加农转子"
+          }
+        },
+        "14002": {
+          "files": {
+            "data": {
+              "path": "w-engines/14002/data.json",
+              "sha256": "f3d7c24212e45dc3c1ed28172feebd0185ad03e080bebc92af8a74dcfeb7f3f8"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14002/details.en.json",
+                "sha256": "b1f4f3320aeef3d3b3113dc8aae8ed8cc3092490a3c6755d64f814dcbbe2de99"
+              },
+              "zh": {
+                "path": "w-engines/14002/details.zh.json",
+                "sha256": "64b0da5cf21fcd02c4b179a19cdfee45e248663f60e9c20d0a1bb9aef97cc9f6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A new supercomputing W-Engine, featuring cutting-edge integrated chips that dynamically monitor the battlefield and provide tactical analysis for the user.",
+            "en": "Unfettered Game Ball",
+            "icon": "Weapon_S_Common_02",
+            "ja": "ゲームボール",
+            "ko": "내 맘대로 게임 볼",
+            "rank": 3,
+            "sub": "Energy Regen",
+            "type": 4,
+            "zh": "逍遥游球"
+          }
+        },
+        "14003": {
+          "files": {
+            "data": {
+              "path": "w-engines/14003/data.json",
+              "sha256": "ab373f906467284381b46130fc7798082106ef0bc305e1e4ff13a588441652fc"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14003/details.en.json",
+                "sha256": "3798da313cf2fe12928900c5eb3b0512bb867cf8eea9cab0beb5afc771bdc1a9"
+              },
+              "zh": {
+                "path": "w-engines/14003/details.zh.json",
+                "sha256": "72049744c5cfe643bff5ed1921ced8ad548d52156429b85b0d90b243350b4f05"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 594,
+            "desc": "A special W-Engine modeled after a revolver. It can load bullet-shaped condensed Ether batteries, which release a great amount of power when fired.",
+            "en": "Six Shooter",
+            "icon": "Weapon_S_Common_03",
+            "ja": "シックスシューター",
+            "ko": "리볼버 로터",
+            "rank": 3,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "左轮转子"
+          }
+        },
+        "14102": {
+          "files": {
+            "data": {
+              "path": "w-engines/14102/data.json",
+              "sha256": "9a2975fc79eb552d132dbd107d4b977ba7a6384939ef81d541fbd31781cbce6b"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14102/details.en.json",
+                "sha256": "219db24a13a7a378ba94c00659ea14a3f219f022165e003cc1f658de5ff1ec68"
+              },
+              "zh": {
+                "path": "w-engines/14102/details.zh.json",
+                "sha256": "072bf35525d94f0e17244527ff0f9f823e32204bfa40d8aa6e7ee5870473ce06"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 684,
+            "desc": "A supercomputing W-Engine equipped with a motion monitoring feature. Thanks to Nekomata's modifications, it perfectly matches the fast reflexes and combat maneuvers of feline Thirens.",
+            "en": "Steel Cushion",
+            "icon": "Weapon_S_1021",
+            "ja": "鋼の肉球",
+            "ko": "스틸 쿠션",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "钢铁肉垫"
+          }
+        },
+        "14104": {
+          "files": {
+            "data": {
+              "path": "w-engines/14104/data.json",
+              "sha256": "9026131a5ba89f30b814b1d5e66fc92a51f426eb3acbbf47c1b300a96fba0271"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14104/details.en.json",
+                "sha256": "836faff84a9ef735cb2e3875551b1039d83cef0dff9157953af8a0a59f82142a"
+              },
+              "zh": {
+                "path": "w-engines/14104/details.zh.json",
+                "sha256": "cd15ad087535594745f8627f77e3470791d613416414dc8b1d194148bb3a3b4e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 684,
+            "desc": "A W-Engine made for Soldier 11 by Obsidian Division. Its intense heat can be used to clear the entire battlefield.",
+            "en": "The Brimstone",
+            "icon": "Weapon_S_1041",
+            "ja": "ブリムストーン",
+            "ko": "유황석",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "硫磺石"
+          }
+        },
+        "14105": {
+          "files": {
+            "data": {
+              "path": "w-engines/14105/data.json",
+              "sha256": "6f79fac76041c5dd8b83279e952d707502003082c464cd5b2ec8b8e43ef563fd"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14105/details.en.json",
+                "sha256": "3c1e5a8719ba132a926294836239f85dc912679d23f48d475b999a51ab1a3c02"
+              },
+              "zh": {
+                "path": "w-engines/14105/details.zh.json",
+                "sha256": "ffdabf22615fa8d765ce357c4fce70a5be6220c1e11b3eaaa2ab4c7129f66ae8"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "In chasing illusions, she was entranced by the light that pierced through the mist.",
+            "en": "Kraken's Cradle",
+            "icon": "Weapon_S_1051",
+            "ja": "セイレーンクレードル",
+            "ko": "크라켄의 요람",
+            "rank": 4,
+            "sub": "HP",
+            "type": 6,
+            "zh": "海妖摇篮"
+          }
+        },
+        "14107": {
+          "files": {
+            "data": {
+              "path": "w-engines/14107/data.json",
+              "sha256": "e99b58aa51d17e033063ccd130195d8a755c03ffec29e8d162ae2b6a3e28d968"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14107/details.en.json",
+                "sha256": "983f64664e432318d1862393bf56050bd10b03431418f5c46126518ca39561b7"
+              },
+              "zh": {
+                "path": "w-engines/14107/details.zh.json",
+                "sha256": "ec2b8af655f5b4e6dfcc27f47dda07b2f8014e8fe73a465108227b80697b7f4f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A versatile W-Engine based on a motorcycle tire that Big Daddy made for Caesar.",
+            "en": "Tusks of Fury",
+            "icon": "Weapon_S_1071",
+            "ja": "猛進するキバ",
+            "ko": "저돌적인 송곳니",
+            "rank": 4,
+            "sub": "Impact",
+            "type": 5,
+            "zh": "奔袭獠牙"
+          }
+        },
+        "14109": {
+          "files": {
+            "data": {
+              "path": "w-engines/14109/data.json",
+              "sha256": "2cb595e69eef61c0dbb7f186718538019089373a37e5e1450b3206534f86d545"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14109/details.en.json",
+                "sha256": "1b7e333f743ff6abedaf55e862f340f3e06887319c19918bc67ba03dda9d8d80"
+              },
+              "zh": {
+                "path": "w-engines/14109/details.zh.json",
+                "sha256": "4fb743257afd9df48526314b9d90cc36e9286c71cccfee79c420bdf5cd25d1e4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 743,
+            "desc": "Hail falls before the shrine, waking her. The blizzard is coming.",
+            "en": "Hailstorm Shrine",
+            "icon": "Weapon_S_1091",
+            "ja": "あられ落つ星殿",
+            "ko": "싸락눈 내린 별각",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 3,
+            "zh": "霰落星殿"
+          }
+        },
+        "14110": {
+          "files": {
+            "data": {
+              "path": "w-engines/14110/data.json",
+              "sha256": "60317bf9ee11f8627e1db12fdfb76f3a76a86570e64b0f12023e5dd287d54f3d"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14110/details.en.json",
+                "sha256": "6f5903d06d0a7a2ee2ea6b149d29e7490c1471142f8b88e12f3e264f7c571e39"
+              },
+              "zh": {
+                "path": "w-engines/14110/details.zh.json",
+                "sha256": "ff9ccb3fa3763e4d5ddd7b828574c14f55dfca722acd8d03a7f778ea7bcdca8b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 684,
+            "desc": "A functional W-Engine with ultra-high power capacity. Modified by Koleda, its energy level has almost exceeded the safety limit.",
+            "en": "Hellfire Gears",
+            "icon": "Weapon_S_1101",
+            "ja": "燃獄ギア",
+            "ko": "헬파이어 기어",
+            "rank": 4,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "燃狱齿轮"
+          }
+        },
+        "14114": {
+          "files": {
+            "data": {
+              "path": "w-engines/14114/data.json",
+              "sha256": "df7b6c9e4ced4a468306ddbbc58e3370506d53d64362113459d6207d6def995b"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14114/details.en.json",
+                "sha256": "a26020c14798ba07b061e7050f8dd65d95833d3da8bc49ef3015d2bd6f283d8c"
+              },
+              "zh": {
+                "path": "w-engines/14114/details.zh.json",
+                "sha256": "477d278159a7473afdaaadcced62eea6e95c74c7ad6ea2e0b6140395ca10621f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 684,
+            "desc": "A special W-Engine with a powerful temperature control system. Modified by Lycaon, it has the capability to quickly create extremely cold environments.",
+            "en": "The Restrained",
+            "icon": "Weapon_S_1141",
+            "ja": "拘縛されし者",
+            "ko": "구속된 자",
+            "rank": 4,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "拘缚者"
+          }
+        },
+        "14116": {
+          "files": {
+            "data": {
+              "path": "w-engines/14116/data.json",
+              "sha256": "4216038449cab15419f59488a1235b273837e446129b10877ceaffe261b23f70"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14116/details.en.json",
+                "sha256": "25cf01fce238107474bfd8c229f53b0b83ecb6d7a616e166e16882beb9992b6f"
+              },
+              "zh": {
+                "path": "w-engines/14116/details.zh.json",
+                "sha256": "0b2ae556d5d4547007bbc24f0b2f6a1eaf5623b7fde691b070fd3f03099fc21a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A violent W-Engine that can ignite flames with a siphon. It deals simple and crude burn damage, encouraging relentless, bone-crushing follow-up attacks.",
+            "en": "Blazing Laurel",
+            "icon": "Weapon_S_1161",
+            "ja": "炎心の桂冠",
+            "ko": "화염의 월계관",
+            "rank": 4,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "焰心桂冠"
+          }
+        },
+        "14117": {
+          "files": {
+            "data": {
+              "path": "w-engines/14117/data.json",
+              "sha256": "36bc0312c50d2bd413a3fb72b8f8d832435a027c7b1c93d0f153c5e978067f22"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14117/details.en.json",
+                "sha256": "7e59f6c7e0106f7dca086902a16e3a95662359442332b22043f55b932fe01987"
+              },
+              "zh": {
+                "path": "w-engines/14117/details.zh.json",
+                "sha256": "94bbddbe3344be28498493520e2dc78e1f2772498397ab7d42256bfc2c465d3e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Modified by Burnice, this W-Engine uses a special fuel as its power source to boost combustion performance to the max.",
+            "en": "Flamemaker Shaker",
+            "icon": "Weapon_S_1171",
+            "ja": "バーニング・シェイカー",
+            "ko": "타오르는 셰이커",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 3,
+            "zh": "灼心摇壶"
+          }
+        },
+        "14118": {
+          "files": {
+            "data": {
+              "path": "w-engines/14118/data.json",
+              "sha256": "fa56f4e6c29d774baa3de429eee30cc55ffadfd2ca1057fca97ed0dbb0285c3b"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14118/details.en.json",
+                "sha256": "2a11f9cb56760d73af95ef093041d4f30a03ad145273c5cfe988df74716c37ae"
+              },
+              "zh": {
+                "path": "w-engines/14118/details.zh.json",
+                "sha256": "d712018704c4a6c61026c705c7a4c40dbec8698e628b4b50fe6ad05573e5c3c9"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 684,
+            "desc": "The latest W-Engine that possesses a hypercalculation core. It can compile operational codes for machines at top speed. This model is favored by Grace.",
+            "en": "Fusion Compiler",
+            "icon": "Weapon_S_1181",
+            "ja": "複合コンパイラ",
+            "ko": "감입 컴파일러",
+            "rank": 4,
+            "sub": "PEN Ratio",
+            "type": 3,
+            "zh": "嵌合编译器"
+          }
+        },
+        "14119": {
+          "files": {
+            "data": {
+              "path": "w-engines/14119/data.json",
+              "sha256": "0ed4cd80ae1c28fa5b9927d353b44bb4eefb40720dd37e44288d3621469e9de6"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14119/details.en.json",
+                "sha256": "a61262846192746b183afd63b17ea5b70916eab45ba9b5c31c68acd08ead9949"
+              },
+              "zh": {
+                "path": "w-engines/14119/details.zh.json",
+                "sha256": "de74ddb9899283c0b67199b006faeafa4ebaabc2d470ea7f091cfd41d9451412"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A high-power W-Engine that possesses efficient freezing capabilities and high damage output. This model is often used by Ellen.",
+            "en": "Deep Sea Visitor",
+            "icon": "Weapon_S_1191",
+            "ja": "ディープシー・ビジター",
+            "ko": "심해 방문객",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "深海访客"
+          }
+        },
+        "14120": {
+          "files": {
+            "data": {
+              "path": "w-engines/14120/data.json",
+              "sha256": "01733498f26729ab463ba07240b066b3935c7ebaf79979a793b95b7e4d82e39f"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14120/details.en.json",
+                "sha256": "a621dac9d95ae6629d0d93efc4b0b634d547e5ce544d4d023a5e715ca5732ee0"
+              },
+              "zh": {
+                "path": "w-engines/14120/details.zh.json",
+                "sha256": "868230378184a1a4d864d284fffdfe0316ab86b1f43aa14e0dfb61609b22f3f1"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Bitterness and pain beget hope, and he devours them all.",
+            "en": "Zanshin Herb Case",
+            "icon": "Weapon_S_1201",
+            "ja": "残心の青籠",
+            "ko": "잔심의 청낭",
+            "rank": 4,
+            "sub": "CRIT DMG",
+            "type": 1,
+            "zh": "残心青囊"
+          }
+        },
+        "14121": {
+          "files": {
+            "data": {
+              "path": "w-engines/14121/data.json",
+              "sha256": "9b35a9a9788517fe34f064ea6649586264ec5589a3d297733084610d87cc18a8"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14121/details.en.json",
+                "sha256": "c9f3935dbed543f6d24256addc57308eaaf46011d799f44ccddddfe3da2eb33b"
+              },
+              "zh": {
+                "path": "w-engines/14121/details.zh.json",
+                "sha256": "1ba0d52482bf316cf987ac17999bc6a0510fc90153e930664656286078daa4dd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 684,
+            "desc": "A special W-Engine with multiple layers embedded inside. It can quickly recharge \tspecial-model Bangboo and custom-made combat equipment. This model is favored by Rina.",
+            "en": "Weeping Cradle",
+            "icon": "Weapon_S_1211",
+            "ja": "啜り泣くゆりかご",
+            "ko": "흐느끼는 요람",
+            "rank": 4,
+            "sub": "PEN Ratio",
+            "type": 4,
+            "zh": "啜泣摇篮"
+          }
+        },
+        "14122": {
+          "files": {
+            "data": {
+              "path": "w-engines/14122/data.json",
+              "sha256": "4168a7a29923ba706d2e6214558ba03bc1a529873c0cb5a27305874811bcb33c"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14122/details.en.json",
+                "sha256": "db7fc4718757082bbbae05e85730f4717ed1cca80474e55791e39dc5d4c10758"
+              },
+              "zh": {
+                "path": "w-engines/14122/details.zh.json",
+                "sha256": "8f3682116a702c46a181be792bb0dde6945c9df989f16db1b1a115d486fce6a1"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A new model of supercomputing W-Engine custom-made by HSO Section 6, equipped with the most elite calculation and analysis functions.",
+            "en": "Timeweaver",
+            "icon": "Weapon_S_1221",
+            "ja": "刻流の賢者",
+            "ko": "시류의 현자",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 3,
+            "zh": "时流贤者"
+          }
+        },
+        "14124": {
+          "files": {
+            "data": {
+              "path": "w-engines/14124/data.json",
+              "sha256": "563dfe3c598aec18c4f9b99f8d0995a09549e93cb314a4ea67c0da665bc20fa1"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14124/details.en.json",
+                "sha256": "595abea5770392abb001b49bba77aa78901f898dd7fa908901c5d228618d68d1"
+              },
+              "zh": {
+                "path": "w-engines/14124/details.zh.json",
+                "sha256": "4988267a98c0787791cbf34d48647b52644fc6052238f7a49c6dba556bd82c5c"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "The latest tactical W-Engine used by Public Security's elite Hollow squads, possessing a powerful Ether energy source. It's Zhu Yuan's favored model.",
+            "en": "Riot Suppressor Mark VI",
+            "icon": "Weapon_S_1241",
+            "ja": "サプレッサーⅥ型",
+            "ko": "서프레서 Ⅵ형",
+            "rank": 4,
+            "sub": "CRIT DMG",
+            "type": 1,
+            "zh": "防暴者Ⅵ型"
+          }
+        },
+        "14125": {
+          "files": {
+            "data": {
+              "path": "w-engines/14125/data.json",
+              "sha256": "9fc64f9422e9c3b0fbf0a1ec910096f59df884719a14030b63482cd84e4b6315"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14125/details.en.json",
+                "sha256": "3a372835b856c37e4534be9f9ab82556b59066dafea477eb41937fca5220d04a"
+              },
+              "zh": {
+                "path": "w-engines/14125/details.zh.json",
+                "sha256": "428ba7f98360c8c9094c3b79827d093798e2058ce793667346433447e82f8130"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A custom stun W-Engine made for an Automaton referencing the combat style and abilities of one. Energy is stored within, then lashes outwards upon conversion.",
+            "en": "Ice-Jade Teapot",
+            "icon": "Weapon_S_1251",
+            "ja": "玉壺青氷",
+            "ko": "맑은 옥주전자",
+            "rank": 4,
+            "sub": "Impact",
+            "type": 2,
+            "zh": "玉壶青冰"
+          }
+        },
+        "14126": {
+          "files": {
+            "data": {
+              "path": "w-engines/14126/data.json",
+              "sha256": "1f12c80ece768470a13772dfb781387218a0237045e102e55da821cbf52a33e3"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14126/details.en.json",
+                "sha256": "661ca852f93cd609ac5513c8feb0564d2963e7aef672234e25fa503578d9e64b"
+              },
+              "zh": {
+                "path": "w-engines/14126/details.zh.json",
+                "sha256": "991b4400b31af5b97de752b59bc681e50b8b35510ec4dd0d78b156da33966327"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A deadly W-Engine from unknown sources, modified personally by Jane Doe with the intent to deal severe physical damage and Anomaly.",
+            "en": "Sharpened Stinger",
+            "icon": "Weapon_S_1261",
+            "ja": "磨き抜かれた切っ先",
+            "ko": "예리한 집게칼",
+            "rank": 4,
+            "sub": "Anomaly Proficiency",
+            "type": 3,
+            "zh": "淬锋钳刺"
+          }
+        },
+        "14129": {
+          "files": {
+            "data": {
+              "path": "w-engines/14129/data.json",
+              "sha256": "28c6feec85711c0cf85f75ed773b7dbf6f45bc75b719e61f380e6ca0fc11fa32"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14129/details.en.json",
+                "sha256": "a59f7db86dd7b9e0f4cbee2424a1e8b96702cf762d89438018f4623a4a979046"
+              },
+              "zh": {
+                "path": "w-engines/14129/details.zh.json",
+                "sha256": "8884f4df64dc76eeec448954a70fa3185751e08c445afcf287506e3f9b968ac9"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Shadowed by darkness at every step, he laid bare his heart to kindle a single, flickering flame.",
+            "en": "Myriad Eclipse",
+            "icon": "Weapon_S_1291",
+            "ja": "千面の落日",
+            "ko": "천변하는 태양의 몰락",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "千面日陨"
+          }
+        },
+        "14130": {
+          "files": {
+            "data": {
+              "path": "w-engines/14130/data.json",
+              "sha256": "fd9e38c1c318d68cb210f5a18efa897341c5b26dd814d5ee4a2338ac2675ab6d"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14130/details.en.json",
+                "sha256": "f2523fb492d6068fc4bfded2dba1f66a2c08d399b7263b215c1718848724bb1a"
+              },
+              "zh": {
+                "path": "w-engines/14130/details.zh.json",
+                "sha256": "5e592499b36fbf076fd6dc38ae4c7b2f45523a5195ebf01b007c91a4f1c4bf0e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "She lingers by the banks of the Styx, waiting for the tide to extinguish the fury burning in her chamber.",
+            "en": "Bellicose Blaze",
+            "icon": "Weapon_S_1301",
+            "ja": "憤怒の銃騒",
+            "ko": "소란한 총성과 화염",
+            "rank": 4,
+            "sub": "Energy Regen",
+            "type": 1,
+            "zh": "嚣枪喧焰"
+          }
+        },
+        "14131": {
+          "files": {
+            "data": {
+              "path": "w-engines/14131/data.json",
+              "sha256": "74b0fa2de9577d49f38dccbbb88d5d2f33ba2760f1385b178f48a3ce51fcb184"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14131/details.en.json",
+                "sha256": "50cac7b24d5ed291144e342cc8183f96b69d7d463792109f81c1c5dd3893c3ee"
+              },
+              "zh": {
+                "path": "w-engines/14131/details.zh.json",
+                "sha256": "8c45ed1a7a96a6419872f2375acf2efa2fd9c4f9c51160fb99ee1f8263bfba21"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Underneath the radiant splendor, her genuine self has never been hidden.",
+            "en": "Elegant Vanity",
+            "icon": "Weapon_S_1311",
+            "ja": "優美のヴァニティ",
+            "ko": "우아한 베니티백",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 4,
+            "zh": "玲珑妆匣"
+          }
+        },
+        "14132": {
+          "files": {
+            "data": {
+              "path": "w-engines/14132/data.json",
+              "sha256": "69873ffe8920dc24605224f75a8e37265f1f094e9e3823cc823a296c3c9445ac"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14132/details.en.json",
+                "sha256": "64202b612fda4c41bc6499454c7279dfe4f00ae6032c278538bf1807334bdadc"
+              },
+              "zh": {
+                "path": "w-engines/14132/details.zh.json",
+                "sha256": "06595ece59ebcbe66838fbe9d2e2e82486b589e74451bedd76cdb347e2ef128a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "The sound of the strings, sharp as blades, cut through the night, protecting the one.",
+            "en": "Heartstring Nocturne",
+            "icon": "Weapon_S_1321",
+            "ja": "心弦のノクターン",
+            "ko": "심금을 울리는 야상곡",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "心弦夜响"
+          }
+        },
+        "14133": {
+          "files": {
+            "data": {
+              "path": "w-engines/14133/data.json",
+              "sha256": "d4403b9a228d7f6c5b7b85ba021b185cc43c927de7b9da6384afdb343ae2f24e"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14133/details.en.json",
+                "sha256": "e676ee48e69a835f8ae37bfef9d3889265c25551969751e366ed6c55f040165a"
+              },
+              "zh": {
+                "path": "w-engines/14133/details.zh.json",
+                "sha256": "5095bd9a6415cc1cf206098fd74eff04dff2ac8d86fef5ce410d6c57a3c909af"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A bird landed on the windowsill, scattering starlight from its tail feathers.",
+            "en": "Flight of Fancy",
+            "icon": "Weapon_S_1331",
+            "ja": "鳥は夢へと羽ばたいて",
+            "ko": "별빛 꿈을 누비는 새",
+            "rank": 4,
+            "sub": "Anomaly Proficiency",
+            "type": 3,
+            "zh": "飞鸟星梦"
+          }
+        },
+        "14134": {
+          "files": {
+            "data": {
+              "path": "w-engines/14134/data.json",
+              "sha256": "17fac05a3f3c4555006d5057cc8a3fb95e72482ee3aa9970a6fa9c1ae76a3f9a"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14134/details.en.json",
+                "sha256": "c50ff315bbf0535627341f1ceed2899ffa4ce1adbcfe66c6ead14b7de73df483"
+              },
+              "zh": {
+                "path": "w-engines/14134/details.zh.json",
+                "sha256": "91cbdf1c39ac0864b0c1df0a7078aecc0f8d9eeae912143fedcffd8e1e3a24c6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Not too sweet, and not too cold.",
+            "en": "Half-Sugar Bunny",
+            "icon": "Weapon_S_1341",
+            "ja": "甘さ控えめ雪うさぎ",
+            "ko": "당도 50% 눈토끼",
+            "rank": 4,
+            "sub": "HP",
+            "type": 5,
+            "zh": "半糖雪兔"
+          }
+        },
+        "14136": {
+          "files": {
+            "data": {
+              "path": "w-engines/14136/data.json",
+              "sha256": "0ff71d8115d826fd1a91d688aa0bde74e7e28f00cba7299299467994c59b56ea"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14136/details.en.json",
+                "sha256": "f33580479427a60c8db0f64f77052ec9d0fa39e2b14ffcce2c4a72ef6ccbfae9"
+              },
+              "zh": {
+                "path": "w-engines/14136/details.zh.json",
+                "sha256": "37e8a83a0bccda551819a1d5687de962d69fed6cfc0252e3861d370fff3e28bd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Broken eyes hold both resilience and vulnerability.",
+            "en": "Spectral Gaze",
+            "icon": "Weapon_S_1361",
+            "ja": "奪魂の瞑目",
+            "ko": "탐혼의 눈동자",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 2,
+            "zh": "索魂影眸"
+          }
+        },
+        "14137": {
+          "files": {
+            "data": {
+              "path": "w-engines/14137/data.json",
+              "sha256": "b0c05586d8de701a8635c502b3ab15ee751623d9b4caf18c237169e352104238"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14137/details.en.json",
+                "sha256": "b7e56a0c99685c78af6454faf363f9eb306fe3cf8aad4468844e8127d5b19e9b"
+              },
+              "zh": {
+                "path": "w-engines/14137/details.zh.json",
+                "sha256": "34536f66858958cb71eb3d061a37d2d50aa74acb8d44911383e1fe8f161af8d4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 743,
+            "desc": "The world is vast and full of change, and fate is unpredictable. But regardless of hardship or lack thereof, one must stay true to one's heart.",
+            "en": "Qingming Birdcage",
+            "icon": "Weapon_S_1371",
+            "ja": "青溟の鳥籠",
+            "ko": "청명의 보금자리",
+            "rank": 4,
+            "sub": "HP",
+            "type": 6,
+            "zh": "青溟笼舍"
+          }
+        },
+        "14138": {
+          "files": {
+            "data": {
+              "path": "w-engines/14138/data.json",
+              "sha256": "599d00c62113b756322d49c623b3e5a6983f3770d253dae4d857fca6f8a26ad4"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14138/details.en.json",
+                "sha256": "d43782e675d9d8d50994bdf634a82ccd6ff8845f5ed412da444194d013c572da"
+              },
+              "zh": {
+                "path": "w-engines/14138/details.zh.json",
+                "sha256": "ff87688e98fd310d01462950ac40674f79ea6277b08c265ab3339ec41444c077"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "The sheen of silver is not innocence. Can the blades of the past cut through fate's connections?",
+            "en": "Severed Innocence",
+            "icon": "Weapon_S_1381",
+            "ja": "純然たる犠牲",
+            "ko": "순결한 희생",
+            "rank": 4,
+            "sub": "CRIT DMG",
+            "type": 1,
+            "zh": "牺牲洁纯"
+          }
+        },
+        "14139": {
+          "files": {
+            "data": {
+              "path": "w-engines/14139/data.json",
+              "sha256": "919fa9d67a5a60d5a3e8ff005c5787c899cd87fd241de3e473878b9862071062"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14139/details.en.json",
+                "sha256": "396b845210db3bcb0aa089983d845c1ce9f01fcfb2a257e3084520426bf28374"
+              },
+              "zh": {
+                "path": "w-engines/14139/details.zh.json",
+                "sha256": "ed8aaf816fdd52354b94f88132888a993ef977c04ad41a888b283008fb60d2a0"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "The warm fire blazes through the long night, casting light on the tiger's roar in my heart.",
+            "en": "Roaring Fur-nace",
+            "icon": "Weapon_S_1391",
+            "ja": "招福の虎炉",
+            "ko": "복을 뿜는 맹호",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 2,
+            "zh": "福虓炉炉"
+          }
+        },
+        "14140": {
+          "files": {
+            "data": {
+              "path": "w-engines/14140/data.json",
+              "sha256": "ae497cd1e03239d1fcde5c041e50daac14ddc915a61de9a40c77231990a7aa9e"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14140/details.en.json",
+                "sha256": "c3d79b2bd5c8f21bd1ef73485e424ec9ee3a44d9f8ed9f3e29967abf221b635e"
+              },
+              "zh": {
+                "path": "w-engines/14140/details.zh.json",
+                "sha256": "f186067b3e040e5c8037f3e1bc4e8838f30e3c1916bc0188a8c3a0e0e3f0d1de"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Starlight became her blade, and she held courage and love firmly in her hands.",
+            "en": "Practiced Perfection",
+            "icon": "Weapon_S_1401",
+            "ja": "十面百錬の星",
+            "ko": "완벽하게 단조된 별",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 3,
+            "zh": "十方锻星"
+          }
+        },
+        "14141": {
+          "files": {
+            "data": {
+              "path": "w-engines/14141/data.json",
+              "sha256": "8dc5c66fe4611249848b77a419c4584ef59512d5dc74302acb62ed26f192d163"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14141/details.en.json",
+                "sha256": "377b3eea598f4c086b88e1791f9590ebfdadf8e48be5a3f3a1d786af0c4eedb1"
+              },
+              "zh": {
+                "path": "w-engines/14141/details.zh.json",
+                "sha256": "9cf48411294e4db06d7ded5ad1be41c54583e7e26e8129f79488d15c5d727539"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A masterfully crafted design, infused with the creator's pursuit of beauty.",
+            "en": "Metanukimorphosis",
+            "icon": "Weapon_S_1411",
+            "ja": "狸の七変化",
+            "ko": "너구리의 7단 변신",
+            "rank": 4,
+            "sub": "Energy Regen",
+            "type": 4,
+            "zh": "狸法七变化"
+          }
+        },
+        "14143": {
+          "files": {
+            "data": {
+              "path": "w-engines/14143/data.json",
+              "sha256": "d28cbc8cf79abdf1df557acfadfd4b530e82f601fa151e739fdbc71796800e83"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14143/details.en.json",
+                "sha256": "23be3f724ce3acb5c1e7e71d380d545370eec0fc8b802fd4f536e4432c50f917"
+              },
+              "zh": {
+                "path": "w-engines/14143/details.zh.json",
+                "sha256": "e5f9f009be945e7818d07ca65b3c2184c785235d5c2a3d845846e44157ef6417"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 743,
+            "desc": "The world may change, but my heart remains constant, like clouds standing eternal.",
+            "en": "Cloudcleave Radiance",
+            "icon": "Weapon_S_1431",
+            "ja": "孤光彩雲",
+            "ko": "구름을 헤친 빛",
+            "rank": 4,
+            "sub": "CRIT DMG",
+            "type": 1,
+            "zh": "云霓孤光"
+          }
+        },
+        "14145": {
+          "files": {
+            "data": {
+              "path": "w-engines/14145/data.json",
+              "sha256": "ba094c8ad6f7ddc09ff38b4d622cc0e04ebbe8581da5e963e06f55bd154cc4d0"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14145/details.en.json",
+                "sha256": "bfc49aac0c2fcd50f8ba58222c5ab57b3a943a95210d6acf819a741e45d0d212"
+              },
+              "zh": {
+                "path": "w-engines/14145/details.zh.json",
+                "sha256": "66c53683ba91fc669dcd91f08a6f229c2ac8954ed734ad6d9d60a77bbe751d97"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "After countless years, it remains a silent puzzle.",
+            "en": "Dreamlit Hearth",
+            "icon": "Weapon_S_1451",
+            "ja": "炉で歌い上げられる夢",
+            "ko": "꿈을 빚는 용광로의 노래",
+            "rank": 4,
+            "sub": "HP",
+            "type": 4,
+            "zh": "铸梦炉歌"
+          }
+        },
+        "14146": {
+          "files": {
+            "data": {
+              "path": "w-engines/14146/data.json",
+              "sha256": "0a2257ec3871e23adf50e5c7c6b52a11df6b5740e04bd0c56a8b3962f64942ab"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14146/details.en.json",
+                "sha256": "27d4706d386351f9fd4d73bb1b7b176870c30bb883263246aa01192cdfb0328a"
+              },
+              "zh": {
+                "path": "w-engines/14146/details.zh.json",
+                "sha256": "5fb05c84c3f5600e77abe78b48a93493fb8ae511c3b67779206e43345e39db4e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Her journey continues along the long, endless circle.",
+            "en": "Cordis Germina",
+            "icon": "Weapon_S_1461",
+            "ja": "駆動する種",
+            "ko": "기계 심장에 내린 씨앗",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 1,
+            "zh": "机巧心种"
+          }
+        },
+        "14147": {
+          "files": {
+            "data": {
+              "path": "w-engines/14147/data.json",
+              "sha256": "3b3c7ce62ace3e511d220069608142c90e90881a4944387a1825b1398552de7a"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14147/details.en.json",
+                "sha256": "380167ac516b7e14c9c6c4e8a086eacddf41118280c566a35a539d63b914714e"
+              },
+              "zh": {
+                "path": "w-engines/14147/details.zh.json",
+                "sha256": "dcbfe378af09f3b56f55605005f50976e0aeb8dfadd29ab067d36e932bb6b111"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "The purging flames burned a hundred times, yet never cleansed me.",
+            "en": "Wrathful Vajra",
+            "icon": "Weapon_S_1471",
+            "ja": "金剛不壊怒髪衝冠",
+            "ko": "성난 눈의 금강",
+            "rank": 4,
+            "sub": "HP",
+            "type": 6,
+            "zh": "怒目金刚"
+          }
+        },
+        "14148": {
+          "files": {
+            "data": {
+              "path": "w-engines/14148/data.json",
+              "sha256": "16db577e485f550e304591f23df8e80e01cc062e231b529c4c889a211a085433"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14148/details.en.json",
+                "sha256": "ed6dfa613f63647f52cd65ec1dfead088347a2726b0e29a504caee81d0774e28"
+              },
+              "zh": {
+                "path": "w-engines/14148/details.zh.json",
+                "sha256": "3245466324100f866c221d3aa6d6de4621ecedef8a9e10f6d1c70953f409601e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "That call you never picked up... she's the one who answered it.",
+            "en": "Yesterday Calls",
+            "icon": "Weapon_S_1481",
+            "ja": "昨夜からの着信",
+            "ko": "지난밤의 전화",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 2,
+            "zh": "昨夜来电"
+          }
+        },
+        "14149": {
+          "files": {
+            "data": {
+              "path": "w-engines/14149/data.json",
+              "sha256": "ff103284c85641ef6aaccde0311a8c60fe2ff4178f96fed2facb8a16c0a95961"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14149/details.en.json",
+                "sha256": "1750a94cc088b12c150e1f5b34d857549765abb7cbf36eaa311145f8240adc63"
+              },
+              "zh": {
+                "path": "w-engines/14149/details.zh.json",
+                "sha256": "7aeb67fed1144128ab46d06004b4075f449f230306420c3316633f0fa47cd252"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Thoughts follow the veins of fantasy, weaving themselves into song.",
+            "en": "Thoughtbop",
+            "icon": "Weapon_S_1491",
+            "ja": "想いが織りなす歌",
+            "ko": "사유로 빚은 노래",
+            "rank": 4,
+            "sub": "Energy Regen",
+            "type": 4,
+            "zh": "思络成歌"
+          }
+        },
+        "14150": {
+          "files": {
+            "data": {
+              "path": "w-engines/14150/data.json",
+              "sha256": "6aa674918a7dddd36ed7b166943b33ead89a59879175027c7ce8404108b62a68"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14150/details.en.json",
+                "sha256": "3676a420f2b3f8c21f3dccc2cb36f28dde527dbd857ea4414e41c4274a37359d"
+              },
+              "zh": {
+                "path": "w-engines/14150/details.zh.json",
+                "sha256": "3a88c57e0ef9e2dc9181585d06fb97b8f9ab27ee42000f87b504881338b15e7e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "There is a soul, even within a shell of steel.",
+            "en": "Angel in the Shell",
+            "icon": "Weapon_S_1501",
+            "ja": "殻の中の魂",
+            "ko": "껍데기 속 영혼",
+            "rank": 4,
+            "sub": "Anomaly Mastery",
+            "type": 3,
+            "zh": "壳中之灵"
+          }
+        },
+        "14151": {
+          "files": {
+            "data": {
+              "path": "w-engines/14151/data.json",
+              "sha256": "45f226572fe7a9a1e07f9fa119fd8190381b555b4fb6e3a678524edfcf08a645"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14151/details.en.json",
+                "sha256": "ff5558bc7de8c662230c6f08d1bb079b8d2f4693be0ff6bd72ba48f036e54ab4"
+              },
+              "zh": {
+                "path": "w-engines/14151/details.zh.json",
+                "sha256": "06cedcdf5a8bca0a48efd3a02d060e4d37382b350a2d2f2f172b62df69c68acc"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "A risky and unpredictable delusion that's impossible to refuse.",
+            "en": "Neon Fantasies",
+            "icon": "Weapon_S_1511",
+            "ja": "妄想ディスコテック",
+            "ko": "네온사인 망상",
+            "rank": 4,
+            "sub": "Anomaly Mastery",
+            "type": 2,
+            "zh": "霓虹妄想"
+          }
+        },
+        "14152": {
+          "files": {
+            "data": {
+              "path": "w-engines/14152/data.json",
+              "sha256": "5f1d518a4b3b026d80cdfc77eb9ffac2b0dcb0cd7632d0a7934e33c915cb873e"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14152/details.en.json",
+                "sha256": "85dfb70b40f2495a3438fde0a4819f06dc326def76d2c63474cf983ef426d604"
+              },
+              "zh": {
+                "path": "w-engines/14152/details.zh.json",
+                "sha256": "70fb6b786a9c6f2735801c7cfcce27abaa483c6d274ebc08ae865416885f0f20"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Digital venom flows beneath those alloy scales.",
+            "en": "Serpentine Seeker",
+            "icon": "Weapon_S_1521",
+            "ja": "影を追う白き牙",
+            "ko": "추적하는 송곳니",
+            "rank": 4,
+            "sub": "Energy Regen",
+            "type": 1,
+            "zh": "鳞齿寻踪"
+          }
+        },
+        "14153": {
+          "files": {
+            "data": {
+              "path": "w-engines/14153/data.json",
+              "sha256": "5452ac1c34e79234f22c8704f3a83678617266d89468037fd58de859d6b4d3b5"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14153/details.en.json",
+                "sha256": "f51b222e9d3ff5fca0b318e29be43881821ee0b3e52748d0727474dcccb60cc3"
+              },
+              "zh": {
+                "path": "w-engines/14153/details.zh.json",
+                "sha256": "b276799a7a18b26132dfb7645c9e8b8a74866780c04185c05a839cadc5082cad"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "The proof of being a knight is within your grasp.",
+            "en": "Starlight Rider Faceplate",
+            "icon": "Weapon_S_1531",
+            "ja": "スターライトバイザー",
+            "ko": "별빛 기사의 가면",
+            "rank": 4,
+            "sub": "HP",
+            "type": 6,
+            "zh": "辉骑面铠"
+          }
+        },
+        "14154": {
+          "files": {
+            "data": {
+              "path": "w-engines/14154/data.json",
+              "sha256": "c2f91f8dfd080b9ad8cce9ba0b79f7ff47a6f2b272af825614ff55f22cfe6f1f"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14154/details.en.json",
+                "sha256": "b401d5bf31897a09c91a4a52b1d7f9de430cba17f7ce66119d27fccd2340558b"
+              },
+              "zh": {
+                "path": "w-engines/14154/details.zh.json",
+                "sha256": "1f14092ec656c032abcc3b3bedf47cb64ab588abca6219f31dda2e95b38b33b3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Carry out judgment until the end comes.",
+            "en": "Frostfall Sickle",
+            "icon": "Weapon_S_1541",
+            "ja": "フロスト・クレセント",
+            "ko": "삭월에 끊어지는 서리",
+            "rank": 4,
+            "sub": "Anomaly Mastery",
+            "type": 3,
+            "zh": "朔月裁霜"
+          }
+        },
+        "14155": {
+          "files": {
+            "data": {
+              "path": "w-engines/14155/data.json",
+              "sha256": "231b6b1c4f4f2fa7302f3b39bea9398791a17adcc0b88c5c4558db61f9b88f1d"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14155/details.en.json",
+                "sha256": "d63775f99a535351b1f4182e34ee85f26d730bc67fff9902a10d28169192b49b"
+              },
+              "zh": {
+                "path": "w-engines/14155/details.zh.json",
+                "sha256": "5ce3fc4500ee18a6f077d10e10693bf86e35141685b64abf66097b5601524da4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "The blazing sun falls, leaving the trapped beast with nowhere left to run.",
+            "en": "Sol Exuvia",
+            "icon": "Weapon_S_Common_04",
+            "ja": "太陽の抜け殻",
+            "ko": "태양의 유체",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 1,
+            "zh": "日冕遗蜕"
+          }
+        },
+        "14156": {
+          "files": {
+            "data": {
+              "path": "w-engines/14156/data.json",
+              "sha256": "83eabf582923d103b79e38ef4c44cc89af376628ea1546cb83db20825c898c05"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14156/details.en.json",
+                "sha256": "5e352682548743fbad843c91f4e53f4b2474191867e704b302e1f89608b0834c"
+              },
+              "zh": {
+                "path": "w-engines/14156/details.zh.json",
+                "sha256": "b7145001a4ee1fd0fd165e83e8d6f6491f46501e10324a0472b0a59989acc9cd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Sit quietly, and listen to the wind's song.",
+            "en": "Joyau Dore",
+            "icon": "Weapon_S_1561",
+            "ja": "金襴の心",
+            "ko": "영롱한 금빛 마음",
+            "rank": 4,
+            "sub": "Energy Regen",
+            "type": 3,
+            "zh": "琳琅鎏心"
+          }
+        },
+        "14157": {
+          "files": {
+            "data": {
+              "path": "w-engines/14157/data.json",
+              "sha256": "d85c61fbc41692409bca165a5b074918d27b492b04a04c4acd523b0d34a80331"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14157/details.en.json",
+                "sha256": "ac763b7dd48efc20cabd10c0620f1c2d3ffd470616fbe3ce0c684b86ca52d1e4"
+              },
+              "zh": {
+                "path": "w-engines/14157/details.zh.json",
+                "sha256": "5f0852373824739812d5e4fed0f362d80638bddea1a868892d08373710e4066c"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Nhe-nha ehn ne! (Through fire and flames for Lady Norma!)",
+            "en": "Chief Sidekick",
+            "icon": "Weapon_S_1571",
+            "ja": "エースのオトモ",
+            "ko": "수석 조수",
+            "rank": 4,
+            "sub": "CRIT Rate",
+            "type": 2,
+            "zh": "首席跟班"
+          }
+        },
+        "14158": {
+          "files": {
+            "data": {
+              "path": "w-engines/14158/data.json",
+              "sha256": "102046e351af0a7f86fd59438f483651999a0e00922dc97e50807187f4423b43"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14158/details.en.json",
+                "sha256": "9fd89297a3085e344e0d0904ce82ef866c4cbfa7583ace5bbfaab58243577f41"
+              },
+              "zh": {
+                "path": "w-engines/14158/details.zh.json",
+                "sha256": "25e17ff0785c5ca76f616bc7e00726d87e0b0e098a96be50ad1d9680254d42f5"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 743,
+            "desc": "Drifting through the cracks of time in search of the light.",
+            "en": "Ode of Resurrected Wings",
+            "icon": "Weapon_S_1581",
+            "ja": "目覚めし翼の聖歌",
+            "ko": "돌아온 날개의 시",
+            "rank": 4,
+            "sub": "ATK",
+            "type": 3,
+            "zh": "空羽复归之诗"
+          }
+        },
+        "14159": {
+          "files": {
+            "data": {
+              "path": "w-engines/14159/data.json",
+              "sha256": "4cde79a7703035dbbe23c166d791f5dab54620557b76394a4063d0a5e7f75e61"
+            },
+            "details": {
+              "en": {
+                "path": "w-engines/14159/details.en.json",
+                "sha256": "919bf36fe13392b1225ae4ddaa07c2e95d5e63cd2506e95b66cc89eb0d03ab1e"
+              },
+              "zh": {
+                "path": "w-engines/14159/details.zh.json",
+                "sha256": "6ffe85fd2c1bc34e00e847e31ba00aef499698c8be40ef68c44dce605d7edb77"
+              }
+            }
+          },
+          "sourceRecord": {
+            "atk": 713,
+            "desc": "Across the vast skies and seas of clouds, the extolment for the knights echoes in quiet reverence.",
+            "en": "Knight's Extolment",
+            "icon": "Weapon_S_1591",
+            "ja": "栄光の騎士道",
+            "ko": "기사 예찬",
+            "rank": 4,
+            "sub": "CRIT DMG",
+            "type": 1,
+            "zh": "骁骑礼赞"
+          }
+        }
+      },
+      "rulesVersion": "nanoka-w-engine-reference/1"
     }
   },
   "format": "fairy-nanoka-integrated/v3",

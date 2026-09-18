@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Virtual or imagined, once something is truly felt, it stops being unreal. Everything a person touches in a lifetime is just a drop in the vast river of time. Still, I hope this song can carry you into a sweet delusion.",
+  "desc2": "Equip to increase Anomaly Agents' combat capabilities",
+  "desc3": "There is a soul, even within a shell of steel.",
+  "id": 14150,
+  "locale": "en",
+  "name": "Angel in the Shell",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Anomaly Mastery",
+    "name2": "Anomaly Mastery"
+  },
+  "talents": {
+    "1": {
+      "desc": "Increases the equipper's Anomaly Proficiency by <color=#2BAD00>90</color>. When the equipper is an <color=#FE437E>Ether</color> character, and comes on-field or uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, they gain a buff: DMG dealt to enemies afflicted with Attribute Anomalies increases by <color=#2BAD00>20%</color>, and all Attribute Anomaly DMG and Disorder DMG they trigger increases by <color=#2BAD00>10%</color>, lasting 15s. Repeated triggers reset the duration, and the effect is removed when switching off-field.",
+      "name": "Energetic Strike"
+    },
+    "2": {
+      "desc": "Increases the equipper's Anomaly Proficiency by <color=#2BAD00>103</color>. When the equipper is an <color=#FE437E>Ether</color> character, and comes on-field or uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, they gain a buff: DMG dealt to enemies afflicted with Attribute Anomalies increases by <color=#2BAD00>23%</color>, and all Attribute Anomaly DMG and Disorder DMG they trigger increases by <color=#2BAD00>11.5%</color>, lasting 15s. Repeated triggers reset the duration, and the effect is removed when switching off-field.",
+      "name": "Energetic Strike"
+    },
+    "3": {
+      "desc": "Increases the equipper's Anomaly Proficiency by <color=#2BAD00>117</color>. When the equipper is an <color=#FE437E>Ether</color> character, and comes on-field or uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, they gain a buff: DMG dealt to enemies afflicted with Attribute Anomalies increases by <color=#2BAD00>26%</color>, and all Attribute Anomaly DMG and Disorder DMG they trigger increases by <color=#2BAD00>13%</color>, lasting 15s. Repeated triggers reset the duration, and the effect is removed when switching off-field.",
+      "name": "Energetic Strike"
+    },
+    "4": {
+      "desc": "Increases the equipper's Anomaly Proficiency by <color=#2BAD00>130</color>. When the equipper is an <color=#FE437E>Ether</color> character, and comes on-field or uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, they gain a buff: DMG dealt to enemies afflicted with Attribute Anomalies increases by <color=#2BAD00>29%</color>, and all Attribute Anomaly DMG and Disorder DMG they trigger increases by <color=#2BAD00>14.5%</color>, lasting 15s. Repeated triggers reset the duration, and the effect is removed when switching off-field.",
+      "name": "Energetic Strike"
+    },
+    "5": {
+      "desc": "Increases the equipper's Anomaly Proficiency by <color=#2BAD00>144</color>. When the equipper is an <color=#FE437E>Ether</color> character, and comes on-field or uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, they gain a buff: DMG dealt to enemies afflicted with Attribute Anomalies increases by <color=#2BAD00>32%</color>, and all Attribute Anomaly DMG and Disorder DMG they trigger increases by <color=#2BAD00>16%</color>, lasting 15s. Repeated triggers reset the duration, and the effect is removed when switching off-field.",
+      "name": "Energetic Strike"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

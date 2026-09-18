@@ -53,6 +53,10 @@ it("consumes the offline-installed package in real Vite development and producti
       integratedIndex.entities["drive-discs"].memberIds
     const driveDiscCount = driveDiscMemberIds.length
     const directDiscId = driveDiscMemberIds[1] ?? driveDiscMemberIds[0]
+    const wEngineMemberIds: string[] =
+      integratedIndex.entities["w-engines"].memberIds
+    const wEngineCount = wEngineMemberIds.length
+    const directWEngineId = wEngineMemberIds[1] ?? wEngineMemberIds[0]
     // 构建模块图应包含两类导入表引用的全部 JSON：按已验证索引逐类别推导，不使用固定文件总数。
     const publishedEntities = integratedIndex.entities as Record<
       string,
@@ -80,6 +84,10 @@ globalThis.fairy = api
 globalThis.fairyDirectDriveDisc = {
   data: () => import("@randomplay/data/integrated/drive-discs/${directDiscId}/data.json"),
   zh: () => import("@randomplay/data/integrated/drive-discs/${directDiscId}/details.zh.json"),
+}
+globalThis.fairyDirectWEngine = {
+  data: () => import("@randomplay/data/integrated/w-engines/${directWEngineId}/data.json"),
+  zh: () => import("@randomplay/data/integrated/w-engines/${directWEngineId}/details.zh.json"),
 }
 document.body.append("ready")
 `,
@@ -133,6 +141,8 @@ document.body.append("ready")
             agentCount,
             driveDiscCount,
             directDiscId,
+            wEngineCount,
+            directWEngineId,
           })) {
             const context = await browser.newContext()
             const page = await context.newPage()
@@ -274,27 +284,38 @@ function devModuleSources(body: string, pathname: string): string[] {
   return match ? [match[1]] : []
 }
 
-/** 两类实体各自的冷启动验收步骤；有效读取只触达本类别，非法参数不触发任何数据加载。 */
+/** 各类别实体各自的冷启动验收步骤；有效读取只触达本类别，非法参数不触发任何数据加载。 */
 function defineScenarios(counts: {
   agentCount: number
   driveDiscCount: number
   directDiscId: string
+  wEngineCount: number
+  directWEngineId: string
 }): Array<{ name: string; steps: ScenarioStep[] }> {
-  const { agentCount, driveDiscCount, directDiscId } = counts
+  const {
+    agentCount,
+    driveDiscCount,
+    directDiscId,
+    wEngineCount,
+    directWEngineId,
+  } = counts
   async function checkNameCatalogs(page: Page) {
     const catalogs = await page.evaluate(() => {
       const api = (globalThis as any).fairy
       return {
         agentNames: api.agentNames.length,
         driveDiscNames: api.driveDiscNames.length,
+        wEngineNames: api.wEngineNames.length,
         frozen:
           Object.isFrozen(api.agentNames) &&
-          Object.isFrozen(api.driveDiscNames),
+          Object.isFrozen(api.driveDiscNames) &&
+          Object.isFrozen(api.wEngineNames),
       }
     })
     expect(catalogs).toEqual({
       agentNames: agentCount,
       driveDiscNames: driveDiscCount,
+      wEngineNames: wEngineCount,
       frozen: true,
     })
   }
@@ -454,15 +475,27 @@ function defineScenarios(counts: {
                 undefined
               )
                 throw new Error("drive disc inexact name")
+              try {
+                await api.loadWEngineData(12001)
+                throw new Error("w-engine numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              if ((await api.loadWEngineData("lunar pleniluna")) !== undefined)
+                throw new Error("w-engine inexact name")
             })
           },
           sources: [],
           after: (requests) => {
-            // 代理人上下文全程不请求驱动盘 JSON。
+            // 代理人上下文全程不请求驱动盘或 WEngine JSON。
             expect(
               requests
                 .flatMap((request) => request.sources)
-                .every((path) => !path.startsWith("drive-discs/")),
+                .every(
+                  (path) =>
+                    !path.startsWith("drive-discs/") &&
+                    !path.startsWith("w-engines/"),
+                ),
             ).toBe(true)
           },
         },
@@ -656,7 +689,7 @@ function defineScenarios(counts: {
               } catch (error) {
                 if (!(error instanceof TypeError)) throw error
               }
-              // 另一类别的非法参数同样立即拒绝，不触发任何数据加载。
+              // 其余类别的非法参数同样立即拒绝，不触发任何数据加载。
               try {
                 await api.loadAgentData(1311)
                 throw new Error("agent numeric id accepted")
@@ -665,15 +698,231 @@ function defineScenarios(counts: {
               }
               if ((await api.loadAgentData("astra yao")) !== undefined)
                 throw new Error("agent inexact name")
+              try {
+                await api.loadWEngineData(12001)
+                throw new Error("w-engine numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              if ((await api.loadWEngineData("lunar pleniluna")) !== undefined)
+                throw new Error("w-engine inexact name")
             })
           },
           sources: [],
           after: (requests) => {
-            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人文件或索引。
+            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine 文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
                 .every((path) => path.startsWith("drive-discs/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+    {
+      name: "w-engines",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "engine-data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadWEngineData(
+                      "[Lunar] Pleniluna",
+                    )
+                  ).id,
+              ),
+            ).toBe(12001)
+          },
+          sources: ["w-engines/12001/data.json"],
+        },
+        {
+          name: "engine-details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const details = await (
+                  globalThis as any
+                ).fairy.loadWEngineDetails("[Lunar] Pleniluna", "en")
+                return { locale: details.locale, name: details.name }
+              }),
+            ).toEqual({ locale: "en", name: "[Lunar] Pleniluna" })
+          },
+          sources: ["w-engines/12001/details.en.json"],
+        },
+        {
+          name: "engine-details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadWEngineDetails(
+                      "[Lunar] Pleniluna",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["w-engines/12001/details.zh.json"],
+        },
+        {
+          name: "all-engines-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const api = (globalThis as any).fairy
+                const all = await api.loadAllWEngines("en")
+                const keys = Object.keys(all)
+                return {
+                  count: keys.length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (engine: any) => engine.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    keys.length === expected &&
+                    keys.every(
+                      (name, position) => name === api.wEngineNames[position],
+                    ),
+                  dataKeysSeparated: Object.values(all).every(
+                    (engine: any) =>
+                      Object.keys(engine).length === 2 &&
+                      "data" in engine &&
+                      "details" in engine,
+                  ),
+                }
+              }, wEngineCount),
+            ).toEqual({
+              count: wEngineCount,
+              locales: ["en"],
+              keysMatch: true,
+              dataKeysSeparated: true,
+            })
+          },
+          after: (requests) => {
+            const engineSources = requests
+              .filter((request) =>
+                ["engine-data", "engine-details-en", "all-engines-en"].includes(
+                  request.phase,
+                ),
+              )
+              .flatMap((request) => request.sources)
+            expect(engineSources).toHaveLength(wEngineCount * 2)
+            expect(new Set(engineSources).size).toBe(wEngineCount * 2)
+            expect(
+              engineSources.every(
+                (path) =>
+                  path.startsWith("w-engines/") &&
+                  (path.endsWith("/data.json") ||
+                    path.endsWith("/details.en.json")),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "direct-subpath",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (id) => {
+                const data = await (globalThis as any).fairyDirectWEngine.data()
+                const zh = await (globalThis as any).fairyDirectWEngine.zh()
+                if (data.default.id !== Number(id))
+                  throw new Error("direct w-engine data id mismatch")
+                if (zh.default.id !== Number(id) || zh.default.locale !== "zh")
+                  throw new Error("direct w-engine details mismatch")
+                return { id: data.default.id, locale: zh.default.locale }
+              }, directWEngineId),
+            ).toEqual({ id: Number(directWEngineId), locale: "zh" })
+          },
+          after: (requests) => {
+            const directSources = requests
+              .filter((request) => request.phase === "direct-subpath")
+              .flatMap((request) => request.sources)
+            expect(directSources).toContain(
+              `w-engines/${directWEngineId}/details.zh.json`,
+            )
+            expect(
+              directSources.every(
+                (path) =>
+                  path === `w-engines/${directWEngineId}/data.json` ||
+                  path === `w-engines/${directWEngineId}/details.zh.json`,
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "engine-repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadWEngineData("[Lunar] Pleniluna")
+              one.materials = "browser mutation"
+              if (
+                (await api.loadWEngineData("[Lunar] Pleniluna")).materials ===
+                "browser mutation"
+              )
+                throw new Error("shared object")
+              const details = await api.loadWEngineDetails(
+                "[Lunar] Pleniluna",
+                "zh",
+              )
+              details.desc3 = "browser mutation"
+              if (
+                (await api.loadWEngineDetails("[Lunar] Pleniluna", "zh"))
+                  .desc3 === "browser mutation"
+              )
+                throw new Error("shared details")
+              if ((await api.loadWEngineData("lunar pleniluna")) !== undefined)
+                throw new Error("inexact name")
+              if ((await api.loadWEngineData("12001")) !== undefined)
+                throw new Error("numeric id string accepted")
+              try {
+                await api.loadAllWEngines("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadWEngineDetails("[Lunar] Pleniluna")
+                throw new Error("missing locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 其余类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("agent numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadDriveDiscData(31000)
+                throw new Error("drive disc numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘文件或索引。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => path.startsWith("w-engines/")),
             ).toBe(true)
           },
         },

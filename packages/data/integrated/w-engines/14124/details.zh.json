@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "治安局为空洞精英小队配备的最新款战术音擎，拥有强劲的以太供能功率，可在短时间内为全部作战设备提供爆发式超额供能。虽然不少精英队员的音擎会因为久经阵仗而伤痕累累，但认真且爱惜物品的朱鸢始终一丝不苟地保养自己的音擎，甚至将其擦拭得像新品一样。\n\n<color=#959595>「无纺布、毛刷、润滑油、除锈剂…好，准备完成。计时…开始！」——朱鸢，开始保养时为自己计时，挑战比上一次更短的保养时间</color>",
+  "desc2": "装备后可提升[强攻]代理人的战斗能力",
+  "desc3": "治安局为空洞精英小队配备的最新款战术音擎，拥有强劲的以太供能功率，是朱鸢爱用的款式。",
+  "id": 14124,
+  "locale": "zh",
+  "name": "防暴者Ⅵ型",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "暴击伤害",
+    "name2": "暴击伤害"
+  },
+  "talents": {
+    "1": {
+      "desc": "暴击率提升<color=#2BAD00>15%</color>；发动<color=#FFFFFF>[强化特殊技]</color>时，为装备者提供8层充能效果，最多叠加8层；<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>造成<color=#FE437E>以太伤害</color>时，消耗1层充能，使当前招式造成的伤害提升<color=#2BAD00>35%</color>。",
+      "name": "安全巡查"
+    },
+    "2": {
+      "desc": "暴击率提升<color=#2BAD00>18.8%</color>；发动<color=#FFFFFF>[强化特殊技]</color>时，为装备者提供8层充能效果，最多叠加8层；<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>造成<color=#FE437E>以太伤害</color>时，消耗1层充能，使当前招式造成的伤害提升<color=#2BAD00>43.5%</color>。",
+      "name": "安全巡查"
+    },
+    "3": {
+      "desc": "暴击率提升<color=#2BAD00>22.6%</color>；发动<color=#FFFFFF>[强化特殊技]</color>时，为装备者提供8层充能效果，最多叠加8层；<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>造成<color=#FE437E>以太伤害</color>时，消耗1层充能，使当前招式造成的伤害提升<color=#2BAD00>52%</color>。",
+      "name": "安全巡查"
+    },
+    "4": {
+      "desc": "暴击率提升<color=#2BAD00>26.4%</color>；发动<color=#FFFFFF>[强化特殊技]</color>时，为装备者提供8层充能效果，最多叠加8层；<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>造成<color=#FE437E>以太伤害</color>时，消耗1层充能，使当前招式造成的伤害提升<color=#2BAD00>60.5%</color>。",
+      "name": "安全巡查"
+    },
+    "5": {
+      "desc": "暴击率提升<color=#2BAD00>30%</color>；发动<color=#FFFFFF>[强化特殊技]</color>时，为装备者提供8层充能效果，最多叠加8层；<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>造成<color=#FE437E>以太伤害</color>时，消耗1层充能，使当前招式造成的伤害提升<color=#2BAD00>70%</color>。",
+      "name": "安全巡查"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

@@ -3,8 +3,10 @@
 ## 状态
 
 - 上游实体：`weapon`
-- 状态：已完成代表性结构调研，可由共享抓取器缓存
-- 当前实现不建立 W-Engines 运行时 schema，也不执行字段级语义验证
+- 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `w-engines` 已按规则
+  `nanoka-w-engine-reference/1` 接入生产快照
+- 抓取器仍不执行 W-Engines 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、共享提取与
+  派生分类见[来源数据整合规范](../data/integration.md#wengine-单实体实现规则-nanoka-w-engine-reference1)
 
 ## 资源
 
@@ -35,3 +37,10 @@ packages/data/raw/nanoka/{version}/
 ```
 
 缓存只用于本机后续观察或处理，不是完整、不可变或可分发的版本快照。
+
+## 整合
+
+整合类别登记名为 `w-engines`，`data.json` 与 `details.{locale}.json` 的字段归属、共享提取、分类 ID 派生与
+校验边界由[WEngine 单实体实现规则](../data/integration.md#wengine-单实体实现规则-nanoka-w-engine-reference1)
+统一定义。成员集合由选定来源版本 `weapon.json` 的顶层 key 决定，不扫描详情目录推断；本层不解析材料字符串、
+不换算百分比、不解释成长公式或天赋计算效果。

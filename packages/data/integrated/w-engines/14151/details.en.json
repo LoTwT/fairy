@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "The neon disco light's misty shimmer intertwined with a playful angel's delusions, twisting into colors too blurred to name. Like every desire that can turn fatal, unpredictable and dangerous, yet no one could quite bring themselves to refuse.\n\nEven seeing through the obsession behind the delusion wasn't enough to resist the temptation of sinking into it.\n\n\"If you say it looks like an octopus sausage, I'll turn you into one.\" — The captain of the Angels of Delusion, eyes blazing as she glares at a certain squad member.",
+  "desc2": "Equip to increase Stun Agents' combat capabilities",
+  "desc3": "A risky and unpredictable delusion that's impossible to refuse.",
+  "id": 14151,
+  "locale": "en",
+  "name": "Neon Fantasies",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Anomaly Mastery",
+    "name2": "Anomaly Mastery"
+  },
+  "talents": {
+    "1": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>90</color>. When the equipper's <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Basic Attack</color> deals <color=#FE437E>Ether DMG</color>, all squad members' DMG dealt increases by <color=#2BAD00>15%</color> for 40s, stacking up to 2 times. This effect can trigger once per use of a skill and repeated triggers reset the duration. With 2 stacks, the equipper's Anomaly Proficiency increases by an additional <color=#2BAD00>60</color>. Only one instance of this effect can exist in the same squad.",
+      "name": "Disco Demon"
+    },
+    "2": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>103</color>. When the equipper's <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Basic Attack</color> deals <color=#FE437E>Ether DMG</color>, all squad members' DMG dealt increases by <color=#2BAD00>17%</color> for 40s, stacking up to 2 times. This effect can trigger once per use of a skill and repeated triggers reset the duration. With 2 stacks, the equipper's Anomaly Proficiency increases by an additional <color=#2BAD00>69</color>. Only one instance of this effect can exist in the same squad.",
+      "name": "Disco Demon"
+    },
+    "3": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>117</color>. When the equipper's <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Basic Attack</color> deals <color=#FE437E>Ether DMG</color>, all squad members' DMG dealt increases by <color=#2BAD00>19.5%</color> for 40s, stacking up to 2 times. This effect can trigger once per use of a skill and repeated triggers reset the duration. With 2 stacks, the equipper's Anomaly Proficiency increases by an additional <color=#2BAD00>78</color>. Only one instance of this effect can exist in the same squad.",
+      "name": "Disco Demon"
+    },
+    "4": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>130</color>. When the equipper's <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Basic Attack</color> deals <color=#FE437E>Ether DMG</color>, all squad members' DMG dealt increases by <color=#2BAD00>21%</color> for 40s, stacking up to 2 times. This effect can trigger once per use of a skill and repeated triggers reset the duration. With 2 stacks, the equipper's Anomaly Proficiency increases by an additional <color=#2BAD00>87</color>. Only one instance of this effect can exist in the same squad.",
+      "name": "Disco Demon"
+    },
+    "5": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>145</color>. When the equipper's <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Basic Attack</color> deals <color=#FE437E>Ether DMG</color>, all squad members' DMG dealt increases by <color=#2BAD00>24%</color> for 40s, stacking up to 2 times. This effect can trigger once per use of a skill and repeated triggers reset the duration. With 2 stacks, the equipper's Anomaly Proficiency increases by an additional <color=#2BAD00>96</color>. Only one instance of this effect can exist in the same squad.",
+      "name": "Disco Demon"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

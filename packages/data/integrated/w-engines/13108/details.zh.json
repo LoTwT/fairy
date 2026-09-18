@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "专精于辅助瞄准与弹道计算的定制款超算音擎，在被比利改装后，更像是某种盗版的星徽骑士手办。它在侦测到敌人时会不断闪动光芒，并且大声喊出设定好的台词。虽然此举无异于自曝位置吸引敌人注意力，但对比利来说，只要够帅，一切都不是问题。\n\n<color=#959595>「仿制？怎么能说仿制呢？这里面可是倾注了我全部的热情、智慧、灵感和冷凝水！除了不能呼唤流星出来让我变身，它就是真正的星徽骑士装备！」——比利，激动地陈述自己的改装理念</color>",
+  "desc2": "装备后可提升[强攻]代理人的战斗能力",
+  "desc3": "专精于辅助瞄准与弹道计算的定制款超算音擎，在被比利改装后，更像是某种盗版的星徽骑士手办。",
+  "id": 13108,
+  "locale": "zh",
+  "name": "仿制星徽引擎",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "攻击力",
+    "name2": "攻击力百分比"
+  },
+  "talents": {
+    "1": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>命中6米外的敌人时，装备者对目标造成的<color=#F0D12B>物理伤害</color>提升<color=#2BAD00>36%</color>，持续8秒。",
+      "name": "骑士光波：改"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>命中6米外的敌人时，装备者对目标造成的<color=#F0D12B>物理伤害</color>提升<color=#2BAD00>41%</color>，持续8秒。",
+      "name": "骑士光波：改"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>命中6米外的敌人时，装备者对目标造成的<color=#F0D12B>物理伤害</color>提升<color=#2BAD00>46.5%</color>，持续8秒。",
+      "name": "骑士光波：改"
+    },
+    "4": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>命中6米外的敌人时，装备者对目标造成的<color=#F0D12B>物理伤害</color>提升<color=#2BAD00>52%</color>，持续8秒。",
+      "name": "骑士光波：改"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>命中6米外的敌人时，装备者对目标造成的<color=#F0D12B>物理伤害</color>提升<color=#2BAD00>57.5%</color>，持续8秒。",
+      "name": "骑士光波：改"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

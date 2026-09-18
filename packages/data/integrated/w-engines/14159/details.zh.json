@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "历任来自德拉叙尔家的空巡局总务次官都拥有一枚属于自己的特型音擎，属于天空守护者的勋章与赞歌，悉数熔铸于这枚洁白精巧的徽记。守护天空之城的空巡局队员们被孩子们视如童话中的骑士，而那些天际云层之间的安宁祥和，正是属于骑士们的静谧赞歌。\n「童话故事里的骑士都有自己的骏马，那话又说回来了…」\n——林德薇恩·挽昼大人，不怀好意地打量着自己的近卫骑士",
+  "desc2": "装备后可提升[强攻]代理人的战斗能力",
+  "desc3": "云海穹苍间，骑士的赞歌静谧响彻。",
+  "id": 14159,
+  "locale": "zh",
+  "name": "骁骑礼赞",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "暴击伤害",
+    "name2": "暴击伤害"
+  },
+  "talents": {
+    "1": {
+      "desc": "装备者的<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[强化特殊技]</color>的重击命中敌人时，获得1层<color=#FFFFFF>[兵锋]</color>，使暴击伤害提升<color=#2BAD00>32%</color>，持续25秒；<color=#FFFFFF>[兵锋]</color>最多叠加2层，且每种招式类型最多提供1层，重复触发时，刷新所有<color=#FFFFFF>[兵锋]</color>持续时间；\n拥有2层<color=#FFFFFF>[兵锋]</color>时，获得<color=#FFFFFF>[彻骨]</color>：装备者造成的伤害无视目标<color=#2BAD00>20%</color><color=#98EFF0>冰属性伤害抗性</color>。",
+      "name": "骑士仪典"
+    },
+    "2": {
+      "desc": "装备者的<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[强化特殊技]</color>的重击命中敌人时，获得1层<color=#FFFFFF>[兵锋]</color>，使暴击伤害提升<color=#2BAD00>36.8%</color>，持续25秒；<color=#FFFFFF>[兵锋]</color>最多叠加2层，且每种招式类型最多提供1层，重复触发时，刷新所有<color=#FFFFFF>[兵锋]</color>持续时间；\n拥有2层<color=#FFFFFF>[兵锋]</color>时，获得<color=#FFFFFF>[彻骨]</color>：装备者造成的伤害无视目标<color=#2BAD00>23%</color><color=#98EFF0>冰属性伤害抗性</color>。",
+      "name": "骑士仪典"
+    },
+    "3": {
+      "desc": "装备者的<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[强化特殊技]</color>的重击命中敌人时，获得1层<color=#FFFFFF>[兵锋]</color>，使暴击伤害提升<color=#2BAD00>41.6%</color>，持续25秒；<color=#FFFFFF>[兵锋]</color>最多叠加2层，且每种招式类型最多提供1层，重复触发时，刷新所有<color=#FFFFFF>[兵锋]</color>持续时间；\n拥有2层<color=#FFFFFF>[兵锋]</color>时，获得<color=#FFFFFF>[彻骨]</color>：装备者造成的伤害无视目标<color=#2BAD00>26%</color><color=#98EFF0>冰属性伤害抗性</color>。",
+      "name": "骑士仪典"
+    },
+    "4": {
+      "desc": "装备者的<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[强化特殊技]</color>的重击命中敌人时，获得1层<color=#FFFFFF>[兵锋]</color>，使暴击伤害提升<color=#2BAD00>46.4%</color>，持续25秒；<color=#FFFFFF>[兵锋]</color>最多叠加2层，且每种招式类型最多提供1层，重复触发时，刷新所有<color=#FFFFFF>[兵锋]</color>持续时间；\n拥有2层<color=#FFFFFF>[兵锋]</color>时，获得<color=#FFFFFF>[彻骨]</color>：装备者造成的伤害无视目标<color=#2BAD00>29%</color><color=#98EFF0>冰属性伤害抗性</color>。",
+      "name": "骑士仪典"
+    },
+    "5": {
+      "desc": "装备者的<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[强化特殊技]</color>的重击命中敌人时，获得1层<color=#FFFFFF>[兵锋]</color>，使暴击伤害提升<color=#2BAD00>51.2%</color>，持续25秒；<color=#FFFFFF>[兵锋]</color>最多叠加2层，且每种招式类型最多提供1层，重复触发时，刷新所有<color=#FFFFFF>[兵锋]</color>持续时间；\n拥有2层<color=#FFFFFF>[兵锋]</color>时，获得<color=#FFFFFF>[彻骨]</color>：装备者造成的伤害无视目标<color=#2BAD00>32%</color><color=#98EFF0>冰属性伤害抗性</color>。",
+      "name": "骑士仪典"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

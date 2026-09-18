@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "A W-Engine with a component structure adjusted according to specific parameters. It can enhance the defensive capabilities of those who have a certain style of combat. If the user does not meet the requirements for this W-Engine, then carrying it would be like lugging around an over-sized shield in battle.",
+  "desc2": "Equip to increase Defense Agents' combat capabilities",
+  "desc3": "A W-Engine with a component structure adjusted according to specific parameters. It can enhance the defensive capabilities of those who have a certain style of combat.",
+  "id": 12013,
+  "locale": "en",
+  "name": "[Identity] Base",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "DEF",
+    "name2": "Percent DEF"
+  },
+  "talents": {
+    "1": {
+      "desc": "When attacked, the equipper's DEF increases by <color=#2BAD00>20%</color> for 8s.",
+      "name": "Sinking Strike"
+    },
+    "2": {
+      "desc": "When attacked, the equipper's DEF increases by <color=#2BAD00>23%</color> for 8s.",
+      "name": "Sinking Strike"
+    },
+    "3": {
+      "desc": "When attacked, the equipper's DEF increases by <color=#2BAD00>26%</color> for 8s.",
+      "name": "Sinking Strike"
+    },
+    "4": {
+      "desc": "When attacked, the equipper's DEF increases by <color=#2BAD00>29%</color> for 8s.",
+      "name": "Sinking Strike"
+    },
+    "5": {
+      "desc": "When attacked, the equipper's DEF increases by <color=#2BAD00>32%</color> for 8s.",
+      "name": "Sinking Strike"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

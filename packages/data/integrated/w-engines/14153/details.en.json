@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "What is a knight?\nThe Crimson Knight says, \"Carrying out the justice in my heart!\"\nThe Amber Knight says, \"Dealing with each sin in this world!\"\nThe Verdant Knight says, \"Protecting everyone's hope!\"\nSo what is a knight, in the end? The advanced tactical construct suddenly falls into serious thought over this profound question, no different from the philosophers who have long pondered the ultimate meaning of existence.\nRegrettably, this great and noble meditation on chivalric aesthetics is cut short in under ten seconds by an unceremonious interruption from a companion.\n\"Billy, you've watched 'Starlight Knight: A Knight's Proof' a hundred times already. So what even is the proof?\"\n\"I'll know when I've watched it another hundred times!\"\n— Two people arguing over the remote at the Cunning Hares' base.",
+  "desc2": "Equip to increase Rupture Agents' combat capabilities",
+  "desc3": "The proof of being a knight is within your grasp.",
+  "id": 14153,
+  "locale": "en",
+  "name": "Starlight Rider Faceplate",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "HP",
+    "name2": "Percent HP"
+  },
+  "talents": {
+    "1": {
+      "desc": "Increases CRIT Rate by <color=#2BAD00>20%</color>. When the equipper launches a <color=#FFFFFF>Special Attack</color>, their <color=#F0D12B>Physical Sheer DMG</color> increases by <color=#2BAD00>10%</color>, stacking up to 2 times and lasting 30s. Repeated triggers reset the duration.",
+      "name": "Knight's Morale"
+    },
+    "2": {
+      "desc": "Increases CRIT Rate by <color=#2BAD00>23%</color>. When the equipper launches a <color=#FFFFFF>Special Attack</color>, their <color=#F0D12B>Physical Sheer DMG</color> increases by <color=#2BAD00>11.5%</color>, stacking up to 2 times and lasting 30s. Repeated triggers reset the duration.",
+      "name": "Knight's Morale"
+    },
+    "3": {
+      "desc": "Increases CRIT Rate by <color=#2BAD00>26%</color>. When the equipper launches a <color=#FFFFFF>Special Attack</color>, their <color=#F0D12B>Physical Sheer DMG</color> increases by <color=#2BAD00>13%</color>, stacking up to 2 times and lasting 30s. Repeated triggers reset the duration.",
+      "name": "Knight's Morale"
+    },
+    "4": {
+      "desc": "Increases CRIT Rate by <color=#2BAD00>29%</color>. When the equipper launches a <color=#FFFFFF>Special Attack</color>, their <color=#F0D12B>Physical Sheer DMG</color> increases by <color=#2BAD00>14.5%</color>, stacking up to 2 times and lasting 30s. Repeated triggers reset the duration.",
+      "name": "Knight's Morale"
+    },
+    "5": {
+      "desc": "Increases CRIT Rate by <color=#2BAD00>32%</color>. When the equipper launches a <color=#FFFFFF>Special Attack</color>, their <color=#F0D12B>Physical Sheer DMG</color> increases by <color=#2BAD00>16%</color>, stacking up to 2 times and lasting 30s. Repeated triggers reset the duration.",
+      "name": "Knight's Morale"
+    }
+  },
+  "weaponType": {
+    "6": "Rupture"
+  }
+}

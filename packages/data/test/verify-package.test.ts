@@ -162,6 +162,7 @@ describe("packed package", () => {
     expect(Object.keys(index.entities).toSorted()).toEqual([
       "agents",
       "drive-discs",
+      "w-engines",
     ])
     const expectedJsonCount =
       1 +
@@ -224,6 +225,15 @@ describe("packed package", () => {
           ),
         ).name,
     )
+    const expectedWEngineNames = index.entities["w-engines"].memberIds.map(
+      (id) =>
+        JSON.parse(
+          readFileSync(
+            join(snapshot, `w-engines/${id}/details.en.json`),
+            "utf8",
+          ),
+        ).name,
+    )
     expect(
       JSON.parse(
         runNode(
@@ -232,11 +242,12 @@ describe("packed package", () => {
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
-assert.deepEqual(Object.keys(api).sort(), ["agentNames", "driveDiscNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllDriveDiscs", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex"].sort())
+assert.deepEqual(Object.keys(api).sort(), ["agentNames", "driveDiscNames", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllDriveDiscs", "loadAllWEngines", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadWEngineData", "loadWEngineDetails"].sort())
 const index = await api.loadIndex()
 assert.deepEqual(index, JSON.parse(readFileSync(new URL(import.meta.resolve("@randomplay/data/integrated/index.json")), "utf8")))
 assert(Object.isFrozen(api.agentNames))
 assert(Object.isFrozen(api.driveDiscNames))
+assert(Object.isFrozen(api.wEngineNames))
 const all = await api.loadAllAgents("zh")
 for (const name of api.agentNames) {
   const data = await api.loadAgentData(name)
@@ -291,23 +302,61 @@ assert.equal(await api.loadDriveDiscDetails("unknown disc", "en"), undefined)
 await assert.rejects(api.loadDriveDiscData(31000), TypeError)
 await assert.rejects(api.loadDriveDiscDetails("Woodpecker Electro"), TypeError)
 await assert.rejects(api.loadAllDriveDiscs("zh-CN"), TypeError)
-console.log(JSON.stringify({ agents: api.agentNames, driveDiscs: api.driveDiscNames }))
+// WEngine 读取 API：逐成员与包内 data/zh/en JSON 比对，子路径直读与 API 值一致。
+const wEngineIds = index.entities["w-engines"].memberIds
+assert(api.wEngineNames.length === wEngineIds.length)
+const allWEngines = await api.loadAllWEngines("zh")
+for (const name of api.wEngineNames) {
+  const data = await api.loadWEngineData(name)
+  const zh = await api.loadWEngineDetails(name, "zh")
+  const en = await api.loadWEngineDetails(name, "en")
+  assert.equal(en.name, name)
+  assert.equal(zh.locale, "zh")
+  assert.equal(en.locale, "en")
+  assert.deepEqual(allWEngines[name], { data, details: zh })
+  assert.deepEqual(Object.keys(allWEngines[name]), ["data", "details"])
+  for (const [file, value] of [["data.json", data], ["details.zh.json", zh], ["details.en.json", en]]) {
+    const direct = await import("@randomplay/data/integrated/w-engines/" + data.id + "/" + file, { with: { type: "json" } })
+    assert.deepEqual(value, direct.default)
+  }
+  data.materials = "modified"
+  assert.notDeepEqual(await api.loadWEngineData(name), data)
+  zh.desc3 = "modified"
+  assert.notDeepEqual(await api.loadWEngineDetails(name, "zh"), zh)
+}
+assert(api.wEngineNames.includes("[Lunar] Pleniluna"))
+assert.equal((await api.loadWEngineData("[Lunar] Pleniluna")).id, 12001)
+assert.equal(await api.loadWEngineData("12001"), undefined)
+assert.equal(await api.loadWEngineDetails("unknown engine", "en"), undefined)
+await assert.rejects(api.loadWEngineData(12001), TypeError)
+await assert.rejects(api.loadWEngineDetails("[Lunar] Pleniluna"), TypeError)
+await assert.rejects(api.loadAllWEngines("zh-CN"), TypeError)
+console.log(JSON.stringify({ agents: api.agentNames, driveDiscs: api.driveDiscNames, wEngines: api.wEngineNames }))
 `,
         ),
       ),
-    ).toEqual({ agents: expectedNames, driveDiscs: expectedDriveDiscNames })
+    ).toEqual({
+      agents: expectedNames,
+      driveDiscs: expectedDriveDiscNames,
+      wEngines: expectedWEngineNames,
+    })
     const typeSource = `import rawData from "@randomplay/data/integrated/agents/1311/data.json" with { type: "json" }
 import rawDriveDiscData from "@randomplay/data/integrated/drive-discs/31000/data.json" with { type: "json" }
-import { agentNames, driveDiscNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs } from "@randomplay/data"
-import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale, DriveDiscName, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc } from "@randomplay/data"
+import rawWEngineData from "@randomplay/data/integrated/w-engines/12001/data.json" with { type: "json" }
+import { agentNames, driveDiscNames, wEngineNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadWEngineData, loadWEngineDetails, loadAllWEngines } from "@randomplay/data"
+import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale, DriveDiscName, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, WEngineName, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
 const numericSourceId: number = rawData.id
 const numericDriveDiscId: number = rawDriveDiscData.id
+const numericWEngineId: number = rawWEngineData.id
 const name: AgentName = "Astra Yao"
 const punctuated: AgentName = "Soldier 0 - Anby"
 const driveDiscName: DriveDiscName = "Woodpecker Electro"
 const spacedDiscName: DriveDiscName = "Puffer Electro"
+const wEngineName: WEngineName = "[Lunar] Pleniluna"
+const punctuatedEngineName: WEngineName = "[Reverb] Mark I"
 const names: readonly AgentName[] = agentNames
 const discNames: readonly DriveDiscName[] = driveDiscNames
+const engineNames: readonly WEngineName[] = wEngineNames
 const index: Promise<IntegratedSnapshotIndex> = loadIndex()
 const data: Promise<AgentData | undefined> = loadAgentData(name)
 const detail: Promise<AgentDetails | undefined> = loadAgentDetails(punctuated, "zh")
@@ -315,32 +364,48 @@ const all: Promise<Record<AgentName, LocalizedAgent>> = loadAllAgents("en")
 const discData: Promise<DriveDiscData | undefined> = loadDriveDiscData(driveDiscName)
 const discDetail: Promise<DriveDiscDetails | undefined> = loadDriveDiscDetails(spacedDiscName, "zh")
 const allDiscs: Promise<Record<DriveDiscName, LocalizedDriveDisc>> = loadAllDriveDiscs("en")
+const engineData: Promise<WEngineData | undefined> = loadWEngineData(wEngineName)
+const engineDetail: Promise<WEngineDetails | undefined> = loadWEngineDetails(punctuatedEngineName, "zh")
+const allEngines: Promise<Record<WEngineName, LocalizedWEngine>> = loadAllWEngines("en")
 function acceptsName(value: AgentName, locale: DetailLocale) { return loadAgentDetails(value, locale) }
 function acceptsDriveDiscName(value: DriveDiscName, locale: DetailLocale) { return loadDriveDiscDetails(value, locale) }
+function acceptsWEngineName(value: WEngineName, locale: DetailLocale) { return loadWEngineDetails(value, locale) }
 // @ts-expect-error exact literal union, no arbitrary string
 const wrong: AgentName = "AstraYao"
 // @ts-expect-error exact drive disc literal union
 const wrongDisc: DriveDiscName = "WoodpeckerElectro"
+// @ts-expect-error exact WEngine literal union
+const wrongEngine: WEngineName = "Lunar Pleniluna"
 // @ts-expect-error arbitrary strings must be narrowed by the caller
 loadAgentData("unknown" as string)
 // @ts-expect-error arbitrary strings must be narrowed by the caller for drive discs
 loadDriveDiscData("unknown" as string)
+// @ts-expect-error arbitrary strings must be narrowed by the caller for WEngines
+loadWEngineData("unknown" as string)
 // @ts-expect-error misspelling
 loadAgentDetails("astra yao", "en")
 // @ts-expect-error drive disc misspelling without space
 loadDriveDiscDetails("woodpecker electro", "en")
+// @ts-expect-error WEngine misspelling with a different bracket
+loadWEngineDetails("[Lunar]Pleniluna", "en")
 // @ts-expect-error numeric IDs are not names
 loadAgentData(1311)
 // @ts-expect-error numeric drive disc IDs are not names
 loadDriveDiscData(31000)
+// @ts-expect-error numeric WEngine IDs are not names
+loadWEngineData(12001)
 // @ts-expect-error locale required
 loadAgentDetails(name)
 // @ts-expect-error drive disc locale required
 loadDriveDiscDetails(driveDiscName)
+// @ts-expect-error WEngine locale required
+loadWEngineDetails(wEngineName)
 // @ts-expect-error locale has no aliases
 loadAllAgents("zh-CN")
 // @ts-expect-error drive disc locale has no aliases
 loadAllDriveDiscs("zh-CN")
+// @ts-expect-error WEngine locale has no aliases
+loadAllWEngines("zh-CN")
 // @ts-expect-error frozen readonly list
 agentNames.push(name)
 // @ts-expect-error readonly element
@@ -349,7 +414,11 @@ agentNames[0] = name
 driveDiscNames.push(driveDiscName)
 // @ts-expect-error readonly drive disc element
 driveDiscNames[0] = driveDiscName
-void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail, all, discData, discDetail, allDiscs, acceptsName, acceptsDriveDiscName, wrong, wrongDisc]
+// @ts-expect-error frozen readonly WEngine list
+wEngineNames.push(wEngineName)
+// @ts-expect-error readonly WEngine element
+wEngineNames[0] = wEngineName
+void [numericSourceId, numericDriveDiscId, numericWEngineId, names, discNames, engineNames, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, acceptsName, acceptsDriveDiscName, acceptsWEngineName, wrong, wrongDisc, wrongEngine]
 `
     const typeFile = join(consumerDirectory, "smoke.ts")
     writeFileSync(typeFile, typeSource)
@@ -376,7 +445,7 @@ void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail
     // Exercise the actual TypeScript language service, including completion after a space.
     const completionSource =
       typeSource +
-      '\nloadAgentData("Soldier ")\nloadDriveDiscData("Woodpecker ")\n'
+      '\nloadAgentData("Soldier ")\nloadDriveDiscData("Woodpecker ")\nloadWEngineData("[Lunar")\n'
     writeFileSync(typeFile, completionSource)
     const compilerOptions: ts.CompilerOptions = {
       module: ts.ModuleKind.ESNext,
@@ -416,6 +485,16 @@ void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail
         )
         ?.entries.map((entry) => entry.name),
     ).toEqual(expect.arrayContaining(expectedDriveDiscNames))
+    // 名称补全包含带空格与方括号的 WEngine 名称。
+    expect(
+      service
+        .getCompletionsAtPosition(
+          typeFile,
+          completionSource.lastIndexOf("[Lunar") + "[Lunar".length,
+          {},
+        )
+        ?.entries.map((entry) => entry.name),
+    ).toEqual(expect.arrayContaining(expectedWEngineNames))
     service.dispose()
     // Fresh private copies: never mutate the offline install's content-addressed files.
     const brokenConsumer = join(temporaryDirectory, "broken")
@@ -425,32 +504,43 @@ void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail
     writeFileSync(join(brokenConsumer, "package.json"), '{"type":"module"}')
     const agentCount = index.entities.agents.memberIds.length
     const driveDiscCount = index.entities["drive-discs"].memberIds.length
-    // 各行：损坏文件、必须拒绝的调用、以及跨类别隔离断言（另一类别的单体与全量读取仍成功）。
+    const wEngineCount = index.entities["w-engines"].memberIds.length
+    // 各行：损坏文件、必须拒绝的调用、以及跨类别隔离断言（其余类别的单体与全量读取仍成功）。
     for (const [path, call, isolation] of [
       [
         "index.json",
         "api.loadIndex()",
-        'assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); assert.equal((await api.loadDriveDiscData("Woodpecker Electro")).id, 31000); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh")',
+        'assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); assert.equal((await api.loadDriveDiscData("Woodpecker Electro")).id, 31000); assert.equal((await api.loadWEngineData("[Lunar] Pleniluna")).id, 12001); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh"); await api.loadAllWEngines("zh")',
       ],
       [
         "agents/1311/data.json",
         'api.loadAgentData("Astra Yao")',
-        'await assert.rejects(api.loadAllAgents("en")); await assert.rejects(api.loadAllAgents("zh")); assert.equal((await api.loadDriveDiscData("Woodpecker Electro")).id, 31000); await api.loadAllDriveDiscs("en")',
+        'await assert.rejects(api.loadAllAgents("en")); await assert.rejects(api.loadAllAgents("zh")); assert.equal((await api.loadDriveDiscData("Woodpecker Electro")).id, 31000); await api.loadAllDriveDiscs("en"); await api.loadAllWEngines("en")',
       ],
       [
         "agents/1311/details.en.json",
         'api.loadAgentDetails("Astra Yao", "en")',
-        'await assert.rejects(api.loadAllAgents("en")); await api.loadAllAgents("zh"); assert.equal((await api.loadDriveDiscDetails("Woodpecker Electro", "en")).name, "Woodpecker Electro"); await api.loadAllDriveDiscs("en")',
+        'await assert.rejects(api.loadAllAgents("en")); await api.loadAllAgents("zh"); assert.equal((await api.loadDriveDiscDetails("Woodpecker Electro", "en")).name, "Woodpecker Electro"); await api.loadAllDriveDiscs("en"); await api.loadAllWEngines("en")',
       ],
       [
         "drive-discs/31000/data.json",
         'api.loadDriveDiscData("Woodpecker Electro")',
-        'await assert.rejects(api.loadAllDriveDiscs("en")); await assert.rejects(api.loadAllDriveDiscs("zh")); assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); await api.loadAllAgents("en")',
+        'await assert.rejects(api.loadAllDriveDiscs("en")); await assert.rejects(api.loadAllDriveDiscs("zh")); assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); await api.loadAllAgents("en"); await api.loadAllWEngines("en")',
       ],
       [
         "drive-discs/31000/details.zh.json",
         'api.loadDriveDiscDetails("Woodpecker Electro", "zh")',
-        'await assert.rejects(api.loadAllDriveDiscs("zh")); await api.loadAllDriveDiscs("en"); assert.equal((await api.loadAgentDetails("Astra Yao", "zh")).locale, "zh"); await api.loadAllAgents("zh")',
+        'await assert.rejects(api.loadAllDriveDiscs("zh")); await api.loadAllDriveDiscs("en"); assert.equal((await api.loadAgentDetails("Astra Yao", "zh")).locale, "zh"); await api.loadAllAgents("zh"); await api.loadAllWEngines("zh")',
+      ],
+      [
+        "w-engines/12001/data.json",
+        'api.loadWEngineData("[Lunar] Pleniluna")',
+        'await assert.rejects(api.loadAllWEngines("en")); await assert.rejects(api.loadAllWEngines("zh")); assert.equal((await api.loadAgentData("Astra Yao")).id, 1311); await api.loadAllAgents("en"); await api.loadAllDriveDiscs("en")',
+      ],
+      [
+        "w-engines/12001/details.zh.json",
+        'api.loadWEngineDetails("[Lunar] Pleniluna", "zh")',
+        'await assert.rejects(api.loadAllWEngines("zh")); await api.loadAllWEngines("en"); assert.equal((await api.loadAgentDetails("Astra Yao", "zh")).locale, "zh"); await api.loadAllAgents("zh"); await api.loadAllDriveDiscs("zh")',
       ],
     ]) {
       const fullPath = join(brokenPackage, "dist/integrated", path)
@@ -460,20 +550,22 @@ void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail
         else writeFileSync(fullPath, "{")
         runNode(
           brokenConsumer,
-          `import assert from "node:assert/strict"; import * as api from "@randomplay/data"; assert.equal(api.agentNames.length, ${agentCount}); assert.equal(api.driveDiscNames.length, ${driveDiscCount}); await assert.rejects(${call}); ${isolation}`,
+          `import assert from "node:assert/strict"; import * as api from "@randomplay/data"; assert.equal(api.agentNames.length, ${agentCount}); assert.equal(api.driveDiscNames.length, ${driveDiscCount}); assert.equal(api.wEngineNames.length, ${wEngineCount}); await assert.rejects(${call}); ${isolation}`,
         )
         writeFileSync(fullPath, bytes)
       }
     }
-    // Root import must still succeed when every JSON file is absent, for both name catalogs.
+    // Root import must still succeed when every JSON file is absent, for all name catalogs.
     rmSync(join(brokenPackage, "dist/integrated"), { recursive: true })
     runNode(
       brokenConsumer,
-      'import assert from "node:assert/strict"; import { agentNames, driveDiscNames, loadAgentData, loadDriveDiscData } from "@randomplay/data"; assert.equal(agentNames.length, ' +
+      'import assert from "node:assert/strict"; import { agentNames, driveDiscNames, wEngineNames, loadAgentData, loadDriveDiscData, loadWEngineData } from "@randomplay/data"; assert.equal(agentNames.length, ' +
         agentCount +
         "); assert.equal(driveDiscNames.length, " +
         driveDiscCount +
-        '); await assert.rejects(loadAgentData("Astra Yao")); await assert.rejects(loadDriveDiscData("Woodpecker Electro"))',
+        "); assert.equal(wEngineNames.length, " +
+        wEngineCount +
+        '); await assert.rejects(loadAgentData("Astra Yao")); await assert.rejects(loadDriveDiscData("Woodpecker Electro")); await assert.rejects(loadWEngineData("[Lunar] Pleniluna"))',
     )
     // Exercise both build boundaries with the real tsdown process in this private checkout.
     for (const intervention of ["source-change", "dist-corruption"]) {
@@ -530,6 +622,7 @@ void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail
         const changedName = JSON.stringify("Astra Yao [next snapshot]")
         expect(declarations).toContain(JSON.stringify("Astra Yao"))
         expect(declarations).toContain(JSON.stringify("Woodpecker Electro"))
+        expect(declarations).toContain(JSON.stringify("[Lunar] Pleniluna"))
         expect(declarations).not.toContain(changedName)
         expect(
           JSON.parse(
@@ -547,6 +640,14 @@ void [numericSourceId, numericDriveDiscId, names, discNames, index, data, detail
             ),
           ),
         ).toEqual(expectedDriveDiscNames)
+        expect(
+          JSON.parse(
+            runNode(
+              cleanPackage,
+              'import { wEngineNames, loadWEngineDetails } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(wEngineNames.map(async name => (await loadWEngineDetails(name, "en")).name))))',
+            ),
+          ),
+        ).toEqual(expectedWEngineNames)
       } else {
         expect(build.status).toBe(1)
         expect(build.stdout + build.stderr).toContain("摘要不一致")

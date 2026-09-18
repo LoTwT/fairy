@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "总务官并非闲职。谈判席上唇枪舌剑，议会席间交锋博弈，案牍之上文书冗杂，种种繁杂苛责，足以令觊觎之辈望而却步。可总务官似乎又是轻松的。人人皆知，无论面对何种棘手难题、荒唐祸端，那一抹银灰色总是锋利而庄重，轻易令人信服。",
+  "desc2": "装备后可提升[异常]代理人的战斗能力",
+  "desc3": "静心安坐，且听风吟。",
+  "id": 14156,
+  "locale": "zh",
+  "name": "琳琅鎏心",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "能量自动回复",
+    "name2": "能量自动回复"
+  },
+  "talents": {
+    "1": {
+      "desc": "装备者的异常精通提升<color=#2BAD00>70</color>点；装备者发动<color=#FFFFFF>[强化特殊技]</color>造成<color=#A6C5FD>风属性伤害</color>时，自身造成的<color=#FFFFFF>[乱流]</color>和<color=#A6C5FD>[风化]</color>伤害提升<color=#2BAD00>7%</color>，持续40秒，最多叠加2层，重复触发时刷新持续时间，同一招式内最多触发一次，拥有2层该效果时，全队代理人的异常精通提升<color=#2BAD00>60</color>点，该效果全队唯一。",
+      "name": "无懈之礼"
+    },
+    "2": {
+      "desc": "装备者的异常精通提升<color=#2BAD00>80</color>点；装备者发动<color=#FFFFFF>[强化特殊技]</color>造成<color=#A6C5FD>风属性伤害</color>时，自身造成的<color=#FFFFFF>[乱流]</color>和<color=#A6C5FD>[风化]</color>伤害提升<color=#2BAD00>8%</color>，持续40秒，最多叠加2层，重复触发时刷新持续时间，同一招式内最多触发一次，拥有2层该效果时，全队代理人的异常精通提升<color=#2BAD00>69</color>点，该效果全队唯一。",
+      "name": "无懈之礼"
+    },
+    "3": {
+      "desc": "装备者的异常精通提升<color=#2BAD00>90</color>点；装备者发动<color=#FFFFFF>[强化特殊技]</color>造成<color=#A6C5FD>风属性伤害</color>时，自身造成的<color=#FFFFFF>[乱流]</color>和<color=#A6C5FD>[风化]</color>伤害提升<color=#2BAD00>9%</color>，持续40秒，最多叠加2层，重复触发时刷新持续时间，同一招式内最多触发一次，拥有2层该效果时，全队代理人的异常精通提升<color=#2BAD00>78</color>点，该效果全队唯一。",
+      "name": "无懈之礼"
+    },
+    "4": {
+      "desc": "装备者的异常精通提升<color=#2BAD00>100</color>点；装备者发动<color=#FFFFFF>[强化特殊技]</color>造成<color=#A6C5FD>风属性伤害</color>时，自身造成的<color=#FFFFFF>[乱流]</color>和<color=#A6C5FD>[风化]</color>伤害提升<color=#2BAD00>10%</color>，持续40秒，最多叠加2层，重复触发时刷新持续时间，同一招式内最多触发一次，拥有2层该效果时，全队代理人的异常精通提升<color=#2BAD00>87</color>点，该效果全队唯一。",
+      "name": "无懈之礼"
+    },
+    "5": {
+      "desc": "装备者的异常精通提升<color=#2BAD00>110</color>点；装备者发动<color=#FFFFFF>[强化特殊技]</color>造成<color=#A6C5FD>风属性伤害</color>时，自身造成的<color=#FFFFFF>[乱流]</color>和<color=#A6C5FD>[风化]</color>伤害提升<color=#2BAD00>11%</color>，持续40秒，最多叠加2层，重复触发时刷新持续时间，同一招式内最多触发一次，拥有2层该效果时，全队代理人的异常精通提升<color=#2BAD00>96</color>点，该效果全队唯一。",
+      "name": "无懈之礼"
+    }
+  },
+  "weaponType": {
+    "3": "异常"
+  }
+}
