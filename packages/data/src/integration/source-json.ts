@@ -62,6 +62,14 @@ export class WEngineIntegrationError extends SourceIntegrationError {
   }
 }
 
+/** Bangboo 整合失败；与代理人、驱动盘、WEngine 分开具名，便于调用方按实体类别定位。 */
+export class BangbooIntegrationError extends SourceIntegrationError {
+  constructor(location: SourceLocation, reason: string) {
+    super(location, reason)
+    this.name = "BangbooIntegrationError"
+  }
+}
+
 /** 失败时抛出指定类别的整合错误；默认沿用既有代理人错误契约，新实体类别显式传入自己的类型。 */
 export function fail(
   location: SourceLocation,

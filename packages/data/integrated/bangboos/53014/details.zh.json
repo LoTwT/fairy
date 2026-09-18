@@ -1,0 +1,184 @@
+{
+  "codeName": "Overtimeboo",
+  "desc": "疲劳值持续积累...嘀——已突破100！",
+  "id": 53014,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "加班布",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，推动电脑桌撞击目标敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "name": "班味全开！",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>，<color=#FFFFFF>[主动技]</color>造成的伤害提升25%，最多提升至100%。",
+          "name": "键盘破坏者",
+          "param": "25%|100%",
+          "property": ["伤害提升", "伤害最多提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>，<color=#FFFFFF>[主动技]</color>造成的伤害提升29%，最多提升至116%。",
+          "name": "键盘破坏者",
+          "param": "29%|116%",
+          "property": ["伤害提升", "伤害最多提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>，<color=#FFFFFF>[主动技]</color>造成的伤害提升32%，最多提升至128%。",
+          "name": "键盘破坏者",
+          "param": "32%|128%",
+          "property": ["伤害提升", "伤害最多提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>，<color=#FFFFFF>[主动技]</color>造成的伤害提升36%，最多提升至144%。",
+          "name": "键盘破坏者",
+          "param": "36%|144%",
+          "property": ["伤害提升", "伤害最多提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>，<color=#FFFFFF>[主动技]</color>造成的伤害提升40%，最多提升至160%。",
+          "name": "键盘破坏者",
+          "param": "40%|160%",
+          "property": ["伤害提升", "伤害最多提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

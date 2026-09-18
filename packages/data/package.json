@@ -29,7 +29,10 @@
     "./integrated/drive-discs/*/details.en.json": "./dist/integrated/drive-discs/*/details.en.json",
     "./integrated/w-engines/*/data.json": "./dist/integrated/w-engines/*/data.json",
     "./integrated/w-engines/*/details.zh.json": "./dist/integrated/w-engines/*/details.zh.json",
-    "./integrated/w-engines/*/details.en.json": "./dist/integrated/w-engines/*/details.en.json"
+    "./integrated/w-engines/*/details.en.json": "./dist/integrated/w-engines/*/details.en.json",
+    "./integrated/bangboos/*/data.json": "./dist/integrated/bangboos/*/data.json",
+    "./integrated/bangboos/*/details.zh.json": "./dist/integrated/bangboos/*/details.zh.json",
+    "./integrated/bangboos/*/details.en.json": "./dist/integrated/bangboos/*/details.en.json"
   },
   "publishConfig": {
     "access": "public"

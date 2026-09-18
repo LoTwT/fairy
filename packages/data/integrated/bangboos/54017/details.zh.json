@@ -1,0 +1,245 @@
+{
+  "codeName": "Belion",
+  "desc": "轻盈自在，正是武学奥义所在。",
+  "id": 54017,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "狮耶",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投射石球，石球会在敌人之间弹射，并对命中的所有敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "舞球摇凤",
+          "param": "{Skill:5401701, Prop:1001}|{Skill:5401701, Prop:1002}|30秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[云岿山]</color>阵营的角色时触发：狮耶造成的伤害提升25%；代理人发动<color=#FFFFFF>[终结技]</color>时，狮耶<color=#FFFFFF>[主动技]</color>的冷却时间减少4秒，最多触发2次，狮耶发动<color=#FFFFFF>[主动技]</color>时刷新可触发次数。",
+          "name": "纵云之道",
+          "param": "2|25%|4秒",
+          "property": ["所需[云岿山]角色数", "伤害提升", "冷却时间减少"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[云岿山]</color>阵营的角色时触发：狮耶造成的伤害提升31%；代理人发动<color=#FFFFFF>[终结技]</color>时，狮耶<color=#FFFFFF>[主动技]</color>的冷却时间减少4秒，最多触发2次，狮耶发动<color=#FFFFFF>[主动技]</color>时刷新可触发次数。",
+          "name": "纵云之道",
+          "param": "2|31%|4秒",
+          "property": ["所需[云岿山]角色数", "伤害提升", "冷却时间减少"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[云岿山]</color>阵营的角色时触发：狮耶造成的伤害提升37%；代理人发动<color=#FFFFFF>[终结技]</color>时，狮耶<color=#FFFFFF>[主动技]</color>的冷却时间减少4秒，最多触发2次，狮耶发动<color=#FFFFFF>[主动技]</color>时刷新可触发次数。",
+          "name": "纵云之道",
+          "param": "1|37%|4秒",
+          "property": ["所需[云岿山]角色数", "伤害提升", "冷却时间减少"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[云岿山]</color>阵营的角色时触发：狮耶造成的伤害提升43%；代理人发动<color=#FFFFFF>[终结技]</color>时，狮耶<color=#FFFFFF>[主动技]</color>的冷却时间减少4秒，最多触发2次，狮耶发动<color=#FFFFFF>[主动技]</color>时刷新可触发次数。",
+          "name": "纵云之道",
+          "param": "1|43%|4秒",
+          "property": ["所需[云岿山]角色数", "伤害提升", "冷却时间减少"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[云岿山]</color>阵营的角色时触发：狮耶造成的伤害提升50%；代理人发动<color=#FFFFFF>[终结技]</color>时，狮耶<color=#FFFFFF>[主动技]</color>的冷却时间减少4秒，最多触发2次，狮耶发动<color=#FFFFFF>[主动技]</color>时刷新可触发次数。",
+          "name": "纵云之道",
+          "param": "1|50%|4秒",
+          "property": ["所需[云岿山]角色数", "伤害提升", "冷却时间减少"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n旋转撞击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "name": "银狮奔雷",
+          "param": "{Skill:5401702, Prop:1001}|{Skill:5401702, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

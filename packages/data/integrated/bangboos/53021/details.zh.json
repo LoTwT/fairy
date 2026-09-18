@@ -1,0 +1,245 @@
+{
+  "codeName": "Booltergeist",
+  "desc": "不陪我玩，就捣蛋！",
+  "id": 53021,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "幽浮布",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n幽浮布飘向空中，对敌人进行持续的激光射击，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "诅咒追光",
+          "param": "{Skill:5302101, Prop:1001}|{Skill:5302101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>发动时，有60%的概率使该次主动技造成的伤害提升40%。",
+          "name": "特型惊吓演员",
+          "param": "40%",
+          "property": ["伤害提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>发动时，有60%的概率使该次主动技造成的伤害提升50%。",
+          "name": "特型惊吓演员",
+          "param": "50%",
+          "property": ["伤害提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>发动时，有60%的概率使该次主动技造成的伤害提升60%。",
+          "name": "特型惊吓演员",
+          "param": "60%",
+          "property": ["伤害提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>发动时，有60%的概率使该次主动技造成的伤害提升70%。",
+          "name": "特型惊吓演员",
+          "param": "70%",
+          "property": ["伤害提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[强攻]</color>或<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>发动时，有60%的概率使该次主动技造成的伤害提升80%。",
+          "name": "特型惊吓演员",
+          "param": "80%",
+          "property": ["伤害提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n从空中俯冲向敌人，命中敌人后产生爆炸，造成大量<color=#FE437E>以太伤害</color>。",
+          "name": "捣蛋鬼出没",
+          "param": "{Skill:5302102, Prop:1001}|{Skill:5302102, Prop:1002}",
+          "property": ["伤害倍率", "失衡倍率"]
+        }
+      }
+    }
+  }
+}

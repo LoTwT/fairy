@@ -1,0 +1,184 @@
+{
+  "codeName": "Magnetiboo",
+  "desc": "依恋型人格焦虑，治疗方案：主人勿携带金属饰品。",
+  "id": 53011,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "磁力布",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，持续牵引周围敌人，并对命中的所有敌人造成<color=#F0D12B>物理伤害</color>。",
+          "name": "磁力锁定",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>攻击范围增加，造成的伤害提升30%。",
+          "name": "磁极吸引",
+          "param": "30%",
+          "property": ["伤害提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>攻击范围增加，造成的伤害提升37.5%。",
+          "name": "磁极吸引",
+          "param": "37.5%",
+          "property": ["伤害提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>攻击范围增加，造成的伤害提升45%。",
+          "name": "磁极吸引",
+          "param": "45%",
+          "property": ["伤害提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>攻击范围增加，造成的伤害提升52.5%。",
+          "name": "磁极吸引",
+          "param": "52.5%",
+          "property": ["伤害提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[异常]</color>角色时触发：<color=#FFFFFF>[主动技]</color>攻击范围增加，造成的伤害提升60%。",
+          "name": "磁极吸引",
+          "param": "60%",
+          "property": ["伤害提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

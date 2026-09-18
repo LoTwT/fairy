@@ -1,0 +1,184 @@
+{
+  "codeName": "Overtimeboo",
+  "desc": "Fatigue levels rising... Beep — now over 100!",
+  "id": 53014,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Overtimeboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nRams the target enemy with a computer and desk, dealing <color=#F0D12B>Physical DMG</color>.",
+          "name": "Corporate Drone Max!",
+          "param": "{Skill:5301401, Prop:1001}|{Skill:5301401, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Anomaly</color> character in your squad: Every activation of the <color=#FFFFFF>Active Skill</color> boosts <color=#FFFFFF>Active Skill</color> DMG by 25%, up to a maximum of 100%.",
+          "name": "Keyboard Smasher",
+          "param": "25%|100%",
+          "property": ["DMG Increase", "Max DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Anomaly</color> character in your squad: Every activation of the <color=#FFFFFF>Active Skill</color> boosts <color=#FFFFFF>Active Skill</color> DMG by 29%, up to a maximum of 116%.",
+          "name": "Keyboard Smasher",
+          "param": "29%|116%",
+          "property": ["DMG Increase", "Max DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Anomaly</color> character in your squad: Every activation of the <color=#FFFFFF>Active Skill</color> boosts <color=#FFFFFF>Active Skill</color> DMG by 32%, up to a maximum of 128%.",
+          "name": "Keyboard Smasher",
+          "param": "32%|128%",
+          "property": ["DMG Increase", "Max DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Anomaly</color> character in your squad: Every activation of the <color=#FFFFFF>Active Skill</color> boosts <color=#FFFFFF>Active Skill</color> DMG by 36%, up to a maximum of 144%.",
+          "name": "Keyboard Smasher",
+          "param": "36%|144%",
+          "property": ["DMG Increase", "Max DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Anomaly</color> character in your squad: Every activation of the <color=#FFFFFF>Active Skill</color> boosts <color=#FFFFFF>Active Skill</color> DMG by 40%, up to a maximum of 160%.",
+          "name": "Keyboard Smasher",
+          "param": "40%|160%",
+          "property": ["DMG Increase", "Max DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

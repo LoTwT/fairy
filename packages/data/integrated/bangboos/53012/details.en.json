@@ -1,0 +1,130 @@
+{
+  "codeName": "Booressure",
+  "desc": "Understanding the mood of a conversation is key to becoming a Bangboo social expert.",
+  "id": 53012,
+  "level": {
+    "1": {
+      "extra": {}
+    },
+    "2": {
+      "extra": {}
+    },
+    "3": {
+      "extra": {}
+    },
+    "4": {
+      "extra": {}
+    },
+    "5": {
+      "extra": {}
+    },
+    "6": {
+      "extra": {}
+    }
+  },
+  "locale": "en",
+  "name": "Booressure",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[2.5 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[2.6 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[2.7 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[2.8 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[2.9 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[3 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[3.1 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[3.2 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[3.3 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nReleases Ether bubbles that generate Energy for characters coming into contact with them.",
+          "name": "Ether Bubble",
+          "param": "[3.4 + Bangboo Level × 0.05]|26s",
+          "property": ["Energy Generation", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Support</color> character in your squad: When Ether bubbles come into contact with characters, they additionally generate 60% of the original effect's Energy for off-field characters.",
+          "name": "Balanced Pressure",
+          "param": "60%",
+          "property": ["Proportion Energy Generated"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Support</color> character in your squad: When Ether bubbles come into contact with characters, they additionally generate 70% of the original effect's Energy for off-field characters.",
+          "name": "Balanced Pressure",
+          "param": "70%",
+          "property": ["Proportion Energy Generated"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Support</color> character in your squad: When Ether bubbles come into contact with characters, they additionally generate 80% of the original effect's Energy for off-field characters.",
+          "name": "Balanced Pressure",
+          "param": "80%",
+          "property": ["Proportion Energy Generated"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Support</color> character in your squad: When Ether bubbles come into contact with characters, they additionally generate 90% of the original effect's Energy for off-field characters.",
+          "name": "Balanced Pressure",
+          "param": "90%",
+          "property": ["Proportion Energy Generated"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Support</color> character in your squad: When Ether bubbles come into contact with characters, they additionally generate 100% of the original effect's Energy for off-field characters.",
+          "name": "Balanced Pressure",
+          "param": "100%",
+          "property": ["Proportion Energy Generated"]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

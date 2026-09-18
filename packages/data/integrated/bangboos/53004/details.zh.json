@@ -1,0 +1,184 @@
+{
+  "codeName": "Sumoboo",
+  "desc": "力士，绝不退后！",
+  "id": 53004,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "locale": "zh",
+  "name": "扑击布",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人跃起并进行下落打击，造成范围<color=#F0D12B>物理伤害</color>；招式具有较强的打断能力。",
+          "name": "决胜技·岩崩",
+          "param": "{Skill:5300401, Prop:1001}|{Skill:5300401, Prop:1002}|14秒",
+          "property": ["伤害倍率", "失衡倍率", "冷却时间"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[击破]</color>角色时触发：目标失衡值大于50%时，<color=#FFFFFF>[主动技]</color>造成的失衡值提升18%。",
+          "name": "一力降十会",
+          "param": "18%",
+          "property": ["失衡值提升"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[击破]</color>角色时触发：目标失衡值大于50%时，<color=#FFFFFF>[主动技]</color>造成的失衡值提升22.5%。",
+          "name": "一力降十会",
+          "param": "22.5%",
+          "property": ["失衡值提升"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[击破]</color>角色时触发：目标失衡值大于50%时，<color=#FFFFFF>[主动技]</color>造成的失衡值提升27%。",
+          "name": "一力降十会",
+          "param": "27%",
+          "property": ["失衡值提升"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[击破]</color>角色时触发：目标失衡值大于50%时，<color=#FFFFFF>[主动技]</color>造成的失衡值提升31.5%。",
+          "name": "一力降十会",
+          "param": "31.5%",
+          "property": ["失衡值提升"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[击破]</color>角色时触发：目标失衡值大于50%时，<color=#FFFFFF>[主动技]</color>造成的失衡值提升36%。",
+          "name": "一力降十会",
+          "param": "36%",
+          "property": ["失衡值提升"]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

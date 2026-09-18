@@ -1,0 +1,245 @@
+{
+  "codeName": "Ultra Jake",
+  "desc": "A super-spec En-Nah tech crystal.",
+  "id": 54022,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Ultra Jake",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, enters a Flying state and continuously fires at the target enemy, dealing <color=#FF5521>Fire DMG</color> and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Ultra Firepower Suppression",
+          "param": "{Skill:5402201, Prop:1001}*3|{Skill:5402201, Prop:1002}*3|30s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Roscaelifer</color> characters in your squad: When any squad member triggers <color=#FFFFFF>Vortex</color> or uses a <color=#FFFFFF>Chain Attack</color>, all squad members gain 2 Energy, and Ultra Jake's <color=#FFFFFF>Active Skill</color> deals 25% increased DMG for 45s. This effect can trigger once every 30s.",
+          "name": "Ultra Boost Module",
+          "param": "2|25%",
+          "property": ["Energy Generation", "DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Roscaelifer</color> characters in your squad: When any squad member triggers <color=#FFFFFF>Vortex</color> or uses a <color=#FFFFFF>Chain Attack</color>, all squad members gain 2.5 Energy, and Ultra Jake's <color=#FFFFFF>Active Skill</color> deals 31% increased DMG for 45s. This effect can trigger once every 30s.",
+          "name": "Ultra Boost Module",
+          "param": "2.5|31%",
+          "property": ["Energy Generation", "DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Roscaelifer</color> characters in your squad: When any squad member triggers <color=#FFFFFF>Vortex</color> or uses a <color=#FFFFFF>Chain Attack</color>, all squad members gain 3 Energy, and Ultra Jake's <color=#FFFFFF>Active Skill</color> deals 37% increased DMG for 45s. This effect can trigger once every 30s.",
+          "name": "Ultra Boost Module",
+          "param": "3|37%",
+          "property": ["Energy Generation", "DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Roscaelifer</color> characters in your squad: When any squad member triggers <color=#FFFFFF>Vortex</color> or uses a <color=#FFFFFF>Chain Attack</color>, all squad members gain 3.5 Energy, and Ultra Jake's <color=#FFFFFF>Active Skill</color> deals 43% increased DMG for 45s. This effect can trigger once every 30s.",
+          "name": "Ultra Boost Module",
+          "param": "3.5|43%",
+          "property": ["Energy Generation", "DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Roscaelifer</color> characters in your squad: When any squad member triggers <color=#FFFFFF>Vortex</color> or uses a <color=#FFFFFF>Chain Attack</color>, all squad members gain 4 Energy, and Ultra Jake's <color=#FFFFFF>Active Skill</color> deals 50% increased DMG for 45s. This effect can trigger once every 30s.",
+          "name": "Ultra Boost Module",
+          "param": "4|50%",
+          "property": ["Energy Generation", "DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nFires a charged hand cannon, dealing massive <color=#FF5521>Fire DMG</color> to enemies in range and accumulating <color=#FF5521>Fire Anomaly Buildup</color>.",
+          "name": "Super Ultra Cannon",
+          "param": "{Skill:5402202, Prop:1001}|{Skill:5402202, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

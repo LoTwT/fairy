@@ -1,0 +1,265 @@
+{
+  "codeName": "Biggest Fan",
+  "desc": "An Angels of Delusion superfan for life!",
+  "id": 54010,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Biggest Fan",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "12.5% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "13.9% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "15.3% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "16.7% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "18.1% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "19.4% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "20.8% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "22.2% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "23.6% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUpon activating this skill, Biggest Fan starts cheering, continuously restoring HP to the currently controlled character based on Biggest Fan's Max HP.",
+          "name": "I Stan My Angels",
+          "param": "25% HP|24s",
+          "property": ["HP Recovery", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Angels of Delusion</color> characters in your squad: When Biggest Fan uses its <color=#FFFFFF>Active Skill</color>, all Agents in the squad gain 50 ATK for 30s.\nThe Attribute Anomaly Buildup dealt by <color=#FFFFFF>Bangboo Chain Attack</color> is increased by 15%.",
+          "name": "Fandom Power Unleashed",
+          "param": "2|50|15%",
+          "property": [
+            "Required Angels of Delusion Characters",
+            "ATK Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Angels of Delusion</color> characters in your squad: When Biggest Fan uses its <color=#FFFFFF>Active Skill</color>, all Agents in the squad gain 62 ATK for 30s.\nThe Attribute Anomaly Buildup dealt by <color=#FFFFFF>Bangboo Chain Attack</color> is increased by 18.8%.",
+          "name": "Fandom Power Unleashed",
+          "param": "2|62|18.8%",
+          "property": [
+            "Required Angels of Delusion Characters",
+            "ATK Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Angels of Delusion</color> characters in your squad: When Biggest Fan uses its <color=#FFFFFF>Active Skill</color>, all Agents in the squad gain 75 ATK for 30s.\nThe Attribute Anomaly Buildup dealt by <color=#FFFFFF>Bangboo Chain Attack</color> is increased by 22.5%.",
+          "name": "Fandom Power Unleashed",
+          "param": "1|75|22.5%",
+          "property": [
+            "Required Angels of Delusion Characters",
+            "ATK Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Angels of Delusion</color> characters in your squad: When Biggest Fan uses its <color=#FFFFFF>Active Skill</color>, all Agents in the squad gain 87 ATK for 30s.\nThe Attribute Anomaly Buildup dealt by <color=#FFFFFF>Bangboo Chain Attack</color> is increased by 26%.",
+          "name": "Fandom Power Unleashed",
+          "param": "1|87|26%",
+          "property": [
+            "Required Angels of Delusion Characters",
+            "ATK Increase",
+            "Anomaly Buildup Increase"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Angels of Delusion</color> characters in your squad: When Biggest Fan uses its <color=#FFFFFF>Active Skill</color>, all Agents in the squad gain 100 ATK for 30s.\nThe Attribute Anomaly Buildup dealt by <color=#FFFFFF>Bangboo Chain Attack</color> is increased by 30%.",
+          "name": "Fandom Power Unleashed",
+          "param": "1|100|30%",
+          "property": [
+            "Required Angels of Delusion Characters",
+            "ATK Increase",
+            "Anomaly Buildup Increase"
+          ]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings glow sticks to attack enemies in front, dealing <color=#FE437E>Ether DMG</color> and massive <color=#FE437E>Ether Anomaly Buildup</color>.",
+          "name": "Grab the Merch!",
+          "param": "{Skill:5401002, Prop:1001}|{Skill:5401002, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

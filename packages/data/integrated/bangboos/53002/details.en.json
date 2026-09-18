@@ -1,0 +1,199 @@
+{
+  "codeName": "Luckyboo",
+  "desc": "Takes up quite a bit of space when placed on the counter.",
+  "id": 53002,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Luckyboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nStrikes the target with a barrage of golden coins, dealing <color=#F0D12B>Physical DMG</color> and accumulating <color=#F0D12B>Physical Anomaly Buildup</color>.",
+          "name": "Lavish Spending",
+          "param": "{{Skill:5300201, Prop:1001}/100}*140|{{Skill:5300201, Prop:1002}/100}*140|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Active Skill</color> inflicts 20% more Anomaly Buildup.\n<color=#FFFFFF>Active Skill</color>'s continuous strikes duration is increased by 0.8s.",
+          "name": "Luck is a Component of Power",
+          "param": "20%|0.8s",
+          "property": [
+            "Anomaly Buildup Increase",
+            "Continuous Strikes Duration Extension"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Active Skill</color> inflicts 25% more Anomaly Buildup.\n<color=#FFFFFF>Active Skill</color>'s continuous strikes duration is increased by 1s.",
+          "name": "Luck is a Component of Power",
+          "param": "25%|1s",
+          "property": [
+            "Anomaly Buildup Increase",
+            "Continuous Strikes Duration Extension"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Active Skill</color> inflicts 30% more Anomaly Buildup.\n<color=#FFFFFF>Active Skill</color>'s continuous strikes duration is increased by 1.2s.",
+          "name": "Luck is a Component of Power",
+          "param": "30%|1.2s",
+          "property": [
+            "Anomaly Buildup Increase",
+            "Continuous Strikes Duration Extension"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Active Skill</color> inflicts 35% more Anomaly Buildup.\n<color=#FFFFFF>Active Skill</color>'s continuous strikes duration is increased by 1.4s.",
+          "name": "Luck is a Component of Power",
+          "param": "35%|1.4s",
+          "property": [
+            "Anomaly Buildup Increase",
+            "Continuous Strikes Duration Extension"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#F0D12B>Physical Attribute</color> characters in your squad: <color=#FFFFFF>Active Skill</color> inflicts 40% more Anomaly Buildup.\n<color=#FFFFFF>Active Skill</color>'s continuous strikes duration is increased by 1.6s.",
+          "name": "Luck is a Component of Power",
+          "param": "40%|1.6s",
+          "property": [
+            "Anomaly Buildup Increase",
+            "Continuous Strikes Duration Extension"
+          ]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

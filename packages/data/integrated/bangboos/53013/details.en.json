@@ -1,0 +1,245 @@
+{
+  "codeName": "Baddieboo",
+  "desc": "Don't mess with it... It won't care if you're a human or Bangboo when it gets angry!",
+  "id": 53013,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Baddieboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSends rockets and molotov cocktails at the target enemy, dealing <color=#FF5521>Fire DMG</color>.",
+          "name": "Rocket Barrage",
+          "param": "{Skill:5301301, Prop:1001}|{Skill:5301301, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 20%. When the target is an <color=#FFFFFF>Organic</color> enemy, this buff increases by an additional 15%.",
+          "name": "Unusually Short Fuse",
+          "param": "20%|15%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 25%. When the target is an <color=#FFFFFF>Organic</color> enemy, this buff increases by an additional 19%.",
+          "name": "Unusually Short Fuse",
+          "param": "25%|19%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 30%. When the target is an <color=#FFFFFF>Organic</color> enemy, this buff increases by an additional 23%.",
+          "name": "Unusually Short Fuse",
+          "param": "30%|23%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 35%. When the target is an <color=#FFFFFF>Organic</color> enemy, this buff increases by an additional 27%.",
+          "name": "Unusually Short Fuse",
+          "param": "35%|27%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least one <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases by 40%. When the target is an <color=#FFFFFF>Organic</color> enemy, this buff increases by an additional 30%.",
+          "name": "Unusually Short Fuse",
+          "param": "40%|30%",
+          "property": ["DMG Increase", "Additional DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nJumps forward and fires a rocket, dealing <color=#FF5521>Fire DMG</color> to enemies in a large area ahead.",
+          "name": "Rocket Blast!",
+          "param": "{Skill:5301302, Prop:1001}|{Skill:5301302, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

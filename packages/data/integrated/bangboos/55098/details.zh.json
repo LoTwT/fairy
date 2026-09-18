@@ -1,0 +1,19 @@
+{
+  "codeName": "Eous",
+  "desc": "伊埃斯",
+  "id": 55098,
+  "level": {},
+  "locale": "zh",
+  "name": "伊埃斯",
+  "skill": {
+    "a": {
+      "level": {}
+    },
+    "b": {
+      "level": {}
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import type {
   AgentName,
+  BangbooName,
   DetailLocale,
   DriveDiscName,
   WEngineName,
@@ -27,6 +28,12 @@ const loaders = vi.hoisted(() => ({
   otherWEngineData: vi.fn(),
   otherWEngineZh: vi.fn(),
   otherWEngineEn: vi.fn(),
+  bangbooData: vi.fn(),
+  bangbooZh: vi.fn(),
+  bangbooEn: vi.fn(),
+  otherBangbooData: vi.fn(),
+  otherBangbooZh: vi.fn(),
+  otherBangbooEn: vi.fn(),
 }))
 vi.mock("../.generated/catalog.ts", () => ({
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
@@ -76,16 +83,37 @@ vi.mock("../.generated/catalog.ts", () => ({
       en: loaders.otherWEngineEn,
     },
   },
+  bangbooNames: Object.freeze(["Penguinboo", "Eous"]),
+  bangbooSourceIds: Object.freeze({
+    Penguinboo: "53001",
+    Eous: "55098",
+  }),
+  bangbooLoaders: {
+    "53001": {
+      data: loaders.bangbooData,
+      zh: loaders.bangbooZh,
+      en: loaders.bangbooEn,
+    },
+    "55098": {
+      data: loaders.otherBangbooData,
+      zh: loaders.otherBangbooZh,
+      en: loaders.otherBangbooEn,
+    },
+  },
   indexLoader: loaders.index,
 }))
 import {
   agentNames,
+  bangbooNames,
   driveDiscNames,
   wEngineNames,
   loadIndex,
   loadAgentData,
   loadAgentDetails,
   loadAllAgents,
+  loadBangbooData,
+  loadBangbooDetails,
+  loadAllBangboos,
   loadDriveDiscData,
   loadDriveDiscDetails,
   loadAllDriveDiscs,
@@ -200,6 +228,87 @@ function mockMemberRecords() {
       extra: { entries: ["original"] },
     })
   }
+
+  for (const [data, zh, en, id] of [
+    [loaders.bangbooData, loaders.bangbooZh, loaders.bangbooEn, 53001],
+    [
+      loaders.otherBangbooData,
+      loaders.otherBangbooZh,
+      loaders.otherBangbooEn,
+      55098,
+    ],
+  ] as const) {
+    data.mockResolvedValue({
+      id,
+      rarity: 3,
+      icon: "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole12.png",
+      stats: { endurance: 180, hpMax: 360, hpupgrade: 428397, attack: 50 },
+      skillProp: {
+        "5300101": {
+          "1001": { main: 46200, growth: 4620, format: "%" },
+          "elementAccumulationValue": 34600,
+        },
+      },
+      level: {
+        "1": {
+          hpMax: 0,
+          attack: 0,
+          defence: 0,
+          levelMax: 10,
+          levelMin: 0,
+          materials: { "10": 15000 },
+          extra: { "20101": { prop: 20101, value: 0 } },
+        },
+      },
+      unknown: { tags: ["original"] },
+    })
+    zh.mockResolvedValue({
+      id,
+      locale: "zh",
+      codeName: "Penguinboo",
+      name: "企鹅布",
+      desc: "摇摇，晃晃。冰冰，凉凉。",
+      skill: {
+        a: {
+          level: {
+            "1": {
+              name: "冰刀舞",
+              desc: "原文说明",
+              property: ["伤害倍率"],
+              param: "{Skill:5300101, Prop:1001}|20秒",
+            },
+          },
+        },
+      },
+      level: {
+        "1": { extra: { "20101": { name: "暴击率", format: "{0:0.#%}" } } },
+      },
+      extra: { entries: ["原文"] },
+    })
+    en.mockResolvedValue({
+      id,
+      locale: "en",
+      codeName: "Penguinboo",
+      name: "Penguinboo",
+      desc: "Widdly-waddly, icy and chilly.",
+      skill: {
+        a: {
+          level: {
+            "1": {
+              name: "Ice Blade Dance",
+              desc: "original description",
+              property: ["DMG Multiplier"],
+              param: "{Skill:5300101, Prop:1001}|20s",
+            },
+          },
+        },
+      },
+      level: {
+        "1": { extra: { "20101": { name: "CRIT Rate", format: "{0:0.#%}" } } },
+      },
+      extra: { entries: ["original"] },
+    })
+  }
 }
 
 beforeEach(() => {
@@ -268,11 +377,27 @@ describe("public readers", () => {
       if (key !== "wEngineData" && key !== "otherWEngineEn")
         expect(loader).not.toHaveBeenCalled()
   })
+  it("loads only the requested bangboo data/locale without prerequisites or other categories", async () => {
+    expect(await loadBangbooData("Penguinboo")).toMatchObject({ id: 53001 })
+    expect(loaders.index).not.toHaveBeenCalled()
+    expect(loaders.bangbooZh).not.toHaveBeenCalled()
+    expect(loaders.bangbooEn).not.toHaveBeenCalled()
+    expect(await loadBangbooDetails("Eous", "en")).toMatchObject({
+      id: 55098,
+      locale: "en",
+    })
+    expect(loaders.otherBangbooData).not.toHaveBeenCalled()
+    expect(loaders.otherBangbooZh).not.toHaveBeenCalled()
+    for (const [key, loader] of Object.entries(loaders))
+      if (key !== "bangbooData" && key !== "otherBangbooEn")
+        expect(loader).not.toHaveBeenCalled()
+  })
   it.each([
     "unknown",
     "1311",
     "31000",
     "12001",
+    "53001",
     "astra yao",
     " Astra Yao",
     "Astra Yao ",
@@ -288,6 +413,8 @@ describe("public readers", () => {
     ).toBeUndefined()
     expect(await loadWEngineData(name as WEngineName)).toBeUndefined()
     expect(await loadWEngineDetails(name as WEngineName, "zh")).toBeUndefined()
+    expect(await loadBangbooData(name as BangbooName)).toBeUndefined()
+    expect(await loadBangbooDetails(name as BangbooName, "zh")).toBeUndefined()
     for (const loader of Object.values(loaders))
       expect(loader).not.toHaveBeenCalled()
   })
@@ -308,6 +435,8 @@ describe("public readers", () => {
       () => loadDriveDiscDetails(name as DriveDiscName, "zh"),
       () => loadWEngineData(name as WEngineName),
       () => loadWEngineDetails(name as WEngineName, "zh"),
+      () => loadBangbooData(name as BangbooName),
+      () => loadBangbooDetails(name as BangbooName, "zh"),
     ])
       await expect(read()).rejects.toBeInstanceOf(TypeError)
   })
@@ -334,6 +463,12 @@ describe("public readers", () => {
       ).rejects.toBeInstanceOf(TypeError)
       await expect(
         loadAllWEngines(locale as DetailLocale),
+      ).rejects.toBeInstanceOf(TypeError)
+      await expect(
+        loadBangbooDetails("unknown" as BangbooName, locale as DetailLocale),
+      ).rejects.toBeInstanceOf(TypeError)
+      await expect(
+        loadAllBangboos(locale as DetailLocale),
       ).rejects.toBeInstanceOf(TypeError)
       for (const loader of Object.values(loaders))
         expect(loader).not.toHaveBeenCalled()
@@ -410,6 +545,35 @@ describe("public readers", () => {
       // WEngine 全量不得顺带加载代理人、驱动盘或索引。
       for (const [key, loader] of Object.entries(loaders))
         if (!key.toLowerCase().includes("wengine"))
+          expect(loader).not.toHaveBeenCalled()
+    },
+  )
+  it.each(supportedLanguages)(
+    "loads the full separated bangboo %s view with English keys",
+    async (locale) => {
+      const all = await loadAllBangboos(locale)
+      expect(Object.keys(all)).toEqual(bangbooNames)
+      expect(Object.keys(all["Penguinboo"])).toEqual(["data", "details"])
+      expect(all["Penguinboo"].details.locale).toBe(locale)
+      expect(all["Penguinboo"].details.name).toBe(
+        locale === "zh" ? "企鹅布" : "Penguinboo",
+      )
+      expect(all["Eous"].details.locale).toBe(locale)
+      expect(loaders.index).not.toHaveBeenCalled()
+      expect(loaders.bangbooData).toHaveBeenCalledTimes(1)
+      expect(loaders.otherBangbooData).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "bangbooZh" : "bangbooEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "otherBangbooZh" : "otherBangbooEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "bangbooEn" : "bangbooZh"],
+      ).not.toHaveBeenCalled()
+      // 邦布全量不得顺带加载代理人、驱动盘、WEngine 或索引。
+      for (const [key, loader] of Object.entries(loaders))
+        if (!key.toLowerCase().includes("bangboo"))
           expect(loader).not.toHaveBeenCalled()
     },
   )
@@ -494,6 +658,27 @@ describe("public readers", () => {
     })
     expect(() => (wEngineNames as WEngineName[]).pop()).toThrow(TypeError)
   })
+  it("isolates bangboo mutations across sequential/concurrent and full/single calls", async () => {
+    const [one, two] = await Promise.all([
+      loadBangbooData("Penguinboo"),
+      loadBangbooData("Penguinboo"),
+    ])
+    ;(one!.unknown as { tags: string[] }).tags.push("changed")
+    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.level["1"].hpMax = 1
+    expect((await loadBangbooData("Penguinboo"))!.level["1"].hpMax).toBe(0)
+    const details = await loadBangbooDetails("Penguinboo", "zh")
+    ;(details!.extra as any).entries.push("changed")
+    const all = await loadAllBangboos("zh")
+    expect((all["Penguinboo"].details.extra as any).entries).toEqual(["原文"])
+    ;(all["Penguinboo"].data.unknown as { tags: string[] }).tags.push("changed")
+    ;(all["Penguinboo"].details.extra as any).entries.push("changed")
+    expect((await loadAllBangboos("zh"))["Penguinboo"]).toEqual({
+      data: two,
+      details: await loadBangbooDetails("Penguinboo", "zh"),
+    })
+    expect(() => (bangbooNames as BangbooName[]).pop()).toThrow(TypeError)
+  })
   it.each([
     new Error("missing file"),
     new SyntaxError("invalid JSON"),
@@ -506,6 +691,8 @@ describe("public readers", () => {
     loaders.discZh.mockRejectedValue(error)
     loaders.wEngineData.mockRejectedValue(error)
     loaders.wEngineZh.mockRejectedValue(error)
+    loaders.bangbooData.mockRejectedValue(error)
+    loaders.bangbooZh.mockRejectedValue(error)
     await expect(loadIndex()).rejects.toBe(error)
     await expect(loadAgentData("Astra Yao")).rejects.toBe(error)
     await expect(loadAgentDetails("Astra Yao", "zh")).rejects.toBe(error)
@@ -520,6 +707,9 @@ describe("public readers", () => {
       error,
     )
     await expect(loadAllWEngines("zh")).rejects.toBe(error)
+    await expect(loadBangbooData("Penguinboo")).rejects.toBe(error)
+    await expect(loadBangbooDetails("Penguinboo", "zh")).rejects.toBe(error)
+    await expect(loadAllBangboos("zh")).rejects.toBe(error)
   })
   it("rejects the full view if a later member's necessary detail fails", async () => {
     const agentError = new Error("missing later member")
@@ -531,5 +721,8 @@ describe("public readers", () => {
     const wEngineError = new Error("missing later WEngine")
     loaders.otherWEngineEn.mockRejectedValue(wEngineError)
     await expect(loadAllWEngines("en")).rejects.toBe(wEngineError)
+    const bangbooError = new Error("missing later bangboo")
+    loaders.otherBangbooEn.mockRejectedValue(bangbooError)
+    await expect(loadAllBangboos("en")).rejects.toBe(bangbooError)
   })
 })

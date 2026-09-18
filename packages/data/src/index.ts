@@ -11,6 +11,10 @@ import type {
   WEngineData,
   WEngineDetails,
 } from "./integration/w-engine-types.ts"
+import type {
+  BangbooData,
+  BangbooDetails,
+} from "./integration/bangboo-types.ts"
 import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
 import {
   agentNames,
@@ -22,12 +26,16 @@ import {
   wEngineNames,
   wEngineSourceIds,
   wEngineLoaders,
+  bangbooNames,
+  bangbooSourceIds,
+  bangbooLoaders,
   indexLoader,
 } from "../.generated/catalog.ts"
 import type {
   AgentName,
   DriveDiscName,
   WEngineName,
+  BangbooName,
 } from "../.generated/catalog.ts"
 
 /** 正式字段类型：实体结构、文件引用、来源身份与多实体完整制品索引。 */
@@ -66,6 +74,19 @@ export type {
   WEngineTalent,
 } from "./integration/w-engine-types.ts"
 export type {
+  BangbooData,
+  BangbooDetails,
+  BangbooLevelExtraLocalization,
+  BangbooLevelExtraShared,
+  BangbooLevelStage,
+  BangbooLevelStageLocalization,
+  BangbooSkillCategory,
+  BangbooSkillLevelEntry,
+  BangbooSkillProp,
+  BangbooSkillPropParameter,
+  BangbooStats,
+} from "./integration/bangboo-types.ts"
+export type {
   IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
   IntegratedSnapshotMember,
@@ -75,11 +96,13 @@ export type {
   AgentName,
   DriveDiscName,
   WEngineName,
+  BangbooName,
 } from "../.generated/catalog.ts"
 export {
   agentNames,
   driveDiscNames,
   wEngineNames,
+  bangbooNames,
 } from "../.generated/catalog.ts"
 
 /** 指定语言的完整代理人资料；公共与本地化字段分别保留，不合并。 */
@@ -104,6 +127,14 @@ export interface LocalizedWEngine {
   data: WEngineData
   /** 指定语言详情，locale 与调用参数一致。 */
   details: WEngineDetails
+}
+
+/** 指定语言的完整邦布资料；公共与本地化字段分别保留，不合并。 */
+export interface LocalizedBangboo {
+  /** 原有公共资料结构。 */
+  data: BangbooData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: BangbooDetails
 }
 
 function assertName(name: unknown): asserts name is string {
@@ -131,6 +162,13 @@ function wEngineSourceId(name: WEngineName): string | undefined {
   assertName(name)
   return Object.hasOwn(wEngineSourceIds, name)
     ? wEngineSourceIds[name]
+    : undefined
+}
+
+function bangbooSourceId(name: BangbooName): string | undefined {
+  assertName(name)
+  return Object.hasOwn(bangbooSourceIds, name)
+    ? bangbooSourceIds[name]
     : undefined
 }
 
@@ -260,4 +298,45 @@ export async function loadAllWEngines(
       }),
     ),
   ) as Record<WEngineName, LocalizedWEngine>
+}
+
+/** 精确英文名称对应的邦布公共资料；未知字符串返回 undefined，非字符串以 TypeError 拒绝。不加载索引、详情或其他类别，每次返回独立对象树。 */
+export async function loadBangbooData(
+  name: BangbooName,
+): Promise<BangbooData | undefined> {
+  const id = bangbooSourceId(name)
+  return id === undefined
+    ? undefined
+    : structuredClone(await bangbooLoaders[id]!.data())
+}
+
+/** 只读取指定邦布显式 zh/en 详情，无语言回退；未知字符串返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
+export async function loadBangbooDetails(
+  name: BangbooName,
+  locale: DetailLocale,
+): Promise<BangbooDetails | undefined> {
+  assertLocale(locale)
+  const id = bangbooSourceId(name)
+  return id === undefined
+    ? undefined
+    : structuredClone(await bangbooLoaders[id]![locale]())
+}
+
+/** 显式加载全部邦布公共资料和指定语言详情，以英文名称为 key；任一必要文件失败则整体拒绝。不加载代理人、驱动盘、WEngine 或索引，每次返回独立对象树。 */
+export async function loadAllBangboos(
+  locale: DetailLocale,
+): Promise<Record<BangbooName, LocalizedBangboo>> {
+  assertLocale(locale)
+  return Object.fromEntries(
+    await Promise.all(
+      bangbooNames.map(async (name) => {
+        const loaders = bangbooLoaders[bangbooSourceIds[name]]!
+        const [data, details] = await Promise.all([
+          loaders.data(),
+          loaders[locale](),
+        ])
+        return [name, structuredClone({ data, details })]
+      }),
+    ),
+  ) as Record<BangbooName, LocalizedBangboo>
 }

@@ -1,0 +1,270 @@
+{
+  "codeName": "Paperboo",
+  "desc": "Always nostalgic over when it hatched from its shell.",
+  "id": 53005,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Paperboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nUses a cardboard box to camouflage itself, inducing a taunt effect: While camouflaged, being attacked by enemies or reaching the camouflage time limit will trigger an explosion, dealing <color=#F0D12B>Physical DMG</color> in an area.",
+          "name": "Decoy Paper Armor",
+          "param": "{Skill:5300501, Prop:1001}|{Skill:5300501, Prop:1002}|20s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Defense</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> generates Shield for all squad members. The more enemies hit, the more Shield generated, up to a max of 15% of Paperboo's Max HP.",
+          "name": "Cardboard Armor",
+          "param": "10% HP|12% HP|15% HP|24s",
+          "property": [
+            "Shield Generated (1 Enemy)",
+            "Shield Generated (2 Enemies)",
+            "Shield Generated (3 or More Enemies)",
+            "Shield Duration"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Defense</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> generates Shield for all squad members. The more enemies hit, the more Shield generated, up to a max of 16.5% of Paperboo's Max HP.",
+          "name": "Cardboard Armor",
+          "param": "11% HP|13.2% HP|16.5% HP|24s",
+          "property": [
+            "Shield Generated (1 Enemy)",
+            "Shield Generated (2 Enemies)",
+            "Shield Generated (3 or More Enemies)",
+            "Shield Duration"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Defense</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> generates Shield for all squad members. The more enemies hit, the more Shield generated, up to a max of 18% of Paperboo's Max HP.",
+          "name": "Cardboard Armor",
+          "param": "12% HP|14.4% HP|18% HP|24s",
+          "property": [
+            "Shield Generated (1 Enemy)",
+            "Shield Generated (2 Enemies)",
+            "Shield Generated (3 or More Enemies)",
+            "Shield Duration"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Defense</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> generates Shield for all squad members. The more enemies hit, the more Shield generated, up to a max of 19.5% of Paperboo's Max HP.",
+          "name": "Cardboard Armor",
+          "param": "13% HP|15.6% HP|19.5% HP|24s",
+          "property": [
+            "Shield Generated (1 Enemy)",
+            "Shield Generated (2 Enemies)",
+            "Shield Generated (3 or More Enemies)",
+            "Shield Duration"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Defense</color> character in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> generates Shield for all squad members. The more enemies hit, the more Shield generated, up to a max of 21% of Paperboo's Max HP.",
+          "name": "Cardboard Armor",
+          "param": "14% HP|16.8% HP|21% HP|24s",
+          "property": [
+            "Shield Generated (1 Enemy)",
+            "Shield Generated (2 Enemies)",
+            "Shield Generated (3 or More Enemies)",
+            "Shield Duration"
+          ]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nEnters a cardboard box and jumps at the target enemy, causing an explosion when it lands, dealing <color=#F0D12B>Physical DMG</color> over a large area.",
+          "name": "Paper Armor: Impact Mode",
+          "param": "{Skill:5300502, Prop:1001}|{Skill:5300502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

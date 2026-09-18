@@ -2965,6 +2965,1575 @@
       },
       "rulesVersion": "nanoka-agent-reference/4"
     },
+    "bangboos": {
+      "complete": true,
+      "detailLocales": ["zh", "en"],
+      "inputs": [
+        {
+          "resource": "zzz/3.1/bangboo.json",
+          "sha256": "788878bfff6efbb1e6568d6fee4220fb5cf366aa2e39f494188b151d8706a34e"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53001.json",
+          "sha256": "cf669f75904c3e602dd49fe09f1ed78c72da83aec439cc5bc8396519ca33fbe0"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53001.json",
+          "sha256": "10754f2832816a5d2ca5b612ccd71d8470083421d7da2c9c251197899a4d5b1e"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53002.json",
+          "sha256": "efddfa37b4edc90367a570dd554cf1b58f53822c9023aaeb27ea88ef58d0e9f8"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53002.json",
+          "sha256": "79ab25c50fcab5675d0a7588afe3f710c0772670bfb7df1762d624e86358b81f"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53003.json",
+          "sha256": "7cfdfdcb79c893464fd7dabfce6d7d2b5d9ccf21dea613077aca2d78ace9dc90"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53003.json",
+          "sha256": "7b1802f6312976ce828b127128d6378ac71fdb4009e187a7f11b397a4fa4db3b"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53004.json",
+          "sha256": "80b4ca50431906a296b76d847b39dee82f1671b329dcd8e67742f96a2de140a1"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53004.json",
+          "sha256": "fe0bec7429932e57b0e636e9742bcecb096c79bae1fed3913cd55d3c1c5a063d"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53005.json",
+          "sha256": "c88703e2938c3b9d54cf910ea4ba58fae95041360939207dcb68f761695d050b"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53005.json",
+          "sha256": "1d336d082f2c5cd9b0e1561b81d803f2027dee17712b59a2ea3aabc5990c8039"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53006.json",
+          "sha256": "8400b150af0915fd46844faef82ad70e272de8cd4dd4d084b8dc718619158cdf"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53006.json",
+          "sha256": "c4fc2752b19e00cecc4432ed7da46e8b224718173d8d2836fd341b85a9cb7b0f"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53007.json",
+          "sha256": "ed484204337a595d58e37edf47b7dcfcbbab5fd3da561e503908b29064595edb"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53007.json",
+          "sha256": "9286d0ec772731db567fc2f366570e8b2dfa99bc15f097cdc7459bbd6b0c8e45"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53008.json",
+          "sha256": "82d4c6e82a5c9e0b2bda4e969c0fd5dbd317a3c529a13d97983dde0f166d0f3e"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53008.json",
+          "sha256": "4202d9d9db642cdb553ef5cd4049ec515a3ac57f2c5d2398999f5371a1dc53a3"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53009.json",
+          "sha256": "afa8a8070245bc1de1787a94fc0775b7952dd3bbcbe5593b358825fd3ec1c0c7"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53009.json",
+          "sha256": "9e79a440a113f853a313852e96ba3742c45de45800941a19374bccf7e0a357f8"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53010.json",
+          "sha256": "2bbeec04c71b74a55e42401a510fdf9bc14a93e3a746dde1d57ec8ebb6c46829"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53010.json",
+          "sha256": "522f05512c2be8903ea9ee425fd499376381b8d377e4c647be11c63af6398496"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53011.json",
+          "sha256": "8fa2364ab92fc68dac79ca80dfeef264ec6ea989e075f4cbad68cdf513976162"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53011.json",
+          "sha256": "c82ba9010352de895f630c2af1e30690b54625f24dd457e72292143c870d9e8f"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53012.json",
+          "sha256": "b94d6e84488baa483bdd6c8b3db177c487b82d54a0b153289435668e5e04c9c8"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53012.json",
+          "sha256": "082e43539b08733213d03e0eb0cd559a385af8b626aecbc7149f0acf2da50388"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53013.json",
+          "sha256": "a7958af208ca26f8ecab87fc4f77681aa2720539b6c0312ae0267ac40cd74a2a"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53013.json",
+          "sha256": "8e09ea07698ae1fc615011891a868eb6e2830e8f5e26fd38c482da9f634c9fba"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53014.json",
+          "sha256": "d32f2f765167bb7352708ebad5ec4f2c8fb142306394c64bc055ddb633092adf"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53014.json",
+          "sha256": "0918e91bef49ed0d2cbad6b2dca792d6b9db2b64edbf23f6dae7d9beff2e6e40"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53015.json",
+          "sha256": "b1217274eb24d57ce27ee805dec2e409db9cab1434985d52bdb25c16bb8afb08"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53015.json",
+          "sha256": "26f602aa4cd89b357bb3c4e367ddba3ac7acdc9a542daec188b6add6ff98a008"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53016.json",
+          "sha256": "7cf9a2851011bc515920b0a6198e374086404219c409d6632a2097e3187a076f"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53016.json",
+          "sha256": "3be47c42a2aff1f241f6dead94356b957e84aeaf0288fcb609e6b82ec7ee4fed"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53017.json",
+          "sha256": "4e39602339c0d78886790063cc8a6c66eb8bdd007a79369ad7c890481fcc393f"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53017.json",
+          "sha256": "ff90548dec3c1b33ed2794621c722d18244059149c76e0eba70fd454d0126bdb"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53019.json",
+          "sha256": "fbf01c4d5c657b5c1bb3fed0be79187a871e3bafa30769cb97807b01646a91a9"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53019.json",
+          "sha256": "4aa1fb42f333fd3afb44da4b20632112f4099be42f8ceee173ceeebcbe5483c3"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/53021.json",
+          "sha256": "d5844c98ab5c4273dbd7617bc0baffd3578732142b937fcf60df332fee0c66e1"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/53021.json",
+          "sha256": "dc737749bb487f0695e2c1cefde2c12a2036bf3792bcddb8d529c6d0be0b5f2c"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54001.json",
+          "sha256": "9d57f6cd036871197cf1abad300a0aa8391ed7e3df62d6bcedfa8021c4528b3f"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54001.json",
+          "sha256": "454208c501ea3f7a995008dfa8395119ed3059def01e59aa87ff3c05c3ca2d4e"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54002.json",
+          "sha256": "f927eda80b4b0739686bd27953e20547c58cc4cf642775f0689b26fe43769d63"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54002.json",
+          "sha256": "4728363ba08e39b053786c623651802e9c8471709f9b056842e19321f1451f4c"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54003.json",
+          "sha256": "922d52927ce7b9bf5db5c29e5f4cfb999d24eafacc2a55c1f553b0e73326de5b"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54003.json",
+          "sha256": "c72611e09d33e584883b505d326209bb07b5f930ff75f8eedc74c57eca192729"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54004.json",
+          "sha256": "b6085500ed8233652b55c4781021a4f36033a00d212172850f21e0816bbd3610"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54004.json",
+          "sha256": "c1513e84d7e8f62fb0a97f4d3b4259e2a4b1ad3b93dc0fabd26ef104cb73bc62"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54005.json",
+          "sha256": "56b2fbbc2f230aec20718f3dc22c01c85c13dde24fc0b35fc2ee8f9630e24601"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54005.json",
+          "sha256": "497f8a47427ad708480c8badbdf334e4d85ee995709ee8113f38b1caf115ff93"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54006.json",
+          "sha256": "d01e621d3697f88663398cba4a4eacb6adb4cfaefd383f4ed88c117f900ffacc"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54006.json",
+          "sha256": "9c899795a3d7c7dbe362ce5a12dfbac8d251174a642cd450d34ad9b941b1c8bc"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54008.json",
+          "sha256": "2afc34c8b72b3a7dc6e18d945e83c12784a742817e4ce760ee8c4c17aa3b0261"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54008.json",
+          "sha256": "ee02fd4ceafacf0aaff83a668ad458b726017aa9b5657a1a11ceb6af1a420930"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54009.json",
+          "sha256": "0ae4966a6abc2251bfe78c027647b72a14cd988e7c0f1c7980e007dfa766bff8"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54009.json",
+          "sha256": "42018cfdc9cd7b526c7cccf95c8cf9141841b3ddb1a69bf6cd8c3dfbd4d8935e"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54010.json",
+          "sha256": "b98d082e9f219a6423ca25d5b8697be142678208bedf43819e6c873cf589398a"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54010.json",
+          "sha256": "139953448c5ea20693d425b310e466dacdfe9c407e91aaf9524c3b0355d2c041"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54011.json",
+          "sha256": "2ebea7eed2b0494c9bedb73b2a3663961680adf162a59fb5440881ef61b99950"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54011.json",
+          "sha256": "c3147b76ed7b4b4e4e47b31c8cabdc7cecbad4d093c4d2780b6e5ff8234d59ec"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54012.json",
+          "sha256": "85070f9238f3e21577496543c57e63383abf475dc46cf30ddfa6db2377b85407"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54012.json",
+          "sha256": "dd081c4b7cd8641309102328a018e9ba04feb19bd9fac65be8ef7bea3934d8ae"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54013.json",
+          "sha256": "44e6c629e08abe858ed08d4609cc1a4fbca9e471d87496a0ec8952f79e7057d3"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54013.json",
+          "sha256": "0820fcd905166b3bcacf9430fcf4ba6e1af952aab9cd111ad6c11420b13886a1"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54014.json",
+          "sha256": "7f22a355da06ba2b9eafb16ed954fc24812a1dfc95a66a87506f289a8f9250df"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54014.json",
+          "sha256": "e6dedd0df4566c5e8f2bdd167b719ca8effe5c416ee8719a5a6a119b57eb1d36"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54015.json",
+          "sha256": "f9f55017608a93b6ed3b974caf93bf0ecd5794ddb5cc2b383190cc4d7d0ddb54"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54015.json",
+          "sha256": "71a8439f74bf13f57e6d9a16626f24cf883e3bc21a9e3af0c0d4133e07faa5ed"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54016.json",
+          "sha256": "a4a27b1c3d1b50dc03f57545d41930fe5a3cfdfd412691a21ac6b06e951d2ff0"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54016.json",
+          "sha256": "9425457354e954ecdc0699d289cdf38e6168da45f463e819a44932fac263a4fa"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54017.json",
+          "sha256": "896a27571f00d6bc0b5878325b6d3a4faf179335b1218a4bf5fcfc75095a58b1"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54017.json",
+          "sha256": "3fc8de070eaf5562b91cc42a5580eb618911902878f062f272221863b7b8f5d7"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54018.json",
+          "sha256": "8cec08666998a2840c7fa3eda5d31aff34c6cff3ade534e2ff692eaef78f7eff"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54018.json",
+          "sha256": "26a83ddd487842f3956ed1d12092930b31c87fa6110468eeea92b2f4a11eceb3"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54019.json",
+          "sha256": "239c618cc0e9c89e1545c32d731aab755eb0a3bde3a0a1ea8d17c20f2960f3ef"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54019.json",
+          "sha256": "f9522bab58cbdb8b4d0631b312f4c93f161d3898b2e625689c0c39574efa8629"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54020.json",
+          "sha256": "1b23190f5c4da3166a682d2179b2126ad5afe6e8530b19ce4c267364d32cf665"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54020.json",
+          "sha256": "3438de1094c766a036ae8f861b99a82a07fdf021d8055f6efb8bc94bfc882929"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54021.json",
+          "sha256": "78f761cd620222c0de7832ffaaaeda1992992b0c5fb4f4ed8754724c5bed61c7"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54021.json",
+          "sha256": "af69d68777d1590424aee4f8339c5274fed3e3e642f7785c935434968f406ca7"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54022.json",
+          "sha256": "fa7e144e031e6b319f413bbce2f85a84b4756c864ba36d673564514875db7454"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54022.json",
+          "sha256": "3aab5d4c2031417caa0559e28f6dee9bd12ca5410eb767dc553c91ebdbfdfbdd"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/54023.json",
+          "sha256": "122a39b842bbfcd924f065802ad137baebd988423f59786b5fa0af17d1a4ff8f"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/54023.json",
+          "sha256": "78219ed94bc07d408c5299c74ec94e032be674688a064692e7b8567b5df189e4"
+        },
+        {
+          "resource": "zzz/3.1/zh/bangboo/55098.json",
+          "sha256": "a150ab0fd8f08029d43a00616783155047e79cc48cd0f3648752b5b94ff50f54"
+        },
+        {
+          "resource": "zzz/3.1/en/bangboo/55098.json",
+          "sha256": "ebcfa9b38872feebb23080ce56c94dcf9c8fbab6b9f8d678e09e2ed48b99e064"
+        }
+      ],
+      "memberIds": [
+        "53001",
+        "53002",
+        "53003",
+        "53004",
+        "53005",
+        "53006",
+        "53007",
+        "53008",
+        "53009",
+        "53010",
+        "53011",
+        "53012",
+        "53013",
+        "53014",
+        "53015",
+        "53016",
+        "53017",
+        "53019",
+        "53021",
+        "54001",
+        "54002",
+        "54003",
+        "54004",
+        "54005",
+        "54006",
+        "54008",
+        "54009",
+        "54010",
+        "54011",
+        "54012",
+        "54013",
+        "54014",
+        "54015",
+        "54016",
+        "54017",
+        "54018",
+        "54019",
+        "54020",
+        "54021",
+        "54022",
+        "54023",
+        "55098"
+      ],
+      "members": {
+        "53001": {
+          "files": {
+            "data": {
+              "path": "bangboos/53001/data.json",
+              "sha256": "0f4cfb164112d5d0fa309f9638641a1251a7fcc82f94bea318194e1ec9466733"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53001/details.en.json",
+                "sha256": "5ae702f6a48fb4e1e582e0782efd31efef7422d34984bb2a45953ab59bbfa86c"
+              },
+              "zh": {
+                "path": "bangboos/53001/details.zh.json",
+                "sha256": "8ed536713456a7fd1bc810e06b0a3516ca3e8ff1d97e33cc3923184ab944c454"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Penguinboo",
+            "desc": "Widdly-waddly, icy and chilly.",
+            "en": "Penguinboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole12.png",
+            "ja": "ペンギンボンプ",
+            "ko": "펭귄부",
+            "rank": 3,
+            "zh": "企鹅布"
+          }
+        },
+        "53002": {
+          "files": {
+            "data": {
+              "path": "bangboos/53002/data.json",
+              "sha256": "6660ed328a71e8ecf0c23536af0b7a7292326e5fa88dd3823bacfbff801285df"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53002/details.en.json",
+                "sha256": "31b02b732c706cf3c8a353975f405f6d54096c1859885df276cf15bfe1c25bb3"
+              },
+              "zh": {
+                "path": "bangboos/53002/details.zh.json",
+                "sha256": "82fee6bf4cb65a1bb191e38c31858719791ac6467d79faaa938acdb827f4524f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Luckyboo",
+            "desc": "Takes up quite a bit of space when placed on the counter.",
+            "en": "Luckyboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole11.png",
+            "ja": "オマネキボンプ",
+            "ko": "럭키부",
+            "rank": 3,
+            "zh": "招财布"
+          }
+        },
+        "53003": {
+          "files": {
+            "data": {
+              "path": "bangboos/53003/data.json",
+              "sha256": "a6e5d7812f3162d693d29792e226a735bb8cd6d50dadd56252d1ef83fd08da10"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53003/details.en.json",
+                "sha256": "e70a0570d3d9e4c1c9f4091bd8ecfb022003549397e86f96e21ff6075a724b8a"
+              },
+              "zh": {
+                "path": "bangboos/53003/details.zh.json",
+                "sha256": "1d323e22714b3a0983e5aaa7737bf235c32c28670aa1a827f24e2e4c418a291b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Exploreboo",
+            "desc": "Beep-beep-beep-beep. Does that mean there treasure or that it's running outta battery?",
+            "en": "Exploreboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole06.png",
+            "ja": "タンケンボンプ",
+            "ko": "탐험부",
+            "rank": 3,
+            "zh": "寻宝布"
+          }
+        },
+        "53004": {
+          "files": {
+            "data": {
+              "path": "bangboos/53004/data.json",
+              "sha256": "b4c9cd1dd8a9f7a08051b97054de41c8afa8d6a95cc26835048c717ae83aafef"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53004/details.en.json",
+                "sha256": "a1614b197085e73835454ebabe9e5d9b8fefc55cba761cf2288b4524e2036cf7"
+              },
+              "zh": {
+                "path": "bangboos/53004/details.zh.json",
+                "sha256": "c4469d34cd8f5be2cc2f32efa77b3609d3e1da77bed37393e6b6f003999a05fd"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Sumoboo",
+            "desc": "A sumo wrestler never retreats!",
+            "en": "Sumoboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole05.png",
+            "ja": "オスモウボンプ",
+            "ko": "스모부",
+            "rank": 3,
+            "zh": "扑击布"
+          }
+        },
+        "53005": {
+          "files": {
+            "data": {
+              "path": "bangboos/53005/data.json",
+              "sha256": "047b2327874c17c06239c8367d42ff203e2bc4579bed81264182d945911f18ac"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53005/details.en.json",
+                "sha256": "4bb5354d3fec1c3f61a2b8e3e358cf6137893544490011799534962dfb0c64e3"
+              },
+              "zh": {
+                "path": "bangboos/53005/details.zh.json",
+                "sha256": "b85fb835ed7d163fe8facbe123570d5a79b975802b1c760ee6d3bd85f0c16225"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Paperboo",
+            "desc": "Always nostalgic over when it hatched from its shell.",
+            "en": "Paperboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole04.png",
+            "ja": "ハコイリボンプ",
+            "ko": "종이부",
+            "rank": 3,
+            "zh": "纸壳布"
+          }
+        },
+        "53006": {
+          "files": {
+            "data": {
+              "path": "bangboos/53006/data.json",
+              "sha256": "21e5602e8be19fbc183444ef8486bfe38777f1fb3b276a5e17cfc5406c149e8b"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53006/details.en.json",
+                "sha256": "ac572dc83f0aec093861875486734549983c74393cd28e2800908aad6177104c"
+              },
+              "zh": {
+                "path": "bangboos/53006/details.zh.json",
+                "sha256": "0e6100e41f609295e8de2f1c42ddc8ee4f85604ea1acb17335103b38d401d249"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Bagboo",
+            "desc": "There's a dark past hidden under that bag...",
+            "en": "Bagboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole01.png",
+            "ja": "フクロノボンプ",
+            "ko": "봉투부",
+            "rank": 3,
+            "zh": "纸袋布"
+          }
+        },
+        "53007": {
+          "files": {
+            "data": {
+              "path": "bangboos/53007/data.json",
+              "sha256": "8822a1b7773476e19478bd05e6ce09c265683eada8af9872e89645ab93446fa7"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53007/details.en.json",
+                "sha256": "1482f72b8895900d52367b32e13e6b5befbf543dd9688b66174cd68a6574d0bf"
+              },
+              "zh": {
+                "path": "bangboos/53007/details.zh.json",
+                "sha256": "0703a8403af73c75c9e136e058d9376fb7245547dee4d88f7c01c2f0433217f3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Cryboo",
+            "desc": "Who knows what troubles plague a young Bangboo?",
+            "en": "Cryboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole02.png",
+            "ja": "ウルリンボンプ",
+            "ko": "울보부",
+            "rank": 3,
+            "zh": "泪眼布"
+          }
+        },
+        "53008": {
+          "files": {
+            "data": {
+              "path": "bangboos/53008/data.json",
+              "sha256": "34a2e8a8769899e2cf198dfdb9cc1ea5effe51e07af78940e3bc2520d9776be1"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53008/details.en.json",
+                "sha256": "5aabe4f9804795f86fb624c43262dbbedf8e7190520e69f7d4392cc11aa35791"
+              },
+              "zh": {
+                "path": "bangboos/53008/details.zh.json",
+                "sha256": "e19f8abbff54eb3dbf989d07518deba85bc6fcaa17b918d483e59f59c7e9bfc5"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Avocaboo",
+            "desc": "A massive success among people who love veggie salads.",
+            "en": "Avocaboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole03.png",
+            "ja": "アボカドボンプ",
+            "ko": "아보카부",
+            "rank": 3,
+            "zh": "果核布"
+          }
+        },
+        "53009": {
+          "files": {
+            "data": {
+              "path": "bangboos/53009/data.json",
+              "sha256": "05d55ef751f7e28c0dd8bb1e02b3e73515c57826cadee918c96bb7592114e531"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53009/details.en.json",
+                "sha256": "d6d5b19d25eb750cc7aa410c63aac87ef5e10e00310210832030e7b8f7a964c4"
+              },
+              "zh": {
+                "path": "bangboos/53009/details.zh.json",
+                "sha256": "a25aaa54c3f6879dec95a10661811d0b00df97da16328ff1446f53bd3a2f6784"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Boollseye",
+            "desc": "Right in the bull's eye!",
+            "en": "Boollseye",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole18.png",
+            "ja": "ズバットボンプ",
+            "ko": "과녁부",
+            "rank": 3,
+            "zh": "飞靶布"
+          }
+        },
+        "53010": {
+          "files": {
+            "data": {
+              "path": "bangboos/53010/data.json",
+              "sha256": "c58044d9a0a507d8d233fe94752e85ada5666ad414325857cde6d8910b7c984e"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53010/details.en.json",
+                "sha256": "507321b9a48232cc60af766b7a3cb84d9fe14f00b7b8cf3e65362f0a41c93dcd"
+              },
+              "zh": {
+                "path": "bangboos/53010/details.zh.json",
+                "sha256": "a947434096b32b50fe25c7e6b803414abfb4af23071b4ba70638bbe75a9075f0"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Electroboo",
+            "desc": "Bzzzt... Please wear insulated gloves when petting.",
+            "en": "Electroboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole16.png",
+            "ja": "ビリビリボンプ",
+            "ko": "찌릿부",
+            "rank": 3,
+            "zh": "电击布"
+          }
+        },
+        "53011": {
+          "files": {
+            "data": {
+              "path": "bangboos/53011/data.json",
+              "sha256": "84151600f74fe02ed0250b27c1bbf808b5da1ce73bde566ada0e63a362d03eea"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53011/details.en.json",
+                "sha256": "5f92094b7d880880adc5ae94021388981a62cf6f2df5ea6bb60dafd50c8ece8a"
+              },
+              "zh": {
+                "path": "bangboos/53011/details.zh.json",
+                "sha256": "2acad50eb8aa038fdcbe041e6db880666a1a8aac839cb9060e2b2703ab741d00"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Magnetiboo",
+            "desc": "Suffering from anxiety caused by an attachment disorder. Treatment plan: Its master should refrain from wearing any metal accessories.",
+            "en": "Magnetiboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole21.png",
+            "ja": "クッツキボンプ",
+            "ko": "자석부",
+            "rank": 3,
+            "zh": "磁力布"
+          }
+        },
+        "53012": {
+          "files": {
+            "data": {
+              "path": "bangboos/53012/data.json",
+              "sha256": "e8681398a922f4fba9898b069a0806b3d5c175b7ddc2bbb76d51305d4212af03"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53012/details.en.json",
+                "sha256": "d13b70bf1a152f43b3fdfb53ada3d63c33ffc696e3b4657a74eb9f53ebfa2f53"
+              },
+              "zh": {
+                "path": "bangboos/53012/details.zh.json",
+                "sha256": "4e7772765cdc0d1dd186e6faeda806e9cbf3c4ad44c834c80122976b655f76a4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Booressure",
+            "desc": "Understanding the mood of a conversation is key to becoming a Bangboo social expert.",
+            "en": "Booressure",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole17.png",
+            "ja": "キアツデボンプ",
+            "ko": "압력부",
+            "rank": 3,
+            "zh": "气压布"
+          }
+        },
+        "53013": {
+          "files": {
+            "data": {
+              "path": "bangboos/53013/data.json",
+              "sha256": "eb279d7e83add5f9e2fe7956b49119dab6a9802d5cd664d24cd867c82131c680"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53013/details.en.json",
+                "sha256": "dd3057b829a7e767c5ed7c892fa813b3945843772bac69de280283b8083eb8c0"
+              },
+              "zh": {
+                "path": "bangboos/53013/details.zh.json",
+                "sha256": "196dc93766871932c125cfadf96589223312085d6e881aeb1b50ba57669e410e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Baddieboo",
+            "desc": "Don't mess with it... It won't care if you're a human or Bangboo when it gets angry!",
+            "en": "Baddieboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole24.png",
+            "ja": "カチコミボンプ",
+            "ko": "불량부",
+            "rank": 3,
+            "zh": "不良布"
+          }
+        },
+        "53014": {
+          "files": {
+            "data": {
+              "path": "bangboos/53014/data.json",
+              "sha256": "6ab8842f86fed423f0f768101649b3f0845e13fad30acab5471742f77e8d3971"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53014/details.en.json",
+                "sha256": "bb332bcacad19fec69cf0b9797c0c3cc3624cd6becb7d2eacf2b2a79eab4e187"
+              },
+              "zh": {
+                "path": "bangboos/53014/details.zh.json",
+                "sha256": "61139dc9125230f0f9c007e81ed10b183e0fbd002e12187bd25cbd3d3e391fba"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Overtimeboo",
+            "desc": "Fatigue levels rising... Beep — now over 100!",
+            "en": "Overtimeboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole32.png",
+            "ja": "サビザンボンプ",
+            "ko": "야근부",
+            "rank": 3,
+            "zh": "加班布"
+          }
+        },
+        "53015": {
+          "files": {
+            "data": {
+              "path": "bangboos/53015/data.json",
+              "sha256": "93932e8772ce33e3e806b3cbc9bcb6e19067e25842573a41430356d95738e82a"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53015/details.en.json",
+                "sha256": "c43fb1d2bbcf5b9b8849235d56ac3dc062b02abb45d39a72dcbe69fdcd7a13d5"
+              },
+              "zh": {
+                "path": "bangboos/53015/details.zh.json",
+                "sha256": "7ea14d07f99b40df60f3ccc33f7610e2fa1e3923500cc2e99c1c86268d22d911"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Brawlerboo",
+            "desc": "Ten thousand en-nah forward punches as practice per day!",
+            "en": "Brawlerboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole29.png",
+            "ja": "カクトウボンプ",
+            "ko": "격투부",
+            "rank": 3,
+            "zh": "格斗布"
+          }
+        },
+        "53016": {
+          "files": {
+            "data": {
+              "path": "bangboos/53016/data.json",
+              "sha256": "0affe8847d5e1f8454b7f369ff13891bf6d6e16d4267cf992656ae1e1e38ddd1"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53016/details.en.json",
+                "sha256": "d09453e7685ff500d72047476512a70dd1ef983c8d96ff3c1bed963e2bebcb19"
+              },
+              "zh": {
+                "path": "bangboos/53016/details.zh.json",
+                "sha256": "3aa3d9e7aaf403db07b4a7d155a78a9b643f6f2749063c9b7ea219c3b68ec246"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Excaliboo",
+            "desc": "Only a sacred sword is needed to crown the true king.",
+            "en": "Excaliboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole39.png",
+            "ja": "セイケンボンプ",
+            "ko": "엑스칼리부",
+            "rank": 3,
+            "zh": "圣剑布"
+          }
+        },
+        "53017": {
+          "files": {
+            "data": {
+              "path": "bangboos/53017/data.json",
+              "sha256": "912718afb50533d88c93a10103842cf3cc1106bd7d0c416e5ff6fde8cda6d3e9"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53017/details.en.json",
+                "sha256": "1921f5116ffc52081c866a25aa360fea8a8ffd8c9a1a238ab6edef021aa1ee24"
+              },
+              "zh": {
+                "path": "bangboos/53017/details.zh.json",
+                "sha256": "3e2659da11ab040167e9b5d672ffee7c792982ab09f4cf7200e84649f47e67ff"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Knightboo",
+            "desc": "My steed and I can both bounce to accelerate!",
+            "en": "Knightboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole27.png",
+            "ja": "キシドウボンプ",
+            "ko": "기사부",
+            "rank": 3,
+            "zh": "骑士布"
+          }
+        },
+        "53019": {
+          "files": {
+            "data": {
+              "path": "bangboos/53019/data.json",
+              "sha256": "3a1c088ef063d5d117ce941b49fd2ca36c7c0c665e18cc0c1bc5341018445627"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53019/details.en.json",
+                "sha256": "6b2d701b164fdaa1c4280cd317ffb638cd932d12f0e6c3118c3f9d8ec1f9b316"
+              },
+              "zh": {
+                "path": "bangboos/53019/details.zh.json",
+                "sha256": "1df5e56e57c34cb0c88a50e083fef3ae5d4ddf1064341b5518ad1350ac16000a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Bild N. Boolok",
+            "desc": "Don't step on the blocks barefoot.",
+            "en": "Bild N. Boolok",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole41.png",
+            "ja": "ブロックボンプ",
+            "ko": "블록부",
+            "rank": 3,
+            "zh": "乐玩布"
+          }
+        },
+        "53021": {
+          "files": {
+            "data": {
+              "path": "bangboos/53021/data.json",
+              "sha256": "8451afe314a240d891c9a9cd415a37dbb01ee4727c8a62917d16c924eac2026b"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/53021/details.en.json",
+                "sha256": "ed53f8c8bf5018870e2211348a8e432dc18d243742ba67e4299f4b4f97e02f75"
+              },
+              "zh": {
+                "path": "bangboos/53021/details.zh.json",
+                "sha256": "3c4a83e6a87d982f5c4c7576242ae6926dc7ddc572cf44a0108fdc9ae718bf6b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Booltergeist",
+            "desc": "Trick or play!",
+            "en": "Booltergeist",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole45.png",
+            "ja": "ユウレイボンプ",
+            "ko": "유령부",
+            "rank": 3,
+            "zh": "幽浮布"
+          }
+        },
+        "54001": {
+          "files": {
+            "data": {
+              "path": "bangboos/54001/data.json",
+              "sha256": "adadaa45c91ffb78346a6a33cc809ef670f757a106204867441fb64990a1035f"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54001/details.en.json",
+                "sha256": "36f2be0913b11255cd326b0ad4fd0bace781dbe6694b53269ec6635381bf4fd3"
+              },
+              "zh": {
+                "path": "bangboos/54001/details.zh.json",
+                "sha256": "ed269166c7c2cb6b40aa145ddc3cb0dbb15be6cb504d99add02579171b02a56e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Sharkboo",
+            "desc": "Seen in the distant seas and the seafood section of the fresh food market.",
+            "en": "Sharkboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole07.png",
+            "ja": "ガブットボンプ",
+            "ko": "샤크부",
+            "rank": 4,
+            "zh": "鲨牙布"
+          }
+        },
+        "54002": {
+          "files": {
+            "data": {
+              "path": "bangboos/54002/data.json",
+              "sha256": "1a3f04e73532664e6059764616ec868d4359725b6b939874c1ceadef86e6ba09"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54002/details.en.json",
+                "sha256": "bfc1d4846fe6fd2c78f27871df62d7a9e392c7aa7cac304c7f45ac6404bab796"
+              },
+              "zh": {
+                "path": "bangboos/54002/details.zh.json",
+                "sha256": "0a2c3e6b6f43a5140202c0d2d5f0caa311d1f2f907fdebe13c0b3dd1c661bc7b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Safety",
+            "desc": "Safety first, ehn-na second.",
+            "en": "Safety",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole10.png",
+            "ja": "ゴアンゼン",
+            "ko": "세이프티",
+            "rank": 4,
+            "zh": "阿全"
+          }
+        },
+        "54003": {
+          "files": {
+            "data": {
+              "path": "bangboos/54003/data.json",
+              "sha256": "141fdd592803839a6270a8e9e7f0ca3f0b058418e52029dcfff68cae00480ac8"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54003/details.en.json",
+                "sha256": "8b060135782fe22b44913ae74d2ef9df131c99bf172655df403668d54b36bb96"
+              },
+              "zh": {
+                "path": "bangboos/54003/details.zh.json",
+                "sha256": "559f812e48c8ebaf31eedd1992d1e1bc055b8e67cb95ef11ef4f8259d334ab2e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Devilboo",
+            "desc": "The only thing more tempting than a devil... is Devilboo!",
+            "en": "Devilboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole14.png",
+            "ja": "アクマデボンプ",
+            "ko": "데빌부",
+            "rank": 3,
+            "zh": "恶魔布"
+          }
+        },
+        "54004": {
+          "files": {
+            "data": {
+              "path": "bangboos/54004/data.json",
+              "sha256": "7da450517cba0c991fe6fa931acb55ed078e0bf9e386f6ac189b912b145f5167"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54004/details.en.json",
+                "sha256": "717969e3eb35adda0cb9d0443154f4dab07234465e4f61657878db6016974556"
+              },
+              "zh": {
+                "path": "bangboos/54004/details.zh.json",
+                "sha256": "0e0af450619b1f8077a9fdd35915894ff21b8caadd4333e8679c81f6f7db03db"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Butler",
+            "desc": "A perfect butler for a perfect you.",
+            "en": "Butler",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole09.png",
+            "ja": "バトラー",
+            "ko": "버틀러",
+            "rank": 4,
+            "zh": "巴特勒"
+          }
+        },
+        "54005": {
+          "files": {
+            "data": {
+              "path": "bangboos/54005/data.json",
+              "sha256": "900577ba1822de0c7585b575c46bf3ae185c3c5df6ca318a6bed71c31427c5fc"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54005/details.en.json",
+                "sha256": "804e4fa729129f10ad55b9e7db3c488d3d661955ab219a22f234a84b2e3b36a6"
+              },
+              "zh": {
+                "path": "bangboos/54005/details.zh.json",
+                "sha256": "0f05c22c70f4120c717a507dedda9b302bdefc4a9bf884cffb7d6569681b56b9"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Amillion",
+            "desc": "A million Dennies in one Bangboo.",
+            "en": "Amillion",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole13.png",
+            "ja": "アミリオン",
+            "ko": "에밀리온",
+            "rank": 4,
+            "zh": "艾米莉安"
+          }
+        },
+        "54006": {
+          "files": {
+            "data": {
+              "path": "bangboos/54006/data.json",
+              "sha256": "987131ae848c3b86e5078facaaa0ca1f848fb6e5caa20eac3630035b659c49ef"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54006/details.en.json",
+                "sha256": "64e7b58d543e243b3cb7545e13817c7c99fdc53f58f4316b60737e78bff51666"
+              },
+              "zh": {
+                "path": "bangboos/54006/details.zh.json",
+                "sha256": "f0268359c4ec166b771fab8f2afbcd005a8a85335d49fcd67f2a361bfb346b20"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Rocketboo",
+            "desc": "This Bangboo accelerates for 17.5 steps when running a hundred kilometers.",
+            "en": "Rocketboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole15.png",
+            "ja": "ハヤスギボンプ",
+            "ko": "날쌘부",
+            "rank": 4,
+            "zh": "飚速布"
+          }
+        },
+        "54008": {
+          "files": {
+            "data": {
+              "path": "bangboos/54008/data.json",
+              "sha256": "5631d9d7473135d2a2a34c03f9e647d83d19da1a9e7c4d87d43b1f0a2095c314"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54008/details.en.json",
+                "sha256": "0610c476b6e77b85eaac0c346def98bbf1082c387d1851ec995ffe13713cc55c"
+              },
+              "zh": {
+                "path": "bangboos/54008/details.zh.json",
+                "sha256": "dac04c3cedb447f4de2478b01369899e8a0258f8069c5514f3e087c2dbe34e8b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Plugboo",
+            "desc": "\"Beeeeep... beep... beep beep.\"",
+            "en": "Plugboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole19.png",
+            "ja": "プラグノボンプ",
+            "ko": "플러그부",
+            "rank": 4,
+            "zh": "插头布"
+          }
+        },
+        "54009": {
+          "files": {
+            "data": {
+              "path": "bangboos/54009/data.json",
+              "sha256": "0973627874dafbe048ecfdd645b3aa419f8ce832ca4b1434fde3aab15d651fd2"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54009/details.en.json",
+                "sha256": "0a7b0e26ae6df0907efdbe4b9ce6763539d969e510b00ebf26697ceb8d5e29e8"
+              },
+              "zh": {
+                "path": "bangboos/54009/details.zh.json",
+                "sha256": "5bb40f3bf2fae876096062ae6e29703ce2c6f366fc1bb20b3ccdf729f07e3ec4"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Resonaboo",
+            "desc": "Accumulating Ether energy...",
+            "en": "Resonaboo",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole20.png",
+            "ja": "レゾナンボンプ",
+            "ko": "공명부",
+            "rank": 4,
+            "zh": "共鸣布"
+          }
+        },
+        "54010": {
+          "files": {
+            "data": {
+              "path": "bangboos/54010/data.json",
+              "sha256": "60dd8fb7b02d8704ad2f313f51f22f94c3f5bdbd62816357aa583bb7fed56d2c"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54010/details.en.json",
+                "sha256": "b3bcb592be732f54c55ea81eec4a574b9025dd3dfa904616ad99d0f6d53514d0"
+              },
+              "zh": {
+                "path": "bangboos/54010/details.zh.json",
+                "sha256": "eb4289526844212d7f18e18a289968e8f18fa51d8ad7ce6a205ec228beec0d7f"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "BiggestFan",
+            "desc": "An Angels of Delusion superfan for life!",
+            "en": "Biggest Fan",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole46.png",
+            "ja": "コサン",
+            "ko": "팬팬",
+            "rank": 4,
+            "zh": "阿饭"
+          }
+        },
+        "54011": {
+          "files": {
+            "data": {
+              "path": "bangboos/54011/data.json",
+              "sha256": "e154c1e2389988f16711064d709a65b2c70b6b824caf02f95577af37c9f4e359"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54011/details.en.json",
+                "sha256": "9dad6abd3ada836acf0be638e6a31a9cd5df48e2fa37d8165953bd5d5d7ebfc5"
+              },
+              "zh": {
+                "path": "bangboos/54011/details.zh.json",
+                "sha256": "4535414089e8a0355404cfb2243175a5776933d5d53a9836dc7fa439a10c27cb"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Red Moccus",
+            "desc": "I'll be waiting for you on the off-road section of the Outer Ring!",
+            "en": "Red Moccus",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole26.png",
+            "ja": "真紅のモックス",
+            "ko": "레드모쿠스",
+            "rank": 4,
+            "zh": "赤红莫库斯"
+          }
+        },
+        "54012": {
+          "files": {
+            "data": {
+              "path": "bangboos/54012/data.json",
+              "sha256": "4a246e5fe4af4cbe82a7ffad9d8dfbe73fd3328665998242ed6979e56fe4d791"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54012/details.en.json",
+                "sha256": "aee01278330ac242b46f953e7c2c1b8eb1da53ba03e021aa8eb820fa779bd757"
+              },
+              "zh": {
+                "path": "bangboos/54012/details.zh.json",
+                "sha256": "00d731ec2dd7ae6aff45490606dd30f69555a93419576a0031cacabc655378a3"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Officer Cui",
+            "desc": "Though it may be a Bangboo, it's even more intimidating than a Security Canine!",
+            "en": "Officer Cui",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole25.png",
+            "ja": "ツェイ巡査",
+            "ko": "최 순찰대원",
+            "rank": 4,
+            "zh": "阿崔巡查"
+          }
+        },
+        "54013": {
+          "files": {
+            "data": {
+              "path": "bangboos/54013/data.json",
+              "sha256": "6f60c5253ffc028c4c53cf3fe37116c35454c9c75d06db1b32432c1840db404e"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54013/details.en.json",
+                "sha256": "0e5e3f41ef805960aa7ae85a6c6c64e12d8fa504b291105b3afe930962fac454"
+              },
+              "zh": {
+                "path": "bangboos/54013/details.zh.json",
+                "sha256": "6c9cca35eed74fd70eeadb63b8e3e92c6643547da76a91578517a55e2bb31be6"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Bangvolver",
+            "desc": "Today's Fortune: Amazing!",
+            "en": "Bangvolver",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole23.png",
+            "ja": "リボルバボンプ",
+            "ko": "리볼버부",
+            "rank": 4,
+            "zh": "左轮布"
+          }
+        },
+        "54014": {
+          "files": {
+            "data": {
+              "path": "bangboos/54014/data.json",
+              "sha256": "b215d1a6e4c784259e8ab6c396e0bbb5b073d83059a5c741c82e1126645771e0"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54014/details.en.json",
+                "sha256": "ac0445fdcb43724f4e8e7ab768914c100ed74633f67b3a335b5ec1f5d21422f6"
+              },
+              "zh": {
+                "path": "bangboos/54014/details.zh.json",
+                "sha256": "d1fbce79fb97383407eb138789c4a46c86167ab9cc5ddbe75f2e387ccf69b367"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Agent Gulliver",
+            "desc": "Security check! Open up!",
+            "en": "Agent Gulliver",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole28.png",
+            "ja": "ガリバー隊員",
+            "ko": "걸리버 요원",
+            "rank": 4,
+            "zh": "格列佛探员"
+          }
+        },
+        "54015": {
+          "files": {
+            "data": {
+              "path": "bangboos/54015/data.json",
+              "sha256": "0fe7b78745e0227687a52a91c22ad6f5e74261ba6930ae88f893f3d477fee9b6"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54015/details.en.json",
+                "sha256": "1a9fe039f9cbfe45694753997e2937ca0530fa92ef51e8039bee89a0e7f7ec12"
+              },
+              "zh": {
+                "path": "bangboos/54015/details.zh.json",
+                "sha256": "52c01e0313bf6164c262cbef2a5fff62e185af216e758bb50678c104a7d96d66"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Snap",
+            "desc": "Its flash only shines for true superstars.",
+            "en": "Snap",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole30.png",
+            "ja": "カチャコ",
+            "ko": "찰칵이",
+            "rank": 4,
+            "zh": "咔嚓仔"
+          }
+        },
+        "54016": {
+          "files": {
+            "data": {
+              "path": "bangboos/54016/data.json",
+              "sha256": "6f5d2ee2b3e386599c140fe5c14235b7e68a2903098fb974ef748a75db1bd35a"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54016/details.en.json",
+                "sha256": "6eaa8048aaa6a92d09c04de6e2123cedd60866994b83e12782d95ca7a51d1d23"
+              },
+              "zh": {
+                "path": "bangboos/54016/details.zh.json",
+                "sha256": "97a27309f3b538bf3270ea082e542b4863a39526cab5bbf0cd60198113764673"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Robin",
+            "desc": "Three, two, one! Don't blink!",
+            "en": "Robin",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole31.png",
+            "ja": "ロビン",
+            "ko": "로빈",
+            "rank": 4,
+            "zh": "罗宾"
+          }
+        },
+        "54017": {
+          "files": {
+            "data": {
+              "path": "bangboos/54017/data.json",
+              "sha256": "c2346c0485405fc73cee7821966bf5cf24ae43936bb96ca31fdbeea0fc14334e"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54017/details.en.json",
+                "sha256": "8ca85179b4904b8f4646b1737a69cda13f0cd9d60afdf65c345a853210c49493"
+              },
+              "zh": {
+                "path": "bangboos/54017/details.zh.json",
+                "sha256": "3648981c152d2cee10d5751024c3fa75d9848a69c99c90bff5bd53f09747cc6e"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Belion",
+            "desc": "The true essence of martial arts is the lightness and purity of heart.",
+            "en": "Belion",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole36.png",
+            "ja": "オシシ",
+            "ko": "사야",
+            "rank": 4,
+            "zh": "狮耶"
+          }
+        },
+        "54018": {
+          "files": {
+            "data": {
+              "path": "bangboos/54018/data.json",
+              "sha256": "663d7b25c37e6b4625bd3dee128d0598642954f0164c6fe930cad3312b4484b2"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54018/details.en.json",
+                "sha256": "67ad1e4b0f41fb11d7b533380f5bc18dd3afa3ce83dc0444e7661624c4fec537"
+              },
+              "zh": {
+                "path": "bangboos/54018/details.zh.json",
+                "sha256": "05b0b73e3d0b9948a0ce3a878cdef1512aa85ca1a9ec9505872bf46fd147f504"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Miss Esme",
+            "desc": "In the name of Starshine, I shall alter the course of destiny!",
+            "en": "Miss Esme",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole37.png",
+            "ja": "ミス・エスメ",
+            "ko": "에스메 양",
+            "rank": 4,
+            "zh": "艾丝弥小姐"
+          }
+        },
+        "54019": {
+          "files": {
+            "data": {
+              "path": "bangboos/54019/data.json",
+              "sha256": "56c3d3b199bf26cbea805ef1c0e831ab4dfe2e6dc7cb05ea9a3b6122a865dba6"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54019/details.en.json",
+                "sha256": "bd789929d8a6558b0da649396bb9408ee2193e3b5f89d06550ff975f425682eb"
+              },
+              "zh": {
+                "path": "bangboos/54019/details.zh.json",
+                "sha256": "6be27ce2336c984cce8c6feffd57ad8f890a5e7c36a5c451ed5280276d650b73"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "「Mercury」",
+            "desc": "A Bangboo uninterested in military merits is not a good soldier.",
+            "en": "Mercury",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole38.png",
+            "ja": "「マーキュリー」",
+            "ko": "「머큐리」",
+            "rank": 4,
+            "zh": "「墨丘利」"
+          }
+        },
+        "54020": {
+          "files": {
+            "data": {
+              "path": "bangboos/54020/data.json",
+              "sha256": "d2c5ea79f1a60404fd1a7037094055ba97e227ffb1053ac133cefee7a1a6d126"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54020/details.en.json",
+                "sha256": "01669d0b5a05d13f83c4e11f3dbea554efb9ee0f58f17dd88e55dae25302e65d"
+              },
+              "zh": {
+                "path": "bangboos/54020/details.zh.json",
+                "sha256": "257ff97d9c63adab1153a6622c7222c1ca32a08117bf82902b5dc5dcfc7c1552"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Birkblick",
+            "desc": "We're both caught in the camera's eye.",
+            "en": "Birkblick",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole42.png",
+            "ja": "ビャークブリック",
+            "ko": "비르크블리크",
+            "rank": 4,
+            "zh": "比克布利克"
+          }
+        },
+        "54021": {
+          "files": {
+            "data": {
+              "path": "bangboos/54021/data.json",
+              "sha256": "646027bb13430221dd74e44890e9c6afb583fac83d639a5fded396d5432c2e0e"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54021/details.en.json",
+                "sha256": "1c051b16abb95851ecb7816b3a50434a2aab94a3aae608112004d6fe4c108e45"
+              },
+              "zh": {
+                "path": "bangboos/54021/details.zh.json",
+                "sha256": "cdee48d907fc996a8832805c842b20424116baa0bdda8194632905a1884da162"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Sprout",
+            "desc": "Don't underestimate our bond!",
+            "en": "Sprout",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole43.png",
+            "ja": "メメ",
+            "ko": "싹싹",
+            "rank": 4,
+            "zh": "芽芽"
+          }
+        },
+        "54022": {
+          "files": {
+            "data": {
+              "path": "bangboos/54022/data.json",
+              "sha256": "3dc26f04f0a3930913af9a8a5915403a0c7f9c1a7666795c22037be6f9907229"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54022/details.en.json",
+                "sha256": "7b00728172ed1d3ceaafe23033b762961d84118c89e85fbab0280b61a69a23e8"
+              },
+              "zh": {
+                "path": "bangboos/54022/details.zh.json",
+                "sha256": "056ca9d88e3769e2834149bf0b94056b72d4537011bb74a84a5817da740d961a"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Ultra Jake",
+            "desc": "A super-spec En-Nah tech crystal.",
+            "en": "Ultra Jake",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole47.png",
+            "ja": "ウルトラネイヴ",
+            "ko": "울트라 제이크",
+            "rank": 4,
+            "zh": "超极杰克"
+          }
+        },
+        "54023": {
+          "files": {
+            "data": {
+              "path": "bangboos/54023/data.json",
+              "sha256": "d966a4bd98ea35f39aa68ea198c782f68a3a4f902882a968726d63734f173e71"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/54023/details.en.json",
+                "sha256": "bd68d0960fd232a08b4ced780cc61ea27929308521063c87f1747232f99209a7"
+              },
+              "zh": {
+                "path": "bangboos/54023/details.zh.json",
+                "sha256": "8731a52ebc104c23982de65d74ebc9db11d68c78a8b202d2116ba064a5e4d77b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Ariel",
+            "desc": "You cannot walk alone in the darkness.",
+            "en": "Ariel",
+            "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole48.png",
+            "ja": "アリエル",
+            "ko": "아리엘",
+            "rank": 4,
+            "zh": "艾瑞儿"
+          }
+        },
+        "55098": {
+          "files": {
+            "data": {
+              "path": "bangboos/55098/data.json",
+              "sha256": "a40568ff09a9283c7d8e24c773e057565dc5a8a849f5b031265f1fd2d407cce1"
+            },
+            "details": {
+              "en": {
+                "path": "bangboos/55098/details.en.json",
+                "sha256": "6bcabb8fb0023fce3b1fcfcef7895c7aa9aea3eebd785138950b7c7330fc88d4"
+              },
+              "zh": {
+                "path": "bangboos/55098/details.zh.json",
+                "sha256": "13f571ef565a1d43805f60662c6b5e1cc25d3e7346ce7779af21fde243d5617b"
+              }
+            }
+          },
+          "sourceRecord": {
+            "codename": "Eous",
+            "desc": "Eous",
+            "en": "Eous",
+            "icon": "",
+            "ja": "イアス",
+            "ko": "이아스",
+            "rank": 3,
+            "zh": "伊埃斯"
+          }
+        }
+      },
+      "rulesVersion": "nanoka-bangboo-reference/1"
+    },
     "drive-discs": {
       "complete": true,
       "detailLocales": ["zh", "en"],

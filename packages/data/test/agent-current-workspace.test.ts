@@ -59,7 +59,7 @@ describe("current workspace commands", () => {
       expect(result.status, result.stderr).toBe(0)
       expect(JSON.parse(result.stdout)).toMatchObject({
         outcome: "unchanged",
-        reusedEntityFiles: 18,
+        reusedEntityFiles: 24,
         changedEntityFiles: 0,
       })
       expect(await fingerprints(input.targetDirectory)).toEqual(before)

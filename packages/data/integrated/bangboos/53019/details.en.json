@@ -1,0 +1,245 @@
+{
+  "codeName": "Bild N. Boolok",
+  "desc": "Don't step on the blocks barefoot.",
+  "id": 53019,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Bild N. Boolok",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nSwings a staff and assembles blocks into a giant hammer to attack the enemy. After hitting the enemy four times or completing three hammer swings, leaps up and slams down, causing <color=#FFFFFF>Block Spikes</color> to erupt outward. Enemies take <color=#F0D12B>Physical DMG</color> upon coming into contact with <color=#FFFFFF>Block Spikes</color>.",
+          "name": "Block Hopscotch",
+          "param": "{Skill:5301901, Prop:1001}|{Skill:5301901, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Support</color> character in your squad: Bild N. Boolok's <color=#FFFFFF>Active Skill</color> releases 7 <color=#FFFFFF>Block Spikes</color>, and its <color=#FFFFFF>Active Skill</color> DMG increases by 30%.",
+          "name": "Red Light! Nobody Move!",
+          "param": "30%",
+          "property": ["DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Support</color> character in your squad: Bild N. Boolok's <color=#FFFFFF>Active Skill</color> releases 7 <color=#FFFFFF>Block Spikes</color>, and its <color=#FFFFFF>Active Skill</color> DMG increases by 37.5%.",
+          "name": "Red Light! Nobody Move!",
+          "param": "37.5%",
+          "property": ["DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Support</color> character in your squad: Bild N. Boolok's <color=#FFFFFF>Active Skill</color> releases 7 <color=#FFFFFF>Block Spikes</color>, and its <color=#FFFFFF>Active Skill</color> DMG increases by 45%.",
+          "name": "Red Light! Nobody Move!",
+          "param": "45%",
+          "property": ["DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Support</color> character in your squad: Bild N. Boolok's <color=#FFFFFF>Active Skill</color> releases 7 <color=#FFFFFF>Block Spikes</color>, and its <color=#FFFFFF>Active Skill</color> DMG increases by 52.5%.",
+          "name": "Red Light! Nobody Move!",
+          "param": "52.5%",
+          "property": ["DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Support</color> character in your squad: Bild N. Boolok's <color=#FFFFFF>Active Skill</color> releases 7 <color=#FFFFFF>Block Spikes</color>, and its <color=#FFFFFF>Active Skill</color> DMG increases by 60%.",
+          "name": "Red Light! Nobody Move!",
+          "param": "60%",
+          "property": ["DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nSwings its staff with full force, launching blocks ahead to deal massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Castle Dodgeball",
+          "param": "{Skill:5301902, Prop:1001}|{Skill:5301902, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}

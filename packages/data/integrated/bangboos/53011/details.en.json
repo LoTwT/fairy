@@ -1,0 +1,184 @@
+{
+  "codeName": "Magnetiboo",
+  "desc": "Suffering from anxiety caused by an attachment disorder. Treatment plan: Its master should refrain from wearing any metal accessories.",
+  "id": 53011,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Magnetiboo",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nPulls in nearby enemies and deals <color=#F0D12B>Physical DMG</color> to all enemies hit.",
+          "name": "Magnetic Lock-On",
+          "param": "{Skill:5301101, Prop:1001}|{Skill:5301101, Prop:1002}|24s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Active Skill</color> attack range is increased, and DMG is increased by 30%.",
+          "name": "Magnetic Attraction",
+          "param": "30%",
+          "property": ["DMG Increase"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Active Skill</color> attack range is increased, and DMG is increased by 37.5%.",
+          "name": "Magnetic Attraction",
+          "param": "37.5%",
+          "property": ["DMG Increase"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Active Skill</color> attack range is increased, and DMG is increased by 45%.",
+          "name": "Magnetic Attraction",
+          "param": "45%",
+          "property": ["DMG Increase"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Active Skill</color> attack range is increased, and DMG is increased by 52.5%.",
+          "name": "Magnetic Attraction",
+          "param": "52.5%",
+          "property": ["DMG Increase"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 1 <color=#FFFFFF>Anomaly</color> character in your squad: <color=#FFFFFF>Active Skill</color> attack range is increased, and DMG is increased by 60%.",
+          "name": "Magnetic Attraction",
+          "param": "60%",
+          "property": ["DMG Increase"]
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  }
+}

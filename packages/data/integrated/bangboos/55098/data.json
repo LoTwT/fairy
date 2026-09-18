@@ -1,0 +1,21 @@
+{
+  "icon": "",
+  "id": 55098,
+  "level": {},
+  "rarity": 3,
+  "skillProp": {},
+  "stats": {
+    "attack": 72,
+    "attackUpgrade": 360408,
+    "breakStun": 103,
+    "crit": 500,
+    "critDmg": 5000,
+    "defUpgrade": 78871,
+    "defence": 28,
+    "elementAbnormalPower": 110,
+    "endurance": 180,
+    "hpMax": 396,
+    "hpupgrade": 471237,
+    "penRatio": 0
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "codeName": "Amillion",
+  "desc": "A million Dennies in one Bangboo.",
+  "id": 54005,
+  "level": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "locale": "en",
+  "name": "Amillion",
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Active Skill</color>\nBuilds a machine gun and continuously shoots enemies, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Debt-Clearer",
+          "param": "{Skill:5400501, Prop:1001}|{Skill:5400501, Prop:1002}|22s",
+          "property": ["DMG Multiplier", "Daze Multiplier", "Cooldown"]
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Cunning Hares</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases with fewer enemies in combat, up to a max of 45%.",
+          "name": "Street Code",
+          "param": "45%|35%|25%",
+          "property": [
+            "DMG Increase (1 Enemy)",
+            "DMG Increase (2 Enemies)",
+            "DMG Increase (3 or More Enemies)"
+          ]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Cunning Hares</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases with fewer enemies in combat, up to a max of 56%.",
+          "name": "Street Code",
+          "param": "56%|43%|31%",
+          "property": [
+            "DMG Increase (1 Enemy)",
+            "DMG Increase (2 Enemies)",
+            "DMG Increase (3 or More Enemies)"
+          ]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Cunning Hares</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases with fewer enemies in combat, up to a max of 67%.",
+          "name": "Street Code",
+          "param": "67%|51%|37%",
+          "property": [
+            "DMG Increase (1 Enemy)",
+            "DMG Increase (2 Enemies)",
+            "DMG Increase (3 or More Enemies)"
+          ]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Cunning Hares</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases with fewer enemies in combat, up to a max of 78%.",
+          "name": "Street Code",
+          "param": "78%|60%|43%",
+          "property": [
+            "DMG Increase (1 Enemy)",
+            "DMG Increase (2 Enemies)",
+            "DMG Increase (3 or More Enemies)"
+          ]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Additional Ability</color>\nWhen there's at least 2 <color=#FFFFFF>Cunning Hares</color> characters in your squad: <color=#FFFFFF>Bangboo Chain Attack</color> DMG increases with fewer enemies in combat, up to a max of 90%.",
+          "name": "Street Code",
+          "param": "90%|70%|50%",
+          "property": [
+            "DMG Increase (1 Enemy)",
+            "DMG Increase (2 Enemies)",
+            "DMG Increase (3 or More Enemies)"
+          ]
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "2": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "3": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "4": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "5": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "6": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "7": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "8": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "9": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        },
+        "10": {
+          "desc": "<color=#FFFFFF>Bangboo Chain Attack</color>\nUses machine guns and cannons to continuously attack the target, dealing massive <color=#F0D12B>Physical DMG</color>.",
+          "name": "Portable Machine Gun - Gatling Debt-Clearer",
+          "param": "{Skill:5400502, Prop:1001}|{Skill:5400502, Prop:1002}",
+          "property": ["DMG Multiplier", "Daze Multiplier"]
+        }
+      }
+    }
+  }
+}
