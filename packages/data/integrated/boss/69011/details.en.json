@@ -1,0 +1,212 @@
+{
+  "id": 69011,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69011,
+      "zone": {
+        "6901101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010106": {
+              "desc": "· DMG dealt by Boss enemies increases by 25%. When a clone is <color=#FFAF2C>destroyed</color> or when the main body is <color=#FFAF2C>stunned</color>, 1/5 stacks of <color=#FFFFFF>On Thin Ice</color> is inflicted on Boss enemies respectively. Each stack of <color=#FFFFFF>On Thin Ice</color> decreases the DMG dealt by the Boss by 5% and increases the <color=#98EFF0>Ice DMG</color> and <color=#2EB6FF>Electric DMG</color> dealt to the Boss by Agents by <color=#FFAF2C>10%</color>. <color=#FFFFFF>On Thin Ice</color> stacks will be reset when the enemy recovers from Stun.",
+              "title": ""
+            },
+            "69010109": {
+              "desc": "· Successfully <color=#FFAF2C>destroying a dance partner</color> grants <color=#FFAF2C>200 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69011011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousMarionette.png",
+              "monsterList": {
+                "11861": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300121,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousMarionette.png",
+                  "name": "Notorious - Marionette",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 9630663.1425,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Marionette",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010201": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>25%</color> and Anomaly Proficiency by <color=#2BAD00>40</color>.\n· When an enemy suffers an Attribute Anomaly, Agents recover <color=#2BAD00>500</color> additional Decibels and ATK increases by <color=#2BAD00>30%</color> for 15s. The Decibel recovery effect can trigger once every 15s.",
+              "title": "Graceful Mastery"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69011101": {
+              "desc": "· Agent <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>.\n· When an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Aftershock</color> hits the enemy, the Agent's CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, and the enemy's DEF is <color=#2BAD00>reduced by 15%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Raging Storm"
+            }
+          },
+          "stageNum": 1
+        },
+        "6901102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· DMG dealt to boss enemies by Attribute Anomaly is increased by 50%. While Notorious - Dead End Butcher is in <color=#FFFFFF>Ether Enhanced</color> state, the DMG it takes is reduced by 15%, and the Daze value dealt by Agents to it is reduced by 30%. Triggering <color=#FFFFFF>Disorder</color> on Notorious - Dead End Butcher immediately forces it to exit the <color=#FFFFFF>Ether Enhanced</color> state.",
+              "title": ""
+            },
+            "69010507": {
+              "desc": "· Successfully <color=#FFAF2C>triggering Perfect Dodge</color> grants <color=#FFAF2C>200 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69011021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "Notorious - Dead End Butcher",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 11783228.67,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Dead End Butcher",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010201": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>25%</color> and Anomaly Proficiency by <color=#2BAD00>40</color>.\n· When an enemy suffers an Attribute Anomaly, Agents recover <color=#2BAD00>500</color> additional Decibels and ATK increases by <color=#2BAD00>30%</color> for 15s. The Decibel recovery effect can trigger once every 15s.",
+              "title": "Graceful Mastery"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69011101": {
+              "desc": "· Agent <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>.\n· When an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Aftershock</color> hits the enemy, the Agent's CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, and the enemy's DEF is <color=#2BAD00>reduced by 15%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Raging Storm"
+            }
+          },
+          "stageNum": 2
+        },
+        "6901103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010205": {
+              "desc": "· Agents inflict <color=#FFFFFF>Overwhelmed</color> when <color=#FFAF2C>landing a Defensive Assist hit</color> against a Boss enemy, and 3 stacks of <color=#FFFFFF>Overwhelmed</color> when accumulating 3 <color=#FFFFFF>Defensive Assist</color> hits and triggering Impaired. Each stack of <color=#FFFFFF>Overwhelmed</color> increases Daze by <color=#FFAF2C>15%</color>, and <color=#FFFFFF>Chain Attack</color> and <color=#FFFFFF>Ultimate</color> DMG taken while Stunned by <color=#FFAF2C>10%</color>. The enemy will fix the impaired parts and reset the impairment level while charging, and will reset its <color=#FFFFFF>Overwhelmed</color> stacks after recovering from Stun.",
+              "title": ""
+            },
+            "69010308": {
+              "desc": "· <color=#FFFFFF>Assist Points</color> are not consumed for this battle.",
+              "title": ""
+            },
+            "69010703": {
+              "desc": "· Successfully <color=#FFAF2C>triggering a Perfect Assist</color> grants <color=#FFAF2C>200 Performance Points</color>\n. Successfully <color=#FFAF2C>causing Impaired</color> grants <color=#FFAF2C>600 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69011031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_TyphonDestroyer.png",
+              "monsterList": {
+                "11891": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 300082,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_TyphonDestroyer.png",
+                  "name": "Autonomous Assault Unit - Typhon Destroyer",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 9433084.184999999,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Autonomous Assault Unit - Typhon Destroyer",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010201": {
+              "desc": "· Increases Agent Anomaly Buildup Rate by <color=#2BAD00>25%</color> and Anomaly Proficiency by <color=#2BAD00>40</color>.\n· When an enemy suffers an Attribute Anomaly, Agents recover <color=#2BAD00>500</color> additional Decibels and ATK increases by <color=#2BAD00>30%</color> for 15s. The Decibel recovery effect can trigger once every 15s.",
+              "title": "Graceful Mastery"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69011101": {
+              "desc": "· Agent <color=#FFFFFF>Special Attack</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>.\n· When an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Aftershock</color> hits the enemy, the Agent's CRIT DMG <color=#2BAD00>increases by 30%</color> for 20s, and the enemy's DEF is <color=#2BAD00>reduced by 15%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Raging Storm"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

@@ -1,0 +1,211 @@
+{
+  "id": 69008,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69008,
+      "zone": {
+        "6900801": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010106": {
+              "desc": "· DMG dealt by Boss enemies increases by 25%. When a clone is <color=#FFAF2C>destroyed</color> or when the main body is <color=#FFAF2C>stunned</color>, 1/5 stacks of <color=#FFFFFF>On Thin Ice</color> is inflicted on Boss enemies respectively. Each stack of <color=#FFFFFF>On Thin Ice</color> decreases the DMG dealt by the Boss by 5% and increases the <color=#98EFF0>Ice DMG</color> and <color=#2EB6FF>Electric DMG</color> dealt to the Boss by Agents by <color=#FFAF2C>10%</color>. <color=#FFFFFF>On Thin Ice</color> stacks will be reset when the enemy recovers from Stun.",
+              "title": ""
+            },
+            "69010109": {
+              "desc": "· Successfully <color=#FFAF2C>destroying a dance partner</color> grants <color=#FFAF2C>200 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69008011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousMarionette.png",
+              "monsterList": {
+                "11861": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300121,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousMarionette.png",
+                  "name": "Notorious - Marionette",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8966479.477500001,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Marionette",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010701": {
+              "desc": "· DMG dealt by Agent <color=#FFFFFF>Aftershocks</color> and <color=#FFFFFF>Chain Attacks</color> is <color=#2BAD00>increased by 30%</color>.\n· When an <color=#FFFFFF>Aftershock</color> or <color=#FFFFFF>Dodge Counter</color> hits an enemy, all squad members' ATK is <color=#2BAD00>increased by 15%</color>, and CRIT DMG is <color=#2BAD00>increased by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Swift Advance"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69010803": {
+              "desc": "· Agent <color=#FF5521>Fire Anomaly Buildup Rate</color> and <color=#98EFF0>Ice Anomaly Buildup Rate</color> <color=#2BAD00>increase by 20%</color>, and ATK <color=#2BAD00>increases by 25%</color>.\n· When inflicting an <color=#FFFFFF>Attribute Anomaly</color> on enemies, the Agent <color=#2BAD00>restores 400 Decibels</color> and <color=#2BAD00>Anomaly Proficiency is increased by 80</color>, lasting 15s. Decibels recovery can be triggered once every 15s.",
+              "title": "Blazing Chill"
+            }
+          },
+          "stageNum": 1
+        },
+        "6900802": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010205": {
+              "desc": "· Agents inflict <color=#FFFFFF>Overwhelmed</color> when <color=#FFAF2C>landing a Defensive Assist hit</color> against a Boss enemy, and 3 stacks of <color=#FFFFFF>Overwhelmed</color> when accumulating 3 <color=#FFFFFF>Defensive Assist</color> hits and triggering Impaired. Each stack of <color=#FFFFFF>Overwhelmed</color> increases Daze by <color=#FFAF2C>15%</color>, and <color=#FFFFFF>Chain Attack</color> and <color=#FFFFFF>Ultimate</color> DMG taken while Stunned by <color=#FFAF2C>10%</color>. The enemy will fix the impaired parts and reset the impairment level while charging, and will reset its <color=#FFFFFF>Overwhelmed</color> stacks after recovering from Stun.",
+              "title": ""
+            },
+            "69010308": {
+              "desc": "· <color=#FFFFFF>Assist Points</color> are not consumed for this battle.",
+              "title": ""
+            },
+            "69010703": {
+              "desc": "· Successfully <color=#FFAF2C>triggering a Perfect Assist</color> grants <color=#FFAF2C>200 Performance Points</color>\n. Successfully <color=#FFAF2C>causing Impaired</color> grants <color=#FFAF2C>600 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69008021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_TyphonDestroyer.png",
+              "monsterList": {
+                "11891": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 300082,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_TyphonDestroyer.png",
+                  "name": "Autonomous Assault Unit - Typhon Destroyer",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 9081540.674999999,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Autonomous Assault Unit - Typhon Destroyer",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010701": {
+              "desc": "· DMG dealt by Agent <color=#FFFFFF>Aftershocks</color> and <color=#FFFFFF>Chain Attacks</color> is <color=#2BAD00>increased by 30%</color>.\n· When an <color=#FFFFFF>Aftershock</color> or <color=#FFFFFF>Dodge Counter</color> hits an enemy, all squad members' ATK is <color=#2BAD00>increased by 15%</color>, and CRIT DMG is <color=#2BAD00>increased by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Swift Advance"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69010803": {
+              "desc": "· Agent <color=#FF5521>Fire Anomaly Buildup Rate</color> and <color=#98EFF0>Ice Anomaly Buildup Rate</color> <color=#2BAD00>increase by 20%</color>, and ATK <color=#2BAD00>increases by 25%</color>.\n· When inflicting an <color=#FFFFFF>Attribute Anomaly</color> on enemies, the Agent <color=#2BAD00>restores 400 Decibels</color> and <color=#2BAD00>Anomaly Proficiency is increased by 80</color>, lasting 15s. Decibels recovery can be triggered once every 15s.",
+              "title": "Blazing Chill"
+            }
+          },
+          "stageNum": 2
+        },
+        "6900803": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010503": {
+              "desc": "· When the Agent <color=#FFAF2C>hits the boss enemy with a Defensive Assist or Chain Attack</color>, they apply 1 stack of <color=#FFFFFF>Weakening</color> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <color=#FFFFFF>Weakening</color> on the target, Agent CRIT DMG is <color=#FFAF2C>increased by 15%</color>.\n\nWhen the boss enemy has 4 stacks of <color=#FFFFFF>Weakening</color>, Defensive Assist will deflect the boss enemy's attack, causing a Stagger effect.",
+              "title": ""
+            },
+            "69010802": {
+              "desc": "· Successfully <color=#FFAF2C>triggering a Perfect Assist</color> grants <color=#FFAF2C>350 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69008031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousPompey.png",
+              "monsterList": {
+                "11881": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300211,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousPompey.png",
+                  "name": "Notorious - Pompey",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8994138.299999999,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Pompey",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010701": {
+              "desc": "· DMG dealt by Agent <color=#FFFFFF>Aftershocks</color> and <color=#FFFFFF>Chain Attacks</color> is <color=#2BAD00>increased by 30%</color>.\n· When an <color=#FFFFFF>Aftershock</color> or <color=#FFFFFF>Dodge Counter</color> hits an enemy, all squad members' ATK is <color=#2BAD00>increased by 15%</color>, and CRIT DMG is <color=#2BAD00>increased by 40%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Swift Advance"
+            },
+            "69010801": {
+              "desc": "· The Daze dealt by Agents is increased by <color=#2BAD00>10%</color>, and the DMG dealt by Chain Attacks is increased by <color=#2BAD00>50%</color>.\n· When <color=#FFFFFF>Chain Attacks</color> hit an enemy, the enemy's Stun DMG Multiplier is increased by <color=#2BAD00>25%</color>, and all squad members' ATK is increased by <color=#2BAD00>20%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Worn Out"
+            },
+            "69010803": {
+              "desc": "· Agent <color=#FF5521>Fire Anomaly Buildup Rate</color> and <color=#98EFF0>Ice Anomaly Buildup Rate</color> <color=#2BAD00>increase by 20%</color>, and ATK <color=#2BAD00>increases by 25%</color>.\n· When inflicting an <color=#FFFFFF>Attribute Anomaly</color> on enemies, the Agent <color=#2BAD00>restores 400 Decibels</color> and <color=#2BAD00>Anomaly Proficiency is increased by 80</color>, lasting 15s. Decibels recovery can be triggered once every 15s.",
+              "title": "Blazing Chill"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

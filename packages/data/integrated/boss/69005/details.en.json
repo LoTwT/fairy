@@ -1,0 +1,210 @@
+{
+  "id": 69005,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69005,
+      "zone": {
+        "6900501": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010206": {
+              "desc": "· When <color=#FFAF2C>not in a Stunned state</color>, Boss enemies gain 1 stack of <color=#FFFFFF>All or Nothing</color> every 6s, stacking up to 3 stacks. Each stack of <color=#FFFFFF>All or Nothing</color> increases the damage dealt by the Boss enemy by 10%. When an Agent's attack hits an enemy, the Agent's CRIT DMG <color=#FFAF2C>increases by 25%</color> for each stack of <color=#FFFFFF>All or Nothing</color> the target has. <color=#FFFFFF>All or Nothing</color> stacks will be reset when the enemy recovers from being Stunned.",
+              "title": ""
+            },
+            "69010507": {
+              "desc": "· Successfully <color=#FFAF2C>triggering Perfect Dodge</color> grants <color=#FFAF2C>200 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69005011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousPompey.png",
+              "monsterList": {
+                "11881": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300211,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousPompey.png",
+                  "name": "Notorious - Pompey",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8017631.856,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Pompey",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010401": {
+              "desc": "· The Agent's Daze value dealt <color=#2BAD00>increases by 15%</color>, and the DMG dealt by <color=#FFFFFF>Chain Attack</color> <color=#2BAD00>increases by 60%</color>.\n· Each use of <color=#FFFFFF>Chain Attack</color> increases the all squad members' ATK by <color=#2BAD00>10%</color> for 20 seconds, stacking up to 4 times. The duration of each stack is calculated separately.",
+              "title": "Dazing Force"
+            },
+            "69010501": {
+              "desc": "· The Agent's <color=#FF5521>Fire Anomaly Buildup Rate</color> and <color=#98EFF0>Ice Anomaly Buildup Rate</color> <color=#2BAD00>increase by 20%</color>, and ATK <color=#2BAD00>increases by 25%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, the Agent <color=#2BAD00>restores 300 Decibels</color> and <color=#2BAD00>increases Anomaly Proficiency by 80 points</color>, lasting 15s.",
+              "title": "Blazing Chill"
+            },
+            "69010502": {
+              "desc": "· The Agent's Decibel Generation Rate <color=#2BAD00>increases by 20%</color>.\n· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>. When the <color=#FFFFFF>Ultimate</color> hits an enemy, it reduces the enemy's DEF by <color=#2BAD00>15%</color> for 20s.",
+              "title": "Final Assault"
+            }
+          },
+          "stageNum": 1
+        },
+        "6900502": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010107": {
+              "desc": "· Successfully <color=#FFAF2C>interrupting a chant</color> grants <color=#FFAF2C>2,000 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69010505": {
+              "desc": "· When inflicting <color=#FFAF2C>an Attribute Anomaly or Disorder</color> on a boss enemy, all squad members gain 1 stack of <color=#FFFFFF>Laser Focus</color>, stacking up to 6 times. Each stack of <color=#FFFFFF>Laser Focus</color> increases the Agent's ATK by <color=#FFAF2C>8%</color>. With at least 3 stacks of <color=#FFFFFF>Laser Focus</color>, inflicting an <color=#FFAF2C>Attribute Anomaly</color> will increase its duration by 5s. When Sacrifice - Bringer attacks with his Sacrificial Knife, all squad members' <color=#FFFFFF>Laser Focus</color> stacks will be reset.",
+              "title": ""
+            },
+            "69010506": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69005021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_SacrificeBringer.png",
+              "monsterList": {
+                "11818": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 30024,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_SacrificeBringer.png",
+                  "name": "Sacrifice - Bringer",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 10279015.2,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Sacrifice - Bringer",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010401": {
+              "desc": "· The Agent's Daze value dealt <color=#2BAD00>increases by 15%</color>, and the DMG dealt by <color=#FFFFFF>Chain Attack</color> <color=#2BAD00>increases by 60%</color>.\n· Each use of <color=#FFFFFF>Chain Attack</color> increases the all squad members' ATK by <color=#2BAD00>10%</color> for 20 seconds, stacking up to 4 times. The duration of each stack is calculated separately.",
+              "title": "Dazing Force"
+            },
+            "69010501": {
+              "desc": "· The Agent's <color=#FF5521>Fire Anomaly Buildup Rate</color> and <color=#98EFF0>Ice Anomaly Buildup Rate</color> <color=#2BAD00>increase by 20%</color>, and ATK <color=#2BAD00>increases by 25%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, the Agent <color=#2BAD00>restores 300 Decibels</color> and <color=#2BAD00>increases Anomaly Proficiency by 80 points</color>, lasting 15s.",
+              "title": "Blazing Chill"
+            },
+            "69010502": {
+              "desc": "· The Agent's Decibel Generation Rate <color=#2BAD00>increases by 20%</color>.\n· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>. When the <color=#FFFFFF>Ultimate</color> hits an enemy, it reduces the enemy's DEF by <color=#2BAD00>15%</color> for 20s.",
+              "title": "Final Assault"
+            }
+          },
+          "stageNum": 2
+        },
+        "6900503": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010503": {
+              "desc": "· When the Agent <color=#FFAF2C>hits the boss enemy with a Defensive Assist or Chain Attack</color>, they apply 1 stack of <color=#FFFFFF>Weakening</color> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <color=#FFFFFF>Weakening</color> on the target, Agent CRIT DMG is <color=#FFAF2C>increased by 15%</color>.\n\nWhen the boss enemy has 4 stacks of <color=#FFFFFF>Weakening</color>, Defensive Assist will deflect the boss enemy's attack, causing a Stagger effect.",
+              "title": ""
+            },
+            "69010504": {
+              "desc": "· Successfully <color=#FFAF2C>triggering Perfect Assist</color> grants <color=#FFAF2C>300 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69005031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_CottusGrey.png",
+              "monsterList": {
+                "11238": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30007,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_CottusGrey.png",
+                  "name": "Dead End Butcher",
+                  "stats": {
+                    "attack": 2934.545454545455,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8196869.951999999,
+                    "stun": 14078.85
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Dead End Butcher",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010401": {
+              "desc": "· The Agent's Daze value dealt <color=#2BAD00>increases by 15%</color>, and the DMG dealt by <color=#FFFFFF>Chain Attack</color> <color=#2BAD00>increases by 60%</color>.\n· Each use of <color=#FFFFFF>Chain Attack</color> increases the all squad members' ATK by <color=#2BAD00>10%</color> for 20 seconds, stacking up to 4 times. The duration of each stack is calculated separately.",
+              "title": "Dazing Force"
+            },
+            "69010501": {
+              "desc": "· The Agent's <color=#FF5521>Fire Anomaly Buildup Rate</color> and <color=#98EFF0>Ice Anomaly Buildup Rate</color> <color=#2BAD00>increase by 20%</color>, and ATK <color=#2BAD00>increases by 25%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, the Agent <color=#2BAD00>restores 300 Decibels</color> and <color=#2BAD00>increases Anomaly Proficiency by 80 points</color>, lasting 15s.",
+              "title": "Blazing Chill"
+            },
+            "69010502": {
+              "desc": "· The Agent's Decibel Generation Rate <color=#2BAD00>increases by 20%</color>.\n· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases by 30%</color>. When the <color=#FFFFFF>Ultimate</color> hits an enemy, it reduces the enemy's DEF by <color=#2BAD00>15%</color> for 20s.",
+              "title": "Final Assault"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

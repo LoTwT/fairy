@@ -1,0 +1,292 @@
+{
+  "id": 690441,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 690442,
+      "zone": {
+        "69044201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013304": {
+              "desc": "· Each successful counter and subsequent trigger of a special stagger against the Boss's attacks grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>1,500 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": ""
+            },
+            "69014407": {
+              "desc": "When an Agent lands Shutdown on an enemy, the enemy's All-Attribute RES decreases by 10%, Agents with Attack specialty gain 20% bonus ATK, 25% bonus PEN Ratio, and their Ice and Ether CRIT DMG increases by 60%. \nUpon triggering a special stagger, the whole squad's Anomaly Proficiency increases by 40 pts and their Anomaly DMG increases by 30%.",
+              "title": "69014407_Title"
+            },
+            "69014409": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690442011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ClonedBlackWolf.png",
+              "monsterList": {
+                "11803": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40003,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_ClonedBlackWolf.png",
+                  "name": "Rewritten - Sanguine Sweeper",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 46994360.22,
+                    "stun": 17876.45
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Rewritten - Sanguine Sweeper",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014401": {
+              "desc": "· DMG dealt by Agents' <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Ultimate</color> <color=#2BAD00>increases by 30%</color>. When an Agent with Attack specialty hits an enemy, their attacks ignore <color=#2BAD00>20%</color> of the target's <color=#98EFF0>Ice RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color>, their own <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Icy Raid"
+            },
+            "69014402": {
+              "desc": "· If there are 2/3 Agents with <color=#FFFFFF>Anomaly</color> specialty in your squad, the whole squad's Attribute Anomaly DMG <color=#2BAD00>increases by 10%/30%</color>, and their ATK <color=#2BAD00>increases by 5%/15%</color> respectively.\n· When dealing Attribute Anomaly DMG to an enemy, ignore <color=#2BAD00>10%</color> of their All-Attribute RES and <color=#2BAD00>10%</color> of their DEF.",
+              "title": "Mutation"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690441,
+      "zone": {
+        "69044101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014403": {
+              "desc": "· When <color=#FFAF2C>not in a Stunned state</color>, Boss enemies gain 1 stack of <color=#FFFFFF>All or Nothing</color> every 6s, stacking up to 3 stacks. Each stack of <color=#FFFFFF>All or Nothing</color> increases the DMG dealt by the Boss enemy by <color=#FFAF2C>10%</color>. When an Agent's attack hits an enemy, for each stack of <color=#FFFFFF>All or Nothing</color> the target has, CRIT DMG from the Agent's attacks <color=#FFAF2C>increases by 25%</color> and Attribute Anomaly DMG <color=#FFAF2C>decreases by 15%</color>. When an enemy enters a Stunned state, they gain 1 stack of <color=#FFFFFF>All or Nothing</color>. <color=#FFFFFF>All or Nothing</color> stacks will be reset when the enemy recovers from being Stunned.",
+              "title": "69014403_Title"
+            },
+            "69014404": {
+              "desc": "· Successfully <color=#FFAF2C>triggering Perfect Dodge</color> or <color=#FFAF2C>Perfect Assist</color> grants <color=#FFAF2C>300 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": "69014404_Title"
+            }
+          },
+          "layerRoom": {
+            "690441011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_CottusGrey.png",
+              "monsterList": {
+                "11238": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30007,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_CottusGrey.png",
+                  "name": "Dead End Butcher",
+                  "stats": {
+                    "attack": 2738.909090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 21772935.809999995,
+                    "stun": 14078.85
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Newborn Dead End Butcher",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014401": {
+              "desc": "· DMG dealt by Agents' <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Ultimate</color> <color=#2BAD00>increases by 30%</color>. When an Agent with Attack specialty hits an enemy, their attacks ignore <color=#2BAD00>20%</color> of the target's <color=#98EFF0>Ice RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color>, their own <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Icy Raid"
+            },
+            "69014402": {
+              "desc": "· If there are 2/3 Agents with <color=#FFFFFF>Anomaly</color> specialty in your squad, the whole squad's Attribute Anomaly DMG <color=#2BAD00>increases by 10%/30%</color>, and their ATK <color=#2BAD00>increases by 5%/15%</color> respectively.\n· When dealing Attribute Anomaly DMG to an enemy, ignore <color=#2BAD00>10%</color> of their All-Attribute RES and <color=#2BAD00>10%</color> of their DEF.",
+              "title": "Mutation"
+            }
+          },
+          "stageNum": 1
+        },
+        "69044102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69013903": {
+              "desc": "· Whenever an Agent inflicts an Anomaly on the Boss, they apply 1 stack of Shadow to it. Each stack of Shadow increases the Boss's <color=#2BAD00>Anomaly DMG taken by 7.5%</color> and additionally increases its Vortex DMG taken <color=#2BAD00>by 5%</color> for <color=#2BAD00>10s</color>. Shadow can stack up to <color=#2BAD00>3 times</color>. The duration of each stack is calculated separately. During <Term:2000001>Corruptive Barrier</Term>, applying Shadow to the Boss additionally reduces the <color=#FFAF2C>Corruptive Barrier</color> by <color=#2BAD00>20% of its max value</color> and accumulates <color=#2BAD00>15% Daze</color> (cannot be repeatedly triggered within 15s). When the <color=#FFAF2C>Corruptive Barrier</color> is broken, the Boss immediately gains max stacks of Shadow. When the Boss is Stunned, all Shadow stacks are removed and an equal number of Laceration stacks are applied. Each stack of Laceration reduces the Boss's <color=#2BAD00>Anomaly Buildup RES by 5%</color> and increases its <color=#2BAD00>Stun DMG Multiplier by 10%</color>. When the Boss's Stunned state ends, all Laceration stacks are removed.",
+              "title": "69013903_Title"
+            },
+            "69013904": {
+              "desc": "· Each successful parry against Girtablullu's consecutive downward smashes after it activates Corruptive Barrier grants <color=#FFAF2C>1,000 Performance Points</color>. Successfully triggering a <Term:2000004>Chain Parry</Term> against the final slam grants an additional <color=#FFAF2C>1,000 Performance Points</color>. <color=#FFAF2C>Successfully breaking the Corruptive Barrier</color> grants <color=#FFAF2C>1,500 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": "69013904_Title"
+            }
+          },
+          "layerRoom": {
+            "690441021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Girtablu.png",
+              "monsterList": {
+                "31661": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 40006,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Girtablu.png",
+                  "name": "Girtablullu",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 21055864.41,
+                    "stun": 21037.2
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Girtablullu",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014401": {
+              "desc": "· DMG dealt by Agents' <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Ultimate</color> <color=#2BAD00>increases by 30%</color>. When an Agent with Attack specialty hits an enemy, their attacks ignore <color=#2BAD00>20%</color> of the target's <color=#98EFF0>Ice RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color>, their own <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Icy Raid"
+            },
+            "69014402": {
+              "desc": "· If there are 2/3 Agents with <color=#FFFFFF>Anomaly</color> specialty in your squad, the whole squad's Attribute Anomaly DMG <color=#2BAD00>increases by 10%/30%</color>, and their ATK <color=#2BAD00>increases by 5%/15%</color> respectively.\n· When dealing Attribute Anomaly DMG to an enemy, ignore <color=#2BAD00>10%</color> of their All-Attribute RES and <color=#2BAD00>10%</color> of their DEF.",
+              "title": "Mutation"
+            }
+          },
+          "stageNum": 2
+        },
+        "69044103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012704": {
+              "desc": "· Boss Anomaly DMG taken is <color=#2BAD00>reduced by 30%</color>. When switching from <Term:2000002>Miasmic Shield</Term> state to normal state, or from normal state to <color=#FFAF2C>Miasmic Shield</color> state, Agent CRIT DMG against them is <color=#2BAD00>increased by 20%</color>. This effect can stack up to 3 times and resets when the boss recovers from Stun.",
+              "title": ""
+            },
+            "69012705": {
+              "desc": "·Triggering <color=#FFAF2C>Miasmic Shield Purification</color> grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>2,000 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>Attack</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690441031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vessel.png",
+              "monsterList": {
+                "31412": {
+                  "element": {
+                    "electric": 0,
+                    "ether": -1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 40000,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vessel.png",
+                  "name": "Primordial Nightmare - \"The Creator\"",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 38711144.160000004,
+                    "stun": 18236
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Primordial Nightmare - \"The Creator\"",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014401": {
+              "desc": "· DMG dealt by Agents' <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Ultimate</color> <color=#2BAD00>increases by 30%</color>. When an Agent with Attack specialty hits an enemy, their attacks ignore <color=#2BAD00>20%</color> of the target's <color=#98EFF0>Ice RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color>, their own <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Icy Raid"
+            },
+            "69014402": {
+              "desc": "· If there are 2/3 Agents with <color=#FFFFFF>Anomaly</color> specialty in your squad, the whole squad's Attribute Anomaly DMG <color=#2BAD00>increases by 10%/30%</color>, and their ATK <color=#2BAD00>increases by 5%/15%</color> respectively.\n· When dealing Attribute Anomaly DMG to an enemy, ignore <color=#2BAD00>10%</color> of their All-Attribute RES and <color=#2BAD00>10%</color> of their DEF.",
+              "title": "Mutation"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

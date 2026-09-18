@@ -1,0 +1,281 @@
+{
+  "id": 690421,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 690422,
+      "zone": {
+        "69042201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014203": {
+              "desc": "· When an Agent's attack hits a Boss, the Boss gains 1 point of Dissonance. The same Agent can apply at most 1 point of Dissonance every 1s.\n· When a Boss accumulates 10 points of Dissonance, all Dissonance points are immediately removed and the Boss enters the Dissonant state. While in the Dissonant state, enemies take <color=#2BAD00>40% bonus Attribute Anomaly DMG</color> for 10s. Re-entering the Dissonant state resets the duration.\n· When an Agent successfully inflicts an Attribute Anomaly on a Boss, all Agents on the squad gain the Transmutation effect: <color=#2BAD00>DMG dealt increases by 15%</color> and Anomaly Proficiency <color=#2BAD00>increases by 20 points</color>. The Transmutation effect lasts 10s, and repeated triggers reset the duration.",
+              "title": ""
+            },
+            "69014204": {
+              "desc": "· Each time you successfully parry an attack from Girtablullu's summoned minions and trigger <color=#FFAF2C>Active Conversion</color>, you gain <color=#FFAF2C>500 Performance Points</color>; successfully triggering <Term:2000004></Term> against Girtablullu's attacks grants <color=#FFAF2C>1000 Performance Points</color>, up to 3 times; if you successfully <color=#FFAF2C>break the Corruptive Barrier within 25s</color> of Girtablullu <color=#FFAF2C>first activating</color> <Term:2000001></Term>, you gain <color=#FFAF2C>1500 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690422011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Girtablu_HC.png",
+              "monsterList": {
+                "31662": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Girtablu_HC.png",
+                  "name": "Integrated - Girtablullu",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 30356741.655,
+                    "stun": 18933.95
+                  }
+                }
+              },
+              "monsterWeakness": {},
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Integrated - Girtablullu",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014201": {
+              "desc": "· If there are 2/3 Agents in the squad with <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30/70</color> respectively, and Attribute Anomaly DMG dealt <color=#2BAD00>increases by 10%/25%</color> respectively.\n· After inflicting an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's All-Attribute RES is <color=#2BAD00>reduced by 15%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "United Strength"
+            },
+            "69014202": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 10%</color>, their Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and their CRIT DMG <color=#2BAD00>increases by 40%</color>.\n· After an Agent inflicts <color=#FFFFFF>Attribute Anomaly</color> on an enemy, their DEF <color=#2BAD00>decreases by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Sneak Attack"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690421,
+      "zone": {
+        "69042101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69014405": {
+              "desc": "· When an Agent inflicts an Attribute Anomaly on an enemy, the target enemy gains 1 stack of Blight Mark of the corresponding attribute, lasting 30s and stacking up to 2 times. Repeated triggers of same-attribute Blight Mark reset its duration.\n· For every stack of Blight Mark inflicted, the enemies <color=#FFAF2C>take 8% more Attribute Anomaly DMG</color>, and <color=#FFAF2C>DMG taken by <Term:2000001></Term> increases by 8%</color>.\n· When inflicting Impaired or Shutdown on an enemy, <color=#FFAF2C>the whole squad's Anomaly Proficiency increases by 60 pts</color>, lasting 30s. Repeated triggers reset the duration.",
+              "title": "69014405_Title"
+            },
+            "69014406": {
+              "desc": "· Successfully <color=#FFAF2C>inflicting Impaired</color> grants <color=#FFAF2C>1000 Performance Points</color>; successfully <color=#FFAF2C>countering</color> <Term:2000003></Term> grants <color=#FFAF2C>500 Performance Points</color> each time; <color=#FFAF2C>preventing an enemy's Corruptive Barrier from completing its charge</color> and rendering them Impaired grants <color=#FFAF2C>1500 Performance Points</color>. A maximum of 5000 Performance Points can be obtained.",
+              "title": "69014406_Title"
+            }
+          },
+          "layerRoom": {
+            "690421011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_GirReborn.png",
+              "monsterList": {
+                "31674": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40008,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_GirReborn.png",
+                  "name": "Girtablullu - Stagnant Aberrant",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22562954.099999998,
+                    "stun": 23276.75
+                  }
+                }
+              },
+              "monsterWeakness": {},
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Girtablullu - Stagnant Aberrant",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014201": {
+              "desc": "· If there are 2/3 Agents in the squad with <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30/70</color> respectively, and Attribute Anomaly DMG dealt <color=#2BAD00>increases by 10%/25%</color> respectively.\n· After inflicting an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's All-Attribute RES is <color=#2BAD00>reduced by 15%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "United Strength"
+            },
+            "69014202": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 10%</color>, their Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and their CRIT DMG <color=#2BAD00>increases by 40%</color>.\n· After an Agent inflicts <color=#FFFFFF>Attribute Anomaly</color> on an enemy, their DEF <color=#2BAD00>decreases by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Sneak Attack"
+            }
+          },
+          "stageNum": 1
+        },
+        "69042102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· DMG dealt to boss enemies by Attribute Anomaly is increased by 50%. While Notorious - Dead End Butcher is in <color=#FFFFFF>Ether Enhanced</color> state, the DMG it takes is reduced by 15%, and the Daze value dealt by Agents to it is reduced by 30%. Triggering <color=#FFFFFF>Disorder</color> on Notorious - Dead End Butcher immediately forces it to exit the <color=#FFFFFF>Ether Enhanced</color> state.",
+              "title": ""
+            },
+            "69013702": {
+              "desc": "· Successfully <color=#FFAF2C>inflicting Disorder</color> grants <color=#FFAF2C>300 Performance Points</color>, up to a maximum of 5,000.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690421021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "Notorious - Dead End Butcher",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 25103400.21,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Dead End Butcher",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014201": {
+              "desc": "· If there are 2/3 Agents in the squad with <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30/70</color> respectively, and Attribute Anomaly DMG dealt <color=#2BAD00>increases by 10%/25%</color> respectively.\n· After inflicting an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's All-Attribute RES is <color=#2BAD00>reduced by 15%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "United Strength"
+            },
+            "69014202": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 10%</color>, their Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and their CRIT DMG <color=#2BAD00>increases by 40%</color>.\n· After an Agent inflicts <color=#FFFFFF>Attribute Anomaly</color> on an enemy, their DEF <color=#2BAD00>decreases by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Sneak Attack"
+            }
+          },
+          "stageNum": 2
+        },
+        "69042103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010305": {
+              "desc": "· When dealing sufficient DMG to the boss enemy's legs, Impaired will be triggered. <color=#FFAF2C>Upon successfully breaking the boss enemy's legs</color>, the Agent restores <color=#FFAF2C>1,000 Decibels</color>, and the boss gains 1 stack of <color=#FFFFFF>Disintegration</color> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <color=#FFFFFF>Disintegration</color> the target has, CRIT DMG is <color=#FFAF2C>increased by 25%</color>.",
+              "title": ""
+            },
+            "69010306": {
+              "desc": "",
+              "title": ""
+            },
+            "69010307": {
+              "desc": "· Successfully <color=#FFAF2C>impairing an enemy</color> grants <color=#FFAF2C>800 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690421031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ComplexCorrupted.png",
+              "monsterList": {
+                "11414": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_ComplexCorrupted.png",
+                  "name": "Unknown Corruption Complex",
+                  "stats": {
+                    "attack": 2738.909090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22199459.4,
+                    "stun": 16894.15
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Unknown Corruption Complex",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69014201": {
+              "desc": "· If there are 2/3 Agents in the squad with <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30/70</color> respectively, and Attribute Anomaly DMG dealt <color=#2BAD00>increases by 10%/25%</color> respectively.\n· After inflicting an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's All-Attribute RES is <color=#2BAD00>reduced by 15%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "United Strength"
+            },
+            "69014202": {
+              "desc": "· Agent ATK <color=#2BAD00>increases by 10%</color>, their Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and their CRIT DMG <color=#2BAD00>increases by 40%</color>.\n· After an Agent inflicts <color=#FFFFFF>Attribute Anomaly</color> on an enemy, their DEF <color=#2BAD00>decreases by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Sneak Attack"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

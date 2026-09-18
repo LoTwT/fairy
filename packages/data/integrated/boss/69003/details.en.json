@@ -1,0 +1,211 @@
+{
+  "id": 69003,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69003,
+      "zone": {
+        "6900301": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· DMG dealt to boss enemies by Attribute Anomaly is increased by 50%. While Notorious - Dead End Butcher is in <color=#FFFFFF>Ether Enhanced</color> state, the DMG it takes is reduced by 15%, and the Daze value dealt by Agents to it is reduced by 30%. Triggering <color=#FFFFFF>Disorder</color> on Notorious - Dead End Butcher immediately forces it to exit the <color=#FFFFFF>Ether Enhanced</color> state.",
+              "title": ""
+            },
+            "69010507": {
+              "desc": "· Successfully <color=#FFAF2C>triggering Perfect Dodge</color> grants <color=#FFAF2C>200 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69003011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "Notorious - Dead End Butcher",
+                  "stats": {
+                    "attack": 3521.454545454546,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 9836434.367999999,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Dead End Butcher",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010302": {
+              "desc": "· The Agent's <color=#2EB6FF>Electric DMG</color> and <color=#98EFF0>Ice DMG</color> will <color=#2BAD00>increase by 25%</color>.\n· DMG dealt by <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, and <color=#FFFFFF>Dash Attack</color> <color=#2BAD00>increases by 40%</color>, ignoring <color=#2BAD00>15%</color> of the enemy's DEF.",
+              "title": "Frosty Thunder"
+            },
+            "69010303": {
+              "desc": "· The Agent's Energy generation rate <color=#2BAD00>increases by 25%</color>, and the DMG dealt by <color=#FFFFFF>Quick Assist</color> <color=#2BAD00>increases by 50%</color>.\n· Each use of <color=#FFFFFF>Quick Assist</color> increases all squad members' ATK by <color=#2BAD00>10%</color> for 20s, stacking up to 3 times. Repeated triggers reset the duration.",
+              "title": "Rapid Aid"
+            }
+          },
+          "stageNum": 1
+        },
+        "6900302": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010305": {
+              "desc": "· When dealing sufficient DMG to the boss enemy's legs, Impaired will be triggered. <color=#FFAF2C>Upon successfully breaking the boss enemy's legs</color>, the Agent restores <color=#FFAF2C>1,000 Decibels</color>, and the boss gains 1 stack of <color=#FFFFFF>Disintegration</color> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <color=#FFFFFF>Disintegration</color> the target has, CRIT DMG is <color=#FFAF2C>increased by 25%</color>.",
+              "title": ""
+            },
+            "69010306": {
+              "desc": "",
+              "title": ""
+            },
+            "69010307": {
+              "desc": "· Successfully <color=#FFAF2C>impairing an enemy</color> grants <color=#FFAF2C>800 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69003021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ComplexCorrupted.png",
+              "monsterList": {
+                "11414": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_ComplexCorrupted.png",
+                  "name": "Unknown Corruption Complex",
+                  "stats": {
+                    "attack": 2543.2727272727275,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8657789.166000001,
+                    "stun": 16894.15
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Unknown Corruption Complex",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010302": {
+              "desc": "· The Agent's <color=#2EB6FF>Electric DMG</color> and <color=#98EFF0>Ice DMG</color> will <color=#2BAD00>increase by 25%</color>.\n· DMG dealt by <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, and <color=#FFFFFF>Dash Attack</color> <color=#2BAD00>increases by 40%</color>, ignoring <color=#2BAD00>15%</color> of the enemy's DEF.",
+              "title": "Frosty Thunder"
+            },
+            "69010303": {
+              "desc": "· The Agent's Energy generation rate <color=#2BAD00>increases by 25%</color>, and the DMG dealt by <color=#FFFFFF>Quick Assist</color> <color=#2BAD00>increases by 50%</color>.\n· Each use of <color=#FFFFFF>Quick Assist</color> increases all squad members' ATK by <color=#2BAD00>10%</color> for 20s, stacking up to 3 times. Repeated triggers reset the duration.",
+              "title": "Rapid Aid"
+            }
+          },
+          "stageNum": 2
+        },
+        "6900303": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010105": {
+              "desc": "· Boss enemies gain 1 stack of <color=#FFFFFF>Battle-Hardened</color> every 10s, increasing their DMG dealt by 20% and stacking up to 3 times. When inflicting <color=#FFAF2C>Attribute Anomaly</color>, removes 1 stack of <color=#FFFFFF>Battle-Hardened</color> and increases their DMG taken by 15% for 20s.",
+              "title": ""
+            },
+            "69010108": {
+              "desc": "· Successfully <color=#FFAF2C>inflicting Attribute Anomaly</color> on enemies grants <color=#FFAF2C>150 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69003031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_TyrantPompey.png",
+              "monsterList": {
+                "11703": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30021,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_TyrantPompey.png",
+                  "name": "Corrupted Overlord - Pompey",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8017631.856,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Corrupted Overlord - Pompey",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69010302": {
+              "desc": "· The Agent's <color=#2EB6FF>Electric DMG</color> and <color=#98EFF0>Ice DMG</color> will <color=#2BAD00>increase by 25%</color>.\n· DMG dealt by <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, and <color=#FFFFFF>Dash Attack</color> <color=#2BAD00>increases by 40%</color>, ignoring <color=#2BAD00>15%</color> of the enemy's DEF.",
+              "title": "Frosty Thunder"
+            },
+            "69010303": {
+              "desc": "· The Agent's Energy generation rate <color=#2BAD00>increases by 25%</color>, and the DMG dealt by <color=#FFFFFF>Quick Assist</color> <color=#2BAD00>increases by 50%</color>.\n· Each use of <color=#FFFFFF>Quick Assist</color> increases all squad members' ATK by <color=#2BAD00>10%</color> for 20s, stacking up to 3 times. Repeated triggers reset the duration.",
+              "title": "Rapid Aid"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

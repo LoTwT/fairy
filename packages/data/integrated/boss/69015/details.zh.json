@@ -1,0 +1,210 @@
+{
+  "id": 69015,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 69015,
+      "zone": {
+        "6901501": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011302": {
+              "desc": "· 秽息司祭每次切换阶段时，会使自身异常积蓄抗性提升10%，同时使自身受到的暴击伤害提高30%，至多可以叠加2层，<Term:2000002></Term>被打破时，清除所有层数。",
+              "title": ""
+            },
+            "69011303": {
+              "desc": "· 代理人<color=#FFAF2C>3秒内成功发动3次[招架支援]</color>时，可获得<color=#FFAF2C>1000操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69011502": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69015011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "秽息司祭",
+                  "stats": {
+                    "attack": 2112.8727272727274,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8886168.472499998,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "秽息司祭",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010303": {
+              "desc": "· 代理人的能量获取效率<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[快速支援]</color>造成的伤害<color=#2BAD00>提升50%</color>。\n· 每次使用<color=#FFFFFF>[快速支援]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加3层，重复触发时刷新持续时间。",
+              "title": "驰援"
+            },
+            "69011301": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率 <color=#2BAD00>提升15%</color>，<color=#FE437E>以太属性伤害</color>和<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "凝神"
+            },
+            "69011501": {
+              "desc": "· 代理人的<color=#FE437E>以太属性异常积蓄效率</color>和<color=#F0D12B>物理属性异常积蓄效率</color><color=#2BAD00>提升20%</color>，异常精通提升60点。\n· 代理人命中属性异常状态中的敌人时，造成的伤害<color=#2BAD00>提升25%</color>，并无视敌人<color=#2BAD00>15%</color>的防御力。",
+              "title": "幻涌"
+            }
+          },
+          "stageNum": 1
+        },
+        "6901502": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010105": {
+              "desc": "· 首领敌人每10秒获得1层<color=#FFFFFF>[愈战愈勇]</color>，使自身造成伤害提升20%，最多叠加3层；队伍中任意代理人<color=#FFAF2C>对敌人施加属性异常效果时</color>，将移除1层<color=#FFFFFF>[愈战愈勇]</color>并削弱目标，使其受到伤害提升15%，持续20秒。",
+              "title": ""
+            },
+            "69010507": {
+              "desc": "· 成功<color=#FFAF2C>触发[极限闪避]</color>时，可获得<color=#FFAF2C>200操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69015021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_TyrantPompey.png",
+              "monsterList": {
+                "11703": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30021,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_TyrantPompey.png",
+                  "name": "「霸主侵蚀体·庞培」",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 9508089.06,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "火属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "「霸主侵蚀体·庞培」",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010303": {
+              "desc": "· 代理人的能量获取效率<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[快速支援]</color>造成的伤害<color=#2BAD00>提升50%</color>。\n· 每次使用<color=#FFFFFF>[快速支援]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加3层，重复触发时刷新持续时间。",
+              "title": "驰援"
+            },
+            "69011301": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率 <color=#2BAD00>提升15%</color>，<color=#FE437E>以太属性伤害</color>和<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "凝神"
+            },
+            "69011501": {
+              "desc": "· 代理人的<color=#FE437E>以太属性异常积蓄效率</color>和<color=#F0D12B>物理属性异常积蓄效率</color><color=#2BAD00>提升20%</color>，异常精通提升60点。\n· 代理人命中属性异常状态中的敌人时，造成的伤害<color=#2BAD00>提升25%</color>，并无视敌人<color=#2BAD00>15%</color>的防御力。",
+              "title": "幻涌"
+            }
+          },
+          "stageNum": 2
+        },
+        "6901503": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· 属性异常对首领敌人造成的伤害提升50%；恶名·死路屠夫处于<color=#FFFFFF>[以太强化]</color>状态时，承受的伤害降低15%，代理人对其造成的失衡值降低30%；代理人对恶名·死路屠夫触发<color=#FFFFFF>[紊乱]</color>后，使其立即退出<color=#FFFFFF>[以太强化]</color>状态。",
+              "title": ""
+            },
+            "69010507": {
+              "desc": "· 成功<color=#FFAF2C>触发[极限闪避]</color>时，可获得<color=#FFAF2C>200操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69015031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "恶名·死路屠夫",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 12295542.959999999,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "恶名·死路屠夫",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010303": {
+              "desc": "· 代理人的能量获取效率<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[快速支援]</color>造成的伤害<color=#2BAD00>提升50%</color>。\n· 每次使用<color=#FFFFFF>[快速支援]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加3层，重复触发时刷新持续时间。",
+              "title": "驰援"
+            },
+            "69011301": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率 <color=#2BAD00>提升15%</color>，<color=#FE437E>以太属性伤害</color>和<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒。",
+              "title": "凝神"
+            },
+            "69011501": {
+              "desc": "· 代理人的<color=#FE437E>以太属性异常积蓄效率</color>和<color=#F0D12B>物理属性异常积蓄效率</color><color=#2BAD00>提升20%</color>，异常精通提升60点。\n· 代理人命中属性异常状态中的敌人时，造成的伤害<color=#2BAD00>提升25%</color>，并无视敌人<color=#2BAD00>15%</color>的防御力。",
+              "title": "幻涌"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}

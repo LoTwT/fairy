@@ -86,6 +86,14 @@ export class ShiyuIntegrationError extends SourceIntegrationError {
   }
 }
 
+/** Boss 整合失败；与代理人、驱动盘、WEngine、Bangboo、Monster、Shiyu 分开具名，便于调用方按实体类别定位。 */
+export class BossIntegrationError extends SourceIntegrationError {
+  constructor(location: SourceLocation, reason: string) {
+    super(location, reason)
+    this.name = "BossIntegrationError"
+  }
+}
+
 /** 失败时抛出指定类别的整合错误；默认沿用既有代理人错误契约，新实体类别显式传入自己的类型。 */
 export function fail(
   location: SourceLocation,

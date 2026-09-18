@@ -38,7 +38,10 @@
     "./integrated/monsters/*/details.en.json": "./dist/integrated/monsters/*/details.en.json",
     "./integrated/shiyu/*/data.json": "./dist/integrated/shiyu/*/data.json",
     "./integrated/shiyu/*/details.zh.json": "./dist/integrated/shiyu/*/details.zh.json",
-    "./integrated/shiyu/*/details.en.json": "./dist/integrated/shiyu/*/details.en.json"
+    "./integrated/shiyu/*/details.en.json": "./dist/integrated/shiyu/*/details.en.json",
+    "./integrated/boss/*/data.json": "./dist/integrated/boss/*/data.json",
+    "./integrated/boss/*/details.zh.json": "./dist/integrated/boss/*/details.zh.json",
+    "./integrated/boss/*/details.en.json": "./dist/integrated/boss/*/details.en.json"
   },
   "publishConfig": {
     "access": "public"

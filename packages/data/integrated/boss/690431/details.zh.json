@@ -1,0 +1,299 @@
+{
+  "id": 690431,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 690432,
+      "zone": {
+        "69043201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013304": {
+              "desc": "·每次成功应对首领的攻击并使其触发特殊跪地，可获得<color=#FFAF2C>1000操作得分</color>；<Term:2000003></Term>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，可获得<color=#FFAF2C>1500操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            },
+            "69014407": {
+              "desc": "代理人对敌人造成[完美反制]后，敌人的全属性抗性降低10%，且全队[强攻]特性的代理人攻击力提升20%，穿透率提升25%，造成的冰属性和以太属性伤害的暴击伤害提升60%。\n触发特殊跪地时，全队异常精通提升40点，异常伤害提升30%。",
+              "title": "69014407_Title"
+            },
+            "69014409": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690432011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ClonedBlackWolf.png",
+              "monsterList": {
+                "11803": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40003,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_ClonedBlackWolf.png",
+                  "name": "复写体·猎血清道夫",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 46197845.63999999,
+                    "stun": 17876.45
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "复写体·猎血清道夫",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69013604": {
+              "desc": "· [命破]特性的代理人贯穿伤害<color=#2BAD00>提升15%</color>，造成的秽息盾削减值<color=#2BAD00>提升30%</color>。\n· 处于以太帷幕中的代理人，<color=#FE437E>以太属性伤害</color><color=#2BAD00>提升25%</color>，攻击命中敌人后使其失衡易伤倍率<color=#2BAD00>提升25%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "破境"
+            },
+            "69014201": {
+              "desc": "· 队伍内存在2/3名<color=#FFFFFF>[异常]</color>特性代理人时，全队的异常精通分别<color=#2BAD00>提升30点/70点</color>，造成的属性异常伤害分别<color=#2BAD00>提升10%/25%</color>。\n· 对敌人施加<color=#FFFFFF>属性异常</color>效果后，敌人的全属性伤害抗性<color=#2BAD00>降低15%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "勠力"
+            },
+            "69014301": {
+              "desc": "· [强攻]特性的代理人攻击力<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>命中敌人时，无视其<color=#2BAD00>30%</color>的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FE437E>以太属性伤害抗性</color>。\n· 代理人命中处于失衡状态的敌人时，其失衡易伤<color=#2BAD00>提升40%</color>，持续5秒，重复触发时刷新持续时间。",
+              "title": "掣霜"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690431,
+      "zone": {
+        "69043101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>[异常]</color>特性的代理人挑战。",
+              "title": ""
+            },
+            "69014405": {
+              "desc": "· 代理人对敌人施加属性异常状态时，目标敌人获得1层对应属性的[凋蚀印记]，持续30秒，最多叠加2层，同属性的[凋蚀印记]重复触发刷新持续时间。\n· 敌人每持有1层[凋蚀印记]，受到的<color=#FFAF2C>属性异常伤害提升8%</color>，<color=#FFAF2C><Term:2000001></Term>受到的伤害提升8%</color>。\n· 对敌人造成[部位破坏]或[完美反制]时，<color=#FFAF2C>全队异常精通提升60</color>点，持续30秒，重复触发刷新持续时间。",
+              "title": "69014405_Title"
+            },
+            "69014406": {
+              "desc": "· 成功<color=#FFAF2C>造成[部位破坏]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；每次成功<color=#FFAF2C>应对</color><Term:2000003></Term>时，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>阻止敌人的[侵蚀壁垒]充能完成并造成部位破坏</color>时，可获得<color=#FFAF2C>1500操作得分</color>，最多获得5000操作得分。",
+              "title": "69014406_Title"
+            }
+          },
+          "layerRoom": {
+            "690431011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_GirReborn.png",
+              "monsterList": {
+                "31674": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40008,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_GirReborn.png",
+                  "name": "基塔布鲁·滞变畸兽",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22562954.099999998,
+                    "stun": 23276.75
+                  }
+                }
+              },
+              "monsterWeakness": {},
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "基塔布鲁·滞变畸兽",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013604": {
+              "desc": "· [命破]特性的代理人贯穿伤害<color=#2BAD00>提升15%</color>，造成的秽息盾削减值<color=#2BAD00>提升30%</color>。\n· 处于以太帷幕中的代理人，<color=#FE437E>以太属性伤害</color><color=#2BAD00>提升25%</color>，攻击命中敌人后使其失衡易伤倍率<color=#2BAD00>提升25%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "破境"
+            },
+            "69014201": {
+              "desc": "· 队伍内存在2/3名<color=#FFFFFF>[异常]</color>特性代理人时，全队的异常精通分别<color=#2BAD00>提升30点/70点</color>，造成的属性异常伤害分别<color=#2BAD00>提升10%/25%</color>。\n· 对敌人施加<color=#FFFFFF>属性异常</color>效果后，敌人的全属性伤害抗性<color=#2BAD00>降低15%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "勠力"
+            },
+            "69014301": {
+              "desc": "· [强攻]特性的代理人攻击力<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>命中敌人时，无视其<color=#2BAD00>30%</color>的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FE437E>以太属性伤害抗性</color>。\n· 代理人命中处于失衡状态的敌人时，其失衡易伤<color=#2BAD00>提升40%</color>，持续5秒，重复触发时刷新持续时间。",
+              "title": "掣霜"
+            }
+          },
+          "stageNum": 1
+        },
+        "69043102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012602": {
+              "desc": "· 索贝克与魇缚者每次交替上场时，可使魇缚者获得1层<color=#FFFFFF>[合契]</color>与一层<color=#FFFFFF>[舍身]</color>，[合契]与[舍身]最多叠加3层，每层[合契]可使全属性异常积蓄抗性<color=#FFAF2C>提升15%</color>，每层[舍身]可使魇缚者防御<color=#FFAF2C>降低8%</color>；魇缚者进入失衡状态时，受到暴击伤害<color=#FFAF2C>提升50%</color>。",
+              "title": ""
+            },
+            "69012603": {
+              "desc": "· 代理人使索贝克与魇缚者进入<color=#FFAF2C>虚弱状态</color>时，可获得<color=#FFAF2C>1500操作得分</color>；代理人<color=#FFAF2C>击杀索贝克</color>时，可获得<color=#FFAF2C>2000操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69013004": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Stun><color=#FFAF2C>[击破]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690431021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Awakener.png",
+              "monsterList": {
+                "31353": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 1,
+                    "wind": 1
+                  },
+                  "id": 30042,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Awakener.png",
+                  "name": "魇缚者·叶释渊",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 24125386.23,
+                    "stun": 14068.040000000003
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "物理",
+                "202": "冰属性",
+                "204": "风属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "魇缚者·叶释渊",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013604": {
+              "desc": "· [命破]特性的代理人贯穿伤害<color=#2BAD00>提升15%</color>，造成的秽息盾削减值<color=#2BAD00>提升30%</color>。\n· 处于以太帷幕中的代理人，<color=#FE437E>以太属性伤害</color><color=#2BAD00>提升25%</color>，攻击命中敌人后使其失衡易伤倍率<color=#2BAD00>提升25%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "破境"
+            },
+            "69014201": {
+              "desc": "· 队伍内存在2/3名<color=#FFFFFF>[异常]</color>特性代理人时，全队的异常精通分别<color=#2BAD00>提升30点/70点</color>，造成的属性异常伤害分别<color=#2BAD00>提升10%/25%</color>。\n· 对敌人施加<color=#FFFFFF>属性异常</color>效果后，敌人的全属性伤害抗性<color=#2BAD00>降低15%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "勠力"
+            },
+            "69014301": {
+              "desc": "· [强攻]特性的代理人攻击力<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>命中敌人时，无视其<color=#2BAD00>30%</color>的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FE437E>以太属性伤害抗性</color>。\n· 代理人命中处于失衡状态的敌人时，其失衡易伤<color=#2BAD00>提升40%</color>，持续5秒，重复触发时刷新持续时间。",
+              "title": "掣霜"
+            }
+          },
+          "stageNum": 2
+        },
+        "69043103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011302": {
+              "desc": "· 秽息司祭每次切换阶段时，会使自身异常积蓄抗性提升10%，同时使自身受到的暴击伤害提高30%，至多可以叠加2层，<Term:2000002></Term>被打破时，清除所有层数。",
+              "title": ""
+            },
+            "69011303": {
+              "desc": "· 代理人<color=#FFAF2C>3秒内成功发动3次[招架支援]</color>时，可获得<color=#FFAF2C>1000操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69013002": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Rupture><color=#FFAF2C>[命破]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690431031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "秽息司祭",
+                  "stats": {
+                    "attack": 2465.018181818182,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 20908631.7,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "秽息司祭",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013604": {
+              "desc": "· [命破]特性的代理人贯穿伤害<color=#2BAD00>提升15%</color>，造成的秽息盾削减值<color=#2BAD00>提升30%</color>。\n· 处于以太帷幕中的代理人，<color=#FE437E>以太属性伤害</color><color=#2BAD00>提升25%</color>，攻击命中敌人后使其失衡易伤倍率<color=#2BAD00>提升25%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "破境"
+            },
+            "69014201": {
+              "desc": "· 队伍内存在2/3名<color=#FFFFFF>[异常]</color>特性代理人时，全队的异常精通分别<color=#2BAD00>提升30点/70点</color>，造成的属性异常伤害分别<color=#2BAD00>提升10%/25%</color>。\n· 对敌人施加<color=#FFFFFF>属性异常</color>效果后，敌人的全属性伤害抗性<color=#2BAD00>降低15%</color>，持续10秒，重复触发时刷新持续时间。",
+              "title": "勠力"
+            },
+            "69014301": {
+              "desc": "· [强攻]特性的代理人攻击力<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>命中敌人时，无视其<color=#2BAD00>30%</color>的<color=#98EFF0>冰属性伤害抗性</color>和<color=#FE437E>以太属性伤害抗性</color>。\n· 代理人命中处于失衡状态的敌人时，其失衡易伤<color=#2BAD00>提升40%</color>，持续5秒，重复触发时刷新持续时间。",
+              "title": "掣霜"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}

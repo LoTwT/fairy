@@ -1,0 +1,233 @@
+{
+  "id": 69038,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69038,
+      "zone": {
+        "6903801": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011602": {
+              "desc": "· When Miasmic Fiend is affected by <color=#FFAF2C>Attribute Anomaly</color>, it takes 8% bonus Anomaly DMG from Agents, stacking up to 6 times; activating <Term:2000002>Miasmic Shield</Term> clears all stacks, with each stack increasing the reduction efficiency of <color=#FFAF2C>Miasmic Shield</color> by 2.5%.",
+              "title": ""
+            },
+            "69011603": {
+              "desc": "· When Agents bait Miasmic Fiend's ground attack into <color=#FFAF2C>detonating at least 5 Miasma Pools at once</color> and <color=#FFAF2C>avoid being hit by the attack and pool explosions</color>, they will earn <color=#FFAF2C>1,700 Performance Points</color>, up to a maximum of 5,000.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69038011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NamelessOne.png",
+              "monsterList": {
+                "31062": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30034,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_NamelessOne.png",
+                  "name": "Miasmic Fiend - Unfathomable",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 19162282.6575,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Miasmic Fiend - Unfathomable",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69013701": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>.\n· After launching EX Special Attack, Agents with Rupture specialty deal <color=#2BAD00>50% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>30%</color> of enemy <color=#F0D12B>Physical RES</color> on hit for 15s. Repeated triggers reset the duration.",
+              "title": "Decree"
+            },
+            "69013801": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increase by 40%</color>, and <color=#FFFFFF>Abloom</color> DMG <color=#2BAD00>increases by 20%</color>.\n· After an Agent inflicts an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, their DEF <color=#2BAD00>is reduced by 15%</color>, and their <color=#98EFF0>Ice RES</color> <color=#2BAD00>is reduced by 30%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Chilling Edge"
+            }
+          },
+          "stageNum": 1
+        },
+        "6903802": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012603": {
+              "desc": "· When Agents inflict <color=#FFAF2C>Weakened</color> on Sobek and The Thrall, <color=#FFAF2C>1,500 Performance Points</color> will be awarded. When an Agent <color=#FFAF2C>eliminates Sobek</color>, <color=#FFAF2C>2,000 Performance Points</color> will be awarded. Up to a maximum of 5,000 Performance Points can be earned.",
+              "title": ""
+            },
+            "69012604": {
+              "desc": "· When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <color=#FFFFFF>Contract</color> and <color=#FFFFFF>Self-Sacrifice</color>. Contract and Self-Sacrifice can stack up to 3 times. Each stack of Contract increases All-Attribute Anomaly Buildup RES by <color=#FFAF2C>15%</color>, each stack of Self-Sacrifice increases The Thrall's Stun DMG Multiplier by <color=#FFAF2C>10%</color>. When The Thrall is Stunned, CRIT DMG taken increases by <color=#FFAF2C>50%</color>.",
+              "title": ""
+            },
+            "69013004": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Stun><color=#FFAF2C>Stun</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69038021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Awakener.png",
+              "monsterList": {
+                "31353": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 1,
+                    "wind": 1
+                  },
+                  "id": 30042,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Awakener.png",
+                  "name": "Ye Shiyuan the Thrall",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22585467.96,
+                    "stun": 14068.040000000003
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Ye Shiyuan the Thrall",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69013701": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>.\n· After launching EX Special Attack, Agents with Rupture specialty deal <color=#2BAD00>50% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>30%</color> of enemy <color=#F0D12B>Physical RES</color> on hit for 15s. Repeated triggers reset the duration.",
+              "title": "Decree"
+            },
+            "69013801": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increase by 40%</color>, and <color=#FFFFFF>Abloom</color> DMG <color=#2BAD00>increases by 20%</color>.\n· After an Agent inflicts an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, their DEF <color=#2BAD00>is reduced by 15%</color>, and their <color=#98EFF0>Ice RES</color> <color=#2BAD00>is reduced by 30%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Chilling Edge"
+            }
+          },
+          "stageNum": 2
+        },
+        "6903803": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011902": {
+              "desc": "· When an Agent hits The Defiler with Defensive Assist, the whole squad gains 1 stack of <color=#FFFFFF>Adjudication</color>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <color=#FFFFFF>Adjudication</color>. Adjudication can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.\n· For each stack of <color=#FFFFFF>Adjudication</color>, the Agent's CRIT DMG <color=#2BAD00>increases by 5%</color>, Physical DMG <color=#2BAD00>increases by 5%</color>, and Electric DMG <color=#2BAD00>increases by 5%</color>.\n· The Defiler receives 25% less Attribute Anomaly DMG.",
+              "title": ""
+            },
+            "69011903": {
+              "desc": "· When an Agent causes <color=#FFAF2C>Impaired status</color>, they gain <color=#FFAF2C>2500 Performance Points</color>; when an Agent <color=#FFAF2C>shoots down The Defiler while it's attacking in mid-air</color>, they gain <color=#FFAF2C>1500 Performance Points</color>, up to a maximum of 5000 Performance Points.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>Attack</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69038031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_IsoldetheDefiler.png",
+              "monsterList": {
+                "31142": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30038,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_IsoldetheDefiler.png",
+                  "name": "The Defiler",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 17803702.62,
+                    "stun": 19977.350000000002
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "203": "Electric"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "The Defiler",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69013201": {
+              "desc": "· Agent CRIT DMG <color=#2BAD00>increases by 30%</color>.\n· ATK of Agents with Attack specialty <color=#2BAD00>increases by 10%</color>. Their Basic Attack DMG <color=#2BAD00>increases by 30%</color> and ignore <color=#2BAD00>15%</color> of enemy DEF.",
+              "title": "Heartcrusher"
+            },
+            "69013701": {
+              "desc": "· Agent Sheer DMG <color=#2BAD00>increases by 20%</color>.\n· After launching EX Special Attack, Agents with Rupture specialty deal <color=#2BAD00>50% bonus</color> CRIT DMG, and their <color=#FFFFFF>EX Special Attack</color> as well as <color=#FFFFFF>Ultimate</color> ignore <color=#2BAD00>30%</color> of enemy <color=#F0D12B>Physical RES</color> on hit for 15s. Repeated triggers reset the duration.",
+              "title": "Decree"
+            },
+            "69013801": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increase by 40%</color>, and <color=#FFFFFF>Abloom</color> DMG <color=#2BAD00>increases by 20%</color>.\n· After an Agent inflicts an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, their DEF <color=#2BAD00>is reduced by 15%</color>, and their <color=#98EFF0>Ice RES</color> <color=#2BAD00>is reduced by 30%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Chilling Edge"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

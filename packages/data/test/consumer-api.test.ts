@@ -6,6 +6,7 @@ import type {
   DriveDiscName,
   MonsterId,
   ShiyuId,
+  BossId,
   WEngineName,
 } from "../src/index.ts"
 import { supportedLanguages } from "../src/nanoka-identity.ts"
@@ -48,6 +49,12 @@ const loaders = vi.hoisted(() => ({
   otherShiyuData: vi.fn(),
   otherShiyuZh: vi.fn(),
   otherShiyuEn: vi.fn(),
+  bossData: vi.fn(),
+  bossZh: vi.fn(),
+  bossEn: vi.fn(),
+  otherBossData: vi.fn(),
+  otherBossZh: vi.fn(),
+  otherBossEn: vi.fn(),
 }))
 vi.mock("../.generated/catalog.ts", () => ({
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
@@ -140,6 +147,19 @@ vi.mock("../.generated/catalog.ts", () => ({
       en: loaders.otherShiyuEn,
     },
   },
+  bossIds: Object.freeze(["69001", "69002"]),
+  bossLoaders: {
+    "69001": {
+      data: loaders.bossData,
+      zh: loaders.bossZh,
+      en: loaders.bossEn,
+    },
+    "69002": {
+      data: loaders.otherBossData,
+      zh: loaders.otherBossZh,
+      en: loaders.otherBossEn,
+    },
+  },
   indexLoader: loaders.index,
 }))
 import {
@@ -148,6 +168,7 @@ import {
   driveDiscNames,
   monsterIds,
   shiyuIds,
+  bossIds,
   wEngineNames,
   loadIndex,
   loadAgentData,
@@ -165,6 +186,9 @@ import {
   loadShiyuData,
   loadShiyuDetails,
   loadAllShiyu,
+  loadBossData,
+  loadBossDetails,
+  loadAllBosses,
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
@@ -477,6 +501,53 @@ function mockMemberRecords() {
       extra: { entries: ["original"] },
     })
   }
+
+  for (const [data, zh, en, id] of [
+    [loaders.bossData, loaders.bossZh, loaders.bossEn, 69001],
+    [loaders.otherBossData, loaders.otherBossZh, loaders.otherBossEn, 69002],
+  ] as const) {
+    data.mockResolvedValue({
+      id,
+      priority: 5,
+      zoneType: 1001,
+      beginTime: "2024-07-04 04:00:00",
+      endTime: "2024-08-01 03:59:59",
+      bossAdjust: {
+        "1001": { hp: 1200, atk: -5000, points: 1000 },
+      },
+      unknown: { tags: ["original"] },
+    })
+    const bossDetails = (locale: string, name: string, modeName: string) => ({
+      id,
+      locale,
+      name,
+      modes: [
+        {
+          id,
+          zoneType: 1001,
+          zone: {
+            "6900101": {
+              name: modeName,
+              stageNum: 1,
+              monsterLevel: 70,
+              layerBuff: {},
+              layerRoom: {},
+              goalType: 2,
+              sRankGoal: 20000,
+              aRankGoal: 14000,
+              bRankGoal: 6000,
+              selectableBuff: {},
+            },
+          },
+        },
+      ],
+      extra: { entries: locale === "zh" ? ["原文"] : ["original"] },
+    })
+    zh.mockResolvedValue(bossDetails("zh", "试炼", "示例首领·一阶"))
+    en.mockResolvedValue(
+      bossDetails("en", "Trial", "Example Overlord · Phase I"),
+    )
+  }
 }
 
 beforeEach(() => {
@@ -590,6 +661,21 @@ describe("public readers", () => {
       if (key !== "shiyuData" && key !== "otherShiyuEn")
         expect(loader).not.toHaveBeenCalled()
   })
+  it("loads only the requested boss data/locale without prerequisites or other categories", async () => {
+    expect(await loadBossData("69001")).toMatchObject({ id: 69001 })
+    expect(loaders.index).not.toHaveBeenCalled()
+    expect(loaders.bossZh).not.toHaveBeenCalled()
+    expect(loaders.bossEn).not.toHaveBeenCalled()
+    expect(await loadBossDetails("69002", "en")).toMatchObject({
+      id: 69002,
+      locale: "en",
+    })
+    expect(loaders.otherBossData).not.toHaveBeenCalled()
+    expect(loaders.otherBossZh).not.toHaveBeenCalled()
+    for (const [key, loader] of Object.entries(loaders))
+      if (key !== "bossData" && key !== "otherBossEn")
+        expect(loader).not.toHaveBeenCalled()
+  })
   it.each([
     "unknown",
     "1311",
@@ -619,6 +705,8 @@ describe("public readers", () => {
     expect(await loadMonsterDetails(name as MonsterId, "zh")).toBeUndefined()
     expect(await loadShiyuData(name as ShiyuId)).toBeUndefined()
     expect(await loadShiyuDetails(name as ShiyuId, "zh")).toBeUndefined()
+    expect(await loadBossData(name as BossId)).toBeUndefined()
+    expect(await loadBossDetails(name as BossId, "zh")).toBeUndefined()
     for (const loader of Object.values(loaders))
       expect(loader).not.toHaveBeenCalled()
   })
@@ -645,6 +733,8 @@ describe("public readers", () => {
       () => loadMonsterDetails(name as MonsterId, "zh"),
       () => loadShiyuData(name as ShiyuId),
       () => loadShiyuDetails(name as ShiyuId, "zh"),
+      () => loadBossData(name as BossId),
+      () => loadBossDetails(name as BossId, "zh"),
     ])
       await expect(read()).rejects.toBeInstanceOf(TypeError)
   })
@@ -856,6 +946,34 @@ describe("public readers", () => {
           expect(loader).not.toHaveBeenCalled()
     },
   )
+  it.each(supportedLanguages)(
+    "loads the full separated boss %s view with source ID keys",
+    async (locale) => {
+      const all = await loadAllBosses(locale)
+      expect(Object.keys(all)).toEqual(bossIds)
+      expect(Object.keys(all["69001"])).toEqual(["data", "details"])
+      expect(all["69001"].details.locale).toBe(locale)
+      expect(all["69001"].details.name).toBe(locale === "zh" ? "试炼" : "Trial")
+      expect(all["69001"].data.bossAdjust["1001"]!.atk).toBe(-5000)
+      expect(all["69002"].details.locale).toBe(locale)
+      expect(loaders.index).not.toHaveBeenCalled()
+      expect(loaders.bossData).toHaveBeenCalledTimes(1)
+      expect(loaders.otherBossData).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "bossZh" : "bossEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "otherBossZh" : "otherBossEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "bossEn" : "bossZh"],
+      ).not.toHaveBeenCalled()
+      // Boss 全量不得顺带加载其他类别或索引。
+      for (const [key, loader] of Object.entries(loaders))
+        if (!key.toLowerCase().includes("boss"))
+          expect(loader).not.toHaveBeenCalled()
+    },
+  )
   it("isolates deeply nested mutations across sequential/concurrent and full/single calls", async () => {
     const [one, two] = await Promise.all([
       loadAgentData("Astra Yao"),
@@ -1007,6 +1125,28 @@ describe("public readers", () => {
     })
     expect(() => (shiyuIds as ShiyuId[]).pop()).toThrow(TypeError)
   })
+  it("isolates boss mutations across sequential/concurrent and full/single calls", async () => {
+    const [one, two] = await Promise.all([
+      loadBossData("69001"),
+      loadBossData("69001"),
+    ])
+    ;(one!.unknown as { tags: string[] }).tags.push("changed")
+    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.bossAdjust["1001"]!.atk = 0
+    expect((await loadBossData("69001"))!.bossAdjust["1001"]!.atk).toBe(-5000)
+    const details = await loadBossDetails("69001", "zh")
+    details!.modes![0]!.zone["6900101"]!.stageNum = -1
+    const reread = await loadBossDetails("69001", "zh")
+    expect(reread!.modes![0]!.zone["6900101"]!.stageNum).toBe(1)
+    const all = await loadAllBosses("zh")
+    expect(all["69001"].details.modes).toHaveLength(1)
+    ;(all["69001"].data.unknown as { tags: string[] }).tags.push("changed")
+    expect((await loadAllBosses("zh"))["69001"]).toEqual({
+      data: two,
+      details: await loadBossDetails("69001", "zh"),
+    })
+    expect(() => (bossIds as BossId[]).pop()).toThrow(TypeError)
+  })
   it.each([
     new Error("missing file"),
     new SyntaxError("invalid JSON"),
@@ -1025,6 +1165,8 @@ describe("public readers", () => {
     loaders.monsterZh.mockRejectedValue(error)
     loaders.shiyuData.mockRejectedValue(error)
     loaders.shiyuZh.mockRejectedValue(error)
+    loaders.bossData.mockRejectedValue(error)
+    loaders.bossZh.mockRejectedValue(error)
     await expect(loadIndex()).rejects.toBe(error)
     await expect(loadAgentData("Astra Yao")).rejects.toBe(error)
     await expect(loadAgentDetails("Astra Yao", "zh")).rejects.toBe(error)
@@ -1048,6 +1190,9 @@ describe("public readers", () => {
     await expect(loadShiyuData("61001")).rejects.toBe(error)
     await expect(loadShiyuDetails("61001", "zh")).rejects.toBe(error)
     await expect(loadAllShiyu("zh")).rejects.toBe(error)
+    await expect(loadBossData("69001")).rejects.toBe(error)
+    await expect(loadBossDetails("69001", "zh")).rejects.toBe(error)
+    await expect(loadAllBosses("zh")).rejects.toBe(error)
   })
   it("rejects the full view if a later member's necessary detail fails", async () => {
     const agentError = new Error("missing later member")
@@ -1068,5 +1213,8 @@ describe("public readers", () => {
     const shiyuError = new Error("missing later shiyu")
     loaders.otherShiyuEn.mockRejectedValue(shiyuError)
     await expect(loadAllShiyu("en")).rejects.toBe(shiyuError)
+    const bossError = new Error("missing later boss")
+    loaders.otherBossEn.mockRejectedValue(bossError)
+    await expect(loadAllBosses("en")).rejects.toBe(bossError)
   })
 })

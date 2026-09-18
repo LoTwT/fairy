@@ -1,0 +1,212 @@
+{
+  "id": 69004,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 69004,
+      "zone": {
+        "6900401": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· 属性异常对首领敌人造成的伤害提升50%；恶名·死路屠夫处于<color=#FFFFFF>[以太强化]</color>状态时，承受的伤害降低15%，代理人对其造成的失衡值降低30%；代理人对恶名·死路屠夫触发<color=#FFFFFF>[紊乱]</color>后，使其立即退出<color=#FFFFFF>[以太强化]</color>状态。",
+              "title": ""
+            },
+            "69010507": {
+              "desc": "· 成功<color=#FFAF2C>触发[极限闪避]</color>时，可获得<color=#FFAF2C>200操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69004011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "恶名·死路屠夫",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 9836434.367999999,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "恶名·死路屠夫",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[冲刺攻击]</color>造成的伤害<color=#2BAD00>提升30%</color>。\n· 触发<color=#FFFFFF>[极限闪避]</color>或<color=#FFFFFF>[极限支援]</color>后，全队攻击力<color=#2BAD00>提升10%</color>，暴击伤害<color=#2BAD00>提升10%</color>，持续15秒，最多叠加3层，每层效果单独结算持续时间。",
+              "title": "破招"
+            },
+            "69010303": {
+              "desc": "· 代理人的能量获取效率<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[快速支援]</color>造成的伤害<color=#2BAD00>提升50%</color>。\n· 每次使用<color=#FFFFFF>[快速支援]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加3层，重复触发时刷新持续时间。",
+              "title": "驰援"
+            },
+            "69010401": {
+              "desc": "· 代理人造成的失衡值<color=#2BAD00>提升15%</color>，<color=#FFFFFF>[连携技]</color>造成的伤害<color=#2BAD00>提升60%</color>。\n· 每次使用<color=#FFFFFF>[连携技]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加4层，每层效果单独结算持续时间。",
+              "title": "破衡"
+            }
+          },
+          "stageNum": 1
+        },
+        "6900402": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010205": {
+              "desc": "· 代理人<color=#FFAF2C>发动[招架支援]命中首领敌人时</color>，将对其施加1层<color=#FFFFFF>[难敌四手]</color>，<color=#FFFFFF>[招架支援]</color>累计命中3次时，将触发部位破坏，并额外施加3层<color=#FFFFFF>[难敌四手]</color>，每层<color=#FFFFFF>[难敌四手]</color>会使代理人对首领敌人造成的失衡值<color=#FFAF2C>提升15%</color>，在失衡状态下<color=#FFFFFF>[连携技]</color>和<color=#FFFFFF>[终结技]</color>对其造成的伤害<color=#FFAF2C>提升10%</color>；敌人充电蓄能时，将修复受损部位并重置部位破坏进度；敌人从失衡状态恢复时，<color=#FFFFFF>[难敌四手]</color>层数将会被重置。",
+              "title": ""
+            },
+            "69010208": {
+              "desc": "· 成功<color=#FFAF2C>造成部位破坏</color>时，可获得<color=#FFAF2C>600操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69010308": {
+              "desc": "· 该场战斗中，将不再消耗<color=#FFFFFF>[支援点数]</color>。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69004021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_TyphonDestroyer.png",
+              "monsterList": {
+                "11891": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 300082,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_TyphonDestroyer.png",
+                  "name": "自律强袭单位·「提丰·破坏者型」",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 7382413.709999999,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "电属性",
+                "204": "风属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "自律强袭单位·「提丰·破坏者型」",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[冲刺攻击]</color>造成的伤害<color=#2BAD00>提升30%</color>。\n· 触发<color=#FFFFFF>[极限闪避]</color>或<color=#FFFFFF>[极限支援]</color>后，全队攻击力<color=#2BAD00>提升10%</color>，暴击伤害<color=#2BAD00>提升10%</color>，持续15秒，最多叠加3层，每层效果单独结算持续时间。",
+              "title": "破招"
+            },
+            "69010303": {
+              "desc": "· 代理人的能量获取效率<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[快速支援]</color>造成的伤害<color=#2BAD00>提升50%</color>。\n· 每次使用<color=#FFFFFF>[快速支援]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加3层，重复触发时刷新持续时间。",
+              "title": "驰援"
+            },
+            "69010401": {
+              "desc": "· 代理人造成的失衡值<color=#2BAD00>提升15%</color>，<color=#FFFFFF>[连携技]</color>造成的伤害<color=#2BAD00>提升60%</color>。\n· 每次使用<color=#FFFFFF>[连携技]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加4层，每层效果单独结算持续时间。",
+              "title": "破衡"
+            }
+          },
+          "stageNum": 2
+        },
+        "6900403": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010106": {
+              "desc": "· 首领敌人造成伤害提升25%；<color=#FFAF2C>分身被击破</color>/<color=#FFAF2C>本体进入失衡状态</color>时，将对首领敌人施加1层/5层<color=#FFFFFF>[如履薄冰]</color>， 每层<color=#FFFFFF>[如履薄冰]</color>会使首领敌人造成的伤害降低5%，并使代理人对其造成的<color=#98EFF0>冰属性伤害</color>和<color=#2EB6FF>电属性伤害</color><color=#FFAF2C>提升10%</color>；敌人从失衡状态恢复时，<color=#FFFFFF>[如履薄冰]</color>层数将会被重置。",
+              "title": ""
+            },
+            "69010109": {
+              "desc": "· 成功<color=#FFAF2C>击破舞者分身</color>时，可获得<color=#FFAF2C>200操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69004031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousMarionette.png",
+              "monsterList": {
+                "11861": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300121,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousMarionette.png",
+                  "name": "恶名·冥宁芙",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 7970203.9799999995,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "恶名·冥宁芙",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避反击]</color>、<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[冲刺攻击]</color>造成的伤害<color=#2BAD00>提升30%</color>。\n· 触发<color=#FFFFFF>[极限闪避]</color>或<color=#FFFFFF>[极限支援]</color>后，全队攻击力<color=#2BAD00>提升10%</color>，暴击伤害<color=#2BAD00>提升10%</color>，持续15秒，最多叠加3层，每层效果单独结算持续时间。",
+              "title": "破招"
+            },
+            "69010303": {
+              "desc": "· 代理人的能量获取效率<color=#2BAD00>提升25%</color>，<color=#FFFFFF>[快速支援]</color>造成的伤害<color=#2BAD00>提升50%</color>。\n· 每次使用<color=#FFFFFF>[快速支援]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加3层，重复触发时刷新持续时间。",
+              "title": "驰援"
+            },
+            "69010401": {
+              "desc": "· 代理人造成的失衡值<color=#2BAD00>提升15%</color>，<color=#FFFFFF>[连携技]</color>造成的伤害<color=#2BAD00>提升60%</color>。\n· 每次使用<color=#FFFFFF>[连携技]</color>时，全队的攻击力<color=#2BAD00>提升10%</color>，持续20秒，最多可叠加4层，每层效果单独结算持续时间。",
+              "title": "破衡"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}

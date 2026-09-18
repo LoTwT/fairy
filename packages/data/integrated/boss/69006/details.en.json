@@ -1,0 +1,214 @@
+{
+  "id": 69006,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69006,
+      "zone": {
+        "6900601": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010305": {
+              "desc": "· When dealing sufficient DMG to the boss enemy's legs, Impaired will be triggered. <color=#FFAF2C>Upon successfully breaking the boss enemy's legs</color>, the Agent restores <color=#FFAF2C>1,000 Decibels</color>, and the boss gains 1 stack of <color=#FFFFFF>Disintegration</color> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <color=#FFFFFF>Disintegration</color> the target has, CRIT DMG is <color=#FFAF2C>increased by 25%</color>.",
+              "title": ""
+            },
+            "69010306": {
+              "desc": "",
+              "title": ""
+            },
+            "69010307": {
+              "desc": "· Successfully <color=#FFAF2C>impairing an enemy</color> grants <color=#FFAF2C>800 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69006011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ComplexCorrupted.png",
+              "monsterList": {
+                "11414": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_ComplexCorrupted.png",
+                  "name": "Unknown Corruption Complex",
+                  "stats": {
+                    "attack": 2543.2727272727275,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8657789.166000001,
+                    "stun": 16894.15
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Unknown Corruption Complex",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010303": {
+              "desc": "· The Agent's Energy generation rate <color=#2BAD00>increases by 25%</color>, and the DMG dealt by <color=#FFFFFF>Quick Assist</color> <color=#2BAD00>increases by 50%</color>.\n· Each use of <color=#FFFFFF>Quick Assist</color> increases all squad members' ATK by <color=#2BAD00>10%</color> for 20s, stacking up to 3 times. Repeated triggers reset the duration.",
+              "title": "Rapid Aid"
+            },
+            "69010601": {
+              "desc": "· The Agent's <color=#FF5521>Fire DMG</color> and <color=#2EB6FF>Electric DMG</color> will <color=#2BAD00>increase by 25%</color>.\n· After triggering <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Perfect Assist</color>, or <color=#FFFFFF>Quick Assist</color>, the Agent's CRIT Rate <color=#2BAD00>increases by 20%</color> and CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s.",
+              "title": "Electrospark"
+            },
+            "69010602": {
+              "desc": "· The Agent's Anomaly Buildup Rate <color=#2BAD00>increases by 10%</color>, and when a shield is active, the Anomaly Buildup Rate <color=#2BAD00>further increases by 20%</color>.\n· When attacking enemies in an Attribute Anomaly state, the Agent's DMG <color=#2BAD00>increases by 40%</color>.",
+              "title": "Anomaly Surge"
+            }
+          },
+          "stageNum": 1
+        },
+        "6900602": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010107": {
+              "desc": "· Successfully <color=#FFAF2C>interrupting a chant</color> grants <color=#FFAF2C>2,000 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69010505": {
+              "desc": "· When inflicting <color=#FFAF2C>an Attribute Anomaly or Disorder</color> on a boss enemy, all squad members gain 1 stack of <color=#FFFFFF>Laser Focus</color>, stacking up to 6 times. Each stack of <color=#FFFFFF>Laser Focus</color> increases the Agent's ATK by <color=#FFAF2C>8%</color>. With at least 3 stacks of <color=#FFFFFF>Laser Focus</color>, inflicting an <color=#FFAF2C>Attribute Anomaly</color> will increase its duration by 5s. When Sacrifice - Bringer attacks with his Sacrificial Knife, all squad members' <color=#FFFFFF>Laser Focus</color> stacks will be reset.",
+              "title": ""
+            },
+            "69010506": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69006021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_SacrificeBringer.png",
+              "monsterList": {
+                "11818": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 30024,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_SacrificeBringer.png",
+                  "name": "Sacrifice - Bringer",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 10279015.2,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Sacrifice - Bringer",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010303": {
+              "desc": "· The Agent's Energy generation rate <color=#2BAD00>increases by 25%</color>, and the DMG dealt by <color=#FFFFFF>Quick Assist</color> <color=#2BAD00>increases by 50%</color>.\n· Each use of <color=#FFFFFF>Quick Assist</color> increases all squad members' ATK by <color=#2BAD00>10%</color> for 20s, stacking up to 3 times. Repeated triggers reset the duration.",
+              "title": "Rapid Aid"
+            },
+            "69010601": {
+              "desc": "· The Agent's <color=#FF5521>Fire DMG</color> and <color=#2EB6FF>Electric DMG</color> will <color=#2BAD00>increase by 25%</color>.\n· After triggering <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Perfect Assist</color>, or <color=#FFFFFF>Quick Assist</color>, the Agent's CRIT Rate <color=#2BAD00>increases by 20%</color> and CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s.",
+              "title": "Electrospark"
+            },
+            "69010602": {
+              "desc": "· The Agent's Anomaly Buildup Rate <color=#2BAD00>increases by 10%</color>, and when a shield is active, the Anomaly Buildup Rate <color=#2BAD00>further increases by 20%</color>.\n· When attacking enemies in an Attribute Anomaly state, the Agent's DMG <color=#2BAD00>increases by 40%</color>.",
+              "title": "Anomaly Surge"
+            }
+          },
+          "stageNum": 2
+        },
+        "6900603": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010503": {
+              "desc": "· When the Agent <color=#FFAF2C>hits the boss enemy with a Defensive Assist or Chain Attack</color>, they apply 1 stack of <color=#FFFFFF>Weakening</color> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <color=#FFFFFF>Weakening</color> on the target, Agent CRIT DMG is <color=#FFAF2C>increased by 15%</color>.\n\nWhen the boss enemy has 4 stacks of <color=#FFFFFF>Weakening</color>, Defensive Assist will deflect the boss enemy's attack, causing a Stagger effect.",
+              "title": ""
+            },
+            "69010504": {
+              "desc": "· Successfully <color=#FFAF2C>triggering Perfect Assist</color> grants <color=#FFAF2C>300 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69006031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousPompey.png",
+              "monsterList": {
+                "11881": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300211,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousPompey.png",
+                  "name": "Notorious - Pompey",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8839953.071999999,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Pompey",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010303": {
+              "desc": "· The Agent's Energy generation rate <color=#2BAD00>increases by 25%</color>, and the DMG dealt by <color=#FFFFFF>Quick Assist</color> <color=#2BAD00>increases by 50%</color>.\n· Each use of <color=#FFFFFF>Quick Assist</color> increases all squad members' ATK by <color=#2BAD00>10%</color> for 20s, stacking up to 3 times. Repeated triggers reset the duration.",
+              "title": "Rapid Aid"
+            },
+            "69010601": {
+              "desc": "· The Agent's <color=#FF5521>Fire DMG</color> and <color=#2EB6FF>Electric DMG</color> will <color=#2BAD00>increase by 25%</color>.\n· After triggering <color=#FFFFFF>Chain Attack</color>, <color=#FFFFFF>Perfect Assist</color>, or <color=#FFFFFF>Quick Assist</color>, the Agent's CRIT Rate <color=#2BAD00>increases by 20%</color> and CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s.",
+              "title": "Electrospark"
+            },
+            "69010602": {
+              "desc": "· The Agent's Anomaly Buildup Rate <color=#2BAD00>increases by 10%</color>, and when a shield is active, the Anomaly Buildup Rate <color=#2BAD00>further increases by 20%</color>.\n· When attacking enemies in an Attribute Anomaly state, the Agent's DMG <color=#2BAD00>increases by 40%</color>.",
+              "title": "Anomaly Surge"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

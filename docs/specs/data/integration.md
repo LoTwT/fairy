@@ -6,13 +6,14 @@
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/1`）、`w-engines`（规则 `nanoka-w-engine-reference/1`）、`bangboos`（规则
-`nanoka-bangboo-reference/1`）、`monsters`（规则 `nanoka-monster-reference/1`）与 `shiyu`（规则
-`nanoka-shiyu-reference/1`）。驱动盘单实体规则与实现状态见
+`nanoka-bangboo-reference/1`）、`monsters`（规则 `nanoka-monster-reference/1`）、`shiyu`（规则
+`nanoka-shiyu-reference/1`）与 `boss`（规则 `nanoka-boss-reference/1`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)，WEngine 单实体规则与实现状态见
 [WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)，Bangboo 单实体规则与实现状态见
 [Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference1)，Monster 单实体规则与实现状态见
 [Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference1)，Shiyu 单实体规则与实现状态见
-[Shiyu 单实体实现规则](#shiyu-单实体实现规则-nanoka-shiyu-reference1)。
+[Shiyu 单实体实现规则](#shiyu-单实体实现规则-nanoka-shiyu-reference1)，Boss 单实体规则与实现状态见
+[Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference1)。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
@@ -1051,6 +1052,80 @@ Monster ID，引用身份来自条目自身的 `id`；encounter 的名称、图�
    字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。
 
+### Boss 单实体实现规则 `nanoka-boss-reference/1`
+
+来源说明见 [Nanoka Boss](../nanoka/boss.md)：上游实体 `boss`，整合类别登记名为 `boss`，
+类型与函数统一使用 `Boss` 命名。一条记录表示一个首领试炼条目；评级目标语义解释、时间换算、mode 唯一性、
+parent/child 闭合、Monster 引用闭合、Boss/Simul 共享配置一致性校验、definitions 或 core 映射不属于本规则。
+Boss 名称在类内完全同名（本地 3.1 全部 44 条的中英文名称各自相同），名称不作为公开身份，
+公开读取以[来源 ID 为身份](consumption.md)；本层仍按字符串保留名称，不做非空或类内唯一检查，
+不因所有记录同名而拒绝发布。
+
+[纯整合函数](../../../packages/data/src/integration/integrate-boss.ts) `integrateBoss` 接受与
+`integrateAgent` 等前序类别相同的输入形态 `{ entityId, sourceRecord, details, detailLocales }`，返回
+`{ data, details, sourceRecord, maintenance }`。它只处理已解析 JSON，不读取文件、配置或网络，不修改输入，
+失败时不返回部分结果；来源身份、JSON 保真与 JSON Pointer 复用[共享来源工具](../../../packages/data/src/integration/source-json.ts)。
+正式类型见[Boss 类型](../../../packages/data/src/integration/boss-types.ts)，逐字段 JSDoc 注明来源与未确认语义；
+字段登记表见[Boss 结构登记](../../../packages/data/src/integration/boss-schema.ts)。
+
+字段归属（第一列为来源拼写，后两列为转换后的字段名）：
+
+| 来源字段         | `data.json`                          | `details.{locale}.json`                 |
+| ---------------- | ------------------------------------ | --------------------------------------- |
+| `id`             | 数值 Boss ID                         | 同值身份副本                            |
+| `priority`       | `priority` 严格公共字段              | 无重复载荷                              |
+| `zone_type`      | `zoneType` 严格公共字段              | 无重复载荷                              |
+| `begin_time`     | `beginTime` 严格公共字段，原始字符串 | 无重复载荷                              |
+| `end_time`       | `endTime` 严格公共字段，原始字符串   | 无重复载荷                              |
+| `boss_adjust`    | `bossAdjust` 完整共享块              | 无重复载荷                              |
+| `name`           | 无                                   | 当前语言原文                            |
+| `modes`          | 无；完整留在各语言                   | 当前结构变体的 mode 数组                |
+| `zone`（旧结构） | 无                                   | 历史结构变体的顶层关卡字典              |
+| 派生 `locale`    | 无                                   | 输入语言标识                            |
+| 索引中的实体记录 | 不覆盖到详情                         | 完整保存在 `sourceRecord`，不修改原 key |
+
+`bossAdjust` 是完整共享块：包括未知成员在内进行跨语言比较，块内负值（如本地 3.1 的 `atk` 负值）、比例与
+`points` 等保留原始数值，不解释或换算。`priority`、`zoneType`、`beginTime`、`endTime` 是严格公共字段：
+每个语言都必须提供，跨语言完整值必须一致，冲突即失败；时间保持原始字符串，不转换时间戳、不猜测时区。
+索引记录中的 `begin`/`end`/`live_begin`/`live_end` 与 `zone_type` 是独立来源，完整保留在 `sourceRecord`，
+不与详情字段互相回退。
+
+详情结构存在两种已建模变体，按实际字段识别，不能只按版本字符串猜测：当前 3.1 使用顶层 `modes` 数组，
+历史版本（本地 3.0 缓存）使用顶层 `zone` 字典，阶段条目结构共用同一登记表（含 `selectable_buff`，无
+`child` 与 `ss_rank_goal`）。两种结构互斥：同时缺失或同时存在都按结构冲突失败；本层不把 zone 强行转换成
+modes，也不丢弃原层级。`modes` 数组顺序保持来源原样，不排序、不去重、不按数组位置跨语言合并；mode ID
+属于详情内部，不生成独立实体目录或远端资源；顶层 `zoneType` 与 mode 的 `zoneType` 分别保留，不要求相等
+（本地 3.1 有 3 条记录的 mode `zone_type` 与顶层不同）。mode/zone 内的关卡、buff、room 与 Monster
+encounter 完整留在各语言详情：encounter 的名称、图片、弱点与关卡数值（含浮点与负值原值）全部保留，
+不能替换成纯外键；`monster_list` 外层 key 不是 Monster ID，引用身份来自条目自身的 `id`。Monster 引用与
+同版本 Monster 索引的核对属于真实验收报告，不在本层强制闭合，也不加入运行时跨类别读取。本规则不依赖尚未
+接入的 Simul，也不提前抽取跨 Boss/Simul 的共享数据制品。
+
+校验边界：
+
+1. `entityId` 复用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)的规范十进制规则。
+2. 每个指定语言的详情必须提供 `id`、`name`、`priority`、`boss_adjust`、`zone_type`、`begin_time`、
+   `end_time` 与 `modes` 或 `zone` 之一；登记字段按登记表核对类型，`id` 必须为安全整数且规范十进制形式与
+   `entityId` 一致。mode、阶段、房间、增益（`layer_buff`/`selectable_buff`）、encounter 与 `boss_adjust`
+   条目各自登记必需成员；未登记的成员原样保留并进入维护诊断。
+3. `detailLocales` 必须非空、受支持（当前 `zh`、`en`）且不重复；`details` 必须恰好覆盖该列表，不补语言、
+   不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
+4. 来源字段与登记输出名冲突（如同时存在 `zone_type` 与 `zoneType`、`boss_adjust` 与 `bossAdjust`、
+   `stage_num` 与 `stageNum`、`selectable_buff` 与 `selectableBuff`）时失败，不覆盖、不合并；来源 `locale`
+   与派生辅助字段重名时同样失败。
+5. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.1 `boss.json` 的 44 条记录为
+   `sort`、`en`、`ja`、`ko`、`zh`、`zone_type` 与轮换时间 `begin`、`end`、`live_begin`、`live_end`
+   （44 条全部为轮换记录）。登记只用于识别未知字段：不要求这些字段存在、不校验其类型，`sourceRecord` 仍按
+   原 key、原值完整保留。未知顶层字段按来源 key 的代码单元顺序生成 `locale: "index"` 的维护诊断，
+   未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
+6. 未登记字段原样保留：详情未知字段留在对应语言并进入维护诊断；`boss_adjust` 与 `modes`/`zone` 各层内部
+   的未知成员随本语言结构保留，`boss_adjust` 的未知成员参与跨语言完整值比较。
+7. 空字符串、零、负值、空数组、空字典、浮点数值、数组顺序与显示格式按来源保留；已登记字段仍须满足其
+   明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
+8. 失败抛出 `BossIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
+   字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
+   [消费契约](consumption.md)以来源 ID 为身份。旧结构变体使用合成 fixture 验证，不切换当前真实数据版本。
+
 ### 离线全量构建的共用能力
 
 全量构建入口是第 7.1 节的 `buildIntegratedSnapshot`（实现见下节）；它按已接入类别登记表处理全部类别，
@@ -1151,11 +1226,11 @@ fairy-integrated-snapshot-<独占后缀>/
 当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）、`drive-discs`（来源实体
 `equipment`，规则 `nanoka-drive-disc-reference/1`）、`w-engines`（来源实体 `weapon`，规则
 `nanoka-w-engine-reference/1`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`）、
-`monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/1`）与 `shiyu`（来源实体 `shiyu`，规则
-`nanoka-shiyu-reference/1`），
+`monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/1`）、`shiyu`（来源实体 `shiyu`，规则
+`nanoka-shiyu-reference/1`）与 `boss`（来源实体 `boss`，规则 `nanoka-boss-reference/1`），
 代理人复用既有 `integrateAgent`、驱动盘复用既有
 `integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`、
-怪物复用既有 `integrateMonster`、Shiyu 复用既有 `integrateShiyu`，
+怪物复用既有 `integrateMonster`、Shiyu 复用既有 `integrateShiyu`、Boss 复用既有 `integrateBoss`，
 成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
 可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
 验证与历史复验只要求静态契约。
@@ -1194,7 +1269,7 @@ fairy-integrated-snapshot-<独占后缀>/
 [更新报告模块](../../../packages/data/scripts/nanoka-integration/update-report.ts)（两种索引外壳归一为同一比较口径、组装报告与回执摘要）
 实现；受管理 v2 旧基线按第 8.1 节的记录复验后归一处理，不修改数据。报告顺序复用序列化模块导出的同一 key 比较规则。
 `generate:integrated` 不绑定实体名称，按当前已接入类别登记表处理全部类别；本次真实类别为 `agents`、
-`drive-discs`、`w-engines`、`bangboos`、`monsters` 与 `shiyu`。
+`drive-discs`、`w-engines`、`bangboos`、`monsters`、`shiyu` 与 `boss`。
 从仓库根目录执行：
 
 ```bash
@@ -1487,6 +1562,52 @@ package.json 增加 Shiyu data/zh/en JSON 子路径，并提交六类别真实�
 - `pnpm check`（类型、data 903 项常规测试与 1 项打包验收、core 1,423 项测试，打包解包离线安装与按包名消费，
   解包 1732 个 JSON、22,511,620 字节）、真实 Chromium 的 Vite 开发/生产消费（六类场景，跨类别零串读，
   生产分块 1733）、`verify:nanoka:current` 全部通过；`git diff --check` 无输出。
+- 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567（`available` 仍含 3.1），本任务
+  明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
+  [共享来源规范](../nanoka/source.md#分发复核记录)。
+
+### Boss 生产类别接入验收
+
+2026-09-19，基线 `132ad7ca32fed83cbd4b09b31f34355ea943d22b`（任务分支 `codex/boss-integration`），
+实现 `boss`（来源实体 `boss`，规则 `nanoka-boss-reference/1`）登记到生产类别登记表，
+package.json 增加 Boss data/zh/en JSON 子路径，并提交七类别真实快照。Boss 名称在类内完全同名
+（本地 3.1 全部 44 条的中英文名称各自相同），公开身份是来源索引顶层 ID 的规范十进制字符串：
+根入口新增 `BossId` 字面量 union、冻结 `bossIds` 列表与 `loadBossData`、`loadBossDetails`、
+`loadAllBosses` 三个按 ID 读取的函数，与 Monster、Shiyu 的按 ID 契约一致；既有名称 API 与名称校验
+保持不变。本次同时补记 consumption.md 公开 JSON 子路径清单在前次 Shiyu 接入时遗漏的六类别条目。
+
+真实 3.1 验收（本机 macOS arm64、Node 24、raw 为只读输入，不联网覆盖缓存、不升级来源版本）：
+
+- 修改登记前先按持锁协议执行 `verify:nanoka:current integrated`：`verified: true`；登记前的全部
+  1732 个制品文件摘要另存仓库外备份。
+- 登记 Boss 后执行 `generate:integrated raw/nanoka 3.1 integrated`：`committed`；boss 新增 44 名成员、
+  132 个文件；agents 58 名成员/174 个文件、drive-discs 30 名成员/90 个文件、w-engines 95 名成员/285 个
+  文件、bangboos 42 名成员/126 个文件、monsters 293 名成员/879 个文件与 shiyu 59 名成员/177 个文件结论
+  均为 `unchanged`，仅 index.json 改写；全制品 1864 个文件（1863 个实体文件与索引）、1249 项来源输入、
+  复用 1731 个既有实体文件。
+- 重复执行同一命令：`unchanged`，复用 1863 个实体文件、改变 0 个、移除 0 个。仓库外备份逐文件比对：
+  除 index.json 外新增 132 个文件全部位于 `boss/`，既有 1731 个实体文件字节不变、无删除。
+- 独立核对脚本（不导入生产代码）执行：索引外壳与七个类别块、boss 成员集合与来源索引 key 严格一致、
+  89 项 boss 输入资源与 data/zh/en 路径、逐成员 `sourceRecord` 与 raw 索引记录 JSON 值相等、严格公共字段
+  （priority/zone_type/begin_time/end_time）跨语言一致且映射进 data.json、`bossAdjust` 完整共享块跨语言
+  相等、`modes`/`zone` 结构互斥且按登记拼写逆向转换后与 raw 详情 JSON 值相等的完整往返还原（44 名成员
+  × 2 语言，本地 3.1 全部为 modes 变体，mode 数量 1–2）、身份与 `locale`，以及维护报告中 44 个成员的
+  未知字段诊断均为 0；数值比较遵循 JS number 语义（`0.0` 与 `0` 相等，与 Monster、Shiyu 既有制品一致）；
+  全部通过。
+- Monster 引用验收：`modes[].zone.*.layer_room.*.monster_list` 全部 encounter 的 21 个去重引用 ID 与
+  同版本 Monster 索引（`entities.monsters.memberIds`，293 名成员）逐一核对，全部闭合；该结论只进入验收
+  报告，不升级为运行时强制图关系契约。3 条记录的 mode `zone_type` 与顶层 `zone_type` 不同，按来源分别
+  保留。
+- 合成验收（不读取真实 raw）覆盖：Boss 纯整合 19 项（双语拆分与独立测试侧还原、modes/zone 双结构变体
+  与互斥冲突、结构缺失同时按冲突处理、严格公共时间字段必填与冲突失败、`bossAdjust` 完整共享块与未知
+  成员冲突、mode/阶段/房间/增益/encounter 逐层登记与改名冲突、索引独立与未知字段诊断确定顺序、身份/
+  类型/语言/辅助字段重名与保真边界、对象 key 排列无关、显式语言子集、空值与特殊自有属性还原）、
+  类型正反例、发布目录按 memberIds 生成 ID union、更新报告七类别归因、消费 API 按 ID 读取边界、
+  JSON 子路径、打包解包与离线安装。
+- `pnpm check`（类型、data 926 项常规测试与 1 项打包验收、core 1,423 项测试，打包解包离线安装与按包名
+  消费，解包 1864 个 JSON、24,258,611 字节，npm 包 2,212,302 字节）、真实 Chromium 的 Vite 开发/生产消费
+  （七类场景含 boss 场景，跨类别零串读，生产分块 1865）、`verify:nanoka:current`（`verified: true`）
+  全部通过；`git diff --check` 无输出。
 - 未执行真实相邻版本推进：上游 `live` 已为 3.2、`latest` 为 3.3.2+18921567（`available` 仍含 3.1），本任务
   明确只使用现有 3.1 缓存，不伪造版本推进；不承诺 nlink、ctime 或目录 inode 不变。来源分发复核记录见
   [共享来源规范](../nanoka/source.md#分发复核记录)。

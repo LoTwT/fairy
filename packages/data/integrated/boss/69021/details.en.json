@@ -1,0 +1,219 @@
+{
+  "id": 69021,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69021,
+      "zone": {
+        "6902101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011602": {
+              "desc": "· When Miasmic Fiend is affected by <color=#FFAF2C>Attribute Anomaly</color>, it takes 8% bonus Anomaly DMG from Agents, stacking up to 6 times; activating <Term:2000002>Miasmic Shield</Term> clears all stacks, with each stack increasing the reduction efficiency of <color=#FFAF2C>Miasmic Shield</color> by 2.5%.",
+              "title": ""
+            },
+            "69011603": {
+              "desc": "· When Agents bait Miasmic Fiend's ground attack into <color=#FFAF2C>detonating at least 5 Miasma Pools at once</color> and <color=#FFAF2C>avoid being hit by the attack and pool explosions</color>, they will earn <color=#FFAF2C>1,700 Performance Points</color>, up to a maximum of 5,000.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69021011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NamelessOne.png",
+              "monsterList": {
+                "31062": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30034,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_NamelessOne.png",
+                  "name": "Miasmic Fiend - Unfathomable",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 13902048.2025,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Miasmic Fiend - Unfathomable",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69011901": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad deals 20%/40% <color=#2BAD00>bonus</color> DMG.\n· After triggering a critical hit, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 30%; for Agents with Attack specialty, their CRIT DMG <color=#2BAD00>further increases</color> by 40% for 5s. Repeated triggers reset the duration.",
+              "title": "Fiery Assault"
+            },
+            "69012101": {
+              "desc": "· Agent HP <color=#2BAD00>increases by 25%</color>, and their Sheer DMG <color=#2BAD00>increases by 15%</color>.\n· Agents with Rupture specialty deal <color=#2BAD00>15%</color> more DMG, and their Ultimate DMG is additionally <color=#2BAD00>increased by 15%</color>.",
+              "title": "Clarity"
+            }
+          },
+          "stageNum": 1
+        },
+        "6902102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010305": {
+              "desc": "· When dealing sufficient DMG to the boss enemy's legs, Impaired will be triggered. <color=#FFAF2C>Upon successfully breaking the boss enemy's legs</color>, the Agent restores <color=#FFAF2C>1,000 Decibels</color>, and the boss gains 1 stack of <color=#FFFFFF>Disintegration</color> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <color=#FFFFFF>Disintegration</color> the target has, CRIT DMG is <color=#FFAF2C>increased by 25%</color>.",
+              "title": ""
+            },
+            "69010306": {
+              "desc": "",
+              "title": ""
+            },
+            "69010307": {
+              "desc": "· Successfully <color=#FFAF2C>impairing an enemy</color> grants <color=#FFAF2C>800 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69021021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ComplexCorrupted.png",
+              "monsterList": {
+                "11414": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_ComplexCorrupted.png",
+                  "name": "Unknown Corruption Complex",
+                  "stats": {
+                    "attack": 2738.909090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 13319675.639999999,
+                    "stun": 16894.15
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Unknown Corruption Complex",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69011901": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad deals 20%/40% <color=#2BAD00>bonus</color> DMG.\n· After triggering a critical hit, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 30%; for Agents with Attack specialty, their CRIT DMG <color=#2BAD00>further increases</color> by 40% for 5s. Repeated triggers reset the duration.",
+              "title": "Fiery Assault"
+            },
+            "69012101": {
+              "desc": "· Agent HP <color=#2BAD00>increases by 25%</color>, and their Sheer DMG <color=#2BAD00>increases by 15%</color>.\n· Agents with Rupture specialty deal <color=#2BAD00>15%</color> more DMG, and their Ultimate DMG is additionally <color=#2BAD00>increased by 15%</color>.",
+              "title": "Clarity"
+            }
+          },
+          "stageNum": 2
+        },
+        "6902103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011302": {
+              "desc": "· When the Miasma Priest switches phase, their Anomaly Buildup RES increases by 10% and CRIT DMG taken increases by 30%. This effect can stack up to 2 times and is cleared when <Term:2000002>Miasmic Shield</Term> breaks.",
+              "title": ""
+            },
+            "69011303": {
+              "desc": "· When an Agent successfully performs <color=#FFAF2C>3 Defensive Assists within 3 seconds</color>, earn <color=#FFAF2C>1,000 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69021031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "Miasma Priest",
+                  "stats": {
+                    "attack": 2288.945454545455,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 12545179.02,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Miasma Priest",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010301": {
+              "desc": "· Increases the Agent's Anomaly Buildup Rate <color=#2BAD00>by 20%</color>.\n· When inflicting <color=#FFFFFF>Attribute Anomaly</color> on enemies, all squad members <color=#2BAD00>gain 60 points of Anomaly Proficiency</color>, and DMG caused by <color=#FFFFFF>Disorder</color> <color=#2BAD00>increases by 40%</color> for 15 seconds.",
+              "title": "Aberration"
+            },
+            "69011901": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad deals 20%/40% <color=#2BAD00>bonus</color> DMG.\n· After triggering a critical hit, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 30%; for Agents with Attack specialty, their CRIT DMG <color=#2BAD00>further increases</color> by 40% for 5s. Repeated triggers reset the duration.",
+              "title": "Fiery Assault"
+            },
+            "69012101": {
+              "desc": "· Agent HP <color=#2BAD00>increases by 25%</color>, and their Sheer DMG <color=#2BAD00>increases by 15%</color>.\n· Agents with Rupture specialty deal <color=#2BAD00>15%</color> more DMG, and their Ultimate DMG is additionally <color=#2BAD00>increased by 15%</color>.",
+              "title": "Clarity"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

@@ -1,0 +1,227 @@
+{
+  "id": 69029,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69029,
+      "zone": {
+        "6902901": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012704": {
+              "desc": "· Boss Anomaly DMG taken is <color=#2BAD00>reduced by 30%</color>. When switching from <Term:2000002>Miasmic Shield</Term> state to normal state, or from normal state to <color=#FFAF2C>Miasmic Shield</color> state, Agent CRIT DMG against them is <color=#2BAD00>increased by 20%</color>. This effect can stack up to 3 times and resets when the boss recovers from Stun.",
+              "title": ""
+            },
+            "69012705": {
+              "desc": "·Triggering <color=#FFAF2C>Miasmic Shield Purification</color> grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>2,000 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>Attack</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69029011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vessel.png",
+              "monsterList": {
+                "31412": {
+                  "element": {
+                    "electric": 0,
+                    "ether": -1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 40000,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vessel.png",
+                  "name": "Primordial Nightmare - \"The Creator\"",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 24799326.7275,
+                    "stun": 18236
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Primordial Nightmare - \"The Creator\"",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012901": {
+              "desc": "· While in Ether Veil, Agent ATK <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 20%</color>.\n· Enemy Stun DMG Multiplier <color=#2BAD00>increases by 30%</color>, and when Agent Basic Attacks and Ultimates hit enemies, they ignore <color=#2BAD00>10%</color> of <color=#F0D12B>Physical RES</color> and <color=#2BAD00>10%</color> of DEF.",
+              "title": "Adjudication"
+            },
+            "69012902": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increase by 30%</color>.\n· When inflicting Attribute Anomaly on enemies, the whole squad's ATK <color=#2BAD00>increases by 25%</color> and Decibel Generation Rate <color=#2BAD00>increases by 20%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Frost Night"
+            },
+            "69012903": {
+              "desc": "· After Stunning enemies, their Stun DMG Multiplier <color=#2BAD00>increases by 35%</color>, and their Stun recovery speed <color=#2BAD00>decreases by 10%</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color>, their CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s.",
+              "title": "Formation Breaker"
+            }
+          },
+          "stageNum": 1
+        },
+        "6902902": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010305": {
+              "desc": "· When dealing sufficient DMG to the boss enemy's legs, Impaired will be triggered. <color=#FFAF2C>Upon successfully breaking the boss enemy's legs</color>, the Agent restores <color=#FFAF2C>1,000 Decibels</color>, and the boss gains 1 stack of <color=#FFFFFF>Disintegration</color> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <color=#FFFFFF>Disintegration</color> the target has, CRIT DMG is <color=#FFAF2C>increased by 25%</color>.",
+              "title": ""
+            },
+            "69010306": {
+              "desc": "",
+              "title": ""
+            },
+            "69010307": {
+              "desc": "· Successfully <color=#FFAF2C>impairing an enemy</color> grants <color=#FFAF2C>800 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69029021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ComplexCorrupted.png",
+              "monsterList": {
+                "11414": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_ComplexCorrupted.png",
+                  "name": "Unknown Corruption Complex",
+                  "stats": {
+                    "attack": 2738.909090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 14984635.095,
+                    "stun": 16894.15
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "203": "Electric",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Unknown Corruption Complex",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012901": {
+              "desc": "· While in Ether Veil, Agent ATK <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 20%</color>.\n· Enemy Stun DMG Multiplier <color=#2BAD00>increases by 30%</color>, and when Agent Basic Attacks and Ultimates hit enemies, they ignore <color=#2BAD00>10%</color> of <color=#F0D12B>Physical RES</color> and <color=#2BAD00>10%</color> of DEF.",
+              "title": "Adjudication"
+            },
+            "69012902": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increase by 30%</color>.\n· When inflicting Attribute Anomaly on enemies, the whole squad's ATK <color=#2BAD00>increases by 25%</color> and Decibel Generation Rate <color=#2BAD00>increases by 20%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Frost Night"
+            },
+            "69012903": {
+              "desc": "· After Stunning enemies, their Stun DMG Multiplier <color=#2BAD00>increases by 35%</color>, and their Stun recovery speed <color=#2BAD00>decreases by 10%</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color>, their CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s.",
+              "title": "Formation Breaker"
+            }
+          },
+          "stageNum": 2
+        },
+        "6902903": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012302": {
+              "desc": "· Wandering Hunter's Base DEF increases by 40% in Miasmic Field; when an Agent hits Wandering Hunter with <color=#FFAF2C>Assist Follow-Up or Dodge Counter</color>, 1 stack of <color=#FFFFFF>Wavering</color> is applied. <color=#FFFFFF>Wavering</color> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.\n· When an Agent's attacks hit Wandering Hunter, for each stack of Wavering, the Agent's Sheer DMG is <color=#FFAF2C>increased by 7%</color>.",
+              "title": ""
+            },
+            "69012303": {
+              "desc": "· During the hide-and-seek phase, using <color=#FFAF2C>Perception Technique</color> to break <color=#FFAF2C>Drowned Ideal Lucia's true form</color> will grant <color=#FFAF2C>3,000 Performance Points</color>; Exposing his true form and activating <color=#FFAF2C>Defensive Assist or Assist Follow-Up</color> against Wandering Hunter will grant <color=#FFAF2C>2,000 Performance Points</color>, up to a maximum of 5,000 points.",
+              "title": ""
+            },
+            "69013002": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Rupture><color=#FFAF2C>Rupture</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69029031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_WanderingHunter.png",
+              "monsterList": {
+                "11842": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 30041,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_WanderingHunter.png",
+                  "name": "Wandering Hunter",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 1588,
+                    "hp": 17472354.6375,
+                    "stun": 16283.150000000001
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire",
+                "202": "Ice"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Wandering Hunter",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012901": {
+              "desc": "· While in Ether Veil, Agent ATK <color=#2BAD00>increases by 20%</color>, CRIT DMG <color=#2BAD00>increases by 20%</color>.\n· Enemy Stun DMG Multiplier <color=#2BAD00>increases by 30%</color>, and when Agent Basic Attacks and Ultimates hit enemies, they ignore <color=#2BAD00>10%</color> of <color=#F0D12B>Physical RES</color> and <color=#2BAD00>10%</color> of DEF.",
+              "title": "Adjudication"
+            },
+            "69012902": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increase by 30%</color>.\n· When inflicting Attribute Anomaly on enemies, the whole squad's ATK <color=#2BAD00>increases by 25%</color> and Decibel Generation Rate <color=#2BAD00>increases by 20%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Frost Night"
+            },
+            "69012903": {
+              "desc": "· After Stunning enemies, their Stun DMG Multiplier <color=#2BAD00>increases by 35%</color>, and their Stun recovery speed <color=#2BAD00>decreases by 10%</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color>, their CRIT DMG <color=#2BAD00>increases by 40%</color> for 20s.",
+              "title": "Formation Breaker"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

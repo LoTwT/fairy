@@ -20,11 +20,13 @@ import {
   syntheticBangbooIds,
   syntheticMonsterIds,
   syntheticShiyuIds,
+  syntheticBossIds,
 } from "./synthetic-dataset.ts"
 import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
 import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
 import { monsterInput } from "./monster-source.ts"
 import { shiyuInput } from "./shiyu-source.ts"
+import { bossInput } from "./boss-source.ts"
 
 /**
  * 合成双语制品；不同英文展示名、codeName 和索引名称用于捕获错误取值来源。
@@ -145,6 +147,19 @@ export async function publicationFixture(
     for (const locale of shiyu.detailLocales)
       await write(`${locale}/shiyu/${id}.json`, {
         ...shiyu.details[locale],
+        id: Number(id),
+      })
+  // 默认登记表包含 boss 类别：boss 输入使用真实 Boss 结构的合成成员（当前 modes 结构变体）；
+  // 公开身份是来源 ID，类内完全同名，不做任何名称校验。
+  const boss = bossInput()
+  await write(
+    "boss.json",
+    Object.fromEntries(syntheticBossIds.map((id) => [id, boss.sourceRecord])),
+  )
+  for (const id of syntheticBossIds)
+    for (const locale of boss.detailLocales)
+      await write(`${locale}/boss/${id}.json`, {
+        ...boss.details[locale],
         id: Number(id),
       })
   const result = await buildIntegratedSnapshot({

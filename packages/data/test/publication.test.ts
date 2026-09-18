@@ -123,6 +123,7 @@ describe("publication snapshot", () => {
     )
     expect(catalog).toContain('Object.freeze(["960001","960002"])')
     expect(catalog).toContain('Object.freeze(["970001","970002"])')
+    expect(catalog).toContain('Object.freeze(["980001","980002"])')
     expect(catalog).toContain(
       'import("@randomplay/data/integrated/agents/2/details.en.json", { with: { type: "json" } })',
     )
@@ -140,6 +141,9 @@ describe("publication snapshot", () => {
     )
     expect(catalog).toContain(
       'import("@randomplay/data/integrated/shiyu/970001/data.json", { with: { type: "json" } })',
+    )
+    expect(catalog).toContain(
+      'import("@randomplay/data/integrated/boss/980001/data.json", { with: { type: "json" } })',
     )
     for (const path of publicationFiles(index))
       expect(await fs.readFile(join(generated, "integrated", path))).toEqual(
@@ -357,7 +361,7 @@ describe("publication snapshot", () => {
     )
   })
 
-  it("rejects catalog generation without the drive-discs, w-engines, bangboos, monsters or shiyu category", async () => {
+  it("rejects catalog generation without the drive-discs, w-engines, bangboos, monsters, shiyu or boss category", async () => {
     const root = await temporaryRoot()
     // agents-only v3 制品过不了发布复制前的完整类别验证；这里直接验证目录生成对缺失类别的要求。
     const { artifactDirectory, index } = await publicationFixture(root, {
@@ -387,6 +391,11 @@ describe("publication snapshot", () => {
     await expect(
       generateCatalog(artifactDirectory, withoutShiyu),
     ).rejects.toThrow(/no shiyu category/u)
+    const withoutBoss = structuredClone(complete)
+    delete (withoutBoss.entities as Record<string, unknown>)["boss"]
+    await expect(
+      generateCatalog(artifactDirectory, withoutBoss),
+    ).rejects.toThrow(/no boss category/u)
   })
 
   it("keeps ID catalog generation unaffected by duplicate or placeholder monster names", async () => {
@@ -420,6 +429,7 @@ describe("publication snapshot", () => {
     expect(catalog).toContain('export type MonsterId = "960001" | "960002"')
     expect(catalog).toContain('Object.freeze(["960001","960002"])')
     expect(catalog).toContain('Object.freeze(["970001","970002"])')
+    expect(catalog).toContain('Object.freeze(["980001","980002"])')
   })
 
   it("preserves whitespace, punctuation and special property names exactly", async () => {

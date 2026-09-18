@@ -1,0 +1,219 @@
+{
+  "id": 69019,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69019,
+      "zone": {
+        "6901901": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011902": {
+              "desc": "· When an Agent hits The Defiler with Defensive Assist, the whole squad gains 1 stack of <color=#FFFFFF>Adjudication</color>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <color=#FFFFFF>Adjudication</color>. Adjudication can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.\n· For each stack of <color=#FFFFFF>Adjudication</color>, the Agent's CRIT DMG <color=#2BAD00>increases by 5%</color>, Physical DMG <color=#2BAD00>increases by 5%</color>, and Electric DMG <color=#2BAD00>increases by 5%</color>.\n· The Defiler receives 25% less Attribute Anomaly DMG.",
+              "title": ""
+            },
+            "69011903": {
+              "desc": "· When an Agent causes <color=#FFAF2C>Impaired status</color>, they gain <color=#FFAF2C>2500 Performance Points</color>; when an Agent <color=#FFAF2C>shoots down The Defiler while it's attacking in mid-air</color>, they gain <color=#FFAF2C>1500 Performance Points</color>, up to a maximum of 5000 Performance Points.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69019011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_IsoldetheDefiler.png",
+              "monsterList": {
+                "31142": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30038,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_IsoldetheDefiler.png",
+                  "name": "The Defiler",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 11329628.94,
+                    "stun": 19977.350000000002
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "203": "Electric"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "The Defiler",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69011601": {
+              "desc": "· Agent DMG <color=#2BAD00>increases by 20%</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increases by an additional 20%</color>.\n· After inflicting an Attribute Anomaly on an enemy, the enemy's DEF <color=#2BAD00>decreases by 10%</color> for 10s. After inflicting Disorder on an enemy, the enemy's DEF <color=#2BAD00>further decreases by 25%</color> for 10s. Each effect's duration refreshes individually.",
+              "title": "Artful"
+            },
+            "69011901": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad deals 20%/40% <color=#2BAD00>bonus</color> DMG.\n· After triggering a critical hit, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 30%; for Agents with Attack specialty, their CRIT DMG <color=#2BAD00>further increases</color> by 40% for 5s. Repeated triggers reset the duration.",
+              "title": "Fiery Assault"
+            },
+            "69011904": {
+              "desc": "· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases</color> by 30%. When launching <color=#FFFFFF>Ultimate</color>, the Agent's ATK <color=#2BAD00>increases</color> by 15% for 15s. Repeated triggers reset the duration.\n· After enemies become Stunned, their Stun DMG Multiplier <color=#2BAD00>increases by 35%</color>.",
+              "title": "Harnessing Change"
+            }
+          },
+          "stageNum": 1
+        },
+        "6901902": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011602": {
+              "desc": "· When Miasmic Fiend is affected by <color=#FFAF2C>Attribute Anomaly</color>, it takes 8% bonus Anomaly DMG from Agents, stacking up to 6 times; activating <Term:2000002>Miasmic Shield</Term> clears all stacks, with each stack increasing the reduction efficiency of <color=#FFAF2C>Miasmic Shield</color> by 2.5%.",
+              "title": ""
+            },
+            "69011603": {
+              "desc": "· When Agents bait Miasmic Fiend's ground attack into <color=#FFAF2C>detonating at least 5 Miasma Pools at once</color> and <color=#FFAF2C>avoid being hit by the attack and pool explosions</color>, they will earn <color=#FFAF2C>1,700 Performance Points</color>, up to a maximum of 5,000.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69019021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NamelessOne.png",
+              "monsterList": {
+                "31062": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30034,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_NamelessOne.png",
+                  "name": "Miasmic Fiend - Unfathomable",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 13902048.2025,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Miasmic Fiend - Unfathomable",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69011601": {
+              "desc": "· Agent DMG <color=#2BAD00>increases by 20%</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increases by an additional 20%</color>.\n· After inflicting an Attribute Anomaly on an enemy, the enemy's DEF <color=#2BAD00>decreases by 10%</color> for 10s. After inflicting Disorder on an enemy, the enemy's DEF <color=#2BAD00>further decreases by 25%</color> for 10s. Each effect's duration refreshes individually.",
+              "title": "Artful"
+            },
+            "69011901": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad deals 20%/40% <color=#2BAD00>bonus</color> DMG.\n· After triggering a critical hit, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 30%; for Agents with Attack specialty, their CRIT DMG <color=#2BAD00>further increases</color> by 40% for 5s. Repeated triggers reset the duration.",
+              "title": "Fiery Assault"
+            },
+            "69011904": {
+              "desc": "· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases</color> by 30%. When launching <color=#FFFFFF>Ultimate</color>, the Agent's ATK <color=#2BAD00>increases</color> by 15% for 15s. Repeated triggers reset the duration.\n· After enemies become Stunned, their Stun DMG Multiplier <color=#2BAD00>increases by 35%</color>.",
+              "title": "Harnessing Change"
+            }
+          },
+          "stageNum": 2
+        },
+        "6901903": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011302": {
+              "desc": "· When the Miasma Priest switches phase, their Anomaly Buildup RES increases by 10% and CRIT DMG taken increases by 30%. This effect can stack up to 2 times and is cleared when <Term:2000002>Miasmic Shield</Term> breaks.",
+              "title": ""
+            },
+            "69011303": {
+              "desc": "· When an Agent successfully performs <color=#FFAF2C>3 Defensive Assists within 3 seconds</color>, earn <color=#FFAF2C>1,000 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69019031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "Miasma Priest",
+                  "stats": {
+                    "attack": 2288.945454545455,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 12545179.02,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Miasma Priest",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69011601": {
+              "desc": "· Agent DMG <color=#2BAD00>increases by 20%</color> and <color=#F0D12B>Physical DMG</color> <color=#2BAD00>increases by an additional 20%</color>.\n· After inflicting an Attribute Anomaly on an enemy, the enemy's DEF <color=#2BAD00>decreases by 10%</color> for 10s. After inflicting Disorder on an enemy, the enemy's DEF <color=#2BAD00>further decreases by 25%</color> for 10s. Each effect's duration refreshes individually.",
+              "title": "Artful"
+            },
+            "69011901": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad deals 20%/40% <color=#2BAD00>bonus</color> DMG.\n· After triggering a critical hit, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 30%; for Agents with Attack specialty, their CRIT DMG <color=#2BAD00>further increases</color> by 40% for 5s. Repeated triggers reset the duration.",
+              "title": "Fiery Assault"
+            },
+            "69011904": {
+              "desc": "· <color=#FFFFFF>Ultimate</color> DMG <color=#2BAD00>increases</color> by 30%. When launching <color=#FFFFFF>Ultimate</color>, the Agent's ATK <color=#2BAD00>increases</color> by 15% for 15s. Repeated triggers reset the duration.\n· After enemies become Stunned, their Stun DMG Multiplier <color=#2BAD00>increases by 35%</color>.",
+              "title": "Harnessing Change"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

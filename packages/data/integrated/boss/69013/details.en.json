@@ -1,0 +1,210 @@
+{
+  "id": 69013,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69013,
+      "zone": {
+        "6901301": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011302": {
+              "desc": "· When the Miasma Priest switches phase, their Anomaly Buildup RES increases by 10% and CRIT DMG taken increases by 30%. This effect can stack up to 2 times and is cleared when <Term:2000002>Miasmic Shield</Term> breaks.",
+              "title": ""
+            },
+            "69011303": {
+              "desc": "· When an Agent successfully performs <color=#FFAF2C>3 Defensive Assists within 3 seconds</color>, earn <color=#FFAF2C>1,000 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69011502": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69013011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "Miasma Priest",
+                  "stats": {
+                    "attack": 2112.8727272727274,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 8886168.472499998,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Miasma Priest",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Dash Attack</color> DMG increases by <color=#2BAD00>30%</color>.\n· After triggering a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Perfect Assist</color>, increases all squad members' ATK by <color=#2BAD00>10%</color> and CRIT DMG by <color=#2BAD00>10%</color> for 15s. Stacks up to 3 times. The duration of each stack is calculated separately.",
+              "title": "Interrupt"
+            },
+            "69011001": {
+              "desc": "· Agent <color=#FE437E>Ether Anomaly Buildup Rate</color> and <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by <color=#2BAD00>25%</color>, and Anomaly Proficiency by <color=#2BAD00>60</color> points.\n· When triggering an Attribute Anomaly, the enemy's DEF is reduced by <color=#2BAD00>10%</color>, and the damage they receive from Attribute Anomalies will be increased by <color=#2BAD00>30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Transformation Charge"
+            },
+            "69011301": {
+              "desc": "· Agent Max HP <color=#2BAD00>increases by 30%</color>, Ultimate DMG <color=#2BAD00>increases by 40%</color>.\n· After using an Ultimate, Energy and Adrenaline Generation Rate <color=#2BAD00>increase by 15%</color>, <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increase by 40%</color> for 20s.",
+              "title": "Meditation"
+            }
+          },
+          "stageNum": 1
+        },
+        "6901302": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010106": {
+              "desc": "· DMG dealt by Boss enemies increases by 25%. When a clone is <color=#FFAF2C>destroyed</color> or when the main body is <color=#FFAF2C>stunned</color>, 1/5 stacks of <color=#FFFFFF>On Thin Ice</color> is inflicted on Boss enemies respectively. Each stack of <color=#FFFFFF>On Thin Ice</color> decreases the DMG dealt by the Boss by 5% and increases the <color=#98EFF0>Ice DMG</color> and <color=#2EB6FF>Electric DMG</color> dealt to the Boss by Agents by <color=#FFAF2C>10%</color>. <color=#FFFFFF>On Thin Ice</color> stacks will be reset when the enemy recovers from Stun.",
+              "title": ""
+            },
+            "69010109": {
+              "desc": "· Successfully <color=#FFAF2C>destroying a dance partner</color> grants <color=#FFAF2C>200 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69013021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousMarionette.png",
+              "monsterList": {
+                "11861": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300121,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousMarionette.png",
+                  "name": "Notorious - Marionette",
+                  "stats": {
+                    "attack": 3051.9272727272732,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 10294846.8075,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Marionette",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Dash Attack</color> DMG increases by <color=#2BAD00>30%</color>.\n· After triggering a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Perfect Assist</color>, increases all squad members' ATK by <color=#2BAD00>10%</color> and CRIT DMG by <color=#2BAD00>10%</color> for 15s. Stacks up to 3 times. The duration of each stack is calculated separately.",
+              "title": "Interrupt"
+            },
+            "69011001": {
+              "desc": "· Agent <color=#FE437E>Ether Anomaly Buildup Rate</color> and <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by <color=#2BAD00>25%</color>, and Anomaly Proficiency by <color=#2BAD00>60</color> points.\n· When triggering an Attribute Anomaly, the enemy's DEF is reduced by <color=#2BAD00>10%</color>, and the damage they receive from Attribute Anomalies will be increased by <color=#2BAD00>30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Transformation Charge"
+            },
+            "69011301": {
+              "desc": "· Agent Max HP <color=#2BAD00>increases by 30%</color>, Ultimate DMG <color=#2BAD00>increases by 40%</color>.\n· After using an Ultimate, Energy and Adrenaline Generation Rate <color=#2BAD00>increase by 15%</color>, <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increase by 40%</color> for 20s.",
+              "title": "Meditation"
+            }
+          },
+          "stageNum": 2
+        },
+        "6901303": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010503": {
+              "desc": "· When the Agent <color=#FFAF2C>hits the boss enemy with a Defensive Assist or Chain Attack</color>, they apply 1 stack of <color=#FFFFFF>Weakening</color> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <color=#FFFFFF>Weakening</color> on the target, Agent CRIT DMG is <color=#FFAF2C>increased by 15%</color>.\n\nWhen the boss enemy has 4 stacks of <color=#FFFFFF>Weakening</color>, Defensive Assist will deflect the boss enemy's attack, causing a Stagger effect.",
+              "title": ""
+            },
+            "69010802": {
+              "desc": "· Successfully <color=#FFAF2C>triggering a Perfect Assist</color> grants <color=#FFAF2C>350 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69013031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousPompey.png",
+              "monsterList": {
+                "11881": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300211,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_NotoriousPompey.png",
+                  "name": "Notorious - Pompey",
+                  "stats": {
+                    "attack": 3948.5939393939398,
+                    "attribute_infliction": 0,
+                    "defence": 952.8000000000001,
+                    "hp": 9508089.06,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Notorious - Pompey",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69010103": {
+              "desc": "· <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, <color=#FFFFFF>EX Special Attack</color>, and <color=#FFFFFF>Dash Attack</color> DMG increases by <color=#2BAD00>30%</color>.\n· After triggering a <color=#FFFFFF>Perfect Dodge</color> or <color=#FFFFFF>Perfect Assist</color>, increases all squad members' ATK by <color=#2BAD00>10%</color> and CRIT DMG by <color=#2BAD00>10%</color> for 15s. Stacks up to 3 times. The duration of each stack is calculated separately.",
+              "title": "Interrupt"
+            },
+            "69011001": {
+              "desc": "· Agent <color=#FE437E>Ether Anomaly Buildup Rate</color> and <color=#F0D12B>Physical Anomaly Buildup Rate</color> is increased by <color=#2BAD00>25%</color>, and Anomaly Proficiency by <color=#2BAD00>60</color> points.\n· When triggering an Attribute Anomaly, the enemy's DEF is reduced by <color=#2BAD00>10%</color>, and the damage they receive from Attribute Anomalies will be increased by <color=#2BAD00>30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Transformation Charge"
+            },
+            "69011301": {
+              "desc": "· Agent Max HP <color=#2BAD00>increases by 30%</color>, Ultimate DMG <color=#2BAD00>increases by 40%</color>.\n· After using an Ultimate, Energy and Adrenaline Generation Rate <color=#2BAD00>increase by 15%</color>, <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increase by 40%</color> for 20s.",
+              "title": "Meditation"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

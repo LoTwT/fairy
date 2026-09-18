@@ -1,0 +1,228 @@
+{
+  "id": 69036,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 69036,
+      "zone": {
+        "6903601": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69013601": {
+              "desc": "· After Scorched Horizon activates Gale Scorcher, they gain 5 stacks of <color=#FFFFFF>Into Flames</color>. Each stack of <color=#FFFFFF>Into Flames</color> <color=#FFAF2C>increases DMG dealt by 10%</color> and <color=#FFAF2C>reduces CRIT DMG taken by 25%</color>. With <color=#FFFFFF>Into Flames</color> stacks, every time Scorched Horizon is inflicted with an <color=#FFAF2C>Anomaly</color>, one stack of <color=#FFFFFF>Into Flames</color> is lost, and subsequent Abloom DMG taken <color=#FFAF2C>increases by 10%</color> for 15s (max 3 stacks). Repeated triggers reset the duration.",
+              "title": ""
+            },
+            "69013602": {
+              "desc": "· When Scorched Horizon is in <color=#FFFFFF>Gale Scorcher</color> state, Impairing them grants <color=#FFAF2C>1,250 Performance Points</color>. <color=#FFAF2C>Striking down Scorched Horizon when they're attacking in mid-air</color> grants <color=#FFAF2C>1,500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> against Scorched Horizon's <Term:2000003>Control Skill</Term> grants <color=#FFAF2C>2,000 Performance Points</color>. Max 5,000 Performance Points.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69036011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Mutant.png",
+              "monsterList": {
+                "31431": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 1
+                  },
+                  "id": 40005,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Mutant.png",
+                  "name": "Phaethon of the Scorched Horizon",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 17018878.882499997,
+                    "stun": 19540.25
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Phaethon of the Scorched Horizon",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012403": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG <color=#2BAD00>increases by 20%/60%</color>.\n· After an EX Special Attack or Ultimate, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 20%. For Agents with Attack specialty, their DMG <color=#2BAD00>further increases by 30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Combined Attack"
+            },
+            "69013603": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and <color=#FFFFFF>Abloom</color> deals <color=#2BAD00>10% bonus</color> DMG.\n· After inflicting <color=#FFFFFF>Abloom</color> on enemies, enemy <color=#98EFF0>Ice RES</color> <color=#2BAD00>drops by 25%</color>, and Agents deal <color=#2BAD00>30% bonus</color> <color=#98EFF0>Ice DMG</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Scorching Frost"
+            },
+            "69013604": {
+              "desc": "· Rupture specialty Agent Sheer DMG <color=#2BAD00>increases by 15%</color>, and reduces Miasma Shield <color=#2BAD00>30% faster</color>.\n· While in Ether Veil, Agent <color=#FE437E>Ether DMG</color> <color=#2BAD00>increases by 25%</color>, and hitting an enemy makes its Stun DMG Multiplier <color=#2BAD00>increase by 25%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Breakthrough"
+            }
+          },
+          "stageNum": 1
+        },
+        "6903602": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012302": {
+              "desc": "· Wandering Hunter's Base DEF increases by 40% in Miasmic Field; when an Agent hits Wandering Hunter with <color=#FFAF2C>Assist Follow-Up or Dodge Counter</color>, 1 stack of <color=#FFFFFF>Wavering</color> is applied. <color=#FFFFFF>Wavering</color> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.\n· When an Agent's attacks hit Wandering Hunter, for each stack of Wavering, the Agent's Sheer DMG is <color=#FFAF2C>increased by 7%</color>.",
+              "title": ""
+            },
+            "69012303": {
+              "desc": "· During the hide-and-seek phase, using <color=#FFAF2C>Perception Technique</color> to break <color=#FFAF2C>Drowned Ideal Lucia's true form</color> will grant <color=#FFAF2C>3,000 Performance Points</color>; Exposing his true form and activating <color=#FFAF2C>Defensive Assist or Assist Follow-Up</color> against Wandering Hunter will grant <color=#FFAF2C>2,000 Performance Points</color>, up to a maximum of 5,000 points.",
+              "title": ""
+            },
+            "69013002": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Rupture><color=#FFAF2C>Rupture</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69036021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_WanderingHunter.png",
+              "monsterList": {
+                "11842": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 0
+                  },
+                  "id": 30041,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_WanderingHunter.png",
+                  "name": "Wandering Hunter",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 1588,
+                    "hp": 19968405.3,
+                    "stun": 16283.150000000001
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "201": "Fire",
+                "202": "Ice"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Wandering Hunter",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012403": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG <color=#2BAD00>increases by 20%/60%</color>.\n· After an EX Special Attack or Ultimate, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 20%. For Agents with Attack specialty, their DMG <color=#2BAD00>further increases by 30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Combined Attack"
+            },
+            "69013603": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and <color=#FFFFFF>Abloom</color> deals <color=#2BAD00>10% bonus</color> DMG.\n· After inflicting <color=#FFFFFF>Abloom</color> on enemies, enemy <color=#98EFF0>Ice RES</color> <color=#2BAD00>drops by 25%</color>, and Agents deal <color=#2BAD00>30% bonus</color> <color=#98EFF0>Ice DMG</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Scorching Frost"
+            },
+            "69013604": {
+              "desc": "· Rupture specialty Agent Sheer DMG <color=#2BAD00>increases by 15%</color>, and reduces Miasma Shield <color=#2BAD00>30% faster</color>.\n· While in Ether Veil, Agent <color=#FE437E>Ether DMG</color> <color=#2BAD00>increases by 25%</color>, and hitting an enemy makes its Stun DMG Multiplier <color=#2BAD00>increase by 25%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Breakthrough"
+            }
+          },
+          "stageNum": 2
+        },
+        "6903603": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011902": {
+              "desc": "· When an Agent hits The Defiler with Defensive Assist, the whole squad gains 1 stack of <color=#FFFFFF>Adjudication</color>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <color=#FFFFFF>Adjudication</color>. Adjudication can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.\n· For each stack of <color=#FFFFFF>Adjudication</color>, the Agent's CRIT DMG <color=#2BAD00>increases by 5%</color>, Physical DMG <color=#2BAD00>increases by 5%</color>, and Electric DMG <color=#2BAD00>increases by 5%</color>.\n· The Defiler receives 25% less Attribute Anomaly DMG.",
+              "title": ""
+            },
+            "69011903": {
+              "desc": "· When an Agent causes <color=#FFAF2C>Impaired status</color>, they gain <color=#FFAF2C>2500 Performance Points</color>; when an Agent <color=#FFAF2C>shoots down The Defiler while it's attacking in mid-air</color>, they gain <color=#FFAF2C>1500 Performance Points</color>, up to a maximum of 5000 Performance Points.",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>Attack</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69036031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_IsoldetheDefiler.png",
+              "monsterList": {
+                "31142": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 30038,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_IsoldetheDefiler.png",
+                  "name": "The Defiler",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 17803702.62,
+                    "stun": 19977.350000000002
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "203": "Electric"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "The Defiler",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012403": {
+              "desc": "· When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG <color=#2BAD00>increases by 20%/60%</color>.\n· After an EX Special Attack or Ultimate, the Agent's <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases</color> by 20%. For Agents with Attack specialty, their DMG <color=#2BAD00>further increases by 30%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Combined Attack"
+            },
+            "69013603": {
+              "desc": "· Agent Anomaly Proficiency <color=#2BAD00>increases by 30 pts</color>, and <color=#FFFFFF>Abloom</color> deals <color=#2BAD00>10% bonus</color> DMG.\n· After inflicting <color=#FFFFFF>Abloom</color> on enemies, enemy <color=#98EFF0>Ice RES</color> <color=#2BAD00>drops by 25%</color>, and Agents deal <color=#2BAD00>30% bonus</color> <color=#98EFF0>Ice DMG</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Scorching Frost"
+            },
+            "69013604": {
+              "desc": "· Rupture specialty Agent Sheer DMG <color=#2BAD00>increases by 15%</color>, and reduces Miasma Shield <color=#2BAD00>30% faster</color>.\n· While in Ether Veil, Agent <color=#FE437E>Ether DMG</color> <color=#2BAD00>increases by 25%</color>, and hitting an enemy makes its Stun DMG Multiplier <color=#2BAD00>increase by 25%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Breakthrough"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

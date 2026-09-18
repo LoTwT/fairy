@@ -1,0 +1,222 @@
+{
+  "id": 69030,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 69030,
+      "zone": {
+        "6903001": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012704": {
+              "desc": "·首领受到的异常伤害<color=#2BAD00>降低30%</color>，当其从<Term:2000002></Term>状态切换回普通状态，或从普通状态切换为<color=#FFAF2C>[秽盾]</color>状态时，使代理人对其造成的暴击伤害<color=#2BAD00>提升20%</color>，最多叠加3层，当其从失衡状态恢复时层数重置。",
+              "title": ""
+            },
+            "69012705": {
+              "desc": "·触发<color=#FFAF2C>[秽盾净除]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；<Term:2000003></Term>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，可获得<color=#FFAF2C>2000操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            },
+            "69013001": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Attack><color=#FFAF2C>[强攻]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69030011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vessel.png",
+              "monsterList": {
+                "31412": {
+                  "element": {
+                    "electric": 0,
+                    "ether": -1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 1,
+                    "wind": 0
+                  },
+                  "id": 40000,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vessel.png",
+                  "name": "太初梦魇·「始主」",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 28428496.4925,
+                    "stun": 18236
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "200": "物理"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "太初梦魇·「始主」",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012801": {
+              "desc": "· 代理人的攻击力<color=#2BAD00>提升25%</color>，异常精通<color=#2BAD00>提升40</color>点。\n· 对敌人施加属性异常效果后，敌人的全伤害抗性<color=#2BAD00>降低10%</color>，代理人对其造成的属性异常伤害<color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "异变"
+            },
+            "69012904": {
+              "desc": "· 处于[以太帷幕]中的代理人攻击力<color=#2BAD00>提升15%</color>，<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[终结技]</color>命中敌人时无视其<color=#2BAD00>15%</color>的防御力。\n· [支援]特性的代理人发动<color=#FFFFFF>[强化特殊技]</color>后，全队<color=#F0D12B>物理属性伤害</color><color=#2BAD00>提升20%</color>，暴击伤害<color=#2BAD00>提升40%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "乘流"
+            },
+            "69012905": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率<color=#2BAD00>提升15%</color>，<color=#FE437E>以太伤害</color>和<color=#FF5521>火属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "威震"
+            }
+          },
+          "stageNum": 1
+        },
+        "6903002": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69011302": {
+              "desc": "· 秽息司祭每次切换阶段时，会使自身异常积蓄抗性提升10%，同时使自身受到的暴击伤害提高30%，至多可以叠加2层，<Term:2000002></Term>被打破时，清除所有层数。",
+              "title": ""
+            },
+            "69011303": {
+              "desc": "· 代理人<color=#FFAF2C>3秒内成功发动3次[招架支援]</color>时，可获得<color=#FFAF2C>1000操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            },
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69013002": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Rupture><color=#FFAF2C>[命破]</color>特性的代理人挑战。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69030021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MentorMevorakh.png",
+              "monsterList": {
+                "31032": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30033,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_MentorMevorakh.png",
+                  "name": "秽息司祭",
+                  "stats": {
+                    "attack": 2465.018181818182,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 16517819.043000001,
+                    "stun": 16647.4
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "秽息司祭",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012801": {
+              "desc": "· 代理人的攻击力<color=#2BAD00>提升25%</color>，异常精通<color=#2BAD00>提升40</color>点。\n· 对敌人施加属性异常效果后，敌人的全伤害抗性<color=#2BAD00>降低10%</color>，代理人对其造成的属性异常伤害<color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "异变"
+            },
+            "69012904": {
+              "desc": "· 处于[以太帷幕]中的代理人攻击力<color=#2BAD00>提升15%</color>，<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[终结技]</color>命中敌人时无视其<color=#2BAD00>15%</color>的防御力。\n· [支援]特性的代理人发动<color=#FFFFFF>[强化特殊技]</color>后，全队<color=#F0D12B>物理属性伤害</color><color=#2BAD00>提升20%</color>，暴击伤害<color=#2BAD00>提升40%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "乘流"
+            },
+            "69012905": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率<color=#2BAD00>提升15%</color>，<color=#FE437E>以太伤害</color>和<color=#FF5521>火属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "威震"
+            }
+          },
+          "stageNum": 2
+        },
+        "6903003": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010402": {
+              "desc": "· 属性异常对首领敌人造成的伤害提升50%；恶名·死路屠夫处于<color=#FFFFFF>[以太强化]</color>状态时，承受的伤害降低15%，代理人对其造成的失衡值降低30%；代理人对恶名·死路屠夫触发<color=#FFFFFF>[紊乱]</color>后，使其立即退出<color=#FFFFFF>[以太强化]</color>状态。",
+              "title": ""
+            },
+            "69011702": {
+              "desc": "· 成功<color=#FFAF2C>施加[紊乱]</color>时，可获得<color=#FFAF2C>200操作得分</color>，最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "69030031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_NotoriousDeadEndButcher.png",
+              "monsterList": {
+                "11901": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 300072,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_NotoriousDeadEndButcher.png",
+                  "name": "恶名·死路屠夫",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 20492571.599999998,
+                    "stun": 15486.5
+                  }
+                }
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "205": "以太"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "恶名·死路屠夫",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69012801": {
+              "desc": "· 代理人的攻击力<color=#2BAD00>提升25%</color>，异常精通<color=#2BAD00>提升40</color>点。\n· 对敌人施加属性异常效果后，敌人的全伤害抗性<color=#2BAD00>降低10%</color>，代理人对其造成的属性异常伤害<color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "异变"
+            },
+            "69012904": {
+              "desc": "· 处于[以太帷幕]中的代理人攻击力<color=#2BAD00>提升15%</color>，<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[终结技]</color>命中敌人时无视其<color=#2BAD00>15%</color>的防御力。\n· [支援]特性的代理人发动<color=#FFFFFF>[强化特殊技]</color>后，全队<color=#F0D12B>物理属性伤害</color><color=#2BAD00>提升20%</color>，暴击伤害<color=#2BAD00>提升40%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "乘流"
+            },
+            "69012905": {
+              "desc": "· 代理人的生命值上限<color=#2BAD00>提升30%</color>，终结技造成的伤害<color=#2BAD00>提升40%</color>。\n· 代理人释放终结技后，能量和闪能获得效率<color=#2BAD00>提升15%</color>，<color=#FE437E>以太伤害</color>和<color=#FF5521>火属性伤害</color><color=#2BAD00>提升40%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "威震"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}
