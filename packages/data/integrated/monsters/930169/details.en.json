@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Hollow Investigator Observation Log, excerpted from casual chat between two observers",
+  "cardSkillDesc": "During combat, Miasma Ravager Avarus will use its massive body to perform rolling attacks. If you successfully counter this skill with Defensive Assists 3 times in a row, you can interrupt its rolling attack and expose its weakness. After taking a certain amount of DMG in battle, it will activate a Miasmic Field.",
+  "desc": "In Hollow Investigative Association reports, Avarus is often jokingly referred to as the embodiment of \"the sin of gluttony\" — its pot-bellied figure makes it look every bit the lazy bum, about to doze off at any moment.\nDon't underestimate it, however. Observation data indicates that Avarus can compress its body into a ball and launch devastating strikes at targets with astonishing speed.\nAs to how it maintains such a rotund figure despite its intense physical activity, the Association has yet to reach a conclusion.\n\n\"The way it rolls around always reminds me of my pet hamster — it's just a bigger, y'know?\"\n\"More than just a bit bigger, I'd say...\"",
+  "groupDesc": "Ether Mutants",
+  "id": 930169,
+  "locale": "en",
+  "name": "Miasma Ravager - Avarus"
+}

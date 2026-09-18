@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A subjective assessment from an Agent who knows Manato well",
+  "cardSkillDesc": "In combat, the Drowned Ideal: Komano Manato will unleash fierce attacks against the player. Players must give it their all to parry his skills. When successfully performing a Defensive Assist against some of his skills, you can interrupt his attacks. If you manage to Defensive Assist his powerful skills, you can force him into a Weakened state.",
+  "desc": "A phantom enemy that shouldn't exist and may never be encountered again, yet the pressure of its power feels all too real. While records of it will ultimately become part of the Association's simulation data, the young men and women who first ventured into the dream realm as its discoverers have a different understanding of its behavioral patterns.\n\n\"Is it just me, or does it look skinnier than Manato?\"",
+  "groupDesc": "Special",
+  "id": 30040,
+  "locale": "en",
+  "name": "Drowned Ideal - Komano Manato"
+}

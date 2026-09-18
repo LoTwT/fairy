@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— \"Rookie's Guide to the Hollow: Papago's Memoirs\"",
+  "cardSkillDesc": "In combat, Ulidim switches weapons as the battle unfolds and launches surprise attacks using teleportation. Dodge its thrown spears and perform a Chain Defensive against its relentless combos to gradually gain the upper hand. Ulidim will no longer have attribute weaknesses or resistances in Operation Bagel.",
+  "desc": "A notorious Ethereal that prowls the Divine Maze of Papago Hollow.\nIf Papago Hollow's Hallucinogenic Soundscape is the trap that lures prey into the maze, then Ulidim is the hound that hunts down those unfortunate enough to become trapped inside it.\nUlidim's most terrifying ability is its power to emerge from any location or object within the Hollow's illusion, whether from a forgotten corner of the labyrinth or an old keepsake filled with a victim's cherished memories. The shock of its sudden appearance delivers a devastating blow to both body and mind, earning it the nickname \"Hound of Old.\" Its true ability lies in ignoring the illusions woven by the Hallucinogenic Soundscape and moving freely through the Hollow itself.\nBecause of its terrifying nature and appearance, Ulidim is one of the most common and most feared threats encountered during Exploration Missions into Papago Hollow. Among the Bangboo stationed at Papago Outpost, even the mention of its name inspires fear, and frightening legends about Ulidim have spread from one Bangboo to another.\nThere are multiple Ulidim within the Hollow. Their routine task is to patrol designated areas and routes, maintaining the stability of the Hallucinogenic Soundscape. Should they detect an intruder interfering with the Hollow's stable expansion, they will immediately pursue and kill the offender.\n\"Within that labyrinth that has a beginning but no end, perhaps being devoured by the dreadful hound is a mercy in itself.\"",
+  "groupDesc": "Ether Mutants",
+  "id": 30053,
+  "locale": "en",
+  "name": "Ulidim"
+}

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— The defeated mecha Romeul muttered to himself as the purple light in his eyes flashed and faded away.",
+  "cardSkillDesc": "In combat, the Sweeper inherits the original's fighting prowess while also gaining unique tech abilities through mechanical augmentation. Be careful!",
+  "desc": "A combat machine produced by Rusty Cliff Corp., modeled after Romeul's appearance and training data.\nEven as a mass-produced model, its individual combat capabilities are in no way inferior to the original. When fighting in groups, their ferocious attack style resembles a wolf pack encircling prey, leaving opponents completely overwhelmed.\nAfter they were hastily deployed to the Outer Ring by TOPS, Youkai briefly seized control of them, attempting to use this steel wolf pack to stop the group from seeking Ramiel.\n\n\"Tch, useless junk. Let me see where I shall find my next toy...\"",
+  "groupDesc": "Thugs",
+  "id": 40003,
+  "locale": "en",
+  "name": "Rewritten - Sanguine Sweeper"
+}

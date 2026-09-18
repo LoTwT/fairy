@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Observation Log, Papago Outpost",
+  "cardSkillDesc": "In combat, the Infernal Revenant unleashes powerful attacks with its weapon. After taking a certain amount of DMG, it enters the \"Infernal State.\" While in the \"Infernal State,\" some attacks can only be blocked by successfully performing a Chain Parry. The Infernal Revenant also summons a rain of fire that continuously damages Agents. Shattering each flint grants an \"Infernal Shield\" and restores Energy. Shattering all three flints will end the rain of fire.\nInfernal Revenant no longer possesses weaknesses or resistances in \"Operation Bagel\" gameplay.",
+  "desc": "An Ethereal that returned from the Cinderglow Lake.\nOnce a Dead End Butcher defeated by the Overlord Pompey, it was cast into the Cinderglow Lake. Yet instead of being reduced to ash, its body became encased in crystals formed from the burning byproducts of Ether.\nWithin the flames, its outer shell melted away and reformed again, each time gathering new layers of crystal. After enduring an endless torment resembling the depths of hell, it emerged with an armor-like body and gained the ability to move freely through fire.\nAfter a long wandering through a world that seemed to have forgotten it, the creature finally discovered a spatial fissure at the bottom of the fire lake and entered the Divine Maze, Papago Hollow.\nBut that place was nothing more than another hell.\nIt appears to have suffered a crushing defeat. Ever since, it has been driven by an unknown force, obsessively collecting the special Ether scattered throughout the labyrinth.\nYet it can no longer tell whether what lies within is salvation... or blasphemy.\n\n\"Every time that walking bonfire comes through, the temperature goes through the roof. I want hazard pay for this!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 30052,
+  "locale": "en",
+  "name": "Infernal Revenant"
+}

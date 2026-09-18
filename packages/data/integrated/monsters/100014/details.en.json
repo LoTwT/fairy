@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Deep within a Hollow, rookie investigator Raffaele Bert attempting to retreat",
+  "cardSkillDesc": "In combat, Alpeca (Infested) will use different skills.",
+  "desc": "The Hollow Investigative Association has limited research on Alpeca. After briefly studying its behavioral pattern of spewing liquid Ether, the Association classified Alpeca as a low-threat Ethereal and ended its investigation.\nScholars once showed great interest in observing how Alpeca spews liquefied Ether and even commissioned surveys for closer observation.\nExperienced investigators have been avoiding such tasks for unknown reasons, however.\n\"Run! They're spitting again... Oh, no! My new clothes!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 100014,
+  "locale": "en",
+  "name": "Alpeca (Infested)"
+}

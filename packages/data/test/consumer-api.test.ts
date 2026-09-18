@@ -4,6 +4,7 @@ import type {
   BangbooName,
   DetailLocale,
   DriveDiscName,
+  MonsterId,
   WEngineName,
 } from "../src/index.ts"
 import { supportedLanguages } from "../src/nanoka-identity.ts"
@@ -34,6 +35,12 @@ const loaders = vi.hoisted(() => ({
   otherBangbooData: vi.fn(),
   otherBangbooZh: vi.fn(),
   otherBangbooEn: vi.fn(),
+  monsterData: vi.fn(),
+  monsterZh: vi.fn(),
+  monsterEn: vi.fn(),
+  otherMonsterData: vi.fn(),
+  otherMonsterZh: vi.fn(),
+  otherMonsterEn: vi.fn(),
 }))
 vi.mock("../.generated/catalog.ts", () => ({
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
@@ -100,12 +107,26 @@ vi.mock("../.generated/catalog.ts", () => ({
       en: loaders.otherBangbooEn,
     },
   },
+  monsterIds: Object.freeze(["10000", "10002"]),
+  monsterLoaders: {
+    "10000": {
+      data: loaders.monsterData,
+      zh: loaders.monsterZh,
+      en: loaders.monsterEn,
+    },
+    "10002": {
+      data: loaders.otherMonsterData,
+      zh: loaders.otherMonsterZh,
+      en: loaders.otherMonsterEn,
+    },
+  },
   indexLoader: loaders.index,
 }))
 import {
   agentNames,
   bangbooNames,
   driveDiscNames,
+  monsterIds,
   wEngineNames,
   loadIndex,
   loadAgentData,
@@ -117,6 +138,9 @@ import {
   loadDriveDiscData,
   loadDriveDiscDetails,
   loadAllDriveDiscs,
+  loadMonsterData,
+  loadMonsterDetails,
+  loadAllMonsters,
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
@@ -309,6 +333,71 @@ function mockMemberRecords() {
       extra: { entries: ["original"] },
     })
   }
+
+  for (const [data, zh, en, id] of [
+    [loaders.monsterData, loaders.monsterZh, loaders.monsterEn, 10000],
+    [
+      loaders.otherMonsterData,
+      loaders.otherMonsterZh,
+      loaders.otherMonsterEn,
+      10002,
+    ],
+  ] as const) {
+    data.mockResolvedValue({
+      id,
+      monsterId: id,
+      imagePath:
+        "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Example.png",
+      rarity: 1,
+      groupId: 201,
+      monsterInfo: {
+        "11096": {
+          id: 11096,
+          codeName: "Monster_ClaymoreGrey",
+          icon: "",
+          tag: ["Ether", "Demote", "Small"],
+          type: "Monster",
+          element: {
+            ice: 1,
+            fire: 0,
+            electric: 0,
+            ether: 1,
+            physical: 0,
+            wind: 0,
+          },
+          stats: { hp: 80, attack: 48, defence: 45, is_stun: false },
+          curves: {
+            hp: { curve: [100, 116, 136], ratio: 100 },
+            stun: { curve: [100, 100, 100], ratio: 100 },
+          },
+        },
+      },
+      elementAbnormal: { "10001": 600, "20001": 2250 },
+      unknown: { tags: ["original"] },
+    })
+    zh.mockResolvedValue({
+      id,
+      locale: "zh",
+      name: "提尔锋",
+      desc: "原文介绍。",
+      groupDesc: "原文分组说明。",
+      cardObtain: "空洞深潜获得",
+      cardQuote: "「原文引语。」",
+      cardSkillDesc: "原文技能说明。",
+      extra: { entries: ["原文"] },
+    })
+    en.mockResolvedValue({
+      id,
+      locale: "en",
+      name: "Tyrfing",
+      desc: "original introduction.",
+      groupDesc: "original group description.",
+      cardObtain: "Obtained from Hollow Deep dives.",
+      cardQuote: '"An original quote."',
+      cardSkillDesc: "original skill description.",
+      extra: { entries: ["original"] },
+    })
+  }
 }
 
 beforeEach(() => {
@@ -392,12 +481,29 @@ describe("public readers", () => {
       if (key !== "bangbooData" && key !== "otherBangbooEn")
         expect(loader).not.toHaveBeenCalled()
   })
+  it("loads only the requested monster data/locale without prerequisites or other categories", async () => {
+    expect(await loadMonsterData("10000")).toMatchObject({ id: 10000 })
+    expect(loaders.index).not.toHaveBeenCalled()
+    expect(loaders.monsterZh).not.toHaveBeenCalled()
+    expect(loaders.monsterEn).not.toHaveBeenCalled()
+    expect(await loadMonsterDetails("10002", "en")).toMatchObject({
+      id: 10002,
+      locale: "en",
+    })
+    expect(loaders.otherMonsterData).not.toHaveBeenCalled()
+    expect(loaders.otherMonsterZh).not.toHaveBeenCalled()
+    for (const [key, loader] of Object.entries(loaders))
+      if (key !== "monsterData" && key !== "otherMonsterEn")
+        expect(loader).not.toHaveBeenCalled()
+  })
   it.each([
     "unknown",
     "1311",
     "31000",
     "12001",
     "53001",
+    "0960001",
+    "1e4",
     "astra yao",
     " Astra Yao",
     "Astra Yao ",
@@ -415,6 +521,8 @@ describe("public readers", () => {
     expect(await loadWEngineDetails(name as WEngineName, "zh")).toBeUndefined()
     expect(await loadBangbooData(name as BangbooName)).toBeUndefined()
     expect(await loadBangbooDetails(name as BangbooName, "zh")).toBeUndefined()
+    expect(await loadMonsterData(name as MonsterId)).toBeUndefined()
+    expect(await loadMonsterDetails(name as MonsterId, "zh")).toBeUndefined()
     for (const loader of Object.values(loaders))
       expect(loader).not.toHaveBeenCalled()
   })
@@ -437,6 +545,8 @@ describe("public readers", () => {
       () => loadWEngineDetails(name as WEngineName, "zh"),
       () => loadBangbooData(name as BangbooName),
       () => loadBangbooDetails(name as BangbooName, "zh"),
+      () => loadMonsterData(name as MonsterId),
+      () => loadMonsterDetails(name as MonsterId, "zh"),
     ])
       await expect(read()).rejects.toBeInstanceOf(TypeError)
   })
@@ -469,6 +579,12 @@ describe("public readers", () => {
       ).rejects.toBeInstanceOf(TypeError)
       await expect(
         loadAllBangboos(locale as DetailLocale),
+      ).rejects.toBeInstanceOf(TypeError)
+      await expect(
+        loadMonsterDetails("unknown" as MonsterId, locale as DetailLocale),
+      ).rejects.toBeInstanceOf(TypeError)
+      await expect(
+        loadAllMonsters(locale as DetailLocale),
       ).rejects.toBeInstanceOf(TypeError)
       for (const loader of Object.values(loaders))
         expect(loader).not.toHaveBeenCalled()
@@ -577,6 +693,35 @@ describe("public readers", () => {
           expect(loader).not.toHaveBeenCalled()
     },
   )
+  it.each(supportedLanguages)(
+    "loads the full separated monster %s view with source ID keys",
+    async (locale) => {
+      const all = await loadAllMonsters(locale)
+      expect(Object.keys(all)).toEqual(monsterIds)
+      expect(Object.keys(all["10000"])).toEqual(["data", "details"])
+      expect(all["10000"].details.locale).toBe(locale)
+      expect(all["10000"].details.name).toBe(
+        locale === "zh" ? "提尔锋" : "Tyrfing",
+      )
+      expect(all["10002"].details.locale).toBe(locale)
+      expect(loaders.index).not.toHaveBeenCalled()
+      expect(loaders.monsterData).toHaveBeenCalledTimes(1)
+      expect(loaders.otherMonsterData).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "monsterZh" : "monsterEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "otherMonsterZh" : "otherMonsterEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "monsterEn" : "monsterZh"],
+      ).not.toHaveBeenCalled()
+      // 怪物全量不得顺带加载其他类别或索引。
+      for (const [key, loader] of Object.entries(loaders))
+        if (!key.toLowerCase().includes("monster"))
+          expect(loader).not.toHaveBeenCalled()
+    },
+  )
   it("isolates deeply nested mutations across sequential/concurrent and full/single calls", async () => {
     const [one, two] = await Promise.all([
       loadAgentData("Astra Yao"),
@@ -679,6 +824,29 @@ describe("public readers", () => {
     })
     expect(() => (bangbooNames as BangbooName[]).pop()).toThrow(TypeError)
   })
+  it("isolates monster mutations across sequential/concurrent and full/single calls", async () => {
+    const [one, two] = await Promise.all([
+      loadMonsterData("10000"),
+      loadMonsterData("10000"),
+    ])
+    ;(one!.unknown as { tags: string[] }).tags.push("changed")
+    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.monsterInfo["11096"]!.curves.hp!.curve.push(999)
+    expect(
+      (await loadMonsterData("10000"))!.monsterInfo["11096"]!.curves.hp!.curve,
+    ).toEqual([100, 116, 136])
+    const details = await loadMonsterDetails("10000", "zh")
+    ;(details!.extra as any).entries.push("changed")
+    const all = await loadAllMonsters("zh")
+    expect((all["10000"].details.extra as any).entries).toEqual(["原文"])
+    ;(all["10000"].data.unknown as { tags: string[] }).tags.push("changed")
+    ;(all["10000"].details.extra as any).entries.push("changed")
+    expect((await loadAllMonsters("zh"))["10000"]).toEqual({
+      data: two,
+      details: await loadMonsterDetails("10000", "zh"),
+    })
+    expect(() => (monsterIds as MonsterId[]).pop()).toThrow(TypeError)
+  })
   it.each([
     new Error("missing file"),
     new SyntaxError("invalid JSON"),
@@ -693,6 +861,8 @@ describe("public readers", () => {
     loaders.wEngineZh.mockRejectedValue(error)
     loaders.bangbooData.mockRejectedValue(error)
     loaders.bangbooZh.mockRejectedValue(error)
+    loaders.monsterData.mockRejectedValue(error)
+    loaders.monsterZh.mockRejectedValue(error)
     await expect(loadIndex()).rejects.toBe(error)
     await expect(loadAgentData("Astra Yao")).rejects.toBe(error)
     await expect(loadAgentDetails("Astra Yao", "zh")).rejects.toBe(error)
@@ -710,6 +880,9 @@ describe("public readers", () => {
     await expect(loadBangbooData("Penguinboo")).rejects.toBe(error)
     await expect(loadBangbooDetails("Penguinboo", "zh")).rejects.toBe(error)
     await expect(loadAllBangboos("zh")).rejects.toBe(error)
+    await expect(loadMonsterData("10000")).rejects.toBe(error)
+    await expect(loadMonsterDetails("10000", "zh")).rejects.toBe(error)
+    await expect(loadAllMonsters("zh")).rejects.toBe(error)
   })
   it("rejects the full view if a later member's necessary detail fails", async () => {
     const agentError = new Error("missing later member")
@@ -724,5 +897,8 @@ describe("public readers", () => {
     const bangbooError = new Error("missing later bangboo")
     loaders.otherBangbooEn.mockRejectedValue(bangbooError)
     await expect(loadAllBangboos("en")).rejects.toBe(bangbooError)
+    const monsterError = new Error("missing later monster")
+    loaders.otherMonsterEn.mockRejectedValue(monsterError)
+    await expect(loadAllMonsters("en")).rejects.toBe(monsterError)
   })
 })

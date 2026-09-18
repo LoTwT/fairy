@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Medium\nATK: Medium\nDEF: 50\nMovement Speed: Fast\nThreat Level: <color=#FFAF2C>Medium</color>",
+  "desc": "Vicious Striker <color=#D9A600>has high HP</color>. Focus your fire on them.",
+  "groupDesc": "Corrupted",
+  "id": 930156,
+  "locale": "en",
+  "name": "Vicious Striker"
+}

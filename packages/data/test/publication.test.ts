@@ -100,6 +100,7 @@ describe("publication snapshot", () => {
     expect(catalog).toContain(
       'export type BangbooName = "Exampleboo 950001" | "Exampleboo 950002"',
     )
+    expect(catalog).toContain('export type MonsterId = "960001" | "960002"')
     expect(catalog).toContain('[["Astra Yao","2"],["Soldier 0 - Anby","10"]]')
     expect(catalog).toContain(
       '[["Example Drive Disc 930001","930001"],["Example Drive Disc 930002","930002"]]',
@@ -120,6 +121,7 @@ describe("publication snapshot", () => {
     expect(catalog).toContain(
       'Object.freeze(["Exampleboo 950001","Exampleboo 950002"])',
     )
+    expect(catalog).toContain('Object.freeze(["960001","960002"])')
     expect(catalog).toContain(
       'import("@randomplay/data/integrated/agents/2/details.en.json", { with: { type: "json" } })',
     )
@@ -131,6 +133,9 @@ describe("publication snapshot", () => {
     )
     expect(catalog).toContain(
       'import("@randomplay/data/integrated/bangboos/950001/data.json", { with: { type: "json" } })',
+    )
+    expect(catalog).toContain(
+      'import("@randomplay/data/integrated/monsters/960001/data.json", { with: { type: "json" } })',
     )
     for (const path of publicationFiles(index))
       expect(await fs.readFile(join(generated, "integrated", path))).toEqual(
@@ -348,7 +353,7 @@ describe("publication snapshot", () => {
     )
   })
 
-  it("rejects catalog generation without the drive-discs, w-engines or bangboos category", async () => {
+  it("rejects catalog generation without the drive-discs, w-engines, bangboos or monsters category", async () => {
     const root = await temporaryRoot()
     // agents-only v3 制品过不了发布复制前的完整类别验证；这里直接验证目录生成对缺失类别的要求。
     const { artifactDirectory, index } = await publicationFixture(root, {
@@ -368,6 +373,43 @@ describe("publication snapshot", () => {
     await expect(
       generateCatalog(artifactDirectory, withoutBangboos),
     ).rejects.toThrow(/no bangboos category/u)
+    const withoutMonsters = structuredClone(complete)
+    delete (withoutMonsters.entities as Record<string, unknown>)["monsters"]
+    await expect(
+      generateCatalog(artifactDirectory, withoutMonsters),
+    ).rejects.toThrow(/no monsters category/u)
+  })
+
+  it("keeps ID catalog generation unaffected by duplicate or placeholder monster names", async () => {
+    const { artifactDirectory, index } = await fixture()
+    // Monster 公开身份是来源 ID：名称重名、占位名与空名称都不参与目录生成，也不触发类内唯一校验。
+    for (const [id, name] of [
+      ["960001", "OfficialName_"],
+      ["960002", "OfficialName_"],
+    ]) {
+      const details = JSON.parse(
+        await fs.readFile(
+          join(artifactDirectory, `monsters/${id}/details.en.json`),
+          "utf8",
+        ),
+      )
+      details.name = name
+      const bytes = JSON.stringify(details)
+      await fs.writeFile(
+        join(artifactDirectory, `monsters/${id}/details.en.json`),
+        bytes,
+      )
+      index.entities["monsters"].members[id].files.details.en.sha256 = sha256(
+        Buffer.from(bytes),
+      )
+    }
+    await fs.writeFile(
+      join(artifactDirectory, "index.json"),
+      JSON.stringify(index),
+    )
+    const catalog = await generateCatalog(artifactDirectory, index)
+    expect(catalog).toContain('export type MonsterId = "960001" | "960002"')
+    expect(catalog).toContain('Object.freeze(["960001","960002"])')
   })
 
   it("preserves whitespace, punctuation and special property names exactly", async () => {

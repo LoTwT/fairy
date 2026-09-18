@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Confession screamed by a captured Hollow Raider",
+  "cardSkillDesc": "During combat, Thracian will repeatedly perform specific skills to enter a charging state. While in this state, their attacks become more aggressive, and after unleashing high-level moves, they will trigger a large-scale explosion.",
+  "desc": "This fearsome Ethereal, named after the warrior tribes of ancient mythology, is said to be the embodiment of the most valiant heroes and the most insane villains corrupted by the Ether.\n— But that's not the case. While the chiseled muscles you developed in the Hollow and the adrenaline released in excess before death may indeed help you become a significant nuisance to your former companions, they probably won't hold it against an old friend who's already beyond saving, right?\nBut it's irrelevant. When your handsome face transforms into a dark, eerie energy orb, who cares about social reputation?\n\"No wonder he's the boss. Even as an Ethereal, he's still formidable!\"\n\"I knew something was off when he was always in the gym!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 30023,
+  "locale": "en",
+  "name": "Thracian"
+}

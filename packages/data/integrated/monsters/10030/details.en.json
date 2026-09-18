@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A rookie Hollow Raider outside a Hollow, recounting his recent experience to his companions",
+  "cardSkillDesc": "During combat, Fossor performs consecutive double-handed slashes.",
+  "desc": "Recent studies by the Whitestar Institute reveal that some Ethereals' limbs carry notable features from their environment.\nFossor is a prime example of this — its strange forelimbs bear a striking resemblance to the drilling equipment found in the Old Oil Field region.\nAlthough some suggest this is a camouflage tactic to deceive enemies, others have pointed out that Fossor's combat style is aggressive and direct, making it appear ill-suited for ambushes.\nSome imaginative Hollow Raiders speculate it may have developed this form just to dig for minerals...\n\"When I caught sight of it from a distance, it seemed to be happily digging up the asphalt.\"\n\"When it spotted me, it didn't hesitate to charge straight at me, desperately trying to drive me away...\"\n\"But I was just passing by! I had absolutely no intention of taking any of its junk!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 10030,
+  "locale": "en",
+  "name": "Fossor"
+}

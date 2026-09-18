@@ -1,0 +1,10 @@
+{
+  "cardObtain": "【未探明】击败1次以获得数据",
+  "cardQuote": "",
+  "cardSkillDesc": "生命值：低\n攻击力：中\n移动速度：快，受到攻击后变慢\n威胁程度：<color=#31CC00>低</color>",
+  "desc": "在满生命值时<color=#D9A600>移动速度很高</color>且<color=#D9A600>无法被阻挡</color>；受到伤害后，移动速度变慢且可以被阻挡。建议部署<color=#D9A600>[射击邦布]</color>，尽早对恶灵造成伤害，以降低其威胁。",
+  "groupDesc": "以太异形",
+  "id": 930159,
+  "locale": "zh",
+  "name": "恶灵"
+}

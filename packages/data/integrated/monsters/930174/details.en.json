@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Veteran miner Sally, interview with the New Metro Daily following Johnny's disappearance",
+  "cardSkillDesc": "In combat, when threatened, the Exalting Hymnist will trigger a powerful explosion that affects both friend and foe.",
+  "desc": "An unsettling chant often echoed through the Hollow. The veteran miners strictly forbade anyone from approaching its source, but newcomer Johnny brushed off their warnings. Spurred on by a foolish bet, he crept step by step toward the source of the sound. Finally, he reached a clearing. There, a group of people wearing identical uniforms and eerie masks stood in a circle, performing some mysterious ritual. All around them, a group of Ethereals slowly closed in. Johnny shouted warnings, hoping they would flee, but they remained deaf to his cries. Instead, the Ethereals, drawn by Johnny's voice, lunged at him...\n\n\"We will do all we can to enhance discipline amongst the miners. God keep Johnny's soul.\"",
+  "groupDesc": "Corrupted",
+  "id": 930174,
+  "locale": "en",
+  "name": "Exalting Hymnist"
+}

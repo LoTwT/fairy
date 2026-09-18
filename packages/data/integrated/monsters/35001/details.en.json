@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Defense Force Hollow Zero Investigation Log K-411",
+  "cardSkillDesc": "In battle, Nineveh will use attacks with wide areas of effect, barrage opponents with missiles, and summon Hornets to aid her.",
+  "desc": "The unique and magnificent appearance of the symbiotic Ethereal swarm known as Nineveh make it \"difficult\" for people to be wary of it.\nAccording to the few research records available, as Nineveh extends its body, a concentrated and potent Ether flows towards its core through its \"rhizome,\" providing a constant supply of energy. Some scholars speculate that this behavior is akin to the photosynthesis process in plants.\nIn the course of its swaying motions, excess highly active Ether energy continuously pours out. When this accumulation of highly active Ether is nearly overflowing, it transforms, unveiling its true \"blossoming\" form.\nAnd with its bloom comes death.\n\"The good news is it doesn't mean any harm, it just absorbs nutrients for photosynthesis. The bad news is... we're the nutrients.\"",
+  "groupDesc": "Ether Mutants",
+  "id": 35001,
+  "locale": "en",
+  "name": "Nineveh"
+}

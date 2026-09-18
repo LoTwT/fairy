@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "CardQuote_29999",
+  "cardSkillDesc": "CardSkillDesc_29999",
+  "desc": "CardDesc_29999",
+  "groupDesc": "Special",
+  "id": 29999,
+  "locale": "en",
+  "name": "Random Enemy Card"
+}

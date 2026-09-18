@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A casual chat with a Hollow Raider who fled the Hollow after a face-to-face encounter with Banyrek, sweating all the while",
+  "cardSkillDesc": "During combat, Banyrek will use a spitting skill to generate Miasma Pools on the ground, which it will actively absorb to enhance its skills. Additionally, its skills possess strong Miasma Corruption capabilities, and when certain skills hit a Miasma Pool, they will trigger an explosion.",
+  "desc": "In the Hollow Investigative Association's reports, Banyrek has been repeatedly marked as \"dangerous\" mainly due to its all-too-great jumping prowess.\nIf an Ethereal Olympics were held in the Hollow, it would definitely sweep both the high jump and long jump championships. Observation data indicates that Banyrek can bounce continuously for hours without showing any signs of fatigue, as if the space between air and ground were some natural runway.\nSome researchers have joked that if they ever released it in New Eridu's urban district, it would probably bounce from west to east in less than a day.\n\n\"How about trying to tame it as a mount?\"\n\"Forget it, with that explosive kinetic energy, it might be more cost-effective to use it for power generation directly.\"",
+  "groupDesc": "Ether Mutants",
+  "id": 930168,
+  "locale": "en",
+  "name": "Banyrek"
+}

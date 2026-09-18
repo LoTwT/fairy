@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Medium\nATK: Medium\nMovement Speed: Slow\nThreat Level: <color=#FF3333>Super High</color>",
+  "desc": "A highly dangerous enemy that launches <color=#D9A600>Ranged Attacks</color>. Upon being blocked, it releases a poisonous mist, <color=#D9A600>damaging all nearby Bangboo</color>. Deploy <color=#D9A600>Kind Bangboo</color> to counter.",
+  "groupDesc": "Ether Mutants",
+  "id": 930147,
+  "locale": "en",
+  "name": "Arlaune"
+}

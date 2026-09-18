@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Public Security's Hollow Special Response, audio recording of personnel on duty",
+  "cardSkillDesc": "During combat, Corrupted Bandit: Wicked Wraith follows up attacks with an Ether Shotshell Attack.",
+  "desc": "Unfortunate souls mutated by the intense corruption of Ether matter within the Hollows. Due to a considerable degree of Ether aptitude and physical capability, their bodies have not been completely transformed by the Ether, retaining humanoid features but with enhanced mutant limbs that are more dangerous.\nJudging from the remnants of clothing and its combat experience, it was likely once a senior gang member or Raider lurking in the Hollows.\nThe makeshift firearms favored by these bandits have somehow been preserved and enhanced by the Ether matter. They no longer fire iron bullets but rather more dangerous crystalline mixtures.\n\"Don't wait around! They have endless bullets and don't need to reload at all!\"",
+  "groupDesc": "Corrupted",
+  "id": 200131,
+  "locale": "en",
+  "name": "Wicked Wraith"
+}

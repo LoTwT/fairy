@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Hollow Investigator Observation Log, excerpt from a casual conversation between two observers",
+  "cardSkillDesc": "During combat, Metamorphosed - Avarus will use its massive body to perform rolling attacks. Successfully triggering Defensive Assist three times in a row against this move will interrupt its rolling attack and expose its vulnerability. After taking a certain amount of DMG in combat, it will activate a Corruptive Barrier.",
+  "desc": "One who sheds a shattered shell in darkness, reborn through corruption, having forsaken its fallen form.\n\nAccording to Hollow Investigative Association reports, Avarus is often jokingly called the embodiment of \"the sin of gluttony\" — its pot-bellied shape makes it look like a lazy lump, ready to nap at any moment.\nBut don't be fooled. Observations show that Avarus can curl into a ball and strike its targets with incredible speed.\nAs for how it keeps that round figure despite such intense activity? The Association is still scratching its head.\n\"The way it rolls reminds me of my pet hamster... just, y'know, a little bigger.\"\n\"More than just a little bigger...\"",
+  "groupDesc": "Ether Mutants",
+  "id": 30049,
+  "locale": "en",
+  "name": "Metamorphosed - Avarus"
+}

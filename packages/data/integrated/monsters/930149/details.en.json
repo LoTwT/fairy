@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Low\nATK: Low\nMovement Speed: Slow\nThreat Level: <color=#31CC00>Low</color>",
+  "desc": "Alpeca can launch <color=#D9A600>Ranged Attacks</color>, and will attack Bangboo on Tactical Positions. Please pay attention to the candidates' Stamina!",
+  "groupDesc": "Ether Mutants",
+  "id": 930149,
+  "locale": "en",
+  "name": "Alpeca"
+}

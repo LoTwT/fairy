@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Inter-Knot forum complaint from a Hollow Raider",
+  "cardSkillDesc": "During combat, this enemy performs attacks that perfectly mimic those of its target, and depending on the battlefield situation, will choose between close-range combos or long-range shooting. When their health drops below a certain percentage or after a set period, they start using follow-up long-range attacks or ambush targets with blind spot shots after quickly repositioning.",
+  "desc": "Even among Ionized enemies renowned for their strange and uncanny qualities, Ionized Doppelgangers are exceptionally unique.\nThese entities can coat their bodies with a layer of special active Ether ions, enabling them to accurately replicate their target's form, often to a degree that makes it hard to tell the difference. Both in detail and texture, it is almost impossible to tell apart from the original.\nEven more challenging is their ability to mimic the powerful and intimidating combat techniques of their targets.\nNo one knows where they obtain the information about the subjects they mimic. Some rumors suggest they can read minds, picking out the most suitable challengers from their opponent's memories, and then attack in that form.\n\"Nonsense! If it could really read my deepest fears, it would turn into a fierce middle-aged woman wielding a clothes hanger! That's right, I'm most afraid of my mom!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 200231,
+  "locale": "en",
+  "name": "Doppelganger - Mors"
+}

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—From \"The Durham Show\" Episode 79, a conversation between host Durham and mathematician Isaac, who was left with a limp after entering the Hollow",
+  "cardSkillDesc": "In combat, Miasmic - Trinox uses parry mechanics to deflect DMG and unleash Block Counter. When Miasmic - Frenzied Maniac is present on the field, Miasmic - Trinox will command it to perform a Coordinated Attack together. Additionally, when one of them dies, the survivor will enter Frenzy.",
+  "desc": "A fallen creation, reshaped in profound darkness and impurity.\n\nThe Hollow Investigative Association has been studying the mutation characteristics of Ethereal humanoid bodies.\n\nTrinox has consistently ranked in the top three of research popularity lists due to its seemingly deliberately designed triangular head structure. There were even rumors of mathematicians disguising themselves as investigators to infiltrate the Hollow just to witness Trinox firsthand.\n\nThe latest research results were published in \"Hollow Encyclopedia\" Issue 28, February Edition. According to subscribers, the article only discussed the aesthetic significance of Trinox's head structure.\n\nDissatisfied Hollow-related readers gave the article the lowest score of the issue on the magazine's website, with only a 34% approval rating currently.\n\n\"Trinox's head measurements are close to the ancient golden ratio!\"\n\n\"We're fighting the Ethereal, not hosting a beauty pageant for them, Professor.\"",
+  "groupDesc": "Corrupted",
+  "id": 20027,
+  "locale": "en",
+  "name": "Miasmic - Trinox"
+}

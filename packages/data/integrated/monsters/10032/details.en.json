@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Planet of Disaster Weekly, Special Contributor Kruz",
+  "cardSkillDesc": "During combat, the Miasma Spawn will summon dust around the player that will explode after some time. Getting out of the dust quickly is your best tactical move.",
+  "desc": "These monsters, still vaguely humanoid after being injected with the Sacrifice serum, have their forms partially restrained by Porcelume — but the grotesque distortions on their bodies remain hard to look at.\nLab reports from the Hollow Investigative Association indicate that once the Porcelume is stripped from their bodies, these pitiful humanoids instantly lose control, rapidly deteriorating into more horrifying forms.\nDespite their seemingly sluggish movements, the Association strongly discourages any attempt to approach or \"rescue\" them, unless you're capable of taking them out in one blow before they go berserk.\n\n\"Look at those lumps bulging from their backs, like eternal baggage they can never shed... They're like some kind of evil backpackers, always ready to embark on another journey.\"",
+  "groupDesc": "Special",
+  "id": 10032,
+  "locale": "en",
+  "name": "Miasma Spawn"
+}

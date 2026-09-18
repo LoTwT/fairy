@@ -15,6 +15,10 @@ import type {
   BangbooData,
   BangbooDetails,
 } from "./integration/bangboo-types.ts"
+import type {
+  MonsterData,
+  MonsterDetails,
+} from "./integration/monster-types.ts"
 import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
 import {
   agentNames,
@@ -29,6 +33,8 @@ import {
   bangbooNames,
   bangbooSourceIds,
   bangbooLoaders,
+  monsterIds,
+  monsterLoaders,
   indexLoader,
 } from "../.generated/catalog.ts"
 import type {
@@ -36,6 +42,7 @@ import type {
   DriveDiscName,
   WEngineName,
   BangbooName,
+  MonsterId,
 } from "../.generated/catalog.ts"
 
 /** 正式字段类型：实体结构、文件引用、来源身份与多实体完整制品索引。 */
@@ -87,6 +94,12 @@ export type {
   BangbooStats,
 } from "./integration/bangboo-types.ts"
 export type {
+  MonsterData,
+  MonsterDetails,
+  MonsterGrowthCurve,
+  MonsterInfoUnit,
+} from "./integration/monster-types.ts"
+export type {
   IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
   IntegratedSnapshotMember,
@@ -97,12 +110,14 @@ export type {
   DriveDiscName,
   WEngineName,
   BangbooName,
+  MonsterId,
 } from "../.generated/catalog.ts"
 export {
   agentNames,
   driveDiscNames,
   wEngineNames,
   bangbooNames,
+  monsterIds,
 } from "../.generated/catalog.ts"
 
 /** 指定语言的完整代理人资料；公共与本地化字段分别保留，不合并。 */
@@ -137,8 +152,20 @@ export interface LocalizedBangboo {
   details: BangbooDetails
 }
 
+/** 指定语言的完整怪物资料；公共与本地化字段分别保留，不合并。 */
+export interface LocalizedMonster {
+  /** 原有公共资料结构。 */
+  data: MonsterData
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: MonsterDetails
+}
+
 function assertName(name: unknown): asserts name is string {
   if (typeof name !== "string") throw new TypeError("name must be a string")
+}
+
+function assertMonsterId(id: unknown): asserts id is string {
+  if (typeof id !== "string") throw new TypeError("id must be a string")
 }
 
 function assertLocale(locale: unknown): asserts locale is DetailLocale {
@@ -339,4 +366,55 @@ export async function loadAllBangboos(
       }),
     ),
   ) as Record<BangbooName, LocalizedBangboo>
+}
+
+/**
+ * 精确来源 ID 对应的怪物公共资料；ID 是规范十进制字符串，不 trim、不转换数值、
+ * 不解析科学计数法或补零。未登记字符串返回 undefined，非字符串以 TypeError 拒绝。
+ * 不加载索引、详情或其他类别，每次返回独立对象树。
+ */
+export async function loadMonsterData(
+  id: MonsterId,
+): Promise<MonsterData | undefined> {
+  assertMonsterId(id)
+  const loaders = Object.hasOwn(monsterLoaders, id)
+    ? monsterLoaders[id]
+    : undefined
+  return loaders === undefined
+    ? undefined
+    : structuredClone(await loaders.data())
+}
+
+/** 只读取指定怪物显式 zh/en 详情，无语言回退；未登记 ID 返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
+export async function loadMonsterDetails(
+  id: MonsterId,
+  locale: DetailLocale,
+): Promise<MonsterDetails | undefined> {
+  assertLocale(locale)
+  assertMonsterId(id)
+  const loaders = Object.hasOwn(monsterLoaders, id)
+    ? monsterLoaders[id]
+    : undefined
+  return loaders === undefined
+    ? undefined
+    : structuredClone(await loaders[locale]())
+}
+
+/** 显式加载全部怪物公共资料和指定语言详情，以来源 ID 为 key；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllMonsters(
+  locale: DetailLocale,
+): Promise<Record<MonsterId, LocalizedMonster>> {
+  assertLocale(locale)
+  return Object.fromEntries(
+    await Promise.all(
+      monsterIds.map(async (id) => {
+        const loaders = monsterLoaders[id]!
+        const [data, details] = await Promise.all([
+          loaders.data(),
+          loaders[locale](),
+        ])
+        return [id, structuredClone({ data, details })]
+      }),
+    ),
+  ) as Record<MonsterId, LocalizedMonster>
 }

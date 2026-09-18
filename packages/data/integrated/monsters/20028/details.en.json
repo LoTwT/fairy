@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—At the exhibition, an indecisive buyer finally couldn't help but let out a wail",
+  "cardSkillDesc": "In combat, Tactical Security Unit - Security Enforcer uses its shield to both significantly reduce DMG and Daze taken, and also counterattack.",
+  "desc": "This civilian-grade Tactical Security Unit, replicated by Typhoeus Security based on Public Security's Search Patrollers, has been modified in both firepower and technology to avoid potential technical reviews and copyright infringement claims.\n\nHowever, these modifications haven't diminished the combat capabilities of these security devices. Without budget constraints on manufacturing, Typhoeus Security used higher-grade but more expensive materials, significantly enhancing their usability and durability.\n\nThese devices became highly sought after by many commercial companies as soon as they hit the market.\n\n\"Hello, Security Enforcer at your service. Please select your desired patrol mode...\"\n\"Uh... you're saying it has over a hundred preset modes?!\"",
+  "groupDesc": "Special",
+  "id": 20028,
+  "locale": "en",
+  "name": "Security Enforcer"
+}

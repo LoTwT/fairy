@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— From a lecturer sharing their experience during the Defense Force recruit training",
+  "cardSkillDesc": "During combat, Heavy Striker deploys a shield. While shielded, it will only accumulate Fire and Physical Anomaly Buildup. Inflict Burn, Assault, or Stun it to break the shield.",
+  "desc": "An automatic tactical mech of the Defense Force, providing continuous fire support for front-line personnel.\nIts inert Ether shield can withstand most light firepower and even impacts from large-sized Ethereals.\nUndoubtedly, it is one of the most trusted \"companions\" of the Defense Force.\n\"Remember, if you're in trouble, just stay behind them... You'll be pretty safe unless they accidentally squish you.\"",
+  "groupDesc": "Rebel Soldiers",
+  "id": 20007,
+  "locale": "en",
+  "name": "Heavy Striker"
+}

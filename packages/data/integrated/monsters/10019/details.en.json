@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Final words of a curious novice investigator before falling to the ground in a Hollow",
+  "cardSkillDesc": "During combat, Hollow Thug - Assaulter launches continual spinning assaults, but this crazy suicidal attack often reveals a weakness after.",
+  "desc": "As the vanguards in Hollow Raider gangs, Assaulters and Ambushers often brandish their weapons and charge ahead independently.\nThis isn't because of their recklessness or disregard for teamwork, but rather a precautionary measure to prevent accidental harm. The modified transformer coils in their hands release high-voltage currents upon contact, capable of paralyzing or even knocking out an opponent with just a touch.\nAnd in the logistically difficult Hollows, an incapacitated teammate could pose a terrible challenge for an entire squad.\n\"What's this? Lemme check it out! Oh, it's some electric baton replicaaaa... Aaaaaaaaaaarrghhh...\"",
+  "groupDesc": "Thugs",
+  "id": 10019,
+  "locale": "en",
+  "name": "Assaulter"
+}

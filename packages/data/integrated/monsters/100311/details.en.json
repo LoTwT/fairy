@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Inside the Hollow, a group of rookie Hollow Raiders battling a Sordidus",
+  "cardSkillDesc": "During combat, Sordidus will whip with its tentacles for close-range attacks or insert its tentacles into the ground for long-range surprise attacks.",
+  "desc": "The Hollows of the Outer Ring are home to a variety of bizarre Ethereals, and Sordidus is a prime example.\nThey possess a unique body structure, with highly flexible limbs that seem to be the result of an unknown reaction between crude oil and active Ether.\nOnce they lock onto a target, they use their limbs like expert acrobats, launching aggressive and brutal attacks.\n\"Damn it... That thing actually whipped me!\"\n\"Does it see itself as a tamer, treating us like wild beasts?\"",
+  "groupDesc": "Ether Mutants",
+  "id": 100311,
+  "locale": "en",
+  "name": "Sordidus - Energized"
+}

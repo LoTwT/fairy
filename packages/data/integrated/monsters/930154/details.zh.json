@@ -1,0 +1,10 @@
+{
+  "cardObtain": "【未探明】击败1次以获得数据",
+  "cardQuote": "",
+  "cardSkillDesc": "生命值：低\n攻击力：低\n移动速度：快\n威胁程度：<color=#FFAF2C>中</color>",
+  "desc": "雷蛛移动速度较快，会在邦布们周围引爆自己，对<color=#D9A600>所有邦布</color>造成伤害。建议部署超高体力值的<color=#D9A600>纸壳布</color>来阻挡它！",
+  "groupDesc": "以太异形",
+  "id": 930154,
+  "locale": "zh",
+  "name": "雷蛛"
+}

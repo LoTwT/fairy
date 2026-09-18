@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Special Feature of Interview on Back 2 Life, talks with an elite investigator of Hollow Zero",
+  "cardSkillDesc": "In combat, Geppetto unleashes large area attacks using both its body and Ether energy. After its hands and tail take sufficient DMG, they'll be destroyed, leaving it paralyzed. Geppetto will repair these destroyed parts when summoning Ether enemies or deploying Curtain of Phantoms. Additionally, Geppetto's Curtain of Phantoms inflicts the Suspended status on enemies who touch it, reducing their movement speed and preventing Skill usage.",
+  "desc": "Among the most fearsome symbiotic entities in Hollow Zero, Geppetto, thanks to its distinctive posture, often leaves an unsettling first impression.\nIts immense, terrifying form harbors violent Ether energy, yet it moves with the unsettling grace of a puppet, often performing strange and unpredictable actions. In the absence of sufficient observational data, an encounter with Geppetto in Hollow Zero typically heralds enormous dread and inescapable death for any investigator.\nSome scholars speculate, drawing from the records of Parasitic Ethereal Swarm, that this horrific outer shell is merely a facade, while a volatile potent Ether Core lies in command within.\nRegrettably, no investigation records regarding this mysterious core have yet come to light.\n\"I've never met the Grim Reaper, but I've definitely seen what his puppet looks like.\"",
+  "groupDesc": "Ether Mutants",
+  "id": 30032,
+  "locale": "en",
+  "name": "Geppetto"
+}

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— In The Vanquishers, Mors' men fending off the enemy",
+  "cardSkillDesc": "During combat, Mors adapts to the battlefield, switching between close-range combos and long-distance shots. When his health drops below a certain percentage or after a set period, he'll start using follow-up long-range attacks or ambush targets with blind spot shots after quickly repositioning.",
+  "desc": "Mors was once the most feared bounty hunter in the Outer Ring. He possessed an almost obsessive desire to hunt, often tracking his targets relentlessly day in and day out. Once he had a target in his sights, he would obsessively pursue the kill until his prey was dead.\n\n\"Lone Wolf Mors\" never fails — this is the belief held by all major factions in the Outer Ring.\n\nHowever, during one \"hunt,\" Mors pursued his target day and night for three days... Yet, even after exhausting his strength, he still failed to kill the target.\nSurprisingly, the man named Pompey didn't take it personally and instead offered an invitation to the defeated Mors — asking him to join his own organization.\n\nFrom that point on, the infamous \"hunter\" Mors was nowhere to be found. However, within The Vanquishers, a new figure emerged — a silent, solitary captain.\nEven now, Mors remains elusive, often disappearing for long periods. He only resurfaces when faced with a foe who genuinely intrigues him, not out of duty as a captain, but simply to indulge in the thrill of combat and the sheer joy of the hunt.\n\"You want to challenge Captain Mors to a duel? Heh, do you really think you're up for it?\"\n\"Go sign up over there first, then come back next month to try your luck in the draw.\"",
+  "groupDesc": "Thugs",
+  "id": 20023,
+  "locale": "en",
+  "name": "Mors"
+}

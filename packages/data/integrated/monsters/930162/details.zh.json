@@ -1,0 +1,10 @@
+{
+  "cardObtain": "【未探明】击败1次以获得数据",
+  "cardQuote": "",
+  "cardSkillDesc": "生命值：中\n攻击力：高\n移动速度：快\n威胁程度：<color=#FFAF2C>中</color>",
+  "desc": "霍普利泰入场时拥有<color=#D9A600>很高的移动速度</color>！它会撞击沿途上遇到的首个邦布，并造成<color=#D9A600>大量伤害</color>；完成撞击后，移动速度会<color=#D9A600>大幅度</color>下降。",
+  "groupDesc": "以太异形",
+  "id": 930162,
+  "locale": "zh",
+  "name": "霍普利泰"
+}

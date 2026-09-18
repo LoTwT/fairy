@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— An Ethereal ecologist, whose latest research interest is maintaining a balanced diet",
+  "cardSkillDesc": "During the combat, Girtablullu - Stagnant Aberrant will activate the Corruptive Barrier multiple times and wield a variety of weapons. During its first activation, it won't be Dazed, so break through and force it into a Stun state as quickly as possible. When the barrier is activated again, it will continuously charge, enhancing its Corruptive Barrier. Keep dealing massive damage to suppress its charge may give you the upper hand.",
+  "desc": "A beast standing at the edge of the abyss, its burning desire laid bare, sought to devour the seed of ultimate evil and ascend as the abyss's chosen Messenger.\n\nThe Enchainer larvae known as \"Girtablullu\" attempted to consume the \"Karma Core\" within Dracaene Sunbringer, but failed to complete its ascension. The \"Stagnant Aberrant\" was the result of that failed transformation. Its Ether-Sculpted body could no longer withstand the power of the \"Karma Core,\" spiraling into uncontrollable mutation. Its grotesque form now lashes out with a malice born from twisted ambition and sheer greed.\n\n\"You can't just eat everything you see. It's not good for you.\"",
+  "groupDesc": "Ether Mutants",
+  "id": 40008,
+  "locale": "en",
+  "name": "Girtablullu - Stagnant Aberrant"
+}

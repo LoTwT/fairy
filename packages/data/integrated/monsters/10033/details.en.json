@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Two Hollow Investigators exchanging intel on the sly.",
+  "cardSkillDesc": "During combat, Miasmic Trooper - Shieldguard uses its shield to both significantly reduce DMG and Daze taken, and also counterattack.",
+  "desc": "An Ethereal Soldier formed from Miasma, wielding a massive, corruptive Miasma blade and protected by an almost impenetrable defense shield, instinctively covers other Miasmic Troopers as they advance.\nTheir immense physical mass and extensive defensive reach make them formidable in positional warfare, especially in groups, where they become significantly harder to handle. The Hollow Investigative Association advises swiftly eliminating any isolated units on sight.\n\"An Ethereal whose main role is to protect others? Now that's a rare sight...\"\n\"Don't overestimate the Ethereals. Remember, whatever's behind these things was never human to begin with!\"",
+  "groupDesc": "Corrupted",
+  "id": 10033,
+  "locale": "en",
+  "name": "Miasmic Trooper - Shieldguard"
+}

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Banyue, who turned to leave, then suddenly stopped amidst the bustling market",
+  "cardSkillDesc": "Mirage Archer Unit is proficient in multiple attack methods. When facing formidable enemies, it activates excess power output to generate Energy, compressing it into a nearly solid concentrated Energy blade. With highly threatening offensive pressure, it unleashes continuous slashes to sweep the battlefield. When energy reaches its threshold, the light blade enter an overload state, and the escaping energy disrupts enemy movement and reactions, creating an opening for the next decisive assault.",
+  "desc": "An old-era military autonomous unit specializing in long-range elimination, equipped with an appearance-simulation system that can effectively disrupt enemy recognition.\nThe Mirage Archer Unit is proficient in multiple attack methods. When facing formidable enemies, it activates excess power output to generate Energy, compressing it into a nearly solid concentrated Energy blade. With highly threatening offensive pressure, it unleashes continuous slashes to sweep the battlefield. When energy reaches its threshold, the light blade enter an overload state, and the escaping energy disrupts enemy movement and reactions, creating an opening for the next decisive assault. Originally deployed as a standardized tactical weapon system, the Mirage Archer Unit was fully decommissioned as the era changed and sealed deep within the Hollows. Prolonged stasis and Ether corruption have caused corrosion and system instability, yet its core extermination protocols remain dormant within its residual commands.\n\n\"Its task remains unfinished, yet the body rots away... the torment this brings needs no more words.\"",
+  "groupDesc": "Special",
+  "id": 30015,
+  "locale": "en",
+  "name": "Mirage Archer Unit"
+}

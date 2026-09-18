@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "HP: Low\nATK: Low\nMovement Speed: Fast\nThreat Level: <color=#FFAF2C>Medium</color>",
+  "desc": "Blastcrawler moves quickly and will explode near Bangboo, dealing damage to <color=#D9A600>all Bangboo</color>. Deploy <color=#D9A600>Paperboo</color>, which have extremely high HP, to deal with it.",
+  "groupDesc": "Ether Mutants",
+  "id": 930164,
+  "locale": "en",
+  "name": "Blastcrawler"
+}

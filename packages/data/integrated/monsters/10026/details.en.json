@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Posted by an anonymous user on Inter-Knot",
+  "cardSkillDesc": "During combat, Specter unleashes a burst of ranged attacks in quick succession.",
+  "desc": "Influenced by the distinctive decor of the interior of the Ballet Twins, Specters have the grotesque and twisted limb configuration of an artistic sculpture.\nSome investigators believe its unique shape is intended to enhance the protection of its Ether Core.\nOthers argue it's merely a trick designed to distract its enemies. While its enemies are mesmerized by its peculiar posture, a Specter will seize the opportunity to launch long-range attacks using concentrated Ether.\n\"I looked at its bizarre structure and thought to myself: Was it trying to play a game of bowling with its own head?\"\n\"But before I could make sense of anything, its bowling ball had already smashed into my face...\"",
+  "groupDesc": "Ether Mutants",
+  "id": 10026,
+  "locale": "en",
+  "name": "Specter"
+}

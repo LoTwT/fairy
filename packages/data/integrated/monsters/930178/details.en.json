@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Shrieking confession made by a captured Hollow Raider gang member",
+  "cardSkillDesc": "During combat, this enemy will activate Miasmic Fields at specific moments, instantly unleashing a powerful large-area attack, while enhancing their skills throughout its duration.",
+  "desc": "A fallen creation, reshaped in the depths of profound darkness and impurity.\n\nThis fearsome Ethereal, named after a warrior tribe in ancient mythology, is said to only manifest from the most valiant heroes and the most insane villains when they become corrupted by the Ether.\nThat is not the case, however. While the chiseled muscles you developed in the Hollow and the adrenaline released in excess before death may indeed help you become a significant nuisance to your former companions, they probably won't hold it against an old friend who's already beyond saving, right?\nNot that it matters, of course. Who cares about street cred or socializing once your handsome face has transformed into a dark, eerie energy orb, anyway?\n\"That's the Boss for ya. Even his Ether-corrupted form is super strong!\"\n\"I always knew something was off about that gym freak!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 930178,
+  "locale": "en",
+  "name": "Miasmic - Thracian"
+}

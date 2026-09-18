@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Hollow Thugs run into an old acquaintance in a Hollow somewhere",
+  "cardSkillDesc": "In combat, the Miasmic - Rampant Brute absorbs powerful Miasma Energy, allowing it to use Miasma-enhanced attack . Inflicting an Anomaly on it will break its defense more efficiently.",
+  "desc": "A fallen creation, reshaped in the depths of impure darkness.\nThe \"Rampant Brute,\" once a symbol of absolute violence, has become a prisoner to the Miasma. Its mechanical armor has nearly fused with flesh, consciousness completely shattered, leaving only raw destructive instinct to lash out and crush everything it encounters within the Hollows.\nThanks to the street workout culture it once worshipped in life, fragments of muscle memory still carry out warped \"training routines,\" but every application of force tears apart its own structure, destroying any trace of strength's beauty.\n\"Boss? What're you doing?! Boss!\"\n\"The fighting moves you taught, the workout techniques — this ain't it... You're not my boss. I won't accept this!\"",
+  "groupDesc": "Corrupted",
+  "id": 30045,
+  "locale": "en",
+  "name": "Miasmic - Rampant Brute"
+}

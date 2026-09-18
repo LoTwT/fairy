@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—New Eridu Public Security slogan played repeatedly through promotional cars",
+  "cardSkillDesc": "During combat, Hollow Thug - Raider will charge from a long distance, potentially colliding with obstacles along the way — creating the perfect opportunity to counterattack.",
+  "desc": "Among the ranks of Ether thieves, Raiders and Looters serve as the core members, possessing both technical expertise and combat skills.\nTheir Electric Resonance Detection Devices emit powerful currents that are used to detect Ether ore and also function as formidable weapons during armed raids.\nOccasionally mistaken for illegal fishermen, they pay little attention to such misconceptions.\nAfter all, with their extremely lethal electro-shockers, they don't really care whether their targets are fish or humans...\n\"If you encounter individuals armed with electrified harpoons, whether near a river, lake, or Hollow, please report it immediately to Public Security!\"",
+  "groupDesc": "Thugs",
+  "id": 10015,
+  "locale": "en",
+  "name": "Raider"
+}

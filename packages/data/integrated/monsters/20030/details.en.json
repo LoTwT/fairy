@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Typhoeus Security Spokesperson",
+  "cardSkillDesc": "In combat, Tactical Security Unit - Medium Patroller uses its long arms to perform a spinning attack. Use Defensive Assist before it attacks to completely prevent it from executing the skill.",
+  "desc": "A mass-produced security unit manufactured by Typhoeus Security, modified from Public Security's support combat mechs. Compared to the support combat mechs, some combat capabilities have been reduced, mainly relying on its large shield to suppress low-threat groups like rioters, maintaining order and guiding crowds during large events and special occasions.\n\nAccording to reports, some units were purchased and modified by illegal operators to create the Illegal Support Unit \"Enraged Sweeper.\" Some even went as far as posting reviews on the company's official website saying \"This quality is worse than the scrapped support mechs I picked up in the Hollow!\" and giving the product a one-star rating.\n\n\"These illegal modifications have nothing to do with our security company and are private modifications by users. We will fight to the end against such negative reviews... I mean, illegal activities...\"",
+  "groupDesc": "Special",
+  "id": 20030,
+  "locale": "en",
+  "name": "Medium Patroller"
+}

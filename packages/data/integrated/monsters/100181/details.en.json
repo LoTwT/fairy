@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A senior member of the Nightingale Security Company talking to a rookie",
+  "cardSkillDesc": "During combat, Hollow Thug - Rustler tends to harass targets at a distance using 3-shot bursts.",
+  "desc": "Most of the thugs who spend their time in the Hollows exhibit serious mental problems or peculiar quirks. Fortunately, the Poachers and the Rustlers within the gang have managed to maintain their sanity while embracing the filthy methods of traditional villains.\nCowardly and cunning, they excel in the art of concealing themselves within the shadows and launching surprise attacks on their targets. They would never choose to attack head-on if they could ambush.\nTheir composite hand crossbows, though limited in power, produce minimal noise when fired. Seasoned Poachers often seize the perfect moment and immobilize their unsuspecting prey with a single well-aimed shot.\n\"I used to be a Public Security officer, then I took an arrow in the knee while on a Hollow operation...\"",
+  "groupDesc": "Thugs",
+  "id": 100181,
+  "locale": "en",
+  "name": "Rustler"
+}

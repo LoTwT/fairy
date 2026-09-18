@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Audio log submitted by a rookie investigator for supplies recovery during a workplace injury claim.",
+  "cardSkillDesc": "In combat, the Fisher Crab moves swiftly sideways, unleashing fierce attacks with its dual pincers while protecting itself with a tough shell. After taking heavy hits, the Fisher Crab enters defense mode. If its shell is intact, it will exit defense mode after a while and launch a devastating counter-attack. However, if its shell is gone and it takes multiple hits, the Fisher Crab will be executed and enter a paralyzed state.",
+  "desc": "Feeding primarily on rookie investigators, newbie Hollow Raiders, and greedy, reckless beginner adventurers, the Fisher Crab - the most patient hunter in the Hollow, fishing for fools.\nBefore rushing towards that \"Hollow Supply Container,\" remember:\nDon't become tonight's dinner party joke among colleagues, or tomorrow morning's mass-distributed obituary.\n\n\"A mimic? You've been playing too many tabletop games, haven't you?\"",
+  "groupDesc": "Ether Mutants",
+  "id": 930171,
+  "locale": "en",
+  "name": "Fisher Crab"
+}

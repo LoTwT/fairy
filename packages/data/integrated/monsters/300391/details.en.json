@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—On a typical late-night overtime shift, an enraged HSO officer violently bangs on Haytor's frame while shouting",
+  "cardSkillDesc": "In combat, Haytor uses Phantoms to deceive opponents and launch surprise attacks; after entering Miasmic Field, Haytor can summon even larger Phantoms to attack alongside him. During this time, successfully parrying the large Phantoms' attacks will weaken the <Term:2000002>Miasmic Shield</Term>.",
+  "desc": "A gaunt and eerie skeleton, bearing a pale, sharp \"Cape\"—another masterpiece from the Exaltists. When it comes to \"100 Ways to Integrate Humans into Hollows,\" their experimental enthusiasm is truly unmatched.\nThose who've encountered Haytor believe these folks must be high-ranking Exaltist members; after all, even as Ethereals, they still couldn't resist creating some lackeys to boss around.\n\n\"I absolutely hate people like that!\"\n\n\"I bet they even say to their phantoms... 'I'm rather disappointed in you, as you could have done better; when I summoned you, I actually had higher expectations'?!\"",
+  "groupDesc": "Corrupted",
+  "id": 300391,
+  "locale": "en",
+  "name": "Haytor"
+}

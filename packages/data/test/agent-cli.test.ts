@@ -20,9 +20,11 @@ import {
   syntheticDriveDiscIds,
   syntheticWEngineIds,
   syntheticBangbooIds,
+  syntheticMonsterIds,
 } from "./fixtures/synthetic-dataset.ts"
 import { wEngineInput } from "./fixtures/w-engine-source.ts"
 import { bangbooInput } from "./fixtures/bangboo-source.ts"
+import { monsterInput } from "./fixtures/monster-source.ts"
 
 const packageDirectory = fileURLToPath(new URL("../", import.meta.url))
 const repositoryDirectory = resolve(packageDirectory, "../..")
@@ -104,6 +106,20 @@ async function fixture(parent = tmpdir(), ids = ["2", "10"]) {
     for (const locale of bangboo.detailLocales)
       await writeJson(join(versionRoot, locale, "bangboo", `${id}.json`), {
         ...bangboo.details[locale],
+        id: Number(id),
+      })
+  // 默认登记表包含 monsters：monster 输入使用真实怪物结构的合成成员。
+  const monster = monsterInput()
+  await writeJson(
+    join(versionRoot, "monster.json"),
+    Object.fromEntries(
+      syntheticMonsterIds.map((id) => [id, monster.sourceRecord]),
+    ),
+  )
+  for (const id of syntheticMonsterIds)
+    for (const locale of monster.detailLocales)
+      await writeJson(join(versionRoot, locale, "monster", `${id}.json`), {
+        ...monster.details[locale],
         id: Number(id),
       })
   const preload = join(root, "offline guard.mjs")
@@ -337,15 +353,18 @@ describe("offline agent package commands", () => {
       const driveDiscIds = syntheticDriveDiscIds
       const wEngineIds = syntheticWEngineIds
       const bangbooIds = syntheticBangbooIds
+      const monsterIds = syntheticMonsterIds
       expect(index.format).toBe("fairy-nanoka-integrated/v3")
       expect(index.entities.agents.memberIds).toEqual(ids)
       expect(index.entities["drive-discs"].memberIds).toEqual(driveDiscIds)
       expect(index.entities["w-engines"].memberIds).toEqual(wEngineIds)
       expect(index.entities["bangboos"].memberIds).toEqual(bangbooIds)
+      expect(index.entities["monsters"].memberIds).toEqual(monsterIds)
       expect(receipt.memberCounts).toEqual({
         "agents": ids.length,
         "bangboos": bangbooIds.length,
         "drive-discs": driveDiscIds.length,
+        "monsters": monsterIds.length,
         "w-engines": wEngineIds.length,
       })
       expect(receipt.format).toBe("fairy-nanoka-integrated/v3")
@@ -415,12 +434,13 @@ describe("offline agent package commands", () => {
         agentInput().detailLocales,
       )
       expect(receipt.inputFileCount).toBe(
-        // manifest、四类索引与全部成员详情；跨类别累计。
-        5 +
+        // manifest、五类索引与全部成员详情；跨类别累计。
+        6 +
           ids.length * 2 +
           driveDiscIds.length * 2 +
           wEngineIds.length * 2 +
-          bangbooIds.length * 2,
+          bangbooIds.length * 2 +
+          monsterIds.length * 2,
       )
       expect(receipt.outputFileCount).toBe(
         Object.keys(await directoryBytes(receipt.artifactDirectory)).length,
@@ -432,6 +452,7 @@ describe("offline agent package commands", () => {
         "agents",
         "bangboos",
         "drive-discs",
+        "monsters",
         "w-engines",
       ])
       expect(
@@ -467,6 +488,14 @@ describe("offline agent package commands", () => {
       for (const entry of maintenance.categories["bangboos"]) {
         expect(entry.maintenance.diagnostics).toEqual([])
       }
+      expect(
+        maintenance.categories["monsters"].map(
+          (entry: { memberId: string }) => entry.memberId,
+        ),
+      ).toEqual(monsterIds)
+      for (const entry of maintenance.categories["monsters"]) {
+        expect(entry.maintenance.diagnostics).toEqual([])
+      }
       const verified = success(
         runCommand(
           input,
@@ -493,6 +522,10 @@ describe("offline agent package commands", () => {
           },
           "bangboos": {
             memberCount: receipt.memberCounts["bangboos"],
+            detailLocales: agentInput().detailLocales,
+          },
+          "monsters": {
+            memberCount: receipt.memberCounts["monsters"],
             detailLocales: agentInput().detailLocales,
           },
         },

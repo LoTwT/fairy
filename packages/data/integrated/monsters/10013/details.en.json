@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—Public Security Front Desk, logistics company member filing a complaint after a failed street arrest",
+  "cardSkillDesc": "Monster Skill Info - Placeholder",
+  "desc": "Highly maneuverable small autonomous mechs deployed by Public Security, equipped with inert Ether circular saws that also serve as assistant steering wheels for navigating complex terrains at high speeds.\nHowever, due to their rudimentary self-control programs, these lawnmowers occasionally cause unintended damage while executing their slicing attacks.\n\"Hey! Who the heck messed up my brand new car!?\"",
+  "groupDesc": "Special",
+  "id": 10013,
+  "locale": "en",
+  "name": "OfficialName_"
+}

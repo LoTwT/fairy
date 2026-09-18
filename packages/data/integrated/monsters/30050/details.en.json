@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— A Brave Explorer",
+  "cardSkillDesc": "During combat, the Metamorphosed - Scorpse conceals itself and attacks through its Mimics. Successfully triggering a Defensive Assist or Dodge Counter against a Mimic will knock the Metamorphosed - Scorpse down, leaving it staggered for a short time. Upon activating the <Term:2000001>Corruptive Barrier</Term>, it summons additional Mimics to attack in coordination with it. It can also spit venom filled with Blastcrawler egg sacs, causing multiple explosive hits.",
+  "desc": "One who sheds a shattered shell in darkness, reborn through corruption, having forsaken its fallen form.\n\nIn a desolate realm completely devoured by the Hollows, it slumbered until the arrival of \"that power.\"\nThis aggressive and contaminating force, like a skilled yet malicious craftsman, refilled it with purer dark energy, transforming it into the current \"Miasmic Scorpse.\"\nGradually, it seemed to grasp the trick of \"existence\" through mimicry. It could split its Miasma energy, creating multiple Mimics indistinguishable from the real thing.\nThese Mimics possess nearly identical offensive capabilities as the original, launching dazzling attacks from different angles to conceal the one lethal \"truth.\"\nWhen facing its encirclement, remember this well: all you see is illusion. All you feel is a trap.\n\n\"Only by stripping away all distractions and perceiving the one 'truth' can you find a glimmer of hope in this deadly dance of phantoms.\"",
+  "groupDesc": "Ether Mutants",
+  "id": 30050,
+  "locale": "en",
+  "name": "Metamorphosed - Scorpse"
+}

@@ -61,6 +61,10 @@ it("consumes the offline-installed package in real Vite development and producti
       integratedIndex.entities["bangboos"].memberIds
     const bangbooCount = bangbooMemberIds.length
     const directBangbooId = bangbooMemberIds[1] ?? bangbooMemberIds[0]
+    const monsterMemberIds: string[] =
+      integratedIndex.entities["monsters"].memberIds
+    const monsterCount = monsterMemberIds.length
+    const directMonsterId = monsterMemberIds[1] ?? monsterMemberIds[0]
     // 构建模块图应包含两类导入表引用的全部 JSON：按已验证索引逐类别推导，不使用固定文件总数。
     const publishedEntities = integratedIndex.entities as Record<
       string,
@@ -96,6 +100,10 @@ globalThis.fairyDirectWEngine = {
 globalThis.fairyDirectBangboo = {
   data: () => import("@randomplay/data/integrated/bangboos/${directBangbooId}/data.json"),
   zh: () => import("@randomplay/data/integrated/bangboos/${directBangbooId}/details.zh.json"),
+}
+globalThis.fairyDirectMonster = {
+  data: () => import("@randomplay/data/integrated/monsters/${directMonsterId}/data.json"),
+  zh: () => import("@randomplay/data/integrated/monsters/${directMonsterId}/details.zh.json"),
 }
 document.body.append("ready")
 `,
@@ -153,6 +161,8 @@ document.body.append("ready")
             directWEngineId,
             bangbooCount,
             directBangbooId,
+            monsterCount,
+            directMonsterId,
           })) {
             const context = await browser.newContext()
             const page = await context.newPage()
@@ -303,6 +313,8 @@ function defineScenarios(counts: {
   directWEngineId: string
   bangbooCount: number
   directBangbooId: string
+  monsterCount: number
+  directMonsterId: string
 }): Array<{ name: string; steps: ScenarioStep[] }> {
   const {
     agentCount,
@@ -312,6 +324,8 @@ function defineScenarios(counts: {
     directWEngineId,
     bangbooCount,
     directBangbooId,
+    monsterCount,
+    directMonsterId,
   } = counts
   async function checkNameCatalogs(page: Page) {
     const catalogs = await page.evaluate(() => {
@@ -321,11 +335,13 @@ function defineScenarios(counts: {
         driveDiscNames: api.driveDiscNames.length,
         wEngineNames: api.wEngineNames.length,
         bangbooNames: api.bangbooNames.length,
+        monsterIds: api.monsterIds.length,
         frozen:
           Object.isFrozen(api.agentNames) &&
           Object.isFrozen(api.driveDiscNames) &&
           Object.isFrozen(api.wEngineNames) &&
-          Object.isFrozen(api.bangbooNames),
+          Object.isFrozen(api.bangbooNames) &&
+          Object.isFrozen(api.monsterIds),
       }
     })
     expect(catalogs).toEqual({
@@ -333,6 +349,7 @@ function defineScenarios(counts: {
       driveDiscNames: driveDiscCount,
       wEngineNames: wEngineCount,
       bangbooNames: bangbooCount,
+      monsterIds: monsterCount,
       frozen: true,
     })
   }
@@ -512,7 +529,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 代理人上下文全程不请求驱动盘、WEngine 或邦布 JSON。
+            // 代理人上下文全程不请求驱动盘、WEngine、邦布或怪物 JSON。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -520,7 +537,8 @@ function defineScenarios(counts: {
                   (path) =>
                     !path.startsWith("drive-discs/") &&
                     !path.startsWith("w-engines/") &&
-                    !path.startsWith("bangboos/"),
+                    !path.startsWith("bangboos/") &&
+                    !path.startsWith("monsters/"),
                 ),
             ).toBe(true)
           },
@@ -744,7 +762,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布文件或索引。
+            // 驱动盘上下文全程只请求驱动盘 JSON：不触达代理人、WEngine、邦布、怪物文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -952,7 +970,7 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布文件或索引。
+            // WEngine 上下文全程只请求 WEngine JSON：不触达代理人、驱动盘、邦布、怪物文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
@@ -1162,11 +1180,233 @@ function defineScenarios(counts: {
           },
           sources: [],
           after: (requests) => {
-            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine 文件或索引。
+            // 邦布上下文全程只请求邦布 JSON：不触达代理人、驱动盘、WEngine、怪物文件或索引。
             expect(
               requests
                 .flatMap((request) => request.sources)
                 .every((path) => path.startsWith("bangboos/")),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
+    {
+      name: "monsters",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "monster-data",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (await (globalThis as any).fairy.loadMonsterData("10000")).id,
+              ),
+            ).toBe(10000)
+          },
+          sources: ["monsters/10000/data.json"],
+        },
+        {
+          name: "monster-details-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const details = await (
+                  globalThis as any
+                ).fairy.loadMonsterDetails("10000", "en")
+                return { locale: details.locale, id: String(details.id) }
+              }),
+            ).toEqual({ locale: "en", id: "10000" })
+          },
+          sources: ["monsters/10000/details.en.json"],
+        },
+        {
+          name: "monster-details-zh",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (globalThis as any).fairy.loadMonsterDetails(
+                      "10000",
+                      "zh",
+                    )
+                  ).locale,
+              ),
+            ).toBe("zh")
+          },
+          sources: ["monsters/10000/details.zh.json"],
+        },
+        {
+          name: "all-monsters-en",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (expected) => {
+                const api = (globalThis as any).fairy
+                const all = await api.loadAllMonsters("en")
+                const keys = Object.keys(all)
+                return {
+                  count: keys.length,
+                  locales: [
+                    ...new Set(
+                      Object.values(all).map(
+                        (monster: any) => monster.details.locale,
+                      ),
+                    ),
+                  ],
+                  keysMatch:
+                    keys.length === expected &&
+                    keys.every(
+                      (id, position) => id === api.monsterIds[position],
+                    ),
+                  dataKeysSeparated: Object.values(all).every(
+                    (monster: any) =>
+                      Object.keys(monster).length === 2 &&
+                      "data" in monster &&
+                      "details" in monster,
+                  ),
+                }
+              }, monsterCount),
+            ).toEqual({
+              count: monsterCount,
+              locales: ["en"],
+              keysMatch: true,
+              dataKeysSeparated: true,
+            })
+          },
+          after: (requests) => {
+            const monsterSources = requests
+              .filter((request) =>
+                [
+                  "monster-data",
+                  "monster-details-en",
+                  "all-monsters-en",
+                ].includes(request.phase),
+              )
+              .flatMap((request) => request.sources)
+            expect(monsterSources).toHaveLength(monsterCount * 2)
+            expect(new Set(monsterSources).size).toBe(monsterCount * 2)
+            expect(
+              monsterSources.every(
+                (path) =>
+                  path.startsWith("monsters/") &&
+                  (path.endsWith("/data.json") ||
+                    path.endsWith("/details.en.json")),
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "direct-subpath",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async (id) => {
+                const data = await (globalThis as any).fairyDirectMonster.data()
+                const zh = await (globalThis as any).fairyDirectMonster.zh()
+                if (String(data.default.id) !== id)
+                  throw new Error("direct monster data id mismatch")
+                if (String(zh.default.id) !== id || zh.default.locale !== "zh")
+                  throw new Error("direct monster details mismatch")
+                return { id: data.default.id, locale: zh.default.locale }
+              }, directMonsterId),
+            ).toEqual({ id: Number(directMonsterId), locale: "zh" })
+          },
+          after: (requests) => {
+            const directSources = requests
+              .filter((request) => request.phase === "direct-subpath")
+              .flatMap((request) => request.sources)
+            expect(directSources).toContain(
+              `monsters/${directMonsterId}/details.zh.json`,
+            )
+            expect(
+              directSources.every(
+                (path) =>
+                  path === `monsters/${directMonsterId}/data.json` ||
+                  path === `monsters/${directMonsterId}/details.zh.json`,
+              ),
+            ).toBe(true)
+          },
+        },
+        {
+          name: "monster-repeat-and-invalid",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const one = await api.loadMonsterData("10000")
+              const unitKey = Object.keys(one.monsterInfo)[0]
+              one.monsterInfo[unitKey].curves.hp.curve.push(-1)
+              const again = await api.loadMonsterData("10000")
+              if (again.monsterInfo[unitKey].curves.hp.curve.includes(-1))
+                throw new Error("shared object")
+              const details = await api.loadMonsterDetails("10000", "zh")
+              details.desc = "browser mutation"
+              if (
+                (await api.loadMonsterDetails("10000", "zh")).desc ===
+                "browser mutation"
+              )
+                throw new Error("shared details")
+              if ((await api.loadMonsterData("010000")) !== undefined)
+                throw new Error("zero-padded id accepted")
+              if ((await api.loadMonsterData("1e4")) !== undefined)
+                throw new Error("scientific notation accepted")
+              if ((await api.loadMonsterData("Penguinboo")) !== undefined)
+                throw new Error("other category id accepted")
+              try {
+                await api.loadAllMonsters("zh-CN")
+                throw new Error("invalid locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadMonsterDetails("10000")
+                throw new Error("missing locale accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadMonsterData(10000)
+                throw new Error("numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              // 其余类别的非法参数同样立即拒绝，不触发任何数据加载。
+              try {
+                await api.loadAgentData(1311)
+                throw new Error("agent numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadDriveDiscData(31000)
+                throw new Error("drive disc numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadWEngineData(12001)
+                throw new Error("w-engine numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+              try {
+                await api.loadBangbooData(53001)
+                throw new Error("bangboo numeric id accepted")
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error
+              }
+            })
+          },
+          sources: [],
+          after: (requests) => {
+            // 怪物上下文全程只请求怪物 JSON：不触达代理人、驱动盘、WEngine、邦布文件或索引。
+            expect(
+              requests
+                .flatMap((request) => request.sources)
+                .every((path) => path.startsWith("monsters/")),
             ).toBe(true)
           },
         },

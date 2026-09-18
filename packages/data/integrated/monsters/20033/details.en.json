@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "— Excited new recruits at an Airspace Patrol orientation event",
+  "cardSkillDesc": "During combat, Lahmu use their four massive claws for melee attacks, repeatedly crushing any target that gets too close.",
+  "desc": "According to Airspace Patrol defense reports, Lahmu are among the most common native Ethereals in Roscaelifer. Their razor-sharp claws and exceptional mobility have made them a persistent headache for countless patrol officers.\nThanks to posing just the right amount of threat, Lahmu have become the Airspace Patrol's unofficial benchmark for combat capability. Defeating one is considered proof that an officer can hold their own in the field.\n\n\"Hey, did you hear? They say Commander Sigrid can take down 100 Lahmu single-handedly!\"\n\"Then with both hands, that'd be 200! Commander Sigrid is amazing!\"\n\"You blockhead, that's not how it works! If Commander Sigrid used both hands... she could probably take down 10,000 Lahmu!\"",
+  "groupDesc": "Ether Mutants",
+  "id": 20033,
+  "locale": "en",
+  "name": "Lahmu"
+}

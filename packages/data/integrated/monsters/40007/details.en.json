@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "",
+  "cardSkillDesc": "Integrated - Primordial Nightmare is enhanced, improving all of their combat abilities. Integrated - Primordial Nightmare can exit or enter a Miasmic Field freely. Even when not in a Miasmic Field, the Miasmic Shield continues to protect it from being Stunned. Only when the Miasmic Shield is broken can it be Stunned. When Integrated - Primordial Nightmare recovers from being Stunned, the protection from the Miasmic Shield will be restored.\n\nIn combat, Integrated - Primordial Nightmare will use \"Control Skills\". Perfectly responding to each attack can grant an advantage in battle.",
+  "desc": "High-risk simulation units based on live combat data. By deeply reconstructing and overfitting the combat logic of their prototypes, certain individuals have exceeded standard performance limits, posing an exceptionally high combat threat.",
+  "groupDesc": "Special",
+  "id": 40007,
+  "locale": "en",
+  "name": "Integrated - Primordial Nightmare"
+}
