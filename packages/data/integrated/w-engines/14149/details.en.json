@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Music is the girl's weapon against the world. The moment she puts on her headphones, she becomes a tiny hero on a quest to conquer the \"Kingdom of Unhappiness,\" proudly swinging her sword and shield and ordering the world to release the treasured fantasies it keeps stingily hidden away.\nBut... every campaign runs into unexpected trouble now and then. Like that old friend who disguises herself as an angel while secretly being an evil demon queen — why is she always able to catch Sunna slacking off in some corner?!\n\"Hey, I went through all that trouble to help you assemble that W-Engine, and you're using it to slack off here?\"\nSadly, this demon queen of unhappiness is far too powerful, and her arguments are always airtight... Every time this happens, the hero Sunna can only put down her weapon and scurry back to the practice room, once again locked in a battle of wits with those complicated dance steps she never quite manages to get right.\n\n<color=#959595>\"One day, I'll defeat the Demon Queen!\" —a certain hero who dares not reveal their name.</color>",
+  "desc2": "Equip to increase Support Agents' combat capabilities",
+  "desc3": "Thoughts follow the veins of fantasy, weaving themselves into song.",
+  "id": 14149,
+  "locale": "en",
+  "name": "Thoughtbop",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Energy Regen",
+    "name2": "Energy Regen"
+  },
+  "talents": {
+    "1": {
+      "desc": "While not the active character, the equipper's Energy Regen increases by <color=#2BAD00>0.6</color>/s. When the equipper uses an <color=#FFFFFF>EX Special Attack</color> and deals <color=#F0D12B>Physical DMG</color>, all squad members gain a buff that increases DMG dealt by <color=#2BAD00>12.5%</color> for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional <color=#2BAD00>10%</color> ATK. Only one instance of this effect can exist in the same squad.",
+      "name": "Decibel Monologue"
+    },
+    "2": {
+      "desc": "While not the active character, the equipper's Energy Regen increases by <color=#2BAD00>0.69</color>/s. When the equipper uses an <color=#FFFFFF>EX Special Attack</color> and deals <color=#F0D12B>Physical DMG</color>, all squad members gain a buff that increases DMG dealt by <color=#2BAD00>14.3%</color> for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional <color=#2BAD00>11.5%</color> ATK. Only one instance of this effect can exist in the same squad.",
+      "name": "Decibel Monologue"
+    },
+    "3": {
+      "desc": "While not the active character, the equipper's Energy Regen increases by <color=#2BAD00>0.78</color>/s. When the equipper uses an <color=#FFFFFF>EX Special Attack</color> and deals <color=#F0D12B>Physical DMG</color>, all squad members gain a buff that increases DMG dealt by <color=#2BAD00>16.1%</color> for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional <color=#2BAD00>13%</color> ATK. Only one instance of this effect can exist in the same squad.",
+      "name": "Decibel Monologue"
+    },
+    "4": {
+      "desc": "While not the active character, the equipper's Energy Regen increases by <color=#2BAD00>0.87</color>/s. When the equipper uses an <color=#FFFFFF>EX Special Attack</color> and deals <color=#F0D12B>Physical DMG</color>, all squad members gain a buff that increases DMG dealt by <color=#2BAD00>17.9%</color> for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional <color=#2BAD00>14.5%</color> ATK. Only one instance of this effect can exist in the same squad.",
+      "name": "Decibel Monologue"
+    },
+    "5": {
+      "desc": "While not the active character, the equipper's Energy Regen increases by <color=#2BAD00>0.96</color>/s. When the equipper uses an <color=#FFFFFF>EX Special Attack</color> and deals <color=#F0D12B>Physical DMG</color>, all squad members gain a buff that increases DMG dealt by <color=#2BAD00>20%</color> for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional <color=#2BAD00>16%</color> ATK. Only one instance of this effect can exist in the same squad.",
+      "name": "Decibel Monologue"
+    }
+  },
+  "weaponType": {
+    "4": "Support"
+  }
+}

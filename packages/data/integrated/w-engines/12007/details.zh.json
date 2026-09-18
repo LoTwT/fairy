@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "拥有特殊运算电路的蓄能型音擎，可收集逸散的能量，并在积蓄到一定程度后瞬间释放，达到额外的冲击效果。虽然无法控制什么时候释放能量，但当它生效时，总能给装备者带来抽奖中签般的快乐。",
+  "desc2": "装备后可提升[击破]代理人的战斗能力",
+  "desc3": "拥有特殊运算电路的蓄能型音擎，可收集能量，积蓄到一定程度后瞬间释放。",
+  "id": 12007,
+  "locale": "zh",
+  "name": "「湍流」-铳型",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "攻击力",
+    "name2": "攻击力百分比"
+  },
+  "talents": {
+    "1": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>造成的失衡值提升<color=#2BAD00>10%</color>。",
+      "name": "暗涌"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>造成的失衡值提升<color=#2BAD00>11.5%</color>。",
+      "name": "暗涌"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>造成的失衡值提升<color=#2BAD00>13%</color>。",
+      "name": "暗涌"
+    },
+    "4": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>造成的失衡值提升<color=#2BAD00>14.5%</color>。",
+      "name": "暗涌"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[强化特殊技]</color>造成的失衡值提升<color=#2BAD00>16%</color>。",
+      "name": "暗涌"
+    }
+  },
+  "weaponType": {
+    "2": "击破"
+  }
+}

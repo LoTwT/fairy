@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "It's not surprising when a film student does something outrageous, but this fan of Hollow-themed films from the renowned New Eridu film school still drew a rebuke from W-engine craftsmen: \"You DO know that W-Engines are for sound right, and not visuals?\"",
+  "desc2": "Equip to increase Defense Agents' combat capabilities",
+  "desc3": "Clearly a W-Engine is for sound, and not images. What kind of lunatic genius would insist on stuffing a 16mm film camera into a W-Engine?",
+  "id": 13016,
+  "locale": "en",
+  "name": "Reel Projector",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Impact",
+    "name2": "Impact"
+  },
+  "talents": {
+    "1": {
+      "desc": "When a squad member's HP is greater than or equal to 50%, they take <color=#2BAD00>7.5%</color> less DMG, and <color=#2BAD00>10%</color> less Miasma Contamination. Only one instance of this effect can exist in the same squad.",
+      "name": "Flash Engraving"
+    },
+    "2": {
+      "desc": "When a squad member's HP is greater than or equal to 50%, they take <color=#2BAD00>8.6%</color> less DMG, and <color=#2BAD00>11.5%</color> less Miasma Contamination. Only one instance of this effect can exist in the same squad.",
+      "name": "Flash Engraving"
+    },
+    "3": {
+      "desc": "When a squad member's HP is greater than or equal to 50%, they take <color=#2BAD00>9.7%</color> less DMG, and <color=#2BAD00>13%</color> less Miasma Contamination. Only one instance of this effect can exist in the same squad.",
+      "name": "Flash Engraving"
+    },
+    "4": {
+      "desc": "When a squad member's HP is greater than or equal to 50%, they take <color=#2BAD00>10.8%</color> less DMG, and <color=#2BAD00>14.5%</color> less Miasma Contamination. Only one instance of this effect can exist in the same squad.",
+      "name": "Flash Engraving"
+    },
+    "5": {
+      "desc": "When a squad member's HP is greater than or equal to 50%, they take <color=#2BAD00>12%</color> less DMG, and <color=#2BAD00>16%</color> less Miasma Contamination. Only one instance of this effect can exist in the same squad.",
+      "name": "Flash Engraving"
+    }
+  },
+  "weaponType": {
+    "5": "Defense"
+  }
+}

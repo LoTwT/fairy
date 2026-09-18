@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "A W-Engine that prioritizes damage output over noise reduction. It can indiscriminately deal considerable damage to all units nearby. Its designer compares it to the full moon. Bright moonlight can interrupt people's sleep, and nothing can be done about it. But the moonlight does not bother anyone on purpose — you just have to get used to it.",
+  "desc2": "Equip to increase Attack Agents' combat capabilities",
+  "desc3": "A W-Engine that prioritizes damage output over noise reduction. It can indiscriminately deal considerable damage to all units nearby.",
+  "id": 12001,
+  "locale": "en",
+  "name": "[Lunar] Pleniluna",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "ATK",
+    "name2": "Percent ATK"
+  },
+  "talents": {
+    "1": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dash Attack</color>, and <color=#FFFFFF>Dodge Counter</color> DMG increases by <color=#2BAD00>12%</color>.",
+      "name": "Full Moon"
+    },
+    "2": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dash Attack</color>, and <color=#FFFFFF>Dodge Counter</color> DMG increases by <color=#2BAD00>14%</color>.",
+      "name": "Full Moon"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dash Attack</color>, and <color=#FFFFFF>Dodge Counter</color> DMG increases by <color=#2BAD00>16%</color>.",
+      "name": "Full Moon"
+    },
+    "4": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dash Attack</color>, and <color=#FFFFFF>Dodge Counter</color> DMG increases by <color=#2BAD00>18%</color>.",
+      "name": "Full Moon"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dash Attack</color>, and <color=#FFFFFF>Dodge Counter</color> DMG increases by <color=#2BAD00>20%</color>.",
+      "name": "Full Moon"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

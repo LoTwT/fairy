@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Goodbye to the fate of the past, goodbye to the childhood that slipped away so quickly, goodbye to my father's embrace and my mother's smile, goodbye to the claws and the stripes, goodbye to the unmoving mountains and the clouds that never linger, goodbye to my mentor and old friends, goodbye to me, goodbye to me.\nAs long as the world remembers, I once roared with courage.\n\n<color=#959595>\"Never fear! Your senior is here!\" —  Fufu's line when coming to the rescue.</color>",
+  "desc2": "Equip to increase Stun Agents' combat capabilities",
+  "desc3": "The warm fire blazes through the long night, casting light on the tiger's roar in my heart.",
+  "id": 14139,
+  "locale": "en",
+  "name": "Roaring Fur-nace",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "ATK",
+    "name2": "Percent ATK"
+  },
+  "talents": {
+    "1": {
+      "desc": "The Daze dealt by the equipper's <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, and <color=#FFFFFF>Ultimate</color> increases by <color=#2BAD00>28%</color>.\nWhen using a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color> to deal <color=#FF5521>Fire DMG</color>, the DMG dealt by all squad members increases by <color=#2BAD00>10%</color>, stacking up to 2 times and lasting 30s. The duration of each stack is calculated separately. Triggers once per use of a skill. Only one instance of this effect can exist in the same squad.",
+      "name": "Tiger Spirit Rising"
+    },
+    "2": {
+      "desc": "The Daze dealt by the equipper's <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, and <color=#FFFFFF>Ultimate</color> increases by <color=#2BAD00>32.2%</color>.\nWhen using a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color> to deal <color=#FF5521>Fire DMG</color>, the DMG dealt by all squad members increases by <color=#2BAD00>11.5%</color>, stacking up to 2 times and lasting 30s. The duration of each stack is calculated separately. Triggers once per use of a skill. Only one instance of this effect can exist in the same squad.",
+      "name": "Tiger Spirit Rising"
+    },
+    "3": {
+      "desc": "The Daze dealt by the equipper's <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, and <color=#FFFFFF>Ultimate</color> increases by <color=#2BAD00>36.4%</color>.\nWhen using a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color> to deal <color=#FF5521>Fire DMG</color>, the DMG dealt by all squad members increases by <color=#2BAD00>13%</color>, stacking up to 2 times and lasting 30s. The duration of each stack is calculated separately. Triggers once per use of a skill. Only one instance of this effect can exist in the same squad.",
+      "name": "Tiger Spirit Rising"
+    },
+    "4": {
+      "desc": "The Daze dealt by the equipper's <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, and <color=#FFFFFF>Ultimate</color> increases by <color=#2BAD00>40.6%</color>.\nWhen using a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color> to deal <color=#FF5521>Fire DMG</color>, the DMG dealt by all squad members increases by <color=#2BAD00>14.5%</color>, stacking up to 2 times and lasting 30s. The duration of each stack is calculated separately. Triggers once per use of a skill. Only one instance of this effect can exist in the same squad.",
+      "name": "Tiger Spirit Rising"
+    },
+    "5": {
+      "desc": "The Daze dealt by the equipper's <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, and <color=#FFFFFF>Ultimate</color> increases by <color=#2BAD00>44.8%</color>.\nWhen using a <color=#FFFFFF>Chain Attack</color> or <color=#FFFFFF>Ultimate</color> to deal <color=#FF5521>Fire DMG</color>, the DMG dealt by all squad members increases by <color=#2BAD00>16%</color>, stacking up to 2 times and lasting 30s. The duration of each stack is calculated separately. Triggers once per use of a skill. Only one instance of this effect can exist in the same squad.",
+      "name": "Tiger Spirit Rising"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

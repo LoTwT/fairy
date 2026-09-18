@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "握紧彷徨的理想。\n在荒蛮的红土上奔走、呼喊，而后沉眠，醒来时就已经长大。\n选择自缚的镣铐。\n作一柄利刃苟活，调查、审讯、追猎，无穷无尽，麻木冰凉。\n等待应许的裁决。\n撷腐烂的新蕊一道踏入冬天，直至迎接生命最后的希望——死亡，温暖、安详。",
+  "desc2": "装备后可提升[异常]代理人的战斗能力",
+  "desc3": "执行裁决，直至迎接终末。",
+  "id": 14154,
+  "locale": "zh",
+  "name": "朔月裁霜",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "异常掌控",
+    "name2": "异常掌控"
+  },
+  "talents": {
+    "1": {
+      "desc": "<color=#98EFF0>冰属性</color>的装备者发动<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[强化特殊技]</color>时，自身造成的<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>20%</color>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者造成的<color=#FFFFFF>[异放]</color>伤害额外提升<color=#2BAD00>35%</color>。",
+      "name": "终末裁决"
+    },
+    "2": {
+      "desc": "<color=#98EFF0>冰属性</color>的装备者发动<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[强化特殊技]</color>时，自身造成的<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>23%</color>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者造成的<color=#FFFFFF>[异放]</color>伤害额外提升<color=#2BAD00>38.5%</color>。",
+      "name": "终末裁决"
+    },
+    "3": {
+      "desc": "<color=#98EFF0>冰属性</color>的装备者发动<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[强化特殊技]</color>时，自身造成的<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>26%</color>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者造成的<color=#FFFFFF>[异放]</color>伤害额外提升<color=#2BAD00>42%</color>。",
+      "name": "终末裁决"
+    },
+    "4": {
+      "desc": "<color=#98EFF0>冰属性</color>的装备者发动<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[强化特殊技]</color>时，自身造成的<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>29%</color>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者造成的<color=#FFFFFF>[异放]</color>伤害额外提升<color=#2BAD00>45.5%</color>。",
+      "name": "终末裁决"
+    },
+    "5": {
+      "desc": "<color=#98EFF0>冰属性</color>的装备者发动<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[强化特殊技]</color>时，自身造成的<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>32%</color>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者造成的<color=#FFFFFF>[异放]</color>伤害额外提升<color=#2BAD00>50%</color>。",
+      "name": "终末裁决"
+    }
+  },
+  "weaponType": {
+    "3": "异常"
+  }
+}

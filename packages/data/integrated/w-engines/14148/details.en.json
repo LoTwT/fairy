@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Riiiing, riiing — every missed call from the Hollows will be answered by Krampus' top-tier customer service!\nThat playful line hardly captures the weight of old obsessions, grudges, and regrets carried through those calls. But in truth, it's the most earnest vow of one prepared to bear that burden.\n\n<color=#959595>\"Everyone else enters the Hollow armed to the teeth. Why am I the one carrying a bunch of phones?\" —Dialyn, venting to her boss about her assigned gear.</color>",
+  "desc2": "Equip to increase Stun Agents' combat capabilities",
+  "desc3": "That call you never picked up... she's the one who answered it.",
+  "id": 14148,
+  "locale": "en",
+  "name": "Yesterday Calls",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "CRIT Rate",
+    "name2": "CRIT Rate"
+  },
+  "talents": {
+    "1": {
+      "desc": "While off-field, the equipper's Energy Regen increases by <color=#2BAD00>1.5</color>/s. When the equipper deals <color=#F0D12B>Physical DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, the Daze dealt by the equipper's attacks increases by <color=#2BAD00>9%</color> for 10s, stacking up to 3 times. At 3 stacks, all squad members gain <color=#2BAD00>30%</color> additional CRIT DMG for 40s. Repeated triggers reset the duration. Only one instance of this CRIT DMG boost effect can exist in the same squad.",
+      "name": "24/7"
+    },
+    "2": {
+      "desc": "While off-field, the equipper's Energy Regen increases by <color=#2BAD00>1.7</color>/s. When the equipper deals <color=#F0D12B>Physical DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, the Daze dealt by the equipper's attacks increases by <color=#2BAD00>10.3%</color> for 10s, stacking up to 3 times. At 3 stacks, all squad members gain <color=#2BAD00>34.5%</color> additional CRIT DMG for 40s. Repeated triggers reset the duration. Only one instance of this CRIT DMG boost effect can exist in the same squad.",
+      "name": "24/7"
+    },
+    "3": {
+      "desc": "While off-field, the equipper's Energy Regen increases by <color=#2BAD00>1.9</color>/s. When the equipper deals <color=#F0D12B>Physical DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, the Daze dealt by the equipper's attacks increases by <color=#2BAD00>11.7%</color> for 10s, stacking up to 3 times. At 3 stacks, all squad members gain <color=#2BAD00>39%</color> additional CRIT DMG for 40s. Repeated triggers reset the duration. Only one instance of this CRIT DMG boost effect can exist in the same squad.",
+      "name": "24/7"
+    },
+    "4": {
+      "desc": "While off-field, the equipper's Energy Regen increases by <color=#2BAD00>2.1</color>/s. When the equipper deals <color=#F0D12B>Physical DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, the Daze dealt by the equipper's attacks increases by <color=#2BAD00>13%</color> for 10s, stacking up to 3 times. At 3 stacks, all squad members gain <color=#2BAD00>43.5%</color> additional CRIT DMG for 40s. Repeated triggers reset the duration. Only one instance of this CRIT DMG boost effect can exist in the same squad.",
+      "name": "24/7"
+    },
+    "5": {
+      "desc": "While off-field, the equipper's Energy Regen increases by <color=#2BAD00>2.3</color>/s. When the equipper deals <color=#F0D12B>Physical DMG</color> with an <color=#FFFFFF>EX Special Attack</color>, the Daze dealt by the equipper's attacks increases by <color=#2BAD00>14.5%</color> for 10s, stacking up to 3 times. At 3 stacks, all squad members gain <color=#2BAD00>48%</color> additional CRIT DMG for 40s. Repeated triggers reset the duration. Only one instance of this CRIT DMG boost effect can exist in the same squad.",
+      "name": "24/7"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

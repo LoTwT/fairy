@@ -31,7 +31,7 @@ export const legacyProtocol = "fairy-nanoka-current/1"
 
 /**
  * 通用事务协议测试的稳定最小类别集合：代理人加合成第二类别（widgets）。
- * 生产登记表（agents + drive-discs）的接入行为由显式标记的用例与 CLI、发布链路测试覆盖，
+ * 生产登记表（agents + drive-discs + w-engines）的接入行为由显式标记的用例与 CLI、发布链路测试覆盖，
  * 这样新增生产类别不会放大全部协议测试的准备成本。
  */
 export const syntheticEntityRegistry = [
@@ -51,7 +51,7 @@ export interface CurrentDatasetFixture {
   policy: SourcePolicy
 }
 
-/** 合成数据集选项：默认最小合成集合；显式 production 使用生产登记表与驱动盘输入。 */
+/** 合成数据集选项：默认最小合成集合；显式 production 使用生产登记表与驱动盘、WEngine 输入。 */
 export interface CurrentDatasetFixtureOptions {
   production?: boolean
   widgetIds?: readonly string[]

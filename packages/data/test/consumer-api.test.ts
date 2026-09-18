@@ -1,5 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
-import type { AgentName, DetailLocale, DriveDiscName } from "../src/index.ts"
+import type {
+  AgentName,
+  DetailLocale,
+  DriveDiscName,
+  WEngineName,
+} from "../src/index.ts"
 import { supportedLanguages } from "../src/nanoka-identity.ts"
 
 const loaders = vi.hoisted(() => ({
@@ -16,6 +21,12 @@ const loaders = vi.hoisted(() => ({
   otherDiscData: vi.fn(),
   otherDiscZh: vi.fn(),
   otherDiscEn: vi.fn(),
+  wEngineData: vi.fn(),
+  wEngineZh: vi.fn(),
+  wEngineEn: vi.fn(),
+  otherWEngineData: vi.fn(),
+  otherWEngineZh: vi.fn(),
+  otherWEngineEn: vi.fn(),
 }))
 vi.mock("../.generated/catalog.ts", () => ({
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
@@ -48,11 +59,29 @@ vi.mock("../.generated/catalog.ts", () => ({
       en: loaders.otherDiscEn,
     },
   },
+  wEngineNames: Object.freeze(["[Lunar] Pleniluna", "[Reverb] Mark I"]),
+  wEngineSourceIds: Object.freeze({
+    "[Lunar] Pleniluna": "12001",
+    "[Reverb] Mark I": "12004",
+  }),
+  wEngineLoaders: {
+    "12001": {
+      data: loaders.wEngineData,
+      zh: loaders.wEngineZh,
+      en: loaders.wEngineEn,
+    },
+    "12004": {
+      data: loaders.otherWEngineData,
+      zh: loaders.otherWEngineZh,
+      en: loaders.otherWEngineEn,
+    },
+  },
   indexLoader: loaders.index,
 }))
 import {
   agentNames,
   driveDiscNames,
+  wEngineNames,
   loadIndex,
   loadAgentData,
   loadAgentDetails,
@@ -60,6 +89,9 @@ import {
   loadDriveDiscData,
   loadDriveDiscDetails,
   loadAllDriveDiscs,
+  loadWEngineData,
+  loadWEngineDetails,
+  loadAllWEngines,
 } from "../src/index.ts"
 
 /** 代理人与驱动盘读取共享的成员档案：嵌套未知字段用于对象隔离检查。 */
@@ -108,6 +140,63 @@ function mockMemberRecords() {
       desc2: "original two-piece",
       desc4: "original four-piece",
       story: "original story",
+      extra: { entries: ["original"] },
+    })
+  }
+  for (const [data, zh, en, id] of [
+    [loaders.wEngineData, loaders.wEngineZh, loaders.wEngineEn, 12001],
+    [
+      loaders.otherWEngineData,
+      loaders.otherWEngineZh,
+      loaders.otherWEngineEn,
+      12004,
+    ],
+  ] as const) {
+    data.mockResolvedValue({
+      id,
+      codeName: `Weapon_Example_${id}`,
+      rarity: 2,
+      icon: "icon.png",
+      level: { "0": { exp: 30, rate: 0, rate2: 10000 } },
+      stars: { "0": { starRate: 0, randRate: 0 } },
+      materials: "10:7200",
+      baseProperty: { value: 32 },
+      randProperty: { value: 800 },
+      classificationIds: { weaponType: ["1"] },
+      unknown: { tags: ["original"] },
+    })
+    zh.mockResolvedValue({
+      id,
+      locale: "zh",
+      name: "「月相」-望",
+      desc: "原文介绍",
+      desc2: "原文说明二",
+      desc3: "原文说明三",
+      weaponType: { "1": "强攻" },
+      baseProperty: {
+        name: "基础攻击力",
+        name2: "基础攻击力",
+        format: "{0:0.#}",
+      },
+      randProperty: {
+        name: "攻击力",
+        name2: "攻击力百分比",
+        format: "{0:0.#%}",
+      },
+      talents: { "1": { name: "满月", desc: "原文天赋" } },
+      extra: { entries: ["原文"] },
+    })
+    en.mockResolvedValue({
+      id,
+      locale: "en",
+      name: "English W-Engine",
+      desc: "original introduction",
+      desc2: "original description two",
+      desc3: "original description three",
+      weaponType: { "1": "Attack" },
+      baseProperty: { name: "Base ATK", name2: "Base ATK", format: "{0:0.#}" },
+      randProperty: { name: "ATK", name2: "Percent ATK", format: "{0:0.#%}" },
+      talents: { "1": { name: "Full Moon", desc: "original talent" } },
       extra: { entries: ["original"] },
     })
   }
@@ -162,10 +251,28 @@ describe("public readers", () => {
       if (key !== "discData" && key !== "otherDiscEn")
         expect(loader).not.toHaveBeenCalled()
   })
+  it("loads only the requested WEngine data/locale without prerequisites or other categories", async () => {
+    expect(await loadWEngineData("[Lunar] Pleniluna")).toMatchObject({
+      id: 12001,
+    })
+    expect(loaders.index).not.toHaveBeenCalled()
+    expect(loaders.wEngineZh).not.toHaveBeenCalled()
+    expect(loaders.wEngineEn).not.toHaveBeenCalled()
+    expect(await loadWEngineDetails("[Reverb] Mark I", "en")).toMatchObject({
+      id: 12004,
+      locale: "en",
+    })
+    expect(loaders.otherWEngineData).not.toHaveBeenCalled()
+    expect(loaders.otherWEngineZh).not.toHaveBeenCalled()
+    for (const [key, loader] of Object.entries(loaders))
+      if (key !== "wEngineData" && key !== "otherWEngineEn")
+        expect(loader).not.toHaveBeenCalled()
+  })
   it.each([
     "unknown",
     "1311",
     "31000",
+    "12001",
     "astra yao",
     " Astra Yao",
     "Astra Yao ",
@@ -179,6 +286,8 @@ describe("public readers", () => {
     expect(
       await loadDriveDiscDetails(name as DriveDiscName, "zh"),
     ).toBeUndefined()
+    expect(await loadWEngineData(name as WEngineName)).toBeUndefined()
+    expect(await loadWEngineDetails(name as WEngineName, "zh")).toBeUndefined()
     for (const loader of Object.values(loaders))
       expect(loader).not.toHaveBeenCalled()
   })
@@ -187,6 +296,7 @@ describe("public readers", () => {
     null,
     1311,
     31000,
+    12001,
     {},
     ["Astra Yao"],
     new String("Astra Yao"),
@@ -196,6 +306,8 @@ describe("public readers", () => {
       () => loadAgentDetails(name as AgentName, "zh"),
       () => loadDriveDiscData(name as DriveDiscName),
       () => loadDriveDiscDetails(name as DriveDiscName, "zh"),
+      () => loadWEngineData(name as WEngineName),
+      () => loadWEngineDetails(name as WEngineName, "zh"),
     ])
       await expect(read()).rejects.toBeInstanceOf(TypeError)
   })
@@ -216,6 +328,12 @@ describe("public readers", () => {
       ).rejects.toBeInstanceOf(TypeError)
       await expect(
         loadAllDriveDiscs(locale as DetailLocale),
+      ).rejects.toBeInstanceOf(TypeError)
+      await expect(
+        loadWEngineDetails("unknown" as WEngineName, locale as DetailLocale),
+      ).rejects.toBeInstanceOf(TypeError)
+      await expect(
+        loadAllWEngines(locale as DetailLocale),
       ).rejects.toBeInstanceOf(TypeError)
       for (const loader of Object.values(loaders))
         expect(loader).not.toHaveBeenCalled()
@@ -261,9 +379,37 @@ describe("public readers", () => {
       expect(
         loaders[locale === "zh" ? "discEn" : "discZh"],
       ).not.toHaveBeenCalled()
-      // 驱动盘全量不得顺带加载代理人或索引。
+      // 驱动盘全量不得顺带加载代理人、WEngine 或索引。
       for (const [key, loader] of Object.entries(loaders))
-        if (!key.toLowerCase().includes("disc"))
+        if (
+          !key.toLowerCase().includes("disc") &&
+          !key.toLowerCase().includes("wengine")
+        )
+          expect(loader).not.toHaveBeenCalled()
+    },
+  )
+  it.each(supportedLanguages)(
+    "loads the full separated WEngine %s view with English keys",
+    async (locale) => {
+      const all = await loadAllWEngines(locale)
+      expect(Object.keys(all)).toEqual(wEngineNames)
+      expect(Object.keys(all["[Lunar] Pleniluna"])).toEqual(["data", "details"])
+      expect(all["[Lunar] Pleniluna"].details.locale).toBe(locale)
+      expect(loaders.index).not.toHaveBeenCalled()
+      expect(loaders.wEngineData).toHaveBeenCalledTimes(1)
+      expect(loaders.otherWEngineData).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "wEngineZh" : "wEngineEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "otherWEngineZh" : "otherWEngineEn"],
+      ).toHaveBeenCalledTimes(1)
+      expect(
+        loaders[locale === "zh" ? "wEngineEn" : "wEngineZh"],
+      ).not.toHaveBeenCalled()
+      // WEngine 全量不得顺带加载代理人、驱动盘或索引。
+      for (const [key, loader] of Object.entries(loaders))
+        if (!key.toLowerCase().includes("wengine"))
           expect(loader).not.toHaveBeenCalled()
     },
   )
@@ -321,6 +467,33 @@ describe("public readers", () => {
     })
     expect(() => (driveDiscNames as DriveDiscName[]).pop()).toThrow(TypeError)
   })
+  it("isolates WEngine mutations across sequential/concurrent and full/single calls", async () => {
+    const [one, two] = await Promise.all([
+      loadWEngineData("[Lunar] Pleniluna"),
+      loadWEngineData("[Lunar] Pleniluna"),
+    ])
+    ;(one!.unknown as { tags: string[] }).tags.push("changed")
+    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.level["0"].exp = 0
+    expect((await loadWEngineData("[Lunar] Pleniluna"))!.level["0"].exp).toBe(
+      30,
+    )
+    const details = await loadWEngineDetails("[Lunar] Pleniluna", "zh")
+    ;(details!.extra as any).entries.push("changed")
+    const all = await loadAllWEngines("zh")
+    expect((all["[Lunar] Pleniluna"].details.extra as any).entries).toEqual([
+      "原文",
+    ])
+    ;(all["[Lunar] Pleniluna"].data.unknown as { tags: string[] }).tags.push(
+      "changed",
+    )
+    ;(all["[Lunar] Pleniluna"].details.extra as any).entries.push("changed")
+    expect((await loadAllWEngines("zh"))["[Lunar] Pleniluna"]).toEqual({
+      data: two,
+      details: await loadWEngineDetails("[Lunar] Pleniluna", "zh"),
+    })
+    expect(() => (wEngineNames as WEngineName[]).pop()).toThrow(TypeError)
+  })
   it.each([
     new Error("missing file"),
     new SyntaxError("invalid JSON"),
@@ -331,6 +504,8 @@ describe("public readers", () => {
     loaders.zh.mockRejectedValue(error)
     loaders.discData.mockRejectedValue(error)
     loaders.discZh.mockRejectedValue(error)
+    loaders.wEngineData.mockRejectedValue(error)
+    loaders.wEngineZh.mockRejectedValue(error)
     await expect(loadIndex()).rejects.toBe(error)
     await expect(loadAgentData("Astra Yao")).rejects.toBe(error)
     await expect(loadAgentDetails("Astra Yao", "zh")).rejects.toBe(error)
@@ -340,6 +515,11 @@ describe("public readers", () => {
       error,
     )
     await expect(loadAllDriveDiscs("zh")).rejects.toBe(error)
+    await expect(loadWEngineData("[Lunar] Pleniluna")).rejects.toBe(error)
+    await expect(loadWEngineDetails("[Lunar] Pleniluna", "zh")).rejects.toBe(
+      error,
+    )
+    await expect(loadAllWEngines("zh")).rejects.toBe(error)
   })
   it("rejects the full view if a later member's necessary detail fails", async () => {
     const agentError = new Error("missing later member")
@@ -348,5 +528,8 @@ describe("public readers", () => {
     const discError = new Error("missing later drive disc")
     loaders.otherDiscEn.mockRejectedValue(discError)
     await expect(loadAllDriveDiscs("en")).rejects.toBe(discError)
+    const wEngineError = new Error("missing later WEngine")
+    loaders.otherWEngineEn.mockRejectedValue(wEngineError)
+    await expect(loadAllWEngines("en")).rejects.toBe(wEngineError)
   })
 })

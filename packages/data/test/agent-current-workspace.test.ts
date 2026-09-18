@@ -17,7 +17,7 @@ import { runDataCli } from "./fixtures/data-cli.ts"
 
 /**
  * 工作区命令：显式 pnpm 脚本、工作区 format/format:check 与受管理数据的隔离。
- * 这些用例走真实 CLI 与真实 oxfmt，保持生产登记表（agents + drive-discs）覆盖；
+ * 这些用例走真实 CLI 与真实 oxfmt，保持生产登记表（agents + drive-discs + w-engines）覆盖；
  * 同一份制品字节会在真实 CLI 与工作区命令之间比较，因此保留真实格式化调用。
  */
 vi.mock("../scripts/nanoka-integration/format.ts", async (original) => ({
@@ -59,7 +59,7 @@ describe("current workspace commands", () => {
       expect(result.status, result.stderr).toBe(0)
       expect(JSON.parse(result.stdout)).toMatchObject({
         outcome: "unchanged",
-        reusedEntityFiles: 12,
+        reusedEntityFiles: 18,
         changedEntityFiles: 0,
       })
       expect(await fingerprints(input.targetDirectory)).toEqual(before)

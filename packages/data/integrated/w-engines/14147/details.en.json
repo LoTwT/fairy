@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "The Vajra with unquenchable rage — surely there's more to their cruelty than this. The warrior as steadfast as a mountain — surely there's more to their purity than this. The ascetic with a heart of flame — surely there's more to their suffering than this.\n\n<color=#959595>\"The craftsman was really fixated on the design of the lion's head... He said all the anger and courage were hidden in those eyes.\"\n—Banyue, who can't help but think the W-Engine looks a bit too much like himself.</color>",
+  "desc2": "Equip to increase Rupture Agents' combat capabilities",
+  "desc3": "The purging flames burned a hundred times, yet never cleansed me.",
+  "id": 14147,
+  "locale": "en",
+  "name": "Wrathful Vajra",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "HP",
+    "name2": "Percent HP"
+  },
+  "talents": {
+    "1": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>20%</color>. When the equipper launches an <color=#FFFFFF>EX Special Attack</color>, their <color=#FF5521>Fire Sheer DMG</color> increases by <color=#2BAD00>9%</color>, stacking up to 2 times and lasting 20s. The duration of each stack is calculated separately.",
+      "name": "Purging Karmic Fire"
+    },
+    "2": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>23%</color>. When the equipper launches an <color=#FFFFFF>EX Special Attack</color>, their <color=#FF5521>Fire Sheer DMG</color> increases by <color=#2BAD00>10.35%</color>, stacking up to 2 times and lasting 20s. The duration of each stack is calculated separately.",
+      "name": "Purging Karmic Fire"
+    },
+    "3": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>26%</color>. When the equipper launches an <color=#FFFFFF>EX Special Attack</color>, their <color=#FF5521>Fire Sheer DMG</color> increases by <color=#2BAD00>11.7%</color>, stacking up to 2 times and lasting 20s. The duration of each stack is calculated separately.",
+      "name": "Purging Karmic Fire"
+    },
+    "4": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>29%</color>. When the equipper launches an <color=#FFFFFF>EX Special Attack</color>, their <color=#FF5521>Fire Sheer DMG</color> increases by <color=#2BAD00>13.05%</color>, stacking up to 2 times and lasting 20s. The duration of each stack is calculated separately.",
+      "name": "Purging Karmic Fire"
+    },
+    "5": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>32%</color>. When the equipper launches an <color=#FFFFFF>EX Special Attack</color>, their <color=#FF5521>Fire Sheer DMG</color> increases by <color=#2BAD00>14.4%</color>, stacking up to 2 times and lasting 20s. The duration of each stack is calculated separately.",
+      "name": "Purging Karmic Fire"
+    }
+  },
+  "weaponType": {
+    "6": "Rupture"
+  }
+}

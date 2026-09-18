@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "如果归于寂静的暴烈，仍然拥有拯救某人的力量——匣中鸣响的故剑，提示着那从不令人怀念的「美好」旧时光。\n\n<color=#959595>「猫又，把它放下。不，没有什么秘密…妮可，请听我解释，是她先动手的…」——安比，只是狡兔屋平凡的一天</color>",
+  "desc2": "装备后可提升[强攻]代理人的战斗能力",
+  "desc3": "白银之白非纯真。过往的利刃，能否斩断因缘？",
+  "id": 14138,
+  "locale": "zh",
+  "name": "牺牲洁纯",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "暴击伤害",
+    "name2": "暴击伤害"
+  },
+  "talents": {
+    "1": {
+      "desc": "暴击伤害提升<color=#2BAD00>30%</color>；装备者发动<color=#FFFFFF>[普通攻击]</color> 、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[追加攻击]</color>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<color=#2BAD00>10%</color>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>20%</color>。",
+      "name": "光静花冷"
+    },
+    "2": {
+      "desc": "暴击伤害提升<color=#2BAD00>34.5%</color>；装备者发动<color=#FFFFFF>[普通攻击]</color> 、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[追加攻击]</color>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<color=#2BAD00>11.5%</color>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>23%</color>。",
+      "name": "光静花冷"
+    },
+    "3": {
+      "desc": "暴击伤害提升<color=#2BAD00>39%</color>；装备者发动<color=#FFFFFF>[普通攻击]</color> 、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[追加攻击]</color>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<color=#2BAD00>13%</color>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>26%</color>。",
+      "name": "光静花冷"
+    },
+    "4": {
+      "desc": "暴击伤害提升<color=#2BAD00>43.5%</color>；装备者发动<color=#FFFFFF>[普通攻击]</color> 、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[追加攻击]</color>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<color=#2BAD00>14.5%</color>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>29%</color>。",
+      "name": "光静花冷"
+    },
+    "5": {
+      "desc": "暴击伤害提升<color=#2BAD00>48%</color>；装备者发动<color=#FFFFFF>[普通攻击]</color> 、<color=#FFFFFF>[特殊技]</color>或<color=#FFFFFF>[追加攻击]</color>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<color=#2BAD00>16%</color>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>32%</color>。",
+      "name": "光静花冷"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

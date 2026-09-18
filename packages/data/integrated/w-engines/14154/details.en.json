@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Clutching a wavering ideal.\nRunning and shouting across the barren red earth, then falling into sleep, only to wake up grown.\nChoosing chains of one's own making.\nLiving on as a blade, scraping by. Investigating, interrogating, hunting... endless, numb, cold.\nWaiting for the promised judgment.\nPlucking a rotting new bud and stepping into winter, until at last welcoming life's final hope... death, warm and peaceful.",
+  "desc2": "Equip to increase Anomaly Agents' combat capabilities",
+  "desc3": "Carry out judgment until the end comes.",
+  "id": 14154,
+  "locale": "en",
+  "name": "Frostfall Sickle",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Anomaly Mastery",
+    "name2": "Anomaly Mastery"
+  },
+  "talents": {
+    "1": {
+      "desc": "When an <color=#98EFF0>Ice attribute</color> equipper uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, their <color=#98EFF0>Ice DMG</color> is increased by <color=#2BAD00>20%</color> for 40s, stacking up to 2 times, once per use of a skill. Repeated triggers refresh the duration. At 2 stacks, the equipper's <color=#FFFFFF>Abloom</color> DMG dealt is increased by an additional <color=#2BAD00>35%</color>.",
+      "name": "Terminating Verdict"
+    },
+    "2": {
+      "desc": "When an <color=#98EFF0>Ice attribute</color> equipper uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, their <color=#98EFF0>Ice DMG</color> is increased by <color=#2BAD00>23%</color> for 40s, stacking up to 2 times, once per use of a skill. Repeated triggers refresh the duration. At 2 stacks, the equipper's <color=#FFFFFF>Abloom</color> DMG dealt is increased by an additional <color=#2BAD00>38.5%</color>.",
+      "name": "Terminating Verdict"
+    },
+    "3": {
+      "desc": "When an <color=#98EFF0>Ice attribute</color> equipper uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, their <color=#98EFF0>Ice DMG</color> is increased by <color=#2BAD00>26%</color> for 40s, stacking up to 2 times, once per use of a skill. Repeated triggers refresh the duration. At 2 stacks, the equipper's <color=#FFFFFF>Abloom</color> DMG dealt is increased by an additional <color=#2BAD00>42%</color>.",
+      "name": "Terminating Verdict"
+    },
+    "4": {
+      "desc": "When an <color=#98EFF0>Ice attribute</color> equipper uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, their <color=#98EFF0>Ice DMG</color> is increased by <color=#2BAD00>29%</color> for 40s, stacking up to 2 times, once per use of a skill. Repeated triggers refresh the duration. At 2 stacks, the equipper's <color=#FFFFFF>Abloom</color> DMG dealt is increased by an additional <color=#2BAD00>45.5%</color>.",
+      "name": "Terminating Verdict"
+    },
+    "5": {
+      "desc": "When an <color=#98EFF0>Ice attribute</color> equipper uses a <color=#FFFFFF>Special Attack</color> or <color=#FFFFFF>EX Special Attack</color>, their <color=#98EFF0>Ice DMG</color> is increased by <color=#2BAD00>32%</color> for 40s, stacking up to 2 times, once per use of a skill. Repeated triggers refresh the duration. At 2 stacks, the equipper's <color=#FFFFFF>Abloom</color> DMG dealt is increased by an additional <color=#2BAD00>50%</color>.",
+      "name": "Terminating Verdict"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

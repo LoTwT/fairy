@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "特制的大功率变温型音擎，能利用自身的降温功能快速冻结周围的物体；虽然它兼具极强的制冷能力与输出功率，是一款性能绝佳的战术音擎，不过对于艾莲来说，它最主要的用途是往开口处放入冰块，削成刨冰。\n\n<color=#959595>「我想把它带去学校用。尤其是夏天。但是莱卡恩和丽娜不允许…真麻烦。」——艾莲，一边吃冰一边摇头</color>",
+  "desc2": "装备后可提升[强攻]代理人的战斗能力",
+  "desc3": "特制的大功率变温型音擎，兼具极强的制冷能力与输出功率，是艾莲惯用的音擎款式。",
+  "id": 14119,
+  "locale": "zh",
+  "name": "深海访客",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "暴击率",
+    "name2": "暴击率"
+  },
+  "talents": {
+    "1": {
+      "desc": "<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>25%</color>；<color=#FFFFFF>[普通攻击]</color>命中敌人时，装备者的暴击率提升<color=#2BAD00>10%</color>，持续8秒；<color=#FFFFFF>[冲刺攻击]</color>造成<color=#98EFF0>冰属性伤害</color>时，装备者的暴击率额外提升<color=#2BAD00>10%</color>，持续15秒，每种增益效果单独结算持续时间。",
+      "name": "诸洋之王"
+    },
+    "2": {
+      "desc": "<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>31.5%</color>；<color=#FFFFFF>[普通攻击]</color>命中敌人时，装备者的暴击率提升<color=#2BAD00>12.5%</color>，持续8秒；<color=#FFFFFF>[冲刺攻击]</color>造成<color=#98EFF0>冰属性伤害</color>时，装备者的暴击率额外提升<color=#2BAD00>12.5%</color>，持续15秒，每种增益效果单独结算持续时间。",
+      "name": "诸洋之王"
+    },
+    "3": {
+      "desc": "<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>38%</color>；<color=#FFFFFF>[普通攻击]</color>命中敌人时，装备者的暴击率提升<color=#2BAD00>15%</color>，持续8秒；<color=#FFFFFF>[冲刺攻击]</color>造成<color=#98EFF0>冰属性伤害</color>时，装备者的暴击率额外提升<color=#2BAD00>15%</color>，持续15秒，每种增益效果单独结算持续时间。",
+      "name": "诸洋之王"
+    },
+    "4": {
+      "desc": "<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>44.5%</color>；<color=#FFFFFF>[普通攻击]</color>命中敌人时，装备者的暴击率提升<color=#2BAD00>17.5%</color>，持续8秒；<color=#FFFFFF>[冲刺攻击]</color>造成<color=#98EFF0>冰属性伤害</color>时，装备者的暴击率额外提升<color=#2BAD00>17.5%</color>，持续15秒，每种增益效果单独结算持续时间。",
+      "name": "诸洋之王"
+    },
+    "5": {
+      "desc": "<color=#98EFF0>冰属性伤害</color>提升<color=#2BAD00>50%</color>；<color=#FFFFFF>[普通攻击]</color>命中敌人时，装备者的暴击率提升<color=#2BAD00>20%</color>，持续8秒；<color=#FFFFFF>[冲刺攻击]</color>造成<color=#98EFF0>冰属性伤害</color>时，装备者的暴击率额外提升<color=#2BAD00>20%</color>，持续15秒，每种增益效果单独结算持续时间。",
+      "name": "诸洋之王"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

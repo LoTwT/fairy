@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "From innocence to maturity, from confusion to resolve.\nThe long path ahead stretches on, and she grips her sword and presses forward, walking a path untrodden.\nUntil her blade flashes like a soaring swan, illuminating the clouds above.\n\n<color=#959595>\"Whenever I swing my sword, it grows warm... It's comforting.\" —Ye Shunguang</color>",
+  "desc2": "Equip to increase Attack Agents' combat capabilities",
+  "desc3": "The world may change, but my heart remains constant, like clouds standing eternal.",
+  "id": 14143,
+  "locale": "en",
+  "name": "Cloudcleave Radiance",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "CRIT DMG",
+    "name2": "CRIT DMG"
+  },
+  "talents": {
+    "1": {
+      "desc": "The equipper's DMG ignores <color=#2BAD00>20%</color> of the target's <color=#F0D12B>Physical RES</color>. When the equipper activates an <color=#FFFFFF>Ether Veil</color>, the equipper's DMG increases by <color=#2BAD00>25%</color> and CRIT DMG increases by <color=#2BAD00>25%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Jade Soul, Frozen Heart"
+    },
+    "2": {
+      "desc": "The equipper's DMG ignores <color=#2BAD00>22%</color> of the target's <color=#F0D12B>Physical RES</color>. When the equipper activates an <color=#FFFFFF>Ether Veil</color>, the equipper's DMG increases by <color=#2BAD00>28.7%</color> and CRIT DMG increases by <color=#2BAD00>28.7%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Jade Soul, Frozen Heart"
+    },
+    "3": {
+      "desc": "The equipper's DMG ignores <color=#2BAD00>24%</color> of the target's <color=#F0D12B>Physical RES</color>. When the equipper activates an <color=#FFFFFF>Ether Veil</color>, the equipper's DMG increases by <color=#2BAD00>32.5%</color> and CRIT DMG increases by <color=#2BAD00>32.5%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Jade Soul, Frozen Heart"
+    },
+    "4": {
+      "desc": "The equipper's DMG ignores <color=#2BAD00>26%</color> of the target's <color=#F0D12B>Physical RES</color>. When the equipper activates an <color=#FFFFFF>Ether Veil</color>, the equipper's DMG increases by <color=#2BAD00>36.2%</color> and CRIT DMG increases by <color=#2BAD00>36.2%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Jade Soul, Frozen Heart"
+    },
+    "5": {
+      "desc": "The equipper's DMG ignores <color=#2BAD00>28%</color> of the target's <color=#F0D12B>Physical RES</color>. When the equipper activates an <color=#FFFFFF>Ether Veil</color>, the equipper's DMG increases by <color=#2BAD00>40%</color> and CRIT DMG increases by <color=#2BAD00>40%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Jade Soul, Frozen Heart"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

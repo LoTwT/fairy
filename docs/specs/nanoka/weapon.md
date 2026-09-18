@@ -3,8 +3,10 @@
 ## 状态
 
 - 上游实体：`weapon`
-- 状态：已完成代表性结构调研，可由共享抓取器缓存
-- 当前实现不建立 W-Engines 运行时 schema，也不执行字段级语义验证
+- 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `w-engines` 已按规则
+  `nanoka-w-engine-reference/1` 接入生产快照
+- 抓取器仍不执行 W-Engines 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、共享提取与
+  派生分类见[来源数据整合规范](../data/integration.md#wengine-单实体实现规则-nanoka-w-engine-reference1)
 
 ## 资源
 
@@ -18,6 +20,9 @@ GET https://static.nanoka.cc/zzz/{version}/{language}/weapon/{weaponId}.json
 ## 已观察结构
 
 - 索引是以 W-Engine ID 为 key 的普通对象。
+- 索引记录包含图标编码、稀有度、分类、基础攻击力、副属性显示名、英文说明与 `zh`/`en`/`ja`/`ko` 名称；
+  这些字段与详情是两个独立来源，同名值不要求相等，也不互相回退。整合器登记这组已知顶层字段并对其余字段
+  生成维护诊断，不校验类型或必需性。
 - 详情包含基础信息、等级成长、突破、天赋和材料等嵌套结构。
 - 部分成长数据使用以等级为 key 的对象。
 - 材料字段包含紧凑的上游字符串语法；其中的 Item/Material ID 不属于当前登记实体。
@@ -35,3 +40,10 @@ packages/data/raw/nanoka/{version}/
 ```
 
 缓存只用于本机后续观察或处理，不是完整、不可变或可分发的版本快照。
+
+## 整合
+
+整合类别登记名为 `w-engines`，`data.json` 与 `details.{locale}.json` 的字段归属、共享提取、分类 ID 派生与
+校验边界由[WEngine 单实体实现规则](../data/integration.md#wengine-单实体实现规则-nanoka-w-engine-reference1)
+统一定义。成员集合由选定来源版本 `weapon.json` 的顶层 key 决定，不扫描详情目录推断；本层不解析材料字符串、
+不换算百分比、不解释成长公式或天赋计算效果。

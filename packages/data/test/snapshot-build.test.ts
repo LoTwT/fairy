@@ -8,6 +8,7 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import type { IntegratedSnapshotEntityContract } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import {
   nanokaAgentsSnapshotEntity,
+  nanokaWEnginesSnapshotEntity,
   validateSnapshotEntityContracts,
 } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
@@ -22,6 +23,7 @@ import {
   syntheticEntityRecord,
   syntheticSnapshotEntity,
 } from "./fixtures/snapshot-entities.ts"
+import { writeSyntheticRaw } from "./fixtures/synthetic-dataset.ts"
 
 vi.mock("node:fs/promises", async (importOriginal) => ({
   ...(await importOriginal<typeof import("node:fs/promises")>()),
@@ -1304,6 +1306,77 @@ describe("multi-entity snapshot build input-side coverage", () => {
       }),
     ).resolves.toMatchObject({ format: "fairy-nanoka-integrated/v3" })
   }, 30_000)
+
+  it("records WEngine index diagnostics in the external maintenance report", async () => {
+    const root = await fs.mkdtemp(join(tmpdir(), "fairy-snapshot-build-test-"))
+    temporaryDirectories.push(root)
+    const rawRoot = join(root, "raw", "nanoka")
+    const version = "synthetic-w-engine-diagnostics"
+    const temporaryParent = join(root, "output")
+    await fs.mkdir(temporaryParent)
+    // 最小合成输入：只构建 WEngine 类别，用于证明 index 诊断进入制品外维护报告。
+    await writeSyntheticRaw({
+      rawRoot,
+      version,
+      agentIds: [],
+      driveDiscIds: [],
+      weaponIds: ["940001"],
+    })
+    await edit(join(rawRoot, version, "weapon.json"), (value) => {
+      value["940001"].future_field = { nested: [0, ""] }
+      value["940001"]["a/b~c"] = null
+    })
+    const build = await buildIntegratedSnapshot({
+      rawRoot,
+      version,
+      temporaryParent,
+      entities: [nanokaWEnginesSnapshotEntity],
+    })
+    const member = build.maintenance["w-engines"]?.find(
+      (entry) => entry.memberId === "940001",
+    )
+    expect(member?.maintenance).toEqual({
+      diagnostics: [
+        {
+          entityId: "940001",
+          locale: "index",
+          pointer: "/a~1b~0c",
+          kind: "unknown-field",
+        },
+        {
+          entityId: "940001",
+          locale: "index",
+          pointer: "/future_field",
+          kind: "unknown-field",
+        },
+      ],
+    })
+    expect(
+      JSON.parse(await fs.readFile(build.maintenanceReportPath, "utf8")),
+    ).toEqual({ categories: build.maintenance })
+    // 诊断只登记位置：索引 sourceRecord 完整保留未知字段，实体文件不包含索引字段。
+    const index = JSON.parse(
+      await fs.readFile(join(build.artifactDirectory, "index.json"), "utf8"),
+    )
+    const sourceRecord =
+      index.entities["w-engines"].members["940001"].sourceRecord
+    expect(sourceRecord.future_field).toEqual({ nested: [0, ""] })
+    expect(sourceRecord["a/b~c"]).toBeNull()
+    const data = JSON.parse(
+      await fs.readFile(
+        join(build.artifactDirectory, "w-engines/940001/data.json"),
+        "utf8",
+      ),
+    )
+    expect(Object.hasOwn(data, "future_field")).toBe(false)
+    await expect(
+      verifyIntegratedSnapshot({
+        artifactDirectory: build.artifactDirectory,
+        policy: await loadSourcePolicy(),
+        entities: [nanokaWEnginesSnapshotEntity],
+      }),
+    ).resolves.toMatchObject({ format: "fairy-nanoka-integrated/v3" })
+  })
 
   it("keeps member content, own keys, codeName and maintenance counts exact", async () => {
     const options = await fixture()

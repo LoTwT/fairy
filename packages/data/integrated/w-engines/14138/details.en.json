@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "If a storm subdued still has the power to save a certain person... The ringing of the old sword in its crate speaks of the \"good\" old days that one doesn't want to remember.\n\n<color=#959595>\"Nekomata, put it down. No, there's no secret... Nicole, please let me explain, she was the one who started it...\" — Anby, just a typical day with the Cunning Hares.</color>",
+  "desc2": "Equip to increase Attack Agents' combat capabilities",
+  "desc3": "The sheen of silver is not innocence. Can the blades of the past cut through fate's connections?",
+  "id": 14138,
+  "locale": "en",
+  "name": "Severed Innocence",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "CRIT DMG",
+    "name2": "CRIT DMG"
+  },
+  "talents": {
+    "1": {
+      "desc": "CRIT DMG is increased by <color=#2BAD00>30%</color>. When the equipper lands a hit with a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>Aftershock</color>, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional <color=#2BAD00>10%</color>, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's <color=#2EB6FF>Electric DMG</color> increases by <color=#2BAD00>20%</color>.",
+      "name": "Tranquil Blossom"
+    },
+    "2": {
+      "desc": "CRIT DMG is increased by <color=#2BAD00>34.5%</color>. When the equipper lands a hit with a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>Aftershock</color>, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional <color=#2BAD00>11.5%</color>, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's <color=#2EB6FF>Electric DMG</color> increases by <color=#2BAD00>23%</color>.",
+      "name": "Tranquil Blossom"
+    },
+    "3": {
+      "desc": "CRIT DMG is increased by <color=#2BAD00>39%</color>. When the equipper lands a hit with a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>Aftershock</color>, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional <color=#2BAD00>13%</color>, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's <color=#2EB6FF>Electric DMG</color> increases by <color=#2BAD00>26%</color>.",
+      "name": "Tranquil Blossom"
+    },
+    "4": {
+      "desc": "CRIT DMG is increased by <color=#2BAD00>43.5%</color>. When the equipper lands a hit with a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>Aftershock</color>, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional <color=#2BAD00>14.5%</color>, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's <color=#2EB6FF>Electric DMG</color> increases by <color=#2BAD00>29%</color>.",
+      "name": "Tranquil Blossom"
+    },
+    "5": {
+      "desc": "CRIT DMG is increased by <color=#2BAD00>48%</color>. When the equipper lands a hit with a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, or <color=#FFFFFF>Aftershock</color>, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional <color=#2BAD00>16%</color>, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's <color=#2EB6FF>Electric DMG</color> increases by <color=#2BAD00>32%</color>.",
+      "name": "Tranquil Blossom"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

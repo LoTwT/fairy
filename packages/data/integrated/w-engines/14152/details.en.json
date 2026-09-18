@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "Beneath the cold alloy scales, venom made of data flows. Each flick of the serpent's tongue probes the dark, carving out an electronic circuit that leads the homeless snake back to its \"nest.\"\n\nEach cycle of data in and out leaves untraceable fragments of corrupted code — much like its user, driven by instinct to chew through truth's rigid shell.\n\n\"It says... this time, the target's hiding somewhere nice and warm.\" — Cissia brushes a hand over the subtly warm serpent head, her smile hovering between danger and anticipation.",
+  "desc2": "Equip to increase Attack Agents' combat capabilities",
+  "desc3": "Digital venom flows beneath those alloy scales.",
+  "id": 14152,
+  "locale": "en",
+  "name": "Serpentine Seeker",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Energy Regen",
+    "name2": "Energy Regen"
+  },
+  "talents": {
+    "1": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>25%</color>. When the equipper consumes at least 20 Energy in a single instance, every 20 Energy consumed grants 3s of a buff: when dealing <color=#2EB6FF>Electric DMG</color>, ignore <color=#2BAD00>28%</color> of the target's DEF. Repeated triggers extend the duration, up to a maximum of 30s. When entering combat, gain 10s of this buff. While the equipper is not the active character, the duration no longer decreases.",
+      "name": "Bioengineered Venom"
+    },
+    "2": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>28.8%</color>. When the equipper consumes at least 20 Energy in a single instance, every 20 Energy consumed grants 3s of a buff: when dealing <color=#2EB6FF>Electric DMG</color>, ignore <color=#2BAD00>31.5%</color> of the target's DEF. Repeated triggers extend the duration, up to a maximum of 30s. When entering combat, gain 10s of this buff. While the equipper is not the active character, the duration no longer decreases.",
+      "name": "Bioengineered Venom"
+    },
+    "3": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>32.5%</color>. When the equipper consumes at least 20 Energy in a single instance, every 20 Energy consumed grants 3s of a buff: when dealing <color=#2EB6FF>Electric DMG</color>, ignore <color=#2BAD00>35%</color> of the target's DEF. Repeated triggers extend the duration, up to a maximum of 30s. When entering combat, gain 10s of this buff. While the equipper is not the active character, the duration no longer decreases.",
+      "name": "Bioengineered Venom"
+    },
+    "4": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>36.3%</color>. When the equipper consumes at least 20 Energy in a single instance, every 20 Energy consumed grants 3s of a buff: when dealing <color=#2EB6FF>Electric DMG</color>, ignore <color=#2BAD00>38.5%</color> of the target's DEF. Repeated triggers extend the duration, up to a maximum of 30s. When entering combat, gain 10s of this buff. While the equipper is not the active character, the duration no longer decreases.",
+      "name": "Bioengineered Venom"
+    },
+    "5": {
+      "desc": "CRIT Rate increases by <color=#2BAD00>40%</color>. When the equipper consumes at least 20 Energy in a single instance, every 20 Energy consumed grants 3s of a buff: when dealing <color=#2EB6FF>Electric DMG</color>, ignore <color=#2BAD00>42%</color> of the target's DEF. Repeated triggers extend the duration, up to a maximum of 30s. When entering combat, gain 10s of this buff. While the equipper is not the active character, the duration no longer decreases.",
+      "name": "Bioengineered Venom"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

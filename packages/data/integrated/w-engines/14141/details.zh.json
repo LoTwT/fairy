@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础攻击力",
+    "name2": "基础攻击力"
+  },
+  "desc": "精巧的小型音擎，原本是第一次参加学校空洞实习时发的便宜货，但因为体积小巧便于携带，柚叶始终难以割舍。\n第一次改造，增大了音擎的输出功率；第二次改造，追加了两个以太异常特化组件；第三次改造，尝试修改了内部布线，但不慎引起短路，把裙子烧了个洞；第四次改造，真斗帮忙修好了短路弄坏的热传导组件，但请真斗吃饭花的钱，已经足够买3个新的热传导组件了；第五次改造，更换了新的共鸣腔；第六次改造，提升了对驱动盘高频信号的响应速度。\n很好，它终于是一件完美的、可以陪伴主人出生入死的神兵利器了！然而——\n「爸，你见我音擎没？」\n「系果边啊，我帮你改左个外壳啦，之前太核突！唔可以畀人话我个女冇眼光！」\n「爸！这可是音擎诶，你搞这么华丽，万一弄坏了多可惜啊！」\n「咁就咪搞啲会整坏音擎嘅危险嘢啦！」",
+  "desc2": "装备后可提升[支援]代理人的战斗能力",
+  "desc3": "巧夺天工的造型，饱含制作者对美的追求。",
+  "id": 14141,
+  "locale": "zh",
+  "name": "狸法七变化",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "能量自动回复",
+    "name2": "能量自动回复"
+  },
+  "talents": {
+    "1": {
+      "desc": "装备者的<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>造成<color=#F0D12B>物理伤害</color>时，装备者<color=#FFFFFF>异常掌控</color>提升<color=#2BAD00>30</color>点，持续40秒；装备者的<color=#FFFFFF>[追加攻击]</color>命中敌人时，使全队角色的<color=#FFFFFF>异常精通</color>提升<color=#2BAD00>60</color>点，持续40秒，该效果全队唯一。",
+      "name": "机巧玲珑"
+    },
+    "2": {
+      "desc": "装备者的<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>造成<color=#F0D12B>物理伤害</color>时，装备者<color=#FFFFFF>异常掌控</color>提升<color=#2BAD00>34</color>点，持续40秒；装备者的<color=#FFFFFF>[追加攻击]</color>命中敌人时，使全队角色的<color=#FFFFFF>异常精通</color>提升<color=#2BAD00>69</color>点，持续40秒，该效果全队唯一。",
+      "name": "机巧玲珑"
+    },
+    "3": {
+      "desc": "装备者的<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>造成<color=#F0D12B>物理伤害</color>时，装备者<color=#FFFFFF>异常掌控</color>提升<color=#2BAD00>39</color>点，持续40秒；装备者的<color=#FFFFFF>[追加攻击]</color>命中敌人时，使全队角色的<color=#FFFFFF>异常精通</color>提升<color=#2BAD00>78</color>点，持续40秒，该效果全队唯一。",
+      "name": "机巧玲珑"
+    },
+    "4": {
+      "desc": "装备者的<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>造成<color=#F0D12B>物理伤害</color>时，装备者<color=#FFFFFF>异常掌控</color>提升<color=#2BAD00>43</color>点，持续40秒；装备者的<color=#FFFFFF>[追加攻击]</color>命中敌人时，使全队角色的<color=#FFFFFF>异常精通</color>提升<color=#2BAD00>87</color>点，持续40秒，该效果全队唯一。",
+      "name": "机巧玲珑"
+    },
+    "5": {
+      "desc": "装备者的<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>造成<color=#F0D12B>物理伤害</color>时，装备者<color=#FFFFFF>异常掌控</color>提升<color=#2BAD00>48</color>点，持续40秒；装备者的<color=#FFFFFF>[追加攻击]</color>命中敌人时，使全队角色的<color=#FFFFFF>异常精通</color>提升<color=#2BAD00>96</color>点，持续40秒，该效果全队唯一。",
+      "name": "机巧玲珑"
+    }
+  },
+  "weaponType": {
+    "4": "支援"
+  }
+}
