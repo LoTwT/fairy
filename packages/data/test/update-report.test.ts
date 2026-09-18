@@ -1769,7 +1769,7 @@ describe("current dataset update report", () => {
     expect(agents.review.required).toBe(false)
     // 纯格式变化不改变 JSON 值，重排后的文件仍是同一份数据。
     expect(JSON.parse(await fs.readFile(entityPath, "utf8"))).toEqual(value)
-  }, 30_000)
+  })
 
   it("advances to a new source version and keeps the report true for the committed dataset", async () => {
     const input = await fixture({ widgets: ["3", "7"] })

@@ -307,7 +307,7 @@ describe("current multi-entity dataset", () => {
     ).toHaveLength(6)
     expect(await bytes(input.rawRoot)).toEqual(raw)
     await clean(input)
-  }, 30_000)
+  })
 
   it.each(["entities", "index"])(
     "preserves current data and recovers after actual oxfmt failure on %s",
