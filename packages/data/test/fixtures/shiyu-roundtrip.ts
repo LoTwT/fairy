@@ -16,47 +16,98 @@ function define(result: Record<string, unknown>, key: string, value: unknown) {
   })
 }
 
-/** 全部登记字段在所有层级上的还原拼写；各层级改名单义，可共用一张表。 */
-const restoreNames: Readonly<Record<string, string>> = {
-  priority: "priority",
-  beginTime: "begin_time",
-  endTime: "end_time",
-  id: "id",
-  name: "name",
-  stageNum: "stage_num",
-  monsterLevel: "monster_level",
-  layerBuff: "layer_buff",
-  child: "child",
-  layerRoom: "layer_room",
-  goalType: "goal_type",
-  ssRankGoal: "ss_rank_goal",
-  sRankGoal: "s_rank_goal",
-  aRankGoal: "a_rank_goal",
-  bRankGoal: "b_rank_goal",
-  title: "title",
-  desc: "desc",
-  monsterIcon: "monster_icon",
-  monsterList: "monster_list",
-  monsterWeakness: "monster_weakness",
-  wavesNum: "waves_num",
-  image: "image",
-  element: "element",
-  stats: "stats",
+/**
+ * 已登记结构的还原形状：只沿实际结构路径逆向改名。
+ * 字典 key 一律原样保留（含恰好与登记字段同名的 key）；未登记成员及其整个值原样保留，
+ * 不继续推断或改写内部字段。
+ */
+type RestoreShape =
+  | { kind: "array"; items: RestoreShape }
+  | { kind: "dict"; values: RestoreShape }
+  | {
+      kind: "object"
+      /** 本层结构字段的输出名 → 来源拼写。 */
+      renamed: Readonly<Record<string, string>>
+      /** 需要继续按子形状还原的成员；未列出的成员整个值原样保留。 */
+      children: Readonly<Record<string, RestoreShape>>
+    }
+
+const roomShape: RestoreShape = {
+  kind: "object",
+  renamed: {
+    monsterIcon: "monster_icon",
+    monsterList: "monster_list",
+    monsterWeakness: "monster_weakness",
+    wavesNum: "waves_num",
+  },
+  // encounter 与弱点文本内部没有登记改名，整个值原样保留。
+  children: {},
 }
 
-/** 递归还原对象成员名：命中登记表则换回来源拼写，未登记成员按原 key 原样保留。 */
-function restore(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(restore)
-  if (!object(value)) return value
-  const restored: Record<string, unknown> = {}
-  for (const [key, item] of Object.entries(value))
-    // 只认登记表的自有 key：constructor、__proto__、toString 等原型链成员不得误判为命中。
-    define(
-      restored,
-      Object.hasOwn(restoreNames, key) ? restoreNames[key]! : key,
-      restore(item),
-    )
-  return restored
+const stageShape: RestoreShape = {
+  kind: "object",
+  renamed: {
+    stageNum: "stage_num",
+    monsterLevel: "monster_level",
+    layerBuff: "layer_buff",
+    layerRoom: "layer_room",
+    goalType: "goal_type",
+    ssRankGoal: "ss_rank_goal",
+    sRankGoal: "s_rank_goal",
+    aRankGoal: "a_rank_goal",
+    bRankGoal: "b_rank_goal",
+  },
+  // layer_buff 与 child 内部没有登记改名，整个值原样保留；只有房间条目继续按结构还原。
+  children: { layerRoom: { kind: "dict", values: roomShape } },
+}
+
+/** data 的顶层结构字段；其余成员原样保留。 */
+const dataShape: RestoreShape = {
+  kind: "object",
+  renamed: { beginTime: "begin_time", endTime: "end_time" },
+  children: {},
+}
+
+/**
+ * details 的顶层结构：zone 是阶段字典，字典 key 与未登记字段原样保留。
+ * 条件公共时间字段未被提取时留在本语言详情，同样按来源拼写还原。
+ */
+const detailsShape: RestoreShape = {
+  kind: "object",
+  renamed: { beginTime: "begin_time", endTime: "end_time" },
+  children: { zone: { kind: "dict", values: stageShape } },
+}
+
+function restoreShape(value: unknown, shape: RestoreShape): unknown {
+  switch (shape.kind) {
+    case "array":
+      return Array.isArray(value)
+        ? value.map((item) => restoreShape(item, shape.items))
+        : value
+    case "dict": {
+      if (!object(value)) return value
+      const restored: Record<string, unknown> = {}
+      for (const [key, item] of Object.entries(value))
+        define(restored, key, restoreShape(item, shape.values))
+      return restored
+    }
+    case "object": {
+      if (!object(value)) return value
+      const restored: Record<string, unknown> = {}
+      for (const [key, item] of Object.entries(value)) {
+        // 只认形状表的自有 key：constructor、__proto__、toString 等原型链成员不得误判为命中。
+        const child = Object.hasOwn(shape.children, key)
+          ? shape.children[key]
+          : undefined
+        define(
+          restored,
+          Object.hasOwn(shape.renamed, key) ? shape.renamed[key]! : key,
+          child === undefined ? item : restoreShape(item, child),
+        )
+      }
+      return restored
+    }
+  }
 }
 
 export function expectShiyuRoundtrip(
@@ -77,8 +128,11 @@ export function expectShiyuRoundtrip(
     delete details.locale
     delete details.id
     // data 提取的字段回到顶层；details 剩余内容（含单语言独有的时间字段）按来源拼写合并。
-    const restored = restore(data) as Record<string, unknown>
-    const detailsRestored = restore(details) as Record<string, unknown>
+    const restored = restoreShape(data, dataShape) as Record<string, unknown>
+    const detailsRestored = restoreShape(details, detailsShape) as Record<
+      string,
+      unknown
+    >
     for (const [key, value] of Object.entries(detailsRestored))
       if (!Object.hasOwn(restored, key)) define(restored, key, value)
     deepStrictEqual(restored, source)

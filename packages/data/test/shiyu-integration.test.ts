@@ -845,3 +845,43 @@ describe("单 Shiyu 纯整合的空值与特例语义", () => {
     },
   )
 })
+
+describe("Shiyu 还原辅助函数的路径边界", () => {
+  it("未知扩展内容原样保留：内部 camelCase/snake_case key 与数组内容不被改写；篡改必须失败", () => {
+    const input = shiyuInput()
+    // 未知字段的整个值原样保留：内部字段名不做登记表推断，数组内容同样不改写；
+    // 同一对象内的 snake_case 与 camelCase key 同时保留。
+    change(input.details.zh, "future_extension", {
+      layerBuff: "camel",
+      layer_buff: "snake",
+      nested: [{ nextPage: [1], stageNum: 2 }],
+    })
+    change(input.details.zh, "future_snake", { layer_buff: "kept" })
+    const result = integrateShiyu(input)
+    expect(result.details.zh!.future_extension).toStrictEqual({
+      layerBuff: "camel",
+      layer_buff: "snake",
+      nested: [{ nextPage: [1], stageNum: 2 }],
+    })
+    expect(result.details.zh!.future_snake).toStrictEqual({
+      layer_buff: "kept",
+    })
+    expectShiyuRoundtrip(result, input)
+    // 人为把未知字段内部的 snake_case key 篡改成 camelCase 后，还原校验必须失败：
+    // 不得把 layerBuff 误还原成 layer_buff 掩盖损坏。
+    const corrupted = structuredClone(result)
+    corrupted.details.zh!.future_snake = { layerBuff: "kept" }
+    expect(() => expectShiyuRoundtrip(corrupted, input)).toThrow()
+  })
+
+  it("字典 key 与登记字段名相同时原样保留，值仍按阶段结构还原", () => {
+    const input = shiyuInput()
+    const stage = structuredClone(input.details.zh.zone["9700101"])
+    // 阶段 key 恰好与登记字段同名：字典 key 原样保留，不按登记表改名。
+    change(input.details.zh, "zone.layerBuff", stage)
+    const result = integrateShiyu(input)
+    expect(Object.keys(result.details.zh!.zone!)).toContain("layerBuff")
+    expect(result.details.zh!.zone["layerBuff"]!.stageNum).toBe(1)
+    expectShiyuRoundtrip(result, input)
+  })
+})
