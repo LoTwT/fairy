@@ -801,3 +801,60 @@ describe("单 Simul 纯整合的空值与特例语义", () => {
     },
   )
 })
+
+describe("Simul 还原辅助函数的路径边界", () => {
+  it("未知扩展内容原样保留：内部 camelCase/snake_case key 与数组内容不被改写；篡改必须失败", () => {
+    const input = simulInput()
+    // 未知字段的整个值原样保留：内部字段名不做登记表推断，数组内容同样不改写；
+    // 同一对象内的 snake_case 与 camelCase key 同时保留。
+    change(input.details.zh, "future_extension", {
+      prevNode: 1,
+      prev_node: 2,
+      nested: [{ nextPage: [1], storyEvent: {} }],
+    })
+    change(input.details.zh, "future_snake", { next_page: "kept" })
+    const result = integrateSimul(input)
+    expect(result.details.zh!.future_extension).toStrictEqual({
+      prevNode: 1,
+      prev_node: 2,
+      nested: [{ nextPage: [1], storyEvent: {} }],
+    })
+    expect(result.details.zh!.future_snake).toStrictEqual({
+      next_page: "kept",
+    })
+    expectSimulRoundtrip(result, input)
+    // 人为把未知字段内部的 snake_case key 篡改成 camelCase 后，还原校验必须失败：
+    // 不得把 nextPage 误还原成 next_page 掩盖损坏。
+    const corrupted = structuredClone(result)
+    corrupted.details.zh!.future_snake = { nextPage: "kept" }
+    expect(() => expectSimulRoundtrip(corrupted, input)).toThrow()
+  })
+
+  it("字典 key 与登记字段名相同时原样保留，值仍按登记结构还原", () => {
+    const input = simulInput()
+    const room =
+      input.details.zh.node["99002"]!.battle["9900201"]!.layer_room["70799001"]!
+    const encounter = structuredClone(room.monster_list["11818"]!)
+    // encounter 字典 key 恰好与登记字段同名：字典 key 原样保留，值仍按 encounter 结构还原。
+    change(
+      input.details.zh,
+      "node.99002.battle.9900201.layer_room.70799001.monster_list.nextPage",
+      encounter,
+    )
+    // 同一层的 battle 字典 key 与 battle 成员输出名同名：key 原样保留，值仍按 battle 结构还原。
+    const battle = structuredClone(
+      input.details.zh.node["99002"]!.battle["9900201"],
+    )
+    change(input.details.zh, "node.99002.battle.tagType", battle)
+    const result = integrateSimul(input)
+    const restoredBattle = result.details.zh!.node["99002"]!.battle["9900201"]!
+    expect(Object.keys(result.details.zh!.node["99002"]!.battle)).toContain(
+      "tagType",
+    )
+    expect(result.details.zh!.node["99002"]!.battle["tagType"]!.tagType).toBe(1)
+    const restoredRoom = restoredBattle.layerRoom["70799001"]!
+    expect(Object.keys(restoredRoom.monsterList)).toContain("nextPage")
+    expect(restoredRoom.monsterList["nextPage"]!.id).toBe(30024)
+    expectSimulRoundtrip(result, input)
+  })
+})

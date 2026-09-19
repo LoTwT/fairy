@@ -172,7 +172,8 @@ pnpm --filter @randomplay/data generate:integrated raw/nanoka 3.1 integrated
 三个位置参数 `rawRoot`、`version`、`targetDirectory` 都必须给出，不自动选版本或联网补齐。
 相对路径仍按进程工作目录解析：filter 命令在 `packages/data` 执行，因此上述路径分别是
 `packages/data/raw/nanoka` 和 `packages/data/integrated`。在 data 包目录可省略 filter；绝对路径也可用，含空格时加引号。
-命令名称不绑定实体；生成当前已登记类别的完整快照（代理人、驱动盘、WEngine、邦布、怪物与 Shiyu），其他实体尚未接入。
+命令名称不绑定实体；生成当前已登记类别的完整快照（代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Boss 与 Simul 八类），
+要求这八类对应的完整来源输入齐备，不按目录扫描推断成员，也不接受只覆盖部分类别的输入。
 
 同一个命令自动处理以下情况：
 

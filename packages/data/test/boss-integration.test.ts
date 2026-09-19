@@ -680,3 +680,47 @@ describe("单 Boss 纯整合的空值与特例语义", () => {
     },
   )
 })
+
+describe("Boss 还原辅助函数的路径边界", () => {
+  it("未知扩展内容原样保留：内部 camelCase/snake_case key 与数组内容不被改写；篡改必须失败", () => {
+    const input = bossInput()
+    // 未知字段的整个值原样保留：内部字段名不做登记表推断，数组内容同样不改写；
+    // 同一对象内的 snake_case 与 camelCase key 同时保留。
+    change(input.details.zh, "future_extension", {
+      zoneType: "camel",
+      zone_type: "snake",
+      nested: [{ stageNum: 2, layerBuff: {} }],
+    })
+    change(input.details.zh, "future_snake", { selectable_buff: "kept" })
+    const result = integrateBoss(input)
+    expect(result.details.zh!.future_extension).toStrictEqual({
+      zoneType: "camel",
+      zone_type: "snake",
+      nested: [{ stageNum: 2, layerBuff: {} }],
+    })
+    expect(result.details.zh!.future_snake).toStrictEqual({
+      selectable_buff: "kept",
+    })
+    expectBossRoundtrip(result, input)
+    // 人为把未知字段内部的 snake_case key 篡改成 camelCase 后，还原校验必须失败：
+    // 不得把 selectableBuff 误还原成 selectable_buff 掩盖损坏。
+    const corrupted = structuredClone(result)
+    corrupted.details.zh!.future_snake = { selectableBuff: "kept" }
+    expect(() => expectBossRoundtrip(corrupted, input)).toThrow()
+  })
+
+  it("字典 key 与登记字段名相同时原样保留，值仍按阶段结构还原", () => {
+    const input = bossInput()
+    const stage = structuredClone(input.details.zh.modes[0]!.zone["9800101"])
+    // 阶段 key 恰好与登记字段同名：字典 key 原样保留，不按登记表改名。
+    change(input.details.zh, "modes.0.zone.selectableBuff", stage)
+    const result = integrateBoss(input)
+    expect(Object.keys(result.details.zh!.modes![0]!.zone)).toContain(
+      "selectableBuff",
+    )
+    expect(result.details.zh!.modes![0]!.zone["selectableBuff"]!.stageNum).toBe(
+      1,
+    )
+    expectBossRoundtrip(result, input)
+  })
+})
