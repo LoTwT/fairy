@@ -2,6 +2,7 @@ import { deepStrictEqual } from "node:assert"
 import { expect } from "vitest"
 import type { IntegratedAgent } from "../../src/integration/integrate-agent.ts"
 import type { SourceJson } from "../../src/integration/agent-types.ts"
+import { expectJsonFidelity } from "./json-fidelity.ts"
 
 /** 独立测试侧还原表；不引用生产 schema、改名、拆分、导航或比较函数。 */
 const renamedContainers: [string, string[]][] = [
@@ -170,7 +171,7 @@ export function expectRoundtrip(
   result: IntegratedAgent,
   input: { sourceRecord: unknown; details: Record<string, unknown> },
 ): void {
-  expect(result.sourceRecord).toStrictEqual(input.sourceRecord)
+  expectJsonFidelity(result.sourceRecord, input.sourceRecord)
   for (const [locale, source] of Object.entries(input.details)) {
     const details = structuredClone(
       result.details[locale as "zh" | "en"],
