@@ -1,6 +1,7 @@
 import { deepStrictEqual } from "node:assert"
 import { expect } from "vitest"
 import type { IntegratedBangboo } from "../../src/integration/integrate-bangboo.ts"
+import { expectJsonFidelity } from "./json-fidelity.ts"
 
 /** 独立测试侧还原：按同一来源路径合并公共字段与各语言内容；不引用生产 schema 或拆分函数。 */
 function object(value: unknown): value is Record<string, unknown> {
@@ -102,7 +103,7 @@ export function expectBangbooRoundtrip(
   result: IntegratedBangboo,
   input: { sourceRecord: unknown; details: Record<string, unknown> },
 ): void {
-  expect(result.sourceRecord).toStrictEqual(input.sourceRecord)
+  expectJsonFidelity(result.sourceRecord, input.sourceRecord)
   for (const [locale, source] of Object.entries(input.details)) {
     const details = structuredClone(
       result.details[locale as "zh" | "en"],
