@@ -2,6 +2,7 @@ import type {
   CoreSkillLevel,
   DirectStat,
   EffectId,
+  EntityId,
   GeneralStat,
   MindscapeRank,
   Phase,
@@ -143,7 +144,7 @@ export function isIdentityString(value: unknown, prefix: string): boolean {
   return value.length > prefix.length + 1
 }
 
-export function isEntityId(value: unknown): boolean {
+export function isEntityId(value: unknown): value is EntityId {
   return isIdentityString(value, "entity")
 }
 
@@ -151,7 +152,7 @@ export function isTeamId(value: unknown): boolean {
   return isIdentityString(value, "team")
 }
 
-export function isPrefixedIdentity(value: unknown): boolean {
+export function isPrefixedIdentity(value: unknown): value is string {
   if (typeof value !== "string") {
     return false
   }

@@ -1,0 +1,1168 @@
+import { describe, expect, it } from "vitest"
+import {
+  evaluateEffects,
+  parseEffectRuleSet,
+  prepareEffects,
+  supplyEffectState,
+  synchronizeSuppliedInstances,
+} from "../src/index.ts"
+import type {
+  EffectState,
+  EvaluationInput,
+  PreparedEffects,
+  StateInput,
+  SuppliedInstancesUpdate,
+} from "../src/index.ts"
+import {
+  clearSuppliedAstra,
+  exampleBindings,
+  exampleRuleSet,
+  exampleWorld,
+  mixedStateBeforeSynchronization,
+  renewSuppliedAstra,
+  suppliedAstraState,
+  syntheticBinding,
+  syntheticHitQuery,
+  syntheticRuleSet,
+  syntheticWorld,
+} from "../../../docs/specs/effects/contract-examples.ts"
+
+function prepareWithExamples(): PreparedEffects {
+  const parsed = parseEffectRuleSet(exampleRuleSet)
+  expect(parsed.ok).toBe(true)
+  if (!parsed.ok) {
+    throw new Error("example rule set must parse")
+  }
+  const prepared = prepareEffects(parsed.value, [...exampleBindings] as never)
+  expect(prepared.ok).toBe(true)
+  if (!prepared.ok) {
+    throw new Error("prepare must succeed")
+  }
+  return prepared.value
+}
+
+function prepareSynthetic(): PreparedEffects {
+  const parsed = parseEffectRuleSet(syntheticRuleSet)
+  expect(parsed.ok).toBe(true)
+  if (!parsed.ok) {
+    throw new Error("synthetic rule set must parse")
+  }
+  const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+  expect(prepared.ok).toBe(true)
+  if (!prepared.ok) {
+    throw new Error("prepare must succeed")
+  }
+  return prepared.value
+}
+
+describe("rina mindscape one range acceptance", () => {
+  it("applies the output scale only to in-range beneficiaries", () => {
+    const prepared = prepareWithExamples()
+    const rinaWorld = {
+      ...exampleWorld,
+      distances: [
+        { first: "entity:attacker", second: "entity:drusilla", meters: 8 },
+        { first: "entity:astra", second: "entity:drusilla", meters: 12 },
+      ],
+    }
+    const input: StateInput = {
+      sessionId: "session:rina",
+      atSeconds: 0,
+      instances: [
+        {
+          instanceId: "instance:rina-core",
+          effectId: "agent:1211:core:penetration-conversion",
+          bindingId: "binding:rina",
+          beneficiaryIds: ["entity:astra", "entity:attacker"],
+          stackKey: [],
+          lifetime: { kind: "supplied" },
+          layers: [
+            {
+              layerId: "layer:rina-core",
+              startedAt: 0,
+              expiresAt: null,
+              trigger: null,
+            },
+          ],
+        },
+      ],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    }
+    const state = supplyEffectState(prepared, input)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const result = evaluateEffects(prepared, state.value, {
+      kind: "contributions",
+      atSeconds: 0,
+      world: rinaWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:astra", "entity:attacker"],
+    } as EvaluationInput)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const penetration = (beneficiary: string) =>
+      result.value.contributions.find(
+        (contribution) =>
+          contribution.origin.effectId ===
+            "agent:1211:core:penetration-conversion" &&
+          contribution.origin.beneficiaryId === beneficiary,
+      )
+    const inRange = penetration("entity:attacker")
+    const outOfRange = penetration("entity:astra")
+    expect(inRange).toBeDefined()
+    expect(outOfRange).toBeDefined()
+    // min(0.25 × 0.40 + 0.12, 0.30) = 0.22；范围内 ×1.3 = 0.286，范围外 0.22。
+    expect(inRange!.value.value).toBeCloseTo(0.286, 12)
+    expect(outOfRange!.value.value).toBeCloseTo(0.22, 12)
+    expect(inRange!.appliedModifications).toEqual([
+      "agent:1211:mindscape-1:core-enhancement",
+    ])
+    expect(outOfRange!.appliedModifications).toEqual([])
+  })
+
+  it("caps the base expression before applying the output scale", () => {
+    const prepared = prepareWithExamples()
+    const rinaWorld = {
+      ...exampleWorld,
+      entities: exampleWorld.entities.map((entity) =>
+        entity.entityId === "entity:rina" && entity.kind === "actor"
+          ? {
+              ...entity,
+              directStats: {
+                penetrationRatio: { baseValue: 0.72, additions: [] },
+              },
+            }
+          : entity,
+      ),
+      distances: [
+        { first: "entity:attacker", second: "entity:drusilla", meters: 3 },
+      ],
+    }
+    const input: StateInput = {
+      sessionId: "session:rina-capped",
+      atSeconds: 0,
+      instances: [
+        {
+          instanceId: "instance:rina-core",
+          effectId: "agent:1211:core:penetration-conversion",
+          bindingId: "binding:rina",
+          beneficiaryIds: ["entity:attacker"],
+          stackKey: [],
+          lifetime: { kind: "supplied" },
+          layers: [
+            {
+              layerId: "layer:rina-core",
+              startedAt: 0,
+              expiresAt: null,
+              trigger: null,
+            },
+          ],
+        },
+      ],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    }
+    const state = supplyEffectState(prepared, input)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const result = evaluateEffects(prepared, state.value, {
+      kind: "contributions",
+      atSeconds: 0,
+      world: rinaWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:attacker"],
+    } as EvaluationInput)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const contribution = result.value.contributions.find(
+      (entry) =>
+        entry.origin.effectId === "agent:1211:core:penetration-conversion",
+    )
+    expect(contribution).toBeDefined()
+    // 基础在 0.30 封顶，输出修改在封顶后执行：0.30 × 1.3 = 0.39。
+    expect(contribution!.value.value).toBeCloseTo(0.39, 12)
+  })
+
+  it("reports a missing distance instead of treating it as out of range", () => {
+    const prepared = prepareWithExamples()
+    const input: StateInput = {
+      sessionId: "session:rina-missing-distance",
+      atSeconds: 0,
+      instances: [
+        {
+          instanceId: "instance:rina-core",
+          effectId: "agent:1211:core:penetration-conversion",
+          bindingId: "binding:rina",
+          beneficiaryIds: ["entity:attacker"],
+          stackKey: [],
+          lifetime: { kind: "supplied" },
+          layers: [
+            {
+              layerId: "layer:rina-core",
+              startedAt: 0,
+              expiresAt: null,
+              trigger: null,
+            },
+          ],
+        },
+      ],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    }
+    const state = supplyEffectState(prepared, input)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const result = evaluateEffects(prepared, state.value, {
+      kind: "contributions",
+      atSeconds: 0,
+      world: { ...exampleWorld, distances: [] },
+      observedSnapshots: [],
+      beneficiaries: ["entity:attacker"],
+    } as EvaluationInput)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+  })
+})
+
+describe("synthetic hit query uniqueness acceptance", () => {
+  const stateInput: StateInput = {
+    sessionId: "session:spec",
+    atSeconds: 0,
+    instances: [],
+    snapshots: [],
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  }
+
+  it("selects the hit contribution in the shared uniqueness group", () => {
+    const prepared = prepareSynthetic()
+    const state = supplyEffectState(prepared, stateInput)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const result = evaluateEffects(prepared, state.value, {
+      ...syntheticHitQuery,
+    } as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const damageBonus = result.value.contributions.filter(
+      (contribution) => contribution.address.kind === "factor",
+    )
+    expect(damageBonus).toHaveLength(1)
+    expect(damageBonus[0]!.value.value).toBeCloseTo(0.2, 12)
+    expect(damageBonus[0]!.address).toMatchObject({
+      kind: "factor",
+      channel: "damage-bonus",
+      entityId: "entity:spec",
+      hitId: "hit:spec-basic",
+    })
+    expect(result.value.hit?.criticalRate).toBeCloseTo(0.05, 12)
+    expect(result.value.hit?.damageItems[0]?.damageMultiplier).toBeCloseTo(
+      1,
+      12,
+    )
+    expect(result.value.hit?.damageItems[0]?.finalStat).toBeCloseTo(1000, 12)
+  })
+
+  it("returns the general contribution for non-matching queries", () => {
+    const prepared = prepareSynthetic()
+    const state = supplyEffectState(prepared, stateInput)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const contributions = evaluateEffects(prepared, state.value, {
+      kind: "contributions",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:spec"],
+    } as EvaluationInput)
+    expect(contributions.ok).toBe(true)
+    if (!contributions.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const damageBonus = contributions.value.contributions.filter(
+      (contribution) => contribution.address.kind === "factor",
+    )
+    expect(damageBonus).toHaveLength(1)
+    expect(damageBonus[0]!.value.value).toBeCloseTo(0.1, 12)
+    expect(damageBonus[0]!.address).toMatchObject({ hitId: null })
+  })
+
+  it("sums both contributions without the uniqueness declaration", () => {
+    const withoutUniqueness = structuredClone(syntheticRuleSet)
+    for (const effect of withoutUniqueness.effects) {
+      if (effect.kind === "contribution") {
+        delete (effect as { uniqueness?: unknown }).uniqueness
+      }
+    }
+    const parsed = parseEffectRuleSet(withoutUniqueness)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    const state = supplyEffectState(prepared.value, stateInput)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const result = evaluateEffects(prepared.value, state.value, {
+      ...syntheticHitQuery,
+    } as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const damageBonus = result.value.contributions.filter(
+      (contribution) => contribution.address.kind === "factor",
+    )
+    expect(damageBonus).toHaveLength(2)
+    const total = damageBonus.reduce((sum, entry) => sum + entry.value.value, 0)
+    expect(total).toBeCloseTo(0.3, 12)
+  })
+})
+
+describe("general and hit-local contributions dedupe at the hit address", () => {
+  it("selects once at the hit while the panel keeps the general value", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as typeof syntheticRuleSet
+    // 构造：通用攻击力 +100 与命中攻击力 +200 共用唯一键，原始攻击力 1000。
+    const generalAttack = {
+      kind: "contribution",
+      effectId: "environment:spec:general-attack",
+      source: ruleSet.effects[0]!.source,
+      config: { kind: "constant", value: true },
+      parameters: {},
+      activation: { kind: "continuous" },
+      beneficiary: { kind: "holder" },
+      scope: "entity",
+      when: { kind: "constant", value: true },
+      operation: {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: { kind: "literal", unit: "attack-points", value: 100 },
+      },
+      uniqueness: {
+        key: "spec-exclusive-attack",
+        scope: "team",
+        select: { kind: "highest-value" },
+      },
+    } as const
+    const hitAttack = {
+      ...generalAttack,
+      effectId: "environment:spec:hit-attack",
+      scope: "hit",
+      operation: {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: { kind: "literal", unit: "attack-points", value: 200 },
+      },
+    } as const
+    ;(ruleSet.effects as unknown as unknown[]).push(generalAttack, hitAttack)
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    const state = supplyEffectState(prepared.value, {
+      sessionId: "session:spec",
+      atSeconds: 0,
+      instances: [],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    })
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const hitResult = evaluateEffects(prepared.value, state.value, {
+      ...syntheticHitQuery,
+    } as never)
+    expect(hitResult.ok).toBe(true)
+    if (!hitResult.ok) {
+      throw new Error("hit evaluation must succeed")
+    }
+    expect(hitResult.value.hit?.damageItems[0]?.finalStat).toBeCloseTo(1200, 9)
+    const attackContributions = hitResult.value.contributions.filter(
+      (contribution) =>
+        contribution.address.kind === "stat" &&
+        contribution.address.stat === "attack",
+    )
+    expect(attackContributions).toHaveLength(1)
+    expect(attackContributions[0]!.value.value).toBeCloseTo(200, 9)
+    expect(attackContributions[0]!.address).toMatchObject({
+      hitId: "hit:spec-basic",
+    })
+    const panelResult = evaluateEffects(prepared.value, state.value, {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as EvaluationInput)
+    expect(panelResult.ok).toBe(true)
+    if (!panelResult.ok) {
+      throw new Error("panel evaluation must succeed")
+    }
+    const attack = panelResult.value.attributes.find(
+      (attribute) => attribute.stat === "attack",
+    )
+    expect(attack?.value.value).toBeCloseTo(1100, 9)
+    const panelAttackContributions = panelResult.value.contributions.filter(
+      (contribution) =>
+        contribution.address.kind === "stat" &&
+        contribution.address.stat === "attack",
+    )
+    expect(panelAttackContributions).toHaveLength(1)
+    expect(panelAttackContributions[0]!.value.value).toBeCloseTo(100, 9)
+    expect(panelAttackContributions[0]!.address).toMatchObject({
+      hitId: null,
+    })
+  })
+})
+
+describe("external instance synchronization acceptance", () => {
+  function prepareMixed(): { prepared: PreparedEffects; state: EffectState } {
+    const prepared = prepareWithExamples()
+    const state = supplyEffectState(prepared, {
+      ...mixedStateBeforeSynchronization,
+    } as never)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("mixed state supply must succeed")
+    }
+    return { prepared, state: state.value }
+  }
+
+  it("renews the supplied astra core layer while preserving everything else", () => {
+    const { prepared, state } = prepareMixed()
+    const renewed = synchronizeSuppliedInstances(prepared, state, {
+      ...renewSuppliedAstra,
+    } as SuppliedInstancesUpdate)
+    expect(renewed.ok).toBe(true)
+    if (!renewed.ok) {
+      throw new Error("synchronization must succeed")
+    }
+    const woodpeckerInstance = renewed.value
+    void woodpeckerInstance
+    const nextStateResult = renewed
+    expect(nextStateResult.ok).toBe(true)
+    const renewAgain = synchronizeSuppliedInstances(prepared, state, {
+      ...renewSuppliedAstra,
+    } as SuppliedInstancesUpdate)
+    expect(renewAgain.ok).toBe(true)
+    if (!renewAgain.ok) {
+      throw new Error("repeated synchronization must succeed")
+    }
+    // 同一旧状态重复同步得到相同结果。
+    const evaluateRenewed = (target: EffectState): number | undefined => {
+      const result = evaluateEffects(prepared, target, {
+        kind: "panel",
+        atSeconds: 2,
+        world: exampleWorld,
+        observedSnapshots: [],
+        entities: ["entity:attacker"],
+        stats: ["attack"],
+      } as EvaluationInput)
+      expect(result.ok).toBe(true)
+      if (!result.ok) {
+        throw new Error("evaluation must succeed")
+      }
+      return result.value.attributes.find(
+        (attribute) => attribute.stat === "attack",
+      )?.value.value
+    }
+    // 啄木鸟自动层（+9% 最终百分比）与耀嘉音核心（+1600）同时有效：2000×1.09+1600。
+    expect(evaluateRenewed(renewed.value)).toBeCloseTo(3780, 9)
+    expect(evaluateRenewed(renewAgain.value)).toBeCloseTo(3780, 9)
+    // 同步后的新状态重放同一同步输入报错。
+    const replay = synchronizeSuppliedInstances(prepared, renewed.value, {
+      ...renewSuppliedAstra,
+    } as SuppliedInstancesUpdate)
+    expect(replay.ok).toBe(false)
+    if (!replay.ok) {
+      expect(replay.issues.some((issue) => issue.code === "EVENT_ORDER")).toBe(
+        true,
+      )
+    }
+  })
+
+  it("clears only the specified supplied scope", () => {
+    const { prepared, state } = prepareMixed()
+    const renewed = synchronizeSuppliedInstances(prepared, state, {
+      ...renewSuppliedAstra,
+    } as SuppliedInstancesUpdate)
+    expect(renewed.ok).toBe(true)
+    if (!renewed.ok) {
+      throw new Error("synchronization must succeed")
+    }
+    const cleared = synchronizeSuppliedInstances(prepared, renewed.value, {
+      ...clearSuppliedAstra,
+      atSeconds: 3,
+    } as SuppliedInstancesUpdate)
+    expect(cleared.ok).toBe(true)
+    if (!cleared.ok) {
+      throw new Error("clear must succeed")
+    }
+    const result = evaluateEffects(prepared, cleared.value, {
+      kind: "panel",
+      atSeconds: 3,
+      world: exampleWorld,
+      observedSnapshots: [],
+      entities: ["entity:attacker"],
+      stats: ["attack", "criticalRate"],
+    } as EvaluationInput)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const attack = result.value.attributes.find(
+      (attribute) => attribute.stat === "attack",
+    )
+    // 耀嘉音核心实例被清除；啄木鸟自动层（到期 7 > 3）保留：2000×1.09。
+    expect(attack?.value.value).toBeCloseTo(2180, 9)
+    const contributionsQuery = evaluateEffects(prepared, cleared.value, {
+      kind: "contributions",
+      atSeconds: 3,
+      world: exampleWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:attacker", "entity:astra", "entity:rina"],
+    } as EvaluationInput)
+    expect(contributionsQuery.ok).toBe(true)
+    if (!contributionsQuery.ok) {
+      throw new Error("contributions query must succeed")
+    }
+    // 音擎增伤 supplied 实例保留。
+    expect(
+      contributionsQuery.value.contributions.some(
+        (contribution) =>
+          contribution.origin.effectId ===
+          "w-engine:14131:damage-on-energy-spend",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects a batch with duplicated scopes and keeps the old state", () => {
+    const { prepared, state } = prepareMixed()
+    const duplicate = {
+      ...renewSuppliedAstra,
+      replacements: [
+        ...renewSuppliedAstra.replacements,
+        ...renewSuppliedAstra.replacements,
+      ],
+    } as SuppliedInstancesUpdate
+    const result = synchronizeSuppliedInstances(prepared, state, duplicate)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.pointer.includes("replacements")),
+      ).toBe(true)
+    }
+  })
+
+  it("rejects replacing an engine-managed triggered scope", () => {
+    const { prepared, state } = prepareMixed()
+    const result = synchronizeSuppliedInstances(prepared, state, {
+      eventId: "event:sync-woodpecker",
+      atSeconds: 2,
+      sequence: 0,
+      replacements: [
+        {
+          effectId: "disc:31000:four-piece:attack",
+          bindingId: "binding:woodpecker",
+          instances: [],
+        },
+      ],
+      world: exampleWorld,
+      observedSnapshots: [],
+    } as SuppliedInstancesUpdate)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some(
+          (issue) =>
+            issue.code === "INVALID_MODIFICATION" ||
+            issue.code === "CONTEXT_MISMATCH",
+        ),
+      ).toBe(true)
+    }
+  })
+
+  it("rejects a conflicting snapshot id", () => {
+    const { prepared, state } = prepareMixed()
+    const conflictingSnapshot = {
+      snapshotId: "snapshot:basic-critical",
+      atSeconds: 1,
+      attributes: [
+        {
+          entityId: "entity:attacker",
+          stat: "attack",
+          stage: "initial",
+          value: { unit: "attack-points", value: 9999 },
+        },
+      ],
+      world: exampleWorld,
+    }
+    const result = synchronizeSuppliedInstances(prepared, state, {
+      ...renewSuppliedAstra,
+      observedSnapshots: [conflictingSnapshot],
+    } as SuppliedInstancesUpdate)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+      ).toBe(true)
+    }
+  })
+
+  it("replays are rejected on the synchronized state", () => {
+    const { prepared, state } = prepareMixed()
+    const renewed = synchronizeSuppliedInstances(prepared, state, {
+      ...renewSuppliedAstra,
+    } as SuppliedInstancesUpdate)
+    expect(renewed.ok).toBe(true)
+    if (!renewed.ok) {
+      throw new Error("synchronization must succeed")
+    }
+    const replay = synchronizeSuppliedInstances(prepared, renewed.value, {
+      ...renewSuppliedAstra,
+    } as SuppliedInstancesUpdate)
+    expect(replay.ok).toBe(false)
+  })
+})
+
+describe("state-bound instance filtering", () => {
+  it("keeps state-bound instances only while the activation identity matches", () => {
+    const parsed = parseEffectRuleSet(syntheticRuleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("synthetic rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    const stateInput: StateInput = {
+      sessionId: "session:spec-bound",
+      atSeconds: 0,
+      instances: [
+        {
+          instanceId: "instance:spec-a",
+          effectId: "environment:spec:state-bound-effect",
+          bindingId: "binding:spec",
+          beneficiaryIds: ["entity:spec"],
+          stackKey: [],
+          lifetime: {
+            kind: "state-bound",
+            stateId: "state:spec:linger",
+            stateOwnerId: "entity:spec",
+            stateActivationId: "state-activation:spec-a",
+          },
+          layers: [
+            {
+              layerId: "layer:spec-a",
+              startedAt: 0,
+              expiresAt: null,
+              trigger: null,
+            },
+          ],
+        },
+      ],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    }
+    const state = supplyEffectState(prepared.value, stateInput)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const activeWorld = {
+      ...syntheticWorld,
+      states: [
+        {
+          stateId: "state:spec:linger",
+          bindingId: "binding:spec",
+          ownerId: "entity:spec",
+          active: true,
+          activationId: "state-activation:spec-a",
+          since: 0,
+        },
+      ],
+    }
+    const activeResult = evaluateEffects(prepared.value, state.value, {
+      kind: "contributions",
+      atSeconds: 1,
+      world: activeWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:spec"],
+    } as EvaluationInput)
+    expect(activeResult.ok).toBe(true)
+    if (!activeResult.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    expect(
+      activeResult.value.contributions.some(
+        (contribution) =>
+          contribution.origin.effectId ===
+          "environment:spec:state-bound-effect",
+      ),
+    ).toBe(true)
+    const reenteredWorld = {
+      ...syntheticWorld,
+      states: [
+        {
+          stateId: "state:spec:linger",
+          bindingId: "binding:spec",
+          ownerId: "entity:spec",
+          active: true,
+          activationId: "state-activation:spec-b",
+          since: 1,
+        },
+      ],
+    }
+    const reenteredResult = evaluateEffects(prepared.value, state.value, {
+      kind: "contributions",
+      atSeconds: 1,
+      world: reenteredWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:spec"],
+    } as EvaluationInput)
+    expect(reenteredResult.ok).toBe(true)
+    if (!reenteredResult.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    expect(
+      reenteredResult.value.contributions.some(
+        (contribution) =>
+          contribution.origin.effectId ===
+          "environment:spec:state-bound-effect",
+      ),
+    ).toBe(false)
+    const inactiveWorld = {
+      ...syntheticWorld,
+      states: [
+        {
+          stateId: "state:spec:linger",
+          bindingId: "binding:spec",
+          ownerId: "entity:spec",
+          active: false,
+          activationId: null,
+          since: null,
+        },
+      ],
+    }
+    const inactiveResult = evaluateEffects(prepared.value, state.value, {
+      kind: "contributions",
+      atSeconds: 1,
+      world: inactiveWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:spec"],
+    } as EvaluationInput)
+    expect(inactiveResult.ok).toBe(true)
+    if (!inactiveResult.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    expect(
+      inactiveResult.value.contributions.some(
+        (contribution) =>
+          contribution.origin.effectId ===
+          "environment:spec:state-bound-effect",
+      ),
+    ).toBe(false)
+  })
+})
+
+describe("dependency cycles", () => {
+  it("reports a real cycle with the full path", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as typeof syntheticRuleSet
+    const selfReading = {
+      kind: "contribution",
+      effectId: "environment:spec:self-reading",
+      source: ruleSet.effects[0]!.source,
+      config: { kind: "constant", value: true },
+      parameters: {},
+      activation: { kind: "continuous" },
+      beneficiary: { kind: "holder" },
+      scope: "entity",
+      when: { kind: "constant", value: true },
+      operation: {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: {
+          kind: "stat",
+          unit: "attack-points",
+          entity: { role: "holder" },
+          stat: "attack",
+          stage: "current",
+          at: "evaluation",
+        },
+      },
+    } as const
+    ;(ruleSet.effects as unknown as unknown[]).push(selfReading)
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    const state = supplyEffectState(prepared.value, {
+      sessionId: "session:spec-cycle",
+      atSeconds: 0,
+      instances: [],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    })
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const result = evaluateEffects(prepared.value, state.value, {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as EvaluationInput)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      const cycle = result.issues.find(
+        (issue) => issue.code === "DEPENDENCY_CYCLE",
+      )
+      expect(cycle).toBeDefined()
+      expect(cycle!.dependencyPath).toBeDefined()
+      expect(cycle!.dependencyPath!.length).toBeGreaterThanOrEqual(2)
+    }
+  })
+
+  it("cross-entity same-name stat dependencies do not form a false cycle", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as typeof syntheticRuleSet
+    const crossEntity = {
+      kind: "contribution",
+      effectId: "environment:spec:cross-entity",
+      source: ruleSet.effects[0]!.source,
+      config: { kind: "constant", value: true },
+      parameters: {},
+      activation: { kind: "continuous" },
+      beneficiary: { kind: "holder" },
+      scope: "entity",
+      when: { kind: "constant", value: true },
+      operation: {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: {
+          kind: "stat",
+          unit: "attack-points",
+          entity: { role: "entity", entityId: "entity:spec-target" },
+          stat: "attack",
+          stage: "initial",
+          at: "evaluation",
+        },
+      },
+    } as const
+    ;(ruleSet.effects as unknown as unknown[]).push(crossEntity)
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    const state = supplyEffectState(prepared.value, {
+      sessionId: "session:spec-cross",
+      atSeconds: 0,
+      instances: [],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    })
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const result = evaluateEffects(prepared.value, state.value, {
+      kind: "panel",
+      atSeconds: 1,
+      world: {
+        ...syntheticWorld,
+        entities: syntheticWorld.entities.map((entity) =>
+          entity.entityId === "entity:spec-target" && entity.kind === "actor"
+            ? {
+                ...entity,
+                generalStats: {
+                  attack: {
+                    baseValue: 500,
+                    initialPercentage: [],
+                    initialFixed: [],
+                    finalPercentage: [],
+                    finalFixed: [],
+                  },
+                },
+              }
+            : entity,
+        ),
+      },
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as EvaluationInput)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const attack = result.value.attributes.find(
+      (attribute) => attribute.stat === "attack",
+    )
+    expect(attack?.value.value).toBeCloseTo(1500, 9)
+  })
+})
+
+void suppliedAstraState
+
+function prepareAstraM6(): PreparedEffects {
+  const parsed = parseEffectRuleSet(exampleRuleSet)
+  expect(parsed.ok).toBe(true)
+  if (!parsed.ok) {
+    throw new Error("example rule set must parse")
+  }
+  const prepared = prepareEffects(parsed.value, [
+    {
+      kind: "agent",
+      bindingId: "binding:astra",
+      holderId: "entity:astra",
+      sourceEntityId: "1311",
+      eligible: true,
+      configuration: { mindscapeRank: 6, coreSkillLevel: 7 },
+    },
+  ])
+  expect(prepared.ok).toBe(true)
+  if (!prepared.ok) {
+    throw new Error("prepare must succeed")
+  }
+  return prepared.value
+}
+
+describe("action-origin matching for automatic third hit", () => {
+  const m6World = {
+    ...exampleWorld,
+    entities: exampleWorld.entities.map((entity) =>
+      entity.entityId === "entity:astra" && entity.kind === "actor"
+        ? {
+            ...entity,
+            directStats: {
+              criticalRate: { baseValue: 0.05, additions: [] },
+            },
+          }
+        : entity,
+    ),
+  }
+
+  const baseState: StateInput = {
+    sessionId: "session:astra-m6",
+    atSeconds: 1,
+    instances: [],
+    snapshots: [
+      {
+        snapshotId: "snapshot:astra-action",
+        atSeconds: 1,
+        attributes: [],
+        world: m6World,
+      },
+    ],
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  }
+
+  it("grants the critical rate only to hits originating from the effect request", () => {
+    const prepared = prepareAstraM6()
+    const state = supplyEffectState(prepared, baseState)
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const automaticHit: EvaluationInput = {
+      kind: "hit",
+      atSeconds: 1,
+      world: m6World,
+      observedSnapshots: [],
+      hit: {
+        hitId: "hit:astra-auto-third",
+        actionInstanceId: "action-instance:astra-auto-third",
+        actionId: "action:astra:charged-basic-third",
+        actorId: "entity:astra",
+        targetId: "entity:spec-target",
+        skillCategory: "basic",
+        actionSnapshotId: "snapshot:astra-action",
+        origin: {
+          kind: "effect-request",
+          requestId: "request:astra-auto",
+          effectId: "agent:1311:mindscape-6:automatic-third-hit",
+          bindingId: "binding:astra",
+        },
+        damageItems: [{ itemId: "main", damageMultiplier: 1, stat: "attack" }],
+      },
+    } as never
+    const autoResult = evaluateEffects(prepared, state.value, automaticHit)
+    expect(autoResult.ok).toBe(true)
+    if (!autoResult.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    expect(autoResult.value.hit?.criticalRate).toBeCloseTo(0.85, 12)
+    const manualHit = {
+      ...(automaticHit as object),
+      hit: {
+        ...((automaticHit as { hit: object }).hit as object),
+        hitId: "hit:astra-manual-third",
+        actionInstanceId: "action-instance:astra-manual-third",
+        origin: { kind: "direct" },
+      },
+    } as never
+    const manualResult = evaluateEffects(prepared, state.value, manualHit)
+    expect(manualResult.ok).toBe(true)
+    if (!manualResult.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    expect(manualResult.value.hit?.criticalRate).toBeCloseTo(0.05, 12)
+    const panel = evaluateEffects(prepared, state.value, {
+      kind: "panel",
+      atSeconds: 1,
+      world: m6World,
+      observedSnapshots: [],
+      entities: ["entity:astra"],
+      stats: ["criticalRate"],
+    } as EvaluationInput)
+    expect(panel.ok).toBe(true)
+    if (!panel.ok) {
+      throw new Error("evaluation must succeed")
+    }
+    const criticalRate = panel.value.attributes.find(
+      (attribute) => attribute.stat === "criticalRate",
+    )
+    expect(criticalRate?.value.value).toBeCloseTo(0.05, 12)
+  })
+})
+
+describe("rule order stability", () => {
+  it("reordering the rule array does not change results or identities", () => {
+    const original = structuredClone(exampleRuleSet)
+    const reordered = structuredClone(exampleRuleSet) as unknown as {
+      effects: unknown[]
+    }
+    reordered.effects = [...reordered.effects].toReversed()
+    const results: number[] = []
+    for (const ruleSet of [original, reordered]) {
+      const parsed = parseEffectRuleSet(ruleSet)
+      expect(parsed.ok).toBe(true)
+      if (!parsed.ok) {
+        throw new Error("rule set must parse")
+      }
+      const prepared = prepareEffects(parsed.value, [
+        {
+          kind: "agent",
+          bindingId: "binding:astra",
+          holderId: "entity:astra",
+          sourceEntityId: "1311",
+          eligible: true,
+          configuration: { mindscapeRank: 2, coreSkillLevel: 7 },
+        },
+      ])
+      expect(prepared.ok).toBe(true)
+      if (!prepared.ok) {
+        throw new Error("prepare must succeed")
+      }
+      const world = {
+        ...exampleWorld,
+        entities: exampleWorld.entities.map((entity) =>
+          entity.entityId === "entity:astra" && entity.kind === "actor"
+            ? {
+                ...entity,
+                generalStats: {
+                  attack: {
+                    baseValue: 3000,
+                    initialPercentage: [],
+                    initialFixed: [],
+                    finalPercentage: [],
+                    finalFixed: [],
+                  },
+                },
+              }
+            : entity,
+        ),
+      }
+      const state = supplyEffectState(prepared.value, {
+        ...suppliedAstraState,
+        snapshots: [
+          { snapshotId: "snapshot:entry", atSeconds: 0, attributes: [], world },
+        ],
+      } as never)
+      expect(state.ok).toBe(true)
+      if (!state.ok) {
+        throw new Error("state supply must succeed")
+      }
+      const result = evaluateEffects(prepared.value, state.value, {
+        kind: "panel",
+        atSeconds: 0,
+        world,
+        observedSnapshots: [],
+        entities: ["entity:attacker"],
+        stats: ["attack"],
+      } as EvaluationInput)
+      expect(result.ok).toBe(true)
+      if (!result.ok) {
+        throw new Error("evaluation must succeed")
+      }
+      results.push(
+        result.value.attributes.find((attribute) => attribute.stat === "attack")
+          ?.value.value ?? Number.NaN,
+      )
+    }
+    expect(results[0]).toBeCloseTo(results[1]!, 12)
+  })
+})

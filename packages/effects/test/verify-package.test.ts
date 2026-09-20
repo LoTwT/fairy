@@ -34,14 +34,24 @@ describe("packed package", () => {
 
     const unpackedDirectory = join(temporaryDirectory, "unpacked")
     const consumerDirectory = join(temporaryDirectory, "consumer")
+    const corePackageDirectory = join(packageDirectory, "..", "core")
 
     execFileSync(
       "corepack",
       ["pnpm", "pack", "--pack-destination", temporaryDirectory],
       { cwd: packageDirectory, stdio: "pipe" },
     )
-    const packedFileName = readdirSync(temporaryDirectory).find((entry) =>
+    execFileSync(
+      "corepack",
+      ["pnpm", "pack", "--pack-destination", temporaryDirectory],
+      { cwd: corePackageDirectory, stdio: "pipe" },
+    )
+    const packedFiles = readdirSync(temporaryDirectory).filter((entry) =>
       entry.endsWith(".tgz"),
+    )
+    expect(packedFiles.length).toBe(2)
+    const packedFileName = packedFiles.find((entry) =>
+      entry.startsWith("randomplay-effects-"),
     )
     expect(packedFileName).toBeDefined()
 
@@ -59,6 +69,10 @@ describe("packed package", () => {
     ])
 
     mkdirSync(consumerDirectory)
+    const packedCore = packedFiles.find((entry) =>
+      entry.startsWith("randomplay-core-"),
+    )
+    expect(packedCore).toBeDefined()
     writeFileSync(
       join(consumerDirectory, "package.json"),
       `${JSON.stringify(
@@ -67,18 +81,21 @@ describe("packed package", () => {
           private: true,
           type: "module",
           packageManager: workspacePackageManager,
+          dependencies: {
+            "@randomplay/effects": `file:${join(unpackedDirectory, "package")}`,
+          },
         },
         null,
         2,
       )}\n`,
     )
+    writeFileSync(
+      join(consumerDirectory, "pnpm-workspace.yaml"),
+      `overrides:\n  "@randomplay/core": file:${join(temporaryDirectory, packedCore!)}\n`,
+    )
     execFileSync(
       "corepack",
-      [
-        workspacePackageManager.split("@")[0]!,
-        "add",
-        join(unpackedDirectory, "package"),
-      ],
+      [workspacePackageManager.split("@")[0]!, "install"],
       { cwd: consumerDirectory, stdio: "pipe" },
     )
     writeFileSync(
