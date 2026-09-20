@@ -66,6 +66,7 @@ describe("packed package", () => {
           name: "randomplay-effects-consumer",
           private: true,
           type: "module",
+          packageManager: workspacePackageManager,
         },
         null,
         2,
