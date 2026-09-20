@@ -451,7 +451,7 @@ function validateDirectStatInput(
   return valid
 }
 
-function validateStateObservation(
+export function validateStateObservation(
   value: unknown,
   collector: IssueCollector,
   pointer: string,

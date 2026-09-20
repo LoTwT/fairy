@@ -1,6 +1,6 @@
 # 统一效果规则模型
 
-状态：正式类型已迁入 `@randomplay/effects` 包（[types.ts](../../packages/effects/src/types.ts)）并随包发布；运行时校验（`parseEffectRuleSet`）、`prepareEffects`、状态导入、外部实例同步与给定状态求值（第一阶段）已实现，事件推进（`advanceEffects`）按[实施阶段](execution.md#实施阶段)交付。
+状态：正式类型已迁入 `@randomplay/effects` 包（[types.ts](../../packages/effects/src/types.ts)）并随包发布；运行时校验（`parseEffectRuleSet`）、`prepareEffects`、状态导入、外部实例同步、给定状态求值与事件推进（`advanceEffects`，含触发、激活阶段修改、时钟、叠层、冷却与稳定请求身份）均已实现，满足完整 `EffectEngine` 接口；验收矩阵见[执行契约](execution.md#求值器实现时的验收矩阵)。
 
 代理人、驱动盘、音擎共用一套规则：**满足条件，提供效果，或修改已有的效果。** 记录数量由实际机制决定。耀嘉音的核心攻击力增益与 2 影强化分别保存，求值时先修改核心参数，再计算一次核心增益。
 
