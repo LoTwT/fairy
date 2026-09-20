@@ -77,8 +77,11 @@ core：计算
 +  definitions/
 ```
 
-`raw` 继续按来源版本保存；`integrated` 维护一份当前数据，不设来源或 `{version}/` 子目录，来源信息保留在 `index.json`。`definitions` 是已确认的
-职责名称，本次不创建空目录或填入计算模型。
+`raw` 继续按来源版本保存；`integrated` 维护一份当前数据，不设来源或 `{version}/` 子目录，来源信息保留在 `index.json`。`definitions` 维护经核对的
+计算语义制品：`definitions/effects/starter.json` 是首批正式效果规则集（耀嘉音核心攻击力转化、2 影核心强化与啄木鸟电音两件套暴击率），内容由
+[统一效果规则模型](../effects/index.md)的契约约束，保留来源定位与规则集身份/修订信息；随包以独立 JSON 子路径分发，不进入根入口，也不依赖
+`@randomplay/effects`。`definitions` 是 Git 跟踪的静态制品，不属于受管理 `integrated` 协议，无控制目录、锁或本机记录；构建时逐文件字节复验后复制
+到 `dist/definitions/`。证据不足的条款（丽娜、玲珑妆匣等）保留为效果规范中明确标注的测试实例，不混入正式规则集。
 
 实体目录是维护和读取的基本单位。使用方可以读取全部数据，也可以通过索引只取指定代理人的公共部分和指定
 语言；完整可获取不等于必须一次加载全库。`details` 本身是该语言的剩余来源内容，需结合 `data` 才能还原详情。

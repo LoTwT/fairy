@@ -20,6 +20,7 @@
       "browser": "./dist/index.browser.mjs",
       "import": "./dist/index.mjs"
     },
+    "./definitions/effects/starter.json": "./dist/definitions/effects/starter.json",
     "./integrated/index.json": "./dist/integrated/index.json",
     "./integrated/agents/*/data.json": "./dist/integrated/agents/*/data.json",
     "./integrated/agents/*/details.zh.json": "./dist/integrated/agents/*/details.zh.json",
