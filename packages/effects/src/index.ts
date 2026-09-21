@@ -1,5 +1,10 @@
 export { parseEffectRuleSet } from "./parse-effect-rule-set.ts"
 export { prepareEffects } from "./internal/prepare.ts"
+export {
+  supplyEffectState,
+  synchronizeSuppliedInstances,
+} from "./internal/state.ts"
+export { evaluateEffects } from "./internal/evaluate.ts"
 export type {
   PreparedEffects,
   Result,
