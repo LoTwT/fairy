@@ -85,6 +85,9 @@ interface EvaluatedLayer {
   readonly appliedModifications: readonly EffectId[]
 }
 
+/** 状态绑定实例在当前世界观察下的裁决；缺记录不是状态结束。 */
+type StateBoundInstanceVerdict = "effective" | "ended" | "unobserved"
+
 /** 单次求值调用的共享可变缓存；上下文拷贝共享同一实例。 */
 interface SharedCache {
   readonly statValues: Map<string, number>
@@ -93,6 +96,8 @@ interface SharedCache {
   readonly selections: Map<string, readonly EvaluatedLayer[]>
   readonly consumed: Set<EvaluatedLayer>
   readonly effectiveInstances: readonly EffectInstance[] | undefined
+  readonly stateBoundVerdicts: Map<string, StateBoundInstanceVerdict>
+  readonly reportedUnobservedInstances: Set<string>
   readonly snapshotWorlds: Map<string, WorldIndex>
 }
 
@@ -200,32 +205,48 @@ function evaluateExpression(
     case "stat":
       return readStatValue(expression, context, layer)
     case "add":
-      return expression.operands.reduce(
-        (sum, operand) =>
-          sum + evaluateExpression(operand, context, layer, parameters),
+      return foldNumericExpression(
+        expression.operands.map((operand) =>
+          evaluateExpression(operand, context, layer, parameters),
+        ),
         0,
+        (sum, operand) => sum + operand,
+        context,
+        "A numeric expression sum",
       )
     case "minimum":
-      return Math.min(
-        ...expression.operands.map((operand) =>
+      return foldNumericExpression(
+        expression.operands.map((operand) =>
           evaluateExpression(operand, context, layer, parameters),
         ),
+        Number.POSITIVE_INFINITY,
+        (lowest, operand) => Math.min(lowest, operand),
+        context,
+        "A numeric expression minimum",
       )
     case "maximum":
-      return Math.max(
-        ...expression.operands.map((operand) =>
+      return foldNumericExpression(
+        expression.operands.map((operand) =>
           evaluateExpression(operand, context, layer, parameters),
         ),
+        Number.NEGATIVE_INFINITY,
+        (highest, operand) => Math.max(highest, operand),
+        context,
+        "A numeric expression maximum",
       )
     case "multiply":
-      return requireFiniteValue(
-        evaluateExpression(expression.value, context, layer, parameters) *
+      return foldNumericExpression(
+        [
+          evaluateExpression(expression.value, context, layer, parameters),
           evaluateExpression(
             expression.coefficient,
             context,
             layer,
             parameters,
           ),
+        ],
+        1,
+        (product, operand) => product * operand,
         context,
         "A numeric expression product",
       )
@@ -260,6 +281,31 @@ function requireFiniteValue(
 function assertNeverExpression(expression: never): number {
   void expression
   throw new Error("Unhandled numeric expression kind")
+}
+
+/**
+ * 逐项算术归约：每一步都检查数值边界，不靠最终输出兜底。
+ * 出现非有限中间结果立即返回，避免后续步骤重复报告同一溢出。
+ */
+function foldNumericExpression(
+  operands: readonly number[],
+  identity: number,
+  combine: (accumulated: number, operand: number) => number,
+  context: EvaluationContext,
+  description: string,
+): number {
+  let accumulated = identity
+  for (const operand of operands) {
+    accumulated = requireFiniteValue(
+      combine(accumulated, operand),
+      context,
+      description,
+    )
+    if (!Number.isFinite(accumulated)) {
+      return accumulated
+    }
+  }
+  return accumulated
 }
 
 function readStatValue(
@@ -613,6 +659,24 @@ function collectLayersForAddress(
       ) {
         continue
       }
+      if (
+        instance.lifetime.kind === "state-bound" &&
+        stateBoundVerdict(instance, context) === "unobserved"
+      ) {
+        // 同一实例被多个消费地址读取时只报告一次缺项。
+        if (
+          !context.shared.reportedUnobservedInstances.has(instance.instanceId)
+        ) {
+          context.shared.reportedUnobservedInstances.add(instance.instanceId)
+          context.collector.report(
+            "MISSING_FACT",
+            "",
+            `State "${instance.lifetime.stateId}" is not observed for owner "${instance.lifetime.stateOwnerId}"; the state-bound instance of "${instance.effectId}" cannot be evaluated`,
+            { effectId: instance.effectId, bindingId: instance.bindingId },
+          )
+        }
+        return undefined
+      }
       for (const beneficiary of instance.beneficiaryIds) {
         if (addressBeneficiary !== null && beneficiary !== addressBeneficiary) {
           continue
@@ -689,33 +753,11 @@ function effectiveInstances(
   }
   const effective = context.state.instances.filter((instance) => {
     if (instance.lifetime.kind === "state-bound") {
-      const holderId = contributionHolderId(context.prepared, instance)
-      if (holderId === undefined) {
-        return false
-      }
-      const bindingId = resolveStateBindingId(
-        context.prepared,
-        instance.lifetime.stateId,
-        holderId,
-        context.collector,
+      // 缺记录的实例保留到真正被消费时再报错，无关查询不因缺少观察而失败。
+      return (
+        stateBoundVerdict(instance, context) !== "ended" &&
+        instance.layers.length > 0
       )
-      if (bindingId === undefined) {
-        return false
-      }
-      const observation = findStateObservation(
-        context.world,
-        instance.lifetime.stateId,
-        bindingId,
-        instance.lifetime.stateOwnerId,
-      )
-      if (
-        observation === undefined ||
-        !observation.active ||
-        observation.activationId !== instance.lifetime.stateActivationId
-      ) {
-        return false
-      }
-      return instance.layers.length > 0
     }
     return instance.layers.some((layer) => layerActive(layer, context))
   })
@@ -725,6 +767,61 @@ function effectiveInstances(
     writable: true,
   })
   return effective
+}
+
+/**
+ * 按完整 (stateId, bindingId, ownerId) 读取状态绑定实例的观察：
+ * 缺记录、显式未生效、生效但激活身份变化是三种不同结果。
+ */
+function stateBoundVerdict(
+  instance: EffectInstance,
+  context: EvaluationContext,
+): StateBoundInstanceVerdict {
+  const cached = context.shared.stateBoundVerdicts.get(instance.instanceId)
+  if (cached !== undefined) {
+    return cached
+  }
+  const verdict = computeStateBoundVerdict(instance, context)
+  context.shared.stateBoundVerdicts.set(instance.instanceId, verdict)
+  return verdict
+}
+
+function computeStateBoundVerdict(
+  instance: EffectInstance,
+  context: EvaluationContext,
+): StateBoundInstanceVerdict {
+  if (instance.lifetime.kind !== "state-bound") {
+    return "ended"
+  }
+  const holderId = contributionHolderId(context.prepared, instance)
+  if (holderId === undefined) {
+    return "ended"
+  }
+  const bindingId = resolveStateBindingId(
+    context.prepared,
+    instance.lifetime.stateId,
+    holderId,
+    context.collector,
+  )
+  if (bindingId === undefined) {
+    return "ended"
+  }
+  const observation = findStateObservation(
+    context.world,
+    instance.lifetime.stateId,
+    bindingId,
+    instance.lifetime.stateOwnerId,
+  )
+  if (observation === undefined) {
+    return "unobserved"
+  }
+  if (
+    !observation.active ||
+    observation.activationId !== instance.lifetime.stateActivationId
+  ) {
+    return "ended"
+  }
+  return "effective"
 }
 
 function effectiveLayers(
@@ -951,11 +1048,19 @@ function evaluateSingleLayer(
     if (current === undefined) {
       continue
     }
+    const description = `The modified parameter "${name}" of "${rule.effectId}"`
+    const withAdds = requireFiniteValue(
+      (transform.set ?? current.value) + transform.addSum,
+      context,
+      description,
+    )
     localParameters.set(name, {
       unit: current.unit,
-      value:
-        ((transform.set ?? current.value) + transform.addSum) *
-        transform.scaleProduct,
+      value: requireFiniteValue(
+        withAdds * transform.scaleProduct,
+        context,
+        description,
+      ),
     })
   }
   const layerWithParams: LayerCandidate = {
@@ -1291,6 +1396,17 @@ function evaluateOneOf(
   return false
 }
 
+interface SourceCandidate {
+  readonly key: string
+  readonly list: readonly EvaluatedLayer[]
+  readonly combined: number
+}
+
+/** 唯一性选择使用的配置阶段优先级。 */
+function priorityOf(candidate: SourceCandidate): number {
+  return candidate.list[0]!.candidate.entry.resolvedPriority
+}
+
 function selectUnique(
   layers: readonly EvaluatedLayer[],
   context: EvaluationContext,
@@ -1301,11 +1417,6 @@ function selectUnique(
     const list = bySource.get(key) ?? []
     list.push(layer)
     bySource.set(key, list)
-  }
-  interface SourceCandidate {
-    readonly key: string
-    readonly list: readonly EvaluatedLayer[]
-    readonly combined: number
   }
   const sourceCandidates: SourceCandidate[] = [...bySource.entries()]
     .map(([key, list]) => ({
@@ -1377,6 +1488,7 @@ function selectUnique(
       continue
     }
     if (uniqueness.select.kind === "latest-activation") {
+      // 先找激活时间最新的候选；较早候选之间的差异不影响明确的最新获胜者。
       let best = group[0]!
       for (const candidate of group) {
         const candidateStart = latestStart(candidate.list)
@@ -1388,24 +1500,43 @@ function selectUnique(
           best = candidate
         }
       }
-      survivors.push(...best.list)
-      continue
-    }
-    let best = group[0]!
-    for (const candidate of group) {
-      const priority = candidate.list[0]!.candidate.entry.resolvedPriority
-      const bestPriority = best.list[0]!.candidate.entry.resolvedPriority
-      if (priority > bestPriority) {
-        best = candidate
-        continue
-      }
-      if (priority === bestPriority && candidate.combined !== best.combined) {
+      const newestStart = latestStart(best.list)
+      if (
+        group.some(
+          (candidate) =>
+            latestStart(candidate.list) === newestStart &&
+            candidate.combined !== best.combined,
+        )
+      ) {
         context.collector.report(
           "UNIQUENESS_CONFLICT",
           "",
-          `Uniqueness group "${uniqueness.key}" cannot resolve equal priorities with different values`,
+          `Uniqueness group "${uniqueness.key}" cannot resolve equal activation times with different values`,
         )
       }
+      survivors.push(...best.list)
+      continue
+    }
+    // 先确定最高优先级，再只在最高优先级候选之间裁决平局。
+    let best = group[0]!
+    for (const candidate of group) {
+      if (priorityOf(candidate) > priorityOf(best)) {
+        best = candidate
+      }
+    }
+    const highestPriority = priorityOf(best)
+    if (
+      group.some(
+        (candidate) =>
+          priorityOf(candidate) === highestPriority &&
+          candidate.combined !== best.combined,
+      )
+    ) {
+      context.collector.report(
+        "UNIQUENESS_CONFLICT",
+        "",
+        `Uniqueness group "${uniqueness.key}" cannot resolve equal priorities with different values`,
+      )
     }
     survivors.push(...best.list)
   }
@@ -1579,6 +1710,8 @@ export function evaluateEffects(
       selections: new Map(),
       consumed: new Set(),
       effectiveInstances: undefined,
+      stateBoundVerdicts: new Map(),
+      reportedUnobservedInstances: new Set(),
       snapshotWorlds: new Map(),
     },
     atSeconds,

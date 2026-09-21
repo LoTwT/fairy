@@ -2034,3 +2034,761 @@ describe("state observation reads", () => {
     ).toBeCloseTo(1000, 9)
   })
 })
+
+/** 状态绑定贡献规则：以外部导入层覆盖求值侧的观察与唯一性边界。 */
+function stateBoundContribution(
+  effectId: string,
+  operation: unknown,
+  extra: Record<string, unknown> = {},
+): Record<string, unknown> {
+  return syntheticContribution(effectId, operation, {
+    activation: {
+      kind: "triggered",
+      trigger: { eventKinds: ["state-observed"], when: alwaysCondition },
+      lifetime: {
+        kind: "state-bound",
+        stateId: "state:spec:linger",
+        stateOwner: { role: "holder" },
+      },
+      layering: {
+        recipientPartition: "individual",
+        keys: [],
+        maximum: countLiteral(2),
+        onRetrigger: "add-layer",
+        atCapacity: "ignore-new-layer",
+      },
+    },
+    ...extra,
+  })
+}
+
+function stateBoundLayerInstance(
+  instanceId: string,
+  effectId: string,
+  options: {
+    layerId: string
+    startedAt: number
+    stateActivationId?: string
+  },
+): Record<string, unknown> {
+  return {
+    instanceId,
+    effectId,
+    bindingId: "binding:spec",
+    beneficiaryIds: ["entity:spec"],
+    stackKey: [],
+    lifetime: {
+      kind: "state-bound",
+      stateId: "state:spec:linger",
+      stateOwnerId: "entity:spec",
+      stateActivationId: options.stateActivationId ?? "state-activation:spec-a",
+    },
+    layers: [
+      {
+        layerId: options.layerId,
+        startedAt: options.startedAt,
+        expiresAt: null,
+        trigger: null,
+      },
+    ],
+  }
+}
+
+function supplyInstances(
+  prepared: PreparedEffects,
+  instances: readonly unknown[],
+  atSeconds = 0,
+): EffectState {
+  const state = supplyEffectState(prepared, {
+    sessionId: "session:spec-observation-boundary",
+    atSeconds,
+    instances: structuredClone(instances) as never,
+    snapshots: [],
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  })
+  expect(state.ok).toBe(true)
+  if (!state.ok) {
+    throw new Error(
+      `state supply must succeed: ${JSON.stringify(state.issues)}`,
+    )
+  }
+  return state.value
+}
+
+/** 贡献查询中落到攻击力地址的来源；合成规则集的其他通道不属于本次断言。 */
+function contributionEffects(
+  prepared: PreparedEffects,
+  state: EffectState,
+  world: unknown,
+): readonly string[] {
+  const result = evaluateEffects(prepared, state, {
+    kind: "contributions",
+    atSeconds: 1,
+    world,
+    observedSnapshots: [],
+    beneficiaries: ["entity:spec"],
+  } as never)
+  expect(result.ok).toBe(true)
+  if (!result.ok) {
+    throw new Error(
+      `contribution query must succeed: ${JSON.stringify(result.issues)}`,
+    )
+  }
+  return result.value.contributions
+    .filter(
+      (contribution) =>
+        contribution.address.kind === "stat" &&
+        contribution.address.stat === "attack",
+    )
+    .map((contribution) => contribution.origin.effectId)
+}
+
+const activeSyntheticStateRecord = {
+  stateId: "state:spec:linger",
+  bindingId: "binding:spec",
+  ownerId: "entity:spec",
+  active: true,
+  activationId: "state-activation:spec-a",
+  since: 0,
+} as const
+
+describe("state-bound observation boundaries", () => {
+  const boundEffectId = "environment:spec:bound-attack"
+  const boundAttack = stateBoundContribution(boundEffectId, fixedAttack(100))
+  const boundInstance = stateBoundLayerInstance(
+    "instance:spec-bound",
+    boundEffectId,
+    { layerId: "layer:spec-bound", startedAt: 0 },
+  )
+
+  it("fails when a consumed state-bound instance has no observation", () => {
+    const prepared = prepareSyntheticWithEffects([boundAttack])
+    const state = supplyInstances(prepared, [boundInstance])
+    const result = evaluateEffects(prepared, state, {
+      kind: "contributions",
+      atSeconds: 1,
+      world: withSyntheticStates([]),
+      observedSnapshots: [],
+      beneficiaries: ["entity:spec"],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+  })
+
+  it("keeps the instance while the activation identity matches", () => {
+    const prepared = prepareSyntheticWithEffects([boundAttack])
+    const state = supplyInstances(prepared, [boundInstance])
+    expect(
+      contributionEffects(
+        prepared,
+        state,
+        withSyntheticStates([activeSyntheticStateRecord]),
+      ),
+    ).toContain(boundEffectId)
+    expect(
+      panelAttack(
+        prepared,
+        state,
+        withSyntheticStates([activeSyntheticStateRecord]),
+      ),
+    ).toBeCloseTo(1100, 9)
+  })
+
+  it("drops the instance when the state ended or the activation identity changed", () => {
+    const prepared = prepareSyntheticWithEffects([boundAttack])
+    const state = supplyInstances(prepared, [boundInstance])
+    const ended = withSyntheticStates([
+      {
+        stateId: "state:spec:linger",
+        bindingId: "binding:spec",
+        ownerId: "entity:spec",
+        active: false,
+        activationId: null,
+        since: null,
+      },
+    ])
+    expect(contributionEffects(prepared, state, ended)).not.toContain(
+      boundEffectId,
+    )
+    expect(panelAttack(prepared, state, ended)).toBeCloseTo(1000, 9)
+    const reentered = withSyntheticStates([
+      {
+        ...activeSyntheticStateRecord,
+        activationId: "state-activation:spec-b",
+      },
+    ])
+    expect(contributionEffects(prepared, state, reentered)).not.toContain(
+      boundEffectId,
+    )
+    expect(panelAttack(prepared, state, reentered)).toBeCloseTo(1000, 9)
+  })
+
+  it("does not require the observation of a state-bound instance this query never consumes", () => {
+    const rateEffectId = "environment:spec:bound-rate"
+    const boundRate = stateBoundContribution(rateEffectId, {
+      kind: "stat-adjustment",
+      stat: "criticalRate",
+      stage: "direct",
+      value: ratioLiteral(0.5),
+    })
+    const prepared = prepareSyntheticWithEffects([boundRate])
+    const state = supplyInstances(prepared, [
+      stateBoundLayerInstance("instance:spec-rate", rateEffectId, {
+        layerId: "layer:spec-rate",
+        startedAt: 0,
+      }),
+    ])
+    // attack 查询不消费该状态绑定实例，因此不需要它的观察记录。
+    expect(panelAttack(prepared, state, withSyntheticStates([]))).toBeCloseTo(
+      1000,
+      9,
+    )
+    // 真正消费该实例的查询仍然要求观察记录。
+    const consumed = evaluateEffects(prepared, state, {
+      kind: "panel",
+      atSeconds: 1,
+      world: withSyntheticStates([]),
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["criticalRate"],
+    } as never)
+    expect(consumed.ok).toBe(false)
+    if (!consumed.ok) {
+      expect(
+        consumed.issues.some((issue) => issue.code === "MISSING_FACT"),
+      ).toBe(true)
+    }
+  })
+})
+
+describe("uniqueness selection boundaries", () => {
+  const latestActivation = {
+    key: "spec-latest",
+    scope: "global",
+    select: { kind: "latest-activation" },
+  } as const
+  const prioritySelection = (priority: number) => ({
+    key: "spec-priority",
+    scope: "global",
+    select: { kind: "priority", priority: countLiteral(priority) },
+  })
+  const activeWorld = withSyntheticStates([activeSyntheticStateRecord])
+
+  function latestRule(effectId: string, value: number) {
+    return stateBoundContribution(effectId, fixedAttack(value), {
+      uniqueness: latestActivation,
+    })
+  }
+
+  it("reports a conflict when the newest activations tie with unequal values", () => {
+    const prepared = prepareSyntheticWithEffects([
+      latestRule("environment:spec:latest-a", 100),
+      latestRule("environment:spec:latest-b", 200),
+    ])
+    const state = supplyInstances(prepared, [
+      stateBoundLayerInstance(
+        "instance:spec-latest-a",
+        "environment:spec:latest-a",
+        { layerId: "layer:spec-latest-a", startedAt: 0 },
+      ),
+      stateBoundLayerInstance(
+        "instance:spec-latest-b",
+        "environment:spec:latest-b",
+        { layerId: "layer:spec-latest-b", startedAt: 0 },
+      ),
+    ])
+    const result = evaluateEffects(prepared, state, {
+      kind: "panel",
+      atSeconds: 1,
+      world: activeWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "UNIQUENESS_CONFLICT"),
+      ).toBe(true)
+    }
+  })
+
+  it("selects a stable source when the tied newest values agree", () => {
+    const prepared = prepareSyntheticWithEffects([
+      latestRule("environment:spec:latest-a", 100),
+      latestRule("environment:spec:latest-b", 100),
+    ])
+    const state = supplyInstances(prepared, [
+      stateBoundLayerInstance(
+        "instance:spec-latest-a",
+        "environment:spec:latest-a",
+        { layerId: "layer:spec-latest-a", startedAt: 0 },
+      ),
+      stateBoundLayerInstance(
+        "instance:spec-latest-b",
+        "environment:spec:latest-b",
+        { layerId: "layer:spec-latest-b", startedAt: 0 },
+      ),
+    ])
+    const contributions = contributionEffects(prepared, state, activeWorld)
+    expect(contributions).toEqual(["environment:spec:latest-a"])
+    expect(panelAttack(prepared, state, activeWorld)).toBeCloseTo(1100, 9)
+  })
+
+  it("ignores differences among earlier candidates once a newer activation wins", () => {
+    const prepared = prepareSyntheticWithEffects([
+      latestRule("environment:spec:latest-a", 100),
+      latestRule("environment:spec:latest-b", 200),
+      latestRule("environment:spec:latest-c", 300),
+    ])
+    const state = supplyInstances(
+      prepared,
+      [
+        stateBoundLayerInstance(
+          "instance:spec-latest-a",
+          "environment:spec:latest-a",
+          { layerId: "layer:spec-latest-a", startedAt: 0 },
+        ),
+        stateBoundLayerInstance(
+          "instance:spec-latest-b",
+          "environment:spec:latest-b",
+          { layerId: "layer:spec-latest-b", startedAt: 0 },
+        ),
+        stateBoundLayerInstance(
+          "instance:spec-latest-c",
+          "environment:spec:latest-c",
+          { layerId: "layer:spec-latest-c", startedAt: 1 },
+        ),
+      ],
+      1,
+    )
+    const contributions = contributionEffects(prepared, state, activeWorld)
+    expect(contributions).toEqual(["environment:spec:latest-c"])
+    expect(panelAttack(prepared, state, activeWorld)).toBeCloseTo(1300, 9)
+  })
+
+  function priorityRule(effectId: string, priority: number, value: number) {
+    return syntheticContribution(effectId, fixedAttack(value), {
+      uniqueness: prioritySelection(priority),
+    })
+  }
+
+  it("resolves the highest priority before checking ties among the top candidates", () => {
+    const prepared = prepareSyntheticWithEffects([
+      priorityRule("environment:spec:priority-a", 1, 100),
+      priorityRule("environment:spec:priority-b", 1, 200),
+      priorityRule("environment:spec:priority-c", 2, 300),
+    ])
+    const state = supplySyntheticState(prepared)
+    const contributions = contributionEffects(prepared, state, syntheticWorld)
+    expect(contributions).toEqual(["environment:spec:priority-c"])
+    expect(panelAttack(prepared, state)).toBeCloseTo(1300, 9)
+  })
+
+  it("reports a conflict only when the top-priority candidates disagree", () => {
+    const conflicting = prepareSyntheticWithEffects([
+      priorityRule("environment:spec:priority-a", 1, 100),
+      priorityRule("environment:spec:priority-b", 1, 200),
+      priorityRule("environment:spec:priority-c", 2, 300),
+      priorityRule("environment:spec:priority-d", 2, 400),
+    ])
+    const state = supplySyntheticState(conflicting)
+    const result = evaluateEffects(conflicting, state, {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "UNIQUENESS_CONFLICT"),
+      ).toBe(true)
+    }
+  })
+
+  it("selects a stable source when the top-priority candidates agree", () => {
+    const prepared = prepareSyntheticWithEffects([
+      priorityRule("environment:spec:priority-a", 1, 100),
+      priorityRule("environment:spec:priority-b", 2, 200),
+      priorityRule("environment:spec:priority-c", 2, 200),
+    ])
+    const state = supplySyntheticState(prepared)
+    expect(contributionEffects(prepared, state, syntheticWorld)).toEqual([
+      "environment:spec:priority-b",
+    ])
+    expect(panelAttack(prepared, state)).toBeCloseTo(1200, 9)
+  })
+
+  it("keeps the verdict when rule, binding, and instance order change", () => {
+    const forwardRules = [
+      priorityRule("environment:spec:priority-a", 1, 100),
+      priorityRule("environment:spec:priority-b", 1, 200),
+      priorityRule("environment:spec:priority-c", 2, 300),
+    ]
+    const forward = prepareSyntheticWithEffects(forwardRules)
+    expect(
+      contributionEffects(
+        forward,
+        supplySyntheticState(forward),
+        syntheticWorld,
+      ),
+    ).toEqual(["environment:spec:priority-c"])
+    const reversed = prepareSyntheticWithEffects(forwardRules.toReversed())
+    expect(
+      contributionEffects(
+        reversed,
+        supplySyntheticState(reversed),
+        syntheticWorld,
+      ),
+    ).toEqual(["environment:spec:priority-c"])
+    expect(panelAttack(forward, supplySyntheticState(forward))).toBeCloseTo(
+      panelAttack(reversed, supplySyntheticState(reversed)),
+      9,
+    )
+  })
+})
+
+const overflowingSumExpression = (unit: string) => ({
+  kind: "add",
+  unit,
+  operands: [
+    { kind: "literal", unit, value: 1e308 },
+    { kind: "literal", unit, value: 1e308 },
+  ],
+})
+
+describe("intermediate overflow boundaries", () => {
+  const criticalRatePanel = (prepared: PreparedEffects) =>
+    evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["criticalRate"],
+    } as never)
+
+  function criticalRateContribution(effectId: string, value: unknown) {
+    return syntheticContribution(effectId, {
+      kind: "stat-adjustment",
+      stat: "criticalRate",
+      stage: "direct",
+      value,
+    })
+  }
+
+  it("fails instead of throwing when an overflowed sum is multiplied by zero", () => {
+    const prepared = prepareSyntheticWithEffects([
+      criticalRateContribution("environment:spec:nan-product", {
+        kind: "multiply",
+        unit: "ratio",
+        value: overflowingSumExpression("ratio"),
+        coefficient: multiplierLiteral(0),
+      }),
+    ])
+    const result = criticalRatePanel(prepared)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("does not let a minimum or maximum operand mask an overflow", () => {
+    for (const kind of ["minimum", "maximum"] as const) {
+      const prepared = prepareSyntheticWithEffects([
+        criticalRateContribution(`environment:spec:masked-${kind}`, {
+          kind,
+          unit: "ratio",
+          operands: [overflowingSumExpression("ratio"), ratioLiteral(0.2)],
+        }),
+      ])
+      const result = criticalRatePanel(prepared)
+      expect(result.ok).toBe(false)
+      if (!result.ok) {
+        expect(
+          result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+        ).toBe(true)
+      }
+    }
+  })
+
+  it("fails when a contribution-phase parameter modification overflows", () => {
+    const target = syntheticContribution(
+      "environment:spec:parameter-overflow-target",
+      {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: {
+          kind: "multiply",
+          unit: "attack-points",
+          value: parameterReference("attack-points", "amount"),
+          coefficient: multiplierLiteral(0),
+        },
+      },
+      {
+        parameters: {
+          amount: { kind: "constant", unit: "attack-points", value: 1 },
+        },
+      },
+    )
+    const modification = syntheticContributionModification(
+      "environment:spec:parameter-overflow",
+      "environment:spec:parameter-overflow-target",
+      [
+        {
+          field: "parameter",
+          name: "amount",
+          unit: "attack-points",
+          change: {
+            operator: "add",
+            value: overflowingSumExpression("attack-points"),
+          },
+        },
+      ],
+    )
+    const prepared = prepareSyntheticWithEffects([target, modification])
+    const result = evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when a configuration-stage expression overflows", () => {
+    const overflowingConfig = syntheticContribution(
+      "environment:spec:config-overflow",
+      fixedAttack(100),
+      {
+        config: {
+          kind: "compare-number",
+          unit: "count",
+          operator: "gt",
+          left: overflowingSumExpression("count"),
+          right: countLiteral(0),
+        },
+      },
+    )
+    const parsed = parseEffectRuleSet(
+      (() => {
+        const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+          effects: unknown[]
+        }
+        ruleSet.effects.push(overflowingConfig)
+        return ruleSet
+      })(),
+    )
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(false)
+    if (!prepared.ok) {
+      expect(
+        prepared.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when a configuration-stage layer maximum hides an overflow", () => {
+    const overflowingMaximum = stateBoundContribution(
+      "environment:spec:maximum-overflow",
+      fixedAttack(100),
+      {
+        activation: {
+          kind: "triggered",
+          trigger: { eventKinds: ["entry"], when: alwaysCondition },
+          lifetime: {
+            kind: "state-bound",
+            stateId: "state:spec:linger",
+            stateOwner: { role: "holder" },
+          },
+          layering: {
+            recipientPartition: "individual",
+            keys: [],
+            maximum: {
+              kind: "minimum",
+              unit: "count",
+              operands: [overflowingSumExpression("count"), countLiteral(2)],
+            },
+            onRetrigger: "add-layer",
+            atCapacity: "ignore-new-layer",
+          },
+        },
+      },
+    )
+    const parsed = parseEffectRuleSet(
+      (() => {
+        const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+          effects: unknown[]
+        }
+        ruleSet.effects.push(overflowingMaximum)
+        return ruleSet
+      })(),
+    )
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(false)
+    if (!prepared.ok) {
+      expect(
+        prepared.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+})
+
+describe("modification accumulation boundaries", () => {
+  const hugeAddOperand = {
+    field: "parameter",
+    name: "amount",
+    unit: "attack-points",
+    change: {
+      operator: "add",
+      value: { kind: "literal", unit: "attack-points", value: 1e308 },
+    },
+  }
+
+  /** 目标规则不读取被修改的参数：只有归约本身能发现累加溢出。 */
+  function unusedParameterTarget() {
+    return syntheticContribution(
+      "environment:spec:accumulation-target",
+      fixedAttack(100),
+      {
+        parameters: {
+          amount: { kind: "constant", unit: "attack-points", value: 1 },
+        },
+      },
+    )
+  }
+
+  it("fails when two contribution-phase modifications overflow the accumulated addends", () => {
+    const prepared = prepareSyntheticWithEffects([
+      unusedParameterTarget(),
+      syntheticContributionModification(
+        "environment:spec:accumulation-a",
+        "environment:spec:accumulation-target",
+        [hugeAddOperand],
+      ),
+      syntheticContributionModification(
+        "environment:spec:accumulation-b",
+        "environment:spec:accumulation-target",
+        [hugeAddOperand],
+      ),
+    ])
+    const result = evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when a configuration-phase modification overflows a state parameter", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: unknown[]
+      states: { parameters: Record<string, { value: number }> }[]
+    }
+    ruleSet.states[0]!.parameters["lingerSeconds"]!.value = 1e308
+    ruleSet.effects.push({
+      kind: "modification",
+      effectId: "environment:spec:state-parameter-overflow",
+      source: structuredClone(syntheticRuleSet.effects[0]!.source),
+      config: alwaysCondition,
+      parameters: {},
+      phase: "configuration",
+      target: { kind: "state", stateId: "state:spec:linger" },
+      modifications: [
+        {
+          field: "parameter",
+          name: "lingerSeconds",
+          unit: "seconds",
+          change: {
+            operator: "add",
+            value: { kind: "literal", unit: "seconds", value: 1e308 },
+          },
+        },
+      ],
+    })
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(false)
+    if (!prepared.ok) {
+      expect(
+        prepared.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when two configuration-phase modifications overflow the accumulated addends", () => {
+    const configurationModification = (
+      effectId: string,
+    ): Record<string, unknown> => ({
+      kind: "modification",
+      effectId,
+      source: structuredClone(syntheticRuleSet.effects[0]!.source),
+      config: alwaysCondition,
+      parameters: {},
+      phase: "configuration",
+      target: {
+        kind: "effect",
+        effectId: "environment:spec:accumulation-target",
+      },
+      modifications: [hugeAddOperand],
+    })
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: unknown[]
+    }
+    ruleSet.effects.push(
+      unusedParameterTarget(),
+      configurationModification("environment:spec:accumulation-config-a"),
+      configurationModification("environment:spec:accumulation-config-b"),
+    )
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(false)
+    if (!prepared.ok) {
+      expect(
+        prepared.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+})

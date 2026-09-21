@@ -19,12 +19,65 @@ import { IssueCollector, failure } from "./issues.ts"
 import { validatePendingModifications } from "./modification.ts"
 import { validateRuleSetStructure, validateSourceBindings } from "./rule.ts"
 
+/**
+ * 配置阶段数值归约：任何非有限中间结果都按定义失败处理。
+ * NaN 表示上游已经报告的问题，不重复报告；其余非有限值在此报告。
+ */
+function requireFiniteConfigurationValue(
+  value: number,
+  collector: IssueCollector,
+  description: string,
+): number {
+  if (Number.isFinite(value) || Number.isNaN(value)) {
+    return value
+  }
+  collector.report(
+    "INVALID_DEFINITION",
+    "",
+    `${description} is not a finite number`,
+  )
+  return Number.NaN
+}
+
+/**
+ * 逐项算术归约：每一步都检查数值边界，不靠最终输出兜底。
+ * 表达式节点与修改归约共用同一契约。
+ */
+function foldFiniteValues(
+  values: readonly number[],
+  identity: number,
+  combine: (accumulated: number, value: number) => number,
+  collector: IssueCollector,
+  description: string,
+): number {
+  let accumulated = identity
+  for (const value of values) {
+    accumulated = requireFiniteConfigurationValue(
+      combine(accumulated, value),
+      collector,
+      description,
+    )
+    if (!Number.isFinite(accumulated)) {
+      return accumulated
+    }
+  }
+  return accumulated
+}
+
 /** 配置阶段数值求值：字面量、参数、配置数字与算术组合。 */
 export function evaluateConfigurationExpression(
   expression: NumericExpression<Unit, "configuration">,
   parameters: ReadonlyMap<string, Quantity<Unit>>,
   configuration: Readonly<Record<string, number>>,
+  collector: IssueCollector,
 ): number {
+  const evaluate = (operand: NumericExpression<Unit, "configuration">) =>
+    evaluateConfigurationExpression(
+      operand,
+      parameters,
+      configuration,
+      collector,
+    )
   switch (expression.kind) {
     case "literal":
       return expression.value
@@ -33,36 +86,36 @@ export function evaluateConfigurationExpression(
     case "configuration-number":
       return configuration[expression.field] ?? 0
     case "add":
-      return expression.operands.reduce(
-        (sum, operand) =>
-          sum +
-          evaluateConfigurationExpression(operand, parameters, configuration),
+      return foldFiniteValues(
+        expression.operands.map(evaluate),
         0,
+        (sum, operand) => sum + operand,
+        collector,
+        "A configuration-stage sum",
       )
     case "minimum":
-      return Math.min(
-        ...expression.operands.map((operand) =>
-          evaluateConfigurationExpression(operand, parameters, configuration),
-        ),
+      return foldFiniteValues(
+        expression.operands.map(evaluate),
+        Number.POSITIVE_INFINITY,
+        (lowest, operand) => Math.min(lowest, operand),
+        collector,
+        "A configuration-stage minimum",
       )
     case "maximum":
-      return Math.max(
-        ...expression.operands.map((operand) =>
-          evaluateConfigurationExpression(operand, parameters, configuration),
-        ),
+      return foldFiniteValues(
+        expression.operands.map(evaluate),
+        Number.NEGATIVE_INFINITY,
+        (highest, operand) => Math.max(highest, operand),
+        collector,
+        "A configuration-stage maximum",
       )
     case "multiply":
-      return (
-        evaluateConfigurationExpression(
-          expression.value,
-          parameters,
-          configuration,
-        ) *
-        evaluateConfigurationExpression(
-          expression.coefficient,
-          parameters,
-          configuration,
-        )
+      return foldFiniteValues(
+        [evaluate(expression.value), evaluate(expression.coefficient)],
+        1,
+        (product, operand) => product * operand,
+        collector,
+        "A configuration-stage product",
       )
   }
 }
@@ -71,20 +124,35 @@ export function evaluateConfigurationCondition(
   condition: Condition<"configuration">,
   parameters: ReadonlyMap<string, Quantity<Unit>>,
   configuration: Readonly<Record<string, number>>,
+  collector: IssueCollector,
 ): boolean {
   switch (condition.kind) {
     case "constant":
       return condition.value
     case "all":
       for (const entry of condition.conditions) {
-        if (!evaluateConfigurationCondition(entry, parameters, configuration)) {
+        if (
+          !evaluateConfigurationCondition(
+            entry,
+            parameters,
+            configuration,
+            collector,
+          )
+        ) {
           return false
         }
       }
       return true
     case "any":
       for (const entry of condition.conditions) {
-        if (evaluateConfigurationCondition(entry, parameters, configuration)) {
+        if (
+          evaluateConfigurationCondition(
+            entry,
+            parameters,
+            configuration,
+            collector,
+          )
+        ) {
           return true
         }
       }
@@ -94,18 +162,32 @@ export function evaluateConfigurationCondition(
         condition.condition,
         parameters,
         configuration,
+        collector,
       )
     case "compare-number": {
-      const left = evaluateConfigurationExpression(
-        condition.left,
-        parameters,
-        configuration,
+      const left = requireFiniteConfigurationValue(
+        evaluateConfigurationExpression(
+          condition.left,
+          parameters,
+          configuration,
+          collector,
+        ),
+        collector,
+        "A compared configuration operand",
       )
-      const right = evaluateConfigurationExpression(
-        condition.right,
-        parameters,
-        configuration,
+      const right = requireFiniteConfigurationValue(
+        evaluateConfigurationExpression(
+          condition.right,
+          parameters,
+          configuration,
+          collector,
+        ),
+        collector,
+        "A compared configuration operand",
       )
+      if (!Number.isFinite(left) || !Number.isFinite(right)) {
+        return false
+      }
       switch (condition.operator) {
         case "eq":
           return left === right
@@ -199,6 +281,7 @@ function resolveConfigurationInteger(
     expression,
     parameters,
     configuration,
+    collector,
   )
   const valid = Number.isInteger(value) && (constraint === "any" || value > 0)
   if (!valid) {
@@ -381,6 +464,7 @@ export function prepareEffects(
           rule.config,
           resolved,
           binding.configuration as Readonly<Record<string, number>>,
+          collector,
         )
       ) {
         continue
@@ -437,6 +521,7 @@ export function prepareEffects(
           change.change.value,
           active.parameters,
           binding.configuration as Readonly<Record<string, number>>,
+          collector,
         ),
       }))
       foldedModifications.push({
@@ -604,9 +689,19 @@ export function prepareEffects(
             const set = fold.parameters.setValues.get(name)
             const addSum = fold.parameters.addSums.get(name) ?? 0
             const scaleProduct = fold.parameters.scaleProducts.get(name) ?? 1
+            const description = `The folded parameter "${name}" of "${active.rule.effectId}"`
+            const withAdds = requireFiniteConfigurationValue(
+              (set ?? quantity.value) + addSum,
+              collector,
+              description,
+            )
             foldedParameters.set(name, {
               unit: quantity.unit,
-              value: ((set ?? quantity.value) + addSum) * scaleProduct,
+              value: requireFiniteConfigurationValue(
+                withAdds * scaleProduct,
+                collector,
+                description,
+              ),
             })
           }
         }
@@ -658,13 +753,22 @@ export function prepareEffects(
           outputAddSum:
             fold === undefined
               ? 0
-              : fold.outputAdds.reduce((sum, value) => sum + value, 0),
+              : foldFiniteValues(
+                  fold.outputAdds,
+                  0,
+                  (sum, value) => sum + value,
+                  collector,
+                  `The folded output additions of "${active.rule.effectId}"`,
+                ),
           outputScaleProduct:
             fold === undefined
               ? 1
-              : fold.outputScales.reduce(
-                  (product, value) => product * value,
+              : foldFiniteValues(
+                  fold.outputScales,
                   1,
+                  (product, value) => product * value,
+                  collector,
+                  `The folded output scales of "${active.rule.effectId}"`,
                 ),
           durationTransform:
             fold === undefined || fold.appliedIds.length === 0
@@ -675,13 +779,19 @@ export function prepareEffects(
                 ? undefined
                 : {
                     set: fold.duration.set,
-                    addSum: fold.duration.adds.reduce(
-                      (sum, value) => sum + value,
+                    addSum: foldFiniteValues(
+                      fold.duration.adds,
                       0,
+                      (sum, value) => sum + value,
+                      collector,
+                      `The folded duration additions of "${active.rule.effectId}"`,
                     ),
-                    scaleProduct: fold.duration.scales.reduce(
-                      (product, value) => product * value,
+                    scaleProduct: foldFiniteValues(
+                      fold.duration.scales,
                       1,
+                      (product, value) => product * value,
+                      collector,
+                      `The folded duration scales of "${active.rule.effectId}"`,
                     ),
                   },
           extensionMaximumTransform:
@@ -693,13 +803,19 @@ export function prepareEffects(
                 ? undefined
                 : {
                     set: fold.extensionMaximum.set,
-                    addSum: fold.extensionMaximum.adds.reduce(
-                      (sum, value) => sum + value,
+                    addSum: foldFiniteValues(
+                      fold.extensionMaximum.adds,
                       0,
+                      (sum, value) => sum + value,
+                      collector,
+                      `The folded extension maximum additions of "${active.rule.effectId}"`,
                     ),
-                    scaleProduct: fold.extensionMaximum.scales.reduce(
-                      (product, value) => product * value,
+                    scaleProduct: foldFiniteValues(
+                      fold.extensionMaximum.scales,
                       1,
+                      (product, value) => product * value,
+                      collector,
+                      `The folded extension maximum scales of "${active.rule.effectId}"`,
                     ),
                   },
           appliedModificationIds:
@@ -764,9 +880,19 @@ export function prepareEffects(
         const set = fold.setValues.get(name)
         const addSum = fold.addSums.get(name) ?? 0
         const scaleProduct = fold.scaleProducts.get(name) ?? 1
+        const description = `The folded state parameter "${name}" of "${state.stateId}"`
+        const withAdds = requireFiniteConfigurationValue(
+          (set ?? quantity.value) + addSum,
+          collector,
+          description,
+        )
         parameters[name] = {
           unit: quantity.unit,
-          value: ((set ?? quantity.value) + addSum) * scaleProduct,
+          value: requireFiniteConfigurationValue(
+            withAdds * scaleProduct,
+            collector,
+            description,
+          ),
         }
       }
       stateParameters.push({
@@ -775,6 +901,9 @@ export function prepareEffects(
         parameters,
       })
     }
+  }
+  if (!collector.isEmpty) {
+    return failure(collector)
   }
 
   const internal: PreparedEffectsInternal = {
