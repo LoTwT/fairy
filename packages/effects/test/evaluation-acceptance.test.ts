@@ -3247,3 +3247,122 @@ describe("numeric reduction boundaries in modifications and multipliers", () => 
     }
   })
 })
+
+function stackedLayerState(
+  prepared: PreparedEffects,
+  inputs: readonly number[],
+) {
+  const state = supplyEffectState(prepared, {
+    sessionId: "session:spec-source-reduction",
+    atSeconds: 2,
+    instances: [
+      {
+        instanceId: "instance:spec-source-reduction",
+        effectId: "environment:spec:varying-multiplier",
+        bindingId: "binding:spec",
+        beneficiaryIds: ["entity:spec"],
+        stackKey: [],
+        lifetime: { kind: "supplied" },
+        layers: inputs.map((_, index) => ({
+          layerId: `layer:source-${index}`,
+          startedAt: index,
+          expiresAt: null,
+          trigger: {
+            eventId: `event:source-${index}`,
+            actorId: "entity:spec",
+            activationSnapshotId: `snapshot:source-${index}`,
+          },
+        })),
+      },
+    ] as never,
+    snapshots: inputs.map((value, index) => ({
+      snapshotId: `snapshot:source-${index}`,
+      atSeconds: index,
+      attributes: [
+        {
+          entityId: "entity:spec",
+          stat: "criticalRate",
+          stage: "current",
+          value: { unit: "ratio", value },
+        },
+      ],
+      world: structuredClone(syntheticWorld),
+    })) as never,
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  })
+  expect(state.ok).toBe(true)
+  if (!state.ok) {
+    throw new Error(
+      `state supply must succeed: ${JSON.stringify(state.issues)}`,
+    )
+  }
+  return state.value
+}
+
+describe("source-layer reduction boundaries", () => {
+  /** 同一来源、同一消费地址的三个有效层，各自通过激活快照给出不同倍率。 */
+  function varyingMultiplierPrepared(): PreparedEffects {
+    return prepareSyntheticWithEffects([
+      syntheticContribution(
+        "environment:spec:varying-multiplier",
+        {
+          kind: "hit-adjustment",
+          field: "damageMultiplier",
+          operator: "scale",
+          value: {
+            kind: "multiply",
+            unit: "multiplier",
+            value: multiplierLiteral(1),
+            coefficient: {
+              kind: "stat",
+              unit: "ratio",
+              entity: { role: "holder" },
+              stat: "criticalRate",
+              stage: "current",
+              at: "activation",
+            },
+          },
+        },
+        { scope: "hit", activation: { kind: "supplied" } },
+      ),
+    ])
+  }
+
+  function hitQueryAt(atSeconds: number) {
+    const query = structuredClone(syntheticHitQuery) as unknown as {
+      atSeconds: number
+      world: unknown
+      observedSnapshots: { atSeconds: number }[]
+    }
+    query.atSeconds = atSeconds
+    query.observedSnapshots[0]!.atSeconds = atSeconds
+    query.world = withSyntheticStates([])
+    return query
+  }
+
+  it("fails instead of throwing when one source's layers overflow before zero", () => {
+    const prepared = varyingMultiplierPrepared()
+    const state = stackedLayerState(prepared, [1e308, 1e308, 0])
+    const result = evaluateEffects(prepared, state, hitQueryAt(3) as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("keeps the same source's finite layer reduction valid", () => {
+    const prepared = varyingMultiplierPrepared()
+    const state = stackedLayerState(prepared, [2, 3, 0.5])
+    const result = evaluateEffects(prepared, state, hitQueryAt(3) as never)
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.value.hit?.damageItems[0]?.damageMultiplier).toBeCloseTo(
+        3,
+        9,
+      )
+    }
+  })
+})
