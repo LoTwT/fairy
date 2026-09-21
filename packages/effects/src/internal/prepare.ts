@@ -314,13 +314,20 @@ export function prepareEffects(
     return failure(collector)
   }
 
+  // 引擎自有副本：冻结准备结果之前先与调用方对象脱钩，
+  // 调用方随后修改原始定义或绑定配置不得影响已经生成的准备结果。
+  const ownedRuleSet = structuredClone(validated.ruleSet)
+  const ownedBindings = validatedBindings.map((binding) =>
+    structuredClone(binding),
+  )
+
   const activeRulesByBinding = new Map<BindingId, readonly ActiveRule[]>()
-  for (const binding of validatedBindings) {
+  for (const binding of ownedBindings) {
     if (!binding.eligible) {
       continue
     }
     const matched: ActiveRule[] = []
-    for (const rule of validated.ruleSet.effects) {
+    for (const rule of ownedRuleSet.effects) {
       if (
         rule.source.identity.kind !== binding.kind ||
         rule.source.identity.entityId !== binding.sourceEntityId
@@ -346,7 +353,7 @@ export function prepareEffects(
   }
 
   const rulesByEffectId = new Map<string, EffectRule>()
-  for (const rule of validated.ruleSet.effects) {
+  for (const rule of ownedRuleSet.effects) {
     rulesByEffectId.set(rule.effectId, rule)
   }
 
@@ -365,9 +372,7 @@ export function prepareEffects(
   }
   const foldedModifications: FoldedModification[] = []
   for (const [bindingId, rules] of activeRulesByBinding) {
-    const binding = validatedBindings.find(
-      (entry) => entry.bindingId === bindingId,
-    )
+    const binding = ownedBindings.find((entry) => entry.bindingId === bindingId)
     if (binding === undefined) {
       continue
     }
@@ -418,7 +423,7 @@ export function prepareEffects(
   const effectFolds = new Map<string, EffectFold>()
   const stateFolds = new Map<string, ParameterFold>()
   const targetPointer = (effectId: string): string => {
-    const index = validated.ruleSet.effects.findIndex(
+    const index = ownedRuleSet.effects.findIndex(
       (rule) => rule.effectId === effectId,
     )
     return index < 0 ? "" : `/effects/${index}/parameters`
@@ -430,7 +435,7 @@ export function prepareEffects(
       if (targetRule === undefined) {
         continue
       }
-      const targetBound = validatedBindings.some(
+      const targetBound = ownedBindings.some(
         (entry) =>
           entry.holderId === folded.holderId &&
           entry.kind === targetRule.source.identity.kind &&
@@ -507,7 +512,7 @@ export function prepareEffects(
           identity: { kind: string; entityId: string }
         }
       )["identity"]
-      const stateBound = validatedBindings.some(
+      const stateBound = ownedBindings.some(
         (entry) =>
           entry.holderId === folded.holderId &&
           entry.kind === stateSource.kind &&
@@ -544,9 +549,7 @@ export function prepareEffects(
   const instants: PreparedInstantEntry[] = []
   const modifications: PreparedModificationEntry[] = []
   for (const [bindingId, rules] of activeRulesByBinding) {
-    const binding = validatedBindings.find(
-      (entry) => entry.bindingId === bindingId,
-    )
+    const binding = ownedBindings.find((entry) => entry.bindingId === bindingId)
     if (binding === undefined) {
       continue
     }
@@ -646,7 +649,7 @@ export function prepareEffects(
   }
 
   const stateParameters: PreparedStateParameters[] = []
-  for (const state of validated.ruleSet.states) {
+  for (const state of ownedRuleSet.states) {
     const stateEntry = validated.statesById.get(state.stateId)
     if (stateEntry === undefined) {
       continue
@@ -656,7 +659,7 @@ export function prepareEffects(
         identity: { kind: string; entityId: string }
       }
     )["identity"]
-    for (const binding of validatedBindings) {
+    for (const binding of ownedBindings) {
       if (
         !binding.eligible ||
         binding.kind !== stateSource.kind ||
@@ -692,8 +695,8 @@ export function prepareEffects(
   }
 
   const internal: PreparedEffectsInternal = {
-    ruleSet: validated.ruleSet,
-    bindings: validatedBindings,
+    ruleSet: ownedRuleSet,
+    bindings: ownedBindings,
     contributions,
     instants,
     modifications,

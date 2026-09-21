@@ -524,4 +524,55 @@ describe("prepareEffects immutability", () => {
     expect(Object.isFrozen(prepared.value.stateParameters)).toBe(true)
     expect(Object.isFrozen(prepared.value.stateParameters[0])).toBe(true)
   })
+
+  it("leaves caller definitions and binding configuration unfrozen", () => {
+    const parse = parseEffectRuleSet(cloneRuleSet(starterRuleSet))
+    expect(parse.ok).toBe(true)
+    if (!parse.ok) {
+      throw new Error("fixture rule set must parse")
+    }
+    const definitions = parse.value as unknown as {
+      readonly effects: readonly Record<string, unknown>[]
+    }
+    const binding = astraBindingAt(2)
+    const prepared = prepareEffects(parse.value, [binding])
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    expect(
+      readAstraCoreRatio(readPreparedInternal(prepared.value)!),
+    ).toBeCloseTo(0.54, 12)
+    expect(Object.isFrozen(parse.value)).toBe(false)
+    expect(Object.isFrozen(definitions.effects)).toBe(false)
+    expect(Object.isFrozen(definitions.effects[0])).toBe(false)
+    expect(Object.isFrozen(binding)).toBe(false)
+    expect(Object.isFrozen(binding.configuration)).toBe(false)
+
+    // 调用方随后调整原始培养配置，可以创建新的准备结果。
+    const configuration = binding.configuration as unknown as {
+      mindscapeRank: number
+    }
+    configuration.mindscapeRank = 1
+    const reprepared = prepareEffects(parse.value, [binding])
+    expect(reprepared.ok).toBe(true)
+    if (!reprepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    expect(
+      readAstraCoreRatio(readPreparedInternal(reprepared.value)!),
+    ).toBeCloseTo(0.35, 12)
+
+    // 修改原始定义不会改变已经生成的准备结果。
+    const core = definitions.effects.find(
+      (effect) => effect["effectId"] === "agent:1311:core:attack-conversion",
+    )!
+    const parameters = core["parameters"] as {
+      ratio: { values: Record<string, number> }
+    }
+    parameters.ratio.values["7"] = 0.9
+    expect(
+      readAstraCoreRatio(readPreparedInternal(prepared.value)!),
+    ).toBeCloseTo(0.54, 12)
+  })
 })
