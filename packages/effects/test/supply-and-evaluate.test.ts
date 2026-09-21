@@ -17,7 +17,24 @@ import {
   exampleRuleSet,
   exampleWorld,
   suppliedAstraState,
+  syntheticBinding,
+  syntheticRuleSet,
+  syntheticWorld,
 } from "../../../docs/specs/effects/contract-examples.ts"
+
+function prepareSynthetic(): PreparedEffects {
+  const parsed = parseEffectRuleSet(syntheticRuleSet)
+  expect(parsed.ok).toBe(true)
+  if (!parsed.ok) {
+    throw new Error("synthetic rule set must parse")
+  }
+  const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+  expect(prepared.ok).toBe(true)
+  if (!prepared.ok) {
+    throw new Error("prepare must succeed")
+  }
+  return prepared.value
+}
 
 function astraWorld(holderInitialAttack: number) {
   return {
@@ -539,5 +556,202 @@ describe("state import validation", () => {
         result.issues.some((issue) => issue.pointer.includes("stackKey")),
       ).toBe(true)
     }
+  })
+})
+
+describe("configuration expressions in state import", () => {
+  const timedEffectId = "environment:spec:timed-effect"
+
+  function prepareWithLayerMaximum(maximum: unknown) {
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: Record<string, unknown>[]
+    }
+    const timed = ruleSet.effects.find(
+      (effect) => effect["effectId"] === timedEffectId,
+    )!
+    const activation = timed["activation"] as {
+      layering: { maximum: unknown }
+    }
+    activation.layering.maximum = maximum
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    return prepared.value
+  }
+
+  function supplyLayers(prepared: PreparedEffects, count: number) {
+    return supplyEffectState(prepared, {
+      sessionId: "session:spec-layer-limit",
+      atSeconds: 0,
+      instances: [
+        {
+          instanceId: "instance:spec-layer-limit",
+          effectId: timedEffectId,
+          bindingId: "binding:spec",
+          beneficiaryIds: ["entity:spec"],
+          stackKey: [],
+          lifetime: { kind: "timed", firstActivatedAt: 0 },
+          layers: Array.from({ length: count }, (_, index) => ({
+            layerId: `layer:spec-layer-limit-${index}`,
+            startedAt: 0,
+            expiresAt: 10,
+            trigger: null,
+          })),
+        },
+      ],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    } as never)
+  }
+
+  it("counts imported layers against an arithmetic layer maximum", () => {
+    const prepared = prepareWithLayerMaximum({
+      kind: "add",
+      unit: "count",
+      operands: [
+        { kind: "literal", unit: "count", value: 1 },
+        { kind: "literal", unit: "count", value: 1 },
+      ],
+    })
+    expect(supplyLayers(prepared, 2).ok).toBe(true)
+    const over = supplyLayers(prepared, 3)
+    expect(over.ok).toBe(false)
+    if (!over.ok) {
+      expect(over.issues.some((issue) => issue.code === "INVALID_INPUT")).toBe(
+        true,
+      )
+    }
+  })
+
+  it("rejects a layer maximum that is not a positive integer", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: Record<string, unknown>[]
+    }
+    const timed = ruleSet.effects.find(
+      (effect) => effect["effectId"] === timedEffectId,
+    )!
+    const activation = timed["activation"] as { layering: { maximum: unknown } }
+    activation.layering.maximum = { kind: "literal", unit: "count", value: 0 }
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(false)
+  })
+})
+
+function deepFreezeValue(value: unknown): void {
+  if (typeof value !== "object" || value === null) {
+    return
+  }
+  Object.freeze(value)
+  for (const nested of Object.values(value)) {
+    deepFreezeValue(nested)
+  }
+}
+
+function syntheticImportInput() {
+  return {
+    sessionId: "session:spec-import-ownership",
+    atSeconds: 0,
+    instances: [
+      {
+        instanceId: "instance:spec-import",
+        effectId: "environment:spec:timed-effect",
+        bindingId: "binding:spec",
+        beneficiaryIds: ["entity:spec"],
+        stackKey: [],
+        lifetime: { kind: "timed", firstActivatedAt: 0 },
+        layers: [
+          {
+            layerId: "layer:spec-import",
+            startedAt: 0,
+            expiresAt: 20,
+            trigger: null,
+          },
+        ],
+      },
+    ],
+    snapshots: [
+      {
+        snapshotId: "snapshot:spec-import",
+        atSeconds: 0,
+        attributes: [],
+        world: structuredClone(syntheticWorld),
+      },
+    ],
+    cooldowns: [
+      {
+        groupId: "spec-import",
+        partitionKey: "6:global6:global",
+        availableAt: 5,
+      },
+    ],
+    eventHistory: {
+      processedIds: ["event:spec-import"],
+      last: { eventId: "event:spec-import", atSeconds: 0, sequence: 0 },
+    },
+  }
+}
+
+describe("state import ownership", () => {
+  it("does not freeze caller state inputs", () => {
+    const prepared = prepareSynthetic()
+    const input = syntheticImportInput()
+    const result = supplyEffectState(prepared, input as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("state supply must succeed")
+    }
+    expect(Object.isFrozen(input)).toBe(false)
+    expect(Object.isFrozen(input.instances[0])).toBe(false)
+    expect(Object.isFrozen(input.instances[0]!.layers)).toBe(false)
+    expect(Object.isFrozen(input.instances[0]!.layers[0])).toBe(false)
+    expect(Object.isFrozen(input.snapshots[0])).toBe(false)
+    expect(Object.isFrozen(input.cooldowns[0])).toBe(false)
+    expect(Object.isFrozen(input.eventHistory)).toBe(false)
+    expect(Object.isFrozen(input.eventHistory.last)).toBe(false)
+  })
+
+  it("keeps its own copy of imported layers", () => {
+    const prepared = prepareSynthetic()
+    const input = syntheticImportInput()
+    const result = supplyEffectState(prepared, input as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("state supply must succeed")
+    }
+    // 调用方随后修改原始层不影响已经导入的状态。
+    input.instances[0]!.layers[0]!.expiresAt = 1
+    const evaluation = evaluateEffects(prepared, result.value, {
+      kind: "panel",
+      atSeconds: 10,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+    expect(evaluation.ok).toBe(true)
+    if (!evaluation.ok) {
+      throw new Error("panel evaluation must succeed")
+    }
+    expect(
+      evaluation.value.attributes.find(
+        (attribute) => attribute.stat === "attack",
+      )?.value.value,
+    ).toBeCloseTo(1100, 9)
+  })
+
+  it("accepts deeply frozen state inputs", () => {
+    const prepared = prepareSynthetic()
+    const input = syntheticImportInput()
+    deepFreezeValue(input)
+    const result = supplyEffectState(prepared, input as never)
+    expect(result.ok).toBe(true)
   })
 })

@@ -12,6 +12,7 @@ import type {
   HitContext,
   NumericExpression,
   PreparedEffects,
+  Quantity,
   ResolvedContribution,
   ResolvedOutput,
   Stat,
@@ -25,7 +26,12 @@ import {
   type PreparedContributionEntry,
   type PreparedEffectsInternal,
 } from "./prepare.ts"
-import { readStateInternal, type EffectStateInternal } from "./state.ts"
+import {
+  findStateObservation,
+  readStateInternal,
+  resolveStateBindingId,
+  type EffectStateInternal,
+} from "./state.ts"
 import {
   validateHitContext,
   validateSnapshots,
@@ -172,39 +178,83 @@ function evaluateExpression(
   expression: NumericExpression<Unit, "contribution">,
   context: EvaluationContext,
   layer: LayerCandidate,
+  parameters: ReadonlyMap<string, Quantity<Unit>> = layer.entry
+    .foldedParameters,
 ): number {
   switch (expression.kind) {
     case "literal":
       return expression.value
-    case "parameter":
-      return layer.entry.foldedParameters.get(expression.name)?.value ?? 0
+    case "parameter": {
+      // parameter 只读取所属规则自己的参数视图，不隐式读取目标字段。
+      const parameter = parameters.get(expression.name)
+      if (parameter === undefined) {
+        context.collector.report(
+          "MISSING_REFERENCE",
+          "",
+          `Parameter "${expression.name}" is not available in the owning rule's parameter view`,
+        )
+        return Number.NaN
+      }
+      return parameter.value
+    }
     case "stat":
       return readStatValue(expression, context, layer)
     case "add":
       return expression.operands.reduce(
-        (sum, operand) => sum + evaluateExpression(operand, context, layer),
+        (sum, operand) =>
+          sum + evaluateExpression(operand, context, layer, parameters),
         0,
       )
     case "minimum":
       return Math.min(
         ...expression.operands.map((operand) =>
-          evaluateExpression(operand, context, layer),
+          evaluateExpression(operand, context, layer, parameters),
         ),
       )
     case "maximum":
       return Math.max(
         ...expression.operands.map((operand) =>
-          evaluateExpression(operand, context, layer),
+          evaluateExpression(operand, context, layer, parameters),
         ),
       )
     case "multiply":
-      return (
-        evaluateExpression(expression.value, context, layer) *
-        evaluateExpression(expression.coefficient, context, layer)
+      return requireFiniteValue(
+        evaluateExpression(expression.value, context, layer, parameters) *
+          evaluateExpression(
+            expression.coefficient,
+            context,
+            layer,
+            parameters,
+          ),
+        context,
+        "A numeric expression product",
       )
     default:
       return assertNeverExpression(expression as never)
   }
+}
+
+/**
+ * 非有限结果必须失败：NaN 表示上游已经报告的问题，不重复报告；
+ * ±Infinity 在此报告并返回 NaN，由调用方按既有 Result 契约失败。
+ */
+function requireFiniteValue(
+  value: number,
+  context: EvaluationContext,
+  description: string,
+): number {
+  if (Number.isNaN(value)) {
+    return value
+  }
+  if (!Number.isFinite(value)) {
+    context.collector.report(
+      "INVALID_DEFINITION",
+      "",
+      `${description} is not a finite number`,
+    )
+    return Number.NaN
+  }
+  return value
 }
 
 function assertNeverExpression(expression: never): number {
@@ -351,12 +401,16 @@ function computeStatValue(
       context.shared.failedStats.add(key)
       return Number.NaN
     }
-    value =
+    const additions = [
+      ...input.additions,
+      ...adjustments.map((entry) => entry.value),
+    ]
+    value = requireFiniteValue(
       input.baseValue +
-      [...input.additions, ...adjustments.map((entry) => entry.value)].reduce(
-        (sum, adjustment) => sum + adjustment,
-        0,
-      )
+        additions.reduce((sum, adjustment) => sum + adjustment, 0),
+      context,
+      `Direct stat (${entityId}, ${stat})`,
+    )
   } else {
     const input = actor.generalStats[stat as GeneralStat]
     if (input === undefined) {
@@ -376,17 +430,22 @@ function computeStatValue(
       { kind: "stat", stat, stage: "initial-fixed", entityId, hitId },
       nested,
     )
-    const initial = calculateInitialStat({
-      baseStat: input.baseValue,
-      initialStatPercentageAdjustments: [
-        ...input.initialPercentage,
-        ...(initialPercentage?.map((entry) => entry.value) ?? []),
-      ],
-      initialStatFixedValueAdjustments: [
-        ...input.initialFixed,
-        ...(initialFixed?.map((entry) => entry.value) ?? []),
-      ],
-    })
+    const initial = callStatHelper(
+      () =>
+        calculateInitialStat({
+          baseStat: input.baseValue,
+          initialStatPercentageAdjustments: [
+            ...input.initialPercentage,
+            ...(initialPercentage?.map((entry) => entry.value) ?? []),
+          ],
+          initialStatFixedValueAdjustments: [
+            ...input.initialFixed,
+            ...(initialFixed?.map((entry) => entry.value) ?? []),
+          ],
+        }),
+      context,
+      `Initial stat (${entityId}, ${stat})`,
+    )
     if (stage === "initial") {
       value = initial
     } else {
@@ -398,21 +457,51 @@ function computeStatValue(
         { kind: "stat", stat, stage: "final-fixed", entityId, hitId },
         nested,
       )
-      value = calculateFinalStat({
-        initialStat: initial,
-        finalStatPercentageAdjustments: [
-          ...input.finalPercentage,
-          ...(finalPercentage?.map((entry) => entry.value) ?? []),
-        ],
-        finalStatFixedValueAdjustments: [
-          ...input.finalFixed,
-          ...(finalFixed?.map((entry) => entry.value) ?? []),
-        ],
-      })
+      value = callStatHelper(
+        () =>
+          calculateFinalStat({
+            initialStat: initial,
+            finalStatPercentageAdjustments: [
+              ...input.finalPercentage,
+              ...(finalPercentage?.map((entry) => entry.value) ?? []),
+            ],
+            finalStatFixedValueAdjustments: [
+              ...input.finalFixed,
+              ...(finalFixed?.map((entry) => entry.value) ?? []),
+            ],
+          }),
+        context,
+        `Final stat (${entityId}, ${stat})`,
+      )
     }
+  }
+  if (Number.isNaN(value)) {
+    context.shared.failedStats.add(key)
+    return Number.NaN
   }
   context.shared.statValues.set(key, value)
   return value
+}
+
+/**
+ * core helper 以抛错表达数值越界；公开接口按 Result 契约失败，
+ * 因此把 helper 的错误转成已报告的问题，而不是让异常逃出求值。
+ */
+function callStatHelper(
+  compute: () => number,
+  context: EvaluationContext,
+  description: string,
+): number {
+  try {
+    return requireFiniteValue(compute(), context, description)
+  } catch (error) {
+    context.collector.report(
+      "INVALID_DEFINITION",
+      "",
+      `${description} failed: ${error instanceof Error ? error.message : String(error)}`,
+    )
+    return Number.NaN
+  }
 }
 
 function reportCycle(
@@ -443,11 +532,14 @@ function selectedAdjustmentsFor(
   if (candidates === undefined) {
     return undefined
   }
-  const evaluated = evaluateLayers(candidates, context)
+  const evaluated = evaluateLayers(candidates, context, address)
   if (evaluated === undefined) {
     return undefined
   }
   const selected = selectUnique(evaluated, context)
+  if (selected === undefined) {
+    return undefined
+  }
   context.shared.selections.set(key, selected)
   return selected
 }
@@ -457,7 +549,9 @@ function collectLayersForAddress(
   context: EvaluationContext,
 ): LayerCandidate[] | undefined {
   const candidates: LayerCandidate[] = []
-  const includeHitScope = context.hit !== null
+  // 只有命中局部的消费地址才纳入命中作用域规则；通用属性节点不因本次查询带命中而被污染。
+  const includeHitScope =
+    context.hit !== null && (address.kind === "hit" || address.hitId !== null)
   for (const entry of context.prepared.contributions) {
     const rule = entry.rule
     const ruleIsHitScope = rule.scope === "hit"
@@ -492,7 +586,7 @@ function collectLayersForAddress(
         continue
       }
     }
-    const addressBeneficiary = addressEntity(address)
+    const addressBeneficiary = beneficiaryForAddress(address, context)
     if (rule.activation.kind === "continuous") {
       const targets = resolveContinuousTargets(entry, context)
       if (targets === undefined) {
@@ -538,9 +632,16 @@ function collectLayersForAddress(
   return candidates
 }
 
-function addressEntity(address: ConsumptionAddress): EntityId | null {
+/**
+ * 消费地址对应的受益者：属性与 Factor 地址使用地址上的实体；
+ * 命中倍率地址只消费当前进攻方自己的贡献，其他受益者的倍率不进入本次命中。
+ */
+function beneficiaryForAddress(
+  address: ConsumptionAddress,
+  context: EvaluationContext,
+): EntityId | null {
   if (address.kind === "hit") {
-    return null
+    return context.hit?.actorId ?? null
   }
   return address.entityId
 }
@@ -588,9 +689,23 @@ function effectiveInstances(
   }
   const effective = context.state.instances.filter((instance) => {
     if (instance.lifetime.kind === "state-bound") {
+      const holderId = contributionHolderId(context.prepared, instance)
+      if (holderId === undefined) {
+        return false
+      }
+      const bindingId = resolveStateBindingId(
+        context.prepared,
+        instance.lifetime.stateId,
+        holderId,
+        context.collector,
+      )
+      if (bindingId === undefined) {
+        return false
+      }
       const observation = findStateObservation(
         context.world,
         instance.lifetime.stateId,
+        bindingId,
         instance.lifetime.stateOwnerId,
       )
       if (
@@ -634,26 +749,26 @@ function layerActive(
   )
 }
 
-function findStateObservation(
-  world: WorldIndex,
-  stateId: string,
-  ownerId: string,
-): { active: boolean; activationId: string | null } | undefined {
-  for (const observation of world.states.values()) {
-    if (observation.stateId === stateId && observation.ownerId === ownerId) {
-      return observation
-    }
-  }
-  return undefined
+function contributionHolderId(
+  prepared: PreparedEffectsInternal,
+  instance: EffectInstance,
+): EntityId | undefined {
+  return prepared.contributions.find(
+    (contribution) =>
+      contribution.rule.effectId === instance.effectId &&
+      contribution.bindingId === instance.bindingId,
+  )?.holderId
 }
 
 function evaluateLayers(
   layers: readonly LayerCandidate[],
   context: EvaluationContext,
+  address: ConsumptionAddress,
 ): EvaluatedLayer[] | undefined {
   const evaluated: EvaluatedLayer[] = []
   for (const layer of layers) {
-    const key = layerKey(layer)
+    // 同一层在不同消费地址上是不同节点：命中局部地址与通用地址分别求值与缓存。
+    const key = `${layerKey(layer)} ${addressKey(address)}`
     const cycleStart = context.stack.indexOf(key)
     if (cycleStart >= 0) {
       reportCycle(context, cycleStart, key)
@@ -666,10 +781,14 @@ function evaluateLayers(
       }
       continue
     }
-    const result = evaluateSingleLayer(layer, {
-      ...context,
-      stack: [...context.stack, key],
-    })
+    const result = evaluateSingleLayer(
+      layer,
+      {
+        ...context,
+        stack: [...context.stack, key],
+      },
+      address,
+    )
     context.shared.layers.set(key, result ?? null)
     if (result === undefined) {
       return undefined
@@ -681,9 +800,56 @@ function evaluateLayers(
   return evaluated
 }
 
+interface ModificationOperand {
+  readonly field: string
+  readonly name?: string
+  readonly operator: string
+  readonly value: number
+}
+
+interface NumericFieldTransform {
+  set: number | undefined
+  addSum: number
+  scaleProduct: number
+}
+
+function emptyNumericFieldTransform(): NumericFieldTransform {
+  return { set: undefined, addSum: 0, scaleProduct: 1 }
+}
+
+/** 按字段归并修改：同值 set 合并，不同有效 set 报 MODIFICATION_CONFLICT。 */
+function mergeFieldOperand(
+  transform: NumericFieldTransform,
+  operand: ModificationOperand,
+  context: EvaluationContext,
+  effectId: EffectId,
+  fieldDescription: string,
+): boolean {
+  if (operand.operator === "set") {
+    if (transform.set !== undefined && transform.set !== operand.value) {
+      context.collector.report(
+        "MODIFICATION_CONFLICT",
+        "",
+        `Different effective set values (${transform.set} and ${operand.value}) target ${fieldDescription}`,
+        { effectId },
+      )
+      return false
+    }
+    transform.set = operand.value
+    return true
+  }
+  if (operand.operator === "add") {
+    transform.addSum += operand.value
+    return true
+  }
+  transform.scaleProduct *= operand.value
+  return true
+}
+
 function evaluateSingleLayer(
   layer: LayerCandidate,
   context: EvaluationContext,
+  address: ConsumptionAddress,
 ): EvaluatedLayer | null | undefined {
   const rule = layer.entry.rule
   if (!evaluateCondition(rule.when, context, layer)) {
@@ -696,14 +862,10 @@ function evaluateSingleLayer(
       modification.rule.target.effectId === rule.effectId &&
       modification.holderId === layer.entry.holderId,
   )
+  // 修改规则继承目标层、受益者、触发事件与命中上下文，但 parameter 读取修改规则自己的参数表。
   const applicable: {
     readonly effectId: EffectId
-    readonly operands: readonly {
-      readonly field: string
-      readonly name?: string
-      readonly operator: string
-      readonly value: number
-    }[]
+    readonly operands: readonly ModificationOperand[]
   }[] = []
   for (const modification of modifications) {
     const modificationWhen = (
@@ -711,7 +873,14 @@ function evaluateSingleLayer(
         when: Condition<"contribution">
       }
     ).when
-    if (!evaluateCondition(modificationWhen, context, layer)) {
+    if (
+      !evaluateCondition(
+        modificationWhen,
+        context,
+        layer,
+        modification.resolvedParameters,
+      )
+    ) {
       continue
     }
     const changeList = modification.rule.modifications as readonly {
@@ -726,37 +895,68 @@ function evaluateSingleLayer(
       field: change.field,
       ...(change.name === undefined ? {} : { name: change.name }),
       operator: change.change.operator,
-      value: evaluateExpression(change.change.value, context, layer),
+      value: evaluateExpression(
+        change.change.value,
+        context,
+        layer,
+        modification.resolvedParameters,
+      ),
     }))
     applicable.push({ effectId: modification.rule.effectId, operands })
   }
-  const localParameters = new Map(layer.entry.foldedParameters)
-  for (const { operands } of applicable) {
+  // 参数先改再执行原表达式；同一字段按 (set 或原值 + Σadd) × Πscale 归并。
+  const parameterTransforms = new Map<string, NumericFieldTransform>()
+  const outputTransform = emptyNumericFieldTransform()
+  for (const { effectId, operands } of applicable) {
     for (const operand of operands) {
-      if (operand.field !== "parameter") {
+      if (operand.field === "parameter") {
+        const name = operand.name ?? ""
+        if (!layer.entry.foldedParameters.has(name)) {
+          continue
+        }
+        const transform =
+          parameterTransforms.get(name) ?? emptyNumericFieldTransform()
+        if (
+          !mergeFieldOperand(
+            transform,
+            operand,
+            context,
+            effectId,
+            `parameter "${name}" of "${rule.effectId}"`,
+          )
+        ) {
+          return undefined
+        }
+        parameterTransforms.set(name, transform)
         continue
       }
-      const name = operand.name ?? ""
-      const current = localParameters.get(name)
-      if (current === undefined) {
-        continue
+      if (operand.field === "output") {
+        if (
+          !mergeFieldOperand(
+            outputTransform,
+            operand,
+            context,
+            effectId,
+            `the output of "${rule.effectId}"`,
+          )
+        ) {
+          return undefined
+        }
       }
-      if (operand.operator === "set") {
-        localParameters.set(name, { unit: current.unit, value: operand.value })
-        continue
-      }
-      if (operand.operator === "add") {
-        localParameters.set(name, {
-          unit: current.unit,
-          value: current.value + operand.value,
-        })
-        continue
-      }
-      localParameters.set(name, {
-        unit: current.unit,
-        value: current.value * operand.value,
-      })
     }
+  }
+  const localParameters = new Map(layer.entry.foldedParameters)
+  for (const [name, transform] of parameterTransforms) {
+    const current = localParameters.get(name)
+    if (current === undefined) {
+      continue
+    }
+    localParameters.set(name, {
+      unit: current.unit,
+      value:
+        ((transform.set ?? current.value) + transform.addSum) *
+        transform.scaleProduct,
+    })
   }
   const layerWithParams: LayerCandidate = {
     ...layer,
@@ -764,61 +964,59 @@ function evaluateSingleLayer(
   }
   const operation = rule.operation
   let value: number
-  let address: ConsumptionAddress
+  let outputAddress: ConsumptionAddress
   let operator: "add" | "scale"
   if (operation.kind === "stat-adjustment") {
     value = evaluateExpression(operation.value, context, layerWithParams)
-    address = {
+    outputAddress = {
       kind: "stat",
       stat: operation.stat,
       stage: operation.stage,
       entityId: layer.beneficiary,
-      hitId: context.hit === null ? null : context.hit.hitId,
+      hitId: address.hitId,
     }
     operator = "add"
   } else if (operation.kind === "factor-contribution") {
     value = evaluateExpression(operation.value, context, layerWithParams)
-    address = {
+    outputAddress = {
       kind: "factor",
       channel: operation.channel,
       entityId: layer.beneficiary,
-      hitId: context.hit === null ? null : context.hit.hitId,
+      hitId: address.hitId,
     }
     operator = "add"
   } else {
     value = evaluateExpression(operation.value, context, layerWithParams)
-    address = {
+    outputAddress = {
       kind: "hit",
       hitId: context.hit?.hitId ?? "",
       field: "damageMultiplier",
     }
     operator = "scale"
   }
-  if (Number.isNaN(value)) {
-    return undefined
-  }
-  let outputValue = value
-  for (const { operands } of applicable) {
-    for (const operand of operands) {
-      if (operand.field !== "output") {
-        continue
-      }
-      if (operand.operator === "add") {
-        outputValue += operand.value
-      } else if (operand.operator === "scale") {
-        outputValue *= operand.value
-      }
-    }
-  }
-  outputValue =
-    (outputValue + layer.entry.outputAddSum) * layer.entry.outputScaleProduct
+  value = requireFiniteValue(
+    value,
+    context,
+    `Rule "${rule.effectId}" produces a non-finite value`,
+  )
+  // 配置阶段的结果修改先建立基线，贡献阶段的输出修改在该基线上按字段归并。
+  const outputValue = requireFiniteValue(
+    ((value + layer.entry.outputAddSum) * layer.entry.outputScaleProduct +
+      outputTransform.addSum) *
+      outputTransform.scaleProduct,
+    context,
+    `The modified output of "${rule.effectId}"`,
+  )
   const appliedModificationIds = [
     ...applicable.map((item) => item.effectId),
     ...layer.entry.appliedModificationIds,
   ]
+  if (Number.isNaN(outputValue)) {
+    return undefined
+  }
   return {
     candidate: layer,
-    address,
+    address: outputAddress,
     operator,
     value: outputValue,
     appliedModifications: appliedModificationIds,
@@ -829,30 +1027,40 @@ function evaluateCondition(
   condition: Condition<"contribution">,
   context: EvaluationContext,
   layer: LayerCandidate,
+  parameters: ReadonlyMap<string, Quantity<Unit>> = layer.entry
+    .foldedParameters,
 ): boolean {
   switch (condition.kind) {
     case "constant":
       return condition.value
     case "all":
       for (const entry of condition.conditions) {
-        if (!evaluateCondition(entry, context, layer)) {
+        if (!evaluateCondition(entry, context, layer, parameters)) {
           return false
         }
       }
       return true
     case "any":
       for (const entry of condition.conditions) {
-        if (evaluateCondition(entry, context, layer)) {
+        if (evaluateCondition(entry, context, layer, parameters)) {
           return true
         }
       }
       return false
     case "not":
-      return !evaluateCondition(condition.condition, context, layer)
+      return !evaluateCondition(condition.condition, context, layer, parameters)
     case "compare-number": {
-      const left = evaluateExpression(condition.left, context, layer)
-      const right = evaluateExpression(condition.right, context, layer)
-      if (Number.isNaN(left) || Number.isNaN(right)) {
+      const left = requireFiniteValue(
+        evaluateExpression(condition.left, context, layer, parameters),
+        context,
+        "A compared operand",
+      )
+      const right = requireFiniteValue(
+        evaluateExpression(condition.right, context, layer, parameters),
+        context,
+        "A compared operand",
+      )
+      if (!Number.isFinite(left) || !Number.isFinite(right)) {
         return false
       }
       switch (condition.operator) {
@@ -913,9 +1121,29 @@ function evaluateCondition(
       if (world === undefined) {
         return false
       }
-      const observation = findStateObservation(world, condition.stateId, owner)
+      const bindingId = resolveStateBindingId(
+        context.prepared,
+        condition.stateId,
+        layer.entry.holderId,
+        context.collector,
+      )
+      if (bindingId === undefined) {
+        return false
+      }
+      const observation = findStateObservation(
+        world,
+        condition.stateId,
+        bindingId,
+        owner,
+      )
       if (observation === undefined) {
-        return !condition.active
+        // 缺记录不是未生效：未生效必须显式提供 active: false 的观察。
+        context.collector.report(
+          "MISSING_FACT",
+          "",
+          `State "${condition.stateId}" is not observed for owner "${owner}" at "${condition.at}"`,
+        )
+        return false
       }
       return observation.active === condition.active
     }
@@ -948,7 +1176,14 @@ function evaluateCondition(
       if (candidates.length === 0) {
         return false
       }
-      const maximum = evaluateExpression(condition.maximum, context, layer)
+      const maximum = requireFiniteValue(
+        evaluateExpression(condition.maximum, context, layer, parameters),
+        context,
+        "A range condition maximum",
+      )
+      if (!Number.isFinite(maximum)) {
+        return false
+      }
       for (const candidate of candidates) {
         const first = entity < candidate ? entity : candidate
         const second = entity < candidate ? candidate : entity
@@ -1059,7 +1294,7 @@ function evaluateOneOf(
 function selectUnique(
   layers: readonly EvaluatedLayer[],
   context: EvaluationContext,
-): EvaluatedLayer[] {
+): EvaluatedLayer[] | undefined {
   const bySource = new Map<string, EvaluatedLayer[]>()
   for (const layer of layers) {
     const key = `${layer.candidate.entry.bindingId}\u0000${layer.candidate.entry.rule.effectId}\u0000${layer.candidate.beneficiary}\u0000${addressKey(layer.address)}`
@@ -1076,12 +1311,18 @@ function selectUnique(
     .map(([key, list]) => ({
       key,
       list,
-      combined:
+      combined: requireFiniteValue(
         list[0]!.operator === "add"
           ? list.reduce((sum, entry) => sum + entry.value, 0)
           : list.reduce((product, entry) => product * entry.value, 1),
+        context,
+        `A uniqueness candidate of "${list[0]!.candidate.entry.rule.effectId}"`,
+      ),
     }))
     .toSorted((left, right) => (left.key < right.key ? -1 : 1))
+  if (sourceCandidates.some((candidate) => Number.isNaN(candidate.combined))) {
+    return undefined
+  }
   const survivors: EvaluatedLayer[] = []
   const groups = new Map<string, SourceCandidate[]>()
   for (const candidate of sourceCandidates) {
@@ -1152,8 +1393,8 @@ function selectUnique(
     }
     let best = group[0]!
     for (const candidate of group) {
-      const priority = resolvePriority(candidate.list[0]!.candidate.entry)
-      const bestPriority = resolvePriority(best.list[0]!.candidate.entry)
+      const priority = candidate.list[0]!.candidate.entry.resolvedPriority
+      const bestPriority = best.list[0]!.candidate.entry.resolvedPriority
       if (priority > bestPriority) {
         best = candidate
         continue
@@ -1180,31 +1421,6 @@ function latestStart(list: readonly EvaluatedLayer[]): number {
     }
   }
   return latest
-}
-
-function resolvePriority(entry: PreparedContributionEntry): number {
-  const rule = entry.rule as {
-    uniqueness?: {
-      select: {
-        kind: string
-        priority?:
-          | { kind: "literal"; value: number }
-          | { kind: "parameter"; name: string }
-      }
-    }
-  }
-  const select = rule.uniqueness?.select
-  if (select?.kind !== "priority") {
-    return 0
-  }
-  const priority = select.priority
-  if (priority === undefined) {
-    return 0
-  }
-  if (priority.kind === "literal") {
-    return priority.value
-  }
-  return entry.resolvedParameters.get(priority.name)?.value ?? 0
 }
 
 function findUniqueness(
@@ -1624,10 +1840,14 @@ function evaluateHitQuery(
     hitId: hit.hitId,
     field: "damageMultiplier",
   })
-  const scaleFactor = multiplierSelected.reduce(
-    (product, layer) => product * layer.value,
-    1,
+  const scaleFactor = requireFiniteValue(
+    multiplierSelected.reduce((product, layer) => product * layer.value, 1),
+    context,
+    "The hit damage multiplier",
   )
+  if (Number.isNaN(scaleFactor)) {
+    return undefined
+  }
   for (const channel of factorChannels(context)) {
     if (
       selectedAdjustmentsFor(
@@ -1659,7 +1879,11 @@ function evaluateHitQuery(
       criticalRate,
       damageItems: hit.damageItems.map((item) => ({
         itemId: item.itemId,
-        damageMultiplier: item.damageMultiplier * scaleFactor,
+        damageMultiplier: requireFiniteValue(
+          item.damageMultiplier * scaleFactor,
+          context,
+          `The damage multiplier of item "${item.itemId}"`,
+        ),
         finalStat: finalStats.get(item.stat) ?? Number.NaN,
       })),
     },

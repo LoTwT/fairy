@@ -181,9 +181,47 @@ export interface PreparedRuleEntry {
   readonly resolvedParameters: ReadonlyMap<string, Quantity<Unit>>
 }
 
+/**
+ * 层数上限与唯一性优先级都是配置阶段表达式：用绑定的配置与参数视图完整求值，
+ * 不能用 Infinity 或 0 掩盖尚未执行的表达式；非法值在准备阶段明确失败。
+ */
+function resolveConfigurationInteger(
+  expression: NumericExpression<Unit, "configuration">,
+  parameters: ReadonlyMap<string, Quantity<Unit>>,
+  configuration: Readonly<Record<string, number>>,
+  collector: IssueCollector,
+  pointer: string,
+  description: string,
+  identity: { readonly effectId: EffectId; readonly bindingId: BindingId },
+  constraint: "positive" | "any",
+): number | undefined {
+  const value = evaluateConfigurationExpression(
+    expression,
+    parameters,
+    configuration,
+  )
+  const valid = Number.isInteger(value) && (constraint === "any" || value > 0)
+  if (!valid) {
+    collector.report(
+      "INVALID_DEFINITION",
+      pointer,
+      `${description} must be ${
+        constraint === "positive" ? "a positive integer" : "an integer"
+      }, received ${String(value)}`,
+      identity,
+    )
+    return undefined
+  }
+  return value
+}
+
 export interface PreparedContributionEntry extends PreparedRuleEntry {
   readonly rule: ContributionRule
   readonly foldedParameters: ReadonlyMap<string, Quantity<Unit>>
+  /** 配置阶段求出的层数上限；非触发式或未声明上限的组不受限。 */
+  readonly resolvedLayerMaximum: number
+  /** 配置阶段求出的唯一性优先级；未声明 priority 选择时为 0。 */
+  readonly resolvedPriority: number
   readonly outputAddSum: number
   readonly outputScaleProduct: number
   readonly durationTransform: NumericTransform | undefined
@@ -422,12 +460,14 @@ export function prepareEffects(
 
   const effectFolds = new Map<string, EffectFold>()
   const stateFolds = new Map<string, ParameterFold>()
-  const targetPointer = (effectId: string): string => {
+  const effectPointer = (effectId: string): string => {
     const index = ownedRuleSet.effects.findIndex(
       (rule) => rule.effectId === effectId,
     )
-    return index < 0 ? "" : `/effects/${index}/parameters`
+    return index < 0 ? "" : `/effects/${index}`
   }
+  const targetPointer = (effectId: string): string =>
+    `${effectPointer(effectId)}/parameters`
 
   for (const folded of foldedModifications) {
     if (folded.targetEffectId !== undefined) {
@@ -570,12 +610,51 @@ export function prepareEffects(
             })
           }
         }
+        const bindingConfiguration = binding.configuration as Readonly<
+          Record<string, number>
+        >
+        const activation = active.rule.activation
+        const resolvedLayerMaximum =
+          activation.kind === "triggered"
+            ? resolveConfigurationInteger(
+                activation.layering.maximum,
+                foldedParameters,
+                bindingConfiguration,
+                collector,
+                `${effectPointer(active.rule.effectId)}/activation/layering/maximum`,
+                `Layer maximum of "${active.rule.effectId}"`,
+                { effectId: active.rule.effectId, bindingId },
+                "positive",
+              )
+            : Number.POSITIVE_INFINITY
+        const uniqueness = active.rule.uniqueness
+        const resolvedPriority =
+          uniqueness !== undefined && uniqueness.select.kind === "priority"
+            ? resolveConfigurationInteger(
+                uniqueness.select.priority,
+                foldedParameters,
+                bindingConfiguration,
+                collector,
+                `${effectPointer(active.rule.effectId)}/uniqueness/select/priority`,
+                `Uniqueness priority of "${active.rule.effectId}"`,
+                { effectId: active.rule.effectId, bindingId },
+                "any",
+              )
+            : 0
+        if (
+          resolvedLayerMaximum === undefined ||
+          resolvedPriority === undefined
+        ) {
+          continue
+        }
         contributions.push({
           rule: active.rule,
           bindingId,
           holderId: binding.holderId,
           resolvedParameters: active.parameters,
           foldedParameters,
+          resolvedLayerMaximum,
+          resolvedPriority,
           outputAddSum:
             fold === undefined
               ? 0
@@ -646,6 +725,10 @@ export function prepareEffects(
         })
       }
     }
+  }
+
+  if (!collector.isEmpty) {
+    return failure(collector)
   }
 
   const stateParameters: PreparedStateParameters[] = []

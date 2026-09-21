@@ -1166,3 +1166,871 @@ describe("rule order stability", () => {
     expect(results[0]).toBeCloseTo(results[1]!, 12)
   })
 })
+
+const alwaysCondition = { kind: "constant", value: true } as const
+const attackPointsLiteral = (value: number) =>
+  ({ kind: "literal", unit: "attack-points", value }) as const
+const ratioLiteral = (value: number) =>
+  ({ kind: "literal", unit: "ratio", value }) as const
+const multiplierLiteral = (value: number) =>
+  ({ kind: "literal", unit: "multiplier", value }) as const
+const countLiteral = (value: number) =>
+  ({ kind: "literal", unit: "count", value }) as const
+const parameterReference = (unit: string, name: string) =>
+  ({ kind: "parameter", unit, name }) as const
+const fixedAttack = (value: unknown) => ({
+  kind: "stat-adjustment",
+  stat: "attack",
+  stage: "final-fixed",
+  value: typeof value === "number" ? attackPointsLiteral(value) : value,
+})
+
+/** 合成来源的贡献规则；额外字段覆盖 scope、when、parameters、uniqueness 等声明。 */
+function syntheticContribution(
+  effectId: string,
+  operation: unknown,
+  extra: Record<string, unknown> = {},
+): Record<string, unknown> {
+  return {
+    kind: "contribution",
+    effectId,
+    source: structuredClone(syntheticRuleSet.effects[0]!.source),
+    config: alwaysCondition,
+    parameters: {},
+    activation: { kind: "continuous" },
+    beneficiary: { kind: "holder" },
+    scope: "entity",
+    when: alwaysCondition,
+    operation,
+    ...extra,
+  }
+}
+
+/** 贡献阶段的修改规则；目标默认指向同一持有者的效果。 */
+function syntheticContributionModification(
+  effectId: string,
+  targetEffectId: string,
+  modifications: readonly unknown[],
+  extra: Record<string, unknown> = {},
+): Record<string, unknown> {
+  return {
+    kind: "modification",
+    effectId,
+    source: structuredClone(syntheticRuleSet.effects[0]!.source),
+    config: alwaysCondition,
+    parameters: {},
+    phase: "contribution",
+    target: { kind: "effect", effectId: targetEffectId },
+    when: alwaysCondition,
+    modifications,
+    ...extra,
+  }
+}
+
+function prepareSyntheticWithEffects(
+  extraEffects: readonly unknown[],
+): PreparedEffects {
+  const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+    effects: unknown[]
+  }
+  ruleSet.effects.push(...(structuredClone(extraEffects) as unknown[]))
+  const parsed = parseEffectRuleSet(ruleSet)
+  expect(parsed.ok).toBe(true)
+  if (!parsed.ok) {
+    throw new Error("rule set must parse")
+  }
+  const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+  expect(prepared.ok).toBe(true)
+  if (!prepared.ok) {
+    throw new Error("prepare must succeed")
+  }
+  return prepared.value
+}
+
+function supplySyntheticState(prepared: PreparedEffects): EffectState {
+  const state = supplyEffectState(prepared, {
+    sessionId: "session:spec-review",
+    atSeconds: 0,
+    instances: [],
+    snapshots: [],
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  })
+  expect(state.ok).toBe(true)
+  if (!state.ok) {
+    throw new Error("state supply must succeed")
+  }
+  return state.value
+}
+
+function panelAttack(
+  prepared: PreparedEffects,
+  state: EffectState,
+  world: unknown = syntheticWorld,
+): number {
+  const result = evaluateEffects(prepared, state, {
+    kind: "panel",
+    atSeconds: 1,
+    world,
+    observedSnapshots: [],
+    entities: ["entity:spec"],
+    stats: ["attack"],
+  } as never)
+  expect(result.ok).toBe(true)
+  if (!result.ok) {
+    throw new Error("panel evaluation must succeed")
+  }
+  const attack = result.value.attributes.find(
+    (attribute) => attribute.stat === "attack",
+  )
+  return attack?.value.value ?? Number.NaN
+}
+
+function withSyntheticStates(
+  states: readonly unknown[],
+): Record<string, unknown> {
+  return { ...structuredClone(syntheticWorld), states }
+}
+
+describe("contribution-phase modification parameter scope", () => {
+  it("reads the modification rule's own parameters, not the target's", () => {
+    const target = syntheticContribution(
+      "environment:spec:parameter-target",
+      fixedAttack(100),
+      {
+        parameters: {
+          bonus: { kind: "constant", unit: "attack-points", value: 900 },
+        },
+      },
+    )
+    const modification = syntheticContributionModification(
+      "environment:spec:parameter-modification",
+      "environment:spec:parameter-target",
+      [
+        {
+          field: "output",
+          unit: "attack-points",
+          change: {
+            operator: "add",
+            value: parameterReference("attack-points", "bonus"),
+          },
+        },
+      ],
+      {
+        parameters: {
+          bonus: { kind: "constant", unit: "attack-points", value: 50 },
+        },
+      },
+    )
+    const prepared = prepareSyntheticWithEffects([target, modification])
+    // 目标规则也声明 bonus = 900，但修改操作数只读修改规则自己的 50。
+    expect(panelAttack(prepared, supplySyntheticState(prepared))).toBeCloseTo(
+      1150,
+      9,
+    )
+  })
+
+  it("rejects an expression that references an undeclared parameter", () => {
+    const target = syntheticContribution(
+      "environment:spec:missing-parameter-target",
+      fixedAttack(100),
+    )
+    const modification = syntheticContributionModification(
+      "environment:spec:missing-parameter-modification",
+      "environment:spec:missing-parameter-target",
+      [
+        {
+          field: "output",
+          unit: "attack-points",
+          change: {
+            operator: "add",
+            value: parameterReference("attack-points", "absent"),
+          },
+        },
+      ],
+    )
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: unknown[]
+    }
+    ruleSet.effects.push(target, modification)
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(false)
+    if (!parsed.ok) {
+      expect(
+        parsed.issues.some((issue) => issue.code === "MISSING_REFERENCE"),
+      ).toBe(true)
+    }
+  })
+})
+
+describe("contribution-phase field normalization", () => {
+  const parameterTarget = syntheticContribution(
+    "environment:spec:field-target",
+    fixedAttack(parameterReference("attack-points", "amount")),
+    {
+      parameters: {
+        amount: { kind: "constant", unit: "attack-points", value: 100 },
+      },
+    },
+  )
+  const scaleAmount = {
+    field: "parameter",
+    name: "amount",
+    unit: "attack-points",
+    change: { operator: "scale", value: multiplierLiteral(2) },
+  }
+  const addAmount = {
+    field: "parameter",
+    name: "amount",
+    unit: "attack-points",
+    change: { operator: "add", value: attackPointsLiteral(10) },
+  }
+  const setAmount = (value: number) => ({
+    field: "parameter",
+    name: "amount",
+    unit: "attack-points",
+    change: { operator: "set", value: attackPointsLiteral(value) },
+  })
+
+  it("applies (set or base + adds) × scales per field regardless of order", () => {
+    for (const changes of [
+      [scaleAmount, addAmount],
+      [addAmount, scaleAmount],
+    ]) {
+      const prepared = prepareSyntheticWithEffects([
+        parameterTarget,
+        syntheticContributionModification(
+          "environment:spec:field-modification",
+          "environment:spec:field-target",
+          changes,
+        ),
+      ])
+      // (100 + 10) × 2 = 220，声明顺序不改变结果。
+      expect(panelAttack(prepared, supplySyntheticState(prepared))).toBeCloseTo(
+        1220,
+        9,
+      )
+    }
+  })
+
+  it("merges equal set values", () => {
+    const prepared = prepareSyntheticWithEffects([
+      parameterTarget,
+      syntheticContributionModification(
+        "environment:spec:set-a",
+        "environment:spec:field-target",
+        [setAmount(200)],
+      ),
+      syntheticContributionModification(
+        "environment:spec:set-b",
+        "environment:spec:field-target",
+        [setAmount(200)],
+      ),
+    ])
+    expect(panelAttack(prepared, supplySyntheticState(prepared))).toBeCloseTo(
+      1200,
+      9,
+    )
+  })
+
+  it("reports conflicting effective set values", () => {
+    const prepared = prepareSyntheticWithEffects([
+      parameterTarget,
+      syntheticContributionModification(
+        "environment:spec:set-conflict",
+        "environment:spec:field-target",
+        [setAmount(200), setAmount(300)],
+      ),
+    ])
+    const result = evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "MODIFICATION_CONFLICT"),
+      ).toBe(true)
+    }
+  })
+
+  it("normalizes output modifications on the layer result", () => {
+    const prepared = prepareSyntheticWithEffects([
+      syntheticContribution("environment:spec:output-target", fixedAttack(100)),
+      syntheticContributionModification(
+        "environment:spec:output-modification",
+        "environment:spec:output-target",
+        [
+          {
+            field: "output",
+            unit: "attack-points",
+            change: { operator: "add", value: attackPointsLiteral(5) },
+          },
+          {
+            field: "output",
+            unit: "attack-points",
+            change: { operator: "scale", value: multiplierLiteral(1.3) },
+          },
+        ],
+      ),
+    ])
+    // 1000 + (100 + 5) × 1.3 = 1136.5
+    expect(panelAttack(prepared, supplySyntheticState(prepared))).toBeCloseTo(
+      1136.5,
+      9,
+    )
+  })
+})
+
+describe("hit-local attribute isolation", () => {
+  it("keeps hit-local contributions out of the general attribute node", () => {
+    const conversion = syntheticContribution(
+      "environment:spec:conversion",
+      fixedAttack({
+        kind: "multiply",
+        unit: "attack-points",
+        coefficient: ratioLiteral(0.1),
+        value: {
+          kind: "stat",
+          unit: "attack-points",
+          entity: { role: "holder" },
+          stat: "attack",
+          stage: "initial",
+          at: "evaluation",
+        },
+      }),
+    )
+    const hitInitialAttack = syntheticContribution(
+      "environment:spec:hit-initial-attack",
+      {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "initial-fixed",
+        value: attackPointsLiteral(100),
+      },
+      { scope: "hit" },
+    )
+    const prepared = prepareSyntheticWithEffects([conversion, hitInitialAttack])
+    const state = supplySyntheticState(prepared)
+    // 通用初始攻击力 1000 的 10% 只按通用节点计算，命中局部 +100 不得混入。
+    expect(panelAttack(prepared, state)).toBeCloseTo(1100, 9)
+    const hitResult = evaluateEffects(prepared, state, {
+      ...structuredClone(syntheticHitQuery),
+    } as never)
+    expect(hitResult.ok).toBe(true)
+    if (!hitResult.ok) {
+      throw new Error("hit evaluation must succeed")
+    }
+    expect(hitResult.value.hit?.damageItems[0]?.finalStat).toBeCloseTo(1200, 9)
+  })
+
+  it("keeps hit-local nodes separate across hits", () => {
+    const basicOnlyAttack = syntheticContribution(
+      "environment:spec:basic-only-attack",
+      {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "initial-fixed",
+        value: attackPointsLiteral(100),
+      },
+      {
+        scope: "hit",
+        when: {
+          kind: "one-of",
+          fact: "hit.skillCategory",
+          values: ["basic"],
+        },
+      },
+    )
+    const prepared = prepareSyntheticWithEffects([basicOnlyAttack])
+    const state = supplySyntheticState(prepared)
+    const basicResult = evaluateEffects(prepared, state, {
+      ...structuredClone(syntheticHitQuery),
+    } as never)
+    const chainResult = evaluateEffects(prepared, state, {
+      ...structuredClone(syntheticHitQuery),
+      hit: {
+        ...syntheticHitQuery.hit,
+        hitId: "hit:spec-chain",
+        skillCategory: "chain",
+      },
+    } as never)
+    expect(basicResult.ok).toBe(true)
+    expect(chainResult.ok).toBe(true)
+    if (!basicResult.ok || !chainResult.ok) {
+      throw new Error("hit evaluations must succeed")
+    }
+    expect(basicResult.value.hit?.damageItems[0]?.finalStat).toBeCloseTo(
+      1100,
+      9,
+    )
+    expect(chainResult.value.hit?.damageItems[0]?.finalStat).toBeCloseTo(
+      1000,
+      9,
+    )
+    expect(panelAttack(prepared, state)).toBeCloseTo(1000, 9)
+  })
+})
+
+describe("hit multiplier beneficiary scoping", () => {
+  it("applies a team-wide hit multiplier once to the current attacker", () => {
+    const teamMultiplier = syntheticContribution(
+      "environment:spec:team-hit-multiplier",
+      {
+        kind: "hit-adjustment",
+        field: "damageMultiplier",
+        operator: "scale",
+        value: multiplierLiteral(2),
+      },
+      { scope: "hit", beneficiary: { kind: "team" } },
+    )
+    const otherMemberMultiplier = syntheticContribution(
+      "environment:spec:other-member-multiplier",
+      {
+        kind: "hit-adjustment",
+        field: "damageMultiplier",
+        operator: "scale",
+        value: multiplierLiteral(3),
+      },
+      { scope: "hit", beneficiary: { kind: "team-except-holder" } },
+    )
+    const prepared = prepareSyntheticWithEffects([
+      teamMultiplier,
+      otherMemberMultiplier,
+    ])
+    const state = supplySyntheticState(prepared)
+    const world = structuredClone(syntheticWorld) as unknown as {
+      entities: { entityId: string; teamId: string }[]
+    }
+    for (const entity of world.entities) {
+      entity.teamId = "team:spec"
+    }
+    const result = evaluateEffects(prepared, state, {
+      ...structuredClone(syntheticHitQuery),
+      world,
+    } as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("hit evaluation must succeed")
+    }
+    // 全队 ×2 只按当前进攻者消费一次；只作用于其他队员的 ×3 不进入本次命中。
+    expect(result.value.hit?.damageItems[0]?.damageMultiplier).toBeCloseTo(2, 9)
+  })
+})
+
+describe("configuration expressions in uniqueness selection", () => {
+  it("selects the higher priority computed from an arithmetic expression", () => {
+    const prepared = prepareSyntheticWithEffects([
+      syntheticContribution("environment:spec:priority-one", fixedAttack(100), {
+        uniqueness: {
+          key: "spec-priority",
+          scope: "global",
+          select: { kind: "priority", priority: countLiteral(1) },
+        },
+      }),
+      syntheticContribution("environment:spec:priority-two", fixedAttack(200), {
+        uniqueness: {
+          key: "spec-priority",
+          scope: "global",
+          select: {
+            kind: "priority",
+            priority: {
+              kind: "add",
+              unit: "count",
+              operands: [countLiteral(1), countLiteral(1)],
+            },
+          },
+        },
+      }),
+    ])
+    expect(panelAttack(prepared, supplySyntheticState(prepared))).toBeCloseTo(
+      1200,
+      9,
+    )
+  })
+
+  it("rejects a priority expression that is not an integer", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: unknown[]
+    }
+    ruleSet.effects.push(
+      syntheticContribution(
+        "environment:spec:fractional-priority",
+        fixedAttack(100),
+        {
+          uniqueness: {
+            key: "spec-priority",
+            scope: "global",
+            select: { kind: "priority", priority: countLiteral(1.5) },
+          },
+        },
+      ),
+    )
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(false)
+    if (!prepared.ok) {
+      expect(
+        prepared.issues.some(
+          (issue) =>
+            issue.code === "INVALID_DEFINITION" &&
+            issue.pointer.includes("uniqueness/select/priority"),
+        ),
+      ).toBe(true)
+    }
+  })
+
+  it("reads applicable configuration numbers in priority expressions", () => {
+    const ruleSet = structuredClone(exampleRuleSet) as unknown as {
+      effects: unknown[]
+    }
+    const source = (ruleSet.effects[0] as { source: unknown }).source
+    const withPriority = (
+      effectId: string,
+      priority: unknown,
+      value: number,
+    ): Record<string, unknown> => ({
+      kind: "contribution",
+      effectId,
+      source: structuredClone(source),
+      config: alwaysCondition,
+      parameters: {},
+      activation: { kind: "continuous" },
+      beneficiary: { kind: "holder" },
+      scope: "entity",
+      when: alwaysCondition,
+      uniqueness: {
+        key: "spec-configuration-priority",
+        scope: "global",
+        select: { kind: "priority", priority },
+      },
+      operation: {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: attackPointsLiteral(value),
+      },
+    })
+    ruleSet.effects.push(
+      withPriority("agent:1311:priority-literal", countLiteral(1), 100),
+      withPriority(
+        "agent:1311:priority-configuration",
+        { kind: "configuration-number", unit: "count", field: "mindscapeRank" },
+        200,
+      ),
+    )
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [
+      {
+        kind: "agent",
+        bindingId: "binding:astra",
+        holderId: "entity:astra",
+        sourceEntityId: "1311",
+        eligible: true,
+        configuration: { mindscapeRank: 2, coreSkillLevel: 7 },
+      },
+    ])
+    expect(prepared.ok).toBe(true)
+    if (!prepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    const state = supplyEffectState(prepared.value, {
+      sessionId: "session:spec-configuration-priority",
+      atSeconds: 0,
+      instances: [],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    })
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const world = {
+      ...structuredClone(exampleWorld),
+      entities: exampleWorld.entities.map((entity) =>
+        entity.entityId === "entity:astra" && entity.kind === "actor"
+          ? {
+              ...entity,
+              generalStats: {
+                attack: {
+                  baseValue: 3000,
+                  initialPercentage: [],
+                  initialFixed: [],
+                  finalPercentage: [],
+                  finalFixed: [],
+                },
+              },
+            }
+          : entity,
+      ),
+    }
+    const result = evaluateEffects(prepared.value, state.value, {
+      kind: "panel",
+      atSeconds: 0,
+      world,
+      observedSnapshots: [],
+      entities: ["entity:astra"],
+      stats: ["attack"],
+    } as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("panel evaluation must succeed")
+    }
+    // mindscapeRank = 2 胜过字面量 1：只保留 +200。
+    expect(
+      result.value.attributes.find((attribute) => attribute.stat === "attack")
+        ?.value.value,
+    ).toBeCloseTo(3200, 9)
+  })
+})
+
+describe("non-finite evaluation boundaries", () => {
+  it("fails instead of returning an overflowed direct stat", () => {
+    const prepared = prepareSyntheticWithEffects([
+      syntheticContribution("environment:spec:overflowing-rate", {
+        kind: "stat-adjustment",
+        stat: "criticalRate",
+        stage: "direct",
+        value: {
+          kind: "multiply",
+          unit: "ratio",
+          value: ratioLiteral(1e308),
+          coefficient: multiplierLiteral(2),
+        },
+      }),
+    ])
+    const result = evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["criticalRate"],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when aggregated contributions overflow", () => {
+    const prepared = prepareSyntheticWithEffects([
+      syntheticContribution("environment:spec:huge-a", fixedAttack(1e308)),
+      syntheticContribution("environment:spec:huge-b", fixedAttack(1e308)),
+    ])
+    const result = evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+    expect(result.ok).toBe(false)
+  })
+
+  it("fails when a hit multiplier product overflows", () => {
+    const hugeMultiplier = (effectId: string) =>
+      syntheticContribution(
+        effectId,
+        {
+          kind: "hit-adjustment",
+          field: "damageMultiplier",
+          operator: "scale",
+          value: multiplierLiteral(1e308),
+        },
+        { scope: "hit" },
+      )
+    const prepared = prepareSyntheticWithEffects([
+      hugeMultiplier("environment:spec:huge-multiplier-a"),
+      hugeMultiplier("environment:spec:huge-multiplier-b"),
+    ])
+    const result = evaluateEffects(prepared, supplySyntheticState(prepared), {
+      ...structuredClone(syntheticHitQuery),
+    } as never)
+    expect(result.ok).toBe(false)
+  })
+
+  it("keeps signed ratios and values above one hundred percent valid", () => {
+    const prepared = prepareSyntheticWithEffects([
+      syntheticContribution("environment:spec:large-damage-bonus", {
+        kind: "factor-contribution",
+        channel: "damage-bonus",
+        value: ratioLiteral(2.5),
+      }),
+      syntheticContribution("environment:spec:negative-critical-rate", {
+        kind: "stat-adjustment",
+        stat: "criticalRate",
+        stage: "direct",
+        value: ratioLiteral(-0.02),
+      }),
+    ])
+    const state = supplySyntheticState(prepared)
+    const panel = evaluateEffects(prepared, state, {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["criticalRate"],
+    } as never)
+    expect(panel.ok).toBe(true)
+    if (!panel.ok) {
+      throw new Error("panel evaluation must succeed")
+    }
+    expect(
+      panel.value.attributes.find(
+        (attribute) => attribute.stat === "criticalRate",
+      )?.value.value,
+    ).toBeCloseTo(0.03, 12)
+    const contributions = evaluateEffects(prepared, state, {
+      kind: "contributions",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      beneficiaries: ["entity:spec"],
+    } as EvaluationInput)
+    expect(contributions.ok).toBe(true)
+    if (!contributions.ok) {
+      throw new Error("contribution evaluation must succeed")
+    }
+    const damageBonus = contributions.value.contributions.find(
+      (contribution) =>
+        contribution.address.kind === "factor" &&
+        contribution.origin.effectId === "environment:spec:large-damage-bonus",
+    )
+    expect(damageBonus?.value.value).toBeCloseTo(2.5, 12)
+  })
+})
+
+describe("state observation reads", () => {
+  const inactiveStateBonus = syntheticContribution(
+    "environment:spec:inactive-state-bonus",
+    fixedAttack(100),
+    {
+      when: {
+        kind: "state-is",
+        stateId: "state:spec:linger",
+        owner: { role: "holder" },
+        at: "evaluation",
+        active: false,
+      },
+    },
+  )
+
+  function panelResult(prepared: PreparedEffects, world: unknown) {
+    return evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+  }
+
+  it("fails when a required state observation is missing", () => {
+    const prepared = prepareSyntheticWithEffects([inactiveStateBonus])
+    const result = panelResult(prepared, withSyntheticStates([]))
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+  })
+
+  it("distinguishes an explicit inactive observation from an active one", () => {
+    const prepared = prepareSyntheticWithEffects([inactiveStateBonus])
+    const inactive = withSyntheticStates([
+      {
+        stateId: "state:spec:linger",
+        bindingId: "binding:spec",
+        ownerId: "entity:spec",
+        active: false,
+        activationId: null,
+        since: null,
+      },
+    ])
+    expect(
+      panelAttack(prepared, supplySyntheticState(prepared), inactive),
+    ).toBeCloseTo(1100, 9)
+    const active = withSyntheticStates([
+      {
+        stateId: "state:spec:linger",
+        bindingId: "binding:spec",
+        ownerId: "entity:spec",
+        active: true,
+        activationId: "state-activation:spec-a",
+        since: 0,
+      },
+    ])
+    expect(
+      panelAttack(prepared, supplySyntheticState(prepared), active),
+    ).toBeCloseTo(1000, 9)
+  })
+
+  it("reads only the observation of the rule's own source binding", () => {
+    const prepared = prepareSyntheticWithEffects([inactiveStateBonus])
+    const foreignBindingRecord = withSyntheticStates([
+      {
+        stateId: "state:spec:linger",
+        bindingId: "binding:spec-other",
+        ownerId: "entity:spec",
+        active: true,
+        activationId: "state-activation:spec-other",
+        since: 0,
+      },
+    ])
+    const foreignResult = panelResult(prepared, foreignBindingRecord)
+    expect(foreignResult.ok).toBe(false)
+    if (!foreignResult.ok) {
+      expect(
+        foreignResult.issues.some((issue) => issue.code === "MISSING_FACT"),
+      ).toBe(true)
+    }
+    const ownRecord = {
+      ...foreignBindingRecord,
+      states: [
+        ...(foreignBindingRecord["states"] as unknown[]),
+        {
+          stateId: "state:spec:linger",
+          bindingId: "binding:spec",
+          ownerId: "entity:spec",
+          active: false,
+          activationId: null,
+          since: null,
+        },
+      ],
+    }
+    expect(
+      panelAttack(prepared, supplySyntheticState(prepared), ownRecord),
+    ).toBeCloseTo(1100, 9)
+  })
+
+  it("does not require state observations this evaluation never reads", () => {
+    const prepared = prepareSynthetic()
+    expect(
+      panelAttack(
+        prepared,
+        supplySyntheticState(prepared),
+        withSyntheticStates([]),
+      ),
+    ).toBeCloseTo(1000, 9)
+  })
+})

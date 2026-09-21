@@ -17,7 +17,6 @@ import type {
   SuppliedEffectInstance,
   SuppliedInstancesUpdate,
   TriggerContext,
-  Unit,
   WorldObservation,
 } from "../types.ts"
 import { IssueCollector, failure } from "./issues.ts"
@@ -516,35 +515,73 @@ function validateEffectInstance(
   return normalized
 }
 
-function resolveLayerMaximum(entry: {
-  readonly rule: EffectInstance extends never ? never : { activation: unknown }
-  readonly resolvedParameters: ReadonlyMap<
-    string,
-    { readonly unit: Unit; readonly value: number }
-  >
+/** 逻辑组的层数上限：准备阶段已按绑定配置与参数视图求出完整表达式值。 */
+export function resolveLayerMaximum(entry: {
+  readonly resolvedLayerMaximum: number
 }): number {
-  const activation = entry.rule.activation as {
-    kind: string
-    layering?: {
-      maximum?:
-        | { kind: "literal"; value: number }
-        | { kind: "parameter"; name: string }
-    }
-  }
-  if (activation.kind !== "triggered") {
-    return Number.POSITIVE_INFINITY
-  }
-  const maximum = activation.layering?.maximum
-  if (maximum === undefined) {
-    return Number.POSITIVE_INFINITY
-  }
-  if (maximum.kind === "literal") {
-    return maximum.value
-  }
-  return (
-    entry.resolvedParameters.get(maximum.name)?.value ??
-    Number.POSITIVE_INFINITY
+  return entry.resolvedLayerMaximum
+}
+
+/**
+ * 状态定义的来源解析到同一持有者的绑定；观察按 (stateId, bindingId, ownerId) 匹配，
+ * 不混用其他绑定的记录。未绑定或解析出多个来源绑定时报错。
+ */
+export function resolveStateBindingId(
+  prepared: PreparedEffectsInternal,
+  stateId: string,
+  holderId: EntityId,
+  collector: IssueCollector,
+): BindingId | undefined {
+  const state = prepared.ruleSet.states.find(
+    (entry) => entry.stateId === stateId,
   )
+  if (state === undefined) {
+    collector.report(
+      "MISSING_REFERENCE",
+      "",
+      `State "${stateId}" is not declared by the rule set`,
+    )
+    return undefined
+  }
+  const identity = state.source.identity
+  const matches = prepared.bindings.filter(
+    (binding) =>
+      binding.holderId === holderId &&
+      binding.kind === identity.kind &&
+      binding.sourceEntityId === identity.entityId,
+  )
+  if (matches.length === 0) {
+    collector.report(
+      "MISSING_FACT",
+      "",
+      `State "${stateId}" has no source binding for holder "${holderId}"`,
+    )
+    return undefined
+  }
+  if (matches.length > 1) {
+    collector.report(
+      "CONTEXT_MISMATCH",
+      "",
+      `State "${stateId}" resolves to multiple source bindings for holder "${holderId}"`,
+    )
+    return undefined
+  }
+  return matches[0]!.bindingId
+}
+
+/** 按 (stateId, bindingId, ownerId) 读取状态观察；缺记录与显式未生效是不同结果。 */
+export function findStateObservation(
+  world: WorldIndex,
+  stateId: string,
+  bindingId: BindingId,
+  ownerId: EntityId,
+): WorldObservation["states"][number] | undefined {
+  return world.states.get(`${stateId} ${bindingId} ${ownerId}`)
+}
+
+/** 引擎自有副本：冻结状态之前先与调用方对象脱钩。 */
+function cloneEngineOwned<T>(value: T): T {
+  return structuredClone(value)
 }
 
 /** 逻辑组键：实例身份 + 生命周期身份；状态两次进入属于不同组。 */
@@ -949,7 +986,7 @@ export function supplyEffectState(
     if (instance === undefined) {
       continue
     }
-    instances.push(instance)
+    instances.push(cloneEngineOwned(instance))
   }
   const cooldowns = validateCooldowns(
     inputObject["cooldowns"],
@@ -974,10 +1011,10 @@ export function supplyEffectState(
     sessionId: sessionId as SessionId,
     atSeconds,
     instances,
-    snapshots,
-    cooldowns,
-    processedEventIds: eventHistory.processedIds,
-    lastCursor: eventHistory.last,
+    snapshots: snapshots.map((snapshot) => cloneEngineOwned(snapshot)),
+    cooldowns: cooldowns.map((cooldown) => cloneEngineOwned(cooldown)),
+    processedEventIds: [...eventHistory.processedIds],
+    lastCursor: eventHistory.last === null ? null : { ...eventHistory.last },
   }
   return { ok: true, value: freezeState(internal) }
 }
@@ -1134,8 +1171,9 @@ export function synchronizeSuppliedInstances(
   for (const snapshot of observedSnapshots) {
     const existing = mergedSnapshotIndex.get(snapshot.snapshotId)
     if (existing === undefined) {
-      mergedSnapshots.push(snapshot)
-      mergedSnapshotIndex.set(snapshot.snapshotId, snapshot)
+      const owned = cloneEngineOwned(snapshot)
+      mergedSnapshots.push(owned)
+      mergedSnapshotIndex.set(snapshot.snapshotId, owned)
       continue
     }
     if (!snapshotsEqual(existing, snapshot)) {
@@ -1323,7 +1361,9 @@ export function synchronizeSuppliedInstances(
   )
   const nextInstances = [...retainedInstances]
   for (const instances of replacedInstancesByScope.values()) {
-    nextInstances.push(...instances)
+    nextInstances.push(
+      ...instances.map((instance) => cloneEngineOwned(instance)),
+    )
   }
   // 同步范围的目标合法性按 world 校验；保留实例沿用导入时的判定。
   for (const instances of replacedInstancesByScope.values()) {
