@@ -180,38 +180,53 @@ function evaluateTriggerExpression(
       )
     }
     case "add":
-      return expression.operands.reduce(
-        (sum, operand) =>
-          sum +
+      return foldTriggerValues(
+        expression.operands.map((operand) =>
           evaluateTriggerExpression(operand, runtime, holderId, parameters),
+        ),
         0,
+        (sum, operand) => sum + operand,
+        runtime,
+        "A numeric expression sum",
       )
     case "minimum":
-      return Math.min(
-        ...expression.operands.map((operand) =>
+      return foldTriggerValues(
+        expression.operands.map((operand) =>
           evaluateTriggerExpression(operand, runtime, holderId, parameters),
         ),
+        Number.POSITIVE_INFINITY,
+        (lowest, operand) => Math.min(lowest, operand),
+        runtime,
+        "A numeric expression minimum",
       )
     case "maximum":
-      return Math.max(
-        ...expression.operands.map((operand) =>
+      return foldTriggerValues(
+        expression.operands.map((operand) =>
           evaluateTriggerExpression(operand, runtime, holderId, parameters),
         ),
+        Number.NEGATIVE_INFINITY,
+        (highest, operand) => Math.max(highest, operand),
+        runtime,
+        "A numeric expression maximum",
       )
     case "multiply":
-      return requireFiniteTriggerValue(
-        evaluateTriggerExpression(
-          expression.value,
-          runtime,
-          holderId,
-          parameters,
-        ) *
+      return foldTriggerValues(
+        [
+          evaluateTriggerExpression(
+            expression.value,
+            runtime,
+            holderId,
+            parameters,
+          ),
           evaluateTriggerExpression(
             expression.coefficient,
             runtime,
             holderId,
             parameters,
           ),
+        ],
+        1,
+        (product, operand) => product * operand,
         runtime,
         "A numeric expression product",
       )
@@ -242,6 +257,66 @@ function requireFiniteTriggerValue(
     return Number.NaN
   }
   return value
+}
+
+/**
+ * 逐项算术归约：每一步都检查数值边界，不靠最终输出兜底。
+ * 出现非有限中间结果立即返回，避免后续步骤重复报告同一溢出。
+ */
+function foldTriggerValues(
+  values: readonly number[],
+  identity: number,
+  combine: (accumulated: number, value: number) => number,
+  runtime: TriggerRuntime,
+  description: string,
+): number {
+  let accumulated = identity
+  for (const value of values) {
+    accumulated = requireFiniteTriggerValue(
+      combine(accumulated, value),
+      runtime,
+      description,
+    )
+    if (!Number.isFinite(accumulated)) {
+      return accumulated
+    }
+  }
+  return accumulated
+}
+
+/**
+ * 层到期时间必须有限：时钟算术的中间溢出按定义失败处理，
+ * 不把非有限值写入新状态。
+ */
+function requireFiniteExpiry(
+  expiresAt: number | null,
+  runtime: TriggerRuntime,
+  effectId: EffectId,
+  bindingId: BindingId,
+): number | null | undefined {
+  if (expiresAt === null || Number.isFinite(expiresAt)) {
+    return expiresAt
+  }
+  runtime.collector.report(
+    "INVALID_DEFINITION",
+    "",
+    `Rule "${effectId}" computes a non-finite layer expiry`,
+    { effectId, bindingId },
+  )
+  return undefined
+}
+
+/** 组内最旧层的选择：开始时间优先，平局按层 ID。 */
+function oldestLayer(
+  layers: readonly EffectInstance["layers"][number][],
+): EffectInstance["layers"][number] {
+  return [...layers].toSorted((left, right) =>
+    left.startedAt !== right.startedAt
+      ? left.startedAt - right.startedAt
+      : left.layerId < right.layerId
+        ? -1
+        : 1,
+  )[0]!
 }
 
 /** 触发阶段事实：只有事件实际携带的字段可读，缺失报 MISSING_FACT。 */
@@ -1541,13 +1616,25 @@ export function advanceEffects(
         bindingId,
         instance.lifetime.stateOwnerId,
       )
+      if (observation === undefined) {
+        // 缺记录不是状态结束：不能把缺失观察当作旧层已失效而清除。
+        collector.report(
+          "MISSING_FACT",
+          "",
+          `State "${instance.lifetime.stateId}" is not observed for owner "${instance.lifetime.stateOwnerId}" in the after world`,
+          { effectId: instance.effectId, bindingId: instance.bindingId },
+        )
+        return false
+      }
       return (
-        observation !== undefined &&
         observation.active &&
         observation.activationId === instance.lifetime.stateActivationId
       )
     },
   )
+  if (!collector.isEmpty) {
+    return failure(collector)
+  }
   const cooldownUpdates = new Map<
     string,
     {
@@ -1806,7 +1893,17 @@ export function advanceEffects(
               stateBindingId,
               ownerEntity,
             )
-            if (observation === undefined || !observation.active) {
+            if (observation === undefined) {
+              // 缺记录不是未生效：显式 inactive 才表示状态未生效。
+              collector.report(
+                "MISSING_FACT",
+                "",
+                `State "${activation.lifetime.stateId}" is not observed for owner "${ownerEntity}" in the after world`,
+                { effectId: entry.rule.effectId, bindingId: entry.bindingId },
+              )
+              return false
+            }
+            if (!observation.active) {
               continue
             }
             const stateActivationId = observation.activationId as string
@@ -1825,7 +1922,8 @@ export function advanceEffects(
               ownerEntity,
               stateActivationId,
             )
-            const existing = workingInstances
+            // 状态绑定组没有时钟；层数上限按完整逻辑组统计，不按单个实例统计。
+            const groupInstances = workingInstances
               .concat(newInstances)
               .filter(
                 (instance) =>
@@ -1840,33 +1938,41 @@ export function advanceEffects(
                     instance.lifetime.stateActivationId,
                   ) === key,
               )
-              .at(-1)
+            const groupLayers = groupInstances.flatMap(
+              (instance) => instance.layers,
+            )
             const maximum = resolveLayerMaximum(entry)
-            // 状态绑定组没有时钟；空组创建一层，add-layer 才尝试增层，满层按 atCapacity 处理。
             let replacedLayerId: string | undefined
             let addNewLayer = false
-            if (existing === undefined) {
+            if (groupLayers.length === 0) {
               addNewLayer = true
             } else if (activation.layering.onRetrigger === "add-layer") {
-              if (existing.layers.length < maximum) {
+              if (groupLayers.length < maximum) {
                 addNewLayer = true
               } else if (
                 activation.layering.atCapacity === "replace-oldest-layer"
               ) {
-                replacedLayerId = [...existing.layers].toSorted(
-                  (left, right) =>
-                    left.startedAt !== right.startedAt
-                      ? left.startedAt - right.startedAt
-                      : left.layerId < right.layerId
-                        ? -1
-                        : 1,
-                )[0]!.layerId
+                replacedLayerId = oldestLayer(groupLayers).layerId
                 addNewLayer = true
               }
             }
             if (!addNewLayer) {
               continue
             }
+            // 新层接替被替换层的位置：组内已有实例时沿用其身份，空组才新建实例。
+            const targetInstance =
+              replacedLayerId === undefined
+                ? groupInstances.find((instance) =>
+                    instance.layers.some(
+                      (layer) =>
+                        layer.layerId === oldestLayer(groupLayers).layerId,
+                    ),
+                  )
+                : groupInstances.find((instance) =>
+                    instance.layers.some(
+                      (layer) => layer.layerId === replacedLayerId,
+                    ),
+                  )
             const snapshotId = ensureSnapshot()
             if (snapshotId === undefined) {
               return false
@@ -1888,11 +1994,11 @@ export function advanceEffects(
               expiresAt: null,
               trigger: triggerContext,
             }
-            if (existing !== undefined) {
+            if (targetInstance !== undefined) {
               const updated: EffectInstance = {
-                ...existing,
+                ...targetInstance,
                 layers: [
-                  ...existing.layers.filter(
+                  ...targetInstance.layers.filter(
                     (layer) => layer.layerId !== replacedLayerId,
                   ),
                   newLayer,
@@ -1939,7 +2045,7 @@ export function advanceEffects(
             group.beneficiaries,
             stackKey,
           )
-          const existing = workingInstances
+          const groupInstances = workingInstances
             .concat(newInstances)
             .filter(
               (instance) =>
@@ -1956,6 +2062,8 @@ export function advanceEffects(
                 layerSurvives(layer, event.atSeconds),
               ),
             )
+          // 时钟锚点与层归属沿用组内代表实例；层数上限按完整逻辑组统计。
+          const existing = groupInstances
             .toSorted((left, right) => {
               const leftAnchor =
                 left.lifetime.kind === "timed"
@@ -1972,6 +2080,11 @@ export function advanceEffects(
                   : 1
             })
             .at(-1)
+          const groupSurvivingLayers = groupInstances.flatMap((instance) =>
+            instance.layers.filter((layer) =>
+              layerSurvives(layer, event.atSeconds),
+            ),
+          )
           const maximum = resolveLayerMaximum(entry)
           const onRetrigger = activation.lifetime.onRetrigger
           const refreshExisting = activation.lifetime.refreshExisting
@@ -1994,6 +2107,15 @@ export function advanceEffects(
                   (timing.maximum ?? Number.POSITIVE_INFINITY)
             return Math.min(base, cap)
           })()
+          if (!Number.isFinite(newLayerExpiry)) {
+            collector.report(
+              "INVALID_DEFINITION",
+              "",
+              `Rule "${entry.rule.effectId}" computes a non-finite layer expiry`,
+              { effectId: entry.rule.effectId, bindingId: entry.bindingId },
+            )
+            return false
+          }
           if (existing === undefined) {
             const snapshotId = ensureSnapshot()
             if (snapshotId === undefined) {
@@ -2061,27 +2183,26 @@ export function advanceEffects(
                   ]
                 : []
           let replacedLayerId: string | undefined
-          if (
-            activation.layering.onRetrigger === "add-layer" &&
-            surviving.length >= maximum
-          ) {
-            if (activation.layering.atCapacity === "ignore-new-layer") {
-              replacedLayerId = "__ignore__"
-            } else {
-              replacedLayerId = [...surviving].toSorted((left, right) =>
-                left.startedAt !== right.startedAt
-                  ? left.startedAt - right.startedAt
-                  : left.layerId < right.layerId
-                    ? -1
-                    : 1,
-              )[0]!.layerId
+          let addNewLayer = false
+          if (activation.layering.onRetrigger === "add-layer") {
+            if (groupSurvivingLayers.length < maximum) {
+              addNewLayer = true
+            } else if (
+              activation.layering.atCapacity === "replace-oldest-layer"
+            ) {
+              replacedLayerId = oldestLayer(groupSurvivingLayers).layerId
+              addNewLayer = true
             }
           }
-          const addNewLayer =
-            activation.layering.onRetrigger === "add-layer" &&
-            (surviving.length < maximum ||
-              (activation.layering.atCapacity === "replace-oldest-layer" &&
-                replacedLayerId !== "__ignore__"))
+          // 被替换的层可能属于组内另一实例：新层接替它的位置，不留下空实例。
+          const replacedInstance =
+            replacedLayerId === undefined
+              ? undefined
+              : groupInstances.find((instance) =>
+                  instance.layers.some(
+                    (layer) => layer.layerId === replacedLayerId,
+                  ),
+                )
           const updatedLayers: EffectInstance["layers"][number][] = []
           let changedLayers = false
           for (const layer of existing.layers) {
@@ -2094,14 +2215,22 @@ export function advanceEffects(
               continue
             }
             if (selectedForClock.includes(layer)) {
-              const updatedExpiry = applyClockUpdate(
-                onRetrigger,
-                layer.expiresAt,
-                event.atSeconds,
-                timing.duration,
-                timing.maximum,
-                firstActivatedAt,
+              const updatedExpiry = requireFiniteExpiry(
+                applyClockUpdate(
+                  onRetrigger,
+                  layer.expiresAt,
+                  event.atSeconds,
+                  timing.duration,
+                  timing.maximum,
+                  firstActivatedAt,
+                ),
+                runtime,
+                entry.rule.effectId,
+                entry.bindingId,
               )
+              if (updatedExpiry === undefined) {
+                return false
+              }
               if (updatedExpiry !== layer.expiresAt) {
                 changedLayers = true
               }
@@ -2116,8 +2245,28 @@ export function advanceEffects(
               return false
             }
             const triggerContext = triggerContextForEvent(runtime, snapshotId)
-            changedLayers = true
-            updatedLayers.push({
+            const newLayerExpiresAt =
+              clock === "shared"
+                ? sharedGroupClock(
+                    selectedForClock,
+                    onRetrigger,
+                    event.atSeconds,
+                    timing.duration,
+                    timing.maximum,
+                    firstActivatedAt,
+                    newLayerExpiry,
+                  )
+                : newLayerExpiry
+            const expiresAt = requireFiniteExpiry(
+              newLayerExpiresAt,
+              runtime,
+              entry.rule.effectId,
+              entry.bindingId,
+            )
+            if (expiresAt === undefined) {
+              return false
+            }
+            const newLayer = {
               layerId: layerIdFor(
                 stateInternal.sessionId,
                 preparedInternal,
@@ -2130,20 +2279,28 @@ export function advanceEffects(
                 0,
               ) as LayerId,
               startedAt: event.atSeconds,
-              expiresAt:
-                clock === "shared"
-                  ? sharedGroupClock(
-                      selectedForClock,
-                      onRetrigger,
-                      event.atSeconds,
-                      timing.duration,
-                      timing.maximum,
-                      firstActivatedAt,
-                      newLayerExpiry,
-                    )
-                  : newLayerExpiry,
+              expiresAt,
               trigger: triggerContext,
-            })
+            }
+            if (
+              replacedInstance !== undefined &&
+              replacedInstance.instanceId !== existing.instanceId
+            ) {
+              const updatedReplaced: EffectInstance = {
+                ...replacedInstance,
+                layers: [
+                  ...replacedInstance.layers.filter(
+                    (layer) => layer.layerId !== replacedLayerId,
+                  ),
+                  newLayer,
+                ] as unknown as NonEmpty<EffectInstance["layers"][number]>,
+              }
+              touchedInstances.set(updatedReplaced.instanceId, updatedReplaced)
+              anyChange = true
+            } else {
+              changedLayers = true
+              updatedLayers.push(newLayer)
+            }
           }
           if (!changedLayers) {
             continue

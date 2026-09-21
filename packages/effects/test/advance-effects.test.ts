@@ -1838,3 +1838,447 @@ describe("advanceEffects input ownership", () => {
     expect(result.ok).toBe(true)
   })
 })
+
+/** 只保留一个合成效果并定向覆盖，避免其他合成规则干扰断言。 */
+function singleEffectRuleSet(
+  effectId: string,
+  override: (effect: Record<string, unknown>) => void,
+): ReturnType<typeof structuredClone> {
+  const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+    effects: Record<string, unknown>[]
+  }
+  ruleSet.effects = ruleSet.effects.filter(
+    (effect) => effect["effectId"] === effectId,
+  )
+  override(ruleSet.effects[0]!)
+  return ruleSet
+}
+
+const stateBoundEffectId = "environment:spec:state-bound-effect"
+
+/** 入场触发的状态绑定规则：缺失观察与组级层数上限都走这条路径。 */
+function syntheticEntryStateBoundRuleSet(
+  options: {
+    maximum?: unknown
+    onRetrigger?: string
+    atCapacity?: string
+  } = {},
+): ReturnType<typeof structuredClone> {
+  return singleEffectRuleSet(stateBoundEffectId, (effect) => {
+    const activation = effect["activation"] as Record<string, unknown>
+    activation["trigger"] = { eventKinds: ["entry"], when: always }
+    activation["layering"] = {
+      recipientPartition: "individual",
+      keys: [],
+      maximum: options.maximum ?? countLiteral(2),
+      onRetrigger: options.onRetrigger ?? "add-layer",
+      atCapacity: options.atCapacity ?? "ignore-new-layer",
+    }
+  })
+}
+
+function importedStateBoundState(
+  atSeconds: number,
+  layers: readonly { instanceId: string; layerId: string; startedAt: number }[],
+): unknown {
+  return {
+    sessionId: "session:spec-group-capacity",
+    atSeconds,
+    instances: layers.map((entry) => ({
+      instanceId: entry.instanceId,
+      effectId: stateBoundEffectId,
+      bindingId: syntheticBinding.bindingId,
+      beneficiaryIds: [syntheticBinding.holderId],
+      stackKey: [],
+      lifetime: {
+        kind: "state-bound",
+        stateId: syntheticState.stateId,
+        stateOwnerId: syntheticBinding.holderId,
+        stateActivationId: "state-activation:spec-a",
+      },
+      layers: [
+        {
+          layerId: entry.layerId,
+          startedAt: entry.startedAt,
+          expiresAt: null,
+          trigger: null,
+        },
+      ],
+    })),
+    snapshots: [],
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  }
+}
+
+function supplyImportedState(
+  prepared: PreparedEffects,
+  input: unknown,
+): EffectState {
+  const supplied = supplyEffectState(prepared, structuredClone(input) as never)
+  expect(supplied.ok).toBe(true)
+  if (!supplied.ok) {
+    throw new Error(
+      `state supply must succeed: ${JSON.stringify(supplied.issues)}`,
+    )
+  }
+  return supplied.value
+}
+
+describe("state-bound observation transitions", () => {
+  it("fails and keeps the old state usable when the after world omits the observation", () => {
+    const prepared = prepareFrom(syntheticEntryStateBoundRuleSet(), [
+      syntheticBinding,
+    ])
+    let state = supplyEmptySession(prepared, "session:spec-missing-after")
+    state = advanceOnce(prepared, state, entryEvent(0, 0, "event:ma-1"))
+    expect(panelAttack(prepared, state, 0).value).toBeCloseTo(1100, 9)
+    const result = advanceEffects(prepared, state, {
+      event: {
+        kind: "entry",
+        eventId: "event:ma-2",
+        atSeconds: 1,
+        sequence: 0,
+        actorId: syntheticBinding.holderId,
+        entryAction: "chain",
+      },
+      before: syntheticWorld,
+      after: worldWithStates([]),
+      observedSnapshots: [],
+    } as unknown as TransitionInput)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+    // 失败不提交：旧状态仍保留原层并可用于后续查询。
+    expect(panelAttack(prepared, state, 1).value).toBeCloseTo(1100, 9)
+  })
+
+  it("fails when the first activation has no observation in either world", () => {
+    const prepared = prepareFrom(syntheticEntryStateBoundRuleSet(), [
+      syntheticBinding,
+    ])
+    const state = supplyEmptySession(prepared, "session:spec-missing-first")
+    const result = advanceEffects(prepared, state, {
+      event: {
+        kind: "entry",
+        eventId: "event:mf-1",
+        atSeconds: 0,
+        sequence: 0,
+        actorId: syntheticBinding.holderId,
+        entryAction: "chain",
+      },
+      before: worldWithStates([]),
+      after: worldWithStates([]),
+      observedSnapshots: [],
+    } as unknown as TransitionInput)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+  })
+
+  it("treats an explicit inactive observation as an ended state, not a missing one", () => {
+    const prepared = prepareFrom(syntheticEntryStateBoundRuleSet(), [
+      syntheticBinding,
+    ])
+    let state = supplyEmptySession(prepared, "session:spec-explicit-inactive")
+    state = advanceOnce(prepared, state, entryEvent(0, 0, "event:ei-1"))
+    const inactive = [
+      {
+        stateId: syntheticState.stateId,
+        bindingId: syntheticBinding.bindingId,
+        ownerId: syntheticBinding.holderId,
+        active: false,
+        activationId: null,
+        since: null,
+      },
+    ]
+    state = advanceOnce(prepared, state, {
+      event: {
+        kind: "entry",
+        eventId: "event:ei-2",
+        atSeconds: 1,
+        sequence: 0,
+        actorId: syntheticBinding.holderId,
+        entryAction: "chain",
+      },
+      before: syntheticWorld,
+      after: worldWithStates(inactive),
+      observedSnapshots: [],
+    } as unknown as TransitionInput)
+    expect(
+      panelAttack(prepared, state, 1, worldWithStates(inactive)).value,
+    ).toBe(1000)
+  })
+})
+
+describe("logical group layer capacity", () => {
+  it("counts every imported instance in one state-bound group", () => {
+    const prepared = prepareFrom(
+      syntheticEntryStateBoundRuleSet({
+        maximum: countLiteral(2),
+        onRetrigger: "add-layer",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(
+      prepared,
+      importedStateBoundState(0, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:spec-a",
+          startedAt: 0,
+        },
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:spec-b",
+          startedAt: 0,
+        },
+      ]),
+    )
+    expect(panelAttack(prepared, state, 0).contributions).toHaveLength(2)
+    expect(panelAttack(prepared, state, 0).value).toBeCloseTo(1200, 9)
+    const advanced = advanceOnce(
+      prepared,
+      state,
+      entryEvent(1, 0, "event:gc-1"),
+    )
+    const panel = panelAttack(prepared, advanced, 1)
+    expect(panel.contributions).toHaveLength(2)
+    expect(panel.value).toBeCloseTo(1200, 9)
+  })
+
+  it("replaces the oldest layer across every instance in the group", () => {
+    const prepared = prepareFrom(
+      syntheticEntryStateBoundRuleSet({
+        maximum: countLiteral(2),
+        onRetrigger: "add-layer",
+        atCapacity: "replace-oldest-layer",
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(
+      prepared,
+      importedStateBoundState(1, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:spec-a",
+          startedAt: 0,
+        },
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:spec-b",
+          startedAt: 1,
+        },
+      ]),
+    )
+    const advanced = advanceOnce(
+      prepared,
+      state,
+      entryEvent(2, 0, "event:gr-1"),
+    )
+    const panel = panelAttack(prepared, advanced, 2)
+    const layerIds = panel.contributions.map(
+      (contribution) => contribution.layerId,
+    )
+    expect(layerIds).toHaveLength(2)
+    expect(layerIds).not.toContain("layer:spec-a")
+    expect(layerIds).toContain("layer:spec-b")
+  })
+
+  it("counts every imported instance in one timed group", () => {
+    const prepared = prepareFrom(
+      singleEffectRuleSet("environment:spec:timed-effect", (effect) => {
+        const activation = effect["activation"] as Record<string, unknown>
+        activation["lifetime"] = {
+          kind: "timed",
+          seconds: { kind: "literal", unit: "seconds", value: 10 },
+          clock: "per-layer",
+          onRetrigger: { kind: "keep" },
+          refreshExisting: "none",
+        }
+        activation["layering"] = {
+          recipientPartition: "individual",
+          keys: [],
+          maximum: countLiteral(2),
+          onRetrigger: "add-layer",
+          atCapacity: "ignore-new-layer",
+        }
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(prepared, {
+      sessionId: "session:spec-timed-group",
+      atSeconds: 0,
+      instances: [
+        {
+          instanceId: "instance:spec-timed-a",
+          effectId: "environment:spec:timed-effect",
+          bindingId: syntheticBinding.bindingId,
+          beneficiaryIds: [syntheticBinding.holderId],
+          stackKey: [],
+          lifetime: { kind: "timed", firstActivatedAt: 0 },
+          layers: [
+            {
+              layerId: "layer:spec-timed-a",
+              startedAt: 0,
+              expiresAt: 100,
+              trigger: null,
+            },
+          ],
+        },
+        {
+          instanceId: "instance:spec-timed-b",
+          effectId: "environment:spec:timed-effect",
+          bindingId: syntheticBinding.bindingId,
+          beneficiaryIds: [syntheticBinding.holderId],
+          stackKey: [],
+          lifetime: { kind: "timed", firstActivatedAt: 0 },
+          layers: [
+            {
+              layerId: "layer:spec-timed-b",
+              startedAt: 0,
+              expiresAt: 100,
+              trigger: null,
+            },
+          ],
+        },
+      ],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    })
+    expect(panelAttack(prepared, state, 0).contributions).toHaveLength(2)
+    const advanced = advanceOnce(
+      prepared,
+      state,
+      entryEvent(1, 0, "event:tg-1"),
+    )
+    const panel = panelAttack(prepared, advanced, 1)
+    expect(panel.contributions).toHaveLength(2)
+    expect(panel.value).toBeCloseTo(1200, 9)
+  })
+})
+
+describe("trigger arithmetic boundaries", () => {
+  it("fails when an overflowed trigger condition would silently become false", () => {
+    const prepared = prepareFrom(
+      singleEffectRuleSet("environment:spec:timed-effect", (effect) => {
+        const activation = effect["activation"] as Record<string, unknown>
+        const trigger = activation["trigger"] as Record<string, unknown>
+        trigger["when"] = {
+          kind: "compare-number",
+          unit: "count",
+          operator: "gt",
+          left: {
+            kind: "multiply",
+            unit: "count",
+            value: {
+              kind: "add",
+              unit: "count",
+              operands: [countLiteral(1e308), countLiteral(1e308)],
+            },
+            coefficient: { kind: "literal", unit: "multiplier", value: 0 },
+          },
+          right: countLiteral(0),
+        }
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyEmptySession(prepared, "session:spec-trigger-overflow")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(0, 0, "event:to-1"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+})
+
+describe("clock arithmetic boundaries", () => {
+  it("fails when the clock arithmetic overflows into a non-finite expiry", () => {
+    const prepared = prepareFrom(
+      singleEffectRuleSet("environment:spec:timed-effect", (effect) => {
+        const activation = effect["activation"] as Record<string, unknown>
+        activation["lifetime"] = {
+          kind: "timed",
+          seconds: { kind: "literal", unit: "seconds", value: 1e308 },
+          clock: "per-layer",
+          onRetrigger: { kind: "keep" },
+          refreshExisting: "none",
+        }
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyEmptySession(prepared, "session:spec-clock-overflow")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(1e308, 0, "event:co-1"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+})
+
+describe("state-bound working view without a matching trigger", () => {
+  it("fails instead of clearing the old group when the after observation is missing", () => {
+    const prepared = prepareFrom(
+      singleEffectRuleSet(stateBoundEffectId, (effect) => {
+        const activation = effect["activation"] as Record<string, unknown>
+        activation["trigger"] = {
+          eventKinds: ["entry"],
+          when: { kind: "constant", value: false },
+        }
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(
+      prepared,
+      importedStateBoundState(0, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:spec-a",
+          startedAt: 0,
+        },
+      ]),
+    )
+    expect(panelAttack(prepared, state, 0).value).toBeCloseTo(1100, 9)
+    const result = advanceEffects(prepared, state, {
+      event: {
+        kind: "entry",
+        eventId: "event:wv-1",
+        atSeconds: 1,
+        sequence: 0,
+        actorId: syntheticBinding.holderId,
+        entryAction: "chain",
+      },
+      before: syntheticWorld,
+      after: worldWithStates([]),
+      observedSnapshots: [],
+    } as unknown as TransitionInput)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+    // 失败不提交：旧层仍然可用。
+    expect(panelAttack(prepared, state, 1).value).toBeCloseTo(1100, 9)
+  })
+})
