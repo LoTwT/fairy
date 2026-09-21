@@ -284,6 +284,28 @@ function assertNeverExpression(expression: never): number {
 }
 
 /**
+ * 修改归约 `(set 或原值 + Σadd) × Πscale`：每一步都检查数值边界，
+ * 不在封顶或乘零之后再判断结果是否有限。
+ */
+function applyFieldTransform(
+  base: number,
+  transform: NumericFieldTransform,
+  context: EvaluationContext,
+  description: string,
+): number {
+  const withAdds = requireFiniteValue(
+    (transform.set ?? base) + transform.addSum,
+    context,
+    description,
+  )
+  return requireFiniteValue(
+    withAdds * transform.scaleProduct,
+    context,
+    description,
+  )
+}
+
+/**
  * 逐项算术归约：每一步都检查数值边界，不靠最终输出兜底。
  * 出现非有限中间结果立即返回，避免后续步骤重复报告同一溢出。
  */
@@ -451,9 +473,10 @@ function computeStatValue(
       ...input.additions,
       ...adjustments.map((entry) => entry.value),
     ]
-    value = requireFiniteValue(
-      input.baseValue +
-        additions.reduce((sum, adjustment) => sum + adjustment, 0),
+    value = foldNumericExpression(
+      additions,
+      input.baseValue,
+      (sum, adjustment) => sum + adjustment,
       context,
       `Direct stat (${entityId}, ${stat})`,
     )
@@ -476,17 +499,22 @@ function computeStatValue(
       { kind: "stat", stat, stage: "initial-fixed", entityId, hitId },
       nested,
     )
+    // 候选求值失败时整次查询失败，不能把失败当成空调整继续返回部分结果。
+    if (initialPercentage === undefined || initialFixed === undefined) {
+      context.shared.failedStats.add(key)
+      return Number.NaN
+    }
     const initial = callStatHelper(
       () =>
         calculateInitialStat({
           baseStat: input.baseValue,
           initialStatPercentageAdjustments: [
             ...input.initialPercentage,
-            ...(initialPercentage?.map((entry) => entry.value) ?? []),
+            ...initialPercentage.map((entry) => entry.value),
           ],
           initialStatFixedValueAdjustments: [
             ...input.initialFixed,
-            ...(initialFixed?.map((entry) => entry.value) ?? []),
+            ...initialFixed.map((entry) => entry.value),
           ],
         }),
       context,
@@ -503,17 +531,21 @@ function computeStatValue(
         { kind: "stat", stat, stage: "final-fixed", entityId, hitId },
         nested,
       )
+      if (finalPercentage === undefined || finalFixed === undefined) {
+        context.shared.failedStats.add(key)
+        return Number.NaN
+      }
       value = callStatHelper(
         () =>
           calculateFinalStat({
             initialStat: initial,
             finalStatPercentageAdjustments: [
               ...input.finalPercentage,
-              ...(finalPercentage?.map((entry) => entry.value) ?? []),
+              ...finalPercentage.map((entry) => entry.value),
             ],
             finalStatFixedValueAdjustments: [
               ...input.finalFixed,
-              ...(finalFixed?.map((entry) => entry.value) ?? []),
+              ...finalFixed.map((entry) => entry.value),
             ],
           }),
         context,
@@ -659,27 +691,28 @@ function collectLayersForAddress(
       ) {
         continue
       }
-      if (
-        instance.lifetime.kind === "state-bound" &&
-        stateBoundVerdict(instance, context) === "unobserved"
-      ) {
-        // 同一实例被多个消费地址读取时只报告一次缺项。
-        if (
-          !context.shared.reportedUnobservedInstances.has(instance.instanceId)
-        ) {
-          context.shared.reportedUnobservedInstances.add(instance.instanceId)
-          context.collector.report(
-            "MISSING_FACT",
-            "",
-            `State "${instance.lifetime.stateId}" is not observed for owner "${instance.lifetime.stateOwnerId}"; the state-bound instance of "${instance.effectId}" cannot be evaluated`,
-            { effectId: instance.effectId, bindingId: instance.bindingId },
-          )
-        }
-        return undefined
-      }
       for (const beneficiary of instance.beneficiaryIds) {
         if (addressBeneficiary !== null && beneficiary !== addressBeneficiary) {
           continue
+        }
+        // 只有该实例确实参与本次受益者计算时才要求它的状态观察。
+        if (
+          instance.lifetime.kind === "state-bound" &&
+          stateBoundVerdict(instance, context) === "unobserved"
+        ) {
+          // 同一实例被多个消费地址读取时只报告一次缺项。
+          if (
+            !context.shared.reportedUnobservedInstances.has(instance.instanceId)
+          ) {
+            context.shared.reportedUnobservedInstances.add(instance.instanceId)
+            context.collector.report(
+              "MISSING_FACT",
+              "",
+              `State "${instance.lifetime.stateId}" is not observed for owner "${instance.lifetime.stateOwnerId}"; the state-bound instance of "${instance.effectId}" cannot be evaluated`,
+              { effectId: instance.effectId, bindingId: instance.bindingId },
+            )
+          }
+          return undefined
         }
         for (const layer of effectiveLayers(instance, context)) {
           candidates.push({
@@ -935,11 +968,20 @@ function mergeFieldOperand(
     transform.set = operand.value
     return true
   }
+  // 累加本身也要逐步检查：先溢出再乘零会得到未报告的 NaN。
   if (operand.operator === "add") {
-    transform.addSum += operand.value
+    transform.addSum = requireFiniteValue(
+      transform.addSum + operand.value,
+      context,
+      `The accumulated add operands for ${fieldDescription}`,
+    )
     return true
   }
-  transform.scaleProduct *= operand.value
+  transform.scaleProduct = requireFiniteValue(
+    transform.scaleProduct * operand.value,
+    context,
+    `The accumulated scale operands for ${fieldDescription}`,
+  )
   return true
 }
 
@@ -1049,15 +1091,11 @@ function evaluateSingleLayer(
       continue
     }
     const description = `The modified parameter "${name}" of "${rule.effectId}"`
-    const withAdds = requireFiniteValue(
-      (transform.set ?? current.value) + transform.addSum,
-      context,
-      description,
-    )
     localParameters.set(name, {
       unit: current.unit,
-      value: requireFiniteValue(
-        withAdds * transform.scaleProduct,
+      value: applyFieldTransform(
+        current.value,
+        transform,
         context,
         description,
       ),
@@ -1104,13 +1142,28 @@ function evaluateSingleLayer(
     context,
     `Rule "${rule.effectId}" produces a non-finite value`,
   )
-  // 配置阶段的结果修改先建立基线，贡献阶段的输出修改在该基线上按字段归并。
-  const outputValue = requireFiniteValue(
-    ((value + layer.entry.outputAddSum) * layer.entry.outputScaleProduct +
-      outputTransform.addSum) *
-      outputTransform.scaleProduct,
+  // 配置阶段的结果修改先建立基线，贡献阶段的输出修改在该基线上按字段归并；
+  // 归并的每一步都检查数值边界，避免先溢出再被后续乘法掩盖。
+  const outputDescription = `The modified output of "${rule.effectId}"`
+  const withConfigurationAdds = requireFiniteValue(
+    value + layer.entry.outputAddSum,
     context,
-    `The modified output of "${rule.effectId}"`,
+    outputDescription,
+  )
+  const withConfigurationScales = requireFiniteValue(
+    withConfigurationAdds * layer.entry.outputScaleProduct,
+    context,
+    outputDescription,
+  )
+  const withContributionAdds = requireFiniteValue(
+    withConfigurationScales + outputTransform.addSum,
+    context,
+    outputDescription,
+  )
+  const outputValue = requireFiniteValue(
+    withContributionAdds * outputTransform.scaleProduct,
+    context,
+    outputDescription,
   )
   const appliedModificationIds = [
     ...applicable.map((item) => item.effectId),
@@ -1419,17 +1472,23 @@ function selectUnique(
     bySource.set(key, list)
   }
   const sourceCandidates: SourceCandidate[] = [...bySource.entries()]
-    .map(([key, list]) => ({
-      key,
-      list,
-      combined: requireFiniteValue(
-        list[0]!.operator === "add"
-          ? list.reduce((sum, entry) => sum + entry.value, 0)
-          : list.reduce((product, entry) => product * entry.value, 1),
-        context,
-        `A uniqueness candidate of "${list[0]!.candidate.entry.rule.effectId}"`,
-      ),
-    }))
+    .map(([key, list]) => {
+      const adding = list[0]!.operator === "add"
+      return {
+        key,
+        list,
+        // 来源层归约同样逐步检查，不把溢出留到最终值再判断。
+        combined: foldNumericExpression(
+          list.map((entry) => entry.value),
+          adding ? 0 : 1,
+          adding
+            ? (sum, value) => sum + value
+            : (product, value) => product * value,
+          context,
+          `A uniqueness candidate of "${list[0]!.candidate.entry.rule.effectId}"`,
+        ),
+      }
+    })
     .toSorted((left, right) => (left.key < right.key ? -1 : 1))
   if (sourceCandidates.some((candidate) => Number.isNaN(candidate.combined))) {
     return undefined
@@ -1973,8 +2032,11 @@ function evaluateHitQuery(
     hitId: hit.hitId,
     field: "damageMultiplier",
   })
-  const scaleFactor = requireFiniteValue(
-    multiplierSelected.reduce((product, layer) => product * layer.value, 1),
+  // 倍率归约逐步检查：先溢出再乘零不会退化成未报告的 NaN。
+  const scaleFactor = foldNumericExpression(
+    multiplierSelected.map((layer) => layer.value),
+    1,
+    (product, value) => product * value,
     context,
     "The hit damage multiplier",
   )

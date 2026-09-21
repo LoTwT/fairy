@@ -2792,3 +2792,458 @@ describe("modification accumulation boundaries", () => {
     }
   })
 })
+
+/** 状态绑定贡献规则：以外部导入层覆盖求值侧的观察边界。 */
+function stateBoundObservationRule(
+  effectId: string,
+  extra: Record<string, unknown> = {},
+): Record<string, unknown> {
+  return stateBoundContribution(effectId, fixedAttack(100), extra)
+}
+
+/** 同一队伍的第二个实体，用于验证受益者与依赖节点的按需读取。 */
+function twoActorWorld(): {
+  readonly [key: string]: unknown
+} {
+  const world = structuredClone(syntheticWorld) as unknown as {
+    entities: {
+      entityId: string
+      teamId: string
+      generalStats?: unknown
+      directStats?: unknown
+    }[]
+    states: unknown[]
+  }
+  const source = world.entities.find(
+    (entity) => entity.entityId === "entity:spec",
+  )!
+  const target = world.entities.find(
+    (entity) => entity.entityId === "entity:spec-target",
+  )!
+  target.teamId = source.teamId
+  target.generalStats = structuredClone(source.generalStats)
+  target.directStats = structuredClone(source.directStats)
+  world.states = []
+  return world as unknown as { readonly [key: string]: unknown }
+}
+
+const beneficiaryBoundEffectId = "environment:spec:beneficiary-bound"
+const beneficiaryBoundInstance = () =>
+  stateBoundLayerInstance("instance:spec-bound", beneficiaryBoundEffectId, {
+    layerId: "layer:spec-bound",
+    startedAt: 0,
+  })
+
+function panelForEntity(
+  prepared: PreparedEffects,
+  state: EffectState,
+  entityId: string,
+  world: unknown,
+  stats: readonly string[] = ["attack"],
+) {
+  return evaluateEffects(prepared, state, {
+    kind: "panel",
+    atSeconds: 1,
+    world,
+    observedSnapshots: [],
+    entities: [entityId],
+    stats,
+  } as never)
+}
+
+describe("on-demand state observation by beneficiary", () => {
+  function preparedWithBoundEffect(
+    extraEffects: readonly unknown[] = [],
+  ): PreparedEffects {
+    return prepareSyntheticWithEffects([
+      stateBoundObservationRule(beneficiaryBoundEffectId),
+      ...extraEffects,
+    ])
+  }
+
+  it("does not block another beneficiary's query when the observation is missing", () => {
+    const prepared = preparedWithBoundEffect()
+    const state = supplyInstances(prepared, [beneficiaryBoundInstance()])
+    const result = panelForEntity(
+      prepared,
+      state,
+      "entity:spec-target",
+      twoActorWorld(),
+    )
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error(`panel must succeed: ${JSON.stringify(result.issues)}`)
+    }
+    expect(
+      result.value.attributes.find(
+        (attribute) => attribute.entityId === "entity:spec-target",
+      )?.value.value,
+    ).toBeCloseTo(1000, 9)
+  })
+
+  it("still fails when the query consumes the unobserved instance", () => {
+    const prepared = preparedWithBoundEffect()
+    const state = supplyInstances(prepared, [beneficiaryBoundInstance()])
+    const result = panelForEntity(
+      prepared,
+      state,
+      "entity:spec",
+      twoActorWorld(),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+  })
+
+  it("keeps missing, inactive and re-entered observations distinct", () => {
+    const prepared = preparedWithBoundEffect()
+    const state = supplyInstances(prepared, [beneficiaryBoundInstance()])
+    const base = twoActorWorld() as { states: unknown[] }
+    const inactive = panelForEntity(prepared, state, "entity:spec", {
+      ...base,
+      states: [
+        {
+          ...activeSyntheticStateRecord,
+          active: false,
+          activationId: null,
+          since: null,
+        },
+      ],
+    })
+    expect(inactive.ok).toBe(true)
+    if (inactive.ok) {
+      expect(inactive.value.attributes[0]?.value.value).toBeCloseTo(1000, 9)
+    }
+    const reentered = panelForEntity(prepared, state, "entity:spec", {
+      ...base,
+      states: [
+        {
+          ...activeSyntheticStateRecord,
+          activationId: "state-activation:spec-b",
+        },
+      ],
+    })
+    expect(reentered.ok).toBe(true)
+    if (reentered.ok) {
+      expect(reentered.value.attributes[0]?.value.value).toBeCloseTo(1000, 9)
+    }
+  })
+
+  it("reads the observation only for the hit actor that consumes the instance", () => {
+    const prepared = preparedWithBoundEffect()
+    const state = supplyInstances(prepared, [beneficiaryBoundInstance()])
+    const world = twoActorWorld()
+    const query = structuredClone(syntheticHitQuery) as unknown as {
+      world: unknown
+      hit: { actorId: string; targetId: string }
+    }
+    query.world = world
+    query.hit.actorId = "entity:spec-target"
+    query.hit.targetId = "entity:spec"
+    const otherActor = evaluateEffects(prepared, state, query as never)
+    expect(otherActor.ok).toBe(true)
+    const ownActor = structuredClone(syntheticHitQuery) as unknown as {
+      world: unknown
+    }
+    ownActor.world = world
+    const consuming = evaluateEffects(prepared, state, ownActor as never)
+    expect(consuming.ok).toBe(false)
+    if (!consuming.ok) {
+      expect(
+        consuming.issues.some((issue) => issue.code === "MISSING_FACT"),
+      ).toBe(true)
+    }
+  })
+
+  it("requires the observation when an internal dependency node consumes the instance", () => {
+    const dependencyRule = syntheticContribution(
+      "environment:spec:dependency-reader",
+      {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: {
+          kind: "stat",
+          unit: "attack-points",
+          entity: { role: "entity", entityId: "entity:spec" },
+          stat: "attack",
+          stage: "current",
+          at: "evaluation",
+        },
+      },
+      { beneficiary: { kind: "team-except-holder" } },
+    )
+    const prepared = preparedWithBoundEffect([dependencyRule])
+    const state = supplyInstances(prepared, [beneficiaryBoundInstance()])
+    const consuming = panelForEntity(
+      prepared,
+      state,
+      "entity:spec-target",
+      twoActorWorld(),
+    )
+    expect(consuming.ok).toBe(false)
+    if (!consuming.ok) {
+      expect(
+        consuming.issues.some((issue) => issue.code === "MISSING_FACT"),
+      ).toBe(true)
+    }
+    const unrelated = panelForEntity(
+      prepared,
+      state,
+      "entity:spec-target",
+      twoActorWorld(),
+      ["criticalRate"],
+    )
+    expect(unrelated.ok).toBe(true)
+  })
+})
+
+describe("numeric reduction boundaries in modifications and multipliers", () => {
+  const hugeScale = (field: string, name?: string) => ({
+    field,
+    ...(name === undefined ? {} : { name }),
+    unit: "attack-points",
+    change: {
+      operator: "scale",
+      value: multiplierLiteral(1e308),
+    },
+  })
+
+  function attackPanel(prepared: PreparedEffects) {
+    return evaluateEffects(prepared, supplySyntheticState(prepared), {
+      kind: "panel",
+      atSeconds: 1,
+      world: syntheticWorld,
+      observedSnapshots: [],
+      entities: ["entity:spec"],
+      stats: ["attack"],
+    } as never)
+  }
+
+  it("fails when two output scales overflow before the zero output", () => {
+    const target = syntheticContribution(
+      "environment:spec:zero-output-target",
+      fixedAttack(0),
+    )
+    const prepared = prepareSyntheticWithEffects([
+      target,
+      syntheticContributionModification(
+        "environment:spec:output-scale-overflow",
+        "environment:spec:zero-output-target",
+        [hugeScale("output"), hugeScale("output")],
+      ),
+    ])
+    const result = attackPanel(prepared)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when two parameter scales overflow from a zero parameter", () => {
+    const target = syntheticContribution(
+      "environment:spec:zero-parameter-target",
+      {
+        kind: "stat-adjustment",
+        stat: "attack",
+        stage: "final-fixed",
+        value: parameterReference("attack-points", "amount"),
+      },
+      {
+        parameters: {
+          amount: { kind: "constant", unit: "attack-points", value: 0 },
+        },
+      },
+    )
+    const prepared = prepareSyntheticWithEffects([
+      target,
+      syntheticContributionModification(
+        "environment:spec:parameter-scale-overflow",
+        "environment:spec:zero-parameter-target",
+        [hugeScale("parameter", "amount"), hugeScale("parameter", "amount")],
+      ),
+    ])
+    const result = attackPanel(prepared)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails in prepare when two configuration parameter scales overflow", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: unknown[]
+    }
+    ruleSet.effects.push(
+      syntheticContribution(
+        "environment:spec:configuration-scale-target",
+        fixedAttack({
+          kind: "parameter",
+          unit: "attack-points",
+          name: "amount",
+        }),
+        {
+          parameters: {
+            amount: { kind: "constant", unit: "attack-points", value: 0 },
+          },
+        },
+      ),
+      {
+        kind: "modification",
+        effectId: "environment:spec:configuration-scale-overflow",
+        source: structuredClone(syntheticRuleSet.effects[0]!.source),
+        config: alwaysCondition,
+        parameters: {},
+        phase: "configuration",
+        target: {
+          kind: "effect",
+          effectId: "environment:spec:configuration-scale-target",
+        },
+        modifications: [
+          hugeScale("parameter", "amount"),
+          hugeScale("parameter", "amount"),
+        ],
+      },
+    )
+    const parsed = parseEffectRuleSet(ruleSet)
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const prepared = prepareEffects(parsed.value, [syntheticBinding] as never)
+    expect(prepared.ok).toBe(false)
+    if (!prepared.ok) {
+      expect(
+        prepared.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  const hitMultiplierRule = (effectId: string, value: number) =>
+    syntheticContribution(
+      effectId,
+      {
+        kind: "hit-adjustment",
+        field: "damageMultiplier",
+        operator: "scale",
+        value: multiplierLiteral(value),
+      },
+      { scope: "hit" },
+    )
+
+  it("fails instead of throwing when hit multipliers overflow before zero", () => {
+    const prepared = prepareSyntheticWithEffects([
+      hitMultiplierRule("environment:spec:multiplier-a", 1e308),
+      hitMultiplierRule("environment:spec:multiplier-b", 1e308),
+      hitMultiplierRule("environment:spec:multiplier-c", 0),
+    ])
+    const query = structuredClone(syntheticHitQuery) as unknown as {
+      world: unknown
+    }
+    query.world = syntheticWorld
+    const result = evaluateEffects(
+      prepared,
+      supplySyntheticState(prepared),
+      query as never,
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when one source's stacked layers overflow during reduction", () => {
+    const stackedMultiplier = syntheticContribution(
+      "environment:spec:stacked-multiplier",
+      {
+        kind: "hit-adjustment",
+        field: "damageMultiplier",
+        operator: "scale",
+        value: multiplierLiteral(1e308),
+      },
+      {
+        scope: "hit",
+        activation: {
+          kind: "triggered",
+          trigger: { eventKinds: ["entry"], when: alwaysCondition },
+          lifetime: {
+            kind: "timed",
+            seconds: { kind: "literal", unit: "seconds", value: 10 },
+            clock: "per-layer",
+            onRetrigger: { kind: "keep" },
+            refreshExisting: "none",
+          },
+          layering: {
+            recipientPartition: "individual",
+            keys: [],
+            maximum: countLiteral(3),
+            onRetrigger: "add-layer",
+            atCapacity: "ignore-new-layer",
+          },
+        },
+      },
+    )
+    const prepared = prepareSyntheticWithEffects([stackedMultiplier])
+    const state = supplyEffectState(prepared, {
+      sessionId: "session:spec-stacked-multiplier",
+      atSeconds: 0,
+      instances: [
+        {
+          instanceId: "instance:spec-stacked",
+          effectId: "environment:spec:stacked-multiplier",
+          bindingId: "binding:spec",
+          beneficiaryIds: ["entity:spec"],
+          stackKey: [],
+          lifetime: { kind: "timed", firstActivatedAt: 0 },
+          layers: [
+            {
+              layerId: "layer:stack-a",
+              startedAt: 0,
+              expiresAt: 100,
+              trigger: null,
+            },
+            {
+              layerId: "layer:stack-b",
+              startedAt: 0,
+              expiresAt: 100,
+              trigger: null,
+            },
+            {
+              layerId: "layer:stack-c",
+              startedAt: 0,
+              expiresAt: 100,
+              trigger: null,
+            },
+          ],
+        },
+      ] as never,
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    })
+    expect(state.ok).toBe(true)
+    if (!state.ok) {
+      throw new Error("state supply must succeed")
+    }
+    const query = structuredClone(syntheticHitQuery) as unknown as {
+      world: unknown
+    }
+    query.world = syntheticWorld
+    const result = evaluateEffects(prepared, state.value, query as never)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+})

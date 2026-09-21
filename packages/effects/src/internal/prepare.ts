@@ -949,11 +949,27 @@ function applyParameterOperand(
     fold.setValues.set(name, value)
     return
   }
+  // 累加本身也要逐步检查：先溢出再乘零会得到未报告的 NaN。
+  const description = `The accumulated parameter modifications for "${name}"`
   if (operator === "add") {
-    fold.addSums.set(name, (fold.addSums.get(name) ?? 0) + value)
+    fold.addSums.set(
+      name,
+      requireFiniteConfigurationValue(
+        (fold.addSums.get(name) ?? 0) + value,
+        collector,
+        description,
+      ),
+    )
     return
   }
-  fold.scaleProducts.set(name, (fold.scaleProducts.get(name) ?? 1) * value)
+  fold.scaleProducts.set(
+    name,
+    requireFiniteConfigurationValue(
+      (fold.scaleProducts.get(name) ?? 1) * value,
+      collector,
+      description,
+    ),
+  )
 }
 
 function applyTimingOperand(
