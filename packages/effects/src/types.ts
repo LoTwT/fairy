@@ -1,6 +1,7 @@
 /**
- * 效果模型的规范类型附件；不属于已发布的包 API，不包含求值器实现。
- * 语义与运行时约束以 index.md、execution.md 为准。
+ * 统一效果模型的正式类型；`@randomplay/effects` 的唯一类型权威来源。
+ * 规范文档（docs/specs/effects/）与示例引用本文件，不在别处复制维护。
+ * 字段语义、跨字段约束与执行行为以 index.md、execution.md 为准。
  */
 
 export type NonEmpty<T> = readonly [T, ...T[]]

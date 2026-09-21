@@ -1,8 +1,8 @@
 # 效果模型类型与执行契约
 
-本文确定模型实现应遵守的行为，交付范围按[实施阶段](#实施阶段)划分。字段、联合分支与单位以 [contracts.ts](contracts.ts) 为唯一类型来源；业务动机见[模型总览](index.md)，游戏条款及其证据限制见[实例页](examples.md)。这些文件是规范附件，尚未接入生产包或实现求值器。
+本文确定模型实现应遵守的行为，交付范围按[实施阶段](#实施阶段)划分。字段、联合分支与单位以 [`@randomplay/effects` 的包内类型](../../packages/effects/src/types.ts)为唯一类型来源；业务动机见[模型总览](index.md)，游戏条款及其证据限制见[实例页](examples.md)。包已实现运行时校验与 `prepareEffects`；状态求值与事件推进按实施阶段交付。
 
-[contract-examples.ts](contract-examples.ts) 提供可编译的规则、输入和类型反例。其中 `syntheticRuleSet` 是纯合成验收数据；游戏实例中显式选择的读取时点、刷新策略和动作别名只用于验证表达能力，不据此发布游戏规则。
+[contract-examples.ts](contract-examples.ts) 提供可编译的规则、输入和类型反例，直接引用包内正式类型；`pnpm check:spec-types` 编译该文件作为类型契约检查，包测试另行验证这些实例通过运行时校验。其中 `syntheticRuleSet` 是纯合成验收数据；游戏实例中显式选择的读取时点、刷新策略和动作别名只用于验证表达能力，不据此发布游戏规则。
 
 ## 数据与身份
 
@@ -65,6 +65,12 @@
 | `evaluateEffects(prepared, state, input)`                 | 在给定世界和时点求值，不推进状态或产生请求     | 贡献、属性及可选的命中计算输入              |
 
 `PreparedEffects`、`EffectState` 的品牌字段用于阻止结构化伪造；运行时还须验证状态归属。它们不是序列化协议，首版没有隐含的 JSON 导出或恢复接口。`StateInput` 是显式导入的规范结构。
+
+### JSON 解析入口
+
+`parseEffectRuleSet(input: unknown): Result<RuleSet>` 是 JSON 消费的边界入口：验证结构、判别联合、必填字段、单位、完整档位、精确引用与跨字段上下文限制，并把通过校验的值以 `RuleSet` 类型返回。输入对象本身不被修改，返回值直接引用输入结构。无效定义即使未被任何绑定启用也在此报告；多个独立问题按稳定指针顺序返回。
+
+解析不代替 `prepareEffects` 对实际绑定、配置选择与来源归属的检查：解析通过只表示定义自洽，`prepareEffects` 仍校验来源绑定、配置字段与来源相容性、同持有者目标约束及配置修改折叠。
 
 所有时间使用同一会话的非负有限秒数；同时间状态变更的 `sequence` 为非负安全整数。事件推进与外部实例同步共用 `StateChangeCursor` 及 `eventHistory`，按 `(atSeconds, sequence)` 严格递增。导入的 `eventHistory.last` 必须出现在无重复的 `processedIds` 中，且时间不晚于状态时刻；空历史必须有 `last: null`。外部有效层携带的历史触发上下文不自动声明该事件已被本引擎处理。
 
@@ -290,7 +296,7 @@ TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、缺
 
 ### 类型附件检查
 
-本检查已接入仓库根验收流程：`pnpm check:spec-types`（随 `pnpm check` 运行）。它在仓库根目录使用 core 已有 TypeScript 依赖，以严格模式编译 `contracts.ts` 与 `contract-examples.ts`；命令本身以根 `package.json` 的脚本为唯一权威来源，不在本文复制完整参数。
+本检查已接入仓库根验收流程：`pnpm check:spec-types`（随 `pnpm check` 运行）。它以严格模式编译 `contract-examples.ts`，后者直接引用 `@randomplay/effects` 的包内正式类型；命令本身以根 `package.json` 的脚本为唯一权威来源，不在本文复制完整参数。
 
 合法例通过 `satisfies` 检查；`RejectedCombinations` 用类型断言确保非法例不能赋给目标类型，不用忽略诊断的注释掩盖错误。这是类型契约检查，不是求值器执行测试。
 
