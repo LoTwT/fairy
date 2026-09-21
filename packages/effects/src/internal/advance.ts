@@ -950,10 +950,10 @@ function partitionIdentity(
 
 /** 按时钟表更新被选中的旧层到期时间；无限层按上限语义收敛。 */
 /**
- * 时钟算术的一步：两个有限值相加必须仍然有限。
+ * 时间算术的一步：两个有限值相加必须仍然有限。
  * 溢出返回 undefined，由调用方按定义失败处理，不在封顶之后才判断。
  */
-function finiteClockSum(left: number, right: number): number | undefined {
+function finiteTimeSum(left: number, right: number): number | undefined {
   const sum = left + right
   return Number.isFinite(sum) ? sum : undefined
 }
@@ -974,19 +974,19 @@ function applyClockUpdate(
     return layerExpiresAt
   }
   if (update.kind === "refresh") {
-    return finiteClockSum(eventTime, duration)
+    return finiteTimeSum(eventTime, duration)
   }
   if (update.kind === "extend") {
     if (update.limit.kind === "none") {
       return layerExpiresAt === null
         ? null
-        : finiteClockSum(layerExpiresAt, duration)
+        : finiteTimeSum(layerExpiresAt, duration)
     }
     if (maximum === undefined) {
       // 没有声明有界延长时不存在封顶值，保持原时钟。
       return layerExpiresAt
     }
-    const cap = finiteClockSum(
+    const cap = finiteTimeSum(
       update.limit.kind === "remaining" ? eventTime : firstActivatedAt,
       maximum,
     )
@@ -996,7 +996,7 @@ function applyClockUpdate(
     if (layerExpiresAt === null) {
       return cap
     }
-    const extended = finiteClockSum(layerExpiresAt, duration)
+    const extended = finiteTimeSum(layerExpiresAt, duration)
     if (extended === undefined) {
       return undefined
     }
@@ -1200,14 +1200,47 @@ function stateBoundGroupKey(
   ].join(" ")
 }
 
+/**
+ * 时长变换 `(set 或原值 + Σadd) × Πscale`：每一步都检查有限性，
+ * 溢出报告后返回 NaN，由调用方按既有 Result 契约失败，不被后续 set 掩盖。
+ */
+function applyTimeTransform(
+  base: number,
+  set: number | undefined,
+  addSum: number,
+  scaleProduct: number,
+  runtime: TriggerRuntime,
+  description: string,
+): number {
+  const withAdds = requireFiniteTriggerValue(
+    (set ?? base) + addSum,
+    runtime,
+    description,
+  )
+  return requireFiniteTriggerValue(
+    withAdds * scaleProduct,
+    runtime,
+    description,
+  )
+}
+
 function applyTransform(
   base: number,
   transform: NumericTransform | undefined,
+  runtime: TriggerRuntime,
+  description: string,
 ): number {
   if (transform === undefined) {
     return base
   }
-  return ((transform.set ?? base) + transform.addSum) * transform.scaleProduct
+  return applyTimeTransform(
+    base,
+    transform.set,
+    transform.addSum,
+    transform.scaleProduct,
+    runtime,
+    description,
+  )
 }
 
 interface ActivationTimingChange {
@@ -1219,8 +1252,17 @@ interface ActivationTimingChange {
 function applyTimingChange(
   base: number,
   change: ActivationTimingChange,
+  runtime: TriggerRuntime,
+  description: string,
 ): number {
-  return ((change.set ?? base) + change.addSum) * change.scaleProduct
+  return applyTimeTransform(
+    base,
+    change.set,
+    change.addSum,
+    change.scaleProduct,
+    runtime,
+    description,
+  )
 }
 
 /** 求值本次触发使用的时长与延长上限，含激活阶段修改与重新校验。 */
@@ -1240,7 +1282,14 @@ function evaluateActivationTiming(
     entry.holderId,
     entry.foldedParameters,
   )
-  let duration = applyTransform(baseDuration, entry.durationTransform)
+  const durationDescription = `The duration of "${entry.rule.effectId}"`
+  const maximumDescription = `The extension maximum of "${entry.rule.effectId}"`
+  let duration = applyTransform(
+    baseDuration,
+    entry.durationTransform,
+    runtime,
+    durationDescription,
+  )
   let maximum: number | undefined
   if (activation.lifetime.onRetrigger.kind === "extend") {
     const limit = activation.lifetime.onRetrigger.limit
@@ -1253,6 +1302,8 @@ function evaluateActivationTiming(
           entry.foldedParameters,
         ),
         entry.extensionMaximumTransform,
+        runtime,
+        maximumDescription,
       )
     }
   }
@@ -1297,13 +1348,16 @@ function evaluateActivationTiming(
       if (Number.isNaN(value)) {
         return undefined
       }
-      const target =
-        change.field === "duration-seconds" ? durationChange : maximumChange
-      const fieldTouched =
-        change.field === "duration-seconds"
-          ? (touchedDuration = true)
-          : (touchedMaximum = true)
-      void fieldTouched
+      const modifyingDuration = change.field === "duration-seconds"
+      const target = modifyingDuration ? durationChange : maximumChange
+      const description = modifyingDuration
+        ? durationDescription
+        : maximumDescription
+      if (modifyingDuration) {
+        touchedDuration = true
+      } else {
+        touchedMaximum = true
+      }
       if (change.change.operator === "set") {
         if (target.set !== undefined && target.set !== value) {
           runtime.collector.report(
@@ -1316,14 +1370,28 @@ function evaluateActivationTiming(
         }
         target.set = value
       } else if (change.change.operator === "add") {
-        target.addSum += value
+        // 激活阶段修改的累计同样逐步检查：先溢出再被 set 覆盖也是失败。
+        target.addSum = requireFiniteTriggerValue(
+          target.addSum + value,
+          runtime,
+          description,
+        )
       } else {
-        target.scaleProduct *= value
+        target.scaleProduct = requireFiniteTriggerValue(
+          target.scaleProduct * value,
+          runtime,
+          description,
+        )
       }
     }
   }
   if (touchedDuration) {
-    duration = applyTimingChange(duration, durationChange)
+    duration = applyTimingChange(
+      duration,
+      durationChange,
+      runtime,
+      durationDescription,
+    )
   }
   if (touchedMaximum) {
     if (maximum === undefined) {
@@ -1335,7 +1403,12 @@ function evaluateActivationTiming(
       )
       return undefined
     }
-    maximum = applyTimingChange(maximum, maximumChange)
+    maximum = applyTimingChange(
+      maximum,
+      maximumChange,
+      runtime,
+      maximumDescription,
+    )
   }
   if (!Number.isFinite(duration) || duration <= 0) {
     runtime.collector.report(
@@ -1694,6 +1767,8 @@ export function advanceEffects(
   const frozenSnapshots = new Map<string, SavedSnapshot>()
   const cooldownDeclarations = new Map<string, number>()
   interface CandidatePlan {
+    readonly effectId: EffectId
+    readonly bindingId: BindingId
     readonly cooldownGroupId: string | undefined
     readonly cooldownPartitionKey: string | undefined
     readonly cooldownSeconds: number | undefined
@@ -1893,6 +1968,8 @@ export function advanceEffects(
           }))
         : [{ beneficiaries: [...beneficiaries].toSorted() }]
     plans.push({
+      effectId: entry.rule.effectId,
+      bindingId: entry.bindingId,
       cooldownGroupId,
       cooldownPartitionKey,
       cooldownSeconds,
@@ -2143,7 +2220,7 @@ export function advanceEffects(
             onRetrigger.kind === "extend" ? onRetrigger.limit : undefined
           // 封顶前先判断每一步：溢出后再取 Math.min 仍然是失败。
           const newLayerExpiry = ((): number | undefined => {
-            const base = finiteClockSum(event.atSeconds, timing.duration)
+            const base = finiteTimeSum(event.atSeconds, timing.duration)
             if (base === undefined) {
               return undefined
             }
@@ -2153,7 +2230,7 @@ export function advanceEffects(
             if (timing.maximum === undefined) {
               return base
             }
-            const cap = finiteClockSum(
+            const cap = finiteTimeSum(
               extendLimit.kind === "remaining"
                 ? event.atSeconds
                 : firstActivatedAt,
@@ -2429,6 +2506,8 @@ export function advanceEffects(
       cooldownSeconds = cooldownDeclarations.get(registration.key)
     }
     plans.push({
+      effectId: entry.rule.effectId,
+      bindingId: entry.bindingId,
       cooldownGroupId,
       cooldownPartitionKey,
       cooldownSeconds,
@@ -2532,12 +2611,26 @@ export function advanceEffects(
       plan.cooldownGroupId !== undefined &&
       plan.cooldownPartitionKey !== undefined
     ) {
+      // 只有确实要提交冷却时才计算结束时间；被阻止或未产生变化的候选不提前求值。
+      const availableAt = finiteTimeSum(
+        event.atSeconds,
+        plan.cooldownSeconds ?? 0,
+      )
+      if (availableAt === undefined) {
+        collector.report(
+          "INVALID_DEFINITION",
+          "",
+          `Cooldown group "${plan.cooldownGroupId}" computes a non-finite availability time`,
+          { effectId: plan.effectId, bindingId: plan.bindingId },
+        )
+        return failure(collector)
+      }
       cooldownUpdates.set(
         `${plan.cooldownGroupId} ${plan.cooldownPartitionKey}`,
         {
           groupId: plan.cooldownGroupId,
           partitionKey: plan.cooldownPartitionKey,
-          availableAt: event.atSeconds + (plan.cooldownSeconds ?? 0),
+          availableAt,
         },
       )
     }

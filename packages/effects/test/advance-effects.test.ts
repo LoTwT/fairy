@@ -2601,3 +2601,384 @@ describe("timed group clock across instances", () => {
     }
   })
 })
+
+/** 单条瞬时回能规则：用于冷却结束时间的数值边界。 */
+function instantCooldownRuleSet(
+  rules: readonly { effectId: string; seconds: number }[],
+): unknown {
+  const source = structuredClone(syntheticRuleSet.effects[0]!["source"])
+  return {
+    schemaVersion: 1,
+    ruleSetId: "effects-test-instant-cooldown",
+    revision: "1",
+    effects: rules.map((rule) => ({
+      kind: "instant",
+      effectId: rule.effectId,
+      source: structuredClone(source),
+      config: always,
+      parameters: {},
+      trigger: {
+        eventKinds: ["entry"],
+        when: always,
+        cooldown: {
+          groupId: `review-cooldown-${rule.effectId}`,
+          partition: "binding",
+          seconds: { kind: "literal", unit: "seconds", value: rule.seconds },
+        },
+      },
+      beneficiary: { kind: "holder" },
+      operation: {
+        kind: "resource-generation",
+        resource: "energy",
+        amount: { kind: "literal", unit: "energy-points", value: 1 },
+      },
+    })),
+    states: [],
+    actions: [],
+  }
+}
+
+function energyRequestCount(requests: readonly EventRequest[]): number {
+  return requests.filter((request) => request.kind === "resource-generation")
+    .length
+}
+
+describe("cooldown availability boundaries", () => {
+  const cooldownEffectId = "environment:spec:cooldown-instant"
+
+  function cooldownState(prepared: PreparedEffects, sessionId: string) {
+    return supplyEmptySession(prepared, sessionId as `session:${string}`)
+  }
+
+  it("fails when the committed cooldown expiry overflows", () => {
+    const prepared = prepareFrom(
+      instantCooldownRuleSet([{ effectId: cooldownEffectId, seconds: 1e308 }]),
+      [syntheticBinding],
+    )
+    const state = cooldownState(prepared, "session:spec-cooldown-overflow")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(1e308, 0, "event:cd-overflow"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("leaves the old state usable and the event unconsumed after the failure", () => {
+    const prepared = prepareFrom(
+      instantCooldownRuleSet([{ effectId: cooldownEffectId, seconds: 1e308 }]),
+      [syntheticBinding],
+    )
+    const state = cooldownState(prepared, "session:spec-cooldown-recovery")
+    const failed = advanceEffects(
+      prepared,
+      state,
+      entryEvent(1e308, 0, "event:cd-failed"),
+    )
+    expect(failed.ok).toBe(false)
+    const internal = readStateInternal(state)!
+    expect(internal.cooldowns).toHaveLength(0)
+    expect(internal.processedEventIds).not.toContain("event:cd-failed")
+    // 旧状态仍可用：同一事件身份在合法时点重新推进成功。
+    const recovered = advanceEffects(
+      prepared,
+      state,
+      entryEvent(0, 0, "event:cd-failed"),
+    )
+    expect(recovered.ok).toBe(true)
+    if (recovered.ok) {
+      expect(energyRequestCount(recovered.value.requests)).toBe(1)
+    }
+  })
+
+  it("keeps zero and finite cooldowns valid", () => {
+    const finite = prepareFrom(
+      instantCooldownRuleSet([{ effectId: cooldownEffectId, seconds: 5 }]),
+      [syntheticBinding],
+    )
+    const finiteState = cooldownState(finite, "session:spec-cooldown-finite")
+    const accepted = advanceEffects(
+      finite,
+      finiteState,
+      entryEvent(3, 0, "event:cd-finite"),
+    )
+    expect(accepted.ok).toBe(true)
+    if (!accepted.ok) {
+      throw new Error("finite cooldown advance must succeed")
+    }
+    expect(energyRequestCount(accepted.value.requests)).toBe(1)
+    expect(readStateInternal(accepted.value.state)!.cooldowns).toEqual([
+      {
+        groupId: `review-cooldown-${cooldownEffectId}`,
+        partitionKey: "7:binding12:binding:spec",
+        availableAt: 8,
+      },
+    ])
+    const blocked = advanceEffects(
+      finite,
+      accepted.value.state,
+      entryEvent(7.999, 1, "event:cd-finite-early"),
+    )
+    expect(blocked.ok).toBe(true)
+    if (blocked.ok) {
+      expect(energyRequestCount(blocked.value.requests)).toBe(0)
+    }
+
+    const zero = prepareFrom(
+      instantCooldownRuleSet([{ effectId: cooldownEffectId, seconds: 0 }]),
+      [syntheticBinding],
+    )
+    const zeroState = cooldownState(zero, "session:spec-cooldown-zero")
+    const opened = advanceEffects(
+      zero,
+      zeroState,
+      entryEvent(3, 0, "event:cd-zero-1"),
+    )
+    expect(opened.ok).toBe(true)
+    if (!opened.ok) {
+      throw new Error("zero cooldown advance must succeed")
+    }
+    expect(
+      readStateInternal(opened.value.state)!.cooldowns[0]?.availableAt,
+    ).toBe(3)
+    const again = advanceEffects(
+      zero,
+      opened.value.state,
+      entryEvent(3, 1, "event:cd-zero-2"),
+    )
+    expect(again.ok).toBe(true)
+    if (again.ok) {
+      expect(energyRequestCount(again.value.requests)).toBe(1)
+    }
+  })
+
+  it("fails the whole advance atomically when one candidate overflows", () => {
+    const prepared = prepareFrom(
+      instantCooldownRuleSet([
+        { effectId: "environment:spec:cooldown-finite", seconds: 5 },
+        { effectId: "environment:spec:cooldown-overflow", seconds: 1e308 },
+      ]),
+      [syntheticBinding],
+    )
+    const state = cooldownState(prepared, "session:spec-cooldown-atomic")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(1e308, 0, "event:cd-atomic"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+    const internal = readStateInternal(state)!
+    expect(internal.cooldowns).toHaveLength(0)
+    expect(internal.processedEventIds).not.toContain("event:cd-atomic")
+  })
+})
+
+/** 限时规则加可选配置/激活阶段时长修改：用于时长变换的数值边界。 */
+function durationTransformRuleSet(options: {
+  seconds?: number
+  extensionMaximum?: number
+  configurationChanges?: readonly Record<string, unknown>[]
+  activationChanges?: readonly Record<string, unknown>[]
+}): unknown {
+  const ruleSet = singleEffectRuleSet(
+    "environment:spec:timed-effect",
+    (effect) => {
+      const activation = effect["activation"] as Record<string, unknown>
+      activation["lifetime"] = {
+        kind: "timed",
+        seconds: {
+          kind: "literal",
+          unit: "seconds",
+          value: options.seconds ?? 10,
+        },
+        clock: "per-layer",
+        onRetrigger:
+          options.extensionMaximum === undefined
+            ? { kind: "keep" }
+            : {
+                kind: "extend",
+                limit: {
+                  kind: "since-first-activation",
+                  maximum: {
+                    kind: "literal",
+                    unit: "seconds",
+                    value: options.extensionMaximum,
+                  },
+                },
+              },
+        refreshExisting: "none",
+      }
+      activation["layering"] = {
+        recipientPartition: "individual",
+        keys: [],
+        maximum: countLiteral(1),
+        onRetrigger: "keep-count",
+        atCapacity: "ignore-new-layer",
+      }
+    },
+  ) as unknown as { effects: Record<string, unknown>[] }
+  const source = structuredClone(ruleSet.effects[0]!["source"])
+  if (options.configurationChanges !== undefined) {
+    ruleSet.effects.push({
+      kind: "modification",
+      effectId: "environment:spec:duration-configuration",
+      source,
+      config: always,
+      parameters: {},
+      phase: "configuration",
+      target: { kind: "effect", effectId: "environment:spec:timed-effect" },
+      modifications: [...options.configurationChanges],
+    })
+  }
+  if (options.activationChanges !== undefined) {
+    ruleSet.effects.push({
+      kind: "modification",
+      effectId: "environment:spec:duration-activation",
+      source: structuredClone(source),
+      config: always,
+      parameters: {},
+      phase: "activation",
+      target: { kind: "effect", effectId: "environment:spec:timed-effect" },
+      when: always,
+      modifications: [...options.activationChanges],
+    })
+  }
+  return ruleSet
+}
+
+const secondsChange = (
+  field: "duration-seconds" | "extension-maximum",
+  operator: "add" | "set",
+  value: number,
+) => ({
+  field,
+  change: {
+    operator,
+    value: { kind: "literal", unit: "seconds", value },
+  },
+})
+
+describe("duration transform boundaries", () => {
+  function preparedFor(
+    options: Parameters<typeof durationTransformRuleSet>[0],
+  ) {
+    return prepareFrom(durationTransformRuleSet(options), [syntheticBinding])
+  }
+
+  it("fails when an activation set hides an overflowed configuration duration", () => {
+    const prepared = preparedFor({
+      seconds: 1e308,
+      configurationChanges: [secondsChange("duration-seconds", "add", 1e308)],
+      activationChanges: [secondsChange("duration-seconds", "set", 10)],
+    })
+    const state = supplyEmptySession(prepared, "session:spec-duration-overflow")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(0, 0, "event:dt-1"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("fails when an activation set hides an overflowed configuration extension maximum", () => {
+    const prepared = preparedFor({
+      seconds: 10,
+      extensionMaximum: 1e308,
+      configurationChanges: [secondsChange("extension-maximum", "add", 1e308)],
+      activationChanges: [secondsChange("extension-maximum", "set", 20)],
+    })
+    const state = supplyEmptySession(prepared, "session:spec-maximum-overflow")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(0, 0, "event:dt-2"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+
+  it("applies a normal configuration transform and then the activation set", () => {
+    const configured = preparedFor({
+      seconds: 10,
+      configurationChanges: [secondsChange("duration-seconds", "add", 5)],
+    })
+    const configuredState = supplyEmptySession(
+      configured,
+      "session:spec-duration-configured",
+    )
+    const configuredAdvanced = advanceOnce(
+      configured,
+      configuredState,
+      entryEvent(0, 0, "event:dt-3"),
+    )
+    expect(panelAttack(configured, configuredAdvanced, 14).value).toBeCloseTo(
+      1100,
+      9,
+    )
+    expect(panelAttack(configured, configuredAdvanced, 15).value).toBeCloseTo(
+      1000,
+      9,
+    )
+
+    const overridden = preparedFor({
+      seconds: 10,
+      configurationChanges: [secondsChange("duration-seconds", "add", 5)],
+      activationChanges: [secondsChange("duration-seconds", "set", 20)],
+    })
+    const overriddenState = supplyEmptySession(
+      overridden,
+      "session:spec-duration-overridden",
+    )
+    const overriddenAdvanced = advanceOnce(
+      overridden,
+      overriddenState,
+      entryEvent(0, 0, "event:dt-4"),
+    )
+    expect(panelAttack(overridden, overriddenAdvanced, 19).value).toBeCloseTo(
+      1100,
+      9,
+    )
+    expect(panelAttack(overridden, overriddenAdvanced, 20).value).toBeCloseTo(
+      1000,
+      9,
+    )
+  })
+
+  it("commits nothing when a duration transform overflows", () => {
+    const prepared = preparedFor({
+      seconds: 1e308,
+      configurationChanges: [secondsChange("duration-seconds", "add", 1e308)],
+      activationChanges: [secondsChange("duration-seconds", "set", 10)],
+    })
+    const state = supplyEmptySession(prepared, "session:spec-duration-atomic")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(0, 0, "event:dt-5"),
+    )
+    expect(result.ok).toBe(false)
+    const internal = readStateInternal(state)!
+    expect(internal.instances).toHaveLength(0)
+    expect(internal.processedEventIds).not.toContain("event:dt-5")
+    expect(panelAttack(prepared, state, 0).value).toBeCloseTo(1000, 9)
+  })
+})
