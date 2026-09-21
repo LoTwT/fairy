@@ -5,6 +5,7 @@ export {
   synchronizeSuppliedInstances,
 } from "./internal/state.ts"
 export { evaluateEffects } from "./internal/evaluate.ts"
+export { advanceEffects } from "./internal/advance.ts"
 export type {
   PreparedEffects,
   Result,

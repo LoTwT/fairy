@@ -71,7 +71,7 @@ export function readStateInternal(
   return internal as EffectStateInternal
 }
 
-function freezeState(internal: EffectStateInternal): EffectState {
+export function freezeState(internal: EffectStateInternal): EffectState {
   deepFreeze(internal)
   const state = {
     atSeconds: internal.atSeconds,

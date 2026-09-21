@@ -101,7 +101,7 @@ interface SharedCache {
   readonly snapshotWorlds: Map<string, WorldIndex>
 }
 
-interface EvaluationContext {
+export interface EvaluationContext {
   readonly prepared: PreparedEffectsInternal
   readonly state: EffectStateInternal
   readonly world: WorldIndex
@@ -113,7 +113,7 @@ interface EvaluationContext {
   readonly stack: readonly string[]
 }
 
-interface SavedSnapshotLike {
+export interface SavedSnapshotLike {
   readonly snapshotId: string
   readonly atSeconds: number
   readonly attributes: readonly {
@@ -1646,6 +1646,53 @@ function markConsumed(
   for (const layer of selected) {
     context.shared.consumed.add(layer)
   }
+}
+
+/** 事件推进复用的时点求值：按给定状态、世界与快照计算属性，不产生请求。 */
+export interface MomentEvaluation {
+  readonly context: EvaluationContext
+}
+
+export function createMomentEvaluation(
+  prepared: PreparedEffectsInternal,
+  state: EffectStateInternal,
+  world: WorldIndex,
+  snapshots: ReadonlyMap<string, SavedSnapshotLike>,
+  atSeconds: number,
+  collector: IssueCollector,
+): MomentEvaluation {
+  const context: EvaluationContext = {
+    prepared,
+    state,
+    world,
+    snapshots: snapshots as Map<string, SavedSnapshotLike>,
+    shared: {
+      statValues: new Map(),
+      failedStats: new Set(),
+      layers: new Map(),
+      selections: new Map(),
+      consumed: new Set(),
+      effectiveInstances: undefined,
+      stateBoundVerdicts: new Map(),
+      reportedUnobservedInstances: new Set(),
+      snapshotWorlds: new Map(),
+    },
+    atSeconds,
+    hit: null,
+    collector,
+    stack: [],
+  }
+  return { context }
+}
+
+/** 读取该时点的一个属性；失败向收集器报告并返回 NaN。 */
+export function readMomentStat(
+  evaluation: MomentEvaluation,
+  entityId: EntityId,
+  stat: Stat,
+  stage: "initial" | "current",
+): number {
+  return computeStatValue(entityId, stat, stage, null, evaluation.context)
 }
 
 export function evaluateEffects(
