@@ -12,6 +12,7 @@ import type {
   PreparedEffects,
   TransitionInput,
 } from "../src/index.ts"
+import { readStateInternal } from "../src/internal/state.ts"
 import {
   exampleBindings,
   exampleRuleSet,
@@ -1301,5 +1302,539 @@ describe("advanceEffects validation acceptance", () => {
       throw new Error("recovered advance must succeed")
     }
     expect(panelAttack(prepared, recovered.value.state, 5).value).toBe(1100)
+  })
+})
+
+const countLiteral = (value: number) =>
+  ({ kind: "literal", unit: "count", value }) as const
+
+function supplyEmptySession(
+  prepared: PreparedEffects,
+  sessionId: `session:${string}`,
+): EffectState {
+  const supplied = supplyEffectState(prepared, {
+    sessionId,
+    atSeconds: 0,
+    instances: [],
+    snapshots: [],
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  })
+  expect(supplied.ok).toBe(true)
+  if (!supplied.ok) {
+    throw new Error("state supply must succeed")
+  }
+  return supplied.value
+}
+
+function advanceOnce(
+  prepared: PreparedEffects,
+  state: EffectState,
+  input: TransitionInput,
+): EffectState {
+  const result = advanceEffects(prepared, state, input)
+  expect(result.ok).toBe(true)
+  if (!result.ok) {
+    throw new Error(`advance must succeed: ${JSON.stringify(result.issues)}`)
+  }
+  return result.value.state
+}
+
+/** 克隆规则集并给状态绑定规则换一组独立的叠层策略。 */
+function syntheticStateBoundLayeringVariant(options: {
+  maximum: unknown
+  onRetrigger: string
+  atCapacity: string
+}): ReturnType<typeof structuredClone> {
+  const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+    effects: Record<string, unknown>[]
+  }
+  ruleSet.effects = ruleSet.effects.filter(
+    (effect) => effect["effectId"] !== "environment:spec:conditional-duration",
+  )
+  const bound = ruleSet.effects.find(
+    (effect) => effect["effectId"] === "environment:spec:state-bound-effect",
+  ) as Record<string, unknown>
+  const activation = bound["activation"] as Record<string, unknown>
+  const layering = activation["layering"] as Record<string, unknown>
+  activation["layering"] = {
+    ...layering,
+    maximum: options.maximum,
+    onRetrigger: options.onRetrigger,
+    atCapacity: options.atCapacity,
+  }
+  return ruleSet
+}
+
+/** 克隆规则集并给限时规则换一组独立的叠层策略。 */
+function syntheticTimedLayeringVariant(options: {
+  maximum: unknown
+  onRetrigger: string
+  atCapacity: string
+}): ReturnType<typeof structuredClone> {
+  const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+    effects: Record<string, unknown>[]
+  }
+  ruleSet.effects = ruleSet.effects.filter(
+    (effect) => effect["effectId"] !== "environment:spec:conditional-duration",
+  )
+  const timed = ruleSet.effects.find(
+    (effect) => effect["effectId"] === "environment:spec:timed-effect",
+  ) as Record<string, unknown>
+  const activation = timed["activation"] as Record<string, unknown>
+  const layering = activation["layering"] as Record<string, unknown>
+  activation["layering"] = {
+    ...layering,
+    maximum: options.maximum,
+    onRetrigger: options.onRetrigger,
+    atCapacity: options.atCapacity,
+  }
+  return ruleSet
+}
+
+function worldWithStates(states: readonly unknown[]): {
+  readonly [key: string]: unknown
+} {
+  return { ...structuredClone(syntheticWorld), states }
+}
+
+function stateIsTransition(options: {
+  atSeconds: number
+  eventId: string
+  states: readonly unknown[]
+}): TransitionInput {
+  const world = worldWithStates(options.states)
+  return {
+    event: {
+      kind: "entry",
+      eventId: options.eventId,
+      atSeconds: options.atSeconds,
+      sequence: 0,
+      actorId: syntheticBinding.holderId,
+      entryAction: "chain",
+    },
+    before: world,
+    after: world,
+    observedSnapshots: [],
+  } as unknown as TransitionInput
+}
+
+describe("state-bound layering policy", () => {
+  it("keeps one layer when the same activation is retriggered under keep-count", () => {
+    const prepared = prepareFrom(
+      syntheticStateBoundLayeringVariant({
+        maximum: countLiteral(2),
+        onRetrigger: "keep-count",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    let state = supplyEmptySession(prepared, "session:spec-state-bound-keep")
+    state = advanceOnce(
+      prepared,
+      state,
+      stateObservedEvent({
+        atSeconds: 0,
+        sequence: 0,
+        eventId: "event:sb-keep-1",
+        activationId: "state-activation:spec-a",
+      }),
+    )
+    const first = panelAttack(prepared, state, 0)
+    state = advanceOnce(
+      prepared,
+      state,
+      stateObservedEvent({
+        atSeconds: 1,
+        sequence: 0,
+        eventId: "event:sb-keep-2",
+        activationId: "state-activation:spec-a",
+      }),
+    )
+    const second = panelAttack(prepared, state, 1)
+    expect(first.value).toBeCloseTo(1100, 9)
+    expect(second.value).toBeCloseTo(1100, 9)
+    expect(second.contributions).toHaveLength(1)
+  })
+
+  it("replaces the oldest layer when a full state-bound group retriggers", () => {
+    const prepared = prepareFrom(
+      syntheticStateBoundLayeringVariant({
+        maximum: countLiteral(2),
+        onRetrigger: "add-layer",
+        atCapacity: "replace-oldest-layer",
+      }),
+      [syntheticBinding],
+    )
+    let state = supplyEmptySession(prepared, "session:spec-state-bound-replace")
+    for (const atSeconds of [0, 1]) {
+      state = advanceOnce(
+        prepared,
+        state,
+        stateObservedEvent({
+          atSeconds,
+          sequence: 0,
+          eventId: `event:sb-replace-${atSeconds}`,
+          activationId: "state-activation:spec-a",
+        }),
+      )
+    }
+    const full = panelAttack(prepared, state, 1)
+    expect(full.contributions).toHaveLength(2)
+    expect(full.value).toBeCloseTo(1200, 9)
+    const oldestLayerId = full.contributions
+      .map((contribution) => contribution.layerId)
+      .toSorted()[0]
+    state = advanceOnce(
+      prepared,
+      state,
+      stateObservedEvent({
+        atSeconds: 2,
+        sequence: 0,
+        eventId: "event:sb-replace-2",
+        activationId: "state-activation:spec-a",
+      }),
+    )
+    const replaced = panelAttack(prepared, state, 2)
+    expect(replaced.contributions).toHaveLength(2)
+    expect(replaced.value).toBeCloseTo(1200, 9)
+    expect(
+      replaced.contributions.map((contribution) => contribution.layerId),
+    ).not.toContain(oldestLayerId)
+  })
+
+  it("creates a new group after the state exits and re-enters", () => {
+    const prepared = prepareFrom(
+      syntheticStateBoundLayeringVariant({
+        maximum: countLiteral(2),
+        onRetrigger: "keep-count",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    let state = supplyEmptySession(prepared, "session:spec-state-bound-reentry")
+    state = advanceOnce(
+      prepared,
+      state,
+      stateObservedEvent({
+        atSeconds: 0,
+        sequence: 0,
+        eventId: "event:sb-reentry-1",
+        activationId: "state-activation:spec-a",
+      }),
+    )
+    state = advanceOnce(
+      prepared,
+      state,
+      stateObservedEvent({
+        atSeconds: 1,
+        sequence: 0,
+        eventId: "event:sb-reentry-2",
+        activationId: null,
+      }),
+    )
+    expect(panelAttack(prepared, state, 1).value).toBeCloseTo(1000, 9)
+    state = advanceOnce(
+      prepared,
+      state,
+      stateObservedEvent({
+        atSeconds: 2,
+        sequence: 0,
+        eventId: "event:sb-reentry-3",
+        activationId: "state-activation:spec-b",
+      }),
+    )
+    const reentered = panelAttack(
+      prepared,
+      state,
+      2,
+      worldWithStates([
+        {
+          stateId: syntheticState.stateId,
+          bindingId: syntheticBinding.bindingId,
+          ownerId: syntheticBinding.holderId,
+          active: true,
+          activationId: "state-activation:spec-b",
+          since: 2,
+        },
+      ]),
+    )
+    expect(reentered.value).toBeCloseTo(1100, 9)
+    expect(reentered.contributions).toHaveLength(1)
+  })
+})
+
+describe("advanceEffects modification and layer maximum expressions", () => {
+  it("reads the activation modification's own condition and duration parameters", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: Record<string, unknown>[]
+    }
+    const timed = ruleSet.effects.find(
+      (effect) => effect["effectId"] === "environment:spec:timed-effect",
+    ) as Record<string, unknown>
+    // 目标规则也声明 flag，但激活修改的条件与操作数只读自己的参数表。
+    timed["parameters"] = {
+      flag: { kind: "constant", unit: "count", value: 0 },
+    }
+    const modification = ruleSet.effects.find(
+      (effect) =>
+        effect["effectId"] === "environment:spec:conditional-duration",
+    ) as Record<string, unknown>
+    modification["parameters"] = {
+      flag: { kind: "constant", unit: "count", value: 1 },
+      extra: { kind: "constant", unit: "seconds", value: 5 },
+    }
+    modification["when"] = {
+      kind: "compare-number",
+      unit: "count",
+      operator: "gte",
+      left: { kind: "parameter", unit: "count", name: "flag" },
+      right: countLiteral(1),
+    }
+    modification["modifications"] = [
+      {
+        field: "duration-seconds",
+        change: {
+          operator: "add",
+          value: { kind: "parameter", unit: "seconds", name: "extra" },
+        },
+      },
+    ]
+    const prepared = prepareFrom(ruleSet, [syntheticBinding])
+    let state = supplyEmptySession(
+      prepared,
+      "session:spec-activation-parameter",
+    )
+    state = advanceOnce(prepared, state, entryEvent(0, 0, "event:ap-1"))
+    // 10 秒基础时长 + 修改自己的 5 秒：第 12 秒仍然有效。
+    expect(panelAttack(prepared, state, 12).value).toBeCloseTo(1100, 9)
+  })
+
+  it("limits stacking to the configuration-resolved layer maximum", () => {
+    const prepared = prepareFrom(
+      syntheticTimedLayeringVariant({
+        maximum: {
+          kind: "add",
+          unit: "count",
+          operands: [countLiteral(1), countLiteral(1)],
+        },
+        onRetrigger: "add-layer",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    let state = supplyEmptySession(prepared, "session:spec-layer-maximum")
+    for (const atSeconds of [0, 1, 2]) {
+      state = advanceOnce(
+        prepared,
+        state,
+        entryEvent(atSeconds, 0, `event:lm-${atSeconds}`),
+      )
+    }
+    const panel = panelAttack(prepared, state, 2)
+    expect(panel.contributions).toHaveLength(2)
+    expect(panel.value).toBeCloseTo(1200, 9)
+  })
+
+  it("fails when a trigger expression overflows", () => {
+    const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
+      effects: Record<string, unknown>[]
+    }
+    const timed = ruleSet.effects.find(
+      (effect) => effect["effectId"] === "environment:spec:timed-effect",
+    ) as Record<string, unknown>
+    const activation = timed["activation"] as {
+      lifetime: Record<string, unknown>
+    }
+    activation.lifetime["seconds"] = {
+      kind: "multiply",
+      unit: "seconds",
+      value: { kind: "literal", unit: "seconds", value: 1e308 },
+      coefficient: { kind: "literal", unit: "multiplier", value: 2 },
+    }
+    const prepared = prepareFrom(ruleSet, [syntheticBinding])
+    const state = supplyEmptySession(prepared, "session:spec-overflow-trigger")
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(0, 0, "event:ov-1"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+})
+
+describe("advanceEffects state observation reads", () => {
+  const activeState = [
+    {
+      stateId: syntheticState.stateId,
+      bindingId: syntheticBinding.bindingId,
+      ownerId: syntheticBinding.holderId,
+      active: true,
+      activationId: "state-activation:spec-a",
+      since: 0,
+    },
+  ]
+  const inactiveState = [
+    {
+      stateId: syntheticState.stateId,
+      bindingId: syntheticBinding.bindingId,
+      ownerId: syntheticBinding.holderId,
+      active: false,
+      activationId: null,
+      since: null,
+    },
+  ]
+
+  it("fails when a trigger condition's state observation is missing", () => {
+    const prepared = prepareSynthetic()
+    const state = supplyEmptySession(
+      prepared,
+      "session:spec-trigger-state-missing",
+    )
+    const result = advanceEffects(
+      prepared,
+      state,
+      stateIsTransition({
+        atSeconds: 0,
+        eventId: "event:tsm-1",
+        states: [],
+      }),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+  })
+
+  it("distinguishes an explicit inactive observation from an active one", () => {
+    const prepared = prepareSynthetic()
+    const inactive = advanceOnce(
+      prepared,
+      supplyEmptySession(prepared, "session:spec-trigger-state-inactive"),
+      stateIsTransition({
+        atSeconds: 0,
+        eventId: "event:tsi-1",
+        states: inactiveState,
+      }),
+    )
+    // 条件为假：时长保持 10 秒，第 12 秒不再有效。
+    expect(panelAttack(prepared, inactive, 9).value).toBeCloseTo(1100, 9)
+    expect(panelAttack(prepared, inactive, 12).value).toBeCloseTo(1000, 9)
+    const active = advanceOnce(
+      prepared,
+      supplyEmptySession(prepared, "session:spec-trigger-state-active"),
+      stateIsTransition({
+        atSeconds: 0,
+        eventId: "event:tsa-1",
+        states: activeState,
+      }),
+    )
+    // 条件为真：10 秒基础时长 + 5.5 秒，第 12 秒仍然有效。
+    expect(panelAttack(prepared, active, 12).value).toBeCloseTo(1100, 9)
+  })
+
+  it("reads only the observation of the rule's own source binding", () => {
+    const prepared = prepareSynthetic()
+    const state = supplyEmptySession(
+      prepared,
+      "session:spec-trigger-state-binding",
+    )
+    const result = advanceEffects(
+      prepared,
+      state,
+      stateIsTransition({
+        atSeconds: 0,
+        eventId: "event:tsb-1",
+        states: [
+          {
+            stateId: syntheticState.stateId,
+            bindingId: "binding:spec-other",
+            ownerId: syntheticBinding.holderId,
+            active: true,
+            activationId: "state-activation:spec-other",
+            since: 0,
+          },
+        ],
+      }),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+        true,
+      )
+    }
+  })
+})
+
+function deepFreezeValue(value: unknown): void {
+  if (typeof value !== "object" || value === null) {
+    return
+  }
+  Object.freeze(value)
+  for (const nested of Object.values(value)) {
+    deepFreezeValue(nested)
+  }
+}
+
+function syntheticTransitionInput() {
+  return {
+    event: {
+      kind: "entry",
+      eventId: "event:afi-1",
+      atSeconds: 0,
+      sequence: 0,
+      actorId: syntheticBinding.holderId,
+      entryAction: "chain",
+    },
+    before: structuredClone(syntheticWorld),
+    after: structuredClone(syntheticWorld),
+    observedSnapshots: [
+      {
+        snapshotId: "snapshot:spec-advance-input",
+        atSeconds: 0,
+        attributes: [],
+        world: structuredClone(syntheticWorld),
+      },
+    ],
+  }
+}
+
+describe("advanceEffects input ownership", () => {
+  it("does not freeze caller transition inputs", () => {
+    const prepared = prepareSynthetic()
+    const input = syntheticTransitionInput()
+    const state = supplyEmptySession(prepared, "session:spec-advance-ownership")
+    const result = advanceEffects(prepared, state, input as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("advance must succeed")
+    }
+    expect(Object.isFrozen(input)).toBe(false)
+    expect(Object.isFrozen(input.event)).toBe(false)
+    expect(Object.isFrozen(input.before)).toBe(false)
+    expect(Object.isFrozen(input.after)).toBe(false)
+    expect(Object.isFrozen(input.observedSnapshots[0])).toBe(false)
+    const internal = readStateInternal(result.value.state)!
+    const recorded = internal.snapshots.find(
+      (snapshot) => snapshot.snapshotId === "snapshot:spec-advance-input",
+    )
+    expect(recorded).toBeDefined()
+    expect(recorded!.world).not.toBe(input.before)
+  })
+
+  it("accepts deeply frozen transition inputs", () => {
+    const prepared = prepareSynthetic()
+    const input = syntheticTransitionInput()
+    deepFreezeValue(input)
+    const state = supplyEmptySession(prepared, "session:spec-advance-frozen")
+    const result = advanceEffects(prepared, state, input as never)
+    expect(result.ok).toBe(true)
   })
 })

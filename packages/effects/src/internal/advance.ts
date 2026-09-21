@@ -41,8 +41,10 @@ import {
   type PreparedEffectsInternal,
 } from "./prepare.ts"
 import {
+  findStateObservation,
   readStateInternal,
   resolveLayerMaximum,
+  resolveStateBindingId,
   type EffectStateInternal,
   freezeState,
 } from "./state.ts"
@@ -81,6 +83,23 @@ interface TriggerRuntime {
   readonly moment: ReturnType<typeof createMomentEvaluation>
 }
 
+/** 实例所属贡献规则的持有者；状态观察按该持有者的来源绑定解析。 */
+function instanceHolderId(
+  prepared: PreparedEffectsInternal,
+  instance: EffectInstance,
+): EntityId | undefined {
+  return prepared.contributions.find(
+    (contribution) =>
+      contribution.rule.effectId === instance.effectId &&
+      contribution.bindingId === instance.bindingId,
+  )?.holderId
+}
+
+/** 引擎自有副本：冻结新状态之前先与调用方对象脱钩。 */
+function cloneEngineOwned<T>(value: T): T {
+  return structuredClone(value)
+}
+
 /** 触发阶段可读的角色：以持有者与事件身份解析；entryActor 回退到事件主体。 */
 function resolveTriggerRole(
   role: string,
@@ -111,8 +130,19 @@ function evaluateTriggerExpression(
   switch (expression.kind) {
     case "literal":
       return expression.value
-    case "parameter":
-      return parameters.get(expression.name)?.value ?? 0
+    case "parameter": {
+      // parameter 只读取所属规则自己的参数视图，不隐式读取目标字段。
+      const parameter = parameters.get(expression.name)
+      if (parameter === undefined) {
+        runtime.collector.report(
+          "MISSING_REFERENCE",
+          "",
+          `Parameter "${expression.name}" is not available in the owning rule's parameter view`,
+        )
+        return Number.NaN
+      }
+      return parameter.value
+    }
     case "stat": {
       const reference = expression.entity
       const entityId = resolveTriggerRole(
@@ -169,24 +199,49 @@ function evaluateTriggerExpression(
         ),
       )
     case "multiply":
-      return (
+      return requireFiniteTriggerValue(
         evaluateTriggerExpression(
           expression.value,
           runtime,
           holderId,
           parameters,
         ) *
-        evaluateTriggerExpression(
-          expression.coefficient,
-          runtime,
-          holderId,
-          parameters,
-        )
+          evaluateTriggerExpression(
+            expression.coefficient,
+            runtime,
+            holderId,
+            parameters,
+          ),
+        runtime,
+        "A numeric expression product",
       )
     default:
       void (expression as never)
       throw new Error("Unhandled numeric expression kind")
   }
+}
+
+/**
+ * 非有限结果必须失败：NaN 表示上游已经报告的问题，不重复报告；
+ * ±Infinity 在此报告并返回 NaN，由调用方按既有 Result 契约失败。
+ */
+function requireFiniteTriggerValue(
+  value: number,
+  runtime: TriggerRuntime,
+  description: string,
+): number {
+  if (Number.isNaN(value)) {
+    return value
+  }
+  if (!Number.isFinite(value)) {
+    runtime.collector.report(
+      "INVALID_DEFINITION",
+      "",
+      `${description} is not a finite number`,
+    )
+    return Number.NaN
+  }
+  return value
 }
 
 /** 触发阶段事实：只有事件实际携带的字段可读，缺失报 MISSING_FACT。 */
@@ -253,19 +308,27 @@ function evaluateTriggerCondition(
         parameters,
       )
     case "compare-number": {
-      const left = evaluateTriggerExpression(
-        condition.left,
+      const left = requireFiniteTriggerValue(
+        evaluateTriggerExpression(
+          condition.left,
+          runtime,
+          holderId,
+          parameters,
+        ),
         runtime,
-        holderId,
-        parameters,
+        "A compared operand",
       )
-      const right = evaluateTriggerExpression(
-        condition.right,
+      const right = requireFiniteTriggerValue(
+        evaluateTriggerExpression(
+          condition.right,
+          runtime,
+          holderId,
+          parameters,
+        ),
         runtime,
-        holderId,
-        parameters,
+        "A compared operand",
       )
-      if (Number.isNaN(left) || Number.isNaN(right)) {
+      if (!Number.isFinite(left) || !Number.isFinite(right)) {
         return false
       }
       switch (condition.operator) {
@@ -362,31 +425,34 @@ function evaluateTriggerCondition(
         )
         return false
       }
+      const bindingId = resolveStateBindingId(
+        runtime.prepared,
+        condition.stateId,
+        holderId,
+        runtime.collector,
+      )
+      if (bindingId === undefined) {
+        return false
+      }
       const observation = findStateObservation(
         runtime.before,
         condition.stateId,
+        bindingId,
         owner,
       )
       if (observation === undefined) {
-        return !condition.active
+        // 缺记录不是未生效：未生效必须显式提供 active: false 的观察。
+        runtime.collector.report(
+          "MISSING_FACT",
+          "",
+          `State "${condition.stateId}" is not observed for owner "${owner}" at "before-event"`,
+        )
+        return false
       }
       return observation.active === condition.active
     }
   }
   return false
-}
-
-function findStateObservation(
-  world: WorldIndex,
-  stateId: string,
-  ownerId: string,
-): { active: boolean; activationId: string | null } | undefined {
-  for (const observation of world.states.values()) {
-    if (observation.stateId === stateId && observation.ownerId === ownerId) {
-      return observation
-    }
-  }
-  return undefined
 }
 
 /** 按目标选择器解析受益者；与世界观察一致地要求持有者可见。 */
@@ -1097,7 +1163,7 @@ function evaluateActivationTiming(
         modification.rule.when,
         runtime,
         entry.holderId,
-        entry.foldedParameters,
+        modification.resolvedParameters,
       )
     ) {
       continue
@@ -1107,8 +1173,11 @@ function evaluateActivationTiming(
         change.change.value,
         runtime,
         entry.holderId,
-        entry.foldedParameters,
+        modification.resolvedParameters,
       )
+      if (Number.isNaN(value)) {
+        return undefined
+      }
       const target =
         change.field === "duration-seconds" ? durationChange : maximumChange
       const fieldTouched =
@@ -1405,10 +1474,11 @@ export function advanceEffects(
   }
   if (event.kind === "state-observed") {
     const observation = event.observation
-    const matching = [...after.states.values()].find(
-      (entry) =>
-        entry.stateId === observation.stateId &&
-        entry.ownerId === observation.ownerId,
+    const matching = findStateObservation(
+      after,
+      observation.stateId,
+      observation.bindingId,
+      observation.ownerId,
     )
     if (matching === undefined) {
       collector.report(
@@ -1452,9 +1522,23 @@ export function advanceEffects(
       if (instance.lifetime.kind !== "state-bound") {
         return true
       }
+      const holderId = instanceHolderId(preparedInternal, instance)
+      if (holderId === undefined) {
+        return false
+      }
+      const bindingId = resolveStateBindingId(
+        preparedInternal,
+        instance.lifetime.stateId,
+        holderId,
+        collector,
+      )
+      if (bindingId === undefined) {
+        return false
+      }
       const observation = findStateObservation(
         after,
         instance.lifetime.stateId,
+        bindingId,
         instance.lifetime.stateOwnerId,
       )
       return (
@@ -1552,7 +1636,7 @@ export function advanceEffects(
       snapshotId: snapshotId as `snapshot:${string}`,
       atSeconds: event.atSeconds,
       attributes,
-      world: inputObject["before"] as SavedSnapshot["world"],
+      world: cloneEngineOwned(inputObject["before"]) as SavedSnapshot["world"],
     })
     return snapshotId
   }
@@ -1707,9 +1791,19 @@ export function advanceEffects(
               )
               return false
             }
+            const stateBindingId = resolveStateBindingId(
+              preparedInternal,
+              activation.lifetime.stateId,
+              entry.holderId,
+              collector,
+            )
+            if (stateBindingId === undefined) {
+              return false
+            }
             const observation = findStateObservation(
               after,
               activation.lifetime.stateId,
+              stateBindingId,
               ownerEntity,
             )
             if (observation === undefined || !observation.active) {
@@ -1748,7 +1842,29 @@ export function advanceEffects(
               )
               .at(-1)
             const maximum = resolveLayerMaximum(entry)
-            if (existing !== undefined && existing.layers.length >= maximum) {
+            // 状态绑定组没有时钟；空组创建一层，add-layer 才尝试增层，满层按 atCapacity 处理。
+            let replacedLayerId: string | undefined
+            let addNewLayer = false
+            if (existing === undefined) {
+              addNewLayer = true
+            } else if (activation.layering.onRetrigger === "add-layer") {
+              if (existing.layers.length < maximum) {
+                addNewLayer = true
+              } else if (
+                activation.layering.atCapacity === "replace-oldest-layer"
+              ) {
+                replacedLayerId = [...existing.layers].toSorted(
+                  (left, right) =>
+                    left.startedAt !== right.startedAt
+                      ? left.startedAt - right.startedAt
+                      : left.layerId < right.layerId
+                        ? -1
+                        : 1,
+                )[0]!.layerId
+                addNewLayer = true
+              }
+            }
+            if (!addNewLayer) {
               continue
             }
             const snapshotId = ensureSnapshot()
@@ -1775,9 +1891,12 @@ export function advanceEffects(
             if (existing !== undefined) {
               const updated: EffectInstance = {
                 ...existing,
-                layers: [...existing.layers, newLayer] as unknown as NonEmpty<
-                  EffectInstance["layers"][number]
-                >,
+                layers: [
+                  ...existing.layers.filter(
+                    (layer) => layer.layerId !== replacedLayerId,
+                  ),
+                  newLayer,
+                ] as unknown as NonEmpty<EffectInstance["layers"][number]>,
               }
               touchedInstances.set(updated.instanceId, updated)
               anyChange = true
@@ -2058,7 +2177,9 @@ export function advanceEffects(
         snapshotId: snapshotId as `snapshot:${string}`,
         atSeconds: event.atSeconds,
         attributes: [],
-        world: inputObject["before"] as SavedSnapshot["world"],
+        world: cloneEngineOwned(
+          inputObject["before"],
+        ) as SavedSnapshot["world"],
       })
     }
     return snapshotId
@@ -2275,7 +2396,7 @@ export function advanceEffects(
     instances: mergedInstances,
     snapshots: [
       ...stateInternal.snapshots,
-      ...observedSnapshots,
+      ...observedSnapshots.map((snapshot) => cloneEngineOwned(snapshot)),
       ...frozenSnapshots.values(),
     ],
     cooldowns: mergedCooldowns,
