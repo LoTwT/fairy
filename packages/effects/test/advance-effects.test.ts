@@ -2282,3 +2282,322 @@ describe("state-bound working view without a matching trigger", () => {
     expect(panelAttack(prepared, state, 1).value).toBeCloseTo(1100, 9)
   })
 })
+
+/** 可配置时钟策略的限时规则：用于多实例计时边界。 */
+function timedClockVariantRuleSet(options: {
+  clock: "shared" | "per-layer"
+  refreshExisting: "all" | "newest" | "none"
+  onRetrigger: Record<string, unknown>
+  maximum: unknown
+  layeringOnRetrigger: string
+  atCapacity: string
+  seconds?: number
+}): ReturnType<typeof structuredClone> {
+  return singleEffectRuleSet("environment:spec:timed-effect", (effect) => {
+    const activation = effect["activation"] as Record<string, unknown>
+    activation["lifetime"] = {
+      kind: "timed",
+      seconds: {
+        kind: "literal",
+        unit: "seconds",
+        value: options.seconds ?? 10,
+      },
+      clock: options.clock,
+      onRetrigger: options.onRetrigger,
+      refreshExisting: options.refreshExisting,
+    }
+    activation["layering"] = {
+      recipientPartition: "individual",
+      keys: [],
+      maximum: options.maximum,
+      onRetrigger: options.layeringOnRetrigger,
+      atCapacity: options.atCapacity,
+    }
+  })
+}
+
+function importedTimedGroupState(
+  atSeconds: number,
+  layers: readonly {
+    instanceId: string
+    layerId: string
+    startedAt: number
+    expiresAt: number
+  }[],
+): unknown {
+  return {
+    sessionId: "session:spec-timed-clock",
+    atSeconds,
+    instances: layers.map((entry) => ({
+      instanceId: entry.instanceId,
+      effectId: "environment:spec:timed-effect",
+      bindingId: syntheticBinding.bindingId,
+      beneficiaryIds: [syntheticBinding.holderId],
+      stackKey: [],
+      lifetime: { kind: "timed", firstActivatedAt: 0 },
+      layers: [
+        {
+          layerId: entry.layerId,
+          startedAt: entry.startedAt,
+          expiresAt: entry.expiresAt,
+          trigger: null,
+        },
+      ],
+    })),
+    snapshots: [],
+    cooldowns: [],
+    eventHistory: { processedIds: [], last: null },
+  }
+}
+
+describe("timed group clock across instances", () => {
+  const refreshAll = { kind: "refresh" }
+  const maximumTwo = countLiteral(2)
+
+  function advanceAt(prepared: PreparedEffects, state: EffectState, t: number) {
+    return advanceOnce(prepared, state, entryEvent(t, 0, `event:tc-${t}`))
+  }
+
+  it("refreshes every instance of a shared group", () => {
+    const prepared = prepareFrom(
+      timedClockVariantRuleSet({
+        clock: "shared",
+        refreshExisting: "all",
+        onRetrigger: refreshAll,
+        maximum: maximumTwo,
+        layeringOnRetrigger: "keep-count",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(
+      prepared,
+      importedTimedGroupState(0, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:a",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:b",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+      ]),
+    )
+    const advanced = advanceAt(prepared, state, 5)
+    expect(panelAttack(prepared, advanced, 12).value).toBeCloseTo(1200, 9)
+    expect(panelAttack(prepared, advanced, 15).value).toBeCloseTo(1000, 9)
+  })
+
+  it("finds the newest layer when it lives outside the representative instance", () => {
+    const prepared = prepareFrom(
+      timedClockVariantRuleSet({
+        clock: "per-layer",
+        refreshExisting: "newest",
+        onRetrigger: refreshAll,
+        maximum: maximumTwo,
+        layeringOnRetrigger: "keep-count",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(
+      prepared,
+      importedTimedGroupState(2, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:newer",
+          startedAt: 2,
+          expiresAt: 10,
+        },
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:older",
+          startedAt: 0,
+          expiresAt: 12,
+        },
+      ]),
+    )
+    const advanced = advanceAt(prepared, state, 5)
+    expect(panelAttack(prepared, advanced, 11).value).toBeCloseTo(1200, 9)
+    expect(panelAttack(prepared, advanced, 13).value).toBeCloseTo(1100, 9)
+  })
+
+  it("still refreshes a full group that ignores the new layer", () => {
+    const prepared = prepareFrom(
+      timedClockVariantRuleSet({
+        clock: "shared",
+        refreshExisting: "all",
+        onRetrigger: refreshAll,
+        maximum: maximumTwo,
+        layeringOnRetrigger: "add-layer",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(
+      prepared,
+      importedTimedGroupState(0, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:a",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:b",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+      ]),
+    )
+    const advanced = advanceAt(prepared, state, 5)
+    const panel = panelAttack(prepared, advanced, 12)
+    expect(panel.contributions).toHaveLength(2)
+    expect(panel.value).toBeCloseTo(1200, 9)
+  })
+
+  it("replaces the oldest layer across instances while refreshing the group", () => {
+    const prepared = prepareFrom(
+      timedClockVariantRuleSet({
+        clock: "shared",
+        refreshExisting: "all",
+        onRetrigger: refreshAll,
+        maximum: maximumTwo,
+        layeringOnRetrigger: "add-layer",
+        atCapacity: "replace-oldest-layer",
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(
+      prepared,
+      importedTimedGroupState(1, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:a",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:b",
+          startedAt: 1,
+          expiresAt: 10,
+        },
+      ]),
+    )
+    const advanced = advanceAt(prepared, state, 5)
+    const panel = panelAttack(prepared, advanced, 12)
+    const layerIds = panel.contributions.map(
+      (contribution) => contribution.layerId,
+    )
+    expect(layerIds).toHaveLength(2)
+    expect(layerIds).not.toContain("layer:a")
+    expect(layerIds).toContain("layer:b")
+    expect(panel.value).toBeCloseTo(1200, 9)
+  })
+
+  it("does not depend on instance or layer array order", () => {
+    const prepared = prepareFrom(
+      timedClockVariantRuleSet({
+        clock: "shared",
+        refreshExisting: "all",
+        onRetrigger: refreshAll,
+        maximum: maximumTwo,
+        layeringOnRetrigger: "keep-count",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    const forward = supplyImportedState(
+      prepared,
+      importedTimedGroupState(0, [
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:a",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:b",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+      ]),
+    )
+    const reversed = supplyImportedState(
+      prepared,
+      importedTimedGroupState(0, [
+        {
+          instanceId: "instance:spec-b",
+          layerId: "layer:b",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+        {
+          instanceId: "instance:spec-a",
+          layerId: "layer:a",
+          startedAt: 0,
+          expiresAt: 10,
+        },
+      ]),
+    )
+    const forwardAdvanced = advanceAt(prepared, forward, 5)
+    const reversedAdvanced = advanceAt(prepared, reversed, 5)
+    expect(panelAttack(prepared, forwardAdvanced, 12).value).toBeCloseTo(
+      panelAttack(prepared, reversedAdvanced, 12).value,
+      9,
+    )
+    expect(panelAttack(prepared, forwardAdvanced, 12).value).toBeCloseTo(
+      1200,
+      9,
+    )
+  })
+
+  it("fails when the bounded clock overflows before its cap", () => {
+    const prepared = prepareFrom(
+      timedClockVariantRuleSet({
+        clock: "shared",
+        refreshExisting: "all",
+        seconds: 1e308,
+        onRetrigger: {
+          kind: "extend",
+          limit: {
+            kind: "since-first-activation",
+            maximum: { kind: "literal", unit: "seconds", value: 1.5e308 },
+          },
+        },
+        maximum: maximumTwo,
+        layeringOnRetrigger: "keep-count",
+        atCapacity: "ignore-new-layer",
+      }),
+      [syntheticBinding],
+    )
+    const state = supplyImportedState(prepared, {
+      ...(importedTimedGroupState(0, [
+        {
+          instanceId: "instance:spec-bound-clock",
+          layerId: "layer:bound-clock",
+          startedAt: 0,
+          expiresAt: 1.1e308,
+        },
+      ]) as Record<string, unknown>),
+    })
+    const result = advanceEffects(
+      prepared,
+      state,
+      entryEvent(1e308, 0, "event:tc-overflow"),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_DEFINITION"),
+      ).toBe(true)
+    }
+  })
+})

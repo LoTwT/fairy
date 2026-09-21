@@ -289,12 +289,15 @@ function foldTriggerValues(
  * 不把非有限值写入新状态。
  */
 function requireFiniteExpiry(
-  expiresAt: number | null,
+  expiresAt: number | null | undefined,
   runtime: TriggerRuntime,
   effectId: EffectId,
   bindingId: BindingId,
 ): number | null | undefined {
-  if (expiresAt === null || Number.isFinite(expiresAt)) {
+  if (
+    expiresAt === null ||
+    (expiresAt !== undefined && Number.isFinite(expiresAt))
+  ) {
     return expiresAt
   }
   runtime.collector.report(
@@ -317,6 +320,21 @@ function oldestLayer(
         ? -1
         : 1,
   )[0]!
+}
+
+/** 组内最新层的选择：开始时间优先，平局按层 ID。 */
+function newestLayer(
+  layers: readonly EffectInstance["layers"][number][],
+): EffectInstance["layers"][number] {
+  return [...layers]
+    .toSorted((left, right) =>
+      left.startedAt !== right.startedAt
+        ? left.startedAt - right.startedAt
+        : left.layerId < right.layerId
+          ? -1
+          : 1,
+    )
+    .at(-1)!
 }
 
 /** 触发阶段事实：只有事件实际携带的字段可读，缺失报 MISSING_FACT。 */
@@ -931,6 +949,19 @@ function partitionIdentity(
 }
 
 /** 按时钟表更新被选中的旧层到期时间；无限层按上限语义收敛。 */
+/**
+ * 时钟算术的一步：两个有限值相加必须仍然有限。
+ * 溢出返回 undefined，由调用方按定义失败处理，不在封顶之后才判断。
+ */
+function finiteClockSum(left: number, right: number): number | undefined {
+  const sum = left + right
+  return Number.isFinite(sum) ? sum : undefined
+}
+
+/**
+ * 按时钟表更新被选中的旧层到期时间；无限层按上限语义收敛。
+ * 任何一步的中间溢出都返回 undefined，调用方报告失败而不是写入非有限值。
+ */
 function applyClockUpdate(
   update: ClockUpdate,
   layerExpiresAt: number | null,
@@ -938,25 +969,38 @@ function applyClockUpdate(
   duration: number,
   maximum: number | undefined,
   firstActivatedAt: number,
-): number | null {
+): number | null | undefined {
   if (update.kind === "keep") {
     return layerExpiresAt
   }
   if (update.kind === "refresh") {
-    return eventTime + duration
+    return finiteClockSum(eventTime, duration)
   }
   if (update.kind === "extend") {
     if (update.limit.kind === "none") {
-      return layerExpiresAt === null ? null : layerExpiresAt + duration
+      return layerExpiresAt === null
+        ? null
+        : finiteClockSum(layerExpiresAt, duration)
     }
-    const cap =
-      update.limit.kind === "remaining"
-        ? eventTime + (maximum ?? Number.POSITIVE_INFINITY)
-        : firstActivatedAt + (maximum ?? Number.POSITIVE_INFINITY)
+    if (maximum === undefined) {
+      // 没有声明有界延长时不存在封顶值，保持原时钟。
+      return layerExpiresAt
+    }
+    const cap = finiteClockSum(
+      update.limit.kind === "remaining" ? eventTime : firstActivatedAt,
+      maximum,
+    )
+    if (cap === undefined) {
+      return undefined
+    }
     if (layerExpiresAt === null) {
-      return maximum === undefined ? null : cap
+      return cap
     }
-    return Math.min(layerExpiresAt + duration, cap)
+    const extended = finiteClockSum(layerExpiresAt, duration)
+    if (extended === undefined) {
+      return undefined
+    }
+    return Math.min(extended, cap)
   }
   return layerExpiresAt
 }
@@ -1409,7 +1453,7 @@ function sharedGroupClock(
   maximum: number | undefined,
   firstActivatedAt: number,
   fallback: number,
-): number {
+): number | undefined {
   if (selectedLayers.length === 0) {
     return fallback
   }
@@ -1419,16 +1463,18 @@ function sharedGroupClock(
       ? layer
       : latest,
   )
-  return (
-    applyClockUpdate(
-      onRetrigger,
-      reference.expiresAt,
-      eventTime,
-      duration,
-      maximum,
-      firstActivatedAt,
-    ) ?? fallback
+  const updated = applyClockUpdate(
+    onRetrigger,
+    reference.expiresAt,
+    eventTime,
+    duration,
+    maximum,
+    firstActivatedAt,
   )
+  if (updated === undefined) {
+    return undefined
+  }
+  return updated ?? fallback
 }
 
 export function advanceEffects(
@@ -2095,19 +2141,30 @@ export function advanceEffects(
               : event.atSeconds
           const extendLimit =
             onRetrigger.kind === "extend" ? onRetrigger.limit : undefined
-          const newLayerExpiry = ((): number => {
-            const base = event.atSeconds + timing.duration
+          // 封顶前先判断每一步：溢出后再取 Math.min 仍然是失败。
+          const newLayerExpiry = ((): number | undefined => {
+            const base = finiteClockSum(event.atSeconds, timing.duration)
+            if (base === undefined) {
+              return undefined
+            }
             if (extendLimit === undefined || extendLimit.kind === "none") {
               return base
             }
-            const cap =
+            if (timing.maximum === undefined) {
+              return base
+            }
+            const cap = finiteClockSum(
               extendLimit.kind === "remaining"
-                ? event.atSeconds + (timing.maximum ?? Number.POSITIVE_INFINITY)
-                : firstActivatedAt +
-                  (timing.maximum ?? Number.POSITIVE_INFINITY)
+                ? event.atSeconds
+                : firstActivatedAt,
+              timing.maximum,
+            )
+            if (cap === undefined) {
+              return undefined
+            }
             return Math.min(base, cap)
           })()
-          if (!Number.isFinite(newLayerExpiry)) {
+          if (newLayerExpiry === undefined) {
             collector.report(
               "INVALID_DEFINITION",
               "",
@@ -2163,24 +2220,12 @@ export function advanceEffects(
             anyChange = true
             continue
           }
-          const surviving = existing.layers.filter((layer) =>
-            layerSurvives(layer, event.atSeconds),
-          )
+          // 时钟选择覆盖完整逻辑组的存活层，不局限于某个代表实例。
           const selectedForClock: EffectInstance["layers"][number][] =
             refreshExisting === "all"
-              ? [...surviving]
+              ? [...groupSurvivingLayers]
               : refreshExisting === "newest"
-                ? [
-                    [...surviving]
-                      .toSorted((left, right) =>
-                        left.startedAt !== right.startedAt
-                          ? left.startedAt - right.startedAt
-                          : left.layerId < right.layerId
-                            ? -1
-                            : 1,
-                      )
-                      .at(-1)!,
-                  ]
+                ? [newestLayer(groupSurvivingLayers)]
                 : []
           let replacedLayerId: string | undefined
           let addNewLayer = false
@@ -2203,42 +2248,8 @@ export function advanceEffects(
                     (layer) => layer.layerId === replacedLayerId,
                   ),
                 )
-          const updatedLayers: EffectInstance["layers"][number][] = []
-          let changedLayers = false
-          for (const layer of existing.layers) {
-            if (replacedLayerId === layer.layerId) {
-              changedLayers = true
-              continue
-            }
-            if (!layerSurvives(layer, event.atSeconds)) {
-              updatedLayers.push(layer)
-              continue
-            }
-            if (selectedForClock.includes(layer)) {
-              const updatedExpiry = requireFiniteExpiry(
-                applyClockUpdate(
-                  onRetrigger,
-                  layer.expiresAt,
-                  event.atSeconds,
-                  timing.duration,
-                  timing.maximum,
-                  firstActivatedAt,
-                ),
-                runtime,
-                entry.rule.effectId,
-                entry.bindingId,
-              )
-              if (updatedExpiry === undefined) {
-                return false
-              }
-              if (updatedExpiry !== layer.expiresAt) {
-                changedLayers = true
-              }
-              updatedLayers.push({ ...layer, expiresAt: updatedExpiry })
-              continue
-            }
-            updatedLayers.push(layer)
-          }
+          const targetInstance = replacedInstance ?? existing
+          let newLayer: EffectInstance["layers"][number] | undefined
           if (addNewLayer) {
             const snapshotId = ensureSnapshot()
             if (snapshotId === undefined) {
@@ -2266,7 +2277,7 @@ export function advanceEffects(
             if (expiresAt === undefined) {
               return false
             }
-            const newLayer = {
+            newLayer = {
               layerId: layerIdFor(
                 stateInternal.sessionId,
                 preparedInternal,
@@ -2282,37 +2293,62 @@ export function advanceEffects(
               expiresAt,
               trigger: triggerContext,
             }
-            if (
-              replacedInstance !== undefined &&
-              replacedInstance.instanceId !== existing.instanceId
-            ) {
-              const updatedReplaced: EffectInstance = {
-                ...replacedInstance,
-                layers: [
-                  ...replacedInstance.layers.filter(
-                    (layer) => layer.layerId !== replacedLayerId,
-                  ),
-                  newLayer,
-                ] as unknown as NonEmpty<EffectInstance["layers"][number]>,
+          }
+          // 组内每个实例各自提交：时钟刷新、替换旧层与新增层一起生效。
+          for (const instance of groupInstances) {
+            const updatedLayers: EffectInstance["layers"][number][] = []
+            let changedLayers = false
+            for (const layer of instance.layers) {
+              if (replacedLayerId === layer.layerId) {
+                changedLayers = true
+                continue
               }
-              touchedInstances.set(updatedReplaced.instanceId, updatedReplaced)
-              anyChange = true
-            } else {
-              changedLayers = true
-              updatedLayers.push(newLayer)
+              if (
+                layerSurvives(layer, event.atSeconds) &&
+                selectedForClock.includes(layer)
+              ) {
+                const updatedExpiry = requireFiniteExpiry(
+                  applyClockUpdate(
+                    onRetrigger,
+                    layer.expiresAt,
+                    event.atSeconds,
+                    timing.duration,
+                    timing.maximum,
+                    firstActivatedAt,
+                  ),
+                  runtime,
+                  entry.rule.effectId,
+                  entry.bindingId,
+                )
+                if (updatedExpiry === undefined) {
+                  return false
+                }
+                if (updatedExpiry !== layer.expiresAt) {
+                  changedLayers = true
+                }
+                updatedLayers.push({ ...layer, expiresAt: updatedExpiry })
+                continue
+              }
+              updatedLayers.push(layer)
             }
+            if (
+              newLayer !== undefined &&
+              instance.instanceId === targetInstance.instanceId
+            ) {
+              updatedLayers.push(newLayer)
+              changedLayers = true
+            }
+            if (!changedLayers) {
+              continue
+            }
+            touchedInstances.set(instance.instanceId, {
+              ...instance,
+              layers: updatedLayers as unknown as NonEmpty<
+                EffectInstance["layers"][number]
+              >,
+            })
+            anyChange = true
           }
-          if (!changedLayers) {
-            continue
-          }
-          const updated: EffectInstance = {
-            ...existing,
-            layers: updatedLayers as unknown as NonEmpty<
-              EffectInstance["layers"][number]
-            >,
-          }
-          touchedInstances.set(updated.instanceId, updated)
-          anyChange = true
         }
         return anyChange
       },
