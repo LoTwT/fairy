@@ -233,6 +233,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 公开 JSON 子路径（前缀 `@randomplay/data`）：
 
+- `/definitions/effects/starter.json`
 - `/integrated/index.json`
 - `/integrated/agents/{来源ID}/data.json`
 - `/integrated/agents/{来源ID}/details.zh.json`
@@ -259,7 +260,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/simul/{来源ID}/details.zh.json`
 - `/integrated/simul/{来源ID}/details.en.json`
 
-这些路径映射到包内 `dist/integrated/` 的已验证发布副本。JSON 原字节、字段、层级、文件名、摘要全部保留，
+这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理的发布副本，`/definitions/effects/starter.json` 是 Git 跟踪的静态效果规则集（首批经核对的耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套条款；类型与执行契约由[统一效果规则模型](../effects/index.md)维护，构建时逐文件字节复验后复制）。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 原字节、字段、层级、文件名、摘要全部保留，
 索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含八个类别的完整数据；根入口的名称与 ID
 元数据及显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时
 请求该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；

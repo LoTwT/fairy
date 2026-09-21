@@ -196,6 +196,7 @@ describe("packed package", () => {
       [
         "LICENSE",
         "README.md",
+        "dist/definitions/effects/starter.json",
         "dist/index.d.mts",
         "dist/index.mjs",
         "dist/index.browser.mjs",
@@ -204,6 +205,13 @@ describe("packed package", () => {
         "package.json",
         ...jsonFiles.map((path) => `dist/integrated/${path}`),
       ].toSorted(),
+    )
+    expectSameBytes(
+      readFileSync(join(packedRoot, "dist/definitions/effects/starter.json")),
+      readFileSync(
+        join(cleanPackage, "definitions", "effects", "starter.json"),
+      ),
+      "definitions/effects/starter.json",
     )
     for (const path of jsonFiles)
       expectSameBytes(
@@ -261,6 +269,10 @@ import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
 assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails"].sort())
+const starterDefinitions = await import("@randomplay/data/definitions/effects/starter.json", { with: { type: "json" } })
+assert.equal(starterDefinitions.default.schemaVersion, 1)
+assert.equal(starterDefinitions.default.ruleSetId, "starter-effects")
+assert.equal(starterDefinitions.default.effects.length, 3)
 const index = await api.loadIndex()
 assert.deepEqual(index, JSON.parse(readFileSync(new URL(import.meta.resolve("@randomplay/data/integrated/index.json")), "utf8")))
 assert(Object.isFrozen(api.agentNames))
