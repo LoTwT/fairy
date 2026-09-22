@@ -6,6 +6,7 @@ import {
 } from "../src/index.ts"
 import type {
   StaticCatalogDamageInput,
+  StaticDamageResult,
   StaticEffectCatalog,
 } from "../src/index.ts"
 import { general, inputFor } from "./static-fixtures.ts"
@@ -33,6 +34,30 @@ const oracle = read("./fixtures/zzz-hp-static-catalog.json") as {
 const coverage = read(
   "../../data/definitions/effects/static-coverage.json",
 ) as { records: { pointer: string; status: string }[] }
+
+function referenceInput(pointer: string): StaticCatalogDamageInput {
+  const vector = oracle.cases.find((entry) => entry.pointer === pointer)
+  if (!vector) throw new Error(`Missing source fixture: ${pointer}`)
+  return {
+    ...Object.fromEntries(
+      Object.entries(vector.input).map(([key, index]) => [
+        key,
+        structuredClone(oracle.tables[key]![index]),
+      ]),
+    ),
+    definitions,
+    catalog,
+  } as unknown as StaticCatalogDamageInput
+}
+
+function calculateCatalogResult(
+  input: StaticCatalogDamageInput,
+): StaticDamageResult {
+  const result = calculateStaticDamageFromCatalog(input)
+  expect(result.ok, JSON.stringify(result)).toBe(true)
+  if (!result.ok) throw new Error(JSON.stringify(result.issues))
+  return result.value
+}
 
 function agentInput(
   agentEntityId: string,
@@ -81,6 +106,89 @@ function agentInput(
 }
 
 describe("fixed-source catalog conformance", () => {
+  it.each(["anomaly", "anomaly-settlement", "vortex", "disorder"] as const)(
+    "consumes generic anomaly bonuses in the final %s damage path",
+    (kind) => {
+      const input = referenceInput(
+        "/driveDiscs/4/fourPieceBuffs/effectBlocks/0/effects/1",
+      )
+      if (input.damage.kind !== "anomaly") throw new Error("fixture")
+      const request = { ...input, damage: { ...input.damage, kind } }
+      const selected = calculateCatalogResult(request)
+      const disabled = calculateCatalogResult({ ...request, selections: [] })
+      // Fixed-source Chained four-piece: +16% in anomaly/release/vortex, not disorder.
+      const multiplier = kind === "disorder" ? 1 : 1.16
+      expect(selected.factors.nonCritical["anomalyDamageBonus"]).toBeCloseTo(
+        multiplier,
+        12,
+      )
+      expect(selected.expected / disabled.expected).toBeCloseTo(multiplier, 12)
+    },
+  )
+  it.each(["anomaly", "anomaly-settlement", "vortex", "disorder"] as const)(
+    "consumes generic anomaly critical contributions in the final %s damage path",
+    (kind) => {
+      const input = referenceInput(
+        "/agents/43/mindscapeBuffs/0/effectBlocks/1/effects/1",
+      )
+      const criticalDamage = referenceInput(
+        "/agents/43/mindscapeBuffs/0/effectBlocks/1/effects/2",
+      )
+      if (input.damage.kind !== "anomaly") throw new Error("fixture")
+      const request = {
+        ...input,
+        selections: [...input.selections, ...criticalDamage.selections],
+        damage: { ...input.damage, kind },
+      }
+      const selected = calculateCatalogResult(request)
+      const disabled = calculateCatalogResult({ ...request, selections: [] })
+      // Jane's explicit 40% anomaly critical rate and 50% damage are summed once.
+      expect(selected.criticalRate).toBe(kind === "disorder" ? 0 : 0.4)
+      expect(selected.expected / disabled.expected).toBeCloseTo(
+        kind === "disorder" ? 1 : 1 + 0.4 * 0.5,
+        12,
+      )
+    },
+  )
+  it("keeps an explicit anomaly scope narrower than a generic anomaly bonus", () => {
+    const input = referenceInput(
+      "/agents/37/mindscapeBuffs/2/effectBlocks/0/effects/0",
+    )
+    if (input.damage.kind !== "anomaly") throw new Error("fixture")
+    for (const kind of ["anomaly", "anomaly-settlement", "vortex"] as const) {
+      const request = { ...input, damage: { ...input.damage, kind } }
+      const selected = calculateCatalogResult(request)
+      const disabled = calculateCatalogResult({ ...request, selections: [] })
+      expect(selected.expected / disabled.expected).toBeCloseTo(
+        kind === "anomaly" ? 1.15 : 1,
+        12,
+      )
+    }
+  })
+  it("consumes Burnice's skill multiplier only for the selected matching hit", () => {
+    const input = referenceInput(
+      "/agents/26/mindscapeBuffs/0/effectBlocks/1/effects/0",
+    )
+    const selected = calculateCatalogResult(input)
+    const disabled = calculateCatalogResult({ ...input, selections: [] })
+    expect(
+      selected.factors.nonCritical["baseDamage"]! -
+        disabled.factors.nonCritical["baseDamage"]!,
+    ).toBeCloseTo(3.5 * 500, 12)
+    expect(selected.expected / disabled.expected).toBeCloseTo(23.5 / 20, 12)
+    const unrelated: StaticCatalogDamageInput = {
+      ...input,
+      hit: {
+        ...input.hit,
+        skillCategory: "basic",
+        skillTargetIds: [],
+        skillTags: [],
+      },
+    }
+    expect(calculateCatalogResult(unrelated).expected).toBe(
+      calculateCatalogResult({ ...unrelated, selections: [] }).expected,
+    )
+  })
   it("preserves The Vault's different self/team targets across refinement ranks", () => {
     const option = catalog.options.find(
       (o) =>
@@ -314,6 +422,12 @@ describe("fixed-source catalog conformance", () => {
               stage: "current",
               value: { unit: "anomaly-proficiency-points", value: 300 },
             },
+            {
+              entityId: "entity:source",
+              stat: "penetrationRatio",
+              stage: "current",
+              value: { unit: "ratio", value: 0.25 },
+            },
           ],
         },
       ],
@@ -353,6 +467,36 @@ describe("fixed-source catalog conformance", () => {
       expect(result.value.factors.nonCritical["anomalyProficiency"]).toBe(3)
       expect(result.value.factors.nonCritical["baseDamage"]).toBe(5000)
       expect(result.value.factors.nonCritical["refringe"]).toBe(1.38)
+      const withAnomalyBonus = calculateCatalogResult({
+        ...luminous,
+        bindings: [
+          ...luminous.bindings,
+          {
+            kind: "drive-disc",
+            bindingId: "binding:disc",
+            sourceEntityId: "33800",
+            holderId: "entity:attacker",
+            eligible: true,
+            configuration: { setPieces: 4 },
+          },
+        ],
+        selections: [
+          ...luminous.selections,
+          {
+            optionId:
+              "drive-discs:SuitNotesFromtheChained:setPieces:4:blk-legacy:legacy-self-anomalyDmgBonus",
+            bindingId: "binding:disc",
+            layers: 1,
+          },
+        ],
+      })
+      expect(withAnomalyBonus.factors.nonCritical["anomalyDamageBonus"]).toBe(
+        1.16,
+      )
+      expect(withAnomalyBonus.expected / result.value.expected).toBeCloseTo(
+        1.16,
+        12,
+      )
     }
     const enhanced = calculateStaticDamageFromCatalog({
       ...luminous,

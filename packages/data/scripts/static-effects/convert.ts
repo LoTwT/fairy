@@ -160,14 +160,27 @@ export const FIELD_MAPPINGS: Readonly<Record<string, FieldMapping>> = {
   staggerVulnerableOnly: factor("stun-damage-adjustment", "multiplier"),
   globalStaggerVulnerable: factor("stun-damage-adjustment", "multiplier"),
   pierceDmgBonus: factor("sheer-damage-bonus", "ratio", ["sheer"]),
-  anomalyDmgBonus: factor("anomaly-damage-bonus", "ratio", ["anomaly"]),
+  anomalyDmgBonus: factor("anomaly-damage-bonus", "ratio", [
+    "anomaly",
+    "anomaly-settlement",
+    "vortex",
+    "luminize",
+  ]),
   disorderDmgBonus: factor("anomaly-damage-bonus", "ratio", ["disorder"]),
   turbulenceDmgBonus: factor("anomaly-damage-bonus", "ratio", ["vortex"]),
   anomalyReleaseDmgBonus: factor("anomaly-damage-bonus", "ratio", [
     "anomaly-settlement",
   ]),
-  anomalyCritRate: factor("anomaly-critical-rate", "ratio", ["anomaly"]),
-  anomalyCritDmg: factor("anomaly-critical-damage", "ratio", ["anomaly"]),
+  anomalyCritRate: factor("anomaly-critical-rate", "ratio", [
+    "anomaly",
+    "anomaly-settlement",
+    "vortex",
+  ]),
+  anomalyCritDmg: factor("anomaly-critical-damage", "ratio", [
+    "anomaly",
+    "anomaly-settlement",
+    "vortex",
+  ]),
   anomalyReleaseCritRate: factor("anomaly-critical-rate", "ratio", [
     "anomaly-settlement",
   ]),

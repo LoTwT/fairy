@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { calculateDefenseLevelBase } from "@randomplay/core"
 import { calculateStaticDamageFromCatalog } from "../src/index.ts"
 import type {
   ContributionOperation,
@@ -293,75 +294,132 @@ describe("catalog static calculation", () => {
       ).toEqual([2, 10])
     expect(calculateStaticDamageFromCatalog(input).ok).toBe(false)
   })
-  it("keeps historical anomaly source independent of the hitter", () => {
-    const input = anomalyInput(fixture())
-    if (input.damage.kind !== "anomaly") throw new Error("fixture")
-    const result = calculateStaticDamageFromCatalog({
-      ...input,
-      actorSources: [
-        ...input.actorSources,
-        { entityId: "entity:source", agentEntityId: "1311" },
-      ],
-      snapshots: [
-        {
-          snapshotId: "snapshot:history",
-          atSeconds: 0,
-          world: {
-            ...input.world,
-            entities: [
-              ...input.world.entities,
+  it.each(["entity:attacker", "entity:source"] as const)(
+    "keeps saved anomaly attributes and level independent of current %s values",
+    (sourceEntityId) => {
+      const input = anomalyInput(fixture())
+      if (input.damage.kind !== "anomaly") throw new Error("fixture")
+      const request: StaticCatalogDamageInput = {
+        ...input,
+        actorSources: [
+          ...input.actorSources,
+          ...(sourceEntityId === "entity:source"
+            ? [{ entityId: sourceEntityId, agentEntityId: "1311" }]
+            : []),
+        ],
+        snapshots: [
+          {
+            snapshotId: "snapshot:history",
+            atSeconds: 0,
+            world: {
+              ...input.world,
+              entities: [
+                ...input.world.entities,
+                {
+                  kind: "actor",
+                  entityId: "entity:source",
+                  teamId: "team:players",
+                  generalStats: { attack: general(9000) },
+                  directStats: {},
+                },
+              ],
+            },
+            attributes: [
               {
-                kind: "actor",
-                entityId: "entity:source",
-                teamId: "team:players",
-                generalStats: { attack: general(9000) },
-                directStats: {},
+                entityId: sourceEntityId,
+                stat: "attack",
+                stage: "current",
+                value: { unit: "attack-points", value: 2500 },
+              },
+              {
+                entityId: sourceEntityId,
+                stat: "anomalyProficiency",
+                stage: "current",
+                value: { unit: "anomaly-proficiency-points", value: 400 },
+              },
+              {
+                entityId: sourceEntityId,
+                stat: "penetrationRatio",
+                stage: "current",
+                value: { unit: "ratio", value: 0.5 },
               },
             ],
           },
-          attributes: [
+        ],
+        hit: {
+          ...input.hit,
+          damageItems: [
             {
-              entityId: "entity:source",
-              stat: "attack",
-              stage: "current",
-              value: { unit: "attack-points", value: 2500 },
-            },
-            {
-              entityId: "entity:source",
-              stat: "anomalyProficiency",
-              stage: "current",
-              value: { unit: "anomaly-proficiency-points", value: 400 },
+              ...input.hit.damageItems[0],
+              statSource: {
+                entityId: sourceEntityId,
+                snapshotId: "snapshot:history",
+              },
             },
           ],
         },
-      ],
-      hit: {
-        ...input.hit,
-        damageItems: [
-          {
-            ...input.hit.damageItems[0],
-            statSource: {
-              entityId: "entity:source",
-              snapshotId: "snapshot:history",
-            },
+        damage: {
+          ...input.damage,
+          anomalySource: {
+            entityId: sourceEntityId,
+            snapshotId: "snapshot:history",
+            level: 50,
           },
-        ],
-      },
-      damage: {
-        ...input.damage,
-        anomalySource: {
-          entityId: "entity:source",
-          snapshotId: "snapshot:history",
-          level: 50,
         },
-      },
-    })
-    expect(result.ok).toBe(true)
-    if (result.ok) {
-      expect(result.value.factors.nonCritical["baseDamage"]).toBe(5000)
-      expect(result.value.factors.nonCritical["anomalyProficiency"]).toBe(4)
-    }
-  })
+      }
+      const result = calculateStaticDamageFromCatalog(request)
+      expect(result.ok, JSON.stringify(result)).toBe(true)
+      if (result.ok) {
+        expect(result.value.factors.nonCritical["baseDamage"]).toBe(5000)
+        expect(result.value.factors.nonCritical["anomalyProficiency"]).toBe(4)
+        const levelBase = calculateDefenseLevelBase(50)
+        expect(result.value.factors.nonCritical["defense"]).toBeCloseTo(
+          levelBase / (levelBase + 1000 * (1 - 0.5)),
+          12,
+        )
+        expect(result.value.evaluation.attributes).toContainEqual(
+          expect.objectContaining({
+            entityId: sourceEntityId,
+            snapshotId: "snapshot:history",
+            stat: "penetrationRatio",
+            value: { unit: "ratio", value: 0.5 },
+          }),
+        )
+        const changedCurrent = calculateStaticDamageFromCatalog({
+          ...request,
+          world: {
+            ...request.world,
+            entities: request.world.entities.map((entity) =>
+              entity.kind === "actor" && entity.entityId === input.hit.actorId
+                ? {
+                    ...entity,
+                    directStats: {
+                      criticalRate: entity.directStats.criticalRate!,
+                    },
+                  }
+                : entity,
+            ),
+          },
+        })
+        expect(changedCurrent.ok, JSON.stringify(changedCurrent)).toBe(true)
+        if (changedCurrent.ok)
+          expect(changedCurrent.value.expected).toBe(result.value.expected)
+      }
+      const missingPenetration = calculateStaticDamageFromCatalog({
+        ...request,
+        snapshots: request.snapshots!.map((snapshot) => ({
+          ...snapshot,
+          attributes: snapshot.attributes.filter(
+            (attribute) => attribute.stat !== "penetrationRatio",
+          ),
+        })),
+      })
+      expect(missingPenetration).toMatchObject({
+        ok: false,
+        issues: [{ code: "MISSING_SNAPSHOT" }],
+      })
+    },
+  )
   it("leaves a known missing rank irrelevant until selected", () => {
     const input = changeVariant(
       fixture([contribution("base-multiplier-increase", 0.2)]),

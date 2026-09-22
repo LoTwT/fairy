@@ -9828,7 +9828,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -15012,7 +15012,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex"]
           }
         ]
       },
@@ -15092,7 +15092,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex"]
           }
         ]
       },
@@ -15182,7 +15182,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex"]
           }
         ]
       },
@@ -15302,7 +15302,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex"]
           },
           {
             "kind": "one-of",
@@ -15380,7 +15380,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex"]
           },
           {
             "kind": "one-of",
@@ -15718,7 +15718,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex"]
           }
         ]
       },
@@ -15791,7 +15791,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -21323,7 +21323,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -21396,7 +21396,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -26393,7 +26393,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           },
           {
             "kind": "one-of",
@@ -26758,7 +26758,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -27096,7 +27096,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -27308,7 +27308,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -27562,7 +27562,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -38775,7 +38775,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           },
           {
             "kind": "one-of",
@@ -39195,7 +39195,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           },
           {
             "kind": "one-of",
@@ -39278,7 +39278,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           },
           {
             "kind": "one-of",
@@ -41382,7 +41382,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -41462,7 +41462,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -47133,7 +47133,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -47900,7 +47900,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -66349,7 +66349,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -68321,7 +68321,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           },
           {
             "kind": "one-of",
@@ -69346,7 +69346,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -69554,7 +69554,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -69762,7 +69762,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -69970,7 +69970,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },
@@ -70178,7 +70178,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly"]
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
           }
         ]
       },

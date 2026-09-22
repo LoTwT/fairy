@@ -30275,7 +30275,7 @@
       "channel": "anomaly-damage-bonus",
       "unit": "ratio",
       "scale": 0.01,
-      "damageKinds": ["anomaly"]
+      "damageKinds": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
     },
     "disorderDmgBonus": {
       "channel": "anomaly-damage-bonus",
@@ -30299,13 +30299,13 @@
       "channel": "anomaly-critical-rate",
       "unit": "ratio",
       "scale": 0.01,
-      "damageKinds": ["anomaly"]
+      "damageKinds": ["anomaly", "anomaly-settlement", "vortex"]
     },
     "anomalyCritDmg": {
       "channel": "anomaly-critical-damage",
       "unit": "ratio",
       "scale": 0.01,
-      "damageKinds": ["anomaly"]
+      "damageKinds": ["anomaly", "anomaly-settlement", "vortex"]
     },
     "anomalyReleaseCritRate": {
       "channel": "anomaly-critical-rate",

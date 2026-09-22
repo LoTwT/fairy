@@ -1414,6 +1414,14 @@ export function calculateStaticDamageFromCatalog(
   const { skillTargetIds: _targets, ...lowHit } = input.hit
   const anomalySource =
     "anomalySource" in input.damage ? input.damage.anomalySource : undefined
+  const anomalyAttributeSource = anomalySource
+    ? {
+        entityId: anomalySource.entityId,
+        ...(anomalySource.snapshotId
+          ? { snapshotId: anomalySource.snapshotId }
+          : {}),
+      }
+    : undefined
   const definitions = {
     ...parsed.value,
     effects: parsed.value.effects.map((rule): EffectRule => {
@@ -1450,15 +1458,11 @@ export function calculateStaticDamageFromCatalog(
     hit: {
       ...lowHit,
       skillTags: [...tags],
-      ...(anomalySource
+      ...(anomalyAttributeSource
         ? {
             attributeSources: {
-              anomalyProficiency: {
-                entityId: anomalySource.entityId,
-                ...(anomalySource.snapshotId
-                  ? { snapshotId: anomalySource.snapshotId }
-                  : {}),
-              },
+              anomalyProficiency: anomalyAttributeSource,
+              penetrationRatio: anomalyAttributeSource,
             },
           }
         : {}),

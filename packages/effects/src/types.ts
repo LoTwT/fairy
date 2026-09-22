@@ -1394,6 +1394,7 @@ export type StaticCatalogDamageParameters =
               readonly refringe:
                 | { readonly mode: "from-effects" }
                 | { readonly mode: "settled"; readonly multiplier: number }
+              /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
               readonly anomalySource: AttributeSource & {
                 readonly level: number
               }
