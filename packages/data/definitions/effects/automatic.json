@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "ruleSetId": "automatic-effects",
+  "revision": "1",
+  "effects": [
+    {
+      "kind": "instant",
+      "effectId": "w-engine:14131:energy-on-entry",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14131"
+        },
+        "section": "weapon-effect",
+        "references": [
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "zzz/3.1/zh/weapon/14131.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "zzz/3.1/zh/weapon/14131.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "zzz/3.1/zh/weapon/14131.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "zzz/3.1/zh/weapon/14131.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "zzz/3.1/zh/weapon/14131.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "en",
+            "resourcePath": "zzz/3.1/en/weapon/14131.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "en",
+            "resourcePath": "zzz/3.1/en/weapon/14131.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "en",
+            "resourcePath": "zzz/3.1/en/weapon/14131.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "en",
+            "resourcePath": "zzz/3.1/en/weapon/14131.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-zzz",
+            "version": "3.1",
+            "locale": "en",
+            "resourcePath": "zzz/3.1/en/weapon/14131.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "parameters": {
+        "energy": {
+          "kind": "by-rank",
+          "unit": "energy-points",
+          "rank": "refinement",
+          "values": {
+            "1": 5,
+            "2": 5.5,
+            "3": 6,
+            "4": 6.5,
+            "5": 7
+          }
+        }
+      },
+      "trigger": {
+        "eventKinds": ["entry"],
+        "when": {
+          "kind": "same-team",
+          "left": {
+            "role": "triggerActor"
+          },
+          "right": {
+            "role": "holder"
+          }
+        },
+        "cooldown": {
+          "groupId": "elegant-vanity-energy",
+          "partition": "binding",
+          "seconds": {
+            "kind": "literal",
+            "unit": "seconds",
+            "value": 5
+          }
+        }
+      },
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "operation": {
+        "kind": "resource-generation",
+        "resource": "energy",
+        "amount": {
+          "kind": "parameter",
+          "unit": "energy-points",
+          "name": "energy"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "actions": []
+}

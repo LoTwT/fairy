@@ -81,6 +81,8 @@ it("consumes the offline-installed package in real Vite development and producti
     >
     const expectedGraph = [
       "index.json",
+      "definitions/effects/starter.json",
+      "definitions/effects/automatic.json",
       ...Object.entries(publishedEntities).flatMap(([category, entity]) =>
         entity.memberIds.flatMap((id) => [
           `${category}/${id}/data.json`,
@@ -98,6 +100,10 @@ it("consumes the offline-installed package in real Vite development and producti
       join(consumerDirectory, "main.js"),
       `import * as api from "@randomplay/data"
 globalThis.fairy = api
+globalThis.fairyDefinitions = {
+  starter: () => import("@randomplay/data/definitions/effects/starter.json"),
+  automatic: () => import("@randomplay/data/definitions/effects/automatic.json"),
+}
 globalThis.fairyDirectDriveDisc = {
   data: () => import("@randomplay/data/integrated/drive-discs/${directDiscId}/data.json"),
   zh: () => import("@randomplay/data/integrated/drive-discs/${directDiscId}/details.zh.json"),
@@ -142,8 +148,16 @@ document.body.append("ready")
               if (output.type === "chunk")
                 chunkSources[file] = Object.keys(output.modules).flatMap(
                   (id) => {
-                    const match = id.match(/\/dist\/integrated\/(.+\.json)$/u)
-                    return match ? [match[1]] : []
+                    const match = id.match(
+                      /\/dist\/(integrated|definitions)\/(.+\.json)$/u,
+                    )
+                    return match
+                      ? [
+                          match[1] === "definitions"
+                            ? `definitions/${match[2]}`
+                            : match[2],
+                        ]
+                      : []
                   },
                 )
             }
@@ -323,12 +337,16 @@ document.body.append("ready")
 function devModuleSources(body: string, pathname: string): string[] {
   const comments = [
     ...body.matchAll(
-      /^\/\/(?:#region)? .*\/dist\/integrated\/(.+\.json)\s*$/gmu,
+      /^\/\/(?:#region)? .*\/dist\/(integrated|definitions)\/(.+\.json)\s*$/gmu,
     ),
-  ].map((match) => match[1])
+  ].map((match) =>
+    match[1] === "definitions" ? `definitions/${match[2]}` : match[2],
+  )
   if (comments.length) return comments
-  const match = pathname.match(/\/dist\/integrated\/(.+\.json)$/u)
-  return match ? [match[1]] : []
+  const match = pathname.match(/\/dist\/(integrated|definitions)\/(.+\.json)$/u)
+  return match
+    ? [match[1] === "definitions" ? `definitions/${match[2]}` : match[2]]
+    : []
 }
 
 /** 各类别实体各自的冷启动验收步骤；有效读取只触达本类别，非法参数不触发任何数据加载。 */
@@ -402,6 +420,61 @@ function defineScenarios(counts: {
     })
   }
   return [
+    {
+      name: "definitions",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        ...(["automatic", "starter"] as const).map(
+          (name): ScenarioStep => ({
+            name,
+            act: async (page) => {
+              expect(
+                await page.evaluate(async (ruleSetName) => {
+                  const rules = (
+                    await (globalThis as any).fairyDefinitions[ruleSetName]()
+                  ).default
+                  return {
+                    schemaVersion: rules.schemaVersion,
+                    ruleSetId: rules.ruleSetId,
+                    revision: rules.revision,
+                    effects: rules.effects.map(
+                      (effect: any) => effect.effectId,
+                    ),
+                  }
+                }, name),
+              ).toEqual({
+                schemaVersion: 1,
+                ruleSetId: `${name}-effects`,
+                revision: "1",
+                effects:
+                  name === "automatic"
+                    ? ["w-engine:14131:energy-on-entry"]
+                    : [
+                        "agent:1311:core:attack-conversion",
+                        "agent:1311:mindscape-2:core-enhancement",
+                        "disc:31000:two-piece:critical-rate",
+                      ],
+              })
+            },
+            sources: [`definitions/effects/${name}.json`],
+          }),
+        ),
+        {
+          name: "repeat",
+          act: async (page) => {
+            await page.evaluate(async () => {
+              await (globalThis as any).fairyDefinitions.automatic()
+              await (globalThis as any).fairyDefinitions.starter()
+            })
+          },
+          sources: [],
+        },
+      ],
+    },
     {
       name: "agents",
       steps: [
