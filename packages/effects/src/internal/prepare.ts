@@ -81,8 +81,18 @@ export function evaluateConfigurationExpression(
   switch (expression.kind) {
     case "literal":
       return expression.value
-    case "parameter":
-      return parameters.get(expression.name)?.value ?? 0
+    case "parameter": {
+      const parameter = parameters.get(expression.name)
+      if (parameter === undefined) {
+        collector.report(
+          "MISSING_RANK",
+          "",
+          `Parameter "${expression.name}" has no value for the selected rank`,
+        )
+        return Number.NaN
+      }
+      return parameter.value
+    }
     case "configuration-number":
       return configuration[expression.field] ?? 0
     case "add":
@@ -116,6 +126,14 @@ export function evaluateConfigurationExpression(
         (product, operand) => product * operand,
         collector,
         "A configuration-stage product",
+      )
+    case "convert":
+      return foldFiniteValues(
+        [evaluate(expression.input), evaluate(expression.rate)],
+        1,
+        (product, operand) => product * operand,
+        collector,
+        "A configuration-stage conversion",
       )
   }
 }
@@ -233,20 +251,39 @@ export function resolveParameters(
       continue
     }
     const rankValue = configuration[parameter.rank]
-    if (rankValue === undefined) {
-      throw new Error(
-        `Binding configuration does not provide rank field "${parameter.rank}" required by parameter "${name}"`,
-      )
-    }
+    if (rankValue === undefined) continue
     const value = parameter.values[String(rankValue)]
     if (value === undefined) {
-      throw new Error(
-        `Parameter "${name}" has no value for rank tier ${String(rankValue)}`,
-      )
+      continue
     }
     resolved.set(name, { unit: parameter.unit, value })
   }
   return resolved
+}
+
+function reportMissingRanks(
+  parameters: Readonly<Record<string, import("../types.ts").AnyParameter>>,
+  configuration: Readonly<Record<string, number>>,
+  collector: IssueCollector,
+  pointer: string,
+  identity: { readonly bindingId: BindingId; readonly effectId?: EffectId },
+): void {
+  for (const [name, parameter] of Object.entries(parameters)) {
+    if (parameter.kind === "constant") continue
+    const tier = configuration[parameter.rank]
+    if (
+      (parameter.values as Readonly<Record<string, number>>)[String(tier)] ===
+      undefined
+    ) {
+      const key = name.replaceAll("~", "~0").replaceAll("/", "~1")
+      collector.report(
+        "MISSING_RANK",
+        `${pointer}/${key}/values/${String(tier)}`,
+        `Parameter "${name}" has no confirmed value for ${parameter.rank} ${String(tier)}`,
+        identity,
+      )
+    }
+  }
 }
 
 /** 数值变换：set → add → scale，公式为 (set 或原值 + Σadd) × Πscale。 */
@@ -395,6 +432,27 @@ function deepFreeze(value: unknown): void {
 export function prepareEffects(
   definitions: RuleSet,
   bindings: readonly SourceBinding[],
+): ResultPreparation {
+  return prepareEffectsWithSelection(definitions, bindings)
+}
+
+type ResultPreparation =
+  | { readonly ok: true; readonly value: PreparedEffects }
+  | ReturnType<typeof failure>
+
+/** 静态入口只对选中 supplied 规则、continuous 规则和相关修改选参。 */
+export function prepareSelectedEffects(
+  definitions: RuleSet,
+  bindings: readonly SourceBinding[],
+  selections: ReadonlySet<string>,
+): ResultPreparation {
+  return prepareEffectsWithSelection(definitions, bindings, selections)
+}
+
+function prepareEffectsWithSelection(
+  definitions: RuleSet,
+  bindings: readonly SourceBinding[],
+  selections?: ReadonlySet<string>,
 ):
   | { readonly ok: true; readonly value: PreparedEffects }
   | ReturnType<typeof failure> {
@@ -443,17 +501,50 @@ export function prepareEffects(
   )
 
   const activeRulesByBinding = new Map<BindingId, readonly ActiveRule[]>()
+  const selectedContribution = (
+    rule: EffectRule,
+    binding: SourceBinding,
+  ): boolean =>
+    rule.kind === "contribution" &&
+    (rule.activation.kind === "continuous" ||
+      selections!.has(JSON.stringify([binding.bindingId, rule.effectId])))
   for (const binding of ownedBindings) {
     if (!binding.eligible) {
       continue
     }
     const matched: ActiveRule[] = []
-    for (const rule of ownedRuleSet.effects) {
+    for (const [ruleIndex, rule] of ownedRuleSet.effects.entries()) {
       if (
         rule.source.identity.kind !== binding.kind ||
         rule.source.identity.entityId !== binding.sourceEntityId
       ) {
         continue
+      }
+      if (selections !== undefined) {
+        if (rule.kind === "instant") continue
+        if (
+          rule.kind === "contribution" &&
+          !selectedContribution(rule, binding)
+        )
+          continue
+        if (rule.kind === "modification" && rule.target.kind === "effect") {
+          const targetId = rule.target.effectId
+          const target = ownedRuleSet.effects.find(
+            (candidate) => candidate.effectId === targetId,
+          )
+          if (
+            target === undefined ||
+            !ownedBindings.some(
+              (candidate) =>
+                candidate.eligible &&
+                candidate.holderId === binding.holderId &&
+                candidate.kind === target.source.identity.kind &&
+                candidate.sourceEntityId === target.source.identity.entityId &&
+                selectedContribution(target, candidate),
+            )
+          )
+            continue
+        }
       }
       const resolved = resolveParameters(
         rule.parameters as never,
@@ -469,10 +560,18 @@ export function prepareEffects(
       ) {
         continue
       }
+      reportMissingRanks(
+        rule.parameters,
+        binding.configuration as Readonly<Record<string, number>>,
+        collector,
+        `/effects/${ruleIndex}/parameters`,
+        { effectId: rule.effectId, bindingId: binding.bindingId },
+      )
       matched.push({ rule, binding, parameters: resolved })
     }
     activeRulesByBinding.set(binding.bindingId, matched)
   }
+  if (!collector.isEmpty) return failure(collector)
 
   const rulesByEffectId = new Map<string, EffectRule>()
   for (const rule of ownedRuleSet.effects) {
@@ -709,14 +808,20 @@ export function prepareEffects(
           Record<string, number>
         >
         const activation = active.rule.activation
-        const resolvedLayerMaximum =
+        const layerMaximum =
           activation.kind === "triggered"
+            ? activation.layering.maximum
+            : activation.kind === "supplied"
+              ? activation.maximumLayers
+              : undefined
+        const resolvedLayerMaximum =
+          layerMaximum !== undefined
             ? resolveConfigurationInteger(
-                activation.layering.maximum,
+                layerMaximum,
                 foldedParameters,
                 bindingConfiguration,
                 collector,
-                `${effectPointer(active.rule.effectId)}/activation/layering/maximum`,
+                `${effectPointer(active.rule.effectId)}/activation/${activation.kind === "triggered" ? "layering/maximum" : "maximumLayers"}`,
                 `Layer maximum of "${active.rule.effectId}"`,
                 { effectId: active.rule.effectId, bindingId },
                 "positive",
@@ -869,6 +974,13 @@ export function prepareEffects(
       const resolved = resolveParameters(
         state.parameters as never,
         binding.configuration as Readonly<Record<string, number>>,
+      )
+      reportMissingRanks(
+        state.parameters,
+        binding.configuration as Readonly<Record<string, number>>,
+        collector,
+        `/states/${ownedRuleSet.states.indexOf(state)}/parameters`,
+        { bindingId: binding.bindingId },
       )
       const fold = stateFolds.get(`${binding.holderId}\u0000${state.stateId}`)
       const parameters: Record<string, Quantity<Unit>> = {}

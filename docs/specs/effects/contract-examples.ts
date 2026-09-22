@@ -1446,7 +1446,7 @@ export type RejectedCombinations = [
         kind: "by-rank"
         unit: "ratio"
         rank: "refinement"
-        values: { 1: 0.1 }
+        values: { 6: 0.1 }
       },
       Parameter<"ratio">
     >

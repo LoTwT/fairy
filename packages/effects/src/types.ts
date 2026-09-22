@@ -126,19 +126,19 @@ export type Parameter<U extends Unit> =
       readonly kind: "by-rank"
       readonly unit: U
       readonly rank: "coreSkillLevel"
-      readonly values: Readonly<Record<CoreSkillLevel, number>>
+      readonly values: Readonly<Partial<Record<CoreSkillLevel, number>>>
     }
   | {
       readonly kind: "by-rank"
       readonly unit: U
       readonly rank: "mindscapeRank"
-      readonly values: Readonly<Record<MindscapeRank, number>>
+      readonly values: Readonly<Partial<Record<MindscapeRank, number>>>
     }
   | {
       readonly kind: "by-rank"
       readonly unit: U
       readonly rank: "refinement"
-      readonly values: Readonly<Record<RefinementRank, number>>
+      readonly values: Readonly<Partial<Record<RefinementRank, number>>>
     }
 
 export type AnyParameter = { [U in Unit]: Parameter<U> }[Unit]
@@ -209,6 +209,16 @@ export type NumericExpression<U extends Unit, P extends Phase> =
     }
   | StatRead<U, P>
   | NumericFact<U, P>
+  | (P extends "contribution"
+      ? { readonly kind: "input"; readonly unit: U; readonly name: string }
+      : never)
+  | {
+      /** rate 表示每一 input 单位对应多少输出单位；不会隐式换算百分数。 */
+      readonly kind: "convert"
+      readonly unit: U
+      readonly input: NumericExpression<Unit, P>
+      readonly rate: NumericExpression<"multiplier", P>
+    }
   | {
       readonly kind: "add" | "minimum" | "maximum"
       readonly unit: U
@@ -225,6 +235,8 @@ export type NumericExpression<U extends Unit, P extends Phase> =
 
 export type SkillCategory =
   | "basic"
+  | "dash"
+  | "follow-up"
   | "dodge-counter"
   | "enhanced-special"
   | "special"
@@ -233,6 +245,24 @@ export type SkillCategory =
   | "quick-assist"
   | "defensive-assist"
   | "evasive-assist"
+
+export type DamageElement =
+  | "physical"
+  | "fire"
+  | "ice"
+  | "electric"
+  | "ether"
+  | "wind"
+  | "auric-ink"
+  | "frost"
+export type DamageKind =
+  | "regular"
+  | "sheer"
+  | "anomaly"
+  | "disorder"
+  | "vortex"
+  | "anomaly-settlement"
+  | "luminize"
 
 export type EntryAction =
   | "quick-assist"
@@ -257,6 +287,10 @@ interface EnumFactMap {
   readonly "hit.actionId": ActionId
   readonly "hit.skillCategory": SkillCategory
   readonly "hit.originEffectId": EffectId | null
+  readonly "hit.element": DamageElement
+  readonly "hit.damageKind": DamageKind
+  readonly "hit.skillTag": string
+  readonly "hit.targetState": "stunned" | "not-stunned"
 }
 
 type EnumFactFor<P extends Phase> = P extends "trigger"
@@ -266,7 +300,14 @@ type EnumFactFor<P extends Phase> = P extends "trigger"
       | "event.skillCategory"
       | "event.followupActionId"
   : P extends "contribution"
-    ? "hit.actionId" | "hit.skillCategory" | "hit.originEffectId"
+    ?
+        | "hit.actionId"
+        | "hit.skillCategory"
+        | "hit.originEffectId"
+        | "hit.element"
+        | "hit.damageKind"
+        | "hit.skillTag"
+        | "hit.targetState"
     : never
 
 type EnumCondition<P extends Phase> = {
@@ -358,25 +399,45 @@ export type StatOperation = {
 }[Stat]
 
 /** 当前登记通道；新增通道必须同时补齐 execution.md 的适配与归约约定。 */
-export type FactorChannel =
-  | "damage-bonus"
-  | "daze-dealt-increase"
-  | "daze-dealt-reduction"
-  | "target-resistance-reduction"
-  | "attacker-resistance-ignore"
-  | "energy-generation-rate"
+export interface FactorChannelUnitMap {
+  readonly "damage-bonus": "ratio"
+  readonly "daze-dealt-increase": "ratio"
+  readonly "daze-dealt-reduction": "ratio"
+  readonly "target-resistance-reduction": "ratio"
+  readonly "attacker-resistance-ignore": "ratio"
+  readonly "energy-generation-rate": "ratio"
+  readonly "target-defense-adjustment": "ratio"
+  readonly "attacker-penetration-value": "defense-points"
+  readonly "damage-taken-increase": "ratio"
+  readonly "damage-taken-reduction": "ratio"
+  readonly "stun-damage-adjustment": "multiplier"
+  readonly "sheer-damage-bonus": "ratio"
+  readonly "anomaly-damage-bonus": "ratio"
+  readonly "anomaly-critical-rate": "ratio"
+  readonly "anomaly-critical-damage": "ratio"
+  readonly "luminize-multiplier-addition": "multiplier"
+  readonly "luminize-multiplier-scale": "multiplier"
+  readonly "refringe-coefficient-increase": "ratio"
+}
+export type FactorChannel = keyof FactorChannelUnitMap
+
+type FactorOperation = {
+  [C in FactorChannel]: {
+    readonly kind: "factor-contribution"
+    readonly channel: C
+    readonly value: NumericExpression<FactorChannelUnitMap[C], "contribution">
+  }
+}[FactorChannel]
 
 export type ContributionOperation =
   | StatOperation
-  | {
-      readonly kind: "factor-contribution"
-      readonly channel: FactorChannel
-      readonly value: NumericExpression<"ratio", "contribution">
-    }
+  | FactorOperation
   | {
       readonly kind: "hit-adjustment"
       readonly field: "damageMultiplier"
-      readonly operator: "scale"
+      readonly operator: "add" | "scale"
+      /** 省略时作用于全部基础伤害项。 */
+      readonly itemIds?: NonEmpty<string>
       readonly value: NumericExpression<"multiplier", "contribution">
     }
 
@@ -435,6 +496,9 @@ export type Activation =
     }
   | {
       readonly kind: "supplied"
+      readonly maximumLayers?: NumericExpression<"count", "configuration">
+      /** 同一来源绑定中，同组只能选择一条规则。 */
+      readonly exclusiveGroup?: string
       readonly trigger?: never
       readonly lifetime?: never
       readonly layering?: never
@@ -773,6 +837,11 @@ export interface HitContext {
   readonly actorId: EntityId
   readonly targetId: EntityId
   readonly skillCategory: SkillCategory
+  /** 旧调用方可省略；规则读取缺失事实时返回 MISSING_FACT。 */
+  readonly element?: DamageElement
+  readonly damageKind?: DamageKind
+  readonly skillTags?: readonly string[]
+  readonly targetState?: "stunned" | "not-stunned"
   readonly actionSnapshotId: SnapshotId
   readonly origin:
     | { readonly kind: "direct" }
@@ -832,18 +901,126 @@ export type EvaluationInput = {
   readonly atSeconds: number
   readonly world: WorldObservation
   readonly observedSnapshots: readonly SavedSnapshot[]
+  readonly inputs?: readonly EffectNumericInput[]
 } & (
   | {
       readonly kind: "panel"
       readonly entities: NonEmpty<EntityId>
       readonly stats: NonEmpty<Stat>
     }
-  | { readonly kind: "hit"; readonly hit: HitContext }
+  | {
+      readonly kind: "hit"
+      readonly hit: HitContext
+      readonly stats?: NonEmpty<Stat>
+    }
   | {
       readonly kind: "contributions"
       readonly beneficiaries: NonEmpty<EntityId>
     }
 )
+
+/** 手工或施加时读取值；按来源绑定隔离，不使用规则中的默认预设。 */
+export interface EffectNumericInput {
+  readonly bindingId: BindingId
+  readonly name: string
+  readonly value: Quantity<Unit>
+}
+
+export interface StaticEffectSelection {
+  readonly effectId: EffectId
+  readonly bindingId: BindingId
+  readonly layers: number
+  /** 仅在规则确实读取触发角色或施加快照时提供。 */
+  readonly trigger?: TriggerContext
+}
+
+export type StaticHit = Pick<
+  HitContext,
+  | "actorId"
+  | "targetId"
+  | "actionId"
+  | "skillCategory"
+  | "skillTags"
+  | "damageItems"
+> & {
+  readonly element: DamageElement
+  readonly actionSnapshotId?: SnapshotId
+}
+
+export type StaticDefenseInput = Omit<
+  import("@randomplay/core").CalculateTargetEffectiveDefenseParams,
+  "penetrationRatios"
+> & {
+  readonly attackerLevel: number
+}
+
+interface StaticDamageCommon {
+  /** 均为尚未包含本次 effects 贡献的基线。 */
+  readonly resistance: import("@randomplay/core").ResistanceFactorInput
+  readonly damageTaken: import("@randomplay/core").DamageTakenFactorInput
+  readonly stunDamage: import("@randomplay/core").StunDamageFactorInput
+}
+
+interface StaticAnomalyCommon {
+  /** 已结算快照或特殊固定乘区可直接提供；此时不再叠加当前 damage-bonus。 */
+  readonly damageBonus:
+    | import("@randomplay/core").DamageBonusFactorInput
+    | { readonly settledMultiplier: number }
+  readonly defense: StaticDefenseInput
+  readonly anomalyDamageBonus: import("@randomplay/core").AnomalyDamageBonusFactorInput
+  readonly refringe: import("@randomplay/core").CalculateRefringeMultiplierParams
+}
+
+export type StaticDamageParameters = StaticDamageCommon &
+  (
+    | {
+        readonly kind: "regular"
+        readonly defense: StaticDefenseInput
+        readonly damageBonus: import("@randomplay/core").DamageBonusFactorInput
+      }
+    | {
+        readonly kind: "sheer"
+        readonly sheerDamageBonus: import("@randomplay/core").SheerDamageBonusFactorInput
+        readonly damageBonus: import("@randomplay/core").DamageBonusFactorInput
+      }
+    | (StaticAnomalyCommon & {
+        readonly kind: "anomaly" | "disorder" | "vortex" | "anomaly-settlement"
+        readonly anomalyCriticalRate: number
+        readonly anomalyCriticalDamage: readonly number[]
+      })
+    | (StaticAnomalyCommon & {
+        readonly kind: "luminize"
+        readonly luminizeMultiplier: import("@randomplay/core").LuminizeMultiplierFactorInput
+      })
+  )
+
+export interface StaticDamageInput {
+  readonly definitions: RuleSet
+  readonly bindings: readonly SourceBinding[]
+  /** 未选择的 supplied 效果关闭；continuous 规则仍由配置条件控制。 */
+  readonly selections: readonly StaticEffectSelection[]
+  readonly world: WorldObservation
+  readonly hit: StaticHit
+  readonly damage: StaticDamageParameters
+  readonly inputs?: readonly EffectNumericInput[]
+  readonly snapshots?: readonly SavedSnapshot[]
+  readonly atSeconds?: number
+}
+
+export interface StaticDamageResult {
+  readonly evaluation: EvaluationResult
+  readonly nonCritical: number
+  /** 当前 core 的 luminize 公式没有暴击分支。 */
+  readonly critical: number | null
+  readonly criticalRate: number
+  readonly expected: number
+  readonly factors: {
+    readonly nonCritical: Readonly<Record<string, number>>
+    readonly critical: Readonly<Record<string, number>> | null
+  }
+  /** 已求值但不属于本次伤害公式的通道，例如能量生成或失衡累积。 */
+  readonly notApplicableContributions: readonly ResolvedContribution[]
+}
 
 export interface ContributionOrigin {
   readonly effectId: EffectId
@@ -895,22 +1072,27 @@ type ResolvedStatOutput = {
 export type ResolvedOutput =
   | ResolvedStatOutput
   | {
-      readonly address: {
-        readonly kind: "factor"
-        readonly channel: FactorChannel
-        readonly entityId: EntityId
-        readonly hitId: HitId | null
+      [C in FactorChannel]: {
+        readonly address: {
+          readonly kind: "factor"
+          readonly channel: C
+          readonly entityId: EntityId
+          readonly hitId: HitId | null
+        }
+        readonly operator: C extends "luminize-multiplier-scale"
+          ? "scale"
+          : "add"
+        readonly value: Quantity<FactorChannelUnitMap[C]>
       }
-      readonly operator: "add"
-      readonly value: Quantity<"ratio">
-    }
+    }[FactorChannel]
   | {
       readonly address: {
         readonly kind: "hit"
         readonly hitId: HitId
         readonly field: "damageMultiplier"
+        readonly itemId?: string
       }
-      readonly operator: "scale"
+      readonly operator: "add" | "scale"
       readonly value: Quantity<"multiplier">
     }
 
@@ -963,6 +1145,7 @@ export type IssueCode =
   | "INVALID_INPUT"
   | "DUPLICATE_ID"
   | "MISSING_REFERENCE"
+  | "MISSING_RANK"
   | "UNIT_MISMATCH"
   | "INVALID_PHASE"
   | "INVALID_MODIFICATION"
@@ -1013,8 +1196,9 @@ export interface TransitionResult {
   readonly requests: readonly EventRequest[]
 }
 
-/** 纯函数接口契约；未提供实现，不承诺现有包已导出这些名称。 */
+/** 公开纯函数接口；全部实现由包入口导出。 */
 export interface EffectEngine {
+  calculateStaticDamage(input: StaticDamageInput): Result<StaticDamageResult>
   prepareEffects(
     definitions: RuleSet,
     bindings: readonly SourceBinding[],

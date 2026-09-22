@@ -34,6 +34,8 @@ import {
 import type { IssueCollector } from "./issues.ts"
 import {
   DIRECT_STATS,
+  FACTOR_CHANNELS,
+  FACTOR_CHANNEL_UNITS,
   SOURCE_CONFIGURATION_FIELDS,
   isEffectId,
   SOURCE_KINDS,
@@ -44,15 +46,6 @@ import {
   isRefinementRank,
   isSetPieceCount,
 } from "./vocabulary.ts"
-
-const FACTOR_CHANNELS = [
-  "damage-bonus",
-  "daze-dealt-increase",
-  "daze-dealt-reduction",
-  "target-resistance-reduction",
-  "attacker-resistance-ignore",
-  "energy-generation-rate",
-] as const
 
 const TARGET_SELECTOR_KINDS = [
   "holder",
@@ -632,7 +625,42 @@ function validateActivation(
         return undefined
       }
     }
-    rejectUnknownFields(object, ["kind"], checks, "activation")
+    if (kind === "supplied") {
+      if (
+        object["maximumLayers"] !== undefined &&
+        validateNumericExpression(
+          object["maximumLayers"],
+          expressionContextFor(
+            fields,
+            collector,
+            "configuration",
+            false,
+            knownStates,
+            knownActions,
+          ),
+          `${pointer}/maximumLayers`,
+          "count",
+        ) === undefined
+      )
+        return undefined
+      if (
+        object["exclusiveGroup"] !== undefined &&
+        expectNonEmptyString(
+          object["exclusiveGroup"],
+          { ...checks, pointer: `${pointer}/exclusiveGroup` },
+          "exclusive group",
+        ) === undefined
+      )
+        return undefined
+    }
+    rejectUnknownFields(
+      object,
+      kind === "supplied"
+        ? ["kind", "maximumLayers", "exclusiveGroup"]
+        : ["kind"],
+      checks,
+      "activation",
+    )
     return kind
   }
   for (const required of ["trigger", "lifetime", "layering"]) {
@@ -1015,7 +1043,7 @@ function validateContributionOperation(
             knownActions,
           ),
           `${pointer}/value`,
-          "ratio",
+          FACTOR_CHANNEL_UNITS[channel],
         ) === undefined
       ) {
         return false
@@ -1037,11 +1065,11 @@ function validateContributionOperation(
         )
         return false
       }
-      if (object["operator"] !== "scale") {
+      if (object["operator"] !== "scale" && object["operator"] !== "add") {
         checks.collector.report(
           checks.structureCode,
           `${pointer}/operator`,
-          'hit-adjustment operator must be "scale"',
+          'hit-adjustment operator must be "add" or "scale"',
         )
         return false
       }
@@ -1061,7 +1089,11 @@ function validateContributionOperation(
       if (multiplier === undefined) {
         return false
       }
-      if (multiplier.kind === "literal" && multiplier.value < 0) {
+      if (
+        object["operator"] === "scale" &&
+        multiplier.kind === "literal" &&
+        multiplier.value < 0
+      ) {
         checks.collector.report(
           "INVALID_DEFINITION",
           `${pointer}/value/value`,
@@ -1069,9 +1101,33 @@ function validateContributionOperation(
         )
         return false
       }
+      if (object["itemIds"] !== undefined) {
+        const itemIds = expectNonEmptyArray(
+          object["itemIds"],
+          { ...checks, pointer: `${pointer}/itemIds` },
+          "damage item identities",
+        )
+        if (itemIds === undefined) return false
+        const seen = new Set<string>()
+        for (const [index, itemId] of itemIds.entries()) {
+          const id = expectNonEmptyString(
+            itemId,
+            { ...checks, pointer: `${pointer}/itemIds/${index}` },
+            "damage item identity",
+          )
+          if (id === undefined) return false
+          if (seen.has(id))
+            collector.report(
+              "DUPLICATE_ID",
+              `${pointer}/itemIds/${index}`,
+              `Duplicate damage item identity "${id}"`,
+            )
+          seen.add(id)
+        }
+      }
       rejectUnknownFields(
         object,
-        ["kind", "field", "operator", "value"],
+        ["kind", "field", "operator", "itemIds", "value"],
         checks,
         "hit-adjustment",
       )

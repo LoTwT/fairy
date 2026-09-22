@@ -61,14 +61,14 @@ describe("parseEffectRuleSet rejects invalid definitions", () => {
     expectIssue(result, "DUPLICATE_ID")
   })
 
-  it("rejects a rank table that misses declared tiers", () => {
+  it("accepts a nonempty rank table with only known tiers", () => {
     const result = parseModifiedRuleSet((ruleSet) => {
       const core = ruleSet.effects[0]! as {
         parameters: { ratio: { values: Record<string, number> } }
       }
       delete core.parameters.ratio.values["7"]
     })
-    expectIssue(result, "INVALID_DEFINITION")
+    expect(result.ok).toBe(true)
   })
 
   it("rejects a rank kind the source cannot provide", () => {

@@ -611,6 +611,8 @@ export function validateGroupLayerCounts(
   collector: IssueCollector,
 ): void {
   const counts = new Map<string, number>()
+  const exclusive = new Map<string, string>()
+  const suppliedCounts = new Map<string, number>()
   for (const instance of instances) {
     const key = instanceGroupKey(instance)
     counts.set(key, (counts.get(key) ?? 0) + instance.layers.length)
@@ -622,6 +624,38 @@ export function validateGroupLayerCounts(
         contribution.bindingId === instance.bindingId,
     )
     if (entry === undefined) {
+      continue
+    }
+    if (entry.rule.activation.kind === "supplied") {
+      const group = entry.rule.activation.exclusiveGroup
+      if (group !== undefined) {
+        const groupKey = JSON.stringify([instance.bindingId, group])
+        const previous = exclusive.get(groupKey)
+        if (previous !== undefined && previous !== instance.effectId) {
+          collector.report(
+            "UNIQUENESS_CONFLICT",
+            "/instances",
+            `Supplied group "${group}" allows only one effect under binding "${instance.bindingId}"`,
+          )
+        }
+        exclusive.set(groupKey, instance.effectId)
+      }
+      for (const beneficiary of instance.beneficiaryIds) {
+        const key = JSON.stringify([
+          instance.bindingId,
+          instance.effectId,
+          beneficiary,
+        ])
+        const count = (suppliedCounts.get(key) ?? 0) + instance.layers.length
+        suppliedCounts.set(key, count)
+        if (count > entry.resolvedLayerMaximum) {
+          collector.report(
+            "INVALID_INPUT",
+            "/instances",
+            `Supplied effect "${instance.effectId}" exceeds its layer maximum of ${entry.resolvedLayerMaximum}`,
+          )
+        }
+      }
       continue
     }
     if (entry.rule.activation.kind !== "triggered") {

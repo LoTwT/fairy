@@ -1,0 +1,547 @@
+{
+  "revision": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+  "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+  "oracle": {
+    "resourcePath": "zzz-hp/src/utils/buffEffect.ts",
+    "functions": ["resolveConvertValue", "resolveEffectBaseValue"],
+    "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+    "method": "Unmodified upstream function bodies, extracted with TypeScript AST; original roundCalc and skill-key dependencies."
+  },
+  "conversions": [
+    {
+      "id": "qingyi",
+      "pointer": "/agents/58/mindscapeBuffs/0/effectBlocks/2/effects/0",
+      "effect": {
+        "id": "eff-ms4b9fw6-990jlw",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "self",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "convert",
+        "stat": "atk",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 1,
+        "valuePerStack": 0,
+        "defaultStacks": 1,
+        "convert": {
+          "from": "impact",
+          "panelSource": "final",
+          "ratioPercent": 600,
+          "cap": null,
+          "defaultBase": null,
+          "initialBase": 120
+        },
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "input": 0,
+          "upstream": 0
+        },
+        {
+          "input": 120,
+          "upstream": 0
+        },
+        {
+          "input": 170,
+          "upstream": 300
+        },
+        {
+          "input": 220,
+          "upstream": 600
+        }
+      ]
+    },
+    {
+      "id": "jane",
+      "pointer": "/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "effect": {
+        "id": "legacy-self-atk",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "self",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "convert",
+        "stat": "atk",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 1,
+        "valuePerStack": 0,
+        "defaultStacks": 1,
+        "convert": {
+          "from": "mastery",
+          "panelSource": "final",
+          "ratioPercent": 200,
+          "cap": 600,
+          "defaultBase": null,
+          "initialBase": 120
+        },
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "input": 100,
+          "upstream": 0
+        },
+        {
+          "input": 120,
+          "upstream": 0
+        },
+        {
+          "input": 200,
+          "upstream": 160
+        },
+        {
+          "input": 420,
+          "upstream": 600
+        },
+        {
+          "input": 500,
+          "upstream": 600
+        }
+      ]
+    },
+    {
+      "id": "lighter",
+      "pointer": "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1",
+      "effect": {
+        "id": "eff-ms4atnfh-29yr0r",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "team",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": ["火", "冰"],
+        "kind": "convert",
+        "stat": "dmgBonus",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 1,
+        "valuePerStack": 0,
+        "defaultStacks": 1,
+        "convert": {
+          "from": "impact",
+          "panelSource": "manual",
+          "ratioPercent": 50,
+          "cap": 50,
+          "defaultBase": 270,
+          "initialBase": 170
+        },
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "input": 100,
+          "upstream": 0
+        },
+        {
+          "input": 170,
+          "upstream": 0
+        },
+        {
+          "input": 200,
+          "upstream": 15
+        },
+        {
+          "input": 270,
+          "upstream": 50
+        },
+        {
+          "input": 300,
+          "upstream": 50
+        }
+      ]
+    },
+    {
+      "id": "lucia",
+      "pointer": "/agents/10/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "effect": {
+        "id": "eff-ms46h2gh-mbmhuc",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "team",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "convert",
+        "stat": "pierce",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 1,
+        "valuePerStack": 0,
+        "defaultStacks": 1,
+        "convert": {
+          "from": "hp",
+          "panelSource": "external",
+          "ratioPercent": 3.7,
+          "cap": 888,
+          "defaultBase": 24000,
+          "initialBase": 0
+        },
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "input": 0,
+          "upstream": 0
+        },
+        {
+          "input": 20000,
+          "upstream": 740
+        },
+        {
+          "input": 24000,
+          "upstream": 888
+        },
+        {
+          "input": 30000,
+          "upstream": 888
+        }
+      ]
+    }
+  ],
+  "refinements": [
+    {
+      "rank": 1,
+      "pointer": "/wengines/67/refinementBuffs/0/effectBlocks/0/effects/0",
+      "effect": {
+        "id": "legacy-team-dmgBonus",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "team",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "stacked",
+        "stat": "dmgBonus",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 2,
+        "valuePerStack": 10,
+        "defaultStacks": 2,
+        "appliesToAnomaly": true,
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "layers": 0,
+          "upstream": 0
+        },
+        {
+          "layers": 1,
+          "upstream": 10
+        },
+        {
+          "layers": 2,
+          "upstream": 20
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "pointer": "/wengines/67/refinementBuffs/1/effectBlocks/0/effects/0",
+      "effect": {
+        "id": "legacy-team-dmgBonus",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "team",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "stacked",
+        "stat": "dmgBonus",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 2,
+        "valuePerStack": 11.5,
+        "defaultStacks": 2,
+        "appliesToAnomaly": true,
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "layers": 0,
+          "upstream": 0
+        },
+        {
+          "layers": 1,
+          "upstream": 11.5
+        },
+        {
+          "layers": 2,
+          "upstream": 23
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+      "effect": {
+        "id": "legacy-team-dmgBonus",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "team",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "stacked",
+        "stat": "dmgBonus",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 2,
+        "valuePerStack": 13,
+        "defaultStacks": 2,
+        "appliesToAnomaly": true,
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "layers": 0,
+          "upstream": 0
+        },
+        {
+          "layers": 1,
+          "upstream": 13
+        },
+        {
+          "layers": 2,
+          "upstream": 26
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "pointer": "/wengines/67/refinementBuffs/3/effectBlocks/0/effects/0",
+      "effect": {
+        "id": "legacy-team-dmgBonus",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "team",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "stacked",
+        "stat": "dmgBonus",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 2,
+        "valuePerStack": 14.5,
+        "defaultStacks": 2,
+        "appliesToAnomaly": true,
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "layers": 0,
+          "upstream": 0
+        },
+        {
+          "layers": 1,
+          "upstream": 14.5
+        },
+        {
+          "layers": 2,
+          "upstream": 29
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "pointer": "/wengines/67/refinementBuffs/4/effectBlocks/0/effects/0",
+      "effect": {
+        "id": "legacy-team-dmgBonus",
+        "origin": "",
+        "scope": "general",
+        "applyTarget": "team",
+        "applySituation": "global",
+        "applyProfession": null,
+        "teamProfession": null,
+        "teamProfessionValues": null,
+        "teamProfessionMinCount": null,
+        "skillSubcategoryId": null,
+        "elementFilter": "all",
+        "kind": "stacked",
+        "stat": "dmgBonus",
+        "value": 0,
+        "stackable": false,
+        "maxStacks": 2,
+        "valuePerStack": 16,
+        "defaultStacks": 2,
+        "appliesToAnomaly": true,
+        "enabledDefault": true,
+        "note": ""
+      },
+      "cases": [
+        {
+          "layers": 0,
+          "upstream": 0
+        },
+        {
+          "layers": 1,
+          "upstream": 16
+        },
+        {
+          "layers": 2,
+          "upstream": 32
+        }
+      ]
+    }
+  ],
+  "knownDifferences": [
+    {
+      "id": "astra-m2-cap-cancellation",
+      "input": 4000,
+      "parts": [
+        {
+          "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+          "effect": {
+            "id": "eff-ms38hwcr-m9hn4v",
+            "origin": "",
+            "scope": "general",
+            "applyTarget": "team",
+            "applySituation": "global",
+            "applyProfession": null,
+            "teamProfession": null,
+            "teamProfessionValues": null,
+            "teamProfessionMinCount": null,
+            "skillSubcategoryId": null,
+            "elementFilter": "all",
+            "kind": "convert",
+            "stat": "atk",
+            "value": 0,
+            "stackable": false,
+            "maxStacks": 1,
+            "valuePerStack": 0,
+            "defaultStacks": 1,
+            "convert": {
+              "from": "atk",
+              "panelSource": "manual",
+              "ratioPercent": 35,
+              "cap": 1200,
+              "defaultBase": 3428.56,
+              "initialBase": 0
+            },
+            "enabledDefault": true,
+            "note": ""
+          },
+          "upstream": 1200
+        },
+        {
+          "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0",
+          "effect": {
+            "id": "legacy-team-atk",
+            "origin": "",
+            "scope": "general",
+            "applyTarget": "team",
+            "applySituation": "global",
+            "applyProfession": null,
+            "teamProfession": null,
+            "teamProfessionValues": null,
+            "teamProfessionMinCount": null,
+            "skillSubcategoryId": null,
+            "elementFilter": "all",
+            "kind": "convert",
+            "stat": "atk",
+            "value": 0,
+            "stackable": false,
+            "maxStacks": 1,
+            "valuePerStack": 0,
+            "defaultStacks": 1,
+            "convert": {
+              "from": "atk",
+              "panelSource": "manual",
+              "ratioPercent": 54,
+              "cap": 1600,
+              "defaultBase": 2963,
+              "initialBase": 0
+            },
+            "enabledDefault": true,
+            "note": ""
+          },
+          "upstream": 1600
+        },
+        {
+          "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/1",
+          "effect": {
+            "id": "eff-ms38lmcz-qennwz",
+            "origin": "",
+            "scope": "general",
+            "applyTarget": "team",
+            "applySituation": "global",
+            "applyProfession": null,
+            "teamProfession": null,
+            "teamProfessionValues": null,
+            "teamProfessionMinCount": null,
+            "skillSubcategoryId": null,
+            "elementFilter": "all",
+            "kind": "convert",
+            "stat": "atk",
+            "value": 0,
+            "stackable": false,
+            "maxStacks": 1,
+            "valuePerStack": 0,
+            "defaultStacks": 1,
+            "convert": {
+              "from": "atk",
+              "panelSource": "manual",
+              "ratioPercent": -35,
+              "cap": 1200,
+              "defaultBase": 3428.56,
+              "initialBase": 0
+            },
+            "enabledDefault": true,
+            "note": ""
+          },
+          "upstream": -1400
+        }
+      ],
+      "upstream": 1400,
+      "fairy": 1600
+    }
+  ]
+}

@@ -6,6 +6,7 @@ export {
 } from "./internal/state.ts"
 export { evaluateEffects } from "./internal/evaluate.ts"
 export { advanceEffects } from "./internal/advance.ts"
+export { calculateStaticDamage } from "./internal/static-damage.ts"
 export type {
   PreparedEffects,
   Result,
@@ -29,6 +30,9 @@ export type {
   CooldownPolicy,
   DirectStat,
   DirectStatInput,
+  DamageElement,
+  DamageKind,
+  EffectNumericInput,
   EffectEngine,
   EffectId,
   EffectInstance,
@@ -46,6 +50,7 @@ export type {
   EventKind,
   EventRequest,
   FactorChannel,
+  FactorChannelUnitMap,
   GeneralStat,
   GeneralStatInput,
   HitContext,
@@ -90,6 +95,12 @@ export type {
   StateId,
   StateInput,
   StateObservation,
+  StaticDamageInput,
+  StaticDamageParameters,
+  StaticDamageResult,
+  StaticDefenseInput,
+  StaticEffectSelection,
+  StaticHit,
   SuppliedEffectInstance,
   SuppliedInstancesUpdate,
   TargetSelector,
