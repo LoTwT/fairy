@@ -281,7 +281,7 @@ function validateStatRead<U extends Unit>(
   const stage = value["stage"]
   const stageValid = direct
     ? stage === "current"
-    : stage === "initial" || stage === "current"
+    : stage === "base" || stage === "initial" || stage === "current"
   if (!stageValid) {
     checks.collector.report(
       checks.structureCode,

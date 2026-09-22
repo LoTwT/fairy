@@ -172,7 +172,7 @@ type StatRead<U extends Unit, P extends Phase> = P extends "configuration"
             readonly stat: S
             readonly stage: S extends DirectStat
               ? "current"
-              : "initial" | "current"
+              : "base" | "initial" | "current"
             readonly at: ReadMoment<P>
           }
         : never
@@ -255,6 +255,7 @@ export type DamageElement =
   | "wind"
   | "auric-ink"
   | "frost"
+  | "lumiflux"
 export type DamageKind =
   | "regular"
   | "sheer"
@@ -418,6 +419,14 @@ export interface FactorChannelUnitMap {
   readonly "luminize-multiplier-addition": "multiplier"
   readonly "luminize-multiplier-scale": "multiplier"
   readonly "refringe-coefficient-increase": "ratio"
+  readonly "base-multiplier-addition": "multiplier"
+  readonly "base-multiplier-increase": "ratio"
+  readonly "settlement-multiplier-addition": "multiplier"
+  readonly "anomaly-duration-addition": "seconds"
+  readonly "luminize-multiplier-increase": "ratio"
+  readonly "luminize-special-addition": "ratio"
+  readonly "luminize-special-increase": "ratio"
+  readonly "luminize-proficiency-input": "anomaly-proficiency-points"
 }
 export type FactorChannel = keyof FactorChannelUnitMap
 
@@ -696,6 +705,8 @@ export interface DirectStatInput {
 export type EntityObservation =
   | {
       readonly kind: "actor"
+      /** 此模式下 sheerForce 记录独立贡献，另加 0.1 health + 0.3 attack。 */
+      readonly deriveSheerForce?: boolean
       readonly entityId: EntityId
       readonly teamId: TeamId
       readonly generalStats: Readonly<
@@ -746,7 +757,9 @@ export type AttributeObservation = {
   [S in Stat]: {
     readonly entityId: EntityId
     readonly stat: S
-    readonly stage: S extends DirectStat ? "current" : "initial" | "current"
+    readonly stage: S extends DirectStat
+      ? "current"
+      : "base" | "initial" | "current"
     readonly value: Quantity<StatUnitMap[S]>
   }
 }[Stat]
@@ -830,6 +843,12 @@ export interface SuppliedInstancesUpdate extends StateChangeCursor {
   readonly observedSnapshots: readonly SavedSnapshot[]
 }
 
+/** 指定读取的角色；提供 snapshotId 时仅消费该快照中已保存的属性。 */
+export interface AttributeSource {
+  readonly entityId: EntityId
+  readonly snapshotId?: SnapshotId
+}
+
 export interface HitContext {
   readonly hitId: HitId
   readonly actionInstanceId: ActionInstanceId
@@ -851,7 +870,9 @@ export interface HitContext {
         readonly effectId: EffectId
         readonly bindingId: BindingId
       }
+  readonly attributeSources?: Readonly<Partial<Record<Stat, AttributeSource>>>
   readonly damageItems: NonEmpty<{
+    readonly statSource?: AttributeSource
     readonly itemId: string
     readonly damageMultiplier: number
     readonly stat: GeneralStat
@@ -941,6 +962,7 @@ export type StaticHit = Pick<
   | "actionId"
   | "skillCategory"
   | "skillTags"
+  | "attributeSources"
   | "damageItems"
 > & {
   readonly element: DamageElement
@@ -968,7 +990,9 @@ interface StaticAnomalyCommon {
     | { readonly settledMultiplier: number }
   readonly defense: StaticDefenseInput
   readonly anomalyDamageBonus: import("@randomplay/core").AnomalyDamageBonusFactorInput
-  readonly refringe: import("@randomplay/core").CalculateRefringeMultiplierParams
+  readonly refringe:
+    | import("@randomplay/core").CalculateRefringeMultiplierParams
+    | { readonly settledMultiplier: number }
 }
 
 export type StaticDamageParameters = StaticDamageCommon &
@@ -1020,6 +1044,11 @@ export interface StaticDamageResult {
   }
   /** 已求值但不属于本次伤害公式的通道，例如能量生成或失衡累积。 */
   readonly notApplicableContributions: readonly ResolvedContribution[]
+  readonly preparations?: readonly {
+    readonly itemId: string
+    readonly durationAdjustment: number
+    readonly contributions: readonly ResolvedContribution[]
+  }[]
 }
 
 export interface ContributionOrigin {
@@ -1128,6 +1157,7 @@ export interface EvaluationResult {
   readonly attributes: readonly (AttributeObservation & {
     /** null 是通用面板；命中局部属性不得写回通用面板。 */
     readonly hitId: HitId | null
+    readonly snapshotId?: SnapshotId
   })[]
   readonly hit: null | {
     readonly hitId: HitId
@@ -1199,6 +1229,9 @@ export interface TransitionResult {
 /** 公开纯函数接口；全部实现由包入口导出。 */
 export interface EffectEngine {
   calculateStaticDamage(input: StaticDamageInput): Result<StaticDamageResult>
+  calculateStaticDamageFromCatalog(
+    input: StaticCatalogDamageInput,
+  ): Result<StaticDamageResult>
   prepareEffects(
     definitions: RuleSet,
     bindings: readonly SourceBinding[],
@@ -1222,4 +1255,175 @@ export interface EffectEngine {
     state: EffectState,
     input: EvaluationInput,
   ): Result<EvaluationResult>
+}
+
+export type StaticCatalogUnavailableReason =
+  | "missing-identity"
+  | "missing-rank-evidence"
+  | "missing-parameter"
+  | "semantic-conflict"
+  | "formula-out-of-scope"
+
+export interface StaticCatalogEntity {
+  readonly catalogEntityId: string
+  readonly upstreamId: string
+  readonly name: string
+  readonly identity: SourceIdentity | null
+  readonly status: "mapped" | "missing-identity" | "placeholder"
+  readonly profession: string | null
+  readonly element: DamageElement | null
+}
+
+export interface StaticCatalogInputRequirement {
+  readonly name: string
+  readonly unit: Unit
+  readonly description: string
+  readonly preset?: number
+}
+
+export interface StaticCatalogApplicability {
+  readonly beneficiaryProfession?: string
+  readonly beneficiaryElements?: readonly DamageElement[]
+  readonly teamProfession?: {
+    readonly profession: string
+    readonly counts: readonly number[]
+  }
+}
+
+export interface StaticCatalogVariant {
+  /** 同一选项不同精炼档改变对象时覆盖 option.target。 */
+  readonly target?: "self" | "team"
+  readonly configuration: {
+    readonly minimumMindscape?: MindscapeRank
+    readonly refinements?: readonly RefinementRank[]
+    readonly minimumSetPieces?: SetPieceCount
+    readonly coreSkillLevels?: readonly CoreSkillLevel[]
+  }
+  readonly status: "converted" | "corrected" | "unsupported"
+  readonly reason?: StaticCatalogUnavailableReason
+  readonly explanation?: string
+  readonly references: NonEmpty<SourceReference>
+  readonly effectIds: readonly EffectId[]
+  readonly maximumLayers: number
+  readonly inputs: readonly StaticCatalogInputRequirement[]
+  readonly applicability: StaticCatalogApplicability
+  readonly differences: readonly string[]
+  /** 只登记已有 core 耀变精通换算；不开放任意参数路径。 */
+  readonly parameterMapping?: {
+    readonly kind: "luminize-proficiency"
+    readonly rate: number
+    readonly source: "holder-current" | "holder-initial" | "input"
+    readonly inputName?: string
+  }
+}
+
+export interface StaticCatalogOption {
+  readonly optionId: string
+  readonly catalogEntityId: string
+  readonly name: string
+  /** 来源描述中的状态、潜能和触发条件由调用方在选中时明确断言。 */
+  readonly conditionDescription: string
+  readonly target: "self" | "team"
+  readonly exclusiveGroup?: string
+  readonly variants: NonEmpty<StaticCatalogVariant>
+}
+
+export interface StaticEffectCatalog {
+  readonly schemaVersion: 1
+  readonly ruleSetId: string
+  readonly revision: string
+  readonly source: {
+    readonly repository: string
+    readonly commit: string
+    readonly files: readonly {
+      readonly path: string
+      readonly sha256: string
+    }[]
+  }
+  readonly entities: readonly StaticCatalogEntity[]
+  readonly options: readonly StaticCatalogOption[]
+  readonly skillTargets: readonly {
+    readonly targetId: string
+    readonly upstreamId: string | null
+    readonly agentEntityId: string | null
+    readonly category: string
+    readonly name: string
+    readonly countsAsFollowUp: boolean
+  }[]
+  readonly differences: readonly {
+    readonly differenceId: string
+    readonly explanation: string
+    readonly references: readonly SourceReference[]
+  }[]
+}
+
+export type StaticCatalogDamageItem = {
+  readonly itemId: string
+  readonly stat: GeneralStat
+  readonly statSource: AttributeSource
+  readonly role: "base" | "settlement"
+} & (
+  | { readonly mode: "direct"; readonly damageMultiplier: number }
+  | {
+      readonly mode: "standard-disorder"
+      readonly originalAnomalyAttribute: import("@randomplay/core").CalculateStandardDisorderDamageMultiplierParams["originalAnomalyAttribute"]
+      readonly baseDurationSeconds: number
+      readonly elapsedSeconds: number
+    }
+  | {
+      readonly mode: "standard-vortex"
+      readonly profile: import("@randomplay/core").CalculateStandardVortexDamageMultiplierParams["vortexDamageMultiplierProfile"]
+      readonly baseDurationSeconds: number
+    }
+)
+
+export type StaticCatalogDamageParameters =
+  StaticDamageParameters extends infer D
+    ? D extends StaticDamageParameters
+      ? D extends { readonly refringe: unknown }
+        ? Omit<D, "refringe" | "luminizeMultiplier"> &
+            (D extends { readonly kind: "luminize" }
+              ? {
+                  readonly luminizeMultiplier: Pick<
+                    import("@randomplay/core").LuminizeMultiplierFactorInput,
+                    | "baseLuminizeMultiplier"
+                    | "multiplicativeLuminizeMultiplierAdjustments"
+                  >
+                }
+              : object) & {
+              readonly refringe:
+                | { readonly mode: "from-effects" }
+                | { readonly mode: "settled"; readonly multiplier: number }
+              /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
+              readonly anomalySource: AttributeSource & {
+                readonly level: number
+              }
+            }
+        : D
+      : never
+    : never
+
+export interface StaticCatalogDamageInput {
+  readonly definitions: RuleSet
+  readonly catalog: StaticEffectCatalog
+  readonly bindings: readonly SourceBinding[]
+  readonly selections: readonly {
+    readonly optionId: string
+    readonly bindingId: BindingId
+    /** 0 明确关闭该选项；仍校验选项、来源、档位和层数身份。 */
+    readonly layers: number
+  }[]
+  readonly actorSources: readonly {
+    readonly entityId: EntityId
+    readonly agentEntityId: string
+  }[]
+  readonly world: WorldObservation
+  readonly hit: Omit<StaticHit, "damageItems" | "attributeSources"> & {
+    readonly damageItems: NonEmpty<StaticCatalogDamageItem>
+    readonly skillTargetIds?: readonly string[]
+  }
+  readonly damage: StaticCatalogDamageParameters
+  readonly inputs?: readonly EffectNumericInput[]
+  readonly snapshots?: readonly SavedSnapshot[]
+  readonly atSeconds?: number
 }

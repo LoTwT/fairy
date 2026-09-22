@@ -46,7 +46,10 @@
     "./integrated/boss/*/details.en.json": "./dist/integrated/boss/*/details.en.json",
     "./integrated/simul/*/data.json": "./dist/integrated/simul/*/data.json",
     "./integrated/simul/*/details.zh.json": "./dist/integrated/simul/*/details.zh.json",
-    "./integrated/simul/*/details.en.json": "./dist/integrated/simul/*/details.en.json"
+    "./integrated/simul/*/details.en.json": "./dist/integrated/simul/*/details.en.json",
+    "./definitions/effects/static.json": "./dist/definitions/effects/static.json",
+    "./definitions/effects/static-catalog.json": "./dist/definitions/effects/static-catalog.json",
+    "./definitions/effects/static-coverage.json": "./dist/definitions/effects/static-coverage.json"
   },
   "publishConfig": {
     "access": "public"
@@ -71,7 +74,8 @@
     "typecheck:prepared": "tsc --noEmit",
     "verify:pack": "vitest run --project packaging test/verify-package.test.ts",
     "prepare:consumer": "node --disable-warning=ExperimentalWarning scripts/prepare-consumer-types.ts",
-    "verify:browser": "vitest run --project packaging test/verify-browser.test.ts"
+    "verify:browser": "vitest run --project packaging test/verify-browser.test.ts",
+    "generate:static-effects": "pnpm --filter @randomplay/core build && node scripts/generate-static-effects.ts"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

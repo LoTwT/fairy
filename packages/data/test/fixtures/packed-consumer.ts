@@ -23,6 +23,7 @@ export function listFiles(directory: string, root = directory): string[] {
 export function installPackedConsumer(
   temporaryDirectory: string,
   sourceDirectory = packageDirectory,
+  includeEffects = false,
 ) {
   execFileSync(
     "corepack",
@@ -65,10 +66,44 @@ export function installPackedConsumer(
       2,
     ),
   )
+  if (includeEffects) {
+    const tarballs: Record<string, string> = {}
+    const engineDirectory = join(temporaryDirectory, "engines")
+    mkdirSync(engineDirectory)
+    for (const name of ["core", "effects"]) {
+      const directory = join(workspaceDirectory, "packages", name)
+      execFileSync(
+        "corepack",
+        ["pnpm", "pack", "--pack-destination", engineDirectory],
+        { cwd: directory, stdio: "pipe" },
+      )
+      const manifest = JSON.parse(
+        readFileSync(join(directory, "package.json"), "utf8"),
+      )
+      tarballs[name] = join(
+        engineDirectory,
+        `randomplay-${name}-${manifest.version}.tgz`,
+      )
+    }
+    const manifestPath = join(consumerDirectory, "package.json")
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8"))
+    manifest.dependencies["@randomplay/effects"] = `file:${tarballs.effects}`
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
+    writeFileSync(
+      join(consumerDirectory, "pnpm-workspace.yaml"),
+      `overrides:\n  "@randomplay/core": ${JSON.stringify(`file:${tarballs.core}`)}\n`,
+    )
+  }
   for (const mode of ["--lockfile-only", "--frozen-lockfile"])
     execFileSync(
       "corepack",
-      ["pnpm", "install", "--offline", mode, "--ignore-workspace"],
+      [
+        "pnpm",
+        "install",
+        "--offline",
+        mode,
+        ...(includeEffects ? [] : ["--ignore-workspace"]),
+      ],
       { cwd: consumerDirectory, stdio: "pipe" },
     )
   return { tarballPath, packedRoot, consumerDirectory }

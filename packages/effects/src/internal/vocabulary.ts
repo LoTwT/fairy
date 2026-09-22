@@ -27,6 +27,7 @@ export const DAMAGE_ELEMENTS: readonly DamageElement[] = [
   "wind",
   "auric-ink",
   "frost",
+  "lumiflux",
 ]
 export const DAMAGE_KINDS: readonly DamageKind[] = [
   "regular",
@@ -56,6 +57,14 @@ export const FACTOR_CHANNEL_UNITS: FactorChannelUnitMap = {
   "luminize-multiplier-addition": "multiplier",
   "luminize-multiplier-scale": "multiplier",
   "refringe-coefficient-increase": "ratio",
+  "base-multiplier-addition": "multiplier",
+  "base-multiplier-increase": "ratio",
+  "settlement-multiplier-addition": "multiplier",
+  "anomaly-duration-addition": "seconds",
+  "luminize-multiplier-increase": "ratio",
+  "luminize-special-addition": "ratio",
+  "luminize-special-increase": "ratio",
+  "luminize-proficiency-input": "anomaly-proficiency-points",
 }
 export const FACTOR_CHANNELS = Object.keys(
   FACTOR_CHANNEL_UNITS,

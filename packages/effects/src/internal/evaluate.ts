@@ -1,5 +1,6 @@
 import type {
   AttributeObservation,
+  AttributeSource,
   Condition,
   DirectStat,
   EffectNumericInput,
@@ -382,7 +383,7 @@ function readStatValue(
   expression: {
     readonly kind: "stat"
     readonly stat: Stat
-    readonly stage: "initial" | "current"
+    readonly stage: "base" | "initial" | "current"
     readonly at: string
     readonly entity: { readonly role: string; readonly entityId?: EntityId }
   },
@@ -464,7 +465,7 @@ function readStatValue(
 function computeStatValue(
   entityId: EntityId,
   stat: Stat,
-  stage: "initial" | "current",
+  stage: "base" | "initial" | "current",
   hitId: string | null,
   context: EvaluationContext,
 ): number {
@@ -491,6 +492,16 @@ function computeStatValue(
     )
     context.shared.failedStats.add(key)
     return Number.NaN
+  }
+  if (stage === "base" && !DIRECT_STATS.has(stat as DirectStat)) {
+    const value = actor.generalStats[stat as GeneralStat]?.baseValue
+    if (value === undefined)
+      context.collector.report(
+        "MISSING_FACT",
+        "",
+        `Base stat (${entityId}, ${stat}) is required`,
+      )
+    return value ?? Number.NaN
   }
   const nested: EvaluationContext = {
     ...context,
@@ -600,6 +611,15 @@ function computeStatValue(
         `Final stat (${entityId}, ${stat})`,
       )
     }
+  }
+  if (stat === "sheerForce" && actor.deriveSheerForce) {
+    value = requireFiniteValue(
+      value +
+        0.1 * computeStatValue(entityId, "health", stage, hitId, nested) +
+        0.3 * computeStatValue(entityId, "attack", stage, hitId, nested),
+      context,
+      `Derived sheer force (${entityId})`,
+    )
   }
   if (Number.isNaN(value)) {
     context.shared.failedStats.add(key)
@@ -1796,7 +1816,7 @@ export function readMomentStat(
   evaluation: MomentEvaluation,
   entityId: EntityId,
   stat: Stat,
-  stage: "initial" | "current",
+  stage: "base" | "initial" | "current",
 ): number {
   return computeStatValue(entityId, stat, stage, null, evaluation.context)
 }
@@ -2236,63 +2256,81 @@ function evaluateHitQuery(
   if (hit === null) {
     return undefined
   }
-  const finalStats = new Map<string, number>()
-  for (const stat of new Set<Stat>([
-    ...hit.damageItems.map((item) => item.stat),
-    ...additionalStats,
-  ])) {
-    const value = computeStatValue(
-      hit.actorId,
-      stat,
-      "current",
-      hit.hitId,
-      context,
+  const attributes: EvaluationResult["attributes"][number][] = []
+  const addAttribute = (
+    attribute: EvaluationResult["attributes"][number],
+  ): void => {
+    if (
+      !attributes.some(
+        (entry) =>
+          entry.stat === attribute.stat &&
+          entry.entityId === attribute.entityId &&
+          entry.snapshotId === attribute.snapshotId &&
+          entry.hitId === attribute.hitId,
+      )
     )
-    if (Number.isNaN(value)) {
-      return undefined
+      attributes.push(attribute)
+  }
+  const readAttribute = (stat: Stat, source?: AttributeSource): number => {
+    const entityId = source?.entityId ?? hit.actorId
+    if (source?.snapshotId !== undefined) {
+      const snapshot = context.snapshots.get(source.snapshotId)
+      const saved = snapshot?.attributes.find(
+        (attribute) =>
+          attribute.entityId === entityId &&
+          attribute.stat === stat &&
+          attribute.stage === "current",
+      )
+      if (saved === undefined) {
+        context.collector.report(
+          "MISSING_SNAPSHOT",
+          "/hit",
+          `Snapshot "${source.snapshotId}" does not save (${entityId}, ${stat}, current)`,
+        )
+        return Number.NaN
+      }
+      addAttribute({
+        ...saved,
+        hitId: hit.hitId,
+        snapshotId: source.snapshotId,
+      } as EvaluationResult["attributes"][number])
+      return saved.value.value
     }
-    finalStats.set(stat, value)
-    const stages: readonly (
-      | "initial-percentage"
-      | "initial-fixed"
-      | "final-percentage"
-      | "final-fixed"
-      | "direct"
-    )[] = DIRECT_STATS.has(stat as DirectStat)
-      ? ["direct"]
-      : [
+    const hitId = entityId === hit.actorId ? hit.hitId : null
+    const value = computeStatValue(entityId, stat, "current", hitId, context)
+    if (Number.isNaN(value)) return value
+    const stages = DIRECT_STATS.has(stat as DirectStat)
+      ? (["direct"] as const)
+      : ([
           "initial-percentage",
           "initial-fixed",
           "final-percentage",
           "final-fixed",
-        ]
-    for (const stage of stages) {
-      markConsumed(context, {
-        kind: "stat",
-        stat,
-        stage,
-        entityId: hit.actorId,
-        hitId: hit.hitId,
-      })
-    }
+        ] as const)
+    for (const stage of stages)
+      markConsumed(context, { kind: "stat", stat, stage, entityId, hitId })
+    addAttribute({
+      entityId,
+      stat,
+      stage: "current",
+      value: { unit: STAT_UNIT_MAP[stat], value },
+      hitId,
+    } as EvaluationResult["attributes"][number])
+    return value
   }
-  const criticalRate = computeStatValue(
-    hit.actorId,
-    "criticalRate",
-    "current",
-    hit.hitId,
-    context,
+  const finalItemStats = hit.damageItems.map((item) =>
+    readAttribute(
+      item.stat,
+      item.statSource ?? hit.attributeSources?.[item.stat],
+    ),
   )
-  if (Number.isNaN(criticalRate)) {
-    return undefined
-  }
-  markConsumed(context, {
-    kind: "stat",
-    stat: "criticalRate",
-    stage: "direct",
-    entityId: hit.actorId,
-    hitId: hit.hitId,
-  })
+  for (const stat of new Set(additionalStats))
+    readAttribute(stat, hit.attributeSources?.[stat])
+  const criticalRate = readAttribute(
+    "criticalRate",
+    hit.attributeSources?.criticalRate,
+  )
+  if (!context.collector.isEmpty) return undefined
   const itemAdjustments = context.prepared.contributions.flatMap((entry) =>
     entry.rule.operation.kind === "hit-adjustment"
       ? (entry.rule.operation.itemIds ?? [])
@@ -2344,7 +2382,7 @@ function evaluateHitQuery(
     damageMultiplier: number
     finalStat: number
   }[] = []
-  for (const item of hit.damageItems) {
+  for (const [itemIndex, item] of hit.damageItems.entries()) {
     const address: HitAddress = {
       kind: "hit",
       hitId: hit.hitId,
@@ -2389,7 +2427,7 @@ function evaluateHitQuery(
     adjustedItems.push({
       itemId: item.itemId,
       damageMultiplier,
-      finalStat: finalStats.get(item.stat)!,
+      finalStat: finalItemStats[itemIndex]!,
     })
   }
   for (const channel of factorChannels(context)) {
@@ -2408,13 +2446,6 @@ function evaluateHitQuery(
       hitId: hit.hitId,
     })
   }
-  const attributes = [...finalStats.entries()].map(([stat, value]) => ({
-    entityId: hit.actorId,
-    stat: stat as Stat,
-    stage: "current",
-    value: { unit: STAT_UNIT_MAP[stat as Stat], value },
-    hitId: hit.hitId,
-  })) as EvaluationResult["attributes"]
   return {
     contributions: collectResultContributions(context),
     attributes,

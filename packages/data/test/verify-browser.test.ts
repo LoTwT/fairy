@@ -44,7 +44,7 @@ it("consumes the offline-installed package in real Vite development and producti
   const reports: unknown[] = []
   try {
     const { consumerDirectory, packedRoot, tarballPath } =
-      installPackedConsumer(temporaryDirectory)
+      installPackedConsumer(temporaryDirectory, undefined, true)
     const integratedIndex = JSON.parse(
       readFileSync(join(packedRoot, "dist/integrated/index.json"), "utf8"),
     )
@@ -83,6 +83,9 @@ it("consumes the offline-installed package in real Vite development and producti
       "index.json",
       "definitions/effects/starter.json",
       "definitions/effects/automatic.json",
+      "definitions/effects/static.json",
+      "definitions/effects/static-catalog.json",
+      "definitions/effects/static-coverage.json",
       ...Object.entries(publishedEntities).flatMap(([category, entity]) =>
         entity.memberIds.flatMap((id) => [
           `${category}/${id}/data.json`,
@@ -100,6 +103,17 @@ it("consumes the offline-installed package in real Vite development and producti
       join(consumerDirectory, "main.js"),
       `import * as api from "@randomplay/data"
 globalThis.fairy = api
+globalThis.fairyStatic = async () => {
+  const [definitions, catalog, coverage, engine] = await Promise.all([
+    import("@randomplay/data/definitions/effects/static.json"),
+    import("@randomplay/data/definitions/effects/static-catalog.json"),
+    import("@randomplay/data/definitions/effects/static-coverage.json"),
+    import("@randomplay/effects"),
+  ])
+  const result = engine.calculateStaticDamageFromCatalog({ ...${readFileSync(new URL("./fixtures/static-catalog-consumer.json", import.meta.url), "utf8")}, definitions: definitions.default, catalog: catalog.default })
+  if (!result.ok) throw new Error(JSON.stringify(result.issues))
+  return { rate: result.value.criticalRate, expected: result.value.expected, nonCritical: result.value.nonCritical, records: coverage.default.summary.rawEffects }
+}
 globalThis.fairyDefinitions = {
   starter: () => import("@randomplay/data/definitions/effects/starter.json"),
   automatic: () => import("@randomplay/data/definitions/effects/automatic.json"),
@@ -427,6 +441,22 @@ function defineScenarios(counts: {
           name: "initial",
           act: async (page) => checkNameCatalogs(page),
           sources: [],
+        },
+        {
+          name: "static-catalog-calculation",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyStatic(),
+            )
+            expect(result.rate).toBeCloseTo(0.13)
+            expect(result.expected).toBeGreaterThan(result.nonCritical)
+            expect(result.records).toBe(1290)
+          },
+          sources: [
+            "definitions/effects/static.json",
+            "definitions/effects/static-catalog.json",
+            "definitions/effects/static-coverage.json",
+          ],
         },
         ...(["automatic", "starter"] as const).map(
           (name): ScenarioStep => ({
