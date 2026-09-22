@@ -41,6 +41,12 @@ export const GENERAL_STATS: ReadonlySet<GeneralStat> = new Set(
   ),
 )
 
+/** 正式属性枚举；查询属性与快照属性都必须取其中的值。 */
+export const STATS: ReadonlySet<Stat> = new Set([
+  ...GENERAL_STATS,
+  ...DIRECT_STATS,
+])
+
 export const UNITS: ReadonlySet<Unit> = new Set([
   ...new Set(Object.values(STAT_UNIT_MAP) as Unit[]),
   "multiplier",

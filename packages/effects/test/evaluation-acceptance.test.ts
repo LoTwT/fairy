@@ -26,6 +26,7 @@ import {
   syntheticRuleSet,
   syntheticWorld,
 } from "../../../docs/specs/effects/contract-examples.ts"
+import { reorderObjectKeys } from "./fixtures.ts"
 
 function prepareWithExamples(): PreparedEffects {
   const parsed = parseEffectRuleSet(exampleRuleSet)
@@ -648,6 +649,36 @@ describe("external instance synchronization acceptance", () => {
         result.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
       ).toBe(true)
     }
+  })
+
+  it("accepts a repeated snapshot whose object keys are ordered differently", () => {
+    const { prepared, state } = prepareMixed()
+    const recorded = mixedStateBeforeSynchronization.snapshots[0]
+    const repeated = reorderObjectKeys(recorded)
+    expect(JSON.stringify(repeated)).not.toBe(JSON.stringify(recorded))
+    const result = synchronizeSuppliedInstances(prepared, state, {
+      ...renewSuppliedAstra,
+      observedSnapshots: [repeated],
+    } as SuppliedInstancesUpdate)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("synchronization must succeed")
+    }
+    // 既有快照未被键顺序不同的重复提供覆盖：改变内容的同 ID 快照仍然冲突。
+    const conflict = synchronizeSuppliedInstances(prepared, result.value, {
+      ...renewSuppliedAstra,
+      eventId: "event:sync-astra-core-conflict",
+      atSeconds: 3,
+      sequence: 1,
+      observedSnapshots: [{ ...recorded, atSeconds: 1 }],
+    } as SuppliedInstancesUpdate)
+    expect(conflict.ok).toBe(false)
+    if (conflict.ok) {
+      throw new Error("synchronization must fail")
+    }
+    expect(
+      conflict.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+    ).toBe(true)
   })
 
   it("replays are rejected on the synchronized state", () => {

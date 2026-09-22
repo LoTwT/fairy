@@ -6,7 +6,9 @@ import {
   supplyEffectState,
 } from "../src/index.ts"
 import type {
+  AttributeObservation,
   EffectState,
+  EntityId,
   EvaluationInput,
   PreparedEffects,
   SourceBinding,
@@ -21,6 +23,7 @@ import {
   syntheticRuleSet,
   syntheticWorld,
 } from "../../../docs/specs/effects/contract-examples.ts"
+import { reorderObjectKeys } from "./fixtures.ts"
 
 function prepareSynthetic(): PreparedEffects {
   const parsed = parseEffectRuleSet(syntheticRuleSet)
@@ -126,6 +129,20 @@ function evaluateAstraPanel(
     throw new Error("evaluation must succeed")
   }
   return result.value
+}
+
+/** 快照属性记录；用于重复身份与快照内容比较用例。 */
+function attackAttribute(
+  entityId: EntityId,
+  value: number,
+  stage: "initial" | "current" = "initial",
+): AttributeObservation {
+  return {
+    entityId,
+    stat: "attack",
+    stage,
+    value: { unit: "attack-points", value },
+  }
 }
 
 function astraContributionValue(
@@ -753,5 +770,580 @@ describe("state import ownership", () => {
     deepFreezeValue(input)
     const result = supplyEffectState(prepared, input as never)
     expect(result.ok).toBe(true)
+  })
+})
+
+describe("snapshot attribute identity", () => {
+  const entrySnapshot = (
+    attributes: readonly unknown[],
+    snapshotId = "snapshot:entry",
+  ) => ({
+    snapshotId,
+    atSeconds: 0,
+    attributes,
+    world: astraWorld(3000),
+  })
+
+  function supplyWithSnapshots(
+    sessionId: string,
+    snapshots: readonly unknown[],
+  ) {
+    return supplyEffectState(prepareAstra(2), {
+      ...suppliedAstraState,
+      sessionId,
+      snapshots,
+    } as never)
+  }
+
+  it("rejects two attribute records with one identity in a single snapshot", () => {
+    const result = supplyWithSnapshots("session:duplicate-attributes", [
+      entrySnapshot([
+        attackAttribute("entity:astra", 1000),
+        attackAttribute("entity:astra", 2000),
+      ]),
+    ])
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("state supply must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "DUPLICATE_ID" &&
+          issue.pointer === "/snapshots/0/attributes/1",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects duplicate attribute identities even when the values match", () => {
+    const result = supplyWithSnapshots("session:duplicate-attribute-values", [
+      entrySnapshot([
+        attackAttribute("entity:astra", 1000),
+        attackAttribute("entity:astra", 1000),
+      ]),
+    ])
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("state supply must fail")
+    }
+    expect(result.issues.some((issue) => issue.code === "DUPLICATE_ID")).toBe(
+      true,
+    )
+  })
+
+  it("rejects duplicate attribute identities regardless of record order", () => {
+    const result = supplyWithSnapshots("session:duplicate-attribute-order", [
+      entrySnapshot([
+        attackAttribute("entity:astra", 2000),
+        attackAttribute("entity:astra", 1000),
+      ]),
+    ])
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("state supply must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "DUPLICATE_ID" &&
+          issue.pointer === "/snapshots/0/attributes/1",
+      ),
+    ).toBe(true)
+  })
+
+  it("leaves the caller input untouched when a snapshot is rejected", () => {
+    const input = {
+      ...suppliedAstraState,
+      sessionId: "session:duplicate-attributes-ownership",
+      snapshots: [
+        entrySnapshot([
+          attackAttribute("entity:astra", 1000),
+          attackAttribute("entity:astra", 2000),
+        ]),
+      ],
+    }
+    const before = structuredClone(input)
+    const result = supplyEffectState(prepareAstra(2), input as never)
+    expect(result.ok).toBe(false)
+    expect(input).toEqual(before)
+  })
+
+  it("keeps distinct entities, stats, and legal stages in one snapshot", () => {
+    const result = supplyWithSnapshots("session:distinct-attributes", [
+      entrySnapshot([
+        attackAttribute("entity:astra", 3000),
+        attackAttribute("entity:attacker", 2000),
+        attackAttribute("entity:astra", 3000, "current"),
+        {
+          entityId: "entity:astra",
+          stat: "criticalRate",
+          stage: "current",
+          value: { unit: "ratio", value: 0.05 },
+        },
+      ]),
+    ])
+    expect(result.ok).toBe(true)
+  })
+
+  it("rejects duplicates in query snapshots and keeps the recorded state usable", () => {
+    const prepared = prepareAstra(2)
+    const state = supplyAstraState(prepared, 3000, "session:duplicate-query")
+    const query = {
+      kind: "panel",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots: [
+        entrySnapshot(
+          [
+            attackAttribute("entity:astra", 1000),
+            attackAttribute("entity:astra", 2000),
+          ],
+          "snapshot:duplicate-query",
+        ),
+      ],
+      entities: ["entity:attacker"],
+      stats: ["attack"],
+    }
+    const failed = evaluateEffects(prepared, state, query as never)
+    expect(failed.ok).toBe(false)
+    if (failed.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      failed.issues.some(
+        (issue) =>
+          issue.code === "DUPLICATE_ID" &&
+          issue.pointer === "/observedSnapshots/0/attributes/1",
+      ),
+    ).toBe(true)
+    // 失败不修改已有状态：同一状态上的合法查询仍然成立。
+    const after = evaluateEffects(prepared, state, {
+      ...query,
+      observedSnapshots: [],
+    } as never)
+    expect(after.ok).toBe(true)
+    if (!after.ok) {
+      throw new Error("query must succeed")
+    }
+    expect(
+      after.value.attributes.find((attribute) => attribute.stat === "attack")
+        ?.value.value,
+    ).toBeCloseTo(3600, 9)
+  })
+})
+
+describe("snapshot content comparison", () => {
+  const entryAttributes = [
+    {
+      entityId: "entity:astra",
+      stat: "attack",
+      stage: "initial",
+      value: { unit: "attack-points", value: 3000 },
+    },
+    {
+      entityId: "entity:attacker",
+      stat: "attack",
+      stage: "initial",
+      value: { unit: "attack-points", value: 2000 },
+    },
+  ]
+
+  const entrySnapshot = () => ({
+    snapshotId: "snapshot:entry",
+    atSeconds: 0,
+    attributes: structuredClone(entryAttributes),
+    world: astraWorld(3000),
+  })
+
+  function sessionWithEntrySnapshot(sessionId: string): {
+    prepared: PreparedEffects
+    state: EffectState
+  } {
+    const prepared = prepareAstra(2)
+    const supplied = supplyEffectState(prepared, {
+      ...suppliedAstraState,
+      sessionId,
+      snapshots: [entrySnapshot()],
+    } as never)
+    expect(supplied.ok).toBe(true)
+    if (!supplied.ok) {
+      throw new Error("state supply must succeed")
+    }
+    return { prepared, state: supplied.value }
+  }
+
+  function astraPanelQuery(observedSnapshots: readonly unknown[]) {
+    return {
+      kind: "panel",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots,
+      entities: ["entity:attacker"],
+      stats: ["attack"],
+    }
+  }
+
+  it("accepts a repeated snapshot whose object keys are ordered differently", () => {
+    const { prepared, state } = sessionWithEntrySnapshot(
+      "session:snapshot-key-order",
+    )
+    const repeated = reorderObjectKeys(entrySnapshot())
+    // 内容相同、序列化不同：确认测试数据只改变了键顺序。
+    expect(JSON.stringify(repeated)).not.toBe(JSON.stringify(entrySnapshot()))
+    const canonical = evaluateEffects(
+      prepared,
+      state,
+      astraPanelQuery([entrySnapshot()]) as never,
+    )
+    expect(canonical.ok).toBe(true)
+    if (!canonical.ok) {
+      throw new Error("canonical query must succeed")
+    }
+    const shuffled = evaluateEffects(
+      prepared,
+      state,
+      astraPanelQuery([repeated]) as never,
+    )
+    expect(shuffled.ok).toBe(true)
+    if (!shuffled.ok) {
+      throw new Error("reordered query must succeed")
+    }
+    expect(shuffled.value).toEqual(canonical.value)
+    expect(
+      shuffled.value.attributes.find((attribute) => attribute.stat === "attack")
+        ?.value.value,
+    ).toBeCloseTo(3600, 9)
+  })
+
+  it("still rejects a recorded snapshot whose content changed", () => {
+    const { prepared, state } = sessionWithEntrySnapshot(
+      "session:snapshot-content-conflict",
+    )
+    const changedTime = evaluateEffects(
+      prepared,
+      state,
+      astraPanelQuery([{ ...entrySnapshot(), atSeconds: 1 }]) as never,
+    )
+    expect(changedTime.ok).toBe(false)
+    if (changedTime.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      changedTime.issues.some(
+        (issue) =>
+          issue.code === "CONTEXT_MISMATCH" &&
+          issue.pointer === "/observedSnapshots",
+      ),
+    ).toBe(true)
+    const changedAttribute = structuredClone(entrySnapshot())
+    changedAttribute.attributes[0]!.value.value = 3001
+    const nested = evaluateEffects(
+      prepared,
+      state,
+      astraPanelQuery([changedAttribute]) as never,
+    )
+    expect(nested.ok).toBe(false)
+    if (nested.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      nested.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+    ).toBe(true)
+    // 冲突不会覆盖旧快照：同一状态用原快照查询仍得到原结果。
+    const canonical = evaluateEffects(
+      prepared,
+      state,
+      astraPanelQuery([entrySnapshot()]) as never,
+    )
+    expect(canonical.ok).toBe(true)
+    if (!canonical.ok) {
+      throw new Error("canonical query must succeed")
+    }
+    expect(
+      canonical.value.attributes.find(
+        (attribute) => attribute.stat === "attack",
+      )?.value.value,
+    ).toBeCloseTo(3600, 9)
+  })
+
+  it("treats array order as part of snapshot content", () => {
+    const { prepared, state } = sessionWithEntrySnapshot(
+      "session:snapshot-array-order",
+    )
+    const reversed = entrySnapshot()
+    reversed.attributes = reversed.attributes.toReversed()
+    const result = evaluateEffects(
+      prepared,
+      state,
+      astraPanelQuery([reversed]) as never,
+    )
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      result.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+    ).toBe(true)
+  })
+})
+
+describe("evaluation input validation", () => {
+  function astraSession(sessionId: string): {
+    prepared: PreparedEffects
+    state: EffectState
+  } {
+    const prepared = prepareAstra(2)
+    return { prepared, state: supplyAstraState(prepared, 3000, sessionId) }
+  }
+
+  const panelInput = (overrides: Record<string, unknown> = {}) => ({
+    kind: "panel",
+    atSeconds: 0,
+    world: astraWorld(3000),
+    observedSnapshots: [],
+    entities: ["entity:attacker"],
+    stats: ["attack"],
+    ...overrides,
+  })
+
+  it("rejects beneficiary entries that are not entity identities", () => {
+    const { prepared, state } = astraSession(
+      "session:query-invalid-beneficiary",
+    )
+    const result = evaluateEffects(prepared, state, {
+      kind: "contributions",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots: [],
+      beneficiaries: [null],
+    } as never)
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" &&
+          issue.pointer === "/beneficiaries/0",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects panel entities that are not entity identities", () => {
+    const { prepared, state } = astraSession("session:query-invalid-entity")
+    const result = evaluateEffects(
+      prepared,
+      state,
+      panelInput({ entities: ["entity:attacker", "attacker"] }) as never,
+    )
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" && issue.pointer === "/entities/1",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects panel stats outside the registered stat set", () => {
+    const { prepared, state } = astraSession("session:query-invalid-stat")
+    const result = evaluateEffects(
+      prepared,
+      state,
+      panelInput({ stats: ["attack", "attackPoints"] }) as never,
+    )
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" && issue.pointer === "/stats/1",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects unknown fields on the evaluation input", () => {
+    const { prepared, state } = astraSession("session:query-unknown-field")
+    const result = evaluateEffects(
+      prepared,
+      state,
+      panelInput({ unsupportedField: true }) as never,
+    )
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("query must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" &&
+          issue.pointer === "/unsupportedField",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects fields belonging to another query branch", () => {
+    const { prepared, state } = astraSession("session:query-branch-fields")
+    const hit = evaluateEffects(prepared, state, {
+      kind: "hit",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots: [],
+      hit: {},
+      entities: ["entity:attacker"],
+      stats: ["attack"],
+    } as never)
+    expect(hit.ok).toBe(false)
+    if (hit.ok) {
+      throw new Error("hit query must fail")
+    }
+    expect(
+      hit.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" && issue.pointer === "/entities",
+      ),
+    ).toBe(true)
+    expect(
+      hit.issues.some(
+        (issue) => issue.code === "INVALID_INPUT" && issue.pointer === "/stats",
+      ),
+    ).toBe(true)
+    const panel = evaluateEffects(
+      prepared,
+      state,
+      panelInput({ hit: {} }) as never,
+    )
+    expect(panel.ok).toBe(false)
+    if (panel.ok) {
+      throw new Error("panel query must fail")
+    }
+    expect(
+      panel.issues.some(
+        (issue) => issue.code === "INVALID_INPUT" && issue.pointer === "/hit",
+      ),
+    ).toBe(true)
+    const contributions = evaluateEffects(prepared, state, {
+      kind: "contributions",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots: [],
+      beneficiaries: ["entity:attacker"],
+      entities: ["entity:attacker"],
+    } as never)
+    expect(contributions.ok).toBe(false)
+    if (contributions.ok) {
+      throw new Error("contributions query must fail")
+    }
+    expect(
+      contributions.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" && issue.pointer === "/entities",
+      ),
+    ).toBe(true)
+  })
+
+  it("requires the fields of the selected branch", () => {
+    const { prepared, state } = astraSession("session:query-missing-fields")
+    const panel = evaluateEffects(prepared, state, {
+      kind: "panel",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots: [],
+      entities: ["entity:attacker"],
+    } as never)
+    expect(panel.ok).toBe(false)
+    if (panel.ok) {
+      throw new Error("panel query must fail")
+    }
+    expect(
+      panel.issues.some(
+        (issue) => issue.code === "INVALID_INPUT" && issue.pointer === "/stats",
+      ),
+    ).toBe(true)
+    const hit = evaluateEffects(prepared, state, {
+      kind: "hit",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots: [],
+    } as never)
+    expect(hit.ok).toBe(false)
+    if (hit.ok) {
+      throw new Error("hit query must fail")
+    }
+    expect(
+      hit.issues.some(
+        (issue) => issue.code === "INVALID_INPUT" && issue.pointer === "/hit",
+      ),
+    ).toBe(true)
+    const contributions = evaluateEffects(prepared, state, {
+      kind: "contributions",
+      atSeconds: 0,
+      world: astraWorld(3000),
+      observedSnapshots: [],
+    } as never)
+    expect(contributions.ok).toBe(false)
+    if (contributions.ok) {
+      throw new Error("contributions query must fail")
+    }
+    expect(
+      contributions.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" && issue.pointer === "/beneficiaries",
+      ),
+    ).toBe(true)
+  })
+
+  it("keeps reading only the facts the query needs", () => {
+    const { prepared, state } = astraSession("session:query-on-demand")
+    const attackerOnlyWorld = {
+      ...astraWorld(3000),
+      entities: astraWorld(3000).entities.filter(
+        (entity) => entity.entityId === "entity:attacker",
+      ),
+    }
+    const result = evaluateEffects(prepared, state, {
+      kind: "panel",
+      atSeconds: 0,
+      world: attackerOnlyWorld,
+      observedSnapshots: [],
+      entities: ["entity:attacker"],
+      stats: ["criticalRate"],
+    } as never)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("panel query must succeed")
+    }
+    expect(
+      result.value.attributes.find(
+        (attribute) => attribute.stat === "criticalRate",
+      )?.value.value,
+    ).toBeCloseTo(0.05, 9)
+  })
+
+  it("keeps accepting repeated query entries", () => {
+    const { prepared, state } = astraSession("session:query-repeated-entries")
+    const result = evaluateEffects(
+      prepared,
+      state,
+      panelInput({
+        entities: ["entity:attacker", "entity:attacker"],
+        stats: ["attack", "attack"],
+      }) as never,
+    )
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error("panel query must succeed")
+    }
+    expect(
+      result.value.attributes.filter(
+        (attribute) => attribute.stat === "attack",
+      ),
+    ).toHaveLength(1)
   })
 })

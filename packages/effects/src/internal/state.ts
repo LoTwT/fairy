@@ -1501,14 +1501,14 @@ function arraysEqual(
 }
 
 function lifetimesEqual(left: unknown, right: unknown): boolean {
-  return JSON.stringify(sortKeys(left)) === JSON.stringify(sortKeys(right))
+  return equalIgnoringKeyOrder(left, right)
 }
 
 function triggersEqual(
   left: TriggerContext | null,
   right: TriggerContext | null,
 ): boolean {
-  return JSON.stringify(sortKeys(left)) === JSON.stringify(sortKeys(right))
+  return equalIgnoringKeyOrder(left, right)
 }
 
 function sortKeys(value: unknown): unknown {
@@ -1524,8 +1524,20 @@ function sortKeys(value: unknown): unknown {
   return value
 }
 
-function snapshotsEqual(left: SavedSnapshot, right: SavedSnapshot): boolean {
+/** 与对象键顺序无关的结构相等；数组元素顺序仍属于内容。 */
+function equalIgnoringKeyOrder(left: unknown, right: unknown): boolean {
   return JSON.stringify(sortKeys(left)) === JSON.stringify(sortKeys(right))
+}
+
+/**
+ * 快照内容比较的唯一实现：导入、同步、查询与推进共用，
+ * 忽略对象键顺序，但不忽略数组顺序。
+ */
+export function snapshotsEqual(
+  left: SavedSnapshot,
+  right: SavedSnapshot,
+): boolean {
+  return equalIgnoringKeyOrder(left, right)
 }
 
 export type {

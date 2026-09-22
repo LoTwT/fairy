@@ -647,7 +647,9 @@ export function validateSnapshots(
           `Attribute (${record.entityId}, ${record.stat}, ${record.stage}) appears more than once in the snapshot`,
         )
         attributesValid = false
+        continue
       }
+      seenAttributes.add(key)
     }
     if (!attributesValid) {
       valid = false

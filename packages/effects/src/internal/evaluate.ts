@@ -20,7 +20,12 @@ import type {
   Unit,
 } from "../types.ts"
 import { IssueCollector, failure } from "./issues.ts"
-import { expectLiteral, expectNonEmptyArray, expectObject } from "./checks.ts"
+import {
+  expectLiteral,
+  expectNonEmptyArray,
+  expectObject,
+  rejectUnknownFields,
+} from "./checks.ts"
 import {
   readPreparedInternal,
   type PreparedContributionEntry,
@@ -30,6 +35,7 @@ import {
   findStateObservation,
   readStateInternal,
   resolveStateBindingId,
+  snapshotsEqual,
   type EffectStateInternal,
 } from "./state.ts"
 import {
@@ -39,7 +45,7 @@ import {
   type WorldIndex,
 } from "./world.ts"
 import { calculateFinalStat, calculateInitialStat } from "@randomplay/core"
-import { DIRECT_STATS, STAT_UNIT_MAP } from "./vocabulary.ts"
+import { DIRECT_STATS, STAT_UNIT_MAP, STATS, isEntityId } from "./vocabulary.ts"
 
 interface LayerCandidate {
   readonly entry: PreparedContributionEntry
@@ -1695,6 +1701,86 @@ export function readMomentStat(
   return computeStatValue(entityId, stat, stage, null, evaluation.context)
 }
 
+/** 各查询分支允许的字段；其他分支的字段属于非法输入，不能静默丢弃。 */
+const EVALUATION_INPUT_FIELDS: Readonly<
+  Record<EvaluationInput["kind"], readonly string[]>
+> = {
+  panel: [
+    "kind",
+    "atSeconds",
+    "world",
+    "observedSnapshots",
+    "entities",
+    "stats",
+  ],
+  hit: ["kind", "atSeconds", "world", "observedSnapshots", "hit"],
+  contributions: [
+    "kind",
+    "atSeconds",
+    "world",
+    "observedSnapshots",
+    "beneficiaries",
+  ],
+}
+
+/** 读取查询中的实体身份列表；每个元素都必须是非空 `entity:` 身份。 */
+function readEntityIdList(
+  value: unknown,
+  collector: IssueCollector,
+  pointer: string,
+  what: string,
+): EntityId[] | undefined {
+  const array = expectNonEmptyArray(
+    value,
+    { collector, structureCode: "INVALID_INPUT", pointer },
+    what,
+  )
+  if (array === undefined) {
+    return undefined
+  }
+  let valid = true
+  for (const [index, entry] of array.entries()) {
+    if (!isEntityId(entry)) {
+      collector.report(
+        "INVALID_INPUT",
+        `${pointer}/${index}`,
+        "Each entry must be a non-empty entity: identity",
+      )
+      valid = false
+    }
+  }
+  return valid ? (array as EntityId[]) : undefined
+}
+
+/** 读取查询中的属性列表；每个元素都必须是正式 Stat。 */
+function readStatList(
+  value: unknown,
+  collector: IssueCollector,
+  pointer: string,
+  what: string,
+): Stat[] | undefined {
+  const array = expectNonEmptyArray(
+    value,
+    { collector, structureCode: "INVALID_INPUT", pointer },
+    what,
+  )
+  if (array === undefined) {
+    return undefined
+  }
+  let valid = true
+  for (const [index, entry] of array.entries()) {
+    if (typeof entry !== "string" || !STATS.has(entry as Stat)) {
+      collector.report(
+        "INVALID_INPUT",
+        `${pointer}/${index}`,
+        "Each entry must be a registered stat",
+      )
+      valid = false
+    }
+  }
+  return valid ? (array as Stat[]) : undefined
+}
+
 export function evaluateEffects(
   prepared: PreparedEffects,
   state: EffectState,
@@ -1735,6 +1821,14 @@ export function evaluateEffects(
     { collector, structureCode: "INVALID_INPUT", pointer: "/kind" },
     "evaluation input kind",
   )
+  if (kind !== undefined) {
+    rejectUnknownFields(
+      inputObject,
+      EVALUATION_INPUT_FIELDS[kind],
+      { collector, structureCode: "INVALID_INPUT", pointer: "" },
+      `${kind} query`,
+    )
+  }
   const atSeconds = inputObject["atSeconds"]
   if (
     typeof atSeconds !== "number" ||
@@ -1781,7 +1875,7 @@ export function evaluateEffects(
       snapshots.set(snapshot.snapshotId, snapshot)
       continue
     }
-    if (JSON.stringify(existing) !== JSON.stringify(snapshot)) {
+    if (!snapshotsEqual(existing, snapshot)) {
       collector.report(
         "CONTEXT_MISMATCH",
         "/observedSnapshots",
@@ -1826,38 +1920,38 @@ export function evaluateEffects(
     stack: [],
   }
   if (kind === "panel") {
-    const entities = expectNonEmptyArray(
+    const entities = readEntityIdList(
       inputObject["entities"],
-      { collector, structureCode: "INVALID_INPUT", pointer: "/entities" },
+      collector,
+      "/entities",
       "panel entities",
     )
-    const stats = expectNonEmptyArray(
+    const stats = readStatList(
       inputObject["stats"],
-      { collector, structureCode: "INVALID_INPUT", pointer: "/stats" },
+      collector,
+      "/stats",
       "panel stats",
     )
     if (entities === undefined || stats === undefined) {
       return failure(collector)
     }
-    const result = evaluatePanel(entities as string[], stats as Stat[], context)
+    const result = evaluatePanel(entities, stats, context)
     if (result === undefined || !collector.isEmpty) {
       return failure(collector)
     }
     return { ok: true, value: result }
   }
   if (kind === "contributions") {
-    const beneficiaries = expectNonEmptyArray(
+    const beneficiaries = readEntityIdList(
       inputObject["beneficiaries"],
-      { collector, structureCode: "INVALID_INPUT", pointer: "/beneficiaries" },
+      collector,
+      "/beneficiaries",
       "contribution beneficiaries",
     )
     if (beneficiaries === undefined) {
       return failure(collector)
     }
-    const result = evaluateContributionsQuery(
-      beneficiaries as string[],
-      context,
-    )
+    const result = evaluateContributionsQuery(beneficiaries, context)
     if (result === undefined || !collector.isEmpty) {
       return failure(collector)
     }

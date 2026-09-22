@@ -45,6 +45,7 @@ import {
   readStateInternal,
   resolveLayerMaximum,
   resolveStateBindingId,
+  snapshotsEqual,
   type EffectStateInternal,
   freezeState,
 } from "./state.ts"
@@ -1624,7 +1625,7 @@ export function advanceEffects(
       snapshots.set(snapshot.snapshotId, snapshot)
       continue
     }
-    if (JSON.stringify(existing) !== JSON.stringify(snapshot)) {
+    if (!snapshotsEqual(existing, snapshot)) {
       collector.report(
         "CONTEXT_MISMATCH",
         "/observedSnapshots",
