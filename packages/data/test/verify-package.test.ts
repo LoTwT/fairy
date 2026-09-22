@@ -125,7 +125,7 @@ describe("packed package", () => {
       expect(existsSync(join(cleanPackage, path)), path).toBe(false)
     execFileSync("corepack", ["pnpm", "typecheck"], {
       cwd: cleanPackage,
-      stdio: "pipe",
+      stdio: "inherit",
       env: checkoutEnvironment,
     })
     // A pre-existing typecheck catalog must never become the build's publication input.
@@ -240,6 +240,9 @@ describe("packed package", () => {
         "README.md",
         "dist/definitions/effects/starter.json",
         "dist/definitions/effects/automatic.json",
+        "dist/definitions/effects/static.json",
+        "dist/definitions/effects/static-catalog.json",
+        "dist/definitions/effects/static-coverage.json",
         "dist/index.d.mts",
         "dist/index.mjs",
         "dist/index.browser.mjs",
@@ -249,7 +252,13 @@ describe("packed package", () => {
         ...jsonFiles.map((path) => `dist/integrated/${path}`),
       ].toSorted(),
     )
-    for (const name of ["starter", "automatic"]) {
+    for (const name of [
+      "starter",
+      "automatic",
+      "static",
+      "static-catalog",
+      "static-coverage",
+    ]) {
       const path = `definitions/effects/${name}.json`
       expectSameBytes(
         readFileSync(join(packedRoot, "dist", path)),
@@ -318,8 +327,15 @@ assert.equal(starterDefinitions.default.schemaVersion, 1)
 assert.equal(starterDefinitions.default.ruleSetId, "starter-effects")
 assert.equal(starterDefinitions.default.effects.length, 3)
 const automaticDefinitions = await import("@randomplay/data/definitions/effects/automatic.json", { with: { type: "json" } })
-const { parseEffectRuleSet, prepareEffects, supplyEffectState, advanceEffects } = await import("@randomplay/effects")
+const { parseEffectRuleSet, prepareEffects, supplyEffectState, advanceEffects, calculateStaticDamageFromCatalog } = await import("@randomplay/effects")
 function value(result) { assert.equal(result.ok, true, JSON.stringify(result)); return result.value }
+const staticDefinitions = (await import("@randomplay/data/definitions/effects/static.json", { with: { type: "json" } })).default
+const staticCatalog = (await import("@randomplay/data/definitions/effects/static-catalog.json", { with: { type: "json" } })).default
+const staticCoverage = (await import("@randomplay/data/definitions/effects/static-coverage.json", { with: { type: "json" } })).default
+assert.equal(staticCoverage.summary.rawEffects, 1290)
+const staticResult = value(calculateStaticDamageFromCatalog({ ...${readFileSync(new URL("./fixtures/static-catalog-consumer.json", import.meta.url), "utf8")}, definitions: staticDefinitions, catalog: staticCatalog }))
+assert.ok(Math.abs(staticResult.criticalRate - 0.13) < 1e-12)
+assert.ok(staticResult.expected > staticResult.nonCritical)
 const rules = value(parseEffectRuleSet(automaticDefinitions.default))
 assert.equal(rules.ruleSetId, "automatic-effects")
 assert.equal(rules.revision, "1")

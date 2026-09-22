@@ -1,0 +1,14 @@
+{
+  "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
+  "zzz-hp/src/types/calculator.ts": "88fc162b03671b9be2d0a29c2bfaf6b41ad51669d2f7507b2308af50ddde70db",
+  "zzz-hp/src/utils/buffEffect.ts": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+  "zzz-hp/src/utils/panelBuffCalc.ts": "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09",
+  "zzz-hp/src/utils/damageCalc.ts": "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71",
+  "zzz-hp/src/utils/multFactorPercent.ts": "eee1f52bfa9c128d0e278c5890717c6aa1e897695237a9c6573751489ad311cb",
+  "zzz-hp/src/utils/calculatorUi.ts": "e61bf67fab73920889338997d77d12190b45d29cfd5cb49703802a0953fb1cfe",
+  "zzz-hp/src/utils/remielUtils.ts": "1cb8084a981115924b0cdc64961a67f937c280fe82babe2710758c7b279d8773",
+  "zzz-hp/src/utils/calcNumberFormat.ts": "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a",
+  "zzz-hp/src/utils/skillTalentLevels.ts": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
+  "zzz-hp/src/stores/calculatorBuffs.ts": "a080573ff7217ffd37c25e161346240cce2cb121f2bb6b3edd1b350393466e6b",
+  "zzz-hp/src/data/calculatorBuffDefaults.ts": "4500dbc92ebb0ad649c47d960bdf26cc332e0f896a539d74bbeb945c4ffdacca"
+}

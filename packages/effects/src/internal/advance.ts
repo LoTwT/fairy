@@ -177,7 +177,7 @@ function evaluateTriggerExpression(
         runtime.moment,
         entityId,
         expression.stat,
-        stage as "initial" | "current",
+        stage as "base" | "initial" | "current",
       )
     }
     case "add":
@@ -1035,13 +1035,13 @@ function collectActivationStatReads(
   readonly role: string
   readonly entityId: string | undefined
   readonly stat: Stat
-  readonly stage: "initial" | "current"
+  readonly stage: "base" | "initial" | "current"
 }[] {
   const reads: {
     role: string
     entityId: string | undefined
     stat: Stat
-    stage: "initial" | "current"
+    stage: "base" | "initial" | "current"
   }[] = []
   const walkExpression = (expression: unknown): void => {
     if (typeof expression !== "object" || expression === null) {
@@ -1053,7 +1053,7 @@ function collectActivationStatReads(
         | { readonly role: string; readonly entityId?: string }
         | undefined
       const stat = record["stat"] as Stat
-      const stage = record["stage"] as "initial" | "current"
+      const stage = record["stage"] as "base" | "initial" | "current"
       if (entity !== undefined && typeof stat === "string") {
         reads.push({
           role: entity.role,

@@ -15,6 +15,7 @@ export type {
 } from "./types.ts"
 export type {
   Activation,
+  AttributeSource,
   ActionId,
   ActionInstanceId,
   AnyParameter,
@@ -114,4 +115,18 @@ export type {
   UniquenessPolicy,
   Unit,
   WorldObservation,
+} from "./types.ts"
+
+export { calculateStaticDamageFromCatalog } from "./internal/static-catalog.ts"
+export type {
+  StaticEffectCatalog,
+  StaticCatalogEntity,
+  StaticCatalogOption,
+  StaticCatalogVariant,
+  StaticCatalogInputRequirement,
+  StaticCatalogApplicability,
+  StaticCatalogUnavailableReason,
+  StaticCatalogDamageInput,
+  StaticCatalogDamageItem,
+  StaticCatalogDamageParameters,
 } from "./types.ts"

@@ -1,0 +1,113 @@
+{
+  "world": {
+    "entities": [
+      {
+        "kind": "actor",
+        "entityId": "entity:holder",
+        "teamId": "team:players",
+        "generalStats": {
+          "attack": {
+            "baseValue": 1000,
+            "initialPercentage": [],
+            "initialFixed": [],
+            "finalPercentage": [],
+            "finalFixed": []
+          }
+        },
+        "directStats": {
+          "criticalRate": {
+            "baseValue": 0.05,
+            "additions": []
+          },
+          "criticalDamage": {
+            "baseValue": 0.5,
+            "additions": []
+          },
+          "penetrationRatio": {
+            "baseValue": 0,
+            "additions": []
+          }
+        }
+      },
+      {
+        "kind": "actor",
+        "entityId": "entity:enemy",
+        "teamId": "team:enemies",
+        "generalStats": {},
+        "directStats": {}
+      }
+    ],
+    "states": [],
+    "distances": []
+  },
+  "hit": {
+    "actorId": "entity:holder",
+    "targetId": "entity:enemy",
+    "actionId": "action:oracle",
+    "skillCategory": "basic",
+    "element": "physical",
+    "damageItems": [
+      {
+        "mode": "direct",
+        "role": "base",
+        "itemId": "base",
+        "damageMultiplier": 2,
+        "stat": "attack",
+        "statSource": {
+          "entityId": "entity:holder"
+        }
+      }
+    ],
+    "skillTargetIds": []
+  },
+  "damage": {
+    "kind": "regular",
+    "damageBonus": [],
+    "defense": {
+      "attackerLevel": 60,
+      "targetBaseDefense": 1000,
+      "defensePercentageAdjustments": [],
+      "penetrationValues": []
+    },
+    "resistance": {
+      "targetResistance": 0,
+      "targetResistanceReductions": [],
+      "attackerResistanceIgnoreValues": []
+    },
+    "damageTaken": {
+      "targetDamageTakenIncreases": [],
+      "targetDamageTakenReductions": []
+    },
+    "stunDamage": {
+      "isTargetStunned": true,
+      "targetBaseStunDamageMultiplier": 1.5,
+      "targetStunDamageMultiplierAdjustments": []
+    }
+  },
+  "bindings": [
+    {
+      "bindingId": "binding:source",
+      "kind": "drive-disc",
+      "holderId": "entity:holder",
+      "sourceEntityId": "31000",
+      "eligible": true,
+      "configuration": {
+        "setPieces": 2
+      }
+    }
+  ],
+  "selections": [
+    {
+      "optionId": "drive-discs:woodpecker:setPieces:2:blk-ms0air06-97bcyw:legacy-self-critRate",
+      "bindingId": "binding:source",
+      "layers": 1
+    }
+  ],
+  "actorSources": [
+    {
+      "entityId": "entity:holder",
+      "agentEntityId": "1211"
+    }
+  ],
+  "inputs": []
+}

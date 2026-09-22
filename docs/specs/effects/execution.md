@@ -4,7 +4,7 @@
 
 [contract-examples.ts](contract-examples.ts) 提供可编译的规则、输入和类型反例，直接引用包内正式类型；`pnpm check:spec-types` 编译该文件作为类型契约检查，包测试另行验证这些实例通过运行时校验。其中 `syntheticRuleSet` 是纯合成验收数据；游戏实例中显式选择的读取时点、刷新策略和动作别名只用于验证表达能力，不据此发布游戏规则。
 
-静态计算入口 `calculateStaticDamage` 也已实现；培养档位、ZZZ-HP 固定来源与后续数据转换范围见[静态快照增益数据与培养配置](static-snapshot.md)。
+静态计算入口 `calculateStaticDamage` 与目录入口 `calculateStaticDamageFromCatalog` 也已实现；培养档位和来源优先级见[静态快照规范](static-snapshot.md)，正式制品及范围见[批量数据接入规范](../data/zzz-hp-static-effects.md)。
 
 ## 数据与身份
 
@@ -238,6 +238,10 @@
 
 贡献阶段的 `input` 表达式读取调用方显式传入的 `EvaluationInput.inputs`，按 `(bindingId, name)` 匹配并校验单位。重复键、未绑定来源、非有限值或未知字段均拒绝；实际读取的值缺失报 `MISSING_FACT`。手工值不回退到默认面板或当前属性，也不等同于历史快照。已有 `activation/action-start` 读取仍使用对应 `SavedSnapshot`。
 
+通用属性新增 `base` 读取阶段，只读取明确的 `GeneralStatInput.baseValue`，不消费任何百分比或固定贡献；初始/最终阶段继续按已有 helper 求值。它用于以基础回能、异常掌控为底数的来源增益，不能以最终面板替代。
+
+角色观察可显式启用 `deriveSheerForce`：贯穿力节点在对应 initial/current 阶段的独立贡献上加上 `0.1 × health + 0.3 × attack`，同样参与依赖环与缺失属性诊断。默认关闭以兼容低层输入；目录入口自动开启，其贯穿力输入分解与历史最终值边界见批量接入规范。
+
 命中条件增加 `hit.element`、`hit.damageKind`、`hit.targetState` 与 `hit.skillTag`。前三者按登记枚举比较，技能标签按数组中任一标签匹配；标签为空表示明确没有，省略表示未提供。旧命中可以省略这些字段，只有实际读取缺失事实时才报错。命中查询的可选 `stats` 可请求额外属性，仍使用同一命中局部依赖图，不另算通用面板冒充命中结果。
 
 ### 唯一性候选
@@ -284,6 +288,13 @@
 | `refringe-coefficient-increase`      | `calculateRefringeMultiplier.refringeCoefficientIncreases`             | 非负比例                             |
 | `luminize-multiplier-addition`       | `luminizeMultiplierFactor.baseLuminizeMultiplier` 的加数               | 有符号倍率加数                       |
 | `luminize-multiplier-scale`          | `luminizeMultiplierFactor.multiplicativeLuminizeMultiplierAdjustments` | 非负乘数，输出操作为 `scale`         |
+| `base-multiplier-addition`           | 目录基础伤害项倍率加数                                                 | 有符号倍率加数                       |
+| `base-multiplier-increase`           | 目录各伤害项乘以 `1 + Σincrease`                                       | 有符号比例，最终倍率须合法           |
+| `settlement-multiplier-addition`     | 目录 `role: settlement` 项倍率加数                                     | 有符号倍率加数；缺独立项即拒绝       |
+| `anomaly-duration-addition`          | 目录紊乱/乱流项的时间准备                                              | 秒数，加入一次，按原异常元素独立筛选 |
+| `luminize-multiplier-increase`       | 耀变倍率乘以 `1 + Σincrease`                                           | 有符号比例                           |
+| `luminize-special-addition/increase` | 已登记的耀变独立调整 `(1 + Σaddition) × (1 + Σincrease)`               | 有符号比例，不是通用特殊乘区         |
+| `luminize-proficiency-input`         | 目录唯一参数映射传给 core 的精通值                                     | 异常精通点数；由 core 唯一换算       |
 | 命中 `damageMultiplier / add, scale` | 每项按 `(原倍率 + Σadd) × Πscale` 归约后交给 `baseDamageFactor`        | 加数可带符号，乘数及归约后的倍率非负 |
 | `resource-generation`                | 能量公式 `baseEnergyGenerationValues` 的一次基础值                     | 非负能量点数，效率适用性另行确认     |
 | `action-request`                     | 外部动作执行方                                                         | 次数与动作身份；不提供猜测的伤害倍率 |
@@ -303,6 +314,12 @@
 - `regular` 使用普通伤害，`sheer` 使用贯穿伤害；`anomaly/disorder/vortex/anomaly-settlement` 使用当前 core 异常伤害公式，基础倍率由调用方先按对应机制确认；`luminize` 使用耀光公式。异常/耀光的 `damageBonus` 可以是尚未结算的贡献数组，也可以是 `{ settledMultiplier }`。后者保留给定快照或特殊固定乘区，不再叠加当前 `damage-bonus`，相关贡献列为本次不适用。跨角色虚拟快照可先由 core 的 `calculateVirtualAgentSnapshot` 构造，再明确提供本次使用的属性与已结算增伤。
 - 普通及异常暴击率只在计算期望时裁剪至 `[0, 1]`，暴伤裁剪仍由各 core 公式负责。耀光没有暴击分支，返回 `critical: null`。计算过程不做显示舍入。
 - 已登记但不适用于该伤害公式的贡献进入 `notApplicableContributions`，例如能量生成或贯穿伤害中的减防；未登记通道在规则校验时直接拒绝。原始基线非法或 core 计算失败返回 `INVALID_INPUT`，不输出半组伤害结果。
+
+每项可通过 `statSource` 指定属性来源，其他乘区属性通过 `hit.attributeSources` 指定。来源没有 snapshotId 时读取该实体的当前属性；指定 snapshotId 时只读取已保存的 current 属性项，缺失报 `MISSING_SNAPSHOT`。结果属性携带 snapshotId 区分同一实体的历史和当前值；不能以当前世界兜底。
+
+低层异化接受原 helper 参数或 `{ settledMultiplier }`。已结算分支直接复用倍率，不再次叠加异化通道。目录 `from-effects` 则将完整系数加数求和后加 1，仅计算一次；目录 `settled` 不再读取被跳过转化的当前属性或输入。
+
+`calculateStaticDamageFromCatalog` 在上述路径前校验选项目录、展开静态选择并准备倍率。身份/职业与互斥、已选缺档/缺输入、耀变唯一参数映射、异常来源及时间派生规则集中在[数据接入规范](../data/zzz-hp-static-effects.md)，类型以 `StaticCatalogDamageInput` 为准。表中标明“目录”的新通道在低层入口仅作为不适用贡献返回，不隐式更改原有倍率。时间派生来源保留在结果 `preparations`，不要求时间线。
 
 ## 校验与验收
 

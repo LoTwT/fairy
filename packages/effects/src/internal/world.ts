@@ -1,4 +1,5 @@
 import type {
+  AttributeSource,
   DirectStat,
   EntityId,
   EntityObservation,
@@ -14,6 +15,7 @@ import {
   DAMAGE_ELEMENTS,
   DAMAGE_KINDS,
   GENERAL_STATS,
+  STATS,
   isEntityId,
   isPrefixedIdentity,
   isTeamId,
@@ -140,6 +142,15 @@ export function validateWorldObservation(
       continue
     }
     if (kind === "actor") {
+      if (
+        entity["deriveSheerForce"] !== undefined &&
+        typeof entity["deriveSheerForce"] !== "boolean"
+      )
+        collector.report(
+          "INVALID_INPUT",
+          `${entityPointer}/deriveSheerForce`,
+          "Expected a boolean",
+        )
       const generalStats = expectObject(
         entity["generalStats"],
         { ...entityChecks, pointer: `${entityPointer}/generalStats` },
@@ -201,7 +212,14 @@ export function validateWorldObservation(
       }
       rejectUnknownFields(
         entity,
-        ["kind", "entityId", "teamId", "generalStats", "directStats"],
+        [
+          "kind",
+          "entityId",
+          "teamId",
+          "generalStats",
+          "directStats",
+          "deriveSheerForce",
+        ],
         entityChecks,
         "actor observation",
       )
@@ -721,7 +739,7 @@ function validateAttributeObservation(
   const direct = DIRECT_STATS.has(stat as DirectStat)
   const stageValid = direct
     ? stage === "current"
-    : stage === "initial" || stage === "current"
+    : stage === "base" || stage === "initial" || stage === "current"
   if (!stageValid) {
     checks.collector.report(
       "INVALID_INPUT",
@@ -762,6 +780,40 @@ function validateAttributeObservation(
     "attribute observation",
   )
   return valid
+}
+
+export function validateAttributeSource(
+  value: unknown,
+  collector: IssueCollector,
+  pointer: string,
+): AttributeSource | undefined {
+  const checks = { collector, structureCode: "INVALID_INPUT" as const, pointer }
+  const object = expectObject(value, checks, "attribute source")
+  if (object === undefined) return undefined
+  rejectUnknownFields(
+    object,
+    ["entityId", "snapshotId"],
+    checks,
+    "attribute source",
+  )
+  for (const [field, prefix] of [
+    ["entityId", "entity"],
+    ["snapshotId", "snapshot"],
+  ] as const) {
+    if (field === "snapshotId" && object[field] === undefined) continue
+    const id = object[field]
+    if (
+      typeof id !== "string" ||
+      !id.startsWith(`${prefix}:`) ||
+      id.length <= prefix.length + 1
+    )
+      collector.report(
+        "INVALID_INPUT",
+        `${pointer}/${field}`,
+        `Expected a non-empty ${prefix}: identity`,
+      )
+  }
+  return object as unknown as AttributeSource
 }
 
 export function validateHitContext(
@@ -897,6 +949,27 @@ export function validateHitContext(
     )
     valid = false
   }
+  if (object["attributeSources"] !== undefined) {
+    const sources = expectObject(
+      object["attributeSources"],
+      { ...checks, pointer: `${pointer}/attributeSources` },
+      "attribute sources",
+    )
+    if (sources !== undefined) {
+      rejectUnknownFields(
+        sources,
+        [...STATS],
+        { ...checks, pointer: `${pointer}/attributeSources` },
+        "attribute sources",
+      )
+      for (const [stat, source] of Object.entries(sources))
+        validateAttributeSource(
+          source,
+          collector,
+          `${pointer}/attributeSources/${stat}`,
+        )
+    }
+  }
   const damageItems = expectNonEmptyArray(
     object["damageItems"],
     { ...checks, pointer: `${pointer}/damageItems` },
@@ -948,6 +1021,12 @@ export function validateHitContext(
       )
       valid = false
     }
+    if (itemObject["statSource"] !== undefined)
+      validateAttributeSource(
+        itemObject["statSource"],
+        collector,
+        `${itemPointer}/statSource`,
+      )
     const stat = itemObject["stat"]
     if (typeof stat !== "string" || !GENERAL_STATS.has(stat as GeneralStat)) {
       checks.collector.report(
@@ -959,7 +1038,7 @@ export function validateHitContext(
     }
     rejectUnknownFields(
       itemObject,
-      ["itemId", "damageMultiplier", "stat"],
+      ["itemId", "damageMultiplier", "stat", "statSource"],
       { ...checks, pointer: itemPointer },
       "damage item",
     )
@@ -974,7 +1053,7 @@ export function snapshotAttribute(
   snapshot: SavedSnapshot,
   entityId: EntityId,
   stat: Stat,
-  stage: "initial" | "current",
+  stage: "base" | "initial" | "current",
 ): number | undefined {
   for (const attribute of snapshot.attributes) {
     if (

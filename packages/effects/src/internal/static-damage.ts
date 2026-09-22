@@ -187,7 +187,13 @@ function validateDamageFields(
     },
   }
   for (const field of fields) {
-    const allowed = nestedFields[field]
+    const allowed =
+      field === "refringe" &&
+      typeof object[field] === "object" &&
+      object[field] !== null &&
+      "settledMultiplier" in object[field]
+        ? { settledMultiplier: "number" as const }
+        : nestedFields[field]
     if (allowed === undefined) continue
     const nestedChecks = { ...checks, pointer: `/damage/${field}` }
     const nested = expectObject(object[field], nestedChecks, field)
@@ -280,6 +286,33 @@ function validateSelections(
 export function calculateStaticDamage(
   input: StaticDamageInput,
 ): Result<StaticDamageResult> {
+  const evaluated = evaluateStaticDamage(input)
+  if (!evaluated.ok) return evaluated
+  const collector = new IssueCollector()
+  try {
+    return {
+      ok: true,
+      value: calculateDamageFromEvaluation(
+        input.damage,
+        evaluated.value.hit,
+        evaluated.value.evaluation,
+      ),
+    }
+  } catch (error) {
+    collector.report(
+      "INVALID_INPUT",
+      "/damage",
+      error instanceof Error ? error.message : String(error),
+    )
+    return failure(collector)
+  }
+}
+
+/** 目录适配复用同一校验、选择、依赖展开与求值，再准备 core 的派生输入。 */
+export function evaluateStaticDamage(input: StaticDamageInput): Result<{
+  readonly hit: HitContext
+  readonly evaluation: StaticDamageResult["evaluation"]
+}> {
   const collector = new IssueCollector()
   const checks = {
     collector,
@@ -337,6 +370,7 @@ export function calculateStaticDamage(
         "actionId",
         "skillCategory",
         "skillTags",
+        "attributeSources",
         "damageItems",
         "element",
         "actionSnapshotId",
@@ -526,19 +560,7 @@ export function calculateStaticDamage(
     ...(input.inputs === undefined ? {} : { inputs: input.inputs }),
   })
   if (!evaluated.ok) return evaluated
-  try {
-    return {
-      ok: true,
-      value: calculateDamage(input.damage, hit, evaluated.value),
-    }
-  } catch (error) {
-    collector.report(
-      "INVALID_INPUT",
-      "/damage",
-      error instanceof Error ? error.message : String(error),
-    )
-    return failure(collector)
-  }
+  return { ok: true, value: { hit, evaluation: evaluated.value } }
 }
 
 function finiteSum(values: readonly number[]): number {
@@ -553,7 +575,7 @@ function finiteSum(values: readonly number[]): number {
   return sum
 }
 
-function calculateDamage(
+export function calculateDamageFromEvaluation(
   damage: StaticDamageParameters,
   hit: HitContext,
   evaluation: StaticDamageResult["evaluation"],
@@ -573,7 +595,10 @@ function calculateDamage(
   const stat = (name: Stat): number => {
     const value = evaluation.attributes.find(
       (attribute) =>
-        attribute.stat === name && attribute.entityId === hit.actorId,
+        attribute.stat === name &&
+        attribute.entityId ===
+          (hit.attributeSources?.[name]?.entityId ?? hit.actorId) &&
+        attribute.snapshotId === hit.attributeSources?.[name]?.snapshotId,
     )?.value.value
     if (value === undefined)
       throw new Error(`Required damage attribute "${name}" was not evaluated`)
@@ -682,13 +707,16 @@ function calculateDamage(
         ...damage.anomalyDamageBonus,
         ...take("anomaly-damage-bonus"),
       ],
-      refringe: calculateRefringeMultiplier({
-        ...damage.refringe,
-        refringeCoefficientIncreases: [
-          ...damage.refringe.refringeCoefficientIncreases,
-          ...take("refringe-coefficient-increase"),
-        ],
-      }),
+      refringe:
+        "settledMultiplier" in damage.refringe
+          ? damage.refringe.settledMultiplier
+          : calculateRefringeMultiplier({
+              ...damage.refringe,
+              refringeCoefficientIncreases: [
+                ...damage.refringe.refringeCoefficientIncreases,
+                ...take("refringe-coefficient-increase"),
+              ],
+            }),
     }
     if (damage.kind === "luminize") {
       nonCritical = luminizeDamageFormula.calculate({
