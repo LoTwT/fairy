@@ -4,6 +4,7 @@ import { calculateStaticDamageFromCatalog } from "../src/index.ts"
 import type {
   ContributionOperation,
   StaticCatalogDamageInput,
+  StaticCatalogDamageItem,
   StaticCatalogVariant,
   StaticEffectCatalog,
 } from "../src/index.ts"
@@ -268,6 +269,84 @@ describe("catalog static calculation", () => {
         result.value.evaluation.hit!.damageItems[0]!.damageMultiplier,
       ).toBe(22.75)
   })
+  it.each([
+    ["disorder", 17],
+    ["vortex", 22.75],
+  ] as const)(
+    "applies item-specific add and scale after preparing %s multipliers",
+    (kind, baseMultiplier) => {
+      const input = anomalyInput(
+        fixture([
+          contribution("anomaly-duration-addition", 3),
+          {
+            kind: "hit-adjustment",
+            field: "damageMultiplier",
+            operator: "add",
+            itemIds: ["base"],
+            value: literal("multiplier", 2),
+          },
+          {
+            kind: "hit-adjustment",
+            field: "damageMultiplier",
+            operator: "scale",
+            itemIds: ["base"],
+            value: literal("multiplier", 1.5),
+          },
+        ]),
+        kind,
+      )
+      const derivedItem: StaticCatalogDamageItem = {
+        role: "base",
+        itemId: "base",
+        stat: "attack",
+        statSource: { entityId: "entity:attacker" },
+        baseDurationSeconds: 10,
+        ...(kind === "disorder"
+          ? {
+              mode: "standard-disorder",
+              originalAnomalyAttribute: "electric",
+              elapsedSeconds: 3,
+            }
+          : { mode: "standard-vortex", profile: "shock" }),
+      }
+      const result = calculateStaticDamageFromCatalog({
+        ...input,
+        hit: {
+          ...input.hit,
+          damageItems: [derivedItem, { ...derivedItem, itemId: "unscaled" }],
+        },
+      })
+      const directItem: StaticCatalogDamageItem = {
+        mode: "direct",
+        role: "base",
+        itemId: "base",
+        stat: "attack",
+        statSource: { entityId: "entity:attacker" },
+        damageMultiplier: baseMultiplier,
+      }
+      const direct = calculateStaticDamageFromCatalog({
+        ...input,
+        selections: input.selections.slice(1),
+        hit: {
+          ...input.hit,
+          damageItems: [directItem, { ...directItem, itemId: "unscaled" }],
+        },
+      })
+      expect(result.ok).toBe(true)
+      expect(direct.ok).toBe(true)
+      if (result.ok && direct.ok) {
+        expect(
+          result.value.evaluation.hit!.damageItems.map(
+            (item) => item.damageMultiplier,
+          ),
+        ).toEqual([(baseMultiplier + 2) * 1.5, baseMultiplier])
+        expect(result.value.expected).toBeCloseTo(direct.value.expected, 12)
+        expect(
+          result.value.preparations?.map((p) => p.durationAdjustment),
+        ).toEqual([3, 3])
+      }
+    },
+  )
   it("keeps settlement on its designated item", () => {
     const input = fixture([contribution("settlement-multiplier-addition", 10)])
     const result = calculateStaticDamageFromCatalog({
@@ -716,6 +795,167 @@ describe("catalog static calculation", () => {
       }).ok,
     ).toBe(true)
   })
+  it("keeps binding and exclusive group identities distinct when they contain colons", () => {
+    const input = fixture([
+      contribution("base-multiplier-increase", 0.2),
+      contribution("base-multiplier-increase", 0.3),
+    ])
+    const independent: StaticCatalogDamageInput = {
+      ...input,
+      catalog: {
+        ...input.catalog,
+        options: input.catalog.options.map((option, index) => ({
+          ...option,
+          exclusiveGroup: index === 0 ? "b:c" : "c",
+        })),
+      },
+      world: {
+        ...input.world,
+        entities: [
+          ...input.world.entities,
+          {
+            kind: "actor",
+            entityId: "entity:second",
+            teamId: "team:players",
+            generalStats: {},
+            directStats: {},
+          },
+        ],
+      },
+      actorSources: [
+        ...input.actorSources,
+        { entityId: "entity:second", agentEntityId: "1311" },
+      ],
+      bindings: (["binding:a", "binding:a:b"] as const).map(
+        (bindingId, index) => ({
+          ...input.bindings[0]!,
+          bindingId,
+          holderId: index === 0 ? "entity:attacker" : "entity:second",
+        }),
+      ),
+      selections: input.selections.map((selection, index) => ({
+        ...selection,
+        bindingId: index === 0 ? "binding:a" : "binding:a:b",
+      })),
+    }
+    const result = calculateStaticDamageFromCatalog(independent)
+    const renamed = calculateStaticDamageFromCatalog({
+      ...independent,
+      bindings: independent.bindings.map((binding, index) => ({
+        ...binding,
+        bindingId: `binding:renamed${index}`,
+      })),
+      selections: independent.selections.map((selection, index) => ({
+        ...selection,
+        bindingId: `binding:renamed${index}`,
+      })),
+    })
+    expect(result.ok).toBe(true)
+    expect(renamed.ok).toBe(true)
+    if (result.ok && renamed.ok) {
+      expect(result.value.factors).toEqual(renamed.value.factors)
+      expect(result.value.expected).toBe(renamed.value.expected)
+    }
+  })
+  it("validates optional variant explanation before using it in a diagnostic", () => {
+    const input = fixture([contribution("base-multiplier-increase", 0.2)])
+    for (const status of ["converted", "unsupported"] as const)
+      for (const explanation of [null, 7, JSON.parse('{"toString":null}')])
+        expect(
+          calculateStaticDamageFromCatalog(
+            changeVariant(input, {
+              status,
+              ...(status === "unsupported"
+                ? { effectIds: [], reason: "semantic-conflict" }
+                : {}),
+              explanation,
+            }),
+          ),
+        ).toMatchObject({
+          ok: false,
+          issues: expect.arrayContaining([
+            expect.objectContaining({
+              code: "INVALID_INPUT",
+              pointer: "/catalog/options/0/variants/0/explanation",
+            }),
+          ]),
+        })
+  })
+  it("keeps holder and drive-disc identities distinct when they contain colons", () => {
+    const input = fixture()
+    const sourceEntityIds = ["c", "b:drive-disc:c"] as const
+    const withSecondHolder = (
+      secondHolder: "entity:a" | "entity:distinct",
+    ): StaticCatalogDamageInput => {
+      const holders = ["entity:a:drive-disc:b", secondHolder] as const
+      return {
+        ...input,
+        catalog: {
+          ...input.catalog,
+          entities: [
+            ...input.catalog.entities,
+            ...sourceEntityIds.map((entityId) => ({
+              catalogEntityId: `test:disc:${entityId}`,
+              upstreamId: entityId,
+              name: entityId,
+              identity: { kind: "drive-disc" as const, entityId },
+              status: "mapped" as const,
+              profession: null,
+              element: null,
+            })),
+          ],
+        },
+        world: {
+          ...input.world,
+          entities: [
+            ...input.world.entities,
+            ...holders.map((entityId) => ({
+              kind: "actor" as const,
+              entityId,
+              teamId: "team:players" as const,
+              generalStats: {},
+              directStats: {},
+            })),
+          ],
+        },
+        actorSources: [
+          ...input.actorSources,
+          ...holders.map((entityId) => ({ entityId, agentEntityId: "1311" })),
+        ],
+        bindings: holders.map((holderId, index) => ({
+          bindingId: `binding:disc${index}`,
+          kind: "drive-disc",
+          holderId,
+          sourceEntityId: sourceEntityIds[index]!,
+          eligible: true,
+          configuration: { setPieces: 2 },
+        })),
+      }
+    }
+    const inputWithColons = withSecondHolder("entity:a")
+    const result = calculateStaticDamageFromCatalog(inputWithColons)
+    expect(result.ok).toBe(true)
+    expect(result).toEqual(
+      calculateStaticDamageFromCatalog(withSecondHolder("entity:distinct")),
+    )
+    expect(
+      calculateStaticDamageFromCatalog({
+        ...inputWithColons,
+        bindings: [
+          ...inputWithColons.bindings,
+          { ...inputWithColons.bindings[0]!, bindingId: "binding:duplicate" },
+        ],
+      }),
+    ).toMatchObject({
+      ok: false,
+      issues: expect.arrayContaining([
+        expect.objectContaining({
+          code: "DUPLICATE_ID",
+          pointer: "/bindings/2",
+        }),
+      ]),
+    })
+  })
   it("returns structured errors for malformed public input and duplicate rule references", () => {
     const input = fixture([contribution("base-multiplier-increase", 0.2)])
     for (const broken of [
@@ -737,4 +977,104 @@ describe("catalog static calculation", () => {
       ),
     ).toMatchObject({ ok: false, issues: [{ code: "DUPLICATE_ID" }] })
   })
+  it.each([
+    "/catalog/entities/0/status",
+    "/catalog/entities/0/identity/kind",
+    "/catalog/options/0/catalogEntityId",
+    "/catalog/options/0/target",
+    "/catalog/options/0/variants/0/status",
+    "/catalog/options/0/variants/0/effectIds/0",
+    "/catalog/options/0/variants/0/differences/0",
+    "/hit/skillCategory",
+    "/selections/0/optionId",
+    "/selections/0/bindingId",
+  ])(
+    "rejects an object at the scalar field %s without coercing it",
+    (pointer) => {
+      const input = fixture([contribution("base-multiplier-increase", 0.2)])
+      const segments = pointer.slice(1).split("/")
+      let target = input as unknown as Record<string, unknown>
+      for (const segment of segments.slice(0, -1))
+        target = target[segment] as Record<string, unknown>
+      target[segments.at(-1)!] = JSON.parse('{"toString":null}')
+      expect(calculateStaticDamageFromCatalog(input)).toMatchObject({
+        ok: false,
+        issues: expect.arrayContaining([
+          expect.objectContaining({ code: "INVALID_INPUT", pointer }),
+        ]),
+      })
+    },
+  )
+  it("rejects malformed conditional catalog and preparation enums without coercing them", () => {
+    const input = fixture([contribution("base-multiplier-increase", 0.2)])
+    const malformed = JSON.parse('{"toString":null}')
+    const samples = [
+      changeVariant(input, {
+        status: "unsupported",
+        effectIds: [],
+        reason: malformed,
+      }),
+      changeVariant(input, {
+        parameterMapping: {
+          kind: "luminize-proficiency",
+          source: malformed,
+          rate: 0.002,
+        },
+      }),
+      ...(["disorder", "vortex"] as const).map((kind) => ({
+        ...anomalyInput(input, kind),
+        hit: {
+          ...input.hit,
+          damageItems: [
+            {
+              role: "base",
+              itemId: "base",
+              stat: "attack",
+              statSource: { entityId: "entity:attacker" },
+              baseDurationSeconds: 10,
+              ...(kind === "disorder"
+                ? {
+                    mode: "standard-disorder",
+                    originalAnomalyAttribute: malformed,
+                    elapsedSeconds: 3,
+                  }
+                : { mode: "standard-vortex", profile: malformed }),
+            },
+          ],
+        },
+      })),
+    ]
+    for (const sample of samples)
+      expect(
+        calculateStaticDamageFromCatalog(sample as StaticCatalogDamageInput),
+      ).toMatchObject({
+        ok: false,
+        issues: expect.arrayContaining([
+          expect.objectContaining({ code: "INVALID_INPUT" }),
+        ]),
+      })
+  })
+  it.each(["optionId", "bindingId"] as const)(
+    "validates %s before serializing the selection identity",
+    (field) => {
+      const input = fixture([contribution("base-multiplier-increase", 0.2)])
+      const circular: Record<string, unknown> = {}
+      circular["self"] = circular
+      for (const malformed of [1n, circular])
+        expect(
+          calculateStaticDamageFromCatalog({
+            ...input,
+            selections: [{ ...input.selections[0], [field]: malformed }],
+          } as StaticCatalogDamageInput),
+        ).toMatchObject({
+          ok: false,
+          issues: expect.arrayContaining([
+            expect.objectContaining({
+              code: "INVALID_INPUT",
+              pointer: `/selections/0/${field}`,
+            }),
+          ]),
+        })
+    },
+  )
 })

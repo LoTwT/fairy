@@ -24,10 +24,12 @@ import type {
 import {
   expectArray,
   expectFiniteNumber,
+  expectLiteral,
   expectNonEmptyString,
   expectObject,
   rejectUnknownFields,
 } from "./checks.ts"
+import { SKILL_CATEGORIES } from "./expression.ts"
 import { IssueCollector, failure } from "./issues.ts"
 import { validateNumericInputs } from "./numeric-input.ts"
 import { validateSourceBindings } from "./rule.ts"
@@ -183,12 +185,12 @@ export function validateStaticCatalog(
     unique(entity["catalogEntityId"], `${p}/catalogEntityId`, entityIds)
     for (const key of ["upstreamId", "name"])
       expectNonEmptyString(entity[key], checks(`${p}/${key}`), key)
-    if (
-      !["mapped", "missing-identity", "placeholder"].includes(
-        String(entity["status"]),
-      )
+    expectLiteral(
+      entity["status"],
+      ["mapped", "missing-identity", "placeholder"],
+      checks(`${p}/status`),
+      "entity status",
     )
-      collector.report("INVALID_INPUT", `${p}/status`, "Unknown entity status")
     if (entity["status"] === "mapped") {
       const identity = expectObject(
         entity["identity"],
@@ -202,16 +204,12 @@ export function validateStaticCatalog(
           checks(`${p}/identity`),
           "source identity",
         )
-        if (
-          !["agent", "w-engine", "drive-disc"].includes(
-            String(identity["kind"]),
-          )
+        expectLiteral(
+          identity["kind"],
+          ["agent", "w-engine", "drive-disc"],
+          checks(`${p}/identity/kind`),
+          "catalog source kind",
         )
-          collector.report(
-            "INVALID_INPUT",
-            `${p}/identity/kind`,
-            "Unsupported catalog source kind",
-          )
         expectNonEmptyString(
           identity["entityId"],
           checks(`${p}/identity/entityId`),
@@ -315,7 +313,12 @@ export function validateStaticCatalog(
       "catalog option",
     )
     unique(option["optionId"], `${p}/optionId`, optionIds)
-    if (!entityIds.has(String(option["catalogEntityId"])))
+    const catalogEntityId = expectNonEmptyString(
+      option["catalogEntityId"],
+      checks(`${p}/catalogEntityId`),
+      "catalog entity identity",
+    )
+    if (catalogEntityId !== undefined && !entityIds.has(catalogEntityId))
       collector.report(
         "MISSING_REFERENCE",
         `${p}/catalogEntityId`,
@@ -324,8 +327,12 @@ export function validateStaticCatalog(
     const owner = (entities as unknown as StaticEffectCatalog["entities"]).find(
       (e) => e.catalogEntityId === option["catalogEntityId"],
     )
-    if (!["self", "team"].includes(String(option["target"])))
-      collector.report("INVALID_INPUT", `${p}/target`, "Unknown target")
+    expectLiteral(
+      option["target"],
+      ["self", "team"],
+      checks(`${p}/target`),
+      "option target",
+    )
     for (const key of ["name", "conditionDescription"])
       if (typeof option[key] !== "string")
         collector.report("INVALID_INPUT", `${p}/${key}`, "Expected text")
@@ -366,16 +373,12 @@ export function validateStaticCatalog(
         checks(vp),
         "variant",
       )
-      if (
-        !["converted", "corrected", "unsupported"].includes(
-          String(variant["status"]),
-        )
+      expectLiteral(
+        variant["status"],
+        ["converted", "corrected", "unsupported"],
+        checks(`${vp}/status`),
+        "variant status",
       )
-        collector.report(
-          "INVALID_INPUT",
-          `${vp}/status`,
-          "Unknown variant status",
-        )
       if (
         variant["target"] !== undefined &&
         variant["target"] !== "self" &&
@@ -386,14 +389,21 @@ export function validateStaticCatalog(
           `${vp}/target`,
           "Unknown variant target",
         )
+      if (variant["status"] === "unsupported")
+        expectLiteral(
+          variant["reason"],
+          unavailableReasons,
+          checks(`${vp}/reason`),
+          "unsupported reason",
+        )
       if (
-        variant["status"] === "unsupported" &&
-        !unavailableReasons.includes(String(variant["reason"]))
+        variant["explanation"] !== undefined &&
+        typeof variant["explanation"] !== "string"
       )
         collector.report(
           "INVALID_INPUT",
-          `${vp}/reason`,
-          "Unsupported variants require an explicit reason",
+          `${vp}/explanation`,
+          "Expected explanation text",
         )
       if (
         !Number.isSafeInteger(variant["maximumLayers"]) ||
@@ -475,13 +485,19 @@ export function validateStaticCatalog(
           `${vp}/effectIds`,
           "Available variants require effects; unsupported variants must not contribute",
         )
-      for (const id of effectIds) {
+      for (const [ei, value] of effectIds.entries()) {
+        const id = expectNonEmptyString(
+          value,
+          checks(`${vp}/effectIds/${ei}`),
+          "effect identity",
+        )
+        if (id === undefined) continue
         const effect = effects.get(id as EffectId)
         if (!effect)
           collector.report(
             "MISSING_REFERENCE",
             `${vp}/effectIds`,
-            `Unknown effect "${String(id)}"`,
+            `Unknown effect "${id}"`,
           )
         else if (
           effect.source.identity.kind !== owner?.identity?.kind ||
@@ -493,17 +509,25 @@ export function validateStaticCatalog(
             "Option and effect source identity disagree",
           )
       }
-      for (const id of expectArray(
-        variant["differences"],
-        checks(`${vp}/differences`),
-        "difference ids",
-      ) ?? [])
-        if (!differenceIds.has(String(id)))
+      for (const [di, value] of (
+        expectArray(
+          variant["differences"],
+          checks(`${vp}/differences`),
+          "difference ids",
+        ) ?? []
+      ).entries()) {
+        const id = expectNonEmptyString(
+          value,
+          checks(`${vp}/differences/${di}`),
+          "difference identity",
+        )
+        if (id !== undefined && !differenceIds.has(id))
           collector.report(
             "MISSING_REFERENCE",
             `${vp}/differences`,
             "Unknown difference",
           )
+      }
       const refs =
         expectArray(
           variant["references"],
@@ -651,17 +675,18 @@ export function validateStaticCatalog(
             checks(`${vp}/parameterMapping`),
             "parameter mapping",
           )
-          if (
-            mapping["kind"] !== "luminize-proficiency" ||
-            !["holder-current", "holder-initial", "input"].includes(
-              String(mapping["source"]),
-            )
-          )
+          if (mapping["kind"] !== "luminize-proficiency")
             collector.report(
               "INVALID_INPUT",
               `${vp}/parameterMapping`,
               "Unknown core parameter mapping",
             )
+          expectLiteral(
+            mapping["source"],
+            ["holder-current", "holder-initial", "input"],
+            checks(`${vp}/parameterMapping/source`),
+            "parameter source",
+          )
           const rate = expectFiniteNumber(
             mapping["rate"],
             checks(`${vp}/parameterMapping/rate`),
@@ -787,33 +812,19 @@ function prepareItem(
         "Value must be non-negative",
       )
   }
-  if (
-    mode === "standard-disorder" &&
-    ![
-      "fire",
-      "electric",
-      "ether",
-      "ice",
-      "physical",
-      "auric_ink",
-      "frost",
-    ].includes(String(item["originalAnomalyAttribute"]))
-  )
-    collector.report(
-      "INVALID_INPUT",
-      `${pointer}/originalAnomalyAttribute`,
-      "Unknown disorder source attribute",
+  if (mode === "standard-disorder")
+    expectLiteral(
+      item["originalAnomalyAttribute"],
+      ["fire", "electric", "ether", "ice", "physical", "auric_ink", "frost"],
+      { ...checks, pointer: `${pointer}/originalAnomalyAttribute` },
+      "disorder source attribute",
     )
-  if (
-    mode === "standard-vortex" &&
-    !["corruption", "shock", "burn", "assault", "frostbite", "frost"].includes(
-      String(item["profile"]),
-    )
-  )
-    collector.report(
-      "INVALID_INPUT",
-      `${pointer}/profile`,
-      "Unknown vortex profile",
+  if (mode === "standard-vortex")
+    expectLiteral(
+      item["profile"],
+      ["corruption", "shock", "burn", "assault", "frostbite", "frost"],
+      { ...checks, pointer: `${pointer}/profile` },
+      "vortex profile",
     )
   return item as unknown as StaticCatalogDamageItem
 }
@@ -888,6 +899,12 @@ export function calculateStaticDamageFromCatalog(
     return failure(collector)
   if (hit["skillTags"] !== undefined)
     expectArray(hit["skillTags"], checks("/hit/skillTags"), "skill tags")
+  expectLiteral(
+    hit["skillCategory"],
+    SKILL_CATEGORIES,
+    checks("/hit/skillCategory"),
+    "skill category",
+  )
   const items = (
     expectArray(
       hit["damageItems"],
@@ -1013,7 +1030,11 @@ export function calculateStaticDamageFromCatalog(
     exclusive = new Set<string>(),
     equipment = new Set<string>()
   for (const binding of input.bindings) {
-    const key = `${binding.holderId}:${binding.kind}:${binding.kind === "drive-disc" ? binding.sourceEntityId : ""}`
+    const key = JSON.stringify([
+      binding.holderId,
+      binding.kind,
+      binding.kind === "drive-disc" ? binding.sourceEntityId : "",
+    ])
     if (equipment.has(key))
       collector.report(
         "CONTEXT_MISMATCH",
@@ -1032,16 +1053,23 @@ export function calculateStaticDamageFromCatalog(
       checks(p),
       "option selection",
     )
-    const key = JSON.stringify([selection["bindingId"], selection["optionId"]])
+    const optionId = expectNonEmptyString(
+      selection["optionId"],
+      checks(`${p}/optionId`),
+      "option identity",
+    )
+    const bindingId = expectNonEmptyString(
+      selection["bindingId"],
+      checks(`${p}/bindingId`),
+      "binding identity",
+    )
+    if (optionId === undefined || bindingId === undefined) continue
+    const key = JSON.stringify([bindingId, optionId])
     if (seenSelections.has(key))
       collector.report("DUPLICATE_ID", p, "Select each bound option only once")
     seenSelections.add(key)
-    const option = catalog.options.find(
-      (o) => o.optionId === selection["optionId"],
-    )
-    const binding = input.bindings.find(
-      (b) => b.bindingId === selection["bindingId"],
-    )
+    const option = catalog.options.find((o) => o.optionId === optionId)
+    const binding = input.bindings.find((b) => b.bindingId === bindingId)
     if (!option || !binding) {
       collector.report(
         "MISSING_REFERENCE",
@@ -1138,7 +1166,7 @@ export function calculateStaticDamageFromCatalog(
     }
     if (layers === 0) continue
     if (option.exclusiveGroup) {
-      const group = `${binding.bindingId}:${option.exclusiveGroup}`
+      const group = JSON.stringify([binding.bindingId, option.exclusiveGroup])
       if (exclusive.has(group))
         collector.report(
           "CONTEXT_MISMATCH",
@@ -1497,30 +1525,6 @@ export function calculateStaticDamageFromCatalog(
     )
     return failure(collector)
   }
-  const evaluated = evaluateStaticDamage(
-    preparesDuration
-      ? {
-          ...lowInput,
-          selections: expanded.filter(
-            (selection) => !durationIds.has(selection.effectId),
-          ),
-        }
-      : lowInput,
-  )
-  if (!evaluated.ok) return evaluated
-  const consumed = new Set<FactorChannel>()
-  const contributions = evaluated.value.evaluation.contributions
-  const take = (channel: FactorChannel): number => {
-    consumed.add(channel)
-    return contributions
-      .filter(
-        (e) =>
-          e.address.kind === "factor" &&
-          e.address.channel === channel &&
-          e.address.entityId === input.hit.actorId,
-      )
-      .reduce((sum, e) => sum + e.value.value, 0)
-  }
   try {
     const preparations: NonNullable<
       StaticDamageResult["preparations"]
@@ -1563,6 +1567,54 @@ export function calculateStaticDamageFromCatalog(
         contributions: durationContributions,
       })
     }
+    const preparedItems = lowInput.hit.damageItems.map((item, index) => {
+      const source = items[index]!
+      if (
+        (source.mode === "standard-disorder" &&
+          input.damage.kind !== "disorder") ||
+        (source.mode === "standard-vortex" && input.damage.kind !== "vortex")
+      )
+        throw new Error("Damage preparation mode and damage kind disagree")
+      const duration =
+        preparations.find((p) => p.itemId === source.itemId)
+          ?.durationAdjustment ?? 0
+      let multiplier = item.damageMultiplier
+      if (source.mode === "standard-disorder")
+        multiplier += calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute: source.originalAnomalyAttribute,
+          remainingAnomalyDurationInSeconds: Math.max(
+            0,
+            source.baseDurationSeconds + duration - source.elapsedSeconds,
+          ),
+        })
+      if (source.mode === "standard-vortex")
+        multiplier += calculateStandardVortexDamageMultiplier({
+          vortexDamageMultiplierProfile: source.profile,
+          sourceAnomalyDurationInSeconds: source.baseDurationSeconds + duration,
+        })
+      return { ...item, damageMultiplier: multiplier }
+    }) as unknown as StaticDamageInput["hit"]["damageItems"]
+    const evaluated = evaluateStaticDamage({
+      ...lowInput,
+      selections: preparesDuration
+        ? expanded.filter((selection) => !durationIds.has(selection.effectId))
+        : expanded,
+      hit: { ...lowInput.hit, damageItems: preparedItems },
+    })
+    if (!evaluated.ok) return evaluated
+    const consumed = new Set<FactorChannel>()
+    const contributions = evaluated.value.evaluation.contributions
+    const take = (channel: FactorChannel): number => {
+      consumed.add(channel)
+      return contributions
+        .filter(
+          (e) =>
+            e.address.kind === "factor" &&
+            e.address.channel === channel &&
+            e.address.entityId === input.hit.actorId,
+        )
+        .reduce((sum, e) => sum + e.value.value, 0)
+    }
     const addition = take("base-multiplier-addition"),
       increase = take("base-multiplier-increase"),
       settlement = take("settlement-multiplier-addition")
@@ -1579,37 +1631,12 @@ export function calculateStaticDamageFromCatalog(
     }
     const damageItems = evaluated.value.evaluation.hit!.damageItems.map(
       (item, index) => {
-        const source = items[index]!
-        if (
-          (source.mode === "standard-disorder" &&
-            input.damage.kind !== "disorder") ||
-          (source.mode === "standard-vortex" && input.damage.kind !== "vortex")
-        )
-          throw new Error("Damage preparation mode and damage kind disagree")
-        const duration =
-          preparations.find((p) => p.itemId === source.itemId)
-            ?.durationAdjustment ?? 0
-        let multiplier = item.damageMultiplier
-        if (source.mode === "standard-disorder")
-          multiplier += calculateStandardDisorderDamageMultiplier({
-            originalAnomalyAttribute: source.originalAnomalyAttribute,
-            remainingAnomalyDurationInSeconds: Math.max(
-              0,
-              source.baseDurationSeconds + duration - source.elapsedSeconds,
-            ),
-          })
-        if (source.mode === "standard-vortex")
-          multiplier += calculateStandardVortexDamageMultiplier({
-            vortexDamageMultiplierProfile: source.profile,
-            sourceAnomalyDurationInSeconds:
-              source.baseDurationSeconds + duration,
-          })
         return {
           ...item,
           damageMultiplier:
-            (source.role === "settlement"
-              ? multiplier + settlement
-              : multiplier + addition) *
+            (items[index]!.role === "settlement"
+              ? item.damageMultiplier + settlement
+              : item.damageMultiplier + addition) *
             (1 + increase),
         }
       },
