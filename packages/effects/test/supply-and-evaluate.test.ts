@@ -1197,7 +1197,7 @@ describe("evaluation input validation", () => {
       observedSnapshots: [],
       hit: {},
       entities: ["entity:attacker"],
-      stats: ["attack"],
+      beneficiaries: ["entity:attacker"],
     } as never)
     expect(hit.ok).toBe(false)
     if (hit.ok) {
@@ -1211,7 +1211,8 @@ describe("evaluation input validation", () => {
     ).toBe(true)
     expect(
       hit.issues.some(
-        (issue) => issue.code === "INVALID_INPUT" && issue.pointer === "/stats",
+        (issue) =>
+          issue.code === "INVALID_INPUT" && issue.pointer === "/beneficiaries",
       ),
     ).toBe(true)
     const panel = evaluateEffects(

@@ -1,4 +1,9 @@
-import type { NumericExpression, NumericUpdate, Unit } from "../types.ts"
+import type {
+  FactorChannel,
+  NumericExpression,
+  NumericUpdate,
+  Unit,
+} from "../types.ts"
 import {
   expectLiteral,
   expectNonEmptyArray,
@@ -12,7 +17,7 @@ import {
 } from "./expression.ts"
 import type { IssueCollector } from "./issues.ts"
 import type { PendingModification, ValidatedRuleSet } from "./rule.ts"
-import { STAT_UNIT_MAP, UNITS } from "./vocabulary.ts"
+import { FACTOR_CHANNEL_UNITS, STAT_UNIT_MAP, UNITS } from "./vocabulary.ts"
 
 interface TargetProfile {
   readonly parameters: ReadonlyMap<string, Unit>
@@ -54,7 +59,8 @@ function readTargetProfile(
             ? "ratio"
             : STAT_UNIT_MAP[stat]
     } else if (operationObject["kind"] === "factor-contribution") {
-      outputUnit = "ratio"
+      outputUnit =
+        FACTOR_CHANNEL_UNITS[operationObject["channel"] as FactorChannel]
     } else if (operationObject["kind"] === "hit-adjustment") {
       outputUnit = "multiplier"
     }

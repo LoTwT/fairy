@@ -210,6 +210,27 @@ function evaluateTriggerExpression(
         runtime,
         "A numeric expression maximum",
       )
+    case "convert":
+      return foldTriggerValues(
+        [
+          evaluateTriggerExpression(
+            expression.input,
+            runtime,
+            holderId,
+            parameters,
+          ),
+          evaluateTriggerExpression(
+            expression.rate,
+            runtime,
+            holderId,
+            parameters,
+          ),
+        ],
+        1,
+        (product, operand) => product * operand,
+        runtime,
+        "A numeric expression conversion",
+      )
     case "multiply":
       return foldTriggerValues(
         [

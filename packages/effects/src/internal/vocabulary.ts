@@ -1,6 +1,10 @@
 import type {
   CoreSkillLevel,
   DirectStat,
+  DamageElement,
+  DamageKind,
+  FactorChannel,
+  FactorChannelUnitMap,
   EffectId,
   EntityId,
   GeneralStat,
@@ -13,6 +17,49 @@ import type {
   StatUnitMap,
   Unit,
 } from "../types.ts"
+
+export const DAMAGE_ELEMENTS: readonly DamageElement[] = [
+  "physical",
+  "fire",
+  "ice",
+  "electric",
+  "ether",
+  "wind",
+  "auric-ink",
+  "frost",
+]
+export const DAMAGE_KINDS: readonly DamageKind[] = [
+  "regular",
+  "sheer",
+  "anomaly",
+  "disorder",
+  "vortex",
+  "anomaly-settlement",
+  "luminize",
+]
+export const FACTOR_CHANNEL_UNITS: FactorChannelUnitMap = {
+  "damage-bonus": "ratio",
+  "daze-dealt-increase": "ratio",
+  "daze-dealt-reduction": "ratio",
+  "target-resistance-reduction": "ratio",
+  "attacker-resistance-ignore": "ratio",
+  "energy-generation-rate": "ratio",
+  "target-defense-adjustment": "ratio",
+  "attacker-penetration-value": "defense-points",
+  "damage-taken-increase": "ratio",
+  "damage-taken-reduction": "ratio",
+  "stun-damage-adjustment": "multiplier",
+  "sheer-damage-bonus": "ratio",
+  "anomaly-damage-bonus": "ratio",
+  "anomaly-critical-rate": "ratio",
+  "anomaly-critical-damage": "ratio",
+  "luminize-multiplier-addition": "multiplier",
+  "luminize-multiplier-scale": "multiplier",
+  "refringe-coefficient-increase": "ratio",
+}
+export const FACTOR_CHANNELS = Object.keys(
+  FACTOR_CHANNEL_UNITS,
+) as FactorChannel[]
 
 export const STAT_UNIT_MAP: Readonly<Record<Stat, StatUnitMap[Stat]>> = {
   attack: "attack-points",

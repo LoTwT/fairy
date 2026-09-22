@@ -2,6 +2,8 @@ import type {
   AttributeObservation,
   Condition,
   DirectStat,
+  EffectNumericInput,
+  FactorChannel,
   EffectId,
   EffectInstance,
   EffectState,
@@ -45,7 +47,14 @@ import {
   type WorldIndex,
 } from "./world.ts"
 import { calculateFinalStat, calculateInitialStat } from "@randomplay/core"
-import { DIRECT_STATS, STAT_UNIT_MAP, STATS, isEntityId } from "./vocabulary.ts"
+import {
+  DIRECT_STATS,
+  FACTOR_CHANNEL_UNITS,
+  STAT_UNIT_MAP,
+  STATS,
+  isEntityId,
+} from "./vocabulary.ts"
+import { validateNumericInputs } from "./numeric-input.ts"
 
 interface LayerCandidate {
   readonly entry: PreparedContributionEntry
@@ -79,6 +88,7 @@ interface HitAddress {
   readonly kind: "hit"
   readonly hitId: string
   readonly field: "damageMultiplier"
+  readonly itemId?: string
 }
 
 type ConsumptionAddress = OutputAddress | FactorAddress | HitAddress
@@ -117,6 +127,7 @@ export interface EvaluationContext {
   readonly hit: HitContext | null
   readonly collector: IssueCollector
   readonly stack: readonly string[]
+  readonly inputs: readonly EffectNumericInput[]
 }
 
 export interface SavedSnapshotLike {
@@ -153,7 +164,7 @@ function addressKey(address: ConsumptionAddress): string {
   if (address.kind === "factor") {
     return `factor ${address.entityId} ${address.channel} ${address.hitId ?? "-"}`
   }
-  return `hit ${address.hitId} ${address.field}`
+  return `hit ${address.hitId} ${address.field} ${address.itemId === undefined ? "all" : JSON.stringify(address.itemId)}`
 }
 
 function resolveRole(
@@ -210,6 +221,37 @@ function evaluateExpression(
     }
     case "stat":
       return readStatValue(expression, context, layer)
+    case "input": {
+      const value = context.inputs.find(
+        (input) =>
+          input.bindingId === layer.entry.bindingId &&
+          input.name === expression.name,
+      )?.value
+      if (value === undefined || value.unit !== expression.unit) {
+        context.collector.report(
+          value === undefined ? "MISSING_FACT" : "UNIT_MISMATCH",
+          "/inputs",
+          `Input "${expression.name}" of binding "${layer.entry.bindingId}" requires ${expression.unit}`,
+          {
+            effectId: layer.entry.rule.effectId,
+            bindingId: layer.entry.bindingId,
+          },
+        )
+        return Number.NaN
+      }
+      return value.value
+    }
+    case "convert":
+      return foldNumericExpression(
+        [
+          evaluateExpression(expression.input, context, layer, parameters),
+          evaluateExpression(expression.rate, context, layer, parameters),
+        ],
+        1,
+        (product, value) => product * value,
+        context,
+        "A numeric expression conversion",
+      )
     case "add":
       return foldNumericExpression(
         expression.operands.map((operand) =>
@@ -650,6 +692,13 @@ function collectLayersForAddress(
       if (rule.operation.kind !== "hit-adjustment") {
         continue
       }
+      if (
+        address.itemId === undefined
+          ? rule.operation.itemIds !== undefined
+          : rule.operation.itemIds !== undefined &&
+            !rule.operation.itemIds.includes(address.itemId)
+      )
+        continue
     } else if (rule.operation.kind === "hit-adjustment") {
       continue
     } else if (address.kind === "stat") {
@@ -1133,15 +1182,19 @@ function evaluateSingleLayer(
       entityId: layer.beneficiary,
       hitId: address.hitId,
     }
-    operator = "add"
+    operator =
+      operation.channel === "luminize-multiplier-scale" ? "scale" : "add"
   } else {
     value = evaluateExpression(operation.value, context, layerWithParams)
     outputAddress = {
       kind: "hit",
       hitId: context.hit?.hitId ?? "",
       field: "damageMultiplier",
+      ...(address.kind === "hit" && address.itemId !== undefined
+        ? { itemId: address.itemId }
+        : {}),
     }
-    operator = "scale"
+    operator = operation.operator
   }
   value = requireFiniteValue(
     value,
@@ -1176,6 +1229,19 @@ function evaluateSingleLayer(
     ...layer.entry.appliedModificationIds,
   ]
   if (Number.isNaN(outputValue)) {
+    return undefined
+  }
+  if (
+    operation.kind === "hit-adjustment" &&
+    operator === "scale" &&
+    outputValue < 0
+  ) {
+    context.collector.report(
+      "INVALID_DEFINITION",
+      "",
+      "Hit multiplier scales must be non-negative",
+      { effectId: rule.effectId },
+    )
     return undefined
   }
   return {
@@ -1452,7 +1518,25 @@ function evaluateOneOf(
       hit.origin.kind === "effect-request" ? hit.origin.effectId : null
     return (condition.values as readonly (string | null)[]).includes(origin)
   }
-  return false
+  const value =
+    fact === "hit.element"
+      ? hit.element
+      : fact === "hit.damageKind"
+        ? hit.damageKind
+        : fact === "hit.targetState"
+          ? hit.targetState
+          : hit.skillTags
+  if (value === undefined) {
+    context.collector.report(
+      "MISSING_FACT",
+      `/hit/${fact.slice(4)}`,
+      `Fact "${fact}" is required by a selected rule`,
+    )
+    return false
+  }
+  return typeof value === "string"
+    ? (condition.values as readonly string[]).includes(value)
+    : value.some((tag) => (condition.values as readonly string[]).includes(tag))
 }
 
 interface SourceCandidate {
@@ -1519,6 +1603,21 @@ function selectUnique(
   for (const group of groups.values()) {
     const first = group[0]!
     const uniqueness = findUniqueness(first.list[0]!.candidate.entry)!
+    if (
+      group.some(
+        (candidate) =>
+          candidate.list[0]!.operator !== first.list[0]!.operator ||
+          findUniqueness(candidate.list[0]!.candidate.entry)!.select.kind !==
+            uniqueness.select.kind,
+      )
+    ) {
+      context.collector.report(
+        "UNIQUENESS_CONFLICT",
+        "",
+        `Uniqueness group "${uniqueness.key}" must use the same selection policy and reduction operator`,
+      )
+      return undefined
+    }
     if (uniqueness.select.kind === "single-source-only") {
       if (group.length > 1) {
         context.collector.report(
@@ -1687,6 +1786,7 @@ export function createMomentEvaluation(
     hit: null,
     collector,
     stack: [],
+    inputs: [],
   }
   return { context }
 }
@@ -1712,14 +1812,24 @@ const EVALUATION_INPUT_FIELDS: Readonly<
     "observedSnapshots",
     "entities",
     "stats",
+    "inputs",
   ],
-  hit: ["kind", "atSeconds", "world", "observedSnapshots", "hit"],
+  hit: [
+    "kind",
+    "atSeconds",
+    "world",
+    "observedSnapshots",
+    "hit",
+    "stats",
+    "inputs",
+  ],
   contributions: [
     "kind",
     "atSeconds",
     "world",
     "observedSnapshots",
     "beneficiaries",
+    "inputs",
   ],
 }
 
@@ -1887,6 +1997,13 @@ export function evaluateEffects(
     return failure(collector)
   }
   let hit: HitContext | null = null
+  const numericInputs = validateNumericInputs(
+    inputObject["inputs"],
+    preparedInternal.bindings,
+    collector,
+  )
+  if (numericInputs === undefined) return failure(collector)
+  let hitStats: readonly Stat[] = []
   if (kind === "hit") {
     const validatedHit = validateHitContext(
       inputObject["hit"],
@@ -1897,6 +2014,16 @@ export function evaluateEffects(
       return failure(collector)
     }
     hit = validatedHit
+    if (inputObject["stats"] !== undefined) {
+      const stats = readStatList(
+        inputObject["stats"],
+        collector,
+        "/stats",
+        "hit stats",
+      )
+      if (stats === undefined) return failure(collector)
+      hitStats = stats
+    }
   }
   const context: EvaluationContext = {
     prepared: preparedInternal,
@@ -1918,6 +2045,7 @@ export function evaluateEffects(
     hit,
     collector,
     stack: [],
+    inputs: numericInputs,
   }
   if (kind === "panel") {
     const entities = readEntityIdList(
@@ -1957,7 +2085,7 @@ export function evaluateEffects(
     }
     return { ok: true, value: result }
   }
-  const result = evaluateHitQuery(context)
+  const result = evaluateHitQuery(context, hitStats)
   if (result === undefined || !collector.isEmpty) {
     return failure(collector)
   }
@@ -2102,16 +2230,20 @@ function evaluateContributionsQuery(
 
 function evaluateHitQuery(
   context: EvaluationContext,
+  additionalStats: readonly Stat[] = [],
 ): EvaluationResult | undefined {
   const hit = context.hit
   if (hit === null) {
     return undefined
   }
   const finalStats = new Map<string, number>()
-  for (const item of hit.damageItems) {
+  for (const stat of new Set<Stat>([
+    ...hit.damageItems.map((item) => item.stat),
+    ...additionalStats,
+  ])) {
     const value = computeStatValue(
       hit.actorId,
-      item.stat,
+      stat,
       "current",
       hit.hitId,
       context,
@@ -2119,14 +2251,14 @@ function evaluateHitQuery(
     if (Number.isNaN(value)) {
       return undefined
     }
-    finalStats.set(item.stat, value)
+    finalStats.set(stat, value)
     const stages: readonly (
       | "initial-percentage"
       | "initial-fixed"
       | "final-percentage"
       | "final-fixed"
       | "direct"
-    )[] = DIRECT_STATS.has(item.stat as DirectStat)
+    )[] = DIRECT_STATS.has(stat as DirectStat)
       ? ["direct"]
       : [
           "initial-percentage",
@@ -2137,7 +2269,7 @@ function evaluateHitQuery(
     for (const stage of stages) {
       markConsumed(context, {
         kind: "stat",
-        stat: item.stat,
+        stat,
         stage,
         entityId: hit.actorId,
         hitId: hit.hitId,
@@ -2161,28 +2293,104 @@ function evaluateHitQuery(
     entityId: hit.actorId,
     hitId: hit.hitId,
   })
-  const multiplierSelected = selectedAdjustmentsFor(
-    { kind: "hit", hitId: hit.hitId, field: "damageMultiplier" },
-    context,
+  const itemAdjustments = context.prepared.contributions.flatMap((entry) =>
+    entry.rule.operation.kind === "hit-adjustment"
+      ? (entry.rule.operation.itemIds ?? [])
+      : [],
   )
+  const hasItemAdjustments = itemAdjustments.length > 0
+  // 具体项和全项贡献在同一个实际消费地址上选择唯一来源。
+  const multiplierSelected = hasItemAdjustments
+    ? []
+    : selectedAdjustmentsFor(
+        { kind: "hit", hitId: hit.hitId, field: "damageMultiplier" },
+        context,
+      )
   if (multiplierSelected === undefined) {
     return undefined
   }
-  markConsumed(context, {
-    kind: "hit",
-    hitId: hit.hitId,
-    field: "damageMultiplier",
-  })
-  // 倍率归约逐步检查：先溢出再乘零不会退化成未报告的 NaN。
-  const scaleFactor = foldNumericExpression(
-    multiplierSelected.map((layer) => layer.value),
-    1,
-    (product, value) => product * value,
-    context,
-    "The hit damage multiplier",
-  )
-  if (Number.isNaN(scaleFactor)) {
-    return undefined
+  if (!hasItemAdjustments) {
+    markConsumed(context, {
+      kind: "hit",
+      hitId: hit.hitId,
+      field: "damageMultiplier",
+    })
+  }
+  for (const itemId of new Set(itemAdjustments)) {
+    if (hit.damageItems.some((item) => item.itemId === itemId)) continue
+    const selected = selectedAdjustmentsFor(
+      { kind: "hit", hitId: hit.hitId, field: "damageMultiplier", itemId },
+      context,
+    )
+    if (selected === undefined) return undefined
+    const invalid = selected.find(
+      (layer) =>
+        layer.candidate.entry.rule.operation.kind === "hit-adjustment" &&
+        layer.candidate.entry.rule.operation.itemIds?.includes(itemId),
+    )
+    if (invalid !== undefined)
+      context.collector.report(
+        "MISSING_REFERENCE",
+        "/hit/damageItems",
+        `Selected adjustment targets missing damage item "${itemId}"`,
+        {
+          effectId: invalid.candidate.entry.rule.effectId,
+          bindingId: invalid.candidate.entry.bindingId,
+        },
+      )
+  }
+  const adjustedItems: {
+    itemId: string
+    damageMultiplier: number
+    finalStat: number
+  }[] = []
+  for (const item of hit.damageItems) {
+    const address: HitAddress = {
+      kind: "hit",
+      hitId: hit.hitId,
+      field: "damageMultiplier",
+      itemId: item.itemId,
+    }
+    const itemSelected = hasItemAdjustments
+      ? selectedAdjustmentsFor(address, context)
+      : []
+    if (itemSelected === undefined) return undefined
+    if (hasItemAdjustments) markConsumed(context, address)
+    const selected = [...multiplierSelected, ...itemSelected]
+    const withAdditions = foldNumericExpression(
+      selected
+        .filter((layer) => layer.operator === "add")
+        .map((layer) => layer.value),
+      item.damageMultiplier,
+      (sum, value) => sum + value,
+      context,
+      "The additive hit multiplier",
+    )
+    const scale = foldNumericExpression(
+      selected
+        .filter((layer) => layer.operator === "scale")
+        .map((layer) => layer.value),
+      1,
+      (product, value) => product * value,
+      context,
+      "The hit multiplier scale",
+    )
+    const damageMultiplier = requireFiniteValue(
+      withAdditions * scale,
+      context,
+      "The scaled hit multiplier",
+    )
+    if (damageMultiplier < 0)
+      context.collector.report(
+        "INVALID_DEFINITION",
+        "/hit/damageItems",
+        `Adjusted multiplier for "${item.itemId}" must be non-negative`,
+      )
+    adjustedItems.push({
+      itemId: item.itemId,
+      damageMultiplier,
+      finalStat: finalStats.get(item.stat)!,
+    })
   }
   for (const channel of factorChannels(context)) {
     if (
@@ -2213,15 +2421,7 @@ function evaluateHitQuery(
     hit: {
       hitId: hit.hitId,
       criticalRate,
-      damageItems: hit.damageItems.map((item) => ({
-        itemId: item.itemId,
-        damageMultiplier: requireFiniteValue(
-          item.damageMultiplier * scaleFactor,
-          context,
-          `The damage multiplier of item "${item.itemId}"`,
-        ),
-        finalStat: finalStats.get(item.stat) ?? Number.NaN,
-      })),
+      damageItems: adjustedItems,
     },
   }
 }
@@ -2266,7 +2466,7 @@ function toResolvedContribution(layer: EvaluatedLayer): ResolvedContribution {
         ? "ratio"
         : STAT_UNIT_MAP[layer.address.stat]
       : layer.address.kind === "factor"
-        ? "ratio"
+        ? FACTOR_CHANNEL_UNITS[layer.address.channel as FactorChannel]
         : "multiplier"
   return {
     address: layer.address as unknown as ResolvedOutput["address"],

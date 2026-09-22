@@ -2,6 +2,8 @@
 
 状态：正式类型已迁入 `@randomplay/effects` 包（[types.ts](../../../packages/effects/src/types.ts)）并随包发布；运行时校验（`parseEffectRuleSet`）、`prepareEffects`、状态导入、外部实例同步、给定状态求值与事件推进（`advanceEffects`，含触发、激活阶段修改、时钟、叠层、冷却与稳定请求身份）均已实现，满足完整 `EffectEngine` 接口；验收矩阵见[执行契约](execution.md#求值器实现时的验收矩阵)。
 
+静态阶段遵循[静态快照增益数据与培养配置](static-snapshot.md)：以 ZZZ-HP 为增益语义的第一信任来源，`calculateStaticDamage` 已接通配置、buff 选择与 core 伤害计算。代表用例已验收，全量转换与正式数据发布留在下一阶段；静态计算不要求模拟时间线。
+
 代理人、驱动盘、音擎共用一套规则：**满足条件，提供效果，或修改已有的效果。** 记录数量由实际机制决定。耀嘉音的核心攻击力增益与 2 影强化分别保存，求值时先修改核心参数，再计算一次核心增益。
 
 ## 规范入口与职责
@@ -11,6 +13,7 @@
 | 本文                                               | 模型概念、职责与设计选择                             |
 | [包内类型](../../../packages/effects/src/types.ts) | 字段、类型分支、单位、输入输出及接口签名             |
 | [类型与执行契约](execution.md)                     | 跨字段约束、修改顺序、事件推进、数值求值、错误与验收 |
+| [静态快照增益数据与培养配置](static-snapshot.md)   | 下一阶段范围、来源优先级、档位记录、转换与对比原则   |
 | [首批自动规则接入](automatic-rules.md)             | PR 6 的正式定义、证据边界、消费接口与验收            |
 | [实例与核对记录](examples.md)                      | 游戏条款、来源、数学基准和待补证机制                 |
 | [contract-examples.ts](contract-examples.ts)       | 可编译的合法实例、合成夹具和类型反例                 |

@@ -11,6 +11,8 @@ import type {
 import { IssueCollector } from "./issues.ts"
 import {
   DIRECT_STATS,
+  DAMAGE_ELEMENTS,
+  DAMAGE_KINDS,
   GENERAL_STATS,
   isEntityId,
   isPrefixedIdentity,
@@ -26,6 +28,7 @@ import {
   rejectUnknownFields,
   type FieldChecks,
 } from "./checks.ts"
+import { SKILL_CATEGORIES } from "./expression.ts"
 
 export interface WorldIndex {
   readonly actors: ReadonlyMap<
@@ -799,22 +802,47 @@ export function validateHitContext(
   expectIdentity("actionSnapshotId", "snapshot")
   const skillCategory = expectLiteral(
     object["skillCategory"],
-    [
-      "basic",
-      "dodge-counter",
-      "enhanced-special",
-      "special",
-      "chain",
-      "ultimate",
-      "quick-assist",
-      "defensive-assist",
-      "evasive-assist",
-    ],
+    SKILL_CATEGORIES,
     checks,
     "skillCategory",
   )
   if (skillCategory === undefined) {
     valid = false
+  }
+  for (const [field, values] of [
+    ["element", DAMAGE_ELEMENTS],
+    ["damageKind", DAMAGE_KINDS],
+    ["targetState", ["stunned", "not-stunned"]],
+  ] as const) {
+    if (
+      object[field] !== undefined &&
+      expectLiteral(
+        object[field],
+        values,
+        { ...checks, pointer: `${pointer}/${field}` },
+        field,
+      ) === undefined
+    )
+      valid = false
+  }
+  if (object["skillTags"] !== undefined) {
+    const tags = expectArray(
+      object["skillTags"],
+      { ...checks, pointer: `${pointer}/skillTags` },
+      "skill tags",
+    )
+    if (tags === undefined) valid = false
+    else
+      for (const [index, tag] of tags.entries()) {
+        if (
+          expectNonEmptyString(
+            tag,
+            { ...checks, pointer: `${pointer}/skillTags/${index}` },
+            "skill tag",
+          ) === undefined
+        )
+          valid = false
+      }
   }
   const origin = expectObject(
     object["origin"],

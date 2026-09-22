@@ -11,6 +11,7 @@ import { tmpdir } from "node:os"
 import { dirname, join, relative, sep } from "node:path"
 import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
+import { inputFor } from "./static-fixtures.ts"
 
 const testDirectory = dirname(fileURLToPath(import.meta.url))
 const packageDirectory = join(testDirectory, "..")
@@ -104,6 +105,7 @@ describe("packed package", () => {
 import {
   parseEffectRuleSet,
   prepareEffects,
+  calculateStaticDamage,
 } from "@randomplay/effects"
 
 const ruleSet = {
@@ -235,6 +237,11 @@ assert.equal(prepared.ok, true)
 assert.equal(prepared.value.ruleSetId, "smoke")
 assert.equal(prepared.value.revision, "1")
 assert.deepEqual(prepared.value.stateParameters, [])
+
+const staticDamage = calculateStaticDamage(${JSON.stringify(inputFor())})
+assert.equal(staticDamage.ok, true)
+assert.equal(staticDamage.value.nonCritical, 2000 * (794 / 1694))
+assert.equal(staticDamage.value.critical, staticDamage.value.nonCritical * 1.5)
 
 const rejected = parseEffectRuleSet({ schemaVersion: 2 })
 assert.equal(rejected.ok, false)

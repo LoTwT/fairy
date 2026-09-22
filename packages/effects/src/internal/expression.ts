@@ -26,6 +26,8 @@ import {
 } from "./checks.ts"
 import {
   CONFIGURATION_FIELD_SOURCES,
+  DAMAGE_ELEMENTS,
+  DAMAGE_KINDS,
   DIRECT_STATS,
   STAT_UNIT_MAP,
   UNITS,
@@ -48,6 +50,8 @@ export const EVENT_KINDS: readonly EventKind[] = [
 
 export const SKILL_CATEGORIES: readonly SkillCategory[] = [
   "basic",
+  "dash",
+  "follow-up",
   "dodge-counter",
   "enhanced-special",
   "special",
@@ -108,6 +112,10 @@ const CONTRIBUTION_FACTS = [
   "hit.actionId",
   "hit.skillCategory",
   "hit.originEffectId",
+  "hit.element",
+  "hit.damageKind",
+  "hit.skillTag",
+  "hit.targetState",
 ] as const
 
 type EnumFact =
@@ -339,6 +347,8 @@ export function validateNumericExpression<U extends Unit>(
       "minimum",
       "maximum",
       "multiply",
+      "convert",
+      "input",
     ],
     checks,
     "numeric expression kind",
@@ -346,7 +356,68 @@ export function validateNumericExpression<U extends Unit>(
   if (kind === undefined) {
     return undefined
   }
+  if (object["unit"] !== expectedUnit) {
+    checks.collector.report(
+      "UNIT_MISMATCH",
+      `${pointer}/unit`,
+      `Expression unit must be ${expectedUnit}, received ${String(object["unit"])}`,
+    )
+    return undefined
+  }
   switch (kind) {
+    case "input": {
+      if (context.phase !== "contribution") {
+        checks.collector.report(
+          "INVALID_PHASE",
+          pointer,
+          "input is only readable in the contribution phase",
+        )
+        return undefined
+      }
+      const name = expectNonEmptyString(
+        object["name"],
+        { ...checks, pointer: `${pointer}/name` },
+        "input name",
+      )
+      if (name === undefined) return undefined
+      rejectUnknownFields(object, ["kind", "unit", "name"], checks, "input")
+      return { kind, unit: expectedUnit, name }
+    }
+    case "convert": {
+      const inputObject = expectObject(
+        object["input"],
+        { ...checks, pointer: `${pointer}/input` },
+        "conversion input",
+      )
+      if (inputObject === undefined) return undefined
+      const inputUnit = expectLiteral(
+        inputObject["unit"],
+        [...UNITS],
+        { ...checks, pointer: `${pointer}/input/unit` },
+        "conversion input unit",
+      )
+      if (inputUnit === undefined) return undefined
+      const input = validateNumericExpression(
+        inputObject,
+        context,
+        `${pointer}/input`,
+        inputUnit,
+      )
+      const rate = validateNumericExpression(
+        object["rate"],
+        context,
+        `${pointer}/rate`,
+        "multiplier",
+      )
+      rejectUnknownFields(
+        object,
+        ["kind", "unit", "input", "rate"],
+        checks,
+        "convert",
+      )
+      if (input === undefined || rate === undefined) return undefined
+      return { kind, unit: expectedUnit, input, rate }
+    }
     case "literal": {
       if (object["unit"] !== expectedUnit) {
         checks.collector.report(
@@ -623,6 +694,35 @@ function validateOneOf(
   let valid = true
   for (const [index, entry] of values.entries()) {
     const entryPointer = `${pointer}/values/${index}`
+    const factValues =
+      fact === "hit.element"
+        ? DAMAGE_ELEMENTS
+        : fact === "hit.damageKind"
+          ? DAMAGE_KINDS
+          : fact === "hit.targetState"
+            ? ["stunned", "not-stunned"]
+            : undefined
+    if (factValues !== undefined) {
+      const result = expectLiteral(
+        entry,
+        factValues,
+        { ...checks, pointer: entryPointer },
+        `value for fact "${fact}"`,
+      )
+      if (result === undefined) valid = false
+      else validated.push(result)
+      continue
+    }
+    if (fact === "hit.skillTag") {
+      const result = expectNonEmptyString(
+        entry,
+        { ...checks, pointer: entryPointer },
+        "skill tag",
+      )
+      if (result === undefined) valid = false
+      else validated.push(result)
+      continue
+    }
     if (SKILL_CATEGORY_FACTS.has(fact)) {
       const literalResult = expectLiteral(
         entry,
@@ -1183,8 +1283,15 @@ export function validateParameter(
     }
   }
   const result: Record<string, number> = {}
-  for (const tier of tiers) {
-    const key = String(tier)
+  if (Object.keys(values).length === 0) {
+    checks.collector.report(
+      "INVALID_DEFINITION",
+      `${pointer}/values`,
+      "A rank table must contain at least one known tier",
+    )
+    valid = false
+  }
+  for (const key of Object.keys(values)) {
     const number = expectFiniteNumber(
       values[key],
       { ...checks, pointer: `${pointer}/values/${key}` },

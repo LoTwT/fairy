@@ -4,6 +4,8 @@
 
 [contract-examples.ts](contract-examples.ts) 提供可编译的规则、输入和类型反例，直接引用包内正式类型；`pnpm check:spec-types` 编译该文件作为类型契约检查，包测试另行验证这些实例通过运行时校验。其中 `syntheticRuleSet` 是纯合成验收数据；游戏实例中显式选择的读取时点、刷新策略和动作别名只用于验证表达能力，不据此发布游戏规则。
 
+静态计算入口 `calculateStaticDamage` 也已实现；培养档位、ZZZ-HP 固定来源与后续数据转换范围见[静态快照增益数据与培养配置](static-snapshot.md)。
+
 ## 数据与身份
 
 ### 定义和绑定
@@ -12,7 +14,7 @@
 - 效果、状态、动作分别在规则集内唯一。运行时实体、来源绑定、实例、层、事件、快照、请求使用不同 ID 前缀；后缀必须非空。数组中的重复身份报错，不采用后者覆盖前者。
 - 规则按 `source.identity.kind + entityId` 匹配来源绑定。一个绑定实例代表一个持有者的一项来源；同一套装的件数合并为一个绑定。同一持有者的同种同 ID 来源不得重复绑定。
 - `eligible: false` 不产生效果或修改。配置条件仍是必填项，无条件写 `constant: true`。不支持的配置字段不能当作零：例如音擎规则读取 `mindscapeRank` 是定义与来源不相容。
-- 当前等级表必须覆盖所声明的全部档位。先按绑定选择一项，再执行修改。基础效果不为每个档位复制。
+- 等级表至少记录一项有限数值，只接受该培养字段域内的档位键。配置条件为假时跳过规则，对启用规则按绑定选值，再执行修改；实际需要的档位缺失报 `MISSING_RANK`，不插值、不回退、不以零替代。基础效果不为每个档位复制。
 
 本版允许登记代理人、驱动盘、音擎、邦布、敌人、环境来源；后三类暂未登记额外培养配置。这表示身份协议可容纳它们，不表示已经覆盖它们的所有机制。实体 ID、技能语义 ID 与来源文件 ID 彼此独立。
 
@@ -35,6 +37,8 @@
 目标选择器中的队伍均为持有者队伍，只选择 `actor`，不自动包含召唤物。`holder-and-trigger-actor` 返回两个身份的去重集合，并要求触发者属于持有者队伍。需要排除持有者自身触发时，另外写实体不相等条件。
 
 `continuous` 在查询时解析目标；`triggered` 在事件的 `before` 世界中解析并写入实例，之后不随目标列表变化而改写；`supplied` 由调用方提供对应集合。目标顺序按 ID 排序，不参与游戏语义。
+
+`supplied.maximumLayers` 可声明配置阶段求值的正整数上限；同一绑定、效果、受益者的各实例层数合计受此限制，不能通过拆分受益集合绕过。`supplied.exclusiveGroup` 在同一绑定内只允许一条同组规则。低层接口中旧定义省略上限时保留原有行为；静态入口对没有上限声明的旧规则只允许选择一层。
 
 `recipientPartition: individual` 对每名受益者分别建组；`selected-set` 对排序后的整个目标集合建组。逻辑组键为 `(effectId, bindingId, beneficiaryIds, stackKey, lifecycleGroupKey)`。`stackKey` 按 `layering.keys` 声明顺序取触发者 ID 或招式分类，不得重复声明键或使用事件没有的分类。
 
@@ -230,7 +234,11 @@
 
 顺序性来源只允许真实的快照时点，不自动把环改为快照。环错误必须列出实体、效果、属性阶段与时点组成的路径。相同输入的数字聚合按稳定 ID 次序进行，避免输入数组重排改变浮点加法顺序；使用 JavaScript 有限数语义，显示舍入不进入中间计算。
 
-加算地址把各层数值相加，倍率地址相乘。`add/minimum/maximum` 的操作数同单位；乘法的系数为比例或乘数，结果保持被乘数单位。属性点数不能与能量点数混加。乘数、时长、距离非负，实际持续时长及其上限严格为正；层数、次数严格为正整数。比例的允许符号按落点契约决定，不能统一夹在 `[0, 1]`。
+加算贡献相加，乘算贡献相乘。`add/minimum/maximum` 的操作数同单位；`multiply` 的系数为比例或乘数，结果保持被乘数单位。跨单位必须使用 `convert`，其 `input.unit` 与外层 `unit` 分别声明输入和输出单位，`rate` 是每一输入单位对应的输出单位数；不隐式处理百分数。阈值用输入单位的 `maximum/add` 表达，上限用输出单位的 `minimum` 表达，属性读取继续参与同一依赖图。乘算系数、时长、距离非负，实际持续时长及其上限严格为正；层数、次数严格为正整数。比例与倍率加数的允许符号按落点契约决定，不能统一夹在 `[0, 1]`。
+
+贡献阶段的 `input` 表达式读取调用方显式传入的 `EvaluationInput.inputs`，按 `(bindingId, name)` 匹配并校验单位。重复键、未绑定来源、非有限值或未知字段均拒绝；实际读取的值缺失报 `MISSING_FACT`。手工值不回退到默认面板或当前属性，也不等同于历史快照。已有 `activation/action-start` 读取仍使用对应 `SavedSnapshot`。
+
+命中条件增加 `hit.element`、`hit.damageKind`、`hit.targetState` 与 `hit.skillTag`。前三者按登记枚举比较，技能标签按数组中任一标签匹配；标签为空表示明确没有，省略表示未提供。旧命中可以省略这些字段，只有实际读取缺失事实时才报错。命中查询的可选 `stats` 可请求额外属性，仍使用同一命中局部依赖图，不另算通用面板冒充命中结果。
 
 ### 唯一性候选
 
@@ -253,33 +261,56 @@
 
 `scope` 决定规则的适用性与可读上下文，输出地址表示实际消费位置：通用面板与实体贡献查询使用 `hitId: null`；命中查询的通用和局部贡献统一使用当前命中 ID。来源作用域可通过 `origin.effectId` 找回，不能靠输出的 `hitId` 反推定义作用域。逐命中属性只影响进攻方本次计算；注册面向特定敌人的减益时，必须有对应目标事实与生命周期，不能仅添加一个通道就假定所有敌人已被施加减益。
 
-命中暴击率使用 `scope: hit` 下的 `stat-adjustment / criticalRate / direct`，输出为 `{ kind: stat, stat: criticalRate, stage: direct, entityId: hit.actorId, hitId }`，与该命中消费的通用暴击率贡献共同归约和去重。输入与输出均不另设命中暴击率分支；`hit-adjustment` 仅处理倍率，输出地址为 `{ kind: hit, field: damageMultiplier, hitId }`。
+命中暴击率使用 `scope: hit` 下的 `stat-adjustment / criticalRate / direct`，输出为 `{ kind: stat, stat: criticalRate, stage: direct, entityId: hit.actorId, hitId }`，与该命中消费的通用暴击率贡献共同归约和去重。输入与输出均不另设命中暴击率分支；`hit-adjustment` 处理倍率，输出地址为 `{ kind: hit, field: damageMultiplier, hitId }`，指定基础伤害项时另带 `itemId`。
 
-| 输出                            | core 或调用方输入                                        | 数值方向                             |
-| ------------------------------- | -------------------------------------------------------- | ------------------------------------ |
-| 四类通用属性调整                | `calculateInitialStat` / `calculateFinalStat` 对应数组   | 有符号有限数，遵循 helper 校验       |
-| 直接暴击率、暴伤、穿透率        | 基础值加有效贡献                                         | 有符号比例；本层不擅自实施概率裁剪   |
-| `damage-bonus`                  | `damageBonusFactor` 输入数组                             | 有符号比例                           |
-| `daze-dealt-increase`           | `dazeDealtFactor.dazeDealtIncreases`                     | 非负比例                             |
-| `daze-dealt-reduction`          | `dazeDealtFactor.dazeDealtReductions`                    | 非负比例，由 core 执行减法           |
-| `target-resistance-reduction`   | `resistanceFactor.targetResistanceReductions`            | 非负比例                             |
-| `attacker-resistance-ignore`    | `resistanceFactor.attackerResistanceIgnoreValues`        | 非负比例                             |
-| `energy-generation-rate`        | `energyGenerationRateFactor` 输入数组                    | 有符号比例                           |
-| 命中 `damageMultiplier / scale` | 乘入 `hit.damageItems` 每项倍率，交给 `baseDamageFactor` | 非负乘数                             |
-| `resource-generation`           | 能量公式 `baseEnergyGenerationValues` 的一次基础值       | 非负能量点数，效率适用性另行确认     |
-| `action-request`                | 外部动作执行方                                           | 次数与动作身份；不提供猜测的伤害倍率 |
+| 输出                                 | core 或调用方输入                                                      | 数值方向                             |
+| ------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------ |
+| 四类通用属性调整                     | `calculateInitialStat` / `calculateFinalStat` 对应数组                 | 有符号有限数，遵循 helper 校验       |
+| 直接暴击率、暴伤、穿透率             | 基础值加有效贡献                                                       | 有符号比例；本层不擅自实施概率裁剪   |
+| `damage-bonus`                       | `damageBonusFactor` 输入数组                                           | 有符号比例                           |
+| `daze-dealt-increase`                | `dazeDealtFactor.dazeDealtIncreases`                                   | 非负比例                             |
+| `daze-dealt-reduction`               | `dazeDealtFactor.dazeDealtReductions`                                  | 非负比例，由 core 执行减法           |
+| `target-resistance-reduction`        | `resistanceFactor.targetResistanceReductions`                          | 非负比例                             |
+| `attacker-resistance-ignore`         | `resistanceFactor.attackerResistanceIgnoreValues`                      | 非负比例                             |
+| `energy-generation-rate`             | `energyGenerationRateFactor` 输入数组                                  | 有符号比例                           |
+| `target-defense-adjustment`          | `calculateTargetEffectiveDefense.defensePercentageAdjustments`         | 有符号比例；减防为负数               |
+| `attacker-penetration-value`         | `calculateTargetEffectiveDefense.penetrationValues`                    | 防御点数，交由 core 归约             |
+| `damage-taken-increase/reduction`    | `damageTakenFactor` 对应数组                                           | 非负比例                             |
+| `stun-damage-adjustment`             | `stunDamageFactor.targetStunDamageMultiplierAdjustments`               | 有符号倍率加数                       |
+| `sheer-damage-bonus`                 | `sheerDamageBonusFactor` 输入数组                                      | 有符号比例                           |
+| `anomaly-damage-bonus`               | `anomalyDamageBonusFactor` 输入数组                                    | 有符号比例                           |
+| `anomaly-critical-rate`              | 静态异常伤害的期望权重                                                 | 有符号比例，最终概率裁剪至 `[0, 1]`  |
+| `anomaly-critical-damage`            | `anomalyCriticalFactor.anomalyCriticalDamageContributions`             | 有符号比例                           |
+| `refringe-coefficient-increase`      | `calculateRefringeMultiplier.refringeCoefficientIncreases`             | 非负比例                             |
+| `luminize-multiplier-addition`       | `luminizeMultiplierFactor.baseLuminizeMultiplier` 的加数               | 有符号倍率加数                       |
+| `luminize-multiplier-scale`          | `luminizeMultiplierFactor.multiplicativeLuminizeMultiplierAdjustments` | 非负乘数，输出操作为 `scale`         |
+| 命中 `damageMultiplier / add, scale` | 每项按 `(原倍率 + Σadd) × Πscale` 归约后交给 `baseDamageFactor`        | 加数可带符号，乘数及归约后的倍率非负 |
+| `resource-generation`                | 能量公式 `baseEnergyGenerationValues` 的一次基础值                     | 非负能量点数，效率适用性另行确认     |
+| `action-request`                     | 外部动作执行方                                                         | 次数与动作身份；不提供猜测的伤害倍率 |
 
-各 Factor 的其他必需参数仍由调用方补齐；例如抗性区的目标抗性不由“降低抗性”贡献推导。暴击区仍接收 `isCritical` 与暴伤贡献，概率判定/期望留在调用方。命中倍率修改当前作用于该命中的全部基础伤害项；仅修改某一项、按元素筛选等能力尚未登记时不能用任意字符串假装支持。
+各 Factor 的其他必需参数仍由调用方补齐；例如抗性区的目标抗性不由“降低抗性”贡献推导。低层查询只提供贡献和属性；静态入口另行计算暴击与期望。命中倍率修改省略 `itemIds` 时作用于全部基础伤害项，指定时只作用于对应项，不改变其他项；加算与乘算按上述顺序归约。存在分项规则时，全项和分项贡献统一到每个基础伤害项的消费地址上裁决唯一来源，输出携带 `itemId`；只有全项规则时保留全项输出。生效的分项修改引用命中中不存在的项时，返回 `MISSING_REFERENCE`。
 
 具体数值公式、裁剪和错误行为引用 [core 规范](../core/index.md)，此处只规定落点。效果求值校验通过也不表示已经完成整条伤害公式计算。
+
+### 静态伤害计算
+
+`calculateStaticDamage` 接收规则、来源绑定、显式效果选择、原始世界属性、命中与 core 所需基线，返回贡献、属性、非暴击/暴击伤害、期望及各乘区。它建立独立 supplied 状态，再沿用准备、状态导入与命中求值，不调用事件推进。每次改变培养配置或选择均重新调用；输入不变，重复调用不会累计贡献。
+
+- `continuous` 仍由配置决定；`selections` 只选择 `supplied` 效果，未选择即关闭。选中未知来源、不适用配置或其他激活类型时报错。准备阶段只为本次选择的 supplied 规则、continuous 规则及相关修改选参；普通 `prepareEffects` 仍准备全部符合配置的规则。
+- 层数和互斥组由定义校验，目标由规则的选择器与实际队伍推导。装备适用性由调用方给出 `eligible`，引擎不根据实体 ID 猜测阵营或职业。不能把预设默认值当作本次有效状态。
+- `atSeconds` 省略为静态时点 0，快照省略为空；需要历史读取时仍须提供真实快照或规则声明的显式 `input`。触发角色来自可选 `selection.trigger`，静态入口不生成战斗历史。
+- 基线数据不能包含本次规则再次提供的贡献。敌人抗性、防御、失衡倍率等必须明确给出；无增益的数组显式写 `[]`。普通/贯穿伤害的暴伤以及有防御区公式的穿透率、异常公式的异常精通由本次命中求值读取。低层命中原有的暴击率读取保持兼容，因此所有静态命中仍须提供该属性。
+- `regular` 使用普通伤害，`sheer` 使用贯穿伤害；`anomaly/disorder/vortex/anomaly-settlement` 使用当前 core 异常伤害公式，基础倍率由调用方先按对应机制确认；`luminize` 使用耀光公式。异常/耀光的 `damageBonus` 可以是尚未结算的贡献数组，也可以是 `{ settledMultiplier }`。后者保留给定快照或特殊固定乘区，不再叠加当前 `damage-bonus`，相关贡献列为本次不适用。跨角色虚拟快照可先由 core 的 `calculateVirtualAgentSnapshot` 构造，再明确提供本次使用的属性与已结算增伤。
+- 普通及异常暴击率只在计算期望时裁剪至 `[0, 1]`，暴伤裁剪仍由各 core 公式负责。耀光没有暴击分支，返回 `critical: null`。计算过程不做显示舍入。
+- 已登记但不适用于该伤害公式的贡献进入 `notApplicableContributions`，例如能量生成或贯穿伤害中的减防；未登记通道在规则校验时直接拒绝。原始基线非法或 core 计算失败返回 `INVALID_INPUT`，不输出半组伤害结果。
 
 ## 校验与验收
 
 ### 两层校验
 
-TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、缺档位、错误规则分支和已声明的禁止字段。它不会验证任意 JSON，也不能静态证明字符串参数名存在、目标规则操作匹配或运行时没有依赖环。
+TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、错误规则分支和已声明的禁止字段。部分档位表的非空约束与实际所选档位由运行时校验；它不会验证任意 JSON，也不能静态证明字符串参数名存在、目标规则操作匹配或运行时没有依赖环。
 
-运行时校验器必须检查未知字段、判别联合、所有必填字段、整数及有限数、非空身份、完整档位、来源与配置匹配、精确引用、参数单位、修改合法性，以及跨字段的上下文限制。未知字段不能静默丢弃。无效定义即使当前未启用也应报告；仅依赖实际绑定或战斗输入的问题延迟到对应阶段。
+运行时校验器必须检查未知字段、判别联合、所有必填字段、整数及有限数、非空身份、合法档位与实际选值、来源与配置匹配、精确引用、参数单位、修改合法性，以及跨字段的上下文限制。未知字段不能静默丢弃。无效定义即使当前未启用也应报告；仅依赖实际绑定或战斗输入的问题延迟到对应阶段。
 
 | 问题                                | 错误码                                             |
 | ----------------------------------- | -------------------------------------------------- |
@@ -288,6 +319,7 @@ TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、缺
 | 单位错误 / 读取时机错误             | `UNIT_MISMATCH` / `INVALID_PHASE`                  |
 | 修改目标或字段不合法 / 不同有效 set | `INVALID_MODIFICATION` / `MODIFICATION_CONFLICT`   |
 | 必需事实 / 快照缺失                 | `MISSING_FACT` / `MISSING_SNAPSHOT`                |
+| 实际使用的参数档位缺失              | `MISSING_RANK`                                     |
 | 数值环 / 唯一性无法裁决             | `DEPENDENCY_CYCLE` / `UNIQUENESS_CONFLICT`         |
 | 重放、逆序事件                      | `EVENT_ORDER`                                      |
 | 状态归属、角色或世界身份不一致      | `CONTEXT_MISMATCH`                                 |
