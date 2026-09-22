@@ -135,6 +135,48 @@ describe("packed package", () => {
     )
     const { tarballPath, packedRoot, consumerDirectory } =
       installPackedConsumer(temporaryDirectory, cleanPackage)
+    // Reuse the isolated checkout: engine packaging must not race workspace builds.
+    const enginePackages = join(temporaryDirectory, "engine-packages")
+    mkdirSync(enginePackages)
+    const engineTarballs: Record<string, string> = {}
+    for (const name of ["core", "effects"]) {
+      const source = join(checkout, "packages", name)
+      execFileSync(
+        "corepack",
+        ["pnpm", "pack", "--pack-destination", enginePackages],
+        {
+          cwd: source,
+          stdio: "pipe",
+          env: checkoutEnvironment,
+        },
+      )
+      const manifest = JSON.parse(
+        readFileSync(join(source, "package.json"), "utf8"),
+      )
+      engineTarballs[name] = join(
+        enginePackages,
+        `randomplay-${name}-${manifest.version}.tgz`,
+      )
+    }
+    const consumerManifestPath = join(consumerDirectory, "package.json")
+    const consumerManifest = JSON.parse(
+      readFileSync(consumerManifestPath, "utf8"),
+    )
+    consumerManifest.dependencies["@randomplay/effects"] =
+      `file:${engineTarballs.effects}`
+    writeFileSync(consumerManifestPath, JSON.stringify(consumerManifest))
+    writeFileSync(
+      join(consumerDirectory, "pnpm-workspace.yaml"),
+      `overrides:\n  "@randomplay/core": ${JSON.stringify(`file:${engineTarballs.core}`)}\n`,
+    )
+    execFileSync(
+      "corepack",
+      ["pnpm", "install", "--offline", "--no-frozen-lockfile"],
+      {
+        cwd: consumerDirectory,
+        stdio: "pipe",
+      },
+    )
     const publishedEntry = readFileSync(join(cleanPackage, "dist/index.mjs"))
     const watch = spawnSync(
       process.execPath,
@@ -197,6 +239,7 @@ describe("packed package", () => {
         "LICENSE",
         "README.md",
         "dist/definitions/effects/starter.json",
+        "dist/definitions/effects/automatic.json",
         "dist/index.d.mts",
         "dist/index.mjs",
         "dist/index.browser.mjs",
@@ -206,13 +249,14 @@ describe("packed package", () => {
         ...jsonFiles.map((path) => `dist/integrated/${path}`),
       ].toSorted(),
     )
-    expectSameBytes(
-      readFileSync(join(packedRoot, "dist/definitions/effects/starter.json")),
-      readFileSync(
-        join(cleanPackage, "definitions", "effects", "starter.json"),
-      ),
-      "definitions/effects/starter.json",
-    )
+    for (const name of ["starter", "automatic"]) {
+      const path = `definitions/effects/${name}.json`
+      expectSameBytes(
+        readFileSync(join(packedRoot, "dist", path)),
+        readFileSync(join(cleanPackage, path)),
+        path,
+      )
+    }
     for (const path of jsonFiles)
       expectSameBytes(
         readFileSync(join(snapshot, path)),
@@ -273,6 +317,22 @@ const starterDefinitions = await import("@randomplay/data/definitions/effects/st
 assert.equal(starterDefinitions.default.schemaVersion, 1)
 assert.equal(starterDefinitions.default.ruleSetId, "starter-effects")
 assert.equal(starterDefinitions.default.effects.length, 3)
+const automaticDefinitions = await import("@randomplay/data/definitions/effects/automatic.json", { with: { type: "json" } })
+const { parseEffectRuleSet, prepareEffects, supplyEffectState, advanceEffects } = await import("@randomplay/effects")
+function value(result) { assert.equal(result.ok, true, JSON.stringify(result)); return result.value }
+const rules = value(parseEffectRuleSet(automaticDefinitions.default))
+assert.equal(rules.ruleSetId, "automatic-effects")
+assert.equal(rules.revision, "1")
+assert.deepEqual(rules.effects.map(effect => effect.effectId), ["w-engine:14131:energy-on-entry"])
+const prepared = value(prepareEffects(rules, [{ kind: "w-engine", bindingId: "binding:weapon", holderId: "entity:holder", sourceEntityId: "14131", eligible: true, configuration: { refinement: 5 } }]))
+const state = value(supplyEffectState(prepared, { sessionId: "session:packed", atSeconds: 0, instances: [], snapshots: [], cooldowns: [], eventHistory: { processedIds: [], last: null } }))
+const world = { entities: ["holder", "teammate"].map(name => ({ kind: "actor", entityId: "entity:" + name, teamId: "team:one", generalStats: {}, directStats: {} })), states: [], distances: [] }
+const input = { event: { kind: "entry", eventId: "event:packed", atSeconds: 0, sequence: 0, actorId: "entity:teammate", entryAction: "quick-assist" }, before: world, after: world, observedSnapshots: [] }
+const advanced = value(advanceEffects(prepared, state, input))
+assert.equal(advanced.requests.length, 1)
+assert.deepEqual(advanced.requests[0], { requestId: advanced.requests[0].requestId, eventId: "event:packed", effectId: "w-engine:14131:energy-on-entry", bindingId: "binding:weapon", beneficiaryId: "entity:holder", kind: "resource-generation", resource: "energy", baseAmount: { unit: "energy-points", value: 7 } })
+assert.match(advanced.requests[0].requestId, /^request:/)
+assert.deepEqual(value(advanceEffects(prepared, state, input)).requests, advanced.requests)
 const index = await api.loadIndex()
 assert.deepEqual(index, JSON.parse(readFileSync(new URL(import.meta.resolve("@randomplay/data/integrated/index.json")), "utf8")))
 assert(Object.isFrozen(api.agentNames))

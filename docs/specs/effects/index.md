@@ -11,6 +11,7 @@
 | 本文                                               | 模型概念、职责与设计选择                             |
 | [包内类型](../../../packages/effects/src/types.ts) | 字段、类型分支、单位、输入输出及接口签名             |
 | [类型与执行契约](execution.md)                     | 跨字段约束、修改顺序、事件推进、数值求值、错误与验收 |
+| [首批自动规则接入](automatic-rules.md)             | PR 6 的正式定义、证据边界、消费接口与验收            |
 | [实例与核对记录](examples.md)                      | 游戏条款、来源、数学基准和待补证机制                 |
 | [contract-examples.ts](contract-examples.ts)       | 可编译的合法实例、合成夹具和类型反例                 |
 

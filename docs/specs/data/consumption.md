@@ -234,6 +234,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 公开 JSON 子路径（前缀 `@randomplay/data`）：
 
 - `/definitions/effects/starter.json`
+- `/definitions/effects/automatic.json`
 - `/integrated/index.json`
 - `/integrated/agents/{来源ID}/data.json`
 - `/integrated/agents/{来源ID}/details.zh.json`
@@ -260,12 +261,24 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/simul/{来源ID}/details.zh.json`
 - `/integrated/simul/{来源ID}/details.en.json`
 
-这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理的发布副本，`/definitions/effects/starter.json` 是 Git 跟踪的静态效果规则集（首批经核对的耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套条款；类型与执行契约由[统一效果规则模型](../effects/index.md)维护，构建时逐文件字节复验后复制）。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 原字节、字段、层级、文件名、摘要全部保留，
+这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理的发布副本，`/definitions/effects/*.json` 是 Git 跟踪的静态效果规则集，构建时逐文件字节复验后复制。`starter.json` 保留耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套三条规则，`automatic.json` 的范围由[首批自动规则接入](../effects/automatic-rules.md)维护；类型与执行契约由[统一效果规则模型](../effects/index.md)维护。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 原字节、字段、层级、文件名、摘要全部保留，
 索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含八个类别的完整数据；根入口的名称与 ID
 元数据及显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时
 请求该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；
 不包含 raw、本机控制目录、抓取/恢复工具及内部维护材料。直接 JSON 导入遵循宿主模块缓存语义；
 返回对象隔离保证属于上述二十五个函数。
+
+## 自动效果消费
+
+应用显式导入 `@randomplay/data/definitions/effects/automatic.json`（Node 使用 `with { type: "json" }`，Vite 直接导入 JSON），将导入结果交给 `@randomplay/effects` 的 `parseEffectRuleSet`。依次调用 `prepareEffects` 绑定适用装备及精炼档位、`supplyEffectState` 建立会话，再用 `advanceEffects` 按真实事件推进。每一步都检查 `Result.ok`，缺少实体或队伍事实的错误不能解释为未触发。data 与 effects 之间没有新增包依赖。
+
+当前 `entry` 仅代表快速支援、连携技、招架支援、回避支援四种真实入场。普通切人不在其中；调用方不得把其他动作标成任意一个合法 `EntryAction`。`entry-followup` 表示关联追加动作，不是第二次入场。事件的来源映射由应用依据真实动作完成，本包不提供未经核实的原始动作 ID 映射。
+
+接受入场后，`advanceEffects` 返回的新状态记录冷却与事件游标，应用须保留并用于后续推进。`requests` 中的 `resource-generation` 只携带持有者的基础能量请求 `baseAmount`，不会改变世界观察或角色能量。执行方按 `requestId` 去重；同一旧状态与事件重算会得到相同请求身份，向新状态重放已处理事件会报 `EVENT_ORDER`。`evaluateEffects` 的面板查询不会再次产生请求。
+
+`baseAmount` 不代表最终能量结算，能量获得效率是否适用仍待确认；不能把效率强制设为 1 或声称已还原最终回能。其他未接入机制与证据缺口见[实例与核对记录](../effects/examples.md#尚需补充的游戏证据)。
+
+`automatic-effects@1` 和 `starter-effects@1` 可分别消费。需要组合时，由应用显式构造自己的 `ruleSetId` 与 `revision`，合并两组的 `effects`、`states`、`actions` 后重新调用 `parseEffectRuleSet`，再准备绑定与运行状态。没有隐式注册表或组合 API，不可复用另一规则集的旧状态。
 
 ## 静态发布与受管理目录边界
 
@@ -303,6 +316,8 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 不缩减 `check` 与 CI 的覆盖范围。
 `pnpm --filter @randomplay/data verify:browser` 对离线安装包进行真实 Chromium 的 Vite 开发/生产请求验收，
 输出 npm/解包字节数、初始与按需请求字节数、gzip 参考值和分块清单；gzip 是离线测量，不冒充服务器实际压缩传输量。
+打包验收同时离线安装隔离构建的 core/effects 制品，从公开 JSON 子路径解析自动规则并推进得到基础回能请求；浏览器验收额外核对两组定义按需导入，根入口冷启动不请求定义 JSON。
+
 浏览器验收需要本机 Playwright Chromium（首次运行 `pnpm --filter @randomplay/data exec playwright install chromium`）；测试使用合成 fixture，包与浏览器验收使用已跟踪的完整静态快照。
 
 CI 的 Node 24 作业安装 Chromium 并运行 `verify:browser`；普通 `check` 不要求本机浏览器。
