@@ -673,6 +673,57 @@ describe("static facts, selection and dependency boundaries", () => {
   ])("returns issues for malformed static input", (input) => {
     expect(calculateStaticDamage(input as StaticDamageInput).ok).toBe(false)
   })
+  it.each([
+    ["regular", ["resistance", "targetResistanceReductions"]],
+    ["regular", ["resistance", "attackerResistanceIgnoreValues"]],
+    ["regular", ["damageTaken", "targetDamageTakenIncreases"]],
+    ["regular", ["damageTaken", "targetDamageTakenReductions"]],
+    ["regular", ["stunDamage", "targetStunDamageMultiplierAdjustments"]],
+    ["regular", ["defense", "defensePercentageAdjustments"]],
+    ["regular", ["defense", "penetrationValues"]],
+    ["sheer", ["sheerDamageBonus"]],
+    ["anomaly", ["anomalyDamageBonus"]],
+    ["anomaly", ["anomalyCriticalDamage"]],
+    ["anomaly", ["refringe", "refringeCoefficientIncreases"]],
+    [
+      "luminize",
+      ["luminizeMultiplier", "multiplicativeLuminizeMultiplierAdjustments"],
+    ],
+  ] as const)(
+    "rejects an empty string instead of a numeric array: %s %j",
+    (kind, path) => {
+      const input = inputFor()
+      const damage =
+        kind === "regular"
+          ? input.damage
+          : kind === "sheer"
+            ? {
+                kind,
+                damageBonus: [],
+                sheerDamageBonus: [],
+                resistance: input.damage.resistance,
+                damageTaken: input.damage.damageTaken,
+                stunDamage: input.damage.stunDamage,
+              }
+            : anomalyDamage(kind)
+      const record = structuredClone(damage) as unknown as Record<
+        string,
+        unknown
+      >
+      let object = record
+      for (const key of path.slice(0, -1))
+        object = object[key] as Record<string, unknown>
+      object[path.at(-1)!] = ""
+      issue(
+        calculateStaticDamage({
+          ...input,
+          damage: record as unknown as StaticDamageParameters,
+        }),
+        "INVALID_INPUT",
+        `/damage/${path.join("/")}`,
+      )
+    },
+  )
   it("rejects unknown core adapter fields and invalid core values", () => {
     const input = inputFor()
     issue(

@@ -23,9 +23,11 @@ import type {
 } from "../types.ts"
 import {
   expectArray,
+  expectBoolean,
   expectFiniteNumber,
   expectObject,
   rejectUnknownFields,
+  type FieldChecks,
 } from "./checks.ts"
 import { evaluateEffects } from "./evaluate.ts"
 import { IssueCollector, failure } from "./issues.ts"
@@ -37,6 +39,18 @@ import {
   validateSnapshots,
   validateWorldObservation,
 } from "./world.ts"
+
+function validateNumberArray(value: unknown, checks: FieldChecks): void {
+  const values = expectArray(value, checks, "numeric contributions")
+  if (values === undefined) return
+  for (const [index, entry] of values.entries()) {
+    expectFiniteNumber(
+      entry,
+      { ...checks, pointer: `${checks.pointer}/${index}` },
+      "numeric contribution",
+    )
+  }
+}
 
 function validateDamageFields(
   value: unknown,
@@ -76,7 +90,12 @@ function validateDamageFields(
     else fields.push("anomalyCriticalRate", "anomalyCriticalDamage")
   }
   rejectUnknownFields(object, fields, checks, "static damage parameters")
-  if (!Array.isArray(object["damageBonus"])) {
+  if (Array.isArray(object["damageBonus"])) {
+    validateNumberArray(object["damageBonus"], {
+      ...checks,
+      pointer: "/damage/damageBonus",
+    })
+  } else {
     if (kind === "regular" || kind === "sheer") {
       collector.report(
         "INVALID_INPUT",
@@ -113,31 +132,59 @@ function validateDamageFields(
         `Required field "${field}" is missing`,
       )
   }
-  const nestedFields: Record<string, readonly string[]> = {
-    resistance: [
-      "targetResistance",
-      "targetResistanceReductions",
-      "attackerResistanceIgnoreValues",
-    ],
-    damageTaken: ["targetDamageTakenIncreases", "targetDamageTakenReductions"],
-    stunDamage: [
-      "isTargetStunned",
-      "targetBaseStunDamageMultiplier",
-      "targetStunDamageMultiplierAdjustments",
-    ],
-    defense: [
-      "attackerLevel",
-      "targetBaseDefense",
-      "defensePercentageAdjustments",
-      "penetrationValues",
-    ],
-    refringe: ["remielleAnomalyProficiency", "refringeCoefficientIncreases"],
-    luminizeMultiplier: [
-      "baseLuminizeMultiplier",
-      "remielleAnomalyProficiency",
-      "anomalyProficiencyConversionRate",
-      "multiplicativeLuminizeMultiplierAdjustments",
-    ],
+  for (const field of [
+    "sheerDamageBonus",
+    "anomalyDamageBonus",
+    "anomalyCriticalDamage",
+  ]) {
+    if (fields.includes(field))
+      validateNumberArray(object[field], {
+        ...checks,
+        pointer: `/damage/${field}`,
+      })
+  }
+  if (fields.includes("anomalyCriticalRate"))
+    expectFiniteNumber(
+      object["anomalyCriticalRate"],
+      { ...checks, pointer: "/damage/anomalyCriticalRate" },
+      "anomaly critical rate",
+    )
+  const nestedFields: Readonly<
+    Record<
+      string,
+      Readonly<Record<string, "number" | "number-array" | "boolean">>
+    >
+  > = {
+    resistance: {
+      targetResistance: "number",
+      targetResistanceReductions: "number-array",
+      attackerResistanceIgnoreValues: "number-array",
+    },
+    damageTaken: {
+      targetDamageTakenIncreases: "number-array",
+      targetDamageTakenReductions: "number-array",
+    },
+    stunDamage: {
+      isTargetStunned: "boolean",
+      targetBaseStunDamageMultiplier: "number",
+      targetStunDamageMultiplierAdjustments: "number-array",
+    },
+    defense: {
+      attackerLevel: "number",
+      targetBaseDefense: "number",
+      defensePercentageAdjustments: "number-array",
+      penetrationValues: "number-array",
+    },
+    refringe: {
+      remielleAnomalyProficiency: "number",
+      refringeCoefficientIncreases: "number-array",
+    },
+    luminizeMultiplier: {
+      baseLuminizeMultiplier: "number",
+      remielleAnomalyProficiency: "number",
+      anomalyProficiencyConversionRate: "number",
+      multiplicativeLuminizeMultiplierAdjustments: "number-array",
+    },
   }
   for (const field of fields) {
     const allowed = nestedFields[field]
@@ -145,14 +192,15 @@ function validateDamageFields(
     const nestedChecks = { ...checks, pointer: `/damage/${field}` }
     const nested = expectObject(object[field], nestedChecks, field)
     if (nested === undefined) continue
-    rejectUnknownFields(nested, allowed, nestedChecks, field)
-    for (const key of allowed) {
-      if (nested[key] === undefined)
-        collector.report(
-          "INVALID_INPUT",
-          `${nestedChecks.pointer}/${key}`,
-          `Required field "${key}" is missing`,
-        )
+    rejectUnknownFields(nested, Object.keys(allowed), nestedChecks, field)
+    for (const [key, type] of Object.entries(allowed)) {
+      const valueChecks = {
+        ...checks,
+        pointer: `${nestedChecks.pointer}/${key}`,
+      }
+      if (type === "number-array") validateNumberArray(nested[key], valueChecks)
+      else if (type === "boolean") expectBoolean(nested[key], valueChecks, key)
+      else expectFiniteNumber(nested[key], valueChecks, key)
     }
   }
   return collector.isEmpty
