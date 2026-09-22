@@ -10,6 +10,7 @@ import type {
   EffectState,
   EventRequest,
   PreparedEffects,
+  SavedSnapshot,
   TransitionInput,
 } from "../src/index.ts"
 import { readStateInternal } from "../src/internal/state.ts"
@@ -24,6 +25,7 @@ import {
   syntheticState,
   syntheticWorld,
 } from "../../../docs/specs/effects/contract-examples.ts"
+import { reorderObjectKeys } from "./fixtures.ts"
 
 const always = { kind: "constant", value: true } as const
 
@@ -2980,5 +2982,123 @@ describe("duration transform boundaries", () => {
     expect(internal.instances).toHaveLength(0)
     expect(internal.processedEventIds).not.toContain("event:dt-5")
     expect(panelAttack(prepared, state, 0).value).toBeCloseTo(1000, 9)
+  })
+})
+
+/** 已记录快照与其中的攻击力属性；用于快照内容比较与重复属性用例。 */
+function recordedSnapshot(): SavedSnapshot {
+  return {
+    snapshotId: "snapshot:spec-recorded",
+    atSeconds: 0,
+    attributes: [],
+    world: structuredClone(syntheticWorld),
+  }
+}
+
+function recordedAttackAttribute(
+  value: number,
+): SavedSnapshot["attributes"][number] {
+  return {
+    entityId: syntheticBinding.holderId,
+    stat: "attack",
+    stage: "initial",
+    value: { unit: "attack-points", value },
+  }
+}
+
+describe("advanceEffects snapshot validation", () => {
+  function syntheticSessionWithSnapshot(sessionId: string): {
+    prepared: PreparedEffects
+    state: EffectState
+  } {
+    const prepared = prepareSynthetic()
+    const supplied = supplyEffectState(prepared, {
+      sessionId,
+      atSeconds: 0,
+      instances: [],
+      snapshots: [recordedSnapshot()],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    } as never)
+    expect(supplied.ok).toBe(true)
+    if (!supplied.ok) {
+      throw new Error("state supply must succeed")
+    }
+    return { prepared, state: supplied.value }
+  }
+
+  it("accepts a repeated snapshot whose object keys are ordered differently", () => {
+    const { prepared, state } = syntheticSessionWithSnapshot(
+      "session:spec-snapshot-key-order",
+    )
+    const repeated = reorderObjectKeys(recordedSnapshot())
+    expect(JSON.stringify(repeated)).not.toBe(
+      JSON.stringify(recordedSnapshot()),
+    )
+    const result = advanceEffects(prepared, state, {
+      ...entryEvent(1, 0, "event:spec-snapshot-key-order"),
+      observedSnapshots: [repeated as SavedSnapshot],
+    })
+    expect(result.ok).toBe(true)
+  })
+
+  it("still rejects a recorded snapshot whose content changed", () => {
+    const { prepared, state } = syntheticSessionWithSnapshot(
+      "session:spec-snapshot-conflict",
+    )
+    const result = advanceEffects(prepared, state, {
+      ...entryEvent(1, 0, "event:spec-snapshot-conflict"),
+      observedSnapshots: [{ ...recordedSnapshot(), atSeconds: 1 }],
+    })
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("advance must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "CONTEXT_MISMATCH" &&
+          issue.pointer === "/observedSnapshots",
+      ),
+    ).toBe(true)
+    // 冲突不覆盖旧快照，也不提交本事件：旧状态仍能接受合法推进。
+    const internal = readStateInternal(state)!
+    expect(internal.snapshots).toHaveLength(1)
+    expect(internal.snapshots[0]!.atSeconds).toBe(0)
+    const valid = advanceEffects(
+      prepared,
+      state,
+      entryEvent(1, 0, "event:spec-snapshot-conflict-valid"),
+    )
+    expect(valid.ok).toBe(true)
+  })
+
+  it("rejects duplicate attribute identities in observed snapshots", () => {
+    const { prepared, state } = syntheticSessionWithSnapshot(
+      "session:spec-snapshot-duplicate",
+    )
+    const result = advanceEffects(prepared, state, {
+      ...entryEvent(1, 0, "event:spec-snapshot-duplicate"),
+      observedSnapshots: [
+        {
+          ...recordedSnapshot(),
+          attributes: [
+            recordedAttackAttribute(1000),
+            recordedAttackAttribute(2000),
+          ],
+        },
+      ],
+    })
+    expect(result.ok).toBe(false)
+    if (result.ok) {
+      throw new Error("advance must fail")
+    }
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.code === "DUPLICATE_ID" &&
+          issue.pointer === "/observedSnapshots/0/attributes/1",
+      ),
+    ).toBe(true)
   })
 })

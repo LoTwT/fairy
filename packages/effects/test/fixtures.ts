@@ -281,3 +281,20 @@ export function asLooseRuleSet(ruleSet: unknown): LooseRuleSet {
 export function cloneRuleSet<T>(ruleSet: T): T {
   return structuredClone(ruleSet)
 }
+
+/**
+ * 递归重建对象并反转键顺序，用于验证内容比较忽略对象键顺序；
+ * 数组元素顺序保持不变，因为数组顺序属于内容。
+ */
+export function reorderObjectKeys(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map((entry) => reorderObjectKeys(entry))
+  }
+  if (typeof value === "object" && value !== null) {
+    const entries = Object.entries(value)
+      .toReversed()
+      .map(([key, nested]) => [key, reorderObjectKeys(nested)] as const)
+    return Object.fromEntries(entries)
+  }
+  return value
+}
