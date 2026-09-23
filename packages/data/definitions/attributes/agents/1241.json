@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1241",
+  "level": 60,
+  "baseAttributes": {
+    "health": {
+      "unit": "health-points",
+      "value": 7482.7069
+    },
+    "attack": {
+      "unit": "attack-points",
+      "value": 844.3011
+    },
+    "defense": {
+      "unit": "defense-points",
+      "value": 600.5916
+    },
+    "impact": {
+      "unit": "impact-points",
+      "value": 90
+    },
+    "anomalyProficiency": {
+      "unit": "anomaly-proficiency-points",
+      "value": 92
+    },
+    "anomalyMastery": {
+      "unit": "anomaly-mastery-points",
+      "value": 93
+    },
+    "energyRegen": {
+      "unit": "energy-per-second",
+      "value": 1.2
+    },
+    "criticalRate": {
+      "unit": "ratio",
+      "value": 0.05
+    },
+    "criticalDamage": {
+      "unit": "ratio",
+      "value": 0.5
+    },
+    "penetrationRatio": {
+      "unit": "ratio",
+      "value": 0
+    }
+  },
+  "coreAttributeBonuses": {
+    "1": [],
+    "2": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 0
+      },
+      {
+        "attribute": "criticalDamage",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.096
+      }
+    ],
+    "3": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "criticalDamage",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.096
+      }
+    ],
+    "4": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "criticalDamage",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.192
+      }
+    ],
+    "5": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "criticalDamage",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.192
+      }
+    ],
+    "6": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "criticalDamage",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.288
+      }
+    ],
+    "7": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 75
+      },
+      {
+        "attribute": "criticalDamage",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.288
+      }
+    ]
+  }
+}

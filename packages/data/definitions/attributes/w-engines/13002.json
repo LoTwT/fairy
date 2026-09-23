@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "entityId": "13002",
+  "level": 60,
+  "baseAttribute": {
+    "attribute": "attack",
+    "operation": "base-add",
+    "unit": "attack-points",
+    "value": 594.8
+  },
+  "advancedAttribute": {
+    "attribute": "penetrationRatio",
+    "operation": "ratio-add",
+    "unit": "ratio",
+    "value": 0.2
+  }
+}

@@ -102,6 +102,8 @@ export async function generateCatalog(
   const json = JSON.stringify
   const lazy = (path: string, type: string) =>
     `() => import(${json(`@randomplay/data/integrated/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
+  const lazyAttribute = (path: string, type: string) =>
+    `() => import(${json(`@randomplay/data/definitions/attributes/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
   const sourceIds = (names: string[], entity: IntegratedSnapshotEntity) =>
     `Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, entity.memberIds[i]]))}))`
   const loaderTable = (
@@ -128,6 +130,7 @@ import type { ShiyuData, ShiyuDetails } from "../src/integration/shiyu-types.ts"
 import type { BossData, BossDetails } from "../src/integration/boss-types.ts"
 import type { SimulData, SimulDetails } from "../src/integration/simul-types.ts"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
+import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes } from "../src/attributes/types.ts"
 /** 本次发布全部代理人的英文详情顶层 name 原值。 */
 export type AgentName = ${agentNames.map((name) => json(name)).join(" | ")}
 /** 本次发布全部驱动盘套装的英文详情顶层 name 原值。 */
@@ -177,6 +180,13 @@ export const driveDiscSourceIds: Readonly<Record<DriveDiscName, string>> = ${sou
 export const wEngineSourceIds: Readonly<Record<WEngineName, string>> = ${sourceIds(wEngineNames, wEngines)} as Readonly<Record<WEngineName, string>>
 export const bangbooSourceIds: Readonly<Record<BangbooName, string>> = ${sourceIds(bangbooNames, bangboos)} as Readonly<Record<BangbooName, string>>
 export const indexLoader = ${lazy("index.json", "IntegratedSnapshotIndex")}
+export const agentAttributeLoaders: Record<string, () => Promise<AgentLevel60Attributes>> = {
+${agents.memberIds.map((id) => `${json(id)}: ${lazyAttribute(`agents/${id}.json`, "AgentLevel60Attributes")}`).join(",\n")}
+}
+export const wEngineAttributeLoaders: Record<string, () => Promise<WEngineLevel60Attributes>> = {
+${wEngines.memberIds.map((id) => `${json(id)}: ${lazyAttribute(`w-engines/${id}.json`, "WEngineLevel60Attributes")}`).join(",\n")}
+}
+export const driveDiscAffixesLoader = ${lazyAttribute("drive-disc-affixes.json", "SDriveDiscMaxLevelAffixes")}
 export const agentLoaders: Record<string, { data: () => Promise<AgentData>; zh: () => Promise<AgentDetails>; en: () => Promise<AgentDetails> }> = {
 ${loaderTable(agents, "AgentData", "AgentDetails")}
 }

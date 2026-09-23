@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1141",
+  "level": 60,
+  "baseAttributes": {
+    "health": {
+      "unit": "health-points",
+      "value": 8416.2915
+    },
+    "attack": {
+      "unit": "attack-points",
+      "value": 653.5933
+    },
+    "defense": {
+      "unit": "defense-points",
+      "value": 606.5977
+    },
+    "impact": {
+      "unit": "impact-points",
+      "value": 119
+    },
+    "anomalyProficiency": {
+      "unit": "anomaly-proficiency-points",
+      "value": 90
+    },
+    "anomalyMastery": {
+      "unit": "anomaly-mastery-points",
+      "value": 91
+    },
+    "energyRegen": {
+      "unit": "energy-per-second",
+      "value": 1.2
+    },
+    "criticalRate": {
+      "unit": "ratio",
+      "value": 0.05
+    },
+    "criticalDamage": {
+      "unit": "ratio",
+      "value": 0.5
+    },
+    "penetrationRatio": {
+      "unit": "ratio",
+      "value": 0
+    }
+  },
+  "coreAttributeBonuses": {
+    "1": [],
+    "2": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 0
+      },
+      {
+        "attribute": "impact",
+        "operation": "base-add",
+        "unit": "impact-points",
+        "value": 6
+      }
+    ],
+    "3": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "impact",
+        "operation": "base-add",
+        "unit": "impact-points",
+        "value": 6
+      }
+    ],
+    "4": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "impact",
+        "operation": "base-add",
+        "unit": "impact-points",
+        "value": 12
+      }
+    ],
+    "5": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "impact",
+        "operation": "base-add",
+        "unit": "impact-points",
+        "value": 12
+      }
+    ],
+    "6": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "impact",
+        "operation": "base-add",
+        "unit": "impact-points",
+        "value": 18
+      }
+    ],
+    "7": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 75
+      },
+      {
+        "attribute": "impact",
+        "operation": "base-add",
+        "unit": "impact-points",
+        "value": 18
+      }
+    ]
+  }
+}

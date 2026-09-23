@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "entityId": "12011",
+  "level": 60,
+  "baseAttribute": {
+    "attribute": "attack",
+    "operation": "base-add",
+    "unit": "attack-points",
+    "value": 475.84
+  },
+  "advancedAttribute": {
+    "attribute": "anomalyProficiency",
+    "operation": "initial-fixed",
+    "unit": "anomaly-proficiency-points",
+    "value": 60
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1421",
+  "level": 60,
+  "baseAttributes": {
+    "health": {
+      "unit": "health-points",
+      "value": 8453.7942
+    },
+    "attack": {
+      "unit": "attack-points",
+      "value": 586.9158
+    },
+    "defense": {
+      "unit": "defense-points",
+      "value": 712.9433
+    },
+    "impact": {
+      "unit": "impact-points",
+      "value": 94
+    },
+    "anomalyProficiency": {
+      "unit": "anomaly-proficiency-points",
+      "value": 90
+    },
+    "anomalyMastery": {
+      "unit": "anomaly-mastery-points",
+      "value": 91
+    },
+    "energyRegen": {
+      "unit": "energy-per-second",
+      "value": 1.2
+    },
+    "criticalRate": {
+      "unit": "ratio",
+      "value": 0.05
+    },
+    "criticalDamage": {
+      "unit": "ratio",
+      "value": 0.5
+    },
+    "penetrationRatio": {
+      "unit": "ratio",
+      "value": 0
+    }
+  },
+  "coreAttributeBonuses": {
+    "1": [],
+    "2": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 0
+      },
+      {
+        "attribute": "energyRegen",
+        "operation": "base-add",
+        "unit": "energy-per-second",
+        "value": 0.12
+      }
+    ],
+    "3": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "energyRegen",
+        "operation": "base-add",
+        "unit": "energy-per-second",
+        "value": 0.12
+      }
+    ],
+    "4": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "energyRegen",
+        "operation": "base-add",
+        "unit": "energy-per-second",
+        "value": 0.24
+      }
+    ],
+    "5": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "energyRegen",
+        "operation": "base-add",
+        "unit": "energy-per-second",
+        "value": 0.24
+      }
+    ],
+    "6": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "energyRegen",
+        "operation": "base-add",
+        "unit": "energy-per-second",
+        "value": 0.36
+      }
+    ],
+    "7": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 75
+      },
+      {
+        "attribute": "energyRegen",
+        "operation": "base-add",
+        "unit": "energy-per-second",
+        "value": 0.36
+      }
+    ]
+  }
+}

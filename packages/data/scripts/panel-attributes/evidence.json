@@ -1,0 +1,25 @@
+{
+  "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+  "resources": [
+    {
+      "resource": "zzz-hp/src/utils/affixDriveDiscConfig.ts",
+      "sha256": "909f4dfb8b1169943832571d0d06f378932705ad0ea91e14074dc8cbf4fca764",
+      "purpose": "ZZZ-HP 固定提交的 S 级满强化主词条和可选槽位；冲击力 18 按百分比归一化为 0.18。"
+    },
+    {
+      "resource": "zzz-hp/src/utils/affixPanelCalc.ts",
+      "sha256": "ba97ae9c7bf8020085829080dc749168c99102a9f215d8c22ce6d13cdaa3c0d2",
+      "purpose": "ZZZ-HP 固定提交的副词条每档数值；初始词条也计一档。"
+    },
+    {
+      "resource": "https://zzz.nanoka.cc/_app/immutable/chunks/zzz.5c2f5691.js",
+      "sha256": "c4ba1f607e49fed77199468d0de31ed3c177e7140beaa455c9ce494cb7750dba",
+      "purpose": "2026-09-23 查验 Rl：base + 59 * growth / 10000 + levelMax60 累计突破；extraLevel 是独立累计行。$i 中的被动转化不计入此基础表。仅为 Nanoka 前端口径证据，不声称游戏内部精度。"
+    },
+    {
+      "resource": "https://zzz.nanoka.cc/_app/immutable/nodes/25.b82f1bbd.js",
+      "sha256": "01d2aa77d4de7bd3f531d2fcd4c81dd0fc727c0c9a5f89c3f3e815286c86ff3b",
+      "purpose": "2026-09-23 查验音擎：base * (10000 + level60.rate + stars5.starRate) / 10000；advanced * (10000 + stars5.randRate) / 10000，再按明确属性单位归一化。"
+    }
+  ]
+}
