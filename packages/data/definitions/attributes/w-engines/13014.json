@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "entityId": "13014",
+  "level": 60,
+  "baseAttribute": {
+    "attribute": "attack",
+    "operation": "base-add",
+    "unit": "attack-points",
+    "value": 594.8
+  },
+  "advancedAttribute": {
+    "attribute": "health",
+    "operation": "initial-percentage",
+    "unit": "ratio",
+    "value": 0.25
+  }
+}

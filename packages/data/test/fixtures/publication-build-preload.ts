@@ -38,7 +38,37 @@ if (intervention === "source-change") {
       index.entities.agents.members["1311"].files.details.en.sha256 =
         createHash("sha256").update(bytes).digest("hex")
       await writeFile(detailsPath, bytes)
+      const dataPath = join(source, "agents/1311/data.json")
+      const data = JSON.parse(await fs.readFile(dataPath, "utf8"))
+      data.stats.attack += 1
+      const dataBytes = JSON.stringify(data)
+      index.entities.agents.members["1311"].files.data.sha256 = createHash(
+        "sha256",
+      )
+        .update(dataBytes)
+        .digest("hex")
+      await writeFile(dataPath, dataBytes)
       await writeFile(indexPath, JSON.stringify(index))
+      // 同步下一份属性制品；发布必须仍使用捕获到的旧属性与旧 manifest。
+      const attributesRoot = join(packageDirectory, "definitions/attributes")
+      const attributePath = join(attributesRoot, "agents/1311.json")
+      const attributes = JSON.parse(await fs.readFile(attributePath, "utf8"))
+      attributes.baseAttributes.attack.value = 641.7699
+      const attributeBytes = JSON.stringify(attributes)
+      await writeFile(attributePath, attributeBytes)
+      const manifestPath = join(attributesRoot, "manifest.json")
+      const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"))
+      for (const ref of manifest.inputs) {
+        if (ref.path === "agents/1311/data.json")
+          ref.sha256 = index.entities.agents.members["1311"].files.data.sha256
+        if (ref.path === "agents/1311/details.en.json")
+          ref.sha256 =
+            index.entities.agents.members["1311"].files.details.en.sha256
+      }
+      manifest.artifacts["agents/1311.json"] = createHash("sha256")
+        .update(attributeBytes)
+        .digest("hex")
+      await writeFile(manifestPath, JSON.stringify(manifest))
       await writeFile(tracePath, intervention)
     }
   }

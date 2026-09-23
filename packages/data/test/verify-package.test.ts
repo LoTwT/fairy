@@ -17,6 +17,10 @@ import ts from "typescript"
 import { afterEach, describe, expect, it } from "vitest"
 import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
 import {
+  attributeArtifactPaths,
+  verifyPanelAttributes,
+} from "../scripts/panel-attributes/manifest.ts"
+import {
   preparePublication,
   publicationFiles,
 } from "../scripts/prepare-publication.ts"
@@ -200,6 +204,11 @@ describe("packed package", () => {
       artifactDirectory: snapshot,
     })
     const jsonFiles = publicationFiles(index)
+    const attributeFiles = [...attributeArtifactPaths(index), "manifest.json"]
+    await verifyPanelAttributes(
+      join(packedRoot, "dist/definitions/attributes"),
+      index,
+    )
     // 文件清单覆盖全部已登记类别与成员：由验证后的索引逐类别推导，不使用固定文件总数。
     expect(Object.keys(index.entities).toSorted()).toEqual([
       "agents",
@@ -250,6 +259,7 @@ describe("packed package", () => {
         ...sharedTypes,
         "package.json",
         ...jsonFiles.map((path) => `dist/integrated/${path}`),
+        ...attributeFiles.map((path) => `dist/definitions/attributes/${path}`),
       ].toSorted(),
     )
     for (const name of [
@@ -270,6 +280,12 @@ describe("packed package", () => {
       expectSameBytes(
         readFileSync(join(snapshot, path)),
         readFileSync(join(cleanPackage, "integrated", path)),
+        path,
+      )
+    for (const path of attributeFiles)
+      expectSameBytes(
+        readFileSync(join(packedRoot, "dist/definitions/attributes", path)),
+        readFileSync(join(cleanPackage, "definitions/attributes", path)),
         path,
       )
     expect(
@@ -321,7 +337,20 @@ describe("packed package", () => {
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
-assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails"].sort())
+assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes"].sort())
+for (const [names, load, category] of [[api.agentNames, api.loadAgentLevel60Attributes, "agents"], [api.wEngineNames, api.loadWEngineLevel60Attributes, "w-engines"]]) {
+  for (const name of names) {
+    const attributes = await load(name)
+    const direct = (await import("@randomplay/data/definitions/attributes/" + category + "/" + attributes.entityId + ".json", { with: { type: "json" } })).default
+    assert.deepEqual(attributes, direct)
+    assert.notEqual(await load(name), attributes)
+  }
+}
+assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
+const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
+assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)
+const attributeManifest = (await import("@randomplay/data/definitions/attributes/manifest.json", { with: { type: "json" } })).default
+assert.equal(attributeManifest.members.agents.length, api.agentNames.length)
 const starterDefinitions = await import("@randomplay/data/definitions/effects/starter.json", { with: { type: "json" } })
 assert.equal(starterDefinitions.default.schemaVersion, 1)
 assert.equal(starterDefinitions.default.ruleSetId, "starter-effects")
@@ -610,7 +639,17 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
       shiyu: expectedShiyuIds,
       wEngines: expectedWEngineNames,
     })
-    const typeSource = `import rawData from "@randomplay/data/integrated/agents/1311/data.json" with { type: "json" }
+    const typeSource = `import { loadAgentLevel60Attributes, loadWEngineLevel60Attributes, loadSDriveDiscMaxLevelAffixes } from "@randomplay/data"
+import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes, PanelAttributeBonus } from "@randomplay/data"
+const agentAttributes: Promise<AgentLevel60Attributes | undefined> = loadAgentLevel60Attributes("Astra Yao")
+const engineAttributes: Promise<WEngineLevel60Attributes | undefined> = loadWEngineLevel60Attributes("Elegant Vanity")
+const discAffixes: Promise<SDriveDiscMaxLevelAffixes> = loadSDriveDiscMaxLevelAffixes()
+const impactBonus: PanelAttributeBonus = { attribute: "impact", operation: "initial-percentage", unit: "ratio", value: 0.18 }
+// @ts-expect-error percentage bonuses require ratio units
+const wrongUnit: PanelAttributeBonus = { attribute: "impact", operation: "initial-percentage", unit: "impact-points", value: 18 }
+// @ts-expect-error exact name required
+loadAgentLevel60Attributes("unknown")
+import rawData from "@randomplay/data/integrated/agents/1311/data.json" with { type: "json" }
 import rawDriveDiscData from "@randomplay/data/integrated/drive-discs/31000/data.json" with { type: "json" }
 import rawWEngineData from "@randomplay/data/integrated/w-engines/12001/data.json" with { type: "json" }
 import rawBangbooData from "@randomplay/data/integrated/bangboos/53001/data.json" with { type: "json" }
@@ -1030,7 +1069,28 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
       }
     }
     // Root import must still succeed when every JSON file is absent, for all name catalogs.
+    for (const [path, call] of [
+      ["agents/1311.json", 'api.loadAgentLevel60Attributes("Astra Yao")'],
+      [
+        "w-engines/14131.json",
+        'api.loadWEngineLevel60Attributes("Elegant Vanity")',
+      ],
+      ["drive-disc-affixes.json", "api.loadSDriveDiscMaxLevelAffixes()"],
+    ]) {
+      const file = join(brokenPackage, "dist/definitions/attributes", path)
+      const original = readFileSync(file)
+      for (const corruption of ["missing", "parse"]) {
+        if (corruption === "missing") rmSync(file)
+        else writeFileSync(file, "{")
+        runNode(
+          brokenConsumer,
+          `import assert from "node:assert/strict"; import * as api from "@randomplay/data"; await assert.rejects(${call}); assert.equal((await api.loadAgentData("Astra Yao")).id, 1311)`,
+        )
+        writeFileSync(file, original)
+      }
+    }
     rmSync(join(brokenPackage, "dist/integrated"), { recursive: true })
+    rmSync(join(brokenPackage, "dist/definitions"), { recursive: true })
     runNode(
       brokenConsumer,
       'import assert from "node:assert/strict"; import { agentNames, bangbooNames, bossIds, simulIds, driveDiscNames, monsterIds, shiyuIds, wEngineNames, loadAgentData, loadBangbooData, loadBossData, loadSimulData, loadDriveDiscData, loadMonsterData, loadShiyuData, loadWEngineData } from "@randomplay/data"; assert.equal(agentNames.length, ' +
@@ -1098,6 +1158,22 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
             readFileSync(join(snapshot, path)),
             path,
           )
+        for (const path of attributeFiles)
+          expectSameBytes(
+            readFileSync(
+              join(cleanPackage, "dist/definitions/attributes", path),
+            ),
+            readFileSync(join(packedRoot, "dist/definitions/attributes", path)),
+            path,
+          )
+        expect(
+          JSON.parse(
+            readFileSync(
+              join(cleanPackage, "definitions/attributes/agents/1311.json"),
+              "utf8",
+            ),
+          ).baseAttributes.attack.value,
+        ).toBe(641.7699)
         // Published declarations and the runtime name table come from the same captured snapshot.
         const declarations = listFiles(join(cleanPackage, "dist"))
           .filter((path) => path.endsWith(".d.mts"))

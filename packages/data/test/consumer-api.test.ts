@@ -12,6 +12,9 @@ import type {
 import { supportedLanguages } from "../src/nanoka-identity.ts"
 
 const loaders = vi.hoisted(() => ({
+  agentAttributes: vi.fn(),
+  wEngineAttributes: vi.fn(),
+  discAffixes: vi.fn(),
   data: vi.fn(),
   zh: vi.fn(),
   en: vi.fn(),
@@ -63,6 +66,9 @@ const loaders = vi.hoisted(() => ({
   otherSimulEn: vi.fn(),
 }))
 vi.mock("../.generated/catalog.ts", () => ({
+  agentAttributeLoaders: { "1311": loaders.agentAttributes },
+  wEngineAttributeLoaders: { "12001": loaders.wEngineAttributes },
+  driveDiscAffixesLoader: loaders.discAffixes,
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
   agentSourceIds: Object.freeze({
     "Astra Yao": "1311",
@@ -215,7 +221,61 @@ import {
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
+  loadAgentLevel60Attributes,
+  loadWEngineLevel60Attributes,
+  loadSDriveDiscMaxLevelAffixes,
 } from "../src/index.ts"
+
+describe("panel attribute consumer isolation", () => {
+  it("uses exact names, loads only the requested artifact and clones nested arrays", async () => {
+    const raw = { coreAttributeBonuses: { 1: [], 7: [{ value: 75 }] } }
+    loaders.agentAttributes.mockResolvedValue(raw)
+    const result = await loadAgentLevel60Attributes("Astra Yao")
+    expect(result).toEqual(raw)
+    ;(
+      result!.coreAttributeBonuses[7] as unknown as { value: number }[]
+    )[0].value = 0
+    expect(await loadAgentLevel60Attributes("Astra Yao")).toEqual(raw)
+    for (const name of ["astra yao", "1311", "__proto__", " Astra Yao"])
+      expect(
+        await loadAgentLevel60Attributes(name as AgentName),
+      ).toBeUndefined()
+    await expect(
+      loadAgentLevel60Attributes(1311 as unknown as AgentName),
+    ).rejects.toThrow(TypeError)
+    for (const [name, loader] of Object.entries(loaders))
+      if (name !== "agentAttributes")
+        expect(loader, name).not.toHaveBeenCalled()
+  })
+
+  it("returns independent engine/disc objects and propagates load failures", async () => {
+    const engine = { advancedAttribute: { value: 0.3 } }
+    const discs = { mainStatsBySlot: { 6: [{ value: 0.18 }] } }
+    loaders.wEngineAttributes.mockResolvedValue(engine)
+    loaders.discAffixes.mockResolvedValue(discs)
+    expect(await loadWEngineLevel60Attributes("[Lunar] Pleniluna")).toEqual(
+      engine,
+    )
+    expect(
+      await loadWEngineLevel60Attributes("unknown" as WEngineName),
+    ).toBeUndefined()
+    await expect(
+      loadWEngineLevel60Attributes(null as unknown as WEngineName),
+    ).rejects.toThrow(TypeError)
+    const first = await loadSDriveDiscMaxLevelAffixes()
+    expect(first).toEqual(discs)
+    expect(await loadSDriveDiscMaxLevelAffixes()).not.toBe(first)
+    const failure = new Error("artifact unavailable")
+    loaders.agentAttributes.mockRejectedValue(failure)
+    loaders.wEngineAttributes.mockRejectedValue(failure)
+    loaders.discAffixes.mockRejectedValue(failure)
+    await expect(loadAgentLevel60Attributes("Astra Yao")).rejects.toBe(failure)
+    await expect(
+      loadWEngineLevel60Attributes("[Lunar] Pleniluna"),
+    ).rejects.toBe(failure)
+    await expect(loadSDriveDiscMaxLevelAffixes()).rejects.toBe(failure)
+  })
+})
 
 /** 代理人与驱动盘读取共享的成员档案：嵌套未知字段用于对象隔离检查。 */
 function mockMemberRecords() {

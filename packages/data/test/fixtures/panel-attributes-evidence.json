@@ -1,0 +1,473 @@
+{
+  "commit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+  "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+  "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
+  "field": "wengines[].baseAtk",
+  "engines": [
+    {
+      "entityId": "12013",
+      "sourceId": "Identity_Base",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12002",
+      "sourceId": "Luna_Descrescent",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12003",
+      "sourceId": "Lunar_Noviluna",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12001",
+      "sourceId": "Lunar_Pleniluna",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12006",
+      "sourceId": "Reverb_Mark_III",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12005",
+      "sourceId": "Reverb_Mark_II",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12004",
+      "sourceId": "Reverb_Mark_I",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12009",
+      "sourceId": "Vortex_Hatchet",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12008",
+      "sourceId": "Vortex_Arrow",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12007",
+      "sourceId": "Vortex_Revolver",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12015",
+      "sourceId": "Cinder_Cobalt",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12012",
+      "sourceId": "Magnetic_Storm_Charlie",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12010",
+      "sourceId": "Magnetic_Storm_Alpha",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "12011",
+      "sourceId": "Magnetic_Storm_Bravo",
+      "displayAttack": 475
+    },
+    {
+      "entityId": "14143",
+      "sourceId": "cloudcleave-radiance",
+      "displayAttack": 743
+    },
+    {
+      "entityId": "13005",
+      "sourceId": "Steam_Oven",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13108",
+      "sourceId": "Starlight_Engine_Replica",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "13016",
+      "sourceId": "Reel_Projector",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13010",
+      "sourceId": "Bunny_Band",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14001",
+      "sourceId": "Cannon_Rotor",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14140",
+      "sourceId": "Practiced_Perfection",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14129",
+      "sourceId": "Myriad_Eclipse",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14134",
+      "sourceId": "Half-Sugar_Bunny",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13008",
+      "sourceId": "Weapon_A_Common_08",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13113",
+      "sourceId": "Bashful_Demon",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "13018",
+      "sourceId": "Boisterous_Echoes",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14121",
+      "sourceId": "Weeping_Cradle",
+      "displayAttack": 684
+    },
+    {
+      "entityId": "14130",
+      "sourceId": "Bellicose_Blaze",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14150",
+      "sourceId": "Angel_In_The_Shell",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14107",
+      "sourceId": "Tusks_Of_Fury",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13115",
+      "sourceId": "Kaboom_The_Cannon",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "13106",
+      "sourceId": "Housekeeper",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "14118",
+      "sourceId": "Fusion_Compiler",
+      "displayAttack": 684
+    },
+    {
+      "entityId": "14003",
+      "sourceId": "Six_Shooter",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13012",
+      "sourceId": "Puzzle_Sphere",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13015",
+      "sourceId": "Marcato_Desire",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13101",
+      "sourceId": "Demara_Battery_Mark_II",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "14132",
+      "sourceId": "Heartstring_Nocturne",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14147",
+      "sourceId": "Wrathful_Vajra",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14149",
+      "sourceId": "Thoughtbop",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14114",
+      "sourceId": "Weapon_S_1141",
+      "displayAttack": 684
+    },
+    {
+      "entityId": "14155",
+      "sourceId": "Sol_Exuvia",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13002",
+      "sourceId": "Slice_Of_Time",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14122",
+      "sourceId": "Timeweaver",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13004",
+      "sourceId": "Starlight_Engine",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13011",
+      "sourceId": "Spring_Embrace",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14148",
+      "sourceId": "Yesterday_Calls",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14154",
+      "sourceId": "Frostfall_Sickle",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14146",
+      "sourceId": "Cordis_Germina",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13007",
+      "sourceId": "Original_Transmorpher",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14120",
+      "sourceId": "Zanshin_Herb_Case",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13112",
+      "sourceId": "Big_Cylinder",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "14105",
+      "sourceId": "Kraken's_Cradle",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14126",
+      "sourceId": "Sharpened_Stinger",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14119",
+      "sourceId": "Deep_Sea_Visitor",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14117",
+      "sourceId": "Flamemaker_Shaker",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13020",
+      "sourceId": "The_Simmering_Pot",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14116",
+      "sourceId": "Blazing_Laurel",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14110",
+      "sourceId": "Hellfire_Gears",
+      "displayAttack": 684
+    },
+    {
+      "entityId": "13144",
+      "sourceId": "Grill_O_Wisp",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "14138",
+      "sourceId": "Severed_Innocence",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14141",
+      "sourceId": "Metanukimorphosis",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14125",
+      "sourceId": "Ice-Jade_Teapot",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14131",
+      "sourceId": "Elegant_Vanity",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14156",
+      "sourceId": "Joyau_Dore",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13014",
+      "sourceId": "Radiowave_Journey",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14104",
+      "sourceId": "The_Brimstone",
+      "displayAttack": 684
+    },
+    {
+      "entityId": "14139",
+      "sourceId": "Roaring_Furnice",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14158",
+      "sourceId": "Ode_Of_Resurrected_Wings",
+      "displayAttack": 743
+    },
+    {
+      "entityId": "14136",
+      "sourceId": "Spectral_Gaze",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13127",
+      "sourceId": "Peacekeeper_Specialized",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "13103",
+      "sourceId": "The_Vault",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "13001",
+      "sourceId": "Street_Superstar",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13135",
+      "sourceId": "Box_Cutter",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "13009",
+      "sourceId": "Electro_Lip_Gloss",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13006",
+      "sourceId": "Precious_Fossilized_Core",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13128",
+      "sourceId": "Roaring_Ride",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "14153",
+      "sourceId": "Starlight_Rider_Faceplate",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14002",
+      "sourceId": "Unfettered_Game_Ball",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13013",
+      "sourceId": "Gilded_Blossom",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14102",
+      "sourceId": "Steel_Cushion",
+      "displayAttack": 684
+    },
+    {
+      "entityId": "14145",
+      "sourceId": "Dreamlit_Hearth",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14124",
+      "sourceId": "Riot_Suppressor_Mark_VI",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "13003",
+      "sourceId": "Rainforest_Gourmet",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "13142",
+      "sourceId": "Tremor_Trigram_Vessel",
+      "displayAttack": 624
+    },
+    {
+      "entityId": "14151",
+      "sourceId": "Neon_Fantasies",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14109",
+      "sourceId": "Hailstorm_Shrine",
+      "displayAttack": 743
+    },
+    {
+      "entityId": "14137",
+      "sourceId": "Qingming_Birdcage",
+      "displayAttack": 743
+    },
+    {
+      "entityId": "13019",
+      "sourceId": "Cauldron_Of_Clarity",
+      "displayAttack": 594
+    },
+    {
+      "entityId": "14133",
+      "sourceId": "Flight_of_Fancy",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14157",
+      "sourceId": "Head_Lackey",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14159",
+      "sourceId": "Weapon_S_1591",
+      "displayAttack": 713
+    },
+    {
+      "entityId": "14152",
+      "sourceId": "Serpentine_Seeker",
+      "displayAttack": 713
+    }
+  ]
+}

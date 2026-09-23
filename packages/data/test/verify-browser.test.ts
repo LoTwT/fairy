@@ -86,6 +86,13 @@ it("consumes the offline-installed package in real Vite development and producti
       "definitions/effects/static.json",
       "definitions/effects/static-catalog.json",
       "definitions/effects/static-coverage.json",
+      ...publishedEntities.agents.memberIds.map(
+        (id) => `definitions/attributes/agents/${id}.json`,
+      ),
+      ...wEngineMemberIds.map(
+        (id) => `definitions/attributes/w-engines/${id}.json`,
+      ),
+      "definitions/attributes/drive-disc-affixes.json",
       ...Object.entries(publishedEntities).flatMap(([category, entity]) =>
         entity.memberIds.flatMap((id) => [
           `${category}/${id}/data.json`,
@@ -103,6 +110,7 @@ it("consumes the offline-installed package in real Vite development and producti
       join(consumerDirectory, "main.js"),
       `import * as api from "@randomplay/data"
 globalThis.fairy = api
+globalThis.fairyDirectAttributes = () => import("@randomplay/data/definitions/attributes/agents/1311.json")
 globalThis.fairyStatic = async () => {
   const [definitions, catalog, coverage, engine] = await Promise.all([
     import("@randomplay/data/definitions/effects/static.json"),
@@ -434,6 +442,91 @@ function defineScenarios(counts: {
     })
   }
   return [
+    {
+      name: "panel-attributes",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "agent-attributes",
+          act: async (page) => {
+            expect(
+              await page.evaluate(async () => {
+                const api = (globalThis as any).fairy
+                const result = await api.loadAgentLevel60Attributes("Astra Yao")
+                const attack = result.baseAttributes.attack.value
+                result.coreAttributeBonuses[7][0].value = -1
+                const fresh = await api.loadAgentLevel60Attributes("Astra Yao")
+                return {
+                  attack,
+                  coreAttack: fresh.coreAttributeBonuses[7][0].value,
+                }
+              }),
+            ).toEqual({ attack: 640.7699, coreAttack: 75 })
+          },
+          sources: ["definitions/attributes/agents/1311.json"],
+        },
+        {
+          name: "engine-attributes",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (
+                      globalThis as any
+                    ).fairy.loadWEngineLevel60Attributes("Elegant Vanity")
+                  ).baseAttribute.value,
+              ),
+            ).toBe(713.76)
+          },
+          sources: ["definitions/attributes/w-engines/14131.json"],
+        },
+        {
+          name: "disc-affixes",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (
+                    await (
+                      globalThis as any
+                    ).fairy.loadSDriveDiscMaxLevelAffixes()
+                  ).mainStatsBySlot[6].find(
+                    (b: any) => b.attribute === "impact",
+                  ).value,
+              ),
+            ).toBe(0.18)
+          },
+          sources: ["definitions/attributes/drive-disc-affixes.json"],
+        },
+        {
+          name: "direct-attribute-json",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (await (globalThis as any).fairyDirectAttributes()).default
+                    .baseAttributes.attack.value,
+              ),
+            ).toBe(640.7699)
+          },
+          after: (requests) => {
+            expect(
+              requests
+                .filter((request) => request.phase === "direct-attribute-json")
+                .flatMap((request) => request.sources)
+                .every(
+                  (path) => path === "definitions/attributes/agents/1311.json",
+                ),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
     {
       name: "definitions",
       steps: [

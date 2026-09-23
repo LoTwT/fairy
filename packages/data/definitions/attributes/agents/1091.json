@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1091",
+  "level": 60,
+  "baseAttributes": {
+    "health": {
+      "unit": "health-points",
+      "value": 7673.7042
+    },
+    "attack": {
+      "unit": "attack-points",
+      "value": 805.6952
+    },
+    "defense": {
+      "unit": "defense-points",
+      "value": 606.5977
+    },
+    "impact": {
+      "unit": "impact-points",
+      "value": 86
+    },
+    "anomalyProficiency": {
+      "unit": "anomaly-proficiency-points",
+      "value": 148
+    },
+    "anomalyMastery": {
+      "unit": "anomaly-mastery-points",
+      "value": 116
+    },
+    "energyRegen": {
+      "unit": "energy-per-second",
+      "value": 1.2
+    },
+    "criticalRate": {
+      "unit": "ratio",
+      "value": 0.05
+    },
+    "criticalDamage": {
+      "unit": "ratio",
+      "value": 0.5
+    },
+    "penetrationRatio": {
+      "unit": "ratio",
+      "value": 0
+    }
+  },
+  "coreAttributeBonuses": {
+    "1": [],
+    "2": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 0
+      },
+      {
+        "attribute": "anomalyProficiency",
+        "operation": "base-add",
+        "unit": "anomaly-proficiency-points",
+        "value": 30
+      }
+    ],
+    "3": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "anomalyProficiency",
+        "operation": "base-add",
+        "unit": "anomaly-proficiency-points",
+        "value": 30
+      }
+    ],
+    "4": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      },
+      {
+        "attribute": "anomalyProficiency",
+        "operation": "base-add",
+        "unit": "anomaly-proficiency-points",
+        "value": 60
+      }
+    ],
+    "5": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "anomalyProficiency",
+        "operation": "base-add",
+        "unit": "anomaly-proficiency-points",
+        "value": 60
+      }
+    ],
+    "6": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      },
+      {
+        "attribute": "anomalyProficiency",
+        "operation": "base-add",
+        "unit": "anomaly-proficiency-points",
+        "value": 90
+      }
+    ],
+    "7": [
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 75
+      },
+      {
+        "attribute": "anomalyProficiency",
+        "operation": "base-add",
+        "unit": "anomaly-proficiency-points",
+        "value": 90
+      }
+    ]
+  }
+}

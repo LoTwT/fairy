@@ -1,18 +1,14 @@
 import { createHash } from "node:crypto"
-import {
-  lstat,
-  mkdir,
-  mkdtemp,
-  readFile,
-  rename,
-  rm,
-  writeFile,
-} from "node:fs/promises"
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { parseEffectRuleSet } from "../../effects/src/parse-effect-rule-set.ts"
 import { formatGeneratedJson } from "./nanoka-integration/format.ts"
 import { preparePublication } from "./prepare-publication.ts"
+import {
+  installCandidateOutputDirectory,
+  resolveCandidateOutputDirectory,
+} from "./candidate-output.ts"
 import { convertSource } from "./static-effects/convert.ts"
 import { loadSource } from "./static-effects/source.ts"
 import evidence from "./static-effects/rank-evidence.json" with { type: "json" }
@@ -20,24 +16,22 @@ import evidence from "./static-effects/rank-evidence.json" with { type: "json" }
 export async function generateStaticEffects(
   sourceRoot: string,
   outputDirectory: string,
+  integratedDirectory = fileURLToPath(
+    new URL("../integrated", import.meta.url),
+  ),
 ): Promise<ReturnType<typeof convertSource>["coverage"]["summary"]> {
-  const output = resolve(outputDirectory)
-  try {
-    await lstat(output)
-    throw new Error("Candidate output directory already exists")
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error
-  }
+  const output = await resolveCandidateOutputDirectory(
+    outputDirectory,
+    integratedDirectory,
+  )
   const source = await loadSource(resolve(sourceRoot))
+  await mkdir(dirname(output), { recursive: true })
   const publication = await mkdtemp(
     join(dirname(output), ".fairy-static-source-"),
   )
   let candidate: string | undefined
   try {
-    await preparePublication(
-      fileURLToPath(new URL("../integrated", import.meta.url)),
-      join(publication, "verified"),
-    )
+    await preparePublication(integratedDirectory, join(publication, "verified"))
     const index = await readFile(
       join(publication, "verified", "integrated", "index.json"),
     )
@@ -108,8 +102,7 @@ export async function generateStaticEffects(
         `${JSON.stringify(value, null, 2)}\n`,
       )
     await formatGeneratedJson(candidate, Object.keys(artifacts))
-    await rename(candidate, output)
-    candidate = undefined
+    await installCandidateOutputDirectory(candidate, output)
     return result.coverage.summary
   } finally {
     await rm(publication, { recursive: true, force: true })
@@ -125,6 +118,5 @@ if (
     throw new Error(
       "Usage: generate:static-effects <sourceRoot> <newOutputDirectory>",
     )
-  await mkdir(dirname(resolve(output)), { recursive: true })
   console.log(JSON.stringify(await generateStaticEffects(source, output)))
 }

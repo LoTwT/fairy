@@ -60,7 +60,61 @@ import {
   simulIds,
   simulLoaders,
   indexLoader,
+  agentAttributeLoaders,
+  wEngineAttributeLoaders,
+  driveDiscAffixesLoader,
 } from "../.generated/catalog.ts"
+import type {
+  AgentLevel60Attributes,
+  WEngineLevel60Attributes,
+  SDriveDiscMaxLevelAffixes,
+} from "./attributes/types.ts"
+export type {
+  AgentLevel60Attributes,
+  WEngineLevel60Attributes,
+  SDriveDiscMaxLevelAffixes,
+  PanelAttribute,
+  PanelAttributeUnitMap,
+  PanelAttributeValues,
+  PanelAttributeBonus,
+  PanelAttributeManifest,
+  PanelCoreSkillLevel,
+  DriveDiscSlot,
+  DriveDiscDamageElement,
+} from "./attributes/types.ts"
+
+/** 60 级满突破、独立核心培养表；不含配装、被动属性转化或战斗增益。 */
+export async function loadAgentLevel60Attributes(
+  name: AgentName,
+): Promise<AgentLevel60Attributes | undefined> {
+  if (typeof name !== "string")
+    throw new TypeError("Agent name must be a string")
+  const id = Object.hasOwn(agentSourceIds, name)
+    ? agentSourceIds[name]
+    : undefined
+  return id === undefined
+    ? undefined
+    : structuredClone(await agentAttributeLoaders[id]!())
+}
+
+/** 60 级满突破的音擎基础/高级属性；不含精炼效果。 */
+export async function loadWEngineLevel60Attributes(
+  name: WEngineName,
+): Promise<WEngineLevel60Attributes | undefined> {
+  if (typeof name !== "string")
+    throw new TypeError("WEngine name must be a string")
+  const id = Object.hasOwn(wEngineSourceIds, name)
+    ? wEngineSourceIds[name]
+    : undefined
+  return id === undefined
+    ? undefined
+    : structuredClone(await wEngineAttributeLoaders[id]!())
+}
+
+/** S 级满强化主词条与副词条每档值；每次读取返回独立对象树。 */
+export async function loadSDriveDiscMaxLevelAffixes(): Promise<SDriveDiscMaxLevelAffixes> {
+  return structuredClone(await driveDiscAffixesLoader())
+}
 import type {
   AgentName,
   DriveDiscName,

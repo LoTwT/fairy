@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1441",
+  "level": 60,
+  "baseAttributes": {
+    "health": {
+      "unit": "health-points",
+      "value": 7724.8563
+    },
+    "attack": {
+      "unit": "attack-points",
+      "value": 680.2106
+    },
+    "defense": {
+      "unit": "defense-points",
+      "value": 443.56
+    },
+    "impact": {
+      "unit": "impact-points",
+      "value": 95
+    },
+    "anomalyProficiency": {
+      "unit": "anomaly-proficiency-points",
+      "value": 90
+    },
+    "anomalyMastery": {
+      "unit": "anomaly-mastery-points",
+      "value": 87
+    },
+    "energyRegen": {
+      "unit": "energy-per-second",
+      "value": 0
+    },
+    "criticalRate": {
+      "unit": "ratio",
+      "value": 0.05
+    },
+    "criticalDamage": {
+      "unit": "ratio",
+      "value": 0.5
+    },
+    "penetrationRatio": {
+      "unit": "ratio",
+      "value": 0
+    }
+  },
+  "coreAttributeBonuses": {
+    "1": [],
+    "2": [
+      {
+        "attribute": "health",
+        "operation": "initial-percentage",
+        "unit": "ratio",
+        "value": 0.06
+      },
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 0
+      }
+    ],
+    "3": [
+      {
+        "attribute": "health",
+        "operation": "initial-percentage",
+        "unit": "ratio",
+        "value": 0.06
+      },
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      }
+    ],
+    "4": [
+      {
+        "attribute": "health",
+        "operation": "initial-percentage",
+        "unit": "ratio",
+        "value": 0.12
+      },
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 25
+      }
+    ],
+    "5": [
+      {
+        "attribute": "health",
+        "operation": "initial-percentage",
+        "unit": "ratio",
+        "value": 0.12
+      },
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      }
+    ],
+    "6": [
+      {
+        "attribute": "health",
+        "operation": "initial-percentage",
+        "unit": "ratio",
+        "value": 0.18
+      },
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 50
+      }
+    ],
+    "7": [
+      {
+        "attribute": "health",
+        "operation": "initial-percentage",
+        "unit": "ratio",
+        "value": 0.18
+      },
+      {
+        "attribute": "attack",
+        "operation": "base-add",
+        "unit": "attack-points",
+        "value": 75
+      }
+    ]
+  }
+}

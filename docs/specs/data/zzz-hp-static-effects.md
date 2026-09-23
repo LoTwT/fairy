@@ -173,7 +173,7 @@ effects 的新增通道、属性读取或组合归约只能服务已核实的来
 
 ## 生成、验证与交付
 
-采用一套通用转换逻辑配显式实体/条目映射，避免为每个角色编写另一套求值器。内部生成入口为 `pnpm --filter @randomplay/data generate:static-effects <sourceRoot> <outputDirectory>`；源根目录包含固定仓库相对路径，输出必须是新的候选目录。先完成全部校验，再由维护者比较并安装三个正式制品；失败不得部分覆盖正式目录。不增加在线服务、API key 或终端用户配置。
+采用一套通用转换逻辑配显式实体/条目映射，避免为每个角色编写另一套求值器。内部生成入口为 `pnpm --filter @randomplay/data generate:static-effects <sourceRoot> <outputDirectory>`；源根目录包含固定仓库相对路径，输出必须是新的候选目录，并遵守[候选路径边界](consumption.md#静态发布与受管理目录边界)。先完成全部校验，再由维护者比较并安装三个正式制品；失败不得部分覆盖正式目录。不增加在线服务、API key 或终端用户配置。
 
 ```text
 固定 ZZZ-HP 文件 + 身份/语义映射 + 持锁取得的 Nanoka 副本

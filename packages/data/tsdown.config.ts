@@ -1,5 +1,5 @@
 import { rmSync } from "node:fs"
-import { cp, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises"
+import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { defineConfig } from "tsdown"
@@ -8,44 +8,10 @@ import {
   preparePublication,
 } from "./scripts/prepare-publication.ts"
 import { verifyIntegratedSnapshot } from "./scripts/nanoka-integration/snapshot-verify.ts"
-
-/** 静态 definitions 制品逐文件字节复验；与 integrated 的受管理协议无关。 */
-async function verifyDefinitionsSnapshot({
-  packageDirectory,
-}: {
-  packageDirectory: string
-}): Promise<void> {
-  const sourceRoot = join(packageDirectory, "definitions")
-  const distRoot = join(packageDirectory, "dist/definitions")
-  const entries = await readdir(sourceRoot, {
-    recursive: true,
-    withFileTypes: true,
-  })
-  for (const entry of entries) {
-    if (!entry.isFile()) {
-      continue
-    }
-    const relativePath = entry.parentPath
-      ? `${entry.parentPath}/${entry.name}`.replace(`${sourceRoot}/`, "")
-      : entry.name
-    const [sourceBytes, distBytes] = await Promise.all([
-      readFile(join(sourceRoot, relativePath)),
-      readFile(join(distRoot, relativePath)),
-    ])
-    if (sourceBytes.length !== distBytes.length) {
-      throw new Error(
-        `definitions artifact mismatch for ${relativePath}: dist size differs from the tracked source`,
-      )
-    }
-    for (let index = 0; index < sourceBytes.length; index += 1) {
-      if (sourceBytes[index] !== distBytes[index]) {
-        throw new Error(
-          `definitions artifact mismatch for ${relativePath}: dist bytes differ from the tracked source`,
-        )
-      }
-    }
-  }
-}
+import {
+  prepareDefinitions,
+  verifyDefinitionsCopy,
+} from "./scripts/prepare-definitions.ts"
 
 export default defineConfig(async (options) => {
   if (options.watch)
@@ -63,6 +29,11 @@ export default defineConfig(async (options) => {
     const index = await preparePublication(
       join(packageDirectory, "integrated"),
       join(buildDirectory, ".generated"),
+    )
+    await prepareDefinitions(
+      join(packageDirectory, "definitions"),
+      join(buildDirectory, ".generated/definitions"),
+      index,
     )
     await writeFile(
       join(buildDirectory, ".generated/browser-catalog.ts"),
@@ -112,13 +83,14 @@ export default defineConfig(async (options) => {
           artifactDirectory: join(packageDirectory, "dist/integrated"),
         })
         await cp(
-          join(packageDirectory, "definitions"),
+          join(buildDirectory, ".generated/definitions"),
           join(packageDirectory, "dist/definitions"),
           { recursive: true },
         )
-        await verifyDefinitionsSnapshot({
-          packageDirectory,
-        })
+        await verifyDefinitionsCopy(
+          join(buildDirectory, ".generated/definitions"),
+          join(packageDirectory, "dist/definitions"),
+        )
         await rm(buildDirectory, { recursive: true, force: true })
       },
     },
