@@ -1,0 +1,2076 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1431",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1431:action:0001",
+      "branchId": "agent:1431:branch:assist-7",
+      "name": "登场技：照影",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": null,
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "拥有6点[青溟剑势]时，在非[明心境]状态下，长按  或接战状态下点按  从后场切换至前场发动：\n进入[明心境]，开启[以太帷幕·决裁]；\n对前方大范围敌人造成物理伤害；\n招式发动时视为发动[快速支援]；\n招式发动后，将处于空中状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431028"],
+      "sourceExpression": "{Skill:1431028, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.004,
+        "growth": 0.364
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.21,
+        "growth": 0.055
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-yeshunguang-direct-mtsgty6b"
+    },
+    {
+      "actionId": "action:agent:1431:action:0002",
+      "branchId": "agent:1431:branch:assist-8",
+      "name": "快速支援：援守",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n跃起并向前方进行刺击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431029"],
+      "sourceExpression": "{Skill:1431029, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.805,
+        "growth": 0.074
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.317,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0002:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.805,
+                  "growth": 0.074
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431029-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0003",
+      "branchId": "agent:1431:branch:assist-9",
+      "name": "支援突击：止戈",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431033"],
+      "sourceExpression": "{Skill:1431033, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.137,
+        "growth": 0.377
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.4,
+        "growth": 0.064
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0003:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0003:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.137,
+                  "growth": 0.377
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431033-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0004",
+      "branchId": "agent:1431:branch:assist-10",
+      "name": "招架支援：归去时",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431030"],
+      "sourceExpression": "{Skill:1431030, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.953,
+        "growth": 0.089
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1431:action:0005",
+      "branchId": "agent:1431:branch:assist-10",
+      "name": "招架支援：归去时",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/9/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431031"],
+      "sourceExpression": "{Skill:1431031, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.072,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1431:action:0006",
+      "branchId": "agent:1431:branch:assist-10",
+      "name": "招架支援：归去时",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/9/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431032"],
+      "sourceExpression": "{Skill:1431032, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.192,
+        "growth": 0.055
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1431:action:0007",
+      "branchId": "agent:1431:branch:assist-11",
+      "name": "快速支援：明心境·策应",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/4/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，当前操作中的角色被击飞时，点按  发动：\n向前方进行一次斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431035"],
+      "sourceExpression": "{Skill:1431035, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.673,
+        "growth": 0.062
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.331,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.673,
+                  "growth": 0.062
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431035-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0008",
+      "branchId": "agent:1431:branch:assist-12",
+      "name": "支援突击：明心境·抱一",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/assist/description/11/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/assist/description/5/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，发动[招架支援]后，点按  发动：\n造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431034"],
+      "sourceExpression": "{Skill:1431034, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.3,
+        "growth": 0.391
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.46,
+        "growth": 0.067
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.3,
+                  "growth": 0.391
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431034-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0009",
+      "branchId": "agent:1431:branch:basic-9",
+      "name": "普通攻击：快剑",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；\n第四段攻击发动后，可以衔接[冲刺攻击：如影疾行]。",
+      "parameterIds": ["1431001"],
+      "sourceExpression": "{Skill:1431001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.794,
+        "growth": 0.073
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.265,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.794,
+                  "growth": 0.073
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431001-一段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0010",
+      "branchId": "agent:1431:branch:basic-9",
+      "name": "普通攻击：快剑",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/8/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；\n第四段攻击发动后，可以衔接[冲刺攻击：如影疾行]。",
+      "parameterIds": ["1431002"],
+      "sourceExpression": "{Skill:1431002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.441,
+        "growth": 0.222
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.775,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.441,
+                  "growth": 0.222
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431002-二段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0011",
+      "branchId": "agent:1431:branch:basic-9",
+      "name": "普通攻击：快剑",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/8/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；\n第四段攻击发动后，可以衔接[冲刺攻击：如影疾行]。",
+      "parameterIds": ["1431003"],
+      "sourceExpression": "{Skill:1431003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.246,
+        "growth": 0.114
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.354,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.246,
+                  "growth": 0.114
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431003-三段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0012",
+      "branchId": "agent:1431:branch:basic-9",
+      "name": "普通攻击：快剑",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/8/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；\n第四段攻击发动后，可以衔接[冲刺攻击：如影疾行]。",
+      "parameterIds": ["1431005"],
+      "sourceExpression": "{Skill:1431005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.68,
+        "growth": 0.335
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.073,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.68,
+                  "growth": 0.335
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431005-四段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0013",
+      "branchId": "agent:1431:branch:basic-10",
+      "name": "普通攻击：流云剑意",
+      "rowName": "每道剑气伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  发动：\n快速发动多道剑气，造成物理伤害，可以通过长按延长攻击；\n招式发动期间，抗打断等级提升。",
+      "parameterIds": ["1431004"],
+      "sourceExpression": "{{Skill:1431004, Prop:1001}/7}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.1667142857142857,
+        "growth": 0.015285714285714286
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.05242857142857142,
+        "growth": 0.0024285714285714284
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.1667142857142857,
+                  "growth": 0.015285714285714286
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431004-每道剑气"
+    },
+    {
+      "actionId": "action:agent:1431:action:0014",
+      "branchId": "agent:1431:branch:basic-11",
+      "name": "普通攻击：明心境·分水行",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "在[明心境]状态下并处于地面时，点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n第三段攻击发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害；\n若拥有[青溟剑势]，第三段攻击将被替换为[普通攻击：明心境·扶摇势]。",
+      "parameterIds": ["1431006"],
+      "sourceExpression": "{Skill:1431006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.126,
+        "growth": 0.103
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.358,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.126,
+                  "growth": 0.103
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431006-一段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0015",
+      "branchId": "agent:1431:branch:basic-11",
+      "name": "普通攻击：明心境·分水行",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/10/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "在[明心境]状态下并处于地面时，点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n第三段攻击发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害；\n若拥有[青溟剑势]，第三段攻击将被替换为[普通攻击：明心境·扶摇势]。",
+      "parameterIds": ["1431007"],
+      "sourceExpression": "{Skill:1431007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.559,
+        "growth": 0.142
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.495,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.559,
+                  "growth": 0.142
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431007-二段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0016",
+      "branchId": "agent:1431:branch:basic-11",
+      "name": "普通攻击：明心境·分水行",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/10/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "在[明心境]状态下并处于地面时，点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n第三段攻击发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害；\n若拥有[青溟剑势]，第三段攻击将被替换为[普通攻击：明心境·扶摇势]。",
+      "parameterIds": ["1431008"],
+      "sourceExpression": "{Skill:1431008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.166,
+        "growth": 0.197
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.688,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.166,
+                  "growth": 0.197
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431008-三段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0017",
+      "branchId": "agent:1431:branch:basic-12",
+      "name": "普通攻击：明心境·扶摇势",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/11/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，拥有[青溟剑势]时，第二段 [普通攻击：明心境·分水行] 后，点按  发动：\n快速发动升空攻击，对敌人造成物理伤害，并进入空中状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431017"],
+      "sourceExpression": "{Skill:1431017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.91,
+        "growth": 0.083
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.358,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.91,
+                  "growth": 0.083
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431017-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0018",
+      "branchId": "agent:1431:branch:basic-13",
+      "name": "普通攻击：明心境·斩流光 极",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/12/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/4/desc"
+        }
+      ],
+      "description": "在[普通攻击：明心境·斩流光 灭]发动后，拥有[青溟剑势]时，点按  发动：\n向前方进行大范围斩击，造成大量物理伤害，命中敌人时会消耗1点[青溟剑势]；\n招式发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害，并提升招式打断等级；\n招式发动后，若拥有[青溟剑势]，点按  可以消耗1点[青溟剑势]，发动一段[强化特殊技：明心境·飞光]，发动后会自动衔接[普通攻击：明心境·扶摇势]，并进入空中状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431009"],
+      "sourceExpression": "{Skill:1431009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 6.048,
+        "growth": 0.55
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.77,
+        "growth": 0.035
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 6.048,
+                  "growth": 0.55
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431009-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0019",
+      "branchId": "agent:1431:branch:basic-14",
+      "name": "普通攻击：明心境·斩流光",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/13/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/5/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，并处于空中时，点按  发动：\n向前下方进行至多两段的斩击，造成物理伤害；\n发动期间不会退出[明心境]状态；\n点按  或  可以直接发动[普通攻击：明心境·斩流光 灭]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431010"],
+      "sourceExpression": "{Skill:1431010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.207,
+        "growth": 0.11
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.34,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.207,
+                  "growth": 0.11
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431010-一段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0020",
+      "branchId": "agent:1431:branch:basic-14",
+      "name": "普通攻击：明心境·斩流光",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/13/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/5/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，并处于空中时，点按  发动：\n向前下方进行至多两段的斩击，造成物理伤害；\n发动期间不会退出[明心境]状态；\n点按  或  可以直接发动[普通攻击：明心境·斩流光 灭]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431011"],
+      "sourceExpression": "{Skill:1431011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.565,
+        "growth": 0.143
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.44,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0020:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.565,
+                  "growth": 0.143
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431011-二段"
+    },
+    {
+      "actionId": "action:agent:1431:action:0021",
+      "branchId": "agent:1431:branch:basic-15",
+      "name": "普通攻击：明心境·斩流光 灭",
+      "rowName": "有青溟剑势时伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/14/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/6/desc"
+        }
+      ],
+      "description": "发动第二段[普通攻击：明心境·斩流光]后，点按  发动：\n向前下方进行下坠攻击，并进入地面状态，造成物理伤害；\n发动时若自身拥有2点及以上[青溟剑势]，则向前下方进行大范围下坠攻击，造成大量物理伤害，命中敌人时，会消耗2点[青溟剑势]，并获得[观止]效果；招式发动后，若拥有[青溟剑势]，点按  可以消耗1点[青溟剑势]，发动一段[强化特殊技：明心境·飞光]，发动后可快速衔接[普通攻击：明心境·斩流光 极]；\n发动期间不会退出[明心境]状态；\n招式发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431013"],
+      "sourceExpression": "{Skill:1431013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 8.912,
+        "growth": 0.811
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.578,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0021:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 8.912,
+                  "growth": 0.811
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431013-有青溟剑势时"
+    },
+    {
+      "actionId": "action:agent:1431:action:0022",
+      "branchId": "agent:1431:branch:basic-15",
+      "name": "普通攻击：明心境·斩流光 灭",
+      "rowName": "无青溟剑势时伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/basic/description/14/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/basic/description/6/desc"
+        }
+      ],
+      "description": "发动第二段[普通攻击：明心境·斩流光]后，点按  发动：\n向前下方进行下坠攻击，并进入地面状态，造成物理伤害；\n发动时若自身拥有2点及以上[青溟剑势]，则向前下方进行大范围下坠攻击，造成大量物理伤害，命中敌人时，会消耗2点[青溟剑势]，并获得[观止]效果；招式发动后，若拥有[青溟剑势]，点按  可以消耗1点[青溟剑势]，发动一段[强化特殊技：明心境·飞光]，发动后可快速衔接[普通攻击：明心境·斩流光 极]；\n发动期间不会退出[明心境]状态；\n招式发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431012"],
+      "sourceExpression": "{Skill:1431012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.599,
+        "growth": 0.146
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.45,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0022:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.599,
+                  "growth": 0.146
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431012-无青溟剑势时"
+    },
+    {
+      "actionId": "action:agent:1431:action:0023",
+      "branchId": "agent:1431:branch:chain-5",
+      "name": "连携技：斩邪祟",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/chain/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动强力斩击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431024"],
+      "sourceExpression": "{Skill:1431024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.716,
+        "growth": 0.793
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.815,
+        "growth": 0.083
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0023:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.716,
+                  "growth": 0.793
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431024-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0024",
+      "branchId": "agent:1431:branch:chain-6",
+      "name": "终结技：逐云惊霆",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/chain/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n召唤剑阵，进入[明心境]状态，开启[以太帷幕·决裁]，并获得6点[青溟剑势]，对敌人造成大量物理伤害；\n招式发动时，若消耗了喧响值，则可以在该次[明心境]中点按  发动不消耗喧响值的[终结技：斩妄开天]；\n招式发动后，将处于空中状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431025"],
+      "sourceExpression": "{Skill:1431025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.25,
+        "growth": 1.75
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.55,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0024:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.25,
+                  "growth": 1.75
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431025-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0025",
+      "branchId": "agent:1431:branch:chain-7",
+      "name": "连携技：明心境·掣惊雷",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/chain/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动强力斩击，造成大量物理伤害；\n发动期间不会退出[明心境]状态；\n招式发动后，将处于空中状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431026"],
+      "sourceExpression": "{Skill:1431026, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 9.086,
+        "growth": 0.826
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.375,
+        "growth": 0.063
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0025:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0025:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 9.086,
+                  "growth": 0.826
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431026-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0026",
+      "branchId": "agent:1431:branch:chain-8",
+      "name": "终结技：斩妄开天",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": ["zzz-hp:skill:yeshunguang-ultimate-ms0g8853"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/chain/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/chain/description/3/desc"
+        }
+      ],
+      "description": "消耗喧响值发动[终结技：逐云惊霆]后，在[明心境]状态下，点按  或[青溟剑势]消耗尽后，长按  发动：\n召唤巨剑，对敌人造成大量物理伤害；\n发动期间不会退出[明心境]状态；\n招式发动后，会退出[明心境]并关闭[以太帷幕·决裁]；\n该招式不消耗喧响值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431027"],
+      "sourceExpression": "{Skill:1431027, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 30.843,
+        "growth": 2.804
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.513,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0026:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0026:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 30.843,
+                  "growth": 2.804
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431027-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0027",
+      "branchId": "agent:1431:branch:dodge-5",
+      "name": "冲刺攻击：如影疾行",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行斩击，造成物理伤害。",
+      "parameterIds": ["1431020"],
+      "sourceExpression": "{Skill:1431020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.05,
+        "growth": 0.096
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.207,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0027:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0027:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.05,
+                  "growth": 0.096
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431020-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0028",
+      "branchId": "agent:1431:branch:dodge-6",
+      "name": "闪避反击：燕袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n跃起并向前方进行刺击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431022"],
+      "sourceExpression": "{Skill:1431022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.463,
+        "growth": 0.315
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.174,
+        "growth": 0.054
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0028:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0028:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.463,
+                  "growth": 0.315
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431022-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0029",
+      "branchId": "agent:1431:branch:special-6",
+      "name": "特殊技：引沧澜",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n若拥有闪避次数，则消耗1次闪避次数并视为同时发动了[闪避]；\n若未拥有闪避次数或未触发[极限闪避]，对敌人发动快速剑气攻击，造成物理伤害；\n若此时触发了[极限闪避]，对敌人发动飞剑攻击，造成物理伤害，并可直接衔接第二段[普通攻击：快剑]；\n招式发动期间拥有短暂无敌效果。",
+      "parameterIds": ["1431014"],
+      "sourceExpression": "{Skill:1431014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.989,
+        "growth": 0.09
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.243,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0029:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0029:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.989,
+                  "growth": 0.09
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431014-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0030",
+      "branchId": "agent:1431:branch:special-6",
+      "name": "特殊技：引沧澜",
+      "rowName": "触发极限闪避伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/special/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n若拥有闪避次数，则消耗1次闪避次数并视为同时发动了[闪避]；\n若未拥有闪避次数或未触发[极限闪避]，对敌人发动快速剑气攻击，造成物理伤害；\n若此时触发了[极限闪避]，对敌人发动飞剑攻击，造成物理伤害，并可直接衔接第二段[普通攻击：快剑]；\n招式发动期间拥有短暂无敌效果。",
+      "parameterIds": ["1431015"],
+      "sourceExpression": "{Skill:1431015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.159,
+        "growth": 0.288
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.321,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0030:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0030:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.159,
+                  "growth": 0.288
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431015-触发极限闪避"
+    },
+    {
+      "actionId": "action:agent:1431:action:0031",
+      "branchId": "agent:1431:branch:special-7",
+      "name": "强化特殊技：定风波",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n对敌人造成突进斩击和飞剑攻击，造成大量物理伤害；\n发动时可以闪避敌人的攻击；\n发动后获得1点[青溟剑势]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431016"],
+      "sourceExpression": "{Skill:1431016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 11.784,
+        "growth": 1.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.401,
+        "growth": 0.155
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0031:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0031:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 11.784,
+                  "growth": 1.072
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431016-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0032",
+      "branchId": "agent:1431:branch:special-8",
+      "name": "特殊技：明心境·拂衣去",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，处于地面状态时，点按  发动：\n发动快速的后撤斩击，造成物理伤害；\n若拥有闪避次数，则消耗1次闪避次数并视为同时发动了[闪避]；\n若此时触发了[极限闪避]，点按  可以快速发动[普通攻击：明心境·斩流光 极]，并进入[极限视域]；\n且该次[普通攻击：明心境·斩流光 极]发动后，可以直接衔接[普通攻击：明心境·扶摇势]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431021"],
+      "sourceExpression": "{Skill:1431021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.71,
+        "growth": 0.065
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.175,
+        "growth": 0.008
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0032:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0032:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.71,
+                  "growth": 0.065
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431021-main"
+    },
+    {
+      "actionId": "action:agent:1431:action:0033",
+      "branchId": "agent:1431:branch:special-9",
+      "name": "强化特殊技：明心境·飞光",
+      "rowName": "消耗1点青溟剑势伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:yeshunguang-special-ms0g7si1"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，拥有[青溟剑势]时，长按  发动：\n发动快速斩击，造成大量物理伤害并持续快速消耗[青溟剑势]，直至耗尽[青溟剑势]；\n若[青溟剑势]不足或停止长按  ，招式会提前结束；\n发动期间不会退出[明心境]状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431018"],
+      "sourceExpression": "{{Skill:1431018, Prop:1001}/6}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.7633333333333332,
+        "growth": 0.16033333333333333
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.18033333333333332,
+        "growth": 0.008333333333333333
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0033:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0033:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.7633333333333332,
+                  "growth": 0.16033333333333333
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431018-消耗1点青溟剑势"
+    },
+    {
+      "actionId": "action:agent:1431:action:0034",
+      "branchId": "agent:1431:branch:special-9",
+      "name": "强化特殊技：明心境·飞光",
+      "rowName": "消耗6点青溟剑势伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:yeshunguang-special-ms0g7si1"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/special/description/8/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，拥有[青溟剑势]时，长按  发动：\n发动快速斩击，造成大量物理伤害并持续快速消耗[青溟剑势]，直至耗尽[青溟剑势]；\n若[青溟剑势]不足或停止长按  ，招式会提前结束；\n发动期间不会退出[明心境]状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431018"],
+      "sourceExpression": "{Skill:1431018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 10.58,
+        "growth": 0.962
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.082,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0034:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0034:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 10.58,
+                  "growth": 0.962
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431018-消耗6点青溟剑势"
+    },
+    {
+      "actionId": "action:agent:1431:action:0035",
+      "branchId": "agent:1431:branch:special-10",
+      "name": "强化特殊技：明心境·归尘",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:yeshunguang-special-ms340rxj"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1431/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1431/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "在[明心境]状态下，点按  或[青溟剑势]耗尽时长按  发动：\n对大范围敌人造成大量物理伤害；\n发动期间不会退出[明心境]状态；\n招式发动后，关闭[以太帷幕·决裁]退出[明心境]状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1431019"],
+      "sourceExpression": "{Skill:1431019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 11.611,
+        "growth": 1.056
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.394,
+        "growth": 0.064
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1431:action:0035:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1431:action:0035:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 11.611,
+                  "growth": 1.056
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yeshunguang-nk-1431019-main"
+    }
+  ]
+}

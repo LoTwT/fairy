@@ -1,0 +1,1991 @@
+{
+  "schemaVersion": 1,
+  "rulesVersion": "agent-actions/1",
+  "sourceVersion": "3.1",
+  "members": [
+    "1011",
+    "1021",
+    "1031",
+    "1041",
+    "1051",
+    "1061",
+    "1071",
+    "1081",
+    "1091",
+    "1101",
+    "1111",
+    "1121",
+    "1131",
+    "1141",
+    "1151",
+    "1161",
+    "1171",
+    "1181",
+    "1191",
+    "1201",
+    "1211",
+    "1221",
+    "1241",
+    "1251",
+    "1261",
+    "1271",
+    "1281",
+    "1291",
+    "1301",
+    "1311",
+    "1321",
+    "1331",
+    "1341",
+    "1351",
+    "1361",
+    "1371",
+    "1381",
+    "1391",
+    "1401",
+    "1411",
+    "1421",
+    "1431",
+    "1441",
+    "1451",
+    "1461",
+    "1471",
+    "1481",
+    "1491",
+    "1501",
+    "1511",
+    "1521",
+    "1531",
+    "1541",
+    "1551",
+    "1561",
+    "1571",
+    "1581",
+    "1591"
+  ],
+  "inputs": [
+    {
+      "path": "agents/1011/data.json",
+      "sha256": "473d727ff57aec63423cd14aef5aa924cdc0f6199beee038087983e1066dde27"
+    },
+    {
+      "path": "agents/1011/details.zh.json",
+      "sha256": "17990b1d92b43af8c7603cf528842676def0029c1d771e79b0ac1b426fed91a2"
+    },
+    {
+      "path": "agents/1011/details.en.json",
+      "sha256": "8757a4c59c8f1c679f61283aae7f3d01faf03b2e19e0f9aecc4b43c00bf9dd00"
+    },
+    {
+      "path": "agents/1021/data.json",
+      "sha256": "e58fc79ecc1ba59d18f56488b7c7522dc42a9f9ec20a3bf7564fd06a9c70c7d0"
+    },
+    {
+      "path": "agents/1021/details.zh.json",
+      "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+    },
+    {
+      "path": "agents/1021/details.en.json",
+      "sha256": "3f14507a5efea10e86c5ef71790f2ca65c820dedb21b74841bcf77c389814a91"
+    },
+    {
+      "path": "agents/1031/data.json",
+      "sha256": "e82afad26c60e5d751d78f489442938785164e9ca473b236f51283238a0cb685"
+    },
+    {
+      "path": "agents/1031/details.zh.json",
+      "sha256": "d70c52714a0b072061f97b860ea34f712b9ea2099b6d3deb2f7ddae0449a2f25"
+    },
+    {
+      "path": "agents/1031/details.en.json",
+      "sha256": "4aaf3d3e2025f28524cd94e2e449b16753de0619d736d2cfbf55633e283a3188"
+    },
+    {
+      "path": "agents/1041/data.json",
+      "sha256": "ec93bc3946a762cfd7113e24a02e9eaf6794be06796e6f19254074d3f472b018"
+    },
+    {
+      "path": "agents/1041/details.zh.json",
+      "sha256": "a66ff561b147b01b3106ccce6491c3c66cd407ab445a3fdf4569ae03c7c4546b"
+    },
+    {
+      "path": "agents/1041/details.en.json",
+      "sha256": "712c6463882ea1f8811898b346a4b489c709a312d1eab5effecb361af52b554c"
+    },
+    {
+      "path": "agents/1051/data.json",
+      "sha256": "9dec5cdeb311b1b1bbd1643bb8db0b2b731799edb2e6af192fbe278cc4f4bf0a"
+    },
+    {
+      "path": "agents/1051/details.zh.json",
+      "sha256": "7002d0cfdbae708a04cee16c856c2a19de628aef478482a8e33108ffa362d88f"
+    },
+    {
+      "path": "agents/1051/details.en.json",
+      "sha256": "ff746e413aa887268b61e76009a6ea9b9340663a9366cf1cb14b4cd34a508f45"
+    },
+    {
+      "path": "agents/1061/data.json",
+      "sha256": "d34b5c15bcb05a8850be445e2b528b9de8605811283be9f7c21ac0e0cda45d8e"
+    },
+    {
+      "path": "agents/1061/details.zh.json",
+      "sha256": "886bd793bc4310dc72982b597a26a68fb4e9b8b294cb8b0bd9c79a183e79f158"
+    },
+    {
+      "path": "agents/1061/details.en.json",
+      "sha256": "051024ab25e1dc7e6d5b5277c19b48e15b3bfb0865813d296758693346608e90"
+    },
+    {
+      "path": "agents/1071/data.json",
+      "sha256": "ec93abe36bde3b7653e372e6f90902a1eaaf7cf6cf85e89dd5b3f1a56dd5ac36"
+    },
+    {
+      "path": "agents/1071/details.zh.json",
+      "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+    },
+    {
+      "path": "agents/1071/details.en.json",
+      "sha256": "f1507e78b4f43c077596000ee6aefef6fa3481a6a26341473d16dca33c7550a6"
+    },
+    {
+      "path": "agents/1081/data.json",
+      "sha256": "b41cd3cc69dda6b613bd0490f906c367695b2ccd0efa06e1f37a815bdc8daa83"
+    },
+    {
+      "path": "agents/1081/details.zh.json",
+      "sha256": "f384ddc96a5efcbc2b24e8677a1d53821c6462699d0c09acb4234b8b8704cace"
+    },
+    {
+      "path": "agents/1081/details.en.json",
+      "sha256": "595d0e1729a72de5718c77126f546f172cb4931838520cc49f52af71c79621d4"
+    },
+    {
+      "path": "agents/1091/data.json",
+      "sha256": "a0cffe1c00903a6afb40cf9529c9375b0a07766fa702d806b402807f29801791"
+    },
+    {
+      "path": "agents/1091/details.zh.json",
+      "sha256": "cec74046b19e9fb4e0ce44aaf7c89ca3adad80167a5910d7943ccc67b871a4e3"
+    },
+    {
+      "path": "agents/1091/details.en.json",
+      "sha256": "5df3f92f2cf3f20d4237d3d1aac41381dcc1577d9848eef4f504089d65071fc8"
+    },
+    {
+      "path": "agents/1101/data.json",
+      "sha256": "cef54cc9e88884c32a2829a9957251b3fc9b1beabddddefaf804b8c850bbea28"
+    },
+    {
+      "path": "agents/1101/details.zh.json",
+      "sha256": "57c3ed53a55d9bd3cb1ac3b9741b623a44b5afb095c893a8685475b6e9c8f017"
+    },
+    {
+      "path": "agents/1101/details.en.json",
+      "sha256": "46ee13e766729d071e66bc482cdbef1c06a978ee2ba703625d2dc51210dcc788"
+    },
+    {
+      "path": "agents/1111/data.json",
+      "sha256": "652507b4450109e3797321a432832023b07b24a0bbeeff0675d63d302d23235a"
+    },
+    {
+      "path": "agents/1111/details.zh.json",
+      "sha256": "1daf7d2b519162f0c2e9714ea6c74444053c2b64e8e7c60ece3b85f1a79b3d20"
+    },
+    {
+      "path": "agents/1111/details.en.json",
+      "sha256": "242f71cfb83b79da36b044b13ddd141be9e4d26efd5c208d8eb035c1e42cd6a8"
+    },
+    {
+      "path": "agents/1121/data.json",
+      "sha256": "9f0d7059f1698d2adc10fb45ee9b88730cd8c03236a1ef2dc43fa4d45a43aedf"
+    },
+    {
+      "path": "agents/1121/details.zh.json",
+      "sha256": "0c7ea966eadc95083e1b188339f09f42167a2ee6dd01ca0b0b3b08cf181bcff4"
+    },
+    {
+      "path": "agents/1121/details.en.json",
+      "sha256": "c3202f53f83dde2e15736bcffca1a7d38725344d6a404790ef88b92de3e84d73"
+    },
+    {
+      "path": "agents/1131/data.json",
+      "sha256": "2889d05e39c85f78c2cfb8fa9155459a8b42482092f50a0c655746734a68a33c"
+    },
+    {
+      "path": "agents/1131/details.zh.json",
+      "sha256": "75a6e29b88868c39c74ea8cd044069e0a7e5e9169db834d441c872fd7ddd10ef"
+    },
+    {
+      "path": "agents/1131/details.en.json",
+      "sha256": "3d4ec10be3d5a84537d6a30bef153765fd0a33e010a7084fd1629a6b4c5eedf0"
+    },
+    {
+      "path": "agents/1141/data.json",
+      "sha256": "6485aff02fa46d43af4d637e5bbd14247a68d48f782462b9a7d0679a383f48a4"
+    },
+    {
+      "path": "agents/1141/details.zh.json",
+      "sha256": "e183f9a19ea3534fa577d215ab5caa5c812fe6636c816a0db6e517379bfb55b3"
+    },
+    {
+      "path": "agents/1141/details.en.json",
+      "sha256": "ee3cacf50da6ae833080750e9a69e3a6282c392f9adcca7d4be0d9437dc6b1a3"
+    },
+    {
+      "path": "agents/1151/data.json",
+      "sha256": "e0879a1c9e8d0e9c3e964891ca17591b552b9a2c087374354109cbcd570ee9aa"
+    },
+    {
+      "path": "agents/1151/details.zh.json",
+      "sha256": "cecf218cd0535701d0059888273a8c74562da6f2f1d76bca4c52425673edc1e2"
+    },
+    {
+      "path": "agents/1151/details.en.json",
+      "sha256": "1ab9dfe0ab071f2b1f185e5f11eb2f2e39ee974f09182d8d9881ca64c5fdb199"
+    },
+    {
+      "path": "agents/1161/data.json",
+      "sha256": "fe7e745f963a9c10c6e90d5819d99f007bc3b1398875a61906d9d97f8ba48ca5"
+    },
+    {
+      "path": "agents/1161/details.zh.json",
+      "sha256": "ad3bafa72864b0f9f321c44d15e089bc025fff5653844aabb2f4d333a8bc3ab2"
+    },
+    {
+      "path": "agents/1161/details.en.json",
+      "sha256": "926bbe30dc69e6f72dade4b145e534f8feda57e24b41caa5dcb8c8ad2c56e285"
+    },
+    {
+      "path": "agents/1171/data.json",
+      "sha256": "a33d1c13a693f96b21a263f9d3b01ab86d42557613ac346ebad41c155eeea62f"
+    },
+    {
+      "path": "agents/1171/details.zh.json",
+      "sha256": "b55233c50a7314a5bcf365bd2d9e5bf94298e92fce284f749370e690a2740dae"
+    },
+    {
+      "path": "agents/1171/details.en.json",
+      "sha256": "ecef25b4730bd38a3cf1ab7e422f3d097072c45b3e6424d45936f93579da7920"
+    },
+    {
+      "path": "agents/1181/data.json",
+      "sha256": "b157ea435aa33add280a542a5f24c9049b0936490607da0d17e20455a8ccb141"
+    },
+    {
+      "path": "agents/1181/details.zh.json",
+      "sha256": "feaf4be0396a002b3a96717e32e9b409ea068b31208c78ff8e91933fdb9be055"
+    },
+    {
+      "path": "agents/1181/details.en.json",
+      "sha256": "bc857285eba046da833283c8b4e356d8268fbf52e86a4bd5420c8aaf1693b471"
+    },
+    {
+      "path": "agents/1191/data.json",
+      "sha256": "12cd539b3bfd8fe5995db804d8baea0209cccc87baaf905c59f43a318dc9ed8e"
+    },
+    {
+      "path": "agents/1191/details.zh.json",
+      "sha256": "7d42a516131172e8dadcfb9744cbbb0d56eba8d8909c795064fc3ea3b40288c8"
+    },
+    {
+      "path": "agents/1191/details.en.json",
+      "sha256": "12555faddfe40018f05bee9685fc96e41ddb399a0d8a70d3f2545018314456d4"
+    },
+    {
+      "path": "agents/1201/data.json",
+      "sha256": "b07930db43e4e62d210d81bb07f1d4850070073328d3567d49ef6589715c6588"
+    },
+    {
+      "path": "agents/1201/details.zh.json",
+      "sha256": "344958cd98b57c943154eef3b203db52b79f8a659315154c9cdf3351cc163886"
+    },
+    {
+      "path": "agents/1201/details.en.json",
+      "sha256": "96933e93636aaaedacae77185ae816d58549a4bb4cc79ae4edf559d0d7b9a1b0"
+    },
+    {
+      "path": "agents/1211/data.json",
+      "sha256": "729d5e2f3aca3e32d2155052d338333956fbe6a1a9c17393239621da4405d4da"
+    },
+    {
+      "path": "agents/1211/details.zh.json",
+      "sha256": "48658bb99713ac204c6b4e85a9ed7cc6bc74dbe206df79ac8ed001f4423d2c18"
+    },
+    {
+      "path": "agents/1211/details.en.json",
+      "sha256": "d29d4d947382d4a5c97cdad03593b210e24dc3cec7e40b24bccb73e2b900566d"
+    },
+    {
+      "path": "agents/1221/data.json",
+      "sha256": "c07224c7b9a25bd163a092193f227cd2b744a7101b38cc74818e605d68929438"
+    },
+    {
+      "path": "agents/1221/details.zh.json",
+      "sha256": "fcdad70a359337a79ffeb884e5b17818e03a65f92796557f86511a339c4b4a09"
+    },
+    {
+      "path": "agents/1221/details.en.json",
+      "sha256": "8d76612586adf147ce31024e5ecf85e9599fe746392d37ea03710996e617c917"
+    },
+    {
+      "path": "agents/1241/data.json",
+      "sha256": "dd3f7d37396f066b4692ed8291df6d44ff78a27732301b226865b50c78588c95"
+    },
+    {
+      "path": "agents/1241/details.zh.json",
+      "sha256": "fc0c38c728435115668231675e24c2006c8a454db1509633a1aacf209c5ba07e"
+    },
+    {
+      "path": "agents/1241/details.en.json",
+      "sha256": "332e8f7d27b870371e53a129fd45c02a96e4cf7a6b0ea130c6cdc4a595a2f8ab"
+    },
+    {
+      "path": "agents/1251/data.json",
+      "sha256": "6c889fec5df8328880dd02273c9a8df2cfe2917bc9d17fdef997861063b31407"
+    },
+    {
+      "path": "agents/1251/details.zh.json",
+      "sha256": "1d04de0965638a8cacc9432246f0700cce94ea6ddbbb5bcbce16cc8b5e726d3f"
+    },
+    {
+      "path": "agents/1251/details.en.json",
+      "sha256": "31b51fc45b7c923266531d1527955abcdd5fe8cab8c42efa37de26e9d43b24cb"
+    },
+    {
+      "path": "agents/1261/data.json",
+      "sha256": "1f4a4bd2a7e3f4a97c1b4dc6bb1e368086909f4ad64a9405158b383937b3d8f5"
+    },
+    {
+      "path": "agents/1261/details.zh.json",
+      "sha256": "072cf7ca66133aa5a10a1a18ca08261a268a8950e652828cf18ccbd00784163a"
+    },
+    {
+      "path": "agents/1261/details.en.json",
+      "sha256": "1a22f9497f28b9ff6b40639dff78a4c02ec68e80036e7f48c99e0540975b4e55"
+    },
+    {
+      "path": "agents/1271/data.json",
+      "sha256": "d6a520a6cfb3b13da32efddb290db1b5e4b1a3f66deb9bbf65ccecb4e950ce7f"
+    },
+    {
+      "path": "agents/1271/details.zh.json",
+      "sha256": "1165787d1cba525295474c0d0df9dc463fdd6a2ccc55b440e1aa290357283d4c"
+    },
+    {
+      "path": "agents/1271/details.en.json",
+      "sha256": "84f2a8071449f6d14b88f8fd5bc73ca09075f776f13ca4b5cf399d3af562ed51"
+    },
+    {
+      "path": "agents/1281/data.json",
+      "sha256": "2812ccc671b8eeb92ba6383ab61ba42d9a2fe65119d18e6980f2f5f82fb01d1d"
+    },
+    {
+      "path": "agents/1281/details.zh.json",
+      "sha256": "76f54f0edb595087e03e8e3275e920bfa1c61f6b55e7cc3dd38c13e6dadfe799"
+    },
+    {
+      "path": "agents/1281/details.en.json",
+      "sha256": "a865dab94721e6a4ca19f260e297ae6bf3982179a94f47e42625574ab2e22b38"
+    },
+    {
+      "path": "agents/1291/data.json",
+      "sha256": "752fffa0935afd088a9b4d4a2ef7880a0a01716a5c8d0cd9f3034430abfabb87"
+    },
+    {
+      "path": "agents/1291/details.zh.json",
+      "sha256": "6740872e16f1f3cc0647b5c57f6100f994e330f1990387a6cfa42098a9013ad1"
+    },
+    {
+      "path": "agents/1291/details.en.json",
+      "sha256": "c145566efce77efc6fc14bb636633d503ea16a932738eddc4b51a64161530523"
+    },
+    {
+      "path": "agents/1301/data.json",
+      "sha256": "ee26a2983eda03a7b95b550a76678fd99adac28d2a33469ce3c12dbac267f4ec"
+    },
+    {
+      "path": "agents/1301/details.zh.json",
+      "sha256": "2eb4f3167462c972e28cccb6dfcf71f6d687733ab36915a5f63b05155bfaa9c2"
+    },
+    {
+      "path": "agents/1301/details.en.json",
+      "sha256": "9bd9d558921017bbdf843ef5a651c1e319299eefa97f643d7b29d4af73f2d767"
+    },
+    {
+      "path": "agents/1311/data.json",
+      "sha256": "01cbb20d46513a0703c324e61e4f7c507f7d227d13c912fb858e9488b804f3d8"
+    },
+    {
+      "path": "agents/1311/details.zh.json",
+      "sha256": "6997a3d8a213bbb67d6e092ca453699757bed07d66f5dabd691b92dd873d03ee"
+    },
+    {
+      "path": "agents/1311/details.en.json",
+      "sha256": "5f7c26b4bc64673b4d28a6f936e4f72575dfb33fba2409149865a646a092d4d3"
+    },
+    {
+      "path": "agents/1321/data.json",
+      "sha256": "a0800ab6a8f5924a9b14f72345fa242763dad9abe6d40b2bc13e78d6cc614f55"
+    },
+    {
+      "path": "agents/1321/details.zh.json",
+      "sha256": "16b8c6db56de08ae823794c40638e058706d132a24de2d0bfbb13c5b4e96d957"
+    },
+    {
+      "path": "agents/1321/details.en.json",
+      "sha256": "6009c1ff9609f88d14c655e1da5f16e109e2d7fbe5227ff95cfb63d48f0e09d5"
+    },
+    {
+      "path": "agents/1331/data.json",
+      "sha256": "9b9bbb084ed79d65a873cd537a2a588f1d163d1eec5b4d820f30d069bf1685f8"
+    },
+    {
+      "path": "agents/1331/details.zh.json",
+      "sha256": "27e855b765bddac637807cf91d7b18cd334c1c943bf91c462a9f4c29ebef3ae5"
+    },
+    {
+      "path": "agents/1331/details.en.json",
+      "sha256": "8d229b6f6161d8cc804d6631552bb4ae9a2e3f31e1941d1302d4db8d478db2bc"
+    },
+    {
+      "path": "agents/1341/data.json",
+      "sha256": "1efce28a87a14963021f96d4b8f91740eb26f6cbfbaa7a48587189b21c0669da"
+    },
+    {
+      "path": "agents/1341/details.zh.json",
+      "sha256": "51af14394bfd4b37069dfe60cd5437b21f51393905db168da880d8fbe332209d"
+    },
+    {
+      "path": "agents/1341/details.en.json",
+      "sha256": "fb589e001ff95da8cb6eb2dc9b017c8bcf89c8a8ff6908e7419a709713d7958b"
+    },
+    {
+      "path": "agents/1351/data.json",
+      "sha256": "76df66b3c480db9c812d8a413cb3999362f40810332f7842c98e30a0c2cde97f"
+    },
+    {
+      "path": "agents/1351/details.zh.json",
+      "sha256": "abada0a982ef307c545a273ebc95fedb540dcad29234982dbe8c7b0a42e78be9"
+    },
+    {
+      "path": "agents/1351/details.en.json",
+      "sha256": "53cc712e38fba22e030ce7404fd583a842c2f784beaa664a55ce839970ec8b87"
+    },
+    {
+      "path": "agents/1361/data.json",
+      "sha256": "120c3110619eb84173c4e420c1234aa54eb03eba00adb9e1156e957db4f9f2a7"
+    },
+    {
+      "path": "agents/1361/details.zh.json",
+      "sha256": "8d311061f8c0183ddb4bbb2061687506a6d4350bdce0c063837c1c246e865903"
+    },
+    {
+      "path": "agents/1361/details.en.json",
+      "sha256": "0870baf94e6bc648601f585bd958a06fee1aafba4ba2540095f4f89e7eb6f56d"
+    },
+    {
+      "path": "agents/1371/data.json",
+      "sha256": "0040454b1646460c0387915b5ab1f7444e73560535643995cca16b78029f4724"
+    },
+    {
+      "path": "agents/1371/details.zh.json",
+      "sha256": "ed25b2714dc6c3a4d94160963ff1d34f223e01ad6d6d7b5e412ce7a1ada2b933"
+    },
+    {
+      "path": "agents/1371/details.en.json",
+      "sha256": "a7ffd04ad560bebc7b2280e2fcab34c11750735a34c18d349179069728d5df7f"
+    },
+    {
+      "path": "agents/1381/data.json",
+      "sha256": "0205d5011a384bbdda8d360d7efee56b3a1ec9c076db54727503e6609ac15174"
+    },
+    {
+      "path": "agents/1381/details.zh.json",
+      "sha256": "b2ec8c86f184122998a0100188800cbb073315f7d6573548da585c102f61ca47"
+    },
+    {
+      "path": "agents/1381/details.en.json",
+      "sha256": "e16fdf7912f23e0cf22817fa84e4de39bfa97e226ff0a723c072bd110e6fc35a"
+    },
+    {
+      "path": "agents/1391/data.json",
+      "sha256": "74e798268261ddef082e0cb2baf0f5b26cc85928f4fa0076af72f2717a48dbeb"
+    },
+    {
+      "path": "agents/1391/details.zh.json",
+      "sha256": "f143236f317dbec5e8ea6b77348998b1a32f590111170739bd2019f78e8ba125"
+    },
+    {
+      "path": "agents/1391/details.en.json",
+      "sha256": "03ba4a88d8efbb27e2cd68a0b75c3d6ec02c8cabe3ae9f9e3c932af15745387c"
+    },
+    {
+      "path": "agents/1401/data.json",
+      "sha256": "b7f3fa797f9679d7e1933cec952b1d1032421c2fa104539a5ade54749bd313b3"
+    },
+    {
+      "path": "agents/1401/details.zh.json",
+      "sha256": "7f59e46e9795d2af33ef9089cf0566c17a3ce9beab02c2970276c8e6b0d5bcb1"
+    },
+    {
+      "path": "agents/1401/details.en.json",
+      "sha256": "2c8d2d04af2e208667523b7e9551009c0ee6352f315954785b6c0a68497ac244"
+    },
+    {
+      "path": "agents/1411/data.json",
+      "sha256": "b644f8e227d3d5fd153001036b9e6e8c682e48d99a2d546d54b8d6696992d225"
+    },
+    {
+      "path": "agents/1411/details.zh.json",
+      "sha256": "1ce87361e15d9f922343e1dfd6babc8ed2732b15cbded508ac58477deffed847"
+    },
+    {
+      "path": "agents/1411/details.en.json",
+      "sha256": "608dce49a42289ee3b1ec37da24e8d899e9f56520b8f5a4ee1477f0fd6ed8bc6"
+    },
+    {
+      "path": "agents/1421/data.json",
+      "sha256": "b9e17fb57690f3c25cf29db45f5187de175b26844c33d7404d18340baf458862"
+    },
+    {
+      "path": "agents/1421/details.zh.json",
+      "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+    },
+    {
+      "path": "agents/1421/details.en.json",
+      "sha256": "4e850b175408ab623e0519441bfb19e1e9ecef702e6c13204e97f834f2da4d2a"
+    },
+    {
+      "path": "agents/1431/data.json",
+      "sha256": "417b5d3fd7b086422b7b9e778e09fcc4994d004f4352fb5f0b8843f6325489c9"
+    },
+    {
+      "path": "agents/1431/details.zh.json",
+      "sha256": "4f5a4bd728ddc6f065baf7381f38115b4054043fab981f1511c9c2e82d9f0ea5"
+    },
+    {
+      "path": "agents/1431/details.en.json",
+      "sha256": "fff9fb87c8ba3c584ae98a71fb4d2452f28da10e75c796cca374c9f531286df9"
+    },
+    {
+      "path": "agents/1441/data.json",
+      "sha256": "d94aeb17f2d3d145d03694a53b01589103e493e4870ed6aff877f138e979e21c"
+    },
+    {
+      "path": "agents/1441/details.zh.json",
+      "sha256": "1921977dbe70537027bd72d9482eb3cae7ac7e9a077ac57c76fbe89f751c2352"
+    },
+    {
+      "path": "agents/1441/details.en.json",
+      "sha256": "eb64f4a35e98d9a17434f435605de07d17a48de18eca66b750209d62a1d162bc"
+    },
+    {
+      "path": "agents/1451/data.json",
+      "sha256": "738d965bf32366ac0d893d19897c3afbf41220dd267c69b423ba3aafa9fc8306"
+    },
+    {
+      "path": "agents/1451/details.zh.json",
+      "sha256": "501102a4740b5b6e8814f180bbd1dc920d7d682ae5b42411d1b75f60277a98ce"
+    },
+    {
+      "path": "agents/1451/details.en.json",
+      "sha256": "f431cf4a9dbe99d977b672a08d3d83e750ad3eca839c9dad4ea66f84b46381e8"
+    },
+    {
+      "path": "agents/1461/data.json",
+      "sha256": "0b8f922027942406de950421307413878b0c5bdf3e238755405c4d08befdc8d7"
+    },
+    {
+      "path": "agents/1461/details.zh.json",
+      "sha256": "c75486dc765543254fbf40e7e32c6bd4b19267a63abafe268a79a3037b9a1876"
+    },
+    {
+      "path": "agents/1461/details.en.json",
+      "sha256": "7325246003cd1856c1d16975873eb587207f44bef06b1eb3bd57eb85972162f5"
+    },
+    {
+      "path": "agents/1471/data.json",
+      "sha256": "1d8fda298476f00c867d2f72d2ea4a03218f9802868a57cba638bd0b40b6e4f2"
+    },
+    {
+      "path": "agents/1471/details.zh.json",
+      "sha256": "cd33fe427097559b2c0164818e019cb5ee579717a1a5d5704dfaec7a5b045382"
+    },
+    {
+      "path": "agents/1471/details.en.json",
+      "sha256": "e1dd4c233a3df54c3f0fa4b9dbf7d9391f23d24809b2d629b39c7e7c84ec1705"
+    },
+    {
+      "path": "agents/1481/data.json",
+      "sha256": "008ddce8c358e3a64d516736aa3a8aac3d7054a7c544f7de08708448eb632c99"
+    },
+    {
+      "path": "agents/1481/details.zh.json",
+      "sha256": "b5a3022f3aa5560ac5a8b1b0fa3a3aaae84942ba8386a2e874fd186148ba3de6"
+    },
+    {
+      "path": "agents/1481/details.en.json",
+      "sha256": "05e53c232d9f5de8ef66e4b6b6b494cf4656882c9024c44bedfe9315bdcd7b40"
+    },
+    {
+      "path": "agents/1491/data.json",
+      "sha256": "88cc3f82d349bd8a9e62189f52e7c5fd90cf01638bd8d0be10f117fdd0307245"
+    },
+    {
+      "path": "agents/1491/details.zh.json",
+      "sha256": "ac40722e4071398d8dc3a17734dd0b802365f264f841d0aa7e8496b2397af88f"
+    },
+    {
+      "path": "agents/1491/details.en.json",
+      "sha256": "8f754789ec8883b5e4587fb9feada8d443dfae0ad05229ed519e132afdca512e"
+    },
+    {
+      "path": "agents/1501/data.json",
+      "sha256": "a7756b12e477c6dbbb142da48cab623ee8f734eb1660cb55034ce8fd7906dbd2"
+    },
+    {
+      "path": "agents/1501/details.zh.json",
+      "sha256": "c676dc3a9f76bc4a2cda359db98199fee7ddb5ef782fa836b03c447c865dd828"
+    },
+    {
+      "path": "agents/1501/details.en.json",
+      "sha256": "a6dfa19cfd74673cb0521015ec0d01da466ebdf77019e8ed983e07bf613c5fd2"
+    },
+    {
+      "path": "agents/1511/data.json",
+      "sha256": "79aab3a7a36dadad4dd4526f80fe807eefc78357d63c9a540ce138466c9d7f90"
+    },
+    {
+      "path": "agents/1511/details.zh.json",
+      "sha256": "3ccdbfa4e58b8cba5b758fbfcfd512a6a06f09b56c929d6b102b9f54d7e5e3cf"
+    },
+    {
+      "path": "agents/1511/details.en.json",
+      "sha256": "292310dd7613e159f243191dbfdfe21c32e4c1161b6e67c3068e069cad87d7cb"
+    },
+    {
+      "path": "agents/1521/data.json",
+      "sha256": "ed947b2488d69b495bd6414048d23654feab05d53f6619bd569cdd07f46694ce"
+    },
+    {
+      "path": "agents/1521/details.zh.json",
+      "sha256": "dd724cc39d599725f01e3ea04752deec8c75977e46c9f27ab3cfed42ad690987"
+    },
+    {
+      "path": "agents/1521/details.en.json",
+      "sha256": "4a8b54d169917e9c1fee24b74631e5b1bb24f4ccdea16ce329406ebfe17c5a72"
+    },
+    {
+      "path": "agents/1531/data.json",
+      "sha256": "38b1cfda7aff18ab564be1c5e44243e69f9d25a231ae8f270610bded824d17e6"
+    },
+    {
+      "path": "agents/1531/details.zh.json",
+      "sha256": "175d49d1114ce20454419f1f43264ecb02663b8b951161b124cb02ade8094499"
+    },
+    {
+      "path": "agents/1531/details.en.json",
+      "sha256": "b0a0fe331e9c9aa57b74889104d746b89b6c07fdec1256b433e7c51d3427acbd"
+    },
+    {
+      "path": "agents/1541/data.json",
+      "sha256": "458224c0daa3dd7818fb1e0f0ad8ac0c88b9673d3f14cb44af29626cae142c92"
+    },
+    {
+      "path": "agents/1541/details.zh.json",
+      "sha256": "9c5c08dc7c3bc489a6d004ebec1d83519a9c5267725397722ac23182fc9c8097"
+    },
+    {
+      "path": "agents/1541/details.en.json",
+      "sha256": "a2ea7131faea459844441d6907e59ac59d8f1fed33918abd36b013a29dfb3703"
+    },
+    {
+      "path": "agents/1551/data.json",
+      "sha256": "77dc19f6a19f286d63b8a8bd40b10dcb9e57ee0532d799397cc499b84a14b836"
+    },
+    {
+      "path": "agents/1551/details.zh.json",
+      "sha256": "18e48f62b4733432c0510a7e6b30446dc33ae5ab8350744d4fc7e5207b34a994"
+    },
+    {
+      "path": "agents/1551/details.en.json",
+      "sha256": "03a0a666269feeb5fcdf017c7cec361d280c3f39536f658e39b002fdeadddc73"
+    },
+    {
+      "path": "agents/1561/data.json",
+      "sha256": "0b0d774c2d1165ff5a8d31fb79af44ea43668e62ddf9caf532b5594a24c0615c"
+    },
+    {
+      "path": "agents/1561/details.zh.json",
+      "sha256": "e8d2d37eedf1d4311d07994c594387cea1877c8fd66f7e09ab65ff6cadd8c33e"
+    },
+    {
+      "path": "agents/1561/details.en.json",
+      "sha256": "71dbcd5b3451d9398b31f84bc3ebf48b9239409f79da1e8b4c59b4e1a52b7090"
+    },
+    {
+      "path": "agents/1571/data.json",
+      "sha256": "d9affc191fe62d9948aeba1b131c03b85ba3e30c4a586184cceafcf4914a9a00"
+    },
+    {
+      "path": "agents/1571/details.zh.json",
+      "sha256": "cbfcbfeee016c8c63e32ccf0679e7fa259bd231822afad890d027f7080966188"
+    },
+    {
+      "path": "agents/1571/details.en.json",
+      "sha256": "4e984fd645d56a45c03e4975d154546fdd6f9523b2e1f6da7d73efc39f678c18"
+    },
+    {
+      "path": "agents/1581/data.json",
+      "sha256": "6ea165916ab2ff9a6449136c5231e0f005a1a02e04d9994defaefe35e83b14d7"
+    },
+    {
+      "path": "agents/1581/details.zh.json",
+      "sha256": "26a1c0cf586d6b53854821529452058ee2e9b482b2c680cdda5705a83ced28cd"
+    },
+    {
+      "path": "agents/1581/details.en.json",
+      "sha256": "d3318b705f8054cd96e12a5c3334f1dc1414478213eb539893b21abe2479958b"
+    },
+    {
+      "path": "agents/1591/data.json",
+      "sha256": "d7f6bbac510683ff662793b90cd6327cfdc673c71e38e0408d51ec4c0eb51306"
+    },
+    {
+      "path": "agents/1591/details.zh.json",
+      "sha256": "59e2a57bc5c70bc8ee7dff5ef0e76476ef212664a37e14ed0b6eb5d0cc535ef6"
+    },
+    {
+      "path": "agents/1591/details.en.json",
+      "sha256": "3455b4135679d030ad5cc9fef85677a29e15422801d90530c81bdeb1d34adacb"
+    }
+  ],
+  "artifacts": {
+    "agents/1011.json": "f2824af04f5f0fff0f79ff64e8b7689e03631e88965f3a1ea3cf604ef739c42d",
+    "agents/1021.json": "82bfa0d6d1185ba448a3b9949a226ed40de0972b492ba4462ed0d35a25391ce3",
+    "agents/1031.json": "4436c11894a5d51b0e6ea24a1471a8e63a8ad937664c56b9d5ccda4182ab14d5",
+    "agents/1041.json": "f064b106bc0cd89d2d7715fe84bd2dd967b4383d4cb55b555af116e6678ed54a",
+    "agents/1051.json": "f708075cc35d749f4fd1242b2ff903a665b06a7f1fedc84a9fc5241176aaf243",
+    "agents/1061.json": "702b4957a3bf99bd4a83358c737521509a196e74d9706e544fd2332bd016c8e7",
+    "agents/1071.json": "5ca10de441dff66612d353b7b8065b3b1a312ae2f9d7490685288fa941870818",
+    "agents/1081.json": "9c6d0258db577fb9b9ca2812146fd62f10f89bf2c5b5121a478d36907c71f833",
+    "agents/1091.json": "00468d398849381f2d9ebdc5818b7a3c24e8bc15f27c01e7e038cb8ce9696bd8",
+    "agents/1101.json": "6b34028d2e160a133e8aaf9071b01107318f32b4d80b91fa98d13a4194d9245c",
+    "agents/1111.json": "0834f2667f8f1cba0cf95cdc51b273dbd752164670b7a8dc9af0e3efc4cda23f",
+    "agents/1121.json": "6805507fc2eeebca29072a4ebcf1f745399051aa5a36257f79b5d30205b5fbac",
+    "agents/1131.json": "546e5e3a767c3b258f8187485113d3ff31d79c8982f4b7b1a203365ed5c7df4f",
+    "agents/1141.json": "bf8e92745ad53d14d4fabf5a0cd2be819325f86a84f3520737a7a6f7518d02cf",
+    "agents/1151.json": "5700f00e4245a49756a0d5511e92de3c3c8d93778c7da61cb7969681c8086719",
+    "agents/1161.json": "befd213361206f7e4028009ca67718bea98478d9cd98f68fdb25d94592df8d81",
+    "agents/1171.json": "69c83784ab113b08fb837b503bdb28ebd2b55576df7a285293b193e34d52fb84",
+    "agents/1181.json": "2032f2a1f07ef6844d75b787f037fa25739ce577f7a12f7a8fdb23a8ce630a6c",
+    "agents/1191.json": "51b9f7b0544099955f40240b0679ec6b98b08d3e3c38146248e7dfcf5e33bda2",
+    "agents/1201.json": "f92d126273511994c61dd71e65a285afed4eb3ae09b8668df5146d54ff2efc74",
+    "agents/1211.json": "d82a4919d6afdf3d20b29c33a53a025b3a9e8c38e1439c7fe2553c3a7ba1a22a",
+    "agents/1221.json": "b5cd28b4a1937e695e88c55f31198e266f2d8040358e64edf946d14767b84689",
+    "agents/1241.json": "b2c4bad3da2d58f681b9dabacada7d0055282650179534196fd3159c9888a2ed",
+    "agents/1251.json": "c25fba403f7e09832116ddf310cdcb0c69330c85915665fd348027c9b3ffb5cd",
+    "agents/1261.json": "0dc07308c2e62bf76edc5620a9263f7c176c80cbcaa31969505cb46b487841ac",
+    "agents/1271.json": "c2187574314060a094be78e0ea74fc0bffe2cf0a08dba6dc140505f2c1fdd3a2",
+    "agents/1281.json": "ab6ef4ec66a609d82535e9d2fa0302b6ecca77b41c8274e9a60c2eeb3c2cf6d8",
+    "agents/1291.json": "70b9fe25a57bb4855faa0a77a32374fbca98e2888767956973fe2baf03a30f65",
+    "agents/1301.json": "620e5fca9cefba89f7311a33023ab4221d99bb0c2b59a9516b4201539a6ce337",
+    "agents/1311.json": "37dfd339d288e9903ad61f908d92e80c8443ac787cf61a97fd007ae7282eef4e",
+    "agents/1321.json": "5dc209edf9e105a2ad535453b03ea9faaf1b5941c2626f739efa4875ed091ac3",
+    "agents/1331.json": "212113d4e0994fd469bd6a5910dd84b111167b89ccc486f2f7566c6ce071edf1",
+    "agents/1341.json": "817be4985773b70ae6f18413d0ac28e4161f29a282532bbdee382e6bf355efc5",
+    "agents/1351.json": "44bca21b050121976b153f56ba6628f079b5f8580e4b96cecb61fa7a111c0670",
+    "agents/1361.json": "96303186991ace3dfd6de07079bf602331da6850f43189255ca8ff5ca2e9f5db",
+    "agents/1371.json": "b02acd4ec219eec8d20a16ca3ff2948ca008cd92763f30148dcfd3a8e44e8cae",
+    "agents/1381.json": "bbfa15525d29b4582ddd6945c385fdde7e437d0e59cee9a4a22f661634171752",
+    "agents/1391.json": "7799090b649de96111c834f9b8344907bece283954b6dc313af508afa086692a",
+    "agents/1401.json": "0b2513a387bbf0cc588e0d4407b3a2f202474ccd9e01899513664b34d520170a",
+    "agents/1411.json": "47cefff0de75460bade785da9f9e8cb6dc54bc54134a14f764c425e3710e4284",
+    "agents/1421.json": "df244a6a5ccc7ac8ce02224933d997aead534699ca8ad44df4825a9fedab72e7",
+    "agents/1431.json": "ad39ab892f56b216148cb620637c432b1660bc67c5c2c748e3e0ee662f166822",
+    "agents/1441.json": "5efd3ba4ab1526ddded61119418d724cf2463600f22c3a78008f925658db84f6",
+    "agents/1451.json": "5db5119ad589eaf51de0b488c25e74c63fb9ea8da91f2d1a55bbb06e7205e146",
+    "agents/1461.json": "6e6badc24d9c9103dcb8ef23a5b2654d0264cccdb0d89a2c16f57f33bb0e3990",
+    "agents/1471.json": "9e18208719b7a2bb24307efda047062f7a391f97672e0d1637e661a7698b52b9",
+    "agents/1481.json": "3ec9631182dc6f4d1684ad09126fb717878c23a7aa1d1fa34d8b9aa6a00ad2f5",
+    "agents/1491.json": "b109581e6088b4273510a113c77de71a46e73a90cea4b836f53473e311e851ba",
+    "agents/1501.json": "bf8b6f70501ee7f61fac6b1e808c23392d2113624bd157e6398bc9508f0f974a",
+    "agents/1511.json": "1503cd8ef8b85e25bac231b18609a3243594bb7b3a2cd721780576381d759ac7",
+    "agents/1521.json": "2e2ed3eb9db33ba85df35148277df6fd6c6bb55ac3d16fa419406d43cd040de9",
+    "agents/1531.json": "ed727e029c376a7c0f30be8eb9cef20e507a270b5414e6fa25e1832e3895d1c1",
+    "agents/1541.json": "5d3eecaa6e774c5b9963df81f17aa9ae0e0e66a282bba667af14145e4be981b9",
+    "agents/1551.json": "1a07142dfb183cd7cd5011ac8f97bb300c3a24e16ae7b45d4cfef778619400fe",
+    "agents/1561.json": "c8b80792c30cbdce00a38e6a17fc298620443ba21d1b854540c3d9830c038322",
+    "agents/1571.json": "50cabe6470f24dc1923294b21c1746b1d2e59da124afbc3151ffacd12be4d8a2",
+    "agents/1581.json": "5bbd71c08977708c77ddd08d8aac7aef9635a0d371695e6f305594ec5de872bc",
+    "agents/1591.json": "8ab0e99594f2e1e21e4f8a262fa321ffe5e9fea7636d0786b5d222d1af957f73"
+  },
+  "evidence": {
+    "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    "resources": [
+      {
+        "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+        "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
+        "purpose": "动作语义、增益锚点、命破职业与耀变倍率的固定参考"
+      },
+      {
+        "resource": "zzz-hp-backend/scripts/import-nanoka-skills.mjs",
+        "sha256": "4721ed276d5fae69b7289d1e04b7024ef01a36097f59159d5b6b9cd09b5c2cb5",
+        "purpose": "Nanoka 技能等级线性成长的来源实现及复合参数导入差异"
+      },
+      {
+        "resource": "zzz-hp/src/utils/skillTalentLevels.ts",
+        "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
+        "purpose": "五类技能等级、影画边界与独立耀变等级归属"
+      }
+    ]
+  },
+  "registrySha256": "bec39d7d7d9c4adf86f0d55556a833008b31e8bde6997fda8f58db79a92215ff",
+  "staticCatalogSha256": "74241a4505ecd9426e25810a43578db47f14edd03b1ec958819f35812118ff1a",
+  "coverage": {
+    "agents": 58,
+    "actions": 1256,
+    "damage": 962,
+    "dazeOnly": 161,
+    "luminize": 4,
+    "unavailable": 129,
+    "individualHitActions": 1
+  },
+  "limitations": [
+    "动作与分支须显式选择，不根据入场、蓄力或前序招式推断战斗状态，不自动相加互斥档位。",
+    "只解析有限的线性倍率语法；来源 CAL 特殊机制及 potential 分支逐项标记，不将缺失数据视为零。",
+    "已确认逐次命中时逐段向上取整；仅有合计倍率时允许合理取整误差，但不能用于逐次附加伤害或不同命中乘区。",
+    "技能等级输入明确区分训练值与最终值；M3/M5 各加二级，最终值不再叠加；普通等级一至十二。",
+    "没有自动施加减防、影画伤害增益、核心属性转化或装备效果；沿用现有静态效果与后续面板适配。",
+    "失衡倍率独立于伤害倍率；耀变基础倍率独立于攻击力直伤，实际结算复用现有 core/effects 公式。"
+  ],
+  "discrepancies": [
+    {
+      "actionId": "action:agent:1011:action:0006",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1011:action:0007",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1011:action:0008",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1011:action:0013",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0001",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.636",
+      "adopted": "1.272",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:basic-enhanced-1",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1031:basic-enhanced-1",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.785",
+      "adopted": "1.774",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0010",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0010",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.716",
+      "adopted": "2.034",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0011",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0011",
+      "field": "level12DamageMultiplier",
+      "upstream": "2.4859999999999998",
+      "adopted": "9.076",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0012",
+      "field": "level12DamageMultiplier",
+      "upstream": "2.104",
+      "adopted": "4.208",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0017",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0018",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0018",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.83",
+      "adopted": "3.1799999999999997",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0019",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0019",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.825",
+      "adopted": "3.6500000000000004",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0020",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.527",
+      "adopted": "1.054",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1031:action:0022",
+      "field": "level12DamageMultiplier",
+      "upstream": "2.153",
+      "adopted": "4.306",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1041:action:0006",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1041:action:0007",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1041:action:0008",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1041:action:0009",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1041:action:0020",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1061:action:0001",
+      "field": "level12DamageMultiplier",
+      "upstream": "2.637",
+      "adopted": "4.306",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1061:action:0014",
+      "field": "level12DamageMultiplier",
+      "upstream": "2.72",
+      "adopted": "5.4399999999999995",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0001",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0005",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0006",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0007",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0008",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0009",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0010",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0011",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0012",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0013",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0014",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0014",
+      "field": "level12DamageMultiplier",
+      "upstream": "3.7760000000000002",
+      "adopted": "12.582999999999998",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0015",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0016",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0017",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0018",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0019",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0019",
+      "field": "level12DamageMultiplier",
+      "upstream": "3.158",
+      "adopted": "7.883",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0020",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "frost",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1091:action:0020",
+      "field": "level12DamageMultiplier",
+      "upstream": "3.8689999999999998",
+      "adopted": "9.672",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1101:action:0006",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1101:action:0007",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1101:action:0008",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1101:action:0009",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1101:action:0016",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1111:action:0001",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1111:action:0007",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1111:action:0008",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1111:action:0009",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1111:action:0010",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1111:action:0016",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1111:action:0017",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1121:action:0006",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1121:action:0007",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1121:action:0008",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1121:action:0011",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1121:action:0013",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1121:action:0014",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1131:action:0005",
+      "field": "level12DamageMultiplier",
+      "upstream": "5.28",
+      "adopted": "7.545",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1131:action:0006",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1131:action:0007",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1131:action:0008",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1131:action:0014",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1131:action:0019",
+      "field": "level12DamageMultiplier",
+      "upstream": "5.252999999999999",
+      "adopted": "2.6265",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0007",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0009",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0011",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0013",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0015",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0020",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0022",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.45899999999999996",
+      "adopted": "1.552",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0023",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.45899999999999996",
+      "adopted": "2.673",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0024",
+      "field": "level12DamageMultiplier",
+      "upstream": "5.053999999999999",
+      "adopted": "10.7",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1141:action:0025",
+      "field": "level12DamageMultiplier",
+      "upstream": "5.053999999999999",
+      "adopted": "15.804",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1151:action:0017",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1161:action:0024",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1181:action:0010",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1181:action:0013",
+      "field": "level12DamageMultiplier",
+      "upstream": "3.341",
+      "adopted": "6.682",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1181:action:0015",
+      "field": "level12DamageMultiplier",
+      "upstream": "11.277000000000001",
+      "adopted": "0.3888620689655172",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1191:action:0006",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1191:action:0007",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1191:action:0008",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1191:action:0014",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.209",
+      "adopted": "3.6270000000000002",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1191:action:0015",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.209",
+      "adopted": "4.413",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1191:action:0016",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.209",
+      "adopted": "5.199",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1191:action:0022",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1201:action:0011",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1201:action:0017",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1211:action:0014",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1221:action:0019",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1251:action:0017",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1251:action:0020",
+      "field": "level12DamageMultiplier",
+      "upstream": "3.014",
+      "adopted": "12.067",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1261:action:0014",
+      "field": "level12DamageMultiplier",
+      "upstream": "6.022",
+      "adopted": "9.649999999999999",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1271:action:0014",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1281:action:0018",
+      "field": "level12DamageMultiplier",
+      "upstream": "3.752",
+      "adopted": "1.8760000000000001",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1291:action:0019",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1291:action:0024",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.374",
+      "adopted": "7.4719999999999995",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1301:action:0015",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1311:action:0009",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.1",
+      "adopted": "2.2",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1311:action:0011",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.1",
+      "adopted": "2.2",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1311:action:0019",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.1",
+      "adopted": "4.4",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1311:action:0020",
+      "field": "skillCategory",
+      "upstream": "special,specialBasic",
+      "adopted": "enhanced-special",
+      "reason": "按具名招式的来源说明确认伤害分类；和弦追加震音明确视为强化特殊技，不沿用上游普通特殊技分类。"
+    },
+    {
+      "actionId": "action:agent:1311:action:0021",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.48200000000000004",
+      "adopted": "1.446",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1321:action:0016",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1331:action:0015",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1341:action:0007",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1341:action:0011",
+      "field": "level12DamageMultiplier",
+      "upstream": "6.182",
+      "adopted": "7.736000000000001",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1341:action:0014",
+      "field": "level12DamageMultiplier",
+      "upstream": "34.999",
+      "adopted": "43.751999999999995",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1361:action:0006",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1361:action:0007",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1361:action:0008",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1361:action:0013",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.963",
+      "adopted": "1.926",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1361:action:0014",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.457",
+      "adopted": "1.371",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1361:action:0018",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0001",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0005",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0006",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0007",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0008",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0009",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0010",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0011",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0012",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0013",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0014",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0015",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0016",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0017",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0018",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0019",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0020",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0021",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0022",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0023",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0024",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1371:action:0025",
+      "field": "element",
+      "upstream": "以太",
+      "adopted": "auric-ink",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1381:action:0009",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.604",
+      "adopted": "2.002",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1391:action:0014",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1391:action:0015",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1431:action:0013",
+      "field": "level12DamageMultiplier",
+      "upstream": "2.344",
+      "adopted": "0.33485714285714285",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1431:action:0033",
+      "field": "level12DamageMultiplier",
+      "upstream": "21.162",
+      "adopted": "3.5269999999999997",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1441:action:0007",
+      "field": "level12DamageMultiplier",
+      "upstream": "3.339",
+      "adopted": "11.41",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1441:action:0008",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1441:action:0009",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1441:action:0009",
+      "field": "level12DamageMultiplier",
+      "upstream": "0.767",
+      "adopted": "1.663",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1441:action:0010",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1441:action:0010",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.205",
+      "adopted": "2.699",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1441:action:0020",
+      "field": "element",
+      "upstream": "火",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1461:action:0006",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1461:action:0007",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1461:action:0015",
+      "field": "element",
+      "upstream": "电",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1491:action:0016",
+      "field": "level12DamageMultiplier",
+      "upstream": "15.883",
+      "adopted": "18.274",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1521:action:0017",
+      "field": "level12DamageMultiplier",
+      "upstream": "4.0169999999999995",
+      "adopted": "13.39",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1561:action:0020",
+      "field": "level12DamageMultiplier",
+      "upstream": "1.954",
+      "adopted": "0.39080000000000004",
+      "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
+    },
+    {
+      "actionId": "action:agent:1591:action:0015",
+      "field": "element",
+      "upstream": "冰",
+      "adopted": "physical",
+      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    }
+  ]
+}

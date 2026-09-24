@@ -1,0 +1,1469 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1141",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1141:action:0001",
+      "branchId": "agent:1141:branch:assist-6",
+      "name": "快速支援：狼群",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动打击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141022"],
+      "sourceExpression": "{Skill:1141022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.631,
+        "growth": 0.058
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.631,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0001:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.631,
+                  "growth": 0.058
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141022-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0002",
+      "branchId": "agent:1141:branch:assist-7",
+      "name": "招架支援：狩猎干预",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        },
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。\n前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141023"],
+      "sourceExpression": "{Skill:1141023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.59,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1141:action:0003",
+      "branchId": "agent:1141:branch:assist-7",
+      "name": "招架支援：狩猎干预",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        },
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。\n前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141024"],
+      "sourceExpression": "{Skill:1141024, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.273,
+        "growth": 0.149
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1141:action:0004",
+      "branchId": "agent:1141:branch:assist-7",
+      "name": "招架支援：狩猎干预",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        },
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。\n前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141025"],
+      "sourceExpression": "{Skill:1141025, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.593,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1141:action:0005",
+      "branchId": "agent:1141:branch:assist-8",
+      "name": "支援突击：复仇反扑",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n在前方生成冰柱并对区域内的敌人发动打击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141026"],
+      "sourceExpression": "{Skill:1141026, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.883,
+        "growth": 0.263
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.468,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0005:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.883,
+                  "growth": 0.263
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141026-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0006",
+      "branchId": "agent:1141:branch:assist-9",
+      "name": "支援突击：复仇反扑·冰舞",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/assist/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/assist/description/4/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，长按  发动：\n对前方敌人快速发动多段打击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141027"],
+      "sourceExpression": "{Skill:1141027, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.107,
+        "growth": 0.374
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.605,
+        "growth": 0.164
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lycaon-nk-1141027-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0007",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141001"],
+      "sourceExpression": "{Skill:1141001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.292,
+        "growth": 0.027
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.146,
+        "growth": 0.007
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.292,
+                  "growth": 0.027
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141001-一段"
+    },
+    {
+      "actionId": "action:agent:1141:action:0008",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "一段蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141002"],
+      "sourceExpression": "{Skill:1141002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.371,
+        "growth": 0.034
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.121,
+        "growth": 0.006
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0008:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.371,
+                  "growth": 0.034
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141002-一段蓄力"
+    },
+    {
+      "actionId": "action:agent:1141:action:0009",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141003"],
+      "sourceExpression": "{Skill:1141003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.349,
+        "growth": 0.032
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.303,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.349,
+                  "growth": 0.032
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141003-二段"
+    },
+    {
+      "actionId": "action:agent:1141:action:0010",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "二段蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141004"],
+      "sourceExpression": "{Skill:1141004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.564,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.329,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0010:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.564,
+                  "growth": 0.052
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141004-二段蓄力"
+    },
+    {
+      "actionId": "action:agent:1141:action:0011",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141005"],
+      "sourceExpression": "{Skill:1141005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.584,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.456,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.584,
+                  "growth": 0.054
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141005-三段"
+    },
+    {
+      "actionId": "action:agent:1141:action:0012",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "三段蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141006"],
+      "sourceExpression": "{Skill:1141006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.995,
+        "growth": 0.091
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.537,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0012:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.995,
+                  "growth": 0.091
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141006-三段蓄力"
+    },
+    {
+      "actionId": "action:agent:1141:action:0013",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/6"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141007"],
+      "sourceExpression": "{Skill:1141007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.52,
+        "growth": 0.139
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.12,
+        "growth": 0.051
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.52,
+                  "growth": 0.139
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141007-四段"
+    },
+    {
+      "actionId": "action:agent:1141:action:0014",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "四段蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/7"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141008"],
+      "sourceExpression": "{Skill:1141008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.109,
+        "growth": 0.192
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.071,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0014:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.109,
+                  "growth": 0.192
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141008-四段蓄力"
+    },
+    {
+      "actionId": "action:agent:1141:action:0015",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/8"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141009"],
+      "sourceExpression": "{Skill:1141009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.807,
+        "growth": 0.165
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.477,
+        "growth": 0.068
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.807,
+                  "growth": 0.165
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141009-五段"
+    },
+    {
+      "actionId": "action:agent:1141:action:0016",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "五段一级蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/9"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141010"],
+      "sourceExpression": "{Skill:1141010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.776,
+        "growth": 0.253
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.631,
+        "growth": 0.075
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0016:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.776,
+                  "growth": 0.253
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141010-五段一级蓄力"
+    },
+    {
+      "actionId": "action:agent:1141:action:0017",
+      "branchId": "agent:1141:branch:basic-2",
+      "name": "普通攻击：狩月舞步",
+      "rowName": "五段二级蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/10"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害；\n长按  可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+      "parameterIds": ["1141011"],
+      "sourceExpression": "{Skill:1141011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.557,
+        "growth": 0.324
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.056,
+        "growth": 0.094
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0017:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.557,
+                  "growth": 0.324
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141011-五段二级蓄力"
+    },
+    {
+      "actionId": "action:agent:1141:action:0018",
+      "branchId": "agent:1141:branch:chain-3",
+      "name": "连携技：遵命",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方小范围敌人发动强力连续打击，造成大量冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141020"],
+      "sourceExpression": "{Skill:1141020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.378,
+        "growth": 0.58
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.188,
+        "growth": 0.1
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0018:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.378,
+                  "growth": 0.58
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141020-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0019",
+      "branchId": "agent:1141:branch:chain-4",
+      "name": "终结技：不辱使命",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围敌人发动强力连续打击，造成大量冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141021"],
+      "sourceExpression": "{Skill:1141021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.941,
+        "growth": 1.541
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 10.966,
+        "growth": 0.499
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0019:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.941,
+                  "growth": 1.541
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141021-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0020",
+      "branchId": "agent:1141:branch:dodge-4",
+      "name": "冲刺攻击：保持清洁",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方滑铲进行连续打击，造成物理伤害。",
+      "parameterIds": ["1141018"],
+      "sourceExpression": "{Skill:1141018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.473,
+        "growth": 0.043
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.237,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0020:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.473,
+                  "growth": 0.043
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141018-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0021",
+      "branchId": "agent:1141:branch:dodge-5",
+      "name": "闪避反击：礼仪教导",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动打击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141019"],
+      "sourceExpression": "{Skill:1141019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.87,
+        "growth": 0.17
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.681,
+        "growth": 0.077
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0021:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.87,
+                  "growth": 0.17
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141019-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0022",
+      "branchId": "agent:1141:branch:special-3",
+      "name": "特殊技：追猎时刻",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行连续打击，造成冰属性伤害；\n长按  可以进行蓄力，提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1141012", "1141013"],
+      "sourceExpression": "{{Skill:1141012, Prop:1001} + {Skill:1141013, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.771,
+        "growth": 0.07100000000000001
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.771,
+        "growth": 0.036000000000000004
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0022:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.771,
+                  "growth": 0.07100000000000001
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141012-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0023",
+      "branchId": "agent:1141:branch:special-3",
+      "name": "特殊技：追猎时刻",
+      "rowName": "蓄力伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/special/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行连续打击，造成冰属性伤害；\n长按  可以进行蓄力，提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1141012", "1141014"],
+      "sourceExpression": "{{Skill:1141012, Prop:1001} + {Skill:1141014, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.331,
+        "growth": 0.12200000000000001
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.331,
+        "growth": 0.062
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0023:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.331,
+                  "growth": 0.12200000000000001
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141012-蓄力"
+    },
+    {
+      "actionId": "action:agent:1141:action:0024",
+      "branchId": "agent:1141:branch:special-4",
+      "name": "强化特殊技：狂猎时刻",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行强力连续打击，造成大量冰属性伤害；\n长按  可以进行蓄力，消耗能量并提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141015", "1141016"],
+      "sourceExpression": "{{Skill:1141015, Prop:1001} + {Skill:1141016, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.343,
+        "growth": 0.487
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.504,
+        "growth": 0.20600000000000002
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0024:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.343,
+                  "growth": 0.487
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141015-main"
+    },
+    {
+      "actionId": "action:agent:1141:action:0025",
+      "branchId": "agent:1141:branch:special-4",
+      "name": "强化特殊技：狂猎时刻",
+      "rowName": "蓄力伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1141/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1141/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行强力连续打击，造成大量冰属性伤害；\n长按  可以进行蓄力，消耗能量并提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1141015", "1141017"],
+      "sourceExpression": "{{Skill:1141015, Prop:1001} + {Skill:1141017, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 7.8950000000000005,
+        "growth": 0.719
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 6.644,
+        "growth": 0.303
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1141:action:0025:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0025:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 7.8950000000000005,
+                  "growth": 0.719
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lycaon-nk-1141015-蓄力"
+    }
+  ]
+}

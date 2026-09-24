@@ -1,0 +1,1062 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1021",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1021:action:0001",
+      "branchId": "agent:1021:branch:assist-4",
+      "name": "快速支援：借用猫爪",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021013"],
+      "sourceExpression": "{Skill:1021013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.945,
+        "growth": 0.086
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.945,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.945,
+                  "growth": 0.086
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021013-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0002",
+      "branchId": "agent:1021:branch:assist-5",
+      "name": "招架支援：应激防御",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021014"],
+      "sourceExpression": "{Skill:1021014, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.59,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1021:action:0003",
+      "branchId": "agent:1021:branch:assist-5",
+      "name": "招架支援：应激防御",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021015"],
+      "sourceExpression": "{Skill:1021015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.273,
+        "growth": 0.149
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1021:action:0004",
+      "branchId": "agent:1021:branch:assist-5",
+      "name": "招架支援：应激防御",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021016"],
+      "sourceExpression": "{Skill:1021016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.593,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1021:action:0005",
+      "branchId": "agent:1021:branch:assist-6",
+      "name": "支援突击：迅影",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021017"],
+      "sourceExpression": "{Skill:1021017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.004,
+        "growth": 0.274
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.581,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.004,
+                  "growth": 0.274
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021017-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0006",
+      "branchId": "agent:1021:branch:basic-5",
+      "name": "普通攻击：猫猫爪刺",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，有33.33%的概率重复攻击三次。\n点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，若命中处于失衡状态下的敌人，则会重复攻击三次。",
+      "parameterIds": ["1021001"],
+      "sourceExpression": "{Skill:1021001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.552,
+        "growth": 0.051
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.18,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.552,
+                  "growth": 0.051
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021001-一段"
+    },
+    {
+      "actionId": "action:agent:1021:action:0007",
+      "branchId": "agent:1021:branch:basic-5",
+      "name": "普通攻击：猫猫爪刺",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，有33.33%的概率重复攻击三次。\n点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，若命中处于失衡状态下的敌人，则会重复攻击三次。",
+      "parameterIds": ["1021002"],
+      "sourceExpression": "{Skill:1021002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.626,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.371,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.626,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021002-二段"
+    },
+    {
+      "actionId": "action:agent:1021:action:0008",
+      "branchId": "agent:1021:branch:basic-5",
+      "name": "普通攻击：猫猫爪刺",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，有33.33%的概率重复攻击三次。\n点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，若命中处于失衡状态下的敌人，则会重复攻击三次。",
+      "parameterIds": ["1021003"],
+      "sourceExpression": "{Skill:1021003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.727,
+        "growth": 0.067
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.467,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.727,
+                  "growth": 0.067
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021003-三段"
+    },
+    {
+      "actionId": "action:agent:1021:action:0009",
+      "branchId": "agent:1021:branch:basic-5",
+      "name": "普通攻击：猫猫爪刺",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，有33.33%的概率重复攻击三次。\n点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，若命中处于失衡状态下的敌人，则会重复攻击三次。",
+      "parameterIds": ["1021004"],
+      "sourceExpression": "{Skill:1021004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.702,
+        "growth": 0.155
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.037,
+        "growth": 0.048
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.702,
+                  "growth": 0.155
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021004-四段"
+    },
+    {
+      "actionId": "action:agent:1021:action:0010",
+      "branchId": "agent:1021:branch:basic-5",
+      "name": "普通攻击：猫猫爪刺",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，有33.33%的概率重复攻击三次。\n点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n发动最后一段斩击时，若命中处于失衡状态下的敌人，则会重复攻击三次。",
+      "parameterIds": ["1021005"],
+      "sourceExpression": "{Skill:1021005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.236,
+        "growth": 0.113
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.589,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.236,
+                  "growth": 0.113
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021005-五段"
+    },
+    {
+      "actionId": "action:agent:1021:action:0011",
+      "branchId": "agent:1021:branch:basic-6",
+      "name": "普通攻击：赤色之刃",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "在[普通攻击]前三段中，长按  发动：\n向前方进行斩击，可穿过前方敌人，并对其造成物理伤害；\n招式发动时，有33.33%的概率重复攻击三次。\n在[普通攻击]前三段中，长按  发动：\n向前方进行斩击，可穿过前方敌人，并对其造成物理伤害；\n招式发动时，若命中处于失衡状态下的敌人，则会重复攻击三次。",
+      "parameterIds": ["1021006"],
+      "sourceExpression": "{Skill:1021006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.718,
+        "growth": 0.066
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.589,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.718,
+                  "growth": 0.066
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021006-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0012",
+      "branchId": "agent:1021:branch:chain-3",
+      "name": "连携技：刃爪挥击",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动强力斩击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021011"],
+      "sourceExpression": "{Skill:1021011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.362,
+        "growth": 0.488
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.592,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.362,
+                  "growth": 0.488
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021011-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0013",
+      "branchId": "agent:1021:branch:chain-4",
+      "name": "终结技：刃爪强袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围敌人发动强力斩击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021012"],
+      "sourceExpression": "{Skill:1021012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.711,
+        "growth": 1.429
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.181,
+        "growth": 0.054
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.711,
+                  "growth": 1.429
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021012-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0014",
+      "branchId": "agent:1021:branch:dodge-6",
+      "name": "冲刺攻击：你在看哪边？",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行斩击，造成物理伤害。",
+      "parameterIds": ["1021009"],
+      "sourceExpression": "{Skill:1021009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.351,
+        "growth": 0.032
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.176,
+        "growth": 0.008
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.351,
+                  "growth": 0.032
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021009-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0015",
+      "branchId": "agent:1021:branch:dodge-7",
+      "name": "闪避反击：虚影双刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021010"],
+      "sourceExpression": "{Skill:1021010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.279,
+        "growth": 0.208
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.995,
+        "growth": 0.091
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.279,
+                  "growth": 0.208
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021010-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0016",
+      "branchId": "agent:1021:branch:dodge-8",
+      "name": "闪避反击：绒爪穿刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
+        }
+      ],
+      "description": "发动[闪避：尾巴失踪术]后点按  或拥有大于等于40点时长按  发动：\n对前方大范围敌人发动强力斩击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1021019"],
+      "sourceExpression": "{Skill:1021019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 12.639,
+        "growth": 1.149
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.646,
+        "growth": 0.075
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-nekomata-nk-1021019-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0017",
+      "branchId": "agent:1021:branch:special-5",
+      "name": "特殊技：奇袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行下落打击，造成物理伤害；\n招式发动期间抗打断等级提升。\n点按  发动：\n向前方进行下落打击，造成物理伤害；\n招式发动期间抗打断等级提升；\n招式的追击效果增强。",
+      "parameterIds": ["1021007"],
+      "sourceExpression": "{Skill:1021007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.473,
+        "growth": 0.043
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.473,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.473,
+                  "growth": 0.043
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021007-main"
+    },
+    {
+      "actionId": "action:agent:1021:action:0018",
+      "branchId": "agent:1021:branch:special-6",
+      "name": "强化特殊技：超~凶奇袭！",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        },
+        {
+          "path": "agents/1021/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行强力下落斩击，造成大量物理伤害；\n招式发动期间拥有无敌效果。\n能量足够时，点按  发动：\n向前方进行强力下落斩击，造成大量物理伤害；\n招式发动期间拥有无敌效果；\n招式的追击效果增强。",
+      "parameterIds": ["1021008"],
+      "sourceExpression": "{Skill:1021008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.397,
+        "growth": 0.491
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.554,
+        "growth": 0.207
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1021:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1021:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.397,
+                  "growth": 0.491
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nekomata-nk-1021008-main"
+    }
+  ]
+}

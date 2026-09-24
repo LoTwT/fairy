@@ -1,0 +1,1094 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1391",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1391:action:0001",
+      "branchId": "agent:1391:branch:assist-4",
+      "name": "快速支援：怒决蹯",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391015"],
+      "sourceExpression": "{Skill:1391015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.753,
+        "growth": 0.069
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.377,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.753,
+                  "growth": 0.069
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391015-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0002",
+      "branchId": "agent:1391:branch:assist-5",
+      "name": "招架支援：岿然虎踞",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391016"],
+      "sourceExpression": "{Skill:1391016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.013,
+        "growth": 0.092
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1391:action:0003",
+      "branchId": "agent:1391:branch:assist-5",
+      "name": "招架支援：岿然虎踞",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391017"],
+      "sourceExpression": "{Skill:1391017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.728,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1391:action:0004",
+      "branchId": "agent:1391:branch:assist-5",
+      "name": "招架支援：岿然虎踞",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391018"],
+      "sourceExpression": "{Skill:1391018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.368,
+        "growth": 0.063
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1391:action:0005",
+      "branchId": "agent:1391:branch:assist-6",
+      "name": "支援突击：彪形焰颌",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动斩击后，使用「虎威」追加一次下落攻击，造成火属性伤害；\n发动时获得1点[威势]，10秒内最多获得1次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391019"],
+      "sourceExpression": "{Skill:1391019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.072,
+        "growth": 0.371
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.563,
+        "growth": 0.117
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.072,
+                  "growth": 0.371
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391019-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0006",
+      "branchId": "agent:1391:branch:basic-3",
+      "name": "普通攻击：恶虎七式·燎身爪",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害和火属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人；\n第三段攻击期间，长按或停顿后点按  ，将衔接第四段攻击；\n第三段攻击期间抗打断等级提升，受到伤害降低40%。",
+      "parameterIds": ["1391001"],
+      "sourceExpression": "{Skill:1391001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.425,
+        "growth": 0.039
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.485,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-jufufu-nk-1391001-一段"
+    },
+    {
+      "actionId": "action:agent:1391:action:0007",
+      "branchId": "agent:1391:branch:basic-3",
+      "name": "普通攻击：恶虎七式·燎身爪",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害和火属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人；\n第三段攻击期间，长按或停顿后点按  ，将衔接第四段攻击；\n第三段攻击期间抗打断等级提升，受到伤害降低40%。",
+      "parameterIds": ["1391002"],
+      "sourceExpression": "{Skill:1391002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.452,
+        "growth": 0.042
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.391,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-jufufu-nk-1391002-二段"
+    },
+    {
+      "actionId": "action:agent:1391:action:0008",
+      "branchId": "agent:1391:branch:basic-3",
+      "name": "普通攻击：恶虎七式·燎身爪",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害和火属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人；\n第三段攻击期间，长按或停顿后点按  ，将衔接第四段攻击；\n第三段攻击期间抗打断等级提升，受到伤害降低40%。",
+      "parameterIds": ["1391003"],
+      "sourceExpression": "{Skill:1391003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.315,
+        "growth": 0.029
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.485,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-jufufu-nk-1391003-三段"
+    },
+    {
+      "actionId": "action:agent:1391:action:0009",
+      "branchId": "agent:1391:branch:basic-3",
+      "name": "普通攻击：恶虎七式·燎身爪",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害和火属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人；\n第三段攻击期间，长按或停顿后点按  ，将衔接第四段攻击；\n第三段攻击期间抗打断等级提升，受到伤害降低40%。",
+      "parameterIds": ["1391004"],
+      "sourceExpression": "{Skill:1391004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.184,
+        "growth": 0.199
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.339,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-jufufu-nk-1391004-四段"
+    },
+    {
+      "actionId": "action:agent:1391:action:0010",
+      "branchId": "agent:1391:branch:basic-4",
+      "name": "普通攻击：「虎威」",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "战斗中，「虎威」会自动对敌人发动攻击， 造成火属性伤害；\n命中敌人时，获得20点[威风]，招式内最多触发一次；[威风]上限为200点。",
+      "parameterIds": ["1391005"],
+      "sourceExpression": "{Skill:1391005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.924,
+        "growth": 0.084
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.693,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0010:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.924,
+                  "growth": 0.084
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391005-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0011",
+      "branchId": "agent:1391:branch:chain-4",
+      "name": "连携技：虎釜崩",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n挥舞「虎威」对前方小范围敌人进行强力打击，造成大量火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391012"],
+      "sourceExpression": "{Skill:1391012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.681,
+        "growth": 0.608
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.605,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0011:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.681,
+                  "growth": 0.608
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391012-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0012",
+      "branchId": "agent:1391:branch:chain-5",
+      "name": "连携技：虎釜震煞",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/chain/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "拥有至少100点[威风]时，触发[连携技]后自动发动：\n消耗100点[威风]，打开「虎威」对前方小范围敌人发射火焰和爆米花打击敌人，造成大量火属性伤害；\n拥有[威势]且不为操作中角色时，招式结束会进入高速旋转状态；\n招式为[追加攻击]，发动期间拥有无敌效果。",
+      "parameterIds": ["1391013"],
+      "sourceExpression": "{Skill:1391013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.545,
+        "growth": 0.323
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.216,
+        "growth": 0.101
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 3.545,
+                  "growth": 0.323
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391013-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0013",
+      "branchId": "agent:1391:branch:chain-6",
+      "name": "终结技：恶虎七式·猛虎炸开花",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/chain/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n使用「虎威」进行两次下落攻击，造成大量火属性伤害；\n发动时获得6点[威势]和100点[威风]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391014"],
+      "sourceExpression": "{Skill:1391014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.638,
+        "growth": 1.513
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 10.907,
+        "growth": 0.496
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0013:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.638,
+                  "growth": 1.513
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391014-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0014",
+      "branchId": "agent:1391:branch:dodge-5",
+      "name": "冲刺攻击：恶虎七式·虎奔",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前发动快速斩击，造成物理伤害。",
+      "parameterIds": ["1391008"],
+      "sourceExpression": "{Skill:1391008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.368,
+        "growth": 0.034
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.184,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.368,
+                  "growth": 0.034
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391008-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0015",
+      "branchId": "agent:1391:branch:dodge-6",
+      "name": "冲刺攻击：恶虎七式·山君鼎戏",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "[冲刺攻击：恶虎七式·虎奔]发动后，长按  发动：\n进入高速旋转状态，该状态下可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}进行移动，接触敌人时造成物理伤害；\n橘福福通过其他招式获得[威势]后，会在高速旋转状态下带有火焰；接触敌人时消耗1点[威势]，改为造成火属性伤害并获得25点[威风]，[威势]上限为15点；\n橘福福消耗[威势]造成火属性伤害时，若[威风]高于100点，会自动消耗100点[威风]发动[连携技：虎釜震煞]；\n松开  可退出旋转状态，并丢出「虎威」攻击敌人，造成火属性伤害；切换至其他角色时，橘福福会继续处于旋转状态，尝试撞击最近的敌人；\n橘福福为当前操作中角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中角色时，获得无敌效果。",
+      "parameterIds": ["1391009"],
+      "sourceExpression": "{Skill:1391009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.184,
+        "growth": 0.017
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.184,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.184,
+                  "growth": 0.017
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391009-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0016",
+      "branchId": "agent:1391:branch:dodge-7",
+      "name": "冲刺攻击：恶虎七式·山君鼎戏·威势",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1391010"],
+      "sourceExpression": "{Skill:1391010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.192,
+        "growth": 0.018
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.087,
+        "growth": 0.004
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0016:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.192,
+                  "growth": 0.018
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391010-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0017",
+      "branchId": "agent:1391:branch:dodge-8",
+      "name": "冲刺攻击：恶虎七式·山君鼎戏·「虎威」",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1391022"],
+      "sourceExpression": "{Skill:1391022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.924,
+        "growth": 0.084
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.693,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.924,
+                  "growth": 0.084
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391022-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0018",
+      "branchId": "agent:1391:branch:dodge-9",
+      "name": "闪避反击：恶虎七式·离火回峰",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/dodge/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动多次斩击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391011"],
+      "sourceExpression": "{Skill:1391011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.078,
+        "growth": 0.189
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.853,
+        "growth": 0.085
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.078,
+                  "growth": 0.189
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391011-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0019",
+      "branchId": "agent:1391:branch:special-3",
+      "name": "特殊技：恶虎七式·下山虎",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行旋转斩击后发动下落斩击，造成火属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1391006"],
+      "sourceExpression": "{Skill:1391006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.661,
+        "growth": 0.061
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.661,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.661,
+                  "growth": 0.061
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391006-main"
+    },
+    {
+      "actionId": "action:agent:1391:action:0020",
+      "branchId": "agent:1391:branch:special-4",
+      "name": "强化特殊技：恶虎七式改·下山猛虎",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1391/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n挥舞「虎威」向前方进行强力打击，造成大量火属性伤害；\n发动时获得3点[威势]和80点[威风]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1391007"],
+      "sourceExpression": "{Skill:1391007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.265,
+        "growth": 0.479
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.441,
+        "growth": 0.157
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1391:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1391:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.265,
+                  "growth": 0.479
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jufufu-nk-1391007-main"
+    }
+  ]
+}

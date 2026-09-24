@@ -1,0 +1,1361 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1201",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1201:action:0001",
+      "branchId": "agent:1201:branch:assist-4",
+      "name": "快速支援：穿弦",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动穿透攻击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201015"],
+      "sourceExpression": "{Skill:1201015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.843,
+        "growth": 0.077
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.843,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0001:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.843,
+                  "growth": 0.077
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201015-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0002",
+      "branchId": "agent:1201:branch:assist-5",
+      "name": "招架支援：构身",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201016"],
+      "sourceExpression": "{Skill:1201016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.476,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1201:action:0003",
+      "branchId": "agent:1201:branch:assist-5",
+      "name": "招架支援：构身",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201017"],
+      "sourceExpression": "{Skill:1201017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.952,
+        "growth": 0.135
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1201:action:0004",
+      "branchId": "agent:1201:branch:assist-5",
+      "name": "招架支援：构身",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201018"],
+      "sourceExpression": "{Skill:1201018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.192,
+        "growth": 0.055
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1201:action:0005",
+      "branchId": "agent:1201:branch:assist-6",
+      "name": "支援突击：构身·斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动连续斩击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201019"],
+      "sourceExpression": "{Skill:1201019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.071,
+        "growth": 0.28
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.633,
+        "growth": 0.12
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0005:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.071,
+                  "growth": 0.28
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201019-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0006",
+      "branchId": "agent:1201:branch:basic-5",
+      "name": "普通攻击：穿云",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的穿透攻击，造成物理伤害和电属性伤害；\n第五段攻击命中敌人时，可生成2枚[电壶]；\n发动[连携技]后，悠真下一次发动[普通攻击：穿云]第五段命中敌人时，可生成6枚[电壶]。",
+      "parameterIds": ["1201001"],
+      "sourceExpression": "{Skill:1201001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.424,
+        "growth": 0.039
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.265,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201001-一段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0007",
+      "branchId": "agent:1201:branch:basic-5",
+      "name": "普通攻击：穿云",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的穿透攻击，造成物理伤害和电属性伤害；\n第五段攻击命中敌人时，可生成2枚[电壶]；\n发动[连携技]后，悠真下一次发动[普通攻击：穿云]第五段命中敌人时，可生成6枚[电壶]。",
+      "parameterIds": ["1201002"],
+      "sourceExpression": "{Skill:1201002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.398,
+        "growth": 0.037
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.443,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201002-二段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0008",
+      "branchId": "agent:1201:branch:basic-5",
+      "name": "普通攻击：穿云",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的穿透攻击，造成物理伤害和电属性伤害；\n第五段攻击命中敌人时，可生成2枚[电壶]；\n发动[连携技]后，悠真下一次发动[普通攻击：穿云]第五段命中敌人时，可生成6枚[电壶]。",
+      "parameterIds": ["1201003"],
+      "sourceExpression": "{Skill:1201003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.709,
+        "growth": 0.065
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.661,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201003-三段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0009",
+      "branchId": "agent:1201:branch:basic-5",
+      "name": "普通攻击：穿云",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的穿透攻击，造成物理伤害和电属性伤害；\n第五段攻击命中敌人时，可生成2枚[电壶]；\n发动[连携技]后，悠真下一次发动[普通攻击：穿云]第五段命中敌人时，可生成6枚[电壶]。",
+      "parameterIds": ["1201004"],
+      "sourceExpression": "{Skill:1201004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.901,
+        "growth": 0.082
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.896,
+        "growth": 0.041
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201004-四段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0010",
+      "branchId": "agent:1201:branch:basic-5",
+      "name": "普通攻击：穿云",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的穿透攻击，造成物理伤害和电属性伤害；\n第五段攻击命中敌人时，可生成2枚[电壶]；\n发动[连携技]后，悠真下一次发动[普通攻击：穿云]第五段命中敌人时，可生成6枚[电壶]。",
+      "parameterIds": ["1201005"],
+      "sourceExpression": "{Skill:1201005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.329,
+        "growth": 0.121
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.154,
+        "growth": 0.053
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201005-五段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0011",
+      "branchId": "agent:1201:branch:basic-6",
+      "name": "普通攻击：穿云·移形",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[普通攻击：穿云]发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  发动：\n发动远程穿透攻击，并向拖曳方向调整身位，对前方敌人造成物理伤害。",
+      "parameterIds": ["1201006"],
+      "sourceExpression": "{Skill:1201006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.695,
+        "growth": 0.064
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.487,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.695,
+                  "growth": 0.064
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201006-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0012",
+      "branchId": "agent:1201:branch:basic-7",
+      "name": "普通攻击：落羽",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "第五段[普通攻击：穿云]、[特殊技]、[强化特殊技]或[连携技]发动后，长按  发动：\n立即向前方敌人发射[落羽]，造成电属性伤害。\n长按  瞄准目标，松开  发动：\n引弓瞄准敌人后，向目标发射[落羽]，造成电属性伤害。",
+      "parameterIds": ["1201007"],
+      "sourceExpression": "{Skill:1201007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.054,
+        "growth": 0.096
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.527,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.054,
+                  "growth": 0.096
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201007-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0013",
+      "branchId": "agent:1201:branch:basic-8",
+      "name": "普通攻击：甲乙矢",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "第五段[普通攻击：穿云]/[强化特殊技]/[连携技]命中敌人或地面时，可生成2/6/6枚[电壶]；\n若场上不存在[电壶]，队伍中任意角色对敌人施加属性异常效果时，可生成6枚[电壶]，12秒内最多触发一次；\n[电壶]同一时间内最多存在6枚，悠真发射[落羽]命中敌人时，若场上存在[电壶]，则会将其激活，向被[落羽]命中的目标发射[甲乙矢]，造成电属性伤害；\n[甲乙矢]命中敌人时，会为其施加[电囚]效果，最多叠加8层，持续10秒，重复触发时刷新持续时间，[电囚]效果大于等于2层时，将在目标身上生成[十文字]标记。",
+      "parameterIds": ["1201008"],
+      "sourceExpression": "{Skill:1201008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.159,
+        "growth": 0.015
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.159,
+                  "growth": 0.015
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201008-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0014",
+      "branchId": "agent:1201:branch:chain-4",
+      "name": "连携技：会·离",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动穿透攻击，并发射强化箭矢，造成大量电属性伤害；\n箭矢命中地面时，可生成6枚[电壶]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201013"],
+      "sourceExpression": "{Skill:1201013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.176,
+        "growth": 0.471
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.834,
+        "growth": 0.084
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0014:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.176,
+                  "growth": 0.471
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201013-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0015",
+      "branchId": "agent:1201:branch:chain-5",
+      "name": "终结技：残心",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/chain/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方敌人发动强力穿透攻击，造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201014"],
+      "sourceExpression": "{Skill:1201014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.539,
+        "growth": 1.777
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.069,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0015:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.539,
+                  "growth": 1.777
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201014-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0016",
+      "branchId": "agent:1201:branch:chain-6",
+      "name": "残心·散华",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": null,
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/chain/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "[终结技：残心]发动后自动派生：\n对前方敌人发动大范围穿透攻击，造成电属性伤害，视为[终结技]伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201024"],
+      "sourceExpression": "{Skill:1201024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.365,
+        "growth": 0.215
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.321,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          },
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201024-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0017",
+      "branchId": "agent:1201:branch:dodge-6",
+      "name": "冲刺攻击：飞弦",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行多段穿透攻击，造成物理伤害。",
+      "parameterIds": ["1201011"],
+      "sourceExpression": "{Skill:1201011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.807,
+        "growth": 0.074
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.404,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.807,
+                  "growth": 0.074
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201011-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0018",
+      "branchId": "agent:1201:branch:dodge-7",
+      "name": "闪避反击：藏锋",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动穿透攻击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201012"],
+      "sourceExpression": "{Skill:1201012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.196,
+        "growth": 0.2
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.943,
+        "growth": 0.089
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0018:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.196,
+                  "growth": 0.2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201012-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0019",
+      "branchId": "agent:1201:branch:dodge-8",
+      "name": "冲刺攻击：飞弦·斩",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:harumasa-dodge-ms4gw5t2"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        },
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
+        }
+      ],
+      "description": "当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n[醒觉]状态下，闪避时，点按  发动：\n快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害；\n斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按  ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n[醒觉]状态下，[普通攻击：落羽]发动后，点按  可以快速衔接发动[冲刺攻击：飞弦·斩]；\n招式发动期间抗打断等级提升，受到的伤害降低40%。\n当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n[醒觉]状态下，闪避时，点按  发动：\n快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害，命中处于失衡状态的敌人时会触发[逐雷]，造成1次额外的电属性伤害；\n斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按  ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n[醒觉]状态下，[普通攻击：落羽]发动后，点按  可以快速衔接发动[冲刺攻击：飞弦·斩]；\n第一段招式期间可以格挡敌人攻击，第二、第三段招式的追击效果增强；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1201020"],
+      "sourceExpression": "{Skill:1201020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.623,
+        "growth": 0.148
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.66,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0019:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.623,
+                  "growth": 0.148
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201020-一段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0020",
+      "branchId": "agent:1201:branch:dodge-8",
+      "name": "冲刺攻击：飞弦·斩",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:harumasa-dodge-ms4gw5t2"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        },
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
+        }
+      ],
+      "description": "当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n[醒觉]状态下，闪避时，点按  发动：\n快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害；\n斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按  ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n[醒觉]状态下，[普通攻击：落羽]发动后，点按  可以快速衔接发动[冲刺攻击：飞弦·斩]；\n招式发动期间抗打断等级提升，受到的伤害降低40%。\n当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n[醒觉]状态下，闪避时，点按  发动：\n快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害，命中处于失衡状态的敌人时会触发[逐雷]，造成1次额外的电属性伤害；\n斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按  ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n[醒觉]状态下，[普通攻击：落羽]发动后，点按  可以快速衔接发动[冲刺攻击：飞弦·斩]；\n第一段招式期间可以格挡敌人攻击，第二、第三段招式的追击效果增强；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1201021"],
+      "sourceExpression": "{Skill:1201021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.666,
+        "growth": 0.152
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.459,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0020:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.666,
+                  "growth": 0.152
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201021-二段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0021",
+      "branchId": "agent:1201:branch:dodge-8",
+      "name": "冲刺攻击：飞弦·斩",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:harumasa-dodge-ms4gw5t2"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        },
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
+        }
+      ],
+      "description": "当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n[醒觉]状态下，闪避时，点按  发动：\n快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害；\n斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按  ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n[醒觉]状态下，[普通攻击：落羽]发动后，点按  可以快速衔接发动[冲刺攻击：飞弦·斩]；\n招式发动期间抗打断等级提升，受到的伤害降低40%。\n当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n[醒觉]状态下，闪避时，点按  发动：\n快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害，命中处于失衡状态的敌人时会触发[逐雷]，造成1次额外的电属性伤害；\n斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按  ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n[醒觉]状态下，[普通攻击：落羽]发动后，点按  可以快速衔接发动[冲刺攻击：飞弦·斩]；\n第一段招式期间可以格挡敌人攻击，第二、第三段招式的追击效果增强；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1201022"],
+      "sourceExpression": "{Skill:1201022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.896,
+        "growth": 0.173
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.495,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0021:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.896,
+                  "growth": 0.173
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201022-三段"
+    },
+    {
+      "actionId": "action:agent:1201:action:0022",
+      "branchId": "agent:1201:branch:dodge-9",
+      "name": "逐雷",
+      "rowName": "额外伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "follow-up",
+      "skillTargetIds": ["zzz-hp:skill:harumasa-dodge-ms4gwjug"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/dodge/description/8/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1201025"],
+      "sourceExpression": "{Skill:1201025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.412,
+        "growth": 0.038
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201025-额外"
+    },
+    {
+      "actionId": "action:agent:1201:action:0023",
+      "branchId": "agent:1201:branch:special-4",
+      "name": "特殊技：天罗",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发射箭矢，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1201009"],
+      "sourceExpression": "{Skill:1201009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.523,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.523,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0023:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.523,
+                  "growth": 0.048
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201009-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0024",
+      "branchId": "agent:1201:branch:special-5",
+      "name": "强化特殊技：地网",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方发射飞刃和强化箭矢，造成大量电属性伤害；\n强化箭矢命中敌人或地面时，可生成6枚[电壶]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201010"],
+      "sourceExpression": "{Skill:1201010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.493,
+        "growth": 0.409
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.49,
+        "growth": 0.205
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1201:action:0024:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.493,
+                  "growth": 0.409
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-harumasa-nk-1201010-main"
+    },
+    {
+      "actionId": "action:agent:1201:action:0025",
+      "branchId": "agent:1201:branch:special-6",
+      "name": "强化特殊技：地网·巡弋",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1201/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1201/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，在第四/五段[普通攻击：穿云]、[冲刺攻击：飞弦·斩]、[终结技]、[闪避反击：藏锋]、[快速支援：穿弦]发动后点按  发动：\n向前方连续发射强化箭矢，造成大量电属性伤害；\n第一发强化箭矢命中敌人或地面时，可生成6枚[电壶]，最后一发强化箭矢命中敌人时，激活场上的[电壶]，向目标发射[甲乙矢]，造成电属性伤害；\n命中的目标持有的[电囚]效果层数接近上限时，会激活更少的[电壶]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1201023"],
+      "sourceExpression": "{Skill:1201023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.131,
+        "growth": 0.467
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.657,
+        "growth": 0.212
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-harumasa-nk-1201023-main"
+    }
+  ]
+}

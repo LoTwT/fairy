@@ -63,7 +63,45 @@ import {
   agentAttributeLoaders,
   wEngineAttributeLoaders,
   driveDiscAffixesLoader,
+  agentActionLoaders,
 } from "../.generated/catalog.ts"
+import type { AgentActions } from "./skills/types.ts"
+export type {
+  AgentActions,
+  AgentAction,
+  AgentActionId,
+  AgentActionCalculation,
+  AgentActionManifest,
+  ActionDamageElement,
+  ActionDamageItem,
+  ActionDamageSegment,
+  ActionIssue,
+  ActionScalingStat,
+  ActionSkillCategory,
+  ActionSourceReference,
+  ResolveAgentActionInput,
+  ResolvedAgentAction,
+  ResolvedActionSegment,
+  ResolvedSkillLevel,
+  SkillCoefficientCurve,
+  SkillLevelGroup,
+  SkillLevelInput,
+} from "./skills/types.ts"
+export { resolveAgentSkillLevel, resolveAgentAction } from "./skills/resolve.ts"
+
+/** 单个角色的动作目录；返回独立对象，根入口不读取技能 JSON。 */
+export async function loadAgentActions(
+  name: AgentName,
+): Promise<AgentActions | undefined> {
+  if (typeof name !== "string")
+    throw new TypeError("Agent name must be a string")
+  const id = Object.hasOwn(agentSourceIds, name)
+    ? agentSourceIds[name]
+    : undefined
+  return id === undefined
+    ? undefined
+    : structuredClone(await agentActionLoaders[id]!())
+}
 import type {
   AgentLevel60Attributes,
   WEngineLevel60Attributes,

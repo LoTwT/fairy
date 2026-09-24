@@ -1,0 +1,1146 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1151",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1151:action:0001",
+      "branchId": "agent:1151:branch:assist-4",
+      "name": "快速支援：触身球！",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动打击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1151018"],
+      "sourceExpression": "{Skill:1151018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.6,
+        "growth": 0.146
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.6,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.6,
+                  "growth": 0.146
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151018-main"
+    },
+    {
+      "actionId": "action:agent:1151:action:0002",
+      "branchId": "agent:1151:branch:assist-5",
+      "name": "招架支援：安全上垒！",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1151019"],
+      "sourceExpression": "{Skill:1151019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.077,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1151:action:0003",
+      "branchId": "agent:1151:branch:assist-5",
+      "name": "招架支援：安全上垒！",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1151020"],
+      "sourceExpression": "{Skill:1151020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.294,
+        "growth": 0.105
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1151:action:0004",
+      "branchId": "agent:1151:branch:assist-5",
+      "name": "招架支援：安全上垒！",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1151021"],
+      "sourceExpression": "{Skill:1151021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.694,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1151:action:0005",
+      "branchId": "agent:1151:branch:assist-6",
+      "name": "支援突击：触垒得分！",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动打击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1151022"],
+      "sourceExpression": "{Skill:1151022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.491,
+        "growth": 0.318
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.043,
+        "growth": 0.139
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.491,
+                  "growth": 0.318
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151022-main"
+    },
+    {
+      "actionId": "action:agent:1151:action:0006",
+      "branchId": "agent:1151:branch:basic-4",
+      "name": "普通攻击：淑女的球棍",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和火属性伤害；\n当露西发动[普通攻击]第四段时，场上的亲卫队小猪会一起发动[亲卫队小猪：回旋挥击！]。",
+      "parameterIds": ["1151001"],
+      "sourceExpression": "{Skill:1151001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.566,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.283,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151001-一段"
+    },
+    {
+      "actionId": "action:agent:1151:action:0007",
+      "branchId": "agent:1151:branch:basic-4",
+      "name": "普通攻击：淑女的球棍",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和火属性伤害；\n当露西发动[普通攻击]第四段时，场上的亲卫队小猪会一起发动[亲卫队小猪：回旋挥击！]。",
+      "parameterIds": ["1151002"],
+      "sourceExpression": "{Skill:1151002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.778,
+        "growth": 0.071
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.65,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151002-二段"
+    },
+    {
+      "actionId": "action:agent:1151:action:0008",
+      "branchId": "agent:1151:branch:basic-4",
+      "name": "普通攻击：淑女的球棍",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和火属性伤害；\n当露西发动[普通攻击]第四段时，场上的亲卫队小猪会一起发动[亲卫队小猪：回旋挥击！]。",
+      "parameterIds": ["1151004"],
+      "sourceExpression": "{Skill:1151004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.889,
+        "growth": 0.172
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.574,
+        "growth": 0.072
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151004-三段"
+    },
+    {
+      "actionId": "action:agent:1151:action:0009",
+      "branchId": "agent:1151:branch:basic-4",
+      "name": "普通攻击：淑女的球棍",
+      "rowName": "三段（派生）伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和火属性伤害；\n当露西发动[普通攻击]第四段时，场上的亲卫队小猪会一起发动[亲卫队小猪：回旋挥击！]。",
+      "parameterIds": ["1151003"],
+      "sourceExpression": "{Skill:1151003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.115,
+        "growth": 0.193
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.623,
+        "growth": 0.074
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151003-三段-派生"
+    },
+    {
+      "actionId": "action:agent:1151:action:0010",
+      "branchId": "agent:1151:branch:basic-4",
+      "name": "普通攻击：淑女的球棍",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和火属性伤害；\n当露西发动[普通攻击]第四段时，场上的亲卫队小猪会一起发动[亲卫队小猪：回旋挥击！]。",
+      "parameterIds": ["1151005"],
+      "sourceExpression": "{Skill:1151005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.726,
+        "growth": 0.248
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.08,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151005-四段"
+    },
+    {
+      "actionId": "action:agent:1151:action:0011",
+      "branchId": "agent:1151:branch:basic-5",
+      "name": "亲卫队小猪：抄家伙！",
+      "rowName": "棒球棍伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "战斗中，亲卫队小猪会随机使用棒球棍、拳套、弹弓，自动对敌人发动攻击， 造成物理伤害。",
+      "parameterIds": ["1151023"],
+      "sourceExpression": "{Skill:1151023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.925,
+        "growth": 0.085
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.155,
+        "growth": 0.008
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151023-棒球棍"
+    },
+    {
+      "actionId": "action:agent:1151:action:0012",
+      "branchId": "agent:1151:branch:basic-5",
+      "name": "亲卫队小猪：抄家伙！",
+      "rowName": "拳套伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "战斗中，亲卫队小猪会随机使用棒球棍、拳套、弹弓，自动对敌人发动攻击， 造成物理伤害。",
+      "parameterIds": ["1151024"],
+      "sourceExpression": "{Skill:1151024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.275,
+        "growth": 0.116
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.213,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151024-拳套"
+    },
+    {
+      "actionId": "action:agent:1151:action:0013",
+      "branchId": "agent:1151:branch:basic-5",
+      "name": "亲卫队小猪：抄家伙！",
+      "rowName": "弹弓伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "战斗中，亲卫队小猪会随机使用棒球棍、拳套、弹弓，自动对敌人发动攻击， 造成物理伤害。",
+      "parameterIds": ["1151025"],
+      "sourceExpression": "{Skill:1151025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.75,
+        "growth": 0.16
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.292,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151025-弹弓"
+    },
+    {
+      "actionId": "action:agent:1151:action:0014",
+      "branchId": "agent:1151:branch:basic-6",
+      "name": "亲卫队小猪：回旋挥击！",
+      "rowName": "回旋挥击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "当露西发动[普通攻击]第四段，或自身获得[加油！]状态时，亲卫队小猪会挥舞棒球棍持续转圈，对周围敌人造成物理伤害。若无法立即发动，亲卫队小猪会记住所需发动次数。",
+      "parameterIds": ["1151026"],
+      "sourceExpression": "{Skill:1151026, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.5,
+        "growth": 0.228
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.2,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-lucy-nk-1151026-回旋挥击"
+    },
+    {
+      "actionId": "action:agent:1151:action:0015",
+      "branchId": "agent:1151:branch:chain-3",
+      "name": "连携技：大满贯！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n露西起跳将场上亲卫队小猪打出，对前方大范围敌人造成大量火属性伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1151016"],
+      "sourceExpression": "{{Skill:1151016, Prop:1001}/3}*3",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 4.924,
+        "growth": 0.448
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.934,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0015:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 4.924,
+                  "growth": 0.448
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151016-main"
+    },
+    {
+      "actionId": "action:agent:1151:action:0016",
+      "branchId": "agent:1151:branch:chain-4",
+      "name": "终结技：再见全垒打！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n将所有亲卫队小猪依次打出，对前方大范围敌人造成大量火属性伤害；\n招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1151017"],
+      "sourceExpression": "{{Skill:1151017, Prop:1001}/3}*3",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 17.186,
+        "growth": 1.563
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.835,
+        "growth": 0.129
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0016:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 17.186,
+                  "growth": 1.563
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151017-main"
+    },
+    {
+      "actionId": "action:agent:1151:action:0017",
+      "branchId": "agent:1151:branch:dodge-4",
+      "name": "冲刺攻击：豪勇猪突！",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行快速打击，造成物理伤害。",
+      "parameterIds": ["1151014"],
+      "sourceExpression": "{Skill:1151014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.784,
+        "growth": 0.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.392,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.784,
+                  "growth": 0.072
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151014-main"
+    },
+    {
+      "actionId": "action:agent:1151:action:0018",
+      "branchId": "agent:1151:branch:dodge-5",
+      "name": "闪避反击：獠牙折转！",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "极限闪避时，点按  发动：\n对前方敌人发动打击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1151015"],
+      "sourceExpression": "{Skill:1151015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.08,
+        "growth": 0.28
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.6,
+        "growth": 0.119
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.08,
+                  "growth": 0.28
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151015-main"
+    },
+    {
+      "actionId": "action:agent:1151:action:0019",
+      "branchId": "agent:1151:branch:special-5",
+      "name": "特殊技：安打！",
+      "rowName": "平直球伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n将亲卫队小猪召回并击出[平直球]，亲卫队小猪命中敌人或墙壁时引发爆炸，造成火属性伤害。\n长按  发动：\n将亲卫队小猪召回并击出[高飞球]，亲卫队小猪从空中落地时引发爆炸，造成火属性伤害。",
+      "parameterIds": ["1151008"],
+      "sourceExpression": "{Skill:1151008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.617,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.617,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.617,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151008-平直球"
+    },
+    {
+      "actionId": "action:agent:1151:action:0020",
+      "branchId": "agent:1151:branch:special-5",
+      "name": "特殊技：安打！",
+      "rowName": "高飞球伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/special/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n将亲卫队小猪召回并击出[平直球]，亲卫队小猪命中敌人或墙壁时引发爆炸，造成火属性伤害。\n长按  发动：\n将亲卫队小猪召回并击出[高飞球]，亲卫队小猪从空中落地时引发爆炸，造成火属性伤害。",
+      "parameterIds": ["1151009"],
+      "sourceExpression": "{Skill:1151009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.692,
+        "growth": 0.063
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.692,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.692,
+                  "growth": 0.063
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151009-高飞球"
+    },
+    {
+      "actionId": "action:agent:1151:action:0021",
+      "branchId": "agent:1151:branch:special-6",
+      "name": "强化特殊技：全垒打！",
+      "rowName": "平直球伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n将亲卫队小猪召回并击出[平直球]，亲卫队小猪命中敌人或墙壁时引发爆炸，造成大量火属性伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]。\n能量足够时，长按  发动：\n将亲卫队小猪召回并击出[高飞球]，亲卫队小猪从空中落地时引发爆炸，造成大量火属性伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1151012"],
+      "sourceExpression": "{Skill:1151012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.084,
+        "growth": 0.463
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.646,
+        "growth": 0.166
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0021:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.084,
+                  "growth": 0.463
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151012-平直球"
+    },
+    {
+      "actionId": "action:agent:1151:action:0022",
+      "branchId": "agent:1151:branch:special-6",
+      "name": "强化特殊技：全垒打！",
+      "rowName": "高飞球伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1151/details.zh.json",
+        "pointer": "/skill/special/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1151/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n将亲卫队小猪召回并击出[平直球]，亲卫队小猪命中敌人或墙壁时引发爆炸，造成大量火属性伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]。\n能量足够时，长按  发动：\n将亲卫队小猪召回并击出[高飞球]，亲卫队小猪从空中落地时引发爆炸，造成大量火属性伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1151013"],
+      "sourceExpression": "{Skill:1151013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.364,
+        "growth": 0.488
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.896,
+        "growth": 0.178
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1151:action:0022:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1151:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.364,
+                  "growth": 0.488
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucy-nk-1151013-高飞球"
+    }
+  ]
+}

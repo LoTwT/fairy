@@ -1,0 +1,1111 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1281",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1281:action:0001",
+      "branchId": "agent:1281:branch:assist-4",
+      "name": "快速支援：点刹",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动下砸攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281015"],
+      "sourceExpression": "{Skill:1281015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.3,
+        "growth": 0.119
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.3,
+        "growth": 0.06
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.3,
+                  "growth": 0.119
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281015-main"
+    },
+    {
+      "actionId": "action:agent:1281:action:0002",
+      "branchId": "agent:1281:branch:assist-5",
+      "name": "招架支援：极限刹车",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281016"],
+      "sourceExpression": "{Skill:1281016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.467,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1281:action:0003",
+      "branchId": "agent:1281:branch:assist-5",
+      "name": "招架支援：极限刹车",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281017"],
+      "sourceExpression": "{Skill:1281017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.117,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1281:action:0004",
+      "branchId": "agent:1281:branch:assist-5",
+      "name": "招架支援：极限刹车",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281018"],
+      "sourceExpression": "{Skill:1281018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.517,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1281:action:0005",
+      "branchId": "agent:1281:branch:assist-6",
+      "name": "支援突击：弯道超车",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281019"],
+      "sourceExpression": "{Skill:1281019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.005,
+        "growth": 0.365
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.52,
+        "growth": 0.16
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.005,
+                  "growth": 0.365
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281019-main"
+    },
+    {
+      "actionId": "action:agent:1281:action:0006",
+      "branchId": "agent:1281:branch:basic-2",
+      "name": "普通攻击：准备发车",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；",
+      "parameterIds": ["1281001"],
+      "sourceExpression": "{Skill:1281001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.59,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.295,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.59,
+                  "growth": 0.054
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281001-一段"
+    },
+    {
+      "actionId": "action:agent:1281:action:0007",
+      "branchId": "agent:1281:branch:basic-2",
+      "name": "普通攻击：准备发车",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；",
+      "parameterIds": ["1281002"],
+      "sourceExpression": "{Skill:1281002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.788,
+        "growth": 0.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.645,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.788,
+                  "growth": 0.072
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281002-二段"
+    },
+    {
+      "actionId": "action:agent:1281:action:0008",
+      "branchId": "agent:1281:branch:basic-2",
+      "name": "普通攻击：准备发车",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；",
+      "parameterIds": ["1281003"],
+      "sourceExpression": "{Skill:1281003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.501,
+        "growth": 0.137
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.219,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.501,
+                  "growth": 0.137
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281003-三段"
+    },
+    {
+      "actionId": "action:agent:1281:action:0009",
+      "branchId": "agent:1281:branch:basic-2",
+      "name": "普通攻击：准备发车",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的斩击，造成物理伤害；",
+      "parameterIds": ["1281004"],
+      "sourceExpression": "{Skill:1281004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.206,
+        "growth": 0.292
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.522,
+        "growth": 0.115
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.206,
+                  "growth": 0.292
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281004-四段"
+    },
+    {
+      "actionId": "action:agent:1281:action:0010",
+      "branchId": "agent:1281:branch:chain-3",
+      "name": "连携技：系好安全带",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方敌人发动强力下砸攻击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281013"],
+      "sourceExpression": "{Skill:1281013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.523,
+        "growth": 0.593
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.533,
+        "growth": 0.116
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.523,
+                  "growth": 0.593
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281013-main"
+    },
+    {
+      "actionId": "action:agent:1281:action:0011",
+      "branchId": "agent:1281:branch:chain-4",
+      "name": "终结技：坐~稳~啦~",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n快速转动身体，对前方大范围敌人发动强力的旋转斩击，随后发动下砸攻击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281014"],
+      "sourceExpression": "{Skill:1281014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.604,
+        "growth": 1.51
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.283,
+        "growth": 0.15
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.604,
+                  "growth": 1.51
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计包含旋转斩击与下砸攻击，尚未拆分下砸倍率；不能将下砸专属增益应用到整个合计，需要该增益时须请求独立命中。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281014-main"
+    },
+    {
+      "actionId": "action:agent:1281:action:0012",
+      "branchId": "agent:1281:branch:dodge-4",
+      "name": "冲刺攻击：一脚油门",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行斩击，造成物理伤害。",
+      "parameterIds": ["1281011"],
+      "sourceExpression": "{Skill:1281011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.901,
+        "growth": 0.082
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.451,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.901,
+                  "growth": 0.082
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281011-main"
+    },
+    {
+      "actionId": "action:agent:1281:action:0013",
+      "branchId": "agent:1281:branch:dodge-5",
+      "name": "闪避反击：动力漂移",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动下砸攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281012"],
+      "sourceExpression": "{Skill:1281012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.69,
+        "growth": 0.245
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.3,
+        "growth": 0.105
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.69,
+                  "growth": 0.245
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281012-main"
+    },
+    {
+      "actionId": "action:agent:1281:action:0014",
+      "branchId": "agent:1281:branch:special-5",
+      "name": "特殊技：轮胎转",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n转动身体向周围发动旋转斩击，造成物理伤害；\n长按  可以延长招式的持续时间，发动越来越强的旋转斩击，并提升招式的蓄力等级，最多提升2次；\n若衔接在[普通攻击]前三段、[冲刺攻击]或[闪避反击]之后，则能够以提升后的蓄力等级快速发动[特殊技：轮胎转]；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1281005"],
+      "sourceExpression": "{Skill:1281005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.717,
+        "growth": 0.247
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.717,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.717,
+                  "growth": 0.247
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281005-main"
+    },
+    {
+      "actionId": "action:agent:1281:action:0015",
+      "branchId": "agent:1281:branch:special-6",
+      "name": "特殊技：有亿点重",
+      "rowName": "一级蓄力伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:piper-special-ms4mow4h"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "在[特殊技：轮胎转]发动期间，松开  发动：\n根据[特殊技：轮胎转]的蓄力等级，向前方发动下砸攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281006"],
+      "sourceExpression": "{Skill:1281006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.934,
+        "growth": 0.085
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.934,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.934,
+                  "growth": 0.085
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281006-一级蓄力"
+    },
+    {
+      "actionId": "action:agent:1281:action:0016",
+      "branchId": "agent:1281:branch:special-6",
+      "name": "特殊技：有亿点重",
+      "rowName": "二级蓄力伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:piper-special-ms4mow4h"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/special/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "在[特殊技：轮胎转]发动期间，松开  发动：\n根据[特殊技：轮胎转]的蓄力等级，向前方发动下砸攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281007"],
+      "sourceExpression": "{Skill:1281007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.034,
+        "growth": 0.094
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.034,
+        "growth": 0.047
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.034,
+                  "growth": 0.094
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281007-二级蓄力"
+    },
+    {
+      "actionId": "action:agent:1281:action:0017",
+      "branchId": "agent:1281:branch:special-6",
+      "name": "特殊技：有亿点重",
+      "rowName": "三级蓄力伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:piper-special-ms4mow4h"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/special/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "在[特殊技：轮胎转]发动期间，松开  发动：\n根据[特殊技：轮胎转]的蓄力等级，向前方发动下砸攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281008"],
+      "sourceExpression": "{Skill:1281008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.35,
+        "growth": 0.214
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.35,
+        "growth": 0.107
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.35,
+                  "growth": 0.214
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281008-三级蓄力"
+    },
+    {
+      "actionId": "action:agent:1281:action:0018",
+      "branchId": "agent:1281:branch:special-7",
+      "name": "强化特殊技：引擎转",
+      "rowName": "每圈伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，在[特殊技：轮胎转]达到最高蓄力等级后，继续长按  发动：\n快速转动身体，向周围发动旋转斩击，造成大量物理伤害；\n发动期间持续消耗能量，最多持续3秒；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1281010"],
+      "sourceExpression": "{{Skill:1281010, Prop:1001}/2}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.9355,
+        "growth": 0.0855
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.548,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.9355,
+                  "growth": 0.0855
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281010-每圈"
+    },
+    {
+      "actionId": "action:agent:1281:action:0019",
+      "branchId": "agent:1281:branch:special-8",
+      "name": "强化特殊技：非常重",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:piper-special-ms4mpekv"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1281/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1281/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "在[强化特殊技：引擎转]发动期间，松开  发动：\n向前方发动强力的下砸攻击，造成大量物理伤害；\n在[强化特殊技：引擎转]发动期间，持续时间达到上限或能量降低至20点时，将会自动发动[强化特殊技：非常重]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1281009"],
+      "sourceExpression": "{Skill:1281009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.129,
+        "growth": 0.558
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.968,
+        "growth": 0.181
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1281:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1281:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.129,
+                  "growth": 0.558
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-piper-nk-1281009-main"
+    }
+  ]
+}

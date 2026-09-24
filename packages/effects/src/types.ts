@@ -245,6 +245,8 @@ export type SkillCategory =
   | "quick-assist"
   | "defensive-assist"
   | "evasive-assist"
+  | "assist-follow-up"
+  | "uncategorized"
 
 export type DamageElement =
   | "physical"

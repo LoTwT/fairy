@@ -10,6 +10,8 @@ import type {
   StaticEffectCatalog,
 } from "../src/index.ts"
 import { general, inputFor } from "./static-fixtures.ts"
+import { resolveAgentAction } from "../../data/src/skills/resolve.ts"
+import type { AgentActions } from "../../data/src/skills/types.ts"
 const read = (path: string) =>
   JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"))
 const parsed = parseEffectRuleSet(
@@ -106,6 +108,133 @@ function agentInput(
 }
 
 describe("fixed-source catalog conformance", () => {
+  it("matches Astra's M6 chord bonuses through the action targets, preserving enhanced-special identity", () => {
+    const agent = read(
+      "../../data/definitions/skills/agents/1311.json",
+    ) as AgentActions
+    const base = agentInput(
+      "1311",
+      ["agents:astrayao:mindscape:6:blk-legacy:eff-ms38u6vr-0upby4"],
+      6,
+    )
+    for (const [suffix, category, multiplier] of [
+      ["0020", "enhanced-special", 2],
+      ["0021", "special", 2],
+      ["0003", "basic", 1],
+    ] as const) {
+      const action = agent.actions.find(
+        (entry) => entry.actionId === `action:agent:1311:action:${suffix}`,
+      )!
+      expect(action.skillCategory).toBe(category)
+      const input = {
+        ...base,
+        hit: {
+          ...base.hit,
+          actionId: action.actionId,
+          skillCategory: category,
+          skillTargetIds: action.skillTargetIds,
+          element: "ether" as const,
+        },
+      }
+      const selected = calculateCatalogResult(input)
+      const disabled = calculateCatalogResult({ ...input, selections: [] })
+      expect(selected.nonCritical / disabled.nonCritical).toBeCloseTo(
+        multiplier,
+        12,
+      )
+    }
+  })
+
+  it("consumes the resolved Nicole hits and the existing core debuff to reproduce the training sample", () => {
+    const agent = read(
+      "../../data/definitions/skills/agents/1031.json",
+    ) as AgentActions
+    const action = resolveAgentAction({
+      agent,
+      actionId: "action:agent:1031:basic-enhanced-1",
+      mindscapeRank: 6,
+      levels: { basic: { mode: "effective", value: 15 } },
+      requireIndividualHits: true,
+    })
+    if (
+      !action.ok ||
+      action.calculation.kind !== "damage" ||
+      !action.skillCategory
+    )
+      throw new Error("fixture")
+    const base = agentInput(
+      "1031",
+      ["agents:nicole:mindscape:0:blk-legacy:legacy-team-reduceDefense"],
+      6,
+    )
+    if (base.damage.kind !== "regular") throw new Error("fixture")
+    const world = {
+      ...base.world,
+      entities: base.world.entities.map((entity) =>
+        entity.kind === "actor" && entity.entityId === "entity:attacker"
+          ? {
+              ...entity,
+              generalStats: {
+                ...entity.generalStats,
+                attack: general(649.1691),
+              },
+              directStats: {
+                ...entity.directStats,
+                penetrationRatio: { baseValue: 0, additions: [] },
+              },
+            }
+          : entity,
+      ),
+    }
+    const displayed = action.calculation.segments.flatMap((segment) => {
+      const result = calculateCatalogResult({
+        ...base,
+        world,
+        hit: {
+          ...base.hit,
+          actionId: action.actionId,
+          skillCategory: action.skillCategory!,
+          skillTargetIds: action.skillTargetIds,
+          skillTags: action.skillTags,
+          element: segment.element,
+          damageItems: segment.damageItems.map((item) => ({
+            ...item,
+            mode: "direct" as const,
+            role: "base" as const,
+            statSource: { entityId: "entity:attacker" as const },
+          })) as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+        },
+        damage: {
+          ...(base.damage as Extract<
+            StaticCatalogDamageInput["damage"],
+            { kind: "regular" }
+          >),
+          defense: {
+            attackerLevel: 60,
+            targetBaseDefense: 921.04,
+            defensePercentageAdjustments: [],
+            penetrationValues: [],
+          },
+        },
+      })
+      return Array<number>(segment.repeat).fill(Math.ceil(result.nonCritical))
+    })
+    expect(displayed).toEqual([342, 144, 144, 144])
+  })
+  it("accepts assist follow-ups as assist scope and uncategorized damage without turning either into an entry", () => {
+    for (const skillCategory of [
+      "assist-follow-up",
+      "uncategorized",
+    ] as const) {
+      const base = agentInput("1031", [])
+      expect(
+        calculateStaticDamageFromCatalog({
+          ...base,
+          hit: { ...base.hit, skillCategory },
+        }).ok,
+      ).toBe(true)
+    }
+  })
   it.each(["anomaly", "anomaly-settlement", "vortex", "disorder"] as const)(
     "consumes generic anomaly bonuses in the final %s damage path",
     (kind) => {

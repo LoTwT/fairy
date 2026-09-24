@@ -1,0 +1,1456 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1451",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1451:action:0001",
+      "branchId": "agent:1451:branch:assist-4",
+      "name": "快速支援：迷雾重击",
+      "rowName": "随想伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n快速支援为[随想]，发动时复现以骸形象向前方圆形区域发动下落攻击，造成以太伤害；\n未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451018"],
+      "sourceExpression": "{Skill:1451018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.064,
+        "growth": 0.097
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.532,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0001:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.064,
+                  "growth": 0.097
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451018-随想"
+    },
+    {
+      "actionId": "action:agent:1451:action:0002",
+      "branchId": "agent:1451:branch:assist-4",
+      "name": "快速支援：迷雾重击",
+      "rowName": "合唱伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n快速支援为[随想]，发动时复现以骸形象向前方圆形区域发动下落攻击，造成以太伤害；\n未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451023"],
+      "sourceExpression": "{Skill:1451023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.439,
+        "growth": 0.222
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.532,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0002:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.439,
+                  "growth": 0.222
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451023-合唱"
+    },
+    {
+      "actionId": "action:agent:1451:action:0003",
+      "branchId": "agent:1451:branch:assist-4",
+      "name": "快速支援：迷雾重击",
+      "rowName": "追加攻击伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n快速支援为[随想]，发动时复现以骸形象向前方圆形区域发动下落攻击，造成以太伤害；\n未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451015"],
+      "sourceExpression": "{Skill:1451015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 5.5,
+        "growth": 0.5
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0003:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0003:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 5.5,
+                  "growth": 0.5
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451015-追加攻击"
+    },
+    {
+      "actionId": "action:agent:1451:action:0004",
+      "branchId": "agent:1451:branch:assist-5",
+      "name": "招架支援：幻梦之声",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451019"],
+      "sourceExpression": "{Skill:1451019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1451:action:0005",
+      "branchId": "agent:1451:branch:assist-5",
+      "name": "招架支援：幻梦之声",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451020"],
+      "sourceExpression": "{Skill:1451020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1451:action:0006",
+      "branchId": "agent:1451:branch:assist-5",
+      "name": "招架支援：幻梦之声",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451021"],
+      "sourceExpression": "{Skill:1451021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1451:action:0007",
+      "branchId": "agent:1451:branch:assist-6",
+      "name": "支援突击：绘梦和声",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": ["zzz-hp:skill:lucia-assist-ms46olt7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n支援突击为[合唱]，发动时复现以骸形象向前方圆形区域发动强力下落攻击，造成以太伤害；\n未处于[梦境]状态中时，卢西娅发动此[合唱]可获得40点[梦境值]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451022"],
+      "sourceExpression": "{Skill:1451022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.277,
+        "growth": 0.298
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.824,
+        "growth": 0.129
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0007:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.277,
+                  "growth": 0.298
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451022-main"
+    },
+    {
+      "actionId": "action:agent:1451:action:0008",
+      "branchId": "agent:1451:branch:basic-2",
+      "name": "普通攻击：星轨连击",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成以太伤害；\n其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+      "parameterIds": ["1451001"],
+      "sourceExpression": "{Skill:1451001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.409,
+        "growth": 0.038
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.661,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0008:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.409,
+                  "growth": 0.038
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451001-一段"
+    },
+    {
+      "actionId": "action:agent:1451:action:0009",
+      "branchId": "agent:1451:branch:basic-2",
+      "name": "普通攻击：星轨连击",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成以太伤害；\n其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+      "parameterIds": ["1451002"],
+      "sourceExpression": "{Skill:1451002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.278,
+        "growth": 0.026
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.367,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0009:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.278,
+                  "growth": 0.026
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451002-二段"
+    },
+    {
+      "actionId": "action:agent:1451:action:0010",
+      "branchId": "agent:1451:branch:basic-2",
+      "name": "普通攻击：星轨连击",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成以太伤害；\n其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+      "parameterIds": ["1451003"],
+      "sourceExpression": "{Skill:1451003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.835,
+        "growth": 0.076
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.077,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0010:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.835,
+                  "growth": 0.076
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451003-三段"
+    },
+    {
+      "actionId": "action:agent:1451:action:0011",
+      "branchId": "agent:1451:branch:basic-2",
+      "name": "普通攻击：星轨连击",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成以太伤害；\n其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+      "parameterIds": ["1451004"],
+      "sourceExpression": "{Skill:1451004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.801,
+        "growth": 0.073
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.119,
+        "growth": 0.051
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0011:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.801,
+                  "growth": 0.073
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451004-四段"
+    },
+    {
+      "actionId": "action:agent:1451:action:0012",
+      "branchId": "agent:1451:branch:basic-2",
+      "name": "普通攻击：星轨连击",
+      "rowName": "随想伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成以太伤害；\n其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+      "parameterIds": ["1451005"],
+      "sourceExpression": "{Skill:1451005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.729,
+        "growth": 0.158
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.076,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0012:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.729,
+                  "growth": 0.158
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451005-随想"
+    },
+    {
+      "actionId": "action:agent:1451:action:0013",
+      "branchId": "agent:1451:branch:basic-2",
+      "name": "普通攻击：星轨连击",
+      "rowName": "合唱伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成以太伤害；\n其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+      "parameterIds": ["1451006"],
+      "sourceExpression": "{Skill:1451006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.125,
+        "growth": 0.375
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.076,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0013:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.125,
+                  "growth": 0.375
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451006-合唱"
+    },
+    {
+      "actionId": "action:agent:1451:action:0014",
+      "branchId": "agent:1451:branch:basic-2",
+      "name": "普通攻击：星轨连击",
+      "rowName": "追加攻击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/6"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成以太伤害；\n其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+      "parameterIds": ["1451007"],
+      "sourceExpression": "{Skill:1451007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 5.5,
+        "growth": 0.5
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0014:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 5.5,
+                  "growth": 0.5
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451007-追加攻击"
+    },
+    {
+      "actionId": "action:agent:1451:action:0015",
+      "branchId": "agent:1451:branch:chain-3",
+      "name": "连携技：璀色剧场",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n连携技为[合唱]，发动时复现以骸形象将前方圆形区域敌人吸近并造成以太伤害；\n未处于[梦境]状态中时，卢西娅发动此[合唱]可获得40点[梦境值]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451016"],
+      "sourceExpression": "{Skill:1451016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.167,
+        "growth": 0.561
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.778,
+        "growth": 0.081
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0015:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.167,
+                  "growth": 0.561
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451016-main"
+    },
+    {
+      "actionId": "action:agent:1451:action:0016",
+      "branchId": "agent:1451:branch:chain-4",
+      "name": "终结技：进击，大铠甲！",
+      "rowName": "突进单次撞击伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n终结技为[合唱]，发动时复现以骸形象，卢西娅骑乘以骸向前突进，保持按住方向键可控制骑乘方向并延长突进时间，最多延长至3秒，突进期间抗打断等级提升，受到的伤害降低40%，且卢西娅受到致命伤害时不会战败退场，生命值最多降低至1；\n在突进停止时对周身大范围区域发动强力打击造成以太伤害，招式命中敌人时，将触发[快速支援]，招式发动后会留下[星光汇聚之地]，[星光汇聚之地]持续8秒，当前操作中的角色在[星光汇聚之地]内获得生命回复效果：每秒回复卢西娅最大生命值的{CAL:0.01+AvatarSkillLevel(3)*0.0005,100,2}%，该回复效果在角色离开[星光汇聚之地]4秒后或下场时消失；\n若发动后卢西娅处于[梦境]状态且[以太帷幕·涌泉]生效中，则使[以太帷幕·涌泉]的持续时间延长32秒；\n未处于[梦境]状态中时，卢西娅发动此[合唱]可获得100点[梦境值]，且若发动此[合唱]时自身处于[梦境]状态，则可在下一次退出[梦境]状态时获得100点[梦境值]并重新进入[梦境]状态，该效果不可重复获得；\n强力打击发动期间拥有无敌效果。",
+      "parameterIds": ["1451024"],
+      "sourceExpression": "{Skill:1451024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.93,
+        "growth": 0.085
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.715,
+        "growth": 0.033
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0016:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 0.93,
+                  "growth": 0.085
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451024-突进单次撞击"
+    },
+    {
+      "actionId": "action:agent:1451:action:0017",
+      "branchId": "agent:1451:branch:chain-4",
+      "name": "终结技：进击，大铠甲！",
+      "rowName": "终结技伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n终结技为[合唱]，发动时复现以骸形象，卢西娅骑乘以骸向前突进，保持按住方向键可控制骑乘方向并延长突进时间，最多延长至3秒，突进期间抗打断等级提升，受到的伤害降低40%，且卢西娅受到致命伤害时不会战败退场，生命值最多降低至1；\n在突进停止时对周身大范围区域发动强力打击造成以太伤害，招式命中敌人时，将触发[快速支援]，招式发动后会留下[星光汇聚之地]，[星光汇聚之地]持续8秒，当前操作中的角色在[星光汇聚之地]内获得生命回复效果：每秒回复卢西娅最大生命值的{CAL:0.01+AvatarSkillLevel(3)*0.0005,100,2}%，该回复效果在角色离开[星光汇聚之地]4秒后或下场时消失；\n若发动后卢西娅处于[梦境]状态且[以太帷幕·涌泉]生效中，则使[以太帷幕·涌泉]的持续时间延长32秒；\n未处于[梦境]状态中时，卢西娅发动此[合唱]可获得100点[梦境值]，且若发动此[合唱]时自身处于[梦境]状态，则可在下一次退出[梦境]状态时获得100点[梦境值]并重新进入[梦境]状态，该效果不可重复获得；\n强力打击发动期间拥有无敌效果。",
+      "parameterIds": ["1451017"],
+      "sourceExpression": "{Skill:1451017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.027,
+        "growth": 1.73
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.944,
+        "growth": 0.089
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0017:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.027,
+                  "growth": 1.73
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451017-终结技"
+    },
+    {
+      "actionId": "action:agent:1451:action:0018",
+      "branchId": "agent:1451:branch:dodge-4",
+      "name": "冲刺攻击：折光",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行快速打击，造成以太伤害。",
+      "parameterIds": ["1451012"],
+      "sourceExpression": "{Skill:1451012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.863,
+        "growth": 0.079
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.432,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0018:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.863,
+                  "growth": 0.079
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451012-main"
+    },
+    {
+      "actionId": "action:agent:1451:action:0019",
+      "branchId": "agent:1451:branch:dodge-5",
+      "name": "闪避反击：星尘回响",
+      "rowName": "随想伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n闪避反击为[随想]，发动时复现以骸形象向前方圆形区域发动下落攻击，造成以太伤害；\n未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451013"],
+      "sourceExpression": "{Skill:1451013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.483,
+        "growth": 0.226
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.164,
+        "growth": 0.099
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0019:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.483,
+                  "growth": 0.226
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451013-随想"
+    },
+    {
+      "actionId": "action:agent:1451:action:0020",
+      "branchId": "agent:1451:branch:dodge-5",
+      "name": "闪避反击：星尘回响",
+      "rowName": "合唱伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n闪避反击为[随想]，发动时复现以骸形象向前方圆形区域发动下落攻击，造成以太伤害；\n未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451014"],
+      "sourceExpression": "{Skill:1451014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.858,
+        "growth": 0.351
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.164,
+        "growth": 0.099
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0020:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.858,
+                  "growth": 0.351
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451014-合唱"
+    },
+    {
+      "actionId": "action:agent:1451:action:0021",
+      "branchId": "agent:1451:branch:special-3",
+      "name": "特殊技：死神协奏曲·风暴",
+      "rowName": "随想伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n特殊技为[随想]，发动时复现以骸形象向前方直线区域发动斩击，造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次。",
+      "parameterIds": ["1451008"],
+      "sourceExpression": "{Skill:1451008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.459,
+        "growth": 0.042
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.459,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0021:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.459,
+                  "growth": 0.042
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451008-随想"
+    },
+    {
+      "actionId": "action:agent:1451:action:0022",
+      "branchId": "agent:1451:branch:special-3",
+      "name": "特殊技：死神协奏曲·风暴",
+      "rowName": "合唱伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/special/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n特殊技为[随想]，发动时复现以骸形象向前方直线区域发动斩击，造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次。",
+      "parameterIds": ["1451009"],
+      "sourceExpression": "{Skill:1451009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.834,
+        "growth": 0.167
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.459,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0022:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.834,
+                  "growth": 0.167
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451009-合唱"
+    },
+    {
+      "actionId": "action:agent:1451:action:0023",
+      "branchId": "agent:1451:branch:special-3",
+      "name": "特殊技：死神协奏曲·风暴",
+      "rowName": "追加攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/special/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n特殊技为[随想]，发动时复现以骸形象向前方直线区域发动斩击，造成以太伤害；\n处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次。",
+      "parameterIds": ["1451010"],
+      "sourceExpression": "{Skill:1451010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.5,
+        "growth": 0.5
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0023:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.5,
+                  "growth": 0.5
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451010-追加攻击"
+    },
+    {
+      "actionId": "action:agent:1451:action:0024",
+      "branchId": "agent:1451:branch:special-4",
+      "name": "强化特殊技：死神协奏曲·破晓",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:lucia-special-ms46owoz"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n强化特殊技为[合唱]，发动时复现以骸形象向前方直线区域发动强力斩击，造成以太伤害；\n卢西娅发动[合唱]时，为全队角色施加[破暗]状态；[破暗]状态下，贯穿力提升12点，卢西娅每拥有200点初始最大生命值，可使贯穿力额外提升{CAL:5+AvatarSkillLevel(1)*0.2,1,1}点，[破暗]状态最多可提升{CAL:612+AvatarSkillLevel(1)*24,1,2}点贯穿力，状态持续20秒，重复触发时刷新持续时间，当卢西娅的初始最大生命值达到24000点时，上述增益效果达到最大值；\n[合唱]造成伤害时，卢西娅会根据最大生命值的{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%额外提升最后一段攻击的伤害；\n卢西娅发动强化特殊技后，若自身处于[梦境]状态且[以太帷幕·涌泉]生效中，则使[以太帷幕·涌泉]的持续时间延长16秒；\n卢西娅发动强化特殊技后，可以直接衔接第五段[普通攻击]；\n未处于[梦境]状态中时，卢西娅发动此[合唱]可获得60点[梦境值]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1451011"],
+      "sourceExpression": "{Skill:1451011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.381,
+        "growth": 0.581
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.419,
+        "growth": 0.201
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1451:action:0024:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1451:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.381,
+                  "growth": 0.581
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-lucia-nk-1451011-main"
+    },
+    {
+      "actionId": "action:agent:1451:action:0025",
+      "branchId": "agent:1451:branch:special-4",
+      "name": "强化特殊技：死神协奏曲·破晓",
+      "rowName": "[合唱]额外伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1451/details.zh.json",
+        "pointer": "/skill/special/description/3/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1451/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n强化特殊技为[合唱]，发动时复现以骸形象向前方直线区域发动强力斩击，造成以太伤害；\n卢西娅发动[合唱]时，为全队角色施加[破暗]状态；[破暗]状态下，贯穿力提升12点，卢西娅每拥有200点初始最大生命值，可使贯穿力额外提升{CAL:5+AvatarSkillLevel(1)*0.2,1,1}点，[破暗]状态最多可提升{CAL:612+AvatarSkillLevel(1)*24,1,2}点贯穿力，状态持续20秒，重复触发时刷新持续时间，当卢西娅的初始最大生命值达到24000点时，上述增益效果达到最大值；\n[合唱]造成伤害时，卢西娅会根据最大生命值的{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%额外提升最后一段攻击的伤害；\n卢西娅发动强化特殊技后，若自身处于[梦境]状态且[以太帷幕·涌泉]生效中，则使[以太帷幕·涌泉]的持续时间延长16秒；\n卢西娅发动强化特殊技后，可以直接衔接第五段[普通攻击]；\n未处于[梦境]状态中时，卢西娅发动此[合唱]可获得60点[梦境值]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "额外结算依赖特殊机制，不能直接将此文本倍率当作普通攻击力倍率。"
+          },
+          {
+            "code": "unsupported-expression",
+            "message": "尚未支持的来源表达式：{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    }
+  ]
+}

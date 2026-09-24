@@ -1329,6 +1329,7 @@ export function calculateStaticDamageFromCatalog(
     "quick-assist": "assist",
     "defensive-assist": "assist",
     "evasive-assist": "assist",
+    "assist-follow-up": "assist",
     "follow-up": "follow_up",
   }
   tags.add(

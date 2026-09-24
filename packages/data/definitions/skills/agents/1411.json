@@ -1,0 +1,1370 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1411",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1411:action:0001",
+      "branchId": "agent:1411:branch:assist-5",
+      "name": "快速支援：甜点时间",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动打击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411013"],
+      "sourceExpression": "{Skill:1411013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.229,
+        "growth": 0.112
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.615,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.229,
+                  "growth": 0.112
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411013-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0002",
+      "branchId": "agent:1411:branch:assist-6",
+      "name": "招架支援：趣能补给",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n成功招架敌人攻击时，获得1点[甜度点]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411014"],
+      "sourceExpression": "{Skill:1411014, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.952,
+        "growth": 0.135
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1411:action:0003",
+      "branchId": "agent:1411:branch:assist-6",
+      "name": "招架支援：趣能补给",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n成功招架敌人攻击时，获得1点[甜度点]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411015"],
+      "sourceExpression": "{Skill:1411015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1411:action:0004",
+      "branchId": "agent:1411:branch:assist-6",
+      "name": "招架支援：趣能补给",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n成功招架敌人攻击时，获得1点[甜度点]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411016"],
+      "sourceExpression": "{Skill:1411016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1411:action:0005",
+      "branchId": "agent:1411:branch:assist-7",
+      "name": "支援突击：来块曲奇",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]或通过[普通攻击：狸之帐]成功招架敌人攻击后，点按  发动：\n对前方敌人发动打击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411017"],
+      "sourceExpression": "{Skill:1411017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.943,
+        "growth": 0.268
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.514,
+        "growth": 0.115
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.943,
+                  "growth": 0.268
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411017-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0006",
+      "branchId": "agent:1411:branch:assist-8",
+      "name": "支援突击：夹心硬糖射击",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": ["zzz-hp:skill:yuzuha-assist-ms44kaqg"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "发动[招架支援]或通过[普通攻击：狸之帐]成功招架敌人攻击后，在恰当的时机点按  发动：\n旋转伞持续攻击后射出一发强力炮弹，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411024"],
+      "sourceExpression": "{Skill:1411024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.636,
+        "growth": 0.422
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.087,
+        "growth": 0.186
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.636,
+                  "growth": 0.422
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411024-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0007",
+      "branchId": "agent:1411:branch:basic-7",
+      "name": "普通攻击：狸之爪",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害。",
+      "parameterIds": ["1411001"],
+      "sourceExpression": "{Skill:1411001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.377,
+        "growth": 0.035
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.44,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.377,
+                  "growth": 0.035
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411001-一段"
+    },
+    {
+      "actionId": "action:agent:1411:action:0008",
+      "branchId": "agent:1411:branch:basic-7",
+      "name": "普通攻击：狸之爪",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害。",
+      "parameterIds": ["1411002"],
+      "sourceExpression": "{Skill:1411002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.577,
+        "growth": 0.053
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.631,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.577,
+                  "growth": 0.053
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411002-二段"
+    },
+    {
+      "actionId": "action:agent:1411:action:0009",
+      "branchId": "agent:1411:branch:basic-7",
+      "name": "普通攻击：狸之爪",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害。",
+      "parameterIds": ["1411003"],
+      "sourceExpression": "{Skill:1411003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.66,
+        "growth": 0.06
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.66,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.66,
+                  "growth": 0.06
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411003-三段"
+    },
+    {
+      "actionId": "action:agent:1411:action:0010",
+      "branchId": "agent:1411:branch:basic-7",
+      "name": "普通攻击：狸之爪",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害。",
+      "parameterIds": ["1411004"],
+      "sourceExpression": "{Skill:1411004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.981,
+        "growth": 0.09
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.127,
+        "growth": 0.052
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.981,
+                  "growth": 0.09
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411004-四段"
+    },
+    {
+      "actionId": "action:agent:1411:action:0011",
+      "branchId": "agent:1411:branch:basic-7",
+      "name": "普通攻击：狸之爪",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的打击，造成物理伤害。",
+      "parameterIds": ["1411005"],
+      "sourceExpression": "{Skill:1411005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.641,
+        "growth": 0.15
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.636,
+        "growth": 0.075
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.641,
+                  "growth": 0.15
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411005-五段"
+    },
+    {
+      "actionId": "action:agent:1411:action:0012",
+      "branchId": "agent:1411:branch:basic-8",
+      "name": "普通攻击：狸之帐",
+      "rowName": "招架失衡倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  发动：\n进入防御姿态，最多持续1.5秒，期间如果受到敌人攻击，会招架敌人的攻击，累积大量失衡值；\n成功招架敌人攻击时，获得1点[甜度点]；\n成功招架敌人攻击时拥有无敌效果。",
+      "parameterIds": ["1411019"],
+      "sourceExpression": "{Skill:1411019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1411:action:0013",
+      "branchId": "agent:1411:branch:basic-9",
+      "name": "普通攻击：硬糖射击",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "当柚叶拥有[甜度点]时，其他操作中的角色攻击命中敌人时，柚叶会围绕敌人旋转伞持续攻击后射出一发强力炮弹，造成物理伤害，该攻击重击命中敌人时，柚叶会消耗1点[甜度点]；\n[普通攻击：硬糖射击]为[追加攻击]；\n[普通攻击：硬糖射击]每8秒最多触发一次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411018"],
+      "sourceExpression": "{Skill:1411018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.32,
+        "growth": 0.12
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.88,
+        "growth": 0.04
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.32,
+                  "growth": 0.12
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411018-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0014",
+      "branchId": "agent:1411:branch:basic-10",
+      "name": "普通攻击：彩糖花火",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "处于[甜蜜惊吓]状态下的敌人，每1秒会受到一次[普通攻击：彩糖花火]攻击；\n[普通攻击：彩糖花火]攻击初始造成物理伤害；\n[普通攻击：彩糖花火]攻击累积的属性异常积蓄值不参与异常伤害结算；\n[普通攻击：彩糖花火]攻击的属性异常积蓄效率提升{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%。",
+      "parameterIds": ["1411020"],
+      "sourceExpression": "{Skill:1411020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.275,
+        "growth": 0.025
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.275,
+                  "growth": 0.025
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411020-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0015",
+      "branchId": "agent:1411:branch:basic-11",
+      "name": "普通攻击：彩糖花火·极",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/4/desc"
+        }
+      ],
+      "description": "处于[甜蜜惊吓]状态下的敌人，被[普通攻击：硬糖射击]或[支援突击：夹心硬糖射击]重击命中时，会受到一次[普通攻击：彩糖花火·极]攻击；\n[普通攻击：彩糖花火·极]攻击初始造成物理伤害；\n[普通攻击：彩糖花火·极]攻击累积的属性异常积蓄值不参与异常伤害结算；\n[普通攻击：彩糖花火·极]攻击的属性异常积蓄效率提升{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%。",
+      "parameterIds": ["1411021"],
+      "sourceExpression": "{Skill:1411021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.08,
+        "growth": 0.28
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.08,
+                  "growth": 0.28
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411021-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0016",
+      "branchId": "agent:1411:branch:basic-12",
+      "name": "普通攻击：狸之助",
+      "rowName": "狸猫阿釜协同柚叶攻击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/11/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/5/desc"
+        }
+      ],
+      "description": "当柚叶位于后场时，狸猫阿釜会协助操作中的角色攻击敌人，造成物理伤害；\n当柚叶发动[普通攻击：狸之帐]时，狸猫阿釜会协助柚叶攻击敌人，造成物理伤害；\n狸猫阿釜可以继承柚叶的初始攻击力。",
+      "parameterIds": ["1411022"],
+      "sourceExpression": "{Skill:1411022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.1,
+        "growth": 0.1
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.1,
+                  "growth": 0.1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411022-狸猫阿釜协同柚叶攻击"
+    },
+    {
+      "actionId": "action:agent:1411:action:0017",
+      "branchId": "agent:1411:branch:basic-12",
+      "name": "普通攻击：狸之助",
+      "rowName": "狸猫阿釜自主攻击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/basic/description/11/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/basic/description/5/desc"
+        }
+      ],
+      "description": "当柚叶位于后场时，狸猫阿釜会协助操作中的角色攻击敌人，造成物理伤害；\n当柚叶发动[普通攻击：狸之帐]时，狸猫阿釜会协助柚叶攻击敌人，造成物理伤害；\n狸猫阿釜可以继承柚叶的初始攻击力。",
+      "parameterIds": ["1411023"],
+      "sourceExpression": "{Skill:1411023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.1,
+        "growth": 0.1
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.1,
+                  "growth": 0.1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411023-狸猫阿釜自主攻击"
+    },
+    {
+      "actionId": "action:agent:1411:action:0018",
+      "branchId": "agent:1411:branch:chain-3",
+      "name": "连携技：恶作剧合战",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方小范围敌人发动强力打击，造成大量物理伤害；\n招式发动时，获得1点[甜度点]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411011"],
+      "sourceExpression": "{Skill:1411011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.987,
+        "growth": 0.545
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.329,
+        "growth": 0.106
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.987,
+                  "growth": 0.545
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411011-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0019",
+      "branchId": "agent:1411:branch:chain-4",
+      "name": "终结技：不投降就捣乱",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对周身大范围敌人发动强力打击，造成大量物理伤害；\n重击命中敌人时，会使其陷入[甜蜜惊吓]状态；\n招式发动时，队伍中其他角色回复{CAL:7+AvatarSkillLevel(3)*1.5,1,2}点能量； \n招式发动时，获得2点[甜度点]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411012"],
+      "sourceExpression": "{Skill:1411012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 14.432,
+        "growth": 1.312
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.86,
+        "growth": 0.13
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 14.432,
+                  "growth": 1.312
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411012-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0020",
+      "branchId": "agent:1411:branch:dodge-4",
+      "name": "冲刺攻击：你要倒霉了！",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行快速打击，造成物理伤害。",
+      "parameterIds": ["1411009"],
+      "sourceExpression": "{Skill:1411009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.698,
+        "growth": 0.064
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.349,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0020:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.698,
+                  "growth": 0.064
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411009-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0021",
+      "branchId": "agent:1411:branch:dodge-5",
+      "name": "闪避反击：报复开始~",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n向前方进行快速打击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411010"],
+      "sourceExpression": "{Skill:1411010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.769,
+        "growth": 0.252
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.384,
+        "growth": 0.109
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0021:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.769,
+                  "growth": 0.252
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411010-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0022",
+      "branchId": "agent:1411:branch:special-5",
+      "name": "特殊技：软糖轰击",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方开炮射击，造成物理伤害。",
+      "parameterIds": ["1411006"],
+      "sourceExpression": "{Skill:1411006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.505,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.505,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0022:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.505,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411006-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0023",
+      "branchId": "agent:1411:branch:special-6",
+      "name": "强化特殊技：小心蛀牙",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向敌人扔出炸弹，造成物理伤害；\n重击命中敌人时，会使其陷入[甜蜜惊吓]状态；\n发动时，获得2点[甜度点]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411007"],
+      "sourceExpression": "{Skill:1411007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.21,
+        "growth": 0.383
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.21,
+        "growth": 0.192
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0023:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.21,
+                  "growth": 0.383
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411007-main"
+    },
+    {
+      "actionId": "action:agent:1411:action:0024",
+      "branchId": "agent:1411:branch:special-7",
+      "name": "强化特殊技：小心蛀牙，就是现在！",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1411/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1411/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "在[闪避反击：报复开始~]、[快速支援：甜点时间]、[支援突击：来块曲奇]、[支援突击：夹心硬糖射击]攻击后或触发[极限闪避]时，点按    发动：\n向敌人快速扔出炸弹，造成物理伤害；\n重击命中敌人时，会使其陷入[甜蜜惊吓]状态；\n发动时，获得2点[甜度点]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1411008"],
+      "sourceExpression": "{Skill:1411008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.414,
+        "growth": 0.22
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.67,
+        "growth": 0.122
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1411:action:0024:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1411:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.414,
+                  "growth": 0.22
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yuzuha-nk-1411008-main"
+    }
+  ]
+}

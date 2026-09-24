@@ -1,0 +1,1046 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1521",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1521:action:0001",
+      "branchId": "agent:1521:branch:assist-4",
+      "name": "快速支援：报警装置",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n向前方跃起，落地后进行横扫攻击，造成电属性伤害；\n招式发动期间，可以快速衔接[特殊技：獠齿]、[强化特殊技：毒牙]和[普通攻击：蛇吻]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521014"],
+      "sourceExpression": "{Skill:1521014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.748,
+        "growth": 0.068
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.633,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0001:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.748,
+                  "growth": 0.068
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521014-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0002",
+      "branchId": "agent:1521:branch:assist-5",
+      "name": "招架支援：牢饭加餐",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521015"],
+      "sourceExpression": "{Skill:1521015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1521:action:0003",
+      "branchId": "agent:1521:branch:assist-5",
+      "name": "招架支援：牢饭加餐",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521016"],
+      "sourceExpression": "{Skill:1521016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1521:action:0004",
+      "branchId": "agent:1521:branch:assist-5",
+      "name": "招架支援：牢饭加餐",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521017"],
+      "sourceExpression": "{Skill:1521017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1521:action:0005",
+      "branchId": "agent:1521:branch:assist-6",
+      "name": "支援突击：共犯情谊",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对目标发动连续攻击，造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521018"],
+      "sourceExpression": "{Skill:1521018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 5.206,
+        "growth": 0.474
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.872,
+        "growth": 0.176
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0005:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 5.206,
+                  "growth": 0.474
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521018-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0006",
+      "branchId": "agent:1521:branch:basic-4",
+      "name": "普通攻击：吐信",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成电属性伤害；\n第四段攻击命中敌人后，获得2点[毒素]，命中处于失衡状态下的敌人时，额外获得1点[毒素]。",
+      "parameterIds": ["1521001"],
+      "sourceExpression": "{Skill:1521001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.777,
+        "growth": 0.071
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.603,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0006:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.777,
+                  "growth": 0.071
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521001-一段"
+    },
+    {
+      "actionId": "action:agent:1521:action:0007",
+      "branchId": "agent:1521:branch:basic-4",
+      "name": "普通攻击：吐信",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成电属性伤害；\n第四段攻击命中敌人后，获得2点[毒素]，命中处于失衡状态下的敌人时，额外获得1点[毒素]。",
+      "parameterIds": ["1521002"],
+      "sourceExpression": "{Skill:1521002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.387,
+        "growth": 0.127
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.984,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0007:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.387,
+                  "growth": 0.127
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521002-二段"
+    },
+    {
+      "actionId": "action:agent:1521:action:0008",
+      "branchId": "agent:1521:branch:basic-4",
+      "name": "普通攻击：吐信",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成电属性伤害；\n第四段攻击命中敌人后，获得2点[毒素]，命中处于失衡状态下的敌人时，额外获得1点[毒素]。",
+      "parameterIds": ["1521003"],
+      "sourceExpression": "{Skill:1521003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.351,
+        "growth": 0.123
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.874,
+        "growth": 0.04
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0008:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.351,
+                  "growth": 0.123
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521003-三段"
+    },
+    {
+      "actionId": "action:agent:1521:action:0009",
+      "branchId": "agent:1521:branch:basic-4",
+      "name": "普通攻击：吐信",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成电属性伤害；\n第四段攻击命中敌人后，获得2点[毒素]，命中处于失衡状态下的敌人时，额外获得1点[毒素]。",
+      "parameterIds": ["1521004"],
+      "sourceExpression": "{Skill:1521004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.502,
+        "growth": 0.228
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.591,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0009:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.502,
+                  "growth": 0.228
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521004-四段"
+    },
+    {
+      "actionId": "action:agent:1521:action:0010",
+      "branchId": "agent:1521:branch:basic-5",
+      "name": "普通攻击：蛇吻",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:cissia-basic-ms4lsh5z"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "拥有[蛇影]时可长按  发动：\n希希芙跳入空中并锁定目标，随后落地对范围内敌人造成电属性伤害；\n锁定期间，保持长按  并拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以延长锁定时间，并自由控制落地位置；\n每获得6点[毒素]，自身获得1层[蛇影]效果，至多获得3层；\n进入战场时，获得1层[蛇影]效果；\n招式发动时消耗1层[蛇影]；\n命中敌人后，快速消耗所有[毒素]并触发[蚀骨]；\n招式发动时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521006"],
+      "sourceExpression": "{Skill:1521006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 5.042,
+        "growth": 0.459
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.797,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0010:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 5.042,
+                  "growth": 0.459
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521006-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0011",
+      "branchId": "agent:1521:branch:basic-6",
+      "name": "蚀骨",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:cissia-basic-ms4ljiqj"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "对附近敌人造成电属性伤害；\n每次触发，使自身暴击率提升6%，持续15秒，至多叠加3层，重复触发刷新持续时间。",
+      "parameterIds": ["1521019"],
+      "sourceExpression": "{Skill:1521019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.268,
+        "growth": 0.116
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.551,
+        "growth": 0.071
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0011:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.268,
+                  "growth": 0.116
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521019-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0012",
+      "branchId": "agent:1521:branch:chain-3",
+      "name": "连携技：团伙作案",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前方进行多段攻击，造成大量电属性伤害；\n招式发动后，获得3点[毒素]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521012"],
+      "sourceExpression": "{Skill:1521012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.378,
+        "growth": 0.671
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.586,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.378,
+                  "growth": 0.671
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521012-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0013",
+      "branchId": "agent:1521:branch:chain-4",
+      "name": "终结技：爬行恐惧",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方发动落雷攻击，造成大量电属性伤害；\n招式发动后，获得3点[毒素]；\n招式发动后，开启[以太帷幕：冷血]，持续30秒，期间全队角色暴击伤害提升5%；\n重复开启[以太帷幕：冷血]前，将关闭已有的[以太帷幕：冷血]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521013"],
+      "sourceExpression": "{Skill:1521013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 18.11,
+        "growth": 1.647
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.211,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 18.11,
+                  "growth": 1.647
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521013-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0014",
+      "branchId": "agent:1521:branch:dodge-4",
+      "name": "冲刺攻击：齿痕",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前进行快速斩击，造成电属性伤害。",
+      "parameterIds": ["1521010"],
+      "sourceExpression": "{Skill:1521010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.473,
+        "growth": 0.134
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.624,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0014:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.473,
+                  "growth": 0.134
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521010-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0015",
+      "branchId": "agent:1521:branch:dodge-5",
+      "name": "闪避反击：反咬一口",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n向前方跃起，落地后进行横扫攻击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521011"],
+      "sourceExpression": "{Skill:1521011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.245,
+        "growth": 0.295
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.366,
+        "growth": 0.108
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0015:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.245,
+                  "growth": 0.295
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521011-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0016",
+      "branchId": "agent:1521:branch:special-3",
+      "name": "特殊技：獠齿",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动远距离蛇咬， 造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1521007"],
+      "sourceExpression": "{Skill:1521007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.52,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.44,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0016:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.52,
+                  "growth": 0.048
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521007-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0017",
+      "branchId": "agent:1521:branch:special-4",
+      "name": "强化特殊技：毒牙",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按或长按  发动：\n向前方发动多段远距离蛇咬，造成电属性伤害；\n招式发动时，回复5点能量；\n长按发动时，会额外消耗能量，每20点发动一次额外的打击，造成电属性伤害，至多额外消耗60点能量；\n招式发动后，自身获得3点[毒素]，长按时每额外消耗20点能量，获得1点[毒素]；\n招式发动后，可直接衔接第四段[普通攻击：吐信]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521008", "1521009"],
+      "sourceExpression": "{{Skill:1521008, Prop:1001}*3+{Skill:1521009, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.68,
+        "growth": 0.6100000000000001
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.6100000000000003,
+        "growth": 0.16699999999999998
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0017:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.68,
+                  "growth": 0.6100000000000001
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521008-main"
+    },
+    {
+      "actionId": "action:agent:1521:action:0018",
+      "branchId": "agent:1521:branch:special-4",
+      "name": "强化特殊技：毒牙",
+      "rowName": "额外打击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/skill/special/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1521/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按或长按  发动：\n向前方发动多段远距离蛇咬，造成电属性伤害；\n招式发动时，回复5点能量；\n长按发动时，会额外消耗能量，每20点发动一次额外的打击，造成电属性伤害，至多额外消耗60点能量；\n招式发动后，自身获得3点[毒素]，长按时每额外消耗20点能量，获得1点[毒素]；\n招式发动后，可直接衔接第四段[普通攻击：吐信]；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1521008"],
+      "sourceExpression": "{Skill:1521008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.004,
+        "growth": 0.183
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.083,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1521:action:0018:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1521:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.004,
+                  "growth": 0.183
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-cissia-nk-1521008-额外打击"
+    }
+  ]
+}

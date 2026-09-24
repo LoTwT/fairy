@@ -1,0 +1,880 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1351",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1351:action:0001",
+      "branchId": "agent:1351:branch:assist-4",
+      "name": "快速支援：雇佣合同·保镖业务",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动突刺并衔接快速斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1351013"],
+      "sourceExpression": "{Skill:1351013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.783,
+        "growth": 0.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.783,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.783,
+                  "growth": 0.072
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351013-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0002",
+      "branchId": "agent:1351:branch:assist-5",
+      "name": "支援突击：单独计价",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[回避支援]后，点按  发动：\n向前腾空跃起后开枪射击，造成物理伤害；\n招式发动时，将消耗1点[支援点数]，使自身进入[猎步]状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1351014"],
+      "sourceExpression": "{Skill:1351014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.071,
+        "growth": 0.28
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.653,
+        "growth": 0.121
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0002:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.071,
+                  "growth": 0.28
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351014-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0003",
+      "branchId": "agent:1351:branch:basic-3",
+      "name": "普通攻击：捷击",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成物理伤害；",
+      "parameterIds": ["1351001"],
+      "sourceExpression": "{Skill:1351001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.357,
+        "growth": 0.033
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.285,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0003:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0003:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.357,
+                  "growth": 0.033
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351001-一段"
+    },
+    {
+      "actionId": "action:agent:1351:action:0004",
+      "branchId": "agent:1351:branch:basic-3",
+      "name": "普通攻击：捷击",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成物理伤害；",
+      "parameterIds": ["1351002"],
+      "sourceExpression": "{Skill:1351002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.941,
+        "growth": 0.086
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.753,
+        "growth": 0.035
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0004:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0004:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.941,
+                  "growth": 0.086
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351002-二段"
+    },
+    {
+      "actionId": "action:agent:1351:action:0005",
+      "branchId": "agent:1351:branch:basic-3",
+      "name": "普通攻击：捷击",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成物理伤害；",
+      "parameterIds": ["1351003"],
+      "sourceExpression": "{Skill:1351003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.676,
+        "growth": 0.153
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.341,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.676,
+                  "growth": 0.153
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351003-三段"
+    },
+    {
+      "actionId": "action:agent:1351:action:0006",
+      "branchId": "agent:1351:branch:basic-4",
+      "name": "普通攻击：跃击",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  发动：\n向前跃进并发动连续斩击，造成物理伤害；",
+      "parameterIds": ["1351004"],
+      "sourceExpression": "{Skill:1351004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.35,
+        "growth": 0.123
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.08,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.35,
+                  "growth": 0.123
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351004-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0007",
+      "branchId": "agent:1351:branch:chain-3",
+      "name": "连携技：嗨，想不到吧",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前方发动蓄力射击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1351011"],
+      "sourceExpression": "{Skill:1351011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.341,
+        "growth": 0.486
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.351,
+        "growth": 0.062
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.341,
+                  "growth": 0.486
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351011-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0008",
+      "branchId": "agent:1351:branch:chain-4",
+      "name": "终结技：噢，游戏时间",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前方大范围敌人发动强力射击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1351012"],
+      "sourceExpression": "{Skill:1351012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 13.938,
+        "growth": 1.268
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.823,
+        "growth": 0.402
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 13.938,
+                  "growth": 1.268
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351012-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0009",
+      "branchId": "agent:1351:branch:dodge-4",
+      "name": "冲刺攻击：先下手为强",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方突进斩击，造成物理伤害。",
+      "parameterIds": ["1351009"],
+      "sourceExpression": "{Skill:1351009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.483,
+        "growth": 0.044
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.242,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.483,
+                  "growth": 0.044
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351009-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0010",
+      "branchId": "agent:1351:branch:dodge-5",
+      "name": "闪避反击：睚眦必报",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动突刺并衔接快速斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1351010"],
+      "sourceExpression": "{Skill:1351010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.018,
+        "growth": 0.184
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.783,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.018,
+                  "growth": 0.184
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351010-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0011",
+      "branchId": "agent:1351:branch:special-4",
+      "name": "特殊技：噬爪",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方快速来回穿刺，造成物理伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1351005"],
+      "sourceExpression": "{Skill:1351005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.251,
+        "growth": 0.023
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.501,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.251,
+                  "growth": 0.023
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351005-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0012",
+      "branchId": "agent:1351:branch:special-5",
+      "name": "特殊技：噬爪·噩梦袭影",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:pulchra-special-ms482do2"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "波可娜进入[猎步]状态后，队伍中其他操作中的角色的[特殊技]或[强化特殊技]重击命中敌人时触发：\n围绕目标敌人，快速来回穿刺，造成物理伤害；\n招式发动后，队伍中其他操作中的角色，发动任意攻击命中敌人时，波可娜会重复发动攻击，最多额外触发5次，且最后一次攻击会被替换为更加强力的终结一击；\n招式发动期间拥有无敌效果；\n[特殊技：噬爪·噩梦袭影]为[追加攻击]。",
+      "parameterIds": ["1351006"],
+      "sourceExpression": "{Skill:1351006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.463,
+        "growth": 0.043
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.29,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.463,
+                  "growth": 0.043
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351006-main"
+    },
+    {
+      "actionId": "action:agent:1351:action:0013",
+      "branchId": "agent:1351:branch:special-5",
+      "name": "特殊技：噬爪·噩梦袭影",
+      "rowName": "终结一击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:pulchra-special-ms482do2"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/special/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "波可娜进入[猎步]状态后，队伍中其他操作中的角色的[特殊技]或[强化特殊技]重击命中敌人时触发：\n围绕目标敌人，快速来回穿刺，造成物理伤害；\n招式发动后，队伍中其他操作中的角色，发动任意攻击命中敌人时，波可娜会重复发动攻击，最多额外触发5次，且最后一次攻击会被替换为更加强力的终结一击；\n招式发动期间拥有无敌效果；\n[特殊技：噬爪·噩梦袭影]为[追加攻击]。",
+      "parameterIds": ["1351007"],
+      "sourceExpression": "{Skill:1351007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.535,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.348,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.535,
+                  "growth": 0.049
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351007-终结一击"
+    },
+    {
+      "actionId": "action:agent:1351:action:0014",
+      "branchId": "agent:1351:branch:special-6",
+      "name": "强化特殊技：噬爪·瞬步",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1351/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1351/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方多次来回穿刺，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1351008"],
+      "sourceExpression": "{Skill:1351008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.477,
+        "growth": 0.317
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.117,
+        "growth": 0.097
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1351:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1351:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.477,
+                  "growth": 0.317
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-pulchra-nk-1351008-main"
+    }
+  ]
+}

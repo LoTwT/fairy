@@ -1,0 +1,1171 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1531",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1531:action:0001",
+      "branchId": "agent:1531:branch:assist-4",
+      "name": "快速支援：星徽-羁绊之力",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n向前使用手炮轰击，造成物理伤害；\n生命值大于25%时，发动该招式改为发动[特殊技：动力压制]，该效果每5秒至多生效1次；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531017"],
+      "sourceExpression": "{Skill:1531017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.92,
+        "growth": 0.084
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.487,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0001:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0001:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.92,
+                  "growth": 0.084
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531017-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0002",
+      "branchId": "agent:1531:branch:assist-5",
+      "name": "招架支援：英雄登台",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531018"],
+      "sourceExpression": "{Skill:1531018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1531:action:0003",
+      "branchId": "agent:1531:branch:assist-5",
+      "name": "招架支援：英雄登台",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531019"],
+      "sourceExpression": "{Skill:1531019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1531:action:0004",
+      "branchId": "agent:1531:branch:assist-5",
+      "name": "招架支援：英雄登台",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531020"],
+      "sourceExpression": "{Skill:1531020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1531:action:0005",
+      "branchId": "agent:1531:branch:assist-6",
+      "name": "支援突击：反派退场",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对目标发动踢车攻击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531021"],
+      "sourceExpression": "{Skill:1531021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.296,
+        "growth": 0.209
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.037,
+        "growth": 0.093
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0005:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0005:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.296,
+                  "growth": 0.209
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531021-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0006",
+      "branchId": "agent:1531:branch:basic-3",
+      "name": "普通攻击：骑士斗技",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害；\n第四段攻击发动时，点按  发动[特殊技：动力压制]消耗生命值减少50%；\n招式命中敌人时，少量回复生命值。",
+      "parameterIds": ["1531001"],
+      "sourceExpression": "{Skill:1531001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.503,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.399,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0006:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0006:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.503,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531001-一段"
+    },
+    {
+      "actionId": "action:agent:1531:action:0007",
+      "branchId": "agent:1531:branch:basic-3",
+      "name": "普通攻击：骑士斗技",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害；\n第四段攻击发动时，点按  发动[特殊技：动力压制]消耗生命值减少50%；\n招式命中敌人时，少量回复生命值。",
+      "parameterIds": ["1531002"],
+      "sourceExpression": "{Skill:1531002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.68,
+        "growth": 0.062
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.568,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0007:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0007:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.68,
+                  "growth": 0.062
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531002-二段"
+    },
+    {
+      "actionId": "action:agent:1531:action:0008",
+      "branchId": "agent:1531:branch:basic-3",
+      "name": "普通攻击：骑士斗技",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害；\n第四段攻击发动时，点按  发动[特殊技：动力压制]消耗生命值减少50%；\n招式命中敌人时，少量回复生命值。",
+      "parameterIds": ["1531003"],
+      "sourceExpression": "{Skill:1531003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.545,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.48,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0008:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0008:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.545,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531003-三段"
+    },
+    {
+      "actionId": "action:agent:1531:action:0009",
+      "branchId": "agent:1531:branch:basic-3",
+      "name": "普通攻击：骑士斗技",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害；\n第四段攻击发动时，点按  发动[特殊技：动力压制]消耗生命值减少50%；\n招式命中敌人时，少量回复生命值。",
+      "parameterIds": ["1531004"],
+      "sourceExpression": "{Skill:1531004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.06,
+        "growth": 0.188
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.635,
+        "growth": 0.075
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0009:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0009:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.06,
+                  "growth": 0.188
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531004-四段"
+    },
+    {
+      "actionId": "action:agent:1531:action:0010",
+      "branchId": "agent:1531:branch:basic-4",
+      "name": "普通攻击：最高马力星光",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:sbilly-basic-ms321kv5"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[决意]足够时，长按  发动：\n对前方发动摩托突击，突击结束后打出激光束，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531010"],
+      "sourceExpression": "{Skill:1531010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 10.432,
+        "growth": 0.949
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.411,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0010:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0010:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 10.432,
+                  "growth": 0.949
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531010-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0011",
+      "branchId": "agent:1531:branch:chain-3",
+      "name": "连携技：骑士漫步",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前方进行多段攻击，造成大量物理伤害；\n招式发动时，回复15点[决意]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531015"],
+      "sourceExpression": "{Skill:1531015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.629,
+        "growth": 0.603
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.622,
+        "growth": 0.12
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0011:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0011:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.629,
+                  "growth": 0.603
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531015-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0012",
+      "branchId": "agent:1531:branch:chain-4",
+      "name": "终结技：骑士飞踢",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n跃至空中朝目标进行飞踢攻击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531016"],
+      "sourceExpression": "{Skill:1531016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.921,
+        "growth": 1.448
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 4.492,
+        "growth": 0.205
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0012:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0012:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.921,
+                  "growth": 1.448
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531016-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0013",
+      "branchId": "agent:1531:branch:dodge-6",
+      "name": "冲刺攻击：星-徽-惩-戒",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前进行快速斩击，造成物理伤害。",
+      "parameterIds": ["1531012"],
+      "sourceExpression": "{Skill:1531012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.451,
+        "growth": 0.041
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.239,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0013:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0013:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.451,
+                  "growth": 0.041
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531012-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0014",
+      "branchId": "agent:1531:branch:dodge-7",
+      "name": "闪避反击：决斗之王",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n向前使用手炮轰击，造成物理伤害；\n若通过[极限闪避]发动该招式，则该招式命中敌人时，回复自身10%生命值上限的生命值，并可以衔接第四段[普通攻击：骑士斗技]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531013"],
+      "sourceExpression": "{Skill:1531013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.195,
+        "growth": 0.109
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.973,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0014:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0014:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.195,
+                  "growth": 0.109
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531013-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0015",
+      "branchId": "agent:1531:branch:dodge-8",
+      "name": "闪避反击：尾焰全旋",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
+        }
+      ],
+      "description": "[闪避：银河横行]期间触发[极限闪避]时自动发动：\n旋转摩托对周围敌人造成物理伤害；\n招式发动后，自动衔接[强化特殊技：孤轮特技]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531014"],
+      "sourceExpression": "{Skill:1531014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.987,
+        "growth": 0.181
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.87,
+        "growth": 0.085
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0015:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0015:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.987,
+                  "growth": 0.181
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531014-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0016",
+      "branchId": "agent:1531:branch:special-6",
+      "name": "特殊技：动力压制",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "自身生命值大于25%时，点按  发动：\n消耗等同于自身16%生命值上限的生命值，召出摩托快速撞向敌人，持续造成物理伤害；\n招式发动短时间内，若为当前操作中的角色时受到敌人攻击，则会触发格挡，免疫该次攻击，并回复5点[决意]；\n触发格挡后，立即衔接[强化特殊技：孤轮特技]；\n招式持续攻击一段时间后会自动衔接[强化特殊技：孤轮特技]；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1531006"],
+      "sourceExpression": "{Skill:1531006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.52,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.1,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0016:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0016:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.52,
+                  "growth": 0.048
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531006-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0017",
+      "branchId": "agent:1531:branch:special-7",
+      "name": "特殊技：脱缰",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "[闪避：银河横行]中断时自动发动：\n将摩托车踢向敌人，造成物理伤害；\n招式发动后，可以衔接[闪避反击：决斗之王]；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1531007"],
+      "sourceExpression": "{Skill:1531007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.721,
+        "growth": 0.066
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.587,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0017:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0017:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.721,
+                  "growth": 0.066
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531007-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0018",
+      "branchId": "agent:1531:branch:special-8",
+      "name": "强化特殊技：孤轮特技",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:sbilly-special-ms324f3w"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "[特殊技：动力压制]达到最大攻击时长或触发格挡时自动发动：\n将摩托车抬起攻击敌人，造成物理伤害；\n招式命中敌人后，额外回复8点[决意]；\n招式发动后，若闪能足够，点按或长按  可以衔接[强化特殊技：摇曳步伐]；\n招式动作结束后，自动衔接[特殊技：脱缰]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531008"],
+      "sourceExpression": "{Skill:1531008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.897,
+        "growth": 0.355
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.393,
+        "growth": 0.064
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0018:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0018:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.897,
+                  "growth": 0.355
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531008-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0019",
+      "branchId": "agent:1531:branch:special-9",
+      "name": "强化特殊技：抓地轮毂",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "闪能足够时，长按  发动：\n使用摩托下砸，造成物理伤害；\n招式发动时，回复自身30%生命值上限的生命值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531009"],
+      "sourceExpression": "{Skill:1531009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 9.299,
+        "growth": 0.846
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 7.954,
+        "growth": 0.362
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0019:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0019:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 9.299,
+                  "growth": 0.846
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531009-main"
+    },
+    {
+      "actionId": "action:agent:1531:action:0020",
+      "branchId": "agent:1531:branch:special-10",
+      "name": "强化特殊技：摇曳步伐",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1531/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "发动[强化特殊技：孤轮特技]后，且闪能足够时，点按或长按  发动：\n使用摩托和手炮进行混合攻击，造成物理伤害；\n招式发动时，回复自身15%生命值上限的生命值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1531011"],
+      "sourceExpression": "{Skill:1531011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 9.59,
+        "growth": 0.872
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 8.24,
+        "growth": 0.375
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1531:action:0020:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1531:action:0020:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 9.59,
+                  "growth": 0.872
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sbilly-nk-1531011-main"
+    }
+  ]
+}

@@ -60,6 +60,8 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
   "quick-assist",
   "defensive-assist",
   "evasive-assist",
+  "assist-follow-up",
+  "uncategorized",
 ]
 
 export const ENTRY_ACTIONS = [

@@ -1,0 +1,1210 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1321",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1321:action:0001",
+      "branchId": "agent:1321:branch:assist-4",
+      "name": "快速支援：烈锋",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n挥动[月辉丝·弦]斩击周围敌人，造成火属性伤害；\n攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321017"],
+      "sourceExpression": "{Skill:1321017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.771,
+        "growth": 0.071
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.771,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.771,
+                  "growth": 0.071
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321017-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0002",
+      "branchId": "agent:1321:branch:assist-5",
+      "name": "招架支援：静默掩护",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321018"],
+      "sourceExpression": "{Skill:1321018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1321:action:0003",
+      "branchId": "agent:1321:branch:assist-5",
+      "name": "招架支援：静默掩护",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321019"],
+      "sourceExpression": "{Skill:1321019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1321:action:0004",
+      "branchId": "agent:1321:branch:assist-5",
+      "name": "招架支援：静默掩护",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321020"],
+      "sourceExpression": "{Skill:1321020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1321:action:0005",
+      "branchId": "agent:1321:branch:assist-6",
+      "name": "支援突击：轨迹干涉",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n挥动[月辉丝·弦]进行斩击，随后在前方引发爆炸，造成火属性伤害；\n攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321021"],
+      "sourceExpression": "{Skill:1321021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.916,
+        "growth": 0.266
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.49,
+        "growth": 0.114
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.916,
+                  "growth": 0.266
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321021-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0006",
+      "branchId": "agent:1321:branch:basic-5",
+      "name": "普通攻击：割弦",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害；\n第五段攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]。",
+      "parameterIds": ["1321001"],
+      "sourceExpression": "{Skill:1321001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.512,
+        "growth": 0.047
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.256,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-evelyn-nk-1321001-一段"
+    },
+    {
+      "actionId": "action:agent:1321:action:0007",
+      "branchId": "agent:1321:branch:basic-5",
+      "name": "普通攻击：割弦",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害；\n第五段攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]。",
+      "parameterIds": ["1321002"],
+      "sourceExpression": "{Skill:1321002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.621,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.538,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-evelyn-nk-1321002-二段"
+    },
+    {
+      "actionId": "action:agent:1321:action:0008",
+      "branchId": "agent:1321:branch:basic-5",
+      "name": "普通攻击：割弦",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害；\n第五段攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]。",
+      "parameterIds": ["1321003"],
+      "sourceExpression": "{Skill:1321003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.782,
+        "growth": 0.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.621,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-evelyn-nk-1321003-三段"
+    },
+    {
+      "actionId": "action:agent:1321:action:0009",
+      "branchId": "agent:1321:branch:basic-5",
+      "name": "普通攻击：割弦",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害；\n第五段攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]。",
+      "parameterIds": ["1321004"],
+      "sourceExpression": "{Skill:1321004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.867,
+        "growth": 0.17
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.53,
+        "growth": 0.07
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-evelyn-nk-1321004-四段"
+    },
+    {
+      "actionId": "action:agent:1321:action:0010",
+      "branchId": "agent:1321:branch:basic-5",
+      "name": "普通攻击：割弦",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害；\n第五段攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]。",
+      "parameterIds": ["1321005"],
+      "sourceExpression": "{Skill:1321005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.234,
+        "growth": 0.204
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.683,
+        "growth": 0.077
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-evelyn-nk-1321005-五段"
+    },
+    {
+      "actionId": "action:agent:1321:action:0011",
+      "branchId": "agent:1321:branch:basic-6",
+      "name": "普通攻击：绞勒式·I型",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "[燎火]大于等于50%时，长按  或  发动：\n消耗50%[燎火]，使用[月辉丝·弦]进行斩击，造成火属性伤害；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动后，累积1点[燎索点]。",
+      "parameterIds": ["1321006"],
+      "sourceExpression": "{Skill:1321006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.264,
+        "growth": 0.206
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.211,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0011:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.264,
+                  "growth": 0.206
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321006-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0012",
+      "branchId": "agent:1321:branch:basic-7",
+      "name": "普通攻击：绞勒式·II型",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "[燎火]大于等于50%时，[普通攻击：绞勒式·I型]发动后，继续长按   或  发动：\n消耗50%[燎火]，使用[月辉丝·弦]进行追击，造成火属性伤害；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动后，累积1点[燎索点]。",
+      "parameterIds": ["1321007"],
+      "sourceExpression": "{Skill:1321007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.452,
+        "growth": 0.223
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.248,
+        "growth": 0.057
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.452,
+                  "growth": 0.223
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321007-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0013",
+      "branchId": "agent:1321:branch:chain-4",
+      "name": "连携技：月辉丝·绊",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n使用复数[月辉丝·弦]连续斩击前方范围内敌人并引爆，造成大量火属性伤害；\n攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321015"],
+      "sourceExpression": "{Skill:1321015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.293,
+        "growth": 0.754
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.366,
+        "growth": 0.108
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0013:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.293,
+                  "growth": 0.754
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321015-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0014",
+      "branchId": "agent:1321:branch:chain-5",
+      "name": "终结技：月辉丝·弦音",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/chain/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n使用复数[月辉丝·弦]连续斩击前方范围内敌人并引爆，造成大量火属性伤害；\n招式发动时，伊芙琳将脱掉风衣，并进入[焰舞觉醒]状态，持续整场战斗，[焰舞觉醒]状态下，伊芙琳消耗[燎索点]发动[连携技：月辉丝·绊]时，将会保留1点[燎索点]；\n攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n招式发动期间拥有无敌效果；\n招式发动后，累积1点[燎索点]。",
+      "parameterIds": ["1321016"],
+      "sourceExpression": "{Skill:1321016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.885,
+        "growth": 1.808
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.604,
+        "growth": 0.119
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0014:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.885,
+                  "growth": 1.808
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1321:action:0015",
+      "branchId": "agent:1321:branch:chain-6",
+      "name": "终结技：月辉丝·弦影",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/chain/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "[焰舞觉醒]状态下，喧响等级达到[极]时，点按  发动：\n使用复数[月辉丝·弦]连续斩击前方范围内敌人并引爆，造成大量火属性伤害；\n攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n招式发动期间拥有无敌效果；\n招式发动后，累积1点[燎索点]。",
+      "parameterIds": ["1321016"],
+      "sourceExpression": "{Skill:1321016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.885,
+        "growth": 1.808
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.604,
+        "growth": 0.119
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0015:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.885,
+                  "growth": 1.808
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321016-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0016",
+      "branchId": "agent:1321:branch:dodge-4",
+      "name": "冲刺攻击：穿梭潜袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n踢击前方敌人，造成物理伤害；",
+      "parameterIds": ["1321013"],
+      "sourceExpression": "{Skill:1321013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.605,
+        "growth": 0.055
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.303,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.605,
+                  "growth": 0.055
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321013-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0017",
+      "branchId": "agent:1321:branch:dodge-5",
+      "name": "闪避反击：绞缢反制",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n挥动[月辉丝·弦]斩击周围敌人，造成火属性伤害；\n攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321014"],
+      "sourceExpression": "{Skill:1321014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.102,
+        "growth": 0.192
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.871,
+        "growth": 0.086
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.102,
+                  "growth": 0.192
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321014-main"
+    },
+    {
+      "actionId": "action:agent:1321:action:0018",
+      "branchId": "agent:1321:branch:special-4",
+      "name": "特殊技：锁系控位",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "未进入[牵缠禁制]前，点按  或   发动：\n使用[月辉丝·弦]牵引敌人并突进踢击，造成火属性伤害；\n攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1321008"],
+      "sourceExpression": "{Skill:1321008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.523,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.523,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.523,
+                  "growth": 0.048
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321008-一段"
+    },
+    {
+      "actionId": "action:agent:1321:action:0019",
+      "branchId": "agent:1321:branch:special-5",
+      "name": "特殊技：束裂式·I型",
+      "rowName": "缠绕伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "进入[牵缠禁制]后，点按或长按  发动：\n以被[牵缠禁制]的目标为中心，牵引周围敌人并引爆，造成火属性伤害，引爆后将退出[牵缠禁制]；\n招式发动时，可以闪避敌人的攻击，若成功触发[极限闪避]，将额外累积25%[燎火]；\n牵引周围敌人后，点按  ，可以取消引爆，直接衔接第三段[普通攻击]；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1321009"],
+      "sourceExpression": "{Skill:1321009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.404,
+        "growth": 0.037
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.404,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.404,
+                  "growth": 0.037
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321009-缠绕"
+    },
+    {
+      "actionId": "action:agent:1321:action:0020",
+      "branchId": "agent:1321:branch:special-5",
+      "name": "特殊技：束裂式·I型",
+      "rowName": "引爆伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/special/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "进入[牵缠禁制]后，点按或长按  发动：\n以被[牵缠禁制]的目标为中心，牵引周围敌人并引爆，造成火属性伤害，引爆后将退出[牵缠禁制]；\n招式发动时，可以闪避敌人的攻击，若成功触发[极限闪避]，将额外累积25%[燎火]；\n牵引周围敌人后，点按  ，可以取消引爆，直接衔接第三段[普通攻击]；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1321010"],
+      "sourceExpression": "{Skill:1321010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.34,
+        "growth": 0.031
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.34,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.34,
+                  "growth": 0.031
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321010-引爆"
+    },
+    {
+      "actionId": "action:agent:1321:action:0021",
+      "branchId": "agent:1321:branch:special-6",
+      "name": "强化特殊技：束裂式·终型",
+      "rowName": "缠绕伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "进入[牵缠禁制]后，能量足够时，点按或长按  发动：\n以被[牵缠禁制]的目标为中心，牵引周围敌人并引爆，造成大量火属性伤害，引爆后将退出[牵缠禁制]；\n招式发动时，可以闪避敌人的攻击，若成功触发[极限闪避]，将额外累积25%[燎火]；\n牵引周围敌人后，点按  ，可以取消引爆，直接衔接第三段[普通攻击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321011"],
+      "sourceExpression": "{Skill:1321011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.412,
+        "growth": 0.492
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.371,
+        "growth": 0.199
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0021:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.412,
+                  "growth": 0.492
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321011-缠绕"
+    },
+    {
+      "actionId": "action:agent:1321:action:0022",
+      "branchId": "agent:1321:branch:special-6",
+      "name": "强化特殊技：束裂式·终型",
+      "rowName": "引爆伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1321/details.zh.json",
+        "pointer": "/skill/special/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1321/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "进入[牵缠禁制]后，能量足够时，点按或长按  发动：\n以被[牵缠禁制]的目标为中心，牵引周围敌人并引爆，造成大量火属性伤害，引爆后将退出[牵缠禁制]；\n招式发动时，可以闪避敌人的攻击，若成功触发[极限闪避]，将额外累积25%[燎火]；\n牵引周围敌人后，点按  ，可以取消引爆，直接衔接第三段[普通攻击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1321012"],
+      "sourceExpression": "{Skill:1321012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.596,
+        "growth": 0.055
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1321:action:0022:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1321:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.596,
+                  "growth": 0.055
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-evelyn-nk-1321012-引爆"
+    }
+  ]
+}

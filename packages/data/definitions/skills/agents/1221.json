@@ -1,0 +1,1322 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1221",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1221:action:0001",
+      "branchId": "agent:1221:branch:assist-4",
+      "name": "快速支援：风华斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击，造成电属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "parameterIds": ["1221017"],
+      "sourceExpression": "{Skill:1221017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.936,
+        "growth": 0.086
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.842,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0001:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.936,
+                  "growth": 0.086
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221017-main"
+    },
+    {
+      "actionId": "action:agent:1221:action:0002",
+      "branchId": "agent:1221:branch:assist-5",
+      "name": "招架支援：流光反",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1221018"],
+      "sourceExpression": "{Skill:1221018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.442,
+        "growth": 0.111
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1221:action:0003",
+      "branchId": "agent:1221:branch:assist-5",
+      "name": "招架支援：流光反",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1221019"],
+      "sourceExpression": "{Skill:1221019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.086,
+        "growth": 0.141
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1221:action:0004",
+      "branchId": "agent:1221:branch:assist-5",
+      "name": "招架支援：流光反",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1221020"],
+      "sourceExpression": "{Skill:1221020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.502,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1221:action:0005",
+      "branchId": "agent:1221:branch:assist-6",
+      "name": "支援突击：飞絮刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n切换当前架势，对前方敌人快速发动多段斩击，造成电属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "parameterIds": ["1221021"],
+      "sourceExpression": "{Skill:1221021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.071,
+        "growth": 0.371
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.206,
+        "growth": 0.146
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0005:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.071,
+                  "growth": 0.371
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221021-main"
+    },
+    {
+      "actionId": "action:agent:1221:action:0006",
+      "branchId": "agent:1221:branch:basic-2",
+      "name": "架势：上弦",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221001"],
+      "sourceExpression": "{Skill:1221001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.566,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.278,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0006:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.566,
+                  "growth": 0.052
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221001-一段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0007",
+      "branchId": "agent:1221:branch:basic-2",
+      "name": "架势：上弦",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221002"],
+      "sourceExpression": "{Skill:1221002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.997,
+        "growth": 0.091
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.681,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0007:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.997,
+                  "growth": 0.091
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221002-二段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0008",
+      "branchId": "agent:1221:branch:basic-2",
+      "name": "架势：上弦",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221003"],
+      "sourceExpression": "{Skill:1221003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.131,
+        "growth": 0.103
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.694,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0008:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.131,
+                  "growth": 0.103
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221003-三段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0009",
+      "branchId": "agent:1221:branch:basic-2",
+      "name": "架势：上弦",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221004"],
+      "sourceExpression": "{Skill:1221004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.266,
+        "growth": 0.116
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.776,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0009:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.266,
+                  "growth": 0.116
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221004-四段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0010",
+      "branchId": "agent:1221:branch:basic-2",
+      "name": "架势：上弦",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/4"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221005"],
+      "sourceExpression": "{Skill:1221005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.369,
+        "growth": 0.216
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.452,
+        "growth": 0.066
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0010:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.369,
+                  "growth": 0.216
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221005-五段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0011",
+      "branchId": "agent:1221:branch:basic-3",
+      "name": "架势：下弦",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221006"],
+      "sourceExpression": "{Skill:1221006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.131,
+        "growth": 0.103
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.555,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0011:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.131,
+                  "growth": 0.103
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221006-一段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0012",
+      "branchId": "agent:1221:branch:basic-3",
+      "name": "架势：下弦",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221007"],
+      "sourceExpression": "{Skill:1221007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.292,
+        "growth": 0.118
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.931,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.292,
+                  "growth": 0.118
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221007-二段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0013",
+      "branchId": "agent:1221:branch:basic-3",
+      "name": "架势：下弦",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221008"],
+      "sourceExpression": "{Skill:1221008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.728,
+        "growth": 0.067
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.446,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.728,
+                  "growth": 0.067
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221008-三段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0014",
+      "branchId": "agent:1221:branch:basic-3",
+      "name": "架势：下弦",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221009"],
+      "sourceExpression": "{Skill:1221009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.077,
+        "growth": 0.098
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.661,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0014:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.077,
+                  "growth": 0.098
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221009-四段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0015",
+      "branchId": "agent:1221:branch:basic-3",
+      "name": "架势：下弦",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1221010"],
+      "sourceExpression": "{Skill:1221010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.718,
+        "growth": 0.248
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.667,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0015:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.718,
+                  "growth": 0.248
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221010-五段"
+    },
+    {
+      "actionId": "action:agent:1221:action:0016",
+      "branchId": "agent:1221:branch:chain-3",
+      "name": "连携技：星月相随",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n切换当前架势，并对前方敌人发动强力斩击，造成大量电属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "parameterIds": ["1221015"],
+      "sourceExpression": "{Skill:1221015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.931,
+        "growth": 0.54
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.783,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0016:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.931,
+                  "growth": 0.54
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221015-main"
+    },
+    {
+      "actionId": "action:agent:1221:action:0017",
+      "branchId": "agent:1221:branch:chain-4",
+      "name": "终结技：雷影天华",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n激发自身能力，在极短时间内对前方大范围敌人发动强力斩击，并追加落雷攻击，造成大量电属性伤害；\n落雷攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "parameterIds": ["1221016"],
+      "sourceExpression": "{Skill:1221016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.118,
+        "growth": 1.375
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.975,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0017:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.118,
+                  "growth": 1.375
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221016-main"
+    },
+    {
+      "actionId": "action:agent:1221:action:0018",
+      "branchId": "agent:1221:branch:chain-4",
+      "name": "终结技：雷影天华",
+      "rowName": "额外附加伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n激发自身能力，在极短时间内对前方大范围敌人发动强力斩击，并追加落雷攻击，造成大量电属性伤害；\n落雷攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "额外结算依赖特殊机制，不能直接将此文本倍率当作普通攻击力倍率。"
+          },
+          {
+            "code": "unsupported-expression",
+            "message": "尚未支持的来源表达式：{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1221:action:0019",
+      "branchId": "agent:1221:branch:dodge-4",
+      "name": "冲刺攻击：飞掠",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行斩击，造成物理伤害。",
+      "parameterIds": ["1221013"],
+      "sourceExpression": "{Skill:1221013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.504,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.454,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.504,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221013-main"
+    },
+    {
+      "actionId": "action:agent:1221:action:0020",
+      "branchId": "agent:1221:branch:dodge-5",
+      "name": "闪避反击：疾反",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动斩击，造成电属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "parameterIds": ["1221014"],
+      "sourceExpression": "{Skill:1221014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.316,
+        "growth": 0.211
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.832,
+        "growth": 0.084
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0020:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.316,
+                  "growth": 0.211
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221014-main"
+    },
+    {
+      "actionId": "action:agent:1221:action:0021",
+      "branchId": "agent:1221:branch:special-3",
+      "name": "特殊技：流转",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行斩击，造成电属性伤害，并切换当前架势；\n招式发动期间抗打断等级提升；\n若衔接在[普通攻击]第三、四、五段之后发动，则能够触发[快速流转]，以更快的速度进行斩击并切换当前架势；\n[快速流转]发动期间可以格挡敌人的攻击；\n触发[快速流转]后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "parameterIds": ["1221011"],
+      "sourceExpression": "{Skill:1221011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.174,
+        "growth": 0.107
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.057,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0021:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.174,
+                  "growth": 0.107
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221011-main"
+    },
+    {
+      "actionId": "action:agent:1221:action:0022",
+      "branchId": "agent:1221:branch:special-4",
+      "name": "强化特殊技：月华流转",
+      "rowName": "突刺攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，长按  发动：\n积蓄力量向前快速突刺，随后发动下落攻击，造成大量电属性伤害；\n突刺发动时，月城柳会切换当前架势，并进入[森罗万象]状态，持续15秒，状态持续期间，从[普通攻击]第五段或其他招式衔接后继[普通攻击]时，将直接从第三段[普通攻击] 起手；\n下落攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1221022"],
+      "sourceExpression": "{Skill:1221022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.638,
+        "growth": 0.149
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.271,
+        "growth": 0.058
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0022:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.638,
+                  "growth": 0.149
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221022-突刺攻击"
+    },
+    {
+      "actionId": "action:agent:1221:action:0023",
+      "branchId": "agent:1221:branch:special-4",
+      "name": "强化特殊技：月华流转",
+      "rowName": "下落攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/special/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，长按  发动：\n积蓄力量向前快速突刺，随后发动下落攻击，造成大量电属性伤害；\n突刺发动时，月城柳会切换当前架势，并进入[森罗万象]状态，持续15秒，状态持续期间，从[普通攻击]第五段或其他招式衔接后继[普通攻击]时，将直接从第三段[普通攻击] 起手；\n下落攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1221023"],
+      "sourceExpression": "{Skill:1221023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.778,
+        "growth": 0.344
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.096,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1221:action:0023:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1221:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.778,
+                  "growth": 0.344
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-yanagi-nk-1221023-下落攻击"
+    },
+    {
+      "actionId": "action:agent:1221:action:0024",
+      "branchId": "agent:1221:branch:special-4",
+      "name": "强化特殊技：月华流转",
+      "rowName": "额外附加伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1221/details.zh.json",
+        "pointer": "/skill/special/description/3/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，长按  发动：\n积蓄力量向前快速突刺，随后发动下落攻击，造成大量电属性伤害；\n突刺发动时，月城柳会切换当前架势，并进入[森罗万象]状态，持续15秒，状态持续期间，从[普通攻击]第五段或其他招式衔接后继[普通攻击]时，将直接从第三段[普通攻击] 起手；\n下落攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "额外结算依赖特殊机制，不能直接将此文本倍率当作普通攻击力倍率。"
+          },
+          {
+            "code": "unsupported-expression",
+            "message": "尚未支持的来源表达式：{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    }
+  ]
+}

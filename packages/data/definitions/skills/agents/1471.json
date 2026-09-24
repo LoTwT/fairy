@@ -1,0 +1,1642 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1471",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1471:action:0001",
+      "branchId": "agent:1471:branch:assist-5",
+      "name": "快速支援：磐岩",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续攻击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471022"],
+      "sourceExpression": "{Skill:1471022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.734,
+        "growth": 0.067
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.459,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0001:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0001:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.734,
+                  "growth": 0.067
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471022-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0002",
+      "branchId": "agent:1471:branch:assist-6",
+      "name": "招架支援：铁壁",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471023"],
+      "sourceExpression": "{Skill:1471023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1471:action:0003",
+      "branchId": "agent:1471:branch:assist-6",
+      "name": "招架支援：铁壁",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471024"],
+      "sourceExpression": "{Skill:1471024, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1471:action:0004",
+      "branchId": "agent:1471:branch:assist-6",
+      "name": "招架支援：铁壁",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471025"],
+      "sourceExpression": "{Skill:1471025, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1471:action:0005",
+      "branchId": "agent:1471:branch:assist-7",
+      "name": "支援突击：昂霄",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n快速突进并发动攻击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471026"],
+      "sourceExpression": "{Skill:1471026, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.416,
+        "growth": 0.22
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.586,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0005:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0005:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.416,
+                  "growth": 0.22
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471026-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0006",
+      "branchId": "agent:1471:branch:assist-8",
+      "name": "支援突击：冲霄",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "通过[闪避：不动如山]成功招架敌人攻击后，点按  发动：\n快速突进并发动攻击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471029"],
+      "sourceExpression": "{Skill:1471029, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.216,
+        "growth": 0.202
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.384,
+        "growth": 0.109
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0006:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0006:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.216,
+                  "growth": 0.202
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471029-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0007",
+      "branchId": "agent:1471:branch:basic-7",
+      "name": "普通攻击：峥嵘",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，打断等级提升。",
+      "parameterIds": ["1471001"],
+      "sourceExpression": "{Skill:1471001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.396,
+        "growth": 0.036
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.371,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0007:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0007:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.396,
+                  "growth": 0.036
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471001-一段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0008",
+      "branchId": "agent:1471:branch:basic-7",
+      "name": "普通攻击：峥嵘",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，打断等级提升。",
+      "parameterIds": ["1471002"],
+      "sourceExpression": "{Skill:1471002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.498,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.455,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0008:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0008:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.498,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471002-二段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0009",
+      "branchId": "agent:1471:branch:basic-7",
+      "name": "普通攻击：峥嵘",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，打断等级提升。",
+      "parameterIds": ["1471003"],
+      "sourceExpression": "{Skill:1471003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.013,
+        "growth": 0.093
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.986,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0009:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0009:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.013,
+                  "growth": 0.093
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471003-三段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0010",
+      "branchId": "agent:1471:branch:basic-7",
+      "name": "普通攻击：峥嵘",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，打断等级提升。",
+      "parameterIds": ["1471004"],
+      "sourceExpression": "{Skill:1471004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.163,
+        "growth": 0.106
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.14,
+        "growth": 0.052
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0010:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0010:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.163,
+                  "growth": 0.106
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471004-四段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0011",
+      "branchId": "agent:1471:branch:basic-8",
+      "name": "普通攻击：崔巍",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，抗打断等级提升。",
+      "parameterIds": ["1471005"],
+      "sourceExpression": "{Skill:1471005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.528,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.495,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0011:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0011:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.528,
+                  "growth": 0.048
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471005-一段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0012",
+      "branchId": "agent:1471:branch:basic-8",
+      "name": "普通攻击：崔巍",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，抗打断等级提升。",
+      "parameterIds": ["1471006"],
+      "sourceExpression": "{Skill:1471006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.704,
+        "growth": 0.064
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.643,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0012:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0012:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.704,
+                  "growth": 0.064
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471006-二段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0013",
+      "branchId": "agent:1471:branch:basic-8",
+      "name": "普通攻击：崔巍",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，抗打断等级提升。",
+      "parameterIds": ["1471007"],
+      "sourceExpression": "{Skill:1471007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.355,
+        "growth": 0.124
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.319,
+        "growth": 0.06
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0013:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0013:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.355,
+                  "growth": 0.124
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471007-三段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0014",
+      "branchId": "agent:1471:branch:basic-8",
+      "name": "普通攻击：崔巍",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害；\n招式发动期间，抗打断等级提升。",
+      "parameterIds": ["1471008"],
+      "sourceExpression": "{Skill:1471008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.924,
+        "growth": 0.084
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.918,
+        "growth": 0.042
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0014:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0014:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.924,
+                  "growth": 0.084
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471008-四段"
+    },
+    {
+      "actionId": "action:agent:1471:action:0015",
+      "branchId": "agent:1471:branch:basic-9",
+      "name": "普通攻击：焚身",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "不处于[怒相]状态且拥有120点[嗔火]时，长按  发动：\n对周身敌人造成火属性伤害，随后进入[怒相]状态。",
+      "parameterIds": ["1471027"],
+      "sourceExpression": "{Skill:1471027, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.106,
+        "growth": 0.101
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.063,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0015:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0015:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.106,
+                  "growth": 0.101
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471027-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0016",
+      "branchId": "agent:1471:branch:basic-10",
+      "name": "普通攻击：倾山",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:banyue-basic-ms32zs37"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/4/desc"
+        }
+      ],
+      "description": "当般岳处于[怒相]状态时，长按  消耗120点[嗔火]发动：\n般岳轰出巨大的山体攻击敌人，造成大量火属性伤害；\n发动该招式后，般岳退出[怒相]状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471009"],
+      "sourceExpression": "{Skill:1471009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 8.698,
+        "growth": 0.791
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.018,
+        "growth": 0.092
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0016:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0016:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 8.698,
+                  "growth": 0.791
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471009-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0017",
+      "branchId": "agent:1471:branch:basic-11",
+      "name": "普通攻击：摧岳",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:banyue-basic-ms32zwl2"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/basic/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/basic/description/5/desc"
+        }
+      ],
+      "description": "当般岳处于[怒相]状态时，通过普通攻击派生或者快速键入指令的方式释放两次不同的[强化特殊技]后，长按  发动：\n般岳向前方打出珠子禁锢敌人造成大量火属性伤害；\n随后般岳将自动释放[普通攻击：倾山]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471010"],
+      "sourceExpression": "{Skill:1471010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.783,
+        "growth": 0.344
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.522,
+        "growth": 0.07
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0017:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0017:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.783,
+                  "growth": 0.344
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471010-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0018",
+      "branchId": "agent:1471:branch:chain-3",
+      "name": "连携技：怒焰",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前方发动大范围攻击，造成大量火属性伤害；\n若般岳的[嗔火]大于120点，攻击结束后般岳会自动进入[怒相]状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471020"],
+      "sourceExpression": "{Skill:1471020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.609,
+        "growth": 0.51
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.623,
+        "growth": 0.12
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0018:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0018:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.609,
+                  "growth": 0.51
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471020-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0019",
+      "branchId": "agent:1471:branch:chain-4",
+      "name": "终结技：撼天动地",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前方发动大范围攻击，造成大量火属性伤害；\n若般岳的[嗔火]大于120点，攻击结束后般岳会自动进入[怒相]状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471021"],
+      "sourceExpression": "{Skill:1471021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.984,
+        "growth": 1.454
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.677,
+        "growth": 0.122
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0019:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0019:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.984,
+                  "growth": 1.454
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471021-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0020",
+      "branchId": "agent:1471:branch:dodge-6",
+      "name": "闪避：不动如山",
+      "rowName": "失衡倍率",
+      "levelGroup": "dodge",
+      "skillCategory": null,
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/dodge/description/0/desc"
+        }
+      ],
+      "description": "攻击过程中不拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}点按  发动：\n般岳进入防御姿态，期间如果受到敌人攻击，会招架敌人攻击，累积失衡值；\n如果在招式发动的瞬间受到敌人的攻击，则可以触发完美格挡；\n成功招架敌人攻击时拥有无敌效果。",
+      "parameterIds": ["1471011"],
+      "sourceExpression": "{Skill:1471011, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.953,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1471:action:0021",
+      "branchId": "agent:1471:branch:dodge-7",
+      "name": "冲刺攻击：飞砂",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "闪避时，点按  或在[闪避：叫阵]时长按  发动：\n向前方打出珠子，造成火属性伤害；\n招式发动后可直接衔接[普通攻击：峥嵘]的第二段攻击或[普通攻击：崔巍]的第二段攻击。",
+      "parameterIds": ["1471018"],
+      "sourceExpression": "{Skill:1471018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.397,
+        "growth": 0.037
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.248,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0021:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0021:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.397,
+                  "growth": 0.037
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471018-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0022",
+      "branchId": "agent:1471:branch:dodge-8",
+      "name": "闪避反击：扬砾",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
+        }
+      ],
+      "description": "通过[闪避：越岭]触发[极限闪避]后，点按  或通过[闪避：叫阵]触发[极限闪避]后，长按  发动：\n对前方敌人发动攻击，造成火属性伤害；\n招式发动后可直接衔接[普通攻击：峥嵘]的第三段攻击或[普通攻击：崔巍]的第三段攻击；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471019"],
+      "sourceExpression": "{Skill:1471019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.949,
+        "growth": 0.178
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.128,
+        "growth": 0.097
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0022:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0022:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.949,
+                  "growth": 0.178
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471019-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0023",
+      "branchId": "agent:1471:branch:special-8",
+      "name": "强化特殊技：地动",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "闪能足够时，可通过以下三种方式发动：\n在第三段或第四段[普通攻击：峥嵘]后点按  发动；\n在[支援突击]、[闪避反击]、[快速支援]后长按  发动；\n在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令    发动；\n般岳连续重击地面，对敌人造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471013"],
+      "sourceExpression": "{Skill:1471013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.548,
+        "growth": 0.232
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.476,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0023:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0023:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.548,
+                  "growth": 0.232
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471013-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0024",
+      "branchId": "agent:1471:branch:special-9",
+      "name": "强化特殊技：山摇",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:banyue-special-ms32zcnw"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "闪能足够时，可通过以下两种方式发动：\n在第一段或第二段[普通攻击：崔巍]后点按  发动；\n在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令    发动；\n般岳掀出山体，对敌人造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471012"],
+      "sourceExpression": "{Skill:1471012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.713,
+        "growth": 0.156
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.571,
+        "growth": 0.072
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0024:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0024:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.713,
+                  "growth": 0.156
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471012-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0025",
+      "branchId": "agent:1471:branch:special-10",
+      "name": "强化特殊技：论道",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "闪能足够时，可通过以下三种方式发动：\n在第三段或第四段[普通攻击：崔巍]后点按  发动；\n在[支援突击]、[闪避反击]、[快速支援]后长按  发动；\n在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令    发动；\n般岳扔出珠子对前方敌人造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471015"],
+      "sourceExpression": "{Skill:1471015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.624,
+        "growth": 0.148
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.475,
+        "growth": 0.068
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0025:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0025:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.624,
+                  "growth": 0.148
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471015-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0026",
+      "branchId": "agent:1471:branch:special-11",
+      "name": "强化特殊技：狮子吼",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:banyue-special-ms32yx5u"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/special/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "闪能足够时，可通过以下两种方式发动：\n在第一段或第二段[普通攻击：峥嵘]后点按  发动；\n在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令    发动；\n般岳向前方发动音波攻击，对敌人造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471014"],
+      "sourceExpression": "{Skill:1471014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.537,
+        "growth": 0.14
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.381,
+        "growth": 0.063
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0026:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0026:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.537,
+                  "growth": 0.14
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471014-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0027",
+      "branchId": "agent:1471:branch:special-12",
+      "name": "强化特殊技：山摇·怒",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:banyue-special-ms32zi9k"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/special/description/11/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "闪能足够时，在发动[强化特殊技：地动]时快速键入指令    发动：\n般岳掀出更巨大的山体，对敌人造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471017"],
+      "sourceExpression": "{Skill:1471017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.25,
+        "growth": 0.296
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.212,
+        "growth": 0.101
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0027:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0027:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.25,
+                  "growth": 0.296
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471017-main"
+    },
+    {
+      "actionId": "action:agent:1471:action:0028",
+      "branchId": "agent:1471:branch:special-13",
+      "name": "强化特殊技：狮子吼·怒",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:banyue-special-ms32z5ea"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1471/details.zh.json",
+        "pointer": "/skill/special/description/12/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1471/details.zh.json",
+          "pointer": "/skill/special/description/5/desc"
+        }
+      ],
+      "description": "闪能足够时，在发动[强化特殊技：论道]时快速键入指令    发动：\n般岳向前方发动更强力的音波攻击，对敌人造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1471016"],
+      "sourceExpression": "{Skill:1471016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.001,
+        "growth": 0.273
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.021,
+        "growth": 0.092
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1471:action:0028:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1471:action:0028:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.001,
+                  "growth": 0.273
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-banyue-nk-1471016-main"
+    }
+  ]
+}

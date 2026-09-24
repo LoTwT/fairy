@@ -1,0 +1,959 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1211",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1211:action:0001",
+      "branchId": "agent:1211:branch:assist-4",
+      "name": "快速支援：二拍的阿勒芒德",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n指派杜苏拉和安娜塔莎，向前方旋转飞出并触发爆炸，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1211019"],
+      "sourceExpression": "{Skill:1211019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.226,
+        "growth": 0.112
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.226,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0001:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.226,
+                  "growth": 0.112
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211019-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0002",
+      "branchId": "agent:1211:branch:assist-5",
+      "name": "支援突击：四拍的加沃特",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[回避支援]后，点按  发动：\n指派杜苏拉和安娜塔莎，向前方持续推进并生成涡旋电场，造成电属性伤害；\n招式发动期间，可以快速衔接[强化特殊技：笨蛋消失魔法]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1211021"],
+      "sourceExpression": "{Skill:1211021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.494,
+        "growth": 0.318
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.036,
+        "growth": 0.138
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0002:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.494,
+                  "growth": 0.318
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211021-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0003",
+      "branchId": "agent:1211:branch:basic-5",
+      "name": "普通攻击：痛打呆子",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n指派杜苏拉和安娜塔莎发动至多四段的攻击，造成物理伤害和电属性伤害；\n在杜苏拉和安娜塔莎攻击期间，丽娜执行其他行动，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1211001"],
+      "sourceExpression": "{Skill:1211001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.44,
+        "growth": 0.04
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.245,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211001-一段"
+    },
+    {
+      "actionId": "action:agent:1211:action:0004",
+      "branchId": "agent:1211:branch:basic-5",
+      "name": "普通攻击：痛打呆子",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n指派杜苏拉和安娜塔莎发动至多四段的攻击，造成物理伤害和电属性伤害；\n在杜苏拉和安娜塔莎攻击期间，丽娜执行其他行动，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1211003"],
+      "sourceExpression": "{Skill:1211003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.114,
+        "growth": 0.102
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.884,
+        "growth": 0.041
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211003-二段"
+    },
+    {
+      "actionId": "action:agent:1211:action:0005",
+      "branchId": "agent:1211:branch:basic-5",
+      "name": "普通攻击：痛打呆子",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n指派杜苏拉和安娜塔莎发动至多四段的攻击，造成物理伤害和电属性伤害；\n在杜苏拉和安娜塔莎攻击期间，丽娜执行其他行动，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1211004"],
+      "sourceExpression": "{Skill:1211004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.171,
+        "growth": 0.107
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.966,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211004-三段"
+    },
+    {
+      "actionId": "action:agent:1211:action:0006",
+      "branchId": "agent:1211:branch:basic-5",
+      "name": "普通攻击：痛打呆子",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n指派杜苏拉和安娜塔莎发动至多四段的攻击，造成物理伤害和电属性伤害；\n在杜苏拉和安娜塔莎攻击期间，丽娜执行其他行动，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1211006"],
+      "sourceExpression": "{Skill:1211006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.839,
+        "growth": 0.168
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.468,
+        "growth": 0.067
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211006-四段"
+    },
+    {
+      "actionId": "action:agent:1211:action:0007",
+      "branchId": "agent:1211:branch:basic-6",
+      "name": "普通攻击：赶走傻瓜",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  或  发动：\n召回杜苏拉和安娜塔莎，在身边回旋后进行范围攻击，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1211007"],
+      "sourceExpression": "{Skill:1211007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.151,
+        "growth": 0.287
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.151,
+        "growth": 0.144
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0007:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.151,
+                  "growth": 0.287
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211007-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0008",
+      "branchId": "agent:1211:branch:basic-7",
+      "name": "普通攻击：晨间清扫",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "当丽娜发动[强化特殊技]、[连携技]或[终结技]后，进入[一尘不染]状态，持续13秒，期间杜苏拉或安娜塔莎会每间隔2.5秒，攻击敌人1次，造成物理伤害和电属性伤害，并获得1层[惊吓]，至多获得6层[惊吓]；招式发动后重置杜苏拉和安娜塔莎离场倒计时。",
+      "parameterIds": ["1211023"],
+      "sourceExpression": "{Skill:1211023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.525,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          },
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          },
+          {
+            "code": "special-mechanic",
+            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211023-一段"
+    },
+    {
+      "actionId": "action:agent:1211:action:0009",
+      "branchId": "agent:1211:branch:basic-7",
+      "name": "普通攻击：晨间清扫",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "当丽娜发动[强化特殊技]、[连携技]或[终结技]后，进入[一尘不染]状态，持续13秒，期间杜苏拉或安娜塔莎会每间隔2.5秒，攻击敌人1次，造成物理伤害和电属性伤害，并获得1层[惊吓]，至多获得6层[惊吓]；招式发动后重置杜苏拉和安娜塔莎离场倒计时。",
+      "parameterIds": ["1211024"],
+      "sourceExpression": "{Skill:1211024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.525,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          },
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          },
+          {
+            "code": "special-mechanic",
+            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211024-二段"
+    },
+    {
+      "actionId": "action:agent:1211:action:0010",
+      "branchId": "agent:1211:branch:basic-7",
+      "name": "普通攻击：晨间清扫",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "当丽娜发动[强化特殊技]、[连携技]或[终结技]后，进入[一尘不染]状态，持续13秒，期间杜苏拉或安娜塔莎会每间隔2.5秒，攻击敌人1次，造成物理伤害和电属性伤害，并获得1层[惊吓]，至多获得6层[惊吓]；招式发动后重置杜苏拉和安娜塔莎离场倒计时。",
+      "parameterIds": ["1211025"],
+      "sourceExpression": "{Skill:1211025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.525,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          },
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          },
+          {
+            "code": "special-mechanic",
+            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211025-三段"
+    },
+    {
+      "actionId": "action:agent:1211:action:0011",
+      "branchId": "agent:1211:branch:basic-8",
+      "name": "普通攻击：午夜清扫",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "当达到6层时，杜苏拉或安娜塔莎下一次发动[普通攻击：晨间清扫]会消耗全部[惊吓]，改为发动[普通攻击：午夜清扫]，造成电属性伤害；招式发动后重置杜苏拉和安娜塔莎离场倒计时。",
+      "parameterIds": ["1211027"],
+      "sourceExpression": "{Skill:1211027, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.1,
+        "growth": 0.191
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-alexandrina-nk-1211027-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0012",
+      "branchId": "agent:1211:branch:chain-3",
+      "name": "连携技：侍者守则",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n指派杜苏拉和安娜塔莎，向前方持续推进并生成球形电场，造成大量电属性伤害；\n杜苏拉和安娜塔莎在推进期间无法响应[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]的指令，但可以通过发动[普通攻击：赶走傻瓜]将其召回丽娜身边；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]。\n",
+      "parameterIds": ["1211015"],
+      "sourceExpression": "{Skill:1211015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 10.13,
+        "growth": 0.921
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.751,
+        "growth": 0.08
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 10.13,
+                  "growth": 0.921
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211015-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0013",
+      "branchId": "agent:1211:branch:chain-4",
+      "name": "终结技：女王的侍从们",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n指派杜苏拉和安娜塔莎，向前方持续推进并发动高速回旋，造成大量电属性伤害；\n杜苏拉和安娜塔莎在推进期间无法响应[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]的指令，但可以通过发动[普通攻击：赶走傻瓜]将其召回丽娜身边；\n招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n招式发动期间拥有无敌效果；\n招式发动后，将触发[快速支援]。",
+      "parameterIds": ["1211017"],
+      "sourceExpression": "{Skill:1211017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 21.167,
+        "growth": 1.925
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.138,
+        "growth": 0.052
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 21.167,
+                  "growth": 1.925
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211017-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0014",
+      "branchId": "agent:1211:branch:dodge-4",
+      "name": "冲刺攻击：突然惊吓",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n指派杜苏拉和安娜塔莎发动穿透攻击，造成物理伤害。",
+      "parameterIds": ["1211011"],
+      "sourceExpression": "{Skill:1211011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.05,
+        "growth": 0.096
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.525,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.05,
+                  "growth": 0.096
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211011-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0015",
+      "branchId": "agent:1211:branch:dodge-5",
+      "name": "闪避反击：邦布回魂",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n指派杜苏拉和安娜塔莎，向前方旋转飞出并触发爆炸，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1211013"],
+      "sourceExpression": "{Skill:1211013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.276,
+        "growth": 0.207
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.276,
+        "growth": 0.104
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0015:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.276,
+                  "growth": 0.207
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211013-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0016",
+      "branchId": "agent:1211:branch:special-3",
+      "name": "特殊技：砸扁笨蛋",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n指派安娜塔莎发动下砸攻击，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1211008"],
+      "sourceExpression": "{Skill:1211008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.613,
+        "growth": 0.056
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.613,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0016:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.613,
+                  "growth": 0.056
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211008-main"
+    },
+    {
+      "actionId": "action:agent:1211:action:0017",
+      "branchId": "agent:1211:branch:special-4",
+      "name": "强化特殊技：笨蛋消失魔法",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1211/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1211/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n指派杜苏拉和安娜塔莎发动持续下砸攻击，造成大量电属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，将触发[快速支援]。",
+      "parameterIds": ["1211009"],
+      "sourceExpression": "{Skill:1211009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.46,
+        "growth": 0.497
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.445,
+        "growth": 0.203
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1211:action:0017:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.46,
+                  "growth": 0.497
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alexandrina-nk-1211009-main"
+    }
+  ]
+}

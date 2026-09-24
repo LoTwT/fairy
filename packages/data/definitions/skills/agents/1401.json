@@ -1,0 +1,1229 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1401",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1401:action:0001",
+      "branchId": "agent:1401:branch:assist-4",
+      "name": "快速支援：交替穿刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击和踢击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401017"],
+      "sourceExpression": "{Skill:1401017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.633,
+        "growth": 0.149
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.469,
+        "growth": 0.067
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.633,
+                  "growth": 0.149
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401017-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0002",
+      "branchId": "agent:1401:branch:assist-5",
+      "name": "招架支援：对抗防守",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401018"],
+      "sourceExpression": "{Skill:1401018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.442,
+        "growth": 0.111
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1401:action:0003",
+      "branchId": "agent:1401:branch:assist-5",
+      "name": "招架支援：对抗防守",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401019"],
+      "sourceExpression": "{Skill:1401019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.086,
+        "growth": 0.141
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1401:action:0004",
+      "branchId": "agent:1401:branch:assist-5",
+      "name": "招架支援：对抗防守",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401020"],
+      "sourceExpression": "{Skill:1401020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.502,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1401:action:0005",
+      "branchId": "agent:1401:branch:assist-6",
+      "name": "支援突击：交叉还击",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401021"],
+      "sourceExpression": "{Skill:1401021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.327,
+        "growth": 0.303
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.584,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.327,
+                  "growth": 0.303
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401021-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0006",
+      "branchId": "agent:1401:branch:basic-3",
+      "name": "普通攻击：星仪序曲",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n爱丽丝通过属性异常积蓄触发[强击]时，下一次发动的[普通攻击]第五段获得强化。",
+      "parameterIds": ["1401001"],
+      "sourceExpression": "{Skill:1401001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.551,
+        "growth": 0.051
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.397,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.551,
+                  "growth": 0.051
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401001-一段"
+    },
+    {
+      "actionId": "action:agent:1401:action:0007",
+      "branchId": "agent:1401:branch:basic-3",
+      "name": "普通攻击：星仪序曲",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n爱丽丝通过属性异常积蓄触发[强击]时，下一次发动的[普通攻击]第五段获得强化。",
+      "parameterIds": ["1401002"],
+      "sourceExpression": "{Skill:1401002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.88,
+        "growth": 0.08
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.698,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.88,
+                  "growth": 0.08
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401002-二段"
+    },
+    {
+      "actionId": "action:agent:1401:action:0008",
+      "branchId": "agent:1401:branch:basic-3",
+      "name": "普通攻击：星仪序曲",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n爱丽丝通过属性异常积蓄触发[强击]时，下一次发动的[普通攻击]第五段获得强化。",
+      "parameterIds": ["1401003"],
+      "sourceExpression": "{Skill:1401003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.661,
+        "growth": 0.061
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.599,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.661,
+                  "growth": 0.061
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401003-三段"
+    },
+    {
+      "actionId": "action:agent:1401:action:0009",
+      "branchId": "agent:1401:branch:basic-3",
+      "name": "普通攻击：星仪序曲",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n爱丽丝通过属性异常积蓄触发[强击]时，下一次发动的[普通攻击]第五段获得强化。",
+      "parameterIds": ["1401004"],
+      "sourceExpression": "{Skill:1401004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.119,
+        "growth": 0.102
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.051,
+        "growth": 0.048
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.119,
+                  "growth": 0.102
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401004-四段"
+    },
+    {
+      "actionId": "action:agent:1401:action:0010",
+      "branchId": "agent:1401:branch:basic-3",
+      "name": "普通攻击：星仪序曲",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n爱丽丝通过属性异常积蓄触发[强击]时，下一次发动的[普通攻击]第五段获得强化。",
+      "parameterIds": ["1401005"],
+      "sourceExpression": "{Skill:1401005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.303,
+        "growth": 0.119
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.317,
+        "growth": 0.06
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.303,
+                  "growth": 0.119
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401005-五段"
+    },
+    {
+      "actionId": "action:agent:1401:action:0011",
+      "branchId": "agent:1401:branch:basic-3",
+      "name": "普通攻击：星仪序曲",
+      "rowName": "五段（强化）伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n爱丽丝通过属性异常积蓄触发[强击]时，下一次发动的[普通攻击]第五段获得强化。",
+      "parameterIds": ["1401006"],
+      "sourceExpression": "{Skill:1401006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.183,
+        "growth": 0.199
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.109,
+        "growth": 0.096
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.183,
+                  "growth": 0.199
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401006-五段-强化"
+    },
+    {
+      "actionId": "action:agent:1401:action:0012",
+      "branchId": "agent:1401:branch:basic-4",
+      "name": "普通攻击：星芒圆舞曲",
+      "rowName": "一段蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "爱丽丝的[剑仪]达到1格时，长按  发动：\n长按进入蓄力，消耗至多3格[剑仪]，松开  或[剑仪]不满1格时，爱丽丝将根据当前蓄力段数以目标敌人为中心发动多段斩击，造成大量物理伤害；\n三段蓄力的[普通攻击：星芒圆舞曲]的终结一击命中敌人时，触发特殊的[强击]效果[极性强击]，无视属性积蓄进度造成一次原本[强击]效果{CAL:0+100,1,2}%的伤害，并可以与包括物理异常效果在内的其他属性异常效果互相结算[紊乱]；\n命中敌人时，不累积[剑仪]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401010"],
+      "sourceExpression": "{Skill:1401010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.889,
+        "growth": 0.172
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.553,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.889,
+                  "growth": 0.172
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401010-一段蓄力"
+    },
+    {
+      "actionId": "action:agent:1401:action:0013",
+      "branchId": "agent:1401:branch:basic-4",
+      "name": "普通攻击：星芒圆舞曲",
+      "rowName": "二段蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "爱丽丝的[剑仪]达到1格时，长按  发动：\n长按进入蓄力，消耗至多3格[剑仪]，松开  或[剑仪]不满1格时，爱丽丝将根据当前蓄力段数以目标敌人为中心发动多段斩击，造成大量物理伤害；\n三段蓄力的[普通攻击：星芒圆舞曲]的终结一击命中敌人时，触发特殊的[强击]效果[极性强击]，无视属性积蓄进度造成一次原本[强击]效果{CAL:0+100,1,2}%的伤害，并可以与包括物理异常效果在内的其他属性异常效果互相结算[紊乱]；\n命中敌人时，不累积[剑仪]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401011"],
+      "sourceExpression": "{Skill:1401011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.044,
+        "growth": 0.277
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.776,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.044,
+                  "growth": 0.277
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401011-二段蓄力"
+    },
+    {
+      "actionId": "action:agent:1401:action:0014",
+      "branchId": "agent:1401:branch:basic-4",
+      "name": "普通攻击：星芒圆舞曲",
+      "rowName": "三段蓄力伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "爱丽丝的[剑仪]达到1格时，长按  发动：\n长按进入蓄力，消耗至多3格[剑仪]，松开  或[剑仪]不满1格时，爱丽丝将根据当前蓄力段数以目标敌人为中心发动多段斩击，造成大量物理伤害；\n三段蓄力的[普通攻击：星芒圆舞曲]的终结一击命中敌人时，触发特殊的[强击]效果[极性强击]，无视属性积蓄进度造成一次原本[强击]效果{CAL:0+100,1,2}%的伤害，并可以与包括物理异常效果在内的其他属性异常效果互相结算[紊乱]；\n命中敌人时，不累积[剑仪]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401012"],
+      "sourceExpression": "{Skill:1401012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 9.657,
+        "growth": 0.878
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.972,
+        "growth": 0.09
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 9.657,
+                  "growth": 0.878
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401012-三段蓄力"
+    },
+    {
+      "actionId": "action:agent:1401:action:0015",
+      "branchId": "agent:1401:branch:chain-3",
+      "name": "连携技：星落间章",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方敌人发动强力多段斩击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401015"],
+      "sourceExpression": "{Skill:1401015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.663,
+        "growth": 0.606
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.047,
+        "growth": 0.094
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.663,
+                  "growth": 0.606
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401015-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0016",
+      "branchId": "agent:1401:branch:chain-4",
+      "name": "终结技：星芒终章",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围敌人发动强力多段斩击，造成大量物理伤害；\n招式发动时，回复200点[剑仪]；\n命中敌人时，不累积[剑仪]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401016"],
+      "sourceExpression": "{Skill:1401016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 22.62,
+        "growth": 2.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.426,
+        "growth": 0.111
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 22.62,
+                  "growth": 2.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401016-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0017",
+      "branchId": "agent:1401:branch:dodge-4",
+      "name": "冲刺攻击：剑舞之风",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行斩击，造成物理伤害。",
+      "parameterIds": ["1401013"],
+      "sourceExpression": "{Skill:1401013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.753,
+        "growth": 0.069
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.339,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.753,
+                  "growth": 0.069
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401013-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0018",
+      "branchId": "agent:1401:branch:dodge-5",
+      "name": "闪避反击：剑闪之仪",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动斩击和踢击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401014"],
+      "sourceExpression": "{Skill:1401014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.84,
+        "growth": 0.259
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.195,
+        "growth": 0.1
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.84,
+                  "growth": 0.259
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401014-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0019",
+      "branchId": "agent:1401:branch:special-4",
+      "name": "特殊技：破晓突刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n丢出剑攻击并穿过前方敌人，造成物理伤害；\n招式发动时可以触发[极限闪避]；\n触发[极限闪避]后，点按  可以衔接发动第五段[普通攻击]；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1401008"],
+      "sourceExpression": "{Skill:1401008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.624,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.561,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.624,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401008-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0020",
+      "branchId": "agent:1401:branch:special-5",
+      "name": "强化特殊技：极光突刺·北十字",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，向前拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  发动：\n突刺攻击并穿过前方敌人，造成大量物理伤害；\n招式发动时可以触发[极限闪避]，并回复10点[剑仪]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401009"],
+      "sourceExpression": "{Skill:1401009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.6,
+        "growth": 0.419
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.452,
+        "growth": 0.157
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0020:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.6,
+                  "growth": 0.419
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401009-main"
+    },
+    {
+      "actionId": "action:agent:1401:action:0021",
+      "branchId": "agent:1401:branch:special-6",
+      "name": "强化特殊技：极光突刺·南十字",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1401/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，不拖曳或者向后方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  发动：\n后退并发动斩击随后向前穿刺，造成大量物理伤害；\n招式发动时可以触发[极限闪避]，并回复10点[剑仪]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1401007"],
+      "sourceExpression": "{Skill:1401007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.32,
+        "growth": 0.484
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.053,
+        "growth": 0.185
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1401:action:0021:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1401:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.32,
+                  "growth": 0.484
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-alice-nk-1401007-main"
+    }
+  ]
+}

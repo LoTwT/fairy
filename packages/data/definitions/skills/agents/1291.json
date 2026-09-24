@@ -1,0 +1,1319 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1291",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1291:action:0001",
+      "branchId": "agent:1291:branch:assist-4",
+      "name": "快速支援：葬歌",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续攻击，造成冰属性伤害；\n招式发动期间长按  可以发动射击攻击，射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+      "parameterIds": ["1291019"],
+      "sourceExpression": "{Skill:1291019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.045,
+        "growth": 0.095
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.523,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0001:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.045,
+                  "growth": 0.095
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291019-main"
+    },
+    {
+      "actionId": "action:agent:1291:action:0002",
+      "branchId": "agent:1291:branch:assist-4",
+      "name": "快速支援：葬歌",
+      "rowName": "派生射击伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续攻击，造成冰属性伤害；\n招式发动期间长按  可以发动射击攻击，射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+      "parameterIds": ["1291027"],
+      "sourceExpression": "{Skill:1291027, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.247,
+        "growth": 0.114
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.624,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0002:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.247,
+                  "growth": 0.114
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291027-派生射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0003",
+      "branchId": "agent:1291:branch:assist-4",
+      "name": "快速支援：葬歌",
+      "rowName": "派生蓄力射击伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续攻击，造成冰属性伤害；\n招式发动期间长按  可以发动射击攻击，射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+      "parameterIds": ["1291028"],
+      "sourceExpression": "{Skill:1291028, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.632,
+        "growth": 0.149
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.816,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0003:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0003:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.632,
+                  "growth": 0.149
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291028-派生蓄力射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0004",
+      "branchId": "agent:1291:branch:assist-5",
+      "name": "招架支援：死期未至",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1291020"],
+      "sourceExpression": "{Skill:1291020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1291:action:0005",
+      "branchId": "agent:1291:branch:assist-5",
+      "name": "招架支援：死期未至",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1291021"],
+      "sourceExpression": "{Skill:1291021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1291:action:0006",
+      "branchId": "agent:1291:branch:assist-5",
+      "name": "招架支援：死期未至",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1291022"],
+      "sourceExpression": "{Skill:1291022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1291:action:0007",
+      "branchId": "agent:1291:branch:assist-6",
+      "name": "支援突击：王牌反转",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n快速突进并发动两次斩击，造成冰属性伤害；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1291023"],
+      "sourceExpression": "{Skill:1291023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.917,
+        "growth": 0.266
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.491,
+        "growth": 0.114
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0007:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.917,
+                  "growth": 0.266
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291023-main"
+    },
+    {
+      "actionId": "action:agent:1291:action:0008",
+      "branchId": "agent:1291:branch:basic-3",
+      "name": "普通攻击：暗渊四重奏",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和冰属性伤害；\n招式第四段攻击为射击攻击，射击攻击发动期间长按  可以进行蓄力，从而发动蓄力射击；\n第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291001"],
+      "sourceExpression": "{Skill:1291001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.431,
+        "growth": 0.04
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.216,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-hugo-nk-1291001-一段"
+    },
+    {
+      "actionId": "action:agent:1291:action:0009",
+      "branchId": "agent:1291:branch:basic-3",
+      "name": "普通攻击：暗渊四重奏",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和冰属性伤害；\n招式第四段攻击为射击攻击，射击攻击发动期间长按  可以进行蓄力，从而发动蓄力射击；\n第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291002"],
+      "sourceExpression": "{Skill:1291002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.741,
+        "growth": 0.068
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.549,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-hugo-nk-1291002-二段"
+    },
+    {
+      "actionId": "action:agent:1291:action:0010",
+      "branchId": "agent:1291:branch:basic-3",
+      "name": "普通攻击：暗渊四重奏",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和冰属性伤害；\n招式第四段攻击为射击攻击，射击攻击发动期间长按  可以进行蓄力，从而发动蓄力射击；\n第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291003"],
+      "sourceExpression": "{Skill:1291003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.696,
+        "growth": 0.155
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.281,
+        "growth": 0.059
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-hugo-nk-1291003-三段"
+    },
+    {
+      "actionId": "action:agent:1291:action:0011",
+      "branchId": "agent:1291:branch:basic-3",
+      "name": "普通攻击：暗渊四重奏",
+      "rowName": "斩击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和冰属性伤害；\n招式第四段攻击为射击攻击，射击攻击发动期间长按  可以进行蓄力，从而发动蓄力射击；\n第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291004"],
+      "sourceExpression": "{Skill:1291004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.491,
+        "growth": 0.136
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.258,
+        "growth": 0.058
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-hugo-nk-1291004-斩击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0012",
+      "branchId": "agent:1291:branch:basic-3",
+      "name": "普通攻击：暗渊四重奏",
+      "rowName": "射击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和冰属性伤害；\n招式第四段攻击为射击攻击，射击攻击发动期间长按  可以进行蓄力，从而发动蓄力射击；\n第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291005"],
+      "sourceExpression": "{Skill:1291005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.586,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.501,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-hugo-nk-1291005-射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0013",
+      "branchId": "agent:1291:branch:basic-3",
+      "name": "普通攻击：暗渊四重奏",
+      "rowName": "蓄力射击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和冰属性伤害；\n招式第四段攻击为射击攻击，射击攻击发动期间长按  可以进行蓄力，从而发动蓄力射击；\n第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291006"],
+      "sourceExpression": "{Skill:1291006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.18,
+        "growth": 0.108
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.957,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-hugo-nk-1291006-蓄力射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0014",
+      "branchId": "agent:1291:branch:basic-4",
+      "name": "普通攻击：暗渊协奏曲",
+      "rowName": "斩击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "发动[普通攻击：暗渊四重奏]第四段后、发动[闪避反击：诡影·斩]的射击攻击后、发动[快速支援：葬歌]的射击攻击后，点按或长按  发动：\n扔出镰刀向前方发动斩击，随后发动射击攻击，造成冰属性伤害；\n射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291024"],
+      "sourceExpression": "{Skill:1291024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.434,
+        "growth": 0.131
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.103,
+        "growth": 0.051
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0014:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.434,
+                  "growth": 0.131
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291024-斩击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0015",
+      "branchId": "agent:1291:branch:basic-4",
+      "name": "普通攻击：暗渊协奏曲",
+      "rowName": "射击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "发动[普通攻击：暗渊四重奏]第四段后、发动[闪避反击：诡影·斩]的射击攻击后、发动[快速支援：葬歌]的射击攻击后，点按或长按  发动：\n扔出镰刀向前方发动斩击，随后发动射击攻击，造成冰属性伤害；\n射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291025"],
+      "sourceExpression": "{Skill:1291025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.867,
+        "growth": 0.079
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.667,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0015:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.867,
+                  "growth": 0.079
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291025-射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0016",
+      "branchId": "agent:1291:branch:basic-4",
+      "name": "普通攻击：暗渊协奏曲",
+      "rowName": "蓄力射击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "发动[普通攻击：暗渊四重奏]第四段后、发动[闪避反击：诡影·斩]的射击攻击后、发动[快速支援：葬歌]的射击攻击后，点按或长按  发动：\n扔出镰刀向前方发动斩击，随后发动射击攻击，造成冰属性伤害；\n射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1291026"],
+      "sourceExpression": "{Skill:1291026, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.706,
+        "growth": 0.156
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.312,
+        "growth": 0.06
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0016:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.706,
+                  "growth": 0.156
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291026-蓄力射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0017",
+      "branchId": "agent:1291:branch:chain-3",
+      "name": "连携技：命运戏法",
+      "rowName": "斩击伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n快速突进向前方发动大范围斩击，随后发动射击攻击，造成大量冰属性伤害；\n招式发动的射击攻击视为蓄力射击；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1291015"],
+      "sourceExpression": "{Skill:1291015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.011,
+        "growth": 0.638
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.622,
+        "growth": 0.12
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0017:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.011,
+                  "growth": 0.638
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291015-斩击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0018",
+      "branchId": "agent:1291:branch:chain-4",
+      "name": "终结技：渎神者",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n丢出镰刀对前方敌人发动强力旋转攻击，随后进行终结一击，造成大量冰属性伤害；\n招式视为非重击；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1291018"],
+      "sourceExpression": "{Skill:1291018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.271,
+        "growth": 1.389
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.642,
+        "growth": 0.121
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0018:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.271,
+                  "growth": 1.389
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291018-main"
+    },
+    {
+      "actionId": "action:agent:1291:action:0019",
+      "branchId": "agent:1291:branch:dodge-4",
+      "name": "冲刺攻击：诡影·破",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行突进攻击，造成物理伤害。",
+      "parameterIds": ["1291011"],
+      "sourceExpression": "{Skill:1291011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.935,
+        "growth": 0.085
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.468,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.935,
+                  "growth": 0.085
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291011-main"
+    },
+    {
+      "actionId": "action:agent:1291:action:0020",
+      "branchId": "agent:1291:branch:dodge-5",
+      "name": "闪避反击：诡影·斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动连续攻击，造成冰属性伤害；\n招式发动期间长按  可以发动射击攻击，射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+      "parameterIds": ["1291012"],
+      "sourceExpression": "{Skill:1291012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.459,
+        "growth": 0.224
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.145,
+        "growth": 0.098
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0020:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.459,
+                  "growth": 0.224
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291012-main"
+    },
+    {
+      "actionId": "action:agent:1291:action:0021",
+      "branchId": "agent:1291:branch:dodge-5",
+      "name": "闪避反击：诡影·斩",
+      "rowName": "派生射击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动连续攻击，造成冰属性伤害；\n招式发动期间长按  可以发动射击攻击，射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+      "parameterIds": ["1291013"],
+      "sourceExpression": "{Skill:1291013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.621,
+        "growth": 0.148
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.247,
+        "growth": 0.057
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0021:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.621,
+                  "growth": 0.148
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291013-派生射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0022",
+      "branchId": "agent:1291:branch:dodge-5",
+      "name": "闪避反击：诡影·斩",
+      "rowName": "派生蓄力射击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动连续攻击，造成冰属性伤害；\n招式发动期间长按  可以发动射击攻击，射击攻击期间长按  可以进行蓄力，从而发动蓄力射击；\n发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式射击期间抗打断等级提升，受到的伤害降低40%;\n招式斩击期间与射击后撤期间拥有无敌效果。",
+      "parameterIds": ["1291014"],
+      "sourceExpression": "{Skill:1291014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.121,
+        "growth": 0.193
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.632,
+        "growth": 0.075
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0022:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.121,
+                  "growth": 0.193
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291014-派生蓄力射击"
+    },
+    {
+      "actionId": "action:agent:1291:action:0023",
+      "branchId": "agent:1291:branch:special-3",
+      "name": "特殊技：魂狩·断罪",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n旋转镰刀后向前方发动斩击，造成冰属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1291008"],
+      "sourceExpression": "{Skill:1291008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.853,
+        "growth": 0.078
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.853,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0023:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.853,
+                  "growth": 0.078
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291008-main"
+    },
+    {
+      "actionId": "action:agent:1291:action:0024",
+      "branchId": "agent:1291:branch:special-4",
+      "name": "强化特殊技：魂狩·惩戒",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:hugo-special-ms4iqbaa"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1291/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n旋转镰刀攻击，随后进行终结一击，造成大量冰属性伤害；\n招式视为非重击；\n招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1291009", "1291010"],
+      "sourceExpression": "{{Skill:1291009, Prop:1001} + {Skill:1291010, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.7319999999999998,
+        "growth": 0.34
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.552,
+        "growth": 0.20800000000000002
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1291:action:0024:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1291:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.7319999999999998,
+                  "growth": 0.34
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-hugo-nk-1291009-main"
+    }
+  ]
+}

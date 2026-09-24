@@ -69,6 +69,22 @@ if (intervention === "source-change") {
         .update(attributeBytes)
         .digest("hex")
       await writeFile(manifestPath, JSON.stringify(manifest))
+      // 技能内容未依赖本次改动的数值，但下一份 manifest 也必须对应新来源。
+      const actionsManifestPath = join(
+        packageDirectory,
+        "definitions/skills/manifest.json",
+      )
+      const actionsManifest = JSON.parse(
+        await fs.readFile(actionsManifestPath, "utf8"),
+      )
+      for (const ref of actionsManifest.inputs) {
+        if (ref.path === "agents/1311/data.json")
+          ref.sha256 = index.entities.agents.members["1311"].files.data.sha256
+        if (ref.path === "agents/1311/details.en.json")
+          ref.sha256 =
+            index.entities.agents.members["1311"].files.details.en.sha256
+      }
+      await writeFile(actionsManifestPath, JSON.stringify(actionsManifest))
       await writeFile(tracePath, intervention)
     }
   }
