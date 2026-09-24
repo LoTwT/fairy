@@ -171,7 +171,7 @@ export async function generateAgentActions(
             upstream: reference.skillTypes.join(","),
             adopted: action.skillCategory!,
             reason:
-              "按具名招式的来源说明确认伤害分类；和弦追加震音明确视为强化特殊技，不沿用上游普通特殊技分类。",
+              "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。",
           })
         const element = action.calculation.segments[0]!.element
         if (sourceElements[reference.element] !== element)

@@ -892,13 +892,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "3ea53501eb5829683e0dc99f550330fc6264adf3fa74da32ec600f6750cc6d8f",
+    "sourceSignature": "3d30aa6360444e07207131c3ff9209a30c14ce78c90eb2d76356e845864bd981",
     "skillCategory": "dash",
     "element": "physical",
     "damageKind": "regular",
     "upstreamSkillId": "sk-nicole-nk-1031201-前闪攻击",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [1]
   },
   {
     "actionId": "action:agent:1031:action:0019",
@@ -8265,13 +8266,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 5,
-    "sourceSignature": "eb132b64e049e8a926db08b450353b8a4fedbebedb136355658e5826597dcf86",
+    "sourceSignature": "0f0c1b3bb285a41966f879ff62c44295d6bdf9963d660e95d1eda9041ded141d",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221001-一段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0007",
@@ -8282,13 +8284,14 @@
     "rowIndex": 1,
     "rowKind": "damage",
     "dazeRowIndex": 6,
-    "sourceSignature": "caebbe5d148fb39103f8484cf6e98642001353c3306d209f0fa75876b81a8d94",
+    "sourceSignature": "0273644371076e11bf15cfd7dbc671e8d796a4c9ebf00bc18f7d3022d7f3a248",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221002-二段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0008",
@@ -8299,13 +8302,14 @@
     "rowIndex": 2,
     "rowKind": "damage",
     "dazeRowIndex": 7,
-    "sourceSignature": "b44bb6d467cc52da1783eaa0beb8e86d1b856f3185d9fea64034e1a01802c4f9",
+    "sourceSignature": "efeff56db5ef597312505d0f954e328074dc8e8e8ee9b93724c09e4953749f15",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221003-三段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0009",
@@ -8316,13 +8320,14 @@
     "rowIndex": 3,
     "rowKind": "damage",
     "dazeRowIndex": 8,
-    "sourceSignature": "f93940034a8eb6920fc223e1163b3f2ee5ae8fb99fe8e6ec29a6c4600d53684b",
+    "sourceSignature": "e8d24c9942eb71dbb5f11206611f20732fe8f7d214bac27e78608839c620b87d",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221004-四段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0010",
@@ -8333,13 +8338,14 @@
     "rowIndex": 4,
     "rowKind": "damage",
     "dazeRowIndex": 9,
-    "sourceSignature": "f50e87686b8551cea7a0780cd89f552af6bd8c658e9ca7c4503e3ba9e6bcc1d1",
+    "sourceSignature": "22e537b2246e8d60d4261ba6b1abdb816dee558c04a69825dda247090a3fcb7c",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221005-五段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0011",
@@ -8350,13 +8356,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 5,
-    "sourceSignature": "d3c2a38249ae4ddddf66a22e09e1861016ee97af9d9548a3470a34e7e0a0585e",
+    "sourceSignature": "874772f2aac7c563b1f64b98cc40959907c6096b3fc5db56ca7ef4bb42b1f878",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221006-一段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0012",
@@ -8367,13 +8374,14 @@
     "rowIndex": 1,
     "rowKind": "damage",
     "dazeRowIndex": 6,
-    "sourceSignature": "479470bd4601832a3786ea8a68536e052f8450bdb28ceb80e4a9c34f32d252aa",
+    "sourceSignature": "9e661760ffc7dfe0ff24fe725bede67bfe5388a2694f7b8806f361aeadda9a3b",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221007-二段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0013",
@@ -8384,13 +8392,14 @@
     "rowIndex": 2,
     "rowKind": "damage",
     "dazeRowIndex": 7,
-    "sourceSignature": "21a28d9eda8a0f8526e31540c928e2614896f1e821ccf1164b745a2316cf8246",
+    "sourceSignature": "86ea3857fa0e87dc0aedb8a188846f61c69e33ffac74d3239c6be5f34ba0cc18",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221008-三段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0014",
@@ -8401,13 +8410,14 @@
     "rowIndex": 3,
     "rowKind": "damage",
     "dazeRowIndex": 8,
-    "sourceSignature": "81311e62f5004aa275f353fed4de8864353280dfe0e7e0ae330df3f8d78b3f3b",
+    "sourceSignature": "947bfad54f009fa0c6887e997f69934436feb5f4b8e8474dd1ac8692c2f8f99f",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221009-四段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0015",
@@ -8418,13 +8428,14 @@
     "rowIndex": 4,
     "rowKind": "damage",
     "dazeRowIndex": 9,
-    "sourceSignature": "5790058ddf5f3139095b3ceecbad69294e11eaa963070ce315b1f8bac8e5dabd",
+    "sourceSignature": "4c137154b5dfa18fb5579445c609c014badf44f1e605aeab875731f5748b089d",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yanagi-nk-1221010-五段",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [0]
   },
   {
     "actionId": "action:agent:1221:action:0016",
@@ -10488,7 +10499,7 @@
     "rowKind": "damage",
     "dazeRowIndex": 4,
     "sourceSignature": "9f8e184bc976d74a72bcac79d169c293541179c489e2cb9f7ce8524f9efbf5bf",
-    "skillCategory": "quick-assist",
+    "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291027-派生射击",
@@ -10505,7 +10516,7 @@
     "rowKind": "damage",
     "dazeRowIndex": 5,
     "sourceSignature": "c0c2369389cc1572c2a8a70943672373d900a0fccc747e6d52d487cb3d0c1b87",
-    "skillCategory": "quick-assist",
+    "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291028-派生蓄力射击",
@@ -10841,11 +10852,11 @@
     "rowKind": "damage",
     "dazeRowIndex": 4,
     "sourceSignature": "89cb27d3f3c9e5a1bb760d7f6bdf6cbeb3b0fa6a605bf422dbca93ca952d70cd",
-    "skillCategory": "dodge-counter",
+    "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291013-派生射击",
-    "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+    "skillTargetIds": [],
     "issues": []
   },
   {
@@ -10858,11 +10869,11 @@
     "rowKind": "damage",
     "dazeRowIndex": 5,
     "sourceSignature": "743d5df1fe969d4025b7f4670ba05f8f6ca7a51ca15e4a15366448b73c8a53e2",
-    "skillCategory": "dodge-counter",
+    "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291014-派生蓄力射击",
-    "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+    "skillTargetIds": [],
     "issues": []
   },
   {
@@ -14101,7 +14112,8 @@
     "damageKind": "regular",
     "upstreamSkillId": "sk-s0anby-nk-1381007-白雷",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "countsAsFollowUp": true
   },
   {
     "actionId": "action:agent:1381:action:0020",
@@ -14398,7 +14410,8 @@
     "damageKind": "regular",
     "upstreamSkillId": "sk-jufufu-nk-1391013-main",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "countsAsFollowUp": true
   },
   {
     "actionId": "action:agent:1391:action:0013",
@@ -14460,13 +14473,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "08f2107fc0ac0757a46c6a5608ffd6ddf1a49a2f08bfa086b39cd9c995366912",
+    "sourceSignature": "ddce77b0bc86cc202d8ecbe19ae4444dca9b61154921fa9468340335ba6189a0",
     "skillCategory": "dash",
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jufufu-nk-1391010-main",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [2]
   },
   {
     "actionId": "action:agent:1391:action:0017",
@@ -14477,13 +14491,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "4de68004307fc32229a624567edb79b530fbbce542962a43554d57e6ffdce63c",
+    "sourceSignature": "7f01bbbe698477b35bbfdfb42d812d775a4e48030284cd337f18009df525f35f",
     "skillCategory": "dash",
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jufufu-nk-1391022-main",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [2]
   },
   {
     "actionId": "action:agent:1391:action:0018",
@@ -15112,7 +15127,8 @@
     "damageKind": "regular",
     "upstreamSkillId": "sk-yuzuha-nk-1411018-main",
     "skillTargetIds": [],
-    "issues": []
+    "issues": [],
+    "countsAsFollowUp": true
   },
   {
     "actionId": "action:agent:1411:action:0014",
@@ -17236,13 +17252,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "975c633a0e0706946bfa26c052fef8baa81c152e3be84f520db26a40c4ccc74e",
+    "sourceSignature": "aaaf91269d4bd7a8569f3fafe2a79d81d8378d7cc79d249a720f2f06807e12df",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-seed-nk-1461007-main",
     "skillTargetIds": ["zzz-hp:skill:seed-basic-ms4kv1p2"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [2]
   },
   {
     "actionId": "action:agent:1461:action:0012",
@@ -17253,13 +17270,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "60421df9a92bbdb23286e46a2f421029c48223649437ddda835bc848fd35d369",
+    "sourceSignature": "19ce60fed6d82f1021b890ca236da8e47aa206aefd265b95376508336d44f0fe",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-seed-nk-1461008-main",
     "skillTargetIds": ["zzz-hp:skill:seed-basic-ms4kv1p2"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [2]
   },
   {
     "actionId": "action:agent:1461:action:0013",
@@ -22015,13 +22033,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "effb2bd4232fb5bf09ed631315330963708179201fd5ecbc907316b29cec6102",
+    "sourceSignature": "b7f1f18d9d50bfb1f299d705d70c19cbfc53eb291fc57be8cccfb4da878a5f92",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-xigelide-nk-1591007-main",
     "skillTargetIds": ["zzz-hp:skill:xigelide-basic-ms4mf3lr"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [1]
   },
   {
     "actionId": "action:agent:1591:action:0011",
@@ -22032,13 +22051,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "77299eca1e41f609508e279d5c9b96791722997f1b2b1765a04f25487fd65125",
+    "sourceSignature": "46fbdf6bbbd49ce3d2bb21ff0b2a8fe452de78e7c0916297b9d9c81b30a53b04",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-xigelide-nk-1591008-main",
     "skillTargetIds": ["zzz-hp:skill:xigelide-basic-ms4mf3lr"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [1]
   },
   {
     "actionId": "action:agent:1591:action:0012",
@@ -22049,13 +22069,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "adbf3adcddfd1abcf7da60858011b7ae80480018e6d52bbade6f74fe78d8ed5e",
+    "sourceSignature": "9bafe441271ab9bb92c0781e6fbadb637f280d2c2ce589693f33cf35818cdd0e",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-xigelide-nk-1591022-main",
     "skillTargetIds": ["zzz-hp:skill:xigelide-basic-ms4mf3lr"],
-    "issues": []
+    "issues": [],
+    "additionalDescriptionIndices": [1]
   },
   {
     "actionId": "action:agent:1591:action:0013",

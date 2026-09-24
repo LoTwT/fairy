@@ -763,7 +763,7 @@
   "artifacts": {
     "agents/1011.json": "f2824af04f5f0fff0f79ff64e8b7689e03631e88965f3a1ea3cf604ef739c42d",
     "agents/1021.json": "82bfa0d6d1185ba448a3b9949a226ed40de0972b492ba4462ed0d35a25391ce3",
-    "agents/1031.json": "4436c11894a5d51b0e6ea24a1471a8e63a8ad937664c56b9d5ccda4182ab14d5",
+    "agents/1031.json": "f8814cf4e7222c3cfb9f9a6b2318605e7b81bb0ee85dd13b05ee1dec64546702",
     "agents/1041.json": "f064b106bc0cd89d2d7715fe84bd2dd967b4383d4cb55b555af116e6678ed54a",
     "agents/1051.json": "f708075cc35d749f4fd1242b2ff903a665b06a7f1fedc84a9fc5241176aaf243",
     "agents/1061.json": "702b4957a3bf99bd4a83358c737521509a196e74d9706e544fd2332bd016c8e7",
@@ -782,13 +782,13 @@
     "agents/1191.json": "51b9f7b0544099955f40240b0679ec6b98b08d3e3c38146248e7dfcf5e33bda2",
     "agents/1201.json": "f92d126273511994c61dd71e65a285afed4eb3ae09b8668df5146d54ff2efc74",
     "agents/1211.json": "d82a4919d6afdf3d20b29c33a53a025b3a9e8c38e1439c7fe2553c3a7ba1a22a",
-    "agents/1221.json": "b5cd28b4a1937e695e88c55f31198e266f2d8040358e64edf946d14767b84689",
+    "agents/1221.json": "5c88a2d4d18f5fc3d735e0db2c8b7695025a9891881315b4cbb829ef4513f97a",
     "agents/1241.json": "b2c4bad3da2d58f681b9dabacada7d0055282650179534196fd3159c9888a2ed",
     "agents/1251.json": "c25fba403f7e09832116ddf310cdcb0c69330c85915665fd348027c9b3ffb5cd",
     "agents/1261.json": "0dc07308c2e62bf76edc5620a9263f7c176c80cbcaa31969505cb46b487841ac",
     "agents/1271.json": "c2187574314060a094be78e0ea74fc0bffe2cf0a08dba6dc140505f2c1fdd3a2",
     "agents/1281.json": "ab6ef4ec66a609d82535e9d2fa0302b6ecca77b41c8274e9a60c2eeb3c2cf6d8",
-    "agents/1291.json": "70b9fe25a57bb4855faa0a77a32374fbca98e2888767956973fe2baf03a30f65",
+    "agents/1291.json": "bf90a1623db6a73601fadb70c3fe78209d20e777333935547eee9b70ee81aad0",
     "agents/1301.json": "620e5fca9cefba89f7311a33023ab4221d99bb0c2b59a9516b4201539a6ce337",
     "agents/1311.json": "37dfd339d288e9903ad61f908d92e80c8443ac787cf61a97fd007ae7282eef4e",
     "agents/1321.json": "5dc209edf9e105a2ad535453b03ea9faaf1b5941c2626f739efa4875ed091ac3",
@@ -797,15 +797,15 @@
     "agents/1351.json": "44bca21b050121976b153f56ba6628f079b5f8580e4b96cecb61fa7a111c0670",
     "agents/1361.json": "96303186991ace3dfd6de07079bf602331da6850f43189255ca8ff5ca2e9f5db",
     "agents/1371.json": "b02acd4ec219eec8d20a16ca3ff2948ca008cd92763f30148dcfd3a8e44e8cae",
-    "agents/1381.json": "bbfa15525d29b4582ddd6945c385fdde7e437d0e59cee9a4a22f661634171752",
-    "agents/1391.json": "7799090b649de96111c834f9b8344907bece283954b6dc313af508afa086692a",
+    "agents/1381.json": "b5b6a443b534aa5aac2e837210cf4b2ca1f99b9ca86c1b632ec1d4194e6c8191",
+    "agents/1391.json": "30ca506799d466f29f3aa6a111f630f8c340f716c0a8f9ca70565d7c8cc26b80",
     "agents/1401.json": "0b2513a387bbf0cc588e0d4407b3a2f202474ccd9e01899513664b34d520170a",
-    "agents/1411.json": "47cefff0de75460bade785da9f9e8cb6dc54bc54134a14f764c425e3710e4284",
+    "agents/1411.json": "9cbd5914c619dd3b1ebcf1bd8dd65c9d5525718230a5d983070aaa992f68d47c",
     "agents/1421.json": "df244a6a5ccc7ac8ce02224933d997aead534699ca8ad44df4825a9fedab72e7",
     "agents/1431.json": "ad39ab892f56b216148cb620637c432b1660bc67c5c2c748e3e0ee662f166822",
     "agents/1441.json": "5efd3ba4ab1526ddded61119418d724cf2463600f22c3a78008f925658db84f6",
     "agents/1451.json": "5db5119ad589eaf51de0b488c25e74c63fb9ea8da91f2d1a55bbb06e7205e146",
-    "agents/1461.json": "6e6badc24d9c9103dcb8ef23a5b2654d0264cccdb0d89a2c16f57f33bb0e3990",
+    "agents/1461.json": "1e439a897e21cd5ff232644f53f24895f705a5e6c259534fce32e0dda2db1eba",
     "agents/1471.json": "9e18208719b7a2bb24307efda047062f7a391f97672e0d1637e661a7698b52b9",
     "agents/1481.json": "3ec9631182dc6f4d1684ad09126fb717878c23a7aa1d1fa34d8b9aa6a00ad2f5",
     "agents/1491.json": "b109581e6088b4273510a113c77de71a46e73a90cea4b836f53473e311e851ba",
@@ -818,7 +818,7 @@
     "agents/1561.json": "c8b80792c30cbdce00a38e6a17fc298620443ba21d1b854540c3d9830c038322",
     "agents/1571.json": "50cabe6470f24dc1923294b21c1746b1d2e59da124afbc3151ffacd12be4d8a2",
     "agents/1581.json": "5bbd71c08977708c77ddd08d8aac7aef9635a0d371695e6f305594ec5de872bc",
-    "agents/1591.json": "8ab0e99594f2e1e21e4f8a262fa321ffe5e9fea7636d0786b5d222d1af957f73"
+    "agents/1591.json": "8e671e68d9600814812c2b044c398974af7407a6ba142d2a5cd73cf834084978"
   },
   "evidence": {
     "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
@@ -840,7 +840,7 @@
       }
     ]
   },
-  "registrySha256": "bec39d7d7d9c4adf86f0d55556a833008b31e8bde6997fda8f58db79a92215ff",
+  "registrySha256": "220c68f64bb8fc90b3ec92f1a032f801b7556a1626fba42e8f951ecef8fff9b6",
   "staticCatalogSha256": "74241a4505ecd9426e25810a43578db47f14edd03b1ec958819f35812118ff1a",
   "coverage": {
     "agents": 58,
@@ -1568,11 +1568,39 @@
       "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
     },
     {
+      "actionId": "action:agent:1291:action:0002",
+      "field": "skillCategory",
+      "upstream": "assist",
+      "adopted": "basic",
+      "reason": "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。"
+    },
+    {
+      "actionId": "action:agent:1291:action:0003",
+      "field": "skillCategory",
+      "upstream": "assist",
+      "adopted": "basic",
+      "reason": "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。"
+    },
+    {
       "actionId": "action:agent:1291:action:0019",
       "field": "element",
       "upstream": "冰",
       "adopted": "physical",
       "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1291:action:0021",
+      "field": "skillCategory",
+      "upstream": "dodge,dodgeCounter",
+      "adopted": "basic",
+      "reason": "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。"
+    },
+    {
+      "actionId": "action:agent:1291:action:0022",
+      "field": "skillCategory",
+      "upstream": "dodge,dodgeCounter",
+      "adopted": "basic",
+      "reason": "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。"
     },
     {
       "actionId": "action:agent:1291:action:0024",
@@ -1614,7 +1642,7 @@
       "field": "skillCategory",
       "upstream": "special,specialBasic",
       "adopted": "enhanced-special",
-      "reason": "按具名招式的来源说明确认伤害分类；和弦追加震音明确视为强化特殊技，不沿用上游普通特殊技分类。"
+      "reason": "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。"
     },
     {
       "actionId": "action:agent:1311:action:0021",

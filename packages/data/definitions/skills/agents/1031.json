@@ -1010,8 +1010,13 @@
         "path": "agents/1031/details.zh.json",
         "pointer": "/skill/dodge/description/4/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向对应方向冲刺，并对身周敌人进行打击，造成物理伤害；\n未拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向后躲避，并对前方敌人发动远程打击，造成物理伤害；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
       "parameterIds": ["1031201", "1031203"],
       "sourceExpression": "{Skill:1031201, Prop:1001} + {{Skill:1031203, Prop:1001}/13}*13",
       "damageCoefficient": {

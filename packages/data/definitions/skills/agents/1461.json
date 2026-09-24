@@ -567,8 +567,13 @@
         "path": "agents/1461/details.zh.json",
         "pointer": "/skill/basic/description/5/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "「席德」拥有[钢能]值，自身招式命中敌人可累积[钢能]；\n[钢能]最大150点，初始拥有60点[钢能]，达到120点时，在[普通攻击：落华·重戮]或[终结技：机芯花园·绽放！]发动后，可点按或长按   消耗60点[钢能]释放[普通攻击：落华·崩坠一式]，并自动消耗60点[钢能]衔接发动[普通攻击：落华·崩坠二式]；\n操控机甲，扫射并释放强力跳砸，造成大量电属性伤害；\n命中敌人时不累积[钢能]；\n招式发动期间拥有无敌效果。",
       "parameterIds": ["1461007"],
       "sourceExpression": "{Skill:1461007, Prop:1001}",
       "damageCoefficient": {
@@ -623,8 +628,13 @@
         "path": "agents/1461/details.zh.json",
         "pointer": "/skill/basic/description/6/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "「席德」拥有[钢能]值，自身招式命中敌人可累积[钢能]；\n[钢能]最大150点，初始拥有60点[钢能]，达到120点时，在[普通攻击：落华·重戮]或[终结技：机芯花园·绽放！]发动后，可点按或长按   消耗60点[钢能]释放[普通攻击：落华·崩坠一式]，并自动消耗60点[钢能]衔接发动[普通攻击：落华·崩坠二式]；\n操控机甲，扫射并释放强力跳砸，造成大量电属性伤害；\n命中敌人时不累积[钢能]；\n招式发动期间拥有无敌效果。",
       "parameterIds": ["1461008"],
       "sourceExpression": "{Skill:1461008, Prop:1001}",
       "damageCoefficient": {

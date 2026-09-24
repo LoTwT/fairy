@@ -107,7 +107,113 @@ function agentInput(
   }
 }
 
+function actionWithDisc(
+  id: string,
+  suffix: string,
+  discId: string,
+  discKey: string,
+): StaticCatalogDamageInput {
+  const agent = read(
+    `../../data/definitions/skills/agents/${id}.json`,
+  ) as AgentActions
+  const action = resolveAgentAction({
+    agent,
+    actionId: `action:agent:${id}:action:${suffix}`,
+    mindscapeRank: 0,
+    levels: {
+      basic: { mode: "trained", value: 12 },
+      assist: { mode: "trained", value: 12 },
+      dodge: { mode: "trained", value: 12 },
+      special: { mode: "trained", value: 12 },
+      chain: { mode: "trained", value: 12 },
+    },
+  })
+  if (
+    !action.ok ||
+    action.calculation.kind !== "damage" ||
+    !action.skillCategory
+  )
+    throw new Error("Expected resolved damage action")
+  expect(action.calculation.segments).toHaveLength(1)
+  const segment = action.calculation.segments[0]!
+  const base = agentInput(id, [])
+  const options = catalog.options.filter((option) =>
+    option.optionId.startsWith(`drive-discs:${discKey}:setPieces:2:`),
+  )
+  expect(options.length).toBeGreaterThan(0)
+  const [firstItem, ...remainingItems] = segment.damageItems.map((item) => ({
+    ...item,
+    mode: "direct" as const,
+    role: "base" as const,
+    statSource: { entityId: "entity:attacker" as const },
+  }))
+  if (!firstItem) throw new Error("Expected nonempty action damage items")
+  return {
+    ...base,
+    bindings: [
+      {
+        bindingId: "binding:static",
+        kind: "drive-disc",
+        holderId: "entity:attacker",
+        sourceEntityId: discId,
+        eligible: true,
+        configuration: { setPieces: 2 },
+      },
+    ],
+    selections: options.map((option) => ({
+      optionId: option.optionId,
+      bindingId: "binding:static",
+      layers: 1,
+    })),
+    hit: {
+      ...base.hit,
+      actionId: action.actionId,
+      skillCategory: action.skillCategory,
+      skillTargetIds: action.skillTargetIds,
+      skillTags: action.skillTags,
+      element: segment.element,
+      damageItems: [firstItem, ...remainingItems],
+    },
+  }
+}
+
 describe("fixed-source catalog conformance", () => {
+  it.each([
+    ["1391", "0012", 1.15],
+    ["1411", "0013", 1.15],
+    ["1381", "0019", 1.15],
+    ["1381", "0014", 1.15],
+    ["1381", "0006", 1],
+    ["1381", "0020", 1],
+  ] as const)(
+    "applies the follow-up set bonus to %s/%s at %f",
+    (id, suffix, multiplier) => {
+      const input = actionWithDisc(id, suffix, "32900", "SuitShadow")
+      expect(
+        calculateCatalogResult(input).nonCritical /
+          calculateCatalogResult({ ...input, selections: [] }).nonCritical,
+      ).toBeCloseTo(multiplier, 12)
+    },
+  )
+
+  it.each([
+    ["0002", 1.15],
+    ["0003", 1.15],
+    ["0021", 1.15],
+    ["0022", 1.15],
+    ["0015", 1.15],
+    ["0001", 1],
+  ] as const)(
+    "applies the basic set bonus to Hugo %s at %f",
+    (suffix, multiplier) => {
+      const input = actionWithDisc("1291", suffix, "33300", "SuitDawnsBloom")
+      expect(
+        calculateCatalogResult(input).nonCritical /
+          calculateCatalogResult({ ...input, selections: [] }).nonCritical,
+      ).toBeCloseTo(multiplier, 12)
+    },
+  )
+
   it("matches Astra's M6 chord bonuses through the action targets, preserving enhanced-special identity", () => {
     const agent = read(
       "../../data/definitions/skills/agents/1311.json",
@@ -234,6 +340,35 @@ describe("fixed-source catalog conformance", () => {
         }).ok,
       ).toBe(true)
     }
+  })
+  it("applies the selected assist bonus to an assist follow-up", () => {
+    const base = agentInput("1031", [])
+    const input: StaticCatalogDamageInput = {
+      ...base,
+      bindings: [
+        {
+          bindingId: "binding:static",
+          kind: "drive-disc",
+          holderId: "entity:attacker",
+          sourceEntityId: "31800",
+          eligible: true,
+          configuration: { setPieces: 4 },
+        },
+      ],
+      selections: [
+        {
+          bindingId: "binding:static",
+          optionId:
+            "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm",
+          layers: 1,
+        },
+      ],
+      hit: { ...base.hit, skillCategory: "assist-follow-up" },
+    }
+    expect(
+      calculateCatalogResult(input).nonCritical /
+        calculateCatalogResult({ ...input, selections: [] }).nonCritical,
+    ).toBeCloseTo(1.2, 12)
   })
   it.each(["anomaly", "anomaly-settlement", "vortex", "disorder"] as const)(
     "consumes generic anomaly bonuses in the final %s damage path",

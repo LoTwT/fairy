@@ -658,7 +658,7 @@
       "levelGroup": "basic",
       "skillCategory": "basic",
       "skillTargetIds": [],
-      "skillTags": [],
+      "skillTags": ["zzz-hp:follow-up"],
       "source": {
         "path": "agents/1411/details.zh.json",
         "pointer": "/skill/basic/description/8/param/0"

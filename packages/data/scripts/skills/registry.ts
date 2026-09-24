@@ -26,6 +26,9 @@ export interface ActionRegistryEntry {
   readonly damageKind: "regular" | "sheer"
   readonly upstreamSkillId: string | null
   readonly skillTargetIds: readonly string[]
+  readonly countsAsFollowUp?: boolean
+  /** 同一技能培养组内、名称与倍率段不同的关联说明位置。 */
+  readonly additionalDescriptionIndices?: readonly number[]
   readonly issues: readonly ActionIssue[]
   readonly limitations?: readonly string[]
   readonly individualHits?: readonly {
@@ -40,7 +43,11 @@ export function sourceRows(
   details: AgentDetails,
   entry: Pick<
     ActionRegistryEntry,
-    "levelGroup" | "sectionIndex" | "rowIndex" | "dazeRowIndex"
+    | "levelGroup"
+    | "sectionIndex"
+    | "rowIndex"
+    | "dazeRowIndex"
+    | "additionalDescriptionIndices"
   >,
 ) {
   const block = details.skill[entry.levelGroup]
@@ -50,9 +57,33 @@ export function sourceRows(
     throw new Error(
       `Missing action source row: ${details.id}/${entry.levelGroup}/${entry.sectionIndex}/${entry.rowIndex}`,
     )
+  const additionalDescriptionIndices = new Set(
+    entry.additionalDescriptionIndices ?? [],
+  )
+  if (
+    additionalDescriptionIndices.size !==
+      (entry.additionalDescriptionIndices?.length ?? 0) ||
+    [...additionalDescriptionIndices].some(
+      (index) =>
+        !Number.isSafeInteger(index) ||
+        index < 0 ||
+        block.description[index]?.desc === undefined,
+    )
+  )
+    throw new Error(`Invalid related action description: ${details.id}`)
   const descriptions = block.description.flatMap((value, index) =>
-    value.name === section.name && value.desc !== undefined
-      ? [{ index, desc: value.desc, potential: value.potential }]
+    (value.name === section.name || additionalDescriptionIndices.has(index)) &&
+    value.desc !== undefined
+      ? [
+          {
+            index,
+            desc: value.desc,
+            potential: value.potential,
+            ...(additionalDescriptionIndices.has(index)
+              ? { name: value.name }
+              : {}),
+          },
+        ]
       : [],
   )
   const daze =
@@ -79,7 +110,11 @@ export function actionSourceSignature(
   details: AgentDetails,
   entry: Pick<
     ActionRegistryEntry,
-    "levelGroup" | "sectionIndex" | "rowIndex" | "dazeRowIndex"
+    | "levelGroup"
+    | "sectionIndex"
+    | "rowIndex"
+    | "dazeRowIndex"
+    | "additionalDescriptionIndices"
   >,
 ): string {
   const { section, row, daze, descriptions } = sourceRows(details, entry)

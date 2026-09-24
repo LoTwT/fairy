@@ -111,7 +111,7 @@ export function convertAgentActions(
       levelGroup: entry.levelGroup,
       skillCategory: entry.skillCategory,
       skillTargetIds: [...entry.skillTargetIds],
-      skillTags: [],
+      skillTags: entry.countsAsFollowUp ? ["zzz-hp:follow-up"] : [],
       source: { path, pointer: `${prefix}/${entry.rowIndex}` },
       descriptionSources,
       description: descriptions.map((value) => strip(value.desc)).join("\n"),

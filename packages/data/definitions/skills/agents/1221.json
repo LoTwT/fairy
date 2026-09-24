@@ -262,8 +262,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/1/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221001"],
       "sourceExpression": "{Skill:1221001, Prop:1001}",
       "damageCoefficient": {
@@ -318,8 +323,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/1/param/1"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221002"],
       "sourceExpression": "{Skill:1221002, Prop:1001}",
       "damageCoefficient": {
@@ -374,8 +384,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/1/param/2"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221003"],
       "sourceExpression": "{Skill:1221003, Prop:1001}",
       "damageCoefficient": {
@@ -430,8 +445,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/1/param/3"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221004"],
       "sourceExpression": "{Skill:1221004, Prop:1001}",
       "damageCoefficient": {
@@ -486,8 +506,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/1/param/4"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221005"],
       "sourceExpression": "{Skill:1221005, Prop:1001}",
       "damageCoefficient": {
@@ -542,8 +567,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/2/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221006"],
       "sourceExpression": "{Skill:1221006, Prop:1001}",
       "damageCoefficient": {
@@ -598,8 +628,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/2/param/1"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221007"],
       "sourceExpression": "{Skill:1221007, Prop:1001}",
       "damageCoefficient": {
@@ -654,8 +689,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/2/param/2"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221008"],
       "sourceExpression": "{Skill:1221008, Prop:1001}",
       "damageCoefficient": {
@@ -710,8 +750,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/2/param/3"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221009"],
       "sourceExpression": "{Skill:1221009, Prop:1001}",
       "damageCoefficient": {
@@ -766,8 +811,13 @@
         "path": "agents/1221/details.zh.json",
         "pointer": "/skill/basic/description/2/param/4"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1221/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "月城柳拥有[上弦]和[下弦]两种架势；\n点按  发动：\n根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n[上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n[下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
       "parameterIds": ["1221010"],
       "sourceExpression": "{Skill:1221010, Prop:1001}",
       "damageCoefficient": {

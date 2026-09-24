@@ -238,7 +238,9 @@ describe("panel attribute consumer isolation", () => {
     ;(
       first as unknown as typeof raw
     ).actions[0].calculation.segments[0].repeat = 99
-    expect(await loadAgentActions("Astra Yao")).toEqual(raw)
+    expect(await loadAgentActions("Astra Yao")).toEqual({
+      actions: [{ calculation: { segments: [{ repeat: 3 }] } }],
+    })
     for (const name of ["astra yao", "1311", "__proto__", " Astra Yao"])
       expect(await loadAgentActions(name as AgentName)).toBeUndefined()
     await expect(

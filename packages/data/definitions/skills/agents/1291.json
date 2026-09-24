@@ -89,7 +89,7 @@
       "name": "快速支援：葬歌",
       "rowName": "派生射击伤害倍率",
       "levelGroup": "assist",
-      "skillCategory": "quick-assist",
+      "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
       "source": {
@@ -150,7 +150,7 @@
       "name": "快速支援：葬歌",
       "rowName": "派生蓄力射击伤害倍率",
       "levelGroup": "assist",
-      "skillCategory": "quick-assist",
+      "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
       "source": {
@@ -1074,8 +1074,8 @@
       "name": "闪避反击：诡影·斩",
       "rowName": "派生射击伤害倍率",
       "levelGroup": "dodge",
-      "skillCategory": "dodge-counter",
-      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillCategory": "basic",
+      "skillTargetIds": [],
       "skillTags": [],
       "source": {
         "path": "agents/1291/details.zh.json",
@@ -1135,8 +1135,8 @@
       "name": "闪避反击：诡影·斩",
       "rowName": "派生蓄力射击伤害倍率",
       "levelGroup": "dodge",
-      "skillCategory": "dodge-counter",
-      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillCategory": "basic",
+      "skillTargetIds": [],
       "skillTags": [],
       "source": {
         "path": "agents/1291/details.zh.json",

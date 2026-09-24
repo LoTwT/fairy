@@ -96,6 +96,80 @@ describe("skill level selection", () => {
 })
 
 describe("agent action semantics", () => {
+  it.each([
+    ["1031", "dodge", 1],
+    ["1221", "basic", 0],
+    ["1391", "dodge", 2],
+    ["1461", "basic", 2],
+    ["1591", "basic", 1],
+  ] as const)(
+    "guards related descriptions for %s/%s/%i and publishes their pointers",
+    async (id, group, index) => {
+      const raw = await details(id)
+      const data = await agent(id)
+      const related = registry.filter(
+        (entry) =>
+          entry.entityId === id &&
+          entry.levelGroup === group &&
+          entry.additionalDescriptionIndices?.includes(index),
+      )
+      expect(related.length).toBeGreaterThan(0)
+      for (const entry of related)
+        expect(
+          data.actions.find((action) => action.actionId === entry.actionId)
+            ?.descriptionSources,
+        ).toContainEqual({
+          path: `agents/${id}/details.zh.json`,
+          pointer: `/skill/${group}/description/${index}/desc`,
+        })
+      for (const field of ["name", "desc", "potential"] as const) {
+        const changed = structuredClone(raw)
+        const description = changed.skill[group]!.description[index]!
+        if (field === "potential") description.potential = [999]
+        else description[field] += " changed source semantics"
+        expect(() => convertAgentActions(id, changed, registry)).toThrow(
+          /semantic signature changed/,
+        )
+      }
+      for (const indices of [[-1], [0.5], [999], [index, index]])
+        expect(() =>
+          convertAgentActions(
+            id,
+            raw,
+            registry.map((entry) =>
+              entry.actionId === related[0]!.actionId
+                ? { ...entry, additionalDescriptionIndices: indices }
+                : entry,
+            ),
+          ),
+        ).toThrow(/Invalid related action description/)
+    },
+  )
+
+  it.each([
+    ["0002", "assist"],
+    ["0003", "assist"],
+    ["0021", "dodge"],
+    ["0022", "dodge"],
+  ] as const)(
+    "keeps Hugo %s training independent of its basic damage category",
+    async (suffix, group) => {
+      const data = await agent("1291")
+      const result = resolveAgentAction({
+        agent: data,
+        actionId: `action:agent:1291:action:${suffix}`,
+        mindscapeRank: 0,
+        levels: { [group]: { mode: "trained", value: 12 } },
+      })
+      expect(result).toMatchObject({
+        ok: true,
+        skillCategory: "basic",
+        skillTargetIds: [],
+        levels: { [group]: { trained: 12, effective: 12 } },
+      })
+    },
+  )
+
   it("keeps enhanced variants' target identities separate and reports partial-target limits", async () => {
     const zhuYuan = await agent("1241")
     for (const action of zhuYuan.actions.filter(

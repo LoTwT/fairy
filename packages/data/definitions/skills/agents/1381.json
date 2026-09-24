@@ -993,7 +993,7 @@
       "levelGroup": "special",
       "skillCategory": "special",
       "skillTargetIds": [],
-      "skillTags": [],
+      "skillTags": ["zzz-hp:follow-up"],
       "source": {
         "path": "agents/1381/details.zh.json",
         "pointer": "/skill/special/description/6/param/0"

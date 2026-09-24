@@ -559,7 +559,7 @@
       "levelGroup": "chain",
       "skillCategory": "chain",
       "skillTargetIds": [],
-      "skillTags": [],
+      "skillTags": ["zzz-hp:follow-up"],
       "source": {
         "path": "agents/1391/details.zh.json",
         "pointer": "/skill/chain/description/4/param/0"
@@ -808,8 +808,13 @@
         "path": "agents/1391/details.zh.json",
         "pointer": "/skill/dodge/description/6/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "[冲刺攻击：恶虎七式·虎奔]发动后，长按  发动：\n进入高速旋转状态，该状态下可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}进行移动，接触敌人时造成物理伤害；\n橘福福通过其他招式获得[威势]后，会在高速旋转状态下带有火焰；接触敌人时消耗1点[威势]，改为造成火属性伤害并获得25点[威风]，[威势]上限为15点；\n橘福福消耗[威势]造成火属性伤害时，若[威风]高于100点，会自动消耗100点[威风]发动[连携技：虎釜震煞]；\n松开  可退出旋转状态，并丢出「虎威」攻击敌人，造成火属性伤害；切换至其他角色时，橘福福会继续处于旋转状态，尝试撞击最近的敌人；\n橘福福为当前操作中角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中角色时，获得无敌效果。",
       "parameterIds": ["1391010"],
       "sourceExpression": "{Skill:1391010, Prop:1001}",
       "damageCoefficient": {
@@ -864,8 +869,13 @@
         "path": "agents/1391/details.zh.json",
         "pointer": "/skill/dodge/description/7/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1391/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "[冲刺攻击：恶虎七式·虎奔]发动后，长按  发动：\n进入高速旋转状态，该状态下可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}进行移动，接触敌人时造成物理伤害；\n橘福福通过其他招式获得[威势]后，会在高速旋转状态下带有火焰；接触敌人时消耗1点[威势]，改为造成火属性伤害并获得25点[威风]，[威势]上限为15点；\n橘福福消耗[威势]造成火属性伤害时，若[威风]高于100点，会自动消耗100点[威风]发动[连携技：虎釜震煞]；\n松开  可退出旋转状态，并丢出「虎威」攻击敌人，造成火属性伤害；切换至其他角色时，橘福福会继续处于旋转状态，尝试撞击最近的敌人；\n橘福福为当前操作中角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中角色时，获得无敌效果。",
       "parameterIds": ["1391022"],
       "sourceExpression": "{Skill:1391022, Prop:1001}",
       "damageCoefficient": {

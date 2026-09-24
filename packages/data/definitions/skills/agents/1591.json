@@ -506,8 +506,13 @@
         "path": "agents/1591/details.zh.json",
         "pointer": "/skill/basic/description/3/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1591/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "处于状态，并有[普通攻击：敛枪式]发动次数时，长按  发动：\n按当前分支段数发动对应[普通攻击：敛枪式]，造成冰属性伤害；\n[普通攻击：敛枪式]共有三段，每次释放都可以使段数提升，发动[普通攻击：敛枪式]第三段后重置段数；\n[普通攻击：敛枪式]第一、二段蓄力架势期间受到敌方攻击时，希格莉德会用盾牌进行格挡，若格挡成功，抵挡此次攻击伤害，使下一次[普通攻击：敛枪式]造成的失衡值提升100%，刷新状态，并获得一次[普通攻击：敛枪式]发动机会；格挡成功后点按  可发动对应段数的[普通攻击：敛枪式]；\n衔接在[普通攻击：凛冽枪尖]后的[普通攻击：敛枪式]可以保留[普通攻击：凛冽枪尖]的段数；\n招式发动期间受到的伤害减少60%；\n招式发动期间抗打断等级提升;\n[普通攻击：敛枪式]第三段发动期间拥有无敌效果。",
       "parameterIds": ["1591007"],
       "sourceExpression": "{Skill:1591007, Prop:1001}",
       "damageCoefficient": {
@@ -562,8 +567,13 @@
         "path": "agents/1591/details.zh.json",
         "pointer": "/skill/basic/description/4/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1591/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "处于状态，并有[普通攻击：敛枪式]发动次数时，长按  发动：\n按当前分支段数发动对应[普通攻击：敛枪式]，造成冰属性伤害；\n[普通攻击：敛枪式]共有三段，每次释放都可以使段数提升，发动[普通攻击：敛枪式]第三段后重置段数；\n[普通攻击：敛枪式]第一、二段蓄力架势期间受到敌方攻击时，希格莉德会用盾牌进行格挡，若格挡成功，抵挡此次攻击伤害，使下一次[普通攻击：敛枪式]造成的失衡值提升100%，刷新状态，并获得一次[普通攻击：敛枪式]发动机会；格挡成功后点按  可发动对应段数的[普通攻击：敛枪式]；\n衔接在[普通攻击：凛冽枪尖]后的[普通攻击：敛枪式]可以保留[普通攻击：凛冽枪尖]的段数；\n招式发动期间受到的伤害减少60%；\n招式发动期间抗打断等级提升;\n[普通攻击：敛枪式]第三段发动期间拥有无敌效果。",
       "parameterIds": ["1591008"],
       "sourceExpression": "{Skill:1591008, Prop:1001}",
       "damageCoefficient": {
@@ -618,8 +628,13 @@
         "path": "agents/1591/details.zh.json",
         "pointer": "/skill/basic/description/5/param/0"
       },
-      "descriptionSources": [],
-      "description": "",
+      "descriptionSources": [
+        {
+          "path": "agents/1591/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "处于状态，并有[普通攻击：敛枪式]发动次数时，长按  发动：\n按当前分支段数发动对应[普通攻击：敛枪式]，造成冰属性伤害；\n[普通攻击：敛枪式]共有三段，每次释放都可以使段数提升，发动[普通攻击：敛枪式]第三段后重置段数；\n[普通攻击：敛枪式]第一、二段蓄力架势期间受到敌方攻击时，希格莉德会用盾牌进行格挡，若格挡成功，抵挡此次攻击伤害，使下一次[普通攻击：敛枪式]造成的失衡值提升100%，刷新状态，并获得一次[普通攻击：敛枪式]发动机会；格挡成功后点按  可发动对应段数的[普通攻击：敛枪式]；\n衔接在[普通攻击：凛冽枪尖]后的[普通攻击：敛枪式]可以保留[普通攻击：凛冽枪尖]的段数；\n招式发动期间受到的伤害减少60%；\n招式发动期间抗打断等级提升;\n[普通攻击：敛枪式]第三段发动期间拥有无敌效果。",
       "parameterIds": ["1591022"],
       "sourceExpression": "{Skill:1591022, Prop:1001}",
       "damageCoefficient": {
