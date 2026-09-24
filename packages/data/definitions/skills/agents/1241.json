@@ -1,0 +1,1214 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1241",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1241:action:0001",
+      "branchId": "agent:1241:branch:assist-4",
+      "name": "快速支援：掩护射击",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n使用以太鹿弹对前方敌人发动射击，造成以太伤害；\n招式发动时，获得1枚[强化霰弹]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1241024"],
+      "sourceExpression": "{Skill:1241024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.514,
+        "growth": 0.047
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.514,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0001:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.514,
+                  "growth": 0.047
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241024-main"
+    },
+    {
+      "actionId": "action:agent:1241:action:0002",
+      "branchId": "agent:1241:branch:assist-5",
+      "name": "支援突击：自卫还击",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[回避支援]后，点按  发动：\n交替使用体术和霰弹枪进行攻击，造成物理伤害和以太伤害；\n招式发动时，获得3枚[强化霰弹]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1241025"],
+      "sourceExpression": "{Skill:1241025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.558,
+        "growth": 0.324
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.086,
+        "growth": 0.141
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241025-main"
+    },
+    {
+      "actionId": "action:agent:1241:action:0003",
+      "branchId": "agent:1241:branch:basic-3",
+      "name": "普通攻击：不许动！",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "[突击模式]\n点按  发动：\n交替使用体术、手枪和以太鹿弹，向前方进行至多五段的攻击，造成物理伤害和以太伤害；\n第四、第五段攻击命中敌人时，获得1枚[强化霰弹]，同一招式中最多获得1枚；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  ，可以发动[冲刺攻击：火力奇袭]，向对应方向调整身位；\n[突击模式]下，长按  时，将会切换攻击方式，进入[压制模式]。",
+      "parameterIds": ["1241001"],
+      "sourceExpression": "{Skill:1241001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.431,
+        "growth": 0.04
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.216,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241001-一段"
+    },
+    {
+      "actionId": "action:agent:1241:action:0004",
+      "branchId": "agent:1241:branch:basic-3",
+      "name": "普通攻击：不许动！",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "[突击模式]\n点按  发动：\n交替使用体术、手枪和以太鹿弹，向前方进行至多五段的攻击，造成物理伤害和以太伤害；\n第四、第五段攻击命中敌人时，获得1枚[强化霰弹]，同一招式中最多获得1枚；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  ，可以发动[冲刺攻击：火力奇袭]，向对应方向调整身位；\n[突击模式]下，长按  时，将会切换攻击方式，进入[压制模式]。",
+      "parameterIds": ["1241002"],
+      "sourceExpression": "{Skill:1241002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.264,
+        "growth": 0.115
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.973,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241002-二段"
+    },
+    {
+      "actionId": "action:agent:1241:action:0005",
+      "branchId": "agent:1241:branch:basic-3",
+      "name": "普通攻击：不许动！",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "[突击模式]\n点按  发动：\n交替使用体术、手枪和以太鹿弹，向前方进行至多五段的攻击，造成物理伤害和以太伤害；\n第四、第五段攻击命中敌人时，获得1枚[强化霰弹]，同一招式中最多获得1枚；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  ，可以发动[冲刺攻击：火力奇袭]，向对应方向调整身位；\n[突击模式]下，长按  时，将会切换攻击方式，进入[压制模式]。",
+      "parameterIds": ["1241003"],
+      "sourceExpression": "{Skill:1241003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.373,
+        "growth": 0.125
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.947,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241003-三段"
+    },
+    {
+      "actionId": "action:agent:1241:action:0006",
+      "branchId": "agent:1241:branch:basic-3",
+      "name": "普通攻击：不许动！",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "[突击模式]\n点按  发动：\n交替使用体术、手枪和以太鹿弹，向前方进行至多五段的攻击，造成物理伤害和以太伤害；\n第四、第五段攻击命中敌人时，获得1枚[强化霰弹]，同一招式中最多获得1枚；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  ，可以发动[冲刺攻击：火力奇袭]，向对应方向调整身位；\n[突击模式]下，长按  时，将会切换攻击方式，进入[压制模式]。",
+      "parameterIds": ["1241004"],
+      "sourceExpression": "{Skill:1241004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.51,
+        "growth": 0.138
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.243,
+        "growth": 0.057
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241004-四段"
+    },
+    {
+      "actionId": "action:agent:1241:action:0007",
+      "branchId": "agent:1241:branch:basic-3",
+      "name": "普通攻击：不许动！",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "[突击模式]\n点按  发动：\n交替使用体术、手枪和以太鹿弹，向前方进行至多五段的攻击，造成物理伤害和以太伤害；\n第四、第五段攻击命中敌人时，获得1枚[强化霰弹]，同一招式中最多获得1枚；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按  ，可以发动[冲刺攻击：火力奇袭]，向对应方向调整身位；\n[突击模式]下，长按  时，将会切换攻击方式，进入[压制模式]。",
+      "parameterIds": ["1241005"],
+      "sourceExpression": "{Skill:1241005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.622,
+        "growth": 0.148
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.392,
+        "growth": 0.064
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241005-五段"
+    },
+    {
+      "actionId": "action:agent:1241:action:0008",
+      "branchId": "agent:1241:branch:basic-4",
+      "name": "普通攻击：请勿抵抗",
+      "rowName": "一段伤害倍率（物理）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[压制模式]\n长按  发动：\n使用霰弹枪向前方进行至多三段的穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动[冲刺攻击：火力压制]，向对应方向调整身位；\n[压制模式]下，松开  时，将会切换攻击方式，回到[突击模式]。",
+      "parameterIds": ["1241006"],
+      "sourceExpression": "{Skill:1241006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.537,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.537,
+                  "growth": 0.049
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0009",
+      "branchId": "agent:1241:branch:basic-4",
+      "name": "普通攻击：请勿抵抗",
+      "rowName": "二段伤害倍率（物理）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[压制模式]\n长按  发动：\n使用霰弹枪向前方进行至多三段的穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动[冲刺攻击：火力压制]，向对应方向调整身位；\n[压制模式]下，松开  时，将会切换攻击方式，回到[突击模式]。",
+      "parameterIds": ["1241007"],
+      "sourceExpression": "{Skill:1241007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.537,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.537,
+                  "growth": 0.049
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0010",
+      "branchId": "agent:1241:branch:basic-4",
+      "name": "普通攻击：请勿抵抗",
+      "rowName": "三段伤害倍率（物理）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[压制模式]\n长按  发动：\n使用霰弹枪向前方进行至多三段的穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动[冲刺攻击：火力压制]，向对应方向调整身位；\n[压制模式]下，松开  时，将会切换攻击方式，回到[突击模式]。",
+      "parameterIds": ["1241008"],
+      "sourceExpression": "{Skill:1241008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.609,
+        "growth": 0.147
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.787,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.609,
+                  "growth": 0.147
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0011",
+      "branchId": "agent:1241:branch:basic-4",
+      "name": "普通攻击：请勿抵抗",
+      "rowName": "一段伤害倍率（以太）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:zhuyuan-basic-ms4hd701"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/6"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[压制模式]\n长按  发动：\n使用霰弹枪向前方进行至多三段的穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动[冲刺攻击：火力压制]，向对应方向调整身位；\n[压制模式]下，松开  时，将会切换攻击方式，回到[突击模式]。",
+      "parameterIds": ["1241010"],
+      "sourceExpression": "{Skill:1241010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.359,
+        "growth": 0.124
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0011:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.359,
+                  "growth": 0.124
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0012",
+      "branchId": "agent:1241:branch:basic-4",
+      "name": "普通攻击：请勿抵抗",
+      "rowName": "二段伤害倍率（以太）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:zhuyuan-basic-ms4hd701"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/7"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[压制模式]\n长按  发动：\n使用霰弹枪向前方进行至多三段的穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动[冲刺攻击：火力压制]，向对应方向调整身位；\n[压制模式]下，松开  时，将会切换攻击方式，回到[突击模式]。",
+      "parameterIds": ["1241011"],
+      "sourceExpression": "{Skill:1241011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.359,
+        "growth": 0.124
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0012:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.359,
+                  "growth": 0.124
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0013",
+      "branchId": "agent:1241:branch:basic-4",
+      "name": "普通攻击：请勿抵抗",
+      "rowName": "三段伤害倍率（以太）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:zhuyuan-basic-ms4hd701"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/8"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[压制模式]\n长按  发动：\n使用霰弹枪向前方进行至多三段的穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动[冲刺攻击：火力压制]，向对应方向调整身位；\n[压制模式]下，松开  时，将会切换攻击方式，回到[突击模式]。",
+      "parameterIds": ["1241012"],
+      "sourceExpression": "{Skill:1241012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.077,
+        "growth": 0.371
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.787,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0013:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.077,
+                  "growth": 0.371
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0014",
+      "branchId": "agent:1241:branch:chain-3",
+      "name": "连携技：歼灭模式",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n使用完全变形武器进行饱和攻击，发射直线激光和追踪导弹，造成大量以太伤害；\n招式发动时，获得3枚[强化霰弹]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1241022"],
+      "sourceExpression": "{Skill:1241022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.875,
+        "growth": 0.535
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.486,
+        "growth": 0.068
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0014:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.875,
+                  "growth": 0.535
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241022-main"
+    },
+    {
+      "actionId": "action:agent:1241:action:0015",
+      "branchId": "agent:1241:branch:chain-4",
+      "name": "终结技：歼灭模式MAX ",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n使用完全变形武器进行饱和攻击，发射直线激光和追踪导弹，造成大量以太伤害；\n招式发动时，获得3枚[强化霰弹]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1241023"],
+      "sourceExpression": "{Skill:1241023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.776,
+        "growth": 1.798
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.251,
+        "growth": 0.0627
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0015:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.776,
+                  "growth": 1.798
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241023-main"
+    },
+    {
+      "actionId": "action:agent:1241:action:0016",
+      "branchId": "agent:1241:branch:dodge-5",
+      "name": "冲刺攻击：火力奇袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "[突击模式]\n闪避时，点按  发动：\n使用手枪进行射击，造成以太伤害。",
+      "parameterIds": ["1241017"],
+      "sourceExpression": "{Skill:1241017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.551,
+        "growth": 0.051
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.276,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0016:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.551,
+                  "growth": 0.051
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241017-main"
+    },
+    {
+      "actionId": "action:agent:1241:action:0017",
+      "branchId": "agent:1241:branch:dodge-6",
+      "name": "冲刺攻击：火力压制",
+      "rowName": "伤害倍率（物理）",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "[压制模式]\n在[普通攻击：请勿抵抗]发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动：\n使用霰弹枪进行穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害。",
+      "parameterIds": ["1241018"],
+      "sourceExpression": "{Skill:1241018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.537,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.537,
+                  "growth": 0.049
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0018",
+      "branchId": "agent:1241:branch:dodge-6",
+      "name": "冲刺攻击：火力压制",
+      "rowName": "伤害倍率（以太）",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:zhuyuan-dodge-ms4hdyw7"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "[压制模式]\n在[普通攻击：请勿抵抗]发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动：\n使用霰弹枪进行穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害。",
+      "parameterIds": ["1241019"],
+      "sourceExpression": "{Skill:1241019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.359,
+        "growth": 0.124
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0018:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.359,
+                  "growth": 0.124
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1241:action:0019",
+      "branchId": "agent:1241:branch:dodge-7",
+      "name": "闪避反击：火力震爆",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n使用以太鹿弹对前方敌人发动射击，造成以太伤害；\n招式发动时，获得1枚[强化霰弹]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1241020"],
+      "sourceExpression": "{Skill:1241020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.768,
+        "growth": 0.161
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.614,
+        "growth": 0.074
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0019:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.768,
+                  "growth": 0.161
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241020-main"
+    },
+    {
+      "actionId": "action:agent:1241:action:0020",
+      "branchId": "agent:1241:branch:special-3",
+      "name": "特殊技：鹿弹射击",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n使用以太鹿弹进行射击，造成以太伤害，连续点按  ，可以重复射击三次；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1241015"],
+      "sourceExpression": "{Skill:1241015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.184,
+        "growth": 0.017
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.184,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0020:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.184,
+                  "growth": 0.017
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241015-main"
+    },
+    {
+      "actionId": "action:agent:1241:action:0021",
+      "branchId": "agent:1241:branch:special-4",
+      "name": "强化特殊技：全弹连射",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1241/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1241/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n使用以太鹿弹进行连续射击，造成大量以太伤害；\n招式发动时，获得3枚[强化霰弹]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1241016"],
+      "sourceExpression": "{Skill:1241016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.874,
+        "growth": 0.534
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.8,
+        "growth": 0.219
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1241:action:0021:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1241:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.874,
+                  "growth": 0.534
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhuyuan-nk-1241016-main"
+    }
+  ]
+}

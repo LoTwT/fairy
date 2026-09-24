@@ -230,6 +230,10 @@ export declare function loadAllSimul(
 
 ## 分发与按需加载
 
+技能动作读取与等级解析另见[技能动作规范](skill-actions.md)。`loadAgentActions` 沿用单体懒加载和深复制契约；
+`resolveAgentAction`、`resolveAgentSkillLevel` 为不读取 JSON 的纯函数。技能 JSON 子路径为
+`/definitions/skills/agents/{来源ID}.json` 与 `/definitions/skills/manifest.json`，与其他 definitions 一起冻结发布。
+
 包保持 ESM，Node 范围沿用包清单，浏览器首版验收目标为 Vite 开发与生产消费。根入口导入不加载任何数据 JSON；
 允许加载小型名称元数据和显式动态导入表。Node 与 browser 条件入口由同一源码和副本生成；
 Node 使用 JSON 导入属性，browser 入口交由 Vite 转换 JSON，默认开发预构建无需额外 exclude 配置。消费者无需配置路径表或运行生成器，无运行时服务、CDN 或 core 依赖。
@@ -309,6 +313,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 包括不属于属性 manifest 的 effects 制品。属性 manifest 另对照同次 integrated 核对成员与依赖文件摘要；
 后续只复制固定 definitions 并逐文件复验，不在构建结束重新读取可变定义。旧属性过期不阻止来源副本获取，
 仅在消费准备和发布边界拒绝；详见[属性生成与发布](panel-attributes.md#固定证据生成与发布)。
+技能 manifest 同时核对角色来源输入、固定语义 registry 和本次冻结的效果目标目录摘要；其过期处理遵循同一边界。
 公开 API 消费随 npm 版本固定的快照，不接受本地目录，不操作锁或恢复记录，运行时不重算原 JSON 的 SHA-256。
 这将维护时的字节完整性检查落实在发布边界；不把静态模块缓存当作受管理目录并发读取协议，也不认证来源真实性。
 普通 build/test/check/pack 不读取真实 raw、不抓取、不生成或格式化真实 integrated。

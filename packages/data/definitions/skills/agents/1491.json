@@ -1,0 +1,1103 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1491",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1491:action:0001",
+      "branchId": "agent:1491:branch:assist-4",
+      "name": "快速支援：狂音连打",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n连续锤击前方敌人，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491013"],
+      "sourceExpression": "{Skill:1491013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.727,
+        "growth": 0.067
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.727,
+        "growth": 0.034
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.727,
+                  "growth": 0.067
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491013-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0002",
+      "branchId": "agent:1491:branch:assist-5",
+      "name": "招架支援：上台恐惧症",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491014"],
+      "sourceExpression": "{Skill:1491014, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.207,
+        "growth": 0.146
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1491:action:0003",
+      "branchId": "agent:1491:branch:assist-5",
+      "name": "招架支援：上台恐惧症",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491015"],
+      "sourceExpression": "{Skill:1491015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.052,
+        "growth": 0.185
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1491:action:0004",
+      "branchId": "agent:1491:branch:assist-5",
+      "name": "招架支援：上台恐惧症",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491016"],
+      "sourceExpression": "{Skill:1491016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.972,
+        "growth": 0.09
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1491:action:0005",
+      "branchId": "agent:1491:branch:assist-6",
+      "name": "支援突击：弹跳练习",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n骑着气锤连续跳跃，对前方敌人造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491017"],
+      "sourceExpression": "{Skill:1491017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 5.357,
+        "growth": 0.487
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.717,
+        "growth": 0.215
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 5.357,
+                  "growth": 0.487
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491017-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0006",
+      "branchId": "agent:1491:branch:basic-3",
+      "name": "普通攻击：鬼马流星锤",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害。",
+      "parameterIds": ["1491001"],
+      "sourceExpression": "{Skill:1491001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.434,
+        "growth": 0.04
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.248,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.434,
+                  "growth": 0.04
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491001-一段"
+    },
+    {
+      "actionId": "action:agent:1491:action:0007",
+      "branchId": "agent:1491:branch:basic-3",
+      "name": "普通攻击：鬼马流星锤",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害。",
+      "parameterIds": ["1491002"],
+      "sourceExpression": "{Skill:1491002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.759,
+        "growth": 0.16
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.091,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.759,
+                  "growth": 0.16
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491002-二段"
+    },
+    {
+      "actionId": "action:agent:1491:action:0008",
+      "branchId": "agent:1491:branch:basic-3",
+      "name": "普通攻击：鬼马流星锤",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害。",
+      "parameterIds": ["1491003"],
+      "sourceExpression": "{Skill:1491003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.812,
+        "growth": 0.165
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.236,
+        "growth": 0.057
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.812,
+                  "growth": 0.165
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491003-三段"
+    },
+    {
+      "actionId": "action:agent:1491:action:0009",
+      "branchId": "agent:1491:branch:basic-3",
+      "name": "普通攻击：鬼马流星锤",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害。",
+      "parameterIds": ["1491004"],
+      "sourceExpression": "{Skill:1491004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.053,
+        "growth": 0.369
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.517,
+        "growth": 0.115
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.053,
+                  "growth": 0.369
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491004-四段"
+    },
+    {
+      "actionId": "action:agent:1491:action:0010",
+      "branchId": "agent:1491:branch:basic-4",
+      "name": "普通攻击：坏猫出没",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "战斗中，千夏位于后场，且场上没有持有[猫的凝视]的敌人时，泡泡会消耗1个[磨爪器]并自动发动攻击， 造成物理伤害；\n队伍中任意角色开启[以太帷幕]时，千夏获得2个[磨爪器]；\n队伍中任意角色对敌人施加属性异常效果时，千夏获得1个[磨爪器]，10秒内最多触发1次；\n泡泡可以继承千夏的初始攻击力，千夏最多持有6个[磨爪器]。",
+      "parameterIds": ["1491005"],
+      "sourceExpression": "{Skill:1491005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.08,
+        "growth": 0.19
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.08,
+                  "growth": 0.19
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491005-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0011",
+      "branchId": "agent:1491:branch:chain-3",
+      "name": "连携技：别惹猫咪",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n骑着泡泡冲向前方敌人，造成大量物理伤害；\n招式重击命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491011"],
+      "sourceExpression": "{Skill:1491011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.113,
+        "growth": 0.738
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.926,
+        "growth": 0.133
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.113,
+                  "growth": 0.738
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491011-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0012",
+      "branchId": "agent:1491:branch:chain-4",
+      "name": "终结技：通通砸碎！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n用锤子连续攻击后，打出泡泡并引发爆炸，对范围内敌人造成大量物理伤害；\n重击发动时，获得6个[磨爪器]；\n从高空下砸命中敌人时，将触发[快速支援]并为全队角色回复{CAL:-50+AvatarSkillLevel(3)*250,1,2}点生命值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491012"],
+      "sourceExpression": "{Skill:1491012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 20.909,
+        "growth": 1.901
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.728,
+        "growth": 0.17
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 20.909,
+                  "growth": 1.901
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491012-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0013",
+      "branchId": "agent:1491:branch:dodge-4",
+      "name": "冲刺攻击：冲天锤",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n挑飞前方敌人，造成物理伤害。",
+      "parameterIds": ["1491009"],
+      "sourceExpression": "{Skill:1491009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.997,
+        "growth": 0.091
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.499,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.997,
+                  "growth": 0.091
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491009-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0014",
+      "branchId": "agent:1491:branch:dodge-5",
+      "name": "闪避反击：妄想三振",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n连续锤击前方敌人，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491010"],
+      "sourceExpression": "{Skill:1491010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.188,
+        "growth": 0.29
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.753,
+        "growth": 0.126
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.188,
+                  "growth": 0.29
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491010-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0015",
+      "branchId": "agent:1491:branch:special-4",
+      "name": "特殊技：星星发射",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n使用气枪发射泡泡攻击前方敌人， 造成物理伤害；技能发动后，泡泡会加入战斗。",
+      "parameterIds": ["1491006"],
+      "sourceExpression": "{Skill:1491006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.564,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.564,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.564,
+                  "growth": 0.052
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491006-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0016",
+      "branchId": "agent:1491:branch:special-5",
+      "name": "强化特殊技：泡泡糖轰炸",
+      "rowName": "泡泡糖轰炸伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按   发动：\n扔出泡泡，砸向目标并造成物理伤害；技能发动后，泡泡会加入战斗；\n技能发动时，为全队代理人添加[天使协律]效果，持续40秒；\n招式重击命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491007", "1491018"],
+      "sourceExpression": "{{Skill:1491007, Prop:1001} + {Skill:1491018, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 9.133,
+        "growth": 0.831
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 6.138,
+        "growth": 0.28
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 9.133,
+                  "growth": 0.831
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491007-泡泡糖轰炸"
+    },
+    {
+      "actionId": "action:agent:1491:action:0017",
+      "branchId": "agent:1491:branch:special-5",
+      "name": "强化特殊技：泡泡糖轰炸",
+      "rowName": "快速衔接特别拍照技巧时，泡泡糖轰炸伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/special/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按   发动：\n扔出泡泡，砸向目标并造成物理伤害；技能发动后，泡泡会加入战斗；\n技能发动时，为全队代理人添加[天使协律]效果，持续40秒；\n招式重击命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1491007"],
+      "sourceExpression": "{Skill:1491007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 7.941,
+        "growth": 0.722
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.946,
+        "growth": 0.225
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 7.941,
+                  "growth": 0.722
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491007-快速衔接特别拍照技巧时-泡泡糖轰炸"
+    },
+    {
+      "actionId": "action:agent:1491:action:0018",
+      "branchId": "agent:1491:branch:special-6",
+      "name": "强化特殊技：特别拍照技巧",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "进入[天使协律]状态后，点按   可以发动，或在[强化特殊技：泡泡糖轰炸]发动期间，保持长按   快速发动：\n与泡泡协同攻击目标敌人，造成物理伤害；技能发动后，泡泡会加入战斗；\n重击发动前，开启[以太帷幕·妄想重奏]，[以太帷幕·妄想重奏]生效期间，全队角色攻击力额外提升50点，持续40秒，千夏重复开启[以太帷幕·妄想重奏]前，将关闭已有的[以太帷幕·妄想重奏]；\n招式重击命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果，每次进入[天使协律]，只能发动1次[强化特殊技：特别拍照技巧]。",
+      "parameterIds": ["1491008"],
+      "sourceExpression": "{Skill:1491008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 8.281,
+        "growth": 0.753
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 6.023,
+        "growth": 0.274
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 8.281,
+                  "growth": 0.753
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-sunna-nk-1491008-main"
+    },
+    {
+      "actionId": "action:agent:1491:action:0019",
+      "branchId": "agent:1491:branch:special-6",
+      "name": "强化特殊技：特别拍照技巧",
+      "rowName": "伤害倍率（协同）",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/skill/special/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1491/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "进入[天使协律]状态后，点按   可以发动，或在[强化特殊技：泡泡糖轰炸]发动期间，保持长按   快速发动：\n与泡泡协同攻击目标敌人，造成物理伤害；技能发动后，泡泡会加入战斗；\n重击发动前，开启[以太帷幕·妄想重奏]，[以太帷幕·妄想重奏]生效期间，全队角色攻击力额外提升50点，持续40秒，千夏重复开启[以太帷幕·妄想重奏]前，将关闭已有的[以太帷幕·妄想重奏]；\n招式重击命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果，每次进入[天使协律]，只能发动1次[强化特殊技：特别拍照技巧]。",
+      "parameterIds": ["1491008", "1491019"],
+      "sourceExpression": "{{Skill:1491008, Prop:1001} + {Skill:1491019, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 9.524000000000001,
+        "growth": 0.866
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 6.927,
+        "growth": 0.316
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1491:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1491:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 9.524000000000001,
+                  "growth": 0.866
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    }
+  ]
+}

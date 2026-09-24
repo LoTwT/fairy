@@ -1,0 +1,934 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1331",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1331:action:0001",
+      "branchId": "agent:1331:branch:assist-4",
+      "name": "快速支援：凛羽之护",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动攻击，造成物理伤害和以太伤害；\n招式发动期间拥有无敌效果；\n招式发动后进入[淑女礼仪]状态；\n拥有[飞羽]时，在招式发动过程中保持按住  可进入[裙裾浮游]状态。",
+      "parameterIds": ["1331015"],
+      "sourceExpression": "{Skill:1331015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.973,
+        "growth": 0.089
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.487,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-vivian-nk-1331015-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0002",
+      "branchId": "agent:1331:branch:assist-5",
+      "name": "招架支援：银伞列阵",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1331016"],
+      "sourceExpression": "{Skill:1331016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1331:action:0003",
+      "branchId": "agent:1331:branch:assist-5",
+      "name": "招架支援：银伞列阵",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1331017"],
+      "sourceExpression": "{Skill:1331017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1331:action:0004",
+      "branchId": "agent:1331:branch:assist-5",
+      "name": "招架支援：银伞列阵",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1331018"],
+      "sourceExpression": "{Skill:1331018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1331:action:0005",
+      "branchId": "agent:1331:branch:assist-6",
+      "name": "支援突击：裁决羽刃",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动攻击，造成以太伤害，并回复2点[飞羽]；\n招式发动期间拥有无敌效果；\n招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按  取消。",
+      "parameterIds": ["1331019"],
+      "sourceExpression": "{Skill:1331019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.739,
+        "growth": 0.34
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.253,
+        "growth": 0.148
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0005:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.739,
+                  "growth": 0.34
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331019-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0006",
+      "branchId": "agent:1331:branch:basic-5",
+      "name": "普通攻击：翎羽拂击",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和以太伤害；\n发动第四段攻击后进入[淑女礼仪]状态；\n拥有[飞羽]时，在第四段攻击过程中保持按住  可进入[裙裾浮游]状态。",
+      "parameterIds": ["1331001"],
+      "sourceExpression": "{Skill:1331001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.341,
+        "growth": 0.031
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.424,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-vivian-nk-1331001-一段"
+    },
+    {
+      "actionId": "action:agent:1331:action:0007",
+      "branchId": "agent:1331:branch:basic-5",
+      "name": "普通攻击：翎羽拂击",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和以太伤害；\n发动第四段攻击后进入[淑女礼仪]状态；\n拥有[飞羽]时，在第四段攻击过程中保持按住  可进入[裙裾浮游]状态。",
+      "parameterIds": ["1331002"],
+      "sourceExpression": "{Skill:1331002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.242,
+        "growth": 0.022
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.281,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-vivian-nk-1331002-二段"
+    },
+    {
+      "actionId": "action:agent:1331:action:0008",
+      "branchId": "agent:1331:branch:basic-5",
+      "name": "普通攻击：翎羽拂击",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和以太伤害；\n发动第四段攻击后进入[淑女礼仪]状态；\n拥有[飞羽]时，在第四段攻击过程中保持按住  可进入[裙裾浮游]状态。",
+      "parameterIds": ["1331003"],
+      "sourceExpression": "{Skill:1331003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.769,
+        "growth": 0.07
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.818,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-vivian-nk-1331003-三段"
+    },
+    {
+      "actionId": "action:agent:1331:action:0009",
+      "branchId": "agent:1331:branch:basic-5",
+      "name": "普通攻击：翎羽拂击",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和以太伤害；\n发动第四段攻击后进入[淑女礼仪]状态；\n拥有[飞羽]时，在第四段攻击过程中保持按住  可进入[裙裾浮游]状态。",
+      "parameterIds": ["1331004"],
+      "sourceExpression": "{Skill:1331004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.284,
+        "growth": 0.117
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.272,
+        "growth": 0.058
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-vivian-nk-1331004-四段"
+    },
+    {
+      "actionId": "action:agent:1331:action:0010",
+      "branchId": "agent:1331:branch:basic-6",
+      "name": "普通攻击：淑女礼仪·舞步",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[淑女礼仪]状态下，点按  发动：\n向前突进攻击，造成以太伤害，并在命中目标时回复1点[飞羽]；\n招式发动期间拥有无敌效果；\n若突进期间触发极限闪避，会额外回复1点[飞羽]；\n招式发动后若拥有[飞羽]，会进入[裙裾浮游]状态，可以通过招式发动时保持长按  取消。",
+      "parameterIds": ["1331005"],
+      "sourceExpression": "{Skill:1331005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.478,
+        "growth": 0.044
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.372,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0010:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.478,
+                  "growth": 0.044
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331005-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0011",
+      "branchId": "agent:1331:branch:basic-7",
+      "name": "普通攻击：裙裾浮游·悬落",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:vivian-basic-ms4rzqxt"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "[裙裾浮游]状态下，点按  发动：\n向前方发动范围攻击，造成以太伤害；\n招式发动后消耗全部[飞羽]，每消耗1点[飞羽]，都会获得1点[护羽]；\n招式发动期间拥有无敌效果；\n在[裙裾浮游]状态下切换角色时，薇薇安会自动发动[普通攻击：裙裾浮游·悬落]；\n在[裙裾浮游]状态下点按  可以退出[裙裾浮游]状态。",
+      "parameterIds": ["1331006"],
+      "sourceExpression": "{Skill:1331006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.802,
+        "growth": 0.073
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.624,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0011:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.802,
+                  "growth": 0.073
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331006-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0012",
+      "branchId": "agent:1331:branch:basic-8",
+      "name": "普通攻击：落羽生花",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:vivian-basic-ms4qvvl9"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "队伍中任意角色发动[强化特殊技]命中目标后，薇薇安会消耗1点[护羽]并对目标发动一次[普通攻击：落羽生花]，造成以太伤害，同一招式最多触发一次，这一效果可以在薇薇安处于后场时触发；\n[护羽]最多持有5点。",
+      "parameterIds": ["1331008"],
+      "sourceExpression": "{Skill:1331008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.2,
+        "growth": 0.2
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0,
+        "growth": 0
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0012:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.2,
+                  "growth": 0.2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331008-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0013",
+      "branchId": "agent:1331:branch:chain-3",
+      "name": "连携技：星羽和声",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动强力攻击，造成大量以太伤害，并回复2点[飞羽]；\n招式发动期间拥有无敌效果；\n招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按  取消。",
+      "parameterIds": ["1331013"],
+      "sourceExpression": "{Skill:1331013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.589,
+        "growth": 0.599
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.2,
+        "growth": 0.1
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0013:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.589,
+                  "growth": 0.599
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331013-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0014",
+      "branchId": "agent:1331:branch:chain-4",
+      "name": "终结技：飞鸟鸣颂",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围敌人发动强力攻击，造成大量以太伤害，并回复5点[飞羽]；\n招式发动期间拥有无敌效果；\n招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按  取消。",
+      "parameterIds": ["1331014"],
+      "sourceExpression": "{Skill:1331014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.868,
+        "growth": 1.534
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.494,
+        "growth": 0.114
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0014:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.868,
+                  "growth": 1.534
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331014-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0015",
+      "branchId": "agent:1331:branch:dodge-5",
+      "name": "冲刺攻击：银刺舞曲",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行突刺，造成物理伤害；",
+      "parameterIds": ["1331011"],
+      "sourceExpression": "{Skill:1331011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.496,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.248,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.496,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331011-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0016",
+      "branchId": "agent:1331:branch:dodge-6",
+      "name": "闪避反击：羽刃反振",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动攻击，造成物理伤害和以太伤害；\n招式发动期间拥有无敌效果；\n招式发动后进入[淑女礼仪]状态；\n拥有[飞羽]时，在招式发动过程中保持按住  可进入[裙裾浮游]状态。",
+      "parameterIds": ["1331012"],
+      "sourceExpression": "{Skill:1331012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.364,
+        "growth": 0.215
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.073,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-vivian-nk-1331012-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0017",
+      "branchId": "agent:1331:branch:special-3",
+      "name": "特殊技：银羽咏叹",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n快速向前方进行攻击，造成物理伤害和以太伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1331009"],
+      "sourceExpression": "{Skill:1331009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.569,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.569,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-vivian-nk-1331009-main"
+    },
+    {
+      "actionId": "action:agent:1331:action:0018",
+      "branchId": "agent:1331:branch:special-4",
+      "name": "强化特殊技：堇花悼亡",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1331/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1331/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方发动强力攻击，造成大量以太伤害，并回复3点[飞羽]；\n招式发动期间拥有无敌效果；\n招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按  进入[淑女礼仪]状态。",
+      "parameterIds": ["1331010"],
+      "sourceExpression": "{Skill:1331010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.926,
+        "growth": 0.539
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.848,
+        "growth": 0.221
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1331:action:0018:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1331:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.926,
+                  "growth": 0.539
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-vivian-nk-1331010-main"
+    }
+  ]
+}

@@ -1,0 +1,1162 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1561",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1561:action:0001",
+      "branchId": "agent:1561:branch:assist-4",
+      "name": "快速支援：紧急预案",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对目标发动连续攻击，造成风属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561015"],
+      "sourceExpression": "{Skill:1561015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.038,
+        "growth": 0.186
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.862,
+        "growth": 0.04
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0001:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.038,
+                  "growth": 0.186
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561015-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0002",
+      "branchId": "agent:1561:branch:assist-5",
+      "name": "招架支援：裁量干预",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561016"],
+      "sourceExpression": "{Skill:1561016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1561:action:0003",
+      "branchId": "agent:1561:branch:assist-5",
+      "name": "招架支援：裁量干预",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561017"],
+      "sourceExpression": "{Skill:1561017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1561:action:0004",
+      "branchId": "agent:1561:branch:assist-5",
+      "name": "招架支援：裁量干预",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561018"],
+      "sourceExpression": "{Skill:1561018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1561:action:0005",
+      "branchId": "agent:1561:branch:assist-6",
+      "name": "支援突击：谈判技巧",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对目标发动连续攻击，造成风属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561019"],
+      "sourceExpression": "{Skill:1561019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 5.327,
+        "growth": 0.485
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.967,
+        "growth": 0.181
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0005:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 5.327,
+                  "growth": 0.485
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561019-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0006",
+      "branchId": "agent:1561:branch:basic-2",
+      "name": "普通攻击：扇舞",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成风属性伤害；\n第五段攻击发动期间，维琳娜的抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1561001"],
+      "sourceExpression": "{Skill:1561001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.517,
+        "growth": 0.047
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.236,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0006:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.517,
+                  "growth": 0.047
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561001-一段"
+    },
+    {
+      "actionId": "action:agent:1561:action:0007",
+      "branchId": "agent:1561:branch:basic-2",
+      "name": "普通攻击：扇舞",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成风属性伤害；\n第五段攻击发动期间，维琳娜的抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1561002"],
+      "sourceExpression": "{Skill:1561002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.489,
+        "growth": 0.045
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.235,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0007:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.489,
+                  "growth": 0.045
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561002-二段"
+    },
+    {
+      "actionId": "action:agent:1561:action:0008",
+      "branchId": "agent:1561:branch:basic-2",
+      "name": "普通攻击：扇舞",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成风属性伤害；\n第五段攻击发动期间，维琳娜的抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1561003"],
+      "sourceExpression": "{Skill:1561003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.691,
+        "growth": 0.154
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.805,
+        "growth": 0.037
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0008:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.691,
+                  "growth": 0.154
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561003-三段"
+    },
+    {
+      "actionId": "action:agent:1561:action:0009",
+      "branchId": "agent:1561:branch:basic-2",
+      "name": "普通攻击：扇舞",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成风属性伤害；\n第五段攻击发动期间，维琳娜的抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1561004"],
+      "sourceExpression": "{Skill:1561004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.256,
+        "growth": 0.115
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.629,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0009:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.256,
+                  "growth": 0.115
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561004-四段"
+    },
+    {
+      "actionId": "action:agent:1561:action:0010",
+      "branchId": "agent:1561:branch:basic-2",
+      "name": "普通攻击：扇舞",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成风属性伤害；\n第五段攻击发动期间，维琳娜的抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1561005"],
+      "sourceExpression": "{Skill:1561005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.296,
+        "growth": 0.209
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.127,
+        "growth": 0.052
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0010:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.296,
+                  "growth": 0.209
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561005-五段"
+    },
+    {
+      "actionId": "action:agent:1561:action:0011",
+      "branchId": "agent:1561:branch:chain-3",
+      "name": "连携技：旋舞华章",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n化作飓风，对敌人进行多段攻击，随后进行终结一击，造成大量风属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561013"],
+      "sourceExpression": "{Skill:1561013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.004,
+        "growth": 0.728
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.384,
+        "growth": 0.109
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0011:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.004,
+                  "growth": 0.728
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561013-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0012",
+      "branchId": "agent:1561:branch:chain-4",
+      "name": "终结技：聆听呼啸",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前方进行多段攻击，造成大量风属性伤害；\n招式发动后将触发上一位角色的[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561014"],
+      "sourceExpression": "{Skill:1561014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 21.883,
+        "growth": 1.99
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.813,
+        "growth": 0.174
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0012:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 21.883,
+                  "growth": 1.99
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561014-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0013",
+      "branchId": "agent:1561:branch:dodge-4",
+      "name": "冲刺攻击：踏风",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前进行快速攻击，造成风属性伤害。",
+      "parameterIds": ["1561011"],
+      "sourceExpression": "{Skill:1561011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.997,
+        "growth": 0.091
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.422,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0013:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.997,
+                  "growth": 0.091
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561011-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0014",
+      "branchId": "agent:1561:branch:dodge-5",
+      "name": "闪避反击：折云",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对目标发动连续攻击，造成风属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561012"],
+      "sourceExpression": "{Skill:1561012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.949,
+        "growth": 0.359
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.824,
+        "growth": 0.129
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0014:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.949,
+                  "growth": 0.359
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561012-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0015",
+      "branchId": "agent:1561:branch:special-5",
+      "name": "特殊技：风切变·激浊",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前扇出一道风，造成风属性伤害。",
+      "parameterIds": ["1561008"],
+      "sourceExpression": "{Skill:1561008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.586,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.496,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0015:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.586,
+                  "growth": 0.054
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561008-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0016",
+      "branchId": "agent:1561:branch:special-6",
+      "name": "强化特殊技：风切变·扬清",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n先向后闪避，随后扇出巨大风弹攻击敌人，造成风属性伤害；\n向后闪避期间，具备闪避判定，如果成功闪避敌人攻击，会触发[极限视域]；\n发动该招式后，点按  可衔接[普通攻击]第五段；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561009"],
+      "sourceExpression": "{Skill:1561009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.405,
+        "growth": 0.401
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.025,
+        "growth": 0.138
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0016:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.405,
+                  "growth": 0.401
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561009-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0017",
+      "branchId": "agent:1561:branch:special-7",
+      "name": "强化特殊技：风切变·三重绝息",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，在[强化特殊技：风切变·扬清]后点按或长按  发动：\n连续挥舞扇子，对敌人造成风属性伤害；\n发动该招式后，点按  可衔接[普通攻击]第五段；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1561010"],
+      "sourceExpression": "{Skill:1561010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 7.252,
+        "growth": 0.66
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 5.152,
+        "growth": 0.235
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0017:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 7.252,
+                  "growth": 0.66
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561010-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0018",
+      "branchId": "agent:1561:branch:special-8",
+      "name": "强化特殊技：风切变·风暴眼",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1561/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "大于等于90点时，长按  或  发动：\n维琳娜汇聚旋风，随后召唤出，持续攻击敌人，并触发上一位角色的[快速支援]；\n[广域气旋]持续5秒，每0.5秒对周边敌人造成一次风属性伤害。",
+      "parameterIds": ["1561006"],
+      "sourceExpression": "{Skill:1561006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.167,
+        "growth": 0.197
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.834,
+        "growth": 0.084
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1561:action:0018:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.167,
+                  "growth": 0.197
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-velina-nk-1561006-main"
+    },
+    {
+      "actionId": "action:agent:1561:action:0019",
+      "branchId": "agent:1561:branch:special-9",
+      "name": "广域气旋",
+      "rowName": "[广域气旋]风属性单次攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": null,
+      "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnzvq"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1561007"],
+      "sourceExpression": "{Skill:1561007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.39,
+        "growth": 0.036
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.825,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-velina-nk-1561007-广域气旋-风属性单次攻击"
+    },
+    {
+      "actionId": "action:agent:1561:action:0020",
+      "branchId": "agent:1561:branch:special-9",
+      "name": "广域气旋",
+      "rowName": "[广域气旋]染色属性单次攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": null,
+      "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnzvq"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/special/description/8/param/2"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1561020"],
+      "sourceExpression": "{{Skill:1561020, Prop:1001}*0.2}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.195,
+        "growth": 0.0178
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-velina-nk-1561020-广域气旋-染色属性单次攻击"
+    },
+    {
+      "actionId": "action:agent:1561:action:0021",
+      "branchId": "agent:1561:branch:special-10",
+      "name": "微域气旋",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": null,
+      "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnsha"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1561021"],
+      "sourceExpression": "{Skill:1561021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.325,
+        "growth": 0.03
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.375,
+        "growth": 0.063
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-velina-nk-1561021-main"
+    }
+  ]
+}

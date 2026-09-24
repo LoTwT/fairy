@@ -1,0 +1,1072 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1251",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1251:action:0001",
+      "branchId": "agent:1251:branch:assist-4",
+      "name": "快速支援：风入松",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n腾空跃起后发动下落攻击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251016"],
+      "sourceExpression": "{Skill:1251016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.339,
+        "growth": 0.122
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.339,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0001:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.339,
+                  "growth": 0.122
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251016-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0002",
+      "branchId": "agent:1251:branch:assist-5",
+      "name": "招架支援：锦上花",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251017"],
+      "sourceExpression": "{Skill:1251017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.493,
+        "growth": 0.114
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1251:action:0003",
+      "branchId": "agent:1251:branch:assist-5",
+      "name": "招架支援：锦上花",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251018"],
+      "sourceExpression": "{Skill:1251018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.043,
+        "growth": 0.139
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1251:action:0004",
+      "branchId": "agent:1251:branch:assist-5",
+      "name": "招架支援：锦上花",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251019"],
+      "sourceExpression": "{Skill:1251019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.283,
+        "growth": 0.059
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1251:action:0005",
+      "branchId": "agent:1251:branch:assist-6",
+      "name": "支援突击：清江引",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n向前方快速突进攻击并向地面注入电能，随后拔起引发爆炸，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251020"],
+      "sourceExpression": "{Skill:1251020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.764,
+        "growth": 0.343
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.79,
+        "growth": 0.127
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0005:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.764,
+                  "growth": 0.343
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251020-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0006",
+      "branchId": "agent:1251:branch:basic-5",
+      "name": "普通攻击：一煞",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和电属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人，在此期间发动[闪避]，不会打断[普通攻击]的连击段数；\n第三段攻击期间，停止点按  将会中断连击，自动衔接第四段攻击，维持连击超过一定时间后，第四段攻击将会得到强化；\n第三、第四段攻击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1251001"],
+      "sourceExpression": "{Skill:1251001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.472,
+        "growth": 0.043
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.236,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-qingyi-nk-1251001-一段"
+    },
+    {
+      "actionId": "action:agent:1251:action:0007",
+      "branchId": "agent:1251:branch:basic-5",
+      "name": "普通攻击：一煞",
+      "rowName": "一段伤害倍率（派生）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和电属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人，在此期间发动[闪避]，不会打断[普通攻击]的连击段数；\n第三段攻击期间，停止点按  将会中断连击，自动衔接第四段攻击，维持连击超过一定时间后，第四段攻击将会得到强化；\n第三、第四段攻击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1251002"],
+      "sourceExpression": "{Skill:1251002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.103,
+        "growth": 0.101
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.552,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1251:action:0008",
+      "branchId": "agent:1251:branch:basic-5",
+      "name": "普通攻击：一煞",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和电属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人，在此期间发动[闪避]，不会打断[普通攻击]的连击段数；\n第三段攻击期间，停止点按  将会中断连击，自动衔接第四段攻击，维持连击超过一定时间后，第四段攻击将会得到强化；\n第三、第四段攻击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1251003"],
+      "sourceExpression": "{Skill:1251003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.221,
+        "growth": 0.111
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.822,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-qingyi-nk-1251003-二段"
+    },
+    {
+      "actionId": "action:agent:1251:action:0009",
+      "branchId": "agent:1251:branch:basic-5",
+      "name": "普通攻击：一煞",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和电属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人，在此期间发动[闪避]，不会打断[普通攻击]的连击段数；\n第三段攻击期间，停止点按  将会中断连击，自动衔接第四段攻击，维持连击超过一定时间后，第四段攻击将会得到强化；\n第三、第四段攻击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1251004"],
+      "sourceExpression": "{Skill:1251004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.176,
+        "growth": 0.016
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.191,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-qingyi-nk-1251004-三段"
+    },
+    {
+      "actionId": "action:agent:1251:action:0010",
+      "branchId": "agent:1251:branch:basic-5",
+      "name": "普通攻击：一煞",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和电属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人，在此期间发动[闪避]，不会打断[普通攻击]的连击段数；\n第三段攻击期间，停止点按  将会中断连击，自动衔接第四段攻击，维持连击超过一定时间后，第四段攻击将会得到强化；\n第三、第四段攻击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1251005"],
+      "sourceExpression": "{Skill:1251005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.064,
+        "growth": 0.097
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.063,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-qingyi-nk-1251005-四段"
+    },
+    {
+      "actionId": "action:agent:1251:action:0011",
+      "branchId": "agent:1251:branch:basic-5",
+      "name": "普通攻击：一煞",
+      "rowName": "四段伤害倍率（强化）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害和电属性伤害；\n第三段攻击期间，连续点按  可以维持连击，持续打击敌人，在此期间发动[闪避]，不会打断[普通攻击]的连击段数；\n第三段攻击期间，停止点按  将会中断连击，自动衔接第四段攻击，维持连击超过一定时间后，第四段攻击将会得到强化；\n第三、第四段攻击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1251006"],
+      "sourceExpression": "{Skill:1251006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.344,
+        "growth": 0.214
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.047,
+        "growth": 0.094
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1251:action:0012",
+      "branchId": "agent:1251:branch:basic-6",
+      "name": "普通攻击：醉花云",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  发动：\n向前方发动一次突进攻击，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1251007"],
+      "sourceExpression": "{Skill:1251007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.856,
+        "growth": 0.078
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.856,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.856,
+                  "growth": 0.078
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251007-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0013",
+      "branchId": "agent:1251:branch:basic-7",
+      "name": "普通攻击：醉花月云转",
+      "rowName": "突进攻击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:qingyi-basic-ms4bcr00"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "[闪络]状态下，长按  发动：\n向前方连续发动五次突进攻击，随后发动终结一击，造成大量电属性伤害，招式发动期间松开  ，可以提前发动终结一击；\n在角色即将受到攻击时发动终结一击，可以触发[极限闪避]；\n突进攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果。",
+      "parameterIds": ["1251008"],
+      "sourceExpression": "{Skill:1251008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.487,
+        "growth": 0.408
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.719,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.487,
+                  "growth": 0.408
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251008-突进攻击"
+    },
+    {
+      "actionId": "action:agent:1251:action:0014",
+      "branchId": "agent:1251:branch:basic-7",
+      "name": "普通攻击：醉花月云转",
+      "rowName": "终结一击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:qingyi-basic-ms4bcr00"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "[闪络]状态下，长按  发动：\n向前方连续发动五次突进攻击，随后发动终结一击，造成大量电属性伤害，招式发动期间松开  ，可以提前发动终结一击；\n在角色即将受到攻击时发动终结一击，可以触发[极限闪避]；\n突进攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果。",
+      "parameterIds": ["1251009"],
+      "sourceExpression": "{Skill:1251009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.944,
+        "growth": 0.359
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.176,
+        "growth": 0.099
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0014:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.944,
+                  "growth": 0.359
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251009-终结一击"
+    },
+    {
+      "actionId": "action:agent:1251:action:0015",
+      "branchId": "agent:1251:branch:chain-3",
+      "name": "连携技：太平令",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围区域发动强力连续打击，造成大量电属性伤害；\n攻击命中敌人时，目标每拥有一层[核心被动：千秋岁]中的[羁服]，招式对其造成的伤害提升3%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251014"],
+      "sourceExpression": "{Skill:1251014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.479,
+        "growth": 0.589
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.09,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0015:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.479,
+                  "growth": 0.589
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251014-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0016",
+      "branchId": "agent:1251:branch:chain-4",
+      "name": "终结技：八声甘州",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围区域发动强力连续打击，随后发动终结一击，造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251015"],
+      "sourceExpression": "{Skill:1251015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.707,
+        "growth": 1.519
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 10.971,
+        "growth": 0.499
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0016:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.707,
+                  "growth": 1.519
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251015-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0017",
+      "branchId": "agent:1251:branch:dodge-4",
+      "name": "冲刺攻击：入破",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前突进后发动上挑攻击，造成物理伤害。",
+      "parameterIds": ["1251012"],
+      "sourceExpression": "{Skill:1251012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.495,
+        "growth": 0.045
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.248,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.495,
+                  "growth": 0.045
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251012-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0018",
+      "branchId": "agent:1251:branch:dodge-5",
+      "name": "闪避反击：意不尽",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n腾空跃起后发动下落攻击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1251013"],
+      "sourceExpression": "{Skill:1251013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.84,
+        "growth": 0.259
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.904,
+        "growth": 0.087
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0018:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.84,
+                  "growth": 0.259
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251013-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0019",
+      "branchId": "agent:1251:branch:special-3",
+      "name": "特殊技：昼锦堂",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方快速上挑，随后发动下砸攻击，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1251010"],
+      "sourceExpression": "{Skill:1251010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.624,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.624,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0019:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.624,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251010-main"
+    },
+    {
+      "actionId": "action:agent:1251:action:0020",
+      "branchId": "agent:1251:branch:special-4",
+      "name": "强化特殊技：月上海棠",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1251/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1251/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方快速上挑后腾空跃起，转身连打后发动强力的下砸攻击，造成大量电属性伤害，长按  时，可以额外消耗能量，提升转身连打的攻击次数；\n招式发动期间拥有无敌效果；\n招式发动后，可直接衔接第三段[普通攻击]。",
+      "parameterIds": ["1251011", "1251021", "1251022"],
+      "sourceExpression": "{{Skill:1251011, Prop:1001} + {Skill:1251021, Prop:1001} + {Skill:1251022, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.0280000000000005,
+        "growth": 0.549
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.443,
+        "growth": 0.203
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1251:action:0020:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.0280000000000005,
+                  "growth": 0.549
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251011-main"
+    }
+  ]
+}

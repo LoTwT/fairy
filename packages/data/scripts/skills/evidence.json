@@ -1,0 +1,20 @@
+{
+  "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+  "resources": [
+    {
+      "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+      "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
+      "purpose": "动作语义、增益锚点、命破职业与耀变倍率的固定参考"
+    },
+    {
+      "resource": "zzz-hp-backend/scripts/import-nanoka-skills.mjs",
+      "sha256": "4721ed276d5fae69b7289d1e04b7024ef01a36097f59159d5b6b9cd09b5c2cb5",
+      "purpose": "Nanoka 技能等级线性成长的来源实现及复合参数导入差异"
+    },
+    {
+      "resource": "zzz-hp/src/utils/skillTalentLevels.ts",
+      "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
+      "purpose": "五类技能等级、影画边界与独立耀变等级归属"
+    }
+  ]
+}

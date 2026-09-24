@@ -20,6 +20,7 @@ import {
   attributeArtifactPaths,
   verifyPanelAttributes,
 } from "../scripts/panel-attributes/manifest.ts"
+import { verifyAgentActions } from "../scripts/skills/manifest.ts"
 import {
   preparePublication,
   publicationFiles,
@@ -205,6 +206,15 @@ describe("packed package", () => {
     })
     const jsonFiles = publicationFiles(index)
     const attributeFiles = [...attributeArtifactPaths(index), "manifest.json"]
+    const actionFiles = [
+      ...index.entities.agents.memberIds.map((id) => `agents/${id}.json`),
+      "manifest.json",
+    ]
+    await verifyAgentActions(
+      join(packedRoot, "dist/definitions/skills"),
+      index,
+      join(packedRoot, "dist/definitions/effects/static-catalog.json"),
+    )
     await verifyPanelAttributes(
       join(packedRoot, "dist/definitions/attributes"),
       index,
@@ -243,6 +253,17 @@ describe("packed package", () => {
       expect(readFileSync(join(packedRoot, entry), "utf8")).toContain(
         sharedStem,
       )
+    const sharedRuntime = listFiles(packedRoot).filter(
+      (path) =>
+        path.endsWith(".mjs") &&
+        path !== "dist/index.mjs" &&
+        path !== "dist/index.browser.mjs",
+    )
+    expect(sharedRuntime).toHaveLength(1)
+    for (const entry of ["dist/index.mjs", "dist/index.browser.mjs"])
+      expect(readFileSync(join(packedRoot, entry), "utf8")).toContain(
+        basename(sharedRuntime[0]),
+      )
     expect(listFiles(packedRoot)).toEqual(
       [
         "LICENSE",
@@ -257,9 +278,11 @@ describe("packed package", () => {
         "dist/index.browser.mjs",
         "dist/index.browser.d.mts",
         ...sharedTypes,
+        ...sharedRuntime,
         "package.json",
         ...jsonFiles.map((path) => `dist/integrated/${path}`),
         ...attributeFiles.map((path) => `dist/definitions/attributes/${path}`),
+        ...actionFiles.map((path) => `dist/definitions/skills/${path}`),
       ].toSorted(),
     )
     for (const name of [
@@ -286,6 +309,12 @@ describe("packed package", () => {
       expectSameBytes(
         readFileSync(join(packedRoot, "dist/definitions/attributes", path)),
         readFileSync(join(cleanPackage, "definitions/attributes", path)),
+        path,
+      )
+    for (const path of actionFiles)
+      expectSameBytes(
+        readFileSync(join(packedRoot, "dist/definitions/skills", path)),
+        readFileSync(join(cleanPackage, "definitions/skills", path)),
         path,
       )
     expect(
@@ -337,7 +366,7 @@ describe("packed package", () => {
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
-assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes"].sort())
+assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes", "loadAgentActions", "resolveAgentAction", "resolveAgentSkillLevel"].sort())
 for (const [names, load, category] of [[api.agentNames, api.loadAgentLevel60Attributes, "agents"], [api.wEngineNames, api.loadWEngineLevel60Attributes, "w-engines"]]) {
   for (const name of names) {
     const attributes = await load(name)
@@ -346,6 +375,18 @@ for (const [names, load, category] of [[api.agentNames, api.loadAgentLevel60Attr
     assert.notEqual(await load(name), attributes)
   }
 }
+for (const name of api.agentNames) {
+  const actions = await api.loadAgentActions(name)
+  const direct = (await import("@randomplay/data/definitions/skills/agents/" + actions.entityId + ".json", { with: { type: "json" } })).default
+  assert.deepEqual(actions, direct)
+  assert.notEqual(await api.loadAgentActions(name), actions)
+}
+const nicole = await api.loadAgentActions("Nicole")
+const resolvedNicole = api.resolveAgentAction({ agent: nicole, actionId: "action:agent:1031:basic-enhanced-1", mindscapeRank: 6, levels: { basic: { mode: "effective", value: 15 } }, requireIndividualHits: true })
+assert.equal(resolvedNicole.ok, true)
+assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
+const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
+assert.equal(actionManifest.members.length, api.agentNames.length)
 assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
 const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
 assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)
@@ -641,6 +682,20 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
     })
     const typeSource = `import { loadAgentLevel60Attributes, loadWEngineLevel60Attributes, loadSDriveDiscMaxLevelAffixes } from "@randomplay/data"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes, PanelAttributeBonus } from "@randomplay/data"
+import { loadAgentActions, resolveAgentAction, resolveAgentSkillLevel } from "@randomplay/data"
+import type { AgentActions, ResolvedAgentAction, SkillLevelInput } from "@randomplay/data"
+const actions: Promise<AgentActions | undefined> = loadAgentActions("Nicole")
+const level: SkillLevelInput = { mode: "effective", value: 15 }
+async function selectAction() {
+  const agent = (await actions)!
+  const selected: ResolvedAgentAction = resolveAgentAction({ agent, actionId: "action:agent:1031:basic-enhanced-1", mindscapeRank: 6, levels: { basic: level } })
+  resolveAgentSkillLevel({ agent, group: "basic", mindscapeRank: 6, level })
+  return selected
+}
+// @ts-expect-error input mode cannot be inferred
+const missingMode: SkillLevelInput = { value: 12 }
+// @ts-expect-error exact agent name required
+loadAgentActions("Unknown Nicole")
 const agentAttributes: Promise<AgentLevel60Attributes | undefined> = loadAgentLevel60Attributes("Astra Yao")
 const engineAttributes: Promise<WEngineLevel60Attributes | undefined> = loadWEngineLevel60Attributes("Elegant Vanity")
 const discAffixes: Promise<SDriveDiscMaxLevelAffixes> = loadSDriveDiscMaxLevelAffixes()
@@ -1158,14 +1213,20 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
             readFileSync(join(snapshot, path)),
             path,
           )
-        for (const path of attributeFiles)
-          expectSameBytes(
-            readFileSync(
-              join(cleanPackage, "dist/definitions/attributes", path),
-            ),
-            readFileSync(join(packedRoot, "dist/definitions/attributes", path)),
-            path,
-          )
+        for (const [category, paths] of [
+          ["attributes", attributeFiles],
+          ["skills", actionFiles],
+        ] as const)
+          for (const path of paths)
+            expectSameBytes(
+              readFileSync(
+                join(cleanPackage, "dist/definitions", category, path),
+              ),
+              readFileSync(
+                join(packedRoot, "dist/definitions", category, path),
+              ),
+              path,
+            )
         expect(
           JSON.parse(
             readFileSync(

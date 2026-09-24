@@ -1,0 +1,900 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1181",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1181:action:0001",
+      "branchId": "agent:1181:branch:assist-4",
+      "name": "快速支援：事故解决方案",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对敌人投掷一颗手雷，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1181011"],
+      "sourceExpression": "{Skill:1181011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.455,
+        "growth": 0.042
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.455,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0001:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.455,
+                  "growth": 0.042
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181011-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0002",
+      "branchId": "agent:1181:branch:assist-5",
+      "name": "支援突击：反击电针",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[回避支援]后，点按  发动：\n对前方敌人发动回旋扫射并投掷手雷，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1181012"],
+      "sourceExpression": "{Skill:1181012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.593,
+        "growth": 0.327
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.128,
+        "growth": 0.143
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0002:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.593,
+                  "growth": 0.327
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181012-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0003",
+      "branchId": "agent:1181:branch:basic-3",
+      "name": "普通攻击：高压射钉",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。\n点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害，在[普通攻击]第一/第二段后发动时，继续点按  会从[普通攻击]第三/第四段连击继续；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1181001"],
+      "sourceExpression": "{Skill:1181001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.551,
+        "growth": 0.051
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.18,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181001-一段"
+    },
+    {
+      "actionId": "action:agent:1181:action:0004",
+      "branchId": "agent:1181:branch:basic-3",
+      "name": "普通攻击：高压射钉",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。\n点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害，在[普通攻击]第一/第二段后发动时，继续点按  会从[普通攻击]第三/第四段连击继续；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1181002"],
+      "sourceExpression": "{Skill:1181002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.597,
+        "growth": 0.055
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.347,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181002-二段"
+    },
+    {
+      "actionId": "action:agent:1181:action:0005",
+      "branchId": "agent:1181:branch:basic-3",
+      "name": "普通攻击：高压射钉",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。\n点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害，在[普通攻击]第一/第二段后发动时，继续点按  会从[普通攻击]第三/第四段连击继续；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1181003"],
+      "sourceExpression": "{Skill:1181003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.248,
+        "growth": 0.114
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.716,
+        "growth": 0.033
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181003-三段"
+    },
+    {
+      "actionId": "action:agent:1181:action:0006",
+      "branchId": "agent:1181:branch:basic-3",
+      "name": "普通攻击：高压射钉",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。\n点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害，在[普通攻击]第一/第二段后发动时，继续点按  会从[普通攻击]第三/第四段连击继续；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1181004"],
+      "sourceExpression": "{Skill:1181004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.863,
+        "growth": 0.17
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.072,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181004-四段"
+    },
+    {
+      "actionId": "action:agent:1181:action:0007",
+      "branchId": "agent:1181:branch:basic-3",
+      "name": "普通攻击：高压射钉",
+      "rowName": "垫步射击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。\n点按  发动：\n向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害，在[普通攻击]第一/第二段后发动时，继续点按  会从[普通攻击]第三/第四段连击继续；\n格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1181015"],
+      "sourceExpression": "{Skill:1181015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.403,
+        "growth": 0.037
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.403,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181015-垫步射击"
+    },
+    {
+      "actionId": "action:agent:1181:action:0008",
+      "branchId": "agent:1181:branch:chain-4",
+      "name": "连携技：协作施工",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向空中抛出三颗手雷，随后扫射将其引爆，造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1181009"],
+      "sourceExpression": "{Skill:1181009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.713,
+        "growth": 0.52
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.523,
+        "growth": 0.07
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0008:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 5.713,
+                  "growth": 0.52
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181009-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0009",
+      "branchId": "agent:1181:branch:chain-5",
+      "name": "终结技：工程爆破请勿接近",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/chain/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n丢出一枚特制的手雷，其在空中爆炸后会分裂成四颗更小的手雷，造成大量电属性伤害；\n招式发动期间拥有无敌效果。\n喧响等级达到[极]时，点按  发动：\n丢出一枚特制的手雷，其在空中爆炸后会分裂成四颗更小的手雷，造成大量电属性伤害；\n获得8层[电能]和25层[脉冲]（上限25层）；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1181010"],
+      "sourceExpression": "{Skill:1181010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 14.788,
+        "growth": 1.345
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.331,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0009:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 14.788,
+                  "growth": 1.345
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181010-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0010",
+      "branchId": "agent:1181:branch:dodge-5",
+      "name": "冲刺攻击：突击检查",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方滑铲扫射，造成物理伤害。",
+      "parameterIds": ["1181007"],
+      "sourceExpression": "{Skill:1181007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.333,
+        "growth": 0.031
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.167,
+        "growth": 0.008
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.333,
+                  "growth": 0.031
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181007-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0011",
+      "branchId": "agent:1181:branch:dodge-6",
+      "name": "闪避反击：违章处罚",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对敌人投掷一颗手雷，造成电属性伤害；\n招式发动期间拥有无敌效果。\n触发[极限闪避]后，点按  发动：\n对敌人投掷一颗手雷，造成电属性伤害，随后自动发动[普通攻击]第四段；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1181008"],
+      "sourceExpression": "{Skill:1181008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.642,
+        "growth": 0.15
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.505,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0011:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.642,
+                  "growth": 0.15
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181008-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0012",
+      "branchId": "agent:1181:branch:special-7",
+      "name": "特殊技：工程清障",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方投掷一颗手雷，造成电属性伤害；\n发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n招式发动期间抗打断等级提升。\n点按  发动：\n向前方投掷一颗手雷，造成电属性伤害；\n发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n消耗[电能]发动时可以闪避敌人的攻击；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1181005"],
+      "sourceExpression": "{Skill:1181005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.421,
+        "growth": 0.039
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.421,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.421,
+                  "growth": 0.039
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181005-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0013",
+      "branchId": "agent:1181:branch:special-8",
+      "name": "强化特殊技：超规工程清障",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        },
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n腾空跃起，并向前方投掷两颗手雷，造成大量电属性伤害；\n发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n招式发动期间拥有无敌效果。\n能量足够时，点按  发动：\n腾空跃起，并向前方投掷两颗手雷，造成大量电属性伤害；\n发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n若[电能]层数到达上限，会额外投掷一枚[涡流集束手雷]，在爆炸位置生成电磁场，持续牵引敌人，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1181006"],
+      "sourceExpression": "{Skill:1181006, Prop:1001}*2",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.338,
+        "growth": 0.304
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.684,
+        "growth": 0.122
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1181:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.338,
+                  "growth": 0.304
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-grace-nk-1181006-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0014",
+      "branchId": "agent:1181:branch:special-9",
+      "name": "涡流集束手雷基础倍率",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": null,
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1181020"],
+      "sourceExpression": "{Skill:1181020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.875,
+        "growth": 0.08
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          },
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181020-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0015",
+      "branchId": "agent:1181:branch:special-10",
+      "name": "特殊技：工程清障·循环",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1181/details.zh.json",
+          "pointer": "/skill/special/description/5/desc"
+        }
+      ],
+      "description": "[脉冲]状态下长按  发动：\n招式期间持续向前方投掷手雷，造成电属性伤害，每次投掷手雷获得一层[电能]；\n发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位，并可以闪避敌人的攻击；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1181018"],
+      "sourceExpression": "{Skill:1181018, Prop:1001}/29",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.19427586206896552,
+        "growth": 0.017689655172413794
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.17682758620689656,
+        "growth": 0.008068965517241379
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181018-main"
+    },
+    {
+      "actionId": "action:agent:1181:action:0016",
+      "branchId": "agent:1181:branch:special-11",
+      "name": "脉冲手雷倍率",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": null,
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1181/details.zh.json",
+        "pointer": "/skill/special/description/10/param/0"
+      },
+      "descriptionSources": [],
+      "description": "",
+      "parameterIds": ["1181019"],
+      "sourceExpression": "{Skill:1181019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.42,
+        "growth": 0.039
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          },
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-grace-nk-1181019-main"
+    }
+  ]
+}

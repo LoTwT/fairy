@@ -1,0 +1,1526 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1261",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1261:action:0001",
+      "branchId": "agent:1261:branch:assist-5",
+      "name": "快速支援：乌刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动多次斩击，随后向下突刺，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261019"],
+      "sourceExpression": "{Skill:1261019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.192,
+        "growth": 0.109
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.192,
+        "growth": 0.055
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.192,
+                  "growth": 0.109
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261019-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0002",
+      "branchId": "agent:1261:branch:assist-6",
+      "name": "快速支援：勾手跳",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "[狂热]状态下，当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动多次快速斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261020"],
+      "sourceExpression": "{Skill:1261020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.375,
+        "growth": 0.125
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.375,
+        "growth": 0.063
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0002:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.375,
+                  "growth": 0.125
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261020-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0003",
+      "branchId": "agent:1261:branch:assist-7",
+      "name": "招架支援：最后防线",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261021"],
+      "sourceExpression": "{Skill:1261021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1261:action:0004",
+      "branchId": "agent:1261:branch:assist-7",
+      "name": "招架支援：最后防线",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261022"],
+      "sourceExpression": "{Skill:1261022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1261:action:0005",
+      "branchId": "agent:1261:branch:assist-7",
+      "name": "招架支援：最后防线",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261023"],
+      "sourceExpression": "{Skill:1261023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1261:action:0006",
+      "branchId": "agent:1261:branch:assist-8",
+      "name": "支援突击：疾风扫",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n腾空跃起后对敌人发动快速斩击，随后在前方大范围内再次发动横扫斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261024"],
+      "sourceExpression": "{Skill:1261024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.455,
+        "growth": 0.315
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.99,
+        "growth": 0.136
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.455,
+                  "growth": 0.315
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261024-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0007",
+      "branchId": "agent:1261:branch:basic-6",
+      "name": "普通攻击：跳步刃舞",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的攻击，造成物理伤害。\n点按  发动：\n向前方进行至多六段的攻击，造成物理伤害；\n发动第六段[普通攻击]同时视为发动[冲刺攻击]，且招式发动期间抗打断等级提升。",
+      "parameterIds": ["1261001"],
+      "sourceExpression": "{Skill:1261001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.361,
+        "growth": 0.033
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.153,
+        "growth": 0.007
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.361,
+                  "growth": 0.033
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261001-一段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0008",
+      "branchId": "agent:1261:branch:basic-6",
+      "name": "普通攻击：跳步刃舞",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的攻击，造成物理伤害。\n点按  发动：\n向前方进行至多六段的攻击，造成物理伤害；\n发动第六段[普通攻击]同时视为发动[冲刺攻击]，且招式发动期间抗打断等级提升。",
+      "parameterIds": ["1261002"],
+      "sourceExpression": "{Skill:1261002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.623,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.443,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.623,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261002-二段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0009",
+      "branchId": "agent:1261:branch:basic-6",
+      "name": "普通攻击：跳步刃舞",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的攻击，造成物理伤害。\n点按  发动：\n向前方进行至多六段的攻击，造成物理伤害；\n发动第六段[普通攻击]同时视为发动[冲刺攻击]，且招式发动期间抗打断等级提升。",
+      "parameterIds": ["1261003"],
+      "sourceExpression": "{Skill:1261003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.835,
+        "growth": 0.076
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.595,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.835,
+                  "growth": 0.076
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261003-三段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0010",
+      "branchId": "agent:1261:branch:basic-6",
+      "name": "普通攻击：跳步刃舞",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的攻击，造成物理伤害。\n点按  发动：\n向前方进行至多六段的攻击，造成物理伤害；\n发动第六段[普通攻击]同时视为发动[冲刺攻击]，且招式发动期间抗打断等级提升。",
+      "parameterIds": ["1261004"],
+      "sourceExpression": "{Skill:1261004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.634,
+        "growth": 0.149
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.097,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.634,
+                  "growth": 0.149
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261004-四段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0011",
+      "branchId": "agent:1261:branch:basic-6",
+      "name": "普通攻击：跳步刃舞",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的攻击，造成物理伤害。\n点按  发动：\n向前方进行至多六段的攻击，造成物理伤害；\n发动第六段[普通攻击]同时视为发动[冲刺攻击]，且招式发动期间抗打断等级提升。",
+      "parameterIds": ["1261005"],
+      "sourceExpression": "{Skill:1261005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.988,
+        "growth": 0.09
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.687,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.988,
+                  "growth": 0.09
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261005-五段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0012",
+      "branchId": "agent:1261:branch:basic-6",
+      "name": "普通攻击：跳步刃舞",
+      "rowName": "六段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的攻击，造成物理伤害。\n点按  发动：\n向前方进行至多六段的攻击，造成物理伤害；\n发动第六段[普通攻击]同时视为发动[冲刺攻击]，且招式发动期间抗打断等级提升。",
+      "parameterIds": ["1261006"],
+      "sourceExpression": "{Skill:1261006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.913,
+        "growth": 0.265
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2,
+        "growth": 0.091
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.913,
+                  "growth": 0.265
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261006-六段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0013",
+      "branchId": "agent:1261:branch:basic-7",
+      "name": "普通攻击：萨霍夫跳",
+      "rowName": "连续攻击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/4/desc"
+        }
+      ],
+      "description": "进入[狂热]状态时，简将获得一次[普通攻击：萨霍夫跳]的可使用次数；\n当有可使用次数时，长按  发动：\n向前方发动快速的连续攻击，随后发动终结一击，造成物理伤害；\n连续攻击期间，保持长按可以延长招式的持续时间，松开  可以提前发动终结一击；\n连续攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果；\n在[狂热]状态下发动[普通攻击：萨霍夫跳]对敌人造成伤害时，可以回复[狂热心流]。\n进入[狂热]状态时，简将获得一次[普通攻击：萨霍夫跳]的可使用次数；\n当有可使用次数时，长按  发动：\n向前方发动快速的连续攻击，随后发动终结一击，造成物理伤害；\n连续攻击期间，保持长按可以大幅延长招式的持续时间，松开  可以提前发动终结一击；\n连续攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果，且发动时可触发极限闪避；\n若触发极限闪避，则提升终结一击命中敌人时回复的[狂热心流]；\n在[狂热]状态下发动[普通攻击：萨霍夫跳]对敌人造成伤害时，可以回复[狂热心流]。",
+      "parameterIds": ["1261007"],
+      "sourceExpression": "{Skill:1261007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.008,
+        "growth": 0.274
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.292,
+        "growth": 0.105
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-jane-nk-1261007-连续攻击"
+    },
+    {
+      "actionId": "action:agent:1261:action:0014",
+      "branchId": "agent:1261:branch:basic-7",
+      "name": "普通攻击：萨霍夫跳",
+      "rowName": "连续攻击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/4/desc"
+        }
+      ],
+      "description": "进入[狂热]状态时，简将获得一次[普通攻击：萨霍夫跳]的可使用次数；\n当有可使用次数时，长按  发动：\n向前方发动快速的连续攻击，随后发动终结一击，造成物理伤害；\n连续攻击期间，保持长按可以延长招式的持续时间，松开  可以提前发动终结一击；\n连续攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果；\n在[狂热]状态下发动[普通攻击：萨霍夫跳]对敌人造成伤害时，可以回复[狂热心流]。\n进入[狂热]状态时，简将获得一次[普通攻击：萨霍夫跳]的可使用次数；\n当有可使用次数时，长按  发动：\n向前方发动快速的连续攻击，随后发动终结一击，造成物理伤害；\n连续攻击期间，保持长按可以大幅延长招式的持续时间，松开  可以提前发动终结一击；\n连续攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果，且发动时可触发极限闪避；\n若触发极限闪避，则提升终结一击命中敌人时回复的[狂热心流]；\n在[狂热]状态下发动[普通攻击：萨霍夫跳]对敌人造成伤害时，可以回复[狂热心流]。",
+      "parameterIds": ["1261030"],
+      "sourceExpression": "{Skill:1261030, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.821,
+        "growth": 0.439
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.227,
+        "growth": 0.147
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-jane-nk-1261007-连续攻击"
+    },
+    {
+      "actionId": "action:agent:1261:action:0015",
+      "branchId": "agent:1261:branch:basic-7",
+      "name": "普通攻击：萨霍夫跳",
+      "rowName": "终结一击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/basic/description/4/desc"
+        }
+      ],
+      "description": "进入[狂热]状态时，简将获得一次[普通攻击：萨霍夫跳]的可使用次数；\n当有可使用次数时，长按  发动：\n向前方发动快速的连续攻击，随后发动终结一击，造成物理伤害；\n连续攻击期间，保持长按可以延长招式的持续时间，松开  可以提前发动终结一击；\n连续攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果；\n在[狂热]状态下发动[普通攻击：萨霍夫跳]对敌人造成伤害时，可以回复[狂热心流]。\n进入[狂热]状态时，简将获得一次[普通攻击：萨霍夫跳]的可使用次数；\n当有可使用次数时，长按  发动：\n向前方发动快速的连续攻击，随后发动终结一击，造成物理伤害；\n连续攻击期间，保持长按可以大幅延长招式的持续时间，松开  可以提前发动终结一击；\n连续攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果，且发动时可触发极限闪避；\n若触发极限闪避，则提升终结一击命中敌人时回复的[狂热心流]；\n在[狂热]状态下发动[普通攻击：萨霍夫跳]对敌人造成伤害时，可以回复[狂热心流]。",
+      "parameterIds": ["1261008"],
+      "sourceExpression": "{Skill:1261008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.613,
+        "growth": 0.147
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.229,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.613,
+                  "growth": 0.147
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261008-终结一击"
+    },
+    {
+      "actionId": "action:agent:1261:action:0017",
+      "branchId": "agent:1261:branch:chain-3",
+      "name": "连携技：罪孽生花",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动穿梭斩击，造成大量物理伤害；\n招式发动时，简将直接进入[狂热]状态，并使[狂热心流]回复至上限；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261017"],
+      "sourceExpression": "{Skill:1261017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.326,
+        "growth": 0.576
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.376,
+        "growth": 0.108
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.326,
+                  "growth": 0.576
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261017-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0018",
+      "branchId": "agent:1261:branch:chain-4",
+      "name": "终结技：终幕演出",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围敌人发动强力穿梭斩击，随后发动终结一击，造成大量物理伤害；\n招式发动时，简将直接进入[狂热]状态，并使[狂热心流]回复至上限；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261018"],
+      "sourceExpression": "{Skill:1261018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 14.706,
+        "growth": 1.337
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.865,
+        "growth": 0.085
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 14.706,
+                  "growth": 1.337
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261018-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0019",
+      "branchId": "agent:1261:branch:dodge-6",
+      "name": "冲刺攻击：刀刃跳",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n若衔接在一段闪避后，将向前方进行上挑斩击，造成物理伤害；\n若衔接在二段闪避后，将向前方进行连续斩击，造成物理伤害。",
+      "parameterIds": ["1261011"],
+      "sourceExpression": "{Skill:1261011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.715,
+        "growth": 0.065
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.358,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.715,
+                  "growth": 0.065
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261011-一段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0020",
+      "branchId": "agent:1261:branch:dodge-6",
+      "name": "冲刺攻击：刀刃跳",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n若衔接在一段闪避后，将向前方进行上挑斩击，造成物理伤害；\n若衔接在二段闪避后，将向前方进行连续斩击，造成物理伤害。",
+      "parameterIds": ["1261012"],
+      "sourceExpression": "{Skill:1261012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.715,
+        "growth": 0.065
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.358,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0020:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.715,
+                  "growth": 0.065
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261012-二段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0021",
+      "branchId": "agent:1261:branch:dodge-7",
+      "name": "冲刺攻击：虚像突刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "[狂热]状态下，闪避时，点按  发动：\n向前方进行三次快速的突进斩击，造成物理伤害。",
+      "parameterIds": ["1261013"],
+      "sourceExpression": "{Skill:1261013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.045,
+        "growth": 0.095
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.523,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0021:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.045,
+                  "growth": 0.095
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261013-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0022",
+      "branchId": "agent:1261:branch:dodge-8",
+      "name": "闪避反击：疾影",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n若衔接在一段闪避后，将对前方敌人发动多次斩击，随后向下突刺，造成物理伤害；\n若衔接在二段闪避后，将会跃起并对前方敌人发动三次连续攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261014"],
+      "sourceExpression": "{Skill:1261014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.412,
+        "growth": 0.311
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.292,
+        "growth": 0.105
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0022:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.412,
+                  "growth": 0.311
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261014-一段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0023",
+      "branchId": "agent:1261:branch:dodge-8",
+      "name": "闪避反击：疾影",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/dodge/description/7/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n若衔接在一段闪避后，将对前方敌人发动多次斩击，随后向下突刺，造成物理伤害；\n若衔接在二段闪避后，将会跃起并对前方敌人发动三次连续攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261015"],
+      "sourceExpression": "{Skill:1261015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.412,
+        "growth": 0.311
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.292,
+        "growth": 0.105
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0023:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.412,
+                  "growth": 0.311
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261015-二段"
+    },
+    {
+      "actionId": "action:agent:1261:action:0024",
+      "branchId": "agent:1261:branch:dodge-9",
+      "name": "闪避反击：疾影连舞",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/dodge/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
+        }
+      ],
+      "description": "[狂热]状态下，触发[极限闪避]后，点按  发动：\n对前方敌人发动多次快速斩击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1261016"],
+      "sourceExpression": "{Skill:1261016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.87,
+        "growth": 0.352
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.475,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0024:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.87,
+                  "growth": 0.352
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261016-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0025",
+      "branchId": "agent:1261:branch:special-5",
+      "name": "特殊技：掠空",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n腾空跃起，向前方发动连续踢击后横扫，造成物理伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1261009"],
+      "sourceExpression": "{Skill:1261009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.578,
+        "growth": 0.053
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.578,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0025:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0025:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.578,
+                  "growth": 0.053
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261009-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0026",
+      "branchId": "agent:1261:branch:special-6",
+      "name": "强化特殊技：掠空-横扫",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        },
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n腾空跃起，向前方发动多次连续踢击后横扫，造成大量物理伤害；\n招式发动期间拥有无敌效果。\n能量足够时，点按  发动：\n腾空跃起，向前方发动多次连续踢击后横扫，造成大量物理伤害；\n招式发动期间拥有无敌效果，且同时视为发动[冲刺攻击]。",
+      "parameterIds": ["1261010"],
+      "sourceExpression": "{Skill:1261010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.747,
+        "growth": 0.523
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.681,
+        "growth": 0.213
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1261:action:0026:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0026:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.747,
+                  "growth": 0.523
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-jane-nk-1261010-main"
+    },
+    {
+      "actionId": "action:agent:1261:action:0027",
+      "branchId": "agent:1261:branch:special-7",
+      "name": "强化特殊技：掠空-强袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1261/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1261/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "[狂热]状态下，能量足够时，点按  发动：\n腾空跃起，向前方发动多次连续踢击后横扫，造成大量物理伤害；\n招式发动期间拥有无敌效果，且同时视为发动[冲刺攻击]。",
+      "parameterIds": ["1261031"],
+      "sourceExpression": "{Skill:1261031, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.951,
+        "growth": 0.541
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.872,
+        "growth": 0.222
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-jane-nk-1261031-main"
+    }
+  ]
+}

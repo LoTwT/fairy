@@ -1,0 +1,1367 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1031",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1031:action:0001",
+      "branchId": "agent:1031:branch:assist-4",
+      "name": "快速支援：救急炮击",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n向后闪避，并对前方敌人发动远程打击，造成以太伤害；\n招式发动期间拥有无敌效果；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031401", "1031402"],
+      "sourceExpression": "{{Skill:1031401, Prop:1001} + {Skill:1031402, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.634,
+        "growth": 0.058
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.634,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0001:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.634,
+                  "growth": 0.058
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031401-main"
+    },
+    {
+      "actionId": "action:agent:1031:action:0002",
+      "branchId": "agent:1031:branch:assist-5",
+      "name": "招架支援：狡兔出手！",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1031403"],
+      "sourceExpression": "{Skill:1031403, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.467,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1031:action:0003",
+      "branchId": "agent:1031:branch:assist-5",
+      "name": "招架支援：狡兔出手！",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1031404"],
+      "sourceExpression": "{Skill:1031404, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.117,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1031:action:0004",
+      "branchId": "agent:1031:branch:assist-5",
+      "name": "招架支援：狡兔出手！",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1031405"],
+      "sourceExpression": "{Skill:1031405, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.517,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1031:action:0005",
+      "branchId": "agent:1031:branch:assist-6",
+      "name": "支援突击：趁虚而入",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n向前方突进后对敌人发动炮击，造成以太伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1031501"],
+      "sourceExpression": "{Skill:1031501, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.771,
+        "growth": 0.343
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.303,
+        "growth": 0.151
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0005:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.771,
+                  "growth": 0.343
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031501-main"
+    },
+    {
+      "actionId": "action:agent:1031:action:0006",
+      "branchId": "agent:1031:branch:basic-3",
+      "name": "普通攻击：狡兔连打",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的打击，造成物理伤害。",
+      "parameterIds": ["1031001", "1031002"],
+      "sourceExpression": "{Skill:1031001, Prop:1001} + {{Skill:1031002, Prop:1001}/3}*3",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.66,
+        "growth": 0.061
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.404,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.66,
+                  "growth": 0.061
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1031:action:0007",
+      "branchId": "agent:1031:branch:basic-3",
+      "name": "普通攻击：狡兔连打",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的打击，造成物理伤害。",
+      "parameterIds": ["1031004", "1031005"],
+      "sourceExpression": "{Skill:1031004, Prop:1001} + {{Skill:1031005, Prop:1001}/4}*4",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.714,
+        "growth": 0.066
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.5680000000000001,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.714,
+                  "growth": 0.066
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1031:action:0008",
+      "branchId": "agent:1031:branch:basic-3",
+      "name": "普通攻击：狡兔连打",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的打击，造成物理伤害。",
+      "parameterIds": ["1031007", "1031008"],
+      "sourceExpression": "{Skill:1031007, Prop:1001} + {{Skill:1031008, Prop:1001}/20}*20",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.047,
+        "growth": 0.277
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.431,
+        "growth": 0.112
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.047,
+                  "growth": 0.277
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1031:basic-enhanced-1",
+      "branchId": "agent:1031:branch:basic-4",
+      "name": "普通攻击：为所欲为",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "发动[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式后，能够上弹并强化[普通攻击]与[冲刺攻击]，提升子弹的威力。",
+      "parameterIds": ["1031001", "1031003"],
+      "sourceExpression": "{Skill:1031001, Prop:1001} + {{Skill:1031003, Prop:1001}/3}*3",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.883,
+        "growth": 0.08099999999999999
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.404,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:basic-enhanced-1:segment:1",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "individual",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:basic-enhanced-1:item:1",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.389,
+                  "growth": 0.036
+                }
+              }
+            ]
+          },
+          {
+            "segmentId": "action:agent:1031:basic-enhanced-1:segment:2",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "individual",
+            "repeat": 3,
+            "items": [
+              {
+                "itemId": "action:agent:1031:basic-enhanced-1:item:2",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.16466666666666666,
+                  "growth": 0.015
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-nicole-nk-1031001-一段"
+    },
+    {
+      "actionId": "action:agent:1031:action:0010",
+      "branchId": "agent:1031:branch:basic-4",
+      "name": "普通攻击：为所欲为",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "发动[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式后，能够上弹并强化[普通攻击]与[冲刺攻击]，提升子弹的威力。",
+      "parameterIds": ["1031004", "1031006"],
+      "sourceExpression": "{Skill:1031004, Prop:1001} + {{Skill:1031006, Prop:1001}/4}*4",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.0110000000000001,
+        "growth": 0.093
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.5680000000000001,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.0110000000000001,
+                  "growth": 0.093
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031004-二段"
+    },
+    {
+      "actionId": "action:agent:1031:action:0011",
+      "branchId": "agent:1031:branch:basic-4",
+      "name": "普通攻击：为所欲为",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "发动[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式后，能够上弹并强化[普通攻击]与[冲刺攻击]，提升子弹的威力。",
+      "parameterIds": ["1031007", "1031009"],
+      "sourceExpression": "{Skill:1031007, Prop:1001} + {{Skill:1031009, Prop:1001}/20}*20",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.533,
+        "growth": 0.413
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.431,
+        "growth": 0.112
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.533,
+                  "growth": 0.413
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031007-三段"
+    },
+    {
+      "actionId": "action:agent:1031:action:0012",
+      "branchId": "agent:1031:branch:chain-3",
+      "name": "连携技：高价以太爆弹",
+      "rowName": "炮击伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方小范围敌人发动强力远程打击，并在目标处生成能量场，持续牵引周围敌人，造成以太伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031301", "1031302"],
+      "sourceExpression": "{{Skill:1031301, Prop:1001} + {Skill:1031302, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.096,
+        "growth": 0.192
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.5,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0012:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 2.096,
+                  "growth": 0.192
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031301-炮击"
+    },
+    {
+      "actionId": "action:agent:1031:action:0013",
+      "branchId": "agent:1031:branch:chain-3",
+      "name": "连携技：高价以太爆弹",
+      "rowName": "能量场伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方小范围敌人发动强力远程打击，并在目标处生成能量场，持续牵引周围敌人，造成以太伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031303"],
+      "sourceExpression": "{Skill:1031303, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.83,
+        "growth": 0.258
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.675,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0013:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 2.83,
+                  "growth": 0.258
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031303-能量场"
+    },
+    {
+      "actionId": "action:agent:1031:action:0014",
+      "branchId": "agent:1031:branch:chain-4",
+      "name": "终结技：特制以太榴弹",
+      "rowName": "炮击伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方小范围敌人发动强力远程打击，并在目标处生成能量场，持续牵引周围敌人，造成以太伤害；\n招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031304"],
+      "sourceExpression": "{Skill:1031304, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.468,
+        "growth": 0.588
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.36,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0014:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.468,
+                  "growth": 0.588
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031304-炮击"
+    },
+    {
+      "actionId": "action:agent:1031:action:0015",
+      "branchId": "agent:1031:branch:chain-4",
+      "name": "终结技：特制以太榴弹",
+      "rowName": "能量场伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方小范围敌人发动强力远程打击，并在目标处生成能量场，持续牵引周围敌人，造成以太伤害；\n招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031305"],
+      "sourceExpression": "{Skill:1031305, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.732,
+        "growth": 0.794
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.486,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0015:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.732,
+                  "growth": 0.794
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031305-能量场"
+    },
+    {
+      "actionId": "action:agent:1031:action:0016",
+      "branchId": "agent:1031:branch:dodge-4",
+      "name": "冲刺攻击：惊喜开箱",
+      "rowName": "前闪攻击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向对应方向冲刺，并对身周敌人进行打击，造成物理伤害；\n未拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向后躲避，并对前方敌人发动远程打击，造成物理伤害；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031201", "1031202"],
+      "sourceExpression": "{Skill:1031201, Prop:1001} + {{Skill:1031202, Prop:1001}/13}*13",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.585,
+        "growth": 0.145
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.741,
+        "growth": 0.035
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.585,
+                  "growth": 0.145
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1031:action:0017",
+      "branchId": "agent:1031:branch:dodge-4",
+      "name": "冲刺攻击：惊喜开箱",
+      "rowName": "后闪攻击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向对应方向冲刺，并对身周敌人进行打击，造成物理伤害；\n未拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向后躲避，并对前方敌人发动远程打击，造成物理伤害；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031204"],
+      "sourceExpression": "{Skill:1031204, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.6,
+        "growth": 0.055
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.6,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.6,
+                  "growth": 0.055
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031204-后闪攻击"
+    },
+    {
+      "actionId": "action:agent:1031:action:0018",
+      "branchId": "agent:1031:branch:dodge-5",
+      "name": "冲刺攻击：为所欲为",
+      "rowName": "前闪攻击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向对应方向冲刺，并对身周敌人进行打击，造成物理伤害；\n未拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按  发动：\n向后躲避，并对前方敌人发动远程打击，造成物理伤害；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031201", "1031203"],
+      "sourceExpression": "{Skill:1031201, Prop:1001} + {{Skill:1031203, Prop:1001}/13}*13",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.585,
+        "growth": 0.145
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.741,
+        "growth": 0.035
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.585,
+                  "growth": 0.145
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031201-前闪攻击"
+    },
+    {
+      "actionId": "action:agent:1031:action:0019",
+      "branchId": "agent:1031:branch:dodge-6",
+      "name": "闪避反击：牵制炮击",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n向后闪避，并对前方敌人发动远程打击，造成以太伤害；\n招式发动期间拥有无敌效果；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031205", "1031206"],
+      "sourceExpression": "{{Skill:1031205, Prop:1001} + {Skill:1031206, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.824,
+        "growth": 0.166
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.634,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.824,
+                  "growth": 0.166
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031205-main"
+    },
+    {
+      "actionId": "action:agent:1031:action:0020",
+      "branchId": "agent:1031:branch:special-3",
+      "name": "特殊技：糖衣炮弹",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n对前方敌人发动远程打击，造成以太伤害；\n招式发动期间抗打断等级提升；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031101", "1031102"],
+      "sourceExpression": "{{Skill:1031101, Prop:1001} + {Skill:1031102, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.526,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.5,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0020:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.526,
+                  "growth": 0.048
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031101-main"
+    },
+    {
+      "actionId": "action:agent:1031:action:0021",
+      "branchId": "agent:1031:branch:special-4",
+      "name": "强化特殊技：夹心糖衣炮弹",
+      "rowName": "蓄力伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n对前方敌人发动强力远程打击，并在目标处生成能量场，持续牵引敌人，造成以太伤害；\n长按  可以进行蓄力，在炮口生成小型能量场，持续消耗能量并对近处的敌人造成额外伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031103"],
+      "sourceExpression": "{Skill:1031103, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.15,
+        "growth": 0.196
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.798,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0021:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.15,
+                  "growth": 0.196
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031103-蓄力"
+    },
+    {
+      "actionId": "action:agent:1031:action:0022",
+      "branchId": "agent:1031:branch:special-4",
+      "name": "强化特殊技：夹心糖衣炮弹",
+      "rowName": "炮击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n对前方敌人发动强力远程打击，并在目标处生成能量场，持续牵引敌人，造成以太伤害；\n长按  可以进行蓄力，在炮口生成小型能量场，持续消耗能量并对近处的敌人造成额外伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031104", "1031105"],
+      "sourceExpression": "{{Skill:1031104, Prop:1001} + {Skill:1031105, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.15,
+        "growth": 0.196
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.798,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0022:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.15,
+                  "growth": 0.196
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031104-炮击"
+    },
+    {
+      "actionId": "action:agent:1031:action:0023",
+      "branchId": "agent:1031:branch:special-4",
+      "name": "强化特殊技：夹心糖衣炮弹",
+      "rowName": "能量场伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1031/details.zh.json",
+        "pointer": "/skill/special/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1031/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n对前方敌人发动强力远程打击，并在目标处生成能量场，持续牵引敌人，造成以太伤害；\n长按  可以进行蓄力，在炮口生成小型能量场，持续消耗能量并对近处的敌人造成额外伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+      "parameterIds": ["1031106"],
+      "sourceExpression": "{Skill:1031106, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.87,
+        "growth": 0.352
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.236,
+        "growth": 0.148
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1031:action:0023:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1031:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.87,
+                  "growth": 0.352
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-nicole-nk-1031106-能量场"
+    }
+  ]
+}

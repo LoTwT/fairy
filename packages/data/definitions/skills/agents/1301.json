@@ -1,0 +1,1186 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1301",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1301:action:0001",
+      "branchId": "agent:1301:branch:assist-4",
+      "name": "快速支援：焦痕劈斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连击，造成物理伤害和火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301017"],
+      "sourceExpression": "{Skill:1301017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.137,
+        "growth": 0.104
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.137,
+        "growth": 0.052
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301017-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0002",
+      "branchId": "agent:1301:branch:assist-5",
+      "name": "招架支援：炙刃炽铳",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301018"],
+      "sourceExpression": "{Skill:1301018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1301:action:0003",
+      "branchId": "agent:1301:branch:assist-5",
+      "name": "招架支援：炙刃炽铳",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301019"],
+      "sourceExpression": "{Skill:1301019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1301:action:0004",
+      "branchId": "agent:1301:branch:assist-5",
+      "name": "招架支援：炙刃炽铳",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301020"],
+      "sourceExpression": "{Skill:1301020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1301:action:0005",
+      "branchId": "agent:1301:branch:assist-6",
+      "name": "支援突击：沸热穿刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动多次攻击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301021"],
+      "sourceExpression": "{Skill:1301021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.609,
+        "growth": 0.329
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.133,
+        "growth": 0.143
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.609,
+                  "growth": 0.329
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301021-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0006",
+      "branchId": "agent:1301:branch:basic-2",
+      "name": "普通攻击：高压火枪",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段攻击，随后向前发起强力火刀攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1301001"],
+      "sourceExpression": "{Skill:1301001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.145,
+        "growth": 0.014
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.117,
+        "growth": 0.006
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301001-一段"
+    },
+    {
+      "actionId": "action:agent:1301:action:0007",
+      "branchId": "agent:1301:branch:basic-2",
+      "name": "普通攻击：高压火枪",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段攻击，随后向前发起强力火刀攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1301002"],
+      "sourceExpression": "{Skill:1301002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.444,
+        "growth": 0.041
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.324,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301002-二段"
+    },
+    {
+      "actionId": "action:agent:1301:action:0008",
+      "branchId": "agent:1301:branch:basic-2",
+      "name": "普通攻击：高压火枪",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段攻击，随后向前发起强力火刀攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1301003"],
+      "sourceExpression": "{Skill:1301003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.415,
+        "growth": 0.038
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.254,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301003-三段"
+    },
+    {
+      "actionId": "action:agent:1301:action:0009",
+      "branchId": "agent:1301:branch:basic-2",
+      "name": "普通攻击：高压火枪",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段攻击，随后向前发起强力火刀攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1301004"],
+      "sourceExpression": "{Skill:1301004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.867,
+        "growth": 0.079
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.536,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301004-四段"
+    },
+    {
+      "actionId": "action:agent:1301:action:0010",
+      "branchId": "agent:1301:branch:basic-2",
+      "name": "普通攻击：高压火枪",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段攻击，随后向前发起强力火刀攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1301005"],
+      "sourceExpression": "{Skill:1301005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.816,
+        "growth": 0.166
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.182,
+        "growth": 0.054
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301005-五段"
+    },
+    {
+      "actionId": "action:agent:1301:action:0011",
+      "branchId": "agent:1301:branch:basic-2",
+      "name": "普通攻击：高压火枪",
+      "rowName": "火刀伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段攻击，随后向前发起强力火刀攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1301006"],
+      "sourceExpression": "{Skill:1301006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.584,
+        "growth": 0.144
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.036,
+        "growth": 0.048
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301006-火刀"
+    },
+    {
+      "actionId": "action:agent:1301:action:0012",
+      "branchId": "agent:1301:branch:chain-3",
+      "name": "连携技：枪管过热",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-chain-whole-ms0bw0cx"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前发动旋转攻击，然后向前方发射激光，造成火属性伤害；\n招式发动时，回复20点[蓄炎]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301014"],
+      "sourceExpression": "{Skill:1301014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.263,
+        "growth": 0.57
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.337,
+        "growth": 0.152
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.263,
+                  "growth": 0.57
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301014-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0013",
+      "branchId": "agent:1301:branch:chain-4",
+      "name": "终结技：与火共舞",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-ultimate-whole-ms0bw26y"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前发动旋转攻击，然后向前方发射激光，造成火属性伤害;\n跃向空中时，将触发[快速支援]，若响应[快速支援]，奥菲丝&「鬼火」会延长激光喷射的持续时间；\n招式发动时，回复20点[蓄炎]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301015"],
+      "sourceExpression": "{Skill:1301015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.987,
+        "growth": 0.636
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.297,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0013:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.987,
+                  "growth": 0.636
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301015-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0014",
+      "branchId": "agent:1301:branch:chain-4",
+      "name": "终结技：与火共舞",
+      "rowName": "延长时间总伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-ultimate-whole-ms0bw26y"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前发动旋转攻击，然后向前方发射激光，造成火属性伤害;\n跃向空中时，将触发[快速支援]，若响应[快速支援]，奥菲丝&「鬼火」会延长激光喷射的持续时间；\n招式发动时，回复20点[蓄炎]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301016"],
+      "sourceExpression": "{Skill:1301016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 4.658,
+        "growth": 0.424
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.198,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0014:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 4.658,
+                  "growth": 0.424
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301016-延长时间总"
+    },
+    {
+      "actionId": "action:agent:1301:action:0015",
+      "branchId": "agent:1301:branch:dodge-4",
+      "name": "冲刺攻击：突袭命令",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前发动快速攻击，造成物理伤害。",
+      "parameterIds": ["1301012"],
+      "sourceExpression": "{Skill:1301012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.623,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.312,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.623,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301012-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0016",
+      "branchId": "agent:1301:branch:dodge-5",
+      "name": "闪避反击：反攻战机",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动连击，造成物理伤害和火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301013"],
+      "sourceExpression": "{Skill:1301013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.578,
+        "growth": 0.235
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.237,
+        "growth": 0.102
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301013-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0017",
+      "branchId": "agent:1301:branch:special-7",
+      "name": "特殊技：热血满膛",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-special-whole-ms0bvkql"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前突刺并进行尾巴攻击，造成火属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1301007"],
+      "sourceExpression": "{Skill:1301007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.395,
+        "growth": 0.036
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.395,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.395,
+                  "growth": 0.036
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301007-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0018",
+      "branchId": "agent:1301:branch:special-8",
+      "name": "特殊技：蚀光一闪",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-special-whole-ms0bvkql",
+        "zzz-hp:skill:orphie&magus-special-ms4ijj32"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "队友攻击时自动发动：\n进行四次激光追加攻击，造成火属性伤害；\n每5秒最多触发一次；\n招式发动时，回复20点[蓄炎]；\n发动招式期间拥有无敌效果。",
+      "parameterIds": ["1301008"],
+      "sourceExpression": "{Skill:1301008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.95,
+        "growth": 0.45
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.55,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.95,
+                  "growth": 0.45
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301008-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0019",
+      "branchId": "agent:1301:branch:special-9",
+      "name": "强化特殊技：小心脚下",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-special-whole-ms0bvkql",
+        "zzz-hp:skill:all-special-ms0fcqv7"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行激光扫射，造成火属性伤害；\n招式发动后，可直接衔接普通攻击中的强力火刀攻击；\n招式发动时，回复20点[蓄炎]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301009"],
+      "sourceExpression": "{Skill:1301009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.809,
+        "growth": 0.256
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.809,
+        "growth": 0.128
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.809,
+                  "growth": 0.256
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301009-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0020",
+      "branchId": "agent:1301:branch:special-10",
+      "name": "强化特殊技：灼红旋涡",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-special-whole-ms0bvkql",
+        "zzz-hp:skill:all-special-ms0fcqv7"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "位于后台且能量大于等于60点时，队友攻击时自动发动：\n向四周进行激光扫射，造成火属性伤害；\n招式发动时，回复20点[蓄炎]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301010"],
+      "sourceExpression": "{Skill:1301010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.784,
+        "growth": 0.617
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.55,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.784,
+                  "growth": 0.617
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301010-main"
+    },
+    {
+      "actionId": "action:agent:1301:action:0021",
+      "branchId": "agent:1301:branch:special-11",
+      "name": "强化特殊技：蓄热充能",
+      "rowName": "激光最大伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-special-whole-ms0bvkql",
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:orphie&magus-special-ms4ilk1b"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/special/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "[蓄炎]大于等于100点时，长按  发动：\n消耗100点[蓄炎]，向前方持续发射激光，造成火属性伤害；\n开始喷射时，将触发[快速支援]；\n持续喷射一段时间后将会加大火力，使得招式的打断等级大幅提升；\n喷射期间受到攻击时，将会招架敌人的攻击，并直接加大火力；\n喷射达到最大时间时，自动发动[强化特殊技：燥焰迸射]；\n低火力期间抗打断等级提升，受到的伤害减少40%，高火力期间拥有无敌效果。",
+      "parameterIds": ["1301011"],
+      "sourceExpression": "{Skill:1301011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.894,
+        "growth": 0.354
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.33,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0021:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.894,
+                  "growth": 0.354
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301011-激光最大"
+    },
+    {
+      "actionId": "action:agent:1301:action:0022",
+      "branchId": "agent:1301:branch:special-12",
+      "name": "强化特殊技：燥焰迸射",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-orphie&magus-special-whole-ms0bvkql",
+        "zzz-hp:skill:all-special-ms0fcqv7"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/skill/special/description/11/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1301/details.zh.json",
+          "pointer": "/skill/special/description/5/desc"
+        }
+      ],
+      "description": "[强化特殊技：蓄热充能]喷射至最大时间后自动发动：\n向前发动旋转攻击，然后向前方发射激光，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1301022"],
+      "sourceExpression": "{Skill:1301022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.596,
+        "growth": 0.236
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.22,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1301:action:0022:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1301:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.596,
+                  "growth": 0.236
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-orphie&magus-nk-1301022-main"
+    }
+  ]
+}

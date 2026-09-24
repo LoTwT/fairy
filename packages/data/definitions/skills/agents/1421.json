@@ -1,0 +1,1046 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1421",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1421:action:0001",
+      "branchId": "agent:1421:branch:assist-4",
+      "name": "快速支援：抬头见喜",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动体术攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421014"],
+      "sourceExpression": "{Skill:1421014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.917,
+        "growth": 0.084
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.459,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.917,
+                  "growth": 0.084
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421014-main"
+    },
+    {
+      "actionId": "action:agent:1421:action:0002",
+      "branchId": "agent:1421:branch:assist-5",
+      "name": "招架支援：见敌卸甲",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421015"],
+      "sourceExpression": "{Skill:1421015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.251,
+        "growth": 0.103
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1421:action:0003",
+      "branchId": "agent:1421:branch:assist-5",
+      "name": "招架支援：见敌卸甲",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421016"],
+      "sourceExpression": "{Skill:1421016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.684,
+        "growth": 0.122
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1421:action:0004",
+      "branchId": "agent:1421:branch:assist-5",
+      "name": "招架支援：见敌卸甲",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421017"],
+      "sourceExpression": "{Skill:1421017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.084,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1421:action:0005",
+      "branchId": "agent:1421:branch:assist-6",
+      "name": "支援突击：借势打势",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动体术攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421018"],
+      "sourceExpression": "{Skill:1421018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.374,
+        "growth": 0.307
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.935,
+        "growth": 0.134
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.374,
+                  "growth": 0.307
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421018-main"
+    },
+    {
+      "actionId": "action:agent:1421:action:0006",
+      "branchId": "agent:1421:branch:basic-2",
+      "name": "普通攻击：极意连打",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的体术攻击，造成物理伤害。",
+      "parameterIds": ["1421001"],
+      "sourceExpression": "{Skill:1421001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.497,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.249,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.497,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421001-一段"
+    },
+    {
+      "actionId": "action:agent:1421:action:0007",
+      "branchId": "agent:1421:branch:basic-2",
+      "name": "普通攻击：极意连打",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的体术攻击，造成物理伤害。",
+      "parameterIds": ["1421002"],
+      "sourceExpression": "{Skill:1421002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.498,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.475,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.498,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421002-二段"
+    },
+    {
+      "actionId": "action:agent:1421:action:0008",
+      "branchId": "agent:1421:branch:basic-2",
+      "name": "普通攻击：极意连打",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的体术攻击，造成物理伤害。",
+      "parameterIds": ["1421003"],
+      "sourceExpression": "{Skill:1421003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.094,
+        "growth": 0.1
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.843,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.094,
+                  "growth": 0.1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421003-三段"
+    },
+    {
+      "actionId": "action:agent:1421:action:0009",
+      "branchId": "agent:1421:branch:basic-2",
+      "name": "普通攻击：极意连打",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的体术攻击，造成物理伤害。",
+      "parameterIds": ["1421004"],
+      "sourceExpression": "{Skill:1421004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.113,
+        "growth": 0.193
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.665,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.113,
+                  "growth": 0.193
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421004-四段"
+    },
+    {
+      "actionId": "action:agent:1421:action:0010",
+      "branchId": "agent:1421:branch:chain-3",
+      "name": "连携技：锅气灌顶",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n坐上[铁锅]快速旋转冲撞，对路径上敌人造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421012"],
+      "sourceExpression": "{Skill:1421012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.323,
+        "growth": 0.575
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.333,
+        "growth": 0.107
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.323,
+                  "growth": 0.575
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421012-main"
+    },
+    {
+      "actionId": "action:agent:1421:action:0011",
+      "branchId": "agent:1421:branch:chain-4",
+      "name": "终结技：满汉全席！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n施展术法将气劲凝作炒饭掀出，对敌人造成大量物理伤害，为全队角色回复{CAL:100+AvatarSkillLevel(3)*60,1,2}点生命值，并为全队角色施加8秒持续回复生命值的效果，每秒回复{CAL:0.8+AvatarSkillLevel(3)*0.05,1,2}%生命值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421013"],
+      "sourceExpression": "{Skill:1421013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.279,
+        "growth": 1.48
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.984,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.279,
+                  "growth": 1.48
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421013-main"
+    },
+    {
+      "actionId": "action:agent:1421:action:0012",
+      "branchId": "agent:1421:branch:dodge-4",
+      "name": "冲刺攻击：热油鼎盛",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前发动快速体术攻击，造成物理伤害。",
+      "parameterIds": ["1421010"],
+      "sourceExpression": "{Skill:1421010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.834,
+        "growth": 0.076
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.417,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.834,
+                  "growth": 0.076
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421010-main"
+    },
+    {
+      "actionId": "action:agent:1421:action:0013",
+      "branchId": "agent:1421:branch:dodge-5",
+      "name": "闪避反击：移峰倒海",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动体术攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421011"],
+      "sourceExpression": "{Skill:1421011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.192,
+        "growth": 0.2
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.917,
+        "growth": 0.088
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.192,
+                  "growth": 0.2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421011-main"
+    },
+    {
+      "actionId": "action:agent:1421:action:0014",
+      "branchId": "agent:1421:branch:special-4",
+      "name": "特殊技：爆音点穴指",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前释放体术并丢出鞭炮，造成物理伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1421005"],
+      "sourceExpression": "{Skill:1421005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.625,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.625,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.625,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421005-main"
+    },
+    {
+      "actionId": "action:agent:1421:action:0015",
+      "branchId": "agent:1421:branch:special-5",
+      "name": "特殊技：断脉破穴手",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "拥有[破劲]时点按  发动：\n[特殊技：断脉破穴手]围绕怪物进行攻击，造成物理伤害；\n招式可连续发动三次，每发动一次[特殊技：断脉破穴手]攻击，将消耗1点[破劲]。\n潘引壶为当前操作中的角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中的角色时，获得无敌效果。",
+      "parameterIds": ["1421007"],
+      "sourceExpression": "{Skill:1421007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.973,
+        "growth": 0.089
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.417,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.973,
+                  "growth": 0.089
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421007-一段"
+    },
+    {
+      "actionId": "action:agent:1421:action:0016",
+      "branchId": "agent:1421:branch:special-5",
+      "name": "特殊技：断脉破穴手",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/special/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "拥有[破劲]时点按  发动：\n[特殊技：断脉破穴手]围绕怪物进行攻击，造成物理伤害；\n招式可连续发动三次，每发动一次[特殊技：断脉破穴手]攻击，将消耗1点[破劲]。\n潘引壶为当前操作中的角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中的角色时，获得无敌效果。",
+      "parameterIds": ["1421008"],
+      "sourceExpression": "{Skill:1421008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.973,
+        "growth": 0.089
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.417,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.973,
+                  "growth": 0.089
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421008-二段"
+    },
+    {
+      "actionId": "action:agent:1421:action:0017",
+      "branchId": "agent:1421:branch:special-5",
+      "name": "特殊技：断脉破穴手",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/special/description/4/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "拥有[破劲]时点按  发动：\n[特殊技：断脉破穴手]围绕怪物进行攻击，造成物理伤害；\n招式可连续发动三次，每发动一次[特殊技：断脉破穴手]攻击，将消耗1点[破劲]。\n潘引壶为当前操作中的角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中的角色时，获得无敌效果。",
+      "parameterIds": ["1421009"],
+      "sourceExpression": "{Skill:1421009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.973,
+        "growth": 0.089
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.417,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.973,
+                  "growth": 0.089
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421009-三段"
+    },
+    {
+      "actionId": "action:agent:1421:action:0018",
+      "branchId": "agent:1421:branch:special-6",
+      "name": "强化特殊技：贴山震脉靠",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1421/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n[强化特殊技：贴山震脉靠]向前方进行强力打击，造成物理伤害；\n招式发动时将获得3点[破劲]，当招式命中敌人时，将触发队伍中上一位角色的[快速支援]；\n通过此次[快速支援]上场的代理人将会获得核心被动提供的贯穿力加成，潘引壶会在换人后留在场上自动释放[特殊技：断脉破穴手]直至[破劲]耗尽后下场；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1421006"],
+      "sourceExpression": "{Skill:1421006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.841,
+        "growth": 0.35
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.573,
+        "growth": 0.117
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1421:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1421:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.841,
+                  "growth": 0.35
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-panyinhu-nk-1421006-main"
+    }
+  ]
+}

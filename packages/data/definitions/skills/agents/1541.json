@@ -1,0 +1,1281 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1541",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1541:action:0001",
+      "branchId": "agent:1541:branch:assist-4",
+      "name": "快速支援：折袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对目标发动连续攻击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541019"],
+      "sourceExpression": "{Skill:1541019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.791,
+        "growth": 0.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.67,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0001:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.791,
+                  "growth": 0.072
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541019-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0002",
+      "branchId": "agent:1541:branch:assist-5",
+      "name": "招架支援：禁令",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541020"],
+      "sourceExpression": "{Skill:1541020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1541:action:0003",
+      "branchId": "agent:1541:branch:assist-5",
+      "name": "招架支援：禁令",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541021"],
+      "sourceExpression": "{Skill:1541021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1541:action:0004",
+      "branchId": "agent:1541:branch:assist-5",
+      "name": "招架支援：禁令",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541022"],
+      "sourceExpression": "{Skill:1541022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1541:action:0005",
+      "branchId": "agent:1541:branch:assist-6",
+      "name": "支援突击：截兵",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对目标发动连续攻击，造成冰属性伤害；\n招式发动后，可直接衔接第五段[普通攻击：偏锋]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541023"],
+      "sourceExpression": "{Skill:1541023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.69,
+        "growth": 0.427
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.467,
+        "growth": 0.158
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0005:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.69,
+                  "growth": 0.427
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541023-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0006",
+      "branchId": "agent:1541:branch:basic-4",
+      "name": "普通攻击：偏锋",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成冰属性伤害；\n第五段攻击为下落攻击，落地后保持长按  或  ，若[霜刑]足够，可衔接[强化特殊技：处刑式·绝裁]；\n第四段攻击将披风扔出后进入[镣锁赦罪]状态。",
+      "parameterIds": ["1541001"],
+      "sourceExpression": "{Skill:1541001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.498,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.338,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0006:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.498,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541001-一段"
+    },
+    {
+      "actionId": "action:agent:1541:action:0007",
+      "branchId": "agent:1541:branch:basic-4",
+      "name": "普通攻击：偏锋",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成冰属性伤害；\n第五段攻击为下落攻击，落地后保持长按  或  ，若[霜刑]足够，可衔接[强化特殊技：处刑式·绝裁]；\n第四段攻击将披风扔出后进入[镣锁赦罪]状态。",
+      "parameterIds": ["1541002"],
+      "sourceExpression": "{Skill:1541002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.032,
+        "growth": 0.094
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.691,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0007:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.032,
+                  "growth": 0.094
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541002-二段"
+    },
+    {
+      "actionId": "action:agent:1541:action:0008",
+      "branchId": "agent:1541:branch:basic-4",
+      "name": "普通攻击：偏锋",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成冰属性伤害；\n第五段攻击为下落攻击，落地后保持长按  或  ，若[霜刑]足够，可衔接[强化特殊技：处刑式·绝裁]；\n第四段攻击将披风扔出后进入[镣锁赦罪]状态。",
+      "parameterIds": ["1541003"],
+      "sourceExpression": "{Skill:1541003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.909,
+        "growth": 0.174
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.249,
+        "growth": 0.057
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0008:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.909,
+                  "growth": 0.174
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541003-三段"
+    },
+    {
+      "actionId": "action:agent:1541:action:0009",
+      "branchId": "agent:1541:branch:basic-4",
+      "name": "普通攻击：偏锋",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成冰属性伤害；\n第五段攻击为下落攻击，落地后保持长按  或  ，若[霜刑]足够，可衔接[强化特殊技：处刑式·绝裁]；\n第四段攻击将披风扔出后进入[镣锁赦罪]状态。",
+      "parameterIds": ["1541004"],
+      "sourceExpression": "{Skill:1541004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.047,
+        "growth": 0.187
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.363,
+        "growth": 0.062
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0009:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.047,
+                  "growth": 0.187
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541004-四段"
+    },
+    {
+      "actionId": "action:agent:1541:action:0010",
+      "branchId": "agent:1541:branch:basic-4",
+      "name": "普通攻击：偏锋",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成冰属性伤害；\n第五段攻击为下落攻击，落地后保持长按  或  ，若[霜刑]足够，可衔接[强化特殊技：处刑式·绝裁]；\n第四段攻击将披风扔出后进入[镣锁赦罪]状态。",
+      "parameterIds": ["1541005"],
+      "sourceExpression": "{Skill:1541005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.415,
+        "growth": 0.22
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.604,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0010:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.415,
+                  "growth": 0.22
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541005-五段"
+    },
+    {
+      "actionId": "action:agent:1541:action:0011",
+      "branchId": "agent:1541:branch:basic-4",
+      "name": "普通攻击：偏锋",
+      "rowName": "披风切割每秒伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/10"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成冰属性伤害；\n第五段攻击为下落攻击，落地后保持长按  或  ，若[霜刑]足够，可衔接[强化特殊技：处刑式·绝裁]；\n第四段攻击将披风扔出后进入[镣锁赦罪]状态。",
+      "parameterIds": ["1541008"],
+      "sourceExpression": "{Skill:1541008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.195,
+        "growth": 0.018
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0011:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.195,
+                  "growth": 0.018
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541008-披风切割每秒"
+    },
+    {
+      "actionId": "action:agent:1541:action:0012",
+      "branchId": "agent:1541:branch:basic-5",
+      "name": "普通攻击：旋刃",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  发动：\n普罗米娅向上跃起发动攻击，并将披风扔至敌人身边进入[镣锁赦罪]状态，造成冰属性伤害；\n命中敌人时，不累积[寒蚀值]。",
+      "parameterIds": ["1541006"],
+      "sourceExpression": "{Skill:1541006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.755,
+        "growth": 0.16
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.825,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0012:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.755,
+                  "growth": 0.16
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541006-一段"
+    },
+    {
+      "actionId": "action:agent:1541:action:0013",
+      "branchId": "agent:1541:branch:chain-3",
+      "name": "连携技：倒悬清算",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n扔出飞镖，倒吊在敌人上空进行多段攻击，随后进行终结一击，造成大量冰属性伤害；\n重击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算一次100%倍率的对应属性的属性异常伤害；\n招式发动后，可直接衔接第五段[普通攻击：偏锋]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541017"],
+      "sourceExpression": "{Skill:1541017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.308,
+        "growth": 0.756
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.641,
+        "growth": 0.121
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0013:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.308,
+                  "growth": 0.756
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541017-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0014",
+      "branchId": "agent:1541:branch:chain-4",
+      "name": "终结技：彻骨磔罚",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前方进行多段攻击，造成大量冰属性伤害；\n重击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算一次250%倍率的对应属性的属性异常伤害；\n招式发动后，可直接衔接第五段[普通攻击：偏锋]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541018"],
+      "sourceExpression": "{Skill:1541018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.384,
+        "growth": 1.399
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.494,
+        "growth": 0.114
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0014:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.384,
+                  "growth": 1.399
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541018-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0015",
+      "branchId": "agent:1541:branch:dodge-4",
+      "name": "冲刺攻击：掠命",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前进行快速攻击，造成冰属性伤害。",
+      "parameterIds": ["1541015"],
+      "sourceExpression": "{Skill:1541015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.563,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.239,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0015:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.563,
+                  "growth": 0.052
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541015-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0016",
+      "branchId": "agent:1541:branch:dodge-5",
+      "name": "闪避反击：蝠跃",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对目标发动连续攻击，造成冰属性伤害；\n招式发动后，可直接衔接第五段[普通攻击：偏锋]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541016"],
+      "sourceExpression": "{Skill:1541016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.357,
+        "growth": 0.306
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.439,
+        "growth": 0.111
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0016:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.357,
+                  "growth": 0.306
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541016-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0017",
+      "branchId": "agent:1541:branch:special-7",
+      "name": "特殊技：处刑式·寒芒乍现",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n发动飞镖攻击，造成冰属性伤害。",
+      "parameterIds": ["1541007"],
+      "sourceExpression": "{Skill:1541007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.278,
+        "growth": 0.117
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.541,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0017:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.278,
+                  "growth": 0.117
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541007-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0018",
+      "branchId": "agent:1541:branch:special-8",
+      "name": "强化特殊技：处刑式·封喉霜径",
+      "rowName": "飞镖射击总伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n发动飞镖攻击，并将披风扔至敌人身边进入[镣锁赦罪]状态，造成冰属性伤害；\n开始发动招式的短时间内，若受到敌人攻击，则会自动衔接[强化特殊技：处刑式·匿影]；\n发动招式时，普罗米娅获得[铁律]效果；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541009"],
+      "sourceExpression": "{Skill:1541009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.793,
+        "growth": 0.073
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0018:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.793,
+                  "growth": 0.073
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541009-飞镖射击总"
+    },
+    {
+      "actionId": "action:agent:1541:action:0019",
+      "branchId": "agent:1541:branch:special-9",
+      "name": "特殊技：处刑式·坠霜",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "拥有[铁律]效果时，在[镣锁赦罪]状态下点按  或点按  发动 ：\n跃向敌人，收回披风的同时进行下落攻击，造成冰属性伤害；\n落地后若拥有[霜刑]，保持长按  、  可衔接[强化特殊技：处刑式·绝裁]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541010"],
+      "sourceExpression": "{Skill:1541010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.838,
+        "growth": 0.349
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.743,
+        "growth": 0.125
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0019:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.838,
+                  "growth": 0.349
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541010-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0020",
+      "branchId": "agent:1541:branch:special-10",
+      "name": "特殊技：处刑式·重霜",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "触发[强化特殊技：处刑式·匿影]后，点按  或  发动：\n快速发动多段攻击，随后跃向敌人，收回披风的同时进行更强力的下落攻击，造成冰属性伤害；\n落地后若拥有[霜刑]，保持长按  、  可衔接[强化特殊技：处刑式·绝裁]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541011"],
+      "sourceExpression": "{Skill:1541011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.082,
+        "growth": 0.553
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.506,
+        "growth": 0.205
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0020:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.082,
+                  "growth": 0.553
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541011-main"
+    },
+    {
+      "actionId": "action:agent:1541:action:0021",
+      "branchId": "agent:1541:branch:special-10",
+      "name": "特殊技：处刑式·重霜",
+      "rowName": "飞镖切割总伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/special/description/9/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "触发[强化特殊技：处刑式·匿影]后，点按  或  发动：\n快速发动多段攻击，随后跃向敌人，收回披风的同时进行更强力的下落攻击，造成冰属性伤害；\n落地后若拥有[霜刑]，保持长按  、  可衔接[强化特殊技：处刑式·绝裁]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541012"],
+      "sourceExpression": "{Skill:1541012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.121,
+        "growth": 0.011
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0021:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.121,
+                  "growth": 0.011
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541012-飞镖切割总"
+    },
+    {
+      "actionId": "action:agent:1541:action:0022",
+      "branchId": "agent:1541:branch:special-11",
+      "name": "强化特殊技：处刑式·绝裁",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:promeia-special-ms4t1203"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1541/details.zh.json",
+        "pointer": "/skill/special/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1541/details.zh.json",
+          "pointer": "/skill/special/description/5/desc"
+        }
+      ],
+      "description": "[霜刑]足够时，发动[普通攻击：偏锋]的最后一段攻击、[特殊技：处刑式·坠霜]、[特殊技：处刑式·重霜]落地后保持长按  、  发动：\n快速闪身后跳的同时进行更强力的终结一击，造成冰属性伤害；\n命中敌人时，不累积[寒蚀值]；\n招式发动后，可通过长按  、  或点按  直接衔接第五段[普通攻击：偏锋]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1541014"],
+      "sourceExpression": "{Skill:1541014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.123,
+        "growth": 0.466
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.216,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1541:action:0022:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1541:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.123,
+                  "growth": 0.466
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-promeia-nk-1541014-main"
+    }
+  ]
+}

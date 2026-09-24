@@ -1,0 +1,1107 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1461",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1461:action:0001",
+      "branchId": "agent:1461:branch:assist-4",
+      "name": "快速支援：花雨齐射",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续的激光打击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461016"],
+      "sourceExpression": "{Skill:1461016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.54,
+        "growth": 0.14
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.77,
+        "growth": 0.035
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0001:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.54,
+                  "growth": 0.14
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461016-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0002",
+      "branchId": "agent:1461:branch:assist-5",
+      "name": "招架支援：雏华屏障",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461017"],
+      "sourceExpression": "{Skill:1461017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1461:action:0003",
+      "branchId": "agent:1461:branch:assist-5",
+      "name": "招架支援：雏华屏障",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461018"],
+      "sourceExpression": "{Skill:1461018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1461:action:0004",
+      "branchId": "agent:1461:branch:assist-5",
+      "name": "招架支援：雏华屏障",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461019"],
+      "sourceExpression": "{Skill:1461019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1461:action:0005",
+      "branchId": "agent:1461:branch:assist-6",
+      "name": "支援突击：绯芯爆裂",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动连续浮游炮攻击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461020"],
+      "sourceExpression": "{Skill:1461020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.56,
+        "growth": 0.415
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.016,
+        "growth": 0.183
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0005:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.56,
+                  "growth": 0.415
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461020-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0006",
+      "branchId": "agent:1461:branch:basic-4",
+      "name": "普通攻击：霜蕊轮舞",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，前两段造成物理伤害，第三第四段造成电属性伤害；\n第三段后撤动作至第四段攻击发动前受到攻击，可触发自动闪避。",
+      "parameterIds": ["1461001"],
+      "sourceExpression": "{Skill:1461001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.465,
+        "growth": 0.043
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.294,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.465,
+                  "growth": 0.043
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461001-一段"
+    },
+    {
+      "actionId": "action:agent:1461:action:0007",
+      "branchId": "agent:1461:branch:basic-4",
+      "name": "普通攻击：霜蕊轮舞",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，前两段造成物理伤害，第三第四段造成电属性伤害；\n第三段后撤动作至第四段攻击发动前受到攻击，可触发自动闪避。",
+      "parameterIds": ["1461002"],
+      "sourceExpression": "{Skill:1461002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.241,
+        "growth": 0.113
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.829,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.241,
+                  "growth": 0.113
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461002-二段"
+    },
+    {
+      "actionId": "action:agent:1461:action:0008",
+      "branchId": "agent:1461:branch:basic-4",
+      "name": "普通攻击：霜蕊轮舞",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，前两段造成物理伤害，第三第四段造成电属性伤害；\n第三段后撤动作至第四段攻击发动前受到攻击，可触发自动闪避。",
+      "parameterIds": ["1461003"],
+      "sourceExpression": "{Skill:1461003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.718,
+        "growth": 0.066
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.446,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0008:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.718,
+                  "growth": 0.066
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461003-三段"
+    },
+    {
+      "actionId": "action:agent:1461:action:0009",
+      "branchId": "agent:1461:branch:basic-4",
+      "name": "普通攻击：霜蕊轮舞",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，前两段造成物理伤害，第三第四段造成电属性伤害；\n第三段后撤动作至第四段攻击发动前受到攻击，可触发自动闪避。",
+      "parameterIds": ["1461004"],
+      "sourceExpression": "{Skill:1461004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.586,
+        "growth": 0.326
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.265,
+        "growth": 0.103
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0009:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.586,
+                  "growth": 0.326
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461004-四段"
+    },
+    {
+      "actionId": "action:agent:1461:action:0010",
+      "branchId": "agent:1461:branch:basic-5",
+      "name": "普通攻击：落华·重戮",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:seed-basic-ms4kuuiv"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[普通攻击]第四段、[闪避反击]、[快速支援]、[支援突击]后，可通过长按或点按   发动：\n召唤机甲，进行蓄力冲拳攻击，造成大量电属性伤害；\n[钢能]值达到120点时，可获得一次快速释放[普通攻击：落华·重戮]的机会，长按  直接发动；[钢能]值不足120点或通过上述方式发动一次[普通攻击：落华·重戮]后，该效果移除；\n命中敌人时不累积[钢能]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461006"],
+      "sourceExpression": "{Skill:1461006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.666,
+        "growth": 0.152
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.448,
+        "growth": 0.066
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0010:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.666,
+                  "growth": 0.152
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461006-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0011",
+      "branchId": "agent:1461:branch:basic-6",
+      "name": "普通攻击：落华·崩坠一式",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:seed-basic-ms4kv1p2"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "「席德」拥有[钢能]值，自身招式命中敌人可累积[钢能]；\n[钢能]最大150点，初始拥有60点[钢能]，达到120点时，在[普通攻击：落华·重戮]或[终结技：机芯花园·绽放！]发动后，可点按或长按   消耗60点[钢能]释放[普通攻击：落华·崩坠一式]，并自动消耗60点[钢能]衔接发动[普通攻击：落华·崩坠二式]；\n操控机甲，扫射并释放强力跳砸，造成大量电属性伤害；\n命中敌人时不累积[钢能]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461007"],
+      "sourceExpression": "{Skill:1461007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 5.283,
+        "growth": 0.481
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.679,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0011:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 5.283,
+                  "growth": 0.481
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461007-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0012",
+      "branchId": "agent:1461:branch:basic-7",
+      "name": "普通攻击：落华·崩坠二式",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:seed-basic-ms4kv1p2"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "「席德」拥有[钢能]值，自身招式命中敌人可累积[钢能]；\n[钢能]最大150点，初始拥有60点[钢能]，达到120点时，在[普通攻击：落华·重戮]或[终结技：机芯花园·绽放！]发动后，可点按或长按   消耗60点[钢能]释放[普通攻击：落华·崩坠一式]，并自动消耗60点[钢能]衔接发动[普通攻击：落华·崩坠二式]；\n操控机甲，扫射并释放强力跳砸，造成大量电属性伤害；\n命中敌人时不累积[钢能]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461008"],
+      "sourceExpression": "{Skill:1461008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 9.894,
+        "growth": 0.9
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.688,
+        "growth": 0.077
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 9.894,
+                  "growth": 0.9
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461008-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0013",
+      "branchId": "agent:1461:branch:chain-3",
+      "name": "连携技：落霰风暴",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n召唤机甲，护住自身后，向前方发射炮击与大量导弹，造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461014"],
+      "sourceExpression": "{Skill:1461014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.342,
+        "growth": 0.668
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.953,
+        "growth": 0.135
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.342,
+                  "growth": 0.668
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461014-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0014",
+      "branchId": "agent:1461:branch:chain-4",
+      "name": "终结技：机芯花园·绽放！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n亲自驾驭机甲，倾泻出大量导弹与流星般的致命光弹，并释放强力跳砸，造成大量电属性伤害；\n招式发动后，累积60点[钢能]；\n命中敌人时不累积[钢能]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461015"],
+      "sourceExpression": "{Skill:1461015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 32.497,
+        "growth": 2.955
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 5.959,
+        "growth": 0.271
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0014:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 32.497,
+                  "growth": 2.955
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461015-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0015",
+      "branchId": "agent:1461:branch:dodge-4",
+      "name": "冲刺攻击：磁陨轮舞",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方扔出钢轮，造成物理伤害。",
+      "parameterIds": ["1461012"],
+      "sourceExpression": "{Skill:1461012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.642,
+        "growth": 0.059
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.321,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.642,
+                  "growth": 0.059
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461012-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0016",
+      "branchId": "agent:1461:branch:dodge-5",
+      "name": "闪避反击：裂萼纷华",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动连续的激光打击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461013"],
+      "sourceExpression": "{Skill:1461013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.201,
+        "growth": 0.291
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.549,
+        "growth": 0.116
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0016:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.201,
+                  "growth": 0.291
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461013-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0017",
+      "branchId": "agent:1461:branch:special-4",
+      "name": "特殊技：苍霜零落",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n扔出钢轮，划出曲线轨迹造成电属性伤害。",
+      "parameterIds": ["1461005"],
+      "sourceExpression": "{Skill:1461005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.477,
+        "growth": 0.044
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.477,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0017:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.477,
+                  "growth": 0.044
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461005-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0018",
+      "branchId": "agent:1461:branch:special-5",
+      "name": "强化特殊技：铁萼雨幕",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n进入飞行模式，可进行四向移动，连续发射弹幕对敌人造成大量电属性伤害；\n长按  可以延长弹幕发射时间并持续消耗能量；\n飞行期间，松开  可发动[强化特殊技：铁萼雨幕·离]；\n一次飞行消耗60点能量时，自动发动[普通攻击：落华·重戮]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461009"],
+      "sourceExpression": "{Skill:1461009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.834,
+        "growth": 0.622
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 5.868,
+        "growth": 0.267
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0018:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.834,
+                  "growth": 0.622
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461009-main"
+    },
+    {
+      "actionId": "action:agent:1461:action:0019",
+      "branchId": "agent:1461:branch:special-6",
+      "name": "强化特殊技：铁萼雨幕·离",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1461/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1461/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "[强化特殊技：铁萼雨幕]发动期间，松开  发动：\n释放快速的炮击，造成电属性伤害；\n命中敌人时不累积[钢能]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1461022"],
+      "sourceExpression": "{Skill:1461022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.184,
+        "growth": 0.017
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.092,
+        "growth": 0.005
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1461:action:0019:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1461:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.184,
+                  "growth": 0.017
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-seed-nk-1461022-main"
+    }
+  ]
+}

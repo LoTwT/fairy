@@ -93,6 +93,9 @@ it("consumes the offline-installed package in real Vite development and producti
         (id) => `definitions/attributes/w-engines/${id}.json`,
       ),
       "definitions/attributes/drive-disc-affixes.json",
+      ...publishedEntities.agents.memberIds.map(
+        (id) => `definitions/skills/agents/${id}.json`,
+      ),
       ...Object.entries(publishedEntities).flatMap(([category, entity]) =>
         entity.memberIds.flatMap((id) => [
           `${category}/${id}/data.json`,
@@ -111,6 +114,7 @@ it("consumes the offline-installed package in real Vite development and producti
       `import * as api from "@randomplay/data"
 globalThis.fairy = api
 globalThis.fairyDirectAttributes = () => import("@randomplay/data/definitions/attributes/agents/1311.json")
+globalThis.fairyDirectActions = () => import("@randomplay/data/definitions/skills/agents/1031.json")
 globalThis.fairyStatic = async () => {
   const [definitions, catalog, coverage, engine] = await Promise.all([
     import("@randomplay/data/definitions/effects/static.json"),
@@ -279,6 +283,7 @@ document.body.append("ready")
                       .filter((request) => request.phase === step.name)
                       .flatMap((request) => request.sources)
                       .toSorted(),
+                    `${mode}/${scenario.name}/${step.name}`,
                   ).toEqual(step.sources.toSorted())
                 }
                 step.after?.(requests)
@@ -442,6 +447,70 @@ function defineScenarios(counts: {
     })
   }
   return [
+    {
+      name: "agent-actions",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "nicole-actions",
+          act: async (page) => {
+            const result = await page.evaluate(async () => {
+              const api = (globalThis as any).fairy
+              const agent = await api.loadAgentActions("Nicole")
+              const selected = api.resolveAgentAction({
+                agent,
+                actionId: "action:agent:1031:basic-enhanced-1",
+                mindscapeRank: 6,
+                levels: { basic: { mode: "effective", value: 15 } },
+                requireIndividualHits: true,
+              })
+              agent.actions.length = 0
+              const fresh = await api.loadAgentActions("Nicole")
+              return {
+                ok: selected.ok,
+                multiplier: selected.sourceDamageMultiplier,
+                repeats: selected.calculation.segments.map(
+                  (segment: any) => segment.repeat,
+                ),
+                isolated: fresh.actions.length > 0,
+              }
+            })
+            expect(result.ok).toBe(true)
+            expect(result.multiplier).toBeCloseTo(2.017, 12)
+            expect(result.repeats).toEqual([1, 3])
+            expect(result.isolated).toBe(true)
+          },
+          sources: ["definitions/skills/agents/1031.json"],
+        },
+        {
+          name: "direct-actions",
+          act: async (page) => {
+            expect(
+              await page.evaluate(
+                async () =>
+                  (await (globalThis as any).fairyDirectActions()).default
+                    .entityId,
+              ),
+            ).toBe("1031")
+          },
+          after: (requests) => {
+            // Dev 的直接子路径与依赖预构建可各自请求同一来源；不得串读其他文件。
+            expect(
+              requests
+                .filter((request) => request.phase === "direct-actions")
+                .flatMap((request) => request.sources)
+                .every(
+                  (path) => path === "definitions/skills/agents/1031.json",
+                ),
+            ).toBe(true)
+          },
+        },
+      ],
+    },
     {
       name: "panel-attributes",
       steps: [

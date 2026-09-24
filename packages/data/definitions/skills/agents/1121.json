@@ -1,0 +1,1046 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1121",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1121:action:0001",
+      "branchId": "agent:1121:branch:assist-4",
+      "name": "快速支援：联合追债",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动打击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121016"],
+      "sourceExpression": "{Skill:1121016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.967,
+        "growth": 0.088
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.967,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.967,
+                  "growth": 0.088
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121016-main"
+    },
+    {
+      "actionId": "action:agent:1121:action:0002",
+      "branchId": "agent:1121:branch:assist-5",
+      "name": "招架支援：分摊风险",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121017"],
+      "sourceExpression": "{Skill:1121017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.251,
+        "growth": 0.103
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1121:action:0003",
+      "branchId": "agent:1121:branch:assist-5",
+      "name": "招架支援：分摊风险",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121018"],
+      "sourceExpression": "{Skill:1121018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.684,
+        "growth": 0.122
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1121:action:0004",
+      "branchId": "agent:1121:branch:assist-5",
+      "name": "招架支援：分摊风险",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121019"],
+      "sourceExpression": "{Skill:1121019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.084,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1121:action:0005",
+      "branchId": "agent:1121:branch:assist-6",
+      "name": "支援突击：违约惩罚",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进打击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121020"],
+      "sourceExpression": "{Skill:1121020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.259,
+        "growth": 0.297
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.828,
+        "growth": 0.129
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.259,
+                  "growth": 0.297
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121020-main"
+    },
+    {
+      "actionId": "action:agent:1121:action:0006",
+      "branchId": "agent:1121:branch:basic-2",
+      "name": "普通攻击：对账",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的打击，造成物理伤害。",
+      "parameterIds": ["1121001"],
+      "sourceExpression": "{Skill:1121001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.659,
+        "growth": 0.06
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.471,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.659,
+                  "growth": 0.06
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121001-一段"
+    },
+    {
+      "actionId": "action:agent:1121:action:0007",
+      "branchId": "agent:1121:branch:basic-2",
+      "name": "普通攻击：对账",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的打击，造成物理伤害。",
+      "parameterIds": ["1121002"],
+      "sourceExpression": "{Skill:1121002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.89,
+        "growth": 0.172
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.569,
+        "growth": 0.072
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.89,
+                  "growth": 0.172
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121002-二段"
+    },
+    {
+      "actionId": "action:agent:1121:action:0008",
+      "branchId": "agent:1121:branch:basic-2",
+      "name": "普通攻击：对账",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的打击，造成物理伤害。",
+      "parameterIds": ["1121003"],
+      "sourceExpression": "{Skill:1121003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.483,
+        "growth": 0.317
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.601,
+        "growth": 0.119
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.483,
+                  "growth": 0.317
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121003-三段"
+    },
+    {
+      "actionId": "action:agent:1121:action:0009",
+      "branchId": "agent:1121:branch:chain-3",
+      "name": "连携技：盖章，结算",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动强力打击，造成大量火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121014"],
+      "sourceExpression": "{Skill:1121014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.273,
+        "growth": 0.571
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.283,
+        "growth": 0.15
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0009:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.273,
+                  "growth": 0.571
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121014-main"
+    },
+    {
+      "actionId": "action:agent:1121:action:0010",
+      "branchId": "agent:1121:branch:chain-4",
+      "name": "终结技：拳债，全面清偿",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围敌人发动强力打击，造成大量火属性伤害；\n招式发动时，额外回复3点支援点数；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121015"],
+      "sourceExpression": "{Skill:1121015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.43,
+        "growth": 1.494
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.1,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0010:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.43,
+                  "growth": 1.494
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121015-main"
+    },
+    {
+      "actionId": "action:agent:1121:action:0011",
+      "branchId": "agent:1121:branch:dodge-4",
+      "name": "冲刺攻击：前来报销",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行打击，造成物理伤害。",
+      "parameterIds": ["1121012"],
+      "sourceExpression": "{Skill:1121012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.384,
+        "growth": 0.126
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.692,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.384,
+                  "growth": 0.126
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121012-main"
+    },
+    {
+      "actionId": "action:agent:1121:action:0012",
+      "branchId": "agent:1121:branch:dodge-5",
+      "name": "闪避反击：清算",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动打击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1121013"],
+      "sourceExpression": "{Skill:1121013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.257,
+        "growth": 0.206
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.967,
+        "growth": 0.09
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.257,
+                  "growth": 0.206
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121013-main"
+    },
+    {
+      "actionId": "action:agent:1121:action:0013",
+      "branchId": "agent:1121:branch:special-3",
+      "name": "特殊技：拳债统计",
+      "rowName": "主动攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n架起武器格挡敌人的攻击，随后对前方进行打击，造成物理伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量物理伤害；\n长按  能够维持格挡；\n维持格挡时获得护盾，护盾值随时间衰减；\n退出格挡后移除护盾，护盾值随时间回复；\n护盾值最高不超过本生命值上限的16%；\n格挡发动时拥有无敌效果；\n打击发动期间抗打断等级提升。",
+      "parameterIds": ["1121005"],
+      "sourceExpression": "{Skill:1121005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.417,
+        "growth": 0.038
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.417,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.417,
+                  "growth": 0.038
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121005-主动攻击"
+    },
+    {
+      "actionId": "action:agent:1121:action:0014",
+      "branchId": "agent:1121:branch:special-3",
+      "name": "特殊技：拳债统计",
+      "rowName": "格挡反击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/special/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n架起武器格挡敌人的攻击，随后对前方进行打击，造成物理伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量物理伤害；\n长按  能够维持格挡；\n维持格挡时获得护盾，护盾值随时间衰减；\n退出格挡后移除护盾，护盾值随时间回复；\n护盾值最高不超过本生命值上限的16%；\n格挡发动时拥有无敌效果；\n打击发动期间抗打断等级提升。",
+      "parameterIds": ["1121006"],
+      "sourceExpression": "{Skill:1121006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.334,
+        "growth": 0.213
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.234,
+        "growth": 0.102
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.334,
+                  "growth": 0.213
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121006-格挡反击"
+    },
+    {
+      "actionId": "action:agent:1121:action:0015",
+      "branchId": "agent:1121:branch:special-4",
+      "name": "强化特殊技：到期还拳",
+      "rowName": "主动攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n架起武器格挡敌人的攻击，随后对前方进行打击，造成火属性伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量火属性伤害；\n长按  能够维持格挡；\n维持格挡时获得护盾，护盾值随时间衰减；\n退出格挡后移除护盾，护盾值随时间回复；\n护盾值最高不超过本生命值上限的16%；\n招式发动时，回复护盾至最大值；\n招式发动后，再次点按  ，能够向前方追加强力打击，造成大量火属性伤害；\n格挡发动时拥有无敌效果；\n打击发动期间拥有无敌效果。",
+      "parameterIds": ["1121008"],
+      "sourceExpression": "{Skill:1121008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.385,
+        "growth": 0.399
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.471,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0015:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.385,
+                  "growth": 0.399
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121008-主动攻击"
+    },
+    {
+      "actionId": "action:agent:1121:action:0016",
+      "branchId": "agent:1121:branch:special-4",
+      "name": "强化特殊技：到期还拳",
+      "rowName": "追加攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n架起武器格挡敌人的攻击，随后对前方进行打击，造成火属性伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量火属性伤害；\n长按  能够维持格挡；\n维持格挡时获得护盾，护盾值随时间衰减；\n退出格挡后移除护盾，护盾值随时间回复；\n护盾值最高不超过本生命值上限的16%；\n招式发动时，回复护盾至最大值；\n招式发动后，再次点按  ，能够向前方追加强力打击，造成大量火属性伤害；\n格挡发动时拥有无敌效果；\n打击发动期间拥有无敌效果。",
+      "parameterIds": ["1121009"],
+      "sourceExpression": "{Skill:1121009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.385,
+        "growth": 0.399
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.471,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0016:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.385,
+                  "growth": 0.399
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121009-追加攻击"
+    },
+    {
+      "actionId": "action:agent:1121:action:0017",
+      "branchId": "agent:1121:branch:special-4",
+      "name": "强化特殊技：到期还拳",
+      "rowName": "格挡反击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/special/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n架起武器格挡敌人的攻击，随后对前方进行打击，造成火属性伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量火属性伤害；\n长按  能够维持格挡；\n维持格挡时获得护盾，护盾值随时间衰减；\n退出格挡后移除护盾，护盾值随时间回复；\n护盾值最高不超过本生命值上限的16%；\n招式发动时，回复护盾至最大值；\n招式发动后，再次点按  ，能够向前方追加强力打击，造成大量火属性伤害；\n格挡发动时拥有无敌效果；\n打击发动期间拥有无敌效果。",
+      "parameterIds": ["1121010"],
+      "sourceExpression": "{Skill:1121010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.005,
+        "growth": 0.455
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.676,
+        "growth": 0.168
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.005,
+                  "growth": 0.455
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121010-格挡反击"
+    },
+    {
+      "actionId": "action:agent:1121:action:0018",
+      "branchId": "agent:1121:branch:special-4",
+      "name": "强化特殊技：到期还拳",
+      "rowName": "格挡追击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1121/details.zh.json",
+        "pointer": "/skill/special/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1121/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n架起武器格挡敌人的攻击，随后对前方进行打击，造成火属性伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量火属性伤害；\n长按  能够维持格挡；\n维持格挡时获得护盾，护盾值随时间衰减；\n退出格挡后移除护盾，护盾值随时间回复；\n护盾值最高不超过本生命值上限的16%；\n招式发动时，回复护盾至最大值；\n招式发动后，再次点按  ，能够向前方追加强力打击，造成大量火属性伤害；\n格挡发动时拥有无敌效果；\n打击发动期间拥有无敌效果。",
+      "parameterIds": ["1121011"],
+      "sourceExpression": "{Skill:1121011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.512,
+        "growth": 0.502
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.676,
+        "growth": 0.168
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1121:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1121:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.512,
+                  "growth": 0.502
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-benbigger-nk-1121011-格挡追击"
+    }
+  ]
+}

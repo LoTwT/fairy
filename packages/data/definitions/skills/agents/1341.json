@@ -1,0 +1,1077 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1341",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1341:action:0001",
+      "branchId": "agent:1341:branch:assist-5",
+      "name": "登场技：霜迸",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": null,
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "照的[霜寒值]满，且处于接战状态下时，点按  发动：\n向前方连续攻击，随后发动斩击，造成大量冰属性伤害；\n招式发动时，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n招式发动时，触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n招式发动时视为发动[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341015"],
+      "sourceExpression": "{Skill:1341015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 6.803,
+        "growth": 0.619
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.302,
+        "growth": 0.105
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhao-nk-1341015-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0002",
+      "branchId": "agent:1341:branch:assist-6",
+      "name": "快速支援：查漏补缺",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n向前方发动下落斩击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341016"],
+      "sourceExpression": "{Skill:1341016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.76,
+        "growth": 0.16
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.88,
+        "growth": 0.04
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0002:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.76,
+                  "growth": 0.16
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341016-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0003",
+      "branchId": "agent:1341:branch:assist-7",
+      "name": "招架支援：霜婵镇场",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341017"],
+      "sourceExpression": "{Skill:1341017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1341:action:0004",
+      "branchId": "agent:1341:branch:assist-7",
+      "name": "招架支援：霜婵镇场",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341018"],
+      "sourceExpression": "{Skill:1341018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1341:action:0005",
+      "branchId": "agent:1341:branch:assist-7",
+      "name": "招架支援：霜婵镇场",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341019"],
+      "sourceExpression": "{Skill:1341019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1341:action:0006",
+      "branchId": "agent:1341:branch:assist-8",
+      "name": "支援突击：凛光返照",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        },
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n向前方连续斩击，造成大量冰属性伤害；\n招式发动时，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n招式发动时，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341020"],
+      "sourceExpression": "{Skill:1341020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.661,
+        "growth": 0.333
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.181,
+        "growth": 0.145
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0006:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.661,
+                  "growth": 0.333
+                }
+              },
+              {
+                "itemId": "action:agent:1341:action:0006:charged-health",
+                "stat": "health",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.13,
+                  "growth": 0.01
+                },
+                "multiplyByInput": "chargeSeconds"
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "inputId": "chargeSeconds",
+          "name": "终结一击消耗的蓄力秒数",
+          "minimum": 0,
+          "maximum": 5
+        }
+      ],
+      "limitations": [
+        "生命值附加项只加入终结一击一次；当前合计计算要求各次命中使用相同乘区。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341020-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0007",
+      "branchId": "agent:1341:branch:basic-3",
+      "name": "普通攻击：凛冽裁决",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，第一段造成物理伤害，后四段造成冰属性伤害。",
+      "parameterIds": ["1341001"],
+      "sourceExpression": "{Skill:1341001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.734,
+        "growth": 0.067
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.551,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.734,
+                  "growth": 0.067
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341001-一段"
+    },
+    {
+      "actionId": "action:agent:1341:action:0008",
+      "branchId": "agent:1341:branch:basic-3",
+      "name": "普通攻击：凛冽裁决",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，第一段造成物理伤害，后四段造成冰属性伤害。",
+      "parameterIds": ["1341002"],
+      "sourceExpression": "{Skill:1341002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.66,
+        "growth": 0.06
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.492,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0008:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.66,
+                  "growth": 0.06
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341002-二段"
+    },
+    {
+      "actionId": "action:agent:1341:action:0009",
+      "branchId": "agent:1341:branch:basic-3",
+      "name": "普通攻击：凛冽裁决",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，第一段造成物理伤害，后四段造成冰属性伤害。",
+      "parameterIds": ["1341003"],
+      "sourceExpression": "{Skill:1341003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.158,
+        "growth": 0.106
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.844,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0009:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.158,
+                  "growth": 0.106
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341003-三段"
+    },
+    {
+      "actionId": "action:agent:1341:action:0010",
+      "branchId": "agent:1341:branch:basic-3",
+      "name": "普通攻击：凛冽裁决",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，第一段造成物理伤害，后四段造成冰属性伤害。",
+      "parameterIds": ["1341004"],
+      "sourceExpression": "{Skill:1341004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.856,
+        "growth": 0.169
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.546,
+        "growth": 0.071
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0010:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.856,
+                  "growth": 0.169
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341004-四段"
+    },
+    {
+      "actionId": "action:agent:1341:action:0011",
+      "branchId": "agent:1341:branch:basic-3",
+      "name": "普通攻击：凛冽裁决",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，第一段造成物理伤害，后四段造成冰属性伤害。",
+      "parameterIds": ["1341005", "1341006"],
+      "sourceExpression": "{{Skill:1341005, Prop:1001} + {Skill:1341006, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.8640000000000003,
+        "growth": 0.35200000000000004
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.931,
+        "growth": 0.134
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0011:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.8640000000000003,
+                  "growth": 0.35200000000000004
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341005-五段"
+    },
+    {
+      "actionId": "action:agent:1341:action:0012",
+      "branchId": "agent:1341:branch:basic-4",
+      "name": "普通攻击：最终裁决",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:zhao-basic-ms213fi3"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        },
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  发动：\n预备后进入蓄力，松开时向前方进行斩击，造成大量冰属性伤害；\n蓄力时，照将累积最多5秒蓄力时长，[普通攻击：最终裁决]、[连携技]或[支援突击]的终结一击命中时，将消耗蓄力时长造成额外伤害，每有1秒蓄力时长，造成照{CAL:0.12+AvatarSkillLevel(0)*0.01,100,2}%最大生命值的额外伤害；\n照处于任意[以太帷幕]中时，如果在蓄力中成为非当前操作中角色，可以继续进行蓄力；\n招式发动时，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]，并触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n不为当前操作中角色时，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341008"],
+      "sourceExpression": "{Skill:1341008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.697,
+        "growth": 0.064
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.523,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0012:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.697,
+                  "growth": 0.064
+                }
+              },
+              {
+                "itemId": "action:agent:1341:action:0012:charged-health",
+                "stat": "health",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.13,
+                  "growth": 0.01
+                },
+                "multiplyByInput": "chargeSeconds"
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "inputId": "chargeSeconds",
+          "name": "终结一击消耗的蓄力秒数",
+          "minimum": 0,
+          "maximum": 5
+        }
+      ],
+      "limitations": [
+        "生命值附加项只加入终结一击一次；当前合计计算要求各次命中使用相同乘区。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341008-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0013",
+      "branchId": "agent:1341:branch:chain-3",
+      "name": "连携技：临时合作",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        },
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前方发动连续斩击，造成大量冰属性伤害；\n招式发动后，积攒5点[霜寒值]，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n招式发动后，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341013"],
+      "sourceExpression": "{Skill:1341013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.708,
+        "growth": 0.701
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.319,
+        "growth": 0.151
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0013:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.708,
+                  "growth": 0.701
+                }
+              },
+              {
+                "itemId": "action:agent:1341:action:0013:charged-health",
+                "stat": "health",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.13,
+                  "growth": 0.01
+                },
+                "multiplyByInput": "chargeSeconds"
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "inputId": "chargeSeconds",
+          "name": "终结一击消耗的蓄力秒数",
+          "minimum": 0,
+          "maximum": 5
+        }
+      ],
+      "limitations": [
+        "生命值附加项只加入终结一击一次；当前合计计算要求各次命中使用相同乘区。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341013-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0014",
+      "branchId": "agent:1341:branch:chain-4",
+      "name": "终结技：兔兔连斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前方连续攻击，随后下落斩击敌人，造成大量冰属性伤害；\n招式发动后，积攒20点[霜寒值]，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n招式发动后，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341014", "1341023"],
+      "sourceExpression": "{{Skill:1341014, Prop:1001} + {Skill:1341023, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 21.873,
+        "growth": 1.9889999999999999
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.0170000000000003,
+        "growth": 0.093
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0014:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 21.873,
+                  "growth": 1.9889999999999999
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341014-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0015",
+      "branchId": "agent:1341:branch:dodge-4",
+      "name": "冲刺攻击：弹跳冲刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方发动斩击，造成物理伤害和冰属性伤害。",
+      "parameterIds": ["1341011"],
+      "sourceExpression": "{Skill:1341011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.863,
+        "growth": 0.079
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.432,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-zhao-nk-1341011-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0016",
+      "branchId": "agent:1341:branch:dodge-5",
+      "name": "闪避反击：倏忽闪",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n向前方发动下落斩击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341012"],
+      "sourceExpression": "{Skill:1341012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.388,
+        "growth": 0.308
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.86,
+        "growth": 0.13
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0016:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.388,
+                  "growth": 0.308
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341012-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0017",
+      "branchId": "agent:1341:branch:special-3",
+      "name": "特殊技：碎冰溢寒",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动斩击，造成冰属性伤害；\n招式发动时，消耗5%当前生命值，使全队角色每秒基于照{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%最大生命值回复生命值，持续5秒，[特殊技：碎冰溢寒]和[强化特殊技：流霜冻土]的消耗生命效果每30秒最多触发一次。",
+      "parameterIds": ["1341009"],
+      "sourceExpression": "{Skill:1341009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.569,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.569,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0017:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.569,
+                  "growth": 0.052
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341009-main"
+    },
+    {
+      "actionId": "action:agent:1341:action:0018",
+      "branchId": "agent:1341:branch:special-4",
+      "name": "强化特殊技：流霜冻土",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1341/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按   发动：\n向前方连续发动斩击，造成大量冰属性伤害；\n招式发动时，消耗5%当前生命值，使全队角色每秒基于照{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%最大生命值回复生命值，持续5秒，[特殊技：碎冰溢寒]和[强化特殊技：流霜冻土]的消耗生命效果每30秒最多触发一次；\n招式发动时，积攒20点[霜寒值]，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n招式发动时，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1341010"],
+      "sourceExpression": "{Skill:1341010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 12.108,
+        "growth": 1.101
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 8.1,
+        "growth": 0.369
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1341:action:0018:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1341:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 12.108,
+                  "growth": 1.101
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-zhao-nk-1341010-main"
+    }
+  ]
+}

@@ -1,0 +1,1320 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1581",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1581:action:0001",
+      "branchId": "agent:1581:branch:assist-5",
+      "name": "快速支援：片羽新生",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对目标发动斩击，造成流明属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581017"],
+      "sourceExpression": "{Skill:1581017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.325,
+        "growth": 0.03
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.275,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0001:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.325,
+                  "growth": 0.03
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581017-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0002",
+      "branchId": "agent:1581:branch:assist-6",
+      "name": "招架支援：浮光掠影",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581018"],
+      "sourceExpression": "{Skill:1581018, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1581:action:0003",
+      "branchId": "agent:1581:branch:assist-6",
+      "name": "招架支援：浮光掠影",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581019"],
+      "sourceExpression": "{Skill:1581019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1581:action:0004",
+      "branchId": "agent:1581:branch:assist-6",
+      "name": "招架支援：浮光掠影",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581020"],
+      "sourceExpression": "{Skill:1581020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1581:action:0005",
+      "branchId": "agent:1581:branch:assist-7",
+      "name": "支援突击：眠醒残明",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对目标发动连续斩击，造成流明属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581021"],
+      "sourceExpression": "{Skill:1581021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.811,
+        "growth": 0.347
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.776,
+        "growth": 0.127
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0005:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.811,
+                  "growth": 0.347
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581021-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0006",
+      "branchId": "agent:1581:branch:assist-8",
+      "name": "支援技：花羽轮舞",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": ["zzz-hp:skill:remiel-assist-ms8eijmj"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "入场并发动大范围攻击，造成流明属性伤害；\n发动时消耗40点，若发动时自身剩余[浮晖]小于等于90点，则本次[支援技：花羽轮舞]不再消耗[浮晖]，并且自身进入[映曜]状态，下次发动[普通攻击：垂虹]时会升级为[普通攻击：惊鸿]；\n招式命中处于失衡状态的敌人时，敌人的失衡持续时间提升3秒，同一敌人在一次失衡状态下最多受到一次此效果，失衡持续时间提升效果与同类效果不可叠加；\n若命中目标，招式结束后可触发效果，倍率为{CAL:200+AvatarSkillLevel(6)*10,1,2}%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581015"],
+      "sourceExpression": "{Skill:1581015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.535,
+        "growth": 0.413
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.952,
+        "growth": 0.135
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0006:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.535,
+                  "growth": 0.413
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581015-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0007",
+      "branchId": "agent:1581:branch:assist-8",
+      "name": "支援技：花羽轮舞",
+      "rowName": "耀变倍率",
+      "levelGroup": "assist",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": ["zzz-hp:skill:remiel-assist-ms8eijmj"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "入场并发动大范围攻击，造成流明属性伤害；\n发动时消耗40点，若发动时自身剩余[浮晖]小于等于90点，则本次[支援技：花羽轮舞]不再消耗[浮晖]，并且自身进入[映曜]状态，下次发动[普通攻击：垂虹]时会升级为[普通攻击：惊鸿]；\n招式命中处于失衡状态的敌人时，敌人的失衡持续时间提升3秒，同一敌人在一次失衡状态下最多受到一次此效果，失衡持续时间提升效果与同类效果不可叠加；\n若命中目标，招式结束后可触发效果，倍率为{CAL:200+AvatarSkillLevel(6)*10,1,2}%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:200+AvatarSkillLevel(6)*10,1,2}%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "luminize",
+        "multiplier": {
+          "levelGroup": "assist",
+          "base": 2.1,
+          "growth": 0.1
+        }
+      },
+      "inputs": [],
+      "limitations": [
+        "仅提供本招式耀变基础倍率；虚曜强度、异化、异常精通及其他增益由现有计算接口显式提供。"
+      ],
+      "upstreamSkillId": "sk-remiel-radiance-mtsw2paj"
+    },
+    {
+      "actionId": "action:agent:1581:action:0008",
+      "branchId": "agent:1581:branch:basic-5",
+      "name": "普通攻击：蹁跹",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成流明属性伤害；\n若普攻命中目标，招式结束后可为自身回复；\n第四段普攻结束后可为命中的敌人施加1个[流明积蓄点]。",
+      "parameterIds": ["1581002"],
+      "sourceExpression": "{Skill:1581002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.312,
+        "growth": 0.029
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.122,
+        "growth": 0.006
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0008:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.312,
+                  "growth": 0.029
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581002-一段"
+    },
+    {
+      "actionId": "action:agent:1581:action:0009",
+      "branchId": "agent:1581:branch:basic-5",
+      "name": "普通攻击：蹁跹",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成流明属性伤害；\n若普攻命中目标，招式结束后可为自身回复；\n第四段普攻结束后可为命中的敌人施加1个[流明积蓄点]。",
+      "parameterIds": ["1581003"],
+      "sourceExpression": "{Skill:1581003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.545,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.282,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0009:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.545,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581003-二段"
+    },
+    {
+      "actionId": "action:agent:1581:action:0010",
+      "branchId": "agent:1581:branch:basic-5",
+      "name": "普通攻击：蹁跹",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成流明属性伤害；\n若普攻命中目标，招式结束后可为自身回复；\n第四段普攻结束后可为命中的敌人施加1个[流明积蓄点]。",
+      "parameterIds": ["1581004"],
+      "sourceExpression": "{Skill:1581004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.843,
+        "growth": 0.077
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.493,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0010:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.843,
+                  "growth": 0.077
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581004-三段"
+    },
+    {
+      "actionId": "action:agent:1581:action:0011",
+      "branchId": "agent:1581:branch:basic-5",
+      "name": "普通攻击：蹁跹",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成流明属性伤害；\n若普攻命中目标，招式结束后可为自身回复；\n第四段普攻结束后可为命中的敌人施加1个[流明积蓄点]。",
+      "parameterIds": ["1581005"],
+      "sourceExpression": "{Skill:1581005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.508,
+        "growth": 0.228
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.266,
+        "growth": 0.058
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0011:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.508,
+                  "growth": 0.228
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581005-四段"
+    },
+    {
+      "actionId": "action:agent:1581:action:0012",
+      "branchId": "agent:1581:branch:basic-6",
+      "name": "普通攻击：独舞",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "长按  发动：\n向前方进行范围斩击，造成流明属性伤害；\n若命中目标，招式结束后可为自身回复[浮晖]。",
+      "parameterIds": ["1581006"],
+      "sourceExpression": "{Skill:1581006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.965,
+        "growth": 0.088
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.816,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0012:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.965,
+                  "growth": 0.088
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581006-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0013",
+      "branchId": "agent:1581:branch:basic-7",
+      "name": "普通攻击：垂虹",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:remiel-basic-ms8egxov"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "当蕾米埃尔身上储存有时，长按  发动：\n向前方发动大范围强力攻击，造成流明属性伤害；\n招式结束后可为自身回复大量[浮晖]；\n若命中目标，招式结束后可触发效果，倍率为{CAL:100+AvatarSkillLevel(0)*5,1,2}%；\n发动后会清空身上储存的所有[虚曜]。",
+      "parameterIds": ["1581007"],
+      "sourceExpression": "{Skill:1581007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.95,
+        "growth": 0.178
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.65,
+        "growth": 0.075
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0013:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.95,
+                  "growth": 0.178
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581007-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0014",
+      "branchId": "agent:1581:branch:basic-7",
+      "name": "普通攻击：垂虹",
+      "rowName": "耀变倍率",
+      "levelGroup": "basic",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": ["zzz-hp:skill:remiel-basic-ms8egxov"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "当蕾米埃尔身上储存有时，长按  发动：\n向前方发动大范围强力攻击，造成流明属性伤害；\n招式结束后可为自身回复大量[浮晖]；\n若命中目标，招式结束后可触发效果，倍率为{CAL:100+AvatarSkillLevel(0)*5,1,2}%；\n发动后会清空身上储存的所有[虚曜]。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:100+AvatarSkillLevel(0)*5,1,2}%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "luminize",
+        "multiplier": {
+          "levelGroup": "basic",
+          "base": 1.05,
+          "growth": 0.05
+        }
+      },
+      "inputs": [],
+      "limitations": [
+        "仅提供本招式耀变基础倍率；虚曜强度、异化、异常精通及其他增益由现有计算接口显式提供。"
+      ],
+      "upstreamSkillId": "sk-remiel-radiance-mtsw4o0y"
+    },
+    {
+      "actionId": "action:agent:1581:action:0015",
+      "branchId": "agent:1581:branch:basic-8",
+      "name": "普通攻击：惊鸿",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:remiel-basic-ms8ehm4k"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "当蕾米埃尔身上储存有[虚曜]，且自身处于[映曜]状态时，长按  发动：\n向前方发动大范围强力攻击，造成流明属性伤害；\n招式结束后可为自身回复大量[浮晖]；\n若命中目标，招式结束后可触发[耀变]效果，倍率为{CAL:200+AvatarSkillLevel(0)*10,1,2}%；\n发动后会清空身上储存的所有[虚曜]。",
+      "parameterIds": ["1581008"],
+      "sourceExpression": "{Skill:1581008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 5.972,
+        "growth": 0.543
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.887,
+        "growth": 0.177
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0015:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 5.972,
+                  "growth": 0.543
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581008-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0016",
+      "branchId": "agent:1581:branch:basic-8",
+      "name": "普通攻击：惊鸿",
+      "rowName": "耀变倍率",
+      "levelGroup": "basic",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": ["zzz-hp:skill:remiel-basic-ms8ehm4k"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "当蕾米埃尔身上储存有[虚曜]，且自身处于[映曜]状态时，长按  发动：\n向前方发动大范围强力攻击，造成流明属性伤害；\n招式结束后可为自身回复大量[浮晖]；\n若命中目标，招式结束后可触发[耀变]效果，倍率为{CAL:200+AvatarSkillLevel(0)*10,1,2}%；\n发动后会清空身上储存的所有[虚曜]。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:200+AvatarSkillLevel(0)*10,1,2}%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "luminize",
+        "multiplier": {
+          "levelGroup": "basic",
+          "base": 2.1,
+          "growth": 0.1
+        }
+      },
+      "inputs": [],
+      "limitations": [
+        "仅提供本招式耀变基础倍率；虚曜强度、异化、异常精通及其他增益由现有计算接口显式提供。"
+      ],
+      "upstreamSkillId": "sk-remiel-radiance-mtsw4ckz"
+    },
+    {
+      "actionId": "action:agent:1581:action:0017",
+      "branchId": "agent:1581:branch:chain-3",
+      "name": "连携技：交叠舞步",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方发动多段大范围攻击，造成流明属性伤害；\n发动时自身进入[映曜]状态，下次发动[普通攻击：垂虹]时会升级为[普通攻击：惊鸿]；\n招式结束后为命中的敌人施加2个[流明积蓄点]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581014"],
+      "sourceExpression": "{Skill:1581014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.852,
+        "growth": 0.714
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.255,
+        "growth": 0.103
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0017:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.852,
+                  "growth": 0.714
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581014-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0018",
+      "branchId": "agent:1581:branch:chain-4",
+      "name": "终结技：缭乱终幕",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": ["zzz-hp:skill:remiel-ultimate-mswz1sen"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前方进行大范围攻击，造成流明属性伤害；\n若命中目标，招式结束后可触发效果，倍率为{CAL:210+AvatarSkillLevel(3)*10.5,1,2}%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581016"],
+      "sourceExpression": "{Skill:1581016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 20.097,
+        "growth": 1.827
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.604,
+        "growth": 0.119
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0018:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 20.097,
+                  "growth": 1.827
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581016-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0019",
+      "branchId": "agent:1581:branch:chain-4",
+      "name": "终结技：缭乱终幕",
+      "rowName": "耀变倍率",
+      "levelGroup": "chain",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": ["zzz-hp:skill:remiel-ultimate-mswz1sen"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n向前方进行大范围攻击，造成流明属性伤害；\n若命中目标，招式结束后可触发效果，倍率为{CAL:210+AvatarSkillLevel(3)*10.5,1,2}%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:210+AvatarSkillLevel(3)*10.5,1,2}%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "luminize",
+        "multiplier": {
+          "levelGroup": "chain",
+          "base": 2.205,
+          "growth": 0.105
+        }
+      },
+      "inputs": [],
+      "limitations": [
+        "仅提供本招式耀变基础倍率；虚曜强度、异化、异常精通及其他增益由现有计算接口显式提供。"
+      ],
+      "upstreamSkillId": "sk-remiel-radiance-mtsw3ov1"
+    },
+    {
+      "actionId": "action:agent:1581:action:0020",
+      "branchId": "agent:1581:branch:dodge-4",
+      "name": "冲刺攻击：锐芒",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行快速攻击，造成流明属性伤害。",
+      "parameterIds": ["1581012"],
+      "sourceExpression": "{Skill:1581012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.39,
+        "growth": 0.036
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.33,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0020:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.39,
+                  "growth": 0.036
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581012-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0021",
+      "branchId": "agent:1581:branch:dodge-5",
+      "name": "闪避反击：对影",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对目标发动强力斩击，造成流明属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581013"],
+      "sourceExpression": "{Skill:1581013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.145,
+        "growth": 0.195
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.65,
+        "growth": 0.075
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0021:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.145,
+                  "growth": 0.195
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581013-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0022",
+      "branchId": "agent:1581:branch:special-4",
+      "name": "特殊技：薄明",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动远程攻击，造成流明属性伤害。",
+      "parameterIds": ["1581009"],
+      "sourceExpression": "{Skill:1581009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.499,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.422,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0022:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.499,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581009-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0023",
+      "branchId": "agent:1581:branch:special-5",
+      "name": "特殊技：曙色颂·转辉",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "若蕾米埃尔处于接战状态中且[浮晖]达到最大值120点时，在[特殊技]或[强化特殊技]后长按  可进入[转换姿态]，在[转换姿态]下切换角色时，蕾米埃尔会进入[相变时流]状态：\n[相变时流]状态下蕾米埃尔会自主行动，协助作战，其中部分攻击还可为目标施加[流明积蓄点]，期间[浮晖]会随时间消耗，当[浮晖]耗尽或离开接战状态时会退出[相变时流]状态，未退出[相变时流]状态前，蕾米埃尔无法通过[连携技]之外的方式主动换入；\n若蕾米埃尔在一次[相变时流]状态下触发3次反应后，或在[浮晖]耗尽时自身储存的数量大于等于1时，则激活[支援技：花羽轮舞]，解锁普通换入并使蕾米埃尔下次普通换入时自动发动[支援技：花羽轮舞]；\n进入[相变时流]状态时，蕾米埃尔会使全队角色造成的伤害提升{CAL:0+AvatarSkillLevel(1)*1.5,1,2}%，持续60秒，重复触发时刷新持续时间；\n若蕾米埃尔发动[特殊技]或[强化特殊技]攻击命中处于失衡状态的敌人，且[浮晖]达到最大值120点时，在[特殊技]或[强化特殊技]中切换角色也可进入[相变时流]状态；\n若进入[转换姿态]后未切换角色，则蕾米埃尔发动下落攻击回到地面。",
+      "parameterIds": ["1581010"],
+      "sourceExpression": "{Skill:1581010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.647,
+        "growth": 0.15
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.697,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0023:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.647,
+                  "growth": 0.15
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581010-main"
+    },
+    {
+      "actionId": "action:agent:1581:action:0024",
+      "branchId": "agent:1581:branch:special-6",
+      "name": "强化特殊技：曙色颂",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1581/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1581/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "进入战场时，若自身不足60点能量则回复至60点，在勘域模式中此效果180秒内最多触发一次；\n能量足够时，点按  发动：\n向前方发动大范围攻击，造成流明属性伤害；\n招式结束后为命中的敌人施加2个[流明积蓄点]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1581011"],
+      "sourceExpression": "{Skill:1581011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 7.215,
+        "growth": 0.656
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.833,
+        "growth": 0.129
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1581:action:0024:total",
+            "damageKind": "regular",
+            "element": "lumiflux",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1581:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 7.215,
+                  "growth": 0.656
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-remiel-nk-1581011-main"
+    }
+  ]
+}

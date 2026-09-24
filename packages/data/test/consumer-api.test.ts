@@ -13,6 +13,7 @@ import { supportedLanguages } from "../src/nanoka-identity.ts"
 
 const loaders = vi.hoisted(() => ({
   agentAttributes: vi.fn(),
+  agentActions: vi.fn(),
   wEngineAttributes: vi.fn(),
   discAffixes: vi.fn(),
   data: vi.fn(),
@@ -67,6 +68,7 @@ const loaders = vi.hoisted(() => ({
 }))
 vi.mock("../.generated/catalog.ts", () => ({
   agentAttributeLoaders: { "1311": loaders.agentAttributes },
+  agentActionLoaders: { "1311": loaders.agentActions },
   wEngineAttributeLoaders: { "12001": loaders.wEngineAttributes },
   driveDiscAffixesLoader: loaders.discAffixes,
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
@@ -222,11 +224,34 @@ import {
   loadWEngineDetails,
   loadAllWEngines,
   loadAgentLevel60Attributes,
+  loadAgentActions,
   loadWEngineLevel60Attributes,
   loadSDriveDiscMaxLevelAffixes,
 } from "../src/index.ts"
 
 describe("panel attribute consumer isolation", () => {
+  it("loads one action catalog lazily, preserves nested isolation and rejects invalid names", async () => {
+    const raw = { actions: [{ calculation: { segments: [{ repeat: 3 }] } }] }
+    loaders.agentActions.mockResolvedValue(raw)
+    const first = await loadAgentActions("Astra Yao")
+    expect(first).toEqual(raw)
+    ;(
+      first as unknown as typeof raw
+    ).actions[0].calculation.segments[0].repeat = 99
+    expect(await loadAgentActions("Astra Yao")).toEqual({
+      actions: [{ calculation: { segments: [{ repeat: 3 }] } }],
+    })
+    for (const name of ["astra yao", "1311", "__proto__", " Astra Yao"])
+      expect(await loadAgentActions(name as AgentName)).toBeUndefined()
+    await expect(
+      loadAgentActions(1311 as unknown as AgentName),
+    ).rejects.toThrow(TypeError)
+    for (const [name, loader] of Object.entries(loaders))
+      if (name !== "agentActions") expect(loader, name).not.toHaveBeenCalled()
+    const failure = new Error("action artifact unavailable")
+    loaders.agentActions.mockRejectedValue(failure)
+    await expect(loadAgentActions("Astra Yao")).rejects.toBe(failure)
+  })
   it("uses exact names, loads only the requested artifact and clones nested arrays", async () => {
     const raw = { coreAttributeBonuses: { 1: [], 7: [{ value: 75 }] } }
     loaders.agentAttributes.mockResolvedValue(raw)

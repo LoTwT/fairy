@@ -1,0 +1,1415 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1571",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1571:action:0001",
+      "branchId": "agent:1571:branch:assist-4",
+      "name": "快速支援：隆隆援护",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n令隆隆钻头进行持续钻击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571020"],
+      "sourceExpression": "{Skill:1571020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.705,
+        "growth": 0.065
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.596,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.705,
+                  "growth": 0.065
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571020-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0002",
+      "branchId": "agent:1571:branch:assist-5",
+      "name": "招架支援：技术壁垒",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571021"],
+      "sourceExpression": "{Skill:1571021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1571:action:0003",
+      "branchId": "agent:1571:branch:assist-5",
+      "name": "招架支援：技术壁垒",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571022"],
+      "sourceExpression": "{Skill:1571022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1571:action:0004",
+      "branchId": "agent:1571:branch:assist-5",
+      "name": "招架支援：技术壁垒",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571023"],
+      "sourceExpression": "{Skill:1571023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1571:action:0005",
+      "branchId": "agent:1571:branch:assist-6",
+      "name": "支援突击：技术压制",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对目标发动连续攻击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571024"],
+      "sourceExpression": "{Skill:1571024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.508,
+        "growth": 0.41
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.324,
+        "growth": 0.152
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.508,
+                  "growth": 0.41
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571024-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0006",
+      "branchId": "agent:1571:branch:basic-3",
+      "name": "普通攻击：工程保险",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害。",
+      "parameterIds": ["1571001"],
+      "sourceExpression": "{Skill:1571001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.261,
+        "growth": 0.024
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.156,
+        "growth": 0.008
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0006:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.261,
+                  "growth": 0.024
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571001-一段"
+    },
+    {
+      "actionId": "action:agent:1571:action:0007",
+      "branchId": "agent:1571:branch:basic-3",
+      "name": "普通攻击：工程保险",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害。",
+      "parameterIds": ["1571002"],
+      "sourceExpression": "{Skill:1571002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.378,
+        "growth": 0.035
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.203,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0007:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.378,
+                  "growth": 0.035
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571002-二段"
+    },
+    {
+      "actionId": "action:agent:1571:action:0008",
+      "branchId": "agent:1571:branch:basic-3",
+      "name": "普通攻击：工程保险",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害。",
+      "parameterIds": ["1571003"],
+      "sourceExpression": "{Skill:1571003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.733,
+        "growth": 0.067
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.378,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0008:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.733,
+                  "growth": 0.067
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571003-三段"
+    },
+    {
+      "actionId": "action:agent:1571:action:0009",
+      "branchId": "agent:1571:branch:basic-3",
+      "name": "普通攻击：工程保险",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的攻击，造成火属性伤害。",
+      "parameterIds": ["1571004"],
+      "sourceExpression": "{Skill:1571004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.409,
+        "growth": 0.129
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.883,
+        "growth": 0.041
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0009:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.409,
+                  "growth": 0.129
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571004-四段"
+    },
+    {
+      "actionId": "action:agent:1571:action:0010",
+      "branchId": "agent:1571:branch:basic-4",
+      "name": "普通攻击：帽子把戏",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "诺姆为当前操作角色，且处于接战状态时，每秒获得1.5%[预热膛温]；\n头上有[随行礼帽]时，长按  发动：\n炮击后扔出[随行礼帽]，令[随行礼帽]发动一轮空中射击，造成火属性伤害，并暂存[预热膛温]；\n招式命中敌人时，将触发上一位角色的[快速支援]，5秒内最多触发一次；\n[随行礼帽]被扔出后，会代替诺姆以相同的速度累积并暂存[预热膛温]，期间诺姆无需在前场；\n诺姆重新拾取[随行礼帽]后，将立即获得暂存的[预热膛温]；\n长按  时， [随行礼帽]会加速跑向诺姆；\n当诺姆拾取[随行礼帽]后的[预热膛温]能够达到80%时，[随行礼帽]会自动加速跑向诺姆；\n当诺姆从前场切换至后场，且处于接战状态时，若[预热膛温]未满，[随行礼帽]会自动跳入战场；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1571005"],
+      "sourceExpression": "{Skill:1571005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.569,
+        "growth": 0.052
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.34,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0010:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.569,
+                  "growth": 0.052
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571005-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0011",
+      "branchId": "agent:1571:branch:chain-3",
+      "name": "连携技：冲击钻探",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n命令大量隆隆钻头对敌人进行多段攻击，造成大量火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571018"],
+      "sourceExpression": "{Skill:1571018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.527,
+        "growth": 0.685
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.98,
+        "growth": 0.09
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0011:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.527,
+                  "growth": 0.685
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571018-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0012",
+      "branchId": "agent:1571:branch:chain-4",
+      "name": "终结技：优势火力学说",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n召唤战术火炮轰炸前方敌人，造成大量火属性伤害；\n招式发动时，立刻获得30%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571019"],
+      "sourceExpression": "{Skill:1571019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.365,
+        "growth": 1.761
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.925,
+        "growth": 0.361
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.365,
+                  "growth": 1.761
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571019-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0013",
+      "branchId": "agent:1571:branch:dodge-4",
+      "name": "冲刺攻击：死线冲刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n旋转并对周围开火，造成火属性伤害。",
+      "parameterIds": ["1571016"],
+      "sourceExpression": "{Skill:1571016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.823,
+        "growth": 0.075
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.349,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0013:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.823,
+                  "growth": 0.075
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571016-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0014",
+      "branchId": "agent:1571:branch:dodge-5",
+      "name": "闪避反击：合规测试",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n令隆隆钻头进行持续钻击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571017"],
+      "sourceExpression": "{Skill:1571017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.131,
+        "growth": 0.285
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.292,
+        "growth": 0.105
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0014:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.131,
+                  "growth": 0.285
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571017-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0015",
+      "branchId": "agent:1571:branch:special-5",
+      "name": "特殊技：高温熔断",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n炮击，造成火属性伤害。",
+      "parameterIds": ["1571006"],
+      "sourceExpression": "{Skill:1571006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.15,
+        "growth": 0.014
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.169,
+        "growth": 0.008
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0015:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.15,
+                  "growth": 0.014
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571006-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0016",
+      "branchId": "agent:1571:branch:special-6",
+      "name": "强化特殊技：嗯呢弹幕",
+      "rowName": "射击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n驾驶炮塔连续射击并根据敌人状态发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；\n招式发动后，诺姆获得16%，并进入[嗯呢弹幕]状态，持续32秒，[嗯呢弹幕]状态期间，诺姆会放置两座[嗯呢炮塔]加入战斗；\n保持长按可以持续消耗能量并延长最多2秒射击时间，每通过长按消耗1点能量，诺姆额外获得0.4%[预热膛温]，并使本轮[嗯呢弹幕]状态的持续时间额外增加0.8秒，最多增加{CAL:2*20*0.8,1,2}秒；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571007"],
+      "sourceExpression": "{Skill:1571007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.054,
+        "growth": 0.187
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.439,
+        "growth": 0.066
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0016:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.054,
+                  "growth": 0.187
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571007-射击"
+    },
+    {
+      "actionId": "action:agent:1571:action:0017",
+      "branchId": "agent:1571:branch:special-6",
+      "name": "强化特殊技：嗯呢弹幕",
+      "rowName": "破甲弹头伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n驾驶炮塔连续射击并根据敌人状态发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；\n招式发动后，诺姆获得16%，并进入[嗯呢弹幕]状态，持续32秒，[嗯呢弹幕]状态期间，诺姆会放置两座[嗯呢炮塔]加入战斗；\n保持长按可以持续消耗能量并延长最多2秒射击时间，每通过长按消耗1点能量，诺姆额外获得0.4%[预热膛温]，并使本轮[嗯呢弹幕]状态的持续时间额外增加0.8秒，最多增加{CAL:2*20*0.8,1,2}秒；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571008"],
+      "sourceExpression": "{Skill:1571008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.08,
+        "growth": 0.28
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.158,
+        "growth": 0.099
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.08,
+                  "growth": 0.28
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571008-破甲弹头"
+    },
+    {
+      "actionId": "action:agent:1571:action:0018",
+      "branchId": "agent:1571:branch:special-6",
+      "name": "强化特殊技：嗯呢弹幕",
+      "rowName": "高爆弹头伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/5/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n驾驶炮塔连续射击并根据敌人状态发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；\n招式发动后，诺姆获得16%，并进入[嗯呢弹幕]状态，持续32秒，[嗯呢弹幕]状态期间，诺姆会放置两座[嗯呢炮塔]加入战斗；\n保持长按可以持续消耗能量并延长最多2秒射击时间，每通过长按消耗1点能量，诺姆额外获得0.4%[预热膛温]，并使本轮[嗯呢弹幕]状态的持续时间额外增加0.8秒，最多增加{CAL:2*20*0.8,1,2}秒；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571009"],
+      "sourceExpression": "{Skill:1571009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.414,
+        "growth": 0.311
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.727,
+        "growth": 0.079
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.414,
+                  "growth": 0.311
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571009-高爆弹头"
+    },
+    {
+      "actionId": "action:agent:1571:action:0019",
+      "branchId": "agent:1571:branch:special-6",
+      "name": "强化特殊技：嗯呢弹幕",
+      "rowName": "延长射击每秒伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/5/param/7"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n驾驶炮塔连续射击并根据敌人状态发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；\n招式发动后，诺姆获得16%，并进入[嗯呢弹幕]状态，持续32秒，[嗯呢弹幕]状态期间，诺姆会放置两座[嗯呢炮塔]加入战斗；\n保持长按可以持续消耗能量并延长最多2秒射击时间，每通过长按消耗1点能量，诺姆额外获得0.4%[预热膛温]，并使本轮[嗯呢弹幕]状态的持续时间额外增加0.8秒，最多增加{CAL:2*20*0.8,1,2}秒；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571010"],
+      "sourceExpression": "{Skill:1571010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.306,
+        "growth": 0.119
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.939,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.306,
+                  "growth": 0.119
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571010-延长射击每秒"
+    },
+    {
+      "actionId": "action:agent:1571:action:0020",
+      "branchId": "agent:1571:branch:special-6",
+      "name": "强化特殊技：嗯呢弹幕",
+      "rowName": "延长射击破甲弹头每秒伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/5/param/9"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n驾驶炮塔连续射击并根据敌人状态发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；\n招式发动后，诺姆获得16%，并进入[嗯呢弹幕]状态，持续32秒，[嗯呢弹幕]状态期间，诺姆会放置两座[嗯呢炮塔]加入战斗；\n保持长按可以持续消耗能量并延长最多2秒射击时间，每通过长按消耗1点能量，诺姆额外获得0.4%[预热膛温]，并使本轮[嗯呢弹幕]状态的持续时间额外增加0.8秒，最多增加{CAL:2*20*0.8,1,2}秒；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571011"],
+      "sourceExpression": "{Skill:1571011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.959,
+        "growth": 0.179
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.409,
+        "growth": 0.065
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.959,
+                  "growth": 0.179
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571011-延长射击破甲弹头每秒"
+    },
+    {
+      "actionId": "action:agent:1571:action:0021",
+      "branchId": "agent:1571:branch:special-6",
+      "name": "强化特殊技：嗯呢弹幕",
+      "rowName": "延长射击高爆弹头每秒伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/5/param/11"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n驾驶炮塔连续射击并根据敌人状态发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；\n招式发动后，诺姆获得16%，并进入[嗯呢弹幕]状态，持续32秒，[嗯呢弹幕]状态期间，诺姆会放置两座[嗯呢炮塔]加入战斗；\n保持长按可以持续消耗能量并延长最多2秒射击时间，每通过长按消耗1点能量，诺姆额外获得0.4%[预热膛温]，并使本轮[嗯呢弹幕]状态的持续时间额外增加0.8秒，最多增加{CAL:2*20*0.8,1,2}秒；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1571012"],
+      "sourceExpression": "{Skill:1571012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.167,
+        "growth": 0.197
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.127,
+        "growth": 0.052
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0021:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.167,
+                  "growth": 0.197
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571012-延长射击高爆弹头每秒"
+    },
+    {
+      "actionId": "action:agent:1571:action:0022",
+      "branchId": "agent:1571:branch:special-7",
+      "name": "特殊技：打靶练习",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "战斗中，会自动对敌人发动攻击， 造成火属性伤害。",
+      "parameterIds": ["1571013"],
+      "sourceExpression": "{Skill:1571013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.95,
+        "growth": 0.178
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.513,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0022:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.95,
+                  "growth": 0.178
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571013-main"
+    },
+    {
+      "actionId": "action:agent:1571:action:0023",
+      "branchId": "agent:1571:branch:special-8",
+      "name": "强化特殊技：火力实验",
+      "rowName": "额外破甲弹头伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "队伍中任意角色使敌人进入失衡状态时，或是诺姆消耗触发[连携技]时，会展开导弹舱，持续8秒，重复触发时刷新持续时间；\n期间，[嗯呢炮塔]的自动攻击间隔减少，自动攻击时根据敌人状态额外发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；",
+      "parameterIds": ["1571014"],
+      "sourceExpression": "{Skill:1571014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.828,
+        "growth": 0.076
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.35,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0023:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.828,
+                  "growth": 0.076
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571014-额外破甲弹头"
+    },
+    {
+      "actionId": "action:agent:1571:action:0024",
+      "branchId": "agent:1571:branch:special-8",
+      "name": "强化特殊技：火力实验",
+      "rowName": "额外高爆弹头伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:norma-special-ms49jn0d"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1571/details.zh.json",
+        "pointer": "/skill/special/description/7/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1571/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "队伍中任意角色使敌人进入失衡状态时，或是诺姆消耗触发[连携技]时，会展开导弹舱，持续8秒，重复触发时刷新持续时间；\n期间，[嗯呢炮塔]的自动攻击间隔减少，自动攻击时根据敌人状态额外发射不同类型的导弹：\n主要攻击目标未处于失衡状态时，发射破甲弹头，造成火属性伤害并累积较多失衡值；\n主要攻击目标处于失衡状态时，发射高爆弹头，造成更高火属性伤害；",
+      "parameterIds": ["1571015"],
+      "sourceExpression": "{Skill:1571015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.923,
+        "growth": 0.084
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.28,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1571:action:0024:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1571:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.923,
+                  "growth": 0.084
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-norma-nk-1571015-额外高爆弹头"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ const integrationTestFiles = [
   "test/nanoka-cli.test.ts",
   "test/publication.test.ts",
   "test/panel-attributes-publication.test.ts",
+  "test/agent-actions-publication.test.ts",
   "test/snapshot-build.test.ts",
   "test/snapshot-convert.test.ts",
   "test/update-report.test.ts",

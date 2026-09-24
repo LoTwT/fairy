@@ -1,0 +1,1239 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1111",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1111:action:0001",
+      "branchId": "agent:1111:branch:assist-5",
+      "name": "快速支援：并肩作战",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续重拳，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111018"],
+      "sourceExpression": "{Skill:1111018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.634,
+        "growth": 0.24
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.317,
+        "growth": 0.06
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.634,
+                  "growth": 0.24
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111018-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0002",
+      "branchId": "agent:1111:branch:assist-6",
+      "name": "快速支援：援护钻击（爆发状态）",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": ["zzz-hp:skill:anton-assist-ms4evh5h"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动[电钻攻击]，造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111019"],
+      "sourceExpression": "{Skill:1111019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.654,
+        "growth": 0.333
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.518,
+        "growth": 0.115
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0002:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.654,
+                  "growth": 0.333
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111019-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0003",
+      "branchId": "agent:1111:branch:assist-7",
+      "name": "招架支援：钢腕",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111020"],
+      "sourceExpression": "{Skill:1111020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.467,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1111:action:0004",
+      "branchId": "agent:1111:branch:assist-7",
+      "name": "招架支援：钢腕",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111021"],
+      "sourceExpression": "{Skill:1111021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.117,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1111:action:0005",
+      "branchId": "agent:1111:branch:assist-7",
+      "name": "招架支援：钢腕",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111022"],
+      "sourceExpression": "{Skill:1111022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.517,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1111:action:0006",
+      "branchId": "agent:1111:branch:assist-8",
+      "name": "支援突击：极限突进",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动[电钻攻击]并以[打桩攻击]收尾，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111023"],
+      "sourceExpression": "{Skill:1111023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.258,
+        "growth": 0.297
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.827,
+        "growth": 0.129
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0006:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.258,
+                  "growth": 0.297
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计包含电钻攻击与打桩攻击，尚未拆分各自倍率；不能将任一子目标增益应用到整个合计，需要这些增益时须请求独立命中。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111023-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0007",
+      "branchId": "agent:1111:branch:basic-3",
+      "name": "普通攻击：热血上工操",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的混合攻击，造成物理伤害；\n第四段攻击为[打桩攻击]。",
+      "parameterIds": ["1111001"],
+      "sourceExpression": "{Skill:1111001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.678,
+        "growth": 0.062
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.339,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.678,
+                  "growth": 0.062
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111001-一段"
+    },
+    {
+      "actionId": "action:agent:1111:action:0008",
+      "branchId": "agent:1111:branch:basic-3",
+      "name": "普通攻击：热血上工操",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的混合攻击，造成物理伤害；\n第四段攻击为[打桩攻击]。",
+      "parameterIds": ["1111002"],
+      "sourceExpression": "{Skill:1111002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.923,
+        "growth": 0.084
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.753,
+        "growth": 0.035
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.923,
+                  "growth": 0.084
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111002-二段"
+    },
+    {
+      "actionId": "action:agent:1111:action:0009",
+      "branchId": "agent:1111:branch:basic-3",
+      "name": "普通攻击：热血上工操",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的混合攻击，造成物理伤害；\n第四段攻击为[打桩攻击]。",
+      "parameterIds": ["1111003"],
+      "sourceExpression": "{Skill:1111003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.098,
+        "growth": 0.1
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.933,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.098,
+                  "growth": 0.1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111003-三段"
+    },
+    {
+      "actionId": "action:agent:1111:action:0010",
+      "branchId": "agent:1111:branch:basic-3",
+      "name": "普通攻击：热血上工操",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:anton-basic-ms4etyvs"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的混合攻击，造成物理伤害；\n第四段攻击为[打桩攻击]。",
+      "parameterIds": ["1111004"],
+      "sourceExpression": "{Skill:1111004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.291,
+        "growth": 0.209
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.814,
+        "growth": 0.083
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.291,
+                  "growth": 0.209
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111004-四段"
+    },
+    {
+      "actionId": "action:agent:1111:action:0011",
+      "branchId": "agent:1111:branch:basic-4",
+      "name": "普通攻击：热血上工操（爆发状态）",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:anton-basic-ms4ezw1q"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[爆发状态]下，点按  发动：\n向前方进行至多三段的混合攻击，造成大量电属性伤害；\n在第二段[电钻攻击]和第三段[打桩攻击]期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1111006"],
+      "sourceExpression": "{Skill:1111006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.409,
+        "growth": 0.219
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.66,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0011:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.409,
+                  "growth": 0.219
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111006-一段"
+    },
+    {
+      "actionId": "action:agent:1111:action:0012",
+      "branchId": "agent:1111:branch:basic-4",
+      "name": "普通攻击：热血上工操（爆发状态）",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [
+        "zzz-hp:skill:anton-basic-ms4ezw1q",
+        "zzz-hp:skill:anton-basic-ms4etptt"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[爆发状态]下，点按  发动：\n向前方进行至多三段的混合攻击，造成大量电属性伤害；\n在第二段[电钻攻击]和第三段[打桩攻击]期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1111007"],
+      "sourceExpression": "{Skill:1111007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.692,
+        "growth": 0.427
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.233,
+        "growth": 0.147
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0012:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.692,
+                  "growth": 0.427
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111007-二段"
+    },
+    {
+      "actionId": "action:agent:1111:action:0013",
+      "branchId": "agent:1111:branch:basic-4",
+      "name": "普通攻击：热血上工操（爆发状态）",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [
+        "zzz-hp:skill:anton-basic-ms4ezw1q",
+        "zzz-hp:skill:anton-basic-ms4etyvs"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[爆发状态]下，点按  发动：\n向前方进行至多三段的混合攻击，造成大量电属性伤害；\n在第二段[电钻攻击]和第三段[打桩攻击]期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1111008"],
+      "sourceExpression": "{Skill:1111008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.569,
+        "growth": 0.416
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.148,
+        "growth": 0.144
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0013:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.569,
+                  "growth": 0.416
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111008-三段"
+    },
+    {
+      "actionId": "action:agent:1111:action:0014",
+      "branchId": "agent:1111:branch:chain-3",
+      "name": "连携技：转转转！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方地面进行大范围[打桩攻击]，对区域内的敌人造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111016"],
+      "sourceExpression": "{Skill:1111016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.407,
+        "growth": 0.583
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.417,
+        "growth": 0.11
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0014:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.407,
+                  "growth": 0.583
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111016-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0015",
+      "branchId": "agent:1111:branch:chain-4",
+      "name": "终结技：转转转转转！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方地面进行大范围[打桩攻击]，对区域内的敌人造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111017"],
+      "sourceExpression": "{Skill:1111017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 18.164,
+        "growth": 1.652
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.434,
+        "growth": 0.111
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0015:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 18.164,
+                  "growth": 1.652
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111017-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0016",
+      "branchId": "agent:1111:branch:dodge-5",
+      "name": "冲刺攻击：硬碰硬",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行撞击，造成物理伤害。",
+      "parameterIds": ["1111012"],
+      "sourceExpression": "{Skill:1111012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.684,
+        "growth": 0.063
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.342,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.684,
+                  "growth": 0.063
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111012-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0017",
+      "branchId": "agent:1111:branch:dodge-6",
+      "name": "闪避反击：回敬拳击",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动连续重拳，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111014"],
+      "sourceExpression": "{Skill:1111014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.712,
+        "growth": 0.247
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.317,
+        "growth": 0.106
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.712,
+                  "growth": 0.247
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111014-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0018",
+      "branchId": "agent:1111:branch:dodge-7",
+      "name": "闪避反击：过载钻击（爆发状态）",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms4e5xea",
+        "zzz-hp:skill:anton-dodge-ms4euzf3"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "[爆发状态]下，触发[极限闪避]后，点按  发动：\n对前方敌人使用[电钻攻击]，造成大量电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1111015"],
+      "sourceExpression": "{Skill:1111015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 4.654,
+        "growth": 0.424
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.518,
+        "growth": 0.16
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0018:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 4.654,
+                  "growth": 0.424
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111015-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0019",
+      "branchId": "agent:1111:branch:special-4",
+      "name": "特殊技：兄弟，转起来！",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n对前方直线区域内敌人发动[打桩攻击]，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1111009"],
+      "sourceExpression": "{Skill:1111009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.442,
+        "growth": 0.041
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.442,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0019:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.442,
+                  "growth": 0.041
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111009-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0020",
+      "branchId": "agent:1111:branch:special-5",
+      "name": "特殊技：爆发钻击（爆发状态）",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "[爆发状态]下，点按  发动：\n对前方敌人发动[打桩攻击]，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1111010"],
+      "sourceExpression": "{Skill:1111010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.314,
+        "growth": 0.211
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.184,
+        "growth": 0.054
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0020:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.314,
+                  "growth": 0.211
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111010-main"
+    },
+    {
+      "actionId": "action:agent:1111:action:0021",
+      "branchId": "agent:1111:branch:special-6",
+      "name": "强化特殊技：兄弟，突破天际！",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1111/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1111/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，若点按  发动：\n对前方直线区域内敌人发动多段[打桩攻击]，造成大量电属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，安东将进入[爆发状态]；在[爆发状态]下，安东会使用更加强力的招式，造成大量电属性伤害，并随招式命中目标，逐渐消耗能量，持续至能量耗尽。",
+      "parameterIds": ["1111011"],
+      "sourceExpression": "{Skill:1111011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.951,
+        "growth": 0.178
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.951,
+        "growth": 0.089
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1111:action:0021:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1111:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.951,
+                  "growth": 0.178
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-anton-nk-1111011-main"
+    }
+  ]
+}

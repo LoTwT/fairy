@@ -1,0 +1,1302 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1311",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1311:action:0001",
+      "branchId": "agent:1311:branch:assist-4",
+      "name": "快速支援：《一川烟火》",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n向前方敌人发动攻击，造成以太伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1311014"],
+      "sourceExpression": "{Skill:1311014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.55,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.484,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0001:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.55,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311014-main"
+    },
+    {
+      "actionId": "action:agent:1311:action:0002",
+      "branchId": "agent:1311:branch:assist-5",
+      "name": "支援突击：《三生初见》",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[回避支援]后，点按  发动：\n向前方发出能量光束，造成以太伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1311015"],
+      "sourceExpression": "{Skill:1311015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.046,
+        "growth": 0.277
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.61,
+        "growth": 0.119
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0002:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0002:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.046,
+                  "growth": 0.277
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311015-main"
+    },
+    {
+      "actionId": "action:agent:1311:action:0003",
+      "branchId": "agent:1311:branch:basic-5",
+      "name": "普通攻击：《随想曲》",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:astrayao-basic-ms38tv67"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成以太伤害；\n第三段攻击期间，可长按  进行蓄力，持续聚集敌人，提升攻击范围，释放更加强力的攻击；\n其他招式发动后，可长按  直接发动第三段攻击。",
+      "parameterIds": ["1311001"],
+      "sourceExpression": "{Skill:1311001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.438,
+        "growth": 0.04
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.413,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0003:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0003:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.438,
+                  "growth": 0.04
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311001-一段"
+    },
+    {
+      "actionId": "action:agent:1311:action:0004",
+      "branchId": "agent:1311:branch:basic-5",
+      "name": "普通攻击：《随想曲》",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:astrayao-basic-ms38tv67"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成以太伤害；\n第三段攻击期间，可长按  进行蓄力，持续聚集敌人，提升攻击范围，释放更加强力的攻击；\n其他招式发动后，可长按  直接发动第三段攻击。",
+      "parameterIds": ["1311002"],
+      "sourceExpression": "{Skill:1311002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.591,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.564,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0004:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0004:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.591,
+                  "growth": 0.054
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311002-二段"
+    },
+    {
+      "actionId": "action:agent:1311:action:0005",
+      "branchId": "agent:1311:branch:basic-5",
+      "name": "普通攻击：《随想曲》",
+      "rowName": "三段最小伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:astrayao-basic-ms38tv67"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成以太伤害；\n第三段攻击期间，可长按  进行蓄力，持续聚集敌人，提升攻击范围，释放更加强力的攻击；\n其他招式发动后，可长按  直接发动第三段攻击。",
+      "parameterIds": ["1311003"],
+      "sourceExpression": "{Skill:1311003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.209,
+        "growth": 0.11
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.148,
+        "growth": 0.053
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0005:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.209,
+                  "growth": 0.11
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311003-三段最小"
+    },
+    {
+      "actionId": "action:agent:1311:action:0006",
+      "branchId": "agent:1311:branch:basic-5",
+      "name": "普通攻击：《随想曲》",
+      "rowName": "三段最大伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:astrayao-basic-ms38tv67"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成以太伤害；\n第三段攻击期间，可长按  进行蓄力，持续聚集敌人，提升攻击范围，释放更加强力的攻击；\n其他招式发动后，可长按  直接发动第三段攻击。",
+      "parameterIds": ["1311004"],
+      "sourceExpression": "{Skill:1311004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.707,
+        "growth": 0.247
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.194,
+        "growth": 0.1
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0006:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.707,
+                  "growth": 0.247
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311004-三段最大"
+    },
+    {
+      "actionId": "action:agent:1311:action:0007",
+      "branchId": "agent:1311:branch:basic-6",
+      "name": "普通攻击：间奏",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[咏叹华彩]状态下，点按  发动：\n向前方释放[震音]进行攻击，造成以太伤害；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1311005"],
+      "sourceExpression": "{Skill:1311005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.55,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.484,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0007:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.55,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311005-一段"
+    },
+    {
+      "actionId": "action:agent:1311:action:0008",
+      "branchId": "agent:1311:branch:basic-6",
+      "name": "普通攻击：间奏",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[咏叹华彩]状态下，点按  发动：\n向前方释放[震音]进行攻击，造成以太伤害；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1311005"],
+      "sourceExpression": "{Skill:1311005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.55,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.484,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0008:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.55,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311005-二段"
+    },
+    {
+      "actionId": "action:agent:1311:action:0009",
+      "branchId": "agent:1311:branch:basic-6",
+      "name": "普通攻击：间奏",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[咏叹华彩]状态下，点按  发动：\n向前方释放[震音]进行攻击，造成以太伤害；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1311005"],
+      "sourceExpression": "{Skill:1311005, Prop:1001} * 2",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.1,
+        "growth": 0.1
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.968,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0009:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.1,
+                  "growth": 0.1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311005-三段"
+    },
+    {
+      "actionId": "action:agent:1311:action:0010",
+      "branchId": "agent:1311:branch:basic-6",
+      "name": "普通攻击：间奏",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[咏叹华彩]状态下，点按  发动：\n向前方释放[震音]进行攻击，造成以太伤害；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1311005"],
+      "sourceExpression": "{Skill:1311005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.55,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.484,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0010:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.55,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311005-四段"
+    },
+    {
+      "actionId": "action:agent:1311:action:0011",
+      "branchId": "agent:1311:branch:basic-6",
+      "name": "普通攻击：间奏",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[咏叹华彩]状态下，点按  发动：\n向前方释放[震音]进行攻击，造成以太伤害；\n招式命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1311005"],
+      "sourceExpression": "{Skill:1311005, Prop:1001} * 2",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.1,
+        "growth": 0.1
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.968,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0011:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.1,
+                  "growth": 0.1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311005-五段"
+    },
+    {
+      "actionId": "action:agent:1311:action:0012",
+      "branchId": "agent:1311:branch:basic-7",
+      "name": "普通攻击：副歌",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "[咏叹华彩]状态下，触发[极限闪避]后，点按  发动：\n对前方敌人发动多道[震音]进行攻击，造成大量以太伤害；\n招式命中敌人时，将触发[快速支援]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1311005"],
+      "sourceExpression": "{Skill:1311005, Prop:1001} * 4",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.2,
+        "growth": 0.2
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.936,
+        "growth": 0.088
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0012:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.2,
+                  "growth": 0.2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1311:action:0013",
+      "branchId": "agent:1311:branch:basic-8",
+      "name": "普通攻击：终曲",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "[咏叹华彩]状态下，长按  发动：\n向前方释放[震音]进行攻击，造成以太伤害，并退出[咏叹华彩]状态；\n招式发动时，会对自身施加[核心被动：《如歌的行板》]中的增益效果；\n能量足够时，会消耗能量追加释放1道[震音]和3枚[音簇]进行攻击，该次[震音]会被视为[强化特殊技]。",
+      "parameterIds": ["1311005"],
+      "sourceExpression": "{Skill:1311005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.55,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.484,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0013:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.55,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311005-main"
+    },
+    {
+      "actionId": "action:agent:1311:action:0014",
+      "branchId": "agent:1311:branch:chain-3",
+      "name": "连携技：《微醺协奏》",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n用歌声引导能量轰击，造成大量以太伤害；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后，耀嘉音将进入[咏叹华彩]状态。",
+      "parameterIds": ["1311012"],
+      "sourceExpression": "{Skill:1311012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.718,
+        "growth": 0.611
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.329,
+        "growth": 0.106
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0014:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.718,
+                  "growth": 0.611
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311012-main"
+    },
+    {
+      "actionId": "action:agent:1311:action:0015",
+      "branchId": "agent:1311:branch:chain-4",
+      "name": "终结技：《幻想式奏鸣》",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n用歌声引导能量轰击，造成大量以太伤害，并为全队角色回复{CAL:-50+AvatarSkillLevel(3)*250,1,2}点生命值；\n招式发动期间拥有无敌效果；\n招式命中敌人时，将触发[快速支援]；\n招式发动后，耀嘉音将进入[咏叹华彩]状态；\n招式发动后，下两次发动的[快速支援]，将被替换为[连携技]；\n次数耗尽前，全队角色[连携技]或[终结技]命中敌人时，将触发[快速支援]。",
+      "parameterIds": ["1311013"],
+      "sourceExpression": "{Skill:1311013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.598,
+        "growth": 1.782
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.383,
+        "growth": 0.109
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0015:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.598,
+                  "growth": 1.782
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311013-main"
+    },
+    {
+      "actionId": "action:agent:1311:action:0016",
+      "branchId": "agent:1311:branch:dodge-4",
+      "name": "冲刺攻击：《蚀月奏》",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行攻击，造成以太伤害；\n发动时若拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以向对应方向位移。",
+      "parameterIds": ["1311010"],
+      "sourceExpression": "{Skill:1311010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.807,
+        "growth": 0.074
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.404,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0016:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.807,
+                  "growth": 0.074
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311010-main"
+    },
+    {
+      "actionId": "action:agent:1311:action:0017",
+      "branchId": "agent:1311:branch:dodge-5",
+      "name": "闪避反击：《折伞华尔兹》",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n向前方敌人发动攻击，造成以太伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1311011"],
+      "sourceExpression": "{Skill:1311011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.1,
+        "growth": 0.1
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.968,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0017:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.1,
+                  "growth": 0.1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311011-main"
+    },
+    {
+      "actionId": "action:agent:1311:action:0018",
+      "branchId": "agent:1311:branch:special-4",
+      "name": "特殊技：《风铃与旧约》",
+      "rowName": "最小伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:astrayao-special-ms38sp46"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/special/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按   发动：\n快速位移，随后释放[震音]造成以太伤害，并进入[咏叹华彩]状态；\n发动时若拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以向对应方向位移；\n发动时可长按  进行蓄力，持续聚集敌人，并根据蓄力时长追加释放1~4道[震音]；\n招式命中敌人时，将触发[快速支援]；\n快速位移期间拥有无敌效果。",
+      "parameterIds": ["1311006"],
+      "sourceExpression": "{Skill:1311006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.55,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.484,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0018:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.55,
+                  "growth": 0.05
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311006-最小"
+    },
+    {
+      "actionId": "action:agent:1311:action:0019",
+      "branchId": "agent:1311:branch:special-4",
+      "name": "特殊技：《风铃与旧约》",
+      "rowName": "最大伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:astrayao-special-ms38sp46"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/special/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按   发动：\n快速位移，随后释放[震音]造成以太伤害，并进入[咏叹华彩]状态；\n发动时若拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以向对应方向位移；\n发动时可长按  进行蓄力，持续聚集敌人，并根据蓄力时长追加释放1~4道[震音]；\n招式命中敌人时，将触发[快速支援]；\n快速位移期间拥有无敌效果。",
+      "parameterIds": ["1311006"],
+      "sourceExpression": "{Skill:1311006, Prop:1001} * 4",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.2,
+        "growth": 0.2
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.936,
+        "growth": 0.088
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0019:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.2,
+                  "growth": 0.2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311006-最大"
+    },
+    {
+      "actionId": "action:agent:1311:action:0020",
+      "branchId": "agent:1311:branch:special-5",
+      "name": "和弦",
+      "rowName": "追加震音伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:astrayao-special-ms38sp46",
+        "zzz-hp:skill:all-special-ms0fcqv7"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "每拥有25点能量，耀嘉音将拥有1点[和弦]；\n[咏叹华彩]状态下，耀嘉音拥有[和弦]时，能够在以下情况中触发[快速支援]：\n· 操作中的角色攻击命中敌人时，3秒内最多触发一次；\n· 操作中的角色重击命中敌人时，1秒内最多触发一次；\n队伍中其他角色通过[快速支援]、[连携技]、[招架支援]或[回避支援]入场时，耀嘉音将消耗25点能量，并追加释放1道[震音]进行攻击，该次[震音]会被视为[强化特殊技]；\n触发[快速支援]后，短时间内点按  切换角色，将触发[精准支援]，耀嘉音会额外追加释放3枚[音簇]进行攻击，队伍中其他角色通过[连携技]、[招架支援]或[回避支援]入场时，将直接触发[精准支援]。",
+      "parameterIds": ["1311008"],
+      "sourceExpression": "{Skill:1311008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.46,
+        "growth": 0.042
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0020:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.46,
+                  "growth": 0.042
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311008-追加震音"
+    },
+    {
+      "actionId": "action:agent:1311:action:0021",
+      "branchId": "agent:1311:branch:special-5",
+      "name": "和弦",
+      "rowName": "追加音簇伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": ["zzz-hp:skill:astrayao-special-ms38sz0g"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1311/details.zh.json",
+        "pointer": "/skill/special/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1311/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "每拥有25点能量，耀嘉音将拥有1点[和弦]；\n[咏叹华彩]状态下，耀嘉音拥有[和弦]时，能够在以下情况中触发[快速支援]：\n· 操作中的角色攻击命中敌人时，3秒内最多触发一次；\n· 操作中的角色重击命中敌人时，1秒内最多触发一次；\n队伍中其他角色通过[快速支援]、[连携技]、[招架支援]或[回避支援]入场时，耀嘉音将消耗25点能量，并追加释放1道[震音]进行攻击，该次[震音]会被视为[强化特殊技]；\n触发[快速支援]后，短时间内点按  切换角色，将触发[精准支援]，耀嘉音会额外追加释放3枚[音簇]进行攻击，队伍中其他角色通过[连携技]、[招架支援]或[回避支援]入场时，将直接触发[精准支援]。",
+      "parameterIds": ["1311009"],
+      "sourceExpression": "{Skill:1311009, Prop:1001} * 3",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.72,
+        "growth": 0.066
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1311:action:0021:total",
+            "damageKind": "regular",
+            "element": "ether",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1311:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.72,
+                  "growth": 0.066
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-astrayao-nk-1311009-追加音簇"
+    }
+  ]
+}

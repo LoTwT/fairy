@@ -1,5 +1,7 @@
 # @randomplay/data
 
+`loadAgentActions` 按角色读取技能动作目录；`resolveAgentSkillLevel` 和 `resolveAgentAction` 解析显式等级、影画及动作选择。倍率、逐次命中限制和覆盖详情见[技能动作规范](../../docs/specs/data/skill-actions.md)。
+
 Fairy 的游戏来源资料与数据整理包。
 
 根入口新增 `loadAgentLevel60Attributes`、`loadWEngineLevel60Attributes` 和 `loadSDriveDiscMaxLevelAffixes`，按需读取角色 60 级基线与独立核心培养表、音擎 60 级属性和 S 级满强化驱动盘词条。百分比已转换为比例；完整字段、面板边界、固定证据及候选生成命令见[属性规范](../../docs/specs/data/panel-attributes.md)。

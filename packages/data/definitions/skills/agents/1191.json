@@ -1,0 +1,1536 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1191",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1191:action:0001",
+      "branchId": "agent:1191:branch:assist-4",
+      "name": "快速支援：护卫鲛",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n快速穿过敌人，拉开剪刀进行剪击，造成冰属性伤害；\n招式发动期间拥有无敌效果。\n当前操作中的角色被击飞时，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，点按  发动：\n进入[巡游]状态，快速冲刺移动；\n在[巡游]状态下使用{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}控制方向，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}则会停下；\n招式发动瞬间拥有短暂的无敌效果。\n发动[快速支援]时，艾莲将获得[快蓄]效果，缩短[冲刺攻击：冰渊潜袭]的蓄力时间，最多持续5秒或触发一次。",
+      "parameterIds": ["1191018"],
+      "sourceExpression": "{Skill:1191018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.211,
+        "growth": 0.111
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.211,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0001:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.211,
+                  "growth": 0.111
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191018-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0002",
+      "branchId": "agent:1191:branch:assist-5",
+      "name": "招架支援：迎头浪",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191019"],
+      "sourceExpression": "{Skill:1191019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1191:action:0003",
+      "branchId": "agent:1191:branch:assist-5",
+      "name": "招架支援：迎头浪",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191020"],
+      "sourceExpression": "{Skill:1191020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1191:action:0004",
+      "branchId": "agent:1191:branch:assist-5",
+      "name": "招架支援：迎头浪",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191021"],
+      "sourceExpression": "{Skill:1191021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1191:action:0005",
+      "branchId": "agent:1191:branch:assist-6",
+      "name": "支援突击：巡洋鲨",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进斩击，造成冰属性伤害；\n招式攻击期间，连点或长按  可以延长招式的持续时间；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191022"],
+      "sourceExpression": "{Skill:1191022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.379,
+        "growth": 0.399
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.848,
+        "growth": 0.175
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0005:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.379,
+                  "growth": 0.399
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191022-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0006",
+      "branchId": "agent:1191:branch:basic-5",
+      "name": "普通攻击：利齿修剪法",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成物理伤害；\n第三段攻击期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1191001"],
+      "sourceExpression": "{Skill:1191001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.488,
+        "growth": 0.045
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.244,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.488,
+                  "growth": 0.045
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191001-一段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0007",
+      "branchId": "agent:1191:branch:basic-5",
+      "name": "普通攻击：利齿修剪法",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成物理伤害；\n第三段攻击期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1191002"],
+      "sourceExpression": "{Skill:1191002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.111,
+        "growth": 0.101
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.868,
+        "growth": 0.04
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.111,
+                  "growth": 0.101
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191002-二段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0008",
+      "branchId": "agent:1191:branch:basic-5",
+      "name": "普通攻击：利齿修剪法",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的攻击，造成物理伤害；\n第三段攻击期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1191003"],
+      "sourceExpression": "{Skill:1191003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.973,
+        "growth": 0.271
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.404,
+        "growth": 0.11
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.973,
+                  "growth": 0.271
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191003-三段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0009",
+      "branchId": "agent:1191:branch:basic-6",
+      "name": "普通攻击：急冻修剪法",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftctx"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "激活[急冻]效果后，点按  发动：\n向前方进行至多三段的攻击，造成冰属性伤害；\n每段攻击消耗1点[急冻充能]；\n第三段攻击期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1191004"],
+      "sourceExpression": "{Skill:1191004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.996,
+        "growth": 0.091
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.488,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0009:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.996,
+                  "growth": 0.091
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191004-一段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0010",
+      "branchId": "agent:1191:branch:basic-6",
+      "name": "普通攻击：急冻修剪法",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftctx"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "激活[急冻]效果后，点按  发动：\n向前方进行至多三段的攻击，造成冰属性伤害；\n每段攻击消耗1点[急冻充能]；\n第三段攻击期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1191005"],
+      "sourceExpression": "{Skill:1191005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.84,
+        "growth": 0.168
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.902,
+        "growth": 0.041
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0010:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.84,
+                  "growth": 0.168
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191005-二段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0011",
+      "branchId": "agent:1191:branch:basic-6",
+      "name": "普通攻击：急冻修剪法",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftctx"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "激活[急冻]效果后，点按  发动：\n向前方进行至多三段的攻击，造成冰属性伤害；\n每段攻击消耗1点[急冻充能]；\n第三段攻击期间，连点或长按  可以延长招式的持续时间。",
+      "parameterIds": ["1191006"],
+      "sourceExpression": "{Skill:1191006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.962,
+        "growth": 0.452
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.455,
+        "growth": 0.112
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0011:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.962,
+                  "growth": 0.452
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191006-三段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0012",
+      "branchId": "agent:1191:branch:basic-7",
+      "name": "普通攻击：冰刃浪",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4fu3ym"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "第三段[普通攻击：急冻修剪法]、[冲刺攻击：冰渊潜袭]蓄力剪击、[闪避反击：暗礁]和[快速支援]发动后，若艾莲拥有[急冻充能]，点按  可以发动[普通攻击：冰刃浪]，造成冰属性伤害；\n招式消耗2点[急冻充能];\n招式发动后，可直接衔接第三段[普通攻击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191029"],
+      "sourceExpression": "{Skill:1191029, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.302,
+        "growth": 0.21
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.67,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-ellen-nk-1191029-一段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0013",
+      "branchId": "agent:1191:branch:basic-7",
+      "name": "普通攻击：冰刃浪",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4fu3ym"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "第三段[普通攻击：急冻修剪法]、[冲刺攻击：冰渊潜袭]蓄力剪击、[闪避反击：暗礁]和[快速支援]发动后，若艾莲拥有[急冻充能]，点按  可以发动[普通攻击：冰刃浪]，造成冰属性伤害；\n招式消耗2点[急冻充能];\n招式发动后，可直接衔接第三段[普通攻击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191030"],
+      "sourceExpression": "{Skill:1191030, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.468,
+        "growth": 0.134
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.842,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-ellen-nk-1191030-二段"
+    },
+    {
+      "actionId": "action:agent:1191:action:0014",
+      "branchId": "agent:1191:branch:basic-8",
+      "name": "普通攻击：霜锋",
+      "rowName": "对小体型敌人伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "第三段[普通攻击：急冻修剪法]、[强化特殊技：鲨卷风]、[闪避反击：暗礁]和[支援突击]发动后，将自动发动[普通攻击：霜锋]，对前方大范围敌人造成多段冰属性伤害，且对中/大体型的敌人会分别额外造成多段冰属性伤害；\n招式发动后，艾莲将获得[快蓄]效果；\n[普通攻击：霜锋]不影响原本招式派生;\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191027"],
+      "sourceExpression": "{{Skill:1191027, Prop:1001}*3}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.812,
+        "growth": 0.165
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.774,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-ellen-nk-1191027-对小体型敌人"
+    },
+    {
+      "actionId": "action:agent:1191:action:0015",
+      "branchId": "agent:1191:branch:basic-8",
+      "name": "普通攻击：霜锋",
+      "rowName": "对中体型敌人伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "第三段[普通攻击：急冻修剪法]、[强化特殊技：鲨卷风]、[闪避反击：暗礁]和[支援突击]发动后，将自动发动[普通攻击：霜锋]，对前方大范围敌人造成多段冰属性伤害，且对中/大体型的敌人会分别额外造成多段冰属性伤害；\n招式发动后，艾莲将获得[快蓄]效果；\n[普通攻击：霜锋]不影响原本招式派生;\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191027", "1191028"],
+      "sourceExpression": "{{Skill:1191027, Prop:1001}*3+{Skill:1191028, Prop:1001}*3}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.202,
+        "growth": 0.201
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.9420000000000001,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-ellen-nk-1191027-对中体型敌人"
+    },
+    {
+      "actionId": "action:agent:1191:action:0016",
+      "branchId": "agent:1191:branch:basic-8",
+      "name": "普通攻击：霜锋",
+      "rowName": "对大体型敌人伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/basic/description/7/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/basic/description/3/desc"
+        }
+      ],
+      "description": "第三段[普通攻击：急冻修剪法]、[强化特殊技：鲨卷风]、[闪避反击：暗礁]和[支援突击]发动后，将自动发动[普通攻击：霜锋]，对前方大范围敌人造成多段冰属性伤害，且对中/大体型的敌人会分别额外造成多段冰属性伤害；\n招式发动后，艾莲将获得[快蓄]效果；\n[普通攻击：霜锋]不影响原本招式派生;\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191027", "1191028"],
+      "sourceExpression": "{{Skill:1191027, Prop:1001}*3+{Skill:1191028, Prop:1001}*6}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.592,
+        "growth": 0.237
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.11,
+        "growth": 0.05399999999999999
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-ellen-nk-1191027-对大体型敌人"
+    },
+    {
+      "actionId": "action:agent:1191:action:0017",
+      "branchId": "agent:1191:branch:chain-3",
+      "name": "连携技：雪崩",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n从空中下砸并生成一阵冰风暴，造成大量冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191016"],
+      "sourceExpression": "{Skill:1191016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.946,
+        "growth": 0.723
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.557,
+        "growth": 0.162
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0017:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.946,
+                  "growth": 0.723
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191016-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0018",
+      "branchId": "agent:1191:branch:chain-4",
+      "name": "终结技：永冬狂宴",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n从空中下砸并生成一阵冰风暴，随后使用剪刀进行强力一击，造成大量冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191017"],
+      "sourceExpression": "{Skill:1191017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 18.908,
+        "growth": 1.719
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.852,
+        "growth": 0.085
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0018:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 18.908,
+                  "growth": 1.719
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191017-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0019",
+      "branchId": "agent:1191:branch:dodge-9",
+      "name": "冲刺攻击：冰渊潜袭",
+      "rowName": "回旋斩击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:ellen-dodge-ms4fsyad"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/dodge/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        },
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "在[巡游]状态下，点按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n快速剪击命中时，获得1点[急冻充能]。\n\n在[巡游]状态下，长按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n招式发动期间拥有无敌效果。\n在[巡游]状态下，点按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n快速剪击命中时，获得1点[急冻充能]。\n\n在[巡游]状态下，长按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n招式蓄力期间受到敌人伤害时，可以免疫该次伤害，并立即完成蓄力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191007"],
+      "sourceExpression": "{Skill:1191007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.623,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.623,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0019:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.623,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191007-回旋斩击"
+    },
+    {
+      "actionId": "action:agent:1191:action:0020",
+      "branchId": "agent:1191:branch:dodge-9",
+      "name": "冲刺攻击：冰渊潜袭",
+      "rowName": "快速剪击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:ellen-dodge-ms4fsyad"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/dodge/description/8/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        },
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "在[巡游]状态下，点按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n快速剪击命中时，获得1点[急冻充能]。\n\n在[巡游]状态下，长按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n招式发动期间拥有无敌效果。\n在[巡游]状态下，点按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n快速剪击命中时，获得1点[急冻充能]。\n\n在[巡游]状态下，长按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n招式蓄力期间受到敌人伤害时，可以免疫该次伤害，并立即完成蓄力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191008"],
+      "sourceExpression": "{Skill:1191008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.276,
+        "growth": 0.116
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.982,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0020:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.276,
+                  "growth": 0.116
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191008-快速剪击"
+    },
+    {
+      "actionId": "action:agent:1191:action:0021",
+      "branchId": "agent:1191:branch:dodge-9",
+      "name": "冲刺攻击：冰渊潜袭",
+      "rowName": "蓄力剪击伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:ellen-dodge-ms4fsyad"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/dodge/description/8/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        },
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "在[巡游]状态下，点按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n快速剪击命中时，获得1点[急冻充能]。\n\n在[巡游]状态下，长按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n招式发动期间拥有无敌效果。\n在[巡游]状态下，点按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n快速剪击命中时，获得1点[急冻充能]。\n\n在[巡游]状态下，长按  发动：\n对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n招式蓄力期间受到敌人伤害时，可以免疫该次伤害，并立即完成蓄力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191009"],
+      "sourceExpression": "{Skill:1191009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.582,
+        "growth": 0.144
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.217,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0021:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.582,
+                  "growth": 0.144
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191009-蓄力剪击"
+    },
+    {
+      "actionId": "action:agent:1191:action:0022",
+      "branchId": "agent:1191:branch:dodge-10",
+      "name": "冲刺攻击：骇浪",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/dodge/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/5/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行突进斩击，造成物理伤害；",
+      "parameterIds": ["1191013"],
+      "sourceExpression": "{Skill:1191013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.77,
+        "growth": 0.07
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.385,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0022:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.77,
+                  "growth": 0.07
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191013-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0023",
+      "branchId": "agent:1191:branch:dodge-11",
+      "name": "冲刺攻击：寒潮",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/dodge/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/6/desc"
+        }
+      ],
+      "description": "激活[急冻]效果后，闪避时，点按  发动：\n向前方进行突进斩击，造成冰属性伤害；\n消耗1点[急冻充能]。",
+      "parameterIds": ["1191014"],
+      "sourceExpression": "{Skill:1191014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.457,
+        "growth": 0.133
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.788,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0023:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.457,
+                  "growth": 0.133
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191014-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0024",
+      "branchId": "agent:1191:branch:dodge-12",
+      "name": "闪避反击：暗礁",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/dodge/description/11/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/dodge/description/7/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n快速穿过敌人，拉开剪刀进行剪击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1191015"],
+      "sourceExpression": "{Skill:1191015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.526,
+        "growth": 0.139
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.274,
+        "growth": 0.104
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0024:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.526,
+                  "growth": 0.139
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191015-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0025",
+      "branchId": "agent:1191:branch:special-4",
+      "name": "特殊技：摆尾",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行快速甩尾攻击，造成冰属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1191010"],
+      "sourceExpression": "{Skill:1191010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.505,
+        "growth": 0.046
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.505,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0025:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0025:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.505,
+                  "growth": 0.046
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191010-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0026",
+      "branchId": "agent:1191:branch:special-5",
+      "name": "强化特殊技：横扫",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行强力甩尾攻击，造成大量冰属性伤害；\n命中敌人时，获得1点[急冻充能]；\n招式发动期间拥有无敌效果；\n招式发动后，可直接衔接第三段[普通攻击]。",
+      "parameterIds": ["1191011"],
+      "sourceExpression": "{Skill:1191011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.772,
+        "growth": 0.343
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.051,
+        "growth": 0.185
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0026:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0026:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.772,
+                  "growth": 0.343
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191011-main"
+    },
+    {
+      "actionId": "action:agent:1191:action:0027",
+      "branchId": "agent:1191:branch:special-6",
+      "name": "强化特殊技：鲨卷风",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1191/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1191/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "[强化特殊技：横扫]发动后，能量足够时，点按  发动：\n向前方进行强力连续斩击，造成大量冰属性伤害；\n命中敌人时，获得1点[急冻充能]；\n招式发动期间拥有无敌效果；\n招式发动后，可直接衔接第三段[普通攻击]。",
+      "parameterIds": ["1191012"],
+      "sourceExpression": "{Skill:1191012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.533,
+        "growth": 0.503
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.717,
+        "growth": 0.169
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1191:action:0027:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0027:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.533,
+                  "growth": 0.503
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-ellen-nk-1191012-main"
+    }
+  ]
+}

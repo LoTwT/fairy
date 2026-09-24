@@ -1,0 +1,1354 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1131",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1131:action:0001",
+      "branchId": "agent:1131:branch:assist-4",
+      "name": "快速支援：双人套餐",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1131020"],
+      "sourceExpression": "{Skill:1131020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.134,
+        "growth": 0.104
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.134,
+        "growth": 0.052
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0001:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.134,
+                  "growth": 0.104
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131020-main"
+    },
+    {
+      "actionId": "action:agent:1131:action:0002",
+      "branchId": "agent:1131:branch:assist-5",
+      "name": "招架支援：防守战术",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1131021"],
+      "sourceExpression": "{Skill:1131021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.467,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1131:action:0003",
+      "branchId": "agent:1131:branch:assist-5",
+      "name": "招架支援：防守战术",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1131022"],
+      "sourceExpression": "{Skill:1131022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.117,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1131:action:0004",
+      "branchId": "agent:1131:branch:assist-5",
+      "name": "招架支援：防守战术",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1131023"],
+      "sourceExpression": "{Skill:1131023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.517,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1131:action:0005",
+      "branchId": "agent:1131:branch:assist-6",
+      "name": "支援突击：席卷打击",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进打击，造成冰属性伤害；\n招式发动期间拥有无敌效果。\n招式发动期间长按  ，可以快速衔接[展旗]攻击。",
+      "parameterIds": ["1131024", "1131026"],
+      "sourceExpression": "{{Skill:1131024, Prop:1001} + {Skill:1131026, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.7720000000000002,
+        "growth": 0.34299999999999997
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.3040000000000003,
+        "growth": 0.152
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0005:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.7720000000000002,
+                  "growth": 0.34299999999999997
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131024-main"
+    },
+    {
+      "actionId": "action:agent:1131:action:0006",
+      "branchId": "agent:1131:branch:basic-3",
+      "name": "普通攻击：打年糕",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段攻击，造成物理伤害。",
+      "parameterIds": ["1131001"],
+      "sourceExpression": "{Skill:1131001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.662,
+        "growth": 0.061
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.331,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.662,
+                  "growth": 0.061
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131001-一段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0007",
+      "branchId": "agent:1131:branch:basic-3",
+      "name": "普通攻击：打年糕",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段攻击，造成物理伤害。",
+      "parameterIds": ["1131002"],
+      "sourceExpression": "{Skill:1131002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.163,
+        "growth": 0.197
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.88,
+        "growth": 0.086
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.163,
+                  "growth": 0.197
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131002-二段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0008",
+      "branchId": "agent:1131:branch:basic-3",
+      "name": "普通攻击：打年糕",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段攻击，造成物理伤害。",
+      "parameterIds": ["1131003"],
+      "sourceExpression": "{Skill:1131003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.931,
+        "growth": 0.267
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.217,
+        "growth": 0.101
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.931,
+                  "growth": 0.267
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131003-三段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0009",
+      "branchId": "agent:1131:branch:basic-4",
+      "name": "普通攻击：打年糕（霜染刃旗）",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:soukaku-basic-ms38ejmz"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[霜染刃旗]状态下，点按  发动：\n向前方进行至多三段更快速的攻击，造成冰属性伤害。",
+      "parameterIds": ["1131004"],
+      "sourceExpression": "{Skill:1131004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.766,
+        "growth": 0.07
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.466,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0009:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.766,
+                  "growth": 0.07
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131004-一段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0010",
+      "branchId": "agent:1131:branch:basic-4",
+      "name": "普通攻击：打年糕（霜染刃旗）",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:soukaku-basic-ms38ejmz"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[霜染刃旗]状态下，点按  发动：\n向前方进行至多三段更快速的攻击，造成冰属性伤害。",
+      "parameterIds": ["1131005"],
+      "sourceExpression": "{Skill:1131005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.285,
+        "growth": 0.208
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.275,
+        "growth": 0.058
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0010:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.285,
+                  "growth": 0.208
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131005-二段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0011",
+      "branchId": "agent:1131:branch:basic-4",
+      "name": "普通攻击：打年糕（霜染刃旗）",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:soukaku-basic-ms38ejmz"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[霜染刃旗]状态下，点按  发动：\n向前方进行至多三段更快速的攻击，造成冰属性伤害。",
+      "parameterIds": ["1131006"],
+      "sourceExpression": "{Skill:1131006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 5.114,
+        "growth": 0.465
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.633,
+        "growth": 0.12
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0011:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 5.114,
+                  "growth": 0.465
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131006-三段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0012",
+      "branchId": "agent:1131:branch:chain-3",
+      "name": "连携技：鹅鸡斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n快速对前方敌人发动多次打击，随后衔接[展旗]攻击，造成大量冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1131018"],
+      "sourceExpression": "{Skill:1131018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 7.458,
+        "growth": 0.678
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.468,
+        "growth": 0.158
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0012:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 7.458,
+                  "growth": 0.678
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131018-main"
+    },
+    {
+      "actionId": "action:agent:1131:action:0013",
+      "branchId": "agent:1131:branch:chain-4",
+      "name": "终结技：大份鹅鸡斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n快速对前方敌人发动更多次打击，随后衔接[展旗]攻击，造成大量冰属性伤害；\n招式发动时，苍角会进入[鬼面]状态，使自身的暴击率提升15%，持续15秒；\n招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1131019"],
+      "sourceExpression": "{Skill:1131019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 19.898,
+        "growth": 1.809
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.768,
+        "growth": 0.172
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0013:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 19.898,
+                  "growth": 1.809
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131019-main"
+    },
+    {
+      "actionId": "action:agent:1131:action:0014",
+      "branchId": "agent:1131:branch:dodge-5",
+      "name": "冲刺攻击：对半分",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行斩击，造成物理伤害。",
+      "parameterIds": ["1131015"],
+      "sourceExpression": "{Skill:1131015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.767,
+        "growth": 0.07
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.384,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.767,
+                  "growth": 0.07
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131015-main"
+    },
+    {
+      "actionId": "action:agent:1131:action:0015",
+      "branchId": "agent:1131:branch:dodge-6",
+      "name": "冲刺攻击：对半分（霜染刃旗）",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-dodge-ms0dnpmr",
+        "zzz-hp:skill:soukaku-dodge-ms38f8n8"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "[霜染刃旗]状态下，闪避时，点按  发动：\n向前方进行斩击，造成冰属性伤害。",
+      "parameterIds": ["1131016"],
+      "sourceExpression": "{Skill:1131016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.315,
+        "growth": 0.12
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.801,
+        "growth": 0.037
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0015:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.315,
+                  "growth": 0.12
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131016-main"
+    },
+    {
+      "actionId": "action:agent:1131:action:0016",
+      "branchId": "agent:1131:branch:dodge-7",
+      "name": "闪避反击：别抢零食",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动斩击，造成冰属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1131017"],
+      "sourceExpression": "{Skill:1131017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.473,
+        "growth": 0.225
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.134,
+        "growth": 0.097
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0016:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.473,
+                  "growth": 0.225
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131017-main"
+    },
+    {
+      "actionId": "action:agent:1131:action:0017",
+      "branchId": "agent:1131:branch:special-4",
+      "name": "特殊技：吹凉便当",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方扇出风场，随后释放终结一击，造成冰属性伤害；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动期间长按  ，可以快速衔接[展旗]攻击。",
+      "parameterIds": ["1131008"],
+      "sourceExpression": "{Skill:1131008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.284,
+        "growth": 0.026
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.284,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0017:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.284,
+                  "growth": 0.026
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131008-一段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0018",
+      "branchId": "agent:1131:branch:special-4",
+      "name": "特殊技：吹凉便当",
+      "rowName": "终结段伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方扇出风场，随后释放终结一击，造成冰属性伤害；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动期间长按  ，可以快速衔接[展旗]攻击。",
+      "parameterIds": ["1131009"],
+      "sourceExpression": "{Skill:1131009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.001,
+        "growth": 0.091
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.001,
+        "growth": 0.046
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0018:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.001,
+                  "growth": 0.091
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131009-终结段"
+    },
+    {
+      "actionId": "action:agent:1131:action:0019",
+      "branchId": "agent:1131:branch:special-5",
+      "name": "强化特殊技：扇走蚊虫",
+      "rowName": "连续攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方扇出范围更远的风场，造成大量冰属性伤害；\n多次点按可以连续发动招式，每次发动时将消耗一定能量，能量不足或停止点按时会自动释放终结一击，造成大量冰属性伤害；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动期间长按  ，可以快速衔接[展旗]攻击。",
+      "parameterIds": ["1131011"],
+      "sourceExpression": "{{Skill:1131011, Prop:1001}/2}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.312,
+        "growth": 0.1195
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.129,
+        "growth": 0.0515
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0019:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.312,
+                  "growth": 0.1195
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131011-连续攻击"
+    },
+    {
+      "actionId": "action:agent:1131:action:0020",
+      "branchId": "agent:1131:branch:special-5",
+      "name": "强化特殊技：扇走蚊虫",
+      "rowName": "风场伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/special/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方扇出范围更远的风场，造成大量冰属性伤害；\n多次点按可以连续发动招式，每次发动时将消耗一定能量，能量不足或停止点按时会自动释放终结一击，造成大量冰属性伤害；\n招式发动期间抗打断等级提升，受到的伤害降低40%；\n招式发动期间长按  ，可以快速衔接[展旗]攻击。",
+      "parameterIds": ["1131010"],
+      "sourceExpression": "{Skill:1131010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.021,
+        "growth": 0.093
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.879,
+        "growth": 0.04
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0020:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.021,
+                  "growth": 0.093
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131010-风场"
+    },
+    {
+      "actionId": "action:agent:1131:action:0021",
+      "branchId": "agent:1131:branch:special-6",
+      "name": "特殊技：集合啦！",
+      "rowName": "展旗伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "长按  发动：\n将武器插入地面变形为旗帜，发动[展旗]攻击，造成冰属性伤害，[展旗]攻击命中敌人时，将触发[快速支援]；\n[展旗]攻击后再次点按  或  ，将发动一次特殊的收旗攻击，造成冰属性伤害；\n发动[展旗]攻击时，若拥有三层[涡流]，则会消耗所有[涡流]，进入[霜染刃旗]状态；[霜染刃旗]状态下，苍角能够发动强化[普通攻击]和强化[冲刺攻击]，造成大量冰属性伤害，最多持续45秒或触发6次；\n苍角的武器在以下情况下会获得[涡流]：\n发动[强化特殊技]时，获得一层[涡流]；\n发动[连携技]时，获得一层[涡流]；\n发动[终结技]时，获得三层[涡流]；\n[涡流]上限为三层。",
+      "parameterIds": ["1131012"],
+      "sourceExpression": "{Skill:1131012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.501,
+        "growth": 0.228
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.751,
+        "growth": 0.126
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0021:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.501,
+                  "growth": 0.228
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131012-展旗"
+    },
+    {
+      "actionId": "action:agent:1131:action:0022",
+      "branchId": "agent:1131:branch:special-6",
+      "name": "特殊技：集合啦！",
+      "rowName": "快速展旗伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/special/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "长按  发动：\n将武器插入地面变形为旗帜，发动[展旗]攻击，造成冰属性伤害，[展旗]攻击命中敌人时，将触发[快速支援]；\n[展旗]攻击后再次点按  或  ，将发动一次特殊的收旗攻击，造成冰属性伤害；\n发动[展旗]攻击时，若拥有三层[涡流]，则会消耗所有[涡流]，进入[霜染刃旗]状态；[霜染刃旗]状态下，苍角能够发动强化[普通攻击]和强化[冲刺攻击]，造成大量冰属性伤害，最多持续45秒或触发6次；\n苍角的武器在以下情况下会获得[涡流]：\n发动[强化特殊技]时，获得一层[涡流]；\n发动[连携技]时，获得一层[涡流]；\n发动[终结技]时，获得三层[涡流]；\n[涡流]上限为三层。",
+      "parameterIds": ["1131013"],
+      "sourceExpression": "{Skill:1131013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.401,
+        "growth": 0.128
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.401,
+        "growth": 0.064
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0022:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.401,
+                  "growth": 0.128
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131013-快速展旗"
+    },
+    {
+      "actionId": "action:agent:1131:action:0023",
+      "branchId": "agent:1131:branch:special-6",
+      "name": "特殊技：集合啦！",
+      "rowName": "收旗攻击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1131/details.zh.json",
+        "pointer": "/skill/special/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1131/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "长按  发动：\n将武器插入地面变形为旗帜，发动[展旗]攻击，造成冰属性伤害，[展旗]攻击命中敌人时，将触发[快速支援]；\n[展旗]攻击后再次点按  或  ，将发动一次特殊的收旗攻击，造成冰属性伤害；\n发动[展旗]攻击时，若拥有三层[涡流]，则会消耗所有[涡流]，进入[霜染刃旗]状态；[霜染刃旗]状态下，苍角能够发动强化[普通攻击]和强化[冲刺攻击]，造成大量冰属性伤害，最多持续45秒或触发6次；\n苍角的武器在以下情况下会获得[涡流]：\n发动[强化特殊技]时，获得一层[涡流]；\n发动[连携技]时，获得一层[涡流]；\n发动[终结技]时，获得三层[涡流]；\n[涡流]上限为三层。",
+      "parameterIds": ["1131014"],
+      "sourceExpression": "{Skill:1131014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.45,
+        "growth": 0.223
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.45,
+        "growth": 0.112
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1131:action:0023:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1131:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.45,
+                  "growth": 0.223
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-soukaku-nk-1131014-收旗攻击"
+    }
+  ]
+}

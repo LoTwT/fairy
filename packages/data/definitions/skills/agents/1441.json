@@ -1,0 +1,1408 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1441",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1441:action:0001",
+      "branchId": "agent:1441:branch:assist-4",
+      "name": "快速支援：孤影·归阵",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击和拳击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441020"],
+      "sourceExpression": "{Skill:1441020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.907,
+        "growth": 0.083
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.567,
+        "growth": 0.026
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0001:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0001:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.907,
+                  "growth": 0.083
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441020-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0002",
+      "branchId": "agent:1441:branch:assist-5",
+      "name": "招架支援：孤影·岳峙",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值，并造成火属性伤害；\n招式发动时，回复75点[炽心]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441026"],
+      "sourceExpression": "{Skill:1441026, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.4,
+        "growth": 0.037
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0002:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0002:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.4,
+                  "growth": 0.037
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441026-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0003",
+      "branchId": "agent:1441:branch:assist-5",
+      "name": "招架支援：孤影·岳峙",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值，并造成火属性伤害；\n招式发动时，回复75点[炽心]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441021"],
+      "sourceExpression": "{Skill:1441021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.467,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1441:action:0004",
+      "branchId": "agent:1441:branch:assist-5",
+      "name": "招架支援：孤影·岳峙",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值，并造成火属性伤害；\n招式发动时，回复75点[炽心]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441022"],
+      "sourceExpression": "{Skill:1441022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.117,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1441:action:0005",
+      "branchId": "agent:1441:branch:assist-5",
+      "name": "招架支援：孤影·岳峙",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值，并造成火属性伤害；\n招式发动时，回复75点[炽心]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441023"],
+      "sourceExpression": "{Skill:1441023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.517,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1441:action:0006",
+      "branchId": "agent:1441:branch:assist-6",
+      "name": "支援突击：孤影·断獠",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动多段斩击，造成火属性伤害；\n连点时，可以连续斩击敌人，最多额外连续斩击7次；\n连续斩击时，如果真斗的生命值在30%以上，则消耗2%最大生命值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441024"],
+      "sourceExpression": "{Skill:1441024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.667,
+        "growth": 0.152
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.709,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0006:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0006:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.667,
+                  "growth": 0.152
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441024-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0007",
+      "branchId": "agent:1441:branch:assist-6",
+      "name": "支援突击：孤影·断獠",
+      "rowName": "连打最大伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动多段斩击，造成火属性伤害；\n连点时，可以连续斩击敌人，最多额外连续斩击7次；\n连续斩击时，如果真斗的生命值在30%以上，则消耗2%最大生命值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441024", "1441025"],
+      "sourceExpression": "{Skill:1441024, Prop:1001}+{Skill:1441025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 5.701,
+        "growth": 0.519
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.809,
+        "growth": 0.22
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0007:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0007:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 5.701,
+                  "growth": 0.519
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441024-连打最大"
+    },
+    {
+      "actionId": "action:agent:1441:action:0008",
+      "branchId": "agent:1441:branch:basic-3",
+      "name": "普通攻击：炽风斩",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n在每一段攻击的发动阶段，点按  将触发[烬风]，使此次攻击造成更高火属性伤害。",
+      "parameterIds": ["1441001"],
+      "sourceExpression": "{Skill:1441001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.287,
+        "growth": 0.027
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.269,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0008:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0008:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.287,
+                  "growth": 0.027
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441001-一段"
+    },
+    {
+      "actionId": "action:agent:1441:action:0009",
+      "branchId": "agent:1441:branch:basic-3",
+      "name": "普通攻击：炽风斩",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n在每一段攻击的发动阶段，点按  将触发[烬风]，使此次攻击造成更高火属性伤害。",
+      "parameterIds": ["1441002", "1441003"],
+      "sourceExpression": "{Skill:1441002, Prop:1001}+{Skill:1441003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.827,
+        "growth": 0.07600000000000001
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.7929999999999999,
+        "growth": 0.037000000000000005
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0009:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0009:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.827,
+                  "growth": 0.07600000000000001
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441002-二段"
+    },
+    {
+      "actionId": "action:agent:1441:action:0010",
+      "branchId": "agent:1441:branch:basic-3",
+      "name": "普通攻击：炽风斩",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n在每一段攻击的发动阶段，点按  将触发[烬风]，使此次攻击造成更高火属性伤害。",
+      "parameterIds": ["1441004", "1441005"],
+      "sourceExpression": "{Skill:1441004, Prop:1001}+{Skill:1441005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.346,
+        "growth": 0.123
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.333,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0010:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0010:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.346,
+                  "growth": 0.123
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441004-三段"
+    },
+    {
+      "actionId": "action:agent:1441:action:0011",
+      "branchId": "agent:1441:branch:basic-3",
+      "name": "普通攻击：炽风斩",
+      "rowName": "一段伤害倍率（触发烬风）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n在每一段攻击的发动阶段，点按  将触发[烬风]，使此次攻击造成更高火属性伤害。",
+      "parameterIds": ["1441001", "1441006"],
+      "sourceExpression": "{Skill:1441001, Prop:1001}+{Skill:1441006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.631,
+        "growth": 0.059
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.5740000000000001,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0011:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0011:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.631,
+                  "growth": 0.059
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1441:action:0012",
+      "branchId": "agent:1441:branch:basic-3",
+      "name": "普通攻击：炽风斩",
+      "rowName": "二段伤害倍率（触发烬风）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n在每一段攻击的发动阶段，点按  将触发[烬风]，使此次攻击造成更高火属性伤害。",
+      "parameterIds": ["1441002", "1441007"],
+      "sourceExpression": "{Skill:1441002, Prop:1001}+{Skill:1441007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.955,
+        "growth": 0.088
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.913,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0012:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0012:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.955,
+                  "growth": 0.088
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1441:action:0013",
+      "branchId": "agent:1441:branch:basic-3",
+      "name": "普通攻击：炽风斩",
+      "rowName": "三段伤害倍率（触发烬风）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多三段的斩击，造成物理伤害；\n在每一段攻击的发动阶段，点按  将触发[烬风]，使此次攻击造成更高火属性伤害。",
+      "parameterIds": ["1441004", "1441008"],
+      "sourceExpression": "{Skill:1441004, Prop:1001}+{Skill:1441008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.4329999999999998,
+        "growth": 0.131
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.416,
+        "growth": 0.065
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0013:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0013:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.4329999999999998,
+                  "growth": 0.131
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1441:action:0014",
+      "branchId": "agent:1441:branch:basic-4",
+      "name": "普通攻击：炽风·胧切",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:manato-basic-ms32k1ns"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "在[熔锋]状态下点按  发动：\n向前方进行至多四段的斩击，造成火属性伤害；\n招式发动时，如果真斗的生命值在30%以上，则消耗3.5%最大生命值。",
+      "parameterIds": ["1441009"],
+      "sourceExpression": "{Skill:1441009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.531,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.388,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0014:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0014:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.531,
+                  "growth": 0.049
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441009-一段"
+    },
+    {
+      "actionId": "action:agent:1441:action:0015",
+      "branchId": "agent:1441:branch:basic-4",
+      "name": "普通攻击：炽风·胧切",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:manato-basic-ms32k1ns"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "在[熔锋]状态下点按  发动：\n向前方进行至多四段的斩击，造成火属性伤害；\n招式发动时，如果真斗的生命值在30%以上，则消耗3.5%最大生命值。",
+      "parameterIds": ["1441010"],
+      "sourceExpression": "{Skill:1441010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.112,
+        "growth": 0.102
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.874,
+        "growth": 0.04
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0015:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0015:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.112,
+                  "growth": 0.102
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441010-二段"
+    },
+    {
+      "actionId": "action:agent:1441:action:0016",
+      "branchId": "agent:1441:branch:basic-4",
+      "name": "普通攻击：炽风·胧切",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:manato-basic-ms32k1ns"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "在[熔锋]状态下点按  发动：\n向前方进行至多四段的斩击，造成火属性伤害；\n招式发动时，如果真斗的生命值在30%以上，则消耗3.5%最大生命值。",
+      "parameterIds": ["1441011"],
+      "sourceExpression": "{Skill:1441011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.545,
+        "growth": 0.141
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.416,
+        "growth": 0.065
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0016:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0016:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.545,
+                  "growth": 0.141
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441011-三段"
+    },
+    {
+      "actionId": "action:agent:1441:action:0017",
+      "branchId": "agent:1441:branch:basic-4",
+      "name": "普通攻击：炽风·胧切",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:manato-basic-ms32k1ns"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "在[熔锋]状态下点按  发动：\n向前方进行至多四段的斩击，造成火属性伤害；\n招式发动时，如果真斗的生命值在30%以上，则消耗3.5%最大生命值。",
+      "parameterIds": ["1441012"],
+      "sourceExpression": "{Skill:1441012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.378,
+        "growth": 0.217
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.175,
+        "growth": 0.099
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0017:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0017:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.378,
+                  "growth": 0.217
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441012-四段"
+    },
+    {
+      "actionId": "action:agent:1441:action:0018",
+      "branchId": "agent:1441:branch:chain-3",
+      "name": "连携技：极炽炎爆",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n丢出手中的剑，随后冲向敌人引发爆炸，造成大量火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441018"],
+      "sourceExpression": "{Skill:1441018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 4.833,
+        "growth": 0.44
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.051,
+        "growth": 0.094
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0018:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0018:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 4.833,
+                  "growth": 0.44
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441018-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0019",
+      "branchId": "agent:1441:branch:chain-4",
+      "name": "终结技：无想荒魂",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n跳起并发动向前方敌人发动下落斩击，随后引发爆炸，造成大量火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441019"],
+      "sourceExpression": "{Skill:1441019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.623,
+        "growth": 1.421
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.484,
+        "growth": 0.159
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0019:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0019:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.623,
+                  "growth": 1.421
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441019-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0020",
+      "branchId": "agent:1441:branch:dodge-4",
+      "name": "冲刺攻击：曜刃·残心",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行肩撞攻击，造成物理伤害。",
+      "parameterIds": ["1441016"],
+      "sourceExpression": "{Skill:1441016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.587,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.367,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0020:total",
+            "damageKind": "sheer",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0020:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.587,
+                  "growth": 0.054
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441016-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0021",
+      "branchId": "agent:1441:branch:dodge-5",
+      "name": "闪避反击：曜刃·掠阵",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动斩击和拳击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441017"],
+      "sourceExpression": "{Skill:1441017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.98,
+        "growth": 0.18
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.134,
+        "growth": 0.097
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0021:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0021:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.98,
+                  "growth": 0.18
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441017-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0022",
+      "branchId": "agent:1441:branch:special-4",
+      "name": "特殊技：归烬",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方斩击敌人，造成火属性伤害；\n如果招式发动期间受到敌人攻击，在发动斩击时回复20%已损失生命值，[特殊技：归烬]和[特殊技：归烬·舍身]的生命回复效果每20秒最多触发一次；\n如果招式发动期间受到敌人攻击，强化此次斩击；\n招式发动期间受到伤害降低40%；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1441013"],
+      "sourceExpression": "{Skill:1441013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.507,
+        "growth": 0.047
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.476,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0022:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0022:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.507,
+                  "growth": 0.047
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441013-main"
+    },
+    {
+      "actionId": "action:agent:1441:action:0023",
+      "branchId": "agent:1441:branch:special-4",
+      "name": "特殊技：归烬",
+      "rowName": "伤害倍率（蓄力或格挡成功）",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/special/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方斩击敌人，造成火属性伤害；\n如果招式发动期间受到敌人攻击，在发动斩击时回复20%已损失生命值，[特殊技：归烬]和[特殊技：归烬·舍身]的生命回复效果每20秒最多触发一次；\n如果招式发动期间受到敌人攻击，强化此次斩击；\n招式发动期间受到伤害降低40%；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1441014"],
+      "sourceExpression": "{Skill:1441014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.307,
+        "growth": 0.119
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.226,
+        "growth": 0.056
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0023:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0023:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.307,
+                  "growth": 0.119
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1441:action:0024",
+      "branchId": "agent:1441:branch:special-5",
+      "name": "强化特殊技：归烬·天坠",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1441/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1441/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "在[熔锋]状态下，闪能足够时，点按   发动：\n跳起并发动向前方敌人发动下落斩击，造成大量火属性伤害；\n招式发动时，回复33%最大生命值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1441015"],
+      "sourceExpression": "{Skill:1441015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.526,
+        "growth": 0.594
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 6.622,
+        "growth": 0.301
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1441:action:0024:total",
+            "damageKind": "sheer",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1441:action:0024:base",
+                "stat": "sheerForce",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.526,
+                  "growth": 0.594
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-manato-nk-1441015-main"
+    }
+  ]
+}

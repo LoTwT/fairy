@@ -1,0 +1,1168 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1061",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1061:action:0001",
+      "branchId": "agent:1061:branch:assist-4",
+      "name": "快速支援：应急措施",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击，随后引爆电锯，造成物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061019", "1061020"],
+      "sourceExpression": "{{Skill:1061019, Prop:1001} + {Skill:1061020, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.15,
+        "growth": 0.196
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.15,
+        "growth": 0.098
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 2.15,
+                  "growth": 0.196
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061019-main"
+    },
+    {
+      "actionId": "action:agent:1061:action:0002",
+      "branchId": "agent:1061:branch:assist-5",
+      "name": "招架支援：请、请让我来！",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061021"],
+      "sourceExpression": "{Skill:1061021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.467,
+        "growth": 0.113
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1061:action:0003",
+      "branchId": "agent:1061:branch:assist-5",
+      "name": "招架支援：请、请让我来！",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061022"],
+      "sourceExpression": "{Skill:1061022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.117,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1061:action:0004",
+      "branchId": "agent:1061:branch:assist-5",
+      "name": "招架支援：请、请让我来！",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061023"],
+      "sourceExpression": "{Skill:1061023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.517,
+        "growth": 0.069
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1061:action:0005",
+      "branchId": "agent:1061:branch:assist-6",
+      "name": "支援突击：快速清扫",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动连续斩击，随后引爆电锯，造成物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061024"],
+      "sourceExpression": "{Skill:1061024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 5.475,
+        "growth": 0.498
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.886,
+        "growth": 0.223
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 5.475,
+                  "growth": 0.498
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061024-main"
+    },
+    {
+      "actionId": "action:agent:1061:action:0006",
+      "branchId": "agent:1061:branch:basic-2",
+      "name": "普通攻击：扫除开始",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n在第三、第五段中连点或长按时，可以使用电锯持续斩击敌人。",
+      "parameterIds": ["1061001"],
+      "sourceExpression": "{Skill:1061001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.82,
+        "growth": 0.075
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.41,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.82,
+                  "growth": 0.075
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061001-一段"
+    },
+    {
+      "actionId": "action:agent:1061:action:0007",
+      "branchId": "agent:1061:branch:basic-2",
+      "name": "普通攻击：扫除开始",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n在第三、第五段中连点或长按时，可以使用电锯持续斩击敌人。",
+      "parameterIds": ["1061002"],
+      "sourceExpression": "{Skill:1061002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.766,
+        "growth": 0.07
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.702,
+        "growth": 0.032
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.766,
+                  "growth": 0.07
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061002-二段"
+    },
+    {
+      "actionId": "action:agent:1061:action:0008",
+      "branchId": "agent:1061:branch:basic-2",
+      "name": "普通攻击：扫除开始",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n在第三、第五段中连点或长按时，可以使用电锯持续斩击敌人。",
+      "parameterIds": ["1061003"],
+      "sourceExpression": "{Skill:1061003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.792,
+        "growth": 0.163
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.238,
+        "growth": 0.057
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.792,
+                  "growth": 0.163
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061003-三段"
+    },
+    {
+      "actionId": "action:agent:1061:action:0009",
+      "branchId": "agent:1061:branch:basic-2",
+      "name": "普通攻击：扫除开始",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n在第三、第五段中连点或长按时，可以使用电锯持续斩击敌人。",
+      "parameterIds": ["1061004"],
+      "sourceExpression": "{Skill:1061004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.334,
+        "growth": 0.213
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.864,
+        "growth": 0.085
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.334,
+                  "growth": 0.213
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061004-四段"
+    },
+    {
+      "actionId": "action:agent:1061:action:0010",
+      "branchId": "agent:1061:branch:basic-2",
+      "name": "普通攻击：扫除开始",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，造成物理伤害；\n在第三、第五段中连点或长按时，可以使用电锯持续斩击敌人。",
+      "parameterIds": ["1061006"],
+      "sourceExpression": "{Skill:1061006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.212,
+        "growth": 0.383
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.42,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.212,
+                  "growth": 0.383
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061006-五段"
+    },
+    {
+      "actionId": "action:agent:1061:action:0011",
+      "branchId": "agent:1061:branch:chain-3",
+      "name": "连携技：抱歉…",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方小范围敌人发动强力斩击，造成大量物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061017"],
+      "sourceExpression": "{Skill:1061017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.873,
+        "growth": 0.625
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.883,
+        "growth": 0.132
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.873,
+                  "growth": 0.625
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061017-main"
+    },
+    {
+      "actionId": "action:agent:1061:action:0012",
+      "branchId": "agent:1061:branch:chain-4",
+      "name": "终结技：非、非常抱歉！",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方小范围敌人发动强力斩击，造成大量物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061018"],
+      "sourceExpression": "{Skill:1061018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 20.288,
+        "growth": 1.845
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 4.068,
+        "growth": 0.185
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 20.288,
+                  "growth": 1.845
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061018-main"
+    },
+    {
+      "actionId": "action:agent:1061:action:0013",
+      "branchId": "agent:1061:branch:dodge-4",
+      "name": "冲刺攻击：[断]",
+      "rowName": "最大伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方发动斩击，造成物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人。",
+      "parameterIds": ["1061014"],
+      "sourceExpression": "{Skill:1061014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.967,
+        "growth": 0.088
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.484,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.967,
+                  "growth": 0.088
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061014-最大"
+    },
+    {
+      "actionId": "action:agent:1061:action:0014",
+      "branchId": "agent:1061:branch:dodge-5",
+      "name": "闪避反击：[舍]",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动斩击，随后引爆电锯，造成物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1061015", "1061016"],
+      "sourceExpression": "{{Skill:1061015, Prop:1001} + {Skill:1061016, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.712,
+        "growth": 0.248
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.318,
+        "growth": 0.06
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.712,
+                  "growth": 0.248
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061015-main"
+    },
+    {
+      "actionId": "action:agent:1061:action:0015",
+      "branchId": "agent:1061:branch:special-3",
+      "name": "特殊技：强力清扫",
+      "rowName": "回旋斩击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行持续斩击，随后引爆电锯，造成物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1061008"],
+      "sourceExpression": "{Skill:1061008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.667,
+        "growth": 0.061
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.667,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.667,
+                  "growth": 0.061
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061008-回旋斩击"
+    },
+    {
+      "actionId": "action:agent:1061:action:0016",
+      "branchId": "agent:1061:branch:special-3",
+      "name": "特殊技：强力清扫",
+      "rowName": "持续斩击最大伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/special/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行持续斩击，随后引爆电锯，造成物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1061009"],
+      "sourceExpression": "{Skill:1061009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.375,
+        "growth": 0.035
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.375,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.375,
+                  "growth": 0.035
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061009-持续斩击最大"
+    },
+    {
+      "actionId": "action:agent:1061:action:0017",
+      "branchId": "agent:1061:branch:special-3",
+      "name": "特殊技：强力清扫",
+      "rowName": "爆炸伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/special/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行持续斩击，随后引爆电锯，造成物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人；\n招式发动期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1061010"],
+      "sourceExpression": "{Skill:1061010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.25,
+        "growth": 0.023
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.25,
+        "growth": 0.012
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.25,
+                  "growth": 0.023
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061010-爆炸"
+    },
+    {
+      "actionId": "action:agent:1061:action:0018",
+      "branchId": "agent:1061:branch:special-4",
+      "name": "强化特殊技：小心裙角",
+      "rowName": "回旋斩击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行持续强力斩击，随后引爆电锯，造成大量物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人，并随招式命中目标，逐渐消耗能量；\n回旋斩击期间拥有无敌效果；\n持续斩击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1061011"],
+      "sourceExpression": "{Skill:1061011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.451,
+        "growth": 0.314
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.064,
+        "growth": 0.094
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.451,
+                  "growth": 0.314
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061011-回旋斩击"
+    },
+    {
+      "actionId": "action:agent:1061:action:0019",
+      "branchId": "agent:1061:branch:special-4",
+      "name": "强化特殊技：小心裙角",
+      "rowName": "持续斩击最大伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行持续强力斩击，随后引爆电锯，造成大量物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人，并随招式命中目标，逐渐消耗能量；\n回旋斩击期间拥有无敌效果；\n持续斩击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1061012"],
+      "sourceExpression": "{Skill:1061012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 10.352,
+        "growth": 0.942
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 6.19,
+        "growth": 0.282
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0019:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 10.352,
+                  "growth": 0.942
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061012-持续斩击最大"
+    },
+    {
+      "actionId": "action:agent:1061:action:0020",
+      "branchId": "agent:1061:branch:special-4",
+      "name": "强化特殊技：小心裙角",
+      "rowName": "爆炸伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1061/details.zh.json",
+        "pointer": "/skill/special/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1061/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前方进行持续强力斩击，随后引爆电锯，造成大量物理伤害；\n连点或长按时，可以使用电锯持续斩击敌人，并随招式命中目标，逐渐消耗能量；\n回旋斩击期间拥有无敌效果；\n持续斩击期间抗打断等级提升，受到的伤害降低40%。",
+      "parameterIds": ["1061013"],
+      "sourceExpression": "{Skill:1061013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.451,
+        "growth": 0.314
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.064,
+        "growth": 0.094
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1061:action:0020:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1061:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.451,
+                  "growth": 0.314
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-corin-nk-1061013-爆炸"
+    }
+  ]
+}

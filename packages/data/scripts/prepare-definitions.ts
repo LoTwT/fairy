@@ -7,6 +7,7 @@ import {
   regularFiles,
   verifyPanelAttributes,
 } from "./panel-attributes/manifest.ts"
+import { verifyAgentActions } from "./skills/manifest.ts"
 
 /** 冻结全部 definitions，再核对其中属性制品与同次 integrated；后续构建只用此副本。 */
 export async function prepareDefinitions(
@@ -24,6 +25,11 @@ export async function prepareDefinitions(
   // 包含 effects 等非属性制品，拒绝捕获期间来源更替形成的跨版本副本。
   await verifyDefinitionsCopy(source, outputDirectory)
   await verifyPanelAttributes(join(outputDirectory, "attributes"), index)
+  await verifyAgentActions(
+    join(outputDirectory, "skills"),
+    index,
+    join(outputDirectory, "effects/static-catalog.json"),
+  )
 }
 
 export async function verifyDefinitionsCopy(

@@ -26,6 +26,8 @@
     "./definitions/attributes/w-engines/*.json": "./dist/definitions/attributes/w-engines/*.json",
     "./definitions/attributes/drive-disc-affixes.json": "./dist/definitions/attributes/drive-disc-affixes.json",
     "./definitions/attributes/manifest.json": "./dist/definitions/attributes/manifest.json",
+    "./definitions/skills/agents/*.json": "./dist/definitions/skills/agents/*.json",
+    "./definitions/skills/manifest.json": "./dist/definitions/skills/manifest.json",
     "./integrated/index.json": "./dist/integrated/index.json",
     "./integrated/agents/*/data.json": "./dist/integrated/agents/*/data.json",
     "./integrated/agents/*/details.zh.json": "./dist/integrated/agents/*/details.zh.json",
@@ -80,7 +82,8 @@
     "prepare:consumer": "node --disable-warning=ExperimentalWarning scripts/prepare-consumer-types.ts",
     "verify:browser": "vitest run --project packaging test/verify-browser.test.ts",
     "generate:static-effects": "pnpm --filter @randomplay/core build && node scripts/generate-static-effects.ts",
-    "generate:panel-attributes": "node --disable-warning=ExperimentalWarning scripts/generate-panel-attributes.ts"
+    "generate:panel-attributes": "node --disable-warning=ExperimentalWarning scripts/generate-panel-attributes.ts",
+    "generate:agent-actions": "node --disable-warning=ExperimentalWarning scripts/generate-agent-actions.ts"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

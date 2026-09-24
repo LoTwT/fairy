@@ -1,0 +1,1264 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1171",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1171:action:0001",
+      "branchId": "agent:1171:branch:assist-5",
+      "name": "快速支援：提神特饮",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        },
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续攻击并喷射火焰，造成物理伤害和火属性伤害；\n招式发动期间拥有无敌效果。\n当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动连续攻击并喷射火焰，造成物理伤害和火属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+      "parameterIds": ["1171018"],
+      "sourceExpression": "{Skill:1171018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.844,
+        "growth": 0.077
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.844,
+        "growth": 0.039
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171018-main"
+    },
+    {
+      "actionId": "action:agent:1171:action:0002",
+      "branchId": "agent:1171:branch:assist-6",
+      "name": "招架支援：烟熏油盅",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1171019"],
+      "sourceExpression": "{Skill:1171019, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1171:action:0003",
+      "branchId": "agent:1171:branch:assist-6",
+      "name": "招架支援：烟熏油盅",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1171020"],
+      "sourceExpression": "{Skill:1171020, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1171:action:0004",
+      "branchId": "agent:1171:branch:assist-6",
+      "name": "招架支援：烟熏油盅",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1171021"],
+      "sourceExpression": "{Skill:1171021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1171:action:0005",
+      "branchId": "agent:1171:branch:assist-7",
+      "name": "支援突击：灼焰甘露",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n腾空跃起，快速旋转前进并向周身喷射火焰，造成火属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+      "parameterIds": ["1171022"],
+      "sourceExpression": "{Skill:1171022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.276,
+        "growth": 0.298
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.824,
+        "growth": 0.129
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.276,
+                  "growth": 0.298
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171022-main"
+    },
+    {
+      "actionId": "action:agent:1171:action:0006",
+      "branchId": "agent:1171:branch:basic-4",
+      "name": "普通攻击：炽焰直调式",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1171001"],
+      "sourceExpression": "{Skill:1171001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.448,
+        "growth": 0.041
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.187,
+        "growth": 0.009
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171001-一段"
+    },
+    {
+      "actionId": "action:agent:1171:action:0007",
+      "branchId": "agent:1171:branch:basic-4",
+      "name": "普通攻击：炽焰直调式",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1171002"],
+      "sourceExpression": "{Skill:1171002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.435,
+        "growth": 0.04
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.308,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171002-二段"
+    },
+    {
+      "actionId": "action:agent:1171:action:0008",
+      "branchId": "agent:1171:branch:basic-4",
+      "name": "普通攻击：炽焰直调式",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1171003"],
+      "sourceExpression": "{Skill:1171003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.717,
+        "growth": 0.066
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.478,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171003-三段"
+    },
+    {
+      "actionId": "action:agent:1171:action:0009",
+      "branchId": "agent:1171:branch:basic-4",
+      "name": "普通攻击：炽焰直调式",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1171004"],
+      "sourceExpression": "{Skill:1171004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.666,
+        "growth": 0.061
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.304,
+        "growth": 0.014
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171004-四段"
+    },
+    {
+      "actionId": "action:agent:1171:action:0010",
+      "branchId": "agent:1171:branch:basic-4",
+      "name": "普通攻击：炽焰直调式",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的攻击，造成物理伤害和火属性伤害。",
+      "parameterIds": ["1171005"],
+      "sourceExpression": "{Skill:1171005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.963,
+        "growth": 0.088
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.52,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171005-五段"
+    },
+    {
+      "actionId": "action:agent:1171:action:0011",
+      "branchId": "agent:1171:branch:basic-5",
+      "name": "普通攻击：炽焰搅拌式",
+      "rowName": "持续喷射伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        },
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "[燃油特调]状态下，长按  发动：\n持续回旋并向周身喷射火焰，随后发动终结一击，造成火属性伤害，保持长按可以延长喷射的持续时间；\n招式发动时，将会消耗20点[燃点]；\n招式发动期间抗打断等级提升；\n终结一击发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。\n[燃油特调]状态下，长按  发动：\n持续回旋并向周身喷射火焰，随后发动终结一击，额外触发一次不消耗[燃点]的[余烬]，造成火属性伤害，保持长按可以延长喷射的持续时间；\n招式造成的伤害同时视为[支援攻击]伤害；\n招式发动时，将会消耗20点[燃点]；\n招式发动期间抗打断等级提升；\n终结一击发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+      "parameterIds": ["1171006"],
+      "sourceExpression": "{Skill:1171006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.254,
+        "growth": 0.114
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.965,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0011:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.254,
+                  "growth": 0.114
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171006-持续喷射"
+    },
+    {
+      "actionId": "action:agent:1171:action:0012",
+      "branchId": "agent:1171:branch:basic-5",
+      "name": "普通攻击：炽焰搅拌式",
+      "rowName": "终结一击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        },
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "[燃油特调]状态下，长按  发动：\n持续回旋并向周身喷射火焰，随后发动终结一击，造成火属性伤害，保持长按可以延长喷射的持续时间；\n招式发动时，将会消耗20点[燃点]；\n招式发动期间抗打断等级提升；\n终结一击发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。\n[燃油特调]状态下，长按  发动：\n持续回旋并向周身喷射火焰，随后发动终结一击，额外触发一次不消耗[燃点]的[余烬]，造成火属性伤害，保持长按可以延长喷射的持续时间；\n招式造成的伤害同时视为[支援攻击]伤害；\n招式发动时，将会消耗20点[燃点]；\n招式发动期间抗打断等级提升；\n终结一击发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+      "parameterIds": ["1171007"],
+      "sourceExpression": "{Skill:1171007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.328,
+        "growth": 0.212
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.791,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.328,
+                  "growth": 0.212
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171007-终结一击"
+    },
+    {
+      "actionId": "action:agent:1171:action:0013",
+      "branchId": "agent:1171:branch:chain-3",
+      "name": "连携技：燃油熔焰",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n快速突进并向周身喷射火焰，随后向前方扇形范围发动一次火焰冲击，造成大量火属性伤害；\n招式发动期间拥有无敌效果；\n招式发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+      "parameterIds": ["1171016"],
+      "sourceExpression": "{Skill:1171016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.809,
+        "growth": 0.619
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.42,
+        "growth": 0.11
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0013:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.809,
+                  "growth": 0.619
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171016-main"
+    },
+    {
+      "actionId": "action:agent:1171:action:0014",
+      "branchId": "agent:1171:branch:chain-4",
+      "name": "终结技：纵享盛焰",
+      "rowName": "最大伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n快速突进后跃向空中，对前方大范围区域持续喷射火焰，造成大量火属性伤害；\n跃向空中时，将触发[快速支援]，若响应[快速支援]，柏妮思会延长火焰喷射的持续时间；\n招式发动时，回复50点[燃点]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1171017"],
+      "sourceExpression": "{Skill:1171017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 20.122,
+        "growth": 1.83
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.064,
+        "growth": 0.049
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0014:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 20.122,
+                  "growth": 1.83
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171017-最大"
+    },
+    {
+      "actionId": "action:agent:1171:action:0015",
+      "branchId": "agent:1171:branch:dodge-4",
+      "name": "冲刺攻击：危险发酵式",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n挥舞喷射器向前方进行突进攻击，造成火属性伤害。",
+      "parameterIds": ["1171014"],
+      "sourceExpression": "{Skill:1171014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.679,
+        "growth": 0.062
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.34,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0015:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.679,
+                  "growth": 0.062
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171014-main"
+    },
+    {
+      "actionId": "action:agent:1171:action:0016",
+      "branchId": "agent:1171:branch:dodge-5",
+      "name": "闪避反击：摇荡闪",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动连续攻击并喷射火焰，造成物理伤害和火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1171015"],
+      "sourceExpression": "{Skill:1171015, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.197,
+        "growth": 0.2
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.944,
+        "growth": 0.089
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171015-main"
+    },
+    {
+      "actionId": "action:agent:1171:action:0017",
+      "branchId": "agent:1171:branch:special-7",
+      "name": "特殊技：灼热熟成法",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动一次火焰冲击，造成火属性伤害；\n长按  可以进行蓄力，提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1171008"],
+      "sourceExpression": "{Skill:1171008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.578,
+        "growth": 0.053
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.578,
+        "growth": 0.027
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.578,
+                  "growth": 0.053
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171008-main"
+    },
+    {
+      "actionId": "action:agent:1171:action:0018",
+      "branchId": "agent:1171:branch:special-7",
+      "name": "特殊技：灼热熟成法",
+      "rowName": "蓄力伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/special/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动一次火焰冲击，造成火属性伤害；\n长按  可以进行蓄力，提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1171009"],
+      "sourceExpression": "{Skill:1171009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.624,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.624,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.624,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171009-蓄力"
+    },
+    {
+      "actionId": "action:agent:1171:action:0019",
+      "branchId": "agent:1171:branch:special-8",
+      "name": "强化特殊技：灼热摇荡法",
+      "rowName": "持续喷射伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        },
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n使用单手喷射器持续喷射火焰，随后向前方直线范围发动一次火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n持续喷射期间拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动侧身闪避，向对应方向调整身位；\n持续喷射期间抗打断等级提升，受到的伤害降低40%；\n侧身闪避和火焰冲击发动期间拥有无敌效果。\n能量足够时，点按  发动：\n使用单手喷射器持续喷射火焰，随后向前方直线范围发动一次火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n持续喷射期间拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动侧身闪避，向对应方向调整身位；\n持续喷射期间抗打断等级提升，受到的伤害降低60%；\n侧身闪避和火焰冲击发动期间拥有无敌效果。",
+      "parameterIds": ["1171010"],
+      "sourceExpression": "{Skill:1171010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.438,
+        "growth": 0.495
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.786,
+        "growth": 0.173
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.438,
+                  "growth": 0.495
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171010-持续喷射"
+    },
+    {
+      "actionId": "action:agent:1171:action:0020",
+      "branchId": "agent:1171:branch:special-8",
+      "name": "强化特殊技：灼热摇荡法",
+      "rowName": "火焰冲击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/special/description/7/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        },
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n使用单手喷射器持续喷射火焰，随后向前方直线范围发动一次火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n持续喷射期间拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动侧身闪避，向对应方向调整身位；\n持续喷射期间抗打断等级提升，受到的伤害降低40%；\n侧身闪避和火焰冲击发动期间拥有无敌效果。\n能量足够时，点按  发动：\n使用单手喷射器持续喷射火焰，随后向前方直线范围发动一次火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n持续喷射期间拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动侧身闪避，向对应方向调整身位；\n持续喷射期间抗打断等级提升，受到的伤害降低60%；\n侧身闪避和火焰冲击发动期间拥有无敌效果。",
+      "parameterIds": ["1171011"],
+      "sourceExpression": "{Skill:1171011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.967,
+        "growth": 0.088
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.657,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.967,
+                  "growth": 0.088
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171011-火焰冲击"
+    },
+    {
+      "actionId": "action:agent:1171:action:0021",
+      "branchId": "agent:1171:branch:special-9",
+      "name": "强化特殊技：灼热摇荡法·双份",
+      "rowName": "持续喷射伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:burnice-special-ms4nzyqb"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        },
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "[强化特殊技：灼热摇荡法]发动期间，能量足够时，点按  发动：\n使用双手喷射器持续喷射火焰，随后向前方直线范围发动一次强力的火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n喷射发动瞬间和火焰冲击发动期间拥有无敌效果；\n持续喷射期间抗打断等级提升，受到的伤害降低40%。\n[强化特殊技：灼热摇荡法]发动期间，能量足够时，点按  发动：\n使用双手喷射器持续喷射火焰，随后向前方直线范围发动一次强力的火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n喷射发动瞬间和火焰冲击发动期间拥有无敌效果；\n持续喷射期间抗打断等级提升，受到的伤害降低60%。",
+      "parameterIds": ["1171012"],
+      "sourceExpression": "{Skill:1171012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 9.581,
+        "growth": 0.871
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 5.857,
+        "growth": 0.267
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0021:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 9.581,
+                  "growth": 0.871
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171012-持续喷射"
+    },
+    {
+      "actionId": "action:agent:1171:action:0022",
+      "branchId": "agent:1171:branch:special-9",
+      "name": "强化特殊技：灼热摇荡法·双份",
+      "rowName": "火焰冲击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:burnice-special-ms4nzyqb"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/special/description/8/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        },
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/4/desc"
+        }
+      ],
+      "description": "[强化特殊技：灼热摇荡法]发动期间，能量足够时，点按  发动：\n使用双手喷射器持续喷射火焰，随后向前方直线范围发动一次强力的火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n喷射发动瞬间和火焰冲击发动期间拥有无敌效果；\n持续喷射期间抗打断等级提升，受到的伤害降低40%。\n[强化特殊技：灼热摇荡法]发动期间，能量足够时，点按  发动：\n使用双手喷射器持续喷射火焰，随后向前方直线范围发动一次强力的火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n喷射发动瞬间和火焰冲击发动期间拥有无敌效果；\n持续喷射期间抗打断等级提升，受到的伤害降低60%。",
+      "parameterIds": ["1171013"],
+      "sourceExpression": "{Skill:1171013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 2.871,
+        "growth": 0.261
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.078,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1171:action:0022:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.871,
+                  "growth": 0.261
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-burnice-nk-1171013-火焰冲击"
+    },
+    {
+      "actionId": "action:agent:1171:action:0023",
+      "branchId": "agent:1171:branch:special-10",
+      "name": "强化特殊技：灼热抛接法",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:burnice-special-ms4ncv27"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1171/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1171/details.zh.json",
+          "pointer": "/skill/special/description/5/desc"
+        }
+      ],
+      "description": "拥有[流火]时，换入前场时发动：\n队友触发12次[余烬]后，柏妮思获得一点[流火]，拥有[流火]时，柏妮思下一次换入前场时消耗一点[流火]自动发动该招式，该次入场视作以[快速支援]入场，[普通攻击：炽焰搅拌式]触发的[余烬]命中敌人时增加2次计数，拥有[流火]时不再增加计数，消耗[流火]时清空计数；\n快速突进并越过敌人，向敌人发动一次火焰冲击，造成物理伤害和火属性伤害；\n招式重击命中处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态的目标时，触发一次[异放]：额外结算一次原属性异常480%/240%/600%/40%/60%/24%的伤害；\n[额外能力：星火燎原]的火属性异常积蓄值提升效果对该招式生效；\n招式发动期间拥有无敌效果；\n招式发动后，点按  可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+      "parameterIds": ["1171026"],
+      "sourceExpression": "{Skill:1171026, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.999,
+        "growth": 0.182
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.999,
+        "growth": 0.091
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "potential-variant",
+            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+          },
+          {
+            "code": "mixed-elements",
+            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": "sk-burnice-nk-1171026-main"
+    }
+  ]
+}

@@ -1,0 +1,1351 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1101",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1101:action:0001",
+      "branchId": "agent:1101:branch:assist-4",
+      "name": "快速支援：让我来",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n向前方敌人发动打击，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101501"],
+      "sourceExpression": "{Skill:1101501, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.838,
+        "growth": 0.168
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.838,
+        "growth": 0.084
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.838,
+                  "growth": 0.168
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101501-main"
+    },
+    {
+      "actionId": "action:agent:1101:action:0002",
+      "branchId": "agent:1101:branch:assist-5",
+      "name": "招架支援：护身锤",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101502"],
+      "sourceExpression": "{Skill:1101502, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.59,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1101:action:0003",
+      "branchId": "agent:1101:branch:assist-5",
+      "name": "招架支援：护身锤",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101503"],
+      "sourceExpression": "{Skill:1101503, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.273,
+        "growth": 0.149
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1101:action:0004",
+      "branchId": "agent:1101:branch:assist-5",
+      "name": "招架支援：护身锤",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101504"],
+      "sourceExpression": "{Skill:1101504, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.593,
+        "growth": 0.073
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1101:action:0005",
+      "branchId": "agent:1101:branch:assist-6",
+      "name": "支援突击：锤钟",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进打击，造成火属性伤害，并获得[熔炉升温]效果；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101505"],
+      "sourceExpression": "{Skill:1101505, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.592,
+        "growth": 0.327
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.127,
+        "growth": 0.143
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.592,
+                  "growth": 0.327
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101505-main"
+    },
+    {
+      "actionId": "action:agent:1101:action:0006",
+      "branchId": "agent:1101:branch:basic-2",
+      "name": "普通攻击：砸扁，粉碎",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "parameterIds": ["1101001"],
+      "sourceExpression": "{Skill:1101001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.636,
+        "growth": 0.058
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.318,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.636,
+                  "growth": 0.058
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101001-一段"
+    },
+    {
+      "actionId": "action:agent:1101:action:0007",
+      "branchId": "agent:1101:branch:basic-2",
+      "name": "普通攻击：砸扁，粉碎",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "parameterIds": ["1101002"],
+      "sourceExpression": "{Skill:1101002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.792,
+        "growth": 0.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.655,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.792,
+                  "growth": 0.072
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101002-二段"
+    },
+    {
+      "actionId": "action:agent:1101:action:0008",
+      "branchId": "agent:1101:branch:basic-2",
+      "name": "普通攻击：砸扁，粉碎",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "parameterIds": ["1101003"],
+      "sourceExpression": "{Skill:1101003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.261,
+        "growth": 0.115
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.043,
+        "growth": 0.048
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.261,
+                  "growth": 0.115
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101003-三段"
+    },
+    {
+      "actionId": "action:agent:1101:action:0009",
+      "branchId": "agent:1101:branch:basic-2",
+      "name": "普通攻击：砸扁，粉碎",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "parameterIds": ["1101004"],
+      "sourceExpression": "{Skill:1101004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.174,
+        "growth": 0.289
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.493,
+        "growth": 0.114
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.174,
+                  "growth": 0.289
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101004-四段"
+    },
+    {
+      "actionId": "action:agent:1101:action:0010",
+      "branchId": "agent:1101:branch:basic-2",
+      "name": "普通攻击：砸扁，粉碎",
+      "rowName": "强化普攻一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "parameterIds": ["1101005"],
+      "sourceExpression": "{Skill:1101005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.608,
+        "growth": 0.147
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.614,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0010:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.608,
+                  "growth": 0.147
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101005-强化普攻一段"
+    },
+    {
+      "actionId": "action:agent:1101:action:0011",
+      "branchId": "agent:1101:branch:basic-2",
+      "name": "普通攻击：砸扁，粉碎",
+      "rowName": "强化普攻二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "parameterIds": ["1101006"],
+      "sourceExpression": "{Skill:1101006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.049,
+        "growth": 0.369
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.566,
+        "growth": 0.072
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0011:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.049,
+                  "growth": 0.369
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101006-强化普攻二段"
+    },
+    {
+      "actionId": "action:agent:1101:action:0012",
+      "branchId": "agent:1101:branch:basic-2",
+      "name": "普通攻击：砸扁，粉碎",
+      "rowName": "强化普攻二段伤害倍率（协同）",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/basic/description/1/param/6"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "parameterIds": ["1101007"],
+      "sourceExpression": "{Skill:1101007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 5.013,
+        "growth": 0.456
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.346,
+        "growth": 0.107
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 5.013,
+                  "growth": 0.456
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1101:action:0013",
+      "branchId": "agent:1101:branch:chain-3",
+      "name": "连携技：天崩-地裂",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101301"],
+      "sourceExpression": "{Skill:1101301, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.36,
+        "growth": 0.579
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.17,
+        "growth": 0.099
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0013:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.36,
+                  "growth": 0.579
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101301-main"
+    },
+    {
+      "actionId": "action:agent:1101:action:0014",
+      "branchId": "agent:1101:branch:chain-4",
+      "name": "终结技：锤进地心",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101401"],
+      "sourceExpression": "{Skill:1101401, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 15.488,
+        "growth": 1.408
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 10.049,
+        "growth": 0.457
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0014:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 15.488,
+                  "growth": 1.408
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101401-main"
+    },
+    {
+      "actionId": "action:agent:1101:action:0015",
+      "branchId": "agent:1101:branch:chain-4",
+      "name": "终结技：锤进地心",
+      "rowName": "伤害倍率（协同）",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101402"],
+      "sourceExpression": "{Skill:1101402, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 16.94,
+        "growth": 1.54
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 10.965,
+        "growth": 0.499
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0015:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 16.94,
+                  "growth": 1.54
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1101:action:0016",
+      "branchId": "agent:1101:branch:dodge-4",
+      "name": "冲刺攻击：给我颤抖",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行打击，造成物理伤害。",
+      "parameterIds": ["1101201"],
+      "sourceExpression": "{Skill:1101201, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.561,
+        "growth": 0.051
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.281,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.561,
+                  "growth": 0.051
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101201-main"
+    },
+    {
+      "actionId": "action:agent:1101:action:0017",
+      "branchId": "agent:1101:branch:dodge-5",
+      "name": "闪避反击：别小看我",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n向前方敌人发动打击并引发爆炸，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101202"],
+      "sourceExpression": "{Skill:1101202, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.439,
+        "growth": 0.313
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.888,
+        "growth": 0.132
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.439,
+                  "growth": 0.313
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101202-main"
+    },
+    {
+      "actionId": "action:agent:1101:action:0018",
+      "branchId": "agent:1101:branch:special-3",
+      "name": "特殊技：爆破！铁锤时间",
+      "rowName": "打击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1101101"],
+      "sourceExpression": "{Skill:1101101, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.519,
+        "growth": 0.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.519,
+        "growth": 0.024
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.519,
+                  "growth": 0.048
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101101-打击"
+    },
+    {
+      "actionId": "action:agent:1101:action:0019",
+      "branchId": "agent:1101:branch:special-3",
+      "name": "特殊技：爆破！铁锤时间",
+      "rowName": "引爆伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/special/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1101102"],
+      "sourceExpression": "{Skill:1101102, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.778,
+        "growth": 0.071
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.778,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.778,
+                  "growth": 0.071
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101102-引爆"
+    },
+    {
+      "actionId": "action:agent:1101:action:0020",
+      "branchId": "agent:1101:branch:special-3",
+      "name": "特殊技：爆破！铁锤时间",
+      "rowName": "引爆伤害倍率（协同）",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/special/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1101103"],
+      "sourceExpression": "{Skill:1101103, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.855,
+        "growth": 0.078
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.778,
+        "growth": 0.036
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.855,
+                  "growth": 0.078
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1101:action:0021",
+      "branchId": "agent:1101:branch:special-4",
+      "name": "强化特殊技：沸腾熔炉",
+      "rowName": "打击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101104"],
+      "sourceExpression": "{Skill:1101104, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 1.523,
+        "growth": 0.139
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.523,
+        "growth": 0.07
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0021:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 1.523,
+                  "growth": 0.139
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101104-打击"
+    },
+    {
+      "actionId": "action:agent:1101:action:0022",
+      "branchId": "agent:1101:branch:special-4",
+      "name": "强化特殊技：沸腾熔炉",
+      "rowName": "引爆伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101105"],
+      "sourceExpression": "{Skill:1101105, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.06,
+        "growth": 0.551
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.94,
+        "growth": 0.225
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0022:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.06,
+                  "growth": 0.551
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-koleda-nk-1101105-引爆"
+    },
+    {
+      "actionId": "action:agent:1101:action:0023",
+      "branchId": "agent:1101:branch:special-4",
+      "name": "强化特殊技：沸腾熔炉",
+      "rowName": "引爆伤害倍率（协同）",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1101/details.zh.json",
+        "pointer": "/skill/special/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1101106"],
+      "sourceExpression": "{Skill:1101106, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.666,
+        "growth": 0.606
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.94,
+        "growth": 0.225
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1101:action:0023:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1101:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.666,
+                  "growth": 0.606
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    }
+  ]
+}

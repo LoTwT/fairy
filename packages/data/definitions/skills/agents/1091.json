@@ -1,0 +1,1168 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1091",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1091:action:0001",
+      "branchId": "agent:1091:branch:assist-4",
+      "name": "快速支援：花信风",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动斩击，造成烈霜伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091021"],
+      "sourceExpression": "{Skill:1091021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.045,
+        "growth": 0.095
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.045,
+        "growth": 0.048
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0001:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.045,
+                  "growth": 0.095
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091021-main"
+    },
+    {
+      "actionId": "action:agent:1091:action:0002",
+      "branchId": "agent:1091:branch:assist-5",
+      "name": "招架支援：花筏",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091022"],
+      "sourceExpression": "{Skill:1091022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1091:action:0003",
+      "branchId": "agent:1091:branch:assist-5",
+      "name": "招架支援：花筏",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091023"],
+      "sourceExpression": "{Skill:1091023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1091:action:0004",
+      "branchId": "agent:1091:branch:assist-5",
+      "name": "招架支援：花筏",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091024"],
+      "sourceExpression": "{Skill:1091024, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.283,
+        "growth": 0.059
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1091:action:0005",
+      "branchId": "agent:1091:branch:assist-6",
+      "name": "支援突击：花辞",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进斩击，造成烈霜伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091025"],
+      "sourceExpression": "{Skill:1091025, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.378,
+        "growth": 0.308
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.919,
+        "growth": 0.133
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0005:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.378,
+                  "growth": 0.308
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091025-main"
+    },
+    {
+      "actionId": "action:agent:1091:action:0006",
+      "branchId": "agent:1091:branch:basic-3",
+      "name": "普通攻击：风花",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mw9lq"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，前两段造成物理伤害，后三段造成烈霜伤害；\n第五段[普通攻击]发动期间可以格挡敌人的攻击。",
+      "parameterIds": ["1091001"],
+      "sourceExpression": "{Skill:1091001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.269,
+        "growth": 0.025
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.135,
+        "growth": 0.007
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.269,
+                  "growth": 0.025
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091001-一段"
+    },
+    {
+      "actionId": "action:agent:1091:action:0007",
+      "branchId": "agent:1091:branch:basic-3",
+      "name": "普通攻击：风花",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mw9lq"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，前两段造成物理伤害，后三段造成烈霜伤害；\n第五段[普通攻击]发动期间可以格挡敌人的攻击。",
+      "parameterIds": ["1091002"],
+      "sourceExpression": "{Skill:1091002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.296,
+        "growth": 0.027
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.269,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.296,
+                  "growth": 0.027
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091002-二段"
+    },
+    {
+      "actionId": "action:agent:1091:action:0008",
+      "branchId": "agent:1091:branch:basic-3",
+      "name": "普通攻击：风花",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mw9lq"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，前两段造成物理伤害，后三段造成烈霜伤害；\n第五段[普通攻击]发动期间可以格挡敌人的攻击。",
+      "parameterIds": ["1091003"],
+      "sourceExpression": "{Skill:1091003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.628,
+        "growth": 0.058
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.464,
+        "growth": 0.022
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0008:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.628,
+                  "growth": 0.058
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091003-三段"
+    },
+    {
+      "actionId": "action:agent:1091:action:0009",
+      "branchId": "agent:1091:branch:basic-3",
+      "name": "普通攻击：风花",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mw9lq"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，前两段造成物理伤害，后三段造成烈霜伤害；\n第五段[普通攻击]发动期间可以格挡敌人的攻击。",
+      "parameterIds": ["1091004"],
+      "sourceExpression": "{Skill:1091004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.965,
+        "growth": 0.088
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.821,
+        "growth": 0.038
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0009:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.965,
+                  "growth": 0.088
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091004-四段"
+    },
+    {
+      "actionId": "action:agent:1091:action:0010",
+      "branchId": "agent:1091:branch:basic-3",
+      "name": "普通攻击：风花",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mw9lq"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多五段的斩击，前两段造成物理伤害，后三段造成烈霜伤害；\n第五段[普通攻击]发动期间可以格挡敌人的攻击。",
+      "parameterIds": ["1091005"],
+      "sourceExpression": "{Skill:1091005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.29,
+        "growth": 0.118
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.31,
+        "growth": 0.06
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0010:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.29,
+                  "growth": 0.118
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091005-五段"
+    },
+    {
+      "actionId": "action:agent:1091:action:0011",
+      "branchId": "agent:1091:branch:basic-4",
+      "name": "普通攻击：霜月",
+      "rowName": "一段蓄力斩击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mtpk5"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "拥有2点或以上[落霜]时，长按  发动：\n星见雅收刀进入[霜月架势]并开始蓄力，每段蓄力会消耗2点[落霜]，最多可以进行三段蓄力，松开  或[落霜]耗尽时，星见雅将根据当前蓄力段数，拔刀向前方发动强力斩击，造成大量烈霜伤害，随后退出[霜月架势]；\n[霜月架势]期间拥有无敌效果；\n星见雅最多拥有6点[落霜]，进入战场时，星见雅立刻获得3点[落霜]。",
+      "parameterIds": ["1091027"],
+      "sourceExpression": "{Skill:1091027, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.547,
+        "growth": 0.414
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.44,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0011:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.547,
+                  "growth": 0.414
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091027-一段蓄力斩击"
+    },
+    {
+      "actionId": "action:agent:1091:action:0012",
+      "branchId": "agent:1091:branch:basic-4",
+      "name": "普通攻击：霜月",
+      "rowName": "二段蓄力斩击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mtpk5"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "拥有2点或以上[落霜]时，长按  发动：\n星见雅收刀进入[霜月架势]并开始蓄力，每段蓄力会消耗2点[落霜]，最多可以进行三段蓄力，松开  或[落霜]耗尽时，星见雅将根据当前蓄力段数，拔刀向前方发动强力斩击，造成大量烈霜伤害，随后退出[霜月架势]；\n[霜月架势]期间拥有无敌效果；\n星见雅最多拥有6点[落霜]，进入战场时，星见雅立刻获得3点[落霜]。",
+      "parameterIds": ["1091028"],
+      "sourceExpression": "{Skill:1091028, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 8.581,
+        "growth": 0.781
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.624,
+        "growth": 0.029
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0012:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 8.581,
+                  "growth": 0.781
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091028-二段蓄力斩击"
+    },
+    {
+      "actionId": "action:agent:1091:action:0013",
+      "branchId": "agent:1091:branch:basic-4",
+      "name": "普通攻击：霜月",
+      "rowName": "三段蓄力斩击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": ["zzz-hp:skill:miyabi-basic-ms4mtpk5"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "拥有2点或以上[落霜]时，长按  发动：\n星见雅收刀进入[霜月架势]并开始蓄力，每段蓄力会消耗2点[落霜]，最多可以进行三段蓄力，松开  或[落霜]耗尽时，星见雅将根据当前蓄力段数，拔刀向前方发动强力斩击，造成大量烈霜伤害，随后退出[霜月架势]；\n[霜月架势]期间拥有无敌效果；\n星见雅最多拥有6点[落霜]，进入战场时，星见雅立刻获得3点[落霜]。",
+      "parameterIds": ["1091029"],
+      "sourceExpression": "{Skill:1091029, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 21.411,
+        "growth": 1.947
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.778,
+        "growth": 0.172
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0013:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 21.411,
+                  "growth": 1.947
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091029-三段蓄力斩击"
+    },
+    {
+      "actionId": "action:agent:1091:action:0014",
+      "branchId": "agent:1091:branch:chain-3",
+      "name": "连携技：春临",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方大范围敌人发动强力斩击，造成大量烈霜伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091015", "1091016", "1091017"],
+      "sourceExpression": "{{Skill:1091015, Prop:1001} + {Skill:1091016, Prop:1001} + {Skill:1091017, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.279999999999999,
+        "growth": 0.573
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.89,
+        "growth": 0.087
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0014:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.279999999999999,
+                  "growth": 0.573
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091015-main"
+    },
+    {
+      "actionId": "action:agent:1091:action:0015",
+      "branchId": "agent:1091:branch:chain-4",
+      "name": "终结技：名残雪",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方大范围敌人发动强力斩击，略作延迟后发动终结一击，造成大量烈霜伤害；\n招式发动时，获得3点[落霜]，自身造成的冰属性伤害提升30%，持续12秒；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091018"],
+      "sourceExpression": "{Skill:1091018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 23.88,
+        "growth": 2.171
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.704,
+        "growth": 0.169
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0015:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 23.88,
+                  "growth": 2.171
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091018-main"
+    },
+    {
+      "actionId": "action:agent:1091:action:0016",
+      "branchId": "agent:1091:branch:dodge-4",
+      "name": "冲刺攻击：冬蜂",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行斩击，造成物理伤害；",
+      "parameterIds": ["1091013"],
+      "sourceExpression": "{Skill:1091013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.258,
+        "growth": 0.024
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.129,
+        "growth": 0.006
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.258,
+                  "growth": 0.024
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091013-main"
+    },
+    {
+      "actionId": "action:agent:1091:action:0017",
+      "branchId": "agent:1091:branch:dodge-5",
+      "name": "闪避反击：寒雀",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动斩击，造成烈霜伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091014"],
+      "sourceExpression": "{Skill:1091014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.459,
+        "growth": 0.224
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.145,
+        "growth": 0.098
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0017:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.459,
+                  "growth": 0.224
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091014-main"
+    },
+    {
+      "actionId": "action:agent:1091:action:0018",
+      "branchId": "agent:1091:branch:special-3",
+      "name": "特殊技：深雪",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n快速拔刀向前方进行斩击，造成烈霜伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1091008"],
+      "sourceExpression": "{Skill:1091008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.358,
+        "growth": 0.033
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.358,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0018:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.358,
+                  "growth": 0.033
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091008-main"
+    },
+    {
+      "actionId": "action:agent:1091:action:0019",
+      "branchId": "agent:1091:branch:special-4",
+      "name": "强化特殊技：飞雪",
+      "rowName": "斩击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n快速突进，对路径上的敌人发动强力斩击，造成大量烈霜伤害；\n招式发动时，获得2点[落霜]；\n招式发动期间拥有无敌效果。\n招式发动后，能量足够时，再次点按  发动：\n额外消耗能量，对前方范围内的敌人发动强力追击，造成大量烈霜伤害；\n招式发动时，获得2点[落霜]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091009", "1091010"],
+      "sourceExpression": "{{Skill:1091009, Prop:1001} + {Skill:1091010, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.934,
+        "growth": 0.359
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.2169999999999996,
+        "growth": 0.147
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0019:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.934,
+                  "growth": 0.359
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091009-斩击"
+    },
+    {
+      "actionId": "action:agent:1091:action:0020",
+      "branchId": "agent:1091:branch:special-4",
+      "name": "强化特殊技：飞雪",
+      "rowName": "追击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1091/details.zh.json",
+        "pointer": "/skill/special/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1091/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n快速突进，对路径上的敌人发动强力斩击，造成大量烈霜伤害；\n招式发动时，获得2点[落霜]；\n招式发动期间拥有无敌效果。\n招式发动后，能量足够时，再次点按  发动：\n额外消耗能量，对前方范围内的敌人发动强力追击，造成大量烈霜伤害；\n招式发动时，获得2点[落霜]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1091011", "1091012"],
+      "sourceExpression": "{{Skill:1091011, Prop:1001} + {Skill:1091012, Prop:1001}}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.832,
+        "growth": 0.44
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.050000000000001,
+        "growth": 0.185
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1091:action:0020:total",
+            "damageKind": "regular",
+            "element": "frost",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1091:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.832,
+                  "growth": 0.44
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-miyabi-nk-1091011-追击"
+    }
+  ]
+}

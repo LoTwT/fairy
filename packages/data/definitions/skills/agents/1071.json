@@ -1,0 +1,1398 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1071",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1071:action:0001",
+      "branchId": "agent:1071:branch:assist-4",
+      "name": "快速支援：变道支援",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n对前方敌人发动刺击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071020"],
+      "sourceExpression": "{Skill:1071020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.642,
+        "growth": 0.059
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.642,
+        "growth": 0.03
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0001:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.642,
+                  "growth": 0.059
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071020-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0002",
+      "branchId": "agent:1071:branch:assist-5",
+      "name": "招架支援：守御之盾",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071021"],
+      "sourceExpression": "{Skill:1071021, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1071:action:0003",
+      "branchId": "agent:1071:branch:assist-5",
+      "name": "招架支援：守御之盾",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071022"],
+      "sourceExpression": "{Skill:1071022, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.453,
+        "growth": 0.157
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1071:action:0004",
+      "branchId": "agent:1071:branch:assist-5",
+      "name": "招架支援：守御之盾",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071023"],
+      "sourceExpression": "{Skill:1071023, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.693,
+        "growth": 0.077
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1071:action:0005",
+      "branchId": "agent:1071:branch:assist-6",
+      "name": "支援突击：支援之锋",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": ["zzz-hp:skill:caesar-assist-ms20ovfg"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n丢出手中的盾牌对前方敌人发动强力旋转攻击，随后发动斩击，造成物理伤害；\n招式发动后点按  或  ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071024"],
+      "sourceExpression": "{Skill:1071024, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.072,
+        "growth": 0.371
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.563,
+        "growth": 0.162
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0005:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.072,
+                  "growth": 0.371
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071024-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0006",
+      "branchId": "agent:1071:branch:basic-3",
+      "name": "普通攻击：横行斩打",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的斩击，造成物理伤害。",
+      "parameterIds": ["1071001"],
+      "sourceExpression": "{Skill:1071001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.472,
+        "growth": 0.043
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.213,
+        "growth": 0.01
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0006:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.472,
+                  "growth": 0.043
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071001-一段"
+    },
+    {
+      "actionId": "action:agent:1071:action:0007",
+      "branchId": "agent:1071:branch:basic-3",
+      "name": "普通攻击：横行斩打",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的斩击，造成物理伤害。",
+      "parameterIds": ["1071002"],
+      "sourceExpression": "{Skill:1071002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.409,
+        "growth": 0.038
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.338,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0007:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.409,
+                  "growth": 0.038
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071002-二段"
+    },
+    {
+      "actionId": "action:agent:1071:action:0008",
+      "branchId": "agent:1071:branch:basic-3",
+      "name": "普通攻击：横行斩打",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的斩击，造成物理伤害。",
+      "parameterIds": ["1071003"],
+      "sourceExpression": "{Skill:1071003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.483,
+        "growth": 0.135
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.1,
+        "growth": 0.05
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0008:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.483,
+                  "growth": 0.135
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071003-三段"
+    },
+    {
+      "actionId": "action:agent:1071:action:0009",
+      "branchId": "agent:1071:branch:basic-3",
+      "name": "普通攻击：横行斩打",
+      "rowName": "三段（派生）伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的斩击，造成物理伤害。",
+      "parameterIds": ["1071008"],
+      "sourceExpression": "{Skill:1071008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.184,
+        "growth": 0.108
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.736,
+        "growth": 0.034
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0009:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.184,
+                  "growth": 0.108
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071008-三段-派生"
+    },
+    {
+      "actionId": "action:agent:1071:action:0010",
+      "branchId": "agent:1071:branch:basic-3",
+      "name": "普通攻击：横行斩打",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的斩击，造成物理伤害。",
+      "parameterIds": ["1071004"],
+      "sourceExpression": "{Skill:1071004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.788,
+        "growth": 0.072
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.675,
+        "growth": 0.031
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0010:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.788,
+                  "growth": 0.072
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071004-四段"
+    },
+    {
+      "actionId": "action:agent:1071:action:0011",
+      "branchId": "agent:1071:branch:basic-3",
+      "name": "普通攻击：横行斩打",
+      "rowName": "五段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/5"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的斩击，造成物理伤害。",
+      "parameterIds": ["1071005"],
+      "sourceExpression": "{Skill:1071005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.986,
+        "growth": 0.181
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.375,
+        "growth": 0.063
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0011:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.986,
+                  "growth": 0.181
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071005-五段"
+    },
+    {
+      "actionId": "action:agent:1071:action:0012",
+      "branchId": "agent:1071:branch:basic-3",
+      "name": "普通攻击：横行斩打",
+      "rowName": "六段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/2/param/6"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多六段的斩击，造成物理伤害。",
+      "parameterIds": ["1071006"],
+      "sourceExpression": "{Skill:1071006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.999,
+        "growth": 0.364
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.626,
+        "growth": 0.12
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0012:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.999,
+                  "growth": 0.364
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071006-六段"
+    },
+    {
+      "actionId": "action:agent:1071:action:0013",
+      "branchId": "agent:1071:branch:basic-4",
+      "name": "普通攻击：此路不通！",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "[支援点数]足够时，长按  发动：\n消耗1点[支援点数]，丢出手中的盾牌对四周进行攻击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071007"],
+      "sourceExpression": "{Skill:1071007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.263,
+        "growth": 0.115
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.932,
+        "growth": 0.043
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.263,
+                  "growth": 0.115
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071007-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0014",
+      "branchId": "agent:1071:branch:chain-3",
+      "name": "连携技：路怒震打",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方范围敌人发动强力下落打击，造成大量物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071018"],
+      "sourceExpression": "{Skill:1071018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 6.388,
+        "growth": 0.581
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.999,
+        "growth": 0.091
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 6.388,
+                  "growth": 0.581
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071018-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0015",
+      "branchId": "agent:1071:branch:chain-4",
+      "name": "终结技：暴君猛击",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n丢出手中的盾牌对前方敌人发动强力旋转攻击，随后发动下落打击，造成大量物理伤害；\n命中持有护盾的敌人时，招式造成的失衡值提升{CAL:40+AvatarSkillLevel(3)*5,1,2}%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071019"],
+      "sourceExpression": "{Skill:1071019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 20.123,
+        "growth": 1.83
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.787,
+        "growth": 0.127
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0015:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 20.123,
+                  "growth": 1.83
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071019-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0016",
+      "branchId": "agent:1071:branch:dodge-4",
+      "name": "冲刺攻击：猪突猛进",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n使用盾牌向前方进行打击，造成物理伤害。\n招式发动期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按  或  ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]。",
+      "parameterIds": ["1071016"],
+      "sourceExpression": "{Skill:1071016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.623,
+        "growth": 0.057
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.312,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0016:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.623,
+                  "growth": 0.057
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071016-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0017",
+      "branchId": "agent:1071:branch:dodge-5",
+      "name": "闪避反击：以牙还牙",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n对前方敌人发动刺击，造成物理伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071017"],
+      "sourceExpression": "{Skill:1071017, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.935,
+        "growth": 0.176
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.742,
+        "growth": 0.08
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0017:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.935,
+                  "growth": 0.176
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071017-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0018",
+      "branchId": "agent:1071:branch:special-7",
+      "name": "特殊技：震荡盾击",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n使用盾牌向前方进行打击，造成物理伤害；\n若在招式发动初期的较短时间内受到敌方攻击，将触发[精准格挡]，抵挡此次攻击伤害，并自动衔接发动[特殊技：喧嚣直刺]；\n招式发动后，凯撒将进入格挡架势，期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按  或  ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n触发[防御反击]时，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071009"],
+      "sourceExpression": "{Skill:1071009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.533,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.24,
+        "growth": 0.011
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0018:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.533,
+                  "growth": 0.049
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071009-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0019",
+      "branchId": "agent:1071:branch:special-7",
+      "name": "特殊技：震荡盾击",
+      "rowName": "[精准格挡]失衡倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/6/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n使用盾牌向前方进行打击，造成物理伤害；\n若在招式发动初期的较短时间内受到敌方攻击，将触发[精准格挡]，抵挡此次攻击伤害，并自动衔接发动[特殊技：喧嚣直刺]；\n招式发动后，凯撒将进入格挡架势，期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按  或  ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n触发[防御反击]时，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071014"],
+      "sourceExpression": "{Skill:1071014, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.77,
+        "growth": 0.035
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1071:action:0020",
+      "branchId": "agent:1071:branch:special-8",
+      "name": "特殊技：喧嚣直刺",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "[特殊技：震荡盾击]发动后，点按  发动：\n向前方进行刺击，造成物理伤害；\n未触发[精准格挡]和[防御反击]时，招式发动期间抗打断等级提升；\n触发[精准格挡]或[防御反击]时，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071010"],
+      "sourceExpression": "{Skill:1071010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.588,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.265,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0020:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.588,
+                  "growth": 0.054
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071010-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0021",
+      "branchId": "agent:1071:branch:special-9",
+      "name": "强化特殊技：招架反击",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n使用盾牌向前方进行打击，随后发动强力刺击，造成大量物理伤害；\n若在招式发动初期受到敌方攻击，或通过盾牌打击触发[破招]时，将触发[精准格挡]，抵挡此次攻击伤害，并挥盾反击；触发[精准格挡]后，点按  ，可以发动[强化特殊技：超强力盾击]，且无需消耗能量；\n招式发动后，凯撒将进入格挡架势，期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按  或  ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071011"],
+      "sourceExpression": "{Skill:1071011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.872,
+        "growth": 0.352
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.526,
+        "growth": 0.115
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0021:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.872,
+                  "growth": 0.352
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071011-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0022",
+      "branchId": "agent:1071:branch:special-9",
+      "name": "强化特殊技：招架反击",
+      "rowName": "[精准格挡]失衡倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/8/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n使用盾牌向前方进行打击，随后发动强力刺击，造成大量物理伤害；\n若在招式发动初期受到敌方攻击，或通过盾牌打击触发[破招]时，将触发[精准格挡]，抵挡此次攻击伤害，并挥盾反击；触发[精准格挡]后，点按  ，可以发动[强化特殊技：超强力盾击]，且无需消耗能量；\n招式发动后，凯撒将进入格挡架势，期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按  或  ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071015"],
+      "sourceExpression": "{Skill:1071015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.54,
+        "growth": 0.07
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1071:action:0023",
+      "branchId": "agent:1071:branch:special-9",
+      "name": "强化特殊技：招架反击",
+      "rowName": "[精准格挡]反击伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/8/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n使用盾牌向前方进行打击，随后发动强力刺击，造成大量物理伤害；\n若在招式发动初期受到敌方攻击，或通过盾牌打击触发[破招]时，将触发[精准格挡]，抵挡此次攻击伤害，并挥盾反击；触发[精准格挡]后，点按  ，可以发动[强化特殊技：超强力盾击]，且无需消耗能量；\n招式发动后，凯撒将进入格挡架势，期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按  或  ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071012"],
+      "sourceExpression": "{Skill:1071012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.872,
+        "growth": 0.352
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.526,
+        "growth": 0.115
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0023:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0023:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.872,
+                  "growth": 0.352
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071012-精准格挡-反击"
+    },
+    {
+      "actionId": "action:agent:1071:action:0024",
+      "branchId": "agent:1071:branch:special-10",
+      "name": "强化特殊技：超强力盾击",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:caesar-special-ms20ojw9"
+      ],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "[强化特殊技：招架反击]发动后，能量足够时，点按  发动：\n使用盾牌向前方进行打击，造成大量物理伤害；\n若在招式发动初期受到敌方攻击，或通过盾牌打击触发[破招]时，将触发[精准格挡]，抵挡此次攻击伤害，并返还发动招式所消耗的能量；\n以[精准格挡]或[防御反击]的方式发动时，无法再次触发[精准格挡]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071013"],
+      "sourceExpression": "{Skill:1071013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.257,
+        "growth": 0.387
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.884,
+        "growth": 0.132
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1071:action:0024:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1071:action:0024:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.257,
+                  "growth": 0.387
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-caesar-nk-1071013-main"
+    },
+    {
+      "actionId": "action:agent:1071:action:0025",
+      "branchId": "agent:1071:branch:special-10",
+      "name": "强化特殊技：超强力盾击",
+      "rowName": "[精准格挡]失衡倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/skill/special/description/9/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1071/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "[强化特殊技：招架反击]发动后，能量足够时，点按  发动：\n使用盾牌向前方进行打击，造成大量物理伤害；\n若在招式发动初期受到敌方攻击，或通过盾牌打击触发[破招]时，将触发[精准格挡]，抵挡此次攻击伤害，并返还发动招式所消耗的能量；\n以[精准格挡]或[防御反击]的方式发动时，无法再次触发[精准格挡]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1071015"],
+      "sourceExpression": "{Skill:1071015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 1.54,
+        "growth": 0.07
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    }
+  ]
+}
