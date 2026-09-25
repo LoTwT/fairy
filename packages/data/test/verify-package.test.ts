@@ -62,6 +62,7 @@ function expectSameBytes(actual: Buffer, expected: Buffer, label: string) {
 }
 
 describe("packed package", () => {
+  // 冷检出、离线安装与双包重建在 CI 上实测约 145 秒，单独保留 5 分钟预算。
   it("builds from a fresh static checkout, preserves exact bytes, installs offline and consumes by package name", async () => {
     const temporaryDirectory = mkdtempSync(
       join(tmpdir(), "randomplay data 中文 #-"),
@@ -1354,5 +1355,5 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         jsonFiles: jsonFiles.length,
       }),
     )
-  }, 120_000)
+  }, 300_000)
 })
