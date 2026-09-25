@@ -25,6 +25,7 @@
 
 ### 当前实施
 
+- [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
 - [PR A 实施与交接](plans/level-60-panel-attributes-pr-a.md)：属性实现的评审处理、验收记录与后续范围。
 - [ZZZ-HP 静态数据来源盘点](plans/zzz-hp-static-inventory.md)：固定来源的身份映射、未匹配项、读取语义及正式覆盖报告入口。
 - [ZZZ-HP 静态数据接入 prompt](plans/zzz-hp-static-data-prompt.md)：批量转换、消费适配、验收、review 与 PR 交接。
