@@ -338,3 +338,17 @@ node packages/data/test/fixtures/generate-static-e2e-reference.mjs /path/to/ZZZ-
 目标防御 / 本次元素抗性 / 是否失衡 / 当前状态基础乘数：
 参考来源与版本 / 非暴击或暴击 / 逐次显示伤害或期望值：
 ```
+
+## PR CI 干净检出复验
+
+- Node 24 和 Node 24.11.0 的首次 PR CI 均暴露了新测试对已有 `dist` 的隐式依赖：
+  `loadStaticCalculationData` 的生成目录使用公开 JSON 子路径，而包导出将其映射到 `dist`。
+  `test:prepared` 在 data 包构建前执行，干净检出因此出现 `ERR_MODULE_NOT_FOUND`；本机已有制品掩盖了该问题。
+- 已将 Vitest 的 unit 项目中 `@randomplay/data/definitions/` 路径映射到本次
+  `prepare:consumer` 生成的 `.generated/definitions/`。保留真实公开加载函数、计算流程及冻结参考，
+  不改变生产导出或 packaging 验收的解析行为。
+- 在仓库外、没有 `dist` 的提交副本中运行准备脚本与 Vitest：修复前复现 13 项失败，
+  修复后 unit 层 21 个文件、646 项测试全部通过，运行前后均确认 `dist` 不存在。
+- 同形态入口检查覆盖两个从 `src/index.ts` 导入的测试文件：新增 `static-e2e.test.ts` 已修复；
+  `consumer-api.test.ts` 使用显式 catalog mock，不受此问题影响。打包测试在独立安装目录消费正式制品，
+  保持既有验收边界。
