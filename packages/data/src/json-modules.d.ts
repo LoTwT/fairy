@@ -13,3 +13,8 @@ declare module "@randomplay/data/definitions/skills/*.json" {
   const value: unknown
   export default value
 }
+
+declare module "@randomplay/data/definitions/effects/*.json" {
+  const value: unknown
+  export default value
+}

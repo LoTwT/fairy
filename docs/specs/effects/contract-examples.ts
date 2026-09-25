@@ -33,7 +33,7 @@ import type {
   TransitionInput,
   Unit,
   WorldObservation,
-} from "../../../packages/effects/src/types.ts"
+} from "../../../packages/core/src/effects/types.ts"
 
 const always = { kind: "constant", value: true } as const
 const literal = <U extends Unit>(unit: U, value: number) =>

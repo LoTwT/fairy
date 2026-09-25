@@ -70,7 +70,7 @@ export type DisorderSourceAttribute =
   | "ether"
   | "ice"
   | "physical"
-  | "auric_ink"
+  | "auric-ink"
   | "frost"
 
 export interface CalculateStandardDisorderDamageMultiplierParams {
@@ -136,7 +136,7 @@ export function calculateStandardDisorderDamageMultiplier(
       damageMultiplier =
         4.5 + Math.floor(remainingAnomalyDurationInSeconds) * 0.075
       break
-    case "auric_ink":
+    case "auric-ink":
       damageMultiplier =
         4.5 + Math.floor(remainingAnomalyDurationInSeconds / 0.5) * 0.625
       break

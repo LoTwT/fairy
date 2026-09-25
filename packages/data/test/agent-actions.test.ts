@@ -235,6 +235,10 @@ describe("agent action semantics", () => {
       expect(result.ok).toBe(true)
       if (!result.ok || result.calculation.kind !== "damage")
         throw new Error("fixture")
+      expect(result.resolutionContext).toEqual({
+        agentEntityId: "1011",
+        mindscapeRank: rank,
+      })
       expect(result.sourceDamageMultiplier).toBeCloseTo(expected!, 12)
       expect(result.calculation.segments[0]!.element).toBe("physical")
     }

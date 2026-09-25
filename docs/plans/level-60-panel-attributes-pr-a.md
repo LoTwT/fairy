@@ -35,7 +35,7 @@
 - `pnpm check` 通过：data 993 项、core 1,423 项、effects 545 项常规测试，以及三个包各自的打包消费验收、类型、规范示例和格式检查。
 - `pnpm --filter @randomplay/data verify:browser` 通过：真实 Chromium 的 Vite 开发/生产模式，根入口零 JSON、单体按需请求、独立返回值和直接 JSON 子路径。
 - 浏览器构建图验收最初漏列新增属性分块，补齐预期清单后重跑通过；实现没有因此改变加载行为。
-- lint 保留未修改的 `packages/effects/test/advance-effects.test.ts` 中一条函数作用域建议，无新增告警。
+- lint 保留未修改的 `packages/core/test/effects/advance-effects.test.ts` 中一条函数作用域建议，无新增告警。
 
 ## 后续范围
 

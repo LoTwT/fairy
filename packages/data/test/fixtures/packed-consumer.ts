@@ -23,7 +23,7 @@ export function listFiles(directory: string, root = directory): string[] {
 export function installPackedConsumer(
   temporaryDirectory: string,
   sourceDirectory = packageDirectory,
-  includeEffects = false,
+  includeCore = false,
 ) {
   execFileSync(
     "corepack",
@@ -66,11 +66,11 @@ export function installPackedConsumer(
       2,
     ),
   )
-  if (includeEffects) {
+  if (includeCore) {
     const tarballs: Record<string, string> = {}
     const engineDirectory = join(temporaryDirectory, "engines")
     mkdirSync(engineDirectory)
-    for (const name of ["core", "effects"]) {
+    for (const name of ["core"]) {
       const directory = join(workspaceDirectory, "packages", name)
       execFileSync(
         "corepack",
@@ -87,7 +87,7 @@ export function installPackedConsumer(
     }
     const manifestPath = join(consumerDirectory, "package.json")
     const manifest = JSON.parse(readFileSync(manifestPath, "utf8"))
-    manifest.dependencies["@randomplay/effects"] = `file:${tarballs.effects}`
+    manifest.dependencies["@randomplay/core"] = `file:${tarballs.core}`
     writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
     writeFileSync(
       join(consumerDirectory, "pnpm-workspace.yaml"),
@@ -102,7 +102,7 @@ export function installPackedConsumer(
         "install",
         "--offline",
         mode,
-        ...(includeEffects ? [] : ["--ignore-workspace"]),
+        ...(includeCore ? [] : ["--ignore-workspace"]),
       ],
       { cwd: consumerDirectory, stdio: "pipe" },
     )

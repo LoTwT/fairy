@@ -328,7 +328,7 @@ describe("anomalyDamageFormula", () => {
 describe("calculateStandardDisorderDamageMultiplier", () => {
   it("exposes its public parameter and function types", () => {
     expectTypeOf<DisorderSourceAttribute>().toEqualTypeOf<
-      "fire" | "electric" | "ether" | "ice" | "physical" | "auric_ink" | "frost"
+      "fire" | "electric" | "ether" | "ice" | "physical" | "auric-ink" | "frost"
     >()
     expectTypeOf<CalculateStandardDisorderDamageMultiplierParams>().toEqualTypeOf<{
       readonly originalAnomalyAttribute: DisorderSourceAttribute
@@ -345,7 +345,7 @@ describe("calculateStandardDisorderDamageMultiplier", () => {
     ["ether", 10, 17],
     ["ice", 10, 5.25],
     ["physical", 10, 5.25],
-    ["auric_ink", 10, 17],
+    ["auric-ink", 10, 17],
     ["frost", 20, 21],
   ] as const)(
     "calculates the %s standard multiplier at a representative duration",
@@ -370,8 +370,8 @@ describe("calculateStandardDisorderDamageMultiplier", () => {
     ["ice", 1, 4.575],
     ["physical", 1 - Number.EPSILON, 4.5],
     ["physical", 1, 4.575],
-    ["auric_ink", 0.5 - Number.EPSILON, 4.5],
-    ["auric_ink", 0.5, 5.125],
+    ["auric-ink", 0.5 - Number.EPSILON, 4.5],
+    ["auric-ink", 0.5, 5.125],
     ["frost", 1 - Number.EPSILON, 6],
     ["frost", 1, 6.75],
   ] as const)(
@@ -392,7 +392,7 @@ describe("calculateStandardDisorderDamageMultiplier", () => {
     ["ether", 4.5],
     ["ice", 4.5],
     ["physical", 4.5],
-    ["auric_ink", 4.5],
+    ["auric-ink", 4.5],
     ["frost", 6],
   ] as const)(
     "returns the %s constant part when no duration remains",
@@ -669,7 +669,7 @@ describe("calculateStandardVortexDamageMultiplier", () => {
     },
   )
 
-  it.each(["", "wind", "auric_ink", "honed_edge", "unknown"])(
+  it.each(["", "wind", "auric-ink", "honed_edge", "unknown"])(
     "rejects the unsupported profile %s",
     (vortexDamageMultiplierProfile) => {
       expect(() =>

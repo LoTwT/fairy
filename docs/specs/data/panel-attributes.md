@@ -2,7 +2,7 @@
 
 `@randomplay/data` 提供构建局外面板所需的标准化静态属性，当前覆盖 Nanoka 3.1 的全部
 58 名角色、95 个音擎，以及通用 S 级满强化驱动盘主副词条。正式类型以
-[`src/attributes/types.ts`](../../../packages/data/src/attributes/types.ts) 为准。
+[shared 属性契约](../../../packages/shared/src/attributes.ts)为准；data 的 [`src/attributes/types.ts`](../../../packages/data/src/attributes/types.ts) 重导出共同类型并维护来源清单。
 本接口不组装完整面板、不计算伤害、不识别截图，不提供其他等级或品质。
 
 ## 读取契约

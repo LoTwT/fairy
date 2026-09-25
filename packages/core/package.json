@@ -35,6 +35,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@randomplay/shared": "workspace:*",
     "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "^4.1.10",
     "tsdown": "^0.22.4",

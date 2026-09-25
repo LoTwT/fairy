@@ -13,7 +13,7 @@
 1. [本次接入规范](../specs/data/zzz-hp-static-effects.md)：实现目标、固定输入、身份、制品、目录消费接口和验收。
 2. [来源盘点](zzz-hp-static-inventory.md)：已复核的范围、读取数量、身份映射和空记录。数字是来源记录数，不是最终规则数或转换成功数。
 3. [静态快照与培养配置](../specs/effects/static-snapshot.md)：来源优先级、培养档位、静态边界和已知差异。
-4. [effects 执行契约](../specs/effects/execution.md)与 [types.ts](../../packages/effects/src/types.ts)：正式类型、单位、校验、求值和 core 落点。
+4. [effects 执行契约](../specs/effects/execution.md)与 [types.ts](../../packages/core/src/effects/types.ts)：正式类型、单位、校验、求值和 core 落点。
 5. [数据消费契约](../specs/data/consumption.md)与[管理状态维护](../specs/data/integration.md#数据管理状态的同步维护)：发布、按需加载、持锁读取和维护边界。
 
 本轮已确认方向，不重新讨论是否采用 ZZZ-HP、是否只做少数角色或是否需要动态模拟。已有公式对应的适配缺口应补齐；新公式和后续版本按条目明确延期。不要修改 `docs/HISTORY.md`。
@@ -41,7 +41,7 @@
 ### 2. 正式制品和目录消费
 
 - 生成并提交 `packages/data/definitions/effects/static.json`、`static-catalog.json`、`static-coverage.json`，按规范登记显式 JSON 子路径。
-- 在 `packages/effects/src/types.ts` 维护目录及输入的正式类型，实现并导出 `calculateStaticDamageFromCatalog`。现有 `calculateStaticDamage`、starter 和 automatic 消费继续可用。
+- 在 `packages/core/src/effects/types.ts` 维护目录及输入的正式类型，实现并导出 `calculateStaticDamageFromCatalog`。现有 `calculateStaticDamage`、starter 和 automatic 消费继续可用。
 - 目录入口先验证目录/规则集一致性、角色来源、装备、选择、培养条件与必要输入，再展开选中规则及修改依赖，复用现有求值和 core 计算。
 - 按 spec 补齐异化 from-effects / settled 模式、耀变转化的唯一归属、历史属性来源与当前命中者分离、标准紊乱/乱流伤害项的时间准备输入。不要只包装现有 StaticDamageInput；它缺少已结算异化等必要表达。历史结果直接复用，同一转化与时间增量只应用一次。
 - 被选中的未知或未支持条目必须给出可定位错误；不要因未选择的独立条目缺档而阻止合法计算。合法但不匹配本次命中的条件属于零贡献。

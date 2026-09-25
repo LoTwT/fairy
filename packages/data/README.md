@@ -1,5 +1,7 @@
 # @randomplay/data
 
+`loadStaticCalculationData({ agents, wEngines })` 按需获取带版本身份的同版计算资料。调用方使用 `resolveAgentAction` 后，将结果传给 core；两个公开包保持相同版本并同批发布。详见[包规范](../../docs/specs/packages.md)和[静态组装](../../docs/specs/core/static-calculation.md)。
+
 `loadAgentActions` 按角色读取技能动作目录；`resolveAgentSkillLevel` 和 `resolveAgentAction` 解析显式等级、影画及动作选择。倍率、逐次命中限制和覆盖详情见[技能动作规范](../../docs/specs/data/skill-actions.md)。
 
 Fairy 的游戏来源资料与数据整理包。

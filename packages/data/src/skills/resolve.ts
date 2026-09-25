@@ -1,3 +1,4 @@
+import type { MindscapeRank } from "@randomplay/shared"
 import type {
   AgentActions,
   ResolveAgentActionInput,
@@ -164,6 +165,10 @@ export function resolveAgentAction(
         : { kind: "daze-only" as const }
   return {
     ok: true,
+    resolutionContext: {
+      agentEntityId: input.agent.entityId,
+      mindscapeRank: input.mindscapeRank as MindscapeRank,
+    },
     actionId: action.actionId,
     skillCategory: action.skillCategory,
     skillTargetIds: [...action.skillTargetIds],

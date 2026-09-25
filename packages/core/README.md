@@ -1,6 +1,9 @@
 # @randomplay/core
 
-Fairy 的确定性计算核心包。
+Fairy 的确定性计算核心包。包含数值公式、效果引擎和静态面板/动作伤害组装。
+
+`calculateStaticActionDamage` 接收调用方通过 data 获取的同版资料与已解析动作，支持配装与已结算局外面板。
+原 effects 包的校验、状态、求值与静态目录入口均从本包导出。详见[静态输入规范](../../docs/specs/core/static-calculation.md)和[包边界](../../docs/specs/packages.md)。
 
 当前包提供乘区与公式定义基建，以及以下内置乘区：
 

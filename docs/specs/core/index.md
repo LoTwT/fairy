@@ -1,5 +1,7 @@
 # Core 计算规范
 
+core 包包含公式、[效果求值](../effects/index.md)和[静态输入组装](static-calculation.md)三层。下文维护公式层契约；包职责及联动发布见[包规范](../packages.md)。
+
 下文 Nanoka 资源路径及 JSON Pointer 遵循[本地观察引用约定](../nanoka/source.md#本地观察引用)，仅用于定位既有观察，不是仓库文件链接或可复现快照。
 
 ## 术语
