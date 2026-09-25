@@ -16,7 +16,7 @@ jobs:
     name: Publish core and data
     if: github.repository == 'LoTwT/fairy'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     environment: npm-publish
     permissions:
       contents: read
@@ -150,9 +150,10 @@ jobs:
             const result = spawnSync('npm', ['publish', candidate.file, '--registry', registry, '--access', 'public', '--tag', 'latest'], { stdio: 'inherit' })
             assert.equal(result.status, 0, `${candidate.name}: publish did not complete cleanly; inspect registry state before any retry`)
           }
+          const visibilityDeadline = Date.now() + 20 * 60 * 1000
           for (const candidate of candidates) {
             let matched = false
-            for (let attempt = 0; attempt < 12; attempt++) {
+            while (true) {
               const current = await metadata(candidate.name)
               const published = current.versions[version]
               if (published) {
@@ -161,7 +162,9 @@ jobs:
                 matched = true
                 break
               }
-              await setTimeout(5000)
+              const remainingTime = visibilityDeadline - Date.now()
+              if (remainingTime <= 0) break
+              await setTimeout(Math.min(5000, remainingTime))
             }
             assert(matched, `${candidate.name}: registry visibility is pending; do not repeat publish blindly`)
           }
