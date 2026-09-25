@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs"
 import { availableParallelism } from "node:os"
+import { fileURLToPath } from "node:url"
 import { defineConfig } from "vitest/config"
 
 /**
@@ -54,6 +55,17 @@ export default defineConfig({
     projects: [
       {
         extends: true,
+        resolve: {
+          // Source-level loaders use the prepared snapshot before a package build exists.
+          alias: [
+            {
+              find: /^@randomplay\/data\/definitions\//u,
+              replacement: fileURLToPath(
+                new URL("./.generated/definitions/", import.meta.url),
+              ),
+            },
+          ],
+        },
         test: {
           name: "unit",
           include: ["test/**/*.test.ts"],

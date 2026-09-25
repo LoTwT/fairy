@@ -1,0 +1,1803 @@
+{
+  "provenance": {
+    "commit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    "fairyBaseline": "bad304914ecb2a50436c82421392a3b80bf61b8d",
+    "gameVersion": "3.1",
+    "method": "Pinned upstream pure functions + independently reproduced direct-damage chain; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
+    "resources": [
+      {
+        "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+        "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c"
+      },
+      {
+        "path": "zzz-hp/src/utils/calculatorUi.ts",
+        "sha256": "e61bf67fab73920889338997d77d12190b45d29cfd5cb49703802a0953fb1cfe"
+      },
+      {
+        "path": "zzz-hp/src/utils/affixDriveDiscConfig.ts",
+        "sha256": "909f4dfb8b1169943832571d0d06f378932705ad0ea91e14074dc8cbf4fca764"
+      },
+      {
+        "path": "zzz-hp/src/utils/affixPanelCalc.ts",
+        "sha256": "ba97ae9c7bf8020085829080dc749168c99102a9f215d8c22ce6d13cdaa3c0d2"
+      },
+      {
+        "path": "zzz-hp/src/utils/multFactorPercent.ts",
+        "sha256": "eee1f52bfa9c128d0e278c5890717c6aa1e897695237a9c6573751489ad311cb"
+      },
+      {
+        "path": "zzz-hp/src/utils/panelBuffCalc.ts",
+        "sha256": "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09"
+      },
+      {
+        "path": "zzz-hp/src/utils/skillTalentLevels.ts",
+        "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d"
+      },
+      {
+        "path": "zzz-hp/src/utils/calcNumberFormat.ts",
+        "sha256": "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a"
+      },
+      {
+        "path": "zzz-hp/src/utils/buffEffect.ts",
+        "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95"
+      },
+      {
+        "path": "zzz-hp/src/utils/enemyResistance.ts",
+        "sha256": "5b0e943c77cf991cd66e38b22349b869173b486a476a88f397b62075112ce43c"
+      },
+      {
+        "path": "zzz-hp/src/utils/damageCalc.ts",
+        "sha256": "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71"
+      }
+    ],
+    "extraction": [
+      {
+        "file": "calculatorUi.ts",
+        "name": "BUFF_STAT_FIELDS",
+        "sha256": "71e86a9ad09e1d897c45cea591937bae48f47dd6f5b178287eafe2c9ddd5f5f5"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "BUFF_MULT_FACTOR_KEYS",
+        "sha256": "587537ec77f4b982bbbf3170529dfc2ac7d10c8b691761183088ac7a8570a399"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "FACTOR_STAT_KEYS",
+        "sha256": "66de01eed2ccb084e249c5bcab500d98a2ea038a6ea0e73479b820068b97ec53"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "readNumber",
+        "sha256": "2a1d98961e8593a9d071c31166590e4554adf862fa2093f16b49df55b37c2b8f"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "createEmptyBuffStatModifiers",
+        "sha256": "fa2c4d62f03496be8152f5253916c1cad74ea50afd81431deeb14569d1a60bb1"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "normalizeBuffStatModifiers",
+        "sha256": "5db52044d3848f464f95871538fdb43344036602c30c8b5e4384a22d1cbda8a4"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "normalizeTwoPieceMods",
+        "sha256": "71d0ab515b9bfcd7746b625ad17b8f498021ca64ae1963fbdd2f710acc60565c"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "mergeBuffStatModifiers",
+        "sha256": "998a2040a281e178b808aa5ed08c0a1fa14c5fe8f29024f5b3a99d5b97faec12"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "createEmptyAgentBasePanel",
+        "sha256": "7a9b04cdc3f4d0179c9c68d1e9f230099778a249fb23d0b27ef424189fb9b829"
+      },
+      {
+        "file": "calculatorUi.ts",
+        "name": "createEmptyWengineAdvancedStats",
+        "sha256": "b2d21b2f0ce8cf88f8e028ae4e508e831a62219a3c5214a4712a9d2d272c823a"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "AFFIX_DRIVE_DISC_SLOT_1_HP",
+        "sha256": "aeade563b10662f4b45c0ce405105dc45b1441d54f3cd1b8aa2fc6c20fe8a66e"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "AFFIX_DRIVE_DISC_SLOT_2_ATK",
+        "sha256": "50231592c4dfe44fb1bd4c04a57ae03a41fcd01b7ecded12592d7d5f80b07a77"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "AFFIX_DRIVE_DISC_SLOT_3_DEF",
+        "sha256": "aa7ba7c40b06df872c068eaad0d795dfd3717dbfe6425326425dbcad33a54f45"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "DRIVE_DISC_SLOT_4_OPTIONS",
+        "sha256": "5e8c67401c77c1fe881f8872b38873404299a1ebbf7f9476813fcd5957c58bb3"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "DRIVE_DISC_SLOT_5_OPTIONS",
+        "sha256": "fbfa67f27bec5f10ed4df526b15ed42165a636c405392b2169cc82683acfaf88"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "DRIVE_DISC_SLOT_6_OPTIONS",
+        "sha256": "0f5e95de8a99aaae66887b1534cb6693e087f2d0705acd19fb5adeeda7fe82d9"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "createEmptyAffixDriveDiscMainStatContribution",
+        "sha256": "46ce3c30ae155412cf01c7311f1f17533f746eaae3d8268d0cd5e02dc6dc6fa3"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "findSlotOption",
+        "sha256": "bb4b3c4eebd90acd4ee738f4bb682a9a119b3d03a46f6f16e7dc275766ecc09a"
+      },
+      {
+        "file": "affixDriveDiscConfig.ts",
+        "name": "collectAffixDriveDiscMainStatContribution",
+        "sha256": "c22585761ee0bb264328ad93fc80d4008a5b40cc24f6b129ac1cba9249673595"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "AFFIX_VALUE_PER_COUNT",
+        "sha256": "55c8b17ff2d85cca41dc3a009ddcecc4a000de22f29ac997264ad73a45f91137"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "affixStatTotal",
+        "sha256": "10f216d17a33d942754346dfc78d9a6c05ae9ae50cc8d37894285347508d3cdc"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "roundPanelValue",
+        "sha256": "37a2b3e031c7829e8b5afc0c928494e3b0bf4f30b21825a7e6a00f57355be18f"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "readTwoPieceExternalPercents",
+        "sha256": "f9e716ed165ad3db4b6f0306e89baabc984761eaee18345b8f56b59a08088885"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "collectAffixTwoPieceMods",
+        "sha256": "b43f4b71bb185d54a0c405c323fb527daf55c563865d41ab99dd43c512b8bb55"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "sumExternalPercents",
+        "sha256": "5d873c4619d2e47f766ba561a166bd609736695959cf1afef752f2f99eb177f8"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "buildAffixExternalFixedParts",
+        "sha256": "04e9b1931d6a450325cbe82092581f8181716daab1747bda6e87895e3b690b2f"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "applyAffixCountsToFixedParts",
+        "sha256": "5947c6f6df826974712b6d2076df92d3f5b7f3167db4ff33a24e0bcce09e01c3"
+      },
+      {
+        "file": "affixPanelCalc.ts",
+        "name": "computeExternalPanelFromAffixes",
+        "sha256": "087cd99b52ceba5780949621fa270bc304da4a02fff79f508549f8babcbfdca6"
+      },
+      {
+        "file": "multFactorPercent.ts",
+        "name": "DEFAULT_MULT_FACTOR_PERCENT",
+        "sha256": "fb9169713b4cda6abb616252bfc6e808601fdcbb2a92ad0788642b7a8f293b1e"
+      },
+      {
+        "file": "multFactorPercent.ts",
+        "name": "normalizePanelMultFactorPercent",
+        "sha256": "3426d84f2c9fe12c11e592b28e8537597788ba659b39fc87838b745f17cd60b4"
+      },
+      {
+        "file": "multFactorPercent.ts",
+        "name": "normalizeBuffMultFactorDelta",
+        "sha256": "47c36bbd5d57ad5fe930588861354df15745e43e5f0b652c6d1a3157eef988e0"
+      },
+      {
+        "file": "multFactorPercent.ts",
+        "name": "combineMultFactorPercent",
+        "sha256": "f8547d7b492e59436fa653a24edebde26265473bf9a856d94aa115d766b85f07"
+      },
+      {
+        "file": "panelBuffCalc.ts",
+        "name": "applyBuffModsToPanel",
+        "sha256": "8c6cce69151093b709949952fcdb562a6bc990fc81845dc15ac65a437e53e6bf"
+      },
+      {
+        "file": "panelBuffCalc.ts",
+        "name": "computePiercePower",
+        "sha256": "0f40046be3c8de7817e4171671e448f39b35b4b993f8bbdeaa73d2d899ad88e4"
+      },
+      {
+        "file": "skillTalentLevels.ts",
+        "name": "SKILL_CONVERT_FROM_TO_TALENT_KEY",
+        "sha256": "9d611d3bcc9a85314fe1320f03b264bd50b17c8f3991dfa329ef5acc9e66ac7d"
+      },
+      {
+        "file": "skillTalentLevels.ts",
+        "name": "isSkillConvertFromKey",
+        "sha256": "e82bf8041056425989f168b1dd8b94369a0a3dcf10249b3c05eabe0bf4e5f0b1"
+      },
+      {
+        "file": "calcNumberFormat.ts",
+        "name": "CALC_NUMBER_PRECISION",
+        "sha256": "2ba4f52f40e32daedc83ca4ce5fcdb5c1e6bad237b3efe555882920370673f48"
+      },
+      {
+        "file": "calcNumberFormat.ts",
+        "name": "roundCalc",
+        "sha256": "6a77ee11b9d4e014bf24fa059ec9ac2891634716d994b3dafc19f73f7e7ed85a"
+      },
+      {
+        "file": "buffEffect.ts",
+        "name": "resolveEffectBaseValue",
+        "sha256": "f399b7e998bda664f52965ed651523112f9791369d56bc224c34592808db6362"
+      },
+      {
+        "file": "buffEffect.ts",
+        "name": "resolveConvertValue",
+        "sha256": "4fb87807ff92141a927e31e5a51163c4049a4e429f4886374c7cebe2ef05e66c"
+      },
+      {
+        "file": "enemyResistance.ts",
+        "name": "ENEMY_RESISTANCE_ELEMENTS",
+        "sha256": "b0e10d318c65df2ce7e70f890f8be58a260bedab8b279e4a33ccef4cfc89f9a2"
+      },
+      {
+        "file": "enemyResistance.ts",
+        "name": "RESISTANCE_VALUE_MAP",
+        "sha256": "b0d1c0709cca4d3e8f63b7b803ac61fe7711e23a3768eb4902874579446220af"
+      },
+      {
+        "file": "enemyResistance.ts",
+        "name": "DEFAULT_ENEMY_STAGGER_MULTIPLIER",
+        "sha256": "aa7645f4f2e30e5a627b67b44f678420de0d11bf05795561eb207871bb090539"
+      },
+      {
+        "file": "enemyResistance.ts",
+        "name": "createDefaultElementResistance",
+        "sha256": "13a26194fe51fddfaf63dcbfe3e868aabaa2cf3bd744a3e6a911dc334633ac9c"
+      },
+      {
+        "file": "enemyResistance.ts",
+        "name": "normalizeDamageEnemyInput",
+        "sha256": "0b7e3e7b37ba12701df8a1ccc315623b4e2f06ed3703ee24c8e7b000178d064d"
+      },
+      {
+        "file": "enemyResistance.ts",
+        "name": "isEnemyResistanceElement",
+        "sha256": "cb370bd8e299592b1945eaa0a488d2332dada31857375430781f77a93d92f7a7"
+      },
+      {
+        "file": "enemyResistance.ts",
+        "name": "resolveEnemyResistanceForElement",
+        "sha256": "8cd2b8af9456dff70162d5185bd92fbda280746c47e7e137ad1adf1bf1f05c60"
+      },
+      {
+        "file": "damageCalc.ts",
+        "name": "clamp",
+        "sha256": "e846fc7efbab30a69d036917abaee7d4b466890758d4f88c83ae17265e60176a"
+      },
+      {
+        "file": "damageCalc.ts",
+        "name": "computeLevelZone",
+        "sha256": "ca35b1a69c5ecd8c5dfc055b016ca441b7139dbac0327f786104f67ffdd5030b"
+      },
+      {
+        "file": "damageCalc.ts",
+        "name": "computeVulnerableZone",
+        "sha256": "492ae19523deebe256ae4381fe536711ab57c3e1c35b55cd52cd031ab85e4253"
+      },
+      {
+        "file": "damageCalc.ts",
+        "name": "resolveBaseDamageParts",
+        "sha256": "58c9e06072b17f084fcc6cdbc60deea4eba6ba981b1e20dd50baa7fa91df5d54"
+      },
+      {
+        "file": "damageCalc.ts",
+        "name": "computeGeneralAndAnomalyBase",
+        "sha256": "1f8b749c523c2413cbfd89a83aeed38c16b79910967c1b3c7b00d753b44248ed"
+      }
+    ],
+    "nanokaSources": [
+      {
+        "path": "agents/1031/data.json",
+        "sha256": "e82afad26c60e5d751d78f489442938785164e9ca473b236f51283238a0cb685"
+      },
+      {
+        "path": "w-engines/13103/data.json",
+        "sha256": "fdcd122b23441b4ecf28b520e5830ec3e58b61cc1fa4cf2397a15eaa5d396be3"
+      },
+      {
+        "path": "w-engines/13103/details.zh.json",
+        "sha256": "bf2b958f4e77151cb7d84641ca65a0caed5b4eabfd376b23f6180838e341a156"
+      },
+      {
+        "path": "agents/1311/data.json",
+        "sha256": "01cbb20d46513a0703c324e61e4f7c507f7d227d13c912fb858e9488b804f3d8"
+      },
+      {
+        "path": "w-engines/14131/data.json",
+        "sha256": "74b0fa2de9577d49f38dccbbb88d5d2f33ba2760f1385b178f48a3ce51fcb184"
+      },
+      {
+        "path": "w-engines/14131/details.zh.json",
+        "sha256": "8c45ed1a7a96a6419872f2375acf2efa2fd9c4f9c51160fb99ee1f8263bfba21"
+      },
+      {
+        "path": "agents/1121/data.json",
+        "sha256": "9f0d7059f1698d2adc10fb45ee9b88730cd8c03236a1ef2dc43fa4d45a43aedf"
+      },
+      {
+        "path": "w-engines/13112/data.json",
+        "sha256": "02b75fdf95964b9b6bdd85281415c23b98dd3778fcb27b363b76ef6b49582043"
+      },
+      {
+        "path": "w-engines/13112/details.zh.json",
+        "sha256": "86a2ce694134ea780dcfe2181938f1bc91dbe7af70a653cbc78fc994875c3201"
+      },
+      {
+        "path": "agents/1121/details.zh.json",
+        "sha256": "0c7ea966eadc95083e1b188339f09f42167a2ee6dd01ca0b0b3b08cf181bcff4"
+      },
+      {
+        "path": "agents/1371/data.json",
+        "sha256": "0040454b1646460c0387915b5ab1f7444e73560535643995cca16b78029f4724"
+      },
+      {
+        "path": "w-engines/14137/data.json",
+        "sha256": "b0c05586d8de701a8635c502b3ab15ee751623d9b4caf18c237169e352104238"
+      },
+      {
+        "path": "w-engines/14137/details.zh.json",
+        "sha256": "34536f66858958cb71eb3d061a37d2d50aa74acb8d44911383e1fe8f161af8d4"
+      },
+      {
+        "path": "agents/1031/details.zh.json",
+        "sha256": "d70c52714a0b072061f97b860ea34f712b9ea2099b6d3deb2f7ddae0449a2f25"
+      },
+      {
+        "path": "agents/1371/details.zh.json",
+        "sha256": "ed25b2714dc6c3a4d94160963ff1d34f223e01ad6d6d7b5e412ce7a1ada2b933"
+      }
+    ]
+  },
+  "builds": {
+    "nicole": {
+      "panel": {
+        "stats": {
+          "health": 10681.8433,
+          "attack": 2767.361835,
+          "defense": 806.6159,
+          "impact": 88,
+          "anomalyProficiency": 93,
+          "anomalyMastery": 90,
+          "energyRegen": 2.34,
+          "criticalRate": 0.562,
+          "criticalDamage": 1.508,
+          "penetrationRatio": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "physical": 0.3
+        }
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 3,
+        "hpPercent": 0,
+        "atkFlat": 5,
+        "atkPercent": 15,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 2,
+        "critRate": 18,
+        "critDmg": 11,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 10681,
+        "atk": 2766.05,
+        "def": 806,
+        "impact": 0,
+        "mastery": 93,
+        "anomalyControl": 90,
+        "energyRegen": 234,
+        "critRate": 56.2,
+        "critDmg": 150.8,
+        "penRate": 0,
+        "dmgBonus": 30,
+        "pen": 18
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 10681.84,
+        "atk": 2767.36,
+        "def": 806.62,
+        "impact": 0,
+        "mastery": 93,
+        "anomalyControl": 90,
+        "energyRegen": 2.34,
+        "critRate": 56.2,
+        "critDmg": 150.8,
+        "penRate": 0,
+        "dmgBonus": 30,
+        "pen": 18
+      }
+    },
+    "astra": {
+      "panel": {
+        "stats": {
+          "health": 15199.910422,
+          "attack": 4580.160215,
+          "defense": 784.5916,
+          "impact": 83,
+          "anomalyProficiency": 92,
+          "anomalyMastery": 93,
+          "energyRegen": 1.56,
+          "criticalRate": 0.19399999999999998,
+          "criticalDamage": 0.7879999999999999,
+          "penetrationRatio": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 17,
+        "atkFlat": 10,
+        "atkPercent": 15,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 6,
+        "critDmg": 6,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 15199.59,
+        "atk": 4575.8,
+        "def": 784,
+        "impact": 0,
+        "mastery": 92,
+        "anomalyControl": 92,
+        "energyRegen": 156,
+        "critRate": 19.4,
+        "critDmg": 78.8,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 15199.91,
+        "atk": 4580.16,
+        "def": 784.59,
+        "impact": 0,
+        "mastery": 92,
+        "anomalyControl": 93,
+        "energyRegen": 1.56,
+        "critRate": 19.4,
+        "critDmg": 78.8,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
+    "ben": {
+      "panel": {
+        "stats": {
+          "health": 12321.509472,
+          "attack": 3554.4823800000004,
+          "defense": 2356.1053,
+          "impact": 95,
+          "anomalyProficiency": 90,
+          "anomalyMastery": 86,
+          "energyRegen": 1.3199999999999998,
+          "criticalRate": 0.48200000000000004,
+          "criticalDamage": 1.0759999999999998,
+          "penetrationRatio": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 1225.1747560000001,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 6,
+        "atkFlat": 0,
+        "atkPercent": 18,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 18,
+        "critDmg": 12,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 12320.86,
+        "atk": 3359.84,
+        "def": 2066.4,
+        "impact": 0,
+        "mastery": 90,
+        "anomalyControl": 86,
+        "energyRegen": 156,
+        "critRate": 48.2,
+        "critDmg": 107.6,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 12321.51,
+        "atk": 3554.4872,
+        "def": 2356.11,
+        "impact": 0,
+        "mastery": 90,
+        "anomalyControl": 86,
+        "energyRegen": 1.32,
+        "critRate": 48.2,
+        "critDmg": 107.6,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
+    "yixuan": {
+      "panel": {
+        "stats": {
+          "health": 21907.88283,
+          "attack": 2513.8617279999994,
+          "defense": 625.1145,
+          "impact": 93,
+          "anomalyProficiency": 90,
+          "anomalyMastery": 92,
+          "energyRegen": 0,
+          "criticalRate": 0.562,
+          "criticalDamage": 0.98,
+          "penetrationRatio": 0,
+          "sheerForce": 2944.9468013999995
+        },
+        "penetrationValue": 54,
+        "damageBonuses": {
+          "ether": 0.3,
+          "auric-ink": 0.3
+        }
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 4,
+        "hpPercent": 20,
+        "atkFlat": 0,
+        "atkPercent": 12,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 6,
+        "critRate": 12,
+        "critDmg": 0,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 21905.9,
+        "atk": 2512.4,
+        "def": 625,
+        "impact": 0,
+        "mastery": 90,
+        "anomalyControl": 92,
+        "energyRegen": 200,
+        "critRate": 56.2,
+        "critDmg": 98,
+        "penRate": 0,
+        "dmgBonus": 30,
+        "pen": 54
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 21907.88,
+        "atk": 2513.86,
+        "def": 625.11,
+        "impact": 0,
+        "mastery": 90,
+        "anomalyControl": 92,
+        "energyRegen": 0,
+        "critRate": 56.2,
+        "critDmg": 98,
+        "penRate": 0,
+        "dmgBonus": 30,
+        "pen": 54
+      }
+    },
+    "astraM2": {
+      "panel": {
+        "stats": {
+          "health": 15199.910422,
+          "attack": 4580.160215,
+          "defense": 784.5916,
+          "impact": 83,
+          "anomalyProficiency": 92,
+          "anomalyMastery": 93,
+          "energyRegen": 1.56,
+          "criticalRate": 0.19399999999999998,
+          "criticalDamage": 0.7879999999999999,
+          "penetrationRatio": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 17,
+        "atkFlat": 10,
+        "atkPercent": 15,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 6,
+        "critDmg": 6,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 15199.59,
+        "atk": 4575.8,
+        "def": 784,
+        "impact": 0,
+        "mastery": 92,
+        "anomalyControl": 92,
+        "energyRegen": 156,
+        "critRate": 19.4,
+        "critDmg": 78.8,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 15199.91,
+        "atk": 4580.16,
+        "def": 784.59,
+        "impact": 0,
+        "mastery": 92,
+        "anomalyControl": 93,
+        "energyRegen": 1.56,
+        "critRate": 19.4,
+        "critDmg": 78.8,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
+    "benF": {
+      "panel": {
+        "stats": {
+          "health": 12321.509472,
+          "attack": 4296.191864,
+          "defense": 2356.1053,
+          "impact": 95,
+          "anomalyProficiency": 90,
+          "anomalyMastery": 86,
+          "energyRegen": 1.56,
+          "criticalRate": 0.48200000000000004,
+          "criticalDamage": 1.0759999999999998,
+          "penetrationRatio": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 1884.8842400000003,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 6,
+        "atkFlat": 0,
+        "atkPercent": 18,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 18,
+        "critDmg": 12,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 12320.86,
+        "atk": 3359.84,
+        "def": 2066.4,
+        "impact": 0,
+        "mastery": 90,
+        "anomalyControl": 86,
+        "energyRegen": 156,
+        "critRate": 48.2,
+        "critDmg": 107.6,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 12321.51,
+        "atk": 4296.198,
+        "def": 2356.11,
+        "impact": 0,
+        "mastery": 90,
+        "anomalyControl": 86,
+        "energyRegen": 1.56,
+        "critRate": 48.2,
+        "critDmg": 107.6,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    }
+  },
+  "cases": {
+    "nicole-unbuffed": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 15,
+          "source": {
+            "path": "agents/1031/details.zh.json",
+            "pointer": "/skill/basic/description/3/param/0",
+            "expression": "{Skill:1031001, Prop:1001} + {{Skill:1031003, Prop:1001}/3}*3",
+            "parameters": {
+              "1031001": {
+                "damagePercentage": 3890,
+                "damagePercentageGrowth": 360
+              },
+              "1031003": {
+                "damagePercentage": 4940,
+                "damagePercentageGrowth": 450
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-nicole-nk-1031001-一段",
+            "element": "以太",
+            "multiplier": 0.893
+          },
+          "multipliers": [
+            0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
+          ],
+          "element": "physical",
+          "individual": true
+        },
+        "conversionBase": null,
+        "contributions": [],
+        "finalStats": {
+          "attack": 2767.361835,
+          "health": 10681.8433,
+          "criticalRate": 0.562,
+          "criticalDamage": 1.508
+        },
+        "factors": {
+          "damageBonus": 1.3,
+          "critical": 2.508,
+          "expectedCritical": 1.847496,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "stunDamage": 1,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 1503.1045239214698,
+            "critical": 3769.7861459950464,
+            "expected": 2776.9795955268196
+          },
+          {
+            "nonCritical": 630.6418383306204,
+            "critical": 1581.6497305331961,
+            "expected": 1165.108273748468
+          },
+          {
+            "nonCritical": 630.6418383306204,
+            "critical": 1581.6497305331961,
+            "expected": 1165.108273748468
+          },
+          {
+            "nonCritical": 630.6418383306204,
+            "critical": 1581.6497305331961,
+            "expected": 1165.108273748468
+          }
+        ],
+        "totals": {
+          "nonCritical": 3395.030038913331,
+          "critical": 8514.735337594635,
+          "expected": 6272.304416772224,
+          "displayedNonCritical": 3397,
+          "displayedCritical": 8516
+        },
+        "upstreamStyleIntegerExpected": 6272
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 3395.030038913331,
+        "critical": 8514.735337594635,
+        "expected": 6272.304416772224,
+        "displayedNonCritical": 3397,
+        "displayedCritical": 8516
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 3395.027787715081,
+        "critical": 8514.729691589422,
+        "expected": 6272.300257692461,
+        "displayedNonCritical": 3397,
+        "displayedCritical": 8516
+      },
+      "upstreamStyleIntegerExpected": 6272
+    },
+    "nicole-self": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 15,
+          "source": {
+            "path": "agents/1031/details.zh.json",
+            "pointer": "/skill/basic/description/3/param/0",
+            "expression": "{Skill:1031001, Prop:1001} + {{Skill:1031003, Prop:1001}/3}*3",
+            "parameters": {
+              "1031001": {
+                "damagePercentage": 3890,
+                "damagePercentageGrowth": 360
+              },
+              "1031003": {
+                "damagePercentage": 4940,
+                "damagePercentageGrowth": 450
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-nicole-nk-1031001-一段",
+            "element": "以太",
+            "multiplier": 0.893
+          },
+          "multipliers": [
+            0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
+          ],
+          "element": "physical",
+          "individual": true
+        },
+        "conversionBase": null,
+        "contributions": [
+          {
+            "optionId": "agents:nicole:mindscape:0:blk-legacy:legacy-team-reduceDefense",
+            "holderId": "entity:nicole",
+            "pointer": "/agents/14/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "reduceDefense",
+            "sourceValue": 40
+          },
+          {
+            "optionId": "drive-discs:hormone:setPieces:4:blk-legacy:legacy-self-inCombatAtkPercent",
+            "holderId": "entity:nicole",
+            "pointer": "/driveDiscs/19/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "inCombatAtkPercent",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
+            "holderId": "entity:nicole",
+            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          }
+        ],
+        "finalStats": {
+          "attack": 3459.20229375,
+          "health": 10681.8433,
+          "criticalRate": 0.562,
+          "criticalDamage": 1.508
+        },
+        "factors": {
+          "damageBonus": 1.5,
+          "critical": 2.508,
+          "expectedCritical": 1.847496,
+          "defense": 0.5976107612085888,
+          "resistance": 1,
+          "stunDamage": 1,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 2769.09010310489,
+            "critical": 6944.877978587065,
+            "expected": 5115.882889125873
+          },
+          {
+            "nonCritical": 1161.798161959648,
+            "critical": 2913.789790194797,
+            "expected": 2146.417457027802
+          },
+          {
+            "nonCritical": 1161.798161959648,
+            "critical": 2913.789790194797,
+            "expected": 2146.417457027802
+          },
+          {
+            "nonCritical": 1161.798161959648,
+            "critical": 2913.789790194797,
+            "expected": 2146.417457027802
+          }
+        ],
+        "totals": {
+          "nonCritical": 6254.484588983834,
+          "critical": 15686.247349171459,
+          "expected": 11555.135260209277,
+          "displayedNonCritical": 6256,
+          "displayedCritical": 15687
+        },
+        "upstreamStyleIntegerExpected": 11555
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 6254.484588983834,
+        "critical": 15686.247349171459,
+        "expected": 11555.135260209277,
+        "displayedNonCritical": 6256,
+        "displayedCritical": 15687
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 6254.480441720158,
+        "critical": 15686.236947834153,
+        "expected": 11555.127598156223,
+        "displayedNonCritical": 6256,
+        "displayedCritical": 15687
+      },
+      "upstreamStyleIntegerExpected": 11555
+    },
+    "nicole-team-one": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 15,
+          "source": {
+            "path": "agents/1031/details.zh.json",
+            "pointer": "/skill/basic/description/3/param/0",
+            "expression": "{Skill:1031001, Prop:1001} + {{Skill:1031003, Prop:1001}/3}*3",
+            "parameters": {
+              "1031001": {
+                "damagePercentage": 3890,
+                "damagePercentageGrowth": 360
+              },
+              "1031003": {
+                "damagePercentage": 4940,
+                "damagePercentageGrowth": 450
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-nicole-nk-1031001-一段",
+            "element": "以太",
+            "multiplier": 0.893
+          },
+          "multipliers": [
+            0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
+          ],
+          "element": "physical",
+          "individual": true
+        },
+        "conversionBase": 4580.160215,
+        "contributions": [
+          {
+            "optionId": "agents:nicole:mindscape:0:blk-legacy:legacy-team-reduceDefense",
+            "holderId": "entity:nicole",
+            "pointer": "/agents/14/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "reduceDefense",
+            "sourceValue": 40
+          },
+          {
+            "optionId": "drive-discs:hormone:setPieces:4:blk-legacy:legacy-self-inCombatAtkPercent",
+            "holderId": "entity:nicole",
+            "pointer": "/driveDiscs/19/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "inCombatAtkPercent",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
+            "holderId": "entity:nicole",
+            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "atk",
+            "sourceValue": 1200
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "critDmg",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 13
+          }
+        ],
+        "finalStats": {
+          "attack": 4659.2022937500005,
+          "health": 10681.8433,
+          "criticalRate": 0.562,
+          "criticalDamage": 1.758
+        },
+        "factors": {
+          "damageBonus": 1.83,
+          "critical": 2.758,
+          "expectedCritical": 1.987996,
+          "defense": 0.5976107612085888,
+          "resistance": 1,
+          "stunDamage": 1,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 4550.221361619324,
+            "critical": 12549.510515346095,
+            "expected": 9045.82186601377
+          },
+          {
+            "nonCritical": 1909.0887683688393,
+            "critical": 5265.266823161259,
+            "expected": 3795.2608351621793
+          },
+          {
+            "nonCritical": 1909.0887683688393,
+            "critical": 5265.266823161259,
+            "expected": 3795.2608351621793
+          },
+          {
+            "nonCritical": 1909.0887683688393,
+            "critical": 5265.266823161259,
+            "expected": 3795.2608351621793
+          }
+        ],
+        "totals": {
+          "nonCritical": 10277.487666725843,
+          "critical": 28345.31098482987,
+          "expected": 20431.604371500307,
+          "displayedNonCritical": 10281,
+          "displayedCritical": 28348
+        },
+        "upstreamStyleIntegerExpected": 20432
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 10277.487666725843,
+        "critical": 28345.31098482987,
+        "expected": 20431.604371500307,
+        "displayedNonCritical": 10281,
+        "displayedCritical": 28348
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 10277.482607064154,
+        "critical": 28345.29703028294,
+        "expected": 20431.594312913112,
+        "displayedNonCritical": 10281,
+        "displayedCritical": 28348
+      },
+      "upstreamStyleIntegerExpected": 20432
+    },
+    "nicole-team-two": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 15,
+          "source": {
+            "path": "agents/1031/details.zh.json",
+            "pointer": "/skill/basic/description/3/param/0",
+            "expression": "{Skill:1031001, Prop:1001} + {{Skill:1031003, Prop:1001}/3}*3",
+            "parameters": {
+              "1031001": {
+                "damagePercentage": 3890,
+                "damagePercentageGrowth": 360
+              },
+              "1031003": {
+                "damagePercentage": 4940,
+                "damagePercentageGrowth": 450
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-nicole-nk-1031001-一段",
+            "element": "以太",
+            "multiplier": 0.893
+          },
+          "multipliers": [
+            0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
+          ],
+          "element": "physical",
+          "individual": true
+        },
+        "conversionBase": 4580.160215,
+        "contributions": [
+          {
+            "optionId": "agents:nicole:mindscape:0:blk-legacy:legacy-team-reduceDefense",
+            "holderId": "entity:nicole",
+            "pointer": "/agents/14/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "reduceDefense",
+            "sourceValue": 40
+          },
+          {
+            "optionId": "drive-discs:hormone:setPieces:4:blk-legacy:legacy-self-inCombatAtkPercent",
+            "holderId": "entity:nicole",
+            "pointer": "/driveDiscs/19/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "inCombatAtkPercent",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
+            "holderId": "entity:nicole",
+            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "atk",
+            "sourceValue": 1200
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "critDmg",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 26
+          }
+        ],
+        "finalStats": {
+          "attack": 4659.2022937500005,
+          "health": 10681.8433,
+          "criticalRate": 0.562,
+          "criticalDamage": 1.758
+        },
+        "factors": {
+          "damageBonus": 1.96,
+          "critical": 2.758,
+          "expectedCritical": 1.987996,
+          "defense": 0.5976107612085888,
+          "resistance": 1,
+          "stunDamage": 1,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 4873.461130477526,
+            "critical": 13441.005797857017,
+            "expected": 9688.421233544801
+          },
+          {
+            "nonCritical": 2044.7070961764612,
+            "critical": 5639.30217125468,
+            "expected": 4064.86952837042
+          },
+          {
+            "nonCritical": 2044.7070961764612,
+            "critical": 5639.30217125468,
+            "expected": 4064.86952837042
+          },
+          {
+            "nonCritical": 2044.7070961764612,
+            "critical": 5639.30217125468,
+            "expected": 4064.86952837042
+          }
+        ],
+        "totals": {
+          "nonCritical": 11007.58241900691,
+          "critical": 30358.912311621054,
+          "expected": 21883.02981865606,
+          "displayedNonCritical": 11009,
+          "displayedCritical": 30362
+        },
+        "upstreamStyleIntegerExpected": 21883
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 11007.58241900691,
+        "critical": 30358.912311621054,
+        "expected": 21883.02981865606,
+        "displayedNonCritical": 11009,
+        "displayedCritical": 30362
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 11007.576999915706,
+        "critical": 30358.897365767516,
+        "expected": 21883.019045524423,
+        "displayedNonCritical": 11009,
+        "displayedCritical": 30361
+      },
+      "upstreamStyleIntegerExpected": 21883
+    },
+    "nicole-astra-m2": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 15,
+          "source": {
+            "path": "agents/1031/details.zh.json",
+            "pointer": "/skill/basic/description/3/param/0",
+            "expression": "{Skill:1031001, Prop:1001} + {{Skill:1031003, Prop:1001}/3}*3",
+            "parameters": {
+              "1031001": {
+                "damagePercentage": 3890,
+                "damagePercentageGrowth": 360
+              },
+              "1031003": {
+                "damagePercentage": 4940,
+                "damagePercentageGrowth": 450
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-nicole-nk-1031001-一段",
+            "element": "以太",
+            "multiplier": 0.893
+          },
+          "multipliers": [
+            0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
+          ],
+          "element": "physical",
+          "individual": true
+        },
+        "conversionBase": 4580.160215,
+        "contributions": [
+          {
+            "optionId": "agents:nicole:mindscape:0:blk-legacy:legacy-team-reduceDefense",
+            "holderId": "entity:nicole",
+            "pointer": "/agents/14/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "reduceDefense",
+            "sourceValue": 40
+          },
+          {
+            "optionId": "drive-discs:hormone:setPieces:4:blk-legacy:legacy-self-inCombatAtkPercent",
+            "holderId": "entity:nicole",
+            "pointer": "/driveDiscs/19/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "inCombatAtkPercent",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
+            "holderId": "entity:nicole",
+            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "atk",
+            "sourceValue": 1600
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "critDmg",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 26
+          }
+        ],
+        "finalStats": {
+          "attack": 5059.2022937500005,
+          "health": 10681.8433,
+          "criticalRate": 0.562,
+          "criticalDamage": 1.758
+        },
+        "factors": {
+          "damageBonus": 1.96,
+          "critical": 2.758,
+          "expectedCritical": 1.987996,
+          "defense": 0.5976107612085888,
+          "resistance": 1,
+          "stunDamage": 1,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 5291.8555957287945,
+            "critical": 14594.937733020015,
+            "expected": 10520.18775688646
+          },
+          {
+            "nonCritical": 2220.248484359524,
+            "critical": 6123.4453198635665,
+            "expected": 4413.8451059127965
+          },
+          {
+            "nonCritical": 2220.248484359524,
+            "critical": 6123.4453198635665,
+            "expected": 4413.8451059127965
+          },
+          {
+            "nonCritical": 2220.248484359524,
+            "critical": 6123.4453198635665,
+            "expected": 4413.8451059127965
+          }
+        ],
+        "totals": {
+          "nonCritical": 11952.601048807366,
+          "critical": 32965.27369261072,
+          "expected": 23761.723074624853,
+          "displayedNonCritical": 11955,
+          "displayedCritical": 32967
+        },
+        "upstreamStyleIntegerExpected": 23762
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 11000.362240420574,
+        "critical": 30338.999059079946,
+        "expected": 21868.676132507142,
+        "displayedNonCritical": 11003,
+        "displayedCritical": 30341
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 11000.356821329371,
+        "critical": 30338.984113226405,
+        "expected": 21868.665359375504,
+        "displayedNonCritical": 11003,
+        "displayedCritical": 30341
+      },
+      "upstreamStyleIntegerExpected": 21869,
+      "upstreamAttackConversion": 1196.9439
+    },
+    "ben-core-b": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 10,
+          "source": {
+            "path": "agents/1121/details.zh.json",
+            "pointer": "/skill/assist/description/3/param/0",
+            "expression": "{Skill:1121016, Prop:1001}",
+            "parameters": {
+              "1121016": {
+                "damagePercentage": 9670,
+                "damagePercentageGrowth": 880
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-benbigger-nk-1121016-main",
+            "element": "火",
+            "multiplier": 1.759
+          },
+          "multipliers": [1.759],
+          "element": "fire",
+          "individual": false
+        },
+        "conversionBase": null,
+        "contributions": [],
+        "finalStats": {
+          "attack": 3554.4823800000004,
+          "health": 12321.509472,
+          "criticalRate": 0.48200000000000004,
+          "criticalDamage": 1.0759999999999998
+        },
+        "factors": {
+          "damageBonus": 1,
+          "critical": 2.0759999999999996,
+          "expectedCritical": 1.518632,
+          "defense": 0.46296296296296297,
+          "resistance": 0.8,
+          "stunDamage": 1.5,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 3473.519170233334,
+            "critical": 7211.025797404401,
+            "expected": 5274.997364529789
+          }
+        ],
+        "totals": {
+          "nonCritical": 3473.519170233334,
+          "critical": 7211.025797404401,
+          "expected": 5274.997364529789,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 5275
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 3473.519170233334,
+        "critical": 7211.025797404401,
+        "expected": 5274.997364529789,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 3473.5238804444443,
+        "critical": 7211.035575802665,
+        "expected": 5275.004517607107,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 5275
+    },
+    "ben-core-f": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1121/details.zh.json",
+            "pointer": "/skill/assist/description/3/param/0",
+            "expression": "{Skill:1121016, Prop:1001}",
+            "parameters": {
+              "1121016": {
+                "damagePercentage": 9670,
+                "damagePercentageGrowth": 880
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-benbigger-nk-1121016-main",
+            "element": "火",
+            "multiplier": 1.935
+          },
+          "multipliers": [1.935],
+          "element": "fire",
+          "individual": false
+        },
+        "conversionBase": null,
+        "contributions": [
+          {
+            "optionId": "drive-discs:hormone:setPieces:4:blk-legacy:legacy-self-inCombatAtkPercent",
+            "holderId": "entity:ben",
+            "pointer": "/driveDiscs/19/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "inCombatAtkPercent",
+            "sourceValue": 25
+          }
+        ],
+        "finalStats": {
+          "attack": 5370.23983,
+          "health": 12321.509472,
+          "criticalRate": 0.48200000000000004,
+          "criticalDamage": 1.0759999999999998
+        },
+        "factors": {
+          "damageBonus": 1,
+          "critical": 2.0759999999999996,
+          "expectedCritical": 1.518632,
+          "defense": 0.46296296296296297,
+          "resistance": 0.8,
+          "stunDamage": 1.5,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 5773.007817250001,
+            "critical": 11984.764228610999,
+            "expected": 8767.074407526003
+          }
+        ],
+        "totals": {
+          "nonCritical": 5773.007817250001,
+          "critical": 11984.764228610999,
+          "expected": 8767.074407526003,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 8767
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 5773.007817250001,
+        "critical": 11984.764228610999,
+        "expected": 8767.074407526003,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 5773.016062500001,
+        "critical": 11984.78134575,
+        "expected": 8767.086929026502,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 8767
+    },
+    "yixuan-self": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1371/details.zh.json",
+            "pointer": "/skill/special/description/6/param/0",
+            "expression": "{Skill:1371022, Prop:1001}",
+            "parameters": {
+              "1371022": {
+                "damagePercentage": 67180,
+                "damagePercentageGrowth": 6110
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-yixuan-nk-1371022-蓄力期间总",
+            "element": "以太",
+            "multiplier": 13.439
+          },
+          "multipliers": [13.439],
+          "element": "auric-ink",
+          "individual": false
+        },
+        "conversionBase": null,
+        "contributions": [
+          {
+            "optionId": "agents:yixuan:mindscape:0:blk-legacy:legacy-self-skillDmgBonus",
+            "holderId": "entity:yixuan",
+            "pointer": "/agents/2/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "skillDmgBonus",
+            "sourceValue": 60
+          },
+          {
+            "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
+            "holderId": "entity:yixuan",
+            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/0",
+            "stat": "critRate",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r8tz7-juw8rc",
+            "holderId": "entity:yixuan",
+            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/1",
+            "stat": "dmgBonus",
+            "sourceValue": 16
+          },
+          {
+            "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r9equ-l7imtb",
+            "holderId": "entity:yixuan",
+            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2",
+            "stat": "pierceDmgBonus",
+            "sourceValue": 10
+          },
+          {
+            "optionId": "drive-discs:SuitYunkuiTales:setPieces:4:blk-legacy:legacy-self-critRate",
+            "holderId": "entity:yixuan",
+            "pointer": "/driveDiscs/0/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "critRate",
+            "sourceValue": 12
+          },
+          {
+            "optionId": "drive-discs:SuitYunkuiTales:setPieces:4:blk-legacy:legacy-self-pierceDmgBonus",
+            "holderId": "entity:yixuan",
+            "pointer": "/driveDiscs/0/fourPieceBuffs/effectBlocks/0/effects/1",
+            "stat": "pierceDmgBonus",
+            "sourceValue": 10
+          }
+        ],
+        "finalStats": {
+          "attack": 2513.8617279999994,
+          "health": 21907.88283,
+          "criticalRate": 0.882,
+          "criticalDamage": 0.98,
+          "sheerForce": 2944.9468013999995
+        },
+        "factors": {
+          "damageBonus": 2.06,
+          "critical": 1.98,
+          "expectedCritical": 1.86436,
+          "defense": 1,
+          "resistance": 1.2,
+          "stunDamage": 1.5,
+          "damageTaken": 1,
+          "sheerDamageBonus": 1.2
+        },
+        "hits": [
+          {
+            "nonCritical": 176102.44242883933,
+            "critical": 348682.8360091019,
+            "expected": 328318.3495666309
+          }
+        ],
+        "totals": {
+          "nonCritical": 176102.44242883933,
+          "critical": 348682.8360091019,
+          "expected": 328318.3495666309,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 328318
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 176102.44242883933,
+        "critical": 348682.8360091019,
+        "expected": 328318.3495666309,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 176102.63369927998,
+        "critical": 348683.21472457435,
+        "expected": 328318.7061635896,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 328319
+    },
+    "yixuan-team": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1371/details.zh.json",
+            "pointer": "/skill/special/description/6/param/0",
+            "expression": "{Skill:1371022, Prop:1001}",
+            "parameters": {
+              "1371022": {
+                "damagePercentage": 67180,
+                "damagePercentageGrowth": 6110
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-yixuan-nk-1371022-蓄力期间总",
+            "element": "以太",
+            "multiplier": 13.439
+          },
+          "multipliers": [13.439],
+          "element": "auric-ink",
+          "individual": false
+        },
+        "conversionBase": 4580.160215,
+        "contributions": [
+          {
+            "optionId": "agents:yixuan:mindscape:0:blk-legacy:legacy-self-skillDmgBonus",
+            "holderId": "entity:yixuan",
+            "pointer": "/agents/2/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "skillDmgBonus",
+            "sourceValue": 60
+          },
+          {
+            "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
+            "holderId": "entity:yixuan",
+            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/0",
+            "stat": "critRate",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r8tz7-juw8rc",
+            "holderId": "entity:yixuan",
+            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/1",
+            "stat": "dmgBonus",
+            "sourceValue": 16
+          },
+          {
+            "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r9equ-l7imtb",
+            "holderId": "entity:yixuan",
+            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2",
+            "stat": "pierceDmgBonus",
+            "sourceValue": 10
+          },
+          {
+            "optionId": "drive-discs:SuitYunkuiTales:setPieces:4:blk-legacy:legacy-self-critRate",
+            "holderId": "entity:yixuan",
+            "pointer": "/driveDiscs/0/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "critRate",
+            "sourceValue": 12
+          },
+          {
+            "optionId": "drive-discs:SuitYunkuiTales:setPieces:4:blk-legacy:legacy-self-pierceDmgBonus",
+            "holderId": "entity:yixuan",
+            "pointer": "/driveDiscs/0/fourPieceBuffs/effectBlocks/0/effects/1",
+            "stat": "pierceDmgBonus",
+            "sourceValue": 10
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "atk",
+            "sourceValue": 1200
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
+            "holderId": "entity:astra",
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "critDmg",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
+            "holderId": "entity:astra",
+            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "stat": "dmgBonus",
+            "sourceValue": 26
+          }
+        ],
+        "finalStats": {
+          "attack": 3713.8617279999994,
+          "health": 21907.88283,
+          "criticalRate": 0.882,
+          "criticalDamage": 1.23,
+          "sheerForce": 3304.9468013999995
+        },
+        "factors": {
+          "damageBonus": 2.52,
+          "critical": 2.23,
+          "expectedCritical": 2.08486,
+          "defense": 1,
+          "resistance": 1.2,
+          "stunDamage": 1.5,
+          "damageTaken": 1,
+          "sheerDamageBonus": 1.2
+        },
+        "hits": [
+          {
+            "nonCritical": 241760.70812444424,
+            "critical": 539126.3791175106,
+            "expected": 504037.2299403288
+          }
+        ],
+        "totals": {
+          "nonCritical": 241760.70812444424,
+          "critical": 539126.3791175106,
+          "expected": 504037.2299403288,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 504037
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 241760.70812444424,
+        "critical": 539126.3791175106,
+        "expected": 504037.2299403288,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 241760.94210575998,
+        "critical": 539126.9008958448,
+        "expected": 504037.71775861474,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 504038
+    }
+  }
+}

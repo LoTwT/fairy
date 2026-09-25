@@ -74,6 +74,7 @@ export interface StaticActionCalculationInput {
     readonly baseDefense: number
     readonly resistances: Readonly<Partial<Record<DamageElement, number>>>
     readonly isStunned: boolean
+    /** 当前状态下的基础乘数（通常未失衡为 1、失衡为 1.5）；不会根据 isStunned 自动切换。 */
     readonly baseStunDamageMultiplier: number
   }
   readonly selections: readonly {
