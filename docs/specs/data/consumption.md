@@ -281,9 +281,9 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 ## 自动效果消费
 
-应用显式导入 `@randomplay/data/definitions/effects/automatic.json`（Node 使用 `with { type: "json" }`，Vite 直接导入 JSON），将导入结果交给 `@randomplay/core` 的 `parseEffectRuleSet`。依次调用 `prepareEffects` 绑定适用装备及精炼档位、`supplyEffectState` 建立会话，再用 `advanceEffects` 按真实事件推进。每一步都检查 `Result.ok`，缺少实体或队伍事实的错误不能解释为未触发。data 与 effects 之间没有新增包依赖。
+应用显式导入 `@randomplay/data/definitions/effects/automatic.json`（Node 使用 `with { type: "json" }`，Vite 直接导入 JSON），将导入结果交给 `@randomplay/core` 的 `parseEffectRuleSet`。依次调用 `prepareEffects` 绑定适用装备及精炼档位、`supplyEffectState` 建立会话，再用 `advanceEffects` 按真实事件推进。每一步都检查 `Result.ok`，缺少实体或队伍事实的错误不能解释为未触发。data 与 core 之间没有运行时包依赖。
 
-静态目录消费使用 `static.json`、`static-catalog.json` 与 effects 的 `calculateStaticDamageFromCatalog`；逐条支持状态与缺失原因在 `static-coverage.json`。三个显式子路径均按原字节发布，根入口不导入它们。新静态规则集是独立消费单位，不与 starter / automatic 的重复机制直接拼接。完整输入和覆盖边界见[静态数据接入规范](zzz-hp-static-effects.md)。Node 打包消费及 Vite 开发/生产消费均验证目录计算和根入口冷启动边界。
+静态目录消费使用 `static.json`、`static-catalog.json` 与 core 的 `calculateStaticDamageFromCatalog`；逐条支持状态与缺失原因在 `static-coverage.json`。三个显式子路径均按原字节发布，根入口不导入它们。新静态规则集是独立消费单位，不与 starter / automatic 的重复机制直接拼接。完整输入和覆盖边界见[静态数据接入规范](zzz-hp-static-effects.md)。Node 打包消费及 Vite 开发/生产消费均验证目录计算和根入口冷启动边界。
 
 当前 `entry` 仅代表快速支援、连携技、招架支援、回避支援四种真实入场。普通切人不在其中；调用方不得把其他动作标成任意一个合法 `EntryAction`。`entry-followup` 表示关联追加动作，不是第二次入场。事件的来源映射由应用依据真实动作完成，本包不提供未经核实的原始动作 ID 映射。
 
@@ -340,7 +340,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 不缩减 `check` 与 CI 的覆盖范围。
 `pnpm --filter @randomplay/data verify:browser` 对离线安装包进行真实 Chromium 的 Vite 开发/生产请求验收，
 输出 npm/解包字节数、初始与按需请求字节数、gzip 参考值和分块清单；gzip 是离线测量，不冒充服务器实际压缩传输量。
-打包验收同时离线安装隔离构建的 core/effects 制品，从公开 JSON 子路径解析自动规则并推进得到基础回能请求；浏览器验收额外核对两组定义按需导入，根入口冷启动不请求定义 JSON。
+打包验收同时离线安装隔离构建的 core 制品，从公开 JSON 子路径解析自动规则并推进得到基础回能请求；浏览器验收额外核对两组定义按需导入，根入口冷启动不请求定义 JSON。
 
 浏览器验收需要本机 Playwright Chromium（首次运行 `pnpm --filter @randomplay/data exec playwright install chromium`）；测试使用合成 fixture，包与浏览器验收使用已跟踪的完整静态快照。
 

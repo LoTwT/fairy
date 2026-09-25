@@ -41,3 +41,104 @@ shared 的变更若影响公开制品，也通过这两个包的同批发布交�
 `loadStaticCalculationData` 从同次冻结发布副本读取指定实体并附带版本信息。调用方整体传递和缓存返回值，
 不要自行把不同副本的内部字段拼接起来；摘要用于来源识别，并非对调用方修改过的对象进行运行时内容认证。
 底层数值公式仍接受显式数值，不强制依赖资料版本元数据。
+
+## 安装与运行环境
+
+当前公开包使用 ESM，Node 要求 `>=24.11.0`。浏览器支持已验收的 Vite 开发与生产消费，
+data 自动选择 browser 条件入口；按需读取行为与 JSON 导入方式见[消费契约](data/consumption.md#分发与按需加载)。
+应用无需抓取 raw、生成资料、配置 Node 内置模块 polyfill 或安装 shared。
+
+选择已发布且支持当前 API 的同一版本，替换下面的版本占位值：
+
+```sh
+FAIRY_VERSION='<同一已发布版本>'
+npm install --save-exact "@randomplay/core@$FAIRY_VERSION" "@randomplay/data@$FAIRY_VERSION"
+```
+
+保存精确版本并一起升级，可避免两个包独立更新后静态计算被版本校验拒绝。只使用 core 的底层公式、
+效果引擎或 data 的资料读取时，可以单独安装对应包。完整计算见[运行示例](core/static-calculation.md#完整计算示例)。
+
+仓库 manifest 的版本不代表 npm 已发布。`0.1.4` 属于重建前接口，不能用于本页的新静态计算示例。
+在当前源码尚未发布时，按[发布操作](#发布操作)的打包步骤生成两个 tarball，在应用目录安装：
+
+```sh
+npm install --save-exact /absolute/path/randomplay-core-VERSION.tgz /absolute/path/randomplay-data-VERSION.tgz
+```
+
+替换为同次打包的实际绝对路径。这一步不发布 npm；运行时无需链接 Fairy 工作区。
+
+## 从旧入口升级
+
+当前接口重建了数据与计算边界。升级 `0.1.4` 的应用需按当前输入契约重新组装请求，
+不保证旧快照、旧 cleaned 数据或旧结果对象直接兼容。
+
+| 原消费方式                                                     | 当前接入方式                                                                                                                                                      |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| core 的 `calculate`、`parseBattleSnapshot` 及旧快照/结果模型   | 静态配装计算使用 `loadStaticCalculationData → resolveAgentAction → calculateStaticActionDamage`；显式数值计算使用对应公式。按新公开类型组装输入与读取结果         |
+| data 的 `@randomplay/data/types`、`@randomplay/data/cleaned/*` | 类型从 data 根入口导入；资料使用按需读取 API，原样 JSON 使用显式 `integrated`/`definitions` 子路径。字段与身份按[消费契约](data/consumption.md)核对，不只替换路径 |
+| 依赖 data 间接安装 core                                        | 联合计算时显式安装同版 core/data；data 不再有 core 运行时依赖                                                                                                     |
+| 源码阶段的 `@randomplay/effects` 导入                          | 将函数和类型导入改为 `@randomplay/core`，例如 `parseEffectRuleSet`、`prepareEffects`、`calculateStaticDamageFromCatalog`；effects 已作为内部模块合入 core         |
+
+应用从 core 或 data 的公开导出引用所需类型，不导入私有 shared，也不复制类型定义。
+单位按各入口契约提供：标准化比例中 `18%` 写作 `0.18`，带单位的属性值使用对应 `Quantity`；
+来源原始数字须先明确语义，不能直接当作计算输入。数据和动作的版本身份、角色身份、影画上下文一起保留。
+
+## 发布操作
+
+[发布工作流](../../.github/workflows/release.yml)在推送 `vX.Y.Z` 标签后，通过 GitHub Actions OIDC 发布两个包。
+标签必须指向已进入 `main` 的提交，当前流程只处理稳定版本并使用 `latest`。
+已有 tarball、检查通过或版本号相同均不代表获得发布授权。
+
+1. 按前述规则确认具体目标版本和发布授权，再同步 core/data manifest；若调整仓库根版本或版本相关测试，保持其语义一致。
+   `static-e2e.test.ts` 当前固定验收 `packageVersion`，改版时应同步检查；历史验收报告中的版本仍保留当时事实。
+   用 `npm view @randomplay/core versions --json`、`npm view @randomplay/data versions --json` 核对目标版本是否已有制品。
+2. 分别核实两个包在 npm 设置页中的 Trusted Publisher：仓库为 `LoTwT/fairy`，工作流文件名为 `release.yml`，
+   环境为 `npm-publish`，并允许直接 `npm publish`。GitHub 的同名环境及其保护规则须保持匹配。
+   工作流通过 `id-token: write` 获取 OIDC 身份，无需本机 npm 登录或长期 npm token；
+   `npm whoami` 的结果不能判断 OIDC 是否可用。查看或修改 npm 设置时，按页面要求完成二次验证。
+3. 在仓库根目录对最终候选执行检查并串行打包，避免多个构建争用受管理数据锁：
+
+   ```sh
+   pnpm check
+   pnpm --filter @randomplay/data verify:browser
+   FAIRY_RELEASE_DIR="$(mktemp -d "${TMPDIR:-/tmp}/fairy-release.XXXXXX")"
+   pnpm --filter @randomplay/core pack --pack-destination "$FAIRY_RELEASE_DIR"
+   pnpm --filter @randomplay/data pack --pack-destination "$FAIRY_RELEASE_DIR"
+   ```
+
+   首次浏览器验收的 Chromium 安装命令见[消费验收入口](data/consumption.md#验收入口)。受管理源的完整性、
+   持锁读取和同步维护沿用[静态发布边界](data/consumption.md#静态发布与受管理目录边界)；失败时保留现场。
+   普通打包不生成或改写 integrated，也不自动修复管理状态。
+
+4. 明确列出 `randomplay-core-<版本>.tgz` 与 `randomplay-data-<版本>.tgz` 两个待发文件。
+   用 `tar -tzf <文件>` 查看清单、`tar -xOf <文件> package/package.json` 核对名称与目标版本。
+   公开运行时代码和声明不得引用私有 shared，不能携带 raw、控制目录或临时发布目录。
+   既有打包验收覆盖独立安装、联合类型消费与文件边界；另在工作区外只安装这两个 tarball，
+   运行[完整示例](core/static-calculation.md#完整计算示例)，核对参考值和两种面板输入的结果。
+   发布前不再改动候选内容，改动后须重建并验证受影响制品。
+5. 取得发布授权并将候选合入 `main` 后，为已验收的提交创建版本标签并推送到已核实的目标仓库。
+   以下占位值必须替换为已确认版本及其提交；已有标签不得覆盖。
+
+   ```sh
+   FAIRY_VERSION='<已确认目标版本>'
+   FAIRY_RELEASE_COMMIT='<已验收的 main 提交 SHA>'
+   git tag "v$FAIRY_VERSION" "$FAIRY_RELEASE_COMMIT"
+   git push origin "refs/tags/v$FAIRY_VERSION"
+   ```
+
+   工作流执行完整检查和浏览器验收，串行打包，在工作区外安装最终 tarball 并运行完整示例，再逐包发布。
+   两个确切文件名及 SHA-512 摘要记录在该次运行的日志和摘要中，不按变更文件筛选包。
+   已存在的同版制品只有摘要一致时才跳过；摘要冲突或 `latest` 比候选更新时停止，避免覆盖或回退。
+   仅一个包成功时，先回查 registry 确认实际状态，再处理缺失制品；网络超时不等于发布失败，
+   不能盲目重试、单独升版或将半批结果报告为完成。
+
+6. 回查两个包的具体版本、dist-tag 和制品摘要，并与发布工作流记录的候选摘要核对：
+
+   ```sh
+   npm view "@randomplay/core@$FAIRY_VERSION" version dist-tags dist.integrity --json --registry=https://registry.npmjs.org
+   npm view "@randomplay/data@$FAIRY_VERSION" version dist-tags dist.integrity --json --registry=https://registry.npmjs.org
+   ```
+
+   工作流还会在新的工作区外目录使用独立空缓存，从 registry 安装两个精确版本并运行完整示例，
+   避免复用候选 tarball 缓存掩盖下载问题；发布者应回查该步骤的实际结果。
+   两包都已可见、通道正确且实际安装消费通过后，才报告整批发布完成。

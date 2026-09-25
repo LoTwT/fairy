@@ -1,0 +1,174 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish core and data
+    if: github.repository == 'LoTwT/fairy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: npm-publish
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Validate release version and source
+        run: |
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict'
+          import { execFileSync } from 'node:child_process'
+          import { appendFileSync, readFileSync } from 'node:fs'
+          import { join } from 'node:path'
+
+          const version = /^v((?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*))$/.exec(process.env.GITHUB_REF_NAME)?.[1]
+          assert(version, 'Release tags must be stable vX.Y.Z versions')
+          for (const file of ['package.json', 'packages/core/package.json', 'packages/data/package.json']) {
+            assert.equal(JSON.parse(readFileSync(file, 'utf8')).version, version, file)
+          }
+          const npm = execFileSync('npm', ['--version'], { encoding: 'utf8' }).trim()
+          const [major, minor, patch] = npm.split('.').map(Number)
+          assert(major > 11 || (major === 11 && (minor > 5 || (minor === 5 && patch >= 1))), `npm ${npm} cannot use trusted publishing`)
+          appendFileSync(process.env.GITHUB_ENV, `FAIRY_VERSION=${version}\nFAIRY_RELEASE_DIR=${join(process.env.RUNNER_TEMP, 'fairy-release')}\n`)
+          NODE
+
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm --filter @randomplay/data exec playwright install --with-deps chromium
+      - run: pnpm --filter @randomplay/data verify:browser
+
+      - name: Pack both release candidates
+        run: |
+          mkdir "$FAIRY_RELEASE_DIR"
+          pnpm --filter @randomplay/core pack --pack-destination "$FAIRY_RELEASE_DIR"
+          pnpm --filter @randomplay/data pack --pack-destination "$FAIRY_RELEASE_DIR"
+
+      - name: Prepare installed-package verification
+        run: |
+          cat > "$RUNNER_TEMP/fairy-release-smoke.mjs" <<'NODE'
+          import assert from 'node:assert/strict'
+          import { execFileSync } from 'node:child_process'
+          import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
+          import { tmpdir } from 'node:os'
+          import { join } from 'node:path'
+
+          const packages = process.argv.slice(2)
+          assert.equal(packages.length, 2)
+          const consumer = mkdtempSync(join(tmpdir(), 'fairy-release-consumer-'))
+          writeFileSync(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module' }))
+          const offline = packages.every(value => value.endsWith('.tgz')) ? ['--offline'] : []
+          execFileSync('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', '--registry=https://registry.npmjs.org', '--cache', join(consumer, '.npm-cache'), ...offline, ...packages], { cwd: consumer, stdio: 'inherit' })
+          for (const name of ['core', 'data']) {
+            const manifest = JSON.parse(readFileSync(join(consumer, 'node_modules', '@randomplay', name, 'package.json'), 'utf8'))
+            assert.equal(manifest.name, `@randomplay/${name}`)
+            assert.equal(manifest.version, process.env.FAIRY_VERSION)
+          }
+          const document = readFileSync('docs/specs/core/static-calculation.md', 'utf8')
+          const examples = [...document.matchAll(/```ts\n([\s\S]*?)\n```/g)]
+          assert.equal(examples.length, 1, 'Expected one canonical complete example')
+          writeFileSync(join(consumer, 'example.mts'), examples[0][1])
+          const result = JSON.parse(execFileSync(process.execPath, ['example.mts'], { cwd: consumer, encoding: 'utf8' }))
+          const reference = JSON.parse(readFileSync('packages/data/test/fixtures/static-e2e-reference.json', 'utf8')).cases['nicole-self'].reference.totals
+          assert.equal(result.version.packageVersion, process.env.FAIRY_VERSION)
+          for (const mode of ['equipment', 'outOfCombat']) {
+            for (const [field, expected] of Object.entries(reference)) {
+              const actual = result[mode][field]
+              assert(Number.isFinite(actual) && Math.abs(actual - expected) < 1e-8, `${mode}.${field}: ${actual} != ${expected}`)
+            }
+          }
+          console.log(JSON.stringify(result, null, 2))
+          NODE
+
+      - name: Verify the exact candidate tarballs
+        run: |
+          node "$RUNNER_TEMP/fairy-release-smoke.mjs" \
+            "$FAIRY_RELEASE_DIR/randomplay-core-$FAIRY_VERSION.tgz" \
+            "$FAIRY_RELEASE_DIR/randomplay-data-$FAIRY_VERSION.tgz"
+
+      - name: Publish exact tarballs with OIDC
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict'
+          import { execFileSync, spawnSync } from 'node:child_process'
+          import { createHash } from 'node:crypto'
+          import { appendFileSync, readFileSync } from 'node:fs'
+          import { join } from 'node:path'
+          import { setTimeout } from 'node:timers/promises'
+
+          const version = process.env.FAIRY_VERSION
+          const registry = 'https://registry.npmjs.org'
+          const candidates = []
+          async function metadata(name) {
+            const response = await fetch(`${registry}/${encodeURIComponent(name)}`, { signal: AbortSignal.timeout(30000) })
+            assert(response.ok, `${name}: registry returned ${response.status}`)
+            return response.json()
+          }
+          for (const shortName of ['core', 'data']) {
+            const name = `@randomplay/${shortName}`
+            const file = join(process.env.FAIRY_RELEASE_DIR, `randomplay-${shortName}-${version}.tgz`)
+            const manifest = JSON.parse(execFileSync('tar', ['-xOf', file, 'package/package.json'], { encoding: 'utf8' }))
+            assert.equal(manifest.name, name)
+            assert.equal(manifest.version, version)
+            assert(!manifest.private)
+            const integrity = `sha512-${createHash('sha512').update(readFileSync(file)).digest('base64')}`
+            const current = await metadata(name)
+            const latest = current['dist-tags'].latest
+            assert(/^\d+\.\d+\.\d+$/.test(latest), `Unexpected latest version: ${latest}`)
+            const targetParts = version.split('.').map(Number)
+            const latestParts = latest.split('.').map(Number)
+            const difference = targetParts.map((value, index) => value - latestParts[index]).find(value => value !== 0) ?? 0
+            assert(difference >= 0, `${name}: refusing to replace newer latest ${latest}`)
+            const published = current.versions[version]
+            if (published) assert.equal(published.dist.integrity, integrity, `${name}: version already exists with different content`)
+            candidates.push({ name, file, integrity, published: Boolean(published) })
+          }
+          console.log(JSON.stringify({ version, candidates }, null, 2))
+          for (const candidate of candidates) {
+            appendFileSync(process.env.GITHUB_STEP_SUMMARY, `- ${candidate.name}@${version}: \`${candidate.integrity}\`\n`)
+            if (candidate.published) continue
+            const result = spawnSync('npm', ['publish', candidate.file, '--registry', registry, '--access', 'public', '--tag', 'latest'], { stdio: 'inherit' })
+            assert.equal(result.status, 0, `${candidate.name}: publish did not complete cleanly; inspect registry state before any retry`)
+          }
+          for (const candidate of candidates) {
+            let matched = false
+            for (let attempt = 0; attempt < 12; attempt++) {
+              const current = await metadata(candidate.name)
+              const published = current.versions[version]
+              if (published) {
+                assert.equal(published.dist.integrity, candidate.integrity)
+                assert.equal(current['dist-tags'].latest, version)
+                matched = true
+                break
+              }
+              await setTimeout(5000)
+            }
+            assert(matched, `${candidate.name}: registry visibility is pending; do not repeat publish blindly`)
+          }
+          NODE
+
+      - name: Verify registry installation
+        run: |
+          node "$RUNNER_TEMP/fairy-release-smoke.mjs" \
+            "@randomplay/core@$FAIRY_VERSION" \
+            "@randomplay/data@$FAIRY_VERSION"
