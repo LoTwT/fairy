@@ -85,15 +85,17 @@ npm install --save-exact /absolute/path/randomplay-core-VERSION.tgz /absolute/pa
 
 ## 发布操作
 
-当前 CI 负责检查，发布由具备两个包写权限的发布者执行。已有 tarball、检查通过或版本号相同均不代表获得发布授权。
-下列步骤使用现有 pnpm/npm 命令；若改用可信发布，须另行核对实际工作流及 npm 的对应授权设置。
+[发布工作流](../../.github/workflows/release.yml)在推送 `vX.Y.Z` 标签后，通过 GitHub Actions OIDC 发布两个包。
+标签必须指向已进入 `main` 的提交，当前流程只处理稳定版本并使用 `latest`。
+已有 tarball、检查通过或版本号相同均不代表获得发布授权。
 
 1. 按前述规则确认具体目标版本和发布授权，再同步 core/data manifest；若调整仓库根版本或版本相关测试，保持其语义一致。
    `static-e2e.test.ts` 当前固定验收 `packageVersion`，改版时应同步检查；历史验收报告中的版本仍保留当时事实。
    用 `npm view @randomplay/core versions --json`、`npm view @randomplay/data versions --json` 核对目标版本是否已有制品。
-2. 核实发布账号和两个包的写权限。`npm whoami --registry=https://registry.npmjs.org` 只证明当前登录身份，
-   包权限可用 `npm access list packages <账号名> --json --registry=https://registry.npmjs.org` 核对。
-   认证、权限或二次验证失败时先处理对应问题，不改用其他账号或绕过 npm 要求。
+2. 分别核实两个包在 npm 设置页中的 Trusted Publisher：仓库为 `LoTwT/fairy`，工作流文件名为 `release.yml`，
+   环境为 `npm-publish`，并允许直接 `npm publish`。GitHub 的同名环境及其保护规则须保持匹配。
+   工作流通过 `id-token: write` 获取 OIDC 身份，无需本机 npm 登录或长期 npm token；
+   `npm whoami` 的结果不能判断 OIDC 是否可用。查看或修改 npm 设置时，按页面要求完成二次验证。
 3. 在仓库根目录对最终候选执行检查并串行打包，避免多个构建争用受管理数据锁：
 
    ```sh
@@ -114,24 +116,29 @@ npm install --save-exact /absolute/path/randomplay-core-VERSION.tgz /absolute/pa
    既有打包验收覆盖独立安装、联合类型消费与文件边界；另在工作区外只安装这两个 tarball，
    运行[完整示例](core/static-calculation.md#完整计算示例)，核对参考值和两种面板输入的结果。
    发布前不再改动候选内容，改动后须重建并验证受影响制品。
-5. 取得发布授权后，使用上述两个确切文件逐包发布。以下版本占位值必须替换为已确认目标，
-   `latest` 用于普通版本；预发布版本应先确认对应 dist-tag，不能直接覆盖 `latest`。
+5. 取得发布授权并将候选合入 `main` 后，为已验收的提交创建版本标签并推送到已核实的目标仓库。
+   以下占位值必须替换为已确认版本及其提交；已有标签不得覆盖。
 
    ```sh
    FAIRY_VERSION='<已确认目标版本>'
-   npm publish "$FAIRY_RELEASE_DIR/randomplay-core-$FAIRY_VERSION.tgz" --registry=https://registry.npmjs.org --access public --tag latest
-   npm publish "$FAIRY_RELEASE_DIR/randomplay-data-$FAIRY_VERSION.tgz" --registry=https://registry.npmjs.org --access public --tag latest
+   FAIRY_RELEASE_COMMIT='<已验收的 main 提交 SHA>'
+   git tag "v$FAIRY_VERSION" "$FAIRY_RELEASE_COMMIT"
+   git push origin "refs/tags/v$FAIRY_VERSION"
    ```
 
-   不按变更文件筛选包。仅一个包成功时，先回查 registry 确认两个包的实际状态，再补齐缺失制品；
-   网络超时不等于发布失败，不能盲目重试已成功版本、单独升版或将半批结果报告为完成。
+   工作流执行完整检查和浏览器验收，串行打包，在工作区外安装最终 tarball 并运行完整示例，再逐包发布。
+   两个确切文件名及 SHA-512 摘要记录在该次运行的日志和摘要中，不按变更文件筛选包。
+   已存在的同版制品只有摘要一致时才跳过；摘要冲突或 `latest` 比候选更新时停止，避免覆盖或回退。
+   仅一个包成功时，先回查 registry 确认实际状态，再处理缺失制品；网络超时不等于发布失败，
+   不能盲目重试、单独升版或将半批结果报告为完成。
 
-6. 回查两个包的具体版本、dist-tag 和制品摘要，并与本次待发文件核对：
+6. 回查两个包的具体版本、dist-tag 和制品摘要，并与发布工作流记录的候选摘要核对：
 
    ```sh
    npm view "@randomplay/core@$FAIRY_VERSION" version dist-tags dist.integrity --json --registry=https://registry.npmjs.org
    npm view "@randomplay/data@$FAIRY_VERSION" version dist-tags dist.integrity --json --registry=https://registry.npmjs.org
    ```
 
-   在新的工作区外目录按上述 registry 安装命令安装两个精确版本，再运行完整示例。
+   工作流还会在新的工作区外目录使用独立空缓存，从 registry 安装两个精确版本并运行完整示例，
+   避免复用候选 tarball 缓存掩盖下载问题；发布者应回查该步骤的实际结果。
    两包都已可见、通道正确且实际安装消费通过后，才报告整批发布完成。
