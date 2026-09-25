@@ -86,6 +86,7 @@
     "generate:agent-actions": "node --disable-warning=ExperimentalWarning scripts/generate-agent-actions.ts"
   },
   "devDependencies": {
+    "@randomplay/shared": "workspace:*",
     "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "^4.1.10",
     "playwright": "^1.63.0",

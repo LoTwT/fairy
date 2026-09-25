@@ -144,7 +144,7 @@ describe("packed package", () => {
     const enginePackages = join(temporaryDirectory, "engine-packages")
     mkdirSync(enginePackages)
     const engineTarballs: Record<string, string> = {}
-    for (const name of ["core", "effects"]) {
+    for (const name of ["core"]) {
       const source = join(checkout, "packages", name)
       execFileSync(
         "corepack",
@@ -167,8 +167,8 @@ describe("packed package", () => {
     const consumerManifest = JSON.parse(
       readFileSync(consumerManifestPath, "utf8"),
     )
-    consumerManifest.dependencies["@randomplay/effects"] =
-      `file:${engineTarballs.effects}`
+    consumerManifest.dependencies["@randomplay/core"] =
+      `file:${engineTarballs.core}`
     writeFileSync(consumerManifestPath, JSON.stringify(consumerManifest))
     writeFileSync(
       join(consumerDirectory, "pnpm-workspace.yaml"),
@@ -366,7 +366,7 @@ describe("packed package", () => {
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
-assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes", "loadAgentActions", "resolveAgentAction", "resolveAgentSkillLevel"].sort())
+assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes", "loadAgentActions", "resolveAgentAction", "resolveAgentSkillLevel", "calculationDataVersion", "loadStaticCalculationData"].sort())
 for (const [names, load, category] of [[api.agentNames, api.loadAgentLevel60Attributes, "agents"], [api.wEngineNames, api.loadWEngineLevel60Attributes, "w-engines"]]) {
   for (const name of names) {
     const attributes = await load(name)
@@ -384,6 +384,7 @@ for (const name of api.agentNames) {
 const nicole = await api.loadAgentActions("Nicole")
 const resolvedNicole = api.resolveAgentAction({ agent: nicole, actionId: "action:agent:1031:basic-enhanced-1", mindscapeRank: 6, levels: { basic: { mode: "effective", value: 15 } }, requireIndividualHits: true })
 assert.equal(resolvedNicole.ok, true)
+assert.deepEqual(resolvedNicole.resolutionContext, { agentEntityId: "1031", mindscapeRank: 6 })
 assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
 const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
 assert.equal(actionManifest.members.length, api.agentNames.length)
@@ -397,7 +398,17 @@ assert.equal(starterDefinitions.default.schemaVersion, 1)
 assert.equal(starterDefinitions.default.ruleSetId, "starter-effects")
 assert.equal(starterDefinitions.default.effects.length, 3)
 const automaticDefinitions = await import("@randomplay/data/definitions/effects/automatic.json", { with: { type: "json" } })
-const { parseEffectRuleSet, prepareEffects, supplyEffectState, advanceEffects, calculateStaticDamageFromCatalog } = await import("@randomplay/effects")
+const { parseEffectRuleSet, prepareEffects, supplyEffectState, advanceEffects, calculateStaticDamageFromCatalog, calculateStaticActionDamage, CORE_PACKAGE_VERSION } = await import("@randomplay/core")
+const calculationData = await (await import("@randomplay/data")).loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
+assert.equal(calculationData.version.packageVersion, CORE_PACKAGE_VERSION)
+assert.equal(calculationData.agents.length, 1)
+assert.equal(calculationData.agents[0].attributes.entityId, "1121")
+const benRecord = calculationData.agents[0].actions
+const benAction = benRecord.actions.find(entry => entry.calculation.kind === "damage" && entry.skillCategory && !entry.inputs.length)
+const benResolved = api.resolveAgentAction({ agent: benRecord, actionId: benAction.actionId, mindscapeRank: 0, levels: Object.fromEntries(["basic", "dodge", "assist", "special", "chain"].map(group => [group, { mode: "trained", value: 12 }])) })
+const benCalculation = calculateStaticActionDamage({ data: calculationData, actors: [{ entityId: "entity:ben", teamId: "team:players", agentEntityId: "1121", mindscapeRank: 0, coreSkillLevel: 7, wEngine: null, driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null }, panel: { mode: "equipment" } }], actorId: "entity:ben", action: benResolved, target: { entityId: "entity:enemy", teamId: "team:enemy", baseDefense: 1000, resistances: { physical: 0, fire: 0 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] })
+assert.equal(benCalculation.ok, true, JSON.stringify(benCalculation))
+assert.ok(Math.abs(benCalculation.value.panels[0].stats.attack.value - 1232.31468) < 1e-8)
 function value(result) { assert.equal(result.ok, true, JSON.stringify(result)); return result.value }
 const staticDefinitions = (await import("@randomplay/data/definitions/effects/static.json", { with: { type: "json" } })).default
 const staticCatalog = (await import("@randomplay/data/definitions/effects/static-catalog.json", { with: { type: "json" } })).default
@@ -680,7 +691,20 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
       shiyu: expectedShiyuIds,
       wEngines: expectedWEngineNames,
     })
-    const typeSource = `import { loadAgentLevel60Attributes, loadWEngineLevel60Attributes, loadSDriveDiscMaxLevelAffixes } from "@randomplay/data"
+    for (const file of listFiles(packedRoot).filter((path) =>
+      /\.(?:mjs|mts)$/u.test(path),
+    ))
+      expect(readFileSync(join(packedRoot, file), "utf8")).not.toContain(
+        "@randomplay/shared",
+      )
+    const typeSource = `import { loadStaticCalculationData } from "@randomplay/data"
+import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput } from "@randomplay/core"
+const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
+async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {
+  const { calculateStaticActionDamage } = await import("@randomplay/core")
+  return calculateStaticActionDamage({ ...input, data: await jointData })
+}
+import { loadAgentLevel60Attributes, loadWEngineLevel60Attributes, loadSDriveDiscMaxLevelAffixes } from "@randomplay/data"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes, PanelAttributeBonus } from "@randomplay/data"
 import { loadAgentActions, resolveAgentAction, resolveAgentSkillLevel } from "@randomplay/data"
 import type { AgentActions, ResolvedAgentAction, SkillLevelInput } from "@randomplay/data"

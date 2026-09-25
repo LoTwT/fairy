@@ -120,11 +120,26 @@ globalThis.fairyStatic = async () => {
     import("@randomplay/data/definitions/effects/static.json"),
     import("@randomplay/data/definitions/effects/static-catalog.json"),
     import("@randomplay/data/definitions/effects/static-coverage.json"),
-    import("@randomplay/effects"),
+    import("@randomplay/core"),
   ])
   const result = engine.calculateStaticDamageFromCatalog({ ...${readFileSync(new URL("./fixtures/static-catalog-consumer.json", import.meta.url), "utf8")}, definitions: definitions.default, catalog: catalog.default })
   if (!result.ok) throw new Error(JSON.stringify(result.issues))
   return { rate: result.value.criticalRate, expected: result.value.expected, nonCritical: result.value.nonCritical, records: coverage.default.summary.rawEffects }
+}
+globalThis.fairyStaticInputs = async () => {
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Ben"], wEngines: [] }), import("@randomplay/core")])
+  const agent = data.agents[0].actions
+  const action = agent.actions.find(a => a.calculation.kind === "damage" && a.skillCategory && !a.inputs.length)
+  const resolved = api.resolveAgentAction({ agent, actionId: action.actionId, mindscapeRank: 0, levels: Object.fromEntries(["basic", "dodge", "assist", "special", "chain"].map(group => [group, { mode: "trained", value: 12 }])) })
+  const actor = { entityId: "entity:ben", teamId: "team:players", agentEntityId: "1121", mindscapeRank: 0, coreSkillLevel: 7, wEngine: null, driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null }, panel: { mode: "equipment" } }
+  const request = { data, actors: [actor], actorId: actor.entityId, action: resolved, target: { entityId: "entity:enemy", teamId: "team:enemy", baseDefense: 1000, resistances: { physical: 0, fire: 0 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] }
+  const result = core.calculateStaticActionDamage(request)
+  if (!result.ok) throw new Error(JSON.stringify(result.issues))
+  const panel = result.value.panels[0]
+  const manual = core.calculateStaticActionDamage({ ...request, actors: [{ ...actor, panel: { mode: "out-of-combat", stats: panel.stats, damageBonuses: panel.damageBonuses, penetrationValue: panel.penetrationValue } }] })
+  if (!manual.ok) throw new Error(JSON.stringify(manual.issues))
+  const mismatchedRank = core.calculateStaticActionDamage({ ...request, actors: [{ ...actor, mindscapeRank: 1 }] })
+  return { attack: panel.stats.attack.value, totals: result.value.totals, manual: manual.value.totals, mismatchedRank }
 }
 globalThis.fairyDefinitions = {
   starter: () => import("@randomplay/data/definitions/effects/starter.json"),
@@ -593,6 +608,42 @@ function defineScenarios(counts: {
                 ),
             ).toBe(true)
           },
+        },
+      ],
+    },
+    {
+      name: "static-inputs",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "assemble-and-calculate",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyStaticInputs(),
+            )
+            expect(result.attack).toBeCloseTo(1232.31468, 8)
+            expect(result.totals).toEqual(result.manual)
+            expect(result.mismatchedRank).toMatchObject({
+              ok: false,
+              issues: [
+                {
+                  code: "CONTEXT_MISMATCH",
+                  pointer: "/action/resolutionContext",
+                },
+              ],
+            })
+          },
+          sources: [
+            "definitions/attributes/agents/1121.json",
+            "definitions/skills/agents/1121.json",
+            "definitions/attributes/drive-disc-affixes.json",
+            "definitions/effects/static.json",
+            "definitions/effects/static-catalog.json",
+          ],
         },
       ],
     },

@@ -8,9 +8,10 @@
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt --write . '!packages/data/integrated/**'",
     "format:check": "oxfmt --check .",
-    "check:spec-types": "pnpm --filter @randomplay/core build && pnpm --filter @randomplay/effects exec tsc --ignoreConfig --noEmit --strict --exactOptionalPropertyTypes --noUncheckedIndexedAccess --target ES2022 --module ESNext --moduleResolution Bundler ../../docs/specs/effects/contract-examples.ts",
-    "check": "pnpm lint && pnpm format:check && pnpm check:spec-types && pnpm --recursive --if-present check",
-    "prepare": "simple-git-hooks"
+    "check:spec-types": "pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core exec tsc --ignoreConfig --noEmit --allowImportingTsExtensions --strict --exactOptionalPropertyTypes --noUncheckedIndexedAccess --target ES2022 --module ESNext --moduleResolution Bundler ../../docs/specs/effects/contract-examples.ts",
+    "check": "pnpm check:packages && pnpm lint && pnpm format:check && pnpm check:spec-types && pnpm --recursive --if-present check",
+    "prepare": "simple-git-hooks",
+    "check:packages": "node scripts/check-packages.ts"
   },
   "devDependencies": {
     "lint-staged": "^17.2.0",

@@ -281,7 +281,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 ## 自动效果消费
 
-应用显式导入 `@randomplay/data/definitions/effects/automatic.json`（Node 使用 `with { type: "json" }`，Vite 直接导入 JSON），将导入结果交给 `@randomplay/effects` 的 `parseEffectRuleSet`。依次调用 `prepareEffects` 绑定适用装备及精炼档位、`supplyEffectState` 建立会话，再用 `advanceEffects` 按真实事件推进。每一步都检查 `Result.ok`，缺少实体或队伍事实的错误不能解释为未触发。data 与 effects 之间没有新增包依赖。
+应用显式导入 `@randomplay/data/definitions/effects/automatic.json`（Node 使用 `with { type: "json" }`，Vite 直接导入 JSON），将导入结果交给 `@randomplay/core` 的 `parseEffectRuleSet`。依次调用 `prepareEffects` 绑定适用装备及精炼档位、`supplyEffectState` 建立会话，再用 `advanceEffects` 按真实事件推进。每一步都检查 `Result.ok`，缺少实体或队伍事实的错误不能解释为未触发。data 与 effects 之间没有新增包依赖。
 
 静态目录消费使用 `static.json`、`static-catalog.json` 与 effects 的 `calculateStaticDamageFromCatalog`；逐条支持状态与缺失原因在 `static-coverage.json`。三个显式子路径均按原字节发布，根入口不导入它们。新静态规则集是独立消费单位，不与 starter / automatic 的重复机制直接拼接。完整输入和覆盖边界见[静态数据接入规范](zzz-hp-static-effects.md)。Node 打包消费及 Vite 开发/生产消费均验证目录计算和根入口冷启动边界。
 

@@ -297,7 +297,7 @@ Nanoka 3.1 游戏文本使用 `Disorder DMG Multiplier` 表示“紊乱效果的
 
 ```ts
 export type DisorderSourceAttribute =
-  "fire" | "electric" | "ether" | "ice" | "physical" | "auric_ink" | "frost"
+  "fire" | "electric" | "ether" | "ice" | "physical" | "auric-ink" | "frost"
 
 export interface CalculateStandardDisorderDamageMultiplierParams {
   readonly originalAnomalyAttribute: DisorderSourceAttribute
@@ -320,14 +320,14 @@ export declare function calculateStandardDisorderDamageMultiplier(
 | `ether`     | Ether / 以太      | Corruption / 侵蚀 | 基础属性                                                             |
 | `ice`       | Ice / 冰属性      | Frostbite / 霜寒  | 基础属性                                                             |
 | `physical`  | Physical / 物理   | Flinch / 畏缩     | 基础属性；本规则按持续状态“畏缩”计算，不使用瞬时“强击”作为判别值     |
-| `auric_ink` | Auric Ink / 玄墨  | Corruption / 侵蚀 | 特殊属性，游戏文本确认其基于以太结算，但仍保留独立公式分支           |
+| `auric-ink` | Auric Ink / 玄墨  | Corruption / 侵蚀 | 特殊属性，游戏文本确认其基于以太结算，但仍保留独立公式分支           |
 | `frost`     | Frost / 烈霜      | Frostbite / 霜寒  | 特殊属性，游戏文本确认其基于冰属性结算，但其紊乱倍率公式不同于冰属性 |
 
 `Auric Ink` 和 `Frost` 的游戏中英文对照分别见 Nanoka 3.1 的
 玄墨英文数据（本地观察：`zzz/3.1/en/character/1371.json`，JSON Pointer `/special_element_type`）、
 玄墨中文数据（本地观察：`zzz/3.1/zh/character/1371.json`，JSON Pointer `/special_element_type`）、
 烈霜英文数据（本地观察：`zzz/3.1/en/character/1091.json`，JSON Pointer `/special_element_type`）与
-烈霜中文数据（本地观察：`zzz/3.1/zh/character/1091.json`，JSON Pointer `/special_element_type`）。`auric_ink` 使用不含空格
+烈霜中文数据（本地观察：`zzz/3.1/zh/character/1091.json`，JSON Pointer `/special_element_type`）。`auric-ink` 使用不含空格
 和特殊空白字符的稳定机器值，不直接复制原始数据中的富文本或空白形式。
 
 `originalAnomalyAttribute` 表示被新异常覆盖并据此结算紊乱的原异常来源属性，不是触发紊乱的新异常
@@ -349,7 +349,7 @@ export declare function calculateStandardDisorderDamageMultiplier(
 | `ether`                    | `4.5 + Math.floor(T / 0.5) * 0.625` |
 | `ice`                      | `4.5 + Math.floor(T) * 0.075`       |
 | `physical`                 | `4.5 + Math.floor(T) * 0.075`       |
-| `auric_ink`                | `4.5 + Math.floor(T / 0.5) * 0.625` |
+| `auric-ink`                | `4.5 + Math.floor(T / 0.5) * 0.625` |
 | `frost`                    | `6 + Math.floor(T) * 0.75`          |
 
 返回值已经是可直接参与基础伤害区计算的小数倍率，例如 `450%` 返回 `4.5`，不额外加上基础值 `1`。函数不

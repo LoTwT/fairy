@@ -6,6 +6,9 @@
 
 ### 规范
 
+- [包边界与联动发布](specs/packages.md)：core/data/shared 职责、共享契约、同版发布与版本号确认。
+- [静态计算输入组装](specs/core/static-calculation.md)：配装与局外面板、自动二件套、常驻转换、动作伤害与版本校验。
+
 - [Core 计算规范](specs/core/index.md)：`@randomplay/core` 的核心术语、公式与乘区公共契约及具体计算规范。
 - [统一效果规则模型](specs/effects/index.md)：统一效果的 TypeScript 类型、条件修改、状态与求值接口、core 适配和验收契约，包含代理人、驱动盘、音擎实例及游戏证据边界。
 - [静态快照增益数据与培养配置](specs/effects/static-snapshot.md)：静态引擎的交付范围、ZZZ-HP 来源优先级、核心等级/影画/精炼的记录方式及固定版本对比。

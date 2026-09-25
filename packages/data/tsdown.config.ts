@@ -1,3 +1,4 @@
+import { prepareCalculationData } from "./scripts/prepare-calculation-data.ts"
 import { rmSync } from "node:fs"
 import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { join } from "node:path"
@@ -35,6 +36,12 @@ export default defineConfig(async (options) => {
       join(buildDirectory, ".generated/definitions"),
       index,
     )
+    await prepareCalculationData(
+      join(buildDirectory, ".generated"),
+      index,
+      JSON.parse(await readFile(join(packageDirectory, "package.json"), "utf8"))
+        .version,
+    )
     await writeFile(
       join(buildDirectory, ".generated/browser-catalog.ts"),
       await generateCatalog(
@@ -61,9 +68,9 @@ export default defineConfig(async (options) => {
 
   return {
     cwd: buildDirectory,
-    tsconfig: join(packageDirectory, "tsconfig.json"),
+    tsconfig: join(packageDirectory, "tsconfig.build.json"),
     clean: true,
-    dts: true,
+    dts: { eager: true },
     entry: {
       "index": join(buildDirectory, "src/index.ts"),
       "index.browser": join(buildDirectory, "src/index.browser.ts"),
@@ -71,7 +78,11 @@ export default defineConfig(async (options) => {
     outDir: join(packageDirectory, "dist"),
     format: ["esm"],
     sourcemap: false,
-    deps: { neverBundle: [/\.json$/u] },
+    deps: {
+      neverBundle: [/\.json$/u],
+      alwaysBundle: ["@randomplay/shared"],
+      dts: { alwaysBundle: ["@randomplay/shared"] },
+    },
     hooks: {
       "build:done": async () => {
         const snapshot = join(buildDirectory, ".generated/integrated")

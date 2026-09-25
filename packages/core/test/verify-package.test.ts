@@ -1,3 +1,4 @@
+import { effectsPackageSmoke } from "./effects/packed-smoke.ts"
 import { execFileSync } from "node:child_process"
 import {
   mkdtempSync,
@@ -65,6 +66,12 @@ describe("packed package", () => {
       "package.json",
     ])
 
+    for (const entry of ["dist/index.d.mts", "dist/index.mjs"]) {
+      expect(readFileSync(join(packedRoot, entry), "utf8")).not.toContain(
+        "@randomplay/shared",
+      )
+    }
+
     const manifest = JSON.parse(
       readFileSync(join(packedRoot, "package.json"), "utf8"),
     )
@@ -103,6 +110,14 @@ describe("packed package", () => {
       ],
       { cwd: consumerDirectory, stdio: "pipe" },
     )
+    writeFileSync(
+      join(consumerDirectory, "effects-smoke.mjs"),
+      effectsPackageSmoke,
+    )
+    execFileSync(process.execPath, ["effects-smoke.mjs"], {
+      cwd: consumerDirectory,
+      stdio: "pipe",
+    })
     writeFileSync(
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"

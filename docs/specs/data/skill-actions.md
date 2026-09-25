@@ -2,7 +2,7 @@
 
 `@randomplay/data` 提供 Nanoka 3.1 全部 58 名角色的独立动作目录、伤害与失衡成长曲线、
 影画技能等级提升和纯解析函数。完整面板组装、装备及被动转化仍属于 PR C。
-正式类型由 [`src/skills/types.ts`](../../../packages/data/src/skills/types.ts) 维护。
+共同类型由 [shared 动作契约](../../../packages/shared/src/skills.ts)维护；data 的 [`src/skills/types.ts`](../../../packages/data/src/skills/types.ts) 重导出这些类型并维护来源清单。
 
 ## 公开读取与解析
 
@@ -52,6 +52,9 @@ JSON 子路径为 `@randomplay/data/definitions/skills/agents/{id}.json` 与
 
 例如 M5 输入最终等级 12，解析为训练 8、提升 4、最终 12。UI 修改影画后是否保留训练进度并更新显示，
 由消费端显式处理；接口不根据填写顺序或数值大小猜测模式。核心 1—7 与这些技能等级独立。
+
+成功解析的动作通过 `resolutionContext` 保留角色身份与解析时的影画档位。修改角色或影画后，调用方须重新解析动作，
+再将原样结果交给 core；core 按此上下文检查当前配置，不重新解析技能倍率。
 
 `actionId` 与 `branchId` 是在内部 registry 中固定登记的应用身份。编号不是可重新生成的展示顺序；
 来源段落、标签、参数身份、表达式或潜能条件发生变化时，生成器要求重新核对登记，保留或显式迁移身份。

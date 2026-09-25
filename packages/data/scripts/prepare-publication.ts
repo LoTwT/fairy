@@ -106,6 +106,8 @@ export async function generateCatalog(
     `() => import(${json(`@randomplay/data/definitions/attributes/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
   const lazyActions = (id: string) =>
     `() => import(${json(`@randomplay/data/definitions/skills/agents/${id}.json`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as AgentActions)`
+  const lazyEffect = (path: string, type: string) =>
+    `() => import(${json(`@randomplay/data/definitions/effects/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
   const sourceIds = (names: string[], entity: IntegratedSnapshotEntity) =>
     `Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, entity.memberIds[i]]))}))`
   const loaderTable = (
@@ -134,6 +136,7 @@ import type { SimulData, SimulDetails } from "../src/integration/simul-types.ts"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes } from "../src/attributes/types.ts"
 import type { AgentActions } from "../src/skills/types.ts"
+import type { RuleSet, StaticEffectCatalog } from "@randomplay/shared"
 /** 本次发布全部代理人的英文详情顶层 name 原值。 */
 export type AgentName = ${agentNames.map((name) => json(name)).join(" | ")}
 /** 本次发布全部驱动盘套装的英文详情顶层 name 原值。 */
@@ -183,6 +186,8 @@ export const driveDiscSourceIds: Readonly<Record<DriveDiscName, string>> = ${sou
 export const wEngineSourceIds: Readonly<Record<WEngineName, string>> = ${sourceIds(wEngineNames, wEngines)} as Readonly<Record<WEngineName, string>>
 export const bangbooSourceIds: Readonly<Record<BangbooName, string>> = ${sourceIds(bangbooNames, bangboos)} as Readonly<Record<BangbooName, string>>
 export const indexLoader = ${lazy("index.json", "IntegratedSnapshotIndex")}
+export const staticEffectDefinitionsLoader = ${lazyEffect("static.json", "RuleSet")}
+export const staticEffectCatalogLoader = ${lazyEffect("static-catalog.json", "StaticEffectCatalog")}
 export const agentAttributeLoaders: Record<string, () => Promise<AgentLevel60Attributes>> = {
 ${agents.memberIds.map((id) => `${json(id)}: ${lazyAttribute(`agents/${id}.json`, "AgentLevel60Attributes")}`).join(",\n")}
 }

@@ -2,7 +2,7 @@ import { createHash } from "node:crypto"
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import { parseEffectRuleSet } from "../../effects/src/parse-effect-rule-set.ts"
+import { parseEffectRuleSet } from "../../core/src/effects/parse-effect-rule-set.ts"
 import { formatGeneratedJson } from "./nanoka-integration/format.ts"
 import { preparePublication } from "./prepare-publication.ts"
 import {
@@ -87,7 +87,7 @@ export async function generateStaticEffects(
     if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
     // 完整生成命令预先构建 core；仅导入转换工具或拒绝坏输入时不加载计算运行时。
     const { validateStaticCatalog } =
-      await import("../../effects/src/internal/static-catalog.ts")
+      await import("../../core/src/effects/internal/static-catalog.ts")
     const catalog = validateStaticCatalog(result.catalog, parsed.value)
     if (!catalog.ok) throw new Error(JSON.stringify(catalog.issues))
     candidate = await mkdtemp(join(dirname(output), ".fairy-static-candidate-"))

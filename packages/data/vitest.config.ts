@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs"
 import { availableParallelism } from "node:os"
 import { defineConfig } from "vitest/config"
 
@@ -36,6 +37,13 @@ const packagingTestFiles = [
 const maxWorkers = Math.min(6, Math.max(1, availableParallelism() - 1))
 
 export default defineConfig({
+  define: {
+    FAIRY_PACKAGE_VERSION: JSON.stringify(
+      JSON.parse(
+        readFileSync(new URL("./package.json", import.meta.url), "utf8"),
+      ).version,
+    ),
+  },
   test: {
     coverage: {
       provider: "v8",
@@ -45,6 +53,7 @@ export default defineConfig({
     maxWorkers,
     projects: [
       {
+        extends: true,
         test: {
           name: "unit",
           include: ["test/**/*.test.ts"],
@@ -52,6 +61,7 @@ export default defineConfig({
         },
       },
       {
+        extends: true,
         test: {
           name: "integration",
           include: integrationTestFiles,
@@ -62,6 +72,7 @@ export default defineConfig({
         },
       },
       {
+        extends: true,
         test: {
           name: "packaging",
           include: packagingTestFiles,

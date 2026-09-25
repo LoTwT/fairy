@@ -64,6 +64,8 @@ import {
   wEngineAttributeLoaders,
   driveDiscAffixesLoader,
   agentActionLoaders,
+  staticEffectDefinitionsLoader,
+  staticEffectCatalogLoader,
 } from "../.generated/catalog.ts"
 import type { AgentActions } from "./skills/types.ts"
 export type {
@@ -735,4 +737,58 @@ export async function loadAllSimul(
       }),
     ),
   ) as Record<SimulId, LocalizedSimul>
+}
+
+export { calculationDataVersion } from "../.generated/calculation-data.ts"
+import {
+  calculationDataVersion,
+  staticPanelRules,
+} from "../.generated/calculation-data.ts"
+import type { StaticCalculationData } from "@randomplay/shared"
+export type {
+  StaticCalculationData,
+  CalculationDataVersion,
+  StaticPanelRules,
+  AgentPanelRules,
+} from "@randomplay/shared"
+
+/** 按需读取一次静态计算所需的同版资料。core 只接收返回值，不调用本包。 */
+export async function loadStaticCalculationData(selection: {
+  readonly agents: readonly AgentName[]
+  readonly wEngines: readonly WEngineName[]
+}): Promise<StaticCalculationData> {
+  const [agents, wEngines, driveDiscAffixes, definitions, catalog] =
+    await Promise.all([
+      Promise.all(
+        selection.agents.map(async (name) => {
+          const [attributes, actions] = await Promise.all([
+            loadAgentLevel60Attributes(name),
+            loadAgentActions(name),
+          ])
+          if (!attributes || !actions)
+            throw new Error(`Unknown calculation agent: ${name}`)
+          return { attributes, actions }
+        }),
+      ),
+      Promise.all(
+        selection.wEngines.map(async (name) => {
+          const attributes = await loadWEngineLevel60Attributes(name)
+          if (!attributes)
+            throw new Error(`Unknown calculation w-engine: ${name}`)
+          return attributes
+        }),
+      ),
+      loadSDriveDiscMaxLevelAffixes(),
+      staticEffectDefinitionsLoader(),
+      staticEffectCatalogLoader(),
+    ])
+  return structuredClone({
+    version: calculationDataVersion,
+    agents,
+    wEngines,
+    driveDiscAffixes,
+    definitions,
+    catalog,
+    panelRules: staticPanelRules,
+  })
 }

@@ -246,9 +246,7 @@ function calculateWeightedField(
 ): number {
   let numerator = 0n
 
-  for (let index = 0; index < records.length; index += 1) {
-    const record = records[index]
-
+  for (const record of records) {
     numerator +=
       record.weightInMinimumUnits * codec.decodeToMinimumUnits(record[field])
   }
@@ -263,11 +261,11 @@ function assertWeightedFieldInvariant(
 ): void {
   assertFiniteResult(value, `Virtual agent snapshot ${field}`)
 
-  let minimum = records[0][field]
-  let maximum = records[0][field]
+  let minimum = records[0]![field]
+  let maximum = records[0]![field]
 
   for (let index = 1; index < records.length; index += 1) {
-    const inputValue = records[index][field]
+    const inputValue = records[index]![field]
 
     if (inputValue < minimum) {
       minimum = inputValue
@@ -327,9 +325,7 @@ export function calculateVirtualAgentSnapshot(
   let denominator = 0n
   let levelNumerator = 0n
 
-  for (let index = 0; index < records.length; index += 1) {
-    const record = records[index]
-
+  for (const record of records) {
     denominator += record.weightInMinimumUnits
     levelNumerator += record.weightInMinimumUnits * BigInt(record.level)
   }
@@ -381,12 +377,12 @@ export function calculateVirtualAgentSnapshot(
     ),
   }
 
-  let minimumLevel = records[0].level
-  let maximumLevel = records[0].level
+  let minimumLevel = records[0]!.level
+  let maximumLevel = records[0]!.level
 
   for (let index = 1; index < records.length; index += 1) {
-    minimumLevel = Math.min(minimumLevel, records[index].level)
-    maximumLevel = Math.max(maximumLevel, records[index].level)
+    minimumLevel = Math.min(minimumLevel, records[index]!.level)
+    maximumLevel = Math.max(maximumLevel, records[index]!.level)
   }
 
   if (

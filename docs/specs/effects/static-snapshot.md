@@ -1,6 +1,6 @@
 # 静态快照增益数据与培养配置
 
-状态：静态引擎和固定版本的批量数据接入已实现，包含部分档位表、跨单位转化、静态命中筛选、伤害通道、低层 `calculateStaticDamage` 与目录入口 `calculateStaticDamageFromCatalog`。正式制品、实际覆盖及未支持原因见[静态增益数据接入规范](../data/zzz-hp-static-effects.md)。公开类型与执行行为分别由 [types.ts](../../../packages/effects/src/types.ts) 和[执行契约](execution.md)维护。
+状态：静态引擎和固定版本的批量数据接入已实现，包含部分档位表、跨单位转化、静态命中筛选、伤害通道、低层 `calculateStaticDamage` 与目录入口 `calculateStaticDamageFromCatalog`。正式制品、实际覆盖及未支持原因见[静态增益数据接入规范](../data/zzz-hp-static-effects.md)。公开类型与执行行为分别由 [types.ts](../../../packages/core/src/effects/types.ts) 和[执行契约](execution.md)维护。
 
 ## 计算范围
 
@@ -137,11 +137,11 @@
 
 ## 对比与验收记录
 
-批量正式制品的 [1,201 条来源对比夹具](../../../packages/effects/test/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/effects/test/static-catalog-data.test.ts)覆盖每个 converted 原始位置；5 条 corrected 记录通过耀嘉音和耀变的具名差异用例单独验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
+批量正式制品的 [1,201 条来源对比夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)覆盖每个 converted 原始位置；5 条 corrected 记录通过耀嘉音和耀变的具名差异用例单独验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
 
-固定版本对比夹具位于 [zzz-hp-static.json](../../../packages/effects/test/fixtures/zzz-hp-static.json)，记录原始效果、JSON Pointer、输入和上游输出。上游输出通过 TypeScript AST 提取未修改的 `resolveConvertValue` / `resolveEffectBaseValue`，连同原始 `roundCalc`、技能键判断依赖离线执行得到；夹具记录求值文件的 SHA-256。
+固定版本对比夹具位于 [zzz-hp-static.json](../../../packages/core/test/effects/fixtures/zzz-hp-static.json)，记录原始效果、JSON Pointer、输入和上游输出。上游输出通过 TypeScript AST 提取未修改的 `resolveConvertValue` / `resolveEffectBaseValue`，连同原始 `roundCalc`、技能键判断依赖离线执行得到；夹具记录求值文件的 SHA-256。
 
-[对比测试](../../../packages/effects/test/zzz-hp-static.test.ts)覆盖青衣、简、莱特、卢西娅的四条属性转化、玲珑妆匣五档精炼与独立层数，以及耀嘉音 2 影的具名差异。规则是验收夹具，不作为正式全量数据，也不推断来源未提供的其他培养档位。效果值与上游函数对比，最终伤害另按当前 core 公式验算；这不表示已经完成 ZZZ-HP 整个应用的全量差分或游戏实测。数值单位先归一，计算值与显示舍入分开。
+[对比测试](../../../packages/core/test/effects/zzz-hp-static.test.ts)覆盖青衣、简、莱特、卢西娅的四条属性转化、玲珑妆匣五档精炼与独立层数，以及耀嘉音 2 影的具名差异。规则是验收夹具，不作为正式全量数据，也不推断来源未提供的其他培养档位。效果值与上游函数对比，最终伤害另按当前 core 公式验算；这不表示已经完成 ZZZ-HP 整个应用的全量差分或游戏实测。数值单位先归一，计算值与显示舍入分开。
 
 培养配置至少覆盖：已提供档位的选值、选中缺档的拒绝、合法零值、影画门槛前后及高影画不重复修改、精炼择一与 buff 层数独立。转化覆盖阈值和封顶前后，并保留已知差异的具体输入与结果。
 

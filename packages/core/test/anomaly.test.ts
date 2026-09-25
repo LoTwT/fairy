@@ -303,7 +303,7 @@ describe("calculateVirtualAgentSnapshot", () => {
         weights.map((effectiveAnomalyBuildup, index) =>
           createRecord({
             effectiveAnomalyBuildup,
-            penetrationValue: values[index],
+            penetrationValue: values[index]!,
           }),
         ),
       )

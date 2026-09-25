@@ -1,6 +1,6 @@
 # 效果模型类型与执行契约
 
-本文确定模型实现应遵守的行为，交付范围按[实施阶段](#实施阶段)划分。字段、联合分支与单位以 [`@randomplay/effects` 的包内类型](../../../packages/effects/src/types.ts)为唯一类型来源；业务动机见[模型总览](index.md)，游戏条款及其证据限制见[实例页](examples.md)。包已实现运行时校验、`prepareEffects`、`supplyEffectState`、`synchronizeSuppliedInstances`、`evaluateEffects` 与 `advanceEffects`，两个实施阶段均已交付，满足完整 `EffectEngine` 接口。
+本文确定模型实现应遵守的行为，交付范围按[实施阶段](#实施阶段)划分。字段、联合分支与单位以 [`@randomplay/core` 的包内类型](../../../packages/core/src/effects/types.ts)为唯一类型来源；业务动机见[模型总览](index.md)，游戏条款及其证据限制见[实例页](examples.md)。包已实现运行时校验、`prepareEffects`、`supplyEffectState`、`synchronizeSuppliedInstances`、`evaluateEffects` 与 `advanceEffects`，两个实施阶段均已交付，满足完整 `EffectEngine` 接口。
 
 [contract-examples.ts](contract-examples.ts) 提供可编译的规则、输入和类型反例，直接引用包内正式类型；`pnpm check:spec-types` 编译该文件作为类型契约检查，包测试另行验证这些实例通过运行时校验。其中 `syntheticRuleSet` 是纯合成验收数据；游戏实例中显式选择的读取时点、刷新策略和动作别名只用于验证表达能力，不据此发布游戏规则。
 
@@ -345,7 +345,7 @@ TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、错
 
 ### 类型附件检查
 
-本检查已接入仓库根验收流程：`pnpm check:spec-types`（随 `pnpm check` 运行）。它以严格模式编译 `contract-examples.ts`，后者直接引用 `@randomplay/effects` 的包内正式类型；命令本身以根 `package.json` 的脚本为唯一权威来源，不在本文复制完整参数。
+本检查已接入仓库根验收流程：`pnpm check:spec-types`（随 `pnpm check` 运行）。它以严格模式编译 `contract-examples.ts`，后者直接引用 `@randomplay/core` 的包内正式类型；命令本身以根 `package.json` 的脚本为唯一权威来源，不在本文复制完整参数。
 
 合法例通过 `satisfies` 检查；`RejectedCombinations` 用类型断言确保非法例不能赋给目标类型，不用忽略诊断的注释掩盖错误。这是类型契约检查，不是求值器执行测试。
 

@@ -1,6 +1,6 @@
 # ZZZ-HP 静态增益数据接入
 
-状态：固定版本的批量转换器、正式制品和目录消费入口已实现。本页约束静态数据接入，来源优先级、计算范围和培养配置以[静态快照规范](../effects/static-snapshot.md)为准，效果类型与运行行为继续由 [effects 类型](../../../packages/effects/src/types.ts)和[执行契约](../effects/execution.md)维护。
+状态：固定版本的批量转换器、正式制品和目录消费入口已实现。本页约束静态数据接入，来源优先级、计算范围和培养配置以[静态快照规范](../effects/static-snapshot.md)为准，效果类型与运行行为继续由 [effects 类型](../../../packages/core/src/effects/types.ts)和[执行契约](../effects/execution.md)维护。
 
 ## 实际覆盖与使用限制
 
@@ -153,8 +153,8 @@ import rawCatalog from "@randomplay/data/definitions/effects/static-catalog.json
 import {
   calculateStaticDamageFromCatalog,
   parseEffectRuleSet,
-} from "@randomplay/effects"
-import type { StaticEffectCatalog } from "@randomplay/effects"
+} from "@randomplay/core"
+import type { StaticEffectCatalog } from "@randomplay/core"
 
 const definitions = parseEffectRuleSet(rawDefinitions)
 if (!definitions.ok) throw new Error(JSON.stringify(definitions.issues))

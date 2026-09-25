@@ -20,7 +20,7 @@ import type {
   StaticEffectCatalog,
   Stat,
   Unit,
-} from "../../../effects/src/types.ts"
+} from "@randomplay/shared"
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
 import {
