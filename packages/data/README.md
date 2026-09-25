@@ -1,6 +1,10 @@
 # @randomplay/data
 
-`loadStaticCalculationData({ agents, wEngines })` 按需获取带版本身份的同版计算资料。调用方使用 `resolveAgentAction` 后，将结果传给 core；两个公开包保持相同版本并同批发布。详见[包规范](../../docs/specs/packages.md)和[静态组装](../../docs/specs/core/static-calculation.md)。
+`loadStaticCalculationData({ agents, wEngines })` 按需获取带版本身份的同版计算资料。调用方使用 `resolveAgentAction` 后，将结果传给 core；两个公开包保持相同版本并同批发布。
+Node 要求 `>=24.11.0`，使用 ESM；浏览器已验收 Vite 开发与生产构建。
+资料读取可单独使用本包，计算时显式安装同版 core。
+[安装与旧版升级](https://github.com/LoTwT/fairy/blob/main/docs/specs/packages.md)说明当前源码 API 与 npm `0.1.4` 的差异，
+[完整静态计算示例](https://github.com/LoTwT/fairy/blob/main/docs/specs/core/static-calculation.md#完整计算示例)串联公开加载、解析与计算入口。
 
 `loadAgentActions` 按角色读取技能动作目录；`resolveAgentSkillLevel` 和 `resolveAgentAction` 解析显式等级、影画及动作选择。倍率、逐次命中限制和覆盖详情见[技能动作规范](../../docs/specs/data/skill-actions.md)。
 
@@ -8,7 +12,7 @@ Fairy 的游戏来源资料与数据整理包。
 
 根入口新增 `loadAgentLevel60Attributes`、`loadWEngineLevel60Attributes` 和 `loadSDriveDiscMaxLevelAffixes`，按需读取角色 60 级基线与独立核心培养表、音擎 60 级属性和 S 级满强化驱动盘词条。百分比已转换为比例；完整字段、面板边界、固定证据及候选生成命令见[属性规范](../../docs/specs/data/panel-attributes.md)。
 
-静态增益另外提供固定版本 ZZZ-HP 转换制品：`@randomplay/data/definitions/effects/static.json`、`static-catalog.json`、`static-coverage.json`。使用 effects 的 `calculateStaticDamageFromCatalog` 读取规则与选项目录，按显式培养、buff 和命中计算伤害；data 根入口不加载这些 JSON，也没有新增运行时计算依赖。覆盖、限制、离线生成方式与示例见[静态数据接入规范](../../docs/specs/data/zzz-hp-static-effects.md)。
+静态增益另外提供固定版本 ZZZ-HP 转换制品：`@randomplay/data/definitions/effects/static.json`、`static-catalog.json`、`static-coverage.json`。使用 core 的 `calculateStaticDamageFromCatalog` 读取规则与选项目录，按显式培养、buff 和命中计算伤害；data 根入口不加载这些 JSON，也没有新增运行时计算依赖。覆盖、限制、离线生成方式与示例见[静态数据接入规范](../../docs/specs/data/zzz-hp-static-effects.md)。
 
 Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。公开接口见[数据消费与 npm 导出契约](../../docs/specs/data/consumption.md)。
 
