@@ -1,18 +1,18 @@
 # 首批自动效果规则接入
 
-本页规定 PR 6 的实施范围与验收要求，依赖[类型与执行契约](execution.md)中已经交付的完整 `EffectEngine`。游戏条款及尚未确认的机制仍由[实例与核对记录](examples.md)维护，本页不重复维护证据缺口清单。
+状态：首批自动规则及其消费链路已实现，使用[类型与执行契约](execution.md)中的完整 `EffectEngine`。本页维护正式规则边界与验收要求；游戏条款及尚未确认的机制由[实例与核对记录](examples.md)维护。
 
 ## 目标与完成边界
 
-将已有明确来源的游戏触发规则作为 `@randomplay/data` 的正式 JSON 定义发布，使消费者能够经过解析、准备、事件推进得到可追溯的一次性请求。PR 6 完成表示本页规定的首批规则及其消费链路已交付，不表示耀嘉音、丽娜、啄木鸟电音和玲珑妆匣的全部自动机制已还原。
+已有明确来源的游戏触发规则作为 `@randomplay/data` 的正式 JSON 定义发布，消费者经过解析、准备、事件推进得到可追溯的一次性请求。交付范围限于本页规定的首批规则，不表示耀嘉音、丽娜、啄木鸟电音和玲珑妆匣的全部自动机制已还原。
 
-当前可以独立交付的是玲珑妆匣的入场基础回能请求。四组对象的其他自动规则仍受实例页证据清单约束；本次逐项核对并保留准确状态，不能为了扩大规则数量采用未确认的默认计时、属性阶段、动作归类或唯一性策略。
+当前已交付玲珑妆匣的入场基础回能请求。四组对象的其他自动规则仍受实例页证据清单约束，不能为了扩大规则数量采用未确认的默认计时、属性阶段、动作归类或唯一性策略。
 
-本次实现沿用现有规则 AST、`SourceBinding`、`Event`、`WorldObservation` 和 `EventRequest`，不新增效果引擎、战斗模拟器或原始游戏日志解析协议。已有 `starter.json` 三条规则的内容、身份、版本及消费方式保持兼容。
+自动规则沿用规则 AST、`SourceBinding`、`Event`、`WorldObservation` 和 `EventRequest`，不包含独立效果引擎、战斗模拟器或原始游戏日志解析协议。已有 `starter.json` 三条规则的内容、身份、版本及消费方式保持兼容。
 
 ## 证据使用
 
-实施基线为 `main@9d75cb11cabadaaceb4cac01d1dbe4a29a01f2d2`。核对游戏文本时使用经验证的 Nanoka 3.1 静态发布副本，遵守[本地观察引用约定](../nanoka/source.md#本地观察引用)；读取受管理目录时遵守[整合规范](../data/integration.md#读取契约与保证边界)。来源路径不是仓库内原始数据文件，也不是上游不可变快照承诺。
+首次接入的实施基线与核对记录见[实例页](examples.md#核对依据)。核对游戏文本时使用经验证的 Nanoka 3.1 静态发布副本，遵守[本地观察引用约定](../nanoka/source.md#本地观察引用)；读取受管理目录时遵守[整合规范](../data/integration.md#读取契约与保证边界)。来源路径不是仓库内原始数据文件，也不是上游不可变快照承诺。
 
 玲珑妆匣的直接依据为 `zzz/3.1/{zh,en}/weapon/14131.json` 的 `/talents/1/desc` 至 `/talents/5/desc`。中英文条款共同支持：四类指定入场、队伍内任意角色触发、回复装备者、精炼 1—5 的基础量，以及 5 秒触发间隔。条款后半段的增伤全队唯一不能被挪到前半段回能规则。
 
@@ -22,12 +22,12 @@
 
 ## 发布制品与接口
 
-新增 Git 跟踪制品 `packages/data/definitions/effects/automatic.json`：
+Git 跟踪制品为 `packages/data/definitions/effects/automatic.json`：
 
 - `schemaVersion: 1`、`ruleSetId: "automatic-effects"`、初始 `revision: "1"`。
 - 首批包含 `w-engine:14131:energy-on-entry`；没有需要登记的状态或动作时，`states` 和 `actions` 为空数组。
-- 新增公开子路径 `@randomplay/data/definitions/effects/automatic.json`，映射到 `dist/definitions/effects/automatic.json`。
-- 沿用 definitions 的构建复制与逐字节验证机制。根入口仍不加载定义 JSON，data 不依赖 effects，effects 不依赖 data。
+- 公开子路径 `@randomplay/data/definitions/effects/automatic.json` 映射到 `dist/definitions/effects/automatic.json`。
+- 沿用 definitions 的构建复制与逐字节验证机制。根入口仍不加载定义 JSON，data 与 core 没有相互的运行时依赖。
 - `automatic.json` 与 `starter.json` 保持不同规则集身份，首批效果 ID 不重叠。可分别消费；应用需要合并时显式构造自己的规则集身份和版本，再经过现有解析入口，不新增组合 API 或隐式全局注册表。
 
 规则定义、参数及来源引用以发布 JSON 为唯一事实来源。测试应加载真实制品，不另写一份同形规则作为正式规则验收输入。规范中的示例规则仍是表达能力示例，不自动成为发布内容。
@@ -69,8 +69,5 @@
 
 ## 文件边界与交付
 
-预计涉及本页、实例页、模型入口、data 消费规范、新 JSON、data 的 package exports 与打包/浏览器测试、effects 的正式规则验收，可能超过 8 个文件。按来源定义、消费与验收这条链组织变更，避免额外服务、依赖、命令或配置开关。
-
-不修改 `docs/HISTORY.md`、真实 raw、来源整合规则或 integrated 快照。若实施发现必须改变这些范围，应先说明必要性；已有数据管理状态维护规则始终适用，不能用静态临时副本的成功掩盖主工作区的异常。
-
-本次交付必须列出实际发布的 effectId、来源核对结果、仍受限的机制及原因、验证命令和结果。完成实现后进行内容 review，有问题先修复并复验；通过后提交、推送并创建一个面向 main 的 PR。合并与 npm 发布另行处理。
+新增或修订自动规则时，同步正式 JSON、来源证据、消费说明与验收，列明实际 effectId、受限机制及验证结果。
+涉及来源整合或 integrated 变化时，按[数据管理状态同步流程](../data/integration.md#数据管理状态的同步维护)维护受影响工作区；包发布统一遵循[联动发布规范](../packages.md)。

@@ -92,10 +92,14 @@ npm install --save-exact /absolute/path/randomplay-core-VERSION.tgz /absolute/pa
 1. 按前述规则确认具体目标版本和发布授权，再同步 core/data manifest；若调整仓库根版本或版本相关测试，保持其语义一致。
    `static-e2e.test.ts` 当前固定验收 `packageVersion`，改版时应同步检查；历史验收报告中的版本仍保留当时事实。
    用 `npm view @randomplay/core versions --json`、`npm view @randomplay/data versions --json` 核对目标版本是否已有制品。
-2. 分别核实两个包在 npm 设置页中的 Trusted Publisher：仓库为 `LoTwT/fairy`，工作流文件名为 `release.yml`，
-   环境为 `npm-publish`，并允许直接 `npm publish`。GitHub 的同名环境及其保护规则须保持匹配。
-   工作流通过 `id-token: write` 获取 OIDC 身份，无需本机 npm 登录或长期 npm token；
-   `npm whoami` 的结果不能判断 OIDC 是否可用。查看或修改 npm 设置时，按页面要求完成二次验证。
+2. 常规发版以两个包已有的成功 OIDC 发布记录、仓库内相关配置差异和已知的管理变更为依据，
+   无需每次打开 npm 设置页或要求用户完成二次验证。首次接入、新增包、发布身份或权限变化，
+   或发布出现认证、授权错误时，再核对受影响包的 Trusted Publisher：仓库为 `LoTwT/fairy`，
+   工作流文件名为 `release.yml`，环境为 `npm-publish`，并允许直接 `npm publish`。
+   工作流的 GitHub environment 须与 npm 配置一致，并遵守该环境的保护规则。工作流通过 `id-token: write` 获取 OIDC 身份，
+   npm CLI 自动完成发布认证，无需本机 npm 登录或长期 npm token；`npm whoami` 不能判断 OIDC 是否可用。
+   仅在确实需要访问或修改受保护的 npm 设置时，按页面要求完成二次验证。
+   配置与认证机制见 [npm Trusted Publishing 文档](https://docs.npmjs.com/trusted-publishers/)。
 3. 在仓库根目录对最终候选执行检查并串行打包，避免多个构建争用受管理数据锁：
 
    ```sh

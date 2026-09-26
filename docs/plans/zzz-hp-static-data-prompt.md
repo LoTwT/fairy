@@ -1,69 +1,8 @@
-# ZZZ-HP 静态增益批量接入执行 prompt
+# ZZZ-HP 静态数据接入记录
 
-在 Fairy 主工作区完成一个完整 PR：将固定版本的 ZZZ-HP 代理人、音擎和驱动盘静态增益转成正式数据，接通选择配置后的瞬时伤害计算。按实现、review、修复、提交、推送、开 PR、核验 CI 的次序推进；合并需要当前任务授权覆盖，不从本交接文档推断外部写入授权。
+原批量接入任务已通过 [PR #169](https://github.com/LoTwT/fairy/pull/169) 完成，
+对应提交为 `e5843c17`。原执行 prompt 保留在 Git 历史中，本页只提供维护入口。
 
-## 开始位置
-
-- 使用既有主工作区；准备本规范时基线为 `main@1c3c0305f6cda77ac48c4f4bc6456a4007ecc3ba`，任务分支为 `codex/zzz-hp-static-data`。先检查实际 HEAD、工作区改动、进行中的 Git 操作和其他任务占用，保留本次规划文件及任何用户改动。不要另建工作区，也不要重置主工作区。
-- 按 AGENTS.md 处理 Git 身份、提交 provenance、操作账号和数据管理状态；新执行者自行核实本任务的 Model / Effort，不从旧提交或本 prompt 推断。
-- 从 `docs/index.md` 进入，只按需阅读本任务相关规范。
-
-## 权威文档
-
-1. [本次接入规范](../specs/data/zzz-hp-static-effects.md)：实现目标、固定输入、身份、制品、目录消费接口和验收。
-2. [来源盘点](zzz-hp-static-inventory.md)：已复核的范围、读取数量、身份映射和空记录。数字是来源记录数，不是最终规则数或转换成功数。
-3. [静态快照与培养配置](../specs/effects/static-snapshot.md)：来源优先级、培养档位、静态边界和已知差异。
-4. [effects 执行契约](../specs/effects/execution.md)与 [types.ts](../../packages/core/src/effects/types.ts)：正式类型、单位、校验、求值和 core 落点。
-5. [数据消费契约](../specs/data/consumption.md)与[管理状态维护](../specs/data/integration.md#数据管理状态的同步维护)：发布、按需加载、持锁读取和维护边界。
-
-本轮已确认方向，不重新讨论是否采用 ZZZ-HP、是否只做少数角色或是否需要动态模拟。已有公式对应的适配缺口应补齐；新公式和后续版本按条目明确延期。不要修改 `docs/HISTORY.md`。
-
-## 输入准备
-
-固定上游为 `Nie7bai/ZZZ-HP@0df40c5bc38f8da7ed0f9eed6be87fb8155b8357`。增益文件为 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json`，其 SHA-256 见来源盘点。取得固定文件后先校验，正常 check/build 不联网。
-
-核对同一版本的 `zzz-hp/src/stores/calculatorBuffs.ts`、`zzz-hp/src/utils/calculatorUi.ts`、`buffEffect.ts`、`panelBuffCalc.ts`、`damageCalc.ts`、`multFactorPercent.ts`、`remielUtils.ts` 和必需依赖。转换顺序是加载规范化、有效表示收集、上下文筛选与求值；不能只按类型名推测语义，也不能只按 JSON 的 `effects` 汇总字段转换。来源盘点继续保留原始位置与数量，不被规范化后的集合替换。
-
-通过现有持锁读取/发布准备取得 Nanoka 稳定副本。可先执行 `pnpm --filter @randomplay/data prepare:consumer`，然后从本次 `.generated/integrated` 副本读身份与补充证据；不要直接遍历受管理 integrated，更不要为构建重抓或覆盖 raw。
-
-## 实现顺序
-
-### 1. 固定映射与转换
-
-- 在 `packages/data/scripts/` 增加 `generate-static-effects.ts` 入口及完成同一职责所需的转换模块，登记一个内部 `generate:static-effects` 命令。身份和条目修正用显式数据表，避免按名称猜测。
-- 覆盖全部来源实体、pack 和实际读取的效果位置，记录空 pack、占位项和反向缺项。不要只遍历已匹配成功的来源，也不要把音擎五档各算成一种可同时叠加的效果。
-- 将参数、条件、单位、输入时机、受益对象和命中范围转成当前 effects 模型；根据规范补齐实际出现的能力缺口。保留稳定 ID、来源位置和具名修正。
-- 核心等级无显式来源字段：逐条核对等级证据，保留部分参数表；不能批量声明所有效果支持任意核心等级，或自动假设均为第 7 档。
-- 对精炼间结构变化、跨档异常标记、倍率增量归约、独立决算项、异常持续时间、互斥梯度、潜能条件和历史读取值分别处理。缺参数不能被默认值掩盖。
-- 明确处理 9 条旧技能定位展开，以及家政员/心弦夜响精炼 5 的异常适用标记继承。锐化/锐暴、蕾米埃尔自身异常强度新公式和通用特殊乘区遵循 spec 的既有 core 边界；流明标识与筛选按已支持耀变的适配补齐。
-- 候选输出放入新的目录；全部校验成功后再安装到正式 definitions，重复生成须字节一致。
-
-### 2. 正式制品和目录消费
-
-- 生成并提交 `packages/data/definitions/effects/static.json`、`static-catalog.json`、`static-coverage.json`，按规范登记显式 JSON 子路径。
-- 在 `packages/core/src/effects/types.ts` 维护目录及输入的正式类型，实现并导出 `calculateStaticDamageFromCatalog`。现有 `calculateStaticDamage`、starter 和 automatic 消费继续可用。
-- 目录入口先验证目录/规则集一致性、角色来源、装备、选择、培养条件与必要输入，再展开选中规则及修改依赖，复用现有求值和 core 计算。
-- 按 spec 补齐异化 from-effects / settled 模式、耀变转化的唯一归属、历史属性来源与当前命中者分离、标准紊乱/乱流伤害项的时间准备输入。不要只包装现有 StaticDamageInput；它缺少已结算异化等必要表达。历史结果直接复用，同一转化与时间增量只应用一次。
-- 被选中的未知或未支持条目必须给出可定位错误；不要因未选择的独立条目缺档而阻止合法计算。合法但不匹配本次命中的条件属于零贡献。
-- data 保持静态分发职责，无新增运行时计算依赖；消费者不需要 raw、生成器、锁或在线服务。不新建包，不把完整 ZZZ-HP 应用移植进来。
-
-### 3. 验收
-
-先写有实际辨别力的转换、身份和消费用例，再实现对应能力。优先复用现有测试工具，避免为一次性验收长期新增脚手架。
-
-- 转换：加载规范化与读取优先级、稳定 ID、去重/合并、空记录、来源摘要错误、完整覆盖分母、重复生成和失败无部分写入。数组重排在合成转换用例验证；正式固定输入入口仍要拒绝错误摘要。
-- 培养：核心已知/缺失/零值，影画累计与修改只应用一次，精炼 1—5 择一、结构变化和独立层数。
-- 选择与求值：开关、互斥档、零/最大/非法层、手工输入缺失、条件真假、转化阈值/上限、单位、循环依赖。
-- 适用性：自身/队友、同名装备不同持有者、异职装备、恰好人数、受益人与命中元素、失衡、多个技能目标和追加攻击。
-- 数值：固定上游规范化/读取/求值函数作独立参考；每个已转换来源位置有代表输入。多来源、同区倍率增量、特定基础伤害项和异常快照另设组合验收；验证精通 500 的单次异化结果为 1.1、已保存 1.38 不随当前 buff 改变、耀变精通转化仅一次，以及紊乱剩余时间与乱流持续时间不混用。保留耀嘉音 2 影等具名差异。
-- 发布：扩展 data 的实际打包、离线安装与 Vite 开发/生产验收，验证新子路径可计算，根入口冷启动不拉取新定义 JSON。
-
-运行 `pnpm check` 和 `pnpm --filter @randomplay/data verify:browser`，记录实际输出。仅改 definitions 时，不无条件重写 integrated 的管理记录；若实际改变已接入实体、整合规则、来源版本或 integrated，则按管理规范完成主工作区维护后才能报告完成。
-
-### 4. Review 与 PR
-
-完整 review 本次 diff 和正式制品，重点攻击“无声漏算、重复累计、误认档位、跨实体串源、不同归约语义混用”这些真实风险。发现问题先复现、修复并验证，再继续已经授权的 Git 操作；不要为了赶完把关键路径记为未验证。
-
-更新规范状态、README 和消费示例；实际规则数、转换数、修正数、未支持数均来自生成报告，不沿用盘点数字冒充完成结果。提交说明写清实际支持范围、明确边界和验证证据。不开 npm 发布，不修改历史档案，不替其他任务清理资源。
-
-最终汇报应给出：PR 链接及 head、正式制品和入口、覆盖报告、明确延期条目与原因、review 修复项、实际检查/CI 结果，以及主工作区管理状态是否需要维护和维护结论。
+- 转换、制品、目录消费与验收要求见[静态增益数据接入规范](../specs/data/zzz-hp-static-effects.md)。
+- 当前固定来源与培养边界见[静态快照规范](../specs/effects/static-snapshot.md)，初始盘点见[来源盘点](zzz-hp-static-inventory.md)。
+- 实际支持范围以[正式覆盖报告](../../packages/data/definitions/effects/static-coverage.json)为准；后续修订不覆盖初始盘点记录。

@@ -1,7 +1,7 @@
 # PR A 实施与交接
 
-状态：PR A 实现及评审修复已完成；提交与合并状态以 Git 和 PR 记录为准。
-正式数据契约统一维护在 [60 级属性规范](../specs/data/panel-attributes.md)，本页仅记录评审处理与交接。
+状态：PR A 已通过 [PR #170](https://github.com/LoTwT/fairy/pull/170) 完成，后续技能动作与完整面板组装也已交付。
+正式数据契约统一维护在 [60 级属性规范](../specs/data/panel-attributes.md)，本页保留当时的评审与验收记录。
 
 ## 已实施
 
@@ -14,7 +14,7 @@
 
 | 事项                             | 处理                                                                                  |
 | -------------------------------- | ------------------------------------------------------------------------------------- |
-| 常驻被动转化缺口                 | 角色基线明确不含本的防御转攻击等转化；PR C 必须补齐，已结算输入不得再次应用           |
+| 常驻被动转化缺口                 | 角色基线不含本的防御转攻击等转化；后续静态组装已补齐，已结算输入不再重复应用          |
 | 属性类型/单位/运算未完全固定     | 正式 TypeScript 类型和显式 prop/name2 映射；未知字段或单位拒绝生成                    |
 | 生成与旧制品校验可能循环         | `preparePublication` 保持来源获取职责；`prepareDefinitions` 独立校验派生属性          |
 | 构建中途读取变化后的 definitions | 构建准备阶段冻结全部 definitions 和 manifest；结束只复制并验证独占副本                |
@@ -31,16 +31,18 @@
 
 ## 验收记录
 
+以下数量与包拆分保留 PR A 当时的事实；当前包边界见[包规范](../specs/packages.md)。
+
 - 固定来源连续生成两次，155 个 JSON 文件逐字节一致。
 - `pnpm check` 通过：data 993 项、core 1,423 项、effects 545 项常规测试，以及三个包各自的打包消费验收、类型、规范示例和格式检查。
 - `pnpm --filter @randomplay/data verify:browser` 通过：真实 Chromium 的 Vite 开发/生产模式，根入口零 JSON、单体按需请求、独立返回值和直接 JSON 子路径。
 - 浏览器构建图验收最初漏列新增属性分块，补齐预期清单后重跑通过；实现没有因此改变加载行为。
 - lint 保留未修改的 `packages/core/test/effects/advance-effects.test.ts` 中一条函数作用域建议，无新增告警。
 
-## 后续范围
+## 后续衔接
 
-- PR B：技能/动作倍率与影画技能等级选择。
-- PR C：配置组装完整面板、已结算面板输入、常驻被动转化、二件套结算和增益去重、伤害衔接。
+- PR B 已通过 [PR #171](https://github.com/LoTwT/fairy/pull/171) 交付，当前契约见[技能动作规范](../specs/data/skill-actions.md)。
+- PR C 已通过 [PR #172](https://github.com/LoTwT/fairy/pull/172) 交付，覆盖完整面板、常驻转化、二件套和增益去重，当前契约见[静态计算规范](../specs/core/static-calculation.md)。
 - 音擎回能增益的点数/百分比疑点需另行逐条核对；PR A 未改现有 effects 制品。
 
-本次不修改 integrated、来源实体、整合规则或本机数据管理记录，不修改冻结历史档案。
+PR A 未修改 integrated、来源实体、整合规则、本机数据管理记录或冻结历史档案。

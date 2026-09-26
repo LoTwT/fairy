@@ -8,15 +8,13 @@ Node 要求 `>=24.11.0`，使用 ESM；浏览器已验收 Vite 开发与生产�
 
 `loadAgentActions` 按角色读取技能动作目录；`resolveAgentSkillLevel` 和 `resolveAgentAction` 解析显式等级、影画及动作选择。倍率、逐次命中限制和覆盖详情见[技能动作规范](../../docs/specs/data/skill-actions.md)。
 
-Fairy 的游戏来源资料与数据整理包。
-
-根入口新增 `loadAgentLevel60Attributes`、`loadWEngineLevel60Attributes` 和 `loadSDriveDiscMaxLevelAffixes`，按需读取角色 60 级基线与独立核心培养表、音擎 60 级属性和 S 级满强化驱动盘词条。百分比已转换为比例；完整字段、面板边界、固定证据及候选生成命令见[属性规范](../../docs/specs/data/panel-attributes.md)。
+根入口提供 `loadAgentLevel60Attributes`、`loadWEngineLevel60Attributes` 和 `loadSDriveDiscMaxLevelAffixes`，按需读取角色 60 级基线与独立核心培养表、音擎 60 级属性和 S 级满强化驱动盘词条。百分比已转换为比例；完整字段、面板边界、固定证据及候选生成命令见[属性规范](../../docs/specs/data/panel-attributes.md)。
 
 静态增益另外提供固定版本 ZZZ-HP 转换制品：`@randomplay/data/definitions/effects/static.json`、`static-catalog.json`、`static-coverage.json`。使用 core 的 `calculateStaticDamageFromCatalog` 读取规则与选项目录，按显式培养、buff 和命中计算伤害；data 根入口不加载这些 JSON，也没有新增运行时计算依赖。覆盖、限制、离线生成方式与示例见[静态数据接入规范](../../docs/specs/data/zzz-hp-static-effects.md)。
 
 Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。公开接口见[数据消费与 npm 导出契约](../../docs/specs/data/consumption.md)。
 
-[来源数据整合规范](../../docs/specs/data/integration.md) 定义了第一阶段完整代理人资料的字段归属、命名与注释、多语言拆分、来源追溯与文件契约，已完成本地 Nanoka 3.1 全部 58 个代理人的类型覆盖与离线契约验证。现已实现[包内单代理人纯整合函数](src/integration/integrate-agent.ts)及[正式类型](src/integration/agent-types.ts)，对合成输入执行常规类型与保真测试；驱动盘套装的单实体纯整合（[integrate-drive-disc.ts](src/integration/integrate-drive-disc.ts)、[drive-disc-types.ts](src/integration/drive-disc-types.ts)）已按规则 `nanoka-drive-disc-reference/1` 实现并接入生产快照；WEngine 的单实体纯整合（[integrate-w-engine.ts](src/integration/integrate-w-engine.ts)、[w-engine-types.ts](src/integration/w-engine-types.ts)）已按规则 `nanoka-w-engine-reference/1` 实现并接入生产快照；邦布的单实体纯整合（[integrate-bangboo.ts](src/integration/integrate-bangboo.ts)、[bangboo-types.ts](src/integration/bangboo-types.ts)）已按规则 `nanoka-bangboo-reference/1` 实现并接入生产快照；怪物的单实体纯整合（[integrate-monster.ts](src/integration/integrate-monster.ts)、[monster-types.ts](src/integration/monster-types.ts)）已按规则 `nanoka-monster-reference/1` 实现并接入生产快照；Shiyu 的单实体纯整合（[integrate-shiyu.ts](src/integration/integrate-shiyu.ts)、[shiyu-types.ts](src/integration/shiyu-types.ts)）已按规则 `nanoka-shiyu-reference/1` 实现并接入生产快照；Boss 的单实体纯整合（[integrate-boss.ts](src/integration/integrate-boss.ts)、[boss-types.ts](src/integration/boss-types.ts)）已按规则 `nanoka-boss-reference/1` 实现并接入生产快照；Simul 的单实体纯整合（[integrate-simul.ts](src/integration/integrate-simul.ts)、[simul-types.ts](src/integration/simul-types.ts)）已按规则 `nanoka-simul-reference/1` 实现并接入生产快照。现已实现离线全量输入读取、确定性序列化、原始字节与输出字节摘要、总索引生成和完整制品复验。raw 保留来源版本目录；现已支持固定当前 integrated 数据集的多实体 v3 增量维护、按类别的更新差异报告、互斥读取、中断恢复与显式迁移，公开 API 消费随 npm 版本发布的固定快照。
+[来源数据整合规范](../../docs/specs/data/integration.md)维护八类资料的字段、类型、规则版本与文件契约，以及当前 v3 数据集的增量更新、差异报告、互斥读取、恢复和迁移协议。npm 消费者读取随包发布的固定快照；来源维护命令仅在源码工作区使用。
 
 效果定义也通过显式 JSON 子路径发布：`@randomplay/data/definitions/effects/starter.json` 与 `@randomplay/data/definitions/effects/automatic.json`。自动规则的范围、事件输入及基础回能请求的执行边界见[消费说明](../../docs/specs/data/consumption.md#自动效果消费)。根入口不自动加载定义。
 
@@ -189,46 +187,19 @@ pnpm --filter @randomplay/data generate:integrated raw/nanoka 3.1 integrated
 命令名称不绑定实体；生成当前已登记类别的完整快照（代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Boss 与 Simul 八类），
 要求这八类对应的完整来源输入齐备，不按目录扫描推断成员，也不接受只覆盖部分类别的输入。
 
-同一个命令自动处理以下情况：
+生成入口处理首次生成、合法静态 v3 制品的本机初始化，以及受管理数据的恢复与增量更新。
+初始化、旧规则及 v2 外壳的处理条件由[更新与恢复协议](../../docs/specs/data/integration.md#81-当前数据集更新与恢复协议)统一规定；独立读取与普通构建不初始化管理记录。
+相同输出保留原文件的内容、inode 和 mtime，但仍执行完整候选构建与校验。
 
-- 目标不存在：首次生成完整数据。
-- 新克隆只有合法 JSON、没有本机管理记录：持永久锁完整验证已有制品，建立本机记录，再进入更新流程。
-- 已有受管理数据：按记录恢复未完成事务，完整验证旧数据并执行整库增量更新（候选恒按当前规则重建）。
+控制目录位于目标同级的 `.<目标名>.fairy-state/`，保存永久锁、本机记录、维护报告与事务材料，
+不加入 Git 或 npm 包。不要删除 `lock.sqlite`、当前数据或管理记录来绕过错误。
+最新报告为该目录下的 `maintenance.json`，其字段、计数与归因见[更新差异报告](../../docs/specs/data/integration.md#更新差异报告)。
 
-初始化要求当前 v3 格式、当前登记表的全部类别、规则 v4、当前完整语言配置、成员与精确文件集合及实际字节摘要
-全部通过验证；空目录、损坏制品、异常控制文件或损坏记录都会拒绝。初始化只登记已验证的数据，不改写 JSON。
-v2 外壳的制品不会被隐式登记或转换：静态 v2 制品需要显式迁移；受管理 v2 数据集会被整库重建（实体字节相同的文件
-仍复用原 inode），或改用迁移命令只改写索引外壳。
-相同输入重复执行仍完整构建和校验，但当前文件的内容、inode 和 mtime 保持不变；临时候选仍有 I/O。
-初始化中断后直接重跑同一命令，永久锁保留，进程终止会自动释放锁。独立读取、恢复和静态验证不会初始化非受管理制品。
+Git 更新 JSON 后若与本机记录不一致，按[数据管理状态同步流程](../../docs/specs/data/integration.md#数据管理状态的同步维护)处理，
+不能直接重新登记受管理数据。`BUSY`、未完成事务或归属不明的现场应保留并报告。
 
-底层复用[多实体构建器](scripts/nanoka-integration/snapshot-build.ts)、[完整制品验证器](scripts/nanoka-integration/snapshot-verify.ts)、
-[当前数据事务模块](scripts/nanoka-integration/current.ts)及[更新报告模块](scripts/nanoka-integration/update-report.ts)。流程仍为：
-按类别生成实体 JSON → oxfmt 格式化 → 计算最终字节摘要 → 生成并格式化 index.json → 完整校验 → 比较旧基线与候选、
-生成并检查维护报告 → 复用相同实体文件并安装当前数据。
-格式化发生在硬链接复用之前，使用仓库 `oxfmt.config.ts`。不要直接格式化当前目录；
-`pnpm format` 排除 integrated，`pnpm format:check` 仍检查它，旧排版通过生成入口更新。
-raw 保留来源版本目录；integrated 不加来源或版本层级，`data`/`details` 字段与语义不变。
-
-控制目录为目标同级的 `.<目标名>.fairy-state/`，默认是 `packages/data/.integrated.fairy-state/`；
-它保存永久锁、本机记录、最新维护报告及事务临时材料，被 Git 忽略。**不要删除永久 lock.sqlite 来解锁，
-也不要删除当前数据或管理记录来绕过错误。** 正常完成不保留历史数据目录。
-
-最新维护报告是 `.<目标名>.fairy-state/maintenance.json`：`categories` 保留各类别成员的未知字段提示等既有维护信息，
-`update` 是本次整库更新的差异报告（按类别的新增、修改、删除、无变化，来源与规则变化，字段级 JSON Pointer 差异，
-以及需要重点审查的既有内容摘要）。报告由本次已完整验证的旧基线与候选在提交前生成，不在提交后重新读取当前目录计算，
-也不写入 v3 索引；首次生成以 `baseline.kind: "none"` 明确表达；报告失败或超限时不会提交新数据，也不会截断冒充完整报告。
-输出未变时回执的 `outcome` 为 `unchanged`，报告仍完整生成并明确表达本次已检查、无变化。
-字段含义、计数口径与状态判定见[更新差异报告](../../docs/specs/data/integration.md#更新差异报告)。
-
-报告里的两类变化要分开看：`update.source` 记录来源侧事实，`update.rules` 与 `categories[].rulesVersion` 只记录整合规则版本变化，
-两者都不单独表示实体输出被改写（版本切换通常只带来资源名的新增与移除）；实体输出是否被改写看 `categories[].result`，
-是否存在需要人工确认的既有内容修改或删除看 `categories[].review`。判定口径与归因规则见上述规范链接，不在本文件重复定义。
-
-若 Git 更新了 JSON，使它与已有本机记录的摘要不一致，生成和恢复会明确拒绝并保留现场；
-本次不支持自动重新登记这种受管理数据，也不支持把未知规则或旧语言子集的非受管理制品直接初始化。
-已有受管理旧规则/语言/预算数据仍按记录复验、恢复与整库重建。完整规则见
-[更新与恢复协议](../../docs/specs/data/integration.md#81-当前数据集更新与恢复协议)。
+生成器在安装前格式化候选；不要直接格式化当前 integrated。`pnpm format` 排除该目录，
+`pnpm format:check` 仍检查它，旧排版通过生成入口更新。
 
 ## 验证、恢复与命令回执
 
@@ -251,14 +222,8 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 成功时脚本 stdout 输出一个 JSON 对象、退出 0；失败退出 1，stderr 输出转义且限长的错误，不打印堆栈。
 机器解析时加 `pnpm --silent`，避免 pnpm 执行信息混入 stdout。
 
-生成回执包含 `outcome`（`committed` 或 `unchanged`）、`artifactDirectory`、`maintenanceReportPath`、`format`、
-按类别的 `memberCounts`、`inputFileCount`、`outputFileCount`、`reusedEntityFiles`、`changedEntityFiles`、
-`removedEntityFiles`，以及本次更新摘要：`reportVersion`、`firstGeneration`、`sourceVersion`、`sourceChanged`、
-`rulesChanged`、`result`、`reviewRequired` 和按类别的 `categories`（`checked`、`presence`、`result`、成员与文件计数、
-`sourceRecordsChanged`、`rulesVersionChanged`、`reviewRequired`）。路径为实际绝对路径；实体计数不包含索引；
-逐条差异只写在制品外的报告里。验证回执包含目标路径、`format`、按类别的成员数与语言
-和 `verified: true`；恢复回执包含目标路径、`outcome`、`available` 与 `format`；迁移回执包含目标路径、
-`outcome`（`migrated` 或 `unchanged`）、`format`、按类别的成员数与实体文件数。
+生成、验证、恢复和迁移回执的完整字段见[当前数据集实现与命令](../../docs/specs/data/integration.md#当前数据集实现与命令)；
+逐条更新差异保存在制品外的维护报告中。
 提交后清理或 stdout 断管失败也可能退出 1，已经提交的数据会保留；应恢复并复验，不能仅按退出码判断是否提交。
 
 摘要证明制品内部字节一致性，不认证来源真实性或同一抓取批次。协议仅支持可信本机 macOS/Linux、同一文件系统及遵守锁的参与者；
@@ -270,5 +235,5 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 ## 约束
 
 - 本包拥有原始来源、清洗结果和发布数据。
-- 本包不依赖 `@randomplay/core`。
-- 整合资料保留来源原文与数值；计算语义需要单独人工讨论和重新建模，再由后续集成层组装计算输入。
+- 本包没有对 `@randomplay/core` 的运行时依赖。
+- 整合资料保留来源原文与数值；计算语义由 definitions 单独维护，完整输入由 core 的静态计算入口组装。
