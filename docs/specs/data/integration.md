@@ -1,4 +1,4 @@
-# 来源数据整合：代理人
+# 来源数据整合
 
 ## 状态与目标
 
@@ -17,7 +17,7 @@
 [Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference1)，Simul 单实体规则与实现状态见
 [Simul 单实体实现规则](#simul-单实体实现规则-nanoka-simul-reference1)。
 
-本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
+整合层把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
 不以 `@randomplay/core` 当前是否使用某字段来裁剪内容。来源资料也包含机器编码、资源标识、来源推荐和
 未解释字段，不能把它们全部声称为已经核实的游戏内可见文本。
 
@@ -31,9 +31,9 @@ definitions：经人工确认的计算语义
 core：计算
 ```
 
-本规范定义第一阶段代理人资料，来源为 [Nanoka Agents](../nanoka/agents.md)，上游名称 `character`
-在整合目录中称为 `agents`；驱动盘套装的独立规则见[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)。
-`definitions` 的内部模型由后续人工讨论决定；data 与 core 保持互不依赖。
+本规范覆盖上述八类资料。代理人来源为 [Nanoka Agents](../nanoka/agents.md)，上游名称 `character`
+在整合目录中称为 `agents`；其他类别的独立规则见各自章节。
+`definitions` 的计算语义分别由[属性](panel-attributes.md)、[技能动作](skill-actions.md)和[效果规范](../effects/index.md)维护；data 与 core 没有相互的运行时依赖。
 
 ## 1. 完整导出的边界
 
@@ -696,7 +696,7 @@ schema 路径的维护错误，不冒充来源结构异常，也不依赖来源�
 
 该纯函数仅处理已解析 JSON，验证来源值、必需字段、可选结构、共享一致性、保真与对象结果确定性。
 文件读取、严格 UTF-8 解码、摘要、序列化和全量索引由下述独立模块负责，这些职责不加入 `integrateAgent`。
-单实体对象测试不代替文件流程验收。计算 helpers、definitions 和 core 映射仍未实现；公开读取 API 见[数据消费契约](consumption.md)。
+单实体对象测试不代替文件流程验收。整合函数不承担计算语义和 core 输入适配；公开读取 API 见[数据消费契约](consumption.md)，完整计算链路见[静态计算规范](../core/static-calculation.md)。
 
 旧文档 example 已迁移并删除：
 
@@ -1263,7 +1263,7 @@ fairy-integrated-snapshot-<独占后缀>/
 可变当前目录使用；该构建入口不覆盖现有 integrated，增量、成员删除及事务恢复由第 8.1 节的独立更新器负责。
 
 全量构建器作为内部能力由统一生成入口调用，不提供单独的临时生成 package script；用户无需分步构建、初始化、更新。
-生成命令与回执见[当前数据更新实现与命令](#当前数据更新实现与命令)，使用说明见[data README](../../../packages/data/README.md#生成-integrated)。
+生成命令与回执见[当前数据集实现与命令](#当前数据集实现与命令)，使用说明见[data README](../../../packages/data/README.md#生成-integrated)。
 静态副本（当前 v3 外壳）可通过 `pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated` 独立复验；
 它只读该目录，不读取管理记录、不初始化、不恢复、不迁移。v2 外壳只由显式迁移识别与转换，没有独立的静态复验入口。
 独立验证接受一个非空目录参数；帮助、错误及回执遵守相同 CLI 契约。
@@ -1273,7 +1273,7 @@ fairy-integrated-snapshot-<独占后缀>/
 真实数据生成脚本不挂接普通 `build`、`test`、`check`、`prepack` 生命周期，不增加 npm `bin`。
 静态发布准备复用验证器；npm `files`、`exports` 与公开 API 由[消费契约](consumption.md)定义。
 
-[全量合成测试](../../../packages/data/test/agent-build.test.ts)覆盖完整输入、非法编码/数值/结构、资源预算、
+[全量合成测试](../../../packages/data/test/snapshot-build.test.ts)覆盖完整输入、非法编码/数值/结构、资源预算、
 路径越界/符号链接/非普通文件、忽略旧缓存、缺失拒绝、输入字节复用、全部摘要、配置语言顺序、重复构建、
 来源排版变化、重新序列化副本与制品篡改；大诊断量测试核对预算内未知字段及维护信息完整保留，
 不把诊断数组展开为调用实参。模拟中途及索引/报告写入失败，核对只清理本次资源。

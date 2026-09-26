@@ -1,6 +1,6 @@
 # 效果模型类型与执行契约
 
-本文确定模型实现应遵守的行为，交付范围按[实施阶段](#实施阶段)划分。字段、联合分支与单位以 [`@randomplay/core` 的包内类型](../../../packages/core/src/effects/types.ts)为唯一类型来源；业务动机见[模型总览](index.md)，游戏条款及其证据限制见[实例页](examples.md)。包已实现运行时校验、`prepareEffects`、`supplyEffectState`、`synchronizeSuppliedInstances`、`evaluateEffects` 与 `advanceEffects`，两个实施阶段均已交付，满足完整 `EffectEngine` 接口。
+本文确定模型实现应遵守的行为，交付范围按[实施阶段](#实施阶段)划分。字段、联合分支与单位以正式类型为准，shared 与 core 的类型职责见[规范入口与职责](index.md#规范入口与职责)；业务动机见[模型总览](index.md)，游戏条款及其证据限制见[实例页](examples.md)。包已实现运行时校验、`prepareEffects`、`supplyEffectState`、`synchronizeSuppliedInstances`、`evaluateEffects` 与 `advanceEffects`，两个实施阶段均已交付，满足完整 `EffectEngine` 接口。
 
 [contract-examples.ts](contract-examples.ts) 提供可编译的规则、输入和类型反例，直接引用包内正式类型；`pnpm check:spec-types` 编译该文件作为类型契约检查，包测试另行验证这些实例通过运行时校验。其中 `syntheticRuleSet` 是纯合成验收数据；游戏实例中显式选择的读取时点、刷新策略和动作别名只用于验证表达能力，不据此发布游戏规则。
 

@@ -17,16 +17,16 @@
 - [来源数据整合规范](specs/data/integration.md)：完整代理人资料的字段归属、多语言目录、来源追溯与文件契约，包含单实体实现、多类别离线全量构建、固定当前数据集的多实体 v3 增量更新、按类别的更新差异报告、恢复与显式迁移协议、正式类型和验收入口，以及 v2 外壳的识别与转换边界。
 - [数据消费与 npm 导出契约](specs/data/consumption.md)：公开名称类型、v3 索引返回结构、按需读取 API、JSON 子路径、静态发布副本及浏览器消费验收。
 - [60 级基础属性与 S 级驱动盘词条](specs/data/panel-attributes.md)：标准化属性、独立核心累计表、音擎高级属性、驱动盘词条、来源证据与生成发布边界。
-- [技能倍率、动作目录与等级选择](specs/data/skill-actions.md)：PR B 的动作身份、完整表达式、伤害与失衡、影画等级输入、覆盖限制、静态效果衔接及发布校验。
+- [技能倍率、动作目录与等级选择](specs/data/skill-actions.md)：动作身份、完整表达式、伤害与失衡、影画等级输入、覆盖限制、静态效果衔接及发布校验。
 
 ### 历史
 
 - [历史记录](HISTORY.md)：冻结的既有发布历史档案，不得用于记录当前或未来工作。
 
-### 当前实施
+### 实施与验收记录
 
 - [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
-- [PR A 实施与交接](plans/level-60-panel-attributes-pr-a.md)：属性实现的评审处理、验收记录与后续范围。
+- [PR A 实施与交接](plans/level-60-panel-attributes-pr-a.md)：属性实现的评审处理、当时的验收记录与后续衔接结果。
 - [ZZZ-HP 静态数据来源盘点](plans/zzz-hp-static-inventory.md)：固定来源的身份映射、未匹配项、读取语义及正式覆盖报告入口。
-- [ZZZ-HP 静态数据接入 prompt](plans/zzz-hp-static-data-prompt.md)：批量转换、消费适配、验收、review 与 PR 交接。
-- [PR 6 执行 prompt](plans/effects-pr6-prompt.md)：首批自动效果规则的实施、review 与 PR 提交交接；正式要求见效果规范中的自动规则接入页。
+- [ZZZ-HP 静态数据接入记录](plans/zzz-hp-static-data-prompt.md)：已完成接入的 Git 记录与维护入口。
+- [首批自动效果规则接入记录](plans/effects-pr6-prompt.md)：已完成接入的 Git 记录与维护入口。

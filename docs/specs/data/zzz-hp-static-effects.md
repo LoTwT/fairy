@@ -1,6 +1,6 @@
 # ZZZ-HP 静态增益数据接入
 
-状态：固定版本的批量转换器、正式制品和目录消费入口已实现。本页约束静态数据接入，来源优先级、计算范围和培养配置以[静态快照规范](../effects/static-snapshot.md)为准，效果类型与运行行为继续由 [effects 类型](../../../packages/core/src/effects/types.ts)和[执行契约](../effects/execution.md)维护。
+状态：固定版本的批量转换器、正式制品和目录消费入口已实现。本页约束静态数据接入，来源优先级、计算范围和培养配置以[静态快照规范](../effects/static-snapshot.md)为准，类型职责与运行行为见[效果模型](../effects/index.md#规范入口与职责)和[执行契约](../effects/execution.md)。
 
 ## 实际覆盖与使用限制
 
@@ -32,11 +32,11 @@
 
 ## 交付目标与边界
 
-一个 PR 完成代理人、音擎和驱动盘的来源盘点、身份映射、可重复转换、正式发布、静态消费与验收。在当前 core 公式能力范围内处理固定来源的全部可用静态效果；不能因为转换器或 effects 暂时缺少表达能力就把已有公式可以计算的效果列为暂不支持。
+转换器覆盖代理人、音擎和驱动盘的来源盘点、身份映射、可重复转换与正式制品生成。在当前 core 公式能力范围内处理固定来源的全部可用静态效果；不能因为转换器或 effects 暂时缺少表达能力就把已有公式可以计算的效果列为暂不支持。
 
-调用方从 data 读取规则和选项目录，提供角色基础属性、培养配置、有效选项及本次命中，通过 effects 得到这一瞬间的伤害。技能基础倍率和未含本次增益的面板仍由调用方提供；本 PR 不交付完整配装面板生成器、技能库计算器或时间线模拟器。
+调用方从 data 读取规则和选项目录，提供角色基础属性、培养配置、有效选项及本次命中，通过 core 的 effects 模块得到这一瞬间的伤害。目录入口接收已有倍率与面板；完整配装、已结算面板和动作组装由更上层的[静态计算入口](../core/static-calculation.md)提供。两者都不模拟时间线。
 
-超出现有 core 契约的新公式、新来源版本、全技能库、邦布、关卡环境与伤害流程预设不进入本 PR；新公式即使已经出现在固定来源内，也遵循这一边界。固定来源内的空记录、身份缺失、缺少参数与新公式条目分别登记，不能通过删除条目、造零值或只公布已成功的分母制造全量覆盖。
+超出现有 core 契约的新公式、未登记的来源版本、邦布、关卡环境与伤害流程预设不在本转换器的支持范围内；新公式即使已经出现在固定来源内，也遵循这一边界。固定来源内的空记录、身份缺失、缺少参数与新公式条目分别登记，不能通过删除条目、造零值或只公布已成功的分母制造全量覆盖。
 
 现有 core 支持范围以本次 Fairy 基线的[公式规范](../core/index.md)为准。`sharpenDmgBonus` / `sharpenCritDmgBonus` 依赖的锐化/锐暴公式及蕾米埃尔作为自身异常强度提供者时的新增特殊等级公式，不因 ZZZ-HP 已支持就自动进入本轮。上游通用 `special` 也不能通过新建任意最终倍率接口或暗乘基础伤害来绕过[特殊乘区边界](../core/factors/special.md)。已有耀变独立机制对应的 `specialMult` 等条目，应按明确来源映射到既有具体乘区；无法对应的条目记录原因。流明元素的标识和筛选属于已有耀变能力的适配，不能以 effects 的元素枚举尚缺 `lumiflux` 为由整体排除。
 
@@ -115,9 +115,9 @@ pack 收集通常是有实际效果的块优先，其次 effects，最后适用�
 
 静态不等于所有数值都在本次实时读取。每个输入必须明确归属和结算阶段，避免把效果转化结果再次传入会做相同转化的 core helper。
 
-- `world` 的通用属性保留已有 `GeneralStatInput` 的基础值及初始/最终百分比与固定值分解；不能把最终面板整体放入 `baseValue` 后再应用应以基础属性为底数的百分比增益。缺少必需分解就明确报缺少输入，不猜回原始属性。
-- 目录路径的异化输入区分 `from-effects` 与 `settled` 两种模式：前者将选中且适用的完整异化系数贡献归约一次、加上基础倍率 1，再交给 core 的异化乘区；后者提供已经保存的最终倍率，直接复用，不读取当前蕾米埃尔属性或重新叠加当前异化贡献。模式不可混填。无异化时显式 `settled: 1`；缺失历史倍率不能用 1 代替。
-- 目录路径的耀变倍率保留本次招式基础倍率，由既有 core 耀变乘区唯一执行 `remielleAnomalyProficiency × anomalyProficiencyConversionRate`；目录准备层从已选择的对应规则取得实际精通读取来源和本次核心转换率，记录该参数映射的来源，不再把同一条转化额外输出为倍率加数或乘数。其他已确认的独立调整仍按规则提供。不能伪造“精通为 0”来绕过重复计算。低层入口同时保留 core helper 参数分支与 `{ settledMultiplier }` 分支，后者不再进行异化转化。
+- `world` 的通用属性使用 `GeneralStatInput`，支持基础值与调整分解，也支持 `settledInitialValue` 已结算初始值；两种模式不能混填。不能把最终面板整体放入 `baseValue` 后再次叠加属性百分比。基础阶段读取与新增初始百分比需要的输入见[面板与来源](../core/static-calculation.md#面板与来源)，缺失时明确报错，不反推原始属性。
+- 目录路径的异化输入区分 `from-effects` 与 `settled` 两种模式：前者将选中且适用的完整异化系数贡献归约一次、加上基础倍率 1，再交给 core 的异化乘区；后者提供已经保存的最终倍率，直接复用，不读取当前蕾米埃尔属性或重新叠加当前异化贡献。模式不可混填。无异化时显式传入 `{ mode: "settled", multiplier: 1 }`；缺失历史倍率不能用 1 代替。低层入口同时保留 core helper 参数分支与 `{ settledMultiplier }` 分支，后者不再进行异化转化。
+- 目录路径的耀变倍率保留本次招式基础倍率，由既有 core 耀变乘区唯一执行 `remielleAnomalyProficiency × anomalyProficiencyConversionRate`；目录准备层从已选择的对应规则取得实际精通读取来源和本次核心转换率，记录该参数映射的来源，不再把同一条转化额外输出为倍率加数或乘数。其他已确认的独立调整仍按规则提供。不能伪造“精通为 0”来绕过重复计算。
 - 异常/耀变保存的来源攻击力、等级、异常精通等继续通过显式来源快照参与对应伤害项和乘区；不能用本次命中角色的实时属性替代。历史来源与当前命中者不同不是身份错误。目录入口必须能分别指定两者，并保留来源追踪。
 
 目录输入中，`hit.damageItems[].statSource` 指定每项属性的实体与可选 `snapshotId`；`damage.anomalySource` 指定异常精通、穿透率的实体、可选快照与已保存等级。指定快照时，精通和穿透率都须存在于该快照 `attributes` 的 `current` 项；缺失报 `MISSING_SNAPSHOT`，不能用当前命中者属性或历史 world 兜底。防御区采用来源等级与穿透率；显式传入的固定穿透、防御调整及命中触发的减防等仍按各自输入或贡献处理。`actorSources` 同时登记当前参与队伍和历史提供者的身份；仅存在于历史快照的角色不计入当前队伍职业人数。
@@ -144,17 +144,17 @@ pack 收集通常是有实际效果的块优先，其次 effects，最后适用�
 
 正式制品放在 `packages/data/definitions/effects/`：
 
-| 文件                   | 内容                                                                                             |
-| ---------------------- | ------------------------------------------------------------------------------------------------ |
-| `static.json`          | 统一 RuleSet，`ruleSetId: zzz-hp-static-effects`，初始 revision 为 `1`；包括正式贡献及其修改关系 |
-| `static-catalog.json`  | 同一 ruleSetId / revision 的来源、实体、选择选项、支持档位、必需输入、技能定位与具名差异         |
-| `static-coverage.json` | 固定来源各实体/pack/效果位置到选项与规则的覆盖报告，以及具体未支持原因                           |
+| 文件                   | 内容                                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| `static.json`          | 统一 RuleSet，`ruleSetId: zzz-hp-static-effects`；包括正式贡献及其修改关系，revision 随语义修订更新 |
+| `static-catalog.json`  | 同一 ruleSetId / revision 的来源、实体、选择选项、支持档位、必需输入、技能定位与具名差异            |
+| `static-coverage.json` | 固定来源各实体/pack/效果位置到选项与规则的覆盖报告，以及具体未支持原因                              |
 
 通过同名的 `@randomplay/data/definitions/effects/*.json` 显式子路径发布。根入口仍不加载定义 JSON，不增加运行时 core/effects 依赖；构建与解包继续逐文件字节复验。旧 starter / automatic 制品继续独立使用，新静态制品是完整消费单位；消费示例不得把它与重复定义同一机制的旧规则集直接拼接。
 
-目录的逻辑结构固定为 `schemaVersion: 1`、`ruleSetId`、`revision`、`source`、`entities`、`options`、`skillTargets`、`differences`。`source` 记录固定提交及资源摘要；实体保留 Fairy 身份或明确的未匹配状态、上游身份及本次适用性所需资料。选项使用稳定 `optionId`，记录来源引用、作用对象、培养条件、开关/层数/互斥关系、必需输入、可用性及其 `effectIds`；耀变精通换算等由 core 求值的部分使用明确登记的参数映射，并按同样规则追踪来源、培养选值与唯一性，不开放任意字段路径写入。缺失档位或未支持原因保留在相应选项上。字段的正式 TypeScript 定义只维护在 effects 包，不在文档或 data 包复制另一份类型权威。
+目录的逻辑结构固定为 `schemaVersion: 1`、`ruleSetId`、`revision`、`source`、`entities`、`options`、`skillTargets`、`differences`。`source` 记录固定提交及资源摘要；实体保留 Fairy 身份或明确的未匹配状态、上游身份及本次适用性所需资料。选项使用稳定 `optionId`，记录来源引用、作用对象、培养条件、开关/层数/互斥关系、必需输入、可用性及其 `effectIds`；耀变精通换算等由 core 求值的部分使用明确登记的参数映射，并按同样规则追踪来源、培养选值与唯一性，不开放任意字段路径写入。缺失档位或未支持原因保留在相应选项上。共享规则与目录的正式类型维护在 [shared 效果契约](../../../packages/shared/src/effects.ts)，由 core 重导出；引擎输入输出由 [core 类型](../../../packages/core/src/effects/types.ts)维护，不在文档或 data 中复制定义。
 
-effects 增加单一目录消费入口 `calculateStaticDamageFromCatalog`，组合目录校验、选项准备和现有 `calculateStaticDamage`：
+core 提供目录消费入口 `calculateStaticDamageFromCatalog`，组合目录校验、选项准备和 `calculateStaticDamage`：
 
 - 输入包括 `definitions`、`catalog`、`bindings`、按 `optionId` 与 `bindingId` 标识的 `selections`、`actorSources`，以及 `world`、`hit`、`damage`、显式 `inputs`、`snapshots`、`atSeconds`。通用部分复用低层类型；`hit.damageItems` 扩展为上述三种准备模式，`damage.refringe` 支持明确的 from-effects / settled 语义，并允许分别提供历史伤害属性来源和当前命中者，不能机械照搬现有 StaticDamageInput 而遗漏这些必需输入。
 - `actorSources` 将运行实体 ID 关联到目录中的代理人身份，以核对职业、队伍和装备适用性；不从实体 ID 字符串或显示名称猜身份。世界观察继续提供队伍关系和属性，二者必须一致。
@@ -203,7 +203,7 @@ effects 的新增通道、属性读取或组合归约只能服务已核实的来
           effects 目录消费入口 → 现有 core 公式
 ```
 
-实现预计涉及超过 8 个文件，范围集中在 data 转换脚本/制品/发布验收、effects 目录适配/必要引擎补齐、测试及对应规范。一个 PR 完整交付，不拆出不能消费的中间阶段。最小实现是现有规则模型、三个 JSON 制品和一个目录消费入口；不新建包，不把上游整套应用或时间线引入仓库。
+转换语义或固定来源变化时，以同次生成的三个 JSON 作为验收和安装单位，并同步相关消费逻辑与测试。
 
 验收要求：
 
@@ -216,4 +216,4 @@ effects 的新增通道、属性读取或组合归约只能服务已核实的来
 7. 正式 npm 包的 Node 与 Vite 开发/生产消费都实际读取新子路径并完成静态计算；根入口冷启动不请求这三个 JSON。断网、缺少 raw 的构建/消费仍可通过。
 8. 执行根级 `pnpm check` 和 `pnpm --filter @randomplay/data verify:browser`；按变更范围完成必要数据管理验收。复用适用的已有结果，失败修复后只重跑受影响部分及最终必需门禁。
 
-完成实现后更新本页状态和盘点对应的实际覆盖报告，做内容 review，修复可复现问题，再提交、推送、开 PR；合并前核对最终 head 的 CI 和 review 结论。不执行 npm 发布。回滚恢复该 PR 的代码与静态 definitions 即可；本 PR 不迁移或替换 Nanoka integrated，若实施中必须改变这一边界，应先按整合规范完成相应维护方案。
+语义或覆盖变化时同步维护本页与正式覆盖报告，原始盘点保留其历史基线。发布按[包边界与联动发布](../packages.md)执行；涉及 integrated 或其管理契约的变化时，按[数据管理状态同步流程](integration.md#数据管理状态的同步维护)完成受影响工作区维护。
