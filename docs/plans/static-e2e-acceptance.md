@@ -10,6 +10,8 @@
 
 ## 可继续追加的制品
 
+2026-09-26，以下参考夹具随[增益修订 2](../specs/data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)切换到当前固定修复提交；Nanoka 内容保持一致，参考生成器核对 Fairy 基线为 `56bc52ad906bf04c5f280fc387049cdb74b828ca`。耀嘉音 2 影的来源结果已与 Fairy 同为 1600，回归断言改为一致性校验。下文保留 2026-09-25 的原始验收基线与差异记录，不代表当前参考夹具仍存在该数值差异。
+
 - [完整输入](../../packages/data/test/fixtures/static-e2e-cases.ts)：配装、六槽主副词条、培养、动作、目标和显式增益选择的唯一输入来源。
 - [冻结参考](../../packages/data/test/fixtures/static-e2e-reference.json)：面板、逐段倍率、贡献、乘区、非暴击/暴击/期望伤害、显示整数，以及来源文件和提取函数摘要。
 - [公开链路回归](../../packages/data/test/static-e2e.test.ts)：调用 `loadStaticCalculationData → resolveAgentAction → calculateStaticActionDamage`；普通测试离线运行，不需要上游仓库或 raw。

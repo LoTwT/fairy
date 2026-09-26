@@ -5,7 +5,8 @@ import { runInNewContext } from "node:vm"
 import ts from "typescript"
 import manifest from "./source-manifest.json" with { type: "json" }
 
-export const SOURCE_COMMIT = "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357"
+export const SOURCE_REPOSITORY = "LoTwT/ZZZ-HP"
+export const SOURCE_COMMIT = "fac62407f3d3995f8200a66be0038f292b1455fa"
 export const BUFF_RESOURCE =
   "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 export interface SourceEffect {

@@ -151,7 +151,7 @@ core 依据为[属性计算](../core/factors/base-damage.md#配套属性计算)�
 
 ## ZZZ-HP 的参考边界
 
-核对版本固定为 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357`。[转化实现](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/buffEffect.ts#L447-L503)先计算转化值，再统一使用 `Math.min(amount, cap)`。
+历史核对版本固定为 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357`。[转化实现](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/buffEffect.ts#L447-L503)先计算转化值，再统一使用 `Math.min(amount, cap)`。
 
 [耀嘉音 2 影记录](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json#L69713)在基础 `35% / 1200` 之外加入 `54% / 1600` 与 `-35% / 1200`；后两者的默认读取值分别是 2963 与 3428.56，基础默认值也是 3428.56。
 
@@ -167,7 +167,7 @@ min(4000 × 0.35, 1200)
 
 负数项没有形成所需的 `-min(4000 × 0.35, 1200)`，所以结果不同于直接使用新核心得到的 1600。默认读取值不一致是另一项风险，不能把两者混成同一个问题。这里是源码与算术核对，不是完整应用执行结果。
 
-本节保留固定版本的代码与算术核对结果，作为[静态接入对比](static-snapshot.md#对比与验收记录)中的具名差异依据。空记录不表示没有游戏效果；同输入对比验证实现之间的关系，不代替游戏实测。
+本节保留旧版本的代码与算术核对结果，作为[静态接入对比](static-snapshot.md#对比与验收记录)中的具名差异依据。[当前固定来源](static-snapshot.md#来源与固定基线)已把上限按正负幅值对称处理；同一输入 4000 的抵消项为 -1200，合计 1600，与 Fairy 原有修正一致。Fairy 仍使用一条核心转化加配置修改，避免重复贡献，并保留已验证的核心等级参数。空记录不表示没有游戏效果；同输入对比验证实现之间的关系，不代替游戏实测。
 
 ## 尚需补充的游戏证据
 

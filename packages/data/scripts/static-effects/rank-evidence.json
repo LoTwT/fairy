@@ -607,9 +607,15 @@
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521055/desc/0",
         "sha256": "dd724cc39d599725f01e3ea04752deec8c75977e46c9f27ab3cfed42ad690987"
+      },
+      {
+        "rank": 7,
+        "path": "agents/1521/details.zh.json",
+        "pointer": "/talent/1/desc",
+        "sha256": "dd724cc39d599725f01e3ea04752deec8c75977e46c9f27ab3cfed42ad690987"
       }
     ],
-    "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
+    "verification": "来源块全文（仅去除标记与空白）与核心等级 7 说明一致；1 影将该核心效果提升至原本的 140%，其两项防御强化继承相同核心等级限制，独立抗性效果不继承。"
   },
   "cissia:blk-ms4lgth6-v31h36": {
     "levels": [1, 2, 3, 4, 5, 6, 7],

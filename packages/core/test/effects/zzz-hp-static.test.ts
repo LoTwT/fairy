@@ -172,7 +172,7 @@ function convertedRule(record: ConversionRecord): ContributionRule {
   } as ContributionRule
 }
 
-describe("fixed ZZZ-HP revision 0df40c5 static conversion fixtures", () => {
+describe("fixed ZZZ-HP revision fac6240 static conversion fixtures", () => {
   for (const record of reference.conversions) {
     it.each(record.cases)(
       `${record.id}: input $input matches upstream $upstream`,
@@ -343,7 +343,7 @@ describe("fixed ZZZ-HP revision 0df40c5 static conversion fixtures", () => {
   }
 
   it.each([0, 1, 2, 4, 6] as const)(
-    "preserves the named Astra M2 difference at mindscape %s without duplicating enhancements",
+    "preserves the Astra M2 parameter modification at mindscape %s without duplicating enhancements",
     (mindscapeRank) => {
       const difference = reference.knownDifferences[0]!
       const input = inputFor()
@@ -408,7 +408,7 @@ describe("fixed ZZZ-HP revision 0df40c5 static conversion fixtures", () => {
         mindscapeRank < 2 ? 1200 : difference.fairy,
       )
       if (mindscapeRank >= 2) {
-        expect(difference.upstream).toBe(1400)
+        expect(difference.upstream).toBe(1600)
         expect(contribution.appliedModifications).toEqual([
           astraMindscapeTwo.effectId,
         ])

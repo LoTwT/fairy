@@ -12,12 +12,12 @@ assert(
   repository && output,
   "Provide the upstream Git repository and a NEW output file",
 )
-const commit = "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357"
-const fairyBaseline = "bad304914ecb2a50436c82421392a3b80bf61b8d"
+const commit = "fac62407f3d3995f8200a66be0038f292b1455fa"
+const fairyBaseline = "56bc52ad906bf04c5f280fc387049cdb74b828ca"
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 const digests = {
   [buffResource]:
-    "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
+    "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f",
   "damageCalc.ts":
     "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71",
   "affixPanelCalc.ts":
@@ -27,7 +27,7 @@ const digests = {
   "panelBuffCalc.ts":
     "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09",
   "buffEffect.ts":
-    "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+    "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909",
   "skillTalentLevels.ts":
     "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
   "calculatorUi.ts":
@@ -590,6 +590,7 @@ for (const scenario of scenarios) {
 }
 const fixture = {
   provenance: {
+    repository: "LoTwT/ZZZ-HP",
     commit,
     fairyBaseline,
     gameVersion: "3.1",
