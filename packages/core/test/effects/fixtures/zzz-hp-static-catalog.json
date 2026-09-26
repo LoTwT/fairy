@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+  "sourceCommit": "fac62407f3d3995f8200a66be0038f292b1455fa",
   "method": "固定提交的 normalize / resolveEffectBaseValue / resolveConvertValue 独立求值结果；转化读取 500 来源单位，贯穿力来源 700；source 舍入误差按单位比例单独容忍。",
   "tables": {
     "world": [
@@ -20062,7 +20062,7 @@
     },
     {
       "pointer": "/agents/17/mindscapeBuffs/1/effectBlocks/0/effects/1",
-      "expected": -0.11999900000000001,
+      "expected": -0.076,
       "unit": "ratio",
       "effectIds": [
         "agent:1521:zzz-hp:eff-ms4lkt33-igdjwu:blk-legacy:mindscape:1"
@@ -23252,7 +23252,7 @@
     },
     {
       "pointer": "/agents/58/mindscapeBuffs/0/effectBlocks/2/effects/0",
-      "expected": 2280,
+      "expected": 600,
       "unit": "attack-points",
       "effectIds": [
         "agent:1251:zzz-hp:eff-ms4b9fw6-990jlw:blk-ms4b9fw6-467qoj:mindscape:0"
@@ -24355,7 +24355,7 @@
     },
     {
       "pointer": "/agents/8/mindscapeBuffs/6/effectBlocks/0/effects/0",
-      "expected": 0.0015,
+      "expected": 0.15,
       "unit": "ratio",
       "effectIds": [
         "agent:1491:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:6"

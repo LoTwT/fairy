@@ -35,7 +35,10 @@ function equippedDisc(
   return { setEntityId, mainStat: { attribute }, substats: [] }
 }
 
-async function fixture(id = "1121"): Promise<StaticActionCalculationInput> {
+async function fixture(
+  id = "1121",
+  mindscapeRank: StaticActorConfiguration["mindscapeRank"] = 0,
+): Promise<StaticActionCalculationInput> {
   const attributes = await json(`attributes/agents/${id}.json`)
   const actions = await json(`skills/agents/${id}.json`)
   const data: StaticCalculationData = {
@@ -60,7 +63,7 @@ async function fixture(id = "1121"): Promise<StaticActionCalculationInput> {
         entityId: "entity:actor",
         teamId: "team:players",
         agentEntityId: id,
-        mindscapeRank: 0,
+        mindscapeRank,
         coreSkillLevel: 7,
         wEngine: null,
         driveDiscs: emptyDiscs,
@@ -71,7 +74,7 @@ async function fixture(id = "1121"): Promise<StaticActionCalculationInput> {
     action: resolveAgentAction({
       agent: actions,
       actionId: action.actionId,
-      mindscapeRank: 0,
+      mindscapeRank,
       levels: {
         basic: { mode: "trained", value: 12 },
         dodge: { mode: "trained", value: 12 },
@@ -126,6 +129,49 @@ function manual(
 }
 
 describe("static calculation assembly", () => {
+  it("keeps Lucia M6 on initial health when her own health buff is selected", async () => {
+    const input = await fixture("1451", 6)
+    const panel = calculate(input).panels[0]!
+    const actor = manual(input.actors[0]!, panel)
+    if (actor.panel.mode !== "out-of-combat") throw new Error("panel")
+    const conversion = {
+      optionId: "agents:lucia:mindscape:6:blk-legacy:legacy-self-atk",
+      holderId: actor.entityId,
+      layers: 1,
+    }
+    const healthBuff = {
+      optionId:
+        "agents:lucia:mindscape:0:blk-ms46hxws-mu8xs8:eff-ms46hxws-g1rj8f",
+      holderId: actor.entityId,
+      layers: 1,
+    }
+    for (const selections of [[conversion], [conversion, healthBuff]]) {
+      const result = calculate({
+        ...input,
+        actors: [
+          {
+            ...actor,
+            panel: {
+              ...actor.panel,
+              stats: {
+                ...actor.panel.stats,
+                health: { unit: "health-points", value: 24000 },
+              },
+            },
+          },
+        ],
+        selections,
+      })
+      const contribution =
+        result.segments[0]!.damage.evaluation.contributions.find(
+          (entry) =>
+            entry.origin.effectId ===
+            "agent:1451:zzz-hp:legacy-self-atk:blk-legacy:mindscape:6",
+        )
+      expect(contribution?.value.value).toBe(480)
+    }
+  })
+
   it.each([
     [0, 6],
     [6, 0],

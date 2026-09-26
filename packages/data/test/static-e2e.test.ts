@@ -52,7 +52,7 @@ const reference = JSON.parse(
     "utf8",
   ),
 ) as {
-  provenance: { commit: string }
+  provenance: { repository: string; commit: string }
   builds: Record<string, { panel: ReferencePanel; permanentConversion: number }>
   cases: Record<
     string,
@@ -78,9 +78,10 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.1",
     snapshotId:
-      "sha256:3d9193b335c8c56ddebce4a4f7578453fb8d8ac6b2e35afd5fce25a7e2e588b7",
+      "sha256:ee99ec1e02f16aaef496dbdcb42d6bb20c2b0c7022ad9bf76cfa541daa9f41fe",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
+  expect(data.catalog.source.repository).toBe(reference.provenance.repository)
   const expected = reference.cases[scenario.id]!.reference
   return {
     data,
@@ -335,9 +336,11 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
     )
     const m2 = await run("nicole-astra-m2")
     const source = reference.cases["nicole-astra-m2"]!
-    expect(source.upstreamAttackConversion).toBeLessThan(1200)
-    expect(m2.totals.expected).toBeGreaterThan(
+    expect(source.upstreamAttackConversion).toBe(1600)
+    close(
+      m2.totals.expected,
       source.upstreamAlignedTotals.expected,
+      "Astra M2 agrees with the fixed upstream",
     )
     const self = await run("yixuan-self")
     const team = await run("yixuan-team")

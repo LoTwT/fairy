@@ -1,7 +1,7 @@
 {
-  "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
-  "zzz-hp/src/types/calculator.ts": "88fc162b03671b9be2d0a29c2bfaf6b41ad51669d2f7507b2308af50ddde70db",
-  "zzz-hp/src/utils/buffEffect.ts": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+  "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json": "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f",
+  "zzz-hp/src/types/calculator.ts": "06ca15ae3176fff8f9d7627873213aeb48fc70779cfb81f5c5b1373c9f8df795",
+  "zzz-hp/src/utils/buffEffect.ts": "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909",
   "zzz-hp/src/utils/panelBuffCalc.ts": "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09",
   "zzz-hp/src/utils/damageCalc.ts": "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71",
   "zzz-hp/src/utils/multFactorPercent.ts": "eee1f52bfa9c128d0e278c5890717c6aa1e897695237a9c6573751489ad311cb",

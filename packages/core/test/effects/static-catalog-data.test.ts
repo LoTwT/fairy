@@ -5,6 +5,8 @@ import {
   parseEffectRuleSet,
 } from "../../src/effects/index.ts"
 import type {
+  CoreSkillLevel,
+  MindscapeRank,
   StaticCatalogDamageInput,
   StaticDamageResult,
   StaticEffectCatalog,
@@ -64,7 +66,8 @@ function calculateCatalogResult(
 function agentInput(
   agentEntityId: string,
   optionIds: readonly string[],
-  mindscapeRank: 0 | 2 | 6 = 0,
+  mindscapeRank: MindscapeRank = 0,
+  coreSkillLevel: CoreSkillLevel = 7,
 ): StaticCatalogDamageInput {
   const base = inputFor()
   return {
@@ -78,7 +81,7 @@ function agentInput(
         holderId: "entity:attacker",
         sourceEntityId: agentEntityId,
         eligible: true,
-        configuration: { mindscapeRank, coreSkillLevel: 7 },
+        configuration: { mindscapeRank, coreSkillLevel },
       },
     ],
     actorSources: [{ entityId: "entity:attacker", agentEntityId }],
@@ -176,6 +179,158 @@ function actionWithDisc(
     },
   }
 }
+
+describe("published conversion boundaries", () => {
+  it.each([
+    [1000, 1.8],
+    [3500, 2.55],
+    [4000, 2.55],
+  ])(
+    "converts Sunna M6 attack %s into the described critical damage",
+    (attack, factor) => {
+      const input = agentInput(
+        "1491",
+        ["agents:sunna:mindscape:6:blk-legacy:legacy-self-critDmg"],
+        6,
+      )
+      const result = calculateCatalogResult({
+        ...input,
+        world: {
+          ...input.world,
+          entities: input.world.entities.map((entity) =>
+            entity.kind === "actor" && entity.entityId === input.hit.actorId
+              ? {
+                  ...entity,
+                  generalStats: {
+                    ...entity.generalStats,
+                    attack: general(attack!),
+                  },
+                }
+              : entity,
+          ),
+        },
+      })
+      expect(result.factors.critical?.critical).toBeCloseTo(factor!, 8)
+    },
+  )
+
+  it.each([
+    [120, 2000],
+    [220, 3200],
+    [250, 3200],
+  ])("caps Qingyi's attack conversion at impact %s", (impact, baseDamage) => {
+    const input = agentInput("1251", [
+      "agents:qingyi:mindscape:0:blk-ms4b9fw6-467qoj:eff-ms4b9fw6-990jlw",
+    ])
+    const result = calculateCatalogResult({
+      ...input,
+      world: {
+        ...input.world,
+        entities: input.world.entities.map((entity) =>
+          entity.kind === "actor" && entity.entityId === input.hit.actorId
+            ? {
+                ...entity,
+                generalStats: {
+                  ...entity.generalStats,
+                  impact: general(impact!),
+                },
+              }
+            : entity,
+        ),
+      },
+    })
+    expect(result.factors.nonCritical.baseDamage).toBe(baseDamage)
+  })
+
+  it("keeps Lucia M6 on initial health when her own veil increases current health", () => {
+    const input = agentInput(
+      "1451",
+      [
+        "agents:lucia:mindscape:6:blk-legacy:legacy-self-atk",
+        "agents:lucia:mindscape:0:blk-ms46hxws-mu8xs8:eff-ms46hxws-g1rj8f",
+      ],
+      6,
+    )
+    const result = calculateCatalogResult(input)
+    // Initial health 24000 gives 480 attack even after the separate 5% health buff.
+    expect(result.factors.nonCritical.baseDamage).toBe(2960)
+  })
+
+  const cissiaDefenseOptions = [
+    "agents:cissia:mindscape:0:blk-ms4l86mv-s5y0rv:eff-ms4l86mv-xyl5lp",
+    "agents:cissia:mindscape:0:blk-ms4l86mv-s5y0rv:eff-ms4lam8x-a2cpjw",
+    "agents:cissia:mindscape:1:blk-legacy:legacy-team-reduceDefense",
+    "agents:cissia:mindscape:1:blk-legacy:eff-ms4lkt33-igdjwu",
+  ]
+  it.each([3.68, 4, 10])(
+    "caps Cissia's core plus M1 at energy regeneration %s",
+    (energyRegen) => {
+      const input = agentInput("1521", cissiaDefenseOptions, 1)
+      const result = calculateCatalogResult({
+        ...input,
+        hit: { ...input.hit, element: "electric" },
+        inputs: cissiaDefenseOptions.flatMap((optionId) =>
+          catalog.options
+            .find((option) => option.optionId === optionId)!
+            .variants.flatMap((variant) =>
+              variant.inputs.map((requirement) => ({
+                bindingId: "binding:static" as const,
+                name: requirement.name,
+                value: { unit: requirement.unit, value: energyRegen },
+              })),
+            ),
+        ),
+      })
+      const reduction = result.evaluation.contributions
+        .filter(
+          (contribution) =>
+            contribution.address.kind === "factor" &&
+            contribution.address.channel === "target-defense-adjustment",
+        )
+        .reduce((total, contribution) => total - contribution.value.value, 0)
+      expect(reduction).toBeCloseTo(0.35, 6)
+    },
+  )
+
+  it.each([1, 6] as const)(
+    "rejects Cissia's M1 defense enhancement at unverified core level %s",
+    (level) => {
+      for (const optionId of cissiaDefenseOptions.slice(2)) {
+        const result = calculateStaticDamageFromCatalog({
+          ...agentInput("1521", [optionId], 1, level),
+          inputs: catalog.options
+            .find((option) => option.optionId === optionId)!
+            .variants.flatMap((variant) =>
+              variant.inputs.map((requirement) => ({
+                bindingId: "binding:static" as const,
+                name: requirement.name,
+                value: { unit: requirement.unit, value: 4 },
+              })),
+            ),
+        })
+        expect(result.ok).toBe(false)
+        if (!result.ok)
+          expect(
+            result.issues.some((issue) => issue.code === "MISSING_RANK"),
+          ).toBe(true)
+      }
+    },
+  )
+
+  it("keeps Cissia's independent M1 resistance effect available at lower core levels", () => {
+    const input = agentInput(
+      "1521",
+      ["agents:cissia:mindscape:1:blk-ms4lpjc1-18nt91:eff-ms4lpjc1-o5rpae"],
+      1,
+      1,
+    )
+    const result = calculateCatalogResult({
+      ...input,
+      hit: { ...input.hit, element: "electric" },
+    })
+    expect(result.factors.nonCritical.resistance).toBeCloseTo(1.05, 8)
+  })
+})
 
 describe("fixed-source catalog conformance", () => {
   it.each([
@@ -620,7 +775,7 @@ describe("fixed-source catalog conformance", () => {
         ],
       })
       expect(result.ok).toBe(true)
-      // Fixed upstream at 4000: 1200 + 1600 - 1400 = 1400; the documented correction caps one conversion at 1600.
+      // The fixed upstream now agrees at core level 7; Fairy still modifies one conversion across all verified levels.
       if (result.ok)
         expect(result.value.factors.nonCritical["baseDamage"]).toBe(
           2 * (1000 + expected!),

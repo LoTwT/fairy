@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "1",
+  "revision": "2",
   "source": {
-    "repository": "Nie7bai/ZZZ-HP",
-    "commit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    "repository": "LoTwT/ZZZ-HP",
+    "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
     "files": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-        "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c"
+        "sha256": "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f"
       },
       {
         "path": "zzz-hp/src/types/calculator.ts",
-        "sha256": "88fc162b03671b9be2d0a29c2bfaf6b41ad51669d2f7507b2308af50ddde70db"
+        "sha256": "06ca15ae3176fff8f9d7627873213aeb48fc70779cfb81f5c5b1373c9f8df795"
       },
       {
         "path": "zzz-hp/src/utils/buffEffect.ts",
-        "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95"
+        "sha256": "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909"
       },
       {
         "path": "zzz-hp/src/utils/panelBuffCalc.ts",

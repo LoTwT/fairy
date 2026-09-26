@@ -1,10 +1,10 @@
 {
-  "revision": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+  "revision": "fac62407f3d3995f8200a66be0038f292b1455fa",
   "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
   "oracle": {
     "resourcePath": "zzz-hp/src/utils/buffEffect.ts",
     "functions": ["resolveConvertValue", "resolveEffectBaseValue"],
-    "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+    "sha256": "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909",
     "method": "Unmodified upstream function bodies, extracted with TypeScript AST; original roundCalc and skill-key dependencies."
   },
   "conversions": [
@@ -34,7 +34,7 @@
           "from": "impact",
           "panelSource": "final",
           "ratioPercent": 600,
-          "cap": null,
+          "cap": 600,
           "defaultBase": null,
           "initialBase": 120
         },
@@ -537,10 +537,10 @@
             "enabledDefault": true,
             "note": ""
           },
-          "upstream": -1400
+          "upstream": -1200
         }
       ],
-      "upstream": 1400,
+      "upstream": 1600,
       "fairy": 1600
     }
   ]

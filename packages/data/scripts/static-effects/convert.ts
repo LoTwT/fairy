@@ -26,6 +26,7 @@ import evidence from "./rank-evidence.json" with { type: "json" }
 import {
   BUFF_RESOURCE,
   SOURCE_COMMIT,
+  SOURCE_REPOSITORY,
   type SourceData,
   type SourceEffect,
   type SourceEntity,
@@ -563,14 +564,25 @@ function compile(
     mapping = FIELD_MAPPINGS[e.stat]
   if (!mapping)
     throw new Error(`Unregistered stat at ${record.pointer}: ${e.stat}`)
-  const proof = rankEvidence[`${record.entityId}:${record.blockId}`]
+  const enhancesCissiaCore =
+    record.category === "agents" &&
+    record.entityId === "cissia" &&
+    record.rankKind === "mindscape" &&
+    record.rank === 1 &&
+    record.blockId === "blk-legacy" &&
+    ["legacy-team-reduceDefense", "eff-ms4lkt33-igdjwu"].includes(e.id)
+  const proof =
+    rankEvidence[
+      `${record.entityId}:${enhancesCissiaCore ? "blk-ms4l86mv-s5y0rv" : record.blockId}`
+    ]
   const coreDependent =
     record.category === "agents" &&
-    record.rank === 0 &&
-    (record.blockName.includes("核心被动") ||
-      ["lucia:blk-legacy", "lucy:blk-legacy", "jane:blk-legacy"].includes(
-        `${record.entityId}:${record.blockId}`,
-      ))
+    (enhancesCissiaCore ||
+      (record.rank === 0 &&
+        (record.blockName.includes("核心被动") ||
+          ["lucia:blk-legacy", "lucy:blk-legacy", "jane:blk-legacy"].includes(
+            `${record.entityId}:${record.blockId}`,
+          ))))
   const requirements: StaticCatalogVariant["inputs"][number][] = []
   let variant: StaticCatalogVariant = {
     configuration: {
@@ -1110,7 +1122,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "1",
+    revision: "2",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1147,7 +1159,7 @@ export function convertSource(
     schemaVersion: 1,
     ruleSetId: definitions.ruleSetId,
     revision: definitions.revision,
-    source: { repository: "Nie7bai/ZZZ-HP", commit: SOURCE_COMMIT, files },
+    source: { repository: SOURCE_REPOSITORY, commit: SOURCE_COMMIT, files },
     entities: collected.entities.toSorted((a, b) =>
       a.catalogEntityId.localeCompare(b.catalogEntityId),
     ),
@@ -1159,7 +1171,7 @@ export function convertSource(
       {
         differenceId: "astra-mindscape-2",
         explanation:
-          "沿用已验证的参数修改：ratio +0.19、cap 1600，不叠加完整强化效果再负数抵消。来源高攻击力时可得到 1400，Fairy 保持 1600。",
+          "沿用已验证的参数修改：ratio +0.19、cap 1600，按已验证的核心等级强化同一条转化。当前来源已修正负数抵消项的上限，核心等级 7 的结果同为 1600；Fairy 保留单次参数修改模型。",
         references: coverage
           .filter(
             (r) => r.catalogEntityId === "agents:astrayao" && r.rank === 2,

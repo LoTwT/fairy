@@ -2,6 +2,8 @@
 
 状态：2026-09-22 的固定输入盘点，批量转换现已落地；实际去向与限制以[正式覆盖报告](../../packages/data/definitions/effects/static-coverage.json)为准。本页的“记录”包含音擎每档精炼的独立来源记录，不表示可叠加规则数量，也不表示已支持的游戏机制数量。正式要求见[接入规范](../specs/data/zzz-hp-static-effects.md)。
 
+2026-09-26 增益来源已按[修订 2](../specs/data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)更新；本页保留初始盘点基线。当前版本和文件摘要分别以[固定基线](../specs/effects/static-snapshot.md#来源与固定基线)与[来源清单](../../packages/data/scripts/static-effects/source-manifest.json)为准，实体、pack、原始效果和支持状态的数量未变。
+
 ## 基线与复核方式
 
 - Fairy 基线：`1c3c0305f6cda77ac48c4f4bc6456a4007ecc3ba`。

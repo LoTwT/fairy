@@ -1,13 +1,14 @@
 {
   "provenance": {
-    "commit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
-    "fairyBaseline": "bad304914ecb2a50436c82421392a3b80bf61b8d",
+    "repository": "LoTwT/ZZZ-HP",
+    "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
+    "fairyBaseline": "56bc52ad906bf04c5f280fc387049cdb74b828ca",
     "gameVersion": "3.1",
     "method": "Pinned upstream pure functions + independently reproduced direct-damage chain; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
     "resources": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-        "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c"
+        "sha256": "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f"
       },
       {
         "path": "zzz-hp/src/utils/calculatorUi.ts",
@@ -39,7 +40,7 @@
       },
       {
         "path": "zzz-hp/src/utils/buffEffect.ts",
-        "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95"
+        "sha256": "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909"
       },
       {
         "path": "zzz-hp/src/utils/enemyResistance.ts",
@@ -249,7 +250,7 @@
       {
         "file": "buffEffect.ts",
         "name": "resolveConvertValue",
-        "sha256": "4fb87807ff92141a927e31e5a51163c4049a4e429f4886374c7cebe2ef05e66c"
+        "sha256": "ce9241321a3bd6fc9a3b14faa4ee5f6276824a0e7169c85501e8fe22db8e4a2b"
       },
       {
         "file": "enemyResistance.ts",
@@ -1365,21 +1366,21 @@
         "upstreamStyleIntegerExpected": 23762
       },
       "upstreamAlignedTotals": {
-        "nonCritical": 11000.362240420574,
-        "critical": 30338.999059079946,
-        "expected": 21868.676132507142,
-        "displayedNonCritical": 11003,
-        "displayedCritical": 30341
+        "nonCritical": 11952.601048807366,
+        "critical": 32965.27369261072,
+        "expected": 23761.723074624853,
+        "displayedNonCritical": 11955,
+        "displayedCritical": 32967
       },
       "upstreamRoundedTotals": {
-        "nonCritical": 11000.356821329371,
-        "critical": 30338.984113226405,
-        "expected": 21868.665359375504,
-        "displayedNonCritical": 11003,
-        "displayedCritical": 30341
+        "nonCritical": 11952.595629716161,
+        "critical": 32965.25874675717,
+        "expected": 23761.712301493215,
+        "displayedNonCritical": 11955,
+        "displayedCritical": 32967
       },
-      "upstreamStyleIntegerExpected": 21869,
-      "upstreamAttackConversion": 1196.9439
+      "upstreamStyleIntegerExpected": 23762,
+      "upstreamAttackConversion": 1600
     },
     "ben-core-b": {
       "reference": {
