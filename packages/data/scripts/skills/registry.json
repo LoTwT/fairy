@@ -20996,17 +20996,12 @@
     "rowKind": "damage",
     "dazeRowIndex": 1,
     "sourceSignature": "746fd1225ac000135297087c5e8c67540d324e0f26059decd586b6f8be842cd6",
-    "skillCategory": null,
+    "skillCategory": "uncategorized",
     "element": "wind",
     "damageKind": "regular",
     "upstreamSkillId": "sk-velina-nk-1561007-广域气旋-风属性单次攻击",
     "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnzvq"],
-    "issues": [
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1561:action:0020",
@@ -21025,8 +21020,8 @@
     "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnzvq"],
     "issues": [
       {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+        "code": "unknown-element",
+        "message": "染色属性的元素需要显式静态元素选择与来源允许集合证据；旧登记的 wind 不作为已确认染色元素。"
       }
     ]
   },

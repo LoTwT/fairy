@@ -1,4 +1,64 @@
 {
+  "alice:blk-legacy": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1401/details.zh.json",
+        "pointer": "/passive/level/1401507/desc/0",
+        "sha256": "7f59e46e9795d2af33ef9089cf0566c17a3ce9beab02c2970276c8e6b0d5bcb1"
+      }
+    ],
+    "verification": "核心被动第 7 级说明与来源块全文一致：物理异常状态下的敌人被触发[紊乱]效果时，每有 1 秒物理异常状态剩余时间，[紊乱]效果的伤害倍率提升 18%、最多提升 180%；保留固定来源确认的显式 0—10 层口径，不模拟经过时间"
+  },
+  "aria:blk-ms36joa0-0vxxo8": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1501/details.zh.json",
+        "pointer": "/passive/level/1501055/desc/0",
+        "sha256": "c676dc3a9f76bc4a2cda359db98199fee7ddb5ef782fa836b03c447c865dd828"
+      }
+    ],
+    "verification": "核心被动第 7 级（1501055）说明与来源块全文一致：异常精通提升 90 点；六个元素来源按每 10 点初始异常掌控的固定比例异放，目标失衡时比例额外提升 50%；精通增量与初始掌控读取分别登记"
+  },
+  "nangongyu:blk-ms4cegmd-bwnttd": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1511/details.zh.json",
+        "pointer": "/passive/level/1511055/desc/0",
+        "sha256": "3ccdbfa4e58b8cba5b758fbfcfd512a6a06f09b56c929d6b102b9f54d7e5e3cf"
+      }
+    ],
+    "verification": "核心被动第 7 级（1511055）说明与来源块全文一致：异常精通提升 120 点；非物理五元素来源基础倍率 450%、物理 449%，颤音每层额外提升 25%、最多 4 层，同一乘区增量相加；持有颤音并从失衡状态恢复时同样结算"
+  },
+  "velina:blk-legacy": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/passive/level/1561507/desc/0",
+        "sha256": "e8d2d37eedf1d4311d07994c594387cea1877c8fd66f7e09ab65ff6cadd8c33e"
+      }
+    ],
+    "verification": "核心被动第 7 级说明与来源块全文一致：初始回能超过 1.2 的部分每 0.01 提升伤害 0.21%（最多 35%）与异常掌控 0.5 点（最多 84 点）；微域/广域气旋爆炸命中风属性异常目标时固定结算 145%/255% 倍率的风属性异放伤害"
+  },
+  "velina:blk-ms5nqnq1-bso2d5": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1561/details.zh.json",
+        "pointer": "/passive/level/1561507/desc/0",
+        "sha256": "e8d2d37eedf1d4311d07994c594387cea1877c8fd66f7e09ab65ff6cadd8c33e"
+      }
+    ],
+    "verification": "核心被动第 7 级说明与来源块全文一致：维琳娜触发[乱流]时的乱流倍率提升 150%，进入 1.5 的乱流倍率加数，不按名称解释为全局乘数或再次乘风属性基础倍率"
+  },
   "orphie&magus:blk-legacy": {
     "levels": [7],
     "evidence": [

@@ -755,6 +755,28 @@ export interface StaticCatalogApplicability {
   }
 }
 
+/** 目录变体声明的伤害项要求；消费端据此发现独立项，目录入口逐项校验。 */
+export interface StaticCatalogDamageItemRequirement {
+  /** 效果绑定的稳定伤害项身份；消费端以同一 itemId 提供对应项。 */
+  readonly itemId: string
+  readonly stat: GeneralStat
+  readonly role: "base" | "settlement"
+  readonly allowedModes: readonly (
+    | "direct"
+    | "standard-disorder"
+    | "standard-vortex"
+  )[]
+  /**
+   * holder-current：statSource 必须是绑定 holder 且无 snapshotId 的当前属性；
+   * anomaly-source：statSource 必须与本次 damage.anomalySource 的实体与快照一致。
+   */
+  readonly source?: "holder-current" | "anomaly-source"
+  /** 仅 direct 模式：要求消费端输入的基础倍率为 0，实际倍率由关联规则贡献一次。 */
+  readonly requiredDirectMultiplier?: 0
+  /** 原异常归属：standard-disorder 项核对 originalAnomalyAttribute；direct 项核对归属元数据。 */
+  readonly originalAnomalyAttribute?: DamageElement
+}
+
 export interface StaticCatalogVariant {
   /** 同一选项不同精炼档改变对象时覆盖 option.target。 */
   readonly target?: "self" | "team"
@@ -766,6 +788,11 @@ export interface StaticCatalogVariant {
     /** 该选项有证据支持的最终特殊技等级；依赖特殊技等级的选项必须列出。 */
     readonly specialSkillLevels?: readonly SpecialSkillLevel[]
   }
+  /**
+   * 声明式伤害项要求：选中该选项时，命中必须包含满足身份与元数据的伤害项；
+   * 由关联规则的 itemIds 精确绑定，消费端据此发现需要提供的独立项。
+   */
+  readonly damageItemRequirements?: readonly StaticCatalogDamageItemRequirement[]
   readonly status: "converted" | "corrected" | "unsupported"
   readonly reason?: StaticCatalogUnavailableReason
   readonly explanation?: string

@@ -19,7 +19,7 @@
 
 **ZZZ-HP 是增益数据与计算语义的第一信任来源。** Nanoka 用于基础资料、身份映射和缺失信息补充。冲突应保留来源与差异记录，不因来源不同自动用 Nanoka 或本项目推断覆盖 ZZZ-HP。
 
-当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `3`。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
+当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `4`。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
 
 相对初始 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 基线，12 个资源中只有增益 JSON、`types/calculator.ts`、`utils/buffEffect.ts` 的内容变化。已接入效果的变化与限制见[修订 2](../data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)。Nanoka 仍为 3.1；属性和技能动作继续保留各自未变化的语义证据版本。
 

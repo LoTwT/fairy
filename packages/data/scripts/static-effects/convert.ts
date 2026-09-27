@@ -12,6 +12,7 @@ import type {
   NonEmpty,
   NumericExpression,
   RuleSet,
+  SkillCategory,
   SourceIdentity,
   SourceReference,
   StaticCatalogEntity,
@@ -36,6 +37,12 @@ import {
 } from "./source.ts"
 
 const identityMap: Readonly<Record<string, string | null>> = identities
+/** 独立目标覆盖表：subcategoryId → 实际增益分类（来自 SOURCE_SEMANTICS）。 */
+const independentTargetCategories: ReadonlyMap<string, SkillCategory> = new Map(
+  Object.values(SOURCE_SEMANTICS)
+    .filter((s) => s.kind === "independent-target")
+    .map((s) => [s.targetId, s.category]),
+)
 const rankEvidence: Readonly<
   Record<
     string,
@@ -539,9 +546,14 @@ function whenFor(
         conditions: targets.map((t) => ({
           kind: "all",
           conditions: [
-            ...(t.category === "follow_up"
-              ? [oneOf("hit.skillTag", ["zzz-hp:follow-up"])]
-              : [oneOf("hit.skillTag", [`zzz-hp:category:${t.category}`])]),
+            // 独立目标只匹配目标本身，不附加来源临时的大类要求。
+            ...(!independentTargetCategories.has(t.subcategoryId ?? "")
+              ? [
+                  t.category === "follow_up"
+                    ? oneOf("hit.skillTag", ["zzz-hp:follow-up"])
+                    : oneOf("hit.skillTag", [`zzz-hp:category:${t.category}`]),
+                ]
+              : []),
             ...(t.subcategoryId
               ? [oneOf("hit.skillTag", [`zzz-hp:skill:${t.subcategoryId}`])]
               : []),
@@ -905,6 +917,64 @@ function compile(
       value: expression,
     }
   let when = whenFor(e, mapping)
+  if (semantics?.kind === "stagger-recovery-settlement") {
+    // 移除 applySituation: stagger 带来的 targetState 条件；
+    // 是否失衡仍独立影响实际失衡乘区（由其他规则照常表达）。
+    if (when.kind === "all") {
+      const filtered = when.conditions.filter(
+        (condition) =>
+          !(
+            condition.kind === "one-of" && condition.fact === "hit.targetState"
+          ),
+      )
+      when = { kind: "all", conditions: filtered }
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, "stagger-recovery-settlement"],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "damage-item-targeting") {
+    const requirement = semantics.requirement
+    // 倍率只作用于声明身份的伤害项：由 itemIds 精确绑定，缺项时求值层报 MISSING_REFERENCE。
+    operation = {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: [requirement.itemId],
+      value: expression as NumericExpression<"multiplier", "contribution">,
+    } as unknown as typeof operation
+    variant = {
+      ...variant,
+      damageItemRequirements: [
+        {
+          itemId: requirement.itemId,
+          stat: requirement.stat,
+          role: requirement.role,
+          allowedModes: [...requirement.allowedModes],
+          source: requirement.source,
+          ...(requirement.originalAnomalyAttribute === undefined
+            ? {}
+            : {
+                originalAnomalyAttribute: requirement.originalAnomalyAttribute,
+              }),
+        },
+      ],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (
     record.entityId === "remiel" &&
     Array.isArray(e.elementFilter) &&
@@ -1188,7 +1258,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "3",
+    revision: "4",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1200,7 +1270,10 @@ export function convertSource(
         targetId: `zzz-hp:skill:${s.id}`,
         upstreamId: s.id,
         agentEntityId: s.agentId ? identityMap[`agents:${s.agentId}`]! : null,
-        category: s.categoryId,
+        // 独立目标的实际增益分类以语义登记为准，不沿用来源临时归类。
+        category:
+          independentTargetCategories.get(s.id) ??
+          (s.categoryId as SkillCategory),
         name: s.name,
         countsAsFollowUp:
           s.countsAsFollowUp === true ||
@@ -1248,6 +1321,16 @@ export function convertSource(
             )
             .map((r) => reference(r.pointer)),
           reference("/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+        ],
+      },
+      {
+        differenceId: "stagger-recovery-settlement",
+        explanation:
+          "南宫羽的三条异放倍率记录在固定 JSON 中标注 applySituation: stagger；来源块原文与 Nanoka 同时证明持有[颤音]并从失衡状态恢复时也会结算。该标注不构成游戏只允许失衡内结算的证据，目录条件移除失衡内限制，由调用方显式提供本次结算与层数；是否失衡仍独立影响实际失衡乘区。",
+        references: [
+          reference("/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/1"),
+          reference("/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/2"),
+          reference("/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/3"),
         ],
       },
       {

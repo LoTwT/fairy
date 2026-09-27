@@ -369,6 +369,7 @@ export function validateStaticCatalog(
           "applicability",
           "differences",
           "parameterMapping",
+          "damageItemRequirements",
         ],
         checks(vp),
         "variant",
@@ -662,6 +663,111 @@ export function validateStaticCatalog(
                 "Expected exact team counts 1–3",
               )
           }
+        }
+      }
+      const requirementList = variant["damageItemRequirements"]
+      if (requirementList !== undefined) {
+        const requirements =
+          expectArray(
+            requirementList,
+            checks(`${vp}/damageItemRequirements`),
+            "damage item requirements",
+          ) ?? []
+        for (const [ri, value] of requirements.entries()) {
+          const rp = `${vp}/damageItemRequirements/${ri}`
+          const requirement = expectObject(
+            value,
+            checks(rp),
+            "damage item requirement",
+          )
+          if (!requirement) continue
+          rejectUnknownFields(
+            requirement,
+            [
+              "itemId",
+              "stat",
+              "role",
+              "allowedModes",
+              "source",
+              "requiredDirectMultiplier",
+              "originalAnomalyAttribute",
+            ],
+            checks(rp),
+            "damage item requirement",
+          )
+          expectNonEmptyString(
+            requirement["itemId"],
+            checks(`${rp}/itemId`),
+            "damage item identity",
+          )
+          if (!GENERAL_STATS.has(requirement["stat"] as never))
+            collector.report(
+              "INVALID_INPUT",
+              `${rp}/stat`,
+              "Expected a general stat",
+            )
+          expectLiteral(
+            requirement["role"],
+            ["base", "settlement"],
+            checks(`${rp}/role`),
+            "damage item role",
+          )
+          const modes =
+            expectArray(
+              requirement["allowedModes"],
+              checks(`${rp}/allowedModes`),
+              "allowed modes",
+            ) ?? []
+          if (
+            !modes.length ||
+            modes.some(
+              (mode) =>
+                mode !== "direct" &&
+                mode !== "standard-disorder" &&
+                mode !== "standard-vortex",
+            )
+          )
+            collector.report(
+              "INVALID_INPUT",
+              `${rp}/allowedModes`,
+              "Expected a nonempty damage preparation mode list",
+            )
+          if (
+            requirement["source"] !== undefined &&
+            requirement["source"] !== "holder-current" &&
+            requirement["source"] !== "anomaly-source"
+          )
+            collector.report(
+              "INVALID_INPUT",
+              `${rp}/source`,
+              "Unknown damage item source restriction",
+            )
+          if (
+            requirement["requiredDirectMultiplier"] !== undefined &&
+            requirement["requiredDirectMultiplier"] !== 0
+          )
+            collector.report(
+              "INVALID_INPUT",
+              `${rp}/requiredDirectMultiplier`,
+              "Direct requirements must demand a zero initial multiplier",
+            )
+          if (
+            requirement["originalAnomalyAttribute"] !== undefined &&
+            ![
+              "fire",
+              "electric",
+              "ether",
+              "ice",
+              "physical",
+              "auric-ink",
+              "frost",
+            ].includes(requirement["originalAnomalyAttribute"] as string)
+          )
+            collector.report(
+              "INVALID_INPUT",
+              `${rp}/originalAnomalyAttribute`,
+              "Unknown original anomaly attribute",
+            )
         }
       }
       if (variant["parameterMapping"] !== undefined) {
@@ -1222,6 +1328,105 @@ export function calculateStaticDamageFromCatalog(
           p,
           `Input ${requirement.name} requires ${requirement.unit}; ${explain}`,
         )
+    }
+    // 伤害项要求：仅对实际生效（层数大于 0）的选中选项校验；缺项报 MISSING_REFERENCE。
+    if (variant.damageItemRequirements !== undefined && layers > 0) {
+      const disorderAttributeSource = (
+        damage as {
+          anomalySource?: { entityId?: unknown; snapshotId?: unknown }
+        }
+      ).anomalySource
+      for (const requirement of variant.damageItemRequirements as readonly {
+        readonly itemId: string
+        readonly stat: string
+        readonly role: string
+        readonly allowedModes: readonly string[]
+        readonly source?: "holder-current" | "anomaly-source"
+        readonly requiredDirectMultiplier?: number
+        readonly originalAnomalyAttribute?: string
+      }[]) {
+        const item = items.find((entry) => entry?.itemId === requirement.itemId)
+        if (item === undefined) {
+          collector.report(
+            "MISSING_REFERENCE",
+            p,
+            `Required damage item "${requirement.itemId}" is absent from the hit; ${explain}`,
+          )
+          continue
+        }
+        const itemRecord = item as unknown as Record<string, unknown>
+        if (item.stat !== requirement.stat)
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `Damage item "${requirement.itemId}" scales ${item.stat}, expected ${requirement.stat}; ${explain}`,
+          )
+        if (item.role !== requirement.role)
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `Damage item "${requirement.itemId}" has role ${item.role}, expected ${requirement.role}; ${explain}`,
+          )
+        if (!requirement.allowedModes.includes(item.mode))
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `Damage item "${requirement.itemId}" uses mode ${item.mode}; ${explain}`,
+          )
+        if (
+          requirement.originalAnomalyAttribute !== undefined &&
+          itemRecord["originalAnomalyAttribute"] !==
+            requirement.originalAnomalyAttribute
+        )
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `Damage item "${requirement.itemId}" does not carry original anomaly attribute ${requirement.originalAnomalyAttribute}; ${explain}`,
+          )
+        if (
+          item.mode === "direct" &&
+          requirement.requiredDirectMultiplier === 0 &&
+          (item as unknown as { damageMultiplier: number }).damageMultiplier !==
+            0
+        )
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `Independent damage item "${requirement.itemId}" must start from a zero multiplier; ${explain}`,
+          )
+        const statSource = item.statSource as {
+          entityId?: string
+          snapshotId?: string
+        }
+        if (requirement.source === "holder-current") {
+          if (
+            statSource.entityId !== binding.holderId ||
+            statSource.snapshotId !== undefined
+          )
+            collector.report(
+              "CONTEXT_MISMATCH",
+              p,
+              `Damage item "${requirement.itemId}" must read the bound holder's current attributes; ${explain}`,
+            )
+        }
+        if (requirement.source === "anomaly-source") {
+          if (disorderAttributeSource === undefined)
+            collector.report(
+              "MISSING_FACT",
+              p,
+              `Damage item "${requirement.itemId}" requires an explicit anomaly source; ${explain}`,
+            )
+          else if (
+            statSource.entityId !== disorderAttributeSource.entityId ||
+            statSource.snapshotId !== disorderAttributeSource.snapshotId
+          )
+            collector.report(
+              "CONTEXT_MISMATCH",
+              p,
+              `Damage item "${requirement.itemId}" must read from the declared anomaly source; ${explain}`,
+            )
+        }
+      }
     }
     const holder = actors.get(binding.holderId)!
     if (

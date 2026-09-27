@@ -1048,7 +1048,7 @@
       "name": "广域气旋",
       "rowName": "[广域气旋]风属性单次攻击伤害倍率",
       "levelGroup": "special",
-      "skillCategory": null,
+      "skillCategory": "uncategorized",
       "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnzvq"],
       "skillTags": [],
       "source": {
@@ -1070,16 +1070,32 @@
         "growth": 0.038
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "unknown-category",
-            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+            "segmentId": "action:agent:1561:action:0019:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.39,
+                  "growth": 0.036
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-velina-nk-1561007-广域气旋-风属性单次攻击"
     },
     {
@@ -1109,8 +1125,8 @@
         "kind": "unavailable",
         "issues": [
           {
-            "code": "unknown-category",
-            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+            "code": "unknown-element",
+            "message": "染色属性的元素需要显式静态元素选择与来源允许集合证据；旧登记的 wind 不作为已确认染色元素。"
           }
         ]
       },
