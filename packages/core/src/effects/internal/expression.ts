@@ -68,12 +68,14 @@ const RANK_FIELDS: readonly RankField[] = [
   "coreSkillLevel",
   "mindscapeRank",
   "refinement",
+  "specialSkillLevel",
 ]
 
 const RANK_TIERS: Readonly<Record<RankField, readonly number[]>> = {
   mindscapeRank: [0, 1, 2, 3, 4, 5, 6],
   coreSkillLevel: [1, 2, 3, 4, 5, 6, 7],
   refinement: [1, 2, 3, 4, 5],
+  specialSkillLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 }
 
 const COMPARISON_OPERATORS = ["eq", "neq", "lt", "lte", "gt", "gte"] as const

@@ -31,6 +31,24 @@ export type MindscapeRank = 0 | 1 | 2 | 3 | 4 | 5 | 6
 export type CoreSkillLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7
 export type RefinementRank = 1 | 2 | 3 | 4 | 5
 export type SetPieceCount = 0 | 1 | 2 | 3 | 4 | 5 | 6
+/** 已含影画加级的特殊技最终等级；培养等级与本次动作等级互相独立。 */
+export type SpecialSkillLevel =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
 export type SourceKind =
   | "agent"
   | "drive-disc"
@@ -73,6 +91,8 @@ export type SourceBinding = BindingBase &
         readonly configuration: {
           readonly mindscapeRank: MindscapeRank
           readonly coreSkillLevel: CoreSkillLevel
+          /** 可选；仅当选中的效果实际依赖特殊技最终等级时要求提供。 */
+          readonly specialSkillLevel?: SpecialSkillLevel
         }
       }
     | {
@@ -140,6 +160,12 @@ export type Parameter<U extends Unit> =
       readonly unit: U
       readonly rank: "refinement"
       readonly values: Readonly<Partial<Record<RefinementRank, number>>>
+    }
+  | {
+      readonly kind: "by-rank"
+      readonly unit: U
+      readonly rank: "specialSkillLevel"
+      readonly values: Readonly<Partial<Record<SpecialSkillLevel, number>>>
     }
 
 export type AnyParameter = { [U in Unit]: Parameter<U> }[Unit]
@@ -737,6 +763,8 @@ export interface StaticCatalogVariant {
     readonly refinements?: readonly RefinementRank[]
     readonly minimumSetPieces?: SetPieceCount
     readonly coreSkillLevels?: readonly CoreSkillLevel[]
+    /** 该选项有证据支持的最终特殊技等级；依赖特殊技等级的选项必须列出。 */
+    readonly specialSkillLevels?: readonly SpecialSkillLevel[]
   }
   readonly status: "converted" | "corrected" | "unsupported"
   readonly reason?: StaticCatalogUnavailableReason

@@ -23,6 +23,7 @@ import type {
 } from "@randomplay/shared"
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
+import { SOURCE_SEMANTICS } from "./semantics.ts"
 import {
   BUFF_RESOURCE,
   SOURCE_COMMIT,
@@ -252,6 +253,19 @@ const reference = (pointer: string): SourceReference => ({
   resourcePath: BUFF_RESOURCE,
   pointer: pointer as `/${string}`,
 })
+const nanokaReference = (path: string, pointer: string): SourceReference => ({
+  sourceId: "nanoka-integrated",
+  version: "3.1",
+  locale: "zh",
+  resourcePath: path,
+  pointer: pointer as `/${string}`,
+})
+/**
+ * 等级表达式取值按 12 位小数归一：base + growth × level 的十进制结果
+ * 与二进制浮点误差解耦，生成表与验收值逐字一致。
+ */
+const levelValue = (base: number, growth: number, level: number): number =>
+  Number((base + growth * level).toFixed(12))
 const idPart = (value: string) => encodeURIComponent(value)
 export interface SourceRecord {
   category: "agents" | "w-engines" | "drive-discs"
@@ -575,14 +589,16 @@ function compile(
     rankEvidence[
       `${record.entityId}:${enhancesCissiaCore ? "blk-ms4l86mv-s5y0rv" : record.blockId}`
     ]
+  // 核心被动按块名判定；此前硬编码的 jane/lucia/lucy 兼容块并非核心被动，
+  // 其语义（显式状态选择、特殊技等级表达式）改由 SOURCE_SEMANTICS 登记。
   const coreDependent =
     record.category === "agents" &&
     (enhancesCissiaCore ||
-      (record.rank === 0 &&
-        (record.blockName.includes("核心被动") ||
-          ["lucia:blk-legacy", "lucy:blk-legacy", "jane:blk-legacy"].includes(
-            `${record.entityId}:${record.blockId}`,
-          ))))
+      (record.rank === 0 && record.blockName.includes("核心被动")))
+  const semantics =
+    SOURCE_SEMANTICS[
+      `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${e.id}`
+    ]
   const requirements: StaticCatalogVariant["inputs"][number][] = []
   let variant: StaticCatalogVariant = {
     configuration: {
@@ -798,6 +814,56 @@ function compile(
       value: value * mapping.scale,
     }
     expression = param(amountUnit, "amount")
+  }
+  if (semantics?.kind === "special-skill-level") {
+    for (const spec of semantics.parameters) {
+      const existing = parameters[spec.name]
+      if (!existing)
+        throw new Error(
+          `Semantics references unknown parameter "${spec.name}" at ${record.pointer}`,
+        )
+      if (existing.unit !== spec.unit)
+        throw new Error(
+          `Semantics unit mismatch for "${spec.name}" at ${record.pointer}`,
+        )
+      parameters[spec.name] = {
+        kind: "by-rank",
+        rank: "specialSkillLevel",
+        unit: spec.unit,
+        values: Object.fromEntries(
+          semantics.levels.map((level) => [
+            level,
+            levelValue(spec.base, spec.growth, level),
+          ]),
+        ),
+      } as AnyParameter
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      configuration: {
+        ...variant.configuration,
+        specialSkillLevels: [...semantics.levels],
+      },
+      differences: [...variant.differences, "special-skill-level-expression"],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "explicit-selection-state") {
+    variant = {
+      ...variant,
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
   }
   if (mapping.basePercentage)
     expression = {
@@ -1122,7 +1188,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "2",
+    revision: "3",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1168,6 +1234,22 @@ export function convertSource(
       a.targetId.localeCompare(b.targetId),
     ),
     differences: [
+      {
+        differenceId: "special-skill-level-expression",
+        explanation:
+          "露西与卢西娅的原始记录把特殊技最终等级 12 的数值固定为常量（露西 22.6%、88 点、线性上限 512；卢西娅 3.7%、线性上限 888）。按 Nanoka 技能描述中的明确等级表达式展开为按最终等级查表的合法参数表，保留两条原始贡献与稳定效果 ID，组合表达完整公式；固定项与线性项合计仍受 600/612+24L 总上限约束，不重复添加固定项。简的狂热由显式状态选择启用，不再使用伪造的核心门槛。",
+        references: [
+          ...coverage
+            .filter(
+              (r) =>
+                (r.catalogEntityId === "agents:lucy" ||
+                  r.catalogEntityId === "agents:lucia") &&
+                (r.stat === "atk" || r.stat === "pierce"),
+            )
+            .map((r) => reference(r.pointer)),
+          reference("/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+        ],
+      },
       {
         differenceId: "astra-mindscape-2",
         explanation:

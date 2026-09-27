@@ -951,3 +951,210 @@ describe("fixed-source catalog conformance", () => {
     ).toBe(false)
   })
 })
+
+describe("special skill level selection", () => {
+  const lucyLinear =
+    "agent:1151:zzz-hp:eff-ms384fjz-fgct7r:blk-legacy:mindscape:0"
+  const lucyOptions = [
+    "agents:lucy:mindscape:0:blk-legacy:legacy-team-atk",
+    "agents:lucy:mindscape:0:blk-legacy:eff-ms384fjz-fgct7r",
+  ]
+  const luciaOptions = [
+    "agents:lucia:mindscape:0:blk-legacy:eff-ms46goq2-wtmb9a",
+    "agents:lucia:mindscape:0:blk-legacy:eff-ms46h2gh-mbmhuc",
+  ]
+  const sumContributions = (
+    input: StaticCatalogDamageInput,
+    effectIds: readonly string[],
+  ): number => {
+    const result = calculateCatalogResult(input)
+    return result.evaluation.contributions
+      .filter(
+        (contribution) =>
+          effectIds.includes(contribution.origin.effectId) &&
+          contribution.origin.beneficiaryId === input.hit.actorId,
+      )
+      .reduce((total, contribution) => total + contribution.value.value, 0)
+  }
+  const withSpecial = (
+    agentEntityId: string,
+    optionIds: readonly string[],
+    specialSkillLevel: number | undefined,
+    overrides: {
+      health?: number
+      itemStat?: "attack" | "sheerForce"
+      coreSkillLevel?: CoreSkillLevel
+      inputs?: readonly { name: string; unit: string; value: number }[]
+    } = {},
+  ): StaticCatalogDamageInput => {
+    const base = agentInput(agentEntityId, optionIds)
+    const entity = base.world.entities[0]
+    return {
+      ...base,
+      ...(overrides.health !== undefined && entity?.kind === "actor"
+        ? {
+            world: {
+              ...base.world,
+              entities: [
+                {
+                  ...entity,
+                  generalStats: {
+                    ...entity.generalStats,
+                    health: general(overrides.health),
+                  },
+                },
+                ...base.world.entities.slice(1),
+              ],
+            },
+          }
+        : {}),
+      ...(overrides.itemStat === undefined
+        ? {}
+        : {
+            hit: {
+              ...base.hit,
+              damageItems: [
+                {
+                  mode: "direct" as const,
+                  role: "base" as const,
+                  itemId: "base",
+                  damageMultiplier: 2,
+                  stat: overrides.itemStat,
+                  statSource: { entityId: "entity:attacker" },
+                },
+              ],
+            },
+          }),
+      bindings: [
+        {
+          bindingId: "binding:static",
+          kind: "agent",
+          holderId: "entity:attacker",
+          sourceEntityId: agentEntityId,
+          eligible: true,
+          configuration: {
+            coreSkillLevel: overrides.coreSkillLevel ?? 7,
+            mindscapeRank: 0,
+            ...(specialSkillLevel === undefined
+              ? {}
+              : { specialSkillLevel: specialSkillLevel as 1 }),
+          },
+        },
+      ],
+      ...(overrides.inputs === undefined
+        ? {}
+        : {
+            inputs: overrides.inputs.map((entry) => ({
+              bindingId: "binding:static" as const,
+              name: entry.name,
+              value: {
+                unit: entry.unit as "attack-points",
+                value: entry.value,
+              },
+            })),
+          }),
+    }
+  }
+
+  it.each([
+    [12, 2000, 540],
+    [16, 2000, 600],
+    [1, 1000, 182],
+  ])(
+    "expands Lucy's buff from the level expression (L%i, attack %s)",
+    (level, attack, expected) => {
+      const total = sumContributions(
+        withSpecial("1151", lucyOptions, level, {
+          inputs: [
+            {
+              name: `${lucyLinear}:source`,
+              unit: "attack-points",
+              value: attack,
+            },
+          ],
+        }),
+        [
+          "agent:1151:zzz-hp:legacy-team-atk:blk-legacy:mindscape:0",
+          lucyLinear,
+        ],
+      )
+      expect(total).toBeCloseTo(expected, 6)
+    },
+  )
+
+  it.each([
+    [12, 12000, 456],
+    [12, 24000, 900],
+    [12, 30000, 900],
+    [16, 12000, 504],
+    [16, 24000, 996],
+  ])(
+    "expands Lucia's Chorus from the level expression (L%i, health %s)",
+    (level, health, expected) => {
+      const total = sumContributions(
+        withSpecial("1451", luciaOptions, level, {
+          health,
+          itemStat: "sheerForce",
+        }),
+        [
+          "agent:1451:zzz-hp:eff-ms46goq2-wtmb9a:blk-legacy:mindscape:0",
+          "agent:1451:zzz-hp:eff-ms46h2gh-mbmhuc:blk-legacy:mindscape:0",
+        ],
+      )
+      expect(total).toBeCloseTo(expected, 6)
+    },
+  )
+
+  it("keeps Jane's frenzy identical at core 1 and 7", () => {
+    const frenzy = ["agents:jane:mindscape:0:blk-legacy:legacy-self-atk"]
+    // 面板异常精通 300：超过 120 的部分每点 +2 → 360；核心等级不影响结果。
+    const values = [1, 7].map((coreSkillLevel) =>
+      sumContributions(
+        withSpecial("1261", frenzy, undefined, {
+          coreSkillLevel: coreSkillLevel as CoreSkillLevel,
+        }),
+        ["agent:1261:zzz-hp:legacy-self-atk:blk-legacy:mindscape:0"],
+      ),
+    )
+    for (const value of values) expect(value).toBeCloseTo(360, 6)
+  })
+
+  it("requires an explicit special skill level before using its parameters", () => {
+    for (const [agentEntityId, optionIds] of [
+      ["1151", lucyOptions],
+      ["1451", luciaOptions],
+    ] as const) {
+      const result = calculateStaticDamageFromCatalog(
+        withSpecial(agentEntityId, optionIds, undefined, {
+          inputs: [
+            {
+              name: `${lucyLinear}:source`,
+              unit: "attack-points",
+              value: 2000,
+            },
+          ],
+        }),
+      )
+      expect(result.ok, JSON.stringify(result)).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) => issue.code === "MISSING_RANK"),
+        ).toBe(true)
+    }
+  })
+
+  it("rejects an out-of-domain special skill level as invalid input", () => {
+    const result = calculateStaticDamageFromCatalog(
+      withSpecial("1151", lucyOptions, 17, {
+        inputs: [
+          { name: `${lucyLinear}:source`, unit: "attack-points", value: 2000 },
+        ],
+      }),
+    )
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(
+        result.issues.some((issue) => issue.code === "INVALID_INPUT"),
+      ).toBe(true)
+  })
+})

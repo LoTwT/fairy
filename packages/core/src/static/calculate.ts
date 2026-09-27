@@ -3,13 +3,17 @@ import {
   CALCULATION_GAME_VERSION,
   DAMAGE_ELEMENTS,
   STAT_UNIT_MAP,
+  resolveAgentSkillLevelFromBonuses,
 } from "@randomplay/shared"
 import type {
   DamageElement,
   EntityId,
   EffectId,
   PanelAttributeBonus,
+  ResolvedSkillLevel,
+  SkillLevelGroup,
   SourceBinding,
+  SpecialSkillLevel,
   Stat,
   GeneralStat,
   DirectStat,
@@ -40,6 +44,7 @@ import type {
 } from "../effects/types.ts"
 import { IssueCollector } from "../effects/internal/issues.ts"
 import { validateSourceBindings } from "../effects/internal/rule.ts"
+import { isSpecialSkillLevel } from "../effects/internal/vocabulary.ts"
 import { validateStaticCatalog } from "../effects/internal/static-catalog.ts"
 import type {
   StaticActionCalculationInput,
@@ -111,12 +116,36 @@ export function staticSourceBindingId(
   return `binding:${holderId}:${kind}:${sourceEntityId}`
 }
 
-function sourceBindings(actor: StaticActorConfiguration): SourceBinding[] {
+/** 最终特殊技等级的域校验；低层目录消费的整数必须落在 1—16。 */
+function assertSpecialSkillLevel(
+  value: number,
+  pointer: string,
+): SpecialSkillLevel {
+  requireValue(
+    isSpecialSkillLevel(value),
+    pointer,
+    "Special skill final level must be an integer within 1–16",
+  )
+  return value
+}
+
+function sourceBindings(
+  actor: StaticActorConfiguration,
+  skillLevels?: Readonly<Partial<Record<SkillLevelGroup, ResolvedSkillLevel>>>,
+): SourceBinding[] {
   requireValue(
     Object.keys(actor.driveDiscs).toSorted().join(",") === "1,2,3,4,5,6",
     `/actors/${actor.entityId}/driveDiscs`,
     "Provide exactly the six drive-disc slots",
   )
+  const special = skillLevels?.special
+  const specialSkillLevel =
+    special === undefined
+      ? undefined
+      : assertSpecialSkillLevel(
+          special.effective,
+          `/actors/${actor.entityId}/skillLevels/special`,
+        )
   const bindings: SourceBinding[] = [
     {
       kind: "agent",
@@ -131,6 +160,7 @@ function sourceBindings(actor: StaticActorConfiguration): SourceBinding[] {
       configuration: {
         coreSkillLevel: actor.coreSkillLevel,
         mindscapeRank: actor.mindscapeRank,
+        ...(specialSkillLevel === undefined ? {} : { specialSkillLevel }),
       },
     },
   ]
@@ -855,7 +885,51 @@ export function calculateStaticActionDamage(
         )
       }
     }
-    const bindings = input.actors.flatMap(sourceBindings)
+    // 按每个角色自己的输入解析显式技能等级；不借用动作等级、默认值或队友等级。
+    const skillLevelsByActor = new Map<
+      EntityId,
+      Partial<Record<SkillLevelGroup, ResolvedSkillLevel>>
+    >()
+    for (const actor of input.actors) {
+      if (actor.skillLevels === undefined) continue
+      const actorRecord = input.data.agents.find(
+        (a) => a.attributes.entityId === actor.agentEntityId,
+      )
+      requireValue(
+        actorRecord,
+        `/actors/${actor.entityId}/agentEntityId`,
+        "Agent attributes were not loaded",
+        "MISSING_REFERENCE",
+      )
+      const resolved: Partial<Record<SkillLevelGroup, ResolvedSkillLevel>> = {}
+      for (const [group, level] of Object.entries(actor.skillLevels)) {
+        resolved[group as SkillLevelGroup] = resolveAgentSkillLevelFromBonuses({
+          skillLevelBonuses: actorRecord.actions.skillLevelBonuses,
+          group: group as SkillLevelGroup,
+          mindscapeRank: actor.mindscapeRank,
+          level,
+        })
+      }
+      skillLevelsByActor.set(actor.entityId, resolved)
+    }
+    const actingSkillLevels = skillLevelsByActor.get(input.actorId)
+    if (actingSkillLevels) {
+      for (const [group, resolved] of Object.entries(action.levels)) {
+        const provided = actingSkillLevels[group as SkillLevelGroup]
+        if (provided && JSON.stringify(provided) !== JSON.stringify(resolved))
+          throw new InputFailure([
+            {
+              code: "CONTEXT_MISMATCH",
+              pointer: `/actors/${input.actorId}/skillLevels/${group}`,
+              message:
+                "Provided skill level disagrees with the resolved action; re-resolve the action after changing levels or mindscape",
+            },
+          ])
+      }
+    }
+    const bindings = input.actors.flatMap((a) =>
+      sourceBindings(a, skillLevelsByActor.get(a.entityId)),
+    )
     const selections = battleSelections(input, bindings)
     const panelRules = panelDefinitions(input)
     const bindingIssues = new IssueCollector()

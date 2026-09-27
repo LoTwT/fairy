@@ -36,6 +36,7 @@ import {
   DIRECT_STATS,
   FACTOR_CHANNELS,
   FACTOR_CHANNEL_UNITS,
+  REQUIRED_SOURCE_CONFIGURATION_FIELDS,
   SOURCE_CONFIGURATION_FIELDS,
   isEffectId,
   SOURCE_KINDS,
@@ -45,6 +46,7 @@ import {
   isMindscapeRank,
   isRefinementRank,
   isSetPieceCount,
+  isSpecialSkillLevel,
 } from "./vocabulary.ts"
 
 const TARGET_SELECTOR_KINDS = [
@@ -2080,6 +2082,35 @@ function expectStringArray(
   return value
 }
 
+/** 单个配置字段的档位值校验；非法值报告 INVALID_INPUT 并返回 false。 */
+function validateConfigurationFieldValue(
+  field: string,
+  value: unknown,
+  checks: FieldChecks,
+  pointer: string,
+): boolean {
+  const fieldValid =
+    field === "mindscapeRank"
+      ? isMindscapeRank(value)
+      : field === "coreSkillLevel"
+        ? isCoreSkillLevel(value)
+        : field === "refinement"
+          ? isRefinementRank(value)
+          : field === "setPieces"
+            ? isSetPieceCount(value)
+            : field === "specialSkillLevel"
+              ? isSpecialSkillLevel(value)
+              : false
+  if (!fieldValid) {
+    checks.collector.report(
+      "INVALID_INPUT",
+      `${pointer}/configuration/${field}`,
+      `Configuration field "${field}" has an invalid rank value`,
+    )
+  }
+  return fieldValid
+}
+
 /** 校验来源绑定的结构；prepareEffects 的调用方输入检查复用本函数。 */
 export function validateSourceBindings(
   input: unknown,
@@ -2182,7 +2213,8 @@ export function validateSourceBindings(
         valid = false
       }
     }
-    for (const field of allowedFields) {
+    const requiredFields = REQUIRED_SOURCE_CONFIGURATION_FIELDS[kind]
+    for (const field of requiredFields) {
       const value = configurationObject[field]
       if (value === undefined) {
         checks.collector.report(
@@ -2193,22 +2225,15 @@ export function validateSourceBindings(
         valid = false
         continue
       }
-      const fieldValid =
-        field === "mindscapeRank"
-          ? isMindscapeRank(value)
-          : field === "coreSkillLevel"
-            ? isCoreSkillLevel(value)
-            : field === "refinement"
-              ? isRefinementRank(value)
-              : isSetPieceCount(value)
-      if (!fieldValid) {
-        checks.collector.report(
-          "INVALID_INPUT",
-          `${pointer}/configuration/${field}`,
-          `Configuration field "${field}" has an invalid rank value`,
-        )
+      if (!validateConfigurationFieldValue(field, value, checks, pointer))
         valid = false
-      }
+    }
+    for (const field of allowedFields) {
+      if (requiredFields.includes(field)) continue
+      const value = configurationObject[field]
+      if (value === undefined) continue
+      if (!validateConfigurationFieldValue(field, value, checks, pointer))
+        valid = false
     }
     if (bindingIds.has(bindingId)) {
       collector.report(
