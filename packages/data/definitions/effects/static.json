@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "3",
+  "revision": "4",
   "effects": [
     {
       "kind": "contribution",
@@ -27356,6 +27356,100 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1401:zzz-hp:legacy-self-disorderBaseMult:blk-legacy:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1401"
+        },
+        "section": "核心被动：剑心双虹",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/37/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.18
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 10
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["disorder"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["disorder"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["zzz-hp:alice:disorder-base:physical"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1401:zzz-hp:legacy-self-resPen:blk-legacy:mindscape:4",
       "source": {
         "identity": {
@@ -27370,6 +27464,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/37/mindscapeBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401507/desc/0"
           }
         ]
       },
@@ -27443,6 +27544,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/37/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401507/desc/0"
           }
         ]
       },
@@ -27521,6 +27629,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/37/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401507/desc/0"
           }
         ]
       },
@@ -27599,6 +27714,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/37/mindscapeBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401507/desc/0"
           }
         ]
       },
@@ -35431,6 +35553,922 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36jo9z-7gl5e0:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "anomaly-proficiency-points",
+          "value": 90
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyProficiency",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "anomaly-mastery-points",
+          "value": 0
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.01719
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ether"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "convert",
+          "unit": "multiplier",
+          "input": {
+            "kind": "maximum",
+            "unit": "anomaly-mastery-points",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "anomaly-mastery-points",
+                "value": 0
+              },
+              {
+                "kind": "add",
+                "unit": "anomaly-mastery-points",
+                "operands": [
+                  {
+                    "kind": "stat",
+                    "unit": "anomaly-mastery-points",
+                    "entity": {
+                      "role": "holder"
+                    },
+                    "stat": "anomalyMastery",
+                    "stage": "initial",
+                    "at": "evaluation"
+                  },
+                  {
+                    "kind": "parameter",
+                    "unit": "anomaly-mastery-points",
+                    "name": "threshold"
+                  }
+                ]
+              }
+            ]
+          },
+          "rate": {
+            "kind": "parameter",
+            "unit": "multiplier",
+            "name": "rate"
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36muwl-79wv54:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "anomaly-mastery-points",
+          "value": 0
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.01788
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["electric"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "convert",
+          "unit": "multiplier",
+          "input": {
+            "kind": "maximum",
+            "unit": "anomaly-mastery-points",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "anomaly-mastery-points",
+                "value": 0
+              },
+              {
+                "kind": "add",
+                "unit": "anomaly-mastery-points",
+                "operands": [
+                  {
+                    "kind": "stat",
+                    "unit": "anomaly-mastery-points",
+                    "entity": {
+                      "role": "holder"
+                    },
+                    "stat": "anomalyMastery",
+                    "stage": "initial",
+                    "at": "evaluation"
+                  },
+                  {
+                    "kind": "parameter",
+                    "unit": "anomaly-mastery-points",
+                    "name": "threshold"
+                  }
+                ]
+              }
+            ]
+          },
+          "rate": {
+            "kind": "parameter",
+            "unit": "multiplier",
+            "name": "rate"
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36nek6-psc6pl:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "anomaly-mastery-points",
+          "value": 0
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.01785
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "convert",
+          "unit": "multiplier",
+          "input": {
+            "kind": "maximum",
+            "unit": "anomaly-mastery-points",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "anomaly-mastery-points",
+                "value": 0
+              },
+              {
+                "kind": "add",
+                "unit": "anomaly-mastery-points",
+                "operands": [
+                  {
+                    "kind": "stat",
+                    "unit": "anomaly-mastery-points",
+                    "entity": {
+                      "role": "holder"
+                    },
+                    "stat": "anomalyMastery",
+                    "stage": "initial",
+                    "at": "evaluation"
+                  },
+                  {
+                    "kind": "parameter",
+                    "unit": "anomaly-mastery-points",
+                    "name": "threshold"
+                  }
+                ]
+              }
+            ]
+          },
+          "rate": {
+            "kind": "parameter",
+            "unit": "multiplier",
+            "name": "rate"
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36o0uv-yslwma:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "anomaly-mastery-points",
+          "value": 0
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.018000000000000002
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ice"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "convert",
+          "unit": "multiplier",
+          "input": {
+            "kind": "maximum",
+            "unit": "anomaly-mastery-points",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "anomaly-mastery-points",
+                "value": 0
+              },
+              {
+                "kind": "add",
+                "unit": "anomaly-mastery-points",
+                "operands": [
+                  {
+                    "kind": "stat",
+                    "unit": "anomaly-mastery-points",
+                    "entity": {
+                      "role": "holder"
+                    },
+                    "stat": "anomalyMastery",
+                    "stage": "initial",
+                    "at": "evaluation"
+                  },
+                  {
+                    "kind": "parameter",
+                    "unit": "anomaly-mastery-points",
+                    "name": "threshold"
+                  }
+                ]
+              }
+            ]
+          },
+          "rate": {
+            "kind": "parameter",
+            "unit": "multiplier",
+            "name": "rate"
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36oy6h-izqgcq:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/5"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "anomaly-mastery-points",
+          "value": 0
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.017830000000000002
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["physical"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "convert",
+          "unit": "multiplier",
+          "input": {
+            "kind": "maximum",
+            "unit": "anomaly-mastery-points",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "anomaly-mastery-points",
+                "value": 0
+              },
+              {
+                "kind": "add",
+                "unit": "anomaly-mastery-points",
+                "operands": [
+                  {
+                    "kind": "stat",
+                    "unit": "anomaly-mastery-points",
+                    "entity": {
+                      "role": "holder"
+                    },
+                    "stat": "anomalyMastery",
+                    "stage": "initial",
+                    "at": "evaluation"
+                  },
+                  {
+                    "kind": "parameter",
+                    "unit": "anomaly-mastery-points",
+                    "name": "threshold"
+                  }
+                ]
+              }
+            ]
+          },
+          "rate": {
+            "kind": "parameter",
+            "unit": "multiplier",
+            "name": "rate"
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36pcqr-9tpwhs:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/6"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "anomaly-mastery-points",
+          "value": 0
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.0175
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["wind"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "convert",
+          "unit": "multiplier",
+          "input": {
+            "kind": "maximum",
+            "unit": "anomaly-mastery-points",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "anomaly-mastery-points",
+                "value": 0
+              },
+              {
+                "kind": "add",
+                "unit": "anomaly-mastery-points",
+                "operands": [
+                  {
+                    "kind": "stat",
+                    "unit": "anomaly-mastery-points",
+                    "entity": {
+                      "role": "holder"
+                    },
+                    "stat": "anomalyMastery",
+                    "stage": "initial",
+                    "at": "evaluation"
+                  },
+                  {
+                    "kind": "parameter",
+                    "unit": "anomaly-mastery-points",
+                    "name": "threshold"
+                  }
+                ]
+              }
+            ]
+          },
+          "rate": {
+            "kind": "parameter",
+            "unit": "multiplier",
+            "name": "rate"
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1501:zzz-hp:eff-ms36s2o3-l3fi3g:blk-ms36joa0-0vxxo8:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1501"
+        },
+        "section": "核心被动：控场核心",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/7"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.5
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.targetState",
+            "values": ["stunned"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-increase",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1501:zzz-hp:eff-ms36xf73-q2nimy:blk-legacy:mindscape:1",
       "source": {
         "identity": {
@@ -36289,6 +37327,441 @@
         "value": {
           "kind": "parameter",
           "unit": "attack-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1511:zzz-hp:eff-ms4cegmd-ob1826:blk-ms4cegmd-bwnttd:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1511"
+        },
+        "section": "核心被动：天才偶像",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "anomaly-proficiency-points",
+          "value": 120
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyProficiency",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1511:zzz-hp:eff-ms4cey14-kzw7xx:blk-ms4cegmd-bwnttd:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1511"
+        },
+        "section": "核心被动：天才偶像",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 4.5
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ether", "electric", "fire", "ice", "wind"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1511:zzz-hp:eff-ms4clm2r-e6xquw:blk-ms4cegmd-bwnttd:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1511"
+        },
+        "section": "核心被动：天才偶像",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 4.49
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["physical"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1511:zzz-hp:eff-ms4cm9a5-wou1p2:blk-ms4cegmd-bwnttd:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1511"
+        },
+        "section": "核心被动：天才偶像",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.25
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-increase",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1511:zzz-hp:eff-ms4cyc74-h4xcin:blk-ms4cegmd-bwnttd:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1511"
+        },
+        "section": "核心被动：天才偶像",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/passive/level/1511055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.25
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
           "name": "amount"
         }
       }
@@ -40307,6 +41780,106 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1561:zzz-hp:eff-ms4tphp6-6zyuxs:blk-legacy:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1561"
+        },
+        "section": "核心被动：风华盈袖",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 2.5500000000000003
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "any",
+            "conditions": [
+              {
+                "kind": "all",
+                "conditions": [
+                  {
+                    "kind": "one-of",
+                    "fact": "hit.skillTag",
+                    "values": ["zzz-hp:skill:velina-special-ms4tnzvq"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["wind"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1561:zzz-hp:eff-ms4tpxkp-9jh4ly:blk-ms4tpxkp-f964lw:mindscape:0",
       "source": {
         "identity": {
@@ -40717,6 +42290,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/44/mindscapeBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
           }
         ]
       },
@@ -40859,6 +42439,223 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1561:zzz-hp:eff-ms5nqnpz-3hs5ih:blk-ms5nqnq1-bso2d5:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1561"
+        },
+        "section": "核心被动：风华盈袖",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 1.5
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["vortex"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["vortex"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1561:zzz-hp:legacy-self-anomalyControl:blk-legacy:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1561"
+        },
+        "section": "核心被动：风华盈袖",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "energy-per-second",
+          "value": -1.2
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 50
+        },
+        "cap": {
+          "kind": "constant",
+          "unit": "anomaly-mastery-points",
+          "value": 84
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyMastery",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "minimum",
+          "unit": "anomaly-mastery-points",
+          "operands": [
+            {
+              "kind": "convert",
+              "unit": "anomaly-mastery-points",
+              "input": {
+                "kind": "maximum",
+                "unit": "energy-per-second",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "energy-per-second",
+                    "value": 0
+                  },
+                  {
+                    "kind": "add",
+                    "unit": "energy-per-second",
+                    "operands": [
+                      {
+                        "kind": "stat",
+                        "unit": "energy-per-second",
+                        "entity": {
+                          "role": "holder"
+                        },
+                        "stat": "energyRegen",
+                        "stage": "initial",
+                        "at": "evaluation"
+                      },
+                      {
+                        "kind": "parameter",
+                        "unit": "energy-per-second",
+                        "name": "threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "rate": {
+                "kind": "parameter",
+                "unit": "multiplier",
+                "name": "rate"
+              }
+            },
+            {
+              "kind": "parameter",
+              "unit": "anomaly-mastery-points",
+              "name": "cap"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1561:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:mindscape:2",
       "source": {
         "identity": {
@@ -40873,6 +42670,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
           }
         ]
       },
@@ -40937,6 +42741,137 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1561:zzz-hp:legacy-self-dmgBonus:blk-legacy:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1561"
+        },
+        "section": "核心被动：风华盈袖",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "energy-per-second",
+          "value": -1.2
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.21
+        },
+        "cap": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.35000000000000003
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "minimum",
+          "unit": "ratio",
+          "operands": [
+            {
+              "kind": "convert",
+              "unit": "ratio",
+              "input": {
+                "kind": "maximum",
+                "unit": "energy-per-second",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "energy-per-second",
+                    "value": 0
+                  },
+                  {
+                    "kind": "add",
+                    "unit": "energy-per-second",
+                    "operands": [
+                      {
+                        "kind": "stat",
+                        "unit": "energy-per-second",
+                        "entity": {
+                          "role": "holder"
+                        },
+                        "stat": "energyRegen",
+                        "stage": "initial",
+                        "at": "evaluation"
+                      },
+                      {
+                        "kind": "parameter",
+                        "unit": "energy-per-second",
+                        "name": "threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "rate": {
+                "kind": "parameter",
+                "unit": "multiplier",
+                "name": "rate"
+              }
+            },
+            {
+              "kind": "parameter",
+              "unit": "ratio",
+              "name": "cap"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1561:zzz-hp:legacy-self-inCombatAtkPercent:blk-legacy:mindscape:4",
       "source": {
         "identity": {
@@ -40951,6 +42886,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/44/mindscapeBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
           }
         ]
       },
@@ -41019,6 +42961,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/44/mindscapeBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
           }
         ]
       },
@@ -41092,6 +43041,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
           }
         ]
       },
@@ -41151,6 +43107,106 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1561:zzz-hp:legacy-team-anomalyReleaseMult:blk-legacy:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1561"
+        },
+        "section": "核心被动：风华盈袖",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 0
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 1.45
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "any",
+            "conditions": [
+              {
+                "kind": "all",
+                "conditions": [
+                  {
+                    "kind": "one-of",
+                    "fact": "hit.skillTag",
+                    "values": ["zzz-hp:skill:velina-special-ms4tnsha"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["wind"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "base-multiplier-addition",
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1561:zzz-hp:legacy-team-resPen:blk-legacy:mindscape:1",
       "source": {
         "identity": {
@@ -41165,6 +43221,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/44/mindscapeBuffs/1/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/passive/level/1561507/desc/0"
           }
         ]
       },

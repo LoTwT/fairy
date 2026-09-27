@@ -4,13 +4,13 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 804 条规则与 830 个选择项。1,214 条 converted、8 条 corrected；68 条 unsupported 中，25 条缺少核心档位证据、37 条缺少 Fairy 身份、6 条属于当前 core 范围外公式。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 823 条规则与 830 个选择项。1,230 条 converted、11 条 corrected；49 条 unsupported 中，6 条缺少核心档位证据、37 条缺少 Fairy 身份、6 条属于当前 core 范围外公式。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项、空记录和蕾米埃尔自身异常强度的新等级公式另列在报告中。目录入口拒绝把蕾米埃尔作为 `anomalySource`；她提供给其他来源异常的已映射增益可以正常计算。
 
 5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`（见下）。
 
-固定输入重复生成的三个制品字节一致。离线验收逐条对比 1,214 条 converted 记录，corrected 另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
+固定输入重复生成的三个制品字节一致。离线验收逐条对比 1,230 条 converted 记录，corrected 另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
 
 ### 修订 2：转化边界与核心档位
 
@@ -43,6 +43,16 @@
 | 星徽·比利 / 千夏 / 希格莉德 / 照核心（7 条） | 开放已核实核心 7                                                            | 各条目按原始数值独立对照                                |
 
 露西/卢西娅的等级表达式来自 Nanoka 技能描述（`agents/1151` `/skill/special/description/2/desc`、`agents/1451` `/skill/special/description/1/desc` 的 `AvatarSkillLevel(1)` 表达式），由其生成最终等级 1—16 的合法参数表，与缺档猜测不同；两条原始贡献保留既有稳定 ID，组合表达总公式。语义修正由新增的 [semantics.ts](../../../packages/data/scripts/static-effects/semantics.ts) 登记（键为 category/entity/rankKind/rank/blockId/effectId 稳定组合），目录具名差异 `special-skill-level-expression` 记录解释与来源。生成器验证语义证据的文件摘要与 Pointer 存在，被动形证据还须与 `data.json` 的明确 level 元数据一致。
+
+### 修订 4：异常倍率与命中范围
+
+规则集 revision 递增为 `4`。闭合 19 个既有缺口（爱芮 8、南宫羽 5、维琳娜 5、爱丽丝 1），全部沿用既有异放/紊乱/乱流乘区与读取链，不新增伤害公式。
+
+- 爱芮：核心 7 精通 +90 与六个元素来源的初始掌控转化分别登记；初始掌控读取不与精通增量混淆，目标失衡 +50% 倍率修正应用一次。
+- 南宫羽：非物理五元素 450%、物理 449% 按来源原值保留；颤音层数 1—4 同一乘区增量相加（4 层为 ×2）；三条异放记录的 `applySituation: stagger` 经具名修正 `stagger-recovery-settlement` 移除失衡内限制——来源块原文与 Nanoka 同时证明持有颤音并从失衡恢复时同样结算，由调用方显式提供本次结算与层数；是否失衡仍独立影响实际失衡乘区；全队 25% 增伤独立登记。
+- 维琳娜：增伤与掌控转化按 energy-per-second 单位读取，两个封顶点不同（0.35 / 84）；微域/广域气旋按来源自带注记改为 `uncategorized` 独立目标，目录目标元数据与条件展开同步修正，条件只匹配独立目标、异放伤害与风元素；乱流 150% 进入既有乱流倍率加数，不解释为全局乘数。
+- 爱丽丝：物理紊乱倍率提升按声明身份精确绑定本次被结算的物理原异常紊乱基础项（变体 `damageItemRequirements` 声明身份、属性、角色、模式与原异常归属，规则以 `hit-adjustment` itemIds 绑定），0—10 层由调用方显式提供；多个基础项只调整指定项，不重复添加。
+- 技能目录联动：`action:agent:1561:action:0019`（广域气旋·风属性）解除 unknown-category 限制并按 `uncategorized` 开放；`action:agent:1561:action:0020`（染色属性）保留不可用，原因具体化为染色元素需要显式静态元素选择与来源允许集合证据，旧登记的 wind 不作为已确认染色元素。
 
 ## 交付目标与边界
 

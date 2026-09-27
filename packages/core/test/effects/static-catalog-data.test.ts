@@ -1158,3 +1158,377 @@ describe("special skill level selection", () => {
       ).toBe(true)
   })
 })
+
+describe("anomaly multipliers and hit scoping", () => {
+  const fixtureTables = {
+    disorder: oracle.tables.damage!.find(
+      (entry) => (entry as { kind?: string }).kind === "disorder",
+    )!,
+    settlement: oracle.tables.damage!.find(
+      (entry) => (entry as { kind?: string }).kind === "anomaly-settlement",
+    )!,
+  }
+  const generalStatsWith = (
+    input: StaticCatalogDamageInput,
+    stat: string,
+    value: number,
+  ): StaticCatalogDamageInput => {
+    const entity = input.world.entities[0]
+    if (entity?.kind !== "actor") throw new Error("actor")
+    return {
+      ...input,
+      world: {
+        ...input.world,
+        entities: [
+          {
+            ...entity,
+            generalStats: {
+              ...entity.generalStats,
+              [stat]: general(value),
+            },
+          },
+          ...input.world.entities.slice(1),
+        ],
+      },
+    }
+  }
+
+  it("applies Alice's disorder multiplier only to the declared physical disorder item", () => {
+    const option =
+      "agents:alice:mindscape:0:blk-legacy:legacy-self-disorderBaseMult"
+    const aliceEffect =
+      "agent:1401:zzz-hp:legacy-self-disorderBaseMult:blk-legacy:mindscape:0"
+    const base = agentInput("1401", [option], 0, 7)
+    const disorderItem = (itemId: string, attribute: "physical" | "fire") => ({
+      mode: "standard-disorder" as const,
+      role: "base" as const,
+      itemId,
+      stat: "attack" as const,
+      statSource: { entityId: "entity:attacker" },
+      originalAnomalyAttribute: attribute,
+      baseDurationSeconds: 30,
+      elapsedSeconds: 10,
+    })
+    const hit = {
+      ...base.hit,
+      damageItems: [
+        disorderItem("zzz-hp:alice:disorder-base:physical", "physical"),
+        disorderItem("other:disorder-base:fire", "fire"),
+        {
+          mode: "direct" as const,
+          role: "base" as const,
+          itemId: "third",
+          stat: "health" as const,
+          damageMultiplier: 3,
+          statSource: { entityId: "entity:attacker" },
+        },
+      ] as unknown as typeof base.hit.damageItems,
+    }
+    const damage = {
+      ...fixtureTables.disorder,
+      anomalySource: { entityId: "entity:attacker", level: 60 },
+    } as unknown as StaticCatalogDamageInput["damage"]
+    for (const [layers, expected] of [
+      [0, 0],
+      [1, 0.18],
+      [10, 1.8],
+    ] as const) {
+      const result = calculateCatalogResult({
+        ...base,
+        hit,
+        damage,
+        selections: [{ optionId: option, bindingId: "binding:static", layers }],
+      })
+      const physical = result.evaluation.hit!.damageItems.find(
+        (item) => item.itemId === "zzz-hp:alice:disorder-base:physical",
+      )!
+      const others = result.evaluation.hit!.damageItems.filter(
+        (item) => item.itemId !== "zzz-hp:alice:disorder-base:physical",
+      )
+      const bonus = result.evaluation.contributions.filter(
+        (contribution) => contribution.origin.effectId === aliceEffect,
+      )
+      expect(
+        bonus.reduce((total, entry) => total + entry.value.value, 0),
+      ).toBeCloseTo(expected, 9)
+      for (const entry of bonus)
+        expect(entry.address).toMatchObject({
+          itemId: "zzz-hp:alice:disorder-base:physical",
+        })
+      void others
+      void physical
+    }
+  })
+
+  it("rejects Alice's selection when the declared item is missing or misattributed", () => {
+    const option =
+      "agents:alice:mindscape:0:blk-legacy:legacy-self-disorderBaseMult"
+    const base = agentInput("1401", [option], 0, 7)
+    const damage = {
+      ...fixtureTables.disorder,
+      anomalySource: { entityId: "entity:attacker", level: 60 },
+    } as unknown as StaticCatalogDamageInput["damage"]
+    const missingItem = calculateStaticDamageFromCatalog({
+      ...base,
+      damage,
+      hit: { ...base.hit, damageItems: base.hit.damageItems },
+    })
+    expect(missingItem).toMatchObject({
+      ok: false,
+      issues: [{ code: "MISSING_REFERENCE" }],
+    })
+    const wrongAttribute = calculateStaticDamageFromCatalog({
+      ...base,
+      damage,
+      hit: {
+        ...base.hit,
+        damageItems: [
+          {
+            mode: "standard-disorder" as const,
+            role: "base" as const,
+            itemId: "zzz-hp:alice:disorder-base:physical",
+            stat: "attack" as const,
+            statSource: { entityId: "entity:attacker" },
+            originalAnomalyAttribute: "fire" as const,
+            baseDurationSeconds: 30,
+            elapsedSeconds: 10,
+          },
+        ],
+      },
+    })
+    expect(wrongAttribute).toMatchObject({
+      ok: false,
+      issues: [{ code: "CONTEXT_MISMATCH" }],
+    })
+  })
+
+  const ariaReleaseOptions = {
+    ether: "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36k7q1-vqttu0",
+    electric: "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36muwl-79wv54",
+    fire: "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36nek6-psc6pl",
+    ice: "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36o0uv-yslwma",
+    physical: "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36oy6h-izqgcq",
+    wind: "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36pcqr-9tpwhs",
+  } as const
+  it.each([
+    ["ether", 3.438],
+    ["electric", 3.576],
+    ["fire", 3.57],
+    ["ice", 3.6],
+    ["physical", 3.566],
+    ["wind", 3.5],
+  ] as const)(
+    "scales Aria's %s release from 200 initial anomaly control",
+    (element, expected) => {
+      const input = generalStatsWith(
+        agentInput(
+          "1501",
+          [
+            "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36jo9z-7gl5e0",
+            ariaReleaseOptions[element],
+          ],
+          0,
+          7,
+        ),
+        "anomalyMastery",
+        200,
+      )
+      const result = calculateCatalogResult({
+        ...input,
+        hit: { ...input.hit, element },
+        damage: {
+          ...fixtureTables.settlement,
+          anomalySource: { entityId: "entity:attacker", level: 60 },
+        } as unknown as StaticCatalogDamageInput["damage"],
+      })
+      const mastery = result.evaluation.contributions.filter(
+        (contribution) =>
+          contribution.address.kind === "stat" &&
+          contribution.address.stat === "anomalyProficiency",
+      )
+      expect(
+        mastery.reduce((total, entry) => total + entry.value.value, 0),
+      ).toBe(90)
+      const release = result.evaluation.contributions.filter(
+        (contribution) =>
+          contribution.address.kind === "factor" &&
+          contribution.address.channel === "base-multiplier-addition",
+      )
+      expect(
+        release.reduce((total, entry) => total + entry.value.value, 0),
+      ).toBeCloseTo(expected, 6)
+    },
+  )
+
+  it("keeps Nangongyu's tremolo additive across layers and settles after stagger recovery", () => {
+    const option =
+      "agents:nangongyu:mindscape:0:blk-ms4cegmd-bwnttd:eff-ms4cm9a5-wou1p2"
+    const base = agentInput("1511", [option], 0, 7)
+    const damage = {
+      ...fixtureTables.settlement,
+      anomalySource: { entityId: "entity:attacker", level: 60 },
+    } as unknown as StaticCatalogDamageInput["damage"]
+    const factorAt = (layers: number, isStunned: boolean) => {
+      const result = calculateCatalogResult({
+        ...base,
+        damage: {
+          ...damage,
+          stunDamage: { ...damage.stunDamage, isTargetStunned: isStunned },
+        },
+        selections: [{ optionId: option, bindingId: "binding:static", layers }],
+      })
+      return result.evaluation.contributions
+        .filter(
+          (contribution) =>
+            contribution.address.kind === "factor" &&
+            contribution.address.channel === "base-multiplier-increase",
+        )
+        .reduce((total, entry) => total + entry.value.value, 0)
+    }
+    expect(factorAt(1, true)).toBeCloseTo(0.25, 9)
+    expect(factorAt(4, true)).toBeCloseTo(1, 9)
+    // 恢复后结算：非失衡快照同样成立（具名修正 stagger-recovery-settlement）
+    expect(factorAt(4, false)).toBeCloseTo(1, 9)
+    expect(factorAt(0, false)).toBe(0)
+  })
+
+  it("caps Velina's two conversions at different points and keeps the cyclones apart", () => {
+    const options = [
+      "agents:velina:mindscape:0:blk-legacy:legacy-self-dmgBonus",
+      "agents:velina:mindscape:0:blk-legacy:legacy-self-anomalyControl",
+      "agents:velina:mindscape:0:blk-legacy:legacy-team-anomalyReleaseMult",
+      "agents:velina:mindscape:0:blk-legacy:eff-ms4tphp6-6zyuxs",
+    ]
+    const energyInput = (value: number): StaticCatalogDamageInput => {
+      const base = agentInput("1561", options, 0, 7)
+      const entity = base.world.entities[0]
+      if (entity?.kind !== "actor") throw new Error("actor")
+      return {
+        ...base,
+        world: {
+          ...base.world,
+          entities: [
+            {
+              ...entity,
+              generalStats: {
+                ...entity.generalStats,
+                energyRegen: general(value),
+                anomalyMastery: general(500),
+              },
+            },
+            ...base.world.entities.slice(1),
+          ],
+        },
+        hit: {
+          ...base.hit,
+          element: "wind" as const,
+          skillTags: [
+            "zzz-hp:skill:velina-special-ms4tnsha",
+            "zzz-hp:skill:velina-special-ms4tnzvq",
+          ],
+          damageItems: [
+            ...base.hit.damageItems,
+            {
+              mode: "direct" as const,
+              role: "base" as const,
+              itemId: "mastery-read",
+              stat: "anomalyMastery" as const,
+              damageMultiplier: 1,
+              statSource: { entityId: "entity:attacker" },
+            },
+          ],
+        },
+        damage: {
+          ...fixtureTables.settlement,
+          anomalySource: { entityId: "entity:attacker", level: 60 },
+        } as unknown as StaticCatalogDamageInput["damage"],
+        inputs: options.flatMap((optionId) =>
+          catalog.options
+            .find((option) => option.optionId === optionId)!
+            .variants.flatMap((variant) =>
+              variant.inputs.map((requirement) => ({
+                bindingId: "binding:static" as const,
+                name: requirement.name,
+                value: { unit: requirement.unit, value },
+              })),
+            ),
+        ),
+      }
+    }
+    const sums = (result: StaticDamageResult) =>
+      result.evaluation.contributions.reduce(
+        (totals, contribution) => {
+          if (
+            contribution.address.kind === "stat" &&
+            contribution.address.stat === "anomalyMastery"
+          )
+            totals.control += contribution.value.value
+          if (
+            contribution.address.kind === "factor" &&
+            contribution.address.channel === "base-multiplier-addition"
+          )
+            totals.release += contribution.value.value
+          if (
+            contribution.address.kind === "factor" &&
+            contribution.address.channel === "damage-bonus"
+          )
+            totals.bonus += contribution.value.value
+          return totals
+        },
+        { control: 0, release: 0, bonus: 0 },
+      )
+    // E=2：增伤 0.168、掌控 40、异放 1.45+2.55
+    const atTwo = sums(calculateCatalogResult(energyInput(2)))
+    expect(atTwo.bonus).toBeCloseTo(0.168, 9)
+    expect(atTwo.control).toBeCloseTo(40, 6)
+    expect(atTwo.release).toBeCloseTo(4, 6)
+    // E=2.88：增伤封顶 0.35，掌控封顶 84 —— 两个封顶点不同
+    const atCap = sums(calculateCatalogResult(energyInput(2.88)))
+    expect(atCap.bonus).toBeCloseTo(0.35, 9)
+    expect(atCap.control).toBeCloseTo(84, 6)
+  })
+})
+
+describe("velina cyclone catalog linkage", () => {
+  it("resolves the wind cyclone attack as an uncategorized action", () => {
+    const agent = read(
+      "../../../data/definitions/skills/agents/1561.json",
+    ) as AgentActions
+    const action = resolveAgentAction({
+      agent,
+      actionId: "action:agent:1561:action:0019",
+      mindscapeRank: 0,
+      levels: { special: { mode: "trained", value: 12 } },
+    })
+    expect(action.ok).toBe(true)
+    if (action.ok) {
+      expect(action.skillCategory).toBe("uncategorized")
+      expect(action.skillTargetIds).toEqual([
+        "zzz-hp:skill:velina-special-ms4tnzvq",
+      ])
+      expect(action.calculation.kind).toBe("damage")
+    }
+  })
+  it("keeps the dye cyclone unavailable with a specific element requirement", () => {
+    const agent = read(
+      "../../../data/definitions/skills/agents/1561.json",
+    ) as AgentActions
+    const action = resolveAgentAction({
+      agent,
+      actionId: "action:agent:1561:action:0020",
+      mindscapeRank: 0,
+      levels: { special: { mode: "trained", value: 12 } },
+    })
+    expect(action.ok).toBe(false)
+    if (!action.ok)
+      expect(
+        action.issues.some((issue) => issue.code === "unknown-element"),
+      ).toBe(true)
+  })
+  const target = catalog.skillTargets.find(
+    (entry) => entry.targetId === "zzz-hp:skill:velina-special-ms4tnzvq",
+  )!
+  it("publishes the cyclone target as uncategorized", () => {
+    expect(target.category).toBe("uncategorized")
+  })
+})

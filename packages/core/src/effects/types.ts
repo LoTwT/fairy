@@ -620,7 +620,12 @@ export type StaticCatalogDamageItem = {
   readonly statSource: AttributeSource
   readonly role: "base" | "settlement"
 } & (
-  | { readonly mode: "direct"; readonly damageMultiplier: number }
+  | {
+      readonly mode: "direct"
+      readonly damageMultiplier: number
+      /** 来源归属元数据；不据此重算已传入的直接倍率。 */
+      readonly originalAnomalyAttribute?: import("../formulas.ts").CalculateStandardDisorderDamageMultiplierParams["originalAnomalyAttribute"]
+    }
   | {
       readonly mode: "standard-disorder"
       readonly originalAnomalyAttribute: import("../formulas.ts").CalculateStandardDisorderDamageMultiplierParams["originalAnomalyAttribute"]

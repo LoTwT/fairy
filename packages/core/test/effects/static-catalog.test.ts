@@ -570,6 +570,67 @@ describe("catalog static calculation", () => {
     })
     expect(oneLayer(5).ok).toBe(true)
   })
+  it("keeps uncategorized targets from matching special-category-only effects", () => {
+    const input = fixture([contribution("base-multiplier-increase", 0.2)])
+    const withWhen = changeVariant(input, {
+      // 模拟 special-only 效果：条件要求 special 大类标签
+    })
+    const specialOnly = {
+      ...withWhen,
+      definitions: {
+        ...withWhen.definitions,
+        effects: withWhen.definitions.effects.map((rule) => ({
+          ...rule,
+          kind: "contribution",
+          when: {
+            kind: "all",
+            conditions: [
+              {
+                kind: "one-of",
+                fact: "hit.skillTag",
+                values: ["zzz-hp:category:special"],
+              },
+            ],
+          },
+        })),
+      } as typeof withWhen.definitions,
+    }
+    const target = (category: string) => ({
+      ...specialOnly,
+      catalog: {
+        ...specialOnly.catalog,
+        skillTargets: [
+          {
+            targetId: "zzz-hp:skill:test-target",
+            upstreamId: "test-target",
+            agentEntityId: "1311",
+            category,
+            name: "test",
+            countsAsFollowUp: false,
+          },
+        ],
+      },
+      hit: { ...specialOnly.hit, skillTargetIds: ["zzz-hp:skill:test-target"] },
+    })
+    // uncategorized 目标注入 uncategorized 标签，special-only 效果不适用
+    const uncategorized = calculateStaticDamageFromCatalog(
+      target("uncategorized"),
+    )
+    expect(uncategorized.ok).toBe(true)
+    if (uncategorized.ok)
+      expect(uncategorized.value.evaluation.contributions).toHaveLength(0)
+    // 对照：special 目标注入 special 标签，效果适用
+    const special = calculateStaticDamageFromCatalog(target("special"))
+    expect(special.ok).toBe(true)
+    if (special.ok)
+      expect(
+        special.value.evaluation.contributions.some(
+          (contribution) =>
+            contribution.address.kind === "factor" &&
+            contribution.address.channel === "base-multiplier-increase",
+        ),
+      ).toBe(true)
+  })
   it.each([0, 2.5, 17, Number.NaN])(
     "rejects special skill level %s outside the 1–16 domain",
     (value) => {

@@ -3852,6 +3852,70 @@
           }
         ],
         "skillTargetIds": []
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "basic",
+        "element": "physical",
+        "damageItems": [
+          {
+            "mode": "standard-disorder",
+            "role": "base",
+            "itemId": "zzz-hp:alice:disorder-base:physical",
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            },
+            "originalAnomalyAttribute": "physical",
+            "baseDurationSeconds": 30,
+            "elapsedSeconds": 10
+          }
+        ],
+        "skillTargetIds": []
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "basic",
+        "element": "wind",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "base",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": [],
+        "skillTags": ["zzz-hp:skill:velina-special-ms4tnsha"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "basic",
+        "element": "wind",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "base",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": [],
+        "skillTags": ["zzz-hp:skill:velina-special-ms4tnzvq"]
       }
     ],
     "damage": [
@@ -17901,6 +17965,118 @@
       [
         {
           "optionId": "agents:zhao:mindscape:0:blk-legacy:eff-ms20xkge-sexk0m",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:alice:mindscape:0:blk-legacy:legacy-self-disorderBaseMult",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36jo9z-7gl5e0",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36k7q1-vqttu0",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36muwl-79wv54",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36nek6-psc6pl",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36o0uv-yslwma",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36oy6h-izqgcq",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36pcqr-9tpwhs",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36s2o3-l3fi3g",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:nangongyu:mindscape:0:blk-ms4cegmd-bwnttd:eff-ms4cegmd-ob1826",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:nangongyu:mindscape:0:blk-ms4cegmd-bwnttd:eff-ms4cyc74-h4xcin",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-legacy:legacy-self-anomalyControl",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-legacy:legacy-self-dmgBonus",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-legacy:legacy-team-anomalyReleaseMult",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-legacy:eff-ms4tphp6-6zyuxs",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-ms5nqnq1-bso2d5:eff-ms5nqnpz-3hs5ih",
           "bindingId": "binding:source",
           "layers": 1
         }
@@ -39400,6 +39576,278 @@
         "bindings": 215,
         "selections": 780,
         "actorSources": 73,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/37/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.18,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1401:zzz-hp:legacy-self-disorderBaseMult:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 105,
+        "damage": 1,
+        "bindings": 4,
+        "selections": 781,
+        "actorSources": 2,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/0",
+      "expected": 90,
+      "unit": "anomaly-proficiency-points",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36jo9z-7gl5e0:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 5,
+        "damage": 0,
+        "bindings": 13,
+        "selections": 782,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/1",
+      "expected": 8.595,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 80,
+        "damage": 3,
+        "bindings": 13,
+        "selections": 783,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/2",
+      "expected": 8.94,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36muwl-79wv54:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 2,
+        "damage": 3,
+        "bindings": 13,
+        "selections": 784,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/3",
+      "expected": 8.925,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36nek6-psc6pl:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 13,
+        "damage": 3,
+        "bindings": 13,
+        "selections": 785,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/4",
+      "expected": 9,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36o0uv-yslwma:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 35,
+        "damage": 3,
+        "bindings": 13,
+        "selections": 786,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/5",
+      "expected": 8.915000000000001,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36oy6h-izqgcq:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 3,
+        "bindings": 13,
+        "selections": 787,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/6",
+      "expected": 8.75,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36pcqr-9tpwhs:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 37,
+        "damage": 3,
+        "bindings": 13,
+        "selections": 788,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/7",
+      "expected": 0.5,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1501:zzz-hp:eff-ms36s2o3-l3fi3g:blk-ms36joa0-0vxxo8:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 3,
+        "bindings": 13,
+        "selections": 789,
+        "actorSources": 5,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/0",
+      "expected": 120,
+      "unit": "anomaly-proficiency-points",
+      "effectIds": [
+        "agent:1511:zzz-hp:eff-ms4cegmd-ob1826:blk-ms4cegmd-bwnttd:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 5,
+        "damage": 0,
+        "bindings": 102,
+        "selections": 790,
+        "actorSources": 37,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/4",
+      "expected": 0.25,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1511:zzz-hp:eff-ms4cyc74-h4xcin:blk-ms4cegmd-bwnttd:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 102,
+        "selections": 791,
+        "actorSources": 37,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "expected": 84,
+      "unit": "anomaly-mastery-points",
+      "effectIds": [
+        "agent:1561:zzz-hp:legacy-self-anomalyControl:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 27,
+        "damage": 0,
+        "bindings": 176,
+        "selections": 792,
+        "actorSources": 64,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.35000000000000003,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1561:zzz-hp:legacy-self-dmgBonus:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 176,
+        "selections": 793,
+        "actorSources": 64,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/2",
+      "expected": 1.45,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1561:zzz-hp:legacy-team-anomalyReleaseMult:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 106,
+        "damage": 3,
+        "bindings": 176,
+        "selections": 794,
+        "actorSources": 64,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/0/effects/3",
+      "expected": 2.5500000000000003,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1561:zzz-hp:eff-ms4tphp6-6zyuxs:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 107,
+        "damage": 3,
+        "bindings": 176,
+        "selections": 795,
+        "actorSources": 64,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0",
+      "expected": 1.5,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1561:zzz-hp:eff-ms5nqnpz-3hs5ih:blk-ms5nqnq1-bso2d5:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 10,
+        "bindings": 176,
+        "selections": 796,
+        "actorSources": 64,
         "inputs": 0
       }
     }
