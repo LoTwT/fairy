@@ -104,6 +104,32 @@ export type SourceSemantics =
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
+  | {
+      /**
+       * 记录对应来源的潜能分支（Nanoka passive 节点 potential 为 102100—102105）：
+       * 规则与变体必须显式声明潜能门槛，未开启潜能时不可用。
+       */
+      readonly kind: "potential-branch"
+      readonly minimumPotential: number
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 记录按潜能等级查表取参（Nanoka potentialDetail 明确各潜能数值）：
+       * 不能由层数、影画或其他培养维度代替；maximumLayers 归一为 1。
+       */
+      readonly kind: "potential-level"
+      readonly minimumPotential: number
+      readonly levels: readonly number[]
+      readonly parameters: readonly {
+        readonly name: string
+        readonly unit: Unit
+        readonly values: Readonly<Record<string, number>>
+      }[]
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
 
 const lucyEvidence = [
   {
@@ -134,6 +160,22 @@ const nangongyuEvidence = [
     path: "agents/1511/details.zh.json",
     pointer: "/passive/level/1511055/desc/0",
     sha256: "3ccdbfa4e58b8cba5b758fbfcfd512a6a06f09b56c929d6b102b9f54d7e5e3cf",
+  },
+] as const
+
+const nekomataPotentialEvidence = [
+  {
+    path: "agents/1021/details.zh.json",
+    pointer: "/passive/level/1021514/desc/0",
+    sha256: "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
+  },
+] as const
+
+const pyroisEvidence = [
+  {
+    path: "agents/1551/details.zh.json",
+    pointer: "/passive/level/1551507/desc/0",
+    sha256: "18e48f62b4733432c0510a7e6b30446dc33ae5ab8350744d4fc7e5207b34a994",
   },
 ] as const
 
@@ -233,6 +275,45 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "同上：颤音每层 +25%、最多 4 层，同一乘区增量相加（4 层为 ×2），由调用方显式提供本次结算层数；失衡内与恢复后的固定快照均可结算。",
   },
+  // 佩洛伊斯：核心被动的终结技分支增益。
+  "agents/pyrois/mindscape/0/blk-legacy/legacy-self-critDmg": {
+    kind: "explicit-selection-state",
+    evidence: pyroisEvidence,
+    verification:
+      "Nanoka 核心被动第 7 级确认：上分支[终结技：万军诛绝]的[阳炎]状态下，发动[终结技]对处于失衡状态下的敌人造成的暴击伤害提升 40%。失衡目标条件由 applySituation: stagger 照常表达，分支与状态由调用方显式断言，不同属性基础项与多个 item 各只加一次。",
+  },
+  "agents/pyrois/mindscape/0/blk-legacy/eff-ms4m3n71-z780mg": {
+    kind: "explicit-selection-state",
+    evidence: pyroisEvidence,
+    verification:
+      "Nanoka 核心被动第 7 级确认：下分支[终结技：凯旋坦途]的[耀斑]状态下，造成的伤害提升 40%；通用增伤与上分支的失衡目标终结技暴伤分别登记，上/下有效状态是否共存由调用方断言，不凭同块说明猜互斥。",
+  },
+  "agents/pyrois/mindscape/0/blk-legacy/eff-ms4m4nah-o17lgq": {
+    kind: "damage-item-targeting",
+    requirement: {
+      itemId: "pyrois:ult-left-extra",
+      stat: "attack",
+      role: "base",
+      allowedModes: ["direct"],
+      source: "holder-current",
+    },
+    evidence: pyroisEvidence,
+    verification:
+      "Nanoka 核心被动第 7 级确认：左分支[终结技：无拘剑势]重击命中[浸染]状态下的敌人时，额外造成等同于 900% 攻击力的伤害。+9 攻击倍率写入声明的独立左分支附加项（direct、holder-current、零初始倍率），由关联规则贡献一次实际倍率；浸染前提由调用方断言。",
+  },
+  "agents/pyrois/mindscape/0/blk-legacy/eff-ms4m5tqw-4wvfng": {
+    kind: "damage-item-targeting",
+    requirement: {
+      itemId: "pyrois:ult-right-settlement",
+      stat: "attack",
+      role: "settlement",
+      allowedModes: ["direct"],
+      source: "holder-current",
+    },
+    evidence: pyroisEvidence,
+    verification:
+      "Nanoka 核心被动第 7 级确认：右分支[终结技：永陷幽囚]重击命中失衡敌人触发效果，额外造成等同于 2250% 攻击力的伤害。+22.5 决算写入声明的独立结算项（role settlement、holder-current、零初始倍率），缺独立结算项时目录按既有契约拒绝；失衡前提由调用方断言。",
+  },
   // 维琳娜：微域/广域气旋在来源中临时归入 special 大类，实际不属于任何类型。
   "agents/velina/mindscape/0/blk-legacy/legacy-team-anomalyReleaseMult": {
     kind: "independent-target",
@@ -241,6 +322,65 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     evidence: velinaEvidence,
     verification:
       "来源块自带注记：微域气旋与广域气旋只是方便处理列入[特殊技]大类，实则不属于任何类型。Nanoka 核心被动第 7 级确认该爆炸为风属性异放、固定结算 145% 倍率。目录目标元数据改为 uncategorized，条件只匹配独立目标、异放伤害种类与风元素，不附加 special 大类要求。",
+  },
+  // 猫又：60% 增伤与爪印来自核心被动潜能分支（闪反/快速支援后，40 秒语义）。
+  "agents/nekomata/mindscape/0/blk-legacy/legacy-self-dmgBonus": {
+    kind: "potential-branch",
+    minimumPotential: 1,
+    evidence: nekomataPotentialEvidence,
+    verification:
+      "Nanoka 潜能分支（/passive/level/1021514，potential 为 102100—102105）确认：[闪避反击]或[快速支援]命中敌人时，自身造成的伤害提升 60%、持续 40 秒；普通分支（1021507，potential 为 [0]）为同系数 6 秒版本，由补充变体单独登记。60% 增伤仅在潜能开启时可用，只开放已核实核心 7。",
+  },
+  "agents/nekomata/mindscape/0/blk-legacy/eff-ms4f47p3-p1s9yz": {
+    kind: "damage-item-targeting",
+    requirement: {
+      itemId: "nekomata:claw-mark",
+      stat: "attack",
+      role: "base",
+      allowedModes: ["direct"],
+      source: "holder-current",
+    },
+    evidence: nekomataPotentialEvidence,
+    verification:
+      "Nanoka 潜能分支 1—7 行（1021508—1021514）均明确：[肉球突袭]状态下自身攻击命中时触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害（1 秒冷却由调用方声明，不模拟）。爪印输出作用于声明身份的独立伤害项：attack 缩放、base、direct、holder-current、零初始倍率；不在普通动作上自动附加，也不借用触发招式的分类。",
+  },
+  "agents/nekomata/mindscape/0/blk-ms4f4rbb-id7p58/eff-ms4f4rbb-y2jon7": {
+    kind: "potential-branch",
+    minimumPotential: 1,
+    evidence: nekomataPotentialEvidence,
+    verification:
+      "Nanoka 潜能分支（1021514 desc/1）确认：队伍中存在[支援]角色或与自身属性/阵营相同的角色时，[闪避：尾巴失踪术]或任意角色施加[强击]后，[强化特殊技]或[闪避反击]命中伤害提升 35%、最多 2 层、持续 30 秒——扩展触发、支援队伍条件与闪反受益属于潜能分支，补充潜能门槛；普通分支（1021507 desc/1）由补充变体单独登记，两个分支条件不并集。",
+  },
+  // 猫又：潜能觉醒暴伤按潜能等级查表（20% 固定 + 0/10/20/30/40% 增量）。
+  "agents/nekomata/mindscape/0/blk-ms4f5yzr-3tuoc1/eff-ms4f5yzr-pivfr6": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2, "6": 0.2 },
+      },
+    ],
+    evidence: nekomataPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 102101—102105（level 2—6）明确：[肉球突袭]状态下暴击伤害提升 20/30/40/50/60%。固定 +20% 自潜能 2 起可用， maximumLayers 归一为 1；来源 note 的“后续每个影画”与 potentialDetail.level 不符，属具名连带修正。",
+  },
+  "agents/nekomata/mindscape/0/blk-ms4f5yzr-3tuoc1/eff-ms4f845b-c51ysw": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0, "3": 0.1, "4": 0.2, "5": 0.3, "6": 0.4 },
+      },
+    ],
+    evidence: nekomataPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 102101—102105（level 2—6）明确总值为 20/30/40/50/60%：固定 +20% 之外的增量为 0/10/20/30/40%，按潜能等级查表；潜能 2 的增量为合法零值。不得由任意 0—4 层或影画等级代替培养等级，maximumLayers 归一为 1。",
   },
   "agents/velina/mindscape/0/blk-legacy/eff-ms4tphp6-6zyuxs": {
     kind: "independent-target",

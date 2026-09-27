@@ -168,6 +168,18 @@ export function validateStaticCatalog(
     const p = `/catalog/entities/${i}`,
       entity = expectObject(value, checks(p), "catalog entity")
     if (!entity) continue
+    const provenance = entity["supplementProvenance"]
+    if (
+      provenance !== undefined &&
+      (typeof provenance !== "object" ||
+        provenance === null ||
+        !Array.isArray((provenance as { resources?: unknown }).resources))
+    )
+      collector.report(
+        "INVALID_INPUT",
+        `${p}/supplementProvenance`,
+        "Supplement provenance requires sourceId, version and resources",
+      )
     rejectUnknownFields(
       entity,
       [
@@ -178,13 +190,59 @@ export function validateStaticCatalog(
         "status",
         "profession",
         "element",
+        "supplementProvenance",
       ],
       checks(p),
       "catalog entity",
     )
     unique(entity["catalogEntityId"], `${p}/catalogEntityId`, entityIds)
-    for (const key of ["upstreamId", "name"])
-      expectNonEmptyString(entity[key], checks(`${p}/${key}`), key)
+    // 补充实体的 ZZZ-HP upstreamId 为 null，但必须携带补充溯源信息
+    if (entity["upstreamId"] !== null)
+      expectNonEmptyString(
+        entity["upstreamId"],
+        checks(`${p}/upstreamId`),
+        "upstreamId",
+      )
+    else if (provenance === undefined)
+      collector.report(
+        "INVALID_INPUT",
+        `${p}/upstreamId`,
+        "A null upstreamId requires supplement provenance",
+      )
+    expectNonEmptyString(entity["name"], checks(`${p}/name`), "name")
+    if (provenance !== undefined && typeof provenance === "object") {
+      const record = provenance as Record<string, unknown>
+      for (const key of ["sourceId", "version"])
+        expectNonEmptyString(
+          record[key],
+          checks(`${p}/supplementProvenance/${key}`),
+          key,
+        )
+      for (const [index, resource] of (
+        record["resources"] as readonly unknown[]
+      ).entries()) {
+        const rp = `${p}/supplementProvenance/resources/${index}`
+        if (typeof resource !== "object" || resource === null) {
+          collector.report("INVALID_INPUT", rp, "Expected a resource record")
+          continue
+        }
+        const resourceRecord = resource as Record<string, unknown>
+        expectNonEmptyString(
+          resourceRecord["path"],
+          checks(`${rp}/path`),
+          "path",
+        )
+        if (
+          typeof resourceRecord["sha256"] !== "string" ||
+          !/^[a-f0-9]{64}$/.test(resourceRecord["sha256"])
+        )
+          collector.report(
+            "INVALID_INPUT",
+            `${rp}/sha256`,
+            "Expected a SHA-256 digest",
+          )
+      }
+    }
     expectLiteral(
       entity["status"],
       ["mapped", "missing-identity", "placeholder"],
@@ -429,6 +487,7 @@ export function validateStaticCatalog(
             "minimumSetPieces",
             "coreSkillLevels",
             "specialSkillLevels",
+            "potentialLevels",
           ],
           checks(`${vp}/configuration`),
           "variant configuration",
@@ -439,6 +498,7 @@ export function validateStaticCatalog(
           ["refinements", 1, 5, true],
           ["coreSkillLevels", 1, 7, true],
           ["specialSkillLevels", 1, 16, true],
+          ["potentialLevels", 0, 6, true],
         ] as const) {
           if (config[key] === undefined) continue
           const ranks = isArray
@@ -1201,19 +1261,27 @@ export function calculateStaticDamageFromCatalog(
       )
       continue
     }
+    const normalizedPotential =
+      binding.kind === "agent"
+        ? (binding.configuration.potentialLevel ?? 0)
+        : undefined
     const variants = option.variants.filter(
       (v) =>
-        !v.configuration.refinements ||
-        (binding.kind === "w-engine" &&
-          v.configuration.refinements.includes(
-            binding.configuration.refinement,
-          )),
+        (!v.configuration.refinements ||
+          (binding.kind === "w-engine" &&
+            v.configuration.refinements.includes(
+              binding.configuration.refinement,
+            ))) &&
+        (!v.configuration.potentialLevels ||
+          (binding.kind === "agent" &&
+            normalizedPotential !== undefined &&
+            v.configuration.potentialLevels.includes(normalizedPotential))),
     )
     if (variants.length !== 1) {
       collector.report(
         "MISSING_RANK",
         p,
-        "Selected option has no unique variant for this refinement",
+        "Selected option has no unique variant for this refinement or potential level",
       )
       continue
     }

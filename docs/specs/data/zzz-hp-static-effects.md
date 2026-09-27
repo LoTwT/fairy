@@ -4,13 +4,13 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 823 条规则与 830 个选择项。1,230 条 converted、11 条 corrected；49 条 unsupported 中，6 条缺少核心档位证据、37 条缺少 Fairy 身份、6 条属于当前 core 范围外公式。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 832 条规则与 831 个选择项。1,232 条 converted、15 条 corrected；43 条 unsupported 中，37 条缺少 Fairy 身份、6 条属于当前 core 范围外公式，原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 4 条经核实的 Nanoka 补充来源记录（3 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项、空记录和蕾米埃尔自身异常强度的新等级公式另列在报告中。目录入口拒绝把蕾米埃尔作为 `anomalySource`；她提供给其他来源异常的已映射增益可以正常计算。
 
-5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`（见下）。
+5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`（见下）。
 
-固定输入重复生成的三个制品字节一致。离线验收逐条对比 1,230 条 converted 记录，corrected 另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
+固定输入重复生成的三个制品字节一致。离线验收逐条对比 1,232 条 converted 记录，corrected 另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
 
 ### 修订 2：转化边界与核心档位
 
@@ -53,6 +53,16 @@
 - 维琳娜：增伤与掌控转化按 energy-per-second 单位读取，两个封顶点不同（0.35 / 84）；微域/广域气旋按来源自带注记改为 `uncategorized` 独立目标，目录目标元数据与条件展开同步修正，条件只匹配独立目标、异放伤害与风元素；乱流 150% 进入既有乱流倍率加数，不解释为全局乘数。
 - 爱丽丝：物理紊乱倍率提升按声明身份精确绑定本次被结算的物理原异常紊乱基础项（变体 `damageItemRequirements` 声明身份、属性、角色、模式与原异常归属，规则以 `hit-adjustment` itemIds 绑定），0—10 层由调用方显式提供；多个基础项只调整指定项，不重复添加。
 - 技能目录联动：`action:agent:1561:action:0019`（广域气旋·风属性）解除 unknown-category 限制并按 `uncategorized` 开放；`action:agent:1561:action:0020`（染色属性）保留不可用，原因具体化为染色元素需要显式静态元素选择与来源允许集合证据，旧登记的 wind 不作为已确认染色元素。
+
+### 修订 5：潜能等级、独立伤害项与补充来源
+
+规则集 revision 递增为 `5`。闭合最后 6 个缺少培养档位证据的位置（猫又 2、佩洛伊斯 4），`missing-rank-evidence` 归零；同时接入经核实的 Nanoka 补充来源。潜能等级契约见[静态快照规范](../effects/static-snapshot.md#潜能等级可选查表维度)与[静态计算输入组装](../core/static-calculation.md#潜能等级)。
+
+- 猫又：`legacy-self-dmgBonus` 拆分为 60% 六秒普通段与 40% 潜能分支（具名差异 `potential-branch-gate`）；爪痕独立项 `eff-ms4f47p3` 通过 `StaticCatalogDamageItemRequirement` 绑定 `nekomata:claw-mark` 伤害项并要求 30% 攻击加成命中其上；核心潜能 2 起固定 +20 与潜能 2—6 增量 0/10/20/30/40 两条记录按潜能等级门控（具名差异 `potential-level-expression`）；技能增伤叠层 35%×2 的潜能 1—6 门槛由潜能等级表达式生成。
+- 佩洛伊斯：终结技对失衡目标暴伤 +40% 与增伤 +40% 维持既有技能范围与失衡条件；浸染左分支独立项 +9 攻击倍率与右分支独立结算项 +22.5 分别保持目标 `ms4m57ys` / `ms4m66yy`，右分支以角色 `settlement` 伤害项进入既有结算乘区加数。
+- 补充来源整合：`convertSource` 接收经校验的补充清单，与固定来源共用同一 RuleSet 与目录。已整合 3 条——猫又普通段增伤与爪痕目标（选项变体）、旋钻机-赤轴红轴天赋（新目录实体，精炼 1—5 系数 0.50/0.575/0.65/0.725/0.80，只作用于电属性普通/冲刺直伤）；恒等式-变格天赋因使攻击者造成的伤害降低（对敌方施加的减益不属于静态增益求值范围）登记为越界边界。每条补充记录带 `supplementProvenance`（来源、版本与资源摘要 SHA-256），目录与规则集同样校验其证据。
+- 南宫玉初始异常掌控超过 110 的部分 1:1 转为冲击力的常驻面板转化进入 `panelRules`，回归测试锁定 110 点门槛与 1:1 速率。
+- 覆盖报告新增 `supplementalRecords` 与 `summary.supplements` 块；`rank-evidence.json` 扩充至 90 条（含 `nekomata:blk-legacy` 与 `pyrois:blk-legacy` 证据锚点）。
 
 ## 交付目标与边界
 

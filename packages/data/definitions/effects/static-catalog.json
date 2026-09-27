@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "4",
+  "revision": "5",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -1121,6 +1121,32 @@
       "status": "mapped",
       "profession": null,
       "element": null
+    },
+    {
+      "catalogEntityId": "nanoka:w-engines:13111",
+      "upstreamId": null,
+      "name": "旋钻机-赤轴",
+      "identity": {
+        "kind": "w-engine",
+        "entityId": "13111"
+      },
+      "status": "mapped",
+      "profession": "强攻",
+      "element": "electric",
+      "supplementProvenance": {
+        "sourceId": "nanoka-integrated",
+        "version": "3.1",
+        "resources": [
+          {
+            "path": "w-engines/13111/details.zh.json",
+            "sha256": "9e64b712f1b2e306e6083aa3bf2507b52396e83c6328df6118049db2fe2c1d43"
+          },
+          {
+            "path": "w-engines/13111/data.json",
+            "sha256": "f15b78db778f650eadc03281d0408aba6b6a4bba603c2d8db304a129a2d757b6"
+          }
+        ]
+      }
     },
     {
       "catalogEntityId": "w-engines:Angel_In_The_Shell",
@@ -12826,9 +12852,10 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "coreSkillLevels": [7]
           },
-          "status": "unsupported",
+          "status": "converted",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -12836,15 +12863,38 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "agent:1021:zzz-hp:eff-ms4f47p3-p1s9yz:blk-legacy:mindscape:0"
+          ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
           "applicability": {},
-          "reason": "missing-rank-evidence",
-          "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据"
+          "damageItemRequirements": [
+            {
+              "itemId": "nekomata:claw-mark",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current"
+            }
+          ]
         }
       ]
     },
@@ -12857,9 +12907,11 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "coreSkillLevels": [7],
+            "potentialLevels": [1, 2, 3, 4, 5, 6]
           },
-          "status": "unsupported",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -12867,15 +12919,53 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "agent:1021:zzz-hp:legacy-self-dmgBonus:blk-legacy:mindscape:0"
+          ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["potential-branch-gate"],
+          "applicability": {}
+        },
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [7],
+            "potentialLevels": [0]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021507/desc/0"
+            }
+          ],
+          "effectIds": [
+            "agent:1021:nanoka:ordinary-dmgBonus:blk-legacy:mindscape:0"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
           "applicability": {},
-          "reason": "missing-rank-evidence",
-          "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据"
+          "differences": []
         }
       ]
     },
@@ -12889,9 +12979,10 @@
         {
           "configuration": {
             "minimumMindscape": 0,
-            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7],
+            "potentialLevels": [1, 2, 3, 4, 5, 6]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -12948,6 +13039,13 @@
               "locale": "zh",
               "resourcePath": "agents/1021/details.zh.json",
               "pointer": "/passive/level/1021514/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
           "effectIds": [
@@ -12955,8 +13053,32 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["potential-branch-gate"],
           "applicability": {}
+        },
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [7],
+            "potentialLevels": [0]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021507/desc/1"
+            }
+          ],
+          "effectIds": [
+            "agent:1021:nanoka:ordinary-show:blk-ms4f4rbb-id7p58:mindscape:0"
+          ],
+          "maximumLayers": 2,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
         }
       ]
     },
@@ -12969,9 +13091,10 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "potentialLevels": [2, 3, 4, 5, 6]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -12979,6 +13102,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
           "effectIds": [
@@ -12986,7 +13116,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["potential-level-expression"],
           "applicability": {}
         }
       ]
@@ -13000,9 +13130,10 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "potentialLevels": [2, 3, 4, 5, 6]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -13010,14 +13141,21 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
           "effectIds": [
             "agent:1021:zzz-hp:eff-ms4f845b-c51ysw:blk-ms4f5yzr-3tuoc1:mindscape:0"
           ],
-          "maximumLayers": 4,
+          "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["potential-level-expression"],
           "applicability": {}
         }
       ]
@@ -13031,7 +13169,8 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 1
+            "minimumMindscape": 1,
+            "coreSkillLevels": [7]
           },
           "status": "converted",
           "references": [
@@ -13041,6 +13180,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
           "effectIds": [
@@ -13062,7 +13208,8 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 4
+            "minimumMindscape": 4,
+            "coreSkillLevels": [7]
           },
           "status": "converted",
           "references": [
@@ -13072,6 +13219,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
           "effectIds": [
@@ -13093,7 +13247,8 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 6
+            "minimumMindscape": 6,
+            "coreSkillLevels": [7]
           },
           "status": "converted",
           "references": [
@@ -13103,6 +13258,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/6/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1021/details.zh.json",
+              "pointer": "/passive/level/1021514/desc/0"
             }
           ],
           "effectIds": [
@@ -15354,9 +15516,10 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "coreSkillLevels": [7]
           },
-          "status": "unsupported",
+          "status": "converted",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -15364,15 +15527,29 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "agent:1551:zzz-hp:eff-ms4m3n71-z780mg:blk-legacy:mindscape:0"
+          ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
-          "applicability": {},
-          "reason": "missing-rank-evidence",
-          "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据"
+          "applicability": {}
         }
       ]
     },
@@ -15385,9 +15562,10 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "coreSkillLevels": [7]
           },
-          "status": "unsupported",
+          "status": "converted",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -15395,15 +15573,38 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "agent:1551:zzz-hp:eff-ms4m4nah-o17lgq:blk-legacy:mindscape:0"
+          ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
           "applicability": {},
-          "reason": "missing-rank-evidence",
-          "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据"
+          "damageItemRequirements": [
+            {
+              "itemId": "pyrois:ult-left-extra",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current"
+            }
+          ]
         }
       ]
     },
@@ -15416,9 +15617,10 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "coreSkillLevels": [7]
           },
-          "status": "unsupported",
+          "status": "converted",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -15426,15 +15628,38 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "agent:1551:zzz-hp:eff-ms4m5tqw-4wvfng:blk-legacy:mindscape:0"
+          ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
           "applicability": {},
-          "reason": "missing-rank-evidence",
-          "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据"
+          "damageItemRequirements": [
+            {
+              "itemId": "pyrois:ult-right-settlement",
+              "stat": "attack",
+              "role": "settlement",
+              "allowedModes": ["direct"],
+              "source": "holder-current"
+            }
+          ]
         }
       ]
     },
@@ -15447,9 +15672,10 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 0
+            "minimumMindscape": 0,
+            "coreSkillLevels": [7]
           },
-          "status": "unsupported",
+          "status": "converted",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -15457,15 +15683,29 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "agent:1551:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
+          ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
-          "applicability": {},
-          "reason": "missing-rank-evidence",
-          "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据"
+          "applicability": {}
         }
       ]
     },
@@ -15559,7 +15799,8 @@
       "variants": [
         {
           "configuration": {
-            "minimumMindscape": 1
+            "minimumMindscape": 1,
+            "coreSkillLevels": [7]
           },
           "status": "converted",
           "references": [
@@ -15569,6 +15810,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/5/mindscapeBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "agents/1551/details.zh.json",
+              "pointer": "/passive/level/1551507/desc/0"
             }
           ],
           "effectIds": [
@@ -43878,6 +44126,64 @@
           "applicability": {}
         }
       ]
+    },
+    {
+      "optionId": "nanoka:w-engines:13111:refinement:red-axis",
+      "catalogEntityId": "nanoka:w-engines:13111",
+      "name": "红莲电机 · dmgBonus",
+      "conditionDescription": "发动[强化特殊技]或[连携技]时，[普通攻击]和[冲刺攻击]造成的电属性伤害提升（按精炼 50/57.5/65/72.5/80%），持续 10 秒，15 秒内最多触发一次；触发状态与持续由调用方显式选择，不模拟冷却。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "refinements": [1, 2, 3, 4, 5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "w-engines/13111/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "w-engines/13111/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "w-engines/13111/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "w-engines/13111/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.1",
+              "locale": "zh",
+              "resourcePath": "w-engines/13111/details.zh.json",
+              "pointer": "/talents/5/desc"
+            }
+          ],
+          "effectIds": ["w-engine:13111:nanoka:red-axis-talent"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -44688,6 +44994,46 @@
           "locale": "zh",
           "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
           "pointer": "/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"
+        }
+      ]
+    },
+    {
+      "differenceId": "potential-branch-gate",
+      "explanation": "猫又的 60% 增伤记录与额外能力（猫步秀）记录实际对应核心被动的潜能分支（Nanoka passive 节点 potential 为 102100—102105）：补充潜能门槛，未开启潜能时不可用；普通分支（potential [0]）由 Nanoka 补充变体单独登记，两个分支条件不并集。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"
+        }
+      ]
+    },
+    {
+      "differenceId": "potential-level-expression",
+      "explanation": "猫又潜能觉醒暴伤记录的来源 note 写作“后续每个影画 +10%”，与 Nanoka potentialDetail.level（102101—102105，level 2—6）不符：按潜能等级查表（固定 20%、增量 0/10/20/30/40%，总值为 20—60%），maximumLayers 归一为 1，潜能 2 起可用，不由任意 0—4 层或影画等级代替培养等级。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/1"
         }
       ]
     },

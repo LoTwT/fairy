@@ -3916,6 +3916,126 @@
         ],
         "skillTargetIds": [],
         "skillTags": ["zzz-hp:skill:velina-special-ms4tnzvq"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "basic",
+        "element": "physical",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "nekomata:claw-mark",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": []
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "ultimate",
+        "element": "physical",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "pyrois:ult-left-extra",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": []
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "ultimate",
+        "element": "physical",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "pyrois:ult-right-settlement",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": []
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "ultimate",
+        "element": "physical",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "pyrois:ult-left-extra",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": ["zzz-hp:skill:pyrois-ultimate-ms4m57ys"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "ultimate",
+        "element": "physical",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "pyrois:ult-right-settlement",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": ["zzz-hp:skill:pyrois-ultimate-ms4m66yy"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "ultimate",
+        "element": "physical",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "settlement",
+            "itemId": "pyrois:ult-right-settlement",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": ["zzz-hp:skill:pyrois-ultimate-ms4m66yy"]
       }
     ],
     "damage": [
@@ -18080,6 +18200,41 @@
           "bindingId": "binding:source",
           "layers": 1
         }
+      ],
+      [
+        {
+          "optionId": "agents:nekomata:mindscape:0:blk-legacy:eff-ms4f47p3-p1s9yz",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:pyrois:mindscape:0:blk-legacy:legacy-self-critDmg",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m3n71-z780mg",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m4nah-o17lgq",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m5tqw-4wvfng",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
       ]
     ],
     "actorSources": [
@@ -22582,57 +22737,6 @@
         "bindings": 105,
         "selections": 213,
         "actorSources": 37,
-        "inputs": 0
-      }
-    },
-    {
-      "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0",
-      "expected": 0.35000000000000003,
-      "unit": "ratio",
-      "effectIds": [
-        "agent:1021:zzz-hp:eff-ms4f4rbb-y2jon7:blk-ms4f4rbb-id7p58:mindscape:0"
-      ],
-      "input": {
-        "world": 0,
-        "hit": 21,
-        "damage": 0,
-        "bindings": 106,
-        "selections": 214,
-        "actorSources": 38,
-        "inputs": 0
-      }
-    },
-    {
-      "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/0",
-      "expected": 0.2,
-      "unit": "ratio",
-      "effectIds": [
-        "agent:1021:zzz-hp:eff-ms4f5yzr-pivfr6:blk-ms4f5yzr-3tuoc1:mindscape:0"
-      ],
-      "input": {
-        "world": 0,
-        "hit": 0,
-        "damage": 0,
-        "bindings": 106,
-        "selections": 215,
-        "actorSources": 38,
-        "inputs": 0
-      }
-    },
-    {
-      "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/1",
-      "expected": 0.1,
-      "unit": "ratio",
-      "effectIds": [
-        "agent:1021:zzz-hp:eff-ms4f845b-c51ysw:blk-ms4f5yzr-3tuoc1:mindscape:0"
-      ],
-      "input": {
-        "world": 0,
-        "hit": 0,
-        "damage": 0,
-        "bindings": 106,
-        "selections": 216,
-        "actorSources": 38,
         "inputs": 0
       }
     },
@@ -39848,6 +39952,91 @@
         "bindings": 176,
         "selections": 796,
         "actorSources": 64,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "expected": 0.3,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1021:zzz-hp:eff-ms4f47p3-p1s9yz:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 108,
+        "damage": 0,
+        "bindings": 106,
+        "selections": 797,
+        "actorSources": 38,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.4,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1551:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 19,
+        "damage": 0,
+        "bindings": 135,
+        "selections": 798,
+        "actorSources": 48,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "expected": 0.4,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1551:zzz-hp:eff-ms4m3n71-z780mg:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 135,
+        "selections": 799,
+        "actorSources": 48,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/2",
+      "expected": 9,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1551:zzz-hp:eff-ms4m4nah-o17lgq:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 111,
+        "damage": 0,
+        "bindings": 135,
+        "selections": 800,
+        "actorSources": 48,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/5/mindscapeBuffs/0/effectBlocks/0/effects/3",
+      "expected": 22.5,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1551:zzz-hp:eff-ms4m5tqw-4wvfng:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 113,
+        "damage": 4,
+        "bindings": 135,
+        "selections": 801,
+        "actorSources": 48,
         "inputs": 0
       }
     }

@@ -56,6 +56,8 @@ export type SourceKind =
   | "bangboo"
   | "monster"
   | "environment"
+/** 潜能等级；0 表示未开启潜能，1—6 对应已核实的潜能 I—VI。 */
+export type PotentialLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
 export interface SourceIdentity {
   readonly kind: SourceKind
@@ -93,6 +95,8 @@ export type SourceBinding = BindingBase &
           readonly coreSkillLevel: CoreSkillLevel
           /** 可选；仅当选中的效果实际依赖特殊技最终等级时要求提供。 */
           readonly specialSkillLevel?: SpecialSkillLevel
+          /** 可选；缺省按未开启潜能（0）处理，与 specialSkillLevel 不同。 */
+          readonly potentialLevel?: PotentialLevel
         }
       }
     | {
@@ -167,6 +171,12 @@ export type Parameter<U extends Unit> =
       readonly rank: "specialSkillLevel"
       readonly values: Readonly<Partial<Record<SpecialSkillLevel, number>>>
     }
+  | {
+      readonly kind: "by-rank"
+      readonly unit: U
+      readonly rank: "potentialLevel"
+      readonly values: Readonly<Partial<Record<PotentialLevel, number>>>
+    }
 
 export type AnyParameter = { [U in Unit]: Parameter<U> }[Unit]
 export type Phase = "configuration" | "trigger" | "contribution"
@@ -215,6 +225,8 @@ type NumericFact<U extends Unit, P extends Phase> =
             | "coreSkillLevel"
             | "refinement"
             | "setPieces"
+            | "specialSkillLevel"
+            | "potentialLevel"
         }
       : never)
   | (P extends "trigger"
@@ -729,14 +741,27 @@ export type StaticCatalogUnavailableReason =
   | "semantic-conflict"
   | "formula-out-of-scope"
 
+/** 补充来源的溯源信息：Nanoka 版本与实际使用的资源摘要。 */
+export interface StaticCatalogSupplementProvenance {
+  readonly sourceId: string
+  readonly version: string
+  readonly resources: readonly {
+    readonly path: string
+    readonly sha256: string
+  }[]
+}
+
 export interface StaticCatalogEntity {
   readonly catalogEntityId: string
-  readonly upstreamId: string
+  /** ZZZ-HP 来源实体 ID；纯 Nanoka 补充实体的上游 ID 为 null。 */
+  readonly upstreamId: string | null
   readonly name: string
   readonly identity: SourceIdentity | null
   readonly status: "mapped" | "missing-identity" | "placeholder"
   readonly profession: string | null
   readonly element: DamageElement | null
+  /** 仅补充实体携带；记录 Nanoka 版本与实际资源摘要。 */
+  readonly supplementProvenance?: StaticCatalogSupplementProvenance
 }
 
 export interface StaticCatalogInputRequirement {
@@ -787,6 +812,8 @@ export interface StaticCatalogVariant {
     readonly coreSkillLevels?: readonly CoreSkillLevel[]
     /** 该选项有证据支持的最终特殊技等级；依赖特殊技等级的选项必须列出。 */
     readonly specialSkillLevels?: readonly SpecialSkillLevel[]
+    /** 该选项有证据支持的潜能等级；潜能分支/普通分支选项分别声明，互斥选择。 */
+    readonly potentialLevels?: readonly PotentialLevel[]
   }
   /**
    * 声明式伤害项要求：选中该选项时，命中必须包含满足身份与元数据的伤害项；

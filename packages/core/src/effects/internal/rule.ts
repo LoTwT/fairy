@@ -46,6 +46,7 @@ import {
   isMindscapeRank,
   isRefinementRank,
   isSetPieceCount,
+  isPotentialLevel,
   isSpecialSkillLevel,
 } from "./vocabulary.ts"
 
@@ -2100,7 +2101,9 @@ function validateConfigurationFieldValue(
             ? isSetPieceCount(value)
             : field === "specialSkillLevel"
               ? isSpecialSkillLevel(value)
-              : false
+              : field === "potentialLevel"
+                ? isPotentialLevel(value)
+                : false
   if (!fieldValid) {
     checks.collector.report(
       "INVALID_INPUT",
