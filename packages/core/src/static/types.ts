@@ -6,6 +6,7 @@ import type {
   MindscapeRank,
   RefinementRank,
   PanelAttributeBonus,
+  PotentialLevel,
   Quantity,
   SkillLevelGroup,
   SkillLevelInput,
@@ -52,6 +53,10 @@ export interface StaticActorConfiguration {
    * 代理人来源绑定。未提供时，依赖特殊技等级的效果按缺输入报告。
    */
   readonly skillLevels?: Partial<Record<SkillLevelGroup, SkillLevelInput>>
+  /**
+   * 可选；未提供按未开启潜能（0）处理。仅当选中的效果依赖潜能等级时有意义。
+   */
+  readonly potentialLevel?: PotentialLevel
   readonly wEngine: {
     readonly entityId: string
     readonly refinement: RefinementRank

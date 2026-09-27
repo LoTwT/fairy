@@ -62,6 +62,8 @@ const CONFIGURATION_NUMBER_FIELDS: readonly ConfigField[] = [
   "coreSkillLevel",
   "refinement",
   "setPieces",
+  "specialSkillLevel",
+  "potentialLevel",
 ]
 
 const RANK_FIELDS: readonly RankField[] = [
@@ -69,6 +71,7 @@ const RANK_FIELDS: readonly RankField[] = [
   "mindscapeRank",
   "refinement",
   "specialSkillLevel",
+  "potentialLevel",
 ]
 
 const RANK_TIERS: Readonly<Record<RankField, readonly number[]>> = {
@@ -76,6 +79,7 @@ const RANK_TIERS: Readonly<Record<RankField, readonly number[]>> = {
   coreSkillLevel: [1, 2, 3, 4, 5, 6, 7],
   refinement: [1, 2, 3, 4, 5],
   specialSkillLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+  potentialLevel: [0, 1, 2, 3, 4, 5, 6],
 }
 
 const COMPARISON_OPERATORS = ["eq", "neq", "lt", "lte", "gt", "gte"] as const

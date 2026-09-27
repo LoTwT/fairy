@@ -1531,4 +1531,111 @@ describe("velina cyclone catalog linkage", () => {
   it("publishes the cyclone target as uncategorized", () => {
     expect(target.category).toBe("uncategorized")
   })
+
+  const withPotential = (
+    optionIds: readonly string[],
+    potentialLevel: number | undefined,
+  ) => {
+    const input = agentInput("1021", optionIds) as StaticCatalogDamageInput
+    return {
+      ...input,
+      bindings: [
+        {
+          ...input.bindings[0]!,
+          configuration: {
+            ...input.bindings[0]!.configuration,
+            ...(potentialLevel === undefined ? {} : { potentialLevel }),
+          },
+        } as StaticCatalogDamageInput["bindings"][number],
+      ],
+    }
+  }
+
+  it("switches Nekomata's ordinary bonus between potential branches by gate", () => {
+    const optionId =
+      "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus"
+    const factorAt = (potentialLevel: number | undefined) =>
+      calculateCatalogResult(withPotential([optionId], potentialLevel)).factors
+        .nonCritical["damageBonus"]
+    // 潜能 0：南卡普通段规则只对快支/回避反击生效，普通直伤不消费
+    expect(factorAt(0)).toBe(1)
+    // 潜能 1 起：潜能分支规则按普通直伤消费 60%
+    expect(factorAt(1)).toBeCloseTo(1.6, 8)
+    expect(factorAt(6)).toBeCloseTo(1.6, 8)
+    // 未提供潜能：按归一默认 0 走潜能 0 分支，不报错
+    expect(factorAt(undefined)).toBe(1)
+  })
+
+  it("gates the stack record behind potential 1 and keeps layers explicit", () => {
+    const optionId =
+      "agents:nekomata:mindscape:0:blk-ms4f4rbb-id7p58:eff-ms4f4rbb-y2jon7"
+    const option = catalog.options.find((o) => o.optionId === optionId)!
+    expect(option.variants.map((v) => v.configuration.potentialLevels)).toEqual(
+      [[1, 2, 3, 4, 5, 6], [0]],
+    )
+    const stack = withPotential([optionId], 1)
+    const stacked = calculateStaticDamageFromCatalog({
+      ...stack,
+      selections: [{ optionId, bindingId: "binding:static", layers: 2 }],
+    })
+    expect(stacked.ok, JSON.stringify(stacked)).toBe(true)
+  })
+
+  it("applies Nekomata's potential-level expressions only from potential 2", () => {
+    const fixedOption =
+      "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f5yzr-pivfr6"
+    const incrementsOption =
+      "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f845b-c51ysw"
+    // 未提供潜能等级：依赖它的记录缺档，返回 MISSING_RANK
+    for (const optionId of [fixedOption, incrementsOption]) {
+      const result = calculateStaticDamageFromCatalog(
+        withPotential([optionId], undefined),
+      )
+      expect(result.ok, optionId).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) => issue.code === "MISSING_RANK"),
+          optionId,
+        ).toBe(true)
+    }
+    // 潜能 1：无证据键，缺档拒绝
+    const below = calculateStaticDamageFromCatalog(
+      withPotential([fixedOption, incrementsOption], 1),
+    )
+    expect(below.ok, JSON.stringify(below)).toBe(false)
+    if (below.ok) return
+    expect(below.issues.some((issue) => issue.code === "MISSING_RANK")).toBe(
+      true,
+    )
+
+    const criticalAt = (potentialLevel: number) =>
+      calculateCatalogResult(
+        withPotential([fixedOption, incrementsOption], potentialLevel),
+      ).factors.critical?.critical
+    const baseline = calculateCatalogResult(withPotential([], 2)).factors
+      .critical?.critical
+    // 固定 +20% 与增量 0/10/20/30/40：潜能 2 合计 +20%，3 为 +30%，6 为 +60%
+    expect(criticalAt(2)! - baseline!).toBeCloseTo(0.2, 8)
+    expect(criticalAt(3)! - baseline!).toBeCloseTo(0.3, 8)
+    expect(criticalAt(6)! - baseline!).toBeCloseTo(0.6, 8)
+  })
+
+  it("integrates the verified Nanoka supplements with provenance", () => {
+    const entity = catalog.entities.find(
+      (e) => e.catalogEntityId === "nanoka:w-engines:13111",
+    )
+    expect(entity?.supplementProvenance).toMatchObject({
+      sourceId: "nanoka-integrated",
+      version: "3.1",
+    })
+    expect(entity?.supplementProvenance?.resources.length).toBeGreaterThan(0)
+    const coverage = read(
+      "../../../data/definitions/effects/static-coverage.json",
+    ) as { summary: { supplements: Record<string, number> } }
+    expect(coverage.summary.supplements).toMatchObject({
+      records: 4,
+      integrated: 3,
+      outOfScope: 1,
+    })
+  })
 })

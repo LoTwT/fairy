@@ -15,6 +15,11 @@ import type {
   StateId,
   Unit,
 } from "../types.ts"
+import type { ConfigurationNumberField } from "./vocabulary.ts"
+import {
+  CONFIGURATION_FIELD_DEFAULTS,
+  CONFIGURATION_FIELD_SOURCES,
+} from "./vocabulary.ts"
 import { IssueCollector, failure } from "./issues.ts"
 import { validatePendingModifications } from "./modification.ts"
 import { validateRuleSetStructure, validateSourceBindings } from "./rule.ts"
@@ -222,6 +227,38 @@ export function evaluateConfigurationCondition(
       }
     }
   }
+}
+
+/**
+ * 绑定配置的归一视图：CONFIGURATION_FIELD_DEFAULTS 中的字段（如潜能未提供按 0）
+ * 在参数选值、配置条件与缺档报告之间保持同一口径。
+ */
+export function configurationView(
+  binding: Pick<SourceBinding, "kind" | "configuration">,
+): Readonly<Record<string, number>> {
+  const configuration = binding.configuration as Readonly<
+    Record<string, number>
+  >
+  const defaults: Record<string, number> = {}
+  for (const [field, value] of Object.entries(CONFIGURATION_FIELD_DEFAULTS)) {
+    if (
+      configuration[field] === undefined &&
+      bindingKindProvides(binding.kind, field)
+    )
+      defaults[field] = value as number
+  }
+  return { ...configuration, ...defaults }
+}
+
+function bindingKindProvides(
+  kind: SourceBinding["kind"],
+  field: string,
+): boolean {
+  return (
+    CONFIGURATION_FIELD_SOURCES[field as ConfigurationNumberField]?.includes(
+      kind,
+    ) ?? false
+  )
 }
 
 /** 按绑定配置选择参数档位；by-rank 用实际档位作键，不做数组索引推断。 */
@@ -548,13 +585,13 @@ function prepareEffectsWithSelection(
       }
       const resolved = resolveParameters(
         rule.parameters as never,
-        binding.configuration as Readonly<Record<string, number>>,
+        configurationView(binding),
       )
       if (
         !evaluateConfigurationCondition(
           rule.config,
           resolved,
-          binding.configuration as Readonly<Record<string, number>>,
+          configurationView(binding),
           collector,
         )
       ) {
@@ -562,7 +599,7 @@ function prepareEffectsWithSelection(
       }
       reportMissingRanks(
         rule.parameters,
-        binding.configuration as Readonly<Record<string, number>>,
+        configurationView(binding),
         collector,
         `/effects/${ruleIndex}/parameters`,
         { effectId: rule.effectId, bindingId: binding.bindingId },
@@ -619,7 +656,7 @@ function prepareEffectsWithSelection(
         value: evaluateConfigurationExpression(
           change.change.value,
           active.parameters,
-          binding.configuration as Readonly<Record<string, number>>,
+          configurationView(binding),
           collector,
         ),
       }))
@@ -973,11 +1010,11 @@ function prepareEffectsWithSelection(
       }
       const resolved = resolveParameters(
         state.parameters as never,
-        binding.configuration as Readonly<Record<string, number>>,
+        configurationView(binding),
       )
       reportMissingRanks(
         state.parameters,
-        binding.configuration as Readonly<Record<string, number>>,
+        configurationView(binding),
         collector,
         `/states/${ownedRuleSet.states.indexOf(state)}/parameters`,
         { bindingId: binding.bindingId },

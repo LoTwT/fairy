@@ -67,6 +67,80 @@ export async function prepareCalculationData(
     )
     const conversions: ContributionRule[] = []
     let deriveSheerForce = false
+    if (
+      id === "1511" &&
+      rows.length === 7 &&
+      rows.every(([, row]) =>
+        row.desc.some((line) =>
+          line
+            .replace(/<[^>]*>/gu, "")
+            .includes(
+              "初始异常掌控大于110点时，每超过1点初始异常掌控会使自身的冲击力提升1点",
+            ),
+        ),
+      )
+    ) {
+      // 全部 7 行核心说明均包含同一固定转化：输入为初始异常掌控（initial），
+      // 无条件常驻被动与 panelRules 的常驻面板转化先例一致；输出阶段
+      // initial-fixed 与既有 initialConversions 的口径相同。
+      conversions.push({
+        kind: "contribution",
+        effectId: `agent:${id}:permanent:mastery-to-impact`,
+        source: {
+          identity: { kind: "agent", entityId: id },
+          section: "permanent-panel-conversion",
+          references: rows.map(([rowId]) => ({
+            sourceId: "nanoka-zzz",
+            version: index.source.version,
+            locale: "zh",
+            resourcePath: reference.path,
+            pointer: `/passive/level/${rowId}/desc/0`,
+          })) as unknown as ContributionRule["source"]["references"],
+        },
+        config: { kind: "constant", value: true },
+        parameters: {},
+        activation: { kind: "continuous" },
+        beneficiary: { kind: "holder" },
+        scope: "entity",
+        when: { kind: "constant", value: true },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "initial-fixed",
+          value: {
+            kind: "convert",
+            unit: "impact-points",
+            input: {
+              kind: "maximum",
+              unit: "anomaly-mastery-points",
+              operands: [
+                { kind: "literal", unit: "anomaly-mastery-points", value: 0 },
+                {
+                  kind: "add",
+                  unit: "anomaly-mastery-points",
+                  operands: [
+                    {
+                      kind: "stat",
+                      unit: "anomaly-mastery-points",
+                      entity: { role: "holder" },
+                      stat: "anomalyMastery",
+                      stage: "initial",
+                      at: "evaluation",
+                    },
+                    {
+                      kind: "literal",
+                      unit: "anomaly-mastery-points",
+                      value: -110,
+                    },
+                  ],
+                },
+              ],
+            },
+            rate: { kind: "literal", unit: "multiplier", value: 1 },
+          },
+        },
+      })
+    }
     if (rows.some(([, row]) => Object.keys(row.extraProperty).length)) {
       if (rows.length !== 7)
         throw new Error(

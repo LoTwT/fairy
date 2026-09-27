@@ -19,13 +19,13 @@
 
 **ZZZ-HP 是增益数据与计算语义的第一信任来源。** Nanoka 用于基础资料、身份映射和缺失信息补充。冲突应保留来源与差异记录，不因来源不同自动用 Nanoka 或本项目推断覆盖 ZZZ-HP。
 
-当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `4`。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
+当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `5`。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
 
 相对初始 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 基线，12 个资源中只有增益 JSON、`types/calculator.ts`、`utils/buffEffect.ts` 的内容变化。已接入效果的变化与限制见[修订 2](../data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)。Nanoka 仍为 3.1；属性和技能动作继续保留各自未变化的语义证据版本。
 
 实现与对比用例使用同一固定版本；上游后续更新不自动更新已冻结的制品与验收基线。转换后发布本项目的数据制品，正常计算不在线读取 ZZZ-HP。
 
-来源记录保留提交版本、原始实体及效果身份、资源路径和 JSON Pointer。规则仍使用本项目的稳定效果 ID；参数补齐或数据修订更新规则集 revision，不因当前选择的档位改变效果 ID。补充来源与本项目修正分别记录，不能伪装成未经修改的上游原值。
+来源记录保留提交版本、原始实体及效果身份、资源路径和 JSON Pointer。规则仍使用本项目的稳定效果 ID；参数补齐或数据修订更新规则集 revision，不因当前选择的档位改变效果 ID。补充来源与本项目修正分别记录，不能伪装成未经修改的上游原值。经核实的 Nanoka 补充来源（Nanoka 专属增益与固定来源缺失的潜能分支语义）以独立补充清单接入，与固定来源共用同一规则集与目录；每条补充记录带 `supplementProvenance`（来源、版本与资源摘要 SHA-256），越界条目保留具体原因，见[修订 5](../data/zzz-hp-static-effects.md#修订-5潜能等级独立伤害项与补充来源)。
 
 第一信任来源不等于两边任何结果都必须相同。已知问题保留为具名差异，例如[耀嘉音 2 影的历史负数抵消问题](examples.md#zzz-hp-的参考边界)。当前来源已修正其数值，Fairy 仍保留按核心等级修改同一条转化的模型；对比时记录输入、来源结果、本项目结果与修正依据，不能为消除差异改写已有正确规则。
 
@@ -96,6 +96,12 @@
 （例如露西/卢西娅技能描述中的等级表达式生成的 1—16 合法表），缺档处理与核心等级参数表一致。
 只有选中的效果实际依赖该等级时，调用方才需要提供；目录选项声明各自有证据支持的等级集合。
 
+### 潜能等级：可选查表维度
+
+`potentialLevel` 表示已含影画的潜能等级（整数域 0—6），0 是配置归一视图中的显式默认值，表示未提供或未解锁。
+依赖它的参数表使用明确的等级键；等级表必须来自来源或补充证据确认的表达式或数值，缺档处理与核心等级参数表一致。
+只有选中的效果实际依赖该等级时，调用方才需要提供；目录选项声明各自有证据支持的 `potentialLevels` 集合。
+
 ### 音擎精炼：择一参数表
 
 沿用 `refinement`，取值为 1—5。同一效果在各精炼档结构相同时共用一条规则，变化的数值存为参数表。例如固定基线中玲珑妆匣的每层伤害加成可记录为：
@@ -142,7 +148,7 @@
 
 ## 对比与验收记录
 
-批量正式制品的 [1,201 条来源对比夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)覆盖每个 converted 原始位置；5 条 corrected 记录通过耀嘉音和耀变的具名差异用例单独验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
+批量正式制品的 [1,232 条来源对比夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)覆盖每个 converted 原始位置；15 条 corrected 记录通过耀嘉音、耀变、南宫羽、卢西娅及猫又的具名差异用例单独验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
 
 固定版本对比夹具位于 [zzz-hp-static.json](../../../packages/core/test/effects/fixtures/zzz-hp-static.json)，记录原始效果、JSON Pointer、输入和上游输出。上游输出通过 TypeScript AST 提取未修改的 `resolveConvertValue` / `resolveEffectBaseValue`，连同原始 `roundCalc`、技能键判断依赖离线执行得到；夹具记录求值文件的 SHA-256。
 

@@ -1,4 +1,28 @@
 {
+  "nekomata:blk-legacy": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021514/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      }
+    ],
+    "verification": "核心被动第 7 级（1021514，潜能分支）说明与来源块全文一致：闪反/快速支援命中后伤害提升 60%、持续 40 秒；攻击命中触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害。潜能分支节点 potential 为 102100—102105，普通分支（potential [0]）由补充变体单独登记"
+  },
+  "pyrois:blk-legacy": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1551/details.zh.json",
+        "pointer": "/passive/level/1551507/desc/0",
+        "sha256": "18e48f62b4733432c0510a7e6b30446dc33ae5ab8350744d4fc7e5207b34a994"
+      }
+    ],
+    "verification": "核心被动第 7 级说明与来源块全文一致：上分支阳炎使终结技对失衡目标暴伤提升 40%、下分支耀斑通用增伤 40%、左分支浸染下额外造成 900% 攻击力伤害、右分支失衡触发额外造成 2250% 攻击力伤害；四个分支增益分开登记，附加倍率进入声明的独立伤害项"
+  },
   "alice:blk-legacy": {
     "levels": [7],
     "evidence": [

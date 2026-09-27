@@ -4,6 +4,7 @@ import type {
   ContributionOperation,
   ContributionRule,
   CoreSkillLevel,
+  PotentialLevel,
   DamageElement,
   DamageKind,
   EffectId,
@@ -25,6 +26,7 @@ import type {
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
 import { SOURCE_SEMANTICS } from "./semantics.ts"
+import { SUPPLEMENTS, type Supplement } from "./supplements.ts"
 import {
   BUFF_RESOURCE,
   SOURCE_COMMIT,
@@ -501,6 +503,27 @@ function configFor(record: SourceRecord): Condition<"configuration"> {
       }
     : always
 }
+/** 潜能门槛合并进配置条件；无条件时直接使用门槛条件。 */
+function withPotentialGate(
+  config: Condition<"configuration">,
+  minimumPotential: number | undefined,
+): Condition<"configuration"> {
+  if (minimumPotential === undefined) return config
+  const gate: Condition<"configuration"> = {
+    kind: "compare-number",
+    unit: "count",
+    operator: "gte",
+    left: {
+      kind: "configuration-number",
+      unit: "count",
+      field: "potentialLevel",
+    },
+    right: literal("count", minimumPotential),
+  }
+  if (config.kind === "constant" && config.value) return gate
+  return { kind: "all", conditions: [config, gate] }
+}
+
 function oneOf(
   fact: "hit.damageKind" | "hit.element" | "hit.skillTag" | "hit.targetState",
   values: readonly string[],
@@ -866,6 +889,59 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "potential-branch") {
+    // 潜能分支记录：规则与变体同时声明潜能门槛，未开启潜能时不可用。
+    variant = {
+      ...variant,
+      status: "corrected",
+      configuration: {
+        ...variant.configuration,
+        potentialLevels: [1, 2, 3, 4, 5, 6],
+      },
+      differences: [...variant.differences, "potential-branch-gate"],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "potential-level") {
+    for (const spec of semantics.parameters) {
+      const existing = parameters[spec.name]
+      if (!existing)
+        throw new Error(
+          `Semantics references unknown parameter "${spec.name}" at ${record.pointer}`,
+        )
+      if (existing.unit !== spec.unit)
+        throw new Error(
+          `Semantics unit mismatch for "${spec.name}" at ${record.pointer}`,
+        )
+      parameters[spec.name] = {
+        kind: "by-rank",
+        rank: "potentialLevel",
+        unit: spec.unit,
+        values: spec.values,
+      } as AnyParameter
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      maximumLayers: 1,
+      configuration: {
+        ...variant.configuration,
+        potentialLevels: [...semantics.levels] as PotentialLevel[],
+      },
+      differences: [...variant.differences, "potential-level-expression"],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "explicit-selection-state") {
     variant = {
       ...variant,
@@ -916,6 +992,12 @@ function compile(
       channel: "luminize-proficiency-input",
       value: expression,
     }
+  const potentialGate =
+    semantics?.kind === "potential-branch"
+      ? semantics.minimumPotential
+      : semantics?.kind === "potential-level"
+        ? semantics.minimumPotential
+        : undefined
   let when = whenFor(e, mapping)
   if (semantics?.kind === "stagger-recovery-settlement") {
     // 移除 applySituation: stagger 带来的 targetState 条件；
@@ -1001,7 +1083,7 @@ function compile(
         section: record.blockName,
         references: variant.references,
       },
-      config: configFor(record),
+      config: withPotentialGate(configFor(record), potentialGate),
       parameters,
       activation: {
         kind: "supplied",
@@ -1024,6 +1106,7 @@ export function convertSource(
   data: SourceData,
   functions: SourceNormalization,
   files: StaticEffectCatalog["source"]["files"],
+  supplements: readonly Supplement[] = SUPPLEMENTS,
 ) {
   const collected = collectSource(data, functions),
     effects: EffectRule[] = [],
@@ -1255,10 +1338,103 @@ export function convertSource(
       }
     }
   }
+  // —— Nanoka 补充来源合并：独立规则/变体/实体，进入同一 RuleSet 与目录 ——
+  const supplementalRecords: {
+    supplementId: string
+    source: string
+    kind: Supplement["kind"]
+    optionId?: string
+    effectIds?: readonly EffectId[]
+    supportedRanks?: string
+    computationTarget: string
+    status: "integrated" | "out-of-scope"
+    reason?: string
+  }[] = []
+  let supplementalRules = 0
+  let supplementalOptions = 0
+  const supplementEntities: StaticCatalogEntity[] = []
+  for (const supplement of supplements) {
+    if (supplement.kind === "boundary") {
+      supplementalRecords.push({
+        supplementId: supplement.supplementId,
+        source: supplement.source,
+        kind: supplement.kind,
+        computationTarget: supplement.computationTarget,
+        status: "out-of-scope",
+        reason: supplement.reason,
+      })
+      continue
+    }
+    const rule: EffectRule = {
+      kind: "contribution",
+      effectId: supplement.rule.effectId,
+      source: {
+        identity: supplement.rule.identity,
+        section: supplement.rule.section,
+        references: supplement.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ) as unknown as NonEmpty<SourceReference>,
+      },
+      config: supplement.rule.config,
+      parameters: supplement.rule.parameters,
+      activation: {
+        kind: "supplied",
+        maximumLayers: literal("count", supplement.rule.maximumLayers),
+      },
+      scope: supplement.rule.scope,
+      beneficiary: { kind: "holder" },
+      when: supplement.rule.when,
+      operation: supplement.rule.operation,
+    } as ContributionRule
+    const variant: StaticCatalogVariant = {
+      ...(supplement.variant.target === undefined
+        ? {}
+        : { target: supplement.variant.target }),
+      configuration: supplement.variant.configuration,
+      status: "converted",
+      references: supplement.evidence.map((ref) =>
+        nanokaReference(ref.path, ref.pointer),
+      ) as unknown as NonEmpty<SourceReference>,
+      effectIds: [supplement.rule.effectId],
+      maximumLayers: supplement.rule.maximumLayers,
+      inputs: supplement.variant.inputs,
+      applicability: supplement.variant.applicability,
+      differences: [],
+    }
+    effects.push(rule)
+    supplementalRules += 1
+    if (supplement.kind === "option-variant") {
+      const option = options.find((o) => o.optionId === supplement.optionId)!
+      ;(option.variants as unknown as StaticCatalogVariant[]).push(variant)
+    }
+    if (supplement.kind === "entity") {
+      supplementEntities.push(supplement.entity)
+      options.push({
+        optionId: supplement.optionId,
+        catalogEntityId: supplement.entity.catalogEntityId,
+        name: supplement.variant.name,
+        conditionDescription: supplement.variant.conditionDescription,
+        target: supplement.variant.target,
+        variants: [variant],
+      })
+      supplementalOptions += 1
+    }
+    supplementalRecords.push({
+      supplementId: supplement.supplementId,
+      source: supplement.source,
+      kind: supplement.kind,
+      optionId: supplement.optionId,
+      effectIds: [supplement.rule.effectId],
+      supportedRanks: supplement.supportedRanks,
+      computationTarget: supplement.computationTarget,
+      status: "integrated",
+    })
+  }
+
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "4",
+    revision: "5",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1299,7 +1475,7 @@ export function convertSource(
     ruleSetId: definitions.ruleSetId,
     revision: definitions.revision,
     source: { repository: SOURCE_REPOSITORY, commit: SOURCE_COMMIT, files },
-    entities: collected.entities.toSorted((a, b) =>
+    entities: [...collected.entities, ...supplementEntities].toSorted((a, b) =>
       a.catalogEntityId.localeCompare(b.catalogEntityId),
     ),
     options,
@@ -1321,6 +1497,24 @@ export function convertSource(
             )
             .map((r) => reference(r.pointer)),
           reference("/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+        ],
+      },
+      {
+        differenceId: "potential-branch-gate",
+        explanation:
+          "猫又的 60% 增伤记录与额外能力（猫步秀）记录实际对应核心被动的潜能分支（Nanoka passive 节点 potential 为 102100—102105）：补充潜能门槛，未开启潜能时不可用；普通分支（potential [0]）由 Nanoka 补充变体单独登记，两个分支条件不并集。",
+        references: [
+          reference("/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+          reference("/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"),
+        ],
+      },
+      {
+        differenceId: "potential-level-expression",
+        explanation:
+          "猫又潜能觉醒暴伤记录的来源 note 写作“后续每个影画 +10%”，与 Nanoka potentialDetail.level（102101—102105，level 2—6）不符：按潜能等级查表（固定 20%、增量 0/10/20/30/40%，总值为 20—60%），maximumLayers 归一为 1，潜能 2 起可用，不由任意 0—4 层或影画等级代替培养等级。",
+        references: [
+          reference("/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/1"),
         ],
       },
       {
@@ -1375,6 +1569,12 @@ export function convertSource(
       ruleSetId: definitions.ruleSetId,
       revision: definitions.revision,
       source: catalog.source,
+      // summary 的 entities/packs/records 为固定来源分母；补充项计入
+      // rules/options 并在 supplements 块单独注明口径。
+      entities: catalog.entities,
+      packs: collected.packs,
+      records: coverage,
+      supplementalRecords,
       summary: {
         entities: collected.entities.length,
         packs: collected.packs.length,
@@ -1383,10 +1583,19 @@ export function convertSource(
         rules: effects.length,
         options: options.length,
         ...counts,
+        supplements: {
+          records: supplementalRecords.length,
+          rules: supplementalRules,
+          options: supplementalOptions,
+          entities: supplementEntities.length,
+          integrated: supplementalRecords.filter(
+            (r) => r.status === "integrated",
+          ).length,
+          outOfScope: supplementalRecords.filter(
+            (r) => r.status === "out-of-scope",
+          ).length,
+        },
       },
-      entities: catalog.entities,
-      packs: collected.packs,
-      records: coverage,
       reverseGaps: ["w-engines/12014", "w-engines/13111"],
       deferredMechanisms: [
         {

@@ -12,6 +12,7 @@ import {
 import { convertSource } from "./static-effects/convert.ts"
 import { loadSource } from "./static-effects/source.ts"
 import { SOURCE_SEMANTICS } from "./static-effects/semantics.ts"
+import { SUPPLEMENTS } from "./static-effects/supplements.ts"
 import evidence from "./static-effects/rank-evidence.json" with { type: "json" }
 
 /** RFC 6901 Pointer 存在性检查；不要求目标为真值。 */
@@ -130,7 +131,27 @@ export async function generateStaticEffects(
         `semantics:${key}`,
         semantics.evidence,
       )
+    for (const supplement of SUPPLEMENTS)
+      await verifyEvidenceReferences(
+        publication,
+        `supplement:${supplement.supplementId}`,
+        supplement.evidence,
+      )
     const result = convertSource(source.data, source.functions, source.files)
+    for (const entity of result.catalog.entities) {
+      if (!entity.supplementProvenance) continue
+      for (const resource of entity.supplementProvenance.resources) {
+        const bytes = await readFile(
+          join(publication, "verified", "integrated", resource.path),
+        )
+        if (
+          createHash("sha256").update(bytes).digest("hex") !== resource.sha256
+        )
+          throw new Error(
+            `Supplement provenance changed: ${entity.catalogEntityId} ${resource.path}`,
+          )
+      }
+    }
     for (const entity of result.catalog.entities)
       if (entity.identity) {
         const category =

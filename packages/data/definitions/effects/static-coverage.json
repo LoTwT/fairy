@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "4",
+  "revision": "5",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -55,17 +55,6 @@
         "sha256": "4500dbc92ebb0ad649c47d960bdf26cc332e0f896a539d74bbeb945c4ffdacca"
       }
     ]
-  },
-  "summary": {
-    "entities": 187,
-    "packs": 1061,
-    "emptyPacks": 366,
-    "rawEffects": 1290,
-    "rules": 823,
-    "options": 830,
-    "converted": 1230,
-    "corrected": 11,
-    "unsupported": 49
   },
   "entities": [
     {
@@ -1132,6 +1121,32 @@
       "status": "mapped",
       "profession": null,
       "element": null
+    },
+    {
+      "catalogEntityId": "nanoka:w-engines:13111",
+      "upstreamId": null,
+      "name": "旋钻机-赤轴",
+      "identity": {
+        "kind": "w-engine",
+        "entityId": "13111"
+      },
+      "status": "mapped",
+      "profession": "强攻",
+      "element": "electric",
+      "supplementProvenance": {
+        "sourceId": "nanoka-integrated",
+        "version": "3.1",
+        "resources": [
+          {
+            "path": "w-engines/13111/details.zh.json",
+            "sha256": "9e64b712f1b2e306e6083aa3bf2507b52396e83c6328df6118049db2fe2c1d43"
+          },
+          {
+            "path": "w-engines/13111/data.json",
+            "sha256": "f15b78db778f650eadc03281d0408aba6b6a4bba603c2d8db304a129a2d757b6"
+          }
+        ]
+      }
     },
     {
       "catalogEntityId": "w-engines:Angel_In_The_Shell",
@@ -14433,10 +14448,10 @@
       "rankKind": "mindscape",
       "stat": "directDmgMult",
       "optionId": "agents:nekomata:mindscape:0:blk-legacy:eff-ms4f47p3-p1s9yz",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1021:zzz-hp:eff-ms4f47p3-p1s9yz:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30
@@ -14448,10 +14463,10 @@
       "rankKind": "mindscape",
       "stat": "dmgBonus",
       "optionId": "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1021:zzz-hp:legacy-self-dmgBonus:blk-legacy:mindscape:0"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 60,
       "normalizedValue": 60
@@ -14466,7 +14481,7 @@
       "effectIds": [
         "agent:1021:zzz-hp:eff-ms4f4rbb-y2jon7:blk-ms4f4rbb-id7p58:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -14481,7 +14496,7 @@
       "effectIds": [
         "agent:1021:zzz-hp:eff-ms4f5yzr-pivfr6:blk-ms4f5yzr-3tuoc1:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 20,
       "normalizedValue": 20
@@ -14496,7 +14511,7 @@
       "effectIds": [
         "agent:1021:zzz-hp:eff-ms4f845b-c51ysw:blk-ms4f5yzr-3tuoc1:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -15303,10 +15318,10 @@
       "rankKind": "mindscape",
       "stat": "dmgBonus",
       "optionId": "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m3n71-z780mg",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1551:zzz-hp:eff-ms4m3n71-z780mg:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
@@ -15318,10 +15333,10 @@
       "rankKind": "mindscape",
       "stat": "directDmgMult",
       "optionId": "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m4nah-o17lgq",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1551:zzz-hp:eff-ms4m4nah-o17lgq:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 900,
       "normalizedValue": 900
@@ -15333,10 +15348,10 @@
       "rankKind": "mindscape",
       "stat": "settlementDmgMult",
       "optionId": "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m5tqw-4wvfng",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1551:zzz-hp:eff-ms4m5tqw-4wvfng:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 2250,
       "normalizedValue": 2250
@@ -15348,10 +15363,10 @@
       "rankKind": "mindscape",
       "stat": "critDmg",
       "optionId": "agents:pyrois:mindscape:0:blk-legacy:legacy-self-critDmg",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1551:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
@@ -30113,6 +30128,69 @@
       "normalizedValue": 64
     }
   ],
+  "supplementalRecords": [
+    {
+      "supplementId": "nanoka:nekomata:ordinary-dmg-bonus",
+      "source": "nanoka-integrated@3.1 agents/1021 /passive/level/1021507/desc/0",
+      "kind": "option-variant",
+      "optionId": "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus",
+      "effectIds": [
+        "agent:1021:nanoka:ordinary-dmgBonus:blk-legacy:mindscape:0"
+      ],
+      "supportedRanks": "core 7；潜能 0",
+      "computationTarget": "catalog option variant",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:nekomata:ordinary-show",
+      "source": "nanoka-integrated@3.1 agents/1021 /passive/level/1021507/desc/1",
+      "kind": "option-variant",
+      "optionId": "agents:nekomata:mindscape:0:blk-ms4f4rbb-id7p58:eff-ms4f4rbb-y2jon7",
+      "effectIds": [
+        "agent:1021:nanoka:ordinary-show:blk-ms4f4rbb-id7p58:mindscape:0"
+      ],
+      "supportedRanks": "core 7；潜能 0；层数 1—2",
+      "computationTarget": "catalog option variant",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:13111",
+      "source": "nanoka-integrated@3.1 w-engines/13111 /talents/1—5/desc",
+      "kind": "entity",
+      "optionId": "nanoka:w-engines:13111:refinement:red-axis",
+      "effectIds": ["w-engine:13111:nanoka:red-axis-talent"],
+      "supportedRanks": "refinement 1—5",
+      "computationTarget": "catalog entity + option",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:12014:boundary",
+      "source": "nanoka-integrated@3.1 w-engines/12014 /talents/1—5/desc",
+      "kind": "boundary",
+      "computationTarget": "none",
+      "status": "out-of-scope",
+      "reason": "五档使攻击者造成的伤害降低 6/7/8/9/10%，属于敌方输出/己方承伤方向；当前公开路径计算己方对敌伤害，不能把它转换成 target damage-taken-reduction 来降低己方输出，也不能报告其增益为零后视为接入。保留五档来源证据，待承伤计算产品建立后另行接入。"
+    }
+  ],
+  "summary": {
+    "entities": 187,
+    "packs": 1061,
+    "emptyPacks": 366,
+    "rawEffects": 1290,
+    "rules": 832,
+    "options": 831,
+    "converted": 1232,
+    "corrected": 15,
+    "unsupported": 43,
+    "supplements": {
+      "records": 4,
+      "rules": 3,
+      "options": 1,
+      "entities": 1,
+      "integrated": 3,
+      "outOfScope": 1
+    }
+  },
   "reverseGaps": ["w-engines/12014", "w-engines/13111"],
   "deferredMechanisms": [
     {

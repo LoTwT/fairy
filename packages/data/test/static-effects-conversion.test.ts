@@ -77,7 +77,7 @@ const data = (): SourceData => ({
 
 describe("static data conversion", () => {
   it("merges only structurally identical refinements and preserves stable ids across array reorder", () => {
-    const original = convertSource(data(), functions, [])
+    const original = convertSource(data(), functions, [], [])
     expect(original.definitions.effects).toHaveLength(2)
     const rule = original.definitions.effects[0]!
     expect(rule.parameters["amount"]).toMatchObject({
@@ -88,7 +88,7 @@ describe("static data conversion", () => {
     const reordered = data()
     for (const p of reordered.wengines[0]!.refinementBuffs!)
       p.effectBlocks![0]!.effects.reverse()
-    const second = convertSource(reordered, functions, [])
+    const second = convertSource(reordered, functions, [], [])
     expect(second.definitions.effects.map((e) => e.effectId)).toEqual(
       original.definitions.effects.map((e) => e.effectId),
     )
@@ -103,7 +103,7 @@ describe("static data conversion", () => {
     const source = data()
     source.wengines[0]!.refinementBuffs![4]!.effectBlocks![0]!.effects[0]!.applyTarget =
       "team"
-    const result = convertSource(source, functions, [])
+    const result = convertSource(source, functions, [], [])
     expect(result.definitions.effects).toHaveLength(6)
     expect(result.catalog.options[0]!.variants[4]!.target).toBe("team")
   })
@@ -112,12 +112,12 @@ describe("static data conversion", () => {
     source.wengines[0]!.refinementBuffs![0]!.effectBlocks![0]!.effects.push(
       effect("first", 99),
     )
-    expect(() => convertSource(source, functions, [])).toThrow(
+    expect(() => convertSource(source, functions, [], [])).toThrow(
       "Duplicate source effect",
     )
   })
   it("retains empty packs in the coverage denominator", () => {
-    const result = convertSource(data(), functions, [])
+    const result = convertSource(data(), functions, [], [])
     expect(result.coverage.summary).toMatchObject({
       entities: 1,
       packs: 6,

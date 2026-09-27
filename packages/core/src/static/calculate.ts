@@ -161,6 +161,9 @@ function sourceBindings(
         coreSkillLevel: actor.coreSkillLevel,
         mindscapeRank: actor.mindscapeRank,
         ...(specialSkillLevel === undefined ? {} : { specialSkillLevel }),
+        ...(actor.potentialLevel === undefined
+          ? {}
+          : { potentialLevel: actor.potentialLevel }),
       },
     },
   ]

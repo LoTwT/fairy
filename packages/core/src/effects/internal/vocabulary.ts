@@ -12,6 +12,7 @@ import type {
   RefinementRank,
   SetPieceCount,
   SourceKind,
+  PotentialLevel,
   SpecialSkillLevel,
   Stat,
   Unit,
@@ -102,7 +103,12 @@ export const SOURCE_KINDS: ReadonlySet<SourceKind> = new Set([
 export const SOURCE_CONFIGURATION_FIELDS: Readonly<
   Record<SourceKind, readonly ConfigurationNumberField[]>
 > = {
-  "agent": ["mindscapeRank", "coreSkillLevel", "specialSkillLevel"],
+  "agent": [
+    "mindscapeRank",
+    "coreSkillLevel",
+    "specialSkillLevel",
+    "potentialLevel",
+  ],
   "drive-disc": ["setPieces"],
   "w-engine": ["refinement"],
   "bangboo": [],
@@ -127,6 +133,7 @@ export type RankField =
   | "mindscapeRank"
   | "refinement"
   | "specialSkillLevel"
+  | "potentialLevel"
 
 export const RANK_TIERS: Readonly<
   Record<RankField, readonly (number | string)[]>
@@ -135,6 +142,7 @@ export const RANK_TIERS: Readonly<
   coreSkillLevel: [1, 2, 3, 4, 5, 6, 7],
   refinement: [1, 2, 3, 4, 5],
   specialSkillLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+  potentialLevel: [0, 1, 2, 3, 4, 5, 6],
 }
 
 export type ConfigurationNumberField =
@@ -143,6 +151,7 @@ export type ConfigurationNumberField =
   | "refinement"
   | "setPieces"
   | "specialSkillLevel"
+  | "potentialLevel"
 
 /** 配置字段可由哪些来源种类提供；读取未列出的字段即定义与来源不相容。 */
 export const CONFIGURATION_FIELD_SOURCES: Readonly<
@@ -153,6 +162,14 @@ export const CONFIGURATION_FIELD_SOURCES: Readonly<
   refinement: ["w-engine"],
   setPieces: ["drive-disc"],
   specialSkillLevel: ["agent"],
+  potentialLevel: ["agent"],
+}
+
+/** 缺省即该值的配置字段：潜能未提供按未开启（0）处理。 */
+export const CONFIGURATION_FIELD_DEFAULTS: Readonly<
+  Partial<Record<ConfigurationNumberField, number>>
+> = {
+  potentialLevel: 0,
 }
 
 export const PHASES: ReadonlySet<Phase> = new Set([
@@ -261,6 +278,15 @@ export function isSpecialSkillLevel(
     Number.isInteger(value) &&
     value >= 1 &&
     value <= 16
+  )
+}
+
+export function isPotentialLevel(value: unknown): value is PotentialLevel {
+  return (
+    typeof value === "number" &&
+    Number.isInteger(value) &&
+    value >= 0 &&
+    value <= 6
   )
 }
 
