@@ -512,6 +512,91 @@ describe("catalog static calculation", () => {
       calculateStaticDamageFromCatalog({ ...input, selections: [] }).ok,
     ).toBe(true)
   })
+  it("checks declared special skill levels even with zero layers or no binding level", () => {
+    const variant = {
+      configuration: { specialSkillLevels: [4, 5, 6] as const },
+    }
+    const selected = changeVariant(
+      fixture([contribution("base-multiplier-increase", 0.2)]),
+      variant,
+    )
+    const binding = (specialSkillLevel: number | undefined) => ({
+      bindingId: "binding:static" as const,
+      kind: "agent" as const,
+      holderId: "entity:attacker" as const,
+      sourceEntityId: "1311",
+      eligible: true,
+      configuration: {
+        coreSkillLevel: 7 as const,
+        mindscapeRank: 6 as const,
+        ...(specialSkillLevel === undefined
+          ? {}
+          : { specialSkillLevel: specialSkillLevel as 4 }),
+      },
+    })
+    // 未选择该效果不阻断其他独立已支持效果。
+    expect(
+      calculateStaticDamageFromCatalog({
+        ...selected,
+        selections: [],
+      }).ok,
+    ).toBe(true)
+    // 0 层仍执行档位与解锁校验。
+    const zeroLayers = (value: number | undefined) =>
+      calculateStaticDamageFromCatalog({
+        ...selected,
+        bindings: [binding(value)],
+        selections: [
+          { optionId: "option:0", bindingId: "binding:static", layers: 0 },
+        ],
+      })
+    expect(zeroLayers(3)).toMatchObject({
+      ok: false,
+      issues: [{ code: "MISSING_RANK" }],
+    })
+    expect(zeroLayers(undefined)).toMatchObject({
+      ok: false,
+      issues: [{ code: "MISSING_RANK" }],
+    })
+    expect(zeroLayers(5).ok).toBe(true)
+    const oneLayer = (value: number | undefined) =>
+      calculateStaticDamageFromCatalog({
+        ...selected,
+        bindings: [binding(value)],
+      })
+    expect(oneLayer(3)).toMatchObject({
+      ok: false,
+      issues: [{ code: "MISSING_RANK" }],
+    })
+    expect(oneLayer(5).ok).toBe(true)
+  })
+  it.each([0, 2.5, 17, Number.NaN])(
+    "rejects special skill level %s outside the 1–16 domain",
+    (value) => {
+      const input = fixture([contribution("base-multiplier-increase", 0.2)])
+      const result = calculateStaticDamageFromCatalog({
+        ...input,
+        bindings: [
+          {
+            bindingId: "binding:static",
+            kind: "agent",
+            holderId: "entity:attacker",
+            sourceEntityId: "1311",
+            eligible: true,
+            configuration: {
+              coreSkillLevel: 7,
+              mindscapeRank: 6,
+              specialSkillLevel: value as 1,
+            },
+          },
+        ],
+      })
+      expect(result).toMatchObject({
+        ok: false,
+        issues: [{ code: "INVALID_INPUT" }],
+      })
+    },
+  )
   it.each([-1, 0.5, 4, Number.NaN])(
     "rejects invalid layer count %s",
     (layers) => {

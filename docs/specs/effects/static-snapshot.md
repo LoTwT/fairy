@@ -19,7 +19,7 @@
 
 **ZZZ-HP 是增益数据与计算语义的第一信任来源。** Nanoka 用于基础资料、身份映射和缺失信息补充。冲突应保留来源与差异记录，不因来源不同自动用 Nanoka 或本项目推断覆盖 ZZZ-HP。
 
-当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `2`。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
+当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `3`。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
 
 相对初始 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 基线，12 个资源中只有增益 JSON、`types/calculator.ts`、`utils/buffEffect.ts` 的内容变化。已接入效果的变化与限制见[修订 2](../data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)。Nanoka 仍为 3.1；属性和技能动作继续保留各自未变化的语义证据版本。
 
@@ -88,6 +88,13 @@
 - 上游某阶的增益数组为空，只表示该位置未提供效果记录；不能据此认定该影画没有游戏作用，或声称该阶全部机制已覆盖。
 
 核心等级选参和影画修改保持独立：先选本次核心参数，再应用已解锁的配置修改。0 影不是核心第 0 档，影画也不是当前 buff 层数。
+
+### 特殊技最终等级：可选查表维度
+
+`specialSkillLevel` 表示已含影画的特殊技最终等级（整数域 1—16），与核心等级、影画、精炼相互独立。
+依赖它的参数表使用明确的等级键；等级表必须来自来源或补充证据确认的表达式或数值
+（例如露西/卢西娅技能描述中的等级表达式生成的 1—16 合法表），缺档处理与核心等级参数表一致。
+只有选中的效果实际依赖该等级时，调用方才需要提供；目录选项声明各自有证据支持的等级集合。
 
 ### 音擎精炼：择一参数表
 

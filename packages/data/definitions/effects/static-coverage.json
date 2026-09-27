@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "2",
+  "revision": "3",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -61,11 +61,11 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 788,
+    "rules": 804,
     "options": 830,
-    "converted": 1201,
-    "corrected": 5,
-    "unsupported": 84
+    "converted": 1214,
+    "corrected": 8,
+    "unsupported": 68
   },
   "entities": [
     {
@@ -13149,10 +13149,8 @@
       "rankKind": "mindscape",
       "stat": "atk",
       "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": ["agent:1261:zzz-hp:legacy-self-atk:blk-legacy:mindscape:0"],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13764,10 +13762,10 @@
       "rankKind": "mindscape",
       "stat": "pierce",
       "optionId": "agents:lucia:mindscape:0:blk-legacy:eff-ms46goq2-wtmb9a",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1451:zzz-hp:eff-ms46goq2-wtmb9a:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 12,
       "normalizedValue": 12
@@ -13779,10 +13777,10 @@
       "rankKind": "mindscape",
       "stat": "pierce",
       "optionId": "agents:lucia:mindscape:0:blk-legacy:eff-ms46h2gh-mbmhuc",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1451:zzz-hp:eff-ms46h2gh-mbmhuc:blk-legacy:mindscape:0"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13927,10 +13925,10 @@
       "rankKind": "mindscape",
       "stat": "atk",
       "optionId": "agents:lucy:mindscape:0:blk-legacy:eff-ms384fjz-fgct7r",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1151:zzz-hp:eff-ms384fjz-fgct7r:blk-legacy:mindscape:0"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13942,10 +13940,8 @@
       "rankKind": "mindscape",
       "stat": "atk",
       "optionId": "agents:lucy:mindscape:0:blk-legacy:legacy-team-atk",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": ["agent:1151:zzz-hp:legacy-team-atk:blk-legacy:mindscape:0"],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 88,
       "normalizedValue": 88
@@ -14752,10 +14748,10 @@
       "rankKind": "mindscape",
       "stat": "skillDmgBonus",
       "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hvpzg-frlpi8",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1301:zzz-hp:eff-ms4hvpzg-frlpi8:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 85,
       "normalizedValue": 85
@@ -14767,10 +14763,10 @@
       "rankKind": "mindscape",
       "stat": "atk",
       "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hwaiu-jl4j7l",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1301:zzz-hp:eff-ms4hwaiu-jl4j7l:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 280,
       "normalizedValue": 280
@@ -14782,10 +14778,10 @@
       "rankKind": "mindscape",
       "stat": "atk",
       "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hwl0k-dqevpc",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1301:zzz-hp:eff-ms4hwl0k-dqevpc:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -14797,10 +14793,10 @@
       "rankKind": "mindscape",
       "stat": "critRate",
       "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:legacy-self-critRate",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1301:zzz-hp:legacy-self-critRate:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25
@@ -15877,10 +15873,10 @@
       "rankKind": "mindscape",
       "stat": "critDmg",
       "optionId": "agents:sbilly:mindscape:0:blk-legacy:legacy-self-critDmg",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1531:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 90,
       "normalizedValue": 90
@@ -16385,10 +16381,10 @@
       "rankKind": "mindscape",
       "stat": "atk",
       "optionId": "agents:sunna:mindscape:0:blk-ms0gi1k3-crbdyc:eff-ms0gi1k3-qri3om",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1491:zzz-hp:eff-ms0gi1k3-qri3om:blk-ms0gi1k3-crbdyc:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -17030,10 +17026,10 @@
       "rankKind": "mindscape",
       "stat": "critRate",
       "optionId": "agents:xigelide:mindscape:0:blk-ms4mgqxs-kz3jwe:eff-ms4mgqxs-0j0oyt",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1591:zzz-hp:eff-ms4mgqxs-0j0oyt:blk-ms4mgqxs-kz3jwe:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 66,
       "normalizedValue": 66
@@ -17045,10 +17041,10 @@
       "rankKind": "mindscape",
       "stat": "staggerVulnerableOnly",
       "optionId": "agents:xigelide:mindscape:0:blk-ms4mgqxs-kz3jwe:eff-ms4mibpt-v0ggne",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1591:zzz-hp:eff-ms4mibpt-v0ggne:blk-ms4mgqxs-kz3jwe:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 20,
       "normalizedValue": 20
@@ -17898,10 +17894,10 @@
       "rankKind": "mindscape",
       "stat": "critRate",
       "optionId": "agents:zhao:mindscape:0:blk-legacy:eff-ms20rscc-nbz649",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1341:zzz-hp:eff-ms20rscc-nbz649:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -17913,10 +17909,10 @@
       "rankKind": "mindscape",
       "stat": "inCombatHpPercent",
       "optionId": "agents:zhao:mindscape:0:blk-legacy:eff-ms20x6sn-xqhdw0",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1341:zzz-hp:eff-ms20x6sn-xqhdw0:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 5,
       "normalizedValue": 5
@@ -17928,10 +17924,10 @@
       "rankKind": "mindscape",
       "stat": "atk",
       "optionId": "agents:zhao:mindscape:0:blk-legacy:eff-ms20xkge-sexk0m",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "missing-rank-evidence",
-      "explanation": "原始记录没有核心等级字段，尚无明确的对应等级参数证据",
+      "effectIds": [
+        "agent:1341:zzz-hp:eff-ms20xkge-sexk0m:blk-legacy:mindscape:0"
+      ],
+      "status": "converted",
       "normalizationChanges": [],
       "rawValue": 1000,
       "normalizedValue": 1000

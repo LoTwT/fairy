@@ -1,4 +1,5 @@
 import type { MindscapeRank } from "@randomplay/shared"
+import { resolveAgentSkillLevelFromBonuses } from "@randomplay/shared"
 import type {
   AgentActions,
   ResolveAgentActionInput,
@@ -8,14 +9,6 @@ import type {
   SkillLevelGroup,
   SkillLevelInput,
 } from "./types.ts"
-
-const groups: readonly SkillLevelGroup[] = [
-  "basic",
-  "dodge",
-  "assist",
-  "special",
-  "chain",
-]
 
 function integer(
   value: number,
@@ -35,32 +28,14 @@ export function resolveAgentSkillLevel(input: {
   readonly mindscapeRank: number
   readonly level: SkillLevelInput
 }): ResolvedSkillLevel {
-  integer(input.mindscapeRank, 0, 6, "Mindscape rank")
-  if (!groups.includes(input.group))
-    throw new TypeError("Unknown skill level group")
   if (input.agent.schemaVersion !== 1)
     throw new TypeError("Unsupported agent actions schema")
-  if (input.level?.mode !== "trained" && input.level?.mode !== "effective")
-    throw new TypeError("Skill level mode must be trained or effective")
-  let bonus = 0
-  for (const entry of input.agent.skillLevelBonuses) {
-    integer(entry.minimumMindscapeRank, 1, 6, "Skill bonus mindscape rank")
-    integer(entry.bonus, 1, 4, "Skill level bonus")
-    if (
-      input.mindscapeRank >= entry.minimumMindscapeRank &&
-      entry.groups.includes(input.group)
-    )
-      bonus += entry.bonus
-  }
-  integer(bonus, 0, 4, "Total skill level bonus")
-  const minimum = input.level.mode === "trained" ? 1 : 1 + bonus
-  const maximum = input.level.mode === "trained" ? 12 : 12 + bonus
-  integer(input.level.value, minimum, maximum, "Skill level")
-  const trained =
-    input.level.mode === "trained"
-      ? input.level.value
-      : input.level.value - bonus
-  return { trained, bonus, effective: trained + bonus }
+  return resolveAgentSkillLevelFromBonuses({
+    skillLevelBonuses: input.agent.skillLevelBonuses,
+    group: input.group,
+    mindscapeRank: input.mindscapeRank,
+    level: input.level,
+  })
 }
 
 /** 只选择一个已登记动作并求值；不推进入场、蓄力、减防或其他战斗状态。 */

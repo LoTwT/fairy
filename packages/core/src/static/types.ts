@@ -7,6 +7,8 @@ import type {
   RefinementRank,
   PanelAttributeBonus,
   Quantity,
+  SkillLevelGroup,
+  SkillLevelInput,
   Stat,
   StatUnitMap,
   StaticCalculationData,
@@ -45,6 +47,11 @@ export interface StaticActorConfiguration {
   readonly agentEntityId: string
   readonly coreSkillLevel: CoreSkillLevel
   readonly mindscapeRank: MindscapeRank
+  /**
+   * 可选的显式技能等级输入，按培养类别提供；special 的有效等级交给该角色的
+   * 代理人来源绑定。未提供时，依赖特殊技等级的效果按缺输入报告。
+   */
+  readonly skillLevels?: Partial<Record<SkillLevelGroup, SkillLevelInput>>
   readonly wEngine: {
     readonly entityId: string
     readonly refinement: RefinementRank

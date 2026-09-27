@@ -17813,6 +17813,97 @@
           "bindingId": "binding:source",
           "layers": 1
         }
+      ],
+      [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:lucia:mindscape:0:blk-legacy:eff-ms46goq2-wtmb9a",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:legacy-self-critRate",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hvpzg-frlpi8",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hwaiu-jl4j7l",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hwl0k-dqevpc",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:sbilly:mindscape:0:blk-legacy:legacy-self-critDmg",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:sunna:mindscape:0:blk-ms0gi1k3-crbdyc:eff-ms0gi1k3-qri3om",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:xigelide:mindscape:0:blk-ms4mgqxs-kz3jwe:eff-ms4mgqxs-0j0oyt",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:xigelide:mindscape:0:blk-ms4mgqxs-kz3jwe:eff-ms4mibpt-v0ggne",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:zhao:mindscape:0:blk-legacy:eff-ms20rscc-nbz649",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:zhao:mindscape:0:blk-legacy:eff-ms20x6sn-xqhdw0",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:zhao:mindscape:0:blk-legacy:eff-ms20xkge-sexk0m",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
       ]
     ],
     "actorSources": [
@@ -18665,6 +18756,26 @@
           "name": "agent:1411:zzz-hp:eff-ms44dh8h-xb20mu:blk-legacy:mindscape:1:source",
           "value": {
             "unit": "anomaly-mastery-points",
+            "value": 500
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "name": "agent:1301:zzz-hp:eff-ms4hwl0k-dqevpc:blk-legacy:mindscape:0:source",
+          "value": {
+            "unit": "energy-per-second",
+            "value": 5
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "name": "agent:1491:zzz-hp:eff-ms0gi1k3-qri3om:blk-ms0gi1k3-crbdyc:mindscape:0:source",
+          "value": {
+            "unit": "attack-points",
             "value": 500
           }
         }
@@ -39070,6 +39181,225 @@
         "bindings": 666,
         "selections": 767,
         "actorSources": 4,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 600,
+      "unit": "attack-points",
+      "effectIds": ["agent:1261:zzz-hp:legacy-self-atk:blk-legacy:mindscape:0"],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 69,
+        "selections": 768,
+        "actorSources": 24,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/10/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 12,
+      "unit": "sheer-force-points",
+      "effectIds": [
+        "agent:1451:zzz-hp:eff-ms46goq2-wtmb9a:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 14,
+        "damage": 0,
+        "bindings": 86,
+        "selections": 769,
+        "actorSources": 30,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/13/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.25,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1301:zzz-hp:legacy-self-critRate:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 116,
+        "selections": 770,
+        "actorSources": 42,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/13/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "expected": 0.85,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1301:zzz-hp:eff-ms4hvpzg-frlpi8:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 56,
+        "damage": 0,
+        "bindings": 116,
+        "selections": 771,
+        "actorSources": 42,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/13/mindscapeBuffs/0/effectBlocks/0/effects/2",
+      "expected": 280,
+      "unit": "attack-points",
+      "effectIds": [
+        "agent:1301:zzz-hp:eff-ms4hwaiu-jl4j7l:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 116,
+        "selections": 772,
+        "actorSources": 42,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/13/mindscapeBuffs/0/effectBlocks/0/effects/3",
+      "expected": 420,
+      "unit": "attack-points",
+      "effectIds": [
+        "agent:1301:zzz-hp:eff-ms4hwl0k-dqevpc:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 116,
+        "selections": 773,
+        "actorSources": 42,
+        "inputs": 32
+      }
+    },
+    {
+      "pointer": "/agents/21/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.9,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1531:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 148,
+        "selections": 774,
+        "actorSources": 56,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/8/mindscapeBuffs/0/effectBlocks/1/effects/0",
+      "expected": 150,
+      "unit": "attack-points",
+      "effectIds": [
+        "agent:1491:zzz-hp:eff-ms0gi1k3-qri3om:blk-ms0gi1k3-crbdyc:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 166,
+        "selections": 775,
+        "actorSources": 62,
+        "inputs": 33
+      }
+    },
+    {
+      "pointer": "/agents/18/mindscapeBuffs/0/effectBlocks/1/effects/0",
+      "expected": 0.66,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1591:zzz-hp:eff-ms4mgqxs-0j0oyt:blk-ms4mgqxs-kz3jwe:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 186,
+        "selections": 776,
+        "actorSources": 67,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/18/mindscapeBuffs/0/effectBlocks/1/effects/1",
+      "expected": 0.2,
+      "unit": "multiplier",
+      "effectIds": [
+        "agent:1591:zzz-hp:eff-ms4mibpt-v0ggne:blk-ms4mgqxs-kz3jwe:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 186,
+        "selections": 777,
+        "actorSources": 67,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/36/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.006999999999999999,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1341:zzz-hp:eff-ms20rscc-nbz649:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 215,
+        "selections": 778,
+        "actorSources": 73,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/36/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "expected": 0.05,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1341:zzz-hp:eff-ms20x6sn-xqhdw0:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 47,
+        "damage": 0,
+        "bindings": 215,
+        "selections": 779,
+        "actorSources": 73,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/36/mindscapeBuffs/0/effectBlocks/0/effects/2",
+      "expected": 1000,
+      "unit": "attack-points",
+      "effectIds": [
+        "agent:1341:zzz-hp:eff-ms20xkge-sexk0m:blk-legacy:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 215,
+        "selections": 780,
+        "actorSources": 73,
         "inputs": 0
       }
     }

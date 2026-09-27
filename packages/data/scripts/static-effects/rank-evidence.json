@@ -1,4 +1,64 @@
 {
+  "orphie&magus:blk-legacy": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1301/details.zh.json",
+        "pointer": "/passive/level/1301507/desc/0",
+        "sha256": "2eb4f3167462c972e28cccb6dfcf71f6d687733ab36915a5f63b05155bfaa9c2"
+      }
+    ],
+    "verification": "核心被动第 7 级说明与来源块全文一致：自身暴击率 25%、追加攻击伤害 85%，[准星聚焦]提供 280 点固定攻击与按初始回能超出的线性提升，初始提升与额外提升合计不超过 700 点；团队准星聚焦条目与自身暴击、追加攻击条目分开登记"
+  },
+  "sbilly:blk-legacy": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1531/details.zh.json",
+        "pointer": "/passive/level/1531055/desc/0",
+        "sha256": "175d49d1114ce20454419f1f43264ecb02663b8b951161b124cb02ade8094499"
+      }
+    ],
+    "verification": "核心被动第 7 级（1531055）说明与来源块全文一致：接战状态下每次发动[特殊技：动力压制]时自身暴击伤害提升 90%、持续 45 秒；只登记动力压制后的有效暴伤状态，不模拟生命消耗"
+  },
+  "sunna:blk-ms0gi1k3-crbdyc": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1491/details.zh.json",
+        "pointer": "/passive/level/1491055/desc/0",
+        "sha256": "ac40722e4071398d8dc3a17734dd0b802365f264f841d0aa7e8496b2397af88f"
+      }
+    ],
+    "verification": "核心被动第 7 级（1491055）说明与来源块全文一致：处于[天使协律]状态下的角色攻击力提升千夏 30% 初始攻击力、最高不超过 1050 点；初始攻击达到 3500 点时增益达到最大"
+  },
+  "xigelide:blk-ms4mgqxs-kz3jwe": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1591/details.zh.json",
+        "pointer": "/passive/level/1591507/desc/0",
+        "sha256": "59e2a57bc5c70bc8ee7dff5ef0e76476ef212664a37e14ed0b6eb5d0cc535ef6"
+      }
+    ],
+    "verification": "核心被动第 7 级说明与来源块全文一致：激活或刷新[巡空枪势]时暴击率提升 66%；处于该状态攻击命中失衡目标时失衡易伤倍率提升 20%，20% 只作用本人对失衡目标的伤害"
+  },
+  "zhao:blk-legacy": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1341/details.zh.json",
+        "pointer": "/passive/level/1341507/desc/0",
+        "sha256": "51af14394bfd4b37069dfe60cd5437b21f51393905db168da880d8fbe332209d"
+      }
+    ],
+    "verification": "核心被动第 7 级说明与来源块全文一致：每 1000 点初始最大生命值提高 1.4% 暴击率；[以太帷幕·涌泉]生效期间全队最大生命值提升 5%，开启时全队攻击力提升 1000 点；初始生命读取、团队生命与团队攻击三项独立"
+  },
   "soldier11:blk-legacy": {
     "levels": [7],
     "evidence": [

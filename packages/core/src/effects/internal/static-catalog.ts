@@ -427,6 +427,7 @@ export function validateStaticCatalog(
             "refinements",
             "minimumSetPieces",
             "coreSkillLevels",
+            "specialSkillLevels",
           ],
           checks(`${vp}/configuration`),
           "variant configuration",
@@ -436,6 +437,7 @@ export function validateStaticCatalog(
           ["minimumSetPieces", 0, 6, false],
           ["refinements", 1, 5, true],
           ["coreSkillLevels", 1, 7, true],
+          ["specialSkillLevels", 1, 16, true],
         ] as const) {
           if (config[key] === undefined) continue
           const ranks = isArray
@@ -1147,6 +1149,21 @@ export function calculateStaticDamageFromCatalog(
         "MISSING_RANK",
         p,
         `No verified core parameters for this level; ${explain}`,
+      )
+      continue
+    }
+    if (
+      configuration.specialSkillLevels &&
+      (binding.kind !== "agent" ||
+        binding.configuration.specialSkillLevel === undefined ||
+        !configuration.specialSkillLevels.includes(
+          binding.configuration.specialSkillLevel,
+        ))
+    ) {
+      collector.report(
+        "MISSING_RANK",
+        p,
+        `No verified special skill parameters for this level; ${explain}`,
       )
       continue
     }

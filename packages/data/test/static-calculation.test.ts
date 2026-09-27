@@ -700,3 +700,145 @@ describe("static calculation assembly", () => {
     }
   })
 })
+
+describe("special skill level inputs", () => {
+  const lucyLinearOption =
+    "agents:lucy:mindscape:0:blk-legacy:eff-ms384fjz-fgct7r"
+  const lucyFixedOption = "agents:lucy:mindscape:0:blk-legacy:legacy-team-atk"
+  const lucyLinearEffect =
+    "agent:1151:zzz-hp:eff-ms384fjz-fgct7r:blk-legacy:mindscape:0"
+  const lucyFixedEffect =
+    "agent:1151:zzz-hp:legacy-team-atk:blk-legacy:mindscape:0"
+
+  async function lucyFixture(special: {
+    mode: "trained" | "effective"
+    value: number
+  }) {
+    const input = await fixture("1151")
+    const action = input.action
+    if (!action.ok) throw new Error("expected a resolved action")
+    const levels = {
+      basic: { mode: "trained", value: 12 } as const,
+      dodge: { mode: "trained", value: 12 } as const,
+      assist: { mode: "trained", value: 12 } as const,
+      special: { mode: "effective", value: 12 } as const,
+      chain: { mode: "trained", value: 12 } as const,
+    }
+    const reResolved = resolveAgentAction({
+      agent: input.data.agents[0]!.actions,
+      actionId: action.actionId,
+      mindscapeRank: input.actors[0]!.mindscapeRank,
+      levels,
+    })
+    if (!reResolved.ok) throw new Error("expected resolvable action")
+    const selections = [lucyFixedOption, lucyLinearOption].map((optionId) => ({
+      optionId,
+      holderId: input.actors[0]!.entityId,
+      layers: 1,
+    }))
+    const base = {
+      ...input,
+      action: reResolved,
+      selections,
+      actors: [
+        {
+          ...input.actors[0]!,
+          skillLevels: { special },
+        },
+      ],
+    }
+    return base
+  }
+
+  it("feeds the acting actor's effective special level into her own team buff", async () => {
+    const input = await lucyFixture({ mode: "effective", value: 12 })
+    const bindingId = "binding:entity:actor:agent:1151"
+    const result = calculate({
+      ...input,
+      inputs: [
+        {
+          bindingId,
+          name: `${lucyLinearEffect}:source`,
+          value: { unit: "attack-points", value: 2000 },
+        },
+      ],
+    })
+    const contributions =
+      result.segments[0]!.damage.evaluation.contributions.filter((entry) =>
+        [lucyFixedEffect, lucyLinearEffect].includes(entry.origin.effectId),
+      )
+    expect(
+      contributions.reduce((total, entry) => total + entry.value.value, 0),
+    ).toBe(540)
+  })
+
+  it("reports missing special level for a selected level-dependent option", async () => {
+    const input = await lucyFixture({ mode: "effective", value: 12 })
+    const { skillLevels: _omitted, ...actorWithoutLevels } = input.actors[0]!
+    const result = calculateStaticActionDamage({
+      ...input,
+      actors: [actorWithoutLevels],
+    })
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues.some((issue) => issue.code === "MISSING_RANK")).toBe(
+        true,
+      )
+  })
+
+  it("rejects an out-of-domain trained special level", async () => {
+    const input = await lucyFixture({ mode: "effective", value: 12 })
+    expect(
+      calculateStaticActionDamage({
+        ...input,
+        actors: [
+          {
+            ...input.actors[0]!,
+            skillLevels: { special: { mode: "trained", value: 17 } },
+          },
+        ],
+      }),
+    ).toMatchObject({ ok: false, issues: [{ code: "INVALID_INPUT" }] })
+  })
+
+  it("rejects skill levels that disagree with the resolved action", async () => {
+    const input = await lucyFixture({ mode: "effective", value: 12 })
+    const actions = input.data.agents[0]!.actions.actions
+    const specialAction = actions.find(
+      (entry) =>
+        entry.calculation.kind === "damage" &&
+        entry.calculation.segments.some((segment) =>
+          segment.items.some(
+            (item) => item.coefficient.levelGroup === "special",
+          ),
+        ),
+    )
+    if (!specialAction) throw new Error("expected a special-group action")
+    const other = resolveAgentAction({
+      agent: input.data.agents[0]!.actions,
+      actionId: specialAction.actionId,
+      mindscapeRank: input.actors[0]!.mindscapeRank,
+      levels: {
+        basic: { mode: "trained", value: 12 },
+        dodge: { mode: "trained", value: 12 },
+        assist: { mode: "trained", value: 12 },
+        special: { mode: "effective", value: 10 },
+        chain: { mode: "trained", value: 12 },
+      },
+    })
+    if (!other.ok) throw new Error("expected resolvable action")
+    // 动作按最终等级 10 解析、角色配置声明 12：重叠类别的解析结果不一致。
+    expect(
+      calculateStaticActionDamage({
+        ...input,
+        action: other,
+        actors: [
+          {
+            ...input.actors[0]!,
+            skillLevels: { special: { mode: "effective", value: 12 } },
+          },
+        ],
+      }),
+    ).toMatchObject({ ok: false, issues: [{ code: "CONTEXT_MISMATCH" }] })
+  })
+})

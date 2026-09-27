@@ -12,6 +12,7 @@ import type {
   RefinementRank,
   SetPieceCount,
   SourceKind,
+  SpecialSkillLevel,
   Stat,
   Unit,
 } from "../types.ts"
@@ -97,12 +98,21 @@ export const SOURCE_KINDS: ReadonlySet<SourceKind> = new Set([
   "environment",
 ])
 
-/** 各来源种类的配置字段；空数组表示该来源没有培养配置。 */
+/** 各来源种类允许出现的配置字段；必填字段由 REQUIRED_SOURCE_CONFIGURATION_FIELDS 单独维护。 */
 export const SOURCE_CONFIGURATION_FIELDS: Readonly<
-  Record<
-    SourceKind,
-    readonly ("mindscapeRank" | "coreSkillLevel" | "refinement" | "setPieces")[]
-  >
+  Record<SourceKind, readonly ConfigurationNumberField[]>
+> = {
+  "agent": ["mindscapeRank", "coreSkillLevel", "specialSkillLevel"],
+  "drive-disc": ["setPieces"],
+  "w-engine": ["refinement"],
+  "bangboo": [],
+  "monster": [],
+  "environment": [],
+}
+
+/** 各来源种类必填的配置字段；可选字段（agent 的 specialSkillLevel）按实际参数依赖读取。 */
+export const REQUIRED_SOURCE_CONFIGURATION_FIELDS: Readonly<
+  Record<SourceKind, readonly ConfigurationNumberField[]>
 > = {
   "agent": ["mindscapeRank", "coreSkillLevel"],
   "drive-disc": ["setPieces"],
@@ -112,7 +122,11 @@ export const SOURCE_CONFIGURATION_FIELDS: Readonly<
   "environment": [],
 }
 
-export type RankField = "coreSkillLevel" | "mindscapeRank" | "refinement"
+export type RankField =
+  | "coreSkillLevel"
+  | "mindscapeRank"
+  | "refinement"
+  | "specialSkillLevel"
 
 export const RANK_TIERS: Readonly<
   Record<RankField, readonly (number | string)[]>
@@ -120,6 +134,7 @@ export const RANK_TIERS: Readonly<
   mindscapeRank: [0, 1, 2, 3, 4, 5, 6],
   coreSkillLevel: [1, 2, 3, 4, 5, 6, 7],
   refinement: [1, 2, 3, 4, 5],
+  specialSkillLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 }
 
 export type ConfigurationNumberField =
@@ -127,6 +142,7 @@ export type ConfigurationNumberField =
   | "coreSkillLevel"
   | "refinement"
   | "setPieces"
+  | "specialSkillLevel"
 
 /** 配置字段可由哪些来源种类提供；读取未列出的字段即定义与来源不相容。 */
 export const CONFIGURATION_FIELD_SOURCES: Readonly<
@@ -136,6 +152,7 @@ export const CONFIGURATION_FIELD_SOURCES: Readonly<
   coreSkillLevel: ["agent"],
   refinement: ["w-engine"],
   setPieces: ["drive-disc"],
+  specialSkillLevel: ["agent"],
 }
 
 export const PHASES: ReadonlySet<Phase> = new Set([
@@ -233,6 +250,17 @@ export function isCoreSkillLevel(value: unknown): value is CoreSkillLevel {
     Number.isInteger(value) &&
     value >= 1 &&
     value <= 7
+  )
+}
+
+export function isSpecialSkillLevel(
+  value: unknown,
+): value is SpecialSkillLevel {
+  return (
+    typeof value === "number" &&
+    Number.isInteger(value) &&
+    value >= 1 &&
+    value <= 16
   )
 }
 
