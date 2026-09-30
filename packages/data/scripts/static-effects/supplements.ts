@@ -114,6 +114,8 @@ const redAxisIdentity: SourceIdentity = { kind: "w-engine", entityId: "13111" }
 /**
  * 猫又普通分支 60% 增伤：闪避反击或快速支援命中后 +60%、持续 6 秒；
  * 仅潜能未开启（0）时可用，与潜能分支的 40 秒记录互斥。
+ * 闪反/快支命中是触发条件，由调用方选中本增益断言状态有效；
+ * 受益范围是自身造成的伤害，不按命中分类筛选。
  */
 const nekomataOrdinaryDmgBonus: Supplement = {
   kind: "option-variant",
@@ -124,7 +126,7 @@ const nekomataOrdinaryDmgBonus: Supplement = {
   computationTarget: "catalog option variant",
   evidence: nekomataOrdinaryEvidence,
   verification:
-    "Nanoka 普通分支（/passive/level/1021507，potential 为 [0]）确认：[闪避反击]或[快速支援]命中敌人时，自身造成的伤害提升 60%、持续 6 秒。与潜能分支的 40 秒记录互斥：本变体声明潜能 0，潜在变体声明潜能 1—6；只支持已核实核心 7。",
+    "Nanoka 普通分支（/passive/level/1021507，potential 为 [0]）确认：[闪避反击]或[快速支援]命中敌人时，自身造成的伤害提升 60%、持续 6 秒。这两个动作是触发条件：静态入口由调用方显式选中有效增益断言触发已发生，不模拟此前的触发事件与持续时间；受益范围与潜能分支一致，为自身造成的全部伤害，普攻、强化特殊技、终结技、闪反、快支命中均获得同一 0.6 增伤贡献，不按命中分类筛选。与潜能分支的 40 秒记录互斥：本变体声明潜能 0，潜在变体声明潜能 1—6；只支持已核实核心 7（潜能分支数值随核心等级 30%—60% 变化，等级 7 之外缺档）。",
   rule: {
     effectId: "agent:1021:nanoka:ordinary-dmgBonus:blk-legacy:mindscape:0",
     identity: { kind: "agent", entityId: "1021" },
@@ -160,21 +162,7 @@ const nekomataOrdinaryDmgBonus: Supplement = {
       amount: { kind: "constant", unit: "ratio", value: 0.6 },
     },
     scope: "hit",
-    when: {
-      kind: "all",
-      conditions: [
-        {
-          kind: "one-of",
-          fact: "hit.damageKind",
-          values: [...directKinds],
-        },
-        {
-          kind: "one-of",
-          fact: "hit.skillCategory",
-          values: ["dodge-counter", "quick-assist"],
-        },
-      ],
-    },
+    when: { kind: "constant", value: true },
     operation: {
       kind: "factor-contribution",
       channel: "damage-bonus",
@@ -187,7 +175,7 @@ const nekomataOrdinaryDmgBonus: Supplement = {
     inputs: [],
     applicability: {},
     conditionDescription:
-      "普通分支（潜能未开启）：[闪避反击]或[快速支援]命中敌人时，自身造成的伤害提升 60%，持续 6 秒；由调用方断言命中分类。",
+      "普通分支（潜能未开启）：[闪避反击]或[快速支援]命中敌人时，自身造成的伤害提升 60%，持续 6 秒；触发事实由调用方选中本增益断言，命中不限于触发分类。",
     name: "核心被动：猫步诡影 · dmgBonus",
     target: "self",
   },

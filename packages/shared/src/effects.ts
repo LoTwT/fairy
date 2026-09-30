@@ -798,6 +798,11 @@ export interface StaticCatalogDamageItemRequirement {
   readonly source?: "holder-current" | "anomaly-source"
   /** 仅 direct 模式：要求消费端输入的基础倍率为 0，实际倍率由关联规则贡献一次。 */
   readonly requiredDirectMultiplier?: 0
+  /**
+   * 独立结算项要求的命中分类：命中使用其他分类（如借用触发招式的普攻/闪反
+   * 分类）时目录返回 CONTEXT_MISMATCH，防止独立项吃到普通分类增益。
+   */
+  readonly requiredSkillCategory?: SkillCategory
   /** 原异常归属：standard-disorder 项核对 originalAnomalyAttribute；direct 项核对归属元数据。 */
   readonly originalAnomalyAttribute?: DamageElement
 }

@@ -8,7 +8,7 @@
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项、空记录和蕾米埃尔自身异常强度的新等级公式另列在报告中。目录入口拒绝把蕾米埃尔作为 `anomalySource`；她提供给其他来源异常的已映射增益可以正常计算。
 
-5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`（见下）。
+5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`（见下）。
 
 固定输入重复生成的三个制品字节一致。离线验收逐条对比 1,232 条 converted 记录，corrected 另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
 
@@ -63,6 +63,21 @@
 - 补充来源整合：`convertSource` 接收经校验的补充清单，与固定来源共用同一 RuleSet 与目录。已整合 3 条——猫又普通段增伤与爪痕目标（选项变体）、旋钻机-赤轴红轴天赋（新目录实体，精炼 1—5 系数 0.50/0.575/0.65/0.725/0.80，只作用于电属性普通/冲刺直伤）；恒等式-变格天赋因使攻击者造成的伤害降低（对敌方施加的减益不属于静态增益求值范围）登记为越界边界。每条补充记录带 `supplementProvenance`（来源、版本与资源摘要 SHA-256），目录与规则集同样校验其证据。
 - 南宫玉初始异常掌控超过 110 的部分 1:1 转为冲击力的常驻面板转化进入 `panelRules`，回归测试锁定 110 点门槛与 1:1 速率。
 - 覆盖报告新增 `supplementalRecords` 与 `summary.supplements` 块；`rank-evidence.json` 扩充至 90 条（含 `nekomata:blk-legacy` 与 `pyrois:blk-legacy` 证据锚点）。
+
+### 修订 6：核心证据作用域、普通分支受益与爪印独立命中
+
+规则集 revision 递增为 `6`。本修订处理 PR #181 二次评审确认的问题：核心档位证据污染同块影画记录、猫又普通分支 60% 增伤受益范围错误、爪印缺潜能门槛、独立伤害项缺零初始倍率约束、补充来源校验抛裸异常，并落实爪印独立命中契约。二次复核进一步修正两处：移除块级核心门槛时误放开的真实影画核心依赖（按记录级键重新登记），以及独立命中分类只校验原始 `hit.skillCategory`、未覆盖保留标签与目标展开的缺口。
+
+- **核心证据作用域**：`compile` 此前按 `entityId:blockId` 命中证据后无条件把 `proof.levels` 写入变体 `coreSkillLevels`。同块 ID 在影画各 rank 复用（rank 0 为"核心被动：…"块，rank N 为"影画 N"块），块级证据只核对 rank 0 记录与对应等级说明全文；修订后核心门槛只施加于 rank 0 记录与显式登记的影画强化核心（希希芙 1 影两项防御强化继承核心 7，行为不变）。被移除块级门槛的 128 个影画变体经逐条审计（按 Nanoka 天赋说明与登记值对照核心参数，区分固定影画增益、核心比例强化、转换率或封顶变化）：126 个是固定增益（绝对增量，或相对于无等级的能力值），影画解锁后核心 1—7 均可用且贡献不随核心等级变化；2 个确属核心依赖，按新增的记录级键 `entityId:blockId:rankKind:rank:effectId` 单独登记并只开放已核实核心 7——凯撒 2 影攻击增益是核心被动攻击力提升效果的比例强化（登记值 500 对应核心 7 的 +1000；核心 6 的 900 需要 450，未建模）、潘引壶 6 影[通窍]强化同时改变核心转换率与总上限（登记 `min(初始攻击 ×6%, 180)` 只在核心 7 的 18%/540 成立，核心 6 的 16.5% 真实增量为 192），其余核心等级与缺档同样拒绝。记录级键同样用于同块支持范围不同的记录：猫又爪印逐行核实潜能分支 1—7 行（1021508—1021514）数值恒为 30% 攻击力，按其自身证据开放核心 1—7，不继承 60% 增伤只核实核心 7 的块级限制；键为 `nekomata:blk-legacy:mindscape:0:eff-ms4f47p3-p1s9yz`。
+- **猫又普通分支 60% 增伤**：闪避反击/快速支援命中是触发条件，不是受益筛选。补充变体移除 `hit.skillCategory` 与伤害种类限制：调用方显式选中有效增益即断言触发已发生，普攻、强化特殊技、终结技、闪反、快支命中均得到同一 0.6 增伤贡献；未选中保持 1，普通与潜能变体仍按潜能等级互斥。额外能力（猫步秀）的叠层、队伍条件与强化特殊技受益分类不变。
+- **爪印独立命中契约（具名差异 `independent-hit-contract`）**：固定 ZZZ-HP 与当前 Nanoka 文本证明爪印是[肉球突袭]状态下攻击命中的额外物理伤害，但没有独立的命中分类证据。目录为爪印登记稳定独立目标 `zzz-hp:skill:nekomata-claw-mark`（`upstreamId` 为 null，不是来源技能），规则只匹配该目标、物理元素与直伤种类；爪印伤害项要求本次命中分类为 `uncategorized`（`requiredSkillCategory`）且基础倍率为 0，30% 由关联规则贡献一次。分类校验按最终用于求值的有效分类标签执行：覆盖原始 `hit.skillCategory`、调用方提供的 `hit.skillTags` 中保留的分类标签，以及合法 `skillTargetIds` 展开出的目标分类与追加攻击标记；任一标签与声明分类不同即返回带路径与来源标签的 `CONTEXT_MISMATCH`，不静默丢弃冲突输入。普通命中保留多标签、多目标与分类别名，限制只作用于声明独立分类要求的已选中选项。uncategorized 与独立目标身份是本项目采用的独立结算契约，不是原始游戏证据；普通攻击组装不自动追加爪印，也不模拟触发冷却。
+- **三个独立伤害项的零初始倍率约束**：`nekomata:claw-mark`（+0.30）、`pyrois:ult-left-extra`（+9）、`pyrois:ult-right-settlement`（+22.5）的 `damageItemRequirements` 均声明 `requiredDirectMultiplier: 0`，复用共享类型与目录入口既有校验：预填对应机制倍率或其他非零倍率返回 `CONTEXT_MISMATCH`（攻击力 500 时分别为 150、4500、11250，不能因重复填写变成 300、9000、22500）；佩洛伊斯左右分支保持各自目标与 base／settlement 角色。
+- **爪印潜能门槛**：爪印属核心被动潜能分支，变体声明 `potentialLevels: [1..6]`；潜能省略（归一为 0）或显式 0 按既有目录错误契约拒绝，潜能 1、2、6 在自身证据支持的核心档位上可算。`rank-evidence.json` 扩充至 93 条：记录级键统一为 `entityId:blockId:rankKind:rank:effectId`，本轮把爪印键改写为 `nekomata:blk-legacy:mindscape:0:eff-ms4f47p3-p1s9yz`（核心 1—7，逐行核对等级元数据），并新增 `caesar:blk-legacy:mindscape:2:legacy-team-atk` 与 `panyinhu:blk-legacy:mindscape:6:legacy-team-pierce`（均只开放核心 7）。
+- **补充来源校验**：目录入口对 `supplementProvenance` 先确认对象与资源数组形状再读取内部字段；`null`、`{}`、`resources: {}` 等非法输入返回带准确路径的错误 `Result`，不再抛 `TypeError`。来源、版本、资源路径及摘要的原有检查保持。
+
+修订 6 不改变来源分母与各记录状态：1,232 条 converted、15 条 corrected、43 条 unsupported 保持，`missing-rank-evidence` 仍为零；技能动作文件全部字节不变，仅技能清单的 `staticCatalogSha256` 更新。
+
+另有一项证据缺口如实保留：南宫羽初始异常掌控超 110 转 1:1 冲击力的常驻转化，冻结 Nanoka 7 行与两个固定来源基线均只证明输入为初始掌控、阈值 110、速率 1:1（ZZZ-HP 两基线均无该转化记录），没有直接说明输出阶段。当前 `initial-fixed` 是实现采用的契约推定，不是来源证明；回归测试区分 `initial-fixed` 与 `final-fixed`（在后续局内百分比修正下两者结果不同）并锁定现采用阶段，门槛 109/110/111/200 与初始/当前读取分离另验。后续取得同版明确证据时应先记录来源版本、资源、Pointer 与摘要，再确认或调整唯一权威落点。
 
 ## 交付目标与边界
 

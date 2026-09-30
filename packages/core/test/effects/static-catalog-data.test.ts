@@ -1557,13 +1557,14 @@ describe("velina cyclone catalog linkage", () => {
     const factorAt = (potentialLevel: number | undefined) =>
       calculateCatalogResult(withPotential([optionId], potentialLevel)).factors
         .nonCritical["damageBonus"]
-    // 潜能 0：南卡普通段规则只对快支/回避反击生效，普通直伤不消费
-    expect(factorAt(0)).toBe(1)
-    // 潜能 1 起：潜能分支规则按普通直伤消费 60%
+    // 潜能 0（普通分支）：闪反/快支命中只是触发条件，选中增益后作用于
+    // 自身造成的全部伤害；基础普攻命中同样得到 60% 增伤
+    expect(factorAt(0)).toBeCloseTo(1.6, 8)
+    // 潜能 1 起：潜能分支按同一乘区消费 60%
     expect(factorAt(1)).toBeCloseTo(1.6, 8)
     expect(factorAt(6)).toBeCloseTo(1.6, 8)
     // 未提供潜能：按归一默认 0 走潜能 0 分支，不报错
-    expect(factorAt(undefined)).toBe(1)
+    expect(factorAt(undefined)).toBeCloseTo(1.6, 8)
   })
 
   it("gates the stack record behind potential 1 and keeps layers explicit", () => {
@@ -1637,5 +1638,870 @@ describe("velina cyclone catalog linkage", () => {
       integrated: 3,
       outOfScope: 1,
     })
+  })
+
+  it("applies the red-axis talent at every refinement to electric basic and dash direct hits", () => {
+    const option = catalog.options.find(
+      (o) => o.optionId === "nanoka:w-engines:13111:refinement:red-axis",
+    )!
+    const bonusAt = (
+      refinement: 1 | 2 | 3 | 4 | 5,
+      skillCategory: "basic" | "dash" | "ultimate",
+      element: "electric" | "fire",
+    ) => {
+      const base = agentInput("1021", []) as StaticCatalogDamageInput
+      return calculateCatalogResult({
+        ...base,
+        bindings: [
+          {
+            kind: "w-engine" as const,
+            bindingId: "binding:weapon",
+            sourceEntityId: "13111",
+            holderId: "entity:attacker",
+            eligible: true,
+            configuration: { refinement },
+          },
+        ],
+        selections: [
+          { optionId: option.optionId, bindingId: "binding:weapon", layers: 1 },
+        ],
+        hit: {
+          ...base.hit,
+          skillCategory,
+          element,
+        },
+      }).factors.nonCritical["damageBonus"]
+    }
+    // Nanoka 红莲电机 1—5 档：0.50/0.575/0.65/0.725/0.80，仅电属性普通/冲刺直伤
+    for (const [refinement, expectedBonus] of [
+      [1, 0.5],
+      [2, 0.575],
+      [3, 0.65],
+      [4, 0.725],
+      [5, 0.8],
+    ] as const) {
+      expect(
+        bonusAt(refinement, "basic", "electric"),
+        `R${refinement} basic`,
+      ).toBeCloseTo(1 + expectedBonus, 8)
+      expect(
+        bonusAt(refinement, "dash", "electric"),
+        `R${refinement} dash`,
+      ).toBeCloseTo(1 + expectedBonus, 8)
+    }
+    for (const [label, skillCategory, element] of [
+      ["non-electric", "basic", "fire"],
+      ["non basic/dash", "ultimate", "electric"],
+    ] as const)
+      expect(bonusAt(5, skillCategory, element), label).toBe(1)
+  })
+})
+
+function contributionOf(result: StaticDamageResult, effectId: string): number {
+  return [
+    ...result.evaluation.contributions,
+    ...(result.preparations ?? []).flatMap((p) => p.contributions),
+  ]
+    .filter(
+      (c) =>
+        c.origin.effectId === effectId &&
+        c.origin.beneficiaryId === "entity:attacker",
+    )
+    .reduce((sum, c) => sum + c.value.value, 0)
+}
+
+function withAttack(
+  input: StaticCatalogDamageInput,
+  attack: number,
+): StaticCatalogDamageInput {
+  return {
+    ...input,
+    world: {
+      ...input.world,
+      entities: input.world.entities.map((entity) =>
+        entity.kind === "actor" && entity.entityId === input.hit.actorId
+          ? {
+              ...entity,
+              generalStats: {
+                ...entity.generalStats,
+                attack: general(attack),
+              },
+            }
+          : entity,
+      ),
+    },
+  }
+}
+
+describe("same-block core evidence scoping and independent damage items", () => {
+  it("keeps same-block mindscape records outside the core passive's level gate", () => {
+    // 影画记录与核心被动共用 blk-legacy 块 ID，但核心档位证据只核对 rank 0
+    // 核心被动块的等级说明；影画解锁后核心 1/6/7 均可用且贡献不随核心等级变化。
+    const cases = [
+      {
+        agentEntityId: "1021",
+        optionId: "agents:nekomata:mindscape:1:blk-legacy:legacy-self-resPen",
+        effectId: "agent:1021:zzz-hp:legacy-self-resPen:blk-legacy:mindscape:1",
+        mindscapeRank: 1,
+        expected: 0.16,
+      },
+      {
+        agentEntityId: "1021",
+        optionId: "agents:nekomata:mindscape:4:blk-legacy:legacy-self-critRate",
+        effectId:
+          "agent:1021:zzz-hp:legacy-self-critRate:blk-legacy:mindscape:4",
+        mindscapeRank: 4,
+        expected: 0.07,
+      },
+      {
+        agentEntityId: "1021",
+        optionId: "agents:nekomata:mindscape:6:blk-legacy:legacy-self-critDmg",
+        effectId:
+          "agent:1021:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:6",
+        mindscapeRank: 6,
+        expected: 0.18,
+      },
+      {
+        agentEntityId: "1551",
+        optionId: "agents:pyrois:mindscape:1:blk-legacy:legacy-self-critRate",
+        effectId:
+          "agent:1551:zzz-hp:legacy-self-critRate:blk-legacy:mindscape:1",
+        mindscapeRank: 1,
+        expected: 0.08,
+      },
+    ] as const
+    for (const entry of cases) {
+      const option = catalog.options.find((o) => o.optionId === entry.optionId)!
+      expect(
+        option.variants.map((v) => v.configuration.coreSkillLevels),
+        entry.optionId,
+      ).toEqual([undefined])
+      for (const coreSkillLevel of [1, 6, 7] as const) {
+        const base = agentInput(
+          entry.agentEntityId,
+          [entry.optionId],
+          entry.mindscapeRank as 1,
+          coreSkillLevel,
+        )
+        // M1 记录的来源 elementFilter 限定物理；按元素条件提供合法命中
+        const input =
+          entry.agentEntityId === "1021" && entry.mindscapeRank === 1
+            ? { ...base, hit: { ...base.hit, element: "physical" as const } }
+            : base
+        const result = calculateCatalogResult(input)
+        expect(
+          contributionOf(result, entry.effectId),
+          `${entry.optionId} core ${coreSkillLevel}`,
+        ).toBeCloseTo(entry.expected, 8)
+      }
+      // 影画未解锁仍然拒绝
+      const locked = calculateStaticDamageFromCatalog(
+        agentInput(entry.agentEntityId, [entry.optionId], 0, 7),
+      )
+      expect(locked.ok, entry.optionId).toBe(false)
+      if (!locked.ok)
+        expect(
+          locked.issues.some(
+            (issue) =>
+              issue.code === "CONTEXT_MISMATCH" &&
+              issue.message.includes("not unlocked"),
+          ),
+          entry.optionId,
+        ).toBe(true)
+    }
+  })
+
+  it("leaves core-level gates only on rank-0 evidence blocks, explicit core enhancers and recorded mindscape dependencies", () => {
+    const gatedMindscape = catalog.options
+      .filter((o) =>
+        o.variants.some(
+          (v) =>
+            (v.configuration.minimumMindscape ?? 0) >= 1 &&
+            v.configuration.coreSkillLevels !== undefined,
+        ),
+      )
+      .map((o) => o.optionId)
+      .toSorted()
+    // 影画默认不继承同块核心证据；只有显式记录级登记的依赖保留核心门槛：
+    // 希希芙 1 影防御强化（核心强化）、凯撒 2 影攻击增益（核心比例强化）、
+    // 潘引壶 6 影通窍强化（核心转换率与封顶变化）
+    expect(gatedMindscape).toEqual([
+      "agents:caesar:mindscape:2:blk-legacy:legacy-team-atk",
+      "agents:cissia:mindscape:1:blk-legacy:eff-ms4lkt33-igdjwu",
+      "agents:cissia:mindscape:1:blk-legacy:legacy-team-reduceDefense",
+      "agents:panyinhu:mindscape:6:blk-legacy:legacy-team-pierce",
+    ])
+    // 真正按核心等级选参的选项保持既有档位：60% 潜能分支只有已核实核心 7
+    const bonus = "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus"
+    const bonusOption = catalog.options.find((o) => o.optionId === bonus)!
+    expect(
+      bonusOption.variants.map((v) => [
+        v.configuration.coreSkillLevels,
+        v.configuration.potentialLevels,
+      ]),
+    ).toEqual([
+      [[7], [1, 2, 3, 4, 5, 6]],
+      [[7], [0]],
+    ])
+    const atCoreOne = calculateStaticDamageFromCatalog({
+      ...agentInput("1021", [bonus], 0, 1),
+      bindings: [
+        {
+          ...agentInput("1021", [bonus], 0, 1).bindings[0]!,
+          configuration: {
+            mindscapeRank: 0,
+            coreSkillLevel: 1,
+            potentialLevel: 1,
+          },
+        } as StaticCatalogDamageInput["bindings"][number],
+      ],
+    })
+    expect(atCoreOne.ok).toBe(false)
+    if (!atCoreOne.ok)
+      expect(
+        atCoreOne.issues.some((issue) => issue.code === "MISSING_RANK"),
+      ).toBe(true)
+  })
+
+  it("keeps recorded mindscape core dependencies on their verified core level", () => {
+    // 凯撒 2 影：攻击增益是核心被动攻击力提升效果的比例强化（提升至原本的 150%）。
+    // 登记值 500 只对应核心 7 的 1000；核心 6 的 900 需要 450，未建模 → MISSING_RANK。
+    const caesarOption = "agents:caesar:mindscape:2:blk-legacy:legacy-team-atk"
+    const caesarAt = (coreSkillLevel: 1 | 6 | 7) =>
+      agentInput(
+        "1071",
+        [caesarOption],
+        2,
+        coreSkillLevel,
+      ) as StaticCatalogDamageInput
+    for (const coreSkillLevel of [1, 6] as const) {
+      const gated = calculateStaticDamageFromCatalog(caesarAt(coreSkillLevel))
+      expect(gated.ok, `caesar core ${coreSkillLevel}`).toBe(false)
+      if (!gated.ok)
+        expect(
+          gated.issues.some((issue) => issue.code === "MISSING_RANK"),
+          `caesar core ${coreSkillLevel}`,
+        ).toBe(true)
+    }
+    const caesarVerified = calculateCatalogResult(caesarAt(7))
+    const caesarUnselected = calculateCatalogResult({
+      ...caesarAt(7),
+      selections: [],
+    })
+    // 命中基础项按攻击力 ×2 缩放：核心 7 的 +500 攻击使基础伤害增加 1000
+    expect(
+      caesarVerified.factors.nonCritical.baseDamage! -
+        caesarUnselected.factors.nonCritical.baseDamage!,
+    ).toBeCloseTo(1000, 6)
+
+    // 潘引壶 6 影：通窍强化改变核心被动的转换率与总上限（+6 个百分点、上限 720）。
+    // 登记公式 min(初始攻击 ×6%, 180) 只在核心 7（18%/540）成立；核心 6 的
+    // 真实增量为 192 而非 180 → 其他等级 MISSING_RANK。
+    const panyinhuOption =
+      "agents:panyinhu:mindscape:6:blk-legacy:legacy-team-pierce"
+    const panyinhuSourceInput = catalog.options.find(
+      (o) => o.optionId === panyinhuOption,
+    )!.variants[0]!.inputs[0]!.name
+    const panyinhuAt = (coreSkillLevel: 1 | 6 | 7) => {
+      const base = agentInput(
+        "1421",
+        [panyinhuOption],
+        6,
+        coreSkillLevel,
+      ) as StaticCatalogDamageInput
+      if (base.damage.kind !== "regular") throw new Error("fixture")
+      const { defense: _defense, ...common } = base.damage
+      return {
+        ...base,
+        inputs: [
+          {
+            bindingId: "binding:static",
+            name: panyinhuSourceInput,
+            value: { unit: "attack-points" as const, value: 3200 },
+          },
+        ],
+        hit: {
+          ...base.hit,
+          damageItems: [
+            {
+              ...base.hit.damageItems[0]!,
+              stat: "sheerForce" as const,
+              damageMultiplier: 1,
+            },
+          ],
+        },
+        damage: { ...common, kind: "sheer" as const, sheerDamageBonus: [] },
+      } as StaticCatalogDamageInput
+    }
+    for (const coreSkillLevel of [1, 6] as const) {
+      const gated = calculateStaticDamageFromCatalog(panyinhuAt(coreSkillLevel))
+      expect(gated.ok, `panyinhu core ${coreSkillLevel}`).toBe(false)
+      if (!gated.ok)
+        expect(
+          gated.issues.some((issue) => issue.code === "MISSING_RANK"),
+          `panyinhu core ${coreSkillLevel}`,
+        ).toBe(true)
+    }
+    const panyinhuVerified = calculateCatalogResult(panyinhuAt(7))
+    const panyinhuUnselected = calculateCatalogResult({
+      ...panyinhuAt(7),
+      selections: [],
+    })
+    // 初始攻击 3200 × 6% = 192，登记封顶 180
+    expect(
+      panyinhuVerified.factors.nonCritical.baseDamage! -
+        panyinhuUnselected.factors.nonCritical.baseDamage!,
+    ).toBeCloseTo(180, 6)
+  })
+
+  it("applies the ordinary 60% branch to every hit category once selected", () => {
+    const optionId =
+      "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus"
+    const factorAt = (skillCategory: string, potentialLevel: number) => {
+      const base = agentInput("1021", [optionId]) as StaticCatalogDamageInput
+      const input = {
+        ...base,
+        bindings: [
+          {
+            ...base.bindings[0]!,
+            configuration: {
+              ...base.bindings[0]!.configuration,
+              potentialLevel,
+            },
+          } as StaticCatalogDamageInput["bindings"][number],
+        ],
+        hit: { ...base.hit, skillCategory: skillCategory as "basic" },
+      }
+      return calculateCatalogResult(input).factors.nonCritical["damageBonus"]
+    }
+    // 触发动作（闪反/快支）只是触发条件；选中增益后普攻、强化特殊技、
+    // 终结技、闪反、快支命中都获得 0.6 增伤贡献
+    for (const category of [
+      "basic",
+      "enhanced-special",
+      "ultimate",
+      "dodge-counter",
+      "quick-assist",
+    ])
+      expect(factorAt(category, 0), category).toBeCloseTo(1.6, 8)
+    // 未选中时保持 1；普通与潜能变体互斥，不会叠成 2.2
+    const unselected = calculateCatalogResult(
+      agentInput("1021", []) as StaticCatalogDamageInput,
+    ).factors.nonCritical["damageBonus"]
+    expect(unselected).toBe(1)
+    expect(factorAt("basic", 1)).toBeCloseTo(1.6, 8)
+  })
+
+  const clawOption =
+    "agents:nekomata:mindscape:0:blk-legacy:eff-ms4f47p3-p1s9yz"
+  const clawEffect =
+    "agent:1021:zzz-hp:eff-ms4f47p3-p1s9yz:blk-legacy:mindscape:0"
+  const clawTarget = "zzz-hp:skill:nekomata-claw-mark"
+
+  function clawInput(overrides: {
+    skillCategory?: string
+    element?: string
+    skillTargetIds?: readonly string[]
+    /** 追加到命中现有标签之后的保留分类标签（如 `zzz-hp:category:basic`）。 */
+    skillTags?: readonly string[]
+    damageMultiplier?: number
+    /** "omitted" 表示完全不提供潜能等级（与显式 0 不同）。 */
+    potentialLevel?: number | "omitted"
+    coreSkillLevel?: number
+    statSourceEntityId?: string
+    stat?: "attack" | "impact"
+    role?: "base" | "settlement"
+    omitItem?: boolean
+  }): StaticCatalogDamageInput {
+    const base = agentInput("1021", [clawOption]) as StaticCatalogDamageInput
+    const potentialLevel =
+      overrides.potentialLevel === "omitted"
+        ? undefined
+        : (overrides.potentialLevel ?? 1)
+    const binding = {
+      ...base.bindings[0]!,
+      configuration: {
+        mindscapeRank: 0,
+        coreSkillLevel: (overrides.coreSkillLevel ?? 7) as 7,
+        ...(potentialLevel === undefined
+          ? {}
+          : { potentialLevel: potentialLevel as 1 }),
+      },
+    } as StaticCatalogDamageInput["bindings"][number]
+    const clawItem = {
+      mode: "direct" as const,
+      role: overrides.role ?? ("base" as const),
+      itemId: "nekomata:claw-mark",
+      damageMultiplier: overrides.damageMultiplier ?? 0,
+      stat: overrides.stat ?? ("attack" as const),
+      statSource: {
+        entityId: overrides.statSourceEntityId ?? "entity:attacker",
+      },
+    }
+    // 目录要求命中至少包含一个伤害项；缺项场景保留基础攻击项
+    const items = overrides.omitItem
+      ? [
+          {
+            mode: "direct" as const,
+            role: "base" as const,
+            itemId: "base",
+            damageMultiplier: 2,
+            stat: "attack" as const,
+            statSource: { entityId: "entity:attacker" },
+          },
+        ]
+      : [clawItem]
+    return {
+      ...base,
+      bindings: [binding],
+      hit: {
+        ...base.hit,
+        skillCategory: (overrides.skillCategory ?? "uncategorized") as "basic",
+        element: (overrides.element ?? "physical") as "physical",
+        skillTargetIds: overrides.skillTargetIds ?? [clawTarget],
+        skillTags: [
+          ...(base.hit.skillTags ?? []),
+          ...(overrides.skillTags ?? []),
+        ],
+        damageItems:
+          items as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+      },
+    }
+  }
+
+  const dawnsBloomOptionId =
+    "drive-discs:SuitDawnsBloom:setPieces:2:blk-ms0cxr3v-4ihs7d:legacy-self-skillDmgBonus"
+  function withDawnsBloom(input: StaticCatalogDamageInput) {
+    return {
+      ...input,
+      bindings: [
+        ...input.bindings,
+        {
+          bindingId: "binding:disc",
+          kind: "drive-disc" as const,
+          holderId: "entity:attacker",
+          sourceEntityId: "33300",
+          eligible: true,
+          configuration: { setPieces: 2 as const },
+        },
+      ] as StaticCatalogDamageInput["bindings"],
+      selections: [
+        ...input.selections,
+        {
+          optionId: dawnsBloomOptionId,
+          bindingId: "binding:disc",
+          layers: 1,
+        },
+      ] as StaticCatalogDamageInput["selections"],
+    }
+  }
+
+  it("gates the claw mark behind potential with its own core-level evidence", () => {
+    const option = catalog.options.find((o) => o.optionId === clawOption)!
+    expect(option.variants).toHaveLength(1)
+    expect(option.variants[0]!.configuration).toMatchObject({
+      coreSkillLevels: [1, 2, 3, 4, 5, 6, 7],
+      potentialLevels: [1, 2, 3, 4, 5, 6],
+    })
+    // 潜能省略（归一为 0）或显式 0：按既有目录错误契约拒绝
+    for (const potentialLevel of ["omitted", 0] as const) {
+      const result = calculateStaticDamageFromCatalog(
+        clawInput({ potentialLevel }),
+      )
+      expect(result.ok, `potential ${String(potentialLevel)}`).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) => issue.code === "MISSING_RANK"),
+        ).toBe(true)
+    }
+    // 潜能 1、2、6 在自身证据支持的核心档位上可算：爪印倍率不随核心等级变化
+    for (const potentialLevel of [1, 2, 6] as const)
+      for (const coreSkillLevel of [1, 7] as const) {
+        const result = calculateCatalogResult(
+          clawInput({ potentialLevel, coreSkillLevel }),
+        )
+        expect(
+          contributionOf(result, clawEffect),
+          `potential ${potentialLevel} core ${coreSkillLevel}`,
+        ).toBeCloseTo(0.3, 8)
+      }
+  })
+
+  it("starts the three independent items from a zero multiplier", () => {
+    // 目录对消费方可见的元数据包含零倍率要求
+    const expected: readonly (readonly [optionId: string, itemId: string])[] = [
+      [clawOption, "nekomata:claw-mark"],
+      [
+        "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m4nah-o17lgq",
+        "pyrois:ult-left-extra",
+      ],
+      [
+        "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m5tqw-4wvfng",
+        "pyrois:ult-right-settlement",
+      ],
+    ]
+    for (const [optionId, itemId] of expected) {
+      const option = catalog.options.find((o) => o.optionId === optionId)!
+      const requirement = option.variants[0]!.damageItemRequirements!.find(
+        (r) => r.itemId === itemId,
+      )!
+      expect(requirement.requiredDirectMultiplier, optionId).toBe(0)
+    }
+    // 攻击力 500：爪印 150、佩洛伊斯左分支 4500、右分支结算 11250
+    const claw = calculateCatalogResult(withAttack(clawInput({}), 500))
+    expect(claw.factors.nonCritical.baseDamage).toBeCloseTo(150, 6)
+    const ultBase = (overrides: {
+      itemId: string
+      role: "base" | "settlement"
+      targetId: string
+      prefilled?: number
+    }) => {
+      const optionId = overrides.itemId.endsWith("left-extra")
+        ? "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m4nah-o17lgq"
+        : "agents:pyrois:mindscape:0:blk-legacy:eff-ms4m5tqw-4wvfng"
+      const base = agentInput("1551", [optionId]) as StaticCatalogDamageInput
+      return {
+        ...base,
+        hit: {
+          ...base.hit,
+          skillCategory: "ultimate" as const,
+          element: "physical" as const,
+          skillTargetIds: [`zzz-hp:skill:${overrides.targetId}`],
+          damageItems: [
+            {
+              mode: "direct" as const,
+              role: overrides.role,
+              itemId: overrides.itemId,
+              damageMultiplier: overrides.prefilled ?? 0,
+              stat: "attack" as const,
+              statSource: { entityId: "entity:attacker" },
+            },
+          ] as StaticCatalogDamageInput["hit"]["damageItems"],
+        },
+      }
+    }
+    const left = calculateCatalogResult(
+      withAttack(
+        ultBase({
+          itemId: "pyrois:ult-left-extra",
+          role: "base",
+          targetId: "pyrois-ultimate-ms4m57ys",
+        }),
+        500,
+      ),
+    )
+    expect(left.factors.nonCritical.baseDamage).toBeCloseTo(4500, 6)
+    const right = calculateCatalogResult(
+      withAttack(
+        ultBase({
+          itemId: "pyrois:ult-right-settlement",
+          role: "settlement",
+          targetId: "pyrois-ultimate-ms4m66yy",
+        }),
+        500,
+      ),
+    )
+    expect(right.factors.nonCritical.baseDamage).toBeCloseTo(11250, 6)
+    // 预填对应机制倍率或其他非零倍率：返回 CONTEXT_MISMATCH，
+    // 不能因重复填写机制倍率变成 300、9000、22500
+    const prefilled = calculateStaticDamageFromCatalog(
+      withAttack(clawInput({ damageMultiplier: 0.3 }), 500),
+    )
+    expect(prefilled.ok).toBe(false)
+    if (!prefilled.ok)
+      expect(
+        prefilled.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+      ).toBe(true)
+    for (const [itemId, role, targetId, prefilledValue] of [
+      ["pyrois:ult-left-extra", "base", "pyrois-ultimate-ms4m57ys", 9],
+      [
+        "pyrois:ult-right-settlement",
+        "settlement",
+        "pyrois-ultimate-ms4m66yy",
+        22.5,
+      ],
+    ] as const) {
+      const result = calculateStaticDamageFromCatalog(
+        withAttack(
+          ultBase({ itemId, role, targetId, prefilled: prefilledValue }),
+          500,
+        ),
+      )
+      expect(result.ok, itemId).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+          itemId,
+        ).toBe(true)
+    }
+  })
+
+  it("settles the claw mark as an independent uncategorized hit", () => {
+    // 目录登记稳定独立目标：不是来源技能（upstreamId 为 null），分类为
+    // 项目采用的 uncategorized 独立结算契约
+    const target = catalog.skillTargets.find((t) => t.targetId === clawTarget)
+    expect(target).toMatchObject({
+      upstreamId: null,
+      agentEntityId: "1021",
+      category: "uncategorized",
+      countsAsFollowUp: false,
+    })
+    // 独立命中：攻击力 1000 时爪印基础伤害 300
+    const independent = calculateCatalogResult(clawInput({}))
+    expect(contributionOf(independent, clawEffect)).toBeCloseTo(0.3, 8)
+    expect(independent.factors.nonCritical.baseDamage).toBeCloseTo(300, 6)
+    // 错误普通分类：借用普攻分类被目录约束拒绝
+    const basicCategory = calculateStaticDamageFromCatalog(
+      clawInput({ skillCategory: "basic" }),
+    )
+    expect(basicCategory.ok).toBe(false)
+    if (!basicCategory.ok)
+      expect(
+        basicCategory.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+      ).toBe(true)
+    // 错误元素／错误目标：合法但不匹配，爪印独立项保持零倍率零贡献
+    for (const [label, overrides] of [
+      ["element", { element: "fire" }],
+      ["target", { skillTargetIds: [] }],
+    ] as const) {
+      const result = calculateCatalogResult(clawInput(overrides))
+      expect(contributionOf(result, clawEffect), label).toBe(0)
+      expect(result.factors.nonCritical.baseDamage, label).toBe(0)
+    }
+    // 缺项：选中爪印但命中不含独立项
+    const absent = calculateStaticDamageFromCatalog(
+      clawInput({ omitItem: true }),
+    )
+    expect(absent.ok).toBe(false)
+    if (!absent.ok)
+      expect(
+        absent.issues.some((issue) => issue.code === "MISSING_REFERENCE"),
+      ).toBe(true)
+    // 错误归属：读取他人当前属性
+    const wrongHolder = calculateStaticDamageFromCatalog(
+      clawInput({ statSourceEntityId: "entity:enemy" }),
+    )
+    expect(wrongHolder.ok).toBe(false)
+    if (!wrongHolder.ok)
+      expect(
+        wrongHolder.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+      ).toBe(true)
+    // 错属性：伤害项不按声明的攻击力缩放
+    const wrongStat = calculateStaticDamageFromCatalog(
+      clawInput({ stat: "impact" }),
+    )
+    expect(wrongStat.ok).toBe(false)
+    if (!wrongStat.ok)
+      expect(
+        wrongStat.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.message.includes("scales impact, expected attack"),
+        ),
+      ).toBe(true)
+    // 错误角色：独立项必须是声明的 base 伤害项
+    const wrongRole = calculateStaticDamageFromCatalog(
+      clawInput({ role: "settlement" }),
+    )
+    expect(wrongRole.ok).toBe(false)
+    if (!wrongRole.ok)
+      expect(
+        wrongRole.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.message.includes("has role settlement, expected base"),
+        ),
+      ).toBe(true)
+    // 错误目标：未登记的独立目标按既有目录契约拒绝
+    const unknownTarget = calculateStaticDamageFromCatalog(
+      clawInput({ skillTargetIds: ["zzz-hp:skill:not-a-target"] }),
+    )
+    expect(unknownTarget.ok).toBe(false)
+    if (!unknownTarget.ok)
+      expect(
+        unknownTarget.issues.some(
+          (issue) =>
+            issue.code === "MISSING_REFERENCE" &&
+            issue.message.includes("Unknown skill target"),
+        ),
+      ).toBe(true)
+  })
+
+  it("keeps the claw mark out of ordinary basic-attack assembly and disc bonuses", () => {
+    // 普通攻击命中不会自动追加爪印：爪印选项按潜能门槛合法选中时，
+    // 基础攻击命中缺少独立项报 MISSING_REFERENCE，而不是自动补上爪印
+    const selected = agentInput("1021", [
+      clawOption,
+    ]) as StaticCatalogDamageInput
+    const autoAppend = calculateStaticDamageFromCatalog({
+      ...selected,
+      bindings: [
+        {
+          ...selected.bindings[0]!,
+          configuration: {
+            ...selected.bindings[0]!.configuration,
+            potentialLevel: 1,
+          },
+        } as StaticCatalogDamageInput["bindings"][number],
+      ],
+    })
+    expect(autoAppend.ok, JSON.stringify(autoAppend)).toBe(false)
+    if (!autoAppend.ok)
+      expect(
+        autoAppend.issues.some((issue) => issue.code === "MISSING_REFERENCE"),
+      ).toBe(true)
+    // 与拂晓生花两件套组合：爪印独立命中不吃 15% 普攻增伤
+    const clawAlone = calculateCatalogResult(clawInput({})).nonCritical
+    const clawWithDisc = calculateCatalogResult(
+      withDawnsBloom(clawInput({})),
+    ).nonCritical
+    expect(clawWithDisc).toBeCloseTo(clawAlone, 6)
+    // 对照：同一两件套在基础攻击命中上提供 1.15 倍
+    const basicAlone = calculateCatalogResult(
+      agentInput("1021", []) as StaticCatalogDamageInput,
+    ).nonCritical
+    const basicWithDisc = calculateCatalogResult(
+      withDawnsBloom(agentInput("1021", []) as StaticCatalogDamageInput),
+    ).nonCritical
+    expect(basicWithDisc / basicAlone).toBeCloseTo(1.15, 8)
+  })
+
+  it("rejects borrowed category labels and targets that conflict with the independent hit category", () => {
+    const extraAbilityOption =
+      "agents:nekomata:mindscape:0:blk-ms4f4rbb-id7p58:eff-ms4f4rbb-y2jon7"
+    const globalDodgeTarget = "zzz-hp:skill:all-dodge-ms4e5xea"
+    // 路径一：调用方保留的普攻分类标签与独立结算契约冲突，拂晓生花
+    // 两件套原本会因此给出 15% 普攻增伤（合法输入不受影响）。
+    const borrowedByTag = calculateStaticDamageFromCatalog(
+      withDawnsBloom(clawInput({ skillTags: ["zzz-hp:category:basic"] })),
+    )
+    expect(borrowedByTag.ok).toBe(false)
+    if (!borrowedByTag.ok)
+      expect(
+        borrowedByTag.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.message.includes("zzz-hp:category:basic"),
+        ),
+        JSON.stringify(borrowedByTag.issues),
+      ).toBe(true)
+    // 对照：合法独立命中不受影响，也不额外吃两件套普攻增伤
+    const legalClaw = calculateCatalogResult(withDawnsBloom(clawInput({})))
+    expect(legalClaw.factors.nonCritical.baseDamage).toBeCloseTo(
+      calculateCatalogResult(clawInput({})).factors.nonCritical.baseDamage!,
+      6,
+    )
+    // 路径二：合法全局目标展开出 dodge 分类，猫又额外能力因此给出 35% 增伤
+    const borrowedByTarget = calculateStaticDamageFromCatalog({
+      ...clawInput({ skillTargetIds: [clawTarget, globalDodgeTarget] }),
+      selections: [
+        ...clawInput({}).selections,
+        {
+          optionId: extraAbilityOption,
+          bindingId: "binding:static",
+          layers: 1,
+        },
+      ],
+    })
+    expect(borrowedByTarget.ok).toBe(false)
+    if (!borrowedByTarget.ok)
+      expect(
+        borrowedByTarget.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.message.includes("zzz-hp:category:dodge"),
+        ),
+        JSON.stringify(borrowedByTarget.issues),
+      ).toBe(true)
+    // 对照：普通命中保留多标签、多目标与分类别名，两件套普攻增伤仍为 1.15
+    const ordinary = agentInput("1021", []) as StaticCatalogDamageInput
+    const ordinaryMulti = withDawnsBloom({
+      ...ordinary,
+      hit: {
+        ...ordinary.hit,
+        skillTargetIds: [globalDodgeTarget],
+        skillTags: [
+          ...(ordinary.hit.skillTags ?? []),
+          "zzz-hp:category:basic",
+          "zzz-hp:skill:all-dodge-ms4e5xea",
+        ],
+      },
+    })
+    const ordinaryAlone = calculateCatalogResult(ordinary).nonCritical
+    expect(
+      calculateCatalogResult(ordinaryMulti).nonCritical / ordinaryAlone,
+    ).toBeCloseTo(1.15, 8)
+  })
+
+  it("reports illegal skill tag members with accurate paths instead of throwing", () => {
+    // 选中爪印（潜能 1、核心 7、独立分类要求、层数 1）后，非法标签成员在
+    // 分类解释前就按 /hit/skillTags/<index> 返回 INVALID_INPUT 错误 Result，
+    // 不在有效分类校验中抛 TypeError；JSON 序列化往返后同样可复现。
+    const withTags = (tags: readonly unknown[]) =>
+      ({
+        ...clawInput({}),
+        hit: {
+          ...clawInput({}).hit,
+          skillTags:
+            tags as unknown as StaticCatalogDamageInput["hit"]["skillTags"],
+        },
+      }) as StaticCatalogDamageInput
+    for (const [label, tags, pointer] of [
+      ["null", [null], "/hit/skillTags/0"],
+      ["number", [1], "/hit/skillTags/0"],
+      ["object", [{}], "/hit/skillTags/0"],
+      ["boolean", [false], "/hit/skillTags/0"],
+      ["empty string", [""], "/hit/skillTags/0"],
+      [
+        "legal tag followed by an illegal member",
+        ["zzz-hp:category:uncategorized", null],
+        "/hit/skillTags/1",
+      ],
+    ] as const) {
+      const result = calculateStaticDamageFromCatalog(withTags(tags))
+      expect(result.ok, label).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some(
+            (issue) =>
+              issue.code === "INVALID_INPUT" && issue.pointer === pointer,
+          ),
+          `${label}: ${JSON.stringify(result.issues)}`,
+        ).toBe(true)
+    }
+    // 对照：合法空数组与独立分类标签正常结算，攻击力 1000 → 300
+    for (const tags of [[], ["zzz-hp:category:uncategorized"]] as const)
+      expect(
+        calculateCatalogResult(withTags(tags)).factors.nonCritical.baseDamage,
+        JSON.stringify(tags),
+      ).toBeCloseTo(300, 6)
+    // 对照：未选中或零层时，非法标签仍由校验流程返回同一错误
+    for (const [label, input] of [
+      [
+        "unselected",
+        { ...withTags([null]), selections: [] } as StaticCatalogDamageInput,
+      ],
+      [
+        "zero layers",
+        {
+          ...withTags([null]),
+          selections: [
+            { optionId: clawOption, bindingId: "binding:static", layers: 0 },
+          ],
+        } as StaticCatalogDamageInput,
+      ],
+    ] as const) {
+      const result = calculateStaticDamageFromCatalog(input)
+      expect(result.ok, label).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some(
+            (issue) =>
+              issue.code === "INVALID_INPUT" &&
+              issue.pointer === "/hit/skillTags/0",
+          ),
+          `${label}: ${JSON.stringify(result.issues)}`,
+        ).toBe(true)
+    }
   })
 })

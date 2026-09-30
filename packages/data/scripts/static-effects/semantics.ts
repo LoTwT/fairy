@@ -87,7 +87,25 @@ export type SourceSemantics =
           | "standard-vortex"
         )[]
         readonly source: "holder-current" | "anomaly-source"
+        /** 仅 direct 模式：要求消费端输入的基础倍率为 0，实际倍率由关联规则贡献一次。 */
+        readonly requiredDirectMultiplier?: 0
+        /** 独立结算项要求的命中分类；命中借用其他分类时目录拒绝。 */
+        readonly requiredSkillCategory?: SkillCategory
         readonly originalAnomalyAttribute?: DamageElement
+      }
+      /** 记录属于核心被动的潜能分支时补充潜能门槛；未开启潜能（0）不可用。 */
+      readonly minimumPotential?: number
+      /**
+       * 独立命中契约：输出项作用声明的独立目标，规则条件只匹配该目标、
+       * 声明元素与伤害种类；目录同时登记该目标的 skillTargets 条目，
+       * 消费端以 skillTargetIds 显式选中。分类为项目采用的独立结算
+       * 契约，不能冒充原始游戏证据，须在 verification 中如实分层记录。
+       */
+      readonly independentHit?: {
+        readonly targetId: string
+        readonly category: SkillCategory
+        readonly element: DamageElement
+        readonly name: string
       }
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
@@ -170,6 +188,15 @@ const nekomataPotentialEvidence = [
     sha256: "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
   },
 ] as const
+
+/** 猫又潜能分支核心被动 1—7 行全文；爪印数值逐行核对。 */
+const nekomataClawMarkEvidence = (
+  [1021508, 1021509, 1021510, 1021511, 1021512, 1021513, 1021514] as const
+).map((row) => ({
+  path: "agents/1021/details.zh.json",
+  pointer: `/passive/level/${row}/desc/0`,
+  sha256: "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
+}))
 
 const pyroisEvidence = [
   {
@@ -296,10 +323,11 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       role: "base",
       allowedModes: ["direct"],
       source: "holder-current",
+      requiredDirectMultiplier: 0,
     },
     evidence: pyroisEvidence,
     verification:
-      "Nanoka 核心被动第 7 级确认：左分支[终结技：无拘剑势]重击命中[浸染]状态下的敌人时，额外造成等同于 900% 攻击力的伤害。+9 攻击倍率写入声明的独立左分支附加项（direct、holder-current、零初始倍率），由关联规则贡献一次实际倍率；浸染前提由调用方断言。",
+      "Nanoka 核心被动第 7 级确认：左分支[终结技：无拘剑势]重击命中[浸染]状态下的敌人时，额外造成等同于 900% 攻击力的伤害。+9 攻击倍率写入声明的独立左分支附加项（direct、holder-current、零初始倍率，实际倍率由关联规则贡献一次），预填非零倍率由目录拒绝；浸染前提由调用方断言。",
   },
   "agents/pyrois/mindscape/0/blk-legacy/eff-ms4m5tqw-4wvfng": {
     kind: "damage-item-targeting",
@@ -309,10 +337,11 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       role: "settlement",
       allowedModes: ["direct"],
       source: "holder-current",
+      requiredDirectMultiplier: 0,
     },
     evidence: pyroisEvidence,
     verification:
-      "Nanoka 核心被动第 7 级确认：右分支[终结技：永陷幽囚]重击命中失衡敌人触发效果，额外造成等同于 2250% 攻击力的伤害。+22.5 决算写入声明的独立结算项（role settlement、holder-current、零初始倍率），缺独立结算项时目录按既有契约拒绝；失衡前提由调用方断言。",
+      "Nanoka 核心被动第 7 级确认：右分支[终结技：永陷幽囚]重击命中失衡敌人触发效果，额外造成等同于 2250% 攻击力的伤害。+22.5 决算写入声明的独立结算项（role settlement、holder-current、零初始倍率，实际倍率由关联规则贡献一次），缺独立结算项或预填非零倍率时目录按既有契约拒绝；失衡前提由调用方断言。",
   },
   // 维琳娜：微域/广域气旋在来源中临时归入 special 大类，实际不属于任何类型。
   "agents/velina/mindscape/0/blk-legacy/legacy-team-anomalyReleaseMult": {
@@ -339,10 +368,19 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       role: "base",
       allowedModes: ["direct"],
       source: "holder-current",
+      requiredDirectMultiplier: 0,
+      requiredSkillCategory: "uncategorized",
     },
-    evidence: nekomataPotentialEvidence,
+    minimumPotential: 1,
+    independentHit: {
+      targetId: "nekomata-claw-mark",
+      category: "uncategorized",
+      element: "physical",
+      name: "超凶爪印",
+    },
+    evidence: nekomataClawMarkEvidence,
     verification:
-      "Nanoka 潜能分支 1—7 行（1021508—1021514）均明确：[肉球突袭]状态下自身攻击命中时触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害（1 秒冷却由调用方声明，不模拟）。爪印输出作用于声明身份的独立伤害项：attack 缩放、base、direct、holder-current、零初始倍率；不在普通动作上自动附加，也不借用触发招式的分类。",
+      "Nanoka 潜能分支 1—7 行（1021508—1021514，potential 节点 102100—102105）均明确：处于[肉球突袭]状态时，自身攻击命中触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害（1 秒冷却由调用方声明，不模拟）。爪印数值不随核心等级变化，按记录级证据开放核心 1—7（rank-evidence 以 nekomata:blk-legacy:mindscape:0:eff-ms4f47p3-p1s9yz 单独登记，不继承 60% 增伤只核实核心 7 的块级限制）。分类证据如实分层：固定 ZZZ-HP 与当前 Nanoka 文本证明额外物理伤害，但没有独立证明命中分类；uncategorized 与稳定目标身份是本项目采用的独立结算契约（具名差异 independent-hit-contract），不是原始游戏证据。命中须包含声明目标并以 uncategorized 分类显式结算，不借用触发招式的普攻/闪反分类；爪印项要求零初始倍率，30% 由关联规则贡献一次，普通动作组装不自动追加。",
   },
   "agents/nekomata/mindscape/0/blk-ms4f4rbb-id7p58/eff-ms4f4rbb-y2jon7": {
     kind: "potential-branch",

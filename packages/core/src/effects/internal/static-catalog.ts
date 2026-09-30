@@ -27,6 +27,7 @@ import {
   expectLiteral,
   expectNonEmptyString,
   expectObject,
+  isPlainObject,
   rejectUnknownFields,
 } from "./checks.ts"
 import { SKILL_CATEGORIES } from "./expression.ts"
@@ -56,6 +57,46 @@ const unavailableReasons = [
   "semantic-conflict",
   "formula-out-of-scope",
 ]
+
+/** 来源临时归类到求值分类别名的唯一映射；求值标签与并集条件共用。 */
+const SKILL_CATEGORY_GROUPS: Record<string, string> = {
+  "dash": "dodge",
+  "dodge-counter": "dodge",
+  "enhanced-special": "special",
+  "quick-assist": "assist",
+  "defensive-assist": "assist",
+  "evasive-assist": "assist",
+  "assist-follow-up": "assist",
+  "follow-up": "follow_up",
+}
+
+/**
+ * 命中在求值时实际携带的分类标签：原始分类（按来源别名归一）、调用方保留
+ * 的分类标签，以及合法技能目标展开出的分类与追加攻击标记。用于独立结算项
+ * 的最终分类校验；未知目标留给既有 MISSING_REFERENCE 报告，不在此重复报告。
+ */
+function effectiveSkillCategoryTags(
+  input: StaticCatalogDamageInput,
+  catalog: StaticEffectCatalog,
+): string[] {
+  const signature = input.hit.skillCategory
+  const tags = [
+    `zzz-hp:category:${SKILL_CATEGORY_GROUPS[signature] ?? signature}`,
+  ]
+  if (signature === "follow-up") tags.push("zzz-hp:follow-up")
+  for (const tag of input.hit.skillTags ?? [])
+    if (tag.startsWith("zzz-hp:category:") || tag === "zzz-hp:follow-up")
+      tags.push(tag)
+  const skillTargetIds = input.hit["skillTargetIds"]
+  if (Array.isArray(skillTargetIds))
+    for (const id of skillTargetIds) {
+      const target = catalog.skillTargets.find((t) => t.targetId === id)
+      if (!target) continue
+      tags.push(`zzz-hp:category:${target.category}`)
+      if (target.countsAsFollowUp) tags.push("zzz-hp:follow-up")
+    }
+  return tags
+}
 
 /** JSON 目录与 TypeScript 调用共享校验；不信任类型断言或未选中条目的引用。 */
 export function validateStaticCatalog(
@@ -168,18 +209,26 @@ export function validateStaticCatalog(
     const p = `/catalog/entities/${i}`,
       entity = expectObject(value, checks(p), "catalog entity")
     if (!entity) continue
+    // 补充溯源先确认对象与资源数组形状，再读取内部字段；
+    // 形状非法时仅报告错误，不继续解引用。
     const provenance = entity["supplementProvenance"]
-    if (
-      provenance !== undefined &&
-      (typeof provenance !== "object" ||
-        provenance === null ||
-        !Array.isArray((provenance as { resources?: unknown }).resources))
-    )
+    const provenanceRecord = isPlainObject(provenance)
+      ? (provenance as Record<string, unknown>)
+      : undefined
+    if (provenance !== undefined && provenanceRecord === undefined)
       collector.report(
         "INVALID_INPUT",
         `${p}/supplementProvenance`,
-        "Supplement provenance requires sourceId, version and resources",
+        "Supplement provenance must be a plain object with sourceId, version and resources",
       )
+    const resources =
+      provenanceRecord === undefined
+        ? undefined
+        : expectArray(
+            provenanceRecord["resources"],
+            checks(`${p}/supplementProvenance/resources`),
+            "provenance resources",
+          )
     rejectUnknownFields(
       entity,
       [
@@ -210,31 +259,23 @@ export function validateStaticCatalog(
         "A null upstreamId requires supplement provenance",
       )
     expectNonEmptyString(entity["name"], checks(`${p}/name`), "name")
-    if (provenance !== undefined && typeof provenance === "object") {
-      const record = provenance as Record<string, unknown>
+    if (provenanceRecord !== undefined) {
       for (const key of ["sourceId", "version"])
         expectNonEmptyString(
-          record[key],
+          provenanceRecord[key],
           checks(`${p}/supplementProvenance/${key}`),
           key,
         )
-      for (const [index, resource] of (
-        record["resources"] as readonly unknown[]
-      ).entries()) {
+      for (const [index, resource] of (resources ?? []).entries()) {
         const rp = `${p}/supplementProvenance/resources/${index}`
-        if (typeof resource !== "object" || resource === null) {
+        if (!isPlainObject(resource)) {
           collector.report("INVALID_INPUT", rp, "Expected a resource record")
           continue
         }
-        const resourceRecord = resource as Record<string, unknown>
-        expectNonEmptyString(
-          resourceRecord["path"],
-          checks(`${rp}/path`),
-          "path",
-        )
+        expectNonEmptyString(resource["path"], checks(`${rp}/path`), "path")
         if (
-          typeof resourceRecord["sha256"] !== "string" ||
-          !/^[a-f0-9]{64}$/.test(resourceRecord["sha256"])
+          typeof resource["sha256"] !== "string" ||
+          !/^[a-f0-9]{64}$/.test(resource["sha256"])
         )
           collector.report(
             "INVALID_INPUT",
@@ -750,6 +791,7 @@ export function validateStaticCatalog(
               "allowedModes",
               "source",
               "requiredDirectMultiplier",
+              "requiredSkillCategory",
               "originalAnomalyAttribute",
             ],
             checks(rp),
@@ -810,6 +852,17 @@ export function validateStaticCatalog(
               "INVALID_INPUT",
               `${rp}/requiredDirectMultiplier`,
               "Direct requirements must demand a zero initial multiplier",
+            )
+          if (
+            requirement["requiredSkillCategory"] !== undefined &&
+            !SKILL_CATEGORIES.includes(
+              requirement["requiredSkillCategory"] as never,
+            )
+          )
+            collector.report(
+              "INVALID_INPUT",
+              `${rp}/requiredSkillCategory`,
+              "Unknown required skill category",
             )
           if (
             requirement["originalAnomalyAttribute"] !== undefined &&
@@ -1065,8 +1118,22 @@ export function calculateStaticDamageFromCatalog(
     !damage
   )
     return failure(collector)
-  if (hit["skillTags"] !== undefined)
-    expectArray(hit["skillTags"], checks("/hit/skillTags"), "skill tags")
+  if (hit["skillTags"] !== undefined) {
+    const skillTags = expectArray(
+      hit["skillTags"],
+      checks("/hit/skillTags"),
+      "skill tags",
+    )
+    // 逐元素确认非空字符串：后续独立分类校验会读取这些标签，非法成员必须
+    // 在分类解释前按准确路径返回错误 Result，而不是在求值中抛裸异常。
+    if (skillTags !== undefined)
+      for (const [index, tag] of skillTags.entries())
+        expectNonEmptyString(
+          tag,
+          checks(`/hit/skillTags/${index}`),
+          "skill tag",
+        )
+  }
   expectLiteral(
     hit["skillCategory"],
     SKILL_CATEGORIES,
@@ -1411,6 +1478,7 @@ export function calculateStaticDamageFromCatalog(
         readonly allowedModes: readonly string[]
         readonly source?: "holder-current" | "anomaly-source"
         readonly requiredDirectMultiplier?: number
+        readonly requiredSkillCategory?: string
         readonly originalAnomalyAttribute?: string
       }[]) {
         const item = items.find((entry) => entry?.itemId === requirement.itemId)
@@ -1462,6 +1530,26 @@ export function calculateStaticDamageFromCatalog(
             p,
             `Independent damage item "${requirement.itemId}" must start from a zero multiplier; ${explain}`,
           )
+        if (requirement.requiredSkillCategory !== undefined) {
+          // 独立结算项按最终有效分类校验：原始分类、调用方保留的分类标签、
+          // 合法技能目标展开的分类与追加攻击标记都参与求值，任何与声明分类
+          // 不同的标签都按 CONTEXT_MISMATCH 拒绝，不静默丢弃冲突输入。
+          const required = requirement.requiredSkillCategory
+          const requiredTag = `zzz-hp:category:${
+            SKILL_CATEGORY_GROUPS[required] ?? required
+          }`
+          const conflict = effectiveSkillCategoryTags(input, catalog).find(
+            (tag) =>
+              tag !== requiredTag &&
+              !(tag === "zzz-hp:follow-up" && required === "follow-up"),
+          )
+          if (conflict)
+            collector.report(
+              "CONTEXT_MISMATCH",
+              p,
+              `Independent damage item "${requirement.itemId}" must settle as ${required}, but the hit carries ${conflict}; ${explain}`,
+            )
+        }
         const statSource = item.statSource as {
           entityId?: string
           snapshotId?: string
@@ -1612,18 +1700,8 @@ export function calculateStaticDamageFromCatalog(
     tags.add(`zzz-hp:category:${target.category}`)
     if (target.countsAsFollowUp) tags.add("zzz-hp:follow-up")
   }
-  const categoryGroups: Record<string, string> = {
-    "dash": "dodge",
-    "dodge-counter": "dodge",
-    "enhanced-special": "special",
-    "quick-assist": "assist",
-    "defensive-assist": "assist",
-    "evasive-assist": "assist",
-    "assist-follow-up": "assist",
-    "follow-up": "follow_up",
-  }
   tags.add(
-    `zzz-hp:category:${categoryGroups[input.hit.skillCategory] ?? input.hit.skillCategory}`,
+    `zzz-hp:category:${SKILL_CATEGORY_GROUPS[input.hit.skillCategory] ?? input.hit.skillCategory}`,
   )
   if (input.hit.skillCategory === "follow-up") tags.add("zzz-hp:follow-up")
   const lowDamage = { ...damage }
