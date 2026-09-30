@@ -3921,21 +3921,21 @@
         "actorId": "entity:holder",
         "targetId": "entity:enemy",
         "actionId": "action:oracle",
-        "skillCategory": "basic",
+        "skillCategory": "uncategorized",
         "element": "physical",
         "damageItems": [
           {
             "mode": "direct",
             "role": "base",
             "itemId": "nekomata:claw-mark",
-            "damageMultiplier": 20,
+            "damageMultiplier": 0,
             "stat": "attack",
             "statSource": {
               "entityId": "entity:holder"
             }
           }
         ],
-        "skillTargetIds": []
+        "skillTargetIds": ["zzz-hp:skill:nekomata-claw-mark"]
       },
       {
         "actorId": "entity:holder",
@@ -3988,7 +3988,7 @@
             "mode": "direct",
             "role": "base",
             "itemId": "pyrois:ult-left-extra",
-            "damageMultiplier": 20,
+            "damageMultiplier": 0,
             "stat": "attack",
             "statSource": {
               "entityId": "entity:holder"
@@ -4028,7 +4028,7 @@
             "mode": "direct",
             "role": "settlement",
             "itemId": "pyrois:ult-right-settlement",
-            "damageMultiplier": 20,
+            "damageMultiplier": 0,
             "stat": "attack",
             "statSource": {
               "entityId": "entity:holder"
@@ -5769,7 +5769,8 @@
           "eligible": true,
           "configuration": {
             "coreSkillLevel": 7,
-            "mindscapeRank": 0
+            "mindscapeRank": 0,
+            "potentialLevel": 1
           }
         }
       ],

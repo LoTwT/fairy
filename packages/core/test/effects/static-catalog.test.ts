@@ -5,6 +5,7 @@ import type {
   ContributionOperation,
   StaticCatalogDamageInput,
   StaticCatalogDamageItem,
+  StaticCatalogDamageItemRequirement,
   StaticCatalogVariant,
   StaticEffectCatalog,
 } from "../../src/effects/index.ts"
@@ -1223,4 +1224,154 @@ describe("catalog static calculation", () => {
         })
     },
   )
+
+  it("reports malformed supplement provenance with accurate paths instead of throwing", () => {
+    const base = fixture([contribution("base-multiplier-increase", 0.2)])
+    const withProvenance = (provenance: unknown) => ({
+      ...base,
+      catalog: {
+        ...base.catalog,
+        entities: [
+          {
+            ...base.catalog.entities[0]!,
+            ...(provenance === undefined
+              ? {}
+              : { supplementProvenance: provenance }),
+          },
+        ],
+      } as unknown as StaticEffectCatalog,
+    })
+    // 合法对照：来源、版本与资源摘要的原有检查保持通过
+    const valid = withProvenance({
+      sourceId: "nanoka-integrated",
+      version: "3.1",
+      resources: [
+        {
+          path: "agents/1021/details.zh.json",
+          sha256:
+            "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
+        },
+      ],
+    })
+    expect(calculateStaticDamageFromCatalog(valid).ok).toBe(true)
+    // null upstreamId 仍要求补充来源登记
+    const missingProvenance = {
+      ...base,
+      catalog: {
+        ...base.catalog,
+        entities: [{ ...base.catalog.entities[0]!, upstreamId: null }],
+      } as StaticEffectCatalog,
+    }
+    const unregistered = calculateStaticDamageFromCatalog(missingProvenance)
+    expect(unregistered.ok).toBe(false)
+    if (!unregistered.ok)
+      expect(
+        unregistered.issues.some(
+          (issue) =>
+            issue.code === "INVALID_INPUT" &&
+            issue.pointer === "/catalog/entities/0/upstreamId",
+        ),
+      ).toBe(true)
+    // 形状非法的登记返回带准确路径的错误 Result，不抛 TypeError
+    for (const [label, provenance, expectedPointer] of [
+      ["null", null, "/catalog/entities/0/supplementProvenance"],
+      ["empty object", {}, "/catalog/entities/0/supplementProvenance/sourceId"],
+      [
+        "non-array resources",
+        { sourceId: "nanoka-integrated", version: "3.1", resources: {} },
+        "/catalog/entities/0/supplementProvenance/resources",
+      ],
+      [
+        "malformed resource record",
+        {
+          sourceId: "nanoka-integrated",
+          version: "3.1",
+          resources: [null],
+        },
+        "/catalog/entities/0/supplementProvenance/resources/0",
+      ],
+      [
+        "bad resource digest",
+        {
+          sourceId: "nanoka-integrated",
+          version: "3.1",
+          resources: [{ path: "agents/1021/details.zh.json", sha256: "zz" }],
+        },
+        "/catalog/entities/0/supplementProvenance/resources/0/sha256",
+      ],
+    ] as const) {
+      const result = calculateStaticDamageFromCatalog(
+        withProvenance(provenance) as StaticCatalogDamageInput,
+      )
+      expect(result.ok, label).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some(
+            (issue) =>
+              issue.code === "INVALID_INPUT" &&
+              issue.pointer === expectedPointer,
+          ),
+          `${label}: ${JSON.stringify(result.issues)}`,
+        ).toBe(true)
+    }
+  })
+
+  it("enforces the declared hit category of an independent damage item", () => {
+    const input = fixture([contribution("base-multiplier-increase", 0.2)])
+    const requirement: StaticCatalogDamageItemRequirement = {
+      itemId: "independent",
+      stat: "attack",
+      role: "base",
+      allowedModes: ["direct"],
+      source: "holder-current",
+      requiredDirectMultiplier: 0,
+      requiredSkillCategory: "uncategorized",
+    }
+    const withItem = (skillCategory: string, category = requirement) => ({
+      ...changeVariant(input, {
+        damageItemRequirements: [category],
+      }),
+      hit: {
+        ...input.hit,
+        skillCategory: skillCategory as "basic",
+        damageItems: [
+          {
+            mode: "direct" as const,
+            role: "base" as const,
+            itemId: "independent",
+            damageMultiplier: 0,
+            stat: "attack" as const,
+            statSource: { entityId: "entity:attacker" },
+          },
+        ] as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+      },
+    })
+    // 独立结算契约：伤害项要求命中分类为 uncategorized
+    expect(calculateStaticDamageFromCatalog(withItem("uncategorized")).ok).toBe(
+      true,
+    )
+    const borrowed = calculateStaticDamageFromCatalog(withItem("basic"))
+    expect(borrowed.ok).toBe(false)
+    if (!borrowed.ok)
+      expect(
+        borrowed.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+      ).toBe(true)
+    // 未声明的分类值在目录校验阶段拒绝
+    const unknownCategory = calculateStaticDamageFromCatalog(
+      withItem("uncategorized", {
+        ...requirement,
+        requiredSkillCategory: "nope",
+      } as unknown as typeof requirement) as StaticCatalogDamageInput,
+    )
+    expect(unknownCategory.ok).toBe(false)
+    if (!unknownCategory.ok)
+      expect(
+        unknownCategory.issues.some(
+          (issue) =>
+            issue.code === "INVALID_INPUT" &&
+            issue.pointer ===
+              "/catalog/options/0/variants/0/damageItemRequirements/0/requiredSkillCategory",
+        ),
+      ).toBe(true)
+  })
 })

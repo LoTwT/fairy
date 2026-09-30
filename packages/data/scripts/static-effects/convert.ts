@@ -53,7 +53,8 @@ const rankEvidence: Readonly<
       evidence: {
         path: string
         pointer: string
-        rank: number
+        /** 被动等级行的等级元数据；天赋等无等级节点时省略。 */
+        rank?: number
         sha256: string
       }[]
       verification: string
@@ -608,6 +609,7 @@ function compile(
   record: SourceRecord,
   identity: SourceIdentity | null,
   effectId: EffectId,
+  declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][],
 ): { rule?: ContributionRule; variant: StaticCatalogVariant } {
   const e = record.normalized ?? record.raw,
     mapping = FIELD_MAPPINGS[e.stat]
@@ -620,10 +622,32 @@ function compile(
     record.rank === 1 &&
     record.blockId === "blk-legacy" &&
     ["legacy-team-reduceDefense", "eff-ms4lkt33-igdjwu"].includes(e.id)
+  // 核心档位证据按块登记并核对 rank 0 pack 内记录与对应等级说明全文；
+  // 同名块在其他影画 rank 是不同记录，默认不继承该核心门槛。影画效果
+  // 若确实依赖核心被动参数（比例强化、转换率或封顶变化），必须按记录级键
+  // entityId:blockId:rankKind:rank:effectId 单独登记：键存在即按自身证据的
+  // levels 施加门槛，其余影画记录保持固定增益。显式登记的影画强化核心
+  // （enhancesCissiaCore）按其证据继承核心等级限制。
+  const recordEvidenceKey = `${record.entityId}:${record.blockId}:${record.rankKind}:${record.rank}:${e.id}`
+  const mindscapeCoreDependency =
+    record.category === "agents" &&
+    record.rankKind === "mindscape" &&
+    record.rank >= 1
+      ? rankEvidence[recordEvidenceKey]
+      : undefined
+  const coreEvidenceScoped =
+    record.category === "agents" && (record.rank === 0 || enhancesCissiaCore)
+  const evidenceBlock = enhancesCissiaCore
+    ? "blk-ms4l86mv-s5y0rv"
+    : record.blockId
+  // 个别记录与同块其他记录的核心支持范围不同（如猫又爪印逐行核实 1—7，
+  // 而同块 60% 增伤只核实核心 7）：按记录级键优先，块级键回退。
   const proof =
-    rankEvidence[
-      `${record.entityId}:${enhancesCissiaCore ? "blk-ms4l86mv-s5y0rv" : record.blockId}`
-    ]
+    mindscapeCoreDependency ??
+    (coreEvidenceScoped
+      ? (rankEvidence[recordEvidenceKey] ??
+        rankEvidence[`${record.entityId}:${evidenceBlock}`])
+      : undefined)
   // 核心被动按块名判定；此前硬编码的 jane/lucia/lucy 兼容块并非核心被动，
   // 其语义（显式状态选择、特殊技等级表达式）改由 SOURCE_SEMANTICS 登记。
   const coreDependent =
@@ -997,7 +1021,10 @@ function compile(
       ? semantics.minimumPotential
       : semantics?.kind === "potential-level"
         ? semantics.minimumPotential
-        : undefined
+        : semantics?.kind === "damage-item-targeting" &&
+            semantics.minimumPotential !== undefined
+          ? semantics.minimumPotential
+          : undefined
   let when = whenFor(e, mapping)
   if (semantics?.kind === "stagger-recovery-settlement") {
     // 移除 applySituation: stagger 带来的 targetState 条件；
@@ -1035,6 +1062,15 @@ function compile(
     } as unknown as typeof operation
     variant = {
       ...variant,
+      ...(semantics.minimumPotential === undefined
+        ? {}
+        : {
+            configuration: {
+              ...variant.configuration,
+              potentialLevels: [1, 2, 3, 4, 5, 6] as PotentialLevel[],
+            },
+            differences: [...variant.differences, "potential-branch-gate"],
+          }),
       damageItemRequirements: [
         {
           itemId: requirement.itemId,
@@ -1047,6 +1083,14 @@ function compile(
             : {
                 originalAnomalyAttribute: requirement.originalAnomalyAttribute,
               }),
+          ...(requirement.requiredDirectMultiplier === undefined
+            ? {}
+            : {
+                requiredDirectMultiplier: requirement.requiredDirectMultiplier,
+              }),
+          ...(requirement.requiredSkillCategory === undefined
+            ? {}
+            : { requiredSkillCategory: requirement.requiredSkillCategory }),
         },
       ],
       references: [
@@ -1055,6 +1099,43 @@ function compile(
           nanokaReference(ref.path, ref.pointer),
         ),
       ],
+    }
+    if (semantics.independentHit) {
+      // 独立命中契约：规则只匹配声明的独立目标、证据元素与既有伤害种类，
+      // 普通动作上下文（不含该目标）不能借用独立项；目录同时登记目标条目。
+      // 来源 elementFilter 已注入的元素条件不重复追加。
+      const independentHit = semantics.independentHit
+      const conditions = when.kind === "all" ? when.conditions : [when]
+      const hasElementCondition = conditions.some(
+        (condition) =>
+          condition.kind === "one-of" &&
+          condition.fact === "hit.element" &&
+          condition.values.length === 1 &&
+          condition.values[0] === independentHit.element,
+      )
+      when = {
+        kind: "all",
+        conditions: [
+          ...conditions,
+          oneOf("hit.skillTag", [`zzz-hp:skill:${independentHit.targetId}`]),
+          ...(hasElementCondition
+            ? []
+            : [oneOf("hit.element", [independentHit.element])]),
+        ],
+      }
+      variant = {
+        ...variant,
+        differences: [...variant.differences, "independent-hit-contract"],
+      }
+      if (identity)
+        declaredSkillTargets.push({
+          targetId: `zzz-hp:skill:${independentHit.targetId}`,
+          upstreamId: null,
+          agentEntityId: identity.entityId,
+          category: independentHit.category,
+          name: independentHit.name,
+          countsAsFollowUp: false,
+        })
     }
   }
   if (
@@ -1111,7 +1192,8 @@ export function convertSource(
   const collected = collectSource(data, functions),
     effects: EffectRule[] = [],
     options: StaticCatalogOption[] = [],
-    coverage: CoverageRecord[] = []
+    coverage: CoverageRecord[] = [],
+    declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][] = []
   const groups = new Map<string, SourceRecord[]>()
   for (const record of collected.records) {
     const pack =
@@ -1139,7 +1221,12 @@ export function convertSource(
             ? "w-engine"
             : "disc"
       const effectId: EffectId = `${prefix}:${entity.identity?.entityId ?? "unmatched"}:zzz-hp:${idPart(record.raw.id)}:${idPart(record.blockId)}:${record.rankKind}:${record.rank}`
-      const compiled = compile(record, entity.identity, effectId)
+      const compiled = compile(
+        record,
+        entity.identity,
+        effectId,
+        declaredSkillTargets,
+      )
       if (compiled.rule) effects.push(compiled.rule)
       variants.push({
         ...compiled.variant,
@@ -1434,7 +1521,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "5",
+    revision: "6",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1470,6 +1557,11 @@ export function convertSource(
         name: `${rule.agentId} ${rule.categoryId} 追加攻击`,
         countsAsFollowUp: true,
       })
+  // 语义登记的独立命中目标（如猫又[超凶爪印]）：不是来源技能（upstreamId
+  // 为 null），仅供消费端在 hit.skillTargetIds 中显式选中独立结算。
+  for (const target of declaredSkillTargets)
+    if (!skillTargets.some((t) => t.targetId === target.targetId))
+      skillTargets.push(target)
   const catalog: StaticEffectCatalog = {
     schemaVersion: 1,
     ruleSetId: definitions.ruleSetId,
@@ -1502,10 +1594,23 @@ export function convertSource(
       {
         differenceId: "potential-branch-gate",
         explanation:
-          "猫又的 60% 增伤记录与额外能力（猫步秀）记录实际对应核心被动的潜能分支（Nanoka passive 节点 potential 为 102100—102105）：补充潜能门槛，未开启潜能时不可用；普通分支（potential [0]）由 Nanoka 补充变体单独登记，两个分支条件不并集。",
+          "猫又的 60% 增伤记录、额外能力（猫步秀）记录与[超凶爪印]独立项实际对应核心被动的潜能分支（Nanoka passive 节点 potential 为 102100—102105）：补充潜能门槛，未开启潜能时不可用；普通分支（potential [0]）由 Nanoka 补充变体单独登记，两个分支条件不并集。",
         references: [
           reference("/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+          reference("/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/1"),
           reference("/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"),
+        ],
+      },
+      {
+        differenceId: "independent-hit-contract",
+        explanation:
+          "猫又[超凶爪印]的额外物理伤害由固定 ZZZ-HP 与当前 Nanoka 同版文本证明，但两处来源都没有独立的命中分类证据。目录为爪印登记稳定独立目标 zzz-hp:skill:nekomata-claw-mark（upstreamId 为 null），规则只匹配该目标、物理元素与直伤种类；爪印伤害项要求本次命中分类为 uncategorized、基础倍率为 0，实际倍率由关联规则贡献一次。uncategorized 与独立目标身份是本项目采用的独立结算契约，不是原始游戏证据；普通攻击命中的组装保持原行为，不自动追加爪印，也不模拟触发冷却。",
+        references: [
+          reference("/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/1"),
+          nanokaReference(
+            "agents/1021/details.zh.json",
+            "/passive/level/1021514/desc/0",
+          ),
         ],
       },
       {

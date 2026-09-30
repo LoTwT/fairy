@@ -9,7 +9,55 @@
         "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
       }
     ],
-    "verification": "核心被动第 7 级（1021514，潜能分支）说明与来源块全文一致：闪反/快速支援命中后伤害提升 60%、持续 40 秒；攻击命中触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害。潜能分支节点 potential 为 102100—102105，普通分支（potential [0]）由补充变体单独登记"
+    "verification": "核心被动第 7 级（1021514，潜能分支）说明与来源块全文一致：闪反/快速支援命中后伤害提升 60%、持续 40 秒；攻击命中触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害。潜能分支节点 potential 为 102100—102105，普通分支（potential [0]）由补充变体单独登记；块级证据只核实 60% 增伤（数值随核心等级 30%—60% 变化），爪印记录另行按记录级证据登记"
+  },
+  "nekomata:blk-legacy:mindscape:0:eff-ms4f47p3-p1s9yz": {
+    "levels": [1, 2, 3, 4, 5, 6, 7],
+    "evidence": [
+      {
+        "rank": 1,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021508/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      },
+      {
+        "rank": 2,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021509/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      },
+      {
+        "rank": 3,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021510/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      },
+      {
+        "rank": 4,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021511/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      },
+      {
+        "rank": 5,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021512/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      },
+      {
+        "rank": 6,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021513/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      },
+      {
+        "rank": 7,
+        "path": "agents/1021/details.zh.json",
+        "pointer": "/passive/level/1021514/desc/0",
+        "sha256": "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e"
+      }
+    ],
+    "verification": "潜能分支 1—7 行（1021508—1021514）逐行核对：处于[肉球突袭]状态时攻击命中触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害，数值不随核心等级变化；本记录级键只覆盖 eff-ms4f47p3-p1s9yz（爪印），不放宽同块 60% 增伤只核实核心 7 的限制"
   },
   "pyrois:blk-legacy": {
     "levels": [7],
@@ -453,7 +501,24 @@
         "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
       }
     ],
-    "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
+    "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致；该块级证据只核对其 rank 0 记录，影画记录的核心依赖按记录级键单独登记"
+  },
+  "caesar:blk-legacy:mindscape:2:legacy-team-atk": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071507/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      },
+      {
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/talent/2/desc",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      }
+    ],
+    "verification": "影画 2 的攻击增益是核心被动[坚韧之壁]攻击力提升效果的比例强化：天赋 2（提升至原本的 150%）与核心第 7 级说明全文（+1000 点）共同给出 +500；核心 6 的 900 需要 450，其他等级的对应值未建模，故只开放核心 7，其余等级按 MISSING_RANK 拒绝"
   },
   "caesar:blk-ms20kmz0-qcb0h3": {
     "levels": [1, 2, 3, 4, 5, 6, 7],
@@ -1485,7 +1550,24 @@
         "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
       }
     ],
-    "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
+    "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致；该块级证据只核对其 rank 0 记录，影画记录的核心依赖按记录级键单独登记"
+  },
+  "panyinhu:blk-legacy:mindscape:6:legacy-team-pierce": {
+    "levels": [7],
+    "evidence": [
+      {
+        "rank": 7,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421507/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      },
+      {
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/talent/6/desc",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      }
+    ],
+    "verification": "影画 6 的[通窍]强化同时改变核心被动的转换率与总上限：天赋 6（+6 个百分点、上限 720）与核心第 7 级说明全文（18%、上限 540）共同给出 min(初始攻击 ×6%, 180)；核心 6 的 16.5%（真实增量 192）等其他档位未建模，故只开放核心 7，其余等级按 MISSING_RANK 拒绝"
   },
   "panyinhu:blk-ms20ft7a-s9mtkd": {
     "levels": [1, 2, 3, 4, 5, 6, 7],

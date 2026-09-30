@@ -130,5 +130,6 @@ export type {
   StaticCatalogUnavailableReason,
   StaticCatalogDamageInput,
   StaticCatalogDamageItem,
+  StaticCatalogDamageItemRequirement,
   StaticCatalogDamageParameters,
 } from "./types.ts"
