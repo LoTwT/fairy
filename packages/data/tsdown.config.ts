@@ -57,6 +57,19 @@ export default defineConfig(async (options) => {
         "../.generated/browser-catalog.ts",
       ),
     )
+    // 私有 tsconfig：include 与相对导入都解析到本次构建的副本，
+    // 类型处理不得跟随包目录下 typecheck 生成的 .generated。
+    await writeFile(
+      join(buildDirectory, "tsconfig.build.json"),
+      `${JSON.stringify(
+        {
+          extends: "../tsconfig.build.json",
+          include: ["src/**/*.ts"],
+        },
+        null,
+        2,
+      )}\n`,
+    )
   } catch (error) {
     await rm(buildDirectory, { recursive: true, force: true })
     throw error
@@ -68,7 +81,7 @@ export default defineConfig(async (options) => {
 
   return {
     cwd: buildDirectory,
-    tsconfig: join(packageDirectory, "tsconfig.build.json"),
+    tsconfig: join(buildDirectory, "tsconfig.build.json"),
     clean: true,
     dts: { eager: true },
     entry: {
