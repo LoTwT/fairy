@@ -388,6 +388,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [0],
       "source": {
         "path": "agents/1381/details.zh.json",
         "pointer": "/skill/basic/description/2/param/2"
@@ -416,16 +417,32 @@
         "growth": 0.033
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1381:action:0008:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1381:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.801,
+                  "growth": 0.073
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-s0anby-nk-1381003-三段"
     },
     {
@@ -437,6 +454,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1381/details.zh.json",
         "pointer": "/skill/basic/description/2/param/3"
@@ -465,16 +483,32 @@
         "growth": 0.035
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1381:action:0009:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1381:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.001,
+                  "growth": 0.091
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-s0anby-nk-1381003-三段"
     },
     {
@@ -679,10 +713,17 @@
       "rowName": "伤害倍率",
       "levelGroup": "chain",
       "skillCategory": "chain",
-      "skillTargetIds": [
-        "zzz-hp:follow-up-rule:fu-s0anby-chain-whole-ms0bpedc"
-      ],
+      "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [0, 1, 2, 3, 4, 5, 6],
+      "conditionalIdentity": {
+        "potentialLevels": [1, 2, 3, 4, 5, 6],
+        "requiresAdditionalAbilityActive": true,
+        "skillTargetIds": [
+          "zzz-hp:follow-up-rule:fu-s0anby-chain-whole-ms0bpedc"
+        ],
+        "skillTags": ["zzz-hp:follow-up"]
+      },
       "source": {
         "path": "agents/1381/details.zh.json",
         "pointer": "/skill/chain/description/2/param/0"
@@ -731,6 +772,7 @@
       },
       "inputs": [],
       "limitations": [
+        "仅潜能 1 起且调用方显式断言额外能力生效时，[连携技]与[终结技]视为[追加攻击]并携带对应目标身份；未断言、潜能 0 或队伍条件未核实时保持原类别，不自动推断队伍构成。",
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
       "upstreamSkillId": "sk-s0anby-nk-1381014-main"
@@ -742,10 +784,17 @@
       "rowName": "伤害倍率",
       "levelGroup": "chain",
       "skillCategory": "ultimate",
-      "skillTargetIds": [
-        "zzz-hp:follow-up-rule:fu-s0anby-ultimate-whole-ms0bpbx8"
-      ],
+      "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [0, 1, 2, 3, 4, 5, 6],
+      "conditionalIdentity": {
+        "potentialLevels": [1, 2, 3, 4, 5, 6],
+        "requiresAdditionalAbilityActive": true,
+        "skillTargetIds": [
+          "zzz-hp:follow-up-rule:fu-s0anby-ultimate-whole-ms0bpbx8"
+        ],
+        "skillTags": ["zzz-hp:follow-up"]
+      },
       "source": {
         "path": "agents/1381/details.zh.json",
         "pointer": "/skill/chain/description/3/param/0"
@@ -794,6 +843,7 @@
       },
       "inputs": [],
       "limitations": [
+        "仅潜能 1 起且调用方显式断言额外能力生效时，[连携技]与[终结技]视为[追加攻击]并携带对应目标身份；未断言、潜能 0 或队伍条件未核实时保持原类别，不自动推断队伍构成。",
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
       "upstreamSkillId": "sk-s0anby-nk-1381015-main"
@@ -1177,6 +1227,7 @@
       "skillCategory": "special",
       "skillTargetIds": ["zzz-hp:skill:s0anby-special-ms0brhgw"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1381/details.zh.json",
         "pointer": "/skill/special/description/8/param/0"
@@ -1201,16 +1252,32 @@
         "growth": 0.044
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1381:action:0022:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1381:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 2.494,
+                  "growth": 0.227
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-s0anby-nk-1381023-main"
     },
     {

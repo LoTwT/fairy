@@ -785,9 +785,10 @@
       "name": "残心·散华",
       "rowName": "伤害倍率",
       "levelGroup": "chain",
-      "skillCategory": null,
+      "skillCategory": "ultimate",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1201/details.zh.json",
         "pointer": "/skill/chain/description/5/param/0"
@@ -812,20 +813,32 @@
         "growth": 0.015
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-          },
-          {
-            "code": "unknown-category",
-            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+            "segmentId": "action:agent:1201:action:0016:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 2.365,
+                  "growth": 0.215
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-harumasa-nk-1201024-main"
     },
     {
@@ -1160,9 +1173,10 @@
       "name": "逐雷",
       "rowName": "额外伤害倍率",
       "levelGroup": "dodge",
-      "skillCategory": "follow-up",
+      "skillCategory": "dodge",
       "skillTargetIds": ["zzz-hp:skill:harumasa-dodge-ms4gwjug"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1201/details.zh.json",
         "pointer": "/skill/dodge/description/8/param/0"
@@ -1178,16 +1192,32 @@
       },
       "dazeCoefficient": null,
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1201:action:0022:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0022:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.412,
+                  "growth": 0.038
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-harumasa-nk-1201025-额外"
     },
     {
@@ -1321,6 +1351,7 @@
       "skillCategory": "enhanced-special",
       "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1201/details.zh.json",
         "pointer": "/skill/special/description/5/param/0"
@@ -1345,16 +1376,32 @@
         "growth": 0.212
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1201:action:0025:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1201:action:0025:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.131,
+                  "growth": 0.467
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-harumasa-nk-1201023-main"
     }
   ]

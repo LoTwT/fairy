@@ -535,18 +535,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "888efa28005404a0015be5a43fb00b27a502fc585a2841de04f291a735d4fde1",
+    "sourceSignature": "2407ab8de785a54eb4eb90eb128d696c05d4536e5ef505bdd532df9c81db5a23",
     "skillCategory": "dodge-counter",
     "element": "physical",
     "damageKind": "regular",
     "upstreamSkillId": "sk-nekomata-nk-1021019-main",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1021:action:0017",
@@ -1216,18 +1212,14 @@
     "rowIndex": 4,
     "rowKind": "damage",
     "dazeRowIndex": 11,
-    "sourceSignature": "109f4a72458da2c3d0aa5a0718c3d479c8d522b141187f89ade471c49c477159",
+    "sourceSignature": "4e3f55fee857078e89d6dfc380b90f5e5d43f4b2b4100d852587b8a7d2721ce1",
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-soldier11-nk-1041024-五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1041:action:0015",
@@ -1238,18 +1230,14 @@
     "rowIndex": 5,
     "rowKind": "damage",
     "dazeRowIndex": 12,
-    "sourceSignature": "3dc5ea48ca6e70eaeeacb7b172bf8f2134e5b5e855ca43328706c040081f77d5",
+    "sourceSignature": "505bc189a681d9bb45e37ee504f3ea84d007d7b385b4197a210fda88beaa8333",
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-soldier11-nk-1041025-强化普攻第五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1041:action:0016",
@@ -1260,18 +1248,14 @@
     "rowIndex": 6,
     "rowKind": "damage",
     "dazeRowIndex": null,
-    "sourceSignature": "bbb5e047bd6f029c44c3e64d453f732e94abdc348d87cffb151c00c2c48adae8",
+    "sourceSignature": "99cc272bac088ac6cc6ccd6a2b6d1f803fe14e3a156969bf06a9391cb7f59e17",
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-soldier11-nk-1041026-强化普攻第五段额外",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1041:action:0017",
@@ -1282,18 +1266,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "9701186ad59e7f904562deaec5f453563d760cfba89c2f048365429903d79c45",
+    "sourceSignature": "05882ebd60bb743a400d53c7961d0edf4c2ef2b60f761bbf9605ce2380fab335",
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-soldier11-nk-1041027-普通攻击-火力迸发",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1041:action:0018",
@@ -4773,18 +4753,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "25c2cfe8fdde291a973e7b408f2b2db8a28eaa8d4af67dc4f649cf454fee0e48",
+    "sourceSignature": "d7d6b22c86fbaa4bcd64200da13a304497d26d4b049488d1754dd13ea04673c0",
     "skillCategory": "assist-follow-up",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lycaon-nk-1141027-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1141:action:0007",
@@ -6508,24 +6484,19 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "703d54e42aeb1a1d3fa66d82df654fce8404d39e6552a0c4285afb8896f44177",
+    "sourceSignature": "6c3f82c45633073abda9c1c1ca4ac49e4f0142ebb303ba244b08c6af9b418094",
     "skillCategory": "enhanced-special",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171026-main",
     "skillTargetIds": [
       "zzz-hp:skill:all-special-ms0fcqv7",
       "zzz-hp:skill:burnice-special-ms4ncv27"
     ],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      },
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6],
+    "limitations": [
+      "来源描述同时提及物理与火属性；本目录按 ZZZ-HP 单属性约定将整条记作火伤，不拆分混合命中，也不推断属性分配。"
     ]
   },
   {
@@ -6783,22 +6754,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": null,
-    "sourceSignature": "7c2a51be4f9ab4d854afd4939dd8386128df29bce6342507b45fcff98480a7d5",
-    "skillCategory": null,
+    "sourceSignature": "74cbfc0d0251cd8c79b6c876371e23148cd63eb953f61292f5090118fcd354ae",
+    "skillCategory": "special",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181020-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      },
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1181:action:0015",
@@ -6809,17 +6772,16 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "c58c3514ac41ad8f449b20dd8159d808b9955bb0756ff1bb2e7228a4f418bb6e",
+    "sourceSignature": "ad972c3702e5bcb2e10a0a723d4432b166594d0eab901defea1b2b808e324245",
     "skillCategory": "special",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181018-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6],
+    "limitations": [
+      "来源整式为 29 次投掷循环合计；本行按完整原式 ÷29 的单次近似保留 aggregate 粒度，未确认逐次命中拆分与逐次增益差异。"
     ]
   },
   {
@@ -6831,22 +6793,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": null,
-    "sourceSignature": "80a269adbfb2031a092dad3a997f2c35ed616ab9e1cb6299dd1c394b484a3df9",
-    "skillCategory": null,
+    "sourceSignature": "21f02d3b08634e1af9687462c4dd2aeb5175e6df10ccd1fd8731633f4a1d9587",
+    "skillCategory": "special",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181019-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      },
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1191:action:0001",
@@ -7044,18 +6998,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 2,
-    "sourceSignature": "7269cd509db8938f7caa72ba30be9a4bfe016d98cc23c081039400e13e0fc8ff",
+    "sourceSignature": "f819c6efac2b27ecc20dd27adbef47046285bd677180107c408dfb4231eec068",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-ellen-nk-1191029-一段",
     "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4fu3ym"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1191:action:0013",
@@ -7066,18 +7016,14 @@
     "rowIndex": 1,
     "rowKind": "damage",
     "dazeRowIndex": 3,
-    "sourceSignature": "8df0dfdfb812408bd49ab972c66d0fd9aa080d87fc30b44f58060500af752bf9",
+    "sourceSignature": "e8648c53cd39df59151118f89ff17c45305058fe00ebcf783182403d05249e23",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-ellen-nk-1191030-二段",
     "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4fu3ym"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1191:action:0014",
@@ -7088,18 +7034,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 3,
-    "sourceSignature": "b931cf4d72c558aeff66c1c22d083232327e530d0c88b03417c8e6e1a28cea4d",
+    "sourceSignature": "2b0199e483d0c52413d51a079610420760b3de2c17664f668392b095d935bd4f",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-ellen-nk-1191027-对小体型敌人",
     "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1191:action:0015",
@@ -7110,18 +7052,14 @@
     "rowIndex": 1,
     "rowKind": "damage",
     "dazeRowIndex": 4,
-    "sourceSignature": "e8076e2003b211044afc4f75cb565e7b17b0c97cfe1d52a176703227dc7e60e7",
+    "sourceSignature": "4c6b380b091fa19875c0b43f0293fe33bd9561cd1c00dd5604cf15ef18453cfe",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-ellen-nk-1191027-对中体型敌人",
     "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1191:action:0016",
@@ -7132,18 +7070,14 @@
     "rowIndex": 2,
     "rowKind": "damage",
     "dazeRowIndex": 5,
-    "sourceSignature": "cb056e0055401a4ff5659fd6e08ea3ecd31ea333d33f7bc2370b903747f17e32",
+    "sourceSignature": "0d3bdf47620a924870c3f8317375f88f99cd3c96211e6470ececd3a252e6226b",
     "skillCategory": "basic",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-ellen-nk-1191027-对大体型敌人",
     "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1191:action:0017",
@@ -7630,22 +7564,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "379c6fd39afbdead6dfb3e91e0d6552ecaf640e3e3f2954b21387a5882bb35a7",
-    "skillCategory": null,
+    "sourceSignature": "25c700490577ac4ab45f1a6049791e5d1ac9481af328d54b81100fd7f59f92db",
+    "skillCategory": "ultimate",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201024-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      },
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1201:action:0017",
@@ -7750,18 +7676,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": null,
-    "sourceSignature": "d4001ec2d88f576ef2ab3aac9c4651106c8f4fd8efcf73f5ac2bae19c9b49bf1",
-    "skillCategory": "follow-up",
+    "sourceSignature": "6463a86d4a19b32e90d2ecda2550de15762f79f58e55148b419746c8e7941f2c",
+    "skillCategory": "dodge",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201025-额外",
     "skillTargetIds": ["zzz-hp:skill:harumasa-dodge-ms4gwjug"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1201:action:0023",
@@ -7806,18 +7728,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "077f635ecff6975ffd84c2322c2d295d9e9762fc8cee93826d136b3b17dc06c0",
+    "sourceSignature": "8819708856dd168a2e5af31c2fc964df8c8a681410f7349d7bc5fce45633cbc6",
     "skillCategory": "enhanced-special",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201023-main",
     "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1211:action:0001",
@@ -7967,25 +7885,16 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 3,
-    "sourceSignature": "87509741a08294c179f262875fdb02449bae40580f5d6b6e98592d58fcaa9c53",
+    "sourceSignature": "84ee0590bebc9b2dedf740ec6484aa737089de916785ec272032381280774120",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211023-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      },
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      },
-      {
-        "code": "special-mechanic",
-        "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
-      }
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6],
+    "limitations": [
+      "杜苏拉与安娜塔莎的攻击按丽娜自身当前静态面板及显式适用增益整条计算；不建立独立木偶 actor、不继承角色属性、不模拟锁面板。来源描述中的物理与电混合伤害按电伤整条处理，保留来源冲突说明。"
     ]
   },
   {
@@ -7997,25 +7906,16 @@
     "rowIndex": 1,
     "rowKind": "damage",
     "dazeRowIndex": 4,
-    "sourceSignature": "0efac89e6821bee7f3cd26e4181730bec3a18c0751ad33520c318eaf9bfda026",
+    "sourceSignature": "5b989c5d366a736b51a33e1f8f72a653995ba8166932248f810156e5628d580f",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211024-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      },
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      },
-      {
-        "code": "special-mechanic",
-        "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
-      }
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6],
+    "limitations": [
+      "杜苏拉与安娜塔莎的攻击按丽娜自身当前静态面板及显式适用增益整条计算；不建立独立木偶 actor、不继承角色属性、不模拟锁面板。来源描述中的物理与电混合伤害按电伤整条处理，保留来源冲突说明。"
     ]
   },
   {
@@ -8027,25 +7927,16 @@
     "rowIndex": 2,
     "rowKind": "damage",
     "dazeRowIndex": 5,
-    "sourceSignature": "486aa507b06ab4a432a1f118d0e35a8194e21fbb9ec4ad07bb046de0433b749b",
+    "sourceSignature": "de37b061dca25b3de601c946cacfeba867ab1bc3959f5969d6be806f50c86d39",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211025-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      },
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      },
-      {
-        "code": "special-mechanic",
-        "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
-      }
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6],
+    "limitations": [
+      "杜苏拉与安娜塔莎的攻击按丽娜自身当前静态面板及显式适用增益整条计算；不建立独立木偶 actor、不继承角色属性、不模拟锁面板。来源描述中的物理与电混合伤害按电伤整条处理，保留来源冲突说明。"
     ]
   },
   {
@@ -8057,18 +7948,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "9641cd3bc8c173dbf3d78462c516d4651dd6e3089e234b74c9371effb17bd5d4",
+    "sourceSignature": "d0b83b55ce792e4d8b386ff77a38c87899a78d5f4f8aa9a9f4eb91ccc4d857ca",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211027-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1211:action:0012",
@@ -9579,12 +9466,8 @@
     "damageKind": "regular",
     "upstreamSkillId": "sk-jane-nk-1261007-连续攻击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [0]
   },
   {
     "actionId": "action:agent:1261:action:0014",
@@ -9595,18 +9478,14 @@
     "rowIndex": 1,
     "rowKind": "damage",
     "dazeRowIndex": 4,
-    "sourceSignature": "34751a985381c371f11bd78bf63675caa640081f13a16909af539aa9ca974daf",
+    "sourceSignature": "4450187ffabd2da838f143a55c195d43c276c5c8fe77fc673ebae33c06305ceb",
     "skillCategory": "basic",
     "element": "physical",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jane-nk-1261007-连续攻击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1261:action:0015",
@@ -9804,18 +9683,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "ac4ec15c0761c7972f86caab16c1cccfd3e1357828757533641f7c679097a252",
+    "sourceSignature": "0736971dab4196b2af9f6c0cf362cfd9dfb6717dd09f904f2101bf132266852e",
     "skillCategory": "enhanced-special",
     "element": "physical",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jane-nk-1261031-main",
     "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1271:action:0001",
@@ -13930,12 +13805,8 @@
     "damageKind": "regular",
     "upstreamSkillId": "sk-s0anby-nk-1381003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [0]
   },
   {
     "actionId": "action:agent:1381:action:0009",
@@ -13946,18 +13817,14 @@
     "rowIndex": 3,
     "rowKind": "damage",
     "dazeRowIndex": 10,
-    "sourceSignature": "ab00e8491612d86619b40ddb58a503dea3a7a81d06ef1eb985ba1701f91bebfa",
+    "sourceSignature": "06acc495869c92e3c7794b120898465bb37af250759925e724198e000d596cf2",
     "skillCategory": "basic",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-s0anby-nk-1381003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1381:action:0010",
@@ -14019,13 +13886,34 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "d030786c1f65c62ef00301bb59c5552bd4d22410db84f50214fe1b42dcb2a727",
+    "sourceSignature": "13cb78c082f2fd8916aab65628cc179a79f5b75cd8842f95ce94cb58b91e90f7",
     "skillCategory": "chain",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-s0anby-nk-1381014-main",
-    "skillTargetIds": ["zzz-hp:follow-up-rule:fu-s0anby-chain-whole-ms0bpedc"],
-    "issues": []
+    "skillTargetIds": [],
+    "issues": [],
+    "potentialLevels": [0, 1, 2, 3, 4, 5, 6],
+    "conditionalIdentity": {
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-s0anby-chain-whole-ms0bpedc"
+      ],
+      "skillTags": ["zzz-hp:follow-up"]
+    },
+    "limitations": [
+      "仅潜能 1 起且调用方显式断言额外能力生效时，[连携技]与[终结技]视为[追加攻击]并携带对应目标身份；未断言、潜能 0 或队伍条件未核实时保持原类别，不自动推断队伍构成。"
+    ],
+    "relatedPassiveEvidence": [
+      {
+        "id": "1381507",
+        "descIndex": 1
+      },
+      {
+        "id": "1381514",
+        "descIndex": 1
+      }
+    ]
   },
   {
     "actionId": "action:agent:1381:action:0015",
@@ -14036,15 +13924,34 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "477f5135250c85e20993033aaa20b2ed0e9bf296524644e19996fb7a729e5c07",
+    "sourceSignature": "1e446fc7615723b568c38a873937a2936ba4e189cdbb2e93cd36c7e72f791221",
     "skillCategory": "ultimate",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-s0anby-nk-1381015-main",
-    "skillTargetIds": [
-      "zzz-hp:follow-up-rule:fu-s0anby-ultimate-whole-ms0bpbx8"
+    "skillTargetIds": [],
+    "issues": [],
+    "potentialLevels": [0, 1, 2, 3, 4, 5, 6],
+    "conditionalIdentity": {
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
+      "skillTargetIds": [
+        "zzz-hp:follow-up-rule:fu-s0anby-ultimate-whole-ms0bpbx8"
+      ],
+      "skillTags": ["zzz-hp:follow-up"]
+    },
+    "limitations": [
+      "仅潜能 1 起且调用方显式断言额外能力生效时，[连携技]与[终结技]视为[追加攻击]并携带对应目标身份；未断言、潜能 0 或队伍条件未核实时保持原类别，不自动推断队伍构成。"
     ],
-    "issues": []
+    "relatedPassiveEvidence": [
+      {
+        "id": "1381507",
+        "descIndex": 1
+      },
+      {
+        "id": "1381514",
+        "descIndex": 1
+      }
+    ]
   },
   {
     "actionId": "action:agent:1381:action:0016",
@@ -14158,18 +14065,14 @@
     "rowIndex": 0,
     "rowKind": "damage",
     "dazeRowIndex": 1,
-    "sourceSignature": "4cc87aeb4cb13315f5bac283cce7402c071ddf508496c260d4d601c51cddf142",
+    "sourceSignature": "a6abfe129d363d25e5afa91b6a67f6629f30dc482573e230d63a88a8e26b1bd3",
     "skillCategory": "special",
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-s0anby-nk-1381023-main",
     "skillTargetIds": ["zzz-hp:skill:s0anby-special-ms0brhgw"],
-    "issues": [
-      {
-        "code": "potential-variant",
-        "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-      }
-    ]
+    "issues": [],
+    "potentialLevels": [1, 2, 3, 4, 5, 6]
   },
   {
     "actionId": "action:agent:1381:action:0023",

@@ -276,6 +276,7 @@ export const SKILL_CATEGORIES = Object.freeze([
   "basic",
   "dash",
   "follow-up",
+  "dodge",
   "dodge-counter",
   "enhanced-special",
   "special",

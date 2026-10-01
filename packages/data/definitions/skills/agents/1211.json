@@ -394,6 +394,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1211/details.zh.json",
         "pointer": "/skill/basic/description/6/param/0"
@@ -418,24 +419,33 @@
         "growth": 0
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-          },
-          {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-          },
-          {
-            "code": "special-mechanic",
-            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+            "segmentId": "action:agent:1211:action:0008:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.525,
+                  "growth": 0.048
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "杜苏拉与安娜塔莎的攻击按丽娜自身当前静态面板及显式适用增益整条计算；不建立独立木偶 actor、不继承角色属性、不模拟锁面板。来源描述中的物理与电混合伤害按电伤整条处理，保留来源冲突说明。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-alexandrina-nk-1211023-一段"
     },
     {
@@ -447,6 +457,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1211/details.zh.json",
         "pointer": "/skill/basic/description/6/param/1"
@@ -471,24 +482,33 @@
         "growth": 0
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-          },
-          {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-          },
-          {
-            "code": "special-mechanic",
-            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+            "segmentId": "action:agent:1211:action:0009:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.525,
+                  "growth": 0.048
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "杜苏拉与安娜塔莎的攻击按丽娜自身当前静态面板及显式适用增益整条计算；不建立独立木偶 actor、不继承角色属性、不模拟锁面板。来源描述中的物理与电混合伤害按电伤整条处理，保留来源冲突说明。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-alexandrina-nk-1211024-二段"
     },
     {
@@ -500,6 +520,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1211/details.zh.json",
         "pointer": "/skill/basic/description/6/param/2"
@@ -524,24 +545,33 @@
         "growth": 0
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-          },
-          {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-          },
-          {
-            "code": "special-mechanic",
-            "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
+            "segmentId": "action:agent:1211:action:0010:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.525,
+                  "growth": 0.048
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "杜苏拉与安娜塔莎的攻击按丽娜自身当前静态面板及显式适用增益整条计算；不建立独立木偶 actor、不继承角色属性、不模拟锁面板。来源描述中的物理与电混合伤害按电伤整条处理，保留来源冲突说明。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-alexandrina-nk-1211025-三段"
     },
     {
@@ -553,6 +583,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1211/details.zh.json",
         "pointer": "/skill/basic/description/7/param/0"
@@ -577,16 +608,32 @@
         "growth": 0
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1211:action:0011:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1211:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.1,
+                  "growth": 0.191
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-alexandrina-nk-1211027-main"
     },
     {

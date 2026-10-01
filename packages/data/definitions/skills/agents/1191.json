@@ -624,6 +624,7 @@
       "skillCategory": "basic",
       "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4fu3ym"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1191/details.zh.json",
         "pointer": "/skill/basic/description/6/param/0"
@@ -648,16 +649,32 @@
         "growth": 0.031
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1191:action:0012:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.302,
+                  "growth": 0.21
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-ellen-nk-1191029-一段"
     },
     {
@@ -669,6 +686,7 @@
       "skillCategory": "basic",
       "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4fu3ym"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1191/details.zh.json",
         "pointer": "/skill/basic/description/6/param/1"
@@ -693,16 +711,32 @@
         "growth": 0.039
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1191:action:0013:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.468,
+                  "growth": 0.134
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-ellen-nk-1191030-二段"
     },
     {
@@ -714,6 +748,7 @@
       "skillCategory": "basic",
       "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1191/details.zh.json",
         "pointer": "/skill/basic/description/7/param/0"
@@ -738,16 +773,32 @@
         "growth": 0.036
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1191:action:0014:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.812,
+                  "growth": 0.165
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-ellen-nk-1191027-对小体型敌人"
     },
     {
@@ -759,6 +810,7 @@
       "skillCategory": "basic",
       "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1191/details.zh.json",
         "pointer": "/skill/basic/description/7/param/1"
@@ -783,16 +835,32 @@
         "growth": 0.045
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1191:action:0015:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.202,
+                  "growth": 0.201
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-ellen-nk-1191027-对中体型敌人"
     },
     {
@@ -804,6 +872,7 @@
       "skillCategory": "basic",
       "skillTargetIds": ["zzz-hp:skill:ellen-basic-ms4ftyxj"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1191/details.zh.json",
         "pointer": "/skill/basic/description/7/param/2"
@@ -828,16 +897,32 @@
         "growth": 0.05399999999999999
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1191:action:0016:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1191:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.592,
+                  "growth": 0.237
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-ellen-nk-1191027-对大体型敌人"
     },
     {

@@ -299,6 +299,13 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 只有选中的效果实际依赖潜能等级时，调用方才需要提供；缺失时依赖它的选项与档位返回 `MISSING_RANK`，
 未选择该效果不阻断同角色的独立已支持效果。
 
+动作解析结果携带的 `resolutionContext.potentialLevel` 必须与当前角色绑定的 `potentialLevel`（缺省归一为 0）
+一致且属于动作登记的合法集合；动作定义没有登记 `potentialLevels` 时解析结果不得携带该字段，潜能变化后可以
+复用这份结果。带条件身份的动作（当前为零号·安比的连携技与终结技）在潜能 1—6 时要求解析上下文保存调用方
+提供的 `additionalAbilityActive`；core 用该事实重新计算期望的 `skillTargetIds` 与 `skillTags`，再与解析结果
+严格比较，缺失、类型错误、多余事实或身份不匹配都返回 `CONTEXT_MISMATCH`，不借由放宽数组比较掩盖错误。
+这些事实只描述当前静态状态，core 不推断队伍构成、出场顺序或触发时序。
+
 耀变需要显式提供既有目录入口的属性来源、快照与参数，其倍率须对应已解析动作。普通动作不会自动推导异常或紊乱结算，
 已有底层入口继续可用。目标防御、逐元素抗性与失衡状态必须采用明确的计算单位，不直接把来源原始字段当成计算值。
 `target.baseStunDamageMultiplier` 沿用[失衡易伤区](factors/stun-damage.md)的当前状态基础乘数契约：

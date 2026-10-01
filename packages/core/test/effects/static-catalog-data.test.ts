@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import {
+  calculateStaticDamage,
   calculateStaticDamageFromCatalog,
   parseEffectRuleSet,
 } from "../../src/effects/index.ts"
@@ -8,6 +9,7 @@ import type {
   CoreSkillLevel,
   MindscapeRank,
   StaticCatalogDamageInput,
+  StaticDamageInput,
   StaticDamageResult,
   StaticEffectCatalog,
 } from "../../src/effects/index.ts"
@@ -68,6 +70,7 @@ function agentInput(
   optionIds: readonly string[],
   mindscapeRank: MindscapeRank = 0,
   coreSkillLevel: CoreSkillLevel = 7,
+  potentialLevel?: number,
 ): StaticCatalogDamageInput {
   const base = inputFor()
   return {
@@ -81,7 +84,14 @@ function agentInput(
         holderId: "entity:attacker",
         sourceEntityId: agentEntityId,
         eligible: true,
-        configuration: { mindscapeRank, coreSkillLevel },
+        configuration: {
+          mindscapeRank,
+          coreSkillLevel,
+          ...(potentialLevel === undefined ? {} : { potentialLevel }),
+        } as Extract<
+          StaticCatalogDamageInput["bindings"][number],
+          { kind: "agent" }
+        >["configuration"],
       },
     ],
     actorSources: [{ entityId: "entity:attacker", agentEntityId }],
@@ -110,11 +120,36 @@ function agentInput(
   }
 }
 
+/** 固定来源夹具输入上补充潜能等级；夹具绑定保留其原有核心与影画档位。 */
+function withPotentialLevel(
+  input: StaticCatalogDamageInput,
+  potentialLevel: number,
+): StaticCatalogDamageInput {
+  return {
+    ...input,
+    bindings: input.bindings.map((binding) =>
+      binding.kind === "agent"
+        ? {
+            ...binding,
+            configuration: {
+              ...binding.configuration,
+              potentialLevel,
+            },
+          }
+        : binding,
+    ) as StaticCatalogDamageInput["bindings"],
+  }
+}
+
 function actionWithDisc(
   id: string,
   suffix: string,
   discId: string,
   discKey: string,
+  actionOptions: {
+    potentialLevel?: number
+    additionalAbilityActive?: boolean
+  } = {},
 ): StaticCatalogDamageInput {
   const agent = read(
     `../../../data/definitions/skills/agents/${id}.json`,
@@ -130,6 +165,12 @@ function actionWithDisc(
       special: { mode: "trained", value: 12 },
       chain: { mode: "trained", value: 12 },
     },
+    ...(actionOptions.potentialLevel === undefined
+      ? {}
+      : { potentialLevel: actionOptions.potentialLevel }),
+    ...(actionOptions.additionalAbilityActive === undefined
+      ? {}
+      : { additionalAbilityActive: actionOptions.additionalAbilityActive }),
   })
   if (
     !action.ok ||
@@ -337,7 +378,6 @@ describe("fixed-source catalog conformance", () => {
     ["1391", "0012", 1.15],
     ["1411", "0013", 1.15],
     ["1381", "0019", 1.15],
-    ["1381", "0014", 1.15],
     ["1381", "0006", 1],
     ["1381", "0020", 1],
   ] as const)(
@@ -350,6 +390,51 @@ describe("fixed-source catalog conformance", () => {
       ).toBeCloseTo(multiplier, 12)
     },
   )
+  it("gates S0 Anby chain/ultimate follow-up identity on potential and the explicit fact", () => {
+    const ratio = (input: StaticCatalogDamageInput) =>
+      calculateCatalogResult(input).nonCritical /
+      calculateCatalogResult({ ...input, selections: [] }).nonCritical
+    // 潜能 0：保持连携/终结原本分类，不携带追加攻击身份
+    expect(
+      ratio(
+        actionWithDisc("1381", "0014", "32900", "SuitShadow", {
+          potentialLevel: 0,
+        }),
+      ),
+    ).toBeCloseTo(1, 12)
+    expect(
+      ratio(
+        actionWithDisc("1381", "0015", "32900", "SuitShadow", {
+          potentialLevel: 0,
+        }),
+      ),
+    ).toBeCloseTo(1, 12)
+    // 潜能 1—6 且显式断言额外能力生效：视为追加攻击
+    for (const suffix of ["0014", "0015"] as const)
+      expect(
+        ratio(
+          actionWithDisc("1381", suffix, "32900", "SuitShadow", {
+            potentialLevel: 6,
+            additionalAbilityActive: true,
+          }),
+        ),
+      ).toBeCloseTo(1.15, 12)
+    // 潜能 1—6 但额外能力未生效：不携带追加攻击身份
+    expect(
+      ratio(
+        actionWithDisc("1381", "0014", "32900", "SuitShadow", {
+          potentialLevel: 6,
+          additionalAbilityActive: false,
+        }),
+      ),
+    ).toBeCloseTo(1, 12)
+    // 潜能 1—6 缺必填事实：数据解析拒绝
+    expect(() =>
+      actionWithDisc("1381", "0014", "32900", "SuitShadow", {
+        potentialLevel: 6,
+      }),
+    ).toThrow(/additionalAbilityActive/)
+  })
 
   it.each([
     ["0002", 1.15],
@@ -666,17 +751,55 @@ describe("fixed-source catalog conformance", () => {
         )
     }
   })
+  /**
+   * 本修订按 Nanoka potentialDetail 修正的来源位置仍在上游参考集中，
+   * 但不按上游期望值比对（原值只有固定档、叠层近似或缺少门槛）；
+   * 它们由本文件后面的具名潜能用例与覆盖状态单独验证。
+   */
+  const potentialCorrectedPointers = new Set([
+    "/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/1",
+    "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/0",
+    "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/1",
+    "/agents/29/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    "/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/1",
+    "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/1",
+    "/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/47/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/1",
+    "/agents/49/mindscapeBuffs/0/effectBlocks/0/effects/1",
+    "/agents/56/mindscapeBuffs/0/effectBlocks/0/effects/2",
+    "/agents/56/mindscapeBuffs/0/effectBlocks/1/effects/1",
+  ])
+  /** 已合并到完整档位选项、不再独立可选的部分记录。 */
+  const potentialMergedPointers = new Set([
+    "/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/1",
+    "/agents/56/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/56/mindscapeBuffs/0/effectBlocks/2/effects/1",
+  ])
+  const potentialExplainedPointers = new Set([
+    ...potentialCorrectedPointers,
+    ...potentialMergedPointers,
+  ])
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
       coverage.records
-        .filter((r) => r.status === "converted")
+        .filter(
+          (r) =>
+            r.status === "converted" ||
+            potentialExplainedPointers.has(r.pointer),
+        )
         .map((r) => r.pointer)
         .toSorted(),
     )
   })
   it("matches each converted record in its actual rank and hit context", () => {
     for (const vector of oracle.cases) {
+      if (potentialExplainedPointers.has(vector.pointer)) continue
       const values = Object.fromEntries(
         Object.entries(vector.input).map(([key, index]) => [
           key,
@@ -1583,42 +1706,57 @@ describe("velina cyclone catalog linkage", () => {
   })
 
   it("applies Nekomata's potential-level expressions only from potential 2", () => {
-    const fixedOption =
+    const completeOption =
       "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f5yzr-pivfr6"
-    const incrementsOption =
+    const mergedOption =
       "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f845b-c51ysw"
-    // 未提供潜能等级：依赖它的记录缺档，返回 MISSING_RANK
-    for (const optionId of [fixedOption, incrementsOption]) {
+    // 未提供潜能等级或潜能 1：无证据键，缺档拒绝
+    for (const potentialLevel of [undefined, 1]) {
       const result = calculateStaticDamageFromCatalog(
-        withPotential([optionId], undefined),
+        potentialLevel === undefined
+          ? withPotential([completeOption], undefined)
+          : withPotential([completeOption], potentialLevel),
       )
-      expect(result.ok, optionId).toBe(false)
+      expect(result.ok, String(potentialLevel)).toBe(false)
       if (!result.ok)
         expect(
           result.issues.some((issue) => issue.code === "MISSING_RANK"),
-          optionId,
+          String(potentialLevel),
         ).toBe(true)
     }
-    // 潜能 1：无证据键，缺档拒绝
+    // 旧增量部分记录已合并：单独选择或与完整值同时选择都被拒绝
     const below = calculateStaticDamageFromCatalog(
-      withPotential([fixedOption, incrementsOption], 1),
+      withPotential([mergedOption], 2),
     )
     expect(below.ok, JSON.stringify(below)).toBe(false)
     if (below.ok) return
-    expect(below.issues.some((issue) => issue.code === "MISSING_RANK")).toBe(
-      true,
-    )
+    expect(
+      below.issues.some(
+        (issue) =>
+          issue.code === "INVALID_INPUT" &&
+          issue.message.includes("已合并至完整状态选项"),
+      ),
+    ).toBe(true)
+    expect(
+      calculateStaticDamageFromCatalog(
+        withPotential([completeOption, mergedOption], 6),
+      ).ok,
+    ).toBe(false)
 
     const criticalAt = (potentialLevel: number) =>
-      calculateCatalogResult(
-        withPotential([fixedOption, incrementsOption], potentialLevel),
-      ).factors.critical?.critical
+      calculateCatalogResult(withPotential([completeOption], potentialLevel))
+        .factors.critical?.critical
     const baseline = calculateCatalogResult(withPotential([], 2)).factors
       .critical?.critical
-    // 固定 +20% 与增量 0/10/20/30/40：潜能 2 合计 +20%，3 为 +30%，6 为 +60%
+    // Nanoka potentialDetail：完整档位值 20/30/40/50/60%，只加一次
     expect(criticalAt(2)! - baseline!).toBeCloseTo(0.2, 8)
     expect(criticalAt(3)! - baseline!).toBeCloseTo(0.3, 8)
     expect(criticalAt(6)! - baseline!).toBeCloseTo(0.6, 8)
+    expect(
+      catalog.options
+        .find((o) => o.optionId === mergedOption)!
+        .variants.map((v) => v.status),
+    ).toEqual(["unsupported"])
   })
 
   it("integrates the verified Nanoka supplements with provenance", () => {
@@ -1634,8 +1772,11 @@ describe("velina cyclone catalog linkage", () => {
       "../../../data/definitions/effects/static-coverage.json",
     ) as { summary: { supplements: Record<string, number> } }
     expect(coverage.summary.supplements).toMatchObject({
-      records: 4,
-      integrated: 3,
+      records: 10,
+      integrated: 9,
+      rules: 9,
+      options: 4,
+      entities: 1,
       outOfScope: 1,
     })
   })
@@ -1694,6 +1835,749 @@ describe("velina cyclone catalog linkage", () => {
       ["non basic/dash", "ultimate", "electric"],
     ] as const)
       expect(bonusAt(5, skillCategory, element), label).toBe(1)
+  })
+})
+
+describe("potential-gated static effects", () => {
+  const optionOf = (optionId: string) =>
+    catalog.options.find((option) => option.optionId === optionId)!
+  const variantInputName = (optionId: string, potentialLevel: number) => {
+    const option = optionOf(optionId)
+    const variant = option.variants.find(
+      (entry) =>
+        !entry.configuration.potentialLevels ||
+        (entry.configuration.potentialLevels as readonly number[]).includes(
+          potentialLevel,
+        ),
+    )!
+    return variant.inputs[0]!.name
+  }
+  const contributionSum = (result: StaticDamageResult, effectId: string) =>
+    [
+      ...result.evaluation.contributions,
+      ...(result.preparations ?? []).flatMap((entry) => entry.contributions),
+    ]
+      .filter((entry) => entry.origin.effectId === effectId)
+      .reduce((sum, entry) => sum + entry.value.value, 0)
+  const withManualInput = (
+    input: StaticCatalogDamageInput,
+    name: string,
+    unit: "ratio" | "energy-per-second",
+    value: number,
+  ): StaticCatalogDamageInput =>
+    ({
+      ...input,
+      inputs: [
+        {
+          bindingId: input.bindings[0]!.bindingId,
+          name,
+          value: { unit, value },
+        },
+      ],
+    }) as unknown as StaticCatalogDamageInput
+  const select = (
+    input: StaticCatalogDamageInput,
+    optionId: string,
+    layers = 1,
+  ): StaticCatalogDamageInput => ({
+    ...input,
+    selections: [{ optionId, bindingId: input.bindings[0]!.bindingId, layers }],
+  })
+  const expectMissingRank = (
+    input: StaticCatalogDamageInput,
+    label: string,
+  ) => {
+    const result = calculateStaticDamageFromCatalog(input)
+    expect(result.ok, label).toBe(false)
+    if (!result.ok)
+      expect(
+        result.issues.some((issue) => issue.code === "MISSING_RANK"),
+        label,
+      ).toBe(true)
+  }
+  const fixtureContribution = (
+    pointer: string,
+    optionId: string,
+    potentialLevel: number,
+    effectId: string,
+    layers = 1,
+  ) =>
+    contributionSum(
+      calculateCatalogResult(
+        select(
+          withPotentialLevel(referenceInput(pointer), potentialLevel),
+          optionId,
+          layers,
+        ),
+      ),
+      effectId,
+    )
+
+  it("applies Soldier 11's potential critical damage from potential 2", () => {
+    const optionId = "nanoka:agents:soldier11:potential:flame-prowess"
+    const effectId = "agent:1041:nanoka:flame-prowess:mindscape:0"
+    const at = (potentialLevel: number) =>
+      contributionSum(
+        calculateCatalogResult(
+          agentInput("1041", [optionId], 0, 7, potentialLevel),
+        ),
+        effectId,
+      )
+    expectMissingRank(agentInput("1041", [optionId], 0, 7, 1), "P1")
+    expect(at(2)).toBeCloseTo(0.16, 8)
+    expect(at(3)).toBeCloseTo(0.24, 8)
+    expect(at(6)).toBeCloseTo(0.48, 8)
+  })
+
+  it("applies Lycaon's potential impact to basic/dash/dodge-counter direct hits", () => {
+    const optionId = "nanoka:agents:lycaon:potential:ice-hunt-impact"
+    const effectId = "agent:1141:nanoka:ice-hunt-impact:mindscape:0"
+    const rule = definitions.effects.find(
+      (entry) => entry.effectId === effectId,
+    )
+    if (rule?.kind !== "contribution") throw new Error("fixture")
+    // 冲击力只进入失衡计算；当前伤害路径不读取该属性，因此这里锁定目录门槛、
+    // 档位数值与命中范围，行为贡献待失衡通道接入后再补。
+    expect(rule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      rank: "potentialLevel",
+      values: { 2: 0.05, 3: 0.075, 4: 0.1, 5: 0.125, 6: 0.15 },
+    })
+    expect(rule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "final-percentage",
+    })
+    const when = JSON.stringify(rule.when)
+    expect(when).toContain("hit.damageKind")
+    expect(when).toContain("hit.skillCategory")
+    expect(when).toContain("dodge-counter")
+    for (const potentialLevel of [2, 6]) {
+      const result = calculateStaticDamageFromCatalog(
+        agentInput("1141", [optionId], 0, 7, potentialLevel),
+      )
+      expect(result.ok, `P${potentialLevel}`).toBe(true)
+    }
+    expectMissingRank(agentInput("1141", [optionId], 0, 7, 1), "P1")
+  })
+
+  it("gates Lycaon's other-element damage bonus behind the potential branch", () => {
+    const pointer = "/agents/49/mindscapeBuffs/0/effectBlocks/0/effects/1"
+    const optionId = "agents:lycaon:mindscape:0:blk-legacy:legacy-team-dmgBonus"
+    const effectId =
+      "agent:1141:zzz-hp:legacy-team-dmgBonus:blk-legacy:mindscape:0"
+    expect(fixtureContribution(pointer, optionId, 1, effectId)).toBeCloseTo(
+      0.3,
+      8,
+    )
+    expect(fixtureContribution(pointer, optionId, 6, effectId)).toBeCloseTo(
+      0.3,
+      8,
+    )
+    expectMissingRank(
+      select(withPotentialLevel(referenceInput(pointer), 0), optionId),
+      "P0",
+    )
+    const resPenPointer = "/agents/49/mindscapeBuffs/0/effectBlocks/0/effects/0"
+    const resPenOption =
+      "agents:lycaon:mindscape:0:blk-legacy:legacy-team-resPen"
+    const resPenEffect =
+      "agent:1141:zzz-hp:legacy-team-resPen:blk-legacy:mindscape:0"
+    expect(
+      fixtureContribution(resPenPointer, resPenOption, 0, resPenEffect),
+    ).toBeCloseTo(0.25, 8)
+  })
+
+  it("scales Burnice's boiling-point conversion rates by potential with fixed caps", () => {
+    const controlPointer =
+      "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/0"
+    const controlOption =
+      "agents:burnice:mindscape:0:blk-ms4njqvi-f55a5p:eff-ms4njqvi-e0gd6d"
+    const controlEffect =
+      "agent:1171:zzz-hp:eff-ms4njqvi-e0gd6d:blk-ms4njqvi-f55a5p:mindscape:0"
+    const damagePointer = "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/1"
+    const damageOption =
+      "agents:burnice:mindscape:0:blk-ms4njqvi-f55a5p:eff-ms4nnnk0-1esj6u"
+    const damageEffect =
+      "agent:1171:zzz-hp:eff-ms4nnnk0-1esj6u:blk-ms4njqvi-f55a5p:mindscape:0"
+    const controlAt = (potentialLevel: number, energy: number) =>
+      contributionSum(
+        calculateCatalogResult(
+          withManualInput(
+            select(
+              withPotentialLevel(
+                referenceInput(controlPointer),
+                potentialLevel,
+              ),
+              controlOption,
+            ),
+            variantInputName(controlOption, potentialLevel),
+            "energy-per-second",
+            energy,
+          ),
+        ),
+        controlEffect,
+      )
+    const damageAt = (potentialLevel: number, energy: number) =>
+      contributionSum(
+        calculateCatalogResult(
+          withManualInput(
+            select(
+              withPotentialLevel(referenceInput(damagePointer), potentialLevel),
+              damageOption,
+            ),
+            variantInputName(damageOption, potentialLevel),
+            "energy-per-second",
+            energy,
+          ),
+        ),
+        damageEffect,
+      )
+    expect(controlAt(2, 2.8)).toBeCloseTo(10, 6)
+    expect(controlAt(6, 2.8)).toBeCloseTo(25, 6)
+    expect(damageAt(2, 2.8)).toBeCloseTo(0.1, 8)
+    expect(damageAt(6, 2.8)).toBeCloseTo(0.2, 8)
+    expect(controlAt(6, 1.8)).toBe(0)
+    expect(damageAt(6, 1.8)).toBe(0)
+    expect(controlAt(6, 9)).toBeCloseTo(25, 6)
+    expect(damageAt(6, 9)).toBeCloseTo(0.2, 8)
+    expectMissingRank(
+      withManualInput(
+        select(
+          withPotentialLevel(referenceInput(controlPointer), 1),
+          controlOption,
+        ),
+        variantInputName(controlOption, 6),
+        "energy-per-second",
+        2.8,
+      ),
+      "P1",
+    )
+  })
+  it("applies Grace's electrical enhancement as a complete potential value", () => {
+    const pointer = "/agents/29/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const optionId =
+      "agents:grace:mindscape:0:blk-ms4o8tep-z28y9w:eff-ms4o8tep-htm584"
+    const effectId =
+      "agent:1181:zzz-hp:eff-ms4o8tep-htm584:blk-ms4o8tep-z28y9w:mindscape:0"
+    expect(fixtureContribution(pointer, optionId, 2, effectId)).toBeCloseTo(
+      0.1,
+      8,
+    )
+    expect(fixtureContribution(pointer, optionId, 6, effectId)).toBeCloseTo(
+      0.3,
+      8,
+    )
+    expectMissingRank(
+      select(withPotentialLevel(referenceInput(pointer), 1), optionId),
+      "P1",
+    )
+    expect(optionOf(optionId).variants[0]!.maximumLayers).toBe(1)
+  })
+
+  it("keeps Ellen's real storm-surge layers separate from potential values", () => {
+    const critPointer = "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const critOption =
+      "agents:ellen:mindscape:0:blk-ms4fuyir-dotq6c:eff-ms4fuyir-e3fuww"
+    const critEffect =
+      "agent:1191:zzz-hp:eff-ms4fuyir-e3fuww:blk-ms4fuyir-dotq6c:mindscape:0"
+    const resPenPointer = "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/1"
+    const resPenOption =
+      "agents:ellen:mindscape:0:blk-ms4fuyir-dotq6c:eff-ms4fvlsz-x4x1hj"
+    const resPenEffect =
+      "agent:1191:zzz-hp:eff-ms4fvlsz-x4x1hj:blk-ms4fuyir-dotq6c:mindscape:0"
+    expect(
+      fixtureContribution(critPointer, critOption, 6, critEffect, 9),
+    ).toBeCloseTo(9 * 0.048, 8)
+    expect(
+      fixtureContribution(critPointer, critOption, 6, critEffect, 10),
+    ).toBeCloseTo(0.48, 8)
+    expect(
+      fixtureContribution(critPointer, critOption, 2, critEffect, 10),
+    ).toBeCloseTo(0.16, 8)
+    expect(fixtureContribution(critPointer, critOption, 6, critEffect, 0)).toBe(
+      0,
+    )
+    expect(
+      fixtureContribution(resPenPointer, resPenOption, 6, resPenEffect),
+    ).toBeCloseTo(0.1, 8)
+    expect(
+      fixtureContribution(resPenPointer, resPenOption, 2, resPenEffect),
+    ).toBeCloseTo(0.033, 8)
+    expectMissingRank(
+      select(
+        withPotentialLevel(referenceInput(critPointer), 1),
+        critOption,
+        10,
+      ),
+      "P1",
+    )
+    const eleven = calculateStaticDamageFromCatalog(
+      select(
+        withPotentialLevel(referenceInput(critPointer), 6),
+        critOption,
+        11,
+      ),
+    )
+    expect(eleven.ok).toBe(false)
+    if (!eleven.ok)
+      expect(
+        eleven.issues.some((issue) => issue.code === "INVALID_INPUT"),
+      ).toBe(true)
+  })
+
+  it("switches Ellen's core-passive critical damage between ordinary and potential scopes", () => {
+    const optionId = "agents:ellen:mindscape:0:blk-legacy:legacy-self-critDmg"
+    const effectId =
+      "agent:1191:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
+    const ordinaryEffect = "agent:1191:nanoka:ordinary-blade-dance:mindscape:0"
+    const at = (potentialLevel: number, skillTags: readonly string[]) => {
+      const base = agentInput("1191", [optionId], 0, 7, potentialLevel)
+      const result = calculateCatalogResult({
+        ...base,
+        hit: { ...base.hit, skillTags },
+      })
+      return {
+        potential: contributionSum(result, effectId),
+        ordinary: contributionSum(result, ordinaryEffect),
+      }
+    }
+    expect(at(0, ["zzz-hp:skill:ellen-basic-ms4ftctx"]).ordinary).toBeCloseTo(
+      1,
+      8,
+    )
+    expect(at(0, ["zzz-hp:skill:ellen-basic-ms4ftctx"]).potential).toBe(0)
+    expect(at(0, ["zzz-hp:skill:ellen-basic-ms4ftyxj"]).ordinary).toBe(0)
+    expect(at(0, ["zzz-hp:category:chain"]).ordinary).toBe(0)
+    expect(
+      at(1, ["zzz-hp:category:basic", "zzz-hp:skill:ellen-basic-ms4ftyxj"])
+        .potential,
+    ).toBeCloseTo(1, 8)
+    expect(at(1, ["zzz-hp:skill:ellen-basic-ms4ftctx"]).ordinary).toBe(0)
+  })
+
+  it("switches Harumasa's core extras between ordinary and potential scopes", () => {
+    const critRateOption =
+      "agents:harumasa:mindscape:0:blk-legacy:legacy-self-critRate"
+    const critRateEffect =
+      "agent:1201:zzz-hp:legacy-self-critRate:blk-legacy:mindscape:0"
+    const critDmgOption =
+      "agents:harumasa:mindscape:0:blk-legacy:eff-ms4gx7ds-ijkzuy"
+    const critDmgEffect =
+      "agent:1201:zzz-hp:eff-ms4gx7ds-ijkzuy:blk-legacy:mindscape:0"
+    const ordinaryRate = "agent:1201:nanoka:ordinary-crit-rate:mindscape:0"
+    const ordinaryDmg = "agent:1201:nanoka:ordinary-crit-dmg:mindscape:0"
+    const at = (
+      potentialLevel: number,
+      skillTags: readonly string[],
+      optionId: string,
+      layers = 1,
+    ) => {
+      const base = agentInput("1201", [optionId], 0, 7, potentialLevel)
+      return calculateCatalogResult({
+        ...base,
+        selections: [
+          { optionId, bindingId: base.bindings[0]!.bindingId, layers },
+        ],
+        hit: { ...base.hit, skillTags },
+      })
+    }
+    const flying = ["zzz-hp:skill:harumasa-dodge-ms4gw5t2"]
+    const thunder = [
+      "zzz-hp:category:dodge",
+      "zzz-hp:skill:harumasa-dodge-ms4gwjug",
+    ]
+    expect(
+      contributionSum(at(0, flying, critRateOption), ordinaryRate),
+    ).toBeCloseTo(0.25, 8)
+    expect(contributionSum(at(0, thunder, critRateOption), ordinaryRate)).toBe(
+      0,
+    )
+    expect(
+      contributionSum(
+        at(0, ["zzz-hp:category:ultimate"], critRateOption),
+        ordinaryRate,
+      ),
+    ).toBe(0)
+    expect(
+      contributionSum(at(0, thunder, critRateOption), critRateEffect),
+    ).toBe(0)
+    expect(
+      contributionSum(at(1, thunder, critRateOption), critRateEffect),
+    ).toBeCloseTo(0.25, 8)
+    expect(
+      contributionSum(
+        at(1, ["zzz-hp:category:ultimate"], critRateOption),
+        critRateEffect,
+      ),
+    ).toBeCloseTo(0.25, 8)
+    expect(
+      contributionSum(at(0, flying, critDmgOption, 6), ordinaryDmg),
+    ).toBeCloseTo(0.72, 8)
+    expect(contributionSum(at(0, thunder, critDmgOption, 6), ordinaryDmg)).toBe(
+      0,
+    )
+    expect(
+      contributionSum(at(1, thunder, critDmgOption, 6), critDmgEffect),
+    ).toBeCloseTo(0.72, 8)
+  })
+
+  it("keeps ordinary core-passive branches out of potential levels at the rule level", () => {
+    // 低层入口按 effectId 直接取规则，不会执行目录变体的潜能配置：
+    // 规则必须自行声明潜能门槛，否则潜能 1 下同时选中普通与潜能分支会让
+    // 艾莲核心暴伤从 +100% 变成 +200%（选择校验必须拒绝普通分支）。
+    const ellenOrdinary = "agent:1191:nanoka:ordinary-blade-dance:mindscape:0"
+    const ellenPotential =
+      "agent:1191:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
+    const harumasaRateOrdinary =
+      "agent:1201:nanoka:ordinary-crit-rate:mindscape:0"
+    const harumasaDmgOrdinary =
+      "agent:1201:nanoka:ordinary-crit-dmg:mindscape:0"
+    const lowLevel = (
+      agentEntityId: string,
+      effectIds: readonly string[],
+      potentialLevel: number,
+      skillTags: readonly string[],
+      layers = 1,
+    ) => {
+      const fixture = inputFor()
+      const base = agentInput(agentEntityId, [], 0, 7, potentialLevel)
+      return calculateStaticDamage({
+        definitions,
+        bindings: base.bindings,
+        damage: fixture.damage,
+        world: fixture.world,
+        hit: { ...fixture.hit, skillTags },
+        selections: effectIds.map((effectId) => ({
+          effectId:
+            effectId as StaticDamageInput["selections"][number]["effectId"],
+          bindingId: "binding:static",
+          layers,
+        })),
+      })
+    }
+    const rejectsEffect = (
+      result: ReturnType<typeof lowLevel>,
+      effectId: string,
+    ) => {
+      expect(result.ok, JSON.stringify(result)).toBe(false)
+      return (
+        !result.ok &&
+        result.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            JSON.stringify(issue).includes(effectId),
+        )
+      )
+    }
+    const ellenTags = [
+      "zzz-hp:category:basic",
+      "zzz-hp:skill:ellen-basic-ms4ftctx",
+    ]
+    const ellenAt = (potentialLevel: number, effectIds: readonly string[]) =>
+      lowLevel("1191", effectIds, potentialLevel, ellenTags)
+    const ellenOrdinaryAtZero = ellenAt(0, [ellenOrdinary])
+    expect(ellenOrdinaryAtZero.ok, JSON.stringify(ellenOrdinaryAtZero)).toBe(
+      true,
+    )
+    if (ellenOrdinaryAtZero.ok)
+      expect(
+        contributionSum(ellenOrdinaryAtZero.value, ellenOrdinary),
+      ).toBeCloseTo(1, 8)
+    // 潜能 1：普通分支不可再选，不能与潜能分支重复叠加
+    expect(rejectsEffect(ellenAt(1, [ellenOrdinary]), ellenOrdinary)).toBe(true)
+    expect(
+      rejectsEffect(ellenAt(1, [ellenOrdinary, ellenPotential]), ellenOrdinary),
+    ).toBe(true)
+    const ellenPotentialAtOne = ellenAt(1, [ellenPotential])
+    expect(ellenPotentialAtOne.ok, JSON.stringify(ellenPotentialAtOne)).toBe(
+      true,
+    )
+    if (ellenPotentialAtOne.ok)
+      expect(
+        contributionSum(ellenPotentialAtOne.value, ellenPotential),
+      ).toBeCloseTo(1, 8)
+    const harumasaTags = [
+      "zzz-hp:category:dodge",
+      "zzz-hp:skill:harumasa-dodge-ms4gw5t2",
+    ]
+    const harumasaRateAtZero = lowLevel(
+      "1201",
+      [harumasaRateOrdinary],
+      0,
+      harumasaTags,
+    )
+    expect(harumasaRateAtZero.ok, JSON.stringify(harumasaRateAtZero)).toBe(true)
+    if (harumasaRateAtZero.ok)
+      expect(
+        contributionSum(harumasaRateAtZero.value, harumasaRateOrdinary),
+      ).toBeCloseTo(0.25, 8)
+    expect(
+      rejectsEffect(
+        lowLevel("1201", [harumasaRateOrdinary], 1, harumasaTags),
+        harumasaRateOrdinary,
+      ),
+    ).toBe(true)
+    const harumasaDmgAtZero = lowLevel(
+      "1201",
+      [harumasaDmgOrdinary],
+      0,
+      harumasaTags,
+      6,
+    )
+    expect(harumasaDmgAtZero.ok, JSON.stringify(harumasaDmgAtZero)).toBe(true)
+    if (harumasaDmgAtZero.ok)
+      expect(
+        contributionSum(harumasaDmgAtZero.value, harumasaDmgOrdinary),
+      ).toBeCloseTo(0.72, 8)
+    expect(
+      rejectsEffect(
+        lowLevel("1201", [harumasaDmgOrdinary], 1, harumasaTags, 6),
+        harumasaDmgOrdinary,
+      ),
+    ).toBe(true)
+  })
+
+  it("applies Harumasa's concentration values by potential from level 2", () => {
+    const atkPointer = "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const atkOption =
+      "agents:harumasa:mindscape:0:blk-ms4gyswd-hl5ii6:eff-ms4gyswd-zyloo3"
+    const atkEffect =
+      "agent:1201:zzz-hp:eff-ms4gyswd-zyloo3:blk-ms4gyswd-hl5ii6:mindscape:0"
+    const penPointer = "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/1"
+    const penOption =
+      "agents:harumasa:mindscape:0:blk-ms4gyswd-hl5ii6:eff-ms4h0385-xlwhvy"
+    const penEffect =
+      "agent:1201:zzz-hp:eff-ms4h0385-xlwhvy:blk-ms4gyswd-hl5ii6:mindscape:0"
+    expect(
+      fixtureContribution(atkPointer, atkOption, 2, atkEffect),
+    ).toBeCloseTo(0.04, 8)
+    expect(
+      fixtureContribution(atkPointer, atkOption, 6, atkEffect),
+    ).toBeCloseTo(0.12, 8)
+    expect(
+      fixtureContribution(penPointer, penOption, 6, penEffect),
+    ).toBeCloseTo(0.15, 8)
+    expectMissingRank(
+      select(withPotentialLevel(referenceInput(atkPointer), 1), atkOption),
+      "P1",
+    )
+  })
+  it("keeps Rina's potential penetration and core conversion rates separate", () => {
+    const pierceOption =
+      "nanoka:agents:alexandrina:potential:perfect-service-pierce"
+    const pierceEffect = "agent:1211:nanoka:perfect-service-pierce:mindscape:0"
+    const attackPointer = "/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const attackOption =
+      "agents:alexandrina:mindscape:0:blk-ms4719qz-139572:eff-ms4719qz-a5ce2o"
+    const attackEffect =
+      "agent:1211:zzz-hp:eff-ms4719qz-a5ce2o:blk-ms4719qz-139572:mindscape:0"
+    const defensePointer = "/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/1"
+    const defenseOption =
+      "agents:alexandrina:mindscape:0:blk-ms4719qz-139572:eff-ms478uay-hcl0vd"
+    const defenseEffect =
+      "agent:1211:zzz-hp:eff-ms478uay-hcl0vd:blk-ms4719qz-139572:mindscape:0"
+    const pierceAt = (potentialLevel: number) =>
+      contributionSum(
+        calculateCatalogResult(
+          agentInput("1211", [pierceOption], 0, 7, potentialLevel),
+        ),
+        pierceEffect,
+      )
+    expect(pierceAt(2)).toBeCloseTo(0.016, 8)
+    expect(pierceAt(3)).toBeCloseTo(0.032, 8)
+    expect(pierceAt(6)).toBeCloseTo(0.08, 8)
+    expectMissingRank(agentInput("1211", [pierceOption], 0, 7, 1), "P1")
+    const conversionAt = (
+      pointer: string,
+      optionId: string,
+      effectId: string,
+      potentialLevel: number,
+      ratio: number,
+    ) =>
+      contributionSum(
+        calculateCatalogResult(
+          withManualInput(
+            select(
+              withPotentialLevel(referenceInput(pointer), potentialLevel),
+              optionId,
+            ),
+            variantInputName(optionId, potentialLevel),
+            "ratio",
+            ratio,
+          ),
+        ),
+        effectId,
+      )
+    expect(
+      conversionAt(attackPointer, attackOption, attackEffect, 2, 0.72),
+    ).toBeCloseTo(216, 6)
+    expect(
+      conversionAt(attackPointer, attackOption, attackEffect, 6, 0.72),
+    ).toBeCloseTo(576, 6)
+    expect(
+      conversionAt(attackPointer, attackOption, attackEffect, 6, 9),
+    ).toBeCloseTo(576, 6)
+    expect(
+      conversionAt(defensePointer, defenseOption, defenseEffect, 2, 0.72),
+    ).toBeCloseTo(180, 6)
+    expect(
+      conversionAt(defensePointer, defenseOption, defenseEffect, 6, 0.72),
+    ).toBeCloseTo(468, 6)
+    expect(
+      conversionAt(defensePointer, defenseOption, defenseEffect, 6, 9),
+    ).toBeCloseTo(468, 6)
+    expectMissingRank(
+      withManualInput(
+        select(
+          withPotentialLevel(referenceInput(attackPointer), 1),
+          attackOption,
+        ),
+        variantInputName(attackOption, 6),
+        "ratio",
+        0.72,
+      ),
+      "P1",
+    )
+    // 读取值来自调用方显式输入：改变持有者当前面板不改变转化贡献
+    const manual = withManualInput(
+      select(
+        withPotentialLevel(referenceInput(attackPointer), 6),
+        attackOption,
+      ),
+      variantInputName(attackOption, 6),
+      "ratio",
+      0.36,
+    )
+    const changedHolder: StaticCatalogDamageInput = {
+      ...manual,
+      world: {
+        ...manual.world,
+        entities: manual.world.entities.map((entity) =>
+          entity.kind === "actor" && entity.entityId === manual.hit.actorId
+            ? {
+                ...entity,
+                directStats: {
+                  ...entity.directStats,
+                  penetrationRatio: { baseValue: 0.9, additions: [] },
+                },
+              }
+            : entity,
+        ),
+      },
+    }
+    expect(
+      contributionSum(calculateCatalogResult(changedHolder), attackEffect),
+    ).toBeCloseTo(
+      contributionSum(calculateCatalogResult(manual), attackEffect),
+      6,
+    )
+  })
+
+  it("applies Jane's complete potential strong-hit critical damage and rejects the partial record", () => {
+    const pointer = "/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const optionId =
+      "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x"
+    const effectId =
+      "agent:1261:zzz-hp:eff-ms34gorp-xrbl8x:blk-ms34gorp-m9dlxw:mindscape:0"
+    expect(fixtureContribution(pointer, optionId, 2, effectId)).toBeCloseTo(
+      0.1,
+      8,
+    )
+    expect(fixtureContribution(pointer, optionId, 4, effectId)).toBeCloseTo(
+      0.2,
+      8,
+    )
+    expect(fixtureContribution(pointer, optionId, 6, effectId)).toBeCloseTo(
+      0.3,
+      8,
+    )
+    expectMissingRank(
+      select(withPotentialLevel(referenceInput(pointer), 1), optionId),
+      "P1",
+    )
+    const merged = calculateStaticDamageFromCatalog(
+      select(
+        withPotentialLevel(referenceInput(pointer), 6),
+        "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34hzuh-214aho",
+      ),
+    )
+    expect(merged.ok).toBe(false)
+    if (!merged.ok)
+      expect(
+        merged.issues.some((issue) =>
+          issue.message.includes("已合并至完整状态选项"),
+        ),
+      ).toBe(true)
+  })
+
+  it("applies S0 Anby's complete follow-up damage bonus and gates the 5% conversion", () => {
+    const bonusPointer = "/agents/56/mindscapeBuffs/0/effectBlocks/1/effects/1"
+    const bonusOption =
+      "agents:s0anby:mindscape:0:blk-ms4jqdq1-rkmmm3:eff-ms4jqsm1-qkfx1a"
+    const bonusEffect =
+      "agent:1381:zzz-hp:eff-ms4jqsm1-qkfx1a:blk-ms4jqdq1-rkmmm3:mindscape:0"
+    expect(
+      fixtureContribution(bonusPointer, bonusOption, 0, bonusEffect),
+    ).toBeCloseTo(0.25, 8)
+    expect(
+      fixtureContribution(bonusPointer, bonusOption, 1, bonusEffect),
+    ).toBeCloseTo(0.25, 8)
+    expect(
+      fixtureContribution(bonusPointer, bonusOption, 2, bonusEffect),
+    ).toBeCloseTo(0.34, 8)
+    expect(
+      fixtureContribution(bonusPointer, bonusOption, 6, bonusEffect),
+    ).toBeCloseTo(0.5, 8)
+    for (const partial of [
+      "agents:s0anby:mindscape:0:blk-ms4jrci5-unykui:eff-ms4jrci5-nxk6sq",
+      "agents:s0anby:mindscape:0:blk-ms4jrci5-unykui:eff-ms4jtmex-gz9fiw",
+    ]) {
+      const result = calculateStaticDamageFromCatalog(
+        select(withPotentialLevel(referenceInput(bonusPointer), 6), partial),
+      )
+      expect(result.ok, partial).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) =>
+            issue.message.includes("已合并至完整状态选项"),
+          ),
+          partial,
+        ).toBe(true)
+    }
+    const conversionPointer =
+      "/agents/56/mindscapeBuffs/0/effectBlocks/0/effects/2"
+    const conversionOption =
+      "agents:s0anby:mindscape:0:blk-legacy:eff-ms4jp2fs-cmvkjd"
+    const conversionEffect =
+      "agent:1381:zzz-hp:eff-ms4jp2fs-cmvkjd:blk-legacy:mindscape:0"
+    const conversionAt = (potentialLevel: number, criticalDamage: number) =>
+      contributionSum(
+        calculateCatalogResult(
+          withManualInput(
+            select(
+              withPotentialLevel(
+                referenceInput(conversionPointer),
+                potentialLevel,
+              ),
+              conversionOption,
+            ),
+            variantInputName(conversionOption, potentialLevel),
+            "ratio",
+            criticalDamage,
+          ),
+        ),
+        conversionEffect,
+      )
+    expectMissingRank(
+      select(
+        withPotentialLevel(referenceInput(conversionPointer), 0),
+        conversionOption,
+      ),
+      "P0",
+    )
+    expect(conversionAt(1, 2)).toBeCloseTo(0.1, 8)
+    expect(conversionAt(6, 2)).toBeCloseTo(0.1, 8)
   })
 })
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "6",
+  "revision": "7",
   "effects": [
     {
       "kind": "contribution",
@@ -839,112 +839,10 @@
           "unit": "ratio",
           "values": {
             "2": 0.2,
-            "3": 0.2,
-            "4": 0.2,
-            "5": 0.2,
-            "6": 0.2
-          }
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "entity",
-      "beneficiary": {
-        "kind": "holder"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "stat-adjustment",
-        "stat": "criticalDamage",
-        "stage": "direct",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "agent:1021:zzz-hp:eff-ms4f845b-c51ysw:blk-ms4f5yzr-3tuoc1:mindscape:0",
-      "source": {
-        "identity": {
-          "kind": "agent",
-          "entityId": "1021"
-        },
-        "section": "潜能觉醒：夜行习性",
-        "references": [
-          {
-            "sourceId": "zzz-hp",
-            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-            "locale": "zh",
-            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-            "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/1"
-          },
-          {
-            "sourceId": "nanoka-integrated",
-            "version": "3.1",
-            "locale": "zh",
-            "resourcePath": "agents/1021/details.zh.json",
-            "pointer": "/passive/level/1021514/desc/0"
-          }
-        ]
-      },
-      "config": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "compare-number",
-            "unit": "count",
-            "operator": "gte",
-            "left": {
-              "kind": "configuration-number",
-              "unit": "count",
-              "field": "mindscapeRank"
-            },
-            "right": {
-              "kind": "literal",
-              "unit": "count",
-              "value": 0
-            }
-          },
-          {
-            "kind": "compare-number",
-            "unit": "count",
-            "operator": "gte",
-            "left": {
-              "kind": "configuration-number",
-              "unit": "count",
-              "field": "potentialLevel"
-            },
-            "right": {
-              "kind": "literal",
-              "unit": "count",
-              "value": 2
-            }
-          }
-        ]
-      },
-      "parameters": {
-        "amount": {
-          "kind": "by-rank",
-          "rank": "potentialLevel",
-          "unit": "ratio",
-          "values": {
-            "2": 0,
-            "3": 0.1,
-            "4": 0.2,
-            "5": 0.3,
-            "6": 0.4
+            "3": 0.3,
+            "4": 0.4,
+            "5": 0.5,
+            "6": 0.6
           }
         }
       },
@@ -1549,6 +1447,109 @@
             "unit": "multiplier",
             "value": -1
           }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1041:nanoka:flame-prowess:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1041"
+        },
+        "section": "潜能觉醒：绝焰",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1041/details.zh.json",
+            "pointer": "/potentialDetail/104101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1041/details.zh.json",
+            "pointer": "/potentialDetail/104102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1041/details.zh.json",
+            "pointer": "/potentialDetail/104103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1041/details.zh.json",
+            "pointer": "/potentialDetail/104104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1041/details.zh.json",
+            "pointer": "/potentialDetail/104105/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "potentialLevel"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "potentialLevel",
+          "unit": "ratio",
+          "values": {
+            "2": 0.16,
+            "3": 0.24,
+            "4": 0.32,
+            "5": 0.4,
+            "6": 0.48
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "criticalDamage",
+        "stage": "direct",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
         }
       }
     },
@@ -6838,6 +6839,120 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1141:nanoka:ice-hunt-impact:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1141"
+        },
+        "section": "潜能觉醒：掠冰",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1141/details.zh.json",
+            "pointer": "/potentialDetail/114101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1141/details.zh.json",
+            "pointer": "/potentialDetail/114102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1141/details.zh.json",
+            "pointer": "/potentialDetail/114103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1141/details.zh.json",
+            "pointer": "/potentialDetail/114104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1141/details.zh.json",
+            "pointer": "/potentialDetail/114105/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "potentialLevel"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "potentialLevel",
+          "unit": "ratio",
+          "values": {
+            "2": 0.05,
+            "3": 0.075,
+            "4": 0.1,
+            "5": 0.125,
+            "6": 0.15
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular", "sheer"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillCategory",
+            "values": ["basic", "dash", "dodge-counter"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1141:zzz-hp:eff-ms49npw0-qzil8p:blk-ms49npw0-1i75ne:mindscape:0",
       "source": {
         "identity": {
@@ -7090,23 +7205,50 @@
             "locale": "zh",
             "resourcePath": "agents/1141/details.zh.json",
             "pointer": "/passive/level/1141514/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1141/details.zh.json",
+            "pointer": "/passive/level/1141514/desc/0"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 1
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
@@ -9092,23 +9234,78 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "threshold": {
@@ -9117,9 +9314,16 @@
           "value": -1.8
         },
         "rate": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "multiplier",
-          "value": 25
+          "values": {
+            "2": 10,
+            "3": 13,
+            "4": 16,
+            "5": 20,
+            "6": 25
+          }
         },
         "cap": {
           "kind": "constant",
@@ -9212,23 +9416,78 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1171/details.zh.json",
+            "pointer": "/potentialDetail/117105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "threshold": {
@@ -9237,9 +9496,16 @@
           "value": -1.8
         },
         "rate": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "multiplier",
-          "value": 0.2
+          "values": {
+            "2": 0.1,
+            "3": 0.125,
+            "4": 0.15,
+            "5": 0.175,
+            "6": 0.2
+          }
         },
         "cap": {
           "kind": "constant",
@@ -10271,29 +10537,91 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/potentialDetail/118101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/potentialDetail/118102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/potentialDetail/118103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/potentialDetail/118104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/potentialDetail/118105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "ratio",
-          "value": 0.05
+          "values": {
+            "2": 0.1,
+            "3": 0.15,
+            "4": 0.2,
+            "5": 0.25,
+            "6": 0.3
+          }
         }
       },
       "activation": {
@@ -10301,7 +10629,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 6
+          "value": 1
         }
       },
       "scope": "hit",
@@ -10388,6 +10716,103 @@
       "operation": {
         "kind": "factor-contribution",
         "channel": "attacker-resistance-ignore",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1191:nanoka:ordinary-blade-dance:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1191"
+        },
+        "section": "核心被动：凌牙厉齿（普通分支）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/passive/level/1191507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "eq",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "coreSkillLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 7
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "eq",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 1
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": [
+              "zzz-hp:skill:ellen-dodge-ms4fsyad",
+              "zzz-hp:skill:ellen-basic-ms4ftctx"
+            ]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "criticalDamage",
+        "stage": "direct",
         "value": {
           "kind": "parameter",
           "unit": "ratio",
@@ -10533,29 +10958,91 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "ratio",
-          "value": 0.048
+          "values": {
+            "2": 0.016,
+            "3": 0.024,
+            "4": 0.032,
+            "5": 0.04,
+            "6": 0.048
+          }
         }
       },
       "activation": {
@@ -10601,29 +11088,91 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/potentialDetail/119105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "ratio",
-          "value": 0.1
+          "values": {
+            "2": 0.033,
+            "3": 0.05,
+            "4": 0.067,
+            "5": 0.083,
+            "6": 0.1
+          }
         }
       },
       "activation": {
@@ -10681,23 +11230,50 @@
             "locale": "zh",
             "resourcePath": "agents/1191/details.zh.json",
             "pointer": "/passive/level/1191514/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1191/details.zh.json",
+            "pointer": "/passive/level/1191514/desc/0"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 1
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
@@ -11149,6 +11725,194 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1201:nanoka:ordinary-crit-dmg:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1201"
+        },
+        "section": "核心被动：破晓（普通分支）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/passive/level/1201507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "eq",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "coreSkillLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 7
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "eq",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.12
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:harumasa-dodge-ms4gw5t2"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "criticalDamage",
+        "stage": "direct",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1201:nanoka:ordinary-crit-rate:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1201"
+        },
+        "section": "核心被动：破晓（普通分支）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/passive/level/1201507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "eq",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "coreSkillLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 7
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "eq",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.25
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:harumasa-dodge-ms4gw5t2"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "criticalRate",
+        "stage": "direct",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1201:zzz-hp:eff-ms4gx7ds-ijkzuy:blk-legacy:mindscape:0",
       "source": {
         "identity": {
@@ -11170,23 +11934,50 @@
             "locale": "zh",
             "resourcePath": "agents/1201/details.zh.json",
             "pointer": "/passive/level/1201507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/passive/level/1201514/desc/0"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 1
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
@@ -11460,29 +12251,91 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "ratio",
-          "value": 0.02
+          "values": {
+            "2": 0.04,
+            "3": 0.06,
+            "4": 0.08,
+            "5": 0.1,
+            "6": 0.12
+          }
         }
       },
       "activation": {
@@ -11490,7 +12343,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 6
+          "value": 1
         }
       },
       "scope": "entity",
@@ -11528,29 +12381,91 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/potentialDetail/120105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "ratio",
-          "value": 0.025
+          "values": {
+            "2": 0.05,
+            "3": 0.075,
+            "4": 0.1,
+            "5": 0.125,
+            "6": 0.15
+          }
         }
       },
       "activation": {
@@ -11558,7 +12473,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 6
+          "value": 1
         }
       },
       "scope": "hit",
@@ -11643,23 +12558,50 @@
             "locale": "zh",
             "resourcePath": "agents/1201/details.zh.json",
             "pointer": "/passive/level/1201507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1201/details.zh.json",
+            "pointer": "/passive/level/1201514/desc/0"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 1
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
@@ -11910,6 +12852,109 @@
       "operation": {
         "kind": "factor-contribution",
         "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1211:nanoka:perfect-service-pierce:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1211"
+        },
+        "section": "潜能觉醒：完美侍奉",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121105/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "potentialLevel"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "potentialLevel",
+          "unit": "ratio",
+          "values": {
+            "2": 0.016,
+            "3": 0.032,
+            "4": 0.048,
+            "5": 0.064,
+            "6": 0.08
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "penetrationRatio",
+        "stage": "direct",
         "value": {
           "kind": "parameter",
           "unit": "ratio",
@@ -12379,23 +13424,78 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "threshold": {
@@ -12404,9 +13504,16 @@
           "value": 0
         },
         "rate": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "multiplier",
-          "value": 800
+          "values": {
+            "2": 300,
+            "3": 420,
+            "4": 550,
+            "5": 670,
+            "6": 800
+          }
         },
         "cap": {
           "kind": "constant",
@@ -12499,23 +13606,78 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/potentialDetail/121105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "threshold": {
@@ -12524,9 +13686,16 @@
           "value": 0
         },
         "rate": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "multiplier",
-          "value": 650
+          "values": {
+            "2": 250,
+            "3": 350,
+            "4": 450,
+            "5": 550,
+            "6": 650
+          }
         },
         "cap": {
           "kind": "constant",
@@ -15632,29 +16801,91 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/potentialDetail/126101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/potentialDetail/126102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/potentialDetail/126103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/potentialDetail/126104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/potentialDetail/126105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 2
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "ratio",
-          "value": 0.1
+          "values": {
+            "2": 0.1,
+            "3": 0.15,
+            "4": 0.2,
+            "5": 0.25,
+            "6": 0.3
+          }
         }
       },
       "activation": {
@@ -15663,84 +16894,6 @@
           "kind": "literal",
           "unit": "count",
           "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "holder"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex"]
-          },
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["physical"]
-          }
-        ]
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "anomaly-critical-damage",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "agent:1261:zzz-hp:eff-ms34hzuh-214aho:blk-ms34gorp-m9dlxw:mindscape:0",
-      "source": {
-        "identity": {
-          "kind": "agent",
-          "entityId": "1261"
-        },
-        "section": "潜能觉醒：致命舞步",
-        "references": [
-          {
-            "sourceId": "zzz-hp",
-            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-            "locale": "zh",
-            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-            "pointer": "/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.05
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 4
         }
       },
       "scope": "hit",
@@ -25333,23 +26486,50 @@
             "locale": "zh",
             "resourcePath": "agents/1381/details.zh.json",
             "pointer": "/passive/level/1381514/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1381/details.zh.json",
+            "pointer": "/passive/level/1381514/desc/0"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 1
+            }
+          }
+        ]
       },
       "parameters": {
         "threshold": {
@@ -25624,29 +26804,93 @@
             "locale": "zh",
             "resourcePath": "agents/1381/details.zh.json",
             "pointer": "/passive/level/1381514/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1381/details.zh.json",
+            "pointer": "/potentialDetail/138101/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1381/details.zh.json",
+            "pointer": "/potentialDetail/138102/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1381/details.zh.json",
+            "pointer": "/potentialDetail/138103/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1381/details.zh.json",
+            "pointer": "/potentialDetail/138104/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1381/details.zh.json",
+            "pointer": "/potentialDetail/138105/desc"
           }
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "potentialLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          }
+        ]
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "potentialLevel",
           "unit": "ratio",
-          "value": 0.25
+          "values": {
+            "0": 0.25,
+            "1": 0.25,
+            "2": 0.34,
+            "3": 0.38,
+            "4": 0.42,
+            "5": 0.46,
+            "6": 0.5
+          }
         }
       },
       "activation": {
@@ -25655,182 +26899,6 @@
           "kind": "literal",
           "unit": "count",
           "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["regular", "sheer"]
-          },
-          {
-            "kind": "any",
-            "conditions": [
-              {
-                "kind": "all",
-                "conditions": [
-                  {
-                    "kind": "one-of",
-                    "fact": "hit.skillTag",
-                    "values": ["zzz-hp:follow-up"]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "agent:1381:zzz-hp:eff-ms4jrci5-nxk6sq:blk-ms4jrci5-unykui:mindscape:0",
-      "source": {
-        "identity": {
-          "kind": "agent",
-          "entityId": "1381"
-        },
-        "section": "潜能觉醒：电脉冲",
-        "references": [
-          {
-            "sourceId": "zzz-hp",
-            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-            "locale": "zh",
-            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-            "pointer": "/agents/56/mindscapeBuffs/0/effectBlocks/2/effects/0"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.09
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["regular", "sheer"]
-          },
-          {
-            "kind": "any",
-            "conditions": [
-              {
-                "kind": "all",
-                "conditions": [
-                  {
-                    "kind": "one-of",
-                    "fact": "hit.skillTag",
-                    "values": ["zzz-hp:follow-up"]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "agent:1381:zzz-hp:eff-ms4jtmex-gz9fiw:blk-ms4jrci5-unykui:mindscape:0",
-      "source": {
-        "identity": {
-          "kind": "agent",
-          "entityId": "1381"
-        },
-        "section": "潜能觉醒：电脉冲",
-        "references": [
-          {
-            "sourceId": "zzz-hp",
-            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-            "locale": "zh",
-            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-            "pointer": "/agents/56/mindscapeBuffs/0/effectBlocks/2/effects/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.04
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 4
         }
       },
       "scope": "hit",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "rulesVersion": "agent-actions/1",
+  "rulesVersion": "agent-actions/2",
   "sourceVersion": "3.1",
   "members": [
     "1011",
@@ -762,9 +762,9 @@
   ],
   "artifacts": {
     "agents/1011.json": "f2824af04f5f0fff0f79ff64e8b7689e03631e88965f3a1ea3cf604ef739c42d",
-    "agents/1021.json": "82bfa0d6d1185ba448a3b9949a226ed40de0972b492ba4462ed0d35a25391ce3",
+    "agents/1021.json": "2d163c1cab5b0c773ea7cf185edfb291b6ad00350bd31854569688ccc4ba33da",
     "agents/1031.json": "f8814cf4e7222c3cfb9f9a6b2318605e7b81bb0ee85dd13b05ee1dec64546702",
-    "agents/1041.json": "f064b106bc0cd89d2d7715fe84bd2dd967b4383d4cb55b555af116e6678ed54a",
+    "agents/1041.json": "8a1b8454b9e0fb2d8b3b737af92188d00df116477a95a28f80e8502601eb3c7d",
     "agents/1051.json": "f708075cc35d749f4fd1242b2ff903a665b06a7f1fedc84a9fc5241176aaf243",
     "agents/1061.json": "702b4957a3bf99bd4a83358c737521509a196e74d9706e544fd2332bd016c8e7",
     "agents/1071.json": "5ca10de441dff66612d353b7b8065b3b1a312ae2f9d7490685288fa941870818",
@@ -774,18 +774,18 @@
     "agents/1111.json": "0834f2667f8f1cba0cf95cdc51b273dbd752164670b7a8dc9af0e3efc4cda23f",
     "agents/1121.json": "6805507fc2eeebca29072a4ebcf1f745399051aa5a36257f79b5d30205b5fbac",
     "agents/1131.json": "546e5e3a767c3b258f8187485113d3ff31d79c8982f4b7b1a203365ed5c7df4f",
-    "agents/1141.json": "bf8e92745ad53d14d4fabf5a0cd2be819325f86a84f3520737a7a6f7518d02cf",
+    "agents/1141.json": "8e3f7ee67183dd371357d0240d9a3f5482bfca78963c4a8b4f9e0ecb43473a86",
     "agents/1151.json": "5700f00e4245a49756a0d5511e92de3c3c8d93778c7da61cb7969681c8086719",
     "agents/1161.json": "befd213361206f7e4028009ca67718bea98478d9cd98f68fdb25d94592df8d81",
-    "agents/1171.json": "69c83784ab113b08fb837b503bdb28ebd2b55576df7a285293b193e34d52fb84",
-    "agents/1181.json": "2032f2a1f07ef6844d75b787f037fa25739ce577f7a12f7a8fdb23a8ce630a6c",
-    "agents/1191.json": "51b9f7b0544099955f40240b0679ec6b98b08d3e3c38146248e7dfcf5e33bda2",
-    "agents/1201.json": "f92d126273511994c61dd71e65a285afed4eb3ae09b8668df5146d54ff2efc74",
-    "agents/1211.json": "d82a4919d6afdf3d20b29c33a53a025b3a9e8c38e1439c7fe2553c3a7ba1a22a",
+    "agents/1171.json": "1d1f06b50b1478cd213f443a13df4e6f63634fded7aea778fd40f86171d8c28a",
+    "agents/1181.json": "cb5a6e776219a149f8fd5ca11c54b2468811ce9dbd34ff69ef242e9c4d0a363a",
+    "agents/1191.json": "322aed3e92e535cf9575f9b0399a714c594daa6977df4fec7b89302017f8a419",
+    "agents/1201.json": "170c0b3f26c3452d5502f233bd654e7b7362eec682f76b8e7ec91ef85c85f59a",
+    "agents/1211.json": "6b34c18866c62d6737103949838c78d55f2497aaefc91780182f9cdc8a6c5d13",
     "agents/1221.json": "5c88a2d4d18f5fc3d735e0db2c8b7695025a9891881315b4cbb829ef4513f97a",
     "agents/1241.json": "b2c4bad3da2d58f681b9dabacada7d0055282650179534196fd3159c9888a2ed",
     "agents/1251.json": "c25fba403f7e09832116ddf310cdcb0c69330c85915665fd348027c9b3ffb5cd",
-    "agents/1261.json": "0dc07308c2e62bf76edc5620a9263f7c176c80cbcaa31969505cb46b487841ac",
+    "agents/1261.json": "8d86f8ff9df5c6165d6a81da164adb7a7d6389c2a869453358f1468bff38868b",
     "agents/1271.json": "c2187574314060a094be78e0ea74fc0bffe2cf0a08dba6dc140505f2c1fdd3a2",
     "agents/1281.json": "ab6ef4ec66a609d82535e9d2fa0302b6ecca77b41c8274e9a60c2eeb3c2cf6d8",
     "agents/1291.json": "bf90a1623db6a73601fadb70c3fe78209d20e777333935547eee9b70ee81aad0",
@@ -797,7 +797,7 @@
     "agents/1351.json": "44bca21b050121976b153f56ba6628f079b5f8580e4b96cecb61fa7a111c0670",
     "agents/1361.json": "96303186991ace3dfd6de07079bf602331da6850f43189255ca8ff5ca2e9f5db",
     "agents/1371.json": "b02acd4ec219eec8d20a16ca3ff2948ca008cd92763f30148dcfd3a8e44e8cae",
-    "agents/1381.json": "b5b6a443b534aa5aac2e837210cf4b2ca1f99b9ca86c1b632ec1d4194e6c8191",
+    "agents/1381.json": "a59caf3a6fff14dba780c8478b9ff8a036eee8d1ccfdec92e0cd8868811fec34",
     "agents/1391.json": "30ca506799d466f29f3aa6a111f630f8c340f716c0a8f9ca70565d7c8cc26b80",
     "agents/1401.json": "0b2513a387bbf0cc588e0d4407b3a2f202474ccd9e01899513664b34d520170a",
     "agents/1411.json": "9cbd5914c619dd3b1ebcf1bd8dd65c9d5525718230a5d983070aaa992f68d47c",
@@ -840,15 +840,15 @@
       }
     ]
   },
-  "registrySha256": "f045cdb456dcc21000815ea3dafde76e9c68f76745d2a11146e56ca7d72aa415",
-  "staticCatalogSha256": "2c4e298f0c2fe3233e86d6d6112513b0904172c91a4104573d4d4de440773e98",
+  "registrySha256": "d6a7f2c8784f51350ed720359e46e22eb2f4e81c96da15c8adfc7c0110901f25",
+  "staticCatalogSha256": "7b3668c3c58ad020811ff5d85d695d1e797b246f5ed452281ed954b8e03df735",
   "coverage": {
     "agents": 58,
     "actions": 1256,
-    "damage": 963,
+    "damage": 991,
     "dazeOnly": 161,
     "luminize": 4,
-    "unavailable": 128,
+    "unavailable": 100,
     "individualHitActions": 1
   },
   "limitations": [
@@ -857,7 +857,8 @@
     "已确认逐次命中时逐段向上取整；仅有合计倍率时允许合理取整误差，但不能用于逐次附加伤害或不同命中乘区。",
     "技能等级输入明确区分训练值与最终值；M3/M5 各加二级，最终值不再叠加；普通等级一至十二。",
     "没有自动施加减防、影画伤害增益、核心属性转化或装备效果；沿用现有静态效果与后续面板适配。",
-    "失衡倍率独立于伤害倍率；耀变基础倍率独立于攻击力直伤，实际结算复用现有 core/effects 公式。"
+    "失衡倍率独立于伤害倍率；耀变基础倍率独立于攻击力直伤，实际结算复用现有 core/effects 公式。",
+    "动作可用性与命中身份可由潜能等级与调用方显式额外能力事实决定；未提供、未解锁或事实非法时拒绝，不插值、不复用最高档。"
   ],
   "discrepancies": [
     {
@@ -1510,6 +1511,13 @@
       "upstream": "电",
       "adopted": "physical",
       "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1201:action:0016",
+      "field": "skillCategory",
+      "upstream": "chain",
+      "adopted": "ultimate",
+      "reason": "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。"
     },
     {
       "actionId": "action:agent:1201:action:0017",

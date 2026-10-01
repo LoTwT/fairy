@@ -56,7 +56,19 @@ export interface SupplementBase {
   readonly verification: string
 }
 
+/** 在既有目录实体新增选项的补充来源；不创建重复实体。 */
+export interface SupplementOption extends SupplementBase {
+  readonly kind: "option"
+  readonly catalogEntityId: string
+  readonly optionId: string
+  readonly rule: SupplementRuleSpec
+  readonly variant: SupplementVariantSpec
+  readonly supportedRanks: string
+  readonly computationTarget: string
+}
+
 export type Supplement =
+  | SupplementOption
   | (SupplementBase & {
       readonly kind: "option-variant"
       readonly optionId: string
@@ -85,6 +97,18 @@ const literal = <U extends import("@randomplay/shared").Unit>(
   value: number,
 ) => ({ kind: "literal", unit, value }) as const
 
+/** 潜能门槛条件；门槛值来自 Nanoka potentialDetail 的每档数值。 */
+const potentialFrom = (minimum: number): Condition<"configuration"> => ({
+  kind: "compare-number",
+  unit: "count",
+  operator: "gte",
+  left: {
+    kind: "configuration-number",
+    unit: "count",
+    field: "potentialLevel",
+  },
+  right: literal("count", minimum),
+})
 const directKinds = ["regular", "sheer"] as const
 
 const nekomataOrdinaryEvidence = [
@@ -370,9 +394,442 @@ const identityInflectionBoundary: Supplement = {
   computationTarget: "none",
 }
 
+const potentialEvidence = (
+  entityId: string,
+  sha256: string,
+  startId: number,
+): readonly SupplementEvidenceReference[] =>
+  [startId + 1, startId + 2, startId + 3, startId + 4, startId + 5].map(
+    (id) => ({
+      path: `agents/${entityId}/details.zh.json`,
+      pointer: `/potentialDetail/${id}/desc`,
+      sha256,
+    }),
+  )
+
+const soldier11PotentialEvidence = potentialEvidence(
+  "1041",
+  "a66ff561b147b01b3106ccce6491c3c66cd407ab445a3fdf4569ae03c7c4546b",
+  104100,
+)
+const lycaonPotentialEvidence = potentialEvidence(
+  "1141",
+  "e183f9a19ea3534fa577d215ab5caa5c812fe6636c816a0db6e517379bfb55b3",
+  114100,
+)
+const alexandrinaPotentialEvidence = potentialEvidence(
+  "1211",
+  "48658bb99713ac204c6b4e85a9ed7cc6bc74dbe206df79ac8ed001f4423d2c18",
+  121100,
+)
+const ellenOrdinaryEvidence = [
+  {
+    path: "agents/1191/details.zh.json",
+    pointer: "/passive/level/1191507/desc/0",
+    sha256: "7d42a516131172e8dadcfb9744cbbb0d56eba8d8909c795064fc3ea3b40288c8",
+  },
+] as const
+const harumasaOrdinaryEvidence = [
+  {
+    path: "agents/1201/details.zh.json",
+    pointer: "/passive/level/1201507/desc/0",
+    sha256: "344958cd98b57c943154eef3b203db52b79f8a659315154c9cdf3351cc163886",
+  },
+] as const
+
+/** 11号（绝焰）：额外能力燎原条件下的自身暴伤，固定来源缺该具名项。 */
+const soldier11FlameProwess: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:soldier11:flame-prowess",
+  source:
+    "nanoka-integrated@3.1 agents/1041 /potentialDetail/104101—104105/desc",
+  catalogEntityId: "agents:soldier11",
+  optionId: "nanoka:agents:soldier11:potential:flame-prowess",
+  supportedRanks: "潜能 2—6",
+  computationTarget: "catalog option on the mapped agent entity",
+  evidence: soldier11PotentialEvidence,
+  verification:
+    "Nanoka potentialDetail 104101—104105（level 2—6）明确：[额外能力：燎原]中，「11号」自身暴击伤害提升 16/24/32/40/48%。固定 ZZZ-HP 来源没有该具名条目（version 6 的额外能力只记录火属性增伤 10% 与失衡额外 22.5%），按补充来源在既有 agents:soldier11 实体新增选项；额外能力触发条件（队伍中存在与自身属性或阵营相同的角色）由调用方显式选择断言，不自动推断队伍构成。",
+  rule: {
+    effectId: "agent:1041:nanoka:flame-prowess:mindscape:0",
+    identity: { kind: "agent", entityId: "1041" },
+    section: "潜能觉醒：绝焰",
+    config: potentialFrom(2),
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "potentialLevel",
+        unit: "ratio",
+        values: { 2: 0.16, 3: 0.24, 4: 0.32, 5: 0.4, 6: 0.48 },
+      },
+    },
+    scope: "hit",
+    when: { kind: "all", conditions: [] },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "criticalDamage",
+      stage: "direct",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { potentialLevels: [2, 3, 4, 5, 6] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "额外能力：燎原生效时（队伍中存在与自身属性或阵营相同的角色，由调用方断言），自身暴击伤害提升（潜能 2—6：16/24/32/40/48%）。",
+    name: "潜能觉醒：绝焰 · critDmg",
+    target: "self",
+  },
+}
+
+/** 莱卡恩（掠冰）：围猎期间作为非当前操作角色发动普攻/冲刺/闪避反击的冲击力。 */
+const lycaonIceHunt: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:lycaon:ice-hunt-impact",
+  source:
+    "nanoka-integrated@3.1 agents/1141 /potentialDetail/114101—114105/desc",
+  catalogEntityId: "agents:lycaon",
+  optionId: "nanoka:agents:lycaon:potential:ice-hunt-impact",
+  supportedRanks: "潜能 2—6",
+  computationTarget: "catalog option on the mapped agent entity",
+  evidence: lycaonPotentialEvidence,
+  verification:
+    "Nanoka potentialDetail 114101—114105（level 2—6）明确：[围猎]状态持续期间，莱卡恩作为非当前操作中代理人发动[普通攻击]、[冲刺攻击]和[闪避反击]时，冲击力提升 5/7.5/10/12.5/15%。固定 ZZZ-HP 来源没有该具名条目，按补充来源在既有 agents:lycaon 实体新增选项；围猎状态与出站事实由调用方显式断言。围猎自动攻击、剩余时间 6% 失衡每秒等时间线机制不模拟。",
+  rule: {
+    effectId: "agent:1141:nanoka:ice-hunt-impact:mindscape:0",
+    identity: { kind: "agent", entityId: "1141" },
+    section: "潜能觉醒：掠冰",
+    config: potentialFrom(2),
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "potentialLevel",
+        unit: "ratio",
+        values: { 2: 0.05, 3: 0.075, 4: 0.1, 5: 0.125, 6: 0.15 },
+      },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer"],
+        },
+        {
+          kind: "one-of",
+          fact: "hit.skillCategory",
+          values: ["basic", "dash", "dodge-counter"],
+        },
+      ],
+    },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "final-percentage",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { potentialLevels: [2, 3, 4, 5, 6] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "围猎状态持续期间，作为非当前操作中代理人发动[普通攻击]、[冲刺攻击]和[闪避反击]时，冲击力提升（潜能 2—6：5/7.5/10/12.5/15%）；围猎状态与出站事实由调用方断言。",
+    name: "潜能觉醒：掠冰 · impact",
+    target: "self",
+  },
+}
+
+/** 丽娜（完美侍奉）：每个潜能升级档的自身穿透率。 */
+const alexandrinaPerfectService: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:alexandrina:perfect-service-pierce",
+  source:
+    "nanoka-integrated@3.1 agents/1211 /potentialDetail/121101—121105/desc",
+  catalogEntityId: "agents:alexandrina",
+  optionId: "nanoka:agents:alexandrina:potential:perfect-service-pierce",
+  supportedRanks: "潜能 2—6",
+  computationTarget: "catalog option on the mapped agent entity",
+  evidence: alexandrinaPotentialEvidence,
+  verification:
+    "Nanoka potentialDetail 121101—121105（level 2—6）均写“穿透率提升1.6%”，即每个潜能升级档 +1.6 个百分点；按来源累计，level 2—6 为 1.6/3.2/4.8/6.4/8.0 个百分点。该常驻穿透率与 [核心被动：迷你毁灭拍档] 的存在条件无关，因此与核心存在期间才生效的攻击/防御转化分开登记，不合并为完整选项；转化读取值仍来自持有者显式输入。",
+  rule: {
+    effectId: "agent:1211:nanoka:perfect-service-pierce:mindscape:0",
+    identity: { kind: "agent", entityId: "1211" },
+    section: "潜能觉醒：完美侍奉",
+    config: potentialFrom(2),
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "potentialLevel",
+        unit: "ratio",
+        values: { 2: 0.016, 3: 0.032, 4: 0.048, 5: 0.064, 6: 0.08 },
+      },
+    },
+    scope: "entity",
+    when: { kind: "all", conditions: [] },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "penetrationRatio",
+      stage: "direct",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { potentialLevels: [2, 3, 4, 5, 6] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "潜能升级档累计的自身穿透率提升（1.6/3.2/4.8/6.4/8.0 个百分点）；与核心被动存在期间的攻击/防御转化分开选择。",
+    name: "潜能觉醒：完美侍奉 · penRate",
+    target: "self",
+  },
+}
+
+/** 艾莲：核心被动 100% 暴伤的普通分支受益范围（仅冰渊潜袭与急冻修剪法）。 */
+const ellenOrdinaryBladeDance: Supplement = {
+  kind: "option-variant",
+  supplementId: "nanoka:ellen:ordinary-blade-dance",
+  source: "nanoka-integrated@3.1 agents/1191 /passive/level/1191507/desc/0",
+  optionId: "agents:ellen:mindscape:0:blk-legacy:legacy-self-critDmg",
+  supportedRanks: "core 7；潜能 0",
+  computationTarget: "catalog option variant",
+  evidence: ellenOrdinaryEvidence,
+  verification:
+    "Nanoka 普通分支（/passive/level/1191507，potential [0]）明确：核心被动 100% 暴伤只作用于[冲刺攻击：冰渊潜袭]蓄力剪击与[普通攻击：急冻修剪法]；潜能分支（1191508—1191514）才扩展到[连携技]、[终结技]、[普通攻击：霜锋]和[普通攻击：冰刃浪]。本变体在潜能 0 提供限制在冰渊潜袭/急冻修剪法目标的 100% 暴伤，与潜能分支记录互斥；只开放已核实核心 7。",
+  rule: {
+    effectId: "agent:1191:nanoka:ordinary-blade-dance:mindscape:0",
+    identity: { kind: "agent", entityId: "1191" },
+    section: "核心被动：凌牙厉齿（普通分支）",
+    config: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "eq",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "coreSkillLevel",
+          },
+          right: literal("count", 7),
+        },
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "eq",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "potentialLevel",
+          },
+          right: literal("count", 0),
+        },
+      ],
+    },
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 1 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: [
+            "zzz-hp:skill:ellen-dodge-ms4fsyad",
+            "zzz-hp:skill:ellen-basic-ms4ftctx",
+          ],
+        },
+      ],
+    },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "criticalDamage",
+      stage: "direct",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: {
+      coreSkillLevels: [7],
+      potentialLevels: [0],
+    },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "普通分支（潜能未开启）：[冲刺攻击：冰渊潜袭]蓄力剪击或消耗[急冻充能]的[普通攻击：急冻修剪法]暴击伤害提升 100%；只有已核实核心等级 7。",
+    name: "核心被动：凌牙厉齿（普通分支） · critDmg",
+    target: "self",
+  },
+}
+/** 悠真：核心被动 25% 暴率的普通分支受益范围（仅飞弦·斩）。 */
+const harumasaOrdinaryCritRate: Supplement = {
+  kind: "option-variant",
+  supplementId: "nanoka:harumasa:ordinary-crit-rate",
+  source: "nanoka-integrated@3.1 agents/1201 /passive/level/1201507/desc/0",
+  optionId: "agents:harumasa:mindscape:0:blk-legacy:legacy-self-critRate",
+  supportedRanks: "core 7；潜能 0",
+  computationTarget: "catalog option variant",
+  evidence: harumasaOrdinaryEvidence,
+  verification:
+    "Nanoka 普通分支（/passive/level/1201507，potential [0]）只列[冲刺攻击：飞弦·斩]的暴击率提升 25%；潜能分支（1201508—1201514）才扩展到[逐雷]和[终结技]。本变体在潜能 0 提供只作用于飞弦斩的 25% 暴率，与潜能分支记录互斥；只开放已核实核心 7。",
+  rule: {
+    effectId: "agent:1201:nanoka:ordinary-crit-rate:mindscape:0",
+    identity: { kind: "agent", entityId: "1201" },
+    section: "核心被动：破晓（普通分支）",
+    config: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "eq",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "coreSkillLevel",
+          },
+          right: literal("count", 7),
+        },
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "eq",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "potentialLevel",
+          },
+          right: literal("count", 0),
+        },
+      ],
+    },
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 0.25 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:harumasa-dodge-ms4gw5t2"],
+        },
+      ],
+    },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "criticalRate",
+      stage: "direct",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { coreSkillLevels: [7], potentialLevels: [0] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "普通分支（潜能未开启）：[冲刺攻击：飞弦·斩]暴击率提升 25%；只有已核实核心等级 7。",
+    name: "核心被动：破晓（普通分支） · critRate",
+    target: "self",
+  },
+}
+
+/** 悠真：锋芒每层 12% 暴伤的普通分支受益范围（仅飞弦·斩）。 */
+const harumasaOrdinaryCritDmg: Supplement = {
+  kind: "option-variant",
+  supplementId: "nanoka:harumasa:ordinary-crit-dmg",
+  source: "nanoka-integrated@3.1 agents/1201 /passive/level/1201507/desc/0",
+  optionId: "agents:harumasa:mindscape:0:blk-legacy:eff-ms4gx7ds-ijkzuy",
+  supportedRanks: "core 7；潜能 0；层数 1—6",
+  computationTarget: "catalog option variant",
+  evidence: harumasaOrdinaryEvidence,
+  verification:
+    "Nanoka 普通分支（/passive/level/1201507，potential [0]）只把[锋芒]每层 12% 暴伤作用于[冲刺攻击：飞弦·斩]；潜能分支（1201508—1201514）才扩展到[逐雷]和[终结技]。本变体在潜能 0 提供只作用于飞弦斩的每层 12% 暴伤，真实[锋芒]层数上限 6 由调用方按实际层数选择，与潜能分支记录互斥；只开放已核实核心 7。",
+  rule: {
+    effectId: "agent:1201:nanoka:ordinary-crit-dmg:mindscape:0",
+    identity: { kind: "agent", entityId: "1201" },
+    section: "核心被动：破晓（普通分支）",
+    config: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "eq",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "coreSkillLevel",
+          },
+          right: literal("count", 7),
+        },
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "eq",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "potentialLevel",
+          },
+          right: literal("count", 0),
+        },
+      ],
+    },
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 0.12 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:harumasa-dodge-ms4gw5t2"],
+        },
+      ],
+    },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "criticalDamage",
+      stage: "direct",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 6,
+  },
+  variant: {
+    configuration: { coreSkillLevels: [7], potentialLevels: [0] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "普通分支（潜能未开启）：每层[锋芒]使[冲刺攻击：飞弦·斩]暴击伤害提升 12%，层数按真实层数选择（最多 6 层）；只有已核实核心等级 7。",
+    name: "核心被动：破晓（普通分支） · critDmg",
+    target: "self",
+  },
+}
 export const SUPPLEMENTS: readonly Supplement[] = [
   nekomataOrdinaryDmgBonus,
   nekomataOrdinaryShow,
   redAxis,
   identityInflectionBoundary,
+  soldier11FlameProwess,
+  lycaonIceHunt,
+  alexandrinaPerfectService,
+  ellenOrdinaryBladeDance,
+  harumasaOrdinaryCritRate,
+  harumasaOrdinaryCritDmg,
 ]

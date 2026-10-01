@@ -12,6 +12,7 @@ import type {
 } from "../../src/skills/types.ts"
 import {
   actionSourceSignature,
+  declaredPotentialLevels,
   sourceRows,
   type ActionRegistryEntry,
 } from "./registry.ts"
@@ -85,6 +86,22 @@ export function convertAgentActions(
         `Action semantic signature changed: ${entry.actionId}; review its registry entry`,
       )
     const { section, row, daze, descriptions } = sourceRows(details, entry)
+    const potentialLevels = declaredPotentialLevels(details, entry)
+    if (entry.conditionalIdentity) {
+      const conditional = entry.conditionalIdentity
+      if (
+        !potentialLevels ||
+        !conditional.potentialLevels.length ||
+        conditional.potentialLevels.some(
+          (level) => !potentialLevels.includes(level),
+        ) ||
+        (!conditional.skillTargetIds.length && !conditional.skillTags.length) ||
+        !entry.relatedPassiveEvidence?.length
+      )
+        throw new Error(
+          `Invalid conditional identity: ${entry.actionId}; review its registry entry`,
+        )
+    }
     const prefix = `/skill/${entry.levelGroup}/description/${entry.sectionIndex}/param`
     cover(`${prefix}/${entry.rowIndex}`)
     if (entry.dazeRowIndex !== null) cover(`${prefix}/${entry.dazeRowIndex}`)
@@ -112,6 +129,17 @@ export function convertAgentActions(
       skillCategory: entry.skillCategory,
       skillTargetIds: [...entry.skillTargetIds],
       skillTags: entry.countsAsFollowUp ? ["zzz-hp:follow-up"] : [],
+      ...(potentialLevels ? { potentialLevels: [...potentialLevels] } : {}),
+      ...(entry.conditionalIdentity
+        ? {
+            conditionalIdentity: {
+              potentialLevels: [...entry.conditionalIdentity.potentialLevels],
+              requiresAdditionalAbilityActive: true as const,
+              skillTargetIds: [...entry.conditionalIdentity.skillTargetIds],
+              skillTags: [...entry.conditionalIdentity.skillTags],
+            },
+          }
+        : {}),
       source: { path, pointer: `${prefix}/${entry.rowIndex}` },
       descriptionSources,
       description: descriptions.map((value) => strip(value.desc)).join("\n"),
