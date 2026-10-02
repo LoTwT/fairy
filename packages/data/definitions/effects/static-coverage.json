@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "7",
+  "revision": "8",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -11973,7 +11973,7 @@
       "stat": "atk",
       "optionId": "agents:caesar:mindscape:0:blk-legacy:legacy-team-atk",
       "effectIds": ["agent:1071:zzz-hp:legacy-team-atk:blk-legacy:mindscape:0"],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 1000,
       "normalizedValue": 1000
@@ -12016,7 +12016,7 @@
       "stat": "atk",
       "optionId": "agents:caesar:mindscape:2:blk-legacy:legacy-team-atk",
       "effectIds": ["agent:1071:zzz-hp:legacy-team-atk:blk-legacy:mindscape:2"],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 500,
       "normalizedValue": 500
@@ -14916,7 +14916,7 @@
       "effectIds": [
         "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -14961,7 +14961,7 @@
       "effectIds": [
         "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:6"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -30239,8 +30239,8 @@
     "rawEffects": 1290,
     "rules": 834,
     "options": 834,
-    "converted": 1213,
-    "corrected": 30,
+    "converted": 1209,
+    "corrected": 34,
     "unsupported": 47,
     "supplements": {
       "records": 10,

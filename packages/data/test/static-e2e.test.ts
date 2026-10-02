@@ -78,7 +78,7 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.1",
     snapshotId:
-      "sha256:008136f6efe3991ac70bc440ae075ed89c24d5188fbb886b3b4fb915fd0f748b",
+      "sha256:a6c2e56dff93c107df512c5eaa875bc0eff15f43607a5ba5ffe33ecaebf463a1",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -157,6 +157,144 @@ function close(
 }
 
 describe("complete static configurations against an independent pinned ZZZ-HP reference", () => {
+  it.each([
+    ["nicole-self", "Caesar", "1071", 2, 2, 0, 135, 67.5],
+    ["yixuan-self", "Pan Yinhu", "1421", 6, 6, 3200, 528, 192],
+    ["yixuan-self", "Pan Yinhu", "1421", 6, 1, 4800, 432, 288],
+    ["yixuan-self", "Pan Yinhu", "1421", 6, 7, 3200, 540, 180],
+  ] as const)(
+    "%s with %s (%s) core-dependent buffs at M%i/core%i preserves complete build and settled-panel equivalence",
+    async (
+      scenarioId,
+      agentName,
+      agentEntityId,
+      mindscapeRank,
+      coreSkillLevel,
+      initialAttack,
+      baseAmount,
+      increment,
+    ) => {
+      const scenario = scenarios.find((entry) => entry.id === scenarioId)!
+      const base = await inputFor(scenario)
+      const build = builds[scenario.buildIds[0]!]!
+      const expected = reference.cases[scenarioId]!.reference
+      const data = await loadStaticCalculationData({
+        agents: [build.agentName, agentName],
+        wEngines: [build.wEngineName],
+      })
+      const support: StaticActorConfiguration = {
+        entityId: "entity:core-support",
+        teamId: base.actors[0]!.teamId,
+        agentEntityId,
+        mindscapeRank,
+        coreSkillLevel,
+        wEngine: null,
+        driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null },
+        // 显式初始攻击与当前来源面板故意不同，防止误读面板替代施加时读数。
+        panel: {
+          mode: "out-of-combat",
+          stats: {
+            attack: { unit: "attack-points", value: 2000 },
+            health: { unit: "health-points", value: 10000 },
+          },
+          penetrationValue: 0,
+          damageBonuses: { physical: 0, ether: 0 },
+        },
+      }
+      const agentKey = agentEntityId === "1071" ? "caesar" : "panyinhu"
+      const effectKey =
+        agentEntityId === "1071" ? "legacy-team-atk" : "legacy-team-pierce"
+      const optionIds = [0, mindscapeRank].map(
+        (rank) =>
+          `agents:${agentKey}:mindscape:${rank}:blk-legacy:${effectKey}`,
+      )
+      const inputs: StaticActionCalculationInput["inputs"] =
+        agentEntityId === "1071"
+          ? []
+          : [0, 6].map((rank) => ({
+              bindingId: staticSourceBindingId(
+                support.entityId,
+                "agent",
+                agentEntityId,
+              ),
+              name: `agent:${agentEntityId}:zzz-hp:${effectKey}:blk-legacy:mindscape:${rank}:source`,
+              value: { unit: "attack-points", value: initialAttack },
+            }))
+      for (const [selected, increase] of [
+        [[], 0],
+        [[optionIds[0]!], baseAmount],
+        [[optionIds[1]!], increment],
+        [optionIds, baseAmount + increment],
+      ] as const) {
+        const input: StaticActionCalculationInput = {
+          ...base,
+          data,
+          actors: [...base.actors, support],
+          inputs,
+          selections: [
+            ...base.selections,
+            ...selected.map((optionId) => ({
+              holderId: support.entityId,
+              optionId,
+              layers: 1,
+            })),
+          ],
+        }
+        const finalStat =
+          expected.finalStats[
+            agentEntityId === "1071" ? "attack" : "sheerForce"
+          ]!
+        for (const actors of [
+          input.actors,
+          [
+            settledActor(
+              base.actors[0]!,
+              reference.builds[scenario.buildIds[0]!]!.panel,
+            ),
+            support,
+          ],
+        ]) {
+          const result = calculate({ ...input, actors })
+          for (const field of ["nonCritical", "critical", "expected"] as const)
+            close(
+              result.totals[field],
+              (expected.totals[field] * (finalStat + increase)) / finalStat,
+              `core buff ${field}`,
+            )
+          for (const segment of result.segments)
+            close(
+              segment.damage.evaluation.hit!.damageItems[0]!.finalStat,
+              finalStat + increase,
+              "core buff final stat",
+            )
+          close(
+            result.panels[0]!.stats.attack!.value,
+            reference.builds[scenario.buildIds[0]!]!.panel.stats["attack"]!,
+            "unchanged out-of-combat attack",
+          )
+        }
+      }
+      if (agentEntityId === "1421") {
+        const missing = calculateStaticActionDamage({
+          ...base,
+          data,
+          actors: [...base.actors, support],
+          selections: [
+            ...base.selections,
+            { holderId: support.entityId, optionId: optionIds[1]!, layers: 1 },
+          ],
+          inputs: [],
+        })
+        expect(missing.ok).toBe(false)
+        if (!missing.ok)
+          expect(
+            missing.issues.some((issue) => issue.code === "MISSING_FACT"),
+          ).toBe(true)
+      }
+    },
+    // 完整数据加载与四种选择 × 两种面板计算在 CI 并行负载下可超过默认 5 秒。
+    30_000,
+  )
   for (const scenario of scenarios)
     it(scenario.label, async () => {
       const input = await inputFor(scenario)

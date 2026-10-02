@@ -4,13 +4,13 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 834 条规则与 834 个选择项。1,213 条 converted、30 条 corrected；47 条 unsupported 中，37 条缺少 Fairy 身份、6 条属于当前 core 范围外公式，另有 4 条是已迁移的重复部分记录（semantic-conflict）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 834 条规则与 834 个选择项。1,209 条 converted、34 条 corrected；47 条 unsupported 中，37 条缺少 Fairy 身份、6 条属于当前 core 范围外公式，另有 4 条是已迁移的重复部分记录（semantic-conflict）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项、空记录和蕾米埃尔自身异常强度的新等级公式另列在报告中。目录入口拒绝把蕾米埃尔作为 `anomalySource`；她提供给其他来源异常的已映射增益可以正常计算。
 
-5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`，修订 7 新增 2 个具名差异 `potential-partial-option-migration` 与 `potential-branch-scope` 并扩展前两者（见下）。
+5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`，修订 7 新增 2 个具名差异 `potential-partial-option-migration` 与 `potential-branch-scope` 并扩展前两者；修订 8 新增 `core-skill-level-parameters` 与 `core-enhancement-independent-increment`（见下）。
 
-固定输入重复生成的三个制品字节一致。离线验收逐条对比 1,232 条 converted 记录，corrected 另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
+固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,232 个位置：当前 1,209 条 converted 与本轮四条 corrected 的核心 7 继续逐条比对，其余 19 个潜能位置按具名修正或迁移验证；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
 
 ### 修订 2：转化边界与核心档位
 
@@ -117,6 +117,36 @@
 动作分类修正保留来源冲突说明：柏妮思灼热抛接法的 Nanoka 描述同时提及物理与火，按 ZZZ-HP 单属性约定整条记火；
 丽娜晨间/午夜整条记电，木偶攻击使用丽娜自身面板与显式增益，不建立独立 actor、不继承属性、不模拟锁面板。
 维琳娜染色动作继续不可用且不新增染色接口；锐化/锐暴、召唤物继承与混合逐段分类仍不在本轮范围。
+
+### 修订 8：核心依赖增益的培养档位扩展
+
+本修订将凯撒基础攻击/M2 增量、潘引壶基础通窍/M6 增量共四条记录补齐至核心 1—7，保持
+`optionId`、`effectId`、显式影画门槛（M2 ≥2、M6 ≥6）、作用对象与 `final-fixed` 属性落点。
+单选影画项只提供真实增量，未选或零层不贡献，同选基础项时组成完整强化值；这是
+[影画修改通则的兼容例外](../effects/static-snapshot.md#影画累计解锁规则)，不改为自动启用的 modification。
+
+核心参数与逐行证据的唯一权威是 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)。
+基础参数新增精确记录级键，块级证据保持原支持范围；[semantics.ts](../../../packages/data/scripts/static-effects/semantics.ts)
+只登记引用与公式关系。[转换器](../../../packages/data/scripts/static-effects/convert.ts)按全部必需参数、证据和声明档位的交集
+生成 `by-rank`，目录与低层表达式保持同一缺档边界。生成器校验冻结摘要、Pointer 与被动行的真实 `level` 元数据。
+Nanoka 固定 3.1，来源分别为 `agents/1071/details.zh.json` 的 `/passive/level/1071501`—`1071507` 下的 `desc/0`
+与 `/talent/2/desc`、`agents/1421/details.zh.json` 的 `/passive/level/1421501`—`1421507` 下的 `desc/0` 与 `/talent/6/desc`。
+
+- 凯撒基础攻击按原文逐档读取，M2 独立增量为基础值 ×0.5，核心 2 保留 67.5，不作显示舍入。
+- 潘引壶令 `A` 为显式提供的施加时初始攻击、`r` 为当前核心档转换率：基础为 `min(max(0,A)×r,540)`；
+  M6 增量为 `min(max(0,A)×(r+0.06),720)−min(max(0,A)×r,540)`。单条贡献内部两项同读一个输入，
+  沿用原输入名和 `attack-points` 单位，不从预设 3000、受益人攻击或当前战斗攻击兜底。
+- 两个封顶点分别为 `720/(r+0.06)`、`540/r`。核心 1—6 在中间区间增量下降，不能套用统一的
+  `min(A×6%,180)`：核心 6/A3200 为 192、A3300 为 180；核心 1/A4800 为 288、A6000 为 180。
+  核心 7 两点均为 3000，保持原参考结果。
+
+四条来源位置由 converted 改为 corrected，目录分别记录低档参数补充与独立增量差额的具名差异；来源分母仍为
+1,290，当前统计见本页首节与正式覆盖报告。规则集 revision 为 8；三个效果制品同次生成，技能清单只更新
+`staticCatalogSha256`，技能动作字节不变。固定 ZZZ-HP 提交与 12 项来源摘要不变，属性/技能各自来源版本不变。
+
+回归覆盖七档独立期望、影画门槛、基础/影画单选与组合、未选/零层、两封顶点前后及区间、负输入钳制、
+不同来源显式读数、缺输入/错单位、缺档与非法核心诊断，以及低层求值、目录、完整动作和配装/局外面板等价。
+原有四条核心 7 上游参考继续执行；希希芙等真实缺档限制保持。此次未补充其他规划机制或扩大其证据边界。
 
 ## 交付目标与边界
 

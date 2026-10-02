@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "7",
+  "revision": "8",
   "effects": [
     {
       "kind": "contribution",
@@ -3712,6 +3712,48 @@
             "version": "3.1",
             "locale": "zh",
             "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
             "pointer": "/passive/level/1071507/desc/0"
           }
         ]
@@ -3733,9 +3775,18 @@
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
           "unit": "attack-points",
-          "value": 1000
+          "values": {
+            "1": 40,
+            "2": 135,
+            "3": 240,
+            "4": 400,
+            "5": 650,
+            "6": 900,
+            "7": 1000
+          }
         }
       },
       "activation": {
@@ -3787,14 +3838,56 @@
             "version": "3.1",
             "locale": "zh",
             "resourcePath": "agents/1071/details.zh.json",
-            "pointer": "/passive/level/1071507/desc/0"
+            "pointer": "/talent/2/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.1",
             "locale": "zh",
             "resourcePath": "agents/1071/details.zh.json",
-            "pointer": "/talent/2/desc"
+            "pointer": "/passive/level/1071501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/passive/level/1071507/desc/0"
           }
         ]
       },
@@ -3815,9 +3908,23 @@
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
           "unit": "attack-points",
-          "value": 500
+          "values": {
+            "1": 40,
+            "2": 135,
+            "3": 240,
+            "4": 400,
+            "5": 650,
+            "6": 900,
+            "7": 1000
+          }
+        },
+        "incrementCoefficient": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 0.5
         }
       },
       "activation": {
@@ -3841,9 +3948,18 @@
         "stat": "attack",
         "stage": "final-fixed",
         "value": {
-          "kind": "parameter",
+          "kind": "multiply",
           "unit": "attack-points",
-          "name": "amount"
+          "value": {
+            "kind": "parameter",
+            "unit": "attack-points",
+            "name": "amount"
+          },
+          "coefficient": {
+            "kind": "parameter",
+            "unit": "multiplier",
+            "name": "incrementCoefficient"
+          }
         }
       }
     },
@@ -30293,6 +30409,48 @@
             "version": "3.1",
             "locale": "zh",
             "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
             "pointer": "/passive/level/1421507/desc/0"
           }
         ]
@@ -30319,14 +30477,32 @@
           "value": 0
         },
         "rate": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
           "unit": "multiplier",
-          "value": 0.18
+          "values": {
+            "1": 0.09,
+            "2": 0.105,
+            "3": 0.12,
+            "4": 0.135,
+            "5": 0.15,
+            "6": 0.165,
+            "7": 0.18
+          }
         },
         "cap": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
           "unit": "sheer-force-points",
-          "value": 540
+          "values": {
+            "1": 540,
+            "2": 540,
+            "3": 540,
+            "4": 540,
+            "5": 540,
+            "6": 540,
+            "7": 540
+          }
         }
       },
       "activation": {
@@ -30420,14 +30596,56 @@
             "version": "3.1",
             "locale": "zh",
             "resourcePath": "agents/1421/details.zh.json",
-            "pointer": "/passive/level/1421507/desc/0"
+            "pointer": "/talent/6/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.1",
             "locale": "zh",
             "resourcePath": "agents/1421/details.zh.json",
-            "pointer": "/talent/6/desc"
+            "pointer": "/passive/level/1421501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.1",
+            "locale": "zh",
+            "resourcePath": "agents/1421/details.zh.json",
+            "pointer": "/passive/level/1421507/desc/0"
           }
         ]
       },
@@ -30453,14 +30671,42 @@
           "value": 0
         },
         "rate": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "multiplier",
+          "values": {
+            "1": 0.09,
+            "2": 0.105,
+            "3": 0.12,
+            "4": 0.135,
+            "5": 0.15,
+            "6": 0.165,
+            "7": 0.18
+          }
+        },
+        "cap": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "sheer-force-points",
+          "values": {
+            "1": 540,
+            "2": 540,
+            "3": 540,
+            "4": 540,
+            "5": 540,
+            "6": 540,
+            "7": 540
+          }
+        },
+        "rateIncrease": {
           "kind": "constant",
           "unit": "multiplier",
           "value": 0.06
         },
-        "cap": {
+        "enhancedCap": {
           "kind": "constant",
           "unit": "sheer-force-points",
-          "value": 180
+          "value": 720
         }
       },
       "activation": {
@@ -30484,49 +30730,122 @@
         "stat": "sheerForce",
         "stage": "final-fixed",
         "value": {
-          "kind": "minimum",
+          "kind": "add",
           "unit": "sheer-force-points",
           "operands": [
             {
-              "kind": "convert",
+              "kind": "minimum",
               "unit": "sheer-force-points",
-              "input": {
-                "kind": "maximum",
-                "unit": "attack-points",
-                "operands": [
-                  {
-                    "kind": "literal",
-                    "unit": "attack-points",
-                    "value": 0
-                  },
-                  {
-                    "kind": "add",
+              "operands": [
+                {
+                  "kind": "convert",
+                  "unit": "sheer-force-points",
+                  "input": {
+                    "kind": "maximum",
                     "unit": "attack-points",
                     "operands": [
                       {
-                        "kind": "input",
+                        "kind": "literal",
                         "unit": "attack-points",
-                        "name": "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:6:source"
+                        "value": 0
+                      },
+                      {
+                        "kind": "add",
+                        "unit": "attack-points",
+                        "operands": [
+                          {
+                            "kind": "input",
+                            "unit": "attack-points",
+                            "name": "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:6:source"
+                          },
+                          {
+                            "kind": "parameter",
+                            "unit": "attack-points",
+                            "name": "threshold"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "rate": {
+                    "kind": "add",
+                    "unit": "multiplier",
+                    "operands": [
+                      {
+                        "kind": "parameter",
+                        "unit": "multiplier",
+                        "name": "rate"
                       },
                       {
                         "kind": "parameter",
-                        "unit": "attack-points",
-                        "name": "threshold"
+                        "unit": "multiplier",
+                        "name": "rateIncrease"
                       }
                     ]
                   }
-                ]
-              },
-              "rate": {
-                "kind": "parameter",
-                "unit": "multiplier",
-                "name": "rate"
-              }
+                },
+                {
+                  "kind": "parameter",
+                  "unit": "sheer-force-points",
+                  "name": "enhancedCap"
+                }
+              ]
             },
             {
-              "kind": "parameter",
+              "kind": "multiply",
               "unit": "sheer-force-points",
-              "name": "cap"
+              "value": {
+                "kind": "minimum",
+                "unit": "sheer-force-points",
+                "operands": [
+                  {
+                    "kind": "convert",
+                    "unit": "sheer-force-points",
+                    "input": {
+                      "kind": "maximum",
+                      "unit": "attack-points",
+                      "operands": [
+                        {
+                          "kind": "literal",
+                          "unit": "attack-points",
+                          "value": 0
+                        },
+                        {
+                          "kind": "add",
+                          "unit": "attack-points",
+                          "operands": [
+                            {
+                              "kind": "input",
+                              "unit": "attack-points",
+                              "name": "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:6:source"
+                            },
+                            {
+                              "kind": "parameter",
+                              "unit": "attack-points",
+                              "name": "threshold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "rate": {
+                      "kind": "parameter",
+                      "unit": "multiplier",
+                      "name": "rate"
+                    }
+                  },
+                  {
+                    "kind": "parameter",
+                    "unit": "sheer-force-points",
+                    "name": "cap"
+                  }
+                ]
+              },
+              "coefficient": {
+                "kind": "literal",
+                "unit": "multiplier",
+                "value": -1
+              }
             }
           ]
         }

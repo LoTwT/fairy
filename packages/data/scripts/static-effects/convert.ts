@@ -25,7 +25,7 @@ import type {
 } from "@randomplay/shared"
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
-import { SOURCE_SEMANTICS } from "./semantics.ts"
+import { SOURCE_SEMANTICS, type CoreSkillLevelSemantics } from "./semantics.ts"
 import { SUPPLEMENTS, type Supplement } from "./supplements.ts"
 import {
   BUFF_RESOURCE,
@@ -45,7 +45,7 @@ const independentTargetCategories: ReadonlyMap<string, SkillCategory> = new Map(
     .filter((s) => s.kind === "independent-target")
     .map((s) => [s.targetId, s.category]),
 )
-const rankEvidence: Readonly<
+export type RankEvidence = Readonly<
   Record<
     string,
     {
@@ -58,9 +58,111 @@ const rankEvidence: Readonly<
         sha256: string
       }[]
       verification: string
+      parameters?: Record<
+        string,
+        { unit: string; value?: number; values?: Record<string, number> }
+      >
     }
   >
-> = evidence
+>
+const rankEvidence: RankEvidence = evidence
+
+/** 只开放全部必需参数及逐档证据的交集；不补零、不插值或继承其他记录的值。 */
+export function resolveCoreRankParameters(
+  semantics: CoreSkillLevelSemantics,
+  outputUnit: Unit,
+  records: RankEvidence = rankEvidence,
+) {
+  const formula = semantics.formula
+  const requests: { key: string; name: string; unit: Unit }[] =
+    formula.kind === "amount" || formula.kind === "proportional-increment"
+      ? [{ key: semantics.baseEvidenceKey, name: "amount", unit: outputUnit }]
+      : [
+          { key: semantics.baseEvidenceKey, name: "rate", unit: "multiplier" },
+          { key: semantics.baseEvidenceKey, name: "cap", unit: outputUnit },
+        ]
+  if (formula.kind === "proportional-increment")
+    requests.push({
+      key: formula.enhancementEvidenceKey,
+      name: "incrementCoefficient",
+      unit: "multiplier",
+    })
+  if (formula.kind === "capped-conversion-increment")
+    requests.push(
+      {
+        key: formula.enhancementEvidenceKey,
+        name: "rateIncrease",
+        unit: "multiplier",
+      },
+      {
+        key: formula.enhancementEvidenceKey,
+        name: "enhancedCap",
+        unit: outputUnit,
+      },
+    )
+  let levels: CoreSkillLevel[] = [1, 2, 3, 4, 5, 6, 7]
+  const parameters: Record<string, AnyParameter> = {}
+  const references: SourceReference[] = []
+  for (const { key, name, unit } of requests) {
+    const entry = records[key]
+    const parameter = entry?.parameters?.[name]
+    if (!entry || !parameter)
+      throw new Error(`Missing core parameter evidence: ${key}/${name}`)
+    if (
+      entry.levels.length === 0 ||
+      new Set(entry.levels).size !== entry.levels.length ||
+      entry.levels.some(
+        (level) => !Number.isInteger(level) || level < 1 || level > 7,
+      ) ||
+      entry.evidence.length === 0
+    )
+      throw new Error(`Invalid core rank evidence: ${key}`)
+    if (parameter.unit !== unit)
+      throw new Error(`Core parameter unit mismatch: ${key}/${name}`)
+    levels = levels.filter((level) => entry.levels.includes(level))
+    if (parameter.values !== undefined) {
+      if (
+        parameter.value !== undefined ||
+        Object.keys(parameter.values).length === 0 ||
+        Object.entries(parameter.values).some(
+          ([rank, value]) => !/^[1-7]$/.test(rank) || !Number.isFinite(value),
+        )
+      )
+        throw new Error(`Invalid core parameter table: ${key}/${name}`)
+      levels = levels.filter(
+        (level) =>
+          Object.hasOwn(parameter.values!, level) &&
+          entry.evidence.some((ref) => ref.rank === level),
+      )
+      parameters[name] = {
+        kind: "by-rank",
+        rank: "coreSkillLevel",
+        unit,
+        values: parameter.values,
+      } as AnyParameter
+    } else {
+      if (!Number.isFinite(parameter.value))
+        throw new Error(`Invalid core parameter constant: ${key}/${name}`)
+      parameters[name] = { kind: "constant", unit, value: parameter.value! }
+    }
+    references.push(
+      ...entry.evidence.map((ref) => nanokaReference(ref.path, ref.pointer)),
+    )
+  }
+  // 参数本身也只发布交集，低层入口与目录入口遵守相同的缺档契约。
+  for (const [name, parameter] of Object.entries(parameters))
+    if (parameter.kind === "by-rank")
+      parameters[name] = {
+        ...parameter,
+        values: Object.fromEntries(
+          levels.map((level) => [
+            level,
+            parameter.values[level as keyof typeof parameter.values],
+          ]),
+        ),
+      } as AnyParameter
+  return { levels, parameters, references }
+}
 export const elementMap: Readonly<Record<string, DamageElement>> = {
   物理: "physical",
   火: "fire",
@@ -771,6 +873,7 @@ function compile(
     e.kind === "stacked" || e.stackable ? (e.valuePerStack ?? e.value) : e.value
   const amountUnit = mapping.basePercentage ? "ratio" : mapping.unit
   let expression: NumericExpression<Unit, "contribution">
+  let conversionInput: NumericExpression<Unit, "contribution"> | undefined
   if (e.kind === "convert") {
     const conversion = e.convert
     if (!conversion) return unsupported("missing-parameter", "转化规则缺少参数")
@@ -862,6 +965,7 @@ function compile(
       },
       rate: param("multiplier", "rate"),
     }
+    conversionInput = expression.input
     if (conversion.cap !== undefined && conversion.cap !== null) {
       parameters["cap"] = {
         kind: "constant",
@@ -894,6 +998,106 @@ function compile(
       value: value * mapping.scale,
     }
     expression = param(amountUnit, "amount")
+  }
+  if (semantics?.kind === "core-skill-level") {
+    const resolved = resolveCoreRankParameters(semantics, amountUnit)
+    if (resolved.levels.length === 0)
+      return unsupported(
+        "missing-rank-evidence",
+        "必需核心参数与逐档证据没有共同支持的档位",
+      )
+    Object.assign(parameters, resolved.parameters)
+    const formula = semantics.formula
+    if (formula.kind === "amount") expression = param(amountUnit, "amount")
+    else if (formula.kind === "proportional-increment")
+      expression = {
+        kind: "multiply",
+        unit: amountUnit,
+        value: param(amountUnit, "amount"),
+        coefficient: param("multiplier", "incrementCoefficient"),
+      }
+    else {
+      if (
+        !conversionInput ||
+        requirements.length !== 1 ||
+        requirements[0]!.unit !== "attack-points"
+      )
+        throw new Error(
+          `Core conversion requires explicit initial attack: ${record.pointer}`,
+        )
+      requirements[0] = {
+        ...requirements[0]!,
+        description:
+          "效果施加时来源角色的初始攻击力；与基础/影画项组合时提供同一读数，不使用预设或当前面板",
+      }
+      const capped = (
+        rate: NumericExpression<"multiplier", "contribution">,
+        cap: string,
+      ): NumericExpression<Unit, "contribution"> => ({
+        kind: "minimum",
+        unit: mapping.unit,
+        operands: [
+          {
+            kind: "convert",
+            unit: mapping.unit,
+            input: conversionInput!,
+            rate,
+          },
+          param(mapping.unit, cap),
+        ],
+      })
+      const base = capped(param("multiplier", "rate"), "cap")
+      expression =
+        formula.kind === "capped-conversion"
+          ? base
+          : {
+              kind: "add",
+              unit: mapping.unit,
+              operands: [
+                capped(
+                  {
+                    kind: "add",
+                    unit: "multiplier",
+                    operands: [
+                      param("multiplier", "rate"),
+                      param("multiplier", "rateIncrease"),
+                    ],
+                  },
+                  "enhancedCap",
+                ),
+                {
+                  kind: "multiply",
+                  unit: mapping.unit,
+                  value: base,
+                  coefficient: literal("multiplier", -1),
+                },
+              ],
+            }
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      configuration: {
+        ...variant.configuration,
+        coreSkillLevels: resolved.levels,
+      },
+      differences: [
+        ...variant.differences,
+        "core-skill-level-parameters",
+        ...(formula.kind === "proportional-increment" ||
+        formula.kind === "capped-conversion-increment"
+          ? ["core-enhancement-independent-increment"]
+          : []),
+      ],
+      references: [
+        variant.references[0],
+        ...new Map(
+          [...variant.references.slice(1), ...resolved.references].map(
+            (ref) => [JSON.stringify(ref), ref],
+          ),
+        ).values(),
+      ],
+    }
   }
   if (semantics?.kind === "special-skill-level") {
     for (const spec of semantics.parameters) {
@@ -1560,7 +1764,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "7",
+    revision: "8",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1614,6 +1818,32 @@ export function convertSource(
       a.targetId.localeCompare(b.targetId),
     ),
     differences: [
+      {
+        differenceId: "core-skill-level-parameters",
+        explanation:
+          "凯撒基础攻击增益与潘引壶基础通窍，以及对应 M2/M6 增量，按 Nanoka 3.1 逐档原文与真实 level 元数据补齐核心 1—7；固定 ZZZ-HP 只提供核心 7 数值。参数唯一维护于 rank-evidence，支持集合为所有必需参数与证据的交集，不扩散至同块其他记录。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("core-skill-level-parameters"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "core-enhancement-independent-increment",
+        explanation:
+          "保留凯撒 M2、潘引壶 M6 既有独立增量选项的兼容契约：单选只提供真实增量，未选不贡献，与基础项同选才得到完整强化值，作为 modification 通则的明确例外。凯撒增量为逐档基础值的 50%（核心 2 为 67.5）；潘引壶在一条贡献内部计算 min(max(0,A)×(r+0.06),720)−min(max(0,A)×r,540)，两项同读显式初始攻击 A。核心 1—6 两个封顶点不同，核心 6/A3200 为 192、核心 1/A4800 为 288；核心 7 保持旧值。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "core-enhancement-independent-increment",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
       {
         differenceId: "special-skill-level-expression",
         explanation:

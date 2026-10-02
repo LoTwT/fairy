@@ -55,6 +55,7 @@ async function verifyEvidenceReferences(
   publication: string,
   label: string,
   references: readonly EvidenceReference[],
+  requirePassiveRanks = false,
 ): Promise<void> {
   for (const ref of references) {
     const bytes = await readFile(
@@ -66,6 +67,12 @@ async function verifyEvidenceReferences(
     if (!jsonPointerExists(document, ref.pointer))
       throw new Error(`Evidence pointer missing: ${label} ${ref.pointer}`)
     const passive = /^\/passive\/level\/(\d+)(?:\/|$)/.exec(ref.pointer)
+    if (
+      requirePassiveRanks &&
+      ref.rank !== undefined &&
+      (!passive || !Number.isInteger(ref.rank) || ref.rank < 1 || ref.rank > 7)
+    )
+      throw new Error(`Invalid passive rank evidence: ${label} ${ref.pointer}`)
     if (!passive || ref.rank === undefined) continue
     const dataPath = ref.path.replace(/details\.[a-z]+\.json$/, "data.json")
     if (dataPath === ref.path)
@@ -124,6 +131,7 @@ export async function generateStaticEffects(
         publication,
         `rank-evidence:${key}`,
         entry.evidence,
+        "parameters" in entry,
       )
     for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS))
       await verifyEvidenceReferences(

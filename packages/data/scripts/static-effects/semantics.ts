@@ -33,7 +33,22 @@ export interface SpecialSkillLevelParameterSpec {
   readonly growth: number
 }
 
+export interface CoreSkillLevelSemantics {
+  readonly kind: "core-skill-level"
+  /** 参数和逐档原文的唯一来源；必须是精确记录级键，不能扩大块级支持。 */
+  readonly baseEvidenceKey: string
+  readonly formula:
+    | { readonly kind: "amount" | "capped-conversion" }
+    | {
+        readonly kind: "proportional-increment" | "capped-conversion-increment"
+        readonly enhancementEvidenceKey: string
+      }
+  readonly evidence: readonly SemanticsEvidenceReference[]
+  readonly verification: string
+}
+
 export type SourceSemantics =
+  | CoreSkillLevelSemantics
   | {
       /**
        * 记录实际由调用方显式选择的状态启用；来源不提供核心等级依赖，
@@ -329,6 +344,45 @@ const lycaonPotentialBranchEvidence = [
 ] as const
 
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
+  "agents/caesar/mindscape/0/blk-legacy/legacy-team-atk": {
+    kind: "core-skill-level",
+    baseEvidenceKey: "caesar:blk-legacy:mindscape:0:legacy-team-atk",
+    formula: { kind: "amount" },
+    evidence: [],
+    verification:
+      "按 rank-evidence 的七档原文读取基础攻击增益；固定 ZZZ-HP 只提供核心 7 的值。记录级补档不扩大同块其他效果的支持集合。",
+  },
+  "agents/caesar/mindscape/2/blk-legacy/legacy-team-atk": {
+    kind: "core-skill-level",
+    baseEvidenceKey: "caesar:blk-legacy:mindscape:0:legacy-team-atk",
+    formula: {
+      kind: "proportional-increment",
+      enhancementEvidenceKey: "caesar:blk-legacy:mindscape:2:legacy-team-atk",
+    },
+    evidence: [],
+    verification:
+      "核心增益提升至原本 150%；保留既有独立增量选项，仅选择本项时贡献基础值的额外 50%。未选中不贡献，与基础项同时选择才组成完整增益；作为 modification 通则的兼容例外。参数及原文只从 rank-evidence 引用。",
+  },
+  "agents/panyinhu/mindscape/0/blk-legacy/legacy-team-pierce": {
+    kind: "core-skill-level",
+    baseEvidenceKey: "panyinhu:blk-legacy:mindscape:0:legacy-team-pierce",
+    formula: { kind: "capped-conversion" },
+    evidence: [],
+    verification:
+      "按 rank-evidence 的七档转换率和上限读取基础通窍；保留显式初始攻击读取名与 attack-points 单位，不回退至预设、受益者或当前战斗面板。",
+  },
+  "agents/panyinhu/mindscape/6/blk-legacy/legacy-team-pierce": {
+    kind: "core-skill-level",
+    baseEvidenceKey: "panyinhu:blk-legacy:mindscape:0:legacy-team-pierce",
+    formula: {
+      kind: "capped-conversion-increment",
+      enhancementEvidenceKey:
+        "panyinhu:blk-legacy:mindscape:6:legacy-team-pierce",
+    },
+    evidence: [],
+    verification:
+      "单条增量贡献内部计算强化封顶值减基础封顶值，两项同读本选项显式初始攻击 A。基础与本项组合时调用方提供同一施加时的 A；保持独立选择契约，作为 modification 通则的兼容例外。低档的两个封顶点不同，不能沿用核心 7 的 min(A×6%,180)。参数及原文只从 rank-evidence 引用。",
+  },
   // 简·狂热：来源记录位于影画 0 的兼容块，实际由狂热状态启用；核心被动不提供该增益。
   "agents/jane/mindscape/0/blk-legacy/legacy-self-atk": {
     kind: "explicit-selection-state",
