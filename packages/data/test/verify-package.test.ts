@@ -134,7 +134,17 @@ describe("packed package", () => {
       stdio: "inherit",
       env: checkoutEnvironment,
     })
-    // A pre-existing typecheck catalog must never become the build's publication input.
+    // A pre-existing typecheck catalog must never become the build's memory or
+    // publication input: a bounded heap fails any build that follows it, while the
+    // runtime poison keeps detecting leaks into the published bytes.
+    execFileSync("corepack", ["pnpm", "build"], {
+      cwd: cleanPackage,
+      stdio: "inherit",
+      env: {
+        ...checkoutEnvironment,
+        NODE_OPTIONS: "--max-old-space-size=3072",
+      },
+    })
     writeFileSync(
       join(cleanPackage, ".generated/catalog.ts"),
       'throw new Error("stale consumer catalog")',
