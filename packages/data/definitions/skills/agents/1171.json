@@ -59,16 +59,33 @@
         "growth": 0.039
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1171:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.844,
+                  "growth": 0.077
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-burnice-nk-1171018-main"
     },
     {
@@ -270,16 +287,33 @@
         "growth": 0.009
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1171:action:0006:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.448,
+                  "growth": 0.041
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-burnice-nk-1171001-一段"
     },
     {
@@ -315,16 +349,33 @@
         "growth": 0.014
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1171:action:0007:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.435,
+                  "growth": 0.04
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-burnice-nk-1171002-二段"
     },
     {
@@ -360,16 +411,33 @@
         "growth": 0.022
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1171:action:0008:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.717,
+                  "growth": 0.066
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-burnice-nk-1171003-三段"
     },
     {
@@ -405,16 +473,33 @@
         "growth": 0.014
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1171:action:0009:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.666,
+                  "growth": 0.061
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-burnice-nk-1171004-四段"
     },
     {
@@ -450,16 +535,33 @@
         "growth": 0.024
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1171:action:0010:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.963,
+                  "growth": 0.088
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-burnice-nk-1171005-五段"
     },
     {
@@ -808,16 +910,33 @@
         "growth": 0.089
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1171:action:0016:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1171:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.197,
+                  "growth": 0.2
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-burnice-nk-1171015-main"
     },
     {

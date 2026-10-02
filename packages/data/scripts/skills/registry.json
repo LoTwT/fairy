@@ -5181,15 +5181,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "bf8d4e785a013e0f20c8a662961982722dab138e75d95f3891135d107a425bde",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5203,15 +5201,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "d50c120145e36ff5a6afffae8159450e58bf300e2e99567b9d563336d5a5c3ef",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5225,15 +5221,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "b626996b9960bfc0ae742e698900c5975752a71194a0d8409fe4cdc2eb89d285",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151004-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5247,15 +5241,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "f16f6053a7f988ac4cf49315ae829576d7dfbf7146ab6660c11446bce81edb42",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151003-三段-派生",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5269,15 +5261,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "49186ed620003472c0f4327fac9542c69c333f67cdb67e8d6e1dd490adc180e4",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151005-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5600,15 +5590,13 @@
     "dazeRowIndex": 16,
     "sourceSignature": "720da59e1e3f8f0474c92aead6a43e11cefb6359d4093beb432682fb8f4d357f",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5622,15 +5610,13 @@
     "dazeRowIndex": 17,
     "sourceSignature": "eebcc6ec2725e9d475dc5a765af277c34bb573f0c82aafffde5c39423aafc684",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5644,15 +5630,13 @@
     "dazeRowIndex": 18,
     "sourceSignature": "b74f4541d172404582219c46f1503ccac915204dd8377245d117ed305bfd9a3b",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5666,15 +5650,13 @@
     "dazeRowIndex": 19,
     "sourceSignature": "3111490b73d78a97ecfd3894966a21cdbf9b2784ec54761c1bea3a061991ef5b",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161004-追击一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5688,15 +5670,13 @@
     "dazeRowIndex": 20,
     "sourceSignature": "dbb10ad32db5f525c309ac3d06d7d11c75f37c696df9337a3a4e57ffefc8831a",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161005-追击二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5710,15 +5690,13 @@
     "dazeRowIndex": 21,
     "sourceSignature": "483d005644d438d0f2f3dd9a7afef5173ab4b4f6a5067787ee6018a291ce2ff6",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161006-追击三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5732,15 +5710,13 @@
     "dazeRowIndex": 22,
     "sourceSignature": "bee0bd1ad792baaa77f1d951d41e04503f32998ea2069fed546d87550cde7bd3",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161007-追击四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5754,15 +5730,13 @@
     "dazeRowIndex": 23,
     "sourceSignature": "8c254ebbe49c767c868029fb389ca56c91905864cc4d787f1cb0bff9d668f8c5",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161008-追击五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5776,15 +5750,13 @@
     "dazeRowIndex": 24,
     "sourceSignature": "a0c5721b42a8f554df0a19ed4eccf04cd2fa16d35809fec3f5e98119738c1e4c",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161009-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5798,15 +5770,13 @@
     "dazeRowIndex": 25,
     "sourceSignature": "40e3b85d1644ceff09f21b26ebfebbee46f264bdf0a18c10ed276ade7fd7eee1",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161010-五段起攻",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5820,15 +5790,13 @@
     "dazeRowIndex": 26,
     "sourceSignature": "331ce816674f7d6cc6d2f2710894891dafe03c2a36dc5c39554cac7fba1f5dd7",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161011-五段连击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5842,15 +5810,13 @@
     "dazeRowIndex": 27,
     "sourceSignature": "cd82cc2bcc36229d737f0f43e17cb41282f8d3d4c0740f750a82b8f46f514b9b",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lighter-nk-1161012-五段终结",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5864,15 +5830,13 @@
     "dazeRowIndex": 28,
     "sourceSignature": "e13151abe1d08bd0d9d8f667d0dab8d1f6392d078c73384dd2f048b4dac6405e",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-lighter-nk-1161026-五段起攻伤害倍率-士气喷发状态",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5886,15 +5850,13 @@
     "dazeRowIndex": 29,
     "sourceSignature": "ee0daef055aee63e960548f4d7083fc1f2b0e5292e140af7119243a5ece478c3",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-lighter-nk-1161027-五段连击伤害倍率-士气喷发状态",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5908,15 +5870,13 @@
     "dazeRowIndex": 30,
     "sourceSignature": "8785f8b31c3cb6d24f6aa4998b1cadb7516eb2a7be382df5fcedf783075c694d",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-lighter-nk-1161028-五段终结伤害倍率-士气喷发状态",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -5930,15 +5890,13 @@
     "dazeRowIndex": 31,
     "sourceSignature": "2c15aa3356a85a8ad3c7c5f48ecf86e599b112f42d7caa0d0253c4c0c16ff9e5",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "upstreamSkillId": "sk-lighter-nk-1161025-五段强力终结伤害倍率-士气喷发状态",
+    "skillTargetIds": ["zzz-hp:skill:lighter-basic-ms4azczu"],
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6071,15 +6029,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "c61a0914cd9f60465c5f4f3908f5c0fcb0bfff1f7c1900e5bfe91485634d757e",
     "skillCategory": "quick-assist",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171018-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6161,15 +6117,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "6b76813cc62ed5267470ee95f97d470bbf1261c7d75e0a780a34720d67fc0693",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6183,15 +6137,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "470f6583c38ff4cfc3ff42cb1ba3407aa2e22b241618e5ebe4f583ef144a96ec",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6205,15 +6157,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "47111742278d0efc30420a1a4325359dcdf6e85d7d2c8d4bd77dbb55278d62e6",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6227,15 +6177,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "0b83a5c22d9ca8976a7b9d44ad3f9524b6c122645f6b9cf8a460ba5dd2efdb28",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6249,15 +6197,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "af4c3fcce08dfd26868da4cafe31bf483f1e17473346c69ebec163e0384a622e",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171005-五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6356,15 +6302,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "9c0a3833d3dd6771f6adb2cb4f6c423e625da99555c353033d598c8bb098ff32",
     "skillCategory": "dodge-counter",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-burnice-nk-1171015-main",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6544,15 +6488,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "5fe049609fda6059c6eacae681d6a72c7a9969b91314ffe2a10e42497581ee42",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6566,15 +6508,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "243e00e32dcd7c98b3805ae89e5728d7049a60a28b2ce1d59f335fea002d76b2",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6588,15 +6528,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "972fb41f3f188dad014e1242af934a7c93f6fc128dda7d8301bc103e70beddc2",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6610,15 +6548,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "9d9f07e34c45197ba87ed90f1262c3fc1e7b406c64416a7146a573348ed83d81",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -6632,16 +6568,11 @@
     "dazeRowIndex": 9,
     "sourceSignature": "9e40a00bc8c50cfd31ea514ba6a20f8397fcd7e8abd6ad4ba07df51af8bf7d64",
     "skillCategory": "basic",
-    "element": null,
+    "element": "physical",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181015-垫步射击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1181:action:0008",
@@ -7371,15 +7302,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "a80a956c358afecef858837f329cc5ed2da1d07aae3fbb7ff8914ec6b3d0d7e6",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7393,15 +7322,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "59d159ecb0e9a03034c605c6a0124cd1c00acb3fdf3a9c66516091148fb53089",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7415,15 +7342,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "65a82f18f95249e18147bf44678cd2d3334c7becbe3ba243010ce94ed94e0d62",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7437,15 +7362,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "ab6b409b2bdb70125a7ddbc9686e0936809e00bbcc1ef8882b9a89d4c3f425d3",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7459,15 +7382,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "7821d5918e765f2ecf0181510215bce61a9acf2d212229a26f007a4198db4984",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-harumasa-nk-1201005-五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7782,15 +7703,13 @@
     "dazeRowIndex": 4,
     "sourceSignature": "3328ceb8ea538fd8afebd05c9f777bd3349f1fab3b38f63ca23820358b6cae67",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7804,15 +7723,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "2433722ffa679617d884bbdeb5985c57de6246a9d7342b9244fa0039b99e0813",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211003-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7826,15 +7743,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "4db06a427622148bd165c71003adb48650d4e2d506ccdcf1456ad448199dc03c",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211004-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -7848,15 +7763,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "e05834d387cfd4433ea3f9e35e2ec62de85fda644c91b37d8538e2c3a567cf9a",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-alexandrina-nk-1211006-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8515,15 +8428,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "42311c74b98771b8b18022d3093ba28254b58c2dba25dbb7b4c563ec94a55141",
     "skillCategory": "assist-follow-up",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhuyuan-nk-1241025-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8537,15 +8448,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "915f4c19d22f9159b4cdd2f6e0f5488da6a3f3ddf528850693eb3d892b8ea5e0",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhuyuan-nk-1241001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8559,15 +8468,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "7bc9de73175dee2b3fdccc5d4df6f3963ee4afeeea070f440e145d24420aeb65",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhuyuan-nk-1241002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8581,15 +8488,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "62bbc81353a93421db5969f7475d55bcc2aa81f5a8de04c62bf1ad3d10aa34f8",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhuyuan-nk-1241003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8603,15 +8508,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "0e4c9d9e958845df9fbb4732a7fcab58b05a97d56f6606530f1df675de60b96c",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhuyuan-nk-1241004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8625,15 +8528,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "a30c2f22ecb3217097654d8f1a0881af1203c34795e8551d9a22eefb9a41a47a",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhuyuan-nk-1241005-五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8973,15 +8874,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "d13db8931fc1c131f3643043c04e7066db4db42ec7a2f0826ad8960b6836e7af",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-qingyi-nk-1251001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -8995,15 +8894,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "9b1581ccff2db8ba6992aeac525812aa5cd16e104b84f14e3260b0c58924335a",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-qingyi-nk-1251002-一段伤害倍率-派生",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9017,15 +8914,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "8a283a376eca34f08d694974807d419907dd9ef301dcdde7c8b7a7f47ecfda1b",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-qingyi-nk-1251003-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9039,15 +8934,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "ed7cadb8a8dd3c84f923151cedddd6922fbc1de94233e536f18926eab01df3f5",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-qingyi-nk-1251004-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9061,15 +8954,13 @@
     "dazeRowIndex": 10,
     "sourceSignature": "e38bb5fba52417c706c13f5eb9309db88cc1c15b87a02fb793890cc2a9268441",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-qingyi-nk-1251005-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9083,15 +8974,13 @@
     "dazeRowIndex": 11,
     "sourceSignature": "0efe934b5f80b8e8dd1ed4a8acf6db75bc21edd66ee20049b2e1771a6b44c702",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-qingyi-nk-1251006-四段伤害倍率-强化",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9788,15 +9677,13 @@
     "dazeRowIndex": 4,
     "sourceSignature": "98fca012d66b4f8b8302d3eb0c79a707208099efc361eede784a4fa27b6e53ee",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-seth-nk-1271001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9810,15 +9697,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "69c8d135894b8371b167ba05a915685e608acbafb561e880a9f5f81916142f33",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-seth-nk-1271002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9832,15 +9717,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "7f1700b1b04a49f356855cdb9188bfa30f30cea40c8e25e4df9a74d3d9ed2df0",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-seth-nk-1271003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -9854,15 +9737,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "72e37aaa68ce6b44c139db2094e1475099855e2b8c9c684ccd03ce0edc1b0479",
     "skillCategory": "basic",
-    "element": null,
+    "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-seth-nk-1271004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10477,15 +10358,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "7416507abe99245131180dee272f4e436b93dc559ecb8aceea83e43b09eada7a",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10499,15 +10378,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "14b216f4391e3cdb3cb59335a6963b3c6d8054de6313935f11120b33ac3b8b6b",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10521,15 +10398,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "38c9de7279da362db11aa4c79d2b80b9287bc8237128796dcc572d765ecf345b",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10543,15 +10418,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "9e737c5dddfefa865043fea2da45d12ee18d7cf195d4ae7b77765f45fb0e2643",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291004-斩击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10565,15 +10438,13 @@
     "dazeRowIndex": 10,
     "sourceSignature": "bbecfa4121e6178e6f16ade6c6311d6b9105ef7f60afeb5cf7c47f1f3892816a",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291005-射击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10587,15 +10458,13 @@
     "dazeRowIndex": 11,
     "sourceSignature": "8219650d9dc8e4c3f96ebe439a295079ec59d3d984c9526fc19bcb8bef7a83be",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-hugo-nk-1291006-蓄力射击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10799,15 +10668,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "375f918a729cc87dd52740b444748b22ee06f7e21039bdeab6f9d2a28e501083",
     "skillCategory": "quick-assist",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301017-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10889,15 +10756,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "b9ec5fd2185e55a96f18ff4c1ea202c3458f5854757ec31767d5224b421294f5",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10911,15 +10776,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "fa174c8feeb12dcd6995c97306ca0733e533594b1e3ee5b6a63a111c7d49c141",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10933,15 +10796,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "9af6a9e2cb369faecc9f7953cb2268cf073254fa533c1b5d94b9b17652bb8f6a",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10955,15 +10816,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "84e3716962f31a4b3956d8785f840b8d193feeece7121ed587f6009e8565fd14",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10977,15 +10836,13 @@
     "dazeRowIndex": 10,
     "sourceSignature": "b974dcae2f16874c394ea7dc1cc62e879078d4abc764ef9cde1daef3f9a95499",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301005-五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -10999,15 +10856,13 @@
     "dazeRowIndex": 11,
     "sourceSignature": "6c09a28429d23df5a39d5edc6a275c9c413b0b45f5097dd1aebb314a4af17a36",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301006-火刀",
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "skillTargetIds": ["zzz-hp:skill:orphie&magus-basic-ms0bu5ij"],
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -11095,15 +10950,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "e047d6eecdc7a3297b97db45afa7b578335a142b16beef676c4a8ae74dfd0f51",
     "skillCategory": "dodge-counter",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-orphie&magus-nk-1301013-main",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -11682,15 +11535,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "af676227f4c3f51fb2578a29516f3c58d940cd5ea2283beebeebcfafc78d67f5",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-evelyn-nk-1321001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -11704,15 +11555,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "db36998f5a31446a3e8c5ab49b5acd363521581975a6b877eed4a08612040b3e",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-evelyn-nk-1321002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -11726,15 +11575,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "a95e970b90bf9a8dec18b311cf6367b837d8bb24d4799164a1df3a6ec1f23015",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-evelyn-nk-1321003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -11748,15 +11595,13 @@
     "dazeRowIndex": 8,
     "sourceSignature": "05c9bd35be7257c618f9f1bfe60429ce89c08486243daeaa8c3fdcefcd84a904",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-evelyn-nk-1321004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -11770,15 +11615,13 @@
     "dazeRowIndex": 9,
     "sourceSignature": "89ceb7e06f446c396b57baf7b095721124c5b5c7a7672836739f5b28c0b06fc7",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-evelyn-nk-1321005-五段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -11996,15 +11839,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "bcea4f1cb48f3db47acf112833f1d7bdc496a65869c2bc7d5e5dd1a2429da027",
     "skillCategory": "quick-assist",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-vivian-nk-1331015-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -12086,15 +11927,13 @@
     "dazeRowIndex": 4,
     "sourceSignature": "4ed91a68f89880409d4aede9f7bf86612f17a1155600f17cd4ca6120dabc5383",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-vivian-nk-1331001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -12108,15 +11947,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "2edc820cb253b67c89a5231d24bb513ffa7beacea8c4496f595ab9c2c6965fef",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-vivian-nk-1331002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -12130,15 +11967,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "af48f15386808c9782c01f326f50493782b82cd4903fb5c4c9ab0092129bec0c",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-vivian-nk-1331003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -12152,15 +11987,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "05cc873d4ddb47cb02be24fe9fe39b6f34b63de3238a0ceceffeea1449e97a15",
     "skillCategory": "basic",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-vivian-nk-1331004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -12276,15 +12109,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "8a23448c65cba747cc54eb88bf09b9da10c204683866cd68ebf160032fdc93a5",
     "skillCategory": "dodge-counter",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-vivian-nk-1331012-main",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms4e5xea"],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -12298,15 +12129,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "03b9b9fa472a096ab18178588307710baabbdb9fd12fe28508f558a04760cc1c",
     "skillCategory": "special",
-    "element": null,
+    "element": "ether",
     "damageKind": "regular",
     "upstreamSkillId": "sk-vivian-nk-1331009-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -12583,15 +12412,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "caee3269d9a9ae6019997455eb94e01213fd4d1631026bff85ebed06007ac6b0",
     "skillCategory": "dash",
-    "element": null,
+    "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhao-nk-1341011-main",
     "skillTargetIds": ["zzz-hp:skill:all-dodge-ms0dnpmr"],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -14187,15 +14014,13 @@
     "dazeRowIndex": 4,
     "sourceSignature": "dd74ad689a49f39f537f7f3f5f3d37c167230e0492c71d945d6675b1031d7910",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jufufu-nk-1391001-一段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -14209,15 +14034,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "f990bf6289c5c97e85f378949154f50795ac34f71fd5432b49638205336d04b8",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jufufu-nk-1391002-二段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -14231,15 +14054,13 @@
     "dazeRowIndex": 6,
     "sourceSignature": "cf1621d67e87d3e5afc21fb81097a97e743029f29d30140c74ea1d25beeda903",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jufufu-nk-1391003-三段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {
@@ -14253,15 +14074,13 @@
     "dazeRowIndex": 7,
     "sourceSignature": "3881602be864ba5634ebb103daf853b9461c5736b41b4a97abc45a4adf34102b",
     "skillCategory": "basic",
-    "element": null,
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-jufufu-nk-1391004-四段",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "mixed-elements",
-        "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。"
     ]
   },
   {

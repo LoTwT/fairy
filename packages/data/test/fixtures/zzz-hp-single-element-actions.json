@@ -1,0 +1,812 @@
+{
+  "source": {
+    "repository": "LoTwT/ZZZ-HP",
+    "commit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+    "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
+    "purpose": "动作语义、增益锚点、命破职业与耀变倍率的固定参考"
+  },
+  "references": [
+    {
+      "actionId": "action:agent:1151:action:0006",
+      "pointer": "/skills/498",
+      "upstreamSkillId": "sk-lucy-nk-1151001-一段",
+      "element": "火",
+      "damagePercentage": 5660,
+      "damagePercentageGrowth": 520,
+      "level12Percentage": 113.8
+    },
+    {
+      "actionId": "action:agent:1151:action:0007",
+      "pointer": "/skills/501",
+      "upstreamSkillId": "sk-lucy-nk-1151002-二段",
+      "element": "火",
+      "damagePercentage": 7780,
+      "damagePercentageGrowth": 710,
+      "level12Percentage": 155.9
+    },
+    {
+      "actionId": "action:agent:1151:action:0008",
+      "pointer": "/skills/499",
+      "upstreamSkillId": "sk-lucy-nk-1151004-三段",
+      "element": "火",
+      "damagePercentage": 18890,
+      "damagePercentageGrowth": 1720,
+      "level12Percentage": 378.1
+    },
+    {
+      "actionId": "action:agent:1151:action:0009",
+      "pointer": "/skills/500",
+      "upstreamSkillId": "sk-lucy-nk-1151003-三段-派生",
+      "element": "火",
+      "damagePercentage": 21150,
+      "damagePercentageGrowth": 1930,
+      "level12Percentage": 423.8
+    },
+    {
+      "actionId": "action:agent:1151:action:0010",
+      "pointer": "/skills/502",
+      "upstreamSkillId": "sk-lucy-nk-1151005-四段",
+      "element": "火",
+      "damagePercentage": 27260,
+      "damagePercentageGrowth": 2480,
+      "level12Percentage": 545.4
+    },
+    {
+      "actionId": "action:agent:1161:action:0006",
+      "pointer": "/skills/448",
+      "upstreamSkillId": "sk-lighter-nk-1161001-一段",
+      "element": "火",
+      "damagePercentage": 3920,
+      "damagePercentageGrowth": 360,
+      "level12Percentage": 78.8
+    },
+    {
+      "actionId": "action:agent:1161:action:0007",
+      "pointer": "/skills/450",
+      "upstreamSkillId": "sk-lighter-nk-1161002-二段",
+      "element": "火",
+      "damagePercentage": 4800,
+      "damagePercentageGrowth": 440,
+      "level12Percentage": 96.4
+    },
+    {
+      "actionId": "action:agent:1161:action:0008",
+      "pointer": "/skills/449",
+      "upstreamSkillId": "sk-lighter-nk-1161003-三段",
+      "element": "火",
+      "damagePercentage": 5530,
+      "damagePercentageGrowth": 510,
+      "level12Percentage": 111.4
+    },
+    {
+      "actionId": "action:agent:1161:action:0009",
+      "pointer": "/skills/459",
+      "upstreamSkillId": "sk-lighter-nk-1161004-追击一段",
+      "element": "火",
+      "damagePercentage": 8690,
+      "damagePercentageGrowth": 790,
+      "level12Percentage": 173.8
+    },
+    {
+      "actionId": "action:agent:1161:action:0010",
+      "pointer": "/skills/461",
+      "upstreamSkillId": "sk-lighter-nk-1161005-追击二段",
+      "element": "火",
+      "damagePercentage": 4770,
+      "damagePercentageGrowth": 440,
+      "level12Percentage": 96.1
+    },
+    {
+      "actionId": "action:agent:1161:action:0011",
+      "pointer": "/skills/460",
+      "upstreamSkillId": "sk-lighter-nk-1161006-追击三段",
+      "element": "火",
+      "damagePercentage": 5810,
+      "damagePercentageGrowth": 530,
+      "level12Percentage": 116.4
+    },
+    {
+      "actionId": "action:agent:1161:action:0012",
+      "pointer": "/skills/463",
+      "upstreamSkillId": "sk-lighter-nk-1161007-追击四段",
+      "element": "火",
+      "damagePercentage": 3280,
+      "damagePercentageGrowth": 300,
+      "level12Percentage": 65.8
+    },
+    {
+      "actionId": "action:agent:1161:action:0013",
+      "pointer": "/skills/462",
+      "upstreamSkillId": "sk-lighter-nk-1161008-追击五段",
+      "element": "火",
+      "damagePercentage": 8900,
+      "damagePercentageGrowth": 810,
+      "level12Percentage": 178.1
+    },
+    {
+      "actionId": "action:agent:1161:action:0014",
+      "pointer": "/skills/458",
+      "upstreamSkillId": "sk-lighter-nk-1161009-四段",
+      "element": "火",
+      "damagePercentage": 7890,
+      "damagePercentageGrowth": 720,
+      "level12Percentage": 158.1
+    },
+    {
+      "actionId": "action:agent:1161:action:0015",
+      "pointer": "/skills/454",
+      "upstreamSkillId": "sk-lighter-nk-1161010-五段起攻",
+      "element": "火",
+      "damagePercentage": 16360,
+      "damagePercentageGrowth": 1490,
+      "level12Percentage": 327.5
+    },
+    {
+      "actionId": "action:agent:1161:action:0016",
+      "pointer": "/skills/456",
+      "upstreamSkillId": "sk-lighter-nk-1161011-五段连击",
+      "element": "火",
+      "damagePercentage": 12290,
+      "damagePercentageGrowth": 1120,
+      "level12Percentage": 246.1
+    },
+    {
+      "actionId": "action:agent:1161:action:0017",
+      "pointer": "/skills/452",
+      "upstreamSkillId": "sk-lighter-nk-1161012-五段终结",
+      "element": "火",
+      "damagePercentage": 10460,
+      "damagePercentageGrowth": 960,
+      "level12Percentage": 210.2
+    },
+    {
+      "actionId": "action:agent:1161:action:0018",
+      "pointer": "/skills/455",
+      "upstreamSkillId": "sk-lighter-nk-1161026-五段起攻伤害倍率-士气喷发状态",
+      "element": "火",
+      "damagePercentage": 17720,
+      "damagePercentageGrowth": 1620,
+      "level12Percentage": 355.4
+    },
+    {
+      "actionId": "action:agent:1161:action:0019",
+      "pointer": "/skills/457",
+      "upstreamSkillId": "sk-lighter-nk-1161027-五段连击伤害倍率-士气喷发状态",
+      "element": "火",
+      "damagePercentage": 36430,
+      "damagePercentageGrowth": 3320,
+      "level12Percentage": 729.5
+    },
+    {
+      "actionId": "action:agent:1161:action:0020",
+      "pointer": "/skills/453",
+      "upstreamSkillId": "sk-lighter-nk-1161028-五段终结伤害倍率-士气喷发状态",
+      "element": "火",
+      "damagePercentage": 11970,
+      "damagePercentageGrowth": 1090,
+      "level12Percentage": 239.6
+    },
+    {
+      "actionId": "action:agent:1161:action:0021",
+      "pointer": "/skills/451",
+      "upstreamSkillId": "sk-lighter-nk-1161025-五段强力终结伤害倍率-士气喷发状态",
+      "element": "火",
+      "damagePercentage": 43540,
+      "damagePercentageGrowth": 3960,
+      "level12Percentage": 871
+    },
+    {
+      "actionId": "action:agent:1171:action:0001",
+      "pointer": "/skills/174",
+      "upstreamSkillId": "sk-burnice-nk-1171018-main",
+      "element": "火",
+      "damagePercentage": 8440,
+      "damagePercentageGrowth": 770,
+      "level12Percentage": 169.1
+    },
+    {
+      "actionId": "action:agent:1171:action:0006",
+      "pointer": "/skills/178",
+      "upstreamSkillId": "sk-burnice-nk-1171001-一段",
+      "element": "火",
+      "damagePercentage": 4480,
+      "damagePercentageGrowth": 410,
+      "level12Percentage": 89.9
+    },
+    {
+      "actionId": "action:agent:1171:action:0007",
+      "pointer": "/skills/180",
+      "upstreamSkillId": "sk-burnice-nk-1171002-二段",
+      "element": "火",
+      "damagePercentage": 4350,
+      "damagePercentageGrowth": 400,
+      "level12Percentage": 87.5
+    },
+    {
+      "actionId": "action:agent:1171:action:0008",
+      "pointer": "/skills/179",
+      "upstreamSkillId": "sk-burnice-nk-1171003-三段",
+      "element": "火",
+      "damagePercentage": 7170,
+      "damagePercentageGrowth": 660,
+      "level12Percentage": 144.3
+    },
+    {
+      "actionId": "action:agent:1171:action:0009",
+      "pointer": "/skills/182",
+      "upstreamSkillId": "sk-burnice-nk-1171004-四段",
+      "element": "火",
+      "damagePercentage": 6660,
+      "damagePercentageGrowth": 610,
+      "level12Percentage": 133.7
+    },
+    {
+      "actionId": "action:agent:1171:action:0010",
+      "pointer": "/skills/181",
+      "upstreamSkillId": "sk-burnice-nk-1171005-五段",
+      "element": "火",
+      "damagePercentage": 9630,
+      "damagePercentageGrowth": 880,
+      "level12Percentage": 193.1
+    },
+    {
+      "actionId": "action:agent:1171:action:0016",
+      "pointer": "/skills/187",
+      "upstreamSkillId": "sk-burnice-nk-1171015-main",
+      "element": "火",
+      "damagePercentage": 21970,
+      "damagePercentageGrowth": 2000,
+      "level12Percentage": 439.7
+    },
+    {
+      "actionId": "action:agent:1181:action:0003",
+      "pointer": "/skills/329",
+      "upstreamSkillId": "sk-grace-nk-1181001-一段",
+      "element": "电",
+      "damagePercentage": 5510,
+      "damagePercentageGrowth": 510,
+      "level12Percentage": 111.2
+    },
+    {
+      "actionId": "action:agent:1181:action:0004",
+      "pointer": "/skills/331",
+      "upstreamSkillId": "sk-grace-nk-1181002-二段",
+      "element": "电",
+      "damagePercentage": 5970,
+      "damagePercentageGrowth": 550,
+      "level12Percentage": 120.2
+    },
+    {
+      "actionId": "action:agent:1181:action:0005",
+      "pointer": "/skills/330",
+      "upstreamSkillId": "sk-grace-nk-1181003-三段",
+      "element": "电",
+      "damagePercentage": 12480,
+      "damagePercentageGrowth": 1140,
+      "level12Percentage": 250.2
+    },
+    {
+      "actionId": "action:agent:1181:action:0006",
+      "pointer": "/skills/332",
+      "upstreamSkillId": "sk-grace-nk-1181004-四段",
+      "element": "电",
+      "damagePercentage": 18630,
+      "damagePercentageGrowth": 1700,
+      "level12Percentage": 373.3
+    },
+    {
+      "actionId": "action:agent:1181:action:0007",
+      "pointer": "/skills/333",
+      "upstreamSkillId": "sk-grace-nk-1181015-垫步射击",
+      "element": "电",
+      "damagePercentage": 4030,
+      "damagePercentageGrowth": 370,
+      "level12Percentage": 81
+    },
+    {
+      "actionId": "action:agent:1201:action:0006",
+      "pointer": "/skills/350",
+      "upstreamSkillId": "sk-harumasa-nk-1201001-一段",
+      "element": "电",
+      "damagePercentage": 4240,
+      "damagePercentageGrowth": 390,
+      "level12Percentage": 85.3
+    },
+    {
+      "actionId": "action:agent:1201:action:0007",
+      "pointer": "/skills/352",
+      "upstreamSkillId": "sk-harumasa-nk-1201002-二段",
+      "element": "电",
+      "damagePercentage": 3980,
+      "damagePercentageGrowth": 370,
+      "level12Percentage": 80.5
+    },
+    {
+      "actionId": "action:agent:1201:action:0008",
+      "pointer": "/skills/351",
+      "upstreamSkillId": "sk-harumasa-nk-1201003-三段",
+      "element": "电",
+      "damagePercentage": 7090,
+      "damagePercentageGrowth": 650,
+      "level12Percentage": 142.4
+    },
+    {
+      "actionId": "action:agent:1201:action:0009",
+      "pointer": "/skills/354",
+      "upstreamSkillId": "sk-harumasa-nk-1201004-四段",
+      "element": "电",
+      "damagePercentage": 9010,
+      "damagePercentageGrowth": 820,
+      "level12Percentage": 180.3
+    },
+    {
+      "actionId": "action:agent:1201:action:0010",
+      "pointer": "/skills/353",
+      "upstreamSkillId": "sk-harumasa-nk-1201005-五段",
+      "element": "电",
+      "damagePercentage": 13290,
+      "damagePercentageGrowth": 1210,
+      "level12Percentage": 266
+    },
+    {
+      "actionId": "action:agent:1211:action:0003",
+      "pointer": "/skills/14",
+      "upstreamSkillId": "sk-alexandrina-nk-1211001-一段",
+      "element": "电",
+      "damagePercentage": 4400,
+      "damagePercentageGrowth": 400,
+      "level12Percentage": 88
+    },
+    {
+      "actionId": "action:agent:1211:action:0004",
+      "pointer": "/skills/16",
+      "upstreamSkillId": "sk-alexandrina-nk-1211003-二段",
+      "element": "电",
+      "damagePercentage": 11140,
+      "damagePercentageGrowth": 1020,
+      "level12Percentage": 223.6
+    },
+    {
+      "actionId": "action:agent:1211:action:0005",
+      "pointer": "/skills/15",
+      "upstreamSkillId": "sk-alexandrina-nk-1211004-三段",
+      "element": "电",
+      "damagePercentage": 11710,
+      "damagePercentageGrowth": 1070,
+      "level12Percentage": 234.8
+    },
+    {
+      "actionId": "action:agent:1211:action:0006",
+      "pointer": "/skills/17",
+      "upstreamSkillId": "sk-alexandrina-nk-1211006-四段",
+      "element": "电",
+      "damagePercentage": 18390,
+      "damagePercentageGrowth": 1680,
+      "level12Percentage": 368.7
+    },
+    {
+      "actionId": "action:agent:1241:action:0002",
+      "pointer": "/skills/1100",
+      "upstreamSkillId": "sk-zhuyuan-nk-1241025-main",
+      "element": "以太",
+      "damagePercentage": 35580,
+      "damagePercentageGrowth": 3240,
+      "level12Percentage": 712.2
+    },
+    {
+      "actionId": "action:agent:1241:action:0003",
+      "pointer": "/skills/1101",
+      "upstreamSkillId": "sk-zhuyuan-nk-1241001-一段",
+      "element": "以太",
+      "damagePercentage": 4310,
+      "damagePercentageGrowth": 400,
+      "level12Percentage": 87.1
+    },
+    {
+      "actionId": "action:agent:1241:action:0004",
+      "pointer": "/skills/1103",
+      "upstreamSkillId": "sk-zhuyuan-nk-1241002-二段",
+      "element": "以太",
+      "damagePercentage": 12640,
+      "damagePercentageGrowth": 1150,
+      "level12Percentage": 252.9
+    },
+    {
+      "actionId": "action:agent:1241:action:0005",
+      "pointer": "/skills/1102",
+      "upstreamSkillId": "sk-zhuyuan-nk-1241003-三段",
+      "element": "以太",
+      "damagePercentage": 13730,
+      "damagePercentageGrowth": 1250,
+      "level12Percentage": 274.8
+    },
+    {
+      "actionId": "action:agent:1241:action:0006",
+      "pointer": "/skills/1105",
+      "upstreamSkillId": "sk-zhuyuan-nk-1241004-四段",
+      "element": "以太",
+      "damagePercentage": 15100,
+      "damagePercentageGrowth": 1380,
+      "level12Percentage": 302.8
+    },
+    {
+      "actionId": "action:agent:1241:action:0007",
+      "pointer": "/skills/1104",
+      "upstreamSkillId": "sk-zhuyuan-nk-1241005-五段",
+      "element": "以太",
+      "damagePercentage": 16220,
+      "damagePercentageGrowth": 1480,
+      "level12Percentage": 325
+    },
+    {
+      "actionId": "action:agent:1251:action:0006",
+      "pointer": "/skills/741",
+      "upstreamSkillId": "sk-qingyi-nk-1251001-一段",
+      "element": "电",
+      "damagePercentage": 4720,
+      "damagePercentageGrowth": 430,
+      "level12Percentage": 94.5
+    },
+    {
+      "actionId": "action:agent:1251:action:0007",
+      "pointer": "/skills/742",
+      "upstreamSkillId": "sk-qingyi-nk-1251002-一段伤害倍率-派生",
+      "element": "电",
+      "damagePercentage": 11030,
+      "damagePercentageGrowth": 1010,
+      "level12Percentage": 221.4
+    },
+    {
+      "actionId": "action:agent:1251:action:0008",
+      "pointer": "/skills/744",
+      "upstreamSkillId": "sk-qingyi-nk-1251003-二段",
+      "element": "电",
+      "damagePercentage": 12210,
+      "damagePercentageGrowth": 1110,
+      "level12Percentage": 244.2
+    },
+    {
+      "actionId": "action:agent:1251:action:0009",
+      "pointer": "/skills/743",
+      "upstreamSkillId": "sk-qingyi-nk-1251004-三段",
+      "element": "电",
+      "damagePercentage": 1760,
+      "damagePercentageGrowth": 160,
+      "level12Percentage": 35.2
+    },
+    {
+      "actionId": "action:agent:1251:action:0010",
+      "pointer": "/skills/745",
+      "upstreamSkillId": "sk-qingyi-nk-1251005-四段",
+      "element": "电",
+      "damagePercentage": 10640,
+      "damagePercentageGrowth": 970,
+      "level12Percentage": 213.1
+    },
+    {
+      "actionId": "action:agent:1251:action:0011",
+      "pointer": "/skills/746",
+      "upstreamSkillId": "sk-qingyi-nk-1251006-四段伤害倍率-强化",
+      "element": "电",
+      "damagePercentage": 23440,
+      "damagePercentageGrowth": 2140,
+      "level12Percentage": 469.8
+    },
+    {
+      "actionId": "action:agent:1271:action:0006",
+      "pointer": "/skills/833",
+      "upstreamSkillId": "sk-seth-nk-1271001-一段",
+      "element": "电",
+      "damagePercentage": 3620,
+      "damagePercentageGrowth": 330,
+      "level12Percentage": 72.5
+    },
+    {
+      "actionId": "action:agent:1271:action:0007",
+      "pointer": "/skills/835",
+      "upstreamSkillId": "sk-seth-nk-1271002-二段",
+      "element": "电",
+      "damagePercentage": 5650,
+      "damagePercentageGrowth": 520,
+      "level12Percentage": 113.7
+    },
+    {
+      "actionId": "action:agent:1271:action:0008",
+      "pointer": "/skills/834",
+      "upstreamSkillId": "sk-seth-nk-1271003-三段",
+      "element": "电",
+      "damagePercentage": 19330,
+      "damagePercentageGrowth": 1760,
+      "level12Percentage": 386.9
+    },
+    {
+      "actionId": "action:agent:1271:action:0009",
+      "pointer": "/skills/836",
+      "upstreamSkillId": "sk-seth-nk-1271004-四段",
+      "element": "电",
+      "damagePercentage": 9740,
+      "damagePercentageGrowth": 890,
+      "level12Percentage": 195.3
+    },
+    {
+      "actionId": "action:agent:1291:action:0008",
+      "pointer": "/skills/372",
+      "upstreamSkillId": "sk-hugo-nk-1291001-一段",
+      "element": "冰",
+      "damagePercentage": 4310,
+      "damagePercentageGrowth": 400,
+      "level12Percentage": 87.1
+    },
+    {
+      "actionId": "action:agent:1291:action:0009",
+      "pointer": "/skills/374",
+      "upstreamSkillId": "sk-hugo-nk-1291002-二段",
+      "element": "冰",
+      "damagePercentage": 7410,
+      "damagePercentageGrowth": 680,
+      "level12Percentage": 148.9
+    },
+    {
+      "actionId": "action:agent:1291:action:0010",
+      "pointer": "/skills/373",
+      "upstreamSkillId": "sk-hugo-nk-1291003-三段",
+      "element": "冰",
+      "damagePercentage": 16960,
+      "damagePercentageGrowth": 1550,
+      "level12Percentage": 340.1
+    },
+    {
+      "actionId": "action:agent:1291:action:0011",
+      "pointer": "/skills/376",
+      "upstreamSkillId": "sk-hugo-nk-1291004-斩击",
+      "element": "冰",
+      "damagePercentage": 14910,
+      "damagePercentageGrowth": 1360,
+      "level12Percentage": 298.7
+    },
+    {
+      "actionId": "action:agent:1291:action:0012",
+      "pointer": "/skills/375",
+      "upstreamSkillId": "sk-hugo-nk-1291005-射击",
+      "element": "冰",
+      "damagePercentage": 5860,
+      "damagePercentageGrowth": 540,
+      "level12Percentage": 118
+    },
+    {
+      "actionId": "action:agent:1291:action:0013",
+      "pointer": "/skills/377",
+      "upstreamSkillId": "sk-hugo-nk-1291006-蓄力射击",
+      "element": "冰",
+      "damagePercentage": 11800,
+      "damagePercentageGrowth": 1080,
+      "level12Percentage": 236.8
+    },
+    {
+      "actionId": "action:agent:1301:action:0001",
+      "pointer": "/skills/640",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301017-main",
+      "element": "火",
+      "damagePercentage": 11370,
+      "damagePercentageGrowth": 1040,
+      "level12Percentage": 228.1
+    },
+    {
+      "actionId": "action:agent:1301:action:0006",
+      "pointer": "/skills/642",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301001-一段",
+      "element": "火",
+      "damagePercentage": 1450,
+      "damagePercentageGrowth": 140,
+      "level12Percentage": 29.9
+    },
+    {
+      "actionId": "action:agent:1301:action:0007",
+      "pointer": "/skills/644",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301002-二段",
+      "element": "火",
+      "damagePercentage": 4440,
+      "damagePercentageGrowth": 410,
+      "level12Percentage": 89.5
+    },
+    {
+      "actionId": "action:agent:1301:action:0008",
+      "pointer": "/skills/643",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301003-三段",
+      "element": "火",
+      "damagePercentage": 4150,
+      "damagePercentageGrowth": 380,
+      "level12Percentage": 83.3
+    },
+    {
+      "actionId": "action:agent:1301:action:0009",
+      "pointer": "/skills/646",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301004-四段",
+      "element": "火",
+      "damagePercentage": 8670,
+      "damagePercentageGrowth": 790,
+      "level12Percentage": 173.6
+    },
+    {
+      "actionId": "action:agent:1301:action:0010",
+      "pointer": "/skills/645",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301005-五段",
+      "element": "火",
+      "damagePercentage": 18160,
+      "damagePercentageGrowth": 1660,
+      "level12Percentage": 364.2
+    },
+    {
+      "actionId": "action:agent:1301:action:0011",
+      "pointer": "/skills/647",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301006-火刀",
+      "element": "火",
+      "damagePercentage": 15840,
+      "damagePercentageGrowth": 1440,
+      "level12Percentage": 316.8
+    },
+    {
+      "actionId": "action:agent:1301:action:0016",
+      "pointer": "/skills/653",
+      "upstreamSkillId": "sk-orphie&magus-nk-1301013-main",
+      "element": "火",
+      "damagePercentage": 25780,
+      "damagePercentageGrowth": 2350,
+      "level12Percentage": 516.3
+    },
+    {
+      "actionId": "action:agent:1321:action:0006",
+      "pointer": "/skills/312",
+      "upstreamSkillId": "sk-evelyn-nk-1321001-一段",
+      "element": "火",
+      "damagePercentage": 5120,
+      "damagePercentageGrowth": 470,
+      "level12Percentage": 102.9
+    },
+    {
+      "actionId": "action:agent:1321:action:0007",
+      "pointer": "/skills/314",
+      "upstreamSkillId": "sk-evelyn-nk-1321002-二段",
+      "element": "火",
+      "damagePercentage": 6210,
+      "damagePercentageGrowth": 570,
+      "level12Percentage": 124.8
+    },
+    {
+      "actionId": "action:agent:1321:action:0008",
+      "pointer": "/skills/313",
+      "upstreamSkillId": "sk-evelyn-nk-1321003-三段",
+      "element": "火",
+      "damagePercentage": 7820,
+      "damagePercentageGrowth": 720,
+      "level12Percentage": 157.4
+    },
+    {
+      "actionId": "action:agent:1321:action:0009",
+      "pointer": "/skills/316",
+      "upstreamSkillId": "sk-evelyn-nk-1321004-四段",
+      "element": "火",
+      "damagePercentage": 18670,
+      "damagePercentageGrowth": 1700,
+      "level12Percentage": 373.7
+    },
+    {
+      "actionId": "action:agent:1321:action:0010",
+      "pointer": "/skills/315",
+      "upstreamSkillId": "sk-evelyn-nk-1321005-五段",
+      "element": "火",
+      "damagePercentage": 22340,
+      "damagePercentageGrowth": 2040,
+      "level12Percentage": 447.8
+    },
+    {
+      "actionId": "action:agent:1331:action:0001",
+      "pointer": "/skills/936",
+      "upstreamSkillId": "sk-vivian-nk-1331015-main",
+      "element": "以太",
+      "damagePercentage": 9730,
+      "damagePercentageGrowth": 890,
+      "level12Percentage": 195.2
+    },
+    {
+      "actionId": "action:agent:1331:action:0006",
+      "pointer": "/skills/939",
+      "upstreamSkillId": "sk-vivian-nk-1331001-一段",
+      "element": "以太",
+      "damagePercentage": 3410,
+      "damagePercentageGrowth": 310,
+      "level12Percentage": 68.2
+    },
+    {
+      "actionId": "action:agent:1331:action:0007",
+      "pointer": "/skills/941",
+      "upstreamSkillId": "sk-vivian-nk-1331002-二段",
+      "element": "以太",
+      "damagePercentage": 2420,
+      "damagePercentageGrowth": 220,
+      "level12Percentage": 48.4
+    },
+    {
+      "actionId": "action:agent:1331:action:0008",
+      "pointer": "/skills/940",
+      "upstreamSkillId": "sk-vivian-nk-1331003-三段",
+      "element": "以太",
+      "damagePercentage": 7690,
+      "damagePercentageGrowth": 700,
+      "level12Percentage": 153.9
+    },
+    {
+      "actionId": "action:agent:1331:action:0009",
+      "pointer": "/skills/942",
+      "upstreamSkillId": "sk-vivian-nk-1331004-四段",
+      "element": "以太",
+      "damagePercentage": 12840,
+      "damagePercentageGrowth": 1170,
+      "level12Percentage": 257.1
+    },
+    {
+      "actionId": "action:agent:1331:action:0016",
+      "pointer": "/skills/948",
+      "upstreamSkillId": "sk-vivian-nk-1331012-main",
+      "element": "以太",
+      "damagePercentage": 23640,
+      "damagePercentageGrowth": 2150,
+      "level12Percentage": 472.9
+    },
+    {
+      "actionId": "action:agent:1331:action:0017",
+      "pointer": "/skills/945",
+      "upstreamSkillId": "sk-vivian-nk-1331009-main",
+      "element": "以太",
+      "damagePercentage": 5690,
+      "damagePercentageGrowth": 520,
+      "level12Percentage": 114.1
+    },
+    {
+      "actionId": "action:agent:1341:action:0015",
+      "pointer": "/skills/1080",
+      "upstreamSkillId": "sk-zhao-nk-1341011-main",
+      "element": "冰",
+      "damagePercentage": 8630,
+      "damagePercentageGrowth": 790,
+      "level12Percentage": 173.2
+    },
+    {
+      "actionId": "action:agent:1391:action:0006",
+      "pointer": "/skills/414",
+      "upstreamSkillId": "sk-jufufu-nk-1391001-一段",
+      "element": "火",
+      "damagePercentage": 4250,
+      "damagePercentageGrowth": 390,
+      "level12Percentage": 85.4
+    },
+    {
+      "actionId": "action:agent:1391:action:0007",
+      "pointer": "/skills/416",
+      "upstreamSkillId": "sk-jufufu-nk-1391002-二段",
+      "element": "火",
+      "damagePercentage": 4520,
+      "damagePercentageGrowth": 420,
+      "level12Percentage": 91.4
+    },
+    {
+      "actionId": "action:agent:1391:action:0008",
+      "pointer": "/skills/415",
+      "upstreamSkillId": "sk-jufufu-nk-1391003-三段",
+      "element": "火",
+      "damagePercentage": 3150,
+      "damagePercentageGrowth": 290,
+      "level12Percentage": 63.4
+    },
+    {
+      "actionId": "action:agent:1391:action:0009",
+      "pointer": "/skills/417",
+      "upstreamSkillId": "sk-jufufu-nk-1391004-四段",
+      "element": "火",
+      "damagePercentage": 21840,
+      "damagePercentageGrowth": 1990,
+      "level12Percentage": 437.3
+    }
+  ]
+}
