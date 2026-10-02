@@ -19,7 +19,7 @@
 
 **ZZZ-HP 是增益数据与计算语义的第一信任来源。** Nanoka 用于基础资料、身份映射和缺失信息补充。冲突应保留来源与差异记录，不因来源不同自动用 Nanoka 或本项目推断覆盖 ZZZ-HP。
 
-当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `7`（本基线的语义修订记录见[修订 7](../data/zzz-hp-static-effects.md#修订-7潜能档位效果普通潜能分支与部分记录迁移)）。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
+当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `8`（本基线的语义修订记录见[修订 8](../data/zzz-hp-static-effects.md#修订-8核心依赖增益的培养档位扩展)）。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
 
 相对初始 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 基线，12 个资源中只有增益 JSON、`types/calculator.ts`、`utils/buffEffect.ts` 的内容变化。已接入效果的变化与限制见[修订 2](../data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)。Nanoka 仍为 3.1；属性和技能动作继续保留各自未变化的语义证据版本。
 
@@ -83,6 +83,7 @@
 
 - 新增独立增益记录为独立贡献规则。
 - 强化已有增益记录为 `modification`，以目标效果 ID 表达关系；按实际机制修改参数或已求值结果。
+- 兼容例外仅限既有凯撒 M2 攻击与潘引壶 M6 通窍的独立增量选项：保留稳定 ID 和显式选择契约，单选只提供真实增量，未选中不贡献，影画解锁不自动启用；与基础核心项同选时才组成完整增益。四条记录按各自完整参数与证据的交集开放核心档位。潘引壶差额在单条贡献内部完成，两项同读显式初始攻击，基础与 M6 组合时调用方应提供同一施加时读数。公式、证据入口与限制见[修订 8](../data/zzz-hp-static-effects.md#修订-8核心依赖增益的培养档位扩展)。
 - 例如现有耀嘉音 2 影规则使用 `mindscapeRank >= 2`，在配置阶段给核心 `ratio` 加 `0.19`、给 `cap` 加 `400`，不重复叠加一份完整强化核心。已有表达见[基础效果如何被强化](index.md#基础效果如何被强化)。
 - 只提高技能等级的条款交给技能配置与倍率选择处理，不能凭空变成一个固定伤害加成。
 - 上游某阶的增益数组为空，只表示该位置未提供效果记录；不能据此认定该影画没有游戏作用，或声称该阶全部机制已覆盖。
@@ -148,7 +149,7 @@
 
 ## 对比与验收记录
 
-批量正式制品的 [1,232 条来源对比夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)覆盖每个 converted 原始位置；15 条 corrected 记录通过耀嘉音、耀变、南宫羽、卢西娅及猫又的具名差异用例单独验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
+批量正式制品的 [1,232 条来源对比夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)保留 1,232 个来源位置，覆盖当前 1,209 条 converted，并继续执行本轮四条 corrected 的核心 7 参考；其余 19 个潜能位置按具名修正或迁移验证，不套用旧数值。全部 34 条 corrected 记录另由相应具名差异用例验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
 
 固定版本对比夹具位于 [zzz-hp-static.json](../../../packages/core/test/effects/fixtures/zzz-hp-static.json)，记录原始效果、JSON Pointer、输入和上游输出。上游输出通过 TypeScript AST 提取未修改的 `resolveConvertValue` / `resolveEffectBaseValue`，连同原始 `roundCalc`、技能键判断依赖离线执行得到；夹具记录求值文件的 SHA-256。
 

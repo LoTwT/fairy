@@ -504,21 +504,21 @@
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致；该块级证据只核对其 rank 0 记录，影画记录的核心依赖按记录级键单独登记"
   },
   "caesar:blk-legacy:mindscape:2:legacy-team-atk": {
-    "levels": [7],
+    "levels": [1, 2, 3, 4, 5, 6, 7],
     "evidence": [
-      {
-        "rank": 7,
-        "path": "agents/1071/details.zh.json",
-        "pointer": "/passive/level/1071507/desc/0",
-        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
-      },
       {
         "path": "agents/1071/details.zh.json",
         "pointer": "/talent/2/desc",
         "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
       }
     ],
-    "verification": "影画 2 的攻击增益是核心被动[坚韧之壁]攻击力提升效果的比例强化：天赋 2（提升至原本的 150%）与核心第 7 级说明全文（+1000 点）共同给出 +500；核心 6 的 900 需要 450，其他等级的对应值未建模，故只开放核心 7，其余等级按 MISSING_RANK 拒绝"
+    "verification": "天赋 2 明确提升至原本 150%，独立选项只提供额外 50%；逐档基础参数和证据由 semantics 引用 caesar:blk-legacy:mindscape:0:legacy-team-atk",
+    "parameters": {
+      "incrementCoefficient": {
+        "unit": "multiplier",
+        "value": 0.5
+      }
+    }
   },
   "caesar:blk-ms20kmz0-qcb0h3": {
     "levels": [1, 2, 3, 4, 5, 6, 7],
@@ -1553,21 +1553,25 @@
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致；该块级证据只核对其 rank 0 记录，影画记录的核心依赖按记录级键单独登记"
   },
   "panyinhu:blk-legacy:mindscape:6:legacy-team-pierce": {
-    "levels": [7],
+    "levels": [1, 2, 3, 4, 5, 6, 7],
     "evidence": [
-      {
-        "rank": 7,
-        "path": "agents/1421/details.zh.json",
-        "pointer": "/passive/level/1421507/desc/0",
-        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
-      },
       {
         "path": "agents/1421/details.zh.json",
         "pointer": "/talent/6/desc",
         "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
       }
     ],
-    "verification": "影画 6 的[通窍]强化同时改变核心被动的转换率与总上限：天赋 6（+6 个百分点、上限 720）与核心第 7 级说明全文（18%、上限 540）共同给出 min(初始攻击 ×6%, 180)；核心 6 的 16.5%（真实增量 192）等其他档位未建模，故只开放核心 7，其余等级按 MISSING_RANK 拒绝"
+    "verification": "天赋 6 明确转换率额外增加 6 个百分点、总上限 720；独立增量为强化封顶值减基础封顶值，两项同读显式初始攻击；逐档基础参数和证据由 semantics 引用 panyinhu:blk-legacy:mindscape:0:legacy-team-pierce",
+    "parameters": {
+      "rateIncrease": {
+        "unit": "multiplier",
+        "value": 0.06
+      },
+      "enhancedCap": {
+        "unit": "sheer-force-points",
+        "value": 720
+      }
+    }
   },
   "panyinhu:blk-ms20ft7a-s9mtkd": {
     "levels": [1, 2, 3, 4, 5, 6, 7],
@@ -2612,5 +2616,141 @@
       }
     ],
     "verification": "逐句核对对应的第 7 级数值；来源摘录省略无关段落，不外推其他档位"
+  },
+  "caesar:blk-legacy:mindscape:0:legacy-team-atk": {
+    "levels": [1, 2, 3, 4, 5, 6, 7],
+    "evidence": [
+      {
+        "rank": 1,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071501/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      },
+      {
+        "rank": 2,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071502/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      },
+      {
+        "rank": 3,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071503/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      },
+      {
+        "rank": 4,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071504/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      },
+      {
+        "rank": 5,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071505/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      },
+      {
+        "rank": 6,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071506/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      },
+      {
+        "rank": 7,
+        "path": "agents/1071/details.zh.json",
+        "pointer": "/passive/level/1071507/desc/0",
+        "sha256": "2e348fade08c69a3d13508f74e09e936d14771b88b4685b3a69b36e5ca25a9d4"
+      }
+    ],
+    "parameters": {
+      "amount": {
+        "unit": "attack-points",
+        "values": {
+          "1": 40,
+          "2": 135,
+          "3": 240,
+          "4": 400,
+          "5": 650,
+          "6": 900,
+          "7": 1000
+        }
+      }
+    },
+    "verification": "Nanoka 3.1 七行原文与 data.json 的 level 元数据逐档核对；参数为原文值，不插值，不传播到同块其他记录。固定 ZZZ-HP 值对应核心 7。"
+  },
+  "panyinhu:blk-legacy:mindscape:0:legacy-team-pierce": {
+    "levels": [1, 2, 3, 4, 5, 6, 7],
+    "evidence": [
+      {
+        "rank": 1,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421501/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      },
+      {
+        "rank": 2,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421502/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      },
+      {
+        "rank": 3,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421503/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      },
+      {
+        "rank": 4,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421504/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      },
+      {
+        "rank": 5,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421505/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      },
+      {
+        "rank": 6,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421506/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      },
+      {
+        "rank": 7,
+        "path": "agents/1421/details.zh.json",
+        "pointer": "/passive/level/1421507/desc/0",
+        "sha256": "cd41ab3b915abb06ba9edfcd311d488e56f57c62fd7d3a3c2ecfa3f4d2cd1b7a"
+      }
+    ],
+    "parameters": {
+      "rate": {
+        "unit": "multiplier",
+        "values": {
+          "1": 0.09,
+          "2": 0.105,
+          "3": 0.12,
+          "4": 0.135,
+          "5": 0.15,
+          "6": 0.165,
+          "7": 0.18
+        }
+      },
+      "cap": {
+        "unit": "sheer-force-points",
+        "values": {
+          "1": 540,
+          "2": 540,
+          "3": 540,
+          "4": 540,
+          "5": 540,
+          "6": 540,
+          "7": 540
+        }
+      }
+    },
+    "verification": "Nanoka 3.1 七行原文与 data.json 的 level 元数据逐档核对；参数为原文值，不插值，不传播到同块其他记录。固定 ZZZ-HP 值对应核心 7。"
   }
 }

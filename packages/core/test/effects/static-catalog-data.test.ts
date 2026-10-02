@@ -784,6 +784,13 @@ describe("fixed-source catalog conformance", () => {
     ...potentialCorrectedPointers,
     ...potentialMergedPointers,
   ])
+  // 四条 core7 固定来源参考继续执行；corrected 只表示新增低档参数/差额语义。
+  const coreRankExpandedPointers = new Set([
+    "/agents/7/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    "/agents/7/mindscapeBuffs/2/effectBlocks/0/effects/0",
+    "/agents/35/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    "/agents/35/mindscapeBuffs/6/effectBlocks/0/effects/0",
+  ])
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
@@ -791,7 +798,8 @@ describe("fixed-source catalog conformance", () => {
         .filter(
           (r) =>
             r.status === "converted" ||
-            potentialExplainedPointers.has(r.pointer),
+            potentialExplainedPointers.has(r.pointer) ||
+            coreRankExpandedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -2747,95 +2755,334 @@ describe("same-block core evidence scoping and independent damage items", () => 
       ).toBe(true)
   })
 
-  it("keeps recorded mindscape core dependencies on their verified core level", () => {
-    // 凯撒 2 影：攻击增益是核心被动攻击力提升效果的比例强化（提升至原本的 150%）。
-    // 登记值 500 只对应核心 7 的 1000；核心 6 的 900 需要 450，未建模 → MISSING_RANK。
-    const caesarOption = "agents:caesar:mindscape:2:blk-legacy:legacy-team-atk"
-    const caesarAt = (coreSkillLevel: 1 | 6 | 7) =>
-      agentInput(
-        "1071",
-        [caesarOption],
-        2,
-        coreSkillLevel,
-      ) as StaticCatalogDamageInput
-    for (const coreSkillLevel of [1, 6] as const) {
-      const gated = calculateStaticDamageFromCatalog(caesarAt(coreSkillLevel))
-      expect(gated.ok, `caesar core ${coreSkillLevel}`).toBe(false)
-      if (!gated.ok)
-        expect(
-          gated.issues.some((issue) => issue.code === "MISSING_RANK"),
-          `caesar core ${coreSkillLevel}`,
-        ).toBe(true)
-    }
-    const caesarVerified = calculateCatalogResult(caesarAt(7))
-    const caesarUnselected = calculateCatalogResult({
-      ...caesarAt(7),
-      selections: [],
-    })
-    // 命中基础项按攻击力 ×2 缩放：核心 7 的 +500 攻击使基础伤害增加 1000
-    expect(
-      caesarVerified.factors.nonCritical.baseDamage! -
-        caesarUnselected.factors.nonCritical.baseDamage!,
-    ).toBeCloseTo(1000, 6)
+  const caesarBase = "agents:caesar:mindscape:0:blk-legacy:legacy-team-atk"
+  const caesarIncrement = "agents:caesar:mindscape:2:blk-legacy:legacy-team-atk"
+  const panBase = "agents:panyinhu:mindscape:0:blk-legacy:legacy-team-pierce"
+  const panIncrement =
+    "agents:panyinhu:mindscape:6:blk-legacy:legacy-team-pierce"
+  const panBaseEffect =
+    "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:0"
+  const panIncrementEffect =
+    "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:6"
+  const coreLevels = [1, 2, 3, 4, 5, 6, 7] as const
 
-    // 潘引壶 6 影：通窍强化改变核心被动的转换率与总上限（+6 个百分点、上限 720）。
-    // 登记公式 min(初始攻击 ×6%, 180) 只在核心 7（18%/540）成立；核心 6 的
-    // 真实增量为 192 而非 180 → 其他等级 MISSING_RANK。
-    const panyinhuOption =
-      "agents:panyinhu:mindscape:6:blk-legacy:legacy-team-pierce"
-    const panyinhuSourceInput = catalog.options.find(
-      (o) => o.optionId === panyinhuOption,
-    )!.variants[0]!.inputs[0]!.name
-    const panyinhuAt = (coreSkillLevel: 1 | 6 | 7) => {
-      const base = agentInput(
-        "1421",
-        [panyinhuOption],
-        6,
-        coreSkillLevel,
-      ) as StaticCatalogDamageInput
-      if (base.damage.kind !== "regular") throw new Error("fixture")
-      const { defense: _defense, ...common } = base.damage
-      return {
-        ...base,
-        inputs: [
+  function panInput(
+    core: CoreSkillLevel,
+    attack: number,
+    selected: readonly string[] = [panBase, panIncrement],
+  ): StaticCatalogDamageInput {
+    const base = agentInput("1421", selected, 6, core)
+    if (base.damage.kind !== "regular") throw new Error("fixture")
+    const { defense: _defense, ...common } = base.damage
+    return {
+      ...base,
+      inputs: [panBaseEffect, panIncrementEffect].map((effectId) => ({
+        bindingId: "binding:static",
+        name: `${effectId}:source`,
+        value: { unit: "attack-points", value: attack },
+      })),
+      hit: {
+        ...base.hit,
+        damageItems: [
           {
-            bindingId: "binding:static",
-            name: panyinhuSourceInput,
-            value: { unit: "attack-points" as const, value: 3200 },
+            itemId: "base",
+            mode: "direct",
+            role: "base",
+            statSource: { entityId: "entity:attacker" },
+            stat: "sheerForce",
+            damageMultiplier: 1,
           },
         ],
-        hit: {
-          ...base.hit,
-          damageItems: [
-            {
-              ...base.hit.damageItems[0]!,
-              stat: "sheerForce" as const,
-              damageMultiplier: 1,
-            },
-          ],
-        },
-        damage: { ...common, kind: "sheer" as const, sheerDamageBonus: [] },
-      } as StaticCatalogDamageInput
+      },
+      damage: { ...common, kind: "sheer", sheerDamageBonus: [] },
     }
-    for (const coreSkillLevel of [1, 6] as const) {
-      const gated = calculateStaticDamageFromCatalog(panyinhuAt(coreSkillLevel))
-      expect(gated.ok, `panyinhu core ${coreSkillLevel}`).toBe(false)
-      if (!gated.ok)
+  }
+
+  function lowLevelResult(input: StaticCatalogDamageInput): StaticDamageResult {
+    const item = input.hit.damageItems[0]!
+    if (item.mode !== "direct") throw new Error("Expected direct fixture")
+    const result = calculateStaticDamage({
+      definitions: input.definitions,
+      bindings: input.bindings,
+      world: input.world,
+      inputs: input.inputs ?? [],
+      damage: input.damage as StaticDamageInput["damage"],
+      hit: {
+        ...input.hit,
+        damageItems: [
+          {
+            itemId: item.itemId,
+            stat: item.stat,
+            statSource: item.statSource,
+            damageMultiplier: item.damageMultiplier,
+          },
+        ],
+      },
+      selections: input.selections.flatMap((selection) =>
+        catalog.options
+          .find((option) => option.optionId === selection.optionId)!
+          .variants[0]!.effectIds.map((effectId) => ({
+            effectId,
+            bindingId: selection.bindingId,
+            layers: selection.layers,
+          })),
+      ),
+    })
+    expect(result.ok, JSON.stringify(result)).toBe(true)
+    if (!result.ok) throw new Error(JSON.stringify(result.issues))
+    return result.value
+  }
+
+  it.each(coreLevels)(
+    "evaluates Caesar core %i with independent base and M2 selections",
+    (core) => {
+      // 固定 3.1 原文逐档值；期望不读取生成参数。
+      const baseAmount = [40, 135, 240, 400, 650, 900, 1000][core - 1]!
+      const increment = [20, 67.5, 120, 200, 325, 450, 500][core - 1]!
+      for (const mindscape of [2, 3, 6] as const)
+        for (const [selected, expected] of [
+          [[], 0],
+          [[caesarBase], baseAmount],
+          [[caesarIncrement], increment],
+          [[caesarBase, caesarIncrement], baseAmount + increment],
+        ] as const) {
+          const input = agentInput("1071", selected, mindscape, core)
+          for (const result of [
+            calculateCatalogResult(input),
+            lowLevelResult(input),
+          ]) {
+            expect(
+              result.evaluation.hit!.damageItems[0]!.finalStat,
+            ).toBeCloseTo(1000 + expected, 8)
+            expect(result.factors.nonCritical.baseDamage).toBeCloseTo(
+              (1000 + expected) * 2,
+              8,
+            )
+          }
+        }
+      const zero = agentInput("1071", [caesarBase, caesarIncrement], 6, core)
+      expect(
+        calculateCatalogResult({
+          ...zero,
+          selections: zero.selections.map((s) => ({ ...s, layers: 0 })),
+        }).factors.nonCritical.baseDamage,
+      ).toBe(2000)
+    },
+  )
+
+  it.each(coreLevels)(
+    "evaluates Panyinhu core %i on both sides of both caps",
+    (core) => {
+      // 数学参考以百分数整数/千分数计算，独立于转换器表达式。
+      const ratePerThousand = [90, 105, 120, 135, 150, 165, 180][core - 1]!
+      const firstCap = [
+        4800,
+        48000 / 11,
+        4000,
+        48000 / 13,
+        24000 / 7,
+        3200,
+        3000,
+      ][core - 1]!
+      const secondCap = [6000, 36000 / 7, 4500, 4000, 3600, 36000 / 11, 3000][
+        core - 1
+      ]!
+      for (const attack of [
+        -100,
+        0,
+        firstCap - 1,
+        firstCap,
+        firstCap + 1,
+        (firstCap + secondCap) / 2,
+        secondCap - 1,
+        secondCap,
+        secondCap + 1,
+        10000,
+      ]) {
+        const positive = Math.max(0, attack)
+        const baseAmount = Math.min((positive * ratePerThousand) / 1000, 540)
+        const total = Math.min((positive * (ratePerThousand + 60)) / 1000, 720)
+        for (const [selected, expected] of [
+          [[], 0],
+          [[panBase], baseAmount],
+          [[panIncrement], total - baseAmount],
+          [[panBase, panIncrement], total],
+        ] as const) {
+          const input = panInput(core, attack, selected)
+          const result = calculateCatalogResult(input)
+          expect(
+            result.evaluation.hit!.damageItems[0]!.finalStat,
+            `core ${core}, A=${attack}`,
+          ).toBeCloseTo(500 + 24000 * 0.1 + 1000 * 0.3 + expected, 8)
+          expect(result.factors.nonCritical.baseDamage).toBeCloseTo(
+            500 + 24000 * 0.1 + 1000 * 0.3 + expected,
+            8,
+          )
+          if (selected.some((optionId) => optionId === panIncrement)) {
+            const increments = result.evaluation.contributions.filter(
+              (c) =>
+                c.origin.effectId === panIncrementEffect &&
+                c.origin.beneficiaryId === "entity:attacker",
+            )
+            expect(increments).toHaveLength(1)
+            expect(increments[0]!.value.value).toBeCloseTo(
+              total - baseAmount,
+              8,
+            )
+          }
+        }
+        const low = lowLevelResult(panInput(core, attack, [panIncrement]))
+        expect(contributionOf(low, panIncrementEffect)).toBeCloseTo(
+          total - baseAmount,
+          8,
+        )
+      }
+      const zero = panInput(core, 4800)
+      expect(
+        calculateCatalogResult({
+          ...zero,
+          inputs: [],
+          selections: zero.selections.map((s) => ({ ...s, layers: 0 })),
+        }).factors.nonCritical.baseDamage,
+      ).toBe(3200)
+    },
+  )
+
+  it.each([
+    [6, 3200, 192],
+    [6, 3300, 180],
+    [1, 4800, 288],
+    [1, 6000, 180],
+    [7, 3200, 180],
+  ] as const)(
+    "keeps the independent Panyinhu example core %i / attack %i = %i",
+    (core, attack, increment) => {
+      expect(
+        contributionOf(
+          calculateCatalogResult(panInput(core, attack, [panIncrement])),
+          panIncrementEffect,
+        ),
+      ).toBeCloseTo(increment, 8)
+    },
+  )
+
+  it("keeps mindscape unlock and missing/invalid core diagnostics", () => {
+    for (const [agent, option, ranks] of [
+      ["1071", caesarIncrement, [0, 1]],
+      ["1421", panIncrement, [0, 1, 2, 3, 4, 5]],
+    ] as const)
+      for (const rank of ranks) {
+        const result = calculateStaticDamageFromCatalog(
+          agentInput(agent, [option], rank, 1),
+        )
+        expect(result.ok).toBe(false)
+        if (!result.ok)
+          expect(result.issues).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({
+                code: "CONTEXT_MISMATCH",
+                message: expect.stringContaining("not unlocked"),
+              }),
+            ]),
+          )
+      }
+    for (const [agent, options] of [
+      ["1071", [caesarBase, caesarIncrement]],
+      ["1421", [panBase, panIncrement]],
+    ] as const)
+      for (const core of [undefined, 0, 8, 1.5]) {
+        const input = agentInput(agent, options, 6)
+        const result = calculateStaticDamageFromCatalog({
+          ...input,
+          bindings: input.bindings.map((binding) => ({
+            ...binding,
+            configuration: {
+              mindscapeRank: 6,
+              ...(core === undefined ? {} : { coreSkillLevel: core }),
+            },
+          })) as StaticCatalogDamageInput["bindings"],
+        })
+        expect(result.ok).toBe(false)
+        if (!result.ok)
+          expect(
+            result.issues.some((issue) => issue.code === "INVALID_INPUT"),
+          ).toBe(true)
+      }
+  })
+
+  it("requires each explicit initial attack and preserves units and source isolation", () => {
+    const input = panInput(1, 4800, [panIncrement])
+    for (const inputs of [
+      [],
+      [
+        {
+          bindingId: "binding:static",
+          name: `${panBaseEffect}:source`,
+          value: { unit: "attack-points", value: 4800 },
+        },
+      ],
+      [
+        {
+          bindingId: "binding:static",
+          name: `${panIncrementEffect}:source`,
+          value: { unit: "sheer-force-points", value: 4800 },
+        },
+      ],
+    ]) {
+      const result = calculateStaticDamageFromCatalog({
+        ...input,
+        inputs,
+      } as StaticCatalogDamageInput)
+      expect(result.ok).toBe(false)
+      if (!result.ok)
         expect(
-          gated.issues.some((issue) => issue.code === "MISSING_RANK"),
-          `panyinhu core ${coreSkillLevel}`,
+          result.issues.some(
+            (issue) =>
+              issue.code === "MISSING_FACT" || issue.code === "UNIT_MISMATCH",
+          ),
         ).toBe(true)
     }
-    const panyinhuVerified = calculateCatalogResult(panyinhuAt(7))
-    const panyinhuUnselected = calculateCatalogResult({
-      ...panyinhuAt(7),
-      selections: [],
+    // 另一来源用不同显式读数；当前面板大幅变化不替代 A。
+    const otherBinding: StaticCatalogDamageInput["bindings"][number] = {
+      ...input.bindings[0]!,
+      bindingId: "binding:other" as const,
+      holderId: "entity:other",
+    }
+    const holder = input.world.entities.find(
+      (entity) => entity.kind === "actor",
+    )!
+    const result = calculateCatalogResult({
+      ...withAttack(input, 99999),
+      bindings: [...input.bindings, otherBinding],
+      actorSources: [
+        ...input.actorSources,
+        { entityId: "entity:other", agentEntityId: "1421" },
+      ],
+      world: {
+        ...input.world,
+        entities: [
+          ...withAttack(input, 99999).world.entities,
+          { ...holder, entityId: "entity:other" },
+        ],
+      },
+      selections: [
+        ...input.selections,
+        { optionId: panIncrement, bindingId: "binding:other", layers: 1 },
+      ],
+      inputs: [
+        ...input.inputs!,
+        {
+          bindingId: "binding:other",
+          name: `${panIncrementEffect}:source`,
+          value: { unit: "attack-points", value: 6000 },
+        },
+      ],
     })
-    // 初始攻击 3200 × 6% = 192，登记封顶 180
-    expect(
-      panyinhuVerified.factors.nonCritical.baseDamage! -
-        panyinhuUnselected.factors.nonCritical.baseDamage!,
-    ).toBeCloseTo(180, 6)
+    expect(contributionOf(result, panIncrementEffect)).toBeCloseTo(288 + 180, 8)
+    expect(result.evaluation.hit!.damageItems[0]!.finalStat).toBeCloseTo(
+      500 + 24000 * 0.1 + 99999 * 0.3 + 288 + 180,
+      8,
+    )
   })
 
   it("applies the ordinary 60% branch to every hit category once selected", () => {

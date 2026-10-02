@@ -10,7 +10,13 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import { generateStaticEffects } from "../scripts/generate-static-effects.ts"
-import { convertSource } from "../scripts/static-effects/convert.ts"
+import {
+  convertSource,
+  resolveCoreRankParameters,
+  type RankEvidence,
+} from "../scripts/static-effects/convert.ts"
+import evidence from "../scripts/static-effects/rank-evidence.json" with { type: "json" }
+import { SOURCE_SEMANTICS } from "../scripts/static-effects/semantics.ts"
 import type {
   SourceData,
   SourceEffect,
@@ -76,6 +82,176 @@ const data = (): SourceData => ({
 })
 
 describe("static data conversion", () => {
+  it("compiles four core-dependent records without widening their block or changing ids on reorder", () => {
+    const source: SourceData = {
+      ...data(),
+      wengines: [],
+      agents: [
+        {
+          id: "caesar",
+          name: "凯撒",
+          mindscapeBuffs: Array.from({ length: 7 }, (_, rank) => ({
+            effectBlocks: [
+              {
+                id: "blk-legacy",
+                name: rank === 0 ? "核心被动：坚韧之壁" : `影画${rank}`,
+                effects:
+                  rank === 0 || rank === 2
+                    ? [
+                        {
+                          ...effect("legacy-team-atk", rank === 0 ? 1000 : 500),
+                          stat: "atk",
+                          applyTarget: "team",
+                        },
+                        ...(rank === 0
+                          ? [
+                              {
+                                ...effect("unverified-same-block", 5),
+                                stat: "atk",
+                              },
+                            ]
+                          : []),
+                      ]
+                    : [],
+              },
+            ],
+          })),
+        },
+        {
+          id: "panyinhu",
+          name: "潘引壶",
+          mindscapeBuffs: Array.from({ length: 7 }, (_, rank) => ({
+            effectBlocks: [
+              {
+                id: "blk-legacy",
+                name: rank === 0 ? "核心被动：脉中乾坤" : `影画${rank}`,
+                effects:
+                  rank === 0 || rank === 6
+                    ? [
+                        {
+                          ...effect("legacy-team-pierce", 0),
+                          kind: "convert",
+                          stat: "pierce",
+                          applyTarget: "team",
+                          convert: {
+                            from: "atk",
+                            panelSource: "manual",
+                            ratioPercent: rank === 0 ? 18 : 6,
+                            cap: rank === 0 ? 540 : 180,
+                            defaultBase: 3000,
+                          },
+                        },
+                      ]
+                    : [],
+              },
+            ],
+          })),
+        },
+      ],
+    }
+    const result = convertSource(source, functions, [], [])
+    expect(result.definitions.revision).toBe("8")
+    for (const option of result.catalog.options) {
+      const variant = option.variants[0]!
+      const sameBlock = option.optionId.endsWith("unverified-same-block")
+      expect(variant.configuration.coreSkillLevels).toEqual(
+        sameBlock ? [7] : [1, 2, 3, 4, 5, 6, 7],
+      )
+      expect(variant.status).toBe(sameBlock ? "converted" : "corrected")
+      expect(variant.effectIds).toHaveLength(1)
+    }
+    const increment = result.definitions.effects.find(
+      (rule) =>
+        rule.effectId ===
+        "agent:1421:zzz-hp:legacy-team-pierce:blk-legacy:mindscape:6",
+    )!
+    expect(increment).toMatchObject({
+      kind: "contribution",
+      operation: {
+        kind: "stat-adjustment",
+        stage: "final-fixed",
+        value: { kind: "add" },
+      },
+    })
+    expect(increment.parameters["rate"]).toMatchObject({
+      kind: "by-rank",
+      rank: "coreSkillLevel",
+      values: { 1: 0.09, 6: 0.165, 7: 0.18 },
+    })
+    source.agents.reverse()
+    source.agents[1]!.mindscapeBuffs![0]!.effectBlocks![0]!.effects.reverse()
+    const reordered = convertSource(source, functions, [], [])
+    expect(reordered.definitions.effects.map((rule) => rule.effectId)).toEqual(
+      result.definitions.effects.map((rule) => rule.effectId),
+    )
+    expect(reordered.catalog.options.map((option) => option.optionId)).toEqual(
+      result.catalog.options.map((option) => option.optionId),
+    )
+    expect(
+      reordered.coverage.records.map((record) => record.pointer),
+    ).not.toEqual(result.coverage.records.map((record) => record.pointer))
+  })
+
+  it("intersects required parameter rows, evidence rows and declared ranks while preserving confirmed zero", () => {
+    const semantics =
+      SOURCE_SEMANTICS[
+        "agents/panyinhu/mindscape/6/blk-legacy/legacy-team-pierce"
+      ]!
+    if (semantics.kind !== "core-skill-level") throw new Error("fixture")
+    const records: RankEvidence = structuredClone(evidence)
+    const base = records[semantics.baseEvidenceKey]!
+    delete base.parameters!["cap"]!.values!["2"]
+    base.evidence = base.evidence.filter((ref) => ref.rank !== 3)
+    records["panyinhu:blk-legacy:mindscape:6:legacy-team-pierce"]!.levels = [
+      1, 2, 3, 5, 6, 7,
+    ]
+    base.parameters!["rate"]!.values!["1"] = 0
+    const result = resolveCoreRankParameters(
+      semantics,
+      "sheer-force-points",
+      records,
+    )
+    expect(result.levels).toEqual([1, 5, 6, 7])
+    expect(result.parameters["rate"]).toMatchObject({ values: { 1: 0 } })
+    for (const parameter of Object.values(result.parameters))
+      if (parameter.kind === "by-rank")
+        expect(Object.keys(parameter.values)).toEqual(["1", "5", "6", "7"])
+  })
+
+  it("rejects missing, nonfinite, out-of-domain and unit-conflicting core parameter evidence", () => {
+    const semantics =
+      SOURCE_SEMANTICS["agents/caesar/mindscape/0/blk-legacy/legacy-team-atk"]!
+    if (semantics.kind !== "core-skill-level") throw new Error("fixture")
+    const changes: ((records: RankEvidence) => void)[] = [
+      (records) => {
+        delete records[semantics.baseEvidenceKey]!.parameters!["amount"]
+      },
+      (records) => {
+        records[semantics.baseEvidenceKey]!.parameters!["amount"]!.unit =
+          "ratio"
+      },
+      (records) => {
+        records[semantics.baseEvidenceKey]!.parameters!["amount"]!.values![
+          "8"
+        ] = 1
+      },
+      (records) => {
+        records[semantics.baseEvidenceKey]!.parameters!["amount"]!.values![
+          "2"
+        ] = NaN
+      },
+      (records) => {
+        records[semantics.baseEvidenceKey]!.levels = [1, 1]
+      },
+    ]
+    for (const change of changes) {
+      const records: RankEvidence = structuredClone(evidence)
+      change(records)
+      expect(() =>
+        resolveCoreRankParameters(semantics, "attack-points", records),
+      ).toThrow(/core parameter|Core parameter|core rank/)
+    }
+  })
   it("merges only structurally identical refinements and preserves stable ids across array reorder", () => {
     const original = convertSource(data(), functions, [], [])
     expect(original.definitions.effects).toHaveLength(2)
