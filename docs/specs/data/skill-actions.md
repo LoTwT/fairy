@@ -123,6 +123,36 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 纳入，不是 dash、dodge-counter 或 follow-up。维琳娜的染色属性动作仍不可用，原因具体化为
 缺少可选择的染色元素集合证据。
 
+### 已知限制：卢西娅合唱末段生命附加伤害
+
+PR4 跳过此项实现，仅记录为已知限制。当前[卢西娅动作定义](../../../packages/data/definitions/skills/agents/1451.json)的行为是：
+
+- `action:agent:1451:action:0024`（强化特殊技：死神协奏曲·破晓）仍可计算已接入的攻击力倍率，
+  结果不包含末段的生命值附加伤害，不能作为该招式包含全部机制的完整伤害。
+- `action:agent:1451:action:0025`（[合唱]额外伤害倍率）保持 `unavailable`，原因仍为
+  `special-mechanic` 与 `unsupported-expression`；解析失败不能视为零贡献，也不能把该行当作独立的普通攻击力伤害。
+
+证据来自 Nanoka 3.1 的 `agents/1451/details.zh.json` 与 `details.en.json`，两种语言的 Pointer 一致：
+`/skill/special/description/1/desc` 说明按最大生命值的相应比例额外提升 `[合唱]` 最后一段攻击的伤害；
+主动作倍率位于 `/skill/special/description/3/param/0`，引用参数 `1451011`；附加行位于
+`/skill/special/description/3/param/4`，表达式为 `{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%`，没有技能参数 ID。
+中文文件 SHA-256 为 `501102a4740b5b6e8814f180bbd1dc920d7d682ae5b42411d1b75f60277a98ce`，
+英文为 `f431cf4a9dbe99d977b672a08d3d83e750ad3eca839c9dad4ea66f84b46381e8`。
+原文适用于所有 `[合唱]`，此处以破晓两行定位缺口；其他 `[合唱]` 动作也未因此获得这份附加伤害支持。
+
+固定 ZZZ-HP 技能来源 `0df40c5b` 与增益来源 `fac62407` 均未实现该项。
+技能目录 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json` 的 `/skills/469` 只记录破晓主倍率，
+12 级为 1277.2%；[导入器](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp-backend/scripts/import-nanoka-skills.mjs#L159)
+跳过没有技能参数 ID 的倍率行，[伤害公式](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/damageCalc.ts#L378)
+也没有补算这份生命值附加项。固定上游结果不能作为该项伤害的独立期望值。
+
+后续重新处理时，须先取得独立机制资料或受控实测，确认附加项的结算位置、生命值读取时点及适用的
+暴击、增伤、防御和抗性等乘区，再明确附加行与主动作的组合及选择契约，避免重复计入。
+原文的“最大生命值”与破暗使用的“初始最大生命值”有区别，不能直接套用破暗或照的读取阶段。
+需要逐命中、末段差异增益或显示取整结果时，还须补齐末段与内部命中的证据；
+整条倍率、`repeat: 1` 与 `attackData` 均不能作为已确认拆分的依据。
+本次不变更动作状态、生成制品、manifest 或覆盖统计，也不把上述待确认事项登记为已支持的计算契约。
+
 ## 潜能等级与条件身份
 
 `resolveAgentAction` 接受可选的 `potentialLevel`（整数 0—6；省略按未开启的 0 处理）。
