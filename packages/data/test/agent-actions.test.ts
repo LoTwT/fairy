@@ -508,3 +508,292 @@ describe("bounded linear expression parser", () => {
     expect(() => parseSkillExpression(expression, "1001")).toThrow()
   })
 })
+
+describe("potential-level action catalogue", () => {
+  const anyLevels = {
+    basic: { mode: "trained", value: 12 },
+    dodge: { mode: "trained", value: 12 },
+    assist: { mode: "trained", value: 12 },
+    special: { mode: "trained", value: 12 },
+    chain: { mode: "trained", value: 12 },
+  } as const
+  const potentialRows = [
+    ["1021", "0016", [1, 2, 3, 4, 5, 6]],
+    ["1041", "0014", [1, 2, 3, 4, 5, 6]],
+    ["1041", "0015", [1, 2, 3, 4, 5, 6]],
+    ["1041", "0016", [1, 2, 3, 4, 5, 6]],
+    ["1041", "0017", [1, 2, 3, 4, 5, 6]],
+    ["1141", "0006", [1, 2, 3, 4, 5, 6]],
+    ["1171", "0023", [1, 2, 3, 4, 5, 6]],
+    ["1181", "0014", [1, 2, 3, 4, 5, 6]],
+    ["1181", "0015", [1, 2, 3, 4, 5, 6]],
+    ["1181", "0016", [1, 2, 3, 4, 5, 6]],
+    ["1191", "0012", [1, 2, 3, 4, 5, 6]],
+    ["1191", "0013", [1, 2, 3, 4, 5, 6]],
+    ["1191", "0014", [1, 2, 3, 4, 5, 6]],
+    ["1191", "0015", [1, 2, 3, 4, 5, 6]],
+    ["1191", "0016", [1, 2, 3, 4, 5, 6]],
+    ["1201", "0016", [1, 2, 3, 4, 5, 6]],
+    ["1201", "0022", [1, 2, 3, 4, 5, 6]],
+    ["1201", "0025", [1, 2, 3, 4, 5, 6]],
+    ["1211", "0008", [1, 2, 3, 4, 5, 6]],
+    ["1211", "0009", [1, 2, 3, 4, 5, 6]],
+    ["1211", "0010", [1, 2, 3, 4, 5, 6]],
+    ["1211", "0011", [1, 2, 3, 4, 5, 6]],
+    ["1261", "0014", [1, 2, 3, 4, 5, 6]],
+    ["1261", "0027", [1, 2, 3, 4, 5, 6]],
+    ["1381", "0009", [1, 2, 3, 4, 5, 6]],
+    ["1381", "0022", [1, 2, 3, 4, 5, 6]],
+    ["1261", "0013", [0]],
+    ["1381", "0008", [0]],
+  ] as const
+
+  it("opens the reviewed potential rows with explicit availability sets", async () => {
+    for (const [entityId, suffix, levels] of potentialRows) {
+      const data = await agent(entityId)
+      const action = data.actions.find(
+        (entry) =>
+          entry.actionId === `action:agent:${entityId}:action:${suffix}`,
+      )!
+      expect(action.potentialLevels, action.actionId).toEqual(levels)
+      expect(action.calculation.kind, action.actionId).toBe("damage")
+      for (const potentialLevel of levels) {
+        const resolved = resolveAgentAction({
+          agent: data,
+          actionId: action.actionId,
+          mindscapeRank: 0,
+          levels: anyLevels,
+          potentialLevel,
+        })
+        expect(resolved.ok, `${action.actionId}@P${potentialLevel}`).toBe(true)
+        if (resolved.ok)
+          expect(
+            resolved.resolutionContext.potentialLevel,
+            action.actionId,
+          ).toBe(potentialLevel)
+        else
+          expect(
+            resolved.issues.some(
+              (issue) =>
+                issue.code.startsWith("mixed-") ||
+                issue.code === "unknown-element",
+            ),
+          ).toBe(false)
+      }
+    }
+  })
+
+  it("rejects unavailable, non-integral and out-of-domain potential levels", async () => {
+    const data = await agent("1021")
+    const actionId = "action:agent:1021:action:0016"
+    for (const potentialLevel of [
+      -1,
+      7,
+      1.5,
+      Number.NaN,
+      Number.POSITIVE_INFINITY,
+    ])
+      expect(() =>
+        resolveAgentAction({
+          agent: data,
+          actionId,
+          mindscapeRank: 0,
+          levels: anyLevels,
+          potentialLevel,
+        }),
+      ).toThrow(RangeError)
+    // P0 未解锁；省略潜能按 0 处理，同样拒绝
+    for (const input of [
+      {
+        agent: data,
+        actionId,
+        mindscapeRank: 0,
+        levels: anyLevels,
+        potentialLevel: 0,
+      },
+      { agent: data, actionId, mindscapeRank: 0, levels: anyLevels },
+    ])
+      expect(() => resolveAgentAction(input)).toThrow(/not available/)
+    // 普通分支动作只允许潜能 0
+    const jane = await agent("1261")
+    expect(() =>
+      resolveAgentAction({
+        agent: jane,
+        actionId: "action:agent:1261:action:0013",
+        mindscapeRank: 0,
+        levels: anyLevels,
+        potentialLevel: 1,
+      }),
+    ).toThrow(/not available/)
+    expect(
+      resolveAgentAction({
+        agent: jane,
+        actionId: "action:agent:1261:action:0013",
+        mindscapeRank: 0,
+        levels: anyLevels,
+      }).ok,
+    ).toBe(true)
+  })
+
+  it("conditions S0 Anby's follow-up identity on potential and the explicit fact", async () => {
+    const data = await agent("1381")
+    for (const [suffix, target] of [
+      ["0014", "zzz-hp:follow-up-rule:fu-s0anby-chain-whole-ms0bpedc"],
+      ["0015", "zzz-hp:follow-up-rule:fu-s0anby-ultimate-whole-ms0bpbx8"],
+    ] as const) {
+      const actionId = `action:agent:1381:action:${suffix}`
+      const base = resolveAgentAction({
+        agent: data,
+        actionId,
+        mindscapeRank: 0,
+        levels: anyLevels,
+        potentialLevel: 0,
+      })
+      expect(base.ok).toBe(true)
+      if (base.ok) {
+        expect(base.skillTargetIds).toEqual([])
+        expect(base.skillTags).toEqual([])
+        expect(base.resolutionContext).toEqual({
+          agentEntityId: "1381",
+          mindscapeRank: 0,
+          potentialLevel: 0,
+        })
+      }
+      // P1—6 缺事实或事实非法时拒绝
+      expect(() =>
+        resolveAgentAction({
+          agent: data,
+          actionId,
+          mindscapeRank: 0,
+          levels: anyLevels,
+          potentialLevel: 6,
+        }),
+      ).toThrow(TypeError)
+      expect(() =>
+        resolveAgentAction({
+          agent: data,
+          actionId,
+          mindscapeRank: 0,
+          levels: anyLevels,
+          potentialLevel: 6,
+          additionalAbilityActive: "yes" as unknown as boolean,
+        }),
+      ).toThrow(TypeError)
+      const inactive = resolveAgentAction({
+        agent: data,
+        actionId,
+        mindscapeRank: 0,
+        levels: anyLevels,
+        potentialLevel: 6,
+        additionalAbilityActive: false,
+      })
+      expect(inactive.ok).toBe(true)
+      if (inactive.ok) {
+        expect(inactive.skillTargetIds).toEqual([])
+        expect(inactive.skillTags).toEqual([])
+        expect(inactive.resolutionContext.additionalAbilityActive).toBe(false)
+      }
+      const active = resolveAgentAction({
+        agent: data,
+        actionId,
+        mindscapeRank: 0,
+        levels: anyLevels,
+        potentialLevel: 6,
+        additionalAbilityActive: true,
+      })
+      expect(active.ok).toBe(true)
+      if (active.ok) {
+        expect(active.skillTargetIds).toEqual([target])
+        expect(active.skillTags).toEqual(["zzz-hp:follow-up"])
+        expect(active.resolutionContext.additionalAbilityActive).toBe(true)
+      }
+    }
+    // 逐雷按通用 dodge 分类，不借用 follow-up 身份
+    const harumasa = await agent("1201")
+    const dodge = harumasa.actions.find(
+      (entry) => entry.actionId === "action:agent:1201:action:0022",
+    )!
+    expect(dodge.skillCategory).toBe("dodge")
+    const resolved = resolveAgentAction({
+      agent: harumasa,
+      actionId: dodge.actionId,
+      mindscapeRank: 0,
+      levels: anyLevels,
+      potentialLevel: 1,
+    })
+    expect(resolved.ok).toBe(true)
+    if (resolved.ok) expect(resolved.skillCategory).toBe("dodge")
+  })
+
+  it("keeps the reviewed element conventions and aggregate assumptions explicit", async () => {
+    const burnice = await agent("1171")
+    expect(
+      burnice.actions.find(
+        (entry) => entry.actionId === "action:agent:1171:action:0023",
+      )!.calculation,
+    ).toMatchObject({ kind: "damage", segments: [{ element: "fire" }] })
+    const rina = await agent("1211")
+    for (const suffix of ["0008", "0009", "0010", "0011"] as const)
+      expect(
+        rina.actions.find(
+          (entry) => entry.actionId === `action:agent:1211:action:${suffix}`,
+        )!.calculation,
+      ).toMatchObject({ kind: "damage", segments: [{ element: "electric" }] })
+    const soldier = await agent("1041")
+    const enhanced = soldier.actions.find(
+      (entry) => entry.actionId === "action:agent:1041:action:0015",
+    )!
+    const extra = soldier.actions.find(
+      (entry) => entry.actionId === "action:agent:1041:action:0016",
+    )!
+    // 主伤与“每消耗一次火力镇压”的额外伤害分别选择，保持 aggregate 且不新增次数输入
+    for (const action of [enhanced, extra]) {
+      expect(action.calculation).toMatchObject({
+        kind: "damage",
+        segments: [{ granularity: "aggregate", repeat: 1 }],
+      })
+      expect(action.inputs).toEqual([])
+    }
+    expect(enhanced.rowName).toBe("强化普攻第五段伤害倍率")
+    expect(extra.rowName).toContain("额外伤害")
+  })
+
+  it("reproduces the reviewed level-12 reference coefficients", async () => {
+    const rows = [
+      ["1041", "0015", 8.839],
+      ["1041", "0016", 1.664],
+      ["1171", "0023", 4.001],
+      ["1181", "0015", 0.3888620689655172],
+      ["1201", "0022", 0.83],
+      ["1211", "0008", 1.053],
+      ["1211", "0009", 1.053],
+      ["1211", "0010", 1.053],
+      ["1211", "0011", 4.201],
+      ["1261", "0014", 9.65],
+      ["1381", "0009", 2.002],
+      ["1191", "0014", 3.627],
+      ["1191", "0015", 4.413],
+      ["1191", "0016", 5.199],
+    ] as const
+    for (const [entityId, suffix, expected] of rows) {
+      const data = await agent(entityId)
+      const action = data.actions.find(
+        (entry) =>
+          entry.actionId === `action:agent:${entityId}:action:${suffix}`,
+      )!
+      const resolved = resolveAgentAction({
+        agent: data,
+        actionId: action.actionId,
+        mindscapeRank: 0,
+        levels: anyLevels,
+        potentialLevel: 1,
+      })
+      expect(resolved.ok, action.actionId).toBe(true)
+      if (resolved.ok)
+        expect(resolved.sourceDamageMultiplier, action.actionId).toBeCloseTo(
+          expected,
+          9,
+        )
+    }
+  })
+})

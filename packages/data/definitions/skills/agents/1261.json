@@ -709,6 +709,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [0],
       "source": {
         "path": "agents/1261/details.zh.json",
         "pointer": "/skill/basic/description/6/param/0"
@@ -737,16 +738,32 @@
         "growth": 0.105
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1261:action:0013:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.008,
+                  "growth": 0.274
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-jane-nk-1261007-连续攻击"
     },
     {
@@ -758,6 +775,7 @@
       "skillCategory": "basic",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1261/details.zh.json",
         "pointer": "/skill/basic/description/6/param/1"
@@ -786,16 +804,32 @@
         "growth": 0.147
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1261:action:0014:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.821,
+                  "growth": 0.439
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-jane-nk-1261007-连续攻击"
     },
     {
@@ -1486,6 +1520,7 @@
       "skillCategory": "enhanced-special",
       "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1261/details.zh.json",
         "pointer": "/skill/special/description/6/param/0"
@@ -1510,16 +1545,32 @@
         "growth": 0.222
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1261:action:0027:total",
+            "damageKind": "regular",
+            "element": "physical",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1261:action:0027:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.951,
+                  "growth": 0.541
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-jane-nk-1261031-main"
     }
   ]

@@ -43,14 +43,42 @@ export function resolveAgentAction(
   input: ResolveAgentActionInput,
 ): ResolvedAgentAction {
   integer(input.mindscapeRank, 0, 6, "Mindscape rank")
+  if (input.potentialLevel !== undefined)
+    integer(input.potentialLevel, 0, 6, "Potential level")
+  const potentialLevel = input.potentialLevel ?? 0
   if (typeof input.actionId !== "string")
     throw new TypeError("Action ID must be a string")
+  if (
+    input.additionalAbilityActive !== undefined &&
+    typeof input.additionalAbilityActive !== "boolean"
+  )
+    throw new TypeError("additionalAbilityActive must be a boolean")
   if (input.agent.schemaVersion !== 1)
     throw new TypeError("Unsupported agent actions schema")
   const action = input.agent.actions.find(
     (entry) => entry.actionId === input.actionId,
   )
   if (!action) throw new RangeError(`Unknown action: ${input.actionId}`)
+  if (
+    action.potentialLevels &&
+    !action.potentialLevels.includes(potentialLevel)
+  )
+    throw new RangeError(
+      `Potential level ${potentialLevel} is not available for ${action.actionId}`,
+    )
+  const conditionalIdentity = action.conditionalIdentity
+  const conditionalIdentityActive =
+    conditionalIdentity !== undefined &&
+    conditionalIdentity.potentialLevels.includes(potentialLevel)
+  if (
+    conditionalIdentityActive &&
+    typeof input.additionalAbilityActive !== "boolean"
+  )
+    throw new TypeError(
+      `additionalAbilityActive is required for ${action.actionId} at potential ${potentialLevel}`,
+    )
+  const usesConditionalIdentity =
+    conditionalIdentityActive && input.additionalAbilityActive === true
   if (
     input.requireIndividualHits !== undefined &&
     typeof input.requireIndividualHits !== "boolean"
@@ -143,11 +171,21 @@ export function resolveAgentAction(
     resolutionContext: {
       agentEntityId: input.agent.entityId,
       mindscapeRank: input.mindscapeRank as MindscapeRank,
+      ...(action.potentialLevels ? { potentialLevel } : {}),
+      ...(conditionalIdentityActive
+        ? { additionalAbilityActive: input.additionalAbilityActive === true }
+        : {}),
     },
     actionId: action.actionId,
     skillCategory: action.skillCategory,
-    skillTargetIds: [...action.skillTargetIds],
-    skillTags: [...action.skillTags],
+    skillTargetIds: [
+      ...action.skillTargetIds,
+      ...(usesConditionalIdentity ? conditionalIdentity!.skillTargetIds : []),
+    ],
+    skillTags: [
+      ...action.skillTags,
+      ...(usesConditionalIdentity ? conditionalIdentity!.skillTags : []),
+    ],
     levels,
     sourceDamageMultiplier: action.damageCoefficient
       ? evaluate(action.damageCoefficient)

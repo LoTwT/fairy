@@ -777,9 +777,10 @@
       "name": "涡流集束手雷基础倍率",
       "rowName": "伤害倍率",
       "levelGroup": "special",
-      "skillCategory": null,
+      "skillCategory": "special",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1181/details.zh.json",
         "pointer": "/skill/special/description/8/param/0"
@@ -795,20 +796,32 @@
       },
       "dazeCoefficient": null,
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-          },
-          {
-            "code": "unknown-category",
-            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+            "segmentId": "action:agent:1181:action:0014:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.875,
+                  "growth": 0.08
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-grace-nk-1181020-main"
     },
     {
@@ -820,6 +833,7 @@
       "skillCategory": "special",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1181/details.zh.json",
         "pointer": "/skill/special/description/9/param/0"
@@ -844,16 +858,33 @@
         "growth": 0.008068965517241379
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1181:action:0015:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.19427586206896552,
+                  "growth": 0.017689655172413794
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "来源整式为 29 次投掷循环合计；本行按完整原式 ÷29 的单次近似保留 aggregate 粒度，未确认逐次命中拆分与逐次增益差异。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-grace-nk-1181018-main"
     },
     {
@@ -862,9 +893,10 @@
       "name": "脉冲手雷倍率",
       "rowName": "伤害倍率",
       "levelGroup": "special",
-      "skillCategory": null,
+      "skillCategory": "special",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1181/details.zh.json",
         "pointer": "/skill/special/description/10/param/0"
@@ -880,20 +912,32 @@
       },
       "dazeCoefficient": null,
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
-          },
-          {
-            "code": "unknown-category",
-            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+            "segmentId": "action:agent:1181:action:0016:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1181:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.42,
+                  "growth": 0.039
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-grace-nk-1181019-main"
     }
   ]

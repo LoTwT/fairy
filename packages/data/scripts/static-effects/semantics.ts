@@ -135,7 +135,8 @@ export type SourceSemantics =
   | {
       /**
        * 记录按潜能等级查表取参（Nanoka potentialDetail 明确各潜能数值）：
-       * 不能由层数、影画或其他培养维度代替；maximumLayers 归一为 1。
+       * 不能由层数、影画或其他培养维度代替；maximumLayers 默认归一为 1，
+       * 仅真实叠层效果（如艾莲极冰带每层）显式保留来源层数上限。
        */
       readonly kind: "potential-level"
       readonly minimumPotential: number
@@ -145,6 +146,22 @@ export type SourceSemantics =
         readonly unit: Unit
         readonly values: Readonly<Record<string, number>>
       }[]
+      /** 选项实际适用的激活层数上限；省略表示单次状态。 */
+      readonly maximumLayers?: number
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 同一触发状态的固定 + 升级部分记录已合并为一个完整状态选项：
+       * 该部分记录不再进入规则集，输出带原因的 unsupported 变体，
+       * 消费端选择时得到迁移说明而不是重复贡献。
+       */
+      readonly kind: "merged-partial-record"
+      /** 接收该语义的完整状态选项 ID。 */
+      readonly mergedIntoOptionId: string
+      /** 部分记录原本覆盖的潜能等级；用于错误定位。 */
+      readonly levels: readonly number[]
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
@@ -217,6 +234,99 @@ const velinaEvidence = [
 const allSpecialSkillLevels: readonly SpecialSkillLevel[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
 ]
+
+const burniceDetailsSha =
+  "b55233c50a7314a5bcf365bd2d9e5bf94298e92fce284f749370e690a2740dae"
+const graceDetailsSha =
+  "feaf4be0396a002b3a96717e32e9b409ea068b31208c78ff8e91933fdb9be055"
+const ellenDetailsSha =
+  "7d42a516131172e8dadcfb9744cbbb0d56eba8d8909c795064fc3ea3b40288c8"
+const harumasaDetailsSha =
+  "344958cd98b57c943154eef3b203db52b79f8a659315154c9cdf3351cc163886"
+const alexandrinaDetailsSha =
+  "48658bb99713ac204c6b4e85a9ed7cc6bc74dbe206df79ac8ed001f4423d2c18"
+const janeDetailsSha =
+  "072cf7ca66133aa5a10a1a18ca08261a268a8950e652828cf18ccbd00784163a"
+const s0anbyDetailsSha =
+  "b2ec8c86f184122998a0100188800cbb073315f7d6573548da585c102f61ca47"
+
+/** 潜力条目 level 2—6 的 desc 指针（level 1 无独立说明，由 abilityList 继承）。 */
+const potentialDetailEvidence = (
+  entityId: string,
+  sha256: string,
+  startId: number,
+): readonly SemanticsEvidenceReference[] =>
+  [startId + 1, startId + 2, startId + 3, startId + 4, startId + 5].map(
+    (id) => ({
+      path: `agents/${entityId}/details.zh.json`,
+      pointer: `/potentialDetail/${id}/desc`,
+      sha256,
+    }),
+  )
+
+const burnicePotentialEvidence = potentialDetailEvidence(
+  "1171",
+  burniceDetailsSha,
+  117100,
+)
+const gracePotentialEvidence = potentialDetailEvidence(
+  "1181",
+  graceDetailsSha,
+  118100,
+)
+const ellenPotentialEvidence = potentialDetailEvidence(
+  "1191",
+  ellenDetailsSha,
+  119100,
+)
+const harumasaPotentialEvidence = potentialDetailEvidence(
+  "1201",
+  harumasaDetailsSha,
+  120100,
+)
+const alexandrinaPotentialEvidence = potentialDetailEvidence(
+  "1211",
+  alexandrinaDetailsSha,
+  121100,
+)
+const janePotentialEvidence = potentialDetailEvidence(
+  "1261",
+  janeDetailsSha,
+  126100,
+)
+const s0anbyPotentialEvidence = potentialDetailEvidence(
+  "1381",
+  s0anbyDetailsSha,
+  138100,
+)
+const ellenBranchEvidence = [
+  {
+    path: "agents/1191/details.zh.json",
+    pointer: "/passive/level/1191514/desc/0",
+    sha256: ellenDetailsSha,
+  },
+] as const
+const harumasaBranchEvidence = [
+  {
+    path: "agents/1201/details.zh.json",
+    pointer: "/passive/level/1201514/desc/0",
+    sha256: harumasaDetailsSha,
+  },
+] as const
+const s0anbyBranchEvidence = [
+  {
+    path: "agents/1381/details.zh.json",
+    pointer: "/passive/level/1381514/desc/0",
+    sha256: s0anbyDetailsSha,
+  },
+] as const
+const lycaonPotentialBranchEvidence = [
+  {
+    path: "agents/1141/details.zh.json",
+    pointer: "/passive/level/1141514/desc/0",
+    sha256: "e183f9a19ea3534fa577d215ab5caa5c812fe6636c816a0db6e517379bfb55b3",
+  },
+] as const
 
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   // 简·狂热：来源记录位于影画 0 的兼容块，实际由狂热状态启用；核心被动不提供该增益。
@@ -389,7 +499,7 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "Nanoka 潜能分支（1021514 desc/1）确认：队伍中存在[支援]角色或与自身属性/阵营相同的角色时，[闪避：尾巴失踪术]或任意角色施加[强击]后，[强化特殊技]或[闪避反击]命中伤害提升 35%、最多 2 层、持续 30 秒——扩展触发、支援队伍条件与闪反受益属于潜能分支，补充潜能门槛；普通分支（1021507 desc/1）由补充变体单独登记，两个分支条件不并集。",
   },
-  // 猫又：潜能觉醒暴伤按潜能等级查表（20% 固定 + 0/10/20/30/40% 增量）。
+  // 猫又：潜能觉醒暴伤按潜能等级查表，固定与增量记录合并为一个完整状态选项。
   "agents/nekomata/mindscape/0/blk-ms4f5yzr-3tuoc1/eff-ms4f5yzr-pivfr6": {
     kind: "potential-level",
     minimumPotential: 2,
@@ -398,27 +508,21 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       {
         name: "amount",
         unit: "ratio",
-        values: { "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2, "6": 0.2 },
+        values: { "2": 0.2, "3": 0.3, "4": 0.4, "5": 0.5, "6": 0.6 },
       },
     ],
     evidence: nekomataPotentialEvidence,
     verification:
-      "Nanoka potentialDetail 102101—102105（level 2—6）明确：[肉球突袭]状态下暴击伤害提升 20/30/40/50/60%。固定 +20% 自潜能 2 起可用， maximumLayers 归一为 1；来源 note 的“后续每个影画”与 potentialDetail.level 不符，属具名连带修正。",
+      "Nanoka potentialDetail 102101—102105（level 2—6）明确：[肉球突袭]状态下暴击伤害提升 20/30/40/50/60%。本条承接同块固定 +20% 记录并改为完整档位值，自潜能 2 起可用，maximumLayers 归一为 1；同块的 +10%/层、最多 4 层的部分记录迁移至此，不再独立可选。来源 note 的“后续每个影画”与 potentialDetail.level 不符，属具名连带修正。",
   },
   "agents/nekomata/mindscape/0/blk-ms4f5yzr-3tuoc1/eff-ms4f845b-c51ysw": {
-    kind: "potential-level",
-    minimumPotential: 2,
+    kind: "merged-partial-record",
+    mergedIntoOptionId:
+      "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f5yzr-pivfr6",
     levels: [2, 3, 4, 5, 6],
-    parameters: [
-      {
-        name: "amount",
-        unit: "ratio",
-        values: { "2": 0, "3": 0.1, "4": 0.2, "5": 0.3, "6": 0.4 },
-      },
-    ],
     evidence: nekomataPotentialEvidence,
     verification:
-      "Nanoka potentialDetail 102101—102105（level 2—6）明确总值为 20/30/40/50/60%：固定 +20% 之外的增量为 0/10/20/30/40%，按潜能等级查表；潜能 2 的增量为合法零值。不得由任意 0—4 层或影画等级代替培养等级，maximumLayers 归一为 1。",
+      "Nanoka potentialDetail 102101—102105（level 2—6）明确总值为 20/30/40/50/60%，来源 note 与上游把“固定 +20%”与“+10%/层、最多 4 层”拆成两条独立记录。二者属于同一触发状态的固定与升级部分，已合并为完整档位选项 agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f5yzr-pivfr6；本记录不再独立可选，防止 20% 与增量重复相加。",
   },
   "agents/velina/mindscape/0/blk-legacy/eff-ms4tphp6-6zyuxs": {
     kind: "independent-target",
@@ -427,5 +531,250 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     evidence: velinaEvidence,
     verification:
       "来源块自带注记：微域气旋与广域气旋只是方便处理列入[特殊技]大类，实则不属于任何类型。Nanoka 核心被动第 7 级确认该爆炸为风属性异放、固定结算 255% 倍率。目录目标元数据改为 uncategorized，条件只匹配独立目标、异放伤害种类与风元素，不附加 special 大类要求。",
+  },
+  // 简：致命舞步的强击暴伤按潜能等级取完整档位值；旧的固定 + 叠层部分记录合并。
+  "agents/jane/mindscape/0/blk-ms34gorp-m9dlxw/eff-ms34gorp-xrbl8x": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0.1, "3": 0.15, "4": 0.2, "5": 0.25, "6": 0.3 },
+      },
+    ],
+    evidence: janePotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 126101—126105（level 2—6）明确：简触发[强击]时，该次[强击]的暴击伤害额外提升 10/15/20/25/30%。上游把固定 +10% 与 +5%/层、最多 4 层拆成两条独立记录，总和 10—30% 与档位值一致；本条改为完整档位值，maximumLayers 归一为 1，自潜能 2 起可用。",
+  },
+  "agents/jane/mindscape/0/blk-ms34gorp-m9dlxw/eff-ms34hzuh-214aho": {
+    kind: "merged-partial-record",
+    mergedIntoOptionId:
+      "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x",
+    levels: [2, 3, 4, 5, 6],
+    evidence: janePotentialEvidence,
+    verification:
+      "同一潜能状态下“固定 +10%”与“+5%/层、最多 4 层”是固定与升级部分，总和已被完整档位值 10/15/20/25/30% 取代；本记录不再独立可选，防止重复相加。",
+  },
+  // 零号安比：电脉冲的完整档位值取代 25% 基础 + 两条部分增量记录。
+  "agents/s0anby/mindscape/0/blk-ms4jqdq1-rkmmm3/eff-ms4jqsm1-qkfx1a": {
+    kind: "potential-level",
+    minimumPotential: 0,
+    levels: [0, 1, 2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: {
+          "0": 0.25,
+          "1": 0.25,
+          "2": 0.34,
+          "3": 0.38,
+          "4": 0.42,
+          "5": 0.46,
+          "6": 0.5,
+        },
+      },
+    ],
+    evidence: s0anbyPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 138101—138105（level 2—6）明确：[额外能力：电极化]中，全队角色[追加攻击]对拥有[银星]标记的敌人造成的伤害提升效果提升至 34/38/42/46/50%；潜能 0—1 保持基础 25%。本条采用对已有 25% 记录的完整档位修改，而不是 25% 与增量叠加；上游 +9% 与 +4%/层、最多 4 层两条部分记录迁移至此。额外能力队伍条件与[银星]状态由调用方显式断言。",
+  },
+  "agents/s0anby/mindscape/0/blk-ms4jrci5-unykui/eff-ms4jrci5-nxk6sq": {
+    kind: "merged-partial-record",
+    mergedIntoOptionId:
+      "agents:s0anby:mindscape:0:blk-ms4jqdq1-rkmmm3:eff-ms4jqsm1-qkfx1a",
+    levels: [2, 3, 4, 5, 6],
+    evidence: s0anbyPotentialEvidence,
+    verification:
+      "潜能的 +9% 增量已被完整档位值 34/38/42/46/50% 包含；本记录不再独立可选，防止与完整值重复相加。",
+  },
+  "agents/s0anby/mindscape/0/blk-ms4jrci5-unykui/eff-ms4jtmex-gz9fiw": {
+    kind: "merged-partial-record",
+    mergedIntoOptionId:
+      "agents:s0anby:mindscape:0:blk-ms4jqdq1-rkmmm3:eff-ms4jqsm1-qkfx1a",
+    levels: [2, 3, 4, 5, 6],
+    evidence: s0anbyPotentialEvidence,
+    verification:
+      "潜能的 +4%/层、最多 4 层增量已被完整档位值包含；本记录不再独立可选，防止与完整值重复相加。",
+  },
+  "agents/s0anby/mindscape/0/blk-legacy/eff-ms4jp2fs-cmvkjd": {
+    kind: "potential-branch",
+    minimumPotential: 1,
+    evidence: s0anbyBranchEvidence,
+    verification:
+      "Nanoka 潜能分支（1381508—1381514 desc/0）明确：[银星]的[追加攻击]暴击伤害提升效果额外提升零号·安比暴击伤害的 5%；普通分支（1381507 desc/0）没有该增量。补充潜能门槛 1—6；[银星]状态与额外能力仍由调用方显式断言，不自动推断队伍条件。",
+  },
+  // 莱卡恩：其他元素 30% 增伤属于潜能分支新增；25% 冰抗在两条分支都存在。
+  "agents/lycaon/mindscape/0/blk-legacy/legacy-team-dmgBonus": {
+    kind: "potential-branch",
+    minimumPotential: 1,
+    evidence: lycaonPotentialBranchEvidence,
+    verification:
+      "Nanoka 潜能分支（1141508—1141514）明确：[强化特殊技：狂猎时刻]、[支援突击：复仇反扑]或[支援突击：复仇反扑·冰舞]命中敌人时，目标的冰属性伤害抗性降低 25%、受到的其他属性伤害提升 30%。30% 其他元素贡献是潜能 1 起的新增效果（普通分支 1141507 只有 25% 冰抗），只对该记录补充潜能门槛；25% 冰抗记录在两条分支都存在，保持所有潜能可用。该贡献在来源与 Fairy 均位于 damage-bonus 通道，保留现状，不在本 PR 改写为抗性修复。",
+  },
+  // 艾莲：核心被动 100% 暴伤的受益范围扩展属于潜能分支。
+  "agents/ellen/mindscape/0/blk-legacy/legacy-self-critDmg": {
+    kind: "potential-branch",
+    minimumPotential: 1,
+    evidence: ellenBranchEvidence,
+    verification:
+      "Nanoka 潜能分支（1191508—1191514）明确：核心被动的 100% 暴伤对[连携技]、[终结技]、[普通攻击：霜锋]和[普通攻击：冰刃浪]同样生效；普通分支（1191507）只作用于[冲刺攻击：冰渊潜袭]蓄力剪击与[普通攻击：急冻修剪法]。上游记录的受益范围是潜能分支范围，补充潜能门槛 1—6；普通分支由补充变体单独登记，二者互斥。核心等级 7 证据不变。",
+  },
+  // 艾莲：极冰带按潜能等级取每层暴伤与满层冰抗无视。
+  "agents/ellen/mindscape/0/blk-ms4fuyir-dotq6c/eff-ms4fuyir-e3fuww": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    maximumLayers: 10,
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0.016, "3": 0.024, "4": 0.032, "5": 0.04, "6": 0.048 },
+      },
+    ],
+    evidence: ellenPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 119101—119105（level 2—6）明确：艾莲[额外能力：风暴潮]每层暴击伤害提升 1.6/2.4/3.2/4/4.8%。真实层数上限 10 由调用方显式提供，不把培养等级或默认满层当作层数；潜能配置不强制把该叠层效果归一为 1 层。",
+  },
+  "agents/ellen/mindscape/0/blk-ms4fuyir-dotq6c/eff-ms4fvlsz-x4x1hj": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0.033, "3": 0.05, "4": 0.067, "5": 0.083, "6": 0.1 },
+      },
+    ],
+    evidence: ellenPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 119101—119105（level 2—6）明确：叠加至 10 层时攻击目标无视 3.3/5/6.7/8.3/10% 冰属性伤害抗性。阈值事实“已达到 10 层”由调用方在选中该选项时显式断言；本规则不从激活层数推断阈值。",
+  },
+  // 悠真：核心被动暴率与锋芒暴伤的作用范围扩展属于潜能分支。
+  "agents/harumasa/mindscape/0/blk-legacy/legacy-self-critRate": {
+    kind: "potential-branch",
+    minimumPotential: 1,
+    evidence: harumasaBranchEvidence,
+    verification:
+      "Nanoka 潜能分支（1201508—1201514）明确：[冲刺攻击：飞弦·斩]、[逐雷]和[终结技]的暴击率提升 25%；普通分支（1201507）只列[冲刺攻击：飞弦·斩]。上游记录的受益范围是潜能分支范围，补充潜能门槛 1—6；普通分支由补充变体单独登记，二者互斥。核心等级 7 证据不变。",
+  },
+  "agents/harumasa/mindscape/0/blk-legacy/eff-ms4gx7ds-ijkzuy": {
+    kind: "potential-branch",
+    minimumPotential: 1,
+    evidence: harumasaBranchEvidence,
+    verification:
+      "Nanoka 潜能分支（1201508—1201514）明确：每层[锋芒]使[冲刺攻击：飞弦·斩]、[逐雷]和[终结技]暴击伤害提升 12%；普通分支（1201507）只列[冲刺攻击：飞弦·斩]。补充潜能门槛 1—6 与真实[锋芒]层数上限 6 分离；普通分支由补充变体单独登记，二者互斥。",
+  },
+  "agents/harumasa/mindscape/0/blk-ms4gyswd-hl5ii6/eff-ms4gyswd-zyloo3": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0.04, "3": 0.06, "4": 0.08, "5": 0.1, "6": 0.12 },
+      },
+    ],
+    evidence: harumasaPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 120101—120105（level 2—6）明确：发动[强化特殊技]、[连携技]或[终结技]时攻击力提升 4/6/8/10/12%，持续 12 秒。上游建模为 +2%/层、最多 6 层；本条改为完整档位值并把层数归一为 1，12 秒激活状态由调用方显式断言，不计算时间。",
+  },
+  "agents/harumasa/mindscape/0/blk-ms4gyswd-hl5ii6/eff-ms4h0385-xlwhvy": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0.05, "3": 0.075, "4": 0.1, "5": 0.125, "6": 0.15 },
+      },
+    ],
+    evidence: harumasaPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 120101—120105（level 2—6）明确：[冲刺攻击：飞弦·斩]和[逐雷]无视目标 5/7.5/10/12.5/15% 电属性伤害抗性，持续 12 秒。上游建模为 +2.5%/层、最多 6 层；本条改为完整档位值并把层数归一为 1，受益招式范围保持来源的飞弦斩/逐雷目标，12 秒状态由调用方显式断言。",
+  },
+  // 柏妮思：沸点派对按潜能等级取初始能量自动回复的换算率。
+  "agents/burnice/mindscape/0/blk-ms4njqvi-f55a5p/eff-ms4njqvi-e0gd6d": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "rate",
+        unit: "multiplier",
+        values: { "2": 10, "3": 13, "4": 16, "5": 20, "6": 25 },
+      },
+    ],
+    evidence: burnicePotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 117101—117105（level 2—6）明确：初始能量自动回复大于等于 1.8 时，超过的部分每 0.1 点使异常掌控额外提升 1/1.3/1.6/2/2.5 点、最多 25 点。换算为每 1 点能量自动回复的 rate：10/13/16/20/25；阈值 1.8 与上限 25 保持来源连续转换公式，不模拟 1.35 秒触发周期。",
+  },
+  "agents/burnice/mindscape/0/blk-ms4njqvi-f55a5p/eff-ms4nnnk0-1esj6u": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "rate",
+        unit: "multiplier",
+        values: { "2": 0.1, "3": 0.125, "4": 0.15, "5": 0.175, "6": 0.2 },
+      },
+    ],
+    evidence: burnicePotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 117101—117105（level 2—6）明确：同一条目每 0.1 点超出初始能量自动回复使造成的伤害提升 1/1.25/1.5/1.75/2%、最多 20%。换算为每 1 点能量自动回复的 rate：0.1/0.125/0.15/0.175/0.2；阈值与 20% 上限保持来源公式，与异常掌控使用同一读取值、各自封顶。",
+  },
+  // 格莉丝：电能强化的完整档位值取代 +5%/层的叠层模型。
+  "agents/grace/mindscape/0/blk-ms4o8tep-z28y9w/eff-ms4o8tep-htm584": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "amount",
+        unit: "ratio",
+        values: { "2": 0.1, "3": 0.15, "4": 0.2, "5": 0.25, "6": 0.3 },
+      },
+    ],
+    evidence: gracePotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 118101—118105（level 2—6）明确：消耗[电能]获得的[电能强化]状态使造成的电属性伤害提升 10/15/20/25/30%、持续 25 秒。上游建模为 +5%/层、最多 6 层；本条改为完整档位值并把层数归一为 1，激活状态与持续时间由调用方显式断言。潜能的额外能力队伍条件增加“其他[异常]角色”，仍按显式选择契约由调用方断言，不自动推断。",
+  },
+  // 丽娜：完美侍奉按潜能等级取核心转化的读取率。
+  "agents/alexandrina/mindscape/0/blk-ms4719qz-139572/eff-ms4719qz-a5ce2o": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "rate",
+        unit: "multiplier",
+        values: { "2": 300, "3": 420, "4": 550, "5": 670, "6": 800 },
+      },
+    ],
+    evidence: alexandrinaPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 121101—121105（level 2—6）明确：核心被动增益存在期间，基于丽娜自身穿透率每 1% 提升全队攻击力 3/4.2/5.5/6.7/8 点、至多 576 点。rate 按每 1 点穿透率（=1%）换算为 300/420/550/670/800；读取值仍来自持有者显式输入，封顶 576 保持。",
+  },
+  "agents/alexandrina/mindscape/0/blk-ms4719qz-139572/eff-ms478uay-hcl0vd": {
+    kind: "potential-level",
+    minimumPotential: 2,
+    levels: [2, 3, 4, 5, 6],
+    parameters: [
+      {
+        name: "rate",
+        unit: "multiplier",
+        values: { "2": 250, "3": 350, "4": 450, "5": 550, "6": 650 },
+      },
+    ],
+    evidence: alexandrinaPotentialEvidence,
+    verification:
+      "Nanoka potentialDetail 121101—121105（level 2—6）明确：同一激活条件基于丽娜自身穿透率每 1% 提升全队防御力 2.5/3.5/4.5/5.5/6.5 点、至多 468 点。rate 换算为 250/350/450/550/650；与攻击转化分别登记、各自封顶，不合并为一个完整选项。",
   },
 }

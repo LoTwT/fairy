@@ -19,7 +19,7 @@
 
 **ZZZ-HP 是增益数据与计算语义的第一信任来源。** Nanoka 用于基础资料、身份映射和缺失信息补充。冲突应保留来源与差异记录，不因来源不同自动用 Nanoka 或本项目推断覆盖 ZZZ-HP。
 
-当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `6`（本基线的语义修订记录见[修订 6](../data/zzz-hp-static-effects.md#修订-6核心证据作用域普通分支受益与爪印独立命中)）。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
+当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `7`（本基线的语义修订记录见[修订 7](../data/zzz-hp-static-effects.md#修订-7潜能档位效果普通潜能分支与部分记录迁移)）。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，12 个固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
 
 相对初始 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 基线，12 个资源中只有增益 JSON、`types/calculator.ts`、`utils/buffEffect.ts` 的内容变化。已接入效果的变化与限制见[修订 2](../data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)。Nanoka 仍为 3.1；属性和技能动作继续保留各自未变化的语义证据版本。
 
@@ -100,7 +100,7 @@
 
 `potentialLevel` 表示已含影画的潜能等级（整数域 0—6），0 是配置归一视图中的显式默认值，表示未提供或未解锁。
 依赖它的参数表使用明确的等级键；等级表必须来自来源或补充证据确认的表达式或数值，缺档处理与核心等级参数表一致。
-只有选中的效果实际依赖该等级时，调用方才需要提供；目录选项声明各自有证据支持的 `potentialLevels` 集合。
+只有选中的效果实际依赖该等级时，调用方才需要提供；目录选项声明各自有证据支持的 `potentialLevels` 集合。同一触发状态的固定与升级部分由目录合并为一次完整状态选择，旧的部分选项不再独立可选（见[修订 7](../data/zzz-hp-static-effects.md#修订-7潜能档位效果普通潜能分支与部分记录迁移)）；潜能参数表只对真实叠层效果保留大于 1 的层数上限。
 
 ### 音擎精炼：择一参数表
 

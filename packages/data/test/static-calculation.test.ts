@@ -841,4 +841,103 @@ describe("special skill level inputs", () => {
       }),
     ).toMatchObject({ ok: false, issues: [{ code: "CONTEXT_MISMATCH" }] })
   })
+
+  it("enforces potential levels and the additional-ability fact on conditional action identities", async () => {
+    const input = await fixture("1381")
+    const actions = input.data.agents[0]!.actions
+    const levels = {
+      basic: { mode: "trained", value: 12 },
+      dodge: { mode: "trained", value: 12 },
+      assist: { mode: "trained", value: 12 },
+      special: { mode: "trained", value: 12 },
+      chain: { mode: "trained", value: 12 },
+    } as const
+    const resolve = (
+      actionId: string,
+      potentialLevel?: number,
+      additionalAbilityActive?: boolean,
+    ) =>
+      resolveAgentAction({
+        agent: actions,
+        actionId,
+        mindscapeRank: 0,
+        levels,
+        ...(potentialLevel === undefined ? {} : { potentialLevel }),
+        ...(additionalAbilityActive === undefined
+          ? {}
+          : { additionalAbilityActive }),
+      })
+    const withActor = (
+      action: ReturnType<typeof resolve>,
+      potentialLevel: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+    ): StaticActionCalculationInput => ({
+      ...input,
+      action,
+      actors: [{ ...input.actors[0]!, potentialLevel }],
+    })
+
+    const active = resolve("action:agent:1381:action:0015", 6, true)
+    expect(active.ok).toBe(true)
+    if (!active.ok) return
+    expect(active.skillTags).toEqual(["zzz-hp:follow-up"])
+    expect(calculateStaticActionDamage(withActor(active, 6))).toMatchObject({
+      ok: true,
+    })
+
+    // 伪造：保留追加攻击身份但抹掉事实，core 重新计算身份后拒绝
+    const forged = {
+      ...active,
+      resolutionContext: {
+        agentEntityId: "1381",
+        mindscapeRank: 0,
+        potentialLevel: 6,
+      },
+    } as typeof active
+    expect(calculateStaticActionDamage(withActor(forged, 6))).toMatchObject({
+      ok: false,
+      issues: [
+        { code: "CONTEXT_MISMATCH", pointer: "/action/resolutionContext" },
+      ],
+    })
+
+    // 伪造：事实为假却携带追加攻击身份
+    const inactive = resolve("action:agent:1381:action:0015", 6, false)
+    expect(inactive.ok).toBe(true)
+    if (!inactive.ok) return
+    expect(
+      calculateStaticActionDamage(
+        withActor({ ...inactive, skillTargetIds: active.skillTargetIds }, 6),
+      ),
+    ).toMatchObject({
+      ok: false,
+      issues: [{ code: "CONTEXT_MISMATCH", pointer: "/action" }],
+    })
+
+    // 角色潜能与解析档位不一致
+    expect(calculateStaticActionDamage(withActor(inactive, 5))).toMatchObject({
+      ok: false,
+      issues: [
+        { code: "CONTEXT_MISMATCH", pointer: "/action/resolutionContext" },
+      ],
+    })
+
+    // 潜能 0：保持连携/终结分类
+    const ordinary = resolve("action:agent:1381:action:0015", 0, true)
+    expect(ordinary.ok).toBe(true)
+    if (!ordinary.ok) return
+    expect(ordinary.skillTargetIds).toEqual([])
+    expect(ordinary.skillTags).toEqual([])
+    expect(calculateStaticActionDamage(withActor(ordinary, 0))).toMatchObject({
+      ok: true,
+    })
+
+    // 无潜能依赖的动作不记录档位，可跨潜能复用
+    const basic = resolve("action:agent:1381:action:0001")
+    expect(basic.ok).toBe(true)
+    if (!basic.ok) return
+    expect(basic.resolutionContext.potentialLevel).toBeUndefined()
+    expect(calculateStaticActionDamage(withActor(basic, 6))).toMatchObject({
+      ok: true,
+    })
+  })
 })

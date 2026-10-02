@@ -740,6 +740,27 @@ function compile(
       "该负暴伤补偿属于锋御锐暴路径，与延期的新公式一并保留",
     )
   if (mapping.reason) return unsupported("formula-out-of-scope", mapping.reason)
+  if (semantics?.kind === "merged-partial-record")
+    return {
+      variant: {
+        ...variant,
+        effectIds: [],
+        status: "unsupported" as const,
+        reason: "semantic-conflict" as const,
+        explanation: `该部分记录已合并至完整状态选项 ${semantics.mergedIntoOptionId}；不得与完整值重复选择。`,
+        maximumLayers: 1,
+        configuration: {
+          ...variant.configuration,
+          potentialLevels: [...semantics.levels] as PotentialLevel[],
+        },
+        references: [
+          ...variant.references,
+          ...semantics.evidence.map((ref) =>
+            nanokaReference(ref.path, ref.pointer),
+          ),
+        ],
+      },
+    }
   if (coreDependent && !proof)
     return unsupported(
       "missing-rank-evidence",
@@ -952,7 +973,7 @@ function compile(
     variant = {
       ...variant,
       status: "corrected",
-      maximumLayers: 1,
+      maximumLayers: semantics.maximumLayers ?? 1,
       configuration: {
         ...variant.configuration,
         potentialLevels: [...semantics.levels] as PotentialLevel[],
@@ -1506,6 +1527,24 @@ export function convertSource(
       })
       supplementalOptions += 1
     }
+    if (supplement.kind === "option") {
+      const entity = collected.entities.find(
+        (candidate) => candidate.catalogEntityId === supplement.catalogEntityId,
+      )
+      if (!entity)
+        throw new Error(
+          `Unknown supplement catalog entity: ${supplement.catalogEntityId}`,
+        )
+      options.push({
+        optionId: supplement.optionId,
+        catalogEntityId: supplement.catalogEntityId,
+        name: supplement.variant.name,
+        conditionDescription: supplement.variant.conditionDescription,
+        target: supplement.variant.target,
+        variants: [variant],
+      })
+      supplementalOptions += 1
+    }
     supplementalRecords.push({
       supplementId: supplement.supplementId,
       source: supplement.source,
@@ -1521,7 +1560,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "6",
+    revision: "7",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1594,11 +1633,16 @@ export function convertSource(
       {
         differenceId: "potential-branch-gate",
         explanation:
-          "猫又的 60% 增伤记录、额外能力（猫步秀）记录与[超凶爪印]独立项实际对应核心被动的潜能分支（Nanoka passive 节点 potential 为 102100—102105）：补充潜能门槛，未开启潜能时不可用；普通分支（potential [0]）由 Nanoka 补充变体单独登记，两个分支条件不并集。",
+          "多条来源记录实际只属于核心被动的潜能分支（Nanoka passive 节点 potential 为 xxx100—xxx105），普通分支（potential [0]）提供更小的受益范围或没有该贡献：猫又 60% 增伤、额外能力（猫步秀）与[超凶爪印]；莱卡恩“受到的其他属性伤害提升 30%”（普通分支只有 25% 冰抗）；零号·安比[追加攻击]暴伤额外提升自身暴伤 5%（普通分支没有该增量）；艾莲与浅羽悠真的核心被动受益范围（普通分支只含冰渊潜袭/急冻修剪法或飞弦·斩，潜能分支扩展逐雷、终结技等）。转换器对这些记录补充潜能门槛 1—6，普通的受限分支由 Nanoka 补充变体或沿用原记录单独登记，两个分支条件不并集。",
         references: [
           reference("/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/0"),
           reference("/agents/39/mindscapeBuffs/0/effectBlocks/0/effects/1"),
           reference("/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"),
+          reference("/agents/49/mindscapeBuffs/0/effectBlocks/0/effects/1"),
+          reference("/agents/56/mindscapeBuffs/0/effectBlocks/0/effects/2"),
+          reference("/agents/47/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+          reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+          reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/1"),
         ],
       },
       {
@@ -1616,10 +1660,41 @@ export function convertSource(
       {
         differenceId: "potential-level-expression",
         explanation:
-          "猫又潜能觉醒暴伤记录的来源 note 写作“后续每个影画 +10%”，与 Nanoka potentialDetail.level（102101—102105，level 2—6）不符：按潜能等级查表（固定 20%、增量 0/10/20/30/40%，总值为 20—60%），maximumLayers 归一为 1，潜能 2 起可用，不由任意 0—4 层或影画等级代替培养等级。",
+          "猫又、简、零号·安比、艾莲、浅羽悠真、柏妮思、格莉丝与丽娜的相关参数按 Nanoka potentialDetail 的明确档位查表，不由层数、影画或其他培养维度代替；同一触发状态的固定与升级部分合并为一次完整状态选择（如猫又暴伤 20—60%、简强击暴伤 10—30%、零号·安比追击增伤 25%→34—50%），maximumLayers 只保留真实叠层效果（艾莲暴伤每层、悠真[锋芒]每层），其余归一为 1。上游部分记录只识别出固定值或叠层近似（猫又 note 的“后续每个影画”、简固定 10%+5%/层、零号·安比 +9%+4%/层、柏妮思异常掌控/增伤换算率、格莉丝 +5%/层、悠真 +2%/+2.5%/层），与 level 2—6 的完整数值不符，属具名连带修正；潜能 2 起才启用升级贡献，潜能 0/1 保持首档能力。",
         references: [
           reference("/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/56/mindscapeBuffs/0/effectBlocks/1/effects/1"),
+          reference("/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/0"),
+          reference("/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/1"),
+          reference("/agents/29/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/1"),
+          reference("/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/1/mindscapeBuffs/0/effectBlocks/2/effects/1"),
+          reference("/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/1"),
+        ],
+      },
+      {
+        differenceId: "potential-partial-option-migration",
+        explanation:
+          "同一触发状态的固定与升级部分记录不再独立可选：猫又 +10%/层、简 +5%/层、零号·安比 +9% 与 +4%/层共四条部分记录已并入对应的完整档位选项（猫又暴伤、简强击暴伤、零号·安比追击增伤），选择这些旧选项返回带迁移说明的语义冲突，防止固定值与增量重复相加；来源位置仍在覆盖报告中保留去向。",
+        references: [
           reference("/agents/39/mindscapeBuffs/0/effectBlocks/2/effects/1"),
+          reference("/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/1"),
+          reference("/agents/56/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/56/mindscapeBuffs/0/effectBlocks/2/effects/1"),
+        ],
+      },
+      {
+        differenceId: "potential-branch-scope",
+        explanation:
+          "艾莲与浅羽悠真的核心被动在潜能 0 与潜能 1—6 的受益范围不同：上游记录采用潜能分支范围（艾莲扩展到连携技、终结技、霜锋与冰刃浪；悠真扩展到逐雷与终结技），潜能 0 由 Nanoka 普通分支的补充变体单独登记为受限范围（艾莲只作用于冰渊潜袭与急冻修剪法；悠真只作用于飞弦·斩的 25% 暴率与每层 12% 暴伤）。两个分支互斥，核心等级 7 证据不变；普通分支的受益目标使用来源技能标签显式匹配，不按名称前缀推断。",
+        references: [
+          reference("/agents/47/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+          reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+          reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/1"),
         ],
       },
       {

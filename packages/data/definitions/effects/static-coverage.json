@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "6",
+  "revision": "7",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -10871,7 +10871,7 @@
       "effectIds": [
         "agent:1211:zzz-hp:eff-ms4719qz-a5ce2o:blk-ms4719qz-139572:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -10886,7 +10886,7 @@
       "effectIds": [
         "agent:1211:zzz-hp:eff-ms478uay-hcl0vd:blk-ms4719qz-139572:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -11855,7 +11855,7 @@
       "effectIds": [
         "agent:1171:zzz-hp:eff-ms4njqvi-e0gd6d:blk-ms4njqvi-f55a5p:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -11870,7 +11870,7 @@
       "effectIds": [
         "agent:1171:zzz-hp:eff-ms4nnnk0-1esj6u:blk-ms4njqvi-f55a5p:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -12554,7 +12554,7 @@
       "effectIds": [
         "agent:1191:zzz-hp:legacy-self-critDmg:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 100,
       "normalizedValue": 100
@@ -12584,7 +12584,7 @@
       "effectIds": [
         "agent:1191:zzz-hp:eff-ms4fuyir-e3fuww:blk-ms4fuyir-dotq6c:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -12599,7 +12599,7 @@
       "effectIds": [
         "agent:1191:zzz-hp:eff-ms4fvlsz-x4x1hj:blk-ms4fuyir-dotq6c:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 10,
       "normalizedValue": 10
@@ -12809,7 +12809,7 @@
       "effectIds": [
         "agent:1181:zzz-hp:eff-ms4o8tep-htm584:blk-ms4o8tep-z28y9w:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -12839,7 +12839,7 @@
       "effectIds": [
         "agent:1201:zzz-hp:eff-ms4gx7ds-ijkzuy:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -12854,7 +12854,7 @@
       "effectIds": [
         "agent:1201:zzz-hp:legacy-self-critRate:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25
@@ -12884,7 +12884,7 @@
       "effectIds": [
         "agent:1201:zzz-hp:eff-ms4gyswd-zyloo3:blk-ms4gyswd-hl5ii6:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -12899,7 +12899,7 @@
       "effectIds": [
         "agent:1201:zzz-hp:eff-ms4h0385-xlwhvy:blk-ms4gyswd-hl5ii6:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13240,7 +13240,7 @@
       "effectIds": [
         "agent:1261:zzz-hp:eff-ms34gorp-xrbl8x:blk-ms34gorp-m9dlxw:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 10,
       "normalizedValue": 10
@@ -13252,10 +13252,10 @@
       "rankKind": "mindscape",
       "stat": "anomalyCritDmg",
       "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34hzuh-214aho",
-      "effectIds": [
-        "agent:1261:zzz-hp:eff-ms34hzuh-214aho:blk-ms34gorp-m9dlxw:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该部分记录已合并至完整状态选项 agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x；不得与完整值重复选择。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13986,7 +13986,7 @@
       "effectIds": [
         "agent:1141:zzz-hp:legacy-team-dmgBonus:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30
@@ -14508,10 +14508,10 @@
       "rankKind": "mindscape",
       "stat": "critDmg",
       "optionId": "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f845b-c51ysw",
-      "effectIds": [
-        "agent:1021:zzz-hp:eff-ms4f845b-c51ysw:blk-ms4f5yzr-3tuoc1:mindscape:0"
-      ],
-      "status": "corrected",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该部分记录已合并至完整状态选项 agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f5yzr-pivfr6；不得与完整值重复选择。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -15786,7 +15786,7 @@
       "effectIds": [
         "agent:1381:zzz-hp:eff-ms4jp2fs-cmvkjd:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -15816,7 +15816,7 @@
       "effectIds": [
         "agent:1381:zzz-hp:eff-ms4jqsm1-qkfx1a:blk-ms4jqdq1-rkmmm3:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25
@@ -15828,10 +15828,10 @@
       "rankKind": "mindscape",
       "stat": "skillDmgBonus",
       "optionId": "agents:s0anby:mindscape:0:blk-ms4jrci5-unykui:eff-ms4jrci5-nxk6sq",
-      "effectIds": [
-        "agent:1381:zzz-hp:eff-ms4jrci5-nxk6sq:blk-ms4jrci5-unykui:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该部分记录已合并至完整状态选项 agents:s0anby:mindscape:0:blk-ms4jqdq1-rkmmm3:eff-ms4jqsm1-qkfx1a；不得与完整值重复选择。",
       "normalizationChanges": [],
       "rawValue": 9,
       "normalizedValue": 9
@@ -15843,10 +15843,10 @@
       "rankKind": "mindscape",
       "stat": "skillDmgBonus",
       "optionId": "agents:s0anby:mindscape:0:blk-ms4jrci5-unykui:eff-ms4jtmex-gz9fiw",
-      "effectIds": [
-        "agent:1381:zzz-hp:eff-ms4jtmex-gz9fiw:blk-ms4jrci5-unykui:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该部分记录已合并至完整状态选项 agents:s0anby:mindscape:0:blk-ms4jqdq1-rkmmm3:eff-ms4jqsm1-qkfx1a；不得与完整值重复选择。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -30170,6 +30170,66 @@
       "computationTarget": "none",
       "status": "out-of-scope",
       "reason": "五档使攻击者造成的伤害降低 6/7/8/9/10%，属于敌方输出/己方承伤方向；当前公开路径计算己方对敌伤害，不能把它转换成 target damage-taken-reduction 来降低己方输出，也不能报告其增益为零后视为接入。保留五档来源证据，待承伤计算产品建立后另行接入。"
+    },
+    {
+      "supplementId": "nanoka:soldier11:flame-prowess",
+      "source": "nanoka-integrated@3.1 agents/1041 /potentialDetail/104101—104105/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:soldier11:potential:flame-prowess",
+      "effectIds": ["agent:1041:nanoka:flame-prowess:mindscape:0"],
+      "supportedRanks": "潜能 2—6",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:lycaon:ice-hunt-impact",
+      "source": "nanoka-integrated@3.1 agents/1141 /potentialDetail/114101—114105/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:lycaon:potential:ice-hunt-impact",
+      "effectIds": ["agent:1141:nanoka:ice-hunt-impact:mindscape:0"],
+      "supportedRanks": "潜能 2—6",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:alexandrina:perfect-service-pierce",
+      "source": "nanoka-integrated@3.1 agents/1211 /potentialDetail/121101—121105/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:alexandrina:potential:perfect-service-pierce",
+      "effectIds": ["agent:1211:nanoka:perfect-service-pierce:mindscape:0"],
+      "supportedRanks": "潜能 2—6",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:ellen:ordinary-blade-dance",
+      "source": "nanoka-integrated@3.1 agents/1191 /passive/level/1191507/desc/0",
+      "kind": "option-variant",
+      "optionId": "agents:ellen:mindscape:0:blk-legacy:legacy-self-critDmg",
+      "effectIds": ["agent:1191:nanoka:ordinary-blade-dance:mindscape:0"],
+      "supportedRanks": "core 7；潜能 0",
+      "computationTarget": "catalog option variant",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:harumasa:ordinary-crit-rate",
+      "source": "nanoka-integrated@3.1 agents/1201 /passive/level/1201507/desc/0",
+      "kind": "option-variant",
+      "optionId": "agents:harumasa:mindscape:0:blk-legacy:legacy-self-critRate",
+      "effectIds": ["agent:1201:nanoka:ordinary-crit-rate:mindscape:0"],
+      "supportedRanks": "core 7；潜能 0",
+      "computationTarget": "catalog option variant",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:harumasa:ordinary-crit-dmg",
+      "source": "nanoka-integrated@3.1 agents/1201 /passive/level/1201507/desc/0",
+      "kind": "option-variant",
+      "optionId": "agents:harumasa:mindscape:0:blk-legacy:eff-ms4gx7ds-ijkzuy",
+      "effectIds": ["agent:1201:nanoka:ordinary-crit-dmg:mindscape:0"],
+      "supportedRanks": "core 7；潜能 0；层数 1—6",
+      "computationTarget": "catalog option variant",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -30177,17 +30237,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 832,
-    "options": 831,
-    "converted": 1232,
-    "corrected": 15,
-    "unsupported": 43,
+    "rules": 834,
+    "options": 834,
+    "converted": 1213,
+    "corrected": 30,
+    "unsupported": 47,
     "supplements": {
-      "records": 4,
-      "rules": 3,
-      "options": 1,
+      "records": 10,
+      "rules": 9,
+      "options": 4,
       "entities": 1,
-      "integrated": 3,
+      "integrated": 9,
       "outOfScope": 1
     }
   },

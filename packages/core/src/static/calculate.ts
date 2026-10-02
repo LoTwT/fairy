@@ -847,14 +847,46 @@ export function calculateStaticActionDamage(
       "Action and actor identity disagree",
       "CONTEXT_MISMATCH",
     )
+    const actorPotentialLevel = selectedActor.potentialLevel ?? 0
+    const resolvedPotentialLevel = action.resolutionContext.potentialLevel
+    requireValue(
+      catalogAction.potentialLevels === undefined
+        ? resolvedPotentialLevel === undefined
+        : resolvedPotentialLevel !== undefined &&
+            catalogAction.potentialLevels.includes(resolvedPotentialLevel) &&
+            resolvedPotentialLevel === actorPotentialLevel,
+      "/action/resolutionContext",
+      "Resolved action potential level must match the configured actor and the action's supported levels",
+      "CONTEXT_MISMATCH",
+    )
+    const conditionalIdentity = catalogAction.conditionalIdentity
+    const conditionalIdentityActive =
+      conditionalIdentity !== undefined &&
+      resolvedPotentialLevel !== undefined &&
+      conditionalIdentity.potentialLevels.includes(resolvedPotentialLevel)
+    const resolvedAdditionalAbility =
+      action.resolutionContext.additionalAbilityActive
+    requireValue(
+      conditionalIdentityActive
+        ? typeof resolvedAdditionalAbility === "boolean"
+        : resolvedAdditionalAbility === undefined,
+      "/action/resolutionContext",
+      "Resolved action must record the additional-ability fact exactly when the action consumes it",
+      "CONTEXT_MISMATCH",
+    )
+    const expectedSkillTargetIds = [...catalogAction.skillTargetIds]
+    const expectedSkillTags = [...catalogAction.skillTags]
+    if (conditionalIdentityActive && resolvedAdditionalAbility === true) {
+      expectedSkillTargetIds.push(...conditionalIdentity!.skillTargetIds)
+      expectedSkillTags.push(...conditionalIdentity!.skillTags)
+    }
     requireValue(
       catalogAction.calculation.kind === action.calculation.kind &&
-        JSON.stringify(catalogAction.skillTargetIds) ===
+        JSON.stringify(expectedSkillTargetIds) ===
           JSON.stringify(action.skillTargetIds) &&
-        JSON.stringify(catalogAction.skillTags) ===
-          JSON.stringify(action.skillTags),
+        JSON.stringify(expectedSkillTags) === JSON.stringify(action.skillTags),
       "/action",
-      "Resolved action classification and targets must match the loaded record",
+      "Resolved action classification and targets must match the loaded record and resolved facts",
       "CONTEXT_MISMATCH",
     )
     if (

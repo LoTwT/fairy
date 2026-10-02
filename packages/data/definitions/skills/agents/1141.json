@@ -270,6 +270,7 @@
       "skillCategory": "assist-follow-up",
       "skillTargetIds": [],
       "skillTags": [],
+      "potentialLevels": [1, 2, 3, 4, 5, 6],
       "source": {
         "path": "agents/1141/details.zh.json",
         "pointer": "/skill/assist/description/8/param/0"
@@ -294,16 +295,32 @@
         "growth": 0.164
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "potential-variant",
-            "message": "来源 potential 分支的启用条件尚未核实；保留独立条目，不与常规分支相加。"
+            "segmentId": "action:agent:1141:action:0006:total",
+            "damageKind": "regular",
+            "element": "ice",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1141:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.107,
+                  "growth": 0.374
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-lycaon-nk-1141027-main"
     },
     {

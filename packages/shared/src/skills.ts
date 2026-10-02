@@ -27,6 +27,19 @@ export interface SkillCoefficientCurve {
   readonly growth: number
 }
 
+/**
+ * 命中身份随潜能与额外能力事实变化的显式条件。基础身份始终携带；
+ * 满足条件时再追加这里声明的目标与标签，由 data 解析、core 复核。
+ */
+export interface AgentActionConditionalIdentity {
+  /** 启用该条件身份的潜能等级；基础身份与它互补，不能同时套用。 */
+  readonly potentialLevels: readonly number[]
+  /** 这些潜能下调用方必须显式提供 additionalAbilityActive，不能推断。 */
+  readonly requiresAdditionalAbilityActive: true
+  readonly skillTargetIds: readonly string[]
+  readonly skillTags: readonly string[]
+}
+
 export interface ActionIssue {
   readonly code:
     | "unsupported-expression"
@@ -77,6 +90,10 @@ export interface AgentAction {
   readonly skillCategory: ActionSkillCategory | null
   readonly skillTargetIds: readonly string[]
   readonly skillTags: readonly string[]
+  /** 该动作仅在列出的潜能等级可用；省略表示与潜能无关，解析上下文不记录潜能。 */
+  readonly potentialLevels?: readonly number[]
+  /** 基础身份之外、满足潜能与额外能力条件时追加的命中身份。 */
+  readonly conditionalIdentity?: AgentActionConditionalIdentity
   readonly source: ActionSourceReference
   readonly descriptionSources: readonly ActionSourceReference[]
   readonly description: string
@@ -123,6 +140,10 @@ export interface ResolveAgentActionInput {
   readonly inputs?: Readonly<Record<string, number>>
   /** 对逐次附加伤害等场景必须开启；未核实拆分时返回不可用。 */
   readonly requireIndividualHits?: boolean
+  /** 整数 0—6；省略按未开启潜能（0）处理。 */
+  readonly potentialLevel?: number
+  /** 条件身份动作在声明潜能下必填的额外能力事实；不能由其他输入推断。 */
+  readonly additionalAbilityActive?: boolean
 }
 
 export interface ResolvedActionSegment {
@@ -146,6 +167,10 @@ export type ResolvedAgentAction =
       readonly resolutionContext: {
         readonly agentEntityId: string
         readonly mindscapeRank: MindscapeRank
+        /** 仅当动作的可用性或身份依赖潜能等级时记录。 */
+        readonly potentialLevel?: number
+        /** 仅当动作在该潜能下实际消费额外能力事实时记录。 */
+        readonly additionalAbilityActive?: boolean
       }
       readonly actionId: AgentActionId
       readonly skillCategory: ActionSkillCategory | null

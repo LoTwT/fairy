@@ -96,7 +96,10 @@ export async function generateAgentActions(
       throw new Error(
         `Missing pinned reference skill: ${entry.upstreamSkillId}`,
       )
-    for (const id of entry.skillTargetIds) {
+    for (const id of [
+      ...entry.skillTargetIds,
+      ...(entry.conditionalIdentity?.skillTargetIds ?? []),
+    ]) {
       const target = staticCatalog.skillTargets.find(
         (value) => value.targetId === id,
       )
