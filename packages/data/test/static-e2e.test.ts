@@ -292,6 +292,8 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
           ).toBe(true)
       }
     },
+    // 完整数据加载与四种选择 × 两种面板计算在 CI 并行负载下可超过默认 5 秒。
+    30_000,
   )
   for (const scenario of scenarios)
     it(scenario.label, async () => {
