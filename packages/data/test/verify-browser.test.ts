@@ -141,6 +141,20 @@ globalThis.fairyStaticInputs = async () => {
   const mismatchedRank = core.calculateStaticActionDamage({ ...request, actors: [{ ...actor, mindscapeRank: 1 }] })
   return { attack: panel.stats.attack.value, totals: result.value.totals, manual: manual.value.totals, mismatchedRank }
 }
+globalThis.fairySingleElementActions = async () => {
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Burnice", "Grace"], wEngines: [] }), import("@randomplay/core")])
+  return [["1171", "0001"], ["1181", "0007"]].map(([id, suffix]) => {
+    const agent = data.agents.find(entry => entry.attributes.entityId === id).actions
+    const action = agent.actions.find(entry => entry.actionId === "action:agent:" + id + ":action:" + suffix)
+    const resolution = { agent, actionId: action.actionId, mindscapeRank: 0, levels: { [action.levelGroup]: { mode: "effective", value: 12 } } }
+    const resolved = api.resolveAgentAction(resolution)
+    if (!resolved.ok) throw new Error(JSON.stringify(resolved.issues))
+    const request = { data, actors: [{ entityId: "entity:aggregate", teamId: "team:players", agentEntityId: id, mindscapeRank: 0, coreSkillLevel: 7, wEngine: null, driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null }, panel: { mode: "out-of-combat", stats: { attack: { unit: "attack-points", value: 1000 }, criticalRate: { unit: "ratio", value: 0 }, criticalDamage: { unit: "ratio", value: 0.5 }, penetrationRatio: { unit: "ratio", value: 0 } }, penetrationValue: 0, damageBonuses: { fire: 0.2, physical: 0.1 } } }], actorId: "entity:aggregate", action: resolved, target: { entityId: "entity:enemy", teamId: "team:enemy", baseDefense: 0, resistances: { fire: 0.25, physical: 0.5 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] }
+    const result = core.calculateStaticActionDamage(request)
+    if (!result.ok) throw new Error(JSON.stringify(result.issues))
+    return { id, element: resolved.calculation.segments[0].element, granularity: resolved.calculation.segments[0].granularity, segments: result.value.segments.length, totals: result.value.totals, strictResolution: api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, strictCalculation: core.calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok }
+  })
+}
 globalThis.fairyDefinitions = {
   starter: () => import("@randomplay/data/definitions/effects/starter.json"),
   automatic: () => import("@randomplay/data/definitions/effects/automatic.json"),
@@ -640,6 +654,48 @@ function defineScenarios(counts: {
           sources: [
             "definitions/attributes/agents/1121.json",
             "definitions/skills/agents/1121.json",
+            "definitions/attributes/drive-disc-affixes.json",
+            "definitions/effects/static.json",
+            "definitions/effects/static-catalog.json",
+          ],
+        },
+      ],
+    },
+    {
+      name: "single-element-actions",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "aggregate-and-physical-exception",
+          act: async (page) => {
+            const results = await page.evaluate(() =>
+              (globalThis as any).fairySingleElementActions(),
+            )
+            expect(results).toHaveLength(2)
+            for (const [index, element, expected] of [
+              [0, "fire", 1521.9],
+              [1, "physical", 445.5],
+            ] as const) {
+              expect(results[index]).toMatchObject({
+                element,
+                granularity: "aggregate",
+                segments: 1,
+                totals: { displayedNonCritical: null, displayedCritical: null },
+                strictResolution: false,
+                strictCalculation: false,
+              })
+              expect(results[index].totals.nonCritical).toBeCloseTo(expected, 8)
+            }
+          },
+          sources: [
+            "definitions/attributes/agents/1171.json",
+            "definitions/skills/agents/1171.json",
+            "definitions/attributes/agents/1181.json",
+            "definitions/skills/agents/1181.json",
             "definitions/attributes/drive-disc-affixes.json",
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",

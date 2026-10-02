@@ -399,6 +399,8 @@ assert.deepEqual(resolvedNicole.resolutionContext, { agentEntityId: "1031", mind
 assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
 const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
 assert.equal(actionManifest.members.length, api.agentNames.length)
+assert.equal(actionManifest.coverage.damage, 1080)
+assert.equal(actionManifest.coverage.unavailable, 11)
 assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
 const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
 assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)
@@ -421,6 +423,32 @@ const benCalculation = calculateStaticActionDamage({ data: calculationData, acto
 assert.equal(benCalculation.ok, true, JSON.stringify(benCalculation))
 assert.ok(Math.abs(benCalculation.value.panels[0].stats.attack.value - 1232.31468) < 1e-8)
 function value(result) { assert.equal(result.ok, true, JSON.stringify(result)); return result.value }
+const aggregateData = await api.loadStaticCalculationData({ agents: ["Burnice", "Grace", "Lighter", "Orphie & Magus"], wEngines: [] })
+for (const [id, suffix, element, expected, mindscapeRank, optionId, selectedExpected] of [
+  ["1171", "0001", "fire", 1521.9, 0, null, null],
+  ["1181", "0007", "physical", 445.5, 0, null, null],
+  ["1161", "0021", "fire", 7839, 1, "agents:lighter:mindscape:1:blk-legacy:eff-ms4axp99-6j88yd", 9798.75],
+  ["1301", "0011", "fire", 2851.2, 0, "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hvpzg-frlpi8", 4870.8],
+]) {
+  const agent = aggregateData.agents.find(entry => entry.attributes.entityId === id).actions
+  const action = agent.actions.find(entry => entry.actionId === "action:agent:" + id + ":action:" + suffix)
+  const resolution = { agent, actionId: action.actionId, mindscapeRank, levels: { [action.levelGroup]: { mode: "effective", value: 12 } } }
+  const resolved = api.resolveAgentAction(resolution)
+  assert.equal(resolved.ok, true)
+  assert.equal(resolved.calculation.segments[0].element, element)
+  assert.equal(resolved.calculation.segments[0].granularity, "aggregate")
+  const request = { data: aggregateData, actors: [{ entityId: "entity:aggregate", teamId: "team:players", agentEntityId: id, mindscapeRank, coreSkillLevel: 7, wEngine: null, driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null }, panel: { mode: "out-of-combat", stats: { attack: { unit: "attack-points", value: 1000 }, criticalRate: { unit: "ratio", value: 0 }, criticalDamage: { unit: "ratio", value: 0.5 }, penetrationRatio: { unit: "ratio", value: 0 } }, penetrationValue: 0, damageBonuses: { fire: 0.2, physical: 0.1 } } }], actorId: "entity:aggregate", action: resolved, target: { entityId: "entity:enemy", teamId: "team:enemy", baseDefense: 0, resistances: { fire: 0.25, physical: 0.5 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] }
+  const calculated = value(calculateStaticActionDamage(request))
+  assert.equal(calculated.segments.length, 1)
+  assert.ok(Math.abs(calculated.totals.nonCritical - expected) < 1e-8)
+  assert.equal(calculated.totals.displayedNonCritical, null)
+  if (optionId) {
+    const selected = value(calculateStaticActionDamage({ ...request, selections: [{ holderId: request.actorId, optionId, layers: 1 }] }))
+    assert.ok(Math.abs(selected.totals.nonCritical - selectedExpected) < 1e-8)
+  }
+  assert.equal(api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, false)
+  assert.equal(calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok, false)
+}
 const staticDefinitions = (await import("@randomplay/data/definitions/effects/static.json", { with: { type: "json" } })).default
 const staticCatalog = (await import("@randomplay/data/definitions/effects/static-catalog.json", { with: { type: "json" } })).default
 const staticCoverage = (await import("@randomplay/data/definitions/effects/static-coverage.json", { with: { type: "json" } })).default

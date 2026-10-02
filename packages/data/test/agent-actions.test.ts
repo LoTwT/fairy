@@ -418,18 +418,20 @@ describe("agent action semantics", () => {
     )
   })
 
-  it("reports unresolved mixed attributes and special expressions, while preserving source coefficients", async () => {
+  it("keeps unresolved classifications and special expressions unavailable", async () => {
     const data = await agent("1341")
-    const dash = data.actions.find((a) => a.name === "冲刺攻击：弹跳冲刺")!
-    expect(dash.damageCoefficient).not.toBeNull()
+    const unresolved = data.actions.find(
+      (a) => a.actionId === "action:agent:1341:action:0001",
+    )!
+    expect(unresolved.damageCoefficient).not.toBeNull()
     expect(
       resolveAgentAction({
         agent: data,
-        actionId: dash.actionId,
+        actionId: unresolved.actionId,
         mindscapeRank: 0,
         levels: {},
       }),
-    ).toMatchObject({ ok: false, issues: [{ code: "mixed-elements" }] })
+    ).toMatchObject({ ok: false, issues: [{ code: "unknown-category" }] })
     expect(() =>
       resolveAgentAction({
         agent: data,

@@ -282,16 +282,33 @@
         "growth": 0.011
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1251:action:0006:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.472,
+                  "growth": 0.043
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-qingyi-nk-1251001-一段"
     },
     {
@@ -327,17 +344,34 @@
         "growth": 0.026
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1251:action:0007:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.103,
+                  "growth": 0.101
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
-      "upstreamSkillId": null
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251002-一段伤害倍率-派生"
     },
     {
       "actionId": "action:agent:1251:action:0008",
@@ -372,16 +406,33 @@
         "growth": 0.038
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1251:action:0008:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.221,
+                  "growth": 0.111
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-qingyi-nk-1251003-二段"
     },
     {
@@ -417,16 +468,33 @@
         "growth": 0.009
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1251:action:0009:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.176,
+                  "growth": 0.016
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-qingyi-nk-1251004-三段"
     },
     {
@@ -462,16 +530,33 @@
         "growth": 0.049
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1251:action:0010:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.064,
+                  "growth": 0.097
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-qingyi-nk-1251005-四段"
     },
     {
@@ -507,17 +592,34 @@
         "growth": 0.094
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "mixed-elements",
-            "message": "来源同时描述多种伤害属性，尚不能将完整倍率可靠分配到各属性。"
+            "segmentId": "action:agent:1251:action:0011:total",
+            "damageKind": "regular",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1251:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.344,
+                  "growth": 0.214
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
-      "upstreamSkillId": null
+      "limitations": [
+        "采用固定 ZZZ-HP 的整条单属性合计约定；原招式的内部属性分配尚未核实，不代表已确认各次命中的实际属性。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": "sk-qingyi-nk-1251006-四段伤害倍率-强化"
     },
     {
       "actionId": "action:agent:1251:action:0012",

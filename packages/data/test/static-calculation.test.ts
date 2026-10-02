@@ -128,6 +128,284 @@ function manual(
   }
 }
 
+describe("single-element aggregate action consumption", () => {
+  const damageBonuses = {
+    physical: 0.11,
+    fire: 0.22,
+    electric: 0.33,
+    ice: 0.44,
+    ether: 0.55,
+  }
+  const resistances = {
+    physical: 0.1,
+    fire: 0.2,
+    electric: 0.3,
+    ice: 0.4,
+    ether: 0.5,
+  }
+
+  async function aggregateInput(
+    id: string,
+    suffix: string,
+    mindscapeRank: StaticActorConfiguration["mindscapeRank"] = 0,
+  ): Promise<StaticActionCalculationInput> {
+    const input = await fixture(id, mindscapeRank)
+    const agent = input.data.agents[0]!.actions
+    const action = agent.actions.find(
+      (entry) => entry.actionId === `action:agent:${id}:action:${suffix}`,
+    )!
+    return {
+      ...input,
+      action: resolveAgentAction({
+        agent,
+        actionId: action.actionId,
+        mindscapeRank,
+        levels: { [action.levelGroup]: { mode: "effective", value: 12 } },
+      }),
+      actors: [
+        {
+          ...input.actors[0]!,
+          panel: {
+            mode: "out-of-combat",
+            stats: {
+              attack: { unit: "attack-points", value: 1000 },
+              criticalRate: { unit: "ratio", value: 0 },
+              criticalDamage: { unit: "ratio", value: 0.5 },
+              penetrationRatio: { unit: "ratio", value: 0 },
+            },
+            penetrationValue: 0,
+            damageBonuses,
+          },
+        },
+      ],
+      target: { ...input.target, baseDefense: 0, resistances },
+    }
+  }
+
+  it.each([
+    ["1151", "0006", "fire", 1.138],
+    ["1181", "0003", "electric", 1.112],
+    ["1181", "0007", "physical", 0.81],
+    ["1241", "0003", "ether", 0.871],
+    ["1291", "0008", "ice", 0.871],
+  ] as const)(
+    "uses only the recorded %s:%s element %s for the complete multiplier",
+    async (id, suffix, element, multiplier) => {
+      const input = await aggregateInput(id, suffix)
+      const result = calculate(input)
+      const expected =
+        1000 *
+        multiplier *
+        (1 + damageBonuses[element]) *
+        (1 - resistances[element])
+      expect(result.segments).toHaveLength(1)
+      expect(result.totals.nonCritical).toBeCloseTo(expected, 10)
+      expect(result.totals.critical).toBeCloseTo(expected * 1.5, 10)
+      expect(result.totals.expected).toBeCloseTo(expected, 10)
+      expect(result.totals.displayedNonCritical).toBeNull()
+      expect(result.totals.displayedCritical).toBeNull()
+      const unrelated = element === "physical" ? "electric" : "physical"
+      expect(
+        calculate({
+          ...input,
+          target: {
+            ...input.target,
+            resistances: { ...resistances, [unrelated]: 0.99 },
+          },
+        }).totals,
+      ).toEqual(result.totals)
+      expect(
+        calculateStaticActionDamage({ ...input, requireIndividualHits: true }),
+      ).toMatchObject({ ok: false })
+    },
+  )
+
+  it.each([
+    ["1151", "0006", true],
+    ["1171", "0001", false],
+    ["1171", "0016", false],
+    ["1241", "0002", false],
+    ["1331", "0017", false],
+    ["1341", "0015", false],
+  ] as const)(
+    "matches the basic bonus only to a basic aggregate: %s:%s",
+    async (id, suffix, isBasic) => {
+      const input = await aggregateInput(id, suffix)
+      if (!input.action.ok || input.action.calculation.kind !== "damage")
+        throw new Error("fixture")
+      const element = input.action.calculation.segments[0]!
+        .element as keyof typeof resistances
+      const expectedExtra = isBasic
+        ? 1000 *
+          input.action.sourceDamageMultiplier! *
+          0.15 *
+          (1 - resistances[element])
+        : 0
+      const plain = calculate(input)
+      const withSet = (setEntityId: string) =>
+        calculate({
+          ...input,
+          actors: [
+            {
+              ...input.actors[0]!,
+              driveDiscs: {
+                ...emptyDiscs,
+                1: { setEntityId },
+                2: { setEntityId },
+              },
+            },
+          ],
+        })
+      expect(
+        withSet("33300").totals.nonCritical - plain.totals.nonCritical,
+      ).toBeCloseTo(expectedExtra, 10)
+      if (isBasic) expect(withSet("32900").totals).toEqual(plain.totals)
+    },
+  )
+
+  // 固定 ZZZ-HP 的 /skillSubcategories/42、/51 与对应 M1 / 核心增益；
+  // 倍率直接取 Nanoka 万分比整数，期望不从生产目标或增益规则反推。
+  it.each([
+    [
+      "1161",
+      "0021",
+      1,
+      8.71,
+      "agents:lighter:mindscape:1:blk-legacy:eff-ms4axp99-6j88yd",
+      0.3,
+    ],
+    [
+      "1161",
+      "0020",
+      1,
+      2.396,
+      "agents:lighter:mindscape:1:blk-legacy:eff-ms4axp99-6j88yd",
+      0,
+    ],
+    [
+      "1301",
+      "0011",
+      0,
+      3.168,
+      "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hvpzg-frlpi8",
+      0.85,
+    ],
+    [
+      "1301",
+      "0010",
+      0,
+      3.642,
+      "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hvpzg-frlpi8",
+      0,
+    ],
+  ] as const)(
+    "matches the selected finisher or follow-up bonus only to its action: %s:%s",
+    async (id, suffix, mindscapeRank, multiplier, optionId, bonus) => {
+      const input = await aggregateInput(id, suffix, mindscapeRank)
+      const plain = calculate(input)
+      const selected = calculate({
+        ...input,
+        selections: [{ holderId: input.actorId, optionId, layers: 1 }],
+      })
+      expect(plain.totals.nonCritical).toBeCloseTo(
+        1000 * multiplier * (1 + damageBonuses.fire) * (1 - resistances.fire),
+        10,
+      )
+      expect(selected.totals.nonCritical).toBeCloseTo(
+        1000 *
+          multiplier *
+          (1 + damageBonuses.fire + bonus) *
+          (1 - resistances.fire),
+        10,
+      )
+      const contributions =
+        selected.segments[0]!.damage.evaluation.contributions.filter((entry) =>
+          entry.origin.effectId.includes(optionId.split(":").at(-1)!),
+        )
+      expect(contributions).toHaveLength(bonus > 0 ? 1 : 0)
+      if (bonus > 0) expect(contributions[0]!.value.value).toBe(bonus)
+    },
+  )
+
+  it("keeps Orphie's fire blade basic classification alongside its follow-up identity", async () => {
+    const input = await aggregateInput("1301", "0011")
+    const result = calculate({
+      ...input,
+      actors: [
+        {
+          ...input.actors[0]!,
+          driveDiscs: {
+            ...emptyDiscs,
+            1: { setEntityId: "32900" },
+            2: { setEntityId: "32900" },
+            3: { setEntityId: "33300" },
+            4: { setEntityId: "33300" },
+          },
+        },
+      ],
+    })
+    expect(result.totals.nonCritical).toBeCloseTo(
+      1000 *
+        3.168 *
+        (1 + damageBonuses.fire + 0.15 + 0.15) *
+        (1 - resistances.fire),
+      10,
+    )
+  })
+
+  it("rejects forged classification, targets, follow-up identity and segment structure", async () => {
+    const input = await aggregateInput("1171", "0001")
+    if (!input.action.ok || input.action.calculation.kind !== "damage")
+      throw new Error("fixture")
+    const action = input.action
+    const segments = input.action.calculation.segments
+    const altered = [
+      { ...action, skillCategory: "basic" as const },
+      { ...action, skillTargetIds: ["zzz-hp:skill:all-dodge-ms0dnpmr"] },
+      { ...action, skillTags: ["zzz-hp:follow-up"] },
+      ...[
+        { repeat: 2 },
+        { granularity: "individual" as const },
+        { element: "physical" as const },
+      ].map((patch) => ({
+        ...action,
+        calculation: {
+          kind: "damage" as const,
+          segments: segments.map((segment) => ({ ...segment, ...patch })),
+        },
+      })),
+    ]
+    for (const forged of altered)
+      expect(
+        calculateStaticActionDamage({ ...input, action: forged }),
+      ).toMatchObject({
+        ok: false,
+        issues: [{ code: "CONTEXT_MISMATCH" }],
+      })
+  })
+
+  it("still refuses Lighter per-hit additions on a newly available basic aggregate", async () => {
+    const input = await aggregateInput("1161", "0006", 6)
+    calculate(input)
+    const result = calculateStaticActionDamage({
+      ...input,
+      selections: [
+        {
+          holderId: input.actorId,
+          optionId:
+            "agents:lighter:mindscape:6:blk-ms4b3uc2-5gulzo:eff-ms4b3uc2-oeaiao",
+          layers: 1,
+        },
+      ],
+    })
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(
+        result.issues.some((issue) => issue.message.includes("per-hit")),
+      ).toBe(true)
+  })
+})
+
 describe("static calculation assembly", () => {
   it("keeps Lucia M6 on initial health when her own health buff is selected", async () => {
     const input = await fixture("1451", 6)
