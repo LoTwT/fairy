@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "HP"
+      "name": "Fire DMG Bonus"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "Fire DMG Bonus"
+      "name": "HP"
     }
   },
   "hitType": {
@@ -1999,11 +1999,13 @@
   "skin": {
     "3114410": {
       "desc": "The standard attire of the unofficial mediator in Sailume Bay, enough to intimidate petty thugs.\nStill, it sometimes draws wandering eyes.",
-      "name": "Komano Manato: Loyal Wild Soul"
+      "name": "Komano Manato: Loyal Wild Soul",
+      "obtainDesc": ""
     },
     "3114411": {
       "desc": "A young Manato made a solitary vow to himself — and from his deep reverie, a lone pale shadow was born.\nMimicking his attire enhances Manato's already exceedingly intimidating presence.",
-      "name": "Komano Manato: White Heart Silhouette"
+      "name": "Komano Manato: White Heart Silhouette",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

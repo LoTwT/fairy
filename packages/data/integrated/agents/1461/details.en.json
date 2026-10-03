@@ -98,7 +98,8 @@
     }
   },
   "hitType": {
-    "101": "Slash"
+    "101": "Slash",
+    "102": "Strike"
   },
   "id": 1461,
   "locale": "en",
@@ -1464,7 +1465,8 @@
   "skin": {
     "3114610": {
       "desc": "A corner of the world blooming in color, a single salty tear, a perfect circle of life — this is where the girl and the construct uncovered the truth of the heart. She never needs to look back; she has already blossomed into her own sea of petals.",
-      "name": "Seed: Flower in Bloom"
+      "name": "Seed: Flower in Bloom",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

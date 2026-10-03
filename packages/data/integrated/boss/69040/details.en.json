@@ -48,6 +48,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "204": "Wind"
               },
@@ -87,7 +88,7 @@
               "title": ""
             },
             "69012705": {
-              "desc": "·Triggering <color=#FFAF2C>Miasmic Shield Purification</color> grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>2,000 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "desc": "·Triggering <color=#FFAF2C>Miasmic Shield Purification</color> grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>2,000 Performance Points</color>. During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C>Counter Assists</color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
               "title": ""
             },
             "69013001": {
@@ -119,6 +120,10 @@
                     "stun": 18236
                   }
                 }
+              },
+              "monsterResistance": {
+                "202": "Ice",
+                "205": "Ether"
               },
               "monsterWeakness": {
                 "200": "Physical"
@@ -191,6 +196,9 @@
                     "stun": 14068.040000000003
                   }
                 }
+              },
+              "monsterResistance": {
+                "203": "Electric"
               },
               "monsterWeakness": {
                 "200": "Physical",

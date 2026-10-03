@@ -1,5 +1,5 @@
 /**
- * Simul 来源结构的登记表（规则 nanoka-simul-reference/1）。
+ * Simul 来源结构的登记表（规则 nanoka-simul-reference/2）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录不在这里登记，原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。
@@ -235,6 +235,9 @@ export const simulRoomMembers: Readonly<Record<string, SimulObjectMember>> = {
 
   /** 来源 `monster_weakness`。弱点字典：元素编码 key → 当前语言弱点文本。 */
   monster_weakness: { output: "monsterWeakness", kind: "object" },
+
+  /** 来源 `monster_resistance`。3.2 新增的抗性字典：元素编码 key → 当前语言抗性文本；与弱点分开保存。 */
+  monster_resistance: { output: "monsterResistance", kind: "object" },
 
   /** 来源 `waves_num`。波次数原值。 */
   waves_num: { output: "wavesNum", kind: "number" },

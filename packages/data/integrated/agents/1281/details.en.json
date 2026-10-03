@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "Physical DMG Bonus"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1442,7 +1442,8 @@
   "skin": {
     "3112810": {
       "desc": "Don't be fooled by this truck driver's lazy gaze. One tap on the gas is enough to fling every passenger's soul straight into the back seat.",
-      "name": "Piper: Lazy Speed"
+      "name": "Piper: Lazy Speed",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

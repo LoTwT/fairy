@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "Anomaly Mastery"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1978,11 +1978,13 @@
   "skin": {
     "3112610": {
       "desc": "Her everyday look when she isn't putting on a disguise. Maybe it's just one of the countless faces she wears. The night becomes her cover, and her mask is the one truth she never sets aside.",
-      "name": "Jane: Hidden Nightfade"
+      "name": "Jane: Hidden Nightfade",
+      "obtainDesc": ""
     },
     "3112611": {
       "desc": "Who says sunlight must accompany a seaside stroll? For lurkers with names unknown, the night is their most faithful companion. The anonymous lady says the evening sea holds unspeakable secrets — is this the truth, or another deception?",
-      "name": "Jane: Nocturne of Light"
+      "name": "Jane: Nocturne of Light",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

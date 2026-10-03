@@ -2516,16 +2516,19 @@
   "skin": {
     "3114310": {
       "desc": "云纹织锦，剑光照影，衣着亦如其人。\n到底是谁选中了这套衣裙，是自己，亦或是内心更深处的…那个她？",
-      "name": "叶瞬光·流云照影"
+      "name": "叶瞬光·流云照影",
+      "obtainDesc": ""
     },
     "3114311": {
       "desc": "霞光温柔，微风和煦，而你们在街道上行走，期待着下一次邂逅。",
-      "name": "叶瞬光·暖霞拾光"
+      "name": "叶瞬光·暖霞拾光",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {
     "desc": "<color=#F0D12B>凛刃属性</color>会基于<color=#F0D12B>物理属性</color>结算伤害与增益效果，秽息净化效率提升50%，造成<color=#F0D12B>凛刃伤害</color>的同时，会对敌人累积<color=#F0D12B>凛刃异常积蓄值</color>，随之将触发<color=#F0D12B>[强击]</color>并施加<color=#F0D12B>[畏缩]</color>效果；<color=#F0D12B>[强击]</color>效果能够打断敌人的行动，并造成大量<color=#F0D12B>物理伤害</color>；<color=#F0D12B>[畏缩]</color>效果能够在一段时间内，使目标承受的失衡值提升。",
     "icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconHonedEdge.png",
+    "id": 200,
     "name": "凛刃",
     "title": "凛刃属性"
   },

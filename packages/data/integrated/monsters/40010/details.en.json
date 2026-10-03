@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A patrol captain, studying combat footage frame by frame",
+  "cardSkillDesc": "In combat, once Kusarikku uses the Meteor Hammer to smash the spatial fissures and activates the Corruptive Barrier, it will frequently slips into the fissures and unleashes <Term:2000005>Rift Assaults</Term>. Use Defensive Assist to counter <Term:2000005>Rift Assaults</Term> and rapidly reduce the Corruptive Barrier. Repeatedly countering them successfully can allow you to seize the initiative in battle.",
+  "desc": "An armored titan born from Nihility, drawn by primal whispers into the abyss, with sheer space-rending brutality, it peers at the Enchainer's power — desperate to forge an unripe vessel into a container for supreme evil.\nKusarikku, a newborn Enchainer larvae, moves under Youkai's guidance in an attempt to seize the Karma Core dwelling within Lindverne Sunbringer.\nIt wields an oversized greatsword and warhammer far beyond all reason — its ferocious onslaught churning Ether Vortexes and leaving brief, unstable spatial fissures in its wake. Yet a hunter's instinct lets it slip through that tangled web of fissures, its hulking frame dissolving into a ghostly phantom that devours lives.\n\n\"Gotta love spatial abilities — great for running when you're losing a fight... not that it ever needs to run.\"",
+  "groupDesc": "Ether Mutants",
+  "id": 40010,
+  "locale": "en",
+  "name": "Kusarikku"
+}

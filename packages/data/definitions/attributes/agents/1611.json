@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1611",
+  "level": 60,
+  "baseAttributes": {
+    "health": {
+      "unit": "health-points",
+      "value": 5651.5949
+    },
+    "attack": {
+      "unit": "attack-points",
+      "value": 626.0261
+    },
+    "defense": {
+      "unit": "defense-points",
+      "value": 441.1145
+    },
+    "impact": {
+      "unit": "impact-points",
+      "value": 93
+    },
+    "anomalyProficiency": {
+      "unit": "anomaly-proficiency-points",
+      "value": 79
+    },
+    "anomalyMastery": {
+      "unit": "anomaly-mastery-points",
+      "value": 80
+    },
+    "energyRegen": {
+      "unit": "energy-per-second",
+      "value": 0
+    },
+    "criticalRate": {
+      "unit": "ratio",
+      "value": 0.05
+    },
+    "criticalDamage": {
+      "unit": "ratio",
+      "value": 0.5
+    },
+    "penetrationRatio": {
+      "unit": "ratio",
+      "value": 0
+    }
+  },
+  "coreAttributeBonuses": {
+    "1": [],
+    "2": [
+      {
+        "attribute": "criticalRate",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.048
+      }
+    ],
+    "3": [
+      {
+        "attribute": "criticalRate",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.096
+      }
+    ],
+    "4": [
+      {
+        "attribute": "criticalRate",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.144
+      }
+    ],
+    "5": [
+      {
+        "attribute": "criticalRate",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.192
+      }
+    ],
+    "6": [
+      {
+        "attribute": "criticalRate",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.24
+      }
+    ],
+    "7": [
+      {
+        "attribute": "criticalRate",
+        "operation": "ratio-add",
+        "unit": "ratio",
+        "value": 0.288
+      }
+    ]
+  }
+}

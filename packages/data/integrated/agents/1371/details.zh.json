@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "生命值"
+      "name": "以太伤害加成"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "以太伤害加成"
+      "name": "生命值"
     }
   },
   "hitType": {
@@ -1893,16 +1893,19 @@
   "skin": {
     "3113710": {
       "desc": "身为云岿山宗主，穿搭和饰品只需自然随心，率性而为即可。",
-      "name": "仪玄·观云同岿"
+      "name": "仪玄·观云同岿",
+      "obtainDesc": ""
     },
     "3113711": {
       "desc": "墨色基调的定制服饰，行踪如影，倏而即逝。",
-      "name": "仪玄·墨形影踪"
+      "name": "仪玄·墨形影踪",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {
     "desc": "<color=#FE437E>玄墨属性</color>会基于<color=#FE437E>以太属性</color>结算伤害与增益效果，造成<color=#FE437E>玄墨伤害</color>的同时，会对敌人累积<color=#FE437E>玄墨异常积蓄值</color>，随之将触发<color=#FE437E>[侵蚀]</color>效果；<color=#FE437E>[侵蚀]</color>效果能够在一段时间内，使目标受到攻击时，承受额外的<color=#FE437E>以太伤害</color>；对受到<color=#FE437E>以太属性</color>克制的敌人施加<color=#FE437E>[侵蚀]</color>效果时，能够打断目标的行动。",
     "icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconAuricInk.png",
+    "id": 205,
     "name": "玄墨",
     "title": "玄墨属性"
   },

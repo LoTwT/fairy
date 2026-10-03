@@ -1616,11 +1616,13 @@
   "skin": {
     "3111510": {
       "desc": "Her outfit is considered rather polished by biker standards and said to work wonders in negotiations with outsiders.\nThe runaway princess found her freedom in the Outer Ring, glittering under the starlit night, burning at the edge of dusk, and resting quietly among the grains of sand at her feet.",
-      "name": "Lucy: Ironfist Gentlewoman"
+      "name": "Lucy: Ironfist Gentlewoman",
+      "obtainDesc": ""
     },
     "3111511": {
       "desc": "A baseball bat obviously has no place in beach volleyball, but it can ensure no one disturbs the princess of the wildlands' holiday fun. Grassy, Woody, Bricky — time to enter vacation combat mode!",
-      "name": "Lucy: Princess on Holiday"
+      "name": "Lucy: Princess on Holiday",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

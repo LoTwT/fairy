@@ -99,6 +99,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -121,11 +122,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ClaymoreGrey.png",
               "name": "Tyrfing",
               "stats": {
-                "attack": 1249.4545454545455,
+                "attack": 1718,
                 "attribute_infliction": 0,
-                "defence": 532.8,
-                "hp": 14737.8,
-                "stun": 0
+                "defence": 426.24,
+                "hp": 206881.8675,
+                "stun": 1068
               }
             },
             "11213": {
@@ -189,6 +190,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -297,6 +299,9 @@
                 "stun": 6403.2
               }
             }
+          },
+          "monsterResistance": {
+            "205": "Ether"
           },
           "monsterWeakness": {
             "200": "Physical",
@@ -428,6 +433,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -557,6 +563,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "202": "Ice"
+          },
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -667,6 +676,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -756,6 +766,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "202": "Ice"
+          },
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -785,6 +798,9 @@
                 "stun": 15243.800000000001
               }
             }
+          },
+          "monsterResistance": {
+            "203": "Electric"
           },
           "monsterWeakness": {
             "201": "Fire",
@@ -929,6 +945,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "200": "Physical"
+          },
           "monsterWeakness": {
             "202": "Ice"
           },
@@ -1024,6 +1043,10 @@
                 "stun": 17585.05
               }
             }
+          },
+          "monsterResistance": {
+            "202": "Ice",
+            "204": "Wind"
           },
           "monsterWeakness": {
             "200": "Physical",
@@ -1141,6 +1164,9 @@
                 "stun": 12445.6
               }
             }
+          },
+          "monsterResistance": {
+            "205": "Ether"
           },
           "monsterWeakness": {
             "200": "Physical",

@@ -39,6 +39,7 @@ const roomShape: RestoreShape = {
     monsterIcon: "monster_icon",
     monsterList: "monster_list",
     monsterWeakness: "monster_weakness",
+    monsterResistance: "monster_resistance",
     wavesNum: "waves_num",
   },
   // encounter 与弱点文本内部没有登记改名，整个值原样保留。

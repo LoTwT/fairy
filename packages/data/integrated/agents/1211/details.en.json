@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "ATK"
     },
     "partSub": {
-      "format": "{0:0.#%}",
-      "name": "ATK"
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
     }
   },
   "hitType": {
@@ -1499,7 +1499,8 @@
   "skin": {
     "3112110": {
       "desc": "Her skirt is immaculate and her appearance flawlessly composed — such is the head maid's standard of perfection. Yet in the kitchen, her definition of \"perfect\" appears to be something else entirely...",
-      "name": "Rina: Head Maid's Perfection"
+      "name": "Rina: Head Maid's Perfection",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

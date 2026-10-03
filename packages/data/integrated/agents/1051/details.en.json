@@ -94,7 +94,7 @@
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "HP"
+      "name": "Ice DMG Bonus"
     }
   },
   "hitType": {
@@ -1802,7 +1802,8 @@
   "skin": {
     "3110510": {
       "desc": "Past recollections and novel dreams spill over, inviting her to drown in them as they entwine on paper. With a blank page before her, she pens the opening line at the crossroads of reality and illusion.",
-      "name": "Yidhari: Stream of Consciousness"
+      "name": "Yidhari: Stream of Consciousness",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

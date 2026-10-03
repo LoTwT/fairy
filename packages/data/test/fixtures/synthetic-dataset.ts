@@ -21,7 +21,7 @@ import { simulInput, simulSecondInput } from "./simul-source.ts"
 export const legacyV2Format = "fairy-nanoka-integrated/v2"
 
 /** 与代理人类别当前登记一致的默认规则版本；调用方可显式传入旧版本。 */
-const defaultRulesVersion = "nanoka-agent-reference/4"
+const defaultRulesVersion = "nanoka-agent-reference/5"
 
 /** 生产登记表默认使用的合成驱动盘成员；details.id 按成员改写，摘要与语言详情复用同一真实结构 fixture。 */
 export const syntheticDriveDiscIds = ["930001", "930002"] as const

@@ -245,9 +245,16 @@ export function convertWEngineAttributes(
   integer(data.id, `${path}/id`)
   if (data.id !== details.id || details.locale !== "zh")
     throw new Error(`${path}: property evidence identity/locale mismatch`)
+  const baseAttributeName = details.baseProperty.name
+  const baseAttributeKind =
+    baseAttributeName === "基础攻击力"
+      ? "attack"
+      : baseAttributeName === "基础防御力"
+        ? "defense"
+        : undefined
   if (
-    details.baseProperty.name !== "基础攻击力" ||
-    details.baseProperty.name2 !== "基础攻击力" ||
+    baseAttributeKind === undefined ||
+    details.baseProperty.name2 !== baseAttributeName ||
     details.baseProperty.format !== "{0:0.#}"
   )
     throw new Error(`${path}/baseProperty: unverified base property`)
@@ -283,12 +290,20 @@ export function convertWEngineAttributes(
     schemaVersion: 1,
     entityId: String(data.id),
     level: 60,
-    baseAttribute: {
-      attribute: "attack",
-      operation: "base-add",
-      unit: "attack-points",
-      value: baseValue,
-    },
+    baseAttribute:
+      baseAttributeKind === "attack"
+        ? {
+            attribute: "attack",
+            operation: "base-add",
+            unit: "attack-points",
+            value: baseValue,
+          }
+        : {
+            attribute: "defense",
+            operation: "base-add",
+            unit: "defense-points",
+            value: baseValue,
+          },
     advancedAttribute: convert(advancedValue),
   }
 }

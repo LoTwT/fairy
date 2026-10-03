@@ -1834,7 +1834,8 @@
   "skin": {
     "3110410": {
       "desc": "Those warm-toned goggles can't hide her icy, soldier's gaze. Want to see her crack a smile? Pick one: 87.5 one-arm push-ups or a bowl of extra-spicy noodles.",
-      "name": "Soldier 11: Elite Soldier"
+      "name": "Soldier 11: Elite Soldier",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

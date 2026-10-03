@@ -1219,7 +1219,8 @@
   "skin": {
     "3113510": {
       "desc": "A wandering mercenary should be out roaming the world, but the sunlight here is warm — perfect for a nap.",
-      "name": "Pulchra: Rest for a Weary Tail"
+      "name": "Pulchra: Rest for a Weary Tail",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

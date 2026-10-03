@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "CRIT DMG"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT DMG"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1627,7 +1627,8 @@
   "skin": {
     "3112410": {
       "desc": "This high-grade anti-riot uniform from Public Security has been specially modified to suit Zhu Yuan's fighting style.\nWinner of the Janus Precinct's combat tournament three years running, the young top Public Security Officer is on call 24/7, ready to arrest any criminal in her path.",
-      "name": "Zhu Yuan: Suppressor of Evil"
+      "name": "Zhu Yuan: Suppressor of Evil",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

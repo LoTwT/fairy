@@ -302,8 +302,8 @@ export function createCurrentDatasetHarness() {
       await fixture(options.production ? { production: true } : {}),
       "v2",
     )
-    const rulesVersion = options.rulesVersion ?? "nanoka-agent-reference/4"
-    if (rulesVersion !== "nanoka-agent-reference/4") {
+    const rulesVersion = options.rulesVersion ?? "nanoka-agent-reference/5"
+    if (rulesVersion !== "nanoka-agent-reference/5") {
       await editJson(join(input.targetDirectory, "index.json"), (index) => {
         index.rulesVersion = rulesVersion
       })

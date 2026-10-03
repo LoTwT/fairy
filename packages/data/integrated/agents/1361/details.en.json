@@ -1556,7 +1556,8 @@
   "skin": {
     "3113610": {
       "desc": "In the Hollows, her aim never wavers. She's a teammate one can rely on to cover their back without question. But once she returns to Sixth Street, that constant watchfulness softens, lingering for a moment before disappearing the instant it's sensed.",
-      "name": "Trigger: Gaze Into the Light"
+      "name": "Trigger: Gaze Into the Light",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

@@ -201,7 +201,7 @@ describe("multi-entity snapshot build", () => {
       "widgets",
     ])
     expect(build.index.entities.agents).toMatchObject({
-      rulesVersion: "nanoka-agent-reference/4",
+      rulesVersion: "nanoka-agent-reference/5",
       detailLocales: ["zh", "en"],
       complete: true,
       memberIds: ["2", "10"],

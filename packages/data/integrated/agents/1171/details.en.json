@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "Fire DMG Bonus"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1813,7 +1813,8 @@
   "skin": {
     "3111710": {
       "desc": "An outfit hotter than any Nitro-Fuel. Wander into a party in the Outer Ring, and odds are you'll bump into Burnice... but drink her signature cocktails at your own risk...\nWait, you've already taken a sip? Well then — 3, 2, 1... fire!",
-      "name": "Burnice: Wildfire Rave"
+      "name": "Burnice: Wildfire Rave",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

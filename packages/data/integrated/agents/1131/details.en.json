@@ -1730,7 +1730,8 @@
   "skin": {
     "3111310": {
       "desc": "Swinging a blade-banner as tall as half a person, and with a stomach rumbling with just as big a sound: fwish fwish fwish fwish fwish — work's done! Time to head home for dinner!",
-      "name": "Soukaku: Dance of Azure Ice"
+      "name": "Soukaku: Dance of Azure Ice",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

@@ -2,7 +2,7 @@
   "classificationIds": {
     "camp": ["4"],
     "elementType": ["200"],
-    "hitType": ["101"],
+    "hitType": ["101", "102"],
     "weaponType": ["5"]
   },
   "codeName": "Caesar",
@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [20103],
+        "suitList": [33700, 31900]
+      },
+      {
+        "partSubList": [31503, 12102],
+        "suitList": []
+      },
+      {
+        "partSubList": [12202],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconBreakStun.png",
       "prop": 12202
@@ -103,7 +117,7 @@
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconAttack.png",
       "prop": 12102
     },
-    "partSubList": [12102, 20103],
+    "partSubList": [12102, 20103, 21103],
     "slot2": 31900,
     "slot4": 33700,
     "slotSub": 31200
@@ -607,6 +621,8 @@
     "elementAbnormalPower": 87,
     "elementMystery": 90,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 1039361,
     "hpMax": 766,
     "penDelta": 0,
@@ -616,6 +632,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

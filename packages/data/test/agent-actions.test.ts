@@ -452,9 +452,9 @@ describe("agent action semantics", () => {
     ).toBe(true)
   })
 
-  it("rebuilds all 58 catalogs without dropped source rows and rejects semantic or level-bonus drift", async () => {
+  it("rebuilds all 60 catalogs without dropped source rows and rejects semantic or level-bonus drift", async () => {
     const ids = [...new Set(registry.map((entry) => entry.entityId))]
-    expect(ids).toHaveLength(58)
+    expect(ids).toHaveLength(60)
     for (const id of ids)
       expect(convertAgentActions(id, await details(id), registry)).toEqual(
         await agent(id),

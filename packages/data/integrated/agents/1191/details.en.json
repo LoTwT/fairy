@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "CRIT DMG"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT DMG"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -2247,11 +2247,13 @@
   "skin": {
     "3111910": {
       "desc": "The sharp scissors of Victoria Housekeeping, if only she weren't sleeping...",
-      "name": "Ellen: Ellen Scissorhands"
+      "name": "Ellen: Ellen Scissorhands",
+      "obtainDesc": ""
     },
     "3111911": {
       "desc": "The tail doesn't quite match the school uniform, but with just a little bit of needlework, it can become even cuter!",
-      "name": "Ellen: On Campus"
+      "name": "Ellen: On Campus",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

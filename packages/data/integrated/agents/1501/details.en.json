@@ -81,12 +81,12 @@
   },
   "fairyRecommend": {
     "part4": {
-      "format": "{0:0.#%}",
-      "name": "Anomaly Mastery"
-    },
-    "part5": {
       "format": "{0:0}",
       "name": "Anomaly Proficiency"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Anomaly Mastery"
     },
     "part6": {
       "format": "{0:0.#%}",
@@ -1750,11 +1750,18 @@
   "skin": {
     "3115010": {
       "desc": "A touch of pink and white, a hint of lights and sound, plus countless days and nights devoted to singing — all of it comes together as a boundless delusion on stage.",
-      "name": "Aria: Energetic Idol"
+      "name": "Aria: Energetic Idol",
+      "obtainDesc": ""
     },
     "3115011": {
       "desc": "Aria's performance outfit for special shows, worn only a handful of times.\nA pure-white \"angel\" clad in \"demonic\" wings. Take a deep breath, get ready... once the spotlight comes on, it's the Angels of Delusion's time to rebel.",
-      "name": "Aria: Discordant Note"
+      "name": "Aria: Discordant Note",
+      "obtainDesc": ""
+    },
+    "3115012": {
+      "desc": "Angels Rule #2: No matter what forms her projections take, the energetic idol's smile must never change!",
+      "name": "Aria: Cuteness Loading",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

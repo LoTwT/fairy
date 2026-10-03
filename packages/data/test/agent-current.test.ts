@@ -512,7 +512,7 @@ describe("current multi-entity dataset", () => {
     // 旧快照只用于复验：新候选必须按当前代码规则重建，不能用改标记代替。
     expect((await updateCurrentDataset(input)).outcome).toBe("committed")
     expect((await clean(input)).index.entities.agents.rulesVersion).toBe(
-      "nanoka-agent-reference/4",
+      "nanoka-agent-reference/5",
     )
     expect((await clean(input)).bytes).toEqual(original)
   })

@@ -1,0 +1,1210 @@
+{
+  "id": 62059,
+  "locale": "en",
+  "name": "Critical Node",
+  "zone": {
+    "6205901": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001591": {
+          "desc": "· Agent Sharp DMG increases by 20%. After defeating normal enemies, Agents with the <color=#FFFFFF>Stun</color> specialty restore 15 Energy.\n· When Agents' <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Ultimate</color> hit enemies, PEN Ratio increases by 10%. If the enemy is Stunned, ignore 15% of their <color=#2EB6FF>Electric RES</color>.",
+          "title": "Master of Wind & Lightning"
+        }
+      },
+      "layerRoom": {
+        "62059011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31482": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 20033,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "Lahmu",
+              "stats": {
+                "attack": 3149.666666666667,
+                "attribute_infliction": 0,
+                "defence": 532.8,
+                "hp": 2573035.6574999997,
+                "stun": 10605.24
+              }
+            },
+            "31491": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20034,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Predator.png",
+              "name": "Mushussu",
+              "stats": {
+                "attack": 2759.2121212121215,
+                "attribute_infliction": 0,
+                "defence": 532.8,
+                "hp": 2484056.19,
+                "stun": 9350.34
+              }
+            },
+            "31583": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10036,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Minion.png",
+              "name": "Kulullu",
+              "stats": {
+                "attack": 1874.1818181818182,
+                "attribute_infliction": 0,
+                "defence": 426.24,
+                "hp": 375629.6775,
+                "stun": 1441.8
+              }
+            },
+            "31744": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10042,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard",
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 509.12,
+                "hp": 431449.095,
+                "stun": 1762.2
+              }
+            },
+            "31752": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10043,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard",
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 544.64,
+                "hp": 480636.5025,
+                "stun": 2403
+              }
+            },
+            "31762": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10041,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Greatsworder.png",
+              "name": "Airspace Patrol Vanguard",
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 509.12,
+                "hp": 480636.5025,
+                "stun": 2403
+              }
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "201": "Fire",
+            "204": "Wind"
+          },
+          "wavesNum": 4
+        },
+        "62059012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11253": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10006,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "Light Jaeger",
+              "stats": {
+                "attack": 1718,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 206881.8675,
+                "stun": 1068
+              }
+            },
+            "11274": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10007,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster-MeleeJaeger.png",
+              "name": "Rookie Jaeger",
+              "stats": {
+                "attack": 1718,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 252937.4925,
+                "stun": 1602
+              }
+            },
+            "11443": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20008,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRover.png",
+              "name": "Lightfoot Rover",
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 639.36,
+                "hp": 1307427.0825,
+                "stun": 6233.56
+              }
+            },
+            "11454": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20007,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "Heavy Striker",
+              "stats": {
+                "attack": 2394.787878787879,
+                "attribute_infliction": 0,
+                "defence": 639.36,
+                "hp": 1550048.115,
+                "stun": 5936.3
+              }
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 50,
+      "name": "Critical Node: First Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 1
+    },
+    "6205902": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001591": {
+          "desc": "· Agent Sharp DMG increases by 20%. After defeating normal enemies, Agents with the <color=#FFFFFF>Stun</color> specialty restore 15 Energy.\n· When Agents' <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Ultimate</color> hit enemies, PEN Ratio increases by 10%. If the enemy is Stunned, ignore 15% of their <color=#2EB6FF>Electric RES</color>.",
+          "title": "Master of Wind & Lightning"
+        }
+      },
+      "layerRoom": {
+        "62059021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31551": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20019,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo",
+              "stats": {
+                "attack": 3209.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 3696941.9899999998,
+                "stun": 10085.76
+              }
+            },
+            "31554": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 1
+              },
+              "id": 20036,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo",
+              "stats": {
+                "attack": 3679.666666666667,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 3829367.3074999996,
+                "stun": 11439.359999999999
+              }
+            },
+            "31622": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10024,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BangbooPatrolMecha.png",
+              "name": "Airspace Patrolboo",
+              "stats": {
+                "attack": 1798.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 592.54,
+                "hp": 715316.0525,
+                "stun": 2592
+              }
+            },
+            "31624": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10038,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CorruptedPatrolMecha.png",
+              "name": "Metamorphosed - Airspace Patrolboo",
+              "stats": {
+                "attack": 1798.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 592.54,
+                "hp": 715316.0525,
+                "stun": 2592
+              }
+            },
+            "31652": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 1,
+                "wind": 1
+              },
+              "id": 10037,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_EyeEngine.png",
+              "name": "Metamorphosed - Beholder Engine",
+              "stats": {
+                "attack": 1798.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 592.54,
+                "hp": 715316.0525,
+                "stun": 2592
+              }
+            }
+          },
+          "monsterResistance": {
+            "200": "Physical"
+          },
+          "monsterWeakness": {
+            "204": "Wind",
+            "205": "Ether"
+          },
+          "wavesNum": 4
+        },
+        "62059022": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11058": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 30002,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Guardian.png",
+              "name": "Guardian",
+              "stats": {
+                "attack": 2545.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 2307709.9324999996,
+                "stun": 7989.12
+              }
+            },
+            "11164": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10005,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_StrikeJaeger.png",
+              "name": "Strike Jaeger",
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 442788.58749999997,
+                "stun": 1728
+              }
+            },
+            "11254": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10006,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "Light Jaeger",
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 376438.84249999997,
+                "stun": 1728
+              }
+            },
+            "11454": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20007,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "Heavy Striker",
+              "stats": {
+                "attack": 2545.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 2306887.415,
+                "stun": 6403.2
+              }
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 4
+        }
+      },
+      "monsterLevel": 55,
+      "name": "Critical Node: Second Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 2
+    },
+    "6205903": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001591": {
+          "desc": "· Agent Sharp DMG increases by 20%. After defeating normal enemies, Agents with the <color=#FFFFFF>Stun</color> specialty restore 15 Energy.\n· When Agents' <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Ultimate</color> hit enemies, PEN Ratio increases by 10%. If the enemy is Stunned, ignore 15% of their <color=#2EB6FF>Electric RES</color>.",
+          "title": "Master of Wind & Lightning"
+        }
+      },
+      "layerRoom": {
+        "62059031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31481": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 20033,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "Lahmu",
+              "stats": {
+                "attack": 2330.7954545454545,
+                "attribute_infliction": 0,
+                "defence": 714.6,
+                "hp": 9150444.66,
+                "stun": 10821.18
+              }
+            },
+            "31552": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20019,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo",
+              "stats": {
+                "attack": 2924.488636363636,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 9478215.705,
+                "stun": 12273.48
+              }
+            },
+            "31642": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20035,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MoltTarasqueMixer.png",
+              "name": "Metamorphosed - Tarasque Mixer",
+              "stats": {
+                "attack": 2660.625,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 11717645.205,
+                "stun": 12273.48
+              }
+            },
+            "31744": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10042,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard",
+              "stats": {
+                "attack": 1737.1022727272725,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 1589316.3299999998,
+                "stun": 2039.4
+              }
+            },
+            "31752": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10043,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard",
+              "stats": {
+                "attack": 1737.1022727272725,
+                "attribute_infliction": 0,
+                "defence": 730.48,
+                "hp": 1770506.535,
+                "stun": 2781
+              }
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "203": "Electric",
+            "204": "Wind"
+          },
+          "wavesNum": 3
+        },
+        "62059032": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11312": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100191,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulterPro.png",
+              "name": "Ambusher",
+              "stats": {
+                "attack": 1385.2840909090908,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 931738.3949999999,
+                "stun": 1854
+              }
+            },
+            "11322": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100181,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacherPro.png",
+              "name": "Rustler",
+              "stats": {
+                "attack": 1187.3863636363635,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 931738.3949999999,
+                "stun": 1854
+              }
+            },
+            "11603": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200231,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Mors.png",
+              "name": "Doppelganger - Mors",
+              "stats": {
+                "attack": 2088.9204545454545,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 6935445.3,
+                "stun": 12273.48
+              }
+            },
+            "11613": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200251,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Bellum.png",
+              "name": "Doppelganger - Bellum",
+              "stats": {
+                "attack": 2550.681818181818,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 7427441.175,
+                "stun": 14720.76
+              }
+            },
+            "11623": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200241,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Pulchra.png",
+              "name": "Doppelganger - Pulchra",
+              "stats": {
+                "attack": 2550.681818181818,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 6935445.3,
+                "stun": 12273.48
+              }
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 60,
+      "name": "Critical Node: Third Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 3
+    },
+    "6205904": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerBuff": {
+        "62001591": {
+          "desc": "· Agent Sharp DMG increases by 20%. After defeating normal enemies, Agents with the <color=#FFFFFF>Stun</color> specialty restore 15 Energy.\n· When Agents' <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Ultimate</color> hit enemies, PEN Ratio increases by 10%. If the enemy is Stunned, ignore 15% of their <color=#2EB6FF>Electric RES</color>.",
+          "title": "Master of Wind & Lightning"
+        }
+      },
+      "layerRoom": {
+        "62059041": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Sentinel.png",
+          "monsterList": {
+            "31531": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 30048,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Sentinel.png",
+              "name": "Airspace Sentinel",
+              "stats": {
+                "attack": 3018.0681818181815,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 31378646.88,
+                "stun": 19771.4
+              }
+            },
+            "31553": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 1
+              },
+              "id": 20036,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo",
+              "stats": {
+                "attack": 2693.0454545454545,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 9948967.14,
+                "stun": 11556.6
+              }
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "204": "Wind"
+          },
+          "wavesNum": 2
+        },
+        "62059042": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ThugBulkyEnforcerBoss.png",
+          "monsterList": {
+            "11311": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100191,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulterPro.png",
+              "name": "Ambusher",
+              "stats": {
+                "attack": 1950.1363636363635,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 497153.22300000006,
+                "stun": 1320
+              }
+            },
+            "11321": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100181,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacherPro.png",
+              "name": "Rustler",
+              "stats": {
+                "attack": 1671.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 497153.22300000006,
+                "stun": 1320
+              }
+            },
+            "11353": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200172,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerBoss.png",
+              "name": "Troublemaker - Wanted Enforcer",
+              "stats": {
+                "attack": 3714.5454545454545,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 10829309.7,
+                "stun": 12194.6
+              }
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 65,
+      "name": "Critical Node: Fourth Frontier",
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 4
+    },
+    "6205905": {
+      "aRankGoal": 1270001002,
+      "bRankGoal": 1270001001,
+      "child": [62059051, 62059052, 62059053],
+      "goalType": 3,
+      "layerBuff": {
+        "62001541": {
+          "desc": "· If there are 2/3 Agents with the <color=#FFFFFF>Anomaly</color> specialty in the squad, Attribute Anomaly DMG dealt by Agents <color=#2BAD00>increases by 10%/60%</color>, and the whole squad initially gains <color=#2BAD00>500/1,500</color> Decibels upon entering combat.",
+          "title": "Turbulent Resonance"
+        },
+        "62001591": {
+          "desc": "· Agent Sharp DMG increases by 20%. After defeating normal enemies, Agents with the <color=#FFFFFF>Stun</color> specialty restore 15 Energy.\n· When Agents' <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Ultimate</color> hit enemies, PEN Ratio increases by 10%. If the enemy is Stunned, ignore 15% of their <color=#2EB6FF>Electric RES</color>.",
+          "title": "Master of Wind & Lightning"
+        },
+        "62001593": {
+          "desc": "· Agent <color=#FF5521>Fire DMG</color> and <color=#FE437E>Ether DMG</color> increase by 15%, and Sheer DMG increases by 15%.\n· Agent <color=#FFFFFF>Ultimate</color> DMG increases by 30%. When an Ultimate attack hits an enemy, it ignores 10% of the target's All-Attribute RES.",
+          "title": "Fleeting Blaze"
+        }
+      },
+      "layerRoom": {},
+      "monsterLevel": 0,
+      "name": "",
+      "sRankGoal": 1270001003,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "62059051": {
+      "aRankGoal": 16000,
+      "bRankGoal": 8000,
+      "child": [],
+      "goalType": 2,
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001591": {
+          "desc": "· Agent Sharp DMG increases by 20%. After defeating normal enemies, Agents with the <color=#FFFFFF>Stun</color> specialty restore 15 Energy.\n· When Agents' <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Ultimate</color> hit enemies, PEN Ratio increases by 10%. If the enemy is Stunned, ignore 15% of their <color=#2EB6FF>Electric RES</color>.",
+          "title": "Master of Wind & Lightning"
+        }
+      },
+      "layerRoom": {
+        "62059051": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_WingedChelonethid.png",
+          "monsterList": {
+            "31552": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20019,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo",
+              "stats": {
+                "attack": 3252.454545454546,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 7965170.595,
+                "stun": 14001.300000000001
+              }
+            },
+            "31571": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 30050,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_WingedChelonethid.png",
+              "name": "Metamorphosed - Scorpse",
+              "stats": {
+                "attack": 3521.454545454546,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 30871461.06,
+                "stun": 19540.25
+              }
+            },
+            "31612": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10035,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Sapper.png",
+              "name": "Special Anti-Riotboo",
+              "stats": {
+                "attack": 1931.909090909091,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 1423183.41,
+                "stun": 3172.5
+              }
+            },
+            "31622": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10024,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BangbooPatrolMecha.png",
+              "name": "Airspace Patrolboo",
+              "stats": {
+                "attack": 1589.5454545454547,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 1423183.41,
+                "stun": 3172.5
+              }
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "203": "Electric",
+            "204": "Wind"
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 70,
+      "name": "Room 1",
+      "sRankGoal": 25000,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "62059052": {
+      "aRankGoal": 16000,
+      "bRankGoal": 8000,
+      "child": [],
+      "goalType": 2,
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001541": {
+          "desc": "· If there are 2/3 Agents with the <color=#FFFFFF>Anomaly</color> specialty in the squad, Attribute Anomaly DMG dealt by Agents <color=#2BAD00>increases by 10%/60%</color>, and the whole squad initially gains <color=#2BAD00>500/1,500</color> Decibels upon entering combat.",
+          "title": "Turbulent Resonance"
+        }
+      },
+      "layerRoom": {
+        "62059052": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MiasmaThracian.png",
+          "monsterList": {
+            "11732": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantEnergy.png",
+              "name": "Ionized - Farbauti",
+              "stats": {
+                "attack": 2592.1818181818185,
+                "attribute_infliction": 0,
+                "defence": 714.6,
+                "hp": 7148100.959999999,
+                "stun": 11169.550000000001
+              }
+            },
+            "11752": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300004,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DurahanEnergy.png",
+              "name": "Ionized - Dullahan",
+              "stats": {
+                "attack": 2714.4545454545455,
+                "attribute_infliction": 0,
+                "defence": 921.0400000000001,
+                "hp": 6014845.484999999,
+                "stun": 9334.2
+              }
+            },
+            "31102": {
+              "element": {
+                "electric": -1,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 930178,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MiasmaThracian.png",
+              "name": "Miasmic - Thracian",
+              "stats": {
+                "attack": 3521.454545454546,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 72386523,
+                "stun": 14327.95
+              }
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "204": "Wind",
+            "205": "Ether"
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 70,
+      "name": "Room 2",
+      "sRankGoal": 25000,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "62059053": {
+      "aRankGoal": 16000,
+      "bRankGoal": 8000,
+      "child": [],
+      "goalType": 2,
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001593": {
+          "desc": "· Agent <color=#FF5521>Fire DMG</color> and <color=#FE437E>Ether DMG</color> increase by 15%, and Sheer DMG increases by 15%.\n· Agent <color=#FFFFFF>Ultimate</color> DMG increases by 30%. When an Ultimate attack hits an enemy, it ignores 10% of the target's All-Attribute RES.",
+          "title": "Fleeting Blaze"
+        }
+      },
+      "layerRoom": {
+        "62059053": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_CovenantGuardian.png",
+          "monsterList": {
+            "11355": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20017,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcer.png",
+              "name": "Bulky Enforcer",
+              "stats": {
+                "attack": 2347.636363636364,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 5365018.125,
+                "stun": 8890.050000000001
+              }
+            },
+            "11364": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20015,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuser.png",
+              "name": "Bulky Intimidator",
+              "stats": {
+                "attack": 2103.0909090909095,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 4039725.375,
+                "stun": 6782.1
+              }
+            },
+            "31332": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": -1
+              },
+              "id": 30044,
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_CovenantGuardian.png",
+              "name": "Sacrifice - Covenant Guardian",
+              "stats": {
+                "attack": 3521.454545454546,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 45802365.38999999,
+                "stun": 17585.05
+              }
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice",
+            "204": "Wind"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 70,
+      "name": "Room 3",
+      "sRankGoal": 25000,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    }
+  }
+}

@@ -80,7 +80,7 @@ export type DatasetIndexFormat =
 
 /** 一个类别的整合规则版本；类别名由已接入类别登记表定义。 */
 export interface DatasetEntityContext {
-  /** 该类别的整合规则版本，如 nanoka-agent-reference/4。 */
+  /** 该类别的整合规则版本，如 nanoka-agent-reference/5。 */
   rulesVersion: string
 }
 

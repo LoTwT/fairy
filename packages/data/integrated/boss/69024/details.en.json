@@ -52,6 +52,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "201": "Fire",
                 "202": "Ice"
@@ -121,6 +122,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "203": "Electric",
                 "204": "Wind"
@@ -194,6 +196,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "205": "Ether"
               },

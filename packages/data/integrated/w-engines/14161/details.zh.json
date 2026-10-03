@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "基础防御力",
+    "name2": "基础防御力"
+  },
+  "desc": "长久以来，有关弗林特的轶闻层出不穷，足以编撰一部志怪集录。鲜血、辉金、尘封的历史、奇迹的传承…诸般危险的秘辛从未显露全貌，却始终牵引着世人的目光。有趣的是，那位家主从未出面予以澄清。有人说她志存高远，无暇理会流言；有人说她少年持重，借机推波助澜；也有人说，弗林特从无轶闻，唯真相流传于世。流言如雾，虚实难明。可唯独对那位年轻的家主，世人除却敬畏，再无其他。\n「洛克茜，这个音擎里的红宝石看起来还挺值钱的，要是把它卖了…」「小姐，恕我直言，这恐怕还抵不上您与林德薇恩大人的一次会谈所带来的损失。」\n——正在为预算亏空头疼的家主大人与她的得力助手",
+  "desc2": "装备后可提升[锋御]代理人的战斗能力",
+  "desc3": "赤月之下，血脉不息。",
+  "id": 14161,
+  "locale": "zh",
+  "name": "猩红渴望",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "防御力",
+    "name2": "防御力百分比"
+  },
+  "talents": {
+    "1": {
+      "desc": "装备者暴击率提升<color=#2BAD00>25%</color>；<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>15%</color>；装备者发动<color=#FFFFFF>[强化特殊技]</color>或触发<color=#FFFFFF>[毁伤]</color>时，造成的<color=#2EB6FF>电属性锐化伤害</color>提升<color=#2BAD00>10%</color>，持续40秒，重复触发时刷新持续时间。",
+      "name": "渴血"
+    },
+    "2": {
+      "desc": "装备者暴击率提升<color=#2BAD00>27.5%</color>；<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>17.5%</color>；装备者发动<color=#FFFFFF>[强化特殊技]</color>或触发<color=#FFFFFF>[毁伤]</color>时，造成的<color=#2EB6FF>电属性锐化伤害</color>提升<color=#2BAD00>11.5%</color>，持续40秒，重复触发时刷新持续时间。",
+      "name": "渴血"
+    },
+    "3": {
+      "desc": "装备者暴击率提升<color=#2BAD00>30%</color>；<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>20%</color>；装备者发动<color=#FFFFFF>[强化特殊技]</color>或触发<color=#FFFFFF>[毁伤]</color>时，造成的<color=#2EB6FF>电属性锐化伤害</color>提升<color=#2BAD00>13%</color>，持续40秒，重复触发时刷新持续时间。",
+      "name": "渴血"
+    },
+    "4": {
+      "desc": "装备者暴击率提升<color=#2BAD00>32.5%</color>；<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>22.5%</color>；装备者发动<color=#FFFFFF>[强化特殊技]</color>或触发<color=#FFFFFF>[毁伤]</color>时，造成的<color=#2EB6FF>电属性锐化伤害</color>提升<color=#2BAD00>14.5%</color>，持续40秒，重复触发时刷新持续时间。",
+      "name": "渴血"
+    },
+    "5": {
+      "desc": "装备者暴击率提升<color=#2BAD00>35%</color>；<color=#2EB6FF>电属性伤害</color>提升<color=#2BAD00>25%</color>；装备者发动<color=#FFFFFF>[强化特殊技]</color>或触发<color=#FFFFFF>[毁伤]</color>时，造成的<color=#2EB6FF>电属性锐化伤害</color>提升<color=#2BAD00>16%</color>，持续40秒，重复触发时刷新持续时间。",
+      "name": "渴血"
+    }
+  },
+  "weaponType": {
+    "7": "锋御"
+  }
+}

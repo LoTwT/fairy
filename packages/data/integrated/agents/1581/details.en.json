@@ -1603,19 +1603,23 @@
   "skin": {
     "3115810": {
       "desc": "An angel of old fell to the mortal world, their feathers drifting down as they sank into silent slumber.\nAwaken from the pale wasteland, beyond the edge of all sound, and begin the journey anew.",
-      "name": "Remielle: Feathered Murmurs"
+      "name": "Remielle: Feathered Murmurs",
+      "obtainDesc": ""
     },
     "3115811": {
       "desc": "Since the sun has never shown mercy, let us embrace the fall alongside the moonlit night.\nYou say it's difficult to differentiate between jokes and deception?\nThen let's have another round of our Q&A game, my dear partner in crime.",
-      "name": "Remielle: Moonlight Whispers"
+      "name": "Remielle: Moonlight Whispers",
+      "obtainDesc": ""
     },
     "3115812": {
       "desc": "This was originally a solo dance, yet a ray of light has illuminated the secrecy and solitude shrouded in darkness. Now, would you care to join me for a pas de deux, my partner in crime?",
-      "name": "Remielle: Seashade Pas Seul"
+      "name": "Remielle: Seashade Pas Seul",
+      "obtainDesc": ""
     },
     "3115813": {
       "desc": "Since the sun has never shown mercy, let us embrace the fall alongside the moonlit night.\nYou say it's difficult to differentiate between jokes and deception?\nThen let's have another round of our Q&A game, my dear partner in crime.",
-      "name": "Remielle: Moonlight Whispers (Veil)"
+      "name": "Remielle: Moonlight Whispers (Veil)",
+      "obtainDesc": "Unlocked after obtaining the\"Moonlight Whispers\" Outfit"
     }
   },
   "specialElementType": {},

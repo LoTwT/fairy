@@ -1703,7 +1703,8 @@
   "skin": {
     "3114510": {
       "desc": "Her cloak is the curtain of night, and beneath her hood rests the world's quiet whispers. She sings for the dusk and speaks in dreams, gathering the thoughts sleepers leave behind and weaving them into halos and riddles across the stars.",
-      "name": "Lucia: Whispering Dreams"
+      "name": "Lucia: Whispering Dreams",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

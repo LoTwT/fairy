@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "CRIT DMG"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT DMG"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1759,7 +1759,8 @@
   "skin": {
     "3112910": {
       "desc": "Never be claimed by fate. Defy its clamps, its control, its taunts, its alms, its curses, and its so-called blessings. Once you return from the abyss, it is fate that should kneel to you.",
-      "name": "Hugo: Crownless Rebellion"
+      "name": "Hugo: Crownless Rebellion",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

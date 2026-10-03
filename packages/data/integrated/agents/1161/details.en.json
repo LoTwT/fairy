@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "CRIT Rate"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1930,7 +1930,8 @@
   "skin": {
     "3111610": {
       "desc": "The undefeated champion never takes off his sunglasses... or his scarf. Glory stopped mattering long ago, but the countless dusks shared with his companions are still worth waiting for.",
-      "name": "Lighter: Everburn Embers"
+      "name": "Lighter: Everburn Embers",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

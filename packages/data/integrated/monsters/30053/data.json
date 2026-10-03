@@ -106,7 +106,7 @@
       "icon": "",
       "id": 31602,
       "stats": {
-        "attack": 144,
+        "attack": 120,
         "auto_recover_cd": 0,
         "auto_recover_rate": 0,
         "base_buildup_ratio": 2500,
@@ -132,7 +132,7 @@
         "fire_damage_res": 0,
         "fire_stun_res": 0,
         "frozen_time_res": 7500,
-        "hp": 52410,
+        "hp": 89097,
         "ice_buildup_curve": 30011,
         "ice_buildup_res": 0,
         "ice_damage_res": 0,
@@ -161,5 +161,5 @@
       "type": "Monster"
     }
   },
-  "rarity": 3
+  "rarity": 4
 }

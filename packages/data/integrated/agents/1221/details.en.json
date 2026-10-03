@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "Anomaly Mastery"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "Anomaly Mastery"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1579,7 +1579,8 @@
   "skin": {
     "3112210": {
       "desc": "Even reflective lenses can't hide the sharp gleam in the Deputy Chief's eyes. She has to constantly keep watch over a warrior obsessed with training, a scout who slacks off whenever possible, and a little one who's forever getting stomachaches.",
-      "name": "Tsukishiro Yanagi: Flowing Moonshade"
+      "name": "Tsukishiro Yanagi: Flowing Moonshade",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

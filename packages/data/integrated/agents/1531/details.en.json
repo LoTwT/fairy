@@ -1514,7 +1514,8 @@
   "skin": {
     "3115310": {
       "desc": "Those who always believe in hope will, in the end, become someone else's hope.",
-      "name": "Starlight - Billy: Starlight Armaments"
+      "name": "Starlight - Billy: Starlight Armaments",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

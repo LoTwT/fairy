@@ -35,6 +35,7 @@ const room: ShiyuZoneRoom = {
   monsterIcon: "",
   monsterList: { "11314": encounter },
   monsterWeakness: { "200": "物理", "202": "冰属性" },
+  monsterResistance: { "200": "物理" },
   wavesNum: 2,
 }
 

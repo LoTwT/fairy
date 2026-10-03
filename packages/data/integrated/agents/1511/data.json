@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [31203],
+        "suitList": [33000, 31300]
+      },
+      {
+        "partSubList": [31903],
+        "suitList": []
+      },
+      {
+        "partSubList": [31402],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementAbnormalPower.png",
       "prop": 31402
@@ -104,9 +118,9 @@
       "prop": 12102
     },
     "partSubList": [31203, 12102],
-    "slot2": 31300,
-    "slot4": 33000,
-    "slotSub": 33600
+    "slot2": 33000,
+    "slot4": 33600,
+    "slotSub": 33200
   },
   "gender": 2,
   "icon": "IconRole59",
@@ -577,6 +591,9 @@
     },
     "3115111": {
       "image": "IconRole59_01"
+    },
+    "3115112": {
+      "image": "IconRole59_02"
     }
   },
   "stats": {
@@ -595,6 +612,8 @@
     "elementAbnormalPower": 90,
     "elementMystery": 93,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 913706,
     "hpMax": 673,
     "penDelta": 0,
@@ -604,6 +623,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

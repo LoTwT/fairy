@@ -1586,7 +1586,8 @@
   "skin": {
     "3115510": {
       "desc": "The dying heat haze extinguished within the valley will one day be reborn from the sea. The beast that trampled fate beneath its feet will become the chariot that clears the path ahead.",
-      "name": "Pyrois: Dawn's Guardian"
+      "name": "Pyrois: Dawn's Guardian",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

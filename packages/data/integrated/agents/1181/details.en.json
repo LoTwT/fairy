@@ -94,7 +94,7 @@
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "PEN Ratio"
     }
   },
   "hitType": {
@@ -1475,7 +1475,8 @@
   "skin": {
     "3111810": {
       "desc": "A clean, no-nonsense work uniform. What the genius mechanic loves most are the many pockets on the outside — big ones, small ones — all perfect for holding screws, gears, and even wrenches of every size.",
-      "name": "Grace: The Iron Witch"
+      "name": "Grace: The Iron Witch",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

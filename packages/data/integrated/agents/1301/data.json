@@ -2,7 +2,7 @@
   "classificationIds": {
     "camp": ["5"],
     "elementType": ["201"],
-    "hitType": ["103"],
+    "hitType": ["101", "103"],
     "weaponType": ["1"]
   },
   "codeName": "Orphie & Magus",
@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [21103, 20103],
+        "suitList": [32900, 33400]
+      },
+      {
+        "partSubList": [31603, 12102],
+        "suitList": [32900, 31600]
+      },
+      {
+        "partSubList": [30502],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconCritDam.png",
       "prop": 21103
@@ -592,6 +606,8 @@
     "elementAbnormalPower": 92,
     "elementMystery": 90,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 849779,
     "hpMax": 626,
     "penDelta": 0,
@@ -601,6 +617,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

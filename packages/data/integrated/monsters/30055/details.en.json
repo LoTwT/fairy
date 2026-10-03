@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A researcher working on tactical units, who can't help but question the pilot the company hired at a hefty salary.",
+  "cardSkillDesc": "When the Conqueror enters optical camouflage, it gains a Corruptive Barrier and becomes immune to DMG. Dodge and Counter to trigger Impaired, which drastically reduces the Corruptive Barrier and builds up Daze. Watch out for the Conqueror's feints.",
+  "desc": "High Ambitions Corp. has illegally seized the Porcelloy transfer station at Shrouded Reef, using it as a base to secretly stockpile a massive arsenal. The Conqueror series stands as the centerpiece of this operation — a core tactical unit combining exceptional mobility with devastating firepower, representing a milestone in TOPS's militarization of civilian Ether technology.\nWhile the Conqueror possesses a degree of autonomous combat capability, the complexity of real battlefield conditions and tactical decision-making still demands an experienced pilot at the helm to unlock its full potential.\n\n\"Become the light... Become the light... Become the light...\"\n\"...So you need to chant spells to pilot a Mech?\"",
+  "groupDesc": "Special",
+  "id": 30055,
+  "locale": "en",
+  "name": "Conqueror"
+}

@@ -42,6 +42,7 @@ const room: SimulRoom = {
     "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Example.png",
   monsterList: { "11818": encounter },
   monsterWeakness: { "202": "冰属性" },
+  monsterResistance: { "202": "冰属性抗性" },
   wavesNum: 1,
 }
 

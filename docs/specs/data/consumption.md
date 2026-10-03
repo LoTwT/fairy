@@ -5,7 +5,7 @@
 类型、数值语义、来源与生成边界统一见[60 级属性规范](panel-attributes.md)，下文原始资料接口保持来源语义。
 
 本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
-[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.1，58 个代理人、30 个驱动盘套装、95 个 WEngine、
+[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.2，60 个代理人、30 个驱动盘套装、100 个 WEngine、
 42 个邦布、293 个怪物、59 个 Shiyu 区域、44 个 Boss 试炼、3 个 Simul 模拟战、zh/en 两种详情语言；公开索引
 使用多实体 v3 外壳，类别（`agents`、`drive-discs`、`w-engines`、`bangboos`、`monsters`、`shiyu`、`boss`
 与 `simul`）与成员文件摘要来自完整验证后的同一发布副本。驱动盘、WEngine 与邦布已进入生产快照、JSON
@@ -191,7 +191,7 @@ export declare function loadAllSimul(
   `IntegratedSnapshotEntity`、`IntegratedSnapshotMember` 与 `IntegratedSnapshotSourceInput` 类型；
   旧的 v2 索引外壳类型不再公开导出，公开读取只有一种索引形状。
 - `loadAgentData` 只加载该成员 data；`loadAgentDetails` 只加载该成员指定语言 details。均无需先调用索引。
-- `loadAllAgents` 显式加载本版全部 data 与指定语言 details，目前为 58 + 58 个文件；结果以 AgentName 为 key。
+- `loadAllAgents` 显式加载本版全部 data 与指定语言 details，目前为 60 + 60 个文件；结果以 AgentName 为 key。
   `data` 和 `details` 保持两个独立对象，不合并同名字段。索引的成员表是
   `entities.agents.members`，仍以来源数字字符串为 key。
 - `loadDriveDiscData` 只加载该套装 data；`loadDriveDiscDetails` 只加载该套装指定语言 details；
@@ -199,7 +199,7 @@ export declare function loadAllSimul(
   DriveDiscName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是
   `entities["drive-discs"].members`。
 - `loadWEngineData` 只加载该 WEngine data；`loadWEngineDetails` 只加载该 WEngine 指定语言 details；
-  `loadAllWEngines` 显式加载全部 WEngine data 与指定语言 details，目前为 95 + 95 个文件，结果以
+  `loadAllWEngines` 显式加载全部 WEngine data 与指定语言 details，目前为 100 + 100 个文件，结果以
   WEngineName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是 `entities["w-engines"].members`。
 - `loadBangbooData` 只加载该邦布 data；`loadBangbooDetails` 只加载该邦布指定语言 details；
   `loadAllBangboos` 显式加载全部邦布 data 与指定语言 details，目前为 42 + 42 个文件，结果以

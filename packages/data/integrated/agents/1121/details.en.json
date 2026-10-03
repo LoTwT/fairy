@@ -1383,12 +1383,13 @@
   "skin": {
     "3111210": {
       "desc": "Ignoring the intimidating look meant to cow outsiders, even the Beast King struggles with grooming his fur and sorting out the bills.",
-      "name": "Ben: Fluffy Beastking"
+      "name": "Ben: Fluffy Beastking",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
   "strategy": [
-    "05",
+    "04",
     "<IconMap:Icon_GeneralBuff_Fire>Fire, defense support",
     "Grants shield Retaliation to all squad members"
   ],

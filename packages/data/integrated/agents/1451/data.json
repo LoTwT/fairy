@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [11102],
+        "suitList": [33400, 33100]
+      },
+      {
+        "partSubList": [11102],
+        "suitList": [33400, 31600]
+      },
+      {
+        "partSubList": [11102],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconHpMax.png",
       "prop": 11102
@@ -104,9 +118,9 @@
       "prop": 12102
     },
     "partSubList": [11102, 11103],
-    "slot2": 31600,
+    "slot2": 33100,
     "slot4": 33400,
-    "slotSub": 33100
+    "slotSub": 31600
   },
   "gender": 2,
   "icon": "IconRole50",
@@ -587,6 +601,8 @@
     "elementAbnormalPower": 96,
     "elementMystery": 95,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 924944,
     "hpMax": 681,
     "penDelta": 0,
@@ -596,6 +612,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

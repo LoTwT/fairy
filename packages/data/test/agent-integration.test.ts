@@ -103,6 +103,8 @@ const expectedData = {
     elementAbnormalPower: 0,
     elementMystery: 0,
     endurance: 0,
+    epMax: 0,
+    epRecover: 0,
     hpGrowth: 0,
     hpMax: 0,
     penDelta: 0,
@@ -112,6 +114,7 @@ const expectedData = {
     rblProbability: 0,
     shield: 0,
     shieldGrowth: 0,
+    sharpCriticalDamage: 0,
     spBarPoint: 0,
     spRecover: 0,
     stun: 0,
@@ -153,6 +156,7 @@ const expectedData = {
     slot2: 0,
     slotSub: 0,
     partSubList: [2, 1, 2],
+    altBuild: [{ suitList: [0], partSubList: [0] }],
     part4: { prop: 0, icon: "" },
     part5: { prop: 0, icon: "" },
     part6: { prop: 0, icon: "" },
@@ -295,7 +299,12 @@ describe("单代理人纯整合 v4", () => {
   })
 
   it.each([
-    ["skin", "only_skin", { image: "only", name: "", desc: "" }, "skin"],
+    [
+      "skin",
+      "only_skin",
+      { image: "only", name: "", desc: "", obtain_desc: "" },
+      "skin",
+    ],
     [
       "skill",
       "only_group",

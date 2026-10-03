@@ -1,7 +1,7 @@
 import type { DetailLocale, SourceJson } from "./agent-types.ts"
 
 /**
- * Simul 公开类型（规则 nanoka-simul-reference/1）。
+ * Simul 公开类型（规则 nanoka-simul-reference/2）。
  *
  * 不承诺未来来源版本结构不变；运行时保留未知成员，合成验收位于 test/simul-integration.test.ts。
  * 已登记结构字段只改为 camelCase，保留来源用词；每个声明字段有独立中文注释。
@@ -270,6 +270,9 @@ export interface SimulRoom {
 
   /** 来源 `monster_weakness`。弱点字典：元素编码 key → 当前语言弱点文本；key 原样保留。 */
   monsterWeakness: Record<string, string>
+
+  /** 来源 `monster_resistance`。3.2 新增的抗性字典：元素编码 key → 当前语言抗性文本；与弱点分开保存。 */
+  monsterResistance: Record<string, string>
 
   /** 来源 `waves_num`。波次数原值。 */
   wavesNum: number

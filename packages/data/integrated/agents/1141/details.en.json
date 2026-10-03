@@ -2122,7 +2122,8 @@
   "skin": {
     "3111410": {
       "desc": "Under the clear moonlight, the attendant's poise is flawless. Yet with the red moon's ascent, the feral nature hidden beneath this suit emerges with a composure and grace all its own.",
-      "name": "Lycaon: Moonlight Prowl"
+      "name": "Lycaon: Moonlight Prowl",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

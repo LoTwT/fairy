@@ -52,6 +52,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "201": "火属性",
                 "202": "冰属性"
@@ -121,6 +122,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "203": "电属性",
                 "204": "风属性"
@@ -194,6 +196,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "205": "以太"
               },

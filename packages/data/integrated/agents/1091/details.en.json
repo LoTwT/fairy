@@ -1649,16 +1649,19 @@
   "skin": {
     "3110910": {
       "desc": "A blade that fells the Hollows, a lighthouse that pierces the fog. People hope for a fighter who hones the world and a helmsman who steers the course; for flags that never fall and honor that lives on. Yet power is finite. Only training remains constant.",
-      "name": "Hoshimi Miyabi: Frostgleam Dew"
+      "name": "Hoshimi Miyabi: Frostgleam Dew",
+      "obtainDesc": ""
     },
     "3110911": {
       "desc": "As blooms first grace the banquet hall and frost dusts the silver courtyard, the young lady would retreat to a quiet corner whenever guests gathered — eyes downcast, book in hand, softly reciting verses from days long past.\nGuests would shower them with praise: the Hoshimi Family still upheld tradition, dignified and cultured as ever.\nOnly Souichirou stood nearby, his eye twitching slightly — he knew better than anyone that his daughter probably didn't grasp half the poem's true meaning.",
-      "name": "Hoshimi Miyabi: Dignified Blossom"
+      "name": "Hoshimi Miyabi: Dignified Blossom",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {
     "desc": "The <color=#98EFF0>Frost Attribute</color> calculates damage and buff effects based on the <color=#98EFF0>Ice</color> attribute. When dealing <color=#98EFF0>Frost DMG</color>, it accumulates <color=#98EFF0>Frost Anomaly Buildup</color> on enemies, which triggers the <color=#98EFF0>Freeze</color> effect and applies the <color=#98EFF0>Frostbite</color> status.\nThe <color=#98EFF0>Freeze</color> effect renders the target unable to act for a duration.\nThe <color=#98EFF0>Shatter</color> effect activates when the <color=#98EFF0>Freeze</color> effect ends, interrupting the enemy's actions and inflicting <color=#98EFF0>Frost DMG</color>.\nThe <color=#98EFF0>Frostbite</color> effect increases the CRIT DMG received by the target for a limited time.",
     "icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconFrost.png",
+    "id": 202,
     "name": "Frost",
     "title": "Frost"
   },

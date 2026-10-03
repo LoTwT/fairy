@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A retired drill instructor on the training field, exasperatedly barking at the new recruits.",
+  "cardSkillDesc": "In combat, the Airspace Patrol Shieldguards respond to teammates' commands to perform follow-up attacks.",
+  "desc": "Guards of the Roscaelifer Airspace Patrol Department, clad in standard-issue gear crafted by the Flint family, tasked with maintaining the city's daily order.\n\nThe patrol units of the Airspace Patrol Department are renowned for their ironclad discipline and efficient operations.\nMembers of the Airspace Patrol come from all walks of life, yet officers at the rank of lieutenant and above are predominantly drawn from a storied noble lineage — the de L'Azur family.\nThe family holds no hereditary claim to military rank; their standing today is owed largely to a longstanding tradition of grooming their children in tactics from an early age. Most of the younger generation see enlisting in the patrol as a natural rite of passage, and to be born a de L'Azur means one must stand as an irreproachable example among their ranks. \"You call that fighting? You think those flashy moves are gonna cut it against Lady Sigrid? Go hit the training grounds and come back when you're actually ready.\"",
+  "groupDesc": "Special",
+  "id": 10043,
+  "locale": "en",
+  "name": "Airspace Patrol Shieldguard"
+}

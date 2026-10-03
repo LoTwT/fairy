@@ -94,7 +94,7 @@
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "Physical DMG Bonus"
     }
   },
   "hitType": {
@@ -1639,7 +1639,8 @@
   "skin": {
     "3114810": {
       "desc": "A sweet voice comes from the receiver, and when you lean in to listen, it softens into a gentle whisper, announcing that the verdict has arrived... just kidding, it's just a standard satisfaction survey.",
-      "name": "Dialyn: Ringing Judgment"
+      "name": "Dialyn: Ringing Judgment",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

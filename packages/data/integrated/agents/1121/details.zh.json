@@ -1362,12 +1362,13 @@
   "skin": {
     "3111210": {
       "desc": "卸下震慑外敌的姿态，兽王也会为毛发护理和账单核算犯难。",
-      "name": "本·兽王毛茸茸"
+      "name": "本·兽王毛茸茸",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
   "strategy": [
-    "05",
+    "04",
     "<IconMap:Icon_GeneralBuff_Fire>火属性，防护辅助",
     "为全队角色提供护盾防御反击"
   ],

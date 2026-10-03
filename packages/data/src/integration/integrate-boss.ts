@@ -58,7 +58,7 @@ export interface IntegratedBoss {
 }
 
 /**
- * 按规则 nanoka-boss-reference/1 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-boss-reference/2 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 BossIntegrationError，不返回部分整合结果。
  */
 export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
@@ -504,7 +504,7 @@ function validateLayerRoom(
   return record
 }
 
-/** 单个房间条目的校验与拼写转换；`monster_list`、`monster_weakness` 是字典结构另行校验。 */
+/** 单个房间条目的校验与拼写转换；`monster_list`、`monster_weakness`、`monster_resistance` 是字典结构另行校验。 */
 function validateRoomEntry(
   value: SourceJson,
   location: SourceLocation,
@@ -527,6 +527,14 @@ function validateRoomEntry(
         record,
         "monsterWeakness",
         validateMonsterWeakness(value[key], at(location, key)),
+      )
+      continue
+    }
+    if (key === "monster_resistance") {
+      put(
+        record,
+        "monsterResistance",
+        validateMonsterResistance(value[key], at(location, key)),
       )
       continue
     }
@@ -621,6 +629,21 @@ function validateMonsterWeakness(
   for (const key of Object.keys(value).toSorted()) {
     if (typeof value[key] !== "string")
       failBoss(at(location, key), "弱点文本必须为 string")
+    put(record, key, value[key])
+  }
+  return record
+}
+
+/** 来源 `monster_resistance` 抗性字典的校验；元素编码 key 原样保留，与弱点结构相同。 */
+function validateMonsterResistance(
+  value: SourceJson,
+  location: SourceLocation,
+): JsonObject {
+  if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
+  const record: JsonObject = {}
+  for (const key of Object.keys(value).toSorted()) {
+    if (typeof value[key] !== "string")
+      failBoss(at(location, key), "抗性文本必须为 string")
     put(record, key, value[key])
   }
   return record

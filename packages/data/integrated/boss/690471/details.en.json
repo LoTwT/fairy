@@ -1,0 +1,298 @@
+{
+  "id": 690471,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 690472,
+      "zone": {
+        "69047201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014204": {
+              "desc": "· Each time you successfully parry an attack from Girtablullu's summoned minions and trigger <color=#FFAF2C>Active Conversion</color>, you gain <color=#FFAF2C>500 Performance Points</color>; successfully triggering <Term:2000004></Term> against Girtablullu's attacks grants <color=#FFAF2C>1000 Performance Points</color>, up to 3 times; if you successfully <color=#FFAF2C>break the Corruptive Barrier within 25s</color> of Girtablullu <color=#FFAF2C>first activating</color> <Term:2000001></Term>, you gain <color=#FFAF2C>1500 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69014602": {
+              "desc": "",
+              "title": ""
+            },
+            "69014711": {
+              "desc": "· When an Agent's attack hits a Boss, the Boss gains 1 point of Dissonance. The same Agent can apply at most 1 point of Dissonance every 1s.\n· When a Boss accumulates 10 points of Dissonance, all Dissonance points are immediately removed and the Boss enters the Dissonant state. While in the Dissonant state, enemies take <color=#2BAD00>40% bonus Attribute Anomaly DMG</color> and <color=#2BAD00>75% bonus Sharp DMG</color> for 10s. Re-entering the Dissonant state resets the duration.\n· When an Agent successfully inflicts an Attribute Anomaly on a Boss, all Agents on the squad gain the Transmutation effect: <color=#2BAD00>DMG dealt increases by 15%</color> and Anomaly Proficiency <color=#2BAD00>increases by 20 points</color>. The Transmutation effect lasts 10s, and repeated triggers reset the duration.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690472011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Girtablu_HC.png",
+              "monsterList": {
+                "31662": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Girtablu_HC.png",
+                  "name": "Integrated - Girtablullu",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 33958388.97,
+                    "stun": 18933.95
+                  }
+                }
+              },
+              "monsterResistance": {},
+              "monsterWeakness": {},
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Integrated - Girtablullu",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 15%</color>, and their Anomaly Proficiency <color=#2BAD00>increases by 60</color>.\n· When an Agent triggers <color=#FFFFFF>Abloom</color> or <color=#FFFFFF>Disorder</color> on an enemy, Attribute Anomaly DMG and Disorder DMG dealt by the whole squad <color=#2BAD00>increase by 25%</color>, and their Buildup Rate <color=#2BAD00>increases by 15%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Frigidity"
+            },
+            "69014702": {
+              "desc": "· Daze dealt to enemies by Agents <color=#2BAD00>increases by 20%</color>.\n· Agents with the <color=#FFFFFF>Attack</color> specialty have their ATK <color=#2BAD00>increased by 20%</color>. After using <color=#FFFFFF>Ultimate</color>, their CRIT DMG <color=#2BAD00>increases by 50%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Defense Crusher"
+            },
+            "69014703": {
+              "desc": "· Agent DEF <color=#2BAD00>increases by 15%</color>, and their Sharp DMG <color=#2BAD00>increases by 15%</color>.\n· For Agents with the <color=#FFFFFF>Stun</color> specialty, Daze dealt by their <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 20%</color>. After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, <color=#2EB6FF>Electric DMG</color> and <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increase by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Knife Edge"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690471,
+      "zone": {
+        "69047101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69013601": {
+              "desc": "· After Scorched Horizon activates Gale Scorcher, they gain 5 stacks of <color=#FFFFFF>Into Flames</color>. Each stack of <color=#FFFFFF>Into Flames</color> <color=#FFAF2C>increases DMG dealt by 10%</color> and <color=#FFAF2C>reduces CRIT DMG taken by 25%</color>. With <color=#FFFFFF>Into Flames</color> stacks, every time Scorched Horizon is inflicted with an <color=#FFAF2C>Anomaly</color>, one stack of <color=#FFFFFF>Into Flames</color> is lost, and subsequent Abloom DMG taken <color=#FFAF2C>increases by 10%</color> for 15s (max 3 stacks). Repeated triggers reset the duration.",
+              "title": ""
+            },
+            "69013602": {
+              "desc": "· When Scorched Horizon is in <color=#FFFFFF>Gale Scorcher</color> state, Impairing them grants <color=#FFAF2C>1,250 Performance Points</color>. <color=#FFAF2C>Striking down Scorched Horizon when they're attacking in mid-air</color> grants <color=#FFAF2C>1,500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> against Scorched Horizon's <Term:2000003>Control Skill</Term> grants <color=#FFAF2C>2,000 Performance Points</color>. Max 5,000 Performance Points.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690471011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Mutant.png",
+              "monsterList": {
+                "31431": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 1
+                  },
+                  "id": 40005,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Mutant.png",
+                  "name": "Phaethon of the Scorched Horizon",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 23723285.715,
+                    "stun": 19540.25
+                  }
+                }
+              },
+              "monsterResistance": {
+                "200": "Physical"
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Phaethon of the Scorched Horizon",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 15%</color>, and their Anomaly Proficiency <color=#2BAD00>increases by 60</color>.\n· When an Agent triggers <color=#FFFFFF>Abloom</color> or <color=#FFFFFF>Disorder</color> on an enemy, Attribute Anomaly DMG and Disorder DMG dealt by the whole squad <color=#2BAD00>increase by 25%</color>, and their Buildup Rate <color=#2BAD00>increases by 15%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Frigidity"
+            },
+            "69014702": {
+              "desc": "· Daze dealt to enemies by Agents <color=#2BAD00>increases by 20%</color>.\n· Agents with the <color=#FFFFFF>Attack</color> specialty have their ATK <color=#2BAD00>increased by 20%</color>. After using <color=#FFFFFF>Ultimate</color>, their CRIT DMG <color=#2BAD00>increases by 50%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Defense Crusher"
+            },
+            "69014703": {
+              "desc": "· Agent DEF <color=#2BAD00>increases by 15%</color>, and their Sharp DMG <color=#2BAD00>increases by 15%</color>.\n· For Agents with the <color=#FFFFFF>Stun</color> specialty, Daze dealt by their <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 20%</color>. After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, <color=#2EB6FF>Electric DMG</color> and <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increase by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Knife Edge"
+            }
+          },
+          "stageNum": 1
+        },
+        "69047102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014410": {
+              "desc": "· After Infernal Revenant enters the Infernal state, the Attribute Anomaly DMG it takes is reduced by 30%; every time <Term:2000004></Term> is triggered, the Boss gains 1 stack of <color=#FFFFFF>Overheat</color>; triggering <color=#FFAF2C>Defensive Assist</color> or <color=#FFAF2C>Perfect Dodge</color> 2 times in total applies 1 stack of <color=#FFFFFF>Overheat</color> on the Boss, and each stack of <color=#FFFFFF>Overheat</color> increases CRIT DMG of the whole squad by <color=#FFAF2C>25%</color>, stacking up to 3 times and lasting 20s. Triggering <color=#FFAF2C>Defensive Assist</color> or retriggering <color=#FFFFFF>Overheat</color> resets the duration.",
+              "title": ""
+            },
+            "69014411": {
+              "desc": "· Successfully triggering <color=#FFAF2C>Shutdown</color> grants <color=#FFAF2C>2000 Performance Points</color>; <color=#FFAF2C>each flint shattered</color> grants <color=#FFAF2C>1000 Performance Points, up to a maximum of 5000 Performance Points</color>.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690471021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_SymbioticEtherealSinner.png",
+              "monsterList": {
+                "31635": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 1
+                  },
+                  "id": 30052,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_SymbioticEtherealSinner.png",
+                  "name": "Infernal Revenant",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 25,
+                    "defence": 952.8000000000001,
+                    "hp": 19464645.285,
+                    "stun": 20430.9
+                  }
+                }
+              },
+              "monsterResistance": {
+                "200": "Physical"
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Infernal Revenant",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 15%</color>, and their Anomaly Proficiency <color=#2BAD00>increases by 60</color>.\n· When an Agent triggers <color=#FFFFFF>Abloom</color> or <color=#FFFFFF>Disorder</color> on an enemy, Attribute Anomaly DMG and Disorder DMG dealt by the whole squad <color=#2BAD00>increase by 25%</color>, and their Buildup Rate <color=#2BAD00>increases by 15%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Frigidity"
+            },
+            "69014702": {
+              "desc": "· Daze dealt to enemies by Agents <color=#2BAD00>increases by 20%</color>.\n· Agents with the <color=#FFFFFF>Attack</color> specialty have their ATK <color=#2BAD00>increased by 20%</color>. After using <color=#FFFFFF>Ultimate</color>, their CRIT DMG <color=#2BAD00>increases by 50%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Defense Crusher"
+            },
+            "69014703": {
+              "desc": "· Agent DEF <color=#2BAD00>increases by 15%</color>, and their Sharp DMG <color=#2BAD00>increases by 15%</color>.\n· For Agents with the <color=#FFFFFF>Stun</color> specialty, Daze dealt by their <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 20%</color>. After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, <color=#2EB6FF>Electric DMG</color> and <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increase by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Knife Edge"
+            }
+          },
+          "stageNum": 2
+        },
+        "69047103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013005": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Armorer><color=#FFAF2C>Armorer</color> specialty.",
+              "title": ""
+            },
+            "69014506": {
+              "desc": "· Attribute Anomaly DMG taken by Kusarikku is <color=#FFAF2C>reduced by 40%</color>.\n· When an Agent successfully uses a Defensive Assist against Kusarikku's <Term:2000005></Term>, applies 1 stack of Exposed to Kusarikku. When Kusarikku becomes Stunned, applies 2 stacks of Exposed. Each stack of Exposed increases the <color=#FFAF2C>Laceration DMG Kusarikku receives by 10%</color>. Exposed can stack up to 4 times and lasts <color=#FFAF2C>30</color>s. Repeated triggers reset the duration.",
+              "title": ""
+            },
+            "69014507": {
+              "desc": "· After Kusarikku activates Corruptive Barrier, use <color=#FFFFFF>Defensive Assist</color> to counter Kusarikku's <Term:2000005></Term> and leave it Impaired to gain <color=#FFAF2C>1000 Performance Points</color>; successfully countering a <Term:2000005></Term> with <color=#FFFFFF>Defensive Assist</color> grants <color=#FFAF2C>700 Performance Points</color>; executing a <color=#FFAF2C>Shutdown</color> on Kusarikku's <Term:2000003></Term> grants <color=#FFAF2C>2000 Performance Points</color>. A maximum of 5000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690471031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Larval.png",
+              "monsterList": {
+                "31711": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40010,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Larval.png",
+                  "name": "Kusarikku",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22124404.935,
+                    "stun": 18933.95
+                  }
+                }
+              },
+              "monsterResistance": {
+                "202": "Ice"
+              },
+              "monsterWeakness": {
+                "201": "Fire",
+                "203": "Electric"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Kusarikku",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· Agent <color=#98EFF0>Ice DMG</color> <color=#2BAD00>increases by 15%</color>, and their Anomaly Proficiency <color=#2BAD00>increases by 60</color>.\n· When an Agent triggers <color=#FFFFFF>Abloom</color> or <color=#FFFFFF>Disorder</color> on an enemy, Attribute Anomaly DMG and Disorder DMG dealt by the whole squad <color=#2BAD00>increase by 25%</color>, and their Buildup Rate <color=#2BAD00>increases by 15%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Frigidity"
+            },
+            "69014702": {
+              "desc": "· Daze dealt to enemies by Agents <color=#2BAD00>increases by 20%</color>.\n· Agents with the <color=#FFFFFF>Attack</color> specialty have their ATK <color=#2BAD00>increased by 20%</color>. After using <color=#FFFFFF>Ultimate</color>, their CRIT DMG <color=#2BAD00>increases by 50%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Defense Crusher"
+            },
+            "69014703": {
+              "desc": "· Agent DEF <color=#2BAD00>increases by 15%</color>, and their Sharp DMG <color=#2BAD00>increases by 15%</color>.\n· For Agents with the <color=#FFFFFF>Stun</color> specialty, Daze dealt by their <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 20%</color>. After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, <color=#2EB6FF>Electric DMG</color> and <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increase by 30%</color> for 15s. Repeated triggers reset the duration.",
+              "title": "Knife Edge"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

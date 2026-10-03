@@ -94,7 +94,7 @@
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1553,11 +1553,13 @@
   "skin": {
     "3114010": {
       "desc": "The young woman's perfect symmetry is only ever slightly compromised when she wears the school crest — such is the elegant and noble Thymefield spirit.",
-      "name": "Alice: Celestian Etiquette"
+      "name": "Alice: Celestian Etiquette",
+      "obtainDesc": ""
     },
     "3114011": {
       "desc": "Though it wasn't completely symmetrical, she did not mind this gift from a dear friend.\nThe girl pushed open the locked door and walked along the pink beach after the sudden downpour, the cool waves brushing over her ankles. There were no unknowns left to frighten her.",
-      "name": "Alice: Sea of Thyme"
+      "name": "Alice: Sea of Thyme",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

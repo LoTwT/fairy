@@ -702,7 +702,7 @@ describe("update report diff engine", () => {
       sourceVersion: "synthetic-1",
       inputs: [{ resource: "manifest.json", sha256: "c".repeat(64) }],
       entities: new Map([
-        ["agents", entity("agents", "nanoka-agent-reference/4")],
+        ["agents", entity("agents", "nanoka-agent-reference/5")],
         ["widgets", entity("widgets", "widget-reference/1")],
       ]),
     }
@@ -711,7 +711,7 @@ describe("update report diff engine", () => {
       sourceVersion: "synthetic-1",
       inputs: [{ resource: "manifest.json", sha256: "c".repeat(64) }],
       entities: new Map([
-        ["agents", entity("agents", "nanoka-agent-reference/4")],
+        ["agents", entity("agents", "nanoka-agent-reference/5")],
       ]),
     }
     const report = await compareSnapshotUpdate({
@@ -817,7 +817,7 @@ describe("current dataset update report", () => {
           {
             name: "agents",
             before: null,
-            after: "nanoka-agent-reference/4",
+            after: "nanoka-agent-reference/5",
             changed: false,
           },
           {
@@ -829,7 +829,7 @@ describe("current dataset update report", () => {
           {
             name: "boss",
             before: null,
-            after: "nanoka-boss-reference/1",
+            after: "nanoka-boss-reference/2",
             changed: false,
           },
           {
@@ -847,13 +847,13 @@ describe("current dataset update report", () => {
           {
             name: "shiyu",
             before: null,
-            after: "nanoka-shiyu-reference/1",
+            after: "nanoka-shiyu-reference/2",
             changed: false,
           },
           {
             name: "simul",
             before: null,
-            after: "nanoka-simul-reference/1",
+            after: "nanoka-simul-reference/2",
             changed: false,
           },
           {
@@ -982,8 +982,8 @@ describe("current dataset update report", () => {
       categories: [
         {
           name: "agents",
-          before: "nanoka-agent-reference/4",
-          after: "nanoka-agent-reference/4",
+          before: "nanoka-agent-reference/5",
+          after: "nanoka-agent-reference/5",
           changed: false,
         },
         {
@@ -1268,8 +1268,8 @@ describe("current dataset update report", () => {
       categories: [
         {
           name: "agents",
-          before: "nanoka-agent-reference/4",
-          after: "nanoka-agent-reference/4",
+          before: "nanoka-agent-reference/5",
+          after: "nanoka-agent-reference/5",
           changed: false,
         },
         {
@@ -2082,7 +2082,7 @@ describe("current dataset update report", () => {
         indexSha256: digest(
           await fs.readFile(join(input.targetDirectory, "index.json")),
         ),
-        rulesVersion: "nanoka-agent-reference/4",
+        rulesVersion: "nanoka-agent-reference/5",
         policy: state.current.policy,
       },
     })

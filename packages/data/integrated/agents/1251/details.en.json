@@ -1582,7 +1582,8 @@
   "skin": {
     "3112510": {
       "desc": "Keep your teapot close and drink plenty of hot water — that's ancient wisdom passed down from the old civilization. But why would an intelligent construct drink tea? It must be for health purposes... right?",
-      "name": "Qingyi: Clarity, Peace, and Joy"
+      "name": "Qingyi: Clarity, Peace, and Joy",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

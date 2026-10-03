@@ -59,6 +59,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric",
             "205": "Ether"
@@ -81,11 +82,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
               "name": "Alpeca",
               "stats": {
-                "attack": 1249.4545454545455,
+                "attack": 1405.6363636363637,
                 "attribute_infliction": 0,
-                "defence": 532.8,
-                "hp": 8421.6,
-                "stun": 0
+                "defence": 426.24,
+                "hp": 118218.20999999999,
+                "stun": 1068
               }
             },
             "11192": {
@@ -169,6 +170,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -278,6 +280,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -367,6 +370,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -408,11 +412,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
               "name": "Alpeca",
               "stats": {
-                "attack": 1328,
+                "attack": 1494,
                 "attribute_infliction": 0,
-                "defence": 620.1,
-                "hp": 12533.599999999999,
-                "stun": 0
+                "defence": 496.08,
+                "hp": 175940.40999999997,
+                "stun": 1152
               }
             },
             "11123": {
@@ -476,6 +480,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -566,6 +571,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -695,6 +701,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -784,6 +791,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -913,6 +921,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "Ether"
           },
@@ -934,11 +943,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_StrikeJaeger.png",
               "name": "Strike Jaeger",
               "stats": {
-                "attack": 1114.090909090909,
+                "attack": 1935,
                 "attribute_infliction": 0,
-                "defence": 794,
-                "hp": 191369.43,
-                "stun": 0
+                "defence": 635.2,
+                "hp": 240423.59999999998,
+                "stun": 1236
               }
             },
             "11253": {
@@ -1022,6 +1031,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -1111,6 +1121,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -1180,6 +1191,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -1249,6 +1261,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -1319,6 +1332,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "Ether"
           },

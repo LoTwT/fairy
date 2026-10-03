@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A hesitant complaint that unexpectedly won the agreement of the patrol squad members.",
+  "cardSkillDesc": "In combat, the Airspace Patrol Vanguard responds to teammates' commands to perform follow-up attacks.",
+  "desc": "The vanguard unit of the Roscaelifer Airspace Patrol Department, equipped with standard-issue greatswords forged from Porcelloy. The blades possess excellent Ether conductivity, capable of resonating with Ether to channel energy into the cutting edge and further enhance the weapon's lethality.\n\nThe patrol units of the Airspace Patrol Department are renowned for their ironclad discipline and efficient operations.\nMembers of the Airspace Patrol come from all walks of life, yet officers at the rank of lieutenant and above are predominantly drawn from a storied noble lineage — the de L'Azur family.\nThe family holds no hereditary claim to military rank; their standing today is owed largely to a longstanding tradition of grooming their children in tactics from an early age. Most of the younger generation see enlisting in the patrol as a natural rite of passage, and to be born a de L'Azur means one must stand as an irreproachable example among their ranks. \"Don't you think this sword is... a little too heavy?\" \"Huh?! I thought I was just too weak, so I never dared say anything...\"",
+  "groupDesc": "Special",
+  "id": 10041,
+  "locale": "en",
+  "name": "Airspace Patrol Vanguard"
+}

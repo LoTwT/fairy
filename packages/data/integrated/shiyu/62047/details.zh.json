@@ -99,6 +99,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "202": "冰属性"
@@ -188,6 +189,9 @@
                 "stun": 6233.56
               }
             }
+          },
+          "monsterResistance": {
+            "201": "火属性"
           },
           "monsterWeakness": {
             "203": "电属性"
@@ -297,6 +301,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "202": "冰属性"
@@ -406,6 +411,9 @@
                 "stun": 1728
               }
             }
+          },
+          "monsterResistance": {
+            "201": "火属性"
           },
           "monsterWeakness": {
             "203": "电属性"
@@ -535,6 +543,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -645,6 +654,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "201": "火属性"
+          },
           "monsterWeakness": {
             "203": "电属性"
           },
@@ -693,6 +705,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -742,6 +755,9 @@
                 "stun": 1980.0000000000002
               }
             }
+          },
+          "monsterResistance": {
+            "201": "火属性"
           },
           "monsterWeakness": {
             "203": "电属性"
@@ -885,6 +901,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "201": "火属性"
+          },
           "monsterWeakness": {
             "200": "物理",
             "205": "以太"
@@ -1002,6 +1021,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "205": "以太"
+          },
           "monsterWeakness": {
             "201": "火属性",
             "203": "电属性"
@@ -1098,6 +1120,9 @@
                 "stun": 14588.800000000001
               }
             }
+          },
+          "monsterResistance": {
+            "203": "电属性"
           },
           "monsterWeakness": {
             "204": "风属性",

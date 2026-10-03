@@ -1777,7 +1777,8 @@
   "skin": {
     "3113810": {
       "desc": "Anby's old Silver Squad uniform, stained with memories that never truly fade.\nWhen the shadows of the past strike without warning, would you stand and face them, or stumble and flee? No matter the choice, home always awaits your return.",
-      "name": "Soldier 0 - Anby: Silver Soldier"
+      "name": "Soldier 0 - Anby: Silver Soldier",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base DEF",
+    "name2": "Base DEF"
+  },
+  "desc": "A specially modified W-Engine that's become hugely popular on Inter-Knot. Some functionality was sacrificed for the sake of its appearance, but that hasn't stopped it from becoming a massive hit.\nEven its designer never expected it to be this successful. In an interview, he explained, \"In the ever-changing Hollows, the anxiety brought on by uncertainty can easily overwhelm a person's will. For people trapped in desperate situations, even a small sign of good fortune can be enough to give them hope.\"\n\"Of course, maybe people just like cats.\" He added with a laugh at the end of the interview.",
+  "desc2": "Equip to increase Armorer Agents' combat capabilities",
+  "desc3": "Meow your way to good luck!",
+  "id": 13017,
+  "locale": "en",
+  "name": "Catty Luck",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "DEF",
+    "name2": "Percent DEF"
+  },
+  "talents": {
+    "1": {
+      "desc": "DEF increases by <color=#2BAD00>8%</color>. When using <color=#FFFFFF>EX Special Attack</color>, DEF increases by an additional <color=#2BAD00>8%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Lucky Pawpad"
+    },
+    "2": {
+      "desc": "DEF increases by <color=#2BAD00>9%</color>. When using <color=#FFFFFF>EX Special Attack</color>, DEF increases by an additional <color=#2BAD00>9%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Lucky Pawpad"
+    },
+    "3": {
+      "desc": "DEF increases by <color=#2BAD00>10%</color>. When using <color=#FFFFFF>EX Special Attack</color>, DEF increases by an additional <color=#2BAD00>10%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Lucky Pawpad"
+    },
+    "4": {
+      "desc": "DEF increases by <color=#2BAD00>11%</color>. When using <color=#FFFFFF>EX Special Attack</color>, DEF increases by an additional <color=#2BAD00>11%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Lucky Pawpad"
+    },
+    "5": {
+      "desc": "DEF increases by <color=#2BAD00>12%</color>. When using <color=#FFFFFF>EX Special Attack</color>, DEF increases by an additional <color=#2BAD00>12%</color> for 40s. Repeated triggers reset the duration.",
+      "name": "Lucky Pawpad"
+    }
+  },
+  "weaponType": {
+    "7": "Armorer"
+  }
+}

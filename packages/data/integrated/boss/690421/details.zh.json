@@ -11,7 +11,7 @@
           "goalType": 2,
           "layerBuff": {
             "69014203": {
-              "desc": "· 代理人攻击命中首领敌人时，使首领敌人获得1点【紊相值】；同一名代理人每1秒最多施加1点【紊相值】。\n· 首领敌人持有的【紊相值】达到10点时，会立即移除所有【紊相值】并使首领敌人进入【紊相】状态。【紊相】状态期间，敌人受到的<color=#2BAD00>属性异常伤害提升40%</color>，持续10秒，重复进入【紊相】状态时刷新持续时间。\n· 代理人成功对首领敌人施加属性异常状态时，全队代理人会获得【升变】效果：<color=#2BAD00>造成的伤害提升15%</color>，异常精通<color=#2BAD00>提升20点</color>；【升变】效果持续10秒，重复触发刷新持续时间。",
+              "desc": "· 代理人攻击命中首领敌人时，使首领敌人获得1点[紊相值]；同一名代理人每1秒最多施加1点[紊相值]。\n· 首领敌人持有的[紊相值]达到10点时，会立即移除所有[紊相值]并使首领敌人进入[紊相]状态。[紊相]状态期间，敌人受到的<color=#2BAD00>属性异常伤害提升40%</color>，持续10秒，重复进入[紊相]状态时刷新持续时间。\n· 代理人成功对首领敌人施加属性异常状态时，全队代理人会获得[升变]效果：<color=#2BAD00>造成的伤害提升15%</color>，异常精通<color=#2BAD00>提升20点</color>；[升变]效果持续10秒，重复触发刷新持续时间。",
               "title": ""
             },
             "69014204": {
@@ -44,6 +44,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {},
               "wavesNum": 1
             }
@@ -87,7 +88,7 @@
               "title": "69014405_Title"
             },
             "69014406": {
-              "desc": "· 成功<color=#FFAF2C>造成[部位破坏]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；每次成功<color=#FFAF2C>应对</color><Term:2000003></Term>时，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>阻止敌人的[侵蚀壁垒]充能完成并造成部位破坏</color>时，可获得<color=#FFAF2C>1500操作得分</color>，最多获得5000操作得分。",
+              "desc": "· 成功<color=#FFAF2C>造成[部位破坏]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；每次成功应对<color=#FFAF2C><Term:2000003></Term></color>时，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>阻止敌人的[侵蚀壁垒]充能完成并造成部位破坏</color>时，可获得<color=#FFAF2C>1500操作得分</color>。<Term:2000003></Term>期间，通过<color=#FFAF2C><Term:2000006></Term></color>造成<color=#FFAF2C>[完美反制]</color>时，会获得该次<color=#FFAF2C>[控制技]</color>剩余的成功应对得分。最多获得5000操作得分。",
               "title": "69014406_Title"
             }
           },
@@ -116,6 +117,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {},
               "wavesNum": 1
             }
@@ -178,6 +180,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "202": "冰属性",
                 "205": "以太"
@@ -247,6 +250,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "203": "电属性",
                 "205": "以太"

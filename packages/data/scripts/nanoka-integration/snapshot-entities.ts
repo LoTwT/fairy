@@ -40,7 +40,7 @@ export interface IntegratedSnapshotEntityContract {
   /** 上游来源实体名；决定 zzz/{version}/{entity}.json 与详情资源路径，如 character。 */
   sourceEntity: EntityName
 
-  /** 该类别当前的整合规则版本，如 nanoka-agent-reference/4。 */
+  /** 该类别当前的整合规则版本，如 nanoka-agent-reference/5。 */
   rulesVersion: string
 
   /** 成员文件身份检查；不含路径、摘要与预算检查。 */
@@ -147,7 +147,7 @@ export function verifyAgentSnapshotMemberFile(
 export const nanokaAgentsSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "agents",
   sourceEntity: "character",
-  rulesVersion: "nanoka-agent-reference/4",
+  rulesVersion: "nanoka-agent-reference/5",
   verifyMemberFile: verifyAgentSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateAgent({
@@ -393,7 +393,7 @@ export function verifyShiyuSnapshotMemberFile(
 export const nanokaShiyuSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "shiyu",
   sourceEntity: "shiyu",
-  rulesVersion: "nanoka-shiyu-reference/1",
+  rulesVersion: "nanoka-shiyu-reference/2",
   verifyMemberFile: verifyShiyuSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateShiyu({
@@ -442,7 +442,7 @@ export function verifyBossSnapshotMemberFile(
 export const nanokaBossSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "boss",
   sourceEntity: "boss",
-  rulesVersion: "nanoka-boss-reference/1",
+  rulesVersion: "nanoka-boss-reference/2",
   verifyMemberFile: verifyBossSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateBoss({
@@ -491,7 +491,7 @@ export function verifySimulSnapshotMemberFile(
 export const nanokaSimulSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "simul",
   sourceEntity: "simul",
-  rulesVersion: "nanoka-simul-reference/1",
+  rulesVersion: "nanoka-simul-reference/2",
   verifyMemberFile: verifySimulSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateSimul({

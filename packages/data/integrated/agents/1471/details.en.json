@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "HP"
+      "name": "Fire DMG Bonus"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "Fire DMG Bonus"
+      "name": "HP"
     }
   },
   "hitType": {
@@ -2182,7 +2182,8 @@
   "skin": {
     "3114710": {
       "desc": "He carries a righteous, unshakable aura — every bit the master he is. Don't judge him by his silence; a stone heart makes no sound, and compassion doesn't speak aloud either.",
-      "name": "Banyue: Blazestone Heart"
+      "name": "Banyue: Blazestone Heart",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

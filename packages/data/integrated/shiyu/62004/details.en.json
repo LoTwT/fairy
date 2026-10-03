@@ -103,6 +103,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "201": "Fire"
           },
@@ -192,6 +193,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -304,6 +306,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -394,6 +397,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "Ether"
           },
@@ -506,6 +510,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -596,6 +601,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -640,11 +646,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
               "name": "Alpeca",
               "stats": {
-                "attack": 1375.2727272727273,
+                "attack": 1547.1818181818182,
                 "attribute_infliction": 0,
-                "defence": 675.9,
-                "hp": 17215.12,
-                "stun": 0
+                "defence": 540.72,
+                "hp": 241657.247,
+                "stun": 1200
               }
             },
             "11114": {
@@ -748,6 +754,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -858,6 +865,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "Ether"
           },
@@ -970,6 +978,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -1080,6 +1089,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -1124,11 +1134,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
               "name": "Alpeca",
               "stats": {
-                "attack": 1485.8181818181818,
+                "attack": 1671.5454545454545,
                 "attribute_infliction": 0,
-                "defence": 714.6,
-                "hp": 21924.24,
-                "stun": 0
+                "defence": 571.6800000000001,
+                "hp": 307761.51900000003,
+                "stun": 1320
               }
             },
             "11156": {
@@ -1172,6 +1182,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -1242,6 +1253,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "Ether"
           },
@@ -1334,6 +1346,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -1384,6 +1397,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },

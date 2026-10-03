@@ -82,15 +82,15 @@
   "fairyRecommend": {
     "part4": {
       "format": "{0:0.#%}",
-      "name": "能量自动回复"
+      "name": "暴击率"
     },
     "part5": {
       "format": "{0:0.#%}",
-      "name": "暴击率"
+      "name": "能量自动回复"
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "暴击伤害"
+      "name": "攻击力"
     },
     "partSub": {
       "format": "{0:0.#%}",
@@ -1392,7 +1392,8 @@
   "skin": {
     "3115210": {
       "desc": "世上的人都是毒蛇和老鼠！至于谁是蛇、谁是鼠…\n希希芙大人坦言：比我强就是蛇，比我弱就是鼠！",
-      "name": "希希芙·蛇鼠游戏"
+      "name": "希希芙·蛇鼠游戏",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
