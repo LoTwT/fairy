@@ -399,8 +399,8 @@ assert.deepEqual(resolvedNicole.resolutionContext, { agentEntityId: "1031", mind
 assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
 const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
 assert.equal(actionManifest.members.length, api.agentNames.length)
-assert.equal(actionManifest.coverage.damage, 1080)
-assert.equal(actionManifest.coverage.unavailable, 11)
+assert.equal(actionManifest.coverage.damage, 1084)
+assert.equal(actionManifest.coverage.unavailable, 7)
 assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
 const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
 assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)
@@ -423,8 +423,9 @@ const benCalculation = calculateStaticActionDamage({ data: calculationData, acto
 assert.equal(benCalculation.ok, true, JSON.stringify(benCalculation))
 assert.ok(Math.abs(benCalculation.value.panels[0].stats.attack.value - 1232.31468) < 1e-8)
 function value(result) { assert.equal(result.ok, true, JSON.stringify(result)); return result.value }
-const aggregateData = await api.loadStaticCalculationData({ agents: ["Burnice", "Grace", "Lighter", "Orphie & Magus"], wEngines: [] })
+const aggregateData = await api.loadStaticCalculationData({ agents: ["Burnice", "Grace", "Lighter", "Orphie & Magus", "Lucy"], wEngines: [] })
 for (const [id, suffix, element, expected, mindscapeRank, optionId, selectedExpected] of [
+  ["1151", "0011", "fire", 1674, 0, null, null],
   ["1171", "0001", "fire", 1521.9, 0, null, null],
   ["1181", "0007", "physical", 445.5, 0, null, null],
   ["1161", "0021", "fire", 7839, 1, "agents:lighter:mindscape:1:blk-legacy:eff-ms4axp99-6j88yd", 9798.75],
