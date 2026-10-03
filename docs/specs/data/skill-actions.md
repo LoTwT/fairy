@@ -153,6 +153,50 @@ PR4 跳过此项实现，仅记录为已知限制。当前[卢西娅动作定义
 整条倍率、`repeat: 1` 与 `attackData` 均不能作为已确认拆分的依据。
 本次不变更动作状态、生成制品、manifest 或覆盖统计，也不把上述待确认事项登记为已支持的计算契约。
 
+### 已知限制：月城柳极性紊乱
+
+PR5 按 ZZZ-HP 已有实现范围处理；固定上游未实现完整极性紊乱，本次跳过动作适配，仅记录限制，
+不继续独立补证或自行补公式。当前[月城柳动作定义](../../../packages/data/definitions/skills/agents/1221.json)中，
+以下两条仍为 `unavailable`，原因均为 `special-mechanic` 与 `unsupported-expression`：
+
+- `action:agent:1221:action:0018`：终结技：雷影天华的额外附加伤害倍率，等级类别为 `chain`。
+- `action:agent:1221:action:0024`：强化特殊技：月华流转的额外附加伤害倍率，等级类别为 `special`。
+
+普通终结技 `action:agent:1221:action:0017`、强化特殊技突刺 `action:agent:1221:action:0022` 与
+下落攻击 `action:agent:1221:action:0023` 仍只计算已接入的攻击力倍率，不自动追加极性紊乱。
+两条附加行只描述柳异常精通对应的系数，不能当普通攻击力倍率、完整极性紊乱或零贡献使用。
+
+证据来自 Nanoka 3.1 的 `agents/1221/details.zh.json` 与 `details.en.json`，两种语言的 Pointer 一致：
+`/skill/chain/description/1/desc` 与 `/skill/special/description/1/desc` 分别说明终结落雷和强化特殊技下落
+命中已有属性异常的敌人时，造成原紊乱的 15% 加柳异常精通附加伤害，且不清除原异常。
+附加倍率行分别为 `/skill/chain/description/3/param/2` 的 `{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%`，
+以及 `/skill/special/description/3/param/5` 的 `{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%`，均没有技能参数 ID。
+中文文件 SHA-256 为 `fcdad70a359337a79ffeb884e5b17818e03a65f92796557f86511a339c4b4a09`，
+英文为 `8d76612586adf147ce31024e5ecf85e9599fe746392d37ea03710996e617c917`。
+
+固定 ZZZ-HP 技能来源 `0df40c5b` 与增益来源 `fac62407` 均未实现这份精通附加结算。
+资源 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json` 的
+`/agents/28/mindscapeBuffs/0/effectBlocks/2/note` 虽写明 15%、3200.0% 异常精通和不清除异常，
+但[导入器](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp-backend/scripts/import-nanoka-skills.mjs#L159)
+跳过没有技能参数 ID 的倍率行；[伤害公式](https://github.com/Nie7bai/ZZZ-HP/blob/fac62407f3d3995f8200a66be0038f292b1455fa/zzz-hp/src/utils/damageCalc.ts#L828)
+仍走通用紊乱，没有独立的柳精通附加项。默认路径先对基础倍率应用修正，再加时间补偿，
+不能据此认定完整原紊乱的 15% 已正确结算。描述文字和通用倍率配置不能作为完整伤害的独立期望值。
+补查上游提交 [`0fcd8a1`](https://github.com/Nie7bai/ZZZ-HP/blob/0fcd8a1fb70cc9dbe5c3423f4015f85ca8faa5ba/zzz-hp/src/utils/damageCalc.ts#L832)
+仍未补齐该附加项；此补查不升级项目固定来源。
+
+另保留影画二的来源字段冲突：同一资源的 `/agents/28/mindscapeBuffs/2/effectBlocks/0/effects/1`
+（`eff-ms4qkjzo-r424yz`）将每次额外突刺的 15 个百分点登记为 `turbulenceBaseMultFactor`（乱流）。
+Nanoka `/talent/2/desc` 明确指向强化特殊技的极性紊乱：比例变为 20%，额外突刺每次增加 15 个百分点，最多两次；
+`/talent/6/desc` 将该次数上限提升为四次。此冲突仅登记，既有增益映射与覆盖状态本次不修正，
+不能把已有倍率增益条目的接入视为完整极性紊乱已受支持。
+
+后续重启须先有覆盖完整结算的可追溯上游实现和独立预期值，或另行决定补充机制资料与受控实测。
+届时须确认 CAL 格式单位与两类技能最终等级、原异常来源与快照、柳精通读取时点、两部分的目标与属性
+绑定、适用乘区、剩余时间、取整及影画层数。若开放，目标是一次返回原紊乱比例部分与精通附加部分，
+普通直伤仍由主动作独立计算；须明确动作与 effects 的贡献归属，避免重复计入，不能用任意最终伤害数字
+绕过来源绑定，也不自动模拟异常清除或战斗流程。上述是重启条件，尚不是公共计算契约。
+本次不改变动作状态、增益规则、生成制品、manifest 或覆盖统计。
+
 ## 潜能等级与条件身份
 
 `resolveAgentAction` 接受可选的 `potentialLevel`（整数 0—6；省略按未开启的 0 处理）。

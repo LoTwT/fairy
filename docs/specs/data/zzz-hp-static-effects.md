@@ -11,6 +11,9 @@
 卢西娅“合唱（2 条）”已接入的是破暗贯穿力增益；合唱末段的生命值附加伤害暂不实现，
 当前限制、固定来源证据与后续补证条件统一见[技能动作规范](skill-actions.md#已知限制卢西娅合唱末段生命附加伤害)。
 
+月城柳已有倍率增益不表示完整极性紊乱已接入；两条附加动作仍不可用，精通附加结算缺口与
+影画二来源字段冲突统一见[技能动作规范](skill-actions.md#已知限制月城柳极性紊乱)，本次不修正既有增益映射。
+
 5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`，修订 7 新增 2 个具名差异 `potential-partial-option-migration` 与 `potential-branch-scope` 并扩展前两者；修订 8 新增 `core-skill-level-parameters` 与 `core-enhancement-independent-increment`（见下）。
 
 固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,232 个位置：当前 1,209 条 converted 与本轮四条 corrected 的核心 7 继续逐条比对，其余 19 个潜能位置按具名修正或迁移验证；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
