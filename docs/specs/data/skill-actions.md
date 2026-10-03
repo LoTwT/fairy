@@ -113,7 +113,8 @@ JSON 子路径为 `@randomplay/data/definitions/skills/agents/{id}.json` 与
 两者分别对应固定 ZZZ-HP 的 `/skillSubcategories/42`、`/skillSubcategories/51`；
 Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` 提供对应语义。
 独立命中请求与逐次附加伤害仍拒绝；安东电钻/打桩、派派下砸等
-部分目标的倍率缺口不由该约定解决，也不将其增益应用到整个合计。露西的小猪独立攻击仍待补。
+部分目标的倍率缺口不由该约定解决，也不将其增益应用到整个合计。
+露西亲卫队小猪的四条攻击另行按后文的具名面板代算约定开放。
 
 潜能分支动作的伤害倍率与元素按 Nanoka 3.1 冻结行记录：柏妮思的强化特殊技：灼热抛接法
 整条按火伤（来源描述同时提及物理与火，按 ZZZ-HP 单属性约定不拆分）；丽娜的晨间清扫与
@@ -122,6 +123,66 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 浅羽悠真残心·散华按其说明“视为终结技伤害”归入 ultimate；零号·安比逐雷按通用 dodge 分类
 纳入，不是 dash、dodge-counter 或 follow-up。维琳娜的染色属性动作仍不可用，原因具体化为
 缺少可选择的染色元素集合证据。
+
+### 具名约定：露西亲卫队小猪面板代算
+
+`action:agent:1151:action:0011`—`0014`（亲卫队小猪：抄家伙！的棒球棍、拳套、弹弓，
+以及亲卫队小猪：回旋挥击！）采用具名的 **ZZZ-HP 露西面板代算约定**，开放为 `basic` 分类、
+火属性、`regular`、`aggregate`、`repeat: 1` 的整行倍率：每条倍率只计入一次，不追加攻击标签或
+独立目标，不乘三只小猪，不随机选招，也不自动累计触发。
+
+倍率保留 Nanoka 3.1 参数行：棒球棍 `1151023`、拳套 `1151024`、弹弓 `1151025`
+（`/skill/basic/description/4/param/0`—`2`，共用描述 `/skill/basic/description/1/desc`）与
+回旋挥击 `1151026`（`/skill/basic/description/5/param/0`，描述 `/skill/basic/description/2/desc`）。
+1/12/16 级倍率分别为 92.5%/186%/220%、127.5%/255.1%/301.5%、175%/351%/415% 与
+250%/500.8%/592%。三种武器与回旋挥击各自独立选择，不把相邻行相加成三段。
+
+固定 ZZZ-HP 技能来源 `0df40c5b` 的资源 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json`
+（sha256 `34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c`）中
+`/skills/489`—`492` 四行均登记 `agentId: "lucy"`、`element: "火"`、`damageType: "direct"`、
+`skillTypes: ["basic"]`，`buffAnchorId`、`ownerGroupId` 为 `null`，`settlementMult: 0`、
+`baseMultFactor: 100`。动作、来源行与 12 级 `baseMult` 逐一对应如下：
+
+| 动作                                     | 来源行        | 12 级 `baseMult` |
+| ---------------------------------------- | ------------- | ---------------- |
+| `action:agent:1151:action:0011` 棒球棍   | `/skills/492` | 186              |
+| `action:agent:1151:action:0012` 拳套     | `/skills/491` | 255.1            |
+| `action:agent:1151:action:0013` 弹弓     | `/skills/490` | 351              |
+| `action:agent:1151:action:0014` 回旋挥击 | `/skills/489` | 500.8            |
+
+该来源的实际计算路径中，[伤害页](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/composables/useDamageProcessEvents.ts#L106)
+以 `requirePanel: true` 求值；[命中解析](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/resolvedHit.ts#L75)
+只有异常类才要求第二个角色与属性提供者；[最优分配](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/optimalAffixAlloc.ts#L807)
+取 `ownerAgent.element`、经 `ownerExternal`/`computeFinalPanel` 得到露西面板、抗性取本体槽位，末尾按
+`perHit × hit.count` 汇总（[#L1177](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/optimalAffixAlloc.ts#L1177)）；
+[面板收集](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/panelBuffCalc.ts#L1249)
+对本体收集 self+team、对队友只收集 team，没有小猪独立属性分支；直伤公式取该面板的攻击力与增伤、
+暴击（[基础项](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/damageCalc.ts#L378)、
+[乘区](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/damageCalc.ts#L450)）。
+上游[导入器](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp-backend/scripts/import-nanoka-skills.mjs#L302)
+把行元素固定写为 `agentElement`，这是同一份 Nanoka 物理正文在上游成为火属性的直接原因。
+上述计算路径文件在技能来源 `0df40c5b` 与增益来源 `fac62407` 两处字节一致；
+固定来源露西 `/agents/57` 没有小猪专属分类或追加攻击规则登记。
+
+**冲突记录**：Nanoka 固定 `agents/1151/details.zh.json`（sha256
+`cecf218cd0535701d0059888273a8c74562da6f2f1d76bca4c52425673edc1e2`）的
+`/skill/basic/description/1/desc`、`/skill/basic/description/2/desc` 均写“造成物理伤害”，
+固定上游行与该计算路径却按火属性结算。本项目接受上游约定登记 `fire`、消费火伤加成与火抗，
+这只是来源约定，不证明游戏内真实结算属性，也不作为游戏实测结果。
+
+以下机制未实现，也不以替代公式补算：小猪独立面板或独立属性来源；
+小猪继承露西攻击力、冲击力与异常精通；核心被动 1—7 对[加油！]的 140%—200% 强化；
+队伍条件满足时小猪继承露西暴击率与暴击伤害；小猪生命周期、三只小猪、随机选招与自动累计触发；
+影画六猪雨的 300% 火伤（属于未列入这四条动作的独立事件）。
+本次静态计算复用调用方配置的露西及调用方已组装的面板：露西同时为动作所有者、本次伤害实体与
+属性提供者，core 以 `input.actorId` 作为倍率属性来源；显式选择的[加油！]两条效果与影画四仍按
+[静态增益契约](zzz-hp-static-effects.md#修订-3特殊技等级与显式状态选择)作用一次，不向“小猪”重复追加，
+也不自动开启。
+`repeat: 1` 不代表已确认内部仅一次命中，`requireIndividualHits` 仍拒绝这些合计动作。
+
+独立期望、火/物正反例、加油与影画四开关、打包消费的回归见
+[agent-actions 测试](../../../packages/data/test/agent-actions.test.ts)与
+[static-calculation 测试](../../../packages/data/test/static-calculation.test.ts)。
 
 ### 已知限制：卢西娅合唱末段生命附加伤害
 
@@ -232,8 +293,8 @@ Nanoka `/talent/2/desc` 明确指向强化特殊技的极性紊乱：比例变�
 
 ## 覆盖、证据与生成
 
-本版共 1,256 条：1,080 条伤害计算、161 条仅失衡、4 条耀变、11 条待补；逐次命中已确认的动作仍为 1 条。
-待补项按互斥原因分为：4 条特殊机制、3 条特殊机制且表达式未支持、3 条未知分类、1 条未知元素。
+本版共 1,256 条：1,084 条伤害计算、161 条仅失衡、4 条耀变、7 条待补；逐次命中已确认的动作仍为 1 条。
+待补项按互斥原因分为：3 条特殊机制且表达式未支持、3 条未知分类、1 条未知元素。
 混合属性阻塞按上述来源约定处理，不表示已经完成游戏内部命中与属性分配的核实。
 全部伤害、失衡和耀变倍率展示行均进入覆盖校验；缺失、新增或重复覆盖会拒绝生成。
 能量消耗、回复、治疗等其他参数仍由原始详情提供，不自动归一化为伤害。

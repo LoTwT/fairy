@@ -406,6 +406,323 @@ describe("single-element aggregate action consumption", () => {
   })
 })
 
+describe("Lucy guard-pig panel proxy consumption", () => {
+  // 固定 ZZZ-HP 露西面板代算约定：四条动作只消费调用方配置的露西面板，
+  // 期望值由 Nanoka 万分比曲线与受控面板独立算出，不从生产转换器反推。
+  const rows = [
+    ["0011", 0.925, 1.86, 2.2],
+    ["0012", 1.275, 2.551, 3.015],
+    ["0013", 1.75, 3.51, 4.15],
+    ["0014", 2.5, 5.008, 5.92],
+  ] as const
+  const controlledBonuses = { fire: 0.22, physical: 0.11 }
+  const controlledResistances = { fire: 0.2, physical: 0.1 }
+  const fireZone = 1 + controlledBonuses.fire
+  const fireMitigation = 1 - controlledResistances.fire
+  const cheerFixedOption = "agents:lucy:mindscape:0:blk-legacy:legacy-team-atk"
+  const cheerLinearOption =
+    "agents:lucy:mindscape:0:blk-legacy:eff-ms384fjz-fgct7r"
+  const cheerFixedEffect =
+    "agent:1151:zzz-hp:legacy-team-atk:blk-legacy:mindscape:0"
+  const cheerLinearEffect =
+    "agent:1151:zzz-hp:eff-ms384fjz-fgct7r:blk-legacy:mindscape:0"
+  const cheerSourceName = `${cheerLinearEffect}:source`
+  const mindscapeFourOption =
+    "agents:lucy:mindscape:4:blk-legacy:legacy-team-critDmg"
+
+  async function pigInput(
+    suffix: string,
+    options: {
+      rank?: StaticActorConfiguration["mindscapeRank"]
+      level?: number
+      specialLevel?: number
+      coreSkillLevel?: StaticActorConfiguration["coreSkillLevel"]
+      criticalRate?: number
+      sourceAttack?: number
+      selections?: StaticActionCalculationInput["selections"]
+      damageBonuses?: Record<string, number>
+      resistances?: Record<string, number>
+    } = {},
+  ): Promise<StaticActionCalculationInput> {
+    const rank = options.rank ?? 0
+    const input = await fixture("1151", rank)
+    const actions = input.data.agents[0]!.actions
+    const actionId = `action:agent:1151:action:${suffix}`
+    const resolved = resolveAgentAction({
+      agent: actions,
+      actionId,
+      mindscapeRank: rank,
+      levels: { basic: { mode: "effective", value: options.level ?? 12 } },
+    })
+    if (!resolved.ok || resolved.calculation.kind !== "damage")
+      throw new Error(`expected a resolved guard-pig action: ${suffix}`)
+    return {
+      ...input,
+      action: resolved,
+      actors: [
+        {
+          ...input.actors[0]!,
+          coreSkillLevel: options.coreSkillLevel ?? 7,
+          // 只显式提供特殊技最终等级，供加油选项读取；基础等级由动作解析上下文校验。
+          skillLevels: {
+            special: {
+              mode: "effective",
+              value: options.specialLevel ?? 12,
+            },
+          },
+          panel: {
+            mode: "out-of-combat",
+            stats: {
+              attack: { unit: "attack-points", value: 1000 },
+              criticalRate: {
+                unit: "ratio",
+                value: options.criticalRate ?? 0,
+              },
+              criticalDamage: { unit: "ratio", value: 0.5 },
+              penetrationRatio: { unit: "ratio", value: 0 },
+            },
+            penetrationValue: 0,
+            damageBonuses: options.damageBonuses ?? controlledBonuses,
+          },
+        },
+      ],
+      target: {
+        ...input.target,
+        baseDefense: 0,
+        resistances: options.resistances ?? controlledResistances,
+      },
+      selections: options.selections ?? [],
+      inputs:
+        options.sourceAttack === undefined
+          ? []
+          : [
+              {
+                bindingId: "binding:entity:actor:agent:1151",
+                name: cheerSourceName,
+                value: {
+                  unit: "attack-points",
+                  value: options.sourceAttack,
+                },
+              },
+            ],
+    }
+  }
+
+  it.each(rows)(
+    "consumes %s as one fire aggregate from the acting Lucy panel at levels 1/12/16",
+    async (suffix, level1, level12, level16) => {
+      for (const [level, rank, multiplier] of [
+        [1, 0, level1],
+        [12, 0, level12],
+        [16, 6, level16],
+      ] as const) {
+        const input = await pigInput(suffix, { level, rank })
+        const result = calculate(input)
+        const expected = 1000 * multiplier * fireZone * fireMitigation
+        // 显式次数一次：单段、单次重复，不自动乘三只小猪。
+        expect(result.segments).toHaveLength(1)
+        expect(result.totals.nonCritical).toBeCloseTo(expected, 10)
+        expect(result.totals.critical).toBeCloseTo(expected * 1.5, 10)
+        expect(result.totals.expected).toBeCloseTo(expected, 10)
+        expect(result.totals.displayedNonCritical).toBeNull()
+        expect(result.totals.displayedCritical).toBeNull()
+        expect(
+          calculateStaticActionDamage({
+            ...input,
+            requireIndividualHits: true,
+          }),
+        ).toMatchObject({ ok: false })
+      }
+    },
+  )
+
+  it.each(rows)(
+    "uses the acting Lucy critical rate for the expectation: %s",
+    async (suffix) => {
+      const noCrit = calculate(await pigInput(suffix))
+      const withCrit = calculate(await pigInput(suffix, { criticalRate: 0.5 }))
+      // 非暴击与暴击事件数值只由面板攻击、增伤、抗性与暴伤决定，与暴击率无关；
+      // 数学期望按露西面板 CR×CD 提高 25%，不引入小猪条件暴击继承。
+      expect(withCrit.totals.nonCritical).toBeCloseTo(
+        noCrit.totals.nonCritical,
+        10,
+      )
+      expect(withCrit.totals.critical).toBeCloseTo(
+        noCrit.totals.nonCritical * 1.5,
+        10,
+      )
+      expect(noCrit.totals.expected).toBeCloseTo(noCrit.totals.nonCritical, 10)
+      expect(withCrit.totals.expected).toBeCloseTo(
+        noCrit.totals.nonCritical * 1.25,
+        10,
+      )
+    },
+  )
+
+  it("reads the fire bonus and fire resistance, not the physical entries", async () => {
+    const input = await pigInput("0011")
+    const base = calculate(input)
+    const shifted = calculate(
+      await pigInput("0011", {
+        damageBonuses: { fire: 0.22, physical: 0.99 },
+        resistances: { fire: 0.2, physical: 0.99 },
+      }),
+    )
+    expect(shifted.totals).toEqual(base.totals)
+    const bonusOff = calculate(
+      await pigInput("0011", { damageBonuses: { fire: 0, physical: 0.99 } }),
+    )
+    expect(bonusOff.totals.nonCritical).toBeCloseTo(
+      1000 * 1.86 * fireMitigation,
+      10,
+    )
+    const resistanceUp = calculate(
+      await pigInput("0011", { resistances: { fire: 0.6, physical: 0.1 } }),
+    )
+    expect(resistanceUp.totals.nonCritical).toBeCloseTo(
+      1000 * 1.86 * fireZone * 0.4,
+      10,
+    )
+    // 登记火属性后，面板缺火伤加成或目标缺火抗必须报错，而不是回退到其他属性。
+    const actor = input.actors[0]!
+    if (actor.panel.mode !== "out-of-combat") throw new Error("panel")
+    expect(
+      calculateStaticActionDamage({
+        ...input,
+        actors: [
+          {
+            ...actor,
+            panel: { ...actor.panel, damageBonuses: { physical: 0.11 } },
+          },
+        ],
+      }),
+    ).toMatchObject({ ok: false })
+    expect(
+      calculateStaticActionDamage({
+        ...input,
+        target: { ...input.target, resistances: { physical: 0.1 } },
+      }),
+    ).toMatchObject({ ok: false })
+  })
+
+  it.each(rows)(
+    "matches the basic set bonus once and never a follow-up bonus: %s",
+    async (suffix, _level1, level12) => {
+      const input = await pigInput(suffix)
+      const base = calculate(input)
+      const withSet = (setEntityId: string) =>
+        calculate({
+          ...input,
+          actors: [
+            {
+              ...input.actors[0]!,
+              driveDiscs: {
+                ...emptyDiscs,
+                1: { setEntityId },
+                2: { setEntityId },
+              },
+            },
+          ],
+        })
+      expect(
+        withSet("33300").totals.nonCritical - base.totals.nonCritical,
+      ).toBeCloseTo(1000 * level12 * 0.15 * fireMitigation, 10)
+      expect(withSet("32900").totals).toEqual(base.totals)
+    },
+  )
+
+  it("applies the selected cheer options once to the acting Lucy panel", async () => {
+    const closed = calculate(await pigInput("0011"))
+    const selections = [cheerFixedOption, cheerLinearOption].map(
+      (optionId) => ({
+        holderId: "entity:actor" as const,
+        optionId,
+        layers: 1,
+      }),
+    )
+    const withCheer = calculate(
+      await pigInput("0011", {
+        selections,
+        specialLevel: 12,
+        sourceAttack: 2000,
+      }),
+    )
+    const cheerEffects = [cheerFixedEffect, cheerLinearEffect]
+    expect(
+      closed.segments[0]!.damage.evaluation.contributions.filter((entry) =>
+        cheerEffects.includes(entry.origin.effectId),
+      ),
+    ).toEqual([])
+    // L12：固定 40+4×12=88 点 + 转换 min(2000×(0.13+0.008×12), 560−4×12)=452 点，合计 540 点。
+    expect(withCheer.totals.nonCritical).toBeCloseTo(
+      (1000 + 540) * 1.86 * fireZone * fireMitigation,
+      10,
+    )
+    const contributions =
+      withCheer.segments[0]!.damage.evaluation.contributions.filter((entry) =>
+        cheerEffects.includes(entry.origin.effectId),
+      )
+    expect(contributions).toHaveLength(2)
+    expect(
+      contributions.reduce((total, entry) => total + entry.value.value, 0),
+    ).toBe(540)
+    // 核心 1 与核心 7 相同：不额外计入小猪专属的核心 140%—200% 强化。
+    const coreOne = calculate(
+      await pigInput("0011", {
+        selections,
+        specialLevel: 12,
+        sourceAttack: 2000,
+        coreSkillLevel: 1,
+      }),
+    )
+    expect(coreOne.totals).toEqual(withCheer.totals)
+  })
+
+  it("gates the mindscape-four crit damage option and never inherits it implicitly", async () => {
+    const rankZero = calculate(await pigInput("0011"))
+    expect(
+      calculateStaticActionDamage({
+        ...(await pigInput("0011")),
+        selections: [
+          {
+            holderId: "entity:actor" as const,
+            optionId: mindscapeFourOption,
+            layers: 1,
+          },
+        ],
+      }),
+    ).toMatchObject({ ok: false, issues: [{ code: "CONTEXT_MISMATCH" }] })
+    const rankFour = calculate(await pigInput("0011", { rank: 4 }))
+    // 仅配置影画 4、未显式选择时不自动获得 +10% 暴击伤害。
+    expect(rankFour.totals.nonCritical).toBeCloseTo(
+      rankZero.totals.nonCritical,
+      10,
+    )
+    expect(rankFour.totals.critical).toBeCloseTo(
+      rankFour.totals.nonCritical * 1.5,
+      10,
+    )
+    const selected = calculate({
+      ...(await pigInput("0011", { rank: 4 })),
+      selections: [
+        {
+          holderId: "entity:actor" as const,
+          optionId: mindscapeFourOption,
+          layers: 1,
+        },
+      ],
+    })
+    expect(selected.totals.nonCritical).toBeCloseTo(
+      rankFour.totals.nonCritical,
+      10,
+    )
+    expect(selected.totals.critical).toBeCloseTo(
+      rankFour.totals.nonCritical * 1.6,
+      10,
+    )
+  })
+})
+
 describe("static calculation assembly", () => {
   it("keeps Lucia M6 on initial health when her own health buff is selected", async () => {
     const input = await fixture("1451", 6)

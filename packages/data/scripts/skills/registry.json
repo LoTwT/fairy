@@ -5281,15 +5281,13 @@
     "dazeRowIndex": 3,
     "sourceSignature": "20acb2b478af18b8fcdf1f87c899ff4feb55e56b79ffb5df251a159b3f71b8c7",
     "skillCategory": "basic",
-    "element": "physical",
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151023-棒球棍",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用具名的 ZZZ-HP 露西面板代算约定：露西同时为动作所有者、本次伤害实体与属性提供者，复用调用方配置及已结算的露西面板，不建立独立的小猪面板。固定 ZZZ-HP 技能行 /skills/492 登记为火属性并按火伤加成与火抗结算，Nanoka 中文正文写为物理伤害；本次按该约定登记 fire，未证实游戏内部属性。小猪对露西攻击力、冲击力与异常精通的继承、核心被动对[加油！]的 140%—200% 强化、队伍条件暴击继承及小猪生命周期均未实现；本行合计倍率只计入一次，不乘三只小猪、不随机选招、不自动累计触发，repeat: 1 不代表已确认内部仅一次命中。"
     ]
   },
   {
@@ -5303,15 +5301,13 @@
     "dazeRowIndex": 4,
     "sourceSignature": "f4342a7fa7495f5cbcb6f040aaeebaf4aa1439982fa00335e852d3a8e2f233fe",
     "skillCategory": "basic",
-    "element": "physical",
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151024-拳套",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用具名的 ZZZ-HP 露西面板代算约定：露西同时为动作所有者、本次伤害实体与属性提供者，复用调用方配置及已结算的露西面板，不建立独立的小猪面板。固定 ZZZ-HP 技能行 /skills/491 登记为火属性并按火伤加成与火抗结算，Nanoka 中文正文写为物理伤害；本次按该约定登记 fire，未证实游戏内部属性。小猪对露西攻击力、冲击力与异常精通的继承、核心被动对[加油！]的 140%—200% 强化、队伍条件暴击继承及小猪生命周期均未实现；本行合计倍率只计入一次，不乘三只小猪、不随机选招、不自动累计触发，repeat: 1 不代表已确认内部仅一次命中。"
     ]
   },
   {
@@ -5325,15 +5321,13 @@
     "dazeRowIndex": 5,
     "sourceSignature": "879e2ec30f56a560be1daf238f391dde43dec2864cad26b5d53e27351e1521bf",
     "skillCategory": "basic",
-    "element": "physical",
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151025-弹弓",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用具名的 ZZZ-HP 露西面板代算约定：露西同时为动作所有者、本次伤害实体与属性提供者，复用调用方配置及已结算的露西面板，不建立独立的小猪面板。固定 ZZZ-HP 技能行 /skills/490 登记为火属性并按火伤加成与火抗结算，Nanoka 中文正文写为物理伤害；本次按该约定登记 fire，未证实游戏内部属性。小猪对露西攻击力、冲击力与异常精通的继承、核心被动对[加油！]的 140%—200% 强化、队伍条件暴击继承及小猪生命周期均未实现；本行合计倍率只计入一次，不乘三只小猪、不随机选招、不自动累计触发，repeat: 1 不代表已确认内部仅一次命中。"
     ]
   },
   {
@@ -5347,15 +5341,13 @@
     "dazeRowIndex": 1,
     "sourceSignature": "c0277bb2f4edc5a1fdcc1e26eeb4b5f835aea0a1681e81e2f18c25ab2c9d35c2",
     "skillCategory": "basic",
-    "element": "physical",
+    "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-lucy-nk-1151026-回旋挥击",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "召唤物或独立协同攻击的属性来源与命中适用关系尚待核实。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用具名的 ZZZ-HP 露西面板代算约定：露西同时为动作所有者、本次伤害实体与属性提供者，复用调用方配置及已结算的露西面板，不建立独立的小猪面板。固定 ZZZ-HP 技能行 /skills/489 登记为火属性并按火伤加成与火抗结算，Nanoka 中文正文写为物理伤害；本次按该约定登记 fire，未证实游戏内部属性。小猪对露西攻击力、冲击力与异常精通的继承、核心被动对[加油！]的 140%—200% 强化、队伍条件暴击继承及小猪生命周期均未实现；本行合计倍率只计入一次，不乘三只小猪、不随机选招、不自动累计触发，repeat: 1 不代表已确认内部仅一次命中。"
     ]
   },
   {

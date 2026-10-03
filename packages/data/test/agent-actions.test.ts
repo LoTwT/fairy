@@ -799,3 +799,201 @@ describe("potential-level action catalogue", () => {
     }
   })
 })
+
+const guardPigActionId = (suffix: string) =>
+  `action:agent:1151:action:${suffix}` as const
+
+describe("Lucy guard-pig panel proxy convention", () => {
+  // 固定 ZZZ-HP 露西面板代算约定：四条独立倍率行，登记火属性、合计一次。
+  // 期望倍率直接取 Nanoka 万分比曲线在 1/12/16 级的独立取值。
+  const rows = [
+    {
+      suffix: "0011",
+      name: "亲卫队小猪：抄家伙！",
+      weapon: "棒球棍",
+      skillPointer: "/skill/basic/description/4/param/0",
+      descriptionPointer: "/skill/basic/description/1/desc",
+      parameterId: "1151023",
+      upstreamSkillId: "sk-lucy-nk-1151023-棒球棍",
+      upstreamPointer: "/skills/492",
+      level1: 0.925,
+      level12: 1.86,
+      level16: 2.2,
+      dazeBase: 0.155,
+      dazeGrowth: 0.008,
+    },
+    {
+      suffix: "0012",
+      name: "亲卫队小猪：抄家伙！",
+      weapon: "拳套",
+      skillPointer: "/skill/basic/description/4/param/1",
+      descriptionPointer: "/skill/basic/description/1/desc",
+      parameterId: "1151024",
+      upstreamSkillId: "sk-lucy-nk-1151024-拳套",
+      upstreamPointer: "/skills/491",
+      level1: 1.275,
+      level12: 2.551,
+      level16: 3.015,
+      dazeBase: 0.213,
+      dazeGrowth: 0.01,
+    },
+    {
+      suffix: "0013",
+      name: "亲卫队小猪：抄家伙！",
+      weapon: "弹弓",
+      skillPointer: "/skill/basic/description/4/param/2",
+      descriptionPointer: "/skill/basic/description/1/desc",
+      parameterId: "1151025",
+      upstreamSkillId: "sk-lucy-nk-1151025-弹弓",
+      upstreamPointer: "/skills/490",
+      level1: 1.75,
+      level12: 3.51,
+      level16: 4.15,
+      dazeBase: 0.292,
+      dazeGrowth: 0.014,
+    },
+    {
+      suffix: "0014",
+      name: "亲卫队小猪：回旋挥击！",
+      weapon: "回旋挥击",
+      skillPointer: "/skill/basic/description/5/param/0",
+      descriptionPointer: "/skill/basic/description/2/desc",
+      parameterId: "1151026",
+      upstreamSkillId: "sk-lucy-nk-1151026-回旋挥击",
+      upstreamPointer: "/skills/489",
+      level1: 2.5,
+      level12: 5.008,
+      level16: 5.92,
+      dazeBase: 0.2,
+      dazeGrowth: 0.01,
+    },
+  ] as const
+
+  it.each(rows)(
+    "keeps $suffix ($weapon) a single fire aggregate row with its own source identity",
+    async (row) => {
+      const data = await agent("1151")
+      const action = data.actions.find(
+        (entry) => entry.actionId === guardPigActionId(row.suffix),
+      )!
+      expect(action.name).toBe(row.name)
+      expect(action.levelGroup).toBe("basic")
+      expect(action.skillCategory).toBe("basic")
+      expect(action.source).toEqual({
+        path: "agents/1151/details.zh.json",
+        pointer: row.skillPointer,
+      })
+      expect(action.descriptionSources).toEqual([
+        {
+          path: "agents/1151/details.zh.json",
+          pointer: row.descriptionPointer,
+        },
+      ])
+      expect(action.parameterIds).toEqual([row.parameterId])
+      expect(action.sourceExpression).toBe(
+        `{Skill:${row.parameterId}, Prop:1001}`,
+      )
+      expect(action.damageCoefficient).toMatchObject({
+        levelGroup: "basic",
+        base: row.level1,
+      })
+      expect(action.damageCoefficient!.growth).toBeCloseTo(
+        (row.level12 - row.level1) / 11,
+        12,
+      )
+      // 失衡曲线独立于伤害，取自 Nanoka 同参数行的 Prop:1002。
+      expect(action.dazeCoefficient).toMatchObject({
+        levelGroup: "basic",
+        base: row.dazeBase,
+      })
+      expect(action.dazeCoefficient!.growth).toBeCloseTo(row.dazeGrowth, 12)
+      expect(action.upstreamSkillId).toBe(row.upstreamSkillId)
+      expect(action.skillTargetIds).toEqual([])
+      expect(action.skillTags).toEqual([])
+      expect(action.inputs).toEqual([])
+      expect(action.potentialLevels).toBeUndefined()
+      expect(action.conditionalIdentity).toBeUndefined()
+      // Nanoka 中文正文写为物理伤害；约定据此不采用，但保留冲突记录。
+      expect(action.description).toContain("物理伤害")
+      const limitations = action.limitations.join("\n")
+      expect(limitations).toContain("ZZZ-HP 露西面板代算约定")
+      expect(limitations).toContain(row.upstreamPointer)
+      expect(limitations).toContain("Nanoka 中文正文写为物理伤害")
+      expect(limitations).toContain("repeat: 1 不代表已确认内部仅一次命中")
+      expect(action.calculation).toMatchObject({
+        kind: "damage",
+        segments: [
+          {
+            segmentId: `${guardPigActionId(row.suffix)}:total`,
+            damageKind: "regular",
+            element: "fire",
+            granularity: "aggregate",
+            repeat: 1,
+            items: [
+              {
+                itemId: `${guardPigActionId(row.suffix)}:base`,
+                stat: "attack",
+              },
+            ],
+          },
+        ],
+      })
+    },
+  )
+
+  it("resolves each weapon row independently at levels 1, 12 and 16", async () => {
+    const data = await agent("1151")
+    const branches = new Set<string>()
+    for (const row of rows) {
+      const action = data.actions.find(
+        (entry) => entry.actionId === guardPigActionId(row.suffix),
+      )!
+      branches.add(action.branchId)
+      for (const [level, rank, expected] of [
+        [1, 0, row.level1],
+        [12, 0, row.level12],
+        [16, 6, row.level16],
+      ] as const) {
+        const resolved = resolveAgentAction({
+          agent: data,
+          actionId: action.actionId,
+          mindscapeRank: rank,
+          levels: { basic: { mode: "effective", value: level } },
+        })
+        expect(resolved.ok, `${row.suffix}@${level}`).toBe(true)
+        if (!resolved.ok || resolved.calculation.kind !== "damage")
+          throw new Error("fixture")
+        expect(resolved.sourceDamageMultiplier).toBeCloseTo(expected, 12)
+        expect(resolved.skillCategory).toBe("basic")
+        expect(resolved.skillTargetIds).toEqual([])
+        expect(resolved.skillTags).toEqual([])
+        // 三种武器与回旋挥击各自一整行，不把相邻行相加成三段。
+        expect(resolved.calculation.segments).toHaveLength(1)
+        expect(resolved.calculation.segments[0]!.repeat).toBe(1)
+        expect(resolved.calculation.segments[0]!.granularity).toBe("aggregate")
+      }
+      expect(
+        resolveAgentAction({
+          agent: data,
+          actionId: action.actionId,
+          mindscapeRank: 0,
+          levels: { basic: { mode: "effective", value: 12 } },
+          requireIndividualHits: true,
+        }),
+      ).toMatchObject({
+        ok: false,
+        issues: [{ code: "individual-hits-required" }],
+      })
+      expect(() =>
+        resolveAgentAction({
+          agent: data,
+          actionId: action.actionId,
+          mindscapeRank: 0,
+          levels: { basic: { mode: "effective", value: 17 } },
+        }),
+      ).toThrow()
+    }
+    // 球棍、拳套、弹弓属于同一说明分支；回旋挥击独立分支。
+    expect(branches.size).toBe(2)
+  })
+})
