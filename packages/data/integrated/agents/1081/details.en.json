@@ -1362,7 +1362,8 @@
   "skin": {
     "3110810": {
       "desc": "Style is justice, justice is style. That's the eternal creed of a true knight! Though, yeah... those joint screws really do wear down fast...",
-      "name": "Billy: Shining Starlight Costume"
+      "name": "Billy: Shining Starlight Costume",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

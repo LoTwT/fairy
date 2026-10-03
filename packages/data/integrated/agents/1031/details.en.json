@@ -2218,11 +2218,13 @@
   "skin": {
     "3110310": {
       "desc": "The classic outfit of the leader of the Cunning Hares, hiding a hint of playful cunning, both mischievous and cute.",
-      "name": "Nicole: Lil Sassy"
+      "name": "Nicole: Lil Sassy",
+      "obtainDesc": ""
     },
     "3110311": {
       "desc": "Pink! Pink! Pink! Pink is Nicole's signature color. So are you feeling it?",
-      "name": "Nicole: Cunning Cutie"
+      "name": "Nicole: Cunning Cutie",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

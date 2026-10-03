@@ -1394,11 +1394,13 @@
   "skin": {
     "3113310": {
       "desc": "Maintain your elegance, Miss Vivian, from the point of your parasol, right down to your flowing skirt. Maintain your courage, Miss Vivian, through last night's lonely walk, or here today at my side.",
-      "name": "Vivian: Fluttering Violet"
+      "name": "Vivian: Fluttering Violet",
+      "obtainDesc": ""
     },
     "3113311": {
       "desc": "Birds soar into the starlit skies, while irises bloom by the pond. Though this enchanting moonlit night may be brief, please let me see the lingering anticipation in your eyes in the moment I bloom.",
-      "name": "Vivian: Iris of the Shore"
+      "name": "Vivian: Iris of the Shore",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

@@ -61,6 +61,10 @@ describe("共享结构登记约束", () => {
     expect(result.data.levelExp).toEqual([10, 0])
     expect(result.data.skillPriority[0].firstPriority).toEqual([2, 1, 2])
     expect(result.data.skin["1"]).toEqual({ image: "original_image" })
-    expect(result.details.zh!.skin["1"]).toEqual({ name: "", desc: "" })
+    expect(result.details.zh!.skin["1"]).toEqual({
+      name: "",
+      desc: "",
+      obtainDesc: "",
+    })
   })
 })

@@ -94,7 +94,7 @@
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT DMG"
+      "name": "Impact"
     }
   },
   "hitType": {
@@ -1501,7 +1501,8 @@
   "skin": {
     "3113910": {
       "desc": "Dressed like a simple mystic, this senior sister looks like she's tucked all her bravado away, but with a tiger in her heart... she still radiates that heroic fire.",
-      "name": "Ju Fufu: Summit's Cute Tiger"
+      "name": "Ju Fufu: Summit's Cute Tiger",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

@@ -1579,7 +1579,8 @@
   "skin": {
     "3111110": {
       "desc": "The jackhammer's bearings rumble without pause, echoing the hot, thunderous beat of its wielder's heart.",
-      "name": "Anton: Earthshaking Axle"
+      "name": "Anton: Earthshaking Axle",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

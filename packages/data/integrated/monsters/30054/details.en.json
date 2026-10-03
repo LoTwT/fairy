@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—A High Ambitions unit responsible for transporting new machines, with what seems to be a special effects movie enthusiast among their ranks.",
+  "cardSkillDesc": "When the Conqueror enters optical camouflage, it gains a Corruptive Barrier and becomes immune to DMG. Dodge and Counter to trigger Impaired, which drastically reduces the Corruptive Barrier and builds up Daze. Watch out for the Conqueror's feints.",
+  "desc": "An oversized combat unit deployed by High Ambitions Corp.\nStaying true to the strategic principle of making the most of available resources, operatives salvaged large quantities of Porcelloy from Shrouded Reef to upgrade the Conqueror's structural materials.\nDue to a lack of expertise in Porcelloy craftsmanship, the material wasn't perfectly integrated into the Mech's core framework — but thanks to its exceptional rigidity and structural strength, it still delivered a significant boost to the unit's defense and durability.\n\n\"Isn't Porcelloy supposed to be super rare? You can't just use it like sheet metal.\"\n\"Just tell me — does the new Mech look sick or what?\"",
+  "groupDesc": "Special",
+  "id": 30054,
+  "locale": "en",
+  "name": "Ares"
+}

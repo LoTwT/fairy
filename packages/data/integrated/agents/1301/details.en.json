@@ -98,6 +98,7 @@
     }
   },
   "hitType": {
+    "101": "Slash",
     "103": "Pierce"
   },
   "id": 1301,
@@ -1627,7 +1628,8 @@
   "skin": {
     "3113010": {
       "desc": "A soul of mirrored halves, having twice crossed the river of the dead. One side forged in fire, the other shaped into ice; one looking back on where it came from, the other watching for a new dawn. They wander on — never lost, never ceasing.",
-      "name": "Orphie & Magus: Two Banks of the River"
+      "name": "Orphie & Magus: Two Banks of the River",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

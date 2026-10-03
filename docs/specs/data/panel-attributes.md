@@ -1,7 +1,7 @@
 # 60 级基础属性与 S 级驱动盘词条
 
-`@randomplay/data` 提供构建局外面板所需的标准化静态属性，当前覆盖 Nanoka 3.1 的全部
-58 名角色、95 个音擎，以及通用 S 级满强化驱动盘主副词条。正式类型以
+`@randomplay/data` 提供构建局外面板所需的标准化静态属性，当前覆盖 Nanoka 3.2 的全部
+60 名角色、100 个音擎，以及通用 S 级满强化驱动盘主副词条。正式类型以
 [shared 属性契约](../../../packages/shared/src/attributes.ts)为准；data 的 [`src/attributes/types.ts`](../../../packages/data/src/attributes/types.ts) 重导出共同类型并维护来源清单。
 本接口不组装完整面板、不计算伤害、不识别截图，不提供其他等级或品质。
 
@@ -87,9 +87,12 @@ const coreB = agent?.coreAttributeBonuses[3]
 
 ### 音擎与驱动盘
 
-音擎基础攻击为 `baseProperty.value × (10000 + level[60].rate + stars[5].starRate) / 10000`；
-高级属性为 `randProperty.value × (10000 + stars[5].randRate) / 10000`，再按明确单位缩放。
-`stars[5]` 是满突破，不是精炼 5。玲珑妆匣基础攻击 `713.76`、高级攻击比例 `0.30`，不按精炼复制属性表。
+音擎基础属性为 `baseProperty.value × (10000 + level[60].rate + stars[5].starRate) / 10000`；
+按经核对的中文 `name` 路由：`基础攻击力` 产出 `attack` 的 `base-add`（`attack-points`），
+3.2 新增的 `基础防御力`（锋御音擎）产出 `defense` 的 `base-add`（`defense-points`），两者共用同一
+等级与突破缩放，不按音擎类别猜测属性。高级属性为 `randProperty.value × (10000 + stars[5].randRate) / 10000`，
+再按明确单位缩放。`stars[5]` 是满突破，不是精炼 5。玲珑妆匣基础攻击 `713.76`、高级攻击比例 `0.30`，
+不按精炼复制属性表；猩红渴望（3.2）基础防御 `431.23`、高级防御比例 `0.48`，同一缩放经独立核对。
 
 高级属性按经核对的中文 `name2` 与格式映射：攻击/生命/防御百分比、冲击力、异常掌控、能量自动回复
 使用 `initial-percentage`；暴击率、暴伤、穿透率使用 `ratio-add`，上述数值再除以 10000。

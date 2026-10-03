@@ -99,6 +99,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -188,6 +189,9 @@
                 "stun": 1068
               }
             }
+          },
+          "monsterResistance": {
+            "202": "Ice"
           },
           "monsterWeakness": {
             "205": "Ether"
@@ -296,6 +300,9 @@
                 "stun": 6403.2
               }
             }
+          },
+          "monsterResistance": {
+            "205": "Ether"
           },
           "monsterWeakness": {
             "200": "Physical",
@@ -427,6 +434,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -536,6 +544,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -646,6 +655,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -735,6 +745,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "202": "Ice"
+          },
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -765,6 +778,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -888,6 +902,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "205": "Ether"
+          },
           "monsterWeakness": {
             "200": "Physical",
             "203": "Electric"
@@ -985,6 +1002,9 @@
               }
             }
           },
+          "monsterResistance": {
+            "200": "Physical"
+          },
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -1080,6 +1100,9 @@
                 "stun": 15486.5
               }
             }
+          },
+          "monsterResistance": {
+            "202": "Ice"
           },
           "monsterWeakness": {
             "201": "Fire",

@@ -226,7 +226,7 @@ describe("v2 agent artifact conversion", () => {
       "other agent rules",
       async ({ source }) =>
         edit(join(source.artifactDirectory, "index.json"), (index) => {
-          index.rulesVersion = "nanoka-agent-reference/5"
+          index.rulesVersion = "nanoka-agent-reference/6"
         }),
       "规则版本错误",
     ],

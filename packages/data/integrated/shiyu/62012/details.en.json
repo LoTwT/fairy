@@ -99,6 +99,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -149,6 +150,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric",
             "205": "Ether"
@@ -190,11 +192,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ClaymoreGrey.png",
               "name": "Tyrfing",
               "stats": {
-                "attack": 1296.7272727272727,
+                "attack": 1783,
                 "attribute_infliction": 0,
-                "defence": 584.1,
-                "hp": 13282.88,
-                "stun": 0
+                "defence": 467.28000000000003,
+                "hp": 186458.428,
+                "stun": 1116
               }
             },
             "11103": {
@@ -210,11 +212,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
               "name": "Alpeca",
               "stats": {
-                "attack": 1296.7272727272727,
+                "attack": 1458.8181818181818,
                 "attribute_infliction": 0,
-                "defence": 584.1,
-                "hp": 13282.88,
-                "stun": 0
+                "defence": 467.28000000000003,
+                "hp": 186458.428,
+                "stun": 1116
               }
             },
             "11123": {
@@ -258,6 +260,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -348,6 +351,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -457,6 +461,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "201": "Fire"
           },
@@ -566,6 +571,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -674,6 +680,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "202": "Ice"
@@ -784,6 +791,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },
@@ -912,6 +920,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -1022,6 +1031,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical",
             "201": "Fire"
@@ -1111,6 +1121,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -1181,6 +1192,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "Physical"
           },
@@ -1289,6 +1301,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "Ice",
             "205": "Ether"
@@ -1339,6 +1352,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "Electric"
           },

@@ -1361,16 +1361,18 @@
   "skin": {
     "3114210": {
       "desc": "Yunkui Summit's largest disciple uniform, spacious enough for this senior brother's belly and all his seasonings. And that iron wok on top is a first of its kind. But... putting a pan you just used for stir-frying on your head? Doesn't it burn?",
-      "name": "Pan Yinhu: Hundred Flavors"
+      "name": "Pan Yinhu: Hundred Flavors",
+      "obtainDesc": ""
     },
     "3114211": {
       "desc": "Senior Yinhu once dreamed of becoming a renowned chef, but in this day and age, there's always some thug looking to smash your bowl.\n—\"Go on, try smashing one.\"",
-      "name": "Pan Yinhu: Culinary Jewel"
+      "name": "Pan Yinhu: Culinary Jewel",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
   "strategy": [
-    "05",
+    "04",
     "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, Rupture-based support",
     "Provides Sheer Force to squadmates"
   ],

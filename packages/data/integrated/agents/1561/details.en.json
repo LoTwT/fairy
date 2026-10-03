@@ -1535,11 +1535,13 @@
   "skin": {
     "3115610": {
       "desc": "Some busybodies claim the Administrative Director rejected the External Strategy Department's official uniform to show off her prestigious upbringing, but Velina has always had little interest in lavish fashion. Rather than the elaborate glamour of ceremonial wear, she favors simple clothing: sharp, proper, and suited to dealing with never-ending administrative work.",
-      "name": "Velina: Elegant Silver Cascade"
+      "name": "Velina: Elegant Silver Cascade",
+      "obtainDesc": ""
     },
     "3115611": {
       "desc": "Outside of work, Velina occasionally invites close friends to afternoon tea parties. During such moments, she changes into relatively casual attire to enjoy her free time... though to the Bangboo, it's merely the Grim Reaper in a different terrifying disguise.",
-      "name": "Velina: Shade of Leisure"
+      "name": "Velina: Shade of Leisure",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

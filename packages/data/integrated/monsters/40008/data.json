@@ -157,7 +157,7 @@
         "wind_damage_res": 0,
         "wind_stun_res": 0
       },
-      "tag": ["Ether", "Large", "Boss", "GirReborn_P2"],
+      "tag": ["Ether", "Large", "Boss", "GirReborn_P2", "MainStoryBoss"],
       "type": "Monster"
     },
     "31674": {
@@ -286,7 +286,8 @@
         "Large",
         "Boss",
         "HighCorruptiveBarrier",
-        "GirReborn_P2"
+        "GirReborn_P2",
+        "MainStoryBoss"
       ],
       "type": "Monster"
     },

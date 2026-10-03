@@ -93,8 +93,8 @@
       "name": "Electric DMG Bonus"
     },
     "partSub": {
-      "format": "{0:0.#%}",
-      "name": "HP"
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
     }
   },
   "hitType": {
@@ -1337,12 +1337,13 @@
   "skin": {
     "3112710": {
       "desc": "He may be slow to pick up on things, slower even than the weight of the shield in his left hand, but his ability to detect evil is keener than the baton in his right.",
-      "name": "Seth: Incorruptible Heart"
+      "name": "Seth: Incorruptible Heart",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
   "strategy": [
-    "05",
+    "04",
     "<IconMap:Icon_GeneralBuff_Thunder>Electric, Anomaly-based support",
     "Grants shields and Anomaly Proficiency to the whole squad"
   ],

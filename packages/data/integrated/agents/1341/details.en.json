@@ -1480,12 +1480,13 @@
   "skin": {
     "3113410": {
       "desc": "Warm, woolly ears and a small build may invite underestimation, but the Judge of \"Value\" won't think twice about bringing her branch down on anyone who tries.",
-      "name": "Zhao: Cuddly Executor"
+      "name": "Zhao: Cuddly Executor",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
   "strategy": [
-    "05",
+    "04",
     "<IconMap:Icon_GeneralBuff_Ice>Ice, versatile quick-swap support",
     "Can reliably activate Ether Veil",
     "Boosts all squad members' ATK"

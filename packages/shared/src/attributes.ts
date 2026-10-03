@@ -87,12 +87,23 @@ export interface WEngineLevel60Attributes {
   readonly schemaVersion: 1
   readonly entityId: string
   readonly level: 60
-  readonly baseAttribute: {
-    readonly attribute: "attack"
-    readonly operation: "base-add"
-    readonly unit: "attack-points"
-    readonly value: number
-  }
+  /**
+   * 来源 `base_property` 的 60 级基础属性；3.2 起锋御音擎为基础防御力，其余仍为基础攻击力。
+   * 两种形态都参与基础值累加，语义路由由属性名决定，不由音擎类别决定。
+   */
+  readonly baseAttribute:
+    | {
+        readonly attribute: "attack"
+        readonly operation: "base-add"
+        readonly unit: "attack-points"
+        readonly value: number
+      }
+    | {
+        readonly attribute: "defense"
+        readonly operation: "base-add"
+        readonly unit: "defense-points"
+        readonly value: number
+      }
   readonly advancedAttribute: PanelAttributeBonus
 }
 

@@ -109,7 +109,13 @@ export const agentSchema: Schema = object({
   hit_type: dictionary(string, true),
   camp: dictionary(string, true),
   special_element_type: object(
-    { name: string, title: string, desc: string, icon: string },
+    {
+      name: string,
+      title: string,
+      desc: string,
+      icon: string,
+      id: optional(number),
+    },
     true,
   ),
   partner_info: object({
@@ -128,7 +134,12 @@ export const agentSchema: Schema = object({
     trust_lv: optional(dictionary(string)),
   }),
   skin: dictionary(
-    object({ image: shared(string), name: string, desc: string }),
+    object({
+      image: shared(string),
+      name: string,
+      desc: string,
+      obtain_desc: string,
+    }),
   ),
   stats: shared(
     object({
@@ -147,6 +158,8 @@ export const agentSchema: Schema = object({
       element_abnormal_power: number,
       element_mystery: number,
       endurance: number,
+      ep_max: number,
+      ep_recover: number,
       hp_growth: number,
       hp_max: number,
       pen_delta: number,
@@ -156,6 +169,7 @@ export const agentSchema: Schema = object({
       rbl_probability: number,
       shield: number,
       shield_growth: number,
+      sharp_critical_damage: number,
       sp_bar_point: number,
       sp_recover: number,
       stun: number,
@@ -258,6 +272,9 @@ export const agentSchema: Schema = object({
     slot2: shared(number),
     slot_sub: shared(number),
     part_sub_list: shared(numbers),
+    alt_build: shared(
+      array(object({ suit_list: numbers, part_sub_list: numbers })),
+    ),
     part4: recommendationProperty,
     part5: recommendationProperty,
     part6: recommendationProperty,

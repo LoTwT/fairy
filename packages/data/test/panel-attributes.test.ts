@@ -179,6 +179,60 @@ describe("normalized panel attributes", () => {
     ).toThrow(/format/)
   })
 
+  it("routes defence-base engines to a defense base-add using the same level and ascension scaling", async () => {
+    // 依据 3.2 真实来源 14161（猩红渴望）的数值构造：基础防御力 29、
+    // level/60.rate 94090、stars/5.starRate 44610、随机防御力 1920、randRate 15000。
+    const data = await source<WEngineData>("w-engines/14131/data.json")
+    const details = await source<WEngineDetails>(
+      "w-engines/14131/details.zh.json",
+    )
+    const defenceData = structuredClone(data)
+    defenceData.id = 14161
+    defenceData.baseProperty.value = 29
+    defenceData.level["60"]!.rate = 94090
+    defenceData.stars["5"]!.starRate = 44610
+    defenceData.randProperty.value = 1920
+    defenceData.stars["5"]!.randRate = 15000
+    expect(
+      convertWEngineAttributes(defenceData, {
+        ...details,
+        id: 14161,
+        baseProperty: {
+          ...details.baseProperty,
+          name: "基础防御力",
+          name2: "基础防御力",
+        },
+        randProperty: {
+          ...details.randProperty,
+          name: "防御力",
+          name2: "防御力百分比",
+        },
+      }),
+    ).toEqual({
+      schemaVersion: 1,
+      entityId: "14161",
+      level: 60,
+      baseAttribute: {
+        attribute: "defense",
+        operation: "base-add",
+        unit: "defense-points",
+        value: 431.23,
+      },
+      advancedAttribute: {
+        attribute: "defense",
+        operation: "initial-percentage",
+        unit: "ratio",
+        value: 0.48,
+      },
+    })
+    expect(() =>
+      convertWEngineAttributes(data, {
+        ...details,
+        baseProperty: { ...details.baseProperty, name2: "基础防御力" },
+      }),
+    ).toThrow(/baseProperty/)
+  })
+
   it("expresses S max main stats by slot and substats per roll in calculation units", () => {
     const result = sDriveDiscMaxLevelAffixes()
     expect(

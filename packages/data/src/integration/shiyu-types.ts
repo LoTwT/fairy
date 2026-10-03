@@ -1,7 +1,7 @@
 import type { DetailLocale, SourceJson } from "./agent-types.ts"
 
 /**
- * Nanoka Shiyu 整合资料的正式字段定义（规则 nanoka-shiyu-reference/1）。
+ * Nanoka Shiyu 整合资料的正式字段定义（规则 nanoka-shiyu-reference/2）。
  *
  * 上游实体为 `shiyu`，整合类别登记名为 `shiyu`；一条记录表示一个空洞深潜区域（稳定节点、
  * 剧变节点等）及其全部关卡阶段。本层不解释评级目标语义、不换算时间、不建立 parent/child
@@ -148,6 +148,9 @@ export interface ShiyuZoneRoom {
 
   /** 来源 `monster_weakness`。弱点字典：元素编码 key → 当前语言弱点文本；key 原样保留。 */
   monsterWeakness: Record<string, string>
+
+  /** 来源 `monster_resistance`。3.2 新增的抗性字典：元素编码 key → 当前语言抗性文本；与弱点分开保存。 */
+  monsterResistance: Record<string, string>
 
   /** 来源 `waves_num`。波次数字原值；未解释波次规则。 */
   wavesNum: number

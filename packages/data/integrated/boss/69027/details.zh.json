@@ -19,7 +19,7 @@
               "title": ""
             },
             "69012705": {
-              "desc": "·触发<color=#FFAF2C>[秽盾净除]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；<Term:2000003></Term>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，可获得<color=#FFAF2C>2000操作得分</color>。最多获得5000操作得分。",
+              "desc": "·触发<color=#FFAF2C>[秽盾净除]</color>时，可获得<color=#FFAF2C>1000操作得分</color>；<Term:2000003></Term>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>500操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，可获得<color=#FFAF2C>2000操作得分</color>。<Term:2000003></Term>期间，通过<color=#FFAF2C>[反制支援]</color>造成<color=#FFAF2C>[完美反制]</color>时，会获得该次<color=#FFAF2C>控制技</color>剩余的成功应对得分。最多获得5000操作得分。",
               "title": ""
             },
             "69013001": {
@@ -52,6 +52,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "200": "物理"
               },
@@ -124,6 +125,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "200": "物理",
                 "205": "以太"
@@ -197,6 +199,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "201": "火属性",
                 "202": "冰属性"

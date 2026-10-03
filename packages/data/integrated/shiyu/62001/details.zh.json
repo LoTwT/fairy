@@ -35,11 +35,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ClaymoreGrey.png",
               "name": "提尔锋",
               "stats": {
-                "attack": 1249.4545454545455,
+                "attack": 1718,
                 "attribute_infliction": 0,
-                "defence": 532.8,
-                "hp": 11790.24,
-                "stun": 0
+                "defence": 426.24,
+                "hp": 165505.49399999998,
+                "stun": 1068
               }
             },
             "11097": {
@@ -143,6 +143,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -233,6 +234,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "201": "火属性"
           },
@@ -345,6 +347,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "以太"
           },
@@ -434,6 +437,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "电属性"
           },
@@ -546,6 +550,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "201": "火属性"
@@ -656,6 +661,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "202": "冰属性"
@@ -789,6 +795,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "电属性"
           },
@@ -898,6 +905,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -1011,6 +1019,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "201": "火属性"
           },
@@ -1100,6 +1109,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "202": "冰属性"
@@ -1173,6 +1183,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "电属性"
           },
@@ -1222,6 +1233,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -1335,6 +1347,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -1385,6 +1398,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"

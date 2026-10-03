@@ -99,8 +99,8 @@ type LanguageTalent = AgentDetails["talent"][string]
 
 /** 共有 key 提取后的语言条目与单语言独有完整条目都必须能由正式类型表达。 */
 export const languageSkinVariants: LanguageSkin[] = [
-  { name: "", desc: "" },
-  { name: "", desc: "", image: "" },
+  { name: "", desc: "", obtainDesc: "" },
+  { name: "", desc: "", obtainDesc: "", image: "" },
 ]
 export const languageSkillVariants: LanguageSkill[] = [
   { description: [] },

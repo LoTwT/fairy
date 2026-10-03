@@ -98,7 +98,8 @@
     }
   },
   "hitType": {
-    "101": "Slash"
+    "101": "Slash",
+    "102": "Strike"
   },
   "id": 1071,
   "locale": "en",
@@ -1740,12 +1741,13 @@
   "skin": {
     "3110710": {
       "desc": "A ruler ready to ready to sound the triumphal anthem anew, a hero poised to reignite her legend. The not-yet-seasoned leader has finally met the flames of her coronation, yet she still walks the gritty sands of the Outer Ring.\nA light tap on the piano keys sends her desert-tinged song drifting across this land that bears the weight of hope.",
-      "name": "Caesar: Inferno Joyride"
+      "name": "Caesar: Inferno Joyride",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
   "strategy": [
-    "05",
+    "04",
     "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, off-field support",
     "Grants shields and Anti-Interrupt to all squad members",
     "Provides attack boosts to on-field squadmates"

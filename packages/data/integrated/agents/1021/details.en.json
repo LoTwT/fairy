@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "ATK"
+      "name": "CRIT DMG"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "CRIT DMG"
+      "name": "ATK"
     }
   },
   "hitType": {
@@ -1540,7 +1540,8 @@
   "skin": {
     "3110210": {
       "desc": "A lost cat doesn't know where to go — only that it has to keep moving.\nShe wandered through the vast streets of New Eridu, her thin clothes offering no protection from the elements, until a tiny odd-job agency finally took her in.",
-      "name": "Nekomata: Cat's Gratitude"
+      "name": "Nekomata: Cat's Gratitude",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

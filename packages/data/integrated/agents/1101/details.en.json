@@ -128,87 +128,87 @@
     },
     "parameterRowsById": {
       "1101001": [
-        "/skill/basic/description/1/param/0",
-        "/skill/basic/description/1/param/7"
+        "/skill/basic/description/2/param/0",
+        "/skill/basic/description/2/param/7"
       ],
       "1101002": [
-        "/skill/basic/description/1/param/1",
-        "/skill/basic/description/1/param/8"
+        "/skill/basic/description/2/param/1",
+        "/skill/basic/description/2/param/8"
       ],
       "1101003": [
-        "/skill/basic/description/1/param/2",
-        "/skill/basic/description/1/param/9"
+        "/skill/basic/description/2/param/2",
+        "/skill/basic/description/2/param/9"
       ],
       "1101004": [
-        "/skill/basic/description/1/param/3",
-        "/skill/basic/description/1/param/10"
+        "/skill/basic/description/2/param/3",
+        "/skill/basic/description/2/param/10"
       ],
       "1101005": [
-        "/skill/basic/description/1/param/4",
-        "/skill/basic/description/1/param/11"
+        "/skill/basic/description/2/param/4",
+        "/skill/basic/description/2/param/11"
       ],
       "1101006": [
-        "/skill/basic/description/1/param/5",
-        "/skill/basic/description/1/param/12"
+        "/skill/basic/description/2/param/5",
+        "/skill/basic/description/2/param/12"
       ],
       "1101007": [
-        "/skill/basic/description/1/param/6",
-        "/skill/basic/description/1/param/13"
+        "/skill/basic/description/2/param/6",
+        "/skill/basic/description/2/param/13"
       ],
       "1101101": [
-        "/skill/special/description/2/param/0",
-        "/skill/special/description/2/param/3"
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/3"
       ],
       "1101102": [
-        "/skill/special/description/2/param/1",
-        "/skill/special/description/2/param/4"
+        "/skill/special/description/4/param/1",
+        "/skill/special/description/4/param/4"
       ],
       "1101103": [
-        "/skill/special/description/2/param/2",
-        "/skill/special/description/2/param/5"
+        "/skill/special/description/4/param/2",
+        "/skill/special/description/4/param/5"
       ],
       "1101104": [
-        "/skill/special/description/3/param/0",
-        "/skill/special/description/3/param/3"
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/3"
       ],
       "1101105": [
-        "/skill/special/description/3/param/1",
-        "/skill/special/description/3/param/4"
+        "/skill/special/description/5/param/1",
+        "/skill/special/description/5/param/4"
       ],
       "1101106": [
-        "/skill/special/description/3/param/2",
-        "/skill/special/description/3/param/5"
+        "/skill/special/description/5/param/2",
+        "/skill/special/description/5/param/5"
       ],
       "1101201": [
-        "/skill/dodge/description/3/param/0",
-        "/skill/dodge/description/3/param/1"
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
       ],
       "1101202": [
-        "/skill/dodge/description/4/param/0",
-        "/skill/dodge/description/4/param/1"
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
       ],
       "1101301": [
-        "/skill/chain/description/2/param/0",
-        "/skill/chain/description/2/param/1"
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
       ],
       "1101401": [
-        "/skill/chain/description/3/param/0",
-        "/skill/chain/description/3/param/2"
+        "/skill/chain/description/4/param/0",
+        "/skill/chain/description/4/param/2"
       ],
       "1101402": [
-        "/skill/chain/description/3/param/1",
-        "/skill/chain/description/3/param/3"
+        "/skill/chain/description/4/param/1",
+        "/skill/chain/description/4/param/3"
       ],
       "1101501": [
-        "/skill/assist/description/3/param/0",
-        "/skill/assist/description/3/param/1"
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
       ],
-      "1101502": ["/skill/assist/description/4/param/0"],
-      "1101503": ["/skill/assist/description/4/param/1"],
-      "1101504": ["/skill/assist/description/4/param/2"],
+      "1101502": ["/skill/assist/description/5/param/0"],
+      "1101503": ["/skill/assist/description/5/param/1"],
+      "1101504": ["/skill/assist/description/5/param/2"],
       "1101505": [
-        "/skill/assist/description/5/param/0",
-        "/skill/assist/description/5/param/1"
+        "/skill/assist/description/6/param/0",
+        "/skill/assist/description/6/param/1"
       ]
     }
   },
@@ -249,7 +249,7 @@
           "Core Passive: Demolition Hammer",
           "Additional Ability: Belobog Management"
         ],
-        "potential": []
+        "potential": [0]
       },
       "1101502": {
         "desc": [
@@ -261,7 +261,7 @@
           "Core Passive: Demolition Hammer",
           "Additional Ability: Belobog Management"
         ],
-        "potential": []
+        "potential": [0]
       },
       "1101503": {
         "desc": [
@@ -273,7 +273,7 @@
           "Core Passive: Demolition Hammer",
           "Additional Ability: Belobog Management"
         ],
-        "potential": []
+        "potential": [0]
       },
       "1101504": {
         "desc": [
@@ -285,7 +285,7 @@
           "Core Passive: Demolition Hammer",
           "Additional Ability: Belobog Management"
         ],
-        "potential": []
+        "potential": [0]
       },
       "1101505": {
         "desc": [
@@ -297,7 +297,7 @@
           "Core Passive: Demolition Hammer",
           "Additional Ability: Belobog Management"
         ],
-        "potential": []
+        "potential": [0]
       },
       "1101506": {
         "desc": [
@@ -309,7 +309,7 @@
           "Core Passive: Demolition Hammer",
           "Additional Ability: Belobog Management"
         ],
-        "potential": []
+        "potential": [0]
       },
       "1101507": {
         "desc": [
@@ -321,11 +321,186 @@
           "Core Passive: Demolition Hammer",
           "Additional Ability: Belobog Management"
         ],
-        "potential": []
+        "potential": [0]
+      },
+      "1101508": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>30%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Armorer</color> character, or shares the same Attribute or Faction:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": [110100, 110101, 110102, 110103, 110104, 110105]
+      },
+      "1101509": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>35%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Armorer</color> character, or shares the same Attribute or Faction:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": [110100, 110101, 110102, 110103, 110104, 110105]
+      },
+      "1101510": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>40%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Armorer</color> character, or shares the same Attribute or Faction:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": [110100, 110101, 110102, 110103, 110104, 110105]
+      },
+      "1101511": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>45%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Armorer</color> character, or shares the same Attribute or Faction:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": [110100, 110101, 110102, 110103, 110104, 110105]
+      },
+      "1101512": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>50%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Armorer</color> character, or shares the same Attribute or Faction:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": [110100, 110101, 110102, 110103, 110104, 110105]
+      },
+      "1101513": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>55%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Armorer</color> character, or shares the same Attribute or Faction:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": [110100, 110101, 110102, 110103, 110104, 110105]
+      },
+      "1101514": {
+        "desc": [
+          "When Koleda uses her <color=#FFFFFF>EX Special Attack</color> or consumes <color=#FFFFFF>Furnace Fire</color> to use an enhanced <color=#FFFFFF>Basic Attack</color>, the Daze she deals increases by <color=#2BAD00>60%</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Rupture</color> or <color=#FFFFFF>Armorer</color> character, or shares the same Attribute or Faction:\nWhen the explosion from Koleda's <color=#FFFFFF>EX Special Attack</color> hits an enemy, it applies a debuff to the target. While the target is Stunned, <color=#FFFFFF>Chain Attacks</color> deal 35% more DMG to the target. This effect can stack up to 2 times and resets when the Stunned effect ends."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Demolition Hammer",
+          "Additional Ability: Belobog Management"
+        ],
+        "potential": [110100, 110101, 110102, 110103, 110104, 110105]
       }
     }
   },
-  "potentialDetail": {},
+  "potentialDetail": {
+    "110100": {
+      "abilityList": [11101401],
+      "desc": "",
+      "id": 110100,
+      "image": "Koleda",
+      "level": 1,
+      "levelShowName": "Get Workin'! I",
+      "name": "",
+      "potentialMaterials": [
+        {
+          "itemId": 20110,
+          "number": 1
+        }
+      ]
+    },
+    "110101": {
+      "abilityList": [11101401, 11101501],
+      "desc": "Armorer Agents in the team gain <color=#2BAD00>4%</color> increased Laceration DMG, while non-Armorer Agents gain <color=#2BAD00>11%</color> increased CRIT DMG.",
+      "id": 110101,
+      "image": "Koleda",
+      "level": 2,
+      "levelShowName": "Get Workin'! II",
+      "name": "Potential Awakening: Demolition Ops",
+      "potentialMaterials": [
+        {
+          "itemId": 20110,
+          "number": 1
+        }
+      ]
+    },
+    "110102": {
+      "abilityList": [11101401, 11101502],
+      "desc": "Armorer Agents in the team gain <color=#2BAD00>6%</color> increased Laceration DMG, while non-Armorer Agents gain <color=#2BAD00>17%</color> increased CRIT DMG.",
+      "id": 110102,
+      "image": "Koleda",
+      "level": 3,
+      "levelShowName": "Get Workin'! III",
+      "name": "Potential Awakening: Demolition Ops",
+      "potentialMaterials": [
+        {
+          "itemId": 20110,
+          "number": 1
+        }
+      ]
+    },
+    "110103": {
+      "abilityList": [11101401, 11101503],
+      "desc": "Armorer Agents in the team gain <color=#2BAD00>8%</color> increased Laceration DMG, while non-Armorer Agents gain <color=#2BAD00>23%</color> increased CRIT DMG.",
+      "id": 110103,
+      "image": "Koleda",
+      "level": 4,
+      "levelShowName": "Get Workin'! IV",
+      "name": "Potential Awakening: Demolition Ops",
+      "potentialMaterials": [
+        {
+          "itemId": 20110,
+          "number": 1
+        }
+      ]
+    },
+    "110104": {
+      "abilityList": [11101401, 11101504],
+      "desc": "Armorer Agents in the team gain <color=#2BAD00>10%</color> increased Laceration DMG, while non-Armorer Agents gain <color=#2BAD00>29%</color> increased CRIT DMG.",
+      "id": 110104,
+      "image": "Koleda",
+      "level": 5,
+      "levelShowName": "Get Workin'! V",
+      "name": "Potential Awakening: Demolition Ops",
+      "potentialMaterials": [
+        {
+          "itemId": 20110,
+          "number": 1
+        }
+      ]
+    },
+    "110105": {
+      "abilityList": [11101401, 11101505],
+      "desc": "Armorer Agents in the team gain <color=#2BAD00>12%</color> increased Laceration DMG, while non-Armorer Agents gain <color=#2BAD00>35%</color> increased CRIT DMG.",
+      "id": 110105,
+      "image": "Koleda",
+      "level": 6,
+      "levelShowName": "Get Workin'! VI",
+      "name": "Potential Awakening: Demolition Ops",
+      "potentialMaterials": [
+        {
+          "itemId": 20110,
+          "number": 1
+        }
+      ]
+    }
+  },
   "skill": {
     "assist": {
       "description": [
@@ -342,7 +517,12 @@
         {
           "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nKoleda charges and strikes enemies in front, dealing <color=#FF5521>Fire DMG</color> and obtaining <color=#FFFFFF>Furnace Fire</color> effect.\nCharacter is invulnerable while using this skill.",
           "name": "Assist Follow-Up: Hammer Bell",
-          "potential": []
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nKoleda charges and strikes enemies in front, dealing <color=#FF5521>Fire DMG</color> and obtaining <color=#FFFFFF>Furnace Fire</color> effect.\nCharacter is invulnerable while using this skill. Hold <IconMap:Icon_Normal> to follow up with <color=#FFFFFF>Dash Attack: Tremble!</color>.",
+          "name": "Assist Follow-Up: Hammer Bell",
+          "potential": [110100, 110101, 110102, 110103, 110104, 110105]
         },
         {
           "name": "Quick Assist: Coming Thru!",
@@ -551,7 +731,12 @@
         {
           "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 strikes, dealing <color=#F0D12B>Physical DMG</color>.\nWhen Koleda has the <color=#FFFFFF>Furnace Fire</color> effect, she can launch an enhanced <color=#FFFFFF>Basic Attack</color> after the 2nd hit, consuming the <color=#FFFFFF>Furnace Fire</color> effect and dealing massive <color=#FF5521>Fire DMG</color>.\nWhen Koleda and Ben are deployed together, executing an enhanced <color=#FFFFFF>Basic Attack</color> will trigger a coordinated attack from both, further increasing the move's power;\nKoleda is invulnerable during the <color=#FFFFFF>Basic Attack's</color> 4th hit and enhanced <color=#FFFFFF>Basic Attack</color>.",
           "name": "Basic Attack: Smash 'n' Bash",
-          "potential": []
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nUnleashes up to 4 strikes, dealing <color=#F0D12B>Physical DMG</color>.\nWhen Koleda has the <color=#FFFFFF>Furnace Fire</color> effect, she can launch an enhanced <color=#FFFFFF>Basic Attack</color> after the 2nd hit, consuming the <color=#FFFFFF>Furnace Fire</color> effect and dealing massive <color=#FF5521>Fire DMG</color>.\nEnhanced <color=#FFFFFF>Basic Attack</color> consists of two hits. After performing the first hit, press or hold <IconMap:Icon_Normal> to follow up with the second hit. The pursuit effect of the enhanced <color=#FFFFFF>Basic Attack</color>'s first hit is also strengthened.\n<color=#FFFFFF>Furnace Fire</color> can stack up to 2 times. Performing an enhanced <color=#FFFFFF>Basic Attack</color> consumes all stacks of <color=#FFFFFF>Furnace Fire</color>.\nWhen <color=#FFFFFF>Furnace Fire</color> is consumed, all Agents deal 35% more damage for 40s. Repeated triggers reset the duration. For each stack of <color=#FFFFFF>Furnace Fire</color> consumed, the second hit of the enhanced <color=#FFFFFF>Basic Attack</color> deals 10% more damage and inflicts 20% more Daze.\nWhen switching Agents during the first hit of the enhanced <color=#FFFFFF>Basic Attack</color>, Koleda remains on-field and automatically launches the second hit of the enhanced <color=#FFFFFF>Basic Attack</color>.\nWhen Koleda and Ben are both in the squad, using an enhanced <color=#FFFFFF>Basic Attack</color> without switching Agents during the first hit of the enhanced <color=#FFFFFF>Basic Attack</color> causes the two to perform a Coordinated Attack, further increasing the skill's power.\nCharacter is invulnerable during the 4th hit of her <color=#FFFFFF>Basic Attack</color> and her enhanced <color=#FFFFFF>Basic Attack</color>.\nThe invulnerability duration of the second hit of her enhanced <color=#FFFFFF>Basic Attack</color> is increased.",
+          "name": "Basic Attack: Smash 'n' Bash",
+          "potential": [110100, 110101, 110102, 110103, 110104, 110105]
         },
         {
           "name": "Basic Attack: Smash 'n' Bash",
@@ -935,7 +1120,12 @@
         {
           "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a powerful explosion on enemies in a large area in front, dealing massive <color=#FF5521>Fire DMG</color> while also obtaining the <color=#FFFFFF>Furnace Fire</color> effect.\nKoleda and Ben can team up when fighting together to launch a coordinated attack, further increasing the power of the attack.\nCharacter is invulnerable while using this skill.",
           "name": "Ultimate: Hammerquake",
-          "potential": []
+          "potential": [0]
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a powerful explosion on enemies in a large area in front, dealing massive <color=#FF5521>Fire DMG</color> while also obtaining the <color=#FFFFFF>Furnace Fire</color> effect.\nKoleda and Ben can team up when fighting together to launch a coordinated attack, further increasing the power of the attack.\nCharacter is invulnerable while using this skill. Hold <IconMap:Icon_Normal> to follow up with <color=#FFFFFF>Dash Attack: Tremble!</color>.",
+          "name": "Ultimate: Hammerquake",
+          "potential": [110100, 110101, 110102, 110103, 110104, 110105]
         },
         {
           "name": "Chain Attack: Natural Disaster",
@@ -1117,12 +1307,22 @@
         {
           "desc": "Press <IconMap:Icon_Normal> during a Dodge to activate:\nStrikes enemies in front, dealing <color=#F0D12B>Physical DMG</color>.",
           "name": "Dash Attack: Tremble!",
-          "potential": []
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nPerforms a forward strike, dealing <color=#F0D12B>Physical DMG</color>.\nDuring this skill, if Koleda has <color=#FFFFFF>Furnace Fire</color>, its Anti-Interrupt Level is increased. Hold <IconMap:Icon_Normal> to follow up with an enhanced <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Dash Attack: Tremble!",
+          "potential": [110100, 110101, 110102, 110103, 110104, 110105]
         },
         {
           "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nStrikes enemies in front and creates an explosion, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill.",
           "name": "Dodge Counter: Don't Look Down on Me",
-          "potential": []
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a <color=#FFFFFF>Perfect Dodge</color> to activate:\nStrikes enemies in front and creates an explosion, dealing <color=#FF5521>Fire DMG</color>.\nCharacter is invulnerable while using this skill. If Koleda has <color=#FFFFFF>Furnace Fire</color>, hold <IconMap:Icon_Normal> to follow up with an enhanced <color=#FFFFFF>Basic Attack</color>.",
+          "name": "Dodge Counter: Don't Look Down on Me",
+          "potential": [110100, 110101, 110102, 110103, 110104, 110105]
         },
         {
           "name": "Dash Attack: Tremble!",
@@ -1247,12 +1447,22 @@
         {
           "desc": "Press <IconMap:Icon_Special> to activate:\nStrikes enemies in front and triggers an explosion, dealing <color=#FF5521>Fire DMG</color>.\nThis skill launches faster and triggers an explosion when used after the 2nd or 4th hit of Koleda's <color=#FFFFFF>Basic Attack</color> or enhanced <color=#FFFFFF>Basic Attack</color>.\nWhen Koleda and Ben are both in your squad, and this skill is quickly launched after an enhanced <color=#FFFFFF>Basic Attack</color>, they team up to launch a coordinated attack, further increasing the power of the skill.\nAnti-Interrupt level is increased while using this skill.",
           "name": "Special Attack: Hammer Time",
-          "potential": []
+          "potential": [0]
+        },
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nStrikes enemies in front and triggers an explosion, dealing <color=#FF5521>Fire DMG</color>.\nThis skill launches faster and directly triggers the explosion when used after the 2nd or 4th hit of Koleda's <color=#FFFFFF>Basic Attack</color> or enhanced <color=#FFFFFF>Basic Attack</color>.\nDuring the 2nd hit of her <color=#FFFFFF>Basic Attack</color>, holding <IconMap:Icon_Normal> can also trigger the explosion directly.\nWhen Koleda and Ben are both in your squad, and this skill is quickly launched after an enhanced <color=#FFFFFF>Basic Attack</color>, they team up to launch a coordinated attack, further increasing the power of the skill.\nAnti-Interrupt level is increased while using this skill.",
+          "name": "Special Attack: Hammer Time",
+          "potential": [110100, 110101, 110102, 110103, 110104, 110105]
         },
         {
           "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nStrikes enemies in front and triggers a powerful explosion, dealing massive <color=#FF5521>Fire DMG</color>. Koleda also gains the <color=#FFFFFF>Furnace Fire</color> effect.\nThis skill activates faster and triggers an explosion when used after the 2nd or 4th hit of Koleda's <color=#FFFFFF>Basic Attack</color> or enhanced <color=#FFFFFF>Basic Attack</color>.\nWhen Koleda and Ben are both in your squad and this skill is quickly launched after an enhanced <color=#FFFFFF>Basic Attack</color>, they team up to launch a coordinated attack, further increasing the power of the skill.\nCharacter is invulnerable while using this skill.",
           "name": "EX Special Attack: Boiling Furnace",
-          "potential": []
+          "potential": [0]
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nStrikes enemies in front and triggers a powerful explosion, dealing massive <color=#FF5521>Fire DMG</color>. Koleda also gains the <color=#FFFFFF>Furnace Fire</color> effect.\nThis skill activates faster and triggers an explosion when used after the 2nd or 4th hit of Koleda's <color=#FFFFFF>Basic Attack</color> or enhanced <color=#FFFFFF>Basic Attack</color>. Explosions triggered this way inflict 10% more Daze.\nWhen Koleda and Ben are both in your squad and this skill is quickly launched after an enhanced <color=#FFFFFF>Basic Attack</color>, they team up to launch a coordinated attack, further increasing the power of the skill.\nCharacter is invulnerable while using this skill. Hold <IconMap:Icon_Normal> to follow up with <color=#FFFFFF>Dash Attack: Tremble!</color>.",
+          "name": "EX Special Attack: Boiling Furnace",
+          "potential": [110100, 110101, 110102, 110103, 110104, 110105]
         },
         {
           "name": "Special Attack: Hammer Time",
@@ -1639,7 +1849,8 @@
   "skin": {
     "3111010": {
       "desc": "A crimson figure swings twin hammers as if she could even shatter time itself.\nStill young, her journey is only just beginning. Growing up can wait; in the end, every person becomes their own true self.",
-      "name": "Koleda: Heart & Hammer"
+      "name": "Koleda: Heart & Hammer",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

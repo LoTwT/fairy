@@ -1459,12 +1459,13 @@
   "skin": {
     "3113410": {
       "desc": "暖绒的双耳、娇小的身姿，倘若因此投以轻视，「利益」的裁决官将不吝挥下枝条。",
-      "name": "照·绒耳寒枝"
+      "name": "照·绒耳寒枝",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
   "strategy": [
-    "05",
+    "04",
     "<IconMap:Icon_GeneralBuff_Ice>冰属性，泛用型速切辅助",
     "可稳定开启[以太帷幕]",
     "提高全队角色攻击力"

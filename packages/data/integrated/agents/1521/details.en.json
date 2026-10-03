@@ -82,15 +82,15 @@
   "fairyRecommend": {
     "part4": {
       "format": "{0:0.#%}",
-      "name": "Energy Regen"
+      "name": "CRIT Rate"
     },
     "part5": {
       "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "name": "Energy Regen"
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "CRIT DMG"
+      "name": "ATK"
     },
     "partSub": {
       "format": "{0:0.#%}",
@@ -1413,7 +1413,8 @@
   "skin": {
     "3115210": {
       "desc": "There are two kinds of people in this world, venomous snakes and mice! As for who is what...\nLady Cissia says: Those stronger than me are snakes, and those weaker than me are mice!",
-      "name": "Cissia: Snake & Mouse Game"
+      "name": "Cissia: Snake & Mouse Game",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

@@ -1,0 +1,306 @@
+{
+  "id": 690451,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 690452,
+      "zone": {
+        "69045201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014504": {
+              "desc": "· When Integrated - Scorched Horizon is Impaired or Shutdown, the whole squad's <color=#FFAF2C>Sharp DMG increases by 40%</color> for 60s. Repeated triggers reset the duration. \n· When an Agent's attack hits an enemy that is not Stunned, Daze dealt <color=#FFAF2C>increases by 15%</color>. While Integrated - Scorched Horizon is Stunned, the Stun DMG Multiplier <color=#FFAF2C>increases by 20%</color>.",
+              "title": ""
+            },
+            "69014505": {
+              "desc": "· When Integrated - Scorched Horizon is in <color=#FFFFFF>Misty Veil</color> state, using <color=#FFFFFF>Defensive Assist</color> to counter Integrated - Scorched Horizon's attack and impair it grants <color=#FFAF2C>1500 Performance Points</color>; landing a <color=#FFAF2C>Shutdown</color> on Integrated - Scorched Horizon's <Term:2000003></Term> grants <color=#FFAF2C>2000 Performance Points</color>. A maximum of 5000 Performance Points can be obtained.",
+              "title": ""
+            },
+            "69014508": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690452011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HoloMutant.png",
+              "monsterList": {
+                "31437": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40011,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_HoloMutant.png",
+                  "name": "Integrated - Scorched Horizon",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22831434.36,
+                    "stun": 17585.05
+                  }
+                }
+              },
+              "monsterResistance": {
+                "200": "Physical"
+              },
+              "monsterWeakness": {
+                "203": "Electric"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Integrated - Phaethon of the Scorched Horizon",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69014502": {
+              "desc": "· If there are 2/3 Agents in the squad with the <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/60</color> respectively, and Anomaly Buildup Rate <color=#2BAD00>increases by 10%/20%</color> respectively.\n· After an Agent inflicts an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's DEF is <color=#2BAD00>reduced by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Cinders of Corrosion"
+            },
+            "69014503": {
+              "desc": "· Agents with the <color=#FFFFFF>Attack</color> specialty deal <color=#2BAD00>20%</color> more <color=#98EFF0>Ice DMG</color>.\n· Agent CRIT DMG increases by <color=#2BAD00>30%</color>. When attacking a Stunned enemy, the enemy's Stun DMG Multiplier additionally increases by <color=#2BAD00>20%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Gleaming Frost"
+            },
+            "69014603": {
+              "desc": "· Agent PEN Ratio <color=#2BAD00>increases by 5%</color>. When an attack hits an enemy, it ignores <color=#2BAD00>15%</color> of the target's <color=#2EB6FF>Electric RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 20%</color> and DEF <color=#2BAD00>increases by 10%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Sharp Rupture"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690451,
+      "zone": {
+        "69045101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013005": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Armorer><color=#FFAF2C>Armorer</color> specialty.",
+              "title": ""
+            },
+            "69014506": {
+              "desc": "· Attribute Anomaly DMG taken by Kusarikku is <color=#FFAF2C>reduced by 40%</color>.\n· When an Agent successfully uses a Defensive Assist against Kusarikku's <Term:2000005></Term>, applies 1 stack of Exposed to Kusarikku. When Kusarikku becomes Stunned, applies 2 stacks of Exposed. Each stack of Exposed increases the <color=#FFAF2C>Laceration DMG Kusarikku receives by 10%</color>. Exposed can stack up to 4 times and lasts <color=#FFAF2C>30</color>s. Repeated triggers reset the duration.",
+              "title": ""
+            },
+            "69014507": {
+              "desc": "· After Kusarikku activates Corruptive Barrier, use <color=#FFFFFF>Defensive Assist</color> to counter Kusarikku's <Term:2000005></Term> and leave it Impaired to gain <color=#FFAF2C>1000 Performance Points</color>; successfully countering a <Term:2000005></Term> with <color=#FFFFFF>Defensive Assist</color> grants <color=#FFAF2C>700 Performance Points</color>; executing a <color=#FFAF2C>Shutdown</color> on Kusarikku's <Term:2000003></Term> grants <color=#FFAF2C>2000 Performance Points</color>. A maximum of 5000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690451011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Larval.png",
+              "monsterList": {
+                "31711": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40010,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Larval.png",
+                  "name": "Kusarikku",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22124404.935,
+                    "stun": 18933.95
+                  }
+                }
+              },
+              "monsterResistance": {
+                "202": "Ice"
+              },
+              "monsterWeakness": {
+                "201": "Fire",
+                "203": "Electric"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Kusarikku",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014502": {
+              "desc": "· If there are 2/3 Agents in the squad with the <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/60</color> respectively, and Anomaly Buildup Rate <color=#2BAD00>increases by 10%/20%</color> respectively.\n· After an Agent inflicts an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's DEF is <color=#2BAD00>reduced by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Cinders of Corrosion"
+            },
+            "69014503": {
+              "desc": "· Agents with the <color=#FFFFFF>Attack</color> specialty deal <color=#2BAD00>20%</color> more <color=#98EFF0>Ice DMG</color>.\n· Agent CRIT DMG increases by <color=#2BAD00>30%</color>. When attacking a Stunned enemy, the enemy's Stun DMG Multiplier additionally increases by <color=#2BAD00>20%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Gleaming Frost"
+            },
+            "69014603": {
+              "desc": "· Agent PEN Ratio <color=#2BAD00>increases by 5%</color>. When an attack hits an enemy, it ignores <color=#2BAD00>15%</color> of the target's <color=#2EB6FF>Electric RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 20%</color> and DEF <color=#2BAD00>increases by 10%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Sharp Rupture"
+            }
+          },
+          "stageNum": 1
+        },
+        "69045102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69014405": {
+              "desc": "· When an Agent inflicts an Attribute Anomaly on an enemy, the target enemy gains 1 stack of Blight Mark of the corresponding attribute, lasting 30s and stacking up to 2 times. Repeated triggers of same-attribute Blight Mark reset its duration.\n· For every stack of Blight Mark inflicted, the enemies <color=#FFAF2C>take 8% more Attribute Anomaly DMG</color>, and <color=#FFAF2C>DMG taken by <Term:2000001></Term> increases by 8%</color>.\n· When inflicting Impaired or Shutdown on an enemy, <color=#FFAF2C>the whole squad's Anomaly Proficiency increases by 60 pts</color>, lasting 30s. Repeated triggers reset the duration.",
+              "title": "69014405_Title"
+            },
+            "69014406": {
+              "desc": "· Successfully <color=#FFAF2C>inflicting Impaired</color> grants <color=#FFAF2C>1000 Performance Points</color>; successfully <color=#FFAF2C>countering <Term:2000003></Term></color> grants <color=#FFAF2C>500 Performance Points</color> each time; <color=#FFAF2C>preventing an enemy's Corruptive Barrier from completing its charge</color> and rendering them Impaired grants <color=#FFAF2C>1,500 Performance Points</color>.  During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C><Term:2000006></Term></color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": "69014406_Title"
+            }
+          },
+          "layerRoom": {
+            "690451021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_GirReborn.png",
+              "monsterList": {
+                "31674": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40008,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_GirReborn.png",
+                  "name": "Girtablullu - Stagnant Aberrant",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 24819249.509999998,
+                    "stun": 23276.75
+                  }
+                }
+              },
+              "monsterResistance": {},
+              "monsterWeakness": {},
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Girtablullu - Stagnant Aberrant",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014502": {
+              "desc": "· If there are 2/3 Agents in the squad with the <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/60</color> respectively, and Anomaly Buildup Rate <color=#2BAD00>increases by 10%/20%</color> respectively.\n· After an Agent inflicts an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's DEF is <color=#2BAD00>reduced by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Cinders of Corrosion"
+            },
+            "69014503": {
+              "desc": "· Agents with the <color=#FFFFFF>Attack</color> specialty deal <color=#2BAD00>20%</color> more <color=#98EFF0>Ice DMG</color>.\n· Agent CRIT DMG increases by <color=#2BAD00>30%</color>. When attacking a Stunned enemy, the enemy's Stun DMG Multiplier additionally increases by <color=#2BAD00>20%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Gleaming Frost"
+            },
+            "69014603": {
+              "desc": "· Agent PEN Ratio <color=#2BAD00>increases by 5%</color>. When an attack hits an enemy, it ignores <color=#2BAD00>15%</color> of the target's <color=#2EB6FF>Electric RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 20%</color> and DEF <color=#2BAD00>increases by 10%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Sharp Rupture"
+            }
+          },
+          "stageNum": 2
+        },
+        "69045103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69012102": {
+              "desc": "",
+              "title": ""
+            },
+            "69012602": {
+              "desc": "· When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <color=#FFFFFF>Contract</color> and <color=#FFFFFF>Self-Sacrifice</color>. Contract and Self-Sacrifice can stack up to 3 times. Each stack of Contract increases All-Attribute Anomaly Buildup RES by <color=#FFAF2C>15%</color>, each stack of Self-Sacrifice reduces The Thrall's DEF by <color=#FFAF2C>8%</color>. When The Thrall is Stunned, CRIT DMG taken increases by <color=#FFAF2C>50%</color>.",
+              "title": ""
+            },
+            "69012603": {
+              "desc": "· When Agents inflict <color=#FFAF2C>Weakened</color> on Sobek and The Thrall, <color=#FFAF2C>1,500 Performance Points</color> will be awarded. When an Agent <color=#FFAF2C>eliminates Sobek</color>, <color=#FFAF2C>2,000 Performance Points</color> will be awarded. Up to a maximum of 5,000 Performance Points can be earned.",
+              "title": ""
+            },
+            "69013004": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Stun><color=#FFAF2C>Stun</color> specialty.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690451031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Awakener.png",
+              "monsterList": {
+                "31353": {
+                  "element": {
+                    "electric": -1,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": 1,
+                    "wind": 1
+                  },
+                  "id": 30042,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Awakener.png",
+                  "name": "Ye Shiyuan the Thrall",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 23612080.139999997,
+                    "stun": 14068.040000000003
+                  }
+                }
+              },
+              "monsterResistance": {
+                "203": "Electric"
+              },
+              "monsterWeakness": {
+                "200": "Physical",
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Ye Shiyuan the Thrall",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014502": {
+              "desc": "· If there are 2/3 Agents in the squad with the <color=#FFFFFF>Anomaly</color> specialty, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/60</color> respectively, and Anomaly Buildup Rate <color=#2BAD00>increases by 10%/20%</color> respectively.\n· After an Agent inflicts an <color=#FFFFFF>Attribute Anomaly</color> on an enemy, the enemy's DEF is <color=#2BAD00>reduced by 10%</color> for 10s. Repeated triggers reset the duration.",
+              "title": "Cinders of Corrosion"
+            },
+            "69014503": {
+              "desc": "· Agents with the <color=#FFFFFF>Attack</color> specialty deal <color=#2BAD00>20%</color> more <color=#98EFF0>Ice DMG</color>.\n· Agent CRIT DMG increases by <color=#2BAD00>30%</color>. When attacking a Stunned enemy, the enemy's Stun DMG Multiplier additionally increases by <color=#2BAD00>20%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Gleaming Frost"
+            },
+            "69014603": {
+              "desc": "· Agent PEN Ratio <color=#2BAD00>increases by 5%</color>. When an attack hits an enemy, it ignores <color=#2BAD00>15%</color> of the target's <color=#2EB6FF>Electric RES</color>.\n· After an Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 20%</color> and DEF <color=#2BAD00>increases by 10%</color> for 20s. Repeated triggers reset the duration.",
+              "title": "Sharp Rupture"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

@@ -44,6 +44,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {},
               "wavesNum": 1
             }
@@ -87,7 +88,7 @@
               "title": "69014405_Title"
             },
             "69014406": {
-              "desc": "· Successfully <color=#FFAF2C>inflicting Impaired</color> grants <color=#FFAF2C>1000 Performance Points</color>; successfully <color=#FFAF2C>countering</color> <Term:2000003></Term> grants <color=#FFAF2C>500 Performance Points</color> each time; <color=#FFAF2C>preventing an enemy's Corruptive Barrier from completing its charge</color> and rendering them Impaired grants <color=#FFAF2C>1500 Performance Points</color>. A maximum of 5000 Performance Points can be obtained.",
+              "desc": "· Successfully <color=#FFAF2C>inflicting Impaired</color> grants <color=#FFAF2C>1000 Performance Points</color>; successfully <color=#FFAF2C>countering <Term:2000003></Term></color> grants <color=#FFAF2C>500 Performance Points</color> each time; <color=#FFAF2C>preventing an enemy's Corruptive Barrier from completing its charge</color> and rendering them Impaired grants <color=#FFAF2C>1,500 Performance Points</color>.  During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C><Term:2000006></Term></color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
               "title": "69014406_Title"
             }
           },
@@ -116,6 +117,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {},
               "wavesNum": 1
             }
@@ -178,6 +180,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "202": "Ice",
                 "205": "Ether"
@@ -247,6 +250,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "203": "Electric",
                 "205": "Ether"

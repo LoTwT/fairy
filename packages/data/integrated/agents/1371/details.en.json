@@ -90,11 +90,11 @@
     },
     "part6": {
       "format": "{0:0.#%}",
-      "name": "HP"
+      "name": "Ether DMG Bonus"
     },
     "partSub": {
       "format": "{0:0.#%}",
-      "name": "Ether DMG Bonus"
+      "name": "HP"
     }
   },
   "hitType": {
@@ -1914,16 +1914,19 @@
   "skin": {
     "3113710": {
       "desc": "As the Master of Yunkui Summit, one's fashion and accessories need only be what feels natural. Stay true to one's self.",
-      "name": "Yixuan: Summit of Clouds"
+      "name": "Yixuan: Summit of Clouds",
+      "obtainDesc": ""
     },
     "3113711": {
       "desc": "A custom attire in shades of ink. Like an elusive shadow, gone in a flash.",
-      "name": "Yixuan: Trails of Ink"
+      "name": "Yixuan: Trails of Ink",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {
     "desc": "<color=#FE437E>Auric Ink</color> DMG and buffs will be calculated based on <color=#FE437E>Ether</color>. Dealing <color=#FE437E>Auric Ink DMG</color> to enemies accumulates <color=#FE437E>Auric Ink Anomaly Buildup</color>, which triggers the <color=#FE437E>Corruption</color> effect. <color=#FE437E>Corruption</color> causes the target to suffer additional <color=#FE437E>Ether DMG</color> when attacked for a period of time. Inflicting <color=#FE437E>Corruption</color> on enemies weak to <color=#FE437E>Ether</color> can interrupt their actions.",
     "icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconAuricInk.png",
+    "id": 205,
     "name": "Auric Ink",
     "title": "Auric Ink"
   },

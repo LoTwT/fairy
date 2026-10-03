@@ -1,0 +1,1685 @@
+{
+  "camp": {
+    "16": "Roscaelifer"
+  },
+  "elementType": {
+    "204": "Wind"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT Rate"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "Energy Regen"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "PEN Ratio"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "Wind DMG Bonus"
+    }
+  },
+  "hitType": {
+    "102": "Strike"
+  },
+  "id": 1621,
+  "locale": "en",
+  "name": "Roxy",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1621013",
+        "1621014",
+        "1621015",
+        "1621016",
+        "1621017",
+        "1621018"
+      ],
+      "basic": ["1621001", "1621002", "1621003", "1621004"],
+      "chain": ["1621011", "1621012"],
+      "dodge": ["1621009", "1621010"],
+      "special": [
+        "1621005",
+        "1621006",
+        "1621007",
+        "1621008",
+        "1621019",
+        "1621020",
+        "1621021",
+        "1621022",
+        "1621023"
+      ]
+    },
+    "parameterRowsById": {
+      "1621001": [
+        "/skill/basic/description/1/param/0",
+        "/skill/basic/description/1/param/4"
+      ],
+      "1621002": [
+        "/skill/basic/description/1/param/1",
+        "/skill/basic/description/1/param/5"
+      ],
+      "1621003": [
+        "/skill/basic/description/1/param/2",
+        "/skill/basic/description/1/param/6"
+      ],
+      "1621004": [
+        "/skill/basic/description/1/param/3",
+        "/skill/basic/description/1/param/7"
+      ],
+      "1621005": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/1"
+      ],
+      "1621006": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1621007": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1621008": [
+        "/skill/special/description/7/param/4",
+        "/skill/special/description/7/param/5"
+      ],
+      "1621009": [
+        "/skill/dodge/description/3/param/0",
+        "/skill/dodge/description/3/param/1"
+      ],
+      "1621010": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1621011": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1621012": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1621013": [
+        "/skill/assist/description/5/param/0",
+        "/skill/assist/description/5/param/1"
+      ],
+      "1621014": ["/skill/assist/description/6/param/0"],
+      "1621015": ["/skill/assist/description/6/param/1"],
+      "1621016": ["/skill/assist/description/6/param/2"],
+      "1621017": [
+        "/skill/assist/description/4/param/2",
+        "/skill/assist/description/7/param/0"
+      ],
+      "1621018": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1621019": [
+        "/skill/special/description/9/param/1",
+        "/skill/special/description/9/param/2"
+      ],
+      "1621020": [
+        "/skill/special/description/9/param/3",
+        "/skill/special/description/9/param/4"
+      ],
+      "1621021": ["/skill/special/description/8/param/2"],
+      "1621022": ["/skill/special/description/9/param/0"],
+      "1621023": [
+        "/skill/special/description/8/param/0",
+        "/skill/special/description/8/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "DEC 29",
+    "fullName": "Roxy Ifrita Pryce",
+    "gender": "Female",
+    "impressionF": "I wish I had a genius assistant as reliable and understanding as Roxy too!",
+    "impressionM": "Belle, could you perhaps be making a jab at a certain Supreme Assistant?",
+    "impressions": [
+      "Impressions of Roxy:\n · A genius assistant who's 100% loyal!",
+      " · A master blacksmith who gives 100%!",
+      " · Vyrium's sleepless tale, Flint's clocking-out myth!"
+    ],
+    "profileDesc": "Roxy Ifrita Pryce, the resident manager of Flint Workshop, is a close friend, assistant, housekeeper, and problem-solver to Claret, head of the Flint family.\n\nUnlike stereotypical \"geniuses\" like Claret and Norma, Roxy considers herself merely an ordinary hard worker, barely keeping pace with true geniuses through sheer time and effort.\n\nSetting aside her modesty, the sheer amount of time and effort Roxy puts into Flint Workshop each day is indeed far beyond what could be considered healthy, which has, to some extent, worsened the paleness caused by her heart condition.\n\nRoxy is usually remarkably steady. Even among the many Agents, she ranks near the top in both operational efficiency and consistency. According to Roxy herself, that's because \"milady gets into more than enough trouble,\" and such an unusual work history has taught her to remain unfazed in the face of any crisis.",
+    "stature": "144",
+    "trustLv": {
+      "1": "Roxy Ifrita Pryce, the resident manager of Flint Workshop, is a close friend, assistant, housekeeper, and problem-solver to Claret, head of the Flint family.\n\nUnlike stereotypical \"geniuses\" like Claret and Norma, Roxy considers herself merely an ordinary hard worker, barely keeping pace with true geniuses through sheer time and effort.\n\nSetting aside her modesty, the sheer amount of time and effort Roxy puts into Flint Workshop each day is indeed far beyond what could be considered healthy, which has, to some extent, worsened the paleness caused by her heart condition.\n\nRoxy is usually remarkably steady. Even among the many Agents, she ranks near the top in both operational efficiency and consistency. According to Roxy herself, that's because \"milady gets into more than enough trouble,\" and such an unusual work history has taught her to remain unfazed in the face of any crisis.",
+      "2": "",
+      "3": "Behind every eccentric genius with a strange temper and an even stranger way of doing things, there's a brilliant assistant who can carry out those wild plans to the letter and clean up every last mess they leave behind.\n\nRoxy is that brilliant assistant for Claret. As someone from a branch line of the Flint family, winning over the future head of the family was undoubtedly the wisest choice. That was indeed why Roxy's elders sent her to Claret's side when she was still young.\n\nBut not once has Roxy chosen to turn her back on the head of the family she chose. Long ago, she stopped being anyone's tool for winning Claret over, because Claret was the only person back then who never saw her as a \"tool.\"\n\nWithout Claret, the Flint family would never have seen the revival it enjoys today. But without Roxy, there would never have been the fearless Claret.\n\nRoxy is her courage and the one who always has her back, while Claret is the one Roxy holds dearest to her heart.",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "Complete Main Story Season 3 Chapter 3 \"Their Secret Histories\"",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1621501": {
+        "desc": [
+          "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>480</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>40</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>22%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>10%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Warm Night's Embrace",
+          "Additional Ability: Porcelloy Heart"
+        ],
+        "potential": []
+      },
+      "1621502": {
+        "desc": [
+          "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>560</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>46</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>25%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>11.5%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Warm Night's Embrace",
+          "Additional Ability: Porcelloy Heart"
+        ],
+        "potential": []
+      },
+      "1621503": {
+        "desc": [
+          "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>640</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>52</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>28%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>13%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Warm Night's Embrace",
+          "Additional Ability: Porcelloy Heart"
+        ],
+        "potential": []
+      },
+      "1621504": {
+        "desc": [
+          "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>720</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>58</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>31%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>14.5%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Warm Night's Embrace",
+          "Additional Ability: Porcelloy Heart"
+        ],
+        "potential": []
+      },
+      "1621505": {
+        "desc": [
+          "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>800</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>64</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>34%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>16%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Warm Night's Embrace",
+          "Additional Ability: Porcelloy Heart"
+        ],
+        "potential": []
+      },
+      "1621506": {
+        "desc": [
+          "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>880</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>70</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>37%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>17.5%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Warm Night's Embrace",
+          "Additional Ability: Porcelloy Heart"
+        ],
+        "potential": []
+      },
+      "1621507": {
+        "desc": [
+          "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>960</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>76.8</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>40%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>20%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Warm Night's Embrace",
+          "Additional Ability: Porcelloy Heart"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "After activating a <color=#FFFFFF>Defensive Assist</color>, press <IconMap:Icon_Switch> again to activate:\nRoxy stays on the field and strikes enemies ahead, dealing <color=#A6C5FD>Wind DMG</color>.\nThis skill is treated as activating a <color=#FFFFFF>Basic Attack</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist: More Overtime?",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is launched, press <IconMap:Icon_Switch> to activate:\nStrikes enemies in front, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: At Your Service",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nThis skill excels at parrying enemy attacks and reduces the consumption of <color=#FFFFFF>Assist Points</color> when the character is under intense attacks.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Allow Me to Assist",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#ffffff>Defensive Assist</color> to activate:\nStrikes enemies ahead, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Midnight Code",
+          "potential": []
+        },
+        {
+          "name": "Assist: More Overtime?",
+          "param": [
+            {
+              "desc": "{Skill:1621018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621018": {
+                  "attackData": [],
+                  "attributeInfliction": 6000,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 12000,
+                  "feverRecovery": 165000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 360,
+                  "main": 3900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6600,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621018": {
+                  "attackData": [],
+                  "attributeInfliction": 6000,
+                  "damagePercentage": 3900,
+                  "damagePercentageGrowth": 360,
+                  "etherPurify": 12000,
+                  "feverRecovery": 165000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6600,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621017, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621017": {
+                  "attackData": [],
+                  "attributeInfliction": 44367,
+                  "damagePercentage": 61160,
+                  "damagePercentageGrowth": 5560,
+                  "etherPurify": 25664,
+                  "feverRecovery": 1440725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2090,
+                  "main": 45870,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 45870,
+                  "stunRatioGrowth": 2090
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: At Your Service",
+          "param": [
+            {
+              "desc": "{Skill:1621013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621013": {
+                  "attackData": [],
+                  "attributeInfliction": 7750,
+                  "damagePercentage": 10080,
+                  "damagePercentageGrowth": 920,
+                  "etherPurify": 7750,
+                  "feverRecovery": 213125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 920,
+                  "main": 10080,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8530,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621013": {
+                  "attackData": [],
+                  "attributeInfliction": 7750,
+                  "damagePercentage": 10080,
+                  "damagePercentageGrowth": 920,
+                  "etherPurify": 7750,
+                  "feverRecovery": 213125,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 390,
+                  "main": 8530,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 27900,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8530,
+                  "stunRatioGrowth": 390
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Allow Me to Assist",
+          "param": [
+            {
+              "desc": "{Skill:1621014, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1621014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621015, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1621015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621016, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1621016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Midnight Code",
+          "param": [
+            {
+              "desc": "{Skill:1621017, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621017": {
+                  "attackData": [],
+                  "attributeInfliction": 44367,
+                  "damagePercentage": 61160,
+                  "damagePercentageGrowth": 5560,
+                  "etherPurify": 25664,
+                  "feverRecovery": 1440725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5560,
+                  "main": 61160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 45870,
+                  "stunRatioGrowth": 2090
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nPerforms up to 4 strikes forward, dealing <color=#A6C5FD>Wind DMG</color>.",
+          "name": "Basic Attack: Do Stay a While",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Do Stay a While",
+          "param": [
+            {
+              "desc": "{Skill:1621001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1621001": {
+                  "attackData": [],
+                  "attributeInfliction": 2723,
+                  "damagePercentage": 5240,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 7367,
+                  "feverRecovery": 202675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5930,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1621002": {
+                  "attackData": [],
+                  "attributeInfliction": 5229,
+                  "damagePercentage": 10790,
+                  "damagePercentageGrowth": 990,
+                  "etherPurify": 12284,
+                  "feverRecovery": 337975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 990,
+                  "main": 10790,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10210,
+                  "stunRatioGrowth": 470
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1621003": {
+                  "attackData": [],
+                  "attributeInfliction": 7997,
+                  "damagePercentage": 17240,
+                  "damagePercentageGrowth": 1570,
+                  "etherPurify": 16929,
+                  "feverRecovery": 465575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1570,
+                  "main": 17240,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 60950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14430,
+                  "stunRatioGrowth": 660
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1621004": {
+                  "attackData": [],
+                  "attributeInfliction": 8579,
+                  "damagePercentage": 19250,
+                  "damagePercentageGrowth": 1750,
+                  "etherPurify": 16259,
+                  "feverRecovery": 447150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1750,
+                  "main": 19250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 58540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17190,
+                  "stunRatioGrowth": 790
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1621001": {
+                  "attackData": [],
+                  "attributeInfliction": 2723,
+                  "damagePercentage": 5240,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 7367,
+                  "feverRecovery": 202675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 270,
+                  "main": 5930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 26520,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5930,
+                  "stunRatioGrowth": 270
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1621002": {
+                  "attackData": [],
+                  "attributeInfliction": 5229,
+                  "damagePercentage": 10790,
+                  "damagePercentageGrowth": 990,
+                  "etherPurify": 12284,
+                  "feverRecovery": 337975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 10210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 44220,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 10210,
+                  "stunRatioGrowth": 470
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1621003": {
+                  "attackData": [],
+                  "attributeInfliction": 7997,
+                  "damagePercentage": 17240,
+                  "damagePercentageGrowth": 1570,
+                  "etherPurify": 16929,
+                  "feverRecovery": 465575,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 660,
+                  "main": 14430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 60950,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14430,
+                  "stunRatioGrowth": 660
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1621004": {
+                  "attackData": [],
+                  "attributeInfliction": 8579,
+                  "damagePercentage": 19250,
+                  "damagePercentageGrowth": 1750,
+                  "etherPurify": 16259,
+                  "feverRecovery": 447150,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 790,
+                  "main": 17190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 58540,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17190,
+                  "stunRatioGrowth": 790
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#ffffff>Chain Attack</color> is triggered, select the character to activate:\nUnleashes a powerful strike at enemies in front, dealing massive <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Gale-Burial Great Hammer",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at Maximum, press <IconMap:Icon_UltimateReady> to activate:\nUnleashes a powerful strike at enemies in front in a large area, dealing massive <color=#A6C5FD>Wind DMG</color>.\nAfter the skill ends, gains 1 <Term:1000039></Term>.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Requiem for the Night-Burial",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Gale-Burial Great Hammer",
+          "param": [
+            {
+              "desc": "{Skill:1621011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621011": {
+                  "attackData": [],
+                  "attributeInfliction": 49446,
+                  "damagePercentage": 90220,
+                  "damagePercentageGrowth": 8210,
+                  "etherPurify": 29497,
+                  "feverRecovery": 2640000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 8210,
+                  "main": 90220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32450,
+                  "stunRatioGrowth": 1480
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621011": {
+                  "attackData": [],
+                  "attributeInfliction": 49446,
+                  "damagePercentage": 90220,
+                  "damagePercentageGrowth": 8210,
+                  "etherPurify": 29497,
+                  "feverRecovery": 2640000,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1480,
+                  "main": 32450,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 32450,
+                  "stunRatioGrowth": 1480
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Requiem for the Night-Burial",
+          "param": [
+            {
+              "desc": "{Skill:1621012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621012": {
+                  "attackData": [],
+                  "attributeInfliction": 31166,
+                  "damagePercentage": 213150,
+                  "damagePercentageGrowth": 19380,
+                  "etherPurify": 81167,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 19380,
+                  "main": 213150,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 105430,
+                  "stunRatioGrowth": 4800
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621012": {
+                  "attackData": [],
+                  "attributeInfliction": 31166,
+                  "damagePercentage": 213150,
+                  "damagePercentageGrowth": 19380,
+                  "etherPurify": 81167,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4800,
+                  "main": 105430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 105430,
+                  "stunRatioGrowth": 4800
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nPerforms a quick dodge to the side.",
+          "name": "Dodge: Excuse Me",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nStrikes forward, dealing <color=#A6C5FD>Wind DMG</color>.",
+          "name": "Dash Attack: Forgive My Rudeness",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a Perfect Dodge to activate:\nStrikes enemies in front, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Returned Courtesy",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Forgive My Rudeness",
+          "param": [
+            {
+              "desc": "{Skill:1621009, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621009": {
+                  "attackData": [],
+                  "attributeInfliction": 1972,
+                  "damagePercentage": 3560,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 4249,
+                  "feverRecovery": 116875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 3560,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3010,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621009, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621009": {
+                  "attackData": [],
+                  "attributeInfliction": 1972,
+                  "damagePercentage": 3560,
+                  "damagePercentageGrowth": 330,
+                  "etherPurify": 4249,
+                  "feverRecovery": 116875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 140,
+                  "main": 3010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 15300,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3010,
+                  "stunRatioGrowth": 140
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Returned Courtesy",
+          "param": [
+            {
+              "desc": "{Skill:1621010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621010": {
+                  "attackData": [],
+                  "attributeInfliction": 15500,
+                  "damagePercentage": 39200,
+                  "damagePercentageGrowth": 3570,
+                  "etherPurify": 30500,
+                  "feverRecovery": 426250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3570,
+                  "main": 39200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28050,
+                  "stunRatioGrowth": 1280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621010": {
+                  "attackData": [],
+                  "attributeInfliction": 15500,
+                  "damagePercentage": 39200,
+                  "damagePercentageGrowth": 3570,
+                  "etherPurify": 30500,
+                  "feverRecovery": 426250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1280,
+                  "main": 28050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 55800,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 28050,
+                  "stunRatioGrowth": 1280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nPerforms a forward strike, dealing <color=#A6C5FD>Wind DMG</color>.",
+          "name": "Special Attack: Much Obliged",
+          "potential": []
+        },
+        {
+          "desc": "After activating <color=#FFFFFF>EX Special Attack: Kindly Rest in Peace</color>, this attack is automatically activated when the total number of <Term:1000040>Eyes of the Storm</Term> on the field and Roxy's <Term:1000039></Term> reaches at least 3:\nThrows her hammer at enemies on the field, dealing <color=#A6C5FD>Wind DMG</color>.\n<color=#FFFFFF>Eyes of the Storm</color> hit by this attack are detonated, up to 3 <color=#FFFFFF>Eyes of the Storm</color> at a time. Based on the number detonated, a corresponding number of Miniature Windstorms are generated, dealing <color=#A6C5FD>Wind DMG</color>.\nIf 3 <color=#FFFFFF>Eyes of the Storm</color> are detonated at once, a Giant Windstorm is generated instead, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Special Attack: Forgive Me for Not Seeing You Off",
+          "potential": []
+        },
+        {
+          "desc": "With enough energy, press or hold <IconMap:Icon_SpecialReady> to activate:\nSlides forward, dealing <color=#A6C5FD>Wind DMG</color>.\nWhile sliding, press and hold <IconMap:Icon_SpecialReady> to have Roxy enter the <color=#FFFFFF>Whirlwind</color> state:\nWhile in the <color=#FFFFFF>Whirlwind</color> state, Roxy generates a tornado. Drag the joystick to control its direction. During this, Energy is continuously consumed, dealing <color=#A6C5FD>Wind DMG</color> to enemies along its path. When Energy is depleted, or when <IconMap:Icon_SpecialReady> is released while the joystick is not being moved, Roxy exits the <color=#FFFFFF>Whirlwind</color> state.\nWhen the slide ends or when exiting the <color=#FFFFFF>Whirlwind</color> state, automatically follows up with <color=#ffffff>EX Special Attack: Kindly Rest in Peace</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Don't Catch a Chill",
+          "potential": []
+        },
+        {
+          "desc": "Automatically activates after <color=#FFFFFF>EX Special Attack: Don't Catch a Chill</color> ends:\nConsumes all <Term:1000039></Term> to fire a wind cannon forward, dealing <color=#A6C5FD>Wind DMG</color>.\nAfter the attack, for each point of <color=#FFFFFF>Wind Energy</color> consumed, deals an additional instance of <color=#A6C5FD>Wind DMG</color> and generates 1 <Term:1000040></Term> at the current position.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Kindly Rest in Peace",
+          "potential": []
+        },
+        {
+          "desc": "Generated after <color=#FFFFFF>EX Special Attack: Kindly Rest in Peace</color> consumes <Term:1000039></Term>, and automatically detonates after 30s.\nUp to 9 <Term:1000040>Eyes of the Storm</Term> can exist at the same time. If this limit is exceeded, the earliest generated <color=#FFFFFF>Eye of the Storm</color> will automatically detonate.\nDetonates when hit by <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color>. If fewer than 3 are hit at the same time, 1 Miniature Windstorm is generated at the location of each <color=#FFFFFF>Eye of the Storm</color>, tracking enemies and dealing <color=#A6C5FD>Wind DMG</color> for 1s.\nIf 3 are hit at the same time, 1 Giant Windstorm is generated instead, dealing <color=#A6C5FD>Wind DMG</color> for 1s.\nWhen detonated by any means, an <color=#FFFFFF>Eye of the Storm</color> releases a blast, dealing 1 instance of <color=#A6C5FD>Wind DMG</color> to nearby enemies.",
+          "name": "Eye of the Storm",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Much Obliged",
+          "param": [
+            {
+              "desc": "{Skill:1621006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621006": {
+                  "attackData": [],
+                  "attributeInfliction": 2824,
+                  "damagePercentage": 5090,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 6084,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 470,
+                  "main": 5090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6460,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621006": {
+                  "attackData": [],
+                  "attributeInfliction": 2824,
+                  "damagePercentage": 5090,
+                  "damagePercentageGrowth": 470,
+                  "etherPurify": 6084,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 300,
+                  "main": 6460,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6460,
+                  "stunRatioGrowth": 300
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Forgive Me for Not Seeing You Off",
+          "param": [
+            {
+              "desc": "{Skill:1621005, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621005": {
+                  "attackData": [],
+                  "attributeInfliction": 6409,
+                  "damagePercentage": 25000,
+                  "damagePercentageGrowth": 2280,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2280,
+                  "main": 25000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621005, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621005": {
+                  "attackData": [],
+                  "attributeInfliction": 6409,
+                  "damagePercentage": 25000,
+                  "damagePercentageGrowth": 2280,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Don't Catch a Chill",
+          "param": [
+            {
+              "desc": "{Skill:1621007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621007": {
+                  "attackData": [],
+                  "attributeInfliction": 1050,
+                  "damagePercentage": 1370,
+                  "damagePercentageGrowth": 130,
+                  "etherPurify": 1050,
+                  "feverRecovery": 28875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 1370,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1160,
+                  "stunRatioGrowth": 60
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621007": {
+                  "attackData": [],
+                  "attributeInfliction": 1050,
+                  "damagePercentage": 1370,
+                  "damagePercentageGrowth": 130,
+                  "etherPurify": 1050,
+                  "feverRecovery": 28875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 60,
+                  "main": 1160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1160,
+                  "stunRatioGrowth": 60
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "25",
+              "name": "Energy Cost to Use",
+              "potential": []
+            },
+            {
+              "desc": "10",
+              "name": "Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621008, Prop:1001}",
+              "name": "Whirlwind DMG Multiplier Per Second",
+              "param": {
+                "1621008": {
+                  "attackData": [],
+                  "attributeInfliction": 61583,
+                  "damagePercentage": 130400,
+                  "damagePercentageGrowth": 11860,
+                  "etherPurify": 11667,
+                  "feverRecovery": 843425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 11860,
+                  "main": 130400,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 46300,
+                  "stunRatioGrowth": 2110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621008, Prop:1002}",
+              "name": "Whirlwind Daze Multiplier Per Second",
+              "param": {
+                "1621008": {
+                  "attackData": [],
+                  "attributeInfliction": 61583,
+                  "damagePercentage": 130400,
+                  "damagePercentageGrowth": 11860,
+                  "etherPurify": 11667,
+                  "feverRecovery": 843425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2110,
+                  "main": 46300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 46300,
+                  "stunRatioGrowth": 2110
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "30",
+              "name": "Energy Cost Per Second",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Kindly Rest in Peace",
+          "param": [
+            {
+              "desc": "{Skill:1621023, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1621023": {
+                  "attackData": [],
+                  "attributeInfliction": 2450,
+                  "damagePercentage": 3190,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 2450,
+                  "feverRecovery": 67375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 290,
+                  "main": 3190,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2700,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621023, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1621023": {
+                  "attackData": [],
+                  "attributeInfliction": 2450,
+                  "damagePercentage": 3190,
+                  "damagePercentageGrowth": 290,
+                  "etherPurify": 2450,
+                  "feverRecovery": 67375,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2700,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621021, Prop:1001}",
+              "name": "Additional Explosion DMG Multiplier",
+              "param": {
+                "1621021": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 2610,
+                  "damagePercentageGrowth": 240,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 240,
+                  "main": 2610,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Eye of the Storm",
+          "param": [
+            {
+              "desc": "{Skill:1621022, Prop:1001}",
+              "name": "Detonation DMG Multiplier",
+              "param": {
+                "1621022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621019, Prop:1001}",
+              "name": "Miniature Windstorm DMG Multiplier per Second",
+              "param": {
+                "1621019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1770,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621019, Prop:1002}",
+              "name": "Miniature Windstorm Daze Multiplier per Second",
+              "param": {
+                "1621019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1770,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621020, Prop:1001}",
+              "name": "Giant Windstorm DMG Multiplier per Second",
+              "param": {
+                "1621020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 20840,
+                  "damagePercentageGrowth": 1900,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1900,
+                  "main": 20840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621020, Prop:1002}",
+              "name": "Giant Windstorm Daze Multiplier per Second",
+              "param": {
+                "1621020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 20840,
+                  "damagePercentageGrowth": 1900,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1621001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Do Stay a While"
+    },
+    "1621002": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Much Obliged"
+    },
+    "1621003": {
+      "desc": "<IconMap:Icon_SpecialReady> (Press or Hold)",
+      "name": "EX Special Attack: Don't Catch a Chill"
+    },
+    "1621004": {
+      "desc": "<IconMap:Icon_SpecialReady> (Automatically follows EX Special Attack: Don't Catch a Chill)",
+      "name": "EX Special Attack: Kindly Rest in Peace"
+    },
+    "1621005": {
+      "desc": "<IconMap:Icon_SpecialReady> (With at least 3 Eyes of the Storm and Wind Energy combined) (Automatically follows EX Special Attack: Kindly Rest in Peace)",
+      "name": "Special Attack: Forgive Me for Not Seeing You Off"
+    },
+    "1621006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Forgive My Rudeness"
+    },
+    "1621007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal>",
+      "name": "Dodge Counter: Returned Courtesy"
+    },
+    "1621008": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Gale-Burial Great Hammer"
+    },
+    "1621009": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Requiem for the Night-Burial"
+    },
+    "1621020": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: At Your Service"
+    },
+    "1621021": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Allow Me to Assist"
+    },
+    "1621022": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Midnight Code"
+    },
+    "1621023": {
+      "desc": "<IconMap:Icon_Switch> ; <IconMap:Icon_Switch> (Switch characters after using Defensive Assist)",
+      "name": "Assist: More Overtime?"
+    }
+  },
+  "skin": {
+    "3116210": {
+      "desc": "Through the long night, the craftsman's face was lit only by the flames of the forge, amid the ringing blows of the great hammer... That's probably the root cause of this legendary artisan's failing eyesight.",
+      "name": "Roxy: Midnight Craft",
+      "obtainDesc": ""
+    }
+  },
+  "specialElementType": {},
+  "strategy": {},
+  "talent": {
+    "1": {
+      "desc": "When <color=#ffffff>EX Special Attack: Kindly Rest in Peace</color> hits, it reduces the enemy's All-Attribute RES by 15% for 50s. Repeated triggers reset the duration. CRIT DMG increases by 40%.",
+      "desc2": "Roxy always manages to keep everything perfectly in order, from the head of the household's daily needs to her frequent whims.\n\"If you insist on going, please take this guide with you. Yes, I knew you would make this decision, milady.\"\n\"You've changed your mind? That's fine. Here's another guide, just for this sort of situation.\"",
+      "name": "Versatile Attendant"
+    },
+    "2": {
+      "desc": "<color=#ffffff>EX Special Attack: Don't Catch a Chill</color> deals 5% more Daze.\nFor each <color=#ffffff>Eye of the Storm</color> detonated, gain 1 stack of <color=#ffffff>Windflow</color>, up to 3 stacks.\nDuring <color=#ffffff>EX Special Attack: Don't Catch a Chill</color>, if Roxy switches out after entering the <color=#ffffff>Whirlwind</color> state, she consumes all <color=#ffffff>Windflow</color>. Each stack consumed sustains the <color=#ffffff>Whirlwind</color> state for 0.2s, during which no Energy is consumed, up to a maximum of 0.6s.\nWhen <color=#ffffff>EX Special Attack: Don't Catch a Chill</color> hits an enemy, that enemy's Stun DMG Multiplier increases by 30% until the target recovers from Stun.",
+      "desc2": "Roxy's pale complexion and ever-present dark circles speak to how much effort she pours into the workshop.\nShe is all too familiar with Vyrium at four in the morning, despite having no nocturnal habits.\nTo her, clocking out feels as distant as a myth.\n\"Ah... dawn again... It feels like getting off work will never become a reality.\"",
+      "name": "Clocking Out Myth"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Roxy is used to making thorough plans, but whenever Claret is involved, those plans struggle to keep up with the changes. Countless schedule adjustments, countless revisions...\nEven the perfect assistant eventually starts to lose her patience until she reaches a certain breaking point — and snaps.\nFrom then on, Vyrium gains a terrifying figure who roams the streets late at night.\n\"I just want to go home... and get a good night's sleep—!\"",
+      "name": "Tales of Insomnia"
+    },
+    "4": {
+      "desc": "When a <color=#ffffff>Defensive Assist</color> successfully parries an enemy attack, Roxy gains 1 Energy, up to once per skill. When <color=#ffffff>Dodge Counter: Returned Courtesy</color> hits an enemy, it grants 2 Energy, up to once per skill. <color=#ffffff>Ultimate: Requiem for the Night-Burial</color> deals 20% more DMG and 10% more Daze.",
+      "desc2": "Whenever Roxy brings out her weapon, her enemies are always left baffled: Who uses a coffin as a weapon?\nTheir confusion never lasts long, though.\nOnce they see the girl casually swing it around, tearing through the air with a heavy howl, they quickly understand: that thing definitely wasn't made for sleeping in.\n\"It's still daytime, but I'm afraid... it's time to say goodnight.\"",
+      "name": "R.I.P."
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "Roxy can barely remember the adventure she had as a child, and the pain of losing her heart has long since faded.\nBut she will never forget how the girl known as a genius once cried until her proud eyes were red, calling Roxy's name over and over.\nHer tears fell upon Roxy's cold chest, almost hot enough to burn a hole through her heart.\n\"Because of this Porcelloy Heart... I do get a little anemic sometimes, but with milady around, there's nothing to worry about.\"",
+      "name": "Second Heartbeat"
+    },
+    "6": {
+      "desc": "The DMG dealt by attacks ignores 15% of the target's <color=#A6C5FD>Wind RES</color>.\nWhen <color=#ffffff>Special Attack: Forgive Me for Not Seeing You Off</color> detonates <color=#ffffff>Eyes of the Storm</color> to generate a Giant Windstorm, the primary target is inflicted with <color=#ffffff>Afterecho</color>. A Giant Windstorm is generated at the target's location every 3s, for a total of 2 additional Giant Windstorms. Repeated triggers stack the number of additional Giant Windstorm instances generated and refresh the duration of <color=#ffffff>Afterecho</color>. The DMG dealt by the Giant Windstorm increases to 250% of its original value, and the Daze it inflicts increases by 20%.",
+      "desc2": "Some believe Roxy only remains by the head of the household's side to sustain her Porcelloy Heart: Flint Workshop used their bloodline to secure a capable assistant.\nRoxy has heard such claims so often that she no longer even bothers refuting them. The other person concerned, however, can't help but worry over it.\nOne day, during a brief lull in her busy schedule, she casually brought the matter up with her assistant, only to be met with a helpless sigh.\n\"No, I've never thought of it that way. Just being alive is already more than enough. I've always been grateful to you, milady.\"\n\"Besides... if I may be so bold, aren't you the one bound by bloodline here, milady?\"\n\"So this is what's been making you restless lately... Rather than some pointless rumor, I'd say that oversized Porcelloy order you boasted to the CCD about not long ago is far more worth worrying about.\"",
+      "name": "Eternity and the Clockwork Doll"
+    }
+  },
+  "weaponType": {
+    "2": "Stun"
+  }
+}

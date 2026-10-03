@@ -14,7 +14,7 @@ import type {
 
 /** 结构、单位和静态输入语义的版本，与 npm 发布号及来源提交分别维护。 */
 export const CALCULATION_CONTRACT_VERSION = 1
-export const CALCULATION_GAME_VERSION = "3.1"
+export const CALCULATION_GAME_VERSION = "3.2"
 
 export interface CalculationDataVersion {
   readonly packageVersion: string

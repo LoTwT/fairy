@@ -12,6 +12,7 @@ export interface SimulSourceRoom {
   monster_icon: string
   monster_list: Record<string, SimulSourceEncounter>
   monster_weakness: Record<string, string>
+  monster_resistance: Record<string, string>
   waves_num: number
 }
 
@@ -122,6 +123,7 @@ function simulSourceRoom(
         "11818": simulSourceEncounter(30024, encounterName),
       },
       monster_weakness: { "202": weakness },
+      monster_resistance: {},
       waves_num: 1,
     },
   }

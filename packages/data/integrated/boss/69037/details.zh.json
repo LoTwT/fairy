@@ -44,6 +44,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "202": "冰属性",
                 "205": "以太"
@@ -117,6 +118,9 @@
                   }
                 }
               },
+              "monsterResistance": {
+                "203": "电属性"
+              },
               "monsterWeakness": {
                 "200": "物理",
                 "202": "冰属性",
@@ -158,7 +162,7 @@
               "title": ""
             },
             "69013104": {
-              "desc": "<color=#FFAF2C>[控制技]</color>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>350操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，或招架部分招式最后一击时，可对首领造成<color=#FFAF2C>[部位破坏]</color>效果，可获得<color=#FFAF2C>750操作得分</color>。最多获得5000操作得分。",
+              "desc": "<color=#FFAF2C>[控制技]</color>期间，每次成功应对首领的攻击，可获得<color=#FFAF2C>350操作得分</color>；<color=#FFAF2C>[完美反制]</color>首领的<color=#FFAF2C>[控制技]</color>时，或招架部分招式最后一击时，可对首领造成<color=#FFAF2C>[部位破坏]</color>效果，可获得<color=#FFAF2C>750操作得分</color>。<Term:2000003></Term>期间，通过<color=#FFAF2C>[反制支援]</color>造成<color=#FFAF2C>[完美反制]</color>时，会获得该次<color=#FFAF2C>[控制技]</color>剩余的成功应对得分。最多获得5000操作得分。",
               "title": ""
             }
           },
@@ -186,6 +190,10 @@
                     "stun": 19977.350000000002
                   }
                 }
+              },
+              "monsterResistance": {
+                "201": "火属性",
+                "202": "冰属性"
               },
               "monsterWeakness": {
                 "204": "风属性",

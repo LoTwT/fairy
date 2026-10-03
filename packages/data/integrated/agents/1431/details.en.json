@@ -2537,16 +2537,19 @@
   "skin": {
     "3114310": {
       "desc": "Cloud-woven silk, a blade's gleam reflected in its folds. The attire mirrors the person.\nBut who truly chose this dress? Was it her... or the deeper self within?",
-      "name": "Ye Shunguang: Clouddrift Illumination"
+      "name": "Ye Shunguang: Clouddrift Illumination",
+      "obtainDesc": ""
     },
     "3114311": {
       "desc": "The gentle glow of sunlight and warm breeze seem to welcome your next encounter as you walk down the streets.",
-      "name": "Ye Shunguang: Touch of Dawnlight"
+      "name": "Ye Shunguang: Touch of Dawnlight",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {
     "desc": "The <color=#F0D12B>Honed Edge</color> attribute calculates damage and buff effects based on the <color=#F0D12B>Physical attribute</color>. Miasma purification rate is increased by 50%. Dealing <color=#F0D12B>Honed Edge DMG</color> to enemies accumulates <color=#F0D12B>Honed Edge Anomaly Buildup</color>, which triggers the <color=#F0D12B>Assault</color> and <color=#F0D12B>Flinch</color> effects.\n<color=#F0D12B>Assault</color> interrupts the enemy and deals massive <color=#F0D12B>Physical DMG</color>. <color=#F0D12B>Flinch</color> increases the Daze the target takes for a period of time.",
     "icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconHonedEdge.png",
+    "id": 200,
     "name": "Honed Edge",
     "title": "Honed Edge"
   },

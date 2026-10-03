@@ -12,6 +12,7 @@ export interface BossSourceRoom {
   monster_icon: string
   monster_list: Record<string, BossSourceEncounter>
   monster_weakness: Record<string, string>
+  monster_resistance: Record<string, string>
   waves_num: number
 }
 
@@ -87,6 +88,7 @@ function bossSourceZoneStage(name: string): BossSourceZoneStage {
           "11818": bossSourceEncounter(30024, "示例首领"),
         },
         monster_weakness: { "202": "冰属性" },
+        monster_resistance: {},
         waves_num: 1,
       },
     },
@@ -205,6 +207,7 @@ export function bossLegacyZoneInput() {
             "11818": bossSourceEncounter(30024, "Example Overlord"),
           },
           monster_weakness: { "202": "Ice" },
+          monster_resistance: {},
           waves_num: 1,
         },
       },

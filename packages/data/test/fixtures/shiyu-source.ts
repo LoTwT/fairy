@@ -12,6 +12,7 @@ export interface ShiyuSourceRoom {
   monster_icon: string
   monster_list: Record<string, ShiyuSourceEncounter>
   monster_weakness: Record<string, string>
+  monster_resistance: Record<string, string>
   waves_num: number
 }
 
@@ -85,6 +86,7 @@ export function shiyuSource(): ShiyuSourceFixture {
               "11323": shiyuSourceEncounter(10018, "偷猎者"),
             },
             monster_weakness: { "200": "物理", "202": "冰属性" },
+            monster_resistance: {},
             waves_num: 2,
           },
         },
@@ -108,6 +110,7 @@ export function shiyuSource(): ShiyuSourceFixture {
               "11331": shiyuSourceEncounter(10016, "纵火犯"),
             },
             monster_weakness: {},
+            monster_resistance: {},
             waves_num: 1,
           },
         },

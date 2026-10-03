@@ -4,11 +4,11 @@
 
 **状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令已实现。固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取已实现；正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
-已接入生产类别：`agents`（规则 `nanoka-agent-reference/4`）、`drive-discs`（规则
+已接入生产类别：`agents`（规则 `nanoka-agent-reference/5`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/1`）、`w-engines`（规则 `nanoka-w-engine-reference/1`）、`bangboos`（规则
 `nanoka-bangboo-reference/1`）、`monsters`（规则 `nanoka-monster-reference/1`）、`shiyu`（规则
-`nanoka-shiyu-reference/1`）、`boss`（规则 `nanoka-boss-reference/1`）与 `simul`（规则
-`nanoka-simul-reference/1`）。驱动盘单实体规则与实现状态见
+`nanoka-shiyu-reference/2`）、`boss`（规则 `nanoka-boss-reference/2`）与 `simul`（规则
+`nanoka-simul-reference/2`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference1)，WEngine 单实体规则与实现状态见
 [WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference1)，Bangboo 单实体规则与实现状态见
 [Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference1)，Monster 单实体规则与实现状态见
@@ -130,7 +130,7 @@ core：计算
 已知单位和缩放、缺失或空值的处理；尚未确认的用途、单位或编码含义要明确标记，不能把推测写成事实。
 字典 key 的语义在对应 `Record` 字段上解释，未知结构以 `SourceJson` 保留。注释齐全不等于游戏语义已全部确认。
 
-[正式包内类型](../../../packages/data/src/integration/agent-types.ts) 覆盖本地 `3.1` 索引 58 个成员的已观察结构，两个主要入口是
+[正式包内类型](../../../packages/data/src/integration/agent-types.ts) 覆盖本地 `3.2` 索引 60 个成员的已观察结构，两个主要入口是
 `AgentData` 和 `AgentDetails`；索引及共享子结构另外声明。该覆盖不外推到未来快照，通过包根入口公开导出。
 [结构变体 fixture](../../../packages/data/test/fixtures/agent-variants.ts) 同时参与类型检查和整合测试，覆盖可选资源、空对象、潜能和参数数组，不代替完整记录。
 
@@ -154,29 +154,29 @@ core：计算
 
 下表第一列使用来源拼写，输出两列使用转换后的字段名；未列出的嵌套已知结构字段同样只改变拼写。
 
-| 来源字段                                          | `data.json`                                                                                           | `details.{locale}.json`                                         |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `id`                                              | `id` 原值                                                                                             | 同值身份副本，便于单文件核对                                    |
-| `icon`、`rarity`、`gender`                        | `icon`、`rarity`、`gender` 原值                                                                       | 无重复载荷                                                      |
-| `code_name`                                       | `codeName`，按第 4.3 节选取一个来源原值                                                               | 不保留重复值或其他语言的不同拼写                                |
-| `live2_d`                                         | `live2D?`，按上述可选资源规则共享                                                                     | 单语言独有时保留 `live2D?` 原值                                 |
-| `name`                                            | 无                                                                                                    | `name`，当前语言原名                                            |
-| `weapon_type`、`element_type`、`hit_type`、`camp` | 派生 `classificationIds`，见第 5 节                                                                   | `weaponType`、`elementType`、`hitType`、`camp`，完整分类字典    |
-| `special_element_type`                            | 不生成分类 ID                                                                                         | `specialElementType`，完整空对象或描述对象                      |
-| `partner_info`                                    | `partnerInfo.interKnotIcon` 必需；`iconPath?`、`roleIcon?` 按可选资源规则共享                         | 其余档案字段均可缺失；保留单语言独有的 `iconPath?`、`roleIcon?` |
-| `skin`                                            | 按外观 ID 提取 `image`                                                                                | 名称、说明及剩余成员                                            |
-| `stats`、`level`、`level_exp`                     | `stats`、`level`、`levelExp`，完整原块                                                                | 无重复载荷                                                      |
-| `extra_level`                                     | `extraLevel` 各阶段 `maxLevel`，各属性 `prop`、`value`                                                | `extraLevel` 各属性名称、格式及剩余成员                         |
-| `skill`                                           | 按类别 key 提取 `material`                                                                            | 完整 `description`、参数展示行及剩余成员                        |
-| `skill_priority`                                  | `skillPriority`，完整来源推荐记录                                                                     | 无重复载荷                                                      |
-| `skill_list`                                      | `skillList` 按自身 ID 提取 `elementType`、`hitType`、`potential`                                      | `skillList` 各条目的名称、说明及剩余成员                        |
-| `passive`                                         | `materials`，各条目 `id`、`level`                                                                     | 原文、`extraProperty`、`potential` 及剩余成员                   |
-| `talent`                                          | 各来源阶段的 `level`                                                                                  | `name`、`desc`、`desc2` 及剩余成员                              |
-| `fairy_recommend`                                 | `fairyRecommend` 的 `slot4`、`slot2`、`slotSub`、`partSubList`；`part4/5/6/partSub` 的 `prop`、`icon` | `fairyRecommend` 各属性名称、格式及剩余成员                     |
-| `strategy`                                        | 无                                                                                                    | 原字符串数组或原空对象，分别保留                                |
-| `potential`                                       | 完整数值数组，允许为空                                                                                | 无重复载荷                                                      |
-| `potential_detail`                                | 无                                                                                                    | `potentialDetail`，完整潜能条目字典，允许为空；材料保留数组结构 |
-| 索引中的实体记录                                  | 不覆盖到详情                                                                                          | 完整保存在 `index.agents[id].sourceRecord`，不修改原 key        |
+| 来源字段                                          | `data.json`                                                                                                                   | `details.{locale}.json`                                                          |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `id`                                              | `id` 原值                                                                                                                     | 同值身份副本，便于单文件核对                                                     |
+| `icon`、`rarity`、`gender`                        | `icon`、`rarity`、`gender` 原值                                                                                               | 无重复载荷                                                                       |
+| `code_name`                                       | `codeName`，按第 4.3 节选取一个来源原值                                                                                       | 不保留重复值或其他语言的不同拼写                                                 |
+| `live2_d`                                         | `live2D?`，按上述可选资源规则共享                                                                                             | 单语言独有时保留 `live2D?` 原值                                                  |
+| `name`                                            | 无                                                                                                                            | `name`，当前语言原名                                                             |
+| `weapon_type`、`element_type`、`hit_type`、`camp` | 派生 `classificationIds`，见第 5 节                                                                                           | `weaponType`、`elementType`、`hitType`、`camp`，完整分类字典                     |
+| `special_element_type`                            | 不生成分类 ID                                                                                                                 | `specialElementType`，完整空对象或描述对象；3.2 起可含 `id` 数值编码，留在本语言 |
+| `partner_info`                                    | `partnerInfo.interKnotIcon` 必需；`iconPath?`、`roleIcon?` 按可选资源规则共享                                                 | 其余档案字段均可缺失；保留单语言独有的 `iconPath?`、`roleIcon?`                  |
+| `skin`                                            | 按外观 ID 提取 `image`                                                                                                        | 名称、说明、获取说明（3.2 起 `obtainDesc`）及剩余成员                            |
+| `stats`、`level`、`level_exp`                     | `stats`、`level`、`levelExp`，完整原块                                                                                        | 无重复载荷                                                                       |
+| `extra_level`                                     | `extraLevel` 各阶段 `maxLevel`，各属性 `prop`、`value`                                                                        | `extraLevel` 各属性名称、格式及剩余成员                                          |
+| `skill`                                           | 按类别 key 提取 `material`                                                                                                    | 完整 `description`、参数展示行及剩余成员                                         |
+| `skill_priority`                                  | `skillPriority`，完整来源推荐记录                                                                                             | 无重复载荷                                                                       |
+| `skill_list`                                      | `skillList` 按自身 ID 提取 `elementType`、`hitType`、`potential`                                                              | `skillList` 各条目的名称、说明及剩余成员                                         |
+| `passive`                                         | `materials`，各条目 `id`、`level`                                                                                             | 原文、`extraProperty`、`potential` 及剩余成员                                    |
+| `talent`                                          | 各来源阶段的 `level`                                                                                                          | `name`、`desc`、`desc2` 及剩余成员                                               |
+| `fairy_recommend`                                 | `fairyRecommend` 的 `slot4`、`slot2`、`slotSub`、`partSubList`、`altBuild`（3.2 新增）；`part4/5/6/partSub` 的 `prop`、`icon` | `fairyRecommend` 各属性名称、格式及剩余成员                                      |
+| `strategy`                                        | 无                                                                                                                            | 原字符串数组或原空对象，分别保留                                                 |
+| `potential`                                       | 完整数值数组，允许为空                                                                                                        | 无重复载荷                                                                       |
+| `potential_detail`                                | 无                                                                                                                            | `potentialDetail`，完整潜能条目字典，允许为空；材料保留数组结构                  |
+| 索引中的实体记录                                  | 不覆盖到详情                                                                                                                  | 完整保存在 `index.agents[id].sourceRecord`，不修改原 key                         |
 
 该表定义本版共享提取路径，不承诺每个来源字段的游戏语义。必需容器缺失、已登记字段不符合所声明的可选性
 或类型时，报告结构不兼容；未知新增成员完整保留并报告待登记，不能因为未写入 TS 类型就丢弃。
@@ -286,7 +286,7 @@ Pointer 采用 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html) 的字符
 | 字段                               | 类型与约束                                                                           |
 | ---------------------------------- | ------------------------------------------------------------------------------------ |
 | `format`                           | 固定 `fairy-nanoka-integrated/v2`，约束文件外壳、拆分和导航契约                      |
-| `rulesVersion`                     | 本版 `nanoka-agent-reference/4`，标识共享提取、字段拼写及派生规则                    |
+| `rulesVersion`                     | 本版 `nanoka-agent-reference/5`，标识共享提取、字段拼写及派生规则                    |
 | `scope.kind`                       | 完整索引导出为 `full-index`；当前单实体样例为 `single-agent-example`                 |
 | `scope.agentIds`                   | 当前输出 ID，按数值升序、无重复，必须与 `agents` key 集合完全一致                    |
 | `scope.completeDataset`            | `full-index` 为 `true`，并须验证全部来源索引成员；样例为 `false`                     |
@@ -366,7 +366,7 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 与输出文件数量检查，数量预算通过后才读取实体文件核对字节、摘要与身份；索引自身同时受单文件上限与整库
 累计输出预算约束，其实际字节计入整库累计。超限立即失败，不裁剪内容。
 
-**旧索引转换边界**：v2 → v3 只接受当前规则版本（`nanoka-agent-reference/4`）、当前完整语言配置、
+**旧索引转换边界**：v2 → v3 只接受当前规则版本（`nanoka-agent-reference/5`）、当前完整语言配置、
 `full-index` + `completeDataset: true`，且已通过 v2 完整验证（成员、身份、精确文件集合与全部字节摘要）的制品。
 规则或语言升级必须按当前规则重新生成，不能靠转换改写版本标记；`single-agent-example`、历史语言子集、
 带摘录 Pointer 的输入、缺失或损坏文件、符号链接都明确失败。转换保留全部实体文件原字节与 `sourceRecord` 原值，
@@ -989,7 +989,7 @@ Monster 名称在类内大量重名（本地 3.1 的占位名 `OfficialName_` �
    字符串保留，占位名称与类内重名是合法来源值；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。
 
-### Shiyu 单实体实现规则 `nanoka-shiyu-reference/1`
+### Shiyu 单实体实现规则 `nanoka-shiyu-reference/2`
 
 来源说明见 [Nanoka Shiyu](../nanoka/shiyu.md)：上游实体 `shiyu`，整合类别登记名为 `shiyu`，
 类型与函数统一使用 `Shiyu` 命名。一条记录表示一个空洞深潜区域（稳定节点、剧变节点等）及其全部关卡阶段；
@@ -1057,7 +1057,7 @@ Monster ID，引用身份来自条目自身的 `id`；encounter 的名称、图�
    字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。
 
-### Boss 单实体实现规则 `nanoka-boss-reference/1`
+### Boss 单实体实现规则 `nanoka-boss-reference/2`
 
 来源说明见 [Nanoka Boss](../nanoka/boss.md)：上游实体 `boss`，整合类别登记名为 `boss`，
 类型与函数统一使用 `Boss` 命名。一条记录表示一个首领试炼条目；评级目标语义解释、时间换算、mode 唯一性、
@@ -1131,7 +1131,7 @@ encounter 完整留在各语言详情：encounter 的名称、图片、弱点与
    字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。旧结构变体使用合成 fixture 验证，不切换当前真实数据版本。
 
-### Simul 单实体实现规则 `nanoka-simul-reference/1`
+### Simul 单实体实现规则 `nanoka-simul-reference/2`
 
 来源说明见 [Nanoka Simul](../nanoka/simul.md)：上游实体 `simul`，整合类别登记名为 `simul`，
 类型与函数统一使用 `Simul` 命名。一条记录表示一个模拟战条目；评级目标语义解释、时间换算、图连通性、
@@ -1293,11 +1293,11 @@ fairy-integrated-snapshot-<独占后缀>/
 ### 多实体完整制品的内部生成、验证与转换
 
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
-当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/4`）、`drive-discs`（来源实体
+当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/5`）、`drive-discs`（来源实体
 `equipment`，规则 `nanoka-drive-disc-reference/1`）、`w-engines`（来源实体 `weapon`，规则
 `nanoka-w-engine-reference/1`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/1`）、
 `monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/1`）、`shiyu`（来源实体 `shiyu`，规则
-`nanoka-shiyu-reference/1`）与 `boss`（来源实体 `boss`，规则 `nanoka-boss-reference/1`），
+`nanoka-shiyu-reference/2`）与 `boss`（来源实体 `boss`，规则 `nanoka-boss-reference/2`），
 代理人复用既有 `integrateAgent`、驱动盘复用既有
 `integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`、
 怪物复用既有 `integrateMonster`、Shiyu 复用既有 `integrateShiyu`、Boss 复用既有 `integrateBoss`，
@@ -1598,7 +1598,7 @@ package.json 增加怪物 data/zh/en JSON 子路径，并提交五类别真实�
 ### Shiyu 生产类别接入验收
 
 2026-09-19，基线 `2b94c0882123ebc5ff97d5f41cbfee5d2a8ed504`（任务分支 `codex/shiyu-integration`），
-实现 `shiyu`（来源实体 `shiyu`，规则 `nanoka-shiyu-reference/1`）登记到生产类别登记表，
+实现 `shiyu`（来源实体 `shiyu`，规则 `nanoka-shiyu-reference/2`）登记到生产类别登记表，
 package.json 增加 Shiyu data/zh/en JSON 子路径，并提交六类别真实快照。Shiyu 名称在类内大量重名
 （本地 3.1 的剧变节点类中英文同名记录各 56 条），公开身份是来源索引顶层 ID 的规范十进制字符串：
 根入口新增 `ShiyuId` 字面量 union、冻结 `shiyuIds` 列表与 `loadShiyuData`、`loadShiyuDetails`、
@@ -1639,7 +1639,7 @@ package.json 增加 Shiyu data/zh/en JSON 子路径，并提交六类别真实�
 ### Boss 生产类别接入验收
 
 2026-09-19，基线 `132ad7ca32fed83cbd4b09b31f34355ea943d22b`（任务分支 `codex/boss-integration`），
-实现 `boss`（来源实体 `boss`，规则 `nanoka-boss-reference/1`）登记到生产类别登记表，
+实现 `boss`（来源实体 `boss`，规则 `nanoka-boss-reference/2`）登记到生产类别登记表，
 package.json 增加 Boss data/zh/en JSON 子路径，并提交七类别真实快照。Boss 名称在类内完全同名
 （本地 3.1 全部 44 条的中英文名称各自相同），公开身份是来源索引顶层 ID 的规范十进制字符串：
 根入口新增 `BossId` 字面量 union、冻结 `bossIds` 列表与 `loadBossData`、`loadBossDetails`、
@@ -1685,7 +1685,7 @@ package.json 增加 Boss data/zh/en JSON 子路径，并提交七类别真实快
 ### Simul 生产类别接入验收
 
 2026-09-19，基线 `e4d731022a09a083073554f06576de02628b58cb`（任务分支 `codex/simul-integration`），
-实现 `simul`（来源实体 `simul`，规则 `nanoka-simul-reference/1`）登记到生产类别登记表，
+实现 `simul`（来源实体 `simul`，规则 `nanoka-simul-reference/2`）登记到生产类别登记表，
 package.json 增加 Simul data/zh/en JSON 子路径，并提交八类别真实快照。Simul 详情没有顶层 name
 （本地 3.1 三条记录 101、102、201 均无该字段），公开身份是来源索引顶层 ID 的规范十进制字符串：
 根入口新增 `SimulId` 字面量 union、冻结 `simulIds` 列表与 `loadSimulData`、`loadSimulDetails`、
@@ -1848,7 +1848,7 @@ inode 与纳秒 mtime 与本次修复前完全一致；未为演示更新真实�
 在隔离工作区中，以真实 `3.1` 数据集的持锁副本做显式迁移验收：175 个文件的集合不变，
 `migrate:nanoka:current` 返回 `migrated`、`format` 为 `fairy-nanoka-integrated/v3`、58 个成员、174 个实体文件；
 独立比较确认 174 个实体文件与迁移前逐字节相同，只有 `index.json` 改变；新记录的协议为 `fairy-nanoka-current/2`、
-状态为 `idle`、`format` 为 v3、类别规则为 `nanoka-agent-reference/4`、语言为 `zh/en`。
+状态为 `idle`、`format` 为 v3、类别规则为 `nanoka-agent-reference/5`、语言为 `zh/en`。
 重复迁移返回 `unchanged`，持锁验证与静态副本验证均通过。以同一真实 raw 执行 `generate:integrated raw/nanoka 3.1 integrated`
 返回 `unchanged` 并复用 174 个实体文件：整库重建结果与迁移结果逐字节一致，说明迁移得到的索引与构建器输出没有外壳偏差。
 真实工作区目录本身未被本次验收改写（复制前后对全部文件与永久控制目录做过摘要与指纹比较）。
@@ -1997,3 +1997,24 @@ data 460 项（当前数据专项 71 项）、core 1,423 项、两包各 1 项 p
 并接入显式 pnpm 整库命令。固定当前数据集已实现多实体 v3 更新协议、增量识别与跳过重写、完整索引驱动的成员与类别增删、
 整组替换、互斥读取、按原协议恢复与显式迁移。运行时查询 API 与人工计算模型分别在其对应任务中确定；
 公开读取、类型生成与发布副本见[消费契约](consumption.md)。
+
+### Nanoka 3.2 正式版本升级验收
+
+2026-10-03，主工作区任务分支执行首次真实相邻版本推进，输入为当日抓取的 raw 3.2（650 实体、1309 资源，
+完整性以索引边界核验）：
+
+1. 字段登记先行：`nanoka-agent-reference/5` 登记 `stats` 的 `epMax`、`epRecover`、`sharpCriticalDamage`
+   （整块共享成员）、`fairyRecommend.altBuild`（备选配装数组）、`skin` 条目 `obtainDesc`、
+   `specialElementType.id`（可缺失，留在各语言 details）；shiyu/boss/simul 规则 `/2` 登记房间成员
+   `monsterResistance`（元素编码 → 本语言文本，同弱点结构逐值校验）。
+2. `generate:integrated raw/nanoka 3.2 integrated` 于持锁协议内提交：`committed`、全部八类别 `checked`、
+   `result: changed`；来源版本 3.1 → 3.2。新增成员 26 名（agents +2、w-engines +5、monsters +13、
+   shiyu +3、boss +3），无删除；既有文件按字节复用硬链接，其余为语义更新。
+3. attributes/skills 两套 definitions 随索引强绑定再生成：attributes 60 角色 + 100 音擎（含 4 件基础防御力
+   锋御音擎的 `defense`/`base-add` 变体）；skills 60 角色共 1308 动作（damage 1101、daze-only 168、
+   luminize 4、unavailable 35）。克拉蕾 25 个锐化动作与洛克茜 3 个风眼动作按 `special-mechanic`/
+   `unknown-category` 记为 unavailable，不冒充已支持语义；珂蕾妲 23 条目按 3.2 章节位移重映射并重算签名。
+4. 数值回归：static-e2e 九场景对照独立 ZZZ-HP 参考的全部命中、合计与面板数值与 3.1 基线逐位一致，
+   证明版本推进未改变既有计算语义；`gameVersion` 契约常量与快照摘要随制品更新。
+5. 包级 `check`（prepare:consumer 强校验 definitions 与同次 integrated、类型、测试与打包验收）及根
+   `check` 全绿。分发复核见[来源规范](../nanoka/source.md#分发复核记录)。

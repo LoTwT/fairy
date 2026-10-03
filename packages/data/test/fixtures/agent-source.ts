@@ -53,6 +53,8 @@ export function agentSource() {
       element_abnormal_power: 0,
       element_mystery: 0,
       endurance: 0,
+      ep_max: 0,
+      ep_recover: 0,
       hp_growth: 0,
       hp_max: 0,
       pen_delta: 0,
@@ -62,6 +64,7 @@ export function agentSource() {
       rbl_probability: 0,
       shield: 0,
       shield_growth: 0,
+      sharp_critical_damage: 0,
       sp_bar_point: 0,
       sp_recover: 0,
       stun: 0,
@@ -80,7 +83,9 @@ export function agentSource() {
       },
     },
     level_exp: [10, 0],
-    skin: { "1": { image: "original_image", name: "", desc: "" } },
+    skin: {
+      "1": { image: "original_image", name: "", desc: "", obtain_desc: "" },
+    },
     extra_level: {
       stage_key: {
         max_level: 0,
@@ -152,6 +157,7 @@ export function agentSource() {
       slot2: 0,
       slot_sub: 0,
       part_sub_list: [2, 1, 2],
+      alt_build: [{ suit_list: [0], part_sub_list: [0] }],
       part4: property(),
       part5: property(),
       part6: property(),

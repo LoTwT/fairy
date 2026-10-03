@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "entityId": "13021",
+  "level": 60,
+  "baseAttribute": {
+    "attribute": "defense",
+    "operation": "base-add",
+    "unit": "defense-points",
+    "value": 356.88
+  },
+  "advancedAttribute": {
+    "attribute": "criticalRate",
+    "operation": "ratio-add",
+    "unit": "ratio",
+    "value": 0.2
+  }
+}

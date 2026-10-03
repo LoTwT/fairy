@@ -93,8 +93,8 @@
       "name": "Energy Regen"
     },
     "partSub": {
-      "format": "{0:0.#%}",
-      "name": "CRIT Rate"
+      "format": "{0:0}",
+      "name": "Anomaly Proficiency"
     }
   },
   "hitType": {
@@ -1671,11 +1671,13 @@
   "skin": {
     "3114110": {
       "desc": "Can you tell what the umbrella conceals? A tanuki, a trap, a ghost, or a girl's sly, spirited smile?",
-      "name": "Yuzuha: Tanuki Under the Shade"
+      "name": "Yuzuha: Tanuki Under the Shade",
+      "obtainDesc": ""
     },
     "3114111": {
       "desc": "Ghost stories aren't born only in shadows. Unconvinced? Just lock eyes with that playful young lady splashing in the water. She'll possess your thoughts, while Kama sneaks away with your drink.",
-      "name": "Yuzuha: Tanuki in Broad Daylight"
+      "name": "Yuzuha: Tanuki in Broad Daylight",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

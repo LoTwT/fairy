@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [31203],
+        "suitList": [34100, 31300]
+      },
+      {
+        "partSubList": [12102],
+        "suitList": []
+      },
+      {
+        "partSubList": [12102],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementMystery.png",
       "prop": 31203
@@ -584,11 +598,11 @@
   "skillPriority": [
     {
       "avatarId": 1581,
-      "firstPriority": [5, 3, 0],
+      "firstPriority": [5, 3, 0, 6],
       "id": 1581001,
       "potentialLevels": [0, 1, 2, 3, 4, 5, 6],
       "secondPriority": [1],
-      "thirdPriority": [6, 2]
+      "thirdPriority": [2]
     }
   ],
   "skin": {
@@ -621,6 +635,8 @@
     "elementAbnormalPower": 115,
     "elementMystery": 116,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 816391,
     "hpMax": 602,
     "penDelta": 0,
@@ -630,6 +646,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

@@ -1246,7 +1246,8 @@
   "skin": {
     "3110110": {
       "desc": "These casual clothes were hand-picked and styled for Anby by Nicole. They're designed for easy movement and ideal for moving about the streets. The fabrics and accessories cost a lot more than they seem, so (?) Anby treats the outfit with real care.",
-      "name": "Anby: Street Streak"
+      "name": "Anby: Street Streak",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

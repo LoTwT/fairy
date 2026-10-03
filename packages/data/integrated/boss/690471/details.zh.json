@@ -1,0 +1,298 @@
+{
+  "id": 690471,
+  "locale": "zh",
+  "modes": [
+    {
+      "id": 690472,
+      "zone": {
+        "69047201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014204": {
+              "desc": "· 每次成功招架基塔布鲁召唤的眷属攻击并触发<color=#FFAF2C>[活性转化]</color>时，可获得<color=#FFAF2C>500操作得分</color>；成功触发<Term:2000004></Term>应对基塔布鲁的攻击时，可获得<color=#FFAF2C>1000操作得分</color>，最多可触发3次；如果成功在基塔布鲁<color=#FFAF2C>第一次开启</color><Term:2000001></Term>后的<color=#FFAF2C>25秒内击破[侵蚀壁垒]</color>，可获得<color=#FFAF2C>1500操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            },
+            "69014602": {
+              "desc": "",
+              "title": ""
+            },
+            "69014711": {
+              "desc": "· 代理人攻击命中首领敌人时，使首领敌人获得1点[紊相值]；同一名代理人每1秒最多施加1点[紊相值]。\n· 首领敌人持有的[紊相值]达到10点时，会立即移除所有[紊相值]并使首领敌人进入[紊相]状态。[紊相]状态期间，敌人受到的<color=#2BAD00>属性异常伤害提升40%</color>，受到的<color=#2BAD00>锐化伤害提升75%</color>，持续10秒，重复进入[紊相]状态时刷新持续时间。\n· 代理人成功对首领敌人施加属性异常状态时，全队代理人会获得[升变]效果：<color=#2BAD00>造成的伤害提升15%</color>，异常精通<color=#2BAD00>提升20点</color>；[升变]效果持续10秒，重复触发刷新持续时间。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690472011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Girtablu_HC.png",
+              "monsterList": {
+                "31662": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Girtablu_HC.png",
+                  "name": "异构·基塔布鲁",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 33958388.97,
+                    "stun": 18933.95
+                  }
+                }
+              },
+              "monsterResistance": {},
+              "monsterWeakness": {},
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "异构·基塔布鲁",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· 代理人的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升15%</color>，异常精通<color=#2BAD00>提升60点</color>。\n· 代理人对敌人触发<color=#FFFFFF>[异放]</color>或<color=#FFFFFF>[紊乱]</color>时，全队造成的属性异常伤害和[紊乱]伤害<color=#2BAD00>提升25%</color>，同时积蓄效率<color=#2BAD00>提升15%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "凛冽"
+            },
+            "69014702": {
+              "desc": "· 代理人对敌人造成的失衡值<color=#2BAD00>提升20%</color>。\n· <color=#FFFFFF>[强攻]</color>特性的代理人攻击力<color=#2BAD00>提升20%</color>，发动<color=#FFFFFF>[终结技]</color>后自身暴击伤害<color=#2BAD00>提升50%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "破御"
+            },
+            "69014703": {
+              "desc": "· 代理人的防御力<color=#2BAD00>提升15%</color>，锐化伤害<color=#2BAD00>提升15%</color>。\n· <color=#FFFFFF>[击破]</color>特性的代理人的<color=#FFFFFF>[强化特殊技]</color>造成的失衡值<color=#2BAD00>提升20%</color>。代理人发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[特殊技]</color>后，<color=#2EB6FF>电属性伤害</color>和<color=#A6C5FD>风属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "锋刃"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690471,
+      "zone": {
+        "69047101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>[异常]</color>特性的代理人挑战。",
+              "title": ""
+            },
+            "69013601": {
+              "desc": "·焚昼余火开启[焚风]状态后，获得5层<color=#FFFFFF>[赴火]</color>，每层<color=#FFFFFF>[赴火]</color>使自身造成的伤害<color=#FFAF2C>提升10%</color>，且受到的暴击伤害<color=#FFAF2C>降低25%</color>。焚昼余火拥有<color=#FFFFFF>[赴火]</color>时，每次进入<color=#FFAF2C>异常状态</color>将失去一层<color=#FFFFFF>[赴火]</color>，并使后续受到的异放伤害<color=#FFAF2C>提升10%</color>，最多叠加3层，持续15秒，重复触发时刷新持续时间。",
+              "title": ""
+            },
+            "69013602": {
+              "desc": "·焚昼余火处于<color=#FFFFFF>[焚风]</color>状态期间，对焚昼余火造成部位破坏时，可获得<color=#FFAF2C>1250操作得分</color>；代理人<color=#FFAF2C>将在空中发动攻击的焚昼余火击落</color>时，可获得<color=#FFAF2C>1500操作得分</color>；<color=#FFAF2C>[完美反制]</color>焚昼余火的<Term:2000003></Term>时，可获得<color=#FFAF2C>2000操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690471011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Mutant.png",
+              "monsterList": {
+                "31431": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 1
+                  },
+                  "id": 40005,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Mutant.png",
+                  "name": "焚昼余火·法厄同",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 23723285.715,
+                    "stun": 19540.25
+                  }
+                }
+              },
+              "monsterResistance": {
+                "200": "物理"
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "204": "风属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "焚昼余火·法厄同",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· 代理人的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升15%</color>，异常精通<color=#2BAD00>提升60点</color>。\n· 代理人对敌人触发<color=#FFFFFF>[异放]</color>或<color=#FFFFFF>[紊乱]</color>时，全队造成的属性异常伤害和[紊乱]伤害<color=#2BAD00>提升25%</color>，同时积蓄效率<color=#2BAD00>提升15%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "凛冽"
+            },
+            "69014702": {
+              "desc": "· 代理人对敌人造成的失衡值<color=#2BAD00>提升20%</color>。\n· <color=#FFFFFF>[强攻]</color>特性的代理人攻击力<color=#2BAD00>提升20%</color>，发动<color=#FFFFFF>[终结技]</color>后自身暴击伤害<color=#2BAD00>提升50%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "破御"
+            },
+            "69014703": {
+              "desc": "· 代理人的防御力<color=#2BAD00>提升15%</color>，锐化伤害<color=#2BAD00>提升15%</color>。\n· <color=#FFFFFF>[击破]</color>特性的代理人的<color=#FFFFFF>[强化特殊技]</color>造成的失衡值<color=#2BAD00>提升20%</color>。代理人发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[特殊技]</color>后，<color=#2EB6FF>电属性伤害</color>和<color=#A6C5FD>风属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "锋刃"
+            }
+          },
+          "stageNum": 1
+        },
+        "69047102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014410": {
+              "desc": "·熔狱行赭进入[熔狱]状态后,其受到的属性异常伤害降低30%;每触发一次<Term:2000004></Term>首领会获得1层<color=#FFFFFF>[过热]</color>;累计触发两次<color=#FFAF2C>[招架支援]</color>或<color=#FFAF2C>[极限闪避]</color>首领会获得1层<color=#FFFFFF>[过热]</color>,每层<color=#FFFFFF>[过热]</color>会使全队代理人暴击伤害<color=#FFAF2C>提升25%</color>。最多叠加3层，持续20秒，触发<color=#FFAF2C>[招架支援]</color>或重复触发<color=#FFFFFF>[过热]</color>时刷新持续时间。",
+              "title": ""
+            },
+            "69014411": {
+              "desc": "· 成功<color=#FFAF2C>触发[完美反制]</color>时，可获得<color=#FFAF2C>2000操作得分</color>；<color=#FFAF2C>每击碎一颗燧石</color>可获得<color=#FFAF2C>1000操作分，最多获得5000操作得分</color>。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690471021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_SymbioticEtherealSinner.png",
+              "monsterList": {
+                "31635": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 1
+                  },
+                  "id": 30052,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_SymbioticEtherealSinner.png",
+                  "name": "熔狱行赭",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 25,
+                    "defence": 952.8000000000001,
+                    "hp": 19464645.285,
+                    "stun": 20430.9
+                  }
+                }
+              },
+              "monsterResistance": {
+                "200": "物理"
+              },
+              "monsterWeakness": {
+                "202": "冰属性",
+                "204": "风属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "熔狱行赭",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· 代理人的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升15%</color>，异常精通<color=#2BAD00>提升60点</color>。\n· 代理人对敌人触发<color=#FFFFFF>[异放]</color>或<color=#FFFFFF>[紊乱]</color>时，全队造成的属性异常伤害和[紊乱]伤害<color=#2BAD00>提升25%</color>，同时积蓄效率<color=#2BAD00>提升15%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "凛冽"
+            },
+            "69014702": {
+              "desc": "· 代理人对敌人造成的失衡值<color=#2BAD00>提升20%</color>。\n· <color=#FFFFFF>[强攻]</color>特性的代理人攻击力<color=#2BAD00>提升20%</color>，发动<color=#FFFFFF>[终结技]</color>后自身暴击伤害<color=#2BAD00>提升50%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "破御"
+            },
+            "69014703": {
+              "desc": "· 代理人的防御力<color=#2BAD00>提升15%</color>，锐化伤害<color=#2BAD00>提升15%</color>。\n· <color=#FFFFFF>[击破]</color>特性的代理人的<color=#FFFFFF>[强化特殊技]</color>造成的失衡值<color=#2BAD00>提升20%</color>。代理人发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[特殊技]</color>后，<color=#2EB6FF>电属性伤害</color>和<color=#A6C5FD>风属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "锋刃"
+            }
+          },
+          "stageNum": 2
+        },
+        "69047103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013005": {
+              "desc": "· 适合<IconMap:Icon_AvatarClass_Armorer><color=#FFAF2C>[锋御]</color>特性的代理人挑战。",
+              "title": ""
+            },
+            "69014506": {
+              "desc": "· 库萨里库受到的属性异常伤害<color=#FFAF2C>降低40%</color>。\n· 代理人成功使用[招架支援]应对库萨里库的<Term:2000005></Term>时，将对其施加1层[识破]，使库萨里库进入失衡状态时，对其施加2层[识破]。每层[识破]会使其受到的<color=#FFAF2C>锐暴伤害提升10%</color>，[识破]最多叠加4层，持续<color=#FFAF2C>30</color>秒，重复触发时刷新持续时间。",
+              "title": ""
+            },
+            "69014507": {
+              "desc": "· 在库萨里库开启[侵蚀壁垒]后，使用<color=#FFFFFF>[招架支援]</color>反制库萨里库的<Term:2000005></Term>并对其造成部位破坏，可获得<color=#FFAF2C>1000操作得分</color>；成功通过<color=#FFFFFF>[招架支援]</color>应对<Term:2000005></Term>时，可获得<color=#FFAF2C>700操作得分</color>；<color=#FFAF2C>[完美反制]</color>库萨里库的<Term:2000003></Term>时，可获得<color=#FFAF2C>2000操作得分</color>。最多获得5000操作得分。",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690471031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Larval.png",
+              "monsterList": {
+                "31711": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40010,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Larval.png",
+                  "name": "库萨里库",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22124404.935,
+                    "stun": 18933.95
+                  }
+                }
+              },
+              "monsterResistance": {
+                "202": "冰属性"
+              },
+              "monsterWeakness": {
+                "201": "火属性",
+                "203": "电属性"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "库萨里库",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014701": {
+              "desc": "· 代理人的<color=#98EFF0>冰属性伤害</color><color=#2BAD00>提升15%</color>，异常精通<color=#2BAD00>提升60点</color>。\n· 代理人对敌人触发<color=#FFFFFF>[异放]</color>或<color=#FFFFFF>[紊乱]</color>时，全队造成的属性异常伤害和[紊乱]伤害<color=#2BAD00>提升25%</color>，同时积蓄效率<color=#2BAD00>提升15%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "凛冽"
+            },
+            "69014702": {
+              "desc": "· 代理人对敌人造成的失衡值<color=#2BAD00>提升20%</color>。\n· <color=#FFFFFF>[强攻]</color>特性的代理人攻击力<color=#2BAD00>提升20%</color>，发动<color=#FFFFFF>[终结技]</color>后自身暴击伤害<color=#2BAD00>提升50%</color>，持续20秒，重复触发时刷新持续时间。",
+              "title": "破御"
+            },
+            "69014703": {
+              "desc": "· 代理人的防御力<color=#2BAD00>提升15%</color>，锐化伤害<color=#2BAD00>提升15%</color>。\n· <color=#FFFFFF>[击破]</color>特性的代理人的<color=#FFFFFF>[强化特殊技]</color>造成的失衡值<color=#2BAD00>提升20%</color>。代理人发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[特殊技]</color>后，<color=#2EB6FF>电属性伤害</color>和<color=#A6C5FD>风属性伤害</color><color=#2BAD00>提升30%</color>，持续15秒，重复触发时刷新持续时间。",
+              "title": "锋刃"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "试炼"
+}

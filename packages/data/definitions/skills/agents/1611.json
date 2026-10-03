@@ -1,0 +1,1256 @@
+{
+  "schemaVersion": 1,
+  "entityId": "1611",
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1611:action:0001",
+      "branchId": "agent:1611:branch:assist-7",
+      "name": "快速支援：厄月再临",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611022"],
+      "sourceExpression": "{Skill:1611022, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.529,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.431,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0002",
+      "branchId": "agent:1611:branch:assist-8",
+      "name": "快速支援：血华誓·厄月再临",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n造成电属性伤害；\n发动期间不会退出状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611023"],
+      "sourceExpression": "{Skill:1611023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.158,
+        "growth": 0.106
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.404,
+        "growth": 0.019
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0003",
+      "branchId": "agent:1611:branch:assist-9",
+      "name": "招架支援：不屈炉心",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/8/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n发动期间，持续时间不再减少；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611024"],
+      "sourceExpression": "{Skill:1611024, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0004",
+      "branchId": "agent:1611:branch:assist-9",
+      "name": "招架支援：不屈炉心",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/8/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n发动期间，持续时间不再减少；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611025"],
+      "sourceExpression": "{Skill:1611025, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0005",
+      "branchId": "agent:1611:branch:assist-9",
+      "name": "招架支援：不屈炉心",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/8/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n发动期间，持续时间不再减少；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611026"],
+      "sourceExpression": "{Skill:1611026, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0006",
+      "branchId": "agent:1611:branch:assist-10",
+      "name": "支援突击：血华誓·无垢熔锋",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/9/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n造成大量电属性伤害；\n发动期间不会退出状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611027"],
+      "sourceExpression": "{Skill:1611027, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.462,
+        "growth": 0.406
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.158,
+        "growth": 0.144
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0007",
+      "branchId": "agent:1611:branch:assist-11",
+      "name": "反制支援：寸铁不让",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": null,
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/10/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/4/desc"
+        }
+      ],
+      "description": "自身或前场角色即将被部分敌人的控制技攻击时，点按  发动：\n与怪物进行角力，角力成功后，化解敌人的控制技并造成电属性伤害；\n发动期间，持续时间不再减少；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611028"],
+      "sourceExpression": "{Skill:1611028, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 11.53,
+        "growth": 1.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 7.149,
+        "growth": 0.325
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          },
+          {
+            "code": "unknown-category",
+            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0008",
+      "branchId": "agent:1611:branch:assist-12",
+      "name": "支援突击：血华誓·琢形",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/assist/description/11/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/assist/description/5/desc"
+        }
+      ],
+      "description": "发动[反制支援]后，点按  发动：\n造成大量电属性伤害，重击命中敌人时，直接为目标添加1层[残痕]；\n发动期间，持续时间不再减少；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611030"],
+      "sourceExpression": "{Skill:1611030, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 8.563,
+        "growth": 0.779
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 5.264,
+        "growth": 0.24
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0009",
+      "branchId": "agent:1611:branch:basic-4",
+      "name": "普通攻击：血锻四式",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动至多四段锤击，造成电属性伤害。",
+      "parameterIds": ["1611001"],
+      "sourceExpression": "{Skill:1611001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.544,
+        "growth": 0.05
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.347,
+        "growth": 0.016
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0010",
+      "branchId": "agent:1611:branch:basic-4",
+      "name": "普通攻击：血锻四式",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动至多四段锤击，造成电属性伤害。",
+      "parameterIds": ["1611002"],
+      "sourceExpression": "{Skill:1611002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.672,
+        "growth": 0.062
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.429,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0011",
+      "branchId": "agent:1611:branch:basic-4",
+      "name": "普通攻击：血锻四式",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动至多四段锤击，造成电属性伤害。",
+      "parameterIds": ["1611003"],
+      "sourceExpression": "{Skill:1611003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.952,
+        "growth": 0.087
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.609,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0012",
+      "branchId": "agent:1611:branch:basic-4",
+      "name": "普通攻击：血锻四式",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动至多四段锤击，造成电属性伤害。",
+      "parameterIds": ["1611004"],
+      "sourceExpression": "{Skill:1611004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.895,
+        "growth": 0.264
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.788,
+        "growth": 0.082
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0013",
+      "branchId": "agent:1611:branch:basic-5",
+      "name": "普通攻击：血华誓·锻星",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "处于下，点按  发动：\n使用血斧向前方发动至多三段斩击，造成电属性伤害；\n第二段攻击招式发动时，克拉蕾会后跳并扔出血斧，后撤期间可触发极限闪避效果；\n第三段攻击招式发动时，克拉蕾会连续斩击后跳起下砸，连续斩击期间抗打断等级提升，受到的伤害降低40%，连点或长按  可以延长连续斩击的持续时间，停止连点或松开  时克拉蕾会立刻跳起下砸，跳起期间可触发极限闪避效果，成功触发极限闪避后，点按或长按  可以衔接[普通攻击：血华誓·锻星]第三段；\n发动期间不会退出[猩红铭刻]状态。",
+      "parameterIds": ["1611005"],
+      "sourceExpression": "{Skill:1611005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.077,
+        "growth": 0.098
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.55,
+        "growth": 0.025
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0014",
+      "branchId": "agent:1611:branch:basic-5",
+      "name": "普通攻击：血华誓·锻星",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "处于下，点按  发动：\n使用血斧向前方发动至多三段斩击，造成电属性伤害；\n第二段攻击招式发动时，克拉蕾会后跳并扔出血斧，后撤期间可触发极限闪避效果；\n第三段攻击招式发动时，克拉蕾会连续斩击后跳起下砸，连续斩击期间抗打断等级提升，受到的伤害降低40%，连点或长按  可以延长连续斩击的持续时间，停止连点或松开  时克拉蕾会立刻跳起下砸，跳起期间可触发极限闪避效果，成功触发极限闪避后，点按或长按  可以衔接[普通攻击：血华誓·锻星]第三段；\n发动期间不会退出[猩红铭刻]状态。",
+      "parameterIds": ["1611006"],
+      "sourceExpression": "{Skill:1611006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.874,
+        "growth": 0.262
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.467,
+        "growth": 0.067
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0015",
+      "branchId": "agent:1611:branch:basic-5",
+      "name": "普通攻击：血华誓·锻星",
+      "rowName": "三段连续斩击伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "处于下，点按  发动：\n使用血斧向前方发动至多三段斩击，造成电属性伤害；\n第二段攻击招式发动时，克拉蕾会后跳并扔出血斧，后撤期间可触发极限闪避效果；\n第三段攻击招式发动时，克拉蕾会连续斩击后跳起下砸，连续斩击期间抗打断等级提升，受到的伤害降低40%，连点或长按  可以延长连续斩击的持续时间，停止连点或松开  时克拉蕾会立刻跳起下砸，跳起期间可触发极限闪避效果，成功触发极限闪避后，点按或长按  可以衔接[普通攻击：血华誓·锻星]第三段；\n发动期间不会退出[猩红铭刻]状态。",
+      "parameterIds": ["1611007"],
+      "sourceExpression": "{Skill:1611007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 4.521,
+        "growth": 0.411
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.87,
+        "growth": 0.085
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0016",
+      "branchId": "agent:1611:branch:basic-5",
+      "name": "普通攻击：血华誓·锻星",
+      "rowName": "三段下砸伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "处于下，点按  发动：\n使用血斧向前方发动至多三段斩击，造成电属性伤害；\n第二段攻击招式发动时，克拉蕾会后跳并扔出血斧，后撤期间可触发极限闪避效果；\n第三段攻击招式发动时，克拉蕾会连续斩击后跳起下砸，连续斩击期间抗打断等级提升，受到的伤害降低40%，连点或长按  可以延长连续斩击的持续时间，停止连点或松开  时克拉蕾会立刻跳起下砸，跳起期间可触发极限闪避效果，成功触发极限闪避后，点按或长按  可以衔接[普通攻击：血华誓·锻星]第三段；\n发动期间不会退出[猩红铭刻]状态。",
+      "parameterIds": ["1611029"],
+      "sourceExpression": "{Skill:1611029, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.773,
+        "growth": 0.162
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.734,
+        "growth": 0.034
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0017",
+      "branchId": "agent:1611:branch:basic-6",
+      "name": "普通攻击：血华誓·伏钺",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "处于下，发动[特殊技：血华誓·斩金断铁]或[特殊技：血华誓·葬血强袭]并成功触发[毁伤]后，点按或长按  发动：\n使用血斧旋转跳起下砸并斩击目标敌人，造成电属性伤害，跳起期间可触发极限闪避效果；\n招式发动后，点按或长按  可以衔接[普通攻击：血华誓·锻星]第三段；\n发动期间不会退出[猩红铭刻]状态。",
+      "parameterIds": ["1611008"],
+      "sourceExpression": "{Skill:1611008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.28,
+        "growth": 0.299
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.357,
+        "growth": 0.062
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0018",
+      "branchId": "agent:1611:branch:chain-3",
+      "name": "连携技：血华誓·血契共鸣",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n对前方敌人发动连续斩击，造成大量电属性伤害；\n发动期间，持续时间不再减少，不会退出状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611020"],
+      "sourceExpression": "{Skill:1611020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 10.58,
+        "growth": 0.962
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.769,
+        "growth": 0.126
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0019",
+      "branchId": "agent:1611:branch:chain-4",
+      "name": "终结技：血华誓·千锤百炼",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n对前方敌人发动连续斩击，造成大量电属性伤害；\n发动期间，持续时间不再减少，不会退出状态；\n招式发动时，回复10点锐能；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611021"],
+      "sourceExpression": "{Skill:1611021, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 22.52,
+        "growth": 2.048
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.538,
+        "growth": 0.161
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0020",
+      "branchId": "agent:1611:branch:dodge-5",
+      "name": "冲刺攻击：淬火",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "非状态下闪避时，点按  发动：\n向前进行锤击，造成电属性伤害。",
+      "parameterIds": ["1611016"],
+      "sourceExpression": "{Skill:1611016, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.529,
+        "growth": 0.049
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.431,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0021",
+      "branchId": "agent:1611:branch:dodge-6",
+      "name": "闪避反击：回锋",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n使用锤柄对前方进行强力反击，造成电属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611018"],
+      "sourceExpression": "{Skill:1611018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.725,
+        "growth": 0.248
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.962,
+        "growth": 0.09
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0022",
+      "branchId": "agent:1611:branch:dodge-7",
+      "name": "闪避反击：血华誓·回锋",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/dodge/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/dodge/description/3/desc"
+        }
+      ],
+      "description": "触发[极限闪避]后，点按  发动：\n使用血斧对前方进行强力反击，造成电属性伤害；\n发动期间不会退出状态；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611019"],
+      "sourceExpression": "{Skill:1611019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.3,
+        "growth": 0.3
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.907,
+        "growth": 0.087
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0023",
+      "branchId": "agent:1611:branch:special-5",
+      "name": "特殊技：初辉启鸣",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动两段锤击，造成电属性伤害；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1611009"],
+      "sourceExpression": "{Skill:1611009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.901,
+        "growth": 0.082
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.367,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0024",
+      "branchId": "agent:1611:branch:special-6",
+      "name": "强化特殊技：血华誓·铸锋秘术",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "锐能足够且不处于[猩红铭刻]时，点按  发动：\n将锻造锤变形为血斧并斩击目标敌人，造成电属性伤害；\n招式发动后，进入[猩红铭刻]，持续16秒，处于后场时，持续时间不再减少；克拉蕾攻击命中敌人时，若敌人在0.5秒内被击败且自身[猩红铭刻]持续时间不为0，则延长3秒[猩红铭刻]持续时间，3秒内最多触发1次；\n招式发动时，保持长按  ，可以跳过斩击，快速派生[特殊技：血华誓·斩金断铁]和[特殊技：血华誓·葬血强袭]；\n招式发动后，点按或长按  可以衔接[普通攻击：血华誓·锻星]第三段；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611010"],
+      "sourceExpression": "{Skill:1611010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.248,
+        "growth": 0.568
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.585,
+        "growth": 0.118
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0025",
+      "branchId": "agent:1611:branch:special-7",
+      "name": "特殊技：血华誓·斩金断铁",
+      "rowName": "上挑伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "处于时，点按  或  发动：\n向前方进行强力上挑后，横向斩击，造成电属性伤害；\n横向斩击命中持有[残痕]的敌人时，对目标触发[毁伤]，额外造成范围电属性伤害；\n发动期间不会退出[猩红铭刻]状态；\n招式发动期间抗打断等级提升，成功触发[毁伤]后，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611011"],
+      "sourceExpression": "{Skill:1611011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.766,
+        "growth": 0.07
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.312,
+        "growth": 0.015
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0026",
+      "branchId": "agent:1611:branch:special-7",
+      "name": "特殊技：血华誓·斩金断铁",
+      "rowName": "横斩伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/special/description/6/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "处于时，点按  或  发动：\n向前方进行强力上挑后，横向斩击，造成电属性伤害；\n横向斩击命中持有[残痕]的敌人时，对目标触发[毁伤]，额外造成范围电属性伤害；\n发动期间不会退出[猩红铭刻]状态；\n招式发动期间抗打断等级提升，成功触发[毁伤]后，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611012"],
+      "sourceExpression": "{Skill:1611012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.877,
+        "growth": 0.08
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.358,
+        "growth": 0.017
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0027",
+      "branchId": "agent:1611:branch:special-7",
+      "name": "特殊技：血华誓·斩金断铁",
+      "rowName": "毁伤伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/special/description/6/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "处于时，点按  或  发动：\n向前方进行强力上挑后，横向斩击，造成电属性伤害；\n横向斩击命中持有[残痕]的敌人时，对目标触发[毁伤]，额外造成范围电属性伤害；\n发动期间不会退出[猩红铭刻]状态；\n招式发动期间抗打断等级提升，成功触发[毁伤]后，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611013"],
+      "sourceExpression": "{Skill:1611013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 8.127,
+        "growth": 0.739
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1611:action:0028",
+      "branchId": "agent:1611:branch:special-8",
+      "name": "特殊技：血华誓·葬血强袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1611/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1611/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "处于，在[特殊技：血华誓·斩金断铁]上挑期间，保持长按  或  发动：\n向前方发动连续3次横向斩击，造成大量电属性伤害；\n每次横向斩击命中持有[残痕]的敌人时，对目标触发[毁伤]，额外造成范围电属性伤害，招式内最多可以连续触发3次[毁伤]，第3次[毁伤]具有更高打断等级；\n发动期间不会退出状态；\n招式发动期间抗打断等级提升，成功触发[毁伤]后，招式发动期间拥有无敌效果。",
+      "parameterIds": ["1611014"],
+      "sourceExpression": "{Skill:1611014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.128,
+        "growth": 0.285
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.549,
+        "growth": 0.116
+      },
+      "calculation": {
+        "kind": "unavailable",
+        "issues": [
+          {
+            "code": "special-mechanic",
+            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    }
+  ]
+}

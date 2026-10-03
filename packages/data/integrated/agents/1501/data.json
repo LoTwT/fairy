@@ -87,13 +87,27 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [31203],
+        "suitList": [33600, 33000]
+      },
+      {
+        "partSubList": [31903],
+        "suitList": [33000, 33600]
+      },
+      {
+        "partSubList": [31402],
+        "suitList": []
+      }
+    ],
     "part4": {
-      "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementAbnormalPower.png",
-      "prop": 31402
-    },
-    "part5": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementMystery.png",
       "prop": 31203
+    },
+    "part5": {
+      "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementAbnormalPower.png",
+      "prop": 31402
     },
     "part6": {
       "icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconDungeonBuffEther.png",
@@ -582,6 +596,9 @@
     },
     "3115011": {
       "image": "IconRole57_01"
+    },
+    "3115012": {
+      "image": "IconRole57_02"
     }
   },
   "stats": {
@@ -600,6 +617,8 @@
     "elementAbnormalPower": 115,
     "elementMystery": 116,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 845544,
     "hpMax": 623,
     "penDelta": 0,
@@ -609,6 +628,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

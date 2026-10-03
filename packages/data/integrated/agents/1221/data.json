@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [31203],
+        "suitList": [31800, 31300]
+      },
+      {
+        "partSubList": [31803, 23103],
+        "suitList": []
+      },
+      {
+        "partSubList": [31402],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementMystery.png",
       "prop": 31203
@@ -96,17 +110,17 @@
       "prop": 31803
     },
     "part6": {
-      "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconAttack.png",
-      "prop": 12102
-    },
-    "partSub": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementAbnormalPower.png",
       "prop": 31402
     },
-    "partSubList": [31203, 12102],
-    "slot2": 31300,
-    "slot4": 31800,
-    "slotSub": 32400
+    "partSub": {
+      "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconAttack.png",
+      "prop": 12102
+    },
+    "partSubList": [12102, 31203],
+    "slot2": 32400,
+    "slot4": 31300,
+    "slotSub": 31800
   },
   "gender": 2,
   "icon": "IconRole31",
@@ -602,6 +616,8 @@
     "elementAbnormalPower": 112,
     "elementMystery": 114,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 849779,
     "hpMax": 626,
     "penDelta": 0,
@@ -611,6 +627,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

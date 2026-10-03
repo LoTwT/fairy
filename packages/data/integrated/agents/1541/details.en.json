@@ -1562,7 +1562,8 @@
   "skin": {
     "3115410": {
       "desc": "Darkness is a weapon that fits perfectly in my hand. As an executioner, I'm already at home in the night, but carrying heavy shackles, it's easy to lose my way.",
-      "name": "Promeia: Shrouded in Frost"
+      "name": "Promeia: Shrouded in Frost",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

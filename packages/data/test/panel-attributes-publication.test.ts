@@ -42,8 +42,8 @@ describe("panel attribute publication", () => {
   it("validates all members, ignores unrelated categories and detects consumed source changes", async () => {
     const { index, attributes } = await fixture()
     const manifest = await verifyPanelAttributes(attributes, index)
-    expect(manifest.members.agents).toHaveLength(58)
-    expect(manifest.members.wEngines).toHaveLength(95)
+    expect(manifest.members.agents).toHaveLength(60)
+    expect(manifest.members.wEngines).toHaveLength(100)
     index.entities.monsters.memberIds = []
     await verifyPanelAttributes(attributes, index)
     index.entities.agents.members["1311"].files.data.sha256 = "0".repeat(64)

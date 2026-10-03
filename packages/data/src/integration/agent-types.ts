@@ -44,14 +44,14 @@ export interface ExportFileReference {
  * 详情引用默认覆盖全部支持语言；历史类型复用同一结构，将固定语言引用设为可选。
  */
 export interface IntegratedIndex<
-  RulesVersion extends string = "nanoka-agent-reference/4",
+  RulesVersion extends string = "nanoka-agent-reference/5",
   DetailFiles extends Partial<Record<DetailLocale, ExportFileReference>> =
     Record<DetailLocale, ExportFileReference>,
 > {
   /** 文件结构与命名契约版本；v2 将已登记的结构字段改为 camelCase，不是游戏版本。 */
   format: "fairy-nanoka-integrated/v2"
 
-  /** 共享提取、字段拼写和导航规则版本；v4 增加可选资源提取与潜能详情字段拼写，沿用 codeName 特例。 */
+  /** 共享提取、字段拼写和导航规则版本；v5 登记 3.2 新增的锐化暴伤/EP 基础属性、备选配装、皮肤获取说明与特殊属性 ID 字段。 */
   rulesVersion: RulesVersion
 
   /** 当前导出的成员范围；完整性的边界是选定来源索引。 */
@@ -174,6 +174,12 @@ export interface SourceBaseStats {
   /** 来源 endurance 原值；实际用途、单位及是否使用尚未确认。 */
   endurance: number
 
+  /** 来源 `ep_max`。3.2 新增的 EP 上限原值；EP 含义与单位尚未确认，多数成员为 0。 */
+  epMax: number
+
+  /** 来源 `ep_recover`。3.2 新增的 EP 恢复原值；恢复周期与缩放未解释，多数成员为 0。 */
+  epRecover: number
+
   /** 来源 `hp_growth`。来源生命成长字段；未解释其缩放或成长公式。 */
   hpGrowth: number
 
@@ -200,6 +206,9 @@ export interface SourceBaseStats {
 
   /** 来源 `shield_growth`。来源护盾成长字段；用途和成长公式尚未确认。 */
   shieldGrowth: number
+
+  /** 来源 `sharp_critical_damage`。3.2 新增的锐化暴击伤害原值；仅锋御代理人非 0（例如克拉蕾为 15000），缩放与公式留待锐化接入确认。 */
+  sharpCriticalDamage: number
 
   /** 来源 `sp_bar_point`。来源 SP 条相关原值；保留 SP 用词，具体单位和换算规则待确认。 */
   spBarPoint: number
@@ -424,6 +433,9 @@ export interface AgentData {
     /** 来源 `part_sub_list`。来源 part_sub_list 属性编码数组；保留顺序，不自动解释为优先级。 */
     partSubList: number[]
 
+    /** 来源 `alt_build`。3.2 新增的备选配装数组；每项的 suit_list 与 part_sub_list 编码含义同上，不解释为推荐顺序。 */
+    altBuild: SourceFairyRecommendAltBuild[]
+
     /** 来源 part4 推荐属性的编码与图标；其显示名称和格式在 details 同位置。 */
     part4: RecommendationProperty
 
@@ -445,6 +457,15 @@ export interface RecommendationProperty {
 
   /** 该推荐属性的来源图标路径；不转换成网络地址。 */
   icon: string
+}
+
+/** 来源 `fairy_recommend.alt_build` 的单条备选配装；纯数值结构，随 data.fairyRecommend 保存。 */
+export interface SourceFairyRecommendAltBuild {
+  /** 来源 `suit_list`。该备选方案的套装编码数组；保留顺序与重复，不解释为优先级。 */
+  suitList: number[]
+
+  /** 来源 `part_sub_list`。该备选方案的属性编码数组；与顶层 partSubList 分开保存。 */
+  partSubList: number[]
 }
 
 /** 与语言相关的属性名称和显示模板；模板原样保留，未经求值。 */
@@ -554,6 +575,9 @@ export interface SourceSpecialElementType {
 
   /** 来源图标资源标识或路径原文；不拼成完整 URL。 */
   icon: string
+
+  /** 来源 `id`。3.2 新增的特殊属性数值编码；仅部分成员出现（例如 200 凛刃、202 烈霜、205 玄墨），不解释为元素枚举。 */
+  id?: number
 }
 
 /** 来源 extra_property 字典中的一条记录；外层 key 与 target 是两个独立来源值。 */
@@ -674,6 +698,8 @@ export interface AgentDetails {
       name: string
       /** 该外观的当前语言来源说明原文；不按计算用途裁剪。 */
       desc: string
+      /** 来源 `obtain_desc`。3.2 新增的该外观当前语言获取方式说明；空字符串原样保留。 */
+      obtainDesc: string
       /** 仅本语言独有外观 ID 时保留的来源图片资源标识；共有 ID 的资源在 data.skin，不补默认值。 */
       image?: string
     }

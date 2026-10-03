@@ -19,7 +19,7 @@
               "title": ""
             },
             "69013304": {
-              "desc": "· Each successful counter and subsequent trigger of a special stagger against the Boss's attacks grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>1,500 Performance Points</color>. Maximum obtainable Performance Points: 5,000.",
+              "desc": "·Each time you successfully neutralize the boss's attacks and trigger the boss's special stagger, it grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>2,000 Performance Points</color>. During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C>Counter Assists</color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
               "title": ""
             }
           },
@@ -47,6 +47,10 @@
                     "stun": 17876.45
                   }
                 }
+              },
+              "monsterResistance": {
+                "201": "Fire",
+                "204": "Wind"
               },
               "monsterWeakness": {
                 "203": "Electric",
@@ -121,6 +125,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "205": "Ether"
               },
@@ -189,6 +194,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "202": "Ice",
                 "205": "Ether"

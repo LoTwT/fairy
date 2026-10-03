@@ -1399,11 +1399,18 @@
   "skin": {
     "3115110": {
       "desc": "Dreams are both cheap and expensive, always just out of reach. The people on the ground call them stars.\nSo the angel walks among the stars and lifts a sliver of fantasy from the endless galaxy... the very first rainbow light that shone upon her.",
-      "name": "Nangong Yu: Dreamy Dancer"
+      "name": "Nangong Yu: Dreamy Dancer",
+      "obtainDesc": ""
     },
     "3115111": {
       "desc": "Dancing within disordered rhythms, spinning across a stage of wild fantasia.\nThe boundary between angel and demon tilts with the lights, dissolving within her reflection.",
-      "name": "Nangong Yu: Rhapsody's Muse"
+      "name": "Nangong Yu: Rhapsody's Muse",
+      "obtainDesc": ""
+    },
+    "3115112": {
+      "desc": "Angels Rule #1: The octopus squad leader must lead by example! Embrace the pink, embrace the summer!",
+      "name": "Nangong Yu: Heartfelt Support",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

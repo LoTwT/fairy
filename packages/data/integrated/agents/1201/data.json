@@ -2,7 +2,7 @@
   "classificationIds": {
     "camp": ["6"],
     "elementType": ["203"],
-    "hitType": ["103"],
+    "hitType": ["101", "103"],
     "weaponType": ["1"]
   },
   "codeName": "Harumasa",
@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [21103, 20103],
+        "suitList": [32400, 31000]
+      },
+      {
+        "partSubList": [31803, 12102],
+        "suitList": []
+      },
+      {
+        "partSubList": [12102],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconCrit.png",
       "prop": 20103
@@ -105,8 +119,8 @@
     },
     "partSubList": [20103, 12102, 21103],
     "slot2": 31000,
-    "slot4": 32400,
-    "slotSub": 32900
+    "slot4": 32900,
+    "slotSub": 32700
   },
   "gender": 1,
   "icon": "IconRole35",
@@ -640,6 +654,8 @@
     "elementAbnormalPower": 80,
     "elementMystery": 95,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 808084,
     "hpMax": 595,
     "penDelta": 0,
@@ -649,6 +665,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

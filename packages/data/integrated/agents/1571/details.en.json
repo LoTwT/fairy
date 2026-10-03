@@ -1735,7 +1735,8 @@
   "skin": {
     "3115710": {
       "desc": "Rule #1 of Norma's Lab Safety Guidelines: Avoid criticism and advice from idiots and incompetents.",
-      "name": "Norma: Immunity to Fools"
+      "name": "Norma: Immunity to Fools",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

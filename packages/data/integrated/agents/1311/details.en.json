@@ -1579,11 +1579,13 @@
   "skin": {
     "3113110": {
       "desc": "The bold red is only to ignite the freedom deep within. On stage, nothing can overshadow her brilliance.",
-      "name": "Astra Yao: Scarlet Rock"
+      "name": "Astra Yao: Scarlet Rock",
+      "obtainDesc": ""
     },
     "3113111": {
       "desc": "The black-and-white dress glimmers in both light and shadows. Every smile of hers seems to sink into the flowing light of the night, becoming a timeless classic.",
-      "name": "Astra Yao: Chandelier"
+      "name": "Astra Yao: Chandelier",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

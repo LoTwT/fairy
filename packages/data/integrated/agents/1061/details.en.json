@@ -1556,7 +1556,8 @@
   "skin": {
     "3110610": {
       "desc": "From that small frame bursts surprising strength, her roaring chainsaw drowning out her soft whimpers. The well-behaved, ever-professional maid is always short on confidence... so take a moment to wait for her.",
-      "name": "Corin: Matcha Profiterole"
+      "name": "Corin: Matcha Profiterole",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

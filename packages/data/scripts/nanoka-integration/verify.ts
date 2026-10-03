@@ -124,7 +124,7 @@ export async function verifyNanokaAgentArtifact<
     index.rulesVersion ===
       (options.rulesVersion ??
         options.expectedIndex?.rulesVersion ??
-        "nanoka-agent-reference/4"),
+        "nanoka-agent-reference/5"),
     "/rulesVersion",
     "规则版本错误",
   )

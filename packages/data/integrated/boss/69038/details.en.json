@@ -52,6 +52,9 @@
                   }
                 }
               },
+              "monsterResistance": {
+                "201": "Fire"
+              },
               "monsterWeakness": {
                 "200": "Physical",
                 "205": "Ether"
@@ -124,6 +127,9 @@
                     "stun": 14068.040000000003
                   }
                 }
+              },
+              "monsterResistance": {
+                "203": "Electric"
               },
               "monsterWeakness": {
                 "200": "Physical",
@@ -198,6 +204,9 @@
                     "stun": 19977.350000000002
                   }
                 }
+              },
+              "monsterResistance": {
+                "202": "Ice"
               },
               "monsterWeakness": {
                 "200": "Physical",

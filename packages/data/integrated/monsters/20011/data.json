@@ -281,7 +281,7 @@
         "wind_damage_res": 0,
         "wind_stun_res": 0
       },
-      "tag": ["Ether", "Demote", "Middle", "LittleMonster"],
+      "tag": ["Ether", "Promote", "Middle", "LittleMonster"],
       "type": "Monster"
     }
   },

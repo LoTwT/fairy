@@ -99,6 +99,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "202": "冰属性"
@@ -149,6 +150,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "电属性",
             "205": "以太"
@@ -278,6 +280,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "201": "火属性"
@@ -368,6 +371,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "以太"
           },
@@ -408,11 +412,11 @@
               "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CyclopsGrey.png",
               "name": "阿佩卡",
               "stats": {
-                "attack": 1328,
+                "attack": 1494,
                 "attribute_infliction": 0,
-                "defence": 620.1,
-                "hp": 17547.039999999997,
-                "stun": 0
+                "defence": 496.08,
+                "hp": 246316.57399999996,
+                "stun": 1324.8
               }
             },
             "11123": {
@@ -476,6 +480,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -566,6 +571,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "电属性"
           },
@@ -674,6 +680,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "以太"
           },
@@ -783,6 +790,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "电属性"
           },
@@ -891,6 +899,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "200": "物理",
             "202": "冰属性"
@@ -1001,6 +1010,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "以太"
           },
@@ -1089,6 +1099,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -1139,6 +1150,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "203": "电属性"
           },
@@ -1247,6 +1259,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "202": "冰属性",
             "205": "以太"
@@ -1317,6 +1330,7 @@
               }
             }
           },
+          "monsterResistance": {},
           "monsterWeakness": {
             "205": "以太"
           },

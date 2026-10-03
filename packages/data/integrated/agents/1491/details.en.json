@@ -1478,11 +1478,18 @@
   "skin": {
     "3114910": {
       "desc": "Put on the outfit she finds cutest, and she can break free from the crowd, slipping into the lingering echoes of delusion.",
-      "name": "Sunna: Dreams on Loop"
+      "name": "Sunna: Dreams on Loop",
+      "obtainDesc": ""
     },
     "3114911": {
       "desc": "Freshly baked cake, rich aromatic coffee, and the warm afternoon sun...\nWrapped in moments of softness, it's time to begin today's tea break.",
-      "name": "Sunna: Afternoon Tea Break"
+      "name": "Sunna: Afternoon Tea Break",
+      "obtainDesc": ""
+    },
+    "3114912": {
+      "desc": "Angels Rule #3: Please put on your wings before heading out. The angels' journey could begin at any moment!",
+      "name": "Sunna: Delusions in Business",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

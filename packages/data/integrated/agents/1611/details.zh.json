@@ -1,0 +1,2013 @@
+{
+  "camp": {
+    "16": "罗斯凯利法"
+  },
+  "elementType": {
+    "203": "电属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "20101": {
+          "format": "{0:0.#%}",
+          "name": "暴击率"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "穿透率"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "电属性伤害加成"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "防御力"
+    }
+  },
+  "hitType": {
+    "101": "斩击",
+    "102": "打击"
+  },
+  "id": 1611,
+  "locale": "zh",
+  "name": "克拉蕾",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1611022",
+        "1611023",
+        "1611024",
+        "1611025",
+        "1611026",
+        "1611027",
+        "1611028",
+        "1611030"
+      ],
+      "basic": [
+        "1611001",
+        "1611002",
+        "1611003",
+        "1611004",
+        "1611005",
+        "1611006",
+        "1611007",
+        "1611008",
+        "1611029"
+      ],
+      "chain": ["1611020", "1611021"],
+      "dodge": ["1611016", "1611018", "1611019"],
+      "special": [
+        "1611009",
+        "1611010",
+        "1611011",
+        "1611012",
+        "1611013",
+        "1611014"
+      ]
+    },
+    "parameterRowsById": {
+      "1611001": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/4"
+      ],
+      "1611002": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1611003": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1611004": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1611005": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/4"
+      ],
+      "1611006": [
+        "/skill/basic/description/4/param/1",
+        "/skill/basic/description/4/param/5"
+      ],
+      "1611007": [
+        "/skill/basic/description/4/param/2",
+        "/skill/basic/description/4/param/6"
+      ],
+      "1611008": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1611009": [
+        "/skill/special/description/4/param/0",
+        "/skill/special/description/4/param/1"
+      ],
+      "1611010": [
+        "/skill/special/description/5/param/0",
+        "/skill/special/description/5/param/1"
+      ],
+      "1611011": [
+        "/skill/special/description/6/param/0",
+        "/skill/special/description/6/param/2"
+      ],
+      "1611012": [
+        "/skill/special/description/6/param/1",
+        "/skill/special/description/6/param/3"
+      ],
+      "1611013": ["/skill/special/description/6/param/4"],
+      "1611014": [
+        "/skill/special/description/7/param/0",
+        "/skill/special/description/7/param/1"
+      ],
+      "1611016": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1611018": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1611019": [
+        "/skill/dodge/description/6/param/0",
+        "/skill/dodge/description/6/param/1"
+      ],
+      "1611020": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1611021": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1611022": [
+        "/skill/assist/description/6/param/0",
+        "/skill/assist/description/6/param/1"
+      ],
+      "1611023": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ],
+      "1611024": ["/skill/assist/description/8/param/0"],
+      "1611025": ["/skill/assist/description/8/param/1"],
+      "1611026": ["/skill/assist/description/8/param/2"],
+      "1611027": [
+        "/skill/assist/description/9/param/0",
+        "/skill/assist/description/9/param/1"
+      ],
+      "1611028": [
+        "/skill/assist/description/10/param/0",
+        "/skill/assist/description/10/param/1"
+      ],
+      "1611029": [
+        "/skill/basic/description/4/param/3",
+        "/skill/basic/description/4/param/7"
+      ],
+      "1611030": [
+        "/skill/assist/description/11/param/0",
+        "/skill/assist/description/11/param/1"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "7/23",
+    "fullName": "克拉蕾·弗林特",
+    "gender": "女",
+    "impressionF": "哥哥，我记得之前佩洛伊斯消耗了不少辉金，具体数目是…",
+    "impressionM": "别想了铃，我们还不清的…不出意外的话，克拉蕾也会是我们一辈子的「债主」了…",
+    "impressions": [
+      "对克拉蕾的印象：\n · 没想到价值两亿丁尼的蛋糕是真实存在的…",
+      " · 谁不想结识一位不急着催债的慷慨债主呢？",
+      " · 天才家主的压力，可以就着甜品一扫而空。"
+    ],
+    "profileDesc": "克拉蕾，弗林特工坊的工坊主与现任家主，传奇辉金锻造师。\n\n极富家族荣誉感与责任心，珍视辉金、家族与世代传承的锻造技艺，正因如此，她厌弃一切浪费辉金、无意义损耗辉金的行为。\n\n罗斯凯利法的日常运转仰赖辉金，弗林特是世间一切辉金的源头，克拉蕾自然就成为了这座天之算枢最大的「债主」。手握足以动摇天空的筹码，却从不借此索求更多的权力与地位，她遵循着这个古老家族最初的誓言。\n\n克拉蕾看似高傲，但并不会端出家主的架子，熟悉她的人往往乐于与其亲近。她不善于坦率表达自己的心意，口是心非，极易心软答应他人的请求，即便那可能将自己陷入窘迫之中。",
+    "stature": "166",
+    "trustLv": {
+      "1": "克拉蕾，弗林特工坊的工坊主与现任家主，传奇辉金锻造师。\n\n极富家族荣誉感与责任心，珍视辉金、家族与世代传承的锻造技艺，正因如此，她厌弃一切浪费辉金、无意义损耗辉金的行为。\n\n罗斯凯利法的日常运转仰赖辉金，弗林特是世间一切辉金的源头，克拉蕾自然就成为了这座天之算枢最大的「债主」。手握足以动摇天空的筹码，却从不借此索求更多的权力与地位，她遵循着这个古老家族最初的誓言。\n\n克拉蕾看似高傲，但并不会端出家主的架子，熟悉她的人往往乐于与其亲近。她不善于坦率表达自己的心意，口是心非，极易心软答应他人的请求，即便那可能将自己陷入窘迫之中。",
+      "2": "",
+      "3": "克拉蕾钟爱甜品，并对口味非常挑剔。「天才」和「家主」的身份给少女带来太多烦恼与忧虑，摄入大量甜食是她缓解压力的有效途径。\n备注：据其助手观察，若甜品口味不佳，效果往往适得其反。\n\n在专业领域之外，克拉蕾有时略显冒失，并非传闻那般高贵神秘、完美无瑕的领袖，但她会拼尽全力维系人们对她的既有印象，以此维护弗林特家族的形象。\n\n克拉蕾致力于带领家族传承和发展辉金锻造术。长久以来，辉金锻造需要以族人的血液作为催化媒介，克拉蕾试图寻求不依靠血脉铸成辉金的方法，以此将族人从漫长的使命中解脱。",
+      "4": ""
+    },
+    "unlockCondition": [
+      "获得代理人",
+      "完成主线第三季第三章 她与她的隐秘往事",
+      "完成委托「安比的困扰」"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1611501": {
+        "desc": [
+          "克拉蕾发动招式造成的伤害均为锐化伤害，使用防御力作为招式伤害倍率，部分锐化伤害会积累残痕值，残痕值满时，敌人会进入[残痕]，[残痕]最多叠加3层，发动[特殊技：血华誓·斩金断铁]、[特殊技：血华誓·葬血强袭]命中处于[残痕]状态下的敌人时，会消耗一层[残痕]，触发[毁伤]并造成一次范围伤害；\n触发暴击时，锐化伤害不受暴击伤害加成，转而计算锐暴伤害加成；若暴击率超过100%且已经触发暴击，还将基于超过部分的暴击率再进行一次锐暴判定，触发锐暴则额外计算一次锐暴伤害加成；克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%；\n克拉蕾进入战场时即可回复60点锐能，在勘域模式中此效果180秒内最多触发一次;\n克拉蕾处于<Term:1000036></Term>期间，抗打断等级提升，克拉蕾发动[连携技]时延长[猩红铭刻]2秒持续时间；\n克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升<color=#2BAD00>15%</color>，残痕积蓄效率提升<color=#2BAD00>20%</color>，在[普通攻击：血华誓·锻星]和[普通攻击：血华誓·伏钺]招式攻击期间触发极限闪避时，使招式剩余时间内造成的伤害提升15%。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色、其他<color=#FFFFFF>[锋御]</color>或与自身属性相同的角色时触发：\n全队代理人触发[浸染]时，克拉蕾回复300点喧响值，18秒内最多触发1次；\n克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下，锐暴伤害提升<color=#FFFFFF>25%</color>，持续40秒；重复进入[残锋]时，刷新[残锋]持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：苍白血宴", "额外能力：血裔传承"],
+        "potential": []
+      },
+      "1611502": {
+        "desc": [
+          "克拉蕾发动招式造成的伤害均为锐化伤害，使用防御力作为招式伤害倍率，部分锐化伤害会积累残痕值，残痕值满时，敌人会进入[残痕]，[残痕]最多叠加3层，发动[特殊技：血华誓·斩金断铁]、[特殊技：血华誓·葬血强袭]命中处于[残痕]状态下的敌人时，会消耗一层[残痕]，触发[毁伤]并造成一次范围伤害；\n触发暴击时，锐化伤害不受暴击伤害加成，转而计算锐暴伤害加成；若暴击率超过100%且已经触发暴击，还将基于超过部分的暴击率再进行一次锐暴判定，触发锐暴则额外计算一次锐暴伤害加成；克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%；\n克拉蕾进入战场时即可回复60点锐能，在勘域模式中此效果180秒内最多触发一次;\n克拉蕾处于<Term:1000036></Term>期间，抗打断等级提升，克拉蕾发动[连携技]时延长[猩红铭刻]2秒持续时间；\n克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升<color=#2BAD00>17.5%</color>，残痕积蓄效率提升<color=#2BAD00>25%</color>，在[普通攻击：血华誓·锻星]和[普通攻击：血华誓·伏钺]招式攻击期间触发极限闪避时，使招式剩余时间内造成的伤害提升15%。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色、其他<color=#FFFFFF>[锋御]</color>或与自身属性相同的角色时触发：\n全队代理人触发[浸染]时，克拉蕾回复300点喧响值，18秒内最多触发1次；\n克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下，锐暴伤害提升<color=#FFFFFF>25%</color>，持续40秒；重复进入[残锋]时，刷新[残锋]持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：苍白血宴", "额外能力：血裔传承"],
+        "potential": []
+      },
+      "1611503": {
+        "desc": [
+          "克拉蕾发动招式造成的伤害均为锐化伤害，使用防御力作为招式伤害倍率，部分锐化伤害会积累残痕值，残痕值满时，敌人会进入[残痕]，[残痕]最多叠加3层，发动[特殊技：血华誓·斩金断铁]、[特殊技：血华誓·葬血强袭]命中处于[残痕]状态下的敌人时，会消耗一层[残痕]，触发[毁伤]并造成一次范围伤害；\n触发暴击时，锐化伤害不受暴击伤害加成，转而计算锐暴伤害加成；若暴击率超过100%且已经触发暴击，还将基于超过部分的暴击率再进行一次锐暴判定，触发锐暴则额外计算一次锐暴伤害加成；克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%；\n克拉蕾进入战场时即可回复60点锐能，在勘域模式中此效果180秒内最多触发一次;\n克拉蕾处于<Term:1000036></Term>期间，抗打断等级提升，克拉蕾发动[连携技]时延长[猩红铭刻]2秒持续时间；\n克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升<color=#2BAD00>20%</color>，残痕积蓄效率提升<color=#2BAD00>30%</color>，在[普通攻击：血华誓·锻星]和[普通攻击：血华誓·伏钺]招式攻击期间触发极限闪避时，使招式剩余时间内造成的伤害提升15%。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色、其他<color=#FFFFFF>[锋御]</color>或与自身属性相同的角色时触发：\n全队代理人触发[浸染]时，克拉蕾回复300点喧响值，18秒内最多触发1次；\n克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下，锐暴伤害提升<color=#FFFFFF>25%</color>，持续40秒；重复进入[残锋]时，刷新[残锋]持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：苍白血宴", "额外能力：血裔传承"],
+        "potential": []
+      },
+      "1611504": {
+        "desc": [
+          "克拉蕾发动招式造成的伤害均为锐化伤害，使用防御力作为招式伤害倍率，部分锐化伤害会积累残痕值，残痕值满时，敌人会进入[残痕]，[残痕]最多叠加3层，发动[特殊技：血华誓·斩金断铁]、[特殊技：血华誓·葬血强袭]命中处于[残痕]状态下的敌人时，会消耗一层[残痕]，触发[毁伤]并造成一次范围伤害；\n触发暴击时，锐化伤害不受暴击伤害加成，转而计算锐暴伤害加成；若暴击率超过100%且已经触发暴击，还将基于超过部分的暴击率再进行一次锐暴判定，触发锐暴则额外计算一次锐暴伤害加成；克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%；\n克拉蕾进入战场时即可回复60点锐能，在勘域模式中此效果180秒内最多触发一次;\n克拉蕾处于<Term:1000036></Term>期间，抗打断等级提升，克拉蕾发动[连携技]时延长[猩红铭刻]2秒持续时间；\n克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升<color=#2BAD00>22.5%</color>，残痕积蓄效率提升<color=#2BAD00>35%</color>，在[普通攻击：血华誓·锻星]和[普通攻击：血华誓·伏钺]招式攻击期间触发极限闪避时，使招式剩余时间内造成的伤害提升15%。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色、其他<color=#FFFFFF>[锋御]</color>或与自身属性相同的角色时触发：\n全队代理人触发[浸染]时，克拉蕾回复300点喧响值，18秒内最多触发1次；\n克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下，锐暴伤害提升<color=#FFFFFF>25%</color>，持续40秒；重复进入[残锋]时，刷新[残锋]持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：苍白血宴", "额外能力：血裔传承"],
+        "potential": []
+      },
+      "1611505": {
+        "desc": [
+          "克拉蕾发动招式造成的伤害均为锐化伤害，使用防御力作为招式伤害倍率，部分锐化伤害会积累残痕值，残痕值满时，敌人会进入[残痕]，[残痕]最多叠加3层，发动[特殊技：血华誓·斩金断铁]、[特殊技：血华誓·葬血强袭]命中处于[残痕]状态下的敌人时，会消耗一层[残痕]，触发[毁伤]并造成一次范围伤害；\n触发暴击时，锐化伤害不受暴击伤害加成，转而计算锐暴伤害加成；若暴击率超过100%且已经触发暴击，还将基于超过部分的暴击率再进行一次锐暴判定，触发锐暴则额外计算一次锐暴伤害加成；克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%；\n克拉蕾进入战场时即可回复60点锐能，在勘域模式中此效果180秒内最多触发一次;\n克拉蕾处于<Term:1000036></Term>期间，抗打断等级提升，克拉蕾发动[连携技]时延长[猩红铭刻]2秒持续时间；\n克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升<color=#2BAD00>25%</color>，残痕积蓄效率提升<color=#2BAD00>40%</color>，在[普通攻击：血华誓·锻星]和[普通攻击：血华誓·伏钺]招式攻击期间触发极限闪避时，使招式剩余时间内造成的伤害提升15%。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色、其他<color=#FFFFFF>[锋御]</color>或与自身属性相同的角色时触发：\n全队代理人触发[浸染]时，克拉蕾回复300点喧响值，18秒内最多触发1次；\n克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下，锐暴伤害提升<color=#FFFFFF>25%</color>，持续40秒；重复进入[残锋]时，刷新[残锋]持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：苍白血宴", "额外能力：血裔传承"],
+        "potential": []
+      },
+      "1611506": {
+        "desc": [
+          "克拉蕾发动招式造成的伤害均为锐化伤害，使用防御力作为招式伤害倍率，部分锐化伤害会积累残痕值，残痕值满时，敌人会进入[残痕]，[残痕]最多叠加3层，发动[特殊技：血华誓·斩金断铁]、[特殊技：血华誓·葬血强袭]命中处于[残痕]状态下的敌人时，会消耗一层[残痕]，触发[毁伤]并造成一次范围伤害；\n触发暴击时，锐化伤害不受暴击伤害加成，转而计算锐暴伤害加成；若暴击率超过100%且已经触发暴击，还将基于超过部分的暴击率再进行一次锐暴判定，触发锐暴则额外计算一次锐暴伤害加成；克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%；\n克拉蕾进入战场时即可回复60点锐能，在勘域模式中此效果180秒内最多触发一次;\n克拉蕾处于<Term:1000036></Term>期间，抗打断等级提升，克拉蕾发动[连携技]时延长[猩红铭刻]2秒持续时间；\n克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升<color=#2BAD00>27.5%</color>，残痕积蓄效率提升<color=#2BAD00>45%</color>，在[普通攻击：血华誓·锻星]和[普通攻击：血华誓·伏钺]招式攻击期间触发极限闪避时，使招式剩余时间内造成的伤害提升15%。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色、其他<color=#FFFFFF>[锋御]</color>或与自身属性相同的角色时触发：\n全队代理人触发[浸染]时，克拉蕾回复300点喧响值，18秒内最多触发1次；\n克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下，锐暴伤害提升<color=#FFFFFF>25%</color>，持续40秒；重复进入[残锋]时，刷新[残锋]持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：苍白血宴", "额外能力：血裔传承"],
+        "potential": []
+      },
+      "1611507": {
+        "desc": [
+          "克拉蕾发动招式造成的伤害均为锐化伤害，使用防御力作为招式伤害倍率，部分锐化伤害会积累残痕值，残痕值满时，敌人会进入[残痕]，[残痕]最多叠加3层，发动[特殊技：血华誓·斩金断铁]、[特殊技：血华誓·葬血强袭]命中处于[残痕]状态下的敌人时，会消耗一层[残痕]，触发[毁伤]并造成一次范围伤害；\n触发暴击时，锐化伤害不受暴击伤害加成，转而计算锐暴伤害加成；若暴击率超过100%且已经触发暴击，还将基于超过部分的暴击率再进行一次锐暴判定，触发锐暴则额外计算一次锐暴伤害加成；克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%；\n克拉蕾进入战场时即可回复60点锐能，在勘域模式中此效果180秒内最多触发一次;\n克拉蕾处于<Term:1000036></Term>期间，抗打断等级提升，克拉蕾发动[连携技]时延长[猩红铭刻]2秒持续时间；\n克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升<color=#2BAD00>30%</color>，残痕积蓄效率提升<color=#2BAD00>50%</color>，在[普通攻击：血华誓·锻星]和[普通攻击：血华誓·伏钺]招式攻击期间触发极限闪避时，使招式剩余时间内造成的伤害提升15%。",
+          "队伍中存在<color=#FFFFFF>[击破]</color>角色、其他<color=#FFFFFF>[锋御]</color>或与自身属性相同的角色时触发：\n全队代理人触发[浸染]时，克拉蕾回复300点喧响值，18秒内最多触发1次；\n克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下，锐暴伤害提升<color=#FFFFFF>25%</color>，持续40秒；重复进入[残锋]时，刷新[残锋]持续时间。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：苍白血宴", "额外能力：血裔传承"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：厄月再临",
+          "potential": []
+        },
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n造成<color=#2EB6FF>电属性伤害</color>；\n发动期间不会退出<Term:1000036></Term>状态；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：血华誓·厄月再临",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n发动期间，<Term:1000036></Term>持续时间不再减少；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：不屈炉心",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n造成大量<color=#2EB6FF>电属性伤害</color>；\n发动期间不会退出<Term:1000036></Term>状态；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：血华誓·无垢熔锋",
+          "potential": []
+        },
+        {
+          "desc": "自身或前场角色即将被部分敌人的控制技攻击时，点按 <IconMap:Icon_Switch> 发动：\n与怪物进行角力，角力成功后，化解敌人的控制技并造成<color=#2EB6FF>电属性伤害</color>；\n发动期间，<Term:1000036></Term>持续时间不再减少；\n招式发动期间拥有无敌效果。",
+          "name": "反制支援：寸铁不让",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[反制支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n造成大量<color=#2EB6FF>电属性伤害</color>，重击命中敌人时，直接为目标添加1层[残痕]；\n发动期间，<Term:1000036></Term>持续时间不再减少；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：血华誓·琢形",
+          "potential": []
+        },
+        {
+          "name": "快速支援：厄月再临",
+          "param": [
+            {
+              "desc": "{Skill:1611022, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611022": {
+                  "attackData": [],
+                  "attributeInfliction": 3916,
+                  "damagePercentage": 5290,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 3917,
+                  "feverRecovery": 118525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 5290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4310,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611022, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611022": {
+                  "attackData": [],
+                  "attributeInfliction": 3916,
+                  "damagePercentage": 5290,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 3917,
+                  "feverRecovery": 118525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4310,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "快速支援：血华誓·厄月再临",
+          "param": [
+            {
+              "desc": "{Skill:1611023, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611023": {
+                  "attackData": [],
+                  "attributeInfliction": 3666,
+                  "damagePercentage": 11580,
+                  "damagePercentageGrowth": 1060,
+                  "etherPurify": 7334,
+                  "feverRecovery": 111100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1060,
+                  "main": 11580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611023, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611023": {
+                  "attackData": [],
+                  "attributeInfliction": 3666,
+                  "damagePercentage": 11580,
+                  "damagePercentageGrowth": 1060,
+                  "etherPurify": 7334,
+                  "feverRecovery": 111100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 190,
+                  "main": 4040,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4040,
+                  "stunRatioGrowth": 190
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：不屈炉心",
+          "param": [
+            {
+              "desc": "{Skill:1611024, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1611024": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611025, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1611025": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611026, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1611026": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：血华誓·无垢熔锋",
+          "param": [
+            {
+              "desc": "{Skill:1611027, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611027": {
+                  "attackData": [],
+                  "attributeInfliction": 30872,
+                  "damagePercentage": 44620,
+                  "damagePercentageGrowth": 4060,
+                  "etherPurify": 15667,
+                  "feverRecovery": 1131075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4060,
+                  "main": 44620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31580,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611027, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611027": {
+                  "attackData": [],
+                  "attributeInfliction": 30872,
+                  "damagePercentage": 44620,
+                  "damagePercentageGrowth": 4060,
+                  "etherPurify": 15667,
+                  "feverRecovery": 1131075,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1440,
+                  "main": 31580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31580,
+                  "stunRatioGrowth": 1440
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "反制支援：寸铁不让",
+          "param": [
+            {
+              "desc": "{Skill:1611028, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611028": {
+                  "attackData": [],
+                  "attributeInfliction": 69619,
+                  "damagePercentage": 115300,
+                  "damagePercentageGrowth": 10490,
+                  "etherPurify": 67167,
+                  "feverRecovery": 2526975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 10490,
+                  "main": 115300,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 71490,
+                  "stunRatioGrowth": 3250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611028, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611028": {
+                  "attackData": [],
+                  "attributeInfliction": 69619,
+                  "damagePercentage": 115300,
+                  "damagePercentageGrowth": 10490,
+                  "etherPurify": 67167,
+                  "feverRecovery": 2526975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3250,
+                  "main": 71490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 71490,
+                  "stunRatioGrowth": 3250
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：血华誓·琢形",
+          "param": [
+            {
+              "desc": "{Skill:1611030, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611030": {
+                  "attackData": [],
+                  "attributeInfliction": 53963,
+                  "damagePercentage": 85630,
+                  "damagePercentageGrowth": 7790,
+                  "etherPurify": 41167,
+                  "feverRecovery": 2187350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7790,
+                  "main": 85630,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 52640,
+                  "stunRatioGrowth": 2400
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611030, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611030": {
+                  "attackData": [],
+                  "attributeInfliction": 53963,
+                  "damagePercentage": 85630,
+                  "damagePercentageGrowth": 7790,
+                  "etherPurify": 41167,
+                  "feverRecovery": 2187350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2400,
+                  "main": 52640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 52640,
+                  "stunRatioGrowth": 2400
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方发动至多四段锤击，造成<color=#2EB6FF>电属性伤害</color>。",
+          "name": "普通攻击：血锻四式",
+          "potential": []
+        },
+        {
+          "desc": "处于<Term:1000036></Term>下，点按 <IconMap:Icon_Normal> 发动：\n使用血斧向前方发动至多三段斩击，造成<color=#2EB6FF>电属性伤害</color>；\n第二段攻击招式发动时，克拉蕾会后跳并扔出血斧，后撤期间可触发极限闪避效果；\n第三段攻击招式发动时，克拉蕾会连续斩击后跳起下砸，连续斩击期间抗打断等级提升，受到的伤害降低40%，连点或长按 <IconMap:Icon_Normal> 可以延长连续斩击的持续时间，停止连点或松开 <IconMap:Icon_Normal> 时克拉蕾会立刻跳起下砸，跳起期间可触发极限闪避效果，成功触发极限闪避后，点按或长按 <IconMap:Icon_Normal> 可以衔接[普通攻击：血华誓·锻星]第三段；\n发动期间不会退出[猩红铭刻]状态。",
+          "name": "普通攻击：血华誓·锻星",
+          "potential": []
+        },
+        {
+          "desc": "处于<Term:1000036></Term>下，发动[特殊技：血华誓·斩金断铁]或[特殊技：血华誓·葬血强袭]并成功触发[毁伤]后，点按或长按 <IconMap:Icon_Normal> 发动：\n使用血斧旋转跳起下砸并斩击目标敌人，造成<color=#2EB6FF>电属性伤害</color>，跳起期间可触发极限闪避效果；\n招式发动后，点按或长按 <IconMap:Icon_Normal> 可以衔接[普通攻击：血华誓·锻星]第三段；\n发动期间不会退出[猩红铭刻]状态。",
+          "name": "普通攻击：血华誓·伏钺",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：血锻四式",
+          "param": [
+            {
+              "desc": "{Skill:1611001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1611001": {
+                  "attackData": [],
+                  "attributeInfliction": 3150,
+                  "damagePercentage": 5440,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 3151,
+                  "feverRecovery": 95425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 500,
+                  "main": 5440,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3470,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1611002": {
+                  "attackData": [],
+                  "attributeInfliction": 3899,
+                  "damagePercentage": 6720,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 3900,
+                  "feverRecovery": 117975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 6720,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4290,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1611003": {
+                  "attackData": [],
+                  "attributeInfliction": 5529,
+                  "damagePercentage": 9520,
+                  "damagePercentageGrowth": 870,
+                  "etherPurify": 5530,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 870,
+                  "main": 9520,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6090,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1611004": {
+                  "attackData": [],
+                  "attributeInfliction": 16253,
+                  "damagePercentage": 28950,
+                  "damagePercentageGrowth": 2640,
+                  "etherPurify": 16254,
+                  "feverRecovery": 491700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2640,
+                  "main": 28950,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17880,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1611001": {
+                  "attackData": [],
+                  "attributeInfliction": 3150,
+                  "damagePercentage": 5440,
+                  "damagePercentageGrowth": 500,
+                  "etherPurify": 3151,
+                  "feverRecovery": 95425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 160,
+                  "main": 3470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3470,
+                  "stunRatioGrowth": 160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1611002": {
+                  "attackData": [],
+                  "attributeInfliction": 3899,
+                  "damagePercentage": 6720,
+                  "damagePercentageGrowth": 620,
+                  "etherPurify": 3900,
+                  "feverRecovery": 117975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4290,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1611003": {
+                  "attackData": [],
+                  "attributeInfliction": 5529,
+                  "damagePercentage": 9520,
+                  "damagePercentageGrowth": 870,
+                  "etherPurify": 5530,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6090,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1611004": {
+                  "attackData": [],
+                  "attributeInfliction": 16253,
+                  "damagePercentage": 28950,
+                  "damagePercentageGrowth": 2640,
+                  "etherPurify": 16254,
+                  "feverRecovery": 491700,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 17880,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 17880,
+                  "stunRatioGrowth": 820
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：血华誓·锻星",
+          "param": [
+            {
+              "desc": "{Skill:1611005, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1611005": {
+                  "attackData": [],
+                  "attributeInfliction": 4996,
+                  "damagePercentage": 10770,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 4997,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611006, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1611006": {
+                  "attackData": [],
+                  "attributeInfliction": 13333,
+                  "damagePercentage": 28740,
+                  "damagePercentageGrowth": 2620,
+                  "etherPurify": 13334,
+                  "feverRecovery": 403425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2620,
+                  "main": 28740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14670,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611007, Prop:1001}",
+              "name": "三段连续斩击伤害倍率",
+              "param": {
+                "1611007": {
+                  "attackData": [],
+                  "attributeInfliction": 17000,
+                  "damagePercentage": 45210,
+                  "damagePercentageGrowth": 4110,
+                  "etherPurify": 17000,
+                  "feverRecovery": 514250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 4110,
+                  "main": 45210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611029, Prop:1001}",
+              "name": "三段下砸伤害倍率",
+              "param": {
+                "1611029": {
+                  "attackData": [],
+                  "attributeInfliction": 6666,
+                  "damagePercentage": 17730,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 6667,
+                  "feverRecovery": 201850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1620,
+                  "main": 17730,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7340,
+                  "stunRatioGrowth": 340
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611005, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1611005": {
+                  "attackData": [],
+                  "attributeInfliction": 4996,
+                  "damagePercentage": 10770,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 4997,
+                  "feverRecovery": 151250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 250,
+                  "main": 5500,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5500,
+                  "stunRatioGrowth": 250
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611006, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1611006": {
+                  "attackData": [],
+                  "attributeInfliction": 13333,
+                  "damagePercentage": 28740,
+                  "damagePercentageGrowth": 2620,
+                  "etherPurify": 13334,
+                  "feverRecovery": 403425,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 670,
+                  "main": 14670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 14670,
+                  "stunRatioGrowth": 670
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611007, Prop:1002}",
+              "name": "三段连续斩击失衡倍率",
+              "param": {
+                "1611007": {
+                  "attackData": [],
+                  "attributeInfliction": 17000,
+                  "damagePercentage": 45210,
+                  "damagePercentageGrowth": 4110,
+                  "etherPurify": 17000,
+                  "feverRecovery": 514250,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 850,
+                  "main": 18700,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 18700,
+                  "stunRatioGrowth": 850
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611029, Prop:1002}",
+              "name": "三段下砸失衡倍率",
+              "param": {
+                "1611029": {
+                  "attackData": [],
+                  "attributeInfliction": 6666,
+                  "damagePercentage": 17730,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 6667,
+                  "feverRecovery": 201850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 340,
+                  "main": 7340,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7340,
+                  "stunRatioGrowth": 340
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：血华誓·伏钺",
+          "param": [
+            {
+              "desc": "{Skill:1611008, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611008": {
+                  "attackData": [],
+                  "attributeInfliction": 12333,
+                  "damagePercentage": 32800,
+                  "damagePercentageGrowth": 2990,
+                  "etherPurify": 12334,
+                  "feverRecovery": 373175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2990,
+                  "main": 32800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13570,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611008, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611008": {
+                  "attackData": [],
+                  "attributeInfliction": 12333,
+                  "damagePercentage": 32800,
+                  "damagePercentageGrowth": 2990,
+                  "etherPurify": 12334,
+                  "feverRecovery": 373175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 620,
+                  "main": 13570,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13570,
+                  "stunRatioGrowth": 620
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n对前方敌人发动连续斩击，造成大量<color=#2EB6FF>电属性伤害</color>；\n发动期间，<Term:1000036></Term>持续时间不再减少，不会退出<Term:1000036></Term>状态；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：血华誓·血契共鸣",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n对前方敌人发动连续斩击，造成大量<color=#2EB6FF>电属性伤害</color>；\n发动期间，<Term:1000036></Term>持续时间不再减少，不会退出<Term:1000036></Term>状态；\n招式发动时，回复10点锐能；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：血华誓·千锤百炼",
+          "potential": []
+        },
+        {
+          "name": "连携技：血华誓·血契共鸣",
+          "param": [
+            {
+              "desc": "{Skill:1611020, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611020": {
+                  "attackData": [],
+                  "attributeInfliction": 45116,
+                  "damagePercentage": 105800,
+                  "damagePercentageGrowth": 9620,
+                  "etherPurify": 25167,
+                  "feverRecovery": 2773100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 9620,
+                  "main": 105800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27690,
+                  "stunRatioGrowth": 1260
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611020, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611020": {
+                  "attackData": [],
+                  "attributeInfliction": 45116,
+                  "damagePercentage": 105800,
+                  "damagePercentageGrowth": 9620,
+                  "etherPurify": 25167,
+                  "feverRecovery": 2773100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1260,
+                  "main": 27690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27690,
+                  "stunRatioGrowth": 1260
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：血华誓·千锤百炼",
+          "param": [
+            {
+              "desc": "{Skill:1611021, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611021": {
+                  "attackData": [],
+                  "attributeInfliction": 32163,
+                  "damagePercentage": 225200,
+                  "damagePercentageGrowth": 20480,
+                  "etherPurify": 82164,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 20480,
+                  "main": 225200,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35380,
+                  "stunRatioGrowth": 1610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611021, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611021": {
+                  "attackData": [],
+                  "attributeInfliction": 32163,
+                  "damagePercentage": 225200,
+                  "damagePercentageGrowth": 20480,
+                  "etherPurify": 82164,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1610,
+                  "main": 35380,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 35380,
+                  "stunRatioGrowth": 1610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：夜视",
+          "potential": []
+        },
+        {
+          "desc": "非<Term:1000036></Term>状态下闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前进行锤击，造成<color=#2EB6FF>电属性伤害</color>。",
+          "name": "冲刺攻击：淬火",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n使用锤柄对前方进行强力反击，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：回锋",
+          "potential": []
+        },
+        {
+          "desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n使用血斧对前方进行强力反击，造成<color=#2EB6FF>电属性伤害</color>；\n发动期间不会退出<Term:1000036></Term>状态；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：血华誓·回锋",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：淬火",
+          "param": [
+            {
+              "desc": "{Skill:1611016, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611016": {
+                  "attackData": [],
+                  "attributeInfliction": 3915,
+                  "damagePercentage": 5290,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 3916,
+                  "feverRecovery": 118525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 490,
+                  "main": 5290,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4310,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611016, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611016": {
+                  "attackData": [],
+                  "attributeInfliction": 3915,
+                  "damagePercentage": 5290,
+                  "damagePercentageGrowth": 490,
+                  "etherPurify": 3916,
+                  "feverRecovery": 118525,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4310,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4310,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：回锋",
+          "param": [
+            {
+              "desc": "{Skill:1611018, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611018": {
+                  "attackData": [],
+                  "attributeInfliction": 7833,
+                  "damagePercentage": 27250,
+                  "damagePercentageGrowth": 2480,
+                  "etherPurify": 22834,
+                  "feverRecovery": 237050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2480,
+                  "main": 27250,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19620,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611018, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611018": {
+                  "attackData": [],
+                  "attributeInfliction": 7833,
+                  "damagePercentage": 27250,
+                  "damagePercentageGrowth": 2480,
+                  "etherPurify": 22834,
+                  "feverRecovery": 237050,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 900,
+                  "main": 19620,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19620,
+                  "stunRatioGrowth": 900
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：血华誓·回锋",
+          "param": [
+            {
+              "desc": "{Skill:1611019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611019": {
+                  "attackData": [],
+                  "attributeInfliction": 7333,
+                  "damagePercentage": 33000,
+                  "damagePercentageGrowth": 3000,
+                  "etherPurify": 22334,
+                  "feverRecovery": 221925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3000,
+                  "main": 33000,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19070,
+                  "stunRatioGrowth": 870
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611019": {
+                  "attackData": [],
+                  "attributeInfliction": 7333,
+                  "damagePercentage": 33000,
+                  "damagePercentageGrowth": 3000,
+                  "etherPurify": 22334,
+                  "feverRecovery": 221925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 870,
+                  "main": 19070,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 19070,
+                  "stunRatioGrowth": 870
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n向前方发动两段锤击，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动期间抗打断等级提升。",
+          "name": "特殊技：初辉启鸣",
+          "potential": []
+        },
+        {
+          "desc": "锐能足够且不处于[猩红铭刻]时，点按 <IconMap:Icon_SpecialReady_Ep> 发动：\n将锻造锤变形为血斧并斩击目标敌人，造成<color=#2EB6FF>电属性伤害</color>；\n招式发动后，进入[猩红铭刻]，持续16秒，处于后场时，持续时间不再减少；克拉蕾攻击命中敌人时，若敌人在0.5秒内被击败且自身[猩红铭刻]持续时间不为0，则延长3秒[猩红铭刻]持续时间，3秒内最多触发1次；\n招式发动时，保持长按 <IconMap:Icon_SpecialReady_Ep> ，可以跳过斩击，快速派生[特殊技：血华誓·斩金断铁]和[特殊技：血华誓·葬血强袭]；\n招式发动后，点按或长按 <IconMap:Icon_Normal> 可以衔接[普通攻击：血华誓·锻星]第三段；\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：血华誓·铸锋秘术",
+          "potential": []
+        },
+        {
+          "desc": "处于<Term:1000036></Term>时，点按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady_Ep> 发动：\n向前方进行强力上挑后，横向斩击，造成<color=#2EB6FF>电属性伤害</color>；\n横向斩击命中持有[残痕]的敌人时，对目标触发[毁伤]，额外造成范围<color=#2EB6FF>电属性伤害</color>；\n发动期间不会退出[猩红铭刻]状态；\n招式发动期间抗打断等级提升，成功触发[毁伤]后，招式发动期间拥有无敌效果。",
+          "name": "特殊技：血华誓·斩金断铁",
+          "potential": []
+        },
+        {
+          "desc": "处于<Term:1000036></Term>，在[特殊技：血华誓·斩金断铁]上挑期间，保持长按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady_Ep> 发动：\n向前方发动连续3次横向斩击，造成大量<color=#2EB6FF>电属性伤害</color>；\n每次横向斩击命中持有[残痕]的敌人时，对目标触发[毁伤]，额外造成范围<color=#2EB6FF>电属性伤害</color>，招式内最多可以连续触发3次[毁伤]，第3次[毁伤]具有更高打断等级；\n发动期间不会退出<Term:1000036></Term>状态；\n招式发动期间抗打断等级提升，成功触发[毁伤]后，招式发动期间拥有无敌效果。",
+          "name": "特殊技：血华誓·葬血强袭",
+          "potential": []
+        },
+        {
+          "name": "特殊技：初辉启鸣",
+          "param": [
+            {
+              "desc": "{Skill:1611009, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611009": {
+                  "attackData": [],
+                  "attributeInfliction": 3334,
+                  "damagePercentage": 9010,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 3335,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 820,
+                  "main": 9010,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3670,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611009, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611009": {
+                  "attackData": [],
+                  "attributeInfliction": 3334,
+                  "damagePercentage": 9010,
+                  "damagePercentageGrowth": 820,
+                  "etherPurify": 3335,
+                  "feverRecovery": 100925,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3670,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3670,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：血华誓·铸锋秘术",
+          "param": [
+            {
+              "desc": "{Skill:1611010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611010": {
+                  "attackData": [],
+                  "attributeInfliction": 23496,
+                  "damagePercentage": 62480,
+                  "damagePercentageGrowth": 5680,
+                  "etherPurify": 23497,
+                  "feverRecovery": 710875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5680,
+                  "main": 62480,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25850,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611010": {
+                  "attackData": [],
+                  "attributeInfliction": 23496,
+                  "damagePercentage": 62480,
+                  "damagePercentageGrowth": 5680,
+                  "etherPurify": 23497,
+                  "feverRecovery": 710875,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1180,
+                  "main": 25850,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25850,
+                  "stunRatioGrowth": 1180
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "60点",
+              "name": "锐能消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：血华誓·斩金断铁",
+          "param": [
+            {
+              "desc": "{Skill:1611011, Prop:1001}",
+              "name": "上挑伤害倍率",
+              "param": {
+                "1611011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7660,
+                  "damagePercentageGrowth": 700,
+                  "etherPurify": 5671,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 700,
+                  "main": 7660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3120,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611012, Prop:1001}",
+              "name": "横斩伤害倍率",
+              "param": {
+                "1611012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8770,
+                  "damagePercentageGrowth": 800,
+                  "etherPurify": 6494,
+                  "feverRecovery": 196625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 800,
+                  "main": 8770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3580,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611011, Prop:1002}",
+              "name": "上挑失衡倍率",
+              "param": {
+                "1611011": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 7660,
+                  "damagePercentageGrowth": 700,
+                  "etherPurify": 5671,
+                  "feverRecovery": 171600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 150,
+                  "main": 3120,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3120,
+                  "stunRatioGrowth": 150
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611012, Prop:1002}",
+              "name": "横斩失衡倍率",
+              "param": {
+                "1611012": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 8770,
+                  "damagePercentageGrowth": 800,
+                  "etherPurify": 6494,
+                  "feverRecovery": 196625,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 170,
+                  "main": 3580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 3580,
+                  "stunRatioGrowth": 170
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611013, Prop:1001}",
+              "name": "毁伤伤害倍率",
+              "param": {
+                "1611013": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 81270,
+                  "damagePercentageGrowth": 7390,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7390,
+                  "main": 81270,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "特殊技：血华誓·葬血强袭",
+          "param": [
+            {
+              "desc": "{Skill:1611014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1611014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 31280,
+                  "damagePercentageGrowth": 2850,
+                  "etherPurify": 23171,
+                  "feverRecovery": 700975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2850,
+                  "main": 31280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25490,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1611014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1611014": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 31280,
+                  "damagePercentageGrowth": 2850,
+                  "etherPurify": 23171,
+                  "feverRecovery": 700975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1160,
+                  "main": 25490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25490,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1611001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：血锻四式"
+    },
+    "1611002": {
+      "desc": "<IconMap:Icon_Normal>（[猩红铭刻]下）",
+      "name": "普通攻击：血华誓·锻星"
+    },
+    "1611003": {
+      "desc": "<IconMap:Icon_Special> ; <IconMap:Icon_Normal>（[猩红铭刻]下）（成功[毁伤]后）",
+      "name": "普通攻击：血华誓·伏钺"
+    },
+    "1611004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：初辉启鸣"
+    },
+    "1611005": {
+      "desc": "<IconMap:Icon_SpecialReady_Ep> （锐能足够且不处于[猩红铭刻]时）",
+      "name": "强化特殊技：血华誓·铸锋秘术"
+    },
+    "1611006": {
+      "desc": "<IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady_Ep>（[猩红铭刻]下）",
+      "name": "特殊技：血华誓·斩金断铁"
+    },
+    "1611007": {
+      "desc": "<IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady_Ep>（[猩红铭刻]下）（保持长按）",
+      "name": "特殊技：血华誓·葬血强袭"
+    },
+    "1611008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：淬火"
+    },
+    "1611009": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：回锋"
+    },
+    "1611010": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "name": "闪避反击：血华誓·回锋（[猩红铭刻]下）"
+    },
+    "1611011": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：血华誓·血契共鸣"
+    },
+    "1611012": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：血华誓·千锤百炼"
+    },
+    "1611013": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：厄月再临"
+    },
+    "1611014": {
+      "desc": "<IconMap:Icon_Switch>（[猩红铭刻]下）（触发快速支援时）",
+      "name": "快速支援：血华誓·厄月再临"
+    },
+    "1611015": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：不屈炉心"
+    },
+    "1611016": {
+      "desc": "<IconMap:Icon_Switch>（触发反制支援时）",
+      "name": "反制支援：寸铁不让"
+    },
+    "1611017": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：血华誓·无垢熔锋"
+    },
+    "1611018": {
+      "desc": "<IconMap:Icon_Normal>（发动反制支援后）",
+      "name": "支援突击：血华誓·琢形"
+    }
+  },
+  "skin": {
+    "3116110": {
+      "desc": "据传，弗林特家主的衣襟总是缀满余烬…显然那不过是一种浪漫想象，年轻的天才锻造师绝不容许那样醒目的失误。",
+      "name": "克拉蕾·灼金绯焰",
+      "obtainDesc": ""
+    }
+  },
+  "specialElementType": {},
+  "strategy": {},
+  "talent": {
+    "1": {
+      "desc": "克拉蕾攻击命中敌人并造成锐暴时，残痕积蓄效率提升20%；克拉蕾触发[毁伤]造成的伤害倍率提升至原本的130%。",
+      "desc2": "少女翻阅古朴的族志，粗粝的纸张啃噬她的掌心。\n一滴血坠入扉页，千万滴血涂满余章。",
+      "name": "淋漓古志"
+    },
+    "2": {
+      "desc": "[猩红铭刻]最大持续时间延长2秒；克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，攻击命中时无视目标18%<color=#2EB6FF>电属性伤害抗性</color>。",
+      "desc2": "被血脉选中的天才踏入殿堂，流溢的辉光照彻脸庞。\n她无言地接过冠冕与权杖，转身奔赴下一个锤锻场。",
+      "name": "薪火荣冠"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "炉火昼夜不息，家族的重担压于少女肩际。\n她向来不知如何排遣心绪，直到某日，天才的助手捧来精巧的甜点，为苦涩的日子添上一缕回甘。",
+      "name": "糖霜宣言"
+    },
+    "4": {
+      "desc": "[普通攻击：血华誓·锻星]第三段招式发动期间，连续斩击的可延长时间增加；[普通攻击：血华誓·锻星]第三段、[连携技：血华誓·血契共鸣]、[终结技：血华誓·千锤百炼]造成的伤害提升20%。",
+      "desc2": "锤声落尽，长夜唯余赤月高悬。\n少女昂起绯色的眼眸，残忍的月光嗤笑着漫过窗棂。",
+      "name": "赤月彷徨"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "历代工匠皆以鲜血滋养熔炉，而她誓要让火焰学会自行燃烧。\n锤声再度响彻工坊，炉火依旧长明，却无需再以生命为柴薪。",
+      "name": "暮血熔炉"
+    },
+    "6": {
+      "desc": "克拉蕾发动[连携技：血华誓·血契共鸣]、[终结技：血华誓·千锤百炼]重击命中敌人时，不消耗[残痕]直接触发1次单体[毁伤]。",
+      "desc2": "少女终于沉沉睡去。\n她梦见一轮满月，一片恒久无垠的大地，\n赤红的月光早已消逝，银色的夜空仿若黎明。\n",
+      "name": "热夜之梦"
+    }
+  },
+  "weaponType": {
+    "7": "锋御"
+  }
+}

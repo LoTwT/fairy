@@ -1619,7 +1619,8 @@
   "skin": {
     "3113210": {
       "desc": "A sharp, no-nonsense manager's outfit. Its hidden edges are enough to make onlookers back off. Her yellow-brown hair weaves a fine, delicate net, where a quiet pool of starlight seems to rest.",
-      "name": "Evelyn: A Moth to Light"
+      "name": "Evelyn: A Moth to Light",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},

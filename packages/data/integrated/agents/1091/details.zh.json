@@ -1628,16 +1628,19 @@
   "skin": {
     "3110910": {
       "desc": "斩落空洞的刀兵，刺穿迷雾的灯塔。人们渴望武者砺世、舵手领航，渴望旌旗不落、永存荣光。可力量总有所限，唯修行一如既往。",
-      "name": "星见雅·烈露濯霜"
+      "name": "星见雅·烈露濯霜",
+      "obtainDesc": ""
     },
     "3110911": {
       "desc": "花筵初启，银庭微霜。每逢家中设宴，少女钟爱端坐一隅，垂眸执卷，低声吟诵旧时诗句。\n宾客无不称奇，笑叹星见家尚存古意，家风雅正。\n唯有宗一郎立于席侧，眼角微跳，因他最是明了——自家女儿未必通晓诗中几分真意。",
-      "name": "星见雅·银庭花信"
+      "name": "星见雅·银庭花信",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {
     "desc": "<color=#98EFF0>烈霜属性</color>会基于<color=#98EFF0>冰属性</color>结算伤害与增益效果，造成<color=#98EFF0>烈霜伤害</color>的同时，会对敌人累积<color=#98EFF0>烈霜异常积蓄值</color>，随之将触发<color=#98EFF0>[冻结]</color>并施加<color=#98EFF0>[霜寒]</color>效果；\n<color=#98EFF0>[冻结]</color>效果能够在一段时间内，使目标无法行动；\n<color=#98EFF0>[碎冰]</color>效果会在<color=#98EFF0>[冻结]</color>效果结束时触发，打断敌人的行动并造成<color=#98EFF0>烈霜伤害</color>；\n<color=#98EFF0>[霜寒]</color>效果能够在一段时间内，使目标承受的暴击伤害提升。",
     "icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconFrost.png",
+    "id": 202,
     "name": "烈霜",
     "title": "烈霜属性"
   },

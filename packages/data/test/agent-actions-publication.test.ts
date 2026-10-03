@@ -45,12 +45,12 @@ describe("action publication contract", () => {
     const { index, actions, catalog } = await fixture()
     const manifest = await verifyAgentActions(actions, index, catalog)
     expect(manifest.coverage).toEqual({
-      agents: 58,
-      actions: 1256,
-      damage: 1084,
-      dazeOnly: 161,
+      agents: 60,
+      actions: 1308,
+      damage: 1101,
+      dazeOnly: 168,
       luminize: 4,
-      unavailable: 7,
+      unavailable: 35,
       individualHitActions: 1,
     })
     index.entities.monsters.memberIds = []

@@ -24,7 +24,7 @@
   "actions": [
     {
       "actionId": "action:agent:1101:action:0001",
-      "branchId": "agent:1101:branch:assist-4",
+      "branchId": "agent:1101:branch:assist-5",
       "name": "快速支援：让我来",
       "rowName": "伤害倍率",
       "levelGroup": "assist",
@@ -33,7 +33,7 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/assist/description/3/param/0"
+        "pointer": "/skill/assist/description/4/param/0"
       },
       "descriptionSources": [
         {
@@ -85,7 +85,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0002",
-      "branchId": "agent:1101:branch:assist-5",
+      "branchId": "agent:1101:branch:assist-6",
       "name": "招架支援：护身锤",
       "rowName": "轻招架失衡倍率",
       "levelGroup": "assist",
@@ -94,7 +94,7 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/assist/description/4/param/0"
+        "pointer": "/skill/assist/description/5/param/0"
       },
       "descriptionSources": [
         {
@@ -120,7 +120,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0003",
-      "branchId": "agent:1101:branch:assist-5",
+      "branchId": "agent:1101:branch:assist-6",
       "name": "招架支援：护身锤",
       "rowName": "重招架失衡倍率",
       "levelGroup": "assist",
@@ -129,7 +129,7 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/assist/description/4/param/1"
+        "pointer": "/skill/assist/description/5/param/1"
       },
       "descriptionSources": [
         {
@@ -155,7 +155,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0004",
-      "branchId": "agent:1101:branch:assist-5",
+      "branchId": "agent:1101:branch:assist-6",
       "name": "招架支援：护身锤",
       "rowName": "连续招架失衡倍率",
       "levelGroup": "assist",
@@ -164,7 +164,7 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/assist/description/4/param/2"
+        "pointer": "/skill/assist/description/5/param/2"
       },
       "descriptionSources": [
         {
@@ -190,7 +190,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0005",
-      "branchId": "agent:1101:branch:assist-6",
+      "branchId": "agent:1101:branch:assist-7",
       "name": "支援突击：锤钟",
       "rowName": "伤害倍率",
       "levelGroup": "assist",
@@ -199,15 +199,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/assist/description/5/param/0"
+        "pointer": "/skill/assist/description/6/param/0"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/assist/description/2/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
         }
       ],
-      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进打击，造成火属性伤害，并获得[熔炉升温]效果；\n招式发动期间拥有无敌效果。",
+      "description": "发动[招架支援]后，点按  发动：\n对前方敌人发动突进打击，造成火属性伤害，并获得[熔炉升温]效果；\n招式发动期间拥有无敌效果。\n发动[招架支援]后，点按  发动：\n对前方敌人发动突进打击，造成火属性伤害，并获得[熔炉升温]效果；\n招式发动期间拥有无敌效果，长按  可衔接[冲刺攻击：给我颤抖]。",
       "parameterIds": ["1101505"],
       "sourceExpression": "{Skill:1101505, Prop:1001}",
       "damageCoefficient": {
@@ -251,7 +255,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0006",
-      "branchId": "agent:1101:branch:basic-2",
+      "branchId": "agent:1101:branch:basic-3",
       "name": "普通攻击：砸扁，粉碎",
       "rowName": "一段伤害倍率",
       "levelGroup": "basic",
@@ -260,15 +264,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/basic/description/1/param/0"
+        "pointer": "/skill/basic/description/2/param/0"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。\n点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n强化[普通攻击]分为两段，发动第一段后点按或长按  可衔接第二段，且第一段强化[普通攻击]的追击效果增强；\n[熔炉升温]效果最多可拥有2层，发动强化[普通攻击]会消耗所有的[熔炉升温]；\n消耗[熔炉升温]时，全队代理人造成的伤害提升35%，持续40秒，重复触发刷新时间，且每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的伤害提升10%，造成的失衡值提升20%；\n第一段强化[普通攻击]发动期间切换代理人，珂蕾妲会在前台自动发动第二段强化[普通攻击]；\n当珂蕾妲与本同时出战，发动强化[普通攻击]，且未在第一段强化[普通攻击]期间切换代理人时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果；\n第二段强化[普通攻击]无敌效果持续时间增加。",
       "parameterIds": ["1101001"],
       "sourceExpression": "{Skill:1101001, Prop:1001}",
       "damageCoefficient": {
@@ -312,7 +320,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0007",
-      "branchId": "agent:1101:branch:basic-2",
+      "branchId": "agent:1101:branch:basic-3",
       "name": "普通攻击：砸扁，粉碎",
       "rowName": "二段伤害倍率",
       "levelGroup": "basic",
@@ -321,15 +329,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/basic/description/1/param/1"
+        "pointer": "/skill/basic/description/2/param/1"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。\n点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n强化[普通攻击]分为两段，发动第一段后点按或长按  可衔接第二段，且第一段强化[普通攻击]的追击效果增强；\n[熔炉升温]效果最多可拥有2层，发动强化[普通攻击]会消耗所有的[熔炉升温]；\n消耗[熔炉升温]时，全队代理人造成的伤害提升35%，持续40秒，重复触发刷新时间，且每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的伤害提升10%，造成的失衡值提升20%；\n第一段强化[普通攻击]发动期间切换代理人，珂蕾妲会在前台自动发动第二段强化[普通攻击]；\n当珂蕾妲与本同时出战，发动强化[普通攻击]，且未在第一段强化[普通攻击]期间切换代理人时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果；\n第二段强化[普通攻击]无敌效果持续时间增加。",
       "parameterIds": ["1101002"],
       "sourceExpression": "{Skill:1101002, Prop:1001}",
       "damageCoefficient": {
@@ -373,7 +385,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0008",
-      "branchId": "agent:1101:branch:basic-2",
+      "branchId": "agent:1101:branch:basic-3",
       "name": "普通攻击：砸扁，粉碎",
       "rowName": "三段伤害倍率",
       "levelGroup": "basic",
@@ -382,15 +394,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/basic/description/1/param/2"
+        "pointer": "/skill/basic/description/2/param/2"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。\n点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n强化[普通攻击]分为两段，发动第一段后点按或长按  可衔接第二段，且第一段强化[普通攻击]的追击效果增强；\n[熔炉升温]效果最多可拥有2层，发动强化[普通攻击]会消耗所有的[熔炉升温]；\n消耗[熔炉升温]时，全队代理人造成的伤害提升35%，持续40秒，重复触发刷新时间，且每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的伤害提升10%，造成的失衡值提升20%；\n第一段强化[普通攻击]发动期间切换代理人，珂蕾妲会在前台自动发动第二段强化[普通攻击]；\n当珂蕾妲与本同时出战，发动强化[普通攻击]，且未在第一段强化[普通攻击]期间切换代理人时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果；\n第二段强化[普通攻击]无敌效果持续时间增加。",
       "parameterIds": ["1101003"],
       "sourceExpression": "{Skill:1101003, Prop:1001}",
       "damageCoefficient": {
@@ -434,7 +450,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0009",
-      "branchId": "agent:1101:branch:basic-2",
+      "branchId": "agent:1101:branch:basic-3",
       "name": "普通攻击：砸扁，粉碎",
       "rowName": "四段伤害倍率",
       "levelGroup": "basic",
@@ -443,15 +459,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/basic/description/1/param/3"
+        "pointer": "/skill/basic/description/2/param/3"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。\n点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n强化[普通攻击]分为两段，发动第一段后点按或长按  可衔接第二段，且第一段强化[普通攻击]的追击效果增强；\n[熔炉升温]效果最多可拥有2层，发动强化[普通攻击]会消耗所有的[熔炉升温]；\n消耗[熔炉升温]时，全队代理人造成的伤害提升35%，持续40秒，重复触发刷新时间，且每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的伤害提升10%，造成的失衡值提升20%；\n第一段强化[普通攻击]发动期间切换代理人，珂蕾妲会在前台自动发动第二段强化[普通攻击]；\n当珂蕾妲与本同时出战，发动强化[普通攻击]，且未在第一段强化[普通攻击]期间切换代理人时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果；\n第二段强化[普通攻击]无敌效果持续时间增加。",
       "parameterIds": ["1101004"],
       "sourceExpression": "{Skill:1101004, Prop:1001}",
       "damageCoefficient": {
@@ -495,7 +515,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0010",
-      "branchId": "agent:1101:branch:basic-2",
+      "branchId": "agent:1101:branch:basic-3",
       "name": "普通攻击：砸扁，粉碎",
       "rowName": "强化普攻一段伤害倍率",
       "levelGroup": "basic",
@@ -504,15 +524,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/basic/description/1/param/4"
+        "pointer": "/skill/basic/description/2/param/4"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。\n点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n强化[普通攻击]分为两段，发动第一段后点按或长按  可衔接第二段，且第一段强化[普通攻击]的追击效果增强；\n[熔炉升温]效果最多可拥有2层，发动强化[普通攻击]会消耗所有的[熔炉升温]；\n消耗[熔炉升温]时，全队代理人造成的伤害提升35%，持续40秒，重复触发刷新时间，且每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的伤害提升10%，造成的失衡值提升20%；\n第一段强化[普通攻击]发动期间切换代理人，珂蕾妲会在前台自动发动第二段强化[普通攻击]；\n当珂蕾妲与本同时出战，发动强化[普通攻击]，且未在第一段强化[普通攻击]期间切换代理人时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果；\n第二段强化[普通攻击]无敌效果持续时间增加。",
       "parameterIds": ["1101005"],
       "sourceExpression": "{Skill:1101005, Prop:1001}",
       "damageCoefficient": {
@@ -556,7 +580,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0011",
-      "branchId": "agent:1101:branch:basic-2",
+      "branchId": "agent:1101:branch:basic-3",
       "name": "普通攻击：砸扁，粉碎",
       "rowName": "强化普攻二段伤害倍率",
       "levelGroup": "basic",
@@ -565,15 +589,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/basic/description/1/param/5"
+        "pointer": "/skill/basic/description/2/param/5"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。\n点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n强化[普通攻击]分为两段，发动第一段后点按或长按  可衔接第二段，且第一段强化[普通攻击]的追击效果增强；\n[熔炉升温]效果最多可拥有2层，发动强化[普通攻击]会消耗所有的[熔炉升温]；\n消耗[熔炉升温]时，全队代理人造成的伤害提升35%，持续40秒，重复触发刷新时间，且每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的伤害提升10%，造成的失衡值提升20%；\n第一段强化[普通攻击]发动期间切换代理人，珂蕾妲会在前台自动发动第二段强化[普通攻击]；\n当珂蕾妲与本同时出战，发动强化[普通攻击]，且未在第一段强化[普通攻击]期间切换代理人时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果；\n第二段强化[普通攻击]无敌效果持续时间增加。",
       "parameterIds": ["1101006"],
       "sourceExpression": "{Skill:1101006, Prop:1001}",
       "damageCoefficient": {
@@ -617,7 +645,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0012",
-      "branchId": "agent:1101:branch:basic-2",
+      "branchId": "agent:1101:branch:basic-3",
       "name": "普通攻击：砸扁，粉碎",
       "rowName": "强化普攻二段伤害倍率（协同）",
       "levelGroup": "basic",
@@ -626,15 +654,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/basic/description/1/param/6"
+        "pointer": "/skill/basic/description/2/param/6"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/basic/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+      "description": "点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。\n点按  发动：\n向前方进行至多四段的打击，造成物理伤害；\n当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n强化[普通攻击]分为两段，发动第一段后点按或长按  可衔接第二段，且第一段强化[普通攻击]的追击效果增强；\n[熔炉升温]效果最多可拥有2层，发动强化[普通攻击]会消耗所有的[熔炉升温]；\n消耗[熔炉升温]时，全队代理人造成的伤害提升35%，持续40秒，重复触发刷新时间，且每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的伤害提升10%，造成的失衡值提升20%；\n第一段强化[普通攻击]发动期间切换代理人，珂蕾妲会在前台自动发动第二段强化[普通攻击]；\n当珂蕾妲与本同时出战，发动强化[普通攻击]，且未在第一段强化[普通攻击]期间切换代理人时，会由双方配合发动协同攻击，进一步提升招式的威力；\n[普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果；\n第二段强化[普通攻击]无敌效果持续时间增加。",
       "parameterIds": ["1101007"],
       "sourceExpression": "{Skill:1101007, Prop:1001}",
       "damageCoefficient": {
@@ -678,7 +710,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0013",
-      "branchId": "agent:1101:branch:chain-3",
+      "branchId": "agent:1101:branch:chain-4",
       "name": "连携技：天崩-地裂",
       "rowName": "伤害倍率",
       "levelGroup": "chain",
@@ -687,7 +719,7 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/chain/description/2/param/0"
+        "pointer": "/skill/chain/description/3/param/0"
       },
       "descriptionSources": [
         {
@@ -739,7 +771,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0014",
-      "branchId": "agent:1101:branch:chain-4",
+      "branchId": "agent:1101:branch:chain-5",
       "name": "终结技：锤进地心",
       "rowName": "伤害倍率",
       "levelGroup": "chain",
@@ -748,15 +780,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/chain/description/3/param/0"
+        "pointer": "/skill/chain/description/4/param/0"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/chain/description/1/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
         }
       ],
-      "description": "喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "description": "喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。\n喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果，长按  可衔接[冲刺攻击：给我颤抖]。",
       "parameterIds": ["1101401"],
       "sourceExpression": "{Skill:1101401, Prop:1001}",
       "damageCoefficient": {
@@ -800,7 +836,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0015",
-      "branchId": "agent:1101:branch:chain-4",
+      "branchId": "agent:1101:branch:chain-5",
       "name": "终结技：锤进地心",
       "rowName": "伤害倍率（协同）",
       "levelGroup": "chain",
@@ -809,15 +845,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/chain/description/3/param/1"
+        "pointer": "/skill/chain/description/4/param/1"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/chain/description/1/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
         }
       ],
-      "description": "喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "description": "喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。\n喧响等级达到[极]时，点按  发动：\n在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果，长按  可衔接[冲刺攻击：给我颤抖]。",
       "parameterIds": ["1101402"],
       "sourceExpression": "{Skill:1101402, Prop:1001}",
       "damageCoefficient": {
@@ -861,7 +901,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0016",
-      "branchId": "agent:1101:branch:dodge-4",
+      "branchId": "agent:1101:branch:dodge-6",
       "name": "冲刺攻击：给我颤抖",
       "rowName": "伤害倍率",
       "levelGroup": "dodge",
@@ -870,15 +910,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/dodge/description/3/param/0"
+        "pointer": "/skill/dodge/description/5/param/0"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/dodge/description/1/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
         }
       ],
-      "description": "闪避时，点按  发动：\n向前方进行打击，造成物理伤害。",
+      "description": "闪避时，点按  发动：\n向前方进行打击，造成物理伤害。\n闪避时，点按  发动：\n向前方进行打击，造成物理伤害。\n招式发动期间，若持有[熔炉升温]，抗打断等级提升，长按  可衔接强化[普通攻击]。",
       "parameterIds": ["1101201"],
       "sourceExpression": "{Skill:1101201, Prop:1001}",
       "damageCoefficient": {
@@ -922,7 +966,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0017",
-      "branchId": "agent:1101:branch:dodge-5",
+      "branchId": "agent:1101:branch:dodge-7",
       "name": "闪避反击：别小看我",
       "rowName": "伤害倍率",
       "levelGroup": "dodge",
@@ -931,15 +975,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/dodge/description/4/param/0"
+        "pointer": "/skill/dodge/description/6/param/0"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
-          "pointer": "/skill/dodge/description/2/desc"
+          "pointer": "/skill/dodge/description/3/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/dodge/description/4/desc"
         }
       ],
-      "description": "触发[极限闪避]后，点按  发动：\n向前方敌人发动打击并引发爆炸，造成火属性伤害；\n招式发动期间拥有无敌效果。",
+      "description": "触发[极限闪避]后，点按  发动：\n向前方敌人发动打击并引发爆炸，造成火属性伤害；\n招式发动期间拥有无敌效果。\n触发[极限闪避]后，点按  发动：\n向前方敌人发动打击并引发爆炸，造成火属性伤害；\n招式发动期间拥有无敌效果，若持有[熔炉升温]，长按  可衔接强化[普通攻击]。",
       "parameterIds": ["1101202"],
       "sourceExpression": "{Skill:1101202, Prop:1001}",
       "damageCoefficient": {
@@ -983,7 +1031,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0018",
-      "branchId": "agent:1101:branch:special-3",
+      "branchId": "agent:1101:branch:special-5",
       "name": "特殊技：爆破！铁锤时间",
       "rowName": "打击伤害倍率",
       "levelGroup": "special",
@@ -992,15 +1040,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/special/description/2/param/0"
+        "pointer": "/skill/special/description/4/param/0"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/special/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。\n点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n第二段[普通攻击]发动期间，长按  也可直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
       "parameterIds": ["1101101"],
       "sourceExpression": "{Skill:1101101, Prop:1001}",
       "damageCoefficient": {
@@ -1044,7 +1096,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0019",
-      "branchId": "agent:1101:branch:special-3",
+      "branchId": "agent:1101:branch:special-5",
       "name": "特殊技：爆破！铁锤时间",
       "rowName": "引爆伤害倍率",
       "levelGroup": "special",
@@ -1053,15 +1105,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/special/description/2/param/1"
+        "pointer": "/skill/special/description/4/param/1"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/special/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。\n点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n第二段[普通攻击]发动期间，长按  也可直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
       "parameterIds": ["1101102"],
       "sourceExpression": "{Skill:1101102, Prop:1001}",
       "damageCoefficient": {
@@ -1105,7 +1161,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0020",
-      "branchId": "agent:1101:branch:special-3",
+      "branchId": "agent:1101:branch:special-5",
       "name": "特殊技：爆破！铁锤时间",
       "rowName": "引爆伤害倍率（协同）",
       "levelGroup": "special",
@@ -1114,15 +1170,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/special/description/2/param/2"
+        "pointer": "/skill/special/description/4/param/2"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
           "pointer": "/skill/special/description/0/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
         }
       ],
-      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
+      "description": "点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。\n点按  发动：\n对前方进行打击并引发爆炸，造成火属性伤害；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n第二段[普通攻击]发动期间，长按  也可直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间抗打断等级提升。",
       "parameterIds": ["1101103"],
       "sourceExpression": "{Skill:1101103, Prop:1001}",
       "damageCoefficient": {
@@ -1166,7 +1226,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0021",
-      "branchId": "agent:1101:branch:special-4",
+      "branchId": "agent:1101:branch:special-6",
       "name": "强化特殊技：沸腾熔炉",
       "rowName": "打击伤害倍率",
       "levelGroup": "special",
@@ -1175,15 +1235,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/special/description/3/param/0"
+        "pointer": "/skill/special/description/5/param/0"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
-          "pointer": "/skill/special/description/1/desc"
+          "pointer": "/skill/special/description/2/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
         }
       ],
-      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。\n能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸，通过该方式引发爆炸造成的失衡值提升10%；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果，长按  可衔接[冲刺攻击：给我颤抖]。",
       "parameterIds": ["1101104"],
       "sourceExpression": "{Skill:1101104, Prop:1001}",
       "damageCoefficient": {
@@ -1227,7 +1291,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0022",
-      "branchId": "agent:1101:branch:special-4",
+      "branchId": "agent:1101:branch:special-6",
       "name": "强化特殊技：沸腾熔炉",
       "rowName": "引爆伤害倍率",
       "levelGroup": "special",
@@ -1236,15 +1300,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/special/description/3/param/1"
+        "pointer": "/skill/special/description/5/param/1"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
-          "pointer": "/skill/special/description/1/desc"
+          "pointer": "/skill/special/description/2/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
         }
       ],
-      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。\n能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸，通过该方式引发爆炸造成的失衡值提升10%；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果，长按  可衔接[冲刺攻击：给我颤抖]。",
       "parameterIds": ["1101105"],
       "sourceExpression": "{Skill:1101105, Prop:1001}",
       "damageCoefficient": {
@@ -1288,7 +1356,7 @@
     },
     {
       "actionId": "action:agent:1101:action:0023",
-      "branchId": "agent:1101:branch:special-4",
+      "branchId": "agent:1101:branch:special-6",
       "name": "强化特殊技：沸腾熔炉",
       "rowName": "引爆伤害倍率（协同）",
       "levelGroup": "special",
@@ -1297,15 +1365,19 @@
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
-        "pointer": "/skill/special/description/3/param/2"
+        "pointer": "/skill/special/description/5/param/2"
       },
       "descriptionSources": [
         {
           "path": "agents/1101/details.zh.json",
-          "pointer": "/skill/special/description/1/desc"
+          "pointer": "/skill/special/description/2/desc"
+        },
+        {
+          "path": "agents/1101/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
         }
       ],
-      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。",
+      "description": "能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果。\n能量足够时，点按  发动：\n对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸，通过该方式引发爆炸造成的失衡值提升10%；\n当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n招式发动期间拥有无敌效果，长按  可衔接[冲刺攻击：给我颤抖]。",
       "parameterIds": ["1101106"],
       "sourceExpression": "{Skill:1101106, Prop:1001}",
       "damageCoefficient": {

@@ -4,7 +4,7 @@
 
 - 上游实体：`simul`
 - 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `simul` 已按规则
-  `nanoka-simul-reference/1` 接入生产快照
+  `nanoka-simul-reference/2` 接入生产快照
 - 抓取器仍不执行 Simul 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、严格公共时间字段与
   图结构边界见[来源数据整合规范](../data/integration.md#simul-单实体实现规则-nanoka-simul-reference1)
 

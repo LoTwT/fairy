@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [21103],
+        "suitList": [33300, 31100]
+      },
+      {
+        "partSubList": [23103, 31703],
+        "suitList": [33300, 32700]
+      },
+      {
+        "partSubList": [12102],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconCritDam.png",
       "prop": 21103
@@ -600,6 +614,8 @@
     "elementAbnormalPower": 92,
     "elementMystery": 90,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 849779,
     "hpMax": 626,
     "penDelta": 0,
@@ -609,6 +625,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

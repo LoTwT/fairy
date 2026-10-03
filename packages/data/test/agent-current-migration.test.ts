@@ -86,7 +86,7 @@ describe("migration to the multi-entity shell", () => {
     expect(state.phase).toBe("idle")
     expect(state.current.format).toBe(integratedSnapshotFormat)
     expect(state.current.entities).toEqual({
-      agents: { rulesVersion: "nanoka-agent-reference/4" },
+      agents: { rulesVersion: "nanoka-agent-reference/5" },
     })
     expect((await clean(input)).index.entities.agents.memberIds).toEqual([
       "2",
@@ -245,7 +245,7 @@ describe("migration to the multi-entity shell", () => {
     )
     const descriptor = (indexSha256: string) => ({
       indexSha256,
-      rulesVersion: "nanoka-agent-reference/4",
+      rulesVersion: "nanoka-agent-reference/5",
       policy: input.policy,
     })
     await writeJson(join(control(input), "state.json"), {

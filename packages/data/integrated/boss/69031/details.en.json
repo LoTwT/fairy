@@ -19,7 +19,7 @@
               "title": ""
             },
             "69013104": {
-              "desc": "During a <color=#FFAF2C>Control Skill</color>, every successful counter of a Boss attack grants <color=#FFAF2C>350 Performance Points</color>. A <color=#FFAF2C>Shutdown</color> of the Boss's <color=#FFAF2C>Control Skill</color> or counter of the final strike of certain skills inflicts on the Boss the <color=#FFAF2C>Impaired</color> effect and grants <color=#FFAF2C>750 Performance Points</color>. Earn up to 5,000 Performance Points from the above.",
+              "desc": "During a <color=#FFAF2C>Control Skill</color>, every successful counter of a Boss attack grants <color=#FFAF2C>350 Performance Points</color>. A <color=#FFAF2C>Shutdown</color> of the Boss's <color=#FFAF2C>Control Skill</color> or counter of the final strike of certain skills inflicts on the Boss the <color=#FFAF2C>Impaired</color> effect and grants <color=#FFAF2C>750 Performance Points</color>. During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C>Counter Assists</color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
               "title": ""
             }
           },
@@ -47,6 +47,10 @@
                     "stun": 19977.350000000002
                   }
                 }
+              },
+              "monsterResistance": {
+                "201": "Fire",
+                "202": "Ice"
               },
               "monsterWeakness": {
                 "204": "Wind",
@@ -121,6 +125,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "200": "Physical",
                 "203": "Electric"
@@ -194,6 +199,7 @@
                   }
                 }
               },
+              "monsterResistance": {},
               "monsterWeakness": {
                 "201": "Fire",
                 "202": "Ice"

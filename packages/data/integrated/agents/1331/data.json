@@ -87,6 +87,20 @@
     }
   },
   "fairyRecommend": {
+    "altBuild": [
+      {
+        "partSubList": [31203],
+        "suitList": [33000, 31300]
+      },
+      {
+        "partSubList": [31903],
+        "suitList": []
+      },
+      {
+        "partSubList": [31402],
+        "suitList": []
+      }
+    ],
     "part4": {
       "icon": "UI/Sprite/A1DynamicLoad/IconAttribute/UnPacker/Role/IconElementMystery.png",
       "prop": 31203
@@ -605,6 +619,8 @@
     "elementAbnormalPower": 108,
     "elementMystery": 118,
     "endurance": 0,
+    "epMax": 0,
+    "epRecover": 0,
     "hpGrowth": 837238,
     "hpMax": 617,
     "penDelta": 0,
@@ -614,6 +630,7 @@
     "rblProbability": 0,
     "rpMax": 0,
     "rpRecover": 0,
+    "sharpCriticalDamage": 0,
     "shield": 0,
     "shieldGrowth": 0,
     "spBarPoint": 120,

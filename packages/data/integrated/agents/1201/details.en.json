@@ -98,6 +98,7 @@
     }
   },
   "hitType": {
+    "101": "Slash",
     "103": "Pierce"
   },
   "id": 1201,
@@ -1950,7 +1951,8 @@
   "skin": {
     "3112010": {
       "desc": "His eyes are brighter than the streak of bright yellow upon his brow. His arrows pierce through deceit and lies and scatter the past like feathers on the wind. Dawn may not have arrived yet, but beyond the horizon, a golden future shimmers faintly.",
-      "name": "Asaba Harumasa: Full-Fledged Strings"
+      "name": "Asaba Harumasa: Full-Fledged Strings",
+      "obtainDesc": ""
     }
   },
   "specialElementType": {},
