@@ -66,6 +66,7 @@ const SKILL_CATEGORY_GROUPS: Record<string, string> = {
   "quick-assist": "assist",
   "defensive-assist": "assist",
   "evasive-assist": "assist",
+  "counter-assist": "assist",
   "assist-follow-up": "assist",
   "follow-up": "follow_up",
 }

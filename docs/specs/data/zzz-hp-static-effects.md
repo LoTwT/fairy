@@ -4,7 +4,7 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 834 条规则与 834 个选择项。1,209 条 converted、34 条 corrected；47 条 unsupported 中，37 条缺少 Fairy 身份、6 条属于当前 core 范围外公式，另有 4 条是已迁移的重复部分记录（semantic-conflict）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 849 条规则与 834 个选择项。1,237 条 converted、45 条 corrected；8 条 unsupported 中，4 条属于当前 core 范围外公式（壳中之灵 R2—R5 的上游 `special` 乘区效果，属性异常与紊乱伤害提升依次为 11.5%、13%、14.5%、16%），另有 4 条是已迁移的重复部分记录（semantic-conflict）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项、空记录和蕾米埃尔自身异常强度的新等级公式另列在报告中。目录入口拒绝把蕾米埃尔作为 `anomalySource`；她提供给其他来源异常的已映射增益可以正常计算。
 
@@ -14,9 +14,14 @@
 月城柳已有倍率增益不表示完整极性紊乱已接入；两条附加动作仍不可用，精通附加结算缺口与
 影画二来源字段冲突统一见[技能动作规范](skill-actions.md#已知限制月城柳极性紊乱)，本次不修正既有增益映射。
 
-5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`，修订 7 新增 2 个具名差异 `potential-partial-option-migration` 与 `potential-branch-scope` 并扩展前两者；修订 8 新增 `core-skill-level-parameters` 与 `core-enhancement-independent-increment`（见下）。
+5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`，修订 7 新增 2 个具名差异 `potential-partial-option-migration` 与 `potential-branch-scope` 并扩展前两者；修订 8 新增 `core-skill-level-parameters` 与 `core-enhancement-independent-increment`，修订 9 新增
+`claret-remnant-edge-self-target`、`claret-mindscape1-multiplier-encoding` 与
+`scarlet-craving-explicit-element`，并把 `core-skill-level-parameters` 的解释扩展到克拉蕾（见下）。
 
-固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,232 个位置：当前 1,209 条 converted 与本轮四条 corrected 的核心 7 继续逐条比对，其余 19 个潜能位置按具名修正或迁移验证；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
+固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,271 个位置：当前 1,237 条 converted 逐条比对，
+5 个核心档位扩展与 10 个猩红渴望元素范围修正位置按来源数值比对，其余 19 个潜能位置按具名修正或迁移
+验证；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与
+打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
 
 ### 修订 2：转化边界与核心档位
 
@@ -154,6 +159,44 @@ Nanoka 固定 3.1，来源分别为 `agents/1071/details.zh.json` 的 `/passive/
 不同来源显式读数、缺输入/错单位、缺档与非法核心诊断，以及低层求值、目录、完整动作和配装/局外面板等价。
 原有四条核心 7 上游参考继续执行；希希芙等真实缺档限制保持。此次未补充其他规划机制或扩大其证据边界。
 
+### 修订 9：锐化与锐暴公式及实体接入
+
+本修订接入锋御（`Sharpen`）的锐化伤害链：core 新增
+[锐化伤害公式](../core/formulas/sharpen-damage.md)、[锐化增伤区](../core/factors/sharpen-damage-bonus.md)
+与[锐暴区](../core/factors/sharp-critical.md)，`sharpCriticalDamage` 进入直伤属性与全部 60 份角色
+属性文件（仅克拉蕾为 `1.5`）；`sharpen` 成为公开伤害种类，克拉蕾 25 条动作按
+[具名锐化约定](skill-actions.md#具名约定克拉蕾锐化伤害)开放。技能动作 damage 1,101 → 1,126、
+unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼动作仍不可用。
+
+效果侧新增 5 个身份映射：`claret → 1611`、`Lunar_Semiluna → 12016`、`Promotion Stats → 13017`、
+`Scarlet-Craving → 14161`、`BloodCasket → 13021`（血髓秘匣补上 3.2 身份）。此前 47 条 unsupported 中的
+39 条转为 28 条 converted 与 11 条 corrected：37 条缺少 Fairy 身份（猩红渴望 15、克拉蕾 7、
+血髓秘匣 5、「月相」-弦 5、喵运当头 5）与珂蕾妲 2 条被硬编码排除的记录；珂蕾妲的硬编码分支由正式
+公式能力取代删除，unsupported 47 → 8。
+
+三项具名差异随目录登记：
+
+- `claret-remnant-edge-self-target`：残锋（+25% 锐暴伤害）按来源仅作用于自身，不扩展到全队；
+- `claret-mindscape1-multiplier-encoding`：一影[触发毁伤造成的伤害倍率提升至原本的 130%]按固定来源编码为
+  毁伤目标上的通用增伤 `+30%`（`skillDmgBonus`），Fairy 遵循固定来源的增伤编码，不改写为倍率乘区；
+- `scarlet-craving-explicit-element`：猩红渴望的[电属性伤害提升]与[造成的电属性锐化伤害提升]两条均
+  限电属性命中，上游 `elementFilter: all` 未编码该限制，修正后按电属性比对仍与来源数值一致；
+  暴击率转增伤来自血髓秘匣（13021）的转换，不属于本差异；
+- 克拉蕾核心被动的暴击率（15%—30% 随核心档）按 `core-skill-level-parameters` 的既有解释登记
+  逐档证据；初始暴伤转暴击率沿用可选输入的显式 `:source` 约定（同 s0anby 电位差先例），
+  不引入 panelRule。
+
+规则集 revision 8 → 9；三个效果制品同次生成，属性与技能制品分别再生成（`sharpCriticalDamage`
+基础属性、锐化动作与 `staticCatalogSha256` / `registrySha256` 摘要）。固定 ZZZ-HP 增益提交
+`fac62407` 与技能来源 `0df40c5b` 不变；Nanoka 补充来源随 3.2 升级再登记（版本 3.1 → 3.2，
+9 条已整合与 1 条越界登记的内容不变），生成器读取的 integrated 索引 pin 同步更新。
+
+独立验证覆盖：26 项锐化/锐暴公式数值断言（r 在 0、1、2 两侧、零 B、独立锐化增伤上下界、
+防御/弱伤/精炼敏感性与常规暴伤/攻击隔离）、全部新位置的上游逐条比对（含 5 档精炼 × 2 项猩红修正）、
+克拉蕾完整配装端到端场景（锋御音擎基础防御、激素盘四件、锐能状态 +30% 暴击率使 r 溢出到 1.15）、
+影画/精炼非法档位拒绝、`direct` 适用范围扩展的常规回归与打包消费。此前九场景数值逐位不变，
+仅 provenance 与新增 `sharpCriticalDamage` 面板字段变化。
+
 ## 交付目标与边界
 
 转换器覆盖代理人、音擎和驱动盘的来源盘点、身份映射、可重复转换与正式制品生成。在当前 core 公式能力范围内处理固定来源的全部可用静态效果；不能因为转换器或 effects 暂时缺少表达能力就把已有公式可以计算的效果列为暂不支持。
@@ -162,7 +205,7 @@ Nanoka 固定 3.1，来源分别为 `agents/1071/details.zh.json` 的 `/passive/
 
 超出现有 core 契约的新公式、未登记的来源版本、邦布、关卡环境与伤害流程预设不在本转换器的支持范围内；新公式即使已经出现在固定来源内，也遵循这一边界。固定来源内的空记录、身份缺失、缺少参数与新公式条目分别登记，不能通过删除条目、造零值或只公布已成功的分母制造全量覆盖。
 
-现有 core 支持范围以本次 Fairy 基线的[公式规范](../core/index.md)为准。`sharpenDmgBonus` / `sharpenCritDmgBonus` 依赖的锐化/锐暴公式及蕾米埃尔作为自身异常强度提供者时的新增特殊等级公式，不因 ZZZ-HP 已支持就自动进入本轮。上游通用 `special` 也不能通过新建任意最终倍率接口或暗乘基础伤害来绕过[特殊乘区边界](../core/factors/special.md)。已有耀变独立机制对应的 `specialMult` 等条目，应按明确来源映射到既有具体乘区；无法对应的条目记录原因。流明元素的标识和筛选属于已有耀变能力的适配，不能以 effects 的元素枚举尚缺 `lumiflux` 为由整体排除。
+现有 core 支持范围以本次 Fairy 基线的[公式规范](../core/index.md)为准。`sharpenDmgBonus` / `sharpenCritDmgBonus` 依赖的锐化/锐暴公式已于修订 9 接入；蕾米埃尔作为自身异常强度提供者时的新增特殊等级公式仍不因 ZZZ-HP 已支持就自动进入。上游通用 `special` 也不能通过新建任意最终倍率接口或暗乘基础伤害来绕过[特殊乘区边界](../core/factors/special.md)。已有耀变独立机制对应的 `specialMult` 等条目，应按明确来源映射到既有具体乘区；无法对应的条目记录原因。流明元素的标识和筛选属于已有耀变能力的适配，不能以 effects 的元素枚举尚缺 `lumiflux` 为由整体排除。
 
 ## 固定输入与证据
 

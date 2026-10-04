@@ -484,6 +484,8 @@ export function defineFormula<FormulaInput extends object>(
 - [减易伤区](factors/damage-taken.md)
 - [失衡易伤区](factors/stun-damage.md)
 - [贯穿增伤区](factors/sheer-damage-bonus.md)
+- [锐化增伤区](factors/sharpen-damage-bonus.md)
+- [锐暴区](factors/sharp-critical.md)
 - [基础异常积蓄值](factors/base-anomaly-buildup.md)
 - [异常掌控区](factors/anomaly-mastery.md)
 - [异常积蓄效率区](factors/anomaly-buildup-rate.md)
@@ -519,6 +521,7 @@ export function defineFormula<FormulaInput extends object>(
 
 - [常规伤害](formulas/regular-damage.md)
 - [贯穿伤害](formulas/sheer-damage.md)
+- [锐化伤害](formulas/sharpen-damage.md)
 - [异常伤害](formulas/anomaly-damage.md)
 - [耀变伤害](formulas/luminize-damage.md)
 - [异常积蓄值](formulas/anomaly-buildup.md)

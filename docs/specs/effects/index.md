@@ -74,7 +74,7 @@ integrated 来源资料 → definitions 效果定义
 
 ### 贡献的落点
 
-- `stat-adjustment`：通用属性区分初始/最终百分比、固定值；暴击率、暴伤、穿透率等直接属性用 `direct`，配合 `scope: hit` 表达单次命中的属性调整。
+- `stat-adjustment`：通用属性区分初始/最终百分比、固定值；暴击率、暴伤、穿透率、锐暴伤害等直接属性用 `direct`，配合 `scope: hit` 表达单次命中的属性调整。
 - `factor-contribution`：向已登记 Factor 通道提供贡献，如 `0.1` 增伤，不把最终倍率 `1.1` 当作加数。
 - `hit-adjustment`：对匹配命中的倍率进行 `scale`。
 

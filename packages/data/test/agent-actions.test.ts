@@ -452,6 +452,80 @@ describe("agent action semantics", () => {
     ).toBe(true)
   })
 
+  it("opens Claret's sharpen actions on defense scaling with reviewed target identities", async () => {
+    const data = await agent("1611")
+    const sharpen = data.actions.filter((a) => a.calculation.kind === "damage")
+    expect(sharpen).toHaveLength(25)
+    expect(
+      data.actions.filter((a) => a.calculation.kind === "unavailable"),
+    ).toHaveLength(0)
+    expect(
+      data.actions.filter((a) => a.calculation.kind === "daze-only"),
+    ).toHaveLength(3)
+    for (const action of sharpen) {
+      expect(action.skillCategory).not.toBeNull()
+      expect(action.calculation.kind).toBe("damage")
+      if (action.calculation.kind !== "damage") continue
+      for (const segment of action.calculation.segments) {
+        expect(segment.damageKind).toBe("sharpen")
+        expect(segment.element).toBe("electric")
+        expect(segment.granularity).toBe("aggregate")
+        expect(segment.items).toHaveLength(1)
+        expect(segment.items[0]!.stat).toBe("defense")
+      }
+    }
+    // 反制支援是 3.2 新支援分类；增益匹配归入支援别名组。
+    const counter = data.actions.find((a) =>
+      a.actionId.endsWith(":action:0007"),
+    )!
+    expect(counter.skillCategory).toBe("counter-assist")
+    // 上游固定技能行的 12 级倍率（万分比原值 / 100）作为独立参考。
+    for (const [suffix, multiplier] of [
+      [":action:0019", 45.048],
+      [":action:0015", 9.042],
+      [":action:0027", 16.256],
+      [":action:0007", 23.069],
+    ] as const) {
+      const action = data.actions.find((a) => a.actionId.endsWith(suffix))!
+      const resolved = resolveAgentAction({
+        agent: data,
+        actionId: action.actionId,
+        mindscapeRank: 6,
+        levels: { [action.levelGroup]: { mode: "effective", value: 12 } },
+      })
+      expect(resolved.ok, action.actionId).toBe(true)
+      if (!resolved.ok || resolved.calculation.kind !== "damage") continue
+      expect(
+        resolved.calculation.segments[0]!.damageItems[0]!.damageMultiplier,
+      ).toBeCloseTo(multiplier, 12)
+    }
+    // 目标绑定与效果目录身份一一对应；锻星第三段同时保留通用与第三段目标。
+    const expectedTargets: Record<string, string[]> = {
+      ":action:0013": ["zzz-hp:skill:claret-basic-mtskq8rr"],
+      ":action:0015": [
+        "zzz-hp:skill:claret-basic-mtskq8rr",
+        "zzz-hp:skill:claret-basic-mtsef46o",
+      ],
+      ":action:0016": [
+        "zzz-hp:skill:claret-basic-mtskq8rr",
+        "zzz-hp:skill:claret-basic-mtsef46o",
+      ],
+      ":action:0017": ["zzz-hp:skill:claret-basic-mtskqn2n"],
+      ":action:0018": ["zzz-hp:skill:claret-chain-mtsefivk"],
+      ":action:0019": ["zzz-hp:skill:claret-ultimate-mtsefude"],
+      ":action:0027": ["zzz-hp:skill:claret-special-mtsecz30"],
+    }
+    for (const [suffix, targets] of Object.entries(expectedTargets)) {
+      const action = data.actions.find((a) => a.actionId.endsWith(suffix))!
+      expect(action.skillTargetIds, suffix).toEqual(targets)
+    }
+    expect(
+      data.actions
+        .filter((a) => a.actionId.endsWith(":action:0009"))
+        .flatMap((a) => a.skillTargetIds),
+    ).toEqual([])
+  })
+
   it("rebuilds all 60 catalogs without dropped source rows and rejects semantic or level-bonus drift", async () => {
     const ids = [...new Set(registry.map((entry) => entry.entityId))]
     expect(ids).toHaveLength(60)

@@ -13,7 +13,7 @@ assert(
   "Provide the upstream Git repository and a NEW output file",
 )
 const commit = "fac62407f3d3995f8200a66be0038f292b1455fa"
-const fairyBaseline = "56bc52ad906bf04c5f280fc387049cdb74b828ca"
+const fairyBaseline = "7f53b1e23ed72cd72b7ddb1fcc54393af4c0a4f2"
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 const digests = {
   [buffResource]:
@@ -246,6 +246,7 @@ function buildReference(build) {
     mastery: s.elementMystery,
     anomalyControl: s.elementAbnormalPower,
     energyRegen: s.spRecover / 100,
+    sharpenCritDmgBonus: (s.sharpCriticalDamage ?? 0) / 100,
   }
   const coreMap = {
     12101: ["atk", 1],
@@ -272,6 +273,12 @@ function buildReference(build) {
     能量自动回复: "energyRegen",
   }[weaponDetails.randProperty.name2]
   assert(advancedKey, weaponDetails.randProperty.name2)
+  // 3.2 起锋御音擎基础属性为防御力；其余仍为基础攻击力（音擎数据 name 决定）。
+  const defenseBaseWeapon = weaponDetails.baseProperty.name.includes("防御")
+  const weaponBaseValue =
+    (weapon.baseProperty.value *
+      (10000 + weapon.level[60].rate + weapon.stars[5].starRate)) /
+    10000
   const counts = Object.fromEntries(
     Object.keys(upstream.AFFIX_VALUE_PER_COUNT).map((key) => [key, 0]),
   )
@@ -283,10 +290,8 @@ function buildReference(build) {
     }
   const input = {
     agentBase: base,
-    wengineBaseAtk:
-      (weapon.baseProperty.value *
-        (10000 + weapon.level[60].rate + weapon.stars[5].starRate)) /
-      10000,
+    wengineBaseAtk: defenseBaseWeapon ? 0 : weaponBaseValue,
+    ...(defenseBaseWeapon ? { wengineBaseDef: weaponBaseValue } : {}),
     wengineAdvanced: {
       ...upstream.createEmptyWengineAdvancedStats(),
       [advancedKey]:
@@ -346,6 +351,7 @@ function buildReference(build) {
     ...input,
     agentBase: sourceAgent.basePanel,
     wengineBaseAtk: sourceWeapon.baseAtk,
+    ...(sourceWeapon.baseDef ? { wengineBaseDef: sourceWeapon.baseDef } : {}),
     wengineAdvanced: sourceWeapon.advancedStats,
   })
   const stats = Object.fromEntries(
@@ -354,6 +360,7 @@ function buildReference(build) {
       precise[key] / (ratioStats.has(stat) ? 100 : 1),
     ]),
   )
+  stats.sharpCriticalDamage = (s.sharpCriticalDamage ?? 0) / 10000
   if (actor.agentEntityId === "1371")
     stats.sheerForce = 0.1 * precise.hp + 0.3 * precise.atk
   const damageBonuses = {}
@@ -378,7 +385,7 @@ const buildResults = Object.fromEntries(
 function actionReference(scenario, build) {
   const id = build.actor.agentEntityId
   assert(
-    ["1031", "1121", "1371"].includes(id),
+    ["1031", "1121", "1371", "1611"].includes(id),
     "Audit the action source and extend this fixture generator before adding another agent",
   )
   const [group, section, parameter] =
@@ -386,7 +393,9 @@ function actionReference(scenario, build) {
       ? ["basic", 3, 0]
       : id === "1121"
         ? ["assist", 3, 0]
-        : ["special", 6, 0]
+        : id === "1611"
+          ? ["chain", 3, 0]
+          : ["special", 6, 0]
   const details = nanoka(`agents/${id}/details.zh.json`)
   const row = details.skill[group].description[section].param[parameter]
   const levelInput = scenario.levels[group]
@@ -409,7 +418,9 @@ function actionReference(scenario, build) {
       ? "sk-nicole-nk-1031001-一段"
       : id === "1121"
         ? "sk-benbigger-nk-1121016-main"
-        : "sk-yixuan-nk-1371022-蓄力期间总"
+        : id === "1611"
+          ? "sk-claret-nk-1611021-main"
+          : "sk-yixuan-nk-1371022-蓄力期间总"
   const sourceSkill = upstreamData.skills.find((skill) => skill.id === skillId)
   assert(sourceSkill, skillId)
   const nativeCoefficient =
@@ -439,8 +450,16 @@ function actionReference(scenario, build) {
       multiplier: nativeCoefficient,
     },
     multipliers,
-    element: id === "1031" ? "physical" : id === "1121" ? "fire" : "auric-ink",
+    element:
+      id === "1031"
+        ? "physical"
+        : id === "1121"
+          ? "fire"
+          : id === "1611"
+            ? "electric"
+            : "auric-ink",
     individual: id === "1031",
+    sharpen: id === "1611",
   }
 }
 
@@ -493,11 +512,17 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
     String(resistance)
   ]
   assert(resistanceType)
+  const sharpen = action.sharpen
+  const sourceMainAgent = upstreamData.agents.find(
+    (a) => a.id === build.upstreamAgentId,
+  )
   const parts = upstream.computeGeneralAndAnomalyBase({
     panel: final,
     piercePower: sheerForce,
     baseDamageSource: sheer ? "pierce" : "atk",
     isMb: sheer,
+    useSharpenFormula: sharpen,
+    combatSharpenDmgBonus: mods.sharpenDmgBonus,
     enemyInput: {
       defense: scenario.target.baseDefense,
       resistanceType,
@@ -520,17 +545,38 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
     staggerPhase: scenario.target.isStunned ? "stagger" : "normal",
     agentLevel: 60,
   })
-  // Independently reproduce damageCalc.ts:713-723's regular direct branch, without
-  // its final integer presentation rounding (lines 953-955). No Fairy functions.
+  // Independently reproduce damageCalc.ts's regular direct branch (713-723) and
+  // the sharpen chain (700-710) without the final integer presentation rounding.
+  // The sharp critical zones follow the documented formula:
+  // r = clamp(critRate%/100, 0, 2), B = 锐暴伤害%/100；
+  // forced first layer r ≤ 1: 1 + B，r > 1: (1 + B) × (1 + B × (r − 1))；
+  // expectation = (1 − min(1, r)) + min(1, r) × forced.
+  const sharpCriticalDamageBonus =
+    (sourceMainAgent.basePanel.sharpenCritDmgBonus + mods.sharpenCritDmgBonus) /
+    100
+  const sharpRate = Math.min(2, Math.max(0, final.critRate / 100))
+  const sharpOverflow = Math.max(0, sharpRate - 1)
+  const sharpWeight = Math.min(1, Math.max(0, sharpRate))
+  const sharpCriticalForcedZone =
+    (1 + sharpCriticalDamageBonus) *
+    (1 + sharpCriticalDamageBonus * sharpOverflow)
+  const sharpCriticalExpectedZone =
+    1 - sharpWeight + sharpWeight * sharpCriticalForcedZone
   const baseChain =
     parts.generalMultiplier *
     parts.directVulnerableMultiplier *
     parts.specialMultiplier *
-    parts.pierceDmgMultiplier
+    (sharpen ? parts.sharpenDmgMultiplier : parts.pierceDmgMultiplier)
   const hits = action.multipliers.map((multiplier) => ({
     nonCritical: baseChain * multiplier,
-    critical: baseChain * multiplier * (1 + parts.critDmgRatio),
-    expected: baseChain * multiplier * parts.critMultiplier,
+    critical:
+      baseChain *
+      multiplier *
+      (sharpen ? sharpCriticalForcedZone : 1 + parts.critDmgRatio),
+    expected:
+      baseChain *
+      multiplier *
+      (sharpen ? sharpCriticalExpectedZone : parts.critMultiplier),
   }))
   const total = (key) => hits.reduce((sum, hit) => sum + hit[key], 0)
   return {
@@ -540,19 +586,26 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
     finalStats: {
       attack: final.atk,
       health: final.hp,
+      ...(sharpen ? { defense: final.def } : {}),
       criticalRate: final.critRate / 100,
       criticalDamage: final.critDmg / 100,
+      ...(sharpen ? { sharpCriticalDamage: sharpCriticalDamageBonus } : {}),
       ...(sheer ? { sheerForce } : {}),
     },
     factors: {
       damageBonus: parts.dmgMultiplier,
-      critical: 1 + parts.critDmgRatio,
-      expectedCritical: parts.critMultiplier,
+      ...(sharpen
+        ? { sharpCritical: sharpCriticalForcedZone }
+        : { critical: 1 + parts.critDmgRatio }),
+      expectedCritical: sharpen
+        ? sharpCriticalExpectedZone
+        : parts.critMultiplier,
       defense: parts.defenseMultiplier,
       resistance: parts.resistanceMultiplier,
       stunDamage: parts.staggerMultiplier,
       damageTaken: parts.directVulnerableMultiplier,
       ...(sheer ? { sheerDamageBonus: parts.pierceDmgMultiplier } : {}),
+      ...(sharpen ? { sharpenDamageBonus: parts.sharpenDmgMultiplier } : {}),
     },
     hits,
     totals: {
@@ -593,9 +646,9 @@ const fixture = {
     repository: "LoTwT/ZZZ-HP",
     commit,
     fairyBaseline,
-    gameVersion: "3.1",
+    gameVersion: "3.2",
     method:
-      "Pinned upstream pure functions + independently reproduced direct-damage chain; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
+      "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
     resources,
     extraction,
     nanokaSources: [...nanokaSources.values()],

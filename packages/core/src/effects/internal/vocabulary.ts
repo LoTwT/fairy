@@ -22,6 +22,7 @@ export { DAMAGE_ELEMENTS } from "@randomplay/shared"
 export const DAMAGE_KINDS: readonly DamageKind[] = [
   "regular",
   "sheer",
+  "sharpen",
   "anomaly",
   "disorder",
   "vortex",
@@ -41,6 +42,7 @@ export const FACTOR_CHANNEL_UNITS: FactorChannelUnitMap = {
   "damage-taken-reduction": "ratio",
   "stun-damage-adjustment": "multiplier",
   "sheer-damage-bonus": "ratio",
+  "sharpen-damage-bonus": "ratio",
   "anomaly-damage-bonus": "ratio",
   "anomaly-critical-rate": "ratio",
   "anomaly-critical-damage": "ratio",
@@ -67,6 +69,7 @@ export const DIRECT_STATS: ReadonlySet<DirectStat> = new Set([
   "criticalRate",
   "criticalDamage",
   "penetrationRatio",
+  "sharpCriticalDamage",
 ])
 
 export const GENERAL_STATS: ReadonlySet<GeneralStat> = new Set(

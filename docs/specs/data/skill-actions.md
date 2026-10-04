@@ -184,6 +184,38 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 [agent-actions 测试](../../../packages/data/test/agent-actions.test.ts)与
 [static-calculation 测试](../../../packages/data/test/static-calculation.test.ts)。
 
+### 具名约定：克拉蕾锐化伤害
+
+克拉蕾（`1611`，锋御）的 25 条伤害动作在 3.2 增量中按 `special-mechanic` / `unknown-category` 暂记为
+不可用；接入锐化公式后全部开放，采用具名的 **ZZZ-HP 锐化直伤约定**：每条倍率行作为一个 `sharpen`、
+`electric`、`aggregate`、`repeat: 1` 的段，缩放属性为 `defense`，倍率取来源 `baseMult / 100`，
+完整攻击倍率只计入一次。普通攻击、闪避反击、支援与特殊技的培养等级照常选择；`requireIndividualHits`
+仍拒绝这些合计动作，`repeat: 1` 不代表已确认内部仅一次命中。
+
+证据来自 Nanoka `3.2` 的 `agents/1611/details.zh.json` 与 `details.en.json`（Pointer 逐行对应），
+并核对固定 ZZZ-HP 技能来源 `0df40c5b` 的 25 行：全部登记 `agentId: "claret"`、`element: "电"`、
+`damageType: "direct"`、`settlementMult: 0`、`baseMultFactor: 100`、`multSource: "nanoka"`。12 级
+`baseMult` 抽样对照如下（完整逐行对照见
+[agent-actions 测试](../../../packages/data/test/agent-actions.test.ts)）：
+
+| 动作                                             | 来源行                              | 12 级 `baseMult` |
+| ------------------------------------------------ | ----------------------------------- | ---------------- |
+| `action:agent:1611:action:0019` 终结技           | `sk-claret-nk-1611021-main`         | 4504.8           |
+| `action:agent:1611:action:0007` 反制支援         | `sk-claret-nk-1611028-main`         | 2306.9           |
+| `action:agent:1611:action:0015` 锻星三段连续斩击 | `sk-claret-nk-1611007-三段连续斩击` | 904.2            |
+| `action:agent:1611:action:0027` 毁伤             | `sk-claret-nk-1611013-毁伤`         | 1625.6           |
+
+反制支援：寸铁不让（`action:agent:1611:action:0007`）新增 `counter-assist` 分类（上游记为
+`assist`）：在目录匹配中属于支援，不是 `EntryAction`。锻星一段/二段/三段、伏钺、毁伤、连携与终结
+按上游 `buffAnchorId` 绑定既有增益目标 `claret-basic-mtskq8rr` / `claret-basic-mtsef46o` /
+`claret-basic-mtskqn2n` / `claret-special-mtsecz30` / `claret-chain-mtsefivk` /
+`claret-ultimate-mtsefude`；未登记目标的行保持空集合，不猜测受益范围。
+
+锐化伤害公式、锐暴区、`sharpCriticalDamage` 直伤属性与克拉蕾增益的三项具名差异（M1 倍率编码、
+残锋自身目标、猩红渴望电属性范围）统一见
+[ZZZ-HP 静态增益数据接入修订 9](zzz-hp-static-effects.md#修订-9锐化与锐暴公式及实体接入)，
+本节不重复定义。仅失衡的 3 条招架动作（0003—0005）照常返回 `daze-only`，不因锐化接入改变。
+
 ### 已知限制：卢西娅合唱末段生命附加伤害
 
 PR4 跳过此项实现，仅记录为已知限制。当前[卢西娅动作定义](../../../packages/data/definitions/skills/agents/1451.json)的行为是：
@@ -293,8 +325,8 @@ Nanoka `/talent/2/desc` 明确指向强化特殊技的极性紊乱：比例变�
 
 ## 覆盖、证据与生成
 
-本版共 1,256 条：1,084 条伤害计算、161 条仅失衡、4 条耀变、7 条待补；逐次命中已确认的动作仍为 1 条。
-待补项按互斥原因分为：3 条特殊机制且表达式未支持、3 条未知分类、1 条未知元素。
+本版共 1,308 条：1,126 条伤害计算、168 条仅失衡、4 条耀变、10 条待补；逐次命中已确认的动作仍为 1 条。
+待补项按互斥原因分为：3 条特殊机制且表达式未支持、6 条未知分类、1 条未知元素。
 混合属性阻塞按上述来源约定处理，不表示已经完成游戏内部命中与属性分配的核实。
 全部伤害、失衡和耀变倍率展示行均进入覆盖校验；缺失、新增或重复覆盖会拒绝生成。
 能量消耗、回复、治疗等其他参数仍由原始详情提供，不自动归一化为伤害。

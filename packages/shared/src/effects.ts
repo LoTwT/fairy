@@ -126,11 +126,16 @@ export const STAT_UNIT_MAP = Object.freeze({
   criticalRate: "ratio",
   criticalDamage: "ratio",
   penetrationRatio: "ratio",
+  sharpCriticalDamage: "ratio",
 } as const)
 export type StatUnitMap = typeof STAT_UNIT_MAP
 
 export type Stat = keyof StatUnitMap
-export type DirectStat = "criticalRate" | "criticalDamage" | "penetrationRatio"
+export type DirectStat =
+  | "criticalRate"
+  | "criticalDamage"
+  | "penetrationRatio"
+  | "sharpCriticalDamage"
 export type GeneralStat = Exclude<Stat, DirectStat>
 export type Unit =
   | StatUnitMap[Stat]
@@ -285,6 +290,7 @@ export const SKILL_CATEGORIES = Object.freeze([
   "quick-assist",
   "defensive-assist",
   "evasive-assist",
+  "counter-assist",
   "assist-follow-up",
   "uncategorized",
 ] as const)
@@ -305,6 +311,7 @@ export type DamageElement = (typeof DAMAGE_ELEMENTS)[number]
 export type DamageKind =
   | "regular"
   | "sheer"
+  | "sharpen"
   | "anomaly"
   | "disorder"
   | "vortex"
@@ -459,6 +466,7 @@ export interface FactorChannelUnitMap {
   readonly "damage-taken-reduction": "ratio"
   readonly "stun-damage-adjustment": "multiplier"
   readonly "sheer-damage-bonus": "ratio"
+  readonly "sharpen-damage-bonus": "ratio"
   readonly "anomaly-damage-bonus": "ratio"
   readonly "anomaly-critical-rate": "ratio"
   readonly "anomaly-critical-damage": "ratio"

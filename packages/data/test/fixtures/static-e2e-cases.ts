@@ -244,11 +244,77 @@ const yixuan: AcceptanceBuild = {
     ),
   },
 }
+const claret: AcceptanceBuild = {
+  agentName: "Claret",
+  wEngineName: "Crimson Thirst",
+  upstreamAgentId: "claret",
+  upstreamWEngineId: "Scarlet-Craving",
+  upstreamSets: ["hormone", "woodpecker"],
+  actor: {
+    entityId: "entity:claret",
+    teamId: "team:players",
+    agentEntityId: "1611",
+    coreSkillLevel: 7,
+    mindscapeRank: 6,
+    wEngine: { entityId: "14161", refinement: 1, eligible: true },
+    panel: { mode: "equipment" },
+    driveDiscs: discs(
+      ["31400", "31400", "31400", "31400", "31000", "31000"],
+      [
+        { attribute: "health" },
+        { attribute: "attack" },
+        { attribute: "defense" },
+        { attribute: "criticalDamage" },
+        { attribute: "damageBonus", element: "electric" },
+        { attribute: "attack" },
+      ],
+      [
+        [
+          percent("defense", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("penetrationValue", 1),
+        ],
+        [
+          percent("defense", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("health", 1),
+        ],
+        [
+          percent("defense", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("health", 1),
+        ],
+        [
+          percent("defense", 3),
+          critical("criticalRate", 3),
+          flat("attack", 2),
+          flat("penetrationValue", 1),
+        ],
+        [
+          percent("defense", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("attack", 1),
+        ],
+        [
+          critical("criticalRate", 3),
+          critical("criticalDamage", 3),
+          flat("attack", 2),
+          flat("health", 1),
+        ],
+      ],
+    ),
+  },
+}
 export const builds: Record<string, AcceptanceBuild> = {
   nicole,
   astra,
   ben,
   yixuan,
+  claret,
   astraM2: { ...astra, actor: { ...astra.actor, mindscapeRank: 2 } },
   benF: {
     ...ben,
@@ -337,6 +403,30 @@ export const effects = {
       "drive-discs:SuitYunkuiTales:setPieces:4:blk-legacy:legacy-self-pierceDmgBonus",
     pointer: "/driveDiscs/0/fourPieceBuffs/effectBlocks/0/effects/1",
   },
+  claretStateCritical: {
+    holderId: "entity:claret",
+    optionId:
+      "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtrf598z-80y7hh",
+    pointer: "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/0",
+  },
+  claretRemnantEdge: {
+    holderId: "entity:claret",
+    optionId:
+      "agents:claret:mindscape:0:blk-mtrgmqhd-srsnon:eff-mtrgmqhd-jgzfvq",
+    pointer: "/agents/6/mindscapeBuffs/0/effectBlocks/1/effects/0",
+  },
+  claretMindscape4: {
+    holderId: "entity:claret",
+    optionId:
+      "agents:claret:mindscape:4:blk-mtseebl3-k0eoh9:eff-mtseebl3-6j53ci",
+    pointer: "/agents/6/mindscapeBuffs/4/effectBlocks/0/effects/0",
+  },
+  crimsonSharpen: {
+    holderId: "entity:claret",
+    optionId:
+      "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+    pointer: "/wengines/65/refinementBuffs/0/effectBlocks/2/effects/0",
+  },
 } as const
 
 export interface AcceptanceScenario {
@@ -344,7 +434,9 @@ export interface AcceptanceScenario {
   label: string
   buildIds: string[]
   actionId: string
-  levels: Partial<Record<"basic" | "assist" | "special", SkillLevelInput>>
+  levels: Partial<
+    Record<"basic" | "assist" | "special" | "chain", SkillLevelInput>
+  >
   target: StaticActionCalculationInput["target"]
   buffs: { effect: keyof typeof effects; layers: number }[]
 }
@@ -473,5 +565,23 @@ export const scenarios: AcceptanceScenario[] = [
       baseStunDamageMultiplier: 1.5,
     },
     buffs: [...yixuanBuffs, ...astraBuffs, buff("vanity", 2)],
+  },
+  {
+    id: "claret-sharpen",
+    label: "克拉蕾锐化终结技、残锋锐暴与猩红渴望 R1",
+    buildIds: ["claret"],
+    actionId: "action:agent:1611:action:0019",
+    levels: { chain: { mode: "effective", value: 12 } },
+    target: {
+      ...normalTarget,
+      baseDefense: 953,
+      resistances: { electric: 0 },
+    },
+    buffs: [
+      buff("claretStateCritical"),
+      buff("claretRemnantEdge"),
+      buff("claretMindscape4"),
+      buff("crimsonSharpen"),
+    ],
   },
 ]

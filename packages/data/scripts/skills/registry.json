@@ -21918,15 +21918,10 @@
     "sourceSignature": "e183ac757f0ab9272fd364476ee4de244cb9028c49423e8b3d2d91c1e1741ddc",
     "skillCategory": "quick-assist",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0002",
@@ -21940,15 +21935,10 @@
     "sourceSignature": "4f9882df6368e746a09c748c1119c418826ed01b13be7229b630a564d049b673",
     "skillCategory": "quick-assist",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0003",
@@ -22013,15 +22003,10 @@
     "sourceSignature": "960a254a1884d8576f7df2ec45d200aaa202d107dc07b80c53131a1823fe7c3a",
     "skillCategory": "assist-follow-up",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0007",
@@ -22033,21 +22018,12 @@
     "rowKind": "damage",
     "dazeRowIndex": 1,
     "sourceSignature": "ab125bd22853ac986338bb3c59f84e5f738c6016ffecaa24b7c54b3806e084a6",
-    "skillCategory": null,
+    "skillCategory": "counter-assist",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      },
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0008",
@@ -22061,15 +22037,10 @@
     "sourceSignature": "98e53be4457af6463da9b410d5ed75bd1c999b4fcdf0fafcaa99413676bfab46",
     "skillCategory": "assist-follow-up",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0009",
@@ -22083,15 +22054,10 @@
     "sourceSignature": "dd4d4e2b9fdd359ab68850f3041cba4219109d7a5fd1157129543c62ad7acb3c",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0010",
@@ -22105,15 +22071,10 @@
     "sourceSignature": "7dcfbfd7ac89c92e862bad1954466f5a1970ce80ee849aae4606851f99e14c16",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0011",
@@ -22127,15 +22088,10 @@
     "sourceSignature": "6cf0234d528073d894f2f4e019d251751b6cbb8fcc8567d60c8ff1aaf86e904e",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0012",
@@ -22149,15 +22105,10 @@
     "sourceSignature": "de12f85fec361715226c26a119fdf65c36588f2f7982bbc29a67a42ac9fca7c1",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0013",
@@ -22171,15 +22122,10 @@
     "sourceSignature": "146a602ca4f872b3ec86560d7ea2867901ca1a8bcc683300305e4247a17b24c0",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": ["zzz-hp:skill:claret-basic-mtskq8rr"],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0014",
@@ -22193,15 +22139,10 @@
     "sourceSignature": "7e5280176354e4fc3c9954d1fee3d9c72615db713c88ede52bff3a15ae6d12b8",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": ["zzz-hp:skill:claret-basic-mtskq8rr"],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0015",
@@ -22215,15 +22156,13 @@
     "sourceSignature": "9088534d774295fd412016d56541e7570da81629a86686d58de49a7856115282",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": [
+      "zzz-hp:skill:claret-basic-mtskq8rr",
+      "zzz-hp:skill:claret-basic-mtsef46o"
+    ],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0016",
@@ -22237,15 +22176,13 @@
     "sourceSignature": "07c4edee47dd52cced79e9b52990977fefa49b829002bfb14ec09d783f3c6e1e",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": [
+      "zzz-hp:skill:claret-basic-mtskq8rr",
+      "zzz-hp:skill:claret-basic-mtsef46o"
+    ],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0017",
@@ -22259,15 +22196,10 @@
     "sourceSignature": "56ce6da1e90389292e55b6e53e9afb2cfde67ed895940009a8780fe46366ffe1",
     "skillCategory": "basic",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": ["zzz-hp:skill:claret-basic-mtskqn2n"],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0018",
@@ -22281,15 +22213,10 @@
     "sourceSignature": "638c9dea717ae1406c9ff068e7f085dd89687eb52776bcf18814df565dd9feb6",
     "skillCategory": "chain",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": ["zzz-hp:skill:claret-chain-mtsefivk"],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0019",
@@ -22303,15 +22230,10 @@
     "sourceSignature": "8035a7e342d58674be583535efab6eb7a8192d1e0a9ec1460c2dbb0d0ff2e8f0",
     "skillCategory": "ultimate",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": ["zzz-hp:skill:claret-ultimate-mtsefude"],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0020",
@@ -22325,15 +22247,10 @@
     "sourceSignature": "6a651dd17227b1d953cf3f0ec625047b6ade73aa529fe8331128f3178a9f0b2b",
     "skillCategory": "dash",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0021",
@@ -22347,15 +22264,10 @@
     "sourceSignature": "291e2ad0c777b446154aafd5e59121e03fe8924673c240b6332e057ecf971c58",
     "skillCategory": "dodge-counter",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0022",
@@ -22369,15 +22281,10 @@
     "sourceSignature": "8cf0ba7b517125cd8e36c1bd76dad14ce488d2aedeb69865af5cbf4a77bcf214",
     "skillCategory": "dodge-counter",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0023",
@@ -22391,15 +22298,10 @@
     "sourceSignature": "fd070aa2ae0dddb4c65f72ba6cad52f5023ae8bc71d1efda2d39d65c12337811",
     "skillCategory": "special",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0024",
@@ -22413,15 +22315,10 @@
     "sourceSignature": "b95e54a2164a00954ce5a1ef1d7949596ec6e3e81bd302c3908c8050fe2160f2",
     "skillCategory": "enhanced-special",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0025",
@@ -22435,15 +22332,10 @@
     "sourceSignature": "b0c6a75390001f8dd6ba70186d8486c05b69b4f830ab9bf0a3b9898cd2fc32e9",
     "skillCategory": "special",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0026",
@@ -22457,15 +22349,10 @@
     "sourceSignature": "a9ed2e2269c7fb8d516eb8bfff9c5319a2acc991fd0581e0528ee3a35394bfaa",
     "skillCategory": "special",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0027",
@@ -22479,15 +22366,10 @@
     "sourceSignature": "d8ee8972668319fa309c67ec0726d5ea387cb61277add88c91cf87f4d8576d35",
     "skillCategory": "special",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "skillTargetIds": ["zzz-hp:skill:claret-special-mtsecz30"],
+    "issues": []
   },
   {
     "actionId": "action:agent:1611:action:0028",
@@ -22501,15 +22383,10 @@
     "sourceSignature": "a139b44ec67c09c88154aea78c93d81fc2b8084c26e3dd05260092d4df54a5bf",
     "skillCategory": "special",
     "element": "electric",
-    "damageKind": "regular",
+    "damageKind": "sharpen",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "special-mechanic",
-        "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-      }
-    ]
+    "issues": []
   },
   {
     "actionId": "action:agent:1621:action:0001",

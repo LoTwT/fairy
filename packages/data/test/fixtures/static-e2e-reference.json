@@ -2,9 +2,9 @@
   "provenance": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
-    "fairyBaseline": "56bc52ad906bf04c5f280fc387049cdb74b828ca",
-    "gameVersion": "3.1",
-    "method": "Pinned upstream pure functions + independently reproduced direct-damage chain; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
+    "fairyBaseline": "7f53b1e23ed72cd72b7ddb1fcc54393af4c0a4f2",
+    "gameVersion": "3.2",
+    "method": "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
     "resources": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -316,7 +316,7 @@
     "nanokaSources": [
       {
         "path": "agents/1031/data.json",
-        "sha256": "e82afad26c60e5d751d78f489442938785164e9ca473b236f51283238a0cb685"
+        "sha256": "cbb5ab0368d150f95a9b37971cbea0244129ff916bcc41e799a19b8906f013b0"
       },
       {
         "path": "w-engines/13103/data.json",
@@ -328,7 +328,7 @@
       },
       {
         "path": "agents/1311/data.json",
-        "sha256": "01cbb20d46513a0703c324e61e4f7c507f7d227d13c912fb858e9488b804f3d8"
+        "sha256": "ab64e523de5a16dd49506896f5ae08e24f7568c1c6f0f7ba9a61f9295d130fb6"
       },
       {
         "path": "w-engines/14131/data.json",
@@ -340,7 +340,7 @@
       },
       {
         "path": "agents/1121/data.json",
-        "sha256": "9f0d7059f1698d2adc10fb45ee9b88730cd8c03236a1ef2dc43fa4d45a43aedf"
+        "sha256": "4394fae7374cf4ae65b4ab43ccfe79a7b06c99549bfab7cfbd72ae74b6be1108"
       },
       {
         "path": "w-engines/13112/data.json",
@@ -352,11 +352,11 @@
       },
       {
         "path": "agents/1121/details.zh.json",
-        "sha256": "0c7ea966eadc95083e1b188339f09f42167a2ee6dd01ca0b0b3b08cf181bcff4"
+        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
       },
       {
         "path": "agents/1371/data.json",
-        "sha256": "0040454b1646460c0387915b5ab1f7444e73560535643995cca16b78029f4724"
+        "sha256": "31a23621a02d06b0b43840aa07c791ba5d1cd25f79fea0767ec3ccaa145edc02"
       },
       {
         "path": "w-engines/14137/data.json",
@@ -367,12 +367,28 @@
         "sha256": "34536f66858958cb71eb3d061a37d2d50aa74acb8d44911383e1fe8f161af8d4"
       },
       {
+        "path": "agents/1611/data.json",
+        "sha256": "2ef4f6dcb7283d61e2709634b38822ae79b358808220688487e888336b045255"
+      },
+      {
+        "path": "w-engines/14161/data.json",
+        "sha256": "3ee2e58f1fee16c9f4785bccc475b4c70758c8daddab919e02638e83fde4e649"
+      },
+      {
+        "path": "w-engines/14161/details.zh.json",
+        "sha256": "0f0095be51b0b67133f0e583b34c79fa8cfb0e2eff520f6c1a56a7947e755d9e"
+      },
+      {
         "path": "agents/1031/details.zh.json",
-        "sha256": "d70c52714a0b072061f97b860ea34f712b9ea2099b6d3deb2f7ddae0449a2f25"
+        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
       },
       {
         "path": "agents/1371/details.zh.json",
-        "sha256": "ed25b2714dc6c3a4d94160963ff1d34f223e01ad6d6d7b5e412ce7a1ada2b933"
+        "sha256": "70e3e1b3347c44e01167bd017d799b73d4a6fee751038484e62475f5e32bf1b3"
+      },
+      {
+        "path": "agents/1611/details.zh.json",
+        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
       }
     ]
   },
@@ -389,7 +405,8 @@
           "energyRegen": 2.34,
           "criticalRate": 0.562,
           "criticalDamage": 1.508,
-          "penetrationRatio": 0
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
         },
         "penetrationValue": 18,
         "damageBonuses": {
@@ -450,7 +467,8 @@
           "energyRegen": 1.56,
           "criticalRate": 0.19399999999999998,
           "criticalDamage": 0.7879999999999999,
-          "penetrationRatio": 0
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
         },
         "penetrationValue": 0,
         "damageBonuses": {}
@@ -509,7 +527,8 @@
           "energyRegen": 1.3199999999999998,
           "criticalRate": 0.48200000000000004,
           "criticalDamage": 1.0759999999999998,
-          "penetrationRatio": 0
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
         },
         "penetrationValue": 0,
         "damageBonuses": {}
@@ -569,6 +588,7 @@
           "criticalRate": 0.562,
           "criticalDamage": 0.98,
           "penetrationRatio": 0,
+          "sharpCriticalDamage": 0,
           "sheerForce": 2944.9468013999995
         },
         "penetrationValue": 54,
@@ -619,6 +639,68 @@
         "pen": 54
       }
     },
+    "claret": {
+      "panel": {
+        "stats": {
+          "health": 8187.5949,
+          "attack": 1287.4365400000002,
+          "defense": 2103.1579,
+          "impact": 93,
+          "anomalyProficiency": 79,
+          "anomalyMastery": 80,
+          "energyRegen": 0,
+          "criticalRate": 0.85,
+          "criticalDamage": 1.508,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 1.5
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "electric": 0.3
+        }
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 3,
+        "hpPercent": 0,
+        "atkFlat": 5,
+        "atkPercent": 0,
+        "defFlat": 0,
+        "defPercent": 15,
+        "pen": 2,
+        "critRate": 18,
+        "critDmg": 11,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 8187,
+        "atk": 1287.4,
+        "def": 2102.4,
+        "impact": 0,
+        "mastery": 79,
+        "anomalyControl": 80,
+        "energyRegen": 0,
+        "critRate": 85,
+        "critDmg": 150.8,
+        "penRate": 0,
+        "dmgBonus": 30,
+        "pen": 18
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 8187.59,
+        "atk": 1287.44,
+        "def": 2103.16,
+        "impact": 0,
+        "mastery": 79,
+        "anomalyControl": 80,
+        "energyRegen": 0,
+        "critRate": 85,
+        "critDmg": 150.8,
+        "penRate": 0,
+        "dmgBonus": 30,
+        "pen": 18
+      }
+    },
     "astraM2": {
       "panel": {
         "stats": {
@@ -631,7 +713,8 @@
           "energyRegen": 1.56,
           "criticalRate": 0.19399999999999998,
           "criticalDamage": 0.7879999999999999,
-          "penetrationRatio": 0
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
         },
         "penetrationValue": 0,
         "damageBonuses": {}
@@ -690,7 +773,8 @@
           "energyRegen": 1.56,
           "criticalRate": 0.48200000000000004,
           "criticalDamage": 1.0759999999999998,
-          "penetrationRatio": 0
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
         },
         "penetrationValue": 0,
         "damageBonuses": {}
@@ -767,7 +851,8 @@
             0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
           ],
           "element": "physical",
-          "individual": true
+          "individual": true,
+          "sharpen": false
         },
         "conversionBase": null,
         "contributions": [],
@@ -861,7 +946,8 @@
             0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
           ],
           "element": "physical",
-          "individual": true
+          "individual": true,
+          "sharpen": false
         },
         "conversionBase": null,
         "contributions": [
@@ -977,7 +1063,8 @@
             0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
           ],
           "element": "physical",
-          "individual": true
+          "individual": true,
+          "sharpen": false
         },
         "conversionBase": 4580.160215,
         "contributions": [
@@ -1121,7 +1208,8 @@
             0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
           ],
           "element": "physical",
-          "individual": true
+          "individual": true,
+          "sharpen": false
         },
         "conversionBase": 4580.160215,
         "contributions": [
@@ -1265,7 +1353,8 @@
             0.893, 0.3746666666666667, 0.3746666666666667, 0.3746666666666667
           ],
           "element": "physical",
-          "individual": true
+          "individual": true,
+          "sharpen": false
         },
         "conversionBase": 4580.160215,
         "contributions": [
@@ -1404,7 +1493,8 @@
           },
           "multipliers": [1.759],
           "element": "fire",
-          "individual": false
+          "individual": false,
+          "sharpen": false
         },
         "conversionBase": null,
         "contributions": [],
@@ -1477,7 +1567,8 @@
           },
           "multipliers": [1.935],
           "element": "fire",
-          "individual": false
+          "individual": false,
+          "sharpen": false
         },
         "conversionBase": null,
         "contributions": [
@@ -1558,7 +1649,8 @@
           },
           "multipliers": [13.439],
           "element": "auric-ink",
-          "individual": false
+          "individual": false,
+          "sharpen": false
         },
         "conversionBase": null,
         "contributions": [
@@ -1676,7 +1768,8 @@
           },
           "multipliers": [13.439],
           "element": "auric-ink",
-          "individual": false
+          "individual": false,
+          "sharpen": false
         },
         "conversionBase": 4580.160215,
         "contributions": [
@@ -1799,6 +1892,112 @@
         "displayedCritical": null
       },
       "upstreamStyleIntegerExpected": 504038
+    },
+    "claret-sharpen": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1611/details.zh.json",
+            "pointer": "/skill/chain/description/3/param/0",
+            "expression": "{Skill:1611021, Prop:1001}",
+            "parameters": {
+              "1611021": {
+                "damagePercentage": 225200,
+                "damagePercentageGrowth": 20480
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-claret-nk-1611021-main",
+            "element": "电",
+            "multiplier": 45.048
+          },
+          "multipliers": [45.048],
+          "element": "electric",
+          "individual": false,
+          "sharpen": true
+        },
+        "conversionBase": null,
+        "contributions": [
+          {
+            "optionId": "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtrf598z-80y7hh",
+            "holderId": "entity:claret",
+            "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "critRate",
+            "sourceValue": 30
+          },
+          {
+            "optionId": "agents:claret:mindscape:0:blk-mtrgmqhd-srsnon:eff-mtrgmqhd-jgzfvq",
+            "holderId": "entity:claret",
+            "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "sharpenCritDmgBonus",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "agents:claret:mindscape:4:blk-mtseebl3-k0eoh9:eff-mtseebl3-6j53ci",
+            "holderId": "entity:claret",
+            "pointer": "/agents/6/mindscapeBuffs/4/effectBlocks/0/effects/0",
+            "stat": "skillDmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+            "holderId": "entity:claret",
+            "pointer": "/wengines/65/refinementBuffs/0/effectBlocks/2/effects/0",
+            "stat": "sharpenDmgBonus",
+            "sourceValue": 10
+          }
+        ],
+        "finalStats": {
+          "attack": 1287.4365400000002,
+          "health": 8187.5949,
+          "defense": 2103.1579,
+          "criticalRate": 1.15,
+          "criticalDamage": 1.508,
+          "sharpCriticalDamage": 1.75
+        },
+        "factors": {
+          "damageBonus": 1.5,
+          "sharpCritical": 3.4718749999999994,
+          "expectedCritical": 3.4718749999999994,
+          "defense": 0.459224985540775,
+          "resistance": 1,
+          "stunDamage": 1,
+          "damageTaken": 1,
+          "sharpenDamageBonus": 1.1
+        },
+        "hits": [
+          {
+            "nonCritical": 71788.82537851935,
+            "critical": 249241.82811104684,
+            "expected": 249241.82811104684
+          }
+        ],
+        "totals": {
+          "nonCritical": 71788.82537851935,
+          "critical": 249241.82811104684,
+          "expected": 249241.82811104684,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 249242
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 71788.82537851935,
+        "critical": 249241.82811104684,
+        "expected": 249241.82811104684,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 71788.8970595535,
+        "critical": 249242.07697863728,
+        "expected": 249242.07697863728,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 249242
     }
   }
 }

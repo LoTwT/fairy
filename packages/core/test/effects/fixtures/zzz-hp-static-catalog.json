@@ -1718,6 +1718,446 @@
         ],
         "states": [],
         "distances": []
+      },
+      {
+        "entities": [
+          {
+            "kind": "actor",
+            "entityId": "entity:holder",
+            "teamId": "team:players",
+            "generalStats": {
+              "attack": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "health": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "defense": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "impact": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "sheerForce": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyProficiency": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyMastery": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "energyRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "adrenalineRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              }
+            },
+            "directStats": {
+              "criticalRate": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "criticalDamage": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "penetrationRatio": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "sharpCriticalDamage": {
+                "baseValue": 1.5,
+                "additions": []
+              }
+            }
+          },
+          {
+            "kind": "actor",
+            "entityId": "entity:enemy",
+            "teamId": "team:enemies",
+            "generalStats": {
+              "attack": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "health": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "defense": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "impact": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "sheerForce": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyProficiency": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyMastery": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "energyRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "adrenalineRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              }
+            },
+            "directStats": {
+              "criticalRate": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "criticalDamage": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "penetrationRatio": {
+                "baseValue": 5,
+                "additions": []
+              }
+            }
+          }
+        ],
+        "states": [],
+        "distances": []
+      },
+      {
+        "entities": [
+          {
+            "kind": "actor",
+            "entityId": "entity:holder",
+            "teamId": "team:players",
+            "generalStats": {
+              "attack": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "health": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "defense": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "impact": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "sheerForce": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyProficiency": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyMastery": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "energyRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "adrenalineRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              }
+            },
+            "directStats": {
+              "criticalRate": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "criticalDamage": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "penetrationRatio": {
+                "baseValue": 5,
+                "additions": []
+              }
+            }
+          },
+          {
+            "kind": "actor",
+            "entityId": "entity:enemy",
+            "teamId": "team:enemies",
+            "generalStats": {
+              "attack": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "health": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "defense": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "impact": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "sheerForce": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyProficiency": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyMastery": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "energyRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "adrenalineRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              }
+            },
+            "directStats": {
+              "criticalRate": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "criticalDamage": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "penetrationRatio": {
+                "baseValue": 5,
+                "additions": []
+              }
+            }
+          },
+          {
+            "kind": "actor",
+            "entityId": "entity:beneficiary",
+            "teamId": "team:players",
+            "generalStats": {
+              "attack": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "health": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "defense": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "impact": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "sheerForce": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyProficiency": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "anomalyMastery": {
+                "baseValue": 500,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "energyRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              },
+              "adrenalineRegen": {
+                "baseValue": 5,
+                "initialPercentage": [],
+                "initialFixed": [],
+                "finalPercentage": [],
+                "finalFixed": []
+              }
+            },
+            "directStats": {
+              "criticalRate": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "criticalDamage": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "penetrationRatio": {
+                "baseValue": 5,
+                "additions": []
+              },
+              "sharpCriticalDamage": {
+                "baseValue": 1.5,
+                "additions": []
+              }
+            }
+          }
+        ],
+        "states": [],
+        "distances": []
       }
     ],
     "hit": [
@@ -4036,6 +4476,86 @@
           }
         ],
         "skillTargetIds": ["zzz-hp:skill:pyrois-ultimate-ms4m66yy"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "basic",
+        "element": "electric",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "base",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": ["zzz-hp:skill:claret-basic-mtskq8rr"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "special",
+        "element": "electric",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "base",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": ["zzz-hp:skill:claret-special-mtsecz30"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "basic",
+        "element": "electric",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "base",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": ["zzz-hp:skill:claret-basic-mtsef46o"]
+      },
+      {
+        "actorId": "entity:holder",
+        "targetId": "entity:enemy",
+        "actionId": "action:oracle",
+        "skillCategory": "basic",
+        "element": "electric",
+        "damageItems": [
+          {
+            "mode": "direct",
+            "role": "base",
+            "itemId": "base",
+            "damageMultiplier": 20,
+            "stat": "attack",
+            "statSource": {
+              "entityId": "entity:holder"
+            }
+          }
+        ],
+        "skillTargetIds": []
       }
     ],
     "damage": [
@@ -4379,6 +4899,31 @@
         },
         "anomalyCriticalRate": 0,
         "anomalyCriticalDamage": []
+      },
+      {
+        "kind": "sharpen",
+        "damageBonus": [],
+        "defense": {
+          "attackerLevel": 60,
+          "targetBaseDefense": 1000,
+          "defensePercentageAdjustments": [],
+          "penetrationValues": []
+        },
+        "resistance": {
+          "targetResistance": 0,
+          "targetResistanceReductions": [],
+          "attackerResistanceIgnoreValues": []
+        },
+        "damageTaken": {
+          "targetDamageTakenIncreases": [],
+          "targetDamageTakenReductions": []
+        },
+        "stunDamage": {
+          "isTargetStunned": true,
+          "targetBaseStunDamageMultiplier": 1.5,
+          "targetStunDamageMultiplierAdjustments": []
+        },
+        "sharpenDamageBonus": []
       }
     ],
     "bindings": [
@@ -12610,6 +13155,298 @@
             "refinement": 5
           }
         }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "agent",
+          "holderId": "entity:holder",
+          "sourceEntityId": "1611",
+          "eligible": true,
+          "configuration": {
+            "coreSkillLevel": 7,
+            "mindscapeRank": 0
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "agent",
+          "holderId": "entity:holder",
+          "sourceEntityId": "1611",
+          "eligible": true,
+          "configuration": {
+            "coreSkillLevel": 7,
+            "mindscapeRank": 1
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "agent",
+          "holderId": "entity:holder",
+          "sourceEntityId": "1611",
+          "eligible": true,
+          "configuration": {
+            "coreSkillLevel": 7,
+            "mindscapeRank": 2
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "agent",
+          "holderId": "entity:holder",
+          "sourceEntityId": "1611",
+          "eligible": true,
+          "configuration": {
+            "coreSkillLevel": 7,
+            "mindscapeRank": 4
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "12016",
+          "eligible": true,
+          "configuration": {
+            "refinement": 1
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "12016",
+          "eligible": true,
+          "configuration": {
+            "refinement": 2
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "12016",
+          "eligible": true,
+          "configuration": {
+            "refinement": 3
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "12016",
+          "eligible": true,
+          "configuration": {
+            "refinement": 4
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "12016",
+          "eligible": true,
+          "configuration": {
+            "refinement": 5
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13017",
+          "eligible": true,
+          "configuration": {
+            "refinement": 1
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13017",
+          "eligible": true,
+          "configuration": {
+            "refinement": 2
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13017",
+          "eligible": true,
+          "configuration": {
+            "refinement": 3
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13017",
+          "eligible": true,
+          "configuration": {
+            "refinement": 4
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13017",
+          "eligible": true,
+          "configuration": {
+            "refinement": 5
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13021",
+          "eligible": true,
+          "configuration": {
+            "refinement": 1
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13021",
+          "eligible": true,
+          "configuration": {
+            "refinement": 2
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13021",
+          "eligible": true,
+          "configuration": {
+            "refinement": 3
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13021",
+          "eligible": true,
+          "configuration": {
+            "refinement": 4
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "13021",
+          "eligible": true,
+          "configuration": {
+            "refinement": 5
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "14161",
+          "eligible": true,
+          "configuration": {
+            "refinement": 1
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "14161",
+          "eligible": true,
+          "configuration": {
+            "refinement": 2
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "14161",
+          "eligible": true,
+          "configuration": {
+            "refinement": 3
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "14161",
+          "eligible": true,
+          "configuration": {
+            "refinement": 4
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "kind": "w-engine",
+          "holderId": "entity:holder",
+          "sourceEntityId": "14161",
+          "eligible": true,
+          "configuration": {
+            "refinement": 5
+          }
+        }
       ]
     ],
     "selections": [
@@ -18236,6 +19073,279 @@
           "bindingId": "binding:source",
           "layers": 1
         }
+      ],
+      [
+        {
+          "optionId": "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtrf598z-80y7hh",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtskn62y-3w5nq8",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtskqyss-1toefw",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:claret:mindscape:0:blk-mtrgmqhd-srsnon:eff-mtrgmqhd-jgzfvq",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:claret:mindscape:1:blk-mtrkovf7-dqmjh3:eff-mtse9xm8-q641yp",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:claret:mindscape:2:blk-mtrkrmdk-tyez3h:eff-mtrkrmdk-lvfngh",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:claret:mindscape:4:blk-mtseebl3-k0eoh9:eff-mtseebl3-6j53ci",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:koleda:mindscape:0:blk-mttp1p1j-9ermke:eff-mttp1p1j-znyjgl",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "agents:koleda:mindscape:0:blk-mttp1p1j-9ermke:eff-mttrobl0-dc0cuk",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Lunar_Semiluna:refinement:blk-mtwnaxxq-5kpz84:eff-mtwnaxxq-965sat",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Lunar_Semiluna:refinement:blk-mtwnaxxq-5kpz84:eff-mtwnaxxq-965sat",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Lunar_Semiluna:refinement:blk-mtwnaxxq-5kpz84:eff-mtwnaxxq-965sat",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Lunar_Semiluna:refinement:blk-mtwnaxxq-5kpz84:eff-mtwnaxxq-965sat",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Lunar_Semiluna:refinement:blk-mtwnaxxq-5kpz84:eff-mtwnaxxq-965sat",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Promotion%20Stats:refinement:blk-mtwn69lr-xfb4n8:eff-mtwn69lr-2h2brm",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Promotion%20Stats:refinement:blk-mtwn69lr-xfb4n8:eff-mtwn69lr-2h2brm",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Promotion%20Stats:refinement:blk-mtwn69lr-xfb4n8:eff-mtwn69lr-2h2brm",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Promotion%20Stats:refinement:blk-mtwn69lr-xfb4n8:eff-mtwn69lr-2h2brm",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Promotion%20Stats:refinement:blk-mtwn69lr-xfb4n8:eff-mtwn69lr-2h2brm",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
+      ],
+      [
+        {
+          "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
       ]
     ],
     "actorSources": [
@@ -18778,6 +19888,22 @@
           "entityId": "entity:beneficiary",
           "agentEntityId": "1471"
         }
+      ],
+      [
+        {
+          "entityId": "entity:holder",
+          "agentEntityId": "1611"
+        }
+      ],
+      [
+        {
+          "entityId": "entity:holder",
+          "agentEntityId": "1101"
+        },
+        {
+          "entityId": "entity:beneficiary",
+          "agentEntityId": "1611"
+        }
       ]
     ],
     "inputs": [
@@ -19109,6 +20235,16 @@
           "value": {
             "unit": "attack-points",
             "value": 500
+          }
+        }
+      ],
+      [
+        {
+          "bindingId": "binding:source",
+          "name": "agent:1611:zzz-hp:eff-mtskqyss-1toefw:blk-mtrf598z-wr4jqt:mindscape:0:source",
+          "value": {
+            "unit": "ratio",
+            "value": 5
           }
         }
       ]
@@ -40038,6 +41174,669 @@
         "bindings": 135,
         "selections": 801,
         "actorSources": 48,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.3,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1611:zzz-hp:eff-mtrf598z-80y7hh:blk-mtrf598z-wr4jqt:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 667,
+        "selections": 802,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "expected": 0.15,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1611:zzz-hp:eff-mtskn62y-3w5nq8:blk-mtrf598z-wr4jqt:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 114,
+        "damage": 0,
+        "bindings": 667,
+        "selections": 803,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/2",
+      "expected": 1.75,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1611:zzz-hp:eff-mtskqyss-1toefw:blk-mtrf598z-wr4jqt:mindscape:0"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 667,
+        "selections": 804,
+        "actorSources": 76,
+        "inputs": 34
+      }
+    },
+    {
+      "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/1/effects/0",
+      "expected": 0.25,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1611:zzz-hp:eff-mtrgmqhd-jgzfvq:blk-mtrgmqhd-srsnon:mindscape:0"
+      ],
+      "input": {
+        "world": 6,
+        "hit": 117,
+        "damage": 11,
+        "bindings": 667,
+        "selections": 805,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
+      "expected": 0.3,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1611:zzz-hp:eff-mtse9xm8-q641yp:blk-mtrkovf7-dqmjh3:mindscape:1"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 115,
+        "damage": 0,
+        "bindings": 668,
+        "selections": 806,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/6/mindscapeBuffs/2/effectBlocks/0/effects/0",
+      "expected": 0.18,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1611:zzz-hp:eff-mtrkrmdk-lvfngh:blk-mtrkrmdk-tyez3h:mindscape:2"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 669,
+        "selections": 807,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/6/mindscapeBuffs/4/effectBlocks/0/effects/0",
+      "expected": 0.2,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1611:zzz-hp:eff-mtseebl3-6j53ci:blk-mtseebl3-k0eoh9:mindscape:4"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 116,
+        "damage": 0,
+        "bindings": 670,
+        "selections": 808,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/40/mindscapeBuffs/0/effectBlocks/2/effects/0",
+      "expected": 0.12,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1101:zzz-hp:eff-mttp1p1j-znyjgl:blk-mttp1p1j-9ermke:mindscape:0"
+      ],
+      "input": {
+        "world": 7,
+        "hit": 31,
+        "damage": 11,
+        "bindings": 79,
+        "selections": 809,
+        "actorSources": 77,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/agents/40/mindscapeBuffs/0/effectBlocks/2/effects/2",
+      "expected": -0.35,
+      "unit": "ratio",
+      "effectIds": [
+        "agent:1101:zzz-hp:eff-mttrobl0-dc0cuk:blk-mttp1p1j-9ermke:mindscape:0"
+      ],
+      "input": {
+        "world": 7,
+        "hit": 31,
+        "damage": 0,
+        "bindings": 79,
+        "selections": 810,
+        "actorSources": 77,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/1/refinementBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.18,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:12016:zzz-hp:eff-mtwnaxxq-965sat:blk-mtwnaxxq-5kpz84:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 671,
+        "selections": 811,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/1/refinementBuffs/1/effectBlocks/0/effects/0",
+      "expected": 0.21,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:12016:zzz-hp:eff-mtwnaxxq-965sat:blk-mtwnaxxq-5kpz84:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 672,
+        "selections": 812,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/1/refinementBuffs/2/effectBlocks/0/effects/0",
+      "expected": 0.24,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:12016:zzz-hp:eff-mtwnaxxq-965sat:blk-mtwnaxxq-5kpz84:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 673,
+        "selections": 813,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/1/refinementBuffs/3/effectBlocks/0/effects/0",
+      "expected": 0.27,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:12016:zzz-hp:eff-mtwnaxxq-965sat:blk-mtwnaxxq-5kpz84:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 674,
+        "selections": 814,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/1/refinementBuffs/4/effectBlocks/0/effects/0",
+      "expected": 0.3,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:12016:zzz-hp:eff-mtwnaxxq-965sat:blk-mtwnaxxq-5kpz84:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 0,
+        "bindings": 675,
+        "selections": 815,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/28/refinementBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.08,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 3,
+        "damage": 0,
+        "bindings": 676,
+        "selections": 816,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/28/refinementBuffs/1/effectBlocks/0/effects/0",
+      "expected": 0.09,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 3,
+        "damage": 0,
+        "bindings": 677,
+        "selections": 817,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/28/refinementBuffs/2/effectBlocks/0/effects/0",
+      "expected": 0.1,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 3,
+        "damage": 0,
+        "bindings": 678,
+        "selections": 818,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/28/refinementBuffs/3/effectBlocks/0/effects/0",
+      "expected": 0.11,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 3,
+        "damage": 0,
+        "bindings": 679,
+        "selections": 819,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/28/refinementBuffs/4/effectBlocks/0/effects/0",
+      "expected": 0.12,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 3,
+        "damage": 0,
+        "bindings": 680,
+        "selections": 820,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/76/refinementBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.24,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 681,
+        "selections": 821,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/76/refinementBuffs/1/effectBlocks/0/effects/0",
+      "expected": 0.28,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 682,
+        "selections": 822,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/76/refinementBuffs/2/effectBlocks/0/effects/0",
+      "expected": 0.32,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 683,
+        "selections": 823,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/76/refinementBuffs/3/effectBlocks/0/effects/0",
+      "expected": 0.36,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 684,
+        "selections": 824,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/76/refinementBuffs/4/effectBlocks/0/effects/0",
+      "expected": 0.4,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 685,
+        "selections": 825,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/0/effectBlocks/0/effects/0",
+      "expected": 0.25,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsekp31-f1g9l2:blk-mtsekp31-ybbcgj:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 686,
+        "selections": 826,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/0/effectBlocks/1/effects/0",
+      "expected": 0.15,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsemp5m-q1jh4f:blk-mtsemp5m-ywlze6:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 686,
+        "selections": 831,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/0/effectBlocks/2/effects/0",
+      "expected": 0.1,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsenpok-prx4yj:blk-mtsenpok-3njiz7:refinement"
+      ],
+      "input": {
+        "world": 6,
+        "hit": 117,
+        "damage": 11,
+        "bindings": 686,
+        "selections": 836,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/1/effectBlocks/0/effects/0",
+      "expected": 0.275,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsekp31-f1g9l2:blk-mtsekp31-ybbcgj:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 687,
+        "selections": 827,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/1/effectBlocks/1/effects/0",
+      "expected": 0.175,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsemp5m-q1jh4f:blk-mtsemp5m-ywlze6:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 687,
+        "selections": 832,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/1/effectBlocks/2/effects/0",
+      "expected": 0.115,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsenpok-prx4yj:blk-mtsenpok-3njiz7:refinement"
+      ],
+      "input": {
+        "world": 6,
+        "hit": 117,
+        "damage": 11,
+        "bindings": 687,
+        "selections": 837,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/2/effectBlocks/0/effects/0",
+      "expected": 0.3,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsekp31-f1g9l2:blk-mtsekp31-ybbcgj:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 688,
+        "selections": 828,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/2/effectBlocks/1/effects/0",
+      "expected": 0.2,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsemp5m-q1jh4f:blk-mtsemp5m-ywlze6:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 688,
+        "selections": 833,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/2/effectBlocks/2/effects/0",
+      "expected": 0.13,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsenpok-prx4yj:blk-mtsenpok-3njiz7:refinement"
+      ],
+      "input": {
+        "world": 6,
+        "hit": 117,
+        "damage": 11,
+        "bindings": 688,
+        "selections": 838,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/3/effectBlocks/0/effects/0",
+      "expected": 0.325,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsekp31-f1g9l2:blk-mtsekp31-ybbcgj:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 689,
+        "selections": 829,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/3/effectBlocks/1/effects/0",
+      "expected": 0.225,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsemp5m-q1jh4f:blk-mtsemp5m-ywlze6:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 689,
+        "selections": 834,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/3/effectBlocks/2/effects/0",
+      "expected": 0.145,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsenpok-prx4yj:blk-mtsenpok-3njiz7:refinement"
+      ],
+      "input": {
+        "world": 6,
+        "hit": 117,
+        "damage": 11,
+        "bindings": 689,
+        "selections": 839,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/4/effectBlocks/0/effects/0",
+      "expected": 0.35,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsekp31-f1g9l2:blk-mtsekp31-ybbcgj:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 690,
+        "selections": 830,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/4/effectBlocks/1/effects/0",
+      "expected": 0.25,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsemp5m-q1jh4f:blk-mtsemp5m-ywlze6:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 117,
+        "damage": 0,
+        "bindings": 690,
+        "selections": 835,
+        "actorSources": 76,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/65/refinementBuffs/4/effectBlocks/2/effects/0",
+      "expected": 0.16,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14161:zzz-hp:eff-mtsenpok-prx4yj:blk-mtsenpok-3njiz7:refinement"
+      ],
+      "input": {
+        "world": 6,
+        "hit": 117,
+        "damage": 11,
+        "bindings": 690,
+        "selections": 840,
+        "actorSources": 76,
         "inputs": 0
       }
     }

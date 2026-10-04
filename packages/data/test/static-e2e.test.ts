@@ -78,7 +78,7 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:db12e0c9c3a09ccb8511e52d090f678c14c963e1494a9a514a9c858b00ddde1b",
+      "sha256:b6acbbfb9e8b61df29d4838b45bc8b60e9667d7a3f112d966a95d959e5861386",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -364,8 +364,15 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
         ),
       ).toBe(true)
       expect(result.segments).toHaveLength(expected.hits.length)
+      const sharpen = input.action.calculation.segments.some(
+        (segment) => segment.damageKind === "sharpen",
+      )
+      const criticalFactorKey = sharpen ? "sharpCritical" : "critical"
       for (const [index, segment] of result.segments.entries()) {
         const damage = segment.damage
+        expect(damage.criticalSemantics).toBe(
+          sharpen ? "sharp-critical-forced-first-layer" : "critical-hit",
+        )
         const hit = expected.hits[index]!
         close(damage.nonCritical, hit.nonCritical, "noncritical hit")
         close(damage.critical, hit.critical, "critical hit")
@@ -374,7 +381,11 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
         close(
           item.finalStat,
           expected.finalStats[
-            expected.action.element === "auric-ink" ? "sheerForce" : "attack"
+            sharpen
+              ? "defense"
+              : expected.action.element === "auric-ink"
+                ? "sheerForce"
+                : "attack"
           ]!,
           "final scaling stat",
         )
@@ -383,7 +394,7 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
             close(
               1 +
                 damage.criticalRate *
-                  (damage.factors.critical!["critical"]! - 1),
+                  (damage.factors.critical![criticalFactorKey]! - 1),
               value,
               factor,
             )
@@ -394,7 +405,7 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
             expect(damage.factors.nonCritical["defense"]).toBeUndefined()
           else
             close(
-              (factor === "critical"
+              (["critical", "sharpCritical"].includes(factor)
                 ? damage.factors.critical
                 : damage.factors.nonCritical)![factor],
               value,

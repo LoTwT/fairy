@@ -42,6 +42,10 @@
     "penetrationRatio": {
       "unit": "ratio",
       "value": 0
+    },
+    "sharpCriticalDamage": {
+      "unit": "ratio",
+      "value": 0
     }
   },
   "coreAttributeBonuses": {

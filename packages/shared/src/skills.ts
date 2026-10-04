@@ -60,9 +60,12 @@ export interface ActionDamageItem {
   readonly multiplyByInput?: string
 }
 
+/** 动作伤害种类的公共取值；sheer 为命破，sharpen 为锐化（防御缩放、锐暴判定）。 */
+export type ActionDamageKind = "regular" | "sheer" | "sharpen"
+
 export interface ActionDamageSegment {
   readonly segmentId: string
-  readonly damageKind: "regular" | "sheer"
+  readonly damageKind: ActionDamageKind
   readonly element: ActionDamageElement
   /** individual 表示一次独立伤害；aggregate 不宣称已知内部命中数。 */
   readonly granularity: "individual" | "aggregate"
@@ -148,7 +151,7 @@ export interface ResolveAgentActionInput {
 
 export interface ResolvedActionSegment {
   readonly segmentId: string
-  readonly damageKind: "regular" | "sheer"
+  readonly damageKind: "regular" | "sheer" | "sharpen"
   readonly element: ActionDamageElement
   readonly granularity: "individual" | "aggregate"
   readonly repeat: number

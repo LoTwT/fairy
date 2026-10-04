@@ -149,6 +149,17 @@ export {
 } from "./factors/sheer-damage-bonus.ts"
 export type { SheerDamageBonusFactorInput } from "./factors/sheer-damage-bonus.ts"
 export {
+  DEFAULT_SHARPEN_DAMAGE_BONUS_FACTOR_INPUT,
+  SHARPEN_DAMAGE_BONUS_FACTOR_ID,
+  sharpenDamageBonusFactor,
+} from "./factors/sharpen-damage-bonus.ts"
+export type { SharpenDamageBonusFactorInput } from "./factors/sharpen-damage-bonus.ts"
+export {
+  SHARP_CRITICAL_FACTOR_ID,
+  sharpCriticalFactor,
+} from "./factors/sharp-critical.ts"
+export type { SharpCriticalFactorInput } from "./factors/sharp-critical.ts"
+export {
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   STUN_DAMAGE_FACTOR_ID,
   stunDamageFactor,
@@ -220,6 +231,11 @@ export {
   sheerDamageFormula,
 } from "./formulas/sheer-damage.ts"
 export type { SheerDamageFormulaInput } from "./formulas/sheer-damage.ts"
+export {
+  SHARPEN_DAMAGE_FORMULA_ID,
+  sharpenDamageFormula,
+} from "./formulas/sharpen-damage.ts"
+export type { SharpenDamageFormulaInput } from "./formulas/sharpen-damage.ts"
 export {
   ANOMALY_DAMAGE_FORMULA_ID,
   anomalyDamageFormula,

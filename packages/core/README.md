@@ -46,11 +46,14 @@ Node 要求 `>=24.11.0`，使用 ESM；浏览器已验收 Vite 开发与生产�
 - 异常暴击区：`anomalyCriticalFactor`
 - 异化区：`refringeFactor`
 - 耀变倍率区：`luminizeMultiplierFactor`
+- 锐化增伤区：`sharpenDamageBonusFactor`
+- 锐暴区：`sharpCriticalFactor`
 
 当前内置公式：
 
 - 常规伤害：`regularDamageFormula`
 - 贯穿伤害：`sheerDamageFormula`
+- 锐化伤害：`sharpenDamageFormula`
 - 异常伤害：`anomalyDamageFormula`
 - 耀变伤害：`luminizeDamageFormula`
 - 异常积蓄值：`anomalyBuildupFormula`
