@@ -6,15 +6,14 @@ import {
 } from "../../src/effects/index.ts"
 import type {
   MindscapeRank,
+  RemielleSpecialVoidflareAnomalySource,
   StaticCatalogDamageInput,
   StaticEffectCatalog,
 } from "../../src/effects/index.ts"
 import { general } from "./static-fixtures.ts"
 
-type CatalogAnomalySource = Extract<
-  StaticCatalogDamageInput["damage"],
-  { readonly refringe: unknown }
->["anomalySource"]
+/** 受控夹具只产生具名机制分支；普通来源经 damage 覆盖并显式断言。 */
+type CatalogAnomalySource = RemielleSpecialVoidflareAnomalySource
 
 const read = (path: string) =>
   JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"))
@@ -86,7 +85,10 @@ function voidflareInput(
     teammates: "jane-velina" | "grace-velina" | "astrayao-velina" | "none"
     anomalySource: CatalogAnomalySource
     damage: Partial<
-      Extract<StaticCatalogDamageInput["damage"], { kind: "luminize" }>
+      Extract<
+        Extract<StaticCatalogDamageInput["damage"], { kind: "luminize" }>,
+        { anomalySource: RemielleSpecialVoidflareAnomalySource }
+      >
     >
     hit: Partial<StaticCatalogDamageInput["hit"]>
     catalog: StaticEffectCatalog
@@ -337,7 +339,6 @@ function voidflareInput(
         multiplicativeLuminizeMultiplierAdjustments: [],
       },
       defense: {
-        attackerLevel: level,
         targetBaseDefense,
         defensePercentageAdjustments: [],
         penetrationValues: [],
@@ -365,6 +366,41 @@ function voidflareInput(
 function resultFor(input: StaticCatalogDamageInput) {
   const result = calculateStaticDamageFromCatalog(input)
   return result
+}
+
+/** 覆盖源角色（entity:remiel）指定 generalStat 的输入形状，其余保持基线。 */
+function withGeneralStat(
+  input: StaticCatalogDamageInput,
+  stat: "attack" | "anomalyProficiency",
+  value:
+    | {
+        readonly baseValue: number
+        readonly initialPercentage: readonly number[]
+        readonly initialFixed: readonly number[]
+        readonly finalPercentage: readonly number[]
+        readonly finalFixed: readonly number[]
+      }
+    | {
+        readonly settledInitialValue: number
+        readonly baseValue?: number
+        readonly finalPercentage: readonly number[]
+        readonly finalFixed: readonly number[]
+      },
+): StaticCatalogDamageInput {
+  return {
+    ...input,
+    world: {
+      ...input.world,
+      entities: input.world.entities.map((entity) =>
+        entity.kind === "actor" && entity.entityId === "entity:remiel"
+          ? {
+              ...entity,
+              generalStats: { ...entity.generalStats, [stat]: value },
+            }
+          : entity,
+      ),
+    },
+  }
 }
 
 function closeTo(
@@ -399,6 +435,134 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
       result.value.nonCritical,
       1400 * 2.5 * 2.46 * 1.1492 * 3.692 * 2,
       "controlled value",
+    )
+  })
+
+  it("excludes the world's in-combat final baseline from the restricted attack reading", () => {
+    // 固定来源口径：受限攻击只读局外攻击 + 指定自身转模；世界里的普通局内
+    // final 调整（ComponentStatInput 的 finalPercentage/finalFixed）不进入。
+    for (const [label, attack] of [
+      [
+        "finalFixed",
+        {
+          baseValue: 1000,
+          initialPercentage: [],
+          initialFixed: [],
+          finalPercentage: [],
+          finalFixed: [500],
+        },
+      ],
+      [
+        "finalPercentage",
+        {
+          baseValue: 1000,
+          initialPercentage: [],
+          initialFixed: [],
+          finalPercentage: [0.5],
+          finalFixed: [],
+        },
+      ],
+    ] as const) {
+      const result = resultFor(
+        withGeneralStat(voidflareInput({ mindscapeRank: 1 }), "attack", attack),
+      )
+      expect(result.ok, label).toBe(true)
+      if (result.ok)
+        closeTo(
+          result.value.factors.nonCritical.baseDamage!,
+          1400,
+          `${label} excluded from the restricted attack`,
+        )
+    }
+    // SettledInitialStatInput 同样只保留已结算局外值；局内 final 不进入。
+    const settled = resultFor(
+      withGeneralStat(voidflareInput({ mindscapeRank: 1 }), "attack", {
+        settledInitialValue: 1000,
+        baseValue: 1000,
+        finalPercentage: [0.5],
+        finalFixed: [500],
+      }),
+    )
+    expect(settled.ok, JSON.stringify(settled)).toBe(true)
+    if (settled.ok)
+      closeTo(
+        settled.value.factors.nonCritical.baseDamage!,
+        1400,
+        "settled initial attack keeps the out-of-combat value",
+      )
+  })
+
+  it("keeps initial-stage adjustments in the restricted readings", () => {
+    // 局外初始调整（initialPercentage/initialFixed）属于局外基线，必须计入。
+    const attackInitial = resultFor(
+      withGeneralStat(voidflareInput({ mindscapeRank: 1 }), "attack", {
+        baseValue: 1000,
+        initialPercentage: [0.4],
+        initialFixed: [100],
+        finalPercentage: [],
+        finalFixed: [],
+      }),
+    )
+    expect(attackInitial.ok, JSON.stringify(attackInitial)).toBe(true)
+    if (attackInitial.ok)
+      closeTo(
+        attackInitial.value.factors.nonCritical.baseDamage!,
+        1000 * 1.4 + 100 + 400,
+        "initial attack adjustments counted",
+      )
+    const proficiencyInitial = resultFor(
+      withGeneralStat(
+        voidflareInput({ mindscapeRank: 1 }),
+        "anomalyProficiency",
+        {
+          baseValue: 100,
+          initialPercentage: [],
+          initialFixed: [50],
+          finalPercentage: [],
+          finalFixed: [],
+        },
+      ),
+    )
+    expect(proficiencyInitial.ok, JSON.stringify(proficiencyInitial)).toBe(true)
+    if (proficiencyInitial.ok)
+      closeTo(
+        proficiencyInitial.value.factors.nonCritical.anomalyProficiency!,
+        (100 + 50 + 96 + 50) / 100,
+        "initial proficiency adjustments counted",
+      )
+  })
+
+  it("excludes the in-combat proficiency baseline while R and the multiplier keep the full current reading", () => {
+    // 世界局内精通 +100：受限 P 仍 246；完整当前精通 346 继续进入
+    // R=1+346/5000+0.1 与耀变倍率 3.2+346×0.002，其余乘区恒等。
+    const result = resultFor(
+      withGeneralStat(
+        voidflareInput({ mindscapeRank: 1 }),
+        "anomalyProficiency",
+        {
+          baseValue: 100,
+          initialPercentage: [],
+          initialFixed: [],
+          finalPercentage: [],
+          finalFixed: [100],
+        },
+      ),
+    )
+    expect(result.ok, JSON.stringify(result)).toBe(true)
+    if (!result.ok) return
+    const factors = result.value.factors.nonCritical
+    closeTo(factors.baseDamage!, 1400, "restricted attack identity")
+    closeTo(factors.anomalyProficiency!, 2.46, "restricted proficiency")
+    closeTo(factors.refringe!, 1.1692, "full current proficiency refringe")
+    closeTo(
+      factors.luminizeMultiplier!,
+      3.892,
+      "full current proficiency multiplier",
+    )
+    closeTo(
+      result.value.nonCritical,
+      1400 * 2.5 * 2.46 * 1.1692 * 3.892 * 2,
+      "independent in-combat baseline value",
     )
   })
 
@@ -876,26 +1040,70 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
           issue.message.includes("requires mindscape rank 6"),
         ),
       ).toBe(true)
-    // 独立防御等级被拒绝。
-    const divergentDefense = resultFor(
-      voidflareInput({
-        damage: {
-          defense: {
-            attackerLevel: 30,
-            targetBaseDefense: 0,
-            defensePercentageAdjustments: [],
-            penetrationValues: [],
-          },
-        } as never,
-      }),
-    )
-    expect(divergentDefense.ok).toBe(false)
-    if (!divergentDefense.ok)
-      expect(
-        divergentDefense.issues.some((issue) =>
-          issue.pointer.includes("/damage/defense/attackerLevel"),
+    // 独立防御等级是唯一等级来源的重复输入：同值与分歧值都拒绝，等级只在
+    // 具名来源上提供并由内部组装。
+    for (const [label, attackerLevel] of [
+      ["same value", 60],
+      ["divergent value", 30],
+    ] as const) {
+      const duplicatedDefense = resultFor(
+        voidflareInput({
+          damage: {
+            defense: {
+              attackerLevel,
+              targetBaseDefense: 0,
+              defensePercentageAdjustments: [],
+              penetrationValues: [],
+            },
+          } as never,
+        }),
+      )
+      expect(duplicatedDefense.ok, label).toBe(false)
+      if (!duplicatedDefense.ok)
+        expect(
+          duplicatedDefense.issues.some(
+            (issue) =>
+              issue.pointer.includes("/damage/defense/attackerLevel") &&
+              issue.code === "INVALID_INPUT",
+          ),
+          label,
+        ).toBe(true)
+    }
+    // 旧分支（普通异常来源）继续消费显式 attackerLevel，不受新分支约束。
+    const baseInput = voidflareInput({ mindscapeRank: 1 })
+    const legacyCompatible = calculateStaticDamageFromCatalog({
+      ...baseInput,
+      world: {
+        ...baseInput.world,
+        entities: baseInput.world.entities.map((entity) =>
+          entity.kind === "actor" && entity.entityId === "entity:velina"
+            ? {
+                ...entity,
+                generalStats: {
+                  attack: general(2000),
+                  anomalyProficiency: general(120),
+                },
+                directStats: {
+                  criticalRate: { baseValue: 0.05, additions: [] },
+                  criticalDamage: { baseValue: 0.5, additions: [] },
+                  penetrationRatio: { baseValue: 0, additions: [] },
+                },
+              }
+            : entity,
         ),
-      ).toBe(true)
+      },
+      damage: {
+        ...baseInput.damage,
+        anomalySource: { entityId: "entity:velina", level: 55 },
+        defense: {
+          attackerLevel: 55,
+          targetBaseDefense: 0,
+          defensePercentageAdjustments: [],
+          penetrationValues: [],
+        },
+      } as never,
+    })
+    expect(legacyCompatible.ok, JSON.stringify(legacyCompatible)).toBe(true)
   })
 
   it("validates the hit shape and identity contract", () => {
@@ -1118,6 +1326,101 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
           kind,
         ).toBe(true)
     }
+  })
+
+  it("rejects malformed mechanism metadata with precise pointers instead of throwing", () => {
+    // 结构错误（对象/数值/null/字符串/非法成员）必须返回带精确 pointer 的
+    // 失败 Result；元素豁免字段曾把非数组原始值当数组遍历而抛出裸 TypeError。
+    const field = "wEngineMasteryElementExemptEffectIds" as const
+    const malformed: [label: string, value: unknown][] = [
+      ["object", {}],
+      ["number", 42],
+      ["null", null],
+      [
+        "string",
+        "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+      ],
+      ["illegal member", [42]],
+      ["null member", [null]],
+    ]
+    for (const [label, value] of malformed) {
+      const brokenCatalog: StaticEffectCatalog = {
+        ...catalog,
+        mechanisms: catalog.mechanisms!.map((mechanism, index) =>
+          index === 0
+            ? ({ ...mechanism, [field]: value } as unknown as typeof mechanism)
+            : mechanism,
+        ),
+      }
+      const attempt = () =>
+        resultFor(voidflareInput({ catalog: brokenCatalog }))
+      expect(attempt, `${field} ${label}`).not.toThrow()
+      const result = attempt()
+      expect(result.ok, `${field} ${label}`).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) =>
+            issue.pointer.startsWith(
+              "/catalog/mechanisms/0/wEngineMasteryElementExemptEffectIds",
+            ),
+          ),
+          `${field} ${label}`,
+        ).toBe(true)
+    }
+    // 相邻标记字段同样只返回失败 Result，不抛异常。
+    for (const [label, fieldKey] of [
+      ["self attack convert", "selfAttackConvertEffectIds"],
+      ["w-engine mastery", "wEngineMasteryEffectIds"],
+      ["four-piece mastery", "driveDiscFourPieceMasteryEffectIds"],
+      ["radiance resistance", "radianceResistanceIgnoreEffectIds"],
+      ["strengths", "strengths"],
+    ] as const) {
+      const brokenCatalog: StaticEffectCatalog = {
+        ...catalog,
+        mechanisms: catalog.mechanisms!.map((mechanism, index) =>
+          index === 0
+            ? ({ ...mechanism, [fieldKey]: 42 } as unknown as typeof mechanism)
+            : mechanism,
+        ),
+      }
+      const attempt = () =>
+        resultFor(voidflareInput({ catalog: brokenCatalog }))
+      expect(attempt, `${label} number`).not.toThrow()
+      const result = attempt()
+      expect(result.ok, `${label} number`).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) =>
+            issue.pointer.startsWith(`/catalog/mechanisms/0/${fieldKey}`),
+          ),
+          `${label} number`,
+        ).toBe(true)
+    }
+    // 普通异常来源路径（不带具名机制）同样受目录结构保护：失败但不抛异常。
+    const baseInput = voidflareInput({ mindscapeRank: 1 })
+    const brokenCatalog: StaticEffectCatalog = {
+      ...catalog,
+      mechanisms: catalog.mechanisms!.map((mechanism, index) =>
+        index === 0
+          ? ({
+              ...mechanism,
+              wEngineMasteryElementExemptEffectIds: 42,
+            } as unknown as typeof mechanism)
+          : mechanism,
+      ),
+    }
+    const normalAttempt = () =>
+      calculateStaticDamageFromCatalog({
+        ...baseInput,
+        catalog: brokenCatalog,
+        damage: {
+          ...baseInput.damage,
+          anomalySource: { entityId: "entity:velina", level: 60 },
+        } as never,
+      })
+    expect(normalAttempt).not.toThrow()
+    const normalResult = normalAttempt()
+    expect(normalResult.ok).toBe(false)
   })
 
   it("rejects the mechanism when the catalog does not declare it while normal calls stay compatible", () => {

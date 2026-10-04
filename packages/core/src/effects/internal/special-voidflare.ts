@@ -245,12 +245,11 @@ export function validateRemielleSpecialVoidflareInput(options: {
     ? (damage["defense"] as Record<string, unknown>)
     : undefined
   if (defense !== undefined && defense["attackerLevel"] !== undefined) {
-    if (defense["attackerLevel"] !== level)
-      report(
-        "CONTEXT_MISMATCH",
-        "/damage/defense/attackerLevel",
-        "The special Voidflare defense level is assembled from the anomaly source level and rejects a divergent value",
-      )
+    report(
+      "INVALID_INPUT",
+      "/damage/defense/attackerLevel",
+      "The special Voidflare defense level is assembled from the anomaly source level only; do not provide attackerLevel, not even the same value",
+    )
   }
   const damageBonus = damage["damageBonus"]
   if (!Array.isArray(damageBonus) || damageBonus.length !== 0)
@@ -338,6 +337,36 @@ export function remielleSpecialVoidflareRejectsEffect(
 }
 
 /**
+ * 特殊虚曜受限读取的局外投影：把源角色 attack 与 anomalyProficiency 的局内
+ * final 调整清空，保留 base/initial/settled 初始阶段与二件套所在的局外面板。
+ * 固定来源的口径是"局外攻击 + 指定自身转模；局外精通 + 指定音擎/四件"，
+ * 世界中的普通局内基线（finalPercentage/finalFixed）不进入受限读取；
+ * R/耀变转换与其他普通路径继续使用原始 world，输入对象不被修改。
+ */
+function outOfCombatReadingWorld(
+  world: StaticDamageInput["world"],
+  entityId: EntityId,
+): StaticDamageInput["world"] {
+  return {
+    ...world,
+    entities: world.entities.map((entity) => {
+      if (entity.kind !== "actor" || entity.entityId !== entityId) return entity
+      const generalStats = { ...entity.generalStats }
+      for (const stat of ["attack", "anomalyProficiency"] as const) {
+        const input = generalStats[stat]
+        if (input !== undefined)
+          generalStats[stat] = {
+            ...input,
+            finalPercentage: [],
+            finalFixed: [],
+          }
+      }
+      return { ...entity, generalStats }
+    }),
+  }
+}
+
+/**
  * 特殊虚曜分支的受限读取组装：在独立求值上下文中计算受限攻击、受限精通、
  * 受限穿透率与自身穿透贡献，并按具名来源元数据拆分通用与耀变专属抗穿。
  * 全部读取复用同一 effects 引擎与选择展开，不缓存跨调用状态。
@@ -395,6 +424,7 @@ export function assembleRemielleSpecialVoidflareReadings(options: {
     ...lowInput,
     definitions: restrictedDefinitions,
     selections: restrictedReadingSelections,
+    world: outOfCombatReadingWorld(lowInput.world, context.entityId),
   })
   if (!restrictedReading.ok) {
     for (const issue of restrictedReading.issues)

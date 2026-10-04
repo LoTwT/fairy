@@ -560,15 +560,15 @@ export function validateStaticCatalog(
       (rule) => isStatAdjustment(rule, "anomalyProficiency", "w-engine"),
       "A w-engine mastery marking must reference an anomaly-proficiency w-engine rule",
     )
-    markedRules(
+    const exemptIds = markedRules(
       "wEngineMasteryElementExemptEffectIds",
       (rule) => isStatAdjustment(rule, "anomalyProficiency", "w-engine"),
       "An element-exempt marking must reference an anomaly-proficiency w-engine rule",
     )
-    for (const id of (mechanism["wEngineMasteryElementExemptEffectIds"] as
-      | unknown[]
-      | undefined) ?? [])
-      if (typeof id === "string" && !wEngineMasteryIds.has(id))
+    // 只遍历已校验的集合；原始值可能不是数组，直接遍历会把结构错误变成裸
+    // TypeError 泄漏给调用方。
+    for (const id of exemptIds)
+      if (!wEngineMasteryIds.has(id))
         collector.report(
           "CONTEXT_MISMATCH",
           `${mp}/wEngineMasteryElementExemptEffectIds`,

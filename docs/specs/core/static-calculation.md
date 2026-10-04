@@ -331,7 +331,8 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 `{ mechanism: "remielle-special-voidflare", entityId, level, strength }`，计算她本人特殊[虚曜]对应的
 一次耀变。`entityId` 必须通过 actorSources 映射到 1581 且等于本次耀变 actor；`level` 是角色等级
 （有限整数 1—60，不做 round/clamp），既是特殊增伤区（1 + 0.025 × 等级）的唯一来源，也在内部组装
-防御等级，不接受独立的 `defense.attackerLevel` 分歧值。`strength` 为 `full`（最低影画 1）或
+防御等级：该分支的 `defense` 不接收 `attackerLevel`（公开类型省略该字段，运行时对任何提供值——
+包括与等级相同的值——明确拒绝）；普通异常来源分支保持原有 `defense.attackerLevel` 输入不变。`strength` 为 `full`（最低影画 1）或
 `mindscape-6-quarter`（最低影画 6，倍率 ×0.25），影画门槛按目录机制元数据校验。此分支只接受
 lumiflux 元素、单项 `attack` 基础伤害项（直接倍率 1）与 `from-effects` 异化，拒绝 `hit.actionSnapshotId`、
 伤害项 `statSource` 的历史快照或其它实体、手工已结算增伤/异化倍率及调用方耀变倍率调整；选中
@@ -363,4 +364,4 @@ current 精通读取仍保留以太条件。抗性沿用显式 baseline：调用
 特殊虚曜耀变已按具名机制接入（见上文与[修订 10](../data/zzz-hp-static-effects.md#修订-10蕾米埃尔自身特殊虚曜接入)），
 普通异常/紊乱/异放/乱流仍不接受她作为 `anomalySource`，她提供给其他来源异常的已映射团队增益继续可用。锐化伤害按[锐化伤害公式](formulas/sharpen-damage.md)以最终防御缩放、锐暴区
 结算，其技能动作与增益接入见[技能倍率规范](../data/skill-actions.md)与[增益数据接入](../data/zzz-hp-static-effects.md)。
-十个完整配装场景的验证边界见[端到端验收](../../plans/static-e2e-acceptance.md)，不推断全部角色、技能或未来资料版本均已验证。
+十四个完整配装场景的验证边界见[端到端验收](../../plans/static-e2e-acceptance.md)，不推断全部角色、技能或未来资料版本均已验证。

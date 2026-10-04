@@ -115,8 +115,8 @@ async function inputFor(
               baseLuminizeMultiplier: expected.action.multipliers[0]!,
               multiplicativeLuminizeMultiplierAdjustments: [],
             },
+            // 特殊虚曜分支：防御等级唯一来自具名来源，不提供 attackerLevel。
             defense: {
-              attackerLevel: 60,
               targetBaseDefense: scenario.target.baseDefense,
               defensePercentageAdjustments: [],
               penetrationValues: [],
@@ -821,7 +821,6 @@ describe("remielle special Voidflare scenarios against the independent reference
         damage: {
           ...original,
           anomalySource: { ...original.anomalySource, level: 30 },
-          defense: { ...original.defense, attackerLevel: 30 },
         },
       },
     })
@@ -832,5 +831,120 @@ describe("remielle special Voidflare scenarios against the independent reference
           issue.message.includes("only supports level 60"),
         ),
       ).toBe(true)
+  })
+
+  it("keeps historical full luminize hit objects assignable and reused by the identity auto-fill", async () => {
+    const scenario = voidflareScenarios.find(
+      (s) => s.id === "remiel-voidflare",
+    )!
+    const base = await inputFor(scenario)
+    // 历史完整 hit 形状（含动作身份字段与 actionSnapshotId 缺省）必须仍可赋值
+    // 给公开输入类型；身份字段由入口按已解析动作覆盖，不采用调用方提供的值。
+    const historicalHit: NonNullable<StaticActionCalculationInput["luminize"]> =
+      {
+        hit: {
+          actorId: "entity:stale-actor",
+          targetId: "entity:stale-target",
+          actionId: "action:stale-action",
+          skillCategory: "special",
+          skillTags: ["stale"],
+          skillTargetIds: ["stale-target-id"],
+          element: base.luminize!.hit.element,
+          damageItems: base.luminize!.hit.damageItems,
+        },
+        damage: base.luminize!.damage,
+      }
+    const reused = calculateStaticActionDamage({
+      ...base,
+      luminize: historicalHit,
+    })
+    const concise = calculateStaticActionDamage({
+      ...base,
+      luminize: { hit: base.luminize!.hit, damage: base.luminize!.damage },
+    })
+    expect(reused.ok, JSON.stringify(reused)).toBe(true)
+    expect(concise.ok, JSON.stringify(concise)).toBe(true)
+    if (reused.ok && concise.ok) {
+      expect(reused.value.kind).toBe("damage")
+      expect(concise.value.kind).toBe("damage")
+      if (reused.value.kind === "damage" && concise.value.kind === "damage") {
+        expect(reused.value.segments[0]!.damage.nonCritical).toBe(
+          concise.value.segments[0]!.damage.nonCritical,
+        )
+        expect(reused.value.totals.nonCritical).toBe(
+          concise.value.totals.nonCritical,
+        )
+      }
+    }
+    // 特殊虚曜分支仍拒绝 actionSnapshotId 快照覆盖（既定行为不变）。
+    const special = luminizeDamageOf(base)
+    if (!("mechanism" in special.anomalySource))
+      throw new Error("Expected the special Voidflare source")
+    const snapshotted = calculateStaticActionDamage({
+      ...base,
+      luminize: {
+        hit: {
+          ...base.luminize!.hit,
+          actionSnapshotId: "snapshot:history",
+        },
+        damage: base.luminize!.damage,
+      },
+    })
+    expect(snapshotted.ok).toBe(false)
+    if (!snapshotted.ok)
+      expect(
+        snapshotted.issues.some((issue) =>
+          issue.pointer.includes("actionSnapshotId"),
+        ),
+      ).toBe(true)
+  })
+
+  it("keeps the normal luminize branch consumable at this entry with an explicit plain source", async () => {
+    // 普通分支回归：蕾米耀变动作 + 维琳娜作为普通异常来源（等级显式、defense
+    // 携带旧契约的 attackerLevel），历史完整 hit 同样可复用。
+    const scenario = voidflareScenarios.find(
+      (s) => s.id === "remiel-voidflare",
+    )!
+    const base = await inputFor(scenario)
+    const velinaActor = base.actors.find(
+      (actor) => actor.agentEntityId === "1561",
+    )
+    if (velinaActor === undefined)
+      throw new Error("Expected Velina in the team")
+    const damage = luminizeDamageOf(base)
+    const plain = calculateStaticActionDamage({
+      ...base,
+      actorId: base.actorId,
+      luminize: {
+        hit: {
+          ...base.luminize!.hit,
+          damageItems: [
+            {
+              mode: "direct" as const,
+              role: "base" as const,
+              itemId: "plain-luminize",
+              stat: "attack" as const,
+              statSource: { entityId: velinaActor.entityId },
+              damageMultiplier: 1,
+            },
+          ],
+        },
+        damage: {
+          ...damage,
+          anomalySource: { entityId: velinaActor.entityId, level: 60 },
+          defense: {
+            attackerLevel: 60,
+            targetBaseDefense: scenario.target.baseDefense,
+            defensePercentageAdjustments: [],
+            penetrationValues: [],
+          },
+        } as never,
+      },
+    })
+    expect(plain.ok, JSON.stringify(plain)).toBe(true)
+    if (plain.ok && plain.value.kind === "damage") {
+      const factors = plain.value.segments[0]!.damage.factors.nonCritical
+      expect(factors.anomalyDamageLevel).toBeDefined()
+    }
   })
 })

@@ -668,11 +668,38 @@ export interface RemielleSpecialVoidflareAnomalySource {
   readonly strength: "full" | "mindscape-6-quarter"
 }
 
+/**
+ * 目录 luminize 分支的公开 defense 形状：普通异常来源沿用含 `attackerLevel` 的
+ * 完整输入；特殊虚曜机制分支不接收 `attackerLevel`（同值也拒绝），等级唯一来自
+ * 具名来源并由内部组装。
+ */
+export type StaticCatalogDefenseInput = Omit<
+  StaticDefenseInput,
+  "attackerLevel"
+>
+
+/** luminize 分支的异常来源与防御形状：普通来源与具名特殊虚曜机制互斥。 */
+export type StaticCatalogLuminizeDamageBranch =
+  | {
+      /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
+      readonly anomalySource: AttributeSource & {
+        readonly level: number
+      }
+      readonly defense: StaticDefenseInput
+    }
+  | {
+      readonly anomalySource: RemielleSpecialVoidflareAnomalySource
+      readonly defense: StaticCatalogDefenseInput
+    }
+
 export type StaticCatalogDamageParameters =
   StaticDamageParameters extends infer D
     ? D extends StaticDamageParameters
       ? D extends { readonly refringe: unknown }
-        ? Omit<D, "refringe" | "luminizeMultiplier" | "anomalySource"> &
+        ? Omit<
+            D,
+            "refringe" | "luminizeMultiplier" | "anomalySource" | "defense"
+          > &
             (D extends { readonly kind: "luminize" }
               ? {
                   readonly luminizeMultiplier: Pick<
@@ -680,18 +707,13 @@ export type StaticCatalogDamageParameters =
                     | "baseLuminizeMultiplier"
                     | "multiplicativeLuminizeMultiplierAdjustments"
                   >
-                  /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
-                  readonly anomalySource:
-                    | (AttributeSource & {
-                        readonly level: number
-                      })
-                    | RemielleSpecialVoidflareAnomalySource
-                }
+                } & StaticCatalogLuminizeDamageBranch
               : {
                   /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
                   readonly anomalySource: AttributeSource & {
                     readonly level: number
                   }
+                  readonly defense: StaticDefenseInput
                 }) & {
               readonly refringe:
                 | { readonly mode: "from-effects" }
