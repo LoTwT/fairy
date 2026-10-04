@@ -66,6 +66,7 @@ const direct = new Set<Stat>([
   "criticalRate",
   "criticalDamage",
   "penetrationRatio",
+  "sharpCriticalDamage",
 ])
 const slots = [1, 2, 3, 4, 5, 6] as const
 
@@ -1079,7 +1080,9 @@ export function calculateStaticActionDamage(
       )
       for (const segment of action.calculation.segments) {
         requireValue(
-          segment.damageKind === "regular" || segment.damageKind === "sheer",
+          segment.damageKind === "regular" ||
+            segment.damageKind === "sheer" ||
+            segment.damageKind === "sharpen",
           `/action/segments/${segment.segmentId}/damageKind`,
           "Unsupported action damage kind",
         )
@@ -1143,7 +1146,19 @@ export function calculateStaticActionDamage(
                   penetrationValues: [panel.penetrationValue],
                 },
               }
-            : { ...commonDamage, kind: "sheer", sheerDamageBonus: [] }
+            : segment.damageKind === "sharpen"
+              ? {
+                  ...commonDamage,
+                  kind: "sharpen",
+                  sharpenDamageBonus: [],
+                  defense: {
+                    attackerLevel: 60,
+                    targetBaseDefense: input.target.baseDefense,
+                    defensePercentageAdjustments: [],
+                    penetrationValues: [panel.penetrationValue],
+                  },
+                }
+              : { ...commonDamage, kind: "sheer", sheerDamageBonus: [] }
         for (let repetition = 1; repetition <= segment.repeat; repetition++) {
           const result = unwrap(
             calculateStaticDamageFromCatalog({

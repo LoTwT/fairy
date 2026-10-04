@@ -184,7 +184,12 @@ export function convertAgentActions(
     if (entry.rowKind === "daze") return action
     if (!damageCoefficient || !entry.element || !entry.skillCategory)
       throw new Error(`Incomplete ready action: ${entry.actionId}`)
-    const stat = entry.damageKind === "sheer" ? "sheerForce" : "attack"
+    const stat =
+      entry.damageKind === "sheer"
+        ? "sheerForce"
+        : entry.damageKind === "sharpen"
+          ? "defense"
+          : "attack"
     const segments: ActionDamageSegment[] = entry.individualHits
       ? entry.individualHits.map((hit, index) => {
           if (

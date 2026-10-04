@@ -138,6 +138,11 @@ export function convertAgentAttributes(
     criticalRate: { unit: "ratio", value: stat("crit") / 10000 },
     criticalDamage: { unit: "ratio", value: stat("critDamage") / 10000 },
     penetrationRatio: { unit: "ratio", value: stat("penRate") / 10000 },
+    // 锐暴伤害基础值（万分比）；仅锋御克拉蕾为 150%，其余代理人为 0。
+    sharpCriticalDamage: {
+      unit: "ratio",
+      value: stat("sharpCriticalDamage") / 10000,
+    },
   }
   if (Object.keys(data.extraLevel).toSorted().join(",") !== "1,2,3,4,5,6")
     throw new Error(

@@ -399,8 +399,8 @@ assert.deepEqual(resolvedNicole.resolutionContext, { agentEntityId: "1031", mind
 assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
 const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
 assert.equal(actionManifest.members.length, api.agentNames.length)
-assert.equal(actionManifest.coverage.damage, 1101)
-assert.equal(actionManifest.coverage.unavailable, 35)
+assert.equal(actionManifest.coverage.damage, 1126)
+assert.equal(actionManifest.coverage.unavailable, 10)
 assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
 const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
 assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)

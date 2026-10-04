@@ -857,3 +857,254 @@ describe("static facts, selection and dependency boundaries", () => {
     ])
   })
 })
+
+describe("static sharpen damage integrates the sharp critical formula", () => {
+  const sharpenInput = (
+    options: {
+      readonly criticalRate?: number
+      readonly sharpCriticalDamage?: number
+      readonly effects?: readonly ContributionRule[]
+      readonly targetBaseDefense?: number
+    } = {},
+  ): StaticDamageInput => {
+    const base = inputFor(options.effects)
+    return {
+      ...base,
+      world: {
+        ...base.world,
+        entities: base.world.entities.map((entity) =>
+          entity.kind === "actor" && entity.entityId === "entity:attacker"
+            ? {
+                ...entity,
+                generalStats: {
+                  ...entity.generalStats,
+                  defense: general(1500),
+                },
+                directStats: {
+                  criticalRate: {
+                    baseValue: options.criticalRate ?? 1.35,
+                    additions: [],
+                  },
+                  criticalDamage: { baseValue: 2, additions: [] },
+                  penetrationRatio: { baseValue: 0, additions: [] },
+                  sharpCriticalDamage: {
+                    baseValue: options.sharpCriticalDamage ?? 1.5,
+                    additions: [],
+                  },
+                },
+              }
+            : entity,
+        ),
+      },
+      hit: {
+        ...base.hit,
+        damageItems: [
+          { itemId: "defense", damageMultiplier: 2, stat: "defense" },
+        ],
+      },
+      damage: {
+        kind: "sharpen",
+        damageBonus: [0.5],
+        sharpenDamageBonus: [],
+        defense: {
+          attackerLevel: 60,
+          targetBaseDefense: options.targetBaseDefense ?? 953,
+          defensePercentageAdjustments: [],
+          penetrationValues: [],
+        },
+        resistance: {
+          targetResistance: 0,
+          targetResistanceReductions: [],
+          attackerResistanceIgnoreValues: [],
+        },
+        damageTaken: {
+          targetDamageTakenIncreases: [],
+          targetDamageTakenReductions: [],
+        },
+        stunDamage: {
+          isTargetStunned: false,
+          targetBaseStunDamageMultiplier: 1,
+          targetStunDamageMultiplierAdjustments: [],
+        },
+      },
+    }
+  }
+
+  it("reproduces the fixed-source sharpen baseline with named sharp-critical semantics", () => {
+    const result = ok(calculateStaticDamage(sharpenInput()))
+    // 防御 1500 × 倍率 2 × 增伤 1.5 × 防御区 794/1747；锐暴区 3.8125。
+    expect(result.nonCritical).toBeCloseTo(2045.220377790498, 9)
+    expect(result.critical).toBeCloseTo(7797.402690326274, 9)
+    expect(result.criticalRate).toBe(1)
+    expect(result.expected).toBeCloseTo(7797.402690326274, 9)
+    expect(result.criticalSemantics).toBe("sharp-critical-forced-first-layer")
+    expect(result.factors.nonCritical).toMatchObject({
+      baseDamage: 3000,
+      damageBonus: 1.5,
+      sharpenDamageBonus: 1,
+      sharpCritical: 1,
+    })
+    expect(result.factors.critical!.sharpCritical).toBeCloseTo(3.8125, 12)
+  })
+
+  it("keeps regular critical damage out of the sharp critical zone", () => {
+    const result = ok(
+      calculateStaticDamage(
+        sharpenInput({ criticalRate: 1.35, sharpCriticalDamage: 1.5 }),
+      ),
+    )
+    expect(result.critical).toBeCloseTo(7797.402690326274, 9)
+  })
+
+  it("applies the independent sharpen damage bonus channel once", () => {
+    const result = ok(
+      calculateStaticDamage(
+        sharpenInput({ effects: [factor("sharpen-damage-bonus", 0.3)] }),
+      ),
+    )
+    expect(result.expected).toBeCloseTo(10136.623497424156, 9)
+    expect(result.factors.critical!.sharpenDamageBonus).toBeCloseTo(1.3, 12)
+  })
+
+  it("adds sharp critical damage battle contributions to the direct stat", () => {
+    const result = ok(
+      calculateStaticDamage({
+        ...sharpenInput(),
+        definitions: definitions([
+          rule("sharp-critical-damage-bonus", {
+            kind: "stat-adjustment",
+            stat: "sharpCriticalDamage",
+            stage: "direct",
+            value: literal("ratio", 0.12),
+          } as ContributionRule["operation"]),
+        ]),
+        selections: [
+          {
+            effectId: "environment:static:sharp-critical-damage-bonus",
+            bindingId: "binding:static",
+            layers: 1,
+          },
+        ],
+      }),
+    )
+    expect(result.critical).toBeCloseTo(8396.734069834001, 9)
+  })
+
+  it("composes the expectation with the clamped rate weight on both sides of one", () => {
+    const below = ok(calculateStaticDamage(sharpenInput({ criticalRate: 0.5 })))
+    expect(below.criticalRate).toBe(0.5)
+    expect(below.expected).toBeCloseTo(
+      0.5 * 2045.220377790498 + 0.5 * 2045.220377790498 * 2.5,
+      9,
+    )
+    const zero = ok(calculateStaticDamage(sharpenInput({ criticalRate: -0.1 })))
+    expect(zero.criticalRate).toBe(0)
+    expect(zero.expected).toBeCloseTo(zero.nonCritical, 9)
+  })
+
+  it("keeps the overflow layer as an expectation at rates above one", () => {
+    const result = ok(
+      calculateStaticDamage(sharpenInput({ criticalRate: 2.5 })),
+    )
+    expect(result.criticalRate).toBe(1)
+    expect(result.factors.critical!.sharpCritical).toBeCloseTo(6.25, 12)
+    expect(result.expected).toBeCloseTo(result.critical!, 9)
+    const zeroBonus = ok(
+      calculateStaticDamage(
+        sharpenInput({ criticalRate: 2.5, sharpCriticalDamage: 0 }),
+      ),
+    )
+    expect(zeroBonus.expected).toBeCloseTo(zeroBonus.nonCritical, 9)
+  })
+
+  it("keeps sheer-only channels out of the sharpen chain", () => {
+    const result = ok(
+      calculateStaticDamage({
+        ...sharpenInput({ effects: [factor("sheer-damage-bonus", 0.6)] }),
+      }),
+    )
+    expect(result.factors.critical).not.toHaveProperty("sheerDamageBonus")
+    expect(result.factors.nonCritical).not.toHaveProperty("sheerDamageBonus")
+    expect(
+      result.notApplicableContributions.map((c) => c.address),
+    ).toMatchObject([
+      {
+        kind: "factor",
+        channel: "sheer-damage-bonus",
+        entityId: "entity:attacker",
+        hitId: "hit:static",
+      },
+    ])
+  })
+
+  it("reports sharpen-only channels as not applicable to regular damage", () => {
+    const input = inputFor([factor("sharpen-damage-bonus", 0.3)])
+    const result = ok(calculateStaticDamage(input))
+    expect(result.criticalSemantics).toBe("critical-hit")
+    expect(
+      result.notApplicableContributions.map((c) => c.address),
+    ).toMatchObject([
+      {
+        kind: "factor",
+        channel: "sharpen-damage-bonus",
+        entityId: "entity:attacker",
+        hitId: "hit:static",
+      },
+    ])
+  })
+
+  it("rejects sharpen damage without the sharpen damage bonus baseline", () => {
+    const input = sharpenInput()
+    const damage = input.damage
+    if (damage.kind !== "sharpen") throw new Error("sharpen")
+    const withoutBonus = {
+      ...damage,
+      sharpenDamageBonus: undefined,
+    } as unknown as typeof damage
+    const result = calculateStaticDamage({ ...input, damage: withoutBonus })
+    issue(result, "INVALID_INPUT", "/damage/sharpenDamageBonus")
+  })
+
+  it("rejects unknown sharpen damage fields", () => {
+    const input = sharpenInput()
+    const result = calculateStaticDamage({
+      ...input,
+      damage: {
+        ...input.damage,
+        sheerDamageBonus: [],
+      } as unknown as StaticDamageParameters,
+    })
+    issue(result, "INVALID_INPUT", "/damage/sheerDamageBonus")
+  })
+
+  it("rejects sharpen evaluation without the sharp critical damage stat", () => {
+    const input = sharpenInput()
+    const result = calculateStaticDamage({
+      ...input,
+      world: {
+        ...input.world,
+        entities: input.world.entities.map((entity) =>
+          entity.kind === "actor" && entity.entityId === "entity:attacker"
+            ? {
+                ...entity,
+                directStats: {
+                  criticalRate: { baseValue: 1.35, additions: [] },
+                  criticalDamage: { baseValue: 2, additions: [] },
+                  penetrationRatio: { baseValue: 0, additions: [] },
+                },
+              }
+            : entity,
+        ),
+      },
+    })
+    expect(result.ok).toBe(false)
+    if (result.ok) return
+    expect(
+      result.issues.some(
+        (entry) =>
+          entry.code === "MISSING_FACT" &&
+          entry.message.includes("sharpCriticalDamage"),
+      ),
+    ).toBe(true)
+  })
+})

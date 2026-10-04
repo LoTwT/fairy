@@ -51,6 +51,7 @@ const sourceSkillCategories: Readonly<Record<string, string>> = {
   "chain": "chain",
   "ultimate": "ultimate",
   "quick-assist": "assist",
+  "counter-assist": "assist",
   "assist-follow-up": "assist",
 }
 

@@ -790,7 +790,16 @@ describe("fixed-source catalog conformance", () => {
     "/agents/7/mindscapeBuffs/2/effectBlocks/0/effects/0",
     "/agents/35/mindscapeBuffs/0/effectBlocks/0/effects/0",
     "/agents/35/mindscapeBuffs/6/effectBlocks/0/effects/0",
+    // 克拉蕾核心被动状态暴击率按核心档位展开；核心 7 参考继续执行。
+    "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/0",
   ])
+  /** 猩红渴望电属性限制修正的位置：上游 elementFilter=all，仍按来源数值比对。 */
+  const elementScopeCorrectedPointers = new Set(
+    Array.from({ length: 5 }, (_, rank) => rank).flatMap((rank) => [
+      `/wengines/65/refinementBuffs/${rank}/effectBlocks/1/effects/0`,
+      `/wengines/65/refinementBuffs/${rank}/effectBlocks/2/effects/0`,
+    ]),
+  )
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
@@ -799,7 +808,8 @@ describe("fixed-source catalog conformance", () => {
           (r) =>
             r.status === "converted" ||
             potentialExplainedPointers.has(r.pointer) ||
-            coreRankExpandedPointers.has(r.pointer),
+            coreRankExpandedPointers.has(r.pointer) ||
+            elementScopeCorrectedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -842,6 +852,270 @@ describe("fixed-source catalog conformance", () => {
       )
     }
   }, 120_000)
+  it("registers the sharpen scope corrections and named differences", () => {
+    for (const differenceId of [
+      "claret-remnant-edge-self-target",
+      "claret-mindscape1-multiplier-encoding",
+      "scarlet-craving-explicit-element",
+    ])
+      expect(
+        catalog.differences.some((d) => d.differenceId === differenceId),
+        differenceId,
+      ).toBe(true)
+    const remnant = catalog.options.find((o) =>
+      o.optionId.endsWith("eff-mtrgmqhd-jgzfvq"),
+    )!
+    expect(remnant.variants[0]!.differences).toContain(
+      "claret-remnant-edge-self-target",
+    )
+    const mindscape1 = catalog.options.find((o) =>
+      o.optionId.endsWith("eff-mtse9xm8-q641yp"),
+    )!
+    expect(mindscape1.target).toBe("self")
+    expect(mindscape1.variants[0]!.configuration.minimumMindscape).toBe(1)
+    for (const block of ["eff-mtsemp5m-q1jh4f", "eff-mtsenpok-prx4yj"])
+      expect(
+        catalog.options
+          .find((o) => o.optionId.includes(block))!
+          .variants.every(
+            (v) =>
+              v.status === "corrected" &&
+              v.differences.includes("scarlet-craving-explicit-element"),
+          ),
+        block,
+      ).toBe(true)
+  })
+
+  it("applies the scarlet sharpen bonus only to electric sharpen hits", () => {
+    const optionId =
+      "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj"
+    const input = (
+      element: "electric" | "physical",
+      kind: "regular" | "sharpen",
+    ): StaticCatalogDamageInput => ({
+      ...agentInput("1611", [], 0, 7),
+      bindings: [
+        {
+          bindingId: "binding:static",
+          kind: "w-engine" as const,
+          holderId: "entity:attacker",
+          sourceEntityId: "14161",
+          eligible: true,
+          configuration: { refinement: 1 },
+        },
+      ],
+      selections: [{ optionId, bindingId: "binding:static", layers: 1 }],
+      world: {
+        entities: [
+          {
+            kind: "actor" as const,
+            entityId: "entity:attacker",
+            teamId: "team:players",
+            generalStats: {
+              attack: general(1000),
+              defense: general(1500),
+            },
+            directStats: {
+              criticalRate: { baseValue: 0.5, additions: [] },
+              criticalDamage: { baseValue: 1, additions: [] },
+              penetrationRatio: { baseValue: 0, additions: [] },
+              sharpCriticalDamage: { baseValue: 1.5, additions: [] },
+            },
+          },
+          {
+            kind: "actor" as const,
+            entityId: "entity:enemy",
+            teamId: "team:enemies",
+            generalStats: {},
+            directStats: {},
+          },
+        ],
+        states: [],
+        distances: [],
+      },
+      hit: {
+        actorId: "entity:attacker",
+        targetId: "entity:enemy",
+        actionId: "action:oracle",
+        skillCategory: "ultimate",
+        element,
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "base",
+            stat: "defense",
+            statSource: { entityId: "entity:attacker" },
+            damageMultiplier: 2,
+          },
+        ],
+      },
+      damage: {
+        ...(kind === "sharpen" ? { kind, sharpenDamageBonus: [] } : { kind }),
+        damageBonus: [],
+        defense: {
+          attackerLevel: 60,
+          targetBaseDefense: 953,
+          defensePercentageAdjustments: [],
+          penetrationValues: [],
+        },
+        resistance: {
+          targetResistance: 0,
+          targetResistanceReductions: [],
+          attackerResistanceIgnoreValues: [],
+        },
+        damageTaken: {
+          targetDamageTakenIncreases: [],
+          targetDamageTakenReductions: [],
+        },
+        stunDamage: {
+          isTargetStunned: false,
+          targetBaseStunDamageMultiplier: 1,
+          targetStunDamageMultiplierAdjustments: [],
+        },
+      },
+    })
+    const applicable = calculateCatalogResult(input("electric", "sharpen"))
+    const bonus = applicable.evaluation.contributions.filter(
+      (c) => c.address.kind === "factor",
+    )
+    expect(bonus).toHaveLength(1)
+    expect(bonus[0]!.address).toMatchObject({
+      kind: "factor",
+      channel: "sharpen-damage-bonus",
+    })
+    expect(bonus[0]!.value.value).toBeCloseTo(0.1, 12)
+    expect(applicable.factors.critical!.sharpenDamageBonus).toBeCloseTo(1.1, 12)
+    for (const mismatch of [
+      input("physical", "sharpen"),
+      input("electric", "regular"),
+    ]) {
+      const result = calculateStaticDamageFromCatalog(mismatch)
+      expect(result.ok, JSON.stringify(result)).toBe(true)
+      if (!result.ok) continue
+      expect(
+        result.value.evaluation.contributions.filter(
+          (c) => c.address.kind === "factor",
+        ),
+        `${mismatch.hit.element}/${mismatch.damage.kind}`,
+      ).toHaveLength(0)
+    }
+  })
+
+  it("rejects Claret mindscape and refinement selections outside their evidence", () => {
+    const mindscape4 = agentInput("1611", [], 0, 7)
+    const below = calculateStaticDamageFromCatalog({
+      ...mindscape4,
+      selections: [
+        {
+          optionId:
+            "agents:claret:mindscape:4:blk-mtseebl3-k0eoh9:eff-mtseebl3-6j53ci",
+          bindingId: "binding:static",
+          layers: 1,
+        },
+      ],
+    })
+    expect(below.ok).toBe(false)
+    if (!below.ok)
+      expect(
+        below.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+      ).toBe(true)
+    const scarletShapenInput = (
+      refinement: number,
+    ): StaticCatalogDamageInput => {
+      const base = agentInput("1611", [], 6, 7)
+      const { damage } = base
+      if (damage.kind !== "regular") throw new Error("fixture")
+      return {
+        ...base,
+        // 非法精炼档（0/6）须绕过静态类型契约，验证的是运行时输入拒绝。
+        bindings: [
+          {
+            bindingId: "binding:static",
+            kind: "w-engine",
+            holderId: "entity:attacker",
+            sourceEntityId: "14161",
+            eligible: true,
+            configuration: { refinement },
+          } as unknown as StaticCatalogDamageInput["bindings"][number],
+        ],
+        selections: [
+          {
+            optionId:
+              "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+            bindingId: "binding:static",
+            layers: 1,
+          },
+        ],
+        world: {
+          entities: [
+            {
+              kind: "actor" as const,
+              entityId: "entity:attacker",
+              teamId: "team:players",
+              generalStats: {
+                attack: general(1000),
+                defense: general(1500),
+              },
+              directStats: {
+                criticalRate: { baseValue: 0.5, additions: [] },
+                criticalDamage: { baseValue: 1, additions: [] },
+                penetrationRatio: { baseValue: 0, additions: [] },
+                sharpCriticalDamage: { baseValue: 1.5, additions: [] },
+              },
+            },
+            {
+              kind: "actor" as const,
+              entityId: "entity:enemy",
+              teamId: "team:enemies",
+              generalStats: {},
+              directStats: {},
+            },
+          ],
+          states: [],
+          distances: [],
+        },
+        hit: {
+          ...base.hit,
+          element: "electric",
+          damageItems: [
+            {
+              mode: "direct" as const,
+              role: "base" as const,
+              itemId: "base",
+              stat: "defense",
+              statSource: { entityId: "entity:attacker" },
+              damageMultiplier: 2,
+            },
+          ],
+        },
+        damage: {
+          ...damage,
+          kind: "sharpen",
+          sharpenDamageBonus: [] as readonly number[],
+        },
+      }
+    }
+    for (const refinement of [0, 6]) {
+      const result = calculateStaticDamageFromCatalog(
+        scarletShapenInput(refinement),
+      )
+      expect(result.ok, `refinement ${refinement}`).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some((issue) => issue.code === "INVALID_INPUT"),
+          `refinement ${refinement}`,
+        ).toBe(true)
+    }
+    const byRank = calculateStaticDamageFromCatalog(scarletShapenInput(3))
+    expect(byRank.ok).toBe(true)
+    if (byRank.ok)
+      expect(byRank.value.factors.critical!.sharpenDamageBonus).toBeCloseTo(
+        1.13,
+        12,
+      )
+  })
+
   it("keeps Astra M2 as one parameter modification at every verified core level", () => {
     const base = catalog.options.find((o) =>
       o.optionId.endsWith("eff-ms38hwcr-m9hn4v"),
@@ -1773,7 +2047,7 @@ describe("velina cyclone catalog linkage", () => {
     )
     expect(entity?.supplementProvenance).toMatchObject({
       sourceId: "nanoka-integrated",
-      version: "3.1",
+      version: "3.2",
     })
     expect(entity?.supplementProvenance?.resources.length).toBeGreaterThan(0)
     const coverage = read(

@@ -23,7 +23,7 @@ export interface ActionRegistryEntry {
   readonly sourceSignature: string
   readonly skillCategory: ActionSkillCategory | null
   readonly element: ActionDamageElement | null
-  readonly damageKind: "regular" | "sheer"
+  readonly damageKind: "regular" | "sheer" | "sharpen"
   readonly upstreamSkillId: string | null
   readonly skillTargetIds: readonly string[]
   /** 动作实际依赖的潜能等级集合；必须与来源行/说明的 potential 元数据一致。 */

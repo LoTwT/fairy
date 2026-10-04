@@ -55,16 +55,32 @@
         "growth": 0.02
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0001:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0001:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.529,
+                  "growth": 0.049
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -100,16 +116,32 @@
         "growth": 0.019
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0002:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0002:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.158,
+                  "growth": 0.106
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -250,16 +282,32 @@
         "growth": 0.144
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0006:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0006:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.462,
+                  "growth": 0.406
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -268,7 +316,7 @@
       "name": "反制支援：寸铁不让",
       "rowName": "伤害倍率",
       "levelGroup": "assist",
-      "skillCategory": null,
+      "skillCategory": "counter-assist",
       "skillTargetIds": [],
       "skillTags": [],
       "source": {
@@ -295,20 +343,32 @@
         "growth": 0.325
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
-          },
-          {
-            "code": "unknown-category",
-            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+            "segmentId": "action:agent:1611:action:0007:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0007:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 11.53,
+                  "growth": 1.049
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -344,16 +404,32 @@
         "growth": 0.24
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0008:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0008:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 8.563,
+                  "growth": 0.779
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -389,16 +465,32 @@
         "growth": 0.016
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0009:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0009:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.544,
+                  "growth": 0.05
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -434,16 +526,32 @@
         "growth": 0.02
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0010:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0010:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.672,
+                  "growth": 0.062
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -479,16 +587,32 @@
         "growth": 0.028
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0011:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0011:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.952,
+                  "growth": 0.087
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -524,16 +648,32 @@
         "growth": 0.082
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0012:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0012:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.895,
+                  "growth": 0.264
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -543,7 +683,7 @@
       "rowName": "一段伤害倍率",
       "levelGroup": "basic",
       "skillCategory": "basic",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:claret-basic-mtskq8rr"],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -569,16 +709,32 @@
         "growth": 0.025
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0013:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0013:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.077,
+                  "growth": 0.098
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -588,7 +744,7 @@
       "rowName": "二段伤害倍率",
       "levelGroup": "basic",
       "skillCategory": "basic",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:claret-basic-mtskq8rr"],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -614,16 +770,32 @@
         "growth": 0.067
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0014:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0014:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.874,
+                  "growth": 0.262
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -633,7 +805,10 @@
       "rowName": "三段连续斩击伤害倍率",
       "levelGroup": "basic",
       "skillCategory": "basic",
-      "skillTargetIds": [],
+      "skillTargetIds": [
+        "zzz-hp:skill:claret-basic-mtskq8rr",
+        "zzz-hp:skill:claret-basic-mtsef46o"
+      ],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -659,16 +834,32 @@
         "growth": 0.085
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0015:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0015:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 4.521,
+                  "growth": 0.411
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -678,7 +869,10 @@
       "rowName": "三段下砸伤害倍率",
       "levelGroup": "basic",
       "skillCategory": "basic",
-      "skillTargetIds": [],
+      "skillTargetIds": [
+        "zzz-hp:skill:claret-basic-mtskq8rr",
+        "zzz-hp:skill:claret-basic-mtsef46o"
+      ],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -704,16 +898,32 @@
         "growth": 0.034
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0016:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0016:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.773,
+                  "growth": 0.162
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -723,7 +933,7 @@
       "rowName": "伤害倍率",
       "levelGroup": "basic",
       "skillCategory": "basic",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:claret-basic-mtskqn2n"],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -749,16 +959,32 @@
         "growth": 0.062
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0017:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0017:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.28,
+                  "growth": 0.299
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -768,7 +994,7 @@
       "rowName": "伤害倍率",
       "levelGroup": "chain",
       "skillCategory": "chain",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:claret-chain-mtsefivk"],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -794,16 +1020,32 @@
         "growth": 0.126
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0018:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0018:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 10.58,
+                  "growth": 0.962
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -813,7 +1055,7 @@
       "rowName": "伤害倍率",
       "levelGroup": "chain",
       "skillCategory": "ultimate",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:claret-ultimate-mtsefude"],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -839,16 +1081,32 @@
         "growth": 0.161
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0019:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0019:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 22.52,
+                  "growth": 2.048
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -884,16 +1142,32 @@
         "growth": 0.02
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0020:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0020:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 0.529,
+                  "growth": 0.049
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -929,16 +1203,32 @@
         "growth": 0.09
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0021:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0021:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.725,
+                  "growth": 0.248
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -974,16 +1264,32 @@
         "growth": 0.087
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0022:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0022:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.3,
+                  "growth": 0.3
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -1019,16 +1325,32 @@
         "growth": 0.017
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0023:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0023:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.901,
+                  "growth": 0.082
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -1064,16 +1386,32 @@
         "growth": 0.118
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0024:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0024:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.248,
+                  "growth": 0.568
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -1109,16 +1447,32 @@
         "growth": 0.015
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0025:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0025:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.766,
+                  "growth": 0.07
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -1154,16 +1508,32 @@
         "growth": 0.017
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0026:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0026:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.877,
+                  "growth": 0.08
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -1173,7 +1543,7 @@
       "rowName": "毁伤伤害倍率",
       "levelGroup": "special",
       "skillCategory": "special",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:claret-special-mtsecz30"],
       "skillTags": [],
       "source": {
         "path": "agents/1611/details.zh.json",
@@ -1195,16 +1565,32 @@
       },
       "dazeCoefficient": null,
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0027:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0027:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 8.127,
+                  "growth": 0.739
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     },
     {
@@ -1240,16 +1626,32 @@
         "growth": 0.116
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "special-mechanic",
-            "message": "锐化伤害以防御力作为招式伤害倍率，锐化暴击与残痕值机制尚未接入动作模型，不能当作普通攻击力倍率。"
+            "segmentId": "action:agent:1611:action:0028:total",
+            "damageKind": "sharpen",
+            "element": "electric",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1611:action:0028:base",
+                "stat": "defense",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.128,
+                  "growth": 0.285
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": null
     }
   ]

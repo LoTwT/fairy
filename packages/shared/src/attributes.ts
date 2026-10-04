@@ -13,6 +13,7 @@ export type PanelAttributeUnitMap = Pick<
   | "criticalRate"
   | "criticalDamage"
   | "penetrationRatio"
+  | "sharpCriticalDamage"
 >
 
 export type PanelAttribute = keyof PanelAttributeUnitMap
@@ -29,10 +30,12 @@ export type DriveDiscDamageElement = Extract<
   DamageElement,
   "physical" | "fire" | "ice" | "electric" | "ether"
 >
-type PointAttribute = Exclude<
-  PanelAttribute,
-  "criticalRate" | "criticalDamage" | "penetrationRatio"
->
+type RatioAttribute =
+  | "criticalRate"
+  | "criticalDamage"
+  | "penetrationRatio"
+  | "sharpCriticalDamage"
+type PointAttribute = Exclude<PanelAttribute, RatioAttribute>
 type PercentageAttribute = Exclude<PointAttribute, "anomalyProficiency">
 
 /** 基础加数先于装备百分比；初始固定加数不被装备百分比放大。 */
@@ -52,7 +55,11 @@ export type PanelAttributeBonus =
       readonly value: number
     }
   | {
-      readonly attribute: "criticalRate" | "criticalDamage" | "penetrationRatio"
+      readonly attribute:
+        | "criticalRate"
+        | "criticalDamage"
+        | "penetrationRatio"
+        | "sharpCriticalDamage"
       readonly operation: "ratio-add"
       readonly unit: "ratio"
       readonly value: number

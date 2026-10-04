@@ -217,7 +217,9 @@ const anomaly: readonly DamageKind[] = [
   "anomaly-settlement",
   "luminize",
 ]
-const direct: readonly DamageKind[] = ["regular", "sheer"]
+/** 直伤/锐化链共享的技能范围与倍率类通道；决算加成不进锐化链，仍限普通/命破。 */
+const direct: readonly DamageKind[] = ["regular", "sheer", "sharpen"]
+const nonSharpenDirect: readonly DamageKind[] = ["regular", "sheer"]
 const factor = (
   channel: FactorChannel,
   unit: Unit = "ratio",
@@ -246,6 +248,7 @@ export const FIELD_MAPPINGS: Readonly<Record<string, FieldMapping>> = {
   critRate: stat("criticalRate", "ratio", "direct", 0.01),
   critDmg: stat("criticalDamage", "ratio", "direct", 0.01),
   penRate: stat("penetrationRatio", "ratio", "direct", 0.01),
+  sharpenCritDmgBonus: stat("sharpCriticalDamage", "ratio", "direct", 0.01),
   mastery: stat(
     "anomalyProficiency",
     "anomaly-proficiency-points",
@@ -306,7 +309,8 @@ export const FIELD_MAPPINGS: Readonly<Record<string, FieldMapping>> = {
   settlementDmgMult: factor(
     "settlement-multiplier-addition",
     "multiplier",
-    direct,
+    // 锐化链不乘直伤决算项：上游 settlementDamageExpected 在锐化路径为 0。
+    nonSharpenDirect,
   ),
   anomalyReleaseMult: factor("base-multiplier-addition", "multiplier", [
     "anomaly-settlement",
@@ -342,16 +346,7 @@ export const FIELD_MAPPINGS: Readonly<Record<string, FieldMapping>> = {
     scale: 0.01,
     reason: "通用特殊乘区不属于当前 core 已登记的独立机制",
   },
-  sharpenDmgBonus: {
-    unit: "ratio",
-    scale: 0.01,
-    reason: "锐化伤害公式不在当前 core 范围内",
-  },
-  sharpenCritDmgBonus: {
-    unit: "ratio",
-    scale: 0.01,
-    reason: "锐暴公式不在当前 core 范围内",
-  },
+  sharpenDmgBonus: factor("sharpen-damage-bonus", "ratio", ["sharpen"]),
 }
 const always = { kind: "constant", value: true } as const
 const literal = <U extends Unit>(unit: U, value: number) =>
@@ -367,7 +362,7 @@ const reference = (pointer: string): SourceReference => ({
 })
 const nanokaReference = (path: string, pointer: string): SourceReference => ({
   sourceId: "nanoka-integrated",
-  version: "3.1",
+  version: "3.2",
   locale: "zh",
   resourcePath: path,
   pointer: pointer as `/${string}`,
@@ -812,7 +807,7 @@ function compile(
           (p) =>
             ({
               sourceId: "nanoka-integrated",
-              version: "3.1",
+              version: "3.2",
               locale: "zh",
               resourcePath: p.path,
               pointer: p.pointer,
@@ -836,11 +831,6 @@ function compile(
     return unsupported("missing-identity", "当前 Fairy 没有已核实的来源实体 ID")
   if (!record.normalized)
     return unsupported("semantic-conflict", "上游加载规范化移除了该原始记录")
-  if (record.entityId === "koleda" && e.id === "eff-mttrobl0-dc0cuk")
-    return unsupported(
-      "formula-out-of-scope",
-      "该负暴伤补偿属于锋御锐暴路径，与延期的新公式一并保留",
-    )
   if (mapping.reason) return unsupported("formula-out-of-scope", mapping.reason)
   if (semantics?.kind === "merged-partial-record")
     return {
@@ -1202,6 +1192,19 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "named-source-discrepancy") {
+    // 遵循来源字段转换，只登记字段与说明文字的具名差异；状态条件仍由选择断言。
+    variant = {
+      ...variant,
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (mapping.basePercentage)
     expression = {
       kind: "multiply",
@@ -1251,6 +1254,24 @@ function compile(
           ? semantics.minimumPotential
           : undefined
   let when = whenFor(e, mapping)
+  if (semantics?.kind === "explicit-element-scope") {
+    // 上游 elementFilter=all 未编码正式文本的元素限制：补显式元素条件。
+    when = {
+      kind: "all",
+      conditions: [when, oneOf("hit.element", [semantics.element])],
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "stagger-recovery-settlement") {
     // 移除 applySituation: stagger 带来的 targetState 条件；
     // 是否失衡仍独立影响实际失衡乘区（由其他规则照常表达）。
@@ -1764,7 +1785,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "8",
+    revision: "9",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1821,7 +1842,7 @@ export function convertSource(
       {
         differenceId: "core-skill-level-parameters",
         explanation:
-          "凯撒基础攻击增益与潘引壶基础通窍，以及对应 M2/M6 增量，按 Nanoka 3.1 逐档原文与真实 level 元数据补齐核心 1—7；固定 ZZZ-HP 只提供核心 7 数值。参数唯一维护于 rank-evidence，支持集合为所有必需参数与证据的交集，不扩散至同块其他记录。",
+          "凯撒基础攻击增益与潘引壶基础通窍及对应 M2/M6 增量按 Nanoka 3.1 逐档原文与真实 level 元数据补齐核心 1—7；克拉蕾核心被动的状态暴击率加成按 Nanoka 3.2 核心被动 1611501—1611507 逐档展开为 15%—30%。固定 ZZZ-HP 只提供核心 7 数值。参数唯一维护于 rank-evidence，支持集合为所有必需参数与证据的交集，不扩散至同块其他记录。",
         references: options.flatMap((option) =>
           option.variants
             .filter((variant) =>
@@ -1961,6 +1982,34 @@ export function convertSource(
           "上游通用流明白名单检查排除了显式流明技能；Fairy 对来源已明确的蕾米埃尔耀变条目保留显式流明范围。",
         references: coverage
           .filter((r) => r.catalogEntityId === "agents:remiel" && r.rank === 6)
+          .map((r) => reference(r.pointer)),
+      },
+      {
+        differenceId: "claret-remnant-edge-self-target",
+        explanation:
+          "克拉蕾额外能力[血裔传承]的固定来源记录 applyTarget=self，而块说明写明[克拉蕾或队友触发毁伤时]全队[锋御]代理人进入[残锋]、锐暴伤害提升 25%。Fairy 以固定来源字段为第一信任来源，仅对持有者生效；不凭说明文字无证据扩大为全队。选择该选项表示持有者处于[残锋]，全队语义留待取得适用范围证据后另行处理。",
+        references: coverage
+          .filter(
+            (r) =>
+              r.catalogEntityId === "agents:claret" &&
+              r.stat === "sharpenCritDmgBonus",
+          )
+          .map((r) => reference(r.pointer)),
+      },
+      {
+        differenceId: "claret-mindscape1-multiplier-encoding",
+        explanation:
+          "克拉蕾影画一原文为[触发毁伤造成的伤害倍率提升至原本的 130%]，固定来源把该条记为毁伤目标（claret-special-mtsecz30）上的 skillDmgBonus +30，即通用增伤区加成而非倍率乘区。Fairy 遵循固定来源的增伤编码；与正式文本的倍率语义差异在此登记，不改写为倍率乘区。",
+        references: coverage
+          .filter((r) => r.catalogEntityId === "agents:claret" && r.rank === 1)
+          .map((r) => reference(r.pointer)),
+      },
+      {
+        differenceId: "scarlet-craving-explicit-element",
+        explanation:
+          "猩红渴望（14161）的固定来源记录 elementFilter=all，未编码正式文本中的电属性限制：精炼的[电属性伤害提升]与[造成的电属性锐化伤害提升]两条都应只作用于电属性命中。Fairy 按各精炼原文补显式电元素条件；锐化增伤通道本身只在锐化伤害命中适用，触发条件（发动强化特殊技或触发毁伤）由调用方显式选择断言。",
+        references: coverage
+          .filter((r) => r.catalogEntityId === "w-engines:Scarlet-Craving")
           .map((r) => reference(r.pointer)),
       },
     ],

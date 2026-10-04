@@ -38,6 +38,7 @@ describe("normalized panel attributes", () => {
       criticalRate: { unit: "ratio", value: 0.05 },
       criticalDamage: { unit: "ratio", value: 0.5 },
       penetrationRatio: { unit: "ratio", value: 0 },
+      sharpCriticalDamage: { unit: "ratio", value: 0 },
     })
     expect(result.coreAttributeBonuses[1]).toEqual([])
     expect(result.coreAttributeBonuses[3]).toEqual([

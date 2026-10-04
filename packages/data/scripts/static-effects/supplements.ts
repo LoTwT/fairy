@@ -115,7 +115,7 @@ const nekomataOrdinaryEvidence = [
   {
     path: "agents/1021/details.zh.json",
     pointer: "/passive/level/1021507/desc/0",
-    sha256: "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
+    sha256: "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07",
   },
 ] as const
 
@@ -123,7 +123,7 @@ const nekomataShowEvidence = [
   {
     path: "agents/1021/details.zh.json",
     pointer: "/passive/level/1021507/desc/1",
-    sha256: "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
+    sha256: "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07",
   },
 ] as const
 
@@ -144,7 +144,7 @@ const redAxisIdentity: SourceIdentity = { kind: "w-engine", entityId: "13111" }
 const nekomataOrdinaryDmgBonus: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:nekomata:ordinary-dmg-bonus",
-  source: "nanoka-integrated@3.1 agents/1021 /passive/level/1021507/desc/0",
+  source: "nanoka-integrated@3.2 agents/1021 /passive/level/1021507/desc/0",
   optionId: "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus",
   supportedRanks: "core 7；潜能 0",
   computationTarget: "catalog option variant",
@@ -212,7 +212,7 @@ const nekomataOrdinaryDmgBonus: Supplement = {
 const nekomataOrdinaryShow: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:nekomata:ordinary-show",
-  source: "nanoka-integrated@3.1 agents/1021 /passive/level/1021507/desc/1",
+  source: "nanoka-integrated@3.2 agents/1021 /passive/level/1021507/desc/1",
   optionId:
     "agents:nekomata:mindscape:0:blk-ms4f4rbb-id7p58:eff-ms4f4rbb-y2jon7",
   supportedRanks: "core 7；潜能 0；层数 1—2",
@@ -295,7 +295,7 @@ const nekomataOrdinaryShow: Supplement = {
 const redAxis: Supplement = {
   kind: "entity",
   supplementId: "nanoka:w-engines:13111",
-  source: "nanoka-integrated@3.1 w-engines/13111 /talents/1—5/desc",
+  source: "nanoka-integrated@3.2 w-engines/13111 /talents/1—5/desc",
   optionId: "nanoka:w-engines:13111:refinement:red-axis",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog entity + option",
@@ -312,7 +312,7 @@ const redAxis: Supplement = {
     element: "electric",
     supplementProvenance: {
       sourceId: "nanoka-integrated",
-      version: "3.1",
+      version: "3.2",
       resources: [
         {
           path: "w-engines/13111/details.zh.json",
@@ -385,7 +385,7 @@ const redAxis: Supplement = {
 const identityInflectionBoundary: Supplement = {
   kind: "boundary",
   supplementId: "nanoka:w-engines:12014:boundary",
-  source: "nanoka-integrated@3.1 w-engines/12014 /talents/1—5/desc",
+  source: "nanoka-integrated@3.2 w-engines/12014 /talents/1—5/desc",
   reason:
     "五档使攻击者造成的伤害降低 6/7/8/9/10%，属于敌方输出/己方承伤方向；当前公开路径计算己方对敌伤害，不能把它转换成 target damage-taken-reduction 来降低己方输出，也不能报告其增益为零后视为接入。保留五档来源证据，待承伤计算产品建立后另行接入。",
   evidence: [],
@@ -409,31 +409,31 @@ const potentialEvidence = (
 
 const soldier11PotentialEvidence = potentialEvidence(
   "1041",
-  "a66ff561b147b01b3106ccce6491c3c66cd407ab445a3fdf4569ae03c7c4546b",
+  "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405",
   104100,
 )
 const lycaonPotentialEvidence = potentialEvidence(
   "1141",
-  "e183f9a19ea3534fa577d215ab5caa5c812fe6636c816a0db6e517379bfb55b3",
+  "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1",
   114100,
 )
 const alexandrinaPotentialEvidence = potentialEvidence(
   "1211",
-  "48658bb99713ac204c6b4e85a9ed7cc6bc74dbe206df79ac8ed001f4423d2c18",
+  "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615",
   121100,
 )
 const ellenOrdinaryEvidence = [
   {
     path: "agents/1191/details.zh.json",
     pointer: "/passive/level/1191507/desc/0",
-    sha256: "7d42a516131172e8dadcfb9744cbbb0d56eba8d8909c795064fc3ea3b40288c8",
+    sha256: "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222",
   },
 ] as const
 const harumasaOrdinaryEvidence = [
   {
     path: "agents/1201/details.zh.json",
     pointer: "/passive/level/1201507/desc/0",
-    sha256: "344958cd98b57c943154eef3b203db52b79f8a659315154c9cdf3351cc163886",
+    sha256: "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db",
   },
 ] as const
 
@@ -442,7 +442,7 @@ const soldier11FlameProwess: Supplement = {
   kind: "option",
   supplementId: "nanoka:soldier11:flame-prowess",
   source:
-    "nanoka-integrated@3.1 agents/1041 /potentialDetail/104101—104105/desc",
+    "nanoka-integrated@3.2 agents/1041 /potentialDetail/104101—104105/desc",
   catalogEntityId: "agents:soldier11",
   optionId: "nanoka:agents:soldier11:potential:flame-prowess",
   supportedRanks: "潜能 2—6",
@@ -489,7 +489,7 @@ const lycaonIceHunt: Supplement = {
   kind: "option",
   supplementId: "nanoka:lycaon:ice-hunt-impact",
   source:
-    "nanoka-integrated@3.1 agents/1141 /potentialDetail/114101—114105/desc",
+    "nanoka-integrated@3.2 agents/1141 /potentialDetail/114101—114105/desc",
   catalogEntityId: "agents:lycaon",
   optionId: "nanoka:agents:lycaon:potential:ice-hunt-impact",
   supportedRanks: "潜能 2—6",
@@ -550,7 +550,7 @@ const alexandrinaPerfectService: Supplement = {
   kind: "option",
   supplementId: "nanoka:alexandrina:perfect-service-pierce",
   source:
-    "nanoka-integrated@3.1 agents/1211 /potentialDetail/121101—121105/desc",
+    "nanoka-integrated@3.2 agents/1211 /potentialDetail/121101—121105/desc",
   catalogEntityId: "agents:alexandrina",
   optionId: "nanoka:agents:alexandrina:potential:perfect-service-pierce",
   supportedRanks: "潜能 2—6",
@@ -596,7 +596,7 @@ const alexandrinaPerfectService: Supplement = {
 const ellenOrdinaryBladeDance: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:ellen:ordinary-blade-dance",
-  source: "nanoka-integrated@3.1 agents/1191 /passive/level/1191507/desc/0",
+  source: "nanoka-integrated@3.2 agents/1191 /passive/level/1191507/desc/0",
   optionId: "agents:ellen:mindscape:0:blk-legacy:legacy-self-critDmg",
   supportedRanks: "core 7；潜能 0",
   computationTarget: "catalog option variant",
@@ -676,7 +676,7 @@ const ellenOrdinaryBladeDance: Supplement = {
 const harumasaOrdinaryCritRate: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:harumasa:ordinary-crit-rate",
-  source: "nanoka-integrated@3.1 agents/1201 /passive/level/1201507/desc/0",
+  source: "nanoka-integrated@3.2 agents/1201 /passive/level/1201507/desc/0",
   optionId: "agents:harumasa:mindscape:0:blk-legacy:legacy-self-critRate",
   supportedRanks: "core 7；潜能 0",
   computationTarget: "catalog option variant",
@@ -751,7 +751,7 @@ const harumasaOrdinaryCritRate: Supplement = {
 const harumasaOrdinaryCritDmg: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:harumasa:ordinary-crit-dmg",
-  source: "nanoka-integrated@3.1 agents/1201 /passive/level/1201507/desc/0",
+  source: "nanoka-integrated@3.2 agents/1201 /passive/level/1201507/desc/0",
   optionId: "agents:harumasa:mindscape:0:blk-legacy:eff-ms4gx7ds-ijkzuy",
   supportedRanks: "core 7；潜能 0；层数 1—6",
   computationTarget: "catalog option variant",

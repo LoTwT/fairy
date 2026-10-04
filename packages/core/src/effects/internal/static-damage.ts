@@ -6,6 +6,7 @@ import {
   damageBonusFactor,
   luminizeDamageFormula,
   regularDamageFormula,
+  sharpenDamageFormula,
   sheerDamageFormula,
 } from "../../formulas.ts"
 import type {
@@ -84,7 +85,8 @@ function validateDamageFields(
   ]
   if (kind === "sheer") fields.push("sheerDamageBonus")
   else fields.push("defense")
-  if (kind !== "regular" && kind !== "sheer") {
+  if (kind === "sharpen") fields.push("sharpenDamageBonus")
+  if (kind !== "regular" && kind !== "sheer" && kind !== "sharpen") {
     fields.push("anomalyDamageBonus", "refringe")
     if (kind === "luminize") fields.push("luminizeMultiplier")
     else fields.push("anomalyCriticalRate", "anomalyCriticalDamage")
@@ -96,11 +98,11 @@ function validateDamageFields(
       pointer: "/damage/damageBonus",
     })
   } else {
-    if (kind === "regular" || kind === "sheer") {
+    if (kind === "regular" || kind === "sheer" || kind === "sharpen") {
       collector.report(
         "INVALID_INPUT",
         "/damage/damageBonus",
-        "Regular and sheer damage require damage bonus contributions",
+        "Regular, sheer and sharpen damage require damage bonus contributions",
       )
     } else {
       const bonusChecks = { ...checks, pointer: "/damage/damageBonus" }
@@ -134,6 +136,7 @@ function validateDamageFields(
   }
   for (const field of [
     "sheerDamageBonus",
+    "sharpenDamageBonus",
     "anomalyDamageBonus",
     "anomalyCriticalDamage",
   ]) {
@@ -549,7 +552,9 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
       ? ["criticalDamage", "penetrationRatio"]
       : kind === "sheer"
         ? ["criticalDamage"]
-        : ["anomalyProficiency", "penetrationRatio"]
+        : kind === "sharpen"
+          ? ["sharpCriticalDamage", "penetrationRatio"]
+          : ["anomalyProficiency", "penetrationRatio"]
   const evaluated = evaluateEffects(prepared.value, state.value, {
     kind: "hit",
     atSeconds,
@@ -665,7 +670,30 @@ export function calculateDamageFromEvaluation(
   }
   let critical: typeof nonCritical | null
   let rate: number
-  if (damage.kind === "regular" || damage.kind === "sheer") {
+  let criticalSemantics: StaticDamageResult["criticalSemantics"]
+  if (damage.kind === "sharpen") {
+    const sharpCriticalInput = {
+      isSharpCritical: false,
+      criticalRate: evaluation.hit!.criticalRate,
+      sharpCriticalDamageContributions: [stat("sharpCriticalDamage")],
+    }
+    const input = {
+      ...common,
+      defense: defense!,
+      sharpenDamageBonus: [
+        ...damage.sharpenDamageBonus,
+        ...take("sharpen-damage-bonus"),
+      ],
+      sharpCritical: sharpCriticalInput,
+    }
+    nonCritical = sharpenDamageFormula.calculate(input)
+    critical = sharpenDamageFormula.calculate({
+      ...input,
+      sharpCritical: { ...sharpCriticalInput, isSharpCritical: true },
+    })
+    rate = evaluation.hit!.criticalRate
+    criticalSemantics = "sharp-critical-forced-first-layer"
+  } else if (damage.kind === "regular" || damage.kind === "sheer") {
     const criticalInput = {
       isCritical: false,
       criticalDamageContributions: [stat("criticalDamage")],
@@ -693,6 +721,7 @@ export function calculateDamageFromEvaluation(
       })
     }
     rate = evaluation.hit!.criticalRate
+    criticalSemantics = "critical-hit"
   } else {
     const input = {
       ...common,
@@ -736,6 +765,7 @@ export function calculateDamageFromEvaluation(
       })
       critical = null
       rate = 0
+      criticalSemantics = "no-critical-settlement"
     } else {
       const anomalyCritical = {
         isAnomalyCritical: false,
@@ -756,6 +786,7 @@ export function calculateDamageFromEvaluation(
         damage.anomalyCriticalRate,
         ...take("anomaly-critical-rate"),
       ])
+      criticalSemantics = "critical-hit"
     }
   }
   if (!Number.isFinite(rate)) throw new Error("Critical rate must be finite")
@@ -770,6 +801,7 @@ export function calculateDamageFromEvaluation(
     evaluation,
     nonCritical: nonCritical.value,
     critical: critical?.value ?? null,
+    criticalSemantics,
     criticalRate,
     expected,
     factors: {

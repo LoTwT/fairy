@@ -364,6 +364,12 @@ export type StaticDamageParameters = StaticDamageCommon &
         readonly sheerDamageBonus: import("../formulas.ts").SheerDamageBonusFactorInput
         readonly damageBonus: import("../formulas.ts").DamageBonusFactorInput
       }
+    | {
+        readonly kind: "sharpen"
+        readonly sharpenDamageBonus: import("../formulas.ts").SharpenDamageBonusFactorInput
+        readonly defense: StaticDefenseInput
+        readonly damageBonus: import("../formulas.ts").DamageBonusFactorInput
+      }
     | (StaticAnomalyCommon & {
         readonly kind: "anomaly" | "disorder" | "vortex" | "anomaly-settlement"
         readonly anomalyCriticalRate: number
@@ -388,11 +394,22 @@ export interface StaticDamageInput {
   readonly atSeconds?: number
 }
 
+/**
+ * 具名暴击分支语义：`critical` 字段在锐化下表示"第一层锐暴强制触发、
+ * 溢出层仍按期望"，与普通伤害的"整次命中按暴击结算"不同，不能混用解读。
+ */
+export type StaticDamageCriticalSemantics =
+  | "critical-hit"
+  | "sharp-critical-forced-first-layer"
+  | "no-critical-settlement"
+
 export interface StaticDamageResult {
   readonly evaluation: EvaluationResult
   readonly nonCritical: number
   /** 当前 core 的 luminize 公式没有暴击分支。 */
   readonly critical: number | null
+  /** 命名 critical 分支的结算语义；critical 为 null 时为 "no-critical-settlement"。 */
+  readonly criticalSemantics: StaticDamageCriticalSemantics
   readonly criticalRate: number
   readonly expected: number
   readonly factors: {

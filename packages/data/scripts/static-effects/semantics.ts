@@ -180,12 +180,37 @@ export type SourceSemantics =
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
+  | {
+      /**
+       * 记录按固定来源字段转换，但来源自身的字段与块说明文字存在具名差异
+       * （如克拉蕾[残锋]锐暴提升的 applyTarget=self 与说明"全队[锋御]"、
+       * 影画一"倍率提升至原本的130%"被记为 skillDmgBonus +30）：
+       * 转换遵循来源字段，不凭文字扩大受益范围或改写落点；差异记录在目录
+       * differences，说明文字中的状态条件仍由调用方显式选择断言。
+       */
+      readonly kind: "named-source-discrepancy"
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 上游 elementFilter 未编码正式文本中的元素限制（如猩红渴望的
+       * "电属性伤害提升"与"电属性锐化伤害提升"记为 all）：规则条件补充
+       * 声明元素，目录以具名差异记录该来源差异。
+       */
+      readonly kind: "explicit-element-scope"
+      readonly element: DamageElement
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
 
 const lucyEvidence = [
   {
     path: "agents/1151/details.zh.json",
     pointer: "/skill/special/description/2/desc",
-    sha256: "cecf218cd0535701d0059888273a8c74562da6f2f1d76bca4c52425673edc1e2",
+    sha256: "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
   },
 ] as const
 
@@ -193,7 +218,7 @@ const luciaEvidence = [
   {
     path: "agents/1451/details.zh.json",
     pointer: "/skill/special/description/1/desc",
-    sha256: "501102a4740b5b6e8814f180bbd1dc920d7d682ae5b42411d1b75f60277a98ce",
+    sha256: "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5",
   },
 ] as const
 
@@ -201,7 +226,7 @@ const aliceEvidence = [
   {
     path: "agents/1401/details.zh.json",
     pointer: "/passive/level/1401507/desc/0",
-    sha256: "7f59e46e9795d2af33ef9089cf0566c17a3ce9beab02c2970276c8e6b0d5bcb1",
+    sha256: "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
   },
 ] as const
 
@@ -209,7 +234,7 @@ const nangongyuEvidence = [
   {
     path: "agents/1511/details.zh.json",
     pointer: "/passive/level/1511055/desc/0",
-    sha256: "3ccdbfa4e58b8cba5b758fbfcfd512a6a06f09b56c929d6b102b9f54d7e5e3cf",
+    sha256: "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
   },
 ] as const
 
@@ -217,7 +242,7 @@ const nekomataPotentialEvidence = [
   {
     path: "agents/1021/details.zh.json",
     pointer: "/passive/level/1021514/desc/0",
-    sha256: "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
+    sha256: "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07",
   },
 ] as const
 
@@ -227,14 +252,14 @@ const nekomataClawMarkEvidence = (
 ).map((row) => ({
   path: "agents/1021/details.zh.json",
   pointer: `/passive/level/${row}/desc/0`,
-  sha256: "a265694efbc779a299d6a5c8c198b569ce43f22d354b02d4be4b4bf3d41d189e",
+  sha256: "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07",
 }))
 
 const pyroisEvidence = [
   {
     path: "agents/1551/details.zh.json",
     pointer: "/passive/level/1551507/desc/0",
-    sha256: "18e48f62b4733432c0510a7e6b30446dc33ae5ab8350744d4fc7e5207b34a994",
+    sha256: "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856",
   },
 ] as const
 
@@ -242,7 +267,7 @@ const velinaEvidence = [
   {
     path: "agents/1561/details.zh.json",
     pointer: "/passive/level/1561507/desc/0",
-    sha256: "e8d2d37eedf1d4311d07994c594387cea1877c8fd66f7e09ab65ff6cadd8c33e",
+    sha256: "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659",
   },
 ] as const
 
@@ -250,20 +275,58 @@ const allSpecialSkillLevels: readonly SpecialSkillLevel[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
 ]
 
+const claretDetailsSha =
+  "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+
+/** 克拉蕾核心被动 1—7 行全文；暴击率加成按核心档位逐行核对。 */
+const claretCorePassiveEvidence = (
+  [1611501, 1611502, 1611503, 1611504, 1611505, 1611506, 1611507] as const
+).map((row) => ({
+  path: "agents/1611/details.zh.json",
+  pointer: `/passive/level/${row}/desc/0`,
+  sha256: claretDetailsSha,
+}))
+
+/** 克拉蕾额外能力（血裔传承）1—7 行全文；[残锋]锐暴提升逐行核对。 */
+const claretAdditionalAbilityEvidence = (
+  [1611501, 1611502, 1611503, 1611504, 1611505, 1611506, 1611507] as const
+).map((row) => ({
+  path: "agents/1611/details.zh.json",
+  pointer: `/passive/level/${row}/desc/1`,
+  sha256: claretDetailsSha,
+}))
+
+const claretTalentEvidence = (rank: 1 | 2 | 4) => [
+  {
+    path: "agents/1611/details.zh.json",
+    pointer: `/talent/${rank}/desc`,
+    sha256: claretDetailsSha,
+  },
+]
+
+/** 猩红渴望精炼 1—5 的天赋描述；电属性限制按各精炼原文核对。 */
+const scarletCravingEvidence = (refinement: 1 | 2 | 3 | 4 | 5) => [
+  {
+    path: "w-engines/14161/details.zh.json",
+    pointer: `/talents/${refinement}/desc`,
+    sha256: "0f0095be51b0b67133f0e583b34c79fa8cfb0e2eff520f6c1a56a7947e755d9e",
+  },
+]
+
 const burniceDetailsSha =
-  "b55233c50a7314a5bcf365bd2d9e5bf94298e92fce284f749370e690a2740dae"
+  "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
 const graceDetailsSha =
-  "feaf4be0396a002b3a96717e32e9b409ea068b31208c78ff8e91933fdb9be055"
+  "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
 const ellenDetailsSha =
-  "7d42a516131172e8dadcfb9744cbbb0d56eba8d8909c795064fc3ea3b40288c8"
+  "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
 const harumasaDetailsSha =
-  "344958cd98b57c943154eef3b203db52b79f8a659315154c9cdf3351cc163886"
+  "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
 const alexandrinaDetailsSha =
-  "48658bb99713ac204c6b4e85a9ed7cc6bc74dbe206df79ac8ed001f4423d2c18"
+  "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
 const janeDetailsSha =
-  "072cf7ca66133aa5a10a1a18ca08261a268a8950e652828cf18ccbd00784163a"
+  "b69786037562711fda0389dc86940257a5df4504e100940781ce91a0311fa9ef"
 const s0anbyDetailsSha =
-  "b2ec8c86f184122998a0100188800cbb073315f7d6573548da585c102f61ca47"
+  "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
 
 /** 潜力条目 level 2—6 的 desc 指针（level 1 无独立说明，由 abilityList 继承）。 */
 const potentialDetailEvidence = (
@@ -339,7 +402,7 @@ const lycaonPotentialBranchEvidence = [
   {
     path: "agents/1141/details.zh.json",
     pointer: "/passive/level/1141514/desc/0",
-    sha256: "e183f9a19ea3534fa577d215ab5caa5c812fe6636c816a0db6e517379bfb55b3",
+    sha256: "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1",
   },
 ] as const
 
@@ -391,7 +454,7 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
         path: "agents/1261/details.zh.json",
         pointer: "/skill/basic/description/2/desc",
         sha256:
-          "072cf7ca66133aa5a10a1a18ca08261a268a8950e652828cf18ccbd00784163a",
+          "b69786037562711fda0389dc86940257a5df4504e100940781ce91a0311fa9ef",
       },
     ],
     verification:
@@ -831,4 +894,120 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "Nanoka potentialDetail 121101—121105（level 2—6）明确：同一激活条件基于丽娜自身穿透率每 1% 提升全队防御力 2.5/3.5/4.5/5.5/6.5 点、至多 468 点。rate 换算为 250/350/450/550/650；与攻击转化分别登记、各自封顶，不合并为一个完整选项。",
   },
+  // 克拉蕾：核心被动暴击率加成按核心 1—7 逐档取值（15/17.5/20/22.5/25/27.5/30%）。
+  "agents/claret/mindscape/0/blk-mtrf598z-wr4jqt/eff-mtrf598z-80y7hh": {
+    kind: "core-skill-level",
+    baseEvidenceKey:
+      "claret:blk-mtrf598z-wr4jqt:mindscape:0:eff-mtrf598z-80y7hh",
+    formula: { kind: "amount" },
+    evidence: claretCorePassiveEvidence,
+    verification:
+      "Nanoka 3.2 核心被动 1611501—1611507 逐行确认：克拉蕾处于[猩红铭刻]，或是在发动[连携技]、[终结技]、[反制支援]、[支援突击]期间，暴击率提升 15/17.5/20/22.5/25/27.5/30%。固定来源只记录核心 7 的 30%；转换器按逐档参数表展开，状态条件由调用方显式选择断言。",
+  },
+  // 克拉蕾：额外能力[残锋]锐暴提升的 applyTarget 与说明文字差异。
+  "agents/claret/mindscape/0/blk-mtrgmqhd-srsnon/eff-mtrgmqhd-jgzfvq": {
+    kind: "named-source-discrepancy",
+    differenceId: "claret-remnant-edge-self-target",
+    evidence: claretAdditionalAbilityEvidence,
+    verification:
+      "Nanoka 3.2 额外能力逐行确认：克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下锐暴伤害提升 25%、持续 40 秒。固定来源记录 applyTarget=self；Fairy 遵循来源字段仅对持有者生效，不凭说明文字无证据扩大为全队，选择该选项表示持有者处于[残锋]。全队语义留待取得适用范围证据后另行处理。",
+  },
+  // 克拉蕾：影画一的"倍率提升至原本的130%"被固定来源记为 skillDmgBonus +30。
+  "agents/claret/mindscape/1/blk-mtrkovf7-dqmjh3/eff-mtse9xm8-q641yp": {
+    kind: "named-source-discrepancy",
+    differenceId: "claret-mindscape1-multiplier-encoding",
+    evidence: claretTalentEvidence(1),
+    verification:
+      "Nanoka 3.2 影画一确认：克拉蕾触发[毁伤]造成的伤害倍率提升至原本的 130%。固定来源把该条记为毁伤目标（claret-special-mtsecz30）上的 skillDmgBonus +30，即通用增伤区加成而非倍率乘区；Fairy 以固定来源为第一信任来源，按 +30% 增伤编码并登记差异，不改写为倍率乘区。",
+  },
+  "w-engines/Scarlet-Craving/refinement/1/blk-mtsemp5m-ywlze6/eff-mtsemp5m-q1jh4f":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(1),
+      verification:
+        "Nanoka 3.2 精炼 1 原文确认：装备者电属性伤害提升（数值见来源记录）。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，非电属性命中不适用。",
+    },
+  "w-engines/Scarlet-Craving/refinement/1/blk-mtsenpok-3njiz7/eff-mtsenpok-prx4yj":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(1),
+      verification:
+        "Nanoka 3.2 精炼 1 原文确认：发动[强化特殊技]或触发[毁伤]时，造成的电属性锐化伤害提升（数值见来源记录），持续 40 秒。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，锐化增伤通道本身只在锐化伤害命中适用，触发条件由调用方显式选择断言。",
+    },
+  "w-engines/Scarlet-Craving/refinement/2/blk-mtsemp5m-ywlze6/eff-mtsemp5m-q1jh4f":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(2),
+      verification:
+        "Nanoka 3.2 精炼 2 原文确认：装备者电属性伤害提升（数值见来源记录）。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，非电属性命中不适用。",
+    },
+  "w-engines/Scarlet-Craving/refinement/2/blk-mtsenpok-3njiz7/eff-mtsenpok-prx4yj":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(2),
+      verification:
+        "Nanoka 3.2 精炼 2 原文确认：发动[强化特殊技]或触发[毁伤]时，造成的电属性锐化伤害提升（数值见来源记录），持续 40 秒。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，锐化增伤通道本身只在锐化伤害命中适用，触发条件由调用方显式选择断言。",
+    },
+  "w-engines/Scarlet-Craving/refinement/3/blk-mtsemp5m-ywlze6/eff-mtsemp5m-q1jh4f":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(3),
+      verification:
+        "Nanoka 3.2 精炼 3 原文确认：装备者电属性伤害提升（数值见来源记录）。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，非电属性命中不适用。",
+    },
+  "w-engines/Scarlet-Craving/refinement/3/blk-mtsenpok-3njiz7/eff-mtsenpok-prx4yj":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(3),
+      verification:
+        "Nanoka 3.2 精炼 3 原文确认：发动[强化特殊技]或触发[毁伤]时，造成的电属性锐化伤害提升（数值见来源记录），持续 40 秒。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，锐化增伤通道本身只在锐化伤害命中适用，触发条件由调用方显式选择断言。",
+    },
+  "w-engines/Scarlet-Craving/refinement/4/blk-mtsemp5m-ywlze6/eff-mtsemp5m-q1jh4f":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(4),
+      verification:
+        "Nanoka 3.2 精炼 4 原文确认：装备者电属性伤害提升（数值见来源记录）。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，非电属性命中不适用。",
+    },
+  "w-engines/Scarlet-Craving/refinement/4/blk-mtsenpok-3njiz7/eff-mtsenpok-prx4yj":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(4),
+      verification:
+        "Nanoka 3.2 精炼 4 原文确认：发动[强化特殊技]或触发[毁伤]时，造成的电属性锐化伤害提升（数值见来源记录），持续 40 秒。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，锐化增伤通道本身只在锐化伤害命中适用，触发条件由调用方显式选择断言。",
+    },
+  "w-engines/Scarlet-Craving/refinement/5/blk-mtsemp5m-ywlze6/eff-mtsemp5m-q1jh4f":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(5),
+      verification:
+        "Nanoka 3.2 精炼 5 原文确认：装备者电属性伤害提升（数值见来源记录）。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，非电属性命中不适用。",
+    },
+  "w-engines/Scarlet-Craving/refinement/5/blk-mtsenpok-3njiz7/eff-mtsenpok-prx4yj":
+    {
+      kind: "explicit-element-scope",
+      element: "electric",
+      differenceId: "scarlet-craving-explicit-element",
+      evidence: scarletCravingEvidence(5),
+      verification:
+        "Nanoka 3.2 精炼 5 原文确认：发动[强化特殊技]或触发[毁伤]时，造成的电属性锐化伤害提升（数值见来源记录），持续 40 秒。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，锐化增伤通道本身只在锐化伤害命中适用，触发条件由调用方显式选择断言。",
+    },
 }
