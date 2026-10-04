@@ -10,5 +10,10 @@
   "zzz-hp/src/utils/calcNumberFormat.ts": "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a",
   "zzz-hp/src/utils/skillTalentLevels.ts": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
   "zzz-hp/src/stores/calculatorBuffs.ts": "a080573ff7217ffd37c25e161346240cce2cb121f2bb6b3edd1b350393466e6b",
-  "zzz-hp/src/data/calculatorBuffDefaults.ts": "4500dbc92ebb0ad649c47d960bdf26cc332e0f896a539d74bbeb945c4ffdacca"
+  "zzz-hp/src/data/calculatorBuffDefaults.ts": "4500dbc92ebb0ad649c47d960bdf26cc332e0f896a539d74bbeb945c4ffdacca",
+  "zzz-hp/src/utils/remielSelfRadiancePanel.ts": "9c9c803a029530e24d3a4ca4d5429e50e46577daf709cfd69a916b620fe68cb1",
+  "zzz-hp/src/utils/optimalAffixAlloc.ts": "640bfd5d177bb86fb22488209b6bc5f53e7786f6a04bdb71caa692a40f057965",
+  "zzz-hp/src/utils/damageEvent.ts": "3fe665ea0aa0fe3c7b0d9752692b94784c02bd28438a8288620b2005d3c4bd30",
+  "CALCULATOR_FORMULAS.md": "28a551a8b345d469f506f835d9de7825132c090e4f9619f072b300992633b3e9",
+  "zzz-hp/scripts/test-mult-factor-percent.mjs": "0bbbca706409845f0835cfd2f850b45275d6a6c069c475a02cf29bf07739dcfb"
 }

@@ -325,10 +325,45 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 `target.baseStunDamageMultiplier` 沿用[失衡易伤区](factors/stun-damage.md)的当前状态基础乘数契约：
 通常未失衡传 `1`、失衡传 `1.5`；`isStunned` 不会把调用方传入的 `1.5` 自动改成 `1`。
 
+#### 蕾米埃尔自身特殊虚曜
+
+目录入口的 `anomalySource` 在 luminize 分支可改用具名机制
+`{ mechanism: "remielle-special-voidflare", entityId, level, strength }`，计算她本人特殊[虚曜]对应的
+一次耀变。`entityId` 必须通过 actorSources 映射到 1581 且等于本次耀变 actor；`level` 是角色等级
+（有限整数 1—60，不做 round/clamp），既是特殊增伤区（1 + 0.025 × 等级）的唯一来源，也在内部组装
+防御等级：该分支的 `defense` 不接收 `attackerLevel`（公开类型显式排除该字段，运行时对任何
+提供值——包括与等级相同的值——明确拒绝）；普通异常来源分支保持原有 `defense.attackerLevel`
+输入不变。两条分支在公开类型上互斥：普通来源不接受 `mechanism`/`strength` 字段（具名对象无法
+经结构化赋值退入普通分支），具名来源的 `defense` 无法携带 `attackerLevel` 退入具名分支。`strength` 为 `full`（最低影画 1）或
+`mindscape-6-quarter`（最低影画 6，倍率 ×0.25），影画门槛按目录机制元数据校验。此分支只接受
+lumiflux 元素、单项 `attack` 基础伤害项（直接倍率 1）与 `from-effects` 异化，拒绝 `hit.actionSnapshotId`、
+伤害项 `statSource` 的历史快照或其它实体、手工已结算增伤/异化倍率及调用方耀变倍率调整；选中
+逐命中倍率或旧 M6 锚点部分选项（`luminize-multiplier-addition` / `luminize-special-increase` 通道）
+时明确报错，strength 档位已表达对应语义。`luminizeMultiplier.baseLuminizeMultiplier` 仍须等于已解析
+动作倍率；普通 damage-bonus 类选择进入 `notApplicableContributions`，不影响特殊基础区。
+
+基础区与精通区按固定来源的本人耀变专用读取准备：受限攻击 = max(0, 局外攻击 + 她自身角色来源的
+攻击转模)；受限精通 = max(0, 局外精通 + 自身装备且职业适配音擎的精通效果 + 自身驱动盘四件套精通
+效果，二件套已在局外面板只计一次)。异化系数与耀变倍率的精通转换、通用抗穿读取她的完整当前面板
+（允许符合条件的队友效果）；穿透率、穿透值与耀变专属抗穿只取自身来源。引擎在独立求值上下文中
+执行这些受限读取，具名标记来自目录 `mechanisms` 元数据，不按名称或数值猜来源；飞鸟星梦的以太
+白名单在专用精通读取中不排除流明（具名差异 `remielle-special-voidflare-restricted-reads`），普通
+current 精通读取仍保留以太条件。抗性沿用显式 baseline：调用方按固定上游"循环下一位非流明队友、
+跳过空槽"的规则确定等效属性，把对应值放入 `damage.resistance.targetResistance`，没有非流明队友时
+取 0；不新增站位或轮转框架。目录缺少该机制元数据（旧目录）时，具名机制输入明确拒绝，普通调用
+不受影响。
+
+本完整入口的配装与面板资料固定为 60 级，只开放 `level` 60；其他等级走低层目录显式数值入口，
+不插值或复用 60 级面板。一次调用对应一枚特殊虚曜的一次耀变，只开放已解析的 luminize 动作，
+不推断虚曜个数或命中次数。防御等级换算与抗性最终钳制沿用 Fairy 既有乘区契约，与固定来源
+整应用的 794 定值防御和抗穿项内钳制存在已登记的数值边界；低等级或极端抗性不承诺与上游整段
+结果逐位相同。
+
 本接口只计算同一静态时点，不增加时间线、自动触发或叠层模拟。输入对象不被修改；配置或时点变化后重新调用。
 
 资料和已核实规则当前使用游戏版本 `3.2`。动作是否可计算以解析结果为准，效果是否支持及缺失原因以
-[覆盖报告与限制](../data/zzz-hp-static-effects.md#实际覆盖与使用限制)为准；蕾米埃尔作为自身异常强度提供者
-的特殊等级公式不在当前范围。锐化伤害按[锐化伤害公式](formulas/sharpen-damage.md)以最终防御缩放、锐暴区
+[覆盖报告与限制](../data/zzz-hp-static-effects.md#实际覆盖与使用限制)为准；蕾米埃尔作为自身异常强度提供者的
+特殊虚曜耀变已按具名机制接入（见上文与[修订 10](../data/zzz-hp-static-effects.md#修订-10蕾米埃尔自身特殊虚曜接入)），
+普通异常/紊乱/异放/乱流仍不接受她作为 `anomalySource`，她提供给其他来源异常的已映射团队增益继续可用。锐化伤害按[锐化伤害公式](formulas/sharpen-damage.md)以最终防御缩放、锐暴区
 结算，其技能动作与增益接入见[技能倍率规范](../data/skill-actions.md)与[增益数据接入](../data/zzz-hp-static-effects.md)。
-十个完整配装场景的验证边界见[端到端验收](../../plans/static-e2e-acceptance.md)，不推断全部角色、技能或未来资料版本均已验证。
+十四个完整配装场景的验证边界见[端到端验收](../../plans/static-e2e-acceptance.md)，不推断全部角色、技能或未来资料版本均已验证。

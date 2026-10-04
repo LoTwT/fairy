@@ -6,7 +6,7 @@
 
 [正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 849 条规则与 834 个选择项。1,237 条 converted、45 条 corrected；8 条 unsupported 中，4 条属于当前 core 范围外公式（壳中之灵 R2—R5 的上游 `special` 乘区效果，属性异常与紊乱伤害提升依次为 11.5%、13%、14.5%、16%），另有 4 条是已迁移的重复部分记录（semantic-conflict）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
-核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项、空记录和蕾米埃尔自身异常强度的新等级公式另列在报告中。目录入口拒绝把蕾米埃尔作为 `anomalySource`；她提供给其他来源异常的已映射增益可以正常计算。
+核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项和空记录另列在报告中。目录入口对普通异常来源仍拒绝把蕾米埃尔作为 `anomalySource`；她本人特殊[虚曜]对应的耀变自修订 10 起按具名机制 `remielle-special-voidflare` 接入（见下文），她提供给其他来源异常的已映射增益继续正常计算。
 
 卢西娅“合唱（2 条）”已接入的是破暗贯穿力增益；合唱末段的生命值附加伤害暂不实现，
 当前限制、固定来源证据与后续补证条件统一见[技能动作规范](skill-actions.md#已知限制卢西娅合唱末段生命附加伤害)。
@@ -197,6 +197,33 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
 影画/精炼非法档位拒绝、`direct` 适用范围扩展的常规回归与打包消费。此前九场景数值逐位不变，
 仅 provenance 与新增 `sharpCriticalDamage` 面板字段变化。
 
+### 修订 10：蕾米埃尔自身特殊虚曜接入
+
+规则集 revision 递增为 `10`。core 的目录入口新增具名机制分支：luminize 的 `anomalySource` 携带
+`mechanism: "remielle-special-voidflare"` 时按角色等级（1—60，不 round/clamp）、`strength`
+`full`/`mindscape-6-quarter`（影画门槛 1/6）计算她本人特殊[虚曜]对应的一次耀变；特殊增伤区由
+`1 + 0.025 × 等级` 准备，等级区沿用 `1 + (等级 − 1) / 59` 的不截断分支，quarter 档位乘 0.25。
+完整输入契约、受限读取口径与边界见[静态计算输入组装](../core/static-calculation.md#蕾米埃尔自身特殊虚曜)。
+
+- **具名读取元数据**：目录新增 `mechanisms` 块，由固定规范化来源生成、core 只按稳定身份消费——
+  自身攻击转模 3 条（芳菲之邀三档）、职业适配音擎精通效果 31 条规则（13 个来源实体，原始精炼
+  档位记录 75 条按归并去重）、驱动盘四件套精通 5 条、耀变专属抗穿 1 条（影画 1）、元素豁免 1 条
+  （飞鸟星梦 14133）。两件套精通不标记（已在局外面板）。来源清单新增 remielSelfRadiancePanel、
+  optimalAffixAlloc、damageEvent、CALCULATOR_FORMULAS、test-mult-factor-percent 五个固定文件摘要，
+  增益与技能固定提交不变。
+- **受限读取口径**：受限攻击/精通、完整面板的异化与耀变精通转换、通用与耀变专属抗穿的拆分按固定
+  上游本人耀变面板实现登记为具名差异 `remielle-special-voidflare-restricted-reads`；旧 M6 两条锚点
+  部分选项在新分支选中时拒绝，`layers: 0` 仍按既有选择身份校验、不计为启用。
+- **覆盖状态**：来源分母不变（187 实体、1,061 pack、1,290 记录；1,237 converted、45 corrected、
+  8 unsupported）。`deferredMechanisms` 中蕾米条目改为 `supported-with-scope`：具名机制已接入，
+  普通异常/紊乱/异放/乱流仍拒绝她作为 `anomalySource`；既有 8 条 unsupported（含壳中之灵 4 条
+  special 乘区）与 10 条 unavailable 计数不因此减少。三个效果制品同次生成，技能动作字节不变，
+  技能清单与计算快照摘要更新。
+- **独立验收**：core 目录机制测试覆盖受限/完整读取分离、等级与档位门槛、旧锚点拒绝、元素豁免、
+  抗穿拆分、缓存隔离与旧目录拒绝；真实配装场景（蕾米 60 级 M1/M4/M6-quarter、三异常队伍、
+  花羽轮舞辅助等级 12）进入[端到端验收](../../plans/static-e2e-acceptance.md#蕾米埃尔特殊虚曜场景追加)，
+  期望值来自固定来源原函数与独立算式，并逐项复验父会话的独立 Decimal 验收值。
+
 ## 交付目标与边界
 
 转换器覆盖代理人、音擎和驱动盘的来源盘点、身份映射、可重复转换与正式制品生成。在当前 core 公式能力范围内处理固定来源的全部可用静态效果；不能因为转换器或 effects 暂时缺少表达能力就把已有公式可以计算的效果列为暂不支持。
@@ -205,7 +232,7 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
 
 超出现有 core 契约的新公式、未登记的来源版本、邦布、关卡环境与伤害流程预设不在本转换器的支持范围内；新公式即使已经出现在固定来源内，也遵循这一边界。固定来源内的空记录、身份缺失、缺少参数与新公式条目分别登记，不能通过删除条目、造零值或只公布已成功的分母制造全量覆盖。
 
-现有 core 支持范围以本次 Fairy 基线的[公式规范](../core/index.md)为准。`sharpenDmgBonus` / `sharpenCritDmgBonus` 依赖的锐化/锐暴公式已于修订 9 接入；蕾米埃尔作为自身异常强度提供者时的新增特殊等级公式仍不因 ZZZ-HP 已支持就自动进入。上游通用 `special` 也不能通过新建任意最终倍率接口或暗乘基础伤害来绕过[特殊乘区边界](../core/factors/special.md)。已有耀变独立机制对应的 `specialMult` 等条目，应按明确来源映射到既有具体乘区；无法对应的条目记录原因。流明元素的标识和筛选属于已有耀变能力的适配，不能以 effects 的元素枚举尚缺 `lumiflux` 为由整体排除。
+现有 core 支持范围以本次 Fairy 基线的[公式规范](../core/index.md)为准。`sharpenDmgBonus` / `sharpenCritDmgBonus` 依赖的锐化/锐暴公式已于修订 9 接入；蕾米埃尔自身特殊虚曜对应的耀变已于修订 10 按具名机制接入，普通异常类仍不接受她作为异常强度提供者。上游通用 `special` 也不能通过新建任意最终倍率接口或暗乘基础伤害来绕过[特殊乘区边界](../core/factors/special.md)。已有耀变独立机制对应的 `specialMult` 等条目，应按明确来源映射到既有具体乘区；无法对应的条目记录原因。流明元素的标识和筛选属于已有耀变能力的适配，不能以 effects 的元素枚举尚缺 `lumiflux` 为由整体排除。
 
 ## 固定输入与证据
 

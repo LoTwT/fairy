@@ -27,6 +27,10 @@
         "sha256": "eee1f52bfa9c128d0e278c5890717c6aa1e897695237a9c6573751489ad311cb"
       },
       {
+        "path": "zzz-hp/src/utils/remielUtils.ts",
+        "sha256": "1cb8084a981115924b0cdc64961a67f937c280fe82babe2710758c7b279d8773"
+      },
+      {
         "path": "zzz-hp/src/utils/panelBuffCalc.ts",
         "sha256": "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09"
       },
@@ -213,6 +217,61 @@
         "sha256": "f8547d7b492e59436fa653a24edebde26265473bf9a856d94aa115d766b85f07"
       },
       {
+        "file": "multFactorPercent.ts",
+        "name": "multFactorPercentToRatio",
+        "sha256": "f09de56233fc0c3068a774d3014285741ff5648ae0d2a16e9a44ffaead43b0a4"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "LUMINOUS_ELEMENT",
+        "sha256": "e30c30e1e99f787534a6bee2e63342b9241298de67897f4007e90c2012c8eea0"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "isLuminousElement",
+        "sha256": "ec0f4b6991f15c280cb7b76510c35c8baa4faeb5102101d23ccb93b91ce5d12d"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "resolveLuminousEquivalentElement",
+        "sha256": "d3fe0d75a53b77a8377265dc1c8168d188cdb81d94565aa96d65db14e0190193"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "clampRemielLevel",
+        "sha256": "ca9890b36def220af163c1b5db7a3205ebe50887caac4cc7977d3a51f0d3400f"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "computeMutationZone",
+        "sha256": "b10e7707762e2b20bc86992aa390c4f7bba148b202cad5a9488a410f5a178fba"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "computeRadianceMultZone",
+        "sha256": "3a117735aaa1cbf709013195e118ac146684c4d3920b7197c4462a48a256e3e7"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "computeSpecialMultZone",
+        "sha256": "26bfa598318456361521239264f83199b05f03d7caaee9ee25fe4e8e4cf4f993"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "computeRemielSelfRadianceSpecialLevelZone",
+        "sha256": "c738e242c6bee92328edbb8bc8d8d7194e79d4c6ebf0512d10095954e5a1222e"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "computeRemielSelfRadianceStandardLevelZone",
+        "sha256": "f3bbffb4f774c185b9060e50e1662ca128e0407265653661b3a1643876f5c62a"
+      },
+      {
+        "file": "remielUtils.ts",
+        "name": "computeRemielSelfAnomalyBase",
+        "sha256": "355475d510b29c73141db1887912da7143c8f805807fa469f72ecebb4c616cbd"
+      },
+      {
         "file": "panelBuffCalc.ts",
         "name": "applyBuffModsToPanel",
         "sha256": "8c6cce69151093b709949952fcdb562a6bc990fc81845dc15ac65a437e53e6bf"
@@ -311,6 +370,11 @@
         "file": "damageCalc.ts",
         "name": "computeGeneralAndAnomalyBase",
         "sha256": "1f8b749c523c2413cbfd89a83aeed38c16b79910967c1b3c7b00d753b44248ed"
+      },
+      {
+        "file": "damageCalc.ts",
+        "name": "computeDefenseZone",
+        "sha256": "f0bbbbecea84b5493a4bce9ad92cbab3e9e4a8c04717d008c78d10b63ebac57e"
       }
     ],
     "nanokaSources": [
@@ -379,6 +443,42 @@
         "sha256": "0f0095be51b0b67133f0e583b34c79fa8cfb0e2eff520f6c1a56a7947e755d9e"
       },
       {
+        "path": "agents/1581/data.json",
+        "sha256": "e44c965092149c70fce8b3771f0a55094143d5e7a9e7196ad1038613f90236e9"
+      },
+      {
+        "path": "w-engines/14158/data.json",
+        "sha256": "102046e351af0a7f86fd59438f483651999a0e00922dc97e50807187f4423b43"
+      },
+      {
+        "path": "w-engines/14158/details.zh.json",
+        "sha256": "25e17ff0785c5ca76f616bc7e00726d87e0b0e098a96be50ad1d9680254d42f5"
+      },
+      {
+        "path": "agents/1261/data.json",
+        "sha256": "85fc60dc9d30625914fdb6420ec10ba2d4db0371a23139bdf87ad22b4318a71a"
+      },
+      {
+        "path": "w-engines/14156/data.json",
+        "sha256": "83eabf582923d103b79e38ef4c44cc89af376628ea1546cb83db20825c898c05"
+      },
+      {
+        "path": "w-engines/14156/details.zh.json",
+        "sha256": "b7145001a4ee1fd0fd165e83e8d6f6491f46501e10324a0472b0a59989acc9cd"
+      },
+      {
+        "path": "agents/1561/data.json",
+        "sha256": "6b1a2ef93d6f0b0b02d6a63aedc78ff3913fbd874f7a976f393475629b063487"
+      },
+      {
+        "path": "w-engines/14118/data.json",
+        "sha256": "fa56f4e6c29d774baa3de429eee30cc55ffadfd2ca1057fca97ed0dbb0285c3b"
+      },
+      {
+        "path": "w-engines/14118/details.zh.json",
+        "sha256": "d712018704c4a6c61026c705c7a4c40dbec8698e628b4b50fe6ad05573e5c3c9"
+      },
+      {
         "path": "agents/1031/details.zh.json",
         "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
       },
@@ -389,6 +489,10 @@
       {
         "path": "agents/1611/details.zh.json",
         "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+      },
+      {
+        "path": "agents/1581/details.zh.json",
+        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
       }
     ]
   },
@@ -701,6 +805,186 @@
         "pen": 18
       }
     },
+    "remiel": {
+      "panel": {
+        "stats": {
+          "health": 9682.706900000001,
+          "attack": 3387.2466959999997,
+          "defense": 784.5916,
+          "impact": 83,
+          "anomalyProficiency": 322,
+          "anomalyMastery": 115,
+          "energyRegen": 1.2,
+          "criticalRate": 0.05,
+          "criticalDamage": 0.5,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 0,
+        "atkFlat": 0,
+        "atkPercent": 0,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 0,
+        "critDmg": 0,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 9682,
+        "atk": 3385.36,
+        "def": 784,
+        "impact": 0,
+        "mastery": 322,
+        "anomalyControl": 115,
+        "energyRegen": 120,
+        "critRate": 5,
+        "critDmg": 50,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 9682.71,
+        "atk": 3387.25,
+        "def": 784.59,
+        "impact": 0,
+        "mastery": 322,
+        "anomalyControl": 115,
+        "energyRegen": 1.2,
+        "critRate": 5,
+        "critDmg": 50,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
+    "jane": {
+      "panel": {
+        "stats": {
+          "health": 9988.696100000001,
+          "attack": 2867.12832,
+          "defense": 790.5977,
+          "impact": 86,
+          "anomalyProficiency": 236,
+          "anomalyMastery": 148,
+          "energyRegen": 1.92,
+          "criticalRate": 0.13,
+          "criticalDamage": 0.5,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 0,
+        "atkFlat": 0,
+        "atkPercent": 0,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 0,
+        "critDmg": 0,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 9988,
+        "atk": 2864.8,
+        "def": 790,
+        "impact": 0,
+        "mastery": 236,
+        "anomalyControl": 148,
+        "energyRegen": 192,
+        "critRate": 13,
+        "critDmg": 50,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 9988.7,
+        "atk": 2867.13,
+        "def": 790.6,
+        "impact": 0,
+        "mastery": 236,
+        "anomalyControl": 148,
+        "energyRegen": 1.92,
+        "critRate": 13,
+        "critDmg": 50,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
+    "velina": {
+      "panel": {
+        "stats": {
+          "health": 9988.696100000001,
+          "attack": 2806.5504,
+          "defense": 796.6038,
+          "impact": 86,
+          "anomalyProficiency": 287,
+          "anomalyMastery": 112,
+          "energyRegen": 1.2,
+          "criticalRate": 0.13,
+          "criticalDamage": 0.5,
+          "penetrationRatio": 0.24,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 0,
+        "atkFlat": 0,
+        "atkPercent": 0,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 0,
+        "critDmg": 0,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 9988,
+        "atk": 2805.6,
+        "def": 796,
+        "impact": 0,
+        "mastery": 287,
+        "anomalyControl": 112,
+        "energyRegen": 120,
+        "critRate": 13,
+        "critDmg": 50,
+        "penRate": 24,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 9988.7,
+        "atk": 2806.55,
+        "def": 796.6,
+        "impact": 0,
+        "mastery": 287,
+        "anomalyControl": 112,
+        "energyRegen": 1.2,
+        "critRate": 13,
+        "critDmg": 50,
+        "penRate": 24,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
     "astraM2": {
       "panel": {
         "stats": {
@@ -816,6 +1100,126 @@
         "energyRegen": 1.56,
         "critRate": 48.2,
         "critDmg": 107.6,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
+    "remielM4": {
+      "panel": {
+        "stats": {
+          "health": 9682.706900000001,
+          "attack": 3387.2466959999997,
+          "defense": 784.5916,
+          "impact": 83,
+          "anomalyProficiency": 322,
+          "anomalyMastery": 115,
+          "energyRegen": 1.2,
+          "criticalRate": 0.05,
+          "criticalDamage": 0.5,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 0,
+        "atkFlat": 0,
+        "atkPercent": 0,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 0,
+        "critDmg": 0,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 9682,
+        "atk": 3385.36,
+        "def": 784,
+        "impact": 0,
+        "mastery": 322,
+        "anomalyControl": 115,
+        "energyRegen": 120,
+        "critRate": 5,
+        "critDmg": 50,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 9682.71,
+        "atk": 3387.25,
+        "def": 784.59,
+        "impact": 0,
+        "mastery": 322,
+        "anomalyControl": 115,
+        "energyRegen": 1.2,
+        "critRate": 5,
+        "critDmg": 50,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      }
+    },
+    "remielM6": {
+      "panel": {
+        "stats": {
+          "health": 9682.706900000001,
+          "attack": 3387.2466959999997,
+          "defense": 784.5916,
+          "impact": 83,
+          "anomalyProficiency": 322,
+          "anomalyMastery": 115,
+          "energyRegen": 1.2,
+          "criticalRate": 0.05,
+          "criticalDamage": 0.5,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 0,
+        "damageBonuses": {}
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 0,
+        "hpPercent": 0,
+        "atkFlat": 0,
+        "atkPercent": 0,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 0,
+        "critRate": 0,
+        "critDmg": 0,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": {
+        "hp": 9682,
+        "atk": 3385.36,
+        "def": 784,
+        "impact": 0,
+        "mastery": 322,
+        "anomalyControl": 115,
+        "energyRegen": 120,
+        "critRate": 5,
+        "critDmg": 50,
+        "penRate": 0,
+        "dmgBonus": 0,
+        "pen": 0
+      },
+      "upstreamRoundedAlignedPanel": {
+        "hp": 9682.71,
+        "atk": 3387.25,
+        "def": 784.59,
+        "impact": 0,
+        "mastery": 322,
+        "anomalyControl": 115,
+        "energyRegen": 1.2,
+        "critRate": 5,
+        "critDmg": 50,
         "penRate": 0,
         "dmgBonus": 0,
         "pen": 0
@@ -1998,6 +2402,580 @@
         "displayedCritical": null
       },
       "upstreamStyleIntegerExpected": 249242
+    },
+    "remiel-voidflare": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1581/details.zh.json",
+            "pointer": "/skill/assist/description/7/param/2",
+            "expression": "{CAL:200+AvatarSkillLevel(6)*10,1,2}%",
+            "parameters": {}
+          },
+          "upstreamSkill": {
+            "id": "sk-remiel-radiance-mtsw2paj",
+            "element": "",
+            "multiplier": 3.2
+          },
+          "multipliers": [3.2],
+          "element": "lumiflux",
+          "individual": false,
+          "sharpen": false,
+          "luminize": true
+        },
+        "conversionBase": 3387.2466959999997,
+        "contributions": [
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 9.36
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "radianceMultFactor",
+            "sourceValue": 0.936
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 10
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "stat": "atk",
+            "sourceValue": 1354.8986783999999
+          },
+          {
+            "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "stat": "radianceResPen",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 96
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 15
+          }
+        ],
+        "finalStats": {
+          "restrictedAttack": 4742.145374399999,
+          "restrictedMastery": 468,
+          "fullMastery": 468,
+          "attack": 3387.2466959999997,
+          "anomalyProficiency": 322
+        },
+        "factors": {
+          "baseDamage": 4742.145374399999,
+          "damageBonus": 2.5,
+          "anomalyProficiency": 4.68,
+          "refringe": 1.1936,
+          "luminizeMultiplier": 4.136,
+          "anomalyDamageBonus": 1.35,
+          "defense": 0.5,
+          "resistance": 1.5,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "specialMultiplier": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 554657.7594933145,
+            "critical": null,
+            "expected": 554657.7594933145
+          }
+        ],
+        "totals": {
+          "nonCritical": 554657.7594933145,
+          "critical": null,
+          "expected": 554657.7594933145,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 554658
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 554657.7594933145,
+        "critical": null,
+        "expected": 554657.7594933145,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 554657.7594933145,
+        "critical": null,
+        "expected": 554657.7594933145,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 554658
+    },
+    "remiel-voidflare-m4": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1581/details.zh.json",
+            "pointer": "/skill/assist/description/7/param/2",
+            "expression": "{CAL:200+AvatarSkillLevel(6)*10,1,2}%",
+            "parameters": {}
+          },
+          "upstreamSkill": {
+            "id": "sk-remiel-radiance-mtsw2paj",
+            "element": "",
+            "multiplier": 3.2
+          },
+          "multipliers": [3.2],
+          "element": "lumiflux",
+          "individual": false,
+          "sharpen": false,
+          "luminize": true
+        },
+        "conversionBase": 3387.2466959999997,
+        "contributions": [
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 9.36
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "radianceMultFactor",
+            "sourceValue": 0.936
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 10
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "stat": "atk",
+            "sourceValue": 1354.8986783999999
+          },
+          {
+            "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "stat": "radianceResPen",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/4/effectBlocks/0/effects/0",
+            "stat": "specialMult",
+            "sourceValue": 12
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 96
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 15
+          }
+        ],
+        "finalStats": {
+          "restrictedAttack": 4742.145374399999,
+          "restrictedMastery": 468,
+          "fullMastery": 468,
+          "attack": 3387.2466959999997,
+          "anomalyProficiency": 322
+        },
+        "factors": {
+          "baseDamage": 4742.145374399999,
+          "damageBonus": 2.5,
+          "anomalyProficiency": 4.68,
+          "refringe": 1.1936,
+          "luminizeMultiplier": 4.136,
+          "anomalyDamageBonus": 1.35,
+          "defense": 0.5,
+          "resistance": 1.5,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "specialMultiplier": 1.12
+        },
+        "hits": [
+          {
+            "nonCritical": 621216.6906325123,
+            "critical": null,
+            "expected": 621216.6906325123
+          }
+        ],
+        "totals": {
+          "nonCritical": 621216.6906325123,
+          "critical": null,
+          "expected": 621216.6906325123,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 621217
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 621216.6906325123,
+        "critical": null,
+        "expected": 621216.6906325123,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 621216.6906325123,
+        "critical": null,
+        "expected": 621216.6906325123,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 621217
+    },
+    "remiel-voidflare-m6-quarter": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1581/details.zh.json",
+            "pointer": "/skill/assist/description/7/param/2",
+            "expression": "{CAL:200+AvatarSkillLevel(6)*10,1,2}%",
+            "parameters": {}
+          },
+          "upstreamSkill": {
+            "id": "sk-remiel-radiance-mtsw2paj",
+            "element": "",
+            "multiplier": 3.2
+          },
+          "multipliers": [3.2],
+          "element": "lumiflux",
+          "individual": false,
+          "sharpen": false,
+          "luminize": true
+        },
+        "conversionBase": 3387.2466959999997,
+        "contributions": [
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 9.36
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "radianceMultFactor",
+            "sourceValue": 0.936
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 10
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "stat": "atk",
+            "sourceValue": 1354.8986783999999
+          },
+          {
+            "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "stat": "radianceResPen",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/4/effectBlocks/0/effects/0",
+            "stat": "specialMult",
+            "sourceValue": 12
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 96
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 15
+          }
+        ],
+        "finalStats": {
+          "restrictedAttack": 4742.145374399999,
+          "restrictedMastery": 468,
+          "fullMastery": 468,
+          "attack": 3387.2466959999997,
+          "anomalyProficiency": 322
+        },
+        "factors": {
+          "baseDamage": 4742.145374399999,
+          "damageBonus": 2.5,
+          "anomalyProficiency": 4.68,
+          "refringe": 1.1936,
+          "luminizeMultiplier": 4.136,
+          "anomalyDamageBonus": 1.35,
+          "defense": 0.5,
+          "resistance": 1.5,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "specialMultiplier": 0.28
+        },
+        "hits": [
+          {
+            "nonCritical": 155304.17265812808,
+            "critical": null,
+            "expected": 155304.17265812808
+          }
+        ],
+        "totals": {
+          "nonCritical": 155304.17265812808,
+          "critical": null,
+          "expected": 155304.17265812808,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 155304
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 155304.17265812808,
+        "critical": null,
+        "expected": 155304.17265812808,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 155304.17265812808,
+        "critical": null,
+        "expected": 155304.17265812808,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 155304
+    },
+    "remiel-voidflare-elements": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1581/details.zh.json",
+            "pointer": "/skill/assist/description/7/param/2",
+            "expression": "{CAL:200+AvatarSkillLevel(6)*10,1,2}%",
+            "parameters": {}
+          },
+          "upstreamSkill": {
+            "id": "sk-remiel-radiance-mtsw2paj",
+            "element": "",
+            "multiplier": 3.2
+          },
+          "multipliers": [3.2],
+          "element": "lumiflux",
+          "individual": false,
+          "sharpen": false,
+          "luminize": true
+        },
+        "conversionBase": 3387.2466959999997,
+        "contributions": [
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 9.36
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "stat": "radianceMultFactor",
+            "sourceValue": 0.936
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "mutationCoeff",
+            "sourceValue": 10
+          },
+          {
+            "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "stat": "atk",
+            "sourceValue": 1354.8986783999999
+          },
+          {
+            "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+            "holderId": "entity:remiel",
+            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "stat": "radianceResPen",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 96
+          },
+          {
+            "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
+            "holderId": "entity:remiel",
+            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 20
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/0",
+            "stat": "mastery",
+            "sourceValue": 50
+          },
+          {
+            "optionId": "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb",
+            "holderId": "entity:remiel",
+            "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/1",
+            "stat": "anomalyDmgBonus",
+            "sourceValue": 15
+          }
+        ],
+        "finalStats": {
+          "restrictedAttack": 4742.145374399999,
+          "restrictedMastery": 468,
+          "fullMastery": 468,
+          "attack": 3387.2466959999997,
+          "anomalyProficiency": 322
+        },
+        "factors": {
+          "baseDamage": 4742.145374399999,
+          "damageBonus": 2.5,
+          "anomalyProficiency": 4.68,
+          "refringe": 1.1936,
+          "luminizeMultiplier": 4.136,
+          "anomalyDamageBonus": 1.35,
+          "defense": 0.5,
+          "resistance": 1.4,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "specialMultiplier": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 517680.5755270936,
+            "critical": null,
+            "expected": 517680.5755270936
+          }
+        ],
+        "totals": {
+          "nonCritical": 517680.5755270936,
+          "critical": null,
+          "expected": 517680.5755270936,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 517681
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 517680.5755270936,
+        "critical": null,
+        "expected": 517680.5755270936,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 517680.5755270936,
+        "critical": null,
+        "expected": 517680.5755270936,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 517681
     }
   }
 }

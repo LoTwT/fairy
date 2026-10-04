@@ -132,4 +132,9 @@ export type {
   StaticCatalogDamageItem,
   StaticCatalogDamageItemRequirement,
   StaticCatalogDamageParameters,
+  StaticCatalogDefenseInput,
+  StaticCatalogLuminizeDamageBranch,
+  StaticCatalogMechanism,
+  StaticCatalogPlainAnomalySource,
+  RemielleSpecialVoidflareAnomalySource,
 } from "./types.ts"

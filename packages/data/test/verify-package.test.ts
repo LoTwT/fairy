@@ -457,6 +457,70 @@ assert.equal(staticCoverage.summary.rawEffects, 1290)
 const staticResult = value(calculateStaticDamageFromCatalog({ ...${readFileSync(new URL("./fixtures/static-catalog-consumer.json", import.meta.url), "utf8")}, definitions: staticDefinitions, catalog: staticCatalog }))
 assert.ok(Math.abs(staticResult.criticalRate - 0.13) < 1e-12)
 assert.ok(staticResult.expected > staticResult.nonCritical)
+// 蕾米埃尔自身特殊虚曜：安装包根入口真实消费新机制目录与真实定义，
+// 完成一例具名机制分支的数值计算。期望独立于实现：
+// 局外 A=1000 + 自身转模 0.4×1000=400 → 受限 A=1400；局外精通 100 + 音擎 96
+// + 四件 50 → 受限 P=246；等级 60 → 特殊增伤 1+0.025×60=2.5、等级区
+// 1+59/59=2；三异常异化 R=1+246×0.0002+0.1=1.1492；倍率=3.2+246×0.002=3.692。
+const remielVoidflareMechanism = staticCatalog.mechanisms?.find((mechanism) => mechanism.mechanism === "remielle-special-voidflare")
+assert.ok(remielVoidflareMechanism, "the packed catalog declares the special Voidflare mechanism")
+assert.equal(remielVoidflareMechanism.agentEntityId, "1581")
+const remielVoidflareData = await (await import("@randomplay/data")).loadStaticCalculationData({ agents: ["Remielle"], wEngines: ["Ode of Resurrected Wings"] })
+assert.ok(remielVoidflareData.catalog.mechanisms?.some((mechanism) => mechanism.mechanism === "remielle-special-voidflare"), "the data root entry exposes the mechanism metadata")
+const voidflareInput = {
+  definitions: staticDefinitions,
+  catalog: staticCatalog,
+  bindings: [
+    { bindingId: "binding:remiel-agent", kind: "agent", holderId: "entity:remiel", sourceEntityId: "1581", eligible: true, configuration: { mindscapeRank: 1, coreSkillLevel: 7 } },
+    { bindingId: "binding:remiel-engine", kind: "w-engine", holderId: "entity:remiel", sourceEntityId: "14158", eligible: true, configuration: { refinement: 1 } },
+    { bindingId: "binding:remiel-disc", kind: "drive-disc", holderId: "entity:remiel", sourceEntityId: "34100", eligible: true, configuration: { setPieces: 4 } },
+    { bindingId: "binding:jane-agent", kind: "agent", holderId: "entity:jane", sourceEntityId: "1261", eligible: true, configuration: { mindscapeRank: 0, coreSkillLevel: 7 } },
+    { bindingId: "binding:velina-agent", kind: "agent", holderId: "entity:velina", sourceEntityId: "1561", eligible: true, configuration: { mindscapeRank: 0, coreSkillLevel: 7 } },
+  ],
+  actorSources: [
+    { entityId: "entity:remiel", agentEntityId: "1581" },
+    { entityId: "entity:jane", agentEntityId: "1261" },
+    { entityId: "entity:velina", agentEntityId: "1561" },
+  ],
+  selections: [
+    ...["agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz", "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz", "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z"].map((optionId) => ({ optionId, bindingId: "binding:remiel-agent", layers: 1 })),
+    { optionId: "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh", bindingId: "binding:remiel-agent", layers: 1 },
+    { optionId: "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7", bindingId: "binding:remiel-engine", layers: 1 },
+    { optionId: "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5", bindingId: "binding:remiel-disc", layers: 1 },
+  ],
+  inputs: [{ bindingId: "binding:remiel-agent", name: "agent:1581:zzz-hp:eff-ms7td2gs-4vbpdh:blk-ms7td2gs-rk1vtd:mindscape:0:source", value: { unit: "attack-points", value: 1000 } }],
+  world: { entities: [
+    { kind: "actor", entityId: "entity:remiel", teamId: "team:players", generalStats: { attack: { baseValue: 1000, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0.05, additions: [] }, criticalDamage: { baseValue: 0.5, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] } } },
+    { kind: "actor", entityId: "entity:jane", teamId: "team:players", generalStats: {}, directStats: {} },
+    { kind: "actor", entityId: "entity:velina", teamId: "team:players", generalStats: {}, directStats: {} },
+    { kind: "actor", entityId: "entity:enemy", teamId: "team:enemies", generalStats: {}, directStats: {} },
+  ], states: [], distances: [] },
+  hit: { actorId: "entity:remiel", targetId: "entity:enemy", actionId: "action:agent:1581:action:0007", skillCategory: "uncategorized", element: "lumiflux", skillTags: [], skillTargetIds: ["zzz-hp:skill:remiel-assist-ms8eijmj"], damageItems: [{ mode: "direct", role: "base", itemId: "special-voidflare", stat: "attack", statSource: { entityId: "entity:remiel" }, damageMultiplier: 1 }] },
+  damage: {
+    kind: "luminize",
+    damageBonus: [],
+    anomalyDamageBonus: [],
+    refringe: { mode: "from-effects" },
+    anomalySource: { mechanism: "remielle-special-voidflare", entityId: "entity:remiel", level: 60, strength: "full" },
+    luminizeMultiplier: { baseLuminizeMultiplier: 3.2, multiplicativeLuminizeMultiplierAdjustments: [] },
+    defense: { targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] },
+    resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+    damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+    stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+  },
+}
+const remielVoidflare = value(calculateStaticDamageFromCatalog(voidflareInput))
+assert.ok(Math.abs(remielVoidflare.factors.nonCritical.baseDamage - 1400) < 1e-9)
+assert.ok(Math.abs(remielVoidflare.factors.nonCritical.damageBonus - 2.5) < 1e-12)
+assert.ok(Math.abs(remielVoidflare.factors.nonCritical.anomalyProficiency - 2.46) < 1e-12)
+assert.ok(Math.abs(remielVoidflare.factors.nonCritical.refringe - 1.1492) < 1e-12)
+assert.ok(Math.abs(remielVoidflare.factors.nonCritical.luminizeMultiplier - 3.692) < 1e-12)
+assert.ok(Math.abs(remielVoidflare.factors.nonCritical.anomalyDamageLevel - 2) < 1e-12)
+assert.ok(Math.abs(remielVoidflare.nonCritical - 1400 * 2.5 * 2.46 * 1.1492 * 3.692 * 2) < 1e-8)
+// 提供重复 attackerLevel（即使与等级同值）在运行时被明确拒绝。
+const duplicated = calculateStaticDamageFromCatalog({ ...voidflareInput, damage: { ...voidflareInput.damage, defense: { ...voidflareInput.damage.defense, attackerLevel: 60 } } })
+assert.equal(duplicated.ok, false)
+assert.ok(!duplicated.ok && duplicated.issues.some((issue) => issue.pointer.includes("/damage/defense/attackerLevel")))
 const rules = value(parseEffectRuleSet(automaticDefinitions.default))
 assert.equal(rules.ruleSetId, "automatic-effects")
 assert.equal(rules.revision, "1")
@@ -738,12 +802,49 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
         "@randomplay/shared",
       )
     const typeSource = `import { loadStaticCalculationData } from "@randomplay/data"
-import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput } from "@randomplay/core"
+import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogLuminizeDamageBranch, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
 const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
 async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {
   const { calculateStaticActionDamage } = await import("@randomplay/core")
   return calculateStaticActionDamage({ ...input, data: await jointData })
 }
+import { calculateStaticDamageFromCatalog } from "@randomplay/core"
+const specialVoidflareSource: RemielleSpecialVoidflareAnomalySource = { mechanism: "remielle-special-voidflare", entityId: "entity:remiel", level: 60, strength: "full" }
+// @ts-expect-error the strength tiers are a closed literal union
+const wrongVoidflareStrength: RemielleSpecialVoidflareAnomalySource = { ...specialVoidflareSource, strength: "half" }
+const mechanismName: StaticCatalogMechanism["mechanism"] = "remielle-special-voidflare"
+const catalogDefense: StaticCatalogDefenseInput = { targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] }
+// @ts-expect-error the special branch rejects a duplicated attackerLevel
+const duplicatedCatalogDefense: StaticCatalogDefenseInput = { ...catalogDefense, attackerLevel: 60 }
+type PackedLuminizeDamage = Extract<StaticCatalogDamageInput["damage"], { kind: "luminize" }>
+const specialLuminizeDamage: PackedLuminizeDamage = { kind: "luminize", damageBonus: [], anomalyDamageBonus: [], refringe: { mode: "from-effects" }, anomalySource: specialVoidflareSource, luminizeMultiplier: { baseLuminizeMultiplier: 3.2, multiplicativeLuminizeMultiplierAdjustments: [] }, defense: catalogDefense, resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] }, damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] }, stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] } }
+// 互斥反例直接用原联合与实际入口验证（结构化变量与 spread，不用 Extract 预收窄）。
+const defenseWithLevel = { attackerLevel: 60, targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] }
+// @ts-expect-error the named source cannot fall back into the plain branch
+const throughUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareSource, defense: defenseWithLevel }
+// @ts-expect-error the special defense rejects attackerLevel even for a structural variable
+const throughDefense: StaticCatalogDefenseInput = defenseWithLevel
+// @ts-expect-error a fresh literal combining the named source with an explicit attackerLevel matches neither branch
+const freshUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: { mechanism: "remielle-special-voidflare", entityId: "entity:remiel", level: 60, strength: "full" }, defense: { attackerLevel: 60, targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] } }
+declare const luminizeRest: Omit<PackedLuminizeDamage, "anomalySource" | "defense">
+// @ts-expect-error the full public damage union rejects the mixed branch input
+const throughFullDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareSource, defense: defenseWithLevel }
+declare const catalogCommon: Omit<StaticCatalogDamageInput, "damage">
+// @ts-expect-error the real catalog entry rejects the named source plus an explicit attackerLevel
+calculateStaticDamageFromCatalog({ ...catalogCommon, damage: { ...luminizeRest, anomalySource: specialVoidflareSource, defense: defenseWithLevel } })
+// 两条合法路径在原联合上保持可用。
+const plainLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: defenseWithLevel }
+const specialLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareSource, defense: catalogDefense }
+const fullSpecialDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareSource, defense: catalogDefense }
+// @ts-expect-error a plain source still requires the explicit attackerLevel
+const plainWithoutDefenseLevel: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: catalogDefense }
+const historicalLuminize: NonNullable<StaticActionCalculationInput["luminize"]> = {
+  hit: { actorId: "entity:remiel", targetId: "entity:enemy", actionId: "action:agent:1581:action:0007", skillCategory: "uncategorized", skillTags: [], skillTargetIds: [], actionSnapshotId: "snapshot:history", element: "lumiflux", damageItems: [{ mode: "direct", role: "base", itemId: "special-voidflare", stat: "attack", statSource: { entityId: "entity:remiel" }, damageMultiplier: 1 }] },
+  damage: fullSpecialDamage,
+}
+// @ts-expect-error element and damageItems remain required on the public hit
+const missingLuminizeHitFields: NonNullable<StaticActionCalculationInput["luminize"]>["hit"] = { actorId: "entity:remiel" }
+void [wrongVoidflareStrength, mechanismName, duplicatedCatalogDefense, throughUnion, throughDefense, freshUnion, throughFullDamage, plainLuminizeBranch, specialLuminizeBranch, fullSpecialDamage, plainWithoutDefenseLevel, historicalLuminize, missingLuminizeHitFields]
 import { loadAgentLevel60Attributes, loadWEngineLevel60Attributes, loadSDriveDiscMaxLevelAffixes } from "@randomplay/data"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes, PanelAttributeBonus } from "@randomplay/data"
 import { loadAgentActions, resolveAgentAction, resolveAgentSkillLevel } from "@randomplay/data"

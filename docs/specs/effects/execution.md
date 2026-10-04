@@ -320,7 +320,7 @@
 
 低层异化接受原 helper 参数或 `{ settledMultiplier }`。已结算分支直接复用倍率，不再次叠加异化通道。目录 `from-effects` 则将完整系数加数求和后加 1，仅计算一次；目录 `settled` 不再读取被跳过转化的当前属性或输入。
 
-`calculateStaticDamageFromCatalog` 在上述路径前校验选项目录、展开静态选择并准备倍率。身份/职业与互斥、已选缺档/缺输入、耀变唯一参数映射、异常来源及时间派生规则集中在[数据接入规范](../data/zzz-hp-static-effects.md)，类型以 `StaticCatalogDamageInput` 为准。表中标明“目录”的新通道在低层入口仅作为不适用贡献返回，不隐式更改原有倍率。时间派生来源保留在结果 `preparations`，不要求时间线。
+`calculateStaticDamageFromCatalog` 在上述路径前校验选项目录、展开静态选择并准备倍率。身份/职业与互斥、已选缺档/缺输入、耀变唯一参数映射、异常来源及时间派生规则集中在[数据接入规范](../data/zzz-hp-static-effects.md)，类型以 `StaticCatalogDamageInput` 为准。luminize 的 `anomalySource` 携带 `mechanism: "remielle-special-voidflare"` 时走具名机制分支：受限攻击/精通在独立求值上下文中读取，抗穿按具名来源元数据区分通用与耀变专属，strength 档位并入耀变倍率乘区；完整契约见[静态计算输入组装](../core/static-calculation.md#蕾米埃尔自身特殊虚曜)。表中标明“目录”的新通道在低层入口仅作为不适用贡献返回，不隐式更改原有倍率。时间派生来源保留在结果 `preparations`，不要求时间线。
 
 ## 校验与验收
 

@@ -656,11 +656,61 @@ export type StaticCatalogDamageItem = {
     }
 )
 
+/**
+ * 蕾米埃尔自身特殊虚曜的具名异常来源。entityId 必须映射到 1581 且等于本次
+ * 耀变 actor；level 为角色等级（有限整数 1—60，不做 round/clamp）；strength
+ * 的影画门槛按目录机制元数据校验。此分支不接受快照覆盖。
+ */
+export interface RemielleSpecialVoidflareAnomalySource {
+  readonly mechanism: "remielle-special-voidflare"
+  readonly entityId: EntityId
+  readonly level: number
+  readonly strength: "full" | "mindscape-6-quarter"
+}
+
+/**
+ * 目录普通异常来源：`mechanism` 与 `strength` 是具名机制来源的专有字段，普通
+ * 来源显式排除（`?: never`），使具名对象无法经结构化赋值退入普通分支；运行时
+ * 对普通来源同样按 `rejectUnknownFields` 拒绝未知字段。
+ */
+export type StaticCatalogPlainAnomalySource = AttributeSource & {
+  readonly level: number
+  readonly mechanism?: never
+  readonly strength?: never
+}
+
+/**
+ * 目录 luminize 分支的公开 defense 形状：普通异常来源沿用含 `attackerLevel` 的
+ * 完整输入；特殊虚曜机制分支不接收 `attackerLevel`（`Omit` 之外再显式排除该
+ * 字段——同值也拒绝），等级唯一来自具名来源并由内部组装。
+ */
+export type StaticCatalogDefenseInput = Omit<
+  StaticDefenseInput,
+  "attackerLevel"
+> & {
+  readonly attackerLevel?: never
+}
+
+/** luminize 分支的异常来源与防御形状：普通来源与具名特殊虚曜机制互斥。 */
+export type StaticCatalogLuminizeDamageBranch =
+  | {
+      /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
+      readonly anomalySource: StaticCatalogPlainAnomalySource
+      readonly defense: StaticDefenseInput
+    }
+  | {
+      readonly anomalySource: RemielleSpecialVoidflareAnomalySource
+      readonly defense: StaticCatalogDefenseInput
+    }
+
 export type StaticCatalogDamageParameters =
   StaticDamageParameters extends infer D
     ? D extends StaticDamageParameters
       ? D extends { readonly refringe: unknown }
-        ? Omit<D, "refringe" | "luminizeMultiplier"> &
+        ? Omit<
+            D,
+            "refringe" | "luminizeMultiplier" | "anomalySource" | "defense"
+          > &
             (D extends { readonly kind: "luminize" }
               ? {
                   readonly luminizeMultiplier: Pick<
@@ -668,15 +718,15 @@ export type StaticCatalogDamageParameters =
                     | "baseLuminizeMultiplier"
                     | "multiplicativeLuminizeMultiplierAdjustments"
                   >
-                }
-              : object) & {
+                } & StaticCatalogLuminizeDamageBranch
+              : {
+                  /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
+                  readonly anomalySource: StaticCatalogPlainAnomalySource
+                  readonly defense: StaticDefenseInput
+                }) & {
               readonly refringe:
                 | { readonly mode: "from-effects" }
                 | { readonly mode: "settled"; readonly multiplier: number }
-              /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
-              readonly anomalySource: AttributeSource & {
-                readonly level: number
-              }
             }
         : D
       : never

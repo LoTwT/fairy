@@ -213,6 +213,7 @@ import {
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
   calculateDisplayedDazePercentage,
+  calculateStaticDamageFromCatalog,
   calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
@@ -1176,6 +1177,7 @@ assert.equal(
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
   calculateDisplayedDazePercentage,
+  calculateStaticDamageFromCatalog,
   calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
@@ -1270,6 +1272,12 @@ assert.equal(
   type LuminizeAnomalyDamageLevelInput,
   type LuminizeDamageFormulaInput,
   type LuminizeMultiplierFactorInput,
+  type RemielleSpecialVoidflareAnomalySource,
+  type StaticActionCalculationInput,
+  type StaticCatalogDamageInput,
+  type StaticCatalogDefenseInput,
+  type StaticCatalogLuminizeDamageBranch,
+  type StaticCatalogMechanism,
   type MiasmicShieldReductionFormulaInput,
   type MiasmicShieldReductionRateFactorInput,
   type MiasmicShieldReductionTakenRateFactorInput,
@@ -1345,6 +1353,107 @@ const luminizeSpecialVoidflareAnomalyDamageLevelInput: LuminizeAnomalyDamageLeve
     mechanism: "remielle-special-voidflare",
     level: 30,
   }
+type PackedLuminizeCatalogDamage = Extract<
+  StaticCatalogDamageInput["damage"],
+  { readonly kind: "luminize" }
+>
+const specialVoidflareAnomalySource: RemielleSpecialVoidflareAnomalySource = {
+  mechanism: "remielle-special-voidflare",
+  entityId: "entity:remiel",
+  level: 60,
+  strength: "full",
+}
+// @ts-expect-error the strength tiers are a closed literal union
+const wrongSpecialVoidflareStrength: RemielleSpecialVoidflareAnomalySource = { ...specialVoidflareAnomalySource, strength: "half" }
+const catalogMechanismName: StaticCatalogMechanism["mechanism"] =
+  "remielle-special-voidflare"
+const catalogDefenseWithoutLevel: StaticCatalogDefenseInput = {
+  targetBaseDefense: 0,
+  defensePercentageAdjustments: [],
+  penetrationValues: [],
+}
+// @ts-expect-error the special Voidflare defense rejects a duplicated attackerLevel
+const duplicatedDefenseLevel: StaticCatalogDefenseInput = { ...catalogDefenseWithoutLevel, attackerLevel: 60 }
+const luminizeCatalogDamage: PackedLuminizeCatalogDamage = {
+  kind: "luminize",
+  damageBonus: [],
+  anomalyDamageBonus: [],
+  refringe: { mode: "from-effects" },
+  anomalySource: specialVoidflareAnomalySource,
+  luminizeMultiplier: {
+    baseLuminizeMultiplier: 3.2,
+    multiplicativeLuminizeMultiplierAdjustments: [],
+  },
+  defense: catalogDefenseWithoutLevel,
+  resistance: {
+    targetResistance: 0,
+    targetResistanceReductions: [],
+    attackerResistanceIgnoreValues: [],
+  },
+  damageTaken: {
+    targetDamageTakenIncreases: [],
+    targetDamageTakenReductions: [],
+  },
+  stunDamage: {
+    isTargetStunned: false,
+    targetBaseStunDamageMultiplier: 1,
+    targetStunDamageMultiplierAdjustments: [],
+  },
+}
+const luminizeDamageBranches: StaticCatalogLuminizeDamageBranch["anomalySource"] =
+  luminizeCatalogDamage.anomalySource
+// 互斥反例直接用原联合与实际入口验证（结构化变量与 spread，不用 Extract 预收窄）：
+// 具名来源无法退入普通分支，携带 attackerLevel 的 defense 也无法进入具名分支。
+const defenseWithLevel = {
+  attackerLevel: 60,
+  targetBaseDefense: 0,
+  defensePercentageAdjustments: [],
+  penetrationValues: [],
+}
+// @ts-expect-error the named source cannot fall back into the plain branch
+const throughUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareAnomalySource, defense: defenseWithLevel }
+// @ts-expect-error the special defense rejects attackerLevel even for a structural variable
+const throughDefense: StaticCatalogDefenseInput = defenseWithLevel
+// @ts-expect-error a fresh literal combining the named source with an explicit attackerLevel matches neither branch
+const freshUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: { mechanism: "remielle-special-voidflare", entityId: "entity:remiel", level: 60, strength: "full" }, defense: { attackerLevel: 60, targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] } }
+declare const luminizeRest: Omit<PackedLuminizeCatalogDamage, "anomalySource" | "defense">
+// @ts-expect-error the full public damage union rejects the mixed branch input
+const throughFullDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareAnomalySource, defense: defenseWithLevel }
+declare const catalogCommon: Omit<StaticCatalogDamageInput, "damage">
+// @ts-expect-error the real catalog entry rejects the named source plus an explicit attackerLevel
+calculateStaticDamageFromCatalog({ ...catalogCommon, damage: { ...luminizeRest, anomalySource: specialVoidflareAnomalySource, defense: defenseWithLevel } })
+// 两条合法路径在原联合上保持可用：普通来源（无 mechanism、显式 attackerLevel）
+// 与具名机制来源（mechanism、无 attackerLevel）。
+const plainLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: defenseWithLevel }
+const specialLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareAnomalySource, defense: catalogDefenseWithoutLevel }
+const fullSpecialDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareAnomalySource, defense: catalogDefenseWithoutLevel }
+// @ts-expect-error a plain anomaly source still requires the explicit attackerLevel
+const plainWithoutDefenseLevel: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: catalogDefenseWithoutLevel }
+type HistoricalLuminizeHit = NonNullable<
+  StaticActionCalculationInput["luminize"]
+>["hit"]
+const historicalLuminizeHit: HistoricalLuminizeHit = {
+  actorId: "entity:remiel",
+  targetId: "entity:enemy",
+  actionId: "action:agent:1581:action:0007",
+  skillCategory: "uncategorized",
+  skillTags: [],
+  skillTargetIds: [],
+  actionSnapshotId: "snapshot:history",
+  element: "lumiflux",
+  damageItems: [
+    {
+      mode: "direct",
+      role: "base",
+      itemId: "special-voidflare",
+      stat: "attack",
+      statSource: { entityId: "entity:remiel" },
+      damageMultiplier: 1,
+    },
+  ],
+}
+// @ts-expect-error element and damageItems remain required on the public hit
+const missingLuminizeHitFields: HistoricalLuminizeHit = { actorId: "entity:remiel" }
 const luminizeStandardAnomalyDamageLevelInput: LuminizeAnomalyDamageLevelInput = 30
 const settledDamageBonusFactorId: "settled_damage_bonus" =
   SETTLED_DAMAGE_BONUS_FACTOR_ID
@@ -1806,6 +1915,20 @@ luminizeDamageFormula.calculate(luminizeDamageInput)
 luminizeDamageFormula.calculate(luminizeSpecialVoidflareDamageInput)
 luminizeStandardAnomalyDamageLevelInput
 specialVoidflareDamageLevelFactorId
+wrongSpecialVoidflareStrength
+catalogMechanismName
+duplicatedDefenseLevel
+plainLuminizeBranch
+specialLuminizeBranch
+fullSpecialDamage
+throughUnion
+throughDefense
+freshUnion
+throughFullDamage
+plainWithoutDefenseLevel
+luminizeDamageBranches
+historicalLuminizeHit
+missingLuminizeHitFields
 `,
     )
 

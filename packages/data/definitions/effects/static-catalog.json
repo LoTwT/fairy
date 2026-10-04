@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "9",
+  "revision": "10",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -53,6 +53,26 @@
       {
         "path": "zzz-hp/src/data/calculatorBuffDefaults.ts",
         "sha256": "4500dbc92ebb0ad649c47d960bdf26cc332e0f896a539d74bbeb945c4ffdacca"
+      },
+      {
+        "path": "zzz-hp/src/utils/remielSelfRadiancePanel.ts",
+        "sha256": "9c9c803a029530e24d3a4ca4d5429e50e46577daf709cfd69a916b620fe68cb1"
+      },
+      {
+        "path": "zzz-hp/src/utils/optimalAffixAlloc.ts",
+        "sha256": "640bfd5d177bb86fb22488209b6bc5f53e7786f6a04bdb71caa692a40f057965"
+      },
+      {
+        "path": "zzz-hp/src/utils/damageEvent.ts",
+        "sha256": "3fe665ea0aa0fe3c7b0d9752692b94784c02bd28438a8288620b2005d3c4bd30"
+      },
+      {
+        "path": "CALCULATOR_FORMULAS.md",
+        "sha256": "28a551a8b345d469f506f835d9de7825132c090e4f9619f072b300992633b3e9"
+      },
+      {
+        "path": "zzz-hp/scripts/test-mult-factor-percent.mjs",
+        "sha256": "0bbbca706409845f0835cfd2f850b45275d6a6c069c475a02cf29bf07739dcfb"
       }
     ]
   },
@@ -44850,7 +44870,684 @@
       "countsAsFollowUp": false
     }
   ],
+  "mechanisms": [
+    {
+      "mechanism": "remielle-special-voidflare",
+      "agentEntityId": "1581",
+      "strengths": [
+        {
+          "strength": "full",
+          "minimumMindscape": 1
+        },
+        {
+          "strength": "mindscape-6-quarter",
+          "minimumMindscape": 6
+        }
+      ],
+      "selfAttackConvertEffectIds": [
+        "agent:1581:zzz-hp:eff-ms7td2gs-4vbpdh:blk-ms7td2gs-rk1vtd:mindscape:0",
+        "agent:1581:zzz-hp:eff-ms7tgbsu-obb50g:blk-ms7td2gs-rk1vtd:mindscape:0",
+        "agent:1581:zzz-hp:eff-ms7tgtyi-fug1mx:blk-ms7td2gs-rk1vtd:mindscape:0"
+      ],
+      "wEngineMasteryEffectIds": [
+        "w-engine:12005:zzz-hp:legacy-team-mastery:blk-legacy:refinement",
+        "w-engine:12011:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:13008:zzz-hp:eff-ms1xeemc-djsdke:blk-ms1xeemc-pbjaln:refinement:1",
+        "w-engine:13008:zzz-hp:eff-ms1xewcy-3dzreb:blk-ms1xewcy-5rceff:refinement:2",
+        "w-engine:13008:zzz-hp:eff-ms1xfc4z-nz8gzx:blk-ms1xfc4z-6gcnep:refinement:3",
+        "w-engine:13008:zzz-hp:eff-ms1xfqk6-3mwjpx:blk-ms1xfqk6-s9tupv:refinement:4",
+        "w-engine:13008:zzz-hp:eff-ms1xg383-b05cr6:blk-ms1xg383-vl142o:refinement:5",
+        "w-engine:13128:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14117:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14118:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14122:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14141:zzz-hp:eff-ms1pv7zg-vuaxv2:blk-legacy:refinement:2",
+        "w-engine:14141:zzz-hp:eff-ms1pw0n4-9qtqhp:blk-legacy:refinement:3",
+        "w-engine:14141:zzz-hp:eff-ms1pwsk5-j04dr3:blk-legacy:refinement:4",
+        "w-engine:14141:zzz-hp:eff-ms1pxfyj-ucuzpi:blk-legacy:refinement:5",
+        "w-engine:14141:zzz-hp:legacy-team-mastery:blk-legacy:refinement:1",
+        "w-engine:14150:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14151:zzz-hp:eff-ms1n6gcl-lpgkvp:blk-legacy:refinement:1",
+        "w-engine:14151:zzz-hp:eff-ms1n7o74-25qbld:blk-legacy:refinement:2",
+        "w-engine:14151:zzz-hp:eff-ms1n8ni5-cqh1yg:blk-legacy:refinement:3",
+        "w-engine:14151:zzz-hp:eff-ms1n97cd-pduh4o:blk-legacy:refinement:4",
+        "w-engine:14151:zzz-hp:eff-ms1n9sz8-f3hujh:blk-legacy:refinement:5",
+        "w-engine:14151:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14156:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "w-engine:14156:zzz-hp:legacy-team-mastery:blk-legacy:refinement",
+        "w-engine:14158:zzz-hp:eff-ms8fa1dg-tcuhq7:blk-ms8fa1dg-ysnes9:refinement:1",
+        "w-engine:14158:zzz-hp:eff-ms8fayyn-1aapkv:blk-ms8fayyn-oov8ou:refinement:2",
+        "w-engine:14158:zzz-hp:eff-ms8fbzml-o4xea9:blk-ms8fbzml-4oxtyx:refinement:3",
+        "w-engine:14158:zzz-hp:eff-ms8fcq58-svdaea:blk-ms8fcq58-nqih9v:refinement:4",
+        "w-engine:14158:zzz-hp:eff-ms8fdeik-w2e1wk:blk-ms8fdeik-thl3ns:refinement:5"
+      ],
+      "wEngineMasteryElementExemptEffectIds": [
+        "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
+      ],
+      "driveDiscFourPieceMasteryEffectIds": [
+        "disc:33000:zzz-hp:legacy-self-mastery:blk-legacy:setPieces:4",
+        "disc:33600:zzz-hp:legacy-self-mastery:blk-legacy:setPieces:4",
+        "disc:33800:zzz-hp:legacy-self-mastery:blk-legacy:setPieces:4",
+        "disc:33900:zzz-hp:legacy-self-mastery:blk-legacy:setPieces:4",
+        "disc:34100:zzz-hp:eff-ms0fq2lr-16g8q5:blk-ms0fq2lr-qfzbac:setPieces:4"
+      ],
+      "radianceResistanceIgnoreEffectIds": [
+        "agent:1581:zzz-hp:eff-ms7tin2y-0pja8e:blk-legacy:mindscape:1"
+      ],
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/51/mindscapeBuffs/6/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/51/mindscapeBuffs/6/effectBlocks/0/effects/1"
+        }
+      ]
+    }
+  ],
   "differences": [
+    {
+      "differenceId": "remielle-special-voidflare-restricted-reads",
+      "explanation": "本人耀变专用读取沿固定来源 remielSelfRadiancePanel/optimalAffixAlloc 的口径以具名机制元数据登记：受限攻击 = 局外攻击 + 蕾米自身角色来源的攻击转模（3 条档位记录）；受限精通 = 局外精通 + 自身装备且职业适配音擎的精通效果（13 个来源实体、去重后 31 条规则）+ 自身驱动盘四件套精通效果（5 条），二件套精通已在局外面板只计一次；异化与耀变倍率的精通转换、通用抗穿仍读完整当前面板（含队友效果），耀变专属抗穿只取自身来源。飞鸟星梦（14133）的以太白名单在自身基础精通专用读取中不排除流明（上游专用读取无 effectMatchesElement 过滤），普通 current 精通读取仍保留以太条件；该项单独列入元素豁免标记。旧 M6 两条锚点选项在新机制分支明确拒绝，strength 档位已表达四分之一与完整强度。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/51/mindscapeBuffs/6/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/driveDiscs/4/fourPieceBuffs/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/driveDiscs/15/fourPieceBuffs/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/driveDiscs/16/fourPieceBuffs/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/driveDiscs/2/fourPieceBuffs/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/94/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/94/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/94/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/94/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/94/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/34/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/34/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/34/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/34/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/34/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/0/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/1/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/2/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/3/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/68/refinementBuffs/4/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/14/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/14/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/14/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/14/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/14/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/64/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/64/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/64/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/64/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/64/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/0/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/90/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/72/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/72/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/72/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/72/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/6/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/6/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/6/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/6/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/6/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/81/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/81/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/81/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/81/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/81/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/45/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/45/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/45/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/45/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/45/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/24/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/24/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/24/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/24/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/24/refinementBuffs/4/effectBlocks/0/effects/0"
+        }
+      ]
+    },
     {
       "differenceId": "core-skill-level-parameters",
       "explanation": "凯撒基础攻击增益与潘引壶基础通窍及对应 M2/M6 增量按 Nanoka 3.1 逐档原文与真实 level 元数据补齐核心 1—7；克拉蕾核心被动的状态暴击率加成按 Nanoka 3.2 核心被动 1611501—1611507 逐档展开为 15%—30%。固定 ZZZ-HP 只提供核心 7 数值。参数唯一维护于 rank-evidence，支持集合为所有必需参数与证据的交集，不扩散至同块其他记录。",

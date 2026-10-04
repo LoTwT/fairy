@@ -4,6 +4,9 @@ import assert from "node:assert/strict"
 import { execFileSync } from "node:child_process"
 import { createHash } from "node:crypto"
 import { readFileSync, writeFileSync } from "node:fs"
+import { createRequire } from "node:module"
+import { dirname, join } from "node:path"
+import { fileURLToPath } from "node:url"
 import ts from "typescript"
 import { builds, effects, scenarios } from "./static-e2e-cases.ts"
 
@@ -38,6 +41,8 @@ const digests = {
     "eee1f52bfa9c128d0e278c5890717c6aa1e897695237a9c6573751489ad311cb",
   "calcNumberFormat.ts":
     "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a",
+  "remielUtils.ts":
+    "1cb8084a981115924b0cdc64961a67f937c280fe82babe2710758c7b279d8773",
 }
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex")
 const resources = []
@@ -95,6 +100,19 @@ const declarations = {
     "normalizePanelMultFactorPercent",
     "normalizeBuffMultFactorDelta",
     "combineMultFactorPercent",
+    "multFactorPercentToRatio",
+  ],
+  "remielUtils.ts": [
+    "LUMINOUS_ELEMENT",
+    "isLuminousElement",
+    "resolveLuminousEquivalentElement",
+    "clampRemielLevel",
+    "computeMutationZone",
+    "computeRadianceMultZone",
+    "computeSpecialMultZone",
+    "computeRemielSelfRadianceSpecialLevelZone",
+    "computeRemielSelfRadianceStandardLevelZone",
+    "computeRemielSelfAnomalyBase",
   ],
   "panelBuffCalc.ts": ["applyBuffModsToPanel", "computePiercePower"],
   "skillTalentLevels.ts": [
@@ -118,6 +136,7 @@ const declarations = {
     "computeVulnerableZone",
     "resolveBaseDamageParts",
     "computeGeneralAndAnomalyBase",
+    "computeDefenseZone",
   ],
 }
 let extracted = ""
@@ -154,6 +173,17 @@ const exported = [
   "applyBuffModsToPanel",
   "computePiercePower",
   "computeGeneralAndAnomalyBase",
+  "computeDefenseZone",
+  "multFactorPercentToRatio",
+  "LUMINOUS_ELEMENT",
+  "isLuminousElement",
+  "resolveLuminousEquivalentElement",
+  "computeMutationZone",
+  "computeRadianceMultZone",
+  "computeSpecialMultZone",
+  "computeRemielSelfRadianceSpecialLevelZone",
+  "computeRemielSelfRadianceStandardLevelZone",
+  "computeRemielSelfAnomalyBase",
 ]
 const compiled = ts.transpileModule(
   `${extracted}\nexport { ${exported.join(",")} }`,
@@ -194,6 +224,7 @@ const mainKeys = {
   criticalRate: "critRate",
   criticalDamage: "critDmg",
   damageBonus: "dmgBonus",
+  anomalyProficiency: "mastery",
 }
 const subKeys = {
   "health:initial-fixed": "hpFlat",
@@ -253,6 +284,8 @@ function buildReference(build) {
     11101: ["hp", 1],
     20101: ["critRate", 100],
     30501: ["energyRegen", 100],
+    31201: ["mastery", 1],
+    31401: ["anomalyControl", 1],
   }
   if (actor.coreSkillLevel > 1)
     for (const entry of Object.values(
@@ -271,6 +304,7 @@ function buildReference(build) {
     攻击力百分比: "externalAtkPercent",
     生命值百分比: "externalHpPercent",
     能量自动回复: "energyRegen",
+    穿透率: "penRate",
   }[weaponDetails.randProperty.name2]
   assert(advancedKey, weaponDetails.randProperty.name2)
   // 3.2 起锋御音擎基础属性为防御力；其余仍为基础攻击力（音擎数据 name 决定）。
@@ -385,9 +419,55 @@ const buildResults = Object.fromEntries(
 function actionReference(scenario, build) {
   const id = build.actor.agentEntityId
   assert(
-    ["1031", "1121", "1371", "1611"].includes(id),
+    ["1031", "1121", "1371", "1611", "1581"].includes(id),
     "Audit the action source and extend this fixture generator before adding another agent",
   )
+  if (id === "1581") {
+    // 耀变动作：倍率来自固定上游耀变技能记录（damagePercentage/Growth 按
+    // 万分之一），并与 Nanoka 的 AvatarSkillLevel 表达式逐字核对。
+    assert.equal(scenario.actionId, "action:agent:1581:action:0007")
+    const details = nanoka("agents/1581/details.zh.json")
+    const row = details.skill.assist.description[7].param[2]
+    const curve = /^\{CAL:(\d+)\+AvatarSkillLevel\(6\)\*(\d+),1,2\}%$/.exec(
+      row.desc,
+    )
+    assert(curve, row.desc)
+    const levelInput = scenario.levels.assist
+    assert(levelInput.mode === "effective")
+    const level = levelInput.value
+    const sourceSkill = upstreamData.skills.find(
+      (skill) => skill.id === "sk-remiel-radiance-mtsw2paj",
+    )
+    assert(sourceSkill, "sk-remiel-radiance-mtsw2paj")
+    const multiplier =
+      (sourceSkill.damagePercentage +
+        sourceSkill.damagePercentageGrowth * (level - 1)) /
+      10000
+    assert.equal(
+      multiplier,
+      (Number(curve[1]) + Number(curve[2]) * level) / 100,
+      "Nanoka luminize curve and upstream skill record disagree",
+    )
+    return {
+      effectiveLevel: level,
+      source: {
+        path: "agents/1581/details.zh.json",
+        pointer: "/skill/assist/description/7/param/2",
+        expression: row.desc,
+        parameters: {},
+      },
+      upstreamSkill: {
+        id: sourceSkill.id,
+        element: sourceSkill.element,
+        multiplier,
+      },
+      multipliers: [multiplier],
+      element: "lumiflux",
+      individual: false,
+      sharpen: false,
+      luminize: true,
+    }
+  }
   const [group, section, parameter] =
     id === "1031"
       ? ["basic", 3, 0]
@@ -467,6 +547,8 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
   const build = builds[scenario.buildIds[0]]
   const reference = buildResults[scenario.buildIds[0]]
   const action = actionReference(scenario, build)
+  if (scenario.luminize)
+    return evaluateVoidflareScenario(scenario, build, reference, action)
   const panel = roundedPanel ? reference.rounded : reference.precise
   const mods = upstream.createEmptyBuffStatModifiers()
   const contributions = []
@@ -622,6 +704,165 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
     upstreamStyleIntegerExpected: Math.round(total("expected")),
   }
 }
+/**
+ * 蕾米埃尔自身特殊虚曜的独立参考：
+ * - 面板与全部增益值仍来自固定上游纯函数和原始记录；
+ * - 异常基础、两个等级区、特殊倍率区、防御区使用固定 remielUtils/damageCalc
+ *   的原函数（未修改的提取声明）；
+ * - 耀变倍率的精通换算按已评审的 luminize-conversion-owner 具名契约执行加算
+ *   （基础倍率 + 精通 × 0.002），不沿用上游把该条记录编码为倍率修正区增量的
+ *   乘算口径；其余乘区按上游本人耀变链独立相乘。
+ */
+function evaluateVoidflareScenario(scenario, build, reference, action) {
+  const actor = build.actor
+  assert.equal(actor.agentEntityId, "1581")
+  assert.equal(action.luminize, true)
+  const panel = reference.precise
+  const contributions = []
+  let conversionBase = null
+  const byEffect = new Map()
+  for (const selection of scenario.buffs) {
+    const mapping = effects[selection.effect]
+    const effect = atPointer(upstreamData, mapping.pointer)
+    assert(effect && effect.id, mapping.pointer)
+    byEffect.set(selection.effect, effect)
+    contributions.push({
+      optionId: mapping.optionId,
+      holderId: mapping.holderId,
+      pointer: mapping.pointer,
+      stat: effect.stat,
+      sourceValue: null,
+    })
+  }
+  const convert = (effect, panelSourceValues) =>
+    upstream.resolveConvertValue(effect, {}, undefined, panelSourceValues)
+  const base = (effect) => upstream.resolveEffectBaseValue(effect, 1)
+  // 受限攻击 = 局外攻击 + 自身角色来源攻击转模（外读初始攻击，上限 1600）。
+  // 转模参数来自固定记录；与面板一样，只独立去除上游 resolveConvertValue 的
+  // 4 位显示舍入，系数与上限保持原值。
+  conversionBase = panel.atk
+  const attackConvert = byEffect.get("remielAttackConvert")
+  const attackConvertValue = Math.max(
+    -Math.abs(attackConvert.convert.cap ?? Infinity),
+    Math.min(
+      Math.abs(attackConvert.convert.cap ?? Infinity),
+      (Math.max(0, panel.atk) * attackConvert.convert.ratioPercent) / 100,
+    ),
+  )
+  const restrictedAttack = Math.max(0, panel.atk + attackConvertValue)
+  // 受限精通 = 局外精通 + 自身适配音擎精通 + 自身四件套精通（二件套已在局外面板）。
+  const wEngineMastery = base(byEffect.get("odeMastery"))
+  const fourPieceMastery = base(byEffect.get("featheredMastery"))
+  const restrictedMastery = Math.max(
+    0,
+    panel.mastery + wEngineMastery + fourPieceMastery,
+  )
+  // 本组场景无队友精通效果，完整当前精通与受限精通一致。
+  const fullMastery = restrictedMastery
+  // 异化：万色滞行1 精通换算（终盘精通）+ 万色滞行2 固定 +10。
+  const mutationConvert = convert(byEffect.get("remielMutationConvert"), {
+    final: { mastery: fullMastery },
+  })
+  const mutationFixed = base(byEffect.get("remielMutationTeam"))
+  const mutationZone = upstream.computeMutationZone({
+    mutationCoeff: mutationConvert + mutationFixed,
+    mutationCoeffFactor: 100,
+  })
+  const anomalyBase = upstream.computeRemielSelfAnomalyBase({
+    inCombatAtk: restrictedAttack,
+    inCombatMastery: restrictedMastery,
+    mutationZone,
+    agentLevel: 60,
+  })
+  // 耀变倍率：基础招式倍率（上游耀变技能记录）+ 完整当前精通 × 0.002。
+  const luminizeMultiplier = action.multipliers[0] + fullMastery * 0.002
+  // 特殊倍率区：M4 +12pp，M6 strength=quarter 由 -75pp 的 25% 表达。
+  const mindscapeFour = byEffect.has("remielMindscapeFour")
+  const specialMultZone = upstream.computeSpecialMultZone({
+    specialMult: 100 + (mindscapeFour ? 12 : 0),
+    specialMultFactor:
+      scenario.luminize.strength === "mindscape-6-quarter" ? 25 : 100,
+  })
+  // 耀变综合增伤 = 音擎异常增伤 + 四件套异常增伤。
+  const anomalyDmgBonusZone =
+    1 +
+    (base(byEffect.get("odeAnomalyBonus")) +
+      base(byEffect.get("featheredAnomalyBonus"))) /
+      100
+  // 防御区：受限穿透率为 0、无固定穿透；目标防御取场景值。
+  const defenseZone = upstream.computeDefenseZone({
+    defensePanel: { penRate: 0, pen: 0, ignoreDefense: 0, reduceDefense: 0 },
+    isMb: false,
+    enemyDefense: scenario.target.baseDefense,
+  })
+  // 抗性区：等效属性抗性由调用方按"循环下一位非流明队友"确定后显式提供；
+  // 通用抗穿取完整面板（本组为 0），耀变专属抗穿取 M1 的 50%。
+  const radianceResPen = byEffect.has("remielMindscapeOne")
+    ? base(byEffect.get("remielMindscapeOne"))
+    : 0
+  const resistanceMultiplier =
+    1 -
+    scenario.luminize.equivalentElementResistance +
+    Math.max(-2, Math.min(2, (0 + radianceResPen) / 100))
+  for (const contribution of contributions) {
+    const effect = byEffect.get(
+      Object.keys(effects).find(
+        (key) => effects[key].optionId === contribution.optionId,
+      ),
+    )
+    contribution.sourceValue =
+      effect.stat === "atk"
+        ? attackConvertValue
+        : effect.id === byEffect.get("remielMutationConvert").id
+          ? mutationConvert
+          : effect.id === byEffect.get("remielLuminizeConvert").id
+            ? fullMastery * 0.002
+            : base(effect)
+  }
+  const value =
+    anomalyBase *
+    defenseZone.defenseMultiplier *
+    resistanceMultiplier *
+    anomalyDmgBonusZone *
+    luminizeMultiplier *
+    specialMultZone
+  return {
+    action,
+    conversionBase,
+    contributions,
+    finalStats: {
+      restrictedAttack,
+      restrictedMastery,
+      fullMastery,
+      attack: panel.atk,
+      anomalyProficiency: panel.mastery,
+    },
+    factors: {
+      baseDamage: restrictedAttack,
+      damageBonus: upstream.computeRemielSelfRadianceSpecialLevelZone(60),
+      anomalyProficiency: restrictedMastery / 100,
+      refringe: mutationZone,
+      luminizeMultiplier,
+      anomalyDamageBonus: anomalyDmgBonusZone,
+      defense: defenseZone.defenseMultiplier,
+      resistance: resistanceMultiplier,
+      damageTaken: 1,
+      stunDamage: 1,
+      anomalyDamageLevel:
+        upstream.computeRemielSelfRadianceStandardLevelZone(60),
+      specialMultiplier: specialMultZone,
+    },
+    hits: [{ nonCritical: value, critical: null, expected: value }],
+    totals: {
+      nonCritical: value,
+      critical: null,
+      expected: value,
+      displayedNonCritical: null,
+      displayedCritical: null,
+    },
+    upstreamStyleIntegerExpected: Math.round(value),
+  }
+}
 const cases = {}
 for (const scenario of scenarios) {
   const reference = evaluateScenario(scenario, true, false)
@@ -678,6 +919,18 @@ const fixture = {
   cases,
 }
 writeFileSync(output, `${JSON.stringify(fixture, null, 2)}\n`, { flag: "wx" })
+// 制品直接落在仓库内：与根级格式检查走同一 oxfmt 配置，保证再生字节一致。
+const workspaceRoot = fileURLToPath(new URL("../../../..", import.meta.url))
+const require = createRequire(new URL("../../../package.json", import.meta.url))
+execFileSync(
+  process.execPath,
+  [
+    join(dirname(require.resolve("oxfmt/package.json")), "bin/oxfmt"),
+    "--write",
+    output,
+  ],
+  { cwd: workspaceRoot, stdio: "inherit" },
+)
 console.log(
   `Wrote ${Object.keys(cases).length} independent reference cases to ${output}`,
 )

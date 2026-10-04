@@ -863,6 +863,35 @@ export interface StaticCatalogOption {
   readonly variants: NonEmpty<StaticCatalogVariant>
 }
 
+/**
+ * 具名机制的受限读取元数据；由固定规范化来源生成，core 只按其中的稳定身份
+ * 消费，不按展示名、字符串包含关系或硬编码数值猜来源。
+ */
+export interface StaticCatalogMechanism {
+  readonly mechanism: "remielle-special-voidflare"
+  /** 该机制绑定的 Fairy 代理人实体（蕾米埃尔）。 */
+  readonly agentEntityId: string
+  /** strength 档位与配置门槛；调用方选择的档位必须满足对应影画。 */
+  readonly strengths: readonly {
+    readonly strength: "full" | "mindscape-6-quarter"
+    readonly minimumMindscape: MindscapeRank
+  }[]
+  /** 蕾米自身角色来源的攻击转模；进入特殊虚曜的受限攻击读取。 */
+  readonly selfAttackConvertEffectIds: readonly EffectId[]
+  /** 音擎精通效果；仅自身装备且职业适配的音擎实际参与受限精通读取。 */
+  readonly wEngineMasteryEffectIds: readonly EffectId[]
+  /**
+   * 上游"自身基础精通专用读取"不应用元素白名单的音擎精通效果
+   * （如飞鸟星梦的以太限制）；普通 current 精通读取仍保留元素条件。
+   */
+  readonly wEngineMasteryElementExemptEffectIds: readonly EffectId[]
+  /** 驱动盘四件套精通效果；两件套精通已进入局外面板，不在此重复标记。 */
+  readonly driveDiscFourPieceMasteryEffectIds: readonly EffectId[]
+  /** attacker-resistance-ignore 通道中属于耀变专属抗穿的效果；通用抗穿不列入。 */
+  readonly radianceResistanceIgnoreEffectIds: readonly EffectId[]
+  readonly references: NonEmpty<SourceReference>
+}
+
 export interface StaticEffectCatalog {
   readonly schemaVersion: 1
   readonly ruleSetId: string
@@ -885,6 +914,8 @@ export interface StaticEffectCatalog {
     readonly name: string
     readonly countsAsFollowUp: boolean
   }[]
+  /** 具名机制读取元数据；旧目录没有该字段时，对应机制输入明确拒绝。 */
+  readonly mechanisms?: readonly StaticCatalogMechanism[]
   readonly differences: readonly {
     readonly differenceId: string
     readonly explanation: string
