@@ -96,6 +96,10 @@ export declare const anomalyDamageLevelFactor: Factor<AnomalyDamageLevelFactorIn
 - 计算防御等级基数或其他等级成长规则；
 - 决定顶层公式是否采用异常伤害等级区。
 
+蕾米埃尔自身特殊虚曜的耀变结算不使用本乘区的四位截断结果，而由
+[耀变伤害公式](../formulas/luminize-damage.md)的具名分支改用
+[特殊虚曜伤害等级区](special-voidflare-damage-level.md)；普通虚曜与通用异常伤害继续使用本乘区。
+
 调用方使用虚拟代理人时，必须把快照的整数 `level` 传入本乘区。除公式规定的四位截断外，本乘区不
 负责伤害显示数值的取整与汇总；该计算由
 [伤害显示总值帮助函数](../helpers/displayed-damage.md)统一处理。

@@ -218,7 +218,8 @@ Nanoka 3.1 本地中英文数据 `packages/data/raw/nanoka/3.1/{en,zh}/character
 
 同文件 `:1952-2036` 同时给出异化、虚曜、异常效果强度与耀变的关系，技能数据 `:725`、`:793`、
 `:1410`、`:1745` 使用 `Luminize Multiplier` / “耀变倍率”。具体数学和历史／实时属性边界分别由
-[异化区](factors/refringe.md)、[耀变倍率区](factors/luminize-multiplier.md)与
+[异化区](factors/refringe.md)、[耀变倍率区](factors/luminize-multiplier.md)、
+[特殊虚曜伤害等级区](factors/special-voidflare-damage-level.md)与
 [耀变伤害公式](formulas/luminize-damage.md)维护。
 
 流明积蓄点不是传统属性异常积蓄值，不能作为 `BaseAnomalyBuildupFactorInput` 传入异常积蓄值公式；异化
@@ -345,6 +346,8 @@ export interface Formula<FormulaInput extends object> {
   代理人等级。
 - 异化区公开恒等输入 `DEFAULT_REFRINGE_FACTOR_INPUT = 1`，只表示本次异常伤害没有适用异化；耀变倍率
   区必须包含本次招式倍率，没有恒等默认输入，也不公开 `DEFAULT_LUMINIZE_MULTIPLIER_FACTOR_INPUT`。
+- 特殊虚曜伤害等级区公开恒等输入 `DEFAULT_SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_INPUT = 1`，等级
+  `1` 产生恒等倍率 `1`；它不代表蕾米埃尔的实际等级。
 
 ## 运行时校验原则
 
@@ -495,6 +498,7 @@ export function defineFormula<FormulaInput extends object>(
 - [异常暴击区](factors/anomaly-critical.md)
 - [异化区](factors/refringe.md)
 - [耀变倍率区](factors/luminize-multiplier.md)
+- [特殊虚曜伤害等级区](factors/special-voidflare-damage-level.md)
 - [基础失衡区](factors/base-daze.md)
 - [失衡值提升区](factors/daze-dealt.md)
 - [受到失衡值提升区](factors/daze-taken.md)
