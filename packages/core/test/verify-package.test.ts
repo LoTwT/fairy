@@ -171,6 +171,7 @@ import {
   DEFAULT_REFRINGE_FACTOR_INPUT,
   DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
+  DEFAULT_SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DEFENSE_FACTOR_ID,
   DISORDER_DAZE_DEALT_FACTOR_ID,
@@ -190,6 +191,7 @@ import {
   SETTLED_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_FORMULA_ID,
+  SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_ID,
   STUN_DAMAGE_FACTOR_ID,
   accompanyingDecibelGenerationRateFactor,
   adrenalineGenerationFormula,
@@ -249,6 +251,7 @@ import {
   settledDamageBonusFactor,
   sheerDamageBonusFactor,
   sheerDamageFormula,
+  specialVoidflareDamageLevelFactor,
   stunDamageFactor,
 } from "@randomplay/core"
 
@@ -1011,6 +1014,44 @@ assert.equal(luminizeDamageResult.value, 246)
 assert.equal(Object.isFrozen(luminizeDamageResult), true)
 assert.equal(Object.isFrozen(luminizeDamageResult.factorResults), true)
 assert.equal(calculateSpecialVoidflareDamageBonusMultiplier(60), 2.5)
+assert.equal(
+  SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_ID,
+  "special_voidflare_damage_level",
+)
+assert.equal(
+  specialVoidflareDamageLevelFactor.factorId,
+  SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_ID,
+)
+assert.equal(specialVoidflareDamageLevelFactor.calculate(30), 88 / 59)
+assert.equal(specialVoidflareDamageLevelFactor.calculate(60), 2)
+assert.equal(
+  specialVoidflareDamageLevelFactor.calculate(
+    DEFAULT_SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_INPUT,
+  ),
+  1,
+)
+const luminizeSpecialVoidflareResult = luminizeDamageFormula.calculate({
+  baseDamage: [{ damageMultiplier: 1, finalStat: 1000 }],
+  damageBonus: calculateSpecialVoidflareDamageBonusMultiplier(30),
+  anomalyProficiency: 100,
+  refringe: DEFAULT_REFRINGE_FACTOR_INPUT,
+  luminizeMultiplier: {
+    baseLuminizeMultiplier: 1,
+    remielleAnomalyProficiency: 0,
+    anomalyProficiencyConversionRate: 0,
+    multiplicativeLuminizeMultiplierAdjustments: [],
+  },
+  anomalyDamageBonus: DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+  defense: DEFAULT_DEFENSE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+  anomalyDamageLevel: { mechanism: "remielle-special-voidflare", level: 30 },
+})
+assert.equal(luminizeSpecialVoidflareResult.value, 154000 / 59)
+assert.equal(luminizeSpecialVoidflareResult.factorResults.anomalyDamageLevel, 88 / 59)
+assert.equal(Object.isFrozen(luminizeSpecialVoidflareResult), true)
+assert.equal(Object.isFrozen(luminizeSpecialVoidflareResult.factorResults), true)
 const virtualAgentSnapshot = calculateVirtualAgentSnapshot([
   {
     effectiveAnomalyBuildup: 1,
@@ -1099,6 +1140,7 @@ assert.equal(
   DEFAULT_REFRINGE_FACTOR_INPUT,
   DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
+  DEFAULT_SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DISORDER_DAZE_DEALT_FACTOR_ID,
   DISORDER_DAZE_FORMULA_ID,
@@ -1113,6 +1155,7 @@ assert.equal(
   REGULAR_DAZE_FORMULA_ID,
   REFRINGE_FACTOR_ID,
   SETTLED_DAMAGE_BONUS_FACTOR_ID,
+  SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_ID,
   accompanyingDecibelGenerationRateFactor,
   adrenalineGenerationFormula,
   adrenalineGenerationRateFactor,
@@ -1171,6 +1214,7 @@ assert.equal(
   settledDamageBonusFactor,
   sheerDamageBonusFactor,
   sheerDamageFormula,
+  specialVoidflareDamageLevelFactor,
   stunDamageFactor,
   type AccompanyingDecibelGenerationRateFactorInput,
   type AdrenalineGenerationFormulaInput,
@@ -1223,6 +1267,7 @@ assert.equal(
   type FormulaFactorResults,
   type FormulaParams,
   type FormulaResult,
+  type LuminizeAnomalyDamageLevelInput,
   type LuminizeDamageFormulaInput,
   type LuminizeMultiplierFactorInput,
   type MiasmicShieldReductionFormulaInput,
@@ -1235,6 +1280,7 @@ assert.equal(
   type SettledDamageBonusFactorInput,
   type SheerDamageBonusFactorInput,
   type SheerDamageFormulaInput,
+  type SpecialVoidflareDamageLevelFactorInput,
   type StunDamageFactorInput,
   type VirtualAgentContributionRecord,
   type VirtualAgentSnapshot,
@@ -1289,6 +1335,17 @@ const luminizeDamageFormulaId: "luminize_damage" =
   LUMINIZE_DAMAGE_FORMULA_ID
 const specialVoidflareDamageBonusMultiplier: number =
   calculateSpecialVoidflareDamageBonusMultiplier(60)
+const specialVoidflareDamageLevelFactorId: "special_voidflare_damage_level" =
+  SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_ID
+const defaultSpecialVoidflareDamageLevelFactorInput: SpecialVoidflareDamageLevelFactorInput =
+  DEFAULT_SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_INPUT
+const specialVoidflareDamageLevelInput: SpecialVoidflareDamageLevelFactorInput = 30
+const luminizeSpecialVoidflareAnomalyDamageLevelInput: LuminizeAnomalyDamageLevelInput =
+  {
+    mechanism: "remielle-special-voidflare",
+    level: 30,
+  }
+const luminizeStandardAnomalyDamageLevelInput: LuminizeAnomalyDamageLevelInput = 30
 const settledDamageBonusFactorId: "settled_damage_bonus" =
   SETTLED_DAMAGE_BONUS_FACTOR_ID
 const settledDamageBonusInput: SettledDamageBonusFactorInput =
@@ -1601,6 +1658,19 @@ const luminizeDamageInput: LuminizeDamageFormulaInput = {
   stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   anomalyDamageLevel: DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
 }
+const luminizeSpecialVoidflareDamageInput: LuminizeDamageFormulaInput = {
+  baseDamage: baseDamageInputs,
+  damageBonus: specialVoidflareDamageBonusMultiplier,
+  anomalyProficiency: DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
+  refringe: DEFAULT_REFRINGE_FACTOR_INPUT,
+  luminizeMultiplier: luminizeMultiplierInput,
+  anomalyDamageBonus: DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+  defense: DEFAULT_DEFENSE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+  anomalyDamageLevel: luminizeSpecialVoidflareAnomalyDamageLevelInput,
+}
 
 factor.calculate({ values: [2, 3] })
 formulaFactorResults.left
@@ -1668,6 +1738,10 @@ anomalyProficiencyFactor.calculate(anomalyProficiencyInput)
 anomalyProficiencyFactor.calculate(DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT)
 refringeFactor.calculate(refringeInput)
 luminizeMultiplierFactor.calculate(luminizeMultiplierInput)
+specialVoidflareDamageLevelFactor.calculate(specialVoidflareDamageLevelInput)
+specialVoidflareDamageLevelFactor.calculate(
+  defaultSpecialVoidflareDamageLevelFactorInput,
+)
 baseAdrenalineGenerationFactor.calculate(baseAdrenalineGenerationInput)
 adrenalineGenerationRateFactor.calculate(adrenalineGenerationRateInput)
 adrenalineGenerationRateFactor.calculate(
@@ -1729,6 +1803,9 @@ sheerDamageFormula.calculate(sheerDamageInput)
 anomalyBuildupFormula.calculate(anomalyBuildupInput)
 anomalyDamageFormula.calculate(anomalyDamageInput)
 luminizeDamageFormula.calculate(luminizeDamageInput)
+luminizeDamageFormula.calculate(luminizeSpecialVoidflareDamageInput)
+luminizeStandardAnomalyDamageLevelInput
+specialVoidflareDamageLevelFactorId
 `,
     )
 

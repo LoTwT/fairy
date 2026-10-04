@@ -22,6 +22,13 @@
 | 结果类型    | `FormulaResult<LuminizeDamageFormulaInput>`      |
 
 ```ts
+export type LuminizeAnomalyDamageLevelInput =
+  | AnomalyDamageLevelFactorInput
+  | {
+      readonly mechanism: "remielle-special-voidflare"
+      readonly level: SpecialVoidflareDamageLevelFactorInput
+    }
+
 export interface LuminizeDamageFormulaInput {
   readonly baseDamage: BaseDamageFactorInput
   readonly damageBonus: SettledDamageBonusFactorInput
@@ -33,7 +40,7 @@ export interface LuminizeDamageFormulaInput {
   readonly resistance: ResistanceFactorInput
   readonly damageTaken: DamageTakenFactorInput
   readonly stunDamage: StunDamageFactorInput
-  readonly anomalyDamageLevel: AnomalyDamageLevelFactorInput
+  readonly anomalyDamageLevel: LuminizeAnomalyDamageLevelInput
 }
 
 export declare const LUMINIZE_DAMAGE_FORMULA_ID: "luminize_damage"
@@ -45,24 +52,26 @@ export declare function calculateSpecialVoidflareDamageBonusMultiplier(
 export declare const luminizeDamageFormula: Formula<LuminizeDamageFormulaInput>
 ```
 
-每个字段都对应一个现有或新增乘区的完整输入。公式顶层不增加蕾米埃尔、来源代理人、技能、属性、虚曜
-类型、虚曜数组、目标或状态标签。
+每个字段都对应一个现有或新增乘区的完整输入。`anomalyDamageLevel` 是唯一接收联合输入的字段：
+数字输入按[异常伤害等级区](../factors/anomaly-damage-level.md)结算，具名对象输入按
+[特殊虚曜伤害等级区](../factors/special-voidflare-damage-level.md)结算，公式在两者中恰好选择一个。
+公式顶层不增加蕾米埃尔、来源代理人、技能、属性、虚曜类型、虚曜数组、目标或状态标签。
 
 ## 输入与恒等值
 
-| 字段                 | 对应乘区                                             | 恒等输入或要求                                 |
-| -------------------- | ---------------------------------------------------- | ---------------------------------------------- |
-| `baseDamage`         | [基础伤害区](../factors/base-damage.md)              | 无默认；普通虚曜通常传来源最终攻击力与倍率 `1` |
-| `damageBonus`        | [已结算增伤区](../factors/settled-damage-bonus.md)   | `DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT`    |
-| `anomalyProficiency` | [异常精通区](../factors/anomaly-proficiency.md)      | `DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT`     |
-| `refringe`           | [异化区](../factors/refringe.md)                     | `DEFAULT_REFRINGE_FACTOR_INPUT`                |
-| `luminizeMultiplier` | [耀变倍率区](../factors/luminize-multiplier.md)      | 无默认；必须提供本次招式及蕾米埃尔实时输入     |
-| `anomalyDamageBonus` | [异常增伤区](../factors/anomaly-damage-bonus.md)     | `DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT`    |
-| `defense`            | [防御区](../factors/defense.md)                      | `DEFAULT_DEFENSE_FACTOR_INPUT`                 |
-| `resistance`         | [抗性区](../factors/resistance.md)                   | `DEFAULT_RESISTANCE_FACTOR_INPUT`              |
-| `damageTaken`        | [减易伤区](../factors/damage-taken.md)               | `DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT`            |
-| `stunDamage`         | [失衡易伤区](../factors/stun-damage.md)              | `DEFAULT_STUN_DAMAGE_FACTOR_INPUT`             |
-| `anomalyDamageLevel` | [异常伤害等级区](../factors/anomaly-damage-level.md) | `DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT`    |
+| 字段                 | 对应乘区                                                                                                                                         | 恒等输入或要求                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| `baseDamage`         | [基础伤害区](../factors/base-damage.md)                                                                                                          | 无默认；普通虚曜通常传来源最终攻击力与倍率 `1`                                         |
+| `damageBonus`        | [已结算增伤区](../factors/settled-damage-bonus.md)                                                                                               | `DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT`                                            |
+| `anomalyProficiency` | [异常精通区](../factors/anomaly-proficiency.md)                                                                                                  | `DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT`                                             |
+| `refringe`           | [异化区](../factors/refringe.md)                                                                                                                 | `DEFAULT_REFRINGE_FACTOR_INPUT`                                                        |
+| `luminizeMultiplier` | [耀变倍率区](../factors/luminize-multiplier.md)                                                                                                  | 无默认；必须提供本次招式及蕾米埃尔实时输入                                             |
+| `anomalyDamageBonus` | [异常增伤区](../factors/anomaly-damage-bonus.md)                                                                                                 | `DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT`                                            |
+| `defense`            | [防御区](../factors/defense.md)                                                                                                                  | `DEFAULT_DEFENSE_FACTOR_INPUT`                                                         |
+| `resistance`         | [抗性区](../factors/resistance.md)                                                                                                               | `DEFAULT_RESISTANCE_FACTOR_INPUT`                                                      |
+| `damageTaken`        | [减易伤区](../factors/damage-taken.md)                                                                                                           | `DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT`                                                    |
+| `stunDamage`         | [失衡易伤区](../factors/stun-damage.md)                                                                                                          | `DEFAULT_STUN_DAMAGE_FACTOR_INPUT`                                                     |
+| `anomalyDamageLevel` | 数字输入为[异常伤害等级区](../factors/anomaly-damage-level.md)，具名对象输入为[特殊虚曜伤害等级区](../factors/special-voidflare-damage-level.md) | 数字输入默认 `DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT`；特殊虚曜分支必须提供具名对象 |
 
 全部字段必填；公式不自动补默认输入。异化区恒等输入 `1` 只适用于来源确认没有异化的路径，不能代替普通
 虚曜已经保存但丢失的异化结果。耀变倍率区没有默认输入。
@@ -86,8 +95,13 @@ export declare const luminizeDamageFormula: Formula<LuminizeDamageFormulaInput>
   × 异常伤害等级区
 ```
 
+等级乘区位置按 `anomalyDamageLevel` 的输入形态恰好选择一个乘区：数字输入调用异常伤害等级区并保留
+四位截断，具名对象输入 `{ mechanism: "remielle-special-voidflare", level }` 调用特殊虚曜伤害等级区且
+不截断。两个等级乘区不得叠算，其余十个乘区及乘法次序在任何分支下都不变。
+
 具体公式必须直接调用十一个 `Factor` 各一次，再严格按上述顺序相乘。即使较早结果为 `0`，也不能跳过
-后续乘区校验。`factorResults` 必须包含与 `LuminizeDamageFormulaInput` 完全相同的十一个键。
+后续乘区校验。`factorResults` 必须包含与 `LuminizeDamageFormulaInput` 完全相同的十一个键，其中
+`anomalyDamageLevel` 保存被选中等级乘区的结果。
 
 乘法采用 JavaScript `number` 的 IEEE 754 语义，不重排、不取整、不截断。`defineFormula` 在返回前检查
 最终值与乘区结果是否有限，并冻结结果及 `factorResults`。
@@ -115,7 +129,7 @@ export declare const luminizeDamageFormula: Formula<LuminizeDamageFormulaInput>
 - `luminizeMultiplier` 使用本次招式倍率及耀变时蕾米埃尔的实时异常精通和核心技换算率；
 - `anomalyDamageBonus` 使用耀变结算时实际适用的通用异常增伤与耀变专属增伤；
 - `damageTaken`、`stunDamage` 及目标侧乘区使用耀变命中结算时的实时状态；
-- `anomalyDamageLevel` 使用来源代理人等级。
+- `anomalyDamageLevel` 使用来源代理人等级，以数字输入传入。
 
 耀变只记住来源异常的属性，不继承该异常状态专属的增伤、暴击、无视防御或其他效果。物理虚曜不因此
 成为强击，耀变公式也不包含 `anomalyCritical` 字段。调用方不能把强击、侵蚀、风化等专属效果自动放入
@@ -137,8 +151,28 @@ Nanoka 3.1 影画文本确认入场及影画 6 可以产生特殊虚曜。机制
 组合后的最终已结算增伤区。helper 不读取角色对象，不钳制等级，也不调用 `settledDamageBonusFactor`。
 
 特殊虚曜仍使用同一个 `luminizeDamageFormula`：调用方使用蕾米埃尔当前属性建立来源侧字段，用 helper
-结果作为 `damageBonus`。影画 6 的四分之一伤害通过耀变倍率区的乘法调整 `0.25` 表达；影画 4 同时适用
-时使用 `1.12`。公式不根据虚曜类型自动增加这些值。
+结果作为 `damageBonus`，并把 `anomalyDamageLevel` 传为具名对象
+`{ mechanism: "remielle-special-voidflare", level: agentLevel }`。影画 6 的四分之一伤害通过耀变倍率区的
+乘法调整 `0.25` 表达；影画 4 同时适用时使用 `1.12`。公式不根据虚曜类型自动增加这些值。
+
+具名对象使等级乘区位置改用[特殊虚曜伤害等级区](../factors/special-voidflare-damage-level.md)：
+
+```text
+特殊虚曜等级乘区 = 1 + (agentLevel - 1) / 59    （不截断）
+```
+
+固定上游来源（ZZZ-HP 增益基线 `fac62407`）确认蕾米埃尔自身特殊虚曜的独立算式为两个等级倍率相乘：
+
+```text
+特殊虚曜等级类乘积 = (1 + 0.025 × agentLevel) × (1 + (agentLevel - 1) / 59)
+```
+
+core 把前一个增伤倍率继续留给调用方：`damageBonus` 传入 helper 结果，等级乘区由具名对象分支提供，
+公式不会自动把两个倍率重复相乘。上游 UI helper 在计算前会 `Math.round` 等级并钳制到 `[1, 60]`；core
+的严格公共 API 不取整也不钳制，非法等级直接报错，调用方必须提供已经确认的实际等级。
+
+`level` 与 `agentLevel` 的值域、取整和失败行为完全一致：必须是 `[1, 60]` 内的有限整数。机制
+`mechanism` 目前只有 `"remielle-special-voidflare"` 一个合法值，其他机制身份按未知机制拒绝。
 
 ## 多虚曜与状态边界
 
@@ -170,6 +204,10 @@ Nanoka 3.1 影画文本确认入场及影画 6 可以产生特殊虚曜。机制
 | 输入不是非数组对象或为 `null`                         | 抛出 `TypeError`                     |
 | 任一必填字段缺失、为 `undefined` 或不符合乘区输入契约 | 传播对应乘区抛出的错误               |
 | 任一乘区计算失败                                      | 传播对应乘区抛出的错误               |
+| `anomalyDamageLevel` 既不是数字也不是非数组对象       | 抛出 `TypeError`                     |
+| 具名对象的 `mechanism` 缺失或不是字符串               | 抛出 `TypeError`                     |
+| 具名对象的 `mechanism` 不是已知机制                   | 抛出 `RangeError`                    |
+| 具名对象的 `level` 不符合特殊虚曜伤害等级区契约       | 传播该乘区抛出的错误                 |
 | 最终耀变伤害不是有限数值                              | 由 `defineFormula` 抛出 `RangeError` |
 
 多个失败条件同时存在时，不承诺乘区校验错误优先级。
@@ -184,10 +222,10 @@ Nanoka 3.1 影画文本确认入场及影画 6 可以产生特殊虚曜。机制
 
 ## 代码组织
 
-耀变伤害公式与特殊虚曜增伤 helper 的生产代码统一放在
+耀变伤害公式、等级分支选择与特殊虚曜增伤 helper 的生产代码统一放在
 `packages/core/src/formulas/luminize-damage.ts`。公式文件只组合现有 `Factor`，不重复乘区算法，也不实现
 虚曜队列、流明积蓄、角色状态或技能数据解析。
 
 公式测试放在 `packages/core/test/luminize-damage.test.ts`，必须覆盖公开身份与类型、完整乘区结果、严格
-乘法顺序、普通与特殊虚曜代表值、零值不短路、输入不可变、全部字段失败、最终溢出及特殊虚曜 helper
-的等级端点和失败行为。安装包验证必须从包根消费全部新增公开 API。
+乘法顺序、普通与特殊虚曜代表值、特殊分支的机制与等级失败、零值不短路、输入不可变、全部字段失败、
+最终溢出及特殊虚曜 helper 的等级端点和失败行为。安装包验证必须从包根消费全部新增公开 API。

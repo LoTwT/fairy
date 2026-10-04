@@ -44,6 +44,11 @@ import {
   type Formula,
   type FormulaFactorResults,
 } from "../formula.ts"
+import type { FactorResult } from "../factor.ts"
+import {
+  specialVoidflareDamageLevelFactor,
+  type SpecialVoidflareDamageLevelFactorInput,
+} from "../factors/special-voidflare-damage-level.ts"
 import {
   assertFiniteResult,
   assertFiniteNumber,
@@ -54,6 +59,13 @@ const MIN_AGENT_LEVEL = 1
 const MAX_AGENT_LEVEL = 60
 const SPECIAL_VOIDFLARE_DAMAGE_BONUS_PER_LEVEL = 0.025
 const BASE_DAMAGE_BONUS_MULTIPLIER = 1
+
+export type LuminizeAnomalyDamageLevelInput =
+  | AnomalyDamageLevelFactorInput
+  | {
+      readonly mechanism: "remielle-special-voidflare"
+      readonly level: SpecialVoidflareDamageLevelFactorInput
+    }
 
 export interface LuminizeDamageFormulaInput {
   readonly baseDamage: BaseDamageFactorInput
@@ -66,7 +78,7 @@ export interface LuminizeDamageFormulaInput {
   readonly resistance: ResistanceFactorInput
   readonly damageTaken: DamageTakenFactorInput
   readonly stunDamage: StunDamageFactorInput
-  readonly anomalyDamageLevel: AnomalyDamageLevelFactorInput
+  readonly anomalyDamageLevel: LuminizeAnomalyDamageLevelInput
 }
 
 export const LUMINIZE_DAMAGE_FORMULA_ID = "luminize_damage" as const
@@ -99,6 +111,37 @@ export function calculateSpecialVoidflareDamageBonusMultiplier(
   return damageBonusMultiplier
 }
 
+function calculateAnomalyDamageLevelFactorResult(
+  input: LuminizeAnomalyDamageLevelInput,
+): FactorResult {
+  if (typeof input === "number") {
+    return anomalyDamageLevelFactor.calculate(input)
+  }
+
+  if (typeof input !== "object" || input === null || Array.isArray(input)) {
+    throw new TypeError(
+      "Luminize anomaly damage level input must be a number or a non-array object",
+    )
+  }
+
+  const { mechanism, level } = input
+
+  if (typeof mechanism !== "string") {
+    throw new TypeError(
+      "Luminize anomaly damage level mechanism must be a string",
+    )
+  }
+
+  switch (mechanism) {
+    case "remielle-special-voidflare":
+      return specialVoidflareDamageLevelFactor.calculate(level)
+    default:
+      throw new RangeError(
+        `Unsupported Luminize anomaly damage level mechanism: ${mechanism}`,
+      )
+  }
+}
+
 export const luminizeDamageFormula: Formula<LuminizeDamageFormulaInput> =
   defineFormula<LuminizeDamageFormulaInput>({
     formulaId: LUMINIZE_DAMAGE_FORMULA_ID,
@@ -122,7 +165,7 @@ export const luminizeDamageFormula: Formula<LuminizeDamageFormulaInput> =
         resistance: resistanceFactor.calculate(input.resistance),
         damageTaken: damageTakenFactor.calculate(input.damageTaken),
         stunDamage: stunDamageFactor.calculate(input.stunDamage),
-        anomalyDamageLevel: anomalyDamageLevelFactor.calculate(
+        anomalyDamageLevel: calculateAnomalyDamageLevelFactorResult(
           input.anomalyDamageLevel,
         ),
       } satisfies FormulaFactorResults<LuminizeDamageFormulaInput>

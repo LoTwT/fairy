@@ -222,6 +222,12 @@ export {
 } from "./factors/luminize-multiplier.ts"
 export type { LuminizeMultiplierFactorInput } from "./factors/luminize-multiplier.ts"
 export {
+  DEFAULT_SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_INPUT,
+  SPECIAL_VOIDFLARE_DAMAGE_LEVEL_FACTOR_ID,
+  specialVoidflareDamageLevelFactor,
+} from "./factors/special-voidflare-damage-level.ts"
+export type { SpecialVoidflareDamageLevelFactorInput } from "./factors/special-voidflare-damage-level.ts"
+export {
   REGULAR_DAMAGE_FORMULA_ID,
   regularDamageFormula,
 } from "./formulas/regular-damage.ts"
@@ -254,7 +260,10 @@ export {
   calculateSpecialVoidflareDamageBonusMultiplier,
   luminizeDamageFormula,
 } from "./formulas/luminize-damage.ts"
-export type { LuminizeDamageFormulaInput } from "./formulas/luminize-damage.ts"
+export type {
+  LuminizeAnomalyDamageLevelInput,
+  LuminizeDamageFormulaInput,
+} from "./formulas/luminize-damage.ts"
 export {
   ANOMALY_BUILDUP_FORMULA_ID,
   anomalyBuildupFormula,

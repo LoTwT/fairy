@@ -19,11 +19,13 @@ import {
   type DamageTakenFactorInput,
   type DefenseFactorInput,
   type Formula,
+  type LuminizeAnomalyDamageLevelInput,
   type LuminizeDamageFormulaInput,
   type LuminizeMultiplierFactorInput,
   type RefringeFactorInput,
   type ResistanceFactorInput,
   type SettledDamageBonusFactorInput,
+  type SpecialVoidflareDamageLevelFactorInput,
   type StunDamageFactorInput,
 } from "../src/index.ts"
 
@@ -50,8 +52,41 @@ function createLuminizeDamageInput(
   }
 }
 
+function createSpecialVoidflareLuminizeInput(
+  level: number,
+): LuminizeDamageFormulaInput {
+  return {
+    baseDamage: [{ damageMultiplier: 1, finalStat: 1000 }],
+    damageBonus: calculateSpecialVoidflareDamageBonusMultiplier(level),
+    anomalyProficiency: 100,
+    refringe: DEFAULT_REFRINGE_FACTOR_INPUT,
+    luminizeMultiplier: {
+      baseLuminizeMultiplier: 1,
+      remielleAnomalyProficiency: 0,
+      anomalyProficiencyConversionRate: 0,
+      multiplicativeLuminizeMultiplierAdjustments: [],
+    },
+    anomalyDamageBonus: DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+    defense: DEFAULT_DEFENSE_FACTOR_INPUT,
+    resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+    damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+    stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+    anomalyDamageLevel: {
+      mechanism: "remielle-special-voidflare",
+      level,
+    },
+  }
+}
+
 describe("luminizeDamageFormula", () => {
   it("exposes its public identity and types", () => {
+    expectTypeOf<LuminizeAnomalyDamageLevelInput>().toEqualTypeOf<
+      | AnomalyDamageLevelFactorInput
+      | {
+          readonly mechanism: "remielle-special-voidflare"
+          readonly level: SpecialVoidflareDamageLevelFactorInput
+        }
+    >()
     expectTypeOf<LuminizeDamageFormulaInput>().toEqualTypeOf<{
       readonly baseDamage: BaseDamageFactorInput
       readonly damageBonus: SettledDamageBonusFactorInput
@@ -63,7 +98,7 @@ describe("luminizeDamageFormula", () => {
       readonly resistance: ResistanceFactorInput
       readonly damageTaken: DamageTakenFactorInput
       readonly stunDamage: StunDamageFactorInput
-      readonly anomalyDamageLevel: AnomalyDamageLevelFactorInput
+      readonly anomalyDamageLevel: LuminizeAnomalyDamageLevelInput
     }>()
     expectTypeOf(LUMINIZE_DAMAGE_FORMULA_ID).toEqualTypeOf<"luminize_damage">()
     expectTypeOf(luminizeDamageFormula).toEqualTypeOf<
@@ -197,6 +232,179 @@ describe("luminizeDamageFormula", () => {
 
     expect(result.value).toBe(250)
     expect(result.factorResults.damageBonus).toBe(2.5)
+  })
+
+  it.each([
+    [1, 1, 1025],
+    [2, 60 / 59, 63000 / 59],
+    [30, 88 / 59, 154000 / 59],
+    [59, 117 / 59, 289575 / 59],
+    [60, 2, 5000],
+  ])(
+    "calculates the special Voidflare branch for level %i without truncating the level factor",
+    (level, levelFactor, value) => {
+      const result = luminizeDamageFormula.calculate(
+        createSpecialVoidflareLuminizeInput(level),
+      )
+
+      expect(result.factorResults.anomalyDamageLevel).toBe(levelFactor)
+      expect(result.value).toBe(value)
+      expect(Object.keys(result.factorResults)).toEqual([
+        "baseDamage",
+        "damageBonus",
+        "anomalyProficiency",
+        "refringe",
+        "luminizeMultiplier",
+        "anomalyDamageBonus",
+        "defense",
+        "resistance",
+        "damageTaken",
+        "stunDamage",
+        "anomalyDamageLevel",
+      ])
+      expect(result.factorResults.baseDamage).toBe(1000)
+      expect(result.factorResults.anomalyProficiency).toBe(1)
+    },
+  )
+
+  it("applies exactly one level factor and switches behavior by branch", () => {
+    const specialResult = luminizeDamageFormula.calculate(
+      createSpecialVoidflareLuminizeInput(30),
+    )
+    const standardResult = luminizeDamageFormula.calculate({
+      ...createSpecialVoidflareLuminizeInput(30),
+      anomalyDamageLevel: 30,
+    })
+
+    expect(specialResult.factorResults.anomalyDamageLevel).toBe(88 / 59)
+    expect(standardResult.factorResults.anomalyDamageLevel).toBe(1.4915)
+    expect(specialResult.value).toBe(154000 / 59)
+    expect(standardResult.value).toBe(1000 * 1.75 * 1.4915)
+    expect(specialResult.value).not.toBe(standardResult.value)
+  })
+
+  it.each([
+    ["a string", "60"],
+    ["null", null],
+    ["an array", [{ mechanism: "remielle-special-voidflare", level: 30 }]],
+    ["a boolean", true],
+  ])(
+    "rejects a special branch input that is %s instead of a number or object",
+    (_name, anomalyDamageLevel) => {
+      const input = {
+        ...createLuminizeDamageInput([{ damageMultiplier: 1, finalStat: 100 }]),
+        anomalyDamageLevel,
+      }
+
+      expect(() =>
+        luminizeDamageFormula.calculate(
+          input as unknown as LuminizeDamageFormulaInput,
+        ),
+      ).toThrow(TypeError)
+    },
+  )
+
+  it.each([
+    ["a non-string mechanism", { mechanism: 123, level: 30 }],
+    ["a missing mechanism", { level: 30 }],
+    ["a null mechanism", { mechanism: null, level: 30 }],
+  ])("rejects %s", (_name, anomalyDamageLevel) => {
+    const input = {
+      ...createLuminizeDamageInput([{ damageMultiplier: 1, finalStat: 100 }]),
+      anomalyDamageLevel,
+    }
+
+    expect(() =>
+      luminizeDamageFormula.calculate(
+        input as unknown as LuminizeDamageFormulaInput,
+      ),
+    ).toThrow(TypeError)
+  })
+
+  it("rejects an unknown mechanism", () => {
+    const input = {
+      ...createLuminizeDamageInput([{ damageMultiplier: 1, finalStat: 100 }]),
+      anomalyDamageLevel: {
+        mechanism: "remielle-standard-voidflare",
+        level: 30,
+      },
+    }
+
+    expect(() =>
+      luminizeDamageFormula.calculate(
+        input as unknown as LuminizeDamageFormulaInput,
+      ),
+    ).toThrow(RangeError)
+  })
+
+  it.each([
+    [
+      "a non-number level",
+      { mechanism: "remielle-special-voidflare", level: "30" },
+    ],
+    ["a missing level", { mechanism: "remielle-special-voidflare" }],
+    ["a null level", { mechanism: "remielle-special-voidflare", level: null }],
+  ])("rejects %s", (_name, anomalyDamageLevel) => {
+    const input = {
+      ...createLuminizeDamageInput([{ damageMultiplier: 1, finalStat: 100 }]),
+      anomalyDamageLevel,
+    }
+
+    expect(() =>
+      luminizeDamageFormula.calculate(
+        input as unknown as LuminizeDamageFormulaInput,
+      ),
+    ).toThrow(TypeError)
+  })
+
+  it.each([NaN, Infinity, -Infinity, 1.5, 0, -1, 61])(
+    "rejects the invalid special branch level %s",
+    (level) => {
+      const input = {
+        ...createLuminizeDamageInput([{ damageMultiplier: 1, finalStat: 100 }]),
+        anomalyDamageLevel: {
+          mechanism: "remielle-special-voidflare",
+          level,
+        },
+      }
+
+      expect(() =>
+        luminizeDamageFormula.calculate(
+          input as unknown as LuminizeDamageFormulaInput,
+        ),
+      ).toThrow(RangeError)
+    },
+  )
+
+  it("does not stop validating the special branch level when an earlier result is zero", () => {
+    const input = {
+      ...createSpecialVoidflareLuminizeInput(30),
+      baseDamage: [],
+      anomalyDamageLevel: { mechanism: "remielle-special-voidflare", level: 0 },
+    }
+
+    expect(() =>
+      luminizeDamageFormula.calculate(
+        input as unknown as LuminizeDamageFormulaInput,
+      ),
+    ).toThrow(RangeError)
+  })
+
+  it("does not modify the special branch anomaly damage level input", () => {
+    const input = createSpecialVoidflareLuminizeInput(30)
+    const anomalyDamageLevel = Object.freeze({
+      mechanism: "remielle-special-voidflare" as const,
+      level: 30,
+    })
+    const frozenInput = Object.freeze({ ...input, anomalyDamageLevel })
+
+    luminizeDamageFormula.calculate(frozenInput)
+
+    expect(anomalyDamageLevel).toEqual({
+      mechanism: "remielle-special-voidflare",
+      level: 30,
+    })
+    expect(Object.isFrozen(anomalyDamageLevel)).toBe(true)
   })
 
   it("returns zero with complete factor results for an empty base damage input", () => {
