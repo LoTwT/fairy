@@ -1062,8 +1062,10 @@ export function calculateStaticActionDamage(
       // 蕾米埃尔自身特殊虚曜：本入口的配装与面板资料固定为 60 级，只开放
       // level 60；其余等级走低层目录显式数值入口，不插值或复用 60 级面板。
       const anomalySource = input.luminize.damage.anomalySource
+      // 与目录运行时的请求检测一致按值判断：mechanism 显式为 undefined 的
+      // 普通来源不属于具名机制分支。
       const specialVoidflare =
-        "mechanism" in anomalySource ? anomalySource : undefined
+        anomalySource.mechanism !== undefined ? anomalySource : undefined
       if (specialVoidflare) {
         requireValue(
           input.data.catalog.mechanisms?.some(

@@ -331,8 +331,10 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 `{ mechanism: "remielle-special-voidflare", entityId, level, strength }`，计算她本人特殊[虚曜]对应的
 一次耀变。`entityId` 必须通过 actorSources 映射到 1581 且等于本次耀变 actor；`level` 是角色等级
 （有限整数 1—60，不做 round/clamp），既是特殊增伤区（1 + 0.025 × 等级）的唯一来源，也在内部组装
-防御等级：该分支的 `defense` 不接收 `attackerLevel`（公开类型省略该字段，运行时对任何提供值——
-包括与等级相同的值——明确拒绝）；普通异常来源分支保持原有 `defense.attackerLevel` 输入不变。`strength` 为 `full`（最低影画 1）或
+防御等级：该分支的 `defense` 不接收 `attackerLevel`（公开类型显式排除该字段，运行时对任何
+提供值——包括与等级相同的值——明确拒绝）；普通异常来源分支保持原有 `defense.attackerLevel`
+输入不变。两条分支在公开类型上互斥：普通来源不接受 `mechanism`/`strength` 字段（具名对象无法
+经结构化赋值退入普通分支），具名来源的 `defense` 无法携带 `attackerLevel` 退入具名分支。`strength` 为 `full`（最低影画 1）或
 `mindscape-6-quarter`（最低影画 6，倍率 ×0.25），影画门槛按目录机制元数据校验。此分支只接受
 lumiflux 元素、单项 `attack` 基础伤害项（直接倍率 1）与 `from-effects` 异化，拒绝 `hit.actionSnapshotId`、
 伤害项 `statSource` 的历史快照或其它实体、手工已结算增伤/异化倍率及调用方耀变倍率调整；选中

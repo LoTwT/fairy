@@ -6,6 +6,7 @@ import {
   staticSourceBindingId,
 } from "../../core/src/index.ts"
 import type {
+  RemielleSpecialVoidflareAnomalySource,
   StaticActionCalculationInput,
   StaticActionCalculationResult,
   StaticActorConfiguration,
@@ -216,12 +217,24 @@ type LuminizeCatalogDamage = Extract<
   StaticCatalogDamageInput["damage"],
   { readonly kind: "luminize" }
 >
+type SpecialVoidflareLuminizeDamage = Extract<
+  LuminizeCatalogDamage,
+  { readonly anomalySource: RemielleSpecialVoidflareAnomalySource }
+>
+function isSpecialVoidflareDamage(
+  damage: LuminizeCatalogDamage,
+): damage is SpecialVoidflareLuminizeDamage {
+  return damage.anomalySource.mechanism !== undefined
+}
+/** 端到端耀变场景均为具名机制输入；返回已收窄的具名分支成员。 */
 function luminizeDamageOf(
   input: StaticActionCalculationInput,
-): LuminizeCatalogDamage {
+): SpecialVoidflareLuminizeDamage {
   const damage = input.luminize!.damage
   if (damage.kind !== "luminize")
     throw new Error("Expected the luminize damage")
+  if (!isSpecialVoidflareDamage(damage))
+    throw new Error("Expected the special Voidflare source")
   return damage
 }
 function close(
@@ -812,8 +825,6 @@ describe("remielle special Voidflare scenarios against the independent reference
     )!
     const base = await inputFor(scenario)
     const original = luminizeDamageOf(base)
-    if (!("mechanism" in original.anomalySource))
-      throw new Error("Expected the special Voidflare source")
     const rejected = calculateStaticActionDamage({
       ...base,
       luminize: {
@@ -877,9 +888,9 @@ describe("remielle special Voidflare scenarios against the independent reference
       }
     }
     // 特殊虚曜分支仍拒绝 actionSnapshotId 快照覆盖（既定行为不变）。
-    const special = luminizeDamageOf(base)
-    if (!("mechanism" in special.anomalySource))
-      throw new Error("Expected the special Voidflare source")
+    // 特殊虚曜分支仍拒绝 actionSnapshotId 快照覆盖（既定行为不变）；
+    // luminizeDamageOf 同时保证此处是具名机制输入。
+    luminizeDamageOf(base)
     const snapshotted = calculateStaticActionDamage({
       ...base,
       luminize: {

@@ -669,22 +669,33 @@ export interface RemielleSpecialVoidflareAnomalySource {
 }
 
 /**
+ * 目录普通异常来源：`mechanism` 与 `strength` 是具名机制来源的专有字段，普通
+ * 来源显式排除（`?: never`），使具名对象无法经结构化赋值退入普通分支；运行时
+ * 对普通来源同样按 `rejectUnknownFields` 拒绝未知字段。
+ */
+export type StaticCatalogPlainAnomalySource = AttributeSource & {
+  readonly level: number
+  readonly mechanism?: never
+  readonly strength?: never
+}
+
+/**
  * 目录 luminize 分支的公开 defense 形状：普通异常来源沿用含 `attackerLevel` 的
- * 完整输入；特殊虚曜机制分支不接收 `attackerLevel`（同值也拒绝），等级唯一来自
- * 具名来源并由内部组装。
+ * 完整输入；特殊虚曜机制分支不接收 `attackerLevel`（`Omit` 之外再显式排除该
+ * 字段——同值也拒绝），等级唯一来自具名来源并由内部组装。
  */
 export type StaticCatalogDefenseInput = Omit<
   StaticDefenseInput,
   "attackerLevel"
->
+> & {
+  readonly attackerLevel?: never
+}
 
 /** luminize 分支的异常来源与防御形状：普通来源与具名特殊虚曜机制互斥。 */
 export type StaticCatalogLuminizeDamageBranch =
   | {
       /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
-      readonly anomalySource: AttributeSource & {
-        readonly level: number
-      }
+      readonly anomalySource: StaticCatalogPlainAnomalySource
       readonly defense: StaticDefenseInput
     }
   | {
@@ -710,9 +721,7 @@ export type StaticCatalogDamageParameters =
                 } & StaticCatalogLuminizeDamageBranch
               : {
                   /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
-                  readonly anomalySource: AttributeSource & {
-                    readonly level: number
-                  }
+                  readonly anomalySource: StaticCatalogPlainAnomalySource
                   readonly defense: StaticDefenseInput
                 }) & {
               readonly refringe:

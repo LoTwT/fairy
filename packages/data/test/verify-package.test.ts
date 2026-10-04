@@ -802,12 +802,13 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
         "@randomplay/shared",
       )
     const typeSource = `import { loadStaticCalculationData } from "@randomplay/data"
-import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
+import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogLuminizeDamageBranch, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
 const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
 async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {
   const { calculateStaticActionDamage } = await import("@randomplay/core")
   return calculateStaticActionDamage({ ...input, data: await jointData })
 }
+import { calculateStaticDamageFromCatalog } from "@randomplay/core"
 const specialVoidflareSource: RemielleSpecialVoidflareAnomalySource = { mechanism: "remielle-special-voidflare", entityId: "entity:remiel", level: 60, strength: "full" }
 // @ts-expect-error the strength tiers are a closed literal union
 const wrongVoidflareStrength: RemielleSpecialVoidflareAnomalySource = { ...specialVoidflareSource, strength: "half" }
@@ -817,19 +818,33 @@ const catalogDefense: StaticCatalogDefenseInput = { targetBaseDefense: 0, defens
 const duplicatedCatalogDefense: StaticCatalogDefenseInput = { ...catalogDefense, attackerLevel: 60 }
 type PackedLuminizeDamage = Extract<StaticCatalogDamageInput["damage"], { kind: "luminize" }>
 const specialLuminizeDamage: PackedLuminizeDamage = { kind: "luminize", damageBonus: [], anomalyDamageBonus: [], refringe: { mode: "from-effects" }, anomalySource: specialVoidflareSource, luminizeMultiplier: { baseLuminizeMultiplier: 3.2, multiplicativeLuminizeMultiplierAdjustments: [] }, defense: catalogDefense, resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] }, damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] }, stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] } }
-type PackedSpecialVoidflareDamage = Extract<PackedLuminizeDamage, { anomalySource: RemielleSpecialVoidflareAnomalySource }>
-// @ts-expect-error the special mechanism source rejects an explicit attackerLevel
-const specialWithDefenseLevel: PackedSpecialVoidflareDamage = { ...specialLuminizeDamage, defense: { ...catalogDefense, attackerLevel: 60 } }
+// 互斥反例直接用原联合与实际入口验证（结构化变量与 spread，不用 Extract 预收窄）。
+const defenseWithLevel = { attackerLevel: 60, targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] }
+// @ts-expect-error the named source cannot fall back into the plain branch
+const throughUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareSource, defense: defenseWithLevel }
+// @ts-expect-error the special defense rejects attackerLevel even for a structural variable
+const throughDefense: StaticCatalogDefenseInput = defenseWithLevel
+// @ts-expect-error a fresh literal combining the named source with an explicit attackerLevel matches neither branch
+const freshUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: { mechanism: "remielle-special-voidflare", entityId: "entity:remiel", level: 60, strength: "full" }, defense: { attackerLevel: 60, targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] } }
+declare const luminizeRest: Omit<PackedLuminizeDamage, "anomalySource" | "defense">
+// @ts-expect-error the full public damage union rejects the mixed branch input
+const throughFullDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareSource, defense: defenseWithLevel }
+declare const catalogCommon: Omit<StaticCatalogDamageInput, "damage">
+// @ts-expect-error the real catalog entry rejects the named source plus an explicit attackerLevel
+calculateStaticDamageFromCatalog({ ...catalogCommon, damage: { ...luminizeRest, anomalySource: specialVoidflareSource, defense: defenseWithLevel } })
+// 两条合法路径在原联合上保持可用。
+const plainLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: defenseWithLevel }
+const specialLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareSource, defense: catalogDefense }
+const fullSpecialDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareSource, defense: catalogDefense }
 // @ts-expect-error a plain source still requires the explicit attackerLevel
-const plainWithoutDefenseLevel: PackedLuminizeDamage = { ...specialLuminizeDamage, anomalySource: { entityId: "entity:velina", level: 60 } }
-const plainLuminizeDamage: PackedLuminizeDamage = { ...specialLuminizeDamage, anomalySource: { entityId: "entity:velina", level: 60 }, defense: { attackerLevel: 60, targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] } }
+const plainWithoutDefenseLevel: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: catalogDefense }
 const historicalLuminize: NonNullable<StaticActionCalculationInput["luminize"]> = {
   hit: { actorId: "entity:remiel", targetId: "entity:enemy", actionId: "action:agent:1581:action:0007", skillCategory: "uncategorized", skillTags: [], skillTargetIds: [], actionSnapshotId: "snapshot:history", element: "lumiflux", damageItems: [{ mode: "direct", role: "base", itemId: "special-voidflare", stat: "attack", statSource: { entityId: "entity:remiel" }, damageMultiplier: 1 }] },
-  damage: specialLuminizeDamage,
+  damage: fullSpecialDamage,
 }
 // @ts-expect-error element and damageItems remain required on the public hit
 const missingLuminizeHitFields: NonNullable<StaticActionCalculationInput["luminize"]>["hit"] = { actorId: "entity:remiel" }
-void [wrongVoidflareStrength, mechanismName, duplicatedCatalogDefense, specialWithDefenseLevel, plainWithoutDefenseLevel, plainLuminizeDamage, historicalLuminize, missingLuminizeHitFields]
+void [wrongVoidflareStrength, mechanismName, duplicatedCatalogDefense, throughUnion, throughDefense, freshUnion, throughFullDamage, plainLuminizeBranch, specialLuminizeBranch, fullSpecialDamage, plainWithoutDefenseLevel, historicalLuminize, missingLuminizeHitFields]
 import { loadAgentLevel60Attributes, loadWEngineLevel60Attributes, loadSDriveDiscMaxLevelAffixes } from "@randomplay/data"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes, PanelAttributeBonus } from "@randomplay/data"
 import { loadAgentActions, resolveAgentAction, resolveAgentSkillLevel } from "@randomplay/data"

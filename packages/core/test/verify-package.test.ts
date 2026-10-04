@@ -213,6 +213,7 @@ import {
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
   calculateDisplayedDazePercentage,
+  calculateStaticDamageFromCatalog,
   calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
@@ -1176,6 +1177,7 @@ assert.equal(
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
   calculateDisplayedDazePercentage,
+  calculateStaticDamageFromCatalog,
   calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
@@ -1398,29 +1400,35 @@ const luminizeCatalogDamage: PackedLuminizeCatalogDamage = {
     targetStunDamageMultiplierAdjustments: [],
   },
 }
-// @ts-expect-error a plain anomaly source still requires the explicit attackerLevel
-const plainSourceWithoutDefenseLevel: PackedLuminizeCatalogDamage = { ...luminizeCatalogDamage, anomalySource: { entityId: "entity:velina", level: 60 } }
-type PackedSpecialVoidflareLuminizeDamage = Extract<
-  PackedLuminizeCatalogDamage,
-  { readonly anomalySource: RemielleSpecialVoidflareAnomalySource }
->
-const specialVoidflareLuminizeDamage: PackedSpecialVoidflareLuminizeDamage = {
-  ...luminizeCatalogDamage,
-}
-// @ts-expect-error the special mechanism source rejects an explicit attackerLevel
-const specialSourceWithDefenseLevel: PackedSpecialVoidflareLuminizeDamage = { ...specialVoidflareLuminizeDamage, defense: { ...catalogDefenseWithoutLevel, attackerLevel: 60 } }
-const plainLuminizeCatalogDamage: PackedLuminizeCatalogDamage = {
-  ...luminizeCatalogDamage,
-  anomalySource: { entityId: "entity:velina", level: 60 },
-  defense: {
-    attackerLevel: 60,
-    targetBaseDefense: 0,
-    defensePercentageAdjustments: [],
-    penetrationValues: [],
-  },
-}
 const luminizeDamageBranches: StaticCatalogLuminizeDamageBranch["anomalySource"] =
   luminizeCatalogDamage.anomalySource
+// 互斥反例直接用原联合与实际入口验证（结构化变量与 spread，不用 Extract 预收窄）：
+// 具名来源无法退入普通分支，携带 attackerLevel 的 defense 也无法进入具名分支。
+const defenseWithLevel = {
+  attackerLevel: 60,
+  targetBaseDefense: 0,
+  defensePercentageAdjustments: [],
+  penetrationValues: [],
+}
+// @ts-expect-error the named source cannot fall back into the plain branch
+const throughUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareAnomalySource, defense: defenseWithLevel }
+// @ts-expect-error the special defense rejects attackerLevel even for a structural variable
+const throughDefense: StaticCatalogDefenseInput = defenseWithLevel
+// @ts-expect-error a fresh literal combining the named source with an explicit attackerLevel matches neither branch
+const freshUnion: StaticCatalogLuminizeDamageBranch = { anomalySource: { mechanism: "remielle-special-voidflare", entityId: "entity:remiel", level: 60, strength: "full" }, defense: { attackerLevel: 60, targetBaseDefense: 0, defensePercentageAdjustments: [], penetrationValues: [] } }
+declare const luminizeRest: Omit<PackedLuminizeCatalogDamage, "anomalySource" | "defense">
+// @ts-expect-error the full public damage union rejects the mixed branch input
+const throughFullDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareAnomalySource, defense: defenseWithLevel }
+declare const catalogCommon: Omit<StaticCatalogDamageInput, "damage">
+// @ts-expect-error the real catalog entry rejects the named source plus an explicit attackerLevel
+calculateStaticDamageFromCatalog({ ...catalogCommon, damage: { ...luminizeRest, anomalySource: specialVoidflareAnomalySource, defense: defenseWithLevel } })
+// 两条合法路径在原联合上保持可用：普通来源（无 mechanism、显式 attackerLevel）
+// 与具名机制来源（mechanism、无 attackerLevel）。
+const plainLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: defenseWithLevel }
+const specialLuminizeBranch: StaticCatalogLuminizeDamageBranch = { anomalySource: specialVoidflareAnomalySource, defense: catalogDefenseWithoutLevel }
+const fullSpecialDamage: StaticCatalogDamageInput["damage"] = { ...luminizeRest, anomalySource: specialVoidflareAnomalySource, defense: catalogDefenseWithoutLevel }
+// @ts-expect-error a plain anomaly source still requires the explicit attackerLevel
+const plainWithoutDefenseLevel: StaticCatalogLuminizeDamageBranch = { anomalySource: { entityId: "entity:velina", level: 60 }, defense: catalogDefenseWithoutLevel }
 type HistoricalLuminizeHit = NonNullable<
   StaticActionCalculationInput["luminize"]
 >["hit"]
@@ -1910,10 +1918,14 @@ specialVoidflareDamageLevelFactorId
 wrongSpecialVoidflareStrength
 catalogMechanismName
 duplicatedDefenseLevel
-plainSourceWithoutDefenseLevel
-specialVoidflareLuminizeDamage
-specialSourceWithDefenseLevel
-plainLuminizeCatalogDamage
+plainLuminizeBranch
+specialLuminizeBranch
+fullSpecialDamage
+throughUnion
+throughDefense
+freshUnion
+throughFullDamage
+plainWithoutDefenseLevel
 luminizeDamageBranches
 historicalLuminizeHit
 missingLuminizeHitFields

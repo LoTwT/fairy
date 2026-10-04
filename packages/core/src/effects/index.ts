@@ -135,5 +135,6 @@ export type {
   StaticCatalogDefenseInput,
   StaticCatalogLuminizeDamageBranch,
   StaticCatalogMechanism,
+  StaticCatalogPlainAnomalySource,
   RemielleSpecialVoidflareAnomalySource,
 } from "./types.ts"
