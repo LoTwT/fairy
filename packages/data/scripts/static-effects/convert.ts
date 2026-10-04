@@ -26,6 +26,7 @@ import type {
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
 import { SOURCE_SEMANTICS, type CoreSkillLevelSemantics } from "./semantics.ts"
+import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import { SUPPLEMENTS, type Supplement } from "./supplements.ts"
 import {
   BUFF_RESOURCE,
@@ -1782,10 +1783,22 @@ export function convertSource(
     })
   }
 
+  const remielAgentEntityId = identityMap["agents:remiel"]
+  if (remielAgentEntityId !== "1581")
+    throw new Error(
+      "The remielle-special-voidflare mechanism requires the reviewed remiel identity",
+    )
+  const remielleMechanism = buildRemielleSpecialVoidflareMechanism({
+    records: collected.records,
+    coverage,
+    effects,
+    remielAgentEntityId,
+  })
+
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "9",
+    revision: "10",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -1838,7 +1851,28 @@ export function convertSource(
     skillTargets: skillTargets.toSorted((a, b) =>
       a.targetId.localeCompare(b.targetId),
     ),
+    mechanisms: [remielleMechanism],
     differences: [
+      {
+        differenceId: "remielle-special-voidflare-restricted-reads",
+        explanation:
+          "本人耀变专用读取沿固定来源 remielSelfRadiancePanel/optimalAffixAlloc 的口径以具名机制元数据登记：受限攻击 = 局外攻击 + 蕾米自身角色来源的攻击转模（3 条档位记录）；受限精通 = 局外精通 + 自身装备且职业适配音擎的精通效果（13 个来源实体、去重后 31 条规则）+ 自身驱动盘四件套精通效果（5 条），二件套精通已在局外面板只计一次；异化与耀变倍率的精通转换、通用抗穿仍读完整当前面板（含队友效果），耀变专属抗穿只取自身来源。飞鸟星梦（14133）的以太白名单在自身基础精通专用读取中不排除流明（上游专用读取无 effectMatchesElement 过滤），普通 current 精通读取仍保留以太条件；该项单独列入元素豁免标记。旧 M6 两条锚点选项在新机制分支明确拒绝，strength 档位已表达四分之一与完整强度。",
+        references: [
+          reference("/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+          reference("/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0"),
+          reference("/agents/51/mindscapeBuffs/6/effectBlocks/0/effects/0"),
+          ...coverage
+            .filter(
+              (r) =>
+                (r.catalogEntityId.startsWith("w-engines:") ||
+                  (r.catalogEntityId.startsWith("drive-discs:") &&
+                    r.rankKind === "setPieces" &&
+                    r.rank === 4)) &&
+                r.stat === "mastery",
+            )
+            .map((r) => reference(r.pointer)),
+        ],
+      },
       {
         differenceId: "core-skill-level-parameters",
         explanation:
@@ -2059,9 +2093,9 @@ export function convertSource(
       deferredMechanisms: [
         {
           catalogEntityId: "agents:remiel",
-          reason: "formula-out-of-scope",
+          reason: "supported-with-scope",
           explanation:
-            "蕾米埃尔自身施加异常的等级强度不属于 buff 原始记录；需要新的等级公式，当前目录入口拒绝将其作为 anomalySource。其余已映射队伍增益仍可独立选用。",
+            "蕾米埃尔自身特殊虚曜对应的耀变已按 remielle-special-voidflare 具名机制接入（catalog.mechanisms 元数据 + core 目录分支）：anomalySource 携带 mechanism 时按角色等级 1—60、strength full（最低影画 1）/mindscape-6-quarter（最低影画 6）计算，旧 M6 锚点部分选项在该分支拒绝。普通异常/紊乱/异放/乱流仍拒绝她作为 anomalySource；她提供给其他异常来源的已映射团队增益继续独立可用。修订前 8 条 unsupported 与壳中之灵 4 条 special 乘区记录的计数不受本条影响。",
         },
       ],
       fieldMappings: FIELD_MAPPINGS,

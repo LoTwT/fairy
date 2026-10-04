@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "9",
+  "revision": "10",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -53,6 +53,26 @@
       {
         "path": "zzz-hp/src/data/calculatorBuffDefaults.ts",
         "sha256": "4500dbc92ebb0ad649c47d960bdf26cc332e0f896a539d74bbeb945c4ffdacca"
+      },
+      {
+        "path": "zzz-hp/src/utils/remielSelfRadiancePanel.ts",
+        "sha256": "9c9c803a029530e24d3a4ca4d5429e50e46577daf709cfd69a916b620fe68cb1"
+      },
+      {
+        "path": "zzz-hp/src/utils/optimalAffixAlloc.ts",
+        "sha256": "640bfd5d177bb86fb22488209b6bc5f53e7786f6a04bdb71caa692a40f057965"
+      },
+      {
+        "path": "zzz-hp/src/utils/damageEvent.ts",
+        "sha256": "3fe665ea0aa0fe3c7b0d9752692b94784c02bd28438a8288620b2005d3c4bd30"
+      },
+      {
+        "path": "CALCULATOR_FORMULAS.md",
+        "sha256": "28a551a8b345d469f506f835d9de7825132c090e4f9619f072b300992633b3e9"
+      },
+      {
+        "path": "zzz-hp/scripts/test-mult-factor-percent.mjs",
+        "sha256": "0bbbca706409845f0835cfd2f850b45275d6a6c069c475a02cf29bf07739dcfb"
       }
     ]
   },
@@ -30270,8 +30290,8 @@
   "deferredMechanisms": [
     {
       "catalogEntityId": "agents:remiel",
-      "reason": "formula-out-of-scope",
-      "explanation": "蕾米埃尔自身施加异常的等级强度不属于 buff 原始记录；需要新的等级公式，当前目录入口拒绝将其作为 anomalySource。其余已映射队伍增益仍可独立选用。"
+      "reason": "supported-with-scope",
+      "explanation": "蕾米埃尔自身特殊虚曜对应的耀变已按 remielle-special-voidflare 具名机制接入（catalog.mechanisms 元数据 + core 目录分支）：anomalySource 携带 mechanism 时按角色等级 1—60、strength full（最低影画 1）/mindscape-6-quarter（最低影画 6）计算，旧 M6 锚点部分选项在该分支拒绝。普通异常/紊乱/异放/乱流仍拒绝她作为 anomalySource；她提供给其他异常来源的已映射团队增益继续独立可用。修订前 8 条 unsupported 与壳中之灵 4 条 special 乘区记录的计数不受本条影响。"
     }
   ],
   "fieldMappings": {

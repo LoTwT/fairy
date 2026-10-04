@@ -309,17 +309,98 @@ const claret: AcceptanceBuild = {
     ),
   },
 }
+
+const remielDiscs = discs(
+  ["34100", "34100", "34100", "34100", "31300", "31300"],
+  [
+    { attribute: "health" },
+    { attribute: "attack" },
+    { attribute: "defense" },
+    { attribute: "anomalyProficiency" },
+    { attribute: "attack" },
+    { attribute: "attack" },
+  ],
+  [[], [], [], [], [], []],
+)
+const remiel: AcceptanceBuild = {
+  agentName: "Remielle",
+  wEngineName: "Ode of Resurrected Wings",
+  upstreamAgentId: "remiel",
+  upstreamWEngineId: "Ode_Of_Resurrected_Wings",
+  upstreamSets: ["SuitFeatheredFate", "SuitFreedomBlues"],
+  actor: {
+    entityId: "entity:remiel",
+    teamId: "team:players",
+    agentEntityId: "1581",
+    coreSkillLevel: 7,
+    mindscapeRank: 1,
+    wEngine: { entityId: "14158", refinement: 1, eligible: true },
+    panel: { mode: "equipment" },
+    driveDiscs: remielDiscs,
+  },
+}
+const teammateDiscs = discs(
+  ["31300", "31300", "31300", "31300", "31000", "31000"],
+  [
+    { attribute: "health" },
+    { attribute: "attack" },
+    { attribute: "defense" },
+    { attribute: "anomalyProficiency" },
+    { attribute: "attack" },
+    { attribute: "attack" },
+  ],
+  [[], [], [], [], [], []],
+)
+const jane: AcceptanceBuild = {
+  agentName: "Jane",
+  wEngineName: "Joyau Dore",
+  upstreamAgentId: "jane",
+  upstreamWEngineId: "Joyau_Dore",
+  upstreamSets: ["SuitFreedomBlues", "woodpecker"],
+  actor: {
+    entityId: "entity:jane",
+    teamId: "team:players",
+    agentEntityId: "1261",
+    coreSkillLevel: 7,
+    mindscapeRank: 0,
+    wEngine: { entityId: "14156", refinement: 5, eligible: true },
+    panel: { mode: "equipment" },
+    driveDiscs: teammateDiscs,
+  },
+}
+const velina: AcceptanceBuild = {
+  agentName: "Velina",
+  wEngineName: "Fusion Compiler",
+  upstreamAgentId: "velina",
+  upstreamWEngineId: "Fusion_Compiler",
+  upstreamSets: ["SuitFreedomBlues", "woodpecker"],
+  actor: {
+    entityId: "entity:velina",
+    teamId: "team:players",
+    agentEntityId: "1561",
+    coreSkillLevel: 7,
+    mindscapeRank: 0,
+    wEngine: { entityId: "14118", refinement: 1, eligible: true },
+    panel: { mode: "equipment" },
+    driveDiscs: structuredClone(teammateDiscs),
+  },
+}
 export const builds: Record<string, AcceptanceBuild> = {
   nicole,
   astra,
   ben,
   yixuan,
   claret,
+  remiel,
+  jane,
+  velina,
   astraM2: { ...astra, actor: { ...astra.actor, mindscapeRank: 2 } },
   benF: {
     ...ben,
     actor: { ...ben.actor, coreSkillLevel: 7, mindscapeRank: 4 },
   },
+  remielM4: { ...remiel, actor: { ...remiel.actor, mindscapeRank: 4 } },
+  remielM6: { ...remiel, actor: { ...remiel.actor, mindscapeRank: 6 } },
 }
 
 // Each pointer identifies the actual pinned upstream effect, not a value derived from Fairy.
@@ -427,6 +508,63 @@ export const effects = {
       "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
     pointer: "/wengines/65/refinementBuffs/0/effectBlocks/2/effects/0",
   },
+  remielMutationConvert: {
+    holderId: "entity:remiel",
+    optionId: "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
+    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+  },
+  remielLuminizeConvert: {
+    holderId: "entity:remiel",
+    optionId: "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+  },
+  remielMutationTeam: {
+    holderId: "entity:remiel",
+    optionId:
+      "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
+    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+  },
+  remielAttackConvert: {
+    holderId: "entity:remiel",
+    optionId:
+      "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
+    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+  },
+  remielMindscapeOne: {
+    holderId: "entity:remiel",
+    optionId: "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+    pointer: "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+  },
+  remielMindscapeFour: {
+    holderId: "entity:remiel",
+    optionId:
+      "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
+    pointer: "/agents/51/mindscapeBuffs/4/effectBlocks/0/effects/0",
+  },
+  odeMastery: {
+    holderId: "entity:remiel",
+    optionId:
+      "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
+    pointer: "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+  },
+  odeAnomalyBonus: {
+    holderId: "entity:remiel",
+    optionId:
+      "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
+    pointer: "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+  },
+  featheredMastery: {
+    holderId: "entity:remiel",
+    optionId:
+      "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5",
+    pointer: "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/0",
+  },
+  featheredAnomalyBonus: {
+    holderId: "entity:remiel",
+    optionId:
+      "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb",
+    pointer: "/driveDiscs/25/fourPieceBuffs/effectBlocks/0/effects/1",
+  },
 } as const
 
 export interface AcceptanceScenario {
@@ -439,6 +577,15 @@ export interface AcceptanceScenario {
   >
   target: StaticActionCalculationInput["target"]
   buffs: { effect: keyof typeof effects; layers: number }[]
+  /**
+   * 蕾米埃尔自身特殊虚曜耀变；测试按显式耀变契约组装 luminize 输入。
+   * equivalentElementResistance 是调用方按固定上游"循环下一位非流明队友、
+   * 跳过空槽"确定的等效属性抗性，沿用耀变显式基线接口。
+   */
+  luminize?: {
+    strength: "full" | "mindscape-6-quarter"
+    equivalentElementResistance: number
+  }
 }
 const normalTarget: StaticActionCalculationInput["target"] = {
   entityId: "entity:target",
@@ -583,5 +730,118 @@ export const scenarios: AcceptanceScenario[] = [
       buff("claretMindscape4"),
       buff("crimsonSharpen"),
     ],
+  },
+  {
+    id: "remiel-voidflare",
+    label: "蕾米埃尔 M1 特殊虚曜耀变，三异常队伍",
+    buildIds: ["remiel", "jane", "velina"],
+    actionId: "action:agent:1581:action:0007",
+    levels: { assist: { mode: "effective", value: 12 } },
+    target: {
+      entityId: "entity:target",
+      teamId: "team:enemies",
+      baseDefense: 794,
+      resistances: { physical: 0, lumiflux: -0.05 },
+      isStunned: false,
+      baseStunDamageMultiplier: 1,
+    },
+    buffs: [
+      buff("remielMutationConvert"),
+      buff("remielLuminizeConvert"),
+      buff("remielMutationTeam"),
+      buff("remielAttackConvert"),
+      buff("remielMindscapeOne"),
+      buff("odeMastery"),
+      buff("odeAnomalyBonus"),
+      buff("featheredMastery"),
+      buff("featheredAnomalyBonus"),
+    ],
+    luminize: { strength: "full", equivalentElementResistance: 0 },
+  },
+  {
+    id: "remiel-voidflare-m4",
+    label: "同配置 M4，倍率乘 1.12",
+    buildIds: ["remielM4", "jane", "velina"],
+    actionId: "action:agent:1581:action:0007",
+    levels: { assist: { mode: "effective", value: 12 } },
+    target: {
+      entityId: "entity:target",
+      teamId: "team:enemies",
+      baseDefense: 794,
+      resistances: { physical: 0, lumiflux: -0.05 },
+      isStunned: false,
+      baseStunDamageMultiplier: 1,
+    },
+    buffs: [
+      buff("remielMutationConvert"),
+      buff("remielLuminizeConvert"),
+      buff("remielMutationTeam"),
+      buff("remielAttackConvert"),
+      buff("remielMindscapeOne"),
+      buff("remielMindscapeFour"),
+      buff("odeMastery"),
+      buff("odeAnomalyBonus"),
+      buff("featheredMastery"),
+      buff("featheredAnomalyBonus"),
+    ],
+    luminize: { strength: "full", equivalentElementResistance: 0 },
+  },
+  {
+    id: "remiel-voidflare-m6-quarter",
+    label: "M6 四分之一强度（含 M4）",
+    buildIds: ["remielM6", "jane", "velina"],
+    actionId: "action:agent:1581:action:0007",
+    levels: { assist: { mode: "effective", value: 12 } },
+    target: {
+      entityId: "entity:target",
+      teamId: "team:enemies",
+      baseDefense: 794,
+      resistances: { physical: 0, lumiflux: -0.05 },
+      isStunned: false,
+      baseStunDamageMultiplier: 1,
+    },
+    buffs: [
+      buff("remielMutationConvert"),
+      buff("remielLuminizeConvert"),
+      buff("remielMutationTeam"),
+      buff("remielAttackConvert"),
+      buff("remielMindscapeOne"),
+      buff("remielMindscapeFour"),
+      buff("odeMastery"),
+      buff("odeAnomalyBonus"),
+      buff("featheredMastery"),
+      buff("featheredAnomalyBonus"),
+    ],
+    luminize: {
+      strength: "mindscape-6-quarter",
+      equivalentElementResistance: 0,
+    },
+  },
+  {
+    id: "remiel-voidflare-elements",
+    label: "不同元素抗性不相等，等效属性取简的物理抗性",
+    buildIds: ["remiel", "jane", "velina"],
+    actionId: "action:agent:1581:action:0007",
+    levels: { assist: { mode: "effective", value: 12 } },
+    target: {
+      entityId: "entity:target",
+      teamId: "team:enemies",
+      baseDefense: 794,
+      resistances: { physical: 0.1, lumiflux: -0.05, wind: 0.2 },
+      isStunned: false,
+      baseStunDamageMultiplier: 1,
+    },
+    buffs: [
+      buff("remielMutationConvert"),
+      buff("remielLuminizeConvert"),
+      buff("remielMutationTeam"),
+      buff("remielAttackConvert"),
+      buff("remielMindscapeOne"),
+      buff("odeMastery"),
+      buff("odeAnomalyBonus"),
+      buff("featheredMastery"),
+      buff("featheredAnomalyBonus"),
+    ],
+    luminize: { strength: "full", equivalentElementResistance: 0.1 },
   },
 ]

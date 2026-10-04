@@ -656,11 +656,23 @@ export type StaticCatalogDamageItem = {
     }
 )
 
+/**
+ * 蕾米埃尔自身特殊虚曜的具名异常来源。entityId 必须映射到 1581 且等于本次
+ * 耀变 actor；level 为角色等级（有限整数 1—60，不做 round/clamp）；strength
+ * 的影画门槛按目录机制元数据校验。此分支不接受快照覆盖。
+ */
+export interface RemielleSpecialVoidflareAnomalySource {
+  readonly mechanism: "remielle-special-voidflare"
+  readonly entityId: EntityId
+  readonly level: number
+  readonly strength: "full" | "mindscape-6-quarter"
+}
+
 export type StaticCatalogDamageParameters =
   StaticDamageParameters extends infer D
     ? D extends StaticDamageParameters
       ? D extends { readonly refringe: unknown }
-        ? Omit<D, "refringe" | "luminizeMultiplier"> &
+        ? Omit<D, "refringe" | "luminizeMultiplier" | "anomalySource"> &
             (D extends { readonly kind: "luminize" }
               ? {
                   readonly luminizeMultiplier: Pick<
@@ -668,15 +680,22 @@ export type StaticCatalogDamageParameters =
                     | "baseLuminizeMultiplier"
                     | "multiplicativeLuminizeMultiplierAdjustments"
                   >
+                  /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
+                  readonly anomalySource:
+                    | (AttributeSource & {
+                        readonly level: number
+                      })
+                    | RemielleSpecialVoidflareAnomalySource
                 }
-              : object) & {
+              : {
+                  /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
+                  readonly anomalySource: AttributeSource & {
+                    readonly level: number
+                  }
+                }) & {
               readonly refringe:
                 | { readonly mode: "from-effects" }
                 | { readonly mode: "settled"; readonly multiplier: number }
-              /** 异常精通、穿透率及等级的来源；有快照时两个属性均须保存 current 值。 */
-              readonly anomalySource: AttributeSource & {
-                readonly level: number
-              }
             }
         : D
       : never

@@ -9,6 +9,7 @@ import type {
   StaticActionCalculationInput,
   StaticActionCalculationResult,
   StaticActorConfiguration,
+  StaticCatalogDamageInput,
   StaticPanelValues,
 } from "../../core/src/index.ts"
 import { STAT_UNIT_MAP } from "@randomplay/shared"
@@ -78,11 +79,66 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:b6acbbfb9e8b61df29d4838b45bc8b60e9667d7a3f112d966a95d959e5861386",
+      "sha256:9ecee912cf7f42e9919ba4130659cf90f3432bd42f286792cd9f409ec7c0986f",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
   const expected = reference.cases[scenario.id]!.reference
+  const luminize: StaticActionCalculationInput["luminize"] | undefined =
+    scenario.luminize
+      ? {
+          hit: {
+            element: "lumiflux" as const,
+            damageItems: [
+              {
+                mode: "direct" as const,
+                role: "base" as const,
+                itemId: "special-voidflare",
+                stat: "attack" as const,
+                statSource: { entityId: actor.entityId },
+                damageMultiplier: 1,
+              },
+            ],
+          },
+          damage: {
+            kind: "luminize" as const,
+            damageBonus: [],
+            anomalyDamageBonus: [],
+            refringe: { mode: "from-effects" as const },
+            anomalySource: {
+              mechanism: "remielle-special-voidflare" as const,
+              entityId: actor.entityId,
+              level: 60,
+              strength: scenario.luminize.strength,
+            },
+            luminizeMultiplier: {
+              baseLuminizeMultiplier: expected.action.multipliers[0]!,
+              multiplicativeLuminizeMultiplierAdjustments: [],
+            },
+            defense: {
+              attackerLevel: 60,
+              targetBaseDefense: scenario.target.baseDefense,
+              defensePercentageAdjustments: [],
+              penetrationValues: [],
+            },
+            resistance: {
+              targetResistance: scenario.luminize.equivalentElementResistance,
+              targetResistanceReductions: [],
+              attackerResistanceIgnoreValues: [],
+            },
+            damageTaken: {
+              targetDamageTakenIncreases: [],
+              targetDamageTakenReductions: [],
+            },
+            stunDamage: {
+              isTargetStunned: scenario.target.isStunned,
+              targetBaseStunDamageMultiplier:
+                scenario.target.baseStunDamageMultiplier,
+              targetStunDamageMultiplierAdjustments: [],
+            },
+          },
+        }
+      : undefined
   return {
     data,
     actors: selected.map((b) => b.actor),
@@ -102,8 +158,19 @@ async function inputFor(
       optionId: effects[effect].optionId,
       layers,
     })),
-    inputs:
-      expected.conversionBase === null
+    inputs: luminize
+      ? [
+          {
+            bindingId: staticSourceBindingId(
+              actor.entityId,
+              "agent",
+              actor.agentEntityId,
+            ),
+            name: "agent:1581:zzz-hp:eff-ms7td2gs-4vbpdh:blk-ms7td2gs-rk1vtd:mindscape:0:source",
+            value: { unit: "attack-points", value: expected.conversionBase! },
+          },
+        ]
+      : expected.conversionBase === null
         ? []
         : [
             {
@@ -113,6 +180,7 @@ async function inputFor(
             },
           ],
     requireIndividualHits: expected.action.individual,
+    ...(luminize ? { luminize } : {}),
   }
 }
 function calculate(
@@ -143,6 +211,18 @@ function settledActor(
       damageBonuses: { physical: 0, fire: 0, ether: 0, ...panel.damageBonuses },
     },
   }
+}
+type LuminizeCatalogDamage = Extract<
+  StaticCatalogDamageInput["damage"],
+  { readonly kind: "luminize" }
+>
+function luminizeDamageOf(
+  input: StaticActionCalculationInput,
+): LuminizeCatalogDamage {
+  const damage = input.luminize!.damage
+  if (damage.kind !== "luminize")
+    throw new Error("Expected the luminize damage")
+  return damage
 }
 function close(
   actual: number | null | undefined,
@@ -295,7 +375,7 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
     // 完整数据加载与四种选择 × 两种面板计算在 CI 并行负载下可超过默认 5 秒。
     30_000,
   )
-  for (const scenario of scenarios)
+  for (const scenario of scenarios.filter((entry) => !entry.luminize))
     it(scenario.label, async () => {
       const input = await inputFor(scenario)
       const unchanged = structuredClone(input)
@@ -526,4 +606,231 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
       expect(selected.panels).toEqual(disabled.panels)
     },
   )
+})
+
+describe("remielle special Voidflare scenarios against the independent reference", () => {
+  const voidflareScenarios = scenarios.filter((entry) => entry.luminize)
+
+  it.each(voidflareScenarios.map((scenario) => [scenario.id, scenario.label]))(
+    "%s",
+    async (scenarioId) => {
+      const scenario = voidflareScenarios.find((s) => s.id === scenarioId)!
+      const input = await inputFor(scenario)
+      const unchanged = structuredClone(input)
+      const expected = reference.cases[scenario.id]!.reference
+      const result = calculate(input)
+      expect(input).toEqual(unchanged)
+      expect(result.segments).toHaveLength(1)
+      const segment = result.segments[0]!
+      expect(segment.granularity).toBe("aggregate")
+      const damage = segment.damage
+      expect(damage.critical).toBeNull()
+      expect(damage.criticalSemantics).toBe("no-critical-settlement")
+      // 蕾米局外面板与独立参考一致（攻击 3387.246696、异常精通 322）。
+      const panel = result.panels[0]!
+      close(
+        panel.stats["attack"]!.value,
+        expected.finalStats.attack!,
+        "remiel panel attack",
+      )
+      close(
+        panel.stats["anomalyProficiency"]!.value,
+        expected.finalStats.anomalyProficiency!,
+        "remiel panel mastery",
+      )
+      for (const [factor, value] of Object.entries(expected.factors)) {
+        if (factor === "luminizeMultiplier" || factor === "specialMultiplier")
+          continue
+        close(
+          damage.factors.nonCritical[factor],
+          value,
+          `${scenarioId} factor ${factor}`,
+        )
+      }
+      // Fairy 把 strength 档位（与 M4）并入耀变倍率乘区，不单列因子。
+      close(
+        damage.factors.nonCritical.luminizeMultiplier!,
+        expected.factors.luminizeMultiplier! *
+          expected.factors.specialMultiplier!,
+        `${scenarioId} luminize multiplier with strength`,
+      )
+      close(
+        damage.evaluation.hit!.damageItems[0]!.finalStat,
+        expected.factors.baseDamage!,
+        `${scenarioId} restricted attack`,
+      )
+      close(
+        damage.nonCritical,
+        expected.totals.nonCritical,
+        `${scenarioId} total`,
+      )
+      expect(damage.nonCritical).toBe(damage.expected)
+      // 动作倍率严格来自 resolveAgentAction。
+      if (!input.action.ok || input.action.calculation.kind !== "luminize")
+        throw new Error("Expected the luminize action")
+      expect(input.action.calculation.multiplier).toBe(
+        expected.action.multipliers[0],
+      )
+    },
+  )
+
+  it("keeps the pinned handoff oracle values for the three mindscape tiers", async () => {
+    // 父会话按固定来源数据与独立 Decimal 算式得到的验收值；此处逐项复验。
+    // 精确十进制保留为字符串，比较按最近 IEEE 754 值加容差执行。
+    const oracle: Record<string, string> = {
+      "remiel-voidflare": "554657.7594933146483712",
+      "remiel-voidflare-m4": "621216.690632512406175744",
+      "remiel-voidflare-m6-quarter": "155304.172658128101543936",
+    }
+    for (const [id, value] of Object.entries(oracle)) {
+      const result = calculate(
+        await inputFor(scenarios.find((s) => s.id === id)!),
+      )
+      close(result.totals.nonCritical, Number(value), `${id} oracle`)
+    }
+  })
+
+  it("derives the equivalent element resistance by the pinned next-non-lumiflux rule", async () => {
+    const scenario = voidflareScenarios.find(
+      (s) => s.id === "remiel-voidflare-elements",
+    )!
+    const base = await inputFor(scenario)
+    // 队伍槽位 [蕾米, 简, 维琳娜]：下一位非流明队友是简（物理）。
+    const equivalent = (actors: typeof base.actors) => {
+      const order = actors.map((actor, index) => ({ actor, index }))
+      const slot = order.findIndex(
+        (entry) => entry.actor.entityId === "entity:remiel",
+      )
+      for (const offset of [1, 2]) {
+        const next = order[(slot + offset) % order.length]!
+        const element = base.data.catalog.entities.find(
+          (e) =>
+            e.identity?.kind === "agent" &&
+            e.identity.entityId === next.actor.agentEntityId,
+        )!.element
+        if (element !== null && element !== "lumiflux") return element
+      }
+      return null
+    }
+    expect(equivalent(base.actors)).toBe("physical")
+    const baseInput = await inputFor(scenario)
+    const reordered: StaticActionCalculationInput = {
+      ...baseInput,
+      actors: [
+        baseInput.actors[2]!,
+        baseInput.actors[1]!,
+        baseInput.actors[0]!,
+      ],
+    }
+    expect(equivalent(reordered.actors)).toBe("wind")
+    // 等效属性抗性沿用显式基线接口：维琳娜在下一槽时取风抗 0.2，不用蕾米的流明抗性。
+    const reorderedDamage = luminizeDamageOf(reordered)
+    const result = calculateStaticActionDamage({
+      ...reordered,
+      luminize: {
+        hit: reordered.luminize!.hit,
+        damage: {
+          ...reorderedDamage,
+          resistance: {
+            ...reorderedDamage.resistance,
+            targetResistance: reordered.target.resistances.wind!,
+          },
+        },
+      },
+    })
+    expect(result.ok, JSON.stringify(result)).toBe(true)
+    if (result.ok && result.value.kind === "damage") {
+      const windResistance =
+        result.value.segments[0]!.damage.factors.nonCritical.resistance!
+      close(windResistance, 1 - 0.2 + 0.5, "wind equivalent resistance")
+      const physical = calculate(await inputFor(scenario))
+      const physicalResistance =
+        physical.segments[0]!.damage.factors.nonCritical.resistance!
+      close(physicalResistance, 1 - 0.1 + 0.5, "physical equivalent resistance")
+      // 蕾米自身的流明抗性 -0.05 不参与该基线；两个等效元素抗性保持差值。
+      close(
+        physicalResistance - windResistance,
+        0.1,
+        "unequal element resistances stay distinct",
+      )
+    }
+  })
+
+  it("falls back to zero resistance when no non-lumiflux teammate exists", async () => {
+    const scenario = voidflareScenarios.find(
+      (s) => s.id === "remiel-voidflare",
+    )!
+    const base = await inputFor(scenario)
+    const soloDamage = luminizeDamageOf(base)
+    const solo: StaticActionCalculationInput = {
+      ...base,
+      actors: [base.actors[0]!],
+      // 三异常门槛的选项在单人队伍没有受益者，不参与选择。
+      selections: base.selections.filter(
+        (selection) =>
+          selection.optionId !==
+            "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z" &&
+          selection.optionId !==
+            "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
+      ),
+      inputs: [],
+      luminize: {
+        hit: base.luminize!.hit,
+        damage: {
+          ...soloDamage,
+          resistance: {
+            ...soloDamage.resistance,
+            // 没有非流明队友：等效属性抗性取 0，不用简的物理抗性。
+            targetResistance: 0,
+          },
+        },
+      },
+    }
+    const result = calculateStaticActionDamage(solo)
+    expect(result.ok, JSON.stringify(result)).toBe(true)
+    if (!result.ok || result.value.kind !== "damage") return
+    const factors = result.value.segments[0]!.damage.factors.nonCritical
+    // A0=3387.246696（无转模）、受限/完整 P=468。
+    close(factors.baseDamage!, 3387.246696, "solo restricted attack")
+    close(factors.anomalyProficiency!, 4.68, "solo restricted mastery")
+    close(
+      factors.refringe!,
+      1 + 0.0002 * 468,
+      "solo refringe without the team gate",
+    )
+    close(
+      factors.luminizeMultiplier!,
+      3.2 + 0.002 * 468,
+      "solo luminize multiplier",
+    )
+    close(factors.resistance!, 1.5, "zero equivalent resistance with own M1")
+  })
+
+  it("rejects non-60 levels at this entry while the catalog entry keeps 1-60", async () => {
+    const scenario = voidflareScenarios.find(
+      (s) => s.id === "remiel-voidflare",
+    )!
+    const base = await inputFor(scenario)
+    const original = luminizeDamageOf(base)
+    if (!("mechanism" in original.anomalySource))
+      throw new Error("Expected the special Voidflare source")
+    const rejected = calculateStaticActionDamage({
+      ...base,
+      luminize: {
+        hit: base.luminize!.hit,
+        damage: {
+          ...original,
+          anomalySource: { ...original.anomalySource, level: 30 },
+          defense: { ...original.defense, attackerLevel: 30 },
+        },
+      },
+    })
+    expect(rejected.ok).toBe(false)
+    if (!rejected.ok)
+      expect(
+        rejected.issues.some((issue) =>
+          issue.message.includes("only supports level 60"),
+        ),
+      ).toBe(true)
+  })
 })

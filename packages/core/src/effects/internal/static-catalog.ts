@@ -2,6 +2,7 @@ import {
   calculateStandardDisorderDamageMultiplier,
   calculateStandardVortexDamageMultiplier,
 } from "../../formulas.ts"
+import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import { parseEffectRuleSet } from "../parse-effect-rule-set.ts"
 import type {
   Condition,
@@ -34,6 +35,14 @@ import { SKILL_CATEGORIES } from "./expression.ts"
 import { IssueCollector, failure } from "./issues.ts"
 import { validateNumericInputs } from "./numeric-input.ts"
 import { validateSourceBindings } from "./rule.ts"
+import {
+  assembleRemielleSpecialVoidflareReadings,
+  remielleSpecialVoidflareDamageBonus,
+  remielleSpecialVoidflareRejectsEffect,
+  remielleSpecialVoidflareRequested,
+  validateRemielleSpecialVoidflareInput,
+  type RemielleSpecialVoidflareContext,
+} from "./special-voidflare.ts"
 import {
   calculateDamageFromEvaluation,
   evaluateStaticDamage,
@@ -99,6 +108,20 @@ function effectiveSkillCategoryTags(
   return tags
 }
 
+/** 机制标记的形状校验谓词：contribution 的 stat-adjustment 且来源类别一致。 */
+function isStatAdjustment(
+  rule: EffectRule,
+  stat: string,
+  kind: "agent" | "w-engine" | "drive-disc",
+): boolean {
+  return (
+    rule.kind === "contribution" &&
+    rule.operation.kind === "stat-adjustment" &&
+    rule.operation.stat === stat &&
+    rule.source.identity.kind === kind
+  )
+}
+
 /** JSON 目录与 TypeScript 调用共享校验；不信任类型断言或未选中条目的引用。 */
 export function validateStaticCatalog(
   catalogValue: unknown,
@@ -126,6 +149,7 @@ export function validateStaticCatalog(
       "entities",
       "options",
       "skillTargets",
+      "mechanisms",
       "differences",
     ],
     checks("/catalog"),
@@ -394,6 +418,209 @@ export function validateStaticCatalog(
   const effects = new Map(
     definitions.effects.map((rule) => [rule.effectId, rule]),
   )
+  for (const [mi, mechanismValue] of (
+    expectArray(
+      catalog["mechanisms"] ?? [],
+      checks("/catalog/mechanisms"),
+      "catalog mechanisms",
+    ) ?? []
+  ).entries()) {
+    const mp = `/catalog/mechanisms/${mi}`,
+      mechanism = expectObject(mechanismValue, checks(mp), "catalog mechanism")
+    if (!mechanism) continue
+    rejectUnknownFields(
+      mechanism,
+      [
+        "mechanism",
+        "agentEntityId",
+        "strengths",
+        "selfAttackConvertEffectIds",
+        "wEngineMasteryEffectIds",
+        "wEngineMasteryElementExemptEffectIds",
+        "driveDiscFourPieceMasteryEffectIds",
+        "radianceResistanceIgnoreEffectIds",
+        "references",
+      ],
+      checks(mp),
+      "catalog mechanism",
+    )
+    expectLiteral(
+      mechanism["mechanism"],
+      ["remielle-special-voidflare"],
+      checks(`${mp}/mechanism`),
+      "mechanism",
+    )
+    const agentEntityId = expectNonEmptyString(
+      mechanism["agentEntityId"],
+      checks(`${mp}/agentEntityId`),
+      "mechanism agent entity",
+    )
+    if (
+      agentEntityId !== undefined &&
+      !(entities as unknown as StaticEffectCatalog["entities"]).some(
+        (e) =>
+          e.identity?.kind === "agent" && e.identity.entityId === agentEntityId,
+      )
+    )
+      collector.report(
+        "MISSING_REFERENCE",
+        `${mp}/agentEntityId`,
+        "The mechanism agent is not a mapped catalog agent",
+      )
+    const strengths = expectArray(
+      mechanism["strengths"],
+      checks(`${mp}/strengths`),
+      "mechanism strengths",
+    )
+    const strengthIds = new Set<string>()
+    if (strengths !== undefined) {
+      if (strengths.length === 0)
+        collector.report(
+          "INVALID_INPUT",
+          `${mp}/strengths`,
+          "A mechanism requires at least one strength tier",
+        )
+      for (const [si, value] of strengths.entries()) {
+        const sp = `${mp}/strengths/${si}`,
+          strength = expectObject(value, checks(sp), "mechanism strength")
+        if (!strength) continue
+        rejectUnknownFields(
+          strength,
+          ["strength", "minimumMindscape"],
+          checks(sp),
+          "mechanism strength",
+        )
+        const strengthId = expectLiteral(
+          strength["strength"],
+          ["full", "mindscape-6-quarter"],
+          checks(`${sp}/strength`),
+          "strength",
+        )
+        if (strengthId !== undefined) {
+          if (strengthIds.has(strengthId))
+            collector.report(
+              "DUPLICATE_ID",
+              `${sp}/strength`,
+              "Duplicate mechanism strength",
+            )
+          strengthIds.add(strengthId)
+        }
+        const minimum = strength["minimumMindscape"]
+        if (
+          typeof minimum !== "number" ||
+          !Number.isInteger(minimum) ||
+          minimum < 0 ||
+          minimum > 6
+        )
+          collector.report(
+            "INVALID_INPUT",
+            `${sp}/minimumMindscape`,
+            "Expected a mindscape rank from 0 to 6",
+          )
+      }
+    }
+    const markedRules = (
+      field: string,
+      expected: (
+        rule: StaticCatalogDamageInput["definitions"]["effects"][number],
+      ) => boolean,
+      message: string,
+    ) => {
+      const ids =
+        expectArray(mechanism[field], checks(`${mp}/${field}`), field) ?? []
+      const seen = new Set<string>()
+      for (const [ei, value] of ids.entries()) {
+        const id = expectNonEmptyString(
+          value,
+          checks(`${mp}/${field}/${ei}`),
+          "effect identity",
+        )
+        if (id === undefined) continue
+        if (seen.has(id))
+          collector.report(
+            "DUPLICATE_ID",
+            `${mp}/${field}/${ei}`,
+            "Duplicate marked effect",
+          )
+        seen.add(id)
+        const effect = effects.get(id as EffectId)
+        if (!effect)
+          collector.report(
+            "MISSING_REFERENCE",
+            `${mp}/${field}/${ei}`,
+            `Unknown marked effect "${id}"`,
+          )
+        else if (!expected(effect))
+          collector.report("CONTEXT_MISMATCH", `${mp}/${field}/${ei}`, message)
+      }
+      return new Set(ids.filter((id) => typeof id === "string") as string[])
+    }
+    const wEngineMasteryIds = markedRules(
+      "wEngineMasteryEffectIds",
+      (rule) => isStatAdjustment(rule, "anomalyProficiency", "w-engine"),
+      "A w-engine mastery marking must reference an anomaly-proficiency w-engine rule",
+    )
+    markedRules(
+      "wEngineMasteryElementExemptEffectIds",
+      (rule) => isStatAdjustment(rule, "anomalyProficiency", "w-engine"),
+      "An element-exempt marking must reference an anomaly-proficiency w-engine rule",
+    )
+    for (const id of (mechanism["wEngineMasteryElementExemptEffectIds"] as
+      | unknown[]
+      | undefined) ?? [])
+      if (typeof id === "string" && !wEngineMasteryIds.has(id))
+        collector.report(
+          "CONTEXT_MISMATCH",
+          `${mp}/wEngineMasteryElementExemptEffectIds`,
+          "Element-exempt markings must reference marked w-engine mastery effects",
+        )
+    markedRules(
+      "selfAttackConvertEffectIds",
+      (rule) =>
+        isStatAdjustment(rule, "attack", "agent") &&
+        rule.source.identity.entityId === agentEntityId,
+      "A self attack convert marking must reference an attack rule of the mechanism agent",
+    )
+    markedRules(
+      "driveDiscFourPieceMasteryEffectIds",
+      (rule) => isStatAdjustment(rule, "anomalyProficiency", "drive-disc"),
+      "A four-piece mastery marking must reference an anomaly-proficiency drive-disc rule",
+    )
+    markedRules(
+      "radianceResistanceIgnoreEffectIds",
+      (rule) =>
+        rule.kind === "contribution" &&
+        rule.operation.kind === "factor-contribution" &&
+        rule.operation.channel === "attacker-resistance-ignore",
+      "A radiance resistance marking must reference an attacker-resistance-ignore rule",
+    )
+    const mechanismReferences = expectArray(
+      mechanism["references"],
+      checks(`${mp}/references`),
+      "source references",
+    )
+    if (mechanismReferences !== undefined && !mechanismReferences.length)
+      collector.report(
+        "INVALID_INPUT",
+        `${mp}/references`,
+        "Source references are required",
+      )
+    for (const [ri, value] of (mechanismReferences ?? []).entries()) {
+      const ref = expectObject(
+        value,
+        checks(`${mp}/references/${ri}`),
+        "source reference",
+      )
+      if (ref)
+        for (const field of ["sourceId", "version", "resourcePath", "pointer"])
+          if (typeof ref[field] !== "string")
+            collector.report(
+              "INVALID_INPUT",
+              `${mp}/references/${ri}/${field}`,
+              "Expected source reference text",
+            )
+    }
+  }
   for (const [i, optionValue] of options.entries()) {
     const p = `/catalog/options/${i}`,
       option = expectObject(optionValue, checks(p), "catalog option")
@@ -1247,6 +1474,23 @@ export function calculateStaticDamageFromCatalog(
     }
   }
   if (!collector.isEmpty) return failure(collector)
+  // 特殊虚曜机制在选项展开前完成身份、档位与输入形状校验；后续选择循环
+  // 依据请求标志拒绝与该机制互斥的倍率贡献。
+  const specialVoidflareRequested = remielleSpecialVoidflareRequested(
+    damage as Record<string, unknown>,
+  )
+  const specialVoidflare: RemielleSpecialVoidflareContext | undefined =
+    specialVoidflareRequested
+      ? validateRemielleSpecialVoidflareInput({
+          damage: damage as Record<string, unknown>,
+          hit: hit as Record<string, unknown>,
+          items,
+          actors,
+          bindings: input.bindings,
+          catalog,
+          collector,
+        })
+      : undefined
   const expanded: StaticEffectSelection[] = []
   const durationIds = new Set(
     parsed.value.effects
@@ -1424,6 +1668,20 @@ export function calculateStaticDamageFromCatalog(
       continue
     }
     if (layers === 0) continue
+    // 特殊虚曜分支：基础区只读受限攻击，动作倍率与档位语义已由具名机制表达；
+    // 逐命中调整与被 strength 取代的旧倍率通道在选中时明确拒绝，不静默丢弃。
+    if (specialVoidflareRequested) {
+      for (const effectId of variant.effectIds) {
+        const rule = parsed.value.effects.find((r) => r.effectId === effectId)
+        if (rule !== undefined && remielleSpecialVoidflareRejectsEffect(rule)) {
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `The special Voidflare branch rejects per-hit or superseded multiplier contributions from "${effectId}"; ${explain}`,
+          )
+        }
+      }
+    }
     if (option.exclusiveGroup) {
       const group = JSON.stringify([binding.bindingId, option.exclusiveGroup])
       if (exclusive.has(group))
@@ -1749,7 +2007,26 @@ export function calculateStaticDamageFromCatalog(
       checks("/damage/anomalySource"),
       "anomaly source",
     )
-    if (source) {
+    if (specialVoidflareRequested) {
+      // 特殊虚曜分支：等级唯一来自具名来源；增伤区由角色等级 helper 准备，
+      // 不接受调用方的手工已结算倍率或独立防御等级。结构校验失败时此处
+      // 不再组装，统一由收集器中已报告的问题在检查点失败。
+      if (specialVoidflare) {
+        const defense = expectObject(
+          damage["defense"],
+          checks("/damage/defense"),
+          "defense",
+        )
+        if (defense)
+          lowDamage["defense"] = {
+            ...defense,
+            attackerLevel: specialVoidflare.level,
+          }
+        lowDamage["damageBonus"] = remielleSpecialVoidflareDamageBonus(
+          specialVoidflare.level,
+        )
+      }
+    } else if (source) {
       const { level, ...attributeSource } = source
       validateAttributeSource(
         attributeSource,
@@ -1774,7 +2051,7 @@ export function calculateStaticDamageFromCatalog(
         collector.report(
           "INVALID_INPUT",
           "/damage/anomalySource",
-          "Remielle's self-provided anomaly strength requires a new level formula outside the current core contract",
+          "Remielle's self-provided anomaly strength requires the remielle-special-voidflare mechanism",
         )
       const defense = expectObject(
         damage["defense"],
@@ -1815,7 +2092,7 @@ export function calculateStaticDamageFromCatalog(
   const anomalyAttributeSource = anomalySource
     ? {
         entityId: anomalySource.entityId,
-        ...(anomalySource.snapshotId
+        ...("snapshotId" in anomalySource && anomalySource.snapshotId
           ? { snapshotId: anomalySource.snapshotId }
           : {}),
       }
@@ -2043,19 +2320,39 @@ export function calculateStaticDamageFromCatalog(
               .multiplicativeLuminizeMultiplierAdjustments,
             1 + take("luminize-multiplier-increase"),
             (1 + take("luminize-special-addition")) *
-              (1 + take("luminize-special-increase")),
+              (1 + take("luminize-special-increase")) *
+              // 特殊虚曜分支把 strength 档位乘数并入耀变乘区：full 为 1，
+              // 影画 6 四分之一为 0.25；普通分支保持恒等。
+              (specialVoidflare?.strengthMultiplier ?? 1),
           ],
         },
       }
     }
-    const evaluation = {
+    let evaluation: StaticDamageResult["evaluation"] = {
       ...evaluated.value.evaluation,
       hit: { ...evaluated.value.evaluation.hit!, damageItems },
+    }
+    let luminizeAnomalyDamageLevel: LuminizeAnomalyDamageLevelInput | undefined
+    if (specialVoidflare) {
+      const assembled = assembleRemielleSpecialVoidflareReadings({
+        context: specialVoidflare,
+        input,
+        lowInput,
+        expanded,
+        evaluation,
+        collector,
+      })
+      if (assembled === undefined) return failure(collector)
+      evaluation = assembled.evaluation
+      luminizeAnomalyDamageLevel = assembled.luminizeAnomalyDamageLevel
     }
     const result = calculateDamageFromEvaluation(
       preparedDamage,
       evaluated.value.hit,
       evaluation,
+      luminizeAnomalyDamageLevel === undefined
+        ? undefined
+        : { luminizeAnomalyDamageLevel },
     )
     return {
       ok: true,

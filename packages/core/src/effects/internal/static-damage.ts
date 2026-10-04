@@ -9,6 +9,7 @@ import {
   sharpenDamageFormula,
   sheerDamageFormula,
 } from "../../formulas.ts"
+import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import type {
   EffectInstance,
   EntityId,
@@ -584,6 +585,13 @@ export function calculateDamageFromEvaluation(
   damage: StaticDamageParameters,
   hit: HitContext,
   evaluation: StaticDamageResult["evaluation"],
+  options?: {
+    /**
+     * 耀变异常等级区的显式机制对象；目录的特殊虚曜分支在受限读取组装后
+     * 传入。缺省沿用 defense.attackerLevel 的普通数值语义。
+     */
+    readonly luminizeAnomalyDamageLevel?: LuminizeAnomalyDamageLevelInput
+  },
 ): StaticDamageResult {
   const applicableChannels = new Set<FactorChannel>()
   const take = (channel: FactorChannel): number[] => {
@@ -750,6 +758,8 @@ export function calculateDamageFromEvaluation(
     if (damage.kind === "luminize") {
       nonCritical = luminizeDamageFormula.calculate({
         ...input,
+        anomalyDamageLevel:
+          options?.luminizeAnomalyDamageLevel ?? damage.defense.attackerLevel,
         luminizeMultiplier: {
           ...damage.luminizeMultiplier,
           baseLuminizeMultiplier: finiteSum([

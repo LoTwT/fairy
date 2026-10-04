@@ -99,8 +99,18 @@ export interface StaticActionCalculationInput {
   readonly snapshots?: StaticCatalogDamageInput["snapshots"]
   readonly atSeconds?: number
   readonly requireIndividualHits?: boolean
-  /** 耀变保留显式伤害来源与已结算快照；不根据普通动作推导异常结算。 */
-  readonly luminize?: Pick<StaticCatalogDamageInput, "hit" | "damage">
+  /**
+   * 耀变保留显式伤害来源与已结算快照；不根据普通动作推导异常结算。
+   * 命中的动作身份字段（actor/target/action/分类与技能目标）由本入口按
+   * 已解析动作填充，调用方只提供元素与伤害项。
+   */
+  readonly luminize?: {
+    readonly hit: Pick<
+      StaticCatalogDamageInput["hit"],
+      "element" | "damageItems"
+    >
+    readonly damage: StaticCatalogDamageInput["damage"]
+  }
 }
 
 export interface StaticPanelResult {
