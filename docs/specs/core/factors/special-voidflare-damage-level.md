@@ -55,9 +55,12 @@ export declare const specialVoidflareDamageLevelFactor: Factor<SpecialVoidflareD
 ## 等级值域
 
 - 输入必须是 `[1, 60]` 范围内的有限整数，两个端点都有效。这与异常伤害等级区的业务值域一致。
-- 小数、`NaN`、`Infinity` 及越界等级无效，本乘区不取整也不钳制。上游 UI helper `clampRemielLevel`
-  会先 `Math.round` 再钳制到 `[1, 60]`；core 采用严格公共 API，非法值直接报错，不隐式修正为合法等级。
-  调用方必须提供已经确认的实际等级。
+- 小数、`NaN`、`Infinity` 及越界等级无效，本乘区不取整也不钳制。固定上游来源的计算 helper
+  `clampRemielLevel` 由 `computeRemielSelfRadianceSpecialLevelZone` 与
+  `computeRemielSelfRadianceStandardLevelZone` 直接调用，其结果经 `computeRemielSelfAnomalyBase` 进入
+  耀变链路：上游计算链会先 `Math.round` 再钳制到 `[1, 60]`，不是仅展示层行为。core 已确定采用严格
+  公共 API，非法值直接报错，不隐式修正为合法等级。这是与固定上游的具名输入契约差异，已定案，
+  不改变游戏内的等级值域。调用方必须提供已经确认的实际等级。
 - 不复用防御区的等级基数表，也不复用异常伤害等级区的四位截断精度。
 
 ## 计算规则
